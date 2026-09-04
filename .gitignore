@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.venv/
+corpus/workbench/*
+!corpus/workbench/.gitkeep
+regulation/stage-b/generated/
