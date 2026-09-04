@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import subprocess
 from pathlib import Path
 
 
@@ -48,10 +49,11 @@ def main() -> None:
 
     ignored = {"corpus/CATALOG.csv", "migration/MANIFEST.csv"}
     rows: list[dict[str, str]] = []
-    for path in sorted(p for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts):
-        rel = path.relative_to(ROOT).as_posix()
+    tracked = subprocess.check_output(["git", "-C", str(ROOT), "ls-files", "-z"])
+    for rel in sorted(item.decode() for item in tracked.split(b"\0") if item):
         if rel in ignored:
             continue
+        path = ROOT / rel
         category, status, treatment, supports = classify(rel)
         source_repo, source_path = reverse.get(rel, ("", ""))
         rows.append({
