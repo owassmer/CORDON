@@ -1,0 +1,83 @@
+{
+  "schema": "cordon-current-state-v1",
+  "as_of": "2026-09-04",
+  "operator": "Regione Puglia — Sezione Osservatorio Fitosanitario",
+  "telos": "Reduce projected Xylella loss through a legally and evidentially faithful computational decision instrument.",
+  "current_stage": "B",
+  "stages": {
+    "A": {
+      "status": "CLOSED_UNDER_STANDING_READING_AUTHORITY",
+      "accepted_by": "Owen Wassmer",
+      "canonical_artifacts": {
+        "eu": {
+          "path": "regulation/stage-a/authoring-eu.json",
+          "sha256": "759d0ae7ac1876bcc365a86dd58b8450a94d027c37c5c5cf32f8a5c15f49c5c0",
+          "provision_versions": 123
+        },
+        "italy_and_puglia": {
+          "path": "regulation/jurisdiction/canonical/authoring.json",
+          "sha256": "6ba04a3a3facef23a285a275bea5e51e1bf62b90c04fb0fbb909c83a80518221",
+          "provision_versions": 400,
+          "national_prefix_rows": 214,
+          "national_prefix_sha256": "0df80951cda6172f048706059cf853f821d3e2fa618d75e6deda4cb2421a82ee"
+        }
+      },
+      "bounded_unknowns": [
+        "Pre-13-March-2021 authority for the affected regional version class if a pre-2021 event enters scope",
+        "DDS 148/2024 exact Santeramo ST26 intermediate geometry",
+        "DDS 39/2021 predecessor procedure meaning for its bounded interval",
+        "DDS 51/2023 correction scope relative to DDS 48/2023"
+      ],
+      "reopening_rule": "Name the affected proposition and show source evidence that falsifies or materially completes the accepted meaning."
+    },
+    "B": {
+      "status": "OPEN",
+      "canonical": {
+        "path": "regulation/stage-b/clocks-and-parameters.json",
+        "sha256": "3d0a2d3334dfb53a5d3cc8740d16f623befb88948d718805c28ff7dd8bccb56f",
+        "schema": "stage-b-essence-v3",
+        "counts": {
+          "clocks": 105,
+          "parameters": 53,
+          "dispositions": 758
+        }
+      },
+      "population": {
+        "path": "regulation/stage-b/population.json",
+        "sha256": "2121e9f49a4baae8408723f510566b65865b2bc55a9bb5b4be47cb34983817fc",
+        "seams": {
+          "1": 136,
+          "2": 100,
+          "3": 126,
+          "4": 161
+        }
+      },
+      "semantic_acceptance": {
+        "1": "NOT_ASSERTED",
+        "2": "NOT_ASSERTED",
+        "3": "NOT_ASSERTED",
+        "4": "NOT_ASSERTED"
+      },
+      "next": [
+        "Owen accepts or reopens corrected seams 1, 2, and 3",
+        "Run and persist the required Stage B review facets on accepted content",
+        "Complete the Stage B mutation suite",
+        "Complete the cross-cutting flight-season, whole-ledger, and cross-seam duplicate pass",
+        "Run the post-stage grill on the remaining register items and close Stage B"
+      ]
+    },
+    "C": {"status": "BLOCKED_ON_STAGE_B"},
+    "D": {"status": "BLOCKED_ON_STAGE_B"},
+    "E": {"status": "BLOCKED_ON_STAGE_B"},
+    "F": {"status": "BLOCKED_ON_STAGE_B"},
+    "G": {"status": "BLOCKED_ON_STAGE_B"}
+  },
+  "aperture": {
+    "included": "The Osservatorio's live phytosanitary decision chain: authority, temporal law, constitutive geography, case branch, genuine case delta, and official evidence.",
+    "deferred": [
+      "Payments, grants, indemnities, and the Law 689 administrative-penalty chain",
+      "The historical cooperative Land, Funding, Applications, Field Work, and Payments product route",
+      "Platform ontology or interface design before Stages C–F close"
+    ]
+  }
+}
