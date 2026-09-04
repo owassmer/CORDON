@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://comune.bitonto.ba.it/it/news/lavorazioni-obbligatorie-di-terreni-agricoli-aree-a-verde-e-superfici-incolte-per-contrastare-la-diffusione-della-xylella-fastidiosa",
+    "status": "error",
+    "error": "Server error '500 Internal Server Error' for url 'http://127.0.0.1:11235/md'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+  },
+  {
+    "url": "https://www.comune.bitonto.ba.it/it/news/ordinanza-sindacale-per-lattuazione-delle-misure-obbligatorie-per-la-lotta-alla-xylella",
+    "status": "error",
+    "error": "Server error '500 Internal Server Error' for url 'http://127.0.0.1:11235/md'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+  },
+  {
+    "url": "https://www.comune.monopoli.ba.it/Novita/Avvisi/Applicazione-delle-misure-fitosanitarie-di-lotta-al-vettore-per-il-contrasto-ed-il-controllo-di-Xylella-fastidiosa",
+    "status": "ok",
+    "bytes": 9111,
+    "path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/research/workflow-redesign/crawl4ai-municipal-verify/www.comune.monopoli.ba.it__Novita__Avvisi__Applicazione-delle-misure-fitosanitarie-di-lotta-al-vettore-per-il-contrasto-ed-il-controllo-di-X-a5c7ed4e3d.md"
+  },
+  {
+    "url": "https://www.comune.monopoli.ba.it/Novita/Avvisi/Controllo-per-la-Xylella-fastidiosa-nel-territorio-del-comune-di-Monopoli",
+    "status": "ok",
+    "bytes": 5096,
+    "path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/research/workflow-redesign/crawl4ai-municipal-verify/www.comune.monopoli.ba.it__Novita__Avvisi__Controllo-per-la-Xylella-fastidiosa-nel-territorio-del-comune-di-Monopoli-5c3609067b.md"
+  },
+  {
+    "url": "https://www.comune.monopoli.ba.it/Servizi/Valutazione-di-Incidenza-Ambientale-V.Inc.A",
+    "status": "ok",
+    "bytes": 2156,
+    "path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/research/workflow-redesign/crawl4ai-municipal-verify/www.comune.monopoli.ba.it__Servizi__Valutazione-di-Incidenza-Ambientale-V.Inc.A-eeea7535d3.md"
+  },
+  {
+    "url": "https://sportellotelematico.comune.bitonto.ba.it/action%3Ar_puglia%3Aautorizzazione.paesaggistica.ordinaria.semplificata",
+    "status": "ok",
+    "bytes": 6573,
+    "path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/research/workflow-redesign/crawl4ai-municipal-verify/sportellotelematico.comune.bitonto.ba.it__action_3Ar_puglia_3Aautorizzazione.paesaggistica.ordinaria.semplificata-cf097d546a.md"
+  },
+  {
+    "url": "https://prefettura.interno.gov.it/it/prefetture/barletta-andria-trani/notizie/xylella-bisceglie-prefettura-tavolo-seguire-levoluzione",
+    "status": "ok",
+    "bytes": 4140,
+    "path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/research/workflow-redesign/crawl4ai-municipal-verify/prefettura.interno.gov.it__it__prefetture__barletta-andria-trani__notizie__xylella-bisceglie-prefettura-tavolo-seguire-levoluzione-7754d0d26f.md"
+  }
+]

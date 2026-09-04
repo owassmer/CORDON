@@ -1,0 +1,116 @@
+{
+  "facet": "F4-ESSENCE",
+  "verdict": "FAIL",
+  "assertions": [
+    {
+      "id": "F4-01",
+      "severity": "material",
+      "class": "dead_field",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "all 72 clock rows and all 53 parameter rows",
+      "field": "seam",
+      "quoted_span": "\"seam\": 1",
+      "claim": "The per-row seam field is read only by verify_stage_b.py for a range check and by generate_stage_b.py for verbatim projection, while the closure manifest and population.json already own seam membership and no declared Stage C–G consumer uses it, so deleting it breaks no legal computation or downstream decision.",
+      "proposed_remedy": "Remove seam from clock and parameter rows and from their CSV projections and field-set checks, retaining seam membership in population.json and the closure manifest.",
+      "falsifier": "An attached downstream Stage C–G consumer or accepted closure procedure reads each row's seam field for a function that cannot be performed from population.json or closure_manifest.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-02",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-2(1)-v2",
+      "field": "note",
+      "quoted_span": "Scope widened by M5: host plants and, in case of suspicion of infection, any other plant species; the surveys may also cover vectors.",
+      "claim": "This note is version history and a restatement of the structured anchor scope rather than a source-stated clock interaction or genuine open term, and Owen loses no ruling or executable input if it is deleted because Stage A and anchor.scope already carry the distinction.",
+      "proposed_remedy": "Set note to null.",
+      "falsifier": "A downstream consumer requires this prose note, rather than the producer version and structured anchor scope, to distinguish the post-M5 survey population.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-03",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-6(1)-four-negative-years",
+      "field": "note",
+      "quoted_span": "Reaching four years opens the lifting discretion; it does not itself lift. The reset rule is carried by the anchor, not by this note.",
+      "claim": "This note records schema rationale already expressed by kind=eligibility_threshold, completion, consumer_decision and anchor.resettable_period rather than an open term or interaction, so deleting it breaks no Stage C calculation or Stage E precondition.",
+      "proposed_remedy": "Set note to null.",
+      "falsifier": "One of the structured fields still represents expiry as lifting the area or omits the reset rule, making this note the only surviving carrier of the correct legal relation.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-04",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-6(2)-v1-early-lift-12-months",
+      "field": "note",
+      "quoted_span": "Reaching 12 months opens the early-lifting discretion subject to 6(2)(a)/(b); it does not itself lift.",
+      "claim": "This note restates the eligibility-threshold kind, record completion, applies_when and consumer decision rather than carrying an open term or otherwise unrepresented interaction, so deleting it breaks no downstream computation.",
+      "proposed_remedy": "Set note to null.",
+      "falsifier": "The structured row causes Stage C or E to treat twelve months as the lifting act or to omit the Article 6(2)(a)/(b) conditions without consulting this note.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-05",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-7(1)(e)-v1-immediate-sampling; B-CLK-EU-7(1)(e)-v2-immediate-sampling",
+      "field": "note",
+      "quoted_span": "Per-plant branch: a specified plant not immediately sampled and tested (and, in this version, not found free) enters the point (e) removal population; the sub2 deferral (B-CLK-EU-7(1)(e)-sub2-two-year-lookback) is the only alternative route. | Per-plant branch: a specified plant not immediately sampled and tested enters the point (e) removal population; a negative test exempts it (sub1); the sub2 deferral is the only alternative route.",
+      "claim": "These notes reproduce Stage A branch meaning and version history already represented by the producer versions, consequence_on_expiry and the separately minted sub2 clock, so Owen is their only reader and deleting them removes no Stage C–G input.",
+      "proposed_remedy": "Set both notes to null and leave the branch authority in Stage A.",
+      "falsifier": "A downstream consumer cannot identify the applicable point-(e) branch and alternative sub2 route from Stage A, the producer version, consequence_on_expiry and the separately referenced sub2 clock without parsing these notes.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-06",
+      "severity": "minor",
+      "class": "check_redundancy",
+      "artifact": "scripts/verify_stage_b.py",
+      "row": "main",
+      "field": "note length check",
+      "quoted_span": "if r['note'] is not None and len(r['note']) > 300: fail(f'{rid}: note too long')",
+      "claim": "The verifier enforces an arbitrary 300-character limit stated by no convention and incapable of distinguishing an allowed open term from forbidden rationale, so deleting the check breaks no declared invariant or downstream consumer.",
+      "proposed_remedy": "Remove the note-length check and leave note admissibility to the stated semantic convention and human review.",
+      "falsifier": "An Owen-ratified convention or downstream storage contract in the attached corpus requires notes to contain at most 300 characters.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-07",
+      "severity": "minor",
+      "class": "duplicate_fact",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "REG-PUGLIA-U181-DIR-2024-00198:area-state-transition:v1; REG-PUGLIA-U181-DIR-2025-00106:area-state-transition:v1",
+      "field": "dispositions",
+      "quoted_span": "• una zona cuscinetto di 2,5 km attorno ad ogni zona infetta; | • una zona infetta del raggio di 50 m attorno ad ogni pianta infetta di Xylella",
+      "claim": "The disposition array contains three exact duplicate entries—one duplicated 2.5 km entry for DDS 198 and duplicated 50 m and 2.5 km entries for DDS 106—while the verifier consumes only provision-version coverage and the projection copies them verbatim, so deleting one copy of each breaks nothing.",
+      "proposed_remedy": "Delete one of each of the three byte-for-byte duplicate disposition objects and preserve the surviving expression-grain dispositions.",
+      "falsifier": "The duplicate objects represent distinct source occurrences whose identity or character span is available to a consumer despite the objects having identical provision_version_id, expression, disposition, ref, seam and why values.",
+      "confidence": "high"
+    }
+  ],
+  "checked_sound": [
+    "Exhaustively inventoried all 20 clock fields across 72 clocks and all 13 parameter fields across 53 parameters; apart from the per-row seam field asserted above, every field has a named legal, computational, evidence-binding, action, ontology or human-review consumer when populated.",
+    "Tested the four exact-looking pre-/post-version parameter pairs and did not assert duplication: their distinct producer versions and effective intervals are required by the adopted version-discipline ruling even where the numeric value remains unchanged.",
+    "The bound addition earns its schema cost: it distinguishes exact recurrence and deadline magnitudes from floors on not-before, eligibility-threshold, minimum-duration and at-least-once recurrence rows; removing it would make Stage C reinterpret source prose.",
+    "The proposed resettable_period anchor kind earns its schema cost on B-CLK-EU-6(1)-four-negative-years: no existing event, legal_state, biological or recurrence anchor can carry scope, start, reset and survey basis without leaving the reset rule in prose.",
+    "The applies_when field is materially consumed by the mutually exclusive Article 13 timing routes, the Article 6(2) reduced-buffer condition and both Article 39 audit clocks' accreditation-assessment exception; removing it would reintroduce note-as-repair or over-provenance errors.",
+    "The window, relation and executor fields each preserve independently consumed facts that cannot be folded into anchor or actor without changing meaning: biological timing qualifiers, ordering relations and source-allocated performance responsibility respectively.",
+    "The two Article 39 applies_when values are operative source exceptions, not proof-of-evidence predicates; the immediate-withdrawal anchor also follows the source's audit-result and failed-remedial-action conditions rather than requiring extraneous proof.",
+    "The five PNI design rows and nine workload rows have distinct percent and count value shapes, complete source phrases and independently scoped target populations or risk strata; recombining them would recreate the cycle-1 mixed-unit defect.",
+    "The retained notes on the Article 5 tests, Article 7(1)(e)-sub2, Article 13 alternative, almond treatment, Article 31(9), the Article 11(6) cohort, Article 39 cadence, Article 42 renewal, Cq boundaries and Article 15(3) interaction carry source-stated interactions or genuine open terms whose deletion would lose information not otherwise executable in the row.",
+    "The 586-entry disposition log has a real consumer and has earned most of its cost: reviewers and the builder used expression-grain dispositions to expose missed producers, clipped matcher windows and contradictory exclusions; the only removable entries substantiated were the three exact duplicates asserted above.",
+    "The six prior-cycle review returns remain consumed audit evidence: the authority snapshot records their adjudication, while the returns preserve exact assertions and falsifiers needed to reconstruct why a class was sustained or rejected.",
+    "The closure manifest's acceptance fields and exact clock/parameter membership lists were retained because they scope any future acceptance to a fixed row population and prevent later rows from silently inheriting an earlier seam-level acceptance.",
+    "Read-only comparison confirmed that all four generated CSVs are exact flattened projections of the canonical arrays, generation-status.json names only the fixed projection set, and the recorded canonical SHA-256 is 4f3d0b31ee33cede89f0a23d240f580ad45cc7e5de65cabaa6055b4b97bfe3e8."
+  ],
+  "unresolved": [
+    "Q12 ratification of the resettable_period anchor kind remains explicitly awaiting Owen; this review found the field necessary but cannot ratify it.",
+    "The attached corpus contains no implemented Stage C–G consumer with which to falsify the declared downstream field-usage contract; the dead-field assertion is therefore grounded in the authority's named consumer inputs and the two attached Stage B scripts."
+  ]
+}

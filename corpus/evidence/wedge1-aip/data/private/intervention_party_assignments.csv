@@ -1,0 +1,3 @@
+intervention_party_assignment_id,intervention_id,party_id,role_kind,bounded_scope,effective_from,effective_to,consequential_powers,exclusions,basis_instrument_id
+INTERVENTION-DET3-MANAGER,DET-3-2026-BITONTO-ERADICATION-WORK,IT/OLI/112,manager,Five-Parcel DET 3/2026 work scope,2026-01-01,,Coordinate the work and issue an authorized work order,Does not create member standing or public acceptance,PUGLIAOLIVE-MANAGER-WORK-ORDER-AUTHORITY
+INTERVENTION-DET3-EXECUTOR,DET-3-2026-BITONTO-ERADICATION-WORK,ARIF-PUGLIA,executor,Five-Parcel DET 3/2026 work scope,2026-02-09,2026-02-20,Perform the requested public execution route when currently feasible,Does not prove performance or official acceptance,MEMBER-0135-ARIF-SERVICE-REQUEST-DET3-2026

@@ -1,0 +1,1424 @@
+                                                                                                  ALLEGATO A
+                                           Il presente allegato, firmato digitalmente, è costituito da n. 40 pagine
+                                                                                          Il Dirigente della Sezione
+                                                                                          Dott. Salvatore Infantino
+    SALVATORE
+    INFANTINO
+    17.05.2022
+    14:08:10
+    GMT+00:00
+
+
+
+
+                                       REGIONE PUGLIA
+                                 OSSERVATORIO FITOSANITARIO
+
+
+Aggiornamento delle “Procedure di attuazione della sorveglianza, campionamento, analisi di
+specie vegetali per il contrasto ed il controllo di Xylella fastidiosa e applicazione delle misure di
+estirpazione delle piante infette”.
+
+
+
+
+                                                                                                                  1
+PREMESSA
+Le procedure di sorveglianza e campionamento descritte in questo documento integrano gli
+aggiornamenti sull’evoluzione dell’epidemia in Puglia, sulla normativa, le conoscenze svilup-
+pate dai programmi di ricerca scientifica in corso e altre informazioni acquisite negli altri Stati
+Membri.
+L’obiettivo di questo documento è quello di illustrare nel dettaglio le procedure operative da
+seguire nelle varie fasi del programma di sorveglianza: dal sopralluogo in campo, al campio-
+namento e trasporto del materiale vegetale, alla manipolazione dei campioni per la diagnosi
+di laboratorio, nonchè all’estirpazione delle piante infette. Ciò, al fine di favorire
+un’applicazione omogenea delle procedure da parte di tutto il personale coinvolto nelle pre-
+dette attività.
+
+
+
+
+                                                                                                 2
+                                NORMATIVA DI RIFERIMENTO
+   Regolamento (UE) n. 2016/2031 del Parlamento Europeo e del Consiglio del 26/10/2016
+    relativo alle misure di protezione contro gli organismi nocivi per le piante;
+   Regolamento (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017,
+    relativo ai controlli ufficiali e alle altre attività ufficiali effettuati per garantire
+    l’applicazione della legislazione sugli alimenti e sui mangimi, delle norme sulla salute e sul
+    benessere degli animali, sulla sanità delle piante nonché sui prodotti fitosanitari;
+   Regolamento di esecuzione (UE) n. 2020/1201 della Commissione del 14/08/2020 relativo
+    alle misure per prevenire l'introduzione e la diffusione nell'Unione della Xylella fastidiosa;
+   Legge n. 44 del 21/05/2019, conversione in legge, con modificazioni, del decreto legge n.
+    27 del 29/03/2019 "Disposizioni urgenti in materia di rilancio dei settori agricoli in crisi e di
+    sostegno alle imprese agroalimentari colpite da eventi atmosferici avversi di carattere
+    eccezionale e per l’emergenza nello stabilimento Stoppani, sito nel Comune di Cogoleto"
+    che ha modificato/integrato la disciplina giuridica di contrasto ai patogeni da quarantena;
+
+   Decreto Legislativo 2 febbraio 2021, n. 19 “Norme per la protezione delle piante dagli
+    organismi nocivi in attuazione dell’articolo 11 della legge 4 ottobre 2019, n. 117, per
+    l’adeguamento della normativa nazionale alle disposizioni del regolamento (UE)
+    2016/2031 e del regolamento (UE) 2017/625”.
+   Decreto MIPAF del 24 gennaio 2022 “Adozione del Piano di emergenza nazionale per il
+    contrasto di Xylella fastidiosa ( Well et al. )”;
+
+   Legge Regionale 4 giugno 2007, n. 14 “Tutela e valorizzazione del paesaggio degli ulivi
+    monumentali della Puglia”;
+   Legge regionale 29 marzo 2017, n. 4 “Gestione della batteriosi da Xylella fastidiosa nel
+    territorio della Legge Regionale 20 settembre 2017" e s.m.i.;
+   Legge regionale 30 aprile 2019, n. 19 (BURP n° 46/2019) recante “Integrazioni alla legge
+    regionale 25 febbraio 2010, n. 3 (Disposizioni in materia di attività irrigue e forestali),
+    commissariamento dell’Agenzia per le attività irrigue e forestali (ARIF) e abrogazione
+    dell’articolo 11 della legge regionale 29 marzo 2017, n. 4 (Gestione della batteriosi da
+    Xylella fastidiosa nel territorio della regione Puglia)”.
+   Determinazione del dirigente Sezione Osservatorio Fitosanitario n° 35 del 29/04/2021 ”
+    “Regolamento di esecuzione (UE) n. 2020/1201 della Commissione del 14/08/2020. Ag-
+    giornamento delle aree delimitate alla "Xylella fastidiosa subspecie Pauca ST53".
+   Determinazione del dirigente Sezione Osservatorio Fitosanitario n° 69 del 27/07/2021
+    “Reg. (UE) 2020/1201 – DGR 538/2021 – Aggiornamento delle aree delimitate alla Xylella
+    fastidiosa sottospecie Pauca ST53 ai sensi del comma 1 dell’art. 5 del Reg. UE 2020/1201”.
+   Determinazione del dirigente Sezione Osservatorio Fitosanitario n° 177 del 30/12/2021 di
+    revoca dell’area delimitata di “Canosa di Puglia”, ai sensi del par. 2 dell’art. 6 del Reg.
+    2020/1201.
+   Deliberazione di giunta regionale n° 343 del 14 marzo 2022 “Approvazione "Piano
+    d'azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia".
+
+
+
+                                                                                                   3
+      PARTE I
+INFORMAZIONI GENERALI
+
+
+
+
+                        4
+1. SINTOMATOLOGIA E MALATTIE CAUSATE DA X. FASTIDIOSA
+Le manifestazioni sintomatologiche comunemente associate alle infezioni di Xylella fastidiosa
+fanno riferimento principalmente a bruscature fogliari (leaf-scorch). Le bruscature fogliari com-
+paiono sulle foglie mature in estate/tarda estate, quando le temperature sono più favorevoli alla
+moltiplicazione del batterio che notoriamente predilige climi temperato-caldi con inverni miti.
+ I sintomi di bruscatura fogliare sono essenzialmente determinati dallo stress idrico causato
+dall’occlusione dei vasi xilematici colonizzati dagli aggregati cellulari del batterio. Oltre alla brusca-
+tura, l’occlusione dei vasi xilematici è anche all’origine dei fenomeni di disseccamento dei rami as-
+sociati in alcuni casi alle infezioni di X. fastidiosa.
+Anche se frequenti, le bruscature non sono comunque l’unica alterazione associata alle infezioni
+di X. fastidiosa. In relazione al ceppo batterico e alle specie ospiti, le infezioni di X. fastidiosa pos-
+sono determinare malattie note come: plum leaf scald (scottatura delle foglie su susino), phony
+peach (nanismo del pesco), clorosi variegata degli agrumi e disseccamento rapido dell’olivo, ma-
+lattia descritta in Puglia che sta decimando gli olivi della penisola salentina.
+Il batterio nella penisola salentina oltre che su olivo è stato identificato su altre 35 diverse specie,
+principalmente ornamentali, ma anche su alcune specie infestanti e due specie frutticole (man-
+dorlo e ciliegio); l’ultima specie ospite di Xylella fastidiosa subspecie pauca ST53 accertata nel Sa-
+lento è Pistacia vera L..
+Purtuttavia, nonostante questo considerevole numero di specie suscettibili (“specie specificate”),
+l’olivo resta l’ospite più frequentemente soggetto ad infezioni. Nelle aree oggetto di monitoraggio
+(contenimento e cuscinetto) è infatti consolidata la costante associazione nei nuovi focolai di infe-
+zioni su piante di olivo.
+I sintomi osservati sui diversi ospiti suscettibili alle infezioni di X. fastidiosa nella penisola salenti-
+na, oltre al disseccamento rapido sull’olivo, includono disseccamenti anche su acacia, lavanda, ro-
+smarino, oleandro, Westringia fruticosa e Poligala myrtifolia. Nella maggior parte di queste spe-
+cie, nelle fasi iniziali delle infezioni, possono comunque essere evidenti le tipiche bruscature fo-
+gliari.
+Sulle piante infette di mandorlo, ciliegio, alloro, fillirea e Grevillea juniperina i sintomi sono pres-
+soché limitati alle bruscature fogliari. È importante evidenziare che nel caso specifico delle piante
+a foglia caduca, come mandorlo e ciliegio, i sintomi di bruscatura fogliare compaiono in estate i-
+noltrata. Dai rilievi effettuati in diversi anni su alcune piante infette ubicate in provincia di Lecce, i
+sintomi si manifestano, a seconda dell’annata, da fine giugno ad inizio settembre. Ciò molto pro-
+babilmente in relazione all’andamento della stagione invernale che influenza il livello di sopravvi-
+venza della popolazione batterica nelle piante dormienti, e quindi la successiva colonizzazione del-
+la vegetazione primaverile-estiva. Nel periodo primaverile, in assenza di sintomi, il batterio non è
+facilmente rilevabile nelle foglie, mentre è rilevabile durante tutto l’anno nel tessuto xilematico
+dei rami ben lignificati. I sintomi di bruscatura, soprattutto in ciliegio, interessano solo alcune
+branche della chioma e non sono associati in maniera chiara al disseccamento dei rami o delle
+branche.
+Con riferimento al disseccamento rapido dell’olivo, questa è tra le più gravi malattie causate da X.
+fastidiosa subspecie pauca. Le manifestazioni iniziali consistono nella comparsa di clorosi e avviz-
+zimento fogliare su alcune branche (generalmente nella parte alta della chioma); successivamen-
+te, queste branche vengono interessate rapidamente da fenomeni di disseccamento, con le foglie
+che seccano completamente (spesso accartocciate lungo la nervatura centrale verso la pagina in-
+                                                                                                         5
+feriore) e che restano attaccate ai rami, anch’essi disseccati, per lungo tempo sino ad eventuali
+eventi atmosferici che ne determinano il distacco e la caduta. Dall’esperienza sinora maturata in
+campo i primi sintomi su olivo compaiono inizialmente nella parte superiore della chioma, ed in
+particolare nella parte esposta a sud, sud -ovest, dove con molta probabilità i vettori prediligono
+nutrirsi.
+I fenomeni di disseccamento compaiono in diversi periodi dell’anno, frequentemente in conse-
+guenza al verificarsi di stress abiotici, come le alte temperature estive accompagnate da stress i-
+drico oppure, al contrario, danni da freddo e gelate invernali. Con l’evolvere delle infezioni i dis-
+seccamenti, soprattutto nelle cultivar suscettibili, da poche branche possono rapidamente esten-
+dersi all’intera chioma, compromettendo gravemente la produttività e sopravvivenza nel giro di 2-
+3 anni, a seconda delle condizioni pedo-climatiche e dell’età.
+Nel caso degli alberi delle cultivar resistenti Leccino e FS17, dalle osservazioni sinora effettuate
+emerge che la sintomatologia è significativamente meno grave, con la comparsa di lievi dissecca-
+menti generalmente limitati a poche branchette; in alcuni casi in cui le piante sono sottoposte a
+scarse cure colturali (mancanza di irrigazione, potatura periodica, ecc.) si possono manifestare
+anche disseccamenti significativi.
+La patogenicità del ceppo di X. fastidiosa su olivo ed altre specie ospiti in Puglia è stata dimostrata
+con appositi test che ne hanno confermato “l’aggressività”, in particolare su olivo e P. myrtifolia,
+ma anche i tempi lunghi di incubazione prima della comparsa dei primi sintomi (circa 12-14 mesi
+per l’olivo; 6-9 mesi per P. myrtifolia) (Saponari et al., 2017).
+Illustrazioni dettagliate sui sintomi del disseccamento rapido e sui sintomi associati alle infezioni
+da Xylella fastidiosa su altre specie ospiti rinvenute in Puglia possono essere osservate sul sito
+http://www.emergenzaxylella.it/ e sul sito dei progetti europei H2020 XF-ACTORS e POnTE:
+https://www.xfactorsproject.eu/communication/photo-gallery/.
+
+
+2. GENERALITÀ SUL BATTERIO
+Xylella fastidiosa è un batterio Gram-negativo che si moltiplica e colonizza i vasi legnosi (xilema)
+delle piante suscettibili. La diffusione del batterio avviene attraverso lo spostamento di piante in-
+fette e attraverso insetti vettori.
+Il batterio non produce spore e pertanto non si diffonde attraverso il vento o acqua/pioggia, non è
+in grado di infettare le piante per contatto e non si diffonde attraverso gli strumenti di taglio
+come le forbici da pota. Il batterio, inoltre, non si tramette per seme.
+Per quanto attiene ai vettori, il batterio è trasmesso da vari generi e specie di cicaline, insetti che
+si nutrono dei fluidi xilematici delle piante infette, da cui possono quindi acquisire le cellule batte-
+riche, che una volta insediate nella parte anteriore dell’apparato boccale, possono essere tra-
+smesse ad altre piante suscettibili con le punture di alimentazione. Una volta acquisito il batterio,
+l’insetto ha la capacità di trasmetterlo per l’intero ciclo vitale.
+In Europa, la capacità di trasmettere il batterio X. fastidiosa è stata dimostrata per le seguenti tre
+specie di Emitteri Afroforidi: Philaenus spumarius L., Neophilaenus campestris (Fallén) e Philaenus
+italosignus Drosopoulos & Remane. Per queste specie gli studi di trasmissione sono stati effettua-
+ti in Puglia, utilizzando l’olivo ed altre specie ospiti infette da X. fastidiosa sottospecie pauca ST53
+come fonte di inoculo, per la dimostrazione prima della capacità di acquisire e successivamente di
+trasmettere il batterio a piante sane.
+
+                                                                                                      6
+Allo stato attuale delle conoscenze, Philaenus spumarius, specie nota come “sputacchina” per la
+capacità delle forme giovanili di ricoprirsi di abbondante secrezione schiumosa simile per aspetto
+alla saliva, è considerato il principale vettore del ceppo di X. fastidiosa sottospecie pauca ST53 in
+Puglia.
+X. fastidiosa è un patogeno da quarantena, attualmente incluso nell’allegato II – parte B del Reg.
+(UE) 2019/2072 del 28 novembre 2019.
+Sino al 2016, X. fastidiosa era considerata l’unica specie appartenente al genere Xylella; successi-
+vamente è stata descritta una seconda specie, Xylella taiwanensis, associata alla malattia deno-
+minata “bruscatura del pero”, riportata a Taiwan (Su et al., 2016).
+All’interno della specie X. fastidiosa sono almeno 4 le sottospecie descritte e più comunemente
+associate alle infezioni:
+
+    X. fastidiosa subsp. fastidiosa,
+
+    X. fastidiosa subsp. multiplex,
+    X. fastidiosa subsp. sandyi,
+
+    X. fastidiosa subsp. pauca.
+In linea generale i ceppi appartenenti a ciascuna sottospecie hanno in comune caratteristiche ge-
+netiche, biologiche e distribuzione geografica.
+I ceppi della sottospecie fastidiosa sono originari del centro-America e sono diffusi in nord Ameri-
+ca associati alla nota malattia di Pierce su vite. A livello europeo ceppi di questa sottospecie sono
+stati diagnosticati solo nell’isola di Majorca su diverse specie, tra cui ciliegio e vite. Recentemente,
+isolati di questa sottospecie sono stati segnalati in Israele su mandorlo.
+I ceppi della sottospecie multiplex sono tipicamente diffusi nel nord America, hanno un’ampia
+gamma di ospiti, tra cui specie ornamentali, forestali e, particolarmente importante per gravità di
+infezioni, il mandorlo. Nella maggior parte delle specie, le infezioni sono generalmente associate a
+malattie della bruscatura fogliare. I ceppi di questa sottospecie sono tra i più diffusi nei focolai
+nelle infezioni in Corsica, in Francia, nelle isole Baleari, in Spagna, Portogallo, Toscana e Lazio.
+I ceppi della sottospecie sandyi, descritti essenzialmente su oleandro in nord America, sono gene-
+ticamente i più vicini alla sottospecie fastidiosa.
+La presenza di ceppi della sottospecie pauca sino a qualche anno fa era nota solo in sud America,
+con infezioni riportate soprattutto in Brasile su agrumi (clorosi variegata degli agrumi) e caffè
+(“crespera” o bruscatura). Nel 2013, infezioni associate a sintomi gravi di disseccamento sono sta-
+te riportate a livello europeo su olivo in Puglia e successivamente nell’isola di Ibiza. Tra il 2015 ed
+il 2016 anche in Brasile ed Argentina sono state identificate infezioni su olivo causate da ceppi del-
+la sottospecie pauca, con lo stesso grave quadro sintomatologico.
+Al di là delle principali specie ospiti di ciascuna sottospecie, il numero totale di specie vegetali su-
+scettibili a X. fastidiosa raggiunge le diverse centinaia. Nell’ultimo aggiornamento della banca dati
+EFSA che raccoglie le piante ospiti di X. fastidiosa, sono 655 le specie vegetali individuate attraver-
+so la consultazione sistematica delle fonti bibliografiche o tramite le notifiche a EUROPHYT, il ser-
+vizio UE d’intercettazione fitosanitaria. Per 407 delle specie l'infezione è stata individuata da al-
+meno due metodi di rilevazione (EFSA, 2022).
+
+
+
+                                                                                                      7
+3. X. FASTIDIOSA IN EUROPA
+Nel territorio europeo, la presenza di X. fastidiosa è considerata “transiente in via di eradicazio-
+ne", ad eccezione del sud della Puglia (Italia), della Corsica (Francia) e delle Isole Baleari (Spagna),
+dove lo stato attuale è "presente con una distribuzione limitata" e sono in atto azioni di conteni-
+mento. Inoltre, piante infette da X. fastidiosa subsp. fastidiosa ST1 furono identificate nel 2015 in
+Sassonia, Germania, su piante in vaso di oleandro, rosmarino, Streptocarpus hybrid e Erysimum
+hybrid, mantenute in serra. A seguito dell’applicazione delle misure di emergenza, quel focolaio è
+stato dichiarato completamente eradicato a marzo 2018 (Europhyt Outbreak (C) n. 946).
+L'attuale distribuzione di X. fastidiosa in Europa, in relazione alle specie ospiti e alle sottospecie, è
+riportata nell’ultima versione della categorizzazione dell’organismo nocivo X. fastidiosa (EFSA,
+2019); da essa si evince che in totale ben 72 specie vegetali sono risultate suscettibili all’infezione
+nei diversi focolai. Con riferimento ai ceppi e alle sottospecie identificate nei diversi focolai euro-
+pei, la maggioranza appartiene alla sottospecie multiplex (ceppi in Francia e Corsica, Spagna e iso-
+le Baleari, Portogallo, Toscana e Lazio), rappresentata da ceppi con sequenza tipo ST6, ST7, ST81 e
+ST87. La sequenza tipo ST1 appartenente alla sottospecie fastidiosa è stata invece identificata in
+diverse specie ornamentali, in ciliegio e vite nell’isola di Majorca. Al momento per la sottospecie
+pauca sono invece segnalate due sequenze tipo “ST53” in Puglia e “ST80” a Ibiza.
+La Commissione Europea a fini legislativi aggiorna periodicamente la lista delle piante ospiti dei
+ceppi europei di X. fastidiosa. Le diverse specie sono raggruppate in relazione alla sottospecie e
+possono essere consultate sul sito: https://ec.europa.eu/food/plants/plant-health-and-
+biosecurity/legislation/control-measures/xylella-fastidiosa/database-susceptible-host-plants_en
+
+
+4. CARATTERISTICHE GENETICHE E PIANTE OSPITI DEL CEPPO PUGLIESE DI X. FASTIDIOSA
+In Puglia, la presenza del batterio è stata ripetutamente confermata con metodiche molecolari, di
+microscopia elettronica e con isolamento in coltura, principalmente da piante di olivo, ma anche
+da altre specie specificate (Tabella 1). Le analisi genetiche effettuate sia sugli isolati in coltura ot-
+tenuti dalle diverse specie infette sia sul DNA estratto direttamente dalle piante infette hanno
+permesso di determinare le relazioni genetiche con i ceppi già noti e descritti in letteratura.
+La caratterizzazione genetica, effettuata sia attraverso l’amplificazione PCR e il sequenziamento di
+sette diversi geni (Multilocus Sequence Typing - MLST) che attraverso il sequenziamento
+dell’intero genoma, ha permesso di definire le correlazioni genetiche del ceppo pugliese con i
+ceppi della sottospecie pauca, e che in tutti i casi gli isolati sono assimilabili al sequence type ST53
+(El Beaino et al., 2015, Loconsole et al., 2016). In pratica si tratta della variante genetica “ST53” di
+X. fastidiosa sottospecie pauca descritta nello stesso anno in Costa Rica associata ad infezioni su
+oleandro e caffè (Nunney et al., 2014).
+Alle stesse conclusioni si è giunti con le tecniche di high throughtput sequencing e la ricostruzione
+sia del genoma completo per l’isolato De Donno, selezionato come ceppo di riferimento, sia di
+una serie di draft genomes. In pratica, l’analisi delle mutazioni puntiformi identificate dalla com-
+parazione tra i genomi sequenziati in Puglia e quelli ottenuti in Costa Rica e in altri Paesi conferma
+la stretta correlazione genetica tra i ceppi pugliesi e i ceppi ST53 sequenziati in Costa Rica, nonché
+il basso tasso di variabilità genetica, ad indicare che trattasi di una introduzione recente (stimata
+in un lasso di tempo compreso tra il 1994 e il 2007) associata ad un unico evento di introduzione.
+
+
+
+                                                                                                       8
+Tabella 1. Lista delle specie specificate suscettibili a Xylella fastidiosa subsp. pauca ST53
+ riscontrate in Puglia
+
+
+                  Specie                         Sintomi                   Metodo di diagnosi
+                                                                         Isolamento, qPCR, ELI-
+  1    Acacia saligna           Gravi disseccamenti
+                                                                         SA
+  2    Amaranthus retroflexus Nessuno                                     qPCR, ELISA
+  3    Asparagus acutifolius    Non rilevato                             qPCR, ELISA
+                                                                         Isolamento, qPCR, ELI-
+  4    Catharanthus sp.         Non rilevato
+                                                                         SA
+
+  5    Chenopodium album        Non rilevato                             qPCR, ELISA
+
+  6    Cistus creticus          Bruscature fogliari e disseccamenti      qPCR, ELISA
+  7    Dimorphoteca fruticosa   Nessuno                                  qPCR, ELISA
+
+  8    Dodonaea viscosa         Non rilevato                             qPCR, ELISA
+
+  9    Eremophila maculata      Non rilevato                             qPCR, ELISA
+  10   Erigeron sumatrensis     Non rilevato                             qPCR, ELISA
+
+  11   Erigeron bonariensis     Non rilevato                             qPCR, ELISA
+
+  12   Euphorbia chamaesyce     Nessuno                                  qPCR, ELISA
+
+  13   Euphorbia terracina      Asintomatico                             qPCR, ELISA
+
+  14   Grevillea juniperina     Bruscature fogliari                      qPCR, ELISA
+
+  15   Hebe sp.                 Bruscature fogliari                      qPCR, ELISA
+       Heliotropium
+  16                            Non rilevato                             qPCR, ELISA
+       europaeum
+                                                                          Isolamento, qPCR, ELI-
+  17   Laurus nobilis           Bruscature fogliari
+                                                                          SA
+                                Bruscature fogliari, seguite da dissecca- Isolamento, qPCR, ELI-
+  18   Lavandula angustifolia
+                                mento di rami e di porzioni dell’arbusto  SA
+                                Bruscature fogliari, seguite da dissecca- Isolamento, qPCR, ELI-
+  19   Lavandula stoechas
+                                mento di rami e di porzioni dell’arbusto  SA
+                                                                         Isolamento, qPCR, ELI-
+  20   Myrtus communis          Ingiallimento generalizzato
+                                                                         SA
+  21   Myoporum insulare        Asintomatico                             qPCR, ELISA
+                                Bruscature fogliari, seguita da dissecca-
+                                                                          Isolamento, qPCR, ELI-
+  22   Nerium oleander          mento di rami e di intere porzioni
+                                                                          SA
+                                dell’arbusto
+
+
+
+
+                                                                                            9
+                                 Clorosi e avvizzimento fogliare su alcune
+                                 branche, seguiti da disseccamento di rami
+                                 e di intere porzioni della chioma. In alcuni Isolamento, qPCR, ELI-
+ 23    Olea europaea
+                                 casi soprattutto sui nuovi getti (succhioni) SA
+                                 possono essere visibili sintomi di brusca-
+                                 tura fogliare
+ 24    Pelargonium x fragrans Disseccamento dei germogli                       qPCR, ELISA
+                                                                               Isolamento, qPCR, ELI-
+ 25    Phillyrea latifolia       Bruscature fogliari
+                                                                               SA
+                                 Bruscature fogliari, seguita da dissecca-
+                                                                           Isolamento, qPCR, ELI-
+ 26    Polygala myrtifolia       mento di rami e di intere porzioni
+                                                                           SA
+                                 dell’arbusto
+                                                                           Isolamento, qPCR, ELI-
+ 27    Prunus avium              Bruscature fogliari
+                                                                           SA
+                                                                           Isolamento, qPCR, ELI-
+ 28    Prunus dulcis             Bruscature fogliari
+                                                                           SA
+ 29    Rhamnus alaternus         Asintomatico                                  qPCR, ELISA
+                                 Bruscature fogliari, ingiallimenti, seguiti
+ 30    Rosmarinus officinalis    da disseccamento di rami e di intere por- qPCR, ELISA
+                                 zioni dell’arbusto
+                                 Disseccamento dei rami e dell’intera pian-
+ 31    Spartium junceum                                                      qPCR, ELISA
+                                 ta
+ 32    Vinca sp.                 Asintomatico                                  qPCR, ELISA
+                                 Bruscature fogliari, seguita da dissecca-
+                                                                           Isolamento, qPCR, ELI-
+ 33    Westringia fruticosa      mento di rami e di intere porzioni
+                                                                           SA
+                                 dell’arbusto
+ 34    Westringia glabra         Asintomatico                                  qPCR, ELISA
+
+ 35    Pistacia vera L.          Sintomi di disseccamento                      qPCR
+
+Sul sito ufficiale della Regione Puglia www.emergenzaxylella.it e sul sito dei progetti europei H2020
+XF-ACTORS e POnTE: https://www.xfactorsproject.eu/communication/photo-gallery/ sono pubbli-
+cate le immagini delle specie ospiti sia sintomatiche che asintomatiche.
+5. AREE DELIMITATE
+
+A seguito del ritrovamento di un focolaio di Xylella il Servizio fitosanitario regionale stabilisce la
+"zona delimitata". Questa, in ottemperanza all’art. 4 del Reg. (UE) 2020/1201 “… è costituita da una
+“zona infetta” e da una “zona cuscinetto”. La zona infetta ha un raggio di almeno 50 m attorno alla
+pianta che è risultata infetta dall’organismo nocivo specificato. La larghezza della zona cuscinetto è
+la seguente:
+    a) almeno 2,5 km quando la zona infetta è stabilita ai fini dell’adozione delle misure di eradica-
+       zione di cui agli articoli da 7 a 11;
+    b) almeno 5 km quando la zona infetta è stabilita ai fini dell’adozione delle misure di conteni-
+       mento di cui agli articoli da 12 a 17. ”.
+Pertanto, sulla base del risultato dei monitoraggi effettuati dal 2013 ad oggi, in Puglia la situazione
+attuale relativa alla delimitazione delle aree per Xylella fastidiosa è riportata nella figura 1 e nella
+
+                                                                                                   10
+DDS 35 del 29/04/2021 aggiornata con la DDS 177 del 30/12/2021 con cui è stata revocata l’area
+delimitata di Canosa, pubblicate sul sito www.emergenzaxylella.it.
+Fig. 1
+
+
+
+
+Quando si individua un focolaio in zona cuscinetto o indenne, si procede alla determinazione della
+sottospecie del ceppo/dei ceppi diagnosticati nelle piante infette. La determinazione della sotto-
+specie avviene applicando una delle analisi di cui alla sezione b) dell’allegato IV del Reg. UE
+2020/1201:
+    1. Analisi MLST (Multi Locus Sequence Typing) sulla base di Yuan et al., 2010, per la determi-
+       nazione di tutte le sottospecie;
+    2. PCR sulla base di Hernandez-Martinez et al., 2006, per la determinazione delle sottospecie
+       fastidiosa, multiplex e sandyi;
+    3. PCR sulla base di Pooler & Hartung, 1995, per la determinazione della sottospecie pauca.
+Anche in caso di individuazione di una nuova specie ospite si deve procedere alla determinazione
+della sottospecie del ceppo/dei ceppi diagnosticati nelle piante infette, applicando una delle analisi
+di cui alla sezione b) dell’allegato IV del Reg. UE 2020/1201 innanzi citate.
+
+
+
+
+                                                                                                 11
+               PARTE II
+SORVEGLIANZA E CAMPIONAMENTO IN CAMPO
+
+
+
+
+                                        12
+ 1. LA SORVEGLIANZA
+L’indagine annuale per rilevare la presenza dell’organismo nocivo specificato è condotta in con-
+formità alle disposizioni del Reg. UE 2020/1201 e alle “Linee guida per indagini statisticamente va-
+lide e basate sul rischio di Xylella fastidiosa (Guidelines for statistically sound and risk-based sur-
+veys of Xylella fastidiosa)” redatte dall’European Food Safety Authority (EFSA).
+
+Poiché l’obiettivo generale dell’attività di sorveglianza è quello di anticipare l’evolversi della batte-
+riosi, il Reg. UE 2020/1201 ha inteso migliorare le modalità di sorveglianza di un territorio, che
+non è più basata su ispezioni visive, considerando che generalmente quando si riscontrano piante
+sintomatiche, l’infezione è già presente da tempo in quel territorio rendendo quindi difficile bloc-
+carne la diffusione.
+La procedura di campionamento prevede l’uso del metodo statistico Ribess + con il quale ci si pre-
+figge di intercettare in un dato territorio la presenza del batterio quando ancora è presente in
+percentuali molto basse, in modo da poter applicare con maggiore efficacia le misure di eradica-
+zione.
+L’attività di sorveglianza in Puglia è impostata su tre livelli di indagine:
+     Indagine nella zona indenne per confermare l’assenza del batterio ed intercettare in ma-
+         niera preventiva eventuali nuovi focolai;
+     Indagini in zona infetta e contenimento, per dimostrare che il batterio è confinato in una
+         determinata area;
+     Indagine nelle zone cuscinetto per intercettare in maniera preventiva nuove infezioni che
+      dovessero prendere origine dalla zona focolaio o contenimento.
+Per pianificare la sorveglianza e applicare il metodo Ribess + sono stati definiti:
+     obiettivo del monitoraggio
+     popolazione target
+     unità epidemiologiche
+     fattori di rischio
+     sensibilità del metodo.
+I parametri individuati sono stati elaborati attraverso l’applicazione dello strumento statistico Ri-
+BESS + con i livelli di confidenza e prevalenza indicati nel Reg. UE 2020/1201 per ogni area oggetto
+di monitoraggio; in alcuni casi sono stati applicati criteri più stringenti. In questo modo sono stati
+calcolati il n° di ettari da monitorare e il n° piante da campionare.
+Ai fini di una maggiore comprensione, si introducono alcune definizioni:
+ Popolazione Target: l’insieme di individui che potenzialmente possono essere infetti da X.
+  fastidiosa. Questo parametro è facilmente calcolabile nelle coltivazioni agrarie in cui è
+  generalmente conosciuto il numero di piante/ettaro ed è presente una sola specie vegetale.
+  Più difficile è la quantificazione delle specie specificate come asparago, cisto, rosmarino,
+  oleandro, vinca, ecc., presenti in aree in cui non è possibile determinare il numero preciso di
+  specie specificate/ettaro, in tal caso si deve ricorrere ad una stima. In Puglia la popolazione
+  target è costituita dalle piante appartenenti alle specie specificate a maggior rischio di
+  infezione quindi: olivo, mandorlo, ciliegio, specie della macchia mediterranea e di
+  conseguenza le unità epidemiologiche sono gli ettari di superficie investiti a oliveto, frutteto,
+  ecc.
+ Unità Epidemiologiche: Per unità epidemiologica si intende un ambiente “omogeneo” sia dal
+  punto di vista delle caratteristiche fisiche che di individui della popolazione target presenti”.
+
+                                                                                                      13
+  Fattori di rischio: sono fattori da individuare per orientare il campionamento in modo ancora
+   più preciso e nelle aree più suscettibili allo sviluppo e alla diffusione della batteriosi.
+  RiBESS+:metodo statistico che consente di calcolare, sulla base di alcuni parametri di input,
+   la dimensione del campione utilizzando un approccio statisticamente valido e basato sul
+   rischio;
+  Livello di confidenza e prevalenza = parametri che definiscono l'obiettivo della indagine e il
+   livello di accuratezza (confidenza) dei risultati che si ottengono.
+
+
+2.   AREE DA MONITORARE
+In Puglia le aree da monitorare sono state così individuate
+  Salento” costituita da:
+        Zona infetta di cui all’Allegato III del Reg. 2020/1201 in cui si attuano misure di
+         contenimento (articoli da 12 a 17 del Reg. 2020/1201), larga 5 km e posizionata al
+         confine con la zona cuscinetto;
+        Zona cuscinetto, adiacente alla zona infetta e della larghezza di 5 km, in cui si
+         applicano le misure di eradicazione;
+    “Monopoli” definita dalla zona infetta e da una zona cuscinetto della larghezza di 2,5 km
+     intorno alla zona infetta in cui si applicano misure di eradicazione (articoli da 7 a 11 del Reg.
+     2020/1201);
+    “Polignano” definita dalla zona infetta e da una zona cuscinetto della larghezza di 2,5 km
+     intorno alla zona infetta in cui si applicano misure di eradicazione (articoli da 7 a 11 del Reg.
+     2020/1201);
+    “Alberobello” definita dalla zona infetta e da una zona cuscinetto della larghezza di 2,5 km
+     intorno alla zona infetta in cui si applicano misure di eradicazione (articoli da 7 a 11 del Reg.
+     2020/1201).
+    area indenne
+    area compresa tra 5 e 20 km dal confine meridionale della zona infetta ‘Salento’ dove si
+     attuano misure di contenimento, con particolare riferimento alla Piana degli olivi secolari di
+     cui al Piano Paesaggistico Territoriale della Regione Puglia (PPTR) approvato con D.G.R. 16
+     febbraio 2015, n. 176 e s.m.i. e alla zona a confine con la Basilicata.
+
+La zona delimitata di “Canosa di Puglia”, revocata con Determina n. 177 del 30/12/2021, sarà co-
+munque sottoposta a sorveglianza fitosanitaria per assicurare il rispetto dei paragrafi 3 e 4
+dell’art. 6 del Reg. (UE) 2020/1201.
+Come innanzi detto, il numero di piante da campionare per ettaro nelle aree sottoposte a sorve-
+glianza dipende dalla popolazione ospite presente, dalla sua distribuzione e dai fattori di rischio
+individuati.
+In base ai fattori di rischio individuati, nel Piano di azione approvato con DGR n° 343 del 14 marzo
+2022, in ogni area sono state individuate le zone a rischio alto, medio e basso.
+
+
+3. PRIORITÀ DEL PROGRAMMA DI SORVEGLIANZA
+L’attività di sorveglianza sul territorio regionale è effettuata in contemporanea in tutte le aree de-
+limitate, nell’area indenne e nell’area compresa tra 5 e 20 km dal confine meridionale della zona
+infetta ‘Salento’ dove si attuano misure di contenimento, con particolare riferimento alla Piana
+degli olivi monumentali e alla zona a confine con la Basilicata.
+
+                                                                                                   14
+Ai fini del cofinanziamento e per agevolare l’attività di reporting dell’attività svolta dagli assistenti
+fitosanitari, ad ogni zona delimitata devono essere assegnate squadre specifiche di Assistenti fi-
+tosanitari che non possono essere destinati in altre zone se non al completamento della sorve-
+glianza della zona assegnata.
+3.1 PRIORITÀ NELLE AREE DELIMITATE
+In ogni area delimitata l’attività di sorveglianza deve essere attuata con la seguente priorità:
+ 1. Aree a Rischio Alto (AR)
+    l’area larga 400 m (da 50 a 450m) intorno al buffer di 50 m di raggio di ciascuna pianta
+      risultata infetta nel precedente monitoraggio ;
+    l’area di larghezza pari a 400 m tra la zona contenimento Salento e la restante zona infetta
+      Salento che va dal Mar Jonio al Mar Adriatico;
+    l’area di larghezza pari a 400 m tra la zona contenimento Salento e la zona cuscinetto
+      Salento che va dal Mar Jonio al Mar Adriatico.
+ 2. Aree a Rischio medio (MR)
+    L’area larga 400 m (da 450 a 850 m) a ridosso della prima area (larga 400 m) a rischio alto
+      (AR), definita intorno a ciascuna pianta infetta individuata nel precedente monitoraggio.
+ 3. Aree a Rischio base (BR)
+    La restante area di ogni singola area delimitata in cui sia nota la presenza di piante
+      specificate.
+
+3.2 PRIORITÀ NELL’AREA INDENNE
+Nell’area indenne la priorità è la seguente:
+ 1. zona comprendente l’area delimitata di larghezza pari a 1 km attorno al focolaio eradicato di
+     Canosa in cui deve essere attuata una sorveglianza ai sensi del comma 3 dell’art. 6 del Reg.
+     (UE) 2020/1201;
+ 2. zona indenne ritenuta a rischio e, pertanto, da sottoporre ad opportuna sorveglianza
+     “rafforzata”, comprendente territori del comune di Monopoli e della Piana degli olivi
+     monumentali non ricompresi in area delimitata;
+ 3. zona comprendente la gran parte del territorio regionale in cui l’organismo nocivo non risulta
+     presente.
+
+3.3. PRIORITÀ NELLA ZONA INFETTA
+Nell’area compresa tra 5 e 20 km dal confine meridionale della zona infetta ‘Salento’ dove si at-
+tuano misure di contenimento, la sorveglianza è svolta con priorità:
+ 1. nella Piana degli olivi secolari nelle aree di 50 m attorno alle piante riscontrate positive nella
+     precedente stagione di monitoraggio;
+ 2. nell’area limitrofa alla regione Basilicata;
+ 3. su eventuali segnalazioni da parte di soggetti interessati.
+
+
+4. SOGGETTI DELEGATI ALLA SORVEGLIANZA
+La sorveglianza del territorio ai sensi del Reg. UE 625/2017 rientra tra le “«altre attività ufficiali»
+che sono effettuate dalle autorità competenti, o dagli organismi delegati o dalle persone fisiche
+cui sono state delegate alcune altre attività ufficiali a norma del presente regolamento…”
+Con la Legge regionale 19/2019, all’ARIF è stata affidata l’attività di sorveglianza e di estirpazione
+delle piante infette.
+L’attività di sorveglianza ufficiale del territorio regionale, di cui al Piano di azione 2022 approvato
+con la DGR 343/2022, deve essere eseguita da Ispettori/Agenti/ Assistenti fitosanitari.
+
+                                                                                                      15
+Gli Assistenti fitosanitari, ai sensi dell’art. 20 del D. Lgs 19/2021:
+    sono tecnici, professionalmente qualificati, operanti presso altre strutture o organizzazioni
+     diverse dai Servizi fitosanitari regionali, che rispondono tecnicamente alle direttive del Servi-
+     zio fitosanitario competente per territorio;
+    si attengono alle disposizioni impartite dal responsabile del Servizio fitosanitario competente
+     per territorio;
+    adempiono ogni attività ufficiale relativa alla protezione delle piante, ad eccezione della pre-
+     scrizione di misure ufficiali e il rilascio di certificati fitosanitari;
+    operano su espresso incarico del Responsabile del Servizio fitosanitario competente, relati-
+     vamente alle funzioni assegnate.
+    propongono all’ispettore fitosanitario l’applicazione di una misura fitosanitaria o l’irrogazione
+     di una sanzione.
+L’ARIF per l’attività di sorveglianza si avvale di tecnici selezionati che devono possedere il requisito
+di professionalità inteso come: titolo di studio in materie agrarie, esperienza lavorativa in ambito
+fitosanitario, corsi di formazione in materie fitosanitarie.
+Dei tecnici selezionati e contrattualizzati da ARIF l’Osservatorio provvede a comunicare i nomina-
+tivi al Mipaaf, che li inserisce nell’elenco degli Assistenti fitosanitari.
+Ogni Assistente fitosanitario, nello svolgimento delle sue funzioni, deve essere munito di un tesse-
+rino di riconoscimento, che dovrà riportare: n° di registrazione nell’elenco nazionale, foto, dati i-
+dentificativi dell’Assistente, riferimento normativo “art. 20 del D. Lgs 19/2021”, logo della Regione
+Puglia, data di avvio e termine dell’incarico.
+I tesserini devono essere siglati dal Dirigente della Sezione Osservatorio fitosanitario.
+Gli Assistenti fitosanitari devono essere organizzati in squadre composte da 2 persone. Ogni squa-
+dra è dotata di un equipaggiamento adeguato al prelievo di campioni vegetali: svettatoi, forbici da
+pota, buste autosigillanti, disinfettante; in particolare, ogni squadra deve disporre di un tablet
+specifico che non può essere utilizzato/scambiato con altre squadre. Ciò è di fondamentale impor-
+tanza al fine di garantire la tracciabilità del lavoro svolto nonché una maggiore certezza operativa
+in caso di ulteriore sopralluogo in campo sullo stesso sito.
+Gli Assistenti fitosanitari che svolgono tale attività per la prima volta devono essere affiancati ad
+Assistenti più esperti.
+ARIF quotidianamente organizza l’attività degli Assistenti fitosanitari e comunica all’Osservatorio
+fitosanitario eventuali variazioni del programma di sorveglianza o degli assistenti fitosanitari inca-
+ricati.
+Tutta l’attività di sorveglianza e campionamento svolta da Ispettori/Agenti/Assistenti fitosanitari
+è registrata in un database, gestito da ARIF, a cui i responsabili di P.O. della Sezione Osservatorio
+che si occupano della gestione Xylella devono:
+     accedere in modalità “lettura” a tutti i livelli informativi, nessuno escluso
+     verificare giornalmente le superfici oggetto di sorveglianza nelle diverse zone.
+
+5. COMUNICAZIONE
+Preliminarmente all’avvio dell’attività di sorveglianza in un determinato territorio, ARIF informa il
+Prefetto, i Sindaci, le Associazioni di categoria e altri soggetti competenti per territorio affinché
+possano a loro volta informare i cittadini.
+                                                                                                     16
+Questa informativa è pubblicata anche sul sito dell’ARIF e sul portale istituzionale
+www.emergenzaxylella.it .
+In caso di prima individuazione di piante infette in un agro comunale, l’Osservatorio provvede a
+informare il Prefetto, il Sindaco, le Associazioni di categoria e altri soggetti competenti per territo-
+rio, al fine di predisporre gli atti consequenziali da assumere, la procedura di notifica attraverso
+pubblicazione all’albo pretorio del comune e la tempistica da osservare per ottemperare alle mi-
+sure fitosanitarie.
+
+
+6. ISPEZIONE E CAMPIONAMENTO
+Nelle aree delimitate oggetto di sorveglianza, attraverso l’uso del suolo sono state identificate e
+suddivise in maglie (= ettaro) le superfici di:
+
+    “Oliveti”: Olea europea
+    “Frutteti”: Prunus e Citrus
+    “Altre aree”: lavandula, poligala, acacia, oleandro, mirto, rosmarino, asparago selvatico, ci-
+     sto, ecc.
+Nelle aree da monitorare l’individuazione delle maglie da sottoporre a sorveglianza è effettuata
+da InnovaPuglia e avviene in modo casuale attraverso l’utilizzo di un algoritmo.
+Gli Assistenti fitosanitari devono ispezionare visivamente ogni maglia assegnata di “Oliveto” o
+“Frutteto” o “Altra area” al fine di individuare eventuali piante sintomatiche che si procede a
+campionare singolarmente. A conclusione dell’ispezione procedono al campionamento di 7 oppu-
+re 14 piante che costituiscono i/il campione/i pool. Le piante devono essere scelte casualmente in
+modo rappresentativo della maglia, ad es. lungo le diagonali.
+Le piante da campionare devono essere della specie a cui è attribuita la maglia (cioè, se la maglia
+è indicata oliveto devono essere campionati olivi e non altre specie specificate eventualmente
+presenti).
+Per quanto riguarda l’olivo, si ribadisce la necessità di ispezionare molto attentamente le piante
+dal lato sud, sud- ovest, in quanto è generalmente la zona in cui compaiono i primi sintomi.
+In presenza di un olivo con sintomi chiaramente ascrivibili a Xylella e non ad altre patologie, que-
+sto campione è raccolto separatamente e non va a costituire il campione pool. La pianta sintoma-
+tica campionata singolarmente deve essere individuata nella App come campione singolo.
+I 7 campioni prelevati dalle 7 piante sono singolarmente imbustati e vanno a costituire il campio-
+ne pool, a cui è assegnato un “codice pool”.
+In una maglia in cui sono prelevati 14 campioni, si costituiscono 2 campioni pool distinti.
+Nelle zone infette, tutti gli olivi monumentali ufficialmente censiti che non sono stati rimossi a
+norma dell’articolo 7, paragrafo 3 del Reg. UE 2020/1201 devono essere campionati singolarmen-
+te.
+
+
+CASI PARTICOLARI
+    In caso di oliveti in cui sono presenti numerosi ulivi sintomatici, si prelevano campioni singoli
+     da 7 olivi sintomatici.
+
+
+                                                                                                     17
+    Se la maglia è indicata come frutteto ma sono presenti anche ulivi, i campioni devono essere
+     prelevati solo dalle specie a cui la maglia è attribuita.
+    Nelle maglie indicate come frutteti in cui sono presenti diverse specie prelevare i campioni
+     dalla specie prevalente.
+    Nelle maglie indicate come frutteti prelevare i campioni di agrumi, pesco, albicocco, susino
+     anche se dichiarati resistenti alla X. Fastidiosa ST53.
+    Se in una maglia non ci sono 7 piante della stessa specie, eventualità che potrebbe verificarsi
+     ad es. nei frutteti, si campionano tutte le piante della stessa specie presenti; in questo caso il
+     campione pool è costituito da un numero inferiore a 7 campioni.
+    Se in una maglia non c’è corrispondenza tra la classe a cui la maglia è attribuita e la presenza
+     di specie specificate, es. la maglia è attribuita a frutteto però è un seminativo o un vigneto,
+     nell’App si registra che non c’è corrispondenza tra ciò che è assegnato e ciò che c’è in campo
+     e il monitoraggio viene effettuato in una maglia limitrofa se è oliveto o frutteto.
+    Nella maglia di macchia mediterranea o area verde, l’Assistente fitosanitario per scegliere le
+     piante da campionare per costituire il campione pool, nel corso dell’ispezione deve campio-
+     nare la specie specificata più presente con preferenza per le specie più suscettibili a X. fasti-
+     diosa pauca ST53 tra quelle presenti, ad es. acacia o oleandro o poligala che sono più su-
+     scettibili rispetto ad asparago o cisto o fillirea.
+Gli Ispettori/Agenti/Assistenti fitosanitari devono registrare ogni ispezione e campionamento di
+una pianta ospite/specificata utilizzando l’applicativo App Xylella. Deve essere compilata una spe-
+cifica scheda tecnica campione, che consente, oltre all'identificazione della pianta in campo me-
+diante coordinate geografiche, di garantire la tracciabilità tra il campione prelevato e il risultato
+delle relative analisi di laboratorio.
+La "scheda tecnica campione" deve essere compilata in maniera puntuale e non approssimativa in
+tutti i campi, ponendo particolare attenzione a:
+
+    georeferenziare le piante con estrema precisione, ponendosi sull'estremità della chioma
+     dell'albero al fine di consentire un buon ricevimento del segnale satellitare, facendo at-
+     tenzione in presenza di sesti di impianto ridotti di georeferenziare con precisione la pian-
+     ta oggetto di campionamento;
+
+    indicare nella colonna “SINTOMO” la presenza o assenza di sintomi
+    specificare nella colonna ” TIPO DI SINTOMO”
+            ascrivibile a Xylella e specificare se sono disseccamenti o bruscature
+          altro e specificare di cosa si tratta, es. rogna, oppure da altri patogeni
+
+    indicare nella colonna ”MONUMENTALE” se si tratta di olivo monumentale e inserire il n°
+     di targa se presente.
+
+
+
+
+                                                                                                    18
+19
+Ogni pianta campionata deve essere fotografata; la foto deve riprendere la pianta nella sua inte-
+rezza, evidenziando eventuali particolarità e rilevando significativi punti di riferimento, in modo
+da consentirne la facile individuazione in campo.
+Nel caso di olivi monumentali o con caratteristiche di monumentalità, nella scheda deve essere
+indicato se la pianta è o non è monumentale e la foto deve essere scattata in modo da evidenziare
+le dimensioni e la forma del tronco. Se la pianta non ha un’etichetta ma ha i caratteri di monu-
+mentalità, si deve misurare il diametro del tronco ad un’altezza di 1,30 m e il valore espresso in
+cm va inserito nelle note.
+
+
+7. CONSEGNA CAMPIONI
+I campioni devono essere consegnati ai laboratori nella stessa giornata del prelievo e devono es-
+sere trasportati in borse frigo con siberine.
+La squadra di Assistenti fitosanitari consegna i campioni al personale ARIF appositamente incari-
+cato del trasporto ai laboratori ufficiali.
+I due Assistenti fitosanitari componenti la squadra e l’autista firmano il verbale di consegna carta-
+ceo o in caso sia informatico digitalmente attraverso la App.
+Il personale autorizzato al trasporto attesta la consegna al laboratorio controfirmando il verbale
+cartaceo o in caso sia informatico digitalmente attraverso la App.
+
+
+8. RINVENIMENTO PIANTA INFETTA
+8.1 ZONA CONTENIMENTO
+In caso di rinvenimento di una pianta infetta, si deve procedere immediatamente a campionare:
+ 1. tutte le piante specificate presenti nel raggio di 50 metri attorno alle piante infette, e tutte le
+     altre piante che presentino sintomi indicativi della possibile infezione da parte della Xylella o
+     che si sospetta siano infette da tale organismo nocivo;
+ 2. tutte le superfici investite ad olivo, altri fruttiferi e altre specie specificate ricadenti nell’area
+     larga 400 m attorno alla pianta risultata infetta, partendo dal perimetro dell’area di raggio 50
+     m, con prelievo di 14 campioni/ettaro.
+
+8.2 ZONA INDENNE E CUSCINETTO
+Se la pianta infetta è rinvenuta in zona indenne o cuscinetto, si deve procedere immediatamente
+a campionare:
+ 1. nel raggio di 50 m attorno alle piante infette, tutti gli ulivi monumentali, ufficialmente censiti
+     oppure con caratteristiche di monumentalità, ma privi di targa o che non risultano
+     ufficialmente censiti, fotografandoli come innanzi descritto;
+ 2. in una seconda area di larghezza pari a 50 m attorno alla prima area, tutte le specie
+     specificate al fine di verificare l’estensione del focolaio;
+ 3. in una terza area di larghezza pari a 400 m attorno alla seconda area, tutti gli ettari con
+     presenza di specie specificate, prelevando 14 campioni/ettaro.
+
+
+9. SEGNALAZIONI
+Le piante sintomatiche segnalate come sospette sono oggetto di ispezione, campionamento e
+georeferenziazione da parte di Ispettori/Agenti fitosanitari dell’Osservatorio.
+
+
+                                                                                                       20
+Ogni ispezione e campionamento di una pianta ospite/specificata deve essere registrato mediante
+la compilazione di una specifica scheda tecnica campione attraverso l’applicativo App Xylella.
+Se la segnalazione giunge ad ARIF, questa deve essere a sua volta inoltrata all’Ispettore
+fitosanitario responsabile P.O. del territorio di competenza.
+Non si procede all’ispezione e campionamento di piante segnalate nella zona infetta Salento non
+ricadenti nelle zone infette oggetto di sorveglianza.
+
+ 10. MODALITÀ DI PRELIEVO DEI CAMPIONI
+Nel prelievo dei campioni si deve distinguere tra una pianta campionata che costituirà un
+campione singolo da una pianta campionata che farà parte di un campione pool.
+
+10.1. CAMPIONE SINGOLO
+Specie arboree sempreverdi
+Il campione deve essere costituito da 8 rametti di 15-20 cm con foglie mature (rimuovere le
+porzioni apicali in via di sviluppo), in alternativa 10-12 foglie mature con picciolo prelevate da
+rami ben lignificati.
+Olivo
+Nel caso specifico dell’olivo, considerando che il batterio è rilevabile soprattutto nei rami e nelle
+branche prossimali a quelle che mostrano sintomi, spesso localizzate (soprattutto nella fase inizia-
+le delle infezioni) nella parte alta della chioma e nella parte della chioma esposta a sud, sud - o-
+vest, è necessario adoperare svettatoi telescopici per poter prelevare il campione in maniera ade-
+guata.
+Il prelievo dei campioni va effettuato, in maniera differenziata, secondo il tipo di pianta:
+
+a. Per gli olivi con sintomatologia lieve o acclarata bisogna campionare nei settori della chioma
+   che mostrano sintomi, prestando cura nel prelevare rametti non interessati da
+   disseccamento, ma rametti ancora vitali e in vegetazione (evitare i tessuti con manifestazioni
+   di sofferenza da disseccamento - vedi scheda illustrativa pag. 24)
+
+b. Per gli olivi asintomatici bisogna campionare esclusivamente con l’uso dello svettatoio dalla
+   parte alta della chioma prelevando almeno 8 rametti lungo la circonferenza della chioma in
+   corrispondenza dei quattro punti cardinali, oppure anche all’interno della chioma.
+
+Non vanno campionate le piante che sono state sottoposte ad una recente potatura drastica e
+che hanno pochi germogli di nuova vegetazione.
+Non vanno prelevati campioni dai polloni e succhioni degli olivi.
+
+10.2 CAMPIONE POOL
+Il campione deve essere costituito da 4 rametti di 15-20 cm con foglie mature (rimuovere le
+porzioni apicali in via di sviluppo) prelevati da ciascuna delle quattro diverse esposizioni della
+chioma (N, E, S, O) o, in alternativa 10-12 foglie mature con picciolo prelevate da rami ben
+lignificati.
+Olivo
+Il prelievo dei campioni va effettuato, in maniera differenziata, secondo il tipo di pianta:
+
+
+                                                                                                  21
+a. Per gli olivi con sintomatologia lieve o acclarata bisogna campionare nei settori della chioma
+   che mostrano sintomi, prestando cura nel prelevare rametti non interessati da
+   disseccamento, ma rametti ancora vitali e in vegetazione (evitare i tessuti con manifestazioni
+   di sofferenza da disseccamento - vedi scheda illustrativa pag. 24)
+
+b. Per gli olivi asintomatici bisogna campionare esclusivamente con l’uso dello svettatoio dalla
+   parte alta della chioma prelevando almeno 4 rametti lungo la circonferenza della chioma in
+   corrispondenza dei quattro punti cardinali, oppure anche all’interno della chioma.
+
+Non vanno campionate le piante che sono state sottoposte ad una recente potatura drastica e
+che hanno pochi germogli di nuova vegetazione.
+Non vanno prelevati campioni dai polloni e succhioni degli olivi.
+
+Specie arboree a foglia caduca
+Il campione deve essere costituito da almeno 4 rametti di 15-20 cm con foglie; in alternativa, per
+alcune specie (ad es. mandorlo, ciliegio), da settembre in poi, 10-12 foglie mature con picciolo
+prelevate da rami ben lignificati oppure, in assenza di foglie, da porzioni di rametti ben lignificati.
+Piante erbacee e specie a ciclo annuale
+Prelevare porzioni di fusto/cauli con foglie basali; laddove possibile prelevare l’intera pianta,
+compreso eventualmente la radice/i principale/i.
+Arbusti
+Prelevare rametti di 15-20 cm con foglie, ovvero foglie mature con picciolo prelevate da rami ben
+lignificati.
+Ove possibile, il materiale da campionare può essere prelevato con il solo uso delle mani (es. per
+staccare le foglie, rametti facilmente asportabili) oppure con l’ausilio di cesoie/svettatoi, opportu-
+namente disinfettati tra il campionamento di una pianta e la successiva (disinfettare gli attrezzi di
+taglio con ipoclorito di sodio a 1-2% è una prassi di buona pratica agricola che va adottata anche
+per altri patogeni).
+Prima di riporre il campione nell’apposita busta, è importante assicurarsi che sulle porzioni vege-
+tali campionate non vi siano insetti potenziali vettori di X. fastidiosa. Pertanto è necessario scuo-
+tere energicamente le parti vegetali che possono ospitare insetti, assicurandosi di non movimen-
+tare insetti in qualsiasi stadio vitale.
+Ogni campione deve essere inserito in una busta autosigillante di dimensioni idonee a contenere i
+vari rametti. Le buste devono essere sigillate sia per evitare scambi di materiale vegetale che per
+evitare che eventuali insetti accidentalmente raccolti con il materiale vegetale possano poi libe-
+rarsi nel corso del trasporto del campione dal sito di raccolta al laboratorio fitopatologico.
+Il laboratorio non procede ad analizzare i campioni pervenuti in buste aperte e non sigillate e co-
+munica al SFR e ad ARIF la presenza di tali campioni non sigillati indicandone gli ID.
+Completate le operazioni di prelievo, sulla busta di plastica che racchiude il campione va apposta
+l'etichetta con tutti i dati necessari alla tracciabilità. In particolare vengono riportati i seguenti dati
+generati in automatico dall’applicazione App:
+   Codice campione pool
+   ID del campione
+
+                                                                                                       22
+    Codice squadra
+    Data
+    Specie campionata
+    Sintomi
+Le 7 buste relative ai campioni prelevati nella maglia, devono essere raggruppate in 1 bustone
+riportante i seguenti dati
+
+
+
+
+ Il bustone che racchiude le 7 buste deve essere conservato in frigo (borse frigo con siberine) sia in
+campo che durante il trasporto ai laboratori. È estremamente importante non lasciare i campioni
+esposti al sole, anche se riposti nelle borse frigo.
+Nel periodo estivo il prelievo dei campioni non deve essere fatto nelle ore più calde della giornata.
+
+
+11. EPOCHE DI CAMPIONAMENTO
+Il periodo di campionamento per la diagnosi sintomatologica e di laboratorio deve tener conto dei
+seguenti aspetti:
+  il batterio si moltiplica con maggiore facilità nelle piante ospiti a temperature medio-alte;
+  il tessuto ideale per il campionamento è rappresentato, per le specie arboree e perenni, da
+      foglie mature da cui vengono prelevati il picciolo e porzioni delle nervature e, ancor meglio
+      (specialmente per le specie a foglia caduca), dai rametti già lignificati;
+  il ciclo biologico delle specie arboree (a foglia caduca o sempreverdi) e delle specie infestanti;
+  l’andamento climatico dell’area in cui si opera.
+
+Sulla base dell’esperienza maturata nel monitoraggio periodico effettuato in questi anni in Puglia,
+per olivo, oleandro, poligala, alloro, fillirea ed altre specie ospiti sempreverdi, i campioni possono
+essere prelevati durante l’intero arco dell’anno.
+Per le specie specificate a foglia caduca, in particolare ciliegio e mandorlo, l’esperienza acquisita in
+questi anni evidenzia che il batterio è rilevabile nei tessuti fogliari soltanto in estate inoltrata/fine
+estate e sino alla caduta delle foglie. Pertanto, per mandorlo e ciliegio è da evitarsi il
+campionamento e il saggio su foglie nei periodi primaverili - inizio estate. Pur tuttavia, in questi
+periodi e per tutto l’inverno in cui le foglie non sono più presenti, il campionamento ed il saggio
+possono essere effettuati sul tessuto legnoso prelevato da rametti ben lignificati in fase di
+dormienza.
+
+
+
+
+                                                                                                      23
+Scheda illustrativa - Campionamento pianta di olivo con presenza di sintomatologia sospetta -
+Le porzioni da cui prelevare rametti ben lignificati sono cerchiate in verde.
+
+
+
+
+Rametti lignificati idonei per il campionamento di mandorlo o ciliegio
+
+
+
+
+                                                                                            24
+      PARTE III
+ANALISI DI LABORATORIO
+
+
+
+
+                         25
+1. LABORATORI UFFICIALI
+Le analisi ufficiali di laboratorio devono essere svolte da laboratori che rispondono ai requisiti
+previsti dall’art. 37 del Reg. UE 2017/ 625 ovvero in deroga ai requisiti di cui all’art. 41 del Reg.
+(UE) 2017/625, in particolare i laboratori devono:
+  possedere l’esperienza, le attrezzature e le infrastrutture necessarie per effettuare analisi,
+     prove o diagnosi sui campioni;
+  disporre di un numero sufficiente di addetti adeguatamente qualificati, formati ed esperti;
+  garantire che i compiti attribuitigli sono effettuati in modo imparziale ed esente da qualsiasi
+     conflitto di interessi per quando riguarda l’adempimento dei propri compiti in qualità di labo-
+     ratorio ufficiale;
+  essere in grado di fornire tempestivamente i risultati delle analisi, prove o diagnosi effettuate
+     sui campioni prelevati durante i controlli ufficiali e le altre attività ufficiali;
+  operare secondo la norma EN ISO/IEC 17025 ed essere stati accreditati secondo tale norma
+     da un organismo nazionale di accreditamento operante in conformità del regolamento (CE)
+     n. 765/2008, oppure in deroga a tale requisito, ai sensi dell’art. 41 del Reg. UE 2017/625,
+     applicare un sistema di assicurazione della qualità per garantire che i metodi di analisi, prove
+     e diagnosi di laboratorio utilizzati portino a risultati solidi e attendibili e partecipare
+     regolarmente e con prestazioni soddisfacenti alle prove comparative inter-laboratorio o alle
+     prove valutative organizzate dai laboratori nazionali ed internazionali di riferimento in
+     relazione ai metodi impiegati.
+
+In Puglia i laboratori ufficiali designati dall’Osservatorio al Ministero delle politiche agricole ali-
+mentari e forestali e comunicati alla Commissione europea con nota prot. n° 9052766 del
+13/08/2020 e che operano in nome e per conto dell’autorità competente regionale sono:
+  per lo screening e l’individuazione della presenza della Xylella fastidiosa
+   Università degli studi di Foggia - Dipartimento di Scienze Agrarie, Alimenti, Risorse Naturali
+      e Ingegneria – Laboratorio di Patologia Vegetale e Diagnostica
+   Università del Salento - Dipartimento di Scienze e Tecnologie Biologiche e Ambientali,
+      Laboratorio di Fisiologia Vegetale;
+   Centro di Ricerca, Formazione e Sperimentazione in Agricoltura “Basile Caramia”;
+   Istituto Agronomico Mediterraneo di Valenzano;
+   Università degli Studi di Bari - Dipartimento di Scienze del Suolo, della Pianta e degli
+      Alimenti (Di.S.S.P.A.);
+
+    Per le analisi molecolari di conferma in aree indenni/cuscinetto e per l’identificazione delle
+     sottospecie di Xylella fastidiosa
+     l’Istituto per la Protezione Sostenibile delle Piante del CNR, Sede Secondaria di Bari.
+
+2. ANALISI DI LABORATORIO
+
+Il laboratorio al momento dell’accettazione dei campioni, verifica che:
+  ci sia corrispondenza con quanto indicato nel verbale cartaceo o elettronico su App di
+      accompagnamento dei campioni;
+  ci sia corrispondenza tra i campioni indicati nel verbale cartaceo o elettronico su App ed il
+      contenuto in termini di singoli campioni che costituiscono il campione pool
+
+                                                                                                    26
+    il campione non presenti fenomeni di alterazione (marcescenza, sviluppo di muffe, disidrata-
+     zione, etc.) alla consegna;
+    il campione sia stato opportunamente confezionato (la busta deve essere sigillata) e identifi-
+     cato;
+    il campione sia in quantità sufficiente a garantire l’esecuzione del saggio diagnostico.
+Dalla ricezione sino alla fase di analisi, i campioni devono essere conservati a una temperatura di
+4-10°C.
+Il campione pool deve essere processato come un unico campione diagnostico rappresentativo
+dei singoli campioni. Sul campione “pool” si procederà ad effettuare l’estrazione del DNA ed il
+saggio real-time PCR seguendo le procedure standard già adottate per il saggio diagnostico sui
+campioni singoli.
+Sulla base dei dati acquisiti relativamente alla distribuzione del batterio all’interno della chioma e
+nei diversi tessuti di olivi di cultivar suscettibili e resistenti (https://www.xfactorsproject.eu/wp-
+content/uploads/2021/04/draft-book-of-abstract-no-email-FINAL_1.pdf), si evince la necessità di
+prelevare i tessuti da saggiare da almeno 4 rametti lignificati, e di utilizzare porzioni di ramo piut-
+tosto che tessuti fogliari, che permettono di ottenere (soprattutto per le cultivar resistenti) valori
+di sensibilità diagnostica più elevati.
+Si forniscono, pertanto, le seguenti indicazioni operative:
+    prelevare con l’ausilio di una cesoia una porzione di 1 cm-1,5 cm dalla parte centrale di ogni
+     singolo rametto (quindi 4 porzioni per ogni campione) (Fig.1A) e trasferirle nella busta di e-
+     strazione codificata con il numero del pool;
+
+    ripetere la stessa operazione per tutti i campioni che costituiscono il pool, trasferendo il ma-
+     teriale prelevato da ogni campione sempre nella stessa busta di estrazione (Fig. 1B e 1C), che
+     conterrà quindi, nel caso di un campione pool costituito da 7 campioni singoli, 28 porzioni di
+     ramo (ca. 1,2-2gr);
+    durante le fasi di prelievo del tessuto da ciascun campione del pool, assicurarsi che il materia-
+     le restante e relativo a ciascun singolo campione venga riposto e risigillato nella sua corri-
+     spondente busta, evitando di mescolare i rami relativi a campioni diversi dello stesso pool. Il
+     restante materiale vegetale presente nelle 7 buste deve essere conservato sino al risultato
+     analitico del campione pool;
+    prima di procedere con le fasi di estrazione, pesare il tessuto prelevato ed aggiungere un vo-
+     lume di tampone di estrazione in rapporto minimo di 1:5 e massimo di 1:10 peso: volume;
+    prima di procedere alla macerazione del campione, per evitare che le porzioni lignificate dei
+     rametti possano danneggiare e causare la rottura delle buste di estrazione, è opportuno pro-
+     cedere ad una preliminare operazione manuale che permetta di schiacciare i cilindretti del
+     materiale legnoso (es. con martello in gomma);
+    successivamente alla macerazione del campione, procedere con le operazioni di estrazione
+     del DNA come da protocollo standard adottato per i campioni singoli.
+
+
+
+
+                                                                                                    27
+Figura 2: Esempio illustrativo del materiale prelevato da ogni campione (A), dal pool dei 7 cam-
+pioni (B) e la busta di estrazione con il materiale relativo ai 7 campioni pool (C).
+
+
+
+
+                                                                                             28
+                SCHEMA PER COSTITUIRE IL CAMPIONE POOL
+                     Bustone (CODICE CAMPIONE POOL)
+                    (max 7 buste con i campioni della stessa
+                      specie e raccolti nella stessa maglia)
+
+
+
+
+IDxxx 1   IDxxx 2          IDxxx 3      IDxxxx 4       IDxxx 5   IDxxx 6   IDxxxx 7
+
+
+
+
+                          Prelevare da ogni busta 4 rametti e
+                         tagliare da ogni rametto una porzione
+                                       di 1-1,5 cm
+
+
+
+
+               Costituire il pool unendo le 4 porzioni di ra-
+               metti recuperati da ciascuno dei 7 campioni
+                       vegetali presenti nel bustone
+                       (tot. 28 porzioni ca. 1.2-2 gr)
+
+
+
+
+                                                                              29
+Le tecniche molecolari utilizzabili ai fini del rilevamento di X. fastidiosa sono quelle previste nella
+sezione A, dell’all. IV del Reg. UE 2020/1201:
+
+          PCR in tempo reale sulla base di Harper et al., 2010 (e erratum 2013);
+          amplificazione isotermica mediata da loop (LAMP) sulla base di primer sviluppati da Har-
+           per et al. 2010 (e erratum 2013);
+           PCR in tempo reale sulla base di Ouyang et al., 2013;
+           PCR convenzionale sulla base di Minsavage et al. 1994.
+In Puglia, per uniformare i risultati dei diversi laboratori e tenendo conto dei ring test effettuati a
+ottobre 2020, i laboratori effettueranno le analisi molecolari applicando:
+          PCR in tempo reale sulla base di Harper et al., 2010 (e erratum 2013).
+
+
+Al fine di armonizzare l’interpretazione dei risultati, qui di seguito si forniscono dei criteri generali
+di riferimento per l’interpretazione dei valori ottenuti dalle reazioni di real time PCR:
+          Cq< 32: “Positivo”
+          Cq>32: “Dubbio” da sottoporre ad ulteriori verifiche
+          Cq=nessun valore, “Negativo”
+È importante sottolineare che tali indicazioni sono generiche e vanno adattate alle risultanze ot-
+tenute per ogni singolo saggio real time PCR, es. considerando i valori ottenuti e generati nei con-
+trolli (negativo, positivo, senza DNA target) inseriti in ogni saggio real time PCR.
+In caso di risultato dubbio, il laboratorio procede dapprima a sottoporre lo stesso estratto ad un
+ulteriore verifica in real time PCR utilizzando nuovamente il saggio di Harper et al. (2010) oppure il
+saggio di Ouyang et al. (2013) che ha una sensibilità diagnostica comparabile a quella di Harper.
+
+Qualora da questa ripetizione in tutte le repliche (pozzetti della piastra real time) del saggio real
+time PCR, il campione generi valori di “Cq” compresi fra 32 e 35, si procede dapprima ad una
+nuova estrazione del campione come “campione pool”, e successivamente ove il risultato sia an-
+cora dubbio si procede al saggio dei singoli campioni del pool.
+Il responsabile del laboratorio quando inserisce il risultato dell’analisi nel Database accede ad una
+serie di informazioni tra cui la zona delimitata di provenienza del campione e l’agro comunale.
+In caso di risultato positivo del campione pool proveniente da:
+  -       ZONA CONTENIMENTO - il laboratorio procede ad analizzare singolarmente i campioni delle
+          7 buste per individuare la pianta o le piante infette.
+  -       ZONA INDENNE O CUSCINETTO - il campione pool, comprensivo delle 7 buste dei campioni
+          singoli, è consegnato prima possibile al CNR-IPSP, che procede all’analisi dei singoli
+          campioni del campione pool utilizzando un‘analisi molecolare tra quelle elencate nella
+          seziona A) dell’allegato IV del Reg. UE 2020/1201, differente da quella utilizzata dal
+          laboratorio di primo livello e all’identificazione della sottospecie, applicando le analisi
+          molecolari elencate nell’allegato IV del Reg. UE 2020/1201 - sezione B).
+
+In caso di campione positivo individuato in una nuova specie non inserita fra le 35 specie specifi-
+cate alla Xylella fastidiosa sottospecie pauca ST53 ad oggi note, il campione è consegnato al IPSP -
+CNR che procede all’identificazione della sottospecie, applicando le analisi molecolari elencate
+nell’allegato IV del Reg. UE 2020/1201 - sezione B).
+
+                                                                                                      30
+3. COMUNICAZIONE RISULTATI ANALISI
+
+Il responsabile del laboratorio quando inserisce il risultato dell’analisi nel Database accede alle se-
+guenti informazioni:
+          ID campione
+          Data campionamento
+          specie
+          coordinate GPS,
+          zona delimitata
+          agro comunale
+Le analisi sono effettuate e registrate nel database entro massimo 5 giorni lavorativi dal ricevi-
+mento dei campioni, a seguire il laboratorio comunica all’Osservatorio i risultati delle analisi.
+In caso di campioni da sottoporre ad analisi di conferma (zona indenne o cuscinetto), il campione
+è inviato con sollecitudine al CNR che effettua l’analisi e comunica il risultato entro massimo 5
+giorni lavorativi dal ricevimento del campione.
+Ogni laboratorio, oltre ad inserire il risultato dell’analisi nel database, comunica all’Osservatorio il
+rapporto di prova distinto tra campioni risultati positivi e campioni risultati negativi, utilizzando il
+seguente schema allegato alla nota di trasmissione al fine di uniformare i rapporti di prova.
+
+
+                                             LABORATORIO……….
+
+                                      RAPPORTO DI PROVA N° …… DEL …….
+
+                                                                            ESITO ANALSI
+
+ ID CAM-      DATA PRE-                                                    PCR Harper et al.,
+                             SPECIE   COMUNE    LATITUDINE   LONGITUDINE                        DATA ANALISI
+  PIONE         LIEVO                                                           2010
+
+
+
+
+I rapporti di prova dei campioni risultati positivi sono pubblicati sul sito www.emergenzaxylella.it
+
+
+
+
+                                                                                                               31
+                                                Schema del flusso delle analisi
+                                    WORKFLOW PER MONITORAGGIO IN ZONA DI CONTENIMENTO
+
+                                                         Campione vegetale pool
+                                                     (costituito da 7 campioni singoli)
+
+
+                                                      Preparazione del campione pool
+
+
+
+                                        1° screening molecolare:                                      X. fastidiosa non rilevata
+                                        analisi su campione pool                   Negativo
+                                                                                                       Campione non infetto
+                                          (Harper et al., 2010)
+
+
+
+
+Saggio laboratori di I livello
+                                          Positivo o dubbio                                              Inserimento nel
+                                                                                                           Database e
+                                                                                                       Comunicazione SFR
+
+
+                                          2° Screening molecolare:
+                                 analisi sui 7 campioni singoli del campione
+                                                      pool
+                                              (Harper et al., 2010)
+
+
+                                                              Dubbio                          - nuova preparazione del campione
+                                                                                              - se ancora dubbio campionare
+                                                                                              nuovamente la pianta
+
+
+
+
+                                                             Negativo                          X. fastidiosa non rilevata
+                                                                                                  Campione negativo
+
+                                                                                              Campione non infetto
+                                  Positivo
+
+
+
+
+                                 X. fastidiosa rilevata                                       Registrazione nel database
+                                  Campione infetto                                                         e
+                                                                                                Comunicazione SFR
+
+
+
+
+                                                                                                               32
+                                                   WORKFLOW PER MONITORAGGIO IN AREA INDENNE/CUSCINETTO
+
+
+                                                                           Campione vegetale pool
+                                                                           (costituito da 7 campioni)
+
+
+                                                                      Preparazione del campione pool
+
+
+
+
+Saggio laboratori di I livello
+                                                       1° screening molecolare:                                           X. fastidiosa non rilevata
+                                                                                                        Negativo
+                                                       analisi su campione pool                                              Campione negativo
+                                                         (Harper et al., 2010)
+
+
+
+                                                          Positivo o dubbio                                                    Registrazione nel
+                                                                                                                                 Database e
+                                                                                                                              Comunicazione SFR
+
+
+                                                         2° Screening molecolare:
+                                                analisi di conferma sui 7 campioni singoli
+                                                             del campione pool
+                                                            (Harper et al., 2010)
+
+
+
+
+  Saggio laboratorio di II livello (IPSP-CNR)
+                                                                              Dubbio                          - ripetere preparazione del campione
+                                                                                                              e analisi
+                                                                                                              - se ancora dubbio campionare nuo-
+                                                                                                              vamente la pianta
+
+
+
+
+                                                                             Negativo                               X. fastidiosa non rilevata
+                                                                                                                       Campione negativo
+
+                                                                                                                   Campione non infetto
+                                                  Positivo
+
+
+
+
+                                                  X. fastidiosa rilevata
+                                                                                                                    Registrazione nel Database
+                                                   Campione infetto
+                                                                                                                                 e
+                                                   Caratterizzazione
+                                                                                                                      Comunicazione SFR
+
+
+
+
+                             * per campioni pool dubbi consultare pag. 30
+
+
+
+                                                                                                                                   33
+4. SITO UFFICIALE
+Sul sito ufficiale della regione Puglia www.emergenzaxylella.it sono presenti le informazioni relati-
+ve all’andamento del monitoraggio del territorio per Xylella fastidiosa.
+Nel sito sono pubblicate gli atti dirigenziali di prescrizione di estirpazione di piante infette, i rap-
+porti di prova dei campioni positivi, le informazioni sui vettori, ed altre comunicazioni
+dell’Osservatorio.
+Il portale presenta diverse sezioni, le principali sono così identificate:
+XYLELLA FASTIDIOSA SUBSPECIE PAUCA ST53
+Contiene le informazioni di carattere generale relative al batterio e in particolare linee guida e
+materiale didattico.
+NORMATIVA
+Contiene 3 sotto-sezioni relative rispettivamente alla normativa comunitaria (Regolamenti - Deci-
+sioni), alla normativa nazionale (Decreti Ministeriali) e alla normativa regionale (Delibere di Giunta
+Regionale e Determine dirigenziali)
+ZONE INTERESSATE
+È un servizio che consente, data una determinata particella catastale, di individuare se un’area ri-
+cade o meno in una delle zone delimitate ai sensi della normativa vigente, oltre a visualizzare su
+cartografia catastale e su ortofoto la particella stessa.
+MONITORAGGIO – RISULTATI DIAGNOSTICI
+Contiene gli esiti dei saggi di laboratorio positivi.
+CARTOGRAFIA E SERVIZIO WEB MAP SERVICE (WMS)
+La sezione presenta due webgis:
+  il primo Consultazione Zone Delimitate per l'emergenza della Xylella fastidiosa consente di
+   visualizzare, su base catastale e/o su ortofoto, le zone delimitate;
+
+  il secondo Consultazione Dati di Monitoraggio delle specie ospiti di Xylella fastidiosa con-
+   sente la consultazione dei dati di monitoraggio.
+La sezione contiene inoltre le indicazioni per richiamare in ambiente GIS le Zone delimitate trami-
+te il servizio WMS esposto.
+Nel dettaglio, il servizio Consultazione Dati di Monitoraggio delle specie ospiti di Xylella fastidio-
+sa consente la consultazione, su base catastale e/o su ortofoto, di:
+     Monitoraggio Xylella fastidiosa: campioni prelevati e sottoposti ad analisi, suddivisi in fun-
+      zione delle principali specie vegetali (olivo, vite, altre specie), ispezioni visive, campioni ri-
+      sultati positivi. Lo strato informativo viene aggiornato in funzione dell'attività di monitorag-
+      gio;
+     Parchi e aree protette: consente di visualizzare le aree protette nazionali e regionali, SIC e
+      ZPS, IBA, RAMSAR;
+     Zone delimitate: consente di visualizzare le zone delimitate in relazione della normativa vi-
+      gente;
+
+
+                                                                                                     34
+     Ulivi monumentali: consente di visualizzare gli ulivi monumentali censiti dalla Regione Pu-
+      glia.
+Il webgis presenta numerosi tasti funzionali che sono illustrati nel manuale utente disponibile on-
+line nella voce Guida. In particolare, si evidenziano i comandi di:
+     Ricerca spaziale (posto sulla barra verticale e indicato con “I”) che consente di interrogare il
+      singolo campione e ottenere informazioni aggiuntive, quali la specie e la data di campiona-
+      mento;
+     Stampa (posto sulla barra verticale) consente di effettuare stampe in scala e in diversi for-
+      mati, sino al formato A0;
+     Query parametriche (posto sulla barra orizzontale) consente di localizzare una determinata
+      particella catastale ;
+     Cambia basemap (posto sulla barra orizzontale) consente di selezionare l’ortofoto da utiliz-
+      zare come mappa di sfondo tra quelle disponibili. Si evidenzia la disponibilità di un’ortofoto
+      del 2015 ad altissima risoluzione spaziale (14 cm) a copertura delle province di Lecce, Brin-
+      disi e Taranto.
+DOCUMENTAZIONE SCIENTIFICA
+Contiene pubblicazioni e lavori relativi alla Xylella fastidiosa
+EUROPEAN FOOD SAFETY AUTHORITY (EFSA)
+Contiene documenti e link al portale EFSA
+
+
+
+
+                                                                                                   35
+         PARTE IV
+ESTIRPAZIONE PIANTE INFETTE
+
+
+
+
+                              36
+L’applicazione delle prescrizioni fitosanitarie che dispongono le misure fitosanitarie è effettuata
+secondo le modalità e i termini stabiliti dall’Osservatorio fitosanitario.
+1. MISURE DI ERADICAZIONE
+In caso di individuazione di piante infette in zona indenne o cuscinetto si applicano le misure di
+eradicazione ai sensi dell’art. 7 del Reg. UE 2020/1201. Le operazioni sono svolte secondo la se-
+guente cronologia:
+    I FASE - Trattamento fitosanitario
+Preventivamente alle operazioni di estirpazione delle piante, nella zona infetta viene effettuato
+un trattamento fitosanitario contro i vettori della Xylella con prodotti autorizzati. Tale trattamen-
+to non si applica nel periodo novembre - marzo in quanto non necessario.
+    II FASE – Estirpazione
+Dopo 48 ore dal trattamento si procede all’estirpazione delle:
+a) piante risultate infette
+b) piante che presentano sintomi indicativi della possibile infezione da parte di tale organismo
+   nocivo o che si sospetta siano infette da tale organismo nocivo;
+c) piante appartenenti alla stessa specie della pianta infetta, indipendentemente dal loro stato
+   sanitario;
+d) piante di specie diverse da quella della pianta infetta che sono risultate infette in altre parti
+   dell’area delimitata;
+e) le piante specificate, diverse da quelle di cui alle lettere c) e d), che non sono state immedia-
+   tamente sottoposte a campionamento e ad analisi molecolare e che non sono risultate in-
+   denni dall’organismo nocivo specificato;
+Nel raggio di 50 m attorno alle piante infette, non si procede all’estirpazione di:
+    olivi monumentali ufficialmente riconosciuti come piante di valore storico e risultati non in-
+     fetti alle analisi di laboratorio;
+    piante di agrumi, pesco, albicocco, susino, che pur essendo specie specificate al ceppo pauca
+     in Puglia non sono suscettibili a X. fastidiosa subspecie pauca ST53.
+Le piante devono essere estirpate con l’intero apparato radicale e devono essere triturate o bru-
+ciate in loco.
+La legna, opportunamente depezzata e priva di rami e fogliame, rimane nella disponibilità del
+proprietario e può essere movimentata ai sensi della Legge 44/2019.
+Ai sensi del comma 2 dell’art. 9 del Reg. UE 2020/1201, in caso di particolari situazioni valutate
+dall’Ispettore/Agente/Assistente fitosanitario, in cui l’estirpazione della pianta con l’apparato ra-
+dicale è di difficile attuazione (es. banchi di roccia, cedimento di scarpate, terrazzamenti o muri), è
+possibile limitare la distruzione delle piante tagliando il tronco con rami e fogliame e lasciando
+l’apparato radicale. In tal caso l’apparato radicale deve essere devitalizzato, con un adeguato trat-
+tamento fitosanitario che eviti la formazione di nuovi germogli.
+   III FASE- Verbalizzazione
+Ai sensi del comma 2 -art. 33 del D.Lgs 19/2021, le operazioni di estirpazione devono essere
+presidiate da un Ispettore fitosanitario/Agente/Assistente fitosanitario che deve:
+  essere di ausilio nel determinare la zona infetta di 50 m in cui applicare le misure di
+     eradicazione e segnalare le piante da estirpare;
+                                                                                                    37
+    verificare la correttezza delle operazioni di estirpazione e distruzione della piante;
+    provvedere alla redazione di apposito verbale utilizzando l’ App Xylella .
+
+Il verbale di estirpazione deve riportare: numero e specie delle piante estirpate nei 50 m attorno
+alle piante infette e deve essere prontamente inserito nel database.
+Una pianta si intende estirpata quando il verbale di estirpazione è inserito nel database.
+L’App deve consentire di registrare i dati delle piante estirpate nei 50 m attorno alle piante infet-
+te.
+2. MISURE DI CONTENIMENTO
+In caso di individuazione di piante infette in zona contenimento si applicano le misure di conteni-
+mento ai sensi dell’art. 15 del Reg. UE 2020/1201. Le operazioni sono svolte secondo le seguenti
+fasi.
+I FASE - Trattamento fitosanitario
+Preventivamente alle operazioni di estirpazione delle piante infette, si procede ad effettuare un
+trattamento fitosanitario contro i vettori della Xylella con prodotti autorizzati diretto alle piante
+da estirpare e alle piante attorno ad esse.
+Tale trattamento non si applica nel periodo novembre- marzo in quanto non necessario.
+II FASE – Estirpazione
+Dopo 48 ore dal trattamento si procede all’estirpazione delle piante infette.
+Le piante devono essere estirpate con l’intero apparato radicale e devono essere triturate o bru-
+ciate in loco. La legna, opportunamente depezzata e priva di rami e fogliame, rimane nella dispo-
+nibilità del proprietario e può essere movimentata ai sensi della Legge 44/2019.
+Ai sensi del comma 2 dell’art. 9 del Reg. UE 2020/1201, in caso di particolari situazioni, valutate
+dall’Ispettore/agente/assistente fitosanitario, in cui l’estirpazione della pianta è di difficile attua-
+zione (es. banchi di roccia, oppure può causare problemi di cedimento di scarpate, terrazzamenti
+o muri), è possibile limitare la distruzione delle piante tagliando il tronco con rami e fogliame e la-
+sciando l’apparato radicale. In tal caso l’apparato radicale deve essere devitalizzato, con un ade-
+guato trattamento fitosanitario che eviti la formazione di nuovi germogli.
+III FASE- Verbalizzazione
+Ai sensi del comma 2 -art. 33 del D.Lgs 19/2021, le operazioni di estirpazione devono essere
+presidiate da un Ispettore fitosanitario/Agente/Assistente fitosanitario, che deve:
+  essere di ausilio per determinare le piante da estirpare;
+  verificare la correttezza delle operazioni di estirpazione e distruzione delle piante;
+  provvedere alla redazione di apposito verbale utilizzando l’App Xylella .
+Il verbale di estirpazione deve essere prontamente inserito nel database.
+Una pianta si intende estirpata quando il verbale di estirpazione è inserito nel database.
+
+
+3. ORGANIZZAZIONE ESTIRPAZIONI
+
+L’estirpazione delle piante infette può essere eseguita direttamente dal proprietario oppure
+questi può avvalersi di ARIF.
+
+
+                                                                                                     38
+Le operazioni di estirpazione volontaria da parte del proprietario sono organizzate dall’Ispettore
+responsabile P.O. territorialmente competente e controllate da Ispettori/Agenti eventualmente
+con il supporto di Assistenti fitosanitari.
+
+Per le operazioni di estirpazione eseguite da ARIF, l’Agenzia:
+  organizza le operazioni e comunica il calendario dettagliato delle estirpazioni all’Osservatorio
+     e all’Ispettore responsabile della P.O. di Brindisi;
+  comunica al Prefetto e al Sindaco territorialmente competente l’avvio delle operazioni di e-
+     stirpazione.
+In caso di accesso negato ai luoghi di estirpazione o di impedimento all’estirpazione (documentati
+e verbalizzati), ARIF deve informare il Prefetto e richiedere l'ausilio della forza pubblica per
+l’esecuzione delle operazioni di rimozione forzosa delle piante, addebitando gli oneri di
+estirpazione al proprietario.
+
+L’Osservatorio provvede alla contestazione al proprietario della violazione amministrativa per
+mancata esecuzione delle prescrizioni fitosanitarie ai sensi del D.lgs 19/2021.
+
+
+
+
+                                                                                                39
+

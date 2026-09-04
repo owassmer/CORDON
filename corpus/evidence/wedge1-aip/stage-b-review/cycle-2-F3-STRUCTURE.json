@@ -1,0 +1,92 @@
+{
+  "facet": "F3-STRUCTURE",
+  "verdict": "FAIL",
+  "assertions": [
+    {
+      "id": "F3-C2-01",
+      "severity": "material",
+      "class": "schema",
+      "artifact": "scripts/verify_stage_b.py",
+      "row": "main",
+      "field": "parameter.value validation",
+      "quoted_span": "if isinstance(v, str) and not re.fullmatch(r'\\d+(\\.\\d+)?', v): fail(f'{rid}: scalar value')\n                if isinstance(v, dict) and not (set(v) in PVALUE or 'open_term' in v): fail(f'{rid}: value shape {sorted(v)}')",
+      "claim": "The new parameter-value union is enforced non-exhaustively: lists, numbers, booleans and null bypass both branches, while any dictionary containing open_term bypasses the declared exact {open_term, reserved_to} shape, so structurally invalid values can pass the verifier silently.",
+      "proposed_remedy": "Require value to be either a numeric string or a dictionary whose key set exactly equals one declared union member, then enforce the corresponding unit and component types for every member.",
+      "falsifier": "A later exhaustive fallback in the verifier rejects every value that is neither a numeric string nor an exact declared dictionary shape.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C2-02",
+      "severity": "material",
+      "class": "anchor_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-6(1)-four-negative-years",
+      "field": "anchor.start_event",
+      "quoted_span": "\"scope\": \"demarcated area, on the Article 10 surveys\", \"start_event\": \"establishment of the demarcated area\", \"reset_event\": \"any later detection of the specified pest in the demarcated area on the Article 10 surveys\"",
+      "claim": "The resettable-period remediation still anchors the first four-year interval on demarcated-area establishment even though the retained source makes the no-detection fact depend on Article 10 surveys, so Stage C could count unsurveyed time and the row fails computability through anchor drift.",
+      "proposed_remedy": "Human-reread Article 6(1) to identify the holdable event that begins a continuous survey-supported no-detection period, and structure that event and its record class rather than defaulting to establishment.",
+      "falsifier": "The attached authority corpus establishes that demarcated-area establishment itself is legally the start of the Article 10 survey-supported no-detection period even when no qualifying survey occurs on that date.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C2-03",
+      "severity": "material",
+      "class": "population_by_pattern",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "EU-2020-1201:15(2):v2",
+      "field": "dispositions[].expression",
+      "quoted_span": "\"expression\": \"r State concerned shall monitor, at the most appropriate times, the presence of the specified pest by annual surveys, taking into account the inform\"",
+      "claim": "The character-span remediation still records context windows clipped in the middle of words rather than independently meaningful legal expressions—272 of 431 non-null expressions have at least one mid-word boundary—so the claimed expression-grain disposition closure remains population by pattern.",
+      "proposed_remedy": "Use the matcher only to nominate candidate spans, then require a human reread to delimit and disposition each independently variable expression before claiming expression-grain closure.",
+      "falsifier": "The source establishes that the quoted text beginning with \"r State\" and ending with \"inform\" is itself the complete independently variable expression rather than a clipped context window.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C2-04",
+      "severity": "material",
+      "class": "green_gate_closure",
+      "artifact": "scripts/generate_stage_b.py",
+      "row": "main",
+      "field": "status.semantic_acceptance",
+      "quoted_span": "accepted = all(m.get('semantic_acceptance') == 'ACCEPTED' for m in b['closure_manifest'] if m['status'] != 'HELD')",
+      "claim": "The generator can emit semantic_acceptance ACCEPTED solely from self-asserted manifest status values without requiring the promised acceptance_act or semantic_reviewer, while the verifier performs no closure-manifest validation, so an unrecorded acceptance can pass mechanically.",
+      "proposed_remedy": "Mechanically require every non-held ACCEPTED entry to carry a non-null acceptance_act and semantic_reviewer before projecting ACCEPTED, while retaining direct human reread as the only gate for the act's semantic validity.",
+      "falsifier": "Another executed check rejects or downgrades every non-held ACCEPTED manifest entry whose acceptance_act or semantic_reviewer is null before generation-status.json is written.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C2-05",
+      "severity": "material",
+      "class": "phantom_report",
+      "artifact": "regulation/jurisdiction/STAGE_A_AUTHORITY_SNAPSHOT.json",
+      "row": "stage_b_execution.seams",
+      "field": "seams[0..2]",
+      "quoted_span": "Seam 1 — surveillance → official evidence → finding → notification: CLOSED 2026-09-01",
+      "claim": "The sole authority still labels seams 1–3 CLOSED in its seam entries even though the same authority says the remediated schema-v3 ledger remains semantic_acceptance NOT_ASSERTED and awaits Owen, so its closure narrative outruns the current artifacts.",
+      "proposed_remedy": "Mark the three 2026-09-01 seam narratives as historical or superseded and reserve CLOSED for the regenerated ledger after a recorded acceptance act.",
+      "falsifier": "The authority schema explicitly scopes each CLOSED label only to a versioned pre-remediation ledger and prevents consumers from interpreting it as the status of the current canonical.",
+      "confidence": "high"
+    }
+  ],
+  "checked_sound": [
+    "Question 1, exhaustive field-shape inventory: all 71 clocks share the same 20-field shape and all 53 parameters share the same 13-field shape; anchors comprise 16 recurrence, 30 legal_state, 22 event, 2 biological and 1 resettable_period objects, each with a consistent key set.",
+    "Question 1, current parameter values: the canonical contains 25 scalar numeric strings, 14 confidence/prevalence objects, 9 samples/tests objects and 5 year-wrapping month-window objects; the five PNI design rows use percent, the nine PNI workload rows use count, every split row's source_phrase covers all carried values, and the former repeated PNI note is absent.",
+    "The 14 confidence/prevalence objects correctly distinguish the nine Union confidence floors from exact design-prevalence values and the five PNI exact design values; the nine workload objects contain numeric-string samples and tests only.",
+    "Question 2, B-CLK-DDS45-eradication-48h: Stage C can take the OPERATOR_RECORD timestamp for execution of vector treatment and add a floor of 48 hours to obtain the earliest removal time.",
+    "Question 2, B-CLK-IT-29(1)-union-entry-5wd: Stage C can take the OFFICIAL_FINDING_CONFIRMED legal-state timestamp and add five working days using the Stage D calendar.",
+    "Question 2, B-CLK-EU-6(1)-four-negative-years: Stage C is told to use the later of establishment and the last later detection, but that computation is unsound unless the unresolved survey-supported start-event issue in F3-C2-02 is settled.",
+    "Question 2, B-PAR-EU-15(3)-island-exemption-5km: Stage C can calculate island-to-nearest-Union-land distance and apply the structured strictly-greater-than 5 km threshold.",
+    "Question 3, exhaustive structural and note review found no per-row hashes, source paths, provenance ASTs, evaluators, evidence bindings, holiday tables or calendar arithmetic in the canonical; stage_a_inputs is now confined to generation-status.json, the seat binding is recorded once, and the 14 clock notes plus 4 parameter notes otherwise carry source interactions or genuine open terms.",
+    "Question 4, the verifier currently enforces canonical field order, identifiers, producer/source-phrase linkage, inherited intervals, seam and consumer references, anchor key sets, selected anchor tokens and record classes, clock kinds and units, magnitude/bound constraints, selected kind-specific rules, endpoint references, parameter kinds and units, selected value shapes, comparators, scope keys, disposition classes and population-version coverage.",
+    "Question 4, the most dangerous newly evidenced mechanical gaps are the non-exhaustive value-union check, the absence of semantic validation for resettable-period events, the absence of expression-boundary or expression-meaning checks on dispositions, and acceptance projection without an acceptance act; separately, the recorded standing fact remains that all ten semantic failure classes can pass and only direct human reread can gate meaning.",
+    "Disposition review was exhaustive for field shape, reference existence, source containment and boundary diagnostics, plus a deterministic 20-row SHA-256-ranked sample containing at least two rows from each of the eight disposition classes; all 431 non-null expressions are source-quote substrings, all 124 minted clock/parameter rows have a disposition reference, and every exclusion carries a reason, but the sampled clipped windows support F3-C2-03.",
+    "Question 5, the canonical closure manifest itself is internally honest: seams 1–3 say REGENERATED_FROM_REPAIRED_A_2026-09-02 with null reviewer and acceptance act and semantic_acceptance NOT_ASSERTED; seam 4 is HELD; clock and parameter IDs are covered exactly once; population counts are 136, 100, 126 and 0 and match population.json.",
+    "generation-status.json currently matches disk: canonical SHA-256 is 974b79b71375cc8f02fbdc1157344a82579d63c070923f00959a2d7e4b91c916, both Stage A input hashes and all four generated hashes match, counts are 71 clocks, 53 parameters and 570 dispositions, and no unrecognized CSV is present.",
+    "Question 6, the four CSV projections are pure deterministic serializations of the canonical fixed projection set; generation-status.json is intentionally a function of additional live state—the two Stage A files and unrecognized CSV names—so two runs can differ if those integrity inputs change even when the canonical does not.",
+    "The read-only verifier completed successfully with 71 clocks, 53 parameters and 570 dispositions; that PASS was treated only as bounded regression evidence and not semantic acceptance."
+  ],
+  "unresolved": [
+    "Q12 ratification of the resettable_period anchor kind is explicitly still awaiting Owen.",
+    "The attached corpus does not establish which holdable Article 10 survey event begins the first continuous no-detection period when demarcated-area establishment and the first qualifying survey occur at different times."
+  ]
+}

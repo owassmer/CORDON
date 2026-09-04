@@ -1,0 +1,587 @@
+8114                           Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 8 febbraio 2022, n. 4
+Misure fitosanitarie per il contenimento della diffusione della Xylella fastidiosa. Monitoraggio 2021.
+Prescrizione di misure di estirpazione ai sensi del Reg. (UE) 2020/1201 in agro di Taranto - zona ex
+contenimento.
+
+
+
+                           IL DIRIGENTE DELLA SEZIONE OSSERVATORIO FITOSANITARIO
+VISTI
+  -     Il D.lgs. 165/01“Norme generali sull’ordinamento del lavoro alle dipendenze delle amministrazioni
+        pubbliche”;
+  -     La L. n. 241/1990 e s.m.i.”Nuove norme in materia di procedimento amministrativo e di diritto di accesso
+        ai documenti amministrativi”;
+  -     gli articoli 4, 5 e 6 della L.R. n. 7/97;
+  -     la D.G.R. n.3261 del 28/07/1998, con la quale sono state emanate direttive per la separazione delle
+        attività di direzione politica da quelle di gestione amministrativa;
+  -     l’art. 32 della legge 18/6/2009, n. 69, secondo cui gli obblighi di pubblicazione di atti e provvedimenti
+        amministrativi aventi effetto di pubblicità legale si intendono assolti con la pubblicazione nei propri siti
+        informatici da parte delle amministrazioni e degli enti pubblici obbligati.
+  -     Il Reg. (UE) 2016/679 del Parlamento europeo e del Consiglio del 27.04.2016, nonché il D.lgs.196/03
+        relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali ed alla libera
+        circolazione di tali dati;
+  -     gli artt. 20 e 21 del Codice dell’Amministrazione Digitale (CAD);
+  -     la D.G.R. n. 1974 del 7 dicembre 2020 avente ad oggetto: “Approvazione Atto di Alta Organizzazione.
+        Modello Organizzativo “MAIA 2.0””;
+  -     il Decreto del Presidente della Giunta regionale n. 22 del 22/01/2021 di adozione dell’atto di alta
+        amministrazione MAIA 2.0;
+  -     la deliberazione di Giunta regionale n. 712 del 03/05/2021 avente ad oggetto ‘Conferimento incarico
+        della Sezione ‘Osservatorio Fitosanitario’ del Dipartimento Agricoltura, Sviluppo Rurale ed Ambientale;
+  -     la nota del Dirigente della Sezione Osservatorio Fitosanitario n. 6598 del 17/05/2019 di conferimento
+        incarichi di Posizioni Organizzative;
+  -     la DDS n. 773 del 25/06/2019 di assegnazione definitiva delle titolarità delle posizioni organizzative
+        dell’Osservatorio fitosanitario;
+  -     la DDS n. 35 del 14/03/2019 inerente la delega di funzioni alle posizioni organizzative dell’Osservatorio
+        fitosanitario;
+  -     la DDS n. 72 del 18/06/2019 “Seguito affidamento responsabilità di P.O. di cui alla nota prot. 6598 in
+        data 17/05/2019. Organizzazione funzionale della Sezione. Delega funzioni ai sensi della241/90 es.m.i.”.
+VISTI
+  -     il Reg. (UE) 2016/2031 del Parlamento Europeo e del Consiglio del 26 ottobre 2016 relativo alle misure
+        di protezione contro gli organismi nocivi per le piante, che modifica i regolamenti (UE) n. 228/2013,
+        (UE) n. 652/2014 e (UE) n. 1143/2014 del Parlamento Europeo e del Consiglio e abroga le direttive
+        69/464/CEE, 74/647/CEE, 93/85/CEE, 98/57/CE, 2000/29/CE, 2006/91/CE e 2007/33/CE del Consiglio;
+  -     il Reg. (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017, relativo ai controlli
+                           Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022                        8115
+
+
+     ufficiali e alle altre attività ufficiali effettuati per garantire l’applicazione della legislazione sugli alimenti
+     e sui mangimi, delle norme sulla salute e sul benessere degli animali, sulla sanità delle piante nonché
+     sui prodotti fitosanitari;
+ -   il Reg. (UE) n. 2020/1201 e s.m.i.della Commissione del 14/08/2020 relativo alle misure per prevenire
+     l’introduzione e la diffusione nell’Unione della Xylella fastidiosa;
+ -   il Reg. (UE) 2019/1702 che integra il Reg. (UE) 2016/2031 del Parlamento europeo e del Consiglio
+     stabilendo l’elenco degli organismi nocivi prioritari, tra i quali la Xylella fastidiosa;
+ -   la Legge n. 44 del 21/05/2019, conversione in legge, con modificazioni, del Decreto Legge n.27 del
+     29/03/2019 “Disposizioni urgenti in materia di rilancio dei settori agricoli in crisi e di sostegno alle
+     imprese agroalimentari colpite da eventi atmosferici avversi di carattere eccezionale e per l’emergenza
+     nello stabilimento Stoppani, sito nel Comune di Cogoleto” che ha modificato/integrato la disciplina
+     giuridica di contrasto ai patogeni da quarantena;
+ -   il D.Lgs 19 del 02/02/2021 “Norme per la protezione delle piante dagli organismi nocivi in attuazione
+     dell’articolo 11 della legge 4 ottobre 2019, n. 117, per l’adeguamento della normativa nazionale alle
+     disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625”;
+ -   la legge n. 14 del 2007 “Tutela e valorizzazione del paesaggio degli ulivi monumentali”;
+ -   la legge Regionale n° 4 del 29/03/2017 “Gestione della batteriosi da Xylella fastidiosa nel territorio della
+     Regione Puglia” e s.m.i.;
+ -   la sentenza della Corte di giustizia dell’Unione europea (CGUE) del 09/06/2016 – Nelle cause riunite
+     C‑78/16 e C‑79/16, aventi ad oggetto alcune domande di pronuncia pregiudiziale proposte ai sensi
+     dell’articolo 267 TFUE, dal Tribunale amministrativo regionale per il Lazio, con decisioni del 16 dicembre
+     2015;
+ -   la sentenza della Corte di giustizia dell’Unione europea (CGUE) del 05/09/2019 – Sentenza C - 443/18
+     avente ad oggetto il ricorso per inadempimento ai sensi dell’articolo 258 TFUE;
+ -   la legge regionale 30 aprile 2019, n. 19 che assegna all’Agenzia Regionale per le attività Irrigue e Forestali
+     (ARIF) funzioni di supporto all’Osservatorio fitosanitario regionale per l’applicazione delle misure di
+     monitoraggio, prevenzione, estirpazione e comunicazione finalizzate alla gestione della batteriosi
+     causata da Xylella fastidiosa;
+ -   la D.G.R.538 del 6/04/2021 che ha approvato il “Piano d’azione 2021, redatto ai sensi dell’art. 27
+     del Reg. UE n. 2016/2031 e del Reg. UE 2020/1201, per contrastare la diffusione di Xylella fastidiosa
+     subspeciepauca ST53 nel territorio regionale”;
+ -   la D.G.R. 2164 del 22/12/2021 con la quale è stato istituito il regime di aiuti per le imprese che hanno
+     adempiuto alla distruzione delle piante infette da Xylella fastidiosa, in seguito ad ingiunzione di
+     abbattimento;
+ -   la determina n° 39 del 14/05/2021 con cui l’Osservatorio fitosanitario ha approvato le procedure di
+     attuazione della sorveglianza, campionamento, analisi di specie vegetali per il contrasto ed il controllo
+     di Xylella fastidiosa e applicazione delle misure di estirpazione delle piante infette;
+PREMESSO CHE
+ -   Ai sensi del Reg. UE 2019/1702, la Xylella fastidiosa rientra tra gli organismi nocivi prioritari, per i quali il
+     potenziale impatto economico, ambientale o sociale è considerato più grave rispetto ad altri organismi
+     nocivi da quarantena sul territorio dell’Unione.
+ -   Il Reg. (UE) n. 2020/1201 della Commissione del 14/08/2020 ha disposto le misure per prevenire
+     l’introduzione e la diffusione nell’Unione della Xylella fastidiosa.
+8116                         Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+  -    Il comma 2,lettera b) dell’art. 15 del Reg. UE 2020/1201 prevede che lo Stato membro monitori, la
+       presenza di Xylella in prossimità di siti di piante che presentano particolare valore culturale e sociale
+       situati al di fuori dell’area di contenimento;
+  -    Ai sensi della legge regionale 4 giugno 2007, n. 14 La Regione Puglia tutela e valorizza gli alberi di ulivo
+       monumentali, anche isolati, in virtù della loro funzione produttiva, di difesa ecologica e idrogeologica
+       nonché quali elementi peculiari e caratterizzanti della storia, della cultura e del paesaggio regionale.”.
+  -    Il Piano di azione approvato con DGR 538/2021 ha disposto che “A conclusione dell’attività di
+       sorveglianza delle aree delimitate e indenni, anche alla luce delle relative risultanze, si attuerà il
+       monitoraggio nell’area infetta non sottoposta a sorveglianza annuale, delle specie specificate presenti
+       nel raggio di 50 m attorno alle piante riscontrate positive nella stagione di monitoraggio 2020. Tale
+       attività riguarderà prioritariamente le piante infette individuate nella Piana degli olivi monumentali e
+       nella provincia di Taranto”, al fine di:
+       • tutelare la Piana degli olivi monumentali;
+       • contenere la diffusione della Xylella fastidiosa non solo nelle aree delimitate, ma anche nella zona
+            infetta compresa tra 5 e 20 km dal confine meridionale della zona infetta ‘Salento’;
+       • ridurre la pressione di inoculo dovuta alle piante infette presenti nella zona infetta compresa tra 5
+            e 20 km dal confine meridionale della zona infetta ‘Salento’.
+  -    L’Osservatorio, con specifica nota di indirizzo, ha disposto che ARIF deve:
+        • anticipare l’attività di sorveglianza della Piana degli olivi secolari di cui al Piano Paesaggistico
+             Territoriale della Regione Puglia (PPTR) approvato con D.G.R. 16 febbraio 2015, n. 176 e s.m.i. e
+             delle zone infette individuate nel precedente monitoraggio 2020 rispetto alla calendarizzazione
+             prevista nel Piano d’Azione di cui alla D.G.R. n. 538 del 2021;
+        • sottoporre a monitoraggio l’area di 50 m attorno alle piante riscontrate positive nelle precedenti
+             stagioni di monitoraggio e, comunque, sulla base dell’analisi del rischio fitosanitario valutato
+             dall’Osservatorio ed eventuali segnalazioni da parte dei soggetti interessati.
+  -    L’art. 5 della L.R. n. 4 del 29/03/2017, come successivamente modificato dalla Legge regionale n. 45 del
+       30/11/2021 stabilisce che:
+        “3. Immediatamente dopo aver individuato una pianta infetta, il Servizio fitosanitario regionale dispone
+             la rimozione immediata delle piante infette e di quelle suscettibili, come previsto dalla normativa
+             vigente.”;
+        “4. La rimozione delle piante è effettuata con tutte le precauzioni necessarie ed è organizzata in base
+             al livello di rischio rappresentato da tali piante e in relazione al ciclo del vettore.”;
+         “5. Al fine di evitare la diffusione del batterio, nei casi in cui non sia possibile eseguire tempestivamente
+             quanto previsto dal comma 4, la pianta infetta è isolata dal contesto esterno dal proprietario/
+             conduttore, con protezioni meccaniche quali incappucciamento degli alberi. La protezione è
+             accompagnata da idonea potatura e dalle operazioni necessarie per la lotta al vettore conosciute
+             e potenziali: sfalcio di tutte le essenze erbacee, lavorazione del terreno dopo lo sfalcio, trattamenti
+             con prodotti fitosanitari autorizzati.”.
+RICHIAMATI
+  -    il comma 3 art. 1 del D. Lgs 19 del 02/02/2021 che recita “ La protezione delle piante, in relazione alle
+       attività per determinare i rischi fitosanitari presentati da qualsiasi specie, ceppo o biotipo di agenti
+       patogeni, animali o piante parassite dannosi per le piante o i prodotti vegetali («organismi nocivi»)
+       e le misure per ridurre tali rischi a un livello accettabile, rientra, in base al criterio della prevalenza,
+       nella materia della profilassi internazionale di cui all’articolo 117, comma secondo, lettera q) della
+       Costituzione.”;
+  -    il comma 3 dell’art. 6 del D. Lgs 19/2021 che prevede, tra le competenze dei Servizi fitosanitari regionali
+       nel proprio ambito territoriale:
+                          Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022                   8117
+
+
+        “a) l’applicazione delle normative fitosanitarie nazionali e dell’Unione e delle altre normative per le
+        quali tale funzione gli è attribuita per espressa disposizione di legge o di regolamento”.
+        “o) la prescrizione, sul territorio di competenza, di tutte le misure ufficiali ritenute necessarie, ivi
+        compresa la distruzione di vegetali e prodotti vegetali ritenuti contaminati o sospetti tali, nonché degli
+        altri oggetti che possono essere veicolo di diffusione di organismi nocivi ai vegetali, in applicazione
+        delle normative vigenti.”;
+ -   l’art. 33 del D. Lgs 19/2021 che recita:
+        “1. Al fine di proteggere l’agricoltura, il territorio, le foreste, il paesaggio e i beni culturali dalla
+        diffusione di organismi nocivi per le piante, le misure fitosanitarie ufficiali di protezione delle
+        piante, ivi compresa la distruzione delle piante contaminate, anche monumentali, disposte da
+        provvedimenti o ordinanze fitosanitarie che le regolamentano, sono attuate in deroga a ogni
+        disposizione vigente, comprese quelle di natura vincolistica, nei limiti e secondo i criteri indicati nei
+        medesimi provvedimenti”.
+        “2. Qualora ricorrano i presupposti di cui all’articolo 21-bis della legge 7 agosto 1990, n. 241,
+        la comunicazione dei provvedimenti o delle ordinanze fitosanitarie che dispongono le misure
+        fitosanitarie, è effettuata secondo le modalità e i termini stabiliti dal Servizio fitosanitario centrale
+        ovvero dal Servizio fitosanitario regionale competente per territorio. Effettuate le suddette forme
+        di pubblicità, gli ispettori o gli agenti fitosanitari e il personale di supporto muniti di autorizzazione
+        del Servizio fitosanitario competente per territorio, nell’esercizio delle loro attribuzioni, accedono
+        ai fondi nei quali sono presenti piante infettate dagli organismi nocivi, al fine di attuare le misure
+        fitosanitarie. A tale scopo, qualora i proprietari si oppongano all’intervento, i Servizi fitosanitari
+        competenti per territorio possono chiedere al Prefetto l’ausilio della forza pubblica.”;
+ -   la sentenza della Corte di Giustizia del 05/09/2019 secondo cui l’Autorità competente deve procedere
+     «immediatamente» all’attuazione delle misure fitosanitarie nell’ambito della gestione dell’emergenza
+     fitosanitaria;
+ -   gli artt. 500 e 650 del Codice Penale;
+ -   l’art. 21-octies della L. 241/1990 s.m.i.;
+ -   la nota della Sezione Osservatorio Fitosanitario prot. 3670 del 22/04/2021 inviata a tutti i Comuni
+     della regione Puglia con la quale è stata trasmessa la D.G.R. 538 del 6 aprile 2021 ed è stato chiesto di
+     affiggere detto atto deliberativo all’Albo Pretorio del comune, in forma ben visibile e consultabile alla
+     popolazione.
+DATO ATTO CHE
+ -   dall’attività di sorveglianza sinora effettuata, sono state individuate ufficialmente n. 4 piante infette
+     nell’agro di Taranto ricadente nell’area di 20 km dal confine meridionale della zona infetta ‘Salento’ in
+     cui si attuano misure di contenimento, come risulta dal rapporto di prova del laboratorio del Centro
+     di Ricerca Sperimentazione e Formazione in Agricoltura “Basile Caramia” n. 2571 del 15/12/2021,
+     pubblicato sul sito istituzionale www.emergenzaxylella.it;
+ -   Innovapuglia spa, sulla base delle coordinate geografiche rilevate in sede di monitoraggio, ha fornito
+     all’Osservatorio fitosanitario i dati relativi alle particelle catastali (agro, foglio di mappa, numero di
+     particella, intestatari) sulle quali insistono le piante infette riportate nell’allegato C e rappresentati
+     nell’allegato A del presente provvedimento, per formarne parte integrante e sostanziale.
+ATTESO CHE
+ -   A fronte delle piante infette individuate nell’agro di Taranto vi sono milioni di olivi anche monumentali
+     o con caratteristiche di monumentalità non infetti che devono essere salvaguardati;
+8118                         Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+ -      le piante infette non devono rappresentare una fonte di infezione per l’areale circostante e si deve,
+        pertanto, procedere alla loro estirpazione;
+ -      tale misura fitosanitaria non sostituibile con altra misura fitosanitaria meno drastica, assume iniziativa
+        di profilassi internazionale di cui al comma 3 dell’art. 1 del D.lgs 19/2021 e deve essere eseguita
+        “immediatamente” così come ribadito dalla sentenza della Corte di Giustizia;
+  -     la mancata estirpazione può essere motivo di diffusione di malattia delle piante, pericolosa per
+        l’economia rurale, perseguita dall’art. 500 e 650 del c.p.;
+  -     ai sensi della L.R. n. 45/2021 che ha modificato l’art. 8 co. 7 bis della Legge regionale n. 4/2017, i
+        proprietari/conduttori di piante di olivo monumentali ufficialmente riconosciute o con caratteristiche di
+        monumentalità risultate infette, possono applicare misure alternative alla distruzione ovvero eseguire
+        la capitozzatura e l’innesto con varietà resistenti, previa autorizzazione dell’Osservatorio.
+
+
+RITENUTO di dovere procedere con urgenza all’adozione del presente provvedimento dichiarandone
+l’immediata esecutività proprio per corrispondere all’obbligo in capo all’Osservatorio fitosanitario derivante
+dalla normativa europea, nazionale e regionale di applicare, senza indugio, le misure fitosanitarie prescritte.
+
+
+                         VERIFICA AI SENSI DEI D. Lgs 196/03 e del Reg. (UE) n. 679/2016
+                                               Garanzie alla riservatezza
+La pubblicazione dell’atto all’albo, salve le garanzie previste dalla legge 241/90 in tema di accesso ai documenti
+amministrativi, avviene nel rispetto della tutela alla riservatezza dei cittadini, secondo quanto disposto dal
+Regolamento (UE) 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei
+dati personali, nonché alla libera circolazione di tali dati, dal D. lgs. 196/03 in materia di protezione di dati
+personali nonché dal vigente regolamento regionale n. 5/2006 per il trattamento dei dati sensibili e giudiziari.
+Ai fini della pubblicità legale, l’atto destinato alla pubblicazione è redatto in modo da evitare la diffusione di
+dati personali identificativi non necessari ovvero il riferimento a dati sensibili.
+                    ADEMPIMENTI CONTABILI AI SENSI DEL D.Lgs. n. 118/2011 e ss.mm.ii.
+Il presente provvedimento non comporta alcun mutamento qualitativo o quantitativo di entrata o di spesa né
+a carico del bilancio regionale né a carico degli enti per i cui debiti i creditori potrebbero rivalersi sulla Regione
+ed è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto
+dal bilancio regionale.
+Ritenuto di dover provvedere in merito con l’adozione del presente provvedimento
+                                                   DETERMINA DI
+          confermare tutte le premesse esposte in narrativa che qui si intendono riportate per farne parte
+          integrante;
+1. prescrivere, ai sensi del del comma 3 art.6 del D.lgs. 19 del 2021, ai proprietari/conduttori di cui all’allegato
+   C, parte integrante e sostanziale del presente provvedimento,l’estirpazione di n°4 piante risultate infette
+   da Xylella fastidiosa, site nell’agro di Taranto;
+2. dare atto che le piante infette sono evidenziate nelle ortofoto di cui allegato A;
+3. stabilire che la tempistica da rispettare per l’estirpazione delle piante infette è la seguente:
+       a) il presente provvedimento è notificato ai proprietari/conduttori attraverso la pubblicazione all’albo
+          pretorio per 7 gg consecutivi e alla loro PEC qualora presente;
+       b) Il provvedimento è notificato con PEC ad ARIF per gli adempimenti conseguenti ed è pubblicato su:
+                              Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022                  8119
+
+
+             -   Bollettino Ufficiale della Regione Puglia
+             -   Portale www.emergenzaxylella.it
+             -   Sezione “Amministrazione trasparente”, sotto sezione “Provvedimenti dirigenti amministrativi”
+                 del sito www.regione.puglia.it
+        c) ciascun proprietario/conduttore, durante il tempo di pubblicazione dell’atto e comunque
+           entro massimo 7 giorni dal termine del periodo di pubblicazione, comunica all’Osservatorio
+           (c.cavallo@regione.puglia.it     -      francesco.colasuonno@regione.puglia.it)           e      all’ARIF
+           (protocollo@pec.arifpuglia.it) mediante il modello di cui all’allegato B, parte integrante e sostanziale
+           del presente provvedimento e scaricabile anche dal sito www.emergenzaxylella.it), se intende:
+            • estirpare volontariamente le piante; oppure
+            • avvalersi di ARIF per l’estirpazione; oppure
+            • adottare solo per le piante di olivo monumentali ufficialmente riconosciute o con caratteristiche
+                 di monumentalità le misure fitosanitarie alternative come previste dall’art. 8 c. 7 bis della L.R.
+                 n. 4/2017 e s.m.i.;
+        d) il proprietario, nel caso di estirpazione su base volontaria, deve procedere entro massimo 10 gg dalla
+           sua comunicazione e deve concordare con il Responsabile della P.O. Attività fitosanitarie Prov. BR
+           (c.cavallo@regione.puglia.it), la tempistica di esecuzione;
+        e) in caso di estirpazione eseguita da ARIF, quest’ultima deve procedere entro massimo 10 gg successivi
+           alla comunicazione del proprietario;
+        f) in caso di adozione delle misure fitosanitarie alternative, per le piante di olivo monumentali
+           ufficialmente riconosciute o con caratteristiche di monumentalità, il proprietario deve comunicare
+           all’ARIF e all’Osservatorio che intende procedere alla capitozzatura ed innesto delle piante e fornire
+           le indicazioni secondo il modello D allegato al presente atto;
+        g) provvedere a propria cura e spese, qualora le operazioni di innesto siano eseguite dopo il 31 marzo
+           2022, ad isolare le piante dal contesto esterno mediante incappucciamento con una protezione
+           meccanica (reti antiafidi) sino al momento dell’esecuzione delle operazioni di innesto e ad effettuare
+           le operazioni necessarie per la lotta al vettore ossia: sfalcio di tutte le essenze erbacee, lavorazione
+           del terreno dopo lo sfalcio e trattamenti fitosanitari, in applicazione della L.R. 4/2017 come
+           successivamente modificata dalla L.R. n. 45/2021.
+        h) se il proprietario, decorsi i termini indicati al punto c), non invia alcuna comunicazione, ARIF procede
+           alla rimozione delle piante entro massimo 10 gg successivi;
+        i) nei casi di rifiuto da parte del proprietario all’esecuzione delle misure fitosanitarie, l’ARIF provvede
+           alla rimozione forzosa delle piante, informando il Prefetto e le Forze dell’Ordine e addebitando gli
+           oneri di estirpazione al proprietario;
+        j) le operazioni di estirpazione volontaria da parte del proprietario sono controllate da Ispettori/Agenti/
+           Assistenti fitosanitari.
+4. stabilire che i proprietari/conduttori o ARIF, procedano all’estirpazione delle piante infette con la seguente
+   modalità:
+    -      estirpare le piante infette con mezzi meccanici. Si precisa che il trattamento fitosanitario nell’area
+           interessata di cui al comma 1 dell’art. 14 del Reg. (UE) 2020/1201 non deve essere eseguito in quanto
+           non necessario in questo periodo;
+    -      distruggere in loco tutta la parte frondosa dell’albero, separata dal tronco, mediante trinciatura o
+           bruciatura se consentito dalla legge e dai relativi regolamenti comunali;
+    -      lasciare nella disponibilità del proprietario/conduttore la parte legnosa delle piante estirpate,
+           opportunamente depezzata;
+8120                                 Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+        -        comunicare alla Soprintendenza eventuali ritrovamenti fortuiti di interesse archeologico;
+5. stabilire che le operazioni di estirpazione e distruzione devono essere presidiate da un Ispettore
+   fitosanitario/Agente/Assistente fitosanitario che deve:
+            -      essere di ausilio per determinare le piante oggetto del presente provvedimento;
+            -      verificare la correttezza delle operazioni di estirpazione e distruzione delle piante;
+            -      provvedere alla redazione di apposito verbale che è atto propedeutico e indispensabile per il
+                   riconoscimento del contributo;
+6. stabilire che a seguito di accertato impedimento all’estirpazione volontaria o tramite ARIF, a causa di
+   intervento di terze persone (documentato e verbalizzato ai sensi degli art. 46, 47 del DPR 445/2000 e
+   dell’art. 76 per dichiarazioni mendaci), l’Ispettore fitosanitario o ARIF, richiede al Prefetto, ai sensi dell’art.
+   33 c. 2 del D. Lgs. n. 19 del 02/02/2021, l’ausilio della forza pubblica nelle operazioni di estirpazione delle
+   piante infette;
+7. stabilire che qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione
+   delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario
+   disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF, denunciando la circostanza alla
+   Procura della Repubblica competente ai sensi degli artt. 500 e 650 c.p., all’applicazione della sanzione
+   amministrativa di cui al comma 13 dell’art. 55 del D. Lgs. 19/2021, a non riconoscere alcun contributo a
+   qualunque titolo per l’abbattimento delle piante infette.
+8. stabilire che ai sensi della D.G.R. 2164 del 22/12/2021 ai proprietari/conduttori che estirpano
+   volontariamente le piante sarà riconosciuto per ogni albero estirpato il contributo per il danno subito
+   e per il costo di estirpazione. In caso di estirpazione a cura di ARIF al proprietario sarà riconosciuto per
+   ogni albero estirpato solo il contributo per il danno subito. Il proprietario/conduttore deve comunicare
+   all’ARIF e, per conoscenza, alla Sezione Osservatorio fitosanitario, il codice fiscale ed i riferimenti bancari
+   ove effettuare (qualora ammissibile) il relativo bonifico (come da allegato B parte integrante del presente
+   atto), scaricabile anche dal sito www.emergenzaxylella.it), a mezzo pec: protocollo@pec.arifpuglia.it.
+Il presente atto si trasmette con unica PEC:
+-           al Comune di Taranto affinché provveda con urgenza dalla data di invio del presente atto all’affissione
+            all’Albo Pretorio della presente determinazione per la durata di 7 (sette) giorni naturali e consecutivi. Tale
+            affissione, ai sensi dell’art. 21 bis L. 241/1990 e s.m.i., decorso il settimo giorno dalla data di pubblicazione
+            assume valore di notifica ai proprietari/conduttori interessati alle estirpazioni;
+-           all’ARIF per le attività di competenza in base alla L.R. 19/2019, alla D.G.R. 538/2021 e al Decreto Legge
+            27/2019 convertito con L. 44/2019;
+-           al Sig. Prefetto di Taranto affinché ai sensi della Legge 44/2019, e su richiesta dell’Osservatorio/ARIF ove
+            di necessità, disponga l’ausilio della forza pubblica nelle operazioni di estirpazione.
+Il presente atto, redatto unicamente con mezzi informatici e firmato digitalmente:
+    −           è composto da n° 9 (nove) facciate e dagli allegati A, composto da 4 (quattro) facciate, B,composto da
+                2 (due) facciate, C composto da 1 (una) facciata e D composto da 1( una ) facciata, sarà conservato e
+                custodito, ai sensi delle Linee Guida del Segretario generale della Giunta Regionale e del Segretario
+                Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020, nei sistemi di archiviazione digitale
+                dell’Amministrazione Regionale;
+    −           sarà reso pubblico, ai sensi dell’art. 20 comma 3 del Decreto del Presidente della Giunta regionale n.
+                22/2021, mediante affissione per 10 giorni lavorativi a decorrere dalla data della sua adozione, all’Albo
+                telematico della Regione Puglia;
+                        Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022                8121
+
+
+-   sarà disponibile nel sito ufficiale della Regione Puglia www.regione.puglia.it - Sezione Amministrazione
+    Trasparente;
+-   sarà inviato telematicamente ed in formato digitale al Segretario Generale della Giunta Regionale e
+    all’Assessore all’Agricoltura.
+                                                               Il Dirigente della Sezione
+                                                              (Dott. Salvatore Infantino)
+8122   Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+
+
+                    DIPARTIMENTO AGRICOLTURA SVILUPPO RURALE E AMBIENTALE
+                    SEZIONE OSSERVATORIO FITOSANITARIO
+                    SERVIZIO CONTROLLI, LOTTE OBBLIGATORIE, AUTORIZZAZIONI E PAN
+
+
+
+
+              ALLEGATO A alla DDS n. 4 del 08/02/2022
+                         (da A/1 ad A/3)
+
+
+
+
+                                         Il presente allegato, firmato digitalmente, è composto
+                                                     dalle ortofoto da A/1 ad A/3
+                                                         Il Dirigente di Sezione
+                                                      (Dott. Salvatore Infantino)
+
+
+
+                                                Firmato digitalmente da:
+                                                SALVATORE INFANTINO
+                                                Regione Puglia
+                                                Firmato il: 08-02-2022 15:13:26
+                                                Seriale certificato: 904277
+                                                Valido dal 09-02-2021 al 09-02-2024
+Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022   8123
+8124   Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022   8125
+8126                            Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+                                                                                              Allegato B
+                                                                           Il presente allegato, firmato digitalmente, è costituito da n. 2 pagina
+                                                                                           Il Dirigente della Sezione
+                                                                                           Dott. Salvatore Infantino
+
+                                                                                  ARIF
+                                                                                  VIA DELLE MAGNOLIE, 6 -70026 MODUGNO
+                                                                                  protocollo@pec.arifpuglia.it
+
+                                                                                  REGIONE PUGLIA
+                                                                                  SEZIONE OSSERVATORIO FITOSANITARIO
+                                                                                  c.cavallo@regione.puglia.it
+                                                                                  francesco.colasuonno@regione.puglia.it
+
+       OGGETTO:             Anno 2021 – DDS N. _______ DEL ________ COMUNICAZIONE ESTIRPAZIONE
+       PIANTE.
+
+       Con la presente il/la sottoscritto/a ………………………………………………., nato/a a …………………… il
+       ……………..Codice Fiscale………………………………………….…... in qualità di ………………..…… (specificare se
+       diverso dall'intestatario indicato nella DDS di cui all’oggetto, in tal caso allegare relativa
+       documentazione probatoria),
+
+                dichiara di procedere all’estirpazione delle piante di cui alla DDS in oggetto:
+
+                 tramite ARIF
+
+                 a proprie cure e spese (abbattimento volontario)
+
+                oppure di:
+
+                 adottare le misure fitosanitarie alternative come previste dall’art. 8 c. 7 bis della L.R. n.
+                 4/2017 e s.m.i. secondo le modalità stabilite al punto 3 lettera f) della DDS di estirpazione
+
+
+       In caso di abbattimento volontario, rispetta ed accetta quanto prescritto nell’atto in oggetto e
+       pertanto si comunica:
+
+                Per l’abbattimento si propone all’Ispettore Fitosanitario la data del _______________;
+                Per le comunicazioni sulle operazioni di estirpazione l’Ispettore Fitosanitario potrà contattare
+                 il seguente numero telefonico _____________________
+                 (necessario per definire gli accordi operativi di campo).
+                la presente espressione di volontà è irrevocabile, consapevole che si deve procedere con
+                 immediatezza alla estirpazione della/e pianta/e infette e che simile circostanza è perseguibile
+                 ai sensi degli artt. 650 e 500 del c.p.;
+                Allega copia del documento di riconoscimento in corso di validità, debitamente firmata e
+                 datata in calce.
+
+       Il contributo per ogni albero abbattuto che potrà essere riconosciuto qualora ritenuto ammissibile,
+       deve essere corrisposto a:
+         nome e cognome____________________________
+         nato/a il __________________a_________________
+         Codice fiscale_______________________________
+         residente in ________________a_______________
+         codice IBAN_____________________________________________________________________
+             (allegare fotocopia delle coordinate bancarie - IBAN)
+
+                 Data _____________                                               In Fede, _________________________
+       Sezione Osservatorio Fitosanitario
+       Lung. Nazario Sauro 41- Bari- Tel. 080 5405147 - PEC: osservatoriofitosanitario.regione@pec.rupar.puglia.it
+       Sede operativa di Brindisi Via Torpisana, 120 - Tel: 0831 /544339 - Fax: 0831 / 544300
+       mail: c.cavallo@regione.puglia.it
+                         Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022                                                      8127
+
+
+                                                                                       Allegato B
+                                                                    Il presente allegato, firmato digitalmente, è costituito da n. 2 pagina
+                                                                                    Il Dirigente della Sezione
+                                                                                    Dott. Salvatore Infantino
+                                                                                    (firma del titolare giuridico del terreno)
+
+
+                               DICHIARAZIONE SOSTITUTIVA DELL’ATTO DI NOTORIETA’
+                                            ( art. 47 D.P.R. 28 dicembre 2000, n. 445)
+
+
+Il/La                     sottoscritto/a______________________________________nato/a                                                     a
+__________________(_____)
+Il_________________                        C.F.______________________________,                                   residente               a
+___________________(___),
+in ______________________________________________________n.________, consapevole che le
+dichiarazioni mendaci, in applicazione dell’art. 76 del D.P.R. 445/2000, sono punite ai sensi del codice
+penale e delle leggi speciali in materia e che comunque comportano la decadenza dai benefici
+eventualmente conseguiti con il provvedimento emanato sulla base della dichiarazione non veritiera
+
+
+                                                               DICHIARA
+         Di non essere una “impresa in difficoltà” ai sensi del punto 14 del paragrafo 1 dell’art. 2 del
+          Reg 702/2014;
+         Di non essere destinatario di un ordine di recupero pendente a seguito di una decisione della
+          Commissione europea che dichiara gli aiuti illegittimi e incompatibili con il mercato interno;
+         Di      essere       _____________________________(1),                         dei      terreni        ubicati        in    agro
+          di__________________contraddistinti                           in         catasto            terreni           al           foglio
+          _________particelle__________
+          ___________________                     contraddistinti            in        catasto           terreni           al        foglio
+          _________particelle__________
+          ___________________                     contraddistinti            in        catasto           terreni           al        foglio
+          _________particelle__________
+          e che tutti i dati riportati in domanda sono veritieri.
+
+
+
+
+          Luogo                        data                                                                   in fede
+
+
+
+
+          (1) Proprietario, comproprietario, nudo proprietario etc…
+          Nel caso in cui le piante estirpate appartengano a più comproprietari, preferibilmente, uno solo di essi
+          richiede l’intero indennizzo allegando la delega degli altri comproprietari come da schema riportato nel
+          mod. 4 della D.G.R. 940/2017, pubblicata sul sito istituzionale www.emergenzaxylella.it.
+
+
+Sezione Osservatorio Fitosanitario
+Lung. Nazario Sauro 41- Bari- Tel. 080 5405147 - PEC: osservatoriofitosanitario.regione@pec.rupar.puglia.it
+Sede operativa di Brindisi Via Torpisana, 120 - Tel: 0831 /544339 - Fax: 0831 / 544300
+mail: c.cavallo@regione.puglia.it
+                                                                                                                                                                                         8128
+                                                                                                                                               Allegato C
+                  Firmato digitalmente da:                                                                     Il presente allegato, firmato digitalmente, è costituito da n. 1 pagina
+                  SALVATORE INFANTINO                                                                                                         Il Dirigente della Sezione
+                  Regione Puglia
+                  Firmato il: 08-02-2022 15:14:33                                                                                             Dott. Salvatore Infantino
+                  Seriale certificato: 904277
+                  Valido dal 09-02-2021 al 09-02-2024
+
+
+
+                                                                    PIANTE INFETTE MONITORAGGIO 2021
+
+
+                                             ID
+    ZONA              AGRO                              Sezione   FOGLIO   PARTICELLA        PROPRIETARIO      SPECIE    LONGITUDINE               LATITUDINE
+                                          CAMPIONE
+Ex contenimento       Taranto                1272387      A        248         69         COLELLA LISA          Olivo      17,32533936              40,46762466
+
+                                             1272444                                                            Olivo      17,32555939              40,46703341
+                                                                                         PANNARALE LUIGI
+Ex contenimento       Taranto                             A        248         88
+                                                                                         PANNARALE GIUSEPPE
+                                             1272515                                                            Olivo      17,32555442              40,46685185
+
+Ex contenimento       Taranto                1272668      A        248        110        COLELLA LISA           Olivo      17,32536283              40,46389654
+
+
+
+
+                                                                                                                                                                                         Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022
+
+
+
+
+                                                                                    1
+                     Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022                                              8129
+
+
+                                                                         Allegato D
+                                                        Il presente allegato, firmato digitalmente, è costituito da n. 1 pagina
+                                                                        Il Dirigente della Sezione
+                                                                        Dott. Salvatore Infantino
+                                                                                                     ARIF
+                                                                 VIA DELLE MAGNOLIE, 6 -70026 MODUGNO
+                                                                               protocollo@pec.arifpuglia.it
+
+
+                                                                                                REGIONE PUGLIA
+                                                                         SEZIONE OSSERVATORIO FITOSANITARIO
+                                                                                       c.cavallo@regione.puglia.it
+                                                                          francesco.colasuonno@regione.puglia.it
+
+
+
+Il/la sottoscritto_____________________________________C.F.__________________________
+
+nato a_____________________________________________il___________________________
+
+residente a_____________________________ in via ____________________________n._____ Comune
+
+_____________
+
+destinatario dell'atto dirigenziale di Prescrizione di abbattimento n° ………. del …………. per n° ……….piante
+
+di olivo risultate infette dal monitoraggio ufficiale
+
+                                                   COMUNICA
+
+di volere procedere alle operazioni di innesto di n° ….. piante di olivo in quanto:
+
+        monumentali e censite
+
+        con caratteristiche di monumentalità
+
+di acquistare le marze dall'operatore professionale :_______________________________________,
+
+RUOP:_____________________, con sede in via ____________________________n.________ Comune
+
+_____________
+
+per finalità di Innesti di talea/gemma di olivo varietà Leccino e FS17:
+
+             DATI DI ACQUISTO                                    PIANTE OGGETTO DI INNESTO
+                                                                                 COORDINATE COORDINATE
+ Data acquisto     Varietà     N. Passaporto     Comune        Foglio Particella    GPS        GPS
+
+
+
+
+L’inizio dei lavori è previsto per il giorno ____________
+lì ___________                                                      __________________________
+                                                                                 (Dichiarante)
+

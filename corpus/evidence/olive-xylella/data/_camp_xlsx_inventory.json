@@ -1,0 +1,1100 @@
+{
+  "n_files": 12,
+  "missing_campaigns": [
+    "2015-2016 workbook not among downloads"
+  ],
+  "files": [
+    {
+      "file": "CAMP_2013_2014.xlsx",
+      "sheet": "Sheet 1",
+      "columns": [
+        "OBJECTID",
+        "NUMERO_ORDINE",
+        "TECNICO",
+        "DATA_PRELIVEO",
+        "SPECIE",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "CULTIVAR",
+        "RISULTATO",
+        "COMUNE"
+      ],
+      "n": 11099,
+      "date_min": "2013-11-13",
+      "date_max": "2014-10-27",
+      "years": {
+        "2013": 3567,
+        "2014": 7532
+      },
+      "n_olive": 8777,
+      "n_pos": 352,
+      "n_neg": 10747,
+      "n_olive_pos": 292,
+      "n_coords": 10879,
+      "lat_min": 39.79694444,
+      "lat_max": 41.427597,
+      "lon_min": 15.94305556,
+      "lon_max": 18.51194444,
+      "n_east_of_17_80": 4910,
+      "n_olive_east": 3920,
+      "n_olive_pos_east": 188,
+      "n_south_of_40_45": 5330,
+      "n_olive_pos_south": 188,
+      "n_sintomo_present": null,
+      "n_sintomo_absent": null,
+      "n_olive_pos_assente": null,
+      "n_olive_pos_presente": null,
+      "top_comuni_pos_olive": {
+        "TREPUZZI": 113,
+        "GALATINA": 43,
+        "LECCE": 27,
+        "GALLIPOLI": 14,
+        "COPERTINO": 10,
+        "RACALE": 10,
+        "UGENTO": 9,
+        "STERNATIA": 6
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2013": 36,
+        "2014": 256
+      },
+      "olive_by_year": {
+        "2013": 2224,
+        "2014": 6553
+      },
+      "pos_by_year": {
+        "2013": 41,
+        "2014": 311
+      }
+    },
+    {
+      "file": "CAMP_2014_2015.xlsx",
+      "sheet": "CAMP_2014_2015",
+      "columns": [
+        "COMUNE",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "SPECIE",
+        "DATA_CAMPIONE",
+        "RISULTATO",
+        "SINTOMO"
+      ],
+      "n": 51409,
+      "date_min": "2014-10-08",
+      "date_max": "2015-12-23",
+      "years": {
+        "2014": 2313,
+        "2015": 49096
+      },
+      "n_olive": 49364,
+      "n_pos": 4191,
+      "n_neg": 47218,
+      "n_olive_pos": 4173,
+      "n_coords": 51409,
+      "lat_min": 39.83283465,
+      "lat_max": 41.22027778,
+      "lon_min": 16.55611111,
+      "lon_max": 18.49024203,
+      "n_east_of_17_80": 44969,
+      "n_olive_east": 43120,
+      "n_olive_pos_east": 4114,
+      "n_south_of_40_45": 39453,
+      "n_olive_pos_south": 3870,
+      "n_sintomo_present": 6025,
+      "n_sintomo_absent": 44679,
+      "n_olive_pos_assente": 843,
+      "n_olive_pos_presente": 3276,
+      "top_comuni_pos_olive": {
+        "TREPUZZI": 3369,
+        "TORCHIAROLO": 119,
+        "CAMPI SALENTINA": 82,
+        "LECCE": 80,
+        "VEGLIE": 65,
+        "ORIA": 59,
+        "COPERTINO": 53,
+        "ALEZIO": 51
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2014": 2,
+        "2015": 4171
+      },
+      "olive_by_year": {
+        "2014": 2122,
+        "2015": 47242
+      },
+      "pos_by_year": {
+        "2014": 2,
+        "2015": 4189
+      }
+    },
+    {
+      "file": "CAMP_2016_2017.xlsx",
+      "sheet": "CAMP_2016_2017",
+      "columns": [
+        "COMUNE",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "SPECIE",
+        "DATA_CAMPIONE",
+        "RISULTATO",
+        "SINTOMO"
+      ],
+      "n": 159109,
+      "date_min": "2016-02-03",
+      "date_max": "2017-05-25",
+      "years": {
+        "2016": 102611,
+        "2017": 56498
+      },
+      "n_olive": 145419,
+      "n_pos": 1588,
+      "n_neg": 157521,
+      "n_olive_pos": 1576,
+      "n_coords": 159109,
+      "lat_min": 39.8382,
+      "lat_max": 41.9209,
+      "lon_min": 15.1569,
+      "lon_max": 18.48561689,
+      "n_east_of_17_80": 3896,
+      "n_olive_east": 3286,
+      "n_olive_pos_east": 671,
+      "n_south_of_40_45": 27699,
+      "n_olive_pos_south": 656,
+      "n_sintomo_present": 7040,
+      "n_sintomo_absent": 150276,
+      "n_olive_pos_assente": 250,
+      "n_olive_pos_presente": 1271,
+      "top_comuni_pos_olive": {
+        "ORIA": 520,
+        "FRANCAVILLA FONTANA": 330,
+        "GALLIPOLI": 80,
+        "LECCE": 55,
+        "UGENTO": 54,
+        "SANNICOLA": 52,
+        "CASARANO": 51,
+        "TAVIANO": 50
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2016": 117,
+        "2017": 1459
+      },
+      "olive_by_year": {
+        "2016": 93877,
+        "2017": 51542
+      },
+      "pos_by_year": {
+        "2016": 125,
+        "2017": 1463
+      }
+    },
+    {
+      "file": "CAMP_2017_2018.xlsx",
+      "sheet": "CAMP_2017_2018",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SINTOMO"
+      ],
+      "n": 198768,
+      "date_min": "2017-07-31",
+      "date_max": "2018-05-08",
+      "years": {
+        "2017": 125247,
+        "2018": 73521
+      },
+      "n_olive": 174040,
+      "n_pos": 3835,
+      "n_neg": 194933,
+      "n_olive_pos": 3828,
+      "n_coords": 198768,
+      "lat_min": 17.50360525,
+      "lat_max": 41.90996344,
+      "lon_min": 15.16797446,
+      "lon_max": 40.7638519,
+      "n_east_of_17_80": 1768,
+      "n_olive_east": 1621,
+      "n_olive_pos_east": 43,
+      "n_south_of_40_45": 27482,
+      "n_olive_pos_south": 28,
+      "n_sintomo_present": 18630,
+      "n_sintomo_absent": 180137,
+      "n_olive_pos_assente": 1664,
+      "n_olive_pos_presente": 2164,
+      "top_comuni_pos_olive": {
+        "ORIA": 1710,
+        "FRANCAVILLA FONTANA": 1176,
+        "CEGLIE MESSAPICA": 214,
+        "CAROVIGNO": 208,
+        "BRINDISI": 168,
+        "VILLA CASTELLI": 84,
+        "SAN VITO DEI NORMANNI": 56,
+        "MANDURIA": 44
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2017": 2983,
+        "2018": 845
+      },
+      "olive_by_year": {
+        "2017": 115594,
+        "2018": 58446
+      },
+      "pos_by_year": {
+        "2017": 2985,
+        "2018": 850
+      }
+    },
+    {
+      "file": "CAMP_2018_2019.xlsx",
+      "sheet": "CAMP_2018_2019",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SINTOMO"
+      ],
+      "n": 68500,
+      "date_min": "2018-11-05",
+      "date_max": "2019-07-26",
+      "years": {
+        "2018": 22945,
+        "2019": 45555
+      },
+      "n_olive": 54437,
+      "n_pos": 1074,
+      "n_neg": 67426,
+      "n_olive_pos": 1072,
+      "n_coords": 68500,
+      "lat_min": 40.4045392,
+      "lat_max": 41.85613569,
+      "lon_min": 15.12727395,
+      "lon_max": 17.78041385,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 80,
+      "n_olive_pos_south": 0,
+      "n_sintomo_present": 7004,
+      "n_sintomo_absent": 61476,
+      "n_olive_pos_assente": 444,
+      "n_olive_pos_presente": 613,
+      "top_comuni_pos_olive": {
+        "CAROVIGNO": 600,
+        "SAN VITO DEI NORMANNI": 130,
+        "OSTUNI": 106,
+        "CEGLIE MESSAPICA": 72,
+        "LATIANO": 52,
+        "MONTEMESOLA": 41,
+        "FRANCAVILLA FONTANA": 24,
+        "TARANTO": 14
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2018": 217,
+        "2019": 855
+      },
+      "olive_by_year": {
+        "2018": 19621,
+        "2019": 34816
+      },
+      "pos_by_year": {
+        "2018": 217,
+        "2019": 857
+      }
+    },
+    {
+      "file": "CAMP_2019_2020.xlsx",
+      "sheet": "CAMP_2019_2020",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SINTOMO"
+      ],
+      "n": 50967,
+      "date_min": "2019-08-01",
+      "date_max": "2020-04-30",
+      "years": {
+        "2019": 19813,
+        "2020": 31154
+      },
+      "n_olive": 41399,
+      "n_pos": 1396,
+      "n_neg": 49571,
+      "n_olive_pos": 1371,
+      "n_coords": 50967,
+      "lat_min": 40.39383603,
+      "lat_max": 40.95470186,
+      "lon_min": 16.77464702,
+      "lon_max": 17.77596608,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 153,
+      "n_olive_pos_south": 11,
+      "n_sintomo_present": 7346,
+      "n_sintomo_absent": 43579,
+      "n_olive_pos_assente": 453,
+      "n_olive_pos_presente": 896,
+      "top_comuni_pos_olive": {
+        "CAROVIGNO": 570,
+        "OSTUNI": 412,
+        "MONTEMESOLA": 132,
+        "CEGLIE MESSAPICA": 119,
+        "CRISPIANO": 50,
+        "MONTEIASI": 19,
+        "CISTERNINO": 17,
+        "TARANTO": 14
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2019": 523,
+        "2020": 848
+      },
+      "olive_by_year": {
+        "2019": 15932,
+        "2020": 25467
+      },
+      "pos_by_year": {
+        "2019": 526,
+        "2020": 870
+      }
+    },
+    {
+      "file": "CAMP_2020.xlsx",
+      "sheet": "CAMP_2020",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SINTOMO"
+      ],
+      "n": 172005,
+      "date_min": "2020-04-30",
+      "date_max": "2021-03-05",
+      "years": {
+        "2020": 145351,
+        "2021": 26654
+      },
+      "n_olive": 163027,
+      "n_pos": 1205,
+      "n_neg": 170800,
+      "n_olive_pos": 1196,
+      "n_coords": 172005,
+      "lat_min": 40.38713227,
+      "lat_max": 41.43830502,
+      "lon_min": 15.69977067,
+      "lon_max": 17.64488393,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 438,
+      "n_olive_pos_south": 1,
+      "n_sintomo_present": 10005,
+      "n_sintomo_absent": 161968,
+      "n_olive_pos_assente": 493,
+      "n_olive_pos_presente": 692,
+      "top_comuni_pos_olive": {
+        "OSTUNI": 477,
+        "CISTERNINO": 139,
+        "FASANO": 114,
+        "MONTEMESOLA": 98,
+        "CRISPIANO": 69,
+        "MONOPOLI": 64,
+        "CEGLIE MESSAPICA": 57,
+        "MONTEIASI": 47
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2020": 1128,
+        "2021": 68
+      },
+      "olive_by_year": {
+        "2020": 136467,
+        "2021": 26560
+      },
+      "pos_by_year": {
+        "2020": 1136,
+        "2021": 69
+      }
+    },
+    {
+      "file": "CAMP_2021.xlsx",
+      "sheet": "MONIT_2021",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "ZONA",
+        "SINTOMO"
+      ],
+      "n": 219120,
+      "date_min": "2021-05-26",
+      "date_max": "2022-02-03",
+      "years": {
+        "2021": 207099,
+        "2022": 12021
+      },
+      "n_olive": 189353,
+      "n_pos": 2800,
+      "n_neg": 216320,
+      "n_olive_pos": 2793,
+      "n_coords": 219120,
+      "lat_min": 40.4323653,
+      "lat_max": 41.93227476,
+      "lon_min": 15.1520133,
+      "lon_max": 17.5823468,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 352,
+      "n_olive_pos_south": 0,
+      "n_sintomo_present": 4514,
+      "n_sintomo_absent": 214569,
+      "n_olive_pos_assente": 613,
+      "n_olive_pos_presente": 2169,
+      "top_comuni_pos_olive": {
+        "OSTUNI": 1516,
+        "CISTERNINO": 520,
+        "FASANO": 278,
+        "CRISPIANO": 127,
+        "MONTEMESOLA": 97,
+        "LOCOROTONDO": 62,
+        "MARTINA FRANCA": 54,
+        "TARANTO": 46
+      },
+      "has_zona": true,
+      "has_subspecie": false,
+      "zona_counts": {
+        "Zona Contenimento - Salento": 99165,
+        "Zona Cuscinetto - Salento": 43810,
+        "Zona Indenne - Nord Puglia": 39342,
+        "Area delimitata Monopoli": 10720,
+        "EX CONTENIMENTO": 8265,
+        "Area delimitata Canosa - 1km ricampionamento": 5809,
+        "Area indenne - Monopoli": 4679,
+        "Area delimitata Polignano a Mare": 4151,
+        "Area delimitata Canosa": 2980,
+        "Area delimitata Monopoli - infetta Monopoli1": 140,
+        "Area delimitata Monopoli - infetta Monopoli5": 37,
+        "Area delimitata Polignano - infetta Polignano1": 22
+      },
+      "zona_olive_pos": {
+        "EX CONTENIMENTO": 2647,
+        "Zona Contenimento - Salento": 88,
+        "Area delimitata Monopoli - infetta Monopoli1": 29,
+        "Zona Cuscinetto - Salento": 17,
+        "Area delimitata Monopoli": 9,
+        "Area delimitata Monopoli - infetta Monopoli5": 2,
+        "Area delimitata Polignano - infetta Polignano1": 1
+      },
+      "olive_pos_by_year": {
+        "2021": 2793
+      },
+      "olive_by_year": {
+        "2021": 177339,
+        "2022": 12014
+      },
+      "pos_by_year": {
+        "2021": 2800
+      }
+    },
+    {
+      "file": "CAMP_2022.xlsx",
+      "sheet": "CAMPIONI2022_2023",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "SINTOMO",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO"
+      ],
+      "n": 266352,
+      "date_min": "2022-06-09",
+      "date_max": "2023-06-30",
+      "years": {
+        "2022": 175243,
+        "2023": 91109
+      },
+      "n_olive": 227770,
+      "n_pos": 366,
+      "n_neg": 265986,
+      "n_olive_pos": 358,
+      "n_coords": 266352,
+      "lat_min": 40.51909828,
+      "lat_max": 41.17881043,
+      "lon_min": 16.02708823,
+      "lon_max": 17.43522125,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 0,
+      "n_olive_pos_south": 0,
+      "n_sintomo_present": 2245,
+      "n_sintomo_absent": 264074,
+      "n_olive_pos_assente": 151,
+      "n_olive_pos_presente": 199,
+      "top_comuni_pos_olive": {
+        "FASANO": 117,
+        "CASTELLANA GROTTE": 71,
+        "MONOPOLI": 67,
+        "POLIGNANO A MARE": 59,
+        "MARTINA FRANCA": 23,
+        "ALBEROBELLO": 10,
+        "LOCOROTONDO": 7,
+        "PUTIGNANO": 3
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2022": 235,
+        "2023": 123
+      },
+      "olive_by_year": {
+        "2022": 152266,
+        "2023": 75504
+      },
+      "pos_by_year": {
+        "2022": 242,
+        "2023": 124
+      }
+    },
+    {
+      "file": "CAMP_2023.xlsx",
+      "sheet": "MONIT_2023",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SINTOMO",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SPECIE",
+        "CULTIVAR"
+      ],
+      "n": 62876,
+      "date_min": "2023-07-18",
+      "date_max": "2024-03-11",
+      "years": {
+        "2023": 30130,
+        "2024": 32746
+      },
+      "n_olive": 56885,
+      "n_pos": 189,
+      "n_neg": 62687,
+      "n_olive_pos": 189,
+      "n_coords": 62876,
+      "lat_min": 40.78652351,
+      "lat_max": 41.1746245,
+      "lon_min": 16.53228976,
+      "lon_max": 17.41333949,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 0,
+      "n_olive_pos_south": 0,
+      "n_sintomo_present": 789,
+      "n_sintomo_absent": 62087,
+      "n_olive_pos_assente": 53,
+      "n_olive_pos_presente": 136,
+      "top_comuni_pos_olive": {
+        "MONOPOLI": 75,
+        "FASANO": 46,
+        "POLIGNANO A MARE": 43,
+        "CASTELLANA GROTTE": 14,
+        "ALBEROBELLO": 10,
+        "PUTIGNANO": 1
+      },
+      "has_zona": false,
+      "has_subspecie": false,
+      "olive_pos_by_year": {
+        "2023": 130,
+        "2024": 59
+      },
+      "olive_by_year": {
+        "2023": 28302,
+        "2024": 28583
+      },
+      "pos_by_year": {
+        "2023": 130,
+        "2024": 59
+      }
+    },
+    {
+      "file": "CAMP_2024.xlsx",
+      "sheet": "CAMP_2024",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "SINTOMO",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SUBSPECIE"
+      ],
+      "n": 119729,
+      "date_min": "2024-01-23",
+      "date_max": "2024-12-20",
+      "years": {
+        "2024": 119723
+      },
+      "n_olive": 59702,
+      "n_pos": 1113,
+      "n_neg": 118610,
+      "n_olive_pos": 154,
+      "n_coords": 119723,
+      "lat_min": 40.40187904,
+      "lat_max": 69.26039604,
+      "lon_min": -64.64284225,
+      "lon_max": 17.39010623,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 1439,
+      "n_olive_pos_south": 0,
+      "n_sintomo_present": 1590,
+      "n_sintomo_absent": 116753,
+      "n_olive_pos_assente": 41,
+      "n_olive_pos_presente": 91,
+      "top_comuni_pos_olive": {
+        "CRISPIANO": 48,
+        "MASSAFRA": 38,
+        "CASTELLANA GROTTE": 37,
+        "POLIGNANO A MARE": 18,
+        "TRIGGIANO": 4,
+        "FASANO": 3,
+        "NOCI": 2,
+        "BARI": 2
+      },
+      "has_zona": false,
+      "has_subspecie": true,
+      "subspecie_counts": {
+        "nan": 118616,
+        "MULTIPLEX": 617,
+        "FASTIDIOSA": 339,
+        "PAUCA": 157
+      },
+      "subspecie_pos": {
+        "MULTIPLEX": 617,
+        "FASTIDIOSA": 339,
+        "PAUCA": 157
+      },
+      "subspecie_olive_pos": {
+        "PAUCA": 154
+      },
+      "olive_pos_by_year": {
+        "2024": 154
+      },
+      "olive_by_year": {
+        "2024": 59702
+      },
+      "pos_by_year": {
+        "2024": 1113
+      }
+    },
+    {
+      "file": "CAMP_2025.xlsx",
+      "sheet": "CAMP_2025",
+      "columns": [
+        "ID",
+        "DATA_RILEVAMENTO",
+        "TIPOLOGIA",
+        "SPECIE",
+        "CULTIVAR",
+        "SINTOMO",
+        "LATITUDINE",
+        "LONGITUDINE",
+        "COMUNE",
+        "RISULTATO",
+        "SUBSPECIE"
+      ],
+      "n": 121860,
+      "date_min": "2025-01-07",
+      "date_max": "2025-12-19",
+      "years": {
+        "2025": 121860
+      },
+      "n_olive": 105554,
+      "n_pos": 396,
+      "n_neg": 121464,
+      "n_olive_pos": 338,
+      "n_coords": 121860,
+      "lat_min": 40.41202418,
+      "lat_max": 41.91814552,
+      "lon_min": 15.1674065,
+      "lon_max": 17.22818575,
+      "n_east_of_17_80": 0,
+      "n_olive_east": 0,
+      "n_olive_pos_east": 0,
+      "n_south_of_40_45": 1612,
+      "n_olive_pos_south": 0,
+      "n_sintomo_present": 1136,
+      "n_sintomo_absent": 120712,
+      "n_olive_pos_assente": 104,
+      "n_olive_pos_presente": 233,
+      "top_comuni_pos_olive": {
+        "CAGNANO VARANO": 260,
+        "BARI": 26,
+        "VALENZANO": 14,
+        "PUTIGNANO": 10,
+        "CASTELLANA GROTTE": 9,
+        "MODUGNO": 6,
+        "BISCEGLIE": 5,
+        "CONVERSANO": 3
+      },
+      "has_zona": false,
+      "has_subspecie": true,
+      "subspecie_counts": {
+        "nan": 121464,
+        "PAUCA": 340,
+        "MULTIPLEX": 36,
+        "FASTIDIOSA": 20
+      },
+      "subspecie_pos": {
+        "PAUCA": 340,
+        "MULTIPLEX": 36,
+        "FASTIDIOSA": 20
+      },
+      "subspecie_olive_pos": {
+        "PAUCA": 338
+      },
+      "olive_pos_by_year": {
+        "2025": 338
+      },
+      "olive_by_year": {
+        "2025": 105554
+      },
+      "pos_by_year": {
+        "2025": 396
+      }
+    }
+  ],
+  "file_year_overlap": [
+    {
+      "file": "CAMP_2013_2014.xlsx",
+      "year": 2013,
+      "olive_pos": 36,
+      "olive": 2224,
+      "pos": 41
+    },
+    {
+      "file": "CAMP_2013_2014.xlsx",
+      "year": 2014,
+      "olive_pos": 256,
+      "olive": 6553,
+      "pos": 311
+    },
+    {
+      "file": "CAMP_2014_2015.xlsx",
+      "year": 2014,
+      "olive_pos": 2,
+      "olive": 2122,
+      "pos": 2
+    },
+    {
+      "file": "CAMP_2014_2015.xlsx",
+      "year": 2015,
+      "olive_pos": 4171,
+      "olive": 47242,
+      "pos": 4189
+    },
+    {
+      "file": "CAMP_2016_2017.xlsx",
+      "year": 2016,
+      "olive_pos": 117,
+      "olive": 93877,
+      "pos": 125
+    },
+    {
+      "file": "CAMP_2016_2017.xlsx",
+      "year": 2017,
+      "olive_pos": 1459,
+      "olive": 51542,
+      "pos": 1463
+    },
+    {
+      "file": "CAMP_2017_2018.xlsx",
+      "year": 2017,
+      "olive_pos": 2983,
+      "olive": 115594,
+      "pos": 2985
+    },
+    {
+      "file": "CAMP_2017_2018.xlsx",
+      "year": 2018,
+      "olive_pos": 845,
+      "olive": 58446,
+      "pos": 850
+    },
+    {
+      "file": "CAMP_2018_2019.xlsx",
+      "year": 2018,
+      "olive_pos": 217,
+      "olive": 19621,
+      "pos": 217
+    },
+    {
+      "file": "CAMP_2018_2019.xlsx",
+      "year": 2019,
+      "olive_pos": 855,
+      "olive": 34816,
+      "pos": 857
+    },
+    {
+      "file": "CAMP_2019_2020.xlsx",
+      "year": 2019,
+      "olive_pos": 523,
+      "olive": 15932,
+      "pos": 526
+    },
+    {
+      "file": "CAMP_2019_2020.xlsx",
+      "year": 2020,
+      "olive_pos": 848,
+      "olive": 25467,
+      "pos": 870
+    },
+    {
+      "file": "CAMP_2020.xlsx",
+      "year": 2020,
+      "olive_pos": 1128,
+      "olive": 136467,
+      "pos": 1136
+    },
+    {
+      "file": "CAMP_2020.xlsx",
+      "year": 2021,
+      "olive_pos": 68,
+      "olive": 26560,
+      "pos": 69
+    },
+    {
+      "file": "CAMP_2021.xlsx",
+      "year": 2021,
+      "olive_pos": 2793,
+      "olive": 177339,
+      "pos": 2800
+    },
+    {
+      "file": "CAMP_2022.xlsx",
+      "year": 2022,
+      "olive_pos": 235,
+      "olive": 152266,
+      "pos": 242
+    },
+    {
+      "file": "CAMP_2022.xlsx",
+      "year": 2023,
+      "olive_pos": 123,
+      "olive": 75504,
+      "pos": 124
+    },
+    {
+      "file": "CAMP_2023.xlsx",
+      "year": 2023,
+      "olive_pos": 130,
+      "olive": 28302,
+      "pos": 130
+    },
+    {
+      "file": "CAMP_2023.xlsx",
+      "year": 2024,
+      "olive_pos": 59,
+      "olive": 28583,
+      "pos": 59
+    },
+    {
+      "file": "CAMP_2024.xlsx",
+      "year": 2024,
+      "olive_pos": 154,
+      "olive": 59702,
+      "pos": 1113
+    },
+    {
+      "file": "CAMP_2025.xlsx",
+      "year": 2025,
+      "olive_pos": 338,
+      "olive": 105554,
+      "pos": 396
+    }
+  ],
+  "resolved_calendar_year": [
+    {
+      "file": "CAMP_2013_2014.xlsx",
+      "year": 2013,
+      "olive_pos": 36,
+      "olive": 2224,
+      "pos": 41,
+      "also_in": []
+    },
+    {
+      "file": "CAMP_2013_2014.xlsx",
+      "year": 2014,
+      "olive_pos": 256,
+      "olive": 6553,
+      "pos": 311,
+      "also_in": [
+        "CAMP_2014_2015.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2014_2015.xlsx",
+      "year": 2015,
+      "olive_pos": 4171,
+      "olive": 47242,
+      "pos": 4189,
+      "also_in": []
+    },
+    {
+      "file": "CAMP_2016_2017.xlsx",
+      "year": 2016,
+      "olive_pos": 117,
+      "olive": 93877,
+      "pos": 125,
+      "also_in": []
+    },
+    {
+      "file": "CAMP_2017_2018.xlsx",
+      "year": 2017,
+      "olive_pos": 2983,
+      "olive": 115594,
+      "pos": 2985,
+      "also_in": [
+        "CAMP_2016_2017.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2017_2018.xlsx",
+      "year": 2018,
+      "olive_pos": 845,
+      "olive": 58446,
+      "pos": 850,
+      "also_in": [
+        "CAMP_2018_2019.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2018_2019.xlsx",
+      "year": 2019,
+      "olive_pos": 855,
+      "olive": 34816,
+      "pos": 857,
+      "also_in": [
+        "CAMP_2019_2020.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2020.xlsx",
+      "year": 2020,
+      "olive_pos": 1128,
+      "olive": 136467,
+      "pos": 1136,
+      "also_in": [
+        "CAMP_2019_2020.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2021.xlsx",
+      "year": 2021,
+      "olive_pos": 2793,
+      "olive": 177339,
+      "pos": 2800,
+      "also_in": [
+        "CAMP_2020.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2022.xlsx",
+      "year": 2022,
+      "olive_pos": 235,
+      "olive": 152266,
+      "pos": 242,
+      "also_in": []
+    },
+    {
+      "file": "CAMP_2023.xlsx",
+      "year": 2023,
+      "olive_pos": 130,
+      "olive": 28302,
+      "pos": 130,
+      "also_in": [
+        "CAMP_2022.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2024.xlsx",
+      "year": 2024,
+      "olive_pos": 154,
+      "olive": 59702,
+      "pos": 1113,
+      "also_in": [
+        "CAMP_2023.xlsx"
+      ]
+    },
+    {
+      "file": "CAMP_2025.xlsx",
+      "year": 2025,
+      "olive_pos": 338,
+      "olive": 105554,
+      "pos": 396,
+      "also_in": []
+    }
+  ],
+  "notes": {
+    "east_of_17_80": "east of CKAN CSV lon max (~17.78) — Salento / Lecce side",
+    "south_of_40_45": "south of northern Brindisi — deeper Salento",
+    "overlap": "campaign workbooks can span two calendar years; resolved series prefers dedicated CAMP_YYYY.xlsx"
+  }
+}

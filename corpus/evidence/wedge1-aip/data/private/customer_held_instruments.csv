@@ -1,0 +1,4 @@
+instrument_ref,title,instrument_kind,operative_interval,operative_effect
+MEMBER-SERVICE-AGREEMENT-0135,Member 0135 service agreement,member_service_agreement,"[2026-01-01,)","Member 0135 grants PugliaOlive representation for Holding 0842 and Parcels A893_002900.117, A893_002900.137, A893_002900.145, A893_002900.146, A893_002900.247; the agreement does not record PugliaOlive acceptance."
+PUGLIAOLIVE-MANAGER-WORK-ORDER-AUTHORITY,PugliaOlive manager work-order authority,cooperative_authority,"[2026-01-01,)",Authorizes the assigned PugliaOlive operations manager to coordinate and issue work orders within approved member agreements and current route requirements.
+MEMBER-0135-ARIF-SERVICE-REQUEST-DET3-2026,Member 0135 ARIF service request for DET 3/2026,member_service_request,"[2026-02-09,2026-02-20)",Records the member request to use the ARIF execution option for the DET 3/2026 work; it does not prove ARIF performance.

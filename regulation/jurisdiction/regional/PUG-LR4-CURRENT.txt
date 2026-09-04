@@ -1,0 +1,141 @@
+SOURCE_ID: PUG-LR4-CURRENT
+TITLE: Legge regionale 29 marzo 2017, n. 4 — Gestione della batteriosi da Xylella fastidiosa nel territorio della regione Puglia
+STATUS: current coordinated text for Articles 1–10
+BASE: regulation/jurisdiction/regional/LR-4-2017-Xylella.txt
+AMENDMENTS: L.R. 19/2019; L.R. 6/2021; L.R. 45/2021
+INTERPRETATION: L.R. 37/2017
+HISTORICAL VERSION SOURCES: L.R. 64/2017; L.R. 67/2018
+NOTE: Article 5(1) retains its enacted cross-reference to “lettera b), comma 2, articolo 3”, although current Article 3(2) no longer contains lettered subparagraphs.
+
+Art. 1
+Finalità
+
+1. La presente legge attua le misure fitosanitarie per prevenire e contenere la diffusione dell’organismo nocivo Xylella fastidiosa (di seguito organismo specificato) e individua la strategia della Regione Puglia ai fini di tutelare il paesaggio, l’ambiente, la salute, l’identità e l’economia delle aree colpite.
+
+Art. 2
+Rilevamento o presenza sospetta dell’organismo specificato
+
+1. Chiunque venga a conoscenza della presenza dell’organismo specificato ne informa immediatamente il Servizio fitosanitario regionale e fornisce tutte le informazioni pertinenti.
+
+2. Il Servizio fitosanitario regionale registra tale informazione e ne dà immediata comunicazione al Servizio fitosanitario centrale.
+
+3. Il Servizio fitosanitario regionale, qualora sia stato informato della presenza anche presunta dell’organismo specificato, adotta tutte le misure necessarie per accertare tale segnalazione.
+
+4. Il Servizio fitosanitario regionale informa immediatamente della presenza anche presunta dell’organismo specificato, delle possibili conseguenze, dei rischi e delle misure da adottare chiunque ha sotto il suo controllo piante potenzialmente colpite dall’organismo specificato.
+
+Art. 3
+Definizione della zona delimitata
+
+1. Se la presenza dell’organismo specificato è confermata, il Servizio fitosanitario regionale definisce senza indugio una zona delimitata in conformità al comma 2, di seguito denominata “zona delimitata”.
+
+2. L’area delimitata è costituita da una zona infetta e da una zona cuscinetto. [L.R. 45/2021, art. 1]
+
+3. Se la presenza dell’organismo specificato è confermata nella zona cuscinetto, la delimitazione della zona infetta e della zona cuscinetto è immediatamente modificata di conseguenza.
+
+4. È possibile procedere alla revoca della delimitazione di un’area se, in base alle indagini di cui all’articolo 4, si possa concludere, in conformità con la normativa vigente, che l’organismo nocivo specificato è stato eradicato e non vi è alcun rischio di ulteriore diffusione. [L.R. 45/2021, art. 1]
+
+Art. 4
+Ispezioni e monitoraggio sul territorio regionale relative all’organismo specificato
+
+1. Il Servizio fitosanitario regionale effettua costantemente indagini ufficiali sulle piante specificate, per rilevare l’eventuale presenza dell’organismo specificato, sulla base di uno specifico piano annuale di monitoraggio regionale.
+
+2. Le indagini tengono conto dei dati tecnici e scientifici disponibili, della biologia dell’organismo specificato e dei suoi vettori, della presenza e della biologia delle piante specificate o di piante ospiti dell’organismo specificato definite ai sensi della normativa comunitaria e nazionale, nonché di tutte le altre informazioni pertinenti per quanto riguarda la presenza dell’organismo specificato. [L.R. 45/2021, art. 2]
+
+3. Il piano di monitoraggio di cui al comma 1 è attuato attraverso indagini ufficiali condotte dal Servizio fitosanitario regionale, direttamente o per delega. Il personale impegnato nell’attività ispettiva opera secondo linee guida adottate dal Servizio fitosanitario regionale e, munito di apposito tesserino di riconoscimento, può accedere ai fondi anche in assenza del proprietario/conduttore. Il monitoraggio consiste nel prelievo di campioni per le analisi, effettuato nei periodi opportuni per rilevare la presenza dell’organismo specificato. I campioni sono analizzati esclusivamente presso uno dei laboratori individuati dal Servizio fitosanitario regionale, il cui elenco è pubblicato sul sito web dell’Osservatorio. [L.R. 45/2021, art. 2]
+
+4. Nell’ambito del piano di monitoraggio regionale di cui al comma 1, il Servizio fitosanitario regionale, nel momento più adatto, conduce ispezioni annuali nelle aree delimitate, in linea con le informazioni scientifiche e tecniche più recenti. Le indagini sono condotte secondo criteri statisticamente attendibili e in funzione dei fattori di rischio di diffusione di Xylella fastidiosa. [L.R. 45/2021, art. 2]
+
+5. Nelle aree indenni, le indagini di cui al comma 1 devono concentrarsi in aree considerate a maggiore rischio di introduzione dell’organismo specificato. [L.R. 45/2021, art. 2]
+
+6. Nella zona cuscinetto e nell’area indenne si effettua anche il monitoraggio degli insetti vettori e potenziali vettori. Campioni di insetti vettori accertati o potenziali, al fine di rilevare la presenza del batterio nel territorio, saranno sottoposti a test analitici al fine di rilevare anticipatamente la presenza dell’organismo specificato nel territorio. Nel caso in cui dalle analisi risulta la presenza di insetti che hanno acquisito il batterio, si procede al campionamento di tutte le piante specificate presenti sul luogo di ritrovamento.
+
+7. Il Servizio fitosanitario regionale comunica mensilmente al Servizio fitosanitario centrale i risultati delle indagini di cui al comma 1, al fine di confermare lo stato fitosanitario del territorio di propria competenza, secondo le modalità indicate, fornendo almeno i seguenti elementi:
+a) numero, tipologia di siti ispezionati e loro coordinate geografiche;
+b) numero di campioni analizzati, la specie e i relativi risultati;
+c) mappa del territorio sottoposto a monitoraggio.
+
+Art. 5
+Misure di eradicazione
+
+1. Il Servizio fitosanitario regionale, che ha stabilito la zona delimitata di cui alla lettera b), comma 2, articolo 3, dispone in tale zona le misure di cui ai commi 2, 3, 4, 5 e 6 del presente articolo.
+
+2. Il Servizio fitosanitario regionale dispone e controlla la rimozione immediata della pianta risultata infetta dall’organismo specificato agli esami di laboratorio.
+
+3. Immediatamente dopo aver individuato una pianta infetta, il Servizio fitosanitario regionale dispone la rimozione immediata delle piante infette e di quelle suscettibili, come previsto dalla normativa vigente. [L.R. 45/2021, art. 3]
+
+4. La rimozione delle piante è effettuata con tutte le precauzioni necessarie ed è organizzata in base al livello di rischio rappresentato da tali piante e in relazione al ciclo del vettore. [L.R. 45/2021, art. 3]
+
+5. Al fine di evitare la diffusione del batterio, nei casi in cui non sia possibile eseguire tempestivamente quanto previsto dal comma 4, la pianta infetta è isolata dal contesto esterno dal proprietario/conduttore, con protezioni meccaniche quali incappucciamento degli alberi. La protezione è accompagnata da idonea potatura e dalle operazioni necessarie per la lotta al vettore conosciute e potenziali: sfalcio di tutte le essenze erbacee, lavorazione del terreno dopo lo sfalcio, trattamenti con prodotti fitosanitari autorizzati. [L.R. 45/2021, art. 3]
+
+6. Il Servizio fitosanitario regionale adotta qualsiasi altra misura in grado di contribuire all’eradicazione dell’organismo specificato, applicando un approccio integrato, secondo i principi stabiliti nella norma ISPM n. 14.
+
+Art. 6
+Misure di contenimento
+
+1. Laddove consentito dalla legislazione comunitaria, nelle zone infette di cui all’articolo 3, comma 2, è possibile applicare misure di contenimento, come indicato al comma 2. [L.R. 45/2021, art. 4]
+
+2. Nelle aree in cui si applicano le misure di contenimento, il Servizio fitosanitario regionale dispone la rimozione immediata di tutte le piante risultate infette dall’organismo specificato in base alle indagini di cui all’articolo 4. [L.R. 45/2021, art. 4]
+
+3. Il Servizio fitosanitario regionale dispone il campionamento e l’analisi delle piante specificate contigue alle piante rimosse ai sensi del comma 2. [L.R. 45/2021, art. 4]
+
+Art. 7
+Ulteriori disposizioni per il contenimento e l’eradicazione del batterio
+
+1. Il Servizio fitosanitario regionale dispone la distruzione in situ o la rimozione e il trasporto delle piante e delle parti di piante di cui agli articoli 5 e 6 in un luogo vicino designato a tal fine all’interno dell’area infetta.
+
+2. Il Servizio fitosanitario regionale prescrive le pratiche agricole per la gestione dell’organismo specificato e dei suoi vettori e provvede a fornire adeguata comunicazione per assicurare la massima diffusione degli interventi previsti per il contenimento della batteriosi nelle aree infette.
+
+3. Ai soggetti che non ottemperano alle prescrizioni di cui al comma 1 non possono essere concessi benefici accordati a qualsiasi titolo dalla Regione Puglia, in via diretta o indiretta, e si impone il divieto di partecipare a gare di appalto o a bandi per l’erogazione di fondi comunitari, nazionali e regionali promossi dalla Regione Puglia. [L.R. 6/2021, art. 3]
+
+4. Il Servizio fitosanitario regionale sensibilizza il pubblico in merito alla minaccia costituita dall’organismo specificato, nonché in merito alle misure adottate per impedirne l’introduzione e la diffusione sul territorio regionale.
+
+Art. 8
+Tutela del patrimonio paesaggistico e ripristino dell’equilibrio economico nelle zone infette
+
+1. La Regione Puglia tutela il proprio patrimonio paesaggistico e sostiene il ripristino del potenziale economico delle zone danneggiate.
+
+2. La Regione Puglia, di concerto con il Governo nazionale, opera affinché i proprietari o i conduttori delle aree delimitate possano beneficiare di contributi finanziari integrativi a fronte dei costi sostenuti per l’attuazione delle misure fitosanitarie contenute nelle presenti disposizioni.
+
+3. Le imprese agricole e le aziende vivaistiche non agricole hanno diritto ad accedere nel più breve tempo al fondo di solidarietà nazionale, di cui al decreto legislativo 29 marzo 2004, n. 102, per ottenere compensazione per il mancato reddito quando i danni subiti per effetto della batteriosi superano il 30 per cento della produzione lorda vendibile aziendale.
+
+4. Per sostenere lo sviluppo di filiere agroalimentari di qualità e rispettose dell’ambiente e delle risorse naturali, nelle zone infette si promuove l’applicazione dei principi dell’economia circolare mediante:
+a) il sostegno all’agricoltura biologica e all’agricoltura integrata o ecosostenibile, anche attraverso la ricerca di principi attivi validi e autorizzati contro il vettore;
+b) la priorità nella programmazione regionale di infrastrutture per il riuso delle acque reflue collegandole con il contenimento dell’eccessivo utilizzo dell’acqua di falda;
+c) la promozione di iniziative finalizzate al riequilibrio della sostanza organica nel terreno, in particolare, incentivando l’utilizzo di ammendanti derivanti da rifiuti organici di origine agricola o dalla frazione organica del rifiuto solido urbano;
+d) la priorità nelle misure di tutela e valorizzazione della biodiversità.
+
+5. Poiché la Regione Puglia intende proteggere l’inestimabile pregio culturale e paesaggistico dei propri ulivi monumentali, in deroga a quanto disposto dall’articolo 5, comma 3, non si procede alla rimozione delle piante non infette inserite nell’elenco di cui all’articolo 2 della legge regionale 4 giugno 2007, n. 14, purché siano soddisfatte le condizioni previste dalla normativa vigente. La Giunta regionale promuove tutte le iniziative volte ad aggiornare l’elenco degli ulivi e degli uliveti monumentali di cui all’articolo 5 della l.r. 14/2007; a tal fine, nei quindici giorni successivi alla data di entrata in vigore delle presenti disposizioni, invita tutti i comuni della regione a comunicare, entro trenta giorni dalla data del ricevimento dell’invito, l’elenco di tutti gli ulivi monumentali presenti sul territorio comunale. In caso di mancata risposta entro il termine stabilito ovvero di risposta incompleta, la Regione provvede in via sostitutiva a rilevare gli ulivi monumentali presenti sul territorio del comune inadempiente, addebitando al comune le spese sostenute. [L.R. 45/2021, art. 5]
+
+6. Fermo restando quanto consentito dalla normativa vigente, la vitalità degli ulivi monumentali infetti è sostenuta con ogni mezzo. A tal fine è incentivata la sperimentazione delle soluzioni proposte dalla ricerca scientifica. [L.R. 45/2021, art. 5]
+
+7. Per prevenire l’infezione degli ulivi monumentali presenti nella zona cuscinetto, la Regione Puglia promuove iniziative di temporaneo isolamento fisico degli alberi monumentali dal contesto ambientale con barriere o coperture delle piante. Nelle aree con presenza di alberi monumentali saranno particolarmente attenzionate le operazioni di lotta obbligatoria al vettore e di potatura, avendo cura soprattutto delle aree abbandonate.
+
+7 bis. La Regione Puglia tutela la Piana degli olivi secolari, così come definita dal Piano paesaggistico territoriale regionale (PPTR) di cui alla deliberazione della Giunta regionale 16 febbraio 2015, n. 176, sottoponendola a monitoraggio per verificare la presenza di Xylella fastidiosa. Laddove consentito dalla normativa vigente, i proprietari di olivi monumentali di cui all’articolo 2 della l.r. 14/2007, risultati infetti da Xylella fastidiosa, possono essere autorizzati dall’Osservatorio fitosanitario regionale a non procedere all’estirpazione e ad adottare misure fitosanitarie alternative consistenti nella capitozzatura delle branche principali, nell’innesto di cultivar resistenti e nell’applicazione delle misure di controllo del vettore. [L.R. 45/2021, art. 5]
+
+8. Nelle aree infette si promuove la ricostituzione dei manufatti rurali tipici del paesaggio.
+
+9. Il Servizio fitosanitario regionale monitora le risultanze scientifiche che dimostrano evidenze di tolleranza/resistenza di specie e varietà di piante specificate e promuove le richieste al Comitato fitosanitario nazionale per ottenere le autorizzazioni all’impianto in zona infetta. [L.R. 45/2021, art. 5]
+
+Art. 9
+Ricerca scientifica
+
+1. È fatto divieto a chiunque di detenere o movimentare materiale vivo di Xylella fastidiosa o ogni materiale infetto da essa e che possa costituire fonte d’inoculo o diffusione dell’organismo specificato.
+
+2. In deroga a quanto previsto al comma 1, le istituzioni scientifiche e gli altri soggetti che intendono avviare attività di indagini e sperimentazione sull’organismo specificato devono darne preventivamente comunicazione al Servizio fitosanitario regionale e devono tempestivamente comunicarne i risultati allo stesso Servizio, prima di darne diffusione pubblica.
+
+3. La Regione Puglia sostiene la ricerca e promuove l’istituzione nell’area infetta di un laboratorio diffuso a cielo aperto che possa consentire la più ampia sperimentazione da parte delle istituzioni scientifiche interessate e l’opportuno coinvolgimento delle imprese agricole coinvolte.
+
+Art. 10
+Spostamento delle piante specificate all’interno della Regione Puglia
+
+1. Gli spostamenti delle piante specificate nell’ambito del territorio regionale sono consentiti se conformi alla vigente normativa nazionale e comunitaria. [L.R. 45/2021, art. 6]
+
+2–4. Abrogati dalla L.R. 45/2021, art. 6.
+
+5. La Regione Puglia tutela i vivai e i poli vivaistici presenti nelle zone delimitate, mediante azioni mirate atte a favorire le attività dei soggetti iscritti al Registro ufficiale degli operatori professionali (RUOP), nel rispetto degli articoli 107 e 108 del Trattato sul funzionamento dell’Unione europea (TFUE). [L.R. 45/2021, art. 6]
+
+5 bis. Abrogato dalla L.R. 45/2021, art. 6.
+
+Art. 11. Abrogato dalla L.R. 19/2019, art. 3.
+
+Art. 11 bis. Abrogato dalla L.R. 45/2021, art. 7.

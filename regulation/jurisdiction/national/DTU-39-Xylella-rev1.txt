@@ -1,0 +1,883 @@
+                 Servizio fitosantario nazionale
+
+                          DOCUMENTI TECNICI UFFICIALI
+                               Documento n. 39
+
+
+
+                                   SCHEDA TECNICA PER
+                       INDAGINI SULL’ORGANISMO NOCIVO:
+                                          Xylella fastidiosa
+
+
+
+
+       DESCRIZIONE                                                                  DATA DI
+REV.                          COMPILAZIONE                    APPROVAZIONE                       FIRMA
+        REVISIONE                                                                  ADOZIONE
+
+
+                        GDL per il Programma di indagine
+ 0       Revisione 0                                           CFN 21-22/06/2023    13/07/2023
+                        sugli organismi nocivi delle piante
+
+
+
+                                                                                                   Bruno Caio
+                                                                                                   Faraglia
+                                                                                                   MASAF
+ 1       Revisione 1      Tavolo permanente della Rete                                             07.01.2025
+                                                              CFN 9-10/12/2024      07/01/2025     09:49:48
+                                                                                                   GMT+02:00
+                                   Nazionale
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 2 di 26
+
+
+                  Indice
+                  Premessa                                                                                          3
+                  1. Informazioni Generali                                                                          3
+                             1.1 Tassonomia e inquadramento                                                         3
+                             1.2 Normativa vigente                                                                  4
+                             1.3 Distribuzione geografica                                                           5
+                                       1.3.1 Presenza in Italia                                                     6
+                  2. Aspetti biologici dell’organismo                                                               7
+                             2.1 Morfologia e biologia dell’organismo nocivo                                        7
+                             2.2 Sintomi/segni                                                                      9
+                             2.3 Piante ospiti (ospiti principali/minori)                                       14
+                  3. Siti di maggiore rischio                                                                   14
+                             3.1 Aree a rischio/ Risk areas                                                     14
+                  4. Indagine/survey                                                                            16
+                             4.1 Osservazione visiva                                                            16
+                             4.2 Campionamento                                                                  17
+                             4.3 Indagine con trappole                                                          18
+                  5. Diagnosi                                                                                   20
+                             5.1 Campione/Matrice                                                               20
+                                    5.1.1 Matrice vegetale                                                      20
+                                    5.1.2 Vettori                                                               20
+                                    5.1.3    Estrazione                                                         21
+                             5.2 Test di screening (Rilevamento)                                                21
+                                    5.2.1    Test di screening previsti all’interno del monitoraggio cofinanziato
+                                                                                                                21
+                            5.3 Test per l’identificazione delle sottospecie di Xylella fastidiosa (All 4 del
+                                regolamento di esecuzione (UE) 2020/1201 Parte B)
+                                                                                                                21
+                            5.4 Note                                                                            21
+                  Bibliografia                                                                                  23
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                            Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                           Pag. 3 di 26
+
+
+       Premessa
+       La scheda tecnica di indagine per un organismo nocivo o gruppo di organismi nocivi affini riporta le informazioni
+       sull’inquadramento tassonomico e normativo, la diffusione a livello mondiale e nazionale, gli aspetti di carattere generale
+       sul ciclo biologico, le istruzioni su come condurre e quando rilievi visivi e campionamenti sulla base di ampie illustrazioni
+       dei sintomi o danni causati sulle specie ospiti e, nel caso di insetti, le modalità di indagine attraverso l’uso di trappole. La
+       scheda riporta anche le informazioni sulle metodologie diagnostiche per l’identificazione del singolo organismo nocivo o
+       gruppo affine.
+       La scheda tecnica di indagine tiene conto dei regolamenti comunitari e/o decreti nazionali, dell’esperienza dei Servizi
+       Fitosanitari Regionali (SFR) nel controllo del territorio, degli standard internazionali (EPPO, ISPM etc..). La scheda è uno
+       strumento funzionale al riconoscimento dell’organismo nocivo in dotazione al personale tecnico impegnato nell’esecuzione
+       delle indagini (Ispettori fitosanitari, Agenti fitosanitari, Assistenti fitosanitari, Tecnici rilevatori)
+       La scheda tecnica di indagine viene elaborata da un gruppo di lavoro di esperti (SFR e CREA-DC) per l’organismo nocivo
+       considerato, con l’eventuale coinvolgimento di altri esperti di Enti di Ricerca e Università. La scheda di indagine viene
+       approva dal Comitato Fitosanitario Nazionale (CFN) e revisionata periodicamente per gli aggiornamenti normativi,
+       distribuzione geografica e procedure di indagine.
+
+
+       1. Informazioni Generali
+
+       1.1Tassonomia e inquadramento
+       Nome scientifico: Xylella fastidiosa Wells et al. (1987)
+
+
+       Nomi comuni: Xylella fastidiosa (Xylella)
+
+
+       Codice EPPO: XYLEFA (Xylella fastidiosa)
+
+
+       Posizione tassonomica:
+       Phylum:         Proteobacteria           (1PROBP)         Classe:        Gammaproteobacteria                (1GAMBC)   Ordine:
+       Lysobacterales (1LYSOO) Famiglia: Lysobacteraceae (1LYSOF) Genere: Xylella (1XYLEG)
+       Specie: Xylella fastidiosa (XYLEFA)
+
+
+       Categorizzazione
+       EU: Quarantine priority pest (Annex IIB - Reg. (UE) 2019/1702). EPPO: A2
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 4 di 26
+
+       1.2 Normativa vigente
+       EUROPEA:
+              - Regolamento (UE) 2016/2031 del Parlamento europeo e del Consiglio, del 26 ottobre 2016,
+                  relativo alle misure di protezione contro gli organismi nocivi per le piante, che modifica i
+                  regolamenti (UE) n. 228/2013, (UE) n. 652/2014 e (UE) n. 1143/2014 del Parlamento
+                  europeo e del Consiglio e abroga le direttive 69/464/CEE, 74/647/CEE, 93/85/CEE,
+                  98/57/CE, 2000/29/CE, 2006/91/CE e 2007/33/CE del Consiglio;
+              - Regolamento (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017,
+                  relativo ai controlli ufficiali e alle altre attività ufficiali effettuati per garantire l’applicazione
+                  della legislazione sugli alimenti e sui mangimi, delle norme sulla salute e sul benessere degli
+                  animali, sulla sanità delle piante nonché sui prodotti fitosanitari, recante modifica dei
+                  regolamenti (CE) n. 999/2001, (CE) n. 396/2005, (CE) n. 1069/2009, (CE) n. 1107/2009, (UE)
+                  n. 1151/2012, (UE) n. 652/2014, (UE) 2016/429 e (UE) 2016/2031 del Parlamento europeo
+                  e del Consiglio, dei regolamenti (CE) n. 1/2005 e (CE) n. 1099/2009 del Consiglio e delle
+                  direttive 98/58/CE, 1999/74/CE, 2007/43/CE, 2008/119/CE e 2008/120/CE del Consiglio, e
+                  che abroga i regolamenti (CE) n. 854/2004 e (CE) n. 882/2004 del Parlamento europeo e del
+                  Consiglio, le direttive 89/608/CEE, 89/662/CEE, 90/425/CEE, 91/496/CEE, 96/23/CE,
+                  96/93/CE e 97/78/CE del Consiglio e la decisione 92/438/CEE del Consiglio (regolamento
+                  sui controlli ufficiali);
+              - Regolamento delegato (UE) 2019/1702 della Commissione del 10 agosto 2019 che integra
+                  il regolamento (UE) 2016/2031 del Parlamento europeo e del Consiglio stabilendo l’elenco
+                  degli organismi nocivi prioritari;
+              - Regolamento di esecuzione (UE) 2019/2072 della Commissione che stabilisce condizioni
+                  uniformi per l’attuazione del regolamento (UE) 2016/2031 del Parlamento europeo e del
+                  Consiglio per quanto riguarda le misure di protezione contro gli organismi nocivi per le piante
+                  e che abroga il regolamento (CE) n. 690/2008 della Commissione e modifica il regolamento
+                  di esecuzione (UE) 2018/2019 della Commissione e ss.mm.ii.;
+              - Regolamento di esecuzione (UE) 2020/1201 della Commissione del 14 agosto 2020
+                  relativo alle misure per prevenire l’introduzione e la diffusione nell’Unione della Xylella
+                  fastidiosa (Wells et al.) che abroga la Decisione di esecuzione (UE) 2015/789 e ss.mm.ii..
+       NAZIONALE:
+              - Decreto Legislativo 2 febbraio 2021, n. 19. "Norme per la protezione delle piante
+                  dagli organismi nocivi in attuazione dell'articolo 11 della legge 4 ottobre 2019, n. 117,
+                  per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE)
+                  2016/2031 e del regolamento (UE) 2017/625"(GU Gazzetta Ufficiale della Repubblica
+                  Italiana - Serie generale n.48 del 26 febbraio 2021) e s.m.i.;
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                        Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                       Pag. 5 di 26
+
+              - Decreto del Ministero delle Politiche Agricole Alimentari e Forestali del 24
+                  gennaio 2022. Adozione del Piano di emergenza nazionale per il contrasto di Xylella
+                  fastidiosa (Well et al.). (GU Gazzetta Ufficiale della Repubblica Italiana - Serie
+                  Generale n. 64 del 17 marzo 2022;
+              - Ordinanza n. 3 (prot. MASAF n. 273672 del 26/05/2023), relativa alla Definizione
+                  aree indenni dall’organismo nocivo Xylella fastidiosa nel territorio della Repubblica
+                  italiana.
+
+
+       1.3 Distribuzione geografica
+       Origini:
+       Africa: assente
+       America: Argentina, Brasile, Canada, Costa Rica, Messico, Paraguay, Puerto Rico, USA,
+       Venezuela.
+       Asia: Iran, Israele, Libano, Taiwan.
+       Europa: Francia (transiente, ma presente in Corsica), Italia, Spagna (transiente, ma presente
+       nelle Isole Baleari), Portogallo.
+       Oceania: assente
+
+
+       Mappa EPPO/CABI
+
+
+
+
+                                                     https://gd.eppo.int/taxon/XYLEFA/distribution
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 6 di 26
+
+
+             1.3.1 Presenza in Italia:
+
+            -     dal 2013 in Puglia principalmente su olivo, ma anche in altre specie vegetali fra le
+                  qualiNerium oleander, Prunus dulcis, Prunus avium, Polygala myrtifolia, Rhamnus
+                  alaternus, Westringia fruticosa, Acacia saligna, Spartium junceum, Cistus sp., Salvia
+                  rosmarinus, Lavandula sp., Myrtus communis;
+            -     dal 2018 In Toscana su varie specie vegetali fra le quali Polygala myrtifolia, Prunus
+                  dulcis, Rhamnus alaternus, Spartium junceum, Calicotome villosa, Laurus nobilis;
+            -     2021 nel Lazio (Canino, VT) su Prunus dulcis;
+            -     2022 nel Lazio (Tarquinia, VT) su Prunus dulcis e Spartium junceum.
+            -     2024 in Puglia su Vitis vinifera.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 10 di 26
+
+
+       2. Aspetti biologici dell’organismo
+
+       2.1 Morfologia e biologia dell’organismo nocivo
+
+       Xylella fastidiosa è un batterio gram-negativo con un ampio numero di specie vegetali ospiti
+       (oltre 500 tra specie erbacee e legnose), alcune delle quali di grande importanza economica
+       (vite, agrumi, piante da frutto, caffè), oltre a specie spontanee tipiche della macchia
+       mediterranea (ginestra, alaterno, calicotome, elicriso, rosmarino, cisto, mirto, alloro,
+       lavanda). È un batterio asporigeno che colonizza i vasi xilematici dell’ospite contribuendo,
+       attraverso la produzione di biofilm, all’occlusione dei vasi con conseguenze che possono
+       portare a morte la pianta. I sintomi assomigliano a quelli causati da stress idrico. Sebbene le
+       cellule batteriche possano muoversi sistemicamente attraverso i vasi xilematici di piante
+       sensibili infette, in alcune piante ospiti, tuttavia, la loro presenza può rimanere limitata in
+       alcune parti della pianta (Purcell and Saunders, 1999). Il periodo di tempo tra l'inoculazione
+       e la comparsa di sintomi (periodo di incubazione) è altamente variabile e varia da pochi mesi
+       ad anni, a seconda del genotipo X. fastidiosa, la specie ospite, lo stadio fisiologico (età) della
+       pianta e le condizioni di crescita (EFSA 2018, 2019a). D'altra parte, alcune specie vegetali
+       potrebbero anche non esprimere alcun sintomo, in alcuni casi anche in base alle condizioni
+       di crescita (EFSA, 2019). Il batterio è trasmesso da emitteri fitomizi (Fig.1) che si nutrono
+       succhiando la linfa dei vasi xilematici. In Italia l’insetto vettore più comune è Philaenus
+       spumarius e in misura minore Neophilaenus campestris e P. italosignus (Cavalieri et al.,
+       2019). P. spumarius è presente in tutta Europa ed è una specie polifaga, con un gran numero
+       di piante ospiti. P. italosignus è una specie autoctona in Italia diffusa soprattutto nelle regioni
+       meridionali e in Sicilia. N. campestris è presente soprattutto in Europa occidentale e compie
+       il proprio ciclo vitale su piante erbacee. A livello europeo altre specie su cui è posta
+       attenzione sono Aphrophora spp. (Casarin et al., 2022), Draeculacephala robinsoni (Rösch
+       et al., 2022) e Cicadella viridis (Bodino et al., 2022). Per quest’ultima, è stato escluso il ruolo
+       nella trasmissione di X. fastidiosa da olivo a olivo (Bodino et al., 2022).
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                        Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                       Pag. 10 di 26
+
+
+
+
+           Fig.1 - Tratto da: https://olivoeolio.edagricole.it/agrofarmaci-difesa/vettori-della-xylella-monitoraggio-e-controllo
+
+
+       Le malattie causate da X. fastidiosa derivano dall'interazione tra il batterio, le piante ospiti,
+       comprese le piante ospiti asintomatiche (che fungono da serbatoi), gli insetti vettori e le
+       condizioni ambientali (EFSA, 2018; Chatterjee et al., 2008).
+       Il batterio viene trasmesso in modo persistente senza un periodo di latenza dopo
+       l'acquisizione (Almeida et al., 2005). I vettori (sia ninfe che adulti) acquisiscono i batteri
+       nutrendosi della linfa xilematica dell’ospite e possono inoculare l'agente patogeno in piante
+       sane immediatamente dopo l'acquisizione. Nell’insetto i batteri restano limitati al canale
+       alimentare e non colonizzano il resto del corpo in maniera sistemica. Aderiscono e si
+       moltiplicano in parti dell’intestino quali il precibarium e il cibarium; ciò implica che i vettori
+       perdano infettività con la muta, in quanto durante questa fase l’intestino si rinnova. Pertanto,
+       gli adulti appena emersi devono acquisire nuovamente X. fastidiosa per diventare infettivi.
+       Una volta infettivi, i vettori adulti invece rimangono capaci di trasmettere il batterio per tutta
+       la loro vita (Almeida et al., 2005). Inoltre, il batterio non viene trasmesso per via transovarica
+       alla progenie del vettore (Freitag, 1951). Gli adulti alati, grazie alla loro elevata mobilità e alla
+       capacità del batterio di moltiplicarsi e persistere all’interno di essi, sono i principali
+       responsabili della diffusione di X. fastidiosa. La trasmissione di X. fastidiosa a nuove piante
+       ospiti avviene anche in presenza di pochissime cellule batteriche vive nell’intestino del
+       vettore (Hill e Purcell, 1995). L'efficienza della trasmissione varia sostanzialmente a seconda
+       della specie di insetto, della pianta ospite e del genotipo X. fastidiosa. Di seguito è
+       rappresentato il ciclo vitale di P. spumarius nella regione Puglia (Italia) (tratto da EFSA,
+       2019). (Fig. 2)
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                         Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                        Pag. 10 di 26
+
+
+
+
+                                      Fig. 2 - Tratto da EFSA, 2019. Pest survey card on Xylella fastidiosa.
+       2.2 Sintomi/segni
+       La tipologia di sintomo dipende dalla combinazione fra la specie vegetale ospite e il ceppo
+       di X. fastidiosa. I sintomi sulle specie ospiti principali (per impatto della malattia e interesse
+       commerciale) sono riportati di seguito.
+       Olivo
+       Sintomi di bruscatura fogliare e deperimento (dieback) su olivo sono stati descritti in
+       California (Krugner et al., 2014) in associazione a X. fastidiosa subsp. multiplex. Tuttavia,
+       non è stata soddisfatta la prova di patogenicità, non essendo certa la correlazione fra la
+       presenza di X. fastidiosa e i sintomi. In Puglia (sud Italia) la sindrome del disseccamento
+       rapido dell’olivo è stata associata a
+       X. fastidiosa subsp. pauca (Saponari et al., 2013). La malattia si manifesta (Fig. 3) con
+       bruscature fogliari, disseccamento della porzione apicale e marginale della foglia e repentino
+       disseccamento di rami e drupe in accrescimento. La chioma presenta disseccamenti a carico
+       di rami e/o branche in maniera irregolare (‘pelle di leopardo’). Il decorso della malattia porta
+       le piante a morte.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                      Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                     Pag. 10 di 26
+
+
+
+
+          Fig.3 - Sintomi di disseccamento rapido dell’olivo in piante di olivo. Foto Donato Boscia, CNR, Istituto Protezione
+                 Sostenibile Piante (IPSP), Bari
+
+       Vite
+       Il sintomo principale su vite è la bruscatura fogliare (Fig. 4). I margini fogliari disseccano
+       rapidamente accompagnati da un alone clorotico, l’intera lamina fogliare può disseccare. I
+       tessuti infetti possono maturare irregolarmente mostrando parti non lignificate (verdi) su tralci
+       lignificati (livello internodi). È possibile il disseccamento dei grappoli che rimangono attaccati
+       al tralcio, mentre il tronco non presenta alterazioni.
+
+
+
+
+                  Fig. 4 - Bruscatura fogliare e maturazione irregolare dei tessuti su vite. Foto: J. Clark, University of
+                  California, Berkeley (US) (https://gd.eppo.int/taxon/XYLEFA/photos).
+
+
+       Agrumi
+       I primi sintomi fogliari appaiono come piccole macchie clorotiche sulla superficie superiore
+       che corrispondono a macchie brune dall’aspetto gommoso sul lato inferiore della foglia (Fig.
+       5). I sintomi si rendono più evidenti sulle foglie completamente espanse indipendentemente
+       dall'età della pianta e principalmente sulle cultivar di arancio dolce. La clorosi internervale
+       fogliare è somigliante alla carenza di zinco.
+       Gli alberi infetti si presentano deboli e la chioma va incontro a defogliazione e deperimento
+       di rami e branche.
+       Fioritura e allegagione hanno un decorso classico, ma nelle piante colpite non si verifica un
+       normale diradamento dei frutti che rimangono piccoli, maturano in anticipo con una
+       consistenza cuoiosa. Le piante di solito non muoiono, ma la resa e la qualità del frutto sono
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 10 di 26
+
+
+
+       fortemente ridotte (Donadio & Moreira, 1998).
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                       Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                      Pag. 10 di 26
+
+
+
+
+                  Fig. 5 - Clorosi variegata degli agrumi: sintomi di clorosi internervale su foglia e maturazione anticipata
+                 dei frutti. Foto: M. Scortichini, CREA-OFA Roma (https://gd.eppo.int/taxon/XYLEFA/photos) e Alexander
+                   Purcell, University of California (https://www.forestryimages.org/browse/detail.cfm?imgnum=1262026)
+
+
+       Caffè
+       Sintomi di bruscatura fogliare sono presenti come imbrunimenti della lamina fogliare a partire
+       dai margini. Le foglie infette cadono prematuramente. I germogli hanno una crescita stentata
+       e le foglie apicali appaiono clorotiche e di taglia ridotta (Fig. 6). I margini fogliari possono
+       essere più o meno arricciati (curling) e le piante presentano raccorciamento degli internodi e
+       crescita stentata. I sintomi possono progredire col deperimento dei germogli. In Costa Rica
+       piante infette di caffè mostravano sintomi di crescita irregolare con un aspetto arricciato
+       atipico della vegetazione al quale è stato associato il termine spagnolo di “crespera”.
+
+
+
+
+                   Fig. 6 - Arricciamento dei margini fogliari, clorosi e deformazione delle foglie (asimmetria).Foto Bruno
+                       Legendre. Anses, Plant Health Laboratory, Angers (FR)e Maria Bergsma-Vlami, NPPO (NL).
+                                                (https://gd.eppo.int/taxon/XYLEFA/photos)
+       Pesco
+       Le piante infette presentano internodi raccorciati, incrementata ramificazione laterale, foglie
+       affastellate e di colore verde più scuro del normale, fioritura anticipata, permanenza su rami
+       di fiori e foglie, pezzatura ridotta di frutti e maturazione anticipata (Fig. 7). Lo sviluppo dei
+       sintomi è lento (fino a 18 mesi). La chioma assume un aspetto compatto e arrotondato. Non
+       si manifestano i sintomi di bruscatura fogliare.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                        Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                       Pag. 10 di 26
+
+
+
+
+                  Fig. 7 - Foto: M. Scortichini, CREA-OFA Roma (https://gd.eppo.int/taxon/XYLEFA/photos)
+       Erba medica
+       La pianta mostra una crescita stentata che può non essere evidente per molti mesi dopo
+       l’infezione. Le giovani foglie sono più piccole e spesso presentano una colorazione più scura
+       rispetto alle piante sane. Il fittone è di dimensioni normali, ma il legno hanno un colore
+       insolitamente giallastro, con sottili strisce scure di tessuto morto (Fig. 8). Nelle piante appena
+       infettate si osserva un ingiallimento dei tessuti al di sotto dello strato corticale esterno, mentre
+       gli strati più interni non presentano alterazioni. I sintomi di nanismo peggiorano
+       progressivamente, eventualmente portando la pianta a morte.
+
+
+
+
+                   Fig. 8 - Crescita stentata della pianta con vegetazione più scura rispetto alla sana. Foto: R.E. Davis and
+                                    M.J. Davis, APS image data base
+                                    https://imagedatabase.apsnet.org/search.aspx?publicationId=229&ps=1
+
+
+       Varie specie vegetali (verde urbano, foreste, macchia mediterranea, materiale
+       vivaistico) Molte specie vegetali presentano il caratteristico sintomo della bruscatura
+       fogliare (Fig. 9). Esempi sono il mandorlo, il ciliegio, il mirtillo e varie specie presenti nel verde
+       urbano come Acer spp., Cornus florida, Celtis occidentalis, Liquidambar styraciflua, Morus
+       alba, Platanus spp., Quercus spp. e Ulmus americana (Gould & Lashomb, 2007), Polygala
+       myrtifolia, oleandro, mimosa e specie tipiche della macchia mediterranea come rosmarino,
+       lavanda, mirto, cisto e ginestra. Nelle specie a foglia espansa, le foglie colpite hanno una
+       necrosi marginale talora circondata da un alone clorotico (giallo) o rosso. Nelle altre specie si
+       osservano sintomi di disseccamento irregolari nella pianta. In generale, i sintomi
+       progrediscono dalle foglie più vecchie a quelle più giovani e, con il progredire della malattia, i
+       rami seccano e la pianta può presentare un aspetto spoglio, fino ad andare incontro a morte
+       (Fig. 9).
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                      Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                     Pag. 13 di 26
+
+
+
+
+                             Polygala myrtifolia                                            Nerium oleander
+
+
+
+
+                  Lavandula angustifolia                                                  Rosmarinus officinalis
+
+
+
+
+                  Myrtus communis                                                                   Cistus sp.
+
+
+
+
+                  Acacia saligna                                                                           Spartium junceum
+                  Fig. 9 Tutte le foto in questa sezione, se non diversamente indicato sono fornite da: Donato Boscia, CNR,
+                                                       Istituto Protezione Sostenibile Piante (IPSP), Bari
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 14 di 26
+
+
+
+       2.3 Piante ospiti (ospiti principali/minori)
+       Secondo l’ultimo rapporto EFSA (EFSA, 2023) sono 696 le specie vegetali ospiti di X. fastidiosa di
+       cui 307 generi e 88 famiglie. Questo rapporto EFSA riporta circa 15 specie vegetali in più rispetto al
+       precedente rapporto del 2020 (EFSA, 2023). Il database in oggetto include tutte le specie di piante
+       ospiti in cui l'agente patogeno è stato rilevato e segnalato. Le specie maggiormente attenzionate
+       sono quelle ritrovate positive sul territorio europeo e sono indicate dalla Commissione Europea ed in
+       continuo aggiornamento.
+       Il Regolamento (UE) 2020/1201 elenca, in allegato I, tutte le piante da impianto, escluse le sementi,
+       “ospiti” di X. fastidiosa e individua, in allegato II, le “piante specificate”, ossia quelle notoriamente
+       sensibili a sottospecie specifiche dell’organismo nocivo. Le piante ospiti vengono sottoposte a
+       controlli ufficiali al momento dell’introduzione nell’Unione e sono previsti controlli annuali sulle piante
+       specificate anche nella fase di primo spostamento all’interno del territorio dell’UE o al momento della
+       loro esportazione, in base ai requisiti fitosanitari dei diversi Paesi Terzi. In particolare, per le piante da
+       impianto, escluse le sementi, di Coffea, Lavandula dentata L., Nerium oleander L., Olea europaea
+       L., Polygala myrtifolia L. e Prunus dulcis (Mill.) D.A. Webb è previsto un controllo rafforzato, in quanto
+       considerate maggiormente sensibili alle diverse sub-specie europee di X. fastidiosa.
+
+
+       3. Siti di maggiore rischio
+       3.1 Aree a rischio/ Risk areas
+       Fondamentale è monitorare tutte le attività correlate ai pathway di introduzione del batterio:
+       commercio, movimentazione, importazione e preparazione di materiale di moltiplicazione delle
+       piante. Di conseguenza rappresentano siti a rischio i vivai, i centri di giardinaggio, i porti, gli aeroporti,
+       i centri di vendita di materiale vegetale di importazione da Paesi in cui è presente la malattia e le
+       principali vie di comunicazione a causa della possibile diffusione del vettore tramite i mezzi di
+       trasporto (hitchhiking) e rilascio involontario del vettore.
+       Sono fattori di rischio:
+            -     Movimento involontario di insetti vettori infetti associati alla movimentazione di
+                  materiale vegetale da aree in cui X. fastidiosa è presente verso aree indenni.
+            -     Spostamento intenzionale di materiale vegetale da parte dei cittadini, in
+                  particolare dei collezionisti di piante.
+            -     Attività in aree urbane correlate ad acquisto/movimentazione di piante da parte di
+                  cittadini (mercati, vivai, centri di giardinaggio).
+            -     Distanza dalla zona costiera (fattore).
+            -     Altitudine (fattore).
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 15 di 26
+
+       Sono siti a rischio:
+          -     Percorsi turistici (trasporto di veicoli e imbarcazioni dalle aree in cui è presente il batterio verso
+                aree indenni idonee alla sua stabilizzazione); zone di transito da rientro vacanziero, come aree
+                ristoro e/o tratti autostradali e aree di sosta camper.
+          -     Punti di ingresso portuali e/o transfrontalieri.
+          -     Campi e frutteti/vigneti trascurati e abbandonati nelle aree rurali.
+          -     Nuovi impianti di specie arboree.
+          -     Impianti di piante specificate che presentino sintomi di deperimento.
+          -     Aree naturali o naturalizzate specialmente nella zona costiera coperte da vegetazione
+                spontanea e macchia mediterranea.
+       I siti a maggiore rischio secondo la codifica Europhyt:
+       All’aperto: 1.1 campo (a seminativo, a pascolo); 1.2 frutteto/vigneto; 1.3 vivaio; 1.4 foresta; 2.2 siti
+       pubblici; 2.5.2 centro giardinaggio.
+       Al chiuso: 3.1 serra
+       Le indagini sono effettuate utilizzando le linee guida per indagini statisticamente attendibili e basate
+       sul rischio (EFSA, 2020b); si applicano sia alle aree demarcate che indenni, con modalità definite
+       dai regolamenti.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 16 di 26
+
+
+
+       4. Indagine/survey
+       Modalità di indagine previste
+
+            ✓ Osservazione visiva – Visual Inspection
+            ✓ Campionamento – Sample Taking
+            ✓ Indagine con trappole – Trapping
+
+
+       4.1 Osservazione visiva
+
+       Aspetti generali: al fine di superare le criticità rappresentate dal periodo di latenza e
+       l’assenza di sintomi, il Regolamento (UE) 2020/1201 prevede la realizzazione di indagini
+       statisticamente valide e basate sul rischio (EFSA 2023), che si basano sul prelievo di
+       campioni vegetali per l’analisi di laboratorio (vedi paragrafo successivo). A solo titolo
+       informativo nel paragrafo 2.2 sono riportati alcuni esempi di sintomo indotto da X. fastidiosa.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 17 di 26
+
+
+
+       4.2 Campionamento
+
+       Aspetti generali: durante il campionamento l’ispezione visiva supporta l’individuazione del
+       quadro sintomatologico causato da X. fastidiosa. Come noto, infezioni da X. fastidiosa
+       comportano l’insorgenza di sintomi aspecifici, analoghi a quelli causati da patogeni vascolari
+       di diversa origine (es. fungina) o da diversi fattori abiotici (stress ambientali, carenze idriche,
+       inquinanti atmosferici, problemi nutrizionali, scottature solari). Il lungo periodo di latenza che
+       intercorre tra l’infezione e la comparsa dei sintomi rappresenta un ulteriore fattore di criticità,
+       influenzando significatamene la possibilità di una intercettazione precoce delle infezioni
+       tramite le sole ispezioni visive. Il periodo asintomatico varia significativamente in
+       conseguenza               dei       molteplici      processi   biologici       coinvolti     nell’interazione
+       ospite/sottospecie/ambiente. Il campionamento prevede la raccolta di campioni di materiale
+       vegetale sintomatico e/o asintomatico e/o insetti vettori.
+       Le linee guida sull'ispezione sono fornite nel PM 3/81 “Inspection of consignments for Xylella
+       fastidiosa” (EPPO, 2022a) e PM 3/82 “Inspection of places of production for Xylella
+       fastidiosa” (EPPO, 2022b). L’ISPM 31 (IPPC, 2008) fornisce indicazioni sul numero di piante
+       da campionare in casi specifici (es. vivai).
+       Lo strumento statistico RIPEST supporta la definizione del numero di campioni da prelevare,
+       utilizzando un approccio basato sull’inserimento di vari parametri come input (dimensioni
+       della popolazione target, il numero di unità epidemiologiche e la percentuale di piante per
+       ciascuna di esse, i fattori di rischio, l’efficacia dei metodi di campionamento e la sensibilità
+       dei metodi di diagnosi). I campioni per il laboratorio devono essere composti da rami/talee se
+       possibile con foglie attaccate o foglie con picciolo integro. Il campione dovrebbe includere
+       foglie mature evitando giovani germogli in crescita. Studi recenti condotti nell'ambito del
+       progetto XF-ACTORS hanno dimostrato che negli olivi infetti il batterio è stato rilevato in modo
+       più consistente nei rametti semi-lignificati di un anno di età che nelle foglie, soprattutto
+       quando i campioni provengono da cultivar di olivo resistenti (ovvero con bassa popolazione
+       batterica).
+       Per le piante piccole si può inviare al laboratorio l'intera pianta.
+       La concentrazione batterica in planta dipende da fattori ambientali, dai ceppi e dall’ospite
+       vegetale. Il campionamento dovrebbe preferibilmente essere eseguito durante il periodo di
+       crescita attiva della pianta per massimizzare la probabilità di rilevamento (Hopkins, 1981).
+       Dopo che i campioni sono stati prelevati, devono essere inviati al laboratorio il prima possibile.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                              Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                             Pag. 18 di 26
+
+
+    Tipologia                                   Periodo di Prelievo             Come
+                          Cosa prelevare                                                                            Immagini
+   campione                                                                   conservare
+
+
+
+
+                      Piante                                             Durante il
+                                               Piante al chiuso:
+                      sintomatiche:                                      trasporto:
+                                               campionamenti tutto
+                      rami/talee, 10 - 25                                mantenere i
+                                               l'anno                                           Tratto da: https://www.ponteproject.eu/wp-
+Campioni da           foglie.                                            campioni
+                                                                                                content/uploads/2017/05/XYLELLA-WORKSHOP-
+piante                                                                   lontano da fonti
+                                               Piante      all’aperto:                          MANUAL-DETECTION-ENG-web.pdf
+sintomatiche e/o      Piante                                             di calore.
+                                               tutto l’anno.
+asintomatiche         asintomatiche: 4 -                                 Verifica
+                                               Per dettagli vedi
+                      10 rami ai quattro                                 dell’assenza di
+                                               paragrafo 3.2.1.1
+                      punti cardinali della                              vettori nei
+                                               EPPO PM 7/24 (5).
+                      chioma.                                            sacchetti dei
+                                                                         campioni
+                      .
+
+                                                                                                Tratto da: https://www.ponteproject.eu/wp-
+                                                                                                content/uploads/2017/05/XYLELLA-WORKSHOP-
+                                                                                                MANUAL-DETECTION-ENG-web.pdf
+
+
+
+
+         4.3 Indagine con trappole
+
+
+         Aspetti generali:
+         Sono di seguito riportate le modalità di campionamento degli insetti vettori.
+                                                                                 Periodo di esposizione
+                            Tipologia di             Posizionamento                      - frequenza
+ Sito di indagine                                                                                                          Immagini
+                                trappola                  trappola                     consigliabile dei
+                                                                                           controlli
+ Vedi sezione 3,          Trappola              - Tarda primavera – inizio      Variabile in base al
+                          cromotropica
+ con particolare          gialla                estate e tarda estate-          contesto geografico:
+ riferimento a:                                 autunno: posizionamento         dalla tarda primavera
+ campi,                                         a livello della vegetazione     all'autunno.
+ frutteti/vigneti,                              spontanea;                      Le trappole devono
+ aree naturali o                                - Giugno-fine agosto:           essere sostituite ogni 10-
+ naturalizzate, vie                             posizionamento in               15 giorni (al massimo
+ di trasporto                                   chioma.                         ogni 21 giorni).
+ principale.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                           Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                          Pag. 19 di 26
+
+
+                        Retino da sfalcio      Il campionamento degli       Variabile in base al
+                        (A); tecnica del       insetti adulti deve essere   contesto geografico:
+                        frappage su            effettuato sulle erbacee     dalla tarda primavera
+                        arboree (B);           nei periodi aprile-maggio    all'autunno.
+                        aspiratori a           e settembre-novembre e
+                        motore (C).            sulle arboree nel periodo
+                                               giugno-settembre.
+
+
+
+
+                                                                                                        Tratto da: WORKSHOP-MANUAL-
+                                                                                                        INSECTS-web.pdf
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 20 di 26
+
+
+
+       5. Diagnosi
+       L’attività di diagnosi di Xylella fastidiosa è delineata dal Decreto del Ministero delle Politiche Agricole
+       Alimentari e Forestali del 24 gennaio 2022. “Adozione del Piano di emergenza nazionale per il
+       contrasto di Xylella fastidiosa (Well et al.) (GU Serie generale - n. 64 del 17-3-2022.)” e dal
+       Regolamento di esecuzione (UE) 2021/1688 della Commissione del 20 settembre 2021 che modifica
+       il Regolamento di esecuzione (UE) 2020/1201 per quanto riguarda gli elenchi delle piante ospiti e
+       delle piante specificate e i metodi di prova per l’identificazione della Xylella fastidiosa.
+
+
+       Protocolli ufficiali di riferimento
+       PM 7/24 Xylella fastidiosa (ultima versione)
+       PM7/141 Philaenus spumarius, Philaenus italosignus and Neophilaenus campestris (ultima versione)
+       ISPM 27 Diagnostic protocols for regulated pests DP 25: Xylella fastidiosa (ultima versione)
+
+
+       5.1 Campione/Matrice
+       Il campione può essere costituito da vettore (insetto) o da matrici vegetali sintomatiche o
+       asintomatiche.
+
+
+       5.1.1 Materiale vegetale
+       La tipologia di materiale (campioni singoli o campioni multipli) deve essere trattata secondo quanto
+       indicato nello standard EPPO PM7/24 (3.2 Sampling of plant material and sample preparation in the
+       laboratory). Le specifiche riguardanti il materiale asintomatico sono indicate nella tabella 1, 2 e 3
+       dello standard EPPO PM7/24 dove vengono inserite tutte le indicazioni per la preparazione del
+       campione.
+       Tutte le specifiche riguardanti la conservazione del materiale prelevato e il suo mantenimento sono
+       riportate nel protocollo EPPO PM7/24.
+
+
+       5.1.2 Vettori
+       La tipologia di prelievo degli insetti vettori, la preparazione del campione e la sua conservazione è
+       indicata nello standard EPPO PM7/24 (3.3 Sampling of vectors and sample preparation in the
+       laboratory).
+       Lo standard EPPO PM7/141 fornisce invece la descrizione morfologica dei diversi stadi vitali (uova,
+       stadi giovanili e adulto) di P. spumarius e dei principali caratteri distintivi degli adulti di P. italosignus
+       e N. campestris, specie di insetti riconosciute come vettori di X. fastidiosa in Europa.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 21 di 26
+
+
+       5.1.3 Estrazione
+
+       L'estrazione del DNA da campioni vegetali e insetti vettori per le analisi molecolari può
+       essere ottenuta utilizzando kit commerciali o mediante il metodo basato su tampone CTAB.
+
+       Le specifiche riguardanti i kit di estrazione oltre che la descrizione della procedura di
+       estrazione degli acidi nucleici a partire da insetto o da matrice vegetale sono descritte nel
+       protocollo standard EPPO PM7/24 Appendix 3.
+
+
+       5.2 Test di screening (Rilevamento)
+
+       5.2.1 Test di screening previsti all’interno del monitoraggio cofinanziato
+       Secondo il Regolamento di esecuzione (UE) 2020/1201 e sue successive modifiche i metodi
+       di prova per l’identificazione della Xylella fastidiosa, i test da utilizzare sono:
+              - Morphological identification (per i vettori) EPPO PM7/141 (sezione 4.1)
+              - PCR EPPO PM 7/24 Appendice 4 (sulla base di Minsavage et al. 1994);
+              - Real Time PCR EPPO PM 7/24 Appendice 5 (sulla base di Harper et al., 2010, erratum
+                  2013) e Appendice 7 (sulla base di Ouyang et al., 2013)
+              - LAMP EPPO PM 7/24 Appendice 12 (sulla base di primer sviluppati da Harper et al.
+                  2010).
+
+
+       5.3 Test per l’identificazione delle sottospecie di Xylella fastidiosa (All 4 del regolamento
+       di esecuzione (UE) 2020/1201 Parte B)
+
+              - MLST EPPO PM7/24 Appendice 16 (sulla base di Yuan et al., 2010);
+              - PCR EPPO PM7/24 Appendice 18 (sulla base di Pooler & Hartung, 1995) per la
+                  determinazione della sottospecie pauca
+              - PCR EPPO PM7/24 Appendice 19 (sulla base di Hernandez-Martinez et al., 2006) per
+                  la determinazione delle sottospecie fastidiosa, multiplex e sandyi;
+              - Real time PCR PM 7/24 Appendice 10 (sulla base di Dupas et al., 2019);
+              - Real time PCR PM 7/24 Appendice 11 (sulla base di Hodgetts et al., 2021);
+
+
+       L’esecuzione delle prove sopra riportate (5.2 test di screening e 5.3 test di identificazione) sono
+       riportate nello standard EPPO PM 7/24.
+       I diagrammi di flusso che descrivono la procedura diagnostica per X. fastidiosa sono presentati nelle
+       figure 1 e 2 (Introduction) nello standard EPPO PM 7/24.
+
+
+       5.4 Note:
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 22 di 26
+
+
+       Secondo quanto indicato dal Decreto 24 gennaio 2022 “Adozione del Piano di emergenza
+       nazionale per il contrasto di Xylella fastidiosa (Well et al.) (22A01653) (GU Serie Generale
+       n.64 del 17-03-2022)”
+       Nel caso di indagini condotte in area indenne, il risultato positivo delle analisi deve essere
+       confermato da un laboratorio nazionale di riferimento con un'ulteriore analisi molecolare tra
+       quelle elencate dal regolamento, diretta a parti diverse del genoma.
+       Le analisi sono effettuate sullo stesso campione vegetale o, se pertinente per l'analisi
+       molecolare utilizzata a fini di conferma, sullo stesso estratto vegetale.
+       L'identificazione delle sottospecie di Xylella fastidiosa è effettuata su ogni specie vegetale
+       risultata infetta dall'organismo nocivo specificato nell'area delimitata interessata.
+       In particolare, il DM 24/12/2022 definisce che nell’ambito della Rete nazionale, sono
+       riconosciuti come laboratori nazionali di riferimento per X. fastidiosa, conformemente a quanto
+       previsto dall’art. 101 del Reg. (UE) 2017/625, il Centro di ricerca Difesa e Certificazione del
+       CREA e il l’Istituto per la Protezione Sostenibile delle Piante del CNR.
+
+
+       Per campioni provenienti da aree delimitate non è richiesto alcun saggio di conferma.
+       Indipendentemente dalla zona di provenienza del campione, il metodo di prova può produrre
+       risultati inconclusivi o dubbi; in tali casi è necessario procedere alla ripetizione dell’analisi
+       utilizzando lo stesso metodo di prova.
+       Qualora il risultato della seconda analisi sia:
+                - positivo, l’analisi deve essere confermata applicando un metodo di prova diretto a
+                parti diverse del genoma;
+                - negativo, il campione viene assegnato con “X. fastidiosa non rilevata/assente”;
+                - inconclusivo, si procede ove possibile ad un nuovo campionamento, oppure ad una
+                nuova analisi sullo stesso campione vegetale o, se pertinente per l'analisi molecolare
+                utilizzata a fini di conferma, sullo stesso estratto vegetale; pertanto, è necessaria la
+                conservazione di un’aliquota di ciascun campione o estratto vegetale.
+       Qualora il risultato delle analisi producesse nuovamente un risultato inconclusivo il campione
+       sarà considerato come “X. fastidiosa non rilevata/assente”.
+       In quest’ultimo caso il Servizio Fitosanitario competente per territorio valuterà l’eventualità di
+       effettuare ulteriori indagini.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 23 di 26
+
+
+
+       Bibliografia
+
+
+       Almeida RPP, Blua MJ, Lopes JR and Purcell AH, 2005. Vector transmission of Xylella
+              fastidiosa: applying fundamental knowledge to generate disease management
+              strategies. Annals of the Entomological Society of America, 98, 775–786.
+       Bodino N., Cavalieri V., Saponari M., Dongiovanni C., Altamura G., Bosco D., 2022.
+              Transmission of Xylella fastidiosa subsp. pauca ST53 by the sharpshooter Cicadella
+              viridis from different source plants and artificial diets. Journal of Economic Entomology,
+              115 (6), 1852-1858.
+       Casarin N., Hasbroucq S., Carestia G., Glibert A., Bragard C., et. al. Investigating dispersal
+              abilities of Aphrophoridae in European temperate regions to assess the threat of
+              potential Xylella fastidiosa-based pathosystems. 2022. Journal of Pest Science
+              https://doi.org/10.1007/s10340-022-01562-9
+       Cavalieri V., Altamura G., Fumarola G., di Carolo M., Saponari M., Cornara D., Bosco D.,
+              Dongiovanni C., 2019. Transmission of Xylella fastidiosa Subspecies Pauca Sequence
+              Type 53 by different insect species. Insects, 29, 10(10):324.
+       Chatterjee S, Almeida RP and Lindow S, 2008. Living in two worlds: the plant and insect
+              lifestyles of Xylella fastidiosa. Annual Review of Phytopathology, 46, 243–271.
+       Davis MJ, Purcell AH & Thomson SV (1980) Isolation medium for the Pierce’s disease
+              bacterium. Phytopathology 70, 425–429.
+       Donadio LC & Moreira CS (1998) Citrus variegated chlorosis. Bebedouro, SP,
+              Brazil, FUNDECITRUS/FAPESP 166 p.
+       EFSA (European Food Safety Authority), 2018. Scientific report on the update of the Xylella
+              spp.      Host        plant     database.     EFSA    Journal     2018;16(9):       5408,   87   pp.
+              https://doi.org/10.2903/j.efsa.2018.5408.
+       EFSA (European Food Safety Authority), 2019. Pest survey card on Xylella fastidiosa. EFSA
+              Journal 2019; 53pp. doi:10.2903/sp.efsa.2019.EN-1667.
+       EFSA PLH Panel (EFSA Panel on Plant Health), 2019a. Update of the Scientific Opinion on
+              the risks to plant health posed by Xylella fastidiosa in the EU territory. EFSA Journal
+              2019;17(5):5665, 200 pp. https://doi: .org/10.2903/j.efsa.2019.5665.
+       EFSA (European Food Safety Authority), 2020a. Update of the Xylella spp. host plant
+              database – systematic literature search up to 30 June 2019. EFSA Journal 2020;18(4):
+              6114, 61 pp. http://doi: 10.2903/j.efsa.2020.6114.
+       EFSA (European Food Safety Authority), Lázaro E, Parnell S, Vicent Civera A, Schans J,
+              Schenk M, Schrader G, Cortiñas Abrahantes J, Zancanaro G and Vos S, 2020b.
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                         Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                        Pag. 24 di 26
+
+
+              Guidelines for statistically sound and risk-based surveys of Xylella fastidiosa. EFSA
+              supporting publication 2020:EN-1873. 76 pp. doi:10.2903/sp.efsa.2020.EN-1873.
+       EFSA (European Food Safety Authority), Gibin D., Gutierrez Linares A., Fasanelli E.,
+              Pasinato L., & Delbianco A. (2023). Update of the Xylella spp. host plant database –
+              systematic        literature       search    up   to   30     June      2023. EFSA        Journal, 21(12),
+              e8477. https://doi.org/10.2903/j.efsa.2023.8477.
+       EPPO 2023. PM 7/24 (5) Xylella fastidiosa. EPPO Bulletin 53:205–276.
+       EPPO 2020. PM 7/141 (1) Philaenus spumarius, Philaenus italosignus and Neophilaenus
+              campestris. Bulletin OEPP/EPPO Bulletin (2020) 50 (1), 32–40.
+       EPPO 2021. PM 7/129 (2) DNA barcoding as an identification tool for a number of regulated
+              pests Bulletin OEPP/EPPO Bulletin (2021) 51 (1), 100–143.
+       EPPO 2022. PM 3/81 (3) Inspection of consignments for Xylella fastidiosa. Bulletin
+              OEPP/EPPO Bulletin (2022) 52, 544–556.
+       EPPO 2022. PM 3/82 (3) Inspection of places of production for Xylella fastidiosa. Bulletin
+              OEPP/EPPO Bulletin (2022) 52, 557–571.
+       Freitag JH, 1951. Host range of the Pierce's disease virus of grapes as determined by insect
+              transmission. Phytopathology, 41, 10.
+       Gould, AB and Lashomb, JH (2007) Bacterial leaf scorch (BLS) of shade trees.
+              https://www.apsnet.org/edcenter/apsnetfeatures/Pages/BacterialLeafScorch.aspx.
+       Harper SJ, Ward LI & Clover GRG (2010) Development of LAMP and real-time PCR methods
+              for the rapid detection of Xylella fastidiosa for quarantine and field applications.
+              Phytopathology 100, 1282–1288.
+       Hernandez-Martinez R, Costa HS, Dumenyo CK & Cooksey DA (2006) Differentiation of
+              strains of Xylella fastidiosa infecting grape, almonds, and oleander using a multiprimer
+              PCR assay. Plant Disease 90, 1382–1388.
+       Hill BL & Purcell AH (1995) Acquisition and retention of Xylella fastidiosa by an efficient
+              vector, Graphocephala atropunctata. Phytopathology 85, 209–212.
+       Hopkins D L (1981) Seasonal concentration of the Pierce's disease bacterium in grapevine
+              stems, petioles, and leaf veins. Phytopathology 71, 415-418.
+       Krugner R, Sisterson MS, Chen JC, Stenger DC & Johnson MW (2014) Evaluation of olive as
+              a host of Xylella fastidiosa and associated sharpshooter vectors. Plant Disease 98,
+              1186–1193.
+       IPPC, 2008. International Standards for Phytosanitary Measures (ISPM) No. 31
+              Methodologies for sampling of consignments
+       Lantero E, Matallanas BM, Pascual S & Callejas C (2018) PCR species-specific primers for
+                                                     Servizio fitosanitario nazionale
+Documento tecnico ufficiale n. 39                                     Schede tecniche organismi nocivi
+
+Scheda tecnica per indagini su: Xylella fastidiosa                    Pag. 25 di 26
+
+
+              molecular gut content analysis to determine the contribution of generalist predators to
+              the biological control of the vector of Xylella fastidiosa. Sustainability 2018, 2207.
+       Minsavage GV, Thompson CM, Hopkins DL, Leite RMVBC & Stall RE (1994) Development
+              of a polymerase chain reaction protocol for detection of Xylella fastidiosa in plant tissue.
+              Phytopathology 84, 45, 6–461.
+       Ouyang P, Arif M, Fletcher J, Melcher U & Ochoa Corona FM (2013) Enhanced reliability
+              and accuracy for field deployable bioforensic detection and discrimination of Xylella
+              fastidiosa subsp. pauca, causal agent of citrus variegated chlorosis using Razor Ex
+              technology and TaqMan Quantitative PCR. PLoS ONE 8, e81647.
+       Pooler MR & Hartung JS (1995) Specific PCR detection and identification of Xylella fastidiosa
+              strains causing citrus variegated chlorosis. Current Microbiology 31, 377–381.
+       Purcell AH and Saunders SR, 1999. Fate of Pierce's disease strains of Xylella fastidiosa in
+              common riparian plants in California. Plant Disease, 83(9), 825-830.
+       Rösch V, Marques E, Miralles-Núñez AD, Zahniser JN, Wilson MR (2022) Draeculacephala
+              robinsoni Hamilton, 1967 (Hemiptera: Auchenorrhyncha: Cicadellidae), a newly
+              introduced species and genus in Europe with comments on its identification. Zootaxa
+              5116(3), 439-448.
+       Saponari M, Boscia D, Nigro F & Martelli GP (2013) Identification of DNA sequences related
+              to Xylella fastidiosa in oleander, almond and olive trees exhibiting leaf scorch symptoms
+              in Apulia (southern Italy). Journal of Plant Pathology 95, 668.
+       Yuan, X., Morano, L., Bromley, R., Spring-Pearson, S., Stouthamer, R., and Nunney, L.
+              (2010) Multilocus Sequence Typing of Xylella fastidiosa Causing Pierce’s Disease and
+              Oleander Leaf Scorch in the United States . Phytopathology
+

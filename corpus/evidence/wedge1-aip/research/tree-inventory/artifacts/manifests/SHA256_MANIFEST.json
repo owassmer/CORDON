@@ -1,0 +1,443 @@
+{
+  "generated_utc": "2026-08-22T06:03:24.699508+00:00",
+  "files": [
+    {
+      "path": "research/tree-inventory/artifacts/acquired/CanHeMonR.zip",
+      "relative_path": "artifacts/acquired/CanHeMonR.zip",
+      "bytes": 180103,
+      "sha256": "454bf6f3d8840f96e1bbec7d88ff4751b2dd4043c52d71e86a4380710e209e06"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/EFSA_S6_P1_BECK.pdf",
+      "relative_path": "artifacts/acquired/EFSA_S6_P1_BECK.pdf",
+      "bytes": 3188555,
+      "sha256": "9c5d7e20dd8e4cd1aafb3e65dc8e6f0fe2c62dd5fb883d88c7ba5c5755e047ff"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/Ortofoto2015_IR_qPCR67.tif",
+      "relative_path": "artifacts/acquired/Ortofoto2015_IR_qPCR67.tif",
+      "bytes": 7079525,
+      "sha256": "bb5ebd2d619cc0115a2175c64ce07a58175db32c89b4f2c05147f1c5c2bbf117"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/Ortofoto2015_qPCR67.tif",
+      "relative_path": "artifacts/acquired/Ortofoto2015_qPCR67.tif",
+      "bytes": 7079525,
+      "sha256": "441d17f2520e7a4eaa1a00790bea4270a1821f0500c22b392e0ed13719f3838b"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/Xf-NPlants-2018.zip",
+      "relative_path": "artifacts/acquired/Xf-NPlants-2018.zip",
+      "bytes": 3210718,
+      "sha256": "44ee5727abd894edf6d677895813e00d06c573b20bea488d3bb243dd1082db5b"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/LICENSE",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/LICENSE",
+      "bytes": 1122,
+      "sha256": "3fa0b549bdfd791fe2c208428ec4d8f31dee8db88b293cd60aff5ee69d847442"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/README.md",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/README.md",
+      "bytes": 6700,
+      "sha256": "29ed96744e0dd8d8007f7be552a22aa8cc53d07ac449af7342e0d3cd9f0ad63d"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/Xylella-NPlants.Rproj",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/Xylella-NPlants.Rproj",
+      "bytes": 205,
+      "sha256": "3a81ccc25a62f1a31c7d3404389935ced50831abea5e848408745ad1a1bf6126"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/codes/Analysis1.R",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/codes/Analysis1.R",
+      "bytes": 15022,
+      "sha256": "052159f20021f8da88cd44d1ff9c2176f1ce99ed10ec043ebb59c9c1e391ff1f"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/codes/Analysis2.R",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/codes/Analysis2.R",
+      "bytes": 15201,
+      "sha256": "4dc05cfa20bdaf9a04fd9e09f1c9d4cdcc650143676d89d602f0f88d38308450"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/codes/Analysis3.R",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/codes/Analysis3.R",
+      "bytes": 6699,
+      "sha256": "e012aad9e3360ace12133975940336804e72e1b321fc36b23e3b8f9cd29fac7b"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/codes/vif_function.r",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/codes/vif_function.r",
+      "bytes": 2119,
+      "sha256": "b741473dd71675ba029a11939a44226b81afbbf773835d17388059fab09d6032"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/data/1-Data_Global_model_Xf-updated.csv",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/data/1-Data_Global_model_Xf-updated.csv",
+      "bytes": 6859153,
+      "sha256": "2d7c0a1c20749271efae2b59162b8ee6940e64509738b1dfc1230c07f3e2d793"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/data/2-Data_Parcel_with_qPCR.csv",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/data/2-Data_Parcel_with_qPCR.csv",
+      "bytes": 65748,
+      "sha256": "9496c4e573db6f1df999cb2a7585825ff0dbbd68c0a96303e8cc56ed2cc52782"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/current/Xf-NPlants-2018-master/data/3-Data_Orchard_with_qPCR.csv",
+      "relative_path": "artifacts/acquired/current/Xf-NPlants-2018-master/data/3-Data_Orchard_with_qPCR.csv",
+      "bytes": 96863,
+      "sha256": "b239f16bcc546fd29cdf8da2a0d1c9f01121a48a470ae7518702287c82689049"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/acquired/history/7b56fe69.zip",
+      "relative_path": "artifacts/acquired/history/7b56fe69.zip",
+      "bytes": 172907534,
+      "sha256": "94f47cc8d8f4cc59010cc54e1a98da478421dad27b0f7a90911e62277f31f2e3"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/manifests/citations.json",
+      "relative_path": "artifacts/manifests/citations.json",
+      "bytes": 2190,
+      "sha256": "1027fb49aeaee5bb58e081747507fac1b01e392e32dd3f173d1b210e93a62608"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/requests/CSIC_JRC_DATA_REQUEST_DRAFT.md",
+      "relative_path": "artifacts/requests/CSIC_JRC_DATA_REQUEST_DRAFT.md",
+      "bytes": 2750,
+      "sha256": "9b2cde8739138d7313acd82725b8f34ef528249d9794ae78967696fa33329ae3"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/scripts/audit_quantalab_tables.py",
+      "relative_path": "artifacts/scripts/audit_quantalab_tables.py",
+      "bytes": 997,
+      "sha256": "48862ad6bf8205d6660c0415626a961d28f36425de44aa7581b5ec3b7bd2563b"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/scripts/inventory_recovered_rdata.R",
+      "relative_path": "artifacts/scripts/inventory_recovered_rdata.R",
+      "bytes": 984,
+      "sha256": "ff251f3c4e411965d0b9b25a3541990743969d3917d466926cc3b9d6819e20cd"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/scripts/reconstruct_qpcr67_2015.py",
+      "relative_path": "artifacts/scripts/reconstruct_qpcr67_2015.py",
+      "bytes": 8391,
+      "sha256": "55f708091bb821d2dcbf08ece8669a9be9b17f706537beb381410163d0e46853"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/CanHeMonR.MaxEnt_branches.json",
+      "relative_path": "artifacts/sources/CanHeMonR.MaxEnt_branches.json",
+      "bytes": 214,
+      "sha256": "8a131632f9b42c563d514026c9f205a62dcf0c0b8fbf32a02e4eafba654296a0"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/CanHeMonR.MaxEnt_commits.json",
+      "relative_path": "artifacts/sources/CanHeMonR.MaxEnt_commits.json",
+      "bytes": 65225,
+      "sha256": "1b155385c0f340d339a99a84720983da5d11464d0ed79ed6b494f2b93d83fa2e"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/CanHeMonR.MaxEnt_git_trees_master.json",
+      "relative_path": "artifacts/sources/CanHeMonR.MaxEnt_git_trees_master.json",
+      "bytes": 10694,
+      "sha256": "0e9183a1dac3106b4818545e572c63d4bf0e76c8f41da1453ae0b7f9265d1b8c"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/CanHeMonR.MaxEnt_repo.json",
+      "relative_path": "artifacts/sources/CanHeMonR.MaxEnt_repo.json",
+      "bytes": 5766,
+      "sha256": "54fc615dd080a59af302e49320eb74ea4c2ef90b370aa0e11c0ea844f79e98ff"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/DeadTrees_branches.json",
+      "relative_path": "artifacts/sources/DeadTrees_branches.json",
+      "bytes": 207,
+      "sha256": "b97f24328c29966f08f93d0dea8bfdd08c914dae86c6d2d85b6180a7b0b16d03"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/DeadTrees_commits.json",
+      "relative_path": "artifacts/sources/DeadTrees_commits.json",
+      "bytes": 262111,
+      "sha256": "b5aa59fd1a2abb1c3f43767a8557c36c7fd05721820eaef763a1ab737860d881"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/DeadTrees_git_trees_master.json",
+      "relative_path": "artifacts/sources/DeadTrees_git_trees_master.json",
+      "bytes": 5444,
+      "sha256": "1a2d0223950fd32f1a750556279d4dab15116300b8f7490caf89f9fed3fced67"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/DeadTrees_repo.json",
+      "relative_path": "artifacts/sources/DeadTrees_repo.json",
+      "bytes": 5520,
+      "sha256": "6f387c78c3e8c41c557e36ba0fa56c70d466eff581cfcb3420bca69409ce2dcc"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Mask_RCNN_branches.json",
+      "relative_path": "artifacts/sources/Mask_RCNN_branches.json",
+      "bytes": 207,
+      "sha256": "ca41b5b4bd2c6b0e702c5fbcb1277df9a2cd9d5fb1da1bc6fa9fb9abaa12dea2"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Mask_RCNN_commits.json",
+      "relative_path": "artifacts/sources/Mask_RCNN_commits.json",
+      "bytes": 334979,
+      "sha256": "b9f97bf4df2ca5e15c04590d4a469881871f1d7e378021e236d459ff82c24f6c"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Mask_RCNN_git_trees_master.json",
+      "relative_path": "artifacts/sources/Mask_RCNN_git_trees_master.json",
+      "bytes": 20502,
+      "sha256": "96eedc2ed65114f1569d1913820cdb38a1eea4b99f81457ba88f0779e9c9be44"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Mask_RCNN_repo.json",
+      "relative_path": "artifacts/sources/Mask_RCNN_repo.json",
+      "bytes": 16256,
+      "sha256": "3e8710b44ee6eb8c6bd5fd0b859c28a70b24e0d0925337eb52fa9fd00fb49dd4"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2013.json",
+      "relative_path": "artifacts/sources/Ortofoto2013.json",
+      "bytes": 5859,
+      "sha256": "96a0f629d480fdff05b0bca111b1d4eb850d34c47e13c4846747e7aec39faabf"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2013_export_url.txt",
+      "relative_path": "artifacts/sources/Ortofoto2013_export_url.txt",
+      "bytes": 265,
+      "sha256": "fc1a248d990f3d3102fc9f7ce37c64c01db515cfa7988f717e65689c49bc167e"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2015.json",
+      "relative_path": "artifacts/sources/Ortofoto2015.json",
+      "bytes": 3275,
+      "sha256": "0e8b65eac3a813490ba78fe37b8fdcdc8f247b038f1c23b33d6713dde26ae4f2"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2015_IR.json",
+      "relative_path": "artifacts/sources/Ortofoto2015_IR.json",
+      "bytes": 1868,
+      "sha256": "14984e15b1b34857a044b62b898355700a3b16deb64d386398a83be6f81bf951"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2015_IR_export_url.txt",
+      "relative_path": "artifacts/sources/Ortofoto2015_IR_export_url.txt",
+      "bytes": 270,
+      "sha256": "698195fc2283d35fcfbb0db43a3824db9ae89e5e0ed2889ec25b834df9b01c90"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2015_export_url.txt",
+      "relative_path": "artifacts/sources/Ortofoto2015_export_url.txt",
+      "bytes": 267,
+      "sha256": "8e64a1583e6cbc70b6f6ccb6bc3fce55452d019749e613c8eb4c3a82c97d82c0"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2016.json",
+      "relative_path": "artifacts/sources/Ortofoto2016.json",
+      "bytes": 3276,
+      "sha256": "b545409eaafa7edf7b3561a588de8b96f317c5f0eb3abe5cfa3b7dedc14619c7"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/Ortofoto2016_export_url.txt",
+      "relative_path": "artifacts/sources/Ortofoto2016_export_url.txt",
+      "bytes": 266,
+      "sha256": "4bc93ae6bf23f00c7c14afa51d5669b3ce9fd45068c56e5ccc8624d295750b51"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/cordis_failed/POnTE_D6.1_remote_sensing_HDS010.html",
+      "relative_path": "artifacts/sources/cordis_failed/POnTE_D6.1_remote_sensing_HDS010.html",
+      "bytes": 4074,
+      "sha256": "a1b9932598cf5891109fa3fba3ea61a31a949e495e304df4b9191a66f381e057"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/cordis_failed/XFACTORS_damage_metrics_datasets_HDS010.html",
+      "relative_path": "artifacts/sources/cordis_failed/XFACTORS_damage_metrics_datasets_HDS010.html",
+      "bytes": 4120,
+      "sha256": "e158b4b71c84d836ca7682b06bee6076823006dd257236cd30e5c702d1b8de2c"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/cordis_failed/XFACTORS_processing_chain_HDS010.html",
+      "relative_path": "artifacts/sources/cordis_failed/XFACTORS_processing_chain_HDS010.html",
+      "bytes": 4120,
+      "sha256": "93af6cf6552ae3fc81f8cdc946e31733bdf3be4d433b07ca6f581b9f8aa416ef"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/cordis_failed/XFACTORS_remote_early_indicators_HDS010.html",
+      "relative_path": "artifacts/sources/cordis_failed/XFACTORS_remote_early_indicators_HDS010.html",
+      "bytes": 4074,
+      "sha256": "a5581b3e05e1701f05bc6f5788a8967c3d5173bbc566fbd2a10f3083d61232c4"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/digital_csic_215092.json",
+      "relative_path": "artifacts/sources/digital_csic_215092.json",
+      "bytes": 4393,
+      "sha256": "36ca292f4b9e2e8bdcf18b6cfa627e12bd85bff093edf8da0d0648d63235e330"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/digital_csic_anubis_blocked.html",
+      "relative_path": "artifacts/sources/digital_csic_anubis_blocked.html",
+      "bytes": 4374,
+      "sha256": "5437cc22db0baa317a8f0685a5e2f5d649c3c4e2ffcc8b35d56eab064e36f5f7"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_branches.json",
+      "relative_path": "artifacts/sources/github_branches.json",
+      "bytes": 209,
+      "sha256": "da35996c9fb8ea136a627ddc640e1ba9f51237220478b79bf635f2b74bb6061b"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_canhemon.json",
+      "relative_path": "artifacts/sources/github_canhemon.json",
+      "bytes": 5139,
+      "sha256": "617a0687e472e38db8c2ba76c2e8b64de22c3f61a6a1e17a6cd68dc2105e6636"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_canhemon_tree.json",
+      "relative_path": "artifacts/sources/github_canhemon_tree.json",
+      "bytes": 38378,
+      "sha256": "e93a601187e368499afebd034067ff11591efdf0974e34b3c4be984ce69d510a"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_commits.json",
+      "relative_path": "artifacts/sources/github_commits.json",
+      "bytes": 411085,
+      "sha256": "4d15770d04c08e92ea98fce229c3e249a83051ebf96d4ef90e53afaa8f123aed"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_issues.json",
+      "relative_path": "artifacts/sources/github_issues.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_releases.json",
+      "relative_path": "artifacts/sources/github_releases.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_repo.json",
+      "relative_path": "artifacts/sources/github_repo.json",
+      "bytes": 5652,
+      "sha256": "14d7e7c6040d5d81439275d81ee8131a0db9120c96919fd3003cec76b58a6f4b"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_tags.json",
+      "relative_path": "artifacts/sources/github_tags.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_tree.json",
+      "relative_path": "artifacts/sources/github_tree.json",
+      "bytes": 2998,
+      "sha256": "26da9b627d32d023979baa2079c89528f12ae05a8320c890e383c95dba6ec436"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_user_MartinezLaura_repos.json",
+      "relative_path": "artifacts/sources/github_user_MartinezLaura_repos.json",
+      "bytes": 132930,
+      "sha256": "2fa30cde3510366a2f3480d89df921ceb8f5152c504b6ca57ed0054f17d70533"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_user_Quantalab_repos.json",
+      "relative_path": "artifacts/sources/github_user_Quantalab_repos.json",
+      "bytes": 6285,
+      "sha256": "cfdc12139bc595caf606a8a8635e400094aa6a2069ecc977e34ba9ef4029703a"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/github_user_pieterbeck_repos.json",
+      "relative_path": "artifacts/sources/github_user_pieterbeck_repos.json",
+      "bytes": 11902,
+      "sha256": "c266a4ec9a1b8a39d6b5a4a7a4e9ac5d85dfec6a909fea9b8738874d63c0c7ea"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/zenodo_1087231.json",
+      "relative_path": "artifacts/sources/zenodo_1087231.json",
+      "bytes": 7474,
+      "sha256": "5845524896f5b0a655b9c82f84fef1c0aa67f75f4b3f410d1c84fd97f78a2469"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/sources/zenodo_2540999.json",
+      "relative_path": "artifacts/sources/zenodo_2540999.json",
+      "bytes": 9602,
+      "sha256": "89286b15a54bfa0721eaf7e08f573320f7bdcb66aed4d0819d5d7e7346163e10"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/Ortofoto2015_IR_qPCR67.png",
+      "relative_path": "artifacts/validation/Ortofoto2015_IR_qPCR67.png",
+      "bytes": 1191966,
+      "sha256": "0d2dd966fab45f8b41842987962a4752fdf90c00158a3a51af4379390ee92ea8"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/Ortofoto2015_IR_qPCR67_overlay.png",
+      "relative_path": "artifacts/validation/Ortofoto2015_IR_qPCR67_overlay.png",
+      "bytes": 1549875,
+      "sha256": "b90ddd963f548e4d59b160f841baf651f688dbd2890c82a4203fb6f1e4277887"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/Ortofoto2015_qPCR67.png",
+      "relative_path": "artifacts/validation/Ortofoto2015_qPCR67.png",
+      "bytes": 1131823,
+      "sha256": "76d15b6721fb5114085c8ea946b0285ebf3b79174fb974412e4a79068af9b749"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/precision_sample_100.csv",
+      "relative_path": "artifacts/validation/precision_sample_100.csv",
+      "bytes": 4315,
+      "sha256": "34fd02c916a12b7a9fcda56d01c5db5ff9aec396adb0aa31d31a2304e810bf64"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/precision_sample_100.png",
+      "relative_path": "artifacts/validation/precision_sample_100.png",
+      "bytes": 1106823,
+      "sha256": "b1f37cbc4626bbdc93fffa37711a6cb4c590a93e251700f29ae684afb2a82b50"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/qpcr67_location_matches.csv",
+      "relative_path": "artifacts/validation/qpcr67_location_matches.csv",
+      "bytes": 7743,
+      "sha256": "327f61d411a4cdf5794200ba52647447831e5aad59556cc306f66b4c25d612b5"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/quantalab_current_table_audit.json",
+      "relative_path": "artifacts/validation/quantalab_current_table_audit.json",
+      "bytes": 5638,
+      "sha256": "887fde99ce22937a8b3c7fb76415567c35283c6410b0ada52333270493a19cd8"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/reconstructed_2015_crown_points.geojson",
+      "relative_path": "artifacts/validation/reconstructed_2015_crown_points.geojson",
+      "bytes": 348889,
+      "sha256": "739ab81f343f95edaff3d72ef894ac1eee804187b9f391898d171522e68c680e"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/reconstruction_quality.json",
+      "relative_path": "artifacts/validation/reconstruction_quality.json",
+      "bytes": 3073,
+      "sha256": "c86776c7311acfadfaf9658fbf86ffa37e2f2cb1af17102719264df9460b2157"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/reconstruction_run.log",
+      "relative_path": "artifacts/validation/reconstruction_run.log",
+      "bytes": 3163,
+      "sha256": "a3f2c5bff761c183778396f88eb73976cc0cfe227b0961ba91116d9cd45be446"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/recovered_rdata_inventory.csv",
+      "relative_path": "artifacts/validation/recovered_rdata_inventory.csv",
+      "bytes": 29706,
+      "sha256": "2b30768e690f669bb347b6d97954ed12165b5e77b520b1c7b6d819e8879e881c"
+    },
+    {
+      "path": "research/tree-inventory/artifacts/validation/recovered_rdata_inventory.log",
+      "relative_path": "artifacts/validation/recovered_rdata_inventory.log",
+      "bytes": 108,
+      "sha256": "2be3490809473c4f5cabfdfdce01b97fdf99b9e774ab2ee7c2f72d8edfbb436c"
+    }
+  ]
+}

@@ -1,0 +1,584 @@
+Received: 28 March 2022     | Accepted: 6 September 2022
+DOI: 10.1111/ppa.13646
+
+
+ORIGINAL ARTICLE
+
+
+
+
+Xylella fastidiosa subsp. pauca ST53 exploits pit membranes of
+susceptible olive cultivars to spread systemically in the xylem
+
+Vito Montilon | Angelo De Stradis | Maria Saponari | Raied Abou Kubaa |
+Annalisa Giampetruzzi | Giusy D'Attoma | Pasquale Saldarelli
+
+Consiglio Nazionale delle Ricerche,
+Institute for Sustainable Plant Protection,     Abstract
+Bari, Italy
+                                                Xylella fastidiosa subspecies pauca strain De Donno (XfDD) ST53 is the causal agent of
+Correspondence                                  olive quick decline syndrome, a severe disease first described in Apulia, Italy. Although
+Pasquale Saldarelli, Consiglio Nazionale
+                                                the two local cultivars Cellina di Nardò and Ogliarola Salentina showed high susceptibil-
+delle Ricerche, Institute for Sustainable
+Plant Protection, via Amendola 122/D,           ity, traits of resistance to the bacterium were found in the cultivar Leccino. Previous
+70126 Bari, Italy.
+                                                studies in field-­grown olives suggested that vascular occlusions and anatomophysio-
+Email: pasquale.saldarelli@ipsp.cnr.it
+                                                logical properties of the different cultivars played a role in the olive response to XfDD.
+Funding information
+                                                The present investigation reports observations at the early stage of the infection on ar-
+EU H2020, Grant/Award Number: 727987
+                                                tificially inoculated olives. Electron microscope studies showed that XfDD exploits the
+                                                pit membranes (PMs) of the susceptible cultivar Cellina di Nardò to spread systemically.
+                                                In this cultivar, PMs were degraded upon XfDD infection, suggesting activity of bacte-
+                                                rial cell wall-­degrading enzymes. Moreover, occluded vessels contained an amorphous
+                                                electrondense matrix resembling gum. Conversely, in Leccino, occluded vessels were
+                                                mainly filled by callose-­like granules that tightly entrapped XfDD cells. In addition, PMs
+                                                from Leccino had a compact undegraded structure that was not permeable to XfDD.
+                                                Our study suggests that exploitation of PMs is a key event in the infection process of X.
+                                                fastidiosa subsp. pauca ST53 in susceptible olive cultivars.
+
+                                                KEYWORDS
+                                                microscopy, olive, pit membranes, Xylella
+
+
+
+
+1     |   I NTRO D U C TI O N                                                   have been reported, name subspecies fastidiosa, multiplex, pauca,
+                                                                                sandyi, tashke and morus, that infect a wide host range (European
+Xylella fastidiosa is an aerobic, non-­spore-­forming, gram-­negative           Food Safety Authority [EFSA], 2022) including important crops
+phytopathogenic bacterium of the Xanthomonadaceae family (Wells                 such as grapevine, peach, almond, citrus, plum and coffee (Chang
+et al., 1987), which multiplies and colonizes the xylem of host plants          et al., 1993; Davis et al., 1980; Li et al., 2007; Mircetich et al., 1976;
+(Hopkins, 1989; Purcell & Hopkins, 1996). Under natural conditions,             Raju et al., 1982; Wells et al., 1983).
+transmission of X. fastidiosa occurs via various genera and species of              In 2013, a strain of X. fastidiosa subsp. pauca (strain De
+xylem-­feeding insects of the Cicadellidae and Aphrophoridae fami-              Donno; XfDD; ST53) was identified in Apulia, in the Salento area
+lies (belonging to Auchenorrhyncha) (Hill & Purcell, 1997). The long-­          (Martelli, 2013), in tissues of olive, oleander and almond trees with
+distance spread of the bacterium is mediated by infected plants or              symptoms of leaf scorching (Saponari et al., 2013, 2019). The extreme
+infectious vectors. To date, six different subspecies of X. fastidiosa          severity of the desiccation symptoms in olive led to the description of
+
+This is an open access article under the terms of the Creative Commons Attribution-NonCommercial-NoDerivs License, which permits use and distribution in
+any medium, provided the original work is properly cited, the use is non-commercial and no modifications or adaptations are made.
+© 2022 The Authors. Plant Pathology published by John Wiley & Sons Ltd on behalf of British Society for Plant Pathology.
+
+
+144   | wileyonlinelibrary.com/journal/ppa
+        	﻿                                                                                                               Plant Pathology. 2023;72:144–153.
+                                                                                                                                                 | 145
+
+
+
+
+                                                                                                                                                           13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+MONTILON et al.
+
+
+
+olive quick decline syndrome (OQDS; Martelli et al., 2016; Saponari           specific to Xylella, reported a low concentration of bacterial cells in
+et al., 2019), a new disease that ultimately causes the death of sus-         vascular occlusions of the stems of Ogliarola Salentina, but a greater
+ceptible cultivars Cellina di Nardò and Ogliarola Salentina. Its discov-      presence of bacterial aggregates in the leaf petioles of the same
+ery was the first report of Xylella infection in the open field in Europe     cultivar. In these field-­grown olives, high percentages of occluded
+and in the Mediterranean basin, becoming a serious phytosanitary              vessels were found of about 16%–­53% (De Benedictis et al., 2017)
+emergency that caused enormous damage to the Salento olive sec-               and 50.2 ± 4.3% (Cardinale et al., 2018). Further evidence of resis-
+tor as well as to the landscape.                                              tance in cv. Leccino came from the studies of Sabella et al. (2019),
+    Xylella is characterized by a wide polyphagia, with a range of over       which showed that, compared with the susceptible cultivar Cellina
+600 host plant species (EFSA, 2022). In several species, it multiplies        di Nardò, Leccino has a lower susceptibility to cavitation (formation
+and colonizes the vascular system without causing symptoms and                of air bubbles in the xylem) due to a better ability to counteract the
+therefore can provide inoculum for the transmission of the bacterium          decline of hydraulic conductivity imposed by the bacterium. Indeed,
+to susceptible plants. While in other hosts, it induces alterations in-       this cultivar has a more efficient strategy of xylem refilling that is
+cluding leaf scorching and desiccation, which, in some cases, can re-         based on starch hydrolysis, as shown by the presence of starch
+sult in the death of the plant (Purcell, 2013; Purcell & Hopkins, 1996).      grains in the vessel of infected plants.
+To date, the host colonization process and the mechanisms that                    While the above studies were carried out in naturally infected
+lead to the development of symptoms are not fully elucidated. It is           field-­grown olives, whose timing of infection was not defined, we
+generally agreed that water transport is impaired, thereby causing            investigated the frequency and distribution of vascular occlusions
+desiccation, by occlusions of xylem vessels by bacterial aggregates           in the secondary xylem in stems of healthy or artificially infected
+embedded in an exopolysaccharide matrix, and tyloses and gums pro-            olives belonging to the susceptible and resistant Cellina di Nardò and
+duced by the plant in response to infection (De la Fuente et al., 2008;       Leccino olive cultivars (Boscia et al., 2017). Indeed, it has been shown
+Rapicavoli et al., 2018; da Silva et al., 2001). Indeed, in grapevines with   that xylem occlusions can decrease the hydraulic conductivity of in-
+Pierce's disease (PD) caused by X. fastidiosa, a decrease in hydraulic        fected plants to a lesser extent in resistant cultivars (Sun et al., 2011,
+conductivity is associated with vascular occlusions of the secondary          2013), a fact that may have a direct impact on the screening of olive
+xylem of stems. The extent of these occlusions, mainly consisting of          germplasm for resistance to Xylella. Our evaluations were carried out
+tyloses, is dependent on the grapevine cultivar, as PD-­resistant geno-       using optical and transmission electron microscopy (TEM) at a single
+types had less vascular obstruction than susceptible genotypes (Sun           time point on plants showing early symptoms of desiccation in order
+et al., 2013). Moreover, it was observed that tylose occlusions did not       to understand better the initial events of the infection.
+prevent the spread of Xylella as their production was probably late
+during the infection. Therefore, tylose production is not a primary
+event in the decline of hydraulic conductivity, but their presence af-        2    |   M ATE R I A L S A N D M E TH O DS
+fects the water transport that is initially disturbed by the pathogen
+diffusion in the xylem network. In this process, Xylella needs to cross       2.1 | Plants and Xylella infections
+through pit membranes (PMs) to move between adjacent vessels and
+spread in the xylem. PMs are porous structures of 5–­20 nm in diame-          Vascular occlusions of the secondary xylem were studied in stems of
+ter made of hemicellulose, cellulose microfibrils and pectins, and con-       potted plants of Cellina di Nardò and Leccino, mock inoculated and
+nect adjacent vessels. In their intact state, they limit the passage of       inoculated with XfDD (maintained in our collection). Three-­year-­old
+the bacterium as well as any gas bubbles, thus protecting plants from         plants were purchased from a local nursery and their sanitary status
+embolism. During infections, the porosity of PMs increases, due to            was certified as pathogen-­tested according to National Regulations
+the degradation of their polysaccharide components by a set of Xylella        for Certified Plant Material. Plants were grown in 10 L pots and
+cell wall-­degrading enzymes (CWDEs), necessary for the bacterium to          maintained throughout the experiments in a greenhouse under con-
+move systemically. The effects of CWDE activity were recently inves-          trolled conditions at 25°C and 70% relative humidity, irrigated twice
+tigated by Fanton and Brodersen (2021) in grapevine, who showed               per week and fertilized with a slow-­release fertilizer (NPK Original
+that the sole activity of polygalacturonase, the role of which in Xylella     Gold; Compo). Inoculum was prepared from 8-­to 10-­day-­old colo-
+infections was previously ascertained by Roper et al. (2007), induces         nies of XfDD scraped from PD3 agar plates and dispersed in sterile
+a significant decline in hydraulic conductivity that can be aggravated        potassium phosphate buffer (0.05 M, pH 7.2) to form a turbid cell
+by the successive production of tyloses (Sun et al., 2013).                   suspension of approximately 109 cells/ml; this was used immediately
+    It is therefore unsurprising that recent studies of healthy and           for inoculations by the pin prick method (Saponari et al., 2017). Plants
+naturally XfDD-­infected field-­grown olives reported a higher pro-           of the cultivar Leccino were inoculated in 2014, whereas plants of
+portion of occluded vessels in the stems of the susceptible Ogliarola         the cultivar Cellina di Nardò were inoculated in 2018. Three twigs
+Salentina and Cellina di Nardò than in the resistant Leccino cultivars.       per plant were punctured with a needle after placing a 10 μl drop of
+De Benedictis et al. (2017) observed that occlusions were mainly              bacterial culture suspension on the surface (Saponari et al., 2016).
+composed of tyloses, gums and pectin gels rather than XfDD cell ag-           Two plants per cultivar were inoculated with XfDD (Table 1; Leccino
+gregates. Similarly, Cardinale et al. (2018), using a fluorogenic probe       1, Leccino 2, Cellina 1 and Cellina 2) while one plant was mock
+      |
+
+
+
+
+                                                                                                                                                          13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+146                                                                                                                                     MONTILON et al.
+
+
+
+inoculated with phosphate-­buffered saline (Table 1; Leccino 3 and             were processed later for electron microscopy. Vessel occlusions were
+Cellina 3). At 12 months after the inoculations, each plant was in-            counted at 20× magnification on 50 randomly captured images of the
+dividually tested by harvesting at least four leaves, whose petioles           cross-­sections for a minimum of 500 vessels per cultivar. The micro-
+were excised and used for total DNA extraction and XfDD detection.             graphs were captured with a Bresser Fotocamera Mikrokular-­Imaging
+XfDD was detected in plant tissues by quantitative PCR (qPCR) using            by software CamLabLite (Bresser GmBH). For TEM, 1–­2 mm2 thin
+total DNA purified with the Maxwell RSC PureFood GMO (Promega)                 sections of stem tissues from the transverse sections were excised
+protocol. qPCR was performed with TaqMan Fast Advanced Master                  and processed according to standard embedding procedures (Martelli
+Mix (Thermo Fisher Scientific) on a CXF 96 Real-­
+                                                Time System                    et al., 1984). Briefly, stem tissues were fixed in 4% glutaraldehyde in
+(Bio-­Rad) following the EPPO diagnostic protocol (European and                0.05 M potassium phosphate buffer (pH 7.2) for 2 h and postfixed
+Mediterranean Plant Protection Organization [EPPO], 2019) and the              at 4°C in 1% osmium tetroxide in the same buffer for 2 h. Sections
+primer/probe set from Harper et al. (2010).                                    were bulk stained overnight in 0.5% aqueous UA-­Zero EM stain (Agar
+                                                                               Scientific Ltd), dehydrated in graded ethanol dilutions, and embed-
+                                                                               ded in TAAB Spurr resin (TAAB Laboratories). Observations were
+2.2 | Optical and TEM                                                          performed with a Philips Morgagni 282D (Thermofisher) transmission
+                                                                               electron microscope at 80 kV after staining with 4 mM lead citrate so-
+Studies were performed on 3-­year-­old Cellina di Nardò and 6-­year-­old       lution. Statistical analysis was performed with the RStudio software:
+Leccino olives, 1 and 4 years, respectively, after inoculation. Twigs          Integrated Development for R (RStudio). The number of occlusions
+from two XfDD-­infected plants per cultivar were selected for qPCR             from the two groups, inoculated with XfDD or mock inoculated, were
+testing to confirm bacterial colonization; for those of Cellina di Nardò,      statistically compared using an unpaired Student's t test.
+one had early symptoms of desiccation and the other was symptom-
+less, whereas both those of Leccino were without symptoms. For
+controls, one mock-­inoculated plant per cultivar was analysed. Only           3    |    R E S U LT S
+twigs that were qPCR-­positive for XfDD were used for microscopy
+observations together with twigs of the same age from the mock-­               3.1 | Evaluation of vascular occlusions of plants
+inoculated plant. Ten transverse sections, c.1–­2 mm thick, of stem            grown in a controlled environment
+tissues were manually cut from each 1-­year-­old twig of c.0.5 cm in
+diameter from healthy or XfDD-­inoculated olives of the cultivars              XfDD-­infected Leccino (without symptoms) and Cellina di Nardò
+Leccino and Cellina di Nardò. Sections were stained for 4 min in 0.05%         (showing symptoms of desiccation) plants were selected (Table 1),
+toluidine in 80% ethanol and successively destained by four washes             and two 1-­year-­old twigs (approx. 0.5 cm in diameter) per plant
+with 80% ethanol and distilled water before observing under a ster-            were sampled. For cultivar Cellina di Nardò, twigs with or without
+eomicroscope Eclipse TI (Nikon). Regions containing occluded vessels           symptoms of desiccation were selected from the infected plants
+
+
+TA B L E 1 Numbers of occluded and open xylem vessels in twigs of Leccino and Cellina di Nardò olive trees inoculated with Xylella
+fastidiosa subsp. pauca strain De Donno or mock-­inoculated
+
+                                                                Occluded           Open                               Occluded
+ Condition           Twig                  Symptoms             vessels            vessels           Total vessels    vessels (%)           Cq
+
+ Infected            Leccino 1-­1          N                     836                    4975            5811          14.4                  21.25
+                     Leccin 1-­2           N                      12                    5922            5934           0.2                  27.26
+                     Leccino 2–­1          N                        2                   4510            4512           0.04                 24.99
+                     Leccino 2–­2          N                     692                    5683            6375          10.8                  24.07
+                     Total                                      1542***            21,090            22,632            6.81 (avg)           24.39 (avg)
+ Infected            Cellina 1-­1          Y                     219                    7555            7774           2.8                  20.51
+                     Cellina 1-­2          Y                     506                    4162            4668          10.8                  19.66
+                     Cellina 2-­1          N                      51                    6808            6859           0.74                 21.72
+                     Cellina 2-­2          N                    1520                    2967            4487          33.9                  20.34
+                     Total                                      2296***            21,492            23,788            9.65 (avg)           20.55 (avg)
+ Mock                Leccino 3             N                        1                   5371            5372           0.02                 N/D
+ Mock                Cellina 3             N                      11                    7258            7269           0.15                 N/D
+
+Note: Infections were confirmed by quantitative PCR, whose Cq values, performed on the same twigs, are reported. Two twigs, showing (Y) or not
+showing (N) initial symptoms of desiccation, were selected from the infected plants, while only one was sampled from the mock-­inoculated plants of
+the same cultivar. (avg): average; N/D: not determined.
+***p < 0.001, significant differences in total occluded vessels between infected and mock-­inoculated plants of the respective cultivars.
+                                                                                                                                        | 147
+
+
+
+
+                                                                                                                                                 13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+MONTILON et al.
+
+
+
+(Table 1). qPCR assays on small portions of the selected twigs indi-     occluded vessels from infected olive trees were statistically differ-
+cated a lower quantity of XfDD in the resistant Leccino compared         ent from those of corresponding mock-­inoculated plants (Table 1).
+with Cellina di Nardò, with average Cq values of 24.39 in Leccino
+and 20.55 in Cellina di Nardò (Table 1). No qPCR product was ob-
+tained from mock-­inoculated plants. The percentages of completely       3.2 | Electron microscopy studies of Xylella-­
+occluded vessels were visually determined by optical microscopy on       infected olives
+toluidine blue-­stained sections (Figure 1). Occlusions were negligi-
+ble in mock-­inoculated plants while they were significantly higher in   Tissue portions in which occluded vessels were found were em-
+XfDD-­infected plants, reaching the highest value (9.65%) in the sus-    bedded in resin to characterize, by TEM, the nature of the vas-
+ceptible cultivar Cellina di Nardò, with only 6.81% in Leccino. In ad-   cular occlusions. Observations were performed on a total of 420
+dition, the distribution of occluded vessels was not uniform among       and 380 sections from Leccino and Cellina di Nardò, respectively.
+individual twigs of the same cultivar, ranging from 1% to 34% in         Electron microscope observations in twigs of Cellina di Nardò-­
+Cellina di Nardò and 0.044% to 14% in Leccino, and were not corre-       infected plants showed that the lumen of xylem vessels was oc-
+lated with the presence of symptoms. However, the total numbers of       cluded by aggregates of XfDD cells embedded in an amorphous
+
+
+
+
+                                                        (a)                                        (b)
+
+
+
+
+                                                        (c)                                        (d)
+
+
+
+
+F I G U R E 1 Stem cross-­sections
+observed by fluorescence (a–­d) and
+bright field (e–­h) microscopy. (a, b) Mock-­
+inoculated olive cultivars Cellina di Nardò
+(a) and Leccino (b); (c, d) olive cultivars             (e)                                       (f)
+Cellina di Nard’ (c) and Leccino (d) infected
+with Xylella fastidiosa subsp. pauca strain
+De Donno (XfDD). Arrows indicate
+occluded xylem vessels. (e–­h) Stem
+sections of cv. Cellina di Nardò (e, f) and cv.
+Leccino (g, h) after toluidine blue staining,
+showing occluded xylem vessels (arrowed)
+in XfDD-­infected (e, g) plants and empty
+vessels (V) and fibre-­tracheids (T) in mock-­
+inoculated plants (f, h). (a–­d) Bar = 50 μm,
+(e–­h) bar = 20 μm. [Colour figure can be               (g)                                       (h)
+viewed at wileyonlinelibrary.com]
+       |
+
+
+
+
+                                                                                                                                                      13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+148                                                                                                                              MONTILON et al.
+
+
+                                                                                                   F I G U R E 2 Transmission electron
+                                                                                                   micrographs showing aggregates of
+                                                                                                   bacterial cells (arrow) in the lumen of
+                                                                                                   xylem vessels of olive cultivar Cellina di
+                                                                                                   Nardò infected by Xylella fastidiosa subsp.
+                                                                                                   pauca strain De Donno (a–­c), compared
+                                                                                                   with an empty vessel of a mock-­inoculated
+                                                                                                   plant (d). Insets highlight a group of
+                                                                                                   bacterial cells (a) and a single bacterial
+                                                                                                   cell with a characteristic wrinkled cell
+                                                                                                   wall (c). Structure of a bordered pit
+                                                                                                   connecting two adjacent vessels (e) and
+                                                                                                   a half-­bordered pit connecting a vessel
+ (a)                                          (b)                                                  with a fibre tracheid, in mock-­inoculated
+                                                                                                   plants. V, vessel, T, fibre-­tracheid; F, fibre;
+                                                                                                   PW, primary wall and middle lamella; SW,
+                                                                                                   secondary wall; PC, pit chamber. Bars:
+                                                                                                   1 µm (a–­d); 250 nm [inset (a, e, f)]; 100 nm
+                                                                                                   [inset (c)].
+
+
+
+
+ (c)                                          (d)
+
+
+
+
+ (e)                                          (f)
+
+
+
+
+electron dense matrix (Figure 2a–­c), resembling gum, which was           and the matrix was organized into the form of “wads” that, in
+never observed in vessels from healthy olives (Figure 2d). Bacterial      some cases, completely filled the vessel lumen. Moreover, only
+cells were not present in fibre tracheids (Figure 2a–­c), which may       in Leccino, fibre tracheids contained crystal structures and depo-
+have been due to the structure of half-­b ordered pits that inter-        sitions of electron-­d ense material (Figure 4e). As with Cellina di
+connected the fibre tracheids with vessels (Figure 2f) rather than        Nardò (Figure 2d), healthy plants of Leccino did not show such
+the bordered-­pits connecting adjacent vessels (Figure 2e). Indeed,       structures in the xylem vessels (Figure 4f). As a general observa-
+XfDD cells were also observed within these pits interconnecting           tion, in cv. Cellina di Nardò vessel colonization completely filled
+adjacent vessels (Figure 3a–­c). In these tissues, an uneven and          the vessel lumens and proceeded along vessels and between con-
+degraded texture of the PMs (Figure 3b,c) was observed, which             tiguous vessels, with XfDD cells crossing the pits (Figure 3a,b).
+contrasted strikingly with the compact and intact structure of            Indeed, in this cultivar, we observed strong structural modifica-
+those from mock-­inoculated olives (Figure 3d,e) of the cultivar          tion of bordered pits interconnecting two adjacent vessels, show-
+Cellina di Nardò. Conversely, in XfDD-­infected Leccino, deposi-          ing fragmented middle lamellas and parts of the primary wall
+tion of callose-­like granules represented the main component of          (Figure 3c). In cultivar Leccino, pits were more electron dense than
+vessel occlusions (Figures 4 and 5). This callose also infiltrated pits   in Cellina di Nardò, indicative of a higher density and compactness
+(Figure 5e), tightly entrapping XfDD cells (Figure 5a,b). Callose-­like   of the tissue, and they also appeared more intact (Figure 5c,d); no
+granules presented a more electron-­d ense central part (Figure 4d)       cells of XfDD were observed within these pits.
+                                                                                                                                              | 149
+
+
+
+
+                                                                                                                                                       13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+MONTILON et al.
+
+
+F I G U R E 3 Transmission electron
+micrographs showing cells of Xylella
+fastidiosa subsp. pauca strain De Donno (*)
+in the lumen of xylem vessels of infected
+olive cultivar Cellina di Nardò (a–­c).
+Arrows point to bacterial cells crossing
+the pits interconnecting two adjacent
+vessels (a, b) or free in the lumen (c). In
+infected tissues, an uneven pit texture
+was observed [arrowhead in (b, c)]; in
+healthy mock inoculated plants of the
+same cultivar (d, e), the pit structure was               (a)
+compact and intact [arrowhead in (d, e)]. V,
+vessel; BP, bordered pit; PW, primary cell
+wall and middle lamella; SW, secondary
+wall. Bars: 500 nm (b, d); 250 nm (a, c, e).
+
+
+
+
+                                                          (b)                                        (c)
+
+
+
+
+                                                          (d)                                        (e)
+
+
+
+
+4   |   DISCUSSION                                                         reached the opposite conclusion, suggesting a major role of the oc-
+                                                                           clusions (accounting for more than 50% of the stem vessels) in the
+Pathogenesis of X. fastidiosa is caused by a complex of mechanisms,        disease progression on susceptible trees of Ogliarola Salentina. They
+including the plant anatomophysiology and immune response as well          found that occlusions were made by bacterial aggregates in vessels
+as virulence factors of the bacterium. A consensus of research ar-         in petioles and by tyloses/gums in vessels in branches.
+gues in favour of occlusions playing a major role in the disease symp-        Our investigations showed that occlusions were rare in twigs
+toms, based on the presence of a higher number of occluded vessels         from greenhouse-­grown mock-­inoculated olives, while they were
+in the xylem of grapevines with PD compared with healthy vines. For        clearly induced in response to the bacterial infection in both the sus-
+example, Sun et al. (2013) found a higher rate of occluded vessels in      ceptible and resistant cultivar. The observed average proportion of
+susceptible (up to 60%) than in resistant (up to 20%) grapevine cul-       occluded vessels in infected olives was 6.8% and 9.6% in Leccino and
+tivars. With olive, De Benedictis et al. (2017) found a higher number      Cellina di Nardò, respectively. Although this is in line with the differ-
+of occlusions in field-­grown olives of the susceptible Cellina di Nardò   ence in susceptibility to XfDD of the two cultivars, no correlation
+and Ogliarola Salentina compared with the resistant cultivar Leccino.      can be drawn between the extent of occlusions and the occurrence
+However, the vessel blockage was not found to be correlated with           of symptoms. In addition, there were striking differences in distri-
+the induction of symptoms. These authors found, for example a lower        bution of occlusions among different twigs, reflecting the erratic
+number of occlusions in the infected branches of Leccino in compari-       mode of colonization of the bacterium, which depends on its ability
+son with those from healthy trees of the same cultivar. Thus, based        to move within the xylem vessel network. The percentages of oc-
+on their findings, they concluded that occlusions are not responsible      cluded vessels found in our study are different from those reported
+for OQDS symptomatology. On the contrary, Cardinale et al. (2018)          in both previous studies, most probably because these earlier works
+       |
+
+
+
+
+                                                                                                                                                     13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+150                                                                                                                              MONTILON et al.
+
+
+                                                                                                     F I G U R E 4 Transmission electron
+                                                                                                     micrographs of vascular parenchyma of
+                                                                                                     twigs from olive cultivar Leccino infected
+                                                                                                     with Xylella fastidiosa subsp. pauca strain
+                                                                                                     De Donno. Callose-­like granules (*)
+                                                                                                     occlude the xylem vessels (a–­d) and some
+                                                                                                     of these are full of dark matrix (b). Insets
+                                                                                                     of the callose-­like granules are shown
+                                                                                                     in (c) and (d). Crystals and electron-­
+                                                                                                     dense material (arrow) are present in
+                                                                                                     fibre-­tracheids (e). (f) Xylem vessel from
+                                                                                                     a mock-­inoculated twig (f). V, vessel; T,
+                                                                                                     fibre-­tracheid. Bars: 1 µm (a, b) 500 nm
+(a)                                           (b)                                                    (c–­f ) 250 nm [inset (c), inset (d)].
+
+
+
+
+(c)                                           (d)
+
+
+
+
+(e)                                           (f)
+
+
+
+
+referred to twigs from field-­grown olives, which were older (i.e., 25–­   time of infection was known. Our observations of the presence
+30 years old) and under natural environmental conditions, compared         of callose-­l ike granules in the resistant Leccino fit better with the
+to the potted plants used in our study.                                    description of starch granules in the vessels of this cultivar by
+      Both De Benedictis et al. (2017) and Cardinale et al. (2018)         Sabella et al. (2019), which act as a refilling mechanism to avoid
+reported that in twigs of field-­g rown infected olives, occlusions        the loss of plant hydraulic conductivity and/or as a mechanism to
+mainly consisted of tyloses/gums and pectin gels. In contrast,             entrap the bacteria. Significantly, the results indicate that XfDD
+we noted that occlusions were composed of gums or callose-­like            exploits the PMs to diffuse systemically within the susceptible
+structures in Cellina di Nardò or Leccino, respectively, and we            Cellina di Nardò. In this cultivar, we observed clearly degraded
+never observed the presence of tylose-­like structures in vessels          middle lamellas, which allowed the bacteria to pass to adjacent
+of either cultivar. Again, we cannot exclude that the different tis-       vessels through degraded PMs. Conversely, this phenomenon
+sue, plant and infection stage could be responsible of the lack            was not observed in Leccino, which had intact and more compact
+of these plant outgrowth structures, although the existence of             PMs, perfused with an electron-­d ense material, which probably
+tyloses in Olea europaea has been questioned by Baas et al. (1988)         maintained the impermeability of these structures to the bacteria.
+because this plant has small vessel-­p arenchyma pits. Indeed, our         Such findings, which indicate a diverse susceptibility to XfDD of
+study was performed in greenhouse controlled conditions, on                PMs of the two cultivars and an active role of Leccino in counter-
+pathogen-­tested olives not exposed to biotic stresses and whose           acting the infection, suggest a variation in the pectic and cellulose
+                                                                                                                                       | 151
+
+
+
+
+                                                                                                                                                13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+MONTILON et al.
+
+
+F I G U R E 5 Transmission electron
+micrographs of the xylem vessel content
+and pit detail of twigs from olive cultivar
+Leccino infected with Xylella fastidiosa
+subsp. pauca strain De Donno (a–­d) and
+from a healthy mock-­inoculated twig of
+the same cultivar (f). A callose-­like matrix
+(*) entraps bacterial cells [arrowhead in
+(a, b)] and fills the pit chambers (e). The
+bordered pits and surrounding primary
+wall between adjacent vessels have a
+more electron-­dense middle lamella and
+appear intact (c, d) compared with that of
+the mock-­inoculated plant (f). V, vessel;             (a)                                       (b)
+PW, primary wall and middle lamella; PC,
+pit chamber. Bars: 250 nm (a, c); 100 nm (e,
+f); 50 nm (b, d).
+
+
+
+
+                                                       (c)                                       (d)
+
+
+
+
+                                                       (e)                                       (f)
+
+
+
+composition of PMs between Leccino and Cellina di Nardò; such           of a battery of CWDEs that degrade the polysaccharide compo-
+a difference has also been observed between grapevine cultivars         nents of the middle lamella, thus enlarging the pore diameter and
+(Ingel et al., 2019; Sun et al., 2011) and deserves further study.      allowing systemic colonization (Fanton & Brodersen, 2021; Ingel
+Thus, our findings provide support to the hypothesis, mainly de-        et al., 2019). A side effect of this degradation is an increased risk
+fined in the grapevine/PD pathosystem, that impairment of xylem         of embolism, which leads to the disruption of water transport;
+conductivity is an initial event in the pathogenesis mechanism          such an effect is exacerbated in the susceptible olive cultivar
+occurring in susceptible hosts (Fanton & Brodersen, 2021; Ingel         Cellina di Nardò, which has a higher air-­e mbolism vulnerability
+et al., 2021; Pérez-­D onoso et al., 2010) and is associated with the   than the resistant Leccino because of the larger lumen of its
+ability of the bacterium to spread systemically by crossing the PM      xylem vessels (Petit et al., 2021). While we did not prove the di-
+barrier. Symptoms are therefore the undesired effect of the plant       rect involvement of CWDEs in olive infections, our observations
+systemic colonization by the bacteria through the xylem network,        clearly indicate that XfDD enlarges PMs of susceptible cultivars
+whose vessels, interconnected by pores (pits) that are in their in-     to spread systemically. Further investigations of the role in the
+tact state not permeable to Xylella cells, are occluded by bacterial    infection process of bacterial CWDEs and the polysaccharide
+aggregates during infection (Pérez-­D onoso et al., 2010). Previous     composition of PMs from different olive cultivars may further
+reports have indicated that the bacteria can cause an increase in       elucidate the mechanisms of resistance in olives, which can be
+pit permeability (increased size and diameter) through the action       exploited in future olive breeding programmes.
+       |
+
+
+
+
+                                                                                                                                                                           13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+152                                                                                                                                                 MONTILON et al.
+
+
+
+AC K N OW L E D G E M E N T S                                                        Ingel, B., Jeske, D.R., Sun, Q., Grosskopf, J. & Roper, M.C. (2019) Xylella
+This work received funding from the EU H2020 Research Project                              fastidiosa endoglucanases mediate the rate of Pierce's disease de-
+                                                                                           velopment in Vitis vinifera in a cultivar-­dependent manner. Molecular
+XF-­ACTORS ‘Xylella fastidiosa active containment through a
+                                                                                           Plant-­Microbe Interactions, 32, 1402–­1414.
+multidisciplinary-­
+                  oriented research strategy’ grant agreement                        Ingel, B., Reyes, C., Massonnet, M., Boudreau, B., Sun, Y., Sun, Q. et al.
+727987. Open Access Funding provided by Consiglio Nazionale delle                          (2021) Xylella fastidiosa causes transcriptional shifts that precede
+Ricerche within the CRUI-CARE Agreement.                                                   tylose formation and starch depletion in xylem. Molecular Plant
+                                                                                           Pathology, 22, 175–­188.
+      [Correction added on 28 November 2022, after first online pub-
+                                                                                     Li, W.B., Pria, W.D., Jr., Teixeira, D.C., Miranda, V.S., Ayres, A.J., Franco,
+lication: CRUI-CARE funding statement has been added.]                                     C.F. et al. (2007) Coffee leaf scorch caused by a strain of Xylella
+                                                                                           fastidiosa from citrus. Plant Disease, 85, 501–­505.
+C O N FL I C T O F I N T E R E S T                                                   Martelli, G.P. (2013) Disseccamento rapido dell'olivo. Georgofili INFO, 30
+                                                                                           October 2013. Available at: https://www.georg​ofili.info/conte​nuti/
+The authors declare that they have no conflict of interest.
+                                                                                           disse​ccame​nto-­rapid​o-­dello​livo/1510 [Accessed 20 September
+                                                                                           2022].
+DATA AVA I L A B I L I T Y S TAT E M E N T                                           Martelli, G.P., Boscia, D., Porcelli, F. & Saponari, M. (2016) The olive quick
+The data that support the findings of this study are available from                        decline syndrome in south-­east Italy: a threatening phytosanitary
+                                                                                           emergency. European Journal of Plant Pathology, 144, 235–­243.
+the corresponding author upon reasonable request.
+                                                                                     Martelli, G.P., Di Franco, A. & Russo, M. (1984) The origin of multivesicu-
+                                                                                           lar bodies in tomato bushy stunt virus-­infected Gomphrena globosa
+ORCID                                                                                      plants. Journal of Ultrastructure Research, 88, 275–­281.
+Pasquale Saldarelli      https://orcid.org/0000-0002-8633-7813                       Mircetich, S.M., Lowe, S.K., Moller, W.J. & Nyland, G. (1976) Etiology of
+                                                                                           almond leaf scorch disease and transmission of the causal agent.
+                                                                                           Phytopathology, 66, 17–­24.
+REFERENCES
+                                                                                     Pérez-­Donoso, A.G., Sun, Q., Roper, C.M., Greve, C.L., Kirkpatrick, B.
+Baas, P., Esser, P.M., van der Westen, M.E.T. & Zandee, M. (1988) Wood                     & Labavitch, J.M. (2010) Cell wall-­       degrading enzymes enlarge
+       anatomy of the Oleaceae. IAWA Journal, 9, 103–­182.                                 the pore size of intervessel pit membranes in healthy and Xylella
+Boscia, D., Altamura, G., Notte, P., Morelli, M., Saldarelli, P., Saponari, M.             fastidiosa-­infected grapevines. Plant Physiology, 152, 1748–­1759.
+       et al. (2017) Resistenza a Xylella fastidiosa in diverse cultivar di olivo.   Petit, G., Bleve, G., Gallo, A., Mita, G., Montanaro, G., Nuzzo, V. et al.
+       L'Informatore Agrario, 11, 59–­63.                                                  (2021) Susceptibility to Xylella fastidiosa and functional xylem anat-
+Cardinale, M., Luvisi, A., Meyer, J.B., Sabella, E., De Bellis, L., Cruz, A.C.             omy in Olea europaea: revisiting a tale of plant–­pathogen interac-
+       et al. (2018) Specific fluorescence in situ hybridization (FISH) test               tion. AoB Plants, 13, plab027.
+       to highlight colonization of xylem vessels by Xylella fastidiosa in           Purcell, A.H. (2013) Paradigms: examples from the bacterium Xylella fas-
+       naturally infected olive trees (Olea europaea L.). Frontiers in Plant               tidiosa. Annual Review of Phytopathology, 51, 339–­356.
+       Science, 9, 431.                                                              Purcell, A.H. & Hopkins, D.L. (1996) Fastidious xylem-­limited bacterial
+Chang, C.J., Garnier, M., Zreik, L., Rossetti, V. & Bové, J.M. (1993) Culture              plant pathogens. Annual Review of Phytopathology, 34, 131–­151.
+       and serological detection of the xylem-­limited bacterium causing             Raju, B.C., Wells, J.M., Nyland, G., Brlansky, R.H. & Lowe, S.K. (1982)
+       citrus variegated chlorosis and its identification as a strain of Xylella           Plum leaf scald: isolation, culture, and pathogenicity of the causal
+       fastidiosa. Current Microbiology, 27, 137–­142.                                     agent. Phytopathology, 72, 1460–­1466.
+Davis, M.J., Purcell, A.H. & Thomson, S.V. (1980) Isolation media for the            Rapicavoli, J., Ingel, B., Blanco-­Ulate, B., Cantu, D. & Roper, M.C. (2018)
+       Pierce's disease bacterium. Phytopathology, 70, 425–­429.                           Xylella fastidiosa: an examination of a re-­emerging plant pathogen.
+De Benedictis, M., De Caroli, M., Baccelli, I., Marchi, G., Bleve, G., Gallo,              Molecular Plant Pathology, 19, 786–­8 00.
+       A. et al. (2017) Vessel occlusion in three cultivars of Olea euro-            Roper, M.C., Greve, L.C., Warren, J.G., Labavitch, J.M. & Kirkpatrick, B.C.
+       paea naturally exposed to Xylella fastidiosa in open field. Journal of              (2007) Xylella fastidiosa requires polygalacturonase for coloniza-
+       Phytopathology, 165, 589–­594.                                                      tion and pathogenicity in Vitis vinifera grapevines. Molecular Plant-­
+De La Fuente, L., Burr, T.J. & Hoch, H.C. (2008) Autoaggregation of                        Microbe Interactions, 20, 411–­419.
+       Xylella fastidiosa cells is influenced by type I and type IV pili. Applied    Sabella, E., Aprile, A., Genga, A., Siciliano, T., Nutricati, E., Nicolì, F. et al.
+       and Environmental Microbiology, 74, 5579–­5582.                                     (2019) Xylem cavitation susceptibility and refilling mechanisms in
+European and Mediterranean Plant Protection Organization (EPPO).                           olive trees infected by Xylella fastidiosa. Scientific Reports, 9, 9602.
+       (2019) PM 7/24 (4). Xylella fastidiosa. EPPO Bulletin, 49, 175–­227.          Saponari, M., Boscia, D., Altamura, G., D'Attoma, G., Cavalieri, V., Zicca,
+European Food Safety Authority (EFSA). (2022) Update of the Xylella                        S. et al. (2016) Pilot project on Xylella fastidiosa to reduce risk as-
+       spp. host plant database–­       systematic literature search up to 31              sessment uncertainties. EFSA Supporting Publications, 13, 1013E.
+       December 2021. EFSA Journal, 20, 7356.                                        Saponari, M., Boscia, D., Altamura, G., Loconsole, G., Zicca, S., D'Attoma,
+Fanton, A.C. & Brodersen, C. (2021) Hydraulic consequences of enzy-                        G. et al. (2017) Isolation and pathogenicity of Xylella fastidiosa
+       matic breakdown of grapevine pit membranes. Plant Physiology,                       associated to the olive quick decline syndrome in southern Italy.
+       186, 1919–­1931.                                                                    Scientific Reports, 7, 17723.
+Harper, S.J., Ward, L.I. & Clover, G.R.G. (2010) Development of LAMP                 Saponari, M., Boscia, D., Nigro, F. & Martelli, G.P. (2013) Identification
+       and real-­time PCR methods for the rapid detection of Xylella fas-                  of DNA sequences related to Xylella fastidiosa in oleander, almond
+       tidiosa for quarantine and field applications. Phytopathology, 100,                 and olive trees exhibiting leaf scorch symptoms in Apulia (southern
+       1282–­1288.                                                                         Italy). Journal of Plant Pathology, 95, 668.
+Hill, B.L. & Purcell, A.H. (1997) Populations of Xylella fastidiosa in plants        Saponari, M., Giampetruzzi, A., Loconsole, G., Boscia, D. & Saldarelli,
+       required for transmission by an efficient vector. Phytopathology, 87,               P. (2019) Xylella fastidiosa in olive in Apulia: where we stand.
+       1197–­1201.                                                                         Phytopathology, 109, 175–­186.
+Hopkins, D.L. (1989) Xylella fastidiosa: xylem-­limited bacterial pathogen           da Silva, F.R., Vettore, A.L., Kemper, E.L., Leite, A. & Arruda, P. (2001)
+       of plants. Annual Review of Phytopathology, 27, 271–­290.                           Fastidian gum: the Xylella fastidiosa exopolysaccharide possibly
+                                                                                                                                             | 153
+
+
+
+
+                                                                                                                                                     13653059, 2023, 1, Downloaded from https://bsppjournals.onlinelibrary.wiley.com/doi/10.1111/ppa.13646 by CNR Group, Wiley Online Library on [19/11/2024]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+MONTILON et al.
+
+
+     involved in bacterial pathogenicity. FEMS Microbiology Letters, 203,
+     165–­171.                                                              How to cite this article: Montilon, V., De Stradis, A.,
+Sun, Q., Greve, L.C. & Labavitch, J.M. (2011) Polysaccharide composi-
+                                                                            Saponari, M., Abou Kubaa, R., Giampetruzzi, A. & D’Attoma,
+     tions of intervessel pit membranes contribute to Pierce's disease
+     resistance of grapevines. Plant Physiology, 155, 1976–­1987.           G. et al. (2023) Xylella fastidiosa subsp. pauca ST53 exploits
+Sun, Q., Sun, Y., Walker, M.A. & Labavitch, J.M. (2013) Vascular occlu-     pit membranes of susceptible olive cultivars to spread
+     sions in grapevines with Pierce's disease make disease symptom         systemically in the xylem. Plant Pathology, 72, 144–­153.
+     development worse. Plant Physiology, 161, 1529–­1541.
+                                                                            Available from: https://doi.org/10.1111/ppa.13646
+Wells, J.M., Raju, B.C., Hung, H.Y., Weisburg, W.G., Mandelco-­     Paul,
+     L. & Brenner, D.J. (1987) Xylella fastidiosa gen. nov., sp. nov:
+     gram-­negative, xylem-­ limited, fastidious plant bacteria related
+     to Xanthomonas spp. International Journal of Systematic and
+     Evolutionary Microbiology, 37, 136–­143.
+Wells, J.M., Raju, B.C. & Nyland, G. (1983) Isolation, culture and
+     pathogenicity of the bacterium causing phony disease of peach.
+     Phytopathology, 73, 859–­862.
+

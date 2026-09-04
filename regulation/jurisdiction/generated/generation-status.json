@@ -1,0 +1,26 @@
+{
+  "status": "DETERMINISTIC_PROJECTION_OF_CANONICAL_AUTHORING",
+  "canonical_authoring": "regulation/jurisdiction/canonical/authoring.json",
+  "canonical_authoring_sha256": "6ba04a3a3facef23a285a275bea5e51e1bf62b90c04fb0fbb909c83a80518221",
+  "counts": {
+    "stable_provisions": 381,
+    "provision_versions": 400,
+    "condition_graphs": 309,
+    "historical_versions_excluded_from_current_graph": 91,
+    "dependencies": 801
+  },
+  "generated": {
+    "stable-provisions.csv": {
+      "sha256": "3e974dea3dde73e1a4401a56be5fe7c0fde0596b7c7ff686446fb7676454f923"
+    },
+    "provision-versions.csv": {
+      "sha256": "0e026bf4a2b3eb463a1e7660084720aad459e176d953ab535e1d866f01215571"
+    },
+    "condition-graph.json": {
+      "sha256": "b608ead90f22aebfd2df2c16eb9c49378619a24f182314148b55db8a5b559ad7"
+    },
+    "dependency-manifest.csv": {
+      "sha256": "1de8a36b973f92bee59911570f175c8bc82b8009acf8bbd4577280fb526d2618"
+    }
+  }
+}

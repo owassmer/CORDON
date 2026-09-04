@@ -1,0 +1,882 @@
+
+
+===== PAGE 1/8 =====
+
+TYPE Original Research
+PUBLISHED 20 September 2022
+DOI 10.3389/fpls.2022.968934
+OPEN ACCESS
+EDITED BY
+David Gramaje,
+Institute of Vine and Wine Sciences,
+Spanish National Research Council
+(CSIC), Spain
+REVIEWED BY
+Marcus Vinicius Merfa,
+Auburn University, United States
+Dion Mundy,
+The New Zealand Institute for Plant
+and Food Research Ltd., New Zealand
+*CORRESPONDENCE
+Pasquale Saldarelli
+pasquale.saldarelli@ipsp.cnr.it
+SPECIALTY SECTION
+This article was submitted to
+Plant Pathogen Interactions,
+a section of the journal
+Frontiers in Plant Science
+RECEIVED 14 June 2022
+ACCEPTED 31 August 2022
+PUBLISHED 20 September 2022
+CITATION
+Surano A, Abou Kubaa R, Nigro F,
+Altamura G, Losciale P, Saponari M and
+Saldarelli P (2022) Susceptible and
+resistant olive cultivars show
+diﬀerential physiological response to
+Xylella fastidiosa infections.
+Front. Plant Sci. 13:968934.
+doi: 10.3389/fpls.2022.968934
+COPYRIGHT
+© 2022 Surano, Abou Kubaa, Nigro,
+Altamura, Losciale, Saponari and
+Saldarelli. This is an open-access
+article distributed under the terms of
+the Creative Commons Attribution
+License (CC BY). The use, distribution
+or reproduction in other forums is
+permitted, provided the original
+author(s) and the copyright owner(s)
+are credited and that the original
+publication in this journal is cited, in
+accordance with accepted academic
+practice. No use, distribution or
+reproduction is permitted which does
+not comply with these terms.
+Susceptible and resistant olive
+cultivars show diﬀerential
+physiological response to Xylella
+fastidiosa infections
+Antony Surano1,2, Raied Abou Kubaa2, Franco Nigro1,
+Giuseppe Altamura3, Pasquale Losciale1, Maria Saponari2 and
+Pasquale Saldarelli2*
+1Department of Soil, Plant and Food Sciences, University of Bari Aldo Moro, Bari, Italy, 2Institute for
+Sustainable Plant Protection, National Research Council (CNR), Bari, Italy, 3CRSFA-Centro Ricerca,
+Sperimentazione e Formazione in Agricoltura Basile Caramia, Locorotondo, Italy
+Olive quick decline syndrome (OQDS) is a severe disease, ﬁrst described in
+Italy in late 2013, caused by strains of Xylella fastidiosa subsp. pauca (Xfp) in
+susceptible olive cultivars. Conversely, resistant olive cultivars do not develop
+OQDS but present scattered branch dieback, which generally does not evolve
+to severe canopy decline. In the present study, we assessed the physiological
+responses of Xfp-infected olive trees of susceptible and resistant cultivars.
+Periodic measurements of stomatal conductance (gs) and stem water potential
+(Ψ stem) were performed using a set of healthy and Xfp-infected plants of
+the susceptible “Cellina di Nardò” and resistant “Leccino” and “FS17” cultivars.
+Strong diﬀerences in 1gs and 1Ψ stem among Xfp-infected trees of these
+cultivars were found, with higher values in Cellina di Nardò than in Leccino and
+FS17, while no diﬀerences were found among healthy plants of the diﬀerent
+cultivars. Both resistant olive cultivars showed lower water stress upon Xfp
+infections, compared to the susceptible one, suggesting that measurements
+of gs and Ψ stem may represent discriminating parameters to be exploited in
+screening programs of olive genotypes for resistance to X. fastidiosa.
+KEYWORDS
+stomatal conductance, water potential, cultivar phenotyping, resistance, Xylella, olive
+Introduction
+Xylella fastidiosa (Xf ) is a gram-negative bacterium highly specialized to colonize
+xylem vessels of host plant species. Xylella fastidiosa is the causal agent of several
+important diseases such as Pierce’s disease of grapevine (Vitis vinifera), citrus variegated
+chlorosis (CVC) in sweet orange, phony peach disease in peach (Prunus persica), coﬀee
+leaf scorch in Coﬀea arabica, almond leaf scorch in Prunus dulcis, plum leaf scald in
+Prunus domestica, and oleander leaf scorch in Nerium oleander (Janse and Obradovic,
+2010). In the past decade, a strain of Xylella fastidiosa subsp. pauca (Xfp) has been
+accidentally introduced in Apulia, Southern Italy (Saponari et al., 2013), where it
+is the causal agent of a severe disease: the olive quick decline syndrome (OQDS).
+Frontiers in Plant Science
+01
+frontiersin.org
+
+
+===== PAGE 2/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+In olive groves, the bacterium was found to be eﬃciently
+transmitted by the predominant European xylem-sap feeder,
+the spittlebug Philaenus spumarius, responsible for the rapid
+spread of the OQDS (Martelli et al., 2016). Olive quick decline
+syndrome is characterized by scorching of leaves and scattered
+desiccation of branches and twigs. These symptoms usually
+start at the top of the olive canopy and expand to the rest of
+the crown, ultimately causing the death of the trees (Saponari
+et al., 2019). As general behavior of Xf in the host plants,
+bacterial cells attach to the vessel wall and, by multiplying,
+aggregate in a bioﬁlm matrix composed of secreted nucleic acids,
+proteins, and exopolysaccharides (EPS) (Roper et al., 2007).
+These bacteria aggregates, together with the plant attempt to
+isolate the bacterium by tylose and gum production cause vessel
+occlusions and an impairment of water transport (Sun et al.,
+2013). This bacterial lifestyle suggests that in Xf -infected plants
+the soil-plant-atmosphere continuum (SPAC) is compromised.
+A scenario supported by several studies showed that a lower
+gas exchange (Gomes et al., 2003) and leaf water potential
+(Habermann et al., 2003a) occur in orange trees aﬀected by
+CVC compared to healthy ones. Indeed, these latter authors
+suggested that xylem occlusion decreases the water supply
+to the leaves thus compromising the photosynthesis and the
+transpiration rates.
+The stomatal conductance (gs) was used to discriminate
+resistant and susceptible cultivars of mango (Mangifera sp.) to
+the fungal vascular phytopathogen Ceratocystis ﬁmbriata (Bispo
+et al., 2016). In this work measurements of gs showed a positive
+correlation with the cultivars responses based on the disease
+indices and plant colonization.
+Beside the vascular occlusion mechanism, a parallel role
+in inducing a water stress is played by the activity of Xf cell
+wall degrading enzymes. Their degradation activity on cell wall
+middle lamella of pit membranes contributes to reduce hydraulic
+conductivity in infected grapevines and to enhance the risk of
+embolisms (Fanton and Brodersen, 2021). Olive cultivars show
+diﬀerent molecular and phenotypical responses to Xfp, with
+trees of the cultivars Leccino and FS17 showing resistance to
+the infection, i.e., with limited desiccation and low bacterial
+populations, while other cultivars such as Ogliarola salentina
+and Cellina di Nardò harbor higher bacterial load and develop
+severe symptoms, which in most cases led to the plant dieback
+(Boscia et al., 2017a). Although the mechanisms of resistance
+in Leccino and FS17 trees are still unclear, in a recent study,
+Leccino was found to be constitutively less susceptible to xylem
+cavitation than Cellina di Nardò, and was able to activate more
+eﬃcient reﬁlling mechanisms, thus rapidly restoring vessel’s
+hydraulic conductivity (Sabella et al., 2019). Moreover, it has
+been hypothesized that the resistance of Leccino to Xfp could
+be related to its response to water stress, which could elicit
+defense pathways against Xfp mediated by sugars (De Pascali
+et al., 2022). In addition, molecular mechanisms entailing the
+plant cell wall receptors have been described in transcriptome
+studies (Giampetruzzi et al., 2016). The cell wall involvement
+is also supported by recent electron microscopy observations
+showing a higher pit membranes degradation in susceptible
+Cellina di Nardò compared to Leccino (Giampetruzzi et al.,
+2021; Montilon et al., 2022).
+The present work aims to understand whether Xfp
+infections aﬀect the physiological response of olives, in
+terms of impaired hydraulic conductivity and whether this
+response diﬀers between one susceptible and two resistant
+cultivars. The study is propaedeutic to the application of these
+physiological measurements for the screening of a larger number
+of cultivars.
+Materials and methods
+Inoculation of olive cultivars with Xfp
+In middle September 2020, 10 potted plants of the cultivars
+Cellina di Nardò, Leccino, and FS17, were used as recipient
+plants in a vector-mediated transmission experiment. Brieﬂy,
+each plant was caged for 3 days with 10 specimens of P.
+spumarius previously conﬁned for bacterial acquisition for 4
+days on selected branches of an infected olive tree located
+in the demarcated area of Apulia. Real time PCR on 30
+out of c. 300 insects after the acquisition period showed
+that the rate of insects positive to Xfp was 45% (data not
+shown). Transmission tests were performed in a screen-house
+located in the demarcated area (Vivai Arif Li Foggi, Lecce).
+Five plants were not caged and maintained under the same
+conditions, to serve as mock inoculated controls. At 6 and
+12 months after the transmission experiments, each plant was
+individually tested for Xfp, by harvesting at least four leaves,
+whose petioles were excised and used for total DNA extraction
+using the commercial kit Maxwell (R) RSC PureFood GMO
+and Authentication Kit (Promega, USA). The presence of Xfp
+was checked by real-time qPCR using the assay developed by
+Harper et al. (2010).
+Plant materials and growing conditions
+To assess if the colonization of the xylem tissues by bacterial
+cells and aggregates has a direct and measurable impact on
+the plant physiology, we selected systemically infected olive
+plants. More speciﬁcally, the plants that showed consistent
+qPCR positive results at 6 and 12 months, were considered
+systemically infected and retained for the stomatal conductance
+and stem water potential measurements. Four qPCR-positive
+plants and 4 mock inoculated plants were used for each cultivar.
+Measurements were started at 1 year post Xfp-transmission,
+when all plants were infected but visually symptomless. The
+Frontiers in Plant Science
+02
+frontiersin.org
+
+
+===== PAGE 3/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+selected olive plants were grown in pots (diameter 12 cm)
+containing a substrate composed by white peat (black peat
+(50:50) with a pH in H2O of 6.5 and an electrical conductivity
+of 0.4 dS/m). The substrate nutrient content was: 140, 100,
+and 180 mg/l of N, P2O5, and K2O, respectively. During the
+experiment, the plants were grown in a quarantine greenhouse
+at 25◦C ± 2 and at relative humidity (RH) of 65% ± 10.
+The measurements of stomatal conductance and stem water
+potential were carried out at ﬁeld capacity, corresponding to a
+soil water potential (9soil) of −0.02 < 9soil < −0.03 MPa.
+Stomatal conductance measurements
+The stomatal conductance (gs) was measured using a
+portable porometer (LI-600, LI-COR, Lincoln, Nebraska 68504,
+USA). For each plant, two mature leaves were selected and
+the mean value of the two gs measurements calculated. Five
+independent measurements were carried out at mid-day starting
+in mid-September 2021, with 3–4 days intervals.
+Diﬀerential stomatal conductance was calculates as followed:
+1gs = Hgs −Igs
+where, Hgs and Igs are the average of stomatal conductance of
+healthy and infected plants of the same cultivar, respectively.
+Stem water potential
+Stem water potential (9stem) deﬁned as the current water
+status of the plants was assessed twice, at the same time of
+the ﬁrst and the ﬁfth measurement of gs, using a Scholander-
+type pressure chamber Soil Moisture 3000 (Soil Moisture Corp.,
+Goleta, CA, USA). 9stem was measured on non-transpiring
+leaves, wrapped with aluminum foil for at least 1 h before the
+measurements, so that leaf water potential matched the stem
+water potential (Habermann et al., 2003a). Before the 9stem
+measurement, the olive leaf was unlined from the aluminum
+foil, placed on the workbench and then deprived of a half of
+the leaf blade to facilitate the allocation inside the sample holder
+(Supplementary Figure 1). Values of 9stem correspond to the
+mean of the measurements obtained from two leaves for each
+plant. Diﬀerential stem water potential (1Ψ stem) was calculated
+as follows:
+19stem = H9stem −I9stem
+where, H9stem and I9stem are the average of the stem water
+potential of healthy (H) and infected (I) plants from the same
+cultivar, respectively.
+Experimental design and statistical
+analysis
+Plants for the measurements of stomatal conductance and
+stem water potential were arranged in completely randomized
+design, with four replications for each cultivar. Data from all
+of the variables measured were assessed for normality and
+homogeneity of variance using the Bartlett test and subjected to
+the analysis of variance (ANOVA). When signiﬁcant, the means
+of the treatments were compared using the Student-Newman-
+Keuls Test (P ≤0.05). The two groups (healthy and infected)
+were analyzed by the unpaired Student’s t-test. Statistical analysis
+and Principal Component Analysis were performed with the
+RStudio software: Integrated Development for R, RStudio, PBC,
+Boston, MA.
+Results
+Real time qPCR
+Six
+and
+twelve
+months
+after
+Xfp
+vector-mediated
+inoculation, positive qPCR reactions were obtained for the
+majority of the plants caged with infected specimens of P.
+spumarius. The Cq (quantiﬁcation cycle) average values
+recorded for the infected plants selected in this study ranged
+from 20.24 for Cellina di Nardò, to 22.04 for Leccino and to
+20.56 for FS17 (Supplementary Table 1), while mock-inoculated
+plants tested negative. Statistical analysis of the Cq-values
+obtained from infected plants did not show any diﬀerence.
+Stomatal conductance (gs)
+For each cultivar, a reduction of the stomatal conductance
+(mol m−2 s−1) was recorded in the Xfp-infected plants
+compared to the healthy ones. However, while gs values for
+Cellina di Nardò were always signiﬁcantly diﬀerent between
+healthy and Xfp-infected plants, this was not the case for the
+plants of the two resistant cultivars. In Leccino, gs of Xfp-
+infected plants were signiﬁcantly diﬀerent from healthy plants
+only at the ﬁrst and second assessments. In FS17, Xfp-infected
+and healthy plants did not show diﬀerences in gs during the
+whole experiment (Table 1). Collectively, the average gs values
+of the healthy plants were not signiﬁcantly diﬀerent among
+the three tested cultivars (Figure 1, green boxes). Conversely,
+signiﬁcantly diﬀerent gs average values were recorded between
+Xfp-infected plants of Cellina di Nardò in comparison with
+those of Leccino and FS17 (Figure 1, red boxes). Moreover,
+intra-cultivar comparison showed that stomatal conductances
+of infected Cellina di Nardò olives were signiﬁcantly lower than
+that of the corresponding healthy plants, while these diﬀerences
+were not signiﬁcant among infected and healthy plants of
+Frontiers in Plant Science
+03
+frontiersin.org
+
+
+===== PAGE 4/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+TABLE 1 Stomatal conductance (gs) of Xfp-infected or healthy plants
+of the three cultivars, during the ﬁve assessments.
+Assessment
+date
+Infected or
+Healthy
+gs (mol m−2 s−1)
+Cellina di
+Nardò
+Leccino
+FS17
+28 Sept.
+Infected
+0.094800
+0.093581
+0.177665
+Healthy
+0.223491
+0.149987
+0.198447
+**
+*
+ns
+1 Oct.
+Infected
+0.069214
+0.134229
+0.205255
+Healthy
+0.24974
+0.200009
+0.227478
+***
+**
+ns
+4 Oct.
+Infected
+0.067936
+0.171211
+0.207488
+Healthy
+0.269279
+0.227855
+0.252709
+***
+ns
+ns
+7 Oct.
+Infected
+0.068892
+0.128206
+0.147707
+Healthy
+0.221905
+0.184497
+0.19759
+***
+ns
+ns
+11 Oct.
+Infected
+0.054984
+0.090632
+0.092731
+Healthy
+0.115406
+0.103032
+0.091379
+**
+ns
+ns
+Values represents the average measurements of two leaves from four plants from
+each cultivar.
+Signiﬁcance level according to the Student’s t-test (n = 4): ***P < 0.001; **0.001 < P <
+0.01; *0.01 < P < 0.05; ns = not signiﬁcant.
+the other two cultivars (Figure 1). Concerning the diﬀerential
+stomatal conductance (1gs) the data showed a constant trend
+during all assessments (Table 2). In particular, Cellina di Nardò
+showed a 1gs signiﬁcantly higher than Leccino and FS17 in all
+ﬁve assessments. The latter two cultivars did not diﬀer from each
+other, with Leccino showing intermediate values, not statistically
+diﬀerent from FS17 (Figure 2).
+Stem water potential (Ψ stem)
+Two measurements of the stem water potential (MPa) were
+taken throughout the trial. No diﬀerence of the average stem
+water potential was recorded among the healthy plants of the
+three cultivars (Figure 3, green boxes) while infected plants of
+the cultivar Cellina di Nardò had a signiﬁcantly lower Ψ stem
+(more negative) than Leccino and FS17 (Figure 3, red boxes).
+Infected plants of the cultivar Leccino showed a signiﬁcant
+drop of the stem water potential in comparison with the
+healthy plants of the same cultivar, while this diﬀerence was not
+recorded among healthy and infected FS17 olives (Figure 3 and
+Table 3). A further evaluation showed that the three cultivars
+have clearly diﬀerent values of diﬀerential stem water potential
+(1Ψ stem) (Figure 4). In particular, negative 1Ψ stem values
+were observed in Cellina di Nardò, while limited diﬀerences
+of stem water potential were measured between healthy and
+FIGURE 1
+Box plot of stomatal conductance (gs) in healthy (green boxes)
+or Xfp-infected (red boxes) olives displaying the variation of data
+among the four infected or healthy plants of the three cultivars.
+Bars marked with the same letter are not statistically diﬀerent,
+according to the Student–Newman–Keuls Test (P ≤0.05).
+TABLE 2 Diﬀerential stomatal conductance (1gs) among Xfp-infected
+or healthy plants of the three cultivars, during the ﬁve assessments.
+Cultivar
+1gs (mol m−2 s−1)*
+28 Sept.
+1 Oct.
+4 Oct.
+7 Oct.
+11 Oct.
+Cellina di Nardò
+0.128690a
+0.180526a
+0.201342a
+0.153013a
+0.060423a
+Leccino
+0.056406b
+0.065780b
+0.056643b
+0.056291b
+0.012399b
+FS17
+0.020782b
+0.022223b
+0.045221b
+0.049883b
+−0.001352b
+Values represents the average measurements of two leaves from four plants for
+each cultivar.
+*Means followed by the same letter in the column are not signiﬁcantly diﬀerent according
+to the Student-Newman-Keuls Test (P≤0.05).
+Xfp-infected plants of the cultivar FS17 (i.e., 1Ψ stem close
+to 0) and Leccino. Therefore, values of diﬀerential stem water
+potential were signiﬁcantly diﬀerent among the three cultivars.
+This trend was similar during both assessments (Table 4).
+A synoptical representation of the diﬀerential clustering
+of Cellina di Nardò in comparison with Leccino and FS17 is
+given by a Principal Component Analysis using gs and Ψ stem
+input data (Figure 5). A clear separation of infected olives of
+Cellina di Nardò from the plants of the other two cultivars
+was observed, demonstrating that Xfp infections determined
+measurable alterations of the physiological indexes in this
+Frontiers in Plant Science
+04
+frontiersin.org
+
+
+===== PAGE 5/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+FIGURE 2
+Diﬀerential stomatal conductance (1gg) in healthy or
+Xfp-infected olives. Average values from four plants of the three
+cultivars are in the y-axis. Bars marked with the same letter are
+not signiﬁcantly diﬀerent, ac-cording to the
+Student–Newman–Keuls Test (P ≤0.05).
+FIGURE 3
+Box plot of stem water potential (Ψ stem) in healthy (green
+boxes) or Xfp-infected (red boxes) olive plants displaying the
+variation of data among the four infected or healthy plants of
+the three cultivars. Bars marked with the same letter are not
+signiﬁcantly diﬀerent, according to the Student-Newman-Keuls
+Test (P ≤0.05).
+cultivar, while these changes were less pronounced in the
+resistant cultivars FS17 and Leccino.
+Discussion
+In the present work, measurements of gs and Ψ stem were
+carried out on healthy and Xfp-infected plants of susceptible
+TABLE 3 Stem water potential (Ψ stem) of Xfp-infected or healthy
+plants of the three cultivars, during the two assessments.
+Assessment
+date
+Infected or
+Healthy
+Ψ stem (MPa)
+Cellina
+di Nardò
+Leccino
+FS17
+28 Sept.
+Infected
+−1.49
+−1.20
+−1.10
+Healthy
+−1.09
+−1.08
+−1.08
+***
+***
+ns
+11 Oct.
+Infected
+−1.67
+−1.34
+−1.24
+Healthy
+−1.22
+−1.20
+−1.20
+***
+**
+ns
+Values represents the average values of two leaves from four plants for each cultivar.
+During the two assessments, measurements were taken from four plants of the
+three cultivars.
+Signiﬁcance level according to the Student’s t-test (n = 4): ***P < 0.001; **0.001 < P <
+0.01; *0.01 < P < 0.05; ns = not signiﬁcant.
+FIGURE 4
+Diﬀerential stem water potential (1Ψ stem) in healthy or
+Xfp-infected olives. Average values from four plants of the three
+cultivars are in the y-axis. Bars marked with the same letter are
+not signiﬁcantly diﬀerent, according to the
+Student-Newman-Keuls Test (P ≤0.05).
+and resistant olive cultivars, from which the diﬀerential
+stomatal conductance (1gs) and the diﬀerential stem water
+potential (1Ψ stem) were calculated. Healthy plants showed
+similar gs and Ψ stem values, regardless of belonging to the
+resistant or susceptible cultivars. Conversely, lower stomatal
+conductance (gs) and more negative stem water potential
+(Ψ stem) values were measured in Xfp-infected plants of the
+susceptible cultivar Cellina di Nardò, which were statistically
+diﬀerent from those of the two resistant cultivars. Therefore,
+by comparing the diﬀerential stomatal conductance (1gs) and
+stem water potential (1Ψ stem) values, we could categorize the
+plants belonging to the three cultivars. Under our experimental
+conditions, plants of the cultivar Cellina di Nardò suﬀered a
+severe hydraulic alteration when infected by Xfp, as showed
+by higher (1gs) and negative 1Ψ stem values. While both
+parameters were not much altered (i.e., close to 0) in infected
+Frontiers in Plant Science
+05
+frontiersin.org
+
+
+===== PAGE 6/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+plants of the two resistant cultivars. This result is in line with
+evidences from Habermann et al. (2003a,b) showing that a lower
+leaf water potential, indicative of an alteration in the water
+supply to the mesophyll, occurs in orange trees aﬀected by CVC.
+The outcomes of diﬀerent studies in olives suggest an
+active host response in the cultivar Leccino to Xfp infections.
+Besides molecular mechanisms entailing the plant cell wall
+receptors and the immune response that have been described
+in transcriptome studies (Giampetruzzi et al., 2016), a better
+hydraulic management of the water stress induced by the
+pathogen has been also reported in this cultivar (Sabella et al.,
+2019). Indeed, these latter authors hypothesized that a more
+eﬃcient reﬁlling mechanism occurs in the plants of the cultivar
+Leccino, which ultimately allows it to mitigate the loss of
+hydraulic conductivity in infected plants, as a consequence of
+the vascular occlusions induced by the pathogen. In addition,
+changes in the stem hydraulic conductivity and consequently
+in the water transport occur in the infected plants as a direct
+impact of the bacterial dynamics and spread in the xylem tissues;
+more speciﬁcally as documented in grapevine, the degradation
+TABLE 4 Diﬀerential stem water potential (1Ψ stem) among
+Xfp-infected or healthy plants of the three cultivars, during the two
+assessments.
+Cultivar
+1Ψ stem (MPa)*
+28 Sept.
+11 Oct.
+Cellina di Nardò
+−0.40a
+−0.45a
+Leccino
+−0.11b
+−0.14b
+FS17
+−0.02c
+−0.04c
+Values represents the average values of two leaves from four plants for each cultivar.
+*Means followed by the same letter in the column are not signiﬁcantly diﬀerent according
+to the Student-Newman-Keuls test (P ≤0.05).
+of Pit Membrane-middle lamellas by the bacterium cell wall
+degrading enzymes (Fanton and Brodersen, 2021) is one of
+the mechanisms underlining the loss of hydraulic conductivity.
+Similarly, a severe degradation of the pit membranes occurs
+in the susceptible cultivar Cellina di Nardò compared to the
+resistant cultivar Leccino (Giampetruzzi et al., 2021; Montilon
+et al., 2022). All together, these studies and the results herein
+reveal that Xfp infection determines physiological alterations
+in olives resembling a water stress, and that these changes are
+less pronounced in resistant cultivars. Furthermore, given that
+there is a positive correlation between stomatal conductance
+and crops yield (Pietragalla and Pask, 2012), and the positive
+correlation between stem water potential and olive yield
+(Fernandes-Silva et al., 2010; Moriana et al., 2012; Ghrab et al.,
+2013), the data herein collected support the speculation that
+resistant plants upon Xfp infections may remain productive.
+Considering that all infected plants, regardless of the cultivar,
+had similar Cq-values (i.e., similar bacterial load), the variations
+of the physiological parameters detected in our study are
+more likely the consequence of the diﬀerential host response
+to the bacterial infections rather than the direct inﬂuence of
+the pathogen abundance. The present data supports molecular
+evidences and extensive ﬁeld surveys concluding that there
+is a diﬀerent susceptibility of olive cultivars to X. fastidiosa
+infection (Habermann et al., 2003b; Boscia et al., 2017b;
+De Pascali et al., 2022). Indeed, this study is a preliminary
+step to introduce a phenomics approach in the screening
+of susceptible/resistant genotypes to X. fastidiosa. Such an
+approach aims to integrate diverse plant phenotypes to describe
+the interaction between genes and the environment (which is
+the pathogen’s pressure, in our case) and to understand the
+impact of plant biological diversity in adaptation to biotic and
+abiotic stresses (Bilder et al., 2009; Furbank and Tester, 2011;
+Yol et al., 2015). To this end, our study gives a quantitative
+FIGURE 5
+Principal Component Analysis using gg (X-axis) and Ψ stem (Y-axis) data from plants of the three cultivars measured throughout the whole
+experiment. Xfp and HC correspond to Xfp-infected and healthy plants, respectively.
+Frontiers in Plant Science
+06
+frontiersin.org
+
+
+===== PAGE 7/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+FIGURE 6
+Olive plants used for the experiment showing symptoms 6
+months after the end of the experiment (18 months after Xfp
+vector-transmission). Healthy plants on left and Xfp-infected
+plants on right. (A) Cellina di Nardò, (B) Leccino, and (C) FS17.
+physiological tool to improve the phenotyping of the wide
+olive germplasm.
+The long period of incubation of the Xfp infections in
+olive [EFSA Panel on Plant Health (PLH), 2015] implies that
+experiments for screening and diﬀerentiation of susceptible
+and resistant cultivars require long period of observations. In
+our study, we demonstrated that in asymptomatic infection,
+monitoring the physiological parameters can help to predict the
+behaviors of a given cultivar. Severe symptoms of desiccation
+were obtained on the Xfp-infected plants of Cellina di Nardò
+18 months after vector transmission and 6 months after our
+measurements, while plants of FS17 and Leccino remained
+symptomless (Figure 6).
+Our results conﬁrm that X. fastidiosa infections in olive
+limit water supply to leaves, as indicated by the lower values
+of stomatal conductance and stem water potential detected
+in the infected plants compared to the healthy ones. To our
+knowledge this is the ﬁrst study documenting physiological
+diﬀerences in olive trees infected by X. fastidiosa, and more
+importantly that physiological diﬀerences exist among these
+cultivars in response to the bacterium. Once this approach is
+validated in time-course experiments and on a larger panel of
+cultivars, it can be proposed as a complementary tool to support
+large-scale screening program of olive cultivars/genotypes for
+resistance to X. fastidiosa, contributing to reduce time, costs and
+infrastructures needed to perform such biological experiments.
+Several breeding programs aiming at developing new X.
+fastidiosa resistant genotypes have been started in the few past
+years, the assessment of the response to the bacterial infections
+is one of the major bottleneck in the selection process, increasing
+the time needed to fully assess the agronomical and productive
+performances of the newly developed genotypes. Perhaps, the
+possibility to rapidly assess the genotype response to bacterial
+infections, can contribute to speed up the breeding programs.
+Data availability statement
+The
+raw
+data
+supporting
+the
+conclusions
+of
+this
+article
+will be
+made
+available
+by the authors,
+without
+undue reservation.
+Author contributions
+AS and RAK performed the experiments. GA managed the
+plants. AS, PS, RAK, and MS planned trials and wrote the
+manuscript. PL and FN contributed to the discussion of the
+data and to the ﬁnal editing. All authors listed have made a
+substantial, direct, and intellectual contribution to the work and
+approved it for publication.
+Funding
+The work was funded by Regione Puglia, P.S.R. Puglia
+2014/2020 - Misura 16 — Cooperazione - Sottomisura 16.2-
+Sostegno a progetti pilota e allo sviluppo di nuovi prodotti,
+pratiche, processi e tecnologie, Avviso Pubblico approvato con
+D.A.G. n. 194 del 12/09/2018, pubblicata nel B.U.R.P. n. 121
+del 20/09/2018, and Project BIOSAVEX Olive Biodiversity for
+Saving Salento from Xylella.
+Acknowledgments
+Authors wish to thank Mauro Centritto (Institute for
+Sustainable
+Plant
+Protection
+(IPSP),
+National
+Research
+Council—CNR) and Gianfranco Rana (Consiglio per la Ricerca
+in Agricoltura e l’Analisi Dell’Economia Agraria—CREA)
+for the inputs provided and the fruitful discussion of the
+experimental plan.
+Frontiers in Plant Science
+07
+frontiersin.org
+
+
+===== PAGE 8/8 =====
+
+Surano et al.
+10.3389/fpls.2022.968934
+Conﬂict of interest
+The authors declare that the research was conducted in the
+absence of any commercial or ﬁnancial relationships that could
+be construed as a potential conﬂict of interest.
+Publisher’s note
+All claims expressed in this article are solely those of the
+authors and do not necessarily represent those of their aﬃliated
+organizations, or those of the publisher, the editors and the
+reviewers. Any product that may be evaluated in this article, or
+claim that may be made by its manufacturer, is not guaranteed
+or endorsed by the publisher.
+Supplementary material
+The Supplementary Material for this article can be
+found online at: https://www.frontiersin.org/articles/10.3389/
+fpls.2022.968934/full#supplementary-material
+SUPPLEMENTARY FIGURE 1
+Sample preparation for 9stem measurement.
+References
+Bilder, R. M., Sabb, F. W., Cannon, T. D., London, E. D., Jentsch, J. D., Parker, D.
+S., et al. (2009). Phenomics: the systematic study of phenotypes on a genome-wide
+scale. Neuroscience 164, 30–42. doi: 10.1016/j.neuroscience.2009.01.027
+Bispo, W. M. D. S., Araujo, L., Moreira, W. R., Silva, L. D. C., and Rodrigues,
+F. Á. (2016). Diﬀerential leaf gas exchange performance of mango cultivars
+infected by diﬀerent isolates of Ceratocystis ﬁmbriata. Sci. Agric. 73, 150–158.
+doi: 10.1590/0103-9016-2015-0022
+Boscia, D., Altamura, G., Ciniero, A., Di Carolo, M., Dongiovanni, C., Fumarola,
+G., et al. (2017a). Resistenza a Xylella fastidiosa in diverse cultivar di olivo. L’Inform.
+Agr. 11, 59–63. doi: 10.5281/zenodo.495708
+Boscia, D., Altamura, G., Dongiovanni, C., Giampetruzzi, A., La Notte, P.,
+Loconsole, G., et al. (2017b). “Screening of olive germplasm for resistance to Xylella
+fastidiosa ST53: the state of the art,” in Proceedings of the European conference on
+Xylella fastidiosa: ﬁnding answers to a global problem (Palma de Mallorca) 12–13.
+doi: 10.5281/zenodo.1051209
+De Pascali, M., Vergine, M., Negro, C., Greco, D., Vita, F., Sabella, E., et al. (2022).
+Xylella fastidiosa and drought stress in olive trees: a complex relationship mediated
+by soluble sugars. Biology 11:112. doi: 10.3390/biology11010112
+EFSA Panel on Plant Health (PLH) (2015). Scientiﬁc opinion on the risks to plant
+health posed by Xylella fastidiosa in the EU territory, with the identiﬁcation and
+evaluation of risk reduction options. EFSA J. 13:3989. doi: 10.2903/j.efsa.2015.3989
+Fanton, A. C., and Brodersen, C. (2021). Hydraulic consequences of enzymatic
+breakdown of grapevine pit membranes. Plant Physiol. 186, 1919–1931.
+doi: 10.1093/plphys/kiab191
+Fernandes-Silva, A. A., Ferreira, T. C., Correia, C. M., Malheiro, A. C., and
+Villalobos, F. J. (2010). Inﬂuence of diﬀerent irrigation regimes on crop yield and
+water use eﬃciency of olive. Plant Soil 333, 35–47. doi: 10.1007/s11104-010-0294-5
+Furbank,
+R.
+T.,
+and
+Tester,
+M.
+(2011).
+Phenomics–technologies
+to
+relieve
+the
+phenotyping
+bottleneck.
+Trends
+Plant
+Sci.
+16,
+635–644.
+doi: 10.1016/j.tplants.2011.09.005
+Ghrab, M., Gargouri, K., Bentaher, H., Chartzoulakis, K., Ayadi, M., Mimoun, M.
+B., et al. (2013). Water relations and yield of olive tree (cv. Chemlali) in response to
+partial root-zone drying (PRD) irrigation technique and salinity under arid climate.
+Agric. Water Manag. 123, 1–11. doi: 10.1016/j.agwat.2013.03.007
+Giampetruzzi, A., D’Attoma, G., De Stradis, A., Altamura, G., Abou Kubaa,
+R., Nicoloso, V., et al. (2021). “Xylella fastidiosa and olive interactions: the key
+role of the plant cell wall,” in Proceedings of the 3rd European Conference on
+Xylella fastidiosa and XF-ACTORS ﬁnal Meeting, 26–30 April 2021 (Online Event).
+doi: 10.5281/zenodo.4882789
+Giampetruzzi, A., Morelli, M., Saponari, M., Loconsole, G., Chiumenti, M.,
+Boscia, D., et al. (2016). Transcriptome proﬁling of two olive cultivars in response
+to infection by the CoDiRO strain of Xylella fastidiosa subsp. pauca. BMC Genomics
+17, 1–18. doi: 10.1186/s12864-016-2833-9
+Gomes, M. D. M. D.A., Lagôa, A. M. M. A., Machado, E. C., Medina, C. L.,
+and Machado, M. A. (2003). Gas exchanges and carbohydrate metabolism in
+orange trees with citrus variegated chlorosis. Braz. J. Plant Physiol. 15, 25–31
+doi: 10.1590/S1677-04202003000100004
+Habermann, G., Machado, E. C., Rodrigues, J. D., and Medina, C. L. (2003a).
+CO2 assimilation, photosynthetic light response curves, and water relations of’
+Pêra’sweet orange plants infected with Xylella fastidiosa. Braz. J. Plant Physiol. 15,
+79–87. doi: 10.1590/S1677-04202003000200003
+Habermann, G., Machado, E. C., Rodrigues, J. D., and Medina, C. L. (2003b). Gas
+exchange rates at diﬀerent vapor pressure deﬁcits and water relations of ‘Pera’sweet
+orange plants with citrus variegated chlorosis (CVC). Sci. Hortic. 98, 233–245.
+doi: 10.1016/S0304-4238(02)00228-5
+Harper, S. J., Ward, L. I., and Clover, G. R. G. (2010). Development
+of LAMP and real-time PCR methods for the rapid detection of Xylella
+fastidiosa for quarantine and ﬁeld applications. Phytopathology 100, 1282–1288.
+doi: 10.1094/PHYTO-06-10-0168
+Janse, J. D., and Obradovic, A. (2010). Xylella fastidiosa: its biology,
+diagnosis,
+control
+and
+risks.
+J.
+Plant
+Pathol.
+92(1
+Suppl),
+S35–S48.
+doi: 10.4454/jpp.v92i1sup.250
+Martelli, G. P., Boscia, D., Porcelli, F., and Saponari, M. (2016). The olive quick
+decline syndrome in south-east Italy: a threatening phytosanitary emergency. Eur.
+J. Plant Pathol. 144, 235–243. doi: 10.1007/s10658-015-0784-7
+Montilon, V., De Stradis, A., Saponari, M., Kubaa, R. A., Giampetruzzi, A.,
+D’Attoma, G. et al. (2022). Xylella fastidiosa subsp. pauca ST53 exploits pit
+membranes of susceptible olive cultivars to spread systemically in the xylem. Plant
+Path. [unpublished].
+Moriana, A., Pérez-López, D., Prieto, M. H., Ramírez-Santa-Pau, M., and
+Pérez-Rodriguez, J. M. (2012). Midday stem water potential as a useful tool for
+estimating irrigation requirements in olive trees. Agric. Water Manag. 112, 43–54.
+doi: 10.1016/j.agwat.2012.06.003
+Pietragalla, J., and Pask, A. (2012). “Stomatal conductance”, in Physiological
+Breeding II: a Field Guide to Wheat Phenotyping, 1st Edn., eds A. J. D. Pask, J.
+Pietragalla, D. M. Mullan, and M. P. Reynolds (Mexico: Cimmyt), 15–17.
+Roper, M. C., Greve, L. C., Labavitch, J. M., and Kirkpatrick, B. C. (2007).
+Detection and visualization of an exopolysaccharide produced by Xylella
+fastidiosa in vitro and in planta. Appl. Environ. Microbiol. 73, 7252–7258.
+doi: 10.1128/AEM.00895-07
+Sabella, E., Aprile, A., Genga, A., Siciliano, T., Nutricati, E., Nicol,ì, F., et al.
+(2019). Xylem cavitation susceptibility and reﬁlling mechanisms in olive trees
+infected by Xylella fastidiosa. Sci. Rep. 9, 1–11. doi: 10.1038/s41598-019-46092-0
+Saponari, M., Boscia, D., Nigro, F., and Martelli, G. P. (2013). Identiﬁcation of
+DNA sequences related to Xylella fastidiosa in oleander, almond and olive trees
+exhibiting leaf scorch symptoms in Apulia (Southern Italy). J. Plant Pathol. 95, 668.
+doi: 10.4454/JPP.V95I3.035
+Saponari, M., Giampetruzzi, A., Loconsole, G., and Boscia, D., Saldarelli, P.
+(2019). Xylella fastidiosa in olive in Apulia: where we stand. Phytopathology 109,
+175–186. doi: 10.1094/PHYTO-08-18-0319-FI
+Sun, Q., Sun, Y., Walker, M. A., and Labavitch, J. M. (2013). Vascular
+occlusions
+in
+grapevines
+with
+Pierce’s
+disease
+make
+disease
+symptom
+development worse. Plant Physiol. 161, 1529–1541. doi: 10.1104/pp.112.2
+08157
+Yol, E., Toker, C., and Uzun, B. (2015). “Traits for phenotyping,” in Phenomics
+in Crop Plants: Trends, Options and Limitations, 1st Edn., eds J. Kumar, A.
+Pratap, and S. Kumar (New Delhi: Springer), 11–26. doi: 10.1007/978-81-322-22
+26-2_2
+Frontiers in Plant Science
+08
+frontiersin.org

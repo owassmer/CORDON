@@ -1,0 +1,114 @@
+SOURCE_URL: https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art33!vig=2021-03-13
+SOURCE_STATUS: Normattiva point-in-time text in force 2021-03-13
+
+[ **Presidenza del Consiglio dei Ministri**](https://www.governo.it)
+[ ITA ](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art33!vig=2021-03-13)
+
+
+# [Normattiva - Il portale della legge vigente ](https://www.normattiva.it/)
+In caso di problemi di visualizzazione dell’atto clicca 
+it-calendar
+July 2015  
+ |  
+|  |  
+| Javascript must be enabled  |  
+Close
+Fare clic o premere il tasto Invio o la barra spaziatrice per aprire il calendario
+Go to previous month
+Go to next month
+Go to previous year
+Go to next year
+Close the date picker
+Date label
+##  DECRETO LEGISLATIVO 2 febbraio 2021, n. 19 
+### Norme per la protezione delle piante dagli organismi nocivi in attuazione dell'articolo 11 della legge 4 ottobre 2019, n. 117, per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625. (21G00021) 
+note: Entrata in vigore del provvedimento: 13/03/2021 _(Ultimo aggiornamento all'atto pubblicato il 24/01/2026)_
+[ visualizza atto intero ](https://www.normattiva.it/esporta/attoCompleto?atto.dataPubblicazioneGazzetta=2021-02-26&atto.codiceRedazionale=21G00021)
+[ nascondi ](javascript:void\(0\))
+vigente al 13/03/2021
+  * Articoli
+  * Ambito di applicazione e definizioni
+  * Organizzazione del servizio fitosanitario nazionale
+  * Laboratori
+  * Personale del servizio fitosanitario nazionale
+  * Sorveglianza degli organismi nocivi delle piante sul territorio nazionale
+  * Emergenze fitosanitarie
+  * Registro ufficiale degli operatori professionali
+  * Passaporto delle piante
+  * Controlli ufficiali
+  * Piante, prodotti vegetali e altri oggetti utilizzati a fini di prove ufficiali, scientifici o educativi, sperimentali, di selezione varietale o riproduttivi
+  * Sistema informativo fitosanitario
+  * Sanzioni amministrative e norme finanziarie
+  * Norme transitorie e finali
+
+
+  * Allegati
+
+
+  * Allegato I
+  * Allegato II
+  * Allegato III
+
+
+## Parole cercate: 
+Presente nei seguenti articoli
+Presente nei seguenti allegati
+chiudi
+Articoli  Approfondimenti e Funzioni 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+Testo in vigore dal: 13-3-2021 
+## Art. 33
+Misure di contrasto degli organismi nocivi da quarantena in applicazione di provvedimenti di emergenza fitosanitaria
+1. Al fine di proteggere l'agricoltura, il territorio, le foreste, il paesaggio e i beni culturali dalla diffusione di organismi nocivi per le piante, le misure fitosanitarie ufficiali di protezione delle piante, ivi compresa la distruzione delle piante contaminate, anche monumentali, disposte da provvedimenti o ordinanze fitosanitarie che le regolamentano, sono attuate in deroga a ogni disposizione vigente, comprese quelle di natura vincolistica, nei limiti e secondo i criteri indicati nei medesimi provvedimenti di emergenza fitosanitaria. In presenza di misure fitosanitarie che prevedono la rimozione delle piante in un'area delimitata, la rimozione di piante monumentali o di interesse storico, nelle quali non sia allo stato accertata la presenza dell'organismo nocivo, può essere disposta, caso per caso, dall'autorità fitosanitaria competente, previa autorizzazione paesaggistica di cui all'[articolo 146 del decreto legislativo 22 gennaio 2004, n. 42](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2004-01-22;42~art146), da rilasciare entro quarantacinque giorni, e comunque nel rispetto degli obblighi derivanti dal diritto dell'Unione. 
+2. Qualora ricorrano i presupposti di cui all'[articolo 21-bis della legge 7 agosto 1990, n. 241](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241~art21bis), la comunicazione dei provvedimenti o delle ordinanze fitosanitarie che dispongono le misure fitosanitarie, è effettuata secondo le modalità e i termini stabiliti dal Servizio fitosanitario centrale ovvero dal Servizio fitosanitario regionale competente per territorio. Effettuate le suddette forme di pubblicità, gli ispettori o gli agenti fitosanitari e il personale di supporto muniti di autorizzazione del Servizio fitosanitario competente per territorio, nell'esercizio delle loro attribuzioni, accedono ai fondi nei quali sono presenti piante infettate dagli organismi nocivi, al fine di attuare le misure fitosanitarie. A tale scopo, qualora i proprietari si oppongano all'intervento, i Servizi fitosanitari competenti per territorio possono chiedere al Prefetto l'ausilio della forza pubblica. 
+Note all'art. 33: - Il testo dell'[articolo 146 del decreto legislativo 22 gennaio 2004, n. 42](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2004-01-22;42~art146) ([Codice dei beni culturali e del paesaggio](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2004-01-22;42), ai sensi dell'[articolo 10 della legge 6 luglio 2002, n. 137](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2002-07-06;137~art10)), pubblicato nella Gazzetta Ufficiale 24 febbraio 2004, n. 45, S.O., così recita: «Art. 146 (Autorizzazione). - 1. I proprietari, possessori o detentori a qualsiasi titolo di immobili ed aree di interesse paesaggistico, tutelati dalla legge, a termini dell'articolo 142, o in base alla legge, a termini degli articoli 136, 143, comma 1, lettera d), e 157, non possono distruggerli, né introdurvi modificazioni che rechino pregiudizio ai valori paesaggistici oggetto di protezione. 2. I soggetti di cui al comma 1 hanno l'obbligo di presentare alle amministrazioni competenti il progetto degli interventi che intendano intraprendere, corredato della prescritta documentazione, ed astenersi dall'avviare i lavori fino a quando non ne abbiano ottenuta l'autorizzazione. 3. La documentazione a corredo del progetto è preordinata alla verifica della compatibilità fra interesse paesaggistico tutelato ed intervento progettato. Essa è individuata, su proposta del Ministro, con decreto del Presidente del Consiglio dei Ministri, d'intesa con la Conferenza Stato-regioni, e può essere aggiornata o integrata con il medesimo procedimento. 4. L'autorizzazione paesaggistica costituisce atto autonomo e presupposto rispetto al permesso di costruire o agli altri titoli legittimanti l'intervento urbanistico-edilizio. Fuori dai casi di cui all'articolo 167, commi 4 e 5, l'autorizzazione non può essere rilasciata in sanatoria successivamente alla realizzazione, anche parziale, degli interventi. L'autorizzazione è efficace per un periodo di cinque anni, scaduto il quale l'esecuzione dei progettati lavori deve essere sottoposta a nuova autorizzazione. I lavori iniziati nel corso del quinquennio di efficacia dell'autorizzazione possono essere conclusi entro e non oltre l'anno successivo la scadenza del quinquennio medesimo. Il termine di efficacia dell'autorizzazione decorre dal giorno in cui acquista efficacia il titolo edilizio eventualmente necessario per la realizzazione dell'intervento, a meno che il ritardo in ordine al rilascio e alla conseguente efficacia di quest'ultimo non sia dipeso da circostanze imputabili all'interessato. 5. Sull'istanza di autorizzazione paesaggistica si pronuncia la regione, dopo avere acquisito il parere vincolante del soprintendente in relazione agli interventi da eseguirsi su immobili ed aree sottoposti a tutela dalla legge o in base alla legge, ai sensi del comma 1, salvo quanto disposto all'articolo 143, commi 4 e 5. Il parere del soprintendente, all'esito dell'approvazione delle prescrizioni d'uso dei beni paesaggistici tutelati, predisposte ai sensi degli articoli 140, comma 2, 141, comma 1, 141-bis e 143, comma 1, lettere b), c) e d), nonché della positiva verifica da parte del Ministero, su richiesta della regione interessata, dell'avvenuto adeguamento degli strumenti urbanistici, assume natura obbligatoria non vincolante ed è reso nel rispetto delle previsioni e delle prescrizioni del piano paesaggistico, entro il termine di quarantacinque giorni dalla ricezione degli atti, decorsi i quali l'amministrazione competente provvede sulla domanda di autorizzazione. 6. La regione esercita la funzione autorizzatoria in materia di paesaggio avvalendosi di propri uffici dotati di adeguate competenze tecnico-scientifiche e idonee risorse strumentali. Può tuttavia delegarne l'esercizio, per i rispettivi territori, a province, a forme associative e di cooperazione fra enti locali come definite dalle vigenti disposizioni sull'ordinamento degli enti locali, agli enti parco, ovvero a comuni, purché gli enti destinatari della delega dispongano di strutture in grado di assicurare un adeguato livello di competenze tecnico-scientifiche nonché di garantire la differenziazione tra attività di tutela paesaggistica ed esercizio di funzioni amministrative in materia urbanistico-edilizia. 7. L'amministrazione competente al rilascio dell'autorizzazione paesaggistica, ricevuta l'istanza dell'interessato, verifica se ricorrono i presupposti per l'applicazione dell'articolo 149, comma 1, alla stregua dei criteri fissati ai sensi degli articoli 140, comma 2, 141, comma 1, 141-bis e 143, comma 1, lettere b), c) e d). Qualora detti presupposti non ricorrano, l'amministrazione verifica se l'istanza stessa sia corredata della documentazione di cui al comma 3, provvedendo, ove necessario, a richiedere le opportune integrazioni e a svolgere gli accertamenti del caso. Entro quaranta giorni dalla ricezione dell'istanza, l'amministrazione effettua gli accertamenti circa la conformità dell'intervento proposto con le prescrizioni contenute nei provvedimenti di dichiarazione di interesse pubblico e nei piani paesaggistici e trasmette al soprintendente la documentazione presentata dall'interessato, accompagnandola con una relazione tecnica illustrativa nonché con una proposta di provvedimento, e dà comunicazione all'interessato dell'inizio del procedimento e dell'avvenuta trasmissione degli atti al soprintendente, ai sensi delle vigenti disposizioni di legge in materia di procedimento amministrativo. 8. Il soprintendente rende il parere di cui al comma 5, limitatamente alla compatibilità paesaggistica del progettato intervento nel suo complesso ed alla conformità dello stesso alle disposizioni contenute nel piano paesaggistico ovvero alla specifica disciplina di cui all'articolo 140, comma 2, entro il termine di quarantacinque giorni dalla ricezione degli atti. Il soprintendente, in caso di parere negativo, comunica agli interessati il preavviso di provvedimento negativo ai sensi dell'[articolo 10-bis della legge 7 agosto 1990, n. 241](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241~art10bis). Entro venti giorni dalla ricezione del parere, l'amministrazione provvede in conformità. 9. Decorsi inutilmente sessanta giorni dalla ricezione degli atti da parte del soprintendente senza che questi abbia reso il prescritto parere, l'amministrazione competente provvede comunque sulla domanda di autorizzazione. Con regolamento da emanarsi ai sensi dell'[articolo 17, comma 2, della legge 23 agosto 1988, n. 400](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1988-08-23;400~art17-com2), entro il 31 dicembre 2008, su proposta del Ministro d'intesa con la Conferenza unificata, salvo quanto previsto dall'[articolo 3 del decreto legislativo 28 agosto 1997, n. 281](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1997-08-28;281~art3), sono stabilite procedure semplificate per il rilascio dell'autorizzazione in relazione ad interventi di lieve entità in base a criteri di snellimento e concentrazione dei procedimenti, ferme, comunque, le esclusioni di cui agli [articoli 19, comma 1](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241~art19-com1) e [20](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241~art19-com20), [comma 4 della legge 7 agosto 1990, n. 241](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241~art19-com4) e successive modificazioni. 10. Decorso inutilmente il termine indicato all'ultimo periodo del comma 8 senza che l'amministrazione si sia pronunciata, l'interessato può richiedere l'autorizzazione in via sostitutiva alla regione, che vi provvede, anche mediante un commissario ad acta, entro sessanta giorni dal ricevimento della richiesta. Qualora la regione non abbia delegato gli enti indicati al comma 6 al rilascio dell'autorizzazione paesaggistica, e sia essa stessa inadempiente, la richiesta del rilascio in via sostitutiva è presentata al soprintendente. 11. L'autorizzazione paesaggistica è trasmessa, senza indugio, alla soprintendenza che ha reso il parere nel corso del procedimento, nonché, unitamente allo stesso parere, alla regione ovvero agli altri enti pubblici territoriali interessati e, ove esistente, all'ente parco nel cui territorio si trova l'immobile o l'area sottoposti al vincolo. 12. L'autorizzazione paesaggistica è impugnabile, con ricorso al tribunale amministrativo regionale o con ricorso straordinario al Presidente della Repubblica, dalle associazioni portatrici di interessi diffusi individuate ai sensi delle vigenti disposizioni di legge in materia di ambiente e danno ambientale, e da qualsiasi altro soggetto pubblico o privato che ne abbia interesse. Le sentenze e le ordinanze del Tribunale amministrativo regionale possono essere appellate dai medesimi soggetti, anche se non abbiano proposto ricorso di primo grado. 13. Presso ogni amministrazione competente al rilascio dell'autorizzazione paesaggistica è istituito un elenco delle autorizzazioni rilasciate, aggiornato almeno ogni trenta giorni e liberamente consultabile, anche per via telematica, in cui è indicata la data di rilascio di ciascuna autorizzazione, con la annotazione sintetica del relativo oggetto. Copia dell'elenco è trasmessa trimestralmente alla regione e alla soprintendenza, ai fini dell'esercizio delle funzioni di vigilanza. 14. Le disposizioni dei commi da 1 a 13 si applicano anche alle istanze concernenti le attività di coltivazione di cave e torbiere nonché per le attività minerarie di ricerca ed estrazione incidenti sui beni di cui all'articolo 134. 15. 16. Dall'attuazione del presente articolo non devono derivare nuovi o maggiori oneri a carico della finanza pubblica.". - Il testo dell'[articolo 21-bis della legge 7 agosto 1990, n. 241](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1990-08-07;241~art21bis) (Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi), pubblicata nella Gazzetta Ufficiale 18 agosto 1990, n. 192, così recita: «Art. 21-bis (Efficacia del provvedimento limitativo della sfera giuridica dei privati). - 1. Il provvedimento limitativo della sfera giuridica dei privati acquista efficacia nei confronti di ciascun destinatario con la comunicazione allo stesso effettuata anche nelle forme stabilite per la notifica agli irreperibili nei casi previsti dal [codice di procedura civile](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:codice.procedura.civile:1940-10-28;1443). Qualora per il numero dei destinatari la comunicazione personale non sia possibile o risulti particolarmente gravosa, l'amministrazione provvede mediante forme di pubblicità idonee di volta in volta stabilite dall'amministrazione medesima. Il provvedimento limitativo della sfera giuridica dei privati non avente carattere sanzionatorio può contenere una motivata clausola di immediata efficacia. I provvedimenti limitativi della sfera giuridica dei privati aventi carattere cautelare ed urgente sono immediatamente efficaci.». 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+[ nascondi ](javascript:void\(0\))
+  * ### Approfondimenti
+  * aggiornamenti all'atto 
+  * lavori preparatori 
+  * aggiornamenti al titolo 
+  * aggiornamenti alla struttura 
+
+
+  * ### Funzioni 
+  * [ esporta in Akoma ntoso ](https://www.normattiva.it/do/atto/caricaAKN?dataGU=20210226&codiceRedaz=21G00021&dataVigenza=20210313)
+  * collegamento permanente 
+
+
+#### lavori preparatori
+chiudi
+#### aggiornamenti all'atto
+chiudi
+#### atti aggiornati
+chiudi
+#### atti correlati
+chiudi
+#### indice dell'atto
+chiudi
+#### aggiornamenti alla struttura
+chiudi
+#### aggiornamenti al titolo
+chiudi
+#### relazioni
+chiudi
+#### note atto
+chiudi
+#### collegamento permanente
+chiudi
+## guida in linea
+chiudi
+#### Aggiornamenti all'articolo
+chiudi
+#### atti parlamentari
+chiudi
+#### atti attuativi
+chiudi
+  *[lun]: lunedì
+  *[mar]: martedì
+  *[mer]: mercoledì
+  *[gio]: giovedì
+  *[ven]: venerdì
+  *[sab]: sabato
+  *[dom]: domenica
+

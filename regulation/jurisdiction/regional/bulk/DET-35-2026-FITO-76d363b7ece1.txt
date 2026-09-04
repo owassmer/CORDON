@@ -1,0 +1,590 @@
+15470                       Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 9 marzo 2026, n. 35
+Reg. (UE) 2020/1201 – D.Lgs 19 del 02/02/2021 – D.G.R. N. 1075/2025. Prescrizione di misure di eradicazione
+di n. 7 piante infette, ai sensi dell’art. 7 del Reg. (UE) 2020/1201, site in agro di Triggiano - Area delimitata
+per “Xylella fastidiosa sottospecie fastidiosa ST1”
+
+
+                                IL DIRIGENTE DELLA STRUTTURA PROPONENTE
+
+VISTI
+
+   • La legge 7 agosto 1990, n. 241 ‘Nuove norme in materia di procedimento amministrativo e di diritto di
+     accesso ai documenti amministrativi’;
+   • Il D.lgs. 30 marzo 2001, n. 165 ‘Norme generali sull’ordinamento del lavoro alle dipendenze delle
+     amministrazioni pubbliche’;
+   • Il D.lgs. 7 marzo 2005, n. 82 ‘Codice dell’amministrazione digitale’;
+   • Il Decreto del Presidente della Giunta regionale n. 22 del 22/01/2021 recante l’adozione dell’atto di alta
+     amministrazione MAIA 2.0;
+   • La D.G.R. n. 712 del 03/05/2021 avente ad oggetto ‘Conferimento incarico della Sezione ‘Osservatorio
+     Fitosanitario’ del Dipartimento Agricoltura, Sviluppo Rurale ed Ambientale’;
+   • La D.G.R. n. 788 del 11/06/2024 avente ad oggetto ‘Proroga incarico di direzione della Sezione
+     Osservatorio Fitosanitario afferente al Dipartimento Agricoltura Sviluppo Rurale ed Ambientale;
+   • La D.G.R. 15 settembre 2021, n. 1466 recante l’approvazione della Strategia regionale per la parità di
+     genere, denominata “Agenda di Genere”;
+   • La D.G.R. 26 settembre 2024, n. 1295 recante “Valutazione di Impatto di Genere (VIG). Approvazione
+     indirizzi metodologico-operativi e avvio fase strutturale”;
+   • La Determina dirigenziale n. 51 del 03/05/2024 di conferimento incarichi di Elevata Qualificazione
+     per la gestione delle emergenze fitosanitarie alle dipendenze della Sezione Osservatorio fitosanitario,
+     rettificata dalla DDS n. 124 del 03/10/2024.
+
+VISTI ALTRESÌ
+
+   • Il Reg. (UE) 2016/2031 del Parlamento Europeo e del Consiglio del 26 ottobre 2016 relativo alle misure
+     di protezione contro gli organismi nocivi per le piante, che modifica i regolamenti (UE) n. 228/2013,
+     (UE) n. 652/2014 e (UE) n. 1143/2014 del Parlamento Europeo e del Consiglio e abroga le direttive
+     69/464/CEE, 74/647/CEE, 93/85/CEE, 98/57/CE, 2000/29/CE, 2006/91/CE e 2007/33/CE del Consiglio;
+   • Il Reg. (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017, relativo ai controlli
+     ufficiali e alle altre attività ufficiali effettuati per garantire l’applicazione della legislazione sugli alimenti
+     e sui mangimi, delle norme sulla salute e sul benessere degli animali, sulla sanità delle piante nonché
+     sui prodotti fitosanitari;
+   • Il Reg. di esecuzione (UE) n. 2020/1201 della Commissione del 14/08/2020 relativo alle misure per
+     prevenire l’introduzione e la diffusione nell’Unione della Xylella fastidiosa;
+   • Il Reg. di esecuzione (UE) 2021/1688 della Commissione del 20 settembre 2021 che modifica il
+     regolamento di esecuzione (UE) 2020/1201 per quanto riguarda gli elenchi delle piante ospiti e delle
+     piante specificate e i metodi di prova per l’identificazione della Xylella fastidiosa;
+   • Il Reg. di esecuzione (UE) 2023/1706 della Commissione del 7 settembre 2023 che modifica il
+     regolamento di esecuzione (UE) 2020/1201 per quanto riguarda gli elenchi delle piante notoriamente
+     sensibili alla Xylella fastidiosa;
+   • Il Reg. (UE) 2019/1702 che integra il regolamento (UE) 2016/2031 del Parlamento europeo e del
+     Consiglio stabilendo l’elenco degli organismi nocivi prioritari, tra i quali la Xylella fastidiosa;
+   • Il Reg. di esecuzione (UE) 2024/1320 del 15 maggio 2024 che modifica il regolamento di esecuzione
+                           Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026                    15471
+
+
+    (UE) 2020/1201 per quanto riguarda l’elenco delle zone infette ai fini del contenimento della Xylella
+    fastidiosa (Wells et al.);
+  • Il Reg. (UE) 2024/2507 del 26 settembre 2024 che modifica e rettifica il regolamento di esecuzione
+    (UE) 2020/1201 relativo alle misure per prevenire l’introduzione e la diffusione nell’Unione della
+    Xylella fastidiosa (Wells et al.) e che modifica il regolamento di esecuzione (UE) 2020/1770 per quanto
+    riguarda l’elenco delle specie di piante non esentate dall’obbligo di inserire il codice di tracciabilità nei
+    passaporti delle piante;
+  • Il D.lgs. 19 del 02/02/2021 “Norme per la protezione delle piante dagli organismi nocivi in attuazione
+    dell’articolo 11 della legge 4 ottobre 2019, n. 117, per l’adeguamento della normativa nazionale alle
+    disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625”;
+  • La legge n. 44 del 21/05/2019, conversione in legge, con modificazioni, del Decreto Legge n. 27 del
+    29/03/2019;
+  • La legge Regionale n° 4 del 29/03/2017 “Gestione della batteriosi da Xylella fastidiosa nel territorio
+    della Regione Puglia” (BURP n° 39 del 30/03/2017) e s.m.i.;
+  • La legge regionale 30 aprile 2019, n. 19 che assegna all’Agenzia Regionale per le attività Irrigue e
+    Forestali (ARIF) funzioni di supporto all’Osservatorio fitosanitario regionale, in particolare nella lotta
+    alla Xylella;
+  • Il Decreto del 24 gennaio 2022 del MIPAAF che approva il piano di emergenza nazionale per contrastare
+    la diffusione di Xylella fastidiosa in Italia;
+  • Il Decreto del Ministro delle politiche agricole alimentari e forestali n° 169819 del 13/04/2022
+    “Caratteristiche, ambiti di competenza, strutture e modalità di riconoscimento dei laboratori che
+    operano nell’ambito della protezione delle piante”;
+  • La D.G.R. n. 994 del 15/07/2024 che ha istituito il regime di aiuto per sostenere le imprese vivaistiche,
+    proprietari e conduttori di terreni agricoli che estirpano le piante infette da Xylella e ha approvato i
+    criteri e la metodologia di stima degli indennizzi;
+  • La D.G.R. n. 903 del 26/06/2025 che ha modificato ed integrato la D.G.R. n. 994/2024;
+  • La D.G.R. n. 1075 del 29/07/2025 che ha approvato il Piano d’azione per contrastare la diffusione di
+    Xylella fastidiosa (Well et al.) in Puglia 2025-2027;
+  • La Determina dirigenziale n. 45 del 26/03/2025 di approvazione delle ”Procedure operative per la
+    sorveglianza, il campionamento, le analisi diagnostiche e l’applicazione delle misure di estirpazione
+    delle piante infette nell’ambito del piano per il contrasto ed il controllo di Xylella fastidiosa.”;
+  • La Determina dirigenziale n. 8 del 21/02/2024 con oggetto “Individuazione di focolai di Xylella fastidiosa
+    sottospecie fastidiosa in agro di Triggiano (BA) – Delimitazione dell’area delimitata ai sensi dell’art. 4
+    del Reg. UE 2020/1201”, integrata dalla Determina dirigenziale n.12 del 27/02/2024, aggiornata con le
+    Determine dirigenziali n. 45 del 24/04/2024, n. 94 del 24/07/2024 e n. 236 del 18/12/2025.
+
+PREMESSO CHE
+
+  • Xylella fastidiosa (Wells et al.) è un organismo nocivo da quarantena rilevante per l’Unione Europea
+    inserita nell’elenco degli organismi nocivi prioritari di cui all’articolo 6, paragrafo 2, del Reg. (UE)
+    2016/2031;
+  • Il Reg. di esecuzione (UE) 2020/1201 della Commissione del 14 agosto 2020 relativo alle misure per
+    prevenire l’introduzione e la diffusione nell’Unione della Xylella fastidiosa prevede che l’Autorità
+    competente definisca le aree delimitate nelle quali applicare misure di eradicazione delle piante ed
+    aree delimitate nelle quali applicare, se del caso, misure di contenimento;
+  • L’Osservatorio fitosanitario della Regione Puglia è l’Autorità fitosanitaria competente ai sensi dell’art. 6
+    del Decreto legislativo 2 febbraio 2021, n. 19 in materia di controlli ufficiali e delle altre attività ufficiali
+    definite dal Regolamento (UE) 2017/625 del Parlamento Europeo e del Consiglio del 15 marzo 2017;
+  • Il MIPAAF con Decreto del 24 gennaio 2022 che approva il piano di emergenza nazionale per contrastare
+15472                       Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+     la diffusione di Xylella fastidiosa in Italia, ha indicato il CNR e il CREA quali laboratori riconosciuti per la
+     caratterizzazione della sottospecie;
+   • In Puglia sono presenti aree infette dalle tre sottospecie di Xylella fastidiosa e precisamente X. f.
+     fastidiosa - X. f. pauca - X. f. multiplex;
+   • L’Osservatorio fitosanitario, con determina n. 190 del 12/12/2024, ha affidato, ai sensi dell’art. 76 del
+     D.lgs. n. 36 del 31 marzo 2023, il “Servizio di analisi di laboratorio ufficiali per rilevare la presenza di
+     Xylella fastidiosa sul territorio della Regione Puglia”, ai seguenti laboratori ufficiali designati e autorizzati
+     ad operare nel territorio regionale e accreditati EN ISO/IEC 17025 o in via di accreditamento:
+            ○ Centro di ricerca, sperimentazione e formazione in agricoltura “Basile Caramia” di Locorotondo;
+            ○ Dipartimento di scienze del suolo, della pianta e degli alimenti - Univ. Bari;
+            ○ CIHEAM - Istituto Agronomico Mediterraneo -Valenzano;
+            ○ Dipartimento di Scienze Agrarie degli alimenti e dell’ambiente (SAFE) - Univ. Foggia;
+            ○ CNR - Istituto per la Protezione Sostenibile delle Piante (IPSP) di Bari;
+   • L’Osservatorio fitosanitario, con determine: n. 54 del 07/04/2025, n. 62 del 15/04/2025 e n. 91 del
+     19/05/2025, ha aggiudicato il “Servizio di analisi di laboratorio ufficiali per rilevare la presenza di Xylella
+     fastidiosa sul territorio della Regione Puglia”, ai sensi dell’art. 76 del D.lgs. n. 36 del 31 marzo 2023, ai
+     laboratori innanzi citati, per il periodo 2025-2026, in applicazione del Piano di azione approvato con la
+     D.G.R. 1593 del 25/11/2024;
+   • L’Istituto per la Protezione Sostenibile delle Piante del CNR è stato individuato come laboratorio
+     nazionale di riferimento nell’ambito del piano di emergenza nazionale per il contrasto di Xylella
+     fastidiosa, approvato con Decreto del Ministro 24 gennaio 2022, conformemente a quanto previsto
+     dall’art. 101 del Reg. (UE) 2017/625 e considerata la presenza nel territorio regionale di 3 sottospecie
+     di Xylella fastidiosa, il CNR effettua la caratterizzazione della sottospecie con la PCR in tempo reale sulla
+     base del metodo Dupas et al. 2019 per ogni pianta risultata infetta e la caratterizzazione del genotipo
+     nei nuovi focolai individuati in zona indenne.
+
+PRESO ATTO CHE
+
+   • In agro di Triggiano (BA), a seguito dell’attività di sorveglianza effettuata da ispettori/agenti/assistenti
+     fitosanitari, sono state individuate n° 7 (sette) piante di vite infette a Xylella fastidiosa sottospecie
+     fastidiosa, di cui al seguente rapporto di prova eseguito dal CNR e pubblicato sul sito istituzionale
+     www.emergenzaxylella.it:
+            ○rapporto di prova 11F/2026 CNR del 13/02/2026;
+   • Innova Puglia spa, sulla base delle coordinate geografiche rilevate dagli Assistenti/Agenti/Ispettori
+     fitosanitari, ha fornito all’Osservatorio fitosanitario le informazioni catastali del terreno sul quale
+     insistono le piante infette di che trattasi e le particelle che rientrano nel raggio di 50 m attorno
+     alle piante infette rappresentate nell’allegato 1A del presente provvedimento, ed i relativi proprietari
+     riportati nell’allegato 1/B, che formano parte integrante e sostanziale del presente provvedimento;
+   • Le piante infette ricadono nell’area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, istituita
+     ai sensi dell’art. 4 del Reg. UE 2020/1201 con determina dirigenziale n. 8 del 21/02/2024 integrata
+     dalla determina dirigenziale n. 12 del 27/02/2024, aggiornata con le determine dirigenziali n. 45 del
+     24/04/2024, n. 94 del 24/07/2024 e n. 236 del 18/12/2025.
+
+VERIFICATO CHE
+
+le piante infette di che trattasi non comportano un’espansione dell’attuale area delimitata “Xylella fastidiosa
+sottospecie fastidiosa ST1”;
+
+DATO ATTO CHE
+                           Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026                   15473
+
+
+   • Nell’area delimitata “Xylella fastidiosa sottospecie fastidiosa ST1”, si applicano solo ed esclusivamente
+     le misure di eradicazione di cui all’art. 7 Reg. (UE) 1201/2020;
+   • ai sensi dell’art. 7 Reg. UE 1201/2020, rubricato “Rimozione delle piante”, le misure di eradicazione del
+     patogeno comportano la rimozione immediata dalla zona infetta delle:
+              a. piante notoriamente infette dall’organismo nocivo specificato,
+              b. piante che presentano sintomi indicativi della possibile infezione da parte di tale organismo
+                 nocivo o che si sospetta siano infette da tale organismo nocivo,
+              c. piante appartenenti alla stessa specie della pianta infetta, indipendentemente dal loro stato
+                 sanitario,
+              d. piante di specie diverse da quella della pianta infetta che sono risultate infette in altre parti
+                 dell’area delimitata,
+              e. piante specificate, diverse da quelle di cui alle lettere c) e d), che non sono state
+                 immediatamente sottoposte a campionamento e ad analisi molecolare e che non sono
+                 risultate indenni dall’organismo nocivo specificato;
+   • ai sensi del successivo art. 9 “Distruzione delle piante”, le piante e le parti di piante di cui all’art. 7,
+     paragr. 1, vanno distrutte secondo le modalità ivi stabilite, in modo da garantire che l’organismo nocivo
+     specificato non si diffonda, così come va rimosso o devitalizzato l’apparato radicale di tali piante, con
+     un adeguato trattamento fitosanitario che permetta di evitare nuovi germogli;
+   • ai sensi della D.G.R. n. 903 del 26/06/2025:
+         ○ sono state adottate per la vite, misure di eradicazione più stringenti rispetto a quelle di cui agli
+           articoli da 7 a 11 del Reg. (UE) 2020/1201, al fine di contrastare con efficacia la diffusione di Xylella
+           fastidiosa fastidiosa nel territorio regionale e impedirne la diffusione nelle altre regioni d’Italia e
+           d’Europa, consentendo ai proprietari/conduttori di vigneti, compresi nei provvedimenti ingiuntivi
+           dell’Osservatorio Fitosanitario, l’estirpazione su base volontaria delle superfici vitate ricadenti
+           entro i 400 metri dal perimetro della zona infetta;
+         ○ è stata disposta l’estirpazione obbligatoria dei mandorli marginali o abbandonati ricadenti entro
+           i 400 metri dal perimetro della zona infetta dell’area delimitata per Xylella fastidiosa sottospecie
+           fastidiosa, ad opera di ARIF.
+
+PRESO ATTO
+Dei seguenti provvedimenti giudiziari che hanno confermato la legittimità dei provvedimenti amministrativi
+adottati dall’Osservatorio fitosanitario, in applicazione della normativa fitosanitaria europea, nazionale e
+regionale:
+
+   • sentenza n° 78/2022 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 694 del 2021;
+   • sentenza n° 000514/2023 del 21/03/2023 emessa dal Tribunale Amministrativo Regionale per la Puglia
+     – Bari sul ricorso numero di registro generale 176 del 2023;
+   • sentenza n. 388/2022 del 16/03/2022 emessa dal Tribunale Amministrativo Regionale per la Puglia –
+     Bari sul ricorso numero di registro generale 1046 del 2017;
+   • ordinanza n. 191/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 313 del 2023;
+   • ordinanza n. 193/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 314 del 2023;
+   • ordinanza n. 125/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 325 del 2023;
+   • ordinanza n. 173/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 440 del 2023;
+   • ordinanza n. 192/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 455 del 2023;
+15474                      Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+   • ordinanza n. 220/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 523 del 2023;
+   • ordinanza n. 194/2023 del Tribunale Amministrativo Regionale per la Puglia Bari sul ricorso numero di
+     registro generale 533 del 2023.
+
+VISTE
+
+   • La sentenza della Corte di Giustizia dell’Unione Europea n. 78/2016, secondo cui le misure di contrasto
+     sono di interesse dell’intera Unione europea, quindi compatibili con i principi di precauzione,
+     prevenzione, proporzionalità e adeguatezza e sono previste e legittimate dalla Commissione europea
+     allo scopo di bilanciare i diversi interessi in gioco;
+   • La sentenza della Corte di Giustizia dell’Unione Europea del 05/09/2019, secondo cui l’Autorità
+     competente della gestione dell’emergenza fitosanitaria deve procedere con immediatezza all’attuazione
+     delle misure fitosanitarie prescritte.
+
+RICHIAMATI
+
+   • Il comma 3 dell’art. 1 del D.lgs. 19/2021 dispone che la protezione delle piante rientra nella materia
+     della profilassi internazionale di cui all’articolo 117, comma secondo, lettera q) della Costituzione della
+     Repubblica italiana;
+   • Il comma 3 dell’art. 6 del D.lgs. 19/2021 dispone che i Servizi fitosanitari regionali applicano nel
+     territorio di competenza, tra l’altro, le misure ufficiali ritenute necessarie, ivi compresa la distruzione
+     di vegetali e prodotti vegetali ritenuti contaminati o sospetti tali, nonché degli altri oggetti che possano
+     essere veicolo di diffusione di organismi nocivi ai vegetali;
+   • Il comma 1 dell’art. 33 del D.lgs. 19/2021 dispone che le misure fitosanitarie ufficiali di protezione
+     delle piante, ivi compresa la distruzione delle piante contaminate, anche monumentali, disposte
+     da provvedimenti o ordinanze fitosanitarie che le regolamentano, sono attuate in deroga a ogni
+     disposizione vigente, comprese quelle di natura vincolistica, nei limiti e secondo i criteri indicati nei
+     medesimi provvedimenti o ordinanze fitosanitarie;
+   • Il comma 2 dell’art. 33 del D.lgs. 19/2021 dispone che, effettuate le forme di pubblicità previste
+     dalla normativa vigente, gli ispettori o gli agenti fitosanitari e il personale di supporto muniti di
+     autorizzazione del Servizio fitosanitario competente per territorio, nell’esercizio delle loro attribuzioni,
+     accedono ai fondi nei quali sono presenti piante infettate dagli organismi nocivi, al fine di attuare le
+     misure fitosanitarie. A tale scopo, qualora i proprietari si oppongano all’intervento, i Servizi fitosanitari
+     competenti per territorio possono chiedere al Prefetto l’ausilio della forza pubblica;
+   • L’art. 21 bis della legge 7 agosto 1990, n. 241 prevede che il provvedimento limitativo della sfera
+     giuridica dei privati acquista efficacia nei confronti di ciascun destinatario con la comunicazione allo
+     stesso effettuata anche nelle forme stabilite per la notifica agli irreperibili nei casi previsti dal codice
+     di procedura civile. Qualora per il numero dei destinatari la comunicazione personale non sia possibile
+     o risulti particolarmente gravosa, l’amministrazione provvede mediante forme di pubblicità idonee di
+     volta in volta stabilite dall’amministrazione medesima;
+   • Il comma 1 dell’art. 33 del D.lgs. 19/2021 dispone che in un’area delimitata, la rimozione di piante
+     monumentali o di interesse storico nelle quali non sia stata accertata la presenza dell’organismo
+     nocivo, può essere disposta, caso per caso, dall’autorità fitosanitaria competente, previa autorizzazione
+     paesaggistica di cui all’articolo 146 del decreto legislativo 22 gennaio 2004, n. 42, da rilasciare entro
+     quarantacinque giorni e comunque nel rispetto degli obblighi derivanti dal diritto dell’Unione Europea
+   • Il comma 2 dell’art. 33 del D.lgs. 19/2021 dispone che, qualora ricorrano i presupposti di cui all’articolo
+     21 -bis della legge 7 agosto 1990, n. 241, la comunicazione dei provvedimenti o delle ordinanze
+     fitosanitarie che dispongono le misure fitosanitarie, è effettuata secondo le modalità e i termini stabiliti
+     dal Servizio fitosanitario centrale ovvero dal Servizio fitosanitario regionale competente per territorio;
+                             Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026                   15475
+
+
+    • Il paragrafo 4.5 del “Piano d’azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia
+      2025-2027” approvato con D.G.R. N. 1075 del 29/07/2025, prevede che i provvedimenti siano notificati
+      al proprietario attraverso la pubblicazione, per 7 giorni, nell’albo pretorio del Comune di competenza;
+    • Gli articoli 500 e 650 del codice di procedura penale, secondo cui la mancata estirpazione può essere
+      motivo di diffusione di malattia delle piante, pericolosa per l’economia rurale.
+
+RITENUTO DI
+
+    • Dovere applicare con immediatezza le misure di eradicazione per n° 7 piante infette di cui al rapporto
+      di prova n. 11F/2026 CNR del 13/02/2026, indicati nell’allegato 1/B al presente provvedimento e
+      pubblicati sul sito emergenzaxylella.it, in quanto non sostituibili con altra misura fitosanitaria meno
+      drastica al fine di contenere la diffusione della malattia sul territorio;
+    • Disporre, ai sensi della D.G.R. n. 903 del 26/06/2025, l’estirpazione obbligatoria dei mandorli marginali
+      o abbandonati ricadenti entro i 400 metri dal perimetro della zona infetta dell’area delimitata per
+      Xylella fastidiosa sottospecie fastidiosa, ad opera di ARIF.
+    • Dovere adempiere agli obblighi di pubblicità del presente provvedimento mediante affissione per 7
+      giorni nell’albo pretorio del Comune in cui ricadono le piante da estirpare tenuto conto dell’irreperibilità
+      di alcuni destinatari e della gravosità per l’amministrazione di notificare i provvedimenti ai singoli
+      beneficiari;
+    • Dichiarare il presente provvedimento immediatamente esecutivo per contrastare la diffusione ulteriore
+      della malattia.
+
+                       VERIFICA AI SENSI DEI D. Lgs 196/03 e del Reg. (UE) n. 679/2016
+                                         Garanzie alla riservatezza
+
+La pubblicazione dell’atto sul BURP, nonché la pubblicazione all’Albo pretorio on-line o sul sito istituzionale,
+salve le garanzie previste dalla legge 241/1990 in tema di accesso ai documenti amministrativi, avviene nel
+rispetto della tutela della riservatezza dei cittadini secondo quanto disposto dal Regolamento UE n. 679/2016
+in materia di protezione dei dati personali, nonché dal D. Lgs. 196/2003 ss.mm.ii., come modificato dal d.lgs.
+101/2018 e dal vigente Regolamento regionale 5/2006 per il trattamento dei dati sensibili e giudiziari, in
+quanto applicabile.
+Ai fini della pubblicità legale, il presente provvedimento è stato redatto in modo da evitare la diffusione di
+dati personali identificativi non necessari ovvero il riferimento alle particolari categorie di dati previste dagli
+articoli 9 e 10 del Regolamento UE innanzi richiamato; qualora detti dati fossero essenziali per l’adozione
+dell’atto, essi sono trasferiti in documenti separati esplicitamente richiamati.
+
+                                        VALUTAZIONE IMPATTO DI GENERE
+
+Il presente atto è stato sottoposto a Valutazione di Impatto di Genere (cfr. DGR n. 1161 del 7/8/2024
+concernente “Approvazione modifiche ed integrazioni alle <Linee guida per la predisposizione delle proposte
+di deliberazione della Giunta Regionale.>, adottate con D.G.R. n. 2100 del 2019” e l’impatto di genere stimato
+risulta neutro.
+
+                    ADEMPIMENTI CONTABILI AI SENSI DEL D.lgs. n. 118/2011 e ss.mm.ii.
+
+Il presente provvedimento non comporta alcun mutamento qualitativo o quantitativo di entrata o di spesa né
+a carico del bilancio regionale né a carico degli enti per i cui debiti i creditori potrebbero rivalersi sulla Regione
+ed è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto
+dal bilancio regionale.
+15476                       Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+                                                    DETERMINA
+
+Di prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente
+atto e che qui si intende integralmente riportato.
+
+   1. Prescrivere nell’agro di Triggiano (BA) esclusivamente le misure di eradicazione, in quanto esso è
+      incluso nell’area delimitata “Xylella fastidiosa sottospecie fastidiosa ST1” e, come tale non è soggetto
+      all’applicazione né delle misure di contenimento ex art. 13 Reg. UE 1201/20202, né dell’art.8, comma 7
+      bis, LR n. 4/2017 e smi;
+   2. Di dare atto che le piante infette individuate in agro di Triggiano (BA) e la rispettiva zona infetta stabilita
+      ai sensi del comma 2 dell’art. 4 del Reg. UE 2020/1201, sono evidenziate nelle ortofoto di cui all’allegato
+      1A, parte integrante e sostanziale del presente provvedimento e che non comportano un’espansione
+      dell’attuale area delimitata “Xylella fastidiosa sottospecie fastidiosa ST1”;
+   3. Di stabilire che, qualora ci fosse stato un cambio di proprietà delle particelle, il proprietario riportato
+      nell’allegato 1/B dovrà comunicare tale variazione all’Osservatorio indicando anche il nome del nuovo
+      proprietario, entro massimo 3 giorni dal termine del periodo di pubblicazione, agli indirizzi mail:
+      gestionefitosanitaria@pec.rupar.puglia.it, protocollo@pec.arifpuglia.it, m.cantatore@regione.puglia.it;
+   4. Di prescrivere, ai sensi della lettera a), comma 1 dell’art. 7 del Reg. UE 2020/1201, ai proprietari/
+      conduttori nei cui appezzamenti ricadono le piante infette e ai proprietari/conduttori, i cui terreni
+      rientrano in tutto o in parte nelle zone infette di 50 m attorno alle piante infette, indicati nell’allegato
+      1/B, parte integrante e sostanziale del presente provvedimento:
+            a. l’estirpazione di n° 7 piante risultate infette da Xylella fastidiosa sottospecie fastidiosa ST1;
+            b. l’estirpazione di tutte le piante che presentino sintomi indicativi della possibile infezione da
+               parte di tale organismo nocivo o che si sospetta siano infette da tale organismo nocivo;
+            c. l’estirpazione di tutte le piante appartenenti alla stessa specie delle piante infette,
+               indipendentemente dal loro stato sanitario;
+            d. l’estirpazione di tutte le piante di specie diverse da quella delle piante infette risultate infette in
+               altre parti dell’area delimitata;
+            e. l’estirpazione di tutte le piante specificate, diverse da quelle di cui alle lettere b) e c), che non
+               siano state immediatamente sottoposte a campionamento e ad analisi molecolare e che non
+               siano risultate indenni dall’organismo nocivo specificato;
+   5. Di stabilire che, ai sensi della D.G.R. n. 903 del 26/06/2025, ai proprietari/conduttori di vigneti,
+      compresi nei provvedimenti ingiuntivi dell’Osservatorio Fitosanitario, è consentita l’estirpazione su
+      base volontaria delle superfici vitate ricadenti entro i 400 metri dal perimetro della zona infetta, così
+      come disciplinato dalla suddetta D.G.R.;
+   6. Di stabilire che nell’applicazione delle misure di eradicazione non si procede all’estirpazione di olivo, in
+      quanto tale specie non è suscettibile a Xylella fastidiosa sottospecie fastidiosa ST1;
+   7. Di stabilire che, ai sensi della D.G.R. n. 903 del 26/06/2025, ARIF procederà con l’estirpazione obbligatoria
+      dei mandorli marginali o abbandonati ricadenti entro i 400 metri dal perimetro delle suddette zone
+      infette e che queste piante non saranno oggetto di indennizzo;
+   8. Di stabilire che la tempistica da rispettare per l’estirpazione delle piante è la seguente:
+            • il presente provvedimento è notificato ai proprietari/conduttori attraverso la pubblicazione
+               all’albo pretorio per 7 gg consecutivi e alla loro PEC qualora presente;
+            • il provvedimento è notificato con PEC ad ARIF per gli adempimenti conseguenti ed è
+               pubblicato su:
+                     o Bollettino Ufficiale della Regione Puglia,
+                     o Portale www.emergenzaxylella.it,
+                     o Sezione “Amministrazione trasparente”, sotto sezione “Provvedimenti dirigenti
+                       amministrativi” del sito www.regione.puglia.it;
+            • il proprietario comunica, durante il tempo di pubblicazione dell’atto e comunque entro massimo
+                          Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026                 15477
+
+
+             3 giorni dal termine del periodo di pubblicazione, se intende estirpare volontariamente le
+             piante oppure se intende avvalersi di ARIF accedendo con le proprie credenziali SPID al portale
+             https://xylella.arifpuglia.it/ (contattare dal lunedì al venerdì dalle 9:00 alle 17:00 il numero
+             3896982031 per l’eventuale richiesta di supporto);
+          • nei casi di estirpazione su base volontaria il proprietario deve procedere all’estirpazione
+             entro massimo 10 giorni dalla sua comunicazione e deve concordare con il Dr. Claudio Zaza
+             dell’Osservatorio fitosanitario (c.zaza@regione.puglia.it), la tempistica di esecuzione;
+          • nei casi di estirpazioni eseguite da ARIF, quest’ultima deve procedere entro massimo 10 giorni
+             successivi alla comunicazione del proprietario;
+          • se il proprietario, decorsi 3 giorni dal termine del periodo di pubblicazione, non invia alcuna
+             comunicazione, ARIF procede alla rimozione delle piante entro massimo 10 giorni successivi;
+          • nei casi di rifiuto da parte del proprietario di dare esecuzione alle misure fitosanitarie di cui
+             al presente provvedimento, ARIF provvede alla rimozione forzosa delle piante, informando
+             il Prefetto e le Forze dell’Ordine e addebitando gli oneri di estirpazione al proprietario.
+             L’Osservatorio provvede alla contestazione della violazione amministrativa per mancata
+             esecuzione delle prescrizioni fitosanitarie ai sensi del D.lgs 19/2021;
+          • le operazioni di estirpazione volontaria da parte del proprietario sono controllate da Ispettori/
+             agenti dell’Osservatorio. Le operazioni di estirpazione eseguite da ARIF sono controllate da 2
+             assistenti fitosanitari ARIF.
+ 9. Di stabilire che i proprietari/conduttori o ARIF, devono procedere all’estirpazione delle piante infette e
+    delle piante ricadenti nei 50 m di cui al punto 4 o delle piante di vite ricadenti fino a 400 m dal perimetro
+    della zona infetta di cui al punto 5 con la seguente modalità:
+          • estirpare la pianta infetta e le piante ricadenti nei 50 m di cui al punto 2 o le piante di vite
+             ricadenti fino a 400 m dal perimetro della zona infetta di cui al punto 5, con mezzi meccanici;
+          • distruggere in loco tutta la parte frondosa degli alberi, separata dal tronco, mediante trinciatura
+             o bruciatura se consentito dalla legge e dai relativi regolamenti comunali;
+          • lasciare nella disponibilità del proprietario/conduttore la parte legnosa delle piante estirpate,
+             opportunamente depezzata;
+          • comunicare alla Soprintendenza eventuali ritrovamenti fortuiti di interesse archeologico.
+10. Di stabilire che ARIF deve procedere all’estirpazione dei mandorli marginali o abbandonati ricadenti
+    entro i 400 metri dal perimetro delle suddette zone infette di cui al punto 7 con la seguente modalità:
+          • distruggere in loco tutta la parte frondosa degli alberi, separata dal tronco, mediante trinciatura
+             o bruciatura se consentito dalla legge e dai relativi regolamenti comunali;
+          • lasciare nella disponibilità del proprietario/conduttore la parte legnosa delle piante estirpate,
+             opportunamente depezzata;
+          • comunicare alla Soprintendenza eventuali ritrovamenti fortuiti di interesse archeologico.
+11. Di stabilire che le operazioni di estirpazione e distruzione devono essere presidiate da almeno un
+    Ispettore/Agente/Assistente fitosanitario che deve:
+          • essere di ausilio per determinare le piante oggetto del presente provvedimento,
+          • verificare la correttezza delle operazioni di estirpazione e distruzione delle piante,
+          • provvedere alla redazione di apposito verbale che è atto propedeutico e indispensabile per il
+             riconoscimento del contributo, laddove previsto;
+12. Di stabilire che a seguito di accertato impedimento all’estirpazione volontaria o tramite ARIF, a causa
+    di intervento di terze persone (documentato e verbalizzato ai sensi degli art. 46, 47 del DPR 445/2000
+    e dell’art. 76 per dichiarazioni mendaci), l’Ispettore/Agente/Assistente fitosanitario o ARIF, richieda al
+    Prefetto, ai sensi dell’art. 33 c. 2 del D. Lgs. n. 19 del 02/02/2021, l’ausilio della forza pubblica nelle
+    operazioni di estirpazione della pianta infetta, delle piante ricadenti nei 50 m e di quelle nei 400 m di
+    cui al punto 7;
+13. Di stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di
+    estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta
+15478                       Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+      notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite
+      dell’ARIF, denunciando la circostanza alla Procura della Repubblica competente ai sensi degli artt. 500
+      e 650 c.p., all’applicazione della sanzione amministrativa di cui al comma 13 dell’art. 55 del D. Lgs.
+      19/2021, non riconoscere alcun contributo a qualunque titolo per l’abbattimento delle piante;
+  14. Di stabilire che in caso di estirpazione delle piante infette, delle piante ricadenti nei 50 m e delle piante
+      di vite ricadenti fino a 400 m dal perimetro della zona infetta, per le motivazioni espresse in narrativa,
+      potrà essere riconosciuto per ogni albero estirpato, un contributo previsto dal regime di aiuto di cui
+      alla D.G.R. n. 994 del 15/07/2024 e n. 903 del 26/06/2025. Il proprietario può eseguire la richiesta di
+      contributo accedendo con le proprie credenziali SPID al portale https://xylella.arifpuglia.it/ (contattare
+      dal lunedì al venerdì dalle 9:00 alle 17:00 il numero 3896982031 per l’eventuale richiesta di supporto);
+  15. Di dichiarare il presente provvedimento immediatamente esecutivo in quanto le misure di eradicazione
+      delle piante infette di cui al presente provvedimento devono essere applicate con immediatezza ai
+      sensi del comma 1 dell’art. 7 del Reg. (UE) 2020/1201 e, pertanto, rivestono il carattere di necessità e
+      urgenza per contrastare la diffusione ulteriore della malattia;
+  16. Di trasmettere il presente atto con unica PEC:
+           • al Comune di Triggiano (BA) affinché provveda con urgenza dalla data di invio del presente atto
+              all’affissione all’Albo Pretorio della presente determinazione per la durata di 7 (sette) giorni
+              naturali e consecutivi. Tale affissione, ai sensi dell’art. 21 bis L. 241/1990 e s.m.i., decorso il
+              settimo giorno dalla data di pubblicazione assume valore di notifica ai proprietari/conduttori
+              interessati dalle estirpazioni;
+           • all’ARIF per le attività di competenza in base alla L.R. 19/2019, alla D.G.R. 343/2022 e al Decreto
+              Legge 27/2019 convertito con L. 44/2019;
+           • al Sig. Prefetto di Bari affinché ai sensi dell’art. 33 del D.lgs 19/2021 su richiesta dell’Osservatorio/
+              ARIF ove di necessità, disponga l’ausilio della forza pubblica nelle operazioni di estirpazione.
+
+Il presente atto, elaborato attraverso la piattaforma CIFRA2, composto da pagine tutte progressivamente
+numerate e dall’allegato 1, firmato digitalmente e adottato in unico originale:
+
+          • sarà conservato e custodito, ai sensi delle Linee Guida del Segretario generale della Giunta
+            Regionale e del Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020, nei
+            sistemi di archiviazione digitale dell’Amministrazione Regionale;
+          • sarà trasmesso, tramite piattaforma CIFRA2, al Segretariato della Giunta Regionale e sarà
+            pubblicato nella sezione “Amministrazione Trasparente” sul sito istituzionale della Regione
+            Puglia, per le finalità di cui al D.Lgs. n. 33/2013 e ss.mm.ii.;
+          • sarà notificato all’Agenzia Regionale Attività Irrigue e Forestali per l’adozione degli atti
+            conseguenti;
+          • sarà pubblicato per 10 giorni lavorativi a decorrere dalla data della sua adozione, ai sensi dell’art.
+            20 comma 3 del D.P.G.R. n. 22/2021, all’Albo regionale on line e conservato nei sistemi informatici
+            regionali CIFRA” e Sistema Puglia.
+
+Avverso la presente determinazione, ai sensi dell’art. 3 comma 4° della L. 241/90 e s.m.i. si può proporre,
+nei termini di legge dalla notifica dell’atto, ricorso giurisdizionale amministrativo o, in alternativa, ricorso
+straordinario (ex D.P.R. 1199/1971).
+
+ALLEGATI INTEGRANTI
+
+Documento - Impronta (SHA256)
+allegato_1_completo.pdf -
+7bc889eac602429719313b903f680bf459dd039b2bebb5c6c79c8bdc730fefd0
+                           Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026   15479
+
+
+Il presente Provvedimento è direttamente esecutivo.
+
+Vista Proposta: Codice Cifra 181/DIR/2026/00021
+Sottoscrittori Proposta:
+
+ • E.Q. “Gestione dell’emergenza fitosanitaria Xylella fastidiosa fastidiosa”
+   Claudio Zaza
+
+ • E.Q.”Programmazione e gestione fitosanitaria”
+   Anna Percoco
+
+Firmato digitalmente da:
+
+Il Dirigente della Sezione Osservatorio Fitosanitario
+Salvatore Infantino
+15480   Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+
+
+                                                                          1
+Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026       15481
+
+
+
+
+       DIPARTIMENTO AGRICOLTURA SVILUPPO RURALE E AMBIENTALE
+       SEZIONE OSSERVATORIO FITOSANITARIO
+
+
+
+
+                       ALLEGATO 1/A
+          Costituito da n° 1 (una) ortofoto
+
+
+
+
+                                                                  2
+                                                                          3
+
+15482   Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+                                                                                                                ALLEGATO 1/B
+
+
+                Area Delimitata Xylella fastidiosa sottospecie fastidiosa ST1 – PIANTE INFETTE MONITORAGGIO 2026
+
+                                     DATA
+               ID      RAPPORTO
+  AGRO                             RAPPORTO        SPECIE       LONGITUDINE   LATITUDINE    FOGLIO PARTICELLA        PROPRIETARIO
+            CAMPIONE    PROVA
+                                    PROVA
+
+                        11F/2026                 Vite europea
+TRIGGIANO    1939956      CNR       13/02/2026     (Vitis L.)   16,95247225   41,05049791
+
+                        11F/2026                 Vite europea
+                                                                                              22       63          DIDONNA LEONARDO
+TRIGGIANO    1939933      CNR       13/02/2026     (Vitis L.)   16,95324086   41,05100996
+
+                        11F/2026                 Vite europea
+TRIGGIANO    1939942      CNR       13/02/2026     (Vitis L.)   16,95238771   41,05073907
+
+                        11F/2026                 Vite europea
+TRIGGIANO    1939928      CNR       13/02/2026     (Vitis L.)   16,95342917   41,0509389
+                                                                                              22       70          DIDONNA LEONARDO
+                        11F/2026                 Vite europea
+TRIGGIANO    1939917      CNR       13/02/2026     (Vitis L.)    16,9535311   41,05084268
+
+                        11F/2026                 Vite europea
+TRIGGIANO    1939952      CNR       13/02/2026     (Vitis L.)   16,95314557   41,05043856                          DIDONNA LEONARDO
+                                                                                              22      108
+                        11F/2026                 Vite europea                                                        DECARO ROSA
+TRIGGIANO    1939946      CNR       13/02/2026     (Vitis L.)   16,95268855   41,05032072
+                                                                                                                                      Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+
+
+                                                                                                                         4
+                                                                                                                                      15483
+                                                                                                         15484
+
+
+                       ZONA INFETTA DI 50 M ATTORNO ALLE PIANTE INFETTE (Rif.
+                        1939917,1939928,1939933,1939942,1939946,1939952,1939956)
+ COMUNE     FOGLIO PARTICELLE                                 PROPRIETARI
+TRIGGIANO   22     108          DIDONNA LEONARDO, DECARO ROSA
+TRIGGIANO   22     107          DIDONNA LEONARDO
+TRIGGIANO   22     105          PORRELLI VINCENZO, PORRELLI GIANNI
+TRIGGIANO   22     230          PATANO ROSA, PATANO MICHELE
+TRIGGIANO   22     185          DIDONNA LEONARDO
+TRIGGIANO   22     70           DIDONNA LEONARDO
+TRIGGIANO   22     69           DIDONNA LEONARDO
+TRIGGIANO   22     66           LOMBARDI TRIFONE
+TRIGGIANO   22     65           RESCINA Gerardo
+TRIGGIANO   22     64           RESCINA Gerardo
+TRIGGIANO   22     63           DIDONNA LEONARDO
+TRIGGIANO   22     62           NITTI GIANFRANCO, NITTI MARIALAURA, NITTI DOMENICO
+                                BOCCUZZI Angelamaria, BOCCUZZI Nicola, BOCCUZZI Valeria, GRANDOLFO
+TRIGGIANO   22     60           Rosella
+TRIGGIANO   22     39           RANIERI Nicola
+TRIGGIANO   22     109          CARBONARA ANGELA
+
+
+
+
+                                                                                                         Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026
+
+
+
+
+                                                                                                     5
+

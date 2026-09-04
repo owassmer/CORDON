@@ -1,0 +1,945 @@
+[Skip to main content](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#main-content)
+
+![](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/icon-dot-gov.svg)
+
+**Official websites use .gov**
+
+A
+**.gov** website belongs to an official
+government organization in the United States.
+
+
+![](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/icon-https.svg)
+
+**Secure .gov websites use HTTPS**
+
+A **lock** (
+Lock
+Locked padlock icon
+) or **https://** means you've safely
+connected to the .gov website. Share sensitive
+information only on official, secure websites.
+
+
+[Home](https://pmc.ncbi.nlm.nih.gov/ "Home")
+
+![PMC search open icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/search.svg)![PMC search close ison](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/close.svg)
+
+Search PMC Full-Text Archive
+
+Search in PMC![Search](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons-bg/search--white.svg)
+
+- [Journal List](https://pmc.ncbi.nlm.nih.gov/journals/)
+- [User Guide](https://pmc.ncbi.nlm.nih.gov/about/userguide/)
+
+- ![Open resources icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/more_vert.svg)
+- [![View on publisher site icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/launch.svg)](https://doi.org/10.1128/JB.01080-13) View on publisher site
+- [![Download PDF icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/file_download.svg)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/pdf/zjb459.pdf) Download PDF
+- ![Collections icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/action-bookmark-full.svg)![Collections icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/action-bookmark-empty.svg)Add to Collections
+- ![Cite icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/format_quote.svg)Cite
+- ![Show article permalink icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/share.svg)Permalink
+
+
+
+
+## PERMALINK
+
+
+
+![Copy icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/content_copy.svg)Copy
+
+
+![Open article navigation icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/list.svg)
+
+As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+the contents by NLM or the National Institutes of Health.
+
+Learn more:
+[PMC Disclaimer](https://pmc.ncbi.nlm.nih.gov/about/disclaimer/)
+\|
+[PMC Copyright Notice](https://pmc.ncbi.nlm.nih.gov/about/copyright/)
+
+![Journal of Bacteriology logo](https://cdn.ncbi.nlm.nih.gov/pmc/banners/logo-jbacter.png)
+
+J Bacteriol
+
+. 2014 Jan;196(2):459–471. doi: [10.1128/JB.01080-13](https://doi.org/10.1128/JB.01080-13)
+
+# Characterization of Novel Virulent Broad-Host-Range Phages of _Xylella fastidiosa_ and _Xanthomonas_
+
+[Stephen J Ahern](https://pubmed.ncbi.nlm.nih.gov/?term=%22Ahern%20SJ%22[Author])
+
+### Stephen J Ahern
+
+aCenter for Phage Technology, Texas A&M University, College Station, Texas, USA
+
+bDepartment of Plant Pathology and Microbiology, Texas A&M University, College Station, Texas, USA
+
+Find articles by [Stephen J Ahern](https://pubmed.ncbi.nlm.nih.gov/?term=%22Ahern%20SJ%22[Author])
+
+a,b, [Mayukh Das](https://pubmed.ncbi.nlm.nih.gov/?term=%22Das%20M%22[Author])
+
+### Mayukh Das
+
+aCenter for Phage Technology, Texas A&M University, College Station, Texas, USA
+
+bDepartment of Plant Pathology and Microbiology, Texas A&M University, College Station, Texas, USA
+
+Find articles by [Mayukh Das](https://pubmed.ncbi.nlm.nih.gov/?term=%22Das%20M%22[Author])
+
+a,b, [Tushar Suvra Bhowmick](https://pubmed.ncbi.nlm.nih.gov/?term=%22Bhowmick%20TS%22[Author])
+
+### Tushar Suvra Bhowmick
+
+aCenter for Phage Technology, Texas A&M University, College Station, Texas, USA
+
+bDepartment of Plant Pathology and Microbiology, Texas A&M University, College Station, Texas, USA
+
+Find articles by [Tushar Suvra Bhowmick](https://pubmed.ncbi.nlm.nih.gov/?term=%22Bhowmick%20TS%22[Author])
+
+a,b, [Ry Young](https://pubmed.ncbi.nlm.nih.gov/?term=%22Young%20R%22[Author])
+
+### Ry Young
+
+aCenter for Phage Technology, Texas A&M University, College Station, Texas, USA
+
+cDepartment of Biochemistry and Biophysics, Texas A&M University, College Station, Texas, USA
+
+Find articles by [Ry Young](https://pubmed.ncbi.nlm.nih.gov/?term=%22Young%20R%22[Author])
+
+a,c, [Carlos F Gonzalez](https://pubmed.ncbi.nlm.nih.gov/?term=%22Gonzalez%20CF%22[Author])
+
+### Carlos F Gonzalez
+
+aCenter for Phage Technology, Texas A&M University, College Station, Texas, USA
+
+bDepartment of Plant Pathology and Microbiology, Texas A&M University, College Station, Texas, USA
+
+Find articles by [Carlos F Gonzalez](https://pubmed.ncbi.nlm.nih.gov/?term=%22Gonzalez%20CF%22[Author])
+
+a,b,✉
+
+- Author information
+- Article notes
+- Copyright and License information
+
+aCenter for Phage Technology, Texas A&M University, College Station, Texas, USA
+
+bDepartment of Plant Pathology and Microbiology, Texas A&M University, College Station, Texas, USA
+
+cDepartment of Biochemistry and Biophysics, Texas A&M University, College Station, Texas, USA
+
+✉
+
+Address correspondence to Carlos F. Gonzalez, cf-gonzalez@tamu.edu.
+
+✉
+
+Corresponding author.
+
+Received 2013 Sep 15; Accepted 2013 Nov 3.
+
+Copyright © 2014, American Society for Microbiology. All Rights Reserved.
+
+[PMC Copyright notice](https://pmc.ncbi.nlm.nih.gov/about/copyright/)
+
+PMCID: PMC3911242  PMID: [24214944](https://pubmed.ncbi.nlm.nih.gov/24214944/)
+
+## Abstract
+
+The xylem-limited bacterium _Xylella fastidiosa_ is the causal agent of several plant diseases, most notably Pierce's disease of grape and citrus variegated chlorosis. We report the isolation and characterization of the first virulent phages for _X. fastidiosa_, siphophages Sano and Salvo and podophages Prado and Paz, with a host range that includes _Xanthomonas_ spp. Phages propagated on homologous hosts had observed adsorption rate constants of ∼4 × 10−12 ml cell−1 min−1 for _X. fastidiosa_ strain Temecula 1 and ∼5 × 10−10 to 7 × 10−10 ml cell−1 min−1 for _Xanthomonas_ strain EC-12. Sano and Salvo exhibit >80% nucleotide identity to each other in aligned regions and are syntenic to phage BcepNazgul. We propose that phage BcepNazgul is the founding member of a novel phage type, to which Sano and Salvo belong. The lysis genes of the Nazgul-like phage type include a gene that encodes an outer membrane lipoprotein endolysin and also spanin gene families that provide insight into the evolution of the lysis pathway for phages of Gram-negative hosts. Prado and Paz, although exhibiting no significant DNA homology to each other, are new members of the phiKMV-like phage type, based on the position of the single-subunit RNA polymerase gene. The four phages are type IV pilus dependent for infection of both _X. fastidiosa_ and _Xanthomonas_. The phages may be useful as agents for an effective and environmentally responsible strategy for the control of diseases caused by _X. fastidiosa_.
+
+## INTRODUCTION
+
+The plant-pathogenic bacterium _Xylella fastidiosa_ is the causative agent of a number of economically important diseases, including Pierce's disease of grape, phony peach disease, periwinkle wilt, citrus variegated chlorosis, almond leaf scorch, oleander leaf scorch, and coffee leaf scorch ( [1](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B1)). Existing disease control methods are often only partially successful and, in the case of systemic insecticides used to control vector populations, may be potentially harmful to the environment ( [2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B2), [3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B3)). Recently, there has been renewed interest in the application of bacteriophages (phage) as an environmentally acceptable mode for the control of bacterial plant disease ( [4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B4)).
+
+To this end, our group isolated and characterized the first temperate (lysogenic) phage of _X. fastidiosa_, Xfas53 ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)). However, temperate phage should not be used as biocontrol agents because of their capacity for lysogenic conversion, superinfection immunity, and risk of generalized transduction. Instead, virulent (lytic) phages are needed for an effective and sustainable phage-based control strategy ( [6](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B6)). Here we report the isolation and characterization of the first virulent siphophages and podophages for _X. fastidiosa_ that are members of the Nazgul-like phage and the phiKMV-like phage types, respectively.
+
+## MATERIALS AND METHODS
+
+### Bacterial strains and culture conditions.
+
+Bacterial strains and plasmids used in this study are listed in [Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T1). _X. fastidiosa_ strains were cultured at 28°C in PW-M broth (PW-MB) ( [7](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B7)) or on PW-M agar (PW-MA) plates (PW-MB with 20 g/liter plant cell culture-tested agar \[Sigma\]) ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)). PW-M soft agar (PW-MSA) (PW-MB with 7.5 g/liter plant cell culture-tested agar) was used for overlays, with 5- to 7-day-old plate cultures used to make indicator suspensions in PW-M broth (optical density at 600 nm \[OD600\] = ∼0.5). PD3 agar (20 g/liter) ( [8](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B8)) was used for the preparation of electrocompetent cells and transformations. For _X. fastidiosa_ cultures carrying antibiotic resistance cassettes or plasmids, the medium was supplemented with chloramphenicol (Cm) (5 μg/ml) or kanamycin (Km) (5 μg/ml). _Xanthomonas_ strains were cultured at 28°C in tryptone nutrient broth (TNB) ( [9](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B9)) or tryptone nutrient agar (TNA) (TNB lacking KNO3 with 20 g/liter agar). TNA soft agar (TNSA) (TNB lacking KNO3 with 7.5 g/liter agar) was used for overlays, with 18-h plate cultures being used to make indicator suspensions in TNB (OD600 = ∼0.5). For _Xanthomonas_ cultures harboring plasmids, the medium was supplemented with Km (50 μg/ml). Yeast tryptone broth (YTB) and yeast tryptone sucrose agar (YTSA) (YTB with 20 g/liter agar and sucrose at a final concentration of 15% \[wt/vol\]) were used for the resolution of mutants ( [10](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B10)). Plasmid constructs were generated by using _Escherichia coli_ DH5α MCR as the host. _E. coli_ strains were cultured at 37°C in LB broth or LB agar ( [11](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B11)). For _E. coli_ cultures harboring plasmids, medium was supplemented with Cm (50 μg/ml), Km (50 μg/ml), or ampicillin (Amp) (100 μg/ml), as appropriate. Plant extracts were plated onto PW-MA or TNA supplemented with cycloheximide (40 μg/ml), designated PW-MC and TNAC, respectively.
+
+#### TABLE 1.
+
+Bacterial strains and plasmids used in this study
+
+| Strain or plasmid | Genotype and/or relevant feature(s)_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF1-1)_ | Reference or source |
+| :-- | :-- | :-- |
+| Strains |  |  |
+| _X. fastidiosa_ |  |  |
+| Temecula 1 | PD strain ( _X. fastidiosa_ subsp. _fastidiosa_) (ATCC 700964) | [79](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B79) |
+| Ann-1 | Oleander isolate ( _X. fastidiosa_ subsp. _sandyi_) (ATCC 700598) | [80](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B80) |
+| Dixon | Almond isolate ( _X. fastidiosa_ subsp. _multiplex_) (ATCC 700965) | [80](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B80) |
+| XF53 | Grape isolate ( _X. fastidiosa_ subsp. _fastidiosa_) | [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5) |
+| XF54 | Grape isolate ( _X. fastidiosa_ subsp. _fastidiosa_) | [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5) |
+| XF95 | Oleander isolate ( _X. fastidiosa_ subsp. _sandyi_) | [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5) |
+| XF134 | Grape isolate ( _X. fastidiosa_ subsp. _fastidiosa_) | This study |
+| XF136 | Grape isolate ( _X. fastidiosa_ subsp. _fastidiosa_) | This study |
+| XF140 | Grape isolate ( _X. fastidiosa_ subsp. _fastidiosa_) | This study |
+| XF141 | Grape isolate ( _X. fastidiosa_ subsp. _fastidiosa_) | This study |
+| XF15-1 | Temecula 1; Δ _pilA_::Kmr | This study |
+| XF15-1-1 | XF15-1; NS1::Cmr _pilA_ | This study |
+| TM1 | Temecula 1; _PD1693_::Tn _5_ | [26](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B26) |
+| _tonB1_ | Temecula 1; _PD0843_::Tn _5_ | [52](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B52) |
+| _Xanthomonas_ |  |  |
+| EC-12 | _Xanthomonas_ sp., rice isolate (ATCC PTA-13101) | This study |
+| North 40 | _X. axonopodis_ pv. citri, sweet orange isolate | N. Wang, University of Florida |
+| Ft. Basinger | _X. axonopodis_ pv. citri, sweet orange isolate | N. Wang, University of Florida |
+| Block 22 | _X. axonopodis_ pv. citri, sweet orange isolate | N. Wang, University of Florida |
+| Jal-4 | _X. euvesicatoria_, jalapeno isolate | Laboratory stock |
+| Presidio-4 | _Xanthomonas_ sp., rice isolate | Laboratory stock |
+| EC-12-1 | EC-12; unmarked deletion of _pilA_ | This study |
+| EC-12-1-1 | EC-12-1; pMo168:: _pilA_ | This study |
+| _E. coli_ |  |  |
+| DH5αMCR | F− ϕ80 _lacZ_ ΔM15 Δ( _lacZYA-argF_) _recA1 endA1 gyrA96 thi-1 hsdR17 supE44 relAl deoR U169_ | Life Technologies, Inc. (Gaithersburg, MD) |
+| Plasmids |  |  |
+| pUC19 | pMB1 replicon; cloning vector; Apr | [81](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B81) |
+| pXF004 | RSF1010::Kmr; broad-host-range vector | [25](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B25) |
+| pSJA101 | Isogenic to pUC19; Temecula 1 _pilA_ downstream-flanking region cloned into XmaI and XbaI sites | This study |
+| pSJA102 | Isogenic to pSJA101; Kmr cassette cloned into KpnI and XmaI sites | This study |
+| pSJA103 | Isogenic to pSJA102; Temecula 1 _pilA_ upstream-flanking region cloned into SacI and KpnI sites | This study |
+| pAX1Cm | Cmr cassette and multiple-cloning site on pAX1 backbone | [7](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B7) |
+| pSJA104 | Isogenic to pAX1Cm; Temecula 1 _pilA_ cloned into XbaI and XhoI sites | This study |
+| pMo130 | Suicide vector for allelic exchange; ColE1 _ori_ RK2 _oriT xylE sacB_ Kmr | [10](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B10) |
+| pSJA105 | Isogenic to pMo130; EC-12 _pilA_ upstream-flanking region cloned into NheI and BglII sites | This study |
+| pSJA106 | pSJA105 with EC-12 _pilA_ downstream-flanking region cloned into BglII and HindIII sites | This study |
+| pMo168 | Replicative vector; _ori_ pBBR1 _mob_ + _xylE_ Kmr | [10](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B10) |
+| pSJA107 | pMo168::EC-12 _pilA_ | This study |
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/table/T1/)
+
+a
+
+Ap, ampicillin; Cm, chloramphenicol; Km, kanamycin.
+
+### Bacteriophage isolation and purification.
+
+Plant and sewage samples were assayed for the presence of phage able to form plaques on _X. fastidiosa_ strain Temecula 1. Plant extracts were prepared by macerating 10 g of plant tissue ( _Oryzae sativa_ or weeds obtained from rice fields in Jefferson County and Wharton County, TX) in 50 ml of P-buffer (50 mM Tris-HCl \[pH 7.5\], 100 mM NaCl, 8 mM MgSO4) using a mortar and pestle, strained through a sterile double layer of cheese cloth to remove large particles, and filter sterilized. Sewage influent collected from a municipal wastewater treatment plant in Brazos County, TX, was centrifuged twice and filter sterilized. Plant and sewage filtrates were directly screened for phage activity using the spot test and soft agar overlay method ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)). Soft agar overlays containing 100 μl of _X. fastidiosa_ strain Temecula 1 (∼108 CFU/ml) as an indicator host were allowed to solidify, spotted with 10-μl drops of serially diluted filtrates in P-buffer, and assayed after incubation at 28°C for 5 to 7 days. Filtrates producing either plaques or cleared zones were serially diluted in P-buffer and assayed by using the overlay method, where 100 μl of each dilution was mixed directly with the host suspension in tempered soft agar before overlaying. Individual plaques formed on overlays of _X. fastidiosa_ strain Temecula 1 were excised, suspended in P-buffer, and filter sterilized, and titers were determined. This procedure was repeated three times to obtain single plaque isolates. Additionally, filtrates were screened for phage activity by using _Xanthomonas_ strain EC-12 (isolated from rice \[see below\]), as described above. Plaques were purified three times by using _Xanthomonas_ strain EC-12, and purified phages were tested for activity on _X. fastidiosa_ strain Temecula 1.
+
+High-titer phage plate lysates (>1 × 1010 PFU/ml) were prepared by harvesting overlay plates of _X. fastidiosa_ strain Temecula 1 or _Xanthomonas_ strain EC-12 exhibiting confluent lysis. After being flooded with 5 ml of P-buffer, the soft agar overlay was macerated, clarified by centrifugation, and filter sterilized. The resulting lysates were stored at 4°C. High-titer phage lysates were further purified by isopycnic CsCl centrifugation, as previously described ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)).
+
+### Bacterial isolation, purification, and identification.
+
+Samples were tested for the presence of _X. fastidiosa_ by using quantitative real-time PCR (qRT-PCR) with _X. fastidiosa_-specific primers (INF2 and INR1), as previously described ( [12](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B12)). Additionally, nonfiltered plant extracts and sewage samples were plated onto PW-MC or TNAC, incubated at 28°C, and evaluated for growth (3 days on TNAC and 10 days on PW-MC). Representative single colonies were picked from plates and streak purified three times to obtain stocks on appropriate media. _Xanthomonas_ isolates were identified by sequencing of the 16S-23S internal transcribed spacer (ITS) region (primers used are listed in Table S1 in the supplemental material). One _Xanthomonas_ isolate, EC-12, was selected for further use in this study.
+
+### Phage DNA isolation and genome sequencing.
+
+DNA was isolated from CsCl-purified phage suspensions as previously described ( [13](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B13)). Phages Sano, Salvo, Prado, and Paz were sequenced as part of two pools of phage genomes by using the 454 pyrosequencing method (Emory GRA Genomics Core). Phage genomic DNA was prepared from phage isolates as described above and mixed in equimolar amounts to a final concentration of ca. 100 ng/μl. The pooled DNA was sheared, ligated with a multiplex identifier (MID) tag specific for each of the four pools, and sequenced by pyrosequencing using a full-plate reaction on a Roche FLX Titanium sequencer according to the manufacturer's protocols. The pooled phage DNA was present in two sequencing reactions. The trimmed FLX Titanium flowgram outputs corresponding to each of the four pools were assembled individually by using Newbler Assembler version 2.5.3 (454 Life Sciences), by adjusting settings to include only reads containing a single MID per assembly. The identity of individual contigs was determined by PCR using primers generated against contig sequences and individual phage genomic DNA preparations as the template. The coverages, calculated as assembled reads (in nucleotides) divided by the size of the genome, were 41-, 62-, 140-, and 46-fold for phages Sano, Salvo, Prado, and Paz, respectively. Sequencher 4.8 (Gene Codes Corporation) was used for sequence assembly and editing. Phage chromosomal end structures were determined experimentally. Cohesive ( _cos_) ends for phages Sano and Salvo were determined by sequencing off the ends of the phage genome and sequencing the PCR products derived by amplification through the ligated junction of circularized genomic DNA, as previously described ( [13](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B13)). Direct terminal repeats for phages Prado and Paz were determined by sequencing off the ends of the phage genome with primers designed within the first and last identified genes. Protein-coding regions were initially predicted by using GeneMark.hmm ( [14](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B14)), refined by manual analysis in Artemis ( [15](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B15)), and analyzed by using BLAST (E value cutoff of 0.005) ( [16](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B16)). Proteins of particular interest were additionally analyzed by InterProScan ( [17](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B17)), HHpred searches against the pdb70\_29jun13 database ( [18](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B18)), the NCBI Conserved Domain Database ( [19](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B19)), LipoP ( [20](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B20)), SignalP 4.1 ( [21](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B21)), and TMHMM ( [22](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B22)). The sequence of phage Salvo gene _36_ was confirmed by PCR and sequencing of the resulting PCR product.
+
+### Transmission electron microscopy.
+
+Electron microscopy of CsCl-purified bacteriophage (∼1 × 1011 PFU/ml) was performed by diluting stock with P-buffer. Phages were applied onto thin 400-mesh carbon-coated Formvar grids, stained with 2% (wt/vol) uranyl acetate, and air dried. Specimens were observed on a JEOL 1200EX transmission electron microscope operating at an acceleration voltage of 100 kV. Five virions of each phage were measured to calculate mean values and standard deviations for dimensions of capsid and tail, where appropriate.
+
+### Host range and efficiency of plating.
+
+Host ranges of purified phages (propagated on _X. fastidiosa_ strain Temecula 1) were determined by the serial dilution spot test method, as described above, using a panel of _X. fastidiosa_ and _Xanthomonas_ isolates as indicator hosts. Phage sensitivities of type IV pilus mutants and complements were tested similarly. Efficiency of plating (EOP) was determined by calculating the ratio of the phage plaque titer obtained with a heterologous (nonpropagating) host to that obtained with a homologous (propagating) host. All experiments were done in triplicate.
+
+### One-step growth curve.
+
+One-step growth curves were used to determine the burst size and latent period of the phages ( [23](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B23)). Liquid cultures of logarithmically growing _Xanthomonas_ strain EC-12 were infected with individual phages at a multiplicity of infection (MOI) of ∼3 and allowed to adsorb at 28°C for 5 min. To stop further phage adsorption, cultures were diluted 1,000-fold in TNB. Infected centers were incubated at 28°C with constant shaking (150 rpm). Samples were taken at 3-min intervals, immediately filter sterilized, and plated in soft agar lawns of _Xanthomonas_ strain EC-12. All experiments were done in triplicate.
+
+### Bacteriophage adsorption.
+
+The kinetics of phage adsorption was determined as previously described ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)). Liquid cultures of logarithmically growing cells ( _X. fastidiosa_ strain Temecula 1 or _Xanthomonas_ strain EC-12) were infected with individual phages (propagated on homologous hosts) at an MOI of ∼0.1. The mixture was incubated at room temperature with shaking (150 rpm). Samples were taken (2-h intervals for _X. fastidiosa_ strain Temecula 1 and 2-min intervals for _Xanthomonas_ strain EC-12) and immediately filter sterilized, and titers were determined. The rate of phage particle disappearance is defined as _dP_/ _dt_ = − _kBP_, where _B_ is the concentration of bacteria, _P_ is the concentration of free phage at any time ( _t_), and _k_ is the adsorption rate constant in ml cell−1 min−1 ( [24](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B24)). All experiments were done in triplicate.
+
+### Construction of the _X. fastidiosa_ strain Temecula 1 _pilA_ deletion mutant and complementation in _trans_.
+
+The _X. fastidiosa_ _pilA_ (GenBank accession number [NP\_780105.1](https://ncbi.nlm.nih.gov/nucleotide/NP_780105.1)) open reading frame (ORF) from nucleotides (nt) 2256755 to 2257201 ( _X. fastidiosa_ Temecula 1 \[accession number [NC\_004556.1](https://ncbi.nlm.nih.gov/nucleotide/NC_004556.1)\]) was removed and replaced with a Kmr cassette by site-directed gene disruption, as described previously by Matsumoto et al. ( [25](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B25)), except that pUC19 served as the cloning vector and the downstream _pilA_, Kmr cassette (amplified from pXF004), and upstream _pilA_ regions were cloned sequentially. Primers used are listed in Table S1 in the supplemental material. The deletion of _pilA_ and replacement with the Kmr cassette were confirmed by PCR.
+
+Complementation of _X. fastidiosa_ strain Temecula 1 _pilA_ deletion mutant strain XF15-1 was accomplished by introducing a wild-type copy of _pilA_ using a chromosome-based complementation system ( [25](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B25)). Insertion of _pilA_ and the Cmr cassette into the neutral site (NS1) of putative complements was confirmed by PCR amplification using primer pair NS1-f and NS1-r ( [25](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B25)) and sequencing of the product.
+
+### Construction of the _Xanthomonas_ strain EC-12 _pilA_ deletion mutant and complementation in _trans_.
+
+Deletion of _pilA_ in _Xanthomonas_ strain EC-12 was performed as described previously by Hamad et al. ( [10](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B10)), except that cells were transformed using electroporation. Primers used are listed in Table S1 in the supplemental material. PCR primers were designed based on the annotated _pilA_ sequence of the _Xanthomonas_ strain EC-12 draft genome. The deletion of _pilA_ was confirmed by PCR. To complement _Xanthomonas_ strain EC-12-1 (Δ _pilA_), wild-type _pilA_ was introduced in _trans_ ( [10](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B10)). The presence of the wild-type _pilA_ was confirmed by PCR and sequencing for confirmation.
+
+### Twitching motility assay.
+
+Twitching motility was examined as previously described ( [26](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B26)). Briefly, late-log-phase liquid cultures of _X. fastidiosa_ strain Temecula 1 (5 days), _Xanthomonas_ strain EC-12 (18 h), and their derivatives were centrifuged and resuspended to 200 μl in liquid medium as appropriate (1 × 109 CFU/ml). Five-microliter cell suspensions were spotted onto appropriate solid medium modified with 1.2% agar and incubated at 28°C ( _X. fastidiosa_ \[5 days\] and _Xanthomonas_ \[18 h\]). _Pseudomonas aeruginosa_ strain PAO1, grown in a similar manner at 37°C for 24 h, was used as a positive control. Following incubation, colony edge morphology was visualized by using an Olympus SZ-PT microscope equipped with a QImaging Go-21 CMOS camera system. Colonies with a peripheral fringe were designated twitch positive.
+
+### Lysogen formation assay.
+
+To assay for phage lysogen formation, survivors of phage infection were tested for the presence of prophages. For each phage, bacteria were infected at an input MOI of ∼3 and plated in a soft agar overlay. Plates were monitored for colony growth (10 to 15 days for _X. fastidiosa_ strain Temecula 1 and 2 to 3 days for _Xanthomonas_ strain EC-12). Individual colonies that emerged were picked, purified (three times), and retested for phage sensitivity by spotting dilutions of the same phage in a soft agar overlay. Primer pairs specific to Sano and Salvo primase or Prado and Paz helicase genes (see Table S1 in the supplemental material) were then used to test for the presence of prophage sequences in the phage-insensitive isolates. Wild-type bacterial DNA was used as the negative control, and wild-type bacterial DNA spiked with phage DNA served as the positive control.
+
+To test whether evidence for abortive lysogeny (i.e., the establishment of repression) could be found, we followed a procedure described previously by Gill et al. ( [27](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B27)), except that reversibly bound phages were removed by three successive washes. Liquid cultures of logarithmically growing _Xanthomonas_ strain EC-12 were cultured to an OD600 of ∼0.3 to 0.5. One-milliliter aliquots were pelleted by centrifugation and resuspended in 0.20 ml of phage lysate (harvested in TNB) or sterile TNB. After a 30-min incubation at 25°C, cell-phage mixtures were centrifuged, the supernatant was removed, and the titer of adsorbed phage was determined. In preliminary experiments, it was determined that phages were reversibly bound, which affected the MOIactual ( [28](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B28)) calculation. To circumvent this problem and to obtain an accurate MOIactual, cells were resuspended in sterile TNB, allowed to incubate for 5 min at 25°C, and centrifuged, and supernatants were removed. This procedure was repeated three times to remove unbound phage. The titer of each supernatant was determined to determine PFU. Cell pellets were resuspended in 0.20 ml of sterile TNB, serially diluted, and plated to enumerate the bacterial survivors remaining following phage exposure. From these data, the MOIactual, i.e., the ratio of the number of adsorbed phage to the number of CFU in the phage-free controls, was calculated. These MOIactual values were used to calculate the predicted proportion of uninfected cells by using the Poisson distribution. This experiment was replicated three times, using both Sano and Prado.
+
+### Nucleotide sequence accession numbers.
+
+In accordance with Texas A&M Center for Phage Technology policy, novel phages were given names for mnemonic purposes. Names were checked for uniqueness by literature searching and were prefixed with Xfa, which is the ReBase species acronym for _X. fastidiosa_ ( [http://rebase.neb.com/](http://rebase.neb.com/)). Completed phage genomes were deposited in GenBank under the following accession numbers: [KF626665](https://ncbi.nlm.nih.gov/nucleotide/KF626665) for XfaSano, [KF626668](https://ncbi.nlm.nih.gov/nucleotide/KF626668) for XfaSalvo, [KF626667](https://ncbi.nlm.nih.gov/nucleotide/KF626667) for XfaPrado, and [KF626666](https://ncbi.nlm.nih.gov/nucleotide/KF626666) for XfaPaz. For simplicity, the phage names are used without the Xfa prefix. Phages Sano, Salvo, Prado, and Paz were deposited in the ATCC under accession numbers ATCC PTA-13096, ATCC PTA-13095, ATCC PTA-13099, and ATCC PTA-13100, respectively.
+
+## RESULTS
+
+### Phage isolation and characterization.
+
+Our initial efforts focused on the screening of rice and weed extracts for phages that formed plaques on lawns of _X. fastidiosa_ strain Temecula 1. Extracts yielded 10 to 105 PFU/g of tissue on lawns of _X.fastidiosa_. _X.fastidiosa_ was not detected in extracts (by direct plating or qRT-PCR to limits of detection). However, _Xanthomonas_ hosts were isolated from extracts, including EC-12. Subsequently, samples from both plant tissues and sewage were routinely screened against both _X. fastidiosa_ strain Temecula 1 and _Xanthomonas_ strain EC-12. Of the phages isolated, Sano, Salvo, Prado, and Paz are representative.
+
+The physical and host range properties of the four representative phages are summarized in [Tables 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T2) and [3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T3) and [Fig. 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F1). Phages Sano and Salvo exhibit siphophage morphology, with isometric heads and noncontractile tails ( [Fig. 1A](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F1) and [B](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F1), respectively), whereas phages Prado and Paz exhibit podophage morphology, with isometric heads and short stubby tails ( [Fig. 1C](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F1) and [D](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F1), respectively). All four phages formed plaques on both _X. fastidiosa_ and _Xanthomonas_ hosts, with differences in host range ( [Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T3)). The siphophages formed small clear plaques, whereas the podophages formed large clear plaques.
+
+#### TABLE 2.
+
+General, physiological, and structural characteristics of phages Sano, Salvo, Prado, and Paz
+
+| Feature | Value for phage_[d](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF2-4)_<br>* * * |
+| :-- | :-- |
+| Sano | Salvo | Prado | Paz |
+| :-- | :-- | :-- | :-- |
+| Host strain | Temecula 1 | EC-12 | Temecula 1 | Temecula 1 |
+| Mean capsid width (nm) (SD)_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF2-1)_ | 64 (±2.1) | 64 (±0.8) | 69 (±1.4) | 68 (±1.1) |
+| Mean tail length (nm) (SD)_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF2-1)_ | 204 (±2.3) | 207 (±4.2) | NA_[d](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF2-4)_ | NA |
+| Mean _k_ (ml cell−1 min−1) ± SD_[b](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF2-2)_ |  |  |  |  |
+| Temecula 1 | (4.33 ± 0.28) × 10−12 | (4.33 ± 0.28) × 10−12 | (4.33 ± 0.28) × 10−12 | (4.33 ± 0.28) × 10−12 |
+| EC-12 | (5.48 ± 0.23) × 10−10 | (4.58 ± 0.30) × 10−10 | (7.26 ± 0.42) × 10−10 | (5.98 ± 0.37) × 10−10 |
+| Mean burst size (PFU/cell) (SD)_[c](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF2-3)_ | 100 (±10.1) | 112 (±8.3) | 99 (±13.2) | 104 (±12.5) |
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/table/T2/)
+
+a
+
+Phage physical dimensions are the means of measurements of five virions, and values in parentheses indicate standard deviations.
+
+b
+
+Phage adsorption rate constants, _k_, are the means of three independent experiments, and values in parentheses indicate standard deviations. Phage stocks were propagated on a homologous host.
+
+c
+
+Phage bursts are the means of three independent experiments, and values in parentheses indicate standard deviations. _Xanthomonas_ strain EC-12 was used as the host.
+
+d
+
+NA, not applicable.
+
+#### TABLE 3.
+
+Phage host range
+
+| Strain | Presence of phage<br>* * * |
+| :-- | :-- |
+| Sano | Salvo | Prado | Paz |
+| :-- | :-- | :-- | :-- |
+| _X. fastidiosa_ |  |  |  |  |
+| Temecula 1 | +_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF3-1)_ | + | + | + |
+| Ann-1 | + | + | + | + |
+| Dixon | + | + | + | + |
+| XF53 | + | + | + | + |
+| XF54 | + | + | + | + |
+| XF95 | + | + | + | + |
+| XF134 | − | + | + | + |
+| XF136 | − | + | + | − |
+| XF140 | + | + | + | − |
+| XF141 | − | + | + | − |
+| _Xanthomonas_ |  |  |  |  |
+| EC-12 | + | + | + | + |
+| Jal-4 | − | − | + | + |
+| Presidio-4 | − | − | + | + |
+| North 40 | − | − | + | − |
+| Ft. Basinger | − | − | + | − |
+| Block 22 | − | − | + | − |
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/table/T3/)
+
+a
+
+Ability to form individual plaques.
+
+#### FIG 1.
+
+![FIG 1](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/3bd96d5891db/zjb9990929920001.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F1/)
+
+Morphology of phages Sano, Salvo, Prado, and Paz. Transmission electron micrographs show Sano (A), Salvo (B), Prado (C), and Paz (D) CsCl-purified phage particles. Samples were negatively stained with 2% (wt/vol) aqueous uranyl acetate, as defined in Materials and Methods. Bars, 100 nm.
+
+Phages Salvo and Paz plated efficiently to _X. fastidiosa_ strain Temecula 1 and _Xanthomonas_ strain EC-12 ( [Table 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T4)). However, there was an ∼2- to 3-log reduction in efficiency for phages Sano and Prado on the same hosts ( [Table 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T4)). Adsorption rate constants for the four phages on _X. fastidiosa_ strain Temecula 1 were on the order of ∼4 × 10−12 ml cell−1 min−1, which is much lower than those for most phages previously reported but similar to that for phage Xfas53 ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)). In contrast, the rate constants for _Xanthomonas_ strain EC-12 were ∼100-fold higher, at ∼5 × 10−10 ml cell−1 min−1. The burst size of all four phages was ∼102 PFU/cell at ∼52 min with _Xanthomonas_ strain EC-12 as the host ( [Table 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T2)). The extremely slow adsorption to _X. fastidiosa_ strain Temecula 1 made it unfeasible to determine burst size with this host.
+
+#### TABLE 4.
+
+Influence of bacterial host on efficiency of plating
+
+| Production host | Indicator host | Mean efficiency of plating ± SD_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF4-1)_<br>* * * |
+| :-- | :-- | :-- |
+| Sano | Salvo | Prado | Paz |
+| :-- | :-- | :-- | :-- |
+| Temecula 1 | Temecula 1 | 1.0 | 1.0 | 1.0 | 1.0 |
+| Temecula 1 | EC-12 | (1.2 ± 0.2) × 10−2 | (1.4 ± 0.5) × 10−1 | (2.3 ± 0.2) × 10−3 | (3.1 ± 0.3) × 10−1 |
+| EC-12 | EC-12 | 1.0 | 1.0 | 1.0 | 1.0 |
+| EC-12 | Temecula 1 | (1.4 ± 0.7) × 10−3 | (2.0 ± 0.2) × 10−1 | (9.5 ± 0.5) × 10−2 | (3.2 ± 0.3) × 10−1 |
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/table/T4/)
+
+a
+
+Data shown are the means of triplicate independent experiments ± standard deviations.
+
+### Genomics of siphophages Sano and Salvo.
+
+The general characteristics of the phage genomes are summarized in [Table 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T5), and complete annotations with supporting evidence are provided in Table S2 in the supplemental material. The genomes of Sano and Salvo were found to be 56.1 and 55.6 kb, encoding 77 and 72 genes, respectively. Both have 12-nt 5′-protruding single-stranded _cos_ ends. Having _cos_ ends makes it unlikely that Sano and Salvo are capable of generalized transduction.
+
+#### TABLE 5.
+
+General features of Sano, Salvo, Prado, and Paz phage genomes
+
+| Feature | Value for phage<br>* * * |
+| :-- | :-- |
+| Sano | Salvo | Prado | Paz |
+| :-- | :-- | :-- | :-- |
+| Genome size (bp) | 56,147 | 55,601 | 43,940 | 43,869 |
+| GC content (%) | 62.3 | 63.0 | 63.0 | 60.2 |
+| Predicted no. of genes | 77 | 72 | 52 | 51 |
+| Coding density (%) | 95.4 | 96.9 | 96.0 | 93.9 |
+| Genomic termini | 12-bp 5′ overhang | 12-bp 5′ overhang | 619-bp DTR_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF5-1)_ | 675-bp DTR |
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/table/T5/)
+
+a
+
+DTR, direct terminal repeats.
+
+When analyzed by pairwise DNA MegaBLAST, the genomes of phages Sano and Salvo can be aligned over ∼69% of their length, with an average ∼80% sequence identity in aligned regions. Sano and Salvo contain 58 homologous genes, with amino acid sequence similarities ranging from ∼13 to 94%, and have retained genome synteny ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2); see also Table S2 in the supplemental material). Despite no direct evidence of transcriptional boundaries or _rho_-independent terminators, breaks between genes are not large enough to contain promoters. Therefore, the arrangement of genes on the two strands suggests that the genomes are organized into four transcriptional units. Genes found in transcriptional units I (starting at the left end; reverse strand) and II (forward strand) primarily encode proteins of unknown function and show very limited similarity to other phage genes in the NCBI database. The lysis cassette, structural module, and DNA metabolism module are all encoded in transcriptional unit III (reverse strand), whereas transcriptional unit IV (forward strand) encodes only a few genes, including a primase.
+
+#### FIG 2.
+
+[![FIG 2](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/184dcacd6090/zjb9990929920002.jpg)](https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&p=PMC3&id=3911242_zjb9990929920002.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F2/)
+
+Synteny of siphophages Sano and Salvo compared to _Burkholderia_ phage Nazgul, _Burkholderia_ phage AH2, _Enterobacter_ phage Enc34, enteric bacterium phage Chi, and _Providencia_ phage Redjac. Predicted genes are represented as boxes. Functional modules are represented by different colors (color key at the bottom right). Functionally equivalent genes are connected by solid lines (lysis genes are omitted for clarity). Homologous genes between Sano and Salvo are connected by dotted lines, and similarity at the amino acid level is indicated by color (color key at the bottom left). Apparent transcriptional units are indicated by Roman numerals. A distinct divergent transcriptional module in AH2 is indicated by a red box.
+
+When analyzed by BLASTp, Sano and Salvo are most closely related to _Burkholderia_ phage BcepNazgul (GenBank accession number [NC\_005091](https://ncbi.nlm.nih.gov/nucleotide/NC_005091)) (here referred to as Nazgul); however, the relationship is distant. Of the 77 predicted Sano genes, only 23 show homology to Nazgul, ranging from ∼11 to 48% sequence identity at the amino acid level. Homologs are primarily located in the structural and DNA metabolism regions (excluding tail fiber and assembly proteins). However, despite the low observed total homology, phages Sano and Salvo are syntenic with Nazgul ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2)).
+
+As defined previously by Casjens ( [29](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B29)), Nazgul does not belong to any existing phage type because of its unique architecture and low homology to previously described phages. We therefore propose that Nazgul is the founder of a new phage type, to which both Sano and Salvo belong. Reannotation of the genomes of _Burkholderia_ phage AH2 ( [30](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B30)) and the closely related _Enterobacter_ phage Enc34 ( [31](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B31)), enteric bacteria phage Chi ( [32](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B32)), and _Providencia_ phage Redjac ( [33](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B33)) indicates that they are all members of the Nazgul-like phage type ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2)).
+
+In the following sections, except where significant differences exist between Sano and Salvo, only the relationships between the proteins of phage Sano and their homologs are discussed in detail ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2); see also Table S2 in the supplemental material).
+
+### Transcriptional units I and II.
+
+Most proteins encoded in transcriptional units I and II do not have homologs in the database. Despite this, 24 of the 38 proteins encoded in Sano transcriptional units I and II have homologs in Salvo, with ∼13 to 94% sequence identity at the amino acid level ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2); see also Table S2 in the supplemental material). Only one protein (Sano gp28) has a homolog in phage Nazgul (Nazgul gp34).
+
+### Lysis genes.
+
+Phages of Gram-negative hosts have genes coding for three functional classes of lytic proteins: holins, endolysins, and spanins ( [34](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B34), [35](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B35)). In addition, many phages encode an antiholin, a specific inhibitor of holin. Analysis of the genes of the Nazgul-like phage type suggested that all four functional classes are represented although with unexpected and novel variations. As with many phage genomes, the lysis proteins are clustered in lysis cassettes for the Nazgul-like phage type. [Figure 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3) shows the lysis cassettes of Sano, Salvo, Nazgul, AH2, and Chi; Redjac and Enc34 are not shown because the lysis gene arrangements are essentially identical to that of Chi. In each case, the lysis genes are the last cistrons of transcriptional unit III, which includes a long series of morphogenesis genes, except for AH2, which has a single novel gene inserted before the convergence point with unit III ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2) and [3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3)). Except for Sano, the lysis cassettes have the order most commonly found in phages of Gram-negative hosts, with the genes encoding the holins and antiholins first, followed by the endolysin and then the i-spanin/o-spanin gene pair. In Sano, the endolysin gene is the first gene of the cassette. Beyond this synteny, however, the Nazgul-like family exhibits extreme diversity and mosaicism in its lysis genes, in that among the 24 lysis genes in the five cassettes shown in [Fig. 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3), 16 are unrelated to any of the others. Although the spanin genes fall into only two groups (see below), the five endolysin genes lack similarity with each other. Moreover, the nine genes encoding integral membrane proteins encode seven proteins with no detectable sequence similarity, presumably including at least three holins and four antiholins, as explained below.
+
+#### FIG 3.
+
+[![FIG 3](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/cd6a1eafbc9e/zjb9990929920003.jpg)](https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&p=PMC3&id=3911242_zjb9990929920003.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F3/)
+
+Lysis cassettes in the Nazgul-like phage type. Black boxes indicate unrelated genes of unknown function; gray and brown indicate o-spanin and i-spanin genes. Shades of gray and brown indicate sequence homology; diagonal hatching indicates endolysin genes. No sequence similarity is present among the five endolysin genes shown. The blue box in the Salvo endolysin gene indicates the N-terminal lipoprotein domain; vertical hatching indicates genes encoding proteins with at least one TMD, potentially holins or antiholins. Pink and yellow indicate sequence homology. Topological models of Sano, Salvo, Nazgul, AH2, and Chi membrane proteins are shown at the right. Genes are drawn to scale.
+
+### Endolysins.
+
+The endolysin genes ( [Fig. 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3), diagonal hatching) in these five phages can be identified independently of their proximity to the other lysis genes although with various degrees of confidence. gp38 of Nazgul is very similar to the P endolysin of the paradigm coliphage 186; P is a transglycosylase of the well-characterized lambda R family. gp43 of Sano is closely related to the endolysin of a _Pseudomonas_ phage, PaP1, which has been shown to have muralytic activity, although its enzymatic type is not known ( [36](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B36)). Gene _42_ of AH2 has many related genes in prophage elements although not to any identified endolysins. However, HHpred analysis reveals weak similarity to eukaryotic and prokaryotic lysozyme (glycosidase) proteins. The Chi/Redjac/Enc34 endolysins were similar to proteins designated lysis protein A in a _Salmonella_ phage, iEPS5 ( [37](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B37)). Although all of these endolysins are distinct and belong to at least two enzymatic classes, they lack signal sequences or membrane domains and are thus soluble endolysins that require canonical holins for release across the cytoplasmic membrane (see below). gp36 of phage Salvo stands in stark contrast and represents an endolysin of unprecedented structure. The last ∼170 residues of gp36, although lacking any similarity to individual proteins by BLAST analysis, nevertheless are strongly predicted by HHpred analysis to be related to a number of experimentally and structurally characterized phage endolysins, including the classical phage T4 lysozyme. However, the first ∼100 residues are unrelated to any sequence in the database. Moreover, the N terminus has a strongly predicted outer membrane (OM) lipoprotein signal sequence, indicating that this endolysin is exported by the _sec_ translocon and, after processing by signal peptidase II and localization by the Lol system, becomes tethered to the inner leaflet of the OM as a 275-amino-acid (aa) mature lipoprotein. In support of this interpretation, gp42 has two pairs of Cys residues in the periplasmic domain; Cys residues in pairs are always found in the catalytic domains of SAR endolysins, presumably to provide stabilizing intramolecular disulfide linkages necessary for the protease-rich environment of the periplasm ( [38](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B38)). In contrast, the cytoplasmic endolysins of the other phages of the Nazgul-like family have no Cys residues, except for the Redjac endolysin, which has a single Cys; this supports the notion that these are all cytoplasmic endolysins.
+
+### Spanins.
+
+Most phages of Gram-negative hosts have two-component spanins, comprised of an integral inner membrane (IM) protein, or i-spanin, and an OM lipoprotein, or o-spanin, that together form a complex that spans the periplasm by C-terminal interactions ( [39](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B39)). Genes for two spanin proteins can be arranged in three distinct architectures ( [39](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B39)). All 7 members of the Nazgul-like phage type encode two-component spanins ( [Fig. 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3)). The sequences fall into two families, with Sano and Salvo comprising one family and the other five members forming the second, as shown most clearly in [Fig. 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F4) for the mature o-spanin lipoproteins. Surprisingly, in both families, there are representatives of two spanin gene architecture classes. In the Sano/Salvo family, the former has its spanin genes in the separated class, whereas in the latter, the spanin genes are overlapped. Similarly, the AH2 genes are entirely separated, whereas the four spanin gene pairs with similarity to the AH2 genes are in the overlapped architecture. These are the first two examples of spanin gene families that include members from different architectural classes (see Discussion).
+
+#### FIG 4.
+
+[![FIG 4](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/ca09ee84e830/zjb9990929920004.jpg)](https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&p=PMC3&id=3911242_zjb9990929920004.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F4/)
+
+Alignments of o-spanin proteins from the Sano/Salvo and Nazgul/AH2/Chi/Enc34/Redjac families. Alignments using the Feng-Doolittle ( [77](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B77)) progressive algorithm are shown for the Sano/Salvo (A) and Nazgul/AH2/Chi/Enc34/Redjac (B) families of o-spanin proteins. Residues are highlighted with RASMOL ( [78](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B78)) colors. Consensus residues were determined based on 100% identity.
+
+### Holins and antiholins.
+
+Absent similarity to a known holin, the general practice is to assign holin function to any integral membrane protein encoded by a gene clustered with the more easily identified endolysin and spanin genes, especially if the putative holin shares topology with one of the three established holin topologies ( [40](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B40), [41](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B41)). Among the Nazgul-like phages, the Chi/Enc34/Redjac subset is the simplest for holin annotation, since there is only a single gene encoding an integral membrane protein immediately upstream of the endolysin and spanin genes, the most common arrangement for lysis cassettes. This protein, gp02 in Chi ( [Fig. 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3)), has a single transmembrane domain (TMD) and is arranged in an N-in, C-out topology, making it the first member of topology class III that is not related to the phage T4 T holin family. The other four members of the Nazgul-like phage type each have genes for two integral membrane proteins clustered with the lysis genes. Among these eight proteins, seven different membrane topologies are represented. Both of the two membrane proteins encoded by Nazgul have homologs in AH2 ( [Fig. 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3), yellow and pink), but otherwise, all of these proteins are unrelated and novel. Although Nazgul gp39 has a predicted topology consistent with the most common holin topology, class I (three TMDs with N-out and C-in topology), its AH2 homolog lacks TMD1. Since it has been shown for two paradigm class I holins, lambda S105 and P2 Y, that the first TMD is required for function, it seems unlikely that these proteins encode holins. In contrast, Nazgul gp40 and its homolog AH2 gp44 both have class III topology, like the Chi holin noted above. The lysis cassettes of Sano and Salvo each encode two novel integral membrane proteins, and because of ambiguity as to the identity of the holin or antiholin, we have annotated all four genes (Sano genes _41_ and _42_ and Salvo genes _37_ and _38_) “holin-antiholin.”
+
+### Structural genes.
+
+There is limited amino acid sequence homology between the tail fiber and assembly genes of Sano and Nazgul (see Table S2 in the supplemental material). However, Sano genes _44_ to _52_ can be presumptively assigned the functions of tail fiber and assembly proteins based on synteny to similar genes in Nazgul (genes _41_ to _49_) ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2)). Sano gp53 is a tail tape measure protein based on the conserved tape measure domain (InterPro IPR013491). In most siphophages and myophages, the reading frames upstream of the tape measure protein encode the functional homologs of the lambda tail assembly chaperones G and G-T. These represent alternate translational products related by programmed −1 frameshifts, and both products have been shown to be required for tail assembly ( [42](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B42)). In Sano, the G- and G-T-equivalent frames are genes _55_ and _54_; manual inspection reveals a translational slippery sequence, 5′-GGGAAAC-3′, near the end of Sano gene _55_. This sequence is conserved in Salvo.
+
+### Genomics of podophages Prado and Paz.
+
+The general characteristics of the phage genomes are summarized in [Table 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T5), and complete annotations with supporting evidence are provided in Table S3 in the supplemental material. The genomes of Prado and Paz were found to be 43.9 and 43.8 kb, encoding 52 and 51 genes, respectively. The genomes of Prado and Paz contain nonpermutated direct terminal repeats of 619 and 675 bp, respectively.
+
+Prado and Paz are clearly phiKMV-like based on genome organization and protein homology with other phiKMV-like phages. Prado is most similar to _Caulobacter_ phage Cd1 (GenBank accession number [GU393987](https://ncbi.nlm.nih.gov/nucleotide/GU393987)), with 26 homologous genes ranging from ∼8 to 55% amino acid similarity. Similar to T7-like phages, phiKMV-like phage genomes consist of three functional gene clusters encoded on the forward strand. Class I consists of early genes with functions to overcome host restriction and to convert the metabolism of the host cell to the production of phage proteins. Class II encodes proteins involved in DNA metabolism. Class III encodes structural and assembly proteins, DNA packaging proteins, and lysis proteins. The phiKMV-like phages are distinguished from T7-like phages in that they encode a single-subunit RNA polymerase (RNAP) at the end of the class II gene cluster rather than in the early genomic region ( [43](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B43)). Phages Prado and Paz share no significant DNA homology (∼4%) in comparisons by pairwise DNA MegaBLAST. Despite the divergence in DNA sequence, Prado and Paz contain 43 homologous genes with amino acid similarities ranging from ∼17 to 79% and have the canonical phiKMV-like gene order ( [Fig. 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F5); see also Table S3 in the supplemental material).
+
+#### FIG 5.
+
+[![FIG 5](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/f386fec6ad6a/zjb9990929920005.jpg)](https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&p=PMC3&id=3911242_zjb9990929920005.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F5/)
+
+Synteny of podophages Prado and Paz compared to _Pseudomonas_ phage phiKMV and _Caulobacter_ phage Cd1. Predicted genes are represented as boxes. Functional modules are represented by different colors (color key at the bottom right). Functionally equivalent genes are connected by solid lines. Homologous genes between Prado and Paz are connected by dotted lines, and similarity at the amino acid level is indicated by color (color key at the bottom left).
+
+In the following sections, except where significant differences exist between Prado and Paz, only the relationship between Prado proteins and database homologs are discussed in detail ( [Fig. 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F5); see also Table S3 in the supplemental material).
+
+### Early genes.
+
+Early genes are involved in host conversion and have been reported to protect phage from bacterial defense mechanisms or alter host cell mechanisms ( [44](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B44)). When comparing phages of the same phage type, phage proteins that interact most intimately with the bacterial host have been reported to be the most diverse ( [45](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B45)). Five out of twelve Prado early genes have homologs in Paz. Only two early gene proteins, Prado gp02 and gp11, have homologs in other phiKMV-like phages, namely, Cd1 gp01 and gp09, respectively.
+
+### DNA metabolism.
+
+Phage Prado DNA metabolism genes follow the canonical phiKMV-like gene order of DNA primase (gene _13_), DNA helicase (gene _14_), DNA polymerase A (gene _17_), 5′-3′ exonuclease (gene _19_), DNA exonuclease VII (gene _20_), ATP-dependent DNA ligase (gene _26_), and a single-subunit RNAP (gene _28_) ( [Fig. 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F5)). Prado gp21 and gp22 do not have homologs in Cd1 but do have homologs in other phiKMV-like phages, such as _Ralstonia_ phage RSB1 gp22 and gp24, respectively. The Prado gene encoding single-subunit RNAP is located at the right end of the DNA metabolism gene cluster, a distinguishing characteristic of all reported phiKMV-like phages. However, it has been noted that the position of the DNA ligase gene can vary within phiKMV-like phages ( [46](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B46)). In phiKMV, the DNA ligase is encoded at the beginning of the DNA metabolism genes, whereas in Cd1 and Salvo, the DNA ligase is encoded directly before the RNA polymerase ( [Fig. 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F5)).
+
+The DNA metabolism region of Prado also shares high homology to several _Xanthomonas_ phages, including CP1 (GenBank accession number [NC\_019933](https://ncbi.nlm.nih.gov/nucleotide/NC_019933)), Xop411 (accession number [NC\_009543](https://ncbi.nlm.nih.gov/nucleotide/NC_009543)), Xp10 (accession number [NC\_004902](https://ncbi.nlm.nih.gov/nucleotide/NC_004902)), OP1 (accession number [NC\_007709](https://ncbi.nlm.nih.gov/nucleotide/NC_007709)), phiL7 (accession number [NC\_012742](https://ncbi.nlm.nih.gov/nucleotide/NC_012742)), and CP2 (accession number [NC\_020205](https://ncbi.nlm.nih.gov/nucleotide/NC_020205)). These phages are non-phiKMV-like yet have homology and preserved gene order characteristic of phiKMV-like DNA metabolism regions, including a single-subunit RNAP located at the end of the region.
+
+### Structural and lysis genes.
+
+As for the DNA metabolism genes noted above, Prado's structural and lysis gene region follows the phiKMV-like gene order. It begins immediately downstream of the single-subunit RNAP, with three small genes for conserved proteins of hypothetical function (genes _29_ to _31_) that are homologs of Cd1 genes _27_ to _29_. Next in sequence are genes encoding a head-tail connector (gene _32_), scaffold protein (gene _33_), major capsid protein (gene _34_), tail tube A (gene _36_), tail tube B (gene _37_), and three internal virion proteins (genes _38_ to _40_). Prado gp40 possesses a C-terminal lysozyme-like domain (IPR023346) identical to that found in Cd1 gp38. However, Prado gp40 is ∼300 aa larger than any previously reported homolog in phiKMV-like phages.
+
+There is diversity within the tail fiber proteins of the phiKMV-like phages in terms of both sequence homology and components ( [46](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B46)). In phiKMV-like phages, tail structural proteins are found immediately downstream of the internal virion proteins. Similarly, genes for the Prado tail fiber proteins (genes _41_ to _44_) are found in the same location. Prado gp41 contains a T7 tail fiber protein domain (IPR005604), and gp43 and gp44 have homologs of tail fiber proteins found in phiKMV-like phages. It appears, however, that Prado genes _41_ to _44_ may have been acquired through horizontal gene transfer with a non-phiKMV-like phage. The four genes are found as a cluster and are homologs of genes _26_ to _29_ in _Xanthomonas_ phage CP2, with ∼31 to 41% identity.
+
+The lysis cassette of phage phiKMV has been studied in detail and is organized with genes encoding holin, endolysin, i-spanin (formerly Rz), and o-spanin (formerly Rz1) immediately downstream of TerS and TerL ( [47](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B47)). The lysis cassette of Prado is similar to that of phiKMV, except that the predicted holin is found upstream of the endolysin, separated by three genes, encoding TerS (gene _46_), TerL (gene _47_), and a hypothetical protein (gene _48_) ( [Fig. 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F5)). This configuration, with lysis and terminase genes intermingled, was previously observed for phage SP6 and the phiKMV-like phage JG068 ( [48](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B48), [49](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B49)).
+
+Prado gene _45_ encodes a putative type II holin based on the presence of two TMDs (N-in, C-in topology). TMD2 (residues 31 to 48) is the most hydrophobic of the two. TMD1 (residues 13 to 29) is not predicted by TMHMM and has characteristics of a SAR domain, with a high percentage of weakly hydrophobic or polar residues. The class II topology and the presence of a SAR domain followed by a typical TMD suggest that gp45 is a pinholin, similar to phiKMV gp45 ( [47](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B47)). Prado gene _49_ encodes an endolysin, based on homology to other phiKMV-like phage endolysins in the database. Prado endolysin gp49 exhibits an N-terminal hydrophobic domain rich in weakly hydrophobic residues that is characteristic of a SAR endolysin ( [50](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B50)). A glycoside hydrolase domain (IPR002196) is predicted by InterProScan and contains an E-8 aa-D-8 aa-T catalytic triad, similar to the E-8 aa-D-5 aa-T and E-9 aa-D-6 aa-T catalytic triads found in phage T4 protein E and phiKMV gp45, respectively ( [38](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B38), [47](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B47)). Prado spanins were identified by characteristic gene orientation and proximity to the endolysin. Prado gp52 is homologous with HslV family proteins of _Xanthomonas_ phages OP1 (gp51), Xp10 (gp51), and Xop411 (gp51), with ∼38 to 42% identity, but does not contain the N-terminal hydrolase domain present in the other phage proteins.
+
+### Phage receptor site identification.
+
+In Gram-negative bacteria, OM proteins, pili, flagella, oligosaccharides, or lipopolysaccharides can act as phage receptors ( [51](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B51)). Our preliminary results (not shown) demonstrated that two transposon insertion mutants of _X. fastidiosa_ strain Temecula 1, TM1 (unpiliated) ( [26](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B26)) and “ _tonB1_ mutant” (hyperpiliated) ( [52](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B52)), were resistant to the four phages, indicating the phages may be type IV pilus dependent. To confirm these observations, we generated type IV pilus mutants (in-frame deletions of _pilA_) in _X. fastidiosa_ strain Temecula 1 and _Xanthomonas_ strain EC-12 and tested for phage sensitivity. PilA is the major subunit of type IV pili and is required for type IV pilus formation ( [53](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B53)). Wild-type _X. fastidiosa_ strain Temecula 1 and _Xanthomonas_ strain EC-12 exhibited twitching motility (indicative of pilus retraction) ( [Fig. 6A](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F6) and [D](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F6), respectively) and were sensitive to all four phages. The Δ _pilA_ derivatives XF15-1 and EC-12-1 were devoid of twitching motility ( [Fig. 6B](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F6) and [E](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F6), respectively) and were resistant to all four phages. Twitching motility and phage sensitivity were restored in XF15-1 and EC-12-1 by complementation of _pilA_ in _trans_ ( [Fig. 6C](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F6) and [F](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F6), respectively), providing evidence that the phages are type IV pilus dependent.
+
+#### FIG 6.
+
+[![FIG 6](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/87e77eeba9b4/zjb9990929920006.jpg)](https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&p=PMC3&id=3911242_zjb9990929920006.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F6/)
+
+Bacterial colony morphology as an indicator of twitching motility. Colonies of the indicated strains were grown on the appropriate solid medium modified with 1.2% agar and incubated at 28°C ( _X. fastidiosa_ \[5 days\] and _Xanthomonas_ \[18 h\]), as described in Materials and Methods. (A) Wild-type _X. fastidiosa_ strain Temecula 1; (B) Temecula 1 Δ _pilA_ strain; (C) Temecula 1 Δ _pilA_ strain complemented chromosomally in _trans_ with _pilA_; (D) wild-type _Xanthomonas_ strain EC-12; (E) EC-12 Δ _pilA_ strain; (F) EC-12 Δ _pilA_ strain complemented with _pilA_-containing plasmid pSJA107. Bars, 0.1 mm.
+
+### Lysogeny.
+
+To examine the potential for lysogeny, 40 phage-insensitive isolates of _X. fastidiosa_ strain Temecula 1 and _Xanthomonas_ strain EC-12 each were recovered following a challenge by phage Sano, Salvo, Prado, or Paz. PCR using phage-specific primers did not detect the presence of phage lysogens in resistant isolates, indicating that resistance was not due to lysogeny. Additionally, we examined the potential for abortive lysogeny using infection at a high MOI and measuring survival ( [27](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B27)). As shown in [Table 6](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T6), following infection with Sano or Prado, there was no significant difference between predicted and actual survivors, indicating that phage infection at a high MOI did not lead to the establishment of repression. Together, these results indicate that there is no evidence for lysogeny or repression, supporting the conclusion that the four phages are virulent.
+
+#### TABLE 6.
+
+Predicted bacterial survivors based on MOIactual compared to measured bacterial survivors of _Xanthomonas_ strain EC-12 following exposure to phage Sano or Prado_[a](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#TF6-1)_
+
+| Phage | Replicate | MOIactual | Predicted % surviving cells | Measured % surviving cells | Fold difference of survivors vs prediction |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| Sano | 1 | 6.51 | 0.15 | 0.12 | 0.80 |
+|  | 2 | 5.57 | 0.38 | 0.25 | 0.65 |
+|  | 3 | 5.99 | 0.30 | 0.24 | 0.80 |
+| Prado | 1 | 5.40 | 0.45 | 0.38 | 0.80 |
+|  | 2 | 5.39 | 0.45 | 0.49 | 1.08 |
+|  | 3 | 5.52 | 0.40 | 0.37 | 0.92 |
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/table/T6/)
+
+a
+
+Predicted survivors were calculated from the Poisson distribution for the measured MOIactual. Data shown are from three independent replicate experiments.
+
+## DISCUSSION
+
+We have previously reported the isolation and propagation of the first temperate phage of _X. fastidiosa_, Xfas53. Here we report the isolation and propagation of the first virulent phages able to infect _X. fastidiosa_ and _Xanthomonas_. Phages were isolated from plant extracts that contained _Xanthomonas_ spp. but not _X. fastidiosa_. We have more recently isolated phage directly from the petioles of grapevines that plate to both _X. fastidiosa_ isolates and _Xanthomonas_. Both genera are members of the _Xanthomonadaceae_ and are associated with a broad range of plant hosts ( [54](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B54), [55](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B55)). _Xylella_ and _Xanthomonas_ share a common origin and have diverged, with _X. fastidiosa_ having a reduced genome that may reflect a xylem-limited lifestyle ( [56](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B56), [57](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B57)). Despite their divergence, both have retained type IV pili ( [58](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B58) [–](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B59) [62](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B62)), which have been previously identified as phage receptors ( [63](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B63) [–](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B64) [70](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B70)). Phages Sano, Salvo, Prado, and Paz are type IV pilus dependent.
+
+Sano and Salvo are siphophages with isometric heads and noncontractile tails, whereas Prado and Paz are podophages with isometric heads and short stubby tails ( [Fig. 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F1)). The adsorption rate of the four phages to _X. fastidiosa_ strain Temecula 1 was similar to that observed previously for Xfas53 ( [5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B5)) but was ∼100-fold higher for _Xanthomonas_ strain EC-12. The observed difference in rate constants between hosts may be due to possible differences in the affinity for the type IV pilus of _X. fastidiosa_ and _Xanthomonas_ spp. or potential differences in type IV pilus retraction speed/frequency that may affect irreversible binding to a secondary receptor site(s). The genomes of Sano, Salvo, Prado, and Paz have an average GC content of ∼62.1%, which is similar to that of sequenced _Xanthomonas_ spp. (∼63.6 to 65.3%) and _Xanthomonas_ phages (∼60%) but significantly higher than those of _X. fastidiosa_ strains (∼49 to 55.6%) ( [54](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B54), [57](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B57)), suggesting that the primary hosts in the plant environment are _Xanthomonas_ spp. We speculate that overlapping plant host ranges and shared environmental niches, along with the conservation of type IV pili, may have led to the selection of phages able to infect both genera. Restriction-modification and clustered regularly interspaced short palindromic repeat (CRISPR)-cas systems have been identified in some _Xanthomonas_ spp. ( [71](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B71), [72](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B72)), with _X. fastidiosa_ exhibiting only the former ( [73](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B73)). The observed weak inhibition of efficiency of plating ( [Table 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#T4)) suggests that either the above-mentioned systems are relatively inefficient in both hosts or the phages are subverting them, as has been demonstrated for phage T7 ( [74](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B74)).
+
+Phages Prado and Paz are members of the phiKMV-like phage type, a large group of virulent phage, and presumably have diverged from a common phiKMV-like ancestor due to genetic drift. However, the DNA metabolism regions of Prado and Paz share homology to several non-phiKMV-like (based on genome architecture) _Xanthomonas_ phages. Additionally, the tail fibers of Prado and Paz share the highest homology with the non-phiKMV-like phage CP2. The observed homology in individual genes and gene clusters between Prado and Paz with non-phiKMV-like _Xanthomonas_ phages is indicative of horizontal gene transfer between these two phage groups and further demonstrates the mosaic nature of phages.
+
+We propose that phage Nazgul is the founder of a new phage type, the Nazgul-like phages. Phages Sano and Salvo are members of this new phage type. Analysis indicates that _Burkholderia_ phage AH2, _Enterobacter_ phage Enc34, enteric bacterium phage Chi, and _Providencia_ phage Redjac are Nazgul-like ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2)). It would be expected that closely related phages would share a similar infection lifestyle (i.e., temperate or virulent). However, closely related virulent and temperate mycobacteriophage and siphophage of _P. aeruginosa_ have been reported ( [75](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B75), [76](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B76)). Phage AH2 was not previously defined as temperate ( [30](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B30)), but there is clear evidence that it may be a temperate phage. AH2 is predicted to encode three excisionase proteins (genes _30_, _31_, and _69_), an integrase (gene _37_), and a CI-like repressor (gene _70_). Homologs of these genes are not present in the other Nazgul-like phages. In fact, AH2 genes _30_, _31_, and _37_ are harbored in two adjacent transcriptional units (based on coding strand position) (boxed in red in [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2)) not present in other Nazgul-like phages. Additionally, there is no clear evidence that the small proteins with helix-turn-helix DNA-binding domains of phages Nazgul, Sano, and Salvo (gp73, gp75, and gp70, respectively) are Cro-like proteins, as annotated in the other Nazgul-like phages ( [30](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B30) [–](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B31) [33](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B33)). Rather, these proteins may be involved in transcriptional regulation. The lysogeny experiments conducted with phages Sano and Salvo support the conclusion that the phages are virulent. Together, this suggests that the Nazgul-like phages, excepting AH2, have diverged to become virulent, due to possible deletions and modifications of lysogeny-related genes.
+
+Despite the rather complete synteny of the Nazgul-like phage-type genomes, the lysis cassettes are examples of pronounced mosaicism. Among the seven genomes, there are at least four novel, unrelated holins represented. Two of these (gp02 of Chi, with homologs in Redjac and AH2, and gp40 in Nazgul, with a gp44 homolog in AH2) can be identified with confidence and represent holins with class III topology. These are the first holins of class III that are not related to the T holin of the paradigm phage T4. Moreover, all of the holins except for Sano must be canonical “large-hole” holins, rather than pinholins, since the respective endolysins lack secretory or membrane localization signals and thus require large holin-mediated lesions for escape across the bilayer ( [34](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B34)).
+
+In the Nazgul-like phage type, the most surprising finding is that the Salvo endolysin gene _36_ has a strong lipobox signal ( [Fig. 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3)), which would mandate that the enzyme is secreted through the translocon, modified as a lipoprotein, and sorted to the inner leaflet of the OM. Heretofore, only two modes of endolysin regulation have been characterized in phages of Gram-negative hosts: canonical (cytoplasmic) endolysins, which are simply sequestered fully active in the cytoplasm until being liberated by holin-mediated hole formation, and SAR endolysins, which are secreted in a membrane-tethered, inactive state by the _sec_ system and activated by release from the bilayer after pinholin-dependent membrane depolarization. Neither of these strategies would apply to gp36, since there is no obvious way that a holin could alter the IM in a way that would directly affect the OM attachment of the gp36 endolysin molecules. It seems unlikely that gp36 endolysin accumulates as a fully active, OM-attached endolysin throughout the morphogenesis period without causing premature lysis, so a novel mode of holin-mediated endolysin control may be in place.
+
+The second most surprising finding concerns the spanin genes of the Nazgul-like phage type. There are two distinct families of i-spanin/o-spanin gene pairs, the Sano/Salvo family and the Nazgul family, shared by the other four phages ( [Fig. 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F4)). Unexpectedly, both of these families have members in the overlapped and separated architectural classes ( [Fig. 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F2) and [3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F3)). The Salvo o-spanin gene is overlapped by its i-spanin gene, whereas in Sano, the genes are separated. Similarly, the AH2 genes are separated, but the homologs of the AH2 i-spanin and o-spanin genes in the other phages are all overlapped. Besides this being the first instances where spanin gene families have members that cross an architectural class boundary ( [39](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B39)), the alignments of the homologs of differing classes may provide a clue to the evolutionary process that underlies the unexpected gene arrangements. When the two gene pairs are aligned, it can be seen that the homologous regions of the i-spanins and o-spanins of Sano and Salvo are separated by ∼100 bp in the Sano-separated genes ( [Fig. 7](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#F7)). The most parsimonious interpretation is that a deletion that crossed the gene boundaries flanking this intervening DNA resulted in the overlapped architecture seen in Salvo. Paradoxically, the deletion, which presumably included the DNA encoding the lipobox of the mature lipoprotein, resulted in a fusion to the +1 reading frame of the upstream i-spanin gene and a consequent extension of the o-spanin by 8 N-terminal residues. The structures examined here suggest that the overlapped gene architecture evolved by a process of successive deletion and reading frame fusion and support our previous hypothesis that the spanin gene architectures originated with the “normal” separated gene format, in which both proteins could evolve independently ( [39](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/#B39)).
+
+### FIG 7.
+
+![FIG 7](https://cdn.ncbi.nlm.nih.gov/pmc/blobs/bf9e/3911242/7eb5db18b8ee/zjb9990929920007.jpg)
+
+[Open in a new tab](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/figure/F7/)
+
+Spanin gene architecture. Shown is a putative deletion (diagonal-hatched bar) that could convert the Sano-separated spanin gene pair into a Salvo-like overlapped gene pair. Gray areas connecting green domains show homologous domains of Salvo and Sano i-spanins (blue bars) and o-spanins (yellow bars). Orange sub-bars indicate lipoprotein signal sequences in o-spanins. Pink sub-bars indicate the TMD in i-spanin. The arrow indicates the direction of transcription.
+
+In medicine and agriculture, the search for innovative solutions to control disease is an ongoing process. Phage therapy offers a novel and environmentally acceptable treatment for the control of disease caused by _X. fastidiosa_. This is the first report of the propagation and characterization of virulent phages for _X. fastidiosa_. The fact that virulent phages for _X. fastidiosa_ can now be easily propagated in a surrogate host ( _Xanthomonas_) that grows in a standard medium allows the efficient isolation, characterization, and propagation of virulent phages that can be implemented as biocontrol agents for prevention or treatment of disease caused by _X. fastidiosa_. The reported phages are therefore attractive candidates for the development of phage cocktails to control disease caused by _X. fastidiosa_.
+
+## Supplementary Material
+
+Supplemental material
+
+[supp\_196\_2\_459\_\_index.html](https://pmc.ncbi.nlm.nih.gov/articles/instance/3911242/bin/supp_196_2_459__index.html) (1.1KB, html)
+
+## ACKNOWLEDGMENTS
+
+This project was funded by a grant to the Center for Phage Technology and Texas A&M AgriLife Research from Otsuka Pharmaceutical Co., Ltd.
+
+We thank Thomas J. Burr for kindly providing strains. We thank Michele Igo for kindly providing plasmids used in this study. We thank Jason Gill for his critical reading of the manuscript and Guichun Yao for her technical assistance. We thank Tsutomu Nishida for his support throughout this project.
+
+## Footnotes
+
+**Published ahead of print** 8 November 2013
+
+Supplemental material for this article may be found at [http://dx.doi.org/10.1128/JB.01080-13](http://dx.doi.org/10.1128/JB.01080-13).
+
+## REFERENCES
+
+- 1.Chatterjee S, Almeida RPP, Lindow S.
+2008\.
+Living in two worlds: the plant and insect lifestyles of Xylella fastidiosa. Annu. Rev. Phytopathol.
+46:243–271. 10.1146/annurev.phyto.45.062806.094342 \[ [DOI](https://doi.org/10.1146/annurev.phyto.45.062806.094342)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/18422428/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Annu.%20Rev.%20Phytopathol.&title=Living%20in%20two%20worlds:%20the%20plant%20and%20insect%20lifestyles%20of%20Xylella%20fastidiosa&author=S%20Chatterjee&author=RPP%20Almeida&author=S%20Lindow&volume=46&publication_year=2008&pages=243-271&pmid=18422428&doi=10.1146/annurev.phyto.45.062806.094342&)\]
+- 2.Stokstad E.
+2012\.
+Agriculture field research on bees raises concern about low-dose pesticides. Science
+335:1555. 10.1126/science.335.6076.1555 \[ [DOI](https://doi.org/10.1126/science.335.6076.1555)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/22461580/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Science&title=Agriculture%20field%20research%20on%20bees%20raises%20concern%20about%20low-dose%20pesticides&author=E%20Stokstad&volume=335&publication_year=2012&pages=1555&pmid=22461580&doi=10.1126/science.335.6076.1555&)\]
+- 3.Whitehorn PR, O'Connor S, Wackers FL, Goulson D.
+2012\.
+Neonicotinoid pesticide reduces bumble bee colony growth and queen production. Science
+336:351–352. 10.1126/science.1215025 \[ [DOI](https://doi.org/10.1126/science.1215025)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/22461500/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Science&title=Neonicotinoid%20pesticide%20reduces%20bumble%20bee%20colony%20growth%20and%20queen%20production&author=PR%20Whitehorn&author=S%20O%27Connor&author=FL%20Wackers&author=D%20Goulson&volume=336&publication_year=2012&pages=351-352&pmid=22461500&doi=10.1126/science.1215025&)\]
+- 4.Jones JB, Jackson LE, Balogh B, Obradovic A, Iriarte FB, Momol MT.
+2007\.
+Bacteriophages for plant disease control. Annu. Rev. Phytopathol.
+45:245–262. 10.1146/annurev.phyto.45.062806.094411 \[ [DOI](https://doi.org/10.1146/annurev.phyto.45.062806.094411)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/17386003/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Annu.%20Rev.%20Phytopathol.&title=Bacteriophages%20for%20plant%20disease%20control&author=JB%20Jones&author=LE%20Jackson&author=B%20Balogh&author=A%20Obradovic&author=FB%20Iriarte&volume=45&publication_year=2007&pages=245-262&pmid=17386003&doi=10.1146/annurev.phyto.45.062806.094411&)\]
+- 5.Summer EJ, Enderle CJ, Ahern SJ, Gill JJ, Torres CP, Appel DN, Black MC, Young R, Gonzalez CF.
+2010\.
+Genomic and biological analysis of phage Xfas53 and related prophages of Xylella fastidiosa. J. Bacteriol.
+192:179–190. 10.1128/JB.01174-09 \[ [DOI](https://doi.org/10.1128/JB.01174-09)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2798268/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19897657/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Genomic%20and%20biological%20analysis%20of%20phage%20Xfas53%20and%20related%20prophages%20of%20Xylella%20fastidiosa&author=EJ%20Summer&author=CJ%20Enderle&author=SJ%20Ahern&author=JJ%20Gill&author=CP%20Torres&volume=192&publication_year=2010&pages=179-190&pmid=19897657&doi=10.1128/JB.01174-09&)\]
+- 6.Gill JJ, Hyman P.
+2010\.
+Phage choice, isolation, and preparation for phage therapy. Curr. Pharm. Biotechnol.
+11:2–14. 10.2174/138920110790725311 \[ [DOI](https://doi.org/10.2174/138920110790725311)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/20214604/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Curr.%20Pharm.%20Biotechnol.&title=Phage%20choice,%20isolation,%20and%20preparation%20for%20phage%20therapy&author=JJ%20Gill&author=P%20Hyman&volume=11&publication_year=2010&pages=2-14&pmid=20214604&doi=10.2174/138920110790725311&)\]
+- 7.Hill BL, Purcell AH.
+1995\.
+Multiplication and movement of Xylella fastidiosa within grapevine and 4 other plants. Phytopathology
+85:1368–1372. 10.1094/Phyto-85-1368 \[ [DOI](https://doi.org/10.1094/Phyto-85-1368)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Phytopathology&title=Multiplication%20and%20movement%20of%20Xylella%20fastidiosa%20within%20grapevine%20and%204%20other%20plants&author=BL%20Hill&author=AH%20Purcell&volume=85&publication_year=1995&pages=1368-1372&doi=10.1094/Phyto-85-1368&)\]
+- 8.Davis MJ, French WJ, Schaad NW.
+1981\.
+Axenic culture of the bacteria associated with phony disease of peach and plum leaf scald. Curr. Microbiol.
+6:309–314. 10.1007/BF01566883 \[ [DOI](https://doi.org/10.1007/BF01566883)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Curr.%20Microbiol.&title=Axenic%20culture%20of%20the%20bacteria%20associated%20with%20phony%20disease%20of%20peach%20and%20plum%20leaf%20scald&author=MJ%20Davis&author=WJ%20French&author=NW%20Schaad&volume=6&publication_year=1981&pages=309-314&doi=10.1007/BF01566883&)\]
+- 9.Hansen JB, Olsen RH.
+1978\.
+Isolation of large bacterial plasmids and characterization of P2 I compatibility group plasmids Pmg1 and Pmg5. J. Bacteriol.
+135:227–238 \[ [DOI](https://doi.org/10.1128/jb.135.1.227-238.1978)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC224811/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/97269/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Isolation%20of%20large%20bacterial%20plasmids%20and%20characterization%20of%20P2%20I%20compatibility%20group%20plasmids%20Pmg1%20and%20Pmg5&author=JB%20Hansen&author=RH%20Olsen&volume=135&publication_year=1978&pages=227-238&pmid=97269&doi=10.1128/jb.135.1.227-238.1978&)\]
+- 10.Hamad MA, Zajdowicz SL, Holmes RK, Voskuil MI.
+2009\.
+An allelic exchange system for compliant genetic manipulation of the select agents Burkholderia pseudomallei and Burkholderia mallei. Gene
+430:123–131. 10.1016/j.gene.2008.10.011 \[ [DOI](https://doi.org/10.1016/j.gene.2008.10.011)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2646673/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19010402/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Gene&title=An%20allelic%20exchange%20system%20for%20compliant%20genetic%20manipulation%20of%20the%20select%20agents%20Burkholderia%20pseudomallei%20and%20Burkholderia%20mallei&author=MA%20Hamad&author=SL%20Zajdowicz&author=RK%20Holmes&author=MI%20Voskuil&volume=430&publication_year=2009&pages=123-131&pmid=19010402&doi=10.1016/j.gene.2008.10.011&)\]
+- 11.Bertani G.
+1951\.
+Studies on lysogenesis. 1. The mode of phage liberation by lysogenic Escherichia coli. J. Bacteriol.
+62:293–300 \[ [DOI](https://doi.org/10.1128/jb.62.3.293-300.1951)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC386127/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/14888646/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Studies%20on%20lysogenesis.%201.%20The%20mode%20of%20phage%20liberation%20by%20lysogenic%20Escherichia%20coli&author=G%20Bertani&volume=62&publication_year=1951&pages=293-300&pmid=14888646&doi=10.1128/jb.62.3.293-300.1951&)\]
+- 12.Bextine B, Child B.
+2007\.
+Xylella fastidiosa genotype differentiation by SYBR Green-based QRT-PCR. FEMS Microbiol. Lett.
+276:48–54. 10.1111/j.1574-6968.2007.00910.x \[ [DOI](https://doi.org/10.1111/j.1574-6968.2007.00910.x)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/17937663/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=FEMS%20Microbiol.%20Lett.&title=Xylella%20fastidiosa%20genotype%20differentiation%20by%20SYBR%20Green-based%20QRT-PCR&author=B%20Bextine&author=B%20Child&volume=276&publication_year=2007&pages=48-54&pmid=17937663&doi=10.1111/j.1574-6968.2007.00910.x&)\]
+- 13.Summer EJ.
+2009\.
+Preparation of a phage DNA fragment library for whole genome shotgun sequencing. Methods Mol. Biol.
+502:27–46. 10.1007/978-1-60327-565-1\_4 \[ [DOI](https://doi.org/10.1007/978-1-60327-565-1_4)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19082550/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Methods%20Mol.%20Biol.&title=Preparation%20of%20a%20phage%20DNA%20fragment%20library%20for%20whole%20genome%20shotgun%20sequencing&author=EJ%20Summer&volume=502&publication_year=2009&pages=27-46&pmid=19082550&doi=10.1007/978-1-60327-565-1_4&)\]
+- 14.Lukashin AV, Borodovsky M.
+1998\.
+GeneMark.hmm: new solutions for gene finding. Nucleic Acids Res.
+26:1107–1115. 10.1093/nar/26.4.1107 \[ [DOI](https://doi.org/10.1093/nar/26.4.1107)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC147337/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/9461475/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Nucleic%20Acids%20Res.&title=GeneMark.hmm:%20new%20solutions%20for%20gene%20finding&author=AV%20Lukashin&author=M%20Borodovsky&volume=26&publication_year=1998&pages=1107-1115&pmid=9461475&doi=10.1093/nar/26.4.1107&)\]
+- 15.Rutherford K, Parkhill J, Crook J, Horsnell T, Rice P, Rajandream MA, Barrell B.
+2000\.
+Artemis: sequence visualization and annotation. Bioinformatics
+16:944–945. 10.1093/bioinformatics/16.10.944 \[ [DOI](https://doi.org/10.1093/bioinformatics/16.10.944)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/11120685/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Bioinformatics&title=Artemis:%20sequence%20visualization%20and%20annotation&author=K%20Rutherford&author=J%20Parkhill&author=J%20Crook&author=T%20Horsnell&author=P%20Rice&volume=16&publication_year=2000&pages=944-945&pmid=11120685&doi=10.1093/bioinformatics/16.10.944&)\]
+- 16.Camacho C, Coulouris G, Avagyan V, Ma N, Papadopoulos J, Bealer K, Madden TL.
+2009\.
+BLAST plus: architecture and applications. BMC Bioinformatics
+10:421. 10.1186/1471-2105-10-421 \[ [DOI](https://doi.org/10.1186/1471-2105-10-421)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2803857/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/20003500/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=BMC%20Bioinformatics&title=BLAST%20plus:%20architecture%20and%20applications&author=C%20Camacho&author=G%20Coulouris&author=V%20Avagyan&author=N%20Ma&author=J%20Papadopoulos&volume=10&publication_year=2009&pages=421&pmid=20003500&doi=10.1186/1471-2105-10-421&)\]
+- 17.Hunter S, Jones P, Mitchell A, Apweiler R, Attwood TK, Bateman A, Bernard T, Binns D, Bork P, Burge S, de Castro E, Coggill P, Corbett M, Das U, Daugherty L, Duquenne L, Finn RD, Fraser M, Gough J, Haft D, Hulo N, Kahn D, Kelly E, Letunic I, Lonsdale D, Lopez R, Madera M, Maslen J, McAnulla C, McDowall J, McMenamin C, Mi HY, Mutowo-Muellenet P, Mulder N, Natale D, Orengo C, Pesseat S, Punta M, Quinn AF, Rivoire C, Sangrador-Vegas A, Selengut JD, Sigrist CJA, Scheremetjew M, Tate J, Thimmajanarthanan M, Thomas PD, Wu CH, Yeats C, Yong SY.
+2012\.
+InterPro in 2011: new developments in the family and domain prediction database. Nucleic Acids Res.
+40:D306–D312. 10.1093/nar/gkr948 \[ [DOI](https://doi.org/10.1093/nar/gkr948)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3245097/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/22096229/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Nucleic%20Acids%20Res.&title=InterPro%20in%202011:%20new%20developments%20in%20the%20family%20and%20domain%20prediction%20database&author=S%20Hunter&author=P%20Jones&author=A%20Mitchell&author=R%20Apweiler&author=TK%20Attwood&volume=40&publication_year=2012&pages=D306-D312&pmid=22096229&doi=10.1093/nar/gkr948&)\]
+- 18.Soding J, Biegert A, Lupas AN.
+2005\.
+The HHpred interactive server for protein homology detection and structure prediction. Nucleic Acids Res.
+33:W244–W248. 10.1093/nar/gki408 \[ [DOI](https://doi.org/10.1093/nar/gki408)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC1160169/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15980461/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Nucleic%20Acids%20Res.&title=The%20HHpred%20interactive%20server%20for%20protein%20homology%20detection%20and%20structure%20prediction&author=J%20Soding&author=A%20Biegert&author=AN%20Lupas&volume=33&publication_year=2005&pages=W244-W248&pmid=15980461&doi=10.1093/nar/gki408&)\]
+- 19.Marchler-Bauer A, Lu S, Anderson JB, Chitsaz F, Derbyshire MK, DeWeese-Scott C, Fong JH, Geer LY, Geer RC, Gonzales NR, Gwadz M, Hurwitz DI, Jackson JD, Ke Z, Lanczycki CJ, Lu F, Marchler GH, Mullokandov M, Omelchenko MV, Robertson CL, Song JS, Thanki N, Yamashita RA, Zhang D, Zhang N, Zheng C, Bryant SH.
+2011\.
+CDD: a conserved domain database for the functional annotation of proteins. Nucleic Acids Res.
+39:D225–D229. 10.1093/nar/gkq1189 \[ [DOI](https://doi.org/10.1093/nar/gkq1189)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3013737/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21109532/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Nucleic%20Acids%20Res.&title=CDD:%20a%20conserved%20domain%20database%20for%20the%20functional%20annotation%20of%20proteins&author=A%20Marchler-Bauer&author=S%20Lu&author=JB%20Anderson&author=F%20Chitsaz&author=MK%20Derbyshire&volume=39&publication_year=2011&pages=D225-D229&pmid=21109532&doi=10.1093/nar/gkq1189&)\]
+- 20.Juncker AS, Willenbrock H, Von Heijne G, Brunak S, Nielsen H, Krogh A.
+2003\.
+Prediction of lipoprotein signal peptides in Gram-negative bacteria. Protein Sci.
+12:1652–1662. 10.1110/ps.0303703 \[ [DOI](https://doi.org/10.1110/ps.0303703)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2323952/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/12876315/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Protein%20Sci.&title=Prediction%20of%20lipoprotein%20signal%20peptides%20in%20Gram-negative%20bacteria&author=AS%20Juncker&author=H%20Willenbrock&author=G%20Von%20Heijne&author=S%20Brunak&author=H%20Nielsen&volume=12&publication_year=2003&pages=1652-1662&pmid=12876315&doi=10.1110/ps.0303703&)\]
+- 21.Petersen TN, Brunak S, von Heijne G, Nielsen H.
+2011\.
+SignalP 4.0: discriminating signal peptides from transmembrane regions. Nat. Methods
+8:785–786. 10.1038/nmeth.1701 \[ [DOI](https://doi.org/10.1038/nmeth.1701)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21959131/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Nat.%20Methods&title=SignalP%204.0:%20discriminating%20signal%20peptides%20from%20transmembrane%20regions&author=TN%20Petersen&author=S%20Brunak&author=G%20von%20Heijne&author=H%20Nielsen&volume=8&publication_year=2011&pages=785-786&pmid=21959131&doi=10.1038/nmeth.1701&)\]
+- 22.Krogh A, Larsson B, von Heijne G, Sonnhammer ELL.
+2001\.
+Predicting transmembrane protein topology with a hidden Markov model: application to complete genomes. J. Mol. Biol.
+305:567–580. 10.1006/jmbi.2000.4315 \[ [DOI](https://doi.org/10.1006/jmbi.2000.4315)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/11152613/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Mol.%20Biol.&title=Predicting%20transmembrane%20protein%20topology%20with%20a%20hidden%20Markov%20model:%20application%20to%20complete%20genomes&author=A%20Krogh&author=B%20Larsson&author=G%20von%20Heijne&author=ELL%20Sonnhammer&volume=305&publication_year=2001&pages=567-580&pmid=11152613&doi=10.1006/jmbi.2000.4315&)\]
+- 23.Clokie MRJ, Kropinski AM.
+2009\.
+Bacteriophages: methods and protocols. Humana Press, New York, NY \[ [Google Scholar](https://scholar.google.com/scholar_lookup?title=Bacteriophages:%20methods%20and%20protocols&author=MRJ%20Clokie&author=AM%20Kropinski&publication_year=2009&)\]
+- 24.Schwartz M.
+1975\.
+Reversible interaction between coliphage lambda and its receptor protein. J. Mol. Biol.
+99:185–201. 10.1016/S0022-2836(75)80167-7 \[ [DOI](https://doi.org/10.1016/S0022-2836(75)80167-7)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/1107562/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Mol.%20Biol.&title=Reversible%20interaction%20between%20coliphage%20lambda%20and%20its%20receptor%20protein&author=M%20Schwartz&volume=99&publication_year=1975&pages=185-201&pmid=1107562&doi=10.1016/S0022-2836(75)80167-7&)\]
+- 25.Matsumoto A, Young GM, Igo MM.
+2009\.
+Chromosome-based genetic complementation system for Xylella fastidiosa. Appl. Environ. Microbiol.
+75:1679–1687. 10.1128/AEM.00024-09 \[ [DOI](https://doi.org/10.1128/AEM.00024-09)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2655483/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19151176/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Appl.%20Environ.%20Microbiol.&title=Chromosome-based%20genetic%20complementation%20system%20for%20Xylella%20fastidiosa&author=A%20Matsumoto&author=GM%20Young&author=MM%20Igo&volume=75&publication_year=2009&pages=1679-1687&pmid=19151176&doi=10.1128/AEM.00024-09&)\]
+- 26.Li Y, Hao G, Galvani CD, Meng Y, De La Fuente L, Hoch HC, Burr TJ.
+2007\.
+Type I and type IV pili of Xylella fastidiosa affect twitching motility, biofilm formation and cell-cell aggregation. Microbiology
+153:719–726. 10.1099/mic.0.2006/002311-0 \[ [DOI](https://doi.org/10.1099/mic.0.2006/002311-0)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/17322192/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Microbiology&title=Type%20I%20and%20type%20IV%20pili%20of%20Xylella%20fastidiosa%20affect%20twitching%20motility,%20biofilm%20formation%20and%20cell-cell%20aggregation&author=Y%20Li&author=G%20Hao&author=CD%20Galvani&author=Y%20Meng&author=L%20De%20La%20Fuente&volume=153&publication_year=2007&pages=719-726&pmid=17322192&doi=10.1099/mic.0.2006/002311-0&)\]
+- 27.Gill JJ, Summer EJ, Russell WK, Cologna SM, Carlile TM, Fuller AC, Kitsopoulos K, Mebane LM, Parkinson BN, Sullivan D, Carmody LA, Gonzalez CF, LiPuma JJ, Young R.
+2011\.
+Genomes and characterization of phages Bcep22 and BcepIL02, founders of a novel phage type in Burkholderia cenocepacia. J. Bacteriol.
+193:5300–5313. 10.1128/JB.05287-11 \[ [DOI](https://doi.org/10.1128/JB.05287-11)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3187461/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21804006/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Genomes%20and%20characterization%20of%20phages%20Bcep22%20and%20BcepIL02,%20founders%20of%20a%20novel%20phage%20type%20in%20Burkholderia%20cenocepacia&author=JJ%20Gill&author=EJ%20Summer&author=WK%20Russell&author=SM%20Cologna&author=TM%20Carlile&volume=193&publication_year=2011&pages=5300-5313&pmid=21804006&doi=10.1128/JB.05287-11&)\]
+- 28.Kasman LM, Kasman A, Westwater C, Dolan J, Schmidt MG, Norris JS.
+2002\.
+Overcoming the phage replication threshold: a mathematical model with implications for phage therapy. J. Virol.
+76:5557–5564. 10.1128/JVI.76.11.5557-5564.2002 \[ [DOI](https://doi.org/10.1128/JVI.76.11.5557-5564.2002)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC137030/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/11991984/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Virol.&title=Overcoming%20the%20phage%20replication%20threshold:%20a%20mathematical%20model%20with%20implications%20for%20phage%20therapy&author=LM%20Kasman&author=A%20Kasman&author=C%20Westwater&author=J%20Dolan&author=MG%20Schmidt&volume=76&publication_year=2002&pages=5557-5564&pmid=11991984&doi=10.1128/JVI.76.11.5557-5564.2002&)\]
+- 29.Casjens SR.
+2008\.
+Diversity among the tailed-bacteriophages that infect the Enterobacteriaceae. Res. Microbiol.
+159:340–348. 10.1016/j.resmic.2008.04.005 \[ [DOI](https://doi.org/10.1016/j.resmic.2008.04.005)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2607141/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/18550341/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Res.%20Microbiol.&title=Diversity%20among%20the%20tailed-bacteriophages%20that%20infect%20the%20Enterobacteriaceae&author=SR%20Casjens&volume=159&publication_year=2008&pages=340-348&pmid=18550341&doi=10.1016/j.resmic.2008.04.005&)\]
+- 30.Lynch KH, Stothard P, Dennis JJ.
+2012\.
+Comparative analysis of two phenotypically-similar but genomically-distinct Burkholderia cenocepacia-specific bacteriophages. BMC Genomics
+13:223. 10.1186/1471-2164-13-223 \[ [DOI](https://doi.org/10.1186/1471-2164-13-223)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3483164/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/22676492/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=BMC%20Genomics&title=Comparative%20analysis%20of%20two%20phenotypically-similar%20but%20genomically-distinct%20Burkholderia%20cenocepacia-specific%20bacteriophages&author=KH%20Lynch&author=P%20Stothard&author=JJ%20Dennis&volume=13&publication_year=2012&pages=223&pmid=22676492&doi=10.1186/1471-2164-13-223&)\]
+- 31.Kazaks A, Dislers A, Lipowsky G, Nikolajeva V, Tars K.
+2012\.
+Complete genome sequence of the Enterobacter cancerogenus bacteriophage Enc34. J. Virol.
+86:11403–11404. 10.1128/JVI.01954-12 \[ [DOI](https://doi.org/10.1128/JVI.01954-12)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3457185/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/22997422/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Virol.&title=Complete%20genome%20sequence%20of%20the%20Enterobacter%20cancerogenus%20bacteriophage%20Enc34&author=A%20Kazaks&author=A%20Dislers&author=G%20Lipowsky&author=V%20Nikolajeva&author=K%20Tars&volume=86&publication_year=2012&pages=11403-11404&pmid=22997422&doi=10.1128/JVI.01954-12&)\]
+- 32.Lee JH, Shin H, Choi Y, Ryu S.
+2013\.
+Complete genome sequence analysis of bacterial-flagellum-targeting bacteriophage Chi. Arch. Virol.
+158:2179–2183. 10.1007/s00705-013-1700-0 \[ [DOI](https://doi.org/10.1007/s00705-013-1700-0)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/23605589/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Arch.%20Virol.&title=Complete%20genome%20sequence%20analysis%20of%20bacterial-flagellum-targeting%20bacteriophage%20Chi&author=JH%20Lee&author=H%20Shin&author=Y%20Choi&author=S%20Ryu&volume=158&publication_year=2013&pages=2179-2183&pmid=23605589&doi=10.1007/s00705-013-1700-0&)\]
+- 33.Onmus-Leone F, Hang J, Clifford RJ, Yang Y, Riley MC, Kuschner RA, Waterman PE, Lesho EP.
+2013\.
+Enhanced de novo assembly of high throughput pyrosequencing data using whole genome mapping. PLoS One
+8:e61762. 10.1371/journal.pone.0061762 \[ [DOI](https://doi.org/10.1371/journal.pone.0061762)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3629165/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/23613926/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=PLoS%20One&title=Enhanced%20de%20novo%20assembly%20of%20high%20throughput%20pyrosequencing%20data%20using%20whole%20genome%20mapping&author=F%20Onmus-Leone&author=J%20Hang&author=RJ%20Clifford&author=Y%20Yang&author=MC%20Riley&volume=8&publication_year=2013&pages=e61762&pmid=23613926&doi=10.1371/journal.pone.0061762&)\]
+- 34.Young R.
+7
+October
+2013\.
+Phage lysis: do we have the hole story?
+Curr. Opin. Microbiol.
+pii:S1369-5274(13)00150-1. 10.1016/j.mib.2013.08.008 \[ [DOI](https://doi.org/10.1016/j.mib.2013.08.008)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3848059/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/24113139/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Curr.%20Opin.%20Microbiol.&title=Phage%20lysis:%20do%20we%20have%20the%20hole%20story?&author=R%20Young&publication_year=2013&pmid=24113139&doi=10.1016/j.mib.2013.08.008&)\]
+- 35.Wang IN, Young R.
+2006\.
+Phage lysis, p 104–125
+_In_
+Calendar R. (ed), The bacteriophages, 2nd ed.
+Oxford University Press, New York, NY \[ [Google Scholar](https://scholar.google.com/scholar_lookup?title=The%20bacteriophages&author=IN%20Wang&author=R%20Young&publication_year=2006&)\]
+- 36.Sun WZ, Tan YL, Jia M, Hu XM, Rao XC, Hu FQ.
+2010\.
+Functional characterization of the endolysin gene encoded by Pseudomonas aeruginosa bacteriophage PaP1. Afr. J. Microbiol. Res.
+4:933–939
+[http://www.academicjournals.org/journal/AJMR/article-abstract/78B3FB61328](http://www.academicjournals.org/journal/AJMR/article-abstract/78B3FB61328) \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Afr.%20J.%20Microbiol.%20Res.&title=Functional%20characterization%20of%20the%20endolysin%20gene%20encoded%20by%20Pseudomonas%20aeruginosa%20bacteriophage%20PaP1&author=WZ%20Sun&author=YL%20Tan&author=M%20Jia&author=XM%20Hu&author=XC%20Rao&volume=4&publication_year=2010&pages=933-939&)\]
+- 37.Choi Y, Shin H, Lee JH, Ryu S.
+2013\.
+Identification and characterization of a novel flagellum-dependent Salmonella-infecting bacteriophage, iEPS5. Appl. Environ. Microbiol.
+79:4829–4837. 10.1128/AEM.00706-13 \[ [DOI](https://doi.org/10.1128/AEM.00706-13)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3754727/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/23747700/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Appl.%20Environ.%20Microbiol.&title=Identification%20and%20characterization%20of%20a%20novel%20flagellum-dependent%20Salmonella-infecting%20bacteriophage,%20iEPS5&author=Y%20Choi&author=H%20Shin&author=JH%20Lee&author=S%20Ryu&volume=79&publication_year=2013&pages=4829-4837&pmid=23747700&doi=10.1128/AEM.00706-13&)\]
+- 38.Kuty GF, Xu M, Struck DK, Summer EJ, Young R.
+2010\.
+Regulation of a phage endolysin by disulfide caging. J. Bacteriol.
+192:5682–5687. 10.1128/JB.00674-10 \[ [DOI](https://doi.org/10.1128/JB.00674-10)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2953681/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/20833810/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Regulation%20of%20a%20phage%20endolysin%20by%20disulfide%20caging&author=GF%20Kuty&author=M%20Xu&author=DK%20Struck&author=EJ%20Summer&author=R%20Young&volume=192&publication_year=2010&pages=5682-5687&pmid=20833810&doi=10.1128/JB.00674-10&)\]
+- 39.Summer EJ, Berry J, Tran TAT, Niu L, Struck DK, Young R.
+2007\.
+Rz/Rz1 lysis gene equivalents in phages of gram-negative hosts. J. Mol. Biol.
+373:1098–1112. 10.1016/j.jmb.2007.08.045 \[ [DOI](https://doi.org/10.1016/j.jmb.2007.08.045)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/17900620/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Mol.%20Biol.&title=Rz/Rz1%20lysis%20gene%20equivalents%20in%20phages%20of%20gram-negative%20hosts&author=EJ%20Summer&author=J%20Berry&author=TAT%20Tran&author=L%20Niu&author=DK%20Struck&volume=373&publication_year=2007&pages=1098-1112&pmid=17900620&doi=10.1016/j.jmb.2007.08.045&)\]
+- 40.Young R.
+2002\.
+Bacteriophage holins: deadly diversity. J. Mol. Microbiol. Biotechnol.
+4:21–36
+[http://www.horizonpress.com/backlist/jmmb/v/v4/03.pdf](http://www.horizonpress.com/backlist/jmmb/v/v4/03.pdf) \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/11763969/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Mol.%20Microbiol.%20Biotechnol.&title=Bacteriophage%20holins:%20deadly%20diversity&author=R%20Young&volume=4&publication_year=2002&pages=21-36&pmid=11763969&)\]
+- 41.Wang IN, Smith DL, Young R.
+2000\.
+Holins: the protein clocks of bacteriophage infections. Annu. Rev. Microbiol.
+54:799–825. 10.1146/annurev.micro.54.1.799 \[ [DOI](https://doi.org/10.1146/annurev.micro.54.1.799)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/11018145/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Annu.%20Rev.%20Microbiol.&title=Holins:%20the%20protein%20clocks%20of%20bacteriophage%20infections&author=IN%20Wang&author=DL%20Smith&author=R%20Young&volume=54&publication_year=2000&pages=799-825&pmid=11018145&doi=10.1146/annurev.micro.54.1.799&)\]
+- 42.Xu J, Hendrix RW, Duda RL.
+30
+July
+2013\.
+Chaperone-protein interactions that mediate assembly of the bacteriophage lambda tail to the correct length. pii:S0022-2836(13)00478-6. 10.1016/j.jmb.2013.06.040 \[ [DOI](https://doi.org/10.1016/j.jmb.2013.06.040)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3907469/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/23911548/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?Xu%20J,%20Hendrix%20RW,%20Duda%20RL.%2030%20July%202013.%20Chaperone-protein%20interactions%20that%20mediate%20assembly%20of%20the%20bacteriophage%20lambda%20tail%20to%20the%20correct%20length.%20pii:S0022-2836(13)00478-6.%2010.1016/j.jmb.2013.06.040)\]
+- 43.Ceyssens PJ, Lavigne R, Mattheus W, Chibeu A, Hertveldt K, Mast J, Robben J, Volckaert G.
+2006\.
+Genomic analysis of Pseudomonas aeruginosa phages LKD16 and LKA1: establishment of the phi KMV subgroup within the T7 supergroup. J. Bacteriol.
+188:6924–6931. 10.1128/JB.00831-06 \[ [DOI](https://doi.org/10.1128/JB.00831-06)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC1595506/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/16980495/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Genomic%20analysis%20of%20Pseudomonas%20aeruginosa%20phages%20LKD16%20and%20LKA1:%20establishment%20of%20the%20phi%20KMV%20subgroup%20within%20the%20T7%20supergroup&author=PJ%20Ceyssens&author=R%20Lavigne&author=W%20Mattheus&author=A%20Chibeu&author=K%20Hertveldt&volume=188&publication_year=2006&pages=6924-6931&pmid=16980495&doi=10.1128/JB.00831-06&)\]
+- 44.Roucourt B, Lavigne R.
+2009\.
+The role of interactions between phage and bacterial proteins within the infected cell: a diverse and puzzling interactome. Environ. Microbiol.
+11:2789–2805. 10.1111/j.1462-2920.2009.02029.x \[ [DOI](https://doi.org/10.1111/j.1462-2920.2009.02029.x)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19691505/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Environ.%20Microbiol.&title=The%20role%20of%20interactions%20between%20phage%20and%20bacterial%20proteins%20within%20the%20infected%20cell:%20a%20diverse%20and%20puzzling%20interactome&author=B%20Roucourt&author=R%20Lavigne&volume=11&publication_year=2009&pages=2789-2805&pmid=19691505&doi=10.1111/j.1462-2920.2009.02029.x&)\]
+- 45.Casjens SR, Thuman-Commike PA.
+2011\.
+Evolution of mosaically related tailed bacteriophage genomes seen through the lens of phage P22 virion assembly. Virology
+411:393–415. 10.1016/j.virol.2010.12.046 \[ [DOI](https://doi.org/10.1016/j.virol.2010.12.046)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21310457/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Virology&title=Evolution%20of%20mosaically%20related%20tailed%20bacteriophage%20genomes%20seen%20through%20the%20lens%20of%20phage%20P22%20virion%20assembly&author=SR%20Casjens&author=PA%20Thuman-Commike&volume=411&publication_year=2011&pages=393-415&pmid=21310457&doi=10.1016/j.virol.2010.12.046&)\]
+- 46.Adriaenssens EM, Ceyssens PJ, Dunon V, Ackermann HW, Van Vaerenbergh J, Maes M, De Proft M, Lavigne R.
+2011\.
+Bacteriophages LIMElight and LIMEzero of Pantoea agglomerans, belonging to the “phiKMV-like viruses.”
+Appl. Environ. Microbiol.
+77:3443–3450. 10.1128/AEM.00128-11 \[ [DOI](https://doi.org/10.1128/AEM.00128-11)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3126476/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21421778/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Appl.%20Environ.%20Microbiol.&title=Bacteriophages%20LIMElight%20and%20LIMEzero%20of%20Pantoea%20agglomerans,%20belonging%20to%20the%20%E2%80%9CphiKMV-like%20viruses.%E2%80%9D&author=EM%20Adriaenssens&author=PJ%20Ceyssens&author=V%20Dunon&author=HW%20Ackermann&author=J%20Van%20Vaerenbergh&volume=77&publication_year=2011&pages=3443-3450&pmid=21421778&doi=10.1128/AEM.00128-11&)\]
+- 47.Briers Y, Peeters LM, Volckaert G, Lavigne R.
+2011\.
+The lysis cassette of bacteriophage phiKMV encodes a signal-arrest-release endolysin and a pinholin. Bacteriophage
+1:25–30. 10.4161/bact.1.1.14868 \[ [DOI](https://doi.org/10.4161/bact.1.1.14868)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3109451/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21687532/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Bacteriophage&title=The%20lysis%20cassette%20of%20bacteriophage%20phiKMV%20encodes%20a%20signal-arrest-release%20endolysin%20and%20a%20pinholin&author=Y%20Briers&author=LM%20Peeters&author=G%20Volckaert&author=R%20Lavigne&volume=1&publication_year=2011&pages=25-30&pmid=21687532&doi=10.4161/bact.1.1.14868&)\]
+- 48.Dobbins AT, George M, Basham DA, Ford ME, Houtz JM, Pedulla ML, Lawrence JG, Hatfull GF, Hendrix RW.
+2004\.
+Complete genomic sequence of the virulent Salmonella bacteriophage SP6. J. Bacteriol.
+186:1933–1944. 10.1128/JB.186.7.1933-1944.2004 \[ [DOI](https://doi.org/10.1128/JB.186.7.1933-1944.2004)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC374404/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15028677/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Complete%20genomic%20sequence%20of%20the%20virulent%20Salmonella%20bacteriophage%20SP6&author=AT%20Dobbins&author=M%20George&author=DA%20Basham&author=ME%20Ford&author=JM%20Houtz&volume=186&publication_year=2004&pages=1933-1944&pmid=15028677&doi=10.1128/JB.186.7.1933-1944.2004&)\]
+- 49.Lynch KH, Abdu AH, Schobert M, Dennis JJ.
+2013\.
+Genomic characterization of JG068, a novel virulent podovirus active against Burkholderia cenocepacia. BMC Genomics
+14:574. 10.1186/1471-2164-14-574 \[ [DOI](https://doi.org/10.1186/1471-2164-14-574)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3765740/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/23978260/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=BMC%20Genomics&title=Genomic%20characterization%20of%20JG068,%20a%20novel%20virulent%20podovirus%20active%20against%20Burkholderia%20cenocepacia&author=KH%20Lynch&author=AH%20Abdu&author=M%20Schobert&author=JJ%20Dennis&volume=14&publication_year=2013&pages=574&pmid=23978260&doi=10.1186/1471-2164-14-574&)\]
+- 50.Xu M, Struck DK, Deaton J, Wang IN, Young R.
+2004\.
+A signal-arrest-release sequence mediates export and control of the phage P1 endolysin. Proc. Natl. Acad. Sci. U. S. A.
+101:6415–6420. 10.1073/pnas.0400957101 \[ [DOI](https://doi.org/10.1073/pnas.0400957101)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC404059/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15090650/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Proc.%20Natl.%20Acad.%20Sci.%20U.%20S.%20A.&title=A%20signal-arrest-release%20sequence%20mediates%20export%20and%20control%20of%20the%20phage%20P1%20endolysin&author=M%20Xu&author=DK%20Struck&author=J%20Deaton&author=IN%20Wang&author=R%20Young&volume=101&publication_year=2004&pages=6415-6420&pmid=15090650&doi=10.1073/pnas.0400957101&)\]
+- 51.Lindberg AA.
+1973\.
+Bacteriophage receptors. Annu. Rev. Microbiol.
+27:205–241. 10.1146/annurev.mi.27.100173.001225 \[ [DOI](https://doi.org/10.1146/annurev.mi.27.100173.001225)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/4584686/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Annu.%20Rev.%20Microbiol.&title=Bacteriophage%20receptors&author=AA%20Lindberg&volume=27&publication_year=1973&pages=205-241&pmid=4584686&doi=10.1146/annurev.mi.27.100173.001225&)\]
+- 52.Cursino L, Li Y, Zaini PA, De La Fuente L, Hoch HC, Burr TJ.
+2009\.
+Twitching motility and biofilm formation are associated with tonB1 in Xylella fastidiosa. FEMS Microbiol. Lett.
+299:193–199. 10.1111/j.1574-6968.2009.01747.x \[ [DOI](https://doi.org/10.1111/j.1574-6968.2009.01747.x)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19735464/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=FEMS%20Microbiol.%20Lett.&title=Twitching%20motility%20and%20biofilm%20formation%20are%20associated%20with%20tonB1%20in%20Xylella%20fastidiosa&author=L%20Cursino&author=Y%20Li&author=PA%20Zaini&author=L%20De%20La%20Fuente&author=HC%20Hoch&volume=299&publication_year=2009&pages=193-199&pmid=19735464&doi=10.1111/j.1574-6968.2009.01747.x&)\]
+- 53.Craig L, Pique ME, Tainer JA.
+2004\.
+Type IV pilus structure and bacterial pathogenicity. Nat. Rev. Microbiol.
+2:363–378. 10.1038/nrmicro885 \[ [DOI](https://doi.org/10.1038/nrmicro885)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15100690/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Nat.%20Rev.%20Microbiol.&title=Type%20IV%20pilus%20structure%20and%20bacterial%20pathogenicity&author=L%20Craig&author=ME%20Pique&author=JA%20Tainer&volume=2&publication_year=2004&pages=363-378&pmid=15100690&doi=10.1038/nrmicro885&)\]
+- 54.Moreira LM, De Souza RF, Digiampietri LA, Da Silva ACR, Setubal JC.
+2005\.
+Comparative analyses of Xanthomonas and Xylella complete genomes. Omics
+9:43–76. 10.1089/omi.2005.9.43 \[ [DOI](https://doi.org/10.1089/omi.2005.9.43)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15805778/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Omics&title=Comparative%20analyses%20of%20Xanthomonas%20and%20Xylella%20complete%20genomes&author=LM%20Moreira&author=RF%20De%20Souza&author=LA%20Digiampietri&author=ACR%20Da%20Silva&author=JC%20Setubal&volume=9&publication_year=2005&pages=43-76&pmid=15805778&doi=10.1089/omi.2005.9.43&)\]
+- 55.Vauterin L, Yang P, Alvarez A, Takikawa Y, Roth DA, Vidaver AK, Stall RE, Kersters K, Swings J.
+1996\.
+Identification of non-pathogenic Xanthomonas strains associated with plants. Syst. Appl. Microbiol.
+19:96–105 \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Syst.%20Appl.%20Microbiol.&title=Identification%20of%20non-pathogenic%20Xanthomonas%20strains%20associated%20with%20plants&author=L%20Vauterin&author=P%20Yang&author=A%20Alvarez&author=Y%20Takikawa&author=DA%20Roth&volume=19&publication_year=1996&pages=96-105&)\]
+- 56.Pieretti I, Royer M, Barbe V, Carrere S, Koebnik R, Cociancich S, Couloux A, Darrasse A, Gouzy J, Jacques MA, Lauber E, Manceau C, Mangenot S, Poussier S, Segurens B, Szurek B, Verdier V, Arlat M, Rott P.
+2009\.
+The complete genome sequence of Xanthomonas albilineans provides new insights into the reductive genome evolution of the xylem-limited Xanthomonadaceae. BMC Genomics
+10:616. 10.1186/1471-2164-10-616 \[ [DOI](https://doi.org/10.1186/1471-2164-10-616)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2810307/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/20017926/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=BMC%20Genomics&title=The%20complete%20genome%20sequence%20of%20Xanthomonas%20albilineans%20provides%20new%20insights%20into%20the%20reductive%20genome%20evolution%20of%20the%20xylem-limited%20Xanthomonadaceae&author=I%20Pieretti&author=M%20Royer&author=V%20Barbe&author=S%20Carrere&author=R%20Koebnik&volume=10&publication_year=2009&pages=616&pmid=20017926&doi=10.1186/1471-2164-10-616&)\]
+- 57.Monteiro-Vitorello CB, De Oliveira MC, Zerillo MM, Varani AM, Civerolo E, Van Sluys MA.
+2005\.
+Xylella and Xanthomonas mobil'omics. Omics
+9:146–159. 10.1089/omi.2005.9.146 \[ [DOI](https://doi.org/10.1089/omi.2005.9.146)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15969647/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Omics&title=Xylella%20and%20Xanthomonas%20mobil%27omics&author=CB%20Monteiro-Vitorello&author=MC%20De%20Oliveira&author=MM%20Zerillo&author=AM%20Varani&author=E%20Civerolo&volume=9&publication_year=2005&pages=146-159&pmid=15969647&doi=10.1089/omi.2005.9.146&)\]
+- 58.Mhedbi-Hajri N, Jacques MA, Koebnik R.
+2011\.
+Adhesion mechanisms of plant-pathogenic Xanthomonadaceae. Adv. Exp. Med. Biol.
+715:71–89. 10.1007/978-94-007-0940-9\_5 \[ [DOI](https://doi.org/10.1007/978-94-007-0940-9_5)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/21557058/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Adv.%20Exp.%20Med.%20Biol.&title=Adhesion%20mechanisms%20of%20plant-pathogenic%20Xanthomonadaceae&author=N%20Mhedbi-Hajri&author=MA%20Jacques&author=R%20Koebnik&volume=715&publication_year=2011&pages=71-89&pmid=21557058&doi=10.1007/978-94-007-0940-9_5&)\]
+- 59.Wang L, Makino S, Subedee A, Bogdanove AJ.
+2007\.
+Novel candidate virulence factors in rice pathogen Xanthomonas oryzae pv. oryzicola as revealed by mutational analysis. Appl. Environ. Microbiol.
+73:8023–8027. 10.1128/AEM.01414-07 \[ [DOI](https://doi.org/10.1128/AEM.01414-07)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2168139/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/17981946/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Appl.%20Environ.%20Microbiol.&title=Novel%20candidate%20virulence%20factors%20in%20rice%20pathogen%20Xanthomonas%20oryzae%20pv.%20oryzicola%20as%20revealed%20by%20mutational%20analysis&author=L%20Wang&author=S%20Makino&author=A%20Subedee&author=AJ%20Bogdanove&volume=73&publication_year=2007&pages=8023-8027&pmid=17981946&doi=10.1128/AEM.01414-07&)\]
+- 60.Lim SH, So BH, Wang JC, Song ES, Park YJ, Lee BM, Kang HW.
+2008\.
+Functional analysis of _pilQ_ gene in Xanthomanas oryzae pv. oryzae, bacterial blight pathogen of rice. J. Microbiol.
+46:214–220. 10.1007/s12275-007-0173-9 \[ [DOI](https://doi.org/10.1007/s12275-007-0173-9)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/18545972/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Microbiol.&title=Functional%20analysis%20of%20pilQ%20gene%20in%20Xanthomanas%20oryzae%20pv.%20oryzae,%20bacterial%20blight%20pathogen%20of%20rice&author=SH%20Lim&author=BH%20So&author=JC%20Wang&author=ES%20Song&author=YJ%20Park&volume=46&publication_year=2008&pages=214-220&pmid=18545972&doi=10.1007/s12275-007-0173-9&)\]
+- 61.Darsonval A, Darrasse A, Durand K, Bureau C, Cesbron S, Jacques MA.
+2009\.
+Adhesion and fitness in the bean phyllosphere and transmission to seed of Xanthomonas fuscans subsp fuscans. Mol. Plant Microbe Interact.
+22:747–757. 10.1094/MPMI-22-6-0747 \[ [DOI](https://doi.org/10.1094/MPMI-22-6-0747)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19445599/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Mol.%20Plant%20Microbe%20Interact.&title=Adhesion%20and%20fitness%20in%20the%20bean%20phyllosphere%20and%20transmission%20to%20seed%20of%20Xanthomonas%20fuscans%20subsp%20fuscans&author=A%20Darsonval&author=A%20Darrasse&author=K%20Durand&author=C%20Bureau&author=S%20Cesbron&volume=22&publication_year=2009&pages=747-757&pmid=19445599&doi=10.1094/MPMI-22-6-0747&)\]
+- 62.Qian W, Jia YT, Ren SX, He YQ, Feng JX, Lu LF, Sun QH, Ying G, Tang DJ, Tang H, Wu W, Hao P, Wang LF, Jiang BL, Zeng SY, Gu WY, Lu G, Rong L, Tian YC, Yao ZJ, Fu G, Chen BS, Fang RX, Qiang BQ, Chen Z, Zhao GP, Tang JL, He CZ.
+2005\.
+Comparative and functional genomic analyses of the pathogenicity of phytopathogen Xanthomonas campestris pv. campestris. Genome Res.
+15:757–767. 10.1101/gr.3378705 \[ [DOI](https://doi.org/10.1101/gr.3378705)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC1142466/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15899963/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Genome%20Res.&title=Comparative%20and%20functional%20genomic%20analyses%20of%20the%20pathogenicity%20of%20phytopathogen%20Xanthomonas%20campestris%20pv.%20campestris&author=W%20Qian&author=YT%20Jia&author=SX%20Ren&author=YQ%20He&author=JX%20Feng&volume=15&publication_year=2005&pages=757-767&pmid=15899963&doi=10.1101/gr.3378705&)\]
+- 63.Chibeu A, Ceyssens PJ, Hertveldt K, Volckaert G, Cornelis P, Matthijs S, Lavigne R.
+2009\.
+The adsorption of Pseudomonas aeruginosa bacteriophage phi KMV is dependent on expression regulation of type IV pili genes. FEMS Microbiol. Lett.
+296:210–218. 10.1111/j.1574-6968.2009.01640.x \[ [DOI](https://doi.org/10.1111/j.1574-6968.2009.01640.x)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19459952/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=FEMS%20Microbiol.%20Lett.&title=The%20adsorption%20of%20Pseudomonas%20aeruginosa%20bacteriophage%20phi%20KMV%20is%20dependent%20on%20expression%20regulation%20of%20type%20IV%20pili%20genes&author=A%20Chibeu&author=PJ%20Ceyssens&author=K%20Hertveldt&author=G%20Volckaert&author=P%20Cornelis&volume=296&publication_year=2009&pages=210-218&pmid=19459952&doi=10.1111/j.1574-6968.2009.01640.x&)\]
+- 64.Bradley DE.
+1973\.
+Basic characterization of a Pseudomonas aeruginosa pilus-dependent bacteriophage with a long noncontractile tail. J. Virol.
+12:1139–1148 \[ [DOI](https://doi.org/10.1128/jvi.12.5.1139-1148.1973)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC356746/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/4128826/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Virol.&title=Basic%20characterization%20of%20a%20Pseudomonas%20aeruginosa%20pilus-dependent%20bacteriophage%20with%20a%20long%20noncontractile%20tail&author=DE%20Bradley&volume=12&publication_year=1973&pages=1139-1148&pmid=4128826&doi=10.1128/jvi.12.5.1139-1148.1973&)\]
+- 65.Bradley DE, Robertson D.
+1968\.
+The structure and infective process of a contractile Pseudomonas aeruginosa bacteriophage. J. Gen. Virol.
+3:247–254. 10.1099/0022-1317-3-2-247 \[ [DOI](https://doi.org/10.1099/0022-1317-3-2-247)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/4177283/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Gen.%20Virol.&title=The%20structure%20and%20infective%20process%20of%20a%20contractile%20Pseudomonas%20aeruginosa%20bacteriophage&author=DE%20Bradley&author=D%20Robertson&volume=3&publication_year=1968&pages=247-254&pmid=4177283&doi=10.1099/0022-1317-3-2-247&)\]
+- 66.Bradley DE.
+1973\.
+The adsorption of the Pseudomonas aeruginosa filamentous bacteriophage Pf to its host. Can. J. Microbiol.
+19:623–631. 10.1139/m73-103 \[ [DOI](https://doi.org/10.1139/m73-103)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/4122693/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Can.%20J.%20Microbiol.&title=The%20adsorption%20of%20the%20Pseudomonas%20aeruginosa%20filamentous%20bacteriophage%20Pf%20to%20its%20host&author=DE%20Bradley&volume=19&publication_year=1973&pages=623-631&pmid=4122693&doi=10.1139/m73-103&)\]
+- 67.Byrne M, Kropinski AM.
+2005\.
+The genome of the Pseudomonas aeruginosa generalized transducing bacteriophage F116. Gene
+346:187–194. 10.1016/j.gene.2004.11.001 \[ [DOI](https://doi.org/10.1016/j.gene.2004.11.001)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15716012/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Gene&title=The%20genome%20of%20the%20Pseudomonas%20aeruginosa%20generalized%20transducing%20bacteriophage%20F116&author=M%20Byrne&author=AM%20Kropinski&volume=346&publication_year=2005&pages=187-194&pmid=15716012&doi=10.1016/j.gene.2004.11.001&)\]
+- 68.Wang PW, Chu L, Guttman DS.
+2004\.
+Complete sequence and evolutionary genomic analysis of the Pseudomonas aeruginosa transposable bacteriophage D3112. J. Bacteriol.
+186:400–410. 10.1128/JB.186.2.400-410.2004 \[ [DOI](https://doi.org/10.1128/JB.186.2.400-410.2004)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC305741/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/14702309/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Complete%20sequence%20and%20evolutionary%20genomic%20analysis%20of%20the%20Pseudomonas%20aeruginosa%20transposable%20bacteriophage%20D3112&author=PW%20Wang&author=L%20Chu&author=DS%20Guttman&volume=186&publication_year=2004&pages=400-410&pmid=14702309&doi=10.1128/JB.186.2.400-410.2004&)\]
+- 69.Budzik JM, Rosche WA, Rietsch A, O'Toole GA.
+2004\.
+Isolation and characterization of a generalized transducing phage for Pseudomonas aeruginosa strains PAO1 and PA14. J. Bacteriol.
+186:3270–3273. 10.1128/JB.186.10.3270-3273.2004 \[ [DOI](https://doi.org/10.1128/JB.186.10.3270-3273.2004)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC400619/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/15126493/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Isolation%20and%20characterization%20of%20a%20generalized%20transducing%20phage%20for%20Pseudomonas%20aeruginosa%20strains%20PAO1%20and%20PA14&author=JM%20Budzik&author=WA%20Rosche&author=A%20Rietsch&author=GA%20O%27Toole&volume=186&publication_year=2004&pages=3270-3273&pmid=15126493&doi=10.1128/JB.186.10.3270-3273.2004&)\]
+- 70.Roncero C, Darzins A, Casadaban MJ.
+1990\.
+Pseudomonas aeruginosa transposable bacteriophages D3112 and B3 require pili and surface growth for adsorption. J. Bacteriol.
+172:1899–1904 \[ [DOI](https://doi.org/10.1128/jb.172.4.1899-1904.1990)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC208684/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/1969404/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Pseudomonas%20aeruginosa%20transposable%20bacteriophages%20D3112%20and%20B3%20require%20pili%20and%20surface%20growth%20for%20adsorption&author=C%20Roncero&author=A%20Darzins&author=MJ%20Casadaban&volume=172&publication_year=1990&pages=1899-1904&pmid=1969404&doi=10.1128/jb.172.4.1899-1904.1990&)\]
+- 71.Yu YJ, Yang MT.
+2007\.
+A novel restriction-modification system from Xanthomonas campestris pv. vesicatoria encodes a m4C-methyltransferase and a nonfunctional restriction endonuclease. FEMS Microbiol. Lett.
+272:83–90. 10.1111/j.1574-6968.2007.00738.x \[ [DOI](https://doi.org/10.1111/j.1574-6968.2007.00738.x)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/17488332/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=FEMS%20Microbiol.%20Lett.&title=A%20novel%20restriction-modification%20system%20from%20Xanthomonas%20campestris%20pv.%20vesicatoria%20encodes%20a%20m4C-methyltransferase%20and%20a%20nonfunctional%20restriction%20endonuclease&author=YJ%20Yu&author=MT%20Yang&volume=272&publication_year=2007&pages=83-90&pmid=17488332&doi=10.1111/j.1574-6968.2007.00738.x&)\]
+- 72.Semenova E, Nagornykh M, Pyatnitskiy M, Artamonova II, Severinov K.
+2009\.
+Analysis of CRISPR system function in plant pathogen Xanthomonas oryzae. FEMS Microbiol. Lett.
+296:110–116. 10.1111/j.1574-6968.2009.01626.x \[ [DOI](https://doi.org/10.1111/j.1574-6968.2009.01626.x)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/19459963/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=FEMS%20Microbiol.%20Lett.&title=Analysis%20of%20CRISPR%20system%20function%20in%20plant%20pathogen%20Xanthomonas%20oryzae&author=E%20Semenova&author=M%20Nagornykh&author=M%20Pyatnitskiy&author=II%20Artamonova&author=K%20Severinov&volume=296&publication_year=2009&pages=110-116&pmid=19459963&doi=10.1111/j.1574-6968.2009.01626.x&)\]
+- 73.Matsumoto A, Igo MM.
+2010\.
+Species-specific type II restriction-modification system of Xylella fastidiosa temecula1. Appl. Environ. Microbiol.
+76:4092–4095. 10.1128/AEM.03034-09 \[ [DOI](https://doi.org/10.1128/AEM.03034-09)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC2893502/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/20418439/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Appl.%20Environ.%20Microbiol.&title=Species-specific%20type%20II%20restriction-modification%20system%20of%20Xylella%20fastidiosa%20temecula1&author=A%20Matsumoto&author=MM%20Igo&volume=76&publication_year=2010&pages=4092-4095&pmid=20418439&doi=10.1128/AEM.03034-09&)\]
+- 74.Eskin B, Lautenberger JA, Linn S.
+1973\.
+Host-controlled modification and restriction of bacteriophage T7 by Escherichia coli B. J. Virol.
+11:1020–1023 \[ [DOI](https://doi.org/10.1128/jvi.11.6.1020-1023.1973)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC355213/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/4576514/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Virol.&title=Host-controlled%20modification%20and%20restriction%20of%20bacteriophage%20T7%20by%20Escherichia%20coli%20B&author=B%20Eskin&author=JA%20Lautenberger&author=S%20Linn&volume=11&publication_year=1973&pages=1020-1023&pmid=4576514&doi=10.1128/jvi.11.6.1020-1023.1973&)\]
+- 75.Ford ME, Sarkis GJ, Belanger AE, Hendrix RW, Hatfull GF.
+1998\.
+Genome structure of mycobacteriophage D29: implications for phage evolution. J. Mol. Biol.
+279:143–164. 10.1006/jmbi.1997.1610 \[ [DOI](https://doi.org/10.1006/jmbi.1997.1610)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/9636706/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Mol.%20Biol.&title=Genome%20structure%20of%20mycobacteriophage%20D29:%20implications%20for%20phage%20evolution&author=ME%20Ford&author=GJ%20Sarkis&author=AE%20Belanger&author=RW%20Hendrix&author=GF%20Hatfull&volume=279&publication_year=1998&pages=143-164&pmid=9636706&doi=10.1006/jmbi.1997.1610&)\]
+- 76.Kim S, Rahman M, Seol SY, Yoon SS, Kim J.
+2012\.
+Pseudomonas aeruginosa bacteriophage PA1Ø requires type IV pili for infection and shows broad bactericidal and biofilm removal activities. Appl. Environ. Microbiol.
+78:6380–6385. 10.1128/AEM.00648-12 \[ [DOI](https://doi.org/10.1128/AEM.00648-12)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC3416619/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/22752161/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Appl.%20Environ.%20Microbiol.&title=Pseudomonas%20aeruginosa%20bacteriophage%20PA1%C3%98%20requires%20type%20IV%20pili%20for%20infection%20and%20shows%20broad%20bactericidal%20and%20biofilm%20removal%20activities&author=S%20Kim&author=M%20Rahman&author=SY%20Seol&author=SS%20Yoon&author=J%20Kim&volume=78&publication_year=2012&pages=6380-6385&pmid=22752161&doi=10.1128/AEM.00648-12&)\]
+- 77.Feng DF, Doolittle RF.
+1996\.
+Progressive alignment of amino acid sequences and construction of phylogenetic trees from them. Methods Enzymol.
+266:368–382. 10.1016/S0076-6879(96)66023-6 \[ [DOI](https://doi.org/10.1016/S0076-6879(96)66023-6)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/8743694/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Methods%20Enzymol.&title=Progressive%20alignment%20of%20amino%20acid%20sequences%20and%20construction%20of%20phylogenetic%20trees%20from%20them&author=DF%20Feng&author=RF%20Doolittle&volume=266&publication_year=1996&pages=368-382&pmid=8743694&doi=10.1016/S0076-6879(96)66023-6&)\]
+- 78.Sayle RA, Milnerwhite EJ.
+1995\.
+Rasmol—biomolecular graphics for all. Trends Biochem. Sci.
+20:374–376. 10.1016/S0968-0004(00)89080-5 \[ [DOI](https://doi.org/10.1016/S0968-0004(00)89080-5)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/7482707/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Trends%20Biochem.%20Sci.&title=Rasmol%E2%80%94biomolecular%20graphics%20for%20all&author=RA%20Sayle&author=EJ%20Milnerwhite&volume=20&publication_year=1995&pages=374-376&pmid=7482707&doi=10.1016/S0968-0004(00)89080-5&)\]
+- 79.Van Sluys MA, de Oliveira MC, Monteiro-Vitorello CB, Miyaki CY, Furlan LR, Camargo LE, da Silva AC, Moon DH, Takita MA, Lemos EG, Machado MA, Ferro MI, da Silva FR, Goldman MH, Goldman GH, Lemos MV, El-Dorry H, Tsai SM, Carrer H, Carraro DM, de Oliveira RC, Nunes LR, Siqueira WJ, Coutinho LL, Kimura ET, Ferro ES, Harakava R, Kuramae EE, Marino CL, Giglioti E, Abreu IL, Alves LM, do Amaral AM, Baia GS, Blanco SR, Brito MS, Cannavan FS, Celestino AV, da Cunha AF, Fenille RC, Ferro JA, Formighieri EF, Kishi LT, Leoni SG, Oliveira AR, Rosa VE, Jr, Sassaki FT, Sena JA, de Souza AA, Truffi D, Tsukumo F, Yanai GM, Zaros LG, Civerolo EL, Simpson AJ, Almeida NF, Jr, Setubal JC, Kitajima JP.
+2003\.
+Comparative analyses of the complete genome sequences of Pierce's disease and citrus variegated chlorosis strains of Xylella fastidiosa. J. Bacteriol.
+185:1018–1026. 10.1128/JB.185.3.1018-1026.2003 \[ [DOI](https://doi.org/10.1128/JB.185.3.1018-1026.2003)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC142809/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/12533478/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=J.%20Bacteriol.&title=Comparative%20analyses%20of%20the%20complete%20genome%20sequences%20of%20Pierce%27s%20disease%20and%20citrus%20variegated%20chlorosis%20strains%20of%20Xylella%20fastidiosa&author=MA%20Van%20Sluys&author=MC%20de%20Oliveira&author=CB%20Monteiro-Vitorello&author=CY%20Miyaki&author=LR%20Furlan&volume=185&publication_year=2003&pages=1018-1026&pmid=12533478&doi=10.1128/JB.185.3.1018-1026.2003&)\]
+- 80.Bhattacharyya A, Stilwagen S, Reznik G, Feil H, Feil WS, Anderson I, Bernal A, D'Souza M, Ivanova N, Kapatral V, Larsen N, Los T, Lykidis A, Selkov E, Walunas TL, Purcell A, Edwards RA, Hawkins T, Haselkorn R, Overbeek R, Kyrpides NC, Predki PF.
+2002\.
+Draft sequencing and comparative genomics of Xylella fastidiosa strains reveal novel biological insights. Genome Res.
+12:1556–1563. 10.1101/gr.370702 \[ [DOI](https://doi.org/10.1101/gr.370702)\] \[ [PMC free article](https://pmc.ncbi.nlm.nih.gov/articles/PMC187531/)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/12368248/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Genome%20Res.&title=Draft%20sequencing%20and%20comparative%20genomics%20of%20Xylella%20fastidiosa%20strains%20reveal%20novel%20biological%20insights&author=A%20Bhattacharyya&author=S%20Stilwagen&author=G%20Reznik&author=H%20Feil&author=WS%20Feil&volume=12&publication_year=2002&pages=1556-1563&pmid=12368248&doi=10.1101/gr.370702&)\]
+- 81.Yanisch-Perron C, Vieira J, Messing J.
+1985\.
+Improved M13 phage cloning vectors and host strains: nucleotide sequences of the M13mp18 and pUC19 vectors. Gene
+33:103–119. 10.1016/0378-1119(85)90120-9 \[ [DOI](https://doi.org/10.1016/0378-1119(85)90120-9)\] \[ [PubMed](https://pubmed.ncbi.nlm.nih.gov/2985470/)\] \[ [Google Scholar](https://scholar.google.com/scholar_lookup?journal=Gene&title=Improved%20M13%20phage%20cloning%20vectors%20and%20host%20strains:%20nucleotide%20sequences%20of%20the%20M13mp18%20and%20pUC19%20vectors&author=C%20Yanisch-Perron&author=J%20Vieira&author=J%20Messing&volume=33&publication_year=1985&pages=103-119&pmid=2985470&doi=10.1016/0378-1119(85)90120-9&)\]
+
+## Associated Data
+
+_This section collects any data citations, data availability statements, or supplementary materials included in this article._
+
+### Supplementary Materials
+
+Supplemental material
+
+[supp\_196\_2\_459\_\_index.html](https://pmc.ncbi.nlm.nih.gov/articles/instance/3911242/bin/supp_196_2_459__index.html) (1.1KB, html)
+
+[JB.01080-13\_zjb999092992so1.pdf](https://pmc.ncbi.nlm.nih.gov/articles/instance/3911242/bin/JB.01080-13_zjb999092992so1.pdf) (30.2KB, pdf)
+
+![Close](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/close.svg)
+
+## ACTIONS
+
+- [![View on publisher site icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/launch.svg)View on publisher site](https://doi.org/10.1128/JB.01080-13)
+- [![Download PDF icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/file_download.svg)PDF (4.0 MB)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3911242/pdf/zjb459.pdf)
+- ![Cite icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/format_quote.svg)Cite
+- ![Collections icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/action-bookmark-full.svg)![Collections icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/action-bookmark-empty.svg)Collections
+- ![Permalink icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/share.svg)Permalink
+
+
+
+
+## PERMALINK
+
+
+
+![Copy icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/content_copy.svg)Copy
+
+
+## RESOURCES
+
+### Similar articles
+
+### Cited by other articles
+
+### Links to NCBI Databases
+
+Back to Top![back to top icon](https://cdn.ncbi.nlm.nih.gov/pmc/pd-medc-pmc-cloudpmc-viewer/production/bb3d0162/var/data/static/img/usa-icons/arrow_upward.svg)

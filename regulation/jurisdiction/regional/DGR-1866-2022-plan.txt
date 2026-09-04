@@ -1,0 +1,1639 @@
+79608                      Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+DELIBERAZIONE DELLA GIUNTA REGIONALE 12 dicembre 2022, n. 1866
+Approvazione “Piano d’azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia”
+biennio 2023-2024.
+
+
+L’Assessore all’Agricoltura, Industria Agroalimentare, Risorse agroalimentari, Riforma fondiaria, Caccia e pesca,
+Foreste, Donato Pentassuglia, sulla base delle risultanze dell’istruttoria espletata dalla P.O. “ Programmazione
+e gestione fitosanitaria”, confermata dal Dirigente della Sezione Osservatorio fitosanitario, riferisce quanto
+segue:
+VISTI
+− Il Regolamento (UE) 2016/2031 del Parlamento Europeo e del Consiglio del 26 ottobre 2016 relativo alle
+  misure di protezione contro gli organismi nocivi per le piante, che modifica i regolamenti (UE) n. 228/2013,
+  (UE) n. 652/2014 e (UE) n. 1143/2014 del Parlamento europeo e del Consiglio e che ha abrogato le direttive
+  69/464/CEE, 74/647/CEE, 93/85/CEE, 98/57/CE, 2000/29/CE, 2006/91/CE e 2007/33/CE del Consiglio.
+− Il Regolamento (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017, relativo ai
+  controlli ufficiali e alle altre attività ufficiali effettuati per garantire l’applicazione della legislazione sugli
+  alimenti e sui mangimi, delle norme sulla salute e sul benessere degli animali, sulla sanità delle piante
+  nonché sui prodotti fitosanitari.
+− Il Regolamento di esecuzione (UE) n. 2020/1201 della Commissione del 14/08/2020 relativo alle misure
+  per prevenire l’introduzione e la diffusione nell’Unione della Xylella fastidiosa.
+− La legge n. 44 del 21/05/2019, di conversione in legge, con modificazioni, del Decreto Legge n. 27 del
+  29/03/2019 “Disposizioni urgenti in materia di rilancio dei settori agricoli in crisi e di sostegno alle imprese
+  agroalimentari colpite da eventi atmosferici avversi di carattere eccezionale e per l’emergenza nello
+  stabilimento Stoppani, sito nel Comune di Cogoleto” che ha modificato/integrato la disciplina giuridica di
+  contrasto ai patogeni da quarantena.
+− Il Decreto Legislativo 2 febbraio 2021, n. 19 “Norme per la protezione delle piante dagli organismi nocivi in
+  attuazione dell’articolo 11 della legge 4 ottobre 2019, n. 117, per l’adeguamento della normativa nazionale
+  alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625”.
+− Il Decreto del Ministero delle Politiche agricole, alimentari e forestali del 24 gennaio 2022 “Adozione del
+  Piano di emergenza nazionale per il contrasto di Xylella fastidiosa ( Well et al. ).
+− Il Decreto del Ministero delle Politiche agricole, alimentari e forestali n.0169819 del 13/04/2022
+  “Caratteristiche, ambiti di competenza, strutture e modalità di riconoscimento dei laboratori che operano
+  nell’ambito della protezione delle piante”.
+− La legge regionale 4 giugno 2007, n. 14 “Tutela e valorizzazione del paesaggio degli ulivi monumentali
+  della Puglia”.
+− La legge regionale 29 marzo 2017, n. 4 “Gestione della batteriosi da Xylella fastidiosa nel territorio della
+  regione Puglia” e s.m.i.
+− La legge regionale 30 aprile 2019, n. 19 (BURP n° 46/2019) recante “Integrazioni alla legge regionale 25
+  febbraio 2010, n. 3 (Disposizioni in materia di attività irrigue e forestali), commissariamento dell’Agenzia
+  per le attività irrigue e forestali (ARIF) e abrogazione dell’articolo 11 della legge regionale 29 marzo 2017,
+  n. 4 (Gestione della batteriosi da Xylella fastidiosa nel territorio della regione Puglia)”.
+− La Deliberazione di Giunta Regionale n. 2164 del 22/12/2021, che ha istituito un regime di aiuto per
+  le imprese che hanno adempiuto alla distruzione delle piante infette da Xylella fastidiosa in seguito ad
+  ingiunzione di abbattimento (SA.100575).
+− La determina n. 177 del 30/12/2021 con cui è stata revocata l’area delimitata di “Canosa di Puglia”, ai sensi
+                            Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                    79609
+
+
+   del par. 2 dell’art. 6 del Reg. 2020/1201, sulla base delle risultanze delle indagini svolte nel corso del 2021
+   e in seguito all’adozione delle misure di cui all’articolo 5, paragrafo 1 del Reg. 2020/1201.
+− La determina dirigenziale n. 13 del 15/03/2022 con cui è stato affidato il “Servizio di analisi di laboratorio
+  ufficiali per rilevare la presenza di Xylella fastidiosa sul territorio della regione Puglia”, ai sensi dell’art. 63,
+  comma 2, lett. b) del d.lgs. n. 50 del 2016, ai laboratori ufficiali designati al MIPAAF e siti nella Regione
+  Puglia, quali:
+   • CIHEAM - Istituto Agronomico Mediterraneo -Valenzano (BA)
+   • Centro di Ricerca, Sperimentazione e Formazione in Agricoltura “Basile Caramia” Locorotondo (BA)
+   • Dipartimento di scienze e tecnologie biologiche - Univ. Salento - Lecce
+   • Dipartimento di Scienze Agrarie, Alimenti Risorse Naturali e Ingegneria - Univ. Foggia
+   • Dipartimento di scienze del suolo, della pianta e degli alimenti - Univ. Bari.
+− La determina n. 127 del 17/11/2022 con cui sono state aggiornate le aree delimitate alla Xylella fastidiosa
+  sub specie Pauca ST53.
+VISTI ALTRESI’
+− La Legge Regionale n. 51 del 30/12/2021 “Disposizioni per la formazione del bilancio di previsione 2022 e
+  bilancio pluriennale 2022-2024 della Regione Puglia (legge di stabilità regionale 2022)”.
+− La Legge Regionale n. 52 del 30/12/2021 “Bilancio di previsione della Regione Puglia per l’esercizio
+  finanziario 2022 e bilancio pluriennale 2022-2024”.
+− La D.G.R. n. 2 del 20/01/2022 “Bilancio di previsione per l’esercizio finanziario 2022 e pluriennale 2022-
+  2024. Articolo 39, comma 10, del decreto legislativo 23 giugno 2011, n. 118. Documento tecnico di
+  accompagnamento e Bilancio Finanziario Gestionale. Approvazione. “
+PREMESSO CHE
+
+− L’autorità fitosanitaria competente, se confermata ufficialmente la presenza di un organismo nocivo
+  prioritario nel territorio di uno Stato membro dell’Unione Europea, adotta uno specifico piano d’azione
+  recante le misure per l’eradicazione e/o il contenimento previste dalla normativa fitosanitaria europea.
+− L’Osservatorio fitosanitario della Regione Puglia è l’Autorità fitosanitaria competente ai sensi dell’art. 6 del
+  Decreto legislativo 2 febbraio 2021, n. 19 in materia di controlli ufficiali e delle altre attività ufficiali definite
+  dal Regolamento (UE) 2017/625 del Parlamento Europeo e del Consiglio del 15 marzo 2017.
+PRESO ATTO CHE
+
+L’attuazione delle misure di contrasto degli organismi nocivi da quarantena in applicazione dei provvedimenti
+di emergenza fitosanitaria è in deroga, ai sensi dell’art. 33 del D.lgs 19/2021, a ogni disposizione vigente,
+comprese quelle di natura vincolistica, nei limiti e secondo i criteri indicati nei medesimi provvedimenti di
+emergenza fitosanitaria.
+
+RILEVATO CHE
+
+− Il Reg. (UE) 2017/625 classifica come ‘Altre attività ufficiali’ le indagini finalizzate ad accertare la presenza
+  di organismi nocivi per le piante, l’applicazione delle misure fitosanitarie per prevenire la diffusione
+  degli organismi nocivi e quelle necessarie per la loro eradicazione o contenimento in capo all’Autorità
+  fitosanitaria competente.
+− Il richiamato regolamento prevede le condizioni per la delega dei compiti riguardanti le altre attività
+  ufficiali (articoli 29 e 31), individua gli obblighi degli organismi delegati e delle persone fisiche (articolo 32)
+  e gli obblighi delle autorità competenti deleganti (articolo 33).
+79610                      Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+TENUTO CONTO CHE
+
+− La legge regionale 25 febbraio 2010, n. 3 e s.m.i. assegna all’Agenzia per le attività irrigue e forestali (ARIF),
+  ente strumentale della Regione Puglia, una funzione di supporto all’Osservatorio nell’attuazione delle
+  misure di monitoraggio, prevenzione, estirpazione e comunicazione finalizzate alla gestione dell’emergenza.
+
+− L’Osservatorio, per l’esecuzione delle analisi di laboratorio relative ad “Altre attività ufficiali” si deve
+  avvalere di laboratori ufficiali designati ai sensi dell’art. 37 del Reg. UE 2017/625 o in deroga ai sensi
+  dell’art. 40 del Reg. UE 2017/625.
+
+− L’Osservatorio fitosanitario si avvale di InnovaPuglia s.p.a. per il supporto tecnico-scientifico e dei
+  Carabinieri Forestali per assicurare i controlli sul rispetto dell’applicazione delle misure obbligatorie di
+  lotta ai vettori e sulla movimentazione delle specie specificate.
+
+− Il “Piano d’azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia- biennio 2023-
+  2024” di cui all’allegato A del presente provvedimento, per formarne parte integrante e sostanziale:
+
+   •    è stato redatto ai sensi della normativa comunitaria, nazionale e regionale vigente e sulla base del
+        rischio fitosanitario, sentito il Comitato tecnico-scientifico Xylella costituito con DGR n. 15 dell’11
+        gennaio 2021;
+   •    ha tenuto conto delle raccomandazioni della Commissione Europea contenute nel report di audit
+        condotto in Italia e in Puglia dal 13 al 24 giugno 2022;
+   •    è stato discusso e approvato nella seduta del Comitato fitosanitario nazionale del 29/11/2022.
+
+RITENUTO NECESSARIO
+Assicurare continuità nello svolgimento delle attività di contrasto alla diffusione della Xylella fastidiosa e
+pertanto approvare il “Piano d’azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia-
+biennio 2023-2024” di cui all’allegato A del presente provvedimento, per formarne parte integrante e
+sostanziale, che potrà essere oggetto di modifica da parte dell’Osservatorio sulla base dei risultati dell’attività
+di sorveglianza e della valutazione del rischio fitosanitario o di eventuali modifiche normative che dovessero
+sopraggiungere.
+                                             Garanzie di riservatezza
+La pubblicazione sul BURP, nonché la pubblicazione all’Albo o sul sito istituzionale, salve le garanzie previste
+dalla legge 241/1990 in tema di accesso ai documenti amministrativi, avviene nel rispetto della tutela della
+riservatezza dei cittadini secondo quanto disposto dal Regolamento UE n. 679/2016 in materia di protezione
+dei dati personali, nonché dal D. Lgs. 196/2003 ss.mm.ii., ed ai sensi del vigente Regolamento regionale
+5/2006 per il trattamento dei dati sensibili e giudiziari, in quanto applicabile. Ai fini della pubblicità legale, il
+presente provvedimento è stato redatto in modo da evitare la diffusione di dati personali identificativi non
+necessari ovvero il riferimento alle particolari categorie di dati previste dagli articoli 9 e 10 del succitato
+Regolamento UE.
+
+                                        Valutazione di impatto di genere
+
+La presente deliberazione è stata sottoposta a Valutazione di impatto di genere ai sensi della DGR n. 302 del
+07/03/2022. L’impatto di genere stimato è:
+❏ diretto
+❏ indiretto
+X neutro
+                           Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                         79611
+
+
+                     COPERTURA FINANZIARIA AI SENSI DEL D.lgs. 118/2011 e ss.mm.ii.
+La Regione Puglia assicura la copertura finanziaria del “Piano d’azione per contrastare la diffusione di Xylella
+fastidiosa (Well et al.) in Puglia 2013-2014” per un importo pari a € 3.620.000,00 per il 2023 e € 4.020.000,00
+per il 2024 a valere sugli esercizi 2023-2024 del Bilancio Gestionale, approvato con Deliberazione della Giunta
+regionale n. 2 del 20/01/2022.
+L’Osservatorio provvederà ad impegnare le somme nel 2023.
+
+     Capitolo                               Declaratoria                             Stanz. Ini. 2023      Stanz. Ini. 2024
+     Bilancio
+    autonomo
+U0111034           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                    500.000,00          500.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. TRASFERIMENTI CORRENTI AD AMMINISTRAZIONI
+                   LOCALI
+U0111038           SPESE PER L’ATTIVITA’ DEL SERVIZIO FITOSANITARIO REGIONALE,                 20.000,00         20.000,00
+                   ANCHE IN CONVENZIONE CON ENTI DI RICERCA, PER
+                   MONITORAGGIO E CONTROLLO MALATTIE DA QUARANTENA E
+                   CERTIFICAZIONE MATERIALE VIVAISTICO . ACQUISTI ALTRI BENI DI
+                   CONSUMO
+U0111039           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                    300.000,00          300.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. TRASFERIMENTI CORRENTI AL RESTO DEL MONDO
+
+U0111041           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                    400.000,00          400.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. TRAFERIMENTI CORRENTI AD AMMINISTRAZIONI
+                   CENTRALI
+U0111042           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                    100.000,00          500.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. TRAFERIMENTI CORRENTI AD ALTRE IMPRESE
+
+U0111044           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                  1.000.000,00        1.000.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. ACQUISTO ALTRISERVIZI
+
+U0111057           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                    200.000,00          200.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. SPESE PER RAPPRESENTANZA, ORGANIZZAZIONE DI
+                   EVENTI, PUBBLICITA’ E SERVIZI PER TRASFERTA.
+U0111058           INTERVENTI URGENTI PER LA PREVENZIONE, IL CONTROLLO E                    100.000,00          100.000,00
+                   LA ERADICAZIONE DEL BATTERIO DA QUARANTENA XYLELLA
+                   FASTIDIOSA. STAMPA E RILEGATURA.
+
+U0111059           INTERVENTI ASSEGNATI AD ARIF CON LEGGE 19/2019 PER LA                  1.000.000,00        1.000.000,00
+                   PREVENZIONE, IL CONTROLLO E LA ERADICAZIONE DEL BATTERIO
+                   DA QUARANTENA XYLELLA FASTIDIOSA.
+
+                                                                                        3.620.000,00        4.020.000,00
+
+
+L’Assessore relatore, sulla base delle risultanze istruttorie come innanzi illustrate, ai sensi dell’art. 4 della L.R.
+7/1997, propone alla Giunta:
+
+−    di approvare quanto riportato in narrativa;
+
+−    di assicurare continuità nello svolgimento delle attività di contrasto alla diffusione della Xylella fastidiosa
+     e pertanto approvare il “Piano d’azione per contrastare la diffusione di Xylella fastidiosa (Well et al.)
+79612                      Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+     in Puglia- biennio 2023-2024” di cui all’allegato A del presente provvedimento, per formarne parte
+     integrante e sostanziale, che potrà essere oggetto di modifica da parte dell’Osservatorio sulla base dei
+     risultati dell’attività di sorveglianza e della valutazione del rischio fitosanitario o di eventuali modifiche
+     normative che dovessero sopraggiungere;
+
+−    di definire i rapporti con i soggetti attuatori delle misure previste nel Piano d’azione con specifiche
+     convenzioni da approvare con successivi provvedimenti;
+
+−    di dare mandato alla Sezione Osservatorio Fitosanitario di notificare il presente provvedimento a:
+     MASAF, Carabinieri forestali, Prefetti, Comuni rientranti nelle aree delimitate, Polizia Stradale, Guardia di
+     Finanza, Agenzia delle Dogane degli aeroporti di Puglia, Sezione Vigilanza Ambientale regionale, Polizia
+     della Città Metropolitana, Polizia Municipale dei comuni ricadenti nelle aree delimitate;
+
+−    di stabilire che il presente provvedimento è pubblicato sul BURP in versione integrale.
+
+I sottoscritti attestano che il procedimento istruttorio è stato espletato nel rispetto della vigente normativa
+regionale, nazionale e europea e che il presente schema di provvedimento, predisposto dal funzionario
+responsabile della P.O. “Programmazione e gestione fitosanitaria” e confermato dal Dirigente della Sezione
+Osservatorio, è conforme alle risultanze istruttorie.
+
+Il Funzionario P.O. (Dr. Anna Percoco)
+
+Il Dirigente della Sezione (Dr. Salvatore Infantino)
+
+Il sottoscritto Direttore di Dipartimento non ravvisa la necessità di esprimere osservazioni sulla proposta di
+deliberazione ai sensi del combinato disposto degli articoli 18 e 20 del DPGR n. 22/2021.
+
+Il Direttore del Dipartimento Agricoltura, Sviluppo Rurale e Ambientale
+(Prof. Gianluca Nardone)					
+
+L’Assessore all’Agricoltura
+(Dott. Donato Pentassuglia)					
+
+
+
+                                              LA GIUNTA REGIONALE
+
+Udita la relazione e la conseguente proposta dell’Assessore Donato Pentassuglia; viste le sottoscrizioni apposte
+in calce alla proposta di deliberazione; a voti unanimi espressi nei modi di legge
+
+                                                   DELIBERA
+−    Di approvare quanto riportato in narrativa;
+
+−    di assicurare continuità nello svolgimento delle attività di contrasto alla diffusione della Xylella fastidiosa
+     e pertanto approvare il “Piano d’azione per contrastare la diffusione di Xylella fastidiosa (Well et al.)
+     in Puglia- biennio 2023-2024” di cui all’allegato A del presente provvedimento, per formarne parte
+     integrante e sostanziale, che potrà essere oggetto di modifica da parte dell’Osservatorio sulla base dei
+     risultati dell’attività di sorveglianza e della valutazione del rischio fitosanitario o di eventuali modifiche
+     normative che dovessero sopraggiungere;
+                         Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                79613
+
+
+−   di definire i rapporti con i soggetti attuatori delle misure previste nel Piano d’azione con specifiche
+    convenzioni da approvare con successivi provvedimenti;
+
+−   di dare mandato alla Sezione Osservatorio Fitosanitario di notificare il presente provvedimento a:
+    MASAF, Carabinieri forestali, Prefetti, Comuni rientranti nelle aree delimitate, Polizia Stradale, Guardia di
+    Finanza, Agenzia delle Dogane degli aeroporti di Puglia, Sezione Vigilanza Ambientale regionale, Polizia
+    della Città Metropolitana, Polizia Municipale dei comuni ricadenti nelle aree delimitate;
+
+−   di stabilire che il presente provvedimento è pubblicato sul BURP in versione integrale
+
+
+           IL SEGRETARIO DELLA GIUNTA                                  IL PRESIDENTE DELLA GIUNTA
+                  ANNA LOBOSCO                                              MICHELE EMILIANO
+79614                    Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+
+                                                                                  Allegato A
+
+
+
+
+                                                   SALVATORE
+                                                   INFANTINO
+                                                   06.12.2022
+                                                   12:47:54
+                                                   GMT+00:00
+
+
+
+
+        Piano d’azione per contrastare la diffusione di Xylella fastidiosa
+        (Well et al.) in Puglia 2023-2024
+
+
+
+
+                    A cura dell’Osservatorio fitosanitario – Regione Puglia
+                           Lungomare Nazario Sauro 45/47 - 70121 Bari
+                      PEC osservatoriofitosanitario.regione@pec.rupar.puglia.it
+
+
+
+
+                                                                                               1
+                            Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                                                                                                  79615
+
+
+
+                                                                                            2
+
+
+
+
+Sommario
+1 Premessa............................................................................................................................................................................. 6
+2 Quadro normativo ............................................................................................................................................................ 6
+3 Obiettivi .............................................................................................................................................................................. 7
+4 Le azioni .............................................................................................................................................................................. 7
+4.1 Aree delimitate .............................................................................................................................................................. 8
+4.2 Programmazione attività di sorveglianza fitosanitaria......................................................................................... 8
+4.2.1 Area delimitata “Salento”-zona infetta in cui si attuano misure di contenimento ................................ 13
+4.2.2 Area delimitata “Valle D‘Itria”- zona infetta in cui si applicano misure di eradicazione ....................... 13
+4.2.3 Aree delimitate “Valle D ‘Itria” e “Salento” – zona cuscinetto .................................................................... 13
+4.2.4 Area indenne ........................................................................................................................................................... 13
+4.3 Sorveglianza a seguito di rinvenimento di pianta infetta .................................................................................. 14
+4.3.1 Area cuscinetto, indenne e area infetta “Valle D’Itria” .................................................................................. 14
+4.3.2 Area delimitata “Salento “ Zona in cui si applicano misure di contenimento .......................................... 15
+4.4 Rimozione delle piante .............................................................................................................................................. 15
+4.4.1 Misure di eradicazione ........................................................................................................................................... 15
+4.4.2 Misure di contenimento ........................................................................................................................................ 15
+4.4.3 Distruzione delle piante ......................................................................................................................................... 15
+4.5 Procedura di notifica alle istituzioni nazionali ed europee ............................................................................... 16
+4.6 Procedura di notifica ai proprietari......................................................................................................................... 16
+4.7 Indennizzi estirpazione .............................................................................................................................................. 17
+4.8 Sorveglianza fitosanitaria ai sensi della legge regionale 29 marzo 2017, n. 4 e s.m.i. ............................... 17
+4.9 Monitoraggio dei vettori ........................................................................................................................................... 17
+4.9.1 Strategia di controllo dei vettori .......................................................................................................................... 18
+4.9.2 Misure fitosanitarie contro le forme giovanili .................................................................................................. 18
+4.9.3 Misure fitosanitarie contro gli adulti .................................................................................................................. 19
+4.10 Divieto di impianto specie specificate ................................................................................................................ 23
+4.11 Controlli ufficiali ........................................................................................................................................................ 24
+4.11.1 Controlli ufficiali nei vivai .................................................................................................................................... 24
+4.11.2 Controlli ufficiali nel posto di controllo frontaliero (Porto di Bari) e porti e aeroporti ........................ 25
+4.11.3 Movimentazione delle specie specificate........................................................................................................ 25
+4.11.4 Controlli ufficiali sull’applicazione delle misure fitosanitarie obbligatorie di controllo alla fase
+giovanile dei vettori ........................................................................................................................................................... 25
+79616                              Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                                                                 3
+
+
+
+        4.11.5 Applicazione delle misure fitosanitarie obbligatorie di controllo nella fase adulta dei vettori ......... 25
+        4.12 Controlli e sanzioni amministrative ...................................................................................................................... 25
+        4.13 Comunicazione .......................................................................................................................................................... 25
+        4.14 Ricerca e collaudo delle innovazioni .................................................................................................................... 26
+        4.14.1 Piano straordinario per la rigenerazione olivicola della Puglia .................................................................. 26
+        4.14.2 Impiego sperimentale di cani in controllo di vivai e punti di entrata. ...................................................... 27
+        4.14.3 Valutazione/validazione dell’utilizzo di immagini aeree per l’identificazione precoce di focolai di
+        Xylella (Early remote sensing). ........................................................................................................................................ 27
+        5 Governance ...................................................................................................................................................................... 28
+        6 Fonti di finanziamento .................................................................................................................................................. 29
+        7 Cronoprogramma delle attività ................................................................................................................................... 30
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                              79617
+
+
+
+                                                     4
+
+
+
+
+Glossario
+    a. Organismo nocivo specificato: Xylella fastidiosa (Wells et al.) e tutte le sue sottospecie;
+    b. Xylella fastidiosa subspecie pauca ST53: sottospecie della Xylella fastidiosa individuata nella
+        Regione Puglia;
+    c. Piante ospiti: tutte le piante da impianto, escluse le sementi, elencate nell’allegato I del Reg.
+        UE 2020/1201, sensibili a una o più sottospecie di Xylella fastidiosa;
+    d. Piante specificate: piante ospiti da impianto, escluse le sementi, notoriamente sensibili alla
+        Xylella fastidiosa sottospecie pauca di cui all’allegato II del Reg. (UE) 2020/1201;
+    e. Area delimitata: area costituita da una zona infetta e da una zona cuscinetto;
+    f. Zona infetta: zona di raggio di almeno 50 m attorno alla pianta infetta da Xylella fastidiosa;
+    g. Zona infetta Salento: zona infetta da Xylella fastidiosa elencata nell’allegato III, parte A del
+        Reg. UE 2020/1201, comprendente l’intera provincia di Lecce, Brindisi, alcuni comuni della
+        provincia di Taranto e il comune di Locorotondo della provincia di Bari;
+    h. Zona cuscinetto = zona attorno ad una zona infetta che può avere una larghezza di:
+             a) almeno 2,5 km quando la zona infetta è stabilita ai fini dell’adozione delle misure di
+                  eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201;
+             b) almeno 5 km quando la zona infetta è stabilita ai fini dell’adozione delle misure di
+                  contenimento di cui agli articoli da 12 a 17 del Reg. (UE) 2020/1201.
+    i. Zona di contenimento: zona di almeno 5 km dal confine tra la zona infetta Salento e la zona
+        cuscinetto che si estende dallo Jonio all'Adriatico in cui si applicano le misure di
+        contenimento (lettera a) comma 2 dell’art. 15 del Reg. (UE) 2020/1201;
+    j. Zona indenne: territorio della Regione Puglia in cui non sono state individuate piante infette
+        da Xylella fastidiosa;
+    k. Eradicazione: applicazione di misure fitosanitarie per eliminare un organismo nocivo da una
+        zona;
+    l. Contenimento: applicazione di misure fitosanitarie in una zona infetta per contenere la
+        diffusione di un organismo nocivo;
+    m. Autorità competente: Autorità regionale responsabile dell’organizzazione dei controlli
+        ufficiali e delle altre attività ufficiali, in conformità al Reg. (UE) 2017/625;
+    n. Organismo delegato: una persona giuridica distinta alla quale le autorità competenti
+        delegano determinati compiti riguardanti i controlli ufficiali o determinati compiti
+        riguardanti altre attività ufficiali;
+    o. Posto di controllo frontaliero: un luogo, nonché le strutture ad esso pertinenti, designato da
+        uno Stato membro per l’esecuzione dei controlli ufficiali;
+    p. Punto di uscita: un posto di controllo frontaliero o qualsiasi altro luogo designato da uno
+        Stato membro attraverso il quale i vegetali escono dal territorio doganale dell’Unione;
+    q. Controllo documentale: la verifica dei certificati ufficiali, degli attestati ufficiali e degli altri
+        documenti, compresi i documenti di natura commerciale, che devono accompagnare la
+        partita, come previsto dalla normativa vigente;
+    r. Controllo di identità: un esame visivo per verificare che il contenuto e l’etichettatura di una
+        partita corrispondano alle informazioni contenute nei certificati ufficiali, negli attestati e
+        negli altri documenti ufficiali di accompagnamento;
+    s. Controllo fisico: un controllo di vegetali e, se del caso, controlli di imballaggi, mezzi di
+        trasporto, etichettatura e temperatura, campionamento ai fini di analisi, prova e diagnosi e
+        qualsiasi altro controllo necessario a verificare la conformità alla normativa vigente;
+    t. Piana degli ulivi secolari: Piana degli ulivi secolari di cui al Piano Paesaggistico Territoriale
+        della Regione Puglia (PPTR) approvato con DGR 16 febbraio 2015, n. 176 e s.m.i.;
+79618              Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                      5
+
+
+
+        u. RiBESS +: strumento statistico che calcola la dimensione del campione basato sull’analisi del
+           rischio;
+        v. Livello di confidenza: è il grado di fiducia che l’intervallo possa contenere effettivamente il
+           parametro di interesse;
+        w. Prevalenza: Il numero totale di piante infette presenti in un determinato momento in una
+           popolazione.
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                               79619
+
+
+
+                                                     6
+
+
+
+1 Premessa
+Il presente piano d'azione, redatto ai sensi dell’art. 27 del Regolamento (UE) 2016/2031 del
+Parlamento Europeo e del Consiglio del 26 ottobre 2016, del Regolamento di esecuzione (UE) n.
+2020/1201 della Commissione del 14 agosto 2020, del Decreto legislativo 29 del 2021 e del Piano
+nazionale di emergenza per la gestione di Xylella fastidiosa in Italia adottato con Decreto del
+Ministro delle Politiche Agricole, Alimentari e Forestali 24 gennaio 2022.
+Il Piano d’azione descrive l’organizzazione della sorveglianza nel biennio 2023-2024 e la strategia
+operativa che l’Autorità competente regionale adotta, ossia l’Osservatorio Fitosanitario della
+Regione Puglia (di seguito Osservatorio). In particolare, esso descrive le misure per l'eradicazione
+dell’organismo nocivo e quelle per il suo contenimento, unitamente a un calendario di attuazione
+delle misure. Il piano comprende, inoltre, una descrizione della progettazione e dell'organizzazione
+delle indagini da svolgere.
+Il Piano tiene conto anche delle raccomandazioni degli auditors della DG Santè della Commissione
+Europea contenute nel report di audit condotto dal 13 giugno al 24 giungo 2022.
+Com’è noto, l’attuazione delle misure di contrasto degli organismi nocivi da quarantena in
+applicazione di provvedimenti di emergenza fitosanitaria è in deroga, ai sensi dell’art. 33 del D.lgs
+19/2021, a ogni disposizione vigente, comprese quelle di natura vincolistica, nei limiti e secondo i
+criteri indicati nei medesimi provvedimenti di emergenza fitosanitaria.
+L’Osservatorio, con specifici provvedimenti dirigenziali, adotta le procedure di attuazione necessarie
+per applicare il Piano di azione e stabilire il numero dei campionamenti e delle prove di laboratorio
+da effettuare, nonché la metodologia di laboratorio da applicare, valorizzando il contributo delle
+comunità locali anche stipulando specifici protocolli di intesa.
+Il Piano tiene conto delle risultanze delle diverse prove sperimentali (in serra ed in campo) condotte
+dall’Istituto della Protezione Sostenibile delle Piante (IPSP) del CNR d Bari e finalizzate alla verifica
+della suscettibilità di diverse specie arboree di interesse per la Puglia, quali l’Olea europea e le specie
+dei generi Prunus, Citrus e Vitis. I dati sperimentali dell’IPSP e di due strutture di ricerca francesi
+quali ANSES e INRA, hanno evidenziato che per agrumi, pesco, albicocco e susino, nessuna delle
+cultivar è risultata suscettibile. Questi risultati sono confermati dagli esiti dell’attività di sorveglianza
+fitosanitaria condotta dall’Osservatorio dal 2013 ad oggi. Nelle aree delimitate sono state
+campionate e analizzate migliaia di piante appartenenti alle suddette specie e non sono mai state
+individuate piante infette. Pertanto, tali specie, pur essendo inserite nell’elenco delle specie
+specificate alla Xylella fastidiosa pauca di cui all’allegato II del Reg. UE 2020/1201, non sono oggetto
+di sorveglianza e, conseguentemente, di applicazione delle misure di eradicazione.
+2 Quadro normativo
+-   Regolamento (UE) n. 2016/2031 del Parlamento Europeo e del Consiglio del 26/10/2016
+    relativo alle misure di protezione contro gli organismi nocivi per le piante;
+-    Regolamento (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017,
+     relativo ai controlli ufficiali e alle altre attività ufficiali effettuati per garantire l’applicazione
+     della legislazione sugli alimenti e sui mangimi, delle norme sulla salute e sul benessere degli
+     animali, sulla sanità delle piante nonché sui prodotti fitosanitari;
+-    Regolamento di esecuzione (UE) n. 2020/1201 della Commissione del 14/08/2020 relativo alle
+     misure per prevenire l'introduzione e la diffusione nell'Unione della Xylella fastidiosa;
+-    Regolamento di esecuzione (UE) 2021/2130 della Commissione del 2 dicembre 2021 che
+     modifica il regolamento di esecuzione (UE) 2020/1201 per quanto riguarda gli elenchi delle
+     piante notoriamente sensibili a Xylella fastidiosa;
+-    Legge n. 44 del 21/05/2019, conversione in legge, con modificazioni, del decreto legge n. 27 del
+     29/03/2019 "Disposizioni urgenti in materia di rilancio dei settori agricoli in crisi e di sostegno
+79620                  Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                           7
+
+
+
+            alle imprese agroalimentari colpite da eventi atmosferici avversi di carattere eccezionale e per
+            l’emergenza nello stabilimento Stoppani, sito nel Comune di Cogoleto" che ha
+            modificato/integrato la disciplina giuridica di contrasto ai patogeni da quarantena;
+        -   Decreto Legislativo 2 febbraio 2021, n. 19 “Norme per la protezione delle piante dagli organismi
+            nocivi in attuazione dell’articolo 11 della legge 4 ottobre 2019, n. 117, per l’adeguamento della
+            normativa nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE)
+            2017/625”.
+        -   Legge regionale 4 giugno 2007, n. 14 “Tutela e valorizzazione del paesaggio degli ulivi
+            monumentali della Puglia”;
+        -   Legge regionale 25 febbraio 2010, n. 3 e s.m.i. “Disposizioni in materia di attività irrigue e
+            forestali”;
+        -   Legge regionale 29 marzo 2017, n. 4 e s.m.i. “Gestione della batteriosi da Xylella fastidiosa nel
+            territorio della regione Puglia”;
+        -   Determina dirigenziale n° 67 del 26/07/2022 “Piano d’azione per contrastare la diffusione di
+            Xylella fastidiosa (Well et al.) in Puglia” 2022 - Misure integrative dell’attività di sorveglianza”;
+        -   Determina dirigenziale n° 127 del 17/11/2022 “Xylella fastidiosa sottospecie Pauca ST53 -
+            Aggiornamento delle aree delimitate ai sensi dell’art. 4 del Reg. UE 2020/1201”
+        3 Obiettivi
+        Obiettivo generale del piano è di anticipare l’evoluzione della malattia evitando di disperdere
+        energie nelle aree dove ormai non è più possibile eradicare l’organismo nocivo. In particolare, la
+        Regione Puglia si prefigge di:
+            a. Eradicare l’organismo nocivo o contenerne la diffusione per tutelare le aree indenni
+                regionali ed evitare che la malattia si diffonda nel resto del territorio dell’Unione Europea
+                attraverso l’attuazione immediata delle misure fitosanitarie e il monitoraggio sistematico dei
+                vettori nelle aree indenni;
+            b. Prevenire la diffusione dell’organismo nocivo mediante la riduzione della popolazione dei
+                vettori attraverso le lavorazioni del terreno e l’esecuzione di trattamenti con fitofarmaci;
+            c. Realizzare la campagna di comunicazione e informazione.
+        4 Le azioni
+         - Sorveglianza nelle aree delimitate;
+         - Sorveglianza nell’area indenne;
+         - Sorveglianza a seguito di rinvenimento di pianta infetta;
+         - Rimozione delle piante:
+                 Misure di eradicazione;
+                 Misure di contenimento;
+         - Sorveglianza fitosanitaria ai sensi della legge regionale 29 marzo 2017, n. 4 e s.m.i;
+         - Monitoraggio dei vettori;
+         - Strategia di controllo dei vettori;
+         - Controlli ufficiali:
+                 nei vivai;
+                 nel punto di controllo frontaliero;
+                 sulla movimentazione delle specie specificate anche in porti e aeroporti;
+                 sull’applicazione delle misure fitosanitarie obbligatorie di controllo dei vettori;
+         - Comunicazione;
+         - Ricerca e collaudo delle innovazioni.
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                             79621
+
+
+
+                                                    8
+
+
+
+4.1 Aree delimitate
+Le attuali aree delimitate istituite ai sensi dell’art. 4 del Regolamento di Esecuzione (UE) 2020/1201
+della Commissione sono:
+-    “Salento” costituita da:
+        -   Zona infetta di cui all’Allegato III del Reg. 2020/1201 in cui, in un’area larga 5 km dal
+            confine tra la zona infetta e la zona cuscinetto, si attuano misure di contenimento di cui
+            agli articoli da 12 a 17 del Reg. UE 2020/1201;
+        -   Zona cuscinetto adiacente alla zona infetta della larghezza di 5 km;
+-    “Valle D’ Itria” costituita da:
+        -    Zona infetta comprendente l’intero agro dei comuni di Monopoli, Polignano e
+             Alberobello e parte dell’agro di Castellana Grotte, in cui si attuano misure di
+             eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201;
+        -    zona cuscinetto della larghezza di 5 km adiacente alla zona infetta;
+L’ex area delimitata di “Canosa di Puglia” revocata con atto dirigenziale n° 177 del 30/12/2021, è
+sottoposta a sorveglianza fitosanitaria per assicurare il rispetto dei paragrafi 3 e 4 dell’art. 6 del Reg.
+(UE) 2020/1201. Le aree delimitate di cui alla DDS 127 del 17/1172022 sono rappresentate nella
+figura 1.
+        Figura 1 - Regione Puglia – Aree delimitate
+
+
+
+
+Sulla base dell’attività di sorveglianza e del ritrovamento di piante infette si procede con
+provvedimento dirigenziale ad aggiornare le aree delimitate e conseguentemente il piano di
+sorveglianza.
+4.2 Programmazione attività di sorveglianza fitosanitaria
+L’attività di sorveglianza è programmata sulla base delle “Guidelines for statistically sound and risk-
+based surveys of Xylella fastidiosa” dell’Autorità europea per la sicurezza alimentare (EFSA) e delle
+conoscenze acquisite negli anni precedenti anche con la realizzazione delle attività di sorveglianza
+fitosanitaria in conformità con l’articolo 27 - Piani d'azione per gli organismi nocivi prioritari - del
+Reg. (UE) 2031/2016 e dell’articolo 2 - Indagini relative all’organismo nocivo specificato nei territori
+degli Stati membri - del Reg. (UE) 1201/2020. In particolare, le indagini sono eseguite
+79622                    Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                                 9
+
+
+
+        dall’Osservatorio e da soggetti delegati ai sensi del Reg. (UE) 2017/625 e si svolgono in pieno campo
+        e nei vivai, nei centri per il giardinaggio e/o nei centri di vendita, nelle aree naturali e in altri luoghi
+        pertinenti. Le indagini consistono nel prelievo di campioni e nella realizzazione di prove sulle piante
+        da impianto assicurando un tasso di presenza di piante infette dell’1 % con un livello di confidenza di
+        almeno l’80 %.
+        L’ampiezza della zona potenzialmente infetta da considerare intorno alla fonte di infezione, com’è
+        noto, varia in funzione del tempo trascorso dall'ultima indagine di rilevamento e dalla velocità di
+        diffusione della malattia (Gruppo EFSA PLH, 2019), così come si evince dalla figura 2.
+        Figura 2 – Ampiezza delle aree potenzialmente infette in funzione del tempo dal rilevamento della pianta
+        infetta e della velocità di diffusione dell’organismo nocivo.
+
+
+
+
+        Nella programmazione delle aree da sottoporre a sorveglianza, si tiene conto anche della tipologia di
+        infezione, cioè se singola o multipla e della necessità di individuare ulteriori 400 m attorno alla zona
+        infetta dove ha avuto inizio l’attività di sorveglianza. Nella figura 3 si descrive la modalità di
+        delimitazione nell’ipotesi in cui la fonte di infezione sia presente da tre anni.
+          Figura 3 – Modalità di delimitazione nell’ipotesi in cui la fonte di infezione sia presente da tre anni
+
+
+
+
+        In conclusione, l’ampiezza delle aree potenzialmente infette è stata determinata considerando:
+             a. un’area larga 400 m (da 50 a 450m) intorno al buffer di 50 m di raggio di ciascuna pianta
+                 risultata infetta nel monitoraggio 2021 e 2022;
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                             79623
+
+
+
+                                                   10
+
+
+
+      b. un’area larga 400 m (da 450 a 850 m) a ridosso della prima area (larga 400 m) definita
+          intorno a ciascuna pianta infetta individuata nel monitoraggio 2021e 2022.
+La dimensione del campione all’interno delle aree da sottoporre a sorveglianza viene determinata
+applicando 3 livelli di rischio: Alto (valore 2), medio (valore 1,5) e basso (valore 1). Nell’attribuire un
+livello di rischio alle varie aree si tiene conto del numero delle piante infette individuate nelle
+campagne di monitoraggio 2021 e 2022 (tabelle 1-2), della la loro distribuzione (figura 4), della
+presenza di ferrovie e strade di grande percorrenza, di centri di passaggio o sosta di numerosi
+automezzi (stazioni di servizio, agriturismi, centri di rimessaggio), di vivai, nonché dell’andamento
+della diffusione del batterio dal 2013 ad oggi.
+
+ Tabella 1 - Monitoraggio 2021 - N° piante infette e distribuzione.
+                                                                                          N. PIANTE
+                 AREE DELIMITATE                           AGRO COMUNALE
+                                                                                           INFETTE
+  Area delimitata Monopoli                            Monopoli                                40
+  Area delimitata Polignano                           Polignano                                1
+  Area delimitata Salento – zona misure di            Fasano, Locorotondo,
+                                                                                              88
+  contenimento                                        Martina Franca, Crispiano,
+
+  Area delimitata Salento -zona cuscinetto            Alberobello                             17
+
+  TOTALI                                                                                      146
+
+
+  Tabella 2 - Monitoraggio 2022 - N° piante infette e distribuzione (aggiornamento novembre 2022).
+                 ZONA DELIMITATA                          AGRO COMUNALE                  N. PIANTE
+                                                                                          INFETTE
+                                                      Monopoli -                             50
+   Area delimitata Monopoli
+                                                      Polignano                              26
+   Area delimitata Polignano                          Castellana Grotte                       4
+   Area indenne Monopoli                              Polignano                              39
+                                                      Fasano                                 95
+   Area delimitata Salento - zona misure di
+                                                      Locorotondo-                            2
+   contenimento
+                                                      Martina Franca -                       20
+
+   Area delimitata Salento                            Alberobello                             3
+   Zona cuscinetto                                    Monopoli                                1
+   TOTALI                                                                                   240
+79624   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+               Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                            79625
+
+
+
+                                                  12
+
+
+
+                  Figura 5 – Esempi di aree con rischio alto e medio
+
+
+
+
+Nelle aree delimitate innanzi citate, sulla base della metodologia descritta, dell’uso del suolo
+(presenza di oliveti, frutteti e di aree con possibile presenza di piante specificate di tipo
+ornamentale, macchia, ecc.) ricavato dai fascicoli AGEA, dalle ortofoto e dalle risultanze dei
+monitoraggi precedenti, si applica il RIBESS+ con i valori di prevalenza e di confidenza previsti dal
+Reg. (UE) 2020/1201 o se del caso più stringenti, ad eccezione della zona infetta dell’area delimitata
+“Valle D’Itria” dove saranno sottoposte a sorveglianza tutte le superfici investite a olivo, fruttiferi e
+aree di macchia mediterranea, boschi e verde pubblico.
+L’applicazione del Ribess + prevede una metodologia a doppio step con la quale si definisce, con il
+primo step, il numero di piante da campionare in un ettaro (maglia) e con il secondo step il numero
+di ettari (maglie) da monitorare.
+Nel programma di sorveglianza 2023 e 2024, in linea con la metodologia utilizzata nel 2022, si
+procede al prelievo di 7/14 campioni per ettaro a seconda dei valori di rischio applicati nelle diverse
+zone delimitate.
+Le ispezioni finalizzate al prelievo dei campioni e il prelievo dei campioni sono svolte secondo le
+procedure dettate dall’Osservatorio.
+79626                   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                            13
+
+
+
+        4.2.1 Area delimitata “Salento”-zona infetta in cui si attuano misure di contenimento
+        La zona sarà sottoposta a sorveglianza applicando i seguenti valori di rischio:
+         1. Alto Rischio – valore di rischio 2 nell’area larga 400 m (da 50 a 450 m) intorno al buffer di 50 m
+             di ciascuna pianta risultata infetta nel monitoraggio 2022;
+         2. Medio Rischio – valore di rischio 1,5 nell’area larga 400 m (da 450m a 850m) intorno a ciascuna
+             pianta risultata positiva nel monitoraggio 2022;
+         3. Basso Rischio – valore di rischio 1 nella restante zona di contenimento.
+        Nelle aree così definite e tenuto conto delle piante infette individuate nel 2022, l’Osservatorio
+        annualmente definisce con provvedimento dirigenziale le superfici da sottoporre a sorveglianza
+        applicando il Ribess +, secondo le “Guidelines for statistically sound and risk-based surveys of Xylella
+        fastidiosa” di EFSA.
+        4.2.2 Area delimitata “Valle D‘Itria”- zona infetta in cui si applicano misure di eradicazione
+        Nella zona infetta della “Valle D’Itria”, considerata un territorio con un livello di rischio molto alto, la
+        sorveglianza si applicherà all’intera superficie investita a olivo, mandorlo, ciliegio, macchia, boschi e
+        verde urbano, degli agri comunali di: Polignano, Monopoli, Alberobello e parte del comune di
+        Castellana Grotte.
+        4.2.3 Aree delimitate “Valle D ‘Itria” e “Salento” – zona cuscinetto
+        Nell’area cuscinetto di 5 km limitrofa alla zona infetta “Salento” e alla zona infetta “Valle D’Itria”, si
+        applicano i seguenti livelli di rischio, ossia:
+             1. Alto Rischio – valore di rischio 2 nell’area larga 400 m. al confine con la zona contenimento
+                Salento e i comuni di Polignano, Monopoli, Alberobello e parte di Castellana Grotte, dallo
+                Jonio all’Adriatico;
+             2. Alto Rischio – valore di rischio 2 nelle aree di 100 m lungo le strade di grande percorrenza su
+                entrambi i lati e aree limitrofe a tutti i centri di rimessaggio, stazioni di servizio, agriturismi,
+                parcheggi aperti al pubblico;
+             3. Medio Rischio– Valore di rischio medio 1,5 nella restante area.
+        Nelle aree così definite, saranno definite annualmente con provvedimento dirigenziale
+        dell’Osservatorio, le superfici da sottoporre a sorveglianza applicando il Ribess +, secondo le
+        “Guidelines for statistically sound and risk-based surveys of Xylella fastidiosa” di EFSA.
+        4.2.4 Area indenne
+        L’Osservatorio conduce indagini annuali sulle piante specificate per rilevare la presenza
+        dell’organismo nocivo nei territori indenni in conformità alle disposizioni di cui all’art. 2 del Reg. (UE)
+        2020/1201.
+        Nell’area indenne si applicano seguenti livelli di rischio, ossia:
+              1. Alto Rischio – valore di rischio 2 nell’area di 1 km dei comuni limitrofi alla regione Basilicata;
+              2. Medio Rischio - valore di rischio 1,5 nell’area di 1 km attorno all'ex focolaio di Canosa;
+              3. Basso Rischio - valore di rischio 1 nella restante area.
+        Nelle aree così definite, saranno definite annualmente con provvedimento dirigenziale
+        dell’Osservatorio, le superfici da sottoporre a sorveglianza applicando il Ribess+, secondo le
+        “Guidelines for statistically sound and risk-based surveys of Xylella fastidiosa” di EFSA.
+        Nell’area indenne le maglie da sottoporre a sorveglianza, saranno individuate tenendo conto anche
+        di ulteriori fattori di rischio come la vicinanza a:
+           - Aree vivaistiche;
+           - Principali vie di comunicazione (autostrada A14 e strade statali di maggiore percorrenza);
+           - Linea ferroviaria Lecce- Bari;
+           - Aree turistiche;
+           - Stazioni di servizio;
+           - Parcheggi aperti al pubblico;
+           - Confini con regioni limitrofe.
+        Nella Figura 6 sono evidenziate le aree delimitate in base al livello di rischio applicato.
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                              79627
+
+
+
+                                                    14
+
+
+
+ Figura 6 – Livelli di rischio applicati alle aree oggetto di sorveglianza.
+
+
+
+
+Il piano di sorveglianza annuale può subire variazioni in base al rischio fitosanitario derivante da:
+  n° di piante infette e loro ubicazione;
+  individuazione di nuove specie suscettibili alla sottospecie Pauca genotipo ST53;
+  individuazione di nuove sottospecie di Xylella fastidiosa.
+4.3 Sorveglianza a seguito di rinvenimento di pianta infetta
+
+
+4.3.1 Area cuscinetto, indenne e area infetta “Valle D’Itria”
+A seguito del rinvenimento di piante positive a Xylella fastidiosa nelle zone cuscinetto o nelle aree
+indenni o nell’area infetta “Valle D’Itria, si applicano le misure di eradicazione di cui agli articoli da 7
+a 11 del Reg. UE 2020/1201, si procede come segue:
+1. in una prima area del raggio di 50 m attorno alla pianta infetta si estirpano tutte le specie
+   specificate. Per quanto attiene gli olivi secolari ufficialmente riconosciuti e risultati indenni non
+   si applica la deroga prevista dal comma 3 dell’art. 7 del Reg. UE 2020/1201.
+2. in una seconda area di larghezza pari a 50 m attorno alla prima area si campionano e analizzano
+   tutte le specie specificate alla Xylella fastidiosa sottospecie Pauca, ad eccezione di agrumi,
+   pesco, albicocco e susino, in quanto non suscettibili al genotipo ST53, al fine di verificare
+   l’estensione del focolaio;
+3. in una terza area di larghezza pari a 400 m attorno alla seconda area, tutti gli ettari con specie
+   specificate alla sottospecie Pauca ad eccezione di agrumi, pesco, albicocco e susino, in quanto
+   non suscettibili al genotipo ST53, sono sottoposti a sorveglianza rafforzata, prelevando 14
+   campioni/ettaro.
+79628                  Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                          15
+
+
+
+        4.3.2 Area delimitata “Salento “ Zona in cui si applicano misure di contenimento
+        A seguito di rinvenimento di piante positive a Xylella fastidiosa nella zona in cui si applicano le
+        misure di contenimento di cui agli articoli da 12 a 17 del Reg. UE 2020/1201, si procede come segue:
+        1.    nel raggio di 50 m attorno alla pianta infetta, si campionano e si analizzano tutte le specie
+             specificate alla Xylella fastidiosa sottospecie Pauca ad eccezione di agrumi, pesco, albicocco e
+             susino, in quanto non suscettibili al genotipo ST53;
+        2. nell’area larga 400 m attorno alla pianta risultata infetta, partendo dal perimetro dell’area di
+           raggio 50 m, si sottopongono a sorveglianza rafforzata con prelievo di 14 campioni/ettaro, tutte
+           le superfici investite ad olivo e alle altre specie specificate alla Xylella fastidiosa sottospecie
+           Pauca, ad eccezione di agrumi, pesco, albicocco e susino, in quanto non suscettibili genotipo
+           ST53.
+        4.4 Rimozione delle piante
+
+
+        4.4.1 Misure di eradicazione
+        Si procede all’applicazione delle misure di eradicazione così come previsto dall’articolo 7 del Reg.
+        (UE) 2020/1201, con la distruzione in situ delle piante estirpate.
+        Non si applica la deroga prevista dal comma 3 dell’art. 7 del Reg. (UE) 2020/1201 per gli olivi
+        monumentali ufficialmente riconosciuti come piante di valore storico e risultati non infetti.
+        L’esperienza pregressa ha dimostrato che gli ulivi pur sottoposti ad adeguati trattamenti fitosanitari
+        contro la popolazione di vettori, si sono infettati nel breve termine costituendo una fonte di inoculo
+        nell’area in cui si applicano misure di eradicazione.
+        Prima delle estirpazioni si effettuano trattamenti chimici contro il vettore nell’area interessata, per
+        evitare la diffusione dell’organismo nocivo specificato.
+        I trattamenti non si effettuano nel periodo novembre – marzo in quanto non necessari.
+        Nell’applicazione delle misure di eradicazione non si procede all’estirpazione di: agrumi, pesco,
+        albicocco, susino, site nei 50 m attorno alla pianta infetta, in quanto specie non suscettibili alla
+        Xylella fastidiosa sottospecie Pauca genotipo ST53.
+        4.4.2 Misure di contenimento
+        In conformità a quanto previsto dall’articolo 13 del Reg. (UE) 2020/1201, l’Osservatorio dispone la
+        rimozione di tutte le piante risultate infette dall’organismo nocivo in base agli esiti dell’attività di
+        sorveglianza. Tale rimozione è effettuata immediatamente dopo l’identificazione ufficiale della
+        presenza dell’organismo nocivo o, se l’organismo nocivo è rilevato al di fuori della stagione di volo
+        del vettore, prima della stagione di volo successiva.
+        Prima delle estirpazioni si effettuano trattamenti chimici contro il vettore nell’area interessata, per
+        evitare la diffusione dell’organismo nocivo specificato.
+        I trattamenti non si effettuano nel periodo novembre – marzo in quanto non necessari.
+        4.4.3 Distruzione delle piante
+        In ottemperanza a quanto previsto dagli articoli 9 e 16 del Reg. (UE) 2020/1201, le piante e le parti di
+        piante rimosse devono essere distrutte in situ o in un luogo vicino designato a tal fine all’interno
+        della zona infetta.
+        La legna priva di rami e foglie, poiché non costituisce un pericolo di diffusione del batterio, ai sensi
+        della Legge n. 44 del 21/05/2019, rimane nella disponibilità del proprietario e può essere
+        movimentata.
+        Nella movimentazione di legna dall’area infetta all’area indenne nel periodo compreso tra il 1 aprile
+        e il 31 ottobre, è obbligatorio per l’acquirente della legna comunicare all’Osservatorio le seguenti
+        informazioni:
+               Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                            79629
+
+
+
+                                                  16
+
+
+
+      zona di origine della legna
+      comune di destinazione della legna
+      quantità
+      targa dell’automezzo.
+Nel periodo compreso tra il 1° aprile e il 31 ottobre, il carico legnoso deve viaggiare coperto con
+teloni al fine di evitare il trasporto passivo di adulti del vettore.
+Nel caso di piante per le quali, a causa della loro particolare allocazione non sia possibile procedere
+all’estirpazione con l’intero apparato radicale, si può limitare la distruzione unicamente ai rami e al
+fogliame previa autorizzazione dell’Osservatorio. L’apparato radicale di tali piante deve essere
+devitalizzato con un adeguato trattamento fitosanitario per evitare l’emissione di germogli.
+4.5 Procedura di notifica alle istituzioni nazionali ed europee
+L’Osservatorio inserisce nel sistema europeo di notifica elettronica le informazioni circa il
+ritrovamento ufficiale di piante infette di Xylella fastidiosa in zona indenne/cuscinetto ai sensi
+dell’art. 29 del D.lgs. 19/2021 e aggiorna periodicamente le notifiche già inserite.
+4.6 Procedura di notifica ai proprietari
+La procedura per l’identificazione dei proprietari delle piante da rimuovere, per la notifica del
+provvedimento ingiuntivo e per l’accesso alle proprietà private prevede le fasi seguenti:
+a. InnovaPuglia S.p.A., a seguito del risultato delle analisi di laboratorio, comunica all’Osservatorio i
+    dati catastali degli appezzamenti oggetto di applicazione di misure di
+    eradicazione/contenimento e le generalità dei relativi proprietari entro 3 giorni lavorativi;
+b. l’Osservatorio emana, entro 7 giorni lavorativi, i provvedimenti ingiuntivi per l’applicazione delle
+    misure di eradicazione/contenimento.
+c. I provvedimenti sono notificati al proprietario attraverso la pubblicazione, per 7 giorni, nell’albo
+    pretorio del Comune di competenza; tale periodo si giustifica considerando l’esigenza di
+    contemperare il pubblico interesse relativo alla trasparenza e alla pubblicità degli atti
+    amministrativi con l’esigenza di dare applicazione immediata alle misure fitosanitarie. Il
+    provvedimento ingiuntivo è notificato con pec ad ARIF e alla Prefettura competente per gli
+    adempimenti conseguenti ed è pubblicato su:
+         Bollettino Ufficiale della Regione Puglia
+         Sito www.emergenzaxylella.it
+         Sezione “Amministrazione trasparente”, sottosezione “Provvedimenti dirigenti
+             amministrativi” del sito www.regione.puglia.it.
+d. il proprietario comunica, durante il tempo di pubblicazione dell’atto e comunque entro massimo
+    3 giorni dal termine del periodo di pubblicazione, se intende estirpare volontariamente le piante
+    oppure se intende avvalersi di ARIF;
+e. nei casi di estirpazione su base volontaria il proprietario deve procedere entro massimo 10 giorni
+    dalla sua comunicazione;
+f. nei casi di estirpazioni eseguite da ARIF, quest’ultima deve procedere entro massimo 10 giorni
+    successivi alla comunicazione del proprietario;
+g. se il proprietario, decorsi 3 giorni dal termine del periodo di pubblicazione, non invia alcuna
+    comunicazione, ARIF procede alla rimozione delle piante entro massimo 10 giorni successivi;
+h. nei casi di rifiuto da parte del proprietario di dare esecuzione alle misure fitosanitarie, l’ARIF
+    provvede alla rimozione forzosa delle piante, informando il Prefetto e le Forze dell’Ordine e
+    addebitando gli oneri di estirpazione al proprietario. L’Osservatorio provvede alla contestazione
+    della violazione amministrativa per mancata esecuzione delle prescrizioni fitosanitarie ai sensi
+    del D.lgs 19/2021.
+79630                  Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                          17
+
+
+
+        Le operazioni di estirpazione volontaria da parte del proprietario sono controllate da Ispettori/agenti
+        dell’Osservatorio.
+         Le operazioni di estirpazione eseguite da ARIF sono controllate da 2 Assistenti fitosanitari ARIF.
+        4.7 Indennizzi estirpazione
+        La Giunta regionale della Regione Puglia, con la deliberazione di Giunta regionale n. 2164 del
+        22/12/2021, ha istituito un regime di aiuto per le imprese che hanno adempiuto alla distruzione
+        delle piante infette da Xylella fastidiosa in seguito ad ingiunzione di abbattimento (SA.100575).
+        4.8 Sorveglianza fitosanitaria ai sensi della legge regionale 29 marzo 2017, n. 4 e s.m.i.
+        Il Consiglio regionale della Regione Puglia, con la legge regionale 29 marzo 2017 n. 4 e s.m.i
+        “Gestione della batteriosi da Xylella fastidiosa nel territorio della Regione Puglia”, ha espresso una
+        forte volontà di attuare le misure fitosanitarie necessarie per contrastare la diffusione di Xylella
+        fastidiosa tutelando l’inestimabile patrimonio naturale costituito dagli olivi monumentali.
+        L’Osservatorio, in coerenza con la citata legge regionale ed in aggiunta alla sorveglianza fitosanitaria
+        programmata in applicazione del Reg. (UE) 2020/1201, sorveglia anche l’area compresa tra 5 e 20
+        km dal confine meridionale della zona infetta ‘Salento’ dove si attuano misure di contenimento, con
+        particolare riferimento alla Piana degli olivi secolari di cui al Piano Paesaggistico Territoriale della
+        Regione Puglia (PPTR) approvato con D.G.R. 16 febbraio 2015, n. 176 e s.m.i.
+        La sorveglianza di tale area è effettuata al completamento della sorveglianza delle aree delimitate e
+        dell’area indenne.
+        La sorveglianza fitosanitaria è svolta sulla superficie con raggio di 50 m attorno alle piante
+        riscontrate positive nella precedente stagione di monitoraggio o su eventuali segnalazioni da parte di
+        soggetti interessati.
+        Questa scelta risponde alla logica di creare una barriera all’avanzamento del batterio e di
+        alleggerirne la pressione nell’area dove si applicano misure di contenimento.
+        Le piante infette sono oggetto di uno specifico provvedimento ingiuntivo di abbattimento ovvero, in
+        alternativa, di adozione di misure fitosanitarie consistenti nella capitozzatura delle branche principali
+        e nell’innesto di cultivar resistenti.
+        I proprietari/conduttori di piante infette che intendano procedere alle operazioni di capitozzatura e
+        di innesto, qualora non sia possibile eseguire tempestivamente tali operazioni e si fosse nel periodo
+        di presenza dello stadio adulto dei vettori (da maggio a novembre), al fine di evitare la diffusione del
+        batterio, devono procedere obbligatoriamente a propria cura e spese ad isolare la pianta infetta con
+        protezioni meccaniche quali incappucciamento degli alberi. La protezione è accompagnata da idonea
+        potatura e dalle operazioni necessarie per la lotta al vettore: sfalcio di tutte le essenze erbacee,
+        lavorazione del terreno dopo lo sfalcio, trattamenti con prodotti fitosanitari autorizzati.
+        L’Osservatorio controlla la corretta esecuzione delle misure fitosanitarie.
+        4.9 Monitoraggio dei vettori
+        L’Osservatorio, con il supporto delle istituzioni scientifiche regionali, monitora in siti “sentinella”
+        distribuiti nell’intero territorio regionale la presenza, la densità di popolazione e l’evoluzione degli
+        stadi di sviluppo degli insetti vettori della Xylella fastidiosa con particolare attenzione al Philaenus
+        spumarius, al fine di:
+              impostare una strategia di controllo dei vettori;
+              valutare l’efficacia delle misure fitosanitarie adottate;
+              ridurre il rischio e la probabilità di diffusione dell’organismo nocivo.
+        I siti saranno selezionati, sia nelle aree delimitate che nelle aree indenni, in areali omogenei per
+        caratteristiche altimetriche, climatiche ed ecologiche rappresentativi del territorio regionale
+        privilegiando:
+              siti incolti;
+               Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                             79631
+
+
+
+                                                   18
+
+
+
+       appezzamenti in regime di agricoltura biologica;
+       appezzamenti in regime di integrato;
+       siti limitrofi alle zone infette in cui si applicano misure di eradicazione;
+       siti limitrofi alle strade di grande percorrenza e ferrovie che collegano le zone infette al
+        rimanente territorio regionale;
+      siti limitrofi ai vivai.
+      siti limitrofi alle regioni confinanti.
+Il monitoraggio ha inizio nella metà di marzo e prosegue sino a ottobre di ciascun anno.
+L’Osservatorio e l’ARIF diffondono, attraverso il sito istituzionale www.emergenzaxylella.it, le
+informazioni dettagliate sul periodo di esecuzione delle misure fitosanitarie obbligatorie nelle aree
+omogenee per caratteristiche altimetriche, climatiche ed ecologiche.
+La metodologia per il campionamento dei siti di monitoraggio e le modalità di intervento sono
+elaborate dall’Osservatorio in collaborazione con le istituzioni scientifiche.
+L’Osservatorio inoltre, ad integrazione del monitoraggio ufficiale nonché per coinvolgere
+attivamente la popolazione nelle attività di gestione dell’emergenza fitosanitaria, partecipa con il
+soggetto a cui viene affidato il servizio di monitoraggio dei vettori, all’organizzazione e alla gestione
+del monitoraggio civico degli stadi giovanili di P. spumarius.
+Questa metodologia di monitoraggio viene attuata con tecnici e volontari degli Istituti tecnici agrari,
+delle organizzazioni professionali agricole, delle organizzazioni dei produttori del comparto olivicolo,
+mediante l’utilizzo di una specifica applicazione messa a punto da Innovapuglia.
+4.9.1 Strategia di controllo dei vettori
+Una strategia di controllo efficace richiede specifici investimenti in ricerca e trasferimento delle
+innovazioni che consentano di evitare il contatto tra l’insetto vettore e la pianta onde evitare sia
+l’acquisizione del batterio che la sua trasmissione.
+Le attuali conoscenze sui vettori, sono principalmente incentrate sull’agrosistema oliveto, mentre
+sono ancora poche le informazioni relative alle potenziali associazioni che vettori e batterio
+potrebbero instaurare in altri patosistemi oltre a quelli strettamente olivicoli. Inoltre sono ancora
+parziali gli studi per individuare strumenti alternativi di controllo dei vettori, coerenti con i principi
+dell’agricoltura sostenibile e della salvaguardia della biodiversità.
+L’attuale strategia di controllo rivolta ai vettori prevede azioni mirate sia al contenimento delle
+forme giovanili che degli individui adulti, mediante l’adozione di interventi meccanici e interventi
+chimici.
+Le misure fitosanitarie di seguito esposte riguardano P. spumarius, il vettore più efficace nella
+trasmissione del batterio in Puglia.
+4.9.2 Misure fitosanitarie contro le forme giovanili
+L’adozione annuale nel territorio regionale di pratiche agronomiche per il controllo meccanico degli
+stadi giovanili dei vettori resta un punto fermo per limitare la diffusione dell’organismo nocivo. Le
+lavorazioni superficiali del terreno (arature, fresature, erpicature e trinciature) nel periodo
+primaverile, eliminando le piante erbacee su cui le forme giovanili completano il ciclo vitale,
+contribuiscono a ridurre la popolazione del vettore.
+Nelle aree in cui è difficile o impossibile l'accesso con mezzi meccanici, ad esempio declivi, bordi
+strada/banchine/rotatorie, si può intervenire con mezzi fisici (pirodiserbo o vapore) e, solo in casi
+d’impossibilità d’intervento con i mezzi citati, con appropriati trattamenti diserbanti privilegiando
+prodotti a basso impatto.
+Occorre intervenire prima che l’insetto raggiunga il picco del IV stadio giovanile. Nel periodo
+primaverile, per aree omogenee, le lavorazioni superficiali dovranno essere eseguite con la seguente
+tempistica:
+     zone fino a 200 m di altitudine - mese di marzo;
+     zone da 200 a 500 m di altitudine - mese di aprile;
+     zone oltre 500 m di altitudine - mese di maggio.
+79632                   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                           19
+
+
+
+        Maggiori informazioni per l’esecuzione delle lavorazioni meccaniche, alla luce all’andamento
+        climatico dell’annata, saranno fornite attraverso il sito istituzionale www.emergenzaxylella.it.
+        È obbligatorio eseguire le lavorazioni superficiali dei terreni nell’intero agro comunale dei seguenti
+        comuni:
+            1. Alberobello                        16. Grottaglie                        31. Palagianello
+            2. Carosino                           17. Laterza                           32. Palagiano
+            3. Carovigno                          18. Leporano                          33. Polignano
+            4. Casamassima                        19. Locorotondo                       34. Pulsano
+            5. Castellana Grotte                  20. Martina Franca                    35. Putignano
+            6. Castellaneta                       21. Massafra                          36. Roccaforzata
+            7. Ceglie Messapica                   22. Mola di Bari                      37. Rutigliano
+            8. Cellamare                          23. Monopoli                          38. Sammichele di Bari
+            9. Cisternino                         24. Monteiasi                         39. San Giorgio Ionico
+            10. Conversano                        25. Montemesola                       40. Statte
+            11. Crispiano                         26. Monteparano                       41. Taranto
+            12. Faggiano                          27. Mottola                           42. Turi
+            13. Fasano                            28. Noci                              43. Villa Castelli
+            14. Ginosa                            29. Noicattaro
+            15. Gioia del Colle                   30. Ostuni
+
+        Le lavorazioni sono fortemente consigliate nel restante territorio regionale. Le lavorazioni dei terreni
+        devono essere eseguite da:
+          proprietari/conduttori di terreni agricoli;
+          proprietari/gestori (soggetti pubblici e privati) delle superfici agricole non coltivate, aree a verde
+              pubblico, bordi delle strade, canali, superfici demaniali.
+        La presente misura fitosanitaria non va applicata nelle seguenti aree:
+              aree protette;
+              macchia mediterranea;
+              boschi;
+              pinete;
+        Per quanto attiene i terreni con colture erbacee in atto quali: cereali, proteaginose, colture orticole
+        da pieno campo e industriali, colture foraggere, colture floricole e terreni adibiti a pascolo, se sono
+        presenti piante di olivo, le lavorazioni del terreno devono essere effettuate nell’area sottostante la
+        pianta dell’olivo.
+        L’Osservatorio promuove l’attuazione della misura fitosanitaria descritta con specifici seminari e
+        riunioni sia con i soggetti pubblici che con i soggetti privati coinvolti e le loro rappresentanze.
+        Il controllo del territorio, finalizzato alla verifica della corretta esecuzione delle misure fitosanitarie
+        viene realizzato dall’Osservatorio avvalendosi dei Carabinieri Forestali, anche con l’ausilio di rilievi
+        aerofotogrammetrici effettuati nei periodi di esecuzione delle misure fitosanitarie obbligatorie.
+        4.9.3 Misure fitosanitarie contro gli adulti
+        Per limitare quanto più possibile la diffusione di X. fastidiosa attraverso il vettore, le azioni di
+        contrasto devono essere rivolte oltre che agli stadi giovanili anche nei confronti degli adulti.
+        Il monitoraggio degli individui adulti ha lo scopo di identificare il periodo in cui essi si muovono dalla
+        vegetazione erbacea verso le chiome delle piante dove possono potenzialmente acquisire il batterio
+        e contribuire alla sua successiva diffusione.
+        Per questa ragione è opportuno che i trattamenti per il controllo degli adulti siano effettuati prima
+        che i vettori possano aver acquisito il batterio, al fine di ridurre quanto più possibile la popolazione
+        di insetti che diviene potenzialmente infettiva.
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                               79633
+
+
+
+                                                    20
+
+
+
+Il numero e il periodo dell’esecuzione dell’intervento dipenderà dall’andamento della popolazione
+adulta dell’insetto che a sua volta è influenzato dall’andamento climatico e dall’altimetria della zona.
+Le indicazioni del periodo di esecuzione del/dei trattamenti obbligatori per aree omogenee saranno
+emanate dall’Osservatorio attraverso il sito istituzionale www.emergenzaxylella.it e da ARIF.
+I trattamenti fitosanitari devono essere effettuati con gli insetticidi autorizzati sulla specie e per il
+controllo di Philaenus spumarius L., avendo cura di rispettare quanto prescritto in etichetta.
+Ad oggi i principi attivi autorizzati sono:
+
+ COLTURE                      PRODOTTI
+ Olivo                        Acetamiprid, spinetoram e deltametrina, flupyradifurone
+ Mandorlo                     Deltametrina
+ Vivai                        Deltametrina
+
+In caso di ulteriori sostanze attive autorizzate in via eccezionale anche per le aziende in regime di
+agricoltura biologica, ne sarà data immediata informazione sul sito www.emergenzaxylella.it, alle
+associazioni di categoria e organizzazioni professionali, affinché ne diano ampia diffusione.
+I predetti trattamenti fitosanitari sono obbligatori nell’intero agro comunale dei seguenti comuni:
+
+     1. Alberobello                                            11. Mola di Bari
+     2. Carovigno                                              12. Monopoli
+     3. Castellana Grotte                                      13. Mottola
+     4. Cisternino                                             14. Noci
+     5. Conversano                                             15. Ostuni
+     6. Crispiano                                              16. Polignano
+     7. Fasano                                                 17. Putignano
+     8. Locorotondo                                            18. Statte
+     9. Martina Franca                                         19. Taranto
+     10. Massafra
+
+L’intervento è fortemente consigliato nel restante territorio regionale. I trattamenti non vanno
+eseguiti:
+     su piante di olivo completamente secche;
+     in aree verdi (parchi, giardini);
+     in aree urbane;
+     nella macchia mediterranea;
+     in boschi e pinete.
+Si ribadisce che i trattamenti insetticidi contro i vettori devono essere eseguiti anche sulle piante
+soggette ad estirpazione, di cui agli articoli 7 -13 del Reg. (UE) 2020/1201, ad eccezione del periodo
+novembre – marzo in quanto non necessari.
+Il controllo finalizzato alla verifica della corretta esecuzione delle misure fitosanitarie contro gli adulti
+è realizzato dall’Osservatorio avvalendosi dei Carabinieri Forestali ed è rivolto in particolare ai
+proprietari di superfici olivicole.
+È consigliato, inoltre, intervenire con la spollonatura nel periodo estivo per eliminare parti delle
+piante particolarmente attrattive per i vettori ed eseguire, con cadenza almeno biennale, la potatura
+delle piante arboree ospiti al fine di ridurre la vegetazione appetibile per il vettore oltre che per
+creare un microclima sfavorevole al suo sviluppo.
+79634                 Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                         21
+
+
+
+
+                                          Piano di controllo del vettore
+        Periodo d’intervento         Azione              Prescrizione                  Territorio
+        Annuale                 Potatura           - Consigliata           Intero territorio regionale
+                                spollonatura
+                                                                           Nell’intero agro comunale dei
+           zone fino a 200 m
+                                                                           seguenti comuni:
+            di altitudine:
+            mese di marzo                                                   Alberobello
+                                                                            Carosino
+           zone da 200 a 500
+                                                                            Carovigno
+            m di altitudine:
+            mese di aprile                                                  Casamassima
+                                                                            Castellana Grotte
+           zone oltre 500 m
+                                                                            Castellaneta
+            di altitudine:
+            mese di maggio                                                  Ceglie Messapica
+                                                                            Cellamare
+                                                                            Cisternino
+                                                                            Conversano
+                                                                            Crispiano
+                                                                            Faggiano
+                                                                            Fasano
+                                                                            Ginosa
+                                                                            Gioia del Colle
+                                                                            Grottaglie
+                                                                            Laterza
+                                N° 1 lavorazione                            Leporano
+                                superficiale del         Obbligatoria       Locorotondo
+                                    terreno
+                                                                            Martina Franca
+                                                                            Massafra
+                                                                            Mola di Bari
+                                                                            Monopoli
+                                                                            Monteiasi
+                                                                            Montemesola
+                                                                            Monteparano
+                                                                            Mottola
+                                                                            Noci
+                                                                            Noicattaro
+                                                                            Ostuni
+                                                                            Palagianello
+                                                                            Palagiano
+                                                                            Polignano
+                                                                            Pulsano
+                                                                            Putignano
+                                                                            Roccaforzata
+                                                                            Rutigliano
+                                                                            Sammichele di Bari
+               Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                         79635
+
+
+
+                                                   22
+
+
+
+                                                                     San Giorgio Ionico
+                                                                     Statte
+                                                                     Taranto
+                                                                     Turi
+                                                                     Villa Castelli
+                                                                    Nell’intero agro comunale dei
+                                                                    seguenti comuni:
+                                                                    Monopoli
+                                                                    Polignano
+                                                                    Alberobello
+                                                                    Castellana Grotte
+                                                                    Mola di Bari
+                                                                    Conversano
+Indicazioni precise sul
+                                                                    Putignano
+momento ottimale
+                           N° trattamenti                           Fasano
+per l’esecuzione del
+                            fitosanitari da        Obbligatoria     Locorotondo
+trattamento saranno
+                          definire in base ai                       Martina Franca
+fornite attraverso il
+                              risultati del                         Crispiano
+sito istituzionale
+                            monitoraggio                            Statte
+www.emergenzaxylell
+                                                                    Taranto
+a.it
+                                                                    Massafra
+                                                                    Mottola
+                                                                    Noci
+                                                                    Cisternino
+                                                                    Ostuni
+                                                                    Carovigno
+                                                Fortemente          Area indenne
+                                                consigliata
+                                                                    Area infetta “Salento”
+
+Gli agri comunali dove sono obbligatorie le misure fitosanitarie di lotta al vettore quali lavorazione
+del terreno e trattamenti fitosanitari sono riportati nelle figure 7 e 8.
+Figura 7 - Agri comunali in cui sono obbligatorie le lavorazioni dei terreni
+79636                   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                            23
+
+
+
+
+                       Figura 8 - Agri comunali in cui sono obbligatorie i trattamenti fitosanitari
+
+
+
+
+        Considerato che il trasferimento degli insetti vettori da zone infette ad altri contesti può avvenire
+        anche in modo passivo, attraverso indumenti o parti del corpo delle persone e con gli autoveicoli ed
+        altri mezzi di trasporto, è raccomandabile:
+             a. assicurarsi di non avere sugli abiti e sulle scarpe insetti vettori prima di risalire sui mezzi di
+                trasporto;
+             b. evitare il parcheggio e la sosta di autoveicoli ed altri mezzi di trasporto in campi o aree
+                ospitanti specie ospiti del batterio e/o dei vettori;
+             c. prediligere, per la realizzazione di giardini ed aree destinate a parcheggio ed altre aree
+                frequentate da veicoli ed altri mezzi di trasporto nelle aree indenni e nelle zone cuscinetto,
+                specie vegetali non specificate a Xylella fastidiosa sub specie pauca;
+             d. provvedere alla copertura/chiusura con teloni degli automezzi adibiti al trasporto di prodotti
+                agricoli oppure della legna proveniente dal taglio di piante infette, durante la
+                movimentazione in zona infetta e da zona infetta ad area indenne.
+        4.10 Divieto di impianto specie specificate
+        Il divieto di impianto di specie specificate di cui all’articolo 18 del Reg. UE Reg. (UE) 2020/1201
+        riguarda i nuovi impianti produttivi. Pertanto, tale divieto non si applica nel caso di innesti di olivi
+        monumentali ufficialmente riconosciuti con varietà resistenti/tolleranti nelle aree delimitate in
+        quanto, con tale pratica, il rischio fitosanitario si riduce e si contribuisce alla salvaguardia degli olivi
+        monumentali.
+        Il divieto di impianto di che trattasi non si applica nel caso di spostamento di specie specificate,
+        nell’ambito della medesima area fitosanitaria, per motivi di pubblica utilità e/o per interventi di
+        miglioramento fondiario in quanto il rischio fitosanitario resta inalterato.
+        Ai sensi della lettera c) dell’art. 18 del Reg. UE Reg. (UE) 2020/1201, nella zona infetta dell’area
+        delimitata “Valle D’Itria” in cui si applicano misure di eradicazione, è autorizzato l’impianto delle
+        seguenti specie specificate a Xylella fastidiosa sub specie pauca; agrumi, pesco, albicocco, susino, in
+        quanto risultate immuni al genotipo ST53. Resta il divieto di realizzare impianti produttivi di specie
+        risultate tolleranti e delle restanti specie specificate.
+        Nella zona infetta dell’area delimitata ‘Salento, ad eccezione della zona dove si applicano misure di
+        contenimento, è autorizzato l’impianto di piante specificate risultate immuni, resistenti, tolleranti o
+        a bassa suscettibilità alla Xylella fastidiosa sottospecie pauca ST53. In particolare:
+              olivo: varietà Leccino e FS17 in quanto risultate resistenti/tolleranti a Xylella fastidiosa
+                 sottospecie pauca genotipo ST53;
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                              79637
+
+
+
+                                                    24
+
+
+
+       agrumi in quanto risultati immuni a Xylella fastidiosa sottospecie pauca genotipo ST53;
+       pesco, susino e albicocco in quanto risultati immuni a Xylella fastidiosa sottospecie pauca
+        genotipo ST53;
+     mandorlo e ciliegio: in quanto risultati a bassa suscettibilità a Xylella fastidiosa sottospecie
+        pauca genotipo ST53.
+L’Osservatorio, al fine di contrastare la diffusione del batterio, individua le vie di comunicazione a
+maggior rischio fitosanitario e dispone l’estirpazione delle specie specificate a Xylella fastidiosa sub
+specie pauca ST53 impiantate nelle stazioni di servizio ivi presenti e il divieto di impianto delle
+suddette specie.
+4.11 Controlli ufficiali
+L’Osservatorio assicura l’esecuzione dei controlli ufficiali nei vivai, nei punti di ingresso, sulla
+movimentazione delle specie specificate, sull’applicazione delle misure fitosanitarie obbligatorie di
+controllo dei vettori e sulle altre disposizioni emanate.
+4.11.1 Controlli ufficiali nei vivai
+L'Osservatorio effettua, ai sensi dell’articolo 92 del Reg. (UE) 2016/2031, ispezioni presso gli
+operatori professionali autorizzati almeno una volta l'anno e, se del caso, campionamenti e prove
+per verificarne l'osservanza dell'articolo 83, paragrafi 1, 2, 4 e 5 (Contenuto e formato del
+passaporto), dell'articolo 87 (Esami per i passaporti delle piante), dell'articolo 88 (Apposizione dei
+passaporti delle piante), dell'articolo 89, paragrafo 1 (Autorizzazione degli operatori professionali a
+rilasciare passaporti delle piante), dell'articolo 90 (Obblighi degli operatori autorizzati) o dell'articolo
+93, paragrafi 1, 2, 3 (Sostituzione di un passaporto delle piante). Il controllo specifico per Xylella
+fastidiosa, sia nell’area indenne che nelle aree delimitate, rientra nell’attività di controllo ordinario
+dell’Osservatorio.
+Nell’area indenne il controllo è finalizzato alla verifica del rispetto delle condizioni di cui all’articolo
+25 del Regolamento (UE) 2020/1201 per lo spostamento delle piante specificate all’interno
+dell’Unione. Per le piante da impianto, escluse le sementi, di Coffea, Lavandula dentata L., Nerium
+oleander L., Olea europaea L., Polygala myrtifolia L. e Prunus dulcis (Mill.) D.A. Webb è previsto un
+controllo rafforzato prima dello spostamento all’interno dell’Unione in quanto considerate
+maggiormente sensibili alle diverse sub-specie europee di Xylella fastidiosa. Le procedure operative
+utilizzate sono definite nella nota tecnica elaborata dal Ministero per le politiche agricole e forestali
+e approvate nella seduta del Comitato fitosanitario nazionale del 22 settembre 2020 ‘Procedura per
+le ispezioni ufficiali, campionamento e analisi nei vivai ai sensi dell’articolo 25 del Regolamento (UE)
+2020/1201 relativo alle misure per Xylella fastidiosa’.
+Nelle zone infette delle aree delimitate il controllo è finalizzato alla verifica dell’eventuale presenza
+di specie specificate e, se del caso, l’Osservatorio ne dispone il blocco della movimentazione, ad
+eccezione delle specie autorizzate con specifico provvedimento dirigenziale. Il blocco della
+movimentazione delle specie specificate viene disposto anche in caso di rilevazione di tali specie nei
+centri per il giardinaggio e/o nei centri di vendita ubicati nelle zone infette.
+L’Osservatorio autorizza i siti di produzione per lo spostamento di piante specificate coltivate in area
+delimitata al di fuori della medesima area ai sensi dell’articolo 24 del Reg. (UE) 2020/1201
+(Determina dirigenziale n. 21/20219) e cioè quando sono verificate le seguenti condizioni:
+     a. è registrato conformemente all’articolo 65 del Reg. (UE) 2016/2031;
+     b. è stato autorizzato dall’autorità competente come sito dotato di protezione fisica contro
+         l’organismo nocivo specificato e i suoi vettori;
+     c. è stato sottoposto ogni anno ad almeno due ispezioni da parte dell’autorità competente, nel
+         periodo più adatto.
+79638                   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                              25
+
+
+
+        4.11.2 Controlli ufficiali nel posto di controllo frontaliero (Porto di Bari) e porti e aeroporti
+        L’Osservatorio assicura lo svolgimento dei controlli nel posto di controllo frontaliero e in altri porti e
+        aeroporti. I controlli sono documentali, di identità e fisici di cui all’articolo 54 del Regolamento (UE)
+        2017/625. L’attività viene svolta dalle Autorità portuale e aeroportuale previa formazione del
+        personale a cura dell’Osservatorio.
+        4.11.3 Movimentazione delle specie specificate
+        L’Osservatorio assicura lo svolgimento di controlli documentali sulla movimentazione di specie
+        specificate in tutto il territorio regionale con maggiore concentrazione negli spostamenti in uscita
+        dalle aree delimitate avvalendosi dei Carabinieri Forestali. Tali controlli sono effettuati lungo le
+        strade, in prossimità di accessi autostradali, presso i centri di produzione e commercializzazione,
+        mercati, fiere.
+        La legna priva di rami e foglie, poiché non costituisce un pericolo di diffusione del batterio, ai sensi
+        della Legge n. 44 del 21/05/2019, rimane nella disponibilità del proprietario e può essere
+        movimentata. Nella movimentazione di legna dall’area infetta all’area indenne nel periodo
+        compreso tra il 1° aprile e il 31 ottobre, è obbligatorio per l’acquirente della legna comunicare
+        all’Osservatorio le seguenti informazioni:
+              zona di origine della legna
+              comune di destinazione
+              quantità
+              targa dell’automezzo.
+        Nel periodo compreso tra il 1° aprile e il 31 ottobre, il carico legnoso deve viaggiare coperto con
+        teloni al fine di evitare il trasporto passivo di adulti del vettore.
+        Le comunicazioni devono essere inviate al dott. Francesco Palmisano dell’Osservatorio al seguente
+        indirizzo mail: fra.palmisano@regione.puglia.it
+        4.11.4 Controlli ufficiali sull’applicazione delle misure fitosanitarie obbligatorie di controllo alla fase
+        giovanile dei vettori
+        L’Osservatorio assicura lo svolgimento dei controlli diretti a verificare il rispetto dell’applicazione
+        delle misure di controllo degli stadi giovanili dei vettori avvalendosi dei Carabinieri Forestali. Il
+        controllo del territorio può essere realizzato anche mediante un rilievo aerofotogrammetrico.
+        4.11.5 Applicazione delle misure fitosanitarie obbligatorie di controllo nella fase adulta dei vettori
+        L’Osservatorio assicura lo svolgimento dei controlli diretti a verificare il rispetto dell’applicazione
+        delle misure di controllo degli stadi adulti dei vettori avvalendosi dei Carabinieri Forestali.
+        4.12 Controlli e sanzioni amministrative
+        L’applicazione delle misure fitosanitarie obbligatorie è oggetto di uno specifico piano di controlli e la
+        mancata osservanza è oggetto ai sensi del comma 15 dell’art. 55 del D. Lgs 19/2021 di sanzione
+        amministrativa del pagamento di una somma da € 1.000,00 a € 6.000,00. Le procedure per la
+        realizzazione dei controlli svolti e per l’applicazione delle sanzioni amministrative delegati ai
+        Carabinieri Forestali sono definiti da uno specifico accordo, approvato dalla Giunta regionale della
+        Regione Puglia, tra l’Osservatorio e l’Arma dei Carabinieri.
+        4.13 Comunicazione
+        L’Osservatorio fornisce informazioni agli Operatori professionali e a tutta la cittadinanza sulla
+        pericolosità di Xylella fastidiosa, il rischio della sua ulteriore diffusione, gli obblighi e le prescrizioni di
+        legge e sugli aspetti tecnici per il contrastarne la diffusione.
+        Per promuovere l’adozione di comportamenti consapevoli e delle misure di autoprotezione da parte
+        dei cittadini, si prevede la realizzazione, con costante e stretta interlocuzione/collaborazione con le
+        amministrazioni locali, altri enti/associazioni e organizzazioni di rappresentanza del mondo agricolo
+        per l'attuazione delle misure obbligatorie di lotta al vettore ed i relativi controlli/sanzioni nonché per
+               Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                          79639
+
+
+
+                                                 26
+
+
+
+coordinare iniziative di divulgazione/informazione sul presente Piano d'Azione delle seguenti
+attività:
+      campagne di informazione specifiche relative alle emergenze fitosanitarie in atto;
+      predisposizione di manifesti e opuscoli informativi;
+      campagne pubblicitarie su televisione, radio e stampa;
+      iniziative di comunicazione rivolte alle scuole;
+      incontri sui territori interessati.
+L’attività informativa è assicurata anche attraverso il Sistema Informativo Territoriale della Regione
+Puglia (SIT) su cui è stato realizzato il sito web dedicato www.emergenzaxylella.it nel quale vengono
+pubblicate ed aggiornate le seguenti informazioni e servizi:
+      Normativa comunitaria, nazionale e regionale;
+      Documentazione scientifica;
+      Atti amministrativi prodotti dall’Osservatorio fitosanitario regionale;
+      Applicazione WebGIS, per visualizzare i punti rilevati nel contesto di un'azione di
+          monitoraggio integrato con le zone delimitate (tutti i punti sono strutturati in base alla
+          specie delle piante, alle date e ai risultati di laboratorio);
+      Consultazione e visualizzazione dei risultati del monitoraggio e della delimitazione delle
+          aree;
+      Risultati del monitoraggio dei vettori responsabili della trasmissione del batterio;
+      Servizi WMS, per visualizzare i dati cartografici in un client desktop diverso dal client
+          WebGIS, per integrare i dati GIS personali;
+      Servizio di ricerca mirata di dati catastali che può essere utilizzato per determinare la zona
+          delimitata e per capire ove cade la pianta infetta o monitorata;
+      Comunicazioni istituzionali;
+      link utili.
+Sempre sul sito www.emergenzaxylella.it è disponibile il cruscotto utile per monitorare l’evoluzione
+delle attività e per la comunicazione istituzionale agli organismi preposti. Il cruscotto si compone di
+tabelle riassuntive che descrivono:
+    l’evoluzione mensile dei procedimenti di campionamento in campo;
+    per ciascun mese, l’indicazione dei procedimenti chiusi o per esito negativo di analisi o per
+       abbattimento delle piante rinvenute positive. In questo modo si può avere un riscontro
+       immediato della tempestività degli abbattimenti;
+    il dato totale dell’attività al fine di verificare l’avanzamento generale delle attività e, in
+       particolare, il progressivo avvicinamento ai target fissati dal Piano di sorveglianza.
+Le tabelle sono riprodotte per ciascuna area sottoposta a sorveglianza.
+Ulteriore livello informativo viene offerto dalla seguente tabella che riprodurrà i tempi medi per
+ciascun processo:
+                                                                                 Durata
+               TEMPISTICA DEL PROCESSO
+                                                                                 (giorni)
+               Tempo medio da raccolta a esito analisi
+               Tempo medio da analisi alla prescrizione di abbattimento
+               Tempo medio dalla prescrizione all’abbattimento
+4.14 Ricerca e collaudo delle innovazioni
+4.14.1 Piano straordinario per la rigenerazione olivicola della Puglia
+L’esperienza maturata in Puglia dal 2013 ad oggi ha evidenziato uno specifico fabbisogno di ricerca e
+di servizi avanzati indispensabili per affrontare, in modo consapevole e sulla base delle evidenze
+scientifiche, l’emergenza fitosanitaria causata da Xylella fastidiosa.
+79640                  Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                           27
+
+
+
+        La Regione Puglia e l’Unione Europea investono diversi milioni di euro all’anno per l’attività di
+        sorveglianza. Riuscire a comprendere come migliorare la qualità della sorveglianza assume
+        certamente una rilevanza strategica per contrastare la diffusione di Xf. Per quanto concerne il
+        controllo dei vettori, occorre migliorare le conoscenze dei meccanismi di interazione tra i vettori, il
+        paesaggio e le piante in modo da acquisire quelle informazioni indispensabili per valutare il rischio
+        fitosanitario nel territorio e per delineare le aree a maggiore rischio. Così com’è cruciale lo sviluppo
+        di modelli per comprendere, nel lungo periodo, quale possa essere l’incidenza dell’adozione della
+        varietà resistenti sulla trasmissione del batterio e per approfondire il meccanismo di trasmissione del
+        batterio su altre piante ospiti in ambiente naturale. Appare prioritario caratterizzare gli stimoli che
+        regolano l’accettazione dell’ospite e la trasmissione di Xf prima di proporre semiochimici e trappole.
+        In questo quadro l’uso delle vibrazioni può essere una risposta interessante e certamente da
+        approfondire. Come pure il tema della dispersione del vettore. E’ necessario comprendere meglio il
+        meccanismo della diffusione attiva e passiva di Philaenus spumarius ed altri xilemomizi candidati
+        vettori.
+        Considerando infine le peculiarità delle ricerche su Xf, con particolare riferimento alle restrizioni che
+        discendono dalla normativa vigente nello sviluppare esperimenti su piante, in campo e con insetti
+        vettori è certamente utile pensare alla possibilità di istituire un network nazionale, ossia un polo del
+        quale facciano parte istituzioni con almeno una base operativa nelle aree delimitate e investire una
+        parte delle risorse economiche disponibili sulle infrastrutture di ricerca (per esempio stazioni di
+        quarantena).
+        Tenendo conto del fabbisogno di ricerca che aiuterebbe i servizi fitosanitari a gestire l’emergenza
+        fitosanitaria con maggiore consapevolezza, migliorando l’efficacia dei piani d’azione e la resilienza
+        dei territori colpiti, è stato pubblicato il decreto direttoriale n. 419161 del 13/09/2022, con il quale è
+        definita la procedura di selezione per la realizzazione di progetti di ricerca pubblica finalizzati a
+        limitare e/o a ridurre la diffusione della Xylella fastidiosa, i temi delle ricerca sono:
+             1. Facility nazionale per lo Screening Varietale e azioni di miglioramento genetico per la
+                 selezione di una nuova generazione di piante di interesse agrario resistenti\tolleranti a
+                 Xylella fastidiosa
+             2. Indagini e prove per individuare metodi di controllo di Xylella fastidiosa
+             3. Indagini e prove di controllo degli insetti vettori
+             4. Ottimizzazione delle tecniche di diagnosi della presenza di Xylella fastidiosa su matrici
+                 vegetali e su insetti vettori: controllo e diagnostica
+             5. Modelli di gestione agronomica del materiale resistente
+        4.14.2 Impiego sperimentale di cani nel controllo di vivai e punti di entrata.
+        Al fine di valutare l’affidabilità di nuovi strumenti atti a migliorare l’efficienza dei metodi di
+        sorveglianza, nel corso del 2023-2024 si continuerà ad impiegare in via sperimentale, senza costi per
+        l’Amministrazione, cani addestrati per l’identificazione di piante infette da Xylella in operazioni di
+        controllo in vivai e ai punti d’ingresso. L’attività si avvale di istruttori e di cani dell’ENCI (Ente
+        Nazionale di Cinofilia Italiana) col supporto scientifico dei ricercatori dell'IPSP del CNR e con il
+        supporto logistico ed organizzativo di Unaprol e di Coldiretti che continuano a collaborare con ENCI
+        per le attività di addestramento dei cani.
+        I controlli saranno effettuati nei vivai/garden di piante ornamentali e/o officinali di specie non
+        specificate siti in zona infetta e vivai/garden di piante appartenenti a specie specificate siti in area
+        indenne, e nel porto di Bari su lotti di piante importate da paesi terzi.
+        4.14.3 Valutazione/validazione dell’utilizzo di immagini aeree per l’identificazione precoce di focolai
+        di Xylella (Early remote sensing).
+        Molteplici evidenze scientifiche indicano la possibilità di identificare, attraverso la elaborazione di
+        immagini tele rilevate da aereo acquisite con sensori iperspettrali e termici, piante infette prima
+        ancora della manifestazione dei sintomi. Questa tecnologia, se opportunamente validata, potrebbe
+        essere adottata per migliorare notevolmente l’efficienza dei programmi di sorveglianza dei territori
+        indenni da Xylella.
+                Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022                                79641
+
+
+
+                                                     28
+
+
+
+Attualmente è in corso di svolgimento il progetto di ricerca Redox (Remote Early Detection of
+Xylella), finanziato dal Ministero dello Sviluppo Economico e coordinato dal Distretto tecnologico
+aerospaziale (DTA), che ha l’obiettivo di mettere a punto metodologie operative per la
+identificazione precoce di focolai di Xylella attraverso rilievi aerei e droni con sensori iperspettrali e
+termici.
+Nell’ambito del progetto Redox, nel biennio 2023 e 2024, sono pianificati rilievi aerei da realizzare
+sul territorio della Regione Puglia finalizzati ad ottimizzare la metodologia e validare i risultati.
+L’Osservatorio ha interesse a valutare i risultati di tale tecnologia per un suo potenziale utilizzo a
+supporto del programma di sorveglianza.
+Ciò premesso, l’Osservatorio e il Consorzio del progetto Redox hanno concordato di identificare in
+modo congiunto la localizzazione delle aree su cui saranno effettuati i rilievi aerei del progetto Redox
+all’interno delle aree di contenimento e/o cuscinetto e/o ex contenimento, oggetto del programma
+di monitoraggio previsto da questo piano; i risultati dei rilievi saranno tempestivamente comunicati
+all'Osservatorio secondo le modalità concordate con il consorzio del progetto, mettendo in evidenza
+eventuali siti sospetti identificati attraverso l’elaborazione delle immagini.
+L’Osservatorio effettuerà su questi siti sospetti, con priorità, le operazioni di ispezione e
+campionamento.
+5 Governance
+L’Osservatorio della Regione Puglia è l’Autorità competente ai sensi dell’art. 6 del Decreto legislativo
+2 febbraio 2021, n. 19 in materia di controlli ufficiali e delle altre attività ufficiali definite dal
+Regolamento (UE) 2017/625 del Parlamento Europeo e del Consiglio del 15 marzo 2017. La legge
+regionale 25 febbraio 2010, n. 3 e s.m.i. assegna all’Agenzia per le attività irrigue e forestali (ARIF),
+ente strumentale della Regione Puglia, una funzione di supporto all’Osservatorio nell’attuazione
+delle misure di monitoraggio, prevenzione, estirpazione e comunicazione finalizzate alla gestione
+dell’emergenza.
+Il Reg. (UE) 2017/625 classifica come ‘Altre attività ufficiali’, in capo all’Autorità competente, le
+indagini per accertare la presenza di organismi nocivi per le piante, l’applicazione delle misure
+fitosanitarie per prevenire la diffusione degli organismi nocivi e quelle necessarie per la loro
+eradicazione o contenimento. Il richiamato regolamento prevede, inoltre, le condizioni per la delega
+dei compiti riguardanti le altre attività ufficiali (articoli 29 e 31), individua gli obblighi degli organismi
+delegati e delle persone fisiche (articolo 32) e gli obblighi delle autorità competenti deleganti
+(articolo 33).
+In questo quadro giuridico l’Osservatorio, con specifica convenzione, provvede a dettagliare i
+contenuti della delega nel rispetto delle seguenti condizioni:
+    -   descrizione dettagliata delle attività delegate;
+    -   obiettivi da raggiungere;
+    -   indicatori per la valutazione del raggiungimento degli obiettivi individuati;
+    -   procedure attraverso le quali ARIF svolge i compiti delegati;
+    -   tempistica di realizzazione delle attività delegate;
+    -   modalità di individuazione del personale impiegato per l’esecuzione delle attività delegate;
+    -   modalità di coordinamento e comunicazione tra autorità delegante ed autorità delegata;
+    -   budget previsto per l’esecuzione;
+    -   modalità di rendicontazione economica delle attività delegate;
+    -   obblighi di ARIF;
+    -   obblighi dell’Osservatorio.
+79642                   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+
+
+
+                                                           29
+
+
+
+        L’Osservatorio, inoltre, si avvale del supporto scientifico di InnovaPuglia S.p.A., Società in House
+        della Regione Puglia. Con tale ruolo InnovaPuglia S.p.A. supporta l’Osservatorio nella gestione
+        dell’emergenza, con particolare riferimento alla gestione del sito istituzionale
+        www.emergenzaxylella.it e alle attività di elaborazioni ed analisi statistiche e territoriali.
+        Per quanto concerne i laboratori ufficiali, ai sensi dell’art. 37 del Regolamento (UE) 2017/625 del
+        Parlamento Europeo e del Consiglio del 15 marzo 2017, le autorità competenti designano laboratori
+        ufficiali cui far effettuare analisi, prove e diagnosi di laboratorio a partire dai campioni prelevati
+        durante i controlli ufficiali e le altre attività ufficiali.
+        Le autorità competenti possono designare come laboratorio ufficiale un laboratorio che abbia i
+        requisiti di cui all’art. 37 del Reg. (UE) 2017/ 625 o in deroga di cui all’art. 41 del Reg. (UE) 2017/625.
+        Gli attuali laboratori ufficiali designati dall’Osservatorio al Ministero delle politiche agricole
+        alimentari e forestali e comunicati alla Commissione Europea con nota prot. n° 9052766 del
+        13/08/2020, sono:
+            Università degli studi di Foggia - Dipartimento di Scienze Agro-Ambientale, Chimica e Difesa
+               Vegetale, Sezione Patologia Vegetale;
+            Università del Salento - Dipartimento di Scienze e Tecnologie Biologiche e Ambientali,
+               Laboratorio di Fisiologia Vegetale;
+            Centro di Ricerca, Formazione e Sperimentazione in Agricoltura “Basile Caramia”, già
+               accreditato ad operare secondo la norma EN ISO/IEC 17025 per le analisi molecolari su Xylella;
+            Istituto Agronomico Mediterraneo di Valenzano;
+            Università degli Studi di Bari- Dipartimento di Scienze del Suolo, della Pianta e degli Alimenti
+               (Di.S.S.P.A.);
+            Istituto per la Protezione Sostenibile delle Piante del C.N.R. di Bari.
+        I rapporti tra Osservatorio e i laboratori ufficiali sono regolati attraverso una procedura di evidenza
+        pubblica e/o accordi di cui all’art. 15 della legge agosto 1990, n. 241 ‘Nuove norme in materia di
+        procedimento amministrativo e di diritto di accesso ai documenti amministrativi’.
+        6 Fonti di finanziamento
+        L’importo complessivo del Piano d’azione 2023 e 2024 è pari a € 3.620.000,00 per il 2023 e €
+        4.020.000,00 per il 2024 a valere su risorse del bilancio autonomo regionale. Le risorse economiche
+        sono state stanziate e approvate dal Consiglio regionale della Regione Puglia con legge regionale 30
+        dicembre 2021, n. 52 “Bilancio di previsione della Regione Puglia per l’esercizio finanziario 2022 e
+        bilancio pluriennale 2022-2024”.
+        Qualora le risorse stanziate per il presente Piano 2023-2024 dovessero risultare insufficienti, si farà
+        fronte utilizzando le risorse rivenienti da altre fonti di finanziamento europee, nazionali e regionali.
+                 Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022              79643
+
+
+
+                                                30
+
+
+
+7 Cronoprogramma delle attività
+
+
+                                                           Mesi
+         Attività                                                                         Dic
+                            Gen. Feb. Mar. Apr. Mag.      Giu. Lug. Ago. Set. Ott. Nov.
+                                                                                           .
+1. Organizzazione
+   attività
+2. Sorveglianza aree
+   delimitate
+3. Sorveglianza area
+   indenne
+4. Sorveglianza a
+   seguito di
+   rinvenimento di
+   pianta infetta
+5. Rimozione delle
+   piante
+6. Sorveglianza
+   fitosanitaria - l.r.
+   4/2017
+7. Monitoraggio vettori
+8. Strategia di controllo
+   dei vettori
+9. Controlli ufficiali
+
+10. Comunicazione
+11. Ricerca e collaudo
+    delle innovazioni
+79644   Bollettino Ufficiale della Regione Puglia - n. 139 del 27-12-2022
+

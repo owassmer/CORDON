@@ -1,0 +1,2067 @@
+{
+  "purpose": "Source-body reading progress only; no semantic authority",
+  "total": 257,
+  "counts": {
+    "read_full": 50,
+    "full_body_compared_to_read_class": 181,
+    "read_as_area_act": 26
+  },
+  "acts": [
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00092",
+      "instrument_ref": "DET-92-2021-FITO",
+      "effective_from": "2021-09-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-92-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00093",
+      "instrument_ref": "DET-93-2021-FITO",
+      "effective_from": "2021-09-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-93-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00094",
+      "instrument_ref": "DET-94-2021-FITO",
+      "effective_from": "2021-09-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-94-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00095",
+      "instrument_ref": "DET-95-2021-FITO",
+      "effective_from": "2021-09-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-95-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00100",
+      "instrument_ref": "DET-100-2021-FITO",
+      "effective_from": "2021-09-23",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-100-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00101",
+      "instrument_ref": "DET-101-2021-FITO",
+      "effective_from": "2021-09-23",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-101-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00102",
+      "instrument_ref": "DET-102-2021-FITO",
+      "effective_from": "2021-10-01",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-102-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00103",
+      "instrument_ref": "DET-103-2021-FITO",
+      "effective_from": "2021-10-01",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-103-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00104",
+      "instrument_ref": "DET-104-2021-FITO",
+      "effective_from": "2021-10-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-104-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00105",
+      "instrument_ref": "DET-105-2021-FITO",
+      "effective_from": "2021-10-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-105-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00106",
+      "instrument_ref": "DET-106-2021-FITO",
+      "effective_from": "2021-10-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-106-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00107",
+      "instrument_ref": "DET-107-2021-FITO",
+      "effective_from": "2021-10-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-107-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00113",
+      "instrument_ref": "DET-113-2021-FITO",
+      "effective_from": "2021-10-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-113-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00114",
+      "instrument_ref": "DET-114-2021-FITO",
+      "effective_from": "2021-10-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/HIST-DDS-114-2021.pdf",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00117",
+      "instrument_ref": "DET-117-2021-FITO",
+      "effective_from": "2021-10-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-117-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00120",
+      "instrument_ref": "DET-120-2021-FITO",
+      "effective_from": "2021-10-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-120-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00121",
+      "instrument_ref": "DET-121-2021-FITO",
+      "effective_from": "2021-10-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-121-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00122",
+      "instrument_ref": "DET-122-2021-FITO",
+      "effective_from": "2021-10-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-122-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00123",
+      "instrument_ref": "DET-123-2021-FITO",
+      "effective_from": "2021-10-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-123-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00125",
+      "instrument_ref": "DET-125-2021-FITO",
+      "effective_from": "2021-11-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-125-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00126",
+      "instrument_ref": "DET-126-2021-FITO",
+      "effective_from": "2021-11-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-126-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00127",
+      "instrument_ref": "DET-127-2021-FITO",
+      "effective_from": "2021-11-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-127-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00128",
+      "instrument_ref": "DET-128-2021-FITO",
+      "effective_from": "2021-11-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-128-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00129",
+      "instrument_ref": "DET-129-2021-FITO",
+      "effective_from": "2021-11-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-129-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00134",
+      "instrument_ref": "DET-134-2021-FITO",
+      "effective_from": "2021-11-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-134-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00135",
+      "instrument_ref": "DET-135-2021-FITO",
+      "effective_from": "2021-11-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-135-2021-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00136",
+      "instrument_ref": "DET-136-2021-FITO",
+      "effective_from": "2021-11-11",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-136-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00137",
+      "instrument_ref": "DET-137-2021-FITO",
+      "effective_from": "2021-11-11",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-137-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00139",
+      "instrument_ref": "DET-139-2021-FITO",
+      "effective_from": "2021-11-17",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-139-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00140",
+      "instrument_ref": "DET-140-2021-FITO",
+      "effective_from": "2021-11-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-140-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00141",
+      "instrument_ref": "DET-141-2021-FITO",
+      "effective_from": "2021-11-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-141-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00142",
+      "instrument_ref": "DET-142-2021-FITO",
+      "effective_from": "2021-11-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-142-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00143",
+      "instrument_ref": "DET-143-2021-FITO",
+      "effective_from": "2021-11-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-143-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00146",
+      "instrument_ref": "DET-146-2021-FITO",
+      "effective_from": "2021-11-22",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-146-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00150",
+      "instrument_ref": "DET-150-2021-FITO",
+      "effective_from": "2021-11-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-150-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00151",
+      "instrument_ref": "DET-151-2021-FITO",
+      "effective_from": "2021-11-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-151-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00152",
+      "instrument_ref": "DET-152-2021-FITO",
+      "effective_from": "2021-11-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-152-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00153",
+      "instrument_ref": "DET-153-2021-FITO",
+      "effective_from": "2021-11-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-153-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00164",
+      "instrument_ref": "DET-164-2021-FITO",
+      "effective_from": "2021-12-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-164-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00165",
+      "instrument_ref": "DET-165-2021-FITO",
+      "effective_from": "2021-12-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-165-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00167",
+      "instrument_ref": "DET-167-2021-FITO",
+      "effective_from": "2021-12-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-167-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00168",
+      "instrument_ref": "DET-168-2021-FITO",
+      "effective_from": "2021-12-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-168-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00169",
+      "instrument_ref": "DET-169-2021-FITO",
+      "effective_from": "2021-12-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-169-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00170",
+      "instrument_ref": "DET-170-2021-FITO",
+      "effective_from": "2021-12-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-170-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00171",
+      "instrument_ref": "DET-171-2021-FITO",
+      "effective_from": "2021-12-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-171-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00172",
+      "instrument_ref": "DET-172-2021-FITO",
+      "effective_from": "2021-12-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-172-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00176",
+      "instrument_ref": "DET-176-2021-FITO",
+      "effective_from": "2021-12-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-176-2021-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2021-00177",
+      "instrument_ref": "DET-177-2021-FITO",
+      "effective_from": "2021-12-30",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-177-2021-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00004",
+      "instrument_ref": "DET-4-2022-FITO",
+      "effective_from": "2022-02-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00005",
+      "instrument_ref": "DET-5-2022-FITO",
+      "effective_from": "2022-02-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-5-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00006",
+      "instrument_ref": "DET-6-2022-FITO",
+      "effective_from": "2022-02-08",
+      "case_kind": "CORRECTIVE_OR_SUPPLEMENTAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-6-2022-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00043",
+      "instrument_ref": "DET-43-2022-FITO",
+      "effective_from": "2022-06-27",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-43-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00044",
+      "instrument_ref": "DET-44-2022-FITO",
+      "effective_from": "2022-07-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-44-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00045",
+      "instrument_ref": "DET-45-2022-FITO",
+      "effective_from": "2022-07-04",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-45-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00046",
+      "instrument_ref": "DET-46-2022-FITO",
+      "effective_from": "2022-07-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-46-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00054",
+      "instrument_ref": "DET-54-2022-FITO",
+      "effective_from": "2022-07-12",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-54-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00055",
+      "instrument_ref": "DET-55-2022-FITO",
+      "effective_from": "2022-07-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-55-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00056",
+      "instrument_ref": "DET-56-2022-FITO",
+      "effective_from": "2022-07-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-56-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00057",
+      "instrument_ref": "DET-57-2022-FITO",
+      "effective_from": "2022-07-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-57-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00060",
+      "instrument_ref": "DET-60-2022-FITO",
+      "effective_from": "2022-07-19",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-60-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00068",
+      "instrument_ref": "DET-68-2022-FITO",
+      "effective_from": "2022-07-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-68-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00069",
+      "instrument_ref": "DET-69-2022-FITO",
+      "effective_from": "2022-07-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-69-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00070",
+      "instrument_ref": "DET-70-2022-FITO",
+      "effective_from": "2022-07-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-70-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00071",
+      "instrument_ref": "DET-71-2022-FITO",
+      "effective_from": "2022-07-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-71-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00075",
+      "instrument_ref": "DET-75-2022-FITO",
+      "effective_from": "2022-08-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-75-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00076",
+      "instrument_ref": "DET-76-2022-FITO",
+      "effective_from": "2022-08-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-76-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00077",
+      "instrument_ref": "DET-77-2022-FITO",
+      "effective_from": "2022-08-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-77-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00078",
+      "instrument_ref": "DET-78-2022-FITO",
+      "effective_from": "2022-08-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-78-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00080",
+      "instrument_ref": "DET-80-2022-FITO",
+      "effective_from": "2022-08-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-80-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00081",
+      "instrument_ref": "DET-81-2022-FITO",
+      "effective_from": "2022-08-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-81-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00082",
+      "instrument_ref": "DET-82-2022-FITO",
+      "effective_from": "2022-08-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-82-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00083",
+      "instrument_ref": "DET-83-2022-FITO",
+      "effective_from": "2022-08-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-83-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00084",
+      "instrument_ref": "DET-84-2022-FITO",
+      "effective_from": "2022-08-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-84-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00085",
+      "instrument_ref": "DET-85-2022-FITO",
+      "effective_from": "2022-08-17",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-85-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00087",
+      "instrument_ref": "DET-87-2022-FITO",
+      "effective_from": "2022-08-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-87-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00088",
+      "instrument_ref": "DET-88-2022-FITO",
+      "effective_from": "2022-08-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-88-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00089",
+      "instrument_ref": "DET-89-2022-FITO",
+      "effective_from": "2022-08-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-89-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00090",
+      "instrument_ref": "DET-90-2022-FITO",
+      "effective_from": "2022-08-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-90-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00095",
+      "instrument_ref": "DET-95-2022-FITO",
+      "effective_from": "2022-09-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-95-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00096",
+      "instrument_ref": "DET-96-2022-FITO",
+      "effective_from": "2022-09-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-96-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00097",
+      "instrument_ref": "DET-97-2022-FITO",
+      "effective_from": "2022-09-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-97-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00098",
+      "instrument_ref": "DET-98-2022-FITO",
+      "effective_from": "2022-09-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-98-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00099",
+      "instrument_ref": "DET-99-2022-FITO",
+      "effective_from": "2022-09-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-99-2022-FITO-46b041b7cc5f.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00100",
+      "instrument_ref": "DET-100-2022-FITO",
+      "effective_from": "2022-09-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-100-2022-FITO-a3d3bec4486b.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00101",
+      "instrument_ref": "DET-101-2022-FITO",
+      "effective_from": "2022-09-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-101-2022-FITO-a9216671420d.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00102",
+      "instrument_ref": "DET-102-2022-FITO",
+      "effective_from": "2022-09-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-102-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00103",
+      "instrument_ref": "DET-103-2022-FITO",
+      "effective_from": "2022-09-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-103-2022-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00104",
+      "instrument_ref": "DET-104-2022-FITO",
+      "effective_from": "2022-09-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-104-2022-FITO-5961d6beb401.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00105",
+      "instrument_ref": "DET-105-2022-FITO",
+      "effective_from": "2022-09-27",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-105-2022-FITO-974a4ec6033e.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00106",
+      "instrument_ref": "DET-106-2022-FITO",
+      "effective_from": "2022-09-27",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-106-2022-FITO-6c89145bb005.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00107",
+      "instrument_ref": "DET-107-2022-FITO",
+      "effective_from": "2022-09-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-107-2022-FITO-0fc2baa84628.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00108",
+      "instrument_ref": "DET-108-2022-FITO",
+      "effective_from": "2022-09-29",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-108-2022-FITO-cb0c7fc8829b.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00109",
+      "instrument_ref": "DET-109-2022-FITO",
+      "effective_from": "2022-09-29",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-109-2022-FITO-7f77bcf82edd.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00113",
+      "instrument_ref": "DET-113-2022-FITO",
+      "effective_from": "2022-10-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-113-2022-FITO-218090cd0e47.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00114",
+      "instrument_ref": "DET-114-2022-FITO",
+      "effective_from": "2022-10-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-114-2022-FITO-6513b9657467.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00117",
+      "instrument_ref": "DET-117-2022-FITO",
+      "effective_from": "2022-10-10",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-117-2022-FITO-1c452d06928d.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00119",
+      "instrument_ref": "DET-119-2022-FITO",
+      "effective_from": "2022-10-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-119-2022-FITO-42e52f0d0a1d.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00120",
+      "instrument_ref": "DET-120-2022-FITO",
+      "effective_from": "2022-10-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-120-2022-FITO-f7bebb75bef5.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00122",
+      "instrument_ref": "DET-122-2022-FITO",
+      "effective_from": "2022-10-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-122-2022-FITO-797b0f7dc106.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00126",
+      "instrument_ref": "DET-126-2022-FITO",
+      "effective_from": "2022-11-03",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-126-2022-FITO-b37c5c1e2dad.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00127",
+      "instrument_ref": "DET-127-2022-FITO",
+      "effective_from": "2022-11-17",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-127-2022-FITO-70eff34bc0bf.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2022-00143",
+      "instrument_ref": "DET-143-2022-FITO",
+      "effective_from": "2022-12-22",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-143-2022-FITO-8f86b471f000.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00002",
+      "instrument_ref": "DET-2-2023-FITO",
+      "effective_from": "2023-01-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00005",
+      "instrument_ref": "DET-5-2023-FITO",
+      "effective_from": "2023-01-31",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-5-2023-FITO-35d6a01b6e4b.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00011",
+      "instrument_ref": "DET-11-2023-FITO",
+      "effective_from": "2023-02-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-11-2023-FITO-dec441586146.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00020",
+      "instrument_ref": "DET-20-2023-FITO",
+      "effective_from": "2023-03-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-20-2023-FITO-beddd92ce454.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00039",
+      "instrument_ref": "DET-39-2023-FITO",
+      "effective_from": "2023-04-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-39-2023-FITO-f086cc4c4162.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00040",
+      "instrument_ref": "DET-40-2023-FITO",
+      "effective_from": "2023-04-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-40-2023-FITO-c04ee5a951ee.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00045",
+      "instrument_ref": "DET-45-2023-FITO",
+      "effective_from": "2023-05-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00047",
+      "instrument_ref": "DET-47-2023-FITO",
+      "effective_from": "2023-05-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-47-2023-FITO-736803a0f0bb.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00051",
+      "instrument_ref": "DET-51-2023-FITO",
+      "effective_from": "2023-05-19",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-51-2023-FITO-db9ed41fcfb9.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00055",
+      "instrument_ref": "DET-55-2023-FITO",
+      "effective_from": "2023-05-29",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-55-2023-FITO-c444535ea6bb.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00059",
+      "instrument_ref": "DET-59-2023-FITO",
+      "effective_from": "2023-06-01",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-59-2023-FITO-e35b5d223c61.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00061",
+      "instrument_ref": "DET-61-2023-FITO",
+      "effective_from": "2023-06-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-61-2023-FITO-29be5f20cf8f.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00062",
+      "instrument_ref": "DET-62-2023-FITO",
+      "effective_from": "2023-06-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-62-2023-FITO-b8ec8ad1e685.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00066",
+      "instrument_ref": "DET-66-2023-FITO",
+      "effective_from": "2023-06-22",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-66-2023-FITO-aaf9fbc95a28.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00068",
+      "instrument_ref": "DET-68-2023-FITO",
+      "effective_from": "2023-06-23",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-68-2023-FITO-11a6cd3543dc.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00070",
+      "instrument_ref": "DET-70-2023-FITO",
+      "effective_from": "2023-06-30",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-70-2023-FITO-cc81bb317a23.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00071",
+      "instrument_ref": "DET-71-2023-FITO",
+      "effective_from": "2023-07-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-71-2023-FITO-5ffd886a8cdc.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00072",
+      "instrument_ref": "DET-72-2023-FITO",
+      "effective_from": "2023-07-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-72-2023-FITO-2e9f5da11200.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00073",
+      "instrument_ref": "DET-73-2023-FITO",
+      "effective_from": "2023-07-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-73-2023-FITO-718c9ee7e5d2.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00074",
+      "instrument_ref": "DET-74-2023-FITO",
+      "effective_from": "2023-07-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-74-2023-FITO-2c23f86b8aab.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00076",
+      "instrument_ref": "DET-76-2023-FITO",
+      "effective_from": "2023-07-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-76-2023-FITO-c052cd5b7e6d.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00082",
+      "instrument_ref": "DET-82-2023-FITO",
+      "effective_from": "2023-07-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-82-2023-FITO-832045ecbd08.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00096",
+      "instrument_ref": "DET-96-2023-FITO",
+      "effective_from": "2023-08-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-96-2023-FITO-dd5bebb3616b.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00106",
+      "instrument_ref": "DET-106-2023-FITO",
+      "effective_from": "2023-09-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-106-2023-FITO-cdeeec689511.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00107",
+      "instrument_ref": "DET-107-2023-FITO",
+      "effective_from": "2023-09-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-107-2023-FITO-524981f1f10b.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00113",
+      "instrument_ref": "DET-113-2023-FITO",
+      "effective_from": "2023-10-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-113-2023-FITO-dd2887bee294.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00114",
+      "instrument_ref": "DET-114-2023-FITO",
+      "effective_from": "2023-10-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-114-2023-FITO-150c676a7bd7.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00115",
+      "instrument_ref": "DET-115-2023-FITO",
+      "effective_from": "2023-10-17",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-115-2023-FITO-3605a828fee1.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00119",
+      "instrument_ref": "DET-119-2023-FITO",
+      "effective_from": "2023-11-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-119-2023-FITO-1edbf64f6616.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00120",
+      "instrument_ref": "DET-120-2023-FITO",
+      "effective_from": "2023-11-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-120-2023-FITO-4e3af97ad350.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00124",
+      "instrument_ref": "DET-124-2023-FITO",
+      "effective_from": "2023-11-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-124-2023-FITO-d79ed2678b0c.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00129",
+      "instrument_ref": "DET-129-2023-FITO",
+      "effective_from": "2023-11-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-129-2023-FITO-070a8639e975.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00134",
+      "instrument_ref": "DET-134-2023-FITO",
+      "effective_from": "2023-12-01",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-134-2023-FITO-4877eaa52475.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2023-00138",
+      "instrument_ref": "DET-138-2023-FITO",
+      "effective_from": "2023-12-01",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-138-2023-FITO-cdbf4ebc2467.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00002",
+      "instrument_ref": "DET-2-2024-FITO",
+      "effective_from": "2024-01-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-2-2024-FITO-b998bd88a30c.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00008",
+      "instrument_ref": "DET-8-2024-FITO",
+      "effective_from": "2024-02-21",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-8-2024-FITO-af75f0207dbe.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00012",
+      "instrument_ref": "DET-12-2024-FITO",
+      "effective_from": "2024-02-27",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-12-2024-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00013",
+      "instrument_ref": "DET-13-2024-FITO",
+      "effective_from": "2024-02-27",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-13-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00018",
+      "instrument_ref": "DET-18-2024-FITO",
+      "effective_from": "2024-03-14",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-18-2024-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00027",
+      "instrument_ref": "DET-27-2024-FITO",
+      "effective_from": "2024-04-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/DDS-27-2024-standard-art13.pdf",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00029",
+      "instrument_ref": "DET-29-2024-FITO",
+      "effective_from": "2024-04-08",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-29-2024-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00030",
+      "instrument_ref": "DET-30-2024-FITO",
+      "effective_from": "2024-04-10",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-30-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00043",
+      "instrument_ref": "DET-43-2024-FITO",
+      "effective_from": "2024-04-22",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-43-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00045",
+      "instrument_ref": "DET-45-2024-FITO",
+      "effective_from": "2024-04-24",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-45-2024-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00052",
+      "instrument_ref": "DET-52-2024-FITO",
+      "effective_from": "2024-05-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00055",
+      "instrument_ref": "DET-55-2024-FITO",
+      "effective_from": "2024-05-07",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-55-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00058",
+      "instrument_ref": "DET-58-2024-FITO",
+      "effective_from": "2024-05-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-58-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00059",
+      "instrument_ref": "DET-59-2024-FITO",
+      "effective_from": "2024-05-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-59-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00063",
+      "instrument_ref": "DET-63-2024-FITO",
+      "effective_from": "2024-05-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-63-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00074",
+      "instrument_ref": "DET-74-2024-FITO",
+      "effective_from": "2024-06-20",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-74-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00075",
+      "instrument_ref": "DET-75-2024-FITO",
+      "effective_from": "2024-06-20",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-75-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00081",
+      "instrument_ref": "DET-81-2024-FITO",
+      "effective_from": "2024-07-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-81-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00082",
+      "instrument_ref": "DET-82-2024-FITO",
+      "effective_from": "2024-07-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-82-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00088",
+      "instrument_ref": "DET-88-2024-FITO",
+      "effective_from": "2024-07-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-88-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00091",
+      "instrument_ref": "DET-91-2024-FITO",
+      "effective_from": "2024-07-22",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-91-2024-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00092",
+      "instrument_ref": "DET-92-2024-FITO",
+      "effective_from": "2024-07-22",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-92-2024-Bari.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00093",
+      "instrument_ref": "DET-93-2024-FITO",
+      "effective_from": "2024-07-23",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-93-2024-Multiplex.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00094",
+      "instrument_ref": "DET-94-2024-FITO",
+      "effective_from": "2024-07-24",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-94-2024-ST1.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00096",
+      "instrument_ref": "DET-96-2024-FITO",
+      "effective_from": "2024-07-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-96-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00097",
+      "instrument_ref": "DET-97-2024-FITO",
+      "effective_from": "2024-07-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-97-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00099",
+      "instrument_ref": "DET-99-2024-FITO",
+      "effective_from": "2024-08-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-99-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00107",
+      "instrument_ref": "DET-107-2024-FITO",
+      "effective_from": "2024-08-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-107-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00108",
+      "instrument_ref": "DET-108-2024-FITO",
+      "effective_from": "2024-08-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-108-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00116",
+      "instrument_ref": "DET-116-2024-FITO",
+      "effective_from": "2024-09-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-116-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00125",
+      "instrument_ref": "DET-125-2024-FITO",
+      "effective_from": "2024-10-03",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-125-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00126",
+      "instrument_ref": "DET-126-2024-FITO",
+      "effective_from": "2024-10-03",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-126-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00129",
+      "instrument_ref": "DET-129-2024-FITO",
+      "effective_from": "2024-10-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-129-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00135",
+      "instrument_ref": "DET-135-2024-FITO",
+      "effective_from": "2024-10-23",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-135-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00138",
+      "instrument_ref": "DET-138-2024-FITO",
+      "effective_from": "2024-10-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-138-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00147",
+      "instrument_ref": "DET-147-2024-FITO",
+      "effective_from": "2024-11-08",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-147-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00149",
+      "instrument_ref": "DET-149-2024-FITO",
+      "effective_from": "2024-11-12",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-149-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00151",
+      "instrument_ref": "DET-151-2024-FITO",
+      "effective_from": "2024-11-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-151-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00157",
+      "instrument_ref": "DET-157-2024-FITO",
+      "effective_from": "2024-11-15",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-157-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00158",
+      "instrument_ref": "DET-158-2024-FITO",
+      "effective_from": "2024-11-18",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-158-2024-FITO-.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00162",
+      "instrument_ref": "DET-162-2024-FITO",
+      "effective_from": "2024-11-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-162-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00163",
+      "instrument_ref": "DET-163-2024-FITO",
+      "effective_from": "2024-11-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-163-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00165",
+      "instrument_ref": "DET-165-2024-FITO",
+      "effective_from": "2024-11-25",
+      "case_kind": "CORRECTIVE_OR_SUPPLEMENTAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00166",
+      "instrument_ref": "DET-166-2024-FITO",
+      "effective_from": "2024-11-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-166-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00167",
+      "instrument_ref": "DET-167-2024-FITO",
+      "effective_from": "2024-11-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-167-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00177",
+      "instrument_ref": "DET-177-2024-FITO",
+      "effective_from": "2024-12-03",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-177-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00179",
+      "instrument_ref": "DET-179-2024-FITO",
+      "effective_from": "2024-12-03",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-179-2024-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00188",
+      "instrument_ref": "DET-188-2024-FITO",
+      "effective_from": "2024-12-12",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-188-2024-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2024-00198",
+      "instrument_ref": "DET-198-2024-FITO",
+      "effective_from": "2024-12-18",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-198-2024-Santeramo-Ginosa.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00004",
+      "instrument_ref": "DET-4-2025-FITO",
+      "effective_from": "2025-01-23",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-4-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00006",
+      "instrument_ref": "DET-6-2025-FITO",
+      "effective_from": "2025-01-23",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-6-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00008",
+      "instrument_ref": "DET-8-2025-FITO",
+      "effective_from": "2025-01-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-8-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00009",
+      "instrument_ref": "DET-9-2025-FITO",
+      "effective_from": "2025-01-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-9-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00010",
+      "instrument_ref": "DET-10-2025-FITO",
+      "effective_from": "2025-02-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-10-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00011",
+      "instrument_ref": "DET-11-2025-FITO",
+      "effective_from": "2025-02-05",
+      "case_kind": "CORRECTIVE_OR_SUPPLEMENTAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00018",
+      "instrument_ref": "DET-18-2025-FITO",
+      "effective_from": "2025-02-12",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-18-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00024",
+      "instrument_ref": "DET-24-2025-FITO",
+      "effective_from": "2025-02-20",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-24-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00031",
+      "instrument_ref": "DET-31-2025-FITO",
+      "effective_from": "2025-03-05",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-31-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00043",
+      "instrument_ref": "DET-43-2025-FITO",
+      "effective_from": "2025-03-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-43-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00044",
+      "instrument_ref": "DET-44-2025-FITO",
+      "effective_from": "2025-03-21",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-44-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00051",
+      "instrument_ref": "DET-51-2025-FITO",
+      "effective_from": "2025-03-31",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-51-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00059",
+      "instrument_ref": "DET-59-2025-FITO",
+      "effective_from": "2025-04-14",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/181_DIR_2025_00059_DeterminaPUB.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00065",
+      "instrument_ref": "DET-65-2025-FITO",
+      "effective_from": "2025-04-18",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-65-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00072",
+      "instrument_ref": "DET-72-2025-FITO",
+      "effective_from": "2025-04-28",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-72-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00077",
+      "instrument_ref": "DET-77-2025-FITO",
+      "effective_from": "2025-05-06",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-77-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00079",
+      "instrument_ref": "DET-79-2025-FITO",
+      "effective_from": "2025-05-07",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-79-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00080",
+      "instrument_ref": "DET-80-2025-FITO",
+      "effective_from": "2025-05-07",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-80-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00086",
+      "instrument_ref": "DET-86-2025-FITO",
+      "effective_from": "2025-05-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-86-2025-FITO-.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00106",
+      "instrument_ref": "DET-106-2025-FITO",
+      "effective_from": "2025-06-16",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-106-2025-Santeramo-Ginosa.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00113",
+      "instrument_ref": "DET-113-2025-FITO",
+      "effective_from": "2025-06-23",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-113-2025-Bisceglie.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00114",
+      "instrument_ref": "DET-114-2025-FITO",
+      "effective_from": "2025-06-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-114-2025-FITO-f1de3913c7a0.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00115",
+      "instrument_ref": "DET-115-2025-FITO",
+      "effective_from": "2025-06-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-115-2025-FITO-ed7ecbb460e2.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00116",
+      "instrument_ref": "DET-116-2025-FITO",
+      "effective_from": "2025-06-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-116-2025-FITO-4d8c2b4eda35.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00117",
+      "instrument_ref": "DET-117-2025-FITO",
+      "effective_from": "2025-06-27",
+      "case_kind": "CORRECTIVE_OR_SUPPLEMENTAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00122",
+      "instrument_ref": "DET-122-2025-FITO",
+      "effective_from": "2025-07-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-122-2025-FITO-5a50b9d7a6a9.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00123",
+      "instrument_ref": "DET-123-2025-FITO",
+      "effective_from": "2025-07-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-123-2025-FITO-2a1e5b6e97b2.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00126",
+      "instrument_ref": "DET-126-2025-FITO",
+      "effective_from": "2025-07-11",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-126-2025-FITO-943e4d6102ae.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00129",
+      "instrument_ref": "DET-129-2025-FITO",
+      "effective_from": "2025-07-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-129-2025-FITO-81c3c9c76803.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00132",
+      "instrument_ref": "DET-132-2025-FITO",
+      "effective_from": "2025-07-18",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-132-2025-FITO-6bed5acbfc11.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00135",
+      "instrument_ref": "DET-135-2025-FITO",
+      "effective_from": "2025-07-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-135-2025-FITO-608bde187e46.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00141",
+      "instrument_ref": "DET-141-2025-FITO",
+      "effective_from": "2025-08-06",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/DET_141_6_8_2025.pdf",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00147",
+      "instrument_ref": "DET-147-2025-FITO",
+      "effective_from": "2025-08-12",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/DET_147_12_8_2025.pdf",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00148",
+      "instrument_ref": "DET-148-2025-FITO",
+      "effective_from": "2025-08-13",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-148-2025-FITO-01d1f001b731.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00150",
+      "instrument_ref": "DET-150-2025-FITO",
+      "effective_from": "2025-08-19",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-150-2025-FITO-569c477c0daa.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00151",
+      "instrument_ref": "DET-151-2025-FITO",
+      "effective_from": "2025-08-20",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-151-2025-FITO-1a103b110695.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00152",
+      "instrument_ref": "DET-152-2025-FITO",
+      "effective_from": "2025-08-20",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-152-2025-FITO-a378f1230c69.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00153",
+      "instrument_ref": "DET-153-2025-FITO",
+      "effective_from": "2025-08-25",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-153-2025-FITO-0d0d382812a8.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00162",
+      "instrument_ref": "DET-162-2025-FITO",
+      "effective_from": "2025-10-03",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-162-2025-FITO-15f2fecdc908.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00163",
+      "instrument_ref": "DET-163-2025-FITO",
+      "effective_from": "2025-10-08",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/DET_163_8_10_2025.pdf",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00173",
+      "instrument_ref": "DET-173-2025-FITO",
+      "effective_from": "2025-10-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/DDS-173-2025-standard-art7.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00201",
+      "instrument_ref": "DET-201-2025-FITO",
+      "effective_from": "2025-11-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-201-2025-FITO-11d2e495c708.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00218",
+      "instrument_ref": "DET-218-2025-FITO",
+      "effective_from": "2025-12-10",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-218-2025-FITO-7564320ec7ca.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00232",
+      "instrument_ref": "DET-232-2025-FITO",
+      "effective_from": "2025-12-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-232-2025-FITO-5d08dcc00883.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00233",
+      "instrument_ref": "DET-233-2025-FITO",
+      "effective_from": "2025-12-16",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-233-2025-FITO-32f9edfd9e78.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00236",
+      "instrument_ref": "DET-236-2025-FITO",
+      "effective_from": "2025-12-18",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-236-2025-ST1.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2025-00238",
+      "instrument_ref": "DET-238-2025-FITO",
+      "effective_from": "2025-12-22",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-238-2025-FITO-babbf64a8a58.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00002",
+      "instrument_ref": "DET-2-2026-FITO",
+      "effective_from": "2026-01-12",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-2-2026-Valenzano.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00003",
+      "instrument_ref": "DET-3-2026-FITO",
+      "effective_from": "2026-01-12",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/DDS-3-2026-standard-art7.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00004",
+      "instrument_ref": "DET-4-2026-FITO",
+      "effective_from": "2026-01-15",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/bulk/DET-4-2026-FITO-0d34986457c0.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00006",
+      "instrument_ref": "DET-6-2026-FITO",
+      "effective_from": "2026-01-19",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-6-2026-FITO-1e196f5cb10c.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00007",
+      "instrument_ref": "DET-7-2026-FITO",
+      "effective_from": "2026-01-22",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-7-2026-FITO-7195e96a1170.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00008",
+      "instrument_ref": "DET-8-2026-FITO",
+      "effective_from": "2026-02-02",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-8-2026-FITO-9ad642da3bb4.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00011",
+      "instrument_ref": "DET-11-2026-FITO",
+      "effective_from": "2026-02-12",
+      "case_kind": "PREVENTIVE_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-11-2026-FITO-46921ff54da6.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00012",
+      "instrument_ref": "DET-12-2026-FITO",
+      "effective_from": "2026-02-12",
+      "case_kind": "PREVENTIVE_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-12-2026-FITO-a5b57a900dcc.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00013",
+      "instrument_ref": "DET-13-2026-FITO",
+      "effective_from": "2026-02-12",
+      "case_kind": "PREVENTIVE_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/DDS-13-2026-almond-route.pdf",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00014",
+      "instrument_ref": "DET-14-2026-FITO",
+      "effective_from": "2026-02-12",
+      "case_kind": "PREVENTIVE_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-14-2026-FITO-e4b09a4fad5c.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00035",
+      "instrument_ref": "DET-35-2026-FITO",
+      "effective_from": "2026-03-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-35-2026-FITO-76d363b7ece1.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00036",
+      "instrument_ref": "DET-36-2026-FITO",
+      "effective_from": "2026-03-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-36-2026-FITO-309919dadd68.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00037",
+      "instrument_ref": "DET-37-2026-FITO",
+      "effective_from": "2026-03-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-37-2026-FITO-090b9f12b662.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00038",
+      "instrument_ref": "DET-38-2026-FITO",
+      "effective_from": "2026-03-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-38-2026-FITO-26fb5f684cca.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00051",
+      "instrument_ref": "DET-51-2026-FITO",
+      "effective_from": "2026-03-24",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-51-2026-FITO-01735d4ef68c.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00055",
+      "instrument_ref": "DET-55-2026-FITO",
+      "effective_from": "2026-03-30",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-55-2026-FITO-c04c38b150c9.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00063",
+      "instrument_ref": "DET-63-2026-FITO",
+      "effective_from": "2026-04-03",
+      "case_kind": "CORRECTIVE_OR_SUPPLEMENTAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
+      "read_status": "read_full"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00082",
+      "instrument_ref": "DET-82-2026-FITO",
+      "effective_from": "2026-05-11",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-82-2026-ex-Salento.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00093",
+      "instrument_ref": "DET-93-2026-FITO",
+      "effective_from": "2026-05-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-93-2026-FITO-1aff76013b66.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00094",
+      "instrument_ref": "DET-94-2026-FITO",
+      "effective_from": "2026-05-26",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-94-2026-FITO-9ffa2fce8222.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00102",
+      "instrument_ref": "DET-102-2026-FITO",
+      "effective_from": "2026-06-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-102-2026-FITO-0b61c4166b22.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00103",
+      "instrument_ref": "DET-103-2026-FITO",
+      "effective_from": "2026-06-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-103-2026-FITO-36f48ba0eae7.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00104",
+      "instrument_ref": "DET-104-2026-FITO",
+      "effective_from": "2026-06-09",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-104-2026-FITO-c9a00d310b51.txt",
+      "read_status": "full_body_compared_to_read_class"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00112",
+      "instrument_ref": "DET-112-2026-FITO",
+      "effective_from": "2026-07-07",
+      "case_kind": "AREA_STATE_ACT",
+      "path": "regulation/jurisdiction/regional/AREA-DDS-112-2026-Modugno.txt",
+      "read_status": "read_as_area_act"
+    },
+    {
+      "source_id": "REG-PUGLIA-U181-DIR-2026-00114",
+      "instrument_ref": "DET-114-2026-FITO",
+      "effective_from": "2026-07-14",
+      "case_kind": "PLANT_REMOVAL_ORDER",
+      "path": "regulation/jurisdiction/regional/bulk/DET-114-2026-FITO-eaa9f80d6d01.txt",
+      "read_status": "full_body_compared_to_read_class"
+    }
+  ]
+}

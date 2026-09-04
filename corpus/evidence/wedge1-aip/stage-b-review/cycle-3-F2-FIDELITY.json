@@ -1,0 +1,61 @@
+{
+  "facet": "F2-FIDELITY",
+  "verdict": "FAIL",
+  "assertions": [
+    {
+      "id": "F2-09",
+      "severity": "material",
+      "class": "remediation_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-6(1)-four-negative-years",
+      "field": "anchor.basis",
+      "quoted_span": "Where, based on the surveys referred to in Article 10, the specified pest has not been detected in a demarcated area for a period of four years",
+      "claim": "The remediated basis goes beyond the source by declaring that the period counts only where every Article 10 survey covers the area and that any gap leaves four years unproven; Article 6(1) requires the no-detection conclusion to be based on Article 10 surveys but states no clock-stopping or automatic non-proof rule for a gap, so the field fails Source fidelity through Remediation drift.",
+      "proposed_remedy": "Retain Article 10 annual surveys of the entire demarcated area as the evidentiary basis, but remove the invented rule that a survey-stream gap automatically prevents the four-year period from elapsing; leave the legal sufficiency of incomplete evidence unresolved unless Stage A expressly settles it.",
+      "falsifier": "A retained source span or binding Stage A ruling expressly establishes that any gap in Article 10 annual survey coverage prevents the Article 6(1) four-year condition from being satisfied, regardless of the other survey evidence held.",
+      "confidence": "high"
+    },
+    {
+      "id": "F2-10",
+      "severity": "minor",
+      "class": "remediation_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-6(1)-four-negative-years",
+      "field": "anchor.start_event",
+      "quoted_span": "establishment of the demarcated area, which follows the demarcating finding and is itself the last detection at that moment",
+      "claim": "The new start-event text grammatically identifies establishment of the demarcated area as itself a detection, although establishment is a legal act and the demarcating finding is the detection, making the anchor denotation internally false through Remediation drift.",
+      "proposed_remedy": "Rewrite the start event without equating establishment with detection—for example, state that establishment follows the demarcating finding, which is the last held detection at establishment unless a later detection is recorded.",
+      "falsifier": "The quoted field is authoritatively defined so that 'is itself the last detection' refers to the demarcating finding rather than to the grammatical subject, establishment of the demarcated area.",
+      "confidence": "high"
+    },
+    {
+      "id": "F2-11",
+      "severity": "material",
+      "class": "remediation_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-625-39-audit-on-necessity",
+      "field": "kind",
+      "quoted_span": "any time they consider that an audit is necessary",
+      "claim": "The newly minted clock is typed as promptness_standard even though the source creates an obligation on each occurrence of the authority's necessity determination and supplies no immediate, without-delay, timely, or other promptness standard, failing Kind and bound through Remediation drift.",
+      "proposed_remedy": "Represent the provision as an event-triggered audit obligation or recurrence with no cadence or deadline, adding an event-triggered kind if the current enum cannot express that relation, rather than labelling it a promptness standard.",
+      "falsifier": "A binding Stage B convention defines promptness_standard as a cadence-free event-triggered obligation that carries no implication of urgency or speed.",
+      "confidence": "high"
+    }
+  ],
+  "checked_sound": [
+    "Exhaustively reread all 72 clocks, in canonical artifact order, against their producer Stage A source_quote spans for anchor denotation; legal-state object, medium and place; kind and bound; magnitude, unit and comparator; consequence and completion; version interval; and vocabulary.",
+    "Confirmed that B-CLK-EU-625-39-audit-recurrence now encodes the Article 37(4)(e) accreditation-assessment redundancy exception in applies_when rather than only in its note; the exception grammatically qualifies the Article 39(1) audit duty and does not improperly narrow it.",
+    "Confirmed that B-CLK-EU-625-39-audit-on-necessity separately represents the second Article 39(1) trigger and anchors it on the competent authority's own determination concerning the designated laboratory; the surviving defect is its promptness_standard kind, not the trigger's denotation.",
+    "Confirmed that the Article 6(1) anchor correctly identifies the Article 10 annual surveys and their entire-demarcated-area scope as the evidentiary basis; the defect is the additional survey-gap rule, which the quoted provisions do not state.",
+    "Apart from the reported cycle-3 remediation defects, the remaining clocks preserve their source triggers, populations, timing relations, magnitudes, units, completion acts, mutually exclusive alternatives and effective intervals.",
+    "Exhaustively checked all 13 floor parameters, the one ceiling parameter and all four threshold parameters against their source phrases and producer quotes; the values, units and inclusive or strict comparators remain faithful, including the strict greater-than 5 km island threshold and the unresolved Cq boundary values.",
+    "Checked every distinct confidence/prevalence design pair against its producer quote: Union pairs preserve floor confidence at 80%/1%, 90%/0.5%, 90%/0.7%, 90%/1% and 95%/1%, while PNI pairs preserve exact 95%/0.05%, 95%/0.09%, 90%/0.7% and 80%/1% values after proportion-to-percent normalization.",
+    "Confirmed that all 72 clocks and all 53 parameters resolve to producer rows in the scoped Stage A authoring files and that every clock source_phrase occurs in its producer source_quote.",
+    "Confirmed the previously remediated eligibility thresholds, four DDS 31/DDS 45 48-hour waits, almond pre-removal treatment ordering constraint, calendar-day authorization unit, Article 5 version changes, Article 7 per-plant clocks, Article 13 flight-season alternatives and Article 42 one-renewal limit remain source-faithful.",
+    "Confirmed that operative vocabulary remains faithful across the population: host plants and specified plants are not substituted, defined terms carry no definiens annotations, and immediate or without-delay duties remain unnumbered."
+  ],
+  "unresolved": [
+    "The attached corpus still does not state the start event for D.lgs. 19/2021 Article 33(1)'s 'entro quarantacinque giorni' landscape-authorization period. Stage B anchors it on lodging the application, while the reached Article 146(8) material separately runs the superintendent's 45 days from receipt of the acts; resolution requires reopening Stage A or consulting an out-of-scope source.",
+    "The Stage A Article 39 composite marks authority_judgment_required as NO even though its source expressly turns the second audit trigger and the accreditation-redundancy exception on what the competent authority considers or finds. Because Stage A's reading is closed for this facet, whether that judgment and its record must be represented in Stage A is unresolved rather than asserted here."
+  ]
+}

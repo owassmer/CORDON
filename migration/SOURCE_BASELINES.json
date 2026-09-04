@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-09-04",
+  "source_repositories": {
+    "wedge1-aip": {
+      "path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip",
+      "commit": "6bb69176e691199bc232da489374c042441471f0",
+      "working_tree_note": "Only .hermes/ was untracked; it was not a migration source."
+    },
+    "olive-xylella": {
+      "path": "/Users/owenwassmer/Desktop/Connor/olive-xylella",
+      "commit": "62246bba810a53c7204bb24b1abeb5b4ab942b6d",
+      "working_tree_inputs": {
+        "AGENTS.md": "6ebe15359b4f2c2f27f878165a60243fc23f6cf5937d763e6df15116360e322d",
+        "CORDON.md": "bce58a199fee11cafee76af06f8f50b145dd441357affc58bdf4c56d0ad555f5"
+      },
+      "working_tree_note": "The two modified files supplied the regional-government transition but were consolidated, not copied. Empty grill.md was excluded."
+    }
+  },
+  "grounding_sessions": [
+    "20260815_120001_9db49a from 2026-08-26 onward",
+    "20260830_112500_857096",
+    "20260901_120952_3d9dca",
+    "20260831_130642_4445a7",
+    "20260901_180140_076e18"
+  ],
+  "transcript_policy": "The sessions informed consolidation. Their full transcripts remain in the Hermes state database and are not duplicated here."
+}
+

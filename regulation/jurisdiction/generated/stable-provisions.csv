@@ -1,0 +1,382 @@
+instrument_id,stable_provision_id,parent_stable_provision_id,article,structural_kind
+EU-2016-2031,EU-2016-2031:Art.31(2):more-stringent-measure-notification,EU-2016-2031:Art.31:more-stringent-national-measures,31(2),article
+EU-2016-2031,EU-2016-2031:Art.31(2):more-stringent-measure-report-on-request,EU-2016-2031:Art.31:more-stringent-national-measures,31(2) second subparagraph,article
+EU-2016-2031,EU-2016-2031:Art.31:more-stringent-national-measures,,31(1),article
+EU-2017-625,EU-2017-625:Art.100:national-reference-laboratory-status,,100,composite
+EU-2017-625,EU-2017-625:Art.101(1):national-reference-laboratory-tasks,,101(1),composite
+EU-2017-625,"EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple",,"37(1),(3)-(5)",composite
+EU-2017-625,EU-2017-625:Art.37(2):external-location-designation,,37(2),composite
+EU-2017-625,EU-2017-625:Art.39:official-laboratory-audit-status,,39,composite
+EU-2017-625,EU-2017-625:Art.40(1)(b):other-official-activity-derogation,,40(1)(b),composite
+EU-2017-625,EU-2017-625:Art.41:representative-method-derogation-authority,,41,composite
+EU-2017-625,EU-2017-625:Art.42:temporary-method-designation,,42,composite
+EU-2017-625,EU-2017-625:Art.93(1):eu-reference-laboratory-designation,,93(1),composite
+EU-2021-1353,EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation,,3,article
+IT-CFN-ORD-3-2023,IT-CFN-ORD-3-2023:Annex-I:territory-list,,Annex I:territory-list,composite
+IT-CFN-ORD-3-2023,IT-CFN-ORD-3-2023:Art.1(1):pest-free-declaration,,1(1):pest-free-declaration,paragraph
+IT-CFN-ORD-3-2023,IT-CFN-ORD-3-2023:Art.1(2):maintain-pest-free-status,,1(2):maintain-pest-free-status,paragraph
+IT-CFN-ORD-3-2023,IT-CFN-ORD-3-2023:Art.1(3):annual-list-revision,,1(3):annual-list-revision,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.10(1):establish-territorial-unit,,10(1):establish-territorial-unit,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.10(1):implement-plan-and-ordinances,,10(1):implement-plan-and-ordinances,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.10(3)(a),IT-DLGS-19-2021:Art.10(1):establish-territorial-unit,10(3)(a),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.10(3)(c),IT-DLGS-19-2021:Art.10(1):establish-territorial-unit,10(3)(c),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.10(4),IT-DLGS-19-2021:Art.10(1):establish-territorial-unit,10(4),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.11(1),,11(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.11(1)(b),IT-DLGS-19-2021:Art.11(1),11(1)(b),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.11(2),,11(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(1):corresponding-reference-laboratory,,13(1):corresponding-reference-laboratory,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(1):unmatched-reference-laboratory,,13(1):unmatched-reference-laboratory,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(2),,13(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(4),,13(4),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(5)(b),IT-DLGS-19-2021:Art.13(5)-stem,13(5)(b),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(5)(h),IT-DLGS-19-2021:Art.13(5)-stem,13(5)(h),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.13(5)-stem,,13(5),stem
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(1):designate-official-laboratory,,14(1):designate-official-laboratory,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(1):official-laboratory-capacity,,14(1):official-laboratory-capacity,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(1):record-designation-data,,14(1):record-designation-data,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(2),,14(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(3):cross-region-designation,,14(3):cross-region-designation,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(3):cross-region-use,,14(3):cross-region-use,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.14(4),,14(4),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.20(1):assistant-identity,,Art.20(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.20(2):appointment-register,,Art.20(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.20(3):activity-limits,,Art.20(3),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.20(4):express-assignment,,Art.20(4),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.20(5):proposal-not-decision,,Art.20(5),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.24:register-current-status,,Art.24(1)-(5),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan,,26(1):prepare-emergency-plan,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.26(2):ministerial-adoption,,26(2):ministerial-adoption,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans,,26(4):monitor-emergency-plans,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.26(4):update-emergency-plan,,26(4):update-emergency-plan,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(1),,27(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(2),,27(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(3),,27(3),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(4):adopt-national-programme,,27(4):adopt-national-programme,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(4):prepare-national-proposal,,27(4):prepare-national-proposal,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(4):publish-national-programme,,27(4):publish-national-programme,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(5),,27(5),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(6):transmit-adopted-programme,,27(6):transmit-adopted-programme,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(6):transmit-prior-year-results,,27(6):transmit-prior-year-results,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(7),,27(7),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(8):access-sipp-data,,27(8):access-sipp-data,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(8):contribute-additional-data,,27(8):contribute-additional-data,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.27(9),,27(9),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.28(1),,28(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.28(2),,28(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.28(3),,28(3),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.28(4),,28(4),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.28(5),,28(5),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.29(1),,29(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.29(2),,29(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.30(1),,30(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.30(2),,30(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(1),,31(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(2),,31(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(3):eradication-regime,,31(3):eradication-regime,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(3):establish-demarcated-area,,31(3):establish-demarcated-area,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(4),,31(4),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval,,31(5):committee-action-plan-approval,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal,,31(5):regional-action-plan-proposal,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(6):adopt-action-plan,,31(6):adopt-action-plan,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(6):declare-emergency,,31(6):declare-emergency,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(6):notify-commission,,31(6):notify-commission,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(7),,31(7),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(8):establish-territorial-unit,,31(8):establish-territorial-unit,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(8):implement-action-plan-measures,,31(8):implement-action-plan-measures,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(9):modify-area-if-necessary,,31(9):modify-area-if-necessary,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(9):periodic-area-surveys,,31(9):periodic-area-surveys,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.31(9):report-area-information,,31(9):report-area-information,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.32(1),,32(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.32(2),,32(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.32(3):determine-completion-costs,,32(3):determine-completion-costs,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.32(3):primary-implementation,,32(3):primary-implementation,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.32(3):recovery-right,,32(3):recovery-right,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.32(3):substitute-execution,,32(3):substitute-execution,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.33(1):emergency-measure-derogation,,33(1):emergency-measure-derogation,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal,,33(1):uninfected-protected-plant-removal,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.33(2):authorized-land-access,,33(2):authorized-land-access,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.33(2):communication-method-and-terms,,33(2):communication-method-and-terms,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.33(2):public-force-assistance,,33(2):public-force-assistance,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.5(1),,5(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.5(4)(e),IT-DLGS-19-2021:Art.5(4)-stem,5(4)(e),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.5(4)(f),IT-DLGS-19-2021:Art.5(4)-stem,5(4)(f),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.5(4)(g),IT-DLGS-19-2021:Art.5(4)-stem,5(4)(g),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.5(4)-stem,,5(4),stem
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(13):coercive-removal,,55(13):coercive-removal,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(13):coercive-removal-costs,,55(13):coercive-removal-costs,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(13):obstruction-sanction,,55(13):obstruction-sanction,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(13):omitted-removal-sanction,,55(13):omitted-removal-sanction,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(15),,55(15),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(25),,55(25),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(29),,55(29),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(30):regional-sanction-competence,,55(30):regional-sanction-competence,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.55(9):notification-violation,,55(9):notification-violation,paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.6(1),,6(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.6(3)(b),IT-DLGS-19-2021:Art.6(3)-stem,6(3)(b),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.6(3)(g),IT-DLGS-19-2021:Art.6(3)-stem,6(3)(g),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.6(3)(o),IT-DLGS-19-2021:Art.6(3)-stem,6(3)(o),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.6(3)-stem,,6(3),stem
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.7(3)(c),IT-DLGS-19-2021:Art.7(3)-stem,7(3)(c),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.7(3)-stem,,7(3),stem
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.7(5),,7(5),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.8(1),,8(1),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.8(2)(c),IT-DLGS-19-2021:Art.8(1),8(2)(c),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.9(2),,9(2),paragraph
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.9(4)(a),,9(4)(a),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.9(4)(c),,9(4)(c),point
+IT-DLGS-19-2021,IT-DLGS-19-2021:Art.9(5),,9(5),paragraph
+IT-DLGS42-A146,IT-DLGS42-A146:Art.146(2),,146(2),paragraph
+IT-DLGS42-A146,IT-DLGS42-A146:Art.146(5):regional-decision-owner,,146(5):regional-decision-owner,paragraph
+IT-DLGS42-A146,IT-DLGS42-A146:Art.146(8):superintendent-opinion,,146(8):superintendent-opinion,paragraph
+IT-DM-0677268-2021,IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation,,1(1):CREA-DC-Firenze-designation,point
+IT-DM-0677268-2021,IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation,,1(1):CREA-DC-Roma-designation,point
+IT-DM-0677268-2021,IT-DM-0677268-2021:Art.2(1):entry-into-force,,2(1):entry-into-force,paragraph
+IT-DM-0677268-2021,IT-DM-0677268-2021:Art.2(1):operate-within-competence,,2(1):operate-within-competence,paragraph
+IT-DM-0677268-2021,IT-DM-0677268-2021:Art.2(1):publication-event,,Art.2(1) publication event,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.10(3):timely-analysis,,10(3):timely-analysis,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.10(5):issue-test-report,,10(5):issue-test-report,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.10(5):retain-analytical-data,,10(5):retain-analytical-data,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.10(6):cross-region-convention,,10(6):cross-region-convention,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.11(1):official-laboratory-designation,,11(1):official-laboratory-designation,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.11(2):monitor-official-laboratories,,11(2):monitor-official-laboratories,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.11(2):suspend-or-revoke,,11(2):suspend-or-revoke,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.11(3):cfn-audit-suspension-route,,11(3):cfn-audit-suspension-route,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.11(6):adapt-to-annex-iii,,11(6):adapt-to-annex-iii,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.11(6):notify-adaptation,,11(6):notify-adaptation,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.14(3):research-laboratory-notification,,14(3):research-laboratory-notification,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.18(3):self-control-laboratory-notification,,18(3):self-control-laboratory-notification,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.3(2):official-sample-laboratory-class,,3(2):official-sample-laboratory-class,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.3(3):research-output-class,,3(3):research-output-class,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.3(4):self-control-output-class,,3(4):self-control-output-class,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.30(3):unvalidated-eppo-classification,,30(3):unvalidated-eppo-classification,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.30(3):urgent-nonnormalized-method,,30(3):urgent-nonnormalized-method,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.30:official-method-selection,,30(1)-(2):official-method-selection,composite
+IT-DM-169819-2022,IT-DM-169819-2022:Art.5:national-reference-minimum-qualification,,5:national-reference-minimum-qualification,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(10):ministerial-revocation,,7(10):ministerial-revocation,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(11):cessation-notice,,7(11):cessation-notice,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(11):revocation-after-cessation-notice,,7(11):revocation-after-cessation-notice,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(4):national-reference-designation,,7(4):national-reference-designation,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(5):multiple-laboratories-per-competence,,7(5):multiple-laboratories-per-competence,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(8):discretionary-suspension,,7(8):discretionary-suspension,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.7(9):serious-nonconformity-suspension,,7(9):serious-nonconformity-suspension,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.8(2):eligible-official-laboratory-classes,,8(2):eligible-official-laboratory-classes,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.8(3):out-of-region-official-laboratory,,8(3):out-of-region-official-laboratory,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.8(4):preexisting-designation-continuity,,8(4):preexisting-designation-continuity,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:Art.9(1):official-laboratory-minimum-qualification,,9(1):official-laboratory-minimum-qualification,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:entry-into-force,,entry-into-force,paragraph
+IT-DM-169819-2022,IT-DM-169819-2022:publication,,publication,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:Art.1:adoption,,1:adoption,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:§6.2:action-plan-15-working-days,,§6.2,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:§6.4:communicate-no-demarcation,,§6.4:communicate-no-demarcation,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:§6.4:no-demarcation-two-year-follow-up,,§6.4,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:§6.5:containment-buffer-5km,,§6.5,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km,,§6.6.2,paragraph
+IT-DM-2022-XYLELLA-PLAN,IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km,,§6.7,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption,,1(1):adoption,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:Art.2(1):replace-2022-plan,,2(1):replace-2022-plan,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§14:annual-review,,§14:annual-review,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§8.2:action-plan-15-day-unit-conflict,,§8.2,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§8.5:communicate-no-demarcation,,§8.5:communicate-no-demarcation,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§8.5:no-demarcation-surveillance,,§8.5:no-demarcation-surveillance,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§8.6:area-composition,,§8.6:area-composition,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§9.2:containment-vector-treatment-coverage,,§9.2,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§9.3:containment-surveillance-band-2km,,§9.3,paragraph
+IT-DTU39-REV1,IT-DTU39-REV1:official-technical-instruction,,Preamble:official-technical-instruction,composite
+IT-DTU39-REV1,IT-DTU39-REV1:§4.2:sample-transfer,,§4.2:sample-transfer,paragraph
+IT-DTU39-REV1,IT-DTU39-REV1:§4:risk-based-sampling,,§4:risk-based-sampling,paragraph
+IT-DTU39-REV1,IT-DTU39-REV1:§5.4:inconclusive-result-routing,,§5.4:inconclusive-result-routing,composite
+IT-DTU39-REV1,IT-DTU39-REV1:§5.4:pest-free-positive-confirmation,,§5.4:pest-free-positive-confirmation,paragraph
+IT-DTU39-REV1,IT-DTU39-REV1:§5:diagnostic-method-routing,,§5:diagnostic-method-routing,composite
+IT-DTU8-REV2,IT-DTU8-REV2:official-laboratory-route-and-continuing-status,,route and continuing status,composite
+IT-L241-A21BIS,IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect,,21-bis(1):individual-communication-effect,paragraph
+IT-L241-A21BIS,IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route,,21-bis(1):mass-publicity-route,paragraph
+IT-L241-A21BIS,IT-L241-A21BIS:Art.21-bis(1):motivated-immediate-effect,,21-bis(1):motivated-immediate-effect,paragraph
+IT-L241-A21BIS,IT-L241-A21BIS:Art.21-bis(1):urgent-cautionary-effect,,21-bis(1):urgent-cautionary-effect,paragraph
+IT-L689-1981,IT-L689-1981:Art.13:violation-evidence-collection,,13:violation-evidence-collection,paragraph
+IT-L689-1981,IT-L689-1981:Art.14:immediate-contest,,14:immediate-contest,paragraph
+IT-L689-1981,IT-L689-1981:Art.14:later-notification,,14:later-notification,paragraph
+IT-L689-1981,IT-L689-1981:Art.14:untimely-notification-extinction,,14:untimely-notification-extinction,paragraph
+IT-L689-1981,IT-L689-1981:Art.16:reduced-payment,,16:reduced-payment,paragraph
+IT-L689-1981,IT-L689-1981:Art.17:violation-report,,17:violation-report,paragraph
+IT-L689-1981,IT-L689-1981:Art.18:adjudication-process,,18:adjudication-process,paragraph
+IT-L689-1981,IT-L689-1981:Art.18:defence-and-hearing-request,,18:defence-and-hearing-request,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.3(1):national-service-exclusive-competence,,3(1):national-service-exclusive-competence,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.4(1):exclusive-accredited-official-analysis,,4(1):exclusive-accredited-official-analysis,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.4(2):accredited-capacity,,4(2):accredited-capacity,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.4(2):designation,,4(2):designation,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.5(1):external-designation,,5(1):external-designation,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.5(1):external-use,,5(1):external-use,paragraph
+IT-ORD10-2025,IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance,,6(2):external-laboratory-continuing-compliance,paragraph
+IT-ORD10-2025,IT-ORD10-2025:effect-from-adoption,,effect-from-adoption,paragraph
+IT-PNI-2026,IT-PNI-2026:Xylella:Puglia-plant-survey-design,,Xylella RiPEST:Puglia plant-survey design,composite
+IT-PNI-2026,IT-PNI-2026:adoption-and-publication-status,,adoption-and-publication-status,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:Art7(3)-policy,,plan Article 7(3) policy,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:Convention-3.1:arif-surveillance-communication,,Convention 3.1,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control,,Convention 3.1,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.3.2:almond-pre-removal-vector-treatment,,§4.3.2:almond-pre-removal-vector-treatment,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.3.2:mandatory-almond-400m,,§4.3.2:mandatory-almond-400m,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:owner-election-execution,,§4.5:owner-election-execution,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:owner-evidence,,§4.5:owner-evidence,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:prescription,,§4.5:prescription,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:recipient-notice-route,,§4.5:recipient-notice-route,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:refusal-route,,§4.5:refusal-route,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:silence-route,,§4.5:silence-route,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:Art7(3)-policy,,plan Article 7(3) policy,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-elected-execution,,plan owner-notification procedure,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-owner-election,,plan owner-notification procedure,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-owner-identification,,plan owner-notification procedure,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-prescription-issuance,,plan owner-notification procedure,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-publication,,plan owner-notification procedure,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-refusal-forced-removal,,plan owner-notification procedure,paragraph
+PUG-DGR1593-2024,PUG-DGR1593-2024:notice-silence-substitute-execution,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:Art7(3)-policy,,plan Article 7(3) policy,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-elected-execution,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-owner-election,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-owner-identification,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-prescription-issuance,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-publication,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-refusal-forced-removal,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:notice-silence-substitute-execution,,plan owner-notification procedure,paragraph
+PUG-DGR1866-2022,PUG-DGR1866-2022:st53-crop-exclusion-conflict,,plan ST53 crop exclusion,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:Art7(3)-policy,,plan Article 7(3) policy,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-elected-execution,,plan owner-notification procedure,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-owner-election,,plan owner-notification procedure,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-owner-identification,,plan owner-notification procedure,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-prescription-issuance,,plan owner-notification procedure,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-publication,,plan owner-notification procedure,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-refusal-forced-removal,,plan owner-notification procedure,paragraph
+PUG-DGR343-2022,PUG-DGR343-2022:notice-silence-substitute-execution,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:Art7(3)-policy,,plan Article 7(3) policy,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-elected-execution,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-owner-election,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-owner-identification,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-prescription-issuance,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-publication,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-refusal-forced-removal,,plan owner-notification procedure,paragraph
+PUG-DGR538-2021,PUG-DGR538-2021:notice-silence-substitute-execution,,plan owner-notification procedure,paragraph
+PUG-DPGR22-2021,PUG-DPGR22-2021:Art.20(3):publication-not-notice,,Art.20(3):publication-not-notice,paragraph
+PUG-LR3-2010,PUG-LR3-2010:Art.3-bis(1)(a),,3-bis(1)(a),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.2(1),,Art.2(1),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.2(2),,Art.2(2),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.2(3),,Art.2(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.2(4),,Art.2(4),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.3(1),,3(1),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.3(2),,3(2),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.3(3),,3(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.3(4):may-revoke,,3(4),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(1),,Art.4(1),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(2),,Art.4(2),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(3):access,,Art.4(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(3):laboratory,,Art.4(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(3):sampling,,Art.4(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(3):survey-route,,Art.4(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(4),,Art.4(4),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(5),,Art.4(5),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(6):follow-up,,Art.4(6),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(6):vector,,Art.4(6),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.4(7),,Art.4(7),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.5(1),,5(1),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.5(2),,5(2),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.5(3),,5(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.5(4),,5(4),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.5(5),,5(5),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.5(6),,5(6),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.6(1),,Art.6(1),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.6(2),,Art.6(2),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.6(3),,Art.6(3),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.7(1),,7(1),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.7(2),,7(2),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.7(4),,7(4),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.8(5):protected-uninfected-retention,,8(5),paragraph
+PUG-LR4-2017,PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary,,8(7bis),paragraph
+REG-PUGLIA-U181-DIR-2021-00069,REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00069,REG-PUGLIA-U181-DIR-2021-00069:partial-parcel-rule,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00069,REG-PUGLIA-U181-DIR-2021-00069:pauca-area-update,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00135,REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:commission-notification,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:post-lift-plant-surveillance,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:post-lift-vector-monitoring,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2022-00004,REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2022-00006,REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2022-00006,REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:containment-pool-decomposition,,historical positive-pool identity routing (containment zone),paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:containment-treatment-removal-sequence,,historical containment treatment and removal sequence,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:cq-analytical-result-classification,,historical analytical-result classification,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:destruction-root-wood-completion,,"historical destruction, root and wood completion",paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:doubtful-result-route,,historical doubtful-result routing,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:eradication-treatment-removal-sequence,,historical eradication treatment and removal sequence,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:execution-oversight-and-record,,historical execution oversight and record,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:obstruction-remedy-route,,historical obstruction remedy route,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:pest-free-buffer-pool-confirmation,,historical pest-free/buffer confirmation routing,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer,,historical sample custody transfer,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:st53-crop-exclusion-conflict,,historical 50 m retention exclusions,paragraph
+REG-PUGLIA-U181-DIR-2022-00127,REG-PUGLIA-U181-DIR-2022-00127:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2023-00002,REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2023-00045,REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2023-00051,REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2023-00096,REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00008,REG-PUGLIA-U181-DIR-2024-00008:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00012,REG-PUGLIA-U181-DIR-2024-00012:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00018,REG-PUGLIA-U181-DIR-2024-00018:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00027,REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00029,REG-PUGLIA-U181-DIR-2024-00029:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00045,REG-PUGLIA-U181-DIR-2024-00045:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00052,REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00052,REG-PUGLIA-U181-DIR-2024-00052:case-delta:staged-article7-workload,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00091,REG-PUGLIA-U181-DIR-2024-00091:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00092,REG-PUGLIA-U181-DIR-2024-00092:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00093,REG-PUGLIA-U181-DIR-2024-00093:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00094,REG-PUGLIA-U181-DIR-2024-00094:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00138,REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00148,REG-PUGLIA-U181-DIR-2024-00148:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00151,REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00158,REG-PUGLIA-U181-DIR-2024-00158:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00158,REG-PUGLIA-U181-DIR-2024-00158:containment-selection,,containment selection,paragraph
+REG-PUGLIA-U181-DIR-2024-00165,REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00188,REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00198,REG-PUGLIA-U181-DIR-2024-00198:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00011,REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00011,REG-PUGLIA-U181-DIR-2025-00011:case-delta:three-day-owner-change-report,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:area-act-before-gis,,Annex A area lifecycle,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:asparagus-non-sampling-conflict,,survey crop exclusion,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:containment-execution-evidence,,Annex A containment execution evidence,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:containment-execution-verification,,Annex A containment execution verification,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:containment-removal-population-support,,Annex A containment removal-population support,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion,,Annex A containment root/wood completion,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:containment-treatment-removal-sequence,,Annex A containment treatment/removal,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification,,Cq analytical classification,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:doubtful-result-route,,Annex A diagnostic interpretation,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:eradication-execution-verification,,Annex A eradication execution verification,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:eradication-removal-population-support,,Annex A eradication removal-population support,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:execution-evidence,,Annex A eradication execution evidence,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:executor-selection,,Annex A eradication execution,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:obstruction-remedy-route,,Annex A eradication execution,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:pest-free-positive-routing,,Annex A pest-free positive routing,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:positive-pool-identity-route,,Annex A positive routing,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion,,Annex A eradication root/wood completion,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer,,Annex A sample delivery,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:st26-olive-exclusion-conflict,,eradication crop exclusion,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:st53-citrus-prunus-exclusion-conflict,,eradication crop exclusion,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:treatment-removal-sequence,,Annex A eradication treatment/removal,paragraph
+REG-PUGLIA-U181-DIR-2025-00059,REG-PUGLIA-U181-DIR-2025-00059:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00106,REG-PUGLIA-U181-DIR-2025-00106:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00113,REG-PUGLIA-U181-DIR-2025-00113:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00115,REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00117,REG-PUGLIA-U181-DIR-2025-00117:case-delta:failed-service-represcription,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00117,REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00126,REG-PUGLIA-U181-DIR-2025-00126:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00132,REG-PUGLIA-U181-DIR-2025-00132:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00141,REG-PUGLIA-U181-DIR-2025-00141:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00147,REG-PUGLIA-U181-DIR-2025-00147:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00163,REG-PUGLIA-U181-DIR-2025-00163:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00201,REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00236,REG-PUGLIA-U181-DIR-2025-00236:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2026-00002,REG-PUGLIA-U181-DIR-2026-00002:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2026-00004,REG-PUGLIA-U181-DIR-2026-00004:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2026-00012,REG-PUGLIA-U181-DIR-2026-00012:almond-characterization,,almond-characterization,paragraph
+REG-PUGLIA-U181-DIR-2026-00035,REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2026-00063,REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2026-00063,REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2026-00082,REG-PUGLIA-U181-DIR-2026-00082:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2026-00112,REG-PUGLIA-U181-DIR-2026-00112:area-state-transition,,operative area decision,paragraph

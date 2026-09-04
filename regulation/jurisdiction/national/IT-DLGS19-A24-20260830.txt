@@ -1,0 +1,115 @@
+SOURCE_URL: https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art24!vig=2026-08-30
+SOURCE_STATUS: Normattiva point-in-time text in force 2026-08-30
+
+[ **Presidenza del Consiglio dei Ministri**](https://www.governo.it)
+[ ITA ](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art24!vig=2026-08-30)
+
+
+# [Normattiva - Il portale della legge vigente ](https://www.normattiva.it/)
+In caso di problemi di visualizzazione dell’atto clicca 
+it-calendar
+July 2015  
+ |  
+|  |  
+| Javascript must be enabled  |  
+Close
+Fare clic o premere il tasto Invio o la barra spaziatrice per aprire il calendario
+Go to previous month
+Go to next month
+Go to previous year
+Go to next year
+Close the date picker
+Date label
+##  DECRETO LEGISLATIVO 2 febbraio 2021, n. 19 
+### Norme per la protezione delle piante dagli organismi nocivi in attuazione dell'articolo 11 della legge 4 ottobre 2019, n. 117, per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625. (21G00021) 
+note: Entrata in vigore del provvedimento: 13/03/2021 _(Ultimo aggiornamento all'atto pubblicato il 24/01/2026)_
+[ visualizza atto intero ](https://www.normattiva.it/esporta/attoCompleto?atto.dataPubblicazioneGazzetta=2021-02-26&atto.codiceRedazionale=21G00021)
+[ nascondi ](javascript:void\(0\))
+vigente al 30/08/2026
+  * Articoli
+  * Ambito di applicazione e definizioni
+  * Organizzazione del servizio fitosanitario nazionale
+  * Laboratori
+  * Personale del servizio fitosanitario nazionale
+  * Sorveglianza degli organismi nocivi delle piante sul territorio nazionale
+  * Emergenze fitosanitarie
+  * Registro ufficiale degli operatori professionali
+  * Passaporto delle piante
+  * Controlli ufficiali
+  * Piante, prodotti vegetali e altri oggetti utilizzati a fini di prove ufficiali, scientifici o educativi, sperimentali, di selezione varietale o riproduttivi
+  * Sistema informativo fitosanitario
+  * Sanzioni amministrative e norme finanziarie
+  * Norme transitorie e finali
+
+
+  * Allegati
+
+
+  * Allegato I
+  * Allegato II
+  * Allegato III
+
+
+## Parole cercate: 
+Presente nei seguenti articoli
+Presente nei seguenti allegati
+chiudi
+Articoli  Approfondimenti e Funzioni 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+Testo in vigore dal: 13-3-2021 
+## Art. 24
+Registro del personale del Servizio fitosanitario nazionale
+1. Presso il Servizio fitosanitario centrale è istituito il Registro del personale del Servizio fitosanitario nazionale. 
+2. Il Registro, inserito nel Sistema Informativo per la Protezione delle Piante, di cui all'articolo 52, si articola in sezioni e contiene i nominativi del personale di cui al presente Capo, il titolo di studio, la funzione relativa ai controlli ufficiali fitosanitari, l'inquadramento, la sede operativa, nonché le relative firme autentiche. 
+3. Con decreto del Ministro delle politiche agricole alimentari e forestali, verificato il possesso di tutti i requisiti di cui rispettivamente agli articoli 18 e 19, sono nominati gli ispettori fitosanitari e gli agenti fitosanitari del Servizio fitosanitario nazionale e il Servizio fitosanitario centrale ne inserisce i nominativi nel Registro di cui al comma 1 dandone comunicazione ai Servizi fitosanitari regionali competenti, affinchè il personale sia inquadrato nei rispettivi ruoli. 
+4. I Servizi fitosanitari regionali comunicano al Servizio fitosanitario centrale, mediante il Sistema Informativo per la Protezione delle Piante, ogni eventuale aggiornamento del registro, al fine della sua validazione. 
+5. I nominativi del personale del Servizio fitosanitario nazionale sono cancellati dal registro, con provvedimento del Ministro delle politiche agricole alimentari e forestali, sulla base della proposta motivata del Servizio Fitosanitario regionale competente, nonché quando il personale viene destinato a svolgere altri compiti non pertinenti alle attività di protezione delle piante o in caso di cessata attività. 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+[ nascondi ](javascript:void\(0\))
+  * ### Approfondimenti
+  * aggiornamenti all'atto 
+  * lavori preparatori 
+  * aggiornamenti al titolo 
+  * aggiornamenti alla struttura 
+
+
+  * ### Funzioni 
+  * [ esporta in Akoma ntoso ](https://www.normattiva.it/do/atto/caricaAKN?dataGU=20210226&codiceRedaz=21G00021&dataVigenza=20260830)
+  * collegamento permanente 
+
+
+#### lavori preparatori
+chiudi
+#### aggiornamenti all'atto
+chiudi
+#### atti aggiornati
+chiudi
+#### atti correlati
+chiudi
+#### indice dell'atto
+chiudi
+#### aggiornamenti alla struttura
+chiudi
+#### aggiornamenti al titolo
+chiudi
+#### relazioni
+chiudi
+#### note atto
+chiudi
+#### collegamento permanente
+chiudi
+## guida in linea
+chiudi
+#### Aggiornamenti all'articolo
+chiudi
+#### atti parlamentari
+chiudi
+#### atti attuativi
+chiudi
+  *[lun]: lunedì
+  *[mar]: martedì
+  *[mer]: mercoledì
+  *[gio]: giovedì
+  *[ven]: venerdì
+  *[sab]: sabato
+  *[dom]: domenica

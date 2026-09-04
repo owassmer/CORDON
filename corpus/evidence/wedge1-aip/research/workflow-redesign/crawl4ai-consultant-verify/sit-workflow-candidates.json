@@ -1,0 +1,685 @@
+[
+  {
+    "name": "Background/Catasto",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Background/CatastoImpianto",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "BaseMaps/CartaEsposizioni",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/CartaPendenze",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/DTMColori",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto1997",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2006",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2010",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2011",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2013",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2015",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2015_IR",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2016",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2019",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2022",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "BaseMaps/Ortofoto2023",
+    "type": "ImageServer",
+    "candidate_categories": [
+      "field_observation"
+    ]
+  },
+  {
+    "name": "Editing/AIAEditing",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/AIAEditing",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/IDEA_VAS_PROCEDIMENTI",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/IDEA_VAS_PROCEDIMENTI",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/PRAE_PROCEDIMENTI",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/PRAE_PROCEDIMENTI",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/PianiVASEditing",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/PianiVASEditing",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/PianoAmianto",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/PianoAmianto",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/SistemaIdrico",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/SistemaIdrico",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/TagliBoschivi",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/TagliBoschivi",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/UpdateAbusi",
+    "type": "FeatureServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Editing/UpdateAbusi",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Operationals/AreeProtetteReteNatura2000",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/AutorizzazioniPaesaggistiche",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Operationals/AziendeAgricole",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals/BoschiDaSeme",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/CatastoGrotte",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals/CatastoManufatti",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals/ConsultaBBCC",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/ConsultaMappaViniIP",
+    "type": "MapServer",
+    "candidate_categories": [
+      "program_or_agriculture"
+    ]
+  },
+  {
+    "name": "Operationals/CorsiAcquaIdrogeomorfologia",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/CorsiAcquaIrrilevantiPPTR",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/DatiPubbliciFasceXF",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals/IndicatoriConsumoSuolo",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/PAI",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/PPTRVincoliDelegati",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/PPTR_ADOTTATO",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/PPTR_APPROVATO",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/PianificazioneParchi",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Operationals/SitiContaminati",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/UsiCivici",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals/VASConsultazione",
+    "type": "MapServer",
+    "candidate_categories": [
+      "procedural"
+    ]
+  },
+  {
+    "name": "Operationals/VASVincoli",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/Vincoli",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals/VincoliDelegati",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/AreeVincoloIdrogeologico",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/AtlanteTratturiEvoland",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/AutorizzazioniPaesaggisticheCompleteDiniego",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Operationals2/BeniCulturaliAmbientaliOstuni",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/CartaTipiForestali",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/CatastoImpiantoEvoland",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals2/ConsultaAbusi",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/ConsultaIdricoDerivazioni",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/DGR8192019",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/DatiPubbliciFasceXFBandoPSR",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella",
+      "program_or_agriculture"
+    ]
+  },
+  {
+    "name": "Operationals2/DatiPubbliciFasceXFF",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/DatiPubbliciFasceXFMultiplex",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/DistrettiIrrigui",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/ElencoTerreniDGR17802019",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/IndicatoriAgricolturaIntegrProc",
+    "type": "MapServer",
+    "candidate_categories": [
+      "program_or_agriculture"
+    ]
+  },
+  {
+    "name": "Operationals2/IndicatoriAgricolturaMonitoraggio",
+    "type": "MapServer",
+    "candidate_categories": [
+      "program_or_agriculture"
+    ]
+  },
+  {
+    "name": "Operationals2/IndicatoriAgricolturaPSR",
+    "type": "MapServer",
+    "candidate_categories": [
+      "program_or_agriculture"
+    ]
+  },
+  {
+    "name": "Operationals2/InventarioForestale",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFFSintesiAttuale",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFMaglie",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFMultiplexSintesiAttuale",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFPasp",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFSintesi",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFSintesiAttuale",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFStampa",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals2/MonitoraggioXFStampaCatasto",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella",
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals2/PTA2019_Vincoli",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/QuadroAssettoTratturi",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/TagliBoschiviConsultazione",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints",
+      "procedural"
+    ]
+  },
+  {
+    "name": "Operationals2/UsiCiviciRicognizione",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals2/UsiCiviciRicognizioneUfficio",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals2/VincoliTotale",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals2/ZVN",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals3/AreeProduzioneDOPIGPAgroalimentari",
+    "type": "MapServer",
+    "candidate_categories": [
+      "program_or_agriculture"
+    ]
+  },
+  {
+    "name": "Operationals3/CartaPedologica",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "Operationals3/DemanioStato",
+    "type": "MapServer",
+    "candidate_categories": [
+      "land_identity"
+    ]
+  },
+  {
+    "name": "Operationals3/MonitoraggioXFFSintesiPrecedenti",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals3/MonitoraggioXFMultiplexSintesiPrecedenti",
+    "type": "MapServer",
+    "candidate_categories": [
+      "legal_xylella"
+    ]
+  },
+  {
+    "name": "Operationals3/PPTR_APPROVATO_PRECEDENTI",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "ServicesArcIMS/AreeVincolate",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  },
+  {
+    "name": "ServicesArcIMS/Idrogeomorfologia",
+    "type": "MapServer",
+    "candidate_categories": [
+      "field_constraints"
+    ]
+  }
+]

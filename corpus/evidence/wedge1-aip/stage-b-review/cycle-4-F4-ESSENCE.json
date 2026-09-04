@@ -1,0 +1,104 @@
+{
+  "facet": "F4-ESSENCE",
+  "verdict": "FAIL",
+  "assertions": [
+    {
+      "id": "F4-C4-01",
+      "severity": "material",
+      "class": "method_fixation",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "56 null-ref implements_clock/restates_parameter dispositions whose provision_version_id already has another disposition",
+      "field": "dispositions[].disposition, dispositions[].ref, dispositions[].why",
+      "quoted_span": "\"disposition\": \"implements_clock\", \"ref\": null, \"why\": \"annual survey implements EU 10/15; C/p pairs restate EU\" | \"disposition\": \"restates_parameter\", \"ref\": null, \"why\": \"area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer)\"",
+      "claim": "These 31 implements_clock and 25 restates_parameter objects name no referenced clock or parameter, while the builder/reviewer is their only possible consumer, the same provision versions remain covered by other dispositions, and no Stage C–G consumer reads dispositions, so deleting them breaks neither computation nor even the verifier's row-coverage check.",
+      "proposed_remedy": "Delete the 56 null-ref implements_clock/restates_parameter objects on already-covered provision versions; retain direct-ref sibling-mint links and the 13 null-ref objects that currently provide a provision version's sole disposition until row coverage has another owner.",
+      "falsifier": "An attached consumer reads one of these exact expression objects, despite its null ref and an independently surviving disposition for the same provision version, to perform a function unavailable from the canonical row, Stage A source quote or surviving disposition.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-C4-02",
+      "severity": "material",
+      "class": "method_fixation",
+      "artifact": "regulation/jurisdiction/STAGE_A_AUTHORITY_SNAPSHOT.json",
+      "row": "stage_b_execution.seams; calls_2026_09_01; schema_v2_conventions_2026_09_01; independent_review.cycle_1_2026_09_02 through cycle_3_2026_09_02",
+      "field": "historical construction and review narratives",
+      "quoted_span": "[HISTORICAL — describes the schema-v2 ledger of 2026-09-01, superseded by the schema-v3 regeneration and review cycles of 2026-09-02; the current canonical's status is its closure_manifest, which says NOT_ASSERTED] | F1 FAIL, F2 FAIL, F3 FAIL — 16 assertions | REMEDIATION DRIFT, mine.",
+      "claim": "The sole authority now embeds roughly 40,000 characters of superseded seam construction history and cycle-by-cycle review adjudication whose consumer is only Owen, while the dated review returns preserve the assertions and falsifiers and the current canonical, closure manifest, owner rulings and unresolved register preserve the live result, so deleting the duplicated history breaks no current decision and its accumulation is now faster than its consumption.",
+      "proposed_remedy": "Stop producing cycle-by-cycle narrative copies in the authority; retain only current status, current owner rulings, unresolved questions and links to the dated review returns, and remove the self-labelled historical seam/schema-v2 construction narratives.",
+      "falsifier": "A current builder or downstream-stage decision depends on a fact found only in one of these historical narratives and absent from the current canonical, current rulings, unresolved register and linked review return.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-C4-03",
+      "severity": "minor",
+      "class": "source_shaped_work",
+      "artifact": "regulation/stage-b/generated/dispositions.csv; regulation/stage-b/generated/closure_manifest.csv",
+      "row": "entire generated projections",
+      "field": "PROJECTIONS entries and generation-status.json generated hashes",
+      "quoted_span": "PROJECTIONS = ('clocks', 'parameters', 'dispositions', 'closure_manifest')",
+      "claim": "No attached downstream consumer reads the CSV projections of the disposition log or closure manifest—the verifier and generator read the canonical JSON and generation-status merely hashes the files it creates—so deleting these two process-only projections breaks no Stage C–G input or human ruling.",
+      "proposed_remedy": "Remove dispositions and closure_manifest from the generated CSV projection set and from generation-status hashes; retain both canonical JSON arrays.",
+      "falsifier": "An attached or declared downstream consumer requires dispositions.csv or closure_manifest.csv rather than the corresponding canonical JSON array.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-C4-04",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-5(1)(b)-tests-once-a-year; B-CLK-DM169819-11(6)-adaptation-12-months",
+      "field": "note",
+      "quoted_span": "Counted since the eradication measures were taken (source-stated lookback). | Closed cohort: only laboratories designated on 17 July 2022 enter it. The Osservatorio's designation and suspension decision consumes it for any event time inside the period.",
+      "claim": "These notes violate the note convention by restating facts already carried by their event anchors, effective interval, consumer_decision and source phrase, so Stage C, Stage E and Owen lose no input or ruling if they are deleted.",
+      "proposed_remedy": "Set both notes to null.",
+      "falsifier": "Either row's structured anchor, interval, consumer decision and source phrase fail to identify the start event or eligible cohort without the note.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-C4-05",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-5(1)(d)-vector-tests-twice-in-flight-season",
+      "field": "note",
+      "quoted_span": "Counted since the eradication measures were taken; the tests must lead to the conclusion that natural spread is excluded.",
+      "claim": "The note carries substantive Article 5 reduction-condition prose rather than a clock interaction or open term, while Stage A owns that predicate and Stage C consumes only the twice-during-flight-season relationship, so deletion breaks no clock computation or Action input.",
+      "proposed_remedy": "Set the note to null and leave the full reduction condition in its Stage A producer.",
+      "falsifier": "A declared Stage C–G consumer uses this note, rather than the Stage A producer and the clock's structured fields, to compute the twice-per-flight-season obligation or its completion.",
+      "confidence": "high"
+    },
+    {
+      "id": "F4-C4-06",
+      "severity": "minor",
+      "class": "note_bloat",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-625-42-renewal-1y; B-PAR-EU-15(3)-island-exemption-5km",
+      "field": "note",
+      "quoted_span": "The source permits one renewal only; no second renewal is available. | Distance from the island to the nearest Union land territory; strictly greater than 5 km disapplies the 15(2)(a) band.",
+      "claim": "These notes are prohibited restatements: the renewal row's source_phrase and the temporary-designation completion already say renewed once, while the island parameter's comparator, scope and consumer_decision carry the complete disapplication rule, so deleting the notes breaks no named consumer.",
+      "proposed_remedy": "Set both notes to null.",
+      "falsifier": "A declared consumer cannot recover the one-renewal limit or the island threshold's measured objects and consequence from the cited structured fields and source phrase.",
+      "confidence": "high"
+    }
+  ],
+  "checked_sound": [
+    "Exhaustively inventoried the current canonical's 19 clock fields across 71 clocks and 12 parameter fields across 53 parameters. The cycle-3 seam removal is complete; no row retains seam, and closure_manifest and population.json are non-duplicative owners of minted-row and population-row seam membership.",
+    "Tested duplicate facts in both directions. The exact-looking pre/post version pairs remain justified by inherited producer intervals, including the two Article 7(1)(e) clocks and four unchanged Union parameter pairs; deleting either version would leave its legal interval without a row.",
+    "The 18 non-identifier clock fields and 11 non-identifier parameter fields other than note have named consumers when populated: Stage C consumes timing, magnitude, bounds, windows, relations and applicability; D consumes anchor identity; E consumes owner, executor, completion and consequence; F/G carry the clock properties; source_phrase and intervals preserve fidelity and version applicability.",
+    "No surviving anchor, applies_when, completion or consequence_on_expiry was substantiated as an evidence predicate standing before a decision vested outright. Record classes identify holdable event anchors; the Article 39 accreditation-assessment exception is source-stated rather than invented proof.",
+    "The cycle-3 partial rejection of F4-05 survives re-review. Article 7(1)(e)-sub2 expressly opens \"By way of derogation from point (e)\", and no structured field on the two immediate-sampling rows links them to the deferral clock; deleting those two remaining one-clause notes would therefore break the human/downstream cross-clock link.",
+    "The retained notes on Article 7(1)(e)-sub2, Article 13(1), the almond exception, Article 31(9), Article 39 and the Cq boundaries carry source-stated clock interactions or genuine open terms. Their deletion would lose a relationship or unresolved boundary not otherwise carried by the same row.",
+    "The bound field earns its schema cost by preserving floors without prose parsing. resettable_period remains the only available structure carrying the Article 6(1) start, reset and survey basis together. applies_when, window, relation and executor each carry independently consumed facts and are not one-row decorative additions.",
+    "The new note and seam convention keys are human-review rules rather than dead letters: the note key supplies the admissibility test the verifier intentionally cannot decide, and the seam key prevents reintroduction of the duplicate per-row ownership removed in cycle 3.",
+    "The closure-manifest partition checks earn their verifier weight after per-row seam deletion: they ensure every clock and parameter has exactly one manifest owner, every held seam is empty and population counts agree with population.json. Removing them would permit silent unowned or multiply claimed canonical rows.",
+    "The duplicate-disposition-object check is not redundant: it enforces the deletion-test result sustained in cycle 3 and rejects indistinguishable objects without attempting semantic judgment.",
+    "Direct-ref implements_clock and restates_parameter dispositions retain an audit consumer: they identify the single canonical owner of a sibling or restated fact and prevent the cycle-3 derived-log divergence. The asserted bloat is limited to null-ref entries on provision versions that remain independently covered.",
+    "No admissible deletion was based on rarity, lack of a Puglian instance or absence of a held case. The Article 15(3), Article 39, Article 42, lifting and closed-cohort rows were tested only for duplication and consumption.",
+    "Read-only integrity comparison found 71 clocks, 53 parameters and 581 dispositions; canonical SHA-256 e1bc21e8c79b9ca48e956222dfc592bc87b68bf09d40bdfe372bca8fc5699afd matches generation-status.json, and all four existing projection hashes match disk.",
+    "The dated review returns themselves still earn retention as evidence because they preserve exact assertions and falsifiers. What should stop is further review on an unchanged ledger and the copying of each adjudication back into the sole authority as another narrative layer."
+  ],
+  "unresolved": [
+    "The attached corpus names no implemented Stage C–G reader, so field-consumption conclusions are tested against the binding declared consumer contract and repository references rather than executable downstream code.",
+    "The note on B-CLK-EU-625-42-renewal-1y is redundant for the present row, but the structured schema still has no dedicated maximum-renewal-count field; whether a later Action model can enforce the one-renewal limit without consulting Stage A is outside this deletion-only facet."
+  ]
+}

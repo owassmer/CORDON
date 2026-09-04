@@ -1,0 +1,24 @@
+{
+  "authority": "ISTAT SITUAS report 61 — Elenco dei codici e delle denominazioni delle unità territoriali",
+  "source_endpoint": "https://situas-servizi.istat.it/publish/reportspooljson?pfun=61&pdata=<DD/MM/YYYY>",
+  "snapshots": [
+    {
+      "date": "2020-08-20",
+      "sha256": "28b6cfa11db31f741fa3e06cacb0d02b65c83c1120f0a96f39372635c93131ed",
+      "italy_rows": 7903
+    },
+    {
+      "date": "2024-06-05",
+      "sha256": "0e2736d735431949c6f4f7f9951600ff04c61d3667383d9b8505137ea3692cc9",
+      "italy_rows": 7896
+    },
+    {
+      "date": "2026-05-31",
+      "sha256": "69ffc40375c706c883463a1ec9462f785c04945f62f0cb09fc323f54aca35314",
+      "italy_rows": 7894
+    }
+  ],
+  "claim": "Lecce (075) has 96 comuni and Brindisi (074) has 20; membership sets are identical at all three snapshots. verified_through limits the currentness claim.",
+  "lecce_rows": 96,
+  "brindisi_rows": 20
+}

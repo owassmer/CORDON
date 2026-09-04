@@ -1,0 +1,2 @@
+ref_id,status,as_of,note,source_class,derivation_class,verification_class,source_url,license,retrieved_at
+VEC-ADULT-2026,act_not_located_as_of,2026-08-16,2026 adult-treatment determina not located (D-5); not the string not_enacted; DDS 39/79 2026 are juvenile tillage not adult treatment,official,deterministic_derived,hand_verified,https://burp.regione.puglia.it/,two failed searches 16 Aug 2026; D-5,2026-08-16T00:00:00Z

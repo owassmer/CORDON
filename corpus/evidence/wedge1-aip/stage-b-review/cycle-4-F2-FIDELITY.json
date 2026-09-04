@@ -1,0 +1,40 @@
+{
+  "facet": "F2-FIDELITY",
+  "verdict": "FAIL",
+  "assertions": [
+    {
+      "id": "F2-12",
+      "severity": "material",
+      "class": "remediation_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "B-CLK-EU-7(1)(e)-v1-immediate-sampling",
+      "field": "note",
+      "quoted_span": "Source-stated derogation: B-CLK-EU-7(1)(e)-sub2-two-year-lookback is the only alternative to immediate sampling.",
+      "claim": "The trimmed note fails Version fidelity through Remediation drift because it attaches the Article 7(1)(e), second-subparagraph derogation to the v1 sampling clock for 20 August 2020–17 October 2024, although that derogation was introduced only on 17 October 2024 and the v1 producer quote contains no such alternative.",
+      "proposed_remedy": "Set the v1 clock's note to null; retain the source-stated derogation note only on B-CLK-EU-7(1)(e)-v2-immediate-sampling, whose interval begins when the second subparagraph was introduced.",
+      "falsifier": "The v1 source span or a binding Stage A ruling establishes that the Article 7(1)(e), second-subparagraph derogation applied before 17 October 2024.",
+      "confidence": "high"
+    }
+  ],
+  "checked_sound": [
+    "Verified the frozen canonical state: sha256 e1bc21e8c79b9ca48e956222dfc592bc87b68bf09d40bdfe372bca8fc5699afd, with 71 clocks, 53 parameters, 581 dispositions and 11 non-null clock notes.",
+    "Exhaustively reread all 71 clocks in canonical order against their producer Stage A source_quote spans for anchor denotation; legal-state object, medium and place; kind and bound; magnitude, unit and comparator; consequence and completion; version interval; and vocabulary.",
+    "Confirmed B-CLK-EU-6(1)-four-negative-years now identifies establishment as the start event while correctly identifying the preceding demarcating finding—not establishment itself—as the last detection held at that moment.",
+    "Confirmed the Article 6(1) basis now says only that the non-detection conclusion rests on the Article 10 annual surveys of the entire demarcated area; neither the row nor the resettable-period convention continues to invent a rule that incomplete survey coverage automatically stops or disproves the period.",
+    "Confirmed the nulled notes on B-CLK-EU-2(1)-v2, B-CLK-EU-6(1)-four-negative-years and B-CLK-EU-6(2)-v1-early-lift-12-months leave no missing operative interaction: population is carried by the anchor, while eligibility kind, bound, applies_when, completion and consumer_decision carry the lifting relations.",
+    "Confirmed B-CLK-EU-7(1)(e)-v2-immediate-sampling may retain the trimmed derogation note because its interval begins on 17 October 2024 together with EU-2020-1201:7(1)(e)-sub2:v1; the version defect is confined to the predecessor v1 clock.",
+    "Confirmed B-CLK-EU-625-39-audit-recurrence faithfully preserves the only computable temporal limb of Article 39(1)—an open recurrence stated as 'on a regular basis' with no invented cadence—and structurally carries the accreditation-assessment redundancy exception.",
+    "Confirmed retraction of B-CLK-EU-625-39-audit-on-necessity is fidelity-preserving: 'any time they consider that an audit is necessary' supplies a condition-owned trigger but no period, ordering relation, threshold, deadline or promptness word for Stage C to compute.",
+    "Confirmed the remaining Article 39 recurrence does not purport to erase the separate necessity trigger: its source_phrase, open-recurrence note and completion are limited to the regular-audit temporal fact, while Stage A retains the composite provision.",
+    "Confirmed the four Article 5(4)(a) rows preserve the version change from at least two years to at least one Union year by separating minimum duration from annual recurrence, without averaging or back-projecting either interval.",
+    "Confirmed the Article 7 per-plant anchors, Article 8 and 14 treatment-ordering constraints, Article 13 mutually exclusive timing routes, four regional 48-hour floors, Article 31(9) open recurrence, Article 42 one-year limit and single-renewal limit remain faithful to their respective quotes.",
+    "Exhaustively checked all 13 floor parameters, the one ceiling parameter and all four threshold parameters against their producer quotes; values, units and comparators remain faithful, including the 400 m almond inclusive ceiling and the strictly-greater-than-5-km island threshold.",
+    "Checked every distinct confidence/prevalence design pair against its quote: Union targets retain floor confidence with exact prevalence, while the five PNI targets retain exact confidence and prevalence after proportion-to-percent normalization.",
+    "Confirmed all legal_state anchors carry object, medium and place keys and that the clock vocabulary does not substitute host plants for specified plants or annotate the defined term specified pest with its definiens."
+  ],
+  "unresolved": [
+    "Article 6(1): the attached corpus does not resolve what incomplete Article 10 survey coverage does to satisfaction of the four-year condition. Stage B now identifies the evidence stream without deciding that legal-sufficiency question.",
+    "D.lgs. 19/2021 Article 33(1): the attached source span does not state the start event for the forty-five-day landscape-authorization period. Stage B anchors it on lodging the application, while the reached Article 146(8) material separately runs the superintendent's forty-five days from receipt of the acts; resolution requires reopening Stage A or consulting an out-of-scope source.",
+    "EU 2017/625 Article 39: Stage A marks authority_judgment_required as NO although the source turns the necessity trigger and accreditation-redundancy exception on what the competent authority considers or finds. Because Stage A's own reading is closed for this facet, this remains an unresolved Stage A question rather than a Stage B assertion."
+  ]
+}

@@ -1,0 +1,144 @@
+SOURCE_URL: https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art5!vig=2021-03-13
+SOURCE_STATUS: Normattiva point-in-time text in force 2021-03-13
+
+[ **Presidenza del Consiglio dei Ministri**](https://www.governo.it)
+[ ITA ](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art5!vig=2021-03-13)
+
+
+# [Normattiva - Il portale della legge vigente ](https://www.normattiva.it/)
+In caso di problemi di visualizzazione dell’atto clicca 
+it-calendar
+July 2015  
+ |  
+|  |  
+| Javascript must be enabled  |  
+Close
+Fare clic o premere il tasto Invio o la barra spaziatrice per aprire il calendario
+Go to previous month
+Go to next month
+Go to previous year
+Go to next year
+Close the date picker
+Date label
+##  DECRETO LEGISLATIVO 2 febbraio 2021, n. 19 
+### Norme per la protezione delle piante dagli organismi nocivi in attuazione dell'articolo 11 della legge 4 ottobre 2019, n. 117, per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625. (21G00021) 
+note: Entrata in vigore del provvedimento: 13/03/2021 _(Ultimo aggiornamento all'atto pubblicato il 24/01/2026)_
+[ visualizza atto intero ](https://www.normattiva.it/esporta/attoCompleto?atto.dataPubblicazioneGazzetta=2021-02-26&atto.codiceRedazionale=21G00021)
+[ nascondi ](javascript:void\(0\))
+vigente al 13/03/2021
+  * Articoli
+  * Ambito di applicazione e definizioni
+  * Organizzazione del servizio fitosanitario nazionale
+  * Laboratori
+  * Personale del servizio fitosanitario nazionale
+  * Sorveglianza degli organismi nocivi delle piante sul territorio nazionale
+  * Emergenze fitosanitarie
+  * Registro ufficiale degli operatori professionali
+  * Passaporto delle piante
+  * Controlli ufficiali
+  * Piante, prodotti vegetali e altri oggetti utilizzati a fini di prove ufficiali, scientifici o educativi, sperimentali, di selezione varietale o riproduttivi
+  * Sistema informativo fitosanitario
+  * Sanzioni amministrative e norme finanziarie
+  * Norme transitorie e finali
+
+
+  * Allegati
+
+
+  * Allegato I
+  * Allegato II
+  * Allegato III
+
+
+## Parole cercate: 
+Presente nei seguenti articoli
+Presente nei seguenti allegati
+chiudi
+Articoli  Approfondimenti e Funzioni 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+Testo in vigore dal: 13-3-2021  al: 22-4-2023
+[aggiornamenti all'articolo](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art5!vig=2021-03-13)
+## Art. 5
+Servizio fitosanitario centrale
+1. Il Servizio fitosanitario centrale opera presso il Ministero delle politiche agricole alimentari e forestali e rappresenta l'autorità unica di coordinamento e vigilanza sull'applicazione delle attività di cui all'articolo 3, ai sensi dell'[articolo 4 del regolamento (UE) 2017/625](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2017;625~art4), nonché l'organo di collegamento ai sensi dell'[articolo 103 del regolamento (UE) 2017/625](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2017;625~art103) limitatamente alla protezione delle piante. 
+2. Il Servizio fitosanitario centrale dispone di addetti, adeguatamente qualificati ed esperti, nell'ambito della vigente dotazione organica del Ministero delle politiche agricole alimentari e forestali per garantire lo svolgimento dei compiti di cui al comma 4, conformemente alla dotazione di cui all'articolo 17, comma 3, organizzati per Unità nei seguenti ambiti di competenze: 
+a) predisposizione e adozione degli atti del Comitato fitosanitario nazionale e delle attività di segreteria; 
+b) funzionamento del Segretariato per le emergenze fitosanitarie; 
+c) controlli all'importazione; 
+d) controlli alla produzione e al territorio; 
+e) controlli all'esportazione e rimozione delle barriere fitosanitarie all'export; 
+f) formazione e audit; 
+g) comunicazione; 
+h) raccordo con le Istituzioni europee ed internazionali. 
+3. Il direttore del Servizio fitosanitario centrale è individuato dal Ministero delle politiche agricole alimentari e forestali, nell'ambito del proprio personale con qualifica dirigenziale. Il nominativo del direttore è comunicato ai Servizi fitosanitari regionali. La sostituzione del direttore deve essere comunicata entro trenta giorni ai Servizi fitosanitari regionali. 
+4. Nelle materie relative al settore fitosanitario e ferme restando le competenze del Ministero degli affari esteri e della cooperazione internazionale, al Servizio fitosanitario centrale compete: 
+a) il coordinamento, la collaborazione e l'interlocuzione con la Commissione europea e con i Servizi fitosanitari dei Paesi membri, con le Organizzazioni per la protezione dei vegetali dei Paesi terzi e con le Organizzazioni internazionali operanti nel settore fitosanitario; 
+b) la designazione degli esperti che rappresentano l'Italia presso i Comitati ed i gruppi di lavoro riguardanti la materia fitosanitaria istituiti dalla Unione europea o da Organizzazioni internazionali, previo il parere del Comitato fitosanitario nazionale; 
+c) le comunicazioni ufficiali inerenti alla Convenzione internazionale per la protezione delle piante (CIPP) firmata a Roma il 6 dicembre 1951, ratificata e resa esecutiva ai sensi della [legge 9 marzo 1955, n. 471](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1955-03-09;471), nonché all'Organizzazione europea e mediterranea per la protezione delle piante (OEPPO), alla Commissione europea e agli altri Stati membri; 
+d) il coordinamento e il funzionamento del Comitato fitosanitario nazionale di cui all'articolo 7; 
+e) l'adozione di provvedimenti di protezione delle piante, inclusi gli standard tecnici e le procedure operative, nonché di prescrizioni più severe, ai sensi dell'[articolo 31 del regolamento (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031~art31), previo parere del Comitato fitosanitario nazionale; 
+f) l'adozione delle ordinanze fitosanitarie, in conformità agli atti approvati ai sensi dell'articolo 7, comma 3, lettera c); 
+g) l'adozione del Programma nazionale di indagine degli organismi nocivi di cui all'articolo 27, del Piano nazionale dei controlli fitosanitari di cui all'articolo 47, dei piani di emergenza e di azione nazionali di cui agli articoli 26 e 31, previo il parere del Comitato fitosanitario nazionale; 
+h) la raccolta di dati relativi alla presenza ed alla diffusione sul territorio nazionale di organismi nocivi ai vegetali e ai prodotti vegetali, nonché la predisposizione e la relativa divulgazione delle relazioni annuali; 
+i) l'ufficializzazione dello stato fitosanitario degli organismi nocivi (pest status nazionale) previo il parere del Comitato fitosanitario nazionale; 
+l) la designazione dei posti di controllo frontalieri e dei centri di ispezione, su parere del Comitato fitosanitario nazionale; 
+m) la designazione delle stazioni da quarantena e delle strutture di confinamento, ai sensi dell'[articolo 60 del regolamento (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031~art60), previa istruttoria del Servizio fitosanitario regionale competente per territorio e parere dell'Istituto nazionale di riferimento per la protezione delle piante; 
+n) la formazione e l'aggiornamento del personale di cui all'articolo 23 operante nel Servizio fitosanitario nazionale, previo parere del Comitato fitosanitario nazionale e la tenuta del registro del personale del Servizio fitosanitario nazionale; 
+o) la realizzazione del programma di audit, in applicazione dei [regolamenti (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031) e [2017/625](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2017;625), sulle strutture del Servizio fitosanitario nazionale; 
+p) la definizione delle norme riguardanti la disciplina del logo, degli stemmi, degli emblemi, delle denominazioni e di ogni altro segno distintivo dell'immagine, riferiti al Servizio fitosanitario nazionale, nonché dei documenti di riconoscimento, delle uniformi, dei dispositivi di protezione personale, delle altre dotazioni, previo il parere del Comitato fitosanitario nazionale; 
+q) la tenuta dei registri nazionali derivanti dall'applicazione dei [regolamenti (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031) e [2017/625](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2017;625) e la definizione delle modalità di trasmissione dei relativi dati da parte dei Servizi fitosanitari regionali; 
+r) la raccolta e la divulgazione delle normative fitosanitarie dei Paesi terzi nonché delle informazioni tecniche provenienti da organizzazioni comunitarie ed internazionali; 
+s) il coordinamento dell'elaborazione di disciplinari di difesa e di diserbo, al fine di migliorare lo stato fitosanitario, la qualità delle produzioni vegetali nonché la concessione di deroghe alle disposizioni in essi contenute; 
+t) l'emanazione di misure e il coordinamento delle attività per ridurre gli impatti derivanti dall'utilizzo di prodotti fitosanitari ai sensi della [direttiva CE 128/2009 del Parlamento europeo e del Consiglio, del 21 ottobre 2009](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32009L0128) sull'uso sostenibile dei prodotti fitosanitari e del [decreto legislativo 14 agosto 2012, n. 150](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2012-08-14;150), di relativo recepimento. 
+5. Il Ministero delle politiche agricole alimentari e forestali definisce l'organizzazione del Servizio fitosanitario centrale, per assicurare lo svolgimento dei compiti di cui al comma 4 e delle attività di protezione delle piante di cui all'articolo 3, nel rispetto dei requisiti di cui all'[articolo 5 del regolamento (UE) 2017/625](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2017;625~art5). 
+Note all'art. 5: - Per i riferimenti dei [regolamenti (UE) 2016/2031 del Parlamento europeo e del Consiglio, del 26 ottobre 2016](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32016R2031) e [2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32017R0625), si veda nelle note alle premesse. - Per i riferimenti normativi della [legge 9 marzo 1955, n. 471](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1955-03-09;471), si veda nelle note alle premesse. - La [direttiva 2009/128/CE del Parlamento europeo e del Consiglio, del 21 ottobre 2009](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32009L0128) che istituisce un quadro per l'azione comunitaria ai fini dell'utilizzo sostenibile dei pesticidi (Testo rilevante ai fini del SEE), è pubblicata nella G.U.U.E. 24 novembre 2009, n. L 309. - Per i riferimenti normativi del [decreto legislativo 14 agosto 2012, n. 150](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2012-08-14;150), si veda nelle note alle premesse. 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+[ nascondi ](javascript:void\(0\))
+  * ### Approfondimenti
+  * aggiornamenti all'atto 
+  * lavori preparatori 
+  * aggiornamenti al titolo 
+  * aggiornamenti alla struttura 
+
+
+  * ### Funzioni 
+  * [ esporta in Akoma ntoso ](https://www.normattiva.it/do/atto/caricaAKN?dataGU=20210226&codiceRedaz=21G00021&dataVigenza=20210313)
+  * collegamento permanente 
+
+
+#### lavori preparatori
+chiudi
+#### aggiornamenti all'atto
+chiudi
+#### atti aggiornati
+chiudi
+#### atti correlati
+chiudi
+#### indice dell'atto
+chiudi
+#### aggiornamenti alla struttura
+chiudi
+#### aggiornamenti al titolo
+chiudi
+#### relazioni
+chiudi
+#### note atto
+chiudi
+#### collegamento permanente
+chiudi
+## guida in linea
+chiudi
+#### Aggiornamenti all'articolo
+chiudi
+#### atti parlamentari
+chiudi
+#### atti attuativi
+chiudi
+  *[lun]: lunedì
+  *[mar]: martedì
+  *[mer]: mercoledì
+  *[gio]: giovedì
+  *[ven]: venerdì
+  *[sab]: sabato
+  *[dom]: domenica
+

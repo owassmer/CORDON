@@ -1,0 +1,979 @@
+10786                        Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 12 febbraio 2026, n. 12
+Reg. (UE) 2020/1201 e s.m.i. - DGR 903 del 26/06/2025 - Prescrizione di estirpazione dei mandorli marginali
+o abbandonati siti negli appezzamenti in agro di Bari ricadenti nei 400 metri attorno alle zone infette
+dell’area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1.
+
+
+                                IL DIRIGENTE DELLA STRUTTURA PROPONENTE
+
+VISTI
+
+   • La legge 7 agosto 1990, n. 241 ‘Nuove norme in materia di procedimento amministrativo e di diritto di
+     accesso ai documenti amministrativi’;
+   • Il D.lgs. 30 marzo 2001, n. 165 ‘Norme generali sull’ordinamento del lavoro alle dipendenze delle
+     amministrazioni pubbliche’;
+   • Il D.lgs. 7 marzo 2005, n. 82 ‘Codice dell’amministrazione digitale’;
+   • il Decreto del Presidente della Giunta regionale n. 22 del 22/01/2021 recante adozione dell’atto di alta
+     amministrazione MAIA 2.0;
+   • la Deliberazione di Giunta Regionale n. 712 del 03/05/2021 avente ad oggetto ‘Conferimento incarico
+     della Sezione ‘Osservatorio Fitosanitario’ del Dipartimento Agricoltura, Sviluppo Rurale ed Ambientale’;
+   • La D.G.R. n. 788 del 11/06/2024 avente ad oggetto ‘Proroga incarico di direzione della Sezione
+     Osservatorio Fitosanitario afferente al Dipartimento Agricoltura Sviluppo Rurale ed Ambientale;
+   • la D.G.R. 15 settembre 2021, n. 1466 recante l’approvazione della Strategia regionale per la parità di
+     genere, denominata “Agenda di Genere”;
+   • D.G.R. 26 settembre 2024, n. 1295 recante “Valutazione di Impatto di Genere (VIG). Approvazione
+     indirizzi metodologico-operativi e avvio fase strutturale”;
+   • La Determina n. 51 del 03/05/2024 di conferimento incarichi di Elevata Qualificazione per la gestione
+     delle emergenze fitosanitarie alle dipendenze della Sezione Osservatorio fitosanitario, come rettificata
+     dalla determina n.124 del 03/10/2024.
+
+VISTI ALTRESI’
+
+   • Il Reg. (UE) 2016/2031 del Parlamento Europeo e del Consiglio del 26 ottobre 2016 relativo alle misure
+     di protezione contro gli organismi nocivi per le piante, che modifica i regolamenti (UE) n. 228/2013,
+     (UE) n. 652/2014 e (UE) n. 1143/2014 del Parlamento europeo e del Consiglio e che ha abrogato le
+     direttive 69/464/CEE, 74/647/CEE, 93/85/CEE, 98/57/CE, 2000/29/CE, 2006/91/CE e 2007/33/CE del
+     Consiglio.
+   • Il Reg. (UE) 2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017, relativo ai controlli
+     ufficiali e alle altre attività ufficiali effettuati per garantire l’applicazione della legislazione sugli alimenti
+     e sui mangimi, delle norme sulla salute e sul benessere degli animali, sulla sanità delle piante nonché
+     sui prodotti fitosanitari.
+   • Il Reg. (UE) 2019/1702 che integra il Reg. (UE) 2016/2031 del Parlamento europeo e del Consiglio
+     stabilendo l’elenco degli organismi nocivi prioritari, tra i quali la Xylella fastidiosa; Il Reg. di esecuzione
+     (UE) n. 2020/1201 della Commissione del 14/08/2020 relativo alle misure per prevenire l’introduzione
+     e la diffusione nell’Unione della Xylella fastidiosa.
+   • Il Reg. di esecuzione (UE) 2021/1688 della Commissione del 20/09/2021 che modifica il Reg. di
+     esecuzione (UE) 2020/1201 per quanto riguarda gli elenchi delle piante ospiti e delle piante specificate
+     e i metodi di prova per l’identificazione della Xylella fastidiosa
+   • Il Reg. (UE) 2021/690 del Parlamento Europeo e del Consiglio del 28 aprile 2021 che istituisce il
+     programma relativo al mercato interno, alla competitività delle imprese, tra cui le piccole e medie
+     imprese, al settore delle piante, degli animali, degli alimenti e dei mangimi e alle statistiche europee
+                            Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026                 10787
+
+
+     (programma per il mercato unico) e che abroga i regolamenti (UE) n. 99/2013, (UE) n. 1287/2013, (UE)
+     n. 254/2014 e (UE) n. 652/2014;
+   • Il Reg. di esecuzione (UE) 2023/1706 della Commissione del 7/09/2023 che modifica il regolamento
+     di esecuzione (UE) 2020/1201 per quanto riguarda gli elenchi delle piante notoriamente sensibili alla
+     Xylella fastidiosa;
+   • Il Reg. di esecuzione (UE) 2024/1320 del 15/05/2024 che modifica il regolamento di esecuzione
+     (UE) 2020/1201 per quanto riguarda l’elenco delle zone infette ai fini del contenimento della Xylella
+     fastidiosa;
+
+   • Il Reg. di esecuzione (UE) 2024/2507 del 26/09/2024 che modifica e rettifica il regolamento di
+     esecuzione (UE) 2020/1201 relativo alle misure per prevenire l’introduzione e la diffusione nell’Unione
+     della Xylella fastidiosa (Wells et al.) e che modifica il Reg. di esecuzione (UE) 2020/1770 per quanto
+     riguarda l’elenco delle specie di piante non esentate dall’obbligo di inserire il codice di tracciabilità nei
+     passaporti delle piante.
+   • La Legge n. 44 del 21/05/2019, di conversione in legge, con modificazioni, del Decreto Legge n. 27 del
+     29/03/2019 che ha modificato/integrato la disciplina giuridica di contrasto ai patogeni da quarantena.
+   • Il Decreto Legislativo 2 febbraio 2021, n. 19 “Norme per la protezione delle piante dagli organismi nocivi
+     in attuazione dell’articolo 11 della legge 4 ottobre 2019, n. 117, per l’adeguamento della normativa
+     nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625”.
+   • Il Decreto del Ministero delle Politiche agricole, alimentari e forestali del 24/01/2022 “Adozione del
+     Piano di emergenza nazionale per il contrasto di Xylella fastidiosa (Well et al.)”.
+   • La D.G.R. n. 994 del 15/07/2024 che ha istituito il regime di aiuto per sostenere le imprese vivaistiche,
+     proprietari e conduttori di terreni agricoli che estirpano le piante infette da Xylella e ha approvato i
+     criteri e la metodologia di stima degli indennizzi da erogare per l’estirpazione delle seguenti specie:
+     olivo, mandorlo, ciliegio e vite.
+   • La DGR n. 1593 del 25/11/2024 “Approvazione del “Piano d’azione per contrastare la diffusione di
+     Xylella fastidiosa (Well et al.) in Puglia 2024-2026”, modifica e integrazione dello schema di convenzione
+     con l’Agenzia per le attività irrigue e forestali. Applicazione della quota vincolata del risultato di
+     amministrazione e variazione al Bilancio finanziario gestionale 2024 e pluriennale 2024-26 ai sensi del
+     D.Lgs.118/2011”.
+   • La determina n. 22 del 15/02/2025 “Reg. UE 2020/1201 e s.m.i.- Applicazione delle misure di
+     eradicazione per contrastare la diffusione di Xylella fastidiosa sottospecie fastidiosa (Well et al.) in
+     Puglia e liquidazione degli indennizzi.”
+   • La DGR n. 903 del 26/06/2025 “Modifica e integrazione della DGR n. 994/2024. Incremento delle
+     risorse destinate ad indennizzare i proprietari/conduttori che applicano le misure di eradicazione
+     e/o contenimento ai sensi del Reg. (UE) 2020/1201 e s.m.i. Approvazione dell’Allegato A. Variazione
+     al Bilancio di previsione 2025 e pluriennale 2025-27 ai sensi del D. Lgs.118/2011 per l’importo di
+     € 1.830.921,27.”
+   • La DGR n. 1075 del 29/07/2025 “Approvazione del “Piano d’azione per contrastare la diffusione di
+     Xylella fastidiosa (Well et al.) in Puglia 2025-2027” e dello schema di convenzione con l’Agenzia per le
+     attività irrigue e forestali.”.
+
+PREMESSO CHE
+
+L’Osservatorio fitosanitario, a seguito dell’individuazione di focolai delle tre sottospecie di Xylella fastidiosa
+fastidiosa, Xf pauca e Xf multiplex negli agri comunali di Triggiano, Bari, Noicattaro e Capurso, ha istituito le
+seguenti aree delimitate:
+
+   • area delimitata per “Xylella fastidiosa sottospecie fastidiosa ST1”, istituita e aggiornata con determine
+     dirigenziali n. 8 del 21/02/2024, n. 12 del 27/02/2024, n. 45 del 24/04/2024, n. 94 del 24/07/2024 e n.
+     236 del 18 dicembre 2025;
+10788                       Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+   • area delimitata per “Xylella fastidiosa sottospecie Pauca ST53 – Bari” istituita con determina n. 92 del
+     22/07/2024;
+   • aree delimitate per “Xylella fastidiosa sottospecie multiplex ST26 - Noicattaro e Triggiano” e “Xylella
+     fastidiosa – sottospecie multiplex ST26 – Capurso” istituite con determina n. 93 del 23/07/2024.
+
+CONSIDERATO CHE
+
+   • Il mandorlo è la specie suscettibile a tutte le tre sottospecie di Xylella presenti in Puglia.
+   • L’Autorità Europea per la Sicurezza Alimentare (EFSA), nella relazione su Xylella fastidiosa pubblicata il
+     3 febbraio 2025, ha:
+            ○annoverato il mandorlo tra le specie con la più elevata suscettibilità a Xylella fastidiosa
+             sottospecie fastidiosa;
+            ○classificato la zona larga 400 m a partire dal perimetro della zona infetta come zona ad alto
+             rischio per la dispersione della malattia a breve distanza tramite insetti vettori;
+            ○stabilito che tutte le piante ospiti all’interno di questa zona possono essere considerate a rischio
+             doppio di infezione rispetto alle piante ospiti nelle rimanenti zone.
+   • Dal monitoraggio rafforzato effettuato dall’Osservatorio nelle aree delimitate per Xylella fastidiosa
+     sottospecie fastidiosa e sottospecie multiplex, il mandorlo risulta essere la specie più infetta.
+   • Dal monitoraggio dei vettori eseguito nelle aree delimitate e sulle specie suscettibili come mandorlo,
+     vite e olivo, i dati raccolti suggeriscono una trasmissione “bimodale” e cioè una possibile trasmissione
+     primaria di Xylella fastidiosa sottospecie fastidiosa da piante esterne al vigneto, probabilmente
+     mandorlo, a piante di vite, ed una trasmissione secondaria da vite a vite. Di conseguenza, l’eliminazione
+     di piante di mandorlo infette nelle vicinanze dei vigneti ridurrebbe l’incidenza della trasmissione
+     primaria.
+   • Negli agri di Triggiano, Bari, Capurso e Noicattaro sono presenti numerosi appezzamenti con presenza
+     di mandorli in stato di abbandono.
+
+TENUTO CONTO CHE
+
+L’estirpazione dei mandorli marginali o abbandonati ricadenti nei 400 metri attorno alle zone infette è una
+misura precauzionale finalizzata a ridurre il rischio che il batterio infetti vigneti limitrofi e, pertanto, è una
+misura fitosanitaria fondamentale per eradicare il patogeno e, di conseguenza, revocare l’area delimitata.
+
+DATO ATTO CHE
+
+Un mandorlo marginale o in stato di abbandono è caratterizzato da:
+
+   • scarsa o assente gestione della chioma, con assenza di potatura e presenza di rami secchi e fitti;
+   • la presenza di un terreno e dell’area sottochioma invasa da vegetazione spontanea;
+   • assenza di impianto di irrigazione;
+   • scarsa produttività con presenza di frutti piccoli, in minor numero e di scarsa qualità;
+   • stato fitosanitario caratterizzato da sintomi e danni dovuti ad organismi nocivi.
+
+PRESO ATTO CHE
+
+   • La Giunta Regionale, con Delibera n. 903 del 26/06/2025, ha disposto “Di applicare l’estirpazione
+     obbligatoria dei mandorli marginali o abbandonati ricadenti entro i 400 metri dal perimetro della zona
+     infetta dell’area delimitata per Xylella fastidiosa sottospecie fastidiosa, ad opera di ARIF.”.
+   • Innova Puglia spa, ha fornito all’Osservatorio fitosanitario le informazioni catastali dei terreni in agro
+     di Bari che rientrano nel raggio di 400 m attorno alle zone infette rappresentate nell’allegato 1/A
+                             Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026                    10789
+
+
+      del presente provvedimento, ed i relativi proprietari riportati nell’allegato 1/B, che formano parte
+      integrante e sostanziale del presente provvedimento
+
+VISTA
+La convenzione stipulata tra la Regione Puglia e ARIF, repertorio n. 026851 del 17 set. 2025, inerente le
+attività di supporto all’Osservatorio assegnate ad ARIF con legge regionale 19/2019, tra cui l’applicazione
+delle misure di eradicazione.
+
+RITENUTO
+Di poter affidare ad ARIF l’estirpazione obbligatoria dei mandorli marginali o abbandonati ricadenti entro i
+400 metri dal perimetro delle zone infette dell’area delimitata per Xylella fastidiosa sottospecie fastidiosa
+(non oggetto di indennizzo), previo atto di prescrizione dell’Osservatorio fitosanitario in quanto dispone delle
+necessarie competenze unitamente alla disponibilità di risorse umane e strumentali.
+
+VERIFICATA
+La disponibilità di ARIF a svolgere la richiamata attività di estirpazione obbligatoria dei mandorli marginali
+o abbandonati ricadenti entro i 400 metri dal perimetro delle zone infette dell’area delimitata per Xylella
+fastidiosa sottospecie fastidiosa.
+
+RITENUTO ALTRESI’
+Di doversi avvalere della collaborazione dei Sindaci dei comuni di Bari - Triggiano - Capurso - Noicattaro e delle
+Associazioni di categoria locali, per garantire la rapida applicazione della suddetta misura fitosanitaria.
+
+                                             Garanzie alla riservatezza
+
+La pubblicazione dell’atto sul BURP, nonché la pubblicazione all’Albo pretorio on-line o sul sito istituzionale,
+salve le garanzie previste dalla legge 241/1990 in tema di accesso ai documenti amministrativi, avviene nel
+rispetto della tutela della riservatezza dei cittadini secondo quanto disposto dal Regolamento UE n. 679/2016
+in materia di protezione dei dati personali, nonché dal D. Lgs. 196/2003 ss.mm.ii., come modificato dal d.lgs.
+101/2018 e dal vigente Regolamento regionale 5/2006 per il trattamento dei dati sensibili e giudiziari, in
+quanto applicabile.
+
+Ai fini della pubblicità legale, il presente provvedimento è stato redatto in modo da evitare la diffusione di
+dati personali identificativi non necessari ovvero il riferimento alle particolari categorie di dati previste dagli
+articoli 9 e 10 del Regolamento UE innanzi richiamato; qualora detti dati fossero essenziali per l’adozione
+dell’atto, essi sono trasferiti in documenti separati esplicitamente richiamati.
+
+                                          Valutazione impatto di genere
+
+Il presente atto è stato sottoposto a Valutazione di Impatto di Genere (cfr. DGR n. 1161 del 7/8/2024 concernente
+“Approvazione modifiche ed integrazioni alle “Linee guida per la predisposizione delle Deliberazioni di Giunta
+Regionale “adottate con D.G.R. n. 2100 del 2019” e l’impatto di genere stimato risulta neutro.
+
+                     Adempimenti contabili ai sensi del D. Lgs. n.118/2011 e ss. mm. e ii.
+
+Il presente provvedimento non comporta alcun mutamento qualitativo o quantitativo di entrata o di spesa né
+a carico del bilancio regionale né a carico degli enti per i cui debiti i creditori potrebbero rivalersi sulla Regione
+ed è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto
+dal bilancio regionale.
+10790                        Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+                                                    DETERMINA
+
+Di prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente
+atto e che qui si intende integralmente riportato.
+
+Di affidare ad ARIF l’attività di estirpazione di tutti i mandorli marginali o abbandonati ricadenti entro i 400
+metri dal perimetro delle zone infette dell’area delimitata a “Xylella fastidiosa sottospecie fastidiosa ST1” in
+agro di Bari, istituita e aggiornata con determina dirigenziale n. 8 del 21/02/2024 - n. 12 del 27/02/2024, n.
+45 del 24/04/2024, n. 94 del 24/07/2024 e n. 236 del 18 dicembre 2025.
+Di stabilire che le suddette piante non siano oggetto di indennizzo.
+Di stabilire che il presente atto sarà notificato al comune di Bari e che la pubblicazione all’albo pretorio ha
+valore di notifica per tutti i proprietari degli appezzamenti in agro di Bari ricadenti entro i 400 metri dal
+perimetro delle zone infette e in cui sono presenti mandorli marginali o abbandonati, le particelle sono
+riportate nelle ortofoto di cui all’allegato 1/A e i proprietari sono indicati nell’allegato 1/B, parti integranti e
+sostanziali del presente provvedimento.
+Di avvalersi della collaborazione del sindaco del comune di Bari e delle Associazioni di categoria per garantire
+la rapida applicazione della suddetta misura fitosanitaria.
+
+Di trasmettere il presente atto con unica PEC:
+
+   • al Comune di Bari affinché provveda con urgenza dalla data di invio del presente atto all’affissione
+     all’Albo Pretorio della presente determinazione per la durata di 7 (sette) giorni naturali e consecutivi.
+     Tale affissione, ai sensi dell’art. 21 bis L. 241/1990 e s.m.i., decorso il settimo giorno dalla data di
+     pubblicazione assume valore di notifica ai proprietari/conduttori interessati all’ estirpazione;
+   • all’ARIF per le attività di competenza in base alla L.R. 19/2019, alla D.G.R. 343/2022 e al Decreto Legge
+     27/2019 convertito con L. 44/2019;
+   • al Sig. Prefetto di Bari affinché ai sensi dell’art. 33 del D.lgs 19/2021 su richiesta dell’Osservatorio/ARIF
+     ove di necessità, disponga l’ausilio della forza pubblica nelle operazioni di estirpazione.
+
+Il presente atto elaborato attraverso la piattaforma CIFRA2, composto da pagine tutte progressivamente
+numerate e dall’allegato 1 (1/A e 1/B), firmato digitalmente e adottato in unico originale, sarà:
+
+   • conservato e custodito, ai sensi delle Linee Guida del Segretario generale della Giunta Regionale e del
+     Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020, nei sistemi di archiviazione
+     digitale dell’Amministrazione Regionale;
+   • trasmesso, tramite piattaforma CIFRA2, al Segretariato della Giunta Regionale e sarà pubblicato nella
+     sezione “Amministrazione Trasparente” sul sito istituzionale della Regione Puglia, per le finalità di cui
+     al D.Lgs. n. 33/2013 e ss.mm.ii.;
+   • notificato all’Agenzia Regionale Attività Irrigue e Forestali per l’adozione degli atti conseguenti;
+   • pubblicato per 10 giorni lavorativi a decorrere dalla data della sua adozione, ai sensi dell’art. 20 comma
+     3 del D.P.G.R. n. 22/2021, all’Albo regionale on line e conservato nei sistemi informatici regionali CIFRA”
+     e Sistema Puglia.
+
+Avverso la presente determinazione, ai sensi dell’art. 3 comma 4° della L. 241/90 e s.m.i. si può proporre,
+nei termini di legge dalla notifica dell’atto, ricorso giurisdizionale amministrativo o, in alternativa, ricorso
+straordinario (ex D.P.R. 1199/1971).
+
+ALLEGATI INTEGRANTI
+                            Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026   10791
+
+
+Documento - Impronta (SHA256)
+BARI -Allegato_1.pdf -
+5785820679552435e5f8408e217c317603997762258832d0a865a69ac1f92b5e
+
+Il presente Provvedimento è direttamente esecutivo.
+
+Come Proposta: Codice Cifra 181/DIR/2026/00010
+Sottoscrittori Proposta:
+
+ • E.Q.”Programmazione e gestione fitosanitaria”
+   Anna Percoco
+
+ • E.Q. “Gestione dell’emergenza fitosanitaria Xylella fastidiosa fastidiosa”
+   Claudio Zaza
+
+Firmato digitalmente da:
+
+Il Dirigente della Sezione Osservatorio Fitosanitario
+Salvatore Infantino
+10792   Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                         1
+        Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026         10793
+
+
+
+
+               
+               
+               
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+                              
+                   
+
+
+
+
+                                      
+                                                                          2
+10794   Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                         3
+Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026   10795
+
+
+
+
+                                                                 4
+10796   Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                         5
+Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026   10797
+
+
+
+
+                                                                 6
+10798   Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                         7
+Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026   10799
+
+
+
+
+                                                                 8
+                                                                                                                              10800
+
+
+                                                                                                               ALLEGATO 1/B
+                                                            400 M ATTORNO ALLE ZONE INFETTE (FOGLIO55)
+COMUNE SEZIONE FOGLIO PARTICELLE                                                              PROPRIETARI
+BARI   A      55      449        D`IPPOLITO MARIA,D`IPPOLITO ORESTE,D`IPPOLITO CARLO GIUSEPPE,DE GIGLIO FARA
+
+
+
+
+                                                                                                                              Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                                                                 9
+                                                            400 M ATTORNO ALLE ZONE INFETTE (FOGLIO63)
+COMUNE SEZIANO FOGLIO PARTICELLE                                                              PROPRIETARI
+BARI   A      63      431        DELMEDICO MARIA ANTONIETTA,CAMPOBASSO GIUSEPPE FABIO
+BARI   A      63      430        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      321        PANNARALE MARIO,PANNARALE VINCENZO,PANNARALE VITO
+BARI   A      63      284        PETRELLI ANNA
+BARI   A      63      282        COMUNE BARI
+BARI   A      63      392        ,
+BARI   A      63      69         ADL COSTRUZIONI S.R.L.
+BARI   A      63      67         VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      65         DIFRONZO SEBASTIANO
+BARI   A      63      64         DI FRONZO FILIPPO,MASTROLIA ANNA,PETRELLI DOMENICA,PETRELLI ADELE
+BARI   A      63      63         MOLA PASQUALE,MOLA CHIARA
+BARI   A      63      62         GIANNELLI VINCENZO,GIANNELLI VINCENZO
+BARI   A      63      429        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      428        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      427        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      426        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      425        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      281        COMUNE BARI
+BARI   A      63      280        COMUNE BARI
+BARI   A      63      279        COMUNE BARI
+BARI   A      63      278        COMUNE BARI
+BARI   A      63      277        COMUNE BARI
+BARI   A      63      276        LIPPOLIS GIUSEPPE,LIPPOLIS ANTONIO,QUARANTA MARIA,LIPPOLIS FRANCESCA
+BARI   A      63      273        MUCIACCIA DARIO,MUCIACCIA MAURIZIO,MUCIACCIA MASSIMO,MUCIACCIA SERGIO,MUCIACCIA ALESSANDRA
+BARI   A      63      272        MUCIACCIA MASSIMO,MUCIACCIA DARIO,MUCIACCIA SERGIO,MUCIACCIA ALESSANDRA,MUCIACCIA MAURIZIO
+BARI   A      63      271        MUCIACCIA DARIO,MUCIACCIA ALESSANDRA,MUCIACCIA MASSIMO,MUCIACCIA MAURIZIO,MUCIACCIA SERGIO
+BARI   A      63      424        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      423        VICTORIA IMMOBILIARE SRL CON SEDE IN BARI
+BARI   A      63      422        SCOTELLA LUISA,RUBINO STELLA
+BARI   A      63      421        RUBINO STELLA,SCOTELLA LUISA
+BARI   A      63      420        SCOTELLA LUISA,RUBINO STELLA
+BARI   A      63      381        ,
+BARI   A      63      380        BOCCUZZI SIMONE
+BARI   A      63      264        COMUNE BARI
+BARI   A      63      263        COMUNE BARI
+BARI   A      63      262        COMUNE BARI
+BARI   A      63      261        COMUNE BARI
+BARI   A      63      259        SERVIDIO NICOLA,FERRARA ANGELA
+                                                                                                                                   Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A      63      258        BOCCUZZI SIMONE
+BARI   A      63      254        COMUNE BARI
+BARI   A      63      253        COMUNE BARI
+BARI   A      63      251        RUBINO FRANCESCO,RUBINO ROSA
+BARI   A      63      250        RUBINO FRANCESCO,RUBINO ROSA
+BARI   A      63      249        RUBINO FRANCESCO,RUBINO ROSA
+BARI   A      63      419        RUBINO ANNA
+BARI   A      63      418        RUBINO ANNA
+BARI   A      63      98         LOSURIELLO ANGELA MARIA NICOLET,COMUNE BARI
+BARI   A      63      97         COMUNE BARI
+BARI   A      63      96         COMUNE BARI
+BARI   A      63      93         LOZUPONE VINCENZODANILO
+
+
+
+                                                                                                                                   10801
+                                                                                                                              10
+                                                                                                                                                          10802
+
+
+BARI   A   63   84    COMUNE BARI
+BARI   A   63   83    COMUNE BARI
+BARI   A   63   82    COMUNE BARI
+BARI   A   63   449   COMUNE BARI
+BARI   A   63   81    COMUNE BARI
+BARI   A   63   448   ADDANTE RAFFAELE
+BARI   A   63   80    COMUNE BARI
+BARI   A   63   445   DI TURI CLAUDIA,DE BENEDICTIS GIUSEPPE,DI TURI DANIELA,PORCU STEFANIA
+BARI   A   63   444   DI TURI DANIELA,DI TURI CLAUDIA,DE BENEDICTIS GIUSEPPE,PORCU STEFANIA
+BARI   A   63   443   BATTISTA ROCCO
+BARI   A   63   442   BATTISTA ROCCO
+BARI   A   63   441   ZERNONE BENEDETTA,RUBINO MICHELE
+BARI   A   63   440   RUBINO MICHELE,ZERNONE BENEDETTA
+BARI   A   63   79    COMUNE BARI
+BARI   A   63   78    COMUNE BARI
+BARI   A   63   73    CAMPAGNA ROCCO
+BARI   A   63   439   ZERNONE BENEDETTA,RUBINO MICHELE
+BARI   A   63   432   DELMEDICO MARIA ANTONIETTA,CAMPOBASSO GIUSEPPE FABIO
+BARI   A   63   399   COMUNE BARI
+BARI   A   63   417   RUBINO ANNA
+BARI   A   63   416   RUBINO STELLA,SCOTELLA LUISA
+BARI   A   63   415   SCOTELLA LUISA,RUBINO STELLA
+BARI   A   63   414   RUBINO STELLA,SCOTELLA LUISA
+                      CONTESI FILIPPO,GIANNELLI LUIGI,GIANNELLI VINCENZO,CONTESI ANGELA ROSA,GIANNELLI GIUSEPPE,GIANNELLI GIUSEPPE,GIANNELLI FILOMENA
+BARI   A   63   413   ANNA MARIA,CONTESI VITO,GIANNELLI LUIGI
+                      GIANNELLI GIUSEPPE,GIANNELLI FILOMENA ANNA MARIA,GIANNELLI GIUSEPPE,CONTESI ANGELA ROSA,CONTESI FILIPPO,GIANNELLI LUIGI,GIANNELLI
+BARI   A   63   412   VINCENZO,GIANNELLI LUIGI,CONTESI VITO
+BARI   A   63   411   RUBINO ANNA
+BARI   A   63   410   RUBINO ANNA
+BARI   A   63   241   DELMONTE ANNA,DELMONTE MARIA LUISA
+BARI   A   63   240   DELMONTE ANNA,DELMONTE MARIA LUISA
+BARI   A   63   237   GRUPPO ANDIDERO FINANZIARIO IMMOBILIARE SRL SEDE BARI
+BARI   A   63   232   RUBINO ROSA,RUBINO FRANCESCO
+BARI   A   63   409   RUBINO ANNA
+BARI   A   63   408   D`ADDABBO CARLO
+BARI   A   63   40    LOMBARDI VINCENZO
+BARI   A   63   407   D`ADDABBO CARLO
+BARI   A   63   406   D`ADDABBO CARLO
+BARI   A   63   405   D`ADDABBO CARLO
+BARI   A   63   404   D`ADDABBO CARLO
+                                                                                                                                                          Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A   63   403   SCOTELLA LUISA,RUBINO STELLA
+BARI   A   63   402   SCOTELLA LUISA,RUBINO STELLA
+BARI   A   63   401   RUBINO STELLA,SCOTELLA LUISA
+BARI   A   63   400   ,
+BARI   A   63   366   GIORDANO VITO
+BARI   A   63   365   GIORDANO VITO
+BARI   A   63   364   GIORDANO TERESA
+BARI   A   63   363   GIORDANO MARIA LUCIA RITA
+BARI   A   63   229   BENTIVOGLIO ANNA,SALLUSTIO FRANCESCO,SALLUSTIO PASCUALINO,SALLUSTIO ANTONIO,SALLUSTIO RAFAELINA
+BARI   A   63   228   NOE` ANNA,NOE` MARIA
+BARI   A   63   227   SALLUSTIO ANTONIO,SALLUSTIO RAFAELINA,BENTIVOGLIO ANNA,SALLUSTIO FRANCESCO,SALLUSTIO PASCUALINO
+BARI   A   63   189   MOLA ROSA,CARONE VITANTONIO
+
+
+
+
+                                                                                                                                               11
+BARI   A   63   221   ADDANTE ANNA MARIA,ADDANTE NICOLA,ADDANTE ANGELA
+BARI   A   63   188   MOLA PASQUALE,MOLA CHIARA
+BARI   A   63   187   MOLA CHIARA,MOLA PASQUALE
+BARI   A   63   185   COMUNE BARI
+BARI   A   63   183   ADDANTE NICOLA,ADDANTE ANGELA,ADDANTE ANNA MARIA
+BARI   A   63   181   DE FRANCESCO MARIA,GUERRA ANTONIO GIUSEPPE
+BARI   A   63   362   RAGNO FRANCESCO
+BARI   A   63   361   RAGNO FRANCESCO
+BARI   A   63   37    GIORDANO MARIA LUCIA RITA
+BARI   A   63   34    LONIGRO ANNA,LONIGRO ROSA,LONIGRO ANNA,LONIGRO ROSA
+BARI   A   63   32    RUBINO MICHELE,ZERNONE BENEDETTA
+BARI   A   63   213   LOMBARDI VINCENZO
+BARI   A   63   212   COMUNE BARI
+BARI   A   63   173   RUBINO GIUSY,PETRELLI ANNA,RUBINO MARIANGELA
+BARI   A   63   171   MUCIACCIA ALESSANDRA,MUCIACCIA MAURIZIO,MUCIACCIA SERGIO,MUCIACCIA DARIO,MUCIACCIA MASSIMO
+BARI   A   63   203   LOZUPONE VINCENZODANILO
+BARI   A   63   347   MASTROLIA MARIA
+BARI   A   63   346   MASTROLIA ANNA
+BARI   A   63   345   MASTROLIA RACHELE
+BARI   A   63   344   MASTROLIA MARIA
+BARI   A   63   343   MASTROLIA CARMELA
+BARI   A   63   342   MASTROLIA RACHELE
+BARI   A   63   341   MASTROLIA RACHELE
+BARI   A   63   340   MASTROLIA MARIA
+                      TRAVAGLIO ALESSANDRO,COLELLA NICOLA,COLELLA SANTINO,COLELLA ROCCO,COLELLA ROSALIA,COLELLA LUCIA,TRAVAGLIO REGINA,COLELLA
+BARI   A   63   15    MICHELE
+BARI   A   63   14    PETRELLI GIUSEPPE
+BARI   A   63   13    PETRELLI GIUSEPPE
+BARI   A   63   11    LIPPOLIS PIETRO,LIPPOLIS MARIA
+BARI   A   63   339   MASTROLIA ANNA
+BARI   A   63   164   COMUNE BARI
+BARI   A   63   163   MUCIACCIA DARIO,MUCIACCIA ALESSANDRA,MUCIACCIA MASSIMO,MUCIACCIA MAURIZIO,MUCIACCIA SERGIO
+BARI   A   63   156   LOMBARDI VINCENZO
+BARI   A   63   155   LOMBARDI VINCENZO
+BARI   A   63   154   COMUNE BARI
+BARI   A   63   153   COMUNE BARI
+BARI   A   63   148   COMUNE BARI
+                      SALLUSTIO ANTONIETTA,SALLUSTIO ANNA,SALLUSTIO FRANCESCO,SALLUSTIO ANTONIO,SALLUSTIO EMANUELE,SALLUSTIO BENITO PIETRO,SALLUSTIO
+                      LUISA,SALLUSTIO STELLA,SALAZAR PETRA LIRIA,SALLUSTIO RAFFAELE,PROCACCIO LUCIA,SALLUSTIO PASQUALE,SALLUSTIO NICOLA,BENTIVOGLIO
+                      ANNA,SALLUSTIO RAFAELA,SALLUSTIO RAFAELA,SALLUSTIO RAFAELINA,PROCACCIO VINCENZO,SALLUSTIO LUISA MARIA,SALLUSTIO
+                                                                                                                                                       Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A   63   140   PASQUALE,ANGELILLIS MARIA,SALLUSTIO PASCUALINO
+BARI   A   63   338   MASTROLIA ANNA
+BARI   A   63   337   MASTROLIA CARMELA
+BARI   A   63   336   MASTROLIA CARMELA
+BARI   A   63   335   MASTROLIA RACHELE
+BARI   A   63   334   VOLPE FRANCESCO
+BARI   A   63   333   VOLPE ROSA ANNA
+BARI   A   63   332   VOLPE FRANCESCO
+BARI   A   63   331   VOLPE MARIA MADIA
+BARI   A   63   139   CATALDO VITO,CATALDO MARIANGELA
+BARI   A   63   138   GIANNELLI FRANCESCO,GIANNELLI PAOLO
+BARI   A   63   136   BATTISTA ROCCO
+
+
+
+                                                                                                                                                       10803
+                                                                                                                                          12
+                                                                                                                             10804
+
+
+BARI   A   63   135   BENTIVOGLIO ANNA,SALLUSTIO RAFAELINA,SALLUSTIO FRANCESCO,SALLUSTIO ANTONIO,SALLUSTIO PASCUALINO
+BARI   A   63   134   CATALDO MARIANGELA,CATALDO VITO
+BARI   A   63   133   GRUPPO ANDIDERO FINANZIARIO IMMOBIIARE SRL
+BARI   A   63   131   OTTOLINO MARIA,OTTOLINO ANGELA
+BARI   A   63   130   CONTESSA MICHELE
+BARI   A   63   125   MUCIACCIA MAURIZIO,MUCIACCIA MASSIMO,MUCIACCIA ALESSANDRA,MUCIACCIA SERGIO,MUCIACCIA DARIO
+BARI   A   63   116   LOSACCO DOMENICA,RANIERI CRESCENZA,LOSACCO VINCENZA
+BARI   A   63   115   PESCE GIUSEPPINA
+BARI   A   63   112   ADDANTE GIOVANNI,FAP S.R.L.
+BARI   A   63   323   PANNARALE VITO,PANNARALE VINCENZO,PANNARALE MARIO
+BARI   A   63   322   DEMANIO DELLA REGIONE PUGLIA
+
+
+
+
+                                                                                                                             Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                                                                        13
+                                                             400 M ATTORNO ALLE ZONE INFETTE (FOGLIO64)
+COMUNE SEZIONE FOGLIO PARTICELLE                                                               PROPRIETARI
+BARI   A      64      58         LOIACONO ANNA MARIA RITA
+BARI   A      64      57         LOIACONO ANNA MARIA RITA
+BARI   A      64      56         LOIACONO ANNA MARIA RITA
+BARI   A      64      55         LOIACONO ANNA MARIA RITA
+BARI   A      64      54         POMPILIO MICHELE,POMPILIO RAFFAELLA,NOE` ISABELLA ROSA
+BARI   A      64      53         POMPILIO MICHELE,POMPILIO RAFFAELLA,NOE` ISABELLA ROSA
+BARI   A      64      52         NOE` ISABELLA ROSA,POMPILIO RAFFAELLA,POMPILIO MICHELE
+BARI   A      64      51         PARTIPILO ANNA
+BARI   A      64      50         PARTIPILO FRANCESCO
+BARI   A      64      502        ,
+BARI   A      64      48         D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      64      47         D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      64      46         D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      64      45         D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      64      501        ,
+BARI   A      64      500        MASTROLONARDO VINCENZO
+BARI   A      64      43         ANGELILLO PASQUALE
+BARI   A      64      42         ANGELILLO PASQUALE
+BARI   A      64      41         FIORE MARIA FRANCESCA
+BARI   A      64      40         CARBONARA CHIARA,CARBONARA COSTANTINA
+BARI   A      64      106        D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      64      105        ,
+BARI   A      64      103        ,
+BARI   A      64      102        MASTROLONARDO CARMELA,FLORIO LORENZO,FLORIO EUGENIO
+BARI   A      64      100        ,
+BARI   A      64      39         CARBONARA CHIARA,CARBONARA COSTANTINA
+BARI   A      64      38         FLORIO FRANCESCO
+BARI   A      64      37         ANACLERIO CARMELA,CIPRIANO GIOVANNI
+BARI   A      64      36         ANGELILLO PASQUALE
+BARI   A      64      99         PARTIPILO FRANCESCO
+BARI   A      64      34         DI GIULIO EUGENIO,DI GIULIO EUGENIO,ZONNA ANTONIA
+BARI   A      64      98         RELLA CHIARA
+BARI   A      64      97         ,
+BARI   A      64      32         ANGELILLO PASQUALE
+BARI   A      64      96         ,
+BARI   A      64      95         DI GIULIO EUGENIO,DI GIULIO EUGENIO,ZONNA ANTONIA
+BARI   A      64      94         DIGIULIO GIOVANNI,POLI DOMENICA,DIGIULIO GIOVANNI
+BARI   A      64      93         VALERIO ANTONIO,DI GIULIO TERESA,DI GIULIO TERESA
+                                                                                                                                                  Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A      64      92         ,
+BARI   A      64      91         DEMANIO DELLA REGIONE PUGLIA
+BARI   A      64      27         MASCIOPINTO PIERLUIGI,CARBONARA GIUSEPPE,MASCIOPINTO ANNA LAURA,RUBINO MARIA CARMELA,MASCIOPINTO GIUSEPPE
+BARI   A      64      26         ANGELILLO PASQUALE
+BARI   A      64      25         ANGELILLO PASQUALE
+BARI   A      64      24         GRANDOLFO NATALE
+BARI   A      64      89         DEMANIO DELLA REGIONE PUGLIA
+BARI   A      64      23         LOIACONO ANNA MARIA RITA
+BARI   A      64      88         CASELLA AGATINA,CASELLA VINCENZO
+BARI   A      64      22         FIORE MARIA FRANCESCA
+BARI   A      64      87         DEMANIO DELLA REGIONE PUGLIA
+BARI   A      64      21         BARBERINO ROSARIA
+
+
+
+                                                                                                                                                  10805
+                                                                                                                                             14
+                                                                                         10806
+
+
+BARI   A   64   86    CASCARANO GIUSEPPE,RELLA CHIARA
+BARI   A   64   20    POMPILIO RAFFAELLA,NOE` ISABELLA ROSA,POMPILIO MICHELE
+BARI   A   64   85    ANCONA MARIA
+BARI   A   64   83    DEMANIO DELLA REGIONE PUGLIA
+BARI   A   64   82    PETRUZZELLI PIETRO
+BARI   A   64   81    DEMANIO DELLA REGIONE PUGLIA
+BARI   A   64   80    NITTI GENNARO
+BARI   A   64   9     NITTI GENNARO
+BARI   A   64   8     ANGELILLO PASQUALE
+BARI   A   64   7     FLORIO FRANCESCO
+BARI   A   64   6     PARTIPILO GAETANO
+BARI   A   64   1     BITETTO VITO
+BARI   A   64   19    CARBONARA COSTANTINA,CARBONARA CHIARA
+BARI   A   64   18    GRANDOLFO NATALE
+BARI   A   64   17    LOIACONO ANNA MARIA RITA
+BARI   A   64   16    FIORE MARIA FRANCESCA
+BARI   A   64   15    CORDONE ANGELA
+BARI   A   64   14    NOE` ISABELLA ROSA,POMPILIO RAFFAELLA,POMPILIO MICHELE
+BARI   A   64   79    DEMANIO DELLA REGIONE PUGLIA
+BARI   A   64   13    CARBONARA CHIARA,CARBONARA COSTANTINA
+BARI   A   64   78    BITETTO VITO
+BARI   A   64   12    ANCONA BENIAMINO
+BARI   A   64   77    DEMANIO DELLA REGIONE PUGLIA
+BARI   A   64   76    PETRUZZELLI DOMENICA,PETRUZZELLI ROSA,PETRUZZELLI ANNA
+BARI   A   64   10    PANNARALE VITO,PANNARALE VINCENZO,PANNARALE MARIO
+BARI   A   64   75    FLORIO MARIA,NITTI DOMENICA,FLORIO COSTANTINA,FLORIA NICOLA
+BARI   A   64   74    ,
+BARI   A   64   73    CORDONE ANGELA
+BARI   A   64   72    CORDONE STELLA
+BARI   A   64   499   MASTROLONARDO TERESA MARIA
+BARI   A   64   71    BARBERINO ROSARIA
+BARI   A   64   498   MASTROLONARDO GIUSEPPINA ANNA PIA
+BARI   A   64   70    MILANO FRANCESCO
+BARI   A   64   497   MASTROLONARDO VINCENZO
+BARI   A   64   496   MASTROLONARDO VINCENZO
+BARI   A   64   495   MASTROLONARDO GIUSEPPINA ANNA PIA
+BARI   A   64   494   LOSACCO VINCENZA,LOSACCO DOMENICO
+BARI   A   64   493   LOSACCO VINCENZA,LOSACCO DOMENICO
+BARI   A   64   69    CORDONE MARIA
+BARI   A   64   68    CORDONE MARIA,DI MAURO GIULIA,CORDONE ISABELLA
+                                                                                         Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A   64   67    ,
+BARI   A   64   66    CORDONE MARIA,CORDONE ISABELLA,DI MAURO GIULIA
+BARI   A   64   64    ANCONA VINCENZO
+
+
+
+
+                                                                                    15
+                                                          400 M ATTORNO ALLE ZONE INFETTE (FOGLIO71)
+COMUNE SEZIONE FOGLIO PARTICELLE                                                            PROPRIETARI
+BARI   A      71      81         FICARELLA GIOVANNI
+BARI   A      71      80         FICARELLA GIOVANNI,GEMMATO ELENA
+BARI   A      71      189        CARBONARA FRANCESCO
+BARI   A      71      79         FICARELLA GIOVANNI
+BARI   A      71      78         CARBONARA FRANCESCO
+BARI   A      71      52         CARBONARA FRANCESCO
+BARI   A      71      7          CARBONARA FRANCESCO
+BARI   A      71      120        CARBONARA FRANCESCO
+
+
+
+
+                                                                                                               Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                                                               10807
+                                                                                                          16
+                                                                                                                              10808
+
+
+                                                             400 M ATTORNO ALLE ZONE INFETTE (FOGLIO72)
+COMUNE SEZIONE FOGLIO PARTICELLE                                                                PROPRIETARI
+BARI   A      72      648        NITTI MARIATERESA,NITTI MARIA TERESA,NITTI MICHELE
+BARI   A      72      647        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      646        NITTI MARIA TERESA,NITTI MICHELE,NITTI MARIATERESA
+BARI   A      72      645        POMPILIO PATRIZIA,POMPILIO GIUSEPPE
+BARI   A      72      644        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      643        POMPILIO PATRIZIA,POMPILIO GIUSEPPE
+BARI   A      72      642        TATONE GIUSEPPE,TATONE COSTANTINA,TATONE VITO
+BARI   A      72      641        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      640        TATONE COSTANTINA,TATONE VITO,TATONE GIUSEPPE
+BARI   A      72      249        ,
+BARI   A      72      661        ANDRIANI FRANCESCA
+BARI   A      72      660        ADDANTE GIOVANNI
+BARI   A      72      109        CATALDO ROSA
+BARI   A      72      106        ATTOLINO ANGELA
+BARI   A      72      105        OTTOLINO MARIA TERESA
+BARI   A      72      104        D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      72      101        GIANNELLI MICHELE
+BARI   A      72      659        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      658        ADDANTE GIOVANNI
+BARI   A      72      657        CHIURLIA ROBERTO
+BARI   A      72      656        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      655        CHIURLIA ROBERTO
+BARI   A      72      654        FIORE ANNA
+BARI   A      72      653        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      652        FIORE ANNA
+BARI   A      72      651        LATROFA ROSA COSTANTINA
+BARI   A      72      450        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      649        LATROFA ROSA COSTANTINA
+BARI   A      72      248        D.R. S.A.S. DI RESSA TERESA C.
+BARI   A      72      246        ,
+BARI   A      72      245        ANGELILLI   COSTANTINO,SANTOLIQUIDO MARIELLA
+BARI   A      72      241        ,
+BARI   A      72      240        MALLARDI TERESA,MALLARDI GIOVANNI
+BARI   A      72      639        CICINELLI VITO COSIMO,CICINELLI FRANCESCO VITO,CICINELLI COSTANTINA,CICINELLI ACHILLE
+BARI   A      72      638        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      637        CICINELLI VITO COSIMO,CICINELLI ACHILLE,CICINELLI FRANCESCO VITO,CICINELLI COSTANTINA
+BARI   A      72      636        CICINELLI FRANCESCO VITO,CICINELLI VITO COSIMO,CICINELLI ACHILLE,CICINELLI COSTANTINA
+BARI   A      72      99         FERRARA PETRONILLA,FERRARA MARIA
+                                                                                                                              Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A      72      635        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      98         FERRARA MARIA,FERRARA PAUL,FERRARA PETRONILLA,LOIACONO ANNA
+BARI   A      72      634        CICINELLI COSTANTINA,CICINELLI VITO COSIMO,CICINELLI ACHILLE,CICINELLI FRANCESCO VITO
+BARI   A      72      97         BATTISTA FRANCESCO,RUBINO FILOMENA,BATTISTA NICOLA
+BARI   A      72      633        CARBONARA COSTANTINA
+BARI   A      72      632        ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A      72      95         VIOLANTE ANGELA,VIOLANTE GIUSEPPE,VIOLANTE MICHELE
+BARI   A      72      631        CARBONARA COSTANTINA
+BARI   A      72      93         ADDANTE VITO
+BARI   A      72      630        CARBONARA VINCENZO
+BARI   A      72      92         TATONE GIOVANNI,RADOGNA LAURA
+BARI   A      72      90         PATANO FRANCA ANTONIA
+
+
+
+
+                                                                                                                         17
+BARI   A   72   239   MALLARDI GIOVANNI,MALLARDI MICHELE ANTONIO
+BARI   A   72   233   ,
+BARI   A   72   232   RAIMONDI ANNA ROSA
+BARI   A   72   231   RAIMONDI AGATA
+BARI   A   72   230   RAIMONDI GIOVANNA
+BARI   A   72   194   FERRARA GIUSEPPE
+BARI   A   72   192   ANDRIANI FRANCESCA
+BARI   A   72   191   ANDRIANI FRANCESCA
+BARI   A   72   629   ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A   72   628   CARBONARA VINCENZO
+BARI   A   72   627   ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A   72   626   CATALDO ROSA
+BARI   A   72   625   CATALDO ROSA
+BARI   A   72   87    VOLPE FILOMENA MARIA ELVIR
+BARI   A   72   624   ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A   72   623   CATALDO ROSA
+BARI   A   72   86    MASTROLONARDO TERESA MARIA
+BARI   A   72   85    SCIANATICO ALBA,DEFRANCESCO VITO DOMENICO,DE FRANCESCO VINCENZO,DE CARO TERESA
+BARI   A   72   83    SELVAGGIO CATERINA,SELVAGGIO FILOMENA,SELVAGGIO PALMA,SELVSAGGIO MARIA,SELVAGGIO NICOLA,SELVAGGIO ANNA
+BARI   A   72   620   ,
+BARI   A   72   81    NITTI CARMELA,NITTI RACHELE,PUZZIFERRI COSTANZA,NITTI ALESSANDRO,NITTI COSTANTINA
+BARI   A   72   80    FIORE ANNA
+BARI   A   72   229   RAIMONDI COSTANZA
+BARI   A   72   228   DELMEDICO MARIA,DELMEDICO GIUSEPPE
+BARI   A   72   227   MELILLI GIOVINA ANNA,PORTINCASA ROSA,MELILLI ANGELA MARIA
+BARI   A   72   226   MELILLI GIOVINA ANNA
+BARI   A   72   225   PORTINCASA ROSA,MELILLI ANGELA MARIA
+BARI   A   72   224   MELILLI GIOVINA ANNA
+BARI   A   72   223   MELILLI ANGELA MARIA,PORTINCASA ROSA
+BARI   A   72   189   POMPILIO PATRIZIA,POMPILIO GIUSEPPE
+BARI   A   72   186   DALESIO TIZIANA ROSANGELA
+BARI   A   72   185   CARBONARA VINCENZO
+BARI   A   72   182   BATTISTA MARIANNA
+BARI   A   72   181   SELVAGGIO PALMA,SELVAGGIO ANNA,SELVAGGIO NICOLA,SELVAGGIO CATERINA,SELVAGGIO FILOMENA,SELVSAGGIO MARIA
+BARI   A   72   180   BIANCOFIORE ROSANNA,BIANCOFIORE FILIPPO,SCANNICCHIO ANGELA
+BARI   A   72   618   ,
+BARI   A   72   78    DIAFERIO LUCIA,DIAFERIO COSTANZA
+BARI   A   72   76    BATTISTA ROCCO
+BARI   A   72   73    SELVAGGIO NICOLA,SELVAGGIO CATERINA,SELVAGGIO ANNA,SELVAGGIO PALMA,SELVAGGIO FILOMENA,SELVSAGGIO MARIA
+BARI   A   72   72    PATANO ESTERINA,LELLA STELLA,LELLA CARMELA,LELLA GIUSEPPINA,LELLA CHIARA,LELLA ANNA
+                                                                                                                                             Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A   72   71    SEBASTIANO MICHELE,SEBASTIANO ROSA MARIA,SEBASTIANO ROSA MARIA,SEBASTIANO MICHELE
+BARI   A   72   70    SEBASTIANO ROSA MARIA,SEBASTIANO ROSA MARIA,SEBASTIANO MICHELE,SEBASTIANO MICHELE
+BARI   A   72   179   MALLARDI MICHELE ANTONIO,MALLARDI GIOVANNI
+BARI   A   72   178   D.R. S.A.S. DI RESSA TERESA C.
+BARI   A   72   176   D.R. S.A.S. DI RESSA TERESA C.
+BARI   A   72   174   GIANNELLI MARIA
+BARI   A   72   173   GIANNELLI MICHELE
+BARI   A   72   170   NITTI MICHELE,NITTI MARIA TERESA,NITTI MARIATERESA
+BARI   A   72   69    DIAFERIO LUCIA,DIAFERIO COSTANZA
+BARI   A   72   68    VOLPE ROCCO
+                      BOLOGNINI ANTONIETTA,BOLOGNINO ANTONIETTA,LORUSSO MARIA ROSARIA,BOLOGNINI GIUSEPPE,BOLOGNINO GIUSEPPE,BOLOGNINO
+BARI   A   72   67    ANNA,BOLOGNINO ISABELLA
+
+
+
+                                                                                                                                             10809
+                                                                                                                                        18
+                                                                                                                                                    10810
+
+
+BARI   A   72   66    PESOLE ANNA
+BARI   A   72   65    D`ADDOSIO ANNA,D`ADDOSIO CHIARA,D`ADDOSIO VITANTONIO,D`ADDOSIO VITO
+BARI   A   72   64    LATTANZIO BENIAMINO,LATTANZIO MARIA,LATTANZIO ANNA,LATTANZIO GIOVANNI,LATTANZIO GIUSEPPE
+BARI   A   72   63    ADDANTE MICHELE,ADDANTE CHIARA
+BARI   A   72   53    RAIMONDI AGATA,CAMPOBASSO VINCENZO
+BARI   A   72   158   CATALDO ROSA
+BARI   A   72   156   D.R. S.A.S. DI RESSA TERESA C.
+BARI   A   72   154   ADDANTE VITO
+BARI   A   72   152   TATONE VITO,TATONE COSTANTINA,TATONE GIUSEPPE
+BARI   A   72   204   GIANNELLI GIUSEPPE
+BARI   A   72   203   SAVINO PIO GIUSEPPE
+BARI   A   72   164   DELL EDERA STEFANO,SERVIDIO COSTANTINA
+BARI   A   72   163   FORNARELLI MICHELE,FORNARELLI VITO,FORNARELLI NICOLA,FORNARELLI GIANMAURO
+BARI   A   72   160   DELMEDICO GIUSEPPE,DELMEDICO MARIA
+BARI   A   72   48    VOLPE FILOMENA MARIA ELVIR
+BARI   A   72   47    ,
+BARI   A   72   46    LAGIOIA LUIGI
+BARI   A   72   41    TRIGGIANO ADELE
+BARI   A   72   149   DE CARO TERESA,DEFRANCESCO VITO DOMENICO,SCIANATICO ALBA,DE FRANCESCO VINCENZO
+BARI   A   72   148   NITTI ALESSANDRO,NITTI CARMELA,NITTI RACHELE,NITTI COSTANTINA,PUZZIFERRI COSTANZA
+BARI   A   72   147   DIAFERIO LUCIA,DIAFERIO COSTANZA
+BARI   A   72   146   FERRARA PASQUALE
+BARI   A   72   142   LAGIOIA ROCCO
+BARI   A   72   141   PESOLE LUIGI,PESOLE MICHELE,TRIGGIANO ADELE
+BARI   A   72   54    PATANO FRANCA ANTONIA
+BARI   A   72   39    VOLPE FILOMENA MARIA ELVIR
+BARI   A   72   38    SCOTELLA COSTANTINA
+BARI   A   72   37    RUBINO ROSA
+BARI   A   72   36    ,
+BARI   A   72   35    ,
+BARI   A   72   34    CAPUTO MARIO
+BARI   A   72   33    VOLPE FILOMENA MARIA ELVIR
+BARI   A   72   32    ,
+BARI   A   72   30    VOLPE MARIA MADIA
+BARI   A   72   139   VOLPE FRANCESCO
+BARI   A   72   138   VIOLANTE GIUSEPPE,VIOLANTE MICHELE,VIOLANTE ANGELA
+BARI   A   72   132   D`ONGHIA ANGELA,BATTISTA GIOVANNI
+BARI   A   72   27    VOLPE FILOMENA MARIA ELVIR
+BARI   A   72   22    D`ADDOSIO ANNA,D`ADDOSIO VITANTONIO,D`ADDOSIO VITO,D`ADDOSIO CHIARA
+BARI   A   72   21    VIOLANTE GIUSEPPE,VIOLANTE MICHELE,VIOLANTE ANGELA
+                                                                                                                                                    Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+BARI   A   72   122   COLELLA VINCENZO
+BARI   A   72   121   ,
+BARI   A   72   120   RAIMONDI AGATA,CAMPOBASSO VINCENZO
+BARI   A   72   14    BATTISTA ANNAMARIA
+BARI   A   72   13    BATTISTA ANNAMARIA
+BARI   A   72   11    ANDRIANI FRANCESCA
+BARI   A   72   10    ANDRIANI FRANCESCA
+BARI   A   72   119   VOLPE FILOMENA MARIA ELVIR
+                      BOLOGNINI ANTONIETTA,DEFILIPPIS ANNA,BOLOGNINO ANNA,BOLOGNINO GIUSEPPE,BOLOGNINO ANTONIETTA,LORUSSO MARIA ROSARIA,BOLOGNINI
+BARI   A   72   116   GIUSEPPE
+BARI   A   72   115   ANCONA ANNA MARIA
+BARI   A   72   114   ANCONA ANNA MARIA
+
+
+
+
+                                                                                                                                        19
+BARI   A   72   113   LATTANZIO MARIA,LATTANZIO BENIAMINO,LATTANZIO GIOVANNI,LATTANZIO ANNA,LATTANZIO GIUSEPPE
+BARI   A   72   112   DI FRONZO ROCCO
+BARI   A   72   111   DELMEDICO GIUSEPPE,DELMEDICO MARIA
+BARI   A   72   110   FORTUNATO ANTONIO,FORTUNATO GIOVANNI,FORTUNATO ROSA
+BARI   A   72   668   ANDRIANI FRANCESCA
+BARI   A   72   667   ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+BARI   A   72   666   ANDRIANI FRANCESCA
+BARI   A   72   665   ANDRIANI FRANCESCA
+BARI   A   72   664   ENTE AUTONOMO ACQUEDOTTO PUGLIESE
+
+
+
+
+                                                                                                                      Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                                                                      10811
+                                                                                                                 20
+                                                                                                                     10812
+
+
+                                                             400 M ATTORNO ALLE ZONE INFETTE (FOGLIO2)
+COMUNE SEZIONE FOGLIO PARTICELLE                                                                  PROPRIETARI
+BARI   G      2       2022       ANCONA ANNA
+BARI   G      2       2021       FERRANTE ANNIBALE,GRASSI PIRRONE ANNA MARIA
+BARI   G      2       2018       TAMMA EMANUELE,TAMMA FULVIA,TAMMA MARIANTONIETTA
+BARI   G      2       2017       TAMMA EMANUELE,TAMMA FULVIA,TAMMA MARIANTONIETTA
+BARI   G      2       2014       PANNARALE ANNA
+BARI   G      2       313        FERRANTE ANNIBALE,GRASSI PIRRONE ANNA MARIA
+BARI   G      2       385        FERRARA PASQUALE
+BARI   G      2       384        LOIACONO ANNA
+BARI   G      2       379        BRATTA PORZIA,MIZZI NICOLA
+BARI   G      2       1215       ,
+BARI   G      2       378        ADDANTE SERAFINA
+BARI   G      2       377        ,
+BARI   G      2       376        MINELLA MARIA
+BARI   G      2       373        MINELLA MARIA
+BARI   G      2       371        MINELLA MARIA
+BARI   G      2       370        CENTRO SPORTIVO ITALIANO" IN SIGLA C.S.I.
+BARI   G      2       1714       ,
+BARI   G      2       369        ,
+BARI   G      2       368        LATTANZI MARGHERITA,FIORE MARIANTONIETTA,FIORE MICHELE,FIORE ANTONIO
+BARI   G      2       1960       VOLPE GIUSEPPE
+BARI   G      2       255        ,
+BARI   G      2       240        ANCONA ANNA
+BARI   G      2       979        ,
+BARI   G      2       82         RETE FERROVIARIA ITALIANA - SOCIETA` PER AZIONI IN SIGLA RFI S.P.A.
+BARI   G      2       1572       ,
+BARI   G      2       560        TAMMA FULVIA,TAMMA MARIANTONIETTA,TAMMA EMANUELE
+BARI   G      2       557        TAMMA EMANUELE,TAMMA FULVIA,TAMMA MARIANTONIETTA
+BARI   G      2       2077       MARIANO VITO,BIRELLA BICE
+BARI   G      2       81
+
+
+
+
+                                                                                                                     Bollettino Ufficiale della Regione Puglia - n. 18 del 5-3-2026
+
+
+
+
+                                                                                                                21
+

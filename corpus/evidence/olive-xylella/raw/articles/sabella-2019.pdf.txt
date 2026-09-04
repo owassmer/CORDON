@@ -1,0 +1,664 @@
+                                                                                                       www.nature.com/scientificreports
+
+
+
+
+                         OPEN      Xylem cavitation susceptibility and
+                                   refilling mechanisms in olive trees
+                                   infected by Xylella fastidiosa
+Received: 27 March 2019            Erika Sabella1, Alessio Aprile 1, Alessandra Genga1, Tiziana Siciliano2, Eliana Nutricati1,
+Accepted: 19 June 2019             Francesca Nicolì1, Marzia Vergine1, Carmine Negro1, Luigi De Bellis 1 & Andrea Luvisi 1
+Published: xx xx xxxx
+                                   In olive trees, Xylella fastidiosa colonizes xylem vessels and compromises water transport causing
+                                   the olive quick decline syndrome (OQDS). The loss of hydraulic conductivity could be attributed to
+                                   vessel occlusions induced both by the bacteria biofilm and by plant responses (tyloses, gums, etc.)
+                                   that could trigger embolism. The ability of the infected plants to detect embolism and to respond, by
+                                   activating mechanisms to restore the hydraulic conductivity, can influence the severity of the disease
+                                   symptomatology. In order to investigate these mechanisms in the X. fastidiosa-resistant olive cultivar
+                                   Leccino and in the susceptible Cellina di Nardò, sections of healthy olive stems were analysed by laser
+                                   scanning microscope to calculate the cavitation vulnerability index. Findings indicated that the cultivar
+                                   Leccino seems to be constitutively less susceptible to cavitation than the susceptible one. Among
+                                   the vascular refilling mechanisms, starch hydrolysis is a well-known strategy to refill xylem vessels
+                                   that suffered cavitation and it is characterized by a dense accumulation of starch grains in the xylem
+                                   parenchima; SEM-EDX analysis of stem cross-sections of infected plants revealed an aggregation of
+                                   starch grains in the Leccino xylem vessels. These observations could indicate that this cultivar, as well as
+                                   being anatomically less susceptible to cavitation, it also could be able to activate more efficient refilling
+                                   mechanisms, restoring vessel’s hydraulic conductivity. In order to verify this hypothesis, we analysed
+                                   the expression levels of some genes belonging to families involved in embolism sensing and refilling
+                                   mechanisms: aquaporins, sucrose transporters, carbohydrate metabolism and enzymes related to
+                                   starch breakdown, alpha and beta-amylase. The obtained genes expression patterns suggested that the
+                                   infected plants of the cultivar Leccino strongly modulates the genes involved in embolism sensing and
+                                   refilling.
+
+
+                                   Xylella fastidiosa, a gram-negative bacterium that colonizes xylem vessels, is transmitted to new host plants
+                                   during sap feeding by insect vectors such as sharpshooter leafhoppers (Hemiptera, Cicadellidae) or spittlebugs
+                                   (Hemiptera, Cercopidae) and spreads from the site of infection to the plant’s network of xylem vessels1. X. fastid-
+                                   iosa was recognized to be the causal agent of a number of so called leaf scorch diseases such as: Pierce’s disease
+                                   (PD) of grapevine (Vitis vinifera), phony peach disease (PPD) in peach (Prunus persica), citrus variegated chloro-
+                                   sis (CVC) or citrus X disease, almond leaf scorch (ALS) in Prunus amygdalus and plum leaf scald (PLS) in Prunus
+                                   domestica, coffee leaf scorch (CLS) in Coffea arabica and the oleander leaf scorch (OLS) in Nerium oleander2.
+                                   Typical severe symptoms affect leaves and fruits causing significant economic loss2. Bacterial cells attach to the
+                                   vessel wall and, by multiplying, they aggregate in a biofilm matrix that includes nucleic acids, proteins, humic sub-
+                                   stances, and exopolysaccharide (EPS); these biofilms protect bacterial communities from antibiotics, dehydration,
+                                   host defences, and other stresses and contribute to virulence by allowing the coordinated expression of patho-
+                                   genicity genes via quorum sensing3. It is conventionally thought that this biofilm is the main factor responsible for
+                                   the blockage of water movement in X. fastidiosa infected plants; nevertheless, studies have found that vessel occlu-
+                                   sions are also caused by the active host plants responses to the presence of the bacterium as defence response1,3–5.
+                                   It was observed that in Pierce’s disease of grapevine a high proportion of colonized vessels in infected leaves were
+                                   not blocked and instead had small colonies or solitary cells, suggesting that vessel blockage is not a colonization
+
+
+                                   1
+                                    Department of Biological and Environmental Sciences and Technologies, University of Salento, via Prov.le
+                                   Monteroni 165, 73100, Lecce, Italy. 2Department of Physic and Math, University of Salento, via Prov.le Monteroni
+                                   165, 73100, Lecce, Italy. Correspondence and requests for materials should be addressed to A.A. (email: alessio.
+                                   aprile@unisalento.it)
+
+
+        Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                             1
+www.nature.com/scientificreports/                                                              www.nature.com/scientificreports
+
+
+                           strategy employed by the pathogen but, rather, a by-product of endophytic colonization1. Stevenson et al.5, by
+                           following the progression of anatomical symptoms of Pierce’s disease in susceptible Vitis vinifera cv. Chardonnay
+                           grapevines, reported that leaf and petiole xylem was predominantly occluded with gums and bacteria, whereas,
+                           stem xylem was occluded almost exclusively with tyloses. Therefore, gums, pectin gels and X. fastidiosa biofilms
+                           contribute to the vascular obstruction3. This loss of xylem water-transporting function determines a decrease in
+                           stem-specific hydraulic conductivity. As for other vascular pathogens6–8, the phenomenon of vessel cavitation
+                           during the disease progression in infected plants could also explain the loss of hydraulic conductivity due to air
+                           filling of the vessels.
+                                Pérez-Donoso et al.4 have reported early embolism in X. fastidiosa-infected grape and they have correlated this
+                           phenomenon with decreased xylem conductivity and drought stress. Nardini et al.9 summarized the mechanism
+                           utilized to restore hydraulic conductivity as the osmotic hypothesis. This hypothesis, proposes an active mecha-
+                           nism that may operate by refilling the embolized vessels with water and the driving force for refilling is generated
+                           by the enrichment of the sap with solutes that engages from inorganic and organic solutes (proteins, polysaccha-
+                           rides, etc.), to sugars derived from the hydrolysis of starch (degradation of starch in the parenchyma cells of the
+                           xylem produces soluble sugars that are released into the vessels, thereby promoting an osmotic flux of water into
+                           their lumen). Recently, X. fastidiosa was reported under field conditions in Italy (Apulia region), associated with
+                           severe cases of Olive Quick Decline Syndrome (OQDS)10,11; although the primary role of the bacterium in occlu-
+                           sions formation has been observed12, the pathogenesis and symptom formation in olive trees represent research
+                           challenges13 and mechanisms as vessel embolism induced by the pathogen have never been investigated in this
+                           host-pathogen association. The main objective of this work was to evaluate constitutive cavitation susceptibility
+                           and activation of refilling mechanisms to restore hydraulic conductivity in olive plants subjected to Xylella fastid-
+                           iosa infection; the comparison between Cellina di Nardò and Leccino, respectively susceptible and resistant olive
+                           cultivars13,14, aimed to know if cavitation could play a role in determining the severity of symptoms caused by X.
+                           fastidiosa.
+
+                           Materials and Methods
+                           Plant materials and experimental design. Trials were carried out in two orchards near the city of Lecce
+                           (Parco Naturale Regionale Bosco e Paludi di Rauccio, 40°27′24.0″N 18°09′43.8″E, Apulia, Italy), in which olive
+                           trees of cv. Leccino and Cellina di Nardò were monitored since 2015. Selected plants (25–35 years) were charac-
+                           terized from the same agronomic practices in the last 5 years. Phytosanitary treatments were carried out accord-
+                           ing to EU Decision 2015/789 which is required to control the insect vector (Philaenus spumarius). Orchards were
+                           also weekly monitored to detect eventual insect or other pest outbreaks. Tree water status was assessed by Ψw
+                           measured every two weeks using a pressure chamber15. No irrigation was needed.
+                               Leaf and branches samples were collected from X. fastidiosa-positive trees (Xf-p, 10 naturally infected plants
+                           per cultivar; according to visual inspections, the X. fastidiosa-positive trees of the cv Cellina di Nardò showed the
+                           typical symptoms of leaf scorching uniformly distributed in the canopy, instead cultivar Leccino exhibits mild
+                           symptoms) and X. fastidiosa-negative trees, (Xf-n, 10 plants/cultivar). The presence of X. fastidiosa was assessed
+                           by polymerase chain reaction (PCR)16. In both Xf-p and Xf-n samples, plants were monitored and tested for some
+                           of the most common pathogens in addition to X. fastidiosa, checking for symptoms caused by natural infection of
+                           Colletotrichum gloeosporioides, Mycocentrospora cladosporioides, Spilocaea oleagina and Pseudomonas savastanoi
+                           pv. savastanoi. Diagnostic tests (real-time PCR) were carried out on leaves or woody chips, according to protocols
+                           reported in the literature, for Verticillium dahliae17; Colletotrichum spp., C. acutatum, and C. gloeosporioides18;
+                           Phaeomoniella chlamydospora19; Phaeoacremonium aleophilum and P. parasiticum20,21; Botryosphaeria dothidea22;
+                           Diplodia seriata23 and Phytophthora spp.24 previously detected in South Italy25. Xf-p and Xf-n trees were nega-
+                           tive to every test, apart some sporadic evidence of C. gloeosporioides, S. oleagina and P. savastanoi pv. savasta-
+                           noi. However, we carried out the assessment of xylem vascular diameter and SEM/EDX analysis (see following
+                           sub-chapters) just on stem tissues in which these non-systemic pathogens were not achieved. Stem tissues from
+                           Xf-p and Xf-n trees were also used to analyse the expression of genes coding for aquaporins, starch and sucrose
+                           metabolism, sucrose transporters, enzymes related to starch breakdown, Alpha and Beta amylase.
+
+                           Detection of X. fastidiosa in planta.           Detection of the pathogen X. fastidiosa was carried out in both
+                           the leaves and the branches. Approximately 1 g of leaf petioles (a pool sample from 60 leaves collected from six
+                           branches) or vascular bundles (a pool sample from six branches) was transferred to an extraction bag (BIOREBA,
+                           Reinach, Switzerland) and 4 ml of extraction buffer (0.2 M Tris – HCl pH 9, 0.4 M LiCl and 25 mM EDTA) were
+                           added. Samples were homogenized using a semiautomatic homogenizer (Homex 6, BIOREBA) at 50% maximum
+                           speed. DNA extraction was performed following the protocol of Edwards et al.26. Briefly, the DNA solution is first
+                           extracted with a phenol-chloroform–isoamyl alcohol mixture to remove protein contaminants and then precip-
+                           itated with 100% ethanol.
+                               The PCR protocol with the primers X.fas-0838-a-S-21-X.fas-1439-a-A-19 and XYgyr499-RXYgyr90716 was
+                           used to confirm the infection of the samples with X. fastidiosa. Amplification was performed in a 25 μL reaction
+                           containing 0.2 μM concentrations of each primer, 200 μM concentrations of dNTPs, 1 x Taq buffer, 2.0 U of Taq
+                           DNA polymerase (TaKaRa, Kyoto, Japan), and 100 ng of DNA template. The PCR started with a 3 min denatur-
+                           ation step at 94 °C, followed by 30 cycles of denaturation at 94 °C for 1 min, primer annealing at 55 °C for 30 s,
+                           extension at 72 °C for 2 min, and final extension for 7 min.
+
+                           Assessment of xylem vessel diameter and vulnerability to cavitation in olive stem. Stem of
+                           the Xf-n olive trees were excised with sterile razor blades, surface sterilized for 1 min in 70% ethanol and then
+                           rinsed three times in sterile distilled water. The cuttings (≈1.5 × 1.5 cm) were fixed in 4% paraformaldehyde in
+                           phosphate-buffered saline (1x PBS, hereafter PBS) overnight at room temperature, followed by washing in PBS
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                             2
+www.nature.com/scientificreports/                                                                 www.nature.com/scientificreports
+
+
+                           buffer for 10 min at room temperature. After fixation, samples were dehydrated by two successive 1-h incuba-
+                           tions in each of 70, 80, 95, and 100% ethanol, then embedded in paraffin and cut into 30 μm-thick sections with
+                           a microtome Leica RM 2155 (Leica Microsystems, Mannheim, Germany). Sections were transferred to 1:1 (v/v)
+                           PBS:96% ethanol and maintained at −20 °C until staining. To dissolve the paraffin, sections were embedded in
+                           toluene for 3 min at 43 °C. After removing the toluene, all sections were stained with safranin solution (1%) to
+                           enhance contrast of wood against void space of vessels. Following the staining, sections were cleared and prepared
+                           for microscopic analyses (aqueous embedding on glass slides). All images were taken on a confocal laser-scanning
+                           microscope (Carl Zeiss LSM 700 laser scanning microscope, Jena, Germany); all images were acquired with the
+                           same microscope settings and analysed using ImageJ v1.46r.
+                               The presented vessel diameter values are the means of more than 400 determinations (arithmetic vessel diam-
+                           eter and the vessel distribution were computed according to Scholz et al.27); xylem vessels were divided in six
+                           classes of diameter (0–15 µm; 15–30 µm; 30–45 µm; 45–60 µm; 60–75 µm; 75–90 µm).
+                               The Student t-test was used to test the statistical significance of the differences found in the vessel density for
+                           different classes of diameter observed in the two studied cultivars.
+                               Vulnerability to cavitation (vulnerability index, VI) was calculated using the equation proposed by Carlquist28,
+                           as follows:
+                                                                                VI = VD/VF
+                           VF is vessel frequency (number of vessels per mm2, N/mm2), while VD is the mean vessel diameter (µm).
+
+                           SEM/EDX wood analysis.            Stem samples from Xf-p and Xf-n plant branches were examined with a scan-
+                           ning electron microscope (SEM). Sections handmade using razor blades were dehydrated by critical point step,
+                           mounted on aluminum stabs and sputter coated with three layers of gold before the SEM observation with a
+                           Tescan Vega LMU model coupled with an energy-dispersed spectrometry (EDS) microanalysis Bruker Quantax
+                           800 (with a lower detection limit per element of less than 0.1%) at an accelerating voltage of 20 kV in high vac-
+                           uum. An X-Ray spectrum has been collected for 120 sec for every SEM image. This allows us to recognize both
+                           the main elements and the trace elements to determine whether there were different chemical substances in the
+                           observed structures (tylose, starch, etc); the Student t-test was used to test the statistical significance of the differ-
+                           ences found in the atomic percentages of the detected elements. Diameter of the starch granules were measured
+                           on SEM micrographs (1000 and 3000×) using software ImageJ 1.46r.
+
+                           Total RNA isolation, cDNA synthesis and RT-PCR analysis of gene expression. Stem tis-
+                           sues from Xf-p and Xf-n plants were frozen in liquid nitrogen and total RNA was isolated from 0.1 gr of sam-
+                           ples using TRIZOL (Invitrogen, Carlsbad, USA). cDNA synthesis was carried out using TaqMan Reverse
+                           Transcription Reagents (Applied Biosystems, Foster City, USA) according to the manufacturer’s standard pro-
+                                                                                                                                         ®
+                           tocol. Amplification reactions were performed using a Biorad CFX96 Real-time PCR cycler and Biorad CFX
+                           manager software v3.1 (Bio-Rad, Irvine, CA, USA) using default settings for amplification curve analysis. Each
+                           reaction consisted of 13 ng of cDNA, 12.5 μL of Power SYBR Green RT-PCR Master mix (Applied Biosystems),
+                           5.0 µM forward and reverse primers, ultrapure DNase/RNase-free water (Carlo Erba Reagents S.r.l.) in a total
+                           volume of 25 μL. The cycling conditions were: 2 min at 50 °C and 10 min at 95 °C, followed by 45 cycles of 95 °C for
+                           15 s and 60 °C for 1 min. Melting curve analysis was performed after PCR to evaluate the presence of non-specific
+                           PCR products and primer dimers. Recent models on the embolism sensing and refilling mechanism describe as
+                           involved genes the following families: Aquaporins, Sucrose transporters, carbohydrate metabolism and enzymes
+                           related to starch breakdown, Alpha and Beta Amylase29–31. The expression levels of some of these genes were
+                           analysed in stems of the olive trees Leccino and Cellina di Nardò, comparing Xf-p and Xf-n samples. The used
+                           primers were retrieved from the literature or designed with the software Primer Express Software 3.0 on the
+                           mRNA sequences deposited in GenBank (Table 1). β-Actin and the Elongation Factor 1-α that has been previously
+                           shown to have stable expression in Leccino stem32 and in O. europaea tissues33 were tested and used to normalize
+                           the expression levels of the target genes. The Student t-test was used to test the statistical significance of the differ-
+                           ences found in the expression profile of genes.
+
+                           Results and Discussion
+                           Xylem vessel diameter and vulnerability to cavitation in stem of Leccino and Cellina di
+                           Nardò. With regard to the number of vessels per diameter class, Student t-test showed a significant effect
+                           of cultivar for the diameter class 0–15 µm (P < 0.05), diameter class 15–30 µm (P < 0.01) and classes 45–60 µm
+                           and 60–75 µm (P < 0.001) (Table 2): our results indicated that the cultivar Leccino, reported as the resistant cul-
+                           tivar, displayed a higher number of small diameter vessels (0–15 µm and 15–30 µm) compared to the susceptible
+                           cultivar Cellina di Nardò, which displayed a higher number of wide diameter vessels (45–60 µm and 60–75 µm)
+                           (Fig. 1). Moreover, the two cultivars differed also for the overall distribution of vessel sizes. The Leccino graph
+                           showed a Gaussian distribution curve with a narrow base (median = 26), whereas the base of Cellina di Nardò
+                           Gaussian curve is larger (median = 45) (Fig. 1). These data suggested that Leccino cultivar is characterized by a
+                           tighter and more homogeneous vessel apparatus if compared to Cellina di Nardò ones.
+                               Previous works speculated on the role of vessel diameter as factor influencing plant’s susceptibility to
+                           xylem-dwelling pathogens and several cases have been described where resistance is related to shorter and smaller
+                           vessels. Chatelet et al.34 examined the vascular anatomy of 12 grape varieties as X. fastidiosa’s hosts and found that
+                           tolerant host plants had narrower vessels; they supposed a decrease in the motility of bacteria within the xylem
+                           vessels. The implications of xylem structure on the pathogen movement are discussed by Elgersma35 that reported
+                           length and diameter of xylem vessels as factors in resistance of elms to Ophiostoma ulmi (syn. Ceratocystis ulmi)
+                           due to a limited spreading of the fungus’s spores in the narrowed vessels, so the percentage of vessels with a large
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                                  3
+www.nature.com/scientificreports/                                                                   www.nature.com/scientificreports
+
+
+                            Name               sequence 5′-3′                           Reference         GenBank
+                            Oeβ-Act_F          ACTATGAACAGGATCTTGAG
+                                                                                        Rossi et al.32    AF545569.1
+                            Oeβ-Act_R          GAACCACCACTGAGGACGAT
+                            OeEF1-α_F          CTGACTGCGCCGTCCTTATC
+                                                                                        Alagna et al.63   XM_002527974.1
+                            OeEF1-α_R          TGACACCAAGGGTGAAGGC
+                            OePIP1_F           GGCATATAAATCCGGCAGTGA
+                                                                                                          DQ202708.1
+                            OePIP1_R           CGGGTCAACGACAATTTCCT
+                            OePIP2_F           TGCCACCATCCCCATCAC
+                                                                                                          DQ202709.2
+                            OePIP2_R           GATGACAGCAGCTCCAAAGCT
+                            OeTIP_F            CGGCGGCCACGTAAAC
+                                                                                                          DQ202710.1
+                            OeTIP_R            CAATGTGATGTGACCACCAACA
+                            Oeβ-Amy_F          ATATGATGACTACGCCCACGAA
+                                                                                                          JQ711506.1
+                            Oeβ-Amy_R          CGATGCCATCAACATTCAAATG
+                            Oeβ-Amy1_F         TGCCACGATATGATGACTACGC
+                                                                                        Alagna et al.63   unigene01162
+                            Oeβ-Amy1_R         TCAGGTTGGAACAAATCCGGGTTC
+                            Oeα-Amy2_F         CGGAGACGCGGTGGAAT
+                                                                                                          XM_022987933.1
+                            Oeα-Amy2_R         CCGTCATTATGAGCATGGTATATTTTT
+                            Oeα-Amy_F          ATCAGGACAGGCATCGGAAT
+                                                                                                          XM_023038990.1
+                            Oeα-Amy_R          GACACTGCCTCCCGCATT
+                            OeMST2_F           GCCAATGTGGACGAGGAGTT
+                                                                                                          DQ087177.2
+                            OeMST2_R           TGCTCCACCTTCCTCGACTCT
+                            OeSUT1_F           TCGGTTATGCGGCTGGAT
+                                                                                                          JN656245.1
+                            OeSUT1_R           CAGGCTTTTGTTTTGGTAAATGG
+                            OeSUSy_F           GCCTGGACTCTACCGAGTTGTT
+                                                                                        Alagna et al.63   unigene02089
+                            OeSUSy_R           CACGCATAGGTGTTCCTTGTTC
+                            OeINV-V_F          CCAGTCAGCGAAGTGGAAGAAT
+                                                                                        Alagna et al.63   unigene01665
+                            OeINV-V_R          TGTAACCAGCATCAGCATCAGC
+                            OeINV-CW_F         AGACAAGGCAGAGACATTCGAC
+                                                                                        Alagna et al.63   unigene02494
+                            OeINV-CW_R         ATGCATCAGAGCACATGAGAAC
+                            OeGBSSI_F          TGTGCCAAAGTCGACCCTGCCG
+                                                                                        Alagna et al.63   unigene00185
+                            OeGBSSI_R          TGGTTCACTGCTGGCAGCCCC
+
+                           Table 1. Primers used for RT-PCR to measure expression levels of analysed genes.
+
+
+                                         Vessel diameter classes
+                                         0–15 µm       15–30 µm    30–45 µm 45–60 µm         60–75 µm        75–90 µm
+                            Cultivar     0.0319*       0.0082**    0.1450   0.0003***        0.0005***       0.1261
+
+                           Table 2. T-test outputs of the vessel diameter classes comparison between the stems of the cvs. Leccino and
+                           Cellina di Nardò. *Significance at P < 0.05; **Significance at P < 0.01; ***Significance at P < 0.001.
+
+
+                           diameter was smaller in resistant elms than in susceptible ones. Another focus of the vessels anatomy studies in
+                           relation to vascular disease is the cavitation induced by pathogen infections. The loss of hydraulic conductivity
+                           could be attributed both to vascular pathogen growth and to plant responses7. Tyloses and gels production is a
+                           well-known plant defence response to halt the pathogens spreading. Sun et al.36 showed a quantitative compar-
+                           ison of vascular occlusions in the Pierce’s Disease susceptible versus resistant grapevine genotypes; they found
+                           tyloses as the predominant type of occlusion and correlated them with the larger vessels. According to their data,
+                           tyloses occlusions does not prevent the pathogen’s systemic spread but they could significantly impede water
+                           conduction contributing to disease symptoms development in the susceptible genotypes. Similarly, Pouzoulet et
+                           al.37 described an increased susceptibility to the vascular pathogen Phaemoniella chlamydospora in grapevines
+                           with wide vessel diameter since fungal compartmentalization was more efficient in wide vessels and also because
+                           large vessels displayed a higher quantity of tyloses and occlusions that create a favorable environment for the
+                           pathogen’s growth and reduce plant’s hydraulic conductance. Since cavitation assumes a key role in the symptoms
+                           development of vascular pathogens as the bacterium X. fastidiosa, vulnerability to cavitation (vulnerability index,
+                           VI) was calculated. Vulnerability index of the Cellina di Nardò showed that this cultivar was almost 2 times more
+                           vulnerable than the cultivar Leccino (Table 3).
+                               Table 3 also shows that vessels frequency was lower in the stem of the cultivar Cellina di Nardò.
+
+                           SEM/EDX analysis. Against the observed background, the mechanisms capable to refill xylem vessels could
+                           be important factors in vascular wilt diseases resistance. Among the embolism repair mechanisms, starch degra-
+                           dation (from parenchyma cells of the xylem to soluble sugars that promotes osmotic water flux capable to refill
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                           4
+www.nature.com/scientificreports/                                                              www.nature.com/scientificreports
+
+
+
+
+                           Figure 1. Diameter classes of the xylem vessels in the stems of the cvs. Leccino and Cellina di Nardò. (A)
+                           Transverse sections of olive stems stained with safranin solution to enhance void space of xylem vessels. (B)
+                           Distribution of xylem vessels diameter observed in the stem of Olea europaea cvs. Leccino and Cellina di Nardò.
+                           Please see Table 2 for further statistical analysis.
+
+
+                            Cultivar           VD (µm)            VF (N/mm2)        VI
+                            Cellina di Nardò   45.70 ± 11.29***   36.60 ± 2.76***   1.25
+                            Leccino            27.46 ± 9.49***    40.70 ± 2.18***   0.67
+
+                           Table 3. Anatomical characters and Vulnerability index (VI) of the olive cultivars Cellina di Nardò and
+                           Leccino. VD = Vessel diameter, VF = Vessel frequency (number of vessels per mm2, N/mm2), VI = Vulnerability
+                           index. ***Significance at P < 0.001.
+
+
+
+                           hydraulic conductivity) is well-known and it is characterized by a dense accumulation of starch grains in the
+                           xylem parenchima38 that could be revealed by the SEM analysis of the stem cross-sections.
+                               In sections from Xf-n samples, vessels appeared free of occlusions (Fig. 2A,B).
+                               Only in the cross-sections from the stems of infected Leccino were observed starch grains (Fig. 2C–E); they
+                           appeared as spherical structures with an average diameter of 4.01 ± 1.02 µm. Figure 3 shows the result of the
+                           elemental analyses of the starch grains conducted by SEM/EDX. Since starch is constituted by glucose units, the
+                           presence of the three elements carbon (C), hydrogen (H) and oxygen (O) would be expected; however, only C and
+                           O can be detected; H is not distinguished as there are no core electrons in hydrogen but only valence electrons. In
+                           addition, the signals emitted from H 1 s valence electrons would overlap with signals of other valence electrons
+                           and would not be possible for identification39. The atomic percentages of C and O in the observed grains gave an
+                           elemental signature that is characteristic of starch according to the data reported in literature40,41 and it showed
+                           statistically significant differences in comparison with the cell wall composition of the xylem vessel (Fig. 4).
+                               In stem’s sections from infected Cellina di Nardò trees, tyloses and crystals were observed (Fig. 2F,G). Tyloses
+                           differed from starch grains for size and composition; tyloses were found in some vessels as masses of different sizes
+                           (the average diameter, assuming these structures as circles, is 2.04 ± 0.60 µm; tyloses size showed a statistically
+                           significant difference in comparison with starch grains according to Student t-test, P < 0.001) and sometimes they
+                           appeared as partially included in the cell wall of the vessel’s lumen; about the composition, the energy-dispersive
+                           X-ray (EDX) analysis showed no differences between the cell wall composition and the observed masses (Fig. 4);
+                           this is reasonable since tyloses are outgrowths on parenchyma cells of xylem vessels42.
+                               Several studies have documented a dense accumulation of starch grains in the vessel’s cells as an integral part
+                           of embolism recovery: Masrahi et al.43 observed in xylem parenchima of the two lianas Cocculus pendulus and
+                           Leptadenia arborea a great quantity of starch grains that can reduce the solute potential of xylem sap improving
+                           the upward flow of water, this proposed strategy could help plants to repair air filled vessels and to survive in the
+                           water deficit of their severe habitat. Starch granules are readily apparent in the fibers of grapevine xylem and it
+                           was proposed that they generated an osmotic driving force for refilling38. Bucci et al.44 explained that the abun-
+                           dant starch granules observed in the vessels of the two savanna tree species Schefflera macrocarpa and Caryocar
+                           Brasiliense could intensificate vascular water uptake by increasing osmotically active solutes. Finally, according to
+                           Nardini et al.9, starch depolymerization is apparently activated during xylem refilling and treatments that repress
+                           refilling also inhibit starch hydrolysis both in the lab and in field-grown plants.
+
+
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                             5
+www.nature.com/scientificreports/                                                               www.nature.com/scientificreports
+
+
+
+
+                           Figure 2. Scanning electron photomicrograph of Leccino and Cellina di Nardò stem cross-sections. (A)
+                           Stem cross-section of Xf-n Cellina di Nardò. (B) Stem cross-section of Xf-n Leccino. In sections from Xf-n
+                           samples, vessels appeared free of occlusions. (C–E) Stem cross-sections of Xf-p Leccino; scanning electron
+                           photomicrographs of xylem parenchyma reveals a dense accumulation of starch grains. (F,G) Stem cross-
+                           sections of Xf-p Cellina di Nardò. In stem’s sections from infected Cellina di Nardò trees, tyloses (indicated by
+                           green arrows) and crystals (indicated by red arrows) were observed. Xf − n = X. fastidiosa negative samples;
+                           Xf − p = X. fastidiosa positive samples.
+
+
+
+                               According to our obtained data, the cultivar Leccino seems to be less susceptible to cavitation and able to
+                           activate more efficient refilling mechanisms restoring vessel’s hydraulic conductivity.
+
+                           Expression of gene families involved in embolism sensing and refilling mechanism. In order to
+                           verify the suggested hypothesis of a more efficient strategy to restore vessel’s conductivity in the cultivar Leccino,
+                           we analysed the expression levels of the gene families involved in embolism sensing and refilling mechanism. In
+                           the Fig. 5 are reported the expression levels of the genes coding for three aquaporins: OePIP1.1, OePIP2.1 and
+                           OeTIP1.1. Aquaporins belong to a highly conserved group membrane major intrinsic protein (MIPs), they are
+                           found in the cell membranes of all living organisms and allow water flux across membranes45. In plants, the aqua-
+                           porins can increase the hydraulic conductivity of the membrane by 10- to 20-fold46. In the two analysed cultivars,
+                           the OePIP1.1 transcript did not significantly change in response to the X. fastidiosa infection; OePIP2.1 resulted
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                              6
+www.nature.com/scientificreports/                                                              www.nature.com/scientificreports
+
+
+
+
+                           Figure 3. EDX analysis of the starch grains. The SEM/EDX analysis indicated that the structure of the starch
+                           grains was composed of carbon and oxygen with atomic percentages that are characteristic of starch according
+                           to the data reported in literature40,41.
+
+
+
+
+                           Figure 4. Quantitative results of the elemental analysis of cell wall, tyloses and starch grains. Carbon (C) and
+                           oxygen (O) distribution in cell wall, tyloses and starch grains observed in stem cross-sections of Leccino and
+                           Cellina di Nardò. The atomic percentages of C and O in the observed grains showed statistically significant
+                           differences in comparison with the cell wall composition of the xylem vessel according to Student t-test
+                           (*P < 0.05; **P < 0.01). The observed masses hypothesized to be tyloses exhibited no differences when
+                           compared with the cell wall composition.
+
+
+                           upregulated in the cultivar Leccino (fold change = 2.04 ± 0.17) whereas in the cultivar Cellina di Nardò its level
+                           didn’t result significantly modified. According to Secchi et al.47 that conducted experiments in a heterologous sys-
+                           tem like Xenopus oocyte, it has been observed that OePIP2.1 water transport activity is much more effective than
+                           that of OePIP1.1. OeTIP1.1 resulted strongly upregulated in the cultivar Leccino (fold change = 15.92 ± 1.02) and
+                           upregulated also in the stems of the infected Cellina di Nardò (fold change = 2.16 ± 0.31) indicating a plant dis-
+                           ease response. According to the obtained data, in the cultivar Leccino, the genes coding for the aquaporins showed
+                           more interesting expression profiles in X. fastidiosa infected stems and OeTIP1.1 deserve specific attention. Secchi
+                           et al.47 investigated the tissue-specific expression of these three aquaporin genes and found that OeTIP1.1 was the
+                           aquaporin with a stem-specific expression while in root and leaves the expression was low. In the Fig. 5 expres-
+                           sion data of the genes coding for the following α- and β-amylases and sugar transporters are reported: OeAMY,
+                           OeAMY2, OeBMY, OeBMY1, OeSUT1 and OeMST2. In the stems of the cultivar Cellina di Nardò, only the gene
+                           OeAMY was upregulated in the X. fastidiosa infected trees (fold change = 2.42 ± 0.35); whereas, in the stems
+                           of the infected Leccino trees, were upregulated the genes: OeAMY (fold change = 10.20 ± 0.92), OeAMY2 (fold
+                           change = 9.51 ± 0.62), OeSUT1 (fold change = 2.74 ± 0.35) and OeMST2 (fold change = 5.79 ± 0.22). According
+                           to Secchi et al.30, that studied transcriptome response to embolism formation in stems of Populus trichocarpa, the
+                           upregulation of amylases and sugar transporters were among the major biological activities associated with the
+                           proposed response of parenchyma cells to embolism. The proposed refilling mechanism is linked to starch to sug-
+                           ars conversion that increases the solute concentration of the residual water in the vessel’s lumens thus promoting
+                           xylem refilling by altering the osmotic potential29,30. The strongly upregulation of the genes coding for α-amylases
+                           and sugar transporters in the stems of infected Leccino trees could be correlated to an active response to restore
+                           hydraulic transport capacity during vessel cavitation as previously proposed for other plant species48–50.
+                               The ability to activate refilling mechanisms in response to cavitation requires efficient mechanisms of
+                           embolism sensing. Secchi and Zwieniecki51 proposed the sucrose as stimulus to sense embolism; in fact, they
+
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                             7
+www.nature.com/scientificreports/                                                                  www.nature.com/scientificreports
+
+
+
+
+                           Figure 5. Expression of genes involved in embolism sensing and refilling mechanisms in X. fastidiosa infected
+                           Leccino and Cellina di Nardò plants. Quantitative analyses of expression of genes coding for aquaporins,
+                           sucrose transporters, enzymes of the carbohydrate metabolism and enzymes related to starch breakdown,
+                           Alpha and Beta Amylase. OePIP1.1 and OePIP2.1 = Olea europaea Plasma Membrane Intrinsic Protein 1.1 and
+                           2.1; OeTIP1.1 = Olea europaea Tonoplast Intrinsic Protein 1.1; OeInv-V = Olea europaea Vacuolar Invertase;
+                           OeInv-CW = Olea europaea Cell Wall Invertase; OeGBSSI = Olea europaea Granule-Bound Starch Synthase
+                           I; OeSusy = Olea europaea Sucrose Synthase; OeMST2 = Olea europaea Monosaccharide Transporter 2;
+                           OeSUT1 = Olea europaea Sucrose Transporter 1; OeAMY and OeAMY2 = Olea europaea α-Amylases; OeBMY
+                           and OeBMY1 = Olea europaea β-Amylases. The significant differences were highlighted according to Student
+                           t-test (*P < 0.05; **P < 0.01; ***P < 0.001).
+
+
+
+                           demonstrated that the only presence of sucrose activated physiological and molecular response similar to that
+                           induced by embolism (upregulation of aquaporins, amylases and sugar transporters family). Therefore, sucrose is
+                           a central molecule for sensing during plant defence against pathogens; there are two alternative routes of sucro-
+                           lytic carbohydrate mobilization: one is reversible and is catalyzed by the sucrose synthase (SUSY); the other route
+                           is the irreversible hydrolytic cleavage by invertases (INVs). There are three groups of INV enzymes: the alkaline/
+                           neutral invertases (A/NInv) localized in cytosol, mitochondria and/or in plastids and two types of acid invertases,
+                           the insoluble one bound to the cell wall (cell wall invertase, CWI) and a soluble one found in the vacuole space
+                           (vacuolar invertase, VI); the alkaline/neutral invertases are involved in plant growth and development while the
+                           acid invertases are also modulated during plant infection52. The expression levels of the genes OeSusy, OeInv-CW,
+                           OeInv-V in the stems of infected Leccino and Cellina di Nardò trees are reported in the Fig. 5.
+                               The level of expression of OeSusy was higher (fold change = 3.13 ± 0.30) only in stems of infected Leccino
+                           plants (Fig. 5). The genes coding for the acid invertases, OeInv-CW and OeInv-V resulted respectively stable in
+                           infected plants in comparison to healthy ones of the two cultivars (Fig. 5) while OeInv-V was strongly downregu-
+                           lated in the cultivar Leccino (fold change = −10.47 ± 0.89).
+                               The activity of the sucrose synthase and of the acid invertases were suggested to be involved in plant stress responses
+                           and signaling cascades (reviewed by Bolouri-Moghaddam et al.53). Susy transcript levels increased in nematode infected
+                           Arabidopsis thaliana plants54 and in different Vitis vinifera varieties undergoing phytoplasma infection55.
+                               Further, the expression of the different INVs was found to be related to plant defence: a reduction of Inv-V
+                           expression has been observed during the infection of Vicia faba by Uromyces fabae and Vitis vinifera by Erysiphe
+                           necator and Plasmopara viticola56,57. This down-regulation was attributed to a decrease in the availability of
+                           sucrose in the storage compartment56,57. Other works reported a decrease in the starch content during pathogen
+                           infection suggesting that the degradation of starch provides more substrates to sucrose synthesis52. Interestingly,
+                           the gene coding for GBSSI (Granule-Bound Starch Synthase I), the most important enzyme in storage starch bio-
+                           synthesis58 resulted strongly downregulated both in the stems of Leccino (fold change = −62.61 ± 1.14) and in the
+                           Cellina di Nardò (fold change = −7.98 ± 0.42) infected trees (Fig. 5); this inhibition of the OeGBSSI expression
+                           could indicate the block of the conversion of sucrose to starch, supporting the sucrose’s role as signaling molecule,
+                           or its involvement in other plant defence mechanisms. Sure enough, Wall et al.59 reported GBSSI as a protein
+                           related to defence and in the work of Yi et al.60 GBSSI resulted among the downregulated gene in rice plants
+                           infected with Xanthomonas oryzae pv. oryzae. Thus, also in relation to the mechanisms that involves sucrose as
+                           important signal molecule for embolism and plant defence response, in the infected plants of the cultivar Leccino
+                           the transcript levels of the above genes showed more interesting expression patterns. Moreover, sucrose has been
+                           described as an inducer of the phenylpropanoid pathway61 that leads to the biosynthesis of lignin which has
+                           already been associated with the major X. fastidiosa resistance of the cultivar Leccino62.
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                                   8
+www.nature.com/scientificreports/                                                                             www.nature.com/scientificreports
+
+
+                           Conclusion
+                           Here we reported, for the first time, the measurement of the xylem vessels diameter in the two Olea europaea
+                           cultivars Leccino and Cellina di Nardò; these anatomical features, as described in the previous sections, may
+                           provide an indication of susceptibility/resistance to Xylella fastidiosa. In the Olea europaea plants, as for the
+                           other plant species affected by X. fastidiosa, the symptoms development is correlated with a decrease of xylem
+                           water-transporting function that could cause embolism. We hypothesized that differences in cavitation suscep-
+                           tibility determined by the constitutive anatomy of the xylem and a major capacity to active refilling mechanisms
+                           after embolism sensing could be involved in the specific cultivar response to the pathogen.
+
+                           References
+                            1. Newman, K. L., Almeida, R. P. P., Purcell, A. H. & Lindow, S. E. Use of a Green Fluorescent Strain for Analysis of Xylella fastidiosa
+                               Colonization of Vitis vinifera”. Appl. Environ. Microb. 69, 7319–7327 (2003).
+                            2. Janse, J. D. & Obradovic, A. Xylella fastidiosa: its biology, diagnosis, control and risks. J. Plant. Pathol. 92, S1.35–S1.48 (2010).
+                            3. Roper, M. C., Greve, L. C., Labavitch, J. M. & Kirkpatrick, B. C. Detection and Visualization of an Exopolysaccharide Produced by
+                               Xylella fastidiosa In Vitro and In. Planta. Appl. Environ. Microb. 73, 7252–7258 (2007).
+                            4. Pérez-Donoso, A. G., Greve, L. C., Walton, J. H., Shackel, K. A. & Labavitch, J. M. Xylella fastidiosa Infection and Ethylene Exposure
+                               Result in Xylem and Water Movement Disruption in Grapevine Shoots. Plant Physiol. 143, 1024–1036 (2007).
+                            5. Stevenson, J. F., Matthews, M. A., Greve, L. C., Labavitch, J. M. & Rost, T. L. Grapevine susceptibility to Pierce’s disease. II. The
+                               progression of anatomical symptoms. Am. J. Enol. Viticult. 55, 238–245 (2004).
+                            6. Martìn, J. A., Solla, A., Ruiz-Villar, M. & Gil, L. Vessel length and conductivity of Ulmus branches: ontogenetic changes and relation
+                               to resistance to Dutch elm disease. Trees 27, 1239–1248 (2013).
+                            7. Yadeta, K. A. & Thomma, B. P. H. J. The xylem as battleground for plant hosts and vascular wilt pathogens. Front. Plant Sci. 4, 97,
+                               https://doi.org/10.3389/fpls.2013.00097 (2013).
+                            8. Pouzoulet, J., Pivovaroff, A. L., Santiago, L. S. & Rolshausen, P. E. Can vessel dimension explain tolerance toward fungal vascular wilt
+                               diseases in woody plants? Lessons from Dutch elm disease and esca disease in grapevine. Front. Plant Sci. 5, 253, https://doi.
+                               org/10.3389/fpls.2014.00253 (2014).
+                            9. Nardini, A., Lo Gullo, M. A. & Salleo, S. Refilling embolized xylem conduits: Is it a matter of phloem unloading? Plant Sci. 180,
+                               604–611 (2011).
+                           10. Saponari, M., Boscia, D., Nigro, F. & Martelli, G. P. Identification of DNA sequences related to Xylella fastidiosa in oleander, almond
+                               and olive trees exhibiting leaf scorch symptoms in Apulia (Southern Italy). J. Plant. Pathol. 95, 668 (2013).
+                           11. Luvisi, A., Nicolì, F. & De Bellis, L. Sustainable management of plant quarantine pests: The case of olive quick decline syndrome.
+                               Sustainability 9, 659 (2017).
+                           12. Cardinale, M. et al. Specific Fluorescence in Situ Hybridization (FISH) Test to Highlight Colonization of Xylem Vessels by Xylella
+                               fastidiosa in Naturally Infected Olive Trees (Olea europaea L.). Front. Plant Sci. 9, 431, https://doi.org/10.3389/fpls.2018.00431
+                               (2018).
+                           13. Luvisi, A. et al. Xylella fastidiosa subsp. pauca (CoDiRO strain) infection in four olive (Olea europaea L.) cultivars: Profile of phenolic
+                               compounds in leaves and progression of leaf scorch symptoms. Phytopathol. Mediterr. 56, 259–273 (2017).
+                           14. Saponari, M. et al. Isolation and pathogenicity of Xylella fastidiosa associated to the olive quick decline syndrome in southern Italy.
+                               Sci. Rep. 7, 17723 (2017).
+                           15. Gucci, R., Massai, R., Casano, S. & Mazzoleni, S. Seasonal changes in the water relations of six Mediterranean woody species. Plant
+                               Biosyst. 133, 117–128 (1999).
+                           16. Rodrigues, J. L. M., Silva-Stenico, M. E., Gomes, J. E., Lopes, J. R. S. & Tsai, S. M. Detection and diversity assessment of Xylella
+                               fastidiosa in field-collected plant and insect samples by using 16S rRNA and gyrB sequences. Appl. Environ. Microbiol. 69, 4249–4255
+                               (2003).
+                           17. Bilodeau, G. J., Koike, S. T., Uribe, P. & Martin, F. N. Development of an assay for rapid detection and quantification of Verticillium
+                               dahliae in soil. Phytopathology 102, 331–343 (2012).
+                           18. Garrido, C. et al. Development of protocols for detection of Colletotrichum acutatum and monitoring of strawberry anthracnose
+                               using qPCR. Plant Pathol. 58, 43–51 (2009).
+                           19. Martín, M. T., Cobos, R., Martín, L. & López-Enríquez, L. qPCR Detection of Phaeomoniella chlamydospora and Phaeoacremonium
+                               aleophilum. Appl. Environ. Microbiol. 78, 3985–3991 (2012).
+                           20. Aroca, A., Raposo, R. & Lunello, P. A biomarker for the identification of four Phaeoacremonium species using the β-tubulin gene as
+                               the target sequence. Appl. Microbiol. Biotechnol. 80, 1131–1140 (2008).
+                           21. Carlucci, A., Lops, F., Cibelli, F. & Raimondo, M. L. Phaeoacremonium species associated with olive wilt and decline in Southern
+                               Italy. Eur. J. Plant Pathol. 141, 717–729 (2015).
+                           22. Romanazzi, G., Murolo, S., Pizzichini, L. & Nardi, S. Esca in young and mature vineyards: and molecular diagnosis of the associated
+                               fungi. Eur. J. Plant Pathol. 125, 277–290 (2009).
+                           23. Martín, M. T., Cuesta, M. J. & Martín, L. Development of SCAR primers for PCR assay to detect Diplodia seriata. Int. Sch. Res.
+                               Notices 2014, 824106 (2014).
+                           24. Drenth, A. et al. Development of a DNA-based method for detection and identification of Phytophthora species. Aust. Plant Pathol.
+                               35, 147–159 (2006).
+                           25. Cacciola, S. O., Agosteo, G. E. & Magnano di San Lio, G. Collar and root rot of olive trees caused by Phytophthora megasperma in
+                               Sicily. Plant Dis. 85, 96 (2001).
+                           26. Edwards, K., Johnstone, C. & Thompson, C. A simple and rapid method for the preparation of plant genomic DNA for PCR analysis.
+                               Nucleic Acids Res. 19, 1349 (1991).
+                           27. Scholz, A., Klepsch, M., Karimi, Z. & Jansen, S. How to quantify conduits in wood? Front. Plant Sci. 4, 56, https://doi.org/10.3389/
+                               fpls.2013.00056 (2013).
+                           28. Carlquist, S. Ecological factors in wood evolution: a floristic approach. Am. J. Bot. 64, 887–896 (1977).
+                           29. Sengupta, S. & Majumder, A. L. Physiological and genomic basis of mechanical-functional trade-off in plant vasculature. Front. Plant
+                               Sci. 5, https://doi.org/10.3389/fpls.2014.00224 (2014).
+                           30. Secchi, F., Gilbert, M. E. & Zwieniecki, M. A. Transcriptome Response to Embolism Formation in Stems of Populus trichocarpa
+                               Provides Insight into Signaling and the Biology of Refilling. Plant Physiol. 157, 1419–1429 (2011).
+                           31. Secchi, F. & Zwieniecki, M. A. Analysis of Xylem Sap from Functional (Non embolized) and Nonfunctional (Embolized) Vessels of
+                               Populus nigra: Chemistry of Refilling. Plant Physiol. 160, 955–964 (2012).
+                           32. Rossi, L. et al. Salt stress induces differential regulation of the phenylpropanoid pathway in Olea europaea cultivars Frantoio (salt-
+                               tolerant) and Leccino (salt-sensitive). J. Plant. Physiol. 204, 8–15 (2016).
+                           33. Ray, D. L. & Johnson, J. C. Validation of reference genes for gene expression analysis in olive (Olea europaea) mesocarp tissue by
+                               quantitative real-time RT-PCR. BMC Research Notes 7, 304 (2014).
+                           34. Chatelet, D. S., Wistrom, C. M., Purcell, A. H., Rost, T. L. & Matthews, M. A. Xylem structure of four grape varieties and 12
+                               alternative hosts to the xylem-limited bacterium Xylella fastidiosa. Ann. Bot. 108, 73–85 (2011).
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                                                       9
+www.nature.com/scientificreports/                                                                            www.nature.com/scientificreports
+
+
+                           35. Elgersma, D. M. Length and diameter of xylem vessels as factors in resistance of elms to Ceratocystis ulmi. Neth. J. Pl. Path. 76,
+                               179–182 (1970).
+                           36. Sun, Q., Sun, Y., Walker, M. A. & Labavitch, J. M. Vascular Occlusions in Grapevines with Pierce’s Disease Make Disease Symptom
+                               Development Worse. Plant Physiol. 161, 1529–1541 (2013).
+                           37. Pouzoulet, J., Scudiero, E., Schiavon, M. & Rolshausen, P. E. Xylem Vessel Diameter Affects the Compartmentalization of the
+                               Vascular Pathogen Phaeomoniella chlamydospora in Grapevine. Front. Plant Sci. 8, 1442, 10.3389/fpls.2017.01442 (2017).
+                           38. Brodersen, C. R. & McElrone, A. J. Maintenance of xylem network transport capacity: a review of embolism repair in vascular
+                               plants. Front. Plant Sci. 4, 10.3389/fpls.2013.00108 (2013).
+                           39. Stojilovic, N. Why can’t we see hydrogen in X-ray photoelectron spectroscopy? J. Chem. Educ. 89, 1331–1332 (2012).
+                           40. Gunduz, G. et al. Physical, morphological properties and Raman spectroscopy of chestnut blight diseased Castanea sativa Mill.
+                               wood. CERNE 22, 43–58 (2016).
+                           41. Power, R. C., Salazar-García, D. C., Wittig, R. M. & Henry, A. G. Assessing use and suitability of scanning electron microscopy in the
+                               analysis of micro remains in dental calculus. J. Archaeol. Sci. 49, 160–169 (2014).
+                           42. Esau, K. Anatomy of seed plants (2nd ed. John Wiley and Sons, Inc.) New York, USA (1977).
+                           43. Masrahi, Y. S. Ecological significance of wood anatomy in two lianas from arid southwestern Saudi Arabia. Saudi J. Biol. Sci. 21,
+                               334–341 (2014).
+                           44. Bucci, S. J. et al. Dynamic changes in hydraulic conductivity in petioles of two savanna tree species: factors and mechanisms
+                               contributing to the refilling of embolized vessels. Plant Cell Environ. 26, 1633–1645 (2003).
+                           45. Tyerman, S. D., Niemietz, C. M. & Bramley, H. Plant aquaporins: multifunctional water and solute channels with expanding roles.
+                               Plant Cell Environ. 25, 173–194 (2002).
+                           46. Preston, G. M., Carroll, T. P., Guggino, W. B. & Agree, P. Appearance of water channels in Xenopus oocytes expressing red cell
+                               CHIP28 protein. Science 256, 385–387 (1992).
+                           47. Secchi, F., Lovisolo, C., Uehlein, N., Kaldenhoff, R. & Schubert, A. Isolation and functional characterization of three aquaporins
+                               from olive (Olea europaea L.). Planta 225, 381–392 (2007).
+                           48. Steudle, E. The cohesion-tension mechanism and the acquisition of water by plant roots. Annu. Rev. Plant Physiol. Plant Mol. Biol.
+                               52, 847–875 (2001).
+                           49. Améglio, T. et al. Temperature effects on xylem sap osmolarity in walnut trees: evidence for a vitalistic model of winter embolism
+                               repair. Tree Physiol. 24, 785–793 (2004).
+                           50. Salleo, S., Trililò, P., Esposito, S., Nardini, A. & Lo Gullo, M. A. Starch-to sugar conversion in wood parenchyma of field-growing
+                               Laurus nobilis plants: a component of the signal pathway for embolism repair? Funct. Plant Biol. 36, 815–825 (2009).
+                           51. Secchi, F. & Zwieniecki, M. A. Sensing embolism in xylem vessels: the role of sucrose as a trigger for refilling. Plant Cell Environ. 34,
+                               514–524 (2011).
+                           52. Tauzin, A. S. & Giardina, T. Sucrose and Invertases, a part of the plant defense response to the biotic stresses. Front. Plant Sci 5,
+                               https://doi.org/10.3389/fpls.2014.00293 (2014).
+                           53. Bolouri-Moghaddam, M. R., Le Roy, K., Xiang, L., Rolland, F. & Van den Ende, W. Sugar signalling and antioxidant network
+                               connections in plant cells. FEBS Journal 277, 2022–2037 (2010).
+                           54. Cabello, S. et al. Altered sucrose synthase and invertase expression affects the local and systemic sugar metabolism of nematode
+                               infected Arabidopsis thaliana plants. J. Exp. Bot. 65, 201–212 (2014).
+                           55. Hren, M. et al. Induced expression of sucrose synthase and alcohol dehydrogenase I genes in phytoplasma infected grapevine plants
+                               grown in the field. Plant Pathol. 58, 170–180 (2009).
+                           56. Voegele, R. T., Wirsel, S., Moll, U., Lechner, M. & Mendgen, K. Cloning and characterization of a novel invertase from the obligate
+                               biotroph Uromyces fabae and analysis of expression patterns of host and pathogen invertases in the course of infection. Mol. Plant
+                               Microbe Interact. 19, 625–634 (2006).
+                           57. Hayes, M. A., Feechan, A. & Dry, I. B. Involvement of abscisic acid in the coordinated regulation of a stress-inducible hexose
+                               transporter (VvHT5) and a cell wall invertase in grapevine in response to biotrophic fungal infection. Plant Physiol. 153, 211–221
+                               (2010).
+                           58. Wang, S.-J., Yeh, K.-W. & Tsai, C.-Y. Regulation of starch granule-bound starch synthase I gene expression by circadian clock and
+                               sucrose in the source tissue of sweet potato. Plant Science 161, 635–644 (2001).
+                           59. Wall, M. L., Wheeler, H. L., Smith, J., Figeys, D. & Altosaar, I. Mass Spectrometric Analysis Reveals Remnants of Host–Pathogen
+                               Molecular Interactions at the Starch Granule Surface in Wheat Endosperm. Phytopatol. 100, 848–854, https://doi.org/10.1094/
+                               PHYTO-100-9-0848 (2010).
+                           60. Yi, S. Y. et al. Microarray Analysis of bacterial blight resistance 1 mutant rice infected with Xanthomonas oryzae pv. oryzae. Plant
+                               Breed. Biotech. 1, 354–365 (2013).
+                           61. Morkunas, I., Narozna, D., Nowak, W., Samardakiewicz, S. & Remlein-Starosta, D. Cross-talk interactions of sucrose and Fusarium
+                               oxysporum in the phenylpropanoid pathway and the accumulation and localization of flavonoids in embryo axes of yellow lupine. J.
+                               Plant Physiol. 168, 424–433 (2011).
+                           62. Sabella, E. et al. Xylella fastidiosa induces differential expression of lignification related-genes and lignin accumulation in tolerant
+                               olive trees cv. Leccino. J. Plant Physiol. 220, 60–68 (2018).
+                           63. Alagna, F. et al. Transcript Analysis and Regulative Events during Flower Development in Olive (Olea europaea L.). PLoS One. 11,
+                               e0152943 (2016).
+
+                           Acknowledgements
+                           We would like to thank farmers Ingallo Cosimo and Mancarella Raffaele for their support in field observations.
+
+                           Author Contributions
+                           Conceived and designed the experiments: E.S., A.A., A.L., L.D.B. Performed the experiments on SEM/EDX:
+                           E.S., A.G., T.S. Performed the experiments on pathogens: A.A., E.S., A.L. Performed the experiments on genes
+                           expression: E.S., E.N., F.N. Analysed the data: E.S., A.A. Contributed reagents/materials/analysis tools: C.N., M.V.
+                           Wrote the paper: E.S., A.A., A.L. The authors all have given approval to the final version of the manuscript.
+
+                           Additional Information
+                           Competing Interests: The authors declare no competing interests.
+                           Publisher’s note: Springer Nature remains neutral with regard to jurisdictional claims in published maps and
+                           institutional affiliations.
+
+
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                                                   10
+www.nature.com/scientificreports/                                                             www.nature.com/scientificreports
+
+
+                                         Open Access This article is licensed under a Creative Commons Attribution 4.0 International
+                                         License, which permits use, sharing, adaptation, distribution and reproduction in any medium or
+                           format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Cre-
+                           ative Commons license, and indicate if changes were made. The images or other third party material in this
+                           article are included in the article’s Creative Commons license, unless indicated otherwise in a credit line to the
+                           material. If material is not included in the article’s Creative Commons license and your intended use is not per-
+                           mitted by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the
+                           copyright holder. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
+
+                           © The Author(s) 2019
+
+
+
+
+Scientific Reports |   (2019) 9:9602 | https://doi.org/10.1038/s41598-019-46092-0                                                          11
+

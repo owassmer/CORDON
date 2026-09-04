@@ -1,0 +1,956 @@
+Impostazioni cookie
+Questo sito utilizza cookie tecnici e cookie analitici. Per accettare tutti i cookie, clicca su 'Accetta tutti i cookie'. Per proseguire la navigazione senza abilitare i cookie analitici clicca sul pulsante 'X' o sul pulsante 'Accetta solo i cookie tecnici'. Puoi gestire le tue preferenze sui cookie in ogni momento riaprendo il banner con l'apposito pulsante 'Impostazioni cookie' e salvandole cliccando sul pulsante 'Conferma le scelte'. Per vedere la Cookie Policy completa, clicca [Maggiori Informazioni](https://scrivania.regione.puglia.it/informativa-privacy "Cookie Policy")
+Cookie tecnici  Cookie necessari per il funzionamento del sito. 
+Cookie analitici  Cookie per la raccolta di informazioni statistiche relativamente agli accessi e navigazione sul sito. 
+Cookie di profilazione  Cookie che permettono di fornire all'utente contenuti personalizzati in base alla sua navigazione. 
+Conferma le scelte Accetta tutti i cookie Accetta solo i cookie tecnici
+[ Torna su ](javascript:void\(0\);)
+## Regione Puglia
+## Servizi digitali - Regione Puglia
+Aree Tematiche
+  * [Competitività, ricerca e innovazione](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_areetematiche_frontend_AreeTematichePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&area=133336)
+  * [Istituzione e partecipazione](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_areetematiche_frontend_AreeTematichePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&area=133338)
+  * [Politiche europee e cooperazione internazionale](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_areetematiche_frontend_AreeTematichePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&area=133342)
+  * [Territorio, paesaggio e mobilità](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_areetematiche_frontend_AreeTematichePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&area=133341)
+  * [Welfare, diritti e cittadinanza](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_areetematiche_frontend_AreeTematichePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&area=133334)
+
+
+Tipologie
+  * [Istituzione e partecipazione](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_tipologie_frontend_TipologiePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&tipologia=133361)
+  * [Politiche europee e cooperazione internazionale](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_tipologie_frontend_TipologiePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&tipologia=133375)
+  * [Territorio, paesaggio e mobilità](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_tipologie_frontend_TipologiePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&tipologia=133366)
+  * [Welfare, diritti e cittadinanza](https://scrivania.regione.puglia.it/home?p_p_id=it_servizidigitali_tipologie_frontend_TipologiePortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&tipologia=133344)
+
+
+Welfare, diritti e cittadinanza
+### Welfare Aziendale
+L'avviso “Welfare Aziendale” consente di ottenere aiuti in regime de minimis per coprire i costi sostenuti dall’impresa per l’erogazione di beni e servizi di welfare a favore dei propri lavoratori e lavoratrici. Per accedere al contributo, l’impresa deve adottare un piano di welfare aziendale, ovvero un insieme di flexible benefit pensati per rispondere ai bisogni concreti di conciliazione tra vita privata e lavoro del personale. Il piano deve essere personalizzabile, in modo che ogni lavoratore o lavoratrice possa scegliere, all’interno del paniere di beni e servizi messo a disposizione dall’azienda, quelli più adatti alle proprie esigenze individuali. L’iniziativa ha l’obiettivo di promuovere un modello di benessere organizzativo inclusivo e su misura, valorizzando la centralità delle risorse umane nel miglioramento del clima aziendale e della produttività.
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](https://app.sistema.puglia.it/ords/f?p=10000:1::::::)
+Welfare, diritti e cittadinanza
+### Inte.R.SS.eca - Interventi di Ristrutturazione o Realizzazione di Strutture Sociali e Socio-assistenziali
+L'avviso Inte.R.SS.eca indirizzato ad amministrazioni pubbliche pugliesi e destinato a finanziare interventi di ammodernamento o realizzazione ex novo di infrastrutture sociali e socio-assistenziali, anche sperimentali, ai sensi del regolamento regionale 4/2007 e s.m.i. Possono presentare proposta progettuale, in qualità di Soggetti proponenti: a) i Comuni del territorio pugliese; b) le Aziende di Servizi alla Persona (ASP). 
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](https://app.sistema.puglia.it/ords/f?p=10000:1::::::)
+Welfare, diritti e cittadinanza
+### Impresa possibile
+L'avviso pubblico “Impresa possibile” è finalizzato a selezionare proposte progettuali per la realizzazione di Interventi di sostegno all’avvio e al rafforzamento delle imprese sociali. Con una dotazione finanziaria di Euro 7.000.000,00 a valere sul PR Puglia FESR-FSE+ 2021-2027, l’avviso intende creare impatto sociale ed economico nella comunità di riferimento attraverso l’inclusione sociale e/o socio-lavorativa, anche di soggetti svantaggiati. Sono previsti infatti specifici punteggi per la presenza nella compagine sociale di soggetti vulnerabili come le persone con disabilità, le persone destinatarie di misure di contrasto alla povertà, le persone detenute e le donne vittime di violenza. Possono presentare proposta progettuale Imprese sociali nella forma di micro, piccole e medie imprese e Gruppi informali di persone fisiche che assumono l’impegno a costituirsi come impresa sociale o cooperativa sociale. È possibile presentare una sola proposta progettuale con un piano d’investimenti non inferiore ad € 10.000,00 e non superiore ad € 250.000,00. 
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](https://app.sistema.puglia.it/ords/f?p=10000:1::::::)
+Welfare, diritti e cittadinanza
+### RED - Reddito di dignità
+Il Reddito di Dignità regionale è una misura di integrazione del reddito "universalistica", a cui cioè possono accedere tutte le persone che si trovino in difficoltà economiche e in condizioni di fragilità sociale tali, anche temporanee, da essere al di sotto delle condizioni minime per una esistenza almeno accettabile. Il Red è uno strumento di contrasto alla povertà assoluta e insieme di supporto a un percorso più ampio di inclusione sociale e di accesso a nuove opportunità di inserimento socio-lavorativo.
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](https://app.sistema.puglia.it/ords/f?p=10000:1::::::)
+Ambiente
+### Censimento Impianti
+La procedura telematica è indirizzata ai referenti comunali e provinciali delegati al censimento e verifica dei dati degli impianti di produzione di energia da fonti rinnovabili presenti su tutto il territorio regionale assentiti con DIA, secondo quanto stabilito dall'Intesa Regione Puglia, Unione delle Province d'Italia - Puglia e Associazione Nazionale Comuni Italiani - Puglia
+Ambiente
+[ Vai al servizio ](https://www.sistema.puglia.it/portal/page/portal/SistemaPuglia/DIA)
+Ambiente
+### Accreditamento Censimento Impianti
+La procedura telematica è indirizzata ai referenti comunali e provinciali delegati al censimento e verifica dei dati degli impianti di produzione di energia da fonti rinnovabili presenti su tutto il territorio regionale assentiti con DIA, secondo quanto stabilito dall'Intesa Regione Puglia, Unione delle Province d'Italia - Puglia e Associazione Nazionale Comuni Italiani - Puglia
+Ambiente
+[ Vai al servizio ](https://www.sistema.puglia.it/portal/page/portal/SistemaPuglia/DIA)
+Competitività, ricerca e innovazione
+### Accreditamento CAI
+Consente ai soggetti interessati di ottenere l’Accreditamento per inviare istanze di partecipazione ai servizi promossi dalla Regione Puglia – Sezione Commercio, Artigianato ed Internazionalizzazione delle Imprese
+Competitività e innovazione
+[ Vai al servizio ](https://sistema.regione.puglia.it/scheda-informativa-accreditamento)
+Competitività, ricerca e innovazione
+### Avviso Pubblico per riconoscimento attività storiche e di tradizione
+L’avviso è destinato alle attività che intendono avere il riconoscimento di negozio storico, bottega artigiana storica oppure locale storico.
+Competitività e innovazione
+[ Vai al servizio ](https://sistema.regione.puglia.it/catalogo-bandi/-/scheda-bando/309085)
+Ambiente
+### Avviso per la selezione di proposte progettuali finalizzate alla costituzione di Comunità Energetiche Rinnovabili (CER)
+Procedura telematica Avviso per la selezione di proposte progettuali finalizzate alla costituzione di Comunità Energetiche Rinnovabili (CER)
+Ambiente
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=CER_2025)
+Competitività, ricerca e innovazione
+### Mappatura delle opportunità insediative e di investimento nella Regione Puglia - Presentazione delle candidature
+Procedura telematica Mappatura delle opportunità insediative e di investimento nella Regione Puglia - Presentazione delle candidature
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=OPP_IN_2025)
+Salute, sport e buona vita
+### Avviso C 2025 “Sostegno alle Eccellenze Sportive"
+Procedura telematica Avviso C 2025 “Sostegno alle Eccellenze Sportive"
+Salute, sport e buona vita
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=SOS_ECC_2025)
+Competitività, ricerca e innovazione
+### Rendicontazione AVVISO 2024 L.R. 20/2003 - Liquidazione prima rata - ANTICIPO/ACCONTO
+Procedura telematica per la rendicontazione AVVISO 2024 L.R. 20/2003 - Liquidazione prima rata - ANTICIPO/ACCONTO
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=REND_LR20_2024)
+Competitività, ricerca e innovazione
+### AVVISO PUBBLICO PER LA COSTITUZIONE DI UN ELENCO REGIONALE DI BOOSTER PER L'IMPRENDITORIALITÀ TIPOLOGIA A "CANTIERI DI IMPRENDITORIALITÀ"
+Procedura telematica per l'AVVISO PUBBLICO PER LA COSTITUZIONE DI UN ELENCO REGIONALE DI BOOSTER PER L'IMPRENDITORIALITÀ TIPOLOGIA A "CANTIERI DI IMPRENDITORIALITÀ"
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=AVV1_TIP_A)
+Competitività, ricerca e innovazione
+### AVVISO PUBBLICO PER LA COSTITUZIONE DI UN ELENCO REGIONALE DI BOOSTER PER L'IMPRENDITORIALITA' - TIPOLOGIA B "INCUBATORI E ACCELERATORI DI IMPRESE".
+Procedura telematica per l'AVVISO PUBBLICO PER LA COSTITUZIONE DI UN ELENCO REGIONALE DI BOOSTER PER L'IMPRENDITORIALITA' - TIPOLOGIA B "INCUBATORI E ACCELERATORI DI IMPRESE".
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=AVV1_TIP_B)
+Competitività, ricerca e innovazione
+### Ricerca e relazioni internazionali - Avviso Fabbisogni: Istanza di pubblicazione nella Linea "A" Innovazione (sfida)
+Procedura telematica per presentare l'istanza di pubblicazione nella Linea "A" Innovazione (sfida) Avviso Fabbisogni
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=AVV2_LINEA_A)
+Competitività, ricerca e innovazione
+### Ricerca e relazioni internazionali - Avviso Fabbisogni: Istanza di pubblicazione nella Linea "B" Sviluppo (opportunità)
+Procedura telematica per presentare l'istanza di pubblicazione nella Linea "B" Sviluppo (opportunità) Avviso Fabbisogni
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=AVV2_LINEA_B)
+Competitività, ricerca e innovazione
+### AVVISO PUBBLICO L.R. 20/2003 - ANNO 2025
+Procedura telematica dell'AVVISO PUBBLICO L.R. 20/2003 - ANNO 2025
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=LR20_2025)
+Istituzione e partecipazione
+### Rendicontazione Finale
+Procedura telematica per la rendicontazione finale
+Istituzione e partecipazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=REND_2022)
+Istituzione e partecipazione
+### CONVENZIONE PER IL FINANZIAMENTO E LA REALIZZAZIONE DEI PROCESSI PARTECIPATIVI DA AMMETTERE A SOSTEGNO REGIONALE NELL'AMBITO DEL PROGRAMMA ANNUALE DELLA PARTECIPAZIONE DELLA REGIONE PUGLIA AI SENSI DELLA LR N.28/2017 - LEGGE SULLA PARTECIPAZIONE. DETERMINAZIONE DEL DIRETTORE DELLA STRUTTURA SPECIALE COMUNICAZIONE ISTITUZIONALE 26 LUGLIO 2022, N. 215
+Sostenere i processi partecipativi promossi a livello territoriale, affinché la cultura del dialogo partecipato tra la pubblica amministrazione e i cittadini continui a svilupparsi e a radicarsi. 
+Istituzione e partecipazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=PART-2022-CONVENZIONE)
+Turismo e Cultura
+### Procedura negoziale Organismi Interesse Regionale - Cultura
+Si intende acquisire la programmazione triennale 2025/2027 e il progetto annuale 2025 in materia di cultura e spettacolo dal vivo di rilevanza regionale
+Turismo e Cultura
+[ Vai al servizio ](https://sistema.regione.puglia.it/catalogo-bandi/-/scheda-bando/381628)
+Istituzione e partecipazione
+### CONCESSIONE DI CONTRIBUTI PER IL SOSTEGNO DI SAGRE, FIERE, MANIFESTAZIONE ED EVENTI LETT. C.2, ART. 3, ALLEGATO 1 D.G.R. n. 53 del 05/02/2024 D.G.R. n. 1254 del 09/09/2024 D.G.R. n. 687 del 29/05/2025 3° QUADRIMESTRE 2025
+Procedura telematica per la concessione di contributi per il sostegno di sagre, fiere, manifestazione ed eventi
+Istituzione e partecipazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=CONTR_C2_2025_3Q)
+Agricoltura
+### Richiesta di risarcimento danni incidente stradale con fauna selvatica
+Procedura telematica per richiedere risarcimento danni per incidente stradale con fauna selvatica
+Agricoltura
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=MOD_RIS_FAUNA)
+Territorio, paesaggio e mobilità
+### Avviso pubblico per la concessione di contributi regionali in conto capitale in favore di amministrazioni pubbliche per interventi di manutenzione di OO.PP. e di pubblico interesse
+Avviso finalizzato a garantire interventi di manutenzione necessari su opere pubbliche o di pubblico interesse di proprietà delle Amministrazioni locali
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://sistema.regione.puglia.it/catalogo-bandi/-/scheda-bando/371708)
+Istituzione e partecipazione
+### Processi Partecipativi: Domanda di pagamento anticipazione
+Servizio per il caricamento delle polizze assicurative nell'ambito della procedura telematica Processi Partecipativi
+Istituzione e partecipazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=PART-2022-PAG_ANTICIPAZIONE)
+Agricoltura
+### Richiesta di migrazione dal PSR 2014/2022 al CSR 2023/2027 e di differimento del termine di ultimazione degli interventi
+Procedura telematica per presentare richiesta di migrazione dal PSR 2014/2022 al CSR 2023/2027 e di differimento del termine di ultimazione degli interventi
+Agricoltura
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=MIGRAZIONE_CSR)
+Territorio, paesaggio e mobilità
+### Avviso finalizzato ad acquisire progettualità in materia di Somma Urgenza, giusta art. 140 del D.Lgs 36/2023
+Avviso pubblico per la concessione di contributi regionali in conto capitale in favore di amministrazioni locali per interventi attuati, gestiti e conclusi in procedure di somma urgenza giusta art. 140 del D.Lgs 36/2023
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://sistema.regione.puglia.it/catalogo-bandi/-/scheda-bando/371421)
+Competitività, ricerca e innovazione
+### Domanda di riconoscimento per l’iscrizione delle superfici vitate nell’ “Elenco dei vigneti eroici e storici della Regione Puglia”. Legge 238/2016 art.7. DM 6899/2020 e D.G.R. n.166/2025.
+Procedura telematica per presentare domande di riconoscimento per l’iscrizione delle superfici vitate nell’ “Elenco dei vigneti eroici e storici della Regione Puglia”. Legge 238/2016 art.7. DM 6899/2020 e D.G.R. n.166/2025.
+Competitività e innovazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=VIG_001)
+Istituzione e partecipazione
+### Accessibilità e fruibilità delle spiagge libere Contributi 2025
+Avviso finalizzato ad acquisire le istanze dei comuni costieri per il finanziamento di interventi tesi a rendere le spiagge libere accessibili a tutti
+Istituzione e partecipazione
+[ Vai al servizio ](https://sistema.regione.puglia.it/catalogo-bandi/-/scheda-bando/408588)
+Istituzione e partecipazione
+### Processi Partecipativi: Estremi Conto Corrente
+Servizio per indicare gli estremi del conto corrente nella procedura telematica Processi Partecipativi
+Istituzione e partecipazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=PART-2022-CC)
+Istituzione e partecipazione
+### Processi Partecipativi: Caricamento Polizze Assicurative
+Servizio per il caricamento delle polizze assicurative nell'ambito della procedura telematica Processi Partecipativi
+Istituzione e partecipazione
+[ Vai al servizio ](https://moduli.regione.puglia.it/rwe2/module_preview.jsp?MODULE_TAG=PART-2022-DOCUMENTI)
+Competitività, ricerca e innovazione
+### Intermediazione pagamenti elettronici su circuito PagoPA 
+gestione dei servizi in rete pagamenti on line
+Competitività e innovazione
+[ Vai al servizio ](https://mypay.regione.puglia.it/mypay4/cittadino/home)
+Politiche europee e cooperazione internazionale
+### Richiedere l’iscrizione all’Albo dei Soggetti operatori di partenariato, cooperazione internazionale e di promozione della cultura dei diritti umani ai sensi dell’art. 9 della L.R. 20/2003 “Partenariato per la Cooperazione” 
+L'Albo regionale dei soggetti operatori di partenariato, di cooperazione internazionale e di promozione della cultura dei diritti umani" è istituito annualmente con funzione consultiva per la Giunta regionale ai sensi della L.R. 20/2003, art. 9 e del Regolamento regionale attuativo n. 4/2005, art. 6. La procedura per l’istituzione annuale dell'Albo è ad avviso pubblico "Invito a presentare istanze di iscrizione", così come stabilito dal decreto del Presidente della G.R. n. 90 del 15 marzo 2022. La Sezione Ricerca e Relazioni Internazionali del Dipartimento Sviluppo Economico cura tutti gli adempimenti relativi all'istituzione e alla tenuta dell'Albo regionale e che rinvengono dalla richiamata legge. Possono presentare domanda di iscrizione all’Albo regionale i seguenti soggetti pubblici e privati: Enti pubblici, Enti locali, Organizzazioni non governative, Associazioni iscritte in albi regionali, Istituzioni scolastiche/universitarie, Enti privati, Organismi intergovernativi, Soggetti della ricerca, Associazioni ed ordini professionali, Associazioni di categoria, Istituti di formazione, Istituzioni del credito, Organizzazioni sindacali, Imprese e cooperative. Requisiti dei soggetti privati:  avere tra i propri fini l’attività di cooperazione allo sviluppo;  disporre di una sede operativa sul territorio pugliese, con una attività documentata in Puglia di almeno 2 anni;  non essere in conflitto di interessi con l’Ente Regione Puglia, a causa di un contenzioso pregresso o in atto. I soggetti richiedenti presentano istanza di iscrizione alla Regione Puglia – Dipartimento Sviluppo Economico – Sezione Ricerca e Relazioni Internazionali, esclusivamente in via telematica utilizzando il servizio on-line disponibile su https://moduli.regione.puglia.it/ 
+Politiche europee e cooperazione internazionale
+[ Vai al servizio ](https://europuglia.regione.puglia.it/web/europuglia/-/l.r.-20_2003-avviso-pubblico-per-istituzione-albo-regionale-dei-soggetti-operatori-di-partenariato-di-cooperazione-internazionale-e-di-promozione-della-cultura-dei-diritti-umani-anno-2024)
+Politiche europee e cooperazione internazionale
+### Richiedere un contributo economico ai sensi della L.R. 20/2003 a sostegno di “Iniziative di Partenariato per la Cooperazione”
+La disciplina di riferimento per le attività della Regione Puglia in materia di Cooperazione internazionale allo sviluppo è rappresentata dalla Legge regionale n. 20/2003 e del relativo regolamento di attuazione n. 4/2005. La Regione Puglia intende promuovere, in materia di cooperazione, il rafforzamento della cultura del partenariato tra le istituzioni e le comunità locali, quali reali destinatarie degli interventi. La programmazione delle attività è organizzata e attuata mediante un Piano triennale e un Programma annuale di attuazione, approvati dalla Giunta regionale, e si avvale dei pareri espressi dai “soggetti operatori di partenariato, di cooperazione internazionale e di promozione della cultura dei diritti umani” iscritti in un apposito Albo, istituito con funzione consultiva dalla L.R. 20/2003, art. 9. Nel Piano, oltre alle finalità e agli obiettivi da conseguire, nonché le priorità tematiche e territoriali, vengono individuati i criteri di ripartizione delle risorse finanziarie. Nell’ambito delle Linee di indirizzo adottate dalla Giunta Regionale, è possibile concedere contributi economici attraverso il ricorso alla procedura di avviso pubblico mediante “invito a presentare iniziative progettuali”. Le tre tipologie di azione riguardano: • il Partenariato fra comunità locali (art.3, L.R. n. 20/2003); • la Cooperazione internazionale (art.4, L.R. n. 20/2003); • la Promozione della cultura dei diritti umani (art.5, L.R. n. 20/2003). L’entità massima del contributo regionale da richiedere è pari a: • € 20.000,00 per gli interventi relativi all’art. 3 “Partenariato tra Comunità locali”; • € 40.000,00 per gli interventi relativi all’art. 4 “Cooperazione Internazionale”; • € 20.000,00 per gli interventi relativi all’art. 5 “Promozione Cultura dei Diritti umani” Chi può partecipare Possono presentare istanza di candidatura soggetti pubblici ed enti privati senza scopo di lucro. Requisiti dei soggetti privati: • che operano con continuità nel territorio pugliese; • con sede operativa in Puglia da almeno 24 mesi, alla data di presentazione dell’istanza di candidatura. La partecipazione all’iniziativa avviene esclusivamente in forma partenariale, da parte del soggetto proponente in partenariato con uno o più partner che manifestino l’interesse a collaborare al pieno raggiungimento degli obiettivi dell’iniziativa. 
+Politiche europee e cooperazione internazionale
+[ Vai al servizio ](https://europuglia.regione.puglia.it/web/europuglia/-/avviso-pubblico-2024-l.r.-20-2003-partenariato-per-la-cooperazione)
+Politiche europee e cooperazione internazionale
+### Richiedere un contributo economico ai sensi dell’art. 8 L.R. 12/2005 a sostegno di “Iniziative per la pace e per lo sviluppo delle relazioni tra i popoli del Mediterraneo”
+Attraverso l’art. 8 della L.R. 12/2005 “Norma di sostegno alle iniziative per la pace e per lo sviluppo delle relazioni tra i popoli del Mediterraneo, la Regione Puglia pone in essere iniziative di carattere promozionale finalizzate alla diffusione delle culture della pace e allo sviluppo delle relazioni, degli scambi culturali e degli strumenti di comunicazione e di informazione tra i Paesi del Mediterraneo, nonché al sostegno di attività di tipo interculturale organizzate nel territorio regionale, in concorso con istituzioni culturali, scientifiche ed universitarie, associazioni, organismi pubblici ed enti locali. Nell’ambito delle Linee di indirizzo adottate dalla Giunta Regionale, è possibile concedere contributi economici attraverso il ricorso alla procedura di avviso pubblico mediante “invito a presentare iniziative progettuali”. Le aree tematiche di intervento riguardano, nel rispetto delle diverse identità etniche, culturali e religiose, la promozione: • del dialogo interculturale, della pace, della convivenza pacifica; • della non discriminazione, delle pari opportunità, delle politiche di genere; • del riconoscimento dei diritti fondamentali di cittadinanza, del rispetto dei diritti umani, della difesa dei diritti delle minoranze; • degli scambi culturali e degli strumenti di comunicazione e di informazione. L’entità massima del contributo da richiedere è pari a € 10.000,00. Possono presentare istanza di candidatura soggetti pubblici ed enti privati senza scopo di lucro. Requisiti dei soggetti privati: • che operano con continuità nel territorio pugliese • con sede operativa in Puglia da almeno 12 mesi. La partecipazione all’iniziativa può avvenire in forma singola con la sola partecipazione del soggetto proponente oppure in forma partenariale con la presentazione di una istanza da parte del soggetto proponente in partenariato con più soggetti partner che manifestino l’interesse a collaborare al pieno raggiungimento degli obiettivi dell’iniziativa I soggetti proponenti presentano istanza di candidatura alla Regione Puglia – Dipartimento Sviluppo Economico – Sezione Ricerca e Relazioni Internazionali, esclusivamente in via telematica utilizzando il servizio on-line disponibile su https://moduli.regione.puglia.it/ 
+Politiche europee e cooperazione internazionale
+[ Vai al servizio ](https://europuglia.regione.puglia.it/-/avviso-pubblico-2024%E2%80%AF-art.-8-l.r.-12-2005-iniziative-per-la-pace-e-per-lo-sviluppo-delle-relazioni-tra-i-popoli-del-mediterraneo-?redirect=%2F)
+Competitività, ricerca e innovazione
+### RETI - Sostegno alla ricerca collaborativa
+L’Avviso ha la finalità di finanziare progetti di ricerca collaborativa tra Imprese e Organismi di ricerca, riconducibili alle linee di intervento Ricerca Industriale e Sviluppo Sperimentale per il sostegno all’implementazione di filiere tecnologiche ad elevato valore di conoscenza, a partire dalla nuova articolazione per filiere dell’innovazione della S3 SMART PUGLIA 2030 (Manifattura sostenibile, Salute dell’uomo e dell’ambiente, Comunità digitali creative e inclusive). I soggetti beneficiari dell’Aiuto sono le Imprese (grandi, di media e piccola-micro dimensione) e gli Organismi di Ricerca. I soggetti beneficiari devono essere organizzati in rete, attraverso una delle seguenti forme giuridiche di Raggruppamento: Associazioni Temporanee di Scopo (A.T.S.), Contratti di Rete, Consorzio o Società consortile. Possono beneficiare delle agevolazioni anche i liberi professionisti, in quanto equiparati alle piccole e medie imprese come esercenti attività economica. La Regione Puglia incentiva, attraverso il presente Avviso, la realizzazione di progetti di ricerca collaborativa tra Imprese e Organismi di ricerca riconducibili alle linee di intervento: Ricerca Industriale (RI); Sviluppo sperimentale (SS)
+Competitività e innovazione
+[ Vai al servizio ](https://www.regione.puglia.it/web/ricerca-e-relazioni-internazionali/-/reti)
+Competitività, ricerca e innovazione
+### Come sostenere la ricerca collaborativa : Avviso Pubblico RETI - Sostegno alla ricerca collaborativa
+L’Avviso ha la finalità di finanziare progetti di ricerca collaborativa tra Imprese e Organismi di ricerca, riconducibili alle linee di intervento Ricerca Industriale e Sviluppo Sperimentale per il sostegno all’implementazione di filiere tecnologiche ad elevato valore di conoscenza, a partire dalla nuova articolazione per filiere dell’innovazione della S3 SMART PUGLIA 2030 (Manifattura sostenibile, Salute dell’uomo e dell’ambiente, Comunità digitali creative e inclusive). I soggetti beneficiari dell’Aiuto sono le Imprese (grandi, di media e piccola-micro dimensione) e gli Organismi di Ricerca. I soggetti beneficiari devono essere organizzati in rete, attraverso una delle seguenti forme giuridiche di Raggruppamento: Associazioni Temporanee di Scopo (A.T.S.), Contratti di Rete, Consorzio o Società consortile. Possono beneficiare delle agevolazioni anche i liberi professionisti, in quanto equiparati alle piccole e medie imprese come esercenti attività economica. La Regione Puglia incentiva, attraverso il presente Avviso, la realizzazione di progetti di ricerca collaborativa tra Imprese e Organismi di ricerca riconducibili alle linee di intervento: Ricerca Industriale (RI); Sviluppo sperimentale (SS)
+Competitività e innovazione
+[ Vai al servizio ](https://www.sistema.puglia.it/SistemaPuglia/reti)
+Competitività, ricerca e innovazione
+### NIDI Nuove iniziative di impresa - PR Puglia FESR-FSE+ 2021-2027
+NIDI è uno strumento di agevolazione che sostiene l'autoimpiego. Offre supporto per avviare una nuova microimpresa attraverso un contributo a fondo perduto e un prestito a tasso zero per le spese di investimento. Questo strumento è rivolto soprattutto a gruppi giovanili, imprese femminili, nuove aziende e imprese nel settore turistico. mGGIORI https://www.regione.puglia.it/web/competitivita-e-innovazione/-/avviso-pubblico-nidi-nuove-iniziative-d-impresa
+Competitività e innovazione
+[ Vai al servizio ](https://www.regione.puglia.it/web/competitivita-e-innovazione/-/avviso-pubblico-nidi-nuove-iniziative-d-impresa)
+Competitività, ricerca e innovazione
+### Mini Pia Turismo - PR Puglia FESR-FSE+ 2021-2027
+L'avviso Mini PIA Turismo - Pacchetti Integrati di Agevolazione è rivolto a imprese turistico-alberghiere di ogni dimensione – grandi, medie, piccole e micro – e include reti d'impresa e consorzi. L'obiettivo è migliorare la qualità dell'offerta e dei servizi in modo sostenibile, puntando su soluzioni ecologiche e green, oltre alla digitalizzazione delle imprese del settore turistico. Gli investimenti sono destinati al recupero di edifici esistenti, come edifici abbandonati o incompleti, masserie, palazzi storici, trulli, torri e fortificazioni, da trasformare in strutture turistico-alberghiere o extralberghiere con almeno 5 camere.
+Competitività e innovazione
+[ Vai al servizio ](https://pugliasemplice.sistema.puglia.it/)
+Competitività, ricerca e innovazione
+### PIA Turismo - PR Puglia FESR-FSE+ 2021-2027
+L'avviso PIA Turismo - Programmi Integrati di Agevolazione è destinato a imprese di tutte le dimensioni – grandi, medie, piccole – e per le loro reti o consorzi. Offre agevolazioni per l'ampliamento, l'ammodernamento e la ristrutturazione di immobili utilizzati o da utilizzare per attività turistico-alberghiere, con l'obiettivo di sviluppare prodotti e servizi che valorizzino le attrazioni culturali e naturali del territorio pugiese.
+Competitività e innovazione
+[ Vai al servizio ](https://pugliasemplice.sistema.puglia.it/)
+Competitività, ricerca e innovazione
+### Mini Pia - PR Puglia FESR-FSE+ 2021-2027
+L'avviso MiniPIA - Pacchetti Integrati di Agevolazione offre agevolazioni e aiuti economici a micro e piccole imprese e a liberi professionisti che operano in Puglia.
+Competitività e innovazione
+[ Vai al servizio ](https://pugliasemplice.sistema.puglia.it/)
+Competitività, ricerca e innovazione
+### PIA Programmi Integrati di Agevolazione - PR Puglia FESR-FSE+ 2021-2027
+L'avviso "Programmi Integrati di Agevolazione" è uno strumento che concede agevolazioni a piccole e medie imprese per attività come la ricerca industriale, lo sviluppo sperimentale, l'innovazione tecnologica e industriale, la digitalizzazione, la transizione energetica e ambientale, oltre allo sviluppo e alla qualificazione delle competenze.
+Competitività e innovazione
+[ Vai al servizio ](https://pugliasemplice.sistema.puglia.it/)
+Competitività, ricerca e innovazione
+### Contratti di Programma - PR Puglia FESR-FSE+ 2021-2027
+L’avviso Contratti di Programma è rivolto alle grandi imprese (singole o in adesione tra loto e obbligatoriamente in collaborazione con PMI e/o start up innovative) per finanziare progetti di ricerca e sviluppo integrati con progetti di innovazione, progetti formativi, investimenti in tutela ambientale.
+Competitività e innovazione
+[ Vai al servizio ](https://pugliasemplice.sistema.puglia.it/)
+Politiche giovanili
+### Galattica – Rete Giovani Puglia Avviso per manifestazione d’interesse per il rifinanziamento dei “Piani Locali di Interventi” della Rete Galattica
+L' Avviso si rivolge ai Comuni pugliesi, singoli o in raggruppamento, titolari di un Nodo della Rete Galattica (di cui all’Avviso approvato con DGR n. 949/2022 e successivo AD n. 66/2022).. Sono ammissibili, a valere sulla presente procedura, le proposte progettuali aventi ad oggetto la prosecuzione per ulteriori 18 mesi di attività dei Piani locali di interventi da realizzare all’interno dei Nodi della Rete Galattica. Il Comune proponente potrà richiedere un contributo massimo di € 30.000,00 destinati a sostenere le attività del Piano locale di interventi del nodo della Rete Galattica. In caso di raggruppamento, il Comune capofila è il solo destinatario.
+Politiche giovanili
+[ Vai al servizio ](https://www.regione.puglia.it/web/politiche-giovanili/-/galattica?redirect=%2Fweb%2Fpolitiche-giovanili)
+Politiche giovanili
+### Galattica - Rete Giovani Puglia 
+Iniziativa “Galattica – Rete giovani Puglia”. Avviso pubblico per manifestazione di interesse rivolto agli Enti Locali per la cooperazione con la Regione Puglia, diretta alla implementazione di una Rete regionale di Centri Risorse per l'informazione, l'accompagnamento e il supporto all'attivazione giovanile (Galattica - Rete Giovani Puglia). 
+Politiche giovanili
+[ Vai al servizio ](https://www.regione.puglia.it/web/politiche-giovanili/-/galattica?redirect=%2Fweb%2Fpolitiche-giovanili)
+Territorio, paesaggio e mobilità
+### Struttura Provinciale Lecce - Sezione Opere Pubbliche ed Infrastrutture
+AVVISO UTENZA DEPOSITO E CONSULTAZIONE PROGETTI STRUTTURALI - REGIONE PUGLIA
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](./)
+Territorio, paesaggio e mobilità
+### Struttura Provinciale Lecce - Sezione Opere Pubbliche ed Infrastrutture
+AVVISO UTENZA DEPOSITO E CONSULTAZIONE PROGETTI STRUTTURALI - REGIONE PUGLIA
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](./)
+Agricoltura
+### Osservatorio Regionale sull'Agricoltura Biologica
+ORAB
+Agricoltura
+[ Vai al servizio ](https://www.regione.puglia.it/web/osservatorio-agricoltura-biologica%20)
+Agricoltura
+### Segnalare un ulivo monumentale 
+Come fare per segnalare un ulivo monumentale
+Agricoltura
+[ Vai al servizio ](http://www.sit.puglia.it/portal/portale_rete_natura_2000/FAQ/Ulivi%20monumentali%20-%20www.sit.puglia.it)
+Lavoro e formazione
+### Come fare per richiedere la Borsa di Studio
+Come fare per richiedere la borsa di studio
+Lavoro e formazione
+[ Vai al servizio ](https://www.studioinpuglia.regione.puglia.it/borse-di-studio-2020-2021/)
+Lavoro e formazione
+### Come richiedere il contributo libri di testo
+Contributo relativo alla fornitura gratuita o semigratuita dei libri di testo da parte della Regione Puglia
+Lavoro e formazione
+[ Vai al servizio ](https://www.studioinpuglia.regione.puglia.it/libri-di-testo-2021-2022/)
+Salute, sport e buona vita
+### Come fare per ottenere la Certificazione Verde Covid-19 (Green Pass) 
+Ottenere la Certificazione verde
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.dgc.gov.it/web/ottenere.html)
+Agricoltura
+### Come diventare una masseria didattica
+Il servizio consente di scaricare la modulistica per le Aziende Agricole e Agrituristiche che intendono ottenere il riconoscimento di "Masseria didattica di Puglia"
+Agricoltura
+[ Vai al servizio ](http://old.regione.puglia.it/web/agricoltura-e-sviluppo-rurale/cerca-masserie-didattiche)
+Istituzione e partecipazione
+### Servizio Contratti Pubblici - Programmazione Biennale Acquisti Beni e Servizi
+- Raccoglie la programmazione di acquisti biennale di beni e servizi nell'ente Regione Puglia - Aggrega gli acquisti secondo le direttive ANAC - Trasmette gli acquisti sopra il milione di euro al Tavolo Tecnico dei Soggetti aggregatori ai sensi del comma 6 dell'art.21 del codice degli appalti - Assolve gli obblighi di pubblicità di cui al comma 7 dell’art.21 e del comma 2 dell’art.29 di detto codice ed in particolare, al referente del programma di cui ai commi 14 e 15 dell’art.3 del DM n.14/2018 ed al comma 13 del medesimo DM n.14/2018
+Istituzione e partecipazione
+[ Vai al servizio ](https://innovapuglia-appalti.maggiolicloud.it/VigilanzaComunicazioni/InitLogin.do)
+Salute, sport e buona vita
+### Tessera Sanitaria-Carta Nazionale dei Servizi
+TS-CNS
+Salute, sport e buona vita
+[ Vai al servizio ](https://sistemats1.sanita.finanze.it/portale/it/web/guest/tessera-sanitaria-cittadini)
+Ambiente
+### Anagrafe Regionale Impianto di Geoscambio (DGR 830/2015)
+Anagrafe Regionale di tutti gli impianti di geoscambio (DGR 830/2015)
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Rilascio autorizzazioni impianti di scambio geotermico mediante l'utilizzo di sonde geotermiche a circuito chiuso (DGR 830/2015)
+Rilascio autorizzazioni impianti di scambio geotermico mediante l'utilizzo di sonde geotermiche a circuito chiuso con potenza termica complessiva PT superiore a 50 Kw (DGR 830/2015)
+Ambiente
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-ambiente/arig#mains)
+Ambiente
+### Rilascio delle autorizzazioni di caratterizzazione e di bonifica dei siti inquinanti
+Rilascio delle autorizzazioni di caratterizzazione e di bonifica dei siti inquinanti a favore di enti pubblici e privati
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Finanziamenti con fondi ecotassa su riqualificazione di aree in condizioni di degrado ambientale
+Finanziamenti con fondi ecotassa su riqualificazione di aree in condizioni di degrado ambientale
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Finanziamenti con risorse del Programma Operativo FESR - Bonifica di siti contaminati e impiantistica rifiuti
+Finanziamenti con risorse del Programma Operativo FESR riguardanti la Bonifica di siti contaminati e impiantistica rifiuti (compreso interventi per Centri Comunali di Raccolta) 
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Pagamento Diritto Annuo Concessioni Acque Minerali e Termali
+Come previsto dalla L.R.44/1975 ogni anno le ditte concessionarie di acque minerali e termali devono versare un onere definito con DGR 
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Erogazione di ausili finanziari ed incentivi economici previsti dalla L.R.22/2019
+Concessione di incentivi economici per la costituzione delle Comissioni tecniche, erogazione di ausili finanziari per investimenti nel settore estrattivo finalizzati all’innovazione tecnologica, all’attività di formazione , all’attività di promozione, studi e ricerche e per il recupero e messa in sicurezza delle cave dismesse . Tali concessioni/ausili finanziari sono a favore dei Comuni (art.10 L.R.22/2019) 
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Rilascio concessioni acque minerali e termali ex L.R.44/75
+Rilascio concessioni acque minerali e termali ex L.R.44/75 a favore di imprese professionisti
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Rilascio Autorizzazioni attività estrattive presentate ante entrata in vigore L.R.22/2019 
+Con la L.R.22/2019, le competenze in materia di rilascio di autorizzazioni sulle attività estrattive, sono passate di competenza dei Comuni. Rimane alla Regione Puglia la gestione dei procedimenti presentati ante avvento della L.R.22/2019 
+Ambiente
+[ Vai al servizio ](serv.rifiutiebonifica@pec.rupar.puglia.it)
+Ambiente
+### Catasto delle cave e delle concessioni delle acque minerali e termali
+Il Servizio consente in consultazione pubblica di visualizzare le perimetrazioni delle cave e delle concessioni di acque minerali e termali presenti nel database del Servizio Attività Estrattive
+Ambiente
+[ Vai al servizio ](http://webapps.sit.puglia.it/freewebapps/AttivitaEstrattive/index.html)
+Competitività, ricerca e innovazione
+### Garanzie
+La Regione Puglia finanzia la costituzione di Fondi rischi presso Cooperative di garanzia e Consorzi Fidi, finalizzati alla concessione di garanzie dirette alle PMI ed ai professionisti che richiedono finanziamenti per la propria attività.
+Competitività e innovazione
+[ Vai al servizio ](https://www.sistema.puglia.it/portal/page/portal/SistemaPuglia/contributiconfidi2017)
+Competitività, ricerca e innovazione
+### Fondo Finanziamento del rischio 2014-2020
+Il Fondo Finanziamento del Rischio favorisce l'accesso al credito e l'erogazione di nuova finanza a condizioni migliorative rispetto al mercato grazie: - ad una garanzia pubblica prestata da Puglia Sviluppo e disponibile c/o le banche aggiudicatarie dei fondi; - ad una dotazione finanziaria attraverso la quale Puglia Sviluppo partecipa al rischio di credito dell’importo di ciascun finanziamento erogato. Il vantaggio finanziario del contributo pubblico al Fondo viene interamente trasferito alle imprese sotto forma di riduzione del tasso di interesse.
+Competitività e innovazione
+[ Vai al servizio ](https://por.regione.puglia.it/)
+Competitività, ricerca e innovazione
+### Minibond
+Il Fondo Minibond favorisce l'accesso al mercato di capitali a condizioni migliorative rispetto al mercato grazie ad una garanzia pubblica di portafoglio ed è finalizzato all’emissione di Minibond da parte delle imprese aderenti. Il vantaggio finanziario del contributo pubblico al Fondo viene interamente trasferito ai destinatari finali sotto forma di riduzione del tasso di remunerazione dei Minibond.
+Competitività e innovazione
+[ Vai al servizio ](https://www.sistema.puglia.it/SistemaPuglia/fondominibond)
+Competitività, ricerca e innovazione
+### Contratti di Programma
+Le grandi imprese possono chiedere aiuti per i programmi di investimento per: - la realizzazione di nuove unità produttive; - l’ampliamento di unità produttive esistenti; - la diversificazione della produzione di uno stabilimento esistente per ottenere prodotti mai fabbricati precedentemente; - il cambiamento fondamentale del processo di produzione complessivo di un'unità produttiva esistente. Ai programmi di investimento possono accedere le grandi imprese e le piccole e medie imprese aderenti a Contratti di Programma presentati da una grande impresa.
+Competitività e innovazione
+[ Vai al servizio ](https://www.sistema.puglia.it/SistemaPuglia/contrattidiprogramma)
+Politiche giovanili
+### Formazione risorse umane Servizio civile
+Erogazione di corsi di formazione e aggiornamento delle risorse umane (formatori generali e Operatori locali di progetto) operanti nei progetti di Servizio Civile Universale 
+Politiche giovanili
+[ Vai al servizio ](https://serviziocivile.regione.puglia.it/formazione-entig)
+Territorio, paesaggio e mobilità
+### Portale PUSH - PUglia Social Housing
+Il portale PUSH, Puglia Social Housing, attua la dematerializzazione completa dei processi e dei procedimenti amministrativi afferenti la Sezione Politiche Abitative rivolti alle ARCA ed ai Comuni della Regione Puglia, nonché l’acquisizione e gestione di banche dati sul patrimonio immobiliare di Edilizia Residenziale Pubblica e sui piani di alienazione, sui programmi di intervento e sui cantieri, sulle risultanze dei bandi comunali di sostegno alla locazione (ai sensi della L.431/98), consentendo mediante le funzioni del cruscotto direzionale il monitoraggio del disagio abitativo e una migliore programmazione delle politiche abitative. Si interfaccia con il SIT consentendo la visualizzazione delle mappe catastali e la geolocalizzazione degli edifici censiti in banca dati L'accesso al portale è riservato agli enti regionali accreditati (Comuni ed ARCA).
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://push.regione.puglia.it/)
+Politiche giovanili
+### Luoghi Comuni 
+Avviso per la manifestazione di interesse rivolto ad Enti Pubblici per la rivitalizzazione tramite co-progettazione di spazi sotto-utilizzati da destinare a progetti di innovazione sociale presentati da Organizzazioni giovanili del Terzo Settore
+Politiche giovanili
+[ Vai al servizio ](https://luoghicomuni.regione.puglia.it/iniziativa/)
+Competitività, ricerca e innovazione
+### Pugliesi nel Mondo
+I pugliesi che vivono all’estero, costituiti in associazioni o altra forma riconosciuta presso il Paese di residenza, possono iscriversi all’albo regionale delle Associazioni e Federazioni dei Pugliesi nel Mondo e partecipare agli avvisi e alle altre iniziative promosse dalla Regione Puglia per la valorizzazione e lo sviluppo della rete dei rapporti tra le comunità pugliesi e quelle estere
+Competitività e innovazione
+[ Vai al servizio ](http://internazionalizzazione.regione.puglia.it/pugliesi-nel-mondo)
+Competitività, ricerca e innovazione
+### Partecipa agli eventi per l’internazionalizzazione
+Le imprese possono candidarsi per far parte alle delegazioni istituzionali regionali che partecipano alle maggiori fiere di rilievo internazionale che si svolgono in Italia e all’estero
+Competitività e innovazione
+[ Vai al servizio ](http://internazionalizzazione.regione.puglia.it/partecipa-agli-eventi)
+Competitività, ricerca e innovazione
+### Avviso Titolo IV Internazionalizzazione
+Avviso pubblico per l’assegnazione di incentivi volti al sostegno di programmi di internazionalizzazione promossi da parte delle PMI aventi sede operativa in Puglia
+Competitività e innovazione
+[ Vai al servizio ](https://www.sistema.puglia.it/SistemaPuglia/internazionalizzazione)
+Istituzione e partecipazione
+### Portale del contribuente
+Il Portale del Contribuente, un servizio messo a disposizione da Regione Puglia dedicato agli utenti che, in forza di disposizioni normative, sono tenuti al versamento dei Tributi : Addizionale applicata all'accisa sul gas autotrazione naturale utilizzato per gli usi civili e per gli usi agricoli, artigiani e industriali (ARISGAN); Tributo speciale per il deposito in discarica dei rifiuti solidi o Ecotassa (TSDD) ; Tassa Concessione Regionale (TCR) .
+Istituzione e partecipazione
+[ Vai al servizio ](https://portaledelcontribuente.regione.puglia.it)
+Salute, sport e buona vita
+### Disdire online prenotazione vaccino anti-covid
+Il servizio consente di disdire la prenotazione per il vaccino COVID-19. Dopo la disdetta, è possibile effettuare una nuova prenotazione. NB. La disdetta deve essere effettuata entro la data dell’appuntamento precedente.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/servizialcittadino/#/RicercaPrenotazione?azienda=regionale)
+Salute, sport e buona vita
+### Prenotare online il vaccino anti-covid
+Il servizio consente di prenotare il vaccino COVID-19. La prenotazione deve essere effettuata nella ASL di residenza o domicilio. La data di prenotazione potrà essere suscettibile di variazione in base alla disponibilità dei vaccini. In tal caso si verrà ricontattati.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/prenotazione-vaccinazione)
+Turismo e Cultura
+### Patrocinio non oneroso in materia di Cultura e Turismo
+Il patrocinio non oneroso ai sensi della L.R. 34/80 è concesso dall'Assessore alla Cultura, tutela e sviluppo delle imprese culturali o dall'Assessore al Turismo, sviluppo e impresa turistica per attività inerenti quest’ultimo ambito. Nel dettaglio, si può richiedere il Patrocinio per convegni, mostre, rassegne, celebrazioni ed ogni altra iniziativa, senza fine di lucro, assunta da enti, comitati, istituzioni ed associazioni pubbliche e private che attengano le tematiche di spettacolo e cultura, la promozione turistica, con specifico riferimento al ruolo dei territori e delle comunità della Puglia. Il Patrocinio non può essere concesso per iniziative promosse da partiti politici, organizzazioni sindacali, imprese o comunque soggetti privati aventi scopo di lucro. L’istanza di patrocinio, redatta utilizzando i modelli allegati, che dovranno essere accompagnati da una relazione descrittiva dell’iniziativa per cui si richiede il Patrocinio, nonché delle finalità statutarie dell’Organismo richiedente. L'Organismo richiedente, ottenuta la concessione di Patrocinio, è autorizzato ad apporre sul materiale inerente l'iniziativa il logo della Regione Puglia e della dicitura riportata nella concessione. Il Patrocinio e il logo concessi, possono essere utilizzati solo per la manifestazione richiesta, e non possono essere utilizzati per altre manifestazioni. La domanda deve pervenire preferibilmente 30 giorni o comunque almeno 15 giorni prima dello svolgimento dell’iniziativa, indirizzandola a: Assessore alla Cultura, Tutela e sviluppo delle imprese culturali per iniziative in ambito culturale agli indirizzi: segreteria.culturaelegalita@regione.puglia.it, dipartimento.turismocultura@regione.puglia.it Assessore al Turismo, Sviluppo e Impresa turistica per iniziative in ambito turistico all'indirizzo: segreteria.turismo@regione.puglia.it Per informazioni in merito all'istruttoria è possibile contattare la struttura responsabile in relazione alla materia, così come di seguito indicato: 
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo-e-cultura)
+Turismo e Cultura
+### Consultare l'elenco degli inadempienti all’obbligo di trasmissione della movimentazione turistica
+Per i Comuni, iscritti al DMS Puglia, è possibile visionare l’elenco delle strutture ricettive risultate inadempienti a seguito delle verifiche sulla trasmissione della movimentazione turistica esercitate dall’Agenzia Regionale del Turismo ARET Pugliapromozione, come previsto dalla L.R. n. 49/2017 (art.9).
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### Consultare e monitorare le Comunicazioni dei prezzi e dei servizi trasmesse
+Per i Comuni, iscritti al DMS Puglia, è possibile visionare l'elenco degli operatori turistici indicati dalla L.R. n. 49/2017 (art. 2) regolarmente registrati nel DMS e, per ciascuno di questi, la presenza o l'assenza della Comunicazione dei Prezzi e Servizi (CPS) regolarmente validata. 
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### Iscrivere la propria impresa (non struttura ricettiva) o la propria professione in ambito culturale e turistico
+E' possibile richiedere la registrazione al DMS Puglia di imprese (non di tipo struttura ricettiva) e di professioni legate all’intermediazione e ai servizi per il turismo e la cultura. La richiesta di registrazione compilata online è oggetto di verifica da parte degli Uffici dell'ARET Pugliapromozione. Se la verifica ha esito positivo, si avrà accesso a tutti i servizi digitali presenti nell'area riservata del DMS Puglia.
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Agricoltura
+### Richiesta Certificati Fitosanitari per Esportazione extra UE
+Il servizio consente di chiedere l'intervento di un Ispettore Fitosanitario (U.P.G.) per ottenere il rilascio di un certificato fitosanitario valido per l'esportazione o la riesportazione di prodotti e materiali vegetali fuori dall' UE. La certificazione fitosanitaria per le merci in esportazione e riesportazione verso i paesi extra UE viene disciplinata dal regolamento (UE) 2016/2031 che subentra al vecchio D. Lgs. 214/05.
+Agricoltura
+[ Vai al servizio ](https://www.osservatoriofitosanitario.regione.puglia.it)
+Agricoltura
+### Procedimenti Amministrativi - Derivazioni di Acque Sotterranee e Superficiali
+Il servizio, realizzato ai sensi del comma 3 dell’art. 13 del Regolamento Regionale n. 2/2017 (Disciplina delle modalità di quantificazione dei volumi idrici ad uso irriguo), permette la gestione telematica dei procedimenti amministrativi relativi alle derivazioni di acque sotterranee e superficiali; tramite lo stesso servizio i soggetti obbligati potranno restituire i dati necessari ad assicurare il popolamento periodico della banca dati SIGRIAN. Nello specifico, il servizio consente l'avvio dei seguenti procedimenti: - Derivazioni di Acque Sotterranee - Licenze di Attingimento Acque Superficiali L'accesso ai procedimenti è possibile solo dopo specifiche abilitazioni sul portale www.sit.puglia.it .
+Agricoltura
+[ Vai al servizio ](http://www.sit.puglia.it/portal/portale_cis/Procedimenti)
+Turismo e Cultura
+### Comunicare l'avvio di un B&B imprenditoriale
+Il servizio fornisce i modelli SCIA per le attività di Bed and Breakfast di tipo imprenditoriale. Si precisa che la modulistica allegata è costituita dai modelli che la Sezione Turismo ha provveduto ad approvare con appositi Atti Dirigenziali. Considerato che i procedimenti amministrativi sono di competenza dei Comuni, è necessario contattare i SUAP - Sportello Unico Attività Produttive territorialmente competenti per ottenere dettagli e chiarimenti sugli adempimenti procedurali.
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-strutture-ricettive)
+Turismo e Cultura
+### Registro regionale delle strutture ricettive non alberghiere
+La Regione Puglia, con Legge Regionale 17 dicembre 2018, n. 57 pubblicata sul BURP n. 161 supplemento del 20/12/2018, ha inserito, integrandola, nella L.R. 49/2017 il Capo II Bis "Registro regionale delle strutture ricettive non alberghiere" che attribuisce il "Codice Identificativo di Struttura" (CIS). Il Registro regionale delle strutture ricettive non alberghiere è un elenco, a formazione progressiva ed aggiornato quotidianamente, contenente tutte le strutture ricettive non alberghiere, tra cui sono compresi anche gli alloggi dati in locazione, in tutto o in parte, per finalità̀ turistiche.
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Territorio, paesaggio e mobilità
+### Consultazione Pubblica Cartografie Tecniche e Tematiche della Regione Puglia
+L'area del portale "Puglia Con" (indirizzo https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/home#menu) delle Cartografie Tecniche e Tematiche, nel complesso delle sue sotto-sezioni e relative pagine, permette di consultare numerose cartografie omogenee sul territorio regionale, tra cui carta tecnica, uso del suolo, database topografico, carta dei beni culturali, ortofoto (1997, 2006, 2010, 2011, 2013, 2016). La consultazione può avvenire: - tramite applicazioni WebGIS dedicate accessibili direttamente mediante voci di menu specifiche; - tramite lo standard WMS, i cui riferimenti e le modalità di fruizione sono riportate nella pagina intestata con la dicitura "WMS". Le applicazioni WebGIS consentono di effettuare ricerche per particella castale e stampa in scala con export in formato grafico (PDF, JPG, PNG), oltre che interrogazioni sugli oggetti territoriali visualizzati in mappa. Dalla sezione è accessibile la funzionalità di download, anche delle cartografie definite "storiche" in quanto precedenti l'implementazione e la messa in esercizio del Sistema Informativo Territoriale (S.I.T.) della Regione Puglia.
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/struttura-del-pptr)
+Ambiente
+### Osservatorio Rifiuti - Gestione Dati
+Il servizio nel suo complesso consente alle Amministrazioni Comunali di inserire i dati inerenti le quantità/destinazioni inerenti i rifiuti prodotti nel territorio di propria competenza e di calcolare i dati sulle percentuali di raccolta differenziata coerentemente a quanto previsto dalle “Linee Guida per la compilazione dell’Allegato 2 alla L.r. 20/2016. Le funzioni del servizio sono richiamabili attraverso la sezione "Gestione Dati" disponibile, previa autenticazione, sotto la voce "Osservatorio Rifiuti".
+Ambiente
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-ambiente/amministrazione-orp2#mains)
+Ambiente
+### Osservatorio Rifiuti - Consultazione Pubblica
+Il servizio nel suo complesso consente alla Amministrazione Regionale e al Cittadino di consultare i dati inerenti le quantità/destinazioni inerenti i rifiuti prodotti nel territorio regionale e le percentuali di raccolta differenziata calcolate sulla base di quanto previsto dalle “Linee Guida per la compilazione dell’Allegato 2 alla L.R. 20/2016. La consultazione è libera ed è sotto forma di tabelle e grafici di sintesi che possono essere richiamati da ciascuna delle voci della sezione "Servizi", ossia: - Ultime comunicazioni - Stato comunicazioni - RSU in Puglia - RSU per Aro - RSU per Comune Le voci afferiscono alla macro sezione "Consultazione Pubblica" richiamabile sotto la scheda "Osservatorio Rifiuti".
+Ambiente
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/orp/public/dashboard)
+Ambiente
+### Procedura di statistica mineraria/tariffa attività estrattive/ordinanze sicurezza in cava
+Il servizio consente a Professionisti e Imprese la gestione automatizzata del procedimento inerente la compilazione e trasmissione di dati e documenti relativi a Statistiche Minerarie, Piani Quotati, Ordinanze di sicurezza, Pagamento Tariffe. E' previsto la possibilità, da parte dei Comuni, di poter visualizzare, entrando con proprie credenziali, le documentazioni inviate riguardanti le cave del territorio di competenza. 
+Ambiente
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-ambiente/statistica-mineraria/ordinanza-sicurezza-in-cava)
+Agricoltura
+### Consultazione dati di Monitoraggio della diffusione della Xylella Fastidiosa
+Il servizio consente la consultazione cartografica dei dati delle diverse campagne di monitoraggio per il contenimento della Xylella Fastidiosa, comprendendo anche la perimetrazione delle zone delimitate in vigore.
+Agricoltura
+[ Vai al servizio ](http://www.emergenzaxylella.it/portal/portale_gestione_agricoltura/Cartografie)
+Agricoltura
+### Dati sui terreni interessati da estirpazioni di piante positive a Xylella Fastidiosa secondo la D.G.R. 1780/2019
+Il servizio consente, nel complesso delle sue funzionalità, la consultazione dei dati pubblici relativi ai terreni interessati da espianto/abbattimento/spostamento di olivi infetti da Xylella Fastidiosa. I dati sono rappresentati sotto forma di elenchi e di localizzazione su mappa tramite georeferenziazione di particelle catastali. Nel dettaglio, sono incluse: - una sezione completa con tutti i riferimenti alla normativa vigente [Normativa]; - una sezione per la visualizzazione dell'elenco delle autorizzazioni come da D.G.R. 1780/2019 lettera a) [Autorizzazioni - lettera a) D.G.R. 1780/2019]; - una sezione per la visualizzazione dell'elenco delle comunicazioni come da D.G.R. 1780/2019 lettera a) [Comunicazioni - lettera b) D.G.R. 1780/2019]; - una sezione per la consultazione cartografica in applicazione WebGIS dedicata [Cartografia]; - una sezione con i riferimenti per l'utilizzo degli strati cartografici secondo lo standard WMS [WMS]. Dagli elenchi è anche possibile visualizzare la georeferenziazione del riferimento di autorizzazione o comunicazione.
+Agricoltura
+[ Vai al servizio ](www.sit.puglia.it/portal/portale_terreni_infetti1)
+Territorio, paesaggio e mobilità
+### Gestione Deleghe al Rilascio di Provvedimenti Paesaggistici
+Il servizio ingloba una serie di funzionalità distinte che consentono: - agli utenti non registrati di consultare le informazioni relative all'organizzazione dell'esercizio delle funzioni paesaggistiche da parte degli enti delegati ["Enti Delegati" e "Provvedimenti"]; - agli Enti di trasmettere la richiesta di delega ai sensi dell'art. 10 della L.R. 20/2009 e tutta la documentazione prevista dalla L.R. 20/2009 e dalla D.G.R. 2273/2009 ["Gestisci Richiesta"] oltre che di gestirne le successive modifiche e variazioni ["Gestisci Enti" e "Gestisci Commissioni"]; - agli uffici regionali di gestire i provvedimenti di delega ["Gestisci Delega"].
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/services/pubblica/paesaggio-urbanistica/deleghe/enti-delegati-e-provvedimenti/ricerca-per-comune)
+Territorio, paesaggio e mobilità
+### Trasmissione dei Provvedimenti Paesaggistici rilasciati dagli Enti delegati
+Il servizio ingloba una serie di funzionalità distinte che consentono agli Enti che rilasciano i provvedimenti paesaggistici di trasmetterli telematicamente alla Regione, alla Soprintendenza e agli Enti Parco, secondo le vigenti norme nazionali e regionali anche al fine della pubblicazione degli “Elenchi dei Provvedimenti Rilasciati”.
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/spazio-per-gli-enti-pptr#mains)
+Territorio, paesaggio e mobilità
+### Elenco Provvedimenti Paesaggistici rilasciati ai sensi del PUTT dagli Enti delegati
+Il servizio consente di visualizzare gli elenchi delle autorizzazioni paesaggistiche rilasciate dagli Enti Delegati ai sensi dell'art. 146 del D.Lgs 42/'04 e dell'art. 5.01 delle Nta del P.U.T.T./p, pubblicate secondo le modalita' definite dalla D.G.R. del 28/12/2010, e dalla D.G.R. n. 2905 del 20/12/2012.
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/informazioni)
+### Intermediazione verso SDI per ricezione FaturaPA
+Servizio di intermediazione verso il servizio di interscambio nazionale per l'invio e la ricezione delle fatture elettroniche nel formato FatturaPA
+Istituzione e partecipazione
+[ Vai al servizio ](https://fatturapa.rsr.rupar.puglia.it)
+Istituzione e partecipazione
+### Intermediazione pagamenti elettronici su circuito PagoPA
+Il servizio, rivolto agli enti territoriali regionali, consente agli stessi di offrire ai propri cittadini i servizi pagamento elettronico su circuito PagoPA, utilizzando l'infrastruttura MyPay messa a disposizione dalla regione Puglia.
+Istituzione e partecipazione
+[ Vai al servizio ](https://pagopa.rupar.puglia.it)
+Turismo e Cultura
+### Apertura e variazione per agenzie di viaggio
+Sono agenzie di viaggio e turismo le imprese che esercitano in via principale attività di produzione, organizzazione, prenotazione e vendita di biglietti di viaggi, soggiorni e servizi turistici collegati, ovvero intermediazione nei predetti servizi o entrambe le attività. Tali attività possono essere realizzate anche nella forma online. Si precisa che la modulistica allegata è costituita dai modelli che la Sezione Turismo ha provveduto ad approvare con appositi Atti Dirigenziali. Considerato che i procedimenti amministrativi sono di competenza dei Comuni, è necessario contattare i SUAP - Sportello Unico Attività Produttive territorialmente competenti per ottenere dettagli e chiarimenti sugli adempimenti procedurali.
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/agenzie-di-viaggio)
+Agricoltura
+### Atti di estirpazioni di piante positive a Xylella Fastidiosa
+Il servizio consente la consultazione dell'elenco dei terreni interessati da espianto/abbattimento/spostamento di olivi infetti da Xylella Fastidiosa.
+Agricoltura
+[ Vai al servizio ](http://www.emergenzaxylella.it/portal/portale_gestione_agricoltura/Documenti/determine)
+Ambiente
+### Segnalazione Amianto
+In ottemperanza a quanto previsto dal Piano Regionale Amianto Puglia, il servizio consente ai cittadini di segnalare la presunta presenza di materiali contenenti amianto.
+Ambiente
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-ambiente/scheda-s#mains)
+Ambiente
+### Autonotifica Amianto
+In ottemperanza a quanto previsto dal Piano Regionale Amianto Puglia, il servizio consente ai cittadini di censire i siti e/o i manufatti contenenti amianto mediante la forma dell’autonotifica.
+Ambiente
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-ambiente/scheda-a)
+Agricoltura
+### Questionari per il rilascio dei patentini fitosanitari
+Consente agli Ispettori Fitosanitari la gestione dei questionari per l’esame previsto per il conseguimento dell’abilitazione all’acquisto ed uso di prodotti fitosanitari.
+Agricoltura
+[ Vai al servizio ](http://www.emergenzaxylella.it/)
+Agricoltura
+### Impianti varietà Leccino e FS17
+Consente ai proprietari di comunicare all’Osservatorio Fitosanitario regionale l’impianto di piante di ulivo delle varietà "Leccino" e "FS17" (resistenti al batterio Xylella Fastidiosa). 
+Agricoltura
+[ Vai al servizio ](http://www.emergenzaxylella.it/portal/portale_gestione_agricoltura/impianti)
+Agricoltura
+### Movimentazioni di specie specificate per la Xylella Fastidiosa
+Consente ai vivaisti di comunicare telematicamente all’Osservatorio Fitosanitario regionale le movimentazioni di specie vegetali soggette a restrizioni introdotte dalla normativa per il contenimento del batterio della Xylella Fastidiosa o di richiedere visita ispettiva.
+Agricoltura
+[ Vai al servizio ](www.emergenzaxylella.it)
+Agricoltura
+### Iscrizione online al RUOP
+Consente agli operatori del settore agroalimentare l’iscrizione online al Registro Ufficiale degli Operatori Professionali, in attuazione del Regolamento (UE) 2016/2031.
+Agricoltura
+[ Vai al servizio ](www.sit.puglia.it/portal/portale_osservatorio/ViewMenuPortletWindow?action=2&idsezione=943&nomesezione=Osservatorio%20Fitosanitario%20&paginacms=null)
+Agricoltura
+### Richiedere le agevolazioni per il carburante agricolo
+Le Organizzazioni Professionali Agricole possono redigere ed inviare telematicamente all’ufficio competente le richieste inerenti l’accredito di imposta per il tramite di carburante ad accisa agevolata, per le aziende agricole ed agro meccaniche, così come indicato nel D.M. 454/01 Art.2
+Agricoltura
+[ Vai al servizio ](https://uma.regione.puglia.it/%20)
+Territorio, paesaggio e mobilità
+### Elenco Provvedimenti Paesaggistici rilasciati ai sensi del PPTR dagli Enti delegati
+Il servizio consente di visualizzare gli elenchi dei provvedimenti paesaggistici rilasciati da tutti gli Enti Delegati ai sensi del PPTR e pubblicati secondo le modalità definite dalla D.G.R. n. 985/2015. Sono inoltre visualizzabili i provvedimenti paesaggistici rilasciati dalla Regione Puglia per conto degli Enti non ancora delegati.
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/informazioni)
+Territorio, paesaggio e mobilità
+### Sportello Istanze Paesaggistiche
+Consente a cittadini e professionisti di presentare telematicamente istanze paesaggistiche di competenza della Regione Puglia (autorizzazioni paesaggistiche e accertamenti di compatibilità paesaggistica), allegando contestualmente la documentazione necessaria, e ricevere il provvedimento finale senza recarsi presso gli uffici.
+Territorio, paesaggio e mobilità
+[ Vai al servizio ](https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/presenta-istanza#mains)
+Turismo e Cultura
+### Monitorare gli effetti COVID-19 in ambito Cultura Puglia
+Erogazione di un questionario per monitorare gli effetti di COVID-19 nella Cultura. Gli Operatori della Cultura iscritti al DMS possono esprimere dati utili alla quantificazione degli effetti derivanti dal Coronavirus.
+Turismo e Cultura
+[ Vai al servizio ](http://www.dms.puglia.it)
+Turismo e Cultura
+### Monitorare gli effetti COVID-19 in ambito Turismo Puglia
+Erogazione di un questionario per monitorare gli effetti di COVID-19 nel Turismo. Gli Operatori del Turismo iscritti al DMS possono esprimere dati utili alla quantificazione degli effetti derivanti dal Coronavirus.
+Turismo e Cultura
+[ Vai al servizio ](http://www.dms.puglia.it)
+Istituzione e partecipazione
+### Pagamento Addizionale regionale all'accisa sul gas naturale - ARISGAN
+L'addizionale regionale all'accisa sul gas naturale colpisce, all'interno del territorio regionale: - la fornitura del gas naturale ai consumatori finali; - il consumo dello stesso estratto per uso proprio.
+Istituzione e partecipazione
+[ Vai al servizio ](https://www.regione.puglia.it/web/tributi/addizionale-regionale-accisa-gas-naturale)
+Turismo e Cultura
+### Trasmettere la Comunicazione dei Prezzi e dei Servizi (CPS)
+Il servizio "CPS Comunicazione dei Prezzi e dei Servizi", coerentemente con la Legge Regionale 1 dicembre 2017, n. 49, ha lo scopo di acquisire i dati relativi alle caratteristiche degli esercizi e i relativi prezzi imposti, nonché di supportare l'espletamento degli obblighi previsti, ossia la loro convalida e trasmissione. La comunicazione dei prezzi e servizi riguarda tutte le strutture turistiche ricettive alberghiere ed extralberghiere, comprese le strutture agrituristiche, nonchè le attività turistiche ricettive ad uso pubblico gestite in regime di concessione e gli stabilimenti balneari. La CPS può essere inoltrata esclusivamente per via telematica all’Agenzia Regionale per il Turismo (Pugliapromozione), entro e non oltre il 1° del mese di ottobre art. (4 comma 3 L.R. 49/2017).
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### Trasmettere e gestire la movimentazione turistica
+Le disposizioni della Legge Regionale n. 49/2017 (e successive modifiche) in materia di rilevazione dei dati sui flussi turistici a fini statistici interessano tutte le strutture turistiche ricettive alberghiere ed extralberghiere (comprese le Locazioni Turistiche). I titolari delle predette strutture ricettive, senza esclusione alcuna, e i gestori delle locazioni turistiche della Regione Puglia sono tenuti ad inviare i dati sul movimento turistico all’Agenzia Regionale del Turismo Pugliapromozione mediante l’apposito applicativo informatico denominato SPOT (riservato alle strutture turistiche ricettive) o SPOT Easy (riservato alle Locazioni Turistiche). La trasmissione avviene inderogabilmente entro il giorno 10 di ogni mese per la movimentazione relativa ai giorni del mese precedente. Le funzioni di verifica dell’avvenuta trasmissione dei dati da parte delle strutture ricettive tramite il Sistema Puglia per l’Osservatorio Turistico sono esercitate dall’Agenzia Regionale del Turismo Pugliapromozione.
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### Ottenere il tesserino di riconoscimento per diventare guida turistica / accompagnatore turistico
+In base all'articolo 6, comma 4, della LEGGE REGIONALE 27 maggio 2016, n. 9 "Disposizioni per il completamento del processo di riordino previsto dalla legge regionale 30 ottobre 2015, n.31 (Riforma del sistema di governo regionale e territoriale)", dalla data di entrata in vigore della I.r. 31/2015 le competenze amministrative in materia di attività professionali turistiche si intendono esercitate dalla Regione. La normativa regionale prevede che per esercitare le professioni di guida turistica, accompagnatore turistico e direttore di agenzia di viaggi è necessario conseguire specifica abilitazione. La guida turistica accompagna singoli o gruppi nelle visite ad opere d'arte, a musei, a gallerie, a scavi archeologici, illustrando le attrattive storiche, artistiche, monumentali e paesaggistiche. L'abilitazione alla professione di guida turistica e' valida su tutto il territorio nazionale. L'accompagnatore turistico accompagna singoli o gruppi nei viaggi attraverso il territorio nazionale o all'estero; fornisce elementi significativi e notizie di interesse turistico sulle zone di transito, al di fuori dell'ambito di competenza delle guide.
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-guide-e-accompagnatori-turistici)
+Turismo e Cultura
+### Inserire un evento nel registro dei rituali festivi legati al fuoco
+La Regione Puglia riconosce e valorizza i rituali festivi legati al fuoco, come espressioni del patrimonio storico e culturale della comunità regionale, e quali strumenti di sviluppo dell'immagine turistica regionale, idonei a sviluppare la conoscenza e lo scambio con altre simili realtà nazionali, europee e mondiali. A tal fine , con legge regionale n. 1 del 25 gennaio 2018 è stato istituito il registro dei rituali festivi legati al fuoco; con successivo regolamento regionale di attuazione n. 8 del 25 febbraio 2019 sono stati disciplinati criteri modalità e termini per l'inserimento nel registro dei rituali festivi legati al fuoco nonché per l'erogazione dei contributi di cui alla legge regionale 25/2018. 
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-rituali-festivi-legati-al-fuoco)
+Turismo e Cultura
+### Inserire un Comune nell'elenco dei Comuni ad economia prevalenemente turistica e Città d'arte 
+I Comuni pugliesi che intendano essere inclusi nell'elenco dei Comuni ad economia prevalentemente turistica e Città d'arte devono possedere i requisiti previsti dalla normativa regionale e produrre specifica istanza di riconoscimento. 
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-comuni-ad-economia-turistica-e-citta-d-arte)
+Turismo e Cultura
+### Istituire un Ufficio Info-Point turistico della Rete Regionale
+La L.R. 28 dicembre 2012, n. 45, all'articolo 40 ha stabilito che le funzioni di informazione e di accoglienza turistica sono state trasferite, a far data dall'1 luglio 2013, ai Comuni. L'Agenzia Pugliapromozione svolge funzioni e compiti di coordinamento della Rete del sistema di Informazione e Accoglienza turistica degli Uffici Info-Point (prima denominati Uffici I.A.T.), promuovendo l'immagine coordinata e l'adeguamento degli standard di qualità. La Regione, attraverso l'Agenzia Pugliapromozione, promuove accordi con i Comuni finalizzati all'istituzione di nuovi Uffici Info-Point turistici della Rete Regionale, previa nulla osta da parte della Sezione Turismo della Regione Puglia. L'accordo è approvato con atto adottato dall'organo comunale competente. 
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-info-point-turistici)
+Istituzione e partecipazione
+### Pagamento Tasse sulle Concessioni Regionali
+La Tassa di Concessione Regionale (TCR) riguarda le autorizzazioni, le licenze, le abilitazioni rilasciate dalla Regione Puglia per l'esercizio di determinate attività in ambito sanitario, caccia e pesca, turismo e industria alberghiera, trasporti, arti e mestieri.
+Istituzione e partecipazione
+[ Vai al servizio ](https://www.regione.puglia.it/web/tributi/tassa-concessione-regionale)
+Istituzione e partecipazione
+### Pagamento tassa automobilistica regionale - Bollo auto
+La tassa automobilistica regionale – bollo auto, è un tributo demandato alle Regioni a statuto ordinario " a decorrere dal 1° gennaio 1999" ai sensi della legge 27 dicembre 1997, n° 449 (Legge Finanziaria 1998), art. 17 comma 10. 
+## Come si paga
+Dal 01/01/2019 è possibile effettuare il versamento del tributo attraverso il sistema di pagamento denominato PagoPa per il tramite dei seguenti soggetti: 
+  * **uffici postali** - avendo cura di specificare all’operatore la targa del veicolo e di verificare con il medesimo la Regione beneficiaria e la scadenza del tributo così come risulta sugli archivi tributari regionali interrogati;
+  * **tabaccai** - avendo cura di specificare all’operatore la targa del veicolo e di verificare con il medesimo la Regione beneficiaria e la scadenza del tributo così come risulta sugli archivi tributari regionali interrogati;
+  * **agenzie di pratiche auto** - avendo cura di specificare all’operatore la targa del veicolo e di verificare con il medesimo la Regione beneficiaria e la scadenza del tributo così come risulta sugli archivi tributari regionali interrogati;
+  * **delegazioni Automobile club d'Italia ACI** - avendo cura di specificare all’operatore la targa del veicolo e di verificare con il medesimo la Regione beneficiaria e la scadenza del tributo così come risulta sugli archivi tributari regionali interrogati;
+  * **pagamento on line tramite piattaforma** [**PagoPa**](https://bollo.aci.it/#/main/home%20): pagamento del bollo auto, prestando particolare attenzione alla digitazione della targa;
+  * **pagamento tramite il proprio home banking** per gli istituti bancari che abbiano concluso accordi con Aci, prestando particolare attenzione alla digitazione della targa.
+È vivamente consigliata la verifica dei dati riportati (targa, periodo tributario, regione beneficiaria), perché **in caso di errore il versamento non potrà essere annullato ed ogni eventuale contestazione non potrà essere addebitata alla Regione** , che potrebbe, al contrario, dover irrogare sanzioni per omesso versamento. 
+Istituzione e partecipazione
+[ Vai al servizio ](https://www.aci.it/i-servizi/servizi-online/bollo-auto.html) 
+
+Turismo e Cultura
+### Comunicare l'avvio di un B&B familiare
+Il servizio fornisce i modelli SCIA per le attività di Bed and Breakfast di tipo familiare. Si precisa che la modulistica allegata è costituita dai modelli che la Sezione Turismo ha provveduto ad approvare con appositi Atti Dirigenziali. Considerato che i procedimenti amministrativi sono di competenza dei Comuni, è necessario contattare i SUAP - Sportello Unico Attività Produttive territorialmente competenti per ottenere dettagli e chiarimenti sugli adempimenti procedurali.
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/strutture-ricettive)
+Turismo e Cultura
+### Richiedere la classificazione della propria struttura ricettiva
+La Regione esercita le funzioni di programmazione, indirizzo, coordinamento e controllo attribuite dalla normativa, individuando i requisiti per la classificazione delle strutture ricettive, determinando gli standard di qualità delle strutture e le procedure per la verifica del loro rispetto, svolgendo attività di vigilanza e di controllo sulle procedure disciplinate dalla legge al fine di verificarne l'efficienza, l'efficacia e la trasparenza sulla base di criteri e standard prestabiliti. La Giunta regionale, anche in coordinamento con le altre regioni e nel rispetto degli standard minimi uniformi sul territorio nazionale, predispone un sistema di classificazione omogenea sul territorio regionale al fine di garantire la qualità dei servizi, tenendo conto anche degli orientamenti a livello internazionale. Si precisa che la modulistica allegata è costituita dai modelli che la Sezione Turismo ha provveduto ad approvare con appositi Atti Dirigenziali. Considerato che i procedimenti amministrativi sono di competenza dei Comuni, è necessario contattare i SUAP - Sportello Unico Attività Produttive territorialmente competenti per ottenere dettagli e chiarimenti sugli adempimenti procedurali.
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-strutture-ricettive)
+Turismo e Cultura
+### Registrare e gestire una Locazione Turistica
+Per "locazioni turistiche" si intendono gli alloggi dati in locazione, in tutto o in parte, per finalità esclusivamente turistiche ai sensi dell'articolo 1, comma 2, lettera c), della Legge 9 dicembre 1998, n. 431. I locatari, per gli alloggi locati ad uso turistico, sono tenuti ad effettuare la registrazione della struttura/e offerta/e in locazione all'interno del DMS utilizzando l'apposito servizio ed ottenere il Codice identificativo Struttura (CIS). 
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### In-Formati
+Il servizio è a disposizione degli operatori della filiera turistico-culturale per aggiornare ed accrescere le proprie competenze - settoriali e non, attraverso moduli online. Sono disponibili due tipologie di servizi: 1. Servizi di Aggiornamento: fruibili direttamente dal DMS, possono essere video-tutorial, brevi lezioni, manuali. 2. Servizi di Formazione: fruibili attraverso la piattaforma di e-learning Forma.LMS, adottata dalla G.R. con deliberazione n.1386/2018 quale strumento di formazione a distanza per argomenti d'interesse dell'Ente Regione e gestita direttamente da InnovaPuglia. 
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### Suggerire un evento
+Il servizio permette di segnalare alla Redazione del DMS gli eventi di cui si è a conoscenza e che ritieni siano imperdibili.
+Turismo e Cultura
+[ Vai al servizio ](https://www.dms.puglia.it/)
+Turismo e Cultura
+### Richiedere il riconoscimento di associazione Pro Loco
+Le pro-loco sono associazioni senza scopo di lucro e composte da volontari che svolgono attività finalizzate alla promozione dei luoghi, alla tutela delle tradizioni locali, alla valorizzare dei prodotti e delle bellezze del territorio. Organizzano manifestazioni ed eventi in ambito turistico, culturale, storico, ambientale, folcloristico, gastronomico e sportivo. 
+Turismo e Cultura
+[ Vai al servizio ](https://www.regione.puglia.it/web/turismo/normativa-pro-loco)
+Salute, sport e buona vita
+### Notifiche preliminari cantieri edili
+Il sistema informatizzato di trasmissione delle Notifiche Preliminari On-Line consente al committente o responsabile dei lavori di assolvere in modalità telematica, prima dell'inizio dei lavori di apertura di un cantiere edile, all'obbligo di trasmissione della notifica preliminare, elaborata conformemente all'allegato XII, all’Azienda Unità Sanitaria Locale e all'Ispettorato Territoriale del Lavoro territorialmente competenti, secondo quanto previsto dagli artt. 54 e 99 del D.Lgs. 81/2008.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/notifiche-preliminari-cantieri-edili)
+Salute, sport e buona vita
+### Medicina dello Sport
+Servizi per medici specialisti in medicina dello sport e società/associazioni sportive
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/medicina-dello-sport)
+Salute, sport e buona vita
+### Stampa attestato di iscrizione e di esenzione ticket
+Il servizio consente di visualizzare e stampare il proprio attestato di iscrizione e di esenzione ticket (libretto sanitario) a seguito ad esempio del cambio del medico o dell'indirizzo di residenza
+Salute, sport e buona vita
+[ Vai al servizio ](https://spid-discovery.rupar.puglia.it/discovery/WAYF?entityID=SERVICE_PROVIDER_REGIONE_PUGLIA&return=https%3A%2F%2Fwww.sanita.puglia.it%2FservizioLivello2%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dss%253Amem%253A85a53d2342d2ea49b7605e13095daa21bc95078d7e1f6774e88f021ce881736d%26acsIndex%3D0)
+Salute, sport e buona vita
+### Autocertificazione esenzione per reddito
+Autocertificazione online del diritto all'esenzione per motivi di reddito alla compartecipazione alla spesa sanitaria 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/esenzionereddito)
+Salute, sport e buona vita
+### Visura esenzioni
+Accesso alle informazioni sulle proprie esenzioni e le prestazioni farmaceutiche e specialistiche a cui si ha diritto 
+Salute, sport e buona vita
+[ Vai al servizio ](https://spid-discovery.rupar.puglia.it/discovery/WAYF?entityID=SERVICE_PROVIDER_REGIONE_PUGLIA&return=https%3A%2F%2Fwww.sanita.puglia.it%2FservizioLivello2%2FShibboleth.sso%2FLogin%3FSAMLDS%3D1%26target%3Dss%253Amem%253Ad886f8535c6665a0a7ef9769d6d82b5cfd73d8de793c94d43ba02594f0ab979e%26acsIndex%3D0)
+Salute, sport e buona vita
+### Diario vaccinazioni
+Vaccinazioni effettuate e calendario delle vaccinazioni da effettuare per i nati dopo il 2002 della Regione 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/diario-vaccinazioni-con-autenticazione)
+Salute, sport e buona vita
+### Scelta e revoca del medico
+Scelta e revoca del medico di medicina generale o del pediatra in tutte le ASL della Regione Puglia. Il servizio consente a tutti i residenti nella Regione Puglia in possesso di SPID (Sistema Pubblico d’Identità Digitale) livello 2, CIE (Carta d’Identità Elettronica), smart card CNS (Carta Nazionale dei Servizi) o TS (Tessera Sanitaria) con funzione di CNS (Carta Nazionale dei Servizi) di: • scegliere il proprio medico di medicina generale o pediatra con contestuale revoca automatica del precedente; • revocare il medico/pediatra scelto per l’iscrizione temporanea in altra regione. 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/scelta-e-revoca-medico)
+Salute, sport e buona vita
+### Referto online (con autenticazione)
+Il servizio, attivo per l'IRCCS de Bellis consente di visualizzare comodamente, 24 ore su 24, con un personal computer, tablet o smartphone connesso ad internet i referti del Laboratorio Analisi. 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/referto-online-con-autenticazione)
+Salute, sport e buona vita
+### Referto online
+Il servizio, attivo per l’AOU Policlinico - Giovanni XXIII - Bari, per l’IRCCS Istituto Tumori “Giovanni Paolo II”, per l'ASL di Foggia e per l'IRCCS de Bellis consente di visualizzare comodamente, 24 ore su 24, con un personal computer, tablet o smartphone connesso ad internet i referti del Laboratorio Analisi. Per accedere al servizio bisogna essere in possesso di credenziali che vengono rilasciate direttamente dalle strutture in occasione del primo accesso.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/referto-online/)
+Salute, sport e buona vita
+### Visualizza / Disdetta prenotazioni / Recupera ricevuta (con autenticazione)
+E' possibile visualizzare la prenotazione effettuata, scaricare il coupon di prenotazione e disdire le prestazioni prenotate online, allo sportello CUP o per telefono. Inoltre accedendo al servizio Recupera ricevuta dal menù laterale è possibile recuperare la ricevuta di pagamento.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/disdetta-prenotazioni-con-autenticazione)
+Salute, sport e buona vita
+### Visualizza / Disdetta prenotazioni
+Il servizio consente di visualizzare la prenotazione effettuata, scaricare il coupon di prenotazione e disdire le prestazioni prenotate attraverso il sistema CUP (sportello, telefono, portale). Dopo aver inserito i dati richiesti, ad operazione completata, il sistema rilascia un numero di disdetta che deve essere conservato a riprova dell'avvenuta operazione. Inoltre accedendo al servizio Recupera ricevuta dal menù laterale è possibile recuperare la ricevuta di pagamento.
+Salute, sport e buona vita
+[ Vai al servizio ](https://play.google.com/store/apps/details?id=it.sincon.pugliasalute&hl=it)
+Salute, sport e buona vita
+### Autosegnalazione coronavirus
+Modulo di autosegnalazione per le persone che transitano o hanno contatti con chi proviene da aree a rischio.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/ingresso-in-puglia-da-estero)
+Salute, sport e buona vita
+### Servizi per gli assistiti celiaci
+I servizi consentono di consultare il credito residuo per il mese corrente, visionare l'elenco delle operazioni effettuate in un dato periodo e richiedere un nuovo codice PIN.
+Salute, sport e buona vita
+[ Vai al servizio ](https://apps.apple.com/it/app/pugliasalute/id1120537176)
+Salute, sport e buona vita
+### Pagamento ticket (con autenticazione)
+Sistema di pagamento del ticket per prestazioni in regime di SSN o le tariffe di visite ed esami effettuati in regime di Libera Professione (ALPI) prenotate attraverso il sistema CUP (sportello, telefono, portale). Per pagare è necessario avere il numero di prenotazione. Effettuato il pagamento, è possibile stampare la ricevuta da presentare al momento dell’erogazione della prestazione. La stessa è valida anche ai fini fiscali.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/pagamento-ticket-con-autenticazione)
+Salute, sport e buona vita
+### Pagamento ticket
+Sistema di pagamento del ticket per prestazioni in regime di SSN o le tariffe di visite ed esami effettuati in regime di Libera Professione (ALPI) prenotate attraverso il sistema CUP (sportello, telefono, portale). Per pagare è necessario avere il numero di prenotazione. Effettuato il pagamento, è possibile stampare la ricevuta da presentare al momento dell’erogazione della prestazione. La stessa è valida anche ai fini fiscali.
+Salute, sport e buona vita
+[ Vai al servizio ](https://play.google.com/store/apps/details?id=it.sincon.pugliasalute&hl=it)
+Salute, sport e buona vita
+### Prenotazione con ricetta rossa SSN o ALPI (accesso con autenticazione)
+Sistema di prenotazione delle prestazioni che consente di prenotare prestazioni del Servizio Sanitario regionale con ricetta Rossa o prestazioni A.L.P.I.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/prenotazioni-con-autenticazione)
+Salute, sport e buona vita
+### Prenotazione con ricetta rossa SSN o ALPI
+Sistema di prenotazione delle prestazioni che consente di prenotare prestazioni del Servizio Sanitario regionale con ricetta Rossa o prestazioni A.L.P.I. 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/prenotazioni-e-pagamento)
+Salute, sport e buona vita
+### Prenotazione con ricetta dematerializzata (accesso con autenticazione)
+Sistema di prenotazione delle prestazioni con ricetta dematerializzata che consente di prenotare le prestazioni erogate dalle strutture sanitarie regionali. 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/prenotazione-ricetta-dematerializzata-autenticato)
+Salute, sport e buona vita
+### 118Sordi Puglia
+118Sordi Puglia è il sistema che consente ai Cittadini Sordi, o inabili a interloquire verbalmente, di accedere in autonomia al Servizio 118 della Regione Puglia tramite l’utilizzo dell’omonima APP 118Sordi.
+Salute, sport e buona vita
+[ Vai al servizio ](https://play.google.com/store/apps/details?id=it.ised.app118sordi)
+Salute, sport e buona vita
+### Gestione Anagrafe dei Soggetti Vaccinati e delle Attività Vaccinali della Regione Puglia
+Il servizio consente la gestione dei soggetti vaccinati e delle attività vaccinali relative a soggetti assistiti dal SSR della Puglia o di altre regioni (soggetti vaccinati in mobilità). Di ogni assistito il servizio consente di conoscere la situazione vaccinale: somministrazioni ricevute, eventuali immunizzazioni per malattia contratta, condizioni di esonero temporaneo o definitivo, rifiuti alla vaccinazione, condizioni sanitarie di rischio e categorie di rischio per le quali sono raccomandate vaccinazioni anti-influenzali, anti-pneumococciche o anti-herpes zoster.
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.regione.puglia.it/documents/56205/0/Disposizione+20+ottobre.pdf/0dd4167d-bbe4-06b4-7685-ae27f01956f3?t=1634915195227)
+Welfare, diritti e cittadinanza
+### Autorizzazione al Funzionamento e Iscrizione ai Registri Regionali dei Servizi e delle Strutture socioassistenziali istituiti presso il Servizio Politiche di benessere Sociale e Pari Opportunità
+Autorizzazione al Funzionamento e Iscrizione ai Registri telematici istituiti presso il Servizio Politiche di benessere Sociale e Pari Opportunità, Legge regionale 10 luglio 2006
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/Registri)
+Welfare, diritti e cittadinanza
+### Finanziamento per la realizzazione di strutture sociali e sociosanitarie a titolarità privata – Avviso pubblico 2 /2015
+Finanziamento di progetti di investimento a titolarità privata per la realizzazione di nuove infrastrutture sociali e socioeducative sul territorio regionale pugliese.
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/ASPrivato)
+Welfare, diritti e cittadinanza
+### Catalogo telematico dell'offerta per i buoni servizio per minori, disabili e anziani
+Iscrizione nel Catalogo dell'Offerta di Servizi rivolti ai Minori, Servizi Domiciliari e a Ciclo Diurno per Persone con Disabilità e Anziani non autosufficienti.
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/CATALOGO)
+Welfare, diritti e cittadinanza
+### Finanziamento per la realizzazione di strutture sociali e sociosanitarie a titolarità pubblica – Avviso pubblico 1 /2015
+Il servizio consente il finanziamento di progetti a titolarità pubblica, che prevedono la realizzazione di nuove infrastrutture sociali ed educative sul territorio pugliese. 
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/ASPubblico)
+Welfare, diritti e cittadinanza
+### Assegno di cura per persone con gravissima non autosufficienza
+Assegno di cura per le gravissime non autosufficienze, finanziato annualmente con risorse del Fondo Nazionale non Autosufficienza e del Fondo Regionale non Autosufficienza, sulla base del profilo di gravità della condizione di non autosufficienza e della titolarità di indennità di accompagnamento.
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/PROVI)
+Welfare, diritti e cittadinanza
+### Buoni Servizio per minori, disabili e anziani
+I buoni servizio permettono alle famiglie di fruire di numerosi servizi, tra cui ludoteche, asili nido e centri diurni, attraverso un contributo alle spese. 
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/CATALOGO)
+Welfare, diritti e cittadinanza
+### Progetti di Vita Indipendente
+Progetti di Vita indipendente per favorire l'autonomia delle persone con disabilità della Puglia
+Welfare, diritti e cittadinanza
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SolidarietaSociale/PROVI)
+Competitività, ricerca e innovazione
+### Titolo II Capo 6
+Aiuti agli Investimenti delle Piccole e Medie Imprese del settore Turismo
+Competitività e innovazione
+[ Vai al servizio ](https://www.sistema.puglia.it/SistemaPuglia/titoloIIturismocapo6)
+Istituzione e partecipazione
+### Consultazione Determinazioni Dirigenziali
+Il servizio visualizza l'elenco delle determinazioni dirigenziali che soddisfano i criteri di ricerca specificati. Per ogni determinazione, vengono visualizzati i seguenti dati: - il codice di identificazione della determinazione (codice CIFRA); - l'oggetto della determinazione; - la struttura regionale a cui fa riferimento la determinazione. Inoltre, per ciascuna determinazione, tramite il link dettaglio, è possibile: - visualizzare la data della determinazione; - visualizzare la data di prima pubblicazione; - visualizzare il contenuto del file contenente la determinazione; - effettuare il download del file contenente la determinazione.
+Istituzione e partecipazione
+[ Vai al servizio ](http://www.sistema.puglia.it/portal/page/portal/SistemaPuglia/Determinazioni)
+Competitività, ricerca e innovazione
+### PIA Piccole imprese 
+Piani di Investimento che le Piccole imprese possono realizzare investimenti in unità locali ubicate/da ubicare nel territorio della Regione Puglia 
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/piapiccoleimprese)
+Istituzione e partecipazione
+### Consultazione Agenda Decisori Pubblici
+Il servizio consente la consultazione degli incontri registrati nell'agenda dei decisori pubblici della Regione Puglia (Presidente della Giunta regionale, Assessori, Direttori di Dipartimento,...)
+Istituzione e partecipazione
+[ Vai al servizio ](https://lobbying.regione.puglia.it/ords/f?p=122:42:::NO:42:P42_DECISORE:0)
+Competitività, ricerca e innovazione
+### Titolo II capo 3
+Aiuti agli Investimenti delle Piccole e Medie Imprese
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/portal/page/portal/SistemaPuglia/titoloIIcapo3)
+Lavoro e formazione
+### Reddito di dignità pugliese - ReD
+Il Reddito di Dignità regionale è una misura di integrazione del reddito "universalistica", a cui cioè possono accedere tutte le persone che si trovino in difficoltà economiche e in condizioni di fragilità sociale tali, anche temporanee, da essere al di sotto delle condizioni minime per una esistenza almeno accettabile. Il Red è uno strumento di contrasto alla povertà assoluta e insieme di supporto a un percorso più ampio di inclusione sociale e di accesso a nuove opportunità di inserimento sociolavorativo.
+Lavoro e formazione
+[ Vai al servizio ](https://www.regione.puglia.it/web/welfare-diritti-e-cittadinanza/-/reddito-di-dignit%C3%A0-2023-aperti-i-termini-per-la-presentazione-delle-domande?redirect=%2Fweb%2Fwelfare-diritti-e-cittadinanza)
+Competitività, ricerca e innovazione
+### Autorizzazione Unica per impianti da energia rinnovabile
+Richiesta per la realizzazione di impianti di produzione di Energia da Fonti Rinnovabili
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/portal/page/portal/SistemaPuglia/AutorizzazioneUnica)
+Istituzione e partecipazione
+### Consultazione Comunicati Stampa della Giunta 
+Il servizio consente di visualizzare l'elenco dei comunicati stampa della Giunta regionale, presentati in ordine discendente di data pubblicazione. Per ciascun comunicato, vengono visualizzate le seguenti informazioni: - il titolo del comunicato; - la data e ora di pubblicazione del comunicato; - una breve anteprima del testo del comunicato. Cliccando sul titolo del comunicato o sul "leggi ancora", è possibile visualizzare i testo integrale del comunicato. 
+[ Vai al servizio ](https://press.regione.puglia.it/web/press-regione/elenco-notizie?p_r_p_categoryId=65972)
+Istituzione e partecipazione
+### Prossimi Appuntamenti e Conferenze Stampa
+Il servizio consente di visualizzare l'elenco dei prossimi appuntamenti e conferenze stampa della Regione, presentati in ordine discendente di data pubblicazione. Per ciascun evento in elenco, vengono visualizzate le seguenti informazioni: - il titolo dell'evento; - la data e ora di pubblicazione dell'evento; - una breve anteprima del testo dell'evento. Cliccando sul titolo dell'evento o sul "leggi ancora", è possibile visualizzare i testo integrale dell'evento. 
+[ Vai al servizio ](https://press.regione.puglia.it/web/press-regione/elenco-notizie?p_r_p_categoryId=65972)
+Istituzione e partecipazione
+### Consultazione Comunicati Sedute Giunta Regionale
+Il servizio consente di visualizzare l'elenco dei comunicati stampa delle sedute della Giunta regionale, presentati in ordine discendente di data pubblicazione. Per ciascun comunicato, vengono visualizzate le seguenti informazioni: - il titolo del comunicato; - la data e ora di pubblicazione del comunicato; - una breve anteprima del testo del comunicato. Cliccando sul titolo del comunicato o sul "leggi ancora", è possibile visualizzare i testo integrale del comunicato. 
+[ Vai al servizio ](https://press.regione.puglia.it/web/press-regione/elenco-notizie?p_r_p_categoryId=65972)
+Istituzione e partecipazione
+### Consultazione Registro Lobbying
+Il servizio consente la consultazione delle informazioni presenti nel Registro Pubblico della Regione Puglia relative ai rappresentati dei gruppi di interesse.
+Istituzione e partecipazione
+[ Vai al servizio ](https://lobbying.regione.puglia.it/ords/f?p=122:28:::NO:28::)
+Istituzione e partecipazione
+### Consultazione Resoconti della Giunta Regionale
+Il servizio consente la visualizzazione dei resoconti delle sedute della Giunta regionale. La pubblicazione dei resoconto è a cura del Segretario Generale della Giunta Regionale (art.13, com.4, Regolamento Regionale 29 settembre 2009, n.20). Il servizio visualizza per anno, il calendario delle sedute di Giunta. Per ciascuna seduta, visualizza la data di svolgimento della seduta e il numero di identificazione del resoconto. Cliccando sulla data della seduta è possibile visualizzare il file contenente il resoconto della seduta. 
+[ Vai al servizio ](http://segreteriagiunta.regione.puglia.it/web_pub_pubblico.nsf)
+Istituzione e partecipazione
+### Consultazione Comunicati Stampa del Presidente
+Il servizio consente di visualizzare l'elenco dei comunicati stampa del Presidente della Giunta regionale, presentati in ordine discendente di data pubblicazione. Per ciascun comunicato, vengono visualizzate le seguenti informazioni: - il titolo del comunicato; - la data e ora di pubblicazione del comunicato; - una breve anteprima del testo del comunicato. Cliccando sul titolo del comunicato o sul "leggi ancora", è possibile visualizzare i testo integrale del comunicato. 
+[ Vai al servizio ](https://press.regione.puglia.it/web/press-regione/elenco-notizie?p_r_p_categoryId=65972)
+Istituzione e partecipazione
+### Consultazione elenco delle sedute della Giunta regionale
+Il servizio consente di visualizzare l'elenco delle sedute di Giunta tenutesi nell'anno in corso. Per ciascuna seduta vengono visualizzate le seguenti informazioni: - la data della seduta; - la tipologia della seduta (ordinaria o straordinaria); - il numero di identificazione dell'ordine del giorno; - eventuali variazioni.
+[ Vai al servizio ](http://segreteriagiunta.regione.puglia.it/web_pub_pubblico.nsf)
+Lavoro e formazione
+### Richiedere Pass Laureati
+PASS LAUREATI" - Voucher per la formazione post universitaria, vuole sostenere i giovani pugliesi che, conseguita la laurea (di I o II livello o secondo le regole del vecchio ordinamento), intendono accrescere le proprie competenze, realizzando il perfezionamento professionale in un'area prescelta, attraverso la partecipazione ad un percorso di alta formazione. 
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/PassLaureati2018)
+Istituzione e partecipazione
+### Contatta la Redazione Press Regione
+Il servizio consente di inviare una richiesta alla redazione press della Regione. Il servizio prevede la compilazione di un apposito form contenente le seguenti informazioni: - il nome del soggetto richiedente; - il cognome; - l'indirizzo di posta elettronica; - il numero di telefono; - la città; - il motivo della richiesta (richiesta di informazioni/richiesta di accredito stampa/accreditamento AGR fax); - eventuali annotazioni; - un campo in cui inserire il codice captcha visualizzato.
+Istituzione e partecipazione
+[ Vai al servizio ](https://press.regione.puglia.it/)
+Lavoro e formazione
+### Piani Formativi Aziendali
+Contributi finanziari alle imprese per sostenere lo sviluppo delle competenze e l'aggiornamento professionale delle lavoratrici, dei lavoratori e degli imprenditori pugliesi.
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/pianiformativi2016)
+Salute, sport e buona vita
+### Fascicolo Sanitario Elettronico
+Il servizio consente di interrogare il Fascicolo Sanitario Elettronico o FSE, che è l’insieme dei dati e documenti digitali di tipo sanitario e socio-sanitario generati da eventi clinici presenti e trascorsi, riguardanti l’assistito del Servizio Sanitario Regionale pugliese
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/infofse)
+Competitività, ricerca e innovazione
+### TecnoNidi
+Iniziativa rivolta alle imprese di piccola dimensione che intendano avviare o realizzare piani di investimenti a contenuto tecnologico nel territorio della Regione Puglia.
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/tecnonidi)
+Lavoro e formazione
+### Accreditamento Servizi per il Lavoro
+Sistema indirizzato ai soggetti pubblici e privati del territorio che intendono entrare a far parte della rete dei Servizi per il lavoro
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/accreditamentoserlav)
+Istituzione e partecipazione
+### Consultazione Elenco Delibere di Giunta
+Il servizio visualizza l'elenco delle delibere approvate dalla Giunta regionale che soddisfano i criteri di ricerca specificati. Per ogni delibera, vengono visualizzati i seguenti dati: - il numero della delibera; - la data in cui è stata approvata la delibera; - l'oggetto della delibera; - la struttura regionale proponente.
+Istituzione e partecipazione
+[ Vai al servizio ](https://trasparenza.regione.puglia.it/provvedimenti/provvedimenti-organi-indirizzo-politico/provvedimenti-della-giunta-regionale)
+Istituzione e partecipazione
+### Consultazioni pubblicazioni varie del Segretariato Generale della Giunta Regionale
+Il servizio consente di visualizzare l'elenco delle pubblicazioni emesse dal Segretariato Generale della Giunta Regionale. Per ciascuna pubblicazione viene visualizzato il titolo della pubblicazione. Cliccando sul titolo è possibile inoltre visualizzare la data di emissione della pubblicazione, eventuali annotazioni alla pubblicazione e il contenuto del file contenente la pubblicazione. 
+[ Vai al servizio ](http://segreteriagiunta.regione.puglia.it/web_pub_pubblico.nsf)
+Lavoro e formazione
+### Ottenere il titolo di Maestro artigiano
+il titolo di "Maestro artigiano" è attribuito a coloro che siano titolari o siano stati titolari di imprese artigiane, regolarmente iscritte all'Albo provinciale o regionale delle imprese artigiane, ovvero ai soci di queste, purché partecipino o abbiano partecipato personalmente e professionalmente all'attività.
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/maestroartigiano)
+Competitività, ricerca e innovazione
+### Microprestito
+L'obiettivo della Misura è quello di finanziare imprese "non bancabili" che non hanno cioè i requisiti patrimoniali e finanziari per ottenere un finanziamento dal sistema bancario
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/microcredito)
+Lavoro e formazione
+###  Accreditamento organismi formativi
+Servizio indirizzato ai soggetti pubblici e privati del territorio che intendono organizzare e erogare attività formative, finanziate con risorse pubbliche basate su età, conoscenze e competenze.
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/AccreditamentoEntiFormazione)
+Competitività, ricerca e innovazione
+### PIA Medie Imprese
+Piani di Investimento che le Medie imprese possono realizzare investimenti in unità locali ubicate/da ubicare nel territorio della Regione Puglia 
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/piamedieimprese)
+Salute, sport e buona vita
+### Prenotazione con ricetta dematerializzata (accesso libero)
+Sistema di prenotazione delle prestazioni con ricetta dematerializzata che consente di prenotare le prestazioni erogate dalle strutture sanitarie regionali. 
+Salute, sport e buona vita
+[ Vai al servizio ](https://www.sanita.puglia.it/web/pugliasalute/prenotazione-ricetta-dematerializzata)
+Lavoro e formazione
+### Apprendistato professionalizzante
+Offerta formativa di base collegata ai contratti di apprendistato permanente
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/apprendistato)
+Competitività, ricerca e innovazione
+### PIA Turismo
+Piani di Investimento che le imprese del settore Turismo possono realizzare investimenti in unità locali ubicate/da ubicare nel territorio della Regione Puglia 
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/piaturismo)
+Lavoro e formazione
+### Garanzia giovani
+Programma Europeo per la lotta alla disoccupazione, indirizzato ai NEET fino ai 29 anni
+Lavoro e formazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/garanziagiovani)
+Competitività, ricerca e innovazione
+### Richiedere il contributo per l'acquisto di servizi per l'innovazione tecnologica, strategica, organizzativa e commerciale
+Richiedere il contributo per l'acquisto di servizi per l'innovazione tecnologica, strategica, organizzativa e commerciale
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/innoaidriapertura)
+Competitività, ricerca e innovazione
+### Titolo VI - Aiuti per la tutela dell'ambiente
+Aiuti per la tutela dell'ambiente
+Competitività e innovazione
+[ Vai al servizio ](www.sistema.puglia.it/SistemaPuglia/fondoefficientamentoenergetico)
+Istituzione e partecipazione
+### Consultazione Decreti del Presidente della Giunta Regionale
+Il servizio consente di visualizzare l'elenco dei decreti del Presidente della giunta regionale. Per ciascun decreto, vengono visualizzate le seguenti informazioni: - il numero del decreto; - la data di pubblicazione del decreto; - l'oggetto del decreto; Cliccando su uno qualsiasi dei campi in elenco, è inoltre possibile visualizzare la materia a cui fa riferimento il decreto e il file contenente il decreto. 
+Istituzione e partecipazione
+[ Vai al servizio ](https://trasparenza.regione.puglia.it/provvedimenti/provvedimenti-organi-indirizzo-politico/decreti-del-presidente-della-giunta)
+Istituzione e partecipazione
+### Iscrizione al Registro Lobbying
+Il servizio consente ad un rappresentante di un gruppo di interesse di inviare una richiesta di registrazione nel Registro Lobbying della Regione Puglia.
+Istituzione e partecipazione
+[ Vai al servizio ](https://lobbying.regione.puglia.it/ords/f?p=122:7)
+Salute, sport e buona vita
+### 118Sordi Puglia
+118Sordi Puglia è il sistema che consente ai Cittadini Sordi, o inabili a interloquire verbalmente, di accedere in autonomia al Servizio 118 della Regione Puglia tramite l’utilizzo dell’omonima APP 118Sordi.
+Salute, sport e buona vita
+[ Vai al servizio ](https://play.google.com/store/apps/details?id=it.ised.app118sordi)

@@ -1,0 +1,2004 @@
+SOURCE_STATUS: effective 2022-03-18 through 2026-08-05
+DECREE_ARTICLE_1: E' adottato il Piano di emergenza nazionale per il contrasto di Xylella fastidiosa (Well et al.) di cui all'allegato I parte integrante del presente decreto.
+DECREE_ARTICLE_2: Il decreto del Ministro delle politiche agricole alimentari e forestali 13 febbraio 2018, recante Misure di emergenza per la prevenzione, il controllo e l'eradicazione di Xylella fastidiosa (Well et al.) nel territorio della Repubblica italiana è abrogato.
+ENTRY_INTO_FORCE: Il presente decreto entra in vigore il giorno successivo alla sua pubblicazione nella Gazzetta Ufficiale della Repubblica italiana.
+
+SOURCE_URL: https://www.gazzettaufficiale.it/atto/serie_generale/caricaArticolo?art.codiceRedazionale=22A01653&art.dataPubblicazioneGazzetta=2022-03-17&art.flagTipoArticolo=1&art.idArticolo=1&art.idGruppo=0&art.idSottoArticolo=1&art.idSottoArticolo1=10&art.progressivo=0&art.versione=1
+
+(Allegato I)
+                                                           Allegato I 
+ 
+                    Piano di emergenza nazionale 
+        per il contrasto di Xylella fastidiosa (Well et al.) 
+ 
+INDICE 
+ 
+1. OBIETTIVI DEL PIANO .............................................. 
+2. CONTESTO NORMATIVO ............................................... 
+3. INFORMAZIONI SUL PATOGENO ........................................ 
+   3.1. Introduzione ................................................ 
+   3.2. Distribuzione geografica .................................... 
+   3.3. Ciclo vitale ................................................ 
+   3.4. Modalita' di diffusione ..................................... 
+   3.5. Vettori ..................................................... 
+   3.6. Piante ospiti ............................................... 
+   3.7. Sintomi e danni ............................................. 
+4. VALUTAZIONE DEL RISCHIO FITOSANITARIO ............................ 
+   4.1. Probabilita' di introduzione ................................ 
+   4.2. Probabilita' di insediamento ................................ 
+   4.3. Probabilita' di diffusione .................................. 
+   4.4. Modelli di diffusione potenziale ............................ 
+   4.5. Impatto sui settori produttivi .............................. 
+5. ATTIVITA' DI INDAGINE............................................. 
+   5.1. Sorveglianza del territorio ................................. 
+   5.2. Ispezioni e campionamento ................................... 
+   5.3. Monitoraggio dei vettori .................................... 
+   5.4. Diagnosi di laboratorio ..................................... 
+6. AZIONI UFFICIALI A SEGUITO DEL RITROVAMENTO DI XYLELLA FASTIDIOSA 
+   6.1. Dichiarazione di emergenza fitosanitaria .................... 
+   6.2. Comunicazione ufficiale ..................................... 
+   6.3. Indagine di tracciabilita' .................................. 
+   6.4. Indagine epidemiologica ..................................... 
+   6.5. Istituzione dell'area delimitata ............................ 
+   6.6. Attivita' di eradicazione ................................... 
+   6.7. Monitoraggio dell'area delimitata ........................... 
+   6.8. Controlli sulla movimentazione delle piante ................. 
+   6.9. Attivita' di sensibilizzazione .............................. 
+7. RUOLI E RESPONSABILITA' .......................................... 
+   7.1. Servizio  fitosanitario  centrale  e   Servizi   fitosanitari
+        regionali.................................................... 
+   7.2. Laboratori nazionali e di riferimento ....................... 
+8. RISORSE PER L'ATTUAZIONE DEL PIANO ............................... 
+9. FORMAZIONE DEL PERSONALE ......................................... 
+10. REVISIONE DEL PIANO DI EMERGENZA................................. 
+ 
+1. OBIETTIVI DEL PIANO 
+Il presente Piano di emergenza, predisposto ai sensi dell'art. 25 del
+Regolamento (UE) 2016/2031, individua le azioni da intraprendere  nel
+territorio nazionale in caso di presenza  sospetta  o  confermata  di
+Xylella fastidiosa. 
+La finalita' del Piano e' quella di individuare le risorse e definire
+i  compiti,  le  responsabilita'  e  le  modalita'   d'intervento   e
+coordinamento dei diversi livelli  istituzionali  responsabili  della
+prevenzione e delle attivita' di eradicazione, al fine di  assicurare
+un tempestivo ed efficace intervento nella gestione di una  emergenza
+fitosanitaria. 
+ 
+2. CONTESTO NORMATIVO 
+- Decreto legislativo 2 febbraio 2021, n. 19, recante  norme  per  la
+  protezione  delle  piante  dagli  organismi  nocivi  in  attuazione
+  dell'articolo  11  della  legge  4   ottobre   2019,   n.117,   per
+  l'adeguamento  della  normativa  nazionale  alle  disposizioni  del
+  Regolamento (UE) 2016/2031 e del Regolamento (UE) 2017/625. 
+- Decreto Ministeriale 6 giugno 2019, relativo alla definizione delle
+  aree indenni dall'organismo nocivo  Xylella  fastidiosa  (Wells  et
+  al.) nel territorio della Repubblica italiana. 
+- Regolamento (UE) 2016/2031 del Parlamento europeo e del  Consiglio,
+  del 26 ottobre 2016, relativo alle misure di protezione contro  gli
+  organismi nocivi per le piante, che modifica i regolamenti (UE)  n.
+  228/2013, (UE) n. 652/2014  e  (UE)  n.  1143/2014  del  Parlamento
+  europeo  e  del  Consiglio  e  abroga  le   direttive   69/464/CEE,
+  74/647/CEE,   93/85/CEE,   98/57/CE,   2000/29/CE,   2006/91/CE   e
+  2007/33/CE del Consiglio (regolamento del settore fitosanitario). 
+- Regolamento (UE) 2017/625 del Parlamento europeo e  del  Consiglio,
+  del 15 marzo 2017, relativo ai controlli  ufficiali  e  alle  altre
+  attivita' ufficiali effettuati per garantire  l'applicazione  della
+  legislazione sugli alimenti e sui mangimi, delle norme sulla salute
+  e sul benessere degli animali, sulla sanita' delle  piante  nonche'
+  sui prodotti fitosanitari, recante modifica dei regolamenti (CE) n.
+  999/2001, (CE) n. 396/2005, (CE) n. 1069/2009, (CE)  n.  1107/2009,
+  (UE) n. 1151/2012, (UE) n. 652/2014, (UE) 2016/429 e (UE) 2016/2031
+  del Parlamento europeo e del Consiglio,  dei  regolamenti  (CE)  n.
+  1/2005  e  (CE)  n.  1099/2009  del  Consiglio  e  delle  direttive
+  98/58/CE, 1999/74/CE, 2007/43/CE,  2008/119/CE  e  2008/120/CE  del
+  Consiglio, e che abroga i regolamenti (CE) n. 854/2004  e  (CE)  n.
+  882/2004 del Parlamento  europeo  e  del  Consiglio,  le  direttive
+  89/608/CEE, 89/662/CEE, 90/425/CEE, 91/496/CEE, 96/23/CE,  96/93/CE
+  e 97/78/CE del Consiglio e la decisione  92/438/CEE  del  Consiglio
+  (regolamento sui controlli ufficiali). 
+- Regolamento di esecuzione (UE) 2019/2072 della Commissione, del  28
+  novembre 2019, che stabilisce condizioni uniformi per  l'attuazione
+  del  regolamento  (UE)  2016/2031  del  Parlamento  europeo  e  del
+  Consiglio per quanto riguarda le misure di  protezione  contro  gli
+  organismi nocivi per le piante e che abroga il regolamento (CE)  n.
+  690/2008 della Commissione e modifica il regolamento di  esecuzione
+  (UE) 2018/2019 della Commissione. 
+- Regolamento di esecuzione (UE) 2020/1201 della Commissione, del  14
+  agosto 2020, relativo alle misure per prevenire l'introduzione e la
+  diffusione nell'Unione della Xylella fastidiosa (Wells et al.). 
+- Regolamento di esecuzione (UE) 2021/690 della Commissione,  del  28
+  aprile  2021  che  istituisce  il  programma  relativo  al  mercato
+  interno, alla competitivita' delle imprese, tra cui  le  piccole  e
+  medie imprese,  al  settore  delle  piante,  degli  animali,  degli
+  alimenti e dei mangimi e alle statistiche europee (programma per il
+  mercato unico) e che abroga i regolamenti (UE) n. 99/2013, (UE)  n.
+  1287/2013,  (UE)  n.  254/2014  e  (UE)  n.  652/2014  (regolamento
+  finanziario). 
+- Nota tecnica Mipaaf n.9240028 del 14/10/2020  -  Procedura  per  le
+  ispezioni ufficiali, campionamento e analisi  nei  vivai  ai  sensi
+  dell'articolo 25  del  Regolamento  (UE)  2020/1201  relativo  alle
+  misure per Xylella fastidiosa; 
+- Scheda tecnica Mipaaf-CREA: Procedura  di  indagine  nazionale  per
+  Xylella fastidiosa. 
+- EFSA  (European  Food  Safety  Authority),  2020.  Guidelines   for
+  statistically sound and risk-based surveys of  Xylella  fastidiosa.
+  EFSA supporting publication 2020: EN-1873. 
+- EFSA (European Food Safety Authority), 2019. Pest  survey  card  on
+  Xylella fastidiosa. EFSA supporting publication 2019: EN-1667. 
+- EFSA (European Food Safety Authority), 2020. Story map  for  survey
+  of Xylella fastidiosa. EFSA supporting publication  2020:  EN-1873.
+  Disponibile online: https://arcg.is/09m4r1. 
+- EFSA (European Food Safety Authority), 2018. Scientific  report  on
+  the update of the Xylella spp. host plant  database.  EFSA  Journal
+  2018;16(9):5408. 
+- EFSA (European Food Safety Authority), 2020. Scientific  report  on
+  the update of the Xylella spp. host  plant  database  -  systematic
+  literature search up to 30 June 2019. EFSA Journal 2020;18(4):6114. 
+- EFSA (European Food Safety Authority), 2019. Xylella  fastidiosa  -
+  Pest Report and  Datasheet  to  support  ranking  of  EU  candidate
+  priority pests. EFSA supporting publication 2020: EN-1660 
+- EFSA PLH Panel (EFSA  Panel  on  Plant  Health),  2015.  Scientific
+  Opinion on the risks to plant health posed by Xylella fastidiosa in
+  the EU territory, with the identification and  evaluation  of  risk
+  reduction options. EFSA Journal 2015;13(1):3989. 
+- EFSA PLH Panel (EFSA  Panel  on  Plant  Health),  2018.  Scientific
+  Opinion on the updated pest categorisation of  Xylella  fastidiosa.
+  EFSA Journal 2018;16(7):5357. 
+- EFSA PLH Panel (EFSA Panel on Plant Health), 2019.  Update  of  the
+  Scientific Opinion on the risks to plant health  posed  by  Xylella
+  fastidiosa in the EU territory. EFSA Journal 2019;17(5):5665. 
+- International Standard for Phytosanitary Measures N. 9.  Guidelines
+  for pest eradication programmes. Roma, IPPC, FAO. 
+- International Standard for Phytosanitary Measures N. 27. Diagnostic
+  protocols for regulated pests. DP (Diagnostic Protocol) 25: Xylella
+  fastidiosa. Roma, IPPC, FAO. 
+- International   Standard   for   Phytosanitary   Measures   N.   4.
+  Requirements for the establishment of pest free areas. Roma,  IPPC,
+  FAO. 
+- International Standard for Phytosanitary Measures N. 5. Glossary of
+  phytosanitary terms. Roma, IPPC, FAO. 
+- International Standard for Phytosanitary Measures N. 6.  Guidelines
+  for surveillance. Roma, IPPC, FAO. 
+- International  Standard   for   Phytosanitary   Measures   N.   10.
+  Requirements  for  the  establishment  of  pest  free   places   of
+  production and pest free production sites. Roma, IPPC, FAO. 
+- Standard EPPO PM 3/82 (1). Inspection of places of  production  for
+  Xylella fastidiosa. EPPO Bulletin, 46 (3). 
+- Standard  EPPO  PM  7/24  (4).  Diagnostic  standard  for   Xylella
+  fastidiosa. EPPO Bulletin, 49 (2). 
+- Standard EPPO PM 9/10 (1). Generic elements for contingency  plans.
+  EPPO Bulletin, 39. 
+- Pagina del sito web del Servizio fitosanitario nazionale su Xylella
+  fastidiosa:
+  https://www.protezionedellepiante.it/emergenze-fitosanitarie/xylell
+  a-fastidiosa/ 
+- Pagina  del  sito  web  della  Commissione   europea   su   Xylella
+  fastidiosa:
+  https://ec.europa.eu/food/plant/plant_health_biosecurity/legislatio
+  n/emergency measures/xylella-fastidiosa en. 
+- Sito   web    Regione    Puglia    su    Xylella    fastidiosa    -
+  www.emergenzaxylella.it. 
+- Sito    web    Regione    Toscana     su     Xylella     fastidiosa
+  https://www.regione.toscana.it/speciali/speciale-xylella/. 
+- Sito   web   Progetti   europei   H2020    Xf-Actors    e    POnTE:
+  https://www.xfactorsproject.eu/. 
+ 
+3. INFORMAZIONI SUL PATOGENO 
+ 
+3.1. Introduzione 
+Xylella  fastidiosa  e'  un  batterio   fitopatogeno   Gram-negativo,
+appartenente al phylum dei Proteobatteri, classe -proteobatteri,  cui
+afferiscono vari generi di  batteri  fitopatogeni  noti  per  causare
+malattie in specie agrarie. Noto da circa 150 anni, X. fastidiosa  ha
+rappresentato una grave problematica fitosanitaria principalmente per
+le Americhe fino alla recente introduzione nel territorio nazionale e
+dell'Unione. 
+La gravita' delle malattie con cui il batterio si e' manifestato alla
+fine del 1880 in California su vite (Malattia di Pierce della  vite),
+alla fine degli anni '90 in  Brasile  su  agrumi  (Clorosi  variegata
+degli agrumi - CVC) e dal 2013  in  Puglia  su  olivo  (Disseccamento
+rapido dell'olivo), sono una evidenza del suo impatto disastroso  nei
+confronti di  diverse  colture  frutticole.  Inoltre,  X.  fastidiosa
+determina fenomeni di bruscatura  fogliare  su  una  vasta  gamma  di
+specie vegetali coltivate e spontanee. 
+La specie X. fastidiosa e' suddivisa  nelle  sottospecie  fastidiosa,
+multiplex e pauca, con l'inclusione di sandyi e morus nella subspecie
+fastidiosa. All'interno di  ciascuna  sottospecie,  i  ceppi  vengono
+ulteriormente  caratterizzati  in  Sequenza-Tipo  (ST),   determinati
+mediante l'analisi MLST (Multi Locus Sequence Typing). 
+X. fastidiosa presenta un'ampia gamma di ospiti vegetali sia in forma
+latente che associata a sintomi piu' o meno gravi. 
+In considerazione dell'elevato rischio fitosanitario,  X.  fastidiosa
+e' inclusa nella lista degli organismi nocivi di quarantena rilevanti
+per l'Unione europea  (Allegato  II  parte  B  del  Regolamento  (UE)
+2019/2072). Inoltre, la Commissione  europea  ha  emanato  specifiche
+misure  fitosanitarie  per  contrastarne  la  diffusione  nell'Unione
+(Regolamento (UE) 2020/1201). 
+Maggiori informazioni sui focolai nazionali di Xylella  fastidiosa  e
+sulla normativa in vigore possono essere reperite nel  sito  web  del
+Servizio fitosanitario nazionale. 
+ 
+3.2. Distribuzione geografica 
+Xylella  fastidiosa  e'  originaria  del  continente  americano.   In
+particolare, le  sottospecie  multiplex,  fastidiosa  e  sandyi  sono
+presenti nel nord America, mentre la sottospecie pauca e' diffusa nel
+sud-America. 
+In primo ritrovamento di X.  fastidiosa  nel  territorio  europeo  e'
+avvenuto in Italia, nel 2013; si tratta di un ceppo divergente  della
+sottospecie pauca associato al disseccamento rapido dell'olivo. 
+A partire dal 2015, X. fastidiosa e' stata individuata in Francia, in
+particolare in Corsica, nelle Provenza-Alpi-Costa Azzurra (PACA) e in
+Occitania; in queste  aree  sono  state  individuate  le  sottospecie
+multiplex, sandyi e pauca. La sottospecie maggiormente  rappresentata
+e' la multiplex, che colpisce varie specie della macchia mediterranea
+e ornamentali. 
+Il batterio e' stato segnalato anche in Spagna nel 2016, nelle  isole
+Baleari e nelle province di Madrid e di Alicante. Nelle isole Baleari
+sono state individuate le sottospecie fastidiosa, pauca e  multiplex,
+quest'ultima piu' diffusa delle altre sul territorio spagnolo. 
+Nel 2018, la presenza della sottospecie multiplex e' stata  segnalata
+per la prima volta in Portogallo (Porto)  e  in  Italia,  in  Toscana
+(Monte Argentario). In entrambi i  focolai,  sono  state  riscontrate
+popolazioni omogenee a carico di specie ornamentali e/o della macchia
+mediterranea. 
+Inoltre, X. fastidiosa subsp. fastidiosa e' stata segnalata nel  2013
+a Taiwan, su vite, nel 2014 in Iran, su vite e mandorlo, e  nel  2017
+-2018 in Israele, su mandorlo. 
+Nel 2021, la presenza della sottospecie multiplex e' stata  accertata
+nel comune di Canino nella regione Lazio. 
+Nella tabella riportata di seguito sono elencati per ciascun focolaio
+dell'Unione, l'anno della prima segnalazione,  la  sottospecie  e  la
+Sequenza-Tipo (ST) di X. fastidiosa. 
+ 
+====================================================================
+|  Paese   |    Focolaio    |Anno|    Subspecie e Sequenza-Tipo    |
++==========+================+====+=================================+
+|Italia    |Salento         |2013|pauca ST53                       |
++----------+----------------+----+---------------------------------+
+|Italia    |Monopoli        |2020|pauca ST53                       |
++----------+----------------+----+---------------------------------+
+|Italia    |Polignano a Mare|2020|pauca ST53                       |
++----------+----------------+----+---------------------------------+
+|Italia    |Canosa di Puglia|2020|pauca ST53                       |
++----------+----------------+----+---------------------------------+
+|Italia    |Monte Argentario|2018|multiplex ST87                   |
++----------+----------------+----+---------------------------------+
+|Italia    |Canino          |2021|multiplex ST87                   |
++----------+----------------+----+---------------------------------+
+|Francia   |Corsica         |2015|multiplex ST6 e ST7              |
++----------+----------------+----+---------------------------------+
+|Francia   |PACA            |2015|multiplex ST6 e ST7, pauca ST53  |
++----------+----------------+----+---------------------------------+
+|Francia   |Occitania       |2020|multiplex ST6 e ST7              |
++----------+----------------+----+---------------------------------+
+|          |                |    |fastidiosa ST1, multiplex ST7 e  |
+|Spagna    |Maiorca         |2016|ST81                             |
++----------+----------------+----+---------------------------------+
+|Spagna    |Minorca         |2017|multiplex ST81                   |
++----------+----------------+----+---------------------------------+
+|Spagna    |Ibiza           |2017|pauca ST80                       |
++----------+----------------+----+---------------------------------+
+|Spagna    |Alicante        |2017|multiplex ST6                    |
++----------+----------------+----+---------------------------------+
+|Spagna    |Madrid          |2018|multiplex ST6                    |
++----------+----------------+----+---------------------------------+
+|Portogallo|Porto           |2019|multiplex ST7                    |
++----------+----------------+----+---------------------------------+
+|Portogallo|Lisbona         |2021|indeterminata                    |
++----------+----------------+----+---------------------------------+
+|Portogallo|Algarve         |2021|indeterminata                    |
++----------+----------------+----+---------------------------------+
+ 
+La rappresentazione geografica della distribuzione  del  patogeno  in
+Europa e nel mondo e' rappresentata nella mappa riportata di seguito. 
+ 
+              Parte di provvedimento in formato grafico
+ 
+3.3. Ciclo vitale 
+Xylella  fastidiosa  colonizza   lo   xilema   dove   si   moltiplica
+diffondendosi   in   ampie   porzioni   della   pianta   ospite.   La
+colonizzazione dello xilema avviene grazie alla presenza di strutture
+filamentose (fimbrie) che permettono alle cellule  di  ancorarsi  fra
+loro nella  corrente  xilematica.  Il  batterio,  muovendosi  sia  in
+direzione acropeta che basipeta, puo' essere  rinvenuto  anche  nelle
+radici. 
+L'attiva colonizzazione dell'ospite  e  la  capacita'  delle  cellule
+batteriche di aggregarsi formando un biofilm  determina  l'occlusione
+dello xilema. A tale fenomeno concorre la produzione di tille e gomme
+da parte della pianta ospite come risposta di difesa,  compromettendo
+il trasporto linfatico della pianta e determinando l'insorgere  della
+malattia con sintomi riconducibili allo stress idrico. 
+La sorgente d'inculo primaria del  batterio  e'  rappresentata  dalle
+piante  infette  da  cui  X.  fastidiosa  si  propaga  essenzialmente
+attraverso insetti vettori, appartenenti alle famiglie  Aphrophoridae
+e Cicadellidae, che mediante il loro apparato pungente-succhiatore si
+nutrono della linfa che fluisce  nei  vasi  xilematici  delle  piante
+infette. La disseminazione a lunga distanza avviene, invece, mediante
+il materiale di propagazione o piante infette. 
+Il periodo di incubazione della malattia puo' variare da qualche mese
+ad oltre un  anno,  a  seconda  della  combinazione  subspecie/ospite
+vegetale,  come  evidenziato  attraverso  prove  di  inoculazione  in
+ambiente controllato: 
+• Xylella fastidiosa subsp. multiplex /Polygala myrtifolia: 3-4 mesi; 
+• Xylella fastidiosa subsp. pauca / Polygala myrtifolia > 6-9 mesi; 
+• Xylella fastidiosa subsp. pauca /olivo > 14 mesi. 
+ 
+3.4. Modalita' di diffusione 
+La diffusione di X. fastidiosa avviene tramite insetti vettori  e  la
+movimentazione,  per  fini  commerciali  e  non,  di   materiale   di
+propagazione infetto (piante, porzioni di piante e talee). I semi non
+rappresentano, invece, una via di trasmissione. 
+Il batterio, non  producendo  spore,  non  e'  infatti  in  grado  di
+diffondersi nell'ambiente in modo autonomo tramite correnti d'aria  o
+acqua/pioggia, ne' e' in grado di infettare le piante  per  contatto.
+In particolare, gli attrezzi di potatura e il contatto  con  le  mani
+degli operatori non rappresentano un rischio per la diffusione. 
+Gli  insetti  che  si  nutrono  di  fluidi  xilematici  (xilemomizi),
+appartenenti  all'ordine   Hemiptera,   sottordine   Auchenorrhyncha,
+infraordine  Cicadomorpha,  possono  essere  considerati   potenziali
+vettori. 
+Fra questi, solo alcuni possiedono le caratteristiche  biologiche  ed
+etologiche che li rendono effettivi vettori  di  Xylella  fastidiosa,
+quali  l'elevata  polifagia  e  l'ampia  distribuzione   nelle   aree
+geografiche interessate, nonche' una  preferenza  per  alcuni  ospiti
+vegetali  in  certi  periodi   dell'anno.   Inoltre,   ai   fini   di
+un'efficiente trasmissione, e' necessario che le  cellule  batteriche
+possano aderire e moltiplicarsi  all'interno  dell'apparato  boccale,
+sullo strato cuticolare, degradando la chitina. 
+Il vettore piu' importante in  Italia  e'  l'Aphrophoridae  Philaenus
+spumarius. Anche per le specie Neophilaenus  campestris  e  Philaenus
+italosignus  e'  stata  verificata  la  capacita'  di   acquisire   e
+trasmettere Xylella fastidiosa. 
+Gli insetti  vettori  si  spostano  attivamente  per  brevi  distanze
+(qualche  centinaio  di  metri)   ma   possono   essere   trasportati
+passivamente come  'autostoppisti'  (automezzi,  indumenti,  attrezzi
+agricoli, vento) su lunghe distanze. 
+La movimentazione di frutti, fiori recisi, e legname privo  di  parti
+verdi (per scopi diversi dalla propagazione  delle  piante),  seppure
+provenienti da piante infette, non sono invece considerati  fonti  di
+diffusione del batterio. 
+ 
+3.5. Vettori 
+L'EFSA, attraverso un lavoro di revisione bibliografica,  ha  mappato
+la presenza e  l'abbondanza  delle  specie  potenziali  vettrici  del
+batterio Xylella fastidiosa in Europa,  evidenziando  come  molte  di
+esse siano ben rappresentate in Europa ed abbiano un'ampia  gamma  di
+piante ospiti. 
+In  considerazione  del  suo  coinvolgimento  nei   diversi   focolai
+nell'Unione,  e  considerando  la  sua  comprovata   competenza   nel
+trasmettere il batterio, Philaenus spumarius e' ad  oggi  il  vettore
+accertato piu' diffuso e importante da tenere in considerazione nella
+sorveglianza del territorio. 
+P. spumarius, appartenente all'ordine degli Hemiptera,  superfamiglia
+Cercopoidea, famiglia Aphrophoridae, non e' mai stato considerato  un
+fitofago di importanza  agraria  in  Europa  prima  dell'introduzione
+della Xylella fastidiosa. Il nome comune 'sputacchina'  deriva  dalla
+protezione schiumosa tipica degli stadi preimmaginali. 
+La colorazione degli esemplari adulti e' estremamente variabile,  dal
+grigio  chiaro  al  nerastro,  sebbene  la  forma  piu'  tipica   sia
+giallo-verde con linee scure indistinte. 
+La specie e' ampiamente distribuita in tutte le regioni temperate  di
+Europa, Asia, Nord America e Nord Africa, dove si ritrova in svariati
+ambienti, come  prati,  terreni  incolti,  bordi  stradali,  rive  di
+ruscelli e fiumi, erbai, paludi, parchi, giardini e campi  coltivati,
+su centinaia di piante ospiti che vanno da piante erbacee ad arboree,
+compresi piante ornamentali, arbusti e conifere. 
+Lo svernamento  avviene  allo  stadio  di  uovo.  La  deposizione  si
+verifica alla fine dell'estate sulle stoppie, erbe, residui vegetali,
+crepe dei tronchi e nella lettiera di  foglie,  mentre  la  schiusura
+avviene nella primavera successiva. Le forme preimmaginali sono  poco
+mobili e si sviluppano, attraverso cinque  stadi,  essenzialmente  su
+specie erbacee. Gli adulti compaiono, generalmente, a  partire  dalla
+fine di aprile e terminano il loro ciclo vitale a fine autunno-inizio
+inverno. In presenza di inverni miti, alcuni esemplari adulti possono
+sopravvivere fino alla primavera successiva. 
+Le neanidi e le ninfe vivono all'interno della  'schiuma'  e  possono
+spostarsi attivamente solo su brevi distanze, da una  pianta  erbacea
+all'altra. Gli adulti alati  sono  dotati  di  maggiore  mobilita'  e
+possono spostarsi attivamente anche su specie arboree, come si evince
+dalla figura riportata di seguito. 
+ 
+              Parte di provvedimento in formato grafico
+ 
+Le altre due specie per cui  e'  stata  verificata  la  capacita'  di
+acquisire e trasmettere Xylella fastidiosa  subsp.  pauca  ST53  sono
+Neophilaenus campestris e Philaenus italosignus.  Studi  condotti  in
+Puglia hanno dimostrato la presenza  delle  due  specie  in  ambienti
+olivicoli con densita' minore rispetto a  P.  spumarius.  Per  quanto
+riguarda P. italosignus e' inoltre conosciuta la relazione delle  sue
+forme preimmaginali con Asphodelus sp. 
+Il campionamento dei vettori  dovrebbe  essere  pertanto  adattato  a
+ciascun caso,  dopo  aver  identificato  i  diversi  fattori  (specie
+ospiti, vettore, ceppo batterico) che contribuiscono  allo  specifico
+patosistema. 
+Gli insetti vettori di Xylella fastidiosa sono caratterizzati  da  un
+apparato boccale pungente succhiante con il quale si alimentano della
+linfa che fluisce nei vasi xilematici  delle  piante.  Attraverso  la
+suzione della linfa il vettore acquisisce il batterio presente  nelle
+piante  infette,  localizzato  nei  vasi   xilematici.   Le   cellule
+batteriche cosi' assunte, si fissano alle pareti del tratto  iniziale
+del canale  alimentare  (pre-cibario)  dove  si  moltiplicano,  senza
+infettare sistemicamente il corpo dell'insetto. 
+Gli individui che acquisiscono il batterio lo  trasmettono  a  piante
+sane con l'immissione di saliva nei tessuti,  la  quale  viene  fatta
+fuoriuscire prima della suzione della linfa, determinando il rilascio
+di  cellule  batteriche   dal   pre-cibario.   Essendo   di   origine
+ectodermica, le pareti del pre-cibario sono rinnovate ad  ogni  muta.
+Cio' comporta che le forme giovanili, in  caso  di  acquisizione  del
+batterio, perdono la  capacita'  infettiva  durante  ogni  muta.  Gli
+adulti, invece,  non  compiendo  la  muta,  una  volta  acquisito  il
+batterio possono trasmetterlo in modo persistente. Tuttavia,  essendo
+la diffusione del batterio nell'insetto di tipo non  sistemico,  esso
+non viene trasmesso alla progenie. 
+ 
+3.6. Piante ospiti 
+Gli  ospiti  di  Xylella  fastidiosa  ricadono  in  dieci  principali
+famiglie:  Asteraceae,  Fabaceae,  Fagaceae,   Lamiaceae,   Oleaceae,
+Poaceae, Rosaceae, Rubiaceae, Rutaceae, Vitaceae. Xylella e'  infatti
+un batterio polifago e le  diverse  specie  ospiti  possono  svolgere
+ruoli diversi nell'epidemiologia, come ad esempio le piante serbatoio
+asintomatiche. 
+Il rapporto EFSA 2020 riporta l'elenco aggiornato delle piante ospiti
+conosciute di Xylella fastidiosa. In particolare, sono riportate  595
+specie vegetali, 275 generi e 85 famiglie, con un totale di 37 specie
+vegetali in piu' rispetto al rapporto EFSA del 2018. 
+Il Regolamento di esecuzione (UE) 2020/1201 relativo alle misure  per
+prevenire  l'introduzione  e  la  diffusione  nell'Unione  della   X.
+fastidiosa, riporta le  liste  degli  ospiti  vegetali,  facendo  una
+distinzione fra «piante ospiti» (allegato I) e  «piante  specificate»
+(allegato II). 
+Nello specifico, si definiscono come «piante  ospiti»  le  piante  da
+impianto, escluse le sementi, appartenenti ai generi  o  alle  specie
+vegetali risultate infette da X. fastidiosa nel mondo e come  «piante
+specificate» le piante ospiti risultate infette  da  una  particolare
+sottospecie. 
+Ciascuna sottospecie di X. fastidiosa presenta una diversa  gamma  di
+ospiti vegetali. In particolare, il  rapporto  EFSA  riporta  che  la
+sottospecie fastidiosa e' stata identificata  su  45  diverse  specie
+vegetali, fra le quali si annoverano la vite (malattia di Pierce), il
+pesco (Mal del pennacchio),  l'erba  medica  (Nanismo)  e  il  caffe'
+(Bruscatura fogliare). La  sottospecie  multiplex  presenta  un'ampia
+gamma di specie ospiti, essendo  stata  individuata  in  147  diverse
+specie vegetali, fra le quali numerose specie  arboree,  arbustive  e
+ornamentali,  nelle  quali  determina   frequentemente   sintomi   di
+bruscatura fogliare. La sottopecie pauca infetta 47 specie  vegetali,
+fra le quali l'olivo  (Disseccamento  rapido),  gli  agrumi  (Clorosi
+variegata)  e  il  caffe'  (Bruscatura  fogliare,  "crespera"   delle
+foglie). 
+Le subspecie sandyi e morus presentano una gamma d'ospite molto  piu'
+ristretta: sono rispettivamente 7 le specie  vegetali  colpite  dalla
+sottospecie sandyi (fra cui oleandro, caffe', polygala)  e  4  specie
+(principalmente del genere Morus) dalla sottospecie morus. 
+L'elenco delle piante ospiti identificate sul territorio nazionale e'
+riportato nel paragrafo 3.7.2. 
+ 
+3.7. Sintomi e danni 
+Le  infezioni  di  Xylella  fastidiosa  si  caratterizzano   per   la
+diversita'  delle  manifestazioni  sintomatologiche  che  determinano
+sulle specie ospiti (tipologia ed intensita' delle alterazioni, tempi
+di latenza, incidenza ed evoluzione sulle piante infette). 
+Nonostante Xylella fastidiosa sia uno degli agenti fitopatogeni  piu'
+temibili, si sottolinea come nella maggior parte delle specie  ospiti
+le  infezioni  non  danno  origine  ad  alterazioni  sintomatologiche
+importanti, restando nella forma di  infezioni  latenti  in  numerose
+specie. Di contro, le infezioni  in  alcune  specie  perenni  ed,  in
+particolare, in alcune specie di interesse agrario come vite, agrumi,
+drupacee ed olivo possono essere tanto  gravi  da  compromettere  non
+solo la produttivita' degli impianti ma anche la sopravvivenza  delle
+stesse piante infette. 
+Poiche'  il  batterio  colonizza  lentamente  le  piante  ospiti,  le
+infezioni sono  generalmente  poco  rilevanti  e  rare  sulle  specie
+annuali. Nelle specie perenni, invece, il batterio ha il  tempo,  col
+passare degli anni, di colonizzare il sistema vascolare riuscendo  ad
+invadere l'intera pianta ospite o porzioni di essa. 
+Il  batterio  invadendo  i   vasi   xilematici   ne   pregiudica   la
+funzionalita', alterando il trasporto di nutrienti minerali e acqua e
+creando   delle   vere   e   proprie   occlusioni.   Le   alterazioni
+sintomatologiche dipendono dalla combinazione specie ospite/ceppo  di
+Xylella fastidiosa e possono essere piu' o meno severe a seconda: (i)
+del  numero  e  della  struttura  anatomica  (dimensione,  indici  di
+aggregazione,  etc.)  dei  vasi  colonizzati;  (ii)  della   risposta
+immunitaria della pianta ospite, in quanto la produzione di  tillosi,
+cellulosa e lignina puo'  determinare  un  aumento  delle  occlusioni
+vascolari;  (iii)  della  patogenicita'  del  ceppo,  correlata,   ad
+esempio, alla quantita' di biofilm prodotto. 
+Il risultato dell'occlusione dei vasi determina la tipica  bruscatura
+fogliare  (leaf   scorch),   l'appassimento,   l'avvizzimento   e   i
+disseccamenti di porzioni di branche. 
+Le bruscature fogliari interessano le foglie mature e cosi' come  gli
+altri sintomi sopra citati,  compaiono  tipicamente  in  estate/tarda
+estate,   quando   le   temperature   sono   piu'   favorevoli   alla
+moltiplicazione del batterio, il quale, successivamente alla  ripresa
+vegetativa primaverile, ha avuto il tempo necessario per  colonizzare
+la nuova vegetazione. A differenza delle specie a foglia caduca,  per
+le  quali  raramente  si  possono  osservare  sintomi   nel   periodo
+primaverile (ed  ovviamente  nel  periodo  invernale),  nelle  specie
+sempreverdi i sintomi possono  persistere  sulle  piante  per  lunghi
+periodi dell'anno,  e,  come  accade  per  l'olivo  nelle  condizioni
+pedo-climatiche  pugliesi,  accentuarsi  in  relazione  agli   stress
+abiotici (siccita' e stress da freddo). 
+ 
+3.7.1. Sintomatologia principale 
+ 
+Malattia di Pierce. 
+La Malattia di Pierce e' una delle malattie  piu'  gravi  causate  da
+Xylella fastidiosa sottospecie fastidiosa. E' diffusa  in  tutti  gli
+Stati  Uniti  (USA)  dove  ha  causato  ingenti  danni  all'industria
+vinicola ed il suo contenimento richiede  significativi  investimenti
+in programmi di controllo del vettore e delle specie alternative (es.
+piante  di  bordo,  infestanti),  nonche'  in  programmi  di  ricerca
+applicata per lo studio di soluzioni di controllo. 
+Si contraddistingue per la presenza  di  decolorazioni  e  bruscature
+fogliari, che possono essere confusi con alterazioni  determinate  da
+altri  patogeni  vascolari  o   da   stress   idrici,   associata   a
+disseccamento dei tralci e moria delle piante  di  vite.  Alterazioni
+piu' specifiche riguardano il  distacco  della  lamina  fogliare  dal
+picciolo,  che  resta  attaccato  al  tralcio,  e  la  lignificazione
+irregolare dei tralci. 
+ 
+Malattie su drupacee. 
+Diverse specie del genere Prunus sono suscettibili alle infezioni  di
+Xylella fastidiosa sottospecie multiplex. Infezioni su  Prunus,  come
+riscontrato in alcuni focolai europei, possono inoltre essere causate
+anche da un ceppo della sottospecie pauca (es. mandorli e ciliegio in
+Puglia), e da un ceppo della sottospecie fastidiosa (es.  ciliegio  e
+mandorlo a Maiorca). 
+Dopo la Malattia di Pierce,  la  Bruscatura  fogliare  del  mandorlo,
+detta  Almond  leaf  scorch,  e'  tra  le  malattie  piu'  diffuse  e
+conosciute. La Bruscatura fogliare si manifesta  nel  periodo  estivo
+interessando alcune  branche  delle  piante  infette  e  puo'  essere
+accompagnata da fenomeni di disseccamento delle branchette.  Mandorli
+infetti da  ceppi  della  sottospecie  multiplex  possono  sviluppare
+fenomeni di ingiallimento generalizzato della chioma, che puo' essere
+seguito da morte  della  stessa  pianta.  Tale  manifestazione  viene
+indicata come "golden death". Nel periodo primaverile le foglie  sono
+generalmente asintomatiche e nelle stesse il  batterio  risulta  poco
+concentrato o non rilevabile con le tecniche diagnostiche attualmente
+a disposizione. 
+Osservazioni pluriennali  su  ciliegi  infetti  dal  ceppo  di  pauca
+riscontrato in Puglia hanno evidenziato che la  bruscatura  interessa
+generalmente solo  alcune  branche  delle  piante,  comparendo  sulle
+stesse ogni anno  in  periodi  diversi,  tra  giugno  ed  agosto,  in
+relazione   probabilmente   all'andamento   climatico   invernale   e
+primaverile. Non sono stati osservati  fenomeni  di  disseccamenti  o
+altre particolari alterazioni. 
+Con riferimento ad altre specie di Prunus, quali susino e  pesco,  in
+letteratura sono  riportate  malattie  note  come:  Plum  leaf  scald
+(Scottatura delle foglie di susino - PLS) e Phony peach (Nanismo  del
+pesco). La Malattia su susino (PLS) e' riportata  prevalentemente  in
+Brasile dove e' associata a ceppi  della  sottospecie  multiplex.  La
+malattia ha un periodo di incubazione  molto  lungo  e  si  manifesta
+inizialmente con clorosi marginale delle foglie  che  poi  evolve  in
+necrosi dei tessuti fogliari, a cui si accompagna  disseccamento  dei
+rami ed in alcuni casi morte della pianta. 
+ 
+Nanismo del pesco. 
+E' una  sindrome  associata  a  ceppi  della  sottospecie  multiplex,
+riportata nei Paesi della costa est degli Stati Uniti. Gli alberi  di
+pesco infetti hanno una vegetazione piu' stentata, la  chioma  appare
+piu' compatta (germogli con  internodi  raccorciati)  e  densa  (piu'
+frondosa) di quella  degli  alberi  sani.  Foglie  e  fiori  appaiono
+precocemente e persistono per un periodo piu' lungo. Con  il  passare
+del tempo la produttivita' delle piante infette si riduce,  anche  in
+termini di pezzatura  dei  frutti,  sino  a  divenire  economicamente
+improduttivi nel giro di 3-5 anni. I frutti possono anche essere piu'
+colorati  e  spesso  maturano  qualche  giorno  prima  del   normale.
+Diversamente da quanto accade per altre specie,  sulle  foglie  degli
+alberi  di  pesco  infetti  non  si  sviluppa  la  tipica  bruscatura
+fogliare. 
+ 
+Clorosi variegata degli agrumi. 
+Le infezioni su agrumi  sono  associate  a  ceppi  della  sottospecie
+pauca. Si evidenzia, tuttavia, che il ceppo di pauca ST53 riscontrato
+in Puglia non e' in grado di infettare gli agrumi. I  sintomi  tipici
+sono caratterizzati da clorosi fogliare (assimilabile ad una  carenza
+di zinco) ed aree clorotiche  tra  le  nervature,  che  nella  pagina
+inferiore evolvono in lesioni di  consistenza  gommosa  e  di  colore
+marrone chiaro (che  diventano  poi  piu'  scure  e  necrotiche).  La
+clorosi  puo'  essere  generalizzata   se   si   tratta   di   piante
+relativamente giovani, mentre puo' interessare settorialmente  alcune
+branche della chioma sulle piante  piu'  adulte.  Le  piante  infette
+presentano uno sviluppo irregolare e una crescita rallentata, con  la
+presenza di disseccamenti che possono  interessare  rami  e  branche,
+senza portare alla morte delle piante. I frutti  sono  piu'  piccoli,
+con una buccia coriacea e un piu' elevato contenuto in zuccheri. 
+ 
+Sintomatologie su specie forestali e ornamentali. 
+Le infezioni di Xylella fastidiosa su  diverse  specie  di  interesse
+forestale (es. querce, olmo, etc.)  sono  note  come  Bacterial  leaf
+scorch - BLS, per le tipiche bruscature  fogliari  che  si  osservano
+sulle piante infette. Cosi' come per le specie arboree  di  interesse
+agrario, le infezioni sulle specie  di  interesse  forestale  possono
+aggravarsi anno dopo anno, determinando l'insorgenza di  fenomeni  di
+disseccamento che possono portare alla morte  delle  piante  (ad  es.
+Acacia saligna). 
+Per quanto riguarda le ornamentali, le  infezioni  sintomatiche  sono
+caratterizzate essenzialmente da bruscatura fogliare e  disseccamenti
+a chiazze  nelle  specie  arbustive.  Alcune  specie  ornamentali  di
+interesse commerciale, come  Lavandula  dentata,  Nerium  oleander  e
+Polygala myrtifolia, sono risultate suscettibili a diverse  subspecie
+di X. fastidiosa nell'Unione. 
+ 
+Disseccamento rapido dell'olivo. 
+E' tra le malattie piu' gravi causate da  Xylella  fastidiosa  sinora
+descritte. Le manifestazioni iniziali consistono  nella  comparsa  di
+fenomeni  di  clorosi  e  avvizzimento  fogliare  su  alcune  branche
+(generalmente nella parte alta  della  chioma).  Successivamente,  le
+branche vengono interessate rapidamente da fenomeni di disseccamento,
+con le foglie che seccano completamente (spesso  accartocciate  lungo
+la nervatura centrale  verso  la  pagina  inferiore)  e  che  restano
+attaccate ai rami, anch'essi disseccati, per  lungo  tempo,  sino  ad
+eventuali eventi atmosferici che ne  determinano  il  distacco  e  la
+caduta. 
+I fenomeni di disseccamento compaiono in diversi  periodi  dell'anno,
+frequentemente in conseguenza al verificarsi di altri stress abiotici
+(alte temperature estive accompagnate da  stress  idrico,  oppure  al
+contrario  danni  da  freddo   e   gelate   invernali).   Nel   corso
+dell'evoluzione delle infezioni i disseccamenti  possono  rapidamente
+estendersi da poche branche, soprattutto negli alberi delle  cultivar
+suscettibili, sino ad interessare e compromettere l'intera chioma  e,
+conseguentemente,  la  produttivita'  e  sopravvivenza  delle  piante
+infette che, a seconda delle condizioni pedo-climatiche e  dell'eta',
+risultano gravemente compromesse nel giro di  2-3  anni.  Oltre  alla
+severita'  dei  disseccamenti,  a  destare  preoccupazione  e'  anche
+l'elevata  incidenza,  all'interno  degli   oliveti   colpiti   dalle
+infezioni, di piante interessate dai fenomeni di disseccamento. 
+Nel caso degli alberi delle  cultivar  con  caratteri  di  resistenza
+(come ad es. Leccino e FS17), dalle osservazioni  sinora  effettuate,
+emerge che la sintomatologia e' significativamente meno grave, con la
+comparsa di  lievi  disseccamenti  generalmente  limitati  a  piccole
+branchette, e che generalmente non  evolvono  in  fenomeni  gravi  di
+disseccamento rapido tali da  compromettere  la  sopravvivenza  e  la
+produttivita' delle stesse piante. 
+ 
+3.7.2. Sintomatologia rilevata in Italia 
+Di seguito e' riportata la lista delle specie ospiti  suscettibili  a
+Xylella  fastidiosa  subsp.  pauca  ST53  e  la   descrizione   della
+sintomatologia riscontrata sulle  piante  infette  in  condizioni  di
+infezioni naturali in Puglia. 
+ 
+=====================================================================
+|      Specie       |                    Sintomi                    |
++===================+===============================================+
+|Acacia saligna     |Gravi disseccamenti                            |
++-------------------+-----------------------------------------------+
+|Amarantus          |                                               |
+|retroflexus        |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Asparagus          |                                               |
+|acutifolius        |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Catharantus sp.    |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Chenopodium album  |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Cistus creticus    |Bruscature fogliari e disseccamento            |
++-------------------+-----------------------------------------------+
+|Dimorphoteca       |                                               |
+|fruticosa          |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Dodonaea viscosa   |                                               |
+|purpurea           |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Eremophila maculata|Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Erigeron           |                                               |
+|bonariensis        |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Erigeron           |                                               |
+|sumatrensis        |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Euphorbia terracina|Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Grevillea          |                                               |
+|juniperina         |Bruscature fogliari                            |
++-------------------+-----------------------------------------------+
+|Hebe sp.           |Bruscature fogliari                            |
++-------------------+-----------------------------------------------+
+|Heliotropium       |                                               |
+|europaeum          |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Laurus nobilis     |Bruscature fogliari                            |
++-------------------+-----------------------------------------------+
+|Lavandula          |Bruscature fogliari, seguite da disseccamento  |
+|angustifolia       |di rami e di porzioni dell'arbusto             |
++-------------------+-----------------------------------------------+
+|                   |Bruscature fogliari, seguite da disseccamento  |
+|Lavandula stoechas |di rami e di porzioni dell'arbusto             |
++-------------------+-----------------------------------------------+
+|  Myoporum insulare|Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Myrtus communis    |Ingiallimento generalizzato                    |
++-------------------+-----------------------------------------------+
+|                   |Bruscature fogliari (parallele alla nervatura  |
+|                   |principale), seguita da disseccamento di rami e|
+|Nerium oleander    |di intere porzioni dell'arbusto.               |
++-------------------+-----------------------------------------------+
+|                   |Clorosi e avvizzimento fogliare su alcune      |
+|                   |branche, seguiti da disseccamento di rami e di |
+|                   |intere porzioni della chioma. In alcuni casi   |
+|                   |soprattutto sui nuovi getti (succhioni) possono|
+|                   |essere visibili sintomi di bruscatura fogliare.|
+|                   |Alcune varieta' di olivo restano asintomatiche |
+|Olea europaea      |o sviluppano sintomi lievi (Leccino, FS17).    |
++-------------------+-----------------------------------------------+
+|Pelargonium x      |                                               |
+|fragrans           |Disseccamento dei germogli                     |
++-------------------+-----------------------------------------------+
+|Phillyrea latifolia|Bruscature fogliari                            |
++-------------------+-----------------------------------------------+
+|Pistacia vera      |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|                   |Bruscature fogliari, seguita da disseccamento  |
+|Polygala myrtifolia|di rami e di intere porzioni dell'arbusto      |
++-------------------+-----------------------------------------------+
+|Prunus avium       |Bruscature fogliari                            |
++-------------------+-----------------------------------------------+
+|Prunus dulcis      |Bruscature fogliari                            |
++-------------------+-----------------------------------------------+
+|Rhamnus alaternus  |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|                   |Bruscature fogliari, ingiallimenti, seguiti da |
+|Rosmarinus         |disseccamento di rami e di intere porzioni     |
+|officinalis        |dell'arbusto                                   |
++-------------------+-----------------------------------------------+
+|Spartium junceum   |Disseccamento dei rami e dell'intera pianta    |
++-------------------+-----------------------------------------------+
+|Vinca sp.          |Sintomi non rilevati                           |
++-------------------+-----------------------------------------------+
+|Westringia         |Bruscature fogliari, seguita da disseccamento  |
+|fruticosa          |di rami e di intere porzioni dell'arbusto      |
++-------------------+-----------------------------------------------+
+ 
+ 
+Lista delle specie ospiti suscettibili a  Xylella  fastidiosa  subsp.
+multiplex ST87 e  la  descrizione  della  sintomatologia  riscontrata
+sulle piante infette in condizioni di infezioni naturali in Toscana 
+ 
+ 
+=====================================================================
+|    Specie     |                      Sintomi                      |
++===============+===================================================+
+|Acacia dealbata|Ingiallimento diffuso con gravi disseccamenti      |
++---------------+---------------------------------------------------+
+|Asparagus      |                                                   |
+|acutifolius    |Asintomatica                                       |
++---------------+---------------------------------------------------+
+|Calicotome     |                                                   |
+|villosa        |Disseccamenti di rami e di porzioni dell'arbusto   |
++---------------+---------------------------------------------------+
+|Cercis         |                                                   |
+|siliquastrum   |Asintomatica                                       |
++---------------+---------------------------------------------------+
+|Cistus creticus|                                                   |
+|e monspeliensis|Disseccamenti di rami e di porzioni dell'arbusto   |
++---------------+---------------------------------------------------+
+|Cytisus        |                                                   |
+|scoparius      |Asintomatica                                       |
++---------------+---------------------------------------------------+
+|Eleagnus       |                                                   |
+|angustifolia   |Asintomatica                                       |
++---------------+---------------------------------------------------+
+|Ficus carica   |Asintomatica                                       |
++---------------+---------------------------------------------------+
+|Helichrysum    |                                                   |
+|italicum       |Disseccamenti di rami e di porzioni dell'arbusto   |
++---------------+---------------------------------------------------+
+|               |Bruscature fogliari (parallele alla nervatura      |
+|Laurus nobilis |principale)                                        |
++---------------+---------------------------------------------------+
+|Lavandula sp.  |Disseccamenti di rami e di porzioni dell'arbusto   |
++---------------+---------------------------------------------------+
+|Lonicera sp.   |Asintomatica                                       |
++---------------+---------------------------------------------------+
+|Myrtus communis|Ingiallimento generalizzato                        |
++---------------+---------------------------------------------------+
+|               |Bruscature fogliari (parallele alla nervatura      |
+|Nerium oleander|principale)                                        |
++---------------+---------------------------------------------------+
+|Phagnalon      |                                                   |
+|saxatile       |Disseccamenti di rami e di porzioni dell'arbusto   |
++---------------+---------------------------------------------------+
+|Polygala       |                                                   |
+|myrtifolia     |Bruscature fogliari                                |
++---------------+---------------------------------------------------+
+|Prunus         |Bruscature fogliari, seguite da disseccamento di   |
+|amygdalus      |rami e di porzioni dell'albero                     |
++---------------+---------------------------------------------------+
+|               |Asintomatico o ingiallimento fogliare di alcuni    |
+|Rhamnus        |rami con successivo disseccamento che poi si       |
+|alaternus      |diffonde a altre porzioni dell'arbusto             |
++---------------+---------------------------------------------------+
+|Rosmarinus     |Avvizzimento progressivo di un ramo che si diffonde|
+|officinalis    |poi all'intera pianta disseccandola completamente  |
++---------------+---------------------------------------------------+
+|Spartium       |                                                   |
+|junceum        |Disseccamenti di rami e di porzioni dell'arbusto   |
++---------------+---------------------------------------------------+
+ 
+ 
+3.7.3. Criticita' dei rilievi sintomatologici 
+Le infezioni causate da Xylella  fastidiosa  determinano  alterazioni
+nella funzionalita' del sistema vascolare delle piante  e  comportano
+insorgenza  di  sintomi  aspecifici,  come  descritto  nei  paragrafi
+precedenti, analoghi  a  quelli  causati  da  patogeni  vascolari  di
+diversa origine (virale,  fungina)  o  da  diversi  fattori  abiotici
+(stress ambientali, carenze idriche, inquinanti atmosferici, problemi
+nutrizionali,  scottature  solari).  Questo  rappresenta  un  fattore
+critico nei rilievi visivi per l'identificazione della malattia. 
+Il lungo periodo di latenza  che  intercorre  tra  l'infezione  e  la
+comparsa dei sintomi rappresenta un ulteriore fattore  di  criticita'
+nella diagnosi di  X.  fastidiosa,  influenzando  significatamene  la
+possibilita' di una intercettazione precoce delle  infezioni  tramite
+le   sole   ispezioni   visive.   Il   periodo   asintomatico   varia
+significativamente in conseguenza dei molteplici  processi  biologici
+coinvolti nell'interazione ospite/sottospecie/ambiente. 
+Anche il portainnesto rappresenta un'ulteriore variabile  che  incide
+sulla comparsa e severita' dei sintomi. Inoltre, all'interno  di  una
+specie vegetale si puo' osservare una diversa  suscettibilita'  delle
+cultivar. Per esempio, nel caso dell'olivo, alcune varieta' (Leccino,
+FS-17) possono restare asintomatiche o sviluppare sintomi piu'  lievi
+rispetto  a  varieta'  altamente  suscettibili  (ad   es.   Ogliarola
+salentina). 
+Negli ultimi anni sono stati messi a  punto  nuovi  approcci  per  il
+rilevamento remoto (remote sensing)  delle  alterazioni  fisiologiche
+indotte da  Xylella  fastidiosa,  con  lo  scopo  di  individuare  la
+presenza di infezioni in corso, quando  i  sintomi  non  sono  ancora
+rilevabili con un'ispezione visiva. Tuttavia,  un  limite  di  queste
+tecniche e' la specificita'  delle  alterazioni  rilevate,  ossia  la
+possibilita' di poter discriminare tra le alterazioni determinate  da
+Xylella fastidiosa e  quelle  indotte  da  altri  fattori  biotici  e
+abiotici. Nell'ottica di migliorarne  la  specificita',  recentemente
+uno studio su olivi e  mandorli  infetti  da  Xylella  fastidiosa  ha
+permesso di identificare le firme spettrali specifiche di  piante  di
+olivo e mandorlo infette da  Xylella  fastidiosa,  distinguendole  da
+quelle indotte da  stress  idrico  o  da  infezioni  di  Verticillium
+dahliae,  ottenendo  una  precisione  di  rilevamento  dell'infezione
+batterica superiore al 92%. Questi studi aprono  quindi  a  possibili
+future applicazioni  pratiche  di  questi  approcci  in  supporto  ai
+programmi di sorveglianza del territorio. 
+Al fine di  superare  le  criticita'  rappresentate  dal  periodo  di
+latenza e l'assenza di sintomi, il Regolamento (UE) 2020/1201 prevede
+la realizzazione di indagini  statisticamente  valide  e  basate  sul
+rischio, che  si  fondano  sul  prelievo  di  campioni  vegetali  per
+l'analisi di laboratorio. 
+ 
+4. VALUTAZIONE DEL RISCHIO FITOSANITARIO 
+ 
+4.1. Probabilita' di introduzione 
+La principale via  di  introduzione  del  batterio  e'  rappresentata
+dall'importazione e movimentazione di materiale  di  propagazione  di
+specie sensibili a Xylella fastidiosa (con l'esclusione dei  semi)  e
+di insetti vettori infetti provenienti  dalle  aree  nelle  quali  e'
+presente l'organismo nocivo. 
+I principali fattori di rischio  identificati  dall'EFSA  per  quanto
+concerne l'introduzione, l'insediamento e la  diffusione  di  Xylella
+fastidiosa nell'Unione europea sono di seguito riportati. 
+ 
+Movimentazione di piante e prodotti vegetali 
+I principali canali di ingresso del batterio sono  rappresentati  dal
+commercio e dalla movimentazione di piante da impianto con esclusione
+delle sementi. Questi impatti sono  comunque  mitigati  dalle  misure
+fitosanitarie poste in essere per  l'importazione,  e  movimentazione
+dei vegetali sensibili e sulle specie ospiti. Nello specifico: 
+- l'introduzione dell'organismo nocivo sul territorio e'  considerata
+  molto probabile per le piante da impianto  di  specie  ospiti,  che
+  possono risultare spesso asintomatiche. Xylella fastidiosa annovera
+  un elevato numero di piante ospiti e la movimentazione di alcune di
+  esse avviene da Paesi dove e' presente il patogeno; 
+- la  possibilita'  di  trasferimento  ad  un  ospite  sensibile   e'
+  considerata molto probabile mediante  l'utilizzo  di  materiale  di
+  propagazione (portainnesti) o d'innesto (marze, gemme); 
+- la capacita' del batterio di sopravvivere durante il  trasporto  e'
+  molto  elevata  e  la  probabilita'  di  resistere  ai  trattamenti
+  fitosanitari conosciuti e' molto probabile. Il solo trattamento con
+  acqua calda risulta efficace ma e' stato testato solo per la vite e
+  noce pecan; 
+- il rischio di introduzione di piante  importate  per  programmi  di
+  breeding o a scopo di ricerca puo'  essere  considerato  di  minore
+  entita', nel caso di piante attualmente  regolamentate,  oppure  si
+  puo' paragonare a quello riservato alle piante da impianto; 
+- in riferimento ai prodotti vegetali quali frutta,  fiori  recisi  e
+  fogliame  ornamentale,  la  probabilita'   d'introduzione   risulta
+  trascurabile; 
+- Il legname, se privato di tutte le parti verdi  della  pianta,  non
+  rappresenta una via di diffusione del batterio, in  quanto  non  e'
+  possibile l'alimentazione da parte degli insetti vettori. 
+ 
+Movimentazione di insetti vettori 
+Gli insetti vettori possono spostarsi  autonomamente  solo  su  brevi
+distanze, tuttavia la loro diffusione su lunghe distanze  puo'  avere
+luogo,  accidentalmente,  anche  mediante   il   trasporto   passivo,
+viaggiando insieme al materiale vegetale o su container  e  mezzi  di
+trasporto. 
+ 
+4.2. Probabilita' di insediamento 
+La probabilita' d'insediamento di X. fastidiosa e' considerata  molto
+elevata in considerazione dell'ampia distribuzione  e  polifagia  dei
+vettori, conosciuti  o  potenziali,  dell'elevato  numero  di  specie
+ospiti, nonche'  dell'elevata  capacita'  di  Xylella  fastidiosa  di
+adattarsi in condizioni climatiche avverse. Il batterio e' infatti in
+grado di svernare in  aree  con  temperature  invernali  anche  molto
+basse. 
+Sulla base degli studi condotti, ampie parti dell'UE risultano adatte
+al potenziale insediamento di Xylella fastidiosa,  escludendone  solo
+alcune aree situate ad alte altitudini e nei Paesi settentrionali. 
+Tenuto conto del clima e la  distribuzione  delle  specie  ospiti  si
+evidenzia che l'area  dell'Europa  meridionale  (Portogallo,  Spagna,
+Italia,  Francia  Grecia  e  Cipro)  risulta  ad  alto   rischio   di
+insediamento dell'organismo nocivo. 
+ 
+              Parte di provvedimento in formato grafico
+ 
+Rispetto  ad  altre  subspecie  di  Xylella  fastidiosa,  la   subsp.
+multiplex ha evidenziato  una  maggiore  capacita'  di  insediamento,
+interessando anche fasce di territorio piu'  a  nord  nel  continente
+europeo. 
+ 
+4.3. Probabilita' di diffusione 
+La diffusione naturale di Xylella fastidiosa puo' avvenire attraverso
+insetti vettori che generalmente  volano  a  brevi  distanze,  alcune
+centinaia di metri, ma e' possibile che siano trasportati dal vento a
+distanze maggiori. La diffusione accidentale del  materiale  vegetale
+infetto e dei vettori  mediante  mezzi  di  trasporto  devono  essere
+comunque prese in considerazione. 
+La movimentazione di materiale vegetale  infetto  e'  considerata  la
+forma  piu'  efficace  di  dispersione  a  lungo  raggio  di  Xylella
+fastidiosa, tenendo conto anche del  lungo  periodo  di  latenza  che
+consente alle piante infette  di  rimanere  asintomatiche  per  molto
+tempo. 
+Recentemente  uno  studio  dell'EFSA  ha  elaborato  un  modello   di
+diffusione a corto raggio, principalmente correlato alla  dispersione
+naturale del vettore, e un modello di diffusione a lungo  raggio  che
+include anche il fattore umano nella movimentazione. Ad  esempio,  il
+modello di diffusione a lungo raggio ha stimato una diffusione  media
+a breve distanza di circa 150 m all'anno e  una  diffusione  a  lunga
+distanza con una mediana di circa  10  km  all'anno.  Il  modello  di
+diffusione a corto raggio (che considera solo la  diffusione  locale)
+ha stimato che in  uno  scenario  di  elevata  suscettibilita'  delle
+piante e alta  densita'  di  popolazione  di  vettori,  il  tasso  di
+diffusione naturale della malattia e' di circa 1,5 km  dopo  5  anni,
+con un'accelerazione della diffusione dopo i primi due anni a seguito
+di una nuova infezione.  Il  tasso  di  diffusione  del  batterio  e'
+influenzato dalle caratteristiche  biologiche  che  intercorrono  tra
+Xylella  e  il  suo  vettore,   dalla   loro   abbondanza   e   dalla
+disponibilita'   di   piante   ospiti.   Incidono,    altresi',    la
+frammentazione  del  territorio,  fattori  ambientali  (vento)  e  il
+fattore umano (diffusione accidentale). 
+I modelli di diffusione a breve e lungo raggio  hanno  mostrato  come
+l'individuazione  tempestiva  dell'organismo  nocivo  e  una   rapida
+applicazione di misure  fitosanitarie,  che  consistono  tra  l'altro
+nella rimozione delle  piante  e  nel  controllo  dei  vettori,  sono
+essenziali per prevenire l'ulteriore diffusione del patogeno in nuove
+aree. 
+ 
+4.4. Modelli di diffusione potenziale 
+E' stato recentemente condotto uno studio per la messa a punto di  un
+modello di distribuzione potenziale di Xylella fastidiosa  (Bosso  et
+al.  2016)  in  grado  di  fornire  scenari  realistici  e   spiegare
+l'influenza di variabili bioclimatiche nel contesto  degli  organismi
+nocivi ai vegetali emergenti. 
+Sulla base dell'analisi delle variabili, il  modello  ha  evidenziato
+che Xylella fastidiosa ha un'elevata probabilita' di colonizzare aree
+caratterizzate  da:  a)  bassa  altitudine  (0-150  m   s.l.m.);   b)
+precipitazioni nei mesi piu' siccitosi <10 mm e  tra  80-110  mm  nei
+mesi piu' piovosi  e  durante  il  trimestre  piu'  caldo  <60mm;  c)
+temperature medie del trimestre piu' freddo = 8°C; d) aree rurali che
+includano  un'agricoltura  intensiva,  sistemi  colturali  complessi,
+oliveti, colture annuali associate a colture permanenti,  frutteti  e
+vigneti;  foreste  (essenzialmente   boschi   di   querce);   macchia
+mediterranea. 
+Cio'  premesso,  il  modello  di  distribuzione   ha   mostrato   una
+probabilita' significativa che Xylella  fastidiosa  possa  estendersi
+alle altre aree della regione Puglia e che abbia la potenzialita'  di
+infrangere le barriere attuali ed  estendersi  anche  ad  ampie  aree
+delle regioni Calabria, Basilicata, Sicilia,  Sardegna  e  alle  aree
+costiere delle regioni Campania, Lazio e Toscana. 
+A seguito dei recenti rinvenimenti in Francia si  considera  ad  alto
+rischio anche la Regione  Liguria,  per  quanto  riguarda  la  fascia
+costiera. 
+Tuttavia, e' stato anche evidenziato  che  le  condizioni  climatiche
+adatte all'insediamento di Xylella possono variare in relazione  alle
+diverse sottospecie. La sottospecie multiplex e, in una certa misura,
+la sottospecie fastidiosa rappresentano una minaccia per  gran  parte
+dell'Europa, mentre le aree climaticamente adatte per la  sottospecie
+pauca sono per lo piu' limitate al bacino del Mediterraneo.  Inoltre,
+sia la distribuzione/disponibilita' di piante ospiti che del  vettore
+Philaenus  spumarius  non  rappresentano  fattori  limitanti  per  la
+diffusione in Europa. 
+ 
+4.5. Impatto sui settori produttivi 
+I settori maggiormente esposti al rischio di introduzione di  Xylella
+fastidiosa  in  Italia  sono  il  comparto   vivaistico   di   piante
+ornamentali e da frutto, le filiere produttive di  olio  e  vino,  la
+produzione di agrumi e drupacee. 
+L'olivo risulta essere la coltura piu'  sensibile,  con  una  maggior
+incidenza su impianti di eta'  superiore  ai  30  anni.  Rispetto  al
+settore olivicolo, la perdita di rendimento produttivo  e'  inferiore
+per  quanto  riguarda  gli  agrumi  (in  particolar   modo   arancio,
+considerata la maggior sensibilita' al batterio), seguito da mandorlo
+e dal comparto viticolo sia con uve da tavola che da vino. 
+La suscettibilita' al batterio delle drupacee, quali ciliegio (Prunus
+avium) e susino (Prunus salicina e Prunus domestica), suggeriscono la
+possibilita' di un forte impatto su  queste  colture,  in  particolar
+modo nell'Europa meridionale e in Italia. 
+In riferimento al settore vivaistico, le informazioni  sugli  impatti
+diretti  sono  limitate.  Cio'  nonostante,  considerando  le  specie
+ospiti,  la  distribuzione  territoriale  dei  vivai  e   l'area   di
+potenziale insediamento dell'organismo nocivo, si prevede una maggior
+l'incidenza della batteriosi nelle aree  di  coltivazione  all'aperto
+nell'Europa meridionale (principalmente quelle che  producono  piante
+destinate  all'impianto  con  alberi  da  frutto,   arbusti,   piante
+forestali e ornamentali) e sotto serra per tutta l'UE.  La  riduzione
+dell'impatto puo' avvenire tramite la produzione in ambiente protetto
+di piante madri e piante destinate all'impianto,  oltre  che  con  il
+controllo   del   vettore.   L'impatto   indiretto   e'   sicuramente
+predominante nel settore vivaistico a causa  delle  restrizioni  alla
+movimentazione delle specie ospiti imposte dall'UE e dai Paesi terzi. 
+Infine, potrebbero  essere  considerevoli  anche  gli  impatti  sulla
+biodiversita', nelle aree forestali e nei paesaggi tipici. 
+ 
+5. ATTIVITA' DI INDAGINE 
+ 
+5.1. Sorveglianza del territorio 
+I Servizi fitosanitari regionali devono effettuare  indagini  annuali
+sul territorio  di  competenza  al  fine  di  verificare  l'eventuale
+presenza di Xylella fastidiosa, ai sensi dell'art. 2 del  Regolamento
+(UE) 2020/1201. 
+Il Programma nazionale di indagine annuale, di cui  all'art.  27  del
+D.lgs. n.19/2021,  definisce  il  livello  di  indagine  che  ciascun
+Servizio  fitosanitario  regionale  deve   effettuare   sul   proprio
+territorio di competenza. 
+Le indagini sono effettuate nel periodo dell'anno  piu'  idoneo  alla
+rilevazione  della   batteriosi,   tenendo   conto   della   biologia
+dell'organismo nocivo e dei suoi  vettori,  della  presenza  e  della
+biologia delle piante ospiti nonche' delle informazioni  scientifiche
+e tecniche  riportate  nella  scheda  di  sorveglianza  fitosanitaria
+nazionale e dell'EFSA. 
+Esse si svolgono all'aperto, incluso nei campi per  la  coltivazione,
+nei frutteti, nei vigneti, nonche'  nei  vivai,  nei  centri  per  il
+giardinaggio e/o nei centri di vendita,  nelle  aree  naturali  e  in
+altri luoghi pertinenti. 
+Qualora un Servizio fitosanitario regionale sospetti o abbia ricevuto
+elementi di prova riguardanti la presenza dell'organismo nocivo, esso
+adotta immediatamente  le  misure  necessarie  per  la  conferma  del
+ritrovamento. 
+Nella  pianificazione  delle  indagini  devono   essere   tenuti   in
+considerazione tutte le  tipologie  di  ambiente  dove  e'  possibile
+l'insediamento del patogeno nonche' ulteriori fattori di  rischio  ad
+esse associate. 
+I principali fattori di  rischio,  intesi  come  elementi  biotici  o
+abiotici che aumentano la probabilita' di infestazione da  parte  del
+patogeno nell'area  di  interesse,  sono  elencati  nella  scheda  di
+sorveglianza fitosanitaria dell'EFSA. 
+Inoltre, e' necessario considerare che alcune specie ospiti (come  ad
+es. Lavandula  dentata,  Nerium  oleander,  Olea  europaea,  Polygala
+myrtifolia e Prunus dulcis)  svolgono  un  ruolo  predominante  nella
+diffusione della batteriosi in virtu' della  loro  suscettibilita'  a
+piu' subspecie di  Xylella  fastidiosa  e  dell'ampia  diffusione  in
+ambienti naturali, urbani e coltivati. 
+Tenuto in considerazione il lungo periodo di latenza e  l'assenza  di
+sintomi in diverse  specie  ospiti,  il  Regolamento  (UE)  2020/1201
+prevede la realizzazione di indagini attraverso un  campionamento  su
+base statistica. 
+A tale scopo, l'EFSA ha predisposto lo strumento software  statistico
+RiBESS+ per il calcolo della dimensione del campione da sottoporre ad
+analisi          (disponibile          online          all'indirizzo:
+https://shiny-efsa.openanalytics.eu/app/ribess), nonche' delle  linee
+guida specifiche. 
+A partire dal 1° gennaio 2023, lo schema di campionamento  utilizzato
+deve permettere di rilevare un tasso di presenza  di  piante  infette
+dell'1 % con un livello di confidenza dell'80 %. 
+La progettazione delle indagini consiste  nella  quantificazione  dei
+seguenti parametri di input da inserire nello strumento statistico al
+fine di stimare la dimensione del campione in termini  di  numero  di
+ettari da monitorare e di piante da campionare. 
+• Dimensione della popolazione target (dimensione  della  popolazione
+  di piante ospiti da sottoporre ad indagine a cui verranno applicati
+  i risultati dell'indagine); 
+• Sensibilita' del  metodo  (quanto  e'  performante  il  metodo  nel
+  rilevare il patogeno. Combina l'efficacia  del  campionamento  e  i
+  valori di sensibilita' diagnostica); 
+• Fattori di rischio  (elementi  che  determinano  un  incremento  di
+  rischio)  Ciascun  fattore  deve  essere  classificato  in  diversi
+  livelli, che sono quantificati per mezzo del loro rischio  relativo
+  e della proporzione della popolazione target a cui si applicano. 
+Inoltre, devono essere acquisite informazioni in merito a: 
+• Unita'  epidemiologiche  (gruppo  di  individui  della  popolazione
+  target in un  ambiente  omogeneo).  Considerato  che  la  copertura
+  vegetale puo' essere molto variabile su ampi territori,  e'  spesso
+  difficile  definire  il  numero  e  la   tipologia   delle   unita'
+  epidemiologiche. Le unita' dovranno essere suddivide almeno  in  I)
+  aree urbanizzate, II) aree  agricole  e  III)  aree  a  vegetazione
+  spontanea. 
+• In mancanza di altre modalita' di suddivisione  del  territorio  in
+  unita' epidemiologiche,  queste  ultime  potranno  essere  ricavate
+  partendo dalle categorie di uso del suolo  di  Corine  land  cover,
+  accorpandole in classi omogenee. 
+• Popolazione target (insieme di individui che potenzialmente possono
+  contaminarsi). Il risultato dell'analisi fara'  sempre  riferimento
+  alla popolazione target. A differenza di quanto e'  possibile  fare
+  in una situazione definita, come  una  coltivazione  agraria  nella
+  quale il numero di piante e' conosciuto e di  solito  afferisce  ad
+  una  sola  specie  vegetale,  in  una  situazione  di  complessita'
+  vegetazionale su vasti territori non e'  possibile  determinare  il
+  numero  preciso  di  piante  ospiti  sull'unita'  di  superficie  e
+  pertanto si deve ricorrere ad una stima.  Per  quanto  riguarda  le
+  piante ospiti di Xylella fastidiosa, ci troviamo  di  fronte  a  un
+  elevato numero di  specie  con  dimensione  eterogenea  e  con  una
+  frequenza sul territorio estremamente differenziata.  La  stima  di
+  tali  popolazioni  sulle  Unita'  epidemiologiche   dovra'   essere
+  effettuata dal  Servizio  fitosanitario  regionale  sulla  base  di
+  esperienze  pratiche,  rilevazioni  campionarie  e\o   altri   dati
+  disponibili. 
+• Sensibilita' (probabilita' di ottenere un positivo campionando  una
+  pianta sicuramente infetta. E'  dato  dalla  moltiplicazione  della
+  sensibilita' di laboratorio e della sensibilita' di campo). Il dato
+  di riferimento della Sensibilita' e' 0.55 e potra'  essere  variato
+  considerando  le  performance  del   laboratorio   di   analisi   e
+  l'esperienza dei campionatori. 
+Il modello RiBESS+ puo' inoltre utilizzare  fattori  di  rischio  per
+orientare il campionamento in modo piu' preciso in aree  maggiormente
+suscettibili  all'infestazione.  A   tali   scopo   potranno   essere
+introdotti dai Servizi fitosanitari regionali vari fattori a  seconda
+delle situazioni del territorio e delle Unita' Epidemiologiche, quali
+ad es.: 
+- zone limitrofe ad aree demarcate; 
+- frutteti di specie sensibili  (oliveti,  vigneti,  coltivazioni  di
+  Prunus); 
+- vicinanza a vivai di specie ospiti; 
+- vicinanza a porti o aeroporti, vie di grande comunicazione; 
+- zone climatiche piu' favorevoli al patogeno, quali coste o  zone  a
+  clima mite; 
+- zone a elevata presenza di vettori; 
+- aree con sintomi di deperimento di piante specificate; 
+- aree  verdi  intorno  a  stabilimenti   che   utilizzano   vegetali
+  provenienti dalle zone delimitate (per  es.  frantoi  che  lavorano
+  olive); 
+- aree non coltivate e abbandonate, parchi, giardini, boschi urbani e
+  periurbani. 
+Il modello  RiBESS+  non  da'  indicazioni  sulla  distribuzione  del
+campione. Ai fini  di  una  sua  distribuzione  omogenea,  le  Unita'
+Epidemiologiche  andranno  suddivise  con  una  griglia  di  adeguate
+dimensioni. In base al numero di campioni da effettuare stabilito  da
+RiBESS+ si stabilira' il numero dei campioni per  ogni  unita'  della
+griglia. 
+L'art. 25 del regolamento  (UE)  2020/1201  definisce,  altresi',  le
+indagini  ufficiali  che  i  Servizi  fitosanitari  regionali  devono
+effettuare nei siti di produzione di piante  specificate  situati  in
+area indenne. La procedura per le ispezioni ufficiali,  campionamento
+e analisi nei suddetti siti di  produzione  sono  definiti  con  nota
+tecnica del Servizio fitosanitario centrale. 
+ 
+5.2. Ispezioni e campionamento 
+Le attivita' di ispezione e  campionamento  ufficiali  devono  essere
+eseguite da ispettori,  agenti  e  assistenti  fitosanitari  o  altri
+soggetti ufficialmente incaricati e formati. 
+Per quanto riguarda il periodo e le  modalita'  di  campionamento  e'
+necessario fare riferimento ai seguenti documenti di indirizzo: 
+- Procedura di indagine nazionale per Xylella fastidiosa Mipaaf-CREA; 
+- EFSA Pest survey card on Xylella fastidiosa; 
+- Nota tecnica Mipaaf n.9240028 del 14/10/2020  -  Procedura  per  le
+  ispezioni ufficiali, campionamento e analisi  nei  vivai  ai  sensi
+  dell'articolo 25  del  Regolamento  (UE)  2020/1201  relativo  alle
+  misure per Xylella fastidiosa; 
+- PM  3/82  (1)  Inspection  of  places  of  production  for  Xylella
+  fastidiosa; 
+- PM 7/24 (4) Diagnostic protocol for Xylella fastidiosa. 
+Il campionamento e' effettuato preferibilmente durante il periodo  di
+attivita'  vegetativa   della   pianta,   quando   e'   maggiore   la
+concentrazione del batterio. 
+Considerato  che  Xylella  fastidiosa  si   localizza   nel   tessuto
+xilematico degli ospiti, nel  picciolo  e  nella  nervatura  centrale
+della foglia,  e'  opportuno  effettuare  il  prelievo  del  campione
+operando nel seguente modo: 
+- il campione deve essere formato da porzioni di ramo  con  attaccate
+  le foglie (8 rametti di 15-20 cm con foglie, in  alternativa  10-12
+  foglie mature con picciolo prelevate da rami ben lignificati); 
+- per piante piccole, puo' essere  inviata  in  laboratorio  l'intera
+  piantina o parte di essa; 
+- per piante con foglie sclerotiche (ad es. Coffea),  possono  essere
+  campionati i piccioli. 
+In relazione all'elevato numero di campioni potenzialmente oggetto di
+prelievo, e' possibile prelevare campioni pool  per  ciascuna  specie
+vegetale ospite di Xylella fastidiosa. 
+Nel caso di piante asintomatiche, la predisposizione di campioni pool
+puo'  avvenire  a   livello   di   foglie   (con   piccioli)   o   di
+germogli\rametti. In presenza di piante sintomatiche il campione deve
+essere prelevato in  prossimita'  dei  sintomi  escludendo  le  parti
+secche. 
+Dal punto di  vista  operativo,  possono  essere  utilizzati  diversi
+schemi per la realizzazione del campionamento in vivaio  o  impianto.
+Si consiglia, tuttavia,  di  definire  la  frequenza  di  prelievo  e
+muoversi lungo le singole file. 
+In presenza di piante sintomatiche, si procede  al  campionamento  di
+queste in via prioritaria. In questo caso, i campioni  devono  essere
+prelevati da una singola pianta sintomatica e non faranno  parte  del
+campione pool. E' opportuno completare  il  campionamento  prelevando
+dei campioni pool dalle piante situate nelle immediate  vicinanze  di
+quelle sintomatiche. 
+Durante  la  fase  di  campionamento   deve   essere   garantita   la
+tracciabilita' dei campioni e/o delle aliquote pool prelevate.  Tutte
+le piante dalle quali vengono  prelevati  i  campioni  devono  essere
+contrassegnate  con  una  fascetta  numerata  univoca.  Nel  caso  di
+campione pool sara' sufficiente una fascetta numerata  su  una  delle
+piante del pool, mentre le altre potranno  essere  contrassegnate  in
+altro modo. I campioni vegetali dovranno  essere  inseriti  in  buste
+chiuse con sigillo univoco collegabile a quello della fascetta  posta
+sulla pianta. 
+I campioni in buste sigillate devono essere  inviati,  a  cura  degli
+ispettori fitosanitari o loro incaricati, ad un laboratorio ufficiale
+avente  sede  nella  Regione  di  competenza.   Solo   in   caso   di
+indisponibilita' di un laboratorio sul territorio regionale, potranno
+essere inviati ad un laboratorio di un'altra Regione, allo  scopo  di
+limitare il trasferimento di  materiale  potenzialmente  infetto  sul
+territorio nazionale. 
+ 
+5.3. Monitoraggio dei vettori 
+Nell'ambito delle indagini territoriali per rilevare la presenza e la
+diffusione di Xylella fastidiosa, tutti gli insetti  xilemomizi  sono
+potenzialmente  rilevanti  per  i   monitoraggi.   La   capacita'   e
+l'efficienza di  acquisizione  del  batterio  da  parte  dei  vettori
+determina la loro rilevanza per la loro sorveglianza. 
+Ad  oggi,  solo  tre  specie,   Philaenus   spumarius,   Neophilaenus
+campestris e Philaenus italosignus, sono state accertate come vettori
+della batteriosi. 
+A causa della loro mobilita', gli insetti adulti  sono  i  principali
+responsabili della diffusione di Xylella fastidiosa nelle  aree  dove
+il batterio sia stato introdotto. Inoltre, gli adulti hanno una  vita
+relativamente lunga e possono pertanto essere a  lungo  portatori  di
+infezione, quindi sono sicuramente gli obiettivi piu' importanti  per
+i monitoraggi. Gli adulti di P. spumarius, il vettore piu' importante
+nei nostri ambienti, compaiono a fine aprile in Puglia e ai primi  di
+maggio in Toscana e Liguria. 
+Il monitoraggio dei  vettori  deve  riguardare  le  aree  a  maggiore
+rischio di introduzione di  X.  fastidiosa.  Il  campionamento  viene
+effettuato generalmente mediante l'impiego di retini da  sfalcio,  ma
+anche l'uso di trappole cromotropiche puo' fornire utili  indicazioni
+sulla presenza degli adulti e  sulla  dinamica  di  popolazione.  Per
+massimizzare la probabilita' di intercettazione di  insetti  positivi
+al batterio, gli insetti dovrebbero essere raccolti quando gli adulti
+sono abbondanti in campo e dopo che si sono nutriti  di  piu'  ospiti
+alla fine dell'estate. 
+Gli insetti adulti raccolti con retino devono  essere  immediatamente
+trasferiti in contenitori  ermetici  contenenti  etanolo  al  70-80%,
+univocamente identificati in base al punto di raccolta degli insetti.
+Dopo la  conferma  dell'identificazione  su  base  morfologica  degli
+insetti  catturati,  gli  xilemomizi  identificati   possono   essere
+analizzati immediatamente mediante diagnosi molecolare per verificare
+la loro infettivita', oppure trasferiti e conservati  in  etanolo  al
+95-99%, oppure a -20 ° C o -80 ° C, con o senza etanolo. 
+In aggiunta al monitoraggio degli adulti nelle  aree  a  rischio,  e'
+importante effettuare un monitoraggio annuale dei vettori nelle  aree
+delimitate, mirato alla valutazione della densita' di  popolazione  e
+al rilievo dei vari stadi di  sviluppo  degli  insetti,  al  fine  di
+fornire  indicazioni  utili  sulla  tempistica  di  esecuzione  degli
+interventi per il controllo delle  forme  giovanili  e  degli  adulti
+previsti dalla normativa vigente. 
+Per monitorare le forme giovanili  si  possono  impiegare  unita'  di
+campionamento (transetti), direttamente appoggiati sulla  vegetazione
+di copertura per circoscrivere facilmente la superficie da esaminare.
+Per raccogliere i campioni si puo' applicare  un  sistema  a  lavaggi
+multipli  sequenziali  (AquaSamPling)  delle  erbe   raccolte   dalla
+superficie dei transetti, che prevede l'uso di una  soluzione  salina
+al 9% per lavare energicamente le  piante  prelevate  dal  transetto,
+mandando in sospensione i giovani vettori che  vengono  trattenuti  e
+filtrando il  liquido.  Al  di  la'  della  tecnica  di  monitoraggio
+adoperata, l'obiettivo dei rilievi sulle forme giovanili e' quello di
+determinare il periodo in cui si verifica il picco di  individui  che
+ha raggiunto il IV stadio di sviluppo, in  corrispondenza  del  quale
+l'applicazione di interventi di distruzione della vegetazione erbacea
+raggiunge la massima efficacia. A  tal  fine,  e'  necessario  che  i
+rilievi sulle forme giovanili siano effettuati in maniera costante  e
+periodica (settimanale o bisettimanale), a  partire  dal  periodo  di
+schiusura delle uova. 
+Il  monitoraggio  nelle  aree  delimitate  ha  anche  lo   scopo   di
+identificare  il  periodo  i  cui  gli   adulti,   subito   dopo   lo
+sfarfallamento, si muovono dalla vegetazione  di  copertura  (insetti
+non  infettivi)  alle  chiome  delle  piante  arboree  dove   possono
+potenzialmente  acquisire  il  batterio  e   contribuire   alla   sua
+successiva diffusione. E' infatti opportuno che i trattamenti per  il
+controllo degli adulti siano effettuati prima che gli stessi  possano
+aver acquisito il batterio, al fine di ridurre quando piu'  possibile
+la popolazione di insetti che diviene potenzialmente infettiva. 
+I  campioni  di  insetti   devono   essere   tutti   cartellinati   e
+georeferenziati  per  consentire,  nel  caso   di   positivita',   di
+effettuare le indagini sulle piante  specificate  di  quell'area  per
+verificare l'eventuale presenza del batterio. 
+Per l'identificazione tassonomica e la preparazione dei  campioni  di
+insetti per le  indagini  molecolari  viene  fatto  riferimento  alle
+indicazioni fornite da EPPO (PM 7/141  e  PM  7/24  (4)).  Le  chiavi
+tassonomiche per le specie della maggior parte degli Aphrophoridae  e
+dei Cercopidae europei  (eccetto  alcune  specie  mediterranee)  sono
+riportate in  Biedermann  and  Niedringhaus,  2009,  Drosopoulos  and
+Remane, 2000, Holzinger et al., 2003, Kunz et al.,  2011,  Wilson  et
+al., 2015. 
+ 
+5.4. Diagnosi di laboratorio 
+Il regolamento 2020/1201 definisce,  all'allegato  IV,  i  metodi  di
+prova che devono essere utilizzati per l'identificazione  di  Xylella
+fastidiosa e delle sue sottospecie. 
+Nel caso delle  indagini  condotte  in  area  indenne,  il  risultato
+positivo delle analisi  deve  essere  confermato  da  un  laboratorio
+nazionale di riferimento  con  un'ulteriore  analisi  molecolare  tra
+quelle elencate dal regolamento, diretta a parti diverse del  genoma.
+Le analisi sono effettuate  sullo  stesso  campione  vegetale,  o  se
+pertinente per l'analisi molecolare utilizzata a  fini  di  conferma,
+sullo stesso estratto vegetale. 
+L'identificazione  delle  sottospecie  di   Xylella   fastidiosa   e'
+effettuata su ogni specie vegetale risultata  infetta  dall'organismo
+nocivo specificato nell'area delimitata interessata. 
+Le procedure diagnostiche per il rilevamento e  l'identificazione  di
+Xylella fastidiosa sono definite da una specifica procedura operativa
+del Servizio fitosanitario nazionale. 
+ 
+6. AZIONI UFFICIALI A SEGUITO DEL RITROVAMENTO DI XYLELLA FASTIDIOSA 
+ 
+6.1. Dichiarazione di emergenza fitosanitaria 
+A seguito  della  conferma  ufficiale  del  ritrovamento  di  Xylella
+fastidiosa, il  Servizio  fitosanitario  regionale  competente  avvia
+senza  indugio   le   indagini   per   risalire   all'origine   della
+contaminazione e adotta immediatamente le prime misure  fitosanitarie
+urgenti   necessarie   a   eliminare   il   rischio   di   diffusione
+dell'organismo nocivo dalla zona  interessata.  Tali  misure  possono
+includere l'interdizione di un sito  e  il  blocco  preventivo  della
+movimentazione  delle  piante  specificate  da  parte  di   Operatori
+professionali, in attesa del completamento delle indagini. 
+Alla prima riunione utile, il Comitato fitosanitario nazionale, sulla
+base dei dati e delle informazioni disponibili, definisce e  delibera
+le misure fitosanitarie urgenti su proposta dei Servizi  fitosanitari
+competenti. 
+Entro i successivi 15 giorni lavorativi,  il  Servizio  fitosanitario
+regionale elabora, conformemente al presente Piano di  emergenza,  la
+proposta di Piano di Azione ai fini dell'eradicazione  del  focolaio,
+contenente il calendario di attuazione delle misure. 
+Tale piano d'azione comprende una descrizione della  progettazione  e
+dell'organizzazione delle indagini da svolgere e stabilisce il numero
+di esami visivi, campionamenti e prove di laboratorio da  effettuare,
+nonche' la metodologia da applicare per l'esame, il  campionamento  e
+le prove. Il piano definisce  altresi'  i  soggetti  attuatori  e  le
+risorse economiche necessarie. 
+Il  Piano  di  Azione  e'  trasmesso  senza   indugio   al   Comitato
+fitosanitario nazionale per la sua approvazione. 
+Il Servizio fitosanitario centrale, sulla  base  della  deliberazione
+del   Comitato,   dichiara    l'emergenza    fitosanitaria,    adotta
+ufficialmente il Piano d'azione e lo notifica alla Commissione UE. 
+Per  il  coordinamento  dell'attuazione  delle  misure  fitosanitarie
+previste dal Piano di Azione, il Servizio fitosanitario centrale,  su
+richiesta   del   Comitato   fitosanitario   nazionale,   attiva   il
+Segretariato per le emergenze fitosanitarie, di  cui  all'art  9  del
+d.lgs. n.19/2021. 
+Il Servizio fitosanitario regionale  competente  istituisce  l'Unita'
+territoriale di emergenza fitosanitaria, di cui all'art 10 del d.lgs.
+n.19/2021, che provvede  al  coordinamento  e  all'organizzazione  in
+ambito regionale per  la  realizzazione  delle  misure  fitosanitarie
+contenute nel Piano di Azione. 
+Sulla base degli aggiornamenti periodici del  Servizio  fitosanitario
+regionale, il Comitato fitosanitario  nazionale  puo'  deliberare  in
+merito alla necessita' di modifica del Piano d'azione  per  includere
+le azioni correttive ritenute necessarie. 
+ 
+6.2. Comunicazione ufficiale 
+In caso di conferma ufficiale della presenza  di  Xylella  fastidiosa
+nel territorio di propria competenza, in una parte in cui la presenza
+dell'organismo nocivo  non  era  precedentemente  nota,  il  Servizio
+fitosanitario regionale ne da' immediata  comunicazione  al  Servizio
+fitosanitario centrale, all'Istituto nazionale di riferimento e  agli
+altri Servizi fitosanitari regionali, fornendo tutte le  informazioni
+disponibili. 
+Contestualmente,  il  Servizio  fitosanitario  regionale  predispone,
+entro 5 giorni lavorativi, la  bozza  di  notifica  di  focolaio  sul
+portale Europhyt-Outbreaks della Commissione UE. 
+Il Servizio fitosanitario  centrale,  entro  i  successivi  3  giorni
+lavorativi,  verifica  le  informazioni  contenute  nella  bozza   di
+notifica,  richiede  eventuali  integrazioni,  e  provvede  alla  sua
+validazione. La notifica di focolaio e' automaticamente inviata  alla
+Commissione, ai Paesi membri e all'EPPO. 
+Qualora  il  Servizio  fitosanitario  regionale  decidesse   di   non
+istituire un'area delimitata ai  sensi  dell'art.  5,  comma  3,  del
+Regolamento (UE) 2020/1201, deve  darne  immediata  comunicazione  al
+Servizio fitosanitario centrale. 
+Nel caso in cui vi siano elementi di prova attestanti che l'organismo
+nocivo e' stato introdotto di recente nell'area insieme  alle  piante
+commercializzate  si  dovra'  invece  valutare  la  possibilita'   di
+inserire la notifica di intercettazione nel portale IMSOC\TRACES-NT. 
+Il Servizio fitosanitario regionale  provvede  altresi'  a  informare
+tempestivamente  gli  Operatori  professionali  e  i  proprietari   o
+possessori dei vegetali interessati  dalle  misure,  prescrivendo  le
+azioni obbligatorie che  devono  essere  attuate  in  conformita'  al
+regolamento (UE) 2020/1201. 
+Il Servizio fitosanitario regionale mantiene costantemente  informati
+i  rappresentanti   dell'Unita'   territoriale   per   le   emergenze
+fitosanitarie in merito alla localizzazione  dell'area  delimitata  e
+alle misure fitosanitarie obbligatorie. 
+Inoltre, da' pubblica informazione in merito alle misure  adottate  e
+che intende adottare, con particolare riguardo a  quelle  indirizzate
+alle pertinenti categorie di Operatori professionali e i  proprietari
+o possessori  di  piante  ospiti  dell'organismo  nocivo,  attraverso
+specifiche campagne di sensibilizzazione per la cittadinanza. 
+L'Unita' territoriale per  le  emergenze  fitosanitarie  mantiene  il
+costante scambio di informazioni con il Segretariato nazionale per le
+emergenze  fitosanitarie  in  merito  all'evoluzione   dell'emergenza
+fitosanitaria in atto. 
+Tali aggiornamenti devono essere riportati anche  nella  notifica  su
+Europhyt-Outbreaks,  riportando  ogni  nuova  informazione  rilevante
+disponibile (risultati delle indagini periodiche, modifica  dell'area
+delimitata, cambio strategia, nuove piante ospiti, ecc.). 
+Il Servizio fitosanitario centrale provvede alla  raccolta  dei  dati
+relativi alla presenza ed alla diffusione sul territorio nazionale di
+Xylella fastidiosa, alla predisposizione e alla relativa divulgazione
+delle relazioni periodiche, nonche' all'ufficializzazione dello stato
+fitosanitario (pest status nazionale), previo il parere del  Comitato
+fitosanitario nazionale. 
+Al    Servizio    fitosanitario    centrale    compete,     altresi',
+l'interlocuzione  con  la  Commissione  europea  e  con   i   Servizi
+fitosanitari  dei  Paesi  membri,  con  le  Organizzazioni   per   la
+protezione dei vegetali dei  Paesi  terzi  e  con  le  Organizzazioni
+internazionali operanti nel settore fitosanitario. 
+Ai sensi del Regolamento (UE) 2020/1201,  il  Servizio  fitosanitario
+centrale trasmette entro il 30 aprile di ogni anno alla Commissione e
+agli altri stati membri una relazione sui  risultati  delle  indagini
+effettuate  nelle  aree  indenni  nell'anno  precedente,  nonche'  un
+resoconto delle misure adottate nelle aree delimitate. 
+A  tal  fine,  i  Servizi  fitosanitari  regionali  provvedono   alla
+compilazione degli appositi modelli  previsti  dal  Regolamento  (UE)
+2020/1231 e dal Regolamento (UE) 2020/1201,  inserendo  le  attivita'
+effettuate sul territorio di competenza. 
+Inoltre, entro il 31 dicembre di ogni anno, il Servizio fitosanitario
+centrale invia alla Commissione e agli altri Stati membri, sulla base
+delle indicazioni fornite dai Servizi fitosanitari regionali: 
+- il piano previsionale riguardante le indagini da attuare nelle aree
+  indenni nazionali nell'anno successivo; 
+- i  piani  d'azione  relativi  alle  aree  delimitate  presenti  sul
+  territorio nazionale, indicanti le  misure  da  adottare  nell'anno
+  successivo, il calendario previsto, i termini per l'attuazione e il
+  bilancio stanziato per ciascuna misura. 
+Se giustificato dall'evoluzione del relativo rischio fitosanitario, i
+piani devono essere aggiornati, modificando le misure corrispondenti,
+e trasmessi  immediatamente  alla  Commissione  e  agli  altri  Stati
+membri. 
+ 
+6.3. Indagine di tracciabilita' 
+A seguito della conferma del ritrovamento di Xylella  fastidiosa,  il
+Servizio fitosanitario  regionale  competente  indaga  senza  indugio
+sull'origine  della   presenza   dell'organismo   nocivo   e   adotta
+immediatamente le prime misure  fitosanitarie  urgenti  necessarie  a
+eliminare il rischio di diffusione dell'organismo nocivo  dalla  zona
+interessata. 
+A tal fine, devono essere reperite informazioni  specifiche  in  base
+alla tipologia di sito dove e' avvenuto il ritrovamento. 
+In caso di aziende agricole, e' necessario verificare se siano  stati
+effettuati  nuovi  impianti  nell'area  o  anche   semplicemente   il
+reintegro di fallanze, acquisendo tutte le informazioni  inerenti  le
+forniture  delle  piante  (passaporto  delle  piante,  documenti   di
+trasporto, ecc.) per risalire al fornitore. 
+Per quanto concerne le aree naturali e le aree verdi, compreso i siti
+a rischio (ad es. aree di  servizio,  campeggi,  ecc.),  deve  essere
+verificata  la  possibile  movimentazione  di  materiale   vivaistico
+infetto o lo spostamento passivo di vettori. 
+Nel  caso  il  ritrovamento  si   verifichi   presso   un   Operatore
+professionale o un garden center, devono  essere  acquisiti  tutti  i
+dati contenuti nei registri in merito ai fornitori e  ai  destinatari
+delle piante  specificate  oggetto  di  indagine,  al  fine  condurre
+appropriate verifiche sulla possibile origine della contaminazione. 
+Il Servizio fitosanitario regionale deve  tempestivamente  comunicare
+tali informazioni al Servizio fitosanitario  centrale  e  ai  Servizi
+fitosanitari regionali dove hanno sede  gli  Operatori  professionali
+coinvolti nella movimentazione delle piante specificate indagate. 
+Nel   caso   di   piante   prodotte    direttamente    dall'Operatore
+professionale, devono essere condotte  indagini  anche  su  tutte  le
+piante madri e verificato l'eventuale utilizzo di portinnesti, talee,
+ecc. 
+E' altresi'  necessario  valutare  la  presenza  di  insetti  vettori
+nell'area, tramite retinaggio e/o il posizionamento di  trappole,  da
+sottoporre ad analisi di laboratorio per la ricerca di X. fastidiosa. 
+Sulla  base  delle  informazioni  reperite  e  delle   manifestazioni
+sintomatologiche  osservate,  se  presenti,   deve   essere   inoltre
+stabilita una possibile datazione dell'inizio dell'infezione. 
+L'esito delle indagini condotte deve essere comunicato senza  indugio
+al Servizio fitosanitario centrale. 
+ 
+6.4. Indagine epidemiologica 
+A seguito della conferma della presenza di X. fastidiosa, il Servizio
+fitosanitario regionale avvia senza indugio appropriate indagini  per
+determinare  la  reale  diffusione  della  batteriosi   e   istituire
+ufficialmente un'area delimitata. 
+Le  indagini   sono   effettuate   tenendo   conto   della   biologia
+dell'organismo nocivo e dei suoi  vettori,  della  presenza  e  della
+biologia delle piante ospiti nonche' delle informazioni  scientifiche
+e tecniche  riportate  nella  scheda  di  sorveglianza  fitosanitaria
+nazionale e dell'EFSA. 
+L'approccio consigliato e' quello di  procedere  ispezionando  cerchi
+concentrici  attorno  al   sito   di   ritrovamento   e   suddividere
+ulteriormente  queste  aree  in  base  ad  una  griglia  di  adeguate
+dimensioni. Nella determinazione dell'area da sottoporre ad  indagini
+e' necessario tenere in considerazione i fattori di rischio  presenti
+e il periodo trascorso dall'ultimo monitoraggio ufficiale  effettuato
+nell'area. A tale scopo puo' essere  utilizzato  anche  lo  strumento
+RiBESS+. 
+Il  Servizio  fitosanitario  regionale  verifica  se  sussistono   le
+condizioni definite dall'art. 5.3 del Regolamento (UE) 2020/1201, che
+consentono di derogare all'obbligo di delimitazione. Nel caso non sia
+necessario istituire un'area delimitata,  il  Servizio  fitosanitario
+regionale comunica tempestivamente al Servizio fitosanitario centrale
+tale  informazione  e  l'esito  delle  indagini.  Inoltre,   effettua
+indagini annuali nell'area per almeno due anni, al fine di confermare
+l'assenza del patogeno. 
+Nel caso di ritrovamento in  un  sito  di  produzione  e'  necessario
+procedere all'ispezione  di  tutti  i  lotti  di  piante  specificate
+presenti, che devono  essere  censite  e  chiaramente  contrassegnate
+all'interno del sito. A seconda della  consistenza  dei  lotti,  sono
+analizzate tutte  le  piante  presenti,  attraverso  il  prelievo  di
+campioni singoli o pool, oppure si applica un campionamento  su  base
+statistica con adeguato livello di confidenza e prevalenza. 
+ 
+6.5. Istituzione dell'area delimitata 
+Alla conclusione delle indagini di cui al paragrafo 6.4, il  Servizio
+fitosanitario  regionale  procede   senza   indugio   all'istituzione
+ufficiale  dell'area  delimitata  in  conformita'  all'art.   4   del
+Regolamento (UE) 2020/1201. 
+L'area delimitata e' costituita da una zona infetta (zona  di  almeno
+50 m di raggio attorno alla pianta infetta) e da una zona  cuscinetto
+(2,5 km quando la zona infetta e' stabilita ai fini dell'adozione  di
+misure di eradicazione e almeno  5  km  quando  la  zona  infetta  e'
+stabilita ai fini dell'adozione di misure di contenimento). 
+Nel  caso  di  adozione  di  misure  di  eradicazione,  e'  possibile
+l'istituzione di piu' zone infette puntiformi, in  base  alle  piante
+contaminate rinvenute, all'interno della stessa zona delimitata. 
+Ai fini della  delimitazione,  il  Servizio  fitosanitario  regionale
+adotta le seguenti azioni: 
+a) Individua  il  personale  coinvolto   nell'istituzione   dell'area
+   delimitata,  con  particolare  riguardo  ai   responsabili   delle
+   relazioni con le autorita' e con il pubblico. 
+b) Acquisisce i dati  geospaziali  dei  siti  risultati  contaminati,
+   nonche' le seguenti informazioni pertinenti alla caratterizzazione
+   delle  superfici  interessate  e   alla   gestione   del   rischio
+   fitosanitario: 
+   - dati  catastali  cartografici   dei   proprietari   tramite   la
+     consultazione       della        banca        dati        SISTER
+     (https://sister.agenziaentrate.gov.it/); 
+   - dati relativi ai conduttori agricoli delle particelle  catastali
+     tramite  la  consultazione  del  Sistema  Informativo   Agricolo
+     Nazionale - SIAN  (https://www.sian.it/)  e  delle  banche  dati
+     degli organismi pagatori nazionali e regionali; 
+   - dati riguardanti la residenza dei  proprietari  delle  superfici
+     interessate attraverso specifici accessi all'anagrafe tributaria
+     (D.P.R. 29 settembre 1973  n.  605  -  Agenzia  delle  Entrate),
+     all'Anagrafe  Italiani  Residenti  all'Estero  (AIRE)  ed   alle
+     anagrafi comunali attinenti; 
+   - dati territoriali  resi  disponibili  nel  Geoportale  Nazionale
+     (MATTM) come ad esempio la presenza  di  parchi,  biotopi,  ZPS,
+     ZSC, aree sottoposte a vincoli paesaggistici e relativi confini; 
+   - dati sulle coperture vegetali,  destinazioni  d'uso  e  relative
+     estensioni, con particolare riguardo alla presenza di  attivita'
+     vivaistiche (piante madri, materiali forestali di base, ecc.)  e
+     di piante di valore storico ufficialmente riconosciute; 
+   - presenza di vie di  comunicazione,  porti,  aeroporti,  aree  di
+     sosta, dogane, mercati all'ingrosso, ecc.; 
+   - confini regionali e nazionali, aree extraterritoriali; 
+   - dati sulla presenza di attivita' produttive agricole, forestali,
+     industriali  e  di  import/export  che  riguardano   le   piante
+     specificate; 
+   - dati sulla presenza di Operatori professionali definiti ai sensi
+     dell'art. 2 del Reg. (UE) 2016/2031,  con  particolare  riguardo
+     agli Operatori professionali registrati ai  sensi  dell'art.  65
+     del medesimo regolamento (RUOP) con o  senza  autorizzazione  al
+     passaporto delle piante; 
+   - dati sulla presenza di zone sottoposte a vincoli militari,  come
+     pure aree con palesi impedimenti all'accesso fisico in sicurezza
+     (recinzioni  e  corsi  d'acqua  invalicabili,  frane,  strutture
+     pericolanti, siti inquinati con restrizioni all'accesso, animali
+     posti alla difesa o selvatici, ecc.); 
+   - dati sulla presenza di giardini pubblici e privati; 
+   - usanze e costumi locali che interessano le piante specificate. 
+c) Redige  su  un  adeguato  supporto  cartografico  le   mappe   che
+   descrivono in dettaglio l'area delimitata, con chiara  indicazione
+   della  zona  infestata  e  della  zona  cuscinetto,  e  le   rende
+   accessibili al pubblico attraverso la pubblicazione sul  sito  web
+   del Servizio fitosanitario nazionale e regionale. 
+d) Individua le autorita' territoriali, gli Operatori  professionali,
+   gli ordini dei tecnici e degli agronomi operanti  sul  territorio,
+   che devono essere informati, insieme alla cittadinanza, in  merito
+   alla   localizzazione   dell'area   delimitata   e   alle   misure
+   fitosanitarie obbligatorie. In particolare, gli Enti  locali  sono
+   coinvolti  nell'identificazione  dei  proprietari  e,  qualora  si
+   rendesse   necessario,   nella   notifica    delle    prescrizioni
+   fitosanitarie tramite  affissione  all'albo  pretorio.  Agli  Enti
+   territoriali in  materia  di  pubblica  sicurezza  e  vigilanza  e
+   all'Arma dei Carabinieri - Comando unita' forestali, ambientali  e
+   agroalimentari e, se presente, al Corpo  Forestale  Regionale,  e'
+   richiesta,   limitatamente   agli   ambiti   di   competenza,   la
+   collaborazione nelle  attivita'  di  sorveglianza  e,  qualora  si
+   rendesse necessario, il supporto  per  l'accesso  alle  proprieta'
+   private, 
+   Il Servizio fitosanitario regionale puo' decidere  di  ridurre  la
+   zona cuscinetto a una larghezza non inferiore a  1  km  o  di  non
+   istituire immediatamente un'area delimitata, se  sono  soddisfatte
+   le condizioni di cui all'art. 5 del regolamento (UE) 2020/1201. Le
+   motivazioni  che  giustificano  tale   decisione   devono   essere
+   notificate al Servizio fitosanitario centrale  per  la  successiva
+   trasmissione alla Commissione e agli altri Stati membri. 
+   L'area delimitata e' revocata se  in  seguito  alle  attivita'  di
+   sorveglianza   periodica   non   viene   rilevata   la    presenza
+   dell'organismo nocivo per 4 anni consecutivi. 
+ 
+6.6. Attivita' di eradicazione 
+ 
+6.6.1. Distruzione delle piante infette 
+In applicazione all'art. 7 del Regolamento (UE) 2020/1201, sulla base
+dell'esito delle analisi di laboratorio,  il  Servizio  fitosanitario
+regionale provvede, direttamente  o  tramite  soggetti  terzi,  quali
+anche il proprietario del terreno o chi ne  ha  la  disponibilita'  a
+qualsiasi titolo, sotto la sua supervisione, alla immediata rimozione
+nella zona infetta delle: 
+a) piante notoriamente infette da Xylella fastidiosa; 
+b) piante che presentano sintomi indicativi della possibile infezione
+o che si sospetta siano infette; 
+c) piante appartenenti  alla  stessa  specie  della  pianta  infetta,
+indipendentemente dal loro stato sanitario; 
+d) piante di specie diverse da quella della pianta infetta  che  sono
+risultate infette in altre parti dell'area delimitata; 
+e) piante specificate, diverse da quelle di cui alle lettere c) e d),
+che non sono state immediatamente sottoposte  a  campionamento  e  ad
+analisi molecolare e che non sono risultate indenni. 
+Le attivita' di  abbattimento  sono  effettuate  prendendo  tutte  le
+precauzioni necessarie e organizzando la rimozione in base al livello
+di rischio rappresentato da tali piante. 
+Inoltre, ai sensi dell'art. 8, prima della rimozione e nel  corso  di
+tale  rimozione  devono  essere   effettuati   adeguati   trattamenti
+fitosanitari contro gli insetti vettori  nell'area  interessata,  che
+possono includere metodi chimici, biologici o meccanici, in  funzione
+delle condizioni locali. 
+Se la rimozione avviene in un  periodo  dell'anno  in  cui  non  sono
+presenti gli insetti vettori, sulla base  di  adeguate  osservazioni,
+l'effettuazione dei trattamenti non e' necessaria. 
+L'apparato radicale delle piante deve essere rimosso o devitalizzato,
+con un adeguato trattamento fitosanitario  che  permetta  di  evitare
+nuovi germogli. 
+La distruzione delle piante deve avvenire  in  situ  o  in  un  luogo
+vicino designato a tal fine all'interno della zona infetta oppure,  a
+condizione che tali piante o parti di piante  siano  coperte  da  una
+rete di protezione contro i vettori, il piu' vicino possibile a  tale
+luogo. 
+Il Servizio fitosanitario regionale puo' decidere, in base al livello
+di rischio, di limitare  la  distruzione  unicamente  ai  rami  e  al
+fogliame. Le parti legnose residue  (tronco  e  branche  principali),
+prive di parti verdi, possono essere spostate al di  fuori  dell'area
+infestata solo a seguito di un adeguato trattamento insetticida. 
+Nei casi in cui non e'  possibile  procedere  all'estirpazione  delle
+piante a causa di comprovati motivi (ad es. aree impervie, rischio di
+smottamento,  terreno  roccioso,  ecc.),  il  Servizio  fitosanitario
+regionale puo' decidere, in base al livello di rischio,  di  limitare
+la distruzione ai rami e al fogliame. In tal caso l'apparato radicale
+di tali piante deve essere devitalizzato con un adeguato  trattamento
+fitosanitario. 
+Il  Servizio  fitosanitario  regionale  puo'  decidere  che  non   e'
+necessaria la  rimozione  per  le  piante  specificate  ufficialmente
+riconosciute dalla regione come piante  di  valore  storico,  purche'
+siano soddisfatte tutte le condizioni seguenti: 
+a) le piante specificate interessate  sono  sottoposte  ogni  anno  a
+   ispezione,  campionamento  e  prove  mediante  una  delle  analisi
+   molecolari ed e' confermato che non siano infette; 
+b) le singole piante specificate o l'area interessata sono sottoposte
+   ad adeguati trattamenti fitosanitari contro i vettori, in tutti  i
+   suoi stadi. 
+Il   Servizio   fitosanitario   regionale   comunica   al    Servizio
+fitosanitario centrale l'elenco delle piante di  valore  storico  non
+rimosse e ogni sua modifica. 
+Nelle aree demarcate elencate nell'allegato III del Regolamento  (UE)
+2020/1201, si  applicano  le  misure  di  contenimento  di  cui  agli
+articoli dal  12  al  17  del  suddetto  regolamento,  che  prevedono
+l'abbattimento delle sole piante che sono risultate infette a seguito
+dell'attivita' di monitoraggio effettuata ai sensi dell'articolo  15,
+paragrafo  2  e  applicando  le  stesse  modalita'   di   distruzione
+sopradescritte. Inoltre, si procedera', in un raggio di 50 m  attorno
+alla pianta infetta, a sottoporre a campionamento e  prove  tutte  le
+piante specificate e tutte le altre  piante  che  presentano  sintomi
+indicativi della possibile infezione. 
+ 
+6.6.2. Misure contro i vettori 
+In applicazione all'art.8 del Regolamento (UE) 2020/1201, il Servizio
+fitosanitario  regionale  dispone,   almeno   nella   zona   infetta,
+l'effettuazione  di  periodici  trattamenti  fitosanitari  contro  la
+popolazione di vettori, in tutti i suoi stadi. 
+Tali  interventi  comprendono  trattamenti   chimici,   biologici   o
+meccanici, in funzione dello stadio di sviluppo del vettore  e  delle
+condizioni locali, e riguardano  sia  le  aree  agricole  che  quelle
+extra-agricole. 
+Gli interventi contro gli  stadi  giovanili  del  vettore  consistono
+nell'eliminazione delle erbe spontanee su cui vivono,  attraverso  le
+lavorazioni superficiali del terreno. Il periodo piu' appropriato  in
+cui intervenire coincide con il picco del  IV  stadio  giovanile  che
+generalmente si verifica verso la meta'  di  aprile.  Le  lavorazioni
+comprendono arature, fresature, erpicature o trinciatura delle  erbe.
+Il controllo delle erbe infestanti  tramite  la  trinciatura  risulta
+meno efficace nella riduzione  della  popolazione  della  sputacchina
+rispetto alla lavorazione del terreno,  in  quanto  l'insetto  e'  in
+grado di completare il suo  ciclo  biologico  riparandosi  alla  base
+delle piante. Laddove risulti difficile o impossibile  l'accesso  con
+mezzi meccanici,  si  puo'  intervenire  con  altri  mezzi  fisici  o
+chimici. 
+Gli interventi contro lo stadio di adulto, che essendo alati  migrano
+dalle piante erbacee ai  giovani  germogli  delle  piante  arboree  o
+arbustive  tra  maggio  e  giugno,  prevedono  la  realizzazione   di
+trattamenti con prodotti insetticidi autorizzati. 
+Al fine di fornire indicazioni utili sulla tempistica  di  esecuzione
+degli interventi contro i vettori in  tutti  i  loro  stadi,  tenendo
+conto  che  il  ciclo  e'  fortemente  influenzato  dalle  condizioni
+climatiche,  il  Servizio  fitosanitario  regionale  deve  effettuare
+nell'area demarcata un  monitoraggio  annuale  delle  popolazioni  di
+vettori. 
+Il suddetto monitoraggio dei vettori  ha  altresi'  la  finalita'  di
+valutare  l'efficacia  delle  misure   fitosanitarie   di   controllo
+applicate. 
+Nel caso di adozione di misure di contenimento, i trattamenti  contro
+il vettore sono effettuati: 
+a) in un'area di almeno 5 km dal confine tra la  zona  infetta  e  la
+zona cuscinetto; 
+b) in prossimita' di siti di piante che presentano particolare valore
+culturale e sociale situati al di fuori dell'area di cui alla lettera
+a) e designati a tal fine dal Servizio fitosanitario regionale. 
+ 
+6.7. Monitoraggio dell'area delimitata 
+Il  Servizio  fitosanitario  regionale  monitora,  nei  periodi  piu'
+appropriati, la  presenza  di  Xylella  fastidiosa  nell'intera  area
+delimitata  mediante  indagini  annuali  su   base   statistica,   in
+applicazione all'art. 10 del Regolamento  (UE)  2020/1201  e  tenendo
+conto delle  informazioni  riportate  nella  scheda  di  sorveglianza
+fitosanitaria dell'EFSA. 
+La sorveglianza e' pianificata in funzione  dell'uso  del  territorio
+interessato e prevede il  campionamento  delle  piante  ospiti  nelle
+varie tipologie di ambiente coltivato, naturale e urbano, incluse  le
+attivita'  commerciali,  tenendo  conto  del   livello   di   rischio
+associato. 
+Nelle aree demarcate in cui si applicano misure di  eradicazione,  lo
+schema di campionamento  per  le  zone  infette  deve  permettere  di
+rilevare un tasso di presenza di piante infette  dello  0,5%  con  un
+livello di  confidenza  almeno  del  90%.  Nelle  zone  infette  sono
+sottoposti a campionamento e prove tutte le  piante  specificate  che
+non sono state rimosse a norma dell'articolo 7, paragrafo 1, come  ad
+es. gli olivi monumentali ufficialmente censiti. 
+Nelle zone cuscinetto lo schema di campionamento  da  applicare  deve
+permettere di rilevare un tasso di presenza di piante infette dell'1%
+con un livello di confidenza almeno del 90%, considerando che i primi
+400 m attorno alle zone infette presentano un livello di rischio piu'
+elevato. 
+Nelle aree demarcate in cui  si  applicano  misure  di  contenimento,
+l'attivita' di sorveglianza e' svolta conformemente a quanto disposto
+dall'articolo 15 del Regolamento (UE) 2020/1201. 
+In particolare, con riferimento alla zona infetta, il monitoraggio e'
+effettuato almeno nell'area di 5 km dal confine tra la zona infetta e
+la zona cuscinetto, detta 'zona di contenimento'.  Le  indagini  sono
+effettuate applicando uno schema di  campionamento  che  permette  di
+rilevare un tasso di presenza di piante infette dello 0,7  %  con  un
+livello di confidenza almeno del 90%. 
+Nella zona cuscinetto, anch'essa di  ampiezza  di  almeno  5  km,  le
+indagini  annuali  sono   effettuate   applicando   uno   schema   di
+campionamento che permette di rilevare un tasso di presenza di piante
+infette dell'1% con un livello di confidenza almeno del 90%. 
+La pianificazione della sorveglianza annuale deve tener  conto  delle
+infezioni riscontrate nelle precedenti  campagne  di  monitoraggio  e
+delle aree a maggiore rischio. 
+Devono essere definiti le unita' di ettari da ispezionare  oltre  che
+di piante specificate  da  sottoporre  a  campionamento  ed  analisi,
+distinti per i differenti livelli di rischio. 
+Nell'area delimitata deve essere  altresi'  attuato  il  monitoraggio
+degli insetti vettori, al fine di verificare la presenza di esemplari
+contaminati e l'efficacia delle misure di contrasto. 
+ 
+6.8. Controlli sulla movimentazione delle piante 
+Lo spostamento di piante specificate da un'area delimitata,  e  dalle
+rispettive zone infette alle zone cuscinetto, puo' avvenire  se  sono
+rispettati i requisiti fissati dagli artt. 19-24 del Regolamento (UE)
+2020/1201. 
+A  seguito  dell'istituzione  di  un'area  demarcata,   il   Servizio
+fitosanitario  regionale  dispone  senza  indugio   il   divieto   di
+movimentazione delle piante specificate,  relative  alla  sottospecie
+identificata,  agli  Operatori   professionali   e   ai   centri   di
+giardinaggio presenti nell'area demarcata e ne da' informazione  alla
+cittadinanza. 
+E' altresi' vietato lo spostamento all'esterno della zona  delimitata
+dei  residui  di  potatura  provenienti  da  piante  specificate.  Lo
+spostamento del materiale destinato agli impianti di smaltimento puo'
+avvenire se sono rispettate  le  disposizioni  emanate  dal  Servizio
+fitosanitario regionale, che  prevedono  periodi  di  stoccaggio  e/o
+adeguati trattamenti in base al livello di rischio. 
+Il Servizio fitosanitario regionale effettua le ispezioni  periodiche
+presso gli Operatori professionali e altre attivita' coinvolte  nella
+movimentazione di  piante  specificate,  al  fine  di  verificare  il
+rispetto delle suddette disposizioni. 
+Inoltre,  il  Servizio  fitosanitario  regionale   svolge   controlli
+ufficiali regolari sulle piante specificate che sono spostate  al  di
+fuori dell'area delimitata o che sono spostate da una zona infetta  a
+una  zona  cuscinetto,  presso  strade,  porti   e   aeroporti.   Per
+l'effettuazione di tali controlli, si avvale degli Enti  territoriali
+in  materia  di  pubblica  sicurezza  e  vigilanza  e  dell'Arma  dei
+Carabinieri - Comando unita' forestali, ambientali  e  agroalimentari
+e, se presente, al Corpo Forestale  Regionale.  Al  riguardo,  devono
+essere definiti specifici accordi e procedure  per  la  realizzazione
+dei controlli e delle azioni necessarie a seguito di non  conformita'
+riscontrate. 
+Il Servizio fitosanitario regionale puo'  concedere  l'autorizzazione
+alla produzione in area delimitata ai siti di produzione che ne fanno
+richiesta, dopo aver verificato il rispetto delle condizioni previste
+all'art. 24 del Reg. (UE) 2020/1201. Lo stesso Servizio fitosanitario
+regionale  istituisce  e  aggiorna  un  elenco  di   tutti   i   siti
+autorizzati. Tale  elenco  e  ogni  sua  modifica  e'  comunicato  al
+Servizio fitosanitario centrale. 
+ 
+6.9. Attivita' di sensibilizzazione 
+I Servizi fitosanitari regionali mettono a disposizione del pubblico,
+dei viaggiatori, degli Operatori professionali e degli  operatori  di
+trasporto internazionale le  informazioni  in  merito  alla  minaccia
+rappresentata da Xylella fastidiosa  e  alle  misure  adottate.  Essi
+mettono pubblicamente a disposizione tali informazioni sotto forma di
+campagne mirate di sensibilizzazione mediante pieghevoli,  manifesti,
+cartelli  stradali,  incontri  specifici  e  attraverso  i  siti  web
+istituzionali o altri siti web designati. 
+In  particolare,  devono  essere  fornite  informazioni   dettagliate
+sull'area delimitata, con indicazioni  particolareggiate  della  zona
+infetta e della zona cuscinetto, attraverso adeguata cartografia, e i
+contatti del Servizio fitosanitario regionale  al  fine  di  ricevere
+segnalazioni sulla possibile presenza di contaminazioni. 
+ 
+7. RUOLI E RESPONSABILITA' 
+ 
+7.1. Servizio fitosanitario centrale e Servizi fitosanitari regionali 
+Il Servizio fitosanitario  nazionale,  autorita'  competente  per  la
+protezione delle piante ai sensi dei  regolamenti  (UE)  2016/2031  e
+2017/625, provvede, con le strutture di cui al  Capo  II  del  D.lgs.
+19/2021, all'attuazione del presente Piano di emergenza,  secondo  le
+rispettive competenze. 
+Ai sensi dell'art. 5 del D.lgs. 19/2021,  al  Servizio  fitosanitario
+centrale  compete  il  coordinamento  e   l'interlocuzione   con   la
+Commissione europea e le altre Organizzazioni internazionali operanti
+nel settore fitosanitario; 
+Ad esso compete, altresi', l'adozione dei piani  di  emergenza  e  di
+azione nazionali, dei provvedimenti e delle ordinanze  fitosanitarie,
+inclusi gli standard tecnici e le procedure operative, previo  parere
+del Comitato fitosanitario nazionale; 
+Inoltre, provvede alla raccolta di dati  relativi  alla  presenza  ed
+alla diffusione  sul  territorio  nazionale  di  Xylella  fastidiosa,
+inclusa la predisposizione e la relativa divulgazione delle relazioni
+annuali,  nonche'  l'ufficializzazione  dello   stato   fitosanitario
+nazionale, previo il parere del Comitato fitosanitario nazionale. 
+Il Servizio fitosanitario centrale, sulla  base  della  deliberazione
+del  Comitato,  dichiara  l'emergenza  fitosanitaria  e   attiva   il
+Segretariato per le emergenze fitosanitarie, di  cui  all'articolo  9
+del D.lgs. 19/2021, con la funzione di raccordo tecnico operativo tra
+il Comitato fitosanitario  nazionale  e  le  Unita'  territoriali  di
+emergenza fitosanitaria, di cui all'articolo 10 del suddetto  decreto
+legislativo. 
+Nell'ambito  della  vigilanza   sull'applicazione   della   normativa
+fitosanitaria nel territorio  nazionale  e  sullo  svolgimento  delle
+attivita' di  protezione  delle  piante,  il  Servizio  fitosanitario
+centrale  puo'  programmare  degli  audit  presso  le  strutture  del
+Servizio fitosanitario nazionale al fine di  verificare  la  corretta
+attuazione del presente Piano. 
+Le relazioni sugli  audit  effettuati  sono  esaminate  dal  Comitato
+fitosanitario nazionale che,  se  del  caso,  delibera  le  opportune
+misure correttive per porre rimedio  alle  carenze  specifiche  o  di
+sistema individuate; 
+Ai sensi dell'art. 6 del  D.lgs.  19/2021,  ai  Servizi  fitosanitari
+regionali compete l'effettuazione delle indagini ufficiali,  al  fine
+di  verificare  l'eventuale  presenza  di  Xylella   fastidiosa   sul
+territorio di competenza, in aree pubbliche e  private,  inclusi  gli
+Operatori professionali. 
+Se viene riscontrata la presenza di  Xylella  fastidiosa,  i  Servizi
+fitosanitari regionali predispongono il piano d'azione,  istituiscono
+le aree delimitate e adottano le misure fitosanitarie relative a tali
+aree. In particolare, essi  prescrivono  tutte  le  misure  ufficiali
+ritenute necessarie,  ivi  compresa  la  distruzione  di  vegetali  e
+prodotti vegetali ritenuti contaminati o sospetti tali. 
+Nel caso che il territorio da delimitare ricada su piu' Regioni, ogni
+Servizio fitosanitario  regionale  deve  istituire  le  delimitazioni
+necessarie nel territorio di competenza, in modo che la delimitazione
+complessiva  delle  aree  risponda   ai   requisiti   richiesti   dal
+Regolamento (UE) 2020/1201. 
+I  Servizi  fitosanitari  regionali  possono  avvalersi  di  soggetti
+esterni  nella  realizzazione  di  specifiche   attivita'   correlate
+all'applicazione del presente piano, sulla base di specifici accordi. 
+A seguito della dichiarazione di  emergenza  da  parte  del  Comitato
+fitosanitario nazionale, i Servizi fitosanitari regionali  competenti
+istituiscono l'Unita' territoriale di emergenza fitosanitaria, di cui
+all'art. 10 del D.lgs. 19/2021, che da' attuazione al Piano di azione
+e alle ordinanze del Servizio fitosanitario centrale. 
+Ad essi compete, altresi', la raccolta delle informazioni e la tenuta
+dei registri regionali derivanti  dall'applicazione  della  normativa
+fitosanitaria, nonche' la redazione delle relazioni annuali. 
+I Servizi fitosanitari regionali realizzano, altresi',  il  programma
+di audit, in applicazione dei regolamenti (UE) 2016/2031 e  2017/625,
+sugli  organismi  delegati  nel  proprio  territorio  di   competenza
+all'esecuzione di controlli ufficiali o altre attivita' ufficiali. 
+Inoltre, ad essi compete la  messa  a  punto,  la  definizione  e  la
+divulgazione di strategie di profilassi e di difesa fitosanitaria. 
+L'attuazione delle misure fitosanitarie di abbattimento delle  piante
+e  dei  trattamenti  fitosanitari  sono  a  cura  dei  proprietari  e
+detentori, a qualsiasi titolo, del fondo, che ne sostengono gli oneri
+economici. Se l'adozione delle misure di attuazione anzidette risulta
+in tutto o in parte omessa, o comunque realizzata in modo  incompleto
+o  difforme  dai  termini  e  modalita'   prescritti,   il   Servizio
+fitosanitario territorialmente  competente,  provvede  all'attuazione
+delle misure in via sostitutiva, altresi' determinando i costi  delle
+attivita' necessarie a conseguirne la completa e corretta attuazione,
+con diritto di rivalsa nei confronti del soggetto  obbligato  in  via
+primaria. 
+ 
+7.2. Laboratori nazionali e di riferimento 
+L'attivita'  di  diagnosi  di  laboratorio  relativa   ai   controlli
+ufficiali svolti dai Servizi  fitosanitari  regionali  ai  sensi  del
+presente Piano e' effettuata da laboratori ufficiali  afferenti  alla
+Rete nazionale dei laboratori per la protezione delle piante, di  cui
+all'art. 16 del D.lgs. 19/2021. 
+Nell'ambito della Rete nazionale, sono riconosciuti  come  laboratori
+nazionali di riferimento  per  Xylella  fastidiosa,  conformemente  a
+quanto previsto dall'art. 101 del Reg. (UE) 2017/625,  il  Centro  di
+ricerca Difesa e Certificazione del  CREA  e  il  l'Istituto  per  la
+Protezione Sostenibile delle Piante del CNR. 
+Il Centro di ricerca Difesa e Certificazione  del  CREA  e'  altresi'
+riconosciuto come Istituto di riferimento nazionale per la protezione
+delle piante, nonche' laboratorio di riferimento dell'Unione  europea
+per batteri, virus e viroidi, di cui del regolamento  (UE)  2019/530,
+svolgendo un ruolo di supporto del Servizio  fitosanitario  nazionale
+per le attivita' di protezione delle piante in conformita' all'art. 8
+del D.lgs. 19/2021. 
+Per  l'effettuazione  di  analisi  di  autocontrollo,  gli  Operatori
+professionali possono rivolgersi ad ulteriori laboratori, che  devono
+rispondere  ai  requisiti  definiti  dal  Ministero  delle  politiche
+agricole alimentari e forestali. 
+Le competenze  dei  laboratori  afferenti  alla  Rete  nazionale  dei
+laboratori per la protezione delle piante sono definite con  apposito
+decreto ministeriale. 
+ 
+8. RISORSE PER L'ATTUAZIONE DEL PIANO 
+Ai fini di una corretta e piena  attuazione  del  presente  piano,  i
+Servizi fitosanitari regionali e il Servizio  fitosanitario  centrale
+effettuano  periodiche   ricognizioni   per   verificare   specifiche
+necessita' e carenze (mezzi tecnici, personale, risorse) e mettono in
+atto adeguate azioni correttive. 
+Le Regioni e le  Province  autonome  devono  individuare  le  risorse
+finanziarie necessarie per garantire la sorveglianza del territorio e
+l'attuazione di eventuali piani d'azione regionali. 
+Ulteriori risorse possono essere assegnate  ai  Servizi  fitosanitari
+attraverso il Fondo per  la  protezione  delle  piante,  iscritto  al
+bilancio  di  previsione  del  Ministero  delle  politiche   agricole
+alimentari e forestali ai sensi dell'art. 57 del D.lgs. n.19/2021. 
+Alle necessita' organizzative della formazione  e  dell'aggiornamento
+del personale e delle attivita' di comunicazione si  provvede  con  i
+fondi afferenti al Fondo per la protezione delle piante. 
+Il Servizio fitosanitario centrale presenta alla  Commissione  Ue  la
+richiesta di cofinanziamento dell'Unione delle  spese  sostenute  per
+attivita' di indagine e di eradicazione, ai sensi del Regolamento  di
+esecuzione (UE) 2021/690, sulla base delle  richieste  pervenute  dai
+Servizi fitosanitari regionali. 
+ 
+9. FORMAZIONE DEL PERSONALE 
+Le attivita' di formazione e aggiornamento del personale del Servizio
+fitosanitario  nazionale  sono  svolte  dal  Servizio   fitosanitario
+centrale, nell'ambito delle risorse umane, strumentali e  finanziarie
+disponibili, sulla base dei  piani  annuali  approvati  dal  Comitato
+fitosanitario nazionale. 
+Le informazioni relative a Xylella fastidiosa nonche' alle  modalita'
+di indagine, diagnosi e  controllo  sono  incluse  nei  programmi  di
+formazione di base destinati al nuovo personale. Inoltre, e' prevista
+l'organizzazione di  periodici  moduli  di  aggiornamento  specifici,
+ripetuti in differenti localita' del  territorio  per  facilitare  la
+partecipazione del personale del Servizio fitosanitario nazionale. 
+Per motivi  di  urgenza  e  qualora  si  verifichi  un  focolaio  nel
+territorio di propria competenza, i  Servizi  fitosanitari  regionali
+possono organizzare  corsi  di  formazione  o  di  aggiornamento,  in
+assenza di corsi nazionali, sulla base del  programma  approvato  dal
+comitato fitosanitario nazionale. 
+Ai corsi di formazione o di aggiornamento, su proposta  del  Comitato
+fitosanitario nazionale, possono avere  accesso  figure  diverse  dal
+personale  del  servizio  fitosanitario  nazionale  coinvolte   nelle
+attivita' di controllo di Xylella fastidiosa. 
+ 
+10. REVISIONE DEL PIANO DI EMERGENZA 
+Il  Comitato  fitosanitario  nazionale  esamina  con  cadenza  almeno
+annuale l'attuazione del presente Piano, ne verifica  l'efficacia  e,
+se del caso, ne valuta la revisione. 
+ 
+ 
+
+ 

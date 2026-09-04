@@ -1,0 +1,707 @@
+
+--- page 1 ---
+STATEMENT
+ADOPTED: 5 April 2016
+doi: 10.2903/j.efsa.2016.4456
+Treatment solutions to cure Xylella fastidiosa
+diseased plants
+EFSA Panel on Plant Health (PLH)
+Abstract
+This opinion addresses the question of the efﬁcacy of current treatment solutions to cure Xylella
+fastidiosa diseased plants, and discusses the experimental treatments under evaluation by two
+research groups in Apulian olive orchards infected by strain CoDiRO (Complesso del Disseccamento
+Rapido dell’Olivo). The increasing problems from newly emerging vascular bacterial diseases and the
+limited success to cure plants from such infections have stimulated numerous studies on treatments
+with chemical and biological compounds. Under ﬁeld conditions, various formulations of copper and
+zinc as spray or root drench are currently used while further options, for example the application of
+bioactive substances, are at an experimental stage. In Apulia, preliminary results from intensive
+treatments with such formulations, in combination with the use of good crop management practices,
+reported more vigorous new growth of diseased trees. However, results provided so far conﬁrmed the
+continued presence of X. fastidiosa after the treatments under evaluation. This is in agreement with
+current knowledge that there are no means to cure plants from this bacterial disease, in the sense of
+eliminating the pathogen from plant tissues. The reported positive response of the treated olive trees
+is most probably due to the effect of micronutrients and other bioactive compounds that, together
+with soil cultivation and agronomical practices, improve the vigour of the plants and their resilience to
+stress caused by bacterial infections. Notwithstanding the preliminary status of these ﬁndings, the
+Panel acknowledged the potentially positive effects of such treatments in prolonging the productive
+phase of olive trees and their putative relevance for the management of olive orchards, particularly in
+the containment area where eradication of the pathogen is considered no longer possible. The
+Panel also concluded that long-term studies are needed to conﬁrm that the reported positive effects
+on crop performance can be sustained over many years.
+© 2016 European Food Safety Authority. EFSA Journal published by John Wiley and Sons Ltd on behalf
+of European Food Safety Authority.
+Keywords: CoDiRO strain, copper, olive disease management, symptom expression, zinc
+Requestor: European Commission
+Question number: EFSA-Q-2016-00183
+Correspondence: alpha@efsa.europa.eu
+EFSA Journal 2016;14(4):4456
+www.efsa.europa.eu/efsajournal
+
+--- page 2 ---
+Panel members: Claude Bragard, David Cafﬁer, Thierry Candresse, Elisavet Chatzivassiliou, Katharina
+Dehnen-Schmutz, Gianni Gilioli, Jean-Claude Gregoire, Josep Anton Jaques Miret, Michael Jeger, Alan
+MacLeod, Maria Navajas Navarro, Bjoern Niere, Stephen Parnell, Roel Potting, Trond Rafoss, Vittorio
+Rossi, Gregor Urek, Ariena Van Bruggen, Wopke Van Der Werf, Jonathan West and Stephan Winter
+Acknowledgements: The Panel wishes to thank the members of the Working Group on urgent
+review of statements on Xylella fastidiosa and its control: Claude Bragard, Leonardo De La Fuente,
+Stephen Parnell and Stephan Winter for the preparatory work on this statement, Antonia Carlucci and
+Francesco Lops for their participation at the hearing as researchers mentioned in the mandate, and
+EFSA staff members: Miren Andueza and Sara Tramontini for the support provided to this statement.
+Suggested citation: EFSA PLH Panel (EFSA Panel on Plant Health), 2016. Statement on treatment
+solutions
+to
+cure
+Xylella
+fastidiosa
+diseased
+plants.
+EFSA
+Journal
+2016;14(4):4456,
+12
+pp.
+doi:10.2903/j.efsa.2016.4456
+ISSN: 1831-4732
+© 2016 European Food Safety Authority. EFSA Journal published by John Wiley and Sons Ltd on behalf
+of European Food Safety Authority.
+This is an open access article under the terms of the Creative Commons Attribution-NoDerivs License,
+which permits use and distribution in any medium, provided the original work is properly cited and no
+modiﬁcations or adaptations are made.
+The EFSA Journal is a publication of the European Food
+Safety Authority, an agency of the European Union.
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+2
+EFSA Journal 2016;14(4):4456
+
+--- page 3 ---
+Table of contents
+Abstract...................................................................................................................................................
+1
+1.
+Introduction....................................................................................................................................
+4
+1.1.
+Background and Terms of Reference as provided by the requestor......................................................
+4
+1.2.
+Interpretation of the Terms of Reference...........................................................................................
+5
+1.3.
+Additional information......................................................................................................................
+6
+2.
+Data and methodologies ..................................................................................................................
+6
+2.1.
+Data...............................................................................................................................................
+6
+2.2.
+Methodologies.................................................................................................................................
+6
+3.
+Assessment.....................................................................................................................................
+6
+4.
+Conclusions..................................................................................................................................... 10
+References............................................................................................................................................... 11
+Abbreviations ........................................................................................................................................... 12
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+3
+EFSA Journal 2016;14(4):4456
+
+--- page 4 ---
+1.
+Introduction
+1.1.
+Background and Terms of Reference as provided by the requestor1
+The purpose of this mandate is to request, pursuant to Article 29 of Regulation (EC) No 178/20022,
+scientiﬁc advice in the ﬁeld of plant health as regards the regulated harmful organism Xylella fastidiosa
+(Wells et al.).
+Speciﬁcally, the Commission has recently been confronted with a number of statements which are
+questioning the overall European Union (EU) control strategy against X. fastidiosa and some relevant
+legal provisions laid down under Decision (EU) 2015/7893. Such statements are the grounds for
+several appeals to the European Court of Justice which are pending for ﬁnal ruling. Those statements
+and the related questions on which the Commission requests the European Food Safety Authority
+(EFSA) scientiﬁc advice are presented below:
+1)
+It is considered that the population of X. fastidiosa subsp. pauca, in Apulia (Italy), is
+heterogeneous as several different strains are present in the infected area, on top of the
+unique strain (referred to as CoDiRO) reported so far.
+–
+Is there any scientiﬁc conclusive evidence for such a statement?
+2)
+The expression of the so-called ‘quick declining symptoms in olive plants’ (CoDiRO) seems to
+be correlated, not only to the presence of X. fastidiosa or other fungi present within the
+xylematic vessels within the plant, but also to a number of other factors which have not been
+fully taken into account in the EU Decision. Such factors are: the degree of compactness of the
+soil, quantity of organic matter in the soil, presence of biodiversity between the microfauna of
+the soil, degree of salinization of the soil, concentration of glyphosate (or other chemical toxic
+agents), nutrient concentration, as well as any pruning activities carried out, including
+ploughing of the soil and other agricultural practices.
+–
+Is this statement in agreement with current scientiﬁc knowledge? Please advise whether
+this would affect the risk of X. fastidiosa for the rest of Union.
+3)
+The causing link between X. fastidiosa and the quick declining symptoms of olive trees is still
+not established and Koch’s postulates have not yet been fulﬁlled. Therefore, it is not sure that
+X. fastidiosa is the only and conﬁrmed causing agent of the plant death.
+–
+Can EFSA provide an update on the current scientiﬁc knowledge about this topic? In case
+Koch’s postulates have not yet been fulﬁlled for the ‘quick declining symptoms’ in olives,
+please advise whether this would affect the risk of X. fastidiosa for the rest of Union
+compared to what reported in the Pest Risk Assessment of January 2015 (EFSA Journal
+2015;13(1):3989)?
+4)
+Removal of infected trees is not considered to be a feasible option to contain or eradicate the
+bacterium, nor to prevent the further spread of the quick declining symptoms of olive plants,
+as also experienced in USA, Brazil and Taiwan. Even more, the removal of host plants,
+regardless of their health status, within a radius of 100 m around the infected plants as
+requested by Decision (EU) 2015/789 for any outbreak identiﬁed outside the province of Lecce,
+where the bacterium is not yet established, is considered to be not scientiﬁcally validated.
+–
+Can EFSA review such a statement on the basis of current scientiﬁc knowledge with
+regards to the level of prevention of further spread of X. fastidiosa in areas not yet
+infected? In particular:
+i
+In a system-based approach, as proposed in Article 7 of Decision (EU), 2015/789, can
+EFSA advise about the efﬁcacy of removing infected plants located within an area where
+the bacterium is considered to be established, (so-called ‘containment area’), and
+1 Submitted by European Commission, ref. SANTE/G1/PDR/mm(2016)1031036.
+2 Regulation (EC) No 178/2002 of the European Parliament and of the Council of 28 January 2002 laying down the general
+principles and requirements of food law, establishing the European Food Safety Authority and laying down procedures in
+matters of food safety, OJ L 31, 1.2.2002, p. 1–24, as last amended.
+3 Commission Implementing Decision (EU) 2015/789 of 18 May 2015 as regards measures to prevent the introduction into and
+the spread within the Union of Xylella fastidiosa (Wells et al.). OJ L 125, 21.5.2015, p. 36–53.
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+4
+EFSA Journal 2016;14(4):4456
+
+--- page 5 ---
+particularly located in proximity of the buffer zone, where the bacterium is not yet
+present with the aim to prevent further spread?
+ii
+In a system-based approach, as proposed in Article 6 of Decision EU 2015/789, can
+EFSA advise about the efﬁcacy of removing host plants, regardless of their health status,
+located in proximity of recently detected infected plants, located in areas where the
+bacterium was not known to occur before that detection (e.g. buffer zone or outside the
+‘containment area’) with the aim to prevent further spread?
+5)
+It is alleged solutions to treat diseased plants in open ﬁeld would be currently available. In this
+respect, it is often referred to experiments carried out by Prof. Marco Scortichini of CREA (Fruit
+Tree Research Unit, Caserta, Italy) and the ones carried out by Prof. Francesco Lops and Dr
+Antonia Carlucci from the University of Foggia (Italy).
+–
+Can EFSA contact these researchers and assess the outcome, if provided, of these on-ﬁeld
+experiments aiming at curing diseased plants?
+–
+Can EFSA also provide an update about recent treatment solutions, scientiﬁcally validated,
+if any, to cure diseased plants?
+6)
+From the Pest Risk Assessment of EFSA (EFSA Journal 2015;13(1):3989), reference is made to
+Section 3.5.2 The intensive use of insecticide treatment to limit the disease transmission and
+control the insect vector may have direct and indirect consequences for the environment by
+modifying whole food webs with cascading consequences, and hence affecting various trophic
+levels. For example, the indirect impact of pesticides on pollination is currently a matter of
+serious concern (EFSA, 2013b). In addition, large-scale insecticide treatments also represent
+risks for human and animal health; Section 4.3.2.2. large-scale application of insecticides may
+lead to the development of insecticide resistance as well as to environmental and human
+health issues; Section 4.3.3.4. Similarly, insecticide treatments could have a negative result by
+modifying
+insect
+population
+dynamics
+and
+favouring
+insect
+vectors,
+e.g.
+by
+placing
+proportionally higher pressure on the insects’ natural enemies.
+–
+Can EFSA provide clariﬁcation on this matter in relation to the phytosanitary treatments
+required by Decision (EU) 2015/789 to be carried out prior to the removal of plants
+referred to in paragraph 2 of Article 6 and Article 7 against the vectors of X. fastidiosa and
+plants that may host those vectors? It is to be noted that those treatments, as appropriate,
+may include as well the removal of herbs where insect vectors lay down their eggs.
+In view of a quick reaction expected by the Commission as part of the ongoing appeals to the
+European Court of Justice, EFSA is requested to prepare an urgent opinion by 18 March 2016. As
+regards speciﬁcally point 1 and point 5 above, an extended deadline could be set for 30 June and 31
+March 2016, respectively.
+1.2.
+Interpretation of the Terms of Reference
+The Terms of Reference (ToR) are organised in six points, each of which refers to a different aspect
+of risks connected to the presence of X. fastidiosa in the EU. Under each point, the European
+Commission addresses one or more questions to EFSA.
+In this opinion, the EFSA Panel on Plant Health (PLH Panel) replies to point 5 and related questions
+as required by the indicated deadline.
+This opinion was prepared in the light of the Italian outbreaks of CoDiRO (Complesso del
+Disseccamento Rapido dell’Olivo, whose English equivalent is OQDS, from olive quick decline
+syndrome). Therefore, unless speciﬁed otherwise, the focus of the replies is on X. fastidiosa subsp.
+pauca strain CoDiRO.
+The question whether scientiﬁcally validated treatments are available to cure plant diseases caused
+by X. fastidiosa in open ﬁeld conditions is addressed in this opinion by distinguishing between the
+improvement in plant appearance (in terms of recovery from disease symptoms and vigorous growth
+despite remaining infected) and the cure from infection by elimination of the bacterial pathogen from
+the plant.
+According to the International Standards for Phytosanitary Measures (ISPM) 5, a ‘treatment’ is an
+ofﬁcial procedure for the killing, inactivation or removal of pests, or for rendering pests infertile or for
+devitalisation (FAO, 2016). In previous opinions on X. fastidiosa, the Panel assessed physical
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+5
+EFSA Journal 2016;14(4):4456
+
+--- page 6 ---
+treatments such as pruning (EFSA PLH Panel 2015a, 2016) and temperature (EFSA PLH Panel 2015a,b).
+In this opinion, the term ‘treatment’ exclusively refers to treatments with chemical mode of action,
+alone or in combination with other measures.
+1.3.
+Additional information
+This opinion is the second output that the Panel was requested to produce in order to address the
+mandate. Points 2, 3, 4 and 6 from the mandate were already addressed in a previous Panel opinion
+(EFSA PLH Panel, 2016) and point 1 will be addressed in a separate opinion at a later stage.
+2.
+Data and methodologies
+2.1.
+Data
+To revise each statement and reply to connected questions, targeted extensive literature searches
+were conducted. Searches were carried out on the research platform ISI Web of Science. The
+references retrieved were reviewed together with those cited in the EFSA risk assessment on
+X. fastidiosa produced earlier (EFSA PLH Panel, 2015a). Further references and information were
+obtained from citations within the reviewed references and from experts.
+2.2.
+Methodologies
+The assessment was conducted in line with the principles described in the EFSA Guidance on
+transparency in the scientiﬁc aspects of risk assessment (EFSA Scientiﬁc Committee, 2009). The
+present document is structured according to the Guidance on the structure and content of EFSA’s
+scientiﬁc opinions and statements (EFSA Scientiﬁc Committee, 2014).
+In order to respond to the question requesting contacting the researchers Dr Antonia Carlucci and
+Prof. Francesco Lops of the University of Foggia (Italy) and Prof. Marco Scortichini of CREA (Caserta,
+Italy) to assess the outcome of their ﬁeld experiments, EFSA proceeded as follows: a letter was sent to
+the three scientists, inviting them to share the applied methodologies, collected data and any relevant
+supporting material (such as pictures, presentations, etc.) and to participate in a technical hearing of
+the Working Group.
+As the three researchers contacted were unable to share with EFSA the original data of their
+experiments due to patent or copyright issues stated, and also considering the preliminary phase of
+these experiments, it was decided to conduct a technical hearing with a more descriptive approach in
+order to obtain feedback on the ongoing activity and future expectations.
+Carlucci and Lops accepted the invitation to participate and the hearing was conducted during the
+6th Working Group meeting, on 22 March. The information obtained during the hearing is included in
+the minutes of the Working Group and available online at http://www.efsa.europa.eu/sites/default/
+ﬁles/plhxylellaurgentreview.pdf.
+Scortichini did not accept the invitation to participate in the technical hearing but provided a written
+response via email on 19 March 2016, which in this document is referred to as ‘Scortichini, personal
+communication’.
+Because the data collected during the ﬁeld experiments by the two above mentioned research
+groups were not provided to the Panel and the same researchers considered the results obtained until
+now preliminary pending repetition for at least another season, the Panel could neither provide a
+scientiﬁc peer-review nor validate their results in this scientiﬁc opinion.
+3.
+Assessment
+This request is connected to the results collected in Apulian olive orchards from experimental
+treatments on olive trees infected by X. fastidiosa strain CoDiRO by Prof. Marco Scortichini of CREA
+(Caserta, Italy) and by Dr Antonia Carlucci and Prof. Francesco Lops from the University of Foggia
+(Italy). The Panel was then asked to evaluate the outcomes of the work conducted by these two
+research groups that have reported promising preliminary results from their treatment approaches.
+In addition, the Panel was requested to provide an update on the availability of scientiﬁcally validated
+treatments to cure plants infected with X. fastidiosa in open ﬁeld conditions.
+With regard to this second point, the Panel has reviewed the scientiﬁc literature on this topic and
+observed the following: the limited success in controlling bacterial infections in plants and the
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+6
+EFSA Journal 2016;14(4):4456
+
+--- page 7 ---
+increasing problems from newly emerging bacterial diseases of crops, have motivated fundamental and
+applied research, as well as industry efforts to explore further avenues for disease control. This is the
+case, for example, of ﬁre blight of apple and pear (Erwinia amylovora), citrus canker (Xanthomonas
+citri subsp. citri), citrus greening (‘Candidatus Liberibacter asiaticus’, also known as huanglongbing
+(HLB)), Pierce’s disease in grapevine (X. fastidiosa subsp. fastidiosa) and CoDiRO disease in olives
+(X. fastidiosa subsp. pauca strain CoDiRO).
+A review of the available literature on treatments against vascular bacterial diseases showed that
+currently proposed treatments include: (i) antibiotics, used experimentally; (ii) formulations of bioactive
+compounds as activators to enhance plant resistance response; (iii) formulations of growth promoting
+micronutrients or biological compounds; (iv) antagonistic bacterial or fungal strains; (v) copper
+(Cu)-based formulations with fertilising, antimicrobial and/or fungicidal action; and (vi) formulations in
+commercial products applied in combinations and together with other crop management practices.
+Based on the request, the Panel considered in its evaluation the approaches to treat bacterial
+diseases of ﬁeld-grown plants and, in particular, compounds that are used for the management of
+X. fastidiosa diseases in olive or other crops. From the review of the available literature, the Panel can
+conﬁrm that numerous studies exist on the efﬁcacy of chemical and biological compounds on the
+growth of bacteria. Many of these experiments are however in vitro studies and thus of limited
+informative value as it is impossible to draw clear conclusions on potential in vivo activity. Moreover, for
+many experimental products, notwithstanding their potential efﬁcacy, it remains to be shown whether
+environmental or economic considerations would allow or prevent their use under ﬁeld conditions. For
+example, antibiotics (oxytetracycline,4 streptomycin,5 tetracycline) have been used experimentally to
+treat ﬁre blight and, in the ﬁeld, to treat citrus greening in individual trees (Stockwell and Duffy, 2012;
+Divya et al., 2013; Lokesh et al., 2014; Zhang et al., 2014) and on grapevine plants affected by
+Pierce’s disease or on other X. fastidiosa-infected hosts (Hopkins and Mortensen, 1971; Hopkins, 1979;
+Kostka et al., 1985; Chang, 1987; Leu and Su, 1993; Kirkpatrick et al., 2003; Hartman et al., 2010).
+Reduction or temporal suppression in Pierce’s disease symptoms were reported on treated grapevines
+as they remained symptomless for a number of years, but none of the treatments did eliminate
+X. fastidiosa infections. Notwithstanding, antibiotics are not used outside experimental set-ups to treat
+X. fastidiosa and they are not approved for use as bactericides in plant and crop protection in the EU.
+This is due to the technical limitations connected to their application but, more so, because of the risk
+of antimicrobial resistance development and thus the high concerns at the EU level regarding the use
+of antibiotics in agriculture per se (ECDC/EFSA/EMA, 2015).
+Other types of treatments, for which the most valid information comes from experience gained
+from long-term experiments to ﬁght the Pierce’s disease of grapevine in the USA, are the application of
+micronutrients, Cu, zinc (Zn), manganese (Mn) at various concentrations and chemical forms, with
+additives to enhance their availability and uptake by the plant. A broad variety of commercial products
+based on the toxic activity of speciﬁc mineral elements is available and in use for disease control as
+well as plant fertilisers. Many of those compounds enhance plant resistance (Fones et al., 2010) and
+have fungicidal and bactericidal effects (Kirkpatrick et al., 2003; Sayler and Kirkpatrick, 2003). Copper
+ions (Cu++) and zinc ions (Zn++), for instance, are beneﬁcial to living organisms because they serve as
+stabilisers and catalysts in many enzymes; however, at high concentrations, they can become toxic. In
+agriculture, Cu has been used for disease control for many decades. In Cu formulations, it is the toxic
+effect of Cu++ ions which block enzyme reactions leading to inactivation and denaturation of fungal
+spores and bacteria when applied above the homeostatic range for microbes (Borkow and Gabbay,
+2005; Mackie et al., 2012). In particular, for the control of fungal pathogens, Cu preparations, copper
+sulfate, etc. are widely used, especially for pathogen control in fruit orchards, vineyards and hop
+gardens. For ﬁeld control of plant pathogenic bacteria, Cu++ is commonly sprayed to aerial parts of the
+plant to control diseases like citrus canker caused by Xanthomonas citri subsp. citri (Behlau et al.,
+2010, 2011; Scapin et al., 2015), bacterial canker of stone fruits caused by Pseudomonas syringae pv.
+syringae (Sayler and Kirkpatrick, 2003) and others. In contrast to the xylem-invading X. fastidiosa, all
+of these bacteria controlled by Cu sprays live on leaf surfaces and aerial parts of the plant, hence foliar
+4 Prohibited in EU as plant protection product by Commission Regulation (EC) No 2076/2002 of 20 November 2002 extending
+the time period referred to in Article 8(2) of Council Directive 91/414/EEC and concerning the non-inclusion of certain active
+substances in Annex I to that Directive and the withdrawal of authorisations for plant protection products containing these
+substances. OJ L 319, 23.11.2002, p. 3–11.
+5 Prohibited in EU as plant protection product by Commission Decision of 30 January 2004 concerning the non-inclusion of
+certain active substances in Annex I to Council Directive 91/414/EEC and the withdrawal of authorisations for plant protection
+products containing these substances. 2004/129/EC. OJ L 37, 10.2.2004, p. 27–31.
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+7
+EFSA Journal 2016;14(4):4456
+
+--- page 8 ---
+applications of Cu in concentrations toxic to bacteria can reach the pathogens before they enter the
+plant. X. fastidiosa is distributed along the xylem vessels, where it forms bioﬁlms that protect bacteria
+from environmental stresses. Therefore, to be effective against X. fastidiosa, a compound should make
+direct contact with the bacterium and this is more likely to occur with injected formulations than with
+spraying or soil drenching.
+Zn-based formulations are also used to control some plant pathogens. Zinc sulfate, for instance,
+has inhibitory activity against Xanthomonas campestris pv. vesicatora, the causal agent of bacterial leaf
+spot on peppers and tomatoes, when applied in vitro (Adaskaveg and Hine, 1985). For X. fastidiosa
+the effect of Zn++ has been studied intensively. Studies on the effect of Zn++ in vitro showed
+concentration-dependent effects in varying directions, as the presence of Zn in xylem vessels has been
+positively (Andersen et al., 2007) or negatively (Malavolta et al., 2005; Brady et al., 2010) correlated
+with the growth of X. fastidiosa. At high concentrations, Zn++ ions have deleterious effects on bacteria
+(Cobine et al., 2013; Navarrete and De La Fuente, 2014). Application of Zn drenches to grapevines
+was shown to decrease X. fastidiosa populations, but with inconsistent effects on disease development
+(Brady et al., 2010). Grapevines with Pierce’s disease were submitted to injections of Zn formulations,
+soil drenching and foliar sprays by Kirkpatrick et al. (2003) but long-term positive effects, such as
+reduction in bacterial populations or alleviation of disease symptoms, have not been reported. The
+most effective treatments to protect grapevines against X. fastidiosa were found to be injections of
+streptomycin or zinc sulfate into the stems of vines. By direct delivery into the xylem, the active
+compound was brought in contact with the pathogen. The treatments prevented symptom expression
+over 3 years but disease suppression did not eliminate the causal agent, X. fastidiosa, and in the
+following years disease symptoms reappeared (Kirkpatrick et al., 2003).
+In the experimental treatments of olive trees currently conducted to mitigate the CoDiRO disease in
+southern Italy, commercial products, such as fertilisers, fungicides and bioactive compounds, alone or
+in combination, also together with agronomic practices are used. In particular, the products and
+formulations used by the two research groups are also used in organic farming:
+•
+The work conducted by the group of Carlucci and Lops (University of Foggia), that has been
+recently described in a non-peer-reviewed journal (Carlucci et al., 2016) and was the object of
+a hearing (Section 2.2), involves the application of commercial products, in formulations and
+concentrations recommended and applied either as single treatments or in combinations.
+•
+The experiments of the Scortichini group (Scortichini, personal communication) tested the
+treatment of olive trees in open ﬁelds with a commercial product containing Zn (4%), Cu (2%)
+and citric acid.
+The experiments conducted in southern Italy by the Carlucci and Lops group from the University of
+Foggia reported positive effects of most treatments on the vigour of olive trees affected by the
+disease. Although in the experimental set-up only a limited number of plants was subjected to
+particular treatments, the difference between untreated and treated plants was evident in their
+appearance (i.e. more leaves per branch with respect to the untreated controls). After only 5 months
+of treatment, trees with greening branches and lush green leaves were shown in their report, although
+all the treated trees tested positive for X. fastidiosa. In addition, sizable olive harvests from trees
+subjected to the treatments were reported. Similar results were also reported from experimental
+treatments conducted by the Scortichini research group (although information could only be retrieved
+from grey literature and video clips from the internet).6
+In the experiments conducted in southern Italy by the Carlucci and Lops group, the treatments
+were applied after rigorous pruning of diseased trees to remove dead branches. Trees treated with
+several bioactive compounds produced vigorous new season growth of branches with leaves that
+lacked disease symptoms (Carlucci et al., 2016). As shown in pruning experiments with Pierce’s
+disease, affected grapevines subjected to severe pruning regenerated quickly from the deep impact
+of the intervention and remained free of symptoms for a number of years before disease symptoms
+reappeared (Kirkpatrick, 2008). In the experiment on Apulian olive trees, soil management was
+carried out in combination with other measures with the objective of improving soil structure and
+controlling weed/vegetation in order to reduce insect vector populations. While treatment effects
+6 Some sources: http://www.trnews.it/2015/05/08/xylella-ecco-gli-effetti-della-cura-israeliana-sugli-ulivi/123114229/
+http://www.csvsalento.it/notizie/index.php?id=5567
+http://xylellareport.it/2015/10/17/lo-strano-caso-della-lebbra-dellulivo-che-divenne-co-di-ro-e-poi-xylella/
+https://www.youtube.com/watch?v=gDxGDgw8bzw
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+8
+EFSA Journal 2016;14(4):4456
+
+--- page 9 ---
+were recorded during the experiments (Carlucci et al., 2016), it was stressed during the hearing that
+the combined effects of all interventions (i.e. crop management practices, such as pruning, soil
+cultivation/aeration, weeding, irrigation, fertilisation, application of micronutrients, plant growth
+activator substances) contribute to improving the health status of the plants. While this is a well-
+acknowledged fact, the positive results from this preliminary study cannot hide the fact that deﬁnite
+controls for each treatment are missing and thus effects of individual measures are difﬁcult to
+assess.
+The experimental treatment started by the group of Scortichini in 2015, with a commercial product
+containing Zn (4%), Cu (2%) and citric acid is considered by the researcher as promising as all the
+treated plants, which were all infected by the bacterium from the beginning of the experiment,
+survived both the last hot summer and the current winter (Scortichini, personal communication).
+Both research groups stated that those treatments are tested with the scope to suppress the
+disease symptoms and not to eliminate the pathogen in the olive trees infected by X. fastidiosa in
+Apulia.
+From the knowledge gained during the hearing, together with available information from the
+management of bacterial diseases (citrus, grapevine and other tree crops), the Panel can draw the
+following considerations on the treatment of olive trees currently tested in Apulia:
+1)
+The mode of action – directly on the pathogen, or indirectly on the plant – of the compounds
+listed above and used to control plant diseases, in particular those caused by bacteria, is not
+known. However, based on extensive research on the management of Pierce’s disease in
+grapevine, it can be inferred that such treatments neither can protect nor cure the plant from
+X. fastidiosa infections. Furthermore, those treatments can have impacts on other pathogens in
+the plant, and thus positively affect plant responses by reducing the severity of disease
+symptoms.
+2)
+While for a number of compounds an in vitro activity on the growth of bacterial cultures is
+demonstrated, further proof of their efﬁciency under natural conditions (in vivo) is lacking in
+most cases. The most promising therapeutic treatments with direct bactericidal effects would
+be expected from application of antibiotics and from the use of Zn++ preparations. However,
+the necessity to bring these antibacterial treatments into direct contact with the bacteria would
+require repeated injections into the xylem of individual plants. There are no antibiotics
+approved in the EU as bactericides in crop or plant protection. Due to the increased risk of
+resistance development to antibacterial compounds in bacteria, the use of antibiotics, in
+particular in agriculture, is expected to be of high concern in the EU.7
+3)
+The Panel acknowledges that the positive effects from good crop management practices,
+including pruning and soil cultivation, applied in combination with the treatments under
+evaluation, may have contributed to the reported improvement of the healthy appearance of
+plants infected with X. fastidiosa. The overall effects from such crop management practices are
+likely to promote vigorous growth of the plant, by increasing water and nutrient availability and
+utilisation, and plant metabolism.
+4)
+Despite the reported more vigorous growth and healthy appearance, the treated olive trees are
+still infected by X. fastidiosa. While it can be considered that pruning or direct effects from
+treatments can result in a reduction – not in the elimination – of bacterial load, this reduction
+could be temporary and could also be compensated by invasion of recovering bacterial
+population into newly formed branches and leaves. Plants in such a state may still function as
+sources of infection for insects to acquire the pathogen, and insect vectors might even be
+more attracted to plants with fresh and lush growth (EFSA PLH Panel, 2016).
+5)
+The Panel acknowledges the relevance of testing the treatments at short intervals (e.g. every
+8 weeks) and in combination with intense crop management practices during this experimental
+phase. However, while the strategy could require a later adjustment also to reduce the
+frequency
+of
+the
+treatments,
+only
+experiments
+over
+several
+seasons
+can
+prove
+the
+effectiveness and applicability of such interventions.
+6)
+While many Cu/Zn products are in use as fertilisers and for disease control in conventional and
+organic farming, there can be negative long-term effects from their use, such as the
+7 See Commission’s Action Plan (2011–2016) against the rising threats from antimicrobial resistance. Available online: http://
+ec.europa.eu/dgs/health_food-safety/amr/action_eu/index_en.htm
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+9
+EFSA Journal 2016;14(4):4456
+
+--- page 10 ---
+accumulation of Cu in soils and problems from Cu toxicity.8 As shown for other bacteria, the
+intensive use of Cu and Zn can also lead to an increased resistance of the bacteria to these
+elements (Behlau et al., 2010, 2012, 2013). Therefore, it has to be considered that positive
+effects on crop performance, also on olive trees, need to be sustained over many years and
+not counterbalanced by the acknowledged adverse effects to the environment.
+Based on the results collected till now, the Panel considers it premature to draw conclusions on
+long-term beneﬁts of such treatments. Notwithstanding the preliminary nature of the experimental
+results and the risk of limited statistical robustness when small numbers of plants are treated, the
+Panel acknowledges the potentially positive effects of such treatments in prolonging the productive phase
+of olive trees. While an experimental conﬁrmation is still pending on data from long-term experiments
+over several seasons, such treatments have potential relevance for the management of olive orchards in
+the area currently identiﬁed as the containment zone, where eradication is no longer possible.
+4.
+Conclusions
+The PLH Panel was requested to contact the researchers Marco Scortichini of CREA (Caserta, Italy),
+and Francesco Lops and Antonia Carlucci from the University of Foggia (Italy), in order to assess the
+outcomes of their experiments aiming at treating CoDiRO diseased plants. The Panel was also
+requested to provide an update about any recent scientiﬁcally validated treatment to cure X. fastidiosa
+diseased plants.
+From the collected feedbacks and the evidence reviewed, the Panel could draw the following
+conclusions on the treatment of olive trees currently tested in Apulia:
+1)
+The treatments under consideration may reduce the symptoms of X. fastidiosa in olive trees,
+but do not eliminate the pathogen X. fastidiosa from the treated infected plants.
+2)
+There is currently no treatment known to cure plants, by eliminating the pathogen, from
+xylem-limited bacterial infections, under ﬁeld conditions.
+3)
+The positive effects from good crop management practices applied in combination with the
+treatments under evaluation may have contributed to the reported vigorous growth and
+improved appearance of the diseased plants.
+4)
+Despite the reported more vigorous growth and healthy appearance, the treated olive trees are
+still systemically infected by X. fastidiosa, and could be acting as sources of inoculum for insect
+vectors which might be even more attracted to plants showing good vegetative conditions.
+5)
+Treatments tested at short intervals (e.g. every 8 weeks) and in combination with intense crop
+management practices during this experimental phase, may require further adjustments in the
+frequency of treatments. In addition, only treatments conducted over several seasons can
+provide information on the long-term effectiveness of these approaches.
+6)
+While many Cu/Zn products are in use for fertilisation and disease control in conventional and
+organic farming, negative long-term effects from their use are the accumulation of Cu/Zn in
+the soil, problems from Cu/Zn toxicity and the possible decrease in bacterial susceptibility.
+Therefore, long-term studies are required to conﬁrm that positive effects on crop performance
+can be sustained for many years and not counterbalanced by adverse effects to the
+environment.
+Based on the results collected till now, the Panel considers it premature to draw conclusions on
+long-term usefulness of such treatments. Notwithstanding the preliminary nature of the experimental
+results and their limited statistical robustness, due to the small number of plants treated, the
+Panel acknowledges the potentially positive effects of such treatments in prolonging the productive
+phase of olive trees. While an experimental validation is still pending data from long-term experiments
+over several seasons, such treatments have a potential relevance for the management of olive
+orchards in the area currently identiﬁed as the containment zone and supports the need for further
+studies in this regard.
+8 See DG SANTE, 2015. Review report for the active substance Copper compounds. Copper compounds SANCO/150/08 ﬁnal 10
+October 2014. 9 pp. Available online: http://ec.europa.eu/food/plant/pesticides/eu-pesticides-database/public/?event=active
+substance.detail&language=FR&selectedID=1158
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+10
+EFSA Journal 2016;14(4):4456
+
+--- page 11 ---
+References
+Adaskaveg JE and Hine RB, 1985. Copper tolerance and zinc sensitivity of Mexican strains of Xanthomonas
+campestris pv. vesicatoria, causal agent of bacterial spot of pepper. Plant Disease, 69, 993–996.
+Andersen PC, Brodbeck BV, Oden S, Shriner A and Leite B, 2007. Inﬂuence of xylem ﬂuid chemistry on planktonic
+growth, bioﬁlm formation and aggregation of Xylella fastidiosa. FEMS Microbiology Letters, 274, 210–217.
+Behlau F, Amorim L, Belasque J, Bergamin A, Leite RP, Graham JH and Gottwald TR, 2010. Annual and polyetic
+progression of citrus canker on trees protected with copper sprays. Plant Pathology, 6, 1031–1036.
+Behlau F, Canteros BI, Minsavange GV, Jones JB and Graham JH, 2011. Molecular characterization of copper
+resistance genes from Xanthomonas citri subsp. citri and Xanthomonas alfalfae subsp. citrumelonis. Applied
+and Environmental Microbiology, 77, 4089–4096.
+Behlau F, Jones JB, Myers ME and Graham JH, 2012. Monitoring for resistant populations of Xanthomonas citri
+subsp. citri and epiphytic bacteria on citrus trees treated with copper or streptomycin using new semi-selective
+medium. European Journal of Plant Pathology, 132, 259–270.
+Behlau F, Hong JC, Jones JB and Graham JH, 2013. Evidence for acquisition of copper resistance genes from
+different sources in citrus-associated Xanthomonads. Phytopathology, 103, 409–418.
+Borkow G and Gabbay J, 2005. Copper as a biocidal tool. Current Medicinal Chemistry, 12, 2163–2175.
+Brady J, Faske J, Faske T and McGahan D, 2010. Evaluating the impact of nutritional treatments on Xylella
+fastidiosa in grapevine. Phytopathology, 100, S16.
+Carlucci A, Ingrosso F, Faggiano S, Raimondo ML and Lops F, 2016. Strategie per contenere il disseccamento degli
+olivi. L’Informatore Agrario, 8/2016, 58–63.
+Chang CJ, 1987. Suppression of leaf scald symptoms in plum by oxytetracycline injection. Annals of the
+Phytopathological Society of Japan, 53, 345–353.
+Cobine PA, Cruz LF, Navarrete F, Duncan D, Tygart M and De La Fuente L, 2013. Xylella fastidiosa differentially
+accumulates mineral elements in bioﬁlm and planktonic cells. PLoS ONE, 8, e54936.
+Divya BL, Pandurange Gowda KT and Chandrashekar SC, 2013. Evaluation of antibiotics, bactericides and nano
+particles for management of bacterial blight of pomegranate caused by Xanthomonas axonopodis pv. punicae.
+Mysore Journal of Agricultural Sciences, 47, 765–772.
+ECDC/EFSA/EMA (European Centre for Disease Prevention and Control), (European Food Safety Authority) and
+(European Medicines Agency), 2015. ECDC/EFSA/EMA ﬁrst joint report on the integrated analysis of the
+consumption of antimicrobial agents and occurrence of antimicrobial resistance in bacteria from humans and
+food-producing animals. Stockholm/Parma/London: ECDC/EFSA/EMA, 2015. EFSA Journal 2015;13(1):4006,
+114 pp. doi:10.2903/j.efsa.2015.4006
+EFSA PLH Panel (EFSA Panel on Plant Health), 2015a. Scientiﬁc Opinion on the risk to plant health posed by Xylella
+fastidiosa in the EU territory, with the identiﬁcation and evaluation of risk reduction options. EFSA Journal
+2015;13(1):3989, 262 pp. doi:10.2903/j.efsa.2015.3989
+EFSA PLH Panel (EFSA Panel on Plant Health), 2015b. Scientiﬁc opinion on Vitis sp. response to Xylella fastidiosa
+strain CoDiRO. EFSA Journal 2015;13(11):4314, 20 pp. doi:10.2903/j.efsa.2015.4314
+EFSA PLH Panel (EFSA Panel on Plant Health), 2016. Scientiﬁc opinion on four statements questioning the EU
+control strategy against Xylella fastidiosa. EFSA Journal 2016;14(3):4450, 15 pp. doi:10.2903/j.efsa.2016.4450
+EFSA Scientiﬁc Committee, 2009. Guidance of the Scientiﬁc Committee on transparency in the scientiﬁc aspects of
+risk assessments carried out by EFSA. Part 2: General Principles. EFSA Journal 2009;7(5):1051, 1–22.
+doi:10.2903/j.efsa.2009.1051
+EFSA Scientiﬁc Committee, 2014. Guidance on the structure and content of EFSA’s scientiﬁc opinions and
+statements. EFSA Journal 2014;12(9):3808, 10 pp. doi:10.2903/j.efsa.2014.3808
+FAO (Food and Agriculture Organization of the United Nations), 2016. International Standards for Phytosanitary
+Measures. ISPM 5, Glossary of phytosanitary terms. Secretariat of the International Plant Protection Convention
+(IPPC), Rome, 34 pp.
+Fones H, Davis CAR, Rico A, Fang F, Smith JAC and Preston GM, 2010. Metal hyperaccumulation armors plants
+against disease. PLOS Pathogens, 6, e1001093.
+Hartman J, Dixon E and Bernick S, 2010. Evaluation of therapeutic treatments to manage oak bacterial leaf scorch.
+Arboriculture and Urban Forestry, 36, 140–146.
+Hopkins DL, 1979. Effect of tetracycline antibiotics on Pierce’s disease of grapevine in Florida. Proceedings of the
+Florida State Horticultural Society, 92, 284–285.
+Hopkins DL and Mortensen JA, 1971. Suppression of Pierce’s disease symptoms by tetracycline antibiotics. Plant
+Disease Reporter, 55, 610–612.
+Kirkpatrick B, 2008. A review and critique of current and past cultural and chemical approaches to managing
+Pierce’s Disease. PD/GWSS Board - Resources - Review of PD Management Methods. Presentation. Available
+online:
+http://www.pdgwss.net/wp-content/uploads/2012/08/Review_of_managing_PD_Kirkpatrick_SD_PDmtg
+2008.pdf [Accessed: 5 April 2016]
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+11
+EFSA Journal 2016;14(4):4456
+
+--- page 12 ---
+Kirkpatrick B, Vargas C, Civerolo E, Purcell A, Andersen P, Weber E and Smith R, 2003. Evaluation of bactericides
+and modes of delivery for managing Pierce’s disease. Proceedings of Pierce’s Disease Research Symposium,
+8-10 December 2003, Coronado. p. 101–103. Available from: https://www.cdfa.ca.gov/pdcp/Research.html
+Kostka SJ, Tattar TA and Sherald JL, 1985. Suppression of bacterial leaf scorch symptoms in American elm through
+oxytetracycline microinjection. Journal of Arboriculture, 11, 54–58.
+Leu LS and Su CC, 1993. Isolation, cultivation, and pathogenicity of Xylella fastidiosa, the causal bacterium of pear
+leaf scorch disease in Taiwan. Plant Disease, 77, 642–646.
+Lokesh R, Erayya KK, Chandrashekhar N and Khan ANA, 2014. In vivo efﬁcacy of some antibiotics against bacterial
+blight of Pomegranate caused by Xanthomonas axonopodis pv. Punicae. International Research Journal of
+Biological Sciences, 3, 31–35.
+Mackie KA, Muller T and Kandeler E, 2012. Remediation of copper in vineyards – a mini review. Environmental
+Pollution, 167, 16–26.
+Malavolta E, de Oliverira SC, Pereira C, Lavres Junior J, Prates HS, Malavolta M and Ferreira M, 2005. Composic~ao
+mineral de folhas de citros afetadas por declínio, amarelinho (CVC), morte súbita e Huanglongbing (HLB).
+Informacoes Agron^omicas, 110, 3–6:Online.
+Navarrete F and De La Fuente L, 2014. Xylella fastidiosa response to zinc: decreased culturability, increased
+exopolysaccharide
+production,
+and
+resilient
+bioﬁlms
+under
+ﬂow
+conditions.
+Applied
+and
+Environment
+Microbiology, 80, 1097–1107.
+Sayler RJ and Kirkpatrick BC, 2003. The effect of copper sprays and fertilization on bacterial canker in French
+prune. Canadian Journal of Plant Pathology, 25, 406–410.
+Scapin MD, Behlau F, Scandelai LHM, Fernandes RS, Silva GJ and Ramos HH, 2015. Tree-row-volume-based sprays
+of copper bactericide for control of citrus canker. Crop Protection, 77, 119–126.
+Stockwell VO and Duffy B, 2012. Use of antibiotics in plant agriculture. Revue Scientiﬁque et Techniques (Ofﬁce
+Internationale des Epizooties), 31, 199–210.
+Zhang M, Guo Y, Powell CA, Doud MS, Yang C and Duan Y, 2014. Effective antibiotics against Candidatus
+Liberibacter asiaticus in HLB-affected citrus plants identiﬁed vis the graft-based evaluation. PLoS ONE, 9,
+e111032.
+Abbreviations
+CoDiRO
+Complesso del Disseccamento Rapido dell’Olivo
+HLB
+huanglongbing
+ISPM
+International Standards for Phytosanitary Measures
+OQDS
+olive quick decline syndrome
+PLH Panel or the Panel
+EFSA Panel on Plant Health
+Treatment solutions to cure Xylella fastidiosa diseased plants
+www.efsa.europa.eu/efsajournal
+12
+EFSA Journal 2016;14(4):4456

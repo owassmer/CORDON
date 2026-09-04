@@ -1,0 +1,84 @@
+{
+  "facet": "F3-STRUCTURE",
+  "verdict": "FAIL",
+  "assertions": [
+    {
+      "id": "F3-C4-01",
+      "severity": "material",
+      "class": "remediation_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json; scripts/verify_stage_b.py",
+      "row": "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:pre-m5-v1",
+      "field": "dispositions[].disposition, ref, why",
+      "quoted_span": "\"disposition\": \"implements_clock\", \"ref\": null, \"why\": \"\\\"indagini annuali\\\" implements B-CLK-EU-10/15(2); the C/p pairs restate EU 10/15; the pre-M5 5 km band coincides with EU 15(2)(a) v1 (B-PAR-EU-15(2)(a)-v1)\"",
+      "claim": "The expression-level remediation does not fit the five-field disposition shape: 40 of 63 implements_clock rows and 29 of 64 restates_parameter rows have null ref, while their prose grounds name one or several clocks or parameters, so a consumer must parse why to recover the claimed targets and Stage B fails one meaning per field and computability.",
+      "proposed_remedy": "Human-reread the affected expressions and emit one disposition per independently claimed mint with a non-null ref, or ratify a typed refs union where one indivisible expression genuinely implements multiple mints; then require references for implements_clock and restates_parameter.",
+      "falsifier": "Every null-ref implements_clock and restates_parameter row is formally declared to carry no machine-consumable target, and no Stage C, audit, or closure consumer needs to identify the clock or parameter that the disposition says it implements or restates.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C4-02",
+      "severity": "material",
+      "class": "remediation_drift",
+      "artifact": "scripts/verify_stage_b.py",
+      "row": "main",
+      "field": "closure_manifest clock_ids and parameter_ids partition validation",
+      "quoted_span": "if sorted(mc) != sorted(c['clock_id'] for c in b['clocks']): fail('closure manifest clock_ids do not partition the canonical clocks')",
+      "claim": "The new partition check proves only global multiset coverage, not the seam membership that closure_manifest now solely owns: swapping a clock ID between seams 1 and 2 still passes, even though each row's producer remains assigned to a different seam in population.json.",
+      "proposed_remedy": "For each manifest seam, require every listed clock and parameter producer_provision_version_id to belong to that same population.json seam, in addition to retaining the global exact-partition check.",
+      "falsifier": "An executed check elsewhere derives each listed row's producer seam from population.json and rejects any manifest entry whose seam differs.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C4-03",
+      "severity": "material",
+      "class": "derived_log_divergence",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json",
+      "row": "IT-DM-169819-2022:Art.9(1):official-laboratory-minimum-qualification:v1",
+      "field": "dispositions[].why",
+      "quoted_span": "\"expression\": \"2017/625 e possiedono almeno i requisiti minimi di cui all’Allegato III.\", \"why\": \"Qualification requirements by reference to Annex I; not a numeric parameter.\"",
+      "claim": "The newly authored expression ground contradicts both its own expression and the producer source_quote by identifying Annex I where the legal text says Allegato III, so the derived disposition log records a false ground despite reaching the defensible not_a_parameter class.",
+      "proposed_remedy": "Correct the authored ground to Annex III after a human reread of the complete Article 9(1) source_quote.",
+      "falsifier": "The controlling Italian source identifies these minimum official-laboratory qualification requirements as Annex I rather than Annex III.",
+      "confidence": "high"
+    },
+    {
+      "id": "F3-C4-04",
+      "severity": "minor",
+      "class": "remediation_drift",
+      "artifact": "regulation/stage-b/clocks-and-parameters.json; scripts/verify_stage_b.py",
+      "row": "B-PAR-EU-15(3)-island-exemption-5km",
+      "field": "conventions.note; parameters[].note",
+      "quoted_span": "\"note\": \"Distance from the island to the nearest Union land territory; strictly greater than 5 km disapplies the 15(2)(a) band.\"",
+      "claim": "The replacement note convention is a dead letter: the verifier neither requires nor reads conventions.note and accepts arbitrary non-empty rationale, while this live note repeats the structured value, comparator, scope purpose and consumer_decision instead of carrying a source-stated interaction or genuine open term.",
+      "proposed_remedy": "Set this redundant note to null, mechanically require the note convention to be present, and retain human reread—not length or keyword code—as the gate for whether each non-null note satisfies that convention.",
+      "falsifier": "The quoted note carries a source-stated interaction or genuine open term that is not already represented by value, comparator, scope, or consumer_decision.",
+      "confidence": "high"
+    }
+  ],
+  "checked_sound": [
+    "Question 1, exhaustive field-shape inventory: all 71 clocks have the declared 19-field order, all 53 parameters have the declared 12-field order, and all 581 dispositions contain the same five field names. Clock anchors comprise 30 legal_state, 22 event, 16 recurrence, 2 biological and 1 resettable_period objects, each with the declared key set.",
+    "Question 1, exhaustive parameter-value inventory: the 53 values comprise 25 scalar numeric strings, 14 percent objects, 9 count objects and 5 month-window objects. Every numeric component is a string, every bound is a string, and every wraps_year component is a JSON boolean.",
+    "Question 1, disposition-ref inventory exposed the drift in F3-C4-01: clock, parameter and qualifies_clock rows all have references, but implements_clock has 40 null references among 63 rows and restates_parameter has 29 null references among 64 rows.",
+    "Question 2, B-CLK-DDS45-eradication-48h: Stage C takes the OPERATOR_RECORD timestamp for execution of vector treatment and applies a 48-hour floor before removal may proceed.",
+    "Question 2, B-CLK-IT-29(1)-union-entry-5wd: Stage C takes the OFFICIAL_FINDING_CONFIRMED legal-state timestamp and adds five working days using the Stage D calendar.",
+    "Question 2, B-CLK-EU-6(1)-four-negative-years: Stage C starts at establishment, resets on any later detection and tests for a four-year floor using the named Article 10 survey stream; whether incomplete survey coverage can satisfy the legal condition remains expressly unresolved rather than invented in B.",
+    "Question 2, B-PAR-EU-15(3)-island-exemption-5km: Stage C computes the island-to-nearest-Union-land distance and applies the structured strict-greater-than 5 km comparator.",
+    "Question 3, exhaustive field and note inspection found no canonical hashes, source paths, provenance ASTs, holiday tables, calendar arithmetic or per-row seat decisions. The remaining 11 clock notes and three Cq parameter notes state source interactions or genuine open terms; the fourth parameter note is the redundant dead-letter example in F3-C4-04.",
+    "Question 4, the verifier actually enforces schema identity, clock and parameter field order, unique minted IDs, producer/source-phrase containment, inherited effective intervals, consumer references, anchor shapes and selected anchor semantics, kinds, units, owners, magnitudes, bounds, selected completion rules, parameter union shapes and component types, disposition field names/classes, duplicate disposition refusal, population coverage, manifest seam order/counts/global coverage, HELD emptiness, and recorded acceptance-act/reviewer presence.",
+    "Question 4, in-memory mutation probes confirmed that booleans in numeric parameter components are rejected, duplicate disposition objects are rejected, and a HELD seam with population is rejected.",
+    "Question 4, the most dangerous silent gaps are semantic disposition accuracy, required/typed targets for implements_clock and restates_parameter, correct per-seam manifest allocation, and note admissibility. Anchor fidelity, source sufficiency, legal meaning and acceptance-act validity also remain human-reread gates and cannot be established by the green verifier.",
+    "The required 20-row disposition sample was selected deterministically by SHA-256 rank, taking at least two rows from each of the eight disposition classes before filling the remaining four lowest-ranked rows; all sampled non-null expressions occur in their own producer source_quote. The sample directly exposed null-ref implements_clock and restates_parameter rows.",
+    "Exhaustive disposition integrity checks found zero byte-identical duplicate objects and zero non-null expressions absent from their own normalized producer source_quote.",
+    "Question 5, the live closure manifest contains seams 1–4 exactly once in order; its current clock and parameter allocations agree with their producers' population.json seams, its population counts are 136, 100, 126 and 0, seams 1–3 remain NOT_ASSERTED, and seam 4 is HELD with no rows or population.",
+    "generation-status.json conservatively records PROJECTION_INTEGRITY_PASS and semantic_acceptance NOT_ASSERTED; its counts are 71 clocks, 53 parameters and 581 dispositions, and its canonical SHA-256 is e1bc21e8c79b9ca48e956222dfc592bc87b68bf09d40bdfe372bca8fc5699afd.",
+    "Question 6, in-memory serialization of the fixed four projections reproduced every recorded generated hash exactly. CSV projections are pure functions of the canonical; generation-status.json additionally and explicitly depends on the two Stage A hashes and ambient unrecognized CSV filenames.",
+    "The permitted read-only verifier completed successfully with 71 clocks, 53 parameters and 581 dispositions; mutation probes demonstrate why that mechanical PASS is not semantic acceptance.",
+    "The review created or modified no repository files; final Git state remained at 3dd8816114e1d91bc62f43a3358954a22ff55077 with only the pre-existing untracked .hermes/ entry."
+  ],
+  "unresolved": [
+    "Q12 ratification of resettable_period remains outside this reviewer's authority.",
+    "The attached corpus does not resolve whether incomplete Article 10 survey coverage can satisfy the Article 6(1) four-year no-detection condition.",
+    "The attached corpus does not resolve the start event of the D.lgs. 19/2021 Article 33(1) forty-five-day landscape-authorization period.",
+    "Stage A still marks EU 2017/625 Article 39 authority_judgment_required NO although its necessary-audit trigger and redundancy exception depend on what the competent authority considers or finds."
+  ]
+}

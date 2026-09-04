@@ -1,0 +1,121 @@
+SOURCE_URL: https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art27!vig=2021-03-13
+SOURCE_STATUS: Normattiva point-in-time text in force 2021-03-13
+
+[ **Presidenza del Consiglio dei Ministri**](https://www.governo.it)
+[ ITA ](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art27!vig=2021-03-13)
+
+
+# [Normattiva - Il portale della legge vigente ](https://www.normattiva.it/)
+In caso di problemi di visualizzazione dell’atto clicca 
+it-calendar
+July 2015  
+ |  
+|  |  
+| Javascript must be enabled  |  
+Close
+Fare clic o premere il tasto Invio o la barra spaziatrice per aprire il calendario
+Go to previous month
+Go to next month
+Go to previous year
+Go to next year
+Close the date picker
+Date label
+##  DECRETO LEGISLATIVO 2 febbraio 2021, n. 19 
+### Norme per la protezione delle piante dagli organismi nocivi in attuazione dell'articolo 11 della legge 4 ottobre 2019, n. 117, per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625. (21G00021) 
+note: Entrata in vigore del provvedimento: 13/03/2021 _(Ultimo aggiornamento all'atto pubblicato il 24/01/2026)_
+[ visualizza atto intero ](https://www.normattiva.it/esporta/attoCompleto?atto.dataPubblicazioneGazzetta=2021-02-26&atto.codiceRedazionale=21G00021)
+[ nascondi ](javascript:void\(0\))
+vigente al 13/03/2021
+  * Articoli
+  * Ambito di applicazione e definizioni
+  * Organizzazione del servizio fitosanitario nazionale
+  * Laboratori
+  * Personale del servizio fitosanitario nazionale
+  * Sorveglianza degli organismi nocivi delle piante sul territorio nazionale
+  * Emergenze fitosanitarie
+  * Registro ufficiale degli operatori professionali
+  * Passaporto delle piante
+  * Controlli ufficiali
+  * Piante, prodotti vegetali e altri oggetti utilizzati a fini di prove ufficiali, scientifici o educativi, sperimentali, di selezione varietale o riproduttivi
+  * Sistema informativo fitosanitario
+  * Sanzioni amministrative e norme finanziarie
+  * Norme transitorie e finali
+
+
+  * Allegati
+
+
+  * Allegato I
+  * Allegato II
+  * Allegato III
+
+
+## Parole cercate: 
+Presente nei seguenti articoli
+Presente nei seguenti allegati
+chiudi
+Articoli  Approfondimenti e Funzioni 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+Testo in vigore dal: 13-3-2021 
+## Art. 27
+Programma nazionale di indagine degli organismi nocivi delle piante 
+1. I Servizi fitosanitari regionali, nei territori di propria competenza, effettuano indagini al fine di verificare la presenza di organismi nocivi da quarantena rilevanti per l'Unione europea, di organismi nocivi considerati provvisoriamente come organismi nocivi da quarantena rilevanti per l'Unione europea, di organismi nocivi prioritari, in applicazione degli [articoli 22](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031~art22) e [24 del regolamento (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031~art24), nonché di altri organismi nocivi delle piante, sulla base di un Programma nazionale di indagine. 
+2. Il Servizio fitosanitario centrale, con il supporto dell'Istituto nazionale di riferimento, adotta, su parere del Comitato fitosanitario nazionale, gli obiettivi e i criteri di indagine generali sulla base della valutazione del rischio dei vari organismi nocivi. 
+3. I Servizi fitosanitari regionali, sulla base delle analisi di rischio in relazione al territorio di propria competenza elaborano e trasmettono, annualmente, al Servizio fitosanitario centrale, la proposta in merito alle indagini che saranno effettuate nell'anno civile successivo alla sua predisposizione, in conformità agli obiettivi e ai criteri di cui al comma 2. 
+4. Sulla base delle proposte, di cui al comma 3, il Servizio fitosanitario centrale predispone la proposta di Programma nazionale di indagine annuale degli organismi nocivi delle piante e adotta tale Programma su parere del Comitato fitosanitario nazionale, dandone divulgazione nel portale web di cui all'articolo 53. 
+5. Per specifici organismi nocivi le attività di indagine possono realizzarsi sulla base di programmi pluriennali secondo quanto stabilito dal Comitato fitosanitario nazionale. 
+6. Il Servizio fitosanitario centrale trasmette, in applicazione degli articoli 22, 23 e 24 del regolamento (UE) n. 2016/2031, alla Commissione e agli Stati membri, il Programma nazionale di indagine annuale o pluriennale adottato e le relazioni contenenti i risultati delle attività di indagine effettuate nell'annualità precedente. 
+7. Il Comando carabinieri unità forestali, ambientali e agroalimentari (CUFAA), l'Ispettorato centrale della tutela della qualità e della repressione frodi dei prodotti agroalimentari (ICQRF), i Centri di ricerca afferenti al CREA ed altri enti pubblici, secondo le indicazioni del Servizio fitosanitario centrale, inviano i dati in loro possesso relativi ad organismi nocivi da quarantena rilevanti per l'Unione europea, ad organismi nocivi considerati provvisoriamente come organismi nocivi da quarantena rilevanti per l'Unione e ad organismi nocivi prioritari, al fine di alimentare la sezione controlli ufficiali del SIPP di cui all'articolo 52. 
+8. Ai fini delle attività di protezione delle piante, le università, le società scientifiche, gli altri enti di ricerca e le associazioni dei produttori possono contribuire, previa istanza al Servizio fitosanitario centrale, alla raccolta di dati e di informazioni aggiuntive, circa la presenza degli organismi nocivi sul territorio, da inserire nella sezione controlli ufficiali del SIPP di cui all'articolo 52, e accedere ai dati in esso contenuti secondo le modalità definite dal Servizio fitosanitario nazionale, nel rispetto dei limiti e delle facoltà previsti dalla legislazione vigente in materia di trattamento dei dati personali. 
+9. Il Servizio fitosanitario centrale coordina le attività di sorveglianza di cui al presente articolo in collaborazione con l'Istituto nazionale di riferimento. 
+Note all'art. 27: - Per i riferimenti del [regolamento (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031), si veda nelle note alle premesse. 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+[ nascondi ](javascript:void\(0\))
+  * ### Approfondimenti
+  * aggiornamenti all'atto 
+  * lavori preparatori 
+  * aggiornamenti al titolo 
+  * aggiornamenti alla struttura 
+
+
+  * ### Funzioni 
+  * [ esporta in Akoma ntoso ](https://www.normattiva.it/do/atto/caricaAKN?dataGU=20210226&codiceRedaz=21G00021&dataVigenza=20210313)
+  * collegamento permanente 
+
+
+#### lavori preparatori
+chiudi
+#### aggiornamenti all'atto
+chiudi
+#### atti aggiornati
+chiudi
+#### atti correlati
+chiudi
+#### indice dell'atto
+chiudi
+#### aggiornamenti alla struttura
+chiudi
+#### aggiornamenti al titolo
+chiudi
+#### relazioni
+chiudi
+#### note atto
+chiudi
+#### collegamento permanente
+chiudi
+## guida in linea
+chiudi
+#### Aggiornamenti all'articolo
+chiudi
+#### atti parlamentari
+chiudi
+#### atti attuativi
+chiudi
+  *[lun]: lunedì
+  *[mar]: martedì
+  *[mer]: mercoledì
+  *[gio]: giovedì
+  *[ven]: venerdì
+  *[sab]: sabato
+  *[dom]: domenica
+

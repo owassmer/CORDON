@@ -1,0 +1,710 @@
+        Servizio fitosanitario nazionale
+
+               DOCUMENTI TECNICI UFFICIALI
+                           Documento n. 8
+
+
+
+Indicazioni applicative per il funzionamento dei laboratori ufficiali
+
+
+
+
+REV   DESCRIZIONE COMPILAZIONE          APPROVAZIONE       DATA DI      FIRMA
+       REVISIONE                                          ADOZIONE
+ 0      Revisione 0  GdL Laboratori      CFN 28/06/2022    20/09/2022
+ 1      Revisione 1 Tavolo Permanente
+                        della Rete
+                                         CFN 15/07/2024   19/07/2024
+                      nazionale dei
+                       Laboratori
+ 2      Revisione 2 Tavolo Permanente                                     Bruno Caio
+                                                                          Faraglia
+                                                                          MASAF
+
+                        della Rete                                        07.01.2025
+                                                                          09:46:50
+
+                                         CFN 09/12/2024   07/01/2025      GMT+02:00
+
+
+                      nazionale dei
+                       Laboratori
+                                                           Servizio fitosanitario nazionale
+    Documento tecnico ufficiale n.8                                                                                   Procedura operativa
+
+    Indicazioni applicative per il funzionamento dei laboratori ufficiali                                                               Pag. 2 di 14
+
+
+
+Indice
+
+Indice ................................................................................................................................................................ 2
+Premessa ........................................................................................................................................................... 3
+Riferimenti Normativi ..................................................................................................................................... 3
+Definizioni di “controlli ufficiali” ed “altre attività ufficiali” (articolo 2 del OCR) .................................. 4
+Laboratori ufficiali .......................................................................................................................................... 8
+Laboratori ufficiali che operano nel rispetto dell’articolo 37 del OCR ...................................................... 8
+Laboratori ufficiali che operano ai sensi dell’articolo 37 del OCR che si avvalgono della deroga di cui
+all’articolo 41 ................................................................................................................................................... 9
+Laboratori ufficiali che operano ai sensi dell’articolo 37 del OCR e che si avvalgono della deroga di cui
+all’articolo 42. ................................................................................................................................................ 10
+   Laboratori ufficiali che operano in deroga all’art. 37 ai sensi dell’articolo 40 del OCR .................... 11
+   Obblighi dei laboratori ufficiali riguardo alla partecipazione alle prove comparative interlaboratorio
+   o alle prove valutative ............................................................................................................................... 11
+   Azioni correttive da attuare in caso di prestazioni non soddisfacenti o per mancata partecipazione ad
+   una prova valutativa.................................................................................................................................. 12
+   Caratteristiche minime attestanti l’applicazione di un sistema di assicurazione della qualità (di cui
+   all’art. 40 comma 1, lettera b), punto iv) Reg. 2017/625 e art. 3 lettera a) del Regolamento delegato
+   2021/1353)................................................................................................................................................... 14
+
+
+
+
+                                                                                   2
+                                                Servizio fitosanitario nazionale
+   Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+   Indicazioni applicative per il funzionamento dei laboratori ufficiali                       Pag. 3 di 14
+
+
+
+Premessa
+Il Regolamento (UE) 2017/625, di seguito denominato anche OCR (Official Controls Regulation),
+definisce il nuovo quadro di riferimento relativo ai controlli ufficiali e alle altre attività ufficiali
+effettuati per garantire l’applicazione della legislazione sugli alimenti e sui mangimi, delle norme
+sulla salute e sul benessere degli animali, sulla sanità delle piante e sui prodotti fitosanitari, recando,
+inoltre, una serie di modifiche a Regolamenti e Direttive comunitarie.
+L’articolo 37 di detto regolamento prevede che le autorità competenti designino laboratori ufficiali
+cui far effettuare analisi, prove e diagnosi di laboratorio sui campioni prelevati durante i controlli
+ufficiali e altre attività ufficiali.
+
+Scopo del presente documento tecnico è di fornire al Servizio Fitosanitario Nazionale e alla costituita
+Rete Nazionale dei laboratori puntuali indicazioni per garantire una corretta ed uniforme applicazione
+delle deroghe stabilite, nonché per individuare in modo univoco ruoli, compiti e obblighi dei
+laboratori ufficiali, a supporto delle azioni del Servizio Fitosanitario nell’ambito delle attività ufficiali
+svolte.
+
+
+
+Riferimenti Normativi
+
+REGOLAMENTO (UE) 2016/2031
+REGOLAMENTO (UE) 2017/625
+DECRETO LEGISLATIVO 19/2021
+REGOLAMENTO DELEGATO (UE) 2021/1353 DELLA COMMISSIONE del 17 maggio 2021
+D.M. n.12 aprile 2022 n. 169819 inerente “Caratteristiche, ambiti di competenza, strutture e modalità
+di riconoscimento dei laboratori che operano nell’ambito della protezione delle piante”
+Comunicazione della Commissione relativa all'attuazione del regolamento (UE) 2017/625 del
+Parlamento europeo e del Consiglio (regolamento sui controlli ufficiali) (2022/C 467/02)
+
+
+
+
+                                                                   3
+                                                   Servizio fitosanitario nazionale
+      Documento tecnico ufficiale n.8                                                      Procedura operativa
+
+      Indicazioni applicative per il funzionamento dei laboratori ufficiali                              Pag. 4 di 14
+
+
+
+Definizioni di “controlli ufficiali” ed “altre attività ufficiali” (articolo 2 del OCR)
+Tutte le attività espletate dal Servizio Fitosanitario Nazionale, designato quale autorità competente ai
+sensi dell’articolo 4 del D.lgs. 19/2021, in applicazione dei regolamenti (UE) 2016/2031 e 2017/625,
+comprendono “controlli ufficiali” e “altre attività ufficiali” così come definiti all’articolo 2 dell’OCR
+e all’articolo 2 del Decreto Ministeriale 12 aprile 2022, che definisce le “Caratteristiche, ambiti di
+competenza, strutture e modalità di riconoscimento dei laboratori che operano nell’ambito della
+protezione delle piante”.
+La Commissione europea, al fine di una migliore comprensione ed armonizzazione dell'applicazione
+delle disposizioni contenute nell’OCR da parte delle autorità competenti e delle parti interessate degli
+Stati membri, ha pubblicato in Gazzetta ufficiale europea la “Comunicazione della Commissione
+relativa all'attuazione del OCR (2022/C 467/02)”, che specifica le definizioni ed i contenuti dei
+“Controlli ufficiali” e delle “altre attività ufficiali”.
+(1)
+  Art. 2 OCR
+    comma 1): Ai fini del presente regolamento, per «controlli ufficiali» si intendono attività eseguite dalle
+autorità competenti, o dagli organismi delegati o dalle persone fisiche cui sono stati delegati determinati
+compiti riguardanti i controlli ufficiali a norma del presente regolamento al fine di verificare:
+
+       a) il rispetto da parte degli operatori delle norme del presente regolamento e della normativa di cui
+          all’articolo 1, paragrafo 2, lettera e (comprendente quindi il rispetto di quanto previsto dal Reg.
+          2031/2016 e dei suoi atti applicativi);
+       b) che gli animali e le merci soddisfino i requisiti prescritti dalla normativa di cui all’articolo 1,
+          paragrafo 2, anche per quanto riguarda il rilascio di un certificato ufficiale o di un attestato
+          ufficiale.
+    comma 2). Ai fini del presente regolamento, per «altre attività ufficiali» si intendono alcune attività,
+diverse dai controlli ufficiali, che sono effettuate dalle autorità competenti, o dagli organismi delegati o
+dalle persone fisiche cui sono state delegate, eseguite a norma del presente regolamento e della normativa
+di cui all’articolo 1, paragrafo 2, incluse le attività tese ad accertare la presenza di malattie animali o di
+organismi nocivi per le piante, a prevenire o contenere la diffusione di tali malattie animali od organismi
+nocivi per le piante, a eradicare tali malattie animali od organismi nocivi per le piante, a rilasciare
+autorizzazioni o approvazioni e a rilasciare certificati ufficiali o attestati ufficiali”
+
+
+Ulteriori chiarimenti sulle “altre attività ufficiali” sono forniti nel considerando 25 dell’OCR
+
+                                                         Considerando 25 OCR
+  La legislazione dell’Unione in materia di filiera agroalimentare affida inoltre alle autorità competenti degli Stati membri
+  compiti specializzati che devono essere svolti a fini di tutela della salute animale, della sanità delle piante e del benessere
+  degli animali e di protezione dell’ambiente in rapporto a OGM e prodotti fitosanitari. Tali compiti costituiscono attività di
+  interesse pubblico che le autorità competenti degli Stati membri devono svolgere al fine di eliminare, contenere o ridurre
+  eventuali pericoli di ordine sanitario per l’uomo, per gli animali o per le piante, per il benessere degli animali o anche per
+  l’ambiente. Tali altre attività ufficiali, che comprendono la concessione di autorizzazioni o approvazioni, la sorveglianza e
+  il monitoraggio epidemiologici, l’eradicazione ed il contenimento delle malattie o degli organismi nocivi, nonché il rilascio
+  di certificati o attestati ufficiali, sono disciplinate dalle stesse norme settoriali la cui attuazione è verificata mediante i
+  controlli ufficiali e pertanto dal presente regolamento.
+
+
+
+
+                                                                      4
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                              Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                                     Pag. 5 di 14
+
+
+Nella comunicazione 2022/C 467/02 si specifica che: “Questa distinzione è importante perché si
+applicano norme e condizioni diverse, a seconda che un'attività sia un «controllo ufficiale» o
+un'«altra attività ufficiale». In particolare, l'articolo 1, paragrafo 5, OCR specifica quali disposizioni
+di tale regolamento si applichino anche ad altre attività ufficiali e, come corollario, quali disposizioni
+si applichino soltanto ai controlli ufficiali.
+
+Conformemente a quanto previsto dall’articolo 35 dell’OCR, qualora nelle piante, nei prodotti
+vegetali o negli altri oggetti, si rilevi la presenza di organismi nocivi da quarantena, l’operatore
+professionale non può esercitare il diritto di controperizia.
+
+È nel diritto e facoltà dell’operatore professionale poter richiedere un esame documentale del
+campionamento, dell’analisi, della prova o della diagnosi, da sottoporre ad un perito di parte
+riconosciuto e adeguatamente qualificato, senza tuttavia ripetere l’analisi in quanto non è ammesso il
+prelievo di un secondo campione.
+
+Nella Tabella seguente (contenuta nella comunicazione 2022/C 467/02) sono riportati i principali
+esempi che distinguono i “controlli ufficiali” dalle “altre attività ufficiali” nell’ambito delle attività
+svolte dal Servizio Fitosanitario.
+
+                                                                           Altra
+                                                        Controllo
+                                                                          Attività           Osservazione/ragionamento
+       Attività del Servizio Fitosanitario              Ufficiale
+                                                                          Ufficiale
+  Controllo dell’elenco di notifiche preventive
+  delle partite che entrano nell’Unione ai fini                                       Preparazione prima dell’esecuzione dei
+                                                                           AAU
+  della pianificazione dei controlli alle                                             controlli ufficiali.
+  frontiere.
+                                                                                      Eradicazione e contenimento di malattie o di
+  Definizione di un programma di
+                                                                           AAU        organismi nocivi (cfr. considerando 25
+  eradicazione.
+                                                                                      OCR).
+                                                                                      Analisi dei dati che fornisce
+                                                                                      informazioni/assistenza ai fini della
+  Utilizzo dei risultati della sorveglianza
+                                                                           AAU        preparazione dei controlli ufficiali, non
+  condotta dagli operatori.
+                                                                                      costituisce di per sé una verifica della
+                                                                                      conformità.
+  Redazione di procedure scritte per                                                  Preparazione/assistenza prima dei controlli
+                                                                           AAU
+  l’esecuzione dei controlli ufficiali.                                               ufficiali.
+  Prelievo di campioni di partite che entrano                                         Verifica della conformità alla normativa di
+                                                           CU
+  nell’Unione conformemente a TRACES-NT.                                              cui all’articolo 1, paragrafo 2, OCR.
+  Esecuzione di controlli ufficiali sugli
+                                                                                      Verifica della conformità alla normativa di
+  animali e sulle merci che entrano                        CU
+                                                                                      cui all’articolo 1, paragrafo 2, OCR.
+  nell’Unione.
+  Controllo della corretta compilazione da                                            Verifica della conformità alla normativa di
+                                                           CU
+  parte dell’operatore di un DSCE.                                                    cui all’articolo 1, paragrafo 2, OCR.
+  Campionamento e analisi di una partita                                              Verifica della conformità alla normativa di
+                                                           CU
+  presso un posto di controllo frontaliero.                                           cui all’articolo 1, paragrafo 2, OCR.
+  Campionamento e analisi di una partita
+                                                                                      Verifica della conformità alla normativa di
+  presso il luogo di destinazione dopo il                  CU
+                                                                                      cui all’articolo 1, paragrafo 2, OCR.
+  commercio transfrontaliero.
+  Controllo del rispetto da parte di un                                               Verifica della conformità alla normativa di
+                                                           CU
+  operatore delle restrizioni dei movimenti.                                          cui all’articolo 1, paragrafo 2, OCR.
+  Campionamento e analisi di una partita                   CU                         Verifica della conformità alla normativa di
+
+                                                                  5
+                                             Servizio fitosanitario nazionale
+Documento tecnico ufficiale n.8                                                        Procedura operativa
+
+Indicazioni applicative per il funzionamento dei laboratori ufficiali                                Pag. 6 di 14
+
+
+presso uno stabilimento di quarantena, come                                   cui all’articolo 1, paragrafo 2, OCR.
+richiesto dalle norme dell’Unione.
+Controllo del rispetto da parte di un
+operatore dei requisiti specifici prescritti da                               Verifica della conformità alla normativa di
+                                                         CU
+un programma di eradicazione per una                                          cui all’articolo 1, paragrafo 2, OCR.
+malattia elencata.
+Assistenza a un operatore in merito a misure
+di biosicurezza per impedire la diffusione di
+malattie elencate, fornita dalle autorità
+competenti, o dagli organismi delegati o                                      Assistenza, non verifica della conformità
+dalle persone fisiche cui sono state delegate                           AAU   alla normativa di cui all’articolo 1, paragrafo
+alcune altre attività ufficiali a norma                                       2, OCR.
+dell’OCR e della normativa di cui
+all’articolo 1, paragrafo 2, del medesimo
+regolamento.
+Esecuzione di indagini proporzionate ai
+                                                                              Cfr. articolo 2, paragrafo 2, e considerando
+rischi per accertare la presenza di organismi                           AAU
+                                                                              25 OCR.
+nocivi.
+Azioni (ad esempio ispezione, controllo
+documentale, ecc.) in relazione a uno
+stabilimento che ha presentato domanda di
+                                                                              Verifica della conformità alla normativa di
+riconoscimento come richiesto dalle norme                CU
+                                                                              cui all’articolo 1, paragrafo 2, OCR.
+dell’Unione (ad esempio un centro di
+raccolta, uno stabilimento di acquacoltura,
+uno stabilimento di materiale germinale).
+Verifica del rispetto della normativa di cui
+all’articolo 1, paragrafo 2, OCR da parte                                     Verifica della conformità alla normativa di
+                                                         CU
+degli animali e delle merci che entrano                                       cui all’articolo 1, paragrafo 2, OCR.
+nell’Unione.
+Adozione di una decisione e firma del                                         Parte della finalizzazione del controllo
+                                                         CU
+DSCE.                                                                         ufficiale.
+Inserimento in TRACES-NT dei risultati dei
+                                                                              Parte della finalizzazione del controllo
+controlli sugli animali e sulle merci che                CU
+                                                                              ufficiale.
+entrano nell’Unione.
+Campionamento e analisi svolti per
+verificare la conformità di un animale/di una                                 Verifica della conformità alla normativa di
+                                                         CU
+partita ai requisiti relativi alla certificazione                             cui all’articolo 1, paragrafo 2, OCR.
+per il commercio transfrontaliero.
+Controlli effettuati da autorità competenti o
+da organismi delegati/persone fisiche su lotti
+di piante o prodotti vegetali per valutare la                                 Verifica della conformità alla normativa di
+presenza di organismi nocivi da quarantena               CU                   cui all’articolo 1, paragrafo 2, lettera g),
+o di organismi nocivi regolamentati non da                                    OCR.
+quarantena rilevanti per l’Unione ai fini del
+rilascio di un certificato fitosanitario.
+Controlli effettuati da autorità competenti o
+da organismi delegati/persone fisiche su lotti
+di piante o prodotti vegetali per valutare la                                 Verifica della conformità alla normativa di
+presenza di organismi nocivi da quarantena               CU                   cui all’articolo 1, paragrafo 2, lettera g),
+o di organismi nocivi regolamentati non da                                    OCR.
+quarantena rilevanti per l’Unione ai fini del
+rilascio di un passaporto delle piante.
+Controlli effettuati da autorità competenti o
+da organismi delegati/persone fisiche su lotti
+                                                                              Verifica della conformità alla normativa di
+di piante o prodotti vegetali per valutare la            CU
+                                                                              cui all’articolo 1, paragrafo 2, OCR.
+presenza di organismi nocivi da quarantena
+o di organismi nocivi regolamentati non da
+                                                                6
+                                             Servizio fitosanitario nazionale
+Documento tecnico ufficiale n.8                                                        Procedura operativa
+
+Indicazioni applicative per il funzionamento dei laboratori ufficiali                                Pag. 7 di 14
+
+
+quarantena rilevanti per l’Unione.
+Rilascio di un certificato fitosanitario o di un                              Attività basata sull’esito di un controllo
+                                                                        AAU
+passaporto delle piante.                                                      ufficiale.
+                                                                              Attività non direttamente tesa alla verifica
+Attività di indagine destinate a rilevare la
+                                                                        AAU   della conformità alla normativa di cui
+presenza di organismi nocivi per le piante.
+                                                                              all’articolo 1, paragrafo 2, OCR.
+Campionamento e analisi eseguiti nel
+contesto di indagini per valutare la presenza                                 Sorveglianza epidemiologica e
+                                                                        AAU
+di organismi nocivi da quarantena rilevanti                                   monitoraggio; cfr. considerando 25 OCR.
+per l’Unione.
+Fornitura di informazioni al pubblico in
+merito a determinati rischi (ad esempio una                                   Fornitura di informazione, non verifica della
+                                                                        AAU
+malattia a carattere epidemico, la natura                                     conformità.
+della stessa, le misure adottate, ecc.).
+Controlli presso uno stabilimento dell’UE al
+fine di verificare la conformità ai requisiti di                              Verifica della conformità alla normativa di
+                                                         CU
+esportazione stabiliti nella normativa di cui                                 cui all’articolo 1, paragrafo 2, OCR.
+all’articolo 1, paragrafo 2, OCR.
+                                                                              Articolo 138, paragrafo 1, OCR; verifica
+Azioni investigative volte a determinare
+                                                         CU                   della conformità alla normativa di cui
+l’entità di una non conformità.
+                                                                              all’articolo 1, paragrafo 2, OCR.
+Verifica della conformità alla normativa di
+                                                                              Verifica della conformità alla normativa di
+cui all’articolo 1, paragrafo 2, OCR ai fini
+                                                         CU                   cui all’articolo 1, paragrafo 2, OCR (cfr.
+del rilascio di un certificato ufficiale o di un
+                                                                              articolo 2, paragrafo 1, lettera b), OCR).
+attestato ufficiale.
+Rilascio di un certificato ufficiale o di un                                  Attività basata su un controllo ufficiale
+attestato ufficiale sulla base degli esiti dei                          AAU   completato (cfr. articolo 2, paragrafo 2,
+controlli ufficiali.                                                          OCR).
+Preparazione di una relazione di
+                                                                              Parte integrante dell’attività di controllo
+ispezione/audit/laboratorio (esito del                   CU
+                                                                              ufficiale.
+controllo ufficiale).
+
+
+
+
+                                                                7
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                       Pag. 8 di 14
+
+
+
+Laboratori ufficiali
+I SS.FF.RR. possono designare le seguenti tipologie di laboratori ufficiali:
+1- Laboratori ufficiali che operano nel rispetto dell’articolo 37 del regolamento (UE) 2017/625.
+2- Laboratori ufficiali che operano nel rispetto dell’articolo 37 del regolamento (UE) 2017/625 e che
+   si avvalgono della deroga dell’articolo 41 come esplicitato dal Regolamento delegato UE
+   2021/1353.
+3- Laboratori ufficiali che operano nel rispetto dell’articolo 37 del regolamento (UE) 2017/625 e che
+   si avvalgono della deroga dell’articolo 42.
+4- Laboratori ufficiali che operano nel rispetto dell’articolo 40 del regolamento (UE) 2017/625 in
+   deroga all’articolo 37 del regolamento (UE) 2017/625 (paragrafo 4 lettera e).
+I laboratori ufficiali, ai fini della loro designazione da parte dei SS.FF.RR., possiedono almeno i
+requisiti minimi di cui all’Allegato III del Decreto 12 aprile 2022.
+L’elenco dei laboratori ufficiali è comunicato in sede europea e pubblicato sul sito web del Sistema
+informativo per la Protezione delle Piante (SIPP), ai sensi dell’articolo 53 del decreto legislativo
+n.19/2021.
+
+Laboratori ufficiali che operano nel rispetto dell’articolo 37 del OCR
+In applicazione all'articolo 37, paragrafo 4, un laboratorio ufficiale che svolge analisi, prove e
+diagnosi per gli specifici organismi accreditati nell’ambito dei “Controlli ufficiali” e delle “altre
+attività ufficiali” deve:
+
+      a) possedere l’esperienza, le attrezzature e le infrastrutture necessarie per effettuare analisi,
+      prove o diagnosi sui campioni;
+
+      b) disporre di un numero sufficiente di addetti adeguatamente qualificati, formati ed esperti;
+
+      c) garantire che i compiti attribuitigli in qualità di laboratorio ufficiale siano effettuati in modo
+      imparziale ed esenti da qualsiasi conflitto di interessi;
+
+      d) fornire tempestivamente i risultati delle analisi, prove o diagnosi effettuate sui campioni
+      prelevati durante i controlli ufficiali e le altre attività ufficiali;
+
+      e) operare secondo la norma EN ISO/IEC 17025 per la quale è stato accreditato da un organismo
+      nazionale di accreditamento operante in conformità del regolamento (CE) n. 765/2008.
+
+L’accreditamento di un laboratorio ufficiale può:
+     a. comprendere gruppi di metodi (articolo 37, paragrafo 5, lettera b, OCR);
+     b. essere definito in maniera flessibile (articolo 37, paragrafo 5, lettera c, OCR).
+
+
+
+
+                                                                  8
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                       Pag. 9 di 14
+
+
+
+Laboratori ufficiali che operano ai sensi dell’articolo 37 del OCR che si avvalgono
+della deroga di cui all’articolo 41
+In applicazione dell’articolo 41 del OCR e del Regolamento delegato (UE) 2021/1353, un laboratorio
+ufficiale, accreditato per uno o più organismi nocivi e per uno o più metodi di prova secondo la norma
+UNI CEI EN ISO/IEC 17025, svolge analisi, prove e diagnosi per gli specifici organismi accreditati
+nell’ambito dei “controlli ufficiali” e delle “altre attività ufficiali”.
+Nel caso di analisi, prove e diagnosi di organismi per i quali il laboratorio ufficiale non dispone di
+specifico accreditamento, l’attività del laboratorio è svolta ai sensi della deroga dell’articolo 41 del
+Reg. (UE) 2017/625 solo se:
+   •    il laboratorio opera ed è accreditato secondo la norma EN ISO/IEC 17025 per l’impiego di
+        uno o più metodi simili agli altri metodi utilizzati e rappresentativi di questi ultimi;
+                                              e
+   •     impiega in modo continuativo e significativo i metodi per cui ha ottenuto l’accreditamento.
+La Commissione, nel Regolamento delegato UE 2021/1353, all’articolo 3, specifica ulteriormente i
+criteri per le deroghe permanenti all’obbligo di accreditamento.
+Ciò stante, i laboratori ufficiali che si avvalgono della deroga all’articolo 41 possono effettuare
+analisi, prove e diagnosi nell’ambito dei “controlli ufficiali” o “altre attività ufficiali”, a condizione
+che soddisfino tutte le seguenti condizioni:
+   a) applichino un sistema di assicurazione della qualità che garantisca che i metodi di analisi,
+      prova o diagnosi di laboratorio per i quali non sono accreditati siano in grado di produrre
+      risultati attendibili;
+   b) i metodi non accreditati impiegati da tali laboratori siano caratterizzati dai criteri pertinenti al
+      settore della sanità delle piante di cui all’allegato III del OCR;
+   c) siano già accreditati per almeno uno dei metodi elencati nelle categorie di cui all’allegato del
+      regolamento delegato (UE) 2021/1353, per l’impiego su un organismo nocivo appartenente
+      allo stesso gruppo cui appartiene l’organismo nocivo per il quale è impiegato il metodo non
+      accreditato.
+Si evidenzia che nel contesto normativo sopra esposto non vi è alcun riferimento ad un dualismo
+stretto organismo/categoria del metodo (es: Xylella/metodo molecolare) in quanto nel testo è riportata
+genericamente la dicitura “per almeno un metodo” indipendentemente dalla categoria del metodo
+stesso. Di conseguenza è sufficiente che il metodo appartenga ad una delle categorie di organismi
+indicate in allegato al Regolamento delegato 2021/1353.
+Si conferma, altresì, che per categoria di organismi si intendono, i seguenti gruppi:
+   •    batteri
+   •    virus, viroidi e fitoplasmi
+   •    funghi e oomiceti
+   •    nematodi
+   •    insetti e acari
+
+                                                                  9
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                      Pag. 10 di 14
+
+
+A titolo esemplificativo, conformemente alla suddetta interpretazione, un laboratorio accreditato per
+la diagnosi di X. fastidiosa con metodo di real-time PCR può svolgere analisi nell’ambito dei controlli
+ufficiali per tutti gli organismi nocivi appartenenti allo stesso gruppo (batteri) con uno qualsiasi dei
+metodi tra quelli elencati nell’allegato del Regolamento delegato (UE) 2021/1353.
+Ne consegue che sarebbe sufficiente che il laboratorio fosse accreditato per almeno un metodo per
+ciascun gruppo di organismi per poter continuare ad eseguire analisi nell’ambito dei controlli ufficiali,
+senza restrizioni metodologiche.
+
+Laboratori ufficiali che operano ai sensi dell’articolo 37 del OCR e che si
+avvalgono della deroga di cui all’articolo 42
+In applicazione dell’articolo 42 del OCR, i SS.FF.RR. possono designare temporaneamente un
+laboratorio ufficiale che operi ai sensi dell’articolo 37 e quindi conformemente a quanto indicato al
+precedente paragrafo “Laboratori ufficiali che operano nel rispetto dell’articolo 37 del OCR”, per
+l’utilizzo di un metodo d’analisi, prova o diagnosi di laboratorio per il quale esso non abbia richiesto
+l’accreditamento solo nei casi in cui:
+      a) l’obbligo di utilizzo di tale metodo è stato introdotto di recente nella normativa dell’Unione;
+                                                     oppure
+      b) quando le modifiche del metodo in vigore richiedono un nuovo accreditamento o
+      un’integrazione dell’accreditamento ottenuto dal laboratorio ufficiale;
+                                                     oppure
+      c) quando l’utilizzo di tale metodo è imposto da una situazione di emergenza.
+La designazione temporanea del laboratorio è soggetta a tutte le seguenti condizioni:
+      a) il laboratorio ufficiale è già accreditato in conformità della norma UNI CEI EN ISO/IEC
+      17025 per l’utilizzo di un metodo simile a quello per il quale è proposta l'applicazione in deroga;
+      b) il laboratorio ufficiale applica un sistema di assicurazione della qualità in grado di garantire
+      risultati solidi e attendibili dall’impiego del metodo per il quale non è attualmente accreditato.
+      A tal fine sono individuati i requisiti minimi di cui all’allegato 1 al presente Documento Tecnico
+      Ufficiale. Tali requisiti sono verificati dal SFR competente che designa il laboratorio come
+      laboratorio ufficiale, sentito il CFN. Il SFC informa la Commissione europea della designazione
+      e procede alla sua pubblicazione nel sito Web del Servizio fitosanitario nazionale;
+      c) le analisi, prove o diagnosi sono effettuate sotto la supervisione delle autorità competenti o
+      del laboratorio nazionale di riferimento per tale metodo.
+La designazione temporanea non potrà eccedere la durata di un anno ed è rinnovabile una sola volta
+per un ulteriore anno, qualora non sia stato ancora reso disponibile un metodo di prova accreditato
+per l’organismo in oggetto.
+Pertanto, la deroga di cui all’art. 42 del OCR è utilizzabile quando il laboratorio ufficiale sia già
+accreditato UNI CEI EN ISO/IEC 17025 per un metodo simile a quello oggetto di deroga.
+Conformemente all’articolo 3 del Regolamento delegato 2021/1353, la deroga di cui al presente
+paragrafo si basa sull’affinità del metodo utilizzato e non sulla tipologia di organismo nocivo. Qualora
+
+                                                                 10
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                      Pag. 11 di 14
+
+
+un nuovo metodo (molecolare, sierologico, morfologico o altro di nuova generazione) sia normato
+come ufficiale dalla UE e nessun laboratorio è accreditato per tale tecnica, a prescindere
+dall’organismo, si può ricorrere all’utilizzo della delega dell’art. 42.
+
+Laboratori ufficiali che operano in deroga all’art. 37 ai sensi dell’articolo 40 del
+OCR
+L’articolo 40 del OCR, in deroga all’articolo 37 paragrafo 4, lettera e), stabilisce che i SS.FF.RR.,
+esclusivamente per lo svolgimento delle “altre attività ufficiali”, possono designare come laboratori
+ufficiali anche laboratori che non sono accreditati secondo la norma UNI CEI EN ISO/IEC 17025,
+purché essi:
+   i) impieghino unicamente metodi di analisi, prove e diagnosi di laboratorio di cui all’articolo 34,
+   paragrafo 1, e all’articolo 34, paragrafo 2, lettere a) o b) del OCR;
+    ii) eseguano analisi, prove o diagnosi sotto la supervisione delle autorità competenti o dei
+   laboratori nazionali di riferimento in relazione ai metodi impiegati;
+   iii) partecipino regolarmente e con prestazioni soddisfacenti alle prove comparative
+   interlaboratorio o alle prove valutative organizzate dai laboratori nazionali ed internazionali di
+   riferimento in relazione ai metodi impiegati;
+    iv) applichino un sistema di assicurazione della qualità per garantire che i metodi di analisi, prove
+   e diagnosi di laboratorio utilizzati consentano di ottenere risultati solidi e attendibili. A tal fine,
+   sono individuati i requisiti minimi di cui all’allegato 1 al presente Documento Tecnico Ufficiale
+   che saranno verificati dal SFR competente che designa il laboratorio come laboratorio ufficiale,
+   sentito il CFN.
+In applicazione dell’articolo 40, paragrafo 2 del OCR, qualora i metodi impiegati dai laboratori sopra
+identificati richiedano una conferma dei risultati delle analisi, prove o diagnosi di laboratorio, tali
+conferme sono effettuate da un laboratorio ufficiale che soddisfi i requisiti di cui all’articolo 37,
+paragrafo 4, lettera e).
+Obblighi dei laboratori ufficiali riguardo alla partecipazione alle prove
+comparative interlaboratorio o alle prove valutative
+Ai sensi dell’art. 38 comma 2 dell’OCR “Obblighi dei laboratori ufficiali” i laboratori ufficiali
+partecipano, su richiesta di un laboratorio di riferimento dell’Unione europea o di un laboratorio
+nazionale di riferimento, alle prove comparative interlaboratorio (Test Performance Studies TPS,
+volte a valutare la robustezza diagnostica di un metodo analitico e a produrre dati di validazione) o
+alle prove valutative (Proficiency Test – PT, volti a valutare l’accuratezza del dato analitico fornito
+dal laboratorio nella diagnosi di un certo organismo) organizzate in merito alle analisi, prove e
+diagnosi che essi effettuano in qualità di laboratori ufficiali.
+In particolare, nel caso di laboratori ufficiali che operano in deroga all’art. 37 ai sensi dell’articolo 40
+del OCR, la partecipazione regolare e con prestazioni soddisfacenti alle prove comparative
+interlaboratorio o alle prove valutative organizzate dai laboratori internazionali di riferimento in
+                                                                 11
+                                                Servizio fitosanitario nazionale
+   Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+   Indicazioni applicative per il funzionamento dei laboratori ufficiali                      Pag. 12 di 14
+
+
+relazione ai metodi impiegati costituisce requisito per la loro designazione a laboratori ufficiali
+(articolo 40 comma 1, lettera b, punto iii dell’OCR). L’obbligo di partecipazione ai PT è richiamato,
+infine, anche all’articolo 10, comma 2 del Decreto Ministeriale 12 aprile 2022, n. 169819.
+Procedura per la partecipazione dei laboratori ufficiali alle prove comparative
+inter-laboratorio o alle prove valutative organizzate dai laboratori nazionali di
+riferimento
+Nell’ambito dell’attività di coordinamento dei laboratori ufficiali, i laboratori nazionali di riferimento
+organizzano annualmente almeno un PT o un TPS per ogni classe di organismo nocivo, così come
+previsto dall’art. 6 comma 3 del D.M. 12 aprile 2022.
+Ciò stante, al fine di garantire il corretto svolgimento delle attività, i SS.FF.RR. sono tenuti ad
+informare tutti i laboratori ufficiali da loro designati dello svolgimento delle suddette prove. Alla
+conclusione della prova comparativa, il laboratorio nazionale di riferimento trasmette il “Report
+finale” in cui sono indicati l’elenco dei partecipanti e i risultati complessivi, comprensivi delle
+eventuali risultanze dell’efficacia delle azioni correttive, al SFC, al INRPP e al Tavolo Permanente
+della Rete nazionale dei laboratori (di seguito Tavolo Permanente), nonché a ciascun laboratorio
+partecipante.
+È compito di ogni laboratorio ufficiale informare il SFR che lo ha designato dei risultati ottenuti.
+Azioni correttive da attuare in caso di prestazioni non soddisfacenti o per mancata
+partecipazione ad una prova valutativa
+Qualora non ottenga prestazioni soddisfacenti in un PT, il laboratorio dovrà applicare tutte le azioni
+correttive concordate con il laboratorio nazionale di riferimento organizzatore. Se necessario, potrà
+essere disposta una seconda prova al fine di verificare e riallineare la performance del laboratorio.
+Nel caso in cui il laboratorio nazionale di riferimento ritenga che le azioni correttive siano state
+applicate solo in parte e/o in maniera non tecnicamente corretta, non consentendo la risoluzione delle
+criticità individuate, il SFR competente, sentito il CFN, provvederà alla sospensione temporanea del
+laboratorio all’esecuzione:
+    -    della sola prova oggetto del PT, laddove questo abbia riguardato un organismo per il quale il
+         laboratorio esegue analisi ufficiali eseguite ai sensi dell’art. 37 dell’OCR,
+    -    per l’esecuzione della prova in oggetto del PT e, se del caso, delle prove relative ad organismi
+         della stessa classe, laddove il PT abbia riguardato un organismo per il quale il laboratorio
+         esegue analisi ufficiali eseguite ai sensi degli artt. 40, 41 e 42 dell’OCR,
+
+fino alla risoluzione delle criticità.
+In caso di impedimento alla partecipazione ad un PT, il laboratorio ufficiale è tenuto a dare
+tempestiva e motivata comunicazione al SFR competente per territorio o al SFR di riferimento nel
+caso di designazione esterna, nonché al laboratorio nazionale di riferimento responsabile
+dell’organizzazione della prova.
+
+                                                                  12
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                 Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                      Pag. 13 di 14
+
+
+Le possibili motivazioni atte a giustificare la mancata partecipazione di un laboratorio ad una prova
+valutativa, proposte dal Tavolo Permanente e approvate dal CFN, sono di seguito riportate:
+    1. Impraticabilità dei laboratori per eventi eccezionali: Trasferimento laboratori, eventi
+     climatici avversi, calamità naturali, furto, incendio, difficoltà di approvvigionamento. Il
+     Laboratorio Ufficiale deve indicare se tale impraticabilità è limitata alla sola attività del PT o
+     riguarda l’intera attività di laboratorio. In quest’ultimo caso il SFR competente valuterà
+     l’eventualità di sospensione temporanea del laboratorio.
+    2. Indisponibilità temporanea del personale addetto all’espletamento delle prove del PT.
+     Tale motivazione dovrà essere preceduta da una valutazione con il laboratorio nazionale di
+     riferimento organizzatore circa l’eventuale possibilità di posticipare il PT.
+    3. Assenza, sul territorio di competenza per il quale è stato designato, dell’ospite
+     dell’organismo nocivo oggetto del PT. Va indicato il Laboratorio Ufficiale designato dal SFR
+     competente ad effettuare, qualora necessario, le analisi sull’organismo nocivo oggetto del PT.
+     Se nel corso dello stesso anno dovessero essere organizzati altri PT sulla stessa classe di
+     organismi, il Laboratorio Ufficiale avrà l’obbligo di parteciparvi.
+    4. Partecipazione di un altro Laboratorio Ufficiale designato dallo stesso Servizio
+     fitosanitario
+    5. Guasto a specifiche apparecchiature. Il Laboratorio Ufficiale deve indicare se il guasto
+     limita la sola attività del PT o l’intera attività di laboratorio. In quest’ultimo caso, il SFR
+     competente valuterà l’eventualità di sospensione temporanea del laboratorio.
+    6. Partecipazione ad altro PT per la stessa classe di organismo nocivo. Il Laboratorio
+     Ufficiale deve indicare l’organismo nocivo oggetto del PT svolto, il risultato ottenuto e
+     l’istituzione organizzatrice.
+Nel caso di mancata partecipazione di un laboratorio ufficiale ad una prova valutativa non supportata
+da almeno una delle motivazioni sopra esposte, il Laboratorio Nazionale di Riferimento responsabile
+dell’organizzazione della prova ne dà immediata comunicazione al SFR competente. Quest’ultimo
+sentito il CFN, provvederà alla sospensione temporanea del laboratorio all’esecuzione:
+   -    della sola prova in oggetto del PT, laddove questo abbia riguardato un organismo per il quale
+        il laboratorio esegue analisi ufficiali ai sensi dell’art. 37 dell’OCR;
+   -    della prova oggetto del PT e, se del caso, delle prove relative ad organismi della stessa
+        classe, laddove il PT abbia riguardato un organismo per il quale il laboratorio esegue analisi
+        ufficiali ai sensi degli artt. 40, 41 e 42 dell’OCR.
+
+Tale sospensione resterà in vigore fino all’espletamento con prestazioni soddisfacenti del PT
+specifico.
+
+
+
+
+                                                                 13
+                                               Servizio fitosanitario nazionale
+  Documento tecnico ufficiale n.8                                                          Procedura operativa
+
+  Indicazioni applicative per il funzionamento dei laboratori ufficiali                                  Pag. 14 di 14
+
+
+
+Allegato 1
+Caratteristiche minime attestanti l’applicazione di un sistema di assicurazione della qualità [di
+cui all’art. 40 comma 1, lettera b), punto iv) Reg. 2017/625 e art. 3 lettera a) del Regolamento
+delegato 2021/1353].
+
+
+Al fine di una corretta applicazione di un sistema di assicurazione della qualità che garantisca risultati
+attendibili anche per i metodi di prova non accreditati, i laboratori ufficiali dovranno dimostrare di
+possedere almeno 3 dei requisiti previsti nella tabella sottostante, di cui almeno uno interno (attività
+gestita direttamente dal laboratorio) ed uno esterno (attività che richiedono la partecipazione di altri
+laboratori o confronti con l’esterno).
+
+                                           Elementi di controllo qualità
+                                                                                                                         Livello di
+     (modificato da: EPPO standard PM 7/98, Ensuring the validity of test results, Table 2. Internal and
+                                                                                                                         controllo
+                                       external quality checks)
+
+
+   Uso di controlli positivi e negativi (target e non target) di riferimento
+                                                                                                                          interno
+
+   Uso di controlli interni/endogeni (e.g. COX, NAD5, 18S)                                                                interno
+
+   Evidenza di aver già diagnosticato l’organismo con successo mediante uso di campioni
+   sperimentalmente contaminati                                                                                           esterno
+
+
+   Evidenza di aver già utilizzato il test da parte di differenti operatori del laboratorio con risultati ripetibili
+   e riproducibili                                                                                                        esterno
+
+
+   Essere stati sottoposti ad Audit verticale per lo specifico metodo                                                     esterno
+
+   Analisi di campioni “ciechi” inseriti all’interno di circuiti inter-laboratorio o bilaterali con risultati
+   concordanti con i valori assegnati                                                                                     esterno
+
+
+   Possesso di chiavi tassonomiche validate con prove inter-laboratorio (per determinazioni
+   morfologiche/tassonomiche di insetti, nematodi e funghi)                                                               esterno
+
+
+   Partecipazione a PT (sullo stesso metodo e stessa classe di organismi)                                                 esterno
+
+   Esperienza pluriennale nel settore fitosanitario e nella diagnostica (dimostrata attraverso CV
+   dell’operatore dell’analisi)                                                                                           interno
+
+
+   Utilizzo di strumentazione tarata (certificazioni di taratura) e sottoposta a programmi di pulizia e
+   manutenzione (documentazione relativa)                                                                                 interno
+
+
+
+
+                                                                 14
+

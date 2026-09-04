@@ -1,0 +1,139 @@
+SOURCE_URL: https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art6!vig=2021-03-13
+SOURCE_STATUS: Normattiva point-in-time text in force 2021-03-13
+
+[ **Presidenza del Consiglio dei Ministri**](https://www.governo.it)
+[ ITA ](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2021-02-02;19~art6!vig=2021-03-13)
+
+
+# [Normattiva - Il portale della legge vigente ](https://www.normattiva.it/)
+In caso di problemi di visualizzazione dell’atto clicca 
+it-calendar
+July 2015  
+ |  
+|  |  
+| Javascript must be enabled  |  
+Close
+Fare clic o premere il tasto Invio o la barra spaziatrice per aprire il calendario
+Go to previous month
+Go to next month
+Go to previous year
+Go to next year
+Close the date picker
+Date label
+##  DECRETO LEGISLATIVO 2 febbraio 2021, n. 19 
+### Norme per la protezione delle piante dagli organismi nocivi in attuazione dell'articolo 11 della legge 4 ottobre 2019, n. 117, per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625. (21G00021) 
+note: Entrata in vigore del provvedimento: 13/03/2021 _(Ultimo aggiornamento all'atto pubblicato il 24/01/2026)_
+[ visualizza atto intero ](https://www.normattiva.it/esporta/attoCompleto?atto.dataPubblicazioneGazzetta=2021-02-26&atto.codiceRedazionale=21G00021)
+[ nascondi ](javascript:void\(0\))
+vigente al 13/03/2021
+  * Articoli
+  * Ambito di applicazione e definizioni
+  * Organizzazione del servizio fitosanitario nazionale
+  * Laboratori
+  * Personale del servizio fitosanitario nazionale
+  * Sorveglianza degli organismi nocivi delle piante sul territorio nazionale
+  * Emergenze fitosanitarie
+  * Registro ufficiale degli operatori professionali
+  * Passaporto delle piante
+  * Controlli ufficiali
+  * Piante, prodotti vegetali e altri oggetti utilizzati a fini di prove ufficiali, scientifici o educativi, sperimentali, di selezione varietale o riproduttivi
+  * Sistema informativo fitosanitario
+  * Sanzioni amministrative e norme finanziarie
+  * Norme transitorie e finali
+
+
+  * Allegati
+
+
+  * Allegato I
+  * Allegato II
+  * Allegato III
+
+
+## Parole cercate: 
+Presente nei seguenti articoli
+Presente nei seguenti allegati
+chiudi
+Articoli  Approfondimenti e Funzioni 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+Testo in vigore dal: 13-3-2021 
+## Art. 6
+Servizi fitosanitari regionali
+1. I Servizi fitosanitari regionali operano presso le Amministrazioni delle regioni e delle province autonome di Trento e Bolzano e rappresentano le autorità deputate per l'attuazione sul territorio di competenza delle attività di cui all'articolo 3 e sono identificati da tale denominazione. 
+2. I Servizi fitosanitari regionali sono strutture che dispongono di addetti, adeguatamente qualificati ed esperti, per garantire lo svolgimento dei compiti di cui al comma 3, conformemente alla dotazione di cui all'articolo 17, comma 3. Le regioni e le province autonome di Trento e di Bolzano comunicano al Servizio fitosanitario centrale il nominativo del responsabile regionale incaricato per le attività di protezione delle piante. Ogni modifica deve essere comunicata entro trenta giorni. 
+3. Ai Servizi fitosanitari regionali, nel proprio ambito territoriale, competono: 
+a) l'applicazione delle normative fitosanitarie nazionali e dell'Unione e delle altre normative per le quali tale funzione gli è attribuita per espressa disposizione di legge o di regolamento; 
+b) l'attuazione delle attività di protezione delle piante di cui all'articolo 3; 
+c) la partecipazione al Comitato fitosanitario nazionale; 
+d) le registrazioni degli operatori professionali e il rilascio delle autorizzazioni fitosanitarie di cui agli articoli 34 e 37; 
+e) il controllo e la vigilanza ufficiale sullo stato fitosanitario dei vegetali coltivati e spontanei, nonché dei loro prodotti nelle fasi di produzione, conservazione e commercializzazione, al fine di verificare l'eventuale presenza di organismi nocivi; 
+f) la responsabilità delle analisi ufficiali fitosanitarie; 
+g) la definizione delle aree delimitate in relazione al rinvenimento di un organismo nocivo da quarantena rilevante per l'Unione europea ai sensi dell'[articolo 18 del regolamento (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031~art18), previo parere del Comitato fitosanitario nazionale; 
+h) l'effettuazione delle indagini nelle aree delimitate ai sensi dell'[articolo 19 del regolamento (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031~art19); 
+i) la redazione dei piani di azione per gli organismi nocivi prioritari, sentito il Comitato fitosanitario nazionale; 
+l) l'accertamento delle violazioni alle normative in materia fitosanitaria e di altre normative per le quali tale funzione gli è attribuita per espressa disposizione di legge o di regolamento; 
+m) l'effettuazione dei controlli documentali, d'identità e fitosanitari inerenti a vegetali, prodotti vegetali ed altri materiali regolamentati provenienti da Paesi terzi; 
+n) l'attività relativa alla certificazione fitosanitaria per i vegetali e prodotti vegetali destinati all'esportazione verso Paesi terzi; 
+o) la prescrizione, sul territorio di competenza, di tutte le misure ufficiali ritenute necessarie, ivi compresa la distruzione di vegetali e prodotti vegetali ritenuti contaminati o sospetti tali, nonché degli altri oggetti che possono essere veicolo di diffusione di organismi nocivi ai vegetali, in applicazione delle normative vigenti; 
+p) la raccolta delle informazioni relative agli organismi nocivi per il territorio di competenza, necessarie alla definizione del pest status nazionale e alla redazione delle relazioni annuali; 
+q) la realizzazione del programma di audit, in applicazione dei [regolamenti (UE) 2016/2031](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2016;2031) e [2017/625](https://www.normattiva.it/uri-res/N2Ls?urn:nir::regolamento:2017;625), sugli organismi delegati nel proprio territorio di competenza all'esecuzione di controlli ufficiali o altre attività ufficiali; 
+r) l'applicazione del Piano nazionale dei controlli fitosanitari di cui all'articolo 47, del Programma nazionale di indagine di cui all'articolo 27, dei provvedimenti di emergenza, nonché dei piani di emergenza e dei piani di azione nazionali contro gli organismi nocivi; 
+s) la notifica al Servizio fitosanitario centrale del rinvenimento di organismi nocivi, precedentemente assenti nel territorio di propria competenza; 
+t) la tenuta per il territorio di competenza dei registri regionali derivanti dall'applicazione della normativa fitosanitaria; 
+u) la messa a punto, la definizione e la divulgazione di strategie di profilassi e di difesa fitosanitaria; 
+v) l'effettuazione di attività di studio e sperimentazione nel settore fitosanitario, con particolare riferimento ai metodi innovativi di difesa delle piante dalle avversità che siano rispettosi dell'ambiente, dell'operatore agricolo e del consumatore, e la loro definizione e divulgazione; 
+z) l'elaborazione di disciplinari di difesa e di diserbo, al fine di migliorare lo stato fitosanitario, la qualità delle produzioni vegetali nonché la concessione di deroghe alle disposizioni in essi contenute; 
+aa) l'emanazione di misure e il coordinamento delle attività per ridurre gli impatti derivanti dall'utilizzo di prodotti fitosanitari ai sensi della [direttiva 2009/128/CE](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32009L0128) sull'uso sostenibile dei prodotti fitosanitari e del relativo decreto legislativo di recepimento del 14 agosto 2012, n. 150; 
+bb) il supporto tecnico-specialistico in materia fitosanitaria agli enti pubblici. 
+4. In virtù dell'autonoma potestà organizzativa regionale, le competenze di cui alle lettere z) e aa) del comma 3, possono essere organizzate anche in ambito di strutture diverse da quelle del Servizio fitosanitario regionale. 
+Note all'art. 6: - Per i riferimenti dei [regolamenti (UE) 2016/2031 del Parlamento europeo e del Consiglio, del 26 ottobre 2016](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32016R2031) e [2017/625 del Parlamento europeo e del Consiglio, del 15 marzo 2017](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32017R0625), si veda nelle note alle premesse. - Per i riferimenti della [direttiva 2009/128/CE](http://eur-lex.europa.eu/legal-content/IT/TXT/?uri=CELEX:32009L0128), si veda nelle note all'art. 5. - Per i riferimenti del [decreto legislativo 14 agosto 2012, n. 150](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2012-08-14;150), si veda nelle note alle premesse. 
+[ _articolo precedente_ ](javascript:) [ _articolo successivo_ ](javascript:)
+[ nascondi ](javascript:void\(0\))
+  * ### Approfondimenti
+  * aggiornamenti all'atto 
+  * lavori preparatori 
+  * aggiornamenti al titolo 
+  * aggiornamenti alla struttura 
+
+
+  * ### Funzioni 
+  * [ esporta in Akoma ntoso ](https://www.normattiva.it/do/atto/caricaAKN?dataGU=20210226&codiceRedaz=21G00021&dataVigenza=20210313)
+  * collegamento permanente 
+
+
+#### lavori preparatori
+chiudi
+#### aggiornamenti all'atto
+chiudi
+#### atti aggiornati
+chiudi
+#### atti correlati
+chiudi
+#### indice dell'atto
+chiudi
+#### aggiornamenti alla struttura
+chiudi
+#### aggiornamenti al titolo
+chiudi
+#### relazioni
+chiudi
+#### note atto
+chiudi
+#### collegamento permanente
+chiudi
+## guida in linea
+chiudi
+#### Aggiornamenti all'articolo
+chiudi
+#### atti parlamentari
+chiudi
+#### atti attuativi
+chiudi
+  *[lun]: lunedì
+  *[mar]: martedì
+  *[mer]: mercoledì
+  *[gio]: giovedì
+  *[ven]: venerdì
+  *[sab]: sabato
+  *[dom]: domenica
+

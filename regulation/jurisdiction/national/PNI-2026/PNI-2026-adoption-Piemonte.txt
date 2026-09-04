@@ -1,0 +1,7 @@
+SOURCE_URL: https://bandi.regione.piemonte.it/contributi-finanziamenti/servizio-lattuazione-di-programmi-di-indagine-accertare-la-presenza-di
+SOURCE_ROLE: Official regional attestation of the nationally adopted 2026 PNI and the National Plant Health Committee opinion date.
+RETRIEVED: 2026-08-29
+
+L’Italia si dota annualmente di un Piano Nazionale di Indagine (PNI) per gli organismi nocivi delle piante, quale strumento strategico di programmazione, secondo obiettivi e i criteri di indagine generali finalizzati alla salvaguardia del territorio, delle foreste e delle produzioni agricole, a cui tutti i Servizi Fitosanitari Regionali (SFR) contribuiscono, elaborando e trasmettendo una proposta di programmazione, in base alla valutazione del rischio dei vari organismi nocivi in relazione al territorio di propria competenza.
+
+L’Italia ha adottato il PNI da realizzare nell’anno 2026 su parere positivo del Comitato Fitosanitario Nazionale (CFN) nella seduta del 13 novembre 2025, in linea con il Programma pluriennale approvato in CFN ai sensi dell’art. 23 del regolamento (UE) 2016/2031.

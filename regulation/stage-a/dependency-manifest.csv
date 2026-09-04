@@ -1,0 +1,74 @@
+dependency_id,source_provision,target_instrument,target_provision,status,trigger,effect,evidence,note,source_token
+EU1201-A18,index,EU-2020-1201,Article 18,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A19,index,EU-2020-1201,Article 19,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A20,index,EU-2020-1201,Article 20,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A21,index,EU-2020-1201,Article 21,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A22,index,EU-2020-1201,Article 22,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A23,index,EU-2020-1201,Article 23,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A24,index,EU-2020-1201,Article 24,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A25,index,EU-2020-1201,Article 25,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A26,index,EU-2020-1201,Article 26,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A27,index,EU-2020-1201,Article 27,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A28,index,EU-2020-1201,Article 28,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A29,index,EU-2020-1201,Article 29,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A30,index,EU-2020-1201,Article 30,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A31,index,EU-2020-1201,Article 31,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A33,index,EU-2020-1201,Article 33,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A35,index,EU-2020-1201,Article 35,DEPENDENCY_STUB,indexed reference,no Phase-1 transaction instantiated,-,Only paragraphs 1 and 4 are direct reporting dependencies,-
+EU1201-A36,index,EU-2020-1201,Article 36,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A37,index,EU-2020-1201,Article 37,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU1201-A38,index,EU-2020-1201,Article 38,DEFERRED_INDEXED,indexed reference,no Phase-1 transaction instantiated,-,Later transaction family indexed without transaction objects,-
+EU2031-A10,multiple,EU-2016-2031,Article 10,DEPENDENCY_STUB,suspicion/evidence of pest presence,official laboratory confirmation process,external submission/authority record,-,-
+EU2031-A11,multiple,EU-2016-2031,Article 11,DEPENDENCY_STUB,official confirmation,Member-State electronic notification,external submission/authority record,-,-
+EU2031-A12,multiple,EU-2016-2031,Article 12,DEPENDENCY_STUB,official confirmation,inform affected professional operators,external submission/authority record,-,-
+EU2031-A13,multiple,EU-2016-2031,Article 13,DEPENDENCY_STUB,priority-pest confirmation,inform public about measures,external submission/authority record,-,-
+EU2031-A14,multiple,EU-2016-2031,Article 14,DEPENDENCY_STUB,professional-operator suspicion/awareness,notification and immediate precautionary action,external submission/authority record,-,-
+EU2031-A15,multiple,EU-2016-2031,Article 15,DEPENDENCY_STUB,other person awareness/suspicion,notification and instructed prevention/elimination,external submission/authority record,-,-
+EU2031-A16,multiple,EU-2016-2031,Article 16,DEPENDENCY_STUB,known-presence area conditions,notification derogations,external submission/authority record,-,-
+EU2031-A17,multiple,EU-2016-2031,Article 17,DEPENDENCY_STUB,official confirmation,eradication plus source/onward-spread investigation,external submission/authority record,-,-
+EU2031-A18,multiple,EU-2016-2031,Article 18,DEPENDENCY_STUB,official confirmation,establish and electronically notify demarcated area,external submission/authority record,-,-
+EU2031-A19,multiple,EU-2016-2031,Article 19,DEPENDENCY_STUB,"survey, buffer finding or lifting",review/modify/abolish area and Article 103 notifications,external submission/authority record,-,-
+EU2031-A22,multiple,EU-2016-2031,Article 22,DEPENDENCY_STUB,annual survey results,annual survey reporting,external submission/authority record,-,-
+EU2031-A25,multiple,EU-2016-2031,Article 25,DEPENDENCY_STUB,contingency-plan duty,base contingency-plan content,external submission/authority record,-,-
+EU2031-A27,multiple,EU-2016-2031,Article 27,DEPENDENCY_STUB,priority-pest official confirmation,case-specific action plan and operator communication,external submission/authority record,-,-
+EU2031-A103,multiple,EU-2016-2031,Article 103,DEPENDENCY_STUB,specified notification/report,electronic transmission through the Union system,external submission/authority record,-,-
+EU1201-A34-2,4;8;12;14,EU-2020-1201,34(2),DEPENDENCY_STUB,demarcated area exists,"raise public and operator awareness of the pest threat, infected/buffer delimitation and Articles 8/14 vector measures",targeted awareness content and publication evidence,Thin direct consequence of in-scope area and vector decisions,-
+EU1201-A35-1,2(8);4-17,EU-2020-1201,35(1),DEPENDENCY_STUB,preceding-year measures/results,Commission and Member-State report,report payload and delivery/receipt,-,-
+EU1201-A35-4,15(2)(a),EU-2020-1201,35(4),DEPENDENCY_STUB,official identification in 15(2)(a) location,immediate Commission and Member-State notification,payload and external receipt,-,-
+EU1201-A32,35(1),EU-2020-1201,32,DEPENDENCY_STUB,Article 32 implemented measures exist,include authoritative external input in annual report,Article 32 source-system extract,-,-
+EU2019-1702,27 dependency,EU-2019-1702,priority-pest list,IMPLEMENTED,taxon classification,Xylella fastidiosa is a priority pest,current list version,-,-
+EU2015-789,3(1)-final-subparagraph,EU-2015-789,historical plans,SUPERSEDED_OR_REPEALED,plan established under predecessor decision,historical update deadline retained,historical plan identity,-,-
+EU1201-ANNEX-1,multiple,EU-2020-1201,Annex 1,IMPLEMENTED,annex reference,versioned classification/method/report schema,dated annex source,-,-
+EU1201-ANNEX-2,multiple,EU-2020-1201,Annex 2,IMPLEMENTED,annex reference,versioned classification/method/report schema,dated annex source,-,-
+EU1201-ANNEX-3,multiple,EU-2020-1201,Annex 3,IMPLEMENTED,annex reference,versioned classification/method/report schema,dated annex source,-,-
+EU1201-ANNEX-4,multiple,EU-2020-1201,Annex 4,IMPLEMENTED,annex reference,versioned classification/method/report schema,dated annex source,-,-
+EU1201-ANNEX-5,multiple,EU-2020-1201,Annex 5,DEPENDENCY_STUB,annex reference,versioned classification/method/report schema,dated annex source,-,-
+SEM-REF-001,1(b),EU-2020-1201,Annex I,IMPLEMENTED_ANNEX_REFERENCE,semantic citation,reference disposition,held source or internal provision,versioned annex relation,Annex I
+SEM-REF-002,1(c);15(1)(a);7(1)(e),EU-2020-1201,Annex II,IMPLEMENTED_ANNEX_REFERENCE,semantic citation,reference disposition,held source or internal provision,versioned annex relation,Annex II
+SEM-REF-003,12;15(2);16(1),EU-2020-1201,Annex III,IMPLEMENTED_ANNEX_REFERENCE,semantic citation,reference disposition,held source or internal provision,versioned annex relation,Annex III
+SEM-REF-004,2(6);5(4)-sub1;7(3)(a),EU-2020-1201,Annex IV,IMPLEMENTED_ANNEX_REFERENCE,semantic citation,reference disposition,held source or internal provision,versioned annex relation,Annex IV
+SEM-REF-005,2(7),EU-2020-1201,Annex IV Section B,IMPLEMENTED_ANNEX_REFERENCE,semantic citation,reference disposition,held source or internal provision,versioned annex relation,Annex IV Section B
+SEM-REF-006,6(1);7(1)(e)-sub2,EU-2020-1201,Art. 10,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 10
+SEM-REF-007,15(5),EU-2020-1201,Art. 14,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 14
+SEM-REF-008,16(2),EU-2020-1201,Art. 14(1),IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 14(1)
+SEM-REF-009,13(1);14(2),EU-2020-1201,Art. 15(2),IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 15(2)
+SEM-REF-010,13(2),EU-2020-1201,Art. 15(2)(b),IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 15(2)(b)
+SEM-REF-011,10,EU-2020-1201,"Art. 2(5), 2(6)",IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,"Art. 2(5), 2(6)"
+SEM-REF-012,15(2)-final-subparagraph,EU-2020-1201,Art. 2(6),IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 2(6)
+SEM-REF-013,6(2),EU-2020-1201,Art. 5(1),IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 5(1)
+SEM-REF-014,10-sub3,EU-2020-1201,Art. 8,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Art. 8
+SEM-REF-015,4(2)(b),EU-2020-1201,Arts. 12-17,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Arts. 12-17
+SEM-REF-016,12,EU-2020-1201,Arts. 13-17,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Arts. 13-17
+SEM-REF-017,3(1)(b),EU-2020-1201,Arts. 19-26,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Arts. 19-26
+SEM-REF-018,3(1)(c),EU-2020-1201,Arts. 32-33,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Arts. 32-33
+SEM-REF-019,3(1)(a);4(2)(a),EU-2020-1201,Arts. 7-11,IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,Arts. 7-11
+SEM-REF-020,3(1),EU-2020-1201,"Arts. 7-11, 19-26, 32-33",IMPLEMENTED_INTERNAL_REFERENCE,semantic citation,reference disposition,held source or internal provision,in-scope article relation or indexed later reference,"Arts. 7-11, 19-26, 32-33"
+SEM-REF-021,10;15(2);2(5);5(1)(b);6(2)(b),EFSA,EFSA Pest Survey Card,METHOD_OR_PARAMETER_HELD,semantic citation,reference disposition,held source or internal provision,held method/guidance source,EFSA Pest Survey Card
+SEM-REF-022,10-sub1;10-sub2;15(2)-final-subparagraph;15(4);2(4);5(1)(c);5(4)-sub1;6(2)(b);6(3),EFSA,EFSA survey guidelines,METHOD_OR_PARAMETER_HELD,semantic citation,reference disposition,held source or internal provision,held method/guidance source,EFSA survey guidelines
+SEM-REF-023,11(1),IPPC,ISPM 14,METHOD_OR_PARAMETER_HELD,semantic citation,reference disposition,held source or internal provision,held standard or incorporated method source,ISPM 14
+SEM-REF-024,11(1),IPPC,ISPM 9,METHOD_OR_PARAMETER_HELD,semantic citation,reference disposition,held source or internal provision,held standard or incorporated method source,ISPM 9
+SEM-REF-025,3(1)-final-subparagraph,EU-2015-789,Impl. Decision (EU) 2015/789,SUPERSEDED_OR_REPEALED,semantic citation,reference disposition,held source or internal provision,historical predecessor,Impl. Decision (EU) 2015/789
+SEM-REF-026,5(1)(d),IPPC,International Standards for Phytosanitary Measures,METHOD_OR_PARAMETER_HELD,semantic citation,reference disposition,held source or internal provision,held standard or incorporated method source,International Standards for Phytosanitary Measures
+SEM-REF-027,4(3),EU-2016-2031,Reg. 2016/2031 Art. 18(6),DEPENDENCY_STUB,semantic citation,reference disposition,held source or internal provision,current base-law dependency,Reg. 2016/2031 Art. 18(6)
+SEM-REF-028,2(8),EU-2016-2031,Reg. 2016/2031 Art. 22(3),DEPENDENCY_STUB,semantic citation,reference disposition,held source or internal provision,current base-law dependency,Reg. 2016/2031 Art. 22(3)
+SEM-REF-029,3(2),EU-2016-2031,Reg. 2016/2031 Art. 25(2),DEPENDENCY_STUB,semantic citation,reference disposition,held source or internal provision,current base-law dependency,Reg. 2016/2031 Art. 25(2)

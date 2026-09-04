@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://digital.csic.es/handle/10261/215092",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 2,
+      "url": "https://www.efsa.europa.eu/sites/default/files/event/191029-xylella/S6.P1_BECK.pdf",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 3,
+      "url": "https://github.com/Quantalab/Xf-NPlants-2018",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 4,
+      "url": "https://xfactors.eppo.int/data/f57f942e-7eb9-4142-b223-8cd9a8c853d1",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 5,
+      "url": "https://doi.org/10.5281/zenodo.1087231",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 6,
+      "url": "https://cordis.europa.eu/project/id/635646/results",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 7,
+      "url": "https://cordis.europa.eu/project/id/727987/results",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 8,
+      "url": "https://geodati.gov.it/resource/id/r_puglia:1de1e983-7933-4e2e-8865-b6128ac05e08",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 9,
+      "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2015_IR/ImageServer",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 10,
+      "url": "https://github.com/pieterbeck/CanHeMonR",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 11,
+      "url": "https://github.com/MartinezLaura/Mask_RCNN",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 12,
+      "url": "https://www.xfactorsproject.eu/partner/jrc",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 13,
+      "url": "https://safes.unimelb.edu.au/research/hypersens",
+      "title": "",
+      "accessed": "2026-08-22"
+    },
+    {
+      "id": 14,
+      "url": "https://www.cid.csic.es/biblioteca/sites/default/files/documents/peticion_copia_nueva_funcionalidad_DC.pdf",
+      "title": "",
+      "accessed": "2026-08-22"
+    }
+  ]
+}

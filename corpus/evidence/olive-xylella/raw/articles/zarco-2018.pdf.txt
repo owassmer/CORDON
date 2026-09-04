@@ -1,0 +1,1426 @@
+
+--- page 1 ---
+Pre-visual symptoms of Xylella fastidiosa infection revealed in spectral plant-trait 
+1 
+alterations 
+2 
+ 
+3 
+Zarco-Tejada1*, P.J., Camino2, C., Beck1, P.S.A., Calderon2, R., Hornero2, A., Hernández-
+4 
+Clemente, R3., Kattenborn4, T., Montes-Borrego2, M., Susca5, L., Morelli6, M., Gonzalez-
+5 
+Dugo2, V., North3, P.R.J., Landa2, B.B., Boscia6, D., Saponari6, M., Navas-Cortes2, J.A. 
+6 
+ 
+7 
+1 European Commission (EC), Joint Research Centre (JRC), Directorate D-Sustainable 
+8 
+Resources, Via E. Fermi 2749  TP 261, 26a/043, I-21027 Ispra (VA), Italy 
+9 
+2 Instituto de Agricultura Sostenible (IAS), Consejo Superior de Investigaciones Científicas 
+10 
+(CSIC), Alameda del Obispo s/n, 14004 Córdoba, Spain 
+11 
+3 Department of Geography, Swansea University, SA2 8PP Swansea, United Kingdom 
+12 
+4 Institute of Geography and Geoecology, Karlsruhe Institute of Technology (KIT), 
+13 
+Kaiserstraße 12, 76131 Karlsruhe, Germany 
+14 
+5 Dip. di Scienze del Suolo, della Pianta e degli Alimenti dell'Università di Bari, Bari, Italy 
+15 
+6 CNR, Istituto per la Protezione Sostenibile delle Piante, Bari, Italy 
+16 
+* Corresponding author 
+17 
+ 
+18 
+ 
+19 
+ABSTRACT 
+20 
+Plant pathogens cause significant losses to agricultural yields, and increasingly threaten 
+21 
+food security1, ecosystem integrity, and societies in general2 5. Xylella fastidiosa (Xf) is one 
+22 
+of the most dangerous plant bacteria worldwide, causing several diseases with profound 
+23 
+impacts on agriculture and the environment6. Primarily occurring in the Americas, its recent 
+24 
+discovery in Asia and Europe demonstrates that Xf  geographic range has broadened 
+25 
+considerably, positioning Xf as a re-emerging global threat that has caused socio-economic 
+26 
+and cultural damage7,8. Xf can infect over 350 plant species worldwide9, and its early 
+27 
+detection is critical for its eradication8. Here, we show that changes in plant functional traits 
+28 
+retrieved from airborne imaging spectroscopy and thermography can reveal Xf infection in 
+29 
+olive trees before symptoms are visible. We obtained accuracies of disease detection, 
+30 
+confirmed by qPCR, exceeding 80% when high-resolution fluorescence quantified by 3D 
+31 
+simulations and thermal stress indicators were coupled with photosynthetic traits sensitive 
+32 
+to rapid pigment dynamics and degradation. Moreover, we found that the visually 
+33 
+asymptomatic trees originally scored as affected via spectral plant trait alterations 
+34 
+developed Xf symptoms at almost double the rate of the asymptomatic trees classified as 
+35 
+not affected by remote sensing. We demonstrate that spectral plant trait alterations caused 
+36 
+by Xf infection are detectable pre-visually at the landscape scale, a critical requirement to 
+37 
+help eradicate some of the most devastating plant diseases worldwide. 
+38 
+ 
+39 
+ 
+40 
+Acronyms - Anth: Anthocyanins; Ca+b: Chlorophyll a+b; Cx+c: Carotenoids; CWSI: Crop Water Stress Index; E: 
+41 
+irradiance; Fi: Fluorescence efficiency; Ft: Leaf-level steady-state fluorescence; FP: False Positives; FW1: Intensive field 
+42 
+work 1; FW2: Intensive field work 2; : Kappa coefficient; L: radiance; LDA: Linear Discriminant Analysis; NBHI: 
+43 
+Narrow Band Hyperspectral Indicators; NDVI:  Normalized Difference Vegetation Index; NIR: Near-infrared; NNE: 
+44 
+Neural Network; NPQI: Chlorophyll Degradation Phaeophytinization-based Spectral Trait; OA: Overall Accuracy; PS: 
+45 
+Pigment- and Structure-based Functional Traits; PSFT: Pigment-Structural-Fluorescence-Temperature Plant Functional 
+46 
+Traits; qPCR: Quantitative Polymerase Chain Reaction assay; RGB: Red-Green-Blue; ROC: Receiver Operating 
+47 
+Characteristic analysis; RT: Radiative Transfer; SIF: Solar-induced Fluorescence; SVI:  Spectral Vegetation Indices; 
+48 
+SVM: Support Vector Machine; TN: True Negatives; TR: Training dataset; TS: Testing dataset; V+A+Z: Violaxanthin 
+49 
+(V), Antheraxanthin (A), Zeaxanthin (Z) pool; VHR: Very-High-Resolution; Xf: Xylella fastidiosa. 
+50 
+
+--- page 2 ---
+Xylella fastidiosa (Xf) is considered one of the most dangerous plant pathogens worldwide6. 
+51
+It can infect over 350 plant species9, causing diseases in several crops and large economic 
+52 
+losses8. In America, this xylem-limited plant pathogenic bacterium is associated with 
+53 
+detrimental diseases in high-value crops, such as 
+54 
+variegated chlorosis in citrus10. Its spread has recently gained a global dimension11: already 
+55 
+widely distributed in the Americas and detected in Iran and Taiwan, Xf has been known to 
+56 
+be present in Europe since 2013 after its official identification in Italy12 causing economic 
+57 
+and societal damage8. 
+58 
+ 
+59 
+The spread of Xf within Europe has thus far not been contained7. Outbreaks detected in 
+60 
+France and recently in Spain have raised concerns of Xf spreadi
+61 
+olive-growing area (over 2.5 million hectares) and throughout Mediterranean agriculture8. 
+62 
+The identification of all three main subspecies of Xf (i.e., fastidiosa, multiplex, and pauca) 
+63 
+in Europe broadens the threat to several other crop plants, including almond, citrus, and 
+64 
+grapevine, but also to ornamental trees as well as elms, oaks and sycamores. A major 
+65 
+difficulty for Xf containment arises from its very wide host range, with infections that do 
+66 
+not cause symptoms in some host strain combinations, despite the infected hosts 
+67 
+continuing to act as inoculum sources9. This threat is further exacerbated because Xf can be 
+68 
+spread via xylem-sap sucking insects without any specific vector relationship8, and due to 
+69 
+increased global trade. 
+70 
+ 
+71 
+Alarms have been raised by both the international scientific community8 and the media7, 
+72 
+pointing out that eradication of Xf will require robust monitoring and early detection of 
+73 
+plants that show little to no signs of decline at the early stages of infection. A major 
+74 
+limitation of standard large-scale mapping methods based on red and near-infrared (NIR) 
+75 
+(e.g. the Normalized Difference Vegetation Index [NDVI] and its multiple variations 
+76 
+obtained from broadband satellite sensors) is that they are useful only for detecting the 
+77 
+advanced stages of disease damage, i.e. when canopy defoliation, leaf wilting, and chlorosis 
+78 
+are apparent13. Additionally, current hyperspectral satellite sensors lack the spatial 
+79 
+resolution to distinguish individual tree crowns. Accordingly, Xf eradication efforts 
+80 
+involving its early detection necessitate high spatial resolution (i.e. sub-meter) imaging 
+81 
+spectroscopy and thermal data to assess subtle changes in spectral features and traits, a 
+82 
+technology that can be potentially deployed at large scales with airborne platforms14. 
+83 
+ 
+84 
+We carried out intensive multi-year in-situ inspections of >7000 trees and airborne  
+85 
+imaging data in 15 olive orchards, finding that physiological alterations caused by Xf 
+86 
+infection at the pre-visual stage were detectable in functional plant traits assessed remotely 
+87 
+by hyperspectral and thermal sensors. We confirmed the presence of Xf infection in all 
+88 
+selected orchards by testing at least two symptomatic trees per plot by quantitative 
+89 
+polymerase chain reaction assay15 (qPCR). Additionally, we sampled one of the olive fields 
+90 
+more extensively for an orchard-level validation of the remote sensing model testing, by 
+91 
+qPCR assays, 67 out of the 157 trees spanning the full range of symptoms, i.e. from 
+92 
+asymptomatic to severely affected. Although quantitative PCR is considered the most 
+93 
+sensitive diagnostic approach, its accuracy under field conditions for the detection of the Xf 
+94 
+in host plants is affected by the period of sampling and the uneven distribution of the 
+95 
+bacterium in the large canopy of the olive trees (especially at the early stage of infection). 
+96 
+Moreover, this type of laboratory assay is time consuming and costly, and requires skilled 
+97 
+and trained personnel. For these reasons, we evaluated non-destructive remote sensing 
+98 
+
+--- page 3 ---
+methods comprising the acquisition of spectroscopy data to build 40 cm radiance and 
+99
+reflectance scenes in 260 narrow spectral bands (Fig. 1a;b) and in the thermal spectral 
+100 
+region (Fig. 1a;c). The entire flight campaigns covered three areas within the Xf-affected 
+101 
+olive growth region in Southern Italy and scanned ca. 200,000 individual trees in 2016 and 
+102 
+2017, quantifying tree-level physiology-related narrow-band spectral traits, Solar-induced 
+103 
+Fluorescence (SIF) and fluorescence efficiency (Fi) by Monte Carlo 3-D scene generation 
+104 
+(Fig. 1d) that modelled the individual tree fluorescence emissions (Fig. 1e) at the tree 
+105 
+radiance level (Fig. 1f). 
+106 
+ 
+107 
+We used a multi-layered functional plant trait scheme to extract the alterations caused by Xf 
+108 
+from a pool of physiology-related narrow-band hyperspectral indicators (NBHI). This pool 
+109 
+included plant physiological traits specifically related to rapid changes in photosynthetic 
+110 
+pigments and leaf processes not simulated by any existing radiative transfer (RT) model, 
+111 
+e.g. the de-epoxidation state of the xanthophyll-cycle pigments via the violaxanthin (V), 
+112 
+antheraxanthin (A), and zeaxanthin (Z) pool16, and chlorophyll degradation via 
+113 
+phaeophytinization17,18 (see Supplementary Table 113). In addition, we assessed traits 
+114 
+sensitive to Xf infection (i.e. anthocyanins and carotenoid / chlorophyll ratios) by a hybrid 
+115 
+wavelet-inverted model inversion method (Supplementary Table 2; Supplementary Fig. 1), 
+116 
+and quantified SIF emission and Fi by a multi-step LUT-based inversion scheme 
+117 
+(Supplementary Table 3, Supplementary Fig. 2).  The inversion of radiative transfer models 
+118 
+enables the simultaneous and independent retrieval of multiple leaf and canopy traits linked 
+119 
+to physiological processes in plants. Thus, compared to single-band and index-based 
+120 
+relationships from radiance or reflectance spectra which simultaneously relate to several 
+121 
+traits (e.g. both photosynthetic pigments and structure), the model-inverted traits space is 
+122 
+more likely to reveal the physiological processes associated with the disease. Furthermore, 
+123 
+the process-based retrieval of traits by physical models increases the potential 
+124 
+transferability of findings to other data sets, diseases, and plant species. Nevertheless, 
+125 
+specific narrow-band spectral indices that track processes currently not simulated by any 
+126 
+radiative transfer simulations can complement model-estimated traits. 
+127 
+ 
+128 
+To reveal the gas exchange dynamics associated with Xf symptoms, we incorporated a 
+129 
+functional trait consisting of temperature-based plant stress indicators linked to stomatal 
+130 
+conductance and tree transpiration alterations. Linear, as well as machine- and deep-
+131 
+learning algorithms (linear discriminant analysis, LDA; support vector machine, SVM; 
+132 
+neural network ensemble, NNE, see Methods in Extended Material) fed by the pool of 
+133 
+functional plant traits via receiver operating characteristic (ROC) analysis revealed that the 
+134 
+chlorophyll degradation phaeophytinization-based spectral trait (NPQI)17,18 calculated in 
+135 
+the blue region, and the thermal-based stress trait (CWSI, Crop Water Stress Index) best 
+136 
+distinguished Xf-symptomatic from asymptomatic trees (Fig. 2a) in both years (Fig. 2b), 
+137 
+followed by anthocyanins (Anth), carotenoids (Cx+c) and solar-induced fluorescence. 
+138 
+Notably, the importance of the functional traits varied as a function of Xf-symptom 
+139 
+severity: NPQI and CWSI most reliably distinguished symptomatic from asymptomatic 
+140 
+material (Fig. 2a, left-side bars), but were of lesser importance to discriminate between 
+141 
+initial and advanced stages of the disease. For these symptomatic trees, solar-induced 
+142 
+fluorescence was the most sensitive functional trait to detect the severity of Xf symptoms 
+143 
+(Fig. 2a, right-side bars). 
+144 
+ 
+145 
+ 
+
+--- page 4 ---
+ 
+ 
+ 
+  
+Fig. 1. Imagery acquisition and plant-trait fluorescence retrievals. a, Strips of airborne 
+146 
+images of 40-cm hyperspectral radiance collected at the O2-A band, reflectance at 415 nm 
+147 
+(used to calculate NPQI), and temperature (in K). Subsets of the very-high-resolution 
+148 
+(VHR) hyperspectral (b) and thermal imagery (c) enable the identification of single trees to 
+149 
+extract tree-crown radiance (L), reflectance (R) and temperature. d, Monte Carlo simulation 
+150 
+modelled solar-induced fluorescence (SIF) emission via 3-D scenes generated with 
+151 
+FluorFLIGHT (e) from tree radiance (L) and irradiance (E) (f) to quantify fluorescence 
+152 
+efficiency (Fi) by radiative transfer. 
+153 
+       
+
+--- page 5 ---
+ 
+Fig. 2. Contribution of remote sensing plant traits to pre-visual Xf symptom detection. 
+154 
+a, ROC analysis from the pool of hyperspectral and thermal plant functional traits used to 
+155 
+detect asymptomatic vs. Xf-symptomatic trees (left bars) and for initial vs. advanced Xf-
+156 
+symptomatic trees (right bars). b, The robustness across years of the functional traits for 
+157 
+asymptomatic vs. Xf-symptomatic trees. The ROC analysis was performed using the 
+158 
+training data set (TR, n=5,852 trees). 
+159 
+ 
+160 
+The sensitivity of these physiology-based remote-sensed plant traits to pre-visual and early 
+161 
+stages of the Xf-infection is supported in the literature by work that shows the 
+162 
+photoprotective role of carotenoids (Cx+c) and the protection from damage induced by 
+163 
+environmental stresses and plant pathogens provided by flavonoids such as anthocyanins 
+164 
+(Anth)19. These compounds accumulate in Xf-infected plant material20 and are produced by 
+165 
+the degradation of the chlorophyll molecule into phaeophytin under stress conditions17,18. In 
+166 
+addition, the alterations in stomatal regulation21 and photosynthesis caused by plant
+167 
+pathogen interactions22 lead to decreased fluorescence13,23 and transpiration24, and produce 
+168 
+phenolic plant-defense compounds25. 
+169 
+The alterations of plant functional traits we detected remotely were highly consistent with 
+170 
+Xf-induced leaf physiological changes measured in-situ. In particular, the changes we 
+171 
+observed in the in-situ Anth, steady-state fluorescence Ft, and temperature leaf traits (Fig. 
+172 
+3a; Supplementary Fig. 3) were in line with the alterations observed in the corresponding 
+173 
+traits quantified from the imagery, such as Anth (Supplementary Fig. 1), SIF and CWSI 
+174 
+(Fig. 3d). These traits differed significantly between asymptomatic and symptomatic 
+175 
+leaves, even when symptoms were mild (Tukey's HSD test, P<0.05) (Supplementary Fig. 
+176 
+3). Moreover, the high-resolution images revealed between- and within-tree-crown patterns 
+177 
+of the functional traits associated with Xf infection (Fig. 3b;c). Although widely used in 
+178 
+global monitoring of vegetation, NDVI did not differ significantly between asymptomatic 
+179 
+and symptomatic trees (Fig. 3d), and was therefore unable to detect non-visual symptoms 
+180 
+of Xf infection. We found that the reflectance changes in the blue region consistently 
+181 
+tracked early and initial Xf symptoms, in particular the 415 and 435 nm spectral bands used 
+182 
+to calculate the chlorophyll degradation phaeophytinization-based spectral trait NPQI17,18, 
+183 
+which was the NBHI indicator most sensitive to Xf infection. The SIF calculated from the 
+184 
+airborne radiance imagery and CWSI calculated from the remotely sensed tree crown 
+185 
+temperature, showed statistically-significant (P<0.001) and consistent trends for early Xf 
+186 
+symptoms. 
+187 
+
+--- page 6 ---
+ 
+Fig. 3. Relationships between remote-sensed functional plant traits and Xf disease 
+188 
+severity levels at leaf and canopy levels. a, Temperature (T, n=922 leaves), fluorescence 
+189 
+(Ft, n=1,197 leaves) and anthocyanins (Anth, n=939 leaves), as well as hourly Ft (n=2,863 
+190 
+leaves), measured in asymptomatic (Xf severity = 0) and increasingly symptomatic leaves 
+191 
+of Xf-infected olive trees. b, Mean tree-crown reflectance for trees with increasing severity 
+192 
+of Xf symptoms in the red-NIR region (n=923 trees), blue region (n=923 trees), O2-A 
+193 
+radiance region for SIF quantification (n=923 trees), and temperature (n=1,493 trees). The 
+194 
+standard deviation for the tree-crown T data is represented as shaded. c, Respective 
+195 
+associated maps of NDVI, NPQI, SIF and CWSI, showing the within-crown variation of 
+196 
+traits in asymptomatic, initial, and low Xf-symptomatic trees. d, Trait values across the 
+197 
+entire sample of trees for NDVI, NPQI and SIF (n=1,493 trees) and CWSI (n=1,446 trees). 
+198 
+The disease severity at leaf and canopy levels was compared by one-sided 
+199 
+test at 5%. Severity levels with same letter are not significantly different (Tukey HSD test, 
+200 
+p-value <0.05). In the box plots, the black line represents the median, and the top and 
+201 
+bottom are the 75th and 25th quartiles. The whiskers are the upper and lower limits based on 
+202 
+the interquartile ranges (Q±1.5xIQR). Average values are shown with a blue point. The 
+203 
+outliers (circles), are the values out of the upper and lower limits. a.u.: arbitrary units.A 
+204 
+
+--- page 7 ---
+pool of plant functional traits comprising pigment and structural traits, together with a flux-
+205
+based fluorescence trait and temperature (PSFT) obtained the best overall accuracy (OA) 
+206 
+and kappa coefficient  ( ) for Xf detection through the SVM algorithm, yielding OA = 
+207 
+80.9% and  = 0.61 (Fig. 4a; Supplementary Tables 4 and 5). By contrast, models built 
+208 
+without SIF and temperature traits (i.e. the Pigment- and Structure-based Functional Traits, 
+209 
+PS model), and particularly one limited to standard red-green-blue (RGB)-NIR spectral 
+210 
+vegetation indices (SVI) commonly found in satellite sensors (NDVI, and blue / green / red 
+211 
+ratios; SVI model), obtained the lowest accuracies (OA=65.4%; =0.29). We obtained 
+212 
+these results through validation with visual inspection data collected by plant pathologists 
+213 
+from 1,332 trees per year in 15 fields, generating a large dataset with statistical robustness 
+214 
+and ample variability in disease severity levels, tree structure and age, and agronomic 
+215 
+management of the orchards within the Xf-infested zone. 
+216 
+ 
+217 
+We evaluated the accuracies of the remote sensing-based SVM-PSFT disease detection 
+218 
+model and the visual inspections using quantitative PCR assay data obtained in a selected 
+219 
+olive orchard. The assessment of the orchard-level remote sensing model validated with the 
+220 
+tree-level qPCR dataset yielded OA=94.03% and =0.88. The performance of the visual 
+221 
+inspection against qPCR (OA=77.62% and =0.55) showed the validity of the evaluations 
+222 
+by the plant pathologists, but reflected a lower performance than that using remote sensing 
+223 
+methods due to the impossibility of visually detecting the asymptomatic infections that 
+224 
+were detected by qPCR. The validation of the remote-sensing model with qPCR data 
+225 
+enabled the generation of a spatial map of disease incidence prediction by remote sensing, 
+226 
+revealing infected asymptomatic trees that were missed by the visual evaluations (Fig. 5a) 
+227 
+but detected by remote sensing (Fig. 5b). Among all trees measured in this particular 
+228 
+orchard by qPCR (n=67), those visually considered asymptomatic by plant pathologists 
+229 
+(n=40) but proven infected via qPCR (n=11) were detected as infected by remote sensing 
+230 
+with 91% accuracy. When the analysis was extended to eight orchards where the 
+231 
+qPCR-sampled trees were visible in the imagery (n=100), the accuracy of the remote 
+232 
+sensing model validated with the tree-level qPCR dataset yielded OA=96% and =0.92, 
+233 
+whereas the performance of the visual inspection against qPCR remained at the same level 
+234 
+as the orchard-level analysis (OA=77% and 
+=0.54). Moreover, the remote sensing 
+235 
+SVM-PSFT model detected 92.9% of the infected asymptomatic trees (qPCR=1; DS=0) 
+236 
+that were missed by visual assessment (Supplementary Table 6). 
+237 
+ 
+238 
+These results obtained by remote sensing and validated with qPCR data suggested the 
+239 
+existence of trees in the very early stage of the disease that were missed by the visual 
+240 
+evaluations. To explore whether our remote sensing model fed by plant functional traits 
+241 
+actually detected the early symptoms at a pre-visual stage, a temporal dimension was added 
+242 
+in the analysis. Indeed, a critical finding of this study arose from further investigation of the 
+243 
+trees seemingly wrongly considered symptomatic by remote sensing (i.e. those initially 
+244 
+considered 
+ based on examination by plant physiologists) over the course of 
+245 
+two years through periodic field revisits. False-positive cases may arise from: i) error and 
+246 
+uncertainty inherent to the remote sensing model used for detecting affected trees; and ii) 
+247 
+trees that were indeed affected by Xf but did not yet display the typical visible symptoms 
+248 
+upon which plant pathologists rely. Thus, we revisited in situ (Fig. 4b; Supplementary 
+249 
+Table 7) the trees identified as symptomatic by the remote-sensing plant functional trait 
+250 
+model applied to the 2016 image data (F1) but classified at the time as asymptomatic by 
+251 
+
+--- page 8 ---
+plant pathologists based on the absence of visible symptoms (false positives, FP; n=178 by 
+252
+SVM). 
+253 
+ 
+254 
+During these field revisits conducted four (indicated as R1), eight (R2), eleven (R3), and 
+255 
+twelve months (R4) after the flight at the F1 date, we recorded the development of visible 
+256 
+Xf symptoms on 1,700 out of the 3,328 trees initially evaluated. Four months after F1, 61% 
+257 
+of the false positives had developed symptoms, while only 39% of the asymptomatic trees 
+258 
+classified as unaffected by the remote sensing-driven PSFT model had (true negatives, TN, 
+259 
+n=818, two-sided t-test: P < 0.001). This difference in visible symptom development was 
+260 
+maintained throughout the one-year post-flight evaluations (R1, R2, R3 and R4), with FP 
+261 
+trees consistently developing symptoms sooner than TN trees.  These results obtained in the 
+262 
+multitemporal revisit scheme and via qPCR confirmed that the remote sensing-driven PSFT 
+263 
+model based on plant functional traits was able to detect Xf symptoms earlier than standard 
+264 
+visual inspections by plant pathologists. The ability to detect pre-visual infections is 
+265 
+particularly relevant given the threat of infected but asymptomatic trees contributing to the 
+266 
+Xf epidemics, as plants artificially infected with Xf and maintained in controlled 
+267 
+environmental conditions take 10 to 12 months to start developing visible symptoms8,12. 
+268 
+ 
+269 
+Notably, our analysis was not based just on single spectral bands or indices to feed the 
+270 
+model. Instead, we used radiative-transfer to independently quantify physiological traits 
+271 
+linked to photosynthesis, pigment degradation, and structural changes of trees undergoing 
+272 
+early stress caused by Xf infection. This methodology permits generalization and transfer to 
+273 
+other plant species or diseases, since the retrieved traits are closely or even directly linked 
+274 
+to the physiological changes occurring in affected vegetation. The relative importance of 
+275 
+these traits for disease detection will differ among pathogens and host plants, depending on 
+276 
+the physiological effects associated with the disease. Operational remote-sensing based 
+277 
+detections of pathogen infections should thus rely on the spectral bandsets enabling the 
+278 
+retrieval of the most sensitive plant traits linked with a particular disease. In our case, 
+279 
+aircraft payloads imaging <10 narrow bands (e.g. 10 nm or less) in the visible-near infrared 
+280 
+region in tandem with a broad-band thermal sensor would reach overall accuracies 
+281 
+exceeding 70%. As global trade increasingly exposes natural and agricultural systems to 
+282 
+exotic pathogens, such advanced large-scale physiology-focused remote sensing methods 
+283 
+relying on plant functional traits could prove critical to prevent and manage plant disease 
+284 
+epidemics worldwide. 
+285 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- page 9 ---
+ 
+Fig. 4. Remote sensing model performance and re-visit analysis results. a, Overall 
+286 
+accuracy (bars) and kappa coefficient ( , bullets) of linear discriminant analysis (LDA), 
+287 
+neural network (NNE) and support vector machine (SVM) algorithms distinguishing 
+288 
+asymptomatic from Xf-symptomatic trees using as inputs standard vegetation indices 
+289 
+calculated from RGB-NIR bands (SVI), Pigment- and Structure-based Functional Traits 
+290 
+(PS), and Pigment-, Structure-, Fluorescence and Temperature-based Functional Traits 
+291 
+(PSFT). Statistics are shown separately for the data (n=7,315 trees) used in training (TR, 
+292 
+n=5,852 trees) and testing (TS, n=1,463 trees) for each of the three algorithms. b, Fraction 
+293 
+of trees that were asymptomatic in June 2016 but showed visible symptoms during later 
+294 
+revisits, for trees classified as non-symptomatic (n=818 trees for SVM, n=588 trees for NN 
+295 
+and n=534 trees for LDA) and symptomatic (n=178 trees for SVM, n=408 trees for NN and 
+296 
+n=462 trees for LDA) by remote sensing (true negatives, TN, and false positives, FP, 
+297 
+respectively). F1 and F2 indicate the dates of the airborne imaging campaigns, which 
+298 
+corresponded with intensive field work (FW1 and FW2). The field revisits conducted are 
+299 
+indicated as R1, R2, R3 and R4. The dotted blue and red lines represent the cumulative sum 
+300 
+of the fraction of trees that were identified as TN and FP by the three algorithms. In the box 
+301 
+plots, the black line within the box represents the median of the predictions of the three 
+302 
+algorithms, and the top and bottom of the box are the 75th and 25th quartiles, respectively. 
+303 
+The whiskers represent the upper and lower limits based on the difference with the 
+304 
+interquartile ranges (Q±1.5xIQR). The average percentage predicted by the three 
+305 
+algorithms is shown with a white point within the boxplot. 
+306 
+
+--- page 10 ---
+ 
+Fig. 5. Field evaluation, qPCR tests and remote sensing spatial predictions. a, Map of 
+307 
+an olive orchard imaged by thermal and hyperspectral remote sensing showing the visual 
+308 
+evaluation by plant pathologists in the field. b, Remote sensing PSFT model used to detect 
+309 
+Xf-affected trees. The visually asymptomatic trees assessed as affected by qPCR (shown 
+310 
+with red border) in (a) and therefore missed in the field evaluations by plant pathologists 
+311 
+were detected by remote sensing using functional traits (b) with 91% accuracy. Background 
+312 
+in stronger blue tones shows the areas more affected by Xf. 
+313 
+ 
+314 
+ 
+315 
+ 
+316 
+Methods 
+317 
+ 
+318 
+Field data collection. We assessed incidence and disease severity (DS) of Xf-induced 
+319 
+symptoms in the field in June 2016 and July 2017 in 15 orchards in the Xf-infected area of 
+320 
+Puglia, Southern Italy. Planting density and overall orchard management were highly 
+321 
+variable within the selected area. We evaluated DS by visually inspecting every tree for 
+322 
+symptoms of canopy desiccation and assessing it on a 0 4 rating scale according to the 
+323 
+percentage of canopy affected by the disease symptoms; 0 indicated the absence of visually 
+324 
+detectable symptoms (asymptomatic) and 4 referred to trees showing canopies with a 
+325 
+prevalence of dead branches. In total, we evaluated 3,328 trees in 2016 [1,442 (DS = 0), 
+326 
+762 (DS = 1), 802 (DS = 2), 250 (DS = 3), and 72 (DS = 4)] and 3,987 trees in 2017 [2,607 
+327 
+(DS = 0), 687 (DS = 1), 555 (DS = 2), 122 (DS = 3), and 15 (DS = 4)]. Most of the olive 
+328 
+orchards sampled had old trees (>50 years old) of cultivars Ogliarola Salentina and Cellina 
+329 
+di Nardò, the native and widespread cultivars in the area. These cultivars have been shown 
+330 
+to be highly susceptible to the CoDiRO strain associated with the Italian Xf epidemic. Xf-
+331 
+infected trees of both cultivars typically show severe desiccation that rapidly encompasses 
+332 
+the entire canopy (within 2 3 years), and causes complete canopy die-back. Only one olive 
+333 
+orchard consisted of trees of the Leccino cultivar (ca. 35 years old), which has genetic traits 
+334 
+
+--- page 11 ---
+of resistance to Xf, as demonstrated by the lower bacterial concentrations in trees of this 
+335
+cultivar and the milder symptoms in infected trees26. 
+336 
+ 
+337 
+During the field campaigns, we conducted different physiological measurements on leaves 
+338 
+(Fig. 3a; Supplementary Fig. 3). Flavonoid (FLAV) concentration, chlorophyll content, 
+339 
+anthocyanin content index, nitrogen balance index (NBI), and leaf temperature were 
+340 
+measured on 15/25 asymptomatic/symptomatic leaves per tree using a leaf clip Dualex 4 
+341 
+(Force-A, Orsay, France). On the same leaves, the steady-state leaf fluorescence yield (Ft) 
+342 
+and the leaf reflectance within the visible and near-infrared regions were measured with a 
+343 
+FluorPen FP100 and PolyPen RP400, respectively (Photon Systems Instruments, Brno, 
+344 
+Czech Republic), calculating leaf NPQI. We conducted a revisit assessment of disease 
+345 
+severity in October 2016 and February, June, and July of 2017, re-evaluating 1,700 of the 
+346 
+3,328 trees originally evaluated in June 2016.  In the 15 olive orchards selected for 
+347 
+symptom scoring, we confirmed the presence of Xf infections by sampling and testing at 
+348 
+least two symptomatic trees per plot. Diagnostic tests were performed using a quantitative 
+349 
+PCR  (qPCR) assays15 in all orchards under study. In addition, one of the orchards was 
+350 
+selected for a more extensive testing by qPCR assay, using 67 out of the 157 trees of this 
+351 
+orchard. This qPCR dataset was used to validate the remote sensing and the visual 
+352 
+evaluation methods. Based on the qPCR assays, the trees were categorized as positive 
+353 
+(presence of infection) or negative (no bacterial infection detected) based on the resultant 
+354 
+quantification cycle (Cq) values. Clear-cut values were consistently obtained for the trees, 
+355 
+both symptomatic and asymptomatic, categorized as qPCR-positive (i.e. Cq ranging from 
+356 
+23 to 28; a positive result is considered if Cq < 35 and a clear exponential fluorescence 
+357 
+curve is observed). Conversely, no fluorescence (Cq=0) was detected in the trees 
+358 
+categorized as qPCR-negative. We used the data from eight orchards where the 
+359 
+qPCR-sampled trees were visible in the imagery (n=100) for further statistical analysis. In 
+360 
+particular, we evaluated the detection by the SVM-PSFT remote sensing model of the 
+361 
+Xf-infected trees (n=58), splitting them 
+362 
+and infected asymptomatic trees (qPCR=1; DS=0; n=14) as assessed by qPCR in the 
+363 
+laboratory. 
+364 
+ 
+365 
+Hyperspectral and thermal image data collection and processing. We acquired imagery 
+366 
+on 28 June 2016 and 5 July 2017 over 1,200 ha within the Xf-infected area using a 
+367 
+hyperspectral sensor and a thermal camera on board a manned aircraft. Both cameras were 
+368 
+flown 500 m above ground level (AGL) at midday, acquiring hyperspectral and thermal 
+369 
+imagery at 40 cm and 60 cm pixel resolution, respectively. We covered the visible and 
+370 
+near-infrared regions with a micro-hyperspectral imager (VNIR model, Headwall 
+371 
+Photonics, Fitchburg, MA, USA) operating in the spectral mode of 260 bands acquired at 
+372 
+1.85 nm/pixel and 12-bit radiometric resolution, yielding 6.4 nm full-width at half-
+373 
+maximum (FWHM) with a 25-micron slit in the 400 885 nm region. We set the frame 
+374 
+storage rate on board the aircraft to 50 frames per second with 18 ms integration time. The 
+375 
+8-mm focal length lens yielded an instantaneous field of view (IFOV) of 0.93 mrad and an 
+376 
+angular field of view (FOV) of 49.82°. We calibrated the hyperspectral sensor 
+377 
+radiometrically in the laboratory with an integrating sphere (CSTM-USS-2000C Uniform 
+378 
+Source System, LabSphere, North Sutton, NH, USA) using coefficients derived from a 
+379 
+calibrated uniform light source at four illumination and six integration times. Atmospheric 
+380 
+correction enabled the conversion of radiance values to reflectance using total incoming 
+381 
+irradiance simulated with the SMARTS model27,28. In addition, we measured aerosol 
+382 
+
+--- page 12 ---
+optical depth in the field at 550 nm with a Micro-Tops II Sunphotometer model 540 (Solar 
+383
+LIGHT Co., Philadelphia, PA, USA) during the flight. We ortho-rectified the hyperspectral 
+384 
+imagery with PARGE (ReSe Applications Schl pfer, Wil, Switzerland), using inputs from 
+385 
+an inertial measuring unit (IMU) (IG500 model, SBG Systems, France) installed onboard 
+386 
+and synchronized with the micro-hyperspectral imager. Due to the high spatial resolution 
+387 
+collected (40 cm) and the large size of most of the trees studied (>5 m) spatial binning was 
+388 
+applied to increase the signal-to-noise ratio (SNR) of the instrument. In addition, we 
+389 
+applied spectral binning due to the large number of spectral bands collected with 
+390 
+oversampling (260 bands @ 1.85 nm sampling interval). After performing both spatial and 
+391 
+spectral binning, SNR increased to values >300:1, showing radiance spectra with absence 
+392 
+of noise (Fig. 1f) and in the reflectance spectra (Fig. 3b). The thermal camera (FLIR 
+393 
+SC655, FLIR Systems, USA) had a resolution of 640×480 pixels and was equipped with a 
+394 
+24.6 mm f/1.0 lens connected to a computer via the GigaE protocol. This camera has a 
+395 
+spectral response in the range of 7.5-14 
+396 
+stabilization, yielding high sensitivity below 50 mK. We calibrated the camera in the 
+397 
+laboratory using a blackbody (model P80P, Land Instruments, Dronfield, UK) at varying 
+398 
+target and ambient temperatures, and in the field through vicarious calibrations using 
+399 
+surface temperature measurements obtained following Calderon et al.13.  
+400 
+ 
+401 
+The high-resolution hyperspectral and thermal imagery acquired over the orchard allowed 
+402 
+single-tree identification using automatic object-based crown detection algorithms. The 
+403 
+algorithms were used to calculate mean temperature and hyperspectral reflectance for pure 
+404 
+crowns. We used image segmentation procedures as described in Calderón et al.29. In this 
+405 
+study, we applied four image segmentation methods to the thermal and hyperspectral 
+406 
+images to extract temperature, radiance, and reflectance spectra from each pure tree crown. 
+407 
+The very high-resolution imagery acquired enabled the identification and delineation of 
+408 
+each tree crown independently in the thermal and hyperspectral datasets, minimizing 
+409 
+background and within-crown shadow effects at the border pixels of each tree crown. The 
+410 
+object-based image segmentation methods selected for the results reported here were 
+411 
+lding method30 
+ techniques31 to separate tree 
+412 
+crowns from the background. Next, we applied a binary watershed analysis using the 
+413 
+Euclidean distance map for each object32 to automatically separate trees with overlapping 
+414 
+crowns. We calculated narrow-band spectral indices for each tree crown from the 260 
+415 
+spectral bands extracted by image segmentation. The spectral index-based traits explored in 
+416 
+this study are closely related to specific features of leaf physiology, and therefore 
+417 
+potentially sensitive predictors of the disease13. Thus, according to the effects of Xf 
+418 
+infection in olive trees, we selected spectral indices from the plant-trait functional groups 
+419 
+related to chlorophyll, carotene and xanthophyll pigments.  
+420 
+ 
+421 
+Model inversion methods. The derivation of canopy structural parameters and leaf 
+422 
+biochemical constituents from each individual tree was performed by inversion of the 
+423 
+radiative transfer model PROSAIL for the pure-vegetation pixels extracted from each tree 
+424 
+crown. The model couples the leaf reflectance PROSPECT model, accounting for leaf 
+425 
+properties such as pigment concentrations, and the canopy reflectance model SAIL, which 
+426 
+accounts for canopy structural properties, such as leaf inclination and the sun-observer 
+427 
+geometry. The versions used in the present study were PROSPECT-D33 and 4SAIL34, 
+428 
+respectively. The inversion of PROSAIL was performed using a Look-up-Table (LUT) 
+429 
+approach, in which randomized input parameters (Supplementary Table 2) are used to 
+430 
+
+--- page 13 ---
+simulate canopy reflectance data, which was then compared to the acquired airborne 
+431
+spectra. To reduce the complexity and thus alleviate the ill-posed problem of the LUT 
+432 
+inversion, we fixed several parameters by assuming that their variation is relatively low for 
+433 
+the canopies under investigation or that the spectral range considered (400-885 nm) is not 
+434 
+affected by these parameters. The variable parameters considered comprised chlorophyll 
+435 
+content, carotenoid content, anthocyanin content, mesophyll structure, leaf area index and 
+436 
+the average leaf angle. For the LUT generation, the values for these parameters were 
+437 
+sampled from a uniform distribution within a range that is plausible for the assessed plant 
+438 
+canopies (Supplementary Table 2). Previous studies demonstrated that wavelet analysis 
+439 
+improved radiative transfer model inversions35 37. It decomposes the reflectance spectra 
+440 
+into frequency components of different scales and thus spectral characteristics, such as 
+441 
+absorption features of plant pigments. Accordingly, the correspondence in terms of RMSE 
+442 
+between simulated spectra and airborne spectra was measured using a transformation of the 
+443 
+reflectance spectra into 6 continuous wavelets derived by a Gaussian kernel. The estimates 
+444 
+for each trait were derived by selecting the 1% of the LUT entries and respective spectra 
+445 
+that resulted in the smallest RMSE. The parameter values of these LUT entries were 
+446 
+subsequently weighted by their RMSE and averaged. A summary of the traits retrieved for 
+447 
+each severity level is given in Supplementary Fig. 1.  
+448 
+ 
+449 
+We retrieved sun-induced chlorophyll fluorescence (SIF) emission throughout the leaf and 
+450 
+canopy using the 3-D model FluorFLIGHT38. The model is based on existing theory of 
+451 
+radiative transfer by coupling the leaf fluorescence model FLUSPECT39 and the 3-D ray-
+452 
+tracing model FLIGHT40,41 to account for the canopy components. Input data required to 
+453 
+run the models are described in Supplementary Table 3. FluorFlight was used to i) estimate 
+454 
+Fi independently from other confounding factors (LAI, Ca+b), and ii) to evaluate the Fi 
+455 
+estimation from the O2-A in-filling FLD method with a 6.4 nm FWHM sensor. We used 
+456 
+FluorFLIGHT in a multi-step LUT-based inversion scheme38 to retrieve full crown SIF and 
+457 
+Fi from a complex scene accounting for the influence of scene structure and composition. 
+458 
+Fi was quantified based on the FLD2 calculation from the airborne image using the LUT 
+459 
+derived from FluorFLIGHT. As a prior step, we quantified the optimal parameter 
+460 
+combination of N, Ca+b, Cx+c and LAI using PROSAIL42,43. The model was originally 
+461 
+developed at 1 nm FWHM. For comparisons with the airborne hyperspectral imagery, we 
+462 
+used model simulations convolved to 6.5 nm FWHM to match the spectral resolution of the 
+463 
+radiance imagery acquired by the hyperspectral airborne sensor, evaluating the effects of 
+464 
+the bandwidth on the Fi vs. SIF relationship (Supplementary Fig. 2). 
+465 
+ 
+466 
+Statistical analysis. We used multivariate analyses based on classification and machine 
+467 
+learning algorithms to classify disease incidence and severity. We assessed the ability of 
+468 
+various selections of spectral indices to estimate disease severity (DS) using support vector 
+469 
+machine (SVM), neural networks (NN) and linear discriminant analysis (LDA). We tested 
+470 
+these modelling approaches for three different objectives, assessing the separation between: 
+471 
+(i) Case A: asymptomatic (AS) vs. symptomatic trees (AF; affected), and (ii) Case B: Initial 
+472 
+Xf-symptoms (IN, DS=1) vs. advanced Xf-symptoms (AD, DS = 2, 3, and 4) severity levels. 
+473 
+We validated the selected models by partitioning the data set into two samples: the training 
+474 
+sample (TR), containing 80% of the data collected over two years (2016 and 2017) for each 
+475 
+disease severity class selected at random, and the testing or validation sample (TS), with the 
+476 
+remaining 20%. We fitted each model using the training sample and validated it by using 
+477 
+the testing sample to assess its classification accuracy. In a first step, we performed a 
+478 
+
+--- page 14 ---
+variable reduction based on variance inflation factor (VIF) analysis for each of the two 
+479
+objectives described (Cases A and B) on the training set. This was done to avoid 
+480 
+multicollinearity among predictor variables (i.e. plant traits). The variables with a VIF 
+481 
+lower than 10 were retained for model development. Variables used to build the different 
+482 
+models evaluated were i) single reflectance bands, for operational purposes we assessed the 
+483 
+10 most sensitive wavelengths related to the disease; ii) spectral indices listed in 
+484 
+Supplementary Table 1, with which we found the indices most sensitive to the disease to be 
+485 
+NPQI, CWSI, PRI CI, PRIn SIF, BF1, PRIM1, CRI700m, BF2, PRIM4, DCabxc,VOG2, 
+486 
+and TCARI/OSAVI; and iii) plant traits estimated by model inversion (Fig. 2) using the 
+487 
+radiative transfer models indicated above. 
+method44 was used to identify the 
+488 
+variables with the greatest contribution. Then, we used the data retained through VIF 
+489 
+analysis in the three classification methods (SVM, NN and LDA). We performed the SVM 
+490 
+analysis using R software (version 3.4.0; R Development Core Team, Vienna, Austria) with 
+491 
+45. We applied a non-linear SVM classification method using the radial 
+492 
+46 in R, based on feed-
+493 
+forward networks with a single hidden layer. To reach the best performance of the NN, 
+494 
+guaranteeing the maximization of its algorithm, we trained 500 NNs for each objective and 
+495 
+selected the one with the highest classification accuracy. In addition, we set the NN 
+496 
+parameter size, the number of units in the hidden layer, and the weight decay for the 
+497 
+quantification of the penalty of misclassification errors using a cross-validation approach 
+498 
+47 
+499 
+to generate a discriminant function capable of determining the classification accuracy of the 
+500 
+dataset, based on the pooled covariance matrix and the prior probabilities of the 
+501 
+classification groups44.  We assessed the classification accuracies of three different sets of 
+502 
+plant traits: 1) Pigment-, Structure-, Fluorescence and Temperature-based Functional Traits 
+503 
+(PSFT); 2) Pigment- and Structure-based Functional Traits (PS); and 3) Standard RGB-NIR 
+504 
+bandset (SVI) by calculating the overall accuracy (OA, in %) and the kappa coefficient ( ), 
+505 
+which provides an overall accuracy assessment for the classification based on commission 
+506 
+and omission errors for all classes48.  
+507 
+ 
+508 
+We applied non-linear SVM classification models using the radial basis function with a 
+509 
+leave one out cross validation (LOOCV) and a stochastic gradient boosting machine to test 
+510 
+the remote sensing-based PSFT model with qPCR assay data obtained in: i) one field with 
+511 
+trees affected by Xf and asymptomatic trees (n = 67 trees tested; total number of trees in the 
+512 
+orchard = 157); and ii) trees tested with qPCR (n=100) located within eight olive orchards 
+513 
+throughout the study area. Training of the SVM model was performed using an iterative 
+514 
+47 in R. In a first step, balance techniques 
+515 
+were performed to minimize unbalanced data effects; then, we conducted 50 iterations of 
+516 
+non-linear SVM classification methods to predict the quantitative PCR data using the using 
+517 
+the remote sensing-based PSFT model. In the next step, a sequential stochastic gradient 
+518 
+boosting was trained using an ensemble model obtained from 50 SVM predictions. We 
+519 
+fitted each non-linear SVM model and ensemble model to assess its classification accuracy. 
+520 
+We assessed the classification accuracies of the proposed remote sensing SVM-PSFT 
+521 
+disease detection model and the visual evaluation performed by plant pathologists against 
+522 
+qPCR assay data obtained at the orchard level. 
+523 
+ 
+524 
+In October 2016, February, June, and July 2017 we revisited 1,700 out of the 3,328 trees 
+525 
+evaluated in June 2016 to assess the potential of the remote sensing-based methods to 
+526 
+
+--- page 15 ---
+detect trees affected by Xf before symptoms become visible. We selected the revisited plots 
+527
+to cover a wide range of initial disease incidence and severity values. The revisit study 
+528 
+focused on calculating the confusion matrix for each model to predict disease severity for 
+529 
+the trees evaluated in June and re-evaluated in October 2016. We used this confusion 
+530 
+matrix to calculate the percentage of true negatives (TN, i.e. trees classified as 
+531 
+asymptomatic by remote sensing and field assessment in June) and false positives (FP, i.e. 
+532 
+trees classified as symptomatic by remote sensing but showing no visual symptoms in the 
+533 
+field assessment in June) that developed symptoms in October. In total, the 1700 evaluated 
+534 
+trees in the revisit consisted of 818 (TN), 412 (True Positives, TP), 178 (FP), and 292 
+535 
+(False Negatives, FN). The results for the studied cases (A, B) and all classification 
+536 
+methods (SVM, NN, and LDA) are shown in Supplementary Tables 4 and 5, the results  of 
+537 
+the qPCR data analysis across eight orchards are shown in Supplementary Table 6, and the 
+538 
+revisit study for the SVM method is displayed in Supplementary Table 7. 
+539 
+ 
+540 
+ 
+541 
+Acknowledgments. We thank Z.G. Cerovic, J.Flexas, F.Morales, and P.Martín for 
+542 
+scientific discussions, QuantaLab-IAS-CSIC for laboratory assistance, and G.Altamura, 
+543 
+544 
+Horizon 2020 research and innovation programme through grant agreements POnTE 
+545 
+(635646) and XF-ACTORS (727987). The views expressed are purely those of the writers 
+546 
+and may not in any circumstance be regarded as stating an official position of the European 
+547 
+Commission. 
+548 
+ 
+549 
+Author contributions. P.J.Z.-T., C.C., P.S.A.B., B.B.L., D.B., M.S. and J.A.N.-C. 
+550 
+designed research; P.J.Z.-T., C.C., P.S.A.B., R.C., A.H., R.H.-C., T.K., M.M.B., L.S., 
+551 
+M.M., V.G.-D., P.R.J.N., B.B.L., D.B., M.S., and J.A.N.-C. performed research; P.J.Z.-T., 
+552 
+C.C., P.S.A.B., R.C., A.H., R.H.-C., T.K., V.G.-D., and J.A.N.-C. analyzed data; and 
+553 
+P.J.Z.-T., C.C., P.S.A.B. and J.A.N.-C. wrote the paper. All authors provided comments, 
+554 
+read, and approved the final submission. 
+555 
+ 
+556 
+Data and code availability. The data and the custom code required for the analysis 
+557 
+conducted 
+in 
+this 
+study 
+are 
+available 
+at 
+the 
+GitHub 
+repository, 
+address:  
+558 
+https://github.com/Quantalab/Xf-NPlants-2018 
+559 
+ 
+560 
+ 
+561 
+References 
+562 
+1. Paini, D. R. et al. Global threat to agriculture from invasive species. Proc. Natl. Acad. 
+563 
+Sci. 113, 7575 7579 (2016). 
+564 
+2. 
+-pathogen 
+565 
+interactions: disease resistance in modern agriculture. Trends Genet. TIG 29, 233 240 
+566 
+(2013). 
+567 
+3. Fisher, M. C. et al. Emerging fungal threats to animal, plant and ecosystem health. 
+568 
+Nature 484, 186 194 (2012). 
+569 
+4. Flood, J. The importance of plant health to food security. Food Secur. 2, 215 231 
+570 
+(2010). 
+571 
+5. Strange, R. N. & Scott, P. R. Plant disease: a threat to global food security. Annu. Rev. 
+572 
+Phytopathol. 43, 83 116 (2005). 
+573 
+
+--- page 16 ---
+6.
+Purcell, A. H. Xylella fastidiosa, a regional problem or a global threat ? J. Plant Pathol.
+574
+79, 99 105 (1997). 
+575 
+7. 
+Science 348, 620 620 (2015). 
+576 
+8. Almeida, R. P. P. 
+Science 353, 346 348 (2016). 
+577 
+9. EFSA. The European Union summary report on trends and sources of zoonoses, 
+578 
+zoonotic agents and food-borne outbreaks in 2015. EFSA J. 14, (2016). 
+579 
+10. Hopkins, D. L. & Purcell, A. H. Xylella fastidiosa
+580 
+Grapevine and Other Emergent Diseases. Plant Dis. 86, 1056 1066 (2002). 
+581 
+11. Xylella fastidiosa World distribution. EPPO Global Database. Available at: 
+582 
+https://gd.eppo.int/taxon/XYLEFA/distribution. (Accessed: 5th March 2018) 
+583 
+12. Saponari, M. et al. Pilot project on Xylella fastidiosa to reduce risk assessment 
+584 
+uncertainties. EFSA Support. Publ. 13, n/a-n/a (2016). 
+585 
+13. Calderón, R., Navas-Cortés, J. A., Lucena, C. & Zarco-Tejada, P. J. High-resolution 
+586 
+airborne hyperspectral and thermal imagery for early detection of Verticillium wilt of 
+587 
+olive using fluorescence, temperature and narrow-band spectral indices. Remote Sens. 
+588 
+Environ. 139, 231 245 (2013). 
+589 
+14. Asner, G. P. et al. Airborne laser-guided imaging spectroscopy to map forest trait 
+590 
+diversity and guide conservation. Science 355, 385 389 (2017). 
+591 
+15. Harper, S. J., Ward, L. I. & Clover, G. R. G. Development of LAMP and real-time PCR 
+592 
+methods for the rapid detection of Xylella fastidiosa for quarantine and field 
+593 
+applications. Phytopathology 100, 1282 1288 (2010). 
+594 
+16. Gamon, J. A., Peñuelas, J. & Field, C. B. A narrow-waveband spectral index that tracks 
+595 
+diurnal changes in photosynthetic efficiency. Remote Sens. Environ. 41, 35 44 (1992). 
+596 
+17. Barnes, J. D., Balaguer, L., Manrique, E., Elvira, S. & Davison, A. W. A reappraisal of 
+597 
+the use of DMSO for the extraction and determination of chlorophylls a and b in 
+598 
+lichens and higher plants. Environ. Exp. Bot. 32, 85 100 (1992). 
+599 
+18. Peñuelas, J., Filella, I., LLoret, P., Muñoz, F., Vilajeliu, M., Reflectance assessment of 
+600 
+mite effects on apple trees. Int.J.Remote Sen. 16, 2727-2733 (1995).  
+601 
+19. Lev-Yadun, S. & Gould, K. S. Role of Anthocyanins in Plant Defence. in Anthocyanins 
+602 
+22 28 (Springer, New York, NY, 2008). doi:10.1007/978-0-387-77335-3_2 
+603 
+20. De La Fuente L, Parker JK, Oliver JE, Granger S, Brannen PM, van Santen E, et al. 
+604 
+(2013) The Bacterial Pathogen Xylella fastidiosa Affects the Leaf Ionome of Plant 
+605 
+Hosts during Infection. PLoS ONE 8(5): e62945. 
+606 
+https://doi.org/10.1371/journal.pone.0062945 
+607 
+21. Zeng, W., Melotto, M. & He, S. Y. Plant stomata: a checkpoint of host immunity and 
+608 
+pathogen virulence. Curr. Opin. Biotechnol. 21, 599 603 (2010). 
+609 
+22. Berger, S., Sinha, A. K. & Roitsch, T. Plant physiology meets phytopathology: plant 
+610 
+primary metabolism and plant-pathogen interactions. J. Exp. Bot.58,4019 4026 (2007). 
+611 
+23. Tung, J., Goodwin, P. H. & Hsiang, T. Chlorophyll fluorescence for quantification of 
+612 
+fungal foliar infection and assessment of the effectiveness of an induced systemic 
+613 
+resistance activator. Eur. J. Plant Pathol. 136, 301 315 (2013). 
+614 
+24. Chaerle, L., Hagenbeek, D., De Bruyne, E., Valcke, R. & Van Der Straeten, D. 
+615 
+Thermal and chlorophyll-fluorescence imaging distinguish plant-pathogen interactions 
+616 
+at an early stage. Plant Cell Physiol. 45, 887 896 (2004). 
+617 
+25. Barón, M., Pineda, M. & Pérez-Bueno, M. L. Picturing pathogen infection in plants. Z. 
+618 
+Naturforschung C J. Biosci. 71, 355 368 (2016). 
+619 
+ 
+620 
+
+--- page 17 ---
+26. Giampetruzzi, A. et al. Transcriptome profiling of two olive cultivars in response to 
+621
+infection by the CoDiRO strain of Xylella fastidiosa subsp. pauca. BMC Genomics 17, 
+622 
+475 (2016). 
+623 
+27. Gueymard, C. SMARTS2: a simple model of the atmospheric radiative transfer of 
+624 
+sunshine: algorithms and performance assessment. (Florida Solar Energy Center 
+625 
+Cocoa, FL, 1995). 
+626 
+28. Gueymard, C. A. Parameterized transmittance model for direct beam and circumsolar 
+627 
+spectral irradiance. Sol. Energy 71, 325 346 (2001). 
+628 
+29. Calderón, R., Navas-Cortés, J.A., Zarco-Tejada, P.J. Early Detection and 
+629 
+Quantification of Verticillium Wilt in Olive Using Hyperspectral and Thermal Imagery 
+630 
+over Large Areas. Remote Sens. 7, 5584 5610 (2015). 
+631 
+30. Niblack, W. An Introduction to Digital Image Processing. (Prentice-Hall, 1986). 
+632 
+31. Sauvola, J. & Pietikäinen, M. Adaptive document image binarization. Pattern Recognit. 
+633 
+33, 225 236 (2000). 
+634 
+32. Hartig, S. M. Basic Image Analysis and Manipulation in ImageJ. in Current Protocols 
+635 
+in Molecular Biology (John Wiley & Sons, Inc., 2001). 
+636 
+doi:10.1002/0471142727.mb1415s102 
+637 
+33. Féret, J.-B., Gitelson, A. A., Noble, S. D. & Jacquemoud, S. PROSPECT-D: Towards 
+638 
+modeling leaf optical properties through a complete lifecycle. Remote Sens. Environ. 
+639 
+193, 204 215 (2017). 
+640 
+34. Verhoef, W., Jia, L., Xiao, Q. & Su, Z. Unified Optical-Thermal Four-Stream Radiative 
+641 
+Transfer Theory for Homogeneous Vegetation Canopies. IEEE Trans. Geosci. Remote 
+642 
+Sens. 45, 1808 1822 (2007). 
+643 
+35. Blackburn, G. A. Wavelet decomposition of hyperspectral data: a novel approach to 
+644 
+quantifying pigment concentrations in vegetation. Int. J. Remote Sens. 28, 2831 2855 
+645 
+(2007). 
+646 
+36. Blackburn, G. A. & Ferwerda, J. G. Retrieval of chlorophyll concentration from leaf 
+647 
+reflectance spectra using wavelet analysis. Remote Sens. Environ. 112, 1614 1632 
+648 
+(2008). 
+649 
+37. Banskota, A. et al. Investigating the Utility of Wavelet Transforms for Inverting a 3-D 
+650 
+Radiative Transfer Model Using Hyperspectral Data to Retrieve Forest LAI. Remote 
+651 
+Sens. 5, 2639 2659 (2013). 
+652 
+38. Hernández-Clemente, R., North, P. R. J., Hornero, A. & Zarco-Tejada, P. J. Assessing 
+653 
+the effects of forest health on sun-induced chlorophyll fluorescence using the 
+654 
+FluorFLIGHT 3-D radiative transfer model to account for forest structure. Remote 
+655 
+Sens. Environ. 193, 165 179 (2017). 
+656 
+39. Vilfan, N., Tol, C., Muller, O., Rascher, U. & Verhoef, W. Fluspect-B: A model for leaf 
+657 
+fluorescence, reflectance and transmittance spectra. 186, (2016). 
+658 
+40. North, P. R. J. Three-dimensional forest light interaction model using a Monte Carlo 
+659 
+method. IEEE Trans. Geosci. Remote Sens. 34, 946 956 (1996). 
+660 
+41. North, P. R. J., Rosette, J. A. B., Suárez, J. C. & Los, S. O. A Monte Carlo radiative 
+661 
+transfer model of satellite waveform LiDAR. Int. J. Remote Sens. 31, 1343 1358 
+662 
+(2010). 
+663 
+42. Jacquemoud, S. & Baret, F. PROSPECT: A model of leaf optical properties spectra. 
+664 
+Remote Sens. Environ. 34, 75 91 (1990). 
+665 
+43. Verhoef, W. Light scattering by leaf layers with application to canopy reflectance 
+666 
+modeling: The SAIL model. Remote Sens. Environ. 16, 125 141 (1984). 
+667 
+
+--- page 18 ---
+44. Khattree, R. & Naik, D. N. Multivariate Data Reduction and Discrimination with SAS 
+668
+Software. (Wiley-SAS, 2000). 
+669 
+45. Meyer, D. et al. e1071: Misc Functions of the Department of Statistics, Probability 
+670 
+Theory Group (Formerly: E1071), TU Wien. (2017). 
+671 
+46. Ripley, B. & Venables, W. nnet: Feed-Forward Neural Networks and Multinomial 
+672 
+Log-Linear Models. (2016). 
+673 
+47. Wing, M. K. C. from J. et al. caret: Classification and Regression Training. (2017). 
+674 
+48. Richards, J. A. Remote Sensing Digital Image Analysis. (1999). 
+675 
+ 
+676 

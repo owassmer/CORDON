@@ -1,0 +1,327 @@
+                          Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025              85781
+
+
+DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 8 ottobre 2025, n. 163
+Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Cagnano Varano (FG) – Istituzione
+dell’area delimitata ai sensi dell’art. 4 del Reg. UE 2020/1201 e s.m.i.
+
+
+                              IL DIRIGENTE DELLA STRUTTURA PROPONENTE
+
+VISTI
+
+   • La legge 7 agosto 1990, n. 241 ‘Nuove norme in materia di procedimento amministrativo e di diritto di
+     accesso ai documenti amministrativi’;
+   • Il D.lgs. 30 marzo 2001, n. 165 ‘Norme generali sull’ordinamento del lavoro alle dipendenze delle
+     amministrazioni pubbliche’;
+   • Il D.lgs. 7 marzo 2005, n. 82 ‘Codice dell’amministrazione digitale’;
+   • Il Decreto del Presidente della Giunta regionale n. 22 del 22/01/2021 recante l’adozione dell’atto di alta
+     amministrazione MAIA 2.0;
+   • La deliberazione di Giunta regionale n. 712 del 03/05/2021 avente ad oggetto ‘Conferimento incarico
+     della Sezione ‘Osservatorio Fitosanitario’ del Dipartimento Agricoltura, Sviluppo Rurale ed Ambientale’;
+   • La D.G.R. n. 788 del 11/06/2024 avente ad oggetto ‘Proroga incarico di direzione della Sezione
+     Osservatorio Fitosanitario afferente al Dipartimento Agricoltura Sviluppo Rurale ed Ambientale’;
+   • La D.G.R. 15 settembre 2021, n. 1466 recante l’approvazione della Strategia regionale per la parità di
+     genere, denominata “Agenda di Genere”;
+   • D.G.R. 26 settembre 2024, n. 1295 recante <Valutazione di Impatto di Genere (VIG). Approvazione
+     indirizzi metodologico-operativi e avvio fase strutturale>;
+   • La DDS n. 51 del 03/05/2024 di conferimento incarichi di Elevata Qualificazione per la gestione delle
+     emergenze fitosanitarie alle dipendenze della Sezione Osservatorio fitosanitario integrata dalla DDS n.
+     00124 del 03/10/2024.
+
+VISTI ALTRESÌ
+
+   • Il Reg. (UE) 2016/2031 del Parlamento Europeo e del Consiglio del 26 ottobre 2016 relativo alle misure
+     di protezione contro gli organismi nocivi per le piante, che modifica i regolamenti (UE) n. 228/2013,
+     (UE) n. 652/2014 e (UE) n. 1143/2014 del Parlamento Europeo e del Consiglio e abroga le direttive
+     69/464/CEE, 74/647/CEE, 93/85/CEE, 98/57/CE, 2000/29/CE, 2006/91/CE e 2007/33/CE del Consiglio;
+   • Il Reg. (UE) 2019/1702 che integra il regolamento (UE) 2016/2031 del Parlamento europeo e del
+     Consiglio stabilendo l’elenco degli organismi nocivi prioritari, tra i quali la Xylella fastidiosa;
+   • Il Reg. (UE) 2020/1201 della Commissione del 14 agosto 2020 relativo alle misure per prevenire
+     l’introduzione e la diffusione nell’Unione della Xylella fastidiosa (Wells et al.) entrato in vigore il
+     20/08/2020;
+   • Il Regolamento di esecuzione (UE) 2024/1320 della Commissione del 15 maggio 2024 che modifica
+     il regolamento di esecuzione (UE) 2020/1201 per quanto riguarda l’elenco delle zone infette per il
+     contenimento della Xylella fastidiosa (Wells et al.);
+   • Il Reg. (UE) 2024/2507 della Commissione del 26 settembre 2024, che modifica e rettifica il regolamento
+     di esecuzione (UE) 2020/1201 relativo alle misure per prevenire l’introduzione e la diffusione
+     nell’Unione della Xylella fastidiosa (Wells et al.) e che modifica il regolamento di esecuzione (UE)
+     2020/1770 per quanto riguarda l’elenco delle specie di piante non esentate dall’obbligo di inserire il
+     codice di tracciabilità nei passaporti delle piante;
+   • Il Decreto Legislativo 2 febbraio 2021, n. 19 “Norme per la protezione delle piante dagli organismi nocivi
+     in attuazione dell’articolo 11 della legge 4 ottobre 2019, n. 117, per l’adeguamento della normativa
+     nazionale alle disposizioni del regolamento (UE) 2016/2031 e del regolamento (UE) 2017/625”;
+   • Il Decreto del 24 gennaio 2022 del Ministero delle Politiche agricole, alimentari e forestali che approva
+     il Piano di emergenza nazionale per il contrasto di Xylella fastidiosa (Well et al.);
+85782                      Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025
+
+
+   • La DGR n. 1593 del 25/11/2024 di approvazione del “Piano d’azione per contrastare la diffusione di
+     Xylella fastidiosa (Well et al.) in Puglia 2024-2026”, modifica e integrazione dello schema di convenzione
+     con l’Agenzia per le attività irrigue e forestali”;
+   • La DGR n. 1075 del 29/07/2025 di approvazione del “Piano d’azione per contrastare la diffusione di
+     Xylella fastidiosa (Well et al.) in Puglia 2025-2027” e dello schema di convenzione con l’Agenzia per le
+     attività irrigue e forestali;
+   • La Determina n. 190 del 12/12/2024, con la quale l’Osservatorio fitosanitario ha affidato, ai sensi
+     dell’art. 76 del D.lgs. n. 36 del 31 marzo 2023, il “Servizio di analisi di laboratorio ufficiali per rilevare la
+     presenza di Xylella fastidiosa sul territorio della Regione Puglia”, ai seguenti laboratori ufficiali designati
+     e autorizzati ad operare nel territorio regionale:
+          ° Centro di ricerca, sperimentazione e formazione in agricoltura “Basile Caramia” di Locorotondo
+             (CRSFA);
+          ° Dipartimento di scienze del suolo, della pianta e degli alimenti - Univ. Bari;
+          ° CIHEAM - Istituto Agronomico Mediterraneo -Valenzano;
+          ° Dipartimento di Scienze Agrarie degli alimenti e dell’ambiente (SAFE) - Univ. Foggia;
+          ° CNR - Istituto per la Protezione Sostenibile delle Piante (IPSP) di Bari;
+        in quanto accreditati EN ISO/IEC 17025 o in via di accreditamento.
+   • Le determine n. 54 del 07/04/2025, n. 62 del 15/04/2025 e n. 91 del 19/05/2025, con le quali
+     l’Osservatorio fitosanitario ha aggiudicato il “Servizio di analisi di laboratorio ufficiali per rilevare la
+     presenza di Xylella fastidiosa sul territorio della Regione Puglia”, ai sensi dell’art. 76 del D.lgs. n. 36 del
+     31 marzo 2023, ai laboratori innanzi citati, per il periodo 2025-2026, in applicazione del Piano di azione
+     approvato con la DGR 1593 del 25/11/2024.
+
+PREMESSO CHE
+
+   • L’Osservatorio fitosanitario della Regione Puglia (di seguito Osservatorio), ai sensi dell’art. 6 del Decreto
+     legislativo 2 febbraio 2021, n. 19, è l’Autorità fitosanitaria competente nel territorio regionale;
+   • L’articolo 31 del richiamato D.lgs. n. 19 del 2021 attribuisce all’autorità fitosanitaria regionale la
+     competenza di istituire un’area delimitata, a seguito della conferma del ritrovamento di organismi
+     nocivi, in applicazione dell’articolo 18 del Regolamento (UE) n. 2016/2031;
+   • L’Istituto per la Protezione Sostenibile delle Piante del CNR è stato individuato come laboratorio
+     nazionale di riferimento nell’ambito del piano di emergenza nazionale per il contrasto di Xylella
+     fastidiosa, approvato con Decreto del Ministro 24 gennaio 2022, conformemente a quanto previsto
+     dall’art. 101 del Reg. (UE) 2017/625 e considerata la presenza nel territorio regionale di 3 sottospecie
+     di Xylella fastidiosa, il CNR effettua la caratterizzazione della sottospecie con la PCR in tempo reale sulla
+     base del metodo Dupas et al. 2019 per ogni pianta risultata infetta;
+   • In Puglia sono state individuate piante infette di tre sottospecie di Xylella fastidiosa e precisamente X. f.
+     fastidiosa ST1- X. f. pauca ST53- X. f. multiplex ST26 e, ai sensi della lettera a), comma 2 - art. 4 del Reg
+     (UE) 2020/1201, sono state istituite le seguenti aree delimitate:
+           ° Area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, istituita con determinazione
+              del Dirigente della Sezione Osservatorio Fitosanitario n° 8 del 21/02/2024 e aggiornata con le
+              determine dirigenziali n. 12 del 27/02/2024, n. 45 del 24/04/2024 e n. 94 del 24/07/2024;
+           ° Area delimitata per “Xylella fastidiosa sottospecie – pauca ST53 – Bari, istituita con determinazione
+              del Dirigente della Sezione Osservatorio Fitosanitario n. 92 del 22/07/2024;
+           ° Area delimitata per Xylella fastidiosa sottospecie multiplex ST26 - Santeramo in Colle, istituita
+              con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 29 dell’8/04/2024,
+              successivamente aggiornata con le determine n. 91 del 22/07/2024, n. 148 del 12/11/2024, n.
+              198 del 18/12/2024 e n. 106 del 16/06/2025;
+           ° Area delimitata per Xylella fastidiosa sottospecie multiplex ST26 – Ginosa, istituita con
+              determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. n. 198 del 18/12/2024,
+              successivamente aggiornata con la determina n. 106 del 16/06/2025;
+                           Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025                85783
+
+
+           ° Aree delimitate per Xylella fastidiosa – sottospecie multiplex ST26 - Noicattaro e Triggiano e
+             per Xylella fastidiosa – sottospecie multiplex ST26 - Capurso, istituite con determinazione del
+             Dirigente della Sezione Osservatorio Fitosanitario n. 93 del 23/07/2024;
+           ° Area delimitata per Xylella fastidiosa sottospecie pauca ST53, aggiornata con determinazione
+             del Dirigente della Sezione Osservatorio Fitosanitario n. 158 del 18/11/2024 con la quale è stata
+             ridotta la zona infetta in cui si applicano misure di contenimento da 5 km a 2 km, in applicazione
+             del Reg. (UE) 2024/2507 del 26 settembre 2024;
+           ° Area delimitata per Xylella fastidiosa sottospecie pauca - Minervino delle Murge (BT), istituita
+             con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 59 del 14/04/2025;
+           ° Area delimitata per Xylella fastidiosa sottospecie pauca - Modugno (BA), istituita con
+             determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 126 dell’11/07/2025,
+             successivamente aggiornata con la determina n. 132 del 18/07/2024;
+           ° Area delimitata per Xylella fastidiosa sottospecie pauca - Bisceglie (BT), istituita con
+             determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 113 del 23/06/2025,
+             successivamente aggiornata con la determina n. 141 del 06/08/2025;
+           ° Area delimitata per Xylella fastidiosa sottospecie pauca -Giovinazzo (BA), istituita con
+             determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 147 del 12/08/2025
+
+CONSIDERATO CHE
+
+   • L’Osservatorio, in applicazione del piano di azione di cui alla DGR n. 1593/2024, da gennaio 2025 ha
+     avviato un’attività di sorveglianza per Xylella fastidiosa nell’area indenne del territorio regionale
+     anche sulla base di segnalazione di piante sospette;
+   • Nell’agro di Cagnano Varano (FG) a settembre 2025 sono stati prelevati e analizzati n. 119 campioni
+     vegetali da piante di Nerium oleander (1 pianta) e Olea europea (118 piante) specie ospiti a Xylella
+     fastidiosa;
+   • I laboratori del Centro di ricerca, sperimentazione e formazione in agricoltura “Basile Caramia” di
+     Locorotondo (CRSFA) e del Dipartimento di Scienze Agrarie degli alimenti e dell’ambiente (SAFE) - Univ.
+     Foggia, rispettivamente, con i seguenti rapporti di prova:
+          ° n.1709 del 18/09/2025 (diciannove piante di olivo infette);
+          ° n. 19_POSITIVI/ UNIFG del 29/09/2025 (ventotto piante di olivo infette);
+      hanno comunicato che compessive n.47 (quarantasette) piante di olivo site in agro di Cagnano Varano
+      (FG) sono risultate infette da Xylella fastidiosa;
+   • Il laboratorio del CNR di Bari, incaricato dall’Osservatorio della caratterizzazione della sottospecie, con
+     i rapporti di prova n. 82P/2025 del 19/09/2025 e n. 85P/2025 del 03/10/2025, ha comunicato che la
+     sottospecie individuata nelle 47 (quarantasette) piante di olivo infette di cui al punto precedente è
+     Xylella fastidiosa sottospecie pauca;
+   • E’ in corso la caratterizzazione del ceppo di Xylella fastidiosa sottospecie pauca individuata in agro di
+     Cagnano Varano (FG) da parte del CNR di Bari;
+   • E’ stata programmata un’attività di sorveglianza rafforzata dell’area di 400 m attorno al focolaio al fine
+     di verificare la presenza di ulteriori piante infette.
+
+ATTESO CHE
+L’Autorità fitosanitaria regionale a seguito del rinvenimento di Xylella fastidiosa sottospecie pauca deve
+istituire un’area delimitata, ai sensi dell’articolo 4 del Reg. (UE) 2020/1201 e s.m.i..
+
+RICHIAMATO
+Il comma 2 -lettera a) dell’art. 4 del Reg. (UE) 2020/1201 e s.m.i., dispone che l’area delimitata è costituita da
+una zona infetta e da una zona cuscinetto:
+     • la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall’organismo nocivo
+       specificato;
+85784                       Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025
+
+
+    • la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.
+
+VISTI
+
+    • L’Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l’area delimitata
+      “Xylella fastidiosa sottospecie pauca - Cagnano Varano (FG)”;
+    • l’Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree
+      delimitate per Xylella fastidiosa in Puglia;
+    • l’Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali
+      dell’area delimitata “Xylella fastidiosa sottospecie pauca - Cagnano Varano (FG)”.
+
+RITENUTO
+
+    • Di dovere istituire l’area delimitata per “Xylella fastidiosa sottospecie pauca – Cagnano Varano (FG)”, ai
+      sensi dei commi 1 e 2 dell’art. 4 del Reg (UE) 2020/1201 e s.m.i., costituita da :
+          ° una zona infetta (aree con raggio di almeno 50 m attorno alle piante infette a Xylella fastidiosa
+             sottospecie pauca);
+          ° una zona cuscinetto di almeno 2,5 km attorno alla zona infetta;
+    • di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11
+      del Reg. UE 2020/1201 e s.m.i.;
+    • di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto è necessario
+      applicare le misure di eradicazione per contrastare l’ulteriore diffusione della malattia.
+
+
+                        VERIFICA AI SENSI DEI D. Lgs 196/03 e del Reg. (UE) n. 679/2016
+                                             Garanzie alla riservatezza
+La pubblicazione dell’atto sul BURP, nonché la pubblicazione all’Albo pretorio on-line o sul sito istituzionale,
+salve le garanzie previste dalla legge 241/1990 in tema di accesso ai documenti amministrativi, avviene nel
+rispetto della tutela della riservatezza dei cittadini secondo quanto disposto dal Regolamento UE n. 679/2016
+in materia di protezione dei dati personali, nonché dal D. Lgs. 196/2003 ss.mm.ii., come modificato dal d.lgs.
+101/2018 e dal vigente Regolamento regionale 5/2006 per il trattamento dei dati sensibili e giudiziari, in
+quanto applicabile.
+Ai fini della pubblicità legale, il presente provvedimento è stato redatto in modo da evitare la diffusione di
+dati personali identificativi non necessari ovvero il riferimento alle particolari categorie di dati previste dagli
+articoli 9 e 10 del Regolamento UE innanzi richiamato; qualora detti dati fossero essenziali per l’adozione
+dell’atto, essi sono trasferiti in documenti separati esplicitamente richiamati.
+
+                                    VALUTAZIONE IMPATTO DI GENERE
+Il presente atto è stato sottoposto a Valutazione di Impatto di Genere (cfr. DGR n. 1161 del 7/8/2024
+concernente “Approvazione modifiche ed integrazioni alle <Linee guida per la predisposizione delle proposte
+di deliberazione della Giunta Regionale.>, adottate con D.G.R. n. 2100 del 2019” e l’impatto di genere stimato
+risulta neutro.
+
+                    ADEMPIMENTI CONTABILI AI SENSI DEL D.lgs. n. 118/2011 e ss.mm.ii.
+Il presente provvedimento non comporta alcun mutamento qualitativo o quantitativo di entrata o di spesa né
+a carico del bilancio regionale né a carico degli enti per i cui debiti i creditori potrebbero rivalersi sulla Regione
+ed è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto
+dal bilancio regionale.
+                                                    DETERMINA
+Di prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente
+                          Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025                85785
+
+
+atto e che qui si intende integralmente riportato.
+   • Di istituire l’area delimitata per “Xylella fastidiosa sottospecie pauca – Cagnano Varano (FG)”, ai sensi
+     della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201 e s.m.i., costituita da:
+          ° una zona infetta (aree con raggio di almeno 50 m attorno alle piante infette a Xylella fastidiosa
+             sottospecie pauca);
+          ° una zona cuscinetto di almeno 2,5 km attorno alla zona infetta;
+   • Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11
+     del Reg. UE 2020/1201 e s.m.i.;
+   • Di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto è necessario
+     applicare le misure di eradicazione per contrastare l’ulteriore diffusione della malattia;
+   • Di approvare l’Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l’area
+     delimitata “Xylella fastidiosa sottospecie pauca - Cagnano Varano (FG)”;
+   • Di approvare l’Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta
+     tutte le aree delimitate per Xylella fastidiosa in Puglia;
+   • Di approvare l’Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i
+     riferimenti catastali dell’area delimitata “Xylella fastidiosa sottospecie pauca - Cagnano Varano (FG)”;
+   • Di stabilire che detta delimitazione è consultabile sui portali istituzionali della Regione Puglia
+     www.regione.puglia.it e sul sito istituzionale www.emergenzaxylella.it;
+   • Di dare atto altresì che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto
+     esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;
+   • Di trasmettere copia del presente atto:
+          ° Al Comune di Cagnano Varano (FG);
+          ° alla Prefettura di FG;
+          ° al Comando Regionale Carabinieri Forestali – Puglia;
+          ° alla Provincia di Foggia;
+          ° all’ANCI Puglia;
+          ° all’ARIF
+   • Di pubblicare il presente provvedimento sul BUR Puglia.
+Il presente atto, redatto attraverso la piattaforma CIFRA2, firmato digitalmente e adottato in unico originale:
+   • è composto da pagine tutte progressivamente numerate e da n° 3 allegati composti rispettivamente da
+     1 facciata e sarà conservato e custodito, ai sensi delle Linee Guida del Segretario generale della Giunta
+     Regionale e del Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020, nei sistemi di
+     archiviazione digitale dell’Amministrazione Regionale;
+   • sarà trasmesso, tramite piattaforma CIFRA2, al Segretariato della Giunta Regionale e sarà pubblicato
+     nella sezione “Amministrazione Trasparente” sul sito istituzionale della Regione Puglia, per le finalità di
+     cui al D.Lgs. n. 33/2013 e ss.mm.ii.;
+   • sarà pubblicato per 10 giorni lavorativi a decorrere dalla data della sua adozione, ai sensi dell’art. 20
+     comma 3 del D.P.G.R. n. 22/2021, all’Albo regionale on line e conservato nei sistemi informatici regionali
+     CIFRA” e Sistema Puglia.
+ALLEGATI INTEGRANTI
+
+Documento - Impronta (SHA256)
+ALLEGATO1_20251002.pdf -
+7cf0177ff0200dab9c522774f38e1c316e1be9605224baba190ed063c55c2a0b
+ALLEGATO1BIS_20251002.pdf -
+7d2f5483f03458b18d6f2e1d6ba5af6ff47248e1d34353cb597dcbc9558c8e03
+ALLEGATO2_CAGNANO_VARANO_20251002.pdf -
+bee3985a0fb0dbcf86153fbd2190516931d29d48bd64ea11008fca7bcb44d6e4
+85786                      Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025
+
+
+Il presente Provvedimento è direttamente esecutivo.
+
+
+Basato sulla proposta n. 181/DIR/2025/00167 dei sottoscrittori della proposta:
+E.Q. “Gestione dell’emergenza fitosanitaria Xylella fastidiosa pauca”
+Francesco Palmisano
+
+E.Q.”Programmazione e gestione fitosanitaria”
+Anna Percoco
+
+
+
+Firmato digitalmente da:
+Il Dirigente della Sezione Osservatorio Fitosanitario
+Salvatore Infantino
+Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025   85787
+
+
+
+
+                                                                   1
+85788   Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025
+
+
+
+
+                                                                           2
+                   Bollettino Ufficiale della Regione Puglia - n. 85 del 23-10-2025                                                        85789
+
+
+
+                                                                                                               ALLEGATO 2
+                                                              IL P R E S E N T E A L L E G A T O E ' C O M P O S T O D A N .1 F O G L IO
+                                                                                               IL D IR IG E N T E D E L L A S E Z IO N E
+
+
+
+
+            XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Cagnano Varano - ZONA INFETTA
+                                           FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE
+PROVINCIA         COMUNE                   PIANTE RISULTATE INFETTE.
+       FG              CAGNANO VARANO                                         FOGLI 8
+
+
+       XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Cagnano Varano - ZONA CUSCINETTO
+                                           FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLE ZONE
+PROVINCIA         COMUNE                   INFETTE. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO
+
+
+
+       FG              CAGNANO VARANO                               FOGLI 1, 3, 6, 7, 8, 12, 15
+
+
+
+
+                                                                                                                                 3
+
