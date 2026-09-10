@@ -7,7 +7,8 @@ CORDON exists to reduce projected Xylella loss by giving the responsible public 
 | Need | Sole owner |
 |---|---|
 | General design posture | `DESIGN_PRINCIPLES.md` |
-| Review facets, independence and joint adjudication | `REVIEW_PRINCIPLES.md` |
+| Unit plan shape | `.github/PULL_REQUEST_TEMPLATE.md` |
+| Plan review, implementation review, adjudication and convergence | `REVIEW_PRINCIPLES.md` |
 | A–G derivation order and stage contracts | `STAGE_BOUNDARIES.md` |
 | Current operator, accepted state, open stage, and next gate | `state/CURRENT.json` |
 | Legal meaning | `regulation/stage-a/authoring-eu.json` and `regulation/jurisdiction/canonical/authoring.json` |
@@ -40,7 +41,7 @@ Before substantive work, read `state/CURRENT.json`, the applicable stage contrac
 
 Default to one bounded, reviewable unit per turn unless Owen authorizes a larger batch. State that unit before work. A next-five list describes sequence, not authorization to execute the whole list; prior broad GO instructions do not override a later request for smaller turns.
 
-`origin/main` on GitHub (`owassmer/CORDON`) is the source of truth; local checkouts are working copies. Each bounded unit is one branch and one pull request that Owen merges; `scripts/worktree.sh <branch>` creates the branch beside other live work. A pull request regenerates `corpus/CATALOG.csv` and passes `scripts/verify_all.sh` in CI before merge. Nothing is pushed to `main` directly; `git config core.hooksPath scripts/githooks`, once per clone, refuses it. Git-ignored source populations live only in the primary checkout and are recreated by their tracked acquisition scripts.
+`origin/main` on GitHub (`owassmer/CORDON`) is the source of truth; local checkouts are working copies. Each bounded unit is one branch and one pull request that Owen merges; `scripts/worktree.sh <branch>` creates the branch beside other live work. The pull request opens as a draft whose body is the unit's plan, written from the template; the plan is reviewed once, the work is done, and the result is reviewed under `REVIEW_PRINCIPLES.md` before Owen merges. Open pull requests are the visible statement of what is in flight and why. A pull request regenerates `corpus/CATALOG.csv` and passes `scripts/verify_all.sh` in CI before merge. Nothing is pushed to `main` directly; `git config core.hooksPath scripts/githooks`, once per clone, refuses it. Git-ignored source populations live only in the primary checkout and are recreated by their tracked acquisition scripts.
 
 Within an authorized stage round, work vertically through each source family: follow its consequential source routes, read its meanings and relationships, resolve implementation limitations, and verify the resulting consumer behavior before moving on. Parsing all selected records is not semantic maturity. An unexplored dependency cannot be closed by calling it conditional; identify its consumer and investigate it, or retain a source-grounded reason why it is outside the round. Recursive exploration follows the publisher and prior evidence, not the formats or endpoints supported by the current readers. Saturate each source’s relevant data and resolve its consequential meanings before closing that source. Run independent capture and semantic work concurrently across source families; neither a slow capture nor broader grounding is a reason to abandon, defer, or silently pause an authorized acquisition. Keep every active source accountable through completion, with progress and failures visible. Concurrent work changes scheduling, not the completion bar.
 

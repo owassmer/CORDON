@@ -60,7 +60,7 @@
       "status": "CLOSED",
       "plan_and_authorization": "corpus/evidence/stage-c-derivation-2026-09-08.md",
       "library_selection": "Full discretion to select the best libraries for each component; current installation does not constrain the choice.",
-      "acceptance_posture": "A/B is the accepted, currently sufficient and revisable base. Preserve the loss-reduction objective, chosen decision chain, proportionality, all five review facets and conclusion-specific uncertainty.",
+      "acceptance_posture": "A/B is the accepted, currently sufficient and revisable base. Preserve the loss-reduction objective, chosen decision chain, proportionality, every review facet and conclusion-specific uncertainty.",
       "upstream_amendment": {
         "path": "corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json",
         "status": "ACCEPTED_AND_PROMOTED"
@@ -87,7 +87,7 @@
       },
       "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
       "current_capability": "The bounded national calendar and generic readers for tabular, geographic, document, event and evidence records remain. No other source population is currently claimed acquired or semantically complete after the purge.",
-      "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent five-facet review and Owen acceptance.",
+      "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent review under REVIEW_PRINCIPLES.md and Owen acceptance.",
       "next": [
         "Select the first input row by consequence to the positive-finding-to-removal chain.",
         "Acquire and semantically read that row’s complete within-aperture source population.",

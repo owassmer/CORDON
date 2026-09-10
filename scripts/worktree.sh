@@ -15,4 +15,5 @@ git -C "$root" ls-files -o -i --exclude-standard -z -- corpus/sources | while IF
   mkdir -p "$dir/$(dirname "$rel")"
   ln -s "$root/$rel" "$dir/$rel"
 done
+python3 "$dir/scripts/generate_stage_b.py" >/dev/null
 echo "$dir"
