@@ -1,0 +1,29 @@
+name: verify
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            regulation/stage-c/requirements.txt
+            regulation/stage-d/requirements.txt
+      - name: Install the Stage C and D reference environment
+        run: python -m pip install -r regulation/stage-d/requirements.txt
+      - name: Generate the git-ignored Stage B projections from the canonical ledger
+        run: python scripts/generate_stage_b.py
+      - name: Repository verification
+        run: CORDON_PYTHON="$(command -v python)" bash scripts/verify_all.sh
+      - name: Stage D suite
+        run: PYTHONPATH=regulation/stage-c:regulation/stage-d python -m unittest discover -s regulation/stage-d -p 'test_*.py'

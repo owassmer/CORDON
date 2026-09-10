@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Refuse direct pushes to main; main changes only through a merged pull request.
+# Install once per clone: git config core.hooksPath scripts/githooks
+while read -r _local_ref _local_sha remote_ref _remote_sha; do
+  if [[ "$remote_ref" == "refs/heads/main" ]]; then
+    echo "pre-push: main accepts only merged pull requests; push a branch and open a PR." >&2
+    exit 1
+  fi
+done
+exit 0
