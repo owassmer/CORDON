@@ -18,11 +18,11 @@ Facet 1 decides what belongs and how much. Facet 2 checks meaning and coherence.
 
 Every unit begins as a plan in its pull request body, written from the template. One independent reviewer reads the plan against `AGENTS.md`, `DESIGN_PRINCIPLES.md`, the applicable stage contract, this document, `state/CURRENT.json` and the owners the plan names, using the plan brief below. The brief is the same every time; alignment comes from the constitution, not from per-unit steering.
 
-One cycle: findings are adjudicated, the plan is revised in place, and the revision is recorded under "Changes since plan review". A second dispatch is warranted only if the decision served or the unit boundary changed. A PASS plan carries weight in implementation review. It is not immune: when the work shows the plan wrong, the plan is corrected and the correction disclosed.
+One cycle: findings are adjudicated, the plan is revised in place, and the revision is recorded under "Changes since plan review". A second dispatch is warranted only if the decision served or the unit boundary changed. A plan that changes no meaning — repository mechanics, a projection, a wording repair — may propose plan review only; the plan reviewer judges that claim and the adjudicator records it on the pull request. A PASS plan carries weight in implementation review. It is not immune: when the work shows the plan wrong, the plan is corrected and the correction disclosed.
 
 ## Implementation review
 
-When the change is complete on its branch, three independent reviewers, one per facet, read the plan and the diff read-only, using the implementation brief below. Collect all three before adjudicating; do not exchange interim conclusions or repair from the first return.
+A draft pull request means the work is in progress. When the change is complete on its branch and "Result" is filled, the pull request leaves draft, and three independent reviewers, one per facet, read the plan and the diff read-only, using the implementation brief below. Collect all three before adjudicating; do not exchange interim conclusions or repair from the first return.
 
 Adjudicate together: verify consequential assertions against authority and actual consumers, reproduce counterexamples, resolve duplicates and conflicts, and distinguish defects, assurance limits, rejected assertions and genuine owner decisions. Reject bloated cures even when the diagnosis is valid. A finding outside the unit's plan becomes a new unit unless it falsifies the plan's purpose.
 
@@ -30,7 +30,7 @@ Adjudicate together: verify consequential assertions against authority and actua
 
 A unit converges when the adjudicator can write, on the pull request, why the result serves the decision named in the plan, what was verified from the consumer surface, and what residual risk remains, and no material finding is open. Material means it would change the operator's decision or Owen's next decision.
 
-Convergence is not three PASS labels, a passing suite, a round count, or exhaustion. Checks establish narrow mechanical claims; they never define the unit's quality. No reviewer is expected to return a finding count, a verdict, or a threshold.
+Convergence is not three PASS returns, a passing suite, a round count, or exhaustion. Checks establish narrow mechanical claims; they never define the unit's quality. No reviewer is expected to return a finding count or meet a threshold. The adjudication names the commit it judged; a later commit reopens the judgment.
 
 A second implementation round follows only when a repair changed meaning or a material risk remains open. A third round is evidence that the plan or the structure is wrong: stop and re-plan instead of reviewing again.
 
@@ -38,7 +38,7 @@ Owen merges the pull request. Merge accepts the unit's content as reviewed; chan
 
 ## Briefs
 
-Supply only the pull request number, the checkout path and, for implementation review, the assigned facet. Reports go on the pull request as comments, one per reviewer and one adjudication. Nothing from a review enters the tree.
+Supply only the pull request number, the checkout path and, for implementation review, the assigned facet. PASS means no finding within the reviewer's stated coverage; it is a coverage statement, not a verdict. Reports go on the pull request as comments, one per reviewer and one adjudication. Nothing from a review enters the tree.
 
 Plan brief:
 
