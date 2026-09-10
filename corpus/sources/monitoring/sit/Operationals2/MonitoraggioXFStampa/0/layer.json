@@ -1,0 +1,157 @@
+{
+  "currentVersion": 10.11,
+  "id": 0,
+  "name": "Pianta positiva-Monitoraggio 2017-2018",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": null,
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "simple",
+      "symbol": {
+        "type": "esriPMS",
+        "url": "de521389afe7ac6b2813403e1c15e187",
+        "imageData": "iVBORw0KGgoAAAANSUhEUgAAABYAAAAUCAYAAACJfM0wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAp5JREFUOI2t1EFIk2EYwPH/1vRDam0ygj7oMIL6Bh7y4BBHuakzb1uXgkprIoJJYQsk7KBDNigXRJ4jxIPYQVaXtqWTHWIVCIleJkgIJUOQT8cSe53bulisoTLJ5/g+z/vjfR4eXh1Hi1PAz3IKdUeEnwL3jxWWZblGVdV7QggfsH5scFNTU9fExIQWuAa8OjZ4e3v7ptvtJp1O34nH48cGXwyFQmcXFxex2+02wAhs/jfc0dHRbTabqampwW6350OhkAsYLxe+oSiK1ev1Xq6qqjpdXBSNRs87nU40Gg3t7e0VRqPxpcPheFxck8lk1gOBwOdUKhUHwsXw25WVFVtPT0+9oiiF/v5+rVarBcDpdFJbWwtAQ0MD6XTamMvljADZbJaBgYGCqqp5IAZES1+8I4R4CHxYWloaW1hYEH6//5xer/+nRVmW6ezsBGBjYyPX29u7pqpqTpKkW0KIj/uN4k+8By6Njo6Ox2Ix49TUVKWiKJWlRXNzcxmXy1WRSqW+AF1CiI2DZlwcKeDq8vKy32KxPNnc3MRgMPxNrq6uYrVa9cAj4MV+wGFbUXA4HGmz2VwwGAwagN3dXXQ6HbIs09ramp+env520OVD181kMnncbremUCgwOzur9vX1nRwbG9PW1dVVeDwerclk6p6cnHx3VPhMJBKx+Hw+hoaG1kZGRiRgtK2t7cHw8PCvxsZGfTAYbAEqgGzZsM1mu55MJjUejyeTSCSWgHbguxDi9eDg4Bur1Xphfn6+SpKkFiFEpGy4urr69tbWVi6RSASBAJDfSyVVVbXG4/FnQF9zc/PdcDhcNmyYmZkxAVeAT/vkd4QQXkmSouFw+DlwAsiVA+uFEPVA+qCOAPZG8BWopuSPPgj+cRhYEmv7Hf4G/oX/y61u1QsAAAAASUVORK5CYII=",
+        "contentType": "image/png",
+        "width": 16,
+        "height": 15,
+        "angle": 0,
+        "xoffset": 0,
+        "yoffset": 0
+      },
+      "label": "",
+      "description": ""
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 704190.2096,
+    "ymin": 4466104.0938,
+    "xmax": 738794.1966,
+    "ymax": 4515476.2803,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "RISULTATO",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SINTOMI",
+      "type": "esriFieldTypeString",
+      "alias": "SINTOMI",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "STRUTTURA_LABORATORIO",
+      "type": "esriFieldTypeString",
+      "alias": "STRUTTURA_LABORATORIO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SQUADRA",
+      "type": "esriFieldTypeString",
+      "alias": "SQUADRA",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "DOCUMENTO_CONFERMA",
+      "type": "esriFieldTypeString",
+      "alias": "DOCUMENTO_CONFERMA",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeString",
+      "alias": "ID_CAMPIONE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "PROTOCOLLO",
+      "type": "esriFieldTypeString",
+      "alias": "PROTOCOLLO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    },
+    {
+      "name": "LONGITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "Longitudine",
+      "domain": null
+    },
+    {
+      "name": "LATITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "Latitudine",
+      "domain": null
+    },
+    {
+      "name": "COMUNE",
+      "type": "esriFieldTypeString",
+      "alias": "COMUNE",
+      "length": 50,
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

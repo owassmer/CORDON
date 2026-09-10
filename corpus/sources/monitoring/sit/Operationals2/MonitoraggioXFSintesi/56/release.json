@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/56",
+  "name": "VITE - 2016-17",
+  "captured_from": "2026-09-10T21:29:20.183283+00:00",
+  "captured_through": "2026-09-10T21:29:38.418114+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 400,
+  "unique_oids": 400,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "3711ba79065b5483925f2ffd626271ef3736f0deabd4852a9ad4716b13aef6d4"
+    }
+  ]
+}

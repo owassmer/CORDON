@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFFSintesiPrecedenti/MapServer/6",
+  "name": "Positivi - Campioni 2024 sub. fastidiosa",
+  "captured_from": "2026-09-10T21:35:47.461547+00:00",
+  "captured_through": "2026-09-10T21:35:58.808380+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 339,
+  "unique_oids": 339,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 339,
+      "sha256": "d43e0f58884236493da006dbf8725cc4a0558385772cdabdea25d4a152a81056"
+    }
+  ]
+}

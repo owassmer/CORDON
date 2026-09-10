@@ -1,0 +1,14 @@
+Package: ribess
+Maintainer: Machteld Varewyck <machteld.varewyck@openanalytics.eu>
+License: MIT + file LICENSE
+Title: Sample Size Computations for Sampling Designs at EFSA
+Type: Package
+Author: Machteld Varewyck
+Description: Perform Sample Size Computations for Sampling Designs at EFSA.
+Version: 0.1.2
+Date: 2021-03-01
+Imports: rriskDistributions, shiny, devtools
+Suggests: DT, shinysky, shinyIncubator, rCharts
+RoxygenNote: 6.1.1
+NeedsCompilation: no
+Packaged: 2021-03-08 14:57:04 UTC; mvarewyck

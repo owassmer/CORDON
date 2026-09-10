@@ -1,0 +1,3811 @@
+{
+  "schema": "stage-d-additional-input-contracts-v1",
+  "declared_evidence_scope": "The owning A source defines the particular payload. consumer-inventory.json projects each exact admitted consumer from predicate-contracts.json/deferred_consumers. Empty deferred-only assignments are retained source text, not live input demands. A completed external antecedent may support an admitted consumer without admitting the originating workflow.",
+  "declared_evidence": [
+    {
+      "evidence": "2026 decree and effective time; exact 2022 decree identity; closed and successor effective intervals.",
+      "contracts": [
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Accepted official sample and receipt time; valid task and method scope; source-compatible laboratory timeline; raw analysis and completion time.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Active Article 28(1) duty; exact obligated person and knowledge; reporting deadline and route; proof of noncompliance; contest or notification, defence and competent final sanction decision under the applicable procedure.",
+      "contracts": []
+    },
+    {
+      "evidence": "Active emergency identity and interval; periodic secretariat reports and committee receipt.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Adopted 2026 programme status; exact workbook hash and rows; operative pest-free territory; target population and risk stratum; selected as-run sites, samples and tests; execution results and achieved design evidence.",
+      "contracts": [
+        "adopted-geography",
+        "evaluation-context",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Adopted annual or multi-year programme identity and version; Commission and Member State transmission record.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Adopted emergency plan and effective interval; monitoring design, evidence and findings; national-reference-institute support.",
+      "contracts": [
+        "administrative-event",
+        "operative-act",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Adopted national survey programme and effective interval; exact pest and regional territory; approved survey design; official inspections, samples, tests and results.",
+      "contracts": [
+        "administrative-event",
+        "operative-act",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Adopted ordinance identity and signature date; later Court of Auditors registration and Gazzetta publication as provenance, not effective-start antecedents.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Adopted programme identity and version; Article 53 portal publication record and published content.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Alleged violation and ascertainment time; interested-person identity and residence; evidence that immediate contest did not occur; notification content, delivery and time; extinction determination where notification was omitted after the deadline.",
+      "contracts": []
+    },
+    {
+      "evidence": "Alleged violation and evidence; alleged violator and jointly liable persons; immediate-contest possibility; contest content, delivery and time.",
+      "contracts": []
+    },
+    {
+      "evidence": "Alleged violation record; proof of contest or notification; reduced-payment status; Article 24 exception analysis; competent regional office; submitted report and receipt.",
+      "contracts": []
+    },
+    {
+      "evidence": "Analytical result from the DDS45-selected Harper et al. 2010 real-time PCR assay with the 2013 erratum; valid Cq or source-defined no-Cq evidence. Analytical classification is not an official infected-plant finding.",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Annual inspection, sampling and Annex IV test evidence confirming that the individual plant concerned is not infected.",
+      "contracts": [
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "App Xylella verbale with number and species of removed plants; database entry.",
+      "contracts": [
+        "operative-assessment",
+        "personnel-assignment",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Applicable adopted plan, competent no-demarcation decision and annual survey evidence; a proven compatibility defect matters through its particular legal consequence.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Applicable adopted plan, operative containment area and source performance evidence; a proven compatibility defect matters through its particular legal consequence.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "treatment-performance",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Applicable almond-removal result, source treatment-exception state, adult-vector monitoring result and pre-removal treatment record.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Applicable demarcated area and surveillance regime; risk-based survey design, timing, execution and results. The same qualifying survey evidence may establish performance under regional and Union requirements.",
+      "contracts": [
+        "adopted-geography",
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Applicable eradication duties, exact assistant identity/status/assignment, as-run removal/destruction and correctness finding.",
+      "contracts": [
+        "operative-assessment",
+        "personnel-assignment",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Applicable eradication route, exact assistant identity/status/assignment and identified removal population.",
+      "contracts": [
+        "operative-assessment",
+        "personnel-assignment",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Applicable fine range; valid contest or notification and time; source-calculated reduced amount and procedural costs; payment record.",
+      "contracts": []
+    },
+    {
+      "evidence": "Applicable measure and authorized intervention; exact owner and land; proven opposition; competent territorial-service request and Prefect response.",
+      "contracts": [
+        "owner-response",
+        "removal-performance",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Applicable official measure and legal basis; exact regional territory and subject population; implementation route, assignment and completion evidence.",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Applicable plant-health measures; implementation workload and resource need; resources legally available; regional allocation and deployment evidence.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Applicable survey duty and population; effective DTU version; risk-based design; selected sites and plants; as-run observations, samples, laboratory analyses and results.",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Appointment, committee opinion, register/current status, express assignment, task and resulting record.",
+      "contracts": [
+        "administrative-event",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Area-survey results or successor area act; complete information package; central transmission and receipt record.",
+      "contracts": [
+        "administrative-event",
+        "operative-act",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Article 31(1) measure identity; Commission/Member-State notification, transmission and receipt; authority construction of any validity consequence.",
+      "contracts": [
+        "administrative-event",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Article 31(4) measures and approval time; effective EU branch availability; regional proposal; implementation calendar; survey design and organization; visual-examination, sample and test counts; examination, sampling and testing methodologies; transmission record.",
+      "contracts": [
+        "administrative-event",
+        "calendar",
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "Article 5 receiving-service designation and use; external laboratory identity, home designation and accreditation; event-time DM 169819 and DTU 8 requirements; task performance and report evidence.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Authorized inspection or control, exact officials, place, person and applicable cooperation duty; proof of denial, obstruction or breach; contest or notification, defence and competent final sanction decision.",
+      "contracts": []
+    },
+    {
+      "evidence": "Candidate laboratory and location; audit/inspection authority or lawful delegation and any accreditation-based audit determination; existing home-region official designation; CFN hearing and exact written designation scope.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
+      "contracts": [
+        "adopted-geography",
+        "case-prescription",
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "party-land-standing",
+        "plant-population",
+        "recipient-notice",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Case date, DDS 18 geography, event-time Annex III eligibility and official infected finding.",
+      "contracts": [
+        "adopted-geography",
+        "case-prescription",
+        "evaluation-context",
+        "official-finding",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Case date, Monopoli/Valle d'Itria area state, official finding and event-time Annex III eligibility.",
+      "contracts": [
+        "adopted-geography",
+        "evaluation-context",
+        "operative-act",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Case date, the copied population text, and the applicable Article 7 version and plant-specific evidence.",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "plant-population",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Central data-supply direction; public-body identity; exact held pest data and provenance; transmission and SIPP ingestion record.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Committee request; effective adopted action plan; exact measures and territorial units; coordination and implementation records.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Committee request; established territorial unit; effective action plan; exact measures, participant competences, assignments and implementation records.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Committee request; officially adopted action plan and measures; central activation act; secretariat coordination record.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Committee-approved action plan and version; central declaration act, time and emergency identity.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Committee-approved action plan and version; central official adoption act, adopted plan and effective interval.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Competent control-body identity; alleged violation and legal basis; source-authorized evidence operation; as-run information, inspection, recording or technical-operation evidence and provenance.",
+      "contracts": []
+    },
+    {
+      "evidence": "Competent regional instruction and legal basis; exact subject, sites and affected plants, products or objects; effective communication; implementation and completion evidence.",
+      "contracts": [
+        "operative-act",
+        "administrative-event",
+        "recipient-notice",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Complete annual official survey results; current list and demarcated-area exceptions; National Plant Health Committee and central ordinance events required for the successor list version.",
+      "contracts": [
+        "official-finding",
+        "survey-performance",
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Complete landscape application; competent decision-owner identity or delegation; superintendent-opinion request and receipt time; opinion and legal character or expiry of the paragraph 5 forty-five-day route; reasoned landscape-authorization decision and time.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "protected-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Complete prior-year survey execution and result population; compiled result reports; Commission and Member State transmission record.",
+      "contracts": [
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Complete received Article 27(3) regional proposal population; current central objectives and criteria; central proposed national programme.",
+      "contracts": []
+    },
+    {
+      "evidence": "Complete regional action-plan proposal and transmission; effective EU branch availability; committee record, approval decision and approved plan version.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Complete transmitted acts and receipt time; proposed intervention; landscape-plan or specific-discipline requirements; superintendent opinion, scope, legal character and time.",
+      "contracts": [
+        "administrative-event",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "Completed Annex III adaptation and date; competent Regional Plant Health Service; notice content, delivery and receipt.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Completed Article 29(1) entry and timestamp; exact source-listed category; finding and first applied measures; central official Commission notification and timestamp.",
+      "contracts": [
+        "official-finding",
+        "pest-classification",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Completed Article 7(11) cessation notice; intended cessation date; ministerial revocation decree and effective time.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Completed official analysis; raw analytical data; signed test report; ISO/IEC 17025 required indications; sample and method traceability.",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Completed receiving-service external designation; external laboratory accreditation, scope and availability; any separately applicable interadministrative agreement; official sample assignment, custody and report.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Completed required publication and exact publication date; calculation of the following day; effective designation and operating status from that date.",
+      "contracts": [
+        "administrative-event",
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Constituent-sample retention and individual test results.",
+      "contracts": [
+        "analytical-result",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Current adopted plan; monitoring evidence; update-necessity assessment; revised plan; National Plant Health Committee opinion and competent adoption act.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Current area version; periodic survey results; effective EU area rule; modification-necessity decision; exact successor constitutive area act and effective time.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Current designation and declared requirements; evidence of requirement loss; CFN hearing record; central suspension decision and scope.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Current designation and scope; evidence of lost Article 13(2) requirements or failed Article 13(5) activities; National Plant Health Committee opinion; ministerial revocation act.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Current designation and scope; regional monitoring and audit evidence; exact lost or partially satisfied Annex III requirement or ended task need; CFN hearing; reasoned regional suspension or revocation act and effective time.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Current designation; audit and exact lost requirement or omitted required activity; CFN opinion; ministerial revocation decree and effective time.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Current plan adoption; exact containment area; 2 km inward band; as-run survey and vector-investigation evidence.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Current plan adoption; operative containment branch; source-area vector-control measures and results; relevant §9.3 surveillance results where used as information.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "Current plan adoption; operative eradication-area version; as-run vector investigations and results for the area and listed higher-risk locations.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Current plan and interval; annual implementation evidence; effectiveness assessment; committee review and any revision evaluation.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Current regional designation; national-reference-laboratory audit and findings; CFN mandate; competent regional suspension act and scope.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Current regional designations and exact scopes; monitoring plan; activity, qualification, task-need and audit evidence; status-change findings where any.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "DDS 148 identity/date/lineage position from successor recital; exact body and maps required for applicability.",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "evidence": "DDS 48/2023 and DDS 51/2023 texts and annexes establishing the exact correction scope; unavailable scope remains unresolved.",
+      "contracts": [
+        "case-prescription",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Designation route; accredited/non-accredited method and organism class; PT/TPS request, participation, result and corrective action; justified nonparticipation; suspension and restoration acts.",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Destruction location and method; root disposition; wood condition.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "removal-performance",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Direct Gazzetta publication record and date; calculation of the following day; event-time laboratory route and status evidence.",
+      "contracts": [
+        "administrative-event",
+        "evaluation-context",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Effective Annex II population and plant-specific Article 7 evidence; the regional categorical exclusion is not an exemption.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Effective Article 11 provision; regional organizational law and acts; service identity, competence, structure and continuing Regulation 2017/625 qualification evidence.",
+      "contracts": [
+        "operative-act",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Effective Article 27 programme cycle; central coordination record; national-reference-institute collaboration and regional surveillance interfaces.",
+      "contracts": [
+        "administrative-event",
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "Effective Article 8 provision and exact CREA-DC institutional identity.",
+      "contracts": [
+        "laboratory-status",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Effective Article 9 provision; exact secretariat, committee and territorial-unit identities; active technical-operational coordination and communication records.",
+      "contracts": [
+        "administrative-event",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Effective EU Annex/provision version, plant identity and evidence, exact regional procedure instruction, competent case decision.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Effective EU Article 5 version; exact no-demarcation predicates and decision; investigation results; central communication and receipt.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "survey-performance",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Effective EU area provisions; official infected-plant finding; selected eradication or lawful containment branch; exact source-native distance parameters; competent regional constitutive geometry act.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Effective EU reference-laboratory designation; qualifying national laboratory identity and scope; ministerial designation decree; continuing qualification.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Effective adopted action plan; exact measures and expected performers; verification or audit mandate, evidence and findings.",
+      "contracts": [
+        "administrative-event",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Effective authenticated competence provision; exact actor and source-native function; the exact opinion, approval or resulting act only where this provision requires it.",
+      "contracts": [
+        "administrative-event",
+        "official-finding",
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Effective facility-specific designation; exact competence category and requested task; continuing Article 100(3) qualification; Article 13(5) and Article 101(1) performance evidence; any suspension or revocation status.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Effective ordinance and Annex I version; exact territory; applicable regional demarcated-area exception; annual official survey evidence and later revision where any.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Effective plan and Union version; exact containment area; source band; Article 31 justification/compatibility/notification where relied upon; as-run treatment or survey evidence.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "administrative-event",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "Effective plan interval; official recognition and negative test of the monumental olive in the 50 m infected zone.",
+      "contracts": [
+        "evaluation-context",
+        "plant-population",
+        "protected-status",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Effective priority-pest status or committee designation; exact pest; source-native plan contents; central draft and update record; national-reference-institute support.",
+      "contracts": [
+        "administrative-event",
+        "pest-classification"
+      ]
+    },
+    {
+      "evidence": "Effective provision and competent territorial Regional Plant Health Service.",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Eligible body identity; National Plant Health Service access method; applicable personal-data legal basis and scope; conforming access record.",
+      "contracts": [
+        "controlled-access"
+      ]
+    },
+    {
+      "evidence": "Eligible contributor identity; submitted prior application; exact contributed data, provenance, ingestion and access controls.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Eligible laboratory class; Article 9 and Annex III qualification; CFN hearing; written regional designation identifying exact competence, tasks, methods and conditions; SIPP entry where required.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Established territorial unit; active emergency identity and interval; exchanged information and receipt records.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Established territorial unit; adopted action plan and exact measures; participant competences and assignments; as-run implementation and completion evidence.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Established territorial unit; effective action plan; exact measure and expected performer; verification evidence and findings.",
+      "contracts": [
+        "administrative-event",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Event-time Annex II ST1 population and the individual olive's infection, symptom and suspicion facts.",
+      "contracts": [
+        "adopted-geography",
+        "official-finding",
+        "operative-assessment",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Evidence that no corresponding EU reference laboratory exists; qualifying laboratory identity and scope; ministerial designation decree; continuing qualification.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact Annex III version, legal area state, official finding and regional decision/evidence.",
+      "contracts": [
+        "administrative-event",
+        "adopted-geography",
+        "evaluation-context",
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Exact EPPO method and edition; validation-data record; resulting normalized or nonnormalized classification.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact act and recipient population; evidence of personal-communication impossibility or particular burden caused by recipient number; administration’s act-specific publicity decision; suitable publication content, channel and completion time.",
+      "contracts": [
+        "operative-assessment",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Exact act identity, official evidence, adopted geography/cadastral annex, subspecies, regime and interval.",
+      "contracts": [
+        "adopted-geography",
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Exact act, evidence, adopted annex and interval.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Exact act, official evidence, adopted annex, subspecies, regime and interval.",
+      "contracts": [
+        "adopted-geography",
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Exact area, plant population, prescription and execution evidence.",
+      "contracts": [
+        "adopted-geography",
+        "evaluation-context",
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "removal-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Exact assignment, evidence and resulting official record.",
+      "contracts": [
+        "administrative-event",
+        "adopted-geography",
+        "analytical-result",
+        "operative-act",
+        "operative-assessment",
+        "personnel-assignment",
+        "sample-custody",
+        "survey-design",
+        "survey-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Exact competence and designation; national-reference or excellence status; ISO/IEC 17025 accreditation in scope; adequate equipment, premises, containment, organization and qualified staff; complete Annex I requirements; audit evidence.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact competence area, pest or pest group; qualification of each proposed structure; evidence of national excellence; complete Article 7(4) designation route and ministerial decree.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact demarcated-area version and interval; applicable survey design; as-run inspections, samples, tests and results; pest-evolution findings.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Exact designation act, scope, qualifications, accreditation/derogation, audit and event-time status evidence.",
+      "contracts": [
+        "administrative-event",
+        "analytical-result",
+        "laboratory-status",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Exact designation act, scope, qualifications, accreditation/derogation, audit and event-time status evidence. Laboratory location and designating authority’s Member State for this derogation route.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Exact designation act, scope, qualifications, accreditation/derogation, audit and event-time status evidence. Location within the permitted EU/EEA territory; only the requirements selectively incorporated by Article 100 apply to the NRL route.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact designation and applicable qualifications; competent audit findings; appropriate and timely remedial action; extent of withdrawal and event-time status.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact designation scope; Article 37(4)–(5) qualification; complete Annex III requirements; accreditation and audit evidence; suspension or revocation status.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Exact effective plan version, activating event, competent actor, completion evidence and any required approval/adoption.",
+      "contracts": [
+        "administrative-event",
+        "adopted-geography",
+        "evaluation-context",
+        "operative-act",
+        "operative-assessment",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Exact measure and publicity route; completed legally effective publicity; territorial authorization and official role; land and infected-plant evidence; access purpose and as-run access record.",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing",
+        "personnel-assignment",
+        "plant-population",
+        "recipient-notice",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Exact official control or plant-protection activity; territorially and functionally competent National Plant Health Service component; delegation or support authority where applicable.",
+      "contracts": [
+        "operative-act",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Exact operative area state; effective Union eradication provisions; Annex III status and competent containment selection where claimed; exact regional measure and implementation record.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Exact pest; committee proposal record, decision and defined multi-year programme terms; competent central adoption and publication where required.",
+      "contracts": [
+        "administrative-event",
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "Exact plant, plant product or object; pest; confirmed or suspected introduction/spread risk and source; applicable Article 32(1) measure.",
+      "contracts": [
+        "operative-assessment",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Exact plant-health measure or ordinance and recipients; applicable Law 241 Article 21-bis route; competent service decision establishing communication methods and terms.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Exact prescription and executor-selection or assignment evidence; for ARIF-executed operations, the detailed removal calendar and evidence of its communication to the Osservatorio. Internal scheduling is not that communication.",
+      "contracts": [
+        "administrative-event",
+        "case-prescription",
+        "operative-act",
+        "operative-assessment",
+        "owner-response",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Exact prescription, treatment, execution and verification records.",
+      "contracts": [
+        "administrative-event",
+        "case-prescription",
+        "execution-cost",
+        "operative-act",
+        "operative-assessment",
+        "personnel-assignment",
+        "recipient-notice",
+        "removal-performance",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Exact restrictive measure and recipient; applicable route; communication content, method, delivery and time; recipient-specific effectiveness record.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Exact restrictive measure; legal and factual evidence of both cautionary and urgent character; issuance and effective time.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Exact restrictive measure; non-sanctioning legal character; reasoned immediate-effect clause; issuance and effective time.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Exact sanction matter; analysis of whether D.lgs. 19/2021 expressly governs it; effective Law 689 provision and procedural record.",
+      "contracts": []
+    },
+    {
+      "evidence": "Exact source facts and branch-specific authority/evidence.",
+      "contracts": [
+        "adopted-geography",
+        "case-prescription",
+        "operative-act",
+        "operative-assessment",
+        "owner-response",
+        "party-land-standing",
+        "plant-population",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Exact source facts and corresponding official record.",
+      "contracts": [
+        "adopted-geography",
+        "analytical-result",
+        "evaluation-context",
+        "laboratory-status",
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "personnel-assignment",
+        "plant-population",
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Exact territorial competence; violation and procedural record; competent regional or provincial final sanction decision.",
+      "contracts": []
+    },
+    {
+      "evidence": "Exact written designation, tasks, coordination, expertise, equipment, staff, impartiality and timely-result capability; independently applicable domestic requirements remain separate.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Execution facts and completion evidence.",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Execution facts; voluntary removals controlled by Osservatorio inspectors/agents and ARIF removals by two ARIF phytosanitary assistants.",
+      "contracts": [
+        "removal-performance",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Existing electronic notification, official infected-plant finding and event-time area classification, and updates to that notification.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "External laboratory identity; Article 37 qualification for the exact task; National Plant Health Committee hearing; regional written designation and scope.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Handover record signatures; transporter countersignature attesting delivery.",
+      "contracts": [
+        "operative-assessment",
+        "personnel-assignment",
+        "removal-performance",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Individual listed/protected status, official negative result, applicable regional retention policy covering the plant, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence; no additional discretionary authorization where the policy supplies the choice.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "official-finding",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "Individual listed/protected status, official negative result, coverage by this effective retention policy, and the Article 7(3) annual inspection, sampling/testing and vector-treatment evidence.",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "operative-assessment",
+        "protected-status",
+        "official-finding",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "Individual official historic-value recognition, official negative result, coverage by this effective retention policy, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence.",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "operative-act",
+        "protected-status",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "Individual positive plant identity, event-time finding location and subspecies, applicable population and geographical coverage, sampling and test records; shared qualifying performance may satisfy concurrent requirements.",
+      "contracts": [
+        "adopted-geography",
+        "official-finding",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Individual specified-plant eligibility under the applicable ground: official historic-value designation, particular social/cultural/environmental value with unacceptable felling impact, or specific national/Union protective rules; both Article 7(3)(a)/(b) safeguards and the exercised competent retention choice, which an applicable policy covering the individual may supply.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "Interested-person identity; applicable notification deadline and anchor; evidence that required notification was omitted through the deadline; person-specific extinction status.",
+      "contracts": []
+    },
+    {
+      "evidence": "Laboratory cessation decision; notice to SFC and INRPP and date; intended cessation date.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Laboratory identity and exact task/method scope; Regulation 2017/625 Article 37 qualification evidence; National Plant Health Committee hearing; regional written designation.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Laboratory legal identity and class; Article 37 qualification or exact lawful derogation; public/private protection-of-plants role; specific agreement to act in the name and on behalf of the designating Regional Plant Health Service where applicable.",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Laboratory result and cadastral/owner records.",
+      "contracts": [
+        "analytical-result",
+        "official-finding",
+        "party-land-standing"
+      ]
+    },
+    {
+      "evidence": "Lawful coercive-removal authority; exact person and obstructed intervention; proof of obstruction; contest or notification, defence and competent final sanction decision.",
+      "contracts": []
+    },
+    {
+      "evidence": "Lawful coercive-removal decision; as-run removal work and cost record; evidence identifying the person who omitted the original duty and is legally chargeable as the offender.",
+      "contracts": [
+        "boundary-context",
+        "execution-cost",
+        "party-land-standing",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Lawful substitute execution; competent cost determination; exact primary obligor; recourse decision, amount, notice and recovery record.",
+      "contracts": []
+    },
+    {
+      "evidence": "Lawful substitute-execution decision; exact activities necessary for complete and correct implementation; as-run work, quantity and cost evidence; competent cost determination.",
+      "contracts": [
+        "execution-cost",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Measure identity and scope; phytosanitary justification; Annex II compatibility analysis; movement-restriction analysis.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "National Plant Health Service request; exact sample or organism; task within CREA-DC competence; analysis or study record and result.",
+      "contracts": [
+        "administrative-event",
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "No-demarcation decision, investigation result and communication to the Central Plant Health Service.",
+      "contracts": [
+        "administrative-event",
+        "operative-act",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Obstruction documentation and verbale; Prefect request records; cost and violation-contest records.",
+      "contracts": [
+        "administrative-event",
+        "case-prescription",
+        "execution-cost",
+        "operative-act",
+        "operative-assessment",
+        "personnel-assignment",
+        "recipient-notice",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Official analysis identity; raw analytical data; appropriate retention and traceability record; sample and method identity.",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Official finding chain and owner/cadastral evidence.",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing",
+        "plant-population",
+        "official-finding",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Official finding/investigation, competent act, adopted annex and effective interval.",
+      "contracts": [
+        "adopted-geography",
+        "analytical-result",
+        "evaluation-context",
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "Official finding; first useful meeting identity and time; available data and information; effective emergency plan; committee-defined and approved measures.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Official infection result, listed monumental-olive status and qualifying Piana location; exact higher-law derogation and its branch/site conditions; Osservatorio authorization of the precise alternative; evidence of the alternative's applicable measures, including its vector controls and any branch-specific testing.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "official-finding",
+        "treatment-performance",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Official plant finding or Article 5/6 route; committee opinion and scope; competent regional act; adopted annexes; publication/effectiveness; supersession/revocation.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Official plant finding; effective Union area provisions; committee opinion where required; exact regional constitutive area act, geometry and effective time.",
+      "contracts": [
+        "official-finding",
+        "operative-act",
+        "adopted-geography",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Official result, source risk/noncompliance indication, exact designating authority and relevant delegated recipients, applicable specific arrangement and notification performance.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "official-finding",
+        "operative-assessment",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Official sample and custody; event-time laboratory designation/accreditation and task scope; effective Annex IV version; exact protocol edition and method; raw analysis and signed report.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Official sample identity and collection; effective DTU version; dispatch time, custody, laboratory receipt and acceptance evidence.",
+      "contracts": [
+        "analytical-result",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Official task and analysis need; event-time Union method rule or validation criteria; availability and suitability of each source-listed route; exact method edition, validation and laboratory scope; recorded method selection.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Official-confirmation decision and regional receipt time; pest presence or applicable suspicion; first adopted measures; Union-system entry and timestamp.",
+      "contracts": [
+        "administrative-event",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Official-confirmation decision; affected area and spread risk; urgency and necessity assessment; selected measure, legal basis, timing and completion evidence.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Official-confirmation decision; exact pest and finding; plant, product and object supply, movement, origin, destination and spread evidence; investigation findings.",
+      "contracts": [
+        "administrative-event",
+        "official-finding",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Official-confirmation decision; exact potentially affected professional operators and plants, products or objects; information content, delivery and timing evidence.",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Official-confirmation decision; priority-pest status; committee public-information method decision; public content, channel and publication evidence.",
+      "contracts": [
+        "official-finding",
+        "pest-classification",
+        "operative-assessment",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Official-control need; external laboratory’s event-time designation and exact scope; specific interadministrative convention; sample assignment, custody and report.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status",
+        "sample-custody",
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Official-control or other-official-activity sample and custody; event-time national-reference or official-laboratory designation; exact task and method scope; signed test report.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Official-control plant sample and custody; event-time official-laboratory designation; ACCREDIA EN ISO/IEC 17025 accreditation and exact method/task scope; assignment, receipt and report.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Officially adopted action plan and version; Commission notification content, channel and time.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Officially adopted action plan; exact affected territory; regional territorial-unit constitutive act, membership and participant competences.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Operative Annex I list version; exact region/province; exact point-in-time demarcated-area acts and geography for Lazio, Puglia or Toscana; any successor national list revision.",
+      "contracts": [
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Operative Annex I list; exact territorial portion and demarcated-area exceptions; applicable annual survey design, execution, results and status reporting.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-design",
+        "survey-performance",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
+      "contracts": [
+        "case-prescription",
+        "evaluation-context",
+        "operative-act",
+        "recipient-notice",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Original sample and method; initial and repeated raw results; same-method repetition; retained aliquot or resample where applicable; final sample disposition; competent service decision on further investigation.",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Other region’s valid written designation and exact scope; agreement between the parties; National Plant Health Committee hearing; receiving region’s designation and use record.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "PEC application and Annex II model; Article 5 and Annex I qualification documentation; INRPP documentary review, any inspection and report; CFN opinion; ministerial decree identifying exact competence scope.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Periodic audit; serious-nonconformity finding; CFN opinion; central suspension decision; INRPP verification of cure; restoration record.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Person or body identity; source-defined knowledge or held imminent-danger information; exact pest or danger; communication content, time, recipient and forwarding record where applicable.",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Pest-free area state, pool/individual identity, official screening result, second-method confirmation where required, Dupas and MLST reports.",
+      "contracts": [
+        "adopted-geography",
+        "analytical-result",
+        "laboratory-status",
+        "official-finding",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Pest-free area state; official sample and positive screening; event-time national-reference authority; second authorized molecular method and distinct genome target; same sample or appropriate extract; confirmation report.",
+      "contracts": [
+        "adopted-geography",
+        "analytical-result",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Plant-specific taxon and infection evidence against the effective Annex II version.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Pre-effective official designation; Union communication; Article 53 publication; decree effective-start evidence; later adaptation, suspension or revocation status.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Pre-effective regional official designation; decree effective-start date; Annex III gap and remediation evidence; completed adaptation and date.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Preceding-calendar-year survey-result set; report payload; authoritative evidence of successful reporting to the Commission and other Member States through the Article 103 electronic notification system. A receipt or system acknowledgement may prove that performance; it is not an independent legal completion condition under this provision. No particular proof format is prescribed here.",
+      "contracts": [
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Preceding-calendar-year survey-result set; report payload; authoritative evidence of successful reporting to the Commission and other Member States. A receipt or system acknowledgement may prove that performance; it is not an independent legal completion condition under this provision. No particular proof format is prescribed here.",
+      "contracts": [
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "Prepared emergency plan; Regulation 2016/2031 Article 25 conformity; National Plant Health Committee opinion; signed ministerial adoption decree and effective publication.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Prepared national programme proposal; National Plant Health Committee opinion; signed central adoption act and effective programme version.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Prepared programme; positive National Plant Health Committee opinion; national adoption attestation; National Plant Health Service publication; exact published workbook hashes; numbered implementing instrument if later obtained.",
+      "contracts": [
+        "administrative-event",
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Professional-operator identity and affected activity; knowledge event; pest or imminent danger; selected precautionary measures, timing and completion evidence.",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment",
+        "treatment-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Proposed laboratory identity and exact competence; Regulation 2017/625 Article 100(3) qualification evidence; ministerial designation record.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Protected property or area identity and legal status; exact proposed intervention; authorization requirement; complete project and required documentation; application and work-start evidence.",
+      "contracts": [
+        "adopted-geography",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Publication, PEC transmission and site-publication records.",
+      "contracts": [
+        "recipient-notice",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Receiving service’s valid written cross-region designation; agreement and exact task or method; laboratory availability; sample assignment, custody and report.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Recipient-effect evidence and the owner communication or its evidenced absence.",
+      "contracts": [
+        "owner-response",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "Recipient-effect evidence, evidenced non-response and ARIF execution records.",
+      "contracts": [
+        "owner-response",
+        "recipient-notice",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Recognized self-control-laboratory identity and scope; nonofficial sample and origin; exact analysis or diagnosis and result; pest classification; both competent regional recipients; notification content and timestamps.",
+      "contracts": [
+        "analytical-result",
+        "official-finding",
+        "laboratory-status",
+        "pest-classification",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Recognized self-control-laboratory identity and scope; professional-operator request; nonofficial sample provenance; analysis report and any mandatory notification route.",
+      "contracts": [
+        "analytical-result",
+        "official-finding",
+        "laboratory-status",
+        "pest-classification",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Refusal evidence, forced-removal records and cost/sanction documentation.",
+      "contracts": [
+        "owner-response",
+        "removal-performance",
+        "execution-cost",
+        "administrative-event",
+        "boundary-context"
+      ]
+    },
+    {
+      "evidence": "Regional designation process; written designation instrument; exact laboratory identity, official tasks, methods and operating conditions required by Regulation 2017/625 Article 37.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Regional emergency-response procedures and organizational acts; competent service roles; technical, operational and administrative readiness evidence.",
+      "contracts": [
+        "administrative-event",
+        "personnel-assignment"
+      ]
+    },
+    {
+      "evidence": "Regional official-control workload; accredited official-laboratory capacity; exact methods, tasks, availability and operational limits.",
+      "contracts": [
+        "laboratory-status",
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "Regional official-control workload; laboratory capacity and competence; continuing availability to the Regional Plant Health Service.",
+      "contracts": [
+        "laboratory-status",
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "Regional suspicion state; exact pest and territory; unresolved official-confirmation state; selected interim measures, legal basis, timing and completion evidence.",
+      "contracts": [
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Repeat-assay records per stage; extract and re-extraction identity.",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Report, Article 27 survey or official-control trigger evidence; exact pest and territory; official sample and custody; diagnosis from a validly designated official laboratory for the task; regional official-confirmation decision.",
+      "contracts": [
+        "official-finding",
+        "survey-performance",
+        "sample-custody",
+        "laboratory-status",
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Request, requesting authority, scope, applicable Article 31(1) measures, report and delivery/receipt.",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Required task and method; complete local accredited-capacity check; external laboratory’s current accreditation and home-region official designation; receiving-service qualification, CFN hearing and written designation.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Research-laboratory identity and network status; nonofficial sample provenance; research or experimental purpose; exact report and any mandatory notification route.",
+      "contracts": [
+        "administrative-event",
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Research-laboratory identity; nonofficial sample and origin; exact analysis or diagnosis and result; pest classification; both competent regional recipients; notification content and timestamps.",
+      "contracts": [
+        "analytical-result",
+        "official-finding",
+        "pest-classification",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Resolved containment result, applicable Article 13 removal route, exact official identity/status/assignment and identified removal population.",
+      "contracts": [
+        "operative-assessment",
+        "personnel-assignment",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Resolved containment result, applicable containment duties, exact official identity/status/assignment, as-run removal/destruction and correctness finding.",
+      "contracts": [
+        "operative-assessment",
+        "personnel-assignment",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Revision table; National Plant Health Committee approval; adoption date; exact technical instruction version applicable to the survey or diagnostic event.",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Sample identity, applicable route, receipt by the responsible laboratory, analysis, database registration where required and communication records.",
+      "contracts": [
+        "analytical-result",
+        "official-finding",
+        "sample-custody",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Sample identity, species and demarcated-area provenance, applicable diagnostic route, CNR-IPSP receipt, required analysis/method and communication records; the qualifying new-species route requires the MLST/Yuan subspecies report. Database registration remains required where the source prescribes it.",
+      "contracts": [
+        "analytical-result",
+        "sample-custody",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Second-level test identity, method and target; subspecies record; delivery chain to CNR-IPSP.",
+      "contracts": [
+        "adopted-geography",
+        "analytical-result",
+        "laboratory-status",
+        "official-finding",
+        "operative-assessment",
+        "sample-custody"
+      ]
+    },
+    {
+      "evidence": "Selected accredited laboratory and exact task/method scope; complete Article 14 qualification, CFN hearing and written regional designation; SIPP record where required.",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Signed 2022 ministerial decree; Gazzetta publication dated 2022-03-17; attached plan; effective and replacement intervals.",
+      "contracts": [
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Signed 2026 ministerial decree; Ministry portal publication and effective time; attached plan; Article 25 conformity; committee opinion record.",
+      "contracts": [
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Signed decree; control-body transmission; Gazzetta publication record, issue and date; exact published text.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Signed ministerial decree; exact facility identity and address; listed competence categories; required publication and effective-start evidence; continuing Article 100(3) qualification and Article 13(5) performance status.",
+      "contracts": [
+        "administrative-event",
+        "evaluation-context",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Survey-programme cycle; pest risk assessments; national-reference-institute support; National Plant Health Committee opinion; adopted general objectives and criteria.",
+      "contracts": [
+        "administrative-event",
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "Territorial risk analysis; current Article 27(2) objectives and criteria; next-year regional survey proposal; transmission to the Central Plant Health Service.",
+      "contracts": []
+    },
+    {
+      "evidence": "Territorial-unit constitutive act; effective adopted action plan or central ordinance; exact participant competence; assigned implementation and completion evidence.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "The case act's recipient population, ascertainment of untraceable recipients or individual-communication burden, and specified publicity.",
+      "contracts": [
+        "case-prescription",
+        "operative-act",
+        "operative-assessment",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "The case plant's infection and monumental status, the elected alternative, and applicable higher-law permission and regional authorization.",
+      "contracts": [
+        "official-finding",
+        "operative-act",
+        "owner-response",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The case plant's negative test, monumental characteristics, and pending recognition and authorization status.",
+      "contracts": [
+        "official-finding",
+        "operative-assessment",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The case's infected-plant list and express deferral of the remaining 50 m Article 7 prescription workload.",
+      "contracts": [
+        "case-prescription",
+        "operative-assessment",
+        "plant-population",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "The case's priority instruction and infected-plant list, read with the complete Article 7 workload.",
+      "contracts": [
+        "case-prescription",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "The case's seasonal treatment judgment and the applicable Union treatment requirement.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "The predecessor and completion acts, omitted parcel/owner relation, and the remaining 50 m plant workload.",
+      "contracts": [
+        "case-prescription",
+        "operative-act",
+        "party-land-standing",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "Treatment record with authorized product and direction, its date, and the removal dates.",
+      "contracts": [
+        "treatment-performance",
+        "vector-biology",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Treatment record with authorized product, its date, and the removal dates.",
+      "contracts": [
+        "operative-act",
+        "treatment-performance",
+        "vector-biology",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Urgent official analysis need; documented absence or unavailability of Article 30(1) and 30(2)(a)–(d) methods within the network; exact nonnormalized method and issuer; validation status; laboratory competence and report.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "Valid Harper et al. 2010 real-time PCR run with negative/positive/no-target controls.",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Valid applicable measure, decree or ordinance; exact obligated person, required performance, notice and clock; proof of nonexecution; contest or notification, defence and competent final sanction decision.",
+      "contracts": []
+    },
+    {
+      "evidence": "Valid contest or notification and time; interested-person identity; defensive writings and documents; hearing request and receipt where exercised.",
+      "contracts": []
+    },
+    {
+      "evidence": "Valid emergency declaration and applicable statutory route; exact affected territory and competent regional services; territorial-unit constitutive act and membership.",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "Valid emergency measure or ordinance; exact actor, population, limits and criteria; applicable Union obligations; assigned implementation and completion evidence.",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Valid measure and legal basis; exact owner or holder and land; effective prescription; required terms, methods and time; primary implementation and cost evidence.",
+      "contracts": [
+        "operative-act",
+        "party-land-standing",
+        "execution-cost",
+        "removal-performance",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Valid national-reference designation and competence; National Plant Health Committee direction; exact Article 13(5) task and completion record.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Valid national-reference designation and competence; committee direction; exact official laboratories and methods; coordination and harmonization records.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status"
+      ]
+    },
+    {
+      "evidence": "Valid national-reference designation and competence; committee direction; official sample or consignment identity; diagnostic, confirmatory, characterization or taxonomic report.",
+      "contracts": [
+        "administrative-event",
+        "laboratory-status",
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "Valid primary prescription; exact obligated person and required performance; execution evidence proving total or partial omission, incompleteness or deviation; competent substitute-execution decision; as-run completion evidence.",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Valid removal measure and exact demarcated-area state; plant identity and monumental or historic legal status; evidence that infection is not currently established; landscape-authorization application, opinion and decision; applicable Union obligations; case-specific removal decision.",
+      "contracts": [
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "Valid removal prescription; official evidence of quarantine-pest presence in the plants; exact owner, occupier or holder; effective notice and deadline; proof of omitted execution; contest or notification, defence and competent final sanction decision.",
+      "contracts": []
+    },
+    {
+      "evidence": "Valid removal prescription; official evidence that the plants carry the quarantine pest; exact obligated owner, occupier or holder; effective notice; proof of omitted execution; competent coercive-removal decision.",
+      "contracts": [
+        "boundary-context",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "Valid written official-laboratory designation and exact data required for SIPP recording; completed SIPP entry.",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "Violation report; contest or notification time; defence documents and arguments; hearing request and completed hearing where requested; reasoned founded-or-unfounded adjudication; payment or archive order.",
+      "contracts": []
+    },
+    {
+      "evidence": "Written designation; non-accredited method; quality-assurance system; Annex III characterisation; accredited method and organism-group correspondence.",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "annual host-plant survey records",
+      "contracts": [
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "compliance inspection records",
+      "contracts": [
+        "adopted-geography",
+        "treatment-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "compliance records",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "treatment-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "confirmed test result per plant",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "designated location, actual destruction location, route, net and transport evidence",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "destruction record and location",
+      "contracts": [
+        "adopted-geography",
+        "official-finding",
+        "plant-population",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "entomological identification",
+      "contracts": [
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "first-year surrounding-zone survey plus host-plant sample/test records",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "four years of Art. 10 survey records",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "geography",
+      "contracts": [
+        "adopted-geography",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "identification date and removal date against the flight season",
+      "contracts": [
+        "vector-biology",
+        "official-finding",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "identity of the surveying body and its supervision",
+      "contracts": [
+        "operative-act",
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "inspection results",
+      "contracts": [
+        "official-finding",
+        "operative-assessment",
+        "plant-population",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "introduction evidence or site protection evidence",
+      "contracts": [
+        "official-finding",
+        "operative-assessment",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "laboratory identification to subspecies where required",
+      "contracts": [
+        "analytical-result",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "method used",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "negative test result",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "plant location; published geometry",
+      "contracts": [
+        "adopted-geography",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "plant sample and test records",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "plant sample/test records and achieved design assurance",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "published geometry",
+      "contracts": [
+        "adopted-geography",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "removal records per plant",
+      "contracts": [
+        "removal-performance",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "sample and test records",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "sampling record and removal record for every specified plant in the zone",
+      "contracts": [
+        "plant-population",
+        "removal-performance",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "sampling records within the radius",
+      "contracts": [
+        "adopted-geography",
+        "official-finding",
+        "operative-act",
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "sampling status per specified plant in the zone",
+      "contracts": [
+        "analytical-result",
+        "official-finding",
+        "operative-assessment",
+        "plant-population",
+        "removal-performance",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "site classification of each survey location",
+      "contracts": [
+        "operative-assessment",
+        "survey-design",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "species identity of the infected plant and of each plant in the zone",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "species-level finding history",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "subspecies identification",
+      "contracts": [
+        "analytical-result",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "subspecies identification record",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "survey dates against pest detectability, pest/vector biology, host presence/biology and scientific information",
+      "contracts": [
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "survey design and results",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "survey design record",
+      "contracts": [
+        "survey-design"
+      ]
+    },
+    {
+      "evidence": "survey record per Annex V grain",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "survey records",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "symptom observation record",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "symptom observation records",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "taxon identification of the plant",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "taxon identification plus subspecies of the finding",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "test identity, target, and the sample or extract used",
+      "contracts": [
+        "adopted-geography",
+        "analytical-result"
+      ]
+    },
+    {
+      "evidence": "test records and their dates relative to lifting",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "test results within the zone since the measures",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "the 5(1) measure records",
+      "contracts": [
+        "operative-assessment",
+        "survey-design",
+        "survey-performance",
+        "vector-biology",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "the conclusion and the root treatment",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "vector-biology",
+        "treatment-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "the confirmation record and the establishing act",
+      "contracts": [
+        "official-finding",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "the demarcated area's species-level finding history",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "evidence": "the designation list",
+      "contracts": [
+        "operative-act",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "the ecoclimatic determination for the Member State",
+      "contracts": [
+        "operative-assessment",
+        "survey-design",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "the four condition records",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "survey-design",
+        "survey-performance",
+        "vector-biology",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "the notification",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "the notification and its justification",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "the official designation and the two ongoing conditions",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "the pending status",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "the plan document and its review date",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "the plan's revision date",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "the plant's location and the published zone geometry",
+      "contracts": [
+        "adopted-geography",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "the procedure text",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "the published list",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "the purpose of the zone, eradication or containment",
+      "contracts": [
+        "adopted-geography",
+        "operative-act"
+      ]
+    },
+    {
+      "evidence": "the referenced plants/cohort, demarcated area, point-(e) results and Art. 10 surveys over the prior two years",
+      "contracts": [
+        "official-finding",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "the report itself",
+      "contracts": [
+        "official-finding",
+        "survey-performance",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "the risk basis actually used",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "the risk basis and the root treatment",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "vector-biology",
+        "treatment-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "the site designation",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "the stated resource floor",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "the survey design and its achieved confidence",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "the three condition records",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "vector-biology",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "the zone's Annex III listing at the decision date",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "evidence": "traceback records and the communication",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "administrative-event"
+      ]
+    },
+    {
+      "evidence": "treatment records",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "treatment-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "treatment records tied to the removal",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "treatment-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "two years of survey records",
+      "contracts": [
+        "operative-act",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "vector finding record; survey record",
+      "contracts": [
+        "adopted-geography",
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "vector monitoring records",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "vector test records",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "vector test records and the exclusion conclusion",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "evidence": "verification record",
+      "contracts": [
+        "operative-assessment",
+        "removal-performance"
+      ]
+    }
+  ],
+  "callables": [
+    {
+      "consumer": "bindings.leaves",
+      "contracts": [],
+      "kind": "C-composition-no-new-external-input"
+    },
+    {
+      "consumer": "bindings.bind",
+      "contracts": [],
+      "kind": "C-composition-no-new-external-input"
+    },
+    {
+      "consumer": "bindings.merge_facts",
+      "contracts": [],
+      "kind": "C-composition-no-new-external-input"
+    },
+    {
+      "consumer": "core.conjunction",
+      "contracts": [],
+      "kind": "C-composition-no-new-external-input"
+    },
+    {
+      "consumer": "core.disjunction",
+      "contracts": [],
+      "kind": "C-composition-no-new-external-input"
+    },
+    {
+      "consumer": "core.negation",
+      "contracts": [],
+      "kind": "C-composition-no-new-external-input"
+    },
+    {
+      "consumer": "core.predicate_value",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "operative-assessment"
+      ],
+      "kind": "composed-exact-predicate-performance-and-historical-bindings"
+    },
+    {
+      "consumer": "core.evaluate",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "operative-assessment"
+      ],
+      "kind": "D-admitted-consumers-only; use EvidenceView.evaluate for D evidence; direct C remains the accepted mathematical reference"
+    },
+    {
+      "consumer": "bindings.continuing_conditions_facts",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "operative-assessment"
+      ],
+      "kind": "composed-exact-predicate-performance-and-historical-bindings"
+    },
+    {
+      "consumer": "bindings.assay_facts",
+      "contracts": [
+        "evaluation-context",
+        "analytical-result"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "diagnostic.analytical_predicates",
+      "contracts": [
+        "evaluation-context",
+        "analytical-result"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.wait_facts",
+      "contracts": [
+        "evaluation-context",
+        "treatment-performance"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.adopted_area_facts",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography",
+        "cadastral-geometry"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.custody_facts",
+      "contracts": [
+        "evaluation-context",
+        "sample-custody",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.confirmation_facts",
+      "contracts": [
+        "evaluation-context",
+        "analytical-result",
+        "laboratory-status",
+        "adopted-geography"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.eradication_species_facts",
+      "contracts": [
+        "evaluation-context",
+        "plant-population",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.early_lifting_survey_facts",
+      "contracts": [
+        "evaluation-context",
+        "survey-design",
+        "survey-performance",
+        "operative-assessment"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.reduced_buffer_survey_facts",
+      "contracts": [
+        "evaluation-context",
+        "survey-design"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.reduced_buffer_removal_facts",
+      "contracts": [
+        "evaluation-context",
+        "plant-population",
+        "survey-performance",
+        "removal-performance",
+        "operative-assessment"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.early_lifting_period_facts",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.four_year_lifting_facts",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "survey-performance",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.noncommencement_facts",
+      "contracts": [
+        "evaluation-context",
+        "recipient-notice",
+        "removal-performance",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.election_window_facts",
+      "contracts": [
+        "evaluation-context",
+        "recipient-notice",
+        "owner-response",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.sampling_lookback_facts",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "survey-performance"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.negative_recurrence_facts",
+      "contracts": [
+        "evaluation-context",
+        "survey-performance",
+        "vector-biology",
+        "operative-assessment"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.reduced_buffer_first_year_facts",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography",
+        "survey-performance",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.island_distance_facts",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.pni_geography_facts",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography",
+        "plant-population"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "populations.post_finding_inner",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography",
+        "plant-population",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "populations.containment_outer",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography",
+        "plant-population",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "populations.pest_free_hectare",
+      "contracts": [
+        "evaluation-context",
+        "adopted-geography",
+        "plant-population",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "populations.inward_band",
+      "contracts": [
+        "adopted-geography"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "populations.exterior_band",
+      "contracts": [
+        "adopted-geography"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "quantities.scalar",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "accepted-B-quantity-and-C-arithmetic"
+    },
+    {
+      "consumer": "quantities.metres",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "accepted-B-quantity-and-C-arithmetic"
+    },
+    {
+      "consumer": "quantities.fixed_recurrence_date",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "accepted-B-quantity-and-C-arithmetic"
+    },
+    {
+      "consumer": "quantities.in_source_month_window",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "source-qualified-observation-under-owning-B-consumer"
+    },
+    {
+      "consumer": "quantities.compare_scalar",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "source-qualified-observation-under-owning-B-consumer"
+    },
+    {
+      "consumer": "quantities.planned_workload_difference",
+      "contracts": [
+        "evaluation-context",
+        "survey-design",
+        "survey-performance"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "quantities.planned_sample_difference",
+      "contracts": [
+        "evaluation-context",
+        "survey-design",
+        "survey-performance"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "quantities.operative_period_rule",
+      "contracts": [
+        "calendar"
+      ],
+      "kind": "accepted-C-counting-rule-with-qualified-D-calendar"
+    },
+    {
+      "consumer": "quantities.clock_boundary",
+      "contracts": [
+        "evaluation-context",
+        "calendar"
+      ],
+      "kind": "exact-B-anchor-event-contract"
+    },
+    {
+      "consumer": "quantities.before_boundary",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-event-and-derived-C-boundary"
+    },
+    {
+      "consumer": "quantities.threshold_reached",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-event-and-derived-C-boundary"
+    },
+    {
+      "consumer": "quantities.clock_ordering",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-event-and-derived-C-boundary"
+    },
+    {
+      "consumer": "quantities.timely_completion",
+      "contracts": [
+        "evaluation-context",
+        "calendar"
+      ],
+      "kind": "exact-B-consumer-event-and-performance-contract"
+    },
+    {
+      "consumer": "quantities.continuous_duration_support",
+      "contracts": [
+        "evaluation-context",
+        "calendar"
+      ],
+      "kind": "exact-B-consumer-event-and-performance-contract"
+    },
+    {
+      "consumer": "quantities.clock_recurrence_coverage",
+      "contracts": [
+        "evaluation-context",
+        "calendar"
+      ],
+      "kind": "exact-B-consumer-event-and-performance-contract"
+    },
+    {
+      "consumer": "spatial.project",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.projection_distance_error",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.compatible",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.distance_test",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.ground_distance",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.minimum_enclosure",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.distance_envelope",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.adopted_membership",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.band_membership",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.surface_in_band",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.partial_parcel",
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ],
+      "kind": "qualified-geometry-and-B-or-C-owned-numeric-controls"
+    },
+    {
+      "consumer": "spatial.population_coverage",
+      "contracts": [
+        "plant-population",
+        "removal-performance",
+        "survey-performance"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "spatial.population_support",
+      "contracts": [
+        "plant-population",
+        "removal-performance",
+        "survey-performance"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "survey.probability",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "accepted-B-targets-and-C-design-calculation"
+    },
+    {
+      "consumer": "survey.equal_group_target",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "accepted-B-targets-and-C-design-calculation"
+    },
+    {
+      "consumer": "survey.proportional_allocation",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "accepted-B-targets-and-C-design-calculation"
+    },
+    {
+      "consumer": "survey.design_targets",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "accepted-B-targets-and-C-design-calculation"
+    },
+    {
+      "consumer": "survey.method_sensitivity",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.independent_parallel_sensitivity",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.binomial_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.binomial_sample_size",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.binomial_meets",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.risk_prevalences",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.independent_system_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.finite_design_counts",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.stratified_finite_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.stratified_finite_meets",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.finite_design_samples",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.stratified_binomial_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.stratified_binomial_meets",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.two_stage_binomial_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.two_stage_independent_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.binomial_design_adequacy",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.survey_design_adequacy",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.two_stage_finite_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.finite_confidence",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.finite_meets",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.finite_sample_size",
+      "contracts": [
+        "survey-design"
+      ],
+      "kind": "qualified-design-and-B-targets-with-C-derived-counts"
+    },
+    {
+      "consumer": "survey.negative_survey_support",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "survey.observed_binomial_support",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "survey.observed_survey_support",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "survey.negative_recurrence_support",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "official-finding"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "temporal.add_months",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.utc",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.elapsed_hours",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.end_of_day",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.month_window",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.precedes",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.calendar_periods",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "qualified-events-and-B-or-C-owned-counting-inputs"
+    },
+    {
+      "consumer": "temporal.working_days_after",
+      "contracts": [
+        "evaluation-context",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "temporal.deadline",
+      "contracts": [
+        "evaluation-context",
+        "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "temporal.no_detection_anchor",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "survey-performance",
+        "operative-act"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "temporal.recurrence_coverage",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "exact-consumer-qualified-performance-and-bounded-history"
+    },
+    {
+      "consumer": "temporal.occurrence_in_window",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "exact-consumer-qualified-performance-and-bounded-history"
+    },
+    {
+      "consumer": "temporal.interval_coverage",
+      "contracts": [
+        "evaluation-context"
+      ],
+      "kind": "exact-consumer-qualified-performance-and-bounded-history"
+    },
+    {
+      "consumer": "temporal.ordering",
+      "contracts": [
+        "evaluation-context",
+        "operative-assessment",
+        "vector-biology",
+        "survey-design"
+      ],
+      "kind": "evidence-or-derived-input"
+    }
+  ],
+  "reference_bindings": [
+    {
+      "consumer": "IT-DLGS-19-2021:Art.10(1):implement-plan-and-ordinances",
+      "reference": "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.10(3)(a)",
+      "reference": "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.10(4)",
+      "reference": "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.14(3):cross-region-use",
+      "reference": "IT-DLGS-19-2021:Art.14(3):cross-region-designation",
+      "contracts": [
+        "laboratory-status"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.26(2):ministerial-adoption",
+      "reference": "IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans",
+      "reference": "IT-DLGS-19-2021:Art.26(2):ministerial-adoption",
+      "contracts": [
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.26(4):update-emergency-plan",
+      "reference": "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.27(3)",
+      "reference": "IT-DLGS-19-2021:Art.27(2)",
+      "contracts": [],
+      "kind": "deferred-consumer"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal",
+      "reference": "IT-DLGS-19-2021:Art.27(3)",
+      "contracts": [],
+      "kind": "deferred-consumer"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.27(4):adopt-national-programme",
+      "reference": "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.27(4):publish-national-programme",
+      "reference": "IT-DLGS-19-2021:Art.27(4):adopt-national-programme",
+      "contracts": [
+        "administrative-event",
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.29(2)",
+      "reference": "IT-DLGS-19-2021:Art.29(1)",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal",
+      "reference": "IT-DLGS-19-2021:Art.31(4)",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval",
+      "reference": "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(6):declare-emergency",
+      "reference": "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+      "reference": "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(6):notify-commission",
+      "reference": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+      "contracts": [
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(7)",
+      "reference": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+      "contracts": [
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit",
+      "reference": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+      "contracts": [
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(8):implement-action-plan-measures",
+      "reference": "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.31(9):modify-area-if-necessary",
+      "reference": "IT-DLGS-19-2021:Art.31(9):periodic-area-surveys",
+      "contracts": [
+        "survey-performance"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
+      "reference": "IT-DLGS42-A146:Art.146(2)",
+      "contracts": [
+        "protected-status",
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DM-169819-2022:Art.7(11):revocation-after-cessation-notice",
+      "reference": "IT-DM-169819-2022:Art.7(11):cessation-notice",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DM-169819-2022:Art.11(6):notify-adaptation",
+      "reference": "IT-DM-169819-2022:Art.11(6):adapt-to-annex-iii",
+      "contracts": [
+        "laboratory-status"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DM-169819-2022:entry-into-force",
+      "reference": "IT-DM-169819-2022:publication",
+      "contracts": [
+        "administrative-event"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-ORD10-2025:Art.5(1):external-use",
+      "reference": "IT-ORD10-2025:Art.5(1):external-designation",
+      "contracts": [
+        "laboratory-status"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance",
+      "reference": "IT-ORD10-2025:Art.5(1):external-designation",
+      "contracts": [
+        "laboratory-status"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "EU-2016-2031:Art.31(2):more-stringent-measure-notification",
+      "reference": "EU-2016-2031:Art.31:more-stringent-national-measures",
+      "contracts": [
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion",
+      "reference": "EU-2020-1201:8(1)",
+      "contracts": [
+        "treatment-performance"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion",
+      "reference": "EU-2020-1201:14(1)",
+      "contracts": [
+        "treatment-performance"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DM-0677268-2021:Art.2(1):operate-within-competence",
+      "reference": "IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "IT-DM-0677268-2021:Art.2(1):operate-within-competence",
+      "reference": "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "IT-DTU8-REV2:official-laboratory-route-and-continuing-status",
+      "reference": "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer",
+      "reference": "PUG-LR4-2017:Art.3(2)",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa",
+      "reference": "PUG-LR4-2017:Art.3(2)",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-DGR1593-2024:Art7(3)-policy",
+      "reference": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-DGR1075-2025:Art7(3)-policy",
+      "reference": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer",
+      "reference": "PUG-LR4-2017:Art.6(2)",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2025-00045:doubtful-result-route",
+      "reference": "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "EU-2020-1201:6(2)",
+      "reference": "EU-2020-1201:5(1)",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ],
+      "kind": "historical-result"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.32(3):determine-completion-costs",
+      "reference": "IT-DLGS-19-2021:Art.32(3):substitute-execution",
+      "contracts": [
+        "execution-cost",
+        "operative-act"
+      ],
+      "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.32(3):recovery-right",
+      "reference": "IT-DLGS-19-2021:Art.32(3):determine-completion-costs",
+      "contracts": [],
+      "kind": "deferred-consumer"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.55(13):coercive-removal-costs",
+      "reference": "IT-DLGS-19-2021:Art.55(13):coercive-removal",
+      "contracts": [
+        "execution-cost",
+        "removal-performance"
+      ],
+      "kind": "actual-performance"
+    }
+  ],
+  "structures": {
+    "core.Evaluation": {
+      "owner": "C result and D evidence truth/needs/provenance; effect remains A-owned"
+    },
+    "diagnostic.AssayResult": {
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    "quantities.PeriodRule": {
+      "owner": "accepted C ordinary rules; qualified exception only",
+      "contracts": [
+        "calendar"
+      ]
+    },
+    "spatial.MetricGeometry": {
+      "contracts": [
+        "adopted-geography",
+        "cadastral-geometry",
+        "plant-population"
+      ]
+    },
+    "survey.BinomialStratum": {
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    "survey.FiniteStratum": {
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    "temporal.WorkingCalendar": {
+      "contracts": [
+        "calendar"
+      ]
+    }
+  },
+  "clock_binding": "Each clock uses its exact accepted B consumer and anchor; the consumer's predicate, declared-evidence and performance contracts supply events. Numeric magnitude/unit/ordering remain B-owned. Calendar convention remains C-owned.",
+  "parameter_binding": "Each B parameter retains its exact accepted consumer and applicability. Observed quantities and population/method scope use that consumer's declared-evidence and callable contracts; source-stated constants are not reminted in D."
+}

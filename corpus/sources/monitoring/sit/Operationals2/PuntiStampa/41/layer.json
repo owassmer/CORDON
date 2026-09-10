@@ -1,0 +1,290 @@
+{
+  "currentVersion": 10.11,
+  "id": 41,
+  "name": "Piante infette-Monitoraggio 2022",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "CODICE_CAMPIONAMENTO = '2022' AND STATO = 'VALIDATO'",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 40,
+    "name": "Monitoraggio 2022"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "simple",
+      "symbol": {
+        "type": "esriPMS",
+        "url": "de521389afe7ac6b2813403e1c15e187",
+        "imageData": "iVBORw0KGgoAAAANSUhEUgAAABYAAAAUCAYAAACJfM0wAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAp5JREFUOI2t1EFIk2EYwPH/1vRDam0ygj7oMIL6Bh7y4BBHuakzb1uXgkprIoJJYQsk7KBDNigXRJ4jxIPYQVaXtqWTHWIVCIleJkgIJUOQT8cSe53bulisoTLJ5/g+z/vjfR4eXh1Hi1PAz3IKdUeEnwL3jxWWZblGVdV7QggfsH5scFNTU9fExIQWuAa8OjZ4e3v7ptvtJp1O34nH48cGXwyFQmcXFxex2+02wAhs/jfc0dHRbTabqampwW6350OhkAsYLxe+oSiK1ev1Xq6qqjpdXBSNRs87nU40Gg3t7e0VRqPxpcPheFxck8lk1gOBwOdUKhUHwsXw25WVFVtPT0+9oiiF/v5+rVarBcDpdFJbWwtAQ0MD6XTamMvljADZbJaBgYGCqqp5IAZES1+8I4R4CHxYWloaW1hYEH6//5xer/+nRVmW6ezsBGBjYyPX29u7pqpqTpKkW0KIj/uN4k+8By6Njo6Ox2Ix49TUVKWiKJWlRXNzcxmXy1WRSqW+AF1CiI2DZlwcKeDq8vKy32KxPNnc3MRgMPxNrq6uYrVa9cAj4MV+wGFbUXA4HGmz2VwwGAwagN3dXXQ6HbIs09ramp+env520OVD181kMnncbremUCgwOzur9vX1nRwbG9PW1dVVeDwerclk6p6cnHx3VPhMJBKx+Hw+hoaG1kZGRiRgtK2t7cHw8PCvxsZGfTAYbAEqgGzZsM1mu55MJjUejyeTSCSWgHbguxDi9eDg4Bur1Xphfn6+SpKkFiFEpGy4urr69tbWVi6RSASBAJDfSyVVVbXG4/FnQF9zc/PdcDhcNmyYmZkxAVeAT/vkd4QQXkmSouFw+DlwAsiVA+uFEPVA+qCOAPZG8BWopuSPPgj+cRhYEmv7Hf4G/oX/y61u1QsAAAAASUVORK5CYII=",
+        "contentType": "image/png",
+        "width": 16,
+        "height": 15,
+        "angle": 0,
+        "xoffset": 0,
+        "yoffset": 0
+      },
+      "label": "",
+      "description": ""
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 556103.5377,
+    "ymin": 4477713.5064,
+    "xmax": 734797.9183,
+    "ymax": 4638537.5595,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "RISULTATO",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 20,
+      "domain": null
+    },
+    {
+      "name": "SINTOMI",
+      "type": "esriFieldTypeString",
+      "alias": "SINTOMI",
+      "length": 20,
+      "domain": null
+    },
+    {
+      "name": "STRUTTURA_LABORATORIO",
+      "type": "esriFieldTypeString",
+      "alias": "STRUTTURA_LABORATORIO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SQUADRA",
+      "type": "esriFieldTypeString",
+      "alias": "SQUADRA",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 100,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    },
+    {
+      "name": "LONGITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "Longitudine",
+      "domain": null
+    },
+    {
+      "name": "LATITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "Latitudine",
+      "domain": null
+    },
+    {
+      "name": "COMUNE",
+      "type": "esriFieldTypeString",
+      "alias": "COMUNE",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "CODICE_CAMPIONAMENTO",
+      "type": "esriFieldTypeString",
+      "alias": "CODICE_CAMPIONAMENTO",
+      "length": 20,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeInteger",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "DATA_RILIEVO",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_RILIEVO",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "PROT_SELGE",
+      "type": "esriFieldTypeString",
+      "alias": "PROT_SELGE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "LNK_DOCUMENTO_SELGE",
+      "type": "esriFieldTypeString",
+      "alias": "LNK_DOCUMENTO_SELGE",
+      "length": 200,
+      "domain": null
+    },
+    {
+      "name": "COD_COMUNE",
+      "type": "esriFieldTypeString",
+      "alias": "COD_COMUNE",
+      "length": 5,
+      "domain": null
+    },
+    {
+      "name": "SEZIONE",
+      "type": "esriFieldTypeString",
+      "alias": "SEZIONE",
+      "length": 5,
+      "domain": null
+    },
+    {
+      "name": "FOGLIO",
+      "type": "esriFieldTypeInteger",
+      "alias": "FOGLIO",
+      "domain": null
+    },
+    {
+      "name": "PARTICELLA",
+      "type": "esriFieldTypeInteger",
+      "alias": "PARTICELLA",
+      "domain": null
+    },
+    {
+      "name": "ID_PART",
+      "type": "esriFieldTypeString",
+      "alias": "ID PARTICELLA",
+      "length": 30,
+      "domain": null
+    },
+    {
+      "name": "ZONA_DELIMITATA",
+      "type": "esriFieldTypeString",
+      "alias": "ZONA_DELIMITATA",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "NOTE",
+      "type": "esriFieldTypeString",
+      "alias": "NOTE",
+      "length": 500,
+      "domain": null
+    },
+    {
+      "name": "STATO",
+      "type": "esriFieldTypeString",
+      "alias": "STATO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "DATA_PROT_SELGE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_PROT_SELGE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "NOTE_SIT",
+      "type": "esriFieldTypeString",
+      "alias": "NOTE_SIT",
+      "length": 500,
+      "domain": null
+    },
+    {
+      "name": "BUFFER",
+      "type": "esriFieldTypeString",
+      "alias": "BUFFER",
+      "length": 10,
+      "domain": null
+    },
+    {
+      "name": "BP_PPTR",
+      "type": "esriFieldTypeString",
+      "alias": "BP_PPTR",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "UCP_PPTR",
+      "type": "esriFieldTypeString",
+      "alias": "UCP_PPTR",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "PAI",
+      "type": "esriFieldTypeString",
+      "alias": "PAI",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "VINCOLO_IDROGEOLOGICO",
+      "type": "esriFieldTypeString",
+      "alias": "VINCOLO_IDROGEOLOGICO",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "NOTE_RILEVATORE",
+      "type": "esriFieldTypeString",
+      "alias": "NOTE_RILEVATORE",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "SCELTA_PROPRIETARIO",
+      "type": "esriFieldTypeString",
+      "alias": "SCELTA_PROPRIETARIO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "MONUMENTALE_ARIF",
+      "type": "esriFieldTypeString",
+      "alias": "MONUMENTALE_ARIF",
+      "length": 50,
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

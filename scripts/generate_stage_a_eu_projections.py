@@ -3,9 +3,11 @@
 Projection only: keeps each CSV's existing column set; stable_provision_id is the qualified canonical id."""
 import csv, json
 from pathlib import Path
+from verify_stage_a import verify_result_references
 ROOT = Path(__file__).resolve().parents[1]
 SA = ROOT / 'regulation/stage-a'
 rows = json.loads((SA / 'authoring-eu.json').read_text(encoding='utf-8'))
+verify_result_references(rows, rows)
 
 def header(path):
     with path.open(newline='', encoding='utf-8') as f:
@@ -16,7 +18,7 @@ def flat(v):
 
 def write(path, fields, recs):
     with path.open('w', newline='', encoding='utf-8') as f:
-        w = csv.DictWriter(f, fieldnames=fields, extrasaction='ignore'); w.writeheader()
+        w = csv.DictWriter(f, fieldnames=fields, extrasaction='ignore', lineterminator='\n'); w.writeheader()
         for r in recs: w.writerow({k: flat(r.get(k)) for k in fields})
 
 pv_fields = header(SA / 'provision-versions.csv')

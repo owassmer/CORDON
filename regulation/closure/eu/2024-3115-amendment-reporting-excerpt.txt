@@ -1,0 +1,10 @@
+EUR-Lex primary-text excerpt; whitespace normalized from retrieved HTML paragraphs.
+Source: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R3115
+Published: 2024-12-16
+Retrieved: 2026-09-04
+Scope: Article 1(4), replacement of Article 22(3), first subparagraph; Article 3.
+
+Member States shall report to the Commission and the other Member States, by 30 April of each year, the results of the surveys referred to in paragraph 1 which were carried out in the preceding calendar year. Those reports shall include information on where the surveys were conducted, the timing of the surveys, the pests and the plants, plant products or other objects concerned, the number of inspections and samples taken, and the finding of each pest concerned. Those reports shall be submitted through the electronic notification system referred to in Article 103.
+
+This Regulation shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union.
+Article 1, point (14), shall apply from 6 July 2026.

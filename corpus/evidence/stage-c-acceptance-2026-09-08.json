@@ -1,0 +1,103 @@
+{
+  "schema": "cordon-stage-c-acceptance-v1",
+  "accepted_by": "Owen Wassmer",
+  "act": "I accept. Prepare to open D.",
+  "date": "2026-09-08",
+  "review_record": "corpus/evidence/stage-c-derivation-2026-09-08.md",
+  "reviewed_package_sha256": "d9a45ed835facef91360126053533322507e9bbdb67bf2f98b746a07e578a33a",
+  "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
+  "accepted_amendment": {
+    "path": "corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json",
+    "sha256": "904a34eaa597c4c200f3960682375ea68f16a9d9a70d1c81ccfb65d1b97c7cd0"
+  },
+  "upstream_before": {
+    "A": {
+      "eu": {
+        "path": "regulation/stage-a/authoring-eu.json",
+        "sha256": "7411f4251b1e6843f11dbac0c579e9373e352fccc6b42187621b60ab8ffbb0be",
+        "provision_versions": 123
+      },
+      "italy_and_puglia": {
+        "path": "regulation/jurisdiction/canonical/authoring.json",
+        "sha256": "b0423ccd58387aa6aca857ef8be10aba7abcef067287aa163109400bd59205db",
+        "provision_versions": 432,
+        "national_prefix_rows": 219,
+        "national_prefix_sha256": "bb5a100f3c5f1d50c51f706e141de17453b372443a87b66167c082f893da7c68"
+      }
+    },
+    "B": {
+      "path": "regulation/stage-b/clocks-and-parameters.json",
+      "sha256": "40c4a498f59928d2b21b25dbc03aafced131cc02b948c189074b2eb54dfe36f1",
+      "schema": "stage-b-essence-v6",
+      "counts": {
+        "clocks": 142,
+        "parameters": 56,
+        "dispositions": 815
+      }
+    },
+    "population": {
+      "path": "regulation/stage-b/population.json",
+      "sha256": "95b0dc884fc743bb82f9b500e57a29c9c7a6cff85e26e0a1bd46561614b52169",
+      "seams": {
+        "1": 150,
+        "2": 100,
+        "3": 126,
+        "4": 179
+      }
+    }
+  },
+  "upstream_after": {
+    "A": {
+      "eu": {
+        "path": "regulation/stage-a/authoring-eu.json",
+        "sha256": "7411f4251b1e6843f11dbac0c579e9373e352fccc6b42187621b60ab8ffbb0be",
+        "provision_versions": 123
+      },
+      "italy_and_puglia": {
+        "path": "regulation/jurisdiction/canonical/authoring.json",
+        "sha256": "1398dd1be2c734fc6a1c635463f7c99165d13cdeb7bb39aa2400e13fafe246ed",
+        "provision_versions": 442,
+        "national_prefix_rows": 219,
+        "national_prefix_sha256": "bb5a100f3c5f1d50c51f706e141de17453b372443a87b66167c082f893da7c68"
+      }
+    },
+    "B": {
+      "path": "regulation/stage-b/clocks-and-parameters.json",
+      "sha256": "efa7650b93978b91a30b82d9c9c30955e873334d7824057e97c7fcd8f6b0dc85",
+      "schema": "stage-b-essence-v6",
+      "counts": {
+        "clocks": 142,
+        "parameters": 169,
+        "dispositions": 929
+      }
+    },
+    "population": {
+      "path": "regulation/stage-b/population.json",
+      "sha256": "d00217fcf1729d94723b1ea5a7bd15f3e1acde3bbda85f6f4b994eeadf4228e6",
+      "seams": {
+        "1": 160,
+        "2": 100,
+        "3": 126,
+        "4": 179
+      }
+    }
+  },
+  "promotion": "Exact additions appended to owners; previous A rows, B clocks/parameters/dispositions and population members retained. All four B acceptance bindings renewed because they include whole A/population hashes. Implementation unchanged; status documentation and amendment-loading test must reflect promotion.",
+  "promoted_package_sha256": "6f053bb34a9d4801716387d5e943d826b2e501a92256985938b944ed19a4bd44",
+  "post_acceptance_updates": [
+    {
+      "path": "regulation/stage-c/SPEC.md",
+      "reviewed_sha256": "ac9800420eb2ae2dcd55b2297c8199c33b649582582618e031bffc286e30702b",
+      "promoted_sha256": "d466258b8813878116257ed111f1de8de70529b3195c55d508f6282505043cb7",
+      "diff": "--- reviewed/regulation/stage-c/SPEC.md\n+++ promoted/regulation/stage-c/SPEC.md\n@@ -5,12 +5,12 @@\n next gate belong to [`CURRENT`](../../state/CURRENT.json). Execution evidence\n and method adjudication are recorded in the\n [dated derivation](../../corpus/evidence/stage-c-derivation-2026-09-08.md).\n-The package is the candidate resulting from the requested second fan-out and\n-local adjudicated repairs. Review is not acceptance; CURRENT owns that status. The regional survey additions are a separately marked\n-[A/B amendment candidate](../../corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json).\n-They are exercised through explicitly constructed review snapshots, never loaded\n-as accepted authority by `Snapshot.load()`. Closure requires acceptance and\n-promotion of the reviewed upstream additions as well as acceptance of C.\n+The regional survey additions have been accepted and promoted into the A/B\n+owners. `Snapshot.load()` consumes those owners normally. The original\n+[amendment snapshot](../../corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json)\n+is retained as dated evidence; its original proposal status describes the reviewed\n+snapshot. Acceptance, convergence and promotion are recorded in the\n+[acceptance record](../../corpus/evidence/stage-c-acceptance-2026-09-08.json).\n \n ## Contract\n \n@@ -235,9 +235,9 @@\n ## Calendar conventions and remaining input boundary\n \n The completed research was collectively adjudicated in the dated derivation.\n-The above methods and following calendar conventions are the candidate C position\n-under review, not claims that every convention is expressly stated in a\n-plant-health act.\n+The methods and calendar conventions below are the accepted C position. Their\n+evidential footing does not imply that every convention is expressly stated in\n+a plant-health act.\n \n `calendar-rules.json` assigns every quantified clock once. `clock_boundary` uses\n that assignment by default, including through the ordinary election,\n@@ -261,17 +261,16 @@\n   deadlines retain Sunday/public-holiday extension; physical removal and\n   commencement do not become procedural submissions by association.\n - Express working-day clocks use Monday–Friday excluding applicable public holidays.\n-  This is the candidate administrative convention; holiday coverage and any\n+  This is the accepted administrative convention; holiday coverage and any\n   established special counting rule must be qualified by D. Contact opening hours\n   do not prove an executor's actual working schedule.\n - Source hour clocks use exact elapsed time; same-day custody ends at the next\n   local midnight. Neither becomes working days or invokes EU1182's distinct\n   exclusion of the initial clock hour as its justification.\n \n-The amendment candidate owns the proposed regional source quantities, retaining\n-area, campaign and risk qualifications and independent Union requirements. An\n-explicitly constructed review snapshot exercises its effect; accepted-owner loading\n-remains unchanged. Displayed population estimates and table totals cannot set\n+The A/B owners now contain the accepted regional source quantities, retaining\n+area, campaign and risk qualifications and independent Union requirements.\n+Ordinary accepted-owner loading exercises their effect. Displayed population estimates and table totals cannot set\n future populations or certify assurance.\n \n Geography continues to use adopted geometry, the supplied operative hectare\n"
+    },
+    {
+      "path": "regulation/stage-c/test_reference.py",
+      "reviewed_sha256": "82fa07839a09b84cc9f319b43bd31a5f8a9f9f4fd293844227d8afb07e4c2210",
+      "promoted_sha256": "c4bd5669fab190ed4cdb097aab3172ef1ca7b7240e5c45054d5d3a98114da03a",
+      "diff": "--- reviewed/regulation/stage-c/test_reference.py\n+++ promoted/regulation/stage-c/test_reference.py\n@@ -1084,22 +1084,24 @@\n         result=evaluate(snapshot,'EU-2020-1201:6(2)(b)',AT,facts=bound)\n         self.assertTrue(result.truth)\n \n-    def test_proposed_regional_targets_have_material_consumer_effect(self):\n+    def test_accepted_regional_targets_have_material_consumer_effect(self):\n         from cordon_c.survey import FiniteStratum, survey_design_adequacy\n         from cordon_c.quantities import planned_sample_difference\n         snapshot=Snapshot.load(); root=Path(__file__).resolve().parents[2]\n         proposal=json.loads((root/'corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json').read_text())\n         self.assertEqual(proposal['status'],'PROPOSED_FOR_REVIEW_NOT_ACCEPTED')\n-        # Candidate is explicitly constructed for review; production loading still\n-        # requires the accepted owners. No provisional override in Snapshot.load.\n-        ledger=dict(clocks=list(snapshot.clocks.values()),parameters=list(snapshot.parameters.values())+proposal['stage_b_additions']['parameters'],dispositions=snapshot.dispositions+proposal['stage_b_additions']['dispositions'])\n-        candidate=Snapshot(list(snapshot.versions.values())+proposal['stage_a_additions'],ledger)\n+        # The accepted owner now contains the exact reviewed additions. The\n+        # unchanged proposal remains dated evidence, not a runtime ledger.\n+        for row in proposal['stage_a_additions']:\n+            self.assertEqual(snapshot.versions[row['provision_version_id']],row)\n+        for row in proposal['stage_b_additions']['parameters']:\n+            self.assertEqual(snapshot.quantity(row['parameter_id'],AT),row)\n+        candidate=snapshot\n         strata=(FiniteStratum(Decimal(100000),1,.55,1000),)\n         kw=dict(population_and_method_qualification=Evaluation(True),required_risk_structure=Evaluation(True),independence_established=True)\n         self.assertTrue(survey_design_adequacy(candidate,'B-PAR-EU-15(4)-C90-p1',AT,strata,**kw).truth)\n         self.assertFalse(survey_design_adequacy(candidate,'B-PAR-DGR1075-T4-olive-design',AT,strata,**kw).truth)\n         self.assertEqual(planned_sample_difference(candidate,'B-PAR-DGR1075-T4-olive-high-samples',AT,5000),116)\n-        with self.assertRaises(KeyError): snapshot.quantity('B-PAR-DGR1075-T4-olive-design',AT)\n \n \n if __name__ == \"__main__\":\n"
+    }
+  ],
+  "implementation_unchanged": true,
+  "promotion_verification": "Exact append equality verified for A, all B substantive collections and population. Every C package file except status documentation and the promoted-owner regression is byte-identical to the convergently reviewed snapshot. Changes to those two files are preserved as diffs above."
+}

@@ -1,0 +1,31 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/9",
+  "name": "Altre Aree - Campioni 2024 sub. pauca",
+  "captured_from": "2026-09-10T21:26:25.986238+00:00",
+  "captured_through": "2026-09-10T21:26:28.805011+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1420,
+  "unique_oids": 1420,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "d4040eab1783ccde2f72f72cedb39742e7541d547114fd7c588208592651afa4"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "9ebeaa3847d9e735ecf6386dd26e54cc0ce55b9654fa1f86c1c8f4b245eb8953"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "0d4bdfe1e46ebf53a2a87d37ed00ca24f42dcdc5a6efc85438bff160555ed7eb"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 220,
+      "sha256": "cb7a4b217b237c6c4b431d6d29bb8daf65f5199f8fa678667cc365824b19761e"
+    }
+  ]
+}

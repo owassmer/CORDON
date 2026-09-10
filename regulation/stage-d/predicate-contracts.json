@@ -1,0 +1,4999 @@
+{
+  "schema": "stage-d-predicate-contracts-v1",
+  "basis": "Explicit semantic reading of the complete accepted predicate inventory; contracts are input evidence families, not additional legal conditions.",
+  "deferred_consumers": {
+    "IT-DLGS-19-2021:Art.27(3):v1": "Direct regional/central survey-proposal preparation is a separate programme-management workflow, outside CURRENT positive-finding-to-removal aperture (B Art27(3) disposition). Its completed preparation record remains admissible as an external antecedent to the adopted-programme consumer; no prospective proposal-management demand is created.",
+    "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal:v1": "Direct regional/central survey-proposal preparation is a separate programme-management workflow, outside CURRENT positive-finding-to-removal aperture (B Art27(3) disposition). Its completed preparation record remains admissible as an external antecedent to the adopted-programme consumer; no prospective proposal-management demand is created.",
+    "IT-DLGS-19-2021:Art.32(3):recovery-right:v1": "Direct exercise of post-execution recourse is a collection/payment workflow deferred by CURRENT. Retain lawful execution, necessary completion-cost determination and the legally chargeable person at their admitted consumers; this does not authorize recourse notice, collection or payment processing.",
+    "IT-DLGS-19-2021:Art.55(13):obstruction-sanction:v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-DLGS-19-2021:Art.55(13):omitted-removal-sanction:v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-DLGS-19-2021:Art.55(15):v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-DLGS-19-2021:Art.55(25):v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-DLGS-19-2021:Art.55(29):v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-DLGS-19-2021:Art.55(30):regional-sanction-competence:v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-DLGS-19-2021:Art.55(9):notification-violation:v1": "This exact A consumer concerns monetary sanction adjudication or its competence/procedure, deferred by CURRENT. Shared omission, obstruction and authority facts remain usable by separately admitted removal consumers.",
+    "IT-L689-1981:Art.13:violation-evidence-collection:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.14:immediate-contest:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.14:later-notification:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.14:untimely-notification-extinction:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.16:reduced-payment:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.17:violation-report:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.18:adjudication-process:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer.",
+    "IT-L689-1981:Art.18:defence-and-hearing-request:v1": "CURRENT aperture defers the Law 689 administrative-penalty proceeding. A retains this source meaning; no D sanction, payment, contest, defence or hearing input is demanded for this consumer."
+  },
+  "bindings": [
+    {
+      "predicate": "12 months from initial establishment",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "48-hour wait evidence missing",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "Annex II Section 2 principles satisfied",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "Annex III eligibility established",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "Annex III eligibility, exact infected-zone geography or the competent territorial selection remains legally unresolved",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "Article 10 surveys support conclusion",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "Article 16(3) leaf/branch-free verification completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "Article 34 method",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "Article 37(4)(e), 37(5), 39 and Article 42(1), 42(2)(a) and (b), 42(3) requirements, subject to the source-permitted Article 41 derogation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "Article 5(3) no-immediate-demarcation route is not applicable",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "Article 9(3) leaf/branch-free verification completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "CNR-IPSP aliquot review not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "CNR-IPSP receives the positive sample under the source route",
+      "contracts": [
+        "sample-custody",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "Commission or Member-State request for annual report established",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "Cq = 32",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "Cq = 35",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "D.lgs. 19/2021 expressly governs the administrative-sanction matter",
+      "contracts": []
+    },
+    {
+      "predicate": "DDS 18 geography",
+      "contracts": [
+        "case-prescription",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "DDS 48 predecessor",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "DDS 51 correction title",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "EN ISO/IEC 17025 accreditation covering the used method or valid derogation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "EU quarantine-pest finding requiring demarcation",
+      "contracts": [
+        "operative-act",
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "Member State notification",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "Monopoli outside effective Annex III",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "National Plant Health Committee hearing completed",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "National Plant Health Service publication completed on 9 February 2022",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "Section B subspecies identification",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "Union rules establish the sampling or analysis method or validation criteria",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "a Union quarantine pest is newly present in a part of national territory",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "a Union quarantine pest is newly present nationally",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "a Union quarantine pest is present in a relevant introduced or moving consignment",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "a buffer zone is established",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "a competent area-modification act produces new information",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "a competent regional act and adopted annexes establish the demarcated area",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "a corresponding EU reference laboratory exists",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "a demarcated area is established",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "a demarcated area is lawfully required for the eradication branch",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "a further result is inconclusive",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "a method under Article 30(1) or Article 30(2)(a)–(d) exists and is available within the national network",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "a national survey-programme cycle requires general objectives and criteria",
+      "contracts": [
+        "administrative-event",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "a national-reference-laboratory audit supports suspension",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "a particularity or complication could delay containment",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a particularity or complication could delay eradication",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a periodic audit establishes a serious nonconformity",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "a plant sample is collected within an official control",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "a plant species is found infected in a demarcated area",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "a plant-health emergency is in progress",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a proven personnel-authority defect legally defeats this official custody proof",
+      "contracts": [
+        "personnel-assignment",
+        "sample-custody",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a proven personnel-authority defect legally defeats this official execution verification",
+      "contracts": [
+        "personnel-assignment",
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof",
+      "contracts": [
+        "personnel-assignment",
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a report under Article 28(1) indicates source-listed pest presence",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "a specific convention is completed",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "a specific pest is considered for a multi-year national survey programme",
+      "contracts": [
+        "administrative-event",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "a survey at least once in the first year, in a zone at least 2,5 km around the infected zone, showing the pest absent",
+      "contracts": [
+        "adopted-geography",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "a survey is conducted",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "a valid applicable measure under this chapter prescribes implementation by the owner or holder of the land",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "a valid emergency plant-health measure or ordinance requires implementation within its stated limits and criteria",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "a valid immediate-effect exception applies",
+      "contracts": [
+        "operative-act",
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "a valid measure requires plant removal in the exact demarcated area",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "a valid official-laboratory designation has been completed",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "active applicable task/class suspension or revocation, or proven failure of a mandatory qualification of the applicable designation route",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "activity within assigned functions",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "additional ownership change",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "adult vectors are absent under source monitoring",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "adult vectors remain present under source monitoring",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "affected parcel",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "affirmative no-response evidence",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "affirmative refusal evidence",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "agricultural areas, infected and buffer zones",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "all Article 5(1)(a)–(d) conditions established",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "survey-design",
+        "survey-performance",
+        "removal-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "all other plants showing symptoms or suspected of infection",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "all replicates of the repeat return Cq between 32 and 35",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "all specified plants in the infected zone, whatever their health, immediately sampled and removed",
+      "contracts": [
+        "plant-population",
+        "survey-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "all specified plants of the species found infected in the same demarcated area",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "almond qualification",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "an Article 27 survey indicates source-listed pest presence",
+      "contracts": [
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "an EN ISO/IEC 17025 accredited official laboratory is available in the regional territory for the required task and method",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "an EPPO method lacks validation data",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "an EU reference laboratory is designated under Regulation 2017/625 Article 93",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "an accepted official sample requires analysis within the laboratory’s valid scope",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "an accredited official laboratory is selected for the regional official-control route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "an act within the complete Article 7(3) competence has been approved and requires implementation through a central ordinance",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "an adopted national survey programme includes the pest and the regional territory",
+      "contracts": [
+        "operative-act",
+        "administrative-event",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "an alleged administrative violation is established",
+      "contracts": []
+    },
+    {
+      "predicate": "an annual or multi-year national survey programme has been adopted",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "an applicable action plan or central ordinance requires implementation",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "an applicable destruction performance condition is proven unsatisfied",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "an applicable specific arrangement provides that this information need not be given immediately",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "an area is lifted under 6(2)",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "an area is lifted under 6(2), 12 months after initial establishment",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "an exact demarcated area state is legally in force",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "an existing European electronic notification concerns an official Xylella-infected plant finding",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "an individually infected plant has been found",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "an infected zone established for the purpose of eradication exists",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "an infected zone is established",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "an infected zone listed in Annex III under containment measures exists",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "an official Xylella survey is executed under the applicable survey programme or demarcated-area duty",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "an official control indicates source-listed pest presence",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "an official plant or vector sample has been collected",
+      "contracts": [
+        "analytical-result",
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "an official plant-health measure is legally applicable within the regional territory",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "an official screening result is positive",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "an official-control analysis is completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "an official-control analysis is performed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "analytical evidence lacks official plant-level attribution, including an unresolved pooled positive",
+      "contracts": [
+        "official-finding",
+        "analytical-result",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "analytical evidence missing or invalid",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "analytical result uses the DDS45-selected Harper et al. 2010 real-time PCR assay with the 2013 erratum",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "annual cycle",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "annual inspection, sampling and testing by an Annex IV test confirming the plant is not infected",
+      "contracts": [
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "annual official surveys produce results relevant to the national pest-free-area list",
+      "contracts": [
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "another Regional Plant Health Service has already validly designated the laboratory for the exact task or method",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "another pest not previously known nationally is present",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "any other plant species in case of suspicion of infection",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "apparent monumental characteristics",
+      "contracts": [
+        "plant-population",
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "applicable 2022 plan interval",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "applicable regional update centrally validated by event time",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "appropriate audit and inspection authority or lawful delegation exists, subject to the accreditation-based audit determination",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "appropriate phytosanitary treatment against the vector population in all stages, on the plants or the area",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "area inside a demarcated area",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "area outside demarcated areas",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "area where the specified pest is not known to be present",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "assigned Article 101 task",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "assigned official survey activity",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "assigned support",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "audit evidence",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "audit/inspection arrangements",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "authorized transporter assignment",
+      "contracts": [
+        "personnel-assignment",
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "authorized transporter countersigns delivery",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "authorized transporter digitally countersigns to attest delivery to the laboratory",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "authorized-product vector treatment completed in the infected zone",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "broader Article 8 all-stage treatment duty and appropriate timing satisfied",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "buffer zones",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "buffer-zone surveillance",
+      "contracts": [
+        "adopted-geography",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "cadastral and owner data received",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "cancellation effective at event time",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "central appointment",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "committee opinion",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "committee urgent-measure decision",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "competent Article 5(3) no-immediate-demarcation decision",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "competent Article 9(2) risk decision limits destruction",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "competent Article 9(2)/16(2) limited-destruction decision",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "competent Osservatorio attribution of Prefect request",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "competent Osservatorio attribution of the Prefect request",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "competent Osservatorio authorization",
+      "contracts": [
+        "operative-act",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "competent act validity is proven defective with unsettled legal consequence",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "competent authority holistic assessment of the complete five-factor source characterization",
+      "contracts": [
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "competent authority validly declines to exercise the discretion",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "competent containment area act",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "competent event-time regional containment selection established under the pre-L.R.45 text",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "competent lifting act effective",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "competent reduction act and adopted limits effective",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "competent substantive branch",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "competent territorial containment selection is operative",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "competent/NRL supervision",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "complete Article 6(2) evidence established",
+      "contracts": [
+        "operative-act",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "complete Article 7 prescription",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "complete reissued prescription",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "completed election window",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "completed suitable route",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "confirmation pending",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "confirmation requirements are not yet established and no test or laboratory disqualification is proven",
+      "contracts": [
+        "official-finding",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "confirmed infected-vector result",
+      "contracts": [
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "constituent samples tested individually by a second molecular test on a different genome region (Article 2(6)); the procedure's 'different Annex IV Section A method' is the regional restatement",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "containment execution occurred",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "containment is not exercised or is competently not exercised",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "containment is the purpose",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "containment or buffer geography",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "containment selection is not superseded or revoked",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "containment-zone provenance",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "contiguous specified plants",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "continuing Article 7(3) conditions",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "controlling publication event determined under the decree",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "copied pre-M5 population text",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "corrected annex",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "corrected municipality payload",
+      "contracts": [
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "corrected parcel/owner evidence",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "corresponding EU laboratory or lawful no-EU-laboratory route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "current owner evidence",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "day after controlling publication event",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "decision time within programme year 2026",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "decision time within the act's interval; its area state not superseded, suspended, revoked or annulled",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "decision time within this version's effective interval",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "decisive substantive inapplicability fact proven",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "detectable tissue",
+      "contracts": [
+        "analytical-result",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "different genome target",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "different-genome-region confirmation not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "digital execution record completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "distance to nearest Union land territory > 5 km",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "documented and recorded access denial or impediment",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "documented opposition or obstruction",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "ecoclimatic conditions preclude establishment in open air",
+      "contracts": [
+        "survey-design",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "effective 2022 national plan interval",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "effective Annex II population",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "effective Annex III eligibility from M4",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "effective Osservatorio prescription",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective Union Article 12 containment is lawfully available and selected for the infected zone",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "effective area law and survey evidence establish that modification is necessary",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "survey-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "effective completion prescription",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective correction act",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective designation covers the exact official task and the applicable legal route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "effective order",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective plan interval",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "effective prescription",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective prescription for the exact work",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective prescription with valid recipient notice",
+      "contracts": [
+        "operative-act",
+        "case-prescription",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "effective re-prescription",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "effective signed convention",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "effective supplement",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "entirely under containment measures",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "epidemiological unit is an authorized RUOP nursery or greenhouse production site",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "eradication execution occurred",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "eradication is the purpose",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "eradication subzone",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "event lies near unresolved original commencement and no independent later confirmation governs",
+      "contracts": [
+        "evaluation-context",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "event occurs on/after exact commencement",
+      "contracts": [
+        "evaluation-context",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "event-time designation not revoked or suspended",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "event-time evidence establishes removal outside vector flight season",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "event-time national-reference status",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "event-time plant biology",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "event-time task assignment",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "evidence establishes breach of an applicable Regulation 2017/625 Article 15 cooperation duty",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes denial of lawful access for an authorized inspection or control",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes failure to notify held imminent-danger information",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes failure to perform the Article 28(1) reporting duty",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes nonexecution of a valid applicable measure governed by a ministerial decree under this decree",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes nonexecution of a valid applicable measure governed by an ordinance under this decree",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes nonexecution of a valid applicable measure issued by a Regional Plant Health Service",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes obstruction of lawful inspection or control activity",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes partial satisfaction of Annex III requirements",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "evidence establishes that a person prevented lawful coercive plant removal",
+      "contracts": []
+    },
+    {
+      "predicate": "evidence establishes that declared application or qualification requirements are no longer satisfied",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "evidence establishes that not all Annex III requirements remain satisfied",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "evidence establishes that the owner, occupier or holder omitted a valid prescription to remove plants with a quarantine pest present",
+      "contracts": [
+        "removal-performance",
+        "boundary-context"
+      ]
+    },
+    {
+      "predicate": "evidence of current ownership",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "evidence proves 48-hour wait not satisfied",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "evidence proves a mandatory Article 31(1) condition failed",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves a mandatory Article 41 qualification or Article 3 condition absent, taking account of the Article 41 plant-health exception",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves a mandatory designation requirement is absent",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves a mandatory source custody condition failed",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "evidence proves discovery basis is not Article 15(2) monitoring",
+      "contracts": [
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "evidence proves event outside PNI binding interval",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "evidence proves independent Article 7(1)(a) or (e) ground",
+      "contracts": [
+        "plant-population",
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves no qualifying prior National Plant Health Committee opinion covers the area decision",
+      "contracts": [
+        "operative-act",
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves required notification not completed",
+      "contracts": [
+        "recipient-notice",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "evidence proves required treatment omitted",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "evidence proves territory is outside every source-listed whole/partial territory",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves the handling or presiding personnel lacked appointment, register status or assignment for the activity",
+      "contracts": [
+        "personnel-assignment",
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves the laboratory held no designation covering the task and method, lacked required accreditation without lawful derogation, or was suspended for the task at the event time",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves the laboratory is outside both eligible classes or fails the applicable qualification/derogation conditions",
+      "contracts": [
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves the national requirement incompatible with Regulation 2016/2031 Article 31(1), with unsettled legal consequence",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidence the pest was recently introduced WITH the plants, or found in a site physically protected from vectors",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "evidenced absence of any owner communication within the source-stated post-publication window",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "evidenced absence of any owner communication within the source-stated window",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "exact Ministry-site publication date established",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "exact adopted 400 m prescription population",
+      "contracts": [
+        "case-prescription",
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "exact case no-treatment direction",
+      "contracts": [
+        "operative-act",
+        "vector-biology",
+        "treatment-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "exact demarcated-area version",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "exact effective area state",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "exact higher-law derogation",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "exact infected zone effectively listed in Annex III",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "exact infected zone is not eligible under the effective Annex III",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "exact original commencement remains unresolved",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "exact plant/parcel work object",
+      "contracts": [
+        "case-prescription",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "exact work assigned to ARIF",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "exact written task and method scope",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "executor-selection evidence missing",
+      "contracts": [
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "existing official designation by the home competent authority",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "expertise/equipment/staff/impartiality/timeliness",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "express manager assignment",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "express owner refusal to execute the phytosanitary measures",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "external to regional service",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "extirpation operation performed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "failed prior service",
+      "contracts": [
+        "case-prescription",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "fastidiosa ST1 branch",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "field impracticability of whole-root extirpation",
+      "contracts": [
+        "vector-biology",
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "further resampling or repeat not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "high confidence the initial presence was isolated and no further spread occurred",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "high degree of confidence that the initial presence of the specified pest did not result in its spread",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "host plants",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "host plants located in that zone sampled and tested",
+      "contracts": [
+        "plant-population",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "identifiable constituent samples",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "identity and qualification tuple in national register at event time",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "immediate Commission and Member-State notification completed",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "immediate contest is possible",
+      "contracts": []
+    },
+    {
+      "predicate": "immediate contest occurred for the interested person",
+      "contracts": []
+    },
+    {
+      "predicate": "impartiality/staff/infrastructure/current-knowledge/emergency/biosecurity tuple",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "implementation of Article 3 plant-protection activities requires resources for plant-health measures",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "implementing designation act following public selection",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "in the plant-health area, no validated method under Article 34(1) and (2) exists for detection of the particular plant pest",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "independent direct official-execution authority",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "individual constituent remains doubtful",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "individual pool-constituent testing not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "individual positive identity",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "individual specified plant",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "individual specified plant officially designated as a plant with historic value",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "infected monumental or visually qualifying olive",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "infected zones",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "infection is currently established in the plant",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "initial analytical class = doubtful",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "inspection results indicate the plants were infected BEFORE introduction",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "survey-performance",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "interested recipient",
+      "contracts": [
+        "recipient-notice",
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "introduction-risk classification",
+      "contracts": [
+        "plant-population",
+        "survey-design",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "investigations support eradication and no further-spread risk",
+      "contracts": [
+        "operative-act",
+        "survey-design",
+        "survey-performance",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "island",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "laboratory analysis identifies plants subject to eradication or containment measures",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "laboratory is accredited for at least one Annex-listed method on a pest from the same organism group",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "laboratory is located in the same Member State as the designating competent authority",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "laboratory makes regular and significant use of those accredited methods",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "laboratory operates and is accredited in accordance with EN ISO/IEC 17025 for one or more methods similar to and representative of the other methods it uses",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "laboratory operates within a Regional Plant Health Service and satisfies Article 37 or an exact lawful derogation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "large ST1 infected population",
+      "contracts": [
+        "case-prescription",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "later official National Plant Health Service evidence independently confirms this competence-specific designation operative at the event time",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "latest completed analytical stage resolves positive or negative on valid evidence",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "lawful Article 5 reduction/no-demarcation or Article 6 lifting route",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "legally sufficient notification of that prescription to this recipient has occurred",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "material annex error",
+      "contracts": [
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "measure contributes to eradication under integrated approach",
+      "contracts": [
+        "operative-act",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "measure lies within Article 31(1) more-stringent-measure scope",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "monitoring and laboratory evidence plus competent managerial act",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "monitoring establishes that an emergency-plan update is necessary",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "municipality not yet in effective Annex III",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "mutually incompatible operative eradication and containment selections",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "national reference laboratory is situated in a Member State or an EEA contracting country",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "national register entry",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "negative result",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "new Union requirement or changed method or emergency/emerging risk",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "new pool extraction not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "no Commission or Member-State annual-report request exists for the exact period and measure scope",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "no active applicable task/class suspension or revocation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "no additional condition",
+      "contracts": []
+    },
+    {
+      "predicate": "no applicable Union method rule exists and a suitable National Plant Health Service method is officially identified and published or legally prescribed",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "no applicable Union method rule exists and a suitable characterized EPPO, IPPC or other European or international normalized method is available",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "no applicable Union method rule exists and a suitable characterized national-reference-laboratory method is available",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "no applicable Union method rule exists and a suitable internal method is developed and characterized under Annex III criteria",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "no applicable Union method rule exists and a suitable method indicated by a European reference laboratory is available",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "no cancellation effective at event time",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "no other plants found infected in the infected zone since the measures were taken, on official tests at least once in the year",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "no prohibited additional movement restriction",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "no vectors carrying the pest detected in the infected zone or its immediate vicinity since the measures, on tests twice in the flight season, concluding natural spread is excluded",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "no vectors carrying the pest detected on tests in the vicinity of those plants",
+      "contracts": [
+        "survey-design",
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "no wood retained",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "non-accredited methods are characterised under Regulation 2017/625 Annex III",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "non-agricultural areas, at least infected zones",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "noncommencement of that work by the source deadline is established",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "not found free from the specified pest",
+      "contracts": [
+        "official-finding",
+        "analytical-result",
+        "plant-population",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "not immediately subjected to sampling and molecular testing",
+      "contracts": [
+        "plant-population",
+        "survey-performance",
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "notification, recording or resampling of the persistently doubtful plant remains outstanding",
+      "contracts": [
+        "analytical-result",
+        "administrative-event",
+        "sample-custody",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "official analysis, test or diagnosis results indicate a risk to plant health or likely non-compliance",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "official confirmation is complete",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "official infected finding",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "official infected-plant finding",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "official infection finding",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "official negative result",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "official protected status",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "official protected/value designation",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "official sample analysed and result returned through the Regional Plant Health Service's official-laboratory route",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "official sample received by the first-level laboratory for evidence in the positive-finding-to-removal chain",
+      "contracts": [
+        "sample-custody",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "official tests within the area as close to the lifting as practicable, under a survey design and sampling scheme able to identify with at least 95 % confidence a 1 % level of presence of infected plants",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "official-control work requires the other regional service’s designated official laboratory",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "official-measure prescription",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "officially recognized monumental olive in the 50 m infected zone that tested negative",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "old-listed recipient knowledge",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "omitted 50 m parcel/owner relations",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "omitted parcel within exact 50 m population",
+      "contracts": [
+        "case-prescription",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "one or more aliquots remain doubtful",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "one or more assigned tasks or obligations are no longer needed",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "one or more qualifying structures are national centres of excellence for an exact pest or pest group within the competence area",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "operative Annex version, territory identity or demarcated-area exception evidence missing",
+      "contracts": [
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "operative Article 7 branch",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "operative Valle d’Itria state",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "operative eradication branch",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "operative eradication selection exists",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "operative eradication subzone",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "operative legal-area state is not established",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "owner communication within the source-stated window",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "owner elected ARIF execution",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "owner elected voluntary removal",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "owner election",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "ownership-transfer evidence",
+      "contracts": [
+        "party-land-standing"
+      ]
+    },
+    {
+      "predicate": "partial parcel intersection",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "particularly burdensome personal communication",
+      "contracts": [
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pending recognition decision",
+      "contracts": [
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "periodic area surveys produce new information",
+      "contracts": [
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "personal communication or act-specific Law 241 mass-publicity predicates",
+      "contracts": [
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pest introduction risk is confirmed",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pest introduction risk is suspected",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pest not detected in the demarcated area for four years on the Article 10 surveys",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "pest spread risk is confirmed",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pest spread risk is suspected",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pest-free geography",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "pest-free or buffer-zone provenance",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "pest-free-area state",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "pest-free-area surveillance",
+      "contracts": [
+        "adopted-geography",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "physically protected site",
+      "contracts": [
+        "plant-population",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "phytosanitary-certificate issuance",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "phytosanitary-protection justification established",
+      "contracts": [
+        "operative-act",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "plant lies in effective controlling EU population",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plant not independently infected symptomatic or suspected",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "plant not otherwise infected symptomatic or suspected",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "plant officially designated as a plant with historic value",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "plant removed under the operative branch",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "plant-specific Article 7 evidence",
+      "contracts": [
+        "operative-act",
+        "plant-population",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "plants and parcels subject to eradication or containment measures are identified",
+      "contracts": [
+        "case-prescription",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plants found infected",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plants found infected in an Annex III infected zone",
+      "contracts": [
+        "official-finding",
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plants known to be infected",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plants of other species found infected elsewhere in the demarcated area",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plants of the same species as the infected plant, whatever their health",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "plants removed under Art. 7(1)",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "plants showing symptoms indicating possible infection, or suspected of infection",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "point (e) sampling/testing results support conclusion",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "survey-design",
+        "survey-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "pool constituent identities held",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "pooled repeat remains doubtful",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "positive Annex IV molecular test",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "positive or doubtful pool result",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "positive pooled result",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "positive sample enters the source CNR-IPSP route",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "post-M5 case date",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "pre-L.R.45/2021 interval and compatibility with effective EU law",
+      "contracts": [
+        "evaluation-context",
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "pre-M4 event time",
+      "contracts": [
+        "evaluation-context"
+      ]
+    },
+    {
+      "predicate": "preceding-calendar-year Article 22(1) survey results exist",
+      "contracts": [
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "predecessor case identity",
+      "contracts": [
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "predecessor eradication order",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "predecessor infected-plant orders",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "predecessor order",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "presence officially confirmed in plants",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "presiding inspector, agent or assistant identified in the record",
+      "contracts": [
+        "personnel-assignment",
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "professional qualification",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "programme content or target-population evidence missing",
+      "contracts": [
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "proposal transmitted to inspector",
+      "contracts": [
+        "personnel-assignment",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "proven noncompliance with the D.lgs. 19/2021 Article 31(5)-(6) proposal, committee-approval or central-adoption chain for the containment selection, with unsettled legal consequence",
+      "contracts": [
+        "operative-act",
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "proven prerequisites for forced work and cost charging",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment",
+        "execution-cost"
+      ]
+    },
+    {
+      "predicate": "proven prerequisites for forced work or cost recovery",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment",
+        "execution-cost"
+      ]
+    },
+    {
+      "predicate": "public/private plant-protection laboratory satisfies Article 37 or an exact lawful derogation and a specific agreement makes it act in the name and on behalf of the designating service",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "published managerial act",
+      "contracts": [
+        "operative-act",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "qualifying branch and site",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "plant-population",
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "quality assurance",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "quality assurance system covers non-accredited methods",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "quality assurance; accredited confirmation where required",
+      "contracts": [
+        "analytical-result",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "recent introduction with the plants",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "recipient number makes personal communication impossible for the exact act",
+      "contracts": [
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "recipient number makes personal communication particularly burdensome for the exact act",
+      "contracts": [
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "record identifies plants, species and/or surface",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "reduced payment was completed",
+      "contracts": []
+    },
+    {
+      "predicate": "referenced plants/cohort not found infected in that demarcated area during prior two years",
+      "contracts": [
+        "plant-population",
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "regional 48-hour wait completed",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "regional authorization evidence",
+      "contracts": [
+        "operative-act",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "regional categorical exclusion instruction",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "removal complies with applicable Union obligations",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "removal is being organised",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "removal occurs during event-time vector flight season",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "removal of infected plants and the prescribed plants in the Bisceglie infected area is lawfully due from this recipient under this clause",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "removal of infected plants only is lawfully due from this recipient under this clause",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "removal performed without pre-treatment under the categorical November–March instruction",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "removed-plant photograph completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "repeat assay on the same extract not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "repeat extraction and Harper test not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "request established",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "requested report not submitted",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "requested report submitted",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "required Article 14 notification was completed for the person",
+      "contracts": []
+    },
+    {
+      "predicate": "required Article 14 treatment completed",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "required Article 8 treatment completed",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "required above-ground destruction of branches and foliage completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required execution record or signature evidence missing",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required owner/holder countersignature completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required primary implementation differed from prescribed terms or methods",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required primary implementation was incomplete",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required primary implementation was omitted wholly or partly",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required record or photograph evidence missing",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "required treatment completed",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "required treatment evidence missing",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "result remains doubtful after re-extraction",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "retained wood receives required phytosanitary treatment",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "retained wood receives the required phytosanitary treatment",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "risk and vector-cycle assessment",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "risk level",
+      "contracts": [
+        "survey-design",
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "risk level permits",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "root system devitalized with adequate phytosanitary treatment",
+      "contracts": [
+        "treatment-performance",
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "root system removed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "same-day delivery and refrigerated transport",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "same-day delivery in refrigerated transport",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "same-method repeat not yet completed",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "sample results negative",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "sample results positive",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "satisfactory comparative tests",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "season appropriate to detection",
+      "contracts": [
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "second molecular test on a different genome region of the same sample or extract (Article 2(6))",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "second positive Annex IV molecular test on the same plant sample or, where appropriate, the same plant extract",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "selected suitable publicity",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "selected suitable publicity route",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "similar accredited method",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "source 2 km inward band applies",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "source 5 km inward band applies",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "source act or adopted annex evidence missing",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "source act/limits held but authority or validity unresolved",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "source continues to state 5 km inward band",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "source finding of particularly burdensome personal communication",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "source finding of unlocatable recipients",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "source lifting act held but authority or validity unresolved",
+      "contracts": [
+        "operative-act",
+        "adopted-geography",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "source owner/cadastral/orthophoto evidence",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing",
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "source pre-removal-treatment exception applies",
+      "contracts": [
+        "operative-act",
+        "vector-biology",
+        "treatment-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "source pre-removal-treatment exception does not apply",
+      "contracts": [
+        "operative-act",
+        "vector-biology",
+        "treatment-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "source priority instruction for infected plants",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "source regional act and adopted annexes are held",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "source-listed pest presence is suspected",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "source-specific competent regional act and adopted annexes establish the geography",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "specified pest confirmed in a vector",
+      "contracts": [
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "specified plant other than points (c) and (d) tested negative for the presence of the specified pest",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "specified plants at the finding location",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "specified plants other than points (c) and (d)",
+      "contracts": [
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "statistically reliable risk design",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "subspecies confirmed",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "subspecies identification where required (Article 2(7))",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "substantive branch or work-object evidence missing",
+      "contracts": [
+        "operative-act",
+        "case-prescription",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "substantive prescription is valid and effective against the recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "survey design",
+      "contracts": [
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "survey design and sampling scheme able to identify with at least 90 % confidence a level of presence of infected plants of 1 %, the first 400 m surrounding the infected plants at higher risk",
+      "contracts": [
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "survey is planned under the operative DGR1075 regional design",
+      "contracts": [
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "survey results exist",
+      "contracts": [
+        "official-finding",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "survey timing",
+      "contracts": [
+        "survey-performance",
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "target population belongs to Area indenne as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST1 buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST26 Capurso buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST26 Ginosa buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST26 Santeramo in Colle buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST26 Triggiano and Noicattaro buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST53 Bari buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST53 buffer zone as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population belongs to ST53 infected zone subject to containment as defined by this source",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is Olea europaea in orchards or vineyards in remaining Puglia pest-free areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is Olea europaea in orchards or vineyards within the 1 km pest-free band around demarcated areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is Prunus sp. or Citrus sp. in remaining Puglia pest-free areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is Prunus sp. or Citrus sp. within the 1 km pest-free band around demarcated areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is Vitis sp. in remaining Puglia pest-free areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is Vitis sp. within the 1 km pest-free band around demarcated areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is the workbook-listed spontaneous-host vegetation in remaining Puglia pest-free areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "target population is the workbook-listed spontaneous-host vegetation within the 1 km pest-free band around demarcated areas",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "technical accountability to territorial service",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "technical inability to complete 50 m prescription immediately",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "territorial directions",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "territory is Abruzzo, Basilicata, Calabria, Campania, Emilia-Romagna, Friuli-Venezia Giulia, Liguria, Lombardia, Marche, Molise, Piemonte, Sardegna, Sicilia, Umbria, Valle d’Aosta, Veneto, Autonomous Province of Bolzano or Autonomous Province of Trento",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "territory is Lazio, Puglia or Toscana and lies inside an operative demarcated area at the decision time",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "territory is Lazio, Puglia or Toscana and lies outside every operative demarcated area at the decision time",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the 2026 decree becomes effective",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "the 5(3) derogation is used",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Article 15(2)(a) area",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "the Article 15(2)(b) sites",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "the Central Plant Health Service directs the data supply",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the Director of the Central Plant Health Service adopts Ordinance 10/2025",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the Law 689 Article 24 exception applies",
+      "contracts": []
+    },
+    {
+      "predicate": "the Member State decides not to establish a demarcated area immediately",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides not to immediately sample and test those specified plants",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides that the individual plant need not be removed",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides to lift the demarcated area",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides to lift the demarcation",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides to limit destruction to branches and foliage",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides to reduce the buffer zone",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Member State decides, for scientific purposes, not to remove them",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Minister undertakes designation of a national reference laboratory",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee directs the Article 13(5) activity",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee directs the coordination",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee directs the diagnostic or confirmatory support",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee has been heard",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee identifies the pest for emergency planning",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee mandates the suspension route",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee requests coordination of measures contained in an applicable action plan",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee requests implementation of measures in an applicable action plan",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee requests secretariat activation",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Committee supplies its opinion",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the National Plant Health Service requests diagnostic, confirmatory, characterization or taxonomic support within CREA-DC competence",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the Regional Plant Health Service decides the official confirmation of the finding on the diagnosis of a validly designated official laboratory (Article 14)",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the Regional Plant Health Service has received a report of actual or presumed presence of the specified pest",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the Regional Plant Health Service lawfully decides under effective EU Article 5 that immediate demarcation is unnecessary",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the Regional Plant Health Service suspects or detects the presence of the specified pest, in a plant or vector, in its territory",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the Regional Plant Health Service undertakes designation of an official laboratory",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the accepted official sample requires Xylella screening",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the accepted official sample requires subspecies identification",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the act has current operative effect, taking account of effectiveness, supersession and any resolved legal consequence of a proven defect",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "the act restricts the recipient’s legal sphere",
+      "contracts": [
+        "operative-act",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the act-specific Law 241 Article 21-bis predicates apply to the plant-health measure or ordinance",
+      "contracts": [
+        "operative-act",
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the activity lies within the designated laboratory’s listed competence",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the activity lies within the laboratory’s designated competence",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the adopted action plan assigns plant-health measures for territorial implementation",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the alleged violation is punishable by an administrative monetary sanction",
+      "contracts": []
+    },
+    {
+      "predicate": "the annual survey-programme cycle reaches regional proposal preparation",
+      "contracts": []
+    },
+    {
+      "predicate": "the applicable prescribed notification deadline has expired",
+      "contracts": []
+    },
+    {
+      "predicate": "the applicable superintendent-opinion route is resolved",
+      "contracts": [
+        "operative-act",
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the areas of Art. 15(2)(a) and (b)",
+      "contracts": [
+        "adopted-geography",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "the audit establishes failure to perform required national-reference activities",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the audit establishes loss of at least one declared requirement",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the authority concludes the plants pose no risk of further spread",
+      "contracts": [
+        "vector-biology",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the authority decides not to destroy the wood",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the buffer is reduced under 5(1)",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the communication to that recipient has been effected, including in the forms prescribed for notification to the unreachable in the cases provided by the code of civil procedure",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the competent Regional Plant Health Service issues plant-health instructions to the subject to prevent spread",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "the competent authority decides to apply the containment measures of Articles 13 to 17 instead of eradication",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the competent authority validly declines to exercise the discretion",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the confirmed finding is in a plant",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the control body is competent for the alleged violation",
+      "contracts": []
+    },
+    {
+      "predicate": "the coordination lies within the national reference laboratory’s designated competence",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the cost target is the proven offender",
+      "contracts": [
+        "party-land-standing",
+        "execution-cost",
+        "boundary-context"
+      ]
+    },
+    {
+      "predicate": "the current national plan remains in force",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the decision requires the Santeramo in Colle ST26 geometry in force 12 November – 18 December 2024",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the defence period and any requested hearing are resolved",
+      "contracts": []
+    },
+    {
+      "predicate": "the designated national reference laboratory fails to perform Article 13(5) activities",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the designated national reference laboratory loses Article 13(2) requirements",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the detected subspecies/genotype is pauca ST53",
+      "contracts": [
+        "official-finding",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "the eligible source-listed body has submitted the required application to the Central Plant Health Service",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the emergency affects the regional services’ territory",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the emergency has been validly declared through the applicable statutory route",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the exact official task falls under the Article 37 designation route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the exact official task falls under the Article 40 designation route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the exact official task falls under the Article 41 with Regulation 2021/1353 Article 3 designation route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the exact official task falls under the Article 42 designation route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the exact territorial portion is declared pest-free under the operative Annex I list",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the external laboratory satisfies Regulation 2017/625 Article 37 requirements for the exact official task",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the finding arose from the Article 15(2) monitoring",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the first useful National Plant Health Committee meeting occurs",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the infected plants are in a site of plants with particular cultural and social value designated under Article 15(2)(b)",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the infected zone is listed in Annex III",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the infected-plant finding arose in a pest-free area",
+      "contracts": [
+        "official-finding",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the infected-plant finding arose in a pest-free area or buffer zone",
+      "contracts": [
+        "official-finding",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the infected-plant finding arose in the infected zone under containment measures",
+      "contracts": [
+        "official-finding",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the initial 400 m-band surveillance has been completed",
+      "contracts": [
+        "survey-design",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "the initial authorized result is inconclusive or doubtful",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the laboratory held regional official designation at the decree’s effective start",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the laboratory holds a valid event-time designation for the exact task and method",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the laboratory holds or seeks national-reference status in an exact competence area",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the laboratory is already designated as official by the Regional Plant Health Service where it is located",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the laboratory is eligible and satisfies the applicable qualification route",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the laboratory seeks or holds official designation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the land contains infected plants subject to the measures",
+      "contracts": [
+        "case-prescription",
+        "party-land-standing",
+        "plant-population"
+      ]
+    },
+    {
+      "predicate": "the measure contains a reasoned immediate-effect clause",
+      "contracts": [
+        "operative-act",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the national reference laboratory decides to terminate its functions",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the notified infected-plant finding originated in a pest-free area or buffer zone",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the official laboratory was communicated at Union level before the decree’s effective start",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the official laboratory was published on the Article 53 website before the decree’s effective start",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the officially confirmed pest is a priority pest",
+      "contracts": [
+        "official-finding",
+        "pest-classification"
+      ]
+    },
+    {
+      "predicate": "the olive is listed as monumental under L.R. 14/2007 Article 2",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the operative regional retention policy covers this individually qualifying plant",
+      "contracts": [
+        "operative-act",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the owner opposes the authorized intervention",
+      "contracts": [
+        "owner-response",
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "the parties have an agreement for the exact task or method",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the person holds territorial authorization from the competent plant-health service",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "the person or body becomes aware of actual source-listed pest presence",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the person or body becomes aware of suspected source-listed pest presence",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the person or body holds information about an imminent pest danger",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the pest is a priority pest",
+      "contracts": [
+        "pest-classification"
+      ]
+    },
+    {
+      "predicate": "the plant has monumental or historic-interest legal status",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the plant or parts concerned have been removed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "the point or parcel lies within the geography adopted by this act and its annexes",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the presence of the specified pest is officially confirmed in the buffer zone",
+      "contracts": [
+        "official-finding",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the prior annual survey activities have produced reportable results",
+      "contracts": [
+        "administrative-event",
+        "survey-performance"
+      ]
+    },
+    {
+      "predicate": "the professional operator becomes aware of actual pest presence affecting its activity",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the professional operator becomes aware of imminent pest danger affecting its activity",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the professional operator becomes aware of suspected pest presence affecting its activity",
+      "contracts": [
+        "administrative-event",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the professional operator’s plants, plant products or other objects may be affected",
+      "contracts": [
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the property or area has legally protected landscape status",
+      "contracts": [
+        "adopted-geography",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the proposed intervention requires landscape authorization",
+      "contracts": [
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the qualifying structure completes the Article 7 application and INRPP review route",
+      "contracts": [
+        "laboratory-status",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the recovery target is the person legally obligated in the primary instance",
+      "contracts": []
+    },
+    {
+      "predicate": "the regional infected-zone definition and 10 km buffer are applied only as far as compatible with the directly applicable Regulation 2020/1201 minima",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the repeated result is inconclusive",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the repeated result is negative",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the repeated result is positive",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the requested access satisfies applicable personal-data limits and permissions",
+      "contracts": [
+        "controlled-access"
+      ]
+    },
+    {
+      "predicate": "the requested access satisfies the National Plant Health Service’s defined access methods",
+      "contracts": [
+        "controlled-access"
+      ]
+    },
+    {
+      "predicate": "the requested task lies within the external laboratory’s valid designation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the required landscape authorization has been granted",
+      "contracts": [
+        "operative-act",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the research analysis or diagnosis detects a quarantine pest",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the research analysis or diagnosis detects a regulated non-quarantine pest",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the research analysis or diagnosis detects another pest not previously reported in Italy",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the resolved event-time treatment route establishes that no pre-removal treatment triggering the regional 48-hour wait is applicable",
+      "contracts": [
+        "operative-act",
+        "vector-biology",
+        "treatment-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the restrictive measure is cautionary",
+      "contracts": [
+        "operative-act",
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the restrictive measure is sanctioning",
+      "contracts": [
+        "operative-act",
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the restrictive measure is urgent",
+      "contracts": [
+        "operative-act",
+        "recipient-notice",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the sample was collected during an official control or other official activity",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the self-control analysis or diagnosis detects a quarantine pest",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the self-control analysis or diagnosis detects a regulated non-quarantine pest",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the self-control analysis or diagnosis detects another pest not previously reported in Italy",
+      "contracts": [
+        "official-finding",
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "the signed decree is ready for publication",
+      "contracts": [
+        "operative-act",
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the signed decree is sent to the control bodies",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the source notification-based commencement deadline has elapsed",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the source-defined publicity is completed and legally effective for the access route",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the source-listed public body holds data on a source-listed pest",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the specified pest is detected outside the flight season of the vector",
+      "contracts": [
+        "vector-biology"
+      ]
+    },
+    {
+      "predicate": "the suitable publicity established by the administration for that act has been completed",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the superintendent receives the complete acts for the landscape-authorization application",
+      "contracts": [
+        "administrative-event",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the survey location is legally pest-free",
+      "contracts": [
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "the task lies within the national reference laboratory’s designated competence",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "the territorial unit’s plant-health emergency is in progress",
+      "contracts": [
+        "administrative-event"
+      ]
+    },
+    {
+      "predicate": "this act's area state is superseded, suspended, revoked or annulled",
+      "contracts": [
+        "operative-act",
+        "adopted-geography"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 115/2025 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 117/2025 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 135/2021 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 138/2024 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 147/2024 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 151/2024 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 173/2025 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 188/2024 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 2/2023 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 201/2025 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 27/2024 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 35/2026 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 4/2022 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 45/2023 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 51/2023 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 52/2024 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 6/2022 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this operative DDS 96/2023 prescription, including any applicable correction, governs this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "this plan interval chooses to exercise the eligible Article 7(3) discretion",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "this source design is operative for the campaign and has not been superseded",
+      "contracts": [
+        "operative-act",
+        "survey-design"
+      ]
+    },
+    {
+      "predicate": "time-limited/reviewed designation",
+      "contracts": [
+        "operative-act",
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "timely remedial-action status",
+      "contracts": [
+        "laboratory-status"
+      ]
+    },
+    {
+      "predicate": "timely removal cannot be performed",
+      "contracts": [
+        "removal-performance",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "treatment directed at the plants and their surroundings completed",
+      "contracts": [
+        "treatment-performance"
+      ]
+    },
+    {
+      "predicate": "tree of particular social, cultural or environmental value whose felling would have an unacceptable impact",
+      "contracts": [
+        "plant-population",
+        "protected-status",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "tree subject to specific national or Union rules for its protection",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "two assistants and driver digitally sign the handover record",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "two assistants and driver sign the handover record",
+      "contracts": [
+        "sample-custody"
+      ]
+    },
+    {
+      "predicate": "underlying Article 13/15(2) route independently valid",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "unlocatable recipients",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "urgent laboratory analysis is required",
+      "contracts": [
+        "analytical-result",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "urgent measures are necessary to eliminate spread risk from the affected area",
+      "contracts": [
+        "operative-act",
+        "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "valid Cq < 32",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "valid Cq > 32",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "valid Cq > 32 and < 35",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "valid Cq > 35 or source-defined no-Cq result",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "valid analytical evidence",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "valid assay with no Cq value",
+      "contracts": [
+        "analytical-result"
+      ]
+    },
+    {
+      "predicate": "valid assistant authority",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "valid identification credential",
+      "contracts": [
+        "personnel-assignment"
+      ]
+    },
+    {
+      "predicate": "valid injunctive prescription issued",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
+      "predicate": "valid notice",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "valid operative eradication selection",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
+      "predicate": "valid owner election of ARIF",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "valid owner self-execution or ARIF election",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "valid owner self-execution selection",
+      "contracts": [
+        "owner-response"
+      ]
+    },
+    {
+      "predicate": "valid recipient effect of the prescription",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "valid recipient notice",
+      "contracts": [
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "verbale with number and species entered in the database",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "wood retained under the source procedure",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "wood stripped of branches and foliage retained by the owner under the source procedure",
+      "contracts": [
+        "removal-performance"
+      ]
+    },
+    {
+      "predicate": "written exact task/conditions/coordination designation",
+      "contracts": [
+        "laboratory-status"
+      ]
+    }
+  ]
+}

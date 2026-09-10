@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/52",
+  "name": "Campioni del 2016 lungo infrastrutture trasporti",
+  "captured_from": "2026-09-10T21:29:01.127042+00:00",
+  "captured_through": "2026-09-10T21:29:22.164869+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 86,
+  "unique_oids": 86,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 86,
+      "sha256": "d04199066bbd9b7d0b058f8b185e4f3e7013576ed4c20e5545410a23141a1aa9"
+    }
+  ]
+}

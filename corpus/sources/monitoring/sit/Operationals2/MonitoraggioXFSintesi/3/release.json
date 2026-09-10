@@ -1,0 +1,126 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/3",
+  "name": "Fruttiferi - Campioni 2025 sub. pauca",
+  "captured_from": "2026-09-10T21:26:25.985995+00:00",
+  "captured_through": "2026-09-10T21:26:31.362703+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 8935,
+  "unique_oids": 8935,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "c63c994465d6ff0043321c463efe81d7962044b5e5c8c9985c15524532899260"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "193fc13b563a428a7eb0538fa555aa3cd21c45a8887798f4dba13805da96db46"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "0233505b851192e21cdc6ee63ffe4c568da123e27553e9d3f737a4b07ecc39b2"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "9f438e44115b963ee326ff83b878548e382e76bb7626346b10086e22aa2327b5"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "9f84dedafa9c794dacdd0cbacfe1cc0a0c765e727a09f53a928241c92a52832e"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "6ff70a6bd9a6f0dc419deca2349e678ad5e6a712dd6825149e19e9f8ab0b81a3"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "dee32dd4a8ef283cd4128e6db0a82f52bb2a2893d1c37a180b645ffbdb65b8c4"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "b33dc602a205c7b03bd87fb2c72333e0c16234790399f59d3f802378e24c3b87"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "37edc7e632292a6449adea4702d99927d349cbbf701b9792794fa83ea0469633"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "5a2f0583f3e74467e55a46a59c5230c253eb4a6b3768464e2c130de7c7d5c56a"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "51c656de079d44ea8012af097c6470c2fc4d46f725331bc5279eae137f0394e5"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "c22e7b3f4fac07b84ee059f5356152f88d852bf1dac6c5a2801a34752ce2ae81"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "2668a4c6e413acbfc264625752a25b00035b9bf2eca3dfd47120246854967627"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "e81aeea003a4d124e509474a6a1b6c9242d468b037f3c3a748a98b8b8f994e88"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 400,
+      "sha256": "fe6e1ef48f22c569d1276ebcb3fdac09abcc22db7a1c4110581614c76d72db41"
+    },
+    {
+      "path": "00006000.json.gz",
+      "rows": 400,
+      "sha256": "a160bc98eb1ca44c3f9984e78a136f22f9a57fb277603d34f56b6d307c742a5a"
+    },
+    {
+      "path": "00006400.json.gz",
+      "rows": 400,
+      "sha256": "686f3f7d8695158852abdbc1f8af7a894a6bdd586cd92655c44fcb172754a6fd"
+    },
+    {
+      "path": "00006800.json.gz",
+      "rows": 400,
+      "sha256": "eb0e3630deadabd77070e3620b63de08bebedd5c9b4ae539075eb6d23a568e20"
+    },
+    {
+      "path": "00007200.json.gz",
+      "rows": 400,
+      "sha256": "b3ead6036302e8304f5e13ef7de2159c3a2fa2bc6f13e93eccd52c551e982602"
+    },
+    {
+      "path": "00007600.json.gz",
+      "rows": 400,
+      "sha256": "f26d432f4c13a87a8e043ee77ea37b4b6ea7d97e729811307aee0af6921c6a08"
+    },
+    {
+      "path": "00008000.json.gz",
+      "rows": 400,
+      "sha256": "7b21b1e3d41cffa55cadbb5b9f4eb13c27a03d662c9f47b89d7ecbcf6a5dc5a4"
+    },
+    {
+      "path": "00008400.json.gz",
+      "rows": 400,
+      "sha256": "a5cb2383d10228b87eab3fb24fd057775cde846dcc273d2303dde936886b3574"
+    },
+    {
+      "path": "00008800.json.gz",
+      "rows": 135,
+      "sha256": "8c478d02ac39798bba86d02ae55a3ae72d21d0b782d9eeefa559d71d31e2be5f"
+    }
+  ]
+}

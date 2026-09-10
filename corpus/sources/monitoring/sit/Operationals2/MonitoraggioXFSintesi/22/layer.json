@@ -1,0 +1,161 @@
+{
+  "currentVersion": 10.11,
+  "id": 22,
+  "name": "Olivo - Campioni 2021",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 20,
+    "name": "Campionamento 2021"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "aae9d7da655eca899a55a0e2fd843bbb",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJtJREFUGJV1zjEKwkAQheFfWd0UVqmyFh7BWxjwCCoIHsBKELEOCBapvIitp/AIYpFJtdgOgmtjEdf4ujd8PMYQRaDn4BnfTbME6Aica5hn8PgLa5gB05e1e1S3rfAGSYADAKprgZOD+w/swwYYfWoSoACWX7CCDNhF/y+qNC2H3l+biwUwiGAX749ADmDEuXEQWdGeiVibO9XLG6vvKGXv1UZYAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 7,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "Positivo",
+          "label": "POSITIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "3f3c19b931b1890e36dac1b9b8553f29",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAKdJREFUGJV10K0KwgAUxfH/lYkiJpMWH8G3cCDmiR/g8AFMgqh5MDCYfAGrS1afwhewWGzDNBkixyLCpp52Lr9w73XIZSmKofHIz51ME3aGgy+GO+P2F3owEHQSlVaQzn9CX5QTCAGwdOqJbWRcvuAdZkDzXcsmAmCcgV1RFywy6xqjnmqbvcWnD6yIAKOaO7Qg4jXgAjh9NVpPrpP8O95peyq5kaXHF2OrLxlejzw5AAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 7,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "Negativo",
+          "label": "NEGATIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "93e74ce2303ad128eae3f1526803e761",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAKNJREFUGJV10KEKwgAUheH/ymQLJpMWH8FmcdmBj6CC4AOYBBHzQDCYfBGrfRMRxGew2IZtDAfHMpBNPe1cvnDvdajmojo9e1XHTqlJRsyBSGN8e/6HJ0bA0EXrDJa/4VUeKRuADJsTa0/f7t8wZQF0iuYhhcC0DM9qkbMqr2+TZqRd4tvtA3OFYI3KobUEtkAA4LQjdR8wq76jyMCNFWR9O74BuSouyw78a5UAAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 7,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "IN ATTESA",
+          "label": "IN ATTESA",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 584798.3771,
+    "ymin": 4509165.7529,
+    "xmax": 725186.0229,
+    "ymax": 4561266.5191,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "ID_GIORNALIERO",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_GIORNALIERO",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    },
+    {
+      "name": "TIPOLOGIA",
+      "type": "esriFieldTypeString",
+      "alias": "TIPOLOGIA",
+      "length": 255,
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

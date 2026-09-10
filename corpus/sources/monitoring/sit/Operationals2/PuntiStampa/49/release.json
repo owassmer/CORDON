@@ -1,0 +1,31 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/49",
+  "name": "Piante infette-Monitoraggio 2020",
+  "captured_from": "2026-09-10T21:35:11.504419+00:00",
+  "captured_through": "2026-09-10T21:35:31.751888+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1253,
+  "unique_oids": 1253,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "e640b2a24a5648f3a01f3918ccc95a6b08ec01529d63a677a6c57009b9adc17d"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "f0ea00236e86d48ca13104d19bdeeeb0317262b08b7b8f80bcaaafeead7399ed"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "9c46a0a5513211ba1ce09e48853d5b010d74fa3be8c3c386e939b1e350bac1ca"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 53,
+      "sha256": "0b721eb4f467687df52e2ab71b40c7db51e185aa08fc9b4443e10bc45afc0e1b"
+    }
+  ]
+}

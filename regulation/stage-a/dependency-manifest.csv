@@ -29,6 +29,7 @@ EU2031-A17,multiple,EU-2016-2031,Article 17,DEPENDENCY_STUB,official confirmatio
 EU2031-A18,multiple,EU-2016-2031,Article 18,DEPENDENCY_STUB,official confirmation,establish and electronically notify demarcated area,external submission/authority record,-,-
 EU2031-A19,multiple,EU-2016-2031,Article 19,DEPENDENCY_STUB,"survey, buffer finding or lifting",review/modify/abolish area and Article 103 notifications,external submission/authority record,-,-
 EU2031-A22,multiple,EU-2016-2031,Article 22,DEPENDENCY_STUB,annual survey results,annual survey reporting,external submission/authority record,-,-
+EU2031-A22-3,2(8),EU-2016-2031,Article 22(3),IMPLEMENTED_DIRECT_DEPENDENCY,preceding-calendar-year annual survey results,report by 30 April through the Article 103 electronic system,report payload and external receipt record,directly imported by Regulation 2020/1201 Article 2(8),-
 EU2031-A25,multiple,EU-2016-2031,Article 25,DEPENDENCY_STUB,contingency-plan duty,base contingency-plan content,external submission/authority record,-,-
 EU2031-A27,multiple,EU-2016-2031,Article 27,DEPENDENCY_STUB,priority-pest official confirmation,case-specific action plan and operator communication,external submission/authority record,-,-
 EU2031-A103,multiple,EU-2016-2031,Article 103,DEPENDENCY_STUB,specified notification/report,electronic transmission through the Union system,external submission/authority record,-,-

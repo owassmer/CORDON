@@ -1,0 +1,336 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFFSintesiPrecedenti/MapServer/9",
+  "name": "Altre Aree - Campioni 2024 sub. fastidiosa",
+  "captured_from": "2026-09-10T21:35:58.810415+00:00",
+  "captured_through": "2026-09-10T21:38:33.751505+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 25981,
+  "unique_oids": 25981,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "1b5e8e2f2b62a3de4ebd69ca46dd9accc102c3df28dee04c3cb257997d69f1bb"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "21545d336d48b62424b83cba68ddf57f0ca250c8fa41c648e2515f92c743d2cc"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "6d3ab7e256ce68a4da6b99b1b5bac5e2a05f09a30c7e3b68242a3af3f0dd690f"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "ec8e013bfc633671369d86b46aeb0e5c6f58fc0032f8605f73f11cea6444ef93"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "ceb38de993a2cadc4df6befdc0dd84e8f389dd1bee8941f00c8108d0913417e2"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "3db2eaeaf134be431dfbb261004b3f32fcdfd61a05375406656bb6bdd3e791b2"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "defd5ef5d9027a3aa61e4937084fb1bf35d2740b044e556ce4ce7301a14b190c"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "6b51edf96dc2350681fb65e89662dd188426380456fdc7ac99ecd79d066028a8"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "abf0c898d6dda44b8efc73a5ad4a44cc4191441497132dd255a7e9127a90a500"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "811208dfdda8dc3c1860ce323f1fc0d7122113eaef360376769924cd275b95d0"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "2df96655ef330ede7ad5ccfe95920bfee28c20f6f9633d01a9c83fac45aa98fc"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "a66d33a4616cb66d264379725b847e7a444659d5039458aabf0728fbd5a63adf"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "07157cd6abb8a7f7595039287d71040519190f5b6e639ab96b7d92131a2a7934"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "13ecb30a3196f62509cd99fabd45968c2e72eab5c05edfdc547f5658ce96ad77"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 400,
+      "sha256": "69e606e1c7942fd030f66825961adba04916794d27ca02b28190f8689a9a96c4"
+    },
+    {
+      "path": "00006000.json.gz",
+      "rows": 400,
+      "sha256": "d849e83a13783274a3600ab89cd06a8512526be85ec1758edf1072d38f138fa8"
+    },
+    {
+      "path": "00006400.json.gz",
+      "rows": 400,
+      "sha256": "66e532737081a875df24c05afdc790a828e59b96c25d2032f408e692935b91f6"
+    },
+    {
+      "path": "00006800.json.gz",
+      "rows": 400,
+      "sha256": "bc0e2567a73ea9d282c6dcaf7755b8f83fb2b92ae5a59b71498a31de02e98b28"
+    },
+    {
+      "path": "00007200.json.gz",
+      "rows": 400,
+      "sha256": "4997e2ee0719d8414ef27bb85ace0b7b0e90c5cf0dd26065ff0710cf6537003a"
+    },
+    {
+      "path": "00007600.json.gz",
+      "rows": 400,
+      "sha256": "31dd8fbdf51c0153b2bd311650e794b438518696e7456808f18dbefe1701b6cd"
+    },
+    {
+      "path": "00008000.json.gz",
+      "rows": 400,
+      "sha256": "17c74ce23bced2d5835d6d3f61a8bed3ee2b8e31465191b0ee86a128761c4737"
+    },
+    {
+      "path": "00008400.json.gz",
+      "rows": 400,
+      "sha256": "8846dcd97222e1d0b60e233842f6c1594755b6cedfc8f0791b36223940cd0ee0"
+    },
+    {
+      "path": "00008800.json.gz",
+      "rows": 400,
+      "sha256": "03a4c2f1a96b5e6e527385461e9dffd473306e74e3aa6d970fd8a3d8b4d554f1"
+    },
+    {
+      "path": "00009200.json.gz",
+      "rows": 400,
+      "sha256": "f160feea97475b9cda1a6af8e001a5a4e5530e03e51e1d44b38ea7256a08b5db"
+    },
+    {
+      "path": "00009600.json.gz",
+      "rows": 400,
+      "sha256": "0002c1358b8e437dfe938cce5c084eb7c5a555cd7b3cf463388d871f513353d1"
+    },
+    {
+      "path": "00010000.json.gz",
+      "rows": 400,
+      "sha256": "cddba358263a64692d346e3b67ed24e676b328f3fb5c2b21d7fcd79e3e6afab9"
+    },
+    {
+      "path": "00010400.json.gz",
+      "rows": 400,
+      "sha256": "9318b623cdc4e9e911925c818009d1f673492ee38cfe2c126fb16bb1af714c05"
+    },
+    {
+      "path": "00010800.json.gz",
+      "rows": 400,
+      "sha256": "d548b0d1aabfbc4451207d75a0027b1a74eca5a78cb11d502c5d56ad2ef5045c"
+    },
+    {
+      "path": "00011200.json.gz",
+      "rows": 400,
+      "sha256": "db61cf41677a7b3aea5d2687be46b3ab956ef89c46d91001eb9f495a67781245"
+    },
+    {
+      "path": "00011600.json.gz",
+      "rows": 400,
+      "sha256": "c1c14212a3955d31c9d6d3987b2960f40fad8531bec15b35b1c933995c36e77a"
+    },
+    {
+      "path": "00012000.json.gz",
+      "rows": 400,
+      "sha256": "278b2f8429549d07f2a03c5ad21b374852c4e717e05db80bdd89b6ae079d96df"
+    },
+    {
+      "path": "00012400.json.gz",
+      "rows": 400,
+      "sha256": "839a7358d9d25eaf379b61f830df594f23fb343f25ce8152ff0293d49754885f"
+    },
+    {
+      "path": "00012800.json.gz",
+      "rows": 400,
+      "sha256": "735c6ef7607e826f28f95562b25cbd63d38490e78f370a688fdd771b993d679c"
+    },
+    {
+      "path": "00013200.json.gz",
+      "rows": 400,
+      "sha256": "96cabfaf872877b47999c5ad8b3ae2f699e313de013f354e3e5b2638e4498174"
+    },
+    {
+      "path": "00013600.json.gz",
+      "rows": 400,
+      "sha256": "49250aebb476fae5a931b5db2ed5dbe7bbfe87308544a73b209fe75c8f556984"
+    },
+    {
+      "path": "00014000.json.gz",
+      "rows": 400,
+      "sha256": "c5ae3271ed8d56c9751a2939fdb22d52080be46e3e521d2a0dc2753390a03ba1"
+    },
+    {
+      "path": "00014400.json.gz",
+      "rows": 400,
+      "sha256": "5f4e0adadb03a2dc481256d5fb0fc3fc688308742a08c93277b48e21bbaf37e3"
+    },
+    {
+      "path": "00014800.json.gz",
+      "rows": 400,
+      "sha256": "a6a3a3047b790936310937f8c9d5d0f8bbeacc7fd176409797858e780bcf03e7"
+    },
+    {
+      "path": "00015200.json.gz",
+      "rows": 400,
+      "sha256": "8fd1f4bbb81f27f58da912fe1023e09710deebb37a3599de6d9085298b6f6444"
+    },
+    {
+      "path": "00015600.json.gz",
+      "rows": 400,
+      "sha256": "87ab8e3279e9c9166b36a5f0ae8e0462541e42691a629a80befb2ddb6256aa6e"
+    },
+    {
+      "path": "00016000.json.gz",
+      "rows": 400,
+      "sha256": "b558f95ee77cae9a263292720338eced52731e895e67cc5faef80f34e51c34c3"
+    },
+    {
+      "path": "00016400.json.gz",
+      "rows": 400,
+      "sha256": "c39e4d7613b757b42b360fa19ebd9200cacc7d8b2ba80ac8d114898d7d066b52"
+    },
+    {
+      "path": "00016800.json.gz",
+      "rows": 400,
+      "sha256": "58a0b9e9d36fdda566191d27dcedd5080a729fac287bc551751e470599dca0d3"
+    },
+    {
+      "path": "00017200.json.gz",
+      "rows": 400,
+      "sha256": "5e335b1c301209fc8fcbe2ac879648bcce33067b055d9a7e0cf9dd728ca63320"
+    },
+    {
+      "path": "00017600.json.gz",
+      "rows": 400,
+      "sha256": "852d87d4c640cc269bf94d83445e254cc08a3e6e67e03bd52b6f597685e942bc"
+    },
+    {
+      "path": "00018000.json.gz",
+      "rows": 400,
+      "sha256": "458d052239e0d1c9b816da0b618928075f79b990064feb0898b77469f18108c0"
+    },
+    {
+      "path": "00018400.json.gz",
+      "rows": 400,
+      "sha256": "7e9e84f59e6a7e47f71853618ef5c2e90bade06e4cb5a2cc5087a1d2555bdd55"
+    },
+    {
+      "path": "00018800.json.gz",
+      "rows": 400,
+      "sha256": "b7e9bbea86fe22aeec6d961b6ac185a1cc9c578b34290329c6aea35c989b8f40"
+    },
+    {
+      "path": "00019200.json.gz",
+      "rows": 400,
+      "sha256": "98ee930b0605f69ff96e86403198cbdf1ca03950b7375acb5b56674a622754dd"
+    },
+    {
+      "path": "00019600.json.gz",
+      "rows": 400,
+      "sha256": "e7fa3708318f8768c2ed1b8c28ca3988b1d4457cb122f39606a000d7f72c1796"
+    },
+    {
+      "path": "00020000.json.gz",
+      "rows": 400,
+      "sha256": "3e9c2276956d4cd76a331146d5386d04d15bf18eb228233fe14f7550c1fbf0c5"
+    },
+    {
+      "path": "00020400.json.gz",
+      "rows": 400,
+      "sha256": "b27cb768870a136e238420dd7a36aec8d2979f31dcdebe4f637cba61f93540a4"
+    },
+    {
+      "path": "00020800.json.gz",
+      "rows": 400,
+      "sha256": "1f0cba2080db8c97c7de7c3990929e502e47c067ae6f1447416ad3782b4dcd1d"
+    },
+    {
+      "path": "00021200.json.gz",
+      "rows": 400,
+      "sha256": "e3aa99beb297feb6c5bd05436bcc29c98fe8c0c33f00dc275be70e8b43ee5cd6"
+    },
+    {
+      "path": "00021600.json.gz",
+      "rows": 400,
+      "sha256": "81279e40ea780db0f0a2ee0cbae97007d5d3a548ae8b0bc129b4f7f905295cb4"
+    },
+    {
+      "path": "00022000.json.gz",
+      "rows": 400,
+      "sha256": "1225a5e7c99912d77125763a3697f3ad22cc55029a077f5ecf678fe84aedf1b0"
+    },
+    {
+      "path": "00022400.json.gz",
+      "rows": 400,
+      "sha256": "5f325b9e3a7b737da0e784955973ae0e8d50d3a2118502623966886cc04b75ee"
+    },
+    {
+      "path": "00022800.json.gz",
+      "rows": 400,
+      "sha256": "4fe1892c765143a4078af0f10a22488fc33671b7994fd5f1b91826d52fb2121c"
+    },
+    {
+      "path": "00023200.json.gz",
+      "rows": 400,
+      "sha256": "4b4929be64dc5d788b942bdfceb0e9627d57404e6b08a9b395ec844a07bc0ef5"
+    },
+    {
+      "path": "00023600.json.gz",
+      "rows": 400,
+      "sha256": "b1657ca8cae3a6fb3e3c5b0447bcf9c0e39704a3d62e03b541e5b40e09fe14d7"
+    },
+    {
+      "path": "00024000.json.gz",
+      "rows": 400,
+      "sha256": "8ab9ebd97129722b5d9d7b5d4026c002bd3b8732e5703b9656ecef923577e7f3"
+    },
+    {
+      "path": "00024400.json.gz",
+      "rows": 400,
+      "sha256": "3a79d2313f1a9ae0dccc5034b111f5716eb26dea1a38539343539a1805e81447"
+    },
+    {
+      "path": "00024800.json.gz",
+      "rows": 400,
+      "sha256": "aae6bdad6aace30f029123a2f3b868d23a833a12b896000042067fb224691bba"
+    },
+    {
+      "path": "00025200.json.gz",
+      "rows": 400,
+      "sha256": "2b367c87464bb883e911fcae1a570f1570d8791409b40521749e03ae6f7c51f5"
+    },
+    {
+      "path": "00025600.json.gz",
+      "rows": 381,
+      "sha256": "8bdf0d66e40eaaafeb81ce47c79b03da86167b41eaef76243c526d5b08834359"
+    }
+  ]
+}

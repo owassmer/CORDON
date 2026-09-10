@@ -1,0 +1,21 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFMultiplexSintesiAttuale/MapServer/2",
+  "name": "Olivo - Campioni 2026 sub. multiplex",
+  "captured_from": "2026-09-10T21:26:25.985666+00:00",
+  "captured_through": "2026-09-10T21:26:33.800483+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 545,
+  "unique_oids": 545,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "31dbd64cde07a62be82245d9ba6274773eaf5829d78ea98262766fa7a54a119d"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 145,
+      "sha256": "755aa3ed1bda8066a938af303d65a8154accc49a33badb3fb5f8bdee3288ba09"
+    }
+  ]
+}

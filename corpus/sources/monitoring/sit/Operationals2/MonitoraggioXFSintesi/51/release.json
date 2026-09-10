@@ -1,0 +1,31 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/51",
+  "name": "Positivi - campioni 2016-17",
+  "captured_from": "2026-09-10T21:28:47.833422+00:00",
+  "captured_through": "2026-09-10T21:29:19.954236+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1588,
+  "unique_oids": 1588,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "c79a82cabd52916e2dab3c4a21428f5261338ecdf8b6f3547cfe606af3400965"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "39ab2e1e30e118284d079e93f241c0214733b8a0713105624de94ceaef3f6767"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "93049a415cc751c1441f5d705c755236a28241a0c33932f0a33d94370489d90d"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 388,
+      "sha256": "59046c3f2ba6bfadd259fe242ac543adbedc0acd18617d3294027b8090368c9d"
+    }
+  ]
+}

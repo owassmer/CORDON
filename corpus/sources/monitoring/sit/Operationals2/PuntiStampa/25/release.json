@@ -1,0 +1,21 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/25",
+  "name": "Piante infette-Monitoraggio 2024 sub. multiplex",
+  "captured_from": "2026-09-10T21:34:51.931460+00:00",
+  "captured_through": "2026-09-10T21:35:04.703535+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 617,
+  "unique_oids": 617,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "9b7f657f7be111b21ef921c7370e1a8823b51acd3013e3e5a3de9c22873e4b79"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 217,
+      "sha256": "6f80777dd46708834ebede503de99338b8e436432049e049429cd26c6f676d15"
+    }
+  ]
+}

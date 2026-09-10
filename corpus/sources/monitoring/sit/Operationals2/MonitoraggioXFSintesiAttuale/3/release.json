@@ -1,0 +1,46 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesiAttuale/MapServer/3",
+  "name": "Fruttiferi - Campioni 2026 sub. pauca",
+  "captured_from": "2026-09-10T21:33:39.239564+00:00",
+  "captured_through": "2026-09-10T21:34:12.402644+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 2613,
+  "unique_oids": 2613,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "b497026e5772a6f140f1c98172c801142332364bd2fec3b749ec418d45676d08"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "f38ca62ff853d44054ac42527322c41e24d0dee4926b8e1425c1d2886995e602"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "0c06acead8ec3d7826173d37f5973ada7d57ff27de9b658f3ade076ea35d2af5"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "1ee215df794460cc09f1dd787ca74e6bbb80c4266b7ae0a3bc1d42bf127014ff"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "89121fbd13bf22b785f4b9f06ea1482fdca29cd0b90aa2abbd4842d4890fcad3"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "695bb9ebe56aede11e81f9ec62401ee1b1cb2b7053d84077e6a101904afe37d0"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 213,
+      "sha256": "b2cd6a6b111be1065e333fdb878340f250049e6dfe5dd27091972cb7c7950d2a"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 {
   "schema_version": "1.0",
   "graph_scope": "CURRENT_LATEST_VERSIONS_ONLY",
-  "historical_versions_excluded": 91,
+  "historical_versions_excluded": 94,
   "historical_provision_version_ids": [
+    "EU-2016-2031:Art.22(3):annual-survey-results-report:v1",
+    "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1",
     "IT-DM-2022-XYLELLA-PLAN:Art.1:adoption:v1",
     "IT-DM-2022-XYLELLA-PLAN:§6.2:action-plan-15-working-days:v1",
     "IT-DM-2022-XYLELLA-PLAN:§6.4:communicate-no-demarcation:v1",
@@ -72,6 +74,7 @@
     "REG-PUGLIA-U181-DIR-2022-00031:doubtful-result-route:v1",
     "REG-PUGLIA-U181-DIR-2022-00031:eradication-treatment-removal-sequence:v1",
     "REG-PUGLIA-U181-DIR-2022-00031:execution-oversight-and-record:v1",
+    "REG-PUGLIA-U181-DIR-2022-00031:first-level-analysis-registration-return:v1",
     "REG-PUGLIA-U181-DIR-2022-00031:obstruction-remedy-route:v1",
     "REG-PUGLIA-U181-DIR-2022-00031:pest-free-buffer-pool-confirmation:v1",
     "REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer:v1",
@@ -96,6 +99,16 @@
     "REG-PUGLIA-U181-DIR-2026-00004:area-state-transition:v1"
   ],
   "graphs": [
+    {
+      "stable_provision_id": "EU-2016-2031:Art.22(3):annual-survey-results-report",
+      "provision_version_id": "EU-2016-2031:Art.22(3):annual-survey-results-report:v2",
+      "operator": "ATOM",
+      "expression": {
+        "predicate": "preceding-calendar-year Article 22(1) survey results exist"
+      },
+      "true_effect": "By 30 April each year, report to the Commission and the other Member States the preceding calendar year's Article 22(1) survey results through the Article 103 electronic notification system.",
+      "false_effect": "A draft, queued transmission or attempted submission does not satisfy reporting. Insufficient evidence leaves performance unverified, not automatically breached."
+    },
     {
       "stable_provision_id": "EU-2016-2031:Art.31(2):more-stringent-measure-notification",
       "provision_version_id": "EU-2016-2031:Art.31(2):more-stringent-measure-notification:v1",
@@ -237,10 +250,13 @@
             "predicate": "corresponding EU laboratory or lawful no-EU-laboratory route"
           },
           {
-            "predicate": "Article 37/39/42 requirements or valid Article 41 derogation"
+            "predicate": "Article 37(4)(e), 37(5), 39 and Article 42(1), 42(2)(a) and (b), 42(3) requirements, subject to the source-permitted Article 41 derogation"
           },
           {
             "predicate": "impartiality/staff/infrastructure/current-knowledge/emergency/biosecurity tuple"
+          },
+          {
+            "predicate": "national reference laboratory is situated in a Member State or an EEA contracting country"
           }
         ],
         "otherwise": {
@@ -272,7 +288,7 @@
     },
     {
       "stable_provision_id": "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple",
-      "provision_version_id": "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1",
+      "provision_version_id": "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v2",
       "operator": "AND",
       "expression": {
         "all_of": [
@@ -314,6 +330,56 @@
       "false_effect": "Without either condition, this external-location route is unavailable."
     },
     {
+      "stable_provision_id": "EU-2017-625:Art.38(1):official-result-notification",
+      "provision_version_id": "EU-2017-625:Art.38(1):official-result-notification:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "official analysis, test or diagnosis results indicate a risk to plant health or likely non-compliance"
+                },
+                {
+                  "not": {
+                    "predicate": "an applicable specific arrangement provides that this information need not be given immediately"
+                  }
+                }
+              ]
+            },
+            "effect": "IMMEDIATE_LABORATORY_NOTIFICATION_REQUIRED"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "official analysis, test or diagnosis results indicate a risk to plant health or likely non-compliance"
+                },
+                {
+                  "predicate": "an applicable specific arrangement provides that this information need not be given immediately"
+                }
+              ]
+            },
+            "effect": "LABORATORY_NOTIFICATION_UNDER_SPECIFIC_ARRANGEMENT"
+          },
+          {
+            "when": {
+              "not": {
+                "predicate": "official analysis, test or diagnosis results indicate a risk to plant health or likely non-compliance"
+              }
+            },
+            "effect": "NO_ARTICLE_38_1_NOTIFICATION_DUTY"
+          }
+        ],
+        "otherwise": {
+          "effect": "LABORATORY_NOTIFICATION_APPLICABILITY_UNRESOLVED"
+        }
+      },
+      "true_effect": "Inform the designating competent authority and relevant delegated recipients immediately of risk-indicating or likely non-compliant official results, except where an applicable specific arrangement displaces immediacy.",
+      "false_effect": "No Article 38(1) notification duty without the source risk or likely-noncompliance result; a specific arrangement changes timing, not the underlying information duty."
+    },
+    {
       "stable_provision_id": "EU-2017-625:Art.39:official-laboratory-audit-status",
       "provision_version_id": "EU-2017-625:Art.39:official-laboratory-audit-status:v1",
       "operator": "AND",
@@ -330,7 +396,7 @@
           "effect": "Audit evidence alone does not withdraw status before the source remedial-action condition; missing audit/status evidence remains unresolved."
         }
       },
-      "true_effect": "Maintain audit oversight and immediately withdraw designation wholly or by task after unremedied loss of Article 37 conditions, Article 38 obligations or comparative-test performance.",
+      "true_effect": "Immediately withdraw designation wholly or by task after unremedied loss of Article 37 conditions, Article 38 obligations or comparative-test performance.",
       "false_effect": "Audit evidence alone does not withdraw status before the source remedial-action condition; missing audit/status evidence remains unresolved."
     },
     {
@@ -350,6 +416,9 @@
           },
           {
             "predicate": "quality assurance; accredited confirmation where required"
+          },
+          {
+            "predicate": "laboratory is located in the same Member State as the designating competent authority"
           }
         ],
         "otherwise": {
@@ -362,12 +431,26 @@
     {
       "stable_provision_id": "EU-2017-625:Art.41:representative-method-derogation-authority",
       "provision_version_id": "EU-2017-625:Art.41:representative-method-derogation-authority:v1",
-      "operator": "ATOM",
+      "operator": "AND",
       "expression": {
-        "provision_ref": "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation"
+        "all_of": [
+          {
+            "predicate": "laboratory operates and is accredited in accordance with EN ISO/IEC 17025 for one or more methods similar to and representative of the other methods it uses"
+          },
+          {
+            "any_of": [
+              {
+                "predicate": "laboratory makes regular and significant use of those accredited methods"
+              },
+              {
+                "predicate": "in the plant-health area, no validated method under Article 34(1) and (2) exists for detection of the particular plant pest"
+              }
+            ]
+          }
+        ]
       },
-      "true_effect": "Permit partial-method-accreditation designation only through the exact applicable delegated derogation.",
-      "false_effect": "Article 41 alone does not make a derogation available."
+      "true_effect": "Article 41 permits partial-method-accreditation designation only where the laboratory operates with EN ISO/IEC 17025 accreditation for similar and representative methods and uses those accredited methods regularly and significantly, except for the stated plant-health no-validated-detection-method case. The applicable delegated conditions must also be satisfied.",
+      "false_effect": "Failure of an Article 41 qualification defeats this derogation; meeting these qualifications alone does not establish the applicable delegated route."
     },
     {
       "stable_provision_id": "EU-2017-625:Art.42:temporary-method-designation",
@@ -386,6 +469,9 @@
           },
           {
             "predicate": "competent/NRL supervision"
+          },
+          {
+            "predicate": "laboratory is located in the same Member State as the designating competent authority"
           }
         ],
         "otherwise": {
@@ -425,6 +511,9 @@
             "when": {
               "all_of": [
                 {
+                  "provision_ref": "EU-2017-625:Art.41:representative-method-derogation-authority"
+                },
+                {
                   "predicate": "quality assurance system covers non-accredited methods"
                 },
                 {
@@ -439,7 +528,7 @@
           },
           {
             "when": {
-              "predicate": "evidence proves any mandatory Article 3 condition absent"
+              "predicate": "evidence proves a mandatory Article 41 qualification or Article 3 condition absent, taking account of the Article 41 plant-health exception"
             },
             "effect": "PARTIAL_ACCREDITATION_DEROGATION_UNAVAILABLE"
           }
@@ -448,8 +537,8 @@
           "effect": "DEROGATION_EVIDENCE_OR_ORGANISM_GROUP_INTERPRETATION_REQUIRED"
         }
       },
-      "true_effect": "Permit official-laboratory designation for the non-accredited plant-health methods only within the complete Article 3 tuple.",
-      "false_effect": "If evidence proves any mandatory Article 3 condition absent, the partial-accreditation derogation is unavailable; missing evidence remains unresolved."
+      "true_effect": "Permit official-laboratory designation for the non-accredited plant-health methods only where the Article 41 qualifications and the complete Article 3 tuple are satisfied together.",
+      "false_effect": "If evidence proves an applicable Article 41 qualification or mandatory Article 3 condition absent, the partial-accreditation derogation is unavailable; missing evidence remains unresolved."
     },
     {
       "stable_provision_id": "IT-CFN-ORD-3-2023:Annex-I:territory-list",
@@ -1283,6 +1372,11 @@
                 },
                 {
                   "predicate": "the Regional Plant Health Service suspects or detects the presence of the specified pest, in a plant or vector, in its territory"
+                },
+                {
+                  "not": {
+                    "predicate": "the Regional Plant Health Service decides the official confirmation of the finding on the diagnosis of a validly designated official laboratory (Article 14)"
+                  }
                 }
               ]
             },
@@ -2043,7 +2137,7 @@
                 }
               ]
             },
-            "effect": "PRIOR_COMMITTEE_OPINION_DUTY_BREACHED; VALIDITY_ADJUDICATION_REQUIRED"
+            "effect": "REGIONAL_AREA_DECISION_AUTHORITY_ESTABLISHED; PRIOR_COMMITTEE_OPINION_DUTY_BREACHED"
           },
           {
             "when": {
@@ -2053,6 +2147,11 @@
                 },
                 {
                   "provision_ref": "EU-2020-1201:4(1)"
+                },
+                {
+                  "not": {
+                    "predicate": "evidence proves no qualifying prior National Plant Health Committee opinion covers the area decision"
+                  }
                 }
               ]
             },
@@ -2063,7 +2162,7 @@
           "effect": "NO_DEMARCATION_FINDING"
         }
       },
-      "true_effect": "The competent Regional Plant Health Service defines the demarcated area (authority allocation); obtaining the prior National Plant Health Committee opinion is a procedural duty of that service whose proven breach is a validity question about an area act that exists.",
+      "true_effect": "The competent Regional Plant Health Service defines the demarcated area (authority allocation) and must obtain the prior National Plant Health Committee opinion. A proven breach remains a breach even where its legal consequence has been competently resolved; it does not itself remove the service's authority or establish present inoperativity.",
       "false_effect": "Without a finding requiring demarcation the authority is not engaged; missing opinion evidence is neither a breach nor a bar."
     },
     {
@@ -2924,38 +3023,25 @@
     {
       "stable_provision_id": "IT-DM-348260-2026-XYLELLA-PLAN:§8.2:action-plan-15-day-unit-conflict",
       "provision_version_id": "IT-DM-348260-2026-XYLELLA-PLAN:§8.2:action-plan-15-day-unit-conflict:v1",
-      "operator": "ROUTE_TABLE",
+      "operator": "AND",
       "expression": {
-        "route_table": [
+        "all_of": [
           {
-            "when": {
-              "all_of": [
-                {
-                  "provision_ref": "IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption"
-                },
-                {
-                  "predicate": "actual National Plant Health Committee first-measure decision"
-                },
-                {
-                  "predicate": "competent authority establishes the plan’s day unit and binding earlier legal effect"
-                }
-              ]
-            },
-            "effect": "PLAN_15_DAY_CONCURRENT_OBLIGATION_ESTABLISHED"
+            "provision_ref": "IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption"
           },
           {
-            "when": {
-              "predicate": "evidence proves the plan wording has operational guidance only and no separate binding legal effect"
-            },
-            "effect": "NO_SEPARATE_PLAN_LATENESS; STATUTORY_CLOCK_REMAINS"
+            "provision_ref": "IT-DLGS-19-2021:Art.31(4)"
+          },
+          {
+            "provision_ref": "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal"
           }
         ],
         "otherwise": {
-          "effect": "PLAN_15_DAY_UNIT_OR_LEGAL_EFFECT_INTERPRETATION_REQUIRED"
+          "effect": "The plan wording alone establishes neither an earlier legal breach nor a separate deadline; the statutory proposal obligation remains applicable."
         }
       },
-      "true_effect": "Preserve the plan’s unqualified 15-day requirement as a concurrent possible earlier obligation only if its day unit, competence and legal effect are established. The separate statutory proposition independently controls legal lateness at 15 working days.",
-      "false_effect": "Without day-unit and authority interpretation, the plan text does not prove an earlier legal breach; it does not alter the separate statutory deadline."
+      "true_effect": "Transmit the regional action-plan proposal under the statutory fifteen-working-day deadline. The plan’s unqualified fifteen-day wording does not establish a separate earlier deadline.",
+      "false_effect": "The plan wording alone establishes neither an earlier legal breach nor a separate deadline; the statutory proposal obligation remains applicable."
     },
     {
       "stable_provision_id": "IT-DM-348260-2026-XYLELLA-PLAN:§8.5:communicate-no-demarcation",
@@ -3024,8 +3110,8 @@
           "effect": "NO_DEMARCATION_ROUTE_OR_ADDITIONAL_YEAR_LEGAL_STATE_UNRESOLVED"
         }
       },
-      "true_effect": "Conduct the Union-required first follow-up year and preserve the second plan year as an additional national legal-effect gate.",
-      "false_effect": "The Union first year remains mandatory. Proven failure of the Article 31 route defeats only the additional national year; missing evidence remains unresolved."
+      "true_effect": "Conduct annual follow-up surveys for at least two years under the adopted national plan after a competent Article 5(3) no-immediate-demarcation decision. The Union first-year minimum is independently mandatory.",
+      "false_effect": "Absent the no-demarcation route this follow-up is not activated. A proven incompatibility with genuinely unsettled legal consequence requires adjudication of the additional national year, without defeating the Union minimum. Missing an Article 31 justification or notification record does not gate implementation."
     },
     {
       "stable_provision_id": "IT-DM-348260-2026-XYLELLA-PLAN:§8.6:area-composition",
@@ -3206,8 +3292,31 @@
           "effect": "CONTAINMENT_PARENT_OR_CURRENT_SURVEILLANCE_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Apply the current 2 km inward containment-surveillance band and source survey design.",
+      "true_effect": "Apply the current 2 km inward containment-surveillance band and source survey design; conduct annual vector investigations in the buffer zone and the stated infected-zone parts, with monitoring also in the listed higher-risk areas.",
       "false_effect": "Outside the operative containment branch or current plan interval, this source rule does not apply."
+    },
+    {
+      "stable_provision_id": "IT-DM-348260-2026-XYLELLA-PLAN:§9.3:eradication-vector-investigation",
+      "provision_version_id": "IT-DM-348260-2026-XYLELLA-PLAN:§9.3:eradication-vector-investigation:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "provision_ref": "IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption"
+          },
+          {
+            "result_ref": {
+              "producer_stable_provision_id": "PUG-LR4-2017:Art.3(2)",
+              "allowed_effect": "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED"
+            }
+          },
+          {
+            "provision_ref": "EU-2020-1201:10-sub3"
+          }
+        ]
+      },
+      "true_effect": "Conduct annual vector investigations throughout the eradication demarcated area and monitor the listed higher-risk locations to establish infected-vector presence, spread risk and effectiveness of control measures.",
+      "false_effect": "This rule applies only to an operative eradication area under the current plan; containment surveillance remains governed by its separate provisions."
     },
     {
       "stable_provision_id": "IT-DTU39-REV1:official-technical-instruction",
@@ -3247,13 +3356,27 @@
         "route_table": [
           {
             "when": {
-              "predicate": "the initial authorized result is inconclusive or doubtful"
+              "all_of": [
+                {
+                  "predicate": "the initial authorized result is inconclusive or doubtful"
+                },
+                {
+                  "predicate": "same-method repeat not yet completed"
+                }
+              ]
             },
             "effect": "REPEAT_USING_THE_SAME_METHOD"
           },
           {
             "when": {
-              "predicate": "the repeated result is positive"
+              "all_of": [
+                {
+                  "predicate": "the repeated result is positive"
+                },
+                {
+                  "predicate": "different-genome-region confirmation not yet completed"
+                }
+              ]
             },
             "effect": "CONFIRM_USING_A_METHOD_DIRECTED_AT_A_DIFFERENT_GENOME_REGION"
           },
@@ -3265,7 +3388,14 @@
           },
           {
             "when": {
-              "predicate": "the repeated result is inconclusive"
+              "all_of": [
+                {
+                  "predicate": "the repeated result is inconclusive"
+                },
+                {
+                  "predicate": "further resampling or repeat not yet completed"
+                }
+              ]
             },
             "effect": "RESAMPLE_OR_REPEAT_ON_THE_SAME_SAMPLE_OR_APPROPRIATE_EXTRACT_WHERE_POSSIBLE_AND_RETAIN_AN_ALIQUOT"
           },
@@ -3327,13 +3457,54 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "valid Article 37 or Articles 40–42 route-specific designation"
+                  "predicate": "effective designation covers the exact official task and the applicable legal route"
                 },
                 {
-                  "predicate": "required PT/TPS participation or source-accepted justified nonparticipation"
+                  "any_of": [
+                    {
+                      "all_of": [
+                        {
+                          "predicate": "the exact official task falls under the Article 37 designation route"
+                        },
+                        {
+                          "provision_ref": "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple"
+                        }
+                      ]
+                    },
+                    {
+                      "all_of": [
+                        {
+                          "predicate": "the exact official task falls under the Article 40 designation route"
+                        },
+                        {
+                          "provision_ref": "EU-2017-625:Art.40(1)(b):other-official-activity-derogation"
+                        }
+                      ]
+                    },
+                    {
+                      "all_of": [
+                        {
+                          "predicate": "the exact official task falls under the Article 41 with Regulation 2021/1353 Article 3 designation route"
+                        },
+                        {
+                          "provision_ref": "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation"
+                        }
+                      ]
+                    },
+                    {
+                      "all_of": [
+                        {
+                          "predicate": "the exact official task falls under the Article 42 designation route"
+                        },
+                        {
+                          "provision_ref": "EU-2017-625:Art.42:temporary-method-designation"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
-                  "predicate": "no active applicable task/class suspension"
+                  "predicate": "no active applicable task/class suspension or revocation"
                 }
               ]
             },
@@ -3341,17 +3512,17 @@
           },
           {
             "when": {
-              "predicate": "active applicable task/class suspension or proven failed mandatory route condition"
+              "predicate": "active applicable task/class suspension or revocation, or proven failure of a mandatory qualification of the applicable designation route"
             },
             "effect": "OFFICIAL_LABORATORY_UNAVAILABLE_FOR_TASK"
           }
         ],
         "otherwise": {
-          "effect": "CONTINUING_STATUS_OR_CORRECTIVE_EVIDENCE_REQUIRED"
+          "effect": "CONTINUING_STATUS_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Treat the laboratory as currently available for the exact official task only when its route-specific qualification and continuing DTU 8 status are established and no applicable task/class suspension is active.",
-      "false_effect": "An active applicable task/class suspension or proven failed mandatory route condition makes the laboratory unavailable for that official task; missing status evidence remains unresolved."
+      "true_effect": "Treat the laboratory as available for the exact official task where its effective designation and applicable route qualifications are established and no applicable task/class suspension or revocation is active. The laboratory must participate in requested PT/TPS, apply agreed corrective actions after unsatisfactory performance, and give timely reasoned notice of an impediment. On unjustified nonparticipation notified by the NRL, or NRL determination that corrective actions fail to resolve the deficiencies, the SFR, after hearing the CFN, must suspend the affected test and, for Articles 40–42, where appropriate the organism class. Suspension lasts until the deficiencies are resolved or, for unjustified nonparticipation, successful completion of the specific PT.",
+      "false_effect": "An effective applicable suspension or revocation, or a proven mandatory route-qualification failure, makes the laboratory unavailable for that official task. Missing qualification/status evidence remains unresolved; a participation breach alone is not an effective suspension."
     },
     {
       "stable_provision_id": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect",
@@ -3677,28 +3848,12 @@
     {
       "stable_provision_id": "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance",
       "provision_version_id": "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance:v1",
-      "operator": "AND",
+      "operator": "ATOM",
       "expression": {
-        "all_of": [
-          {
-            "predicate": "valid Article 5 external designation"
-          },
-          {
-            "provision_ref": "IT-DM-169819-2022:Art.9(1):official-laboratory-minimum-qualification"
-          },
-          {
-            "provision_ref": "IT-DM-169819-2022:Art.30:official-method-selection"
-          },
-          {
-            "provision_ref": "IT-DTU8-REV2:official-laboratory-route-and-continuing-status"
-          }
-        ],
-        "otherwise": {
-          "effect": "EXTERNAL_OFFICIAL_LABORATORY_ROUTE_NOT_ESTABLISHED"
-        }
+        "provision_ref": "IT-ORD10-2025:Art.5(1):external-designation"
       },
       "true_effect": "Comply with all requirements of DM 169819/2022 and National Plant Health Service Technical Document 8 while performing the external official task.",
-      "false_effect": "Without the exact continuing requirements and event-time compliance evidence, the external official route is not established; missing DTU 8 text remains unresolved rather than failed."
+      "false_effect": "Without an Article 5 designation this provision does not establish an external-laboratory route. Breach of a continuing duty engages the applicable corrective, qualification or suspension consequence; it does not by itself extinguish designation or invalidate every result."
     },
     {
       "stable_provision_id": "IT-ORD10-2025:effect-from-adoption",
@@ -3862,12 +4017,6 @@
           },
           {
             "when": {
-              "predicate": "PNI parent result = CONTENT_HELD_BINDING_INTERVAL_UNRESOLVED"
-            },
-            "effect": "SURVEY_DESIGN_CONTENT_HELD; DECISION_TIME_APPLICABILITY_UNRESOLVED"
-          },
-          {
-            "when": {
               "predicate": "evidence proves event outside PNI binding interval"
             },
             "effect": "PNI_SURVEY_DESIGN_NOT_APPLICABLE"
@@ -3922,13 +4071,32 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "effective plan interval"
+                  "all_of": [
+                    {
+                      "predicate": "effective plan interval"
+                    },
+                    {
+                      "provision_ref": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention"
+                    },
+                    {
+                      "predicate": "this plan interval chooses to exercise the eligible Article 7(3) discretion"
+                    }
+                  ]
                 },
                 {
-                  "provision_ref": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention"
-                },
-                {
-                  "predicate": "this plan interval chooses to exercise the eligible Article 7(3) discretion"
+                  "not": {
+                    "any_of": [
+                      {
+                        "predicate": "decisive substantive inapplicability fact proven"
+                      },
+                      {
+                        "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                      },
+                      {
+                        "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -3944,20 +4112,12 @@
             "when": {
               "all_of": [
                 {
-                  "all_of": [
-                    {
-                      "predicate": "effective plan interval"
-                    },
-                    {
-                      "provision_ref": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention"
-                    },
-                    {
-                      "predicate": "this plan interval chooses to exercise the eligible Article 7(3) discretion"
-                    }
-                  ]
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "evidence proves legally required approval/adoption absent or outside scope"
+                  "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
                 }
               ]
             },
@@ -3967,20 +4127,17 @@
             "when": {
               "all_of": [
                 {
-                  "all_of": [
-                    {
-                      "predicate": "effective plan interval"
-                    },
-                    {
-                      "provision_ref": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention"
-                    },
-                    {
-                      "predicate": "this plan interval chooses to exercise the eligible Article 7(3) discretion"
-                    }
-                  ]
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "approval/adoption event exists but procedural defect or effectiveness consequence is legally unsettled"
+                  "not": {
+                    "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                  }
+                },
+                {
+                  "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
                 }
               ]
             },
@@ -3991,8 +4148,8 @@
           "effect": "PLAN_ONLY_SUBSTANTIVE_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Permit case-specific retention of a qualifying plant.",
-      "false_effect": "Proven substantive inapplicability, missing substantive evidence, proven authority absence/out-of-scope and proven-defect validity adjudication remain separate. Missing approval evidence is not a gate. Independent statutory or exact case effects remain separate."
+      "true_effect": "Do not remove the individually qualifying plant covered by the adopted retention policy; no additional discretionary authorization is required.",
+      "false_effect": "Substantive inapplicability, a proven measure-defeating legal consequence, and a proven defect with genuinely unsettled operativity have distinct outcomes. Missing approval evidence or a procedural concern without that legal consequence does not gate the regional measure."
     },
     {
       "stable_provision_id": "PUG-DGR1075-2025:Convention-3.1:arif-surveillance-communication",
@@ -4035,6 +4192,260 @@
       "false_effect": "Before 6 August 2025, or for a task class outside monitoring, prevention, removal and communication support, the DGR-attached schema alone does not establish an effective assignment."
     },
     {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.10:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Ginosa buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.1:survey-method",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "survey is planned under the operative DGR1075 regional design"
+          }
+        ]
+      },
+      "true_effect": "Use the operative one-step regional survey design with its source-defined risk strata and allocation qualifications; retain separate immediate post-finding surveillance and all applicable Union requirements.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.2:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to Area indenne as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.3:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST53 infected zone subject to containment as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.4:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST53 buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.5:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST1 buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.6:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Capurso buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.7:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Triggiano and Noicattaro buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.8:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST53 Bari buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.9:survey-design",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Santeramo in Colle buffer zone as defined by this source"
+          }
+        ]
+      },
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.2.1:pest-free-extent-investigation",
+      "provision_version_id": "PUG-DGR1075-2025:§4.2.1:pest-free-extent-investigation:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "an individually infected plant has been found"
+                },
+                {
+                  "predicate": "the infected-plant finding arose in a pest-free area"
+                },
+                {
+                  "predicate": "the initial 400 m-band surveillance has been completed"
+                }
+              ]
+            },
+            "effect": "PEST_FREE_FOLLOW_ON_EXTENT_INVESTIGATION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_PEST_FREE_FOLLOW_ON_EXTENT_INVESTIGATION_AT_THIS_POINT"
+        }
+      },
+      "true_effect": "After the initial 400 m surveillance for a pest-free finding, surveil all hectares containing species specified for the detected subspecies from the buffer boundary toward the infected zone. Repeat the investigation when additional positives are found until the demarcated-area extent is established. Once boundaries are established, set risk levels and use statistical sampling in the subsequent monitoring campaign.",
+      "false_effect": "This follow-on sequence is not prescribed here for a finding originating in the buffer or containment zone, and cannot start as this phase before initial-band surveillance is completed."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.2.1:post-finding-hectare-surveillance",
+      "provision_version_id": "PUG-DGR1075-2025:§4.2.1:post-finding-hectare-surveillance:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "an individually infected plant has been found"
+                },
+                {
+                  "predicate": "the infected-plant finding arose in a pest-free area or buffer zone"
+                }
+              ]
+            },
+            "effect": "POST_FINDING_ALL_QUALIFYING_HECTARES_SURVEILLANCE_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_PLAN_PEST_FREE_BUFFER_POST_FINDING_COVERAGE_DUTY"
+        }
+      },
+      "true_effect": "Surveil every hectare containing species specified for the detected subspecies in the 400 m-wide band around the infected area. This supplies the plan coverage for the manual post-finding sampling, not an additional independent operation.",
+      "false_effect": "An annual statistical sample that leaves a qualifying hectare uncovered does not satisfy this post-finding coverage."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.2.2:st53-post-finding-sampling",
+      "provision_version_id": "PUG-DGR1075-2025:§4.2.2:st53-post-finding-sampling:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "an individually infected plant has been found"
+                },
+                {
+                  "predicate": "the infected-plant finding arose in the infected zone under containment measures"
+                },
+                {
+                  "predicate": "the detected subspecies/genotype is pauca ST53"
+                }
+              ]
+            },
+            "effect": "ST53_POST_FINDING_SAMPLING_QUALIFICATION_APPLIES"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_ST53_PLAN_SAMPLING_QUALIFICATION"
+        }
+      },
+      "true_effect": "For ST53 containment findings, sample and analyse all pauca-specified species within 50 m, except citrus, peach, apricot and plum under this regional extension. Preserve every plant independently required to be sampled by effective Article 15(1); the plan cannot displace that Union population.",
+      "false_effect": "This plan qualification does not apply outside its operative interval or ST53 containment scope."
+    },
+    {
       "stable_provision_id": "PUG-DGR1075-2025:§4.3.2:almond-pre-removal-vector-treatment",
       "provision_version_id": "PUG-DGR1075-2025:§4.3.2:almond-pre-removal-vector-treatment:v1",
       "operator": "ROUTE_TABLE",
@@ -4048,9 +4459,6 @@
                     "producer_stable_provision_id": "PUG-DGR1075-2025:§4.3.2:mandatory-almond-400m",
                     "allowed_effect": "PLAN_ONLY_EFFECT_APPLIES"
                   }
-                },
-                {
-                  "provision_ref": "EU-2020-1201:8(1)"
                 },
                 {
                   "any_of": [
@@ -4120,15 +4528,6 @@
               }
             },
             "effect": "PLAN_ONLY_EFFECT_VALIDITY_ADJUDICATION_REQUIRED"
-          },
-          {
-            "when": {
-              "result_ref": {
-                "producer_stable_provision_id": "PUG-DGR1075-2025:§4.3.2:mandatory-almond-400m",
-                "allowed_effect": "PLAN_ONLY_ROUTE_INTERPRETATION_REQUIRED"
-              }
-            },
-            "effect": "PLAN_ONLY_ROUTE_INTERPRETATION_REQUIRED"
           }
         ],
         "otherwise": {
@@ -4148,19 +4547,38 @@
             "when": {
               "all_of": [
                 {
-                  "result_ref": {
-                    "producer_stable_provision_id": "PUG-LR4-2017:Art.3(2)",
-                    "allowed_effect": "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED"
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "PUG-LR4-2017:Art.3(2)",
+                        "allowed_effect": "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED"
+                      }
+                    },
+                    {
+                      "predicate": "exact adopted 400 m prescription population"
+                    },
+                    {
+                      "predicate": "almond qualification"
+                    },
+                    {
+                      "predicate": "effective Osservatorio prescription"
+                    }
+                  ]
+                },
+                {
+                  "not": {
+                    "any_of": [
+                      {
+                        "predicate": "decisive substantive inapplicability fact proven"
+                      },
+                      {
+                        "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                      },
+                      {
+                        "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
+                      }
+                    ]
                   }
-                },
-                {
-                  "predicate": "exact adopted 400 m prescription population"
-                },
-                {
-                  "predicate": "almond qualification"
-                },
-                {
-                  "predicate": "effective Osservatorio prescription"
                 }
               ]
             },
@@ -4176,26 +4594,12 @@
             "when": {
               "all_of": [
                 {
-                  "all_of": [
-                    {
-                      "result_ref": {
-                        "producer_stable_provision_id": "PUG-LR4-2017:Art.3(2)",
-                        "allowed_effect": "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED"
-                      }
-                    },
-                    {
-                      "predicate": "exact adopted 400 m prescription population"
-                    },
-                    {
-                      "predicate": "almond qualification"
-                    },
-                    {
-                      "predicate": "effective Osservatorio prescription"
-                    }
-                  ]
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "evidence proves legally required approval/adoption absent or outside scope"
+                  "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
                 }
               ]
             },
@@ -4205,26 +4609,17 @@
             "when": {
               "all_of": [
                 {
-                  "all_of": [
-                    {
-                      "result_ref": {
-                        "producer_stable_provision_id": "PUG-LR4-2017:Art.3(2)",
-                        "allowed_effect": "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED"
-                      }
-                    },
-                    {
-                      "predicate": "exact adopted 400 m prescription population"
-                    },
-                    {
-                      "predicate": "almond qualification"
-                    },
-                    {
-                      "predicate": "effective Osservatorio prescription"
-                    }
-                  ]
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "approval/adoption event exists but procedural defect or effectiveness consequence is legally unsettled"
+                  "not": {
+                    "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                  }
+                },
+                {
+                  "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
                 }
               ]
             },
@@ -4236,7 +4631,34 @@
         }
       },
       "true_effect": "ARIF directly executes mandatory removal as a separate Article 11 eradication-support measure; owner default is not an antecedent.",
-      "false_effect": "Proven substantive inapplicability, missing substantive evidence, proven authority absence/out-of-scope and proven-defect validity adjudication remain separate. Missing approval evidence is not a gate. Independent statutory or exact case effects remain separate."
+      "false_effect": "Substantive inapplicability, a proven measure-defeating legal consequence, and a proven defect with genuinely unsettled operativity have distinct outcomes. Missing approval evidence or a procedural concern without that legal consequence does not gate the regional measure."
+    },
+    {
+      "stable_provision_id": "PUG-DGR1075-2025:§4.4:periodic-finding-notification-update",
+      "provision_version_id": "PUG-DGR1075-2025:§4.4:periodic-finding-notification-update:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "an existing European electronic notification concerns an official Xylella-infected plant finding"
+                },
+                {
+                  "predicate": "the notified infected-plant finding originated in a pest-free area or buffer zone"
+                }
+              ]
+            },
+            "effect": "EXISTING_FINDING_NOTIFICATION_UPDATE_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_EXISTING_PEST_FREE_BUFFER_PLANT_FINDING_NOTIFICATION_TO_UPDATE"
+        }
+      },
+      "true_effect": "Periodically update the existing European electronic notifications of official Xylella-infected plant findings originating in pest-free areas or buffer zones.",
+      "false_effect": "This continuing update duty is not activated without an existing electronic notification for an official infected-plant finding originating in a pest-free area or buffer zone."
     },
     {
       "stable_provision_id": "PUG-DGR1075-2025:§4.5:owner-election-execution",
@@ -4248,17 +4670,29 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "substantive prescription is valid and effective against the recipient"
-                },
-                {
                   "all_of": [
                     {
-                      "predicate": "valid recipient notice"
+                      "predicate": "substantive prescription is valid and effective against the recipient"
                     },
                     {
                       "predicate": "valid owner self-execution or ARIF election"
                     }
                   ]
+                },
+                {
+                  "not": {
+                    "any_of": [
+                      {
+                        "predicate": "decisive substantive inapplicability fact proven"
+                      },
+                      {
+                        "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                      },
+                      {
+                        "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -4274,10 +4708,12 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "substantive prescription is valid and effective against the recipient"
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "evidence proves legally required approval/adoption absent or outside scope"
+                  "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
                 }
               ]
             },
@@ -4287,10 +4723,17 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "substantive prescription is valid and effective against the recipient"
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "approval/adoption event exists but procedural defect or effectiveness consequence is legally unsettled"
+                  "not": {
+                    "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                  }
+                },
+                {
+                  "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
                 }
               ]
             },
@@ -4302,7 +4745,7 @@
         }
       },
       "true_effect": "Record the owner’s executor election; the selected owner or ARIF route then carries its source-defined ten-day execution window. SPID is an interface, not notice.",
-      "false_effect": "Proven substantive inapplicability, missing substantive evidence, proven authority absence/out-of-scope and proven-defect validity adjudication remain separate. Missing approval evidence is not a gate. Independent statutory or exact case effects remain separate."
+      "false_effect": "Substantive inapplicability, a proven measure-defeating legal consequence, and a proven defect with genuinely unsettled operativity have distinct outcomes. Missing approval evidence or a procedural concern without that legal consequence does not gate the regional measure."
     },
     {
       "stable_provision_id": "PUG-DGR1075-2025:§4.5:owner-evidence",
@@ -4314,10 +4757,29 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "affected parcel"
+                  "all_of": [
+                    {
+                      "predicate": "affected parcel"
+                    },
+                    {
+                      "predicate": "source owner/cadastral/orthophoto evidence"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "source owner/cadastral/orthophoto evidence"
+                  "not": {
+                    "any_of": [
+                      {
+                        "predicate": "decisive substantive inapplicability fact proven"
+                      },
+                      {
+                        "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                      },
+                      {
+                        "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -4333,17 +4795,12 @@
             "when": {
               "all_of": [
                 {
-                  "all_of": [
-                    {
-                      "predicate": "affected parcel"
-                    },
-                    {
-                      "predicate": "source owner/cadastral/orthophoto evidence"
-                    }
-                  ]
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "evidence proves legally required approval/adoption absent or outside scope"
+                  "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
                 }
               ]
             },
@@ -4353,17 +4810,17 @@
             "when": {
               "all_of": [
                 {
-                  "all_of": [
-                    {
-                      "predicate": "affected parcel"
-                    },
-                    {
-                      "predicate": "source owner/cadastral/orthophoto evidence"
-                    }
-                  ]
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "approval/adoption event exists but procedural defect or effectiveness consequence is legally unsettled"
+                  "not": {
+                    "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                  }
+                },
+                {
+                  "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
                 }
               ]
             },
@@ -4375,7 +4832,7 @@
         }
       },
       "true_effect": "Transmit the source owner/cadastral/orthophoto tuple to the Osservatorio within seven working days for prescription preparation.",
-      "false_effect": "Proven substantive inapplicability, missing substantive evidence, proven authority absence/out-of-scope and proven-defect validity adjudication remain separate. Missing approval evidence is not a gate. Independent statutory or exact case effects remain separate."
+      "false_effect": "Substantive inapplicability, a proven measure-defeating legal consequence, and a proven defect with genuinely unsettled operativity have distinct outcomes. Missing approval evidence or a procedural concern without that legal consequence does not gate the regional measure."
     },
     {
       "stable_provision_id": "PUG-DGR1075-2025:§4.5:prescription",
@@ -4463,20 +4920,39 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "substantive prescription is valid and effective against the recipient"
-                },
-                {
                   "all_of": [
                     {
-                      "predicate": "valid recipient notice"
+                      "predicate": "substantive prescription is valid and effective against the recipient"
                     },
                     {
-                      "predicate": "completed election window"
-                    },
-                    {
-                      "predicate": "affirmative no-response evidence"
+                      "all_of": [
+                        {
+                          "predicate": "valid recipient notice"
+                        },
+                        {
+                          "predicate": "completed election window"
+                        },
+                        {
+                          "predicate": "affirmative no-response evidence"
+                        }
+                      ]
                     }
                   ]
+                },
+                {
+                  "not": {
+                    "any_of": [
+                      {
+                        "predicate": "decisive substantive inapplicability fact proven"
+                      },
+                      {
+                        "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                      },
+                      {
+                        "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -4492,10 +4968,12 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "substantive prescription is valid and effective against the recipient"
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "evidence proves legally required approval/adoption absent or outside scope"
+                  "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
                 }
               ]
             },
@@ -4505,10 +4983,17 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "substantive prescription is valid and effective against the recipient"
+                  "not": {
+                    "predicate": "decisive substantive inapplicability fact proven"
+                  }
                 },
                 {
-                  "predicate": "approval/adoption event exists but procedural defect or effectiveness consequence is legally unsettled"
+                  "not": {
+                    "predicate": "a proven defect legally defeats the authority or operativity of this particular regional measure"
+                  }
+                },
+                {
+                  "predicate": "a proven defect leaves the operativity of this particular regional measure legally unsettled"
                 }
               ]
             },
@@ -4520,7 +5005,7 @@
         }
       },
       "true_effect": "Route the prescribed work to ARIF direct execution within the source window without reclassifying it as proven refusal or sanctionable breach.",
-      "false_effect": "Proven substantive inapplicability, missing substantive evidence, proven authority absence/out-of-scope and proven-defect validity adjudication remain separate. Missing approval evidence is not a gate. Independent statutory or exact case effects remain separate."
+      "false_effect": "Substantive inapplicability, a proven measure-defeating legal consequence, and a proven defect with genuinely unsettled operativity have distinct outcomes. Missing approval evidence or a procedural concern without that legal consequence does not gate the regional measure."
     },
     {
       "stable_provision_id": "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
@@ -4584,10 +5069,10 @@
       "provision_version_id": "PUG-LR4-2017:Art.2(3):v1",
       "operator": "ATOM",
       "expression": {
-        "predicate": "no additional condition"
+        "predicate": "the Regional Plant Health Service has received a report of actual or presumed presence of the specified pest"
       },
-      "true_effect": "Adopt measures necessary to verify the report without treating it as confirmation.",
-      "false_effect": "-"
+      "true_effect": "On receipt of a report of actual or presumed presence, adopt all measures necessary to verify that report without treating it as confirmation.",
+      "false_effect": "Without a received presence report, Article 2(3) does not activate this report-verification duty."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.2(4)",
@@ -4622,13 +5107,10 @@
                   ]
                 },
                 {
-                  "provision_ref": "EU-2020-1201:5(3)"
-                },
-                {
-                  "predicate": "all Article 5(3)(a)-(c) conditions satisfied"
-                },
-                {
-                  "predicate": "competent no-immediate-demarcation discretion validly exercised"
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:5(3)",
+                    "allowed_effect": "NO_IMMEDIATE_DEMARCATION_DECIDED"
+                  }
                 }
               ]
             },
@@ -4651,14 +5133,10 @@
                   ]
                 },
                 {
-                  "any_of": [
-                    {
-                      "predicate": "evidence proves at least one Article 5(3) condition failed"
-                    },
-                    {
-                      "predicate": "competent authority validly declines to exercise Article 5(3) discretion"
-                    }
-                  ]
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:5(3)",
+                    "allowed_effect": "ARTICLE_4_DEMARCATION_DUTY_STANDS"
+                  }
                 },
                 {
                   "provision_ref": "IT-DLGS-19-2021:Art.31(3):establish-demarcated-area"
@@ -4672,13 +5150,40 @@
               "predicate": "analytical evidence lacks official plant-level attribution, including an unresolved pooled positive"
             },
             "effect": "PLANT_IDENTITY_EVIDENCE_REQUIRED_BEFORE_AREA_GEOMETRY"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "not": {
+                    "all_of": [
+                      {
+                        "result_ref": {
+                          "producer_stable_provision_id": "IT-DLGS-19-2021:Art.28(3)",
+                          "allowed_effect": "OFFICIAL_FINDING_CONFIRMED"
+                        }
+                      },
+                      {
+                        "predicate": "the confirmed finding is in a plant"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "predicate": "analytical evidence lacks official plant-level attribution, including an unresolved pooled positive"
+                  }
+                }
+              ]
+            },
+            "effect": "NO_ARTICLE_4_PLANT_FINDING_TRIGGER"
           }
         ],
         "otherwise": {
-          "effect": "NO_ARTICLE_4_PLANT_FINDING_TRIGGER"
+          "effect": "DEMARCATION_LEGAL_STATE_UNRESOLVED"
         }
       },
-      "true_effect": "Establish a demarcated area without delay only when an official plant finding exists and the Article 5 no-immediate-demarcation route is proven unavailable or competently unexercised.",
+      "true_effect": "On an official plant finding, establish a demarcated area without delay under Article 4 unless the qualifying Article 5(3) discretion is exercised.",
       "false_effect": "Where every Article 5(3) condition is satisfied and the competent authority validly exercises the discretion, no immediate area is established and the follow-up route applies."
     },
     {
@@ -4704,18 +5209,11 @@
                   ]
                 },
                 {
-                  "predicate": "act effectiveness and supersession state resolved"
+                  "predicate": "the act has current operative effect, taking account of effectiveness, supersession and any resolved legal consequence of a proven defect"
                 },
                 {
                   "not": {
-                    "any_of": [
-                      {
-                        "predicate": "evidence proves no qualifying prior National Plant Health Committee opinion covers the area decision"
-                      },
-                      {
-                        "predicate": "competent act validity is proven defective with unsettled legal consequence"
-                      }
-                    ]
+                    "predicate": "competent act validity is proven defective with unsettled legal consequence"
                   }
                 }
               ]
@@ -4729,18 +5227,11 @@
                   "predicate": "source regional act and adopted annexes are held"
                 },
                 {
-                  "any_of": [
-                    {
-                      "predicate": "evidence proves no qualifying prior National Plant Health Committee opinion covers the area decision"
-                    },
-                    {
-                      "predicate": "competent act validity is proven defective with unsettled legal consequence"
-                    }
-                  ]
+                  "predicate": "competent act validity is proven defective with unsettled legal consequence"
                 }
               ]
             },
-            "effect": "SOURCE_STATED_GEOGRAPHY_HELD; NATIONAL_PROCEDURAL_NONCOMPLIANCE_OR_ACT_VALIDITY_ADJUDICATION_REQUIRED"
+            "effect": "SOURCE_STATED_GEOGRAPHY_HELD; ACT_VALIDITY_ADJUDICATION_REQUIRED"
           },
           {
             "when": {
@@ -4750,21 +5241,21 @@
           }
         ],
         "otherwise": {
-          "effect": "AREA_ROUTE_OR_EFFECTIVENESS_EVIDENCE_REQUIRED"
+          "effect": "AREA_ROUTE_OR_OPERATIVITY_NOT_ESTABLISHED"
         }
       },
-      "true_effect": "Treat a source-stated geography as an operative legal-area state when the competent act and adopted annexes establish it through a lawful Union route, the act is effective and not superseded, and no procedural defect is proven.",
-      "false_effect": "A held act and annex establish the source-stated geography; proven absence of the required prior committee opinion or a proven act defect sends the area to national procedural-compliance or validity adjudication; missing opinion evidence is not a gate."
+      "true_effect": "Treat a source-stated geography as an operative legal-area state when the competent act and adopted annexes establish it through a lawful Union route and the act has current operative effect, taking account of effectiveness, supersession and any resolved legal consequence of a proven defect. A historical prior-opinion breach can coexist with that operative state.",
+      "false_effect": "Missing act or annex evidence leaves source geography unresolved. A proven defect with an unsettled legal consequence requires adjudication; a resolved consequence that defeats current operative effect does not establish an operative area. Missing opinion evidence is not a gate, and resolving a consequence does not erase a historical breach."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.3(3)",
       "provision_version_id": "PUG-LR4-2017:Art.3(3):v1",
       "operator": "ATOM",
       "expression": {
-        "predicate": "no additional condition"
+        "predicate": "the presence of the specified pest is officially confirmed in the buffer zone"
       },
-      "true_effect": "Immediately modify infected and buffer delimitation through a competent act.",
-      "false_effect": "-"
+      "true_effect": "On confirmed presence in the buffer zone, immediately modify the infected-zone and buffer-zone delimitation accordingly through a competent act.",
+      "false_effect": "A finding only inside the existing infected zone does not activate the Article 3(3) buffer-finding modification duty."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.3(4):may-revoke",
@@ -4911,7 +5402,7 @@
           "effect": "survey design or timing unresolved; annual duty continues"
         }
       },
-      "true_effect": "Use statistically reliable, risk-based criteria at the appropriate time.",
+      "true_effect": "Conduct annual inspections in demarcated areas at the appropriate time, using statistically reliable risk-based criteria and current scientific and technical information.",
       "false_effect": "Survey design or timing remains unresolved; the annual duty continues."
     },
     {
@@ -4941,21 +5432,15 @@
       "expression": {
         "all_of": [
           {
-            "provision_ref": "EU-2020-1201:2(4a)"
-          },
-          {
             "predicate": "confirmed infected-vector result"
           },
           {
             "predicate": "specified plants at the finding location"
           }
-        ],
-        "otherwise": {
-          "effect": "regional location-specific sampling not established; controlling EU investigation remains independently applicable"
-        }
+        ]
       },
-      "true_effect": "As an additive regional implementation within the complete controlling 400 m investigation, sample specified plants at the vector-finding location; do not narrow the investigation radius or create a plant finding or area act.",
-      "false_effect": "No regional location-specific sampling conclusion follows; the controlling EU investigation remains independently applicable."
+      "true_effect": "Sample all specified plants at the infected-vector finding location under the regional duty. From 17 October 2024, this location-specific performance also contributes to, but cannot narrow or replace, the independently applicable complete EU Article 2(4a) 400 m investigation.",
+      "false_effect": "Without the infected-vector finding and specified plants at that location, no regional location-specific sampling follows. Any independently applicable Union investigation remains mandatory."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.4(6):vector",
@@ -5040,15 +5525,18 @@
             "predicate": "operative eradication subzone"
           },
           {
-            "predicate": "plant satisfies effective Article 7 population"
+            "result_ref": {
+              "producer_stable_provision_id": "EU-2020-1201:7(1)",
+              "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+            }
           }
         ],
         "otherwise": {
           "effect": "no removal conclusion for plant outside effective Article 7 population"
         }
       },
-      "true_effect": "Order immediate removal of infected and susceptible plants only as required by the effective higher-law population.",
-      "false_effect": "No removal conclusion follows for a plant outside the effective Article 7 population."
+      "true_effect": "Order immediate removal only for plants for which effective Article 7(1) emits IMMEDIATE_REMOVAL_REQUIRED after its applicable exceptions.",
+      "false_effect": "No removal order under this provision for a plant retained or otherwise excluded by the effective Article 7 result."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.5(4)",
@@ -5268,8 +5756,8 @@
           "effect": "CONTAINMENT_BRANCH_INPUT_OR_AREA_VALIDITY_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Select containment as the controlling substitute for eradication when the operative area is effectively listed in Annex III and the competent territorial containment selection is operative and current, with no incompatible eradication selection and no proven procedural defect.",
-      "false_effect": "Proven ineligibility, proven non-exercise or valid eradication selection controls only for a valid area and absent incompatible containment. Proven procedural noncompliance, missing eligibility/geography/selection evidence, invalid area and conflict remain separate outcomes."
+      "true_effect": "Apply containment in place of eradication for the valid, eligible infected-zone geography with a competent operative and current selection, absent an incompatible operative selection or a proven defect with legally unsettled consequence for this selection.",
+      "false_effect": "Preserve distinct outcomes for effective eradication, incompatible selections, invalid area, missing selection/eligibility evidence, and a proven defect with legally unsettled consequence for the particular containment selection."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.6(2)",
@@ -5287,17 +5775,43 @@
                   }
                 },
                 {
-                  "predicate": "official infected-plant finding"
-                },
-                {
-                  "predicate": "discovery basis = Article 15(2) monitoring"
-                },
-                {
-                  "provision_ref": "EU-2020-1201:13(1)"
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
                 }
               ]
             },
             "effect": "ARTICLE_13_REMOVAL_ACTIVATED"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
+                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
+                  }
+                },
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                    "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                  }
+                }
+              ]
+            },
+            "effect": "SCIENTIFIC_RETENTION; NO_CONTAINMENT_REMOVAL_REQUIREMENT; PRESERVE_ARTICLE_14_TREATMENT"
           },
           {
             "when": {
@@ -5368,8 +5882,8 @@
           "effect": "CONTAINMENT_PARENT_OR_ARTICLE_15_2_PROVENANCE_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Order immediate removal under Article 13 only when Article 15(2) discovery provenance is established.",
-      "false_effect": "Where evidence proves the finding did not arise from Article 15(2) monitoring, Article 13 is not established and any separate exact legal basis must be evaluated independently. Missing provenance remains unresolved."
+      "true_effect": "Order removal of the Article 13(1) infected-plant population only where removal stands after Article 13(2), with the applicable Article 13(1) immediate or next-flight-season timing.",
+      "false_effect": "Scientific retention displaces the removal requirement but preserves Article 14 treatment around retained plants. Where evidence proves the finding did not arise from Article 15(2) monitoring, Article 13 is not established and any separate exact legal basis must be evaluated independently. Missing provenance remains unresolved."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.6(3)",
@@ -5455,12 +5969,19 @@
     {
       "stable_provision_id": "PUG-LR4-2017:Art.7(1)",
       "provision_version_id": "PUG-LR4-2017:Art.7(1):v1",
-      "operator": "ATOM",
+      "operator": "OR",
       "expression": {
-        "predicate": "no additional condition"
+        "any_of": [
+          {
+            "provision_ref": "EU-2020-1201:9(1)"
+          },
+          {
+            "provision_ref": "EU-2020-1201:16(1)"
+          }
+        ]
       },
-      "true_effect": "Order in-situ destruction or removal/transport to a designated nearby place within the infected area.",
-      "false_effect": "-"
+      "true_effect": "For the applicable Article 9 or 16 destruction population, order in-situ destruction or removal/transport to a designated nearby place within the infected area, preserving lawful limited-destruction alternatives.",
+      "false_effect": "No destruction order for a living plant lawfully retained outside that population; removed infected material remains governed by the applicable destruction duty."
     },
     {
       "stable_provision_id": "PUG-LR4-2017:Art.7(2)",
@@ -5526,7 +6047,7 @@
                   "provision_ref": "EU-2020-1201:7(3)(b)"
                 },
                 {
-                  "predicate": "applicable regional policy and competent case-specific retention decision"
+                  "predicate": "the operative regional retention policy covers this individually qualifying plant"
                 }
               ]
             },
@@ -5549,7 +6070,7 @@
           "effect": "ARTICLE_7_3_DOMAIN_SAFEGUARD_OR_EXERCISE_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Make the discretionary regional retention route available only for an individual b/c/d plant satisfying both Article 7(3) safeguards and the separate Puglia policy/case exercise.",
+      "true_effect": "Do not remove an individual b/c/d plant satisfying both Article 7(3) safeguards and covered by the operative regional retention policy.",
       "false_effect": "Independent Article 7(1)(a) or (e) grounds remain controlling. Failure of a safeguard or a competent non-exercise leaves the applicable removal duty in place; missing evidence remains unresolved."
     },
     {
@@ -5574,6 +6095,42 @@
       },
       "true_effect": "Allow an alternative only where an exact higher-law derogation independently permits retention and the competent authority authorizes that precise route; no general owner-choice substitute exists.",
       "false_effect": "Mandatory infected-plant removal remains controlling."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 135/2021 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment",
@@ -5652,6 +6209,42 @@
       "false_effect": "Area remains active."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 4/2022 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1",
       "operator": "AND",
@@ -5704,6 +6297,42 @@
       "false_effect": "No duty transfer follows without exact correction, effective re-prescription and a separately valid underlying removal duty."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 6/2022 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1",
       "operator": "AND",
@@ -5748,6 +6377,78 @@
       },
       "true_effect": "Permit this act’s mass-publicity route only through its stated unlocatable-recipient and burdensome-personal-notice predicates.",
       "false_effect": "No other case notice route is validated."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 2/2023 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 45/2023 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
@@ -5796,6 +6497,78 @@
       "false_effect": "The correction title alone proves neither full replacement nor independent duplication."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 51/2023 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 96/2023 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1",
       "operator": "AND",
@@ -5817,6 +6590,42 @@
       },
       "true_effect": "For this pre-M4 event, resolve Monopoli through Valle d’Itria Article 7 eradication; Article 13 containment and the regional Piana alternative are unavailable.",
       "false_effect": "This point-in-time fork does not prove Monopoli remains eradication-only after M4."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 27/2024 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict",
@@ -5843,6 +6652,42 @@
       },
       "true_effect": "Treat infected-plant removal as supported under Article 7(1)(a), reject the premature Article 13 branch before Annex III eligibility, and record that the remaining Article 7 population was not discharged at event time.",
       "false_effect": "No valid containment selection, discharge of the complete Article 7 population, or presently executable owner-order population follows."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 52/2024 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary",
@@ -5952,6 +6797,42 @@
       "false_effect": "Outside the act's interval or adopted geography, or where its area state is superseded, suspended, revoked or annulled, no area state follows from this act."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 138/2024 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text:v1",
       "operator": "AND",
@@ -5973,6 +6854,78 @@
       },
       "true_effect": "Resolve the case through the Article 7 version effective at decision time, including the M5 alternative evidence routes; the copied pre-M5 letter (e) wording cannot narrow or enlarge the population.",
       "false_effect": "No case population is derived from stale embedded text alone."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 147/2024 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 151/2024 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text",
@@ -6042,6 +6995,42 @@
       },
       "true_effect": "Complete the parcel/owner annexes omitted from ten earlier infected-plant orders and prescribe the deferred Article 7(b)–(e) 50 m population as a distinct linked workload.",
       "false_effect": "The completion act is not a duplicate, and the earlier infected-plant removals do not satisfy the deferred population."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 188/2024 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction",
@@ -6142,13 +7131,22 @@
                   }
                 },
                 {
-                  "predicate": "containment execution occurred"
+                  "all_of": [
+                    {
+                      "predicate": "containment execution occurred"
+                    },
+                    {
+                      "predicate": "digital execution record completed"
+                    },
+                    {
+                      "predicate": "removed-plant photograph completed"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "digital execution record completed"
-                },
-                {
-                  "predicate": "removed-plant photograph completed"
+                  "not": {
+                    "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof"
+                  }
                 }
               ]
             },
@@ -6164,11 +7162,47 @@
                   }
                 },
                 {
-                  "predicate": "evidence proves the handling or presiding personnel lacked appointment, register status or assignment for the activity"
+                  "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof"
                 }
               ]
             },
             "effect": "CONTAINMENT_EXECUTION_PROOF_NONCOMPLIANT"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
+                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
+                  }
+                },
+                {
+                  "not": {
+                    "all_of": [
+                      {
+                        "predicate": "containment execution occurred"
+                      },
+                      {
+                        "predicate": "digital execution record completed"
+                      },
+                      {
+                        "predicate": "removed-plant photograph completed"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof"
+                  }
+                },
+                {
+                  "predicate": "required record or photograph evidence missing"
+                }
+              ]
+            },
+            "effect": "CONTAINMENT_EXECUTION_EVIDENCE_REQUIRED; NONEXECUTION_NOT_PROVEN"
           },
           {
             "when": {
@@ -6208,38 +7242,6 @@
           },
           {
             "when": {
-              "all_of": [
-                {
-                  "result_ref": {
-                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
-                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
-                  }
-                },
-                {
-                  "predicate": "required record, photograph or assistant-authority evidence missing"
-                }
-              ]
-            },
-            "effect": "CONTAINMENT_EXECUTION_EVIDENCE_REQUIRED; NONEXECUTION_NOT_PROVEN"
-          },
-          {
-            "when": {
-              "all_of": [
-                {
-                  "result_ref": {
-                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
-                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
-                  }
-                },
-                {
-                  "predicate": "evidence proves required execution-proof condition failed"
-                }
-              ]
-            },
-            "effect": "CONTAINMENT_EXECUTION_PROOF_NONCOMPLIANT"
-          },
-          {
-            "when": {
               "result_ref": {
                 "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
                 "allowed_effect": "CONTAINMENT_AUTHORITY_OR_SELECTION_EVIDENCE_REQUIRED"
@@ -6253,7 +7255,7 @@
         }
       },
       "true_effect": "Create the containment execution record and photograph for the removed infected plant without treating evidence as activation.",
-      "false_effect": "Missing record, photograph or assistant-authority evidence does not prove nonexecution and never satisfies completion."
+      "false_effect": "A proven defect with legally defeating consequence for this official proof prevents proof completion, not the physical occurrence of removal. Missing required record content remains an evidence gap; missing separate personnel-register evidence is not a gate."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-verification",
@@ -6271,13 +7273,38 @@
                   }
                 },
                 {
-                  "provision_ref": "EU-2020-1201:13(1)"
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
                 },
                 {
-                  "provision_ref": "EU-2020-1201:16(1)"
+                  "any_of": [
+                    {
+                      "provision_ref": "EU-2020-1201:16(1)"
+                    },
+                    {
+                      "provision_ref": "EU-2020-1201:16(2)"
+                    }
+                  ]
                 },
                 {
                   "predicate": "presiding inspector, agent or assistant identified in the record"
+                },
+                {
+                  "not": {
+                    "predicate": "a proven personnel-authority defect legally defeats this official execution verification"
+                  }
                 }
               ]
             },
@@ -6293,7 +7320,42 @@
                   }
                 },
                 {
-                  "predicate": "evidence proves the handling or presiding personnel lacked appointment, register status or assignment for the activity"
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                    "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                  }
+                }
+              ]
+            },
+            "effect": "SCIENTIFIC_RETENTION; NO_CONTAINMENT_REMOVAL_REQUIREMENT; PRESERVE_ARTICLE_14_TREATMENT"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
+                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
+                  }
+                },
+                {
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "predicate": "a proven personnel-authority defect legally defeats this official execution verification"
                 }
               ]
             },
@@ -6349,8 +7411,8 @@
           "effect": "CONTAINMENT_EXECUTION_VERIFICATION_LEGAL_STATE_UNRESOLVED"
         }
       },
-      "true_effect": "Verify that containment removal and destruction conform to the applicable legal duties without treating verification as execution itself.",
-      "false_effect": "Missing verification does not prove nonexecution; proven nonconformity remains separate from missing verification."
+      "true_effect": "Where Article 13 removal stands after the scientific non-removal exception: verify that containment removal and destruction conform to the applicable legal duties without treating verification as execution itself.",
+      "false_effect": "Scientific retention displaces the removal requirement but preserves Article 14 treatment around retained plants. Missing verification does not prove nonexecution; proven nonconformity remains separate from missing verification."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:containment-removal-population-support",
@@ -6368,7 +7430,20 @@
                   }
                 },
                 {
-                  "provision_ref": "EU-2020-1201:13(1)"
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
                 },
                 {
                   "predicate": "presiding inspector, agent or assistant identified in the record"
@@ -6376,6 +7451,25 @@
               ]
             },
             "effect": "ASSIST_CONTAINMENT_REMOVAL_POPULATION_IDENTIFICATION"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
+                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
+                  }
+                },
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                    "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                  }
+                }
+              ]
+            },
+            "effect": "SCIENTIFIC_RETENTION; NO_CONTAINMENT_REMOVAL_REQUIREMENT; PRESERVE_ARTICLE_14_TREATMENT"
           },
           {
             "when": {
@@ -6443,8 +7537,8 @@
           "effect": "CONTAINMENT_REMOVAL_POPULATION_SUPPORT_LEGAL_STATE_UNRESOLVED"
         }
       },
-      "true_effect": "Assist identification of the containment infected plants to be removed without acquiring the removal decision.",
-      "false_effect": "Outside a valid containment route or complete official authority and assignment, this support function is not established; the Regional Plant Health Service retains the decision."
+      "true_effect": "Where Article 13 removal stands after the scientific non-removal exception: assist identification of the containment infected plants to be removed without acquiring the removal decision.",
+      "false_effect": "Scientific retention displaces the removal requirement but preserves Article 14 treatment around retained plants. Outside a valid containment route or complete official authority and assignment, this support function is not established; the Regional Plant Health Service retains the decision."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion",
@@ -6467,10 +7561,10 @@
                       "provision_ref": "EU-2020-1201:16(1)"
                     },
                     {
-                      "predicate": "infected plant and relevant parts fully destroyed with no relevant wood retained"
+                      "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed"
                     },
                     {
-                      "predicate": "regional whole-root requirement completed where applicable"
+                      "predicate": "no wood retained"
                     }
                   ]
                 }
@@ -6488,30 +7582,76 @@
                   }
                 },
                 {
+                  "not": {
+                    "all_of": [
+                      {
+                        "provision_ref": "EU-2020-1201:16(1)"
+                      },
+                      {
+                        "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed"
+                      },
+                      {
+                        "predicate": "no wood retained"
+                      }
+                    ]
+                  }
+                },
+                {
                   "all_of": [
                     {
-                      "predicate": "wood retained under the source procedure"
-                    },
-                    {
-                      "predicate": "competent Article 16(2) no-further-spread conclusion"
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:16(2)",
+                        "allowed_effect": "LIMITED_DESTRUCTION_DECIDED; WOOD_TREATED_UNDER_ARTICLE_14_1; ROOTS_REMOVED_OR_DEVITALISED"
+                      }
                     },
                     {
                       "provision_ref": "EU-2020-1201:14(1)"
                     },
                     {
-                      "predicate": "retained wood receives required phytosanitary treatment"
+                      "predicate": "required above-ground destruction of branches and foliage completed"
                     },
                     {
-                      "predicate": "root system removed or devitalised to prevent resprouting"
+                      "any_of": [
+                        {
+                          "predicate": "no wood retained"
+                        },
+                        {
+                          "all_of": [
+                            {
+                              "predicate": "wood retained under the source procedure"
+                            },
+                            {
+                              "predicate": "retained wood receives required phytosanitary treatment"
+                            },
+                            {
+                              "predicate": "Article 16(3) leaf/branch-free verification completed"
+                            }
+                          ]
+                        }
+                      ]
                     },
                     {
-                      "predicate": "Article 16(3) leaf/branch-free verification completed"
+                      "any_of": [
+                        {
+                          "predicate": "root system removed"
+                        },
+                        {
+                          "all_of": [
+                            {
+                              "predicate": "field impracticability of whole-root extirpation"
+                            },
+                            {
+                              "predicate": "root system devitalized with adequate phytosanitary treatment"
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
               ]
             },
-            "effect": "ARTICLE_16_2_RETAINED_WOOD_ROUTE_COMPLETE"
+            "effect": "ARTICLE_16_2_LIMITED_DESTRUCTION_COMPLETE"
           },
           {
             "when": {
@@ -6523,11 +7663,81 @@
                   }
                 },
                 {
-                  "predicate": "retained wood exists without complete Article 16(2)–(3) conditions"
+                  "not": {
+                    "all_of": [
+                      {
+                        "provision_ref": "EU-2020-1201:16(1)"
+                      },
+                      {
+                        "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed"
+                      },
+                      {
+                        "predicate": "no wood retained"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "all_of": [
+                      {
+                        "result_ref": {
+                          "producer_stable_provision_id": "EU-2020-1201:16(2)",
+                          "allowed_effect": "LIMITED_DESTRUCTION_DECIDED; WOOD_TREATED_UNDER_ARTICLE_14_1; ROOTS_REMOVED_OR_DEVITALISED"
+                        }
+                      },
+                      {
+                        "provision_ref": "EU-2020-1201:14(1)"
+                      },
+                      {
+                        "predicate": "required above-ground destruction of branches and foliage completed"
+                      },
+                      {
+                        "any_of": [
+                          {
+                            "predicate": "no wood retained"
+                          },
+                          {
+                            "all_of": [
+                              {
+                                "predicate": "wood retained under the source procedure"
+                              },
+                              {
+                                "predicate": "retained wood receives required phytosanitary treatment"
+                              },
+                              {
+                                "predicate": "Article 16(3) leaf/branch-free verification completed"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "any_of": [
+                          {
+                            "predicate": "root system removed"
+                          },
+                          {
+                            "all_of": [
+                              {
+                                "predicate": "field impracticability of whole-root extirpation"
+                              },
+                              {
+                                "predicate": "root system devitalized with adequate phytosanitary treatment"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "predicate": "an applicable destruction performance condition is proven unsatisfied"
                 }
               ]
             },
-            "effect": "CONTAINMENT_RETAINED_WOOD_ROUTE_NONCOMPLIANT_OR_INCOMPLETE"
+            "effect": "CONTAINMENT_DESTRUCTION_NOT_COMPLETE"
           },
           {
             "when": {
@@ -6579,8 +7789,8 @@
           "effect": "CONTAINMENT_PARENT_OR_CHILD_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Distinguish Article 16 full destruction from the retained-wood limited-destruction route. The regional whole-root procedure may add to either route but never makes retained wood satisfy Article 16(1).",
-      "false_effect": "Retained wood never satisfies full destruction. Proven failure of a selected-route condition makes completion unavailable; missing evidence remains unresolved."
+      "true_effect": "Complete the applicable destruction alternative: full destruction including roots and no retained wood, or competent limited destruction with above-ground branches and foliage destroyed, lawful treatment and verification of any retained wood, and roots removed or adequately devitalised where whole-root extraction is impracticable.",
+      "false_effect": "A proven unmet performance condition prevents completion; missing evidence establishes neither completion nor nonperformance. Retained wood cannot satisfy full destruction."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:containment-treatment-removal-sequence",
@@ -6598,7 +7808,20 @@
                   }
                 },
                 {
-                  "predicate": "official infected-plant finding from Article 15(2) monitoring"
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
                 },
                 {
                   "predicate": "required Article 14 treatment completed"
@@ -6608,7 +7831,26 @@
                 }
               ]
             },
-            "effect": "CONTAINMENT_TREATMENT_AND_REMOVAL_SEQUENCE_COMPLETE"
+            "effect": "CONTAINMENT_TREATMENT_AND_WAIT_SATISFIED_FOR_REMOVAL"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
+                    "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
+                  }
+                },
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                    "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                  }
+                }
+              ]
+            },
+            "effect": "SCIENTIFIC_RETENTION; NO_CONTAINMENT_REMOVAL_REQUIREMENT; PRESERVE_ARTICLE_14_TREATMENT"
           },
           {
             "when": {
@@ -6656,6 +7898,22 @@
                   }
                 },
                 {
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
+                },
+                {
                   "predicate": "required treatment evidence missing"
                 }
               ]
@@ -6672,6 +7930,22 @@
                   }
                 },
                 {
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
+                },
+                {
                   "predicate": "evidence proves required treatment omitted"
                 }
               ]
@@ -6686,6 +7960,22 @@
                     "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
                     "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
                   }
+                },
+                {
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
                 },
                 {
                   "all_of": [
@@ -6709,6 +7999,22 @@
                     "producer_stable_provision_id": "PUG-LR4-2017:Art.6(1)",
                     "allowed_effect": "CONTAINMENT_SUBSTITUTES_FOR_ERADICATION"
                   }
+                },
+                {
+                  "all_of": [
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                        "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                      }
+                    },
+                    {
+                      "result_ref": {
+                        "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                        "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                      }
+                    }
+                  ]
                 },
                 {
                   "all_of": [
@@ -6738,8 +8044,8 @@
           "effect": "CONTAINMENT_PARENT_OR_DISCOVERY_BASIS_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Apply mandatory Article 14 treatment before containment removal, then the regional 48-hour wait and Article 13 infected-plant removal.",
-      "false_effect": "Proven omission of pre-removal treatment is noncompliant; missing treatment or discovery-basis evidence does not cancel removal and remains unresolved."
+      "true_effect": "Where Article 13 removal stands after the scientific non-removal exception: apply mandatory Article 14 treatment before containment removal, then the regional 48-hour wait and Article 13 infected-plant removal.",
+      "false_effect": "Scientific retention displaces the removal requirement but preserves Article 14 treatment around retained plants. Proven omission of pre-removal treatment is noncompliant; missing treatment or discovery-basis evidence does not cancel removal and remains unresolved."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification",
@@ -6749,19 +8055,40 @@
         "route_table": [
           {
             "when": {
-              "predicate": "valid Cq < 32"
+              "all_of": [
+                {
+                  "predicate": "analytical result uses the DDS45-selected Harper et al. 2010 real-time PCR assay with the 2013 erratum"
+                },
+                {
+                  "predicate": "valid Cq < 32"
+                }
+              ]
             },
             "effect": "POSITIVE_ANALYTICAL_RESULT"
           },
           {
             "when": {
-              "predicate": "valid Cq > 32 and < 35"
+              "all_of": [
+                {
+                  "predicate": "analytical result uses the DDS45-selected Harper et al. 2010 real-time PCR assay with the 2013 erratum"
+                },
+                {
+                  "predicate": "valid Cq > 32 and < 35"
+                }
+              ]
             },
             "effect": "DOUBTFUL_ANALYTICAL_RESULT"
           },
           {
             "when": {
-              "predicate": "valid Cq > 35 or source-defined no-Cq result"
+              "all_of": [
+                {
+                  "predicate": "analytical result uses the DDS45-selected Harper et al. 2010 real-time PCR assay with the 2013 erratum"
+                },
+                {
+                  "predicate": "valid Cq > 35 or source-defined no-Cq result"
+                }
+              ]
             },
             "effect": "NEGATIVE_ANALYTICAL_RESULT"
           },
@@ -6769,15 +8096,22 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "valid analytical evidence"
+                  "predicate": "analytical result uses the DDS45-selected Harper et al. 2010 real-time PCR assay with the 2013 erratum"
                 },
                 {
-                  "any_of": [
+                  "all_of": [
                     {
-                      "predicate": "Cq = 32"
+                      "predicate": "valid analytical evidence"
                     },
                     {
-                      "predicate": "Cq = 35"
+                      "any_of": [
+                        {
+                          "predicate": "Cq = 32"
+                        },
+                        {
+                          "predicate": "Cq = 35"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -6809,13 +8143,22 @@
             "when": {
               "all_of": [
                 {
-                  "provision_ref": "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification"
+                  "all_of": [
+                    {
+                      "provision_ref": "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification"
+                    },
+                    {
+                      "predicate": "initial analytical class = doubtful"
+                    },
+                    {
+                      "predicate": "repeat extraction and Harper test not yet completed"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "initial analytical class = doubtful"
-                },
-                {
-                  "predicate": "repeat extraction and Harper test not yet completed"
+                  "not": {
+                    "predicate": "latest completed analytical stage resolves positive or negative on valid evidence"
+                  }
                 }
               ]
             },
@@ -6825,23 +8168,26 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "repeat extraction/Harper result resolves positive or negative"
+                  "all_of": [
+                    {
+                      "all_of": [
+                        {
+                          "predicate": "pooled repeat remains doubtful"
+                        },
+                        {
+                          "predicate": "pool constituent identities held"
+                        }
+                      ]
+                    },
+                    {
+                      "predicate": "individual pool-constituent testing not yet completed"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "valid analytical evidence"
-                }
-              ]
-            },
-            "effect": "TERMINATE_IN_RESULTING_ANALYTICAL_CLASS"
-          },
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "pooled repeat remains doubtful"
-                },
-                {
-                  "predicate": "pool constituent identities held"
+                  "not": {
+                    "predicate": "latest completed analytical stage resolves positive or negative on valid evidence"
+                  }
                 }
               ]
             },
@@ -6849,7 +8195,23 @@
           },
           {
             "when": {
-              "predicate": "individual constituent remains doubtful"
+              "all_of": [
+                {
+                  "all_of": [
+                    {
+                      "predicate": "individual constituent remains doubtful"
+                    },
+                    {
+                      "predicate": "CNR-IPSP aliquot review not yet completed"
+                    }
+                  ]
+                },
+                {
+                  "not": {
+                    "predicate": "latest completed analytical stage resolves positive or negative on valid evidence"
+                  }
+                }
+              ]
             },
             "effect": "SEND_INDIVIDUAL_TO_CNR_IPSP_ALIQUOT_REVIEW"
           },
@@ -6857,20 +8219,29 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "aliquot review resolves positive or negative"
+                  "all_of": [
+                    {
+                      "predicate": "one or more aliquots remain doubtful"
+                    },
+                    {
+                      "predicate": "notification, recording or resampling of the persistently doubtful plant remains outstanding"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "valid analytical evidence"
+                  "not": {
+                    "predicate": "latest completed analytical stage resolves positive or negative on valid evidence"
+                  }
                 }
               ]
             },
-            "effect": "TERMINATE_IN_RESULTING_ANALYTICAL_CLASS"
+            "effect": "NOTIFY_REGIONAL_SERVICE; RECORD_DOUBTFUL_RESULT; RESAMPLE_PLANT"
           },
           {
             "when": {
-              "predicate": "one or more aliquots remain doubtful"
+              "predicate": "latest completed analytical stage resolves positive or negative on valid evidence"
             },
-            "effect": "NOTIFY_REGIONAL_SERVICE; RECORD_DOUBTFUL_RESULT; RESAMPLE_PLANT"
+            "effect": "TERMINATE_IN_RESULTING_ANALYTICAL_CLASS"
           }
         ],
         "otherwise": {
@@ -6887,17 +8258,27 @@
       "expression": {
         "all_of": [
           {
-            "provision_ref": "EU-2020-1201:7(1)"
+            "result_ref": {
+              "producer_stable_provision_id": "EU-2020-1201:7(1)",
+              "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+            }
           },
           {
-            "provision_ref": "EU-2020-1201:9(1)"
+            "any_of": [
+              {
+                "provision_ref": "EU-2020-1201:9(1)"
+              },
+              {
+                "provision_ref": "EU-2020-1201:9(2)"
+              }
+            ]
           },
           {
             "predicate": "presiding inspector, agent or assistant identified in the record"
           },
           {
             "not": {
-              "predicate": "evidence proves the handling or presiding personnel lacked appointment, register status or assignment for the activity"
+              "predicate": "a proven personnel-authority defect legally defeats this official execution verification"
             }
           }
         ],
@@ -6906,7 +8287,7 @@
         }
       },
       "true_effect": "Verify that eradication removal and destruction conform to the applicable legal duties without treating verification as execution itself.",
-      "false_effect": "Missing verification does not prove nonexecution; proven nonconformity remains separate from missing verification."
+      "false_effect": "Missing verification does not prove nonexecution; proven nonconformity remains separate from missing verification. A lawful retention or point-(e) deferral is not an unfulfilled removal assignment."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:eradication-removal-population-support",
@@ -6915,7 +8296,10 @@
       "expression": {
         "all_of": [
           {
-            "provision_ref": "EU-2020-1201:7(1)"
+            "result_ref": {
+              "producer_stable_provision_id": "EU-2020-1201:7(1)",
+              "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+            }
           },
           {
             "predicate": "presiding inspector, agent or assistant identified in the record"
@@ -6931,7 +8315,7 @@
         }
       },
       "true_effect": "Assist determination of the eradication infected-zone removal population and identify the plants to be removed without acquiring the removal decision.",
-      "false_effect": "Outside the applicable eradication route or complete assistant authority and assignment, this support function is not established; the Regional Plant Health Service retains the decision."
+      "false_effect": "Outside the applicable eradication route or complete assistant authority and assignment, this support function is not established; the Regional Plant Health Service retains the decision. A lawful retention or point-(e) deferral is not an unfulfilled removal assignment."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:execution-evidence",
@@ -6946,10 +8330,22 @@
                   "predicate": "eradication execution occurred"
                 },
                 {
-                  "predicate": "record identifies plants, species and/or surface"
+                  "all_of": [
+                    {
+                      "predicate": "eradication execution occurred"
+                    },
+                    {
+                      "predicate": "record identifies plants, species and/or surface"
+                    },
+                    {
+                      "predicate": "required owner/holder countersignature completed"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "required owner/holder countersignature completed"
+                  "not": {
+                    "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof"
+                  }
                 }
               ]
             },
@@ -6957,29 +8353,57 @@
           },
           {
             "when": {
-              "predicate": "required execution record or signature evidence missing"
+              "all_of": [
+                {
+                  "predicate": "eradication execution occurred"
+                },
+                {
+                  "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof"
+                }
+              ]
+            },
+            "effect": "ERADICATION_EXECUTION_PROOF_NONCOMPLIANT"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "eradication execution occurred"
+                },
+                {
+                  "not": {
+                    "all_of": [
+                      {
+                        "predicate": "eradication execution occurred"
+                      },
+                      {
+                        "predicate": "record identifies plants, species and/or surface"
+                      },
+                      {
+                        "predicate": "required owner/holder countersignature completed"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "predicate": "a proven record, signature, photograph or personnel-authority defect legally defeats this official execution proof"
+                  }
+                },
+                {
+                  "predicate": "required execution record or signature evidence missing"
+                }
+              ]
             },
             "effect": "ERADICATION_EXECUTION_EVIDENCE_REQUIRED; NONEXECUTION_NOT_PROVEN"
-          },
-          {
-            "when": {
-              "predicate": "evidence proves required record/signature condition failed"
-            },
-            "effect": "ERADICATION_EXECUTION_PROOF_NONCOMPLIANT"
-          },
-          {
-            "when": {
-              "predicate": "evidence proves the handling or presiding personnel lacked appointment, register status or assignment for the activity"
-            },
-            "effect": "ERADICATION_EXECUTION_PROOF_NONCOMPLIANT"
           }
         ],
         "otherwise": {
-          "effect": "ERADICATION_EXECUTION_OR_ASSISTANT_AUTHORITY_EVIDENCE_REQUIRED"
+          "effect": "ERADICATION_EXECUTION_PROOF_EVIDENCE_REQUIRED"
         }
       },
       "true_effect": "Create the execution record with plant/species/surface facts and countersignature without treating the record as activation.",
-      "false_effect": "Missing record or signature evidence does not prove nonexecution and never satisfies completion."
+      "false_effect": "A proven defect with legally defeating consequence for this official proof prevents proof completion, not the physical occurrence of removal. Missing required record content remains an evidence gap; missing separate personnel-register evidence is not a gate."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:executor-selection",
@@ -7011,7 +8435,7 @@
                 }
               ]
             },
-            "effect": "OWNER_SELECTED_ARIF_EXECUTOR; NOT_SUBSTITUTE_EXECUTION"
+            "effect": "OWNER_SELECTED_ARIF_EXECUTOR; NOT_SUBSTITUTE_EXECUTION; ARIF_DETAILED_REMOVAL_CALENDAR_COMMUNICATION_TO_OSSERVATORIO_REQUIRED"
           },
           {
             "when": {
@@ -7024,7 +8448,7 @@
                 }
               ]
             },
-            "effect": "DIRECT_OFFICIAL_EXECUTOR; NO_OWNER_DEFAULT_ANTECEDENT"
+            "effect": "DIRECT_OFFICIAL_EXECUTOR; NO_OWNER_DEFAULT_ANTECEDENT; ARIF_DETAILED_REMOVAL_CALENDAR_COMMUNICATION_TO_OSSERVATORIO_REQUIRED"
           },
           {
             "when": {
@@ -7037,8 +8461,48 @@
           "effect": "EXECUTOR_SELECTION_NOT_ESTABLISHED"
         }
       },
-      "true_effect": "Route execution to the validly selected owner or ARIF executor; ARIF coordinates owner work or schedules assigned work under Osservatorio authority.",
+      "true_effect": "Route execution to the validly selected owner or ARIF executor; ARIF coordinates and controls voluntary owner work. For operations executed by ARIF, ARIF must organize the work and communicate the detailed removal calendar to the Osservatorio.",
       "false_effect": "Executor selection remains unresolved; missing election does not prove default."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:first-level-result-return",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00045:first-level-result-return:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "official sample received by the first-level laboratory for evidence in the positive-finding-to-removal chain"
+                },
+                {
+                  "predicate": "sample results positive"
+                }
+              ]
+            },
+            "effect": "POSITIVE_ANALYSIS_REGISTRATION_AND_RETURN_WITHIN_SEVEN_WORKING_DAYS_REQUIRED"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "official sample received by the first-level laboratory for evidence in the positive-finding-to-removal chain"
+                },
+                {
+                  "predicate": "sample results negative"
+                }
+              ]
+            },
+            "effect": "NEGATIVE_ANALYSIS_REGISTRATION_AND_RETURN_WITHIN_TEN_WORKING_DAYS_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_POSITIVE_OR_NEGATIVE_RETURN_MAXIMUM_ESTABLISHED"
+        }
+      },
+      "true_effect": "Perform analysis, register it in the database and communicate it to the Osservatorio within seven working days of sample receipt for positive results and ten working days for negative results.",
+      "false_effect": "Outside the applicable receipt/route this performance is not activated. A missed limit does not by itself invalidate the result or establish absence of the pest."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:obstruction-remedy-route",
@@ -7079,20 +8543,60 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "pest-free geography"
+                  "all_of": [
+                    {
+                      "predicate": "pest-free geography"
+                    },
+                    {
+                      "predicate": "individual positive identity"
+                    },
+                    {
+                      "predicate": "second molecular test on a different genome region of the same sample or extract (Article 2(6))"
+                    },
+                    {
+                      "predicate": "subspecies identification where required (Article 2(7))"
+                    },
+                    {
+                      "not": {
+                        "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory"
+                      }
+                    }
+                  ]
                 },
                 {
-                  "predicate": "individual positive identity"
-                },
+                  "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence"
+                }
+              ]
+            },
+            "effect": "PEST_FREE_CONFIRMATION_EVIDENCE_ESTABLISHED; CONFIRMATION_VALIDITY_ADJUDICATION_REQUIRED"
+          },
+          {
+            "when": {
+              "all_of": [
                 {
-                  "predicate": "second molecular test on a different genome region of the same sample or extract (Article 2(6))"
-                },
-                {
-                  "predicate": "subspecies identification where required (Article 2(7))"
+                  "all_of": [
+                    {
+                      "predicate": "pest-free geography"
+                    },
+                    {
+                      "predicate": "individual positive identity"
+                    },
+                    {
+                      "predicate": "second molecular test on a different genome region of the same sample or extract (Article 2(6))"
+                    },
+                    {
+                      "predicate": "subspecies identification where required (Article 2(7))"
+                    },
+                    {
+                      "not": {
+                        "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory"
+                      }
+                    }
+                  ]
                 },
                 {
                   "not": {
-                    "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory"
+                    "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence"
                   }
                 }
               ]
@@ -7101,15 +8605,44 @@
           },
           {
             "when": {
-              "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory"
+              "all_of": [
+                {
+                  "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory"
+                },
+                {
+                  "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence"
+                }
+              ]
+            },
+            "effect": "PEST_FREE_CONFIRMATION_NOT_ESTABLISHED; CONFIRMATION_VALIDITY_ADJUDICATION_REQUIRED"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "evidence proves the second test was not performed on a different genome region or not by a validly designated laboratory"
+                },
+                {
+                  "not": {
+                    "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence"
+                  }
+                }
+              ]
             },
             "effect": "PEST_FREE_CONFIRMATION_NOT_ESTABLISHED"
           },
           {
             "when": {
-              "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence"
+              "all_of": [
+                {
+                  "predicate": "confirmation requirements are not yet established and no test or laboratory disqualification is proven"
+                },
+                {
+                  "predicate": "evidence proves the confirmation departed from the national reference-laboratory routing, with unsettled legal consequence"
+                }
+              ]
             },
-            "effect": "CONFIRMATION_VALIDITY_ADJUDICATION_REQUIRED"
+            "effect": "PEST_FREE_CONFIRMATION_OR_SUBSPECIES_IDENTITY_EVIDENCE_REQUIRED; CONFIRMATION_VALIDITY_ADJUDICATION_REQUIRED"
           }
         ],
         "otherwise": {
@@ -7143,6 +8676,77 @@
       "false_effect": "Pool positivity does not establish an individual positive sample or an official infected-plant finding."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:positive-sample-cnr-return",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00045:positive-sample-cnr-return:v1",
+      "operator": "OR",
+      "expression": {
+        "any_of": [
+          {
+            "predicate": "positive sample enters the source CNR-IPSP route"
+          },
+          {
+            "predicate": "CNR-IPSP receives the positive sample under the source route"
+          }
+        ]
+      },
+      "true_effect": "Send positive samples promptly to CNR-IPSP; following receipt, CNR-IPSP performs the applicable source-route analysis and communicates the result within three working days. For a positive in a new species not among the specified species for the Xylella present in its demarcated area, the required subspecies identification is MLST under Yuan et al. (2010).",
+      "false_effect": "Outside the applicable receipt/route this performance is not activated. A missed limit does not by itself invalidate the result or establish absence of the pest."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:post-finding-containment-sampling",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00045:post-finding-containment-sampling:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "an individually infected plant has been found"
+                },
+                {
+                  "predicate": "the infected-plant finding arose in the infected zone under containment measures"
+                }
+              ]
+            },
+            "effect": "IMMEDIATE_CONTAINMENT_POST_FINDING_SAMPLING_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_CONTAINMENT_POST_FINDING_SAMPLING_DUTY"
+        }
+      },
+      "true_effect": "Immediately sample the source inner population within 50 m: all specified plants and all other symptomatic or suspected plants. In the 400 m-wide outer band starting at that 50 m perimeter, sample all surfaces planted with olives, fruit trees, vines or other specified species using the manual pool/single procedure. Where the operative DGR1075 §4.2.2 ST53 qualification applies, use that qualified inner population while preserving independently required Article 15(1) sampling; the outer band remains.",
+      "false_effect": "Outside the infected containment zone this manual branch does not apply; the separate pest-free/buffer branch may apply."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:post-finding-pest-free-buffer-sampling",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00045:post-finding-pest-free-buffer-sampling:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "an individually infected plant has been found"
+                },
+                {
+                  "predicate": "the infected-plant finding arose in a pest-free area or buffer zone"
+                }
+              ]
+            },
+            "effect": "IMMEDIATE_PEST_FREE_BUFFER_SAMPLING_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_PEST_FREE_BUFFER_POST_FINDING_SAMPLING_DUTY"
+        }
+      },
+      "true_effect": "Immediately sample all monumental olives, officially listed or displaying monumental characteristics, within 50 m of the infected plants; in the 400 m-wide band around the infected zone, sample every hectare containing specified species using the manual pool/single procedure. This is hectare coverage, not sampling every plant.",
+      "false_effect": "Outside this finding-location branch, this regional sampling duty does not arise. An adequate annual statistical survey alone does not establish the prescribed post-finding coverage."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion:v1",
       "operator": "ROUTE_TABLE",
@@ -7155,13 +8759,17 @@
                   "predicate": "operative eradication branch"
                 },
                 {
-                  "provision_ref": "EU-2020-1201:9(1)"
-                },
-                {
-                  "predicate": "plant and relevant parts fully destroyed with no relevant wood retained"
-                },
-                {
-                  "predicate": "regional whole-root requirement completed where applicable"
+                  "all_of": [
+                    {
+                      "provision_ref": "EU-2020-1201:9(1)"
+                    },
+                    {
+                      "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed"
+                    },
+                    {
+                      "predicate": "no wood retained"
+                    }
+                  ]
                 }
               ]
             },
@@ -7174,40 +8782,161 @@
                   "predicate": "operative eradication branch"
                 },
                 {
-                  "predicate": "wood retained under the source procedure"
+                  "not": {
+                    "all_of": [
+                      {
+                        "provision_ref": "EU-2020-1201:9(1)"
+                      },
+                      {
+                        "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed"
+                      },
+                      {
+                        "predicate": "no wood retained"
+                      }
+                    ]
+                  }
                 },
                 {
-                  "predicate": "competent Article 9(2) risk decision limits destruction"
-                },
-                {
-                  "provision_ref": "EU-2020-1201:8(1)"
-                },
-                {
-                  "predicate": "retained wood receives required phytosanitary treatment"
-                },
-                {
-                  "predicate": "root system removed or devitalised to prevent resprouting"
-                },
-                {
-                  "predicate": "Article 9(3) leaf/branch-free verification completed"
+                  "all_of": [
+                    {
+                      "predicate": "competent Article 9(2) risk decision limits destruction"
+                    },
+                    {
+                      "provision_ref": "EU-2020-1201:8(1)"
+                    },
+                    {
+                      "predicate": "required above-ground destruction of branches and foliage completed"
+                    },
+                    {
+                      "any_of": [
+                        {
+                          "predicate": "no wood retained"
+                        },
+                        {
+                          "all_of": [
+                            {
+                              "predicate": "wood retained under the source procedure"
+                            },
+                            {
+                              "predicate": "retained wood receives required phytosanitary treatment"
+                            },
+                            {
+                              "predicate": "Article 9(3) leaf/branch-free verification completed"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "any_of": [
+                        {
+                          "predicate": "root system removed"
+                        },
+                        {
+                          "all_of": [
+                            {
+                              "predicate": "field impracticability of whole-root extirpation"
+                            },
+                            {
+                              "predicate": "root system devitalized with adequate phytosanitary treatment"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
-            "effect": "ARTICLE_9_2_RETAINED_WOOD_ROUTE_COMPLETE"
+            "effect": "ARTICLE_9_2_LIMITED_DESTRUCTION_COMPLETE"
           },
           {
             "when": {
-              "predicate": "retained wood exists without complete Article 9(2)–(3) conditions"
+              "all_of": [
+                {
+                  "predicate": "operative eradication branch"
+                },
+                {
+                  "not": {
+                    "all_of": [
+                      {
+                        "provision_ref": "EU-2020-1201:9(1)"
+                      },
+                      {
+                        "predicate": "whole-root extirpation with in-situ shredding or burning of the plant and its parts completed"
+                      },
+                      {
+                        "predicate": "no wood retained"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "all_of": [
+                      {
+                        "predicate": "competent Article 9(2) risk decision limits destruction"
+                      },
+                      {
+                        "provision_ref": "EU-2020-1201:8(1)"
+                      },
+                      {
+                        "predicate": "required above-ground destruction of branches and foliage completed"
+                      },
+                      {
+                        "any_of": [
+                          {
+                            "predicate": "no wood retained"
+                          },
+                          {
+                            "all_of": [
+                              {
+                                "predicate": "wood retained under the source procedure"
+                              },
+                              {
+                                "predicate": "retained wood receives required phytosanitary treatment"
+                              },
+                              {
+                                "predicate": "Article 9(3) leaf/branch-free verification completed"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "any_of": [
+                          {
+                            "predicate": "root system removed"
+                          },
+                          {
+                            "all_of": [
+                              {
+                                "predicate": "field impracticability of whole-root extirpation"
+                              },
+                              {
+                                "predicate": "root system devitalized with adequate phytosanitary treatment"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "predicate": "an applicable destruction performance condition is proven unsatisfied"
+                }
+              ]
             },
-            "effect": "RETAINED_WOOD_ROUTE_NONCOMPLIANT_OR_INCOMPLETE"
+            "effect": "ERADICATION_DESTRUCTION_NOT_COMPLETE"
           }
         ],
         "otherwise": {
           "effect": "DESTRUCTION_RISK_TREATMENT_ROOT_WOOD_OR_VERIFICATION_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Distinguish Article 9 full destruction from the retained-wood limited-destruction route. The regional whole-root procedure may add to either route but never makes retained wood satisfy Article 9(1).",
-      "false_effect": "Retained wood never satisfies full destruction. Proven failure of a selected-route condition makes completion unavailable; missing evidence remains unresolved."
+      "true_effect": "Complete the applicable destruction alternative: full destruction including roots and no retained wood, or competent limited destruction with above-ground branches and foliage destroyed, lawful treatment and verification of any retained wood, and roots removed or adequately devitalised where whole-root extraction is impracticable.",
+      "false_effect": "A proven unmet performance condition prevents completion; missing evidence establishes neither completion nor nonperformance. Retained wood cannot satisfy full destruction."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer",
@@ -7229,6 +8958,18 @@
                 },
                 {
                   "predicate": "authorized transporter digitally countersigns to attest delivery to the laboratory"
+                },
+                {
+                  "not": {
+                    "any_of": [
+                      {
+                        "predicate": "evidence proves a mandatory source custody condition failed"
+                      },
+                      {
+                        "predicate": "a proven personnel-authority defect legally defeats this official custody proof"
+                      }
+                    ]
+                  }
                 }
               ]
             },
@@ -7236,13 +8977,14 @@
           },
           {
             "when": {
-              "predicate": "evidence proves a mandatory source custody condition failed"
-            },
-            "effect": "SOURCE_SAMPLE_CUSTODY_NONCOMPLIANT"
-          },
-          {
-            "when": {
-              "predicate": "evidence proves the handling or presiding personnel lacked appointment, register status or assignment for the activity"
+              "any_of": [
+                {
+                  "predicate": "evidence proves a mandatory source custody condition failed"
+                },
+                {
+                  "predicate": "a proven personnel-authority defect legally defeats this official custody proof"
+                }
+              ]
             },
             "effect": "SOURCE_SAMPLE_CUSTODY_NONCOMPLIANT"
           }
@@ -7251,7 +8993,7 @@
           "effect": "ASSISTANT_AUTHORITY_COLD_CHAIN_OR_SOURCE_SIGNATURE_EVIDENCE_REQUIRED"
         }
       },
-      "true_effect": "Complete the DDS 45 assistant-team custody transfer through same-day cold-chain delivery, assistant/driver signatures, and transporter countersignature attesting delivery.",
+      "true_effect": "Complete the source-qualified DDS 45 assistant-team custody transfer through same-day cold-chain delivery, assistant/driver signatures, and transporter countersignature attesting delivery, without a proven legally defeating personnel-authority defect.",
       "false_effect": "Missing source custody evidence does not prove transfer or nontransfer. Laboratory acceptance/receipt is a separate fact only where another source requires it."
     },
     {
@@ -7304,32 +9046,62 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "operative eradication branch"
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                    "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+                  }
                 },
                 {
-                  "predicate": "removal occurs during event-time vector flight season"
-                },
-                {
-                  "predicate": "required Article 8 treatment completed"
-                },
-                {
-                  "predicate": "regional 48-hour wait completed"
+                  "all_of": [
+                    {
+                      "predicate": "operative eradication branch"
+                    },
+                    {
+                      "predicate": "removal occurs during event-time vector flight season"
+                    },
+                    {
+                      "predicate": "required Article 8 treatment completed"
+                    },
+                    {
+                      "predicate": "regional 48-hour wait completed"
+                    }
+                  ]
                 }
               ]
             },
-            "effect": "FLIGHT_SEASON_TREATMENT_AND_REMOVAL_SEQUENCE_COMPLETE"
+            "effect": "FLIGHT_SEASON_TREATMENT_AND_WAIT_SATISFIED_FOR_REMOVAL"
           },
           {
             "when": {
               "all_of": [
                 {
-                  "predicate": "operative eradication branch"
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                    "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+                  }
                 },
                 {
-                  "predicate": "event-time evidence establishes removal outside vector flight season"
-                },
-                {
-                  "predicate": "broader Article 8 all-stage treatment duty and appropriate timing satisfied"
+                  "all_of": [
+                    {
+                      "predicate": "operative eradication branch"
+                    },
+                    {
+                      "predicate": "event-time evidence establishes removal outside vector flight season"
+                    },
+                    {
+                      "predicate": "broader Article 8 all-stage treatment duty and appropriate timing satisfied"
+                    },
+                    {
+                      "any_of": [
+                        {
+                          "predicate": "regional 48-hour wait completed"
+                        },
+                        {
+                          "predicate": "the resolved event-time treatment route establishes that no pre-removal treatment triggering the regional 48-hour wait is applicable"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -7337,13 +9109,33 @@
           },
           {
             "when": {
-              "predicate": "required treatment evidence missing"
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                    "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+                  }
+                },
+                {
+                  "predicate": "required treatment evidence missing"
+                }
+              ]
             },
             "effect": "ARTICLE_8_TREATMENT_EVIDENCE_REQUIRED"
           },
           {
             "when": {
-              "predicate": "evidence proves required treatment omitted"
+              "all_of": [
+                {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                    "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+                  }
+                },
+                {
+                  "predicate": "evidence proves required treatment omitted"
+                }
+              ]
             },
             "effect": "ARTICLE_8_NONCOMPLIANCE; ARTICLE_7_REMOVAL_DUTY_REMAINS"
           },
@@ -7351,10 +9143,20 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "required treatment completed"
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                    "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+                  }
                 },
                 {
-                  "predicate": "48-hour wait evidence missing"
+                  "all_of": [
+                    {
+                      "predicate": "required treatment completed"
+                    },
+                    {
+                      "predicate": "48-hour wait evidence missing"
+                    }
+                  ]
                 }
               ]
             },
@@ -7364,21 +9166,40 @@
             "when": {
               "all_of": [
                 {
-                  "predicate": "required treatment completed"
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                    "allowed_effect": "IMMEDIATE_REMOVAL_REQUIRED"
+                  }
                 },
                 {
-                  "predicate": "evidence proves 48-hour wait not satisfied"
+                  "all_of": [
+                    {
+                      "predicate": "required treatment completed"
+                    },
+                    {
+                      "predicate": "evidence proves 48-hour wait not satisfied"
+                    }
+                  ]
                 }
               ]
             },
             "effect": "REGIONAL_48_HOUR_SEQUENCE_NONCOMPLIANT; ARTICLE_7_REMOVAL_DUTY_REMAINS"
+          },
+          {
+            "when": {
+              "result_ref": {
+                "producer_stable_provision_id": "EU-2020-1201:7(1)",
+                "allowed_effect": "NO_ARTICLE_7_1_REMOVAL_DUTY"
+              }
+            },
+            "effect": "NO_ERADICATION_REMOVAL_SEQUENCE_FOR_THIS_PLANT"
           }
         ],
         "otherwise": {
           "effect": "VECTOR_FLIGHT_OR_APPROPRIATE_TREATMENT_INTERPRETATION_REQUIRED"
         }
       },
-      "true_effect": "During vector flight, apply Article 8 treatment before and during removal and the regional 48-hour sequence. Outside proven flight, do not treat the fixed November–March instruction as self-proving compliance; resolve the broader Article 8 treatment duty and appropriate timing from event-time evidence.",
+      "true_effect": "For the operative post-exception Article 7(1) removal population only: During vector flight, apply Article 8 treatment before and during removal and the regional 48-hour sequence. Outside proven flight, do not treat the fixed November–March instruction as self-proving compliance; resolve the broader Article 8 treatment duty and appropriate timing from event-time evidence, and satisfy the applicable regional 48-hour wait.",
       "false_effect": "Proven omission of required flight-season treatment is noncompliant. Missing vector-flight or appropriate-treatment evidence does not cancel Article 7 removal and does not establish the regional no-treatment instruction as lawful."
     },
     {
@@ -7446,6 +9267,42 @@
       "false_effect": "Outside the act's interval or adopted geography, or where its area state is superseded, suspended, revoked or annulled, no area state follows from this act."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 115/2025 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants in the Bisceglie infected area is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants in the Bisceglie infected area, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1",
       "operator": "AND",
@@ -7493,6 +9350,42 @@
       },
       "true_effect": "Correct the current owners and re-prescribe the complete Article 7 population because the predecessor orders were not effectively notified to them.",
       "false_effect": "Failed service cannot become silence, refusal, breach, or substitute-execution authority."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 117/2025 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary",
@@ -7614,6 +9507,42 @@
       "false_effect": "Outside the act's interval or adopted geography, or where its area state is superseded, suspended, revoked or annulled, no area state follows from this act."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 173/2025 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1",
       "operator": "AND",
@@ -7632,6 +9561,42 @@
       },
       "true_effect": "Give execution priority to the 106 officially infected plants without changing or discharging the remaining mandatory Article 7 population.",
       "false_effect": "Priority does not remove noninfected, suspected, or other qualifying plants from the workload."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 201/2025 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00236:area-state-transition",
@@ -7674,6 +9639,42 @@
       },
       "true_effect": "Classify the individual almond tree as marginal/abandoned only through a competent holistic assessment of all five source-stated indicators.",
       "false_effect": "Without the competent characterization, qualification remains unresolved; parcel listing or any single indicator does not establish or defeat it."
+    },
+    {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "this operative DDS 35/2026 prescription, including any applicable correction, governs this recipient"
+                },
+                {
+                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text",

@@ -1,0 +1,810 @@
+{
+  "schema": "stage-d-evidence-contracts-v1",
+  "scope_owner": "state/CURRENT.json",
+  "predicate_bindings": "regulation/stage-d/predicate-contracts.json",
+  "shared_rules": {
+    "source_basis": "Accepted A–C owns the required meaning. D supplies the corresponding real source value to that consumer; a source listing alone supplies no value.",
+    "identity": "Retain source occurrences and original identifiers. Instrument identity includes issuer/office, type and adopted number/date; proposal numbers, register occurrences and document renditions remain distinct. Cross-source joins require a relationship supported by the sources, never names, repeated native IDs or coordinate proximity alone.",
+    "temporal": "Keep event, legal effect, publication and acquisition/knowledge time separate at source precision. Distinguish proposal, issue, transmission, receipt, publication commencement/completion, actual work and later record insertion where the consumer does. Corrections identify the same affected fact/context and predecessor; chronology alone does not prove replacement. Conflicting contemporaneous values remain unresolved until supported adjudication.",
+    "cadence": "Retain publisher release cadence and observed acquisition time per source. Recheck mutable source status before a new time-sensitive conclusion; do not treat a captured baseline as a live subscription or infer an update interval from silence.",
+    "population": "A complete published population and a complete real-world required population are independently qualified. Known acquisition omissions cannot be certified complete.",
+    "access": "Retain rights/access metadata and enforce controlled-source permission at the evidence reader. A public form proves format, not instance performance.",
+    "correction": "Repair the source-owned fact and every affected dependent conclusion while preserving the original source and historical knowledge view. Do not use last-writer wins.",
+    "composition": "Listed contracts are evidence routes contributing to a predicate, not additional universal conjunctions. C controls decisive branch composition; absent irrelevant evidence cannot block a resolved branch."
+  },
+  "contracts": [
+    {
+      "id": "cadastral-geometry",
+      "claim": "The delivered cadastral feature and its qualified parcel correspondence are established.",
+      "grain": "one municipality/release/GML feature occurrence; source identifiers may repeat",
+      "keys": [
+        "release hash",
+        "municipal archive/member",
+        "feature occurrence",
+        "national cadastral reference"
+      ],
+      "fields": [
+        "native geometry and axis order",
+        "CRS",
+        "national reference/label",
+        "municipality/sheet/parcel",
+        "publication generation date",
+        "source occurrence and multipart relation",
+        "positional qualification"
+      ],
+      "acquisition_routes": [
+        "AdE regional bulk municipal GML release",
+        "official SIT cadastral snapshot",
+        "case annex correspondence"
+      ],
+      "sufficiency": "Preserve every source occurrence, including repeated gml:id/national references with different geometry. Join to case annexes through qualified municipality/sheet/parcel correspondence; a later cadastral release does not establish historical case geometry. EPSG6706 GML uses its stated axis order; do not assume longitude,latitude. A source-reference comparison enumerates its actual components. Matching municipality/section/sheet/parcel does not fill missing annex/development, identify a whole parcel from a portion, or establish physical succession. Preserve original/definitive reference roles and source-native repetitions; a missing reference in a later release or bounded query is not a suppression or title-transfer act.",
+      "absence": "A missing polygon does not negate the source case parcel or establish its owner. A general 2m accuracy description is not a guaranteed error bound.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "calendar",
+      "claim": "The bounded holiday calendar and any qualified exceptional counting context apply to this clock.",
+      "grain": "one calendar jurisdiction and bounded date interval with source-rule versions",
+      "keys": [
+        "jurisdiction",
+        "coverage interval",
+        "source rule version"
+      ],
+      "fields": [
+        "holiday dates",
+        "weekend under accepted C convention",
+        "effective changes",
+        "applicable local holiday where established",
+        "exceptional rule evidence"
+      ],
+      "acquisition_routes": [
+        "official national holiday legislation and amendments",
+        "competent local holiday evidence where applicable"
+      ],
+      "sufficiency": "C owns ordinary counting conventions. Supply holidays for the entire interval the calculation may traverse, with source-effective dates; no calendar beyond its proven coverage. Working contact hours do not determine legal working days.",
+      "absence": "Missing local or exceptional evidence cannot become an arbitrary override. Identify the affected clock/calendar interval.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "evaluation-context",
+      "claim": "The legal event and knowledge cutoff of this evaluation.",
+      "grain": "one evaluation of one coherent plant, area, work or occasion context",
+      "keys": [
+        "context identity",
+        "event date",
+        "knowledge cutoff"
+      ],
+      "fields": [
+        "event date: ISO date",
+        "knowledge cutoff: timezone-aware instant",
+        "source precision: date or instant",
+        "owning A/B version references"
+      ],
+      "acquisition_routes": [
+        "explicit evaluation request",
+        "event source under the applicable event contract"
+      ],
+      "sufficiency": "The legal event date selects A/B. Sampling, reporting, adoption, publication and notification dates remain different. A date-only source cannot establish an exact instant. Query context is not proof of an event.",
+      "absence": "Require the missing event or its precision only for computations using it.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "operative-act",
+      "claim": "A particular administrative or legal state is established at the relevant event time.",
+      "grain": "one instrument/version, operative proposition and territorial/case scope",
+      "keys": [
+        "issuer",
+        "instrument kind/number/year",
+        "version or correction",
+        "scope"
+      ],
+      "fields": [
+        "adoption date",
+        "publication date",
+        "effective interval",
+        "operative clause and annex selectors",
+        "supersession/correction/annulment basis",
+        "actual exercised choice where relevant"
+      ],
+      "acquisition_routes": [
+        "BURP and signed regional/national/EU primary acts",
+        "official registers and incorporated annexes",
+        "competent recorded decisions"
+      ],
+      "sufficiency": "Read the actual operative clause and adopted annexes against accepted A. An applicable policy may establish exercised retention without inventing a further individual authorization. Later summaries and a title alone do not establish payload or legal effect. Identify the actual affected scope and event time of corrections, revocations and judicial outcomes; preserve unaffected predecessor propositions. Same-number or later same-subject records do not establish a replacement relation, and an empty appeal search does not establish permanent finality.",
+      "absence": "Source absence is not annulment, refusal or failure. Resolve the exact missing act, annex or effect basis.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "case-prescription",
+      "claim": "The particular act governs the stated work population and recipient positions.",
+      "grain": "one source-annex occurrence linked to its instrument and case",
+      "keys": [
+        "instrument identity",
+        "annex/row occurrence",
+        "native plant/sample reference",
+        "municipality/sheet/parcel"
+      ],
+      "fields": [
+        "source-stated prescribed scope",
+        "plant/sample/report references",
+        "recipient positions",
+        "predecessor and exact corrected payload",
+        "governing A references"
+      ],
+      "acquisition_routes": [
+        "original BURP prescription and complete annexes",
+        "official correction and supplement acts"
+      ],
+      "sufficiency": "Read original clauses and preserve each annex occurrence. A partial-parcel intersection is not a plant census; several listed positions are not necessarily distinct people. Old generic Article 7/13 classifications and default state columns are not admitted as legal or event facts.",
+      "absence": "Missing annex relations remain unresolved; do not turn an omitted row into exclusion from the lawful plant population.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "recipient-notice",
+      "claim": "The exact recipient-effect or publication event is established through the applicable route.",
+      "grain": "one act, recipient or legally defined recipient cohort, and notice/publication occurrence",
+      "keys": [
+        "act",
+        "recipient/cohort",
+        "channel",
+        "occurrence"
+      ],
+      "fields": [
+        "communication content",
+        "delivery/completion date or instant",
+        "publication interval and continuity",
+        "act-specific mass-publicity basis",
+        "reasoned immediate-effect qualification"
+      ],
+      "acquisition_routes": [
+        "municipal albo entry and publication attestation",
+        "PEC/protocol delivery evidence",
+        "competent act selecting publicity or immediate-effect route"
+      ],
+      "sufficiency": "Apply accepted A to the actual completed route. A source instruction to publish, a BURP issue date or a planned channel does not prove municipal publication or individual delivery. Acknowledgement is evidence where appropriate, not a new universal legal condition. Interpret date fields against the source’s actual meaning: an archive retention horizon is not completed legal publication. Use the original publication certificate when available; preserve a stated start even if completion remains unknown. An archived observation before a displayed end cannot certify an uninterrupted completed period. Preserve whether a document match is source-stated or an inferred candidate, and whether the posted attachment itself was acquired. Municipal receipt of a general circular does not establish case-specific recipient notice.",
+      "absence": "No public notice record does not establish no notice; obtain the attestation or recipient evidence.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "owner-response",
+      "claim": "An actual election, refusal or qualified absence of communication concerns this recipient and work.",
+      "grain": "one recipient/work communication occurrence; absence over a bounded complete history",
+      "keys": [
+        "act/work",
+        "recipient",
+        "communication ID"
+      ],
+      "fields": [
+        "response/election content",
+        "receipt instant and precision",
+        "channel",
+        "history interval",
+        "history completeness basis"
+      ],
+      "acquisition_routes": [
+        "ARIF authenticated election record",
+        "PEC or competent protocol records",
+        "authoritative bounded no-response attestation"
+      ],
+      "sufficiency": "C applies the correct window to qualifying actual responses, including valid early election. No-response requires a complete bounded history or explicit qualified attestation, not an archive default or an empty public table.",
+      "absence": "Missing communications and evidence of no communication remain distinct.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "party-land-standing",
+      "claim": "The identified person or position bears the case-relevant relationship to the land at the event time.",
+      "grain": "one evidence-backed party/parcel/role occurrence and interval",
+      "keys": [
+        "source party reference",
+        "qualified parcel reference",
+        "role",
+        "event interval"
+      ],
+      "fields": [
+        "source name/reference",
+        "owner/holder/occupier role",
+        "instrument supporting transfer or standing",
+        "effective date",
+        "unresolved identity distinctions",
+        "source-stated right and share, with absent unit or denominator explicit",
+        "whole/part scope and source accounting or procedural status"
+      ],
+      "acquisition_routes": [
+        "official case annexes and corrections",
+        "competent cadastral/title/holding documents where needed",
+        "recorded ownership-change communication"
+      ],
+      "sufficiency": "An annex establishes the published position it states. Current ownership/control needs its appropriate evidence. Names alone do not resolve identity; a cadastral polygon does not establish title or occupier authority. Municipal inventory inclusion, cadastral designation, state-property title, civic-use status, concession and actual control are distinct source statements. Preserve their original roles, portions, dates and share semantics. A municipal percentage is not automatically an exclusive title share. Published future tenders, withdrawn awards, expired arrangements and taken-back property do not establish a present concession merely because the row is newly published. Competing source positions require their title-effective or case-specific evidence; neither dataset recency nor a name match determines the responsible recipient.",
+      "absence": "Preserve unresolved party identity while retaining independently established parcel and finding facts.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "official-finding",
+      "claim": "A finding or published analytical observation is established at its actual scope and level.",
+      "grain": "one official finding or source observation, with its plant/sample/report context",
+      "keys": [
+        "publisher",
+        "source occurrence",
+        "sample or plant reference",
+        "report identifier"
+      ],
+      "fields": [
+        "result",
+        "host/species",
+        "subspecies/genotype where stated",
+        "symptoms",
+        "sampling date",
+        "report date",
+        "official confirmation basis",
+        "location as published"
+      ],
+      "acquisition_routes": [
+        "official finding/prescription acts and annexes",
+        "CNR/other official test reports",
+        "CAMP workbooks and SIT observation records"
+      ],
+      "sufficiency": "An official act explicitly establishing an infected plant can supply that fact directly. A CAMP result supplies its published result label; it does not independently prove each assay, pool decomposition or official-confirmation condition. Asymptomatic is not uninfected. A new report can qualify the same finding more deeply.",
+      "absence": "Unobserved, unreported and negative are different. Preserve useful established findings despite missing deeper analytical fields.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "analytical-result",
+      "claim": "The actual analytical result and method/identity qualifications required by this consumer are established.",
+      "grain": "one assay/run or signed report result for an identified sample, extract or pool",
+      "keys": [
+        "laboratory",
+        "report/version",
+        "sample",
+        "extract/pool",
+        "test/run"
+      ],
+      "fields": [
+        "exact method and edition",
+        "result/Cq as exact decimal or explicit no-Cq",
+        "run/control validity",
+        "genome target",
+        "pool constituents",
+        "repeat sequence",
+        "subspecies/MLST result",
+        "completion and communication dates"
+      ],
+      "acquisition_routes": [
+        "public official laboratory reports linked by SIT",
+        "signed report and analytical worksheets",
+        "official diagnostic procedures and applicable method documentation"
+      ],
+      "sufficiency": "Use report-stated method/result qualifications and source-native identities. Method name alone does not establish a different genome target; assay counts are not independent sampled units. C owns Cq boundaries and repeat logic. A procedure defines the record requirement, not actual test performance. An attributable nonofficial report may establish its own reported result and reporting trigger; it does not establish official-control status or official confirmation.",
+      "absence": "Acquire linked public reports before classifying deeper inputs as controlled. Missing Cq does not erase a sufficient official finding.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset",
+        "qualified-observation"
+      ]
+    },
+    {
+      "id": "laboratory-status",
+      "claim": "Source-required recognition, designation and qualification cover the exact task/method at the event time.",
+      "grain": "one laboratory facility, source-required status route and exact task/method scope over an interval",
+      "keys": [
+        "facility/legal identity",
+        "recognizing/designating authority",
+        "task/method",
+        "designation version"
+      ],
+      "fields": [
+        "recognition/designation act",
+        "accreditation scope and interval",
+        "applicable derogation",
+        "required qualifications",
+        "audit/suspension/revocation/restoration",
+        "agreements and competence"
+      ],
+      "acquisition_routes": [
+        "official recognition/designation acts and SFN/INRPP lists",
+        "ACCREDIA scope records",
+        "official audit/status/derogation and interadministrative records"
+      ],
+      "sufficiency": "Qualification follows the exact A route. General laboratory presence or accreditation does not prove every method. A current list cannot silently supply a historical status; later independent evidence may establish later operation without resolving original commencement.",
+      "absence": "No discovered suspension is not a complete no-suspension history. Scope missingness to the actual qualification required.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "personnel-assignment",
+      "claim": "The responsible individual is qualified and assigned for the particular official activity.",
+      "grain": "one personnel identity, legal role, assignment and event interval",
+      "keys": [
+        "personnel/register identity",
+        "assigning authority",
+        "task",
+        "interval"
+      ],
+      "fields": [
+        "appointment",
+        "register status",
+        "credential",
+        "express assignment",
+        "record signature and supervising role"
+      ],
+      "acquisition_routes": [
+        "official appointment/register/assignment records",
+        "signed custody/execution record",
+        "operative convention and service records"
+      ],
+      "sufficiency": "The actual role and task matter; authority to assist does not create authority to prescribe. Read source-required signature and supervision distinctions without inventing a wider personnel workflow. Published assignment descriptions support their stated remit and qualified interval; a potentially presumed end is not a proven cessation. A CV, current role description and historical appointment/correction original are distinct evidence. Conditional substitution requires the condition only when that attribution is material; no blanket appointment-file prerequisite is added to every official measure.",
+      "absence": "Missing proof is not a proven personnel-authority defect.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "administrative-event",
+      "claim": "The particular adoption, opinion, request, transmission or other required administrative performance occurred.",
+      "grain": "one event and payload tied to a particular instrument, programme, request or task",
+      "keys": [
+        "source actor/body and documented role",
+        "event/payload identity",
+        "recipient if applicable",
+        "occurrence"
+      ],
+      "fields": [
+        "event kind and actual date/instant",
+        "payload/version",
+        "scope",
+        "transmission/receipt/completion evidence where relevant",
+        "required population of submissions",
+        "source-established actor knowledge/awareness date where the exact consumer requires it"
+      ],
+      "acquisition_routes": [
+        "published official acts, programmes and minutes",
+        "official portal publication",
+        "protocol/system event and transmission records"
+      ],
+      "sufficiency": "A duty to act is not performance. Preserve the particular source-native requirement: successful reporting may be evidenced by an acknowledgement without making that format an added legal condition. Include only events directly affecting this decision chain. A report issue date is not its recipient receipt or a particular person’s awareness; those require the particular source payload. Monitoring an emergency plan is an administrative performance about that plan, distinct from field survey observations. Application, recognition referral, opinion, express grant, source-stated absence of an opinion and actual record receipt remain distinct events. Read incorporated originals when a summary conflicts, and retain source-attributed discrepancies rather than silently rewriting every date.",
+      "absence": "Missing published event does not prove nonperformance; obtain the particular record or bounded history.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "adopted-geography",
+      "claim": "The operative area, partition or geographical relationship is established for the proper version and scope.",
+      "grain": "one source feature occurrence plus dataset/release and adopting instrument where applicable",
+      "keys": [
+        "publisher/service/layer",
+        "snapshot",
+        "native key and occurrence",
+        "adopting act"
+      ],
+      "fields": [
+        "original geometry",
+        "source CRS",
+        "effective interval",
+        "subspecies/regime",
+        "grid ID/row/column",
+        "coverage extent",
+        "source/transformation error qualification",
+        "actual shared boundary"
+      ],
+      "acquisition_routes": [
+        "SIT current and historical feature services",
+        "adopted maps and annexes",
+        "InnovaPuglia adopted shapefiles supplied to Osservatorio/ARIF",
+        "qualified land geometry for the island consumer"
+      ],
+      "sufficiency": "Separate source feature completeness from operative geographic completeness. A public 1ha layer is not automatically the full regional operative grid. Bind features to the adopting act and event time. Preserve disjoint components and holes. Numeric C ground-distance claims require qualified spatial error; EPSG or coordinate decimals do not supply it.",
+      "absence": "Direct official area statements can remain useful when a numeric distance cannot yet be qualified. Never fabricate a grid, adopted boundary or zero-error ground coordinate.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "plant-population",
+      "claim": "The relevant plants, host qualifications or land units and their completeness are established.",
+      "grain": "one plant/inspection-unit occurrence within an explicitly defined required population",
+      "keys": [
+        "population scope/version",
+        "qualified member identity",
+        "observation/source occurrence"
+      ],
+      "fields": [
+        "taxon and host qualification",
+        "plant versus sample identity",
+        "location",
+        "health/symptom facts",
+        "species-finding history",
+        "population boundary and completeness basis"
+      ],
+      "acquisition_routes": [
+        "official field inventory and geolocated plant records",
+        "finding/removal annexes",
+        "qualified survey records",
+        "validated observation-derived inventories with stated limitations"
+      ],
+      "sufficiency": "Required populations follow A and C, not the available dataset. A sample ID, tree-crown candidate and legally identified plant are different evidential identities. A complete monitoring download or parcel list is not a complete required-plant census. Source-qualified estimates remain estimates.",
+      "absence": "Unknown members or inventory incompleteness affect universal/all-member conclusions, not a separately identified positive plant.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset",
+        "qualified-observation"
+      ]
+    },
+    {
+      "id": "protected-status",
+      "claim": "The individual plant or site has the particular recognized or otherwise qualifying protection/value status.",
+      "grain": "one source-qualified plant/site and cohort where relevant, qualification ground and status interval",
+      "keys": [
+        "plant/site identity",
+        "designation or protection instrument",
+        "ground",
+        "interval"
+      ],
+      "fields": [
+        "official/provisional recognition",
+        "applicable protection rule",
+        "value assessment if that ground applies",
+        "pending status",
+        "landscape application/opinion/decision where required"
+      ],
+      "acquisition_routes": [
+        "official monumental-tree lists and acts",
+        "provisional recognition records",
+        "specific protection instruments",
+        "the competent permission or decision reached by the affected protected plant and intervention"
+      ],
+      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion.",
+      "absence": "No registry match alone does not prove lack of every protection/value ground.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "survey-design",
+      "claim": "The operative survey inputs are qualified for the actual target population and method.",
+      "grain": "one campaign/area/host design and its disjoint strata",
+      "keys": [
+        "programme/version",
+        "target population",
+        "stratum",
+        "inspection-unit definition"
+      ],
+      "fields": [
+        "population estimate or finite count",
+        "risk proportion and relative risk",
+        "method sensitivity and its components",
+        "pooling/dependence qualification",
+        "one/two-stage context",
+        "source target reference",
+        "required period/occasion set"
+      ],
+      "acquisition_routes": [
+        "adopted regional and PNI plans/workbooks",
+        "operative survey design records",
+        "qualified validation and official methodological evidence"
+      ],
+      "sufficiency": "C owns formulas and finite-count conventions; B owns targets. Supply source-qualified current estimates and method scope. Do not substitute historical published estimates for future populations, .55 workload fit for universal sensitivity, or assay counts for inspected units.",
+      "absence": "Unqualified method or population leaves the corresponding assurance claim unresolved while preserving workload and actual observations.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset",
+        "qualified-observation"
+      ]
+    },
+    {
+      "id": "survey-performance",
+      "claim": "Distinct usable observations and required survey occasions support the stated achieved-survey claim.",
+      "grain": "one source observation or qualifying occasion within an explicit population and period",
+      "keys": [
+        "campaign/scope",
+        "inspection-unit identity",
+        "occasion",
+        "source occurrence"
+      ],
+      "fields": [
+        "positive/negative/undetermined result",
+        "sampling/test dates",
+        "usable method qualification",
+        "required scope/strata",
+        "inventory and period completeness",
+        "no-detection history"
+      ],
+      "acquisition_routes": [
+        "complete CAMP and live monitoring populations",
+        "actual survey reports and performance records",
+        "vector/host test reports and bounded official histories"
+      ],
+      "sufficiency": "Keep raw occurrences; deduplicate for a particular inspection-unit claim only with demonstrated identity. Public campaign absence may reflect survey allocation. Negative recurrence needs its own qualifying occasion and history, not multiple rows from one occasion.",
+      "absence": "A known positive defeats a negative claim; an incomplete observation history does not prove no detection or omitted survey.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset",
+        "qualified-observation"
+      ]
+    },
+    {
+      "id": "vector-biology",
+      "claim": "The actual biological or environmental condition is established for this place and time.",
+      "grain": "one bounded observation or qualified assessment of a relevant site/plant/vector population",
+      "keys": [
+        "place/population",
+        "observation interval",
+        "method/assessment identity"
+      ],
+      "fields": [
+        "vector presence and stage",
+        "flight-season basis",
+        "host/tissue detectability",
+        "ecoclimatic/site protection",
+        "risk and practicability grounds"
+      ],
+      "acquisition_routes": [
+        "official vector-monitoring bulletins and observations",
+        "case-specific field assessment",
+        "applicable primary biological evidence and operative directions"
+      ],
+      "sufficiency": "Use the operative local evidence. A sentinel monitoring calendar is not actual flight season; an administrative treatment month does not prove vectors absent. A qualified official case determination can supply the qualitative input C deliberately leaves explicit.",
+      "absence": "Missing vector observation is not absence. Confine unresolved biology to the treatment/timing or surveillance conclusion using it.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset",
+        "qualified-observation"
+      ]
+    },
+    {
+      "id": "treatment-performance",
+      "claim": "The required vector/root/wood treatment actually occurred with the applicable qualifications.",
+      "grain": "one treatment performance on an exact plant/population or area",
+      "keys": [
+        "work/scope",
+        "treatment event",
+        "performer",
+        "source record"
+      ],
+      "fields": [
+        "authorized product and direction",
+        "target vector stages/population",
+        "actual completion date/instant",
+        "phase performance",
+        "root/wood treatment where applicable"
+      ],
+      "acquisition_routes": [
+        "actual official treatment and field records",
+        "qualified operator records verified under the operative procedure"
+      ],
+      "sufficiency": "A prescription or planned calendar is not treatment. C computes waiting and timing from actual qualified performance. Do not require continuous spraying to establish treatment during an applicable phase.",
+      "absence": "Missing treatment evidence differs from proven omitted treatment; a resolved no-treatment route does not require an invented wait.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "removal-performance",
+      "claim": "Actual commencement, removal, destruction and verification are established for the exact required work.",
+      "grain": "one actual operation/verification and the plant or surface population it covers",
+      "keys": [
+        "prescription/work",
+        "App buffer code or corresponding source work key",
+        "operation/record identity"
+      ],
+      "fields": [
+        "plant number/species and/or removed surface",
+        "geolocation/polygon and area ha",
+        "removal/commencement date or instant",
+        "performer/presiding role",
+        "signatures/photographs where required",
+        "root/wood/foliage disposition",
+        "correctness finding",
+        "bounded complete history"
+      ],
+      "acquisition_routes": [
+        "App Xylella actual records under DDS45 documented form",
+        "signed removal/destruction/inspection verbali",
+        "qualified public execution attestations"
+      ],
+      "sufficiency": "The public form establishes an actual record format, not a completed operation. Preserve commencement, physical removal, permitted wood handling, verification and their times. Required member/scope coverage is separate from published-row completeness. Public source-derived expected-state columns cannot supply execution or noncommencement.",
+      "absence": "Missing operation records are not nonexecution. Only a complete qualified history or affirmative evidence supports omission/noncommencement.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "sample-custody",
+      "claim": "The particular sample handoff and mandatory transport conditions are evidenced.",
+      "grain": "one sample batch/handoff/receipt linked to constituent sample identities",
+      "keys": [
+        "sample/batch",
+        "handoff record",
+        "receiving laboratory"
+      ],
+      "fields": [
+        "collection date/instant",
+        "delivery date/instant",
+        "refrigerated transport",
+        "assistants/driver signatures",
+        "transporter countersignature",
+        "other established mandatory failures",
+        "delivery history completeness"
+      ],
+      "acquisition_routes": [
+        "actual App/paper handover and receipt records",
+        "DDS31/DDS45 documented custody procedure and forms"
+      ],
+      "sufficiency": "Preserve actual delivery and source-required signatures. The form defines fields; it does not prove transport occurred. A date-only same-day record can support a same-calendar-day claim without inventing an exact delivery instant for a different clock.",
+      "absence": "Unknown delivery or refrigeration is not affirmative failure.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "operative-assessment",
+      "claim": "The competent factual judgment or established legal consequence required by the exact predicate is available.",
+      "grain": "one reasoned determination concerning a specific proposition and context",
+      "keys": [
+        "competent source",
+        "determination identity",
+        "exact proposition/context",
+        "event date"
+      ],
+      "fields": [
+        "conclusion",
+        "considered evidence and source-required factors",
+        "scope",
+        "reasoning",
+        "applicable authority/policy",
+        "resolved versus remaining ambiguity"
+      ],
+      "acquisition_routes": [
+        "reasoned official case/field decisions",
+        "applicable policy supplying an exercised choice",
+        "source-grounded build-time adjudication for non-reserved evidence questions"
+      ],
+      "sufficiency": "Resolve supported in-actu choices during construction. Do not create operator model menus or demand individual authorization where an applicable policy supplies the choice. A proven defect affects the particular legal consequence established; missing paperwork is not automatically invalidity.",
+      "absence": "Genuine load-bearing ambiguity remains named for Owen; reachable evidence is acquisition work.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset",
+        "qualified-observation"
+      ]
+    },
+    {
+      "id": "execution-cost",
+      "claim": "The narrow lawful-work and cost basis affecting this removal chain is established.",
+      "grain": "one lawful execution work scope and competent cost determination",
+      "keys": [
+        "execution/work",
+        "cost determination",
+        "legally chargeable person"
+      ],
+      "fields": [
+        "lawful work basis",
+        "necessary activities/quantities",
+        "cost basis and amount",
+        "determination date",
+        "primary obligor or proven offender as required"
+      ],
+      "acquisition_routes": [
+        "competent execution/cost determination and supporting work records"
+      ],
+      "sufficiency": "A duty to undertake substitute execution is not determined costs or a recovery right. Prospective lawful cost determination need not universally await completed work. This contract does not open grants, payments or the full penalty workflow.",
+      "absence": "Missing cost records affect cost conclusions, not separately established removal duties.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "controlled-access",
+      "claim": "The requested evidence use follows the actual source access route and permission scope.",
+      "grain": "one principal, requested evidence scope and access grant/route",
+      "keys": [
+        "principal/role",
+        "source system",
+        "permitted scope",
+        "valid interval"
+      ],
+      "fields": [
+        "custodian",
+        "documented access method",
+        "authorization scope",
+        "export/correction route",
+        "applicable restrictions"
+      ],
+      "acquisition_routes": [
+        "DDS45 Osservatorio/ARIF access arrangements",
+        "official system documentation and authenticated custodian grants"
+      ],
+      "sufficiency": "Public evidence stays usable for its supported claims. A documented role/access route is not a claim that credentials or every backend export have been acquired. Do not expose controlled support through a public reader. A data-handler appointment and an actual system access grant have different scope; no replacement edge or current credential follows merely from a newer appointment title.",
+      "absence": "Permission absence leaves that evidence unavailable without invalidating independent public evidence.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "boundary-context",
+      "claim": "An external procedural fact affects only the retained boundary/dependency in the accepted chain.",
+      "grain": "one source-established external event or status relevant to the retained proposition",
+      "keys": [
+        "external proceeding/event",
+        "exact affected person/work",
+        "event date"
+      ],
+      "fields": [
+        "source-established status",
+        "scope",
+        "competent issuing body",
+        "notice/defence/payment occurrence only when the retained boundary consumes it"
+      ],
+      "acquisition_routes": [
+        "competent external record or determination"
+      ],
+      "sufficiency": "Accepted A retains some surrounding legal boundaries. This evidence interface does not admit operation of the Law689 penalty chain, grants or funding workflows. Do not acquire irrelevant full external populations merely because the provision mentions them.",
+      "absence": "An unavailable external fact remains scoped; no synthetic proceeding state is supplied.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    },
+    {
+      "id": "pest-classification",
+      "claim": "The identified pest belongs to the operative source-listed legal category.",
+      "grain": "one taxon and legal-list version at the event date",
+      "keys": [
+        "taxon",
+        "list/version",
+        "event date"
+      ],
+      "fields": [
+        "identified pest",
+        "applicable quarantine/priority category",
+        "source list entry"
+      ],
+      "acquisition_routes": [
+        "accepted source legal lists and official identification evidence"
+      ],
+      "sufficiency": "Use the exact event-time list and taxon identity; the source distinction does not expand the product to other pests.",
+      "absence": "Unknown identification does not establish category membership.",
+      "admissible_instance_roles": [
+        "official-record",
+        "official-dataset"
+      ]
+    }
+  ]
+}

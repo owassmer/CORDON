@@ -1,0 +1,139 @@
+{
+  "currentVersion": 10.11,
+  "id": 75,
+  "name": "VITE - 2013-14",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 74,
+    "name": "VITE"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "c1d50ef381a1d9416e9e60da181e7051",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJ1JREFUKJHNzzFKQ0EQgOFvceEVASUbTKVNrhLIGcTCIsezSJ+QIqWCkJtMv8/oWmgRQjSv9J/2G5jJoLnDClMndbp+ZPQUKV4ga+6xw+wUQ/2edWllESleM55/w0ddh1hrbnOnG1f1ggc3uMpD5HH/caGq/UD7gc9clGWIDcZ/4AMeJX2OFG+llXmILcoZ/I4HyYqfHyLFHpMhd30BU0EtYDd1sLYAAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 9,
+            "height": 9,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "NEGATIVO",
+          "label": "NEGATIVO",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 578982.6562,
+    "ymin": 4410648.1354,
+    "xmax": 799307.1672,
+    "ymax": 4586718.1539,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "timeInfo": {
+    "startTimeField": "DATA_CAMPIONE",
+    "endTimeField": null,
+    "trackIdField": null,
+    "timeExtent": [
+      1384297200000,
+      1386111600000
+    ],
+    "timeReference": {
+      "timeZone": "W. Europe Standard Time",
+      "respectsDaylightSaving": false
+    },
+    "timeInterval": 2,
+    "timeIntervalUnits": "esriTimeUnitsDays",
+    "exportOptions": {
+      "useTime": true,
+      "timeDataCumulative": true,
+      "timeOffset": null,
+      "timeOffsetUnits": null
+    },
+    "hasLiveData": true
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeString",
+      "alias": "ID_CAMPIONE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

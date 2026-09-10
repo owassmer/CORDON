@@ -1,0 +1,91 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/69",
+  "name": "Ispezioni Visive 2014-15",
+  "captured_from": "2026-09-10T21:32:09.575415+00:00",
+  "captured_through": "2026-09-10T21:33:39.238939+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 6232,
+  "unique_oids": 6232,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "0b26e9c11042028a66ad801f354600a4d325f51fd496444d18423d3f5f790171"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "1ef44e8edc3158abb259ab3271934c62383d69c35fab52ea1a640cb21d7a5689"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "eedbf83476e3d698678c68ba3d500f5bd94ca839db819fae271df8587d59a717"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "f3d9eedbb47d126d2375581762320255cc0ce1cdcf2ef0fe10185749f276bb88"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "7155a265dd191188db382f814681af3f24dfc70727497eaeaa0c256309fbceec"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "527a9b6f1c48a13d9ace593d14000047aab85f58264efbad408a9de5585771c2"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "5c17b819ac376aaa2008d778fec63208016fec7889295c60edceafe9581b49e7"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "ce46735cb51669830c499981b9266333532d0340f4a46d7b67fd62f89ee43bfc"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "6c2fbcb93fb6f204512929b17fe27ebdb1cfeaf80705a58478d5ceab5133ea68"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "6c0bd1f547f610106faa0eed96bb14ef15cc25497a24b54c7739621416335866"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "e5f763502f29e42da050afe0280b46bc1ab19f248846c10a15ff17f65a9b4d2d"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "56f55cee5436a0e70f92e2fb4fedcdae187c9f89724292cc7852f9dbde063328"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "84254c7fbd09ff8e39e0bd0fd9dc8535a5400dcc2274ba7f48b47e6821b8b5f3"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "133926e636dffa53b033b41cb5f84c38476d78b49d1bc8ca5907806674a10abb"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 400,
+      "sha256": "faa58979af0c680cfbaec7edfdad25d397079ff275826ad5481069cf93351d44"
+    },
+    {
+      "path": "00006000.json.gz",
+      "rows": 232,
+      "sha256": "8160d080d8994eda0df97baef241142f8b6a627a46e4d41b98676a1fc52b6cf1"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/44",
+  "name": "Positivi - campioni 2017-2018",
+  "captured_from": "2026-09-10T21:26:39.358954+00:00",
+  "captured_through": "2026-09-10T21:27:43.233460+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 3835,
+  "unique_oids": 3835,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "f6565f3483cfa4b46506f53e7a36e4405a11ee5770eba246c474fc8c238ae11e"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "1c89be357c235de3c0baa5cba6c23deb1d71b86f8924122cfc6372dd5a66413c"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "b657e4283477bf287e0df8114f16898c6583a0a056ebbc4470d1089a84d0bbb2"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "ebcbf29b233116f8942c359d308d10d1c22179e7c7253221101621cdbe8898a4"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "8b0517b7ed01d2cfd6a6692335a0bf0fe614b9c7ad65c91ebe74e5490e0d7889"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "3e65b71c13acac883ecbe28c601de9b4fb7ecae16edbdceac653b6d2ea2d5fe7"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "b2808d0c76950e61cc53f6c9a62fcce575f978ad9753defc5f67d084fefedcf6"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "32d652c186809f2d0263185b907fad96324595d74c91072ab29b4c4a3e5d1b22"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "58f0ceeec4d910402816bd50a64ca1999a0e2c39b82f362069b6e6086c254cf1"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 235,
+      "sha256": "bf809ea9f5f75ca53fd235f677830368f3b790e604d814a8215b198522ca965a"
+    }
+  ]
+}

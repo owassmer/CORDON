@@ -1,0 +1,86 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFFSintesiPrecedenti/MapServer/7",
+  "name": "Olivo - Campioni 2024 sub. fastidiosa",
+  "captured_from": "2026-09-10T21:35:49.244723+00:00",
+  "captured_through": "2026-09-10T21:36:15.470537+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 5605,
+  "unique_oids": 5605,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "c03db5ba8e630e507f9aac8cb86068e6afbe9e68047762fa192c756a971e964e"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "a74598517186f7129a80a09cd88a37b2c611a61dfbe03d6e5d983ac3c0a4f5b0"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "3c4da82f3d7d126fa7a194a0ad2e0f95ec6f19e3ce319fb2f21568103505c72d"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "4211e88ade5ce566cf0c4b7f6c48ee73de7fa8617f6c72991c484d8b54471f40"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "12390e5cf792cef5847262492b53a2d1c05df85356f9cd761d15d4e2b189293c"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "1659db81066a77b05b3f33a529698cd5df4dc4f57ebe55da81f36871d5c54591"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "04f3ffc927d2801a84fd8cedd6ce191daf4cf40be6e5e71ecbff3c1469e4328f"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "5a25457a962392332eea40a98e5daeaf6b704e7239c4662b4671ed377428da31"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "a400759e25841dc64a6662ce09bd4993ee11962ad1b2ec680d7975ef1e0a4280"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "bcd719319fe31c05cfbe81c522b84eaaf469ab0dc4d56e367dc11e3e6022b85e"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "733ee560aa9d61e26dbe2f768202fe38c1a30d067649dac5192b3b74dbff2110"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "9b49d2dddb1adc9a09c15b8b231d0f5bb2835505fe5e6e57c91d617cf257ff2c"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "fa86b353674849176fa634a7b474def6cd9042a14d4dbfb6b558bbacbf9c6cdc"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "ca37e896f8c93966802fea3ded70226e69da2c8f551a611afc914e38433b0c91"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 5,
+      "sha256": "6e0658f04b4d3676bac19a86725737488a241dd7bd6b7f8d2208876369c4d3f0"
+    }
+  ]
+}

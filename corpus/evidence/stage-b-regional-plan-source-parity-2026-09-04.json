@@ -1,0 +1,58 @@
+{
+  "schema": "cordon-source-parity-v1",
+  "status": "EVIDENCE_RECORD_NOT_AUTHORITY",
+  "scope": "Every Stage B source_phrase produced by the five OCR-derived regional action-plan families",
+  "method": {
+    "extract_check": "Whitespace-normalized, case-insensitive exact containment in the admitted extract",
+    "primary_check": "Primary PDF SHA-256 recomputed against the migration-provenance archive and compared with migration/MANIFEST.csv",
+    "visual_check": "Rendered primary pages inspected for the high-risk 2021 notification ladder and the 2025 almond exception and notification ladder. Extended 2026-09-07 to DGR1075 post-finding coverage, sequence and ST53 qualification: printed plan pages 22–23, physical PDF pages 31–32; primary PDF hash rechecked. Extended 2026-09-08 to the existing-notification update sentence in §4.4: printed plan page 25, physical PDF page 34, as verified in the pass-8 joint adjudication.",
+    "limit": "This record validates the Stage B phrases named by its scope; it does not claim whole-document OCR parity"
+  },
+  "instruments": [
+    {
+      "instrument_id": "PUG-DGR538-2021",
+      "primary_pdf_sha256": "dec28b2d8d175e5f21f881493a5b40a75e0586d313868e74156f743333ba6205",
+      "extract_path": "regulation/jurisdiction/regional/DGR-538-2021-plan.tesseract.txt",
+      "extract_sha256": "389d7501684a5581bae0eb3099122d8817a83b5ee2632d8550b6b902180630a8",
+      "stage_b_phrases": 5,
+      "normalized_exact_matches": 5,
+      "primary_visual_pages": [25]
+    },
+    {
+      "instrument_id": "PUG-DGR343-2022",
+      "primary_pdf_sha256": "6399d42346fd9786830f1ff15ed056df418650ac7f95925d9999354382eefcca",
+      "extract_path": "regulation/jurisdiction/regional/DGR-343-2022-plan.txt",
+      "extract_sha256": "956bec799c80e707c2235f4ee64e68129cba3be9b8db6755293fc095e1b5caa5",
+      "stage_b_phrases": 7,
+      "normalized_exact_matches": 7,
+      "primary_visual_pages": []
+    },
+    {
+      "instrument_id": "PUG-DGR1866-2022",
+      "primary_pdf_sha256": "428450ef83933a90b677bb32d7b825b49da31e812e0a02442337f3a863eefc00",
+      "extract_path": "regulation/jurisdiction/regional/DGR-1866-2022-plan.txt",
+      "extract_sha256": "50d679c51ae222dcb12f6339f3cc1a013e8e068dfbf1bed7f3603bb89951e64e",
+      "stage_b_phrases": 7,
+      "normalized_exact_matches": 7,
+      "primary_visual_pages": []
+    },
+    {
+      "instrument_id": "PUG-DGR1593-2024",
+      "primary_pdf_sha256": "c9d29cbe336c91cb7408e7b5627e4c27f179e0914276016a7398a9ca24e2a170",
+      "extract_path": "regulation/jurisdiction/regional/DGR-1593-2024-pages35-37.tesseract.txt",
+      "extract_sha256": "53ebf9093f41011f4765ea5aba6e672f0902982e8a7bb0de6460e5c6560dd6a3",
+      "stage_b_phrases": 6,
+      "normalized_exact_matches": 6,
+      "primary_visual_pages": []
+    },
+    {
+      "instrument_id": "PUG-DGR1075-2025",
+      "primary_pdf_sha256": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "extract_path": "regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "extract_sha256": "3df46f0624de15d766514afbb390852152579dfa2fa612f23619e07db13d7622",
+      "stage_b_phrases": 12,
+      "normalized_exact_matches": 12,
+      "primary_visual_pages": [22, 23, 24, 25]
+    }
+  ]
+}

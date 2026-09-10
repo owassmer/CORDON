@@ -1,0 +1,56 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFMultiplexSintesiPrecedenti/MapServer/9",
+  "name": "Altre Aree - Campioni 2024 sub. multiplex",
+  "captured_from": "2026-09-10T21:36:43.145356+00:00",
+  "captured_through": "2026-09-10T21:36:59.393362+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 3547,
+  "unique_oids": 3547,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "b5fd1471d7b65b29e1613158bbf9900b1c4f74886e67374055831b03df20587e"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "52b479124d437aa8ae3a530a07bb4dd43f810a737e93e85a0783938c5c6d1283"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "5c9797df7e451678395b46df3ba286084f3198f92ec76c5c7f5b7f8860084538"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "168dd512b335b3549e818cbc04d959f480e3982741b9d302307a126a2aaebc19"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "debdc54cabdbc4f7973a51b28d303e60e99440e5351c531dd11bb288aa02e7f2"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "dae552cae8ac289983997aa26fd12f86b2a11bed211420bb972d05b5bcdd5987"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "7ec6eb02fd9116634e3be6ebda744c7f8e8ba26ae1346798eec41222ff3d9712"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "80943076c2a095a646143c6a287b7b8b1aaa04b2440b069e79054f90c174e5a9"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 347,
+      "sha256": "482b5b7556a7a25e92a451b263b34a0ce9acdb7cf118fcff8bb355172275527c"
+    }
+  ]
+}

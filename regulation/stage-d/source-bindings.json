@@ -1,0 +1,197 @@
+{
+  "schema": "stage-d-source-bindings-v2",
+  "rule": "A source enters D only because it supplies a named input required by accepted A-C. A binding describes the source itself, not the investigation history. First-party Osservatorio records are ordinary operator inputs, not an external authority problem.",
+  "sources": [
+    {
+      "id": "monitoring-records",
+      "name": "Regional monitoring observations and campaign workbooks",
+      "purpose": "Supply the observed sample, plant or survey unit; sampling date and location; species; published result; and links to the confirming report.",
+      "contracts": [
+        "official-finding",
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody",
+        "plant-population",
+        "survey-design",
+        "survey-performance",
+        "pest-classification",
+        "evaluation-context"
+      ],
+      "routes": [
+        "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
+        "https://webapps.sit.puglia.it/arcgis/rest/services"
+      ],
+      "population": "All records in each admitted campaign release and SIT monitoring layer, including positive, negative and other result states.",
+      "reader": "cordon_d.campaign and cordon_d.releases",
+      "open": "Reacquire each admitted release and establish how repeated observations relate to the same physical plant or survey unit. A result label does not select the population."
+    },
+    {
+      "id": "result-documents",
+      "name": "Official laboratory result documents",
+      "purpose": "Supply the laboratory's result, taxon or subspecies, method, report identity and report date for the sample named by the document.",
+      "contracts": [
+        "official-finding",
+        "analytical-result",
+        "laboratory-status",
+        "sample-custody"
+      ],
+      "routes": [
+        "DOCUMENTO_CONFERMA links published in regional monitoring records"
+      ],
+      "population": "Every result document referenced by an admitted monitoring release, followed through its own source link.",
+      "reader": "cordon_d.campaign, cordon_d.releases and a source-structure report reader still to be completed",
+      "open": "Reacquire the referenced documents and derive report-row joins and corrections without a case list or authored expected answer."
+    },
+    {
+      "id": "official-areas",
+      "name": "Adopted demarcated-area geometry",
+      "purpose": "Supply the infected, containment, buffer and other legally consequential area containing a location on the event date.",
+      "contracts": [
+        "adopted-geography",
+        "boundary-context",
+        "evaluation-context"
+      ],
+      "routes": [
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer"
+      ],
+      "population": "Every geometry version required by an accepted A provision interval, together with the act that adopted it.",
+      "reader": "cordon_d.releases and cordon_d.spatial",
+      "open": "Reacquire the current and consequential historical versions and bind each version to its adopting act."
+    },
+    {
+      "id": "cadastre",
+      "name": "Cadastral parcel geometry and references",
+      "purpose": "Supply the parcel geometry and cadastral reference containing or intersecting a relevant plant or work location.",
+      "contracts": [
+        "cadastral-geometry"
+      ],
+      "routes": [
+        "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2"
+      ],
+      "population": "The parcels spatially reached by an admitted finding or removal population; national AdE geometry is the current reference where available.",
+      "reader": "cordon_d.releases and cordon_d.spatial",
+      "open": "Reacquire the required parcel population and preserve source cadastral identifiers. Geometry alone does not establish ownership or authority to enter."
+    },
+    {
+      "id": "removal-orders",
+      "name": "Osservatorio removal determinations and incorporated annexes",
+      "purpose": "Supply the issued removal measure, its operative branch, date, referenced plants or parcels, and any explicit supplement or correction.",
+      "contracts": [
+        "operative-act",
+        "case-prescription",
+        "administrative-event",
+        "evaluation-context"
+      ],
+      "routes": [
+        "https://burp.regione.puglia.it/bollettini",
+        "https://www.regione.puglia.it/documents/736605/"
+      ],
+      "population": "Every Osservatorio determination required by an admitted finding or by a correction relationship reached from it.",
+      "reader": "Not yet implemented after the D purge",
+      "open": "Reacquire the admitted originals and implement one general reader across the population. Prescription means the Osservatorio's formal direction to remove named plants or parcels."
+    },
+    {
+      "id": "notice-and-response-records",
+      "name": "Notice, publication and owner-response records",
+      "purpose": "Supply the actual sending, delivery, publication, receipt or response event when an accepted A or B rule depends on that event.",
+      "contracts": [
+        "recipient-notice",
+        "owner-response",
+        "administrative-event"
+      ],
+      "routes": [
+        "The Osservatorio's protocol and PEC records",
+        "The relevant municipality's official publication register when the governing measure uses municipal publication"
+      ],
+      "population": "The event records attached to an admitted removal matter, not every notice published by every municipality.",
+      "reader": "cordon_d.notices and cordon_d.events",
+      "open": "The intended operator's own event record is primary when it holds the event. Public register data is needed only for a legally consequential municipal publication fact."
+    },
+    {
+      "id": "plant-protection-records",
+      "name": "Protected-plant status and required permission records",
+      "purpose": "Supply an individual plant's protected status and, only where that status changes removal, the applicable permission or decision.",
+      "contracts": [
+        "protected-status",
+        "boundary-context",
+        "operative-act"
+      ],
+      "routes": [
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1",
+        "The competent authority's actual permission record for the affected plant or parcel"
+      ],
+      "population": "Protected plants reached by the removal population and the permission records required for those plants. It is not the publisher-wide landscape-proceeding catalogue.",
+      "reader": "Generic ArcGIS and document readers; source-specific interpretation remains to be implemented",
+      "open": "Reacquire the register and establish event-time status. Investigate PPTR, municipal planning or a landscape authorization only when the affected plant's accepted branch requires it."
+    },
+    {
+      "id": "land-standing-records",
+      "name": "Current owner, occupier and public-land standing records",
+      "purpose": "Supply the person or public body with the legally consequential relationship to the affected parcel or plant.",
+      "contracts": [
+        "party-land-standing",
+        "boundary-context"
+      ],
+      "routes": [
+        "The Osservatorio's case record and transmitted cadastral/owner data",
+        "A competent public asset register when the affected parcel is public land"
+      ],
+      "population": "Only the people and parcels reached by an admitted finding or removal measure.",
+      "reader": "Generic record and document readers; no current source-specific consumer",
+      "open": "Current standing must come from the operator's matter or competent register. Old public-land catalogues and cadastral geometry do not by themselves prove current standing."
+    },
+    {
+      "id": "field-and-execution-records",
+      "name": "Osservatorio and executing-body operational records",
+      "purpose": "Supply assignment, field assessment, treatment, removal, completion and lawful cost facts required by the accepted chain.",
+      "contracts": [
+        "personnel-assignment",
+        "operative-assessment",
+        "treatment-performance",
+        "removal-performance",
+        "execution-cost",
+        "controlled-access",
+        "administrative-event"
+      ],
+      "routes": [
+        "The Osservatorio's casefile and field systems",
+        "ARIF or other executing-body records incorporated into the matter"
+      ],
+      "population": "The operational records for the admitted finding and resulting work, including corrections and completion evidence.",
+      "reader": "cordon_d.evidence, cordon_d.events and source-specific readers still to be implemented",
+      "open": "No public procedure manual can supply an unseen operational fact. At deployment these are first-party operator inputs, with unavailable fields left unknown."
+    },
+    {
+      "id": "vector-and-treatment-observations",
+      "name": "Official vector and treatment observations",
+      "purpose": "Supply observed vector state or treatment performance when an accepted computation requires it.",
+      "contracts": [
+        "vector-biology",
+        "treatment-performance",
+        "survey-performance"
+      ],
+      "routes": [
+        "Official Osservatorio, ARIF and incorporated scientific monitoring publications"
+      ],
+      "population": "The observations for the place, period and intervention evaluated by the accepted consumer.",
+      "reader": "Generic table and document readers; source-specific reader not yet selected",
+      "open": "Identify the exact C consumers before acquiring a publication series. General Xylella research is not an operational input by default."
+    },
+    {
+      "id": "calendar",
+      "name": "Italian civil calendar",
+      "purpose": "Supply weekends and national holidays for B clocks expressed in working days.",
+      "contracts": [
+        "calendar"
+      ],
+      "routes": [
+        "Italian national holiday law and enacted one-off changes"
+      ],
+      "population": "The bounded calendar years required by accepted B clocks.",
+      "reader": "cordon_d.calendar",
+      "open": "Extend only when an accepted clock reaches a year not currently represented."
+    }
+  ]
+}

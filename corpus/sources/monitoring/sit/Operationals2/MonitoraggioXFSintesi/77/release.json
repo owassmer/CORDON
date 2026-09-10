@@ -1,0 +1,56 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/77",
+  "name": "Altre Specie - 2013-14",
+  "captured_from": "2026-09-10T21:32:50.711836+00:00",
+  "captured_through": "2026-09-10T21:33:36.080303+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 3388,
+  "unique_oids": 3388,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "c0b9e65109d719bf2bea79e10bdf4d790fd1d58f0994dcd4e7343493700bcd86"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "33a5c3a306a0374f6fac6deb9da3040107b2a3965f9a3d030b8dbf93c352838e"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "297b65ef495d109787fb7acee089b8be1885e49a162590734aaa4db8ff98854d"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "aae218535390c8f59e4165a4f9706863eb54f41f406a1977ccfaadc54d9e7b56"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "a0de7f005b2d72a37380ea380180f8858c68be39e0e8bc2d60b02d49040d3c22"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "4f4a51809cb550435e80cfa41687c5d5c773defbd6ffbaee8857dc700ce574da"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "aed2c3c8fa63bb30f321c77ac38e175775b1cca9e5cf55affcb4c6e1ac6c7d6a"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "74caff4bcbb25e2a34458a1f066877987891ccfcd921ecaf2c40fe7aec0498a1"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 188,
+      "sha256": "f28cf98f4ee1cd79a0635a8db855492d557be3434ace06a7538d1707b58d85d9"
+    }
+  ]
+}

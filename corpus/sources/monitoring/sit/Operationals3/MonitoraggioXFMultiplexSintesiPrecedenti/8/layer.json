@@ -1,0 +1,155 @@
+{
+  "currentVersion": 10.11,
+  "id": 8,
+  "name": "Fruttiferi - Campioni 2024 sub. multiplex",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 5,
+    "name": "Campionamento 2024"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "31c6c9c99aefbc7238b07acb9493cd63",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACxJREFUGJVj+c/AkMfAwMDHgB2cZWFgYChjYGCQxib7n4FhJgsOnXAwJBQAABGZBJJP3Y0fAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "Positivo",
+          "label": "POSITIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "34684b39c2034749f85f5e42ab1b46c3",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAC9JREFUGJVjCf3PkMfIwMDHgAX8ZmA4y8LAwFD2n4FBGpsCpv8MM1mwSSCDIaEAADEqBuT8mOoTAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "Negativo",
+          "label": "NEGATIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "9d32674d588f41fefe92f8841b1caa77",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAACpJREFUGJVjYTj6P4+BgYGPATs4y8LAwFDGwMAgjV3+/0wWHDrhYEgoAADXOwVXh3kd9gAAAABJRU5ErkJggg==",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "IN ATTESA",
+          "label": "IN ATTESA",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 646529.2627,
+    "ymin": 4516250.2625,
+    "xmax": 646529.2916,
+    "ymax": 4516289.356,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    },
+    {
+      "name": "TIPOLOGIA",
+      "type": "esriFieldTypeString",
+      "alias": "TIPOLOGIA",
+      "length": 255,
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

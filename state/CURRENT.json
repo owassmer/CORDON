@@ -1,25 +1,26 @@
 {
   "schema": "cordon-current-state-v1",
-  "as_of": "2026-09-04",
+  "as_of": "2026-09-10",
   "operator": "Regione Puglia — Sezione Osservatorio Fitosanitario",
   "telos": "Reduce projected Xylella loss through a legally and evidentially faithful computational decision instrument.",
-  "current_stage": "B",
+  "current_stage": "D",
   "stages": {
     "A": {
-      "status": "CLOSED_UNDER_STANDING_READING_AUTHORITY",
+      "status": "CLOSED",
       "accepted_by": "Owen Wassmer",
+      "reopened_proposition": "Owen accepted the exact regional survey amendment with Stage C on 2026-09-08 after convergent five-facet review. The ten reviewed provisions are promoted; the prior accepted rows and national prefix are unchanged. Acceptance remains revisable.",
       "canonical_artifacts": {
         "eu": {
           "path": "regulation/stage-a/authoring-eu.json",
-          "sha256": "759d0ae7ac1876bcc365a86dd58b8450a94d027c37c5c5cf32f8a5c15f49c5c0",
+          "sha256": "7411f4251b1e6843f11dbac0c579e9373e352fccc6b42187621b60ab8ffbb0be",
           "provision_versions": 123
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "6ba04a3a3facef23a285a275bea5e51e1bf62b90c04fb0fbb909c83a80518221",
-          "provision_versions": 400,
-          "national_prefix_rows": 214,
-          "national_prefix_sha256": "0df80951cda6172f048706059cf853f821d3e2fa618d75e6deda4cb2421a82ee"
+          "sha256": "1398dd1be2c734fc6a1c635463f7c99165d13cdeb7bb39aa2400e13fafe246ed",
+          "provision_versions": 442,
+          "national_prefix_rows": 219,
+          "national_prefix_sha256": "bb5a100f3c5f1d50c51f706e141de17453b372443a87b66167c082f893da7c68"
         }
       },
       "bounded_unknowns": [
@@ -31,50 +32,84 @@
       "reopening_rule": "Name the affected proposition and show source evidence that falsifies or materially completes the accepted meaning."
     },
     "B": {
-      "status": "OPEN",
+      "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "3d0a2d3334dfb53a5d3cc8740d16f623befb88948d718805c28ff7dd8bccb56f",
-        "schema": "stage-b-essence-v3",
+        "sha256": "efa7650b93978b91a30b82d9c9c30955e873334d7824057e97c7fcd8f6b0dc85",
+        "schema": "stage-b-essence-v6",
         "counts": {
-          "clocks": 105,
-          "parameters": 53,
-          "dispositions": 758
+          "clocks": 142,
+          "parameters": 169,
+          "dispositions": 929
         }
       },
       "population": {
         "path": "regulation/stage-b/population.json",
-        "sha256": "2121e9f49a4baae8408723f510566b65865b2bc55a9bb5b4be47cb34983817fc",
+        "sha256": "d00217fcf1729d94723b1ea5a7bd15f3e1acde3bbda85f6f4b994eeadf4228e6",
         "seams": {
-          "1": 136,
+          "1": 160,
           "2": 100,
           "3": 126,
-          "4": 161
+          "4": 179
         }
       },
-      "semantic_acceptance": {
-        "1": "NOT_ASSERTED",
-        "2": "NOT_ASSERTED",
-        "3": "NOT_ASSERTED",
-        "4": "NOT_ASSERTED"
+      "accepted_by": "Owen Wassmer",
+      "reopening_rule": "Acceptance establishes current sufficiency, not permanent closure. Reopen a named requirement when source evidence or a demonstrated decision-chain failure shows the base is wrong or insufficient; repair affected owners and consumers and obtain acceptance of changed content."
+    },
+    "C": {
+      "status": "CLOSED",
+      "plan_and_authorization": "corpus/evidence/stage-c-derivation-2026-09-08.md",
+      "library_selection": "Full discretion to select the best libraries for each component; current installation does not constrain the choice.",
+      "acceptance_posture": "A/B is the accepted, currently sufficient and revisable base. Preserve the loss-reduction objective, chosen decision chain, proportionality, all five review facets and conclusion-specific uncertainty.",
+      "upstream_amendment": {
+        "path": "corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json",
+        "status": "ACCEPTED_AND_PROMOTED"
       },
+      "accepted_by": "Owen Wassmer",
+      "acceptance_record": {
+        "path": "corpus/evidence/stage-c-acceptance-2026-09-08.json",
+        "sha256": "3548e36c38301c65c47e0549bd33f6cc74f268e08155654bbdf1b0ca3d7a0ded"
+      },
+      "canonical": {
+        "path": "regulation/stage-c",
+        "sha256": "6f053bb34a9d4801716387d5e943d826b2e501a92256985938b944ed19a4bd44",
+        "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
+      }
+    },
+    "D": {
+      "status": "OPEN",
+      "purpose": "Connect every external fact required by accepted A-C to the source population and ordinary reader that can supply it to the Osservatorio.",
+      "canonical": {
+        "contract": "regulation/stage-d/SPEC.md",
+        "input_map": "regulation/stage-d/INPUTS.md",
+        "input_contracts": "regulation/stage-d/contracts.json",
+        "source_bindings": "regulation/stage-d/source-bindings.json"
+      },
+      "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
+      "current_capability": "The bounded national calendar and generic readers for tabular, geographic, document, event and evidence records remain. No other source population is currently claimed acquired or semantically complete after the purge.",
+      "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent five-facet review and Owen acceptance.",
       "next": [
-        "Owen accepts or reopens corrected seams 1, 2, and 3",
-        "Run and persist the required Stage B review facets on accepted content",
-        "Complete the Stage B mutation suite",
-        "Complete the cross-cutting flight-season, whole-ledger, and cross-seam duplicate pass",
-        "Run the post-stage grill on the remaining register items and close Stage B"
+        "Select the first input row by consequence to the positive-finding-to-removal chain.",
+        "Acquire and semantically read that row’s complete within-aperture source population.",
+        "Implement its ordinary source-to-input path and delete the unit workbench.",
+        "Repeat for the next consequential input until every INPUTS.md row is complete or explicitly unavailable to the Osservatorio.",
+        "Run whole-D convergent review, present D for Owen acceptance, then open Stage E."
       ]
     },
-    "C": {"status": "BLOCKED_ON_STAGE_B"},
-    "D": {"status": "BLOCKED_ON_STAGE_B"},
-    "E": {"status": "BLOCKED_ON_STAGE_B"},
-    "F": {"status": "BLOCKED_ON_STAGE_B"},
-    "G": {"status": "BLOCKED_ON_STAGE_B"}
+    "E": {
+      "status": "BLOCKED_ON_STAGE_D"
+    },
+    "F": {
+      "status": "BLOCKED_ON_STAGE_E"
+    },
+    "G": {
+      "status": "BLOCKED_ON_STAGE_F"
+    }
   },
   "aperture": {
-    "included": "The Osservatorio's live phytosanitary decision chain: authority, temporal law, constitutive geography, case branch, genuine case delta, and official evidence.",
+    "included": "Positive finding -> removal, through the Osservatorio's decisions, duties and actions, including the authority, event-time law, constitutive geography, diagnostic and case branches, genuine case delta, official evidence and execution dependencies needed to make that chosen chain legally and operationally faithful. Operator competence is necessary context, not admission of the operator's full remit. Historical material enters only through a present or prospective consequence; an already-held case is not required.",
     "deferred": [
+      "Article 18 planting/replanting authorisation, a distinct workflow outside the chosen positive-finding-to-removal chain",
       "Payments, grants, indemnities, and the Law 689 administrative-penalty chain",
       "The historical cooperative Land, Funding, Applications, Field Work, and Payments product route",
       "Platform ontology or interface design before Stages C–F close"

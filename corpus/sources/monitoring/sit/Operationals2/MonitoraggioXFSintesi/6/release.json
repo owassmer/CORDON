@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/6",
+  "name": "Positivi - Campioni 2024 sub. pauca",
+  "captured_from": "2026-09-10T21:26:25.986080+00:00",
+  "captured_through": "2026-09-10T21:26:28.531878+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 157,
+  "unique_oids": 157,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 157,
+      "sha256": "0d2c6f16d7e5b8b814d0abb368ceb078c56e340fe91f8c64af693ccade9af03c"
+    }
+  ]
+}

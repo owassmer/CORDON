@@ -1,0 +1,41 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFMultiplexSintesiPrecedenti/MapServer/3",
+  "name": "Fruttiferi - Campioni 2025 sub. multiplex",
+  "captured_from": "2026-09-10T21:36:16.579759+00:00",
+  "captured_through": "2026-09-10T21:36:38.855454+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 2042,
+  "unique_oids": 2042,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "26159020b0575bee4fda33da90931a6c234852e471e5a843b388bfe08bbbfe27"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "d95f20951da979c1995b007c8d189ab0f9346453a10fe48122169e500b93e9fc"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "c9b53f0561d4b21a8146d81e48707239421290f8ec2597653e046f04a865bd10"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "ed8ce560b097350a0461e9e2768e75978a58eeac84d14c8769e9a23fa2a9cff0"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "adb6ae201d87a52d7ac6d0863524e774676092c6da6db38086514251531f8e30"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 42,
+      "sha256": "b17ff342224b256afed74dac093204014bace495b3c09f063e333d81c3ce19e6"
+    }
+  ]
+}

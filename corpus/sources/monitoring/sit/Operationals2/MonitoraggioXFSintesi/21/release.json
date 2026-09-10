@@ -1,0 +1,51 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+  "name": "Positivi - Campioni 2021",
+  "captured_from": "2026-09-10T21:26:31.170548+00:00",
+  "captured_through": "2026-09-10T21:26:35.127016+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 2803,
+  "unique_oids": 2803,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "b4a6c8948aa349553d3323a23a182cfca39d34b0e5c9b7044e1dc04f739abe19"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "6f155c010301d951cd028046dac0aaa8bd83fa6de00f565ae34230ace665cee3"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "56aa52da005483e1e338a32282bce5c61b679c39ed9a1c261d77356759c7afba"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "c34ccf364721284762cab96406319b5a28022ff5d016b3a8e7acd13b1db47c53"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "5de06aa20a12f385d0b76c7a53ec44d38b151412205e2bf84c214320874b4714"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "8967446a2998d62f8f9ccf88785ca71cb00049ae50adb435fd5309991f76d596"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 3,
+      "sha256": "c3e9746a42a84c98aa8eac2f8698c1257f64fbf3a419915cf930afb78c829b3c"
+    }
+  ]
+}

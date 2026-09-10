@@ -1,0 +1,82 @@
+[
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2013_2014.xlsx",
+    "path": "CAMP_2013_2014.xlsx",
+    "captured_at": "2026-09-10T21:18:41.201095+00:00",
+    "sha256": "046736f2ddf6e687a1669edcb04a41b39ada7035784d19cffb5451554d40f8f2"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2014_2015.xlsx",
+    "path": "CAMP_2014_2015.xlsx",
+    "captured_at": "2026-09-10T21:19:10.287459+00:00",
+    "sha256": "de0d2838a243b47f06bd16aab52d039208af2cd3eef204a895bee789c96b2ab9"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2016_2017.xlsx",
+    "path": "CAMP_2016_2017.xlsx",
+    "captured_at": "2026-09-10T21:21:37.567126+00:00",
+    "sha256": "fd9e7a51a017527458fafdae7d007a1584de71c616654cdeead20c951875d385"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2017_2018.xlsx",
+    "path": "CAMP_2017_2018.xlsx",
+    "captured_at": "2026-09-10T21:23:17.353473+00:00",
+    "sha256": "1efe2f10012441ac1598b1df0ac76bf407abd4923f32d60ee9893c3e1dbe791c"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2018_2019.xlsx",
+    "path": "CAMP_2018_2019.xlsx",
+    "captured_at": "2026-09-10T21:19:18.627716+00:00",
+    "sha256": "0bb922f8f3807b173474e17cb5f1ad79b416fd437f62eaf7291a190bfb642e8a"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2019_2020.xlsx",
+    "path": "CAMP_2019_2020.xlsx",
+    "captured_at": "2026-09-10T21:19:14.448567+00:00",
+    "sha256": "cd1e974142feac7d015c4d0a05a5ea8fae55d44cf43a50b966cc4fc96f60740c"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2020.xlsx",
+    "path": "CAMP_2020.xlsx",
+    "captured_at": "2026-09-10T21:23:49.353976+00:00",
+    "sha256": "96eb6bc48969d37bbf763bde3de2b60fb4d3d236c28dcae331aa7da8dc278742"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2021.xlsx",
+    "path": "CAMP_2021.xlsx",
+    "captured_at": "2026-09-10T21:24:34.967324+00:00",
+    "sha256": "714841409d2480feefeed9bb7725d6c1d4560f213d50298ac2cf9ab905b2c5c2"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2022.xlsx",
+    "path": "CAMP_2022.xlsx",
+    "captured_at": "2026-09-10T21:25:55.063431+00:00",
+    "sha256": "9ec77895c202fb0db58d526f7a1f29331bbfbd03c42e1a4b5023ff064134aa0a"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2023.xlsx",
+    "path": "CAMP_2023.xlsx",
+    "captured_at": "2026-09-10T21:23:38.653615+00:00",
+    "sha256": "d0202f73d2d07f8c23a61210ddc028217150f8cdfe407180438f7507b93814a7"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2024.xlsx",
+    "path": "CAMP_2024.xlsx",
+    "captured_at": "2026-09-10T21:25:28.503563+00:00",
+    "sha256": "7420f4fd808b139eff3199be2411cf2c9f8329db0791b35e85e965acb2a9e2ea"
+  },
+  {
+    "url": "http://cartografia.sit.puglia.it/doc/xylella/download_monit_pauca/CAMP_2025.xlsx",
+    "path": "CAMP_2025.xlsx",
+    "captured_at": "2026-09-10T21:26:14.974388+00:00",
+    "sha256": "6d416c0f0058267df723d8cb498a617b280505de56df63295e8bc0ac4e5ab21a"
+  },
+  {
+    "url": "https://dati.puglia.it/ckan/dataset/6d0fb7c5-e197-4c16-bec9-4986011c05b6/resource/fe41c298-e6b4-4728-ba19-50d17e411372/download/camp_2020_2022.csv",
+    "path": "camp_2020_2022.csv",
+    "captured_at": "2026-09-10T21:30:37.147838+00:00",
+    "sha256": "124ebb627433a14735f158adfe2b9adb6abdfc124645e61f064ab3ebd0ff39f9",
+    "encoding": "latin-1",
+    "delimiter": ";"
+  }
+]

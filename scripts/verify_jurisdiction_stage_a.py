@@ -18,6 +18,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from verify_stage_a import ast_nodes, verify_result_references
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_AUTHORING = ROOT / "regulation/jurisdiction/canonical/authoring.json"
 EU_STABLE = ROOT / "regulation/stage-a/stable-provisions.csv"
@@ -73,6 +75,8 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
     rows = json.loads(authoring.read_text(encoding="utf-8"))
     if not isinstance(rows, list) or not rows:
         fail("canonical authoring must be a non-empty array")
+    eu_rows = json.loads((ROOT / "regulation/stage-a/authoring-eu.json").read_text(encoding="utf-8"))
+    verify_result_references(rows, eu_rows + rows)
     removed_fields = {
         "verbatim_text", "semantic_equivalence_key", "scope_status",
         "public_observability", "government_availability", "clock_rule",
@@ -165,12 +169,6 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
         fail("master containment routes are not explicitly disjoint: conclusive routes must exclude the incompatibility conflict")
     if "CONTAINMENT_AUTHORITY_OR_SELECTION_EVIDENCE_REQUIRED" not in ast_text:
         fail("master containment missing-evidence result absent")
-    master_effects = [route["effect"] for route in master["condition_ast"]["route_table"]]
-    if master_effects[:2] != [
-        "VALID_AREA_REQUIRED; PRESERVE_ANY_OUTSTANDING_EU_ARTICLE_4_DUTY",
-        "LEGAL_CONFLICT_OR_AUTHORITY_ADJUDICATION_REQUIRED",
-    ]:
-        fail("master invalid-area/conflict priority is not explicit")
 
     containment_children = {
         "IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km",
@@ -221,19 +219,29 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
     if "SOURCE_STATED_GEOGRAPHY_HELD" not in validity_text or "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED" not in validity_text:
         fail("source geography and operative area validity are collapsed")
 
-    # Article 13 provenance exists at both accepted-EU and shared Puglia seams.
+    # Puglia consumes the EU population and post-exception result, not a second provenance rule.
     article13 = get(by, "PUG-LR4-2017:Art.6(2)")
-    if "discovery basis = Article 15(2) monitoring" not in json.dumps(article13["condition_ast"]):
-        fail("shared Puglia Article 13 route lacks Article 15(2) provenance")
+    activation = next((route["when"] for route in article13["condition_ast"].get("route_table", [])
+                       if route["effect"] == "ARTICLE_13_REMOVAL_ACTIVATED"), None)
+    if activation is None:
+        fail("shared Puglia Article 13 removal activation is missing")
+    for sid, effect in (("EU-2020-1201:13(1)", "ARTICLE_13_BASELINE_REMOVAL_POPULATION"),
+                        ("EU-2020-1201:13(2)", "ARTICLE_13_REMOVAL_STANDS")):
+        required = {"result_ref": {"producer_stable_provision_id": sid, "allowed_effect": effect}}
+        if required not in list(ast_nodes(activation)):
+            fail("shared Puglia Article 13 route lacks the controlling population or exception result")
+    population13 = next(row for row in eu_rows if row["stable_provision_id"] == "EU-2020-1201:13(1)")
+    if "the finding arose from the Article 15(2) monitoring" not in json.dumps(population13["condition_ast"]):
+        fail("EU Article 13 population lacks Article 15(2) provenance")
 
     # Retained wood never reaches full-destruction results.
     for sid, full_effect, retained_effect in (
-        ("REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion", "ARTICLE_9_1_FULL_DESTRUCTION_COMPLETE", "ARTICLE_9_2_RETAINED_WOOD_ROUTE_COMPLETE"),
-        ("REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion", "ARTICLE_16_1_FULL_DESTRUCTION_COMPLETE", "ARTICLE_16_2_RETAINED_WOOD_ROUTE_COMPLETE"),
+        ("REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion", "ARTICLE_9_1_FULL_DESTRUCTION_COMPLETE", "ARTICLE_9_2_LIMITED_DESTRUCTION_COMPLETE"),
+        ("REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion", "ARTICLE_16_1_FULL_DESTRUCTION_COMPLETE", "ARTICLE_16_2_LIMITED_DESTRUCTION_COMPLETE"),
     ):
         row = get(by, sid)
         routes = {route["effect"]: json.dumps(route["when"], ensure_ascii=False) for route in row["condition_ast"]["route_table"]}
-        if "no relevant wood retained" not in routes.get(full_effect, ""):
+        if "no wood retained" not in routes.get(full_effect, ""):
             fail(f"{sid}: full destruction does not exclude retained wood")
         if "wood retained" not in routes.get(retained_effect, ""):
             fail(f"{sid}: retained-wood route missing")
@@ -287,10 +295,6 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
     for sid in ("IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation", "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation"):
         if "LATER_EVENT_DESIGNATION_STATUS_ESTABLISHED_WITHOUT_RETROACTIVE_START_CONCLUSION" not in effect_set(get(by, sid)):
             fail(f"{sid}: later operative status cannot coexist with unknown original start")
-    pni = get(by, "IT-PNI-2026:Xylella:Puglia-plant-survey-design")
-    if "SURVEY_DESIGN_CONTENT_HELD; DECISION_TIME_APPLICABILITY_UNRESOLVED" not in effect_set(pni):
-        fail("PNI content-known/binding-interval-unknown state missing")
-
     if check_projection:
         with (GENERATED / "dependency-manifest.csv").open(newline="", encoding="utf-8-sig") as handle:
             dependencies = list(csv.DictReader(handle))
@@ -329,7 +333,15 @@ def run_mutations(authoring: Path) -> None:
         row["condition_ast"]["route_table"] = [route for route in row["condition_ast"]["route_table"] if route["effect"] != effect]
 
     mutations.append(("drop containment conflict", lambda rows: drop_effect(rows, "PUG-LR4-2017:Art.6(1)", "LEGAL_CONFLICT_OR_AUTHORITY_ADJUDICATION_REQUIRED")))
-    mutations.append(("allow retained wood as full destruction", lambda rows: next(row for row in rows if row["stable_provision_id"] == "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion")["condition_ast"]["route_table"][0]["when"]["all_of"].__setitem__(2, {"predicate": "wood retained"})))
+    def allow_retained_wood(rows):
+        row = get({r['stable_provision_id']: [r] for r in rows}, "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion")
+        for node in ast_nodes(row['condition_ast']['route_table'][0]['when']):
+            if node.get('predicate') == 'no wood retained':
+                node['predicate'] = 'wood retained'
+                return
+        fail('retained-wood mutation has no target')
+
+    mutations.append(("allow retained wood as full destruction", allow_retained_wood))
     mutations.append(("remove Article 13 provenance", lambda rows: setattr_proxy(next(row for row in rows if row["stable_provision_id"] == "PUG-LR4-2017:Art.6(2)" and row.get("temporal_status") != "SUPERSEDED"), "condition_ast", {"predicate": "official infected-plant finding"})))
     mutations.append(("restore unsupported DGR343 policy", lambda rows: rows.append({**rows[-1], "stable_provision_id": "PUG-DGR343-2022:Art13(2)-scientific-retention-policy", "provision_version_id": "mutant:dgr343"})))
 

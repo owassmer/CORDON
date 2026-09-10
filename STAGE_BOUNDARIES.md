@@ -6,6 +6,8 @@ CORDON is derived in the order below because each stage supplies meaning that th
 
 A stage opens only from accepted upstream meaning. Its output must identify its canonical owner, its downstream consumer, its negative scope, and a check capable of falsifying its mechanical claims. Reviews assert; evidence and adjudication decide. Owen accepts a stage.
 
+Review coverage and adjudication follow `REVIEW_PRINCIPLES.md`.
+
 An accepted stage reopens only when a named proposition and source show that its meaning is wrong or incomplete. A downstream schema preference, missing convenience field, or implementation difficulty is not a reopening ground.
 
 ## A — legal provision decision map

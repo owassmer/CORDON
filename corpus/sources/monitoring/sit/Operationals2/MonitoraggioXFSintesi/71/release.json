@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/71",
+  "name": "Positivi -  2013-14",
+  "captured_from": "2026-09-10T21:32:10.504216+00:00",
+  "captured_through": "2026-09-10T21:32:31.221232+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 352,
+  "unique_oids": 352,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 352,
+      "sha256": "ddf3ab2a816b0ae70f125d083df4b79ebe09681dc16300accb264d475d0d7ece"
+    }
+  ]
+}

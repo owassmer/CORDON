@@ -1,4 +1,5 @@
 instrument_id,stable_provision_id,parent_stable_provision_id,article,structural_kind
+EU-2016-2031,EU-2016-2031:Art.22(3):annual-survey-results-report,EU-2016-2031:Art.22,22(3),paragraph
 EU-2016-2031,EU-2016-2031:Art.31(2):more-stringent-measure-notification,EU-2016-2031:Art.31:more-stringent-national-measures,31(2),article
 EU-2016-2031,EU-2016-2031:Art.31(2):more-stringent-measure-report-on-request,EU-2016-2031:Art.31:more-stringent-national-measures,31(2) second subparagraph,article
 EU-2016-2031,EU-2016-2031:Art.31:more-stringent-national-measures,,31(1),article
@@ -6,6 +7,7 @@ EU-2017-625,EU-2017-625:Art.100:national-reference-laboratory-status,,100,compos
 EU-2017-625,EU-2017-625:Art.101(1):national-reference-laboratory-tasks,,101(1),composite
 EU-2017-625,"EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple",,"37(1),(3)-(5)",composite
 EU-2017-625,EU-2017-625:Art.37(2):external-location-designation,,37(2),composite
+EU-2017-625,EU-2017-625:Art.38(1):official-result-notification,,38(1),paragraph
 EU-2017-625,EU-2017-625:Art.39:official-laboratory-audit-status,,39,composite
 EU-2017-625,EU-2017-625:Art.40(1)(b):other-official-activity-derogation,,40(1)(b),composite
 EU-2017-625,EU-2017-625:Art.41:representative-method-derogation-authority,,41,composite
@@ -181,6 +183,7 @@ IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§8.5:no-demarcati
 IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§8.6:area-composition,,§8.6:area-composition,paragraph
 IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§9.2:containment-vector-treatment-coverage,,§9.2,paragraph
 IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§9.3:containment-surveillance-band-2km,,§9.3,paragraph
+IT-DM-348260-2026-XYLELLA-PLAN,IT-DM-348260-2026-XYLELLA-PLAN:§9.3:eradication-vector-investigation,,§9.3,paragraph
 IT-DTU39-REV1,IT-DTU39-REV1:official-technical-instruction,,Preamble:official-technical-instruction,composite
 IT-DTU39-REV1,IT-DTU39-REV1:§4.2:sample-transfer,,§4.2:sample-transfer,paragraph
 IT-DTU39-REV1,IT-DTU39-REV1:§4:risk-based-sampling,,§4:risk-based-sampling,paragraph
@@ -213,8 +216,22 @@ IT-PNI-2026,IT-PNI-2026:adoption-and-publication-status,,adoption-and-publicatio
 PUG-DGR1075-2025,PUG-DGR1075-2025:Art7(3)-policy,,plan Article 7(3) policy,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:Convention-3.1:arif-surveillance-communication,,Convention 3.1,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control,,Convention 3.1,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.10:survey-design,,4.1.10,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.1:survey-method,,4.1.1,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.2:survey-design,,4.1.2,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.3:survey-design,,4.1.3,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.4:survey-design,,4.1.4,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.5:survey-design,,4.1.5,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.6:survey-design,,4.1.6,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.7:survey-design,,4.1.7,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.8:survey-design,,4.1.8,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.1.9:survey-design,,4.1.9,composite
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.2.1:pest-free-extent-investigation,,§4.2.1(3) pest-free follow-on extent investigation,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.2.1:post-finding-hectare-surveillance,,§4.2.1(2) post-finding hectare coverage,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.2.2:st53-post-finding-sampling,,§4.2.2 ST53 post-finding inner sampling,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:§4.3.2:almond-pre-removal-vector-treatment,,§4.3.2:almond-pre-removal-vector-treatment,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:§4.3.2:mandatory-almond-400m,,§4.3.2:mandatory-almond-400m,paragraph
+PUG-DGR1075-2025,PUG-DGR1075-2025:§4.4:periodic-finding-notification-update,,§4.4 existing infected-plant notification updates,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:owner-election-execution,,§4.5:owner-election-execution,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:owner-evidence,,§4.5:owner-evidence,paragraph
 PUG-DGR1075-2025,PUG-DGR1075-2025:§4.5:prescription,,§4.5:prescription,paragraph
@@ -292,13 +309,16 @@ PUG-LR4-2017,PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary,,8(7bi
 REG-PUGLIA-U181-DIR-2021-00069,REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer,,operative decision,paragraph
 REG-PUGLIA-U181-DIR-2021-00069,REG-PUGLIA-U181-DIR-2021-00069:partial-parcel-rule,,operative decision,paragraph
 REG-PUGLIA-U181-DIR-2021-00069,REG-PUGLIA-U181-DIR-2021-00069:pauca-area-update,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2021-00135,REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement,,operative point 7,paragraph
 REG-PUGLIA-U181-DIR-2021-00135,REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:commission-notification,,operative decision,paragraph
 REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:post-lift-plant-surveillance,,operative decision,paragraph
 REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:post-lift-vector-monitoring,,operative decision,paragraph
 REG-PUGLIA-U181-DIR-2021-00177,REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa,,operative decision,paragraph
+REG-PUGLIA-U181-DIR-2022-00004,REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement,,operative point 7,paragraph
 REG-PUGLIA-U181-DIR-2022-00004,REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2022-00006,REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2022-00006,REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement,,operative point 10,paragraph
 REG-PUGLIA-U181-DIR-2022-00006,REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:containment-pool-decomposition,,historical positive-pool identity routing (containment zone),paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:containment-treatment-removal-sequence,,historical containment treatment and removal sequence,paragraph
@@ -307,34 +327,45 @@ REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:destruction-root-w
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:doubtful-result-route,,historical doubtful-result routing,paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:eradication-treatment-removal-sequence,,historical eradication treatment and removal sequence,paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:execution-oversight-and-record,,historical execution oversight and record,paragraph
+REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:first-level-analysis-registration-return,,"Annex A section 3 — first-level analysis, registration and subsequent return",paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:obstruction-remedy-route,,historical obstruction remedy route,paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:pest-free-buffer-pool-confirmation,,historical pest-free/buffer confirmation routing,paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer,,historical sample custody transfer,paragraph
 REG-PUGLIA-U181-DIR-2022-00031,REG-PUGLIA-U181-DIR-2022-00031:st53-crop-exclusion-conflict,,historical 50 m retention exclusions,paragraph
 REG-PUGLIA-U181-DIR-2022-00127,REG-PUGLIA-U181-DIR-2022-00127:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2023-00002,REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2023-00002,REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement,,operative point 10,paragraph
+REG-PUGLIA-U181-DIR-2023-00045,REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement,,operative point unnumbered commencement bullet,paragraph
 REG-PUGLIA-U181-DIR-2023-00045,REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2023-00051,REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2023-00051,REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement,,operative point 10,paragraph
+REG-PUGLIA-U181-DIR-2023-00096,REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement,,operative point 10,paragraph
 REG-PUGLIA-U181-DIR-2023-00096,REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2024-00008,REG-PUGLIA-U181-DIR-2024-00008:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00012,REG-PUGLIA-U181-DIR-2024-00012:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00018,REG-PUGLIA-U181-DIR-2024-00018:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00027,REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement,,operative point 7,paragraph
 REG-PUGLIA-U181-DIR-2024-00027,REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2024-00029,REG-PUGLIA-U181-DIR-2024-00029:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00045,REG-PUGLIA-U181-DIR-2024-00045:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00052,REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement,,operative point 9,paragraph
 REG-PUGLIA-U181-DIR-2024-00052,REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2024-00052,REG-PUGLIA-U181-DIR-2024-00052:case-delta:staged-article7-workload,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2024-00091,REG-PUGLIA-U181-DIR-2024-00091:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00092,REG-PUGLIA-U181-DIR-2024-00092:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00093,REG-PUGLIA-U181-DIR-2024-00093:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00094,REG-PUGLIA-U181-DIR-2024-00094:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00138,REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement,,operative point 9,paragraph
 REG-PUGLIA-U181-DIR-2024-00138,REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00147,REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement,,operative point 9,paragraph
 REG-PUGLIA-U181-DIR-2024-00148,REG-PUGLIA-U181-DIR-2024-00148:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2024-00151,REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement,,operative point 9,paragraph
 REG-PUGLIA-U181-DIR-2024-00151,REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2024-00158,REG-PUGLIA-U181-DIR-2024-00158:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2024-00158,REG-PUGLIA-U181-DIR-2024-00158:containment-selection,,containment selection,paragraph
 REG-PUGLIA-U181-DIR-2024-00165,REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2024-00188,REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2024-00188,REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement,,operative point 10,paragraph
 REG-PUGLIA-U181-DIR-2024-00198,REG-PUGLIA-U181-DIR-2024-00198:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00011,REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2025-00011,REG-PUGLIA-U181-DIR-2025-00011:case-delta:three-day-owner-change-report,,case operative delta,paragraph
@@ -350,10 +381,14 @@ REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:doubtful-result-ro
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:eradication-execution-verification,,Annex A eradication execution verification,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:eradication-removal-population-support,,Annex A eradication removal-population support,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:execution-evidence,,Annex A eradication execution evidence,paragraph
-REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:executor-selection,,Annex A eradication execution,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:executor-selection,,Annex A §3 organisation of removals,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:first-level-result-return,,Annex A section 3 — first-level result return,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:obstruction-remedy-route,,Annex A eradication execution,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:pest-free-positive-routing,,Annex A pest-free positive routing,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:positive-pool-identity-route,,Annex A positive routing,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:positive-sample-cnr-return,,Annex A Part IV sections 2–3 — positive-sample CNR analysis and return,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:post-finding-containment-sampling,,Annex A infected-plant finding — containment,paragraph
+REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:post-finding-pest-free-buffer-sampling,,Annex A infected-plant finding — pest-free/buffer,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion,,Annex A eradication root/wood completion,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer,,Annex A sample delivery,paragraph
 REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:st26-olive-exclusion-conflict,,eradication crop exclusion,paragraph
@@ -362,19 +397,24 @@ REG-PUGLIA-U181-DIR-2025-00045,REG-PUGLIA-U181-DIR-2025-00045:treatment-removal-
 REG-PUGLIA-U181-DIR-2025-00059,REG-PUGLIA-U181-DIR-2025-00059:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00106,REG-PUGLIA-U181-DIR-2025-00106:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00113,REG-PUGLIA-U181-DIR-2025-00113:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00115,REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement,,operative point 3 (restarted numbering),paragraph
 REG-PUGLIA-U181-DIR-2025-00115,REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2025-00117,REG-PUGLIA-U181-DIR-2025-00117:case-delta:failed-service-represcription,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00117,REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement,,operative point unnumbered commencement bullet,paragraph
 REG-PUGLIA-U181-DIR-2025-00117,REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2025-00126,REG-PUGLIA-U181-DIR-2025-00126:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00132,REG-PUGLIA-U181-DIR-2025-00132:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00141,REG-PUGLIA-U181-DIR-2025-00141:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00147,REG-PUGLIA-U181-DIR-2025-00147:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2025-00163,REG-PUGLIA-U181-DIR-2025-00163:area-state-transition,,operative area decision,paragraph
+REG-PUGLIA-U181-DIR-2025-00173,REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement,,operative point 8,paragraph
 REG-PUGLIA-U181-DIR-2025-00201,REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority,,case operative delta,paragraph
+REG-PUGLIA-U181-DIR-2025-00201,REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement,,operative point 13,paragraph
 REG-PUGLIA-U181-DIR-2025-00236,REG-PUGLIA-U181-DIR-2025-00236:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2026-00002,REG-PUGLIA-U181-DIR-2026-00002:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2026-00004,REG-PUGLIA-U181-DIR-2026-00004:area-state-transition,,operative area decision,paragraph
 REG-PUGLIA-U181-DIR-2026-00012,REG-PUGLIA-U181-DIR-2026-00012:almond-characterization,,almond-characterization,paragraph
+REG-PUGLIA-U181-DIR-2026-00035,REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement,,operative point 13,paragraph
 REG-PUGLIA-U181-DIR-2026-00035,REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2026-00063,REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis,,case operative delta,paragraph
 REG-PUGLIA-U181-DIR-2026-00063,REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement,,case operative delta,paragraph

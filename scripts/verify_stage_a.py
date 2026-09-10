@@ -28,8 +28,53 @@ def q(row):
     return re.sub(r'\s+', ' ', row['source_quote'])
 
 
+def ast_nodes(value):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from ast_nodes(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from ast_nodes(child)
+
+
+def verify_result_references(rows, producers):
+    """Check declared producer/effect links, not runtime applicability or evidence."""
+    by = defaultdict(list)
+    for producer in producers:
+        by[producer['stable_provision_id']].append(producer)
+    for row in rows:
+        for node in ast_nodes(row['condition_ast']):
+            if 'result_ref' not in node:
+                continue
+            ref = node['result_ref']
+            label = row['provision_version_id']
+            if (not isinstance(ref, dict)
+                    or set(ref) != {'producer_stable_provision_id', 'allowed_effect'}
+                    or not all(isinstance(v, str) and v.strip() for v in ref.values())):
+                fail(f'{label}: malformed result_ref')
+            target, effect = ref['producer_stable_provision_id'], ref['allowed_effect']
+            if target not in row['external_dependencies']:
+                fail(f'{label}: result producer not declared as dependency: {target}')
+            if target not in by:
+                fail(f'{label}: result producer missing: {target}')
+            overlapping = [p for p in by[target] if
+                           max(p['effective_from'], row['effective_from']) <
+                           min(p['effective_to_exclusive'] or '9999',
+                               row['effective_to_exclusive'] or '9999')]
+            if not overlapping:
+                fail(f'{label}: no overlapping result producer version: {target}')
+            for producer in overlapping:
+                effects = {n['effect'] for n in ast_nodes(producer['condition_ast'])
+                           if isinstance(n.get('effect'), str)}
+                if effect not in effects:
+                    fail(f'{label}: result effect {effect!r} not emitted by '
+                         f'{producer["provision_version_id"]}')
+
+
 def verify(authoring: Path) -> dict:
     rows = json.loads(authoring.read_text(encoding='utf-8'))
+    verify_result_references(rows, rows)
     if len(rows) != 123:
         fail(f'version count {len(rows)} != 123')
     for row in rows:
@@ -68,8 +113,11 @@ def verify(authoring: Path) -> dict:
         fail('4(2)-sub1 quote lost the 50 m infected-zone radius')
     if 'in plants' not in get('4(1)', 'v2')['source_quote'] or 'in plants' in get('4(1)', 'v1')['source_quote']:
         fail('4(1) v1/v2 in-plants boundary corrupted')
-    if json.dumps(get('4(1)', 'v1')['condition_ast']) == json.dumps(get('4(1)', 'v2')['condition_ast']):
-        fail('4(1) v1 AST back-projects the v2 in-plants trigger')
+    for version in ('v1', 'v2'):
+        required = {'result_ref': {'producer_stable_provision_id': 'EU-2020-1201:5(3)',
+                                   'allowed_effect': 'ARTICLE_4_DEMARCATION_DUTY_STANDS'}}
+        if required not in list(ast_nodes(get('4(1)', version)['condition_ast'])):
+            fail('4(1) operative duty loses the Article 5(3) exception result')
     if 'any other plant species' in get('2(1)', 'v1')['source_quote']:
         fail('2(1) v1 quote carries M5 suspicion-species text')
     if 'suspicion' in json.dumps(get('2(1)', 'v1')['condition_ast']):
@@ -141,7 +189,7 @@ MUTATIONS = [
                           source_quote_sha256=hashlib.sha256(
                               r['source_quote'].replace('50 m', '500 m').encode()).hexdigest())
                  for r in rs if r['provision_version_id'].endswith('4(2)-sub1:v1')]),
-    ('back-project in-plants onto 4(1) v1',
+    ('erase the Article 5(3) exception from the historical demarcation trigger',
      lambda rs: [r.update(condition_ast={'predicate': 'presence officially confirmed in plants'})
                  for r in rs if r['provision_version_id'].endswith('4(1):v1')]),
     ('back-project suspicion species onto 2(1) v1',

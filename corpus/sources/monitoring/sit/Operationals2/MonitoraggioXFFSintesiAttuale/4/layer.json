@@ -1,0 +1,155 @@
+{
+  "currentVersion": 10.11,
+  "id": 4,
+  "name": "Altre Aree - Campioni 2026 sub. fastidiosa",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 0,
+    "name": "Campionamento 2026"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "ac384964c5e7ea8f0d084ff6c2916fa4",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJZJREFUGJV1zyFuQkEARdFDM4GkdYPi28rqmiZsgBUgMN+zACyehA3g6koVu2hI6lgCf1CDwSDIIGiaQODYd80L/jQxvrdy7hcOWFXsIBSeEgs518W/eUNd8RV2jFG79ozPLetQGLmv3WIYEB8EdDrdgF+83g2Ox3XQ602lNMDLzfyz5ztUKW2aGPtynuHD5eayMHnjdAbErilGZfkpKgAAAABJRU5ErkJggg==",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "Positivo",
+          "label": "POSITIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "e39fd04f3a606e8912d870943d51fd44",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJ5JREFUGJVtyqFKQ2EYgOHnP3xO2Noxmb0Gi7AbsAzDEYPldC/Aah/sBmy2TRCEXYQM1nYNWzoYFhQc34pFOU993/DrJuvLE934wP6L92Wxg5CqJj3TtYkKQ2a3qZ0X82h4ULT+GiYvk7SKwn3qNQjuIqn7O1WengXWuOg9yvcqfpw/he01Rv/yx4LXeCvbTZP1mG6KK+ylxWfxqDgcASh4LEzcLkoVAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "Negativo",
+          "label": "NEGATIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "59c147478e8bec0e10bce739821efc39",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJpJREFUGJV1yqFOQmEYgOHnk3+yHYs7JrOR7NyY3IBXQLCc7gVY7W7egI2GJKoZGGOjcQ2QTqK4qZ/FIsOnvm/xq57ldctA2OuYuokdFO95osrXlgYkPr2YZ6Mf46LyQDT+qqSRRa4K7h136tuwoP5n0JUXBWtcHRs+xKpcpqdtuMPZQV86Nynb29jU8xy06Rl97EW+EY968fUD1rUqcEr/Es0AAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "IN ATTESA",
+          "label": "IN ATTESA",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": -5120763.26769827,
+    "ymin": -9997963.94301857,
+    "xmax": 6120763.26769827,
+    "ymax": 9997963.94301857,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    },
+    {
+      "name": "TIPOLOGIA",
+      "type": "esriFieldTypeString",
+      "alias": "TIPOLOGIA",
+      "length": 255,
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

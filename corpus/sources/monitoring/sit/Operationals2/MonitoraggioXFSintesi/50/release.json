@@ -1,0 +1,26 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/50",
+  "name": "Piante estirpate 2016-17",
+  "captured_from": "2026-09-10T21:28:47.317896+00:00",
+  "captured_through": "2026-09-10T21:29:01.125177+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 914,
+  "unique_oids": 914,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "77a829f86797a865502df902ef0b40076fa4a37d3d562ec6536c877cb91d990d"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "3ccef0bb7c75185f2c36b57664875e2611fa69809eeca94b6506acd330895dc7"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 114,
+      "sha256": "0d39e7dc8dd1ae32d286e5c32be36e2fcf80b59d0a643c5b80743a5b31b636e0"
+    }
+  ]
+}

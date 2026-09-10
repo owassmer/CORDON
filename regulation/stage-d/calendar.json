@@ -1,0 +1,82 @@
+{
+  "schema": "stage-d-national-calendar-v1",
+  "jurisdiction": "Italy nationwide baseline",
+  "start": "2020-01-01",
+  "end_exclusive": "2027-01-01",
+  "sources": [
+    "L260/1949",
+    "L54/1977",
+    "DPR792/1985",
+    "L336/2000",
+    "L151/2025",
+    "L27/2024"
+  ],
+  "fixed_rules": [
+    {
+      "month": 1,
+      "day": 1,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 1,
+      "day": 6,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 4,
+      "day": 25,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 5,
+      "day": 1,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 6,
+      "day": 2,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 8,
+      "day": 15,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 11,
+      "day": 1,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 12,
+      "day": 8,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 12,
+      "day": 25,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 12,
+      "day": 26,
+      "effective_from": "2020-01-01"
+    },
+    {
+      "month": 10,
+      "day": 4,
+      "effective_from": "2026-01-01",
+      "source": "L151/2025 arts1,3"
+    }
+  ],
+  "easter_mondays": [
+    "2020-04-13",
+    "2021-04-05",
+    "2022-04-18",
+    "2023-04-10",
+    "2024-04-01",
+    "2025-04-21",
+    "2026-04-06"
+  ],
+  "qualification": "Reconciled L260/1949, L54/1977, DPR792/1985, L336/2000, L151/2025 and L27/2024. Weekend follows accepted C convention. No substitute Monday, November4 holiday, or universal local patron exclusion. Easter Monday dates are computed calendar facts. Coverage must refresh for 2027 onward."
+}

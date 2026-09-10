@@ -1,0 +1,106 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/73",
+  "name": "Olivo - 2013-14",
+  "captured_from": "2026-09-10T21:32:31.222995+00:00",
+  "captured_through": "2026-09-10T21:34:06.804757+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 7537,
+  "unique_oids": 7537,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "7dbda9f89831561bec854e1e05db140e350db78d2193784e57dacdc24503c1bf"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "fa711fc8585b1292ad0b898ae6765f95bbe1b7a757e75d5e93f16f3bb524b87c"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "714b9fbc714c6b1ed56419957bdbb73800daf40df5c6ab82800d69c5eb67b4d0"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "c0504d847dcb94ad098e11c75f3b6c1eec0be896f28ab0acc6c99053e0b80dd3"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "7db8b49e46be5585cfbcfacb49480b068a10efc2d628afc25799eb980b000c1b"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "d7ba016d6fd12b3cd3142ac1d739380ace6bb42aa60c0a69e15ba48559a95de6"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "f0be165a0d6bf87647e4409b5a9bb7bfb5341f01d40b08c43a973f68cea1a207"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "fe1d68d68955c6b6894f61b3991179010065acbc2ff121eba202bee44577166b"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "224a4b8344a455aef77e9862141e8582ab7a4cb134bd55a7eeb27077ff6b1bb1"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "9dba02af61256b69ee03f542a72abc6b8d5974dae6c2fec44497b0ea91a83a46"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "7aa9e48ff59cb41dd4897fbb81abdf6f27b832644002f089bb6c79508fc32241"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "23eacfbbb5064f0061d22e16ce492f533a4781e6aa957f1bb249d6cf541d9519"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "e575f8573fd8c8b91dd5e8b9acb5d1f0bf502e331652642dcf0e41355a2b7b3e"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "4fea714347bdaa35fc9ce178226d39d40fd9a619feb889d360f0bd1220925398"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 400,
+      "sha256": "e27c1742dc2c81dae88d3b32e20b55b57153057b3a276d73b662283e595e67c0"
+    },
+    {
+      "path": "00006000.json.gz",
+      "rows": 400,
+      "sha256": "f7a8a7fa388840224dadd40b492ac6e2f6b66b369b0fdefae72197edcfbd6a8d"
+    },
+    {
+      "path": "00006400.json.gz",
+      "rows": 400,
+      "sha256": "917076d3bd3dc5de435f9758e5dd822dabe7d6f97a8cc99e30a0b551b9ef317d"
+    },
+    {
+      "path": "00006800.json.gz",
+      "rows": 400,
+      "sha256": "510e7178f95fbfa0335be3ab9038ec83c75c2ccfee7380e9524e47b9d145d29b"
+    },
+    {
+      "path": "00007200.json.gz",
+      "rows": 337,
+      "sha256": "f1202fa1b685b90a1c8d332df8f4c248bf9a906b304bec3281576f5cf44e5e75"
+    }
+  ]
+}

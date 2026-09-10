@@ -5,4 +5,11 @@ __pycache__/
 .venv/
 corpus/workbench/*
 !corpus/workbench/.gitkeep
+# Direct monitoring populations; their acquisition records and readers are tracked.
+corpus/sources/monitoring/**/*.xlsx
+corpus/sources/monitoring/**/*.csv
+corpus/sources/monitoring/**/*.json.gz
 regulation/stage-b/generated/
+
+.playwright-cli/
+output/playwright/

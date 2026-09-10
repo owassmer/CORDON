@@ -1,0 +1,256 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesiAttuale/MapServer/2",
+  "name": "Olivo - Campioni 2026 sub. pauca",
+  "captured_from": "2026-09-10T21:33:38.500465+00:00",
+  "captured_through": "2026-09-10T21:36:16.570879+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 19290,
+  "unique_oids": 19290,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "ec805195bf49eff7257c6df01d21949a1ec5db6782c8d24566b6d9f750852699"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "cf0686eca150a20ed2c24e95dc5c99bde928209914e3ee0bd5329d789180b30e"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "04d34ce93c2b56e171d230e30e83bfb6f0ae10296b6be5d88bcb1be5df8236c8"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "b737ba42671cf1f34dd1cea5227ea4c2dd29ba02da1efe20c6f09c54703d04b9"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "b114ec928bf466c86d35be950c2884f6a5e9b3e42f1f461005a1a51f242211b9"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "0622052ba701be375755bacf2aed1365b67861dafb005d737a8f0c264a7bce97"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "c1e7a04d267c56615c0485d37a6554cecd53e020cf9102cafc0cf0666563dbaa"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "158e73823fd7f6aaa3a2703f55a76e223906f74fa4fcc95bc2ec315b33ff26ce"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "c35e64ab3971e59ac6d2e85c6a7136177efeea77494e6059580e91ff2e662629"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "a543907a1ac3a334f70754f9c2cba316a0a33651c64e2faceaa51ee8ec1c8fd6"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "2960314b963e1c159ccb60cb359dadf9a7d3ae9f588180a63682709fb8601b62"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "a7e5a8422e3f10fc05cb952182b7cf35fc6610921b86246648f95c2f4ba72bea"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "d788ff4f3d355e9e532fcf6e13fab6f68c8501025b48443ad0780f901f55d85b"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "f2c0eb28afb660be9b165dc8bee5c1b4e763a8f6dd78e6462ae426915ce85da5"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 400,
+      "sha256": "c9e9a9006bad666fc40bd0bdf516f6e9c238c226e9904a4262e7913474d26e72"
+    },
+    {
+      "path": "00006000.json.gz",
+      "rows": 400,
+      "sha256": "5a6244792af01fd7495f0d832b688023dd5c17222c38c39a842d25fee005fcea"
+    },
+    {
+      "path": "00006400.json.gz",
+      "rows": 400,
+      "sha256": "cad9446bd7e21c107e8a92004ebbad4526c3f827ca241a76c40b022f63f9ca99"
+    },
+    {
+      "path": "00006800.json.gz",
+      "rows": 400,
+      "sha256": "30836d727aed0dac5ee0e061f0f185456f6688e65a3e4370e8e4c775c2ad62f5"
+    },
+    {
+      "path": "00007200.json.gz",
+      "rows": 400,
+      "sha256": "3adfb35bcc711dab14c18ea81a9d16a4c5da941a90d404116e5a77687df684b7"
+    },
+    {
+      "path": "00007600.json.gz",
+      "rows": 400,
+      "sha256": "3a6fc9d4c729a1418f87e633a371bc678fc2bc90844c977498cbb85de165983c"
+    },
+    {
+      "path": "00008000.json.gz",
+      "rows": 400,
+      "sha256": "04a495b7c28f7808da12919a308a2ffdff813611d6fb729779d68e254d551ed3"
+    },
+    {
+      "path": "00008400.json.gz",
+      "rows": 400,
+      "sha256": "8e17f944318c842ae9ad6120de89d142f4e2fe9dc5620468b6b79ce7fe7ec5b2"
+    },
+    {
+      "path": "00008800.json.gz",
+      "rows": 400,
+      "sha256": "9e6b2a1166e3d750e89d52a58640489e781d9f09d1fe9a2b030a8a0587c5dcef"
+    },
+    {
+      "path": "00009200.json.gz",
+      "rows": 400,
+      "sha256": "fa3a3d789c7a3a50ea5132ac00d7da2c3969fdef4479c2bf1170ff4e30edeef3"
+    },
+    {
+      "path": "00009600.json.gz",
+      "rows": 400,
+      "sha256": "94e82a2a3e19fdd00c95c8f2aa7fe1118515bf5e0db43649c35febf09bab199f"
+    },
+    {
+      "path": "00010000.json.gz",
+      "rows": 400,
+      "sha256": "af472ec815846187a840cac80df45f18778fb3e1c651a4c24ba1cf0585f9b4f2"
+    },
+    {
+      "path": "00010400.json.gz",
+      "rows": 400,
+      "sha256": "a3dbaa306b634f0504bae984bebc439ea67116264d285f70a8273b1a31817e71"
+    },
+    {
+      "path": "00010800.json.gz",
+      "rows": 400,
+      "sha256": "612f9cc4bd0607d572e720c6e7c2059530e4bb40fe65c1a2b4e67f8da12dd6da"
+    },
+    {
+      "path": "00011200.json.gz",
+      "rows": 400,
+      "sha256": "ea2869360057b457ededce1848f962e486b7151afa71ba4ea71e48890cf958de"
+    },
+    {
+      "path": "00011600.json.gz",
+      "rows": 400,
+      "sha256": "5e2c1f27d612e80bd5db8d3ce710004e15ccc674f79f488dde5b9d046e7672dd"
+    },
+    {
+      "path": "00012000.json.gz",
+      "rows": 400,
+      "sha256": "a72324e880a3ac90b98945de7030775b7be78d4f0b5eebd59bbe3ea4de356aea"
+    },
+    {
+      "path": "00012400.json.gz",
+      "rows": 400,
+      "sha256": "de6799326f6b5109901e38370575b3e322259d0cd16b5f3116333f7c36d1e96f"
+    },
+    {
+      "path": "00012800.json.gz",
+      "rows": 400,
+      "sha256": "1aaf82edc699bebaf5cbac34c6cd90fd0719a60d5dfeb6c903fefbd5a3d24cda"
+    },
+    {
+      "path": "00013200.json.gz",
+      "rows": 400,
+      "sha256": "5d23f46cfd238f61587ab7f70869bd93527197a6d879b14ce89f74c73d5b232f"
+    },
+    {
+      "path": "00013600.json.gz",
+      "rows": 400,
+      "sha256": "83428081a6a339fe91b68980801780795135037873c5ab3f7b032111dc565fb6"
+    },
+    {
+      "path": "00014000.json.gz",
+      "rows": 400,
+      "sha256": "017aa29d79f73a90eaf8430b3bc9111b04c6a51187c5926143e4ef37c0128f48"
+    },
+    {
+      "path": "00014400.json.gz",
+      "rows": 400,
+      "sha256": "fd45d33e741b8906d78f189542c6c40f8a042e9915f4ffe590c8d6cfcb62be16"
+    },
+    {
+      "path": "00014800.json.gz",
+      "rows": 400,
+      "sha256": "e6f5a4dfe88be2ba996ff8542f2f56e81c7e4e765079aaf7b1166cb3dee96f4f"
+    },
+    {
+      "path": "00015200.json.gz",
+      "rows": 400,
+      "sha256": "e7957e6e7235485c3a1025e6d82e49b6308bb52d16da5cc544cd07ad578be2c6"
+    },
+    {
+      "path": "00015600.json.gz",
+      "rows": 400,
+      "sha256": "bfdd7671b2ce6a72ee978f572a42db80c2149ed44e4672bec2b84432fd971137"
+    },
+    {
+      "path": "00016000.json.gz",
+      "rows": 400,
+      "sha256": "ea01b0a83270d52c6a18dc8cabae0ea1f605946a50c7d7184244932da0cbce7e"
+    },
+    {
+      "path": "00016400.json.gz",
+      "rows": 400,
+      "sha256": "41692554cf14ff564422c65471616bdf29071e237494287f2334270b7ca6624f"
+    },
+    {
+      "path": "00016800.json.gz",
+      "rows": 400,
+      "sha256": "4476897719ca4590ed7f658cc0083d3d2171b84b8d9de4b043a1db383b0cbdb0"
+    },
+    {
+      "path": "00017200.json.gz",
+      "rows": 400,
+      "sha256": "bf0aae9135d21dddec25b513d44326cc6a3015ffe44521ae47815ae6f28dc7b3"
+    },
+    {
+      "path": "00017600.json.gz",
+      "rows": 400,
+      "sha256": "91a9d429d6ebca60353d33b5e7a32a3570b03dee9da51af1e7e6be1d1937b0dd"
+    },
+    {
+      "path": "00018000.json.gz",
+      "rows": 400,
+      "sha256": "d2ed811e472e5c33e6df084e022620e88143725296168c11d3e3d8f13b0ce01a"
+    },
+    {
+      "path": "00018400.json.gz",
+      "rows": 400,
+      "sha256": "a22b5b69cce6e4f236820a2a0116fbad12e33cc1a6a66ad273ec605afc6db748"
+    },
+    {
+      "path": "00018800.json.gz",
+      "rows": 400,
+      "sha256": "63af2640f6c89055ec5841abde831bfc9a0b4ebc3abe2fd0ab6267341326d066"
+    },
+    {
+      "path": "00019200.json.gz",
+      "rows": 90,
+      "sha256": "8d8e9f3f60bb12b2f1ca39248c5cf9473cc51e543ed51c4e38f1bc460c5a35df"
+    }
+  ]
+}

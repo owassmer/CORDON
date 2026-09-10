@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFFSintesiPrecedenti/MapServer/4",
+  "name": "Altre Aree - Campioni 2025 sub. fastidiosa",
+  "captured_from": "2026-09-10T21:35:33.328617+00:00",
+  "captured_through": "2026-09-10T21:35:49.243240+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 8,
+  "unique_oids": 8,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 8,
+      "sha256": "d21db29e5f3e3608a305b3eba6cfcb333add42fd8a379d14f34fe662f0f084fb"
+    }
+  ]
+}

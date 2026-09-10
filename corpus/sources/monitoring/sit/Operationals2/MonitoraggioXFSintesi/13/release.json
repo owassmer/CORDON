@@ -1,0 +1,81 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/13",
+  "name": "Fruttiferi - Campioni 2023 sub. pauca",
+  "captured_from": "2026-09-10T21:26:28.553159+00:00",
+  "captured_through": "2026-09-10T21:26:32.347569+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 5556,
+  "unique_oids": 5556,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "6eefd4aa06abe965261bae3ebb2af4fdccf1527027c14f79c63fef80d64469fc"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "308236a26d7ce5c2eed9698d30c8f71465300ad83192b714ec8a19dc99890d2b"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "277d6bfd58295eec6aa8cf764793a385725314003ee2bc4bebbeba0a85dfd035"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "2e65f119ece85ded764b1f3ce512f8066b2145b1ec167afaae95a9f437bbdcdd"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "3a68f49ea75703bebe2d7a753e2901a09a5d116439f6988cfeccf005845875ec"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "a279de78e2f58d596894cb59534b1f0e29a4e94a3132ddfff20f71b4c96be965"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "2f4d6f21712d9da4be63d8065c0f2b6d4ef16cda0874f386c5911d9af1e91a8c"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "ecbcf8431513da31a6fb360fc78993c775c545c0feea9f33ea97589f571f51c1"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "ce345704edf8449ddd37441775cfd49d2ac289168a32e7f1ab31005d6a3b428e"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "caef307f8bb1d22779fad52d81b104323a860a6f5bef55ed9a066e07a9f78690"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "510294c1d23462bfff96bf287dbb21f1003bff9d0ed82c0000856f06a041df7a"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "c4630bb578cf6f4d4a3abb067d5aa8f5f3354f199d150e0c4968282e11fe6afa"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "5077862eeef6b23051c056293137df65aa6f2823f877af91d38d609018fa01f1"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 356,
+      "sha256": "38675bde7f88bca2d1b200ac0be5bb52cc2dc4aa5e29d6e1d66ae1c945654715"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFFSintesiAttuale/MapServer/2",
+  "name": "Olivo - Campioni 2026 sub. fastidiosa",
+  "captured_from": "2026-09-10T21:26:25.985392+00:00",
+  "captured_through": "2026-09-10T21:26:31.168637+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 82,
+  "unique_oids": 82,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 82,
+      "sha256": "aa8983778b81c6406979f74c6698a1dfe0e84aecb3d548e298c9abd59f18cd35"
+    }
+  ]
+}

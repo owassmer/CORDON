@@ -1,2121 +1,577 @@
 {
- "seams": {
-  "1": [
-   "EU-2020-1201:2(1):v1",
-   "EU-2020-1201:2(1):v2",
-   "EU-2020-1201:2(2):v1",
-   "EU-2020-1201:2(3):v1",
-   "EU-2020-1201:2(3)-sub1:v1",
-   "EU-2020-1201:2(4):v1",
-   "EU-2020-1201:2(4):v2",
-   "EU-2020-1201:2(4):v3",
-   "EU-2020-1201:2(4a):v1",
-   "EU-2020-1201:2(5):v1",
-   "EU-2020-1201:2(6):v1",
-   "EU-2020-1201:2(7):v1",
-   "EU-2020-1201:2(8):v1",
-   "EU-2020-1201:3(1)-final-subparagraph:v1",
-   "EU-2020-1201:3(2)(a):v1",
-   "EU-2020-1201:5(2):v1",
-   "EU-2020-1201:5(4)(b):v1",
-   "EU-2020-1201:6(4):v1",
-   "EU-2020-1201:10:v1",
-   "EU-2020-1201:10-sub1:v1",
-   "EU-2020-1201:10-sub2:v1",
-   "EU-2020-1201:10-sub3:v1",
-   "EU-2020-1201:11(3):v1",
-   "EU-2020-1201:15(2):v1",
-   "EU-2020-1201:15(2):v2",
-   "EU-2020-1201:15(2)(a):v1",
-   "EU-2020-1201:15(2)(a):v2",
-   "EU-2020-1201:15(2)(b):v1",
-   "EU-2020-1201:15(2)-final-subparagraph:v1",
-   "EU-2020-1201:15(4):v1",
-   "IT-DLGS-19-2021:Art.11(1)(b):v1",
-   "IT-DLGS-19-2021:Art.27(1):v1",
-   "IT-DLGS-19-2021:Art.27(2):v1",
-   "IT-DLGS-19-2021:Art.27(3):v1",
-   "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal:v1",
-   "IT-DLGS-19-2021:Art.27(4):adopt-national-programme:v1",
-   "IT-DLGS-19-2021:Art.27(4):publish-national-programme:v1",
-   "IT-DLGS-19-2021:Art.27(5):v1",
-   "IT-DLGS-19-2021:Art.27(6):transmit-adopted-programme:v1",
-   "IT-DLGS-19-2021:Art.27(6):transmit-prior-year-results:v1",
-   "IT-DLGS-19-2021:Art.27(7):v1",
-   "IT-DLGS-19-2021:Art.27(8):contribute-additional-data:v1",
-   "IT-DLGS-19-2021:Art.27(8):access-sipp-data:v1",
-   "IT-DLGS-19-2021:Art.27(9):v1",
-   "IT-DLGS-19-2021:Art.28(1):v1",
-   "IT-DLGS-19-2021:Art.28(2):v1",
-   "IT-DLGS-19-2021:Art.28(3):v1",
-   "IT-DLGS-19-2021:Art.28(4):v1",
-   "IT-DLGS-19-2021:Art.28(5):v1",
-   "IT-DLGS-19-2021:Art.29(1):v1",
-   "IT-DLGS-19-2021:Art.29(2):v1",
-   "IT-DLGS-19-2021:Art.30(1):v1",
-   "IT-DLGS-19-2021:Art.30(2):v1",
-   "IT-DLGS-19-2021:Art.31(1):v1",
-   "IT-DLGS-19-2021:Art.31(2):v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§14:annual-review:v1",
-   "IT-DTU39-REV1:official-technical-instruction:v1",
-   "IT-DTU39-REV1:§4:risk-based-sampling:v1",
-   "IT-DTU39-REV1:§4.2:sample-transfer:v1",
-   "IT-DTU39-REV1:§5:diagnostic-method-routing:v1",
-   "IT-DTU39-REV1:§5.4:pest-free-positive-confirmation:v1",
-   "IT-DTU39-REV1:§5.4:inconclusive-result-routing:v1",
-   "IT-CFN-ORD-3-2023:Art.1(1):pest-free-declaration:v1",
-   "IT-CFN-ORD-3-2023:Art.1(2):maintain-pest-free-status:v1",
-   "IT-CFN-ORD-3-2023:Art.1(3):annual-list-revision:v1",
-   "IT-CFN-ORD-3-2023:Annex-I:territory-list:v1",
-   "IT-PNI-2026:adoption-and-publication-status:v1",
-   "IT-PNI-2026:Xylella:Puglia-plant-survey-design:v1",
-   "IT-DM-169819-2022:Art.10(3):timely-analysis:v1",
-   "IT-DM-169819-2022:Art.14(3):research-laboratory-notification:v1",
-   "IT-DM-169819-2022:Art.18(3):self-control-laboratory-notification:v1",
-   "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance:v1",
-   "IT-DTU8-REV2:official-laboratory-route-and-continuing-status:v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:pre-m5-v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:post-m5-v2",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§9.3:containment-surveillance-band-2km:v1",
-   "EU-2016-2031:Art.31(2):more-stringent-measure-notification:v1",
-   "EU-2016-2031:Art.31(2):more-stringent-measure-report-on-request:v1",
-   "PUG-LR4-2017:Art.2(1):v1",
-   "PUG-LR4-2017:Art.2(2):v1",
-   "PUG-LR4-2017:Art.2(3):v1",
-   "PUG-LR4-2017:Art.2(4):v1",
-   "PUG-LR4-2017:Art.4(1):v1",
-   "PUG-LR4-2017:Art.4(2):pre-LR45-v1",
-   "PUG-LR4-2017:Art.4(2):post-LR45-v2",
-   "PUG-LR4-2017:Art.4(3):survey-route:pre-LR45-v1",
-   "PUG-LR4-2017:Art.4(3):survey-route:post-LR45-v2",
-   "PUG-LR4-2017:Art.4(3):access:pre-LR45-v1",
-   "PUG-LR4-2017:Art.4(3):access:post-LR45-v2",
-   "PUG-LR4-2017:Art.4(3):sampling:pre-LR45-v1",
-   "PUG-LR4-2017:Art.4(3):sampling:post-LR45-v2",
-   "PUG-LR4-2017:Art.4(3):laboratory:pre-LR45-v1",
-   "PUG-LR4-2017:Art.4(3):laboratory:post-LR45-v2",
-   "PUG-LR4-2017:Art.4(4):pre-LR45-v1",
-   "PUG-LR4-2017:Art.4(4):post-LR45-v2",
-   "PUG-LR4-2017:Art.4(5):v1",
-   "PUG-LR4-2017:Art.4(6):vector:v1",
-   "PUG-LR4-2017:Art.4(6):follow-up:v1",
-   "PUG-LR4-2017:Art.4(7):v1",
-   "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control:v1",
-   "PUG-DGR1075-2025:Convention-3.1:arif-surveillance-communication:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:doubtful-result-route:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:positive-pool-identity-route:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:pest-free-positive-routing:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:cq-analytical-result-classification:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:doubtful-result-route:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:containment-pool-decomposition:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:pest-free-buffer-pool-confirmation:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification:v1",
-   "IT-DLGS-19-2021:Art.31(9):periodic-area-surveys:v1",
-   "IT-DLGS-19-2021:Art.31(9):modify-area-if-necessary:v1",
-   "IT-DLGS-19-2021:Art.31(9):report-area-information:v1",
-   "EU-2016-2031:Art.31:more-stringent-national-measures:v1",
-   "EU-2017-625:Art.101(1):national-reference-laboratory-tasks:v1",
-   "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation:v1",
-   "IT-DLGS-19-2021:Art.8(1):v1",
-   "IT-DLGS-19-2021:Art.9(5):v1",
-   "IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation:v1",
-   "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation:v1",
-   "IT-DM-169819-2022:Art.10(5):issue-test-report:v1",
-   "IT-DM-169819-2022:Art.10(5):retain-analytical-data:v1",
-   "IT-DM-169819-2022:Art.9(1):official-laboratory-minimum-qualification:v1",
-   "IT-DM-169819-2022:Art.11(6):adapt-to-annex-iii:v1",
-   "IT-DM-169819-2022:Art.11(6):notify-adaptation:v1",
-   "EU-2020-1201:3(1)(b):v1",
-   "EU-2020-1201:3(1)(c):v1",
-   "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1",
-   "EU-2017-625:Art.37(2):external-location-designation:v1",
-   "EU-2017-625:Art.39:official-laboratory-audit-status:v1",
-   "EU-2017-625:Art.40(1)(b):other-official-activity-derogation:v1",
-   "EU-2017-625:Art.41:representative-method-derogation-authority:v1",
-   "EU-2017-625:Art.42:temporary-method-designation:v1",
-   "EU-2017-625:Art.93(1):eu-reference-laboratory-designation:v1",
-   "EU-2017-625:Art.100:national-reference-laboratory-status:v1"
-  ],
-  "2": [
-   "EU-2020-1201:4(1):v1",
-   "EU-2020-1201:4(1):v2",
-   "EU-2020-1201:4(1)-sub1:v1",
-   "EU-2020-1201:4(1)-sub2:v1",
-   "EU-2020-1201:4(2):v1",
-   "EU-2020-1201:4(2)(a):v1",
-   "EU-2020-1201:4(2)(b):v1",
-   "EU-2020-1201:4(2)-sub1:v1",
-   "EU-2020-1201:4(2)-sub2:v1",
-   "EU-2020-1201:4(3):v1",
-   "EU-2020-1201:5(1):v1",
-   "EU-2020-1201:5(1):v2",
-   "EU-2020-1201:5(1)(a):v1",
-   "EU-2020-1201:5(1)(b):v1",
-   "EU-2020-1201:5(1)(c):v1",
-   "EU-2020-1201:5(1)(c):v2",
-   "EU-2020-1201:5(1)(d):v1",
-   "EU-2020-1201:5(3):v1",
-   "EU-2020-1201:5(3):v2",
-   "EU-2020-1201:5(3)(a):v1",
-   "EU-2020-1201:5(3)(b):v1",
-   "EU-2020-1201:5(3)(c):v1",
-   "EU-2020-1201:5(4):v1",
-   "EU-2020-1201:5(4):v2",
-   "EU-2020-1201:5(4)(a):v1",
-   "EU-2020-1201:5(4)(a):v2",
-   "EU-2020-1201:5(4)-sub1:v1",
-   "EU-2020-1201:6(1):v1",
-   "EU-2020-1201:6(2):v1",
-   "EU-2020-1201:6(2):v2",
-   "EU-2020-1201:6(2)(a):v1",
-   "EU-2020-1201:6(2)(b):v1",
-   "EU-2020-1201:6(3):v1",
-   "IT-DLGS-19-2021:Art.6(3)(g):v1",
-   "IT-DLGS-19-2021:Art.31(3):establish-demarcated-area:v1",
-   "IT-DLGS-19-2021:Art.31(3):eradication-regime:v1",
-   "IT-DLGS-19-2021:Art.31(4):v1",
-   "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal:v1",
-   "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval:v1",
-   "IT-DLGS-19-2021:Art.31(6):declare-emergency:v1",
-   "IT-DLGS-19-2021:Art.31(6):adopt-action-plan:v1",
-   "IT-DLGS-19-2021:Art.31(6):notify-commission:v1",
-   "IT-DLGS-19-2021:Art.31(7):v1",
-   "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit:v1",
-   "IT-DLGS-19-2021:Art.31(8):implement-action-plan-measures:v1",
-   "IT-DM-2022-XYLELLA-PLAN:Art.1:adoption:v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption:v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:Art.2(1):replace-2022-plan:v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§8.5:communicate-no-demarcation:v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§8.5:no-demarcation-surveillance:v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§8.6:area-composition:v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.2:action-plan-15-working-days:v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.4:communicate-no-demarcation:v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.4:no-demarcation-two-year-follow-up:pre-m5-v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.5:containment-buffer-5km:v1",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§8.2:action-plan-15-day-unit-conflict:v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.4:no-demarcation-two-year-follow-up:post-m5-v2",
-   "PUG-LR4-2017:Art.3(1):v1",
-   "PUG-LR4-2017:Art.3(2):pre-LR45-v1",
-   "PUG-LR4-2017:Art.3(2):post-LR45-v2",
-   "PUG-LR4-2017:Art.3(3):v1",
-   "PUG-LR4-2017:Art.3(4):may-revoke:pre-LR45-v1",
-   "PUG-LR4-2017:Art.3(4):may-revoke:post-LR45-v2",
-   "REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer:v1",
-   "REG-PUGLIA-U181-DIR-2021-00069:pauca-area-update:v1",
-   "REG-PUGLIA-U181-DIR-2021-00069:partial-parcel-rule:v1",
-   "REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa:v1",
-   "REG-PUGLIA-U181-DIR-2021-00177:post-lift-plant-surveillance:v1",
-   "REG-PUGLIA-U181-DIR-2021-00177:post-lift-vector-monitoring:v1",
-   "REG-PUGLIA-U181-DIR-2021-00177:commission-notification:v1",
-   "REG-PUGLIA-U181-DIR-2022-00127:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v2",
-   "REG-PUGLIA-U181-DIR-2024-00158:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction:v1",
-   "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1",
-   "REG-PUGLIA-U181-DIR-2024-00158:containment-selection:v1",
-   "REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00012:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00029:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00045:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00091:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00092:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00093:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00094:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition:unresolved-v1",
-   "REG-PUGLIA-U181-DIR-2024-00198:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00059:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00106:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00113:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00126:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00132:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00141:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00147:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00163:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2025-00236:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2026-00002:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2026-00004:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1",
-   "REG-PUGLIA-U181-DIR-2026-00112:area-state-transition:v1"
-  ],
-  "3": [
-   "EU-2020-1201:7(1):v1",
-   "EU-2020-1201:7(1):v2",
-   "EU-2020-1201:7(1)(a):v1",
-   "EU-2020-1201:7(1)(b):v1",
-   "EU-2020-1201:7(1)(c):v1",
-   "EU-2020-1201:7(1)(d):v1",
-   "EU-2020-1201:7(1)(e):v1",
-   "EU-2020-1201:7(1)(e):v2",
-   "EU-2020-1201:7(1)(e)-sub1:v1",
-   "EU-2020-1201:7(1)(e)-sub2:v1",
-   "EU-2020-1201:7(2):v1",
-   "EU-2020-1201:7(3):v1",
-   "EU-2020-1201:7(3):v2",
-   "EU-2020-1201:7(3):v3",
-   "EU-2020-1201:7(3)(a):v1",
-   "EU-2020-1201:7(3)(b):v1",
-   "EU-2020-1201:8(1):v1",
-   "EU-2020-1201:8(1):v2",
-   "EU-2020-1201:8(2):v1",
-   "EU-2020-1201:8(2):v2",
-   "EU-2020-1201:8(2)(a):v1",
-   "EU-2020-1201:8(2)(b):v1",
-   "EU-2020-1201:8(2)-sub1:v1",
-   "EU-2020-1201:9(1):v1",
-   "EU-2020-1201:9(2):v1",
-   "EU-2020-1201:9(3):v1",
-   "EU-2020-1201:11(1):v1",
-   "EU-2020-1201:11(1):v2",
-   "EU-2020-1201:11(2):v1",
-   "EU-2020-1201:12:v1",
-   "EU-2020-1201:13(1):v1",
-   "EU-2020-1201:13(1)-sub1:v1",
-   "EU-2020-1201:13(2):v1",
-   "EU-2020-1201:14(1):v1",
-   "EU-2020-1201:14(1):v2",
-   "EU-2020-1201:14(2):v1",
-   "EU-2020-1201:15(1):v1",
-   "EU-2020-1201:15(1):v2",
-   "EU-2020-1201:15(1)(a):v1",
-   "EU-2020-1201:15(1)(b):v1",
-   "EU-2020-1201:16(1):v1",
-   "EU-2020-1201:16(2):v1",
-   "EU-2020-1201:16(3):v1",
-   "EU-2020-1201:17:v1",
-   "IT-DLGS-19-2021:Art.32(1):v1",
-   "IT-DLGS-19-2021:Art.32(2):v1",
-   "IT-DLGS-19-2021:Art.32(3):primary-implementation:v1",
-   "IT-DLGS-19-2021:Art.32(3):substitute-execution:v1",
-   "IT-DLGS-19-2021:Art.32(3):determine-completion-costs:v1",
-   "IT-DLGS-19-2021:Art.32(3):recovery-right:v1",
-   "IT-DLGS-19-2021:Art.33(1):emergency-measure-derogation:v1",
-   "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal:v1",
-   "IT-DLGS42-A146:Art.146(2):v1",
-   "IT-DLGS42-A146:Art.146(5):regional-decision-owner:v1",
-   "IT-DLGS42-A146:Art.146(8):superintendent-opinion:v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km:pre-m5-v1",
-   "IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km:post-m5-v2",
-   "IT-DM-348260-2026-XYLELLA-PLAN:§9.2:containment-vector-treatment-coverage:v1",
-   "PUG-LR4-2017:Art.5(1):v1",
-   "PUG-LR4-2017:Art.5(2):v1",
-   "PUG-LR4-2017:Art.5(3):pre-LR45-v1",
-   "PUG-LR4-2017:Art.5(3):post-LR45-v2",
-   "PUG-LR4-2017:Art.5(4):pre-LR45-v1",
-   "PUG-LR4-2017:Art.5(4):post-LR45-v2",
-   "PUG-LR4-2017:Art.5(5):pre-LR45-v1",
-   "PUG-LR4-2017:Art.5(5):post-LR45-v2",
-   "PUG-LR4-2017:Art.5(6):v1",
-   "PUG-LR4-2017:Art.7(1):v1",
-   "PUG-LR4-2017:Art.7(2):v1",
-   "PUG-LR4-2017:Art.7(4):v1",
-   "PUG-LR4-2017:Art.8(5):protected-uninfected-retention:pre-LR45-v1",
-   "PUG-LR4-2017:Art.8(5):protected-uninfected-retention:post-LR45-v2",
-   "REG-PUGLIA-U181-DIR-2025-00045:treatment-removal-sequence:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:execution-evidence:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:eradication-removal-population-support:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:eradication-execution-verification:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:executor-selection:v1",
-   "PUG-LR4-2017:Art.6(1):pre-LR45-v1",
-   "PUG-LR4-2017:Art.6(1):post-LR45-v2",
-   "PUG-LR4-2017:Art.6(2):pre-LR45-v1",
-   "PUG-LR4-2017:Art.6(2):post-LR45-v2",
-   "PUG-LR4-2017:Art.6(3):pre-LR45-v1",
-   "PUG-LR4-2017:Art.6(3):post-LR45-v2",
-   "PUG-DGR538-2021:Art7(3)-policy:v1",
-   "PUG-DGR343-2022:Art7(3)-policy:v1",
-   "PUG-DGR1866-2022:Art7(3)-policy:v1",
-   "PUG-DGR1593-2024:Art7(3)-policy:v1",
-   "PUG-DGR1075-2025:Art7(3)-policy:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:containment-treatment-removal-sequence:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-evidence:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:containment-removal-population-support:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-verification:v1",
-   "PUG-DGR1075-2025:§4.3.2:mandatory-almond-400m:v1",
-   "PUG-DGR1075-2025:§4.3.2:almond-pre-removal-vector-treatment:v1",
-   "REG-PUGLIA-U181-DIR-2026-00012:almond-characterization:v1",
-   "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:eradication-treatment-removal-sequence:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:st53-crop-exclusion-conflict:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:containment-treatment-removal-sequence:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:destruction-root-wood-completion:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:execution-oversight-and-record:v1",
-   "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1",
-   "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
-   "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1",
-   "REG-PUGLIA-U181-DIR-2024-00052:case-delta:staged-article7-workload:v1",
-   "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1",
-   "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text:v1",
-   "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text:v1",
-   "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1",
-   "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text:v1",
-   "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment:v1",
-   "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1",
-   "REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion:v1",
-   "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:st53-citrus-prunus-exclusion-conflict:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:asparagus-non-sampling-conflict:v1",
-   "EU-2020-1201:15(3):v1",
-   "PUG-DGR1866-2022:st53-crop-exclusion-conflict:v1",
-   "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-   "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved:v1",
-   "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1",
-   "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction:v1",
-   "REG-PUGLIA-U181-DIR-2025-00011:case-delta:three-day-owner-change-report:v1",
-   "REG-PUGLIA-U181-DIR-2025-00117:case-delta:failed-service-represcription:v1",
-   "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1"
-  ],
-  "4": [
-   "EU-2020-1201:1(a):v1",
-   "EU-2020-1201:1(b):v1",
-   "EU-2020-1201:1(c):v1",
-   "EU-2020-1201:1(c):v2",
-   "EU-2020-1201:1(d):v1",
-   "EU-2020-1201:15(5):v1",
-   "EU-2020-1201:1:v1",
-   "EU-2020-1201:3(1)(a):v1",
-   "EU-2020-1201:3(1):v1",
-   "EU-2020-1201:3(1):v2",
-   "EU-2020-1201:3(2)(b):v1",
-   "EU-2020-1201:3(2):v1",
-   "EU-2020-1201:3(2):v2",
-   "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit:v1",
-   "IT-DLGS-19-2021:Art.10(1):implement-plan-and-ordinances:v1",
-   "IT-DLGS-19-2021:Art.10(3)(a):v1",
-   "IT-DLGS-19-2021:Art.10(3)(c):v1",
-   "IT-DLGS-19-2021:Art.10(4):v1",
-   "IT-DLGS-19-2021:Art.11(1):v1",
-   "IT-DLGS-19-2021:Art.11(2):v1",
-   "IT-DLGS-19-2021:Art.13(1):corresponding-reference-laboratory:v1",
-   "IT-DLGS-19-2021:Art.13(1):unmatched-reference-laboratory:v1",
-   "IT-DLGS-19-2021:Art.13(2):v1",
-   "IT-DLGS-19-2021:Art.13(4):v1",
-   "IT-DLGS-19-2021:Art.13(5)(b):v1",
-   "IT-DLGS-19-2021:Art.13(5)(h):v1",
-   "IT-DLGS-19-2021:Art.13(5)-stem:v1",
-   "IT-DLGS-19-2021:Art.14(1):designate-official-laboratory:v1",
-   "IT-DLGS-19-2021:Art.14(1):official-laboratory-capacity:v1",
-   "IT-DLGS-19-2021:Art.14(1):record-designation-data:v1",
-   "IT-DLGS-19-2021:Art.14(2):v1",
-   "IT-DLGS-19-2021:Art.14(3):cross-region-designation:v1",
-   "IT-DLGS-19-2021:Art.14(3):cross-region-use:v1",
-   "IT-DLGS-19-2021:Art.14(4):v1",
-   "IT-DLGS-19-2021:Art.20(1):assistant-identity:v1",
-   "IT-DLGS-19-2021:Art.20(2):appointment-register:v1",
-   "IT-DLGS-19-2021:Art.20(3):activity-limits:v1",
-   "IT-DLGS-19-2021:Art.20(4):express-assignment:v1",
-   "IT-DLGS-19-2021:Art.20(5):proposal-not-decision:v1",
-   "IT-DLGS-19-2021:Art.24:register-current-status:v1",
-   "IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1",
-   "IT-DLGS-19-2021:Art.26(2):ministerial-adoption:v1",
-   "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans:v1",
-   "IT-DLGS-19-2021:Art.26(4):update-emergency-plan:v1",
-   "IT-DLGS-19-2021:Art.33(2):authorized-land-access:v1",
-   "IT-DLGS-19-2021:Art.33(2):communication-method-and-terms:v1",
-   "IT-DLGS-19-2021:Art.33(2):public-force-assistance:v1",
-   "IT-DLGS-19-2021:Art.5(1):v1",
-   "IT-DLGS-19-2021:Art.5(4)(e):v1",
-   "IT-DLGS-19-2021:Art.5(4)(f):v1",
-   "IT-DLGS-19-2021:Art.5(4)(g):v1",
-   "IT-DLGS-19-2021:Art.5(4)-stem:v1",
-   "IT-DLGS-19-2021:Art.55(13):coercive-removal-costs:v1",
-   "IT-DLGS-19-2021:Art.55(13):coercive-removal:v1",
-   "IT-DLGS-19-2021:Art.55(13):obstruction-sanction:v1",
-   "IT-DLGS-19-2021:Art.55(13):omitted-removal-sanction:v1",
-   "IT-DLGS-19-2021:Art.55(15):v1",
-   "IT-DLGS-19-2021:Art.55(25):v1",
-   "IT-DLGS-19-2021:Art.55(29):v1",
-   "IT-DLGS-19-2021:Art.55(30):regional-sanction-competence:v1",
-   "IT-DLGS-19-2021:Art.55(9):notification-violation:v1",
-   "IT-DLGS-19-2021:Art.6(1):v1",
-   "IT-DLGS-19-2021:Art.6(3)(b):v1",
-   "IT-DLGS-19-2021:Art.6(3)(o):v1",
-   "IT-DLGS-19-2021:Art.6(3)-stem:v1",
-   "IT-DLGS-19-2021:Art.7(3)(c):v1",
-   "IT-DLGS-19-2021:Art.7(3)-stem:v1",
-   "IT-DLGS-19-2021:Art.7(5):v1",
-   "IT-DLGS-19-2021:Art.8(2)(c):v1",
-   "IT-DLGS-19-2021:Art.9(2):v1",
-   "IT-DLGS-19-2021:Art.9(4)(a):v1",
-   "IT-DLGS-19-2021:Art.9(4)(c):v1",
-   "IT-DM-0677268-2021:Art.2(1):entry-into-force:v1",
-   "IT-DM-0677268-2021:Art.2(1):operate-within-competence:v1",
-   "IT-DM-0677268-2021:Art.2(1):publication-event:v1",
-   "IT-DM-169819-2022:Art.10(6):cross-region-convention:v1",
-   "IT-DM-169819-2022:Art.11(1):official-laboratory-designation:v1",
-   "IT-DM-169819-2022:Art.11(2):monitor-official-laboratories:v1",
-   "IT-DM-169819-2022:Art.11(2):suspend-or-revoke:v1",
-   "IT-DM-169819-2022:Art.11(3):cfn-audit-suspension-route:v1",
-   "IT-DM-169819-2022:Art.3(2):official-sample-laboratory-class:v1",
-   "IT-DM-169819-2022:Art.3(3):research-output-class:v1",
-   "IT-DM-169819-2022:Art.3(4):self-control-output-class:v1",
-   "IT-DM-169819-2022:Art.30(3):unvalidated-eppo-classification:v1",
-   "IT-DM-169819-2022:Art.30(3):urgent-nonnormalized-method:v1",
-   "IT-DM-169819-2022:Art.30:official-method-selection:v1",
-   "IT-DM-169819-2022:Art.5:national-reference-minimum-qualification:v1",
-   "IT-DM-169819-2022:Art.7(10):ministerial-revocation:v1",
-   "IT-DM-169819-2022:Art.7(11):cessation-notice:v1",
-   "IT-DM-169819-2022:Art.7(11):revocation-after-cessation-notice:v1",
-   "IT-DM-169819-2022:Art.7(4):national-reference-designation:v1",
-   "IT-DM-169819-2022:Art.7(5):multiple-laboratories-per-competence:v1",
-   "IT-DM-169819-2022:Art.7(8):discretionary-suspension:v1",
-   "IT-DM-169819-2022:Art.7(9):serious-nonconformity-suspension:v1",
-   "IT-DM-169819-2022:Art.8(2):eligible-official-laboratory-classes:v1",
-   "IT-DM-169819-2022:Art.8(3):out-of-region-official-laboratory:v1",
-   "IT-DM-169819-2022:Art.8(4):preexisting-designation-continuity:v1",
-   "IT-DM-169819-2022:entry-into-force:v1",
-   "IT-DM-169819-2022:publication:v1",
-   "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect:v1",
-   "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route:v1",
-   "IT-L241-A21BIS:Art.21-bis(1):motivated-immediate-effect:v1",
-   "IT-L241-A21BIS:Art.21-bis(1):urgent-cautionary-effect:v1",
-   "IT-L689-1981:Art.13:violation-evidence-collection:v1",
-   "IT-L689-1981:Art.14:immediate-contest:v1",
-   "IT-L689-1981:Art.14:later-notification:v1",
-   "IT-L689-1981:Art.14:untimely-notification-extinction:v1",
-   "IT-L689-1981:Art.16:reduced-payment:v1",
-   "IT-L689-1981:Art.17:violation-report:v1",
-   "IT-L689-1981:Art.18:adjudication-process:v1",
-   "IT-L689-1981:Art.18:defence-and-hearing-request:v1",
-   "IT-ORD10-2025:Art.3(1):national-service-exclusive-competence:v1",
-   "IT-ORD10-2025:Art.4(1):exclusive-accredited-official-analysis:v1",
-   "IT-ORD10-2025:Art.4(2):accredited-capacity:v1",
-   "IT-ORD10-2025:Art.4(2):designation:v1",
-   "IT-ORD10-2025:Art.5(1):external-designation:v1",
-   "IT-ORD10-2025:Art.5(1):external-use:v1",
-   "IT-ORD10-2025:effect-from-adoption:v1",
-   "PUG-DGR1075-2025:§4.5:owner-election-execution:v1",
-   "PUG-DGR1075-2025:§4.5:owner-evidence:v1",
-   "PUG-DGR1075-2025:§4.5:prescription:v1",
-   "PUG-DGR1075-2025:§4.5:recipient-notice-route:v1",
-   "PUG-DGR1075-2025:§4.5:refusal-route:v1",
-   "PUG-DGR1075-2025:§4.5:silence-route:v1",
-   "PUG-DGR1593-2024:notice-elected-execution:v1",
-   "PUG-DGR1593-2024:notice-owner-election:v1",
-   "PUG-DGR1593-2024:notice-owner-identification:v1",
-   "PUG-DGR1593-2024:notice-prescription-issuance:v1",
-   "PUG-DGR1593-2024:notice-publication:v1",
-   "PUG-DGR1593-2024:notice-refusal-forced-removal:v1",
-   "PUG-DGR1593-2024:notice-silence-substitute-execution:v1",
-   "PUG-DGR1866-2022:notice-elected-execution:v1",
-   "PUG-DGR1866-2022:notice-owner-election:v1",
-   "PUG-DGR1866-2022:notice-owner-identification:v1",
-   "PUG-DGR1866-2022:notice-prescription-issuance:v1",
-   "PUG-DGR1866-2022:notice-publication:v1",
-   "PUG-DGR1866-2022:notice-refusal-forced-removal:v1",
-   "PUG-DGR1866-2022:notice-silence-substitute-execution:v1",
-   "PUG-DGR343-2022:notice-elected-execution:v1",
-   "PUG-DGR343-2022:notice-owner-election:v1",
-   "PUG-DGR343-2022:notice-owner-identification:v1",
-   "PUG-DGR343-2022:notice-prescription-issuance:v1",
-   "PUG-DGR343-2022:notice-publication:v1",
-   "PUG-DGR343-2022:notice-refusal-forced-removal:v1",
-   "PUG-DGR343-2022:notice-silence-substitute-execution:v1",
-   "PUG-DGR538-2021:notice-elected-execution:v1",
-   "PUG-DGR538-2021:notice-owner-election:v1",
-   "PUG-DGR538-2021:notice-owner-identification:v1",
-   "PUG-DGR538-2021:notice-prescription-issuance:v1",
-   "PUG-DGR538-2021:notice-publication:v1",
-   "PUG-DGR538-2021:notice-refusal-forced-removal:v1",
-   "PUG-DGR538-2021:notice-silence-substitute-execution:v1",
-   "PUG-DPGR22-2021:Art.20(3):publication-not-notice:v1",
-   "PUG-LR3-2010:Art.3-bis(1)(a):v1",
-   "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer:v1",
-   "REG-PUGLIA-U181-DIR-2022-00031:obstruction-remedy-route:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:area-act-before-gis:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:obstruction-remedy-route:v1",
-   "REG-PUGLIA-U181-DIR-2025-00045:st26-olive-exclusion-conflict:v1",
-   "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v1"
-  ]
- },
- "fallback_expression_ground": {
-  "EU-2016-2031:Art.31(2):more-stringent-measure-notification:v1": {
-   "class": "not_a_clock",
-   "why": "Member State duty toward the Commission (class-E ruling); national actor"
-  },
-  "EU-2016-2031:Art.31(2):more-stringent-measure-report-on-request:v1": {
-   "class": "not_a_clock",
-   "why": "Member State duty toward the Commission (class-E ruling); national actor"
-  },
-  "EU-2020-1201:10-sub3:v1": {
-   "class": "not_a_clock",
-   "why": "standing vector-monitoring duty with no stated period; falls inside the annual demarcated-area survey"
-  },
-  "EU-2020-1201:11(1):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "EU-2020-1201:11(1):v2": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "EU-2020-1201:11(2):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "EU-2020-1201:11(3):v1": {
-   "class": "not_a_clock",
-   "why": "\"before\" is a population scope (plants moved before demarcation), not a clock; the investigation clock is Art. 31(1) senza indugio"
-  },
-  "EU-2020-1201:12:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "EU-2020-1201:13(1):v1": {
-   "class": "not_a_clock",
-   "why": "the removal duty; its timing is owned by 13(1)-sub1"
-  },
-  "EU-2020-1201:13(2):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "EU-2020-1201:15(1)(a):v1": {
-   "class": "not_a_clock",
-   "why": "sampling population; no temporal expression"
-  },
-  "EU-2020-1201:15(1)(b):v1": {
-   "class": "not_a_clock",
-   "why": "sampling population; no temporal expression"
-  },
-  "EU-2020-1201:15(2)(b):v1": {
-   "class": "not_a_clock",
-   "why": "geography of monitoring; no clock or parameter"
-  },
-  "EU-2020-1201:16(1):v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "EU-2020-1201:16(2):v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "EU-2020-1201:16(3):v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "EU-2020-1201:17:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "EU-2020-1201:2(2):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression; supervision duty"
-  },
-  "EU-2020-1201:2(3)-sub1:v1": {
-   "class": "not_a_clock",
-   "why": "ecoclimatic scope rule"
-  },
-  "EU-2020-1201:2(3):v1": {
-   "class": "not_a_clock",
-   "why": "survey siting by risk; no clock"
-  },
-  "EU-2020-1201:2(4):v1": {
-   "class": "not_a_parameter",
-   "why": "80 %/1 % present in the text but not applicable in this interval (Article 38); the pair enters with v2 on 1 January 2023"
-  },
-  "EU-2020-1201:2(4):v3": {
-   "class": "not_a_parameter",
-   "why": "M5 text states no numeric confidence/prevalence pair (\"sufficient level of confidence, a low level of presence\")"
-  },
-  "EU-2020-1201:2(6):v1": {
-   "class": "not_a_clock",
-   "why": "confirmation route; no temporal expression"
-  },
-  "EU-2020-1201:2(7):v1": {
-   "class": "not_a_clock",
-   "why": "subspecies identification; no clock"
-  },
-  "EU-2020-1201:2(8):v1": {
-   "class": "not_a_clock",
-   "why": "reporting duty stated without a date in the A quote; the 30 April date lives in Article 35 (outside the Articles 1–17 aperture) and binds the Member State — see the seam-1 Q2 correction"
-  },
-  "EU-2020-1201:3(1)-final-subparagraph:v1": {
-   "class": "not_a_clock",
-   "why": "31 December annual contingency-plan update is the Member State's (MASAF Art. 26) duty; no Osservatorio decision turns on it (Q2)"
-  },
-  "EU-2020-1201:3(2)(a):v1": {
-   "class": "not_a_clock",
-   "why": "contingency-plan content"
-  },
-  "EU-2020-1201:4(1)-sub1:v1": {
-   "class": "not_a_clock",
-   "why": "subspecies narrowing option; no temporal expression"
-  },
-  "EU-2020-1201:4(1)-sub2:v1": {
-   "class": "not_a_clock",
-   "why": "\"pending\" is a state of the confirmation, not a clock"
-  },
-  "EU-2020-1201:4(2)-sub2:v1": {
-   "class": "not_a_clock",
-   "why": "list stem"
-  },
-  "EU-2020-1201:4(2):v1": {
-   "class": "not_a_clock",
-   "why": "composition rule"
-  },
-  "EU-2020-1201:4(3):v1": {
-   "class": "not_a_clock",
-   "why": "Commission actor; the Union list is publication, not constitution; no Osservatorio decision turns on its timing (third-party boundary)"
-  },
-  "EU-2020-1201:5(3)(a):v1": {
-   "class": "not_a_clock",
-   "why": "\"recently\"/\"before\" are evidentiary scope, not clocks"
-  },
-  "EU-2020-1201:5(3)(b):v1": {
-   "class": "not_a_clock",
-   "why": "\"recently\"/\"before\" are evidentiary scope, not clocks"
-  },
-  "EU-2020-1201:5(3)(c):v1": {
-   "class": "not_a_clock",
-   "why": "\"recently\"/\"before\" are evidentiary scope, not clocks"
-  },
-  "EU-2020-1201:5(3):v1": {
-   "class": "not_a_clock",
-   "why": "the decline decision itself; \"immediately\" is the Article 4 demarcation timing being derogated from"
-  },
-  "EU-2020-1201:5(3):v2": {
-   "class": "not_a_clock",
-   "why": "the decline decision itself; \"immediately\" is the Article 4 demarcation timing being derogated from"
-  },
-  "EU-2020-1201:5(4):v1": {
-   "class": "not_a_clock",
-   "why": "list stem"
-  },
-  "EU-2020-1201:5(4):v2": {
-   "class": "not_a_clock",
-   "why": "list stem"
-  },
-  "EU-2020-1201:6(2)(a):v1": {
-   "class": "not_a_clock",
-   "why": "confidence conclusion; no temporal expression"
-  },
-  "EU-2020-1201:6(2):v1": {
-   "class": "restates_parameter",
-   "why": "\"no less than 1 km\" restates the Article 5(1) reduced-buffer floor"
-  },
-  "EU-2020-1201:6(2):v2": {
-   "class": "restates_parameter",
-   "why": "\"no less than 1 km\" restates the Article 5(1) reduced-buffer floor"
-  },
-  "EU-2020-1201:7(1)(a):v1": {
-   "class": "not_a_clock",
-   "why": "population member / exemption; no temporal expression"
-  },
-  "EU-2020-1201:7(1)(b):v1": {
-   "class": "not_a_clock",
-   "why": "population member / exemption; no temporal expression"
-  },
-  "EU-2020-1201:7(1)(c):v1": {
-   "class": "not_a_clock",
-   "why": "population member / exemption; no temporal expression"
-  },
-  "EU-2020-1201:7(1)(d):v1": {
-   "class": "not_a_clock",
-   "why": "population member / exemption; no temporal expression"
-  },
-  "EU-2020-1201:7(1)(e)-sub1:v1": {
-   "class": "not_a_clock",
-   "why": "population member / exemption; no temporal expression"
-  },
-  "EU-2020-1201:7(2):v1": {
-   "class": "not_a_clock",
-   "why": "organisation of the removal by risk; qualifies how, not when"
-  },
-  "EU-2020-1201:7(3)(b):v1": {
-   "class": "not_a_clock",
-   "why": "retention derogation and its treatment condition; no temporal expression (the annual testing is 7(3)(a))"
-  },
-  "EU-2020-1201:7(3):v1": {
-   "class": "not_a_clock",
-   "why": "retention derogation and its treatment condition; no temporal expression (the annual testing is 7(3)(a))"
-  },
-  "EU-2020-1201:7(3):v2": {
-   "class": "not_a_clock",
-   "why": "retention derogation and its treatment condition; no temporal expression (the annual testing is 7(3)(a))"
-  },
-  "EU-2020-1201:7(3):v3": {
-   "class": "not_a_clock",
-   "why": "retention derogation and its treatment condition; no temporal expression (the annual testing is 7(3)(a))"
-  },
-  "EU-2020-1201:8(2)-sub1:v1": {
-   "class": "not_a_clock",
-   "why": "treatment classes; no clock"
-  },
-  "EU-2020-1201:8(2):v2": {
-   "class": "not_a_clock",
-   "why": "list stem"
-  },
-  "EU-2020-1201:9(1):v1": {
-   "class": "not_a_clock",
-   "why": "\"at the shortest distance\" is spatial; destruction carries no temporal expression"
-  },
-  "EU-2020-1201:9(2):v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "EU-2020-1201:9(3):v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "IT-CFN-ORD-3-2023:Annex-I:territory-list:v1": {
-   "class": "not_a_clock",
-   "why": "status declaration / list; no clock"
-  },
-  "IT-CFN-ORD-3-2023:Art.1(1):pest-free-declaration:v1": {
-   "class": "not_a_clock",
-   "why": "status declaration / list; no clock"
-  },
-  "IT-CFN-ORD-3-2023:Art.1(2):maintain-pest-free-status:v1": {
-   "class": "not_a_clock",
-   "why": "status declaration / list; no clock"
-  },
-  "IT-CFN-ORD-3-2023:Art.1(3):annual-list-revision:v1": {
-   "class": "not_a_clock",
-   "why": "national list revision on annual survey results; national actor"
-  },
-  "IT-DLGS-19-2021:Art.11(1)(b):v1": {
-   "class": "not_a_clock",
-   "why": "organizational \"immediata risposta\" — no clock"
-  },
-  "IT-DLGS-19-2021:Art.27(1):v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.27(2):v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.27(4):adopt-national-programme:v1": {
-   "class": "not_a_clock",
-   "why": "annual programme cycle of the Central Plant Health Service; national actor, no Osservatorio decision turns on its timing (Q2)"
-  },
-  "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal:v1": {
-   "class": "not_a_clock",
-   "why": "annual programme cycle of the Central Plant Health Service; national actor, no Osservatorio decision turns on its timing (Q2)"
-  },
-  "IT-DLGS-19-2021:Art.27(4):publish-national-programme:v1": {
-   "class": "not_a_clock",
-   "why": "annual programme cycle of the Central Plant Health Service; national actor, no Osservatorio decision turns on its timing (Q2)"
-  },
-  "IT-DLGS-19-2021:Art.27(5):v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.27(6):transmit-adopted-programme:v1": {
-   "class": "not_a_clock",
-   "why": "annual programme cycle of the Central Plant Health Service; national actor, no Osservatorio decision turns on its timing (Q2)"
-  },
-  "IT-DLGS-19-2021:Art.27(6):transmit-prior-year-results:v1": {
-   "class": "not_a_clock",
-   "why": "annual programme cycle of the Central Plant Health Service; national actor, no Osservatorio decision turns on its timing (Q2)"
-  },
-  "IT-DLGS-19-2021:Art.27(7):v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.27(8):access-sipp-data:v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.27(8):contribute-additional-data:v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.27(9):v1": {
-   "class": "not_a_clock",
-   "why": "no clock; programme structure, data supply or coordination"
-  },
-  "IT-DLGS-19-2021:Art.28(1):v1": {
-   "class": "not_a_clock",
-   "why": "Third-party duty whose anchor (the moment a person became aware) is a fact the build cannot hold; the operator holds only the receipt of the report, which anchors its own L.R. 4 Art. 2 and Art. 28(3)/(4) clocks. Awareness enters only as a case fact in an Art. 55(9) contest act (Q2(b))."
-  },
-  "IT-DLGS-19-2021:Art.28(2):v1": {
-   "class": "not_a_clock",
-   "why": "third-party \"immediatamente\" precaution; no A effect consumes its timeliness"
-  },
-  "IT-DLGS-19-2021:Art.28(3):v1": {
-   "class": "not_a_clock",
-   "why": "the finding decision itself — the anchor of the seam, not a clock"
-  },
-  "IT-DLGS-19-2021:Art.28(5):v1": {
-   "class": "not_a_clock",
-   "why": "instruction-specific duty; no temporal expression"
-  },
-  "IT-DLGS-19-2021:Art.29(2):v1": {
-   "class": "not_a_clock",
-   "why": "Central Plant Health Service actor; the Osservatorio's duty ends at the Art. 29(1) entry and no operator decision turns on Rome's three working days (Q2, same class as the Art. 27(4)/(6) cycle)."
-  },
-  "IT-DLGS-19-2021:Art.30(2):v1": {
-   "class": "not_a_clock",
-   "why": "National Plant Health Committee public-information method; national actor"
-  },
-  "IT-DLGS-19-2021:Art.31(3):eradication-regime:v1": {
-   "class": "not_a_clock",
-   "why": "authority/route provision; no temporal expression"
-  },
-  "IT-DLGS-19-2021:Art.31(3):establish-demarcated-area:v1": {
-   "class": "not_a_clock",
-   "why": "authority/route provision; no temporal expression"
-  },
-  "IT-DLGS-19-2021:Art.31(4):v1": {
-   "class": "not_a_clock",
-   "why": "\"prima riunione utile\" is the National Plant Health Committee's own timing; national actor (Q2). Its decision is the received event that anchors the Art. 31(5) clock."
-  },
-  "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval:v1": {
-   "class": "not_a_clock",
-   "why": "national actor (CFN / Central Plant Health Service); no temporal expression and no Osservatorio decision turns on its timing"
-  },
-  "IT-DLGS-19-2021:Art.31(6):adopt-action-plan:v1": {
-   "class": "not_a_clock",
-   "why": "national actor (CFN / Central Plant Health Service); no temporal expression and no Osservatorio decision turns on its timing"
-  },
-  "IT-DLGS-19-2021:Art.31(6):declare-emergency:v1": {
-   "class": "not_a_clock",
-   "why": "national actor (CFN / Central Plant Health Service); no temporal expression and no Osservatorio decision turns on its timing"
-  },
-  "IT-DLGS-19-2021:Art.31(6):notify-commission:v1": {
-   "class": "not_a_clock",
-   "why": "national actor (CFN / Central Plant Health Service); no temporal expression and no Osservatorio decision turns on its timing"
-  },
-  "IT-DLGS-19-2021:Art.31(7):v1": {
-   "class": "not_a_clock",
-   "why": "national actor (CFN / Central Plant Health Service); no temporal expression and no Osservatorio decision turns on its timing"
-  },
-  "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "IT-DLGS-19-2021:Art.31(8):implement-action-plan-measures:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "IT-DLGS-19-2021:Art.32(1):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.32(2):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.32(3):determine-completion-costs:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.32(3):primary-implementation:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.32(3):recovery-right:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.32(3):substitute-execution:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.33(1):emergency-measure-derogation:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression (seam 4 reads Art. 32(3) for its execution routes)"
-  },
-  "IT-DLGS-19-2021:Art.6(3)(g):v1": {
-   "class": "not_a_clock",
-   "why": "authority/route provision; no temporal expression"
-  },
-  "IT-DLGS42-A146:Art.146(2):v1": {
-   "class": "not_a_clock",
-   "why": "\"do not begin work before authorization\" is the ordering the Art. 33(1) clock already carries"
-  },
-  "IT-DLGS42-A146:Art.146(5):regional-decision-owner:v1": {
-   "class": "not_a_clock",
-   "why": "the landscape procedure's internal 45 days and post-opinion decision (Q2: internal mechanics); the operator waits on the Art. 33(1) authorization clock, whose completion is this decision"
-  },
-  "IT-DLGS42-A146:Art.146(8):superintendent-opinion:v1": {
-   "class": "not_a_clock",
-   "why": "superintendent actor; internal step of the landscape procedure (Q2)"
-  },
-  "IT-DM-169819-2022:Art.10(3):timely-analysis:v1": {
-   "class": "not_a_clock",
-   "why": "laboratory-internal \"tempestivamente\"; no operator decision consumes it (Q2)"
-  },
-  "IT-DM-2022-XYLELLA-PLAN:Art.1:adoption:v1": {
-   "class": "not_a_clock",
-   "why": "adoption act; no clock"
-  },
-  "IT-DM-2022-XYLELLA-PLAN:§6.2:action-plan-15-working-days:v1": {
-   "class": "implements_clock",
-   "why": "\"15 giorni lavorativi\" and \"senza indugio\" restate the Art. 31(5) statutory clock"
-  },
-  "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:post-m5-v2": {
-   "class": "implements_clock",
-   "why": "\"indagini annuali\" implements B-CLK-EU-15(2)-v2"
-  },
-  "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:pre-m5-v1": {
-   "class": "implements_clock",
-   "why": "\"indagini annuali\" implements B-CLK-EU-10/15(2); the C/p pairs restate EU 10/15; the pre-M5 5 km band coincides with EU 15(2)(a) v1 (B-PAR-EU-15(2)(a)-v1)"
-  },
-  "IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption:v1": {
-   "class": "not_a_clock",
-   "why": "adoption act; no clock"
-  },
-  "IT-DM-348260-2026-XYLELLA-PLAN:Art.2(1):replace-2022-plan:v1": {
-   "class": "not_a_clock",
-   "why": "\"17 marzo 2022\" is a publication date in a citation, not a clock"
-  },
-  "IT-DM-348260-2026-XYLELLA-PLAN:§14:annual-review:v1": {
-   "class": "not_a_clock",
-   "why": "CFN annual review of the national plan; national actor"
-  },
-  "IT-DM-348260-2026-XYLELLA-PLAN:§8.2:action-plan-15-day-unit-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "unqualified \"15 giorni\"; ruled (Q5): the statutory 15 working days controls and the plan wording cannot shorten it — one clock (B-CLK-IT-31(5)), this row a note"
-  },
-  "IT-DM-348260-2026-XYLELLA-PLAN:§9.2:containment-vector-treatment-coverage:v1": {
-   "class": "implements_clock",
-   "why": "\"periodici trattamenti\" and \"nel periodo più adatto dell'anno\" implement 8(1)/8(2)/14(2) with the biological open term; no magnitude stated"
-  },
-  "IT-DM-348260-2026-XYLELLA-PLAN:§9.3:containment-surveillance-band-2km:v1": {
-   "class": "implements_clock",
-   "why": "annual survey implements EU 10/15; C/p pairs restate EU"
-  },
-  "IT-DTU39-REV1:official-technical-instruction:v1": {
-   "class": "not_a_clock",
-   "why": "technical instruction; no clock"
-  },
-  "IT-DTU39-REV1:§4.2:sample-transfer:v1": {
-   "class": "not_a_clock",
-   "why": "\"il prima possibile\" is subsumed by the operative regional same-day custody rule (DDS 31/45); no separate decision turns on it"
-  },
-  "IT-DTU39-REV1:§4:risk-based-sampling:v1": {
-   "class": "not_a_clock",
-   "why": "technical instruction; no clock"
-  },
-  "IT-DTU39-REV1:§5.4:inconclusive-result-routing:v1": {
-   "class": "not_a_clock",
-   "why": "technical instruction; no clock"
-  },
-  "IT-DTU39-REV1:§5.4:pest-free-positive-confirmation:v1": {
-   "class": "not_a_clock",
-   "why": "technical instruction; no clock"
-  },
-  "IT-DTU39-REV1:§5:diagnostic-method-routing:v1": {
-   "class": "not_a_clock",
-   "why": "technical instruction; no clock"
-  },
-  "IT-DTU8-REV2:official-laboratory-route-and-continuing-status:v1": {
-   "class": "not_a_clock",
-   "why": "NRL annual PT organization and the laboratory's \"tempestiva\" impediment notice are laboratory-side duties demoted to the defect route (class A); no operator decision turns on their timing"
-  },
-  "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance:v1": {
-   "class": "not_a_clock",
-   "why": "\"aprile\" is a decree date; no clock"
-  },
-  "IT-PNI-2026:adoption-and-publication-status:v1": {
-   "class": "not_a_clock",
-   "why": "13 November 2025 is the adoption event date, not a clock"
-  },
-  "PUG-DGR1075-2025:Art7(3)-policy:v1": {
-   "class": "not_a_clock",
-   "why": "plan retention policy by interval; no temporal expression (the 50 m is the Article 4(2) floor restated)"
-  },
-  "PUG-DGR1075-2025:Convention-3.1:arif-surveillance-communication:v1": {
-   "class": "not_a_clock",
-   "why": "\"tempestività e continuità nel triennio\" is task-allocation wording; no decision turns on it"
-  },
-  "PUG-DGR1593-2024:Art7(3)-policy:v1": {
-   "class": "not_a_clock",
-   "why": "plan retention policy by interval; no temporal expression (the 50 m is the Article 4(2) floor restated)"
-  },
-  "PUG-DGR1866-2022:Art7(3)-policy:v1": {
-   "class": "not_a_clock",
-   "why": "plan retention policy by interval; no temporal expression (the 50 m is the Article 4(2) floor restated)"
-  },
-  "PUG-DGR343-2022:Art7(3)-policy:v1": {
-   "class": "not_a_clock",
-   "why": "plan retention policy by interval; no temporal expression (the 50 m is the Article 4(2) floor restated)"
-  },
-  "PUG-DGR538-2021:Art7(3)-policy:v1": {
-   "class": "implements_clock",
-   "why": "\"ogni anno\" restates B-CLK-EU-7(3)(a)"
-  },
-  "PUG-LR4-2017:Art.2(1):v1": {
-   "class": "not_a_clock",
-   "why": "Regional restatement of Art. 28(1); same class — third-party anchor not holdable."
-  },
-  "PUG-LR4-2017:Art.2(3):v1": {
-   "class": "not_a_clock",
-   "why": "verification duty; no temporal expression"
-  },
-  "PUG-LR4-2017:Art.3(1):v1": {
-   "class": "implements_clock",
-   "why": "\"senza indugio\" restates the Article 4(1) clock; the row owns the demarcation fork"
-  },
-  "PUG-LR4-2017:Art.3(2):post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "operative-area master; no temporal expression"
-  },
-  "PUG-LR4-2017:Art.3(2):pre-LR45-v1": {
-   "class": "not_a_parameter",
-   "why": "Pre-L.R. 45 infected-zone definition and 10 km buffer: the version's interval closed 18 December 2021, so no decision now or later applies it prospectively, and A hedges it to compatibility with the directly applicable Article 4(2) minima, which own the geometry for any retrospective judgment."
-  },
-  "PUG-LR4-2017:Art.3(4):may-revoke:post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "no temporal expression; controlling Article 6 owns the lifting thresholds"
-  },
-  "PUG-LR4-2017:Art.3(4):may-revoke:pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "Pre-L.R. 45 five-year no-detection revocation: interval closed 18 December 2021; Article 6 owns every lifting threshold from that date, prospectively and retrospectively."
-  },
-  "PUG-LR4-2017:Art.4(2):post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(2):pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(3):access:post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(3):access:pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(3):laboratory:post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(3):laboratory:pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(3):sampling:post-LR45-v2": {
-   "class": "open_term",
-   "why": "\"periodi opportuni\" — the Art. 2(5) biological open term"
-  },
-  "PUG-LR4-2017:Art.4(3):sampling:pre-LR45-v1": {
-   "class": "open_term",
-   "why": "\"periodi opportuni\" — the Art. 2(5) biological open term"
-  },
-  "PUG-LR4-2017:Art.4(3):survey-route:post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(3):survey-route:pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(4):post-LR45-v2": {
-   "class": "implements_clock",
-   "why": "\"ispezioni annuali\" implements B-CLK-EU-10; \"nel momento più adatto\" is the Art. 2(5) open term"
-  },
-  "PUG-LR4-2017:Art.4(4):pre-LR45-v1": {
-   "class": "implements_clock",
-   "why": "Pre-L.R. 45 20 km inward inspection band and 100 m grid: the version's interval closed 18 December 2021, so no decision applies it prospectively, and A hedges it to compatibility with the effective Article 10/15 survey population, which owns the geography for any judgment of an act of that interval."
-  },
-  "PUG-LR4-2017:Art.4(5):v1": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.4(6):follow-up:v1": {
-   "class": "not_a_clock",
-   "why": "location sampling inside the 2(4a) investigation; the 2(4a) clock governs"
-  },
-  "PUG-LR4-2017:Art.4(6):vector:v1": {
-   "class": "not_a_clock",
-   "why": "no clock in the quote"
-  },
-  "PUG-LR4-2017:Art.5(1):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.5(2):v1": {
-   "class": "implements_clock",
-   "why": "\"rimozione immediata\" restates B-CLK-EU-7(1)"
-  },
-  "PUG-LR4-2017:Art.5(3):post-LR45-v2": {
-   "class": "implements_clock",
-   "why": "\"immediatamente dopo aver individuato ... rimozione immediata\" restates B-CLK-EU-7(1)"
-  },
-  "PUG-LR4-2017:Art.5(3):pre-LR45-v1": {
-   "class": "not_a_parameter",
-   "why": "Pre-L.R. 45 100 m host-removal text: interval closed 18 December 2021 and A holds it as a conflict with the directly applicable Article 7 population, which owns the removal population for any judgment of an act of that interval."
-  },
-  "PUG-LR4-2017:Art.5(4):post-LR45-v2": {
-   "class": "open_term",
-   "why": "\"in relazione al ciclo del vettore\" is the biological open term the 8(1) v2 season clock carries; organises the removal, no clock of its own"
-  },
-  "PUG-LR4-2017:Art.5(4):pre-LR45-v1": {
-   "class": "not_a_parameter",
-   "why": "Pre-L.R. 45 100 m vector-operation text: interval closed 18 December 2021; Article 8 owns the treatment territory for any judgment of an act of that interval."
-  },
-  "PUG-LR4-2017:Art.5(5):post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "\"tempestivamente\" qualifies the removal (owned by B-CLK-EU-7(1)); the interim isolation duty has no clock"
-  },
-  "PUG-LR4-2017:Art.5(5):pre-LR45-v1": {
-   "class": "not_a_parameter",
-   "why": "Pre-L.R. 45 100 m interim isolation: interval closed 18 December 2021; A holds it as an interim protection that never substitutes for the Article 7 removal duty."
-  },
-  "PUG-LR4-2017:Art.5(6):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.6(1):post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.6(1):pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.6(2):post-LR45-v2": {
-   "class": "implements_clock",
-   "why": "\"rimozione immediata\" restates B-CLK-EU-13(1)-sub1-immediate-removal"
-  },
-  "PUG-LR4-2017:Art.6(2):pre-LR45-v1": {
-   "class": "not_a_parameter",
-   "why": "Pre-L.R. 45 200 m/site categories: interval closed 18 December 2021 and A holds them as a conflict with the Article 13 infected-plant population."
-  },
-  "PUG-LR4-2017:Art.6(3):post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "additive contiguous-plant sampling; no temporal expression (15(1) owns immediacy)"
-  },
-  "PUG-LR4-2017:Art.6(3):pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "Pre-L.R. 45 100 m twice-yearly sampling: interval closed 18 December 2021; additive to, and never narrowing, the Article 15 monitoring population."
-  },
-  "PUG-LR4-2017:Art.7(1):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.7(2):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.7(4):v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "PUG-LR4-2017:Art.8(5):protected-uninfected-retention:post-LR45-v2": {
-   "class": "not_a_clock",
-   "why": "the 15-day invitation and 30-day municipal response are the Giunta/comuni listing machinery; no Osservatorio decision turns on their timing (Q2)"
-  },
-  "PUG-LR4-2017:Art.8(5):protected-uninfected-retention:pre-LR45-v1": {
-   "class": "not_a_clock",
-   "why": "the 15-day request to the comuni is a one-off Giunta duty of 2017 (national/other actor, expired); the blanket non-removal text is A-hedged"
-  },
-  "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary:v1": {
-   "class": "not_a_clock",
-   "why": "no temporal expression"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer:v1": {
-   "class": "restates_parameter",
-   "why": "case act exercising the Article 5(1) reduction; \"non inferiore a 1 km\" restates the EU floor (cases do not define the law)"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00069:partial-parcel-rule:v1": {
-   "class": "not_a_clock",
-   "why": "parcel-inclusion rule; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00069:pauca-area-update:v1": {
-   "class": "not_a_clock",
-   "why": "area act; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment:v1": {
-   "class": "not_a_clock",
-   "why": "case-specific no-treatment direction held by A as a conflict; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00177:commission-notification:v1": {
-   "class": "implements_clock",
-   "why": "exercises B-CLK-EU-6(4)-notify-lifting through MASAF"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00177:post-lift-plant-surveillance:v1": {
-   "class": "implements_clock",
-   "why": "\"nei prossimi due anni\" exercises B-CLK-EU-6(3)"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00177:post-lift-vector-monitoring:v1": {
-   "class": "not_a_clock",
-   "why": "no period stated"
-  },
-  "REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa:v1": {
-   "class": "not_a_clock",
-   "why": "lifting act; the act date is the event anchor of the 6(3)/6(4) clocks"
-  },
-  "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; \"31 marzo 2022\" is a case-specific date and the 7-day election belongs to seam 4 (DGR 538 producer); cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1": {
-   "class": "not_a_clock",
-   "why": "case-specific no-treatment direction held by A as a conflict; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2022-00031:containment-pool-decomposition:v1": {
-   "class": "not_a_parameter",
-   "why": "Pool size is sampling mechanics; the operator's decision needs individual plant identity, not the bag count (Q8)."
-  },
-  "REG-PUGLIA-U181-DIR-2022-00031:destruction-root-wood-completion:v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "REG-PUGLIA-U181-DIR-2022-00031:doubtful-result-route:v1": {
-   "class": "not_a_parameter",
-   "why": "The 32–35 repeat band triggers pool re-extraction inside the laboratory's doubtful route; the operator consumes only the terminal analytical class (laboratory-internal mechanics, Q2/Q8)."
-  },
-  "REG-PUGLIA-U181-DIR-2022-00031:pest-free-buffer-pool-confirmation:v1": {
-   "class": "not_a_parameter",
-   "why": "Restates the pool size, which is not a parameter (Q8)."
-  },
-  "REG-PUGLIA-U181-DIR-2022-00031:st53-crop-exclusion-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "population conflict held by A; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2022-00127:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00012:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v2": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00029:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00045:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00052:case-delta:staged-article7-workload:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00091:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00092:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00093:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00094:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition:unresolved-v1": {
-   "class": "not_a_clock",
-   "why": "The retained quote is a successor recital identifying the act and its adoption date; it states no period, threshold or geometry. That DDS 148's body and annexes are not yet acquired is an evidence-acquisition item in the register, never a ground for excluding a decision (corrected aperture)."
-  },
-  "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00158:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00158:containment-selection:v1": {
-   "class": "restates_parameter",
-   "why": "2 km inward band and 5 km buffer restate the EU 15(2)(a) v2 and 4(2)(b) floors"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction:v1": {
-   "class": "not_a_clock",
-   "why": "annex payload correction; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2024-00198:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:asparagus-non-sampling-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "population conflict held by A; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-evidence:v1": {
-   "class": "not_a_clock",
-   "why": "execution record/support/verification; no temporal expression"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-verification:v1": {
-   "class": "not_a_clock",
-   "why": "execution record/support/verification; no temporal expression"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:containment-removal-population-support:v1": {
-   "class": "not_a_clock",
-   "why": "execution record/support/verification; no temporal expression"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:pest-free-positive-routing:v1": {
-   "class": "not_a_parameter",
-   "why": "Restates the pool size, which is not a parameter (Q8)."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:positive-pool-identity-route:v1": {
-   "class": "not_a_parameter",
-   "why": "Pool size is sampling mechanics (Q8)."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion:v1": {
-   "class": "not_a_clock",
-   "why": "destruction route; no temporal expression"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:st53-citrus-prunus-exclusion-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "population conflict held by A; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00059:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00106:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00113:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00126:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00132:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00141:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00147:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00163:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2025-00236:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00002:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00004:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00012:almond-characterization:v1": {
-   "class": "not_a_clock",
-   "why": "holistic qualification; no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text:v1": {
-   "class": "not_a_clock",
-   "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4; cases mint no clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1": {
-   "class": "not_a_clock",
-   "why": "\"con immediatezza\" applies the predecessor order's timing (DDS 173/2025, seam 4); a case does not mint a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "REG-PUGLIA-U181-DIR-2026-00112:area-state-transition:v1": {
-   "class": "restates_parameter",
-   "why": "area act dispositivo restating the Article 4(2) floors (50 m infected zone; 2,5 km / 5 km buffer); the act date is an event anchor, \"immediatamente esecutivo\" is act effectiveness, not a clock"
-  },
-  "EU-2016-2031:Art.31:more-stringent-national-measures:v1": {
-   "class": "not_a_clock",
-   "why": "Member State duty toward the Commission; the Osservatorio takes no decision on its timing (vested-decision ground)."
-  },
-  "EU-2017-625:Art.101(1):national-reference-laboratory-tasks:v1": {
-   "class": "not_a_clock",
-   "why": "National reference laboratory tasks; laboratory-side, no Osservatorio decision turns on their timing."
-  },
-  "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation:v1": {
-   "class": "not_a_parameter",
-   "why": "Partial-accreditation derogation; 'at least' is qualitative scope, not a numeric parameter."
-  },
-  "IT-DLGS-19-2021:Art.8(1):v1": {
-   "class": "not_a_clock",
-   "why": "National reference institute designation; central actor."
-  },
-  "IT-DLGS-19-2021:Art.9(5):v1": {
-   "class": "not_a_clock",
-   "why": "Emergency Secretariat reports periodically to the national committee; central actor."
-  },
-  "IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation:v1": {
-   "class": "not_a_clock",
-   "why": "National reference laboratory designation; central actor."
-  },
-  "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation:v1": {
-   "class": "not_a_clock",
-   "why": "National reference laboratory designation; central actor."
-  },
-  "IT-DM-169819-2022:Art.10(5):issue-test-report:v1": {
-   "class": "not_a_parameter",
-   "why": "'almeno le indicazioni previste dalla norma' is a content minimum by reference, not a numeric parameter."
-  },
-  "IT-DM-169819-2022:Art.10(5):retain-analytical-data:v1": {
-   "class": "not_a_parameter",
-   "why": "Record-keeping content minimum by reference; not a numeric parameter."
-  },
-  "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1": {
-   "class": "not_a_clock",
-   "why": "Designation conditions; the temporal limits on that designation are Article 42 (one year, one renewal) and the Article 39 audit and withdrawal duties, both minted."
-  },
-  "EU-2017-625:Art.37(2):external-location-designation:v1": {
-   "class": "not_a_clock",
-   "why": "Conditions for designating a laboratory located elsewhere; no temporal or numeric expression the operator's decision turns on."
-  },
-  "EU-2017-625:Art.40(1)(b):other-official-activity-derogation:v1": {
-   "class": "not_a_parameter",
-   "why": "Accreditation derogation for certain laboratories; 'at least' is qualitative scope, not a numeric parameter."
-  },
-  "EU-2017-625:Art.41:representative-method-derogation-authority:v1": {
-   "class": "not_a_clock",
-   "why": "The Commission adopts the delegated acts; vested elsewhere."
-  },
-  "EU-2017-625:Art.93(1):eu-reference-laboratory-designation:v1": {
-   "class": "not_a_clock",
-   "why": "The Commission designates European Union reference laboratories; vested elsewhere."
-  },
-  "EU-2017-625:Art.100:national-reference-laboratory-status:v1": {
-   "class": "not_a_clock",
-   "why": "The Member State designates national reference laboratories; vested elsewhere (central plant-health service)."
-  },
-  "EU-2020-1201:3(1)(b):v1": {
-   "class": "not_a_clock",
-   "why": "Movement of specified plants within the Union and the official checks on it (Articles 19 to 26) are outside the program aperture by standing ruling; 'within' here is spatial and states no period."
-  },
-  "EU-2020-1201:3(1)(c):v1": {
-   "class": "not_a_clock",
-   "why": "Movement of specified plants within the Union and the official checks on it (Articles 19 to 26) are outside the program aperture by standing ruling; 'within' here is spatial and states no period."
-  },
-  "PUG-DGR1866-2022:st53-crop-exclusion-conflict:v1": {
-   "class": "not_a_parameter",
-   "why": "The 400 m enhanced-surveillance band and 14 samples/ha are additive plan survey design A holds as one proposition (grain rule); the row's proposition is the categorical crop exclusion, held by A as a conflict."
-  },
-  "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1": {
-   "class": "not_a_clock",
-   "why": "Case delta; the seven-day albo publication is carried by the plan-version clocks of seam 4. Cases mint no clock."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction:v1": {
-   "class": "not_a_clock",
-   "why": "Correction of the owner recorded against particular parcels in an earlier determina, carrying with it the annex 1/C three-day ownership-change report. It transfers an existing removal duty to the corrected owner and creates none, and no plan-version clock carries that report: a case instantiates law and mints nothing."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00011:case-delta:three-day-owner-change-report:v1": {
-   "class": "not_a_clock",
-   "why": "The act binds the owners listed in annex 1/C of DDS 188/2024 to report a later change of ownership within three days of the end of the publication period. It is a duty imposed by one act on one named population, not a rule of general application: a case instantiates law and mints nothing. No plan-version clock carries it."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00117:case-delta:failed-service-represcription:v1": {
-   "class": "not_a_clock",
-   "why": "The act rectifies annex 1/C of earlier determinations and re-prescribes the measures against the corrected parcels. Its detected expression restates the Article 7(1)(e) specified-plant limb — plants not immediately sampled and tested and not found free — which B-CLK-EU-7(1)(e) carries. A case instantiates law and mints nothing."
-  },
-  "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1": {
-   "class": "not_a_clock",
-   "why": "Case delta; the seven-day albo publication is carried by the plan-version clocks of seam 4. Cases mint no clock."
-  },
-  "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved:v1": {
-   "class": "not_a_clock",
-   "why": "Case delta: the reissued Article 7 package restates B-CLK-EU-7(1)'s immediacy and the Article 4(2) 50 m floor, and the ST53 crop exclusion is the conflict A already holds. A case instantiates law and mints nothing."
-  },
-  "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1": {
-   "class": "not_a_clock",
-   "why": "Case delta: staged execution of the Article 7 population — the immediacy is B-CLK-EU-7(1)'s and the 50 m the Article 4(2) floor; deferring part of the workload changes neither. A case instantiates law and mints nothing."
-  },
-  "IT-DLGS-19-2021:Art.31(9):modify-area-if-necessary:v1": {
-   "class": "not_a_clock",
-   "why": "'ove necessario' conditions the modification duty; the periodic survey carries the recurrence"
-  },
-  "IT-DLGS-19-2021:Art.31(9):report-area-information:v1": {
-   "class": "not_a_clock",
-   "why": "reporting duty with no stated period of its own; rides the periodic survey"
-  },
-  "EU-2020-1201:1(a):v1": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:1(b):v1": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:1(c):v1": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:1(c):v2": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:1(d):v1": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:15(5):v1": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:1:v1": {
-   "class": "not_a_clock",
-   "why": "Article 1 definition: names a population and states no period, threshold or ordering."
-  },
-  "EU-2020-1201:3(1)(a):v1": {
-   "class": "not_a_clock",
-   "why": "Contingency-plan structure and required content; states no period the Osservatorio computes."
-  },
-  "EU-2020-1201:3(1):v1": {
-   "class": "not_a_clock",
-   "why": "Contingency-plan structure and required content; states no period the Osservatorio computes."
-  },
-  "EU-2020-1201:3(1):v2": {
-   "class": "not_a_clock",
-   "why": "Contingency-plan structure and required content; states no period the Osservatorio computes."
-  },
-  "EU-2020-1201:3(2)(b):v1": {
-   "class": "not_a_clock",
-   "why": "Contingency-plan structure and required content; states no period the Osservatorio computes."
-  },
-  "EU-2020-1201:3(2):v1": {
-   "class": "not_a_clock",
-   "why": "Contingency-plan structure and required content; states no period the Osservatorio computes."
-  },
-  "EU-2020-1201:3(2):v2": {
-   "class": "not_a_clock",
-   "why": "Contingency-plan structure and required content; states no period the Osservatorio computes."
-  },
-  "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.10(1):implement-plan-and-ordinances:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.10(3)(a):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.10(3)(c):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.10(4):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.11(1):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.11(2):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(1):corresponding-reference-laboratory:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(1):unmatched-reference-laboratory:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(2):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(4):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(5)(b):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(5)(h):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.13(5)-stem:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(1):designate-official-laboratory:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(1):official-laboratory-capacity:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(1):record-designation-data:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(2):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(3):cross-region-designation:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(3):cross-region-use:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.14(4):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.20(1):assistant-identity:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.20(2):appointment-register:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.20(3):activity-limits:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.20(4):express-assignment:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.20(5):proposal-not-decision:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.24:register-current-status:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.26(2):ministerial-adoption:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.26(4):update-emergency-plan:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.33(2):communication-method-and-terms:v1": {
-   "class": "not_a_clock",
-   "why": "Allocates authority to set the method and terms of communication; the terms themselves are set act by act and the seam-4 notice clocks carry them."
-  },
-  "IT-DLGS-19-2021:Art.33(2):public-force-assistance:v1": {
-   "class": "not_a_clock",
-   "why": "The request for public force follows the owner's opposition; the source states no period and no ordering beyond that condition."
-  },
-  "IT-DLGS-19-2021:Art.5(1):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.5(4)(e):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.5(4)(f):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.5(4)(g):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.5(4)-stem:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.55(13):coercive-removal-costs:v1": {
-   "class": "not_a_clock",
-   "why": "Charging the cost of coercive removal to the proven offender. It states who bears the cost and no period, threshold or ordering; the amount is the cost actually incurred, which Stage B does not carry."
-  },
-  "IT-DLGS-19-2021:Art.55(13):coercive-removal:v1": {
-   "class": "not_a_clock",
-   "why": "The Osservatorio's power to order coercive removal where a valid removal prescription was not executed: seam 4's enforcement limb. The source states the power and no period, threshold or ordering; the ten days ARIF has after evidenced non-response come from the regional plans and are minted there."
-  },
-  "IT-DLGS-19-2021:Art.55(13):obstruction-sanction:v1": {
-   "class": "not_a_clock",
-   "why": "Statutory sanction range for this violation. The amount is the adjudicator's reserved discretion under the Law 689/1981 proceeding, and payments — duties and grants alike — are deferred from CORDON, so no period or threshold in this chain is minted."
-  },
-  "IT-DLGS-19-2021:Art.55(13):omitted-removal-sanction:v1": {
-   "class": "not_a_clock",
-   "why": "Statutory sanction range for this violation. The amount is the adjudicator's reserved discretion under the Law 689/1981 proceeding, and payments — duties and grants alike — are deferred from CORDON, so no period or threshold in this chain is minted."
-  },
-  "IT-DLGS-19-2021:Art.55(15):v1": {
-   "class": "not_a_clock",
-   "why": "Statutory sanction range for this violation. The amount is the adjudicator's reserved discretion under the Law 689/1981 proceeding, and payments — duties and grants alike — are deferred from CORDON, so no period or threshold in this chain is minted."
-  },
-  "IT-DLGS-19-2021:Art.55(25):v1": {
-   "class": "not_a_clock",
-   "why": "Statutory sanction range for this violation. The amount is the adjudicator's reserved discretion under the Law 689/1981 proceeding, and payments — duties and grants alike — are deferred from CORDON, so no period or threshold in this chain is minted."
-  },
-  "IT-DLGS-19-2021:Art.55(29):v1": {
-   "class": "not_a_clock",
-   "why": "Residual application of Law 689/1981 to matters this decree does not expressly govern. That proceeding is deferred from CORDON with payments; the provision states no period."
-  },
-  "IT-DLGS-19-2021:Art.55(30):regional-sanction-competence:v1": {
-   "class": "not_a_clock",
-   "why": "Allocates competence to impose the decree's administrative sanctions to the regional plant-health services, and assigns the proceeds. It states who decides and no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.55(9):notification-violation:v1": {
-   "class": "not_a_clock",
-   "why": "Statutory sanction range for this violation. The amount is the adjudicator's reserved discretion under the Law 689/1981 proceeding, and payments — duties and grants alike — are deferred from CORDON, so no period or threshold in this chain is minted."
-  },
-  "IT-DLGS-19-2021:Art.6(1):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.6(3)(b):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.6(3)(o):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.6(3)-stem:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.7(3)(c):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.7(3)-stem:v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.7(5):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.8(2)(c):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.9(2):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.9(4)(a):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DLGS-19-2021:Art.9(4)(c):v1": {
-   "class": "not_a_clock",
-   "why": "Competence allocation: the source names who decides or who acts, and states no period, threshold or ordering."
-  },
-  "IT-DM-0677268-2021:Art.2(1):entry-into-force:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-0677268-2021:Art.2(1):operate-within-competence:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-0677268-2021:Art.2(1):publication-event:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.10(6):cross-region-convention:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.11(1):official-laboratory-designation:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.11(2):monitor-official-laboratories:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.11(2):suspend-or-revoke:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.11(3):cfn-audit-suspension-route:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.3(2):official-sample-laboratory-class:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.3(3):research-output-class:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.3(4):self-control-output-class:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.30(3):unvalidated-eppo-classification:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.30(3):urgent-nonnormalized-method:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.30:official-method-selection:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.5:national-reference-minimum-qualification:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.7(10):ministerial-revocation:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.7(11):cessation-notice:v1": {
-   "class": "not_a_clock",
-   "why": "Six-month cessation notice owed by a national reference laboratory to the central service and INRPP: vested elsewhere."
-  },
-  "IT-DM-169819-2022:Art.7(11):revocation-after-cessation-notice:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.7(4):national-reference-designation:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.7(5):multiple-laboratories-per-competence:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.7(8):discretionary-suspension:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.7(9):serious-nonconformity-suspension:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.8(2):eligible-official-laboratory-classes:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.8(3):out-of-region-official-laboratory:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:Art.8(4):preexisting-designation-continuity:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:entry-into-force:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-DM-169819-2022:publication:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect:v1": {
-   "class": "not_a_clock",
-   "why": "States which route makes a restrictive act effective against a recipient — individual communication, act-specific mass publicity, a reasoned immediate-effect clause, or urgency by operation of law. None states a period; the routes condition the anchors of the seam-4 notice clocks."
-  },
-  "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route:v1": {
-   "class": "not_a_clock",
-   "why": "States which route makes a restrictive act effective against a recipient — individual communication, act-specific mass publicity, a reasoned immediate-effect clause, or urgency by operation of law. None states a period; the routes condition the anchors of the seam-4 notice clocks."
-  },
-  "IT-L241-A21BIS:Art.21-bis(1):motivated-immediate-effect:v1": {
-   "class": "not_a_clock",
-   "why": "States which route makes a restrictive act effective against a recipient — individual communication, act-specific mass publicity, a reasoned immediate-effect clause, or urgency by operation of law. None states a period; the routes condition the anchors of the seam-4 notice clocks."
-  },
-  "IT-L241-A21BIS:Art.21-bis(1):urgent-cautionary-effect:v1": {
-   "class": "not_a_clock",
-   "why": "States which route makes a restrictive act effective against a recipient — individual communication, act-specific mass publicity, a reasoned immediate-effect clause, or urgency by operation of law. None states a period; the routes condition the anchors of the seam-4 notice clocks."
-  },
-  "IT-L689-1981:Art.13:violation-evidence-collection:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.14:immediate-contest:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.14:later-notification:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.14:untimely-notification-extinction:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.16:reduced-payment:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.17:violation-report:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.18:adjudication-process:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-L689-1981:Art.18:defence-and-hearing-request:v1": {
-   "class": "not_a_clock",
-   "why": "Law 689/1981 administrative-penalty proceeding: its object is a sum of money and its periods end in payment, extinction of the obligation to pay, or adjudication of the amount. Payments are deferred from CORDON, so no period in this chain is minted."
-  },
-  "IT-ORD10-2025:Art.3(1):national-service-exclusive-competence:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-ORD10-2025:Art.4(1):exclusive-accredited-official-analysis:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-ORD10-2025:Art.4(2):accredited-capacity:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-ORD10-2025:Art.4(2):designation:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-ORD10-2025:Art.5(1):external-designation:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-ORD10-2025:Art.5(1):external-use:v1": {
-   "class": "not_a_clock",
-   "why": "Official- and national-reference-laboratory designation and qualification chain. Its temporal content is minted elsewhere: Regulation 2017/625 Article 42's one-year limit and single renewal, Article 39's audit recurrence and immediate withdrawal, and DM 169819 Article 11(6)'s twelve-month adaptation."
-  },
-  "IT-ORD10-2025:effect-from-adoption:v1": {
-   "class": "not_a_clock",
-   "why": "The instrument's own commencement: an act's effective date, not a period the operator computes."
-  },
-  "PUG-DGR1075-2025:§4.5:prescription:v1": {
-   "class": "not_a_clock",
-   "why": "Issuance of the prescription and the refusal route; the source states no period for either. The windows around them are minted on this plan's own election, silence and execution rows."
-  },
-  "PUG-DGR1075-2025:§4.5:refusal-route:v1": {
-   "class": "not_a_clock",
-   "why": "Issuance of the prescription and the refusal route; the source states no period for either. The windows around them are minted on this plan's own election, silence and execution rows."
-  },
-  "PUG-DGR1593-2024:notice-prescription-issuance:v1": {
-   "class": "not_a_clock",
-   "why": "Issuance of the prescription; this version states no period for it."
-  },
-  "PUG-DGR1593-2024:notice-refusal-forced-removal:v1": {
-   "class": "not_a_clock",
-   "why": "Forced removal on proven refusal; the source states no period for it."
-  },
-  "PUG-DGR1866-2022:notice-refusal-forced-removal:v1": {
-   "class": "not_a_clock",
-   "why": "Forced removal on proven refusal; the source states no period for it."
-  },
-  "PUG-DGR343-2022:notice-refusal-forced-removal:v1": {
-   "class": "not_a_clock",
-   "why": "Forced removal on proven refusal; the source states no period for it."
-  },
-  "PUG-DGR538-2021:notice-owner-identification:v1": {
-   "class": "not_a_clock",
-   "why": "Transmission of the cadastral and owner data; this version states no window. The later plans state three, then seven working days."
-  },
-  "PUG-DGR538-2021:notice-prescription-issuance:v1": {
-   "class": "not_a_clock",
-   "why": "Issuance of the prescription; this version states no period for it."
-  },
-  "PUG-DGR538-2021:notice-refusal-forced-removal:v1": {
-   "class": "not_a_clock",
-   "why": "Forced removal on proven refusal; the source states no period for it."
-  },
-  "PUG-DPGR22-2021:Art.20(3):publication-not-notice:v1": {
-   "class": "not_a_clock",
-   "why": "Publication does not exonerate from notification: a rule about effectiveness against a recipient, not a period."
-  },
-  "PUG-LR3-2010:Art.3-bis(1)(a):v1": {
-   "class": "not_a_clock",
-   "why": "Allocates ARIF support functions to the Osservatorio's programme; states no period."
-  },
-  "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer:v1": {
-   "class": "not_a_clock",
-   "why": "Case delta correcting the parcel and owner of one infected plant; it transfers an existing duty and mints nothing."
-  },
-  "REG-PUGLIA-U181-DIR-2022-00031:obstruction-remedy-route:v1": {
-   "class": "not_a_clock",
-   "why": "Documented denial of access or impediment, the request for public force and the charging of costs; the source states no period. A holds the attribution conflict with D.lgs. 19/2021 Article 33(2)."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:area-act-before-gis:v1": {
-   "class": "not_a_clock",
-   "why": "The shapefiles follow the managerial act: a data-handling sequence that keeps operational GIS from constituting the legal area. No duty timetable turns on it."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion:v1": {
-   "class": "not_a_clock",
-   "why": "Destruction route under the containment branch; states no period."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:obstruction-remedy-route:v1": {
-   "class": "not_a_clock",
-   "why": "Documented denial of access or impediment, the request for public force and the charging of costs; the source states no period. A holds the attribution conflict with D.lgs. 19/2021 Article 33(2)."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00045:st26-olive-exclusion-conflict:v1": {
-   "class": "not_a_clock",
-   "why": "Categorical population exclusion held by A as a conflict with the effective Annex II population; a case mints nothing."
-  },
-  "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v1": {
-   "class": "not_a_clock",
-   "why": "Categorical population exclusion held by A as a conflict with the effective Annex II population; a case mints nothing."
+  "seams": {
+    "1": [
+      "PUG-DGR1075-2025:§4.4:periodic-finding-notification-update:v1",
+      "EU-2020-1201:2(1):v1",
+      "EU-2020-1201:2(1):v2",
+      "EU-2020-1201:2(2):v1",
+      "EU-2020-1201:2(3):v1",
+      "EU-2020-1201:2(3)-sub1:v1",
+      "EU-2020-1201:2(4):v1",
+      "EU-2020-1201:2(4):v2",
+      "EU-2020-1201:2(4):v3",
+      "EU-2020-1201:2(4a):v1",
+      "EU-2020-1201:2(5):v1",
+      "EU-2020-1201:2(6):v1",
+      "EU-2020-1201:2(7):v1",
+      "EU-2020-1201:2(8):v1",
+      "EU-2020-1201:3(1)-final-subparagraph:v1",
+      "EU-2020-1201:3(2)(a):v1",
+      "EU-2020-1201:5(2):v1",
+      "EU-2020-1201:5(4)(b):v1",
+      "EU-2020-1201:6(4):v1",
+      "EU-2020-1201:10:v1",
+      "EU-2020-1201:10-sub1:v1",
+      "EU-2020-1201:10-sub2:v1",
+      "EU-2020-1201:10-sub3:v1",
+      "EU-2020-1201:11(3):v1",
+      "EU-2020-1201:15(2):v1",
+      "EU-2020-1201:15(2):v2",
+      "EU-2020-1201:15(2)(a):v1",
+      "EU-2020-1201:15(2)(a):v2",
+      "EU-2020-1201:15(2)(b):v1",
+      "EU-2020-1201:15(2)-final-subparagraph:v1",
+      "EU-2020-1201:15(4):v1",
+      "IT-DLGS-19-2021:Art.11(1)(b):v1",
+      "IT-DLGS-19-2021:Art.27(1):v1",
+      "IT-DLGS-19-2021:Art.27(2):v1",
+      "IT-DLGS-19-2021:Art.27(3):v1",
+      "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal:v1",
+      "IT-DLGS-19-2021:Art.27(4):adopt-national-programme:v1",
+      "IT-DLGS-19-2021:Art.27(4):publish-national-programme:v1",
+      "IT-DLGS-19-2021:Art.27(5):v1",
+      "IT-DLGS-19-2021:Art.27(6):transmit-adopted-programme:v1",
+      "IT-DLGS-19-2021:Art.27(6):transmit-prior-year-results:v1",
+      "IT-DLGS-19-2021:Art.27(7):v1",
+      "IT-DLGS-19-2021:Art.27(8):contribute-additional-data:v1",
+      "IT-DLGS-19-2021:Art.27(8):access-sipp-data:v1",
+      "IT-DLGS-19-2021:Art.27(9):v1",
+      "IT-DLGS-19-2021:Art.28(1):v1",
+      "IT-DLGS-19-2021:Art.28(2):v1",
+      "IT-DLGS-19-2021:Art.28(3):v1",
+      "IT-DLGS-19-2021:Art.28(4):v1",
+      "IT-DLGS-19-2021:Art.28(5):v1",
+      "IT-DLGS-19-2021:Art.29(1):v1",
+      "IT-DLGS-19-2021:Art.29(2):v1",
+      "IT-DLGS-19-2021:Art.30(1):v1",
+      "IT-DLGS-19-2021:Art.30(2):v1",
+      "IT-DLGS-19-2021:Art.31(1):v1",
+      "IT-DLGS-19-2021:Art.31(2):v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§14:annual-review:v1",
+      "IT-DTU39-REV1:official-technical-instruction:v1",
+      "IT-DTU39-REV1:§4:risk-based-sampling:v1",
+      "IT-DTU39-REV1:§4.2:sample-transfer:v1",
+      "IT-DTU39-REV1:§5:diagnostic-method-routing:v1",
+      "IT-DTU39-REV1:§5.4:pest-free-positive-confirmation:v1",
+      "IT-DTU39-REV1:§5.4:inconclusive-result-routing:v1",
+      "IT-CFN-ORD-3-2023:Art.1(1):pest-free-declaration:v1",
+      "IT-CFN-ORD-3-2023:Art.1(2):maintain-pest-free-status:v1",
+      "IT-CFN-ORD-3-2023:Art.1(3):annual-list-revision:v1",
+      "IT-CFN-ORD-3-2023:Annex-I:territory-list:v1",
+      "IT-PNI-2026:adoption-and-publication-status:v1",
+      "IT-PNI-2026:Xylella:Puglia-plant-survey-design:v1",
+      "IT-DM-169819-2022:Art.10(3):timely-analysis:v1",
+      "IT-DM-169819-2022:Art.14(3):research-laboratory-notification:v1",
+      "IT-DM-169819-2022:Art.18(3):self-control-laboratory-notification:v1",
+      "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance:v1",
+      "IT-DTU8-REV2:official-laboratory-route-and-continuing-status:v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:pre-m5-v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:post-m5-v2",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§9.3:eradication-vector-investigation:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§9.3:containment-surveillance-band-2km:v1",
+      "EU-2016-2031:Art.31(2):more-stringent-measure-notification:v1",
+      "EU-2016-2031:Art.31(2):more-stringent-measure-report-on-request:v1",
+      "PUG-LR4-2017:Art.2(1):v1",
+      "PUG-LR4-2017:Art.2(2):v1",
+      "PUG-LR4-2017:Art.2(3):v1",
+      "PUG-LR4-2017:Art.2(4):v1",
+      "PUG-LR4-2017:Art.4(1):v1",
+      "PUG-LR4-2017:Art.4(2):pre-LR45-v1",
+      "PUG-LR4-2017:Art.4(2):post-LR45-v2",
+      "PUG-LR4-2017:Art.4(3):survey-route:pre-LR45-v1",
+      "PUG-LR4-2017:Art.4(3):survey-route:post-LR45-v2",
+      "PUG-LR4-2017:Art.4(3):access:pre-LR45-v1",
+      "PUG-LR4-2017:Art.4(3):access:post-LR45-v2",
+      "PUG-LR4-2017:Art.4(3):sampling:pre-LR45-v1",
+      "PUG-LR4-2017:Art.4(3):sampling:post-LR45-v2",
+      "PUG-LR4-2017:Art.4(3):laboratory:pre-LR45-v1",
+      "PUG-LR4-2017:Art.4(3):laboratory:post-LR45-v2",
+      "PUG-LR4-2017:Art.4(4):pre-LR45-v1",
+      "PUG-LR4-2017:Art.4(4):post-LR45-v2",
+      "PUG-LR4-2017:Art.4(5):v1",
+      "PUG-LR4-2017:Art.4(6):vector:v1",
+      "PUG-LR4-2017:Art.4(6):follow-up:v1",
+      "PUG-LR4-2017:Art.4(7):v1",
+      "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control:v1",
+      "PUG-DGR1075-2025:Convention-3.1:arif-surveillance-communication:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:doubtful-result-route:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:positive-pool-identity-route:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:pest-free-positive-routing:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:cq-analytical-result-classification:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:doubtful-result-route:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:containment-pool-decomposition:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:pest-free-buffer-pool-confirmation:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification:v1",
+      "IT-DLGS-19-2021:Art.31(9):periodic-area-surveys:v1",
+      "IT-DLGS-19-2021:Art.31(9):modify-area-if-necessary:v1",
+      "IT-DLGS-19-2021:Art.31(9):report-area-information:v1",
+      "EU-2016-2031:Art.31:more-stringent-national-measures:v1",
+      "EU-2017-625:Art.101(1):national-reference-laboratory-tasks:v1",
+      "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation:v1",
+      "IT-DLGS-19-2021:Art.8(1):v1",
+      "IT-DLGS-19-2021:Art.9(5):v1",
+      "IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation:v1",
+      "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation:v1",
+      "IT-DM-169819-2022:Art.10(5):issue-test-report:v1",
+      "IT-DM-169819-2022:Art.10(5):retain-analytical-data:v1",
+      "IT-DM-169819-2022:Art.9(1):official-laboratory-minimum-qualification:v1",
+      "IT-DM-169819-2022:Art.11(6):adapt-to-annex-iii:v1",
+      "IT-DM-169819-2022:Art.11(6):notify-adaptation:v1",
+      "EU-2020-1201:3(1)(b):v1",
+      "EU-2020-1201:3(1)(c):v1",
+      "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1",
+      "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v2",
+      "EU-2017-625:Art.38(1):official-result-notification:v1",
+      "EU-2017-625:Art.37(2):external-location-designation:v1",
+      "EU-2017-625:Art.39:official-laboratory-audit-status:v1",
+      "EU-2017-625:Art.40(1)(b):other-official-activity-derogation:v1",
+      "EU-2017-625:Art.41:representative-method-derogation-authority:v1",
+      "EU-2017-625:Art.42:temporary-method-designation:v1",
+      "EU-2017-625:Art.93(1):eu-reference-laboratory-designation:v1",
+      "EU-2017-625:Art.100:national-reference-laboratory-status:v1",
+      "EU-2016-2031:Art.22(3):annual-survey-results-report:v1",
+      "EU-2016-2031:Art.22(3):annual-survey-results-report:v2",
+      "REG-PUGLIA-U181-DIR-2025-00045:post-finding-pest-free-buffer-sampling:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:post-finding-containment-sampling:v1",
+      "PUG-DGR1075-2025:§4.2.1:post-finding-hectare-surveillance:v1",
+      "PUG-DGR1075-2025:§4.2.1:pest-free-extent-investigation:v1",
+      "PUG-DGR1075-2025:§4.2.2:st53-post-finding-sampling:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:first-level-result-return:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:positive-sample-cnr-return:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:first-level-analysis-registration-return:v1",
+      "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+      "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.10:survey-design:v1"
+    ],
+    "2": [
+      "EU-2020-1201:4(1):v1",
+      "EU-2020-1201:4(1):v2",
+      "EU-2020-1201:4(1)-sub1:v1",
+      "EU-2020-1201:4(1)-sub2:v1",
+      "EU-2020-1201:4(2):v1",
+      "EU-2020-1201:4(2)(a):v1",
+      "EU-2020-1201:4(2)(b):v1",
+      "EU-2020-1201:4(2)-sub1:v1",
+      "EU-2020-1201:4(2)-sub2:v1",
+      "EU-2020-1201:4(3):v1",
+      "EU-2020-1201:5(1):v1",
+      "EU-2020-1201:5(1):v2",
+      "EU-2020-1201:5(1)(a):v1",
+      "EU-2020-1201:5(1)(b):v1",
+      "EU-2020-1201:5(1)(c):v1",
+      "EU-2020-1201:5(1)(c):v2",
+      "EU-2020-1201:5(1)(d):v1",
+      "EU-2020-1201:5(3):v1",
+      "EU-2020-1201:5(3):v2",
+      "EU-2020-1201:5(3)(a):v1",
+      "EU-2020-1201:5(3)(b):v1",
+      "EU-2020-1201:5(3)(c):v1",
+      "EU-2020-1201:5(4):v1",
+      "EU-2020-1201:5(4):v2",
+      "EU-2020-1201:5(4)(a):v1",
+      "EU-2020-1201:5(4)(a):v2",
+      "EU-2020-1201:5(4)-sub1:v1",
+      "EU-2020-1201:6(1):v1",
+      "EU-2020-1201:6(2):v1",
+      "EU-2020-1201:6(2):v2",
+      "EU-2020-1201:6(2)(a):v1",
+      "EU-2020-1201:6(2)(b):v1",
+      "EU-2020-1201:6(3):v1",
+      "IT-DLGS-19-2021:Art.6(3)(g):v1",
+      "IT-DLGS-19-2021:Art.31(3):establish-demarcated-area:v1",
+      "IT-DLGS-19-2021:Art.31(3):eradication-regime:v1",
+      "IT-DLGS-19-2021:Art.31(4):v1",
+      "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal:v1",
+      "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval:v1",
+      "IT-DLGS-19-2021:Art.31(6):declare-emergency:v1",
+      "IT-DLGS-19-2021:Art.31(6):adopt-action-plan:v1",
+      "IT-DLGS-19-2021:Art.31(6):notify-commission:v1",
+      "IT-DLGS-19-2021:Art.31(7):v1",
+      "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit:v1",
+      "IT-DLGS-19-2021:Art.31(8):implement-action-plan-measures:v1",
+      "IT-DM-2022-XYLELLA-PLAN:Art.1:adoption:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:Art.1(1):adoption:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:Art.2(1):replace-2022-plan:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§8.5:communicate-no-demarcation:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§8.5:no-demarcation-surveillance:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§8.6:area-composition:v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.2:action-plan-15-working-days:v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.4:communicate-no-demarcation:v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.4:no-demarcation-two-year-follow-up:pre-m5-v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.5:containment-buffer-5km:v1",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§8.2:action-plan-15-day-unit-conflict:v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.4:no-demarcation-two-year-follow-up:post-m5-v2",
+      "PUG-LR4-2017:Art.3(1):v1",
+      "PUG-LR4-2017:Art.3(2):pre-LR45-v1",
+      "PUG-LR4-2017:Art.3(2):post-LR45-v2",
+      "PUG-LR4-2017:Art.3(3):v1",
+      "PUG-LR4-2017:Art.3(4):may-revoke:pre-LR45-v1",
+      "PUG-LR4-2017:Art.3(4):may-revoke:post-LR45-v2",
+      "REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer:v1",
+      "REG-PUGLIA-U181-DIR-2021-00069:pauca-area-update:v1",
+      "REG-PUGLIA-U181-DIR-2021-00069:partial-parcel-rule:v1",
+      "REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa:v1",
+      "REG-PUGLIA-U181-DIR-2021-00177:post-lift-plant-surveillance:v1",
+      "REG-PUGLIA-U181-DIR-2021-00177:post-lift-vector-monitoring:v1",
+      "REG-PUGLIA-U181-DIR-2021-00177:commission-notification:v1",
+      "REG-PUGLIA-U181-DIR-2022-00127:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v2",
+      "REG-PUGLIA-U181-DIR-2024-00158:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction:v1",
+      "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00158:containment-selection:v1",
+      "REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00012:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00029:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00045:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00091:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00092:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00093:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00094:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition:unresolved-v1",
+      "REG-PUGLIA-U181-DIR-2024-00198:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00059:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00106:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00113:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00126:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00132:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00141:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00147:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00163:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2025-00236:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2026-00002:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2026-00004:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1",
+      "REG-PUGLIA-U181-DIR-2026-00112:area-state-transition:v1"
+    ],
+    "3": [
+      "EU-2020-1201:7(1):v1",
+      "EU-2020-1201:7(1):v2",
+      "EU-2020-1201:7(1)(a):v1",
+      "EU-2020-1201:7(1)(b):v1",
+      "EU-2020-1201:7(1)(c):v1",
+      "EU-2020-1201:7(1)(d):v1",
+      "EU-2020-1201:7(1)(e):v1",
+      "EU-2020-1201:7(1)(e):v2",
+      "EU-2020-1201:7(1)(e)-sub1:v1",
+      "EU-2020-1201:7(1)(e)-sub2:v1",
+      "EU-2020-1201:7(2):v1",
+      "EU-2020-1201:7(3):v1",
+      "EU-2020-1201:7(3):v2",
+      "EU-2020-1201:7(3):v3",
+      "EU-2020-1201:7(3)(a):v1",
+      "EU-2020-1201:7(3)(b):v1",
+      "EU-2020-1201:8(1):v1",
+      "EU-2020-1201:8(1):v2",
+      "EU-2020-1201:8(2):v1",
+      "EU-2020-1201:8(2):v2",
+      "EU-2020-1201:8(2)(a):v1",
+      "EU-2020-1201:8(2)(b):v1",
+      "EU-2020-1201:8(2)-sub1:v1",
+      "EU-2020-1201:9(1):v1",
+      "EU-2020-1201:9(2):v1",
+      "EU-2020-1201:9(3):v1",
+      "EU-2020-1201:11(1):v1",
+      "EU-2020-1201:11(1):v2",
+      "EU-2020-1201:11(2):v1",
+      "EU-2020-1201:12:v1",
+      "EU-2020-1201:13(1):v1",
+      "EU-2020-1201:13(1)-sub1:v1",
+      "EU-2020-1201:13(2):v1",
+      "EU-2020-1201:14(1):v1",
+      "EU-2020-1201:14(1):v2",
+      "EU-2020-1201:14(2):v1",
+      "EU-2020-1201:15(1):v1",
+      "EU-2020-1201:15(1):v2",
+      "EU-2020-1201:15(1)(a):v1",
+      "EU-2020-1201:15(1)(b):v1",
+      "EU-2020-1201:16(1):v1",
+      "EU-2020-1201:16(2):v1",
+      "EU-2020-1201:16(3):v1",
+      "EU-2020-1201:17:v1",
+      "IT-DLGS-19-2021:Art.32(1):v1",
+      "IT-DLGS-19-2021:Art.32(2):v1",
+      "IT-DLGS-19-2021:Art.32(3):primary-implementation:v1",
+      "IT-DLGS-19-2021:Art.32(3):substitute-execution:v1",
+      "IT-DLGS-19-2021:Art.32(3):determine-completion-costs:v1",
+      "IT-DLGS-19-2021:Art.32(3):recovery-right:v1",
+      "IT-DLGS-19-2021:Art.33(1):emergency-measure-derogation:v1",
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal:v1",
+      "IT-DLGS42-A146:Art.146(2):v1",
+      "IT-DLGS42-A146:Art.146(5):regional-decision-owner:v1",
+      "IT-DLGS42-A146:Art.146(8):superintendent-opinion:v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km:pre-m5-v1",
+      "IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km:post-m5-v2",
+      "IT-DM-348260-2026-XYLELLA-PLAN:§9.2:containment-vector-treatment-coverage:v1",
+      "PUG-LR4-2017:Art.5(1):v1",
+      "PUG-LR4-2017:Art.5(2):v1",
+      "PUG-LR4-2017:Art.5(3):pre-LR45-v1",
+      "PUG-LR4-2017:Art.5(3):post-LR45-v2",
+      "PUG-LR4-2017:Art.5(4):pre-LR45-v1",
+      "PUG-LR4-2017:Art.5(4):post-LR45-v2",
+      "PUG-LR4-2017:Art.5(5):pre-LR45-v1",
+      "PUG-LR4-2017:Art.5(5):post-LR45-v2",
+      "PUG-LR4-2017:Art.5(6):v1",
+      "PUG-LR4-2017:Art.7(1):v1",
+      "PUG-LR4-2017:Art.7(2):v1",
+      "PUG-LR4-2017:Art.7(4):v1",
+      "PUG-LR4-2017:Art.8(5):protected-uninfected-retention:pre-LR45-v1",
+      "PUG-LR4-2017:Art.8(5):protected-uninfected-retention:post-LR45-v2",
+      "REG-PUGLIA-U181-DIR-2025-00045:treatment-removal-sequence:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:execution-evidence:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:eradication-removal-population-support:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:eradication-execution-verification:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:executor-selection:v1",
+      "PUG-LR4-2017:Art.6(1):pre-LR45-v1",
+      "PUG-LR4-2017:Art.6(1):post-LR45-v2",
+      "PUG-LR4-2017:Art.6(2):pre-LR45-v1",
+      "PUG-LR4-2017:Art.6(2):post-LR45-v2",
+      "PUG-LR4-2017:Art.6(3):pre-LR45-v1",
+      "PUG-LR4-2017:Art.6(3):post-LR45-v2",
+      "PUG-DGR538-2021:Art7(3)-policy:v1",
+      "PUG-DGR343-2022:Art7(3)-policy:v1",
+      "PUG-DGR1866-2022:Art7(3)-policy:v1",
+      "PUG-DGR1593-2024:Art7(3)-policy:v1",
+      "PUG-DGR1075-2025:Art7(3)-policy:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:containment-treatment-removal-sequence:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-evidence:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:containment-removal-population-support:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:containment-execution-verification:v1",
+      "PUG-DGR1075-2025:§4.3.2:mandatory-almond-400m:v1",
+      "PUG-DGR1075-2025:§4.3.2:almond-pre-removal-vector-treatment:v1",
+      "REG-PUGLIA-U181-DIR-2026-00012:almond-characterization:v1",
+      "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:eradication-treatment-removal-sequence:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:st53-crop-exclusion-conflict:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:containment-treatment-removal-sequence:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:destruction-root-wood-completion:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:execution-oversight-and-record:v1",
+      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1",
+      "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
+      "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1",
+      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:staged-article7-workload:v1",
+      "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1",
+      "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text:v1",
+      "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text:v1",
+      "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1",
+      "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text:v1",
+      "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment:v1",
+      "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1",
+      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion:v1",
+      "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:st53-citrus-prunus-exclusion-conflict:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:asparagus-non-sampling-conflict:v1",
+      "EU-2020-1201:15(3):v1",
+      "PUG-DGR1866-2022:st53-crop-exclusion-conflict:v1",
+      "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
+      "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved:v1",
+      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1",
+      "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction:v1",
+      "REG-PUGLIA-U181-DIR-2025-00011:case-delta:three-day-owner-change-report:v1",
+      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:failed-service-represcription:v1",
+      "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1"
+    ],
+    "4": [
+      "EU-2020-1201:1(a):v1",
+      "EU-2020-1201:1(b):v1",
+      "EU-2020-1201:1(c):v1",
+      "EU-2020-1201:1(c):v2",
+      "EU-2020-1201:1(d):v1",
+      "EU-2020-1201:15(5):v1",
+      "EU-2020-1201:1:v1",
+      "EU-2020-1201:3(1)(a):v1",
+      "EU-2020-1201:3(1):v1",
+      "EU-2020-1201:3(1):v2",
+      "EU-2020-1201:3(2)(b):v1",
+      "EU-2020-1201:3(2):v1",
+      "EU-2020-1201:3(2):v2",
+      "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit:v1",
+      "IT-DLGS-19-2021:Art.10(1):implement-plan-and-ordinances:v1",
+      "IT-DLGS-19-2021:Art.10(3)(a):v1",
+      "IT-DLGS-19-2021:Art.10(3)(c):v1",
+      "IT-DLGS-19-2021:Art.10(4):v1",
+      "IT-DLGS-19-2021:Art.11(1):v1",
+      "IT-DLGS-19-2021:Art.11(2):v1",
+      "IT-DLGS-19-2021:Art.13(1):corresponding-reference-laboratory:v1",
+      "IT-DLGS-19-2021:Art.13(1):unmatched-reference-laboratory:v1",
+      "IT-DLGS-19-2021:Art.13(2):v1",
+      "IT-DLGS-19-2021:Art.13(4):v1",
+      "IT-DLGS-19-2021:Art.13(5)(b):v1",
+      "IT-DLGS-19-2021:Art.13(5)(h):v1",
+      "IT-DLGS-19-2021:Art.13(5)-stem:v1",
+      "IT-DLGS-19-2021:Art.14(1):designate-official-laboratory:v1",
+      "IT-DLGS-19-2021:Art.14(1):official-laboratory-capacity:v1",
+      "IT-DLGS-19-2021:Art.14(1):record-designation-data:v1",
+      "IT-DLGS-19-2021:Art.14(2):v1",
+      "IT-DLGS-19-2021:Art.14(3):cross-region-designation:v1",
+      "IT-DLGS-19-2021:Art.14(3):cross-region-use:v1",
+      "IT-DLGS-19-2021:Art.14(4):v1",
+      "IT-DLGS-19-2021:Art.20(1):assistant-identity:v1",
+      "IT-DLGS-19-2021:Art.20(2):appointment-register:v1",
+      "IT-DLGS-19-2021:Art.20(3):activity-limits:v1",
+      "IT-DLGS-19-2021:Art.20(4):express-assignment:v1",
+      "IT-DLGS-19-2021:Art.20(5):proposal-not-decision:v1",
+      "IT-DLGS-19-2021:Art.24:register-current-status:v1",
+      "IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1",
+      "IT-DLGS-19-2021:Art.26(2):ministerial-adoption:v1",
+      "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans:v1",
+      "IT-DLGS-19-2021:Art.26(4):update-emergency-plan:v1",
+      "IT-DLGS-19-2021:Art.33(2):authorized-land-access:v1",
+      "IT-DLGS-19-2021:Art.33(2):communication-method-and-terms:v1",
+      "IT-DLGS-19-2021:Art.33(2):public-force-assistance:v1",
+      "IT-DLGS-19-2021:Art.5(1):v1",
+      "IT-DLGS-19-2021:Art.5(4)(e):v1",
+      "IT-DLGS-19-2021:Art.5(4)(f):v1",
+      "IT-DLGS-19-2021:Art.5(4)(g):v1",
+      "IT-DLGS-19-2021:Art.5(4)-stem:v1",
+      "IT-DLGS-19-2021:Art.55(13):coercive-removal-costs:v1",
+      "IT-DLGS-19-2021:Art.55(13):coercive-removal:v1",
+      "IT-DLGS-19-2021:Art.55(13):obstruction-sanction:v1",
+      "IT-DLGS-19-2021:Art.55(13):omitted-removal-sanction:v1",
+      "IT-DLGS-19-2021:Art.55(15):v1",
+      "IT-DLGS-19-2021:Art.55(25):v1",
+      "IT-DLGS-19-2021:Art.55(29):v1",
+      "IT-DLGS-19-2021:Art.55(30):regional-sanction-competence:v1",
+      "IT-DLGS-19-2021:Art.55(9):notification-violation:v1",
+      "IT-DLGS-19-2021:Art.6(1):v1",
+      "IT-DLGS-19-2021:Art.6(3)(b):v1",
+      "IT-DLGS-19-2021:Art.6(3)(o):v1",
+      "IT-DLGS-19-2021:Art.6(3)-stem:v1",
+      "IT-DLGS-19-2021:Art.7(3)(c):v1",
+      "IT-DLGS-19-2021:Art.7(3)-stem:v1",
+      "IT-DLGS-19-2021:Art.7(5):v1",
+      "IT-DLGS-19-2021:Art.8(2)(c):v1",
+      "IT-DLGS-19-2021:Art.9(2):v1",
+      "IT-DLGS-19-2021:Art.9(4)(a):v1",
+      "IT-DLGS-19-2021:Art.9(4)(c):v1",
+      "IT-DM-0677268-2021:Art.2(1):entry-into-force:v1",
+      "IT-DM-0677268-2021:Art.2(1):operate-within-competence:v1",
+      "IT-DM-0677268-2021:Art.2(1):publication-event:v1",
+      "IT-DM-169819-2022:Art.10(6):cross-region-convention:v1",
+      "IT-DM-169819-2022:Art.11(1):official-laboratory-designation:v1",
+      "IT-DM-169819-2022:Art.11(2):monitor-official-laboratories:v1",
+      "IT-DM-169819-2022:Art.11(2):suspend-or-revoke:v1",
+      "IT-DM-169819-2022:Art.11(3):cfn-audit-suspension-route:v1",
+      "IT-DM-169819-2022:Art.3(2):official-sample-laboratory-class:v1",
+      "IT-DM-169819-2022:Art.3(3):research-output-class:v1",
+      "IT-DM-169819-2022:Art.3(4):self-control-output-class:v1",
+      "IT-DM-169819-2022:Art.30(3):unvalidated-eppo-classification:v1",
+      "IT-DM-169819-2022:Art.30(3):urgent-nonnormalized-method:v1",
+      "IT-DM-169819-2022:Art.30:official-method-selection:v1",
+      "IT-DM-169819-2022:Art.5:national-reference-minimum-qualification:v1",
+      "IT-DM-169819-2022:Art.7(10):ministerial-revocation:v1",
+      "IT-DM-169819-2022:Art.7(11):cessation-notice:v1",
+      "IT-DM-169819-2022:Art.7(11):revocation-after-cessation-notice:v1",
+      "IT-DM-169819-2022:Art.7(4):national-reference-designation:v1",
+      "IT-DM-169819-2022:Art.7(5):multiple-laboratories-per-competence:v1",
+      "IT-DM-169819-2022:Art.7(8):discretionary-suspension:v1",
+      "IT-DM-169819-2022:Art.7(9):serious-nonconformity-suspension:v1",
+      "IT-DM-169819-2022:Art.8(2):eligible-official-laboratory-classes:v1",
+      "IT-DM-169819-2022:Art.8(3):out-of-region-official-laboratory:v1",
+      "IT-DM-169819-2022:Art.8(4):preexisting-designation-continuity:v1",
+      "IT-DM-169819-2022:entry-into-force:v1",
+      "IT-DM-169819-2022:publication:v1",
+      "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect:v1",
+      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route:v1",
+      "IT-L241-A21BIS:Art.21-bis(1):motivated-immediate-effect:v1",
+      "IT-L241-A21BIS:Art.21-bis(1):urgent-cautionary-effect:v1",
+      "IT-L689-1981:Art.13:violation-evidence-collection:v1",
+      "IT-L689-1981:Art.14:immediate-contest:v1",
+      "IT-L689-1981:Art.14:later-notification:v1",
+      "IT-L689-1981:Art.14:untimely-notification-extinction:v1",
+      "IT-L689-1981:Art.16:reduced-payment:v1",
+      "IT-L689-1981:Art.17:violation-report:v1",
+      "IT-L689-1981:Art.18:adjudication-process:v1",
+      "IT-L689-1981:Art.18:defence-and-hearing-request:v1",
+      "IT-ORD10-2025:Art.3(1):national-service-exclusive-competence:v1",
+      "IT-ORD10-2025:Art.4(1):exclusive-accredited-official-analysis:v1",
+      "IT-ORD10-2025:Art.4(2):accredited-capacity:v1",
+      "IT-ORD10-2025:Art.4(2):designation:v1",
+      "IT-ORD10-2025:Art.5(1):external-designation:v1",
+      "IT-ORD10-2025:Art.5(1):external-use:v1",
+      "IT-ORD10-2025:effect-from-adoption:v1",
+      "PUG-DGR1075-2025:§4.5:owner-election-execution:v1",
+      "PUG-DGR1075-2025:§4.5:owner-evidence:v1",
+      "PUG-DGR1075-2025:§4.5:prescription:v1",
+      "PUG-DGR1075-2025:§4.5:recipient-notice-route:v1",
+      "PUG-DGR1075-2025:§4.5:refusal-route:v1",
+      "PUG-DGR1075-2025:§4.5:silence-route:v1",
+      "PUG-DGR1593-2024:notice-elected-execution:v1",
+      "PUG-DGR1593-2024:notice-owner-election:v1",
+      "PUG-DGR1593-2024:notice-owner-identification:v1",
+      "PUG-DGR1593-2024:notice-prescription-issuance:v1",
+      "PUG-DGR1593-2024:notice-publication:v1",
+      "PUG-DGR1593-2024:notice-refusal-forced-removal:v1",
+      "PUG-DGR1593-2024:notice-silence-substitute-execution:v1",
+      "PUG-DGR1866-2022:notice-elected-execution:v1",
+      "PUG-DGR1866-2022:notice-owner-election:v1",
+      "PUG-DGR1866-2022:notice-owner-identification:v1",
+      "PUG-DGR1866-2022:notice-prescription-issuance:v1",
+      "PUG-DGR1866-2022:notice-publication:v1",
+      "PUG-DGR1866-2022:notice-refusal-forced-removal:v1",
+      "PUG-DGR1866-2022:notice-silence-substitute-execution:v1",
+      "PUG-DGR343-2022:notice-elected-execution:v1",
+      "PUG-DGR343-2022:notice-owner-election:v1",
+      "PUG-DGR343-2022:notice-owner-identification:v1",
+      "PUG-DGR343-2022:notice-prescription-issuance:v1",
+      "PUG-DGR343-2022:notice-publication:v1",
+      "PUG-DGR343-2022:notice-refusal-forced-removal:v1",
+      "PUG-DGR343-2022:notice-silence-substitute-execution:v1",
+      "PUG-DGR538-2021:notice-elected-execution:v1",
+      "PUG-DGR538-2021:notice-owner-election:v1",
+      "PUG-DGR538-2021:notice-owner-identification:v1",
+      "PUG-DGR538-2021:notice-prescription-issuance:v1",
+      "PUG-DGR538-2021:notice-publication:v1",
+      "PUG-DGR538-2021:notice-refusal-forced-removal:v1",
+      "PUG-DGR538-2021:notice-silence-substitute-execution:v1",
+      "PUG-DPGR22-2021:Art.20(3):publication-not-notice:v1",
+      "PUG-LR3-2010:Art.3-bis(1)(a):v1",
+      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer:v1",
+      "REG-PUGLIA-U181-DIR-2022-00031:obstruction-remedy-route:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:area-act-before-gis:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:obstruction-remedy-route:v1",
+      "REG-PUGLIA-U181-DIR-2025-00045:st26-olive-exclusion-conflict:v1",
+      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v1",
+      "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1"
+    ]
   }
- }
 }

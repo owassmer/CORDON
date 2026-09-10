@@ -1,0 +1,270 @@
+[
+  {
+    "consumer": "IT-DLGS-19-2021:Art.10(1):implement-plan-and-ordinances",
+    "reference": "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit",
+    "required_fact": "territorial emergency unit established"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.10(3)(a)",
+    "reference": "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit",
+    "required_fact": "territorial emergency unit established"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.10(4)",
+    "reference": "IT-DLGS-19-2021:Art.10(1):establish-territorial-unit",
+    "required_fact": "territorial emergency unit established and emergency in progress"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.14(3):cross-region-use",
+    "reference": "IT-DLGS-19-2021:Art.14(3):cross-region-designation",
+    "required_fact": "receiving-service cross-region designation effective for the task"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.26(2):ministerial-adoption",
+    "reference": "IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan",
+    "required_fact": "Article 26(1) emergency plan prepared"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans",
+    "reference": "IT-DLGS-19-2021:Art.26(2):ministerial-adoption",
+    "required_fact": "emergency plan adopted and in force"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.26(4):update-emergency-plan",
+    "reference": "IT-DLGS-19-2021:Art.26(4):monitor-emergency-plans",
+    "required_fact": "monitoring performed and findings available"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.27(3)",
+    "reference": "IT-DLGS-19-2021:Art.27(2)",
+    "required_fact": "general survey objectives and criteria adopted"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal",
+    "reference": "IT-DLGS-19-2021:Art.27(3)",
+    "required_fact": "regional proposal population available for the annual cycle"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.27(4):adopt-national-programme",
+    "reference": "IT-DLGS-19-2021:Art.27(4):prepare-national-proposal",
+    "required_fact": "national programme proposal prepared"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.27(4):publish-national-programme",
+    "reference": "IT-DLGS-19-2021:Art.27(4):adopt-national-programme",
+    "required_fact": "annual national programme adopted"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.29(2)",
+    "reference": "IT-DLGS-19-2021:Art.29(1)",
+    "required_fact": "regional electronic entry completed"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal",
+    "reference": "IT-DLGS-19-2021:Art.31(4)",
+    "required_fact": "Article 31(4) measures defined and approved"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval",
+    "reference": "IT-DLGS-19-2021:Art.31(5):regional-action-plan-proposal",
+    "required_fact": "complete regional proposal received"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(6):declare-emergency",
+    "reference": "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval",
+    "required_fact": "committee approved the action plan"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+    "reference": "IT-DLGS-19-2021:Art.31(5):committee-action-plan-approval",
+    "required_fact": "committee approved the action plan"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(6):notify-commission",
+    "reference": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+    "required_fact": "action plan officially adopted"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(7)",
+    "reference": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+    "required_fact": "action plan officially adopted"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit",
+    "reference": "IT-DLGS-19-2021:Art.31(6):adopt-action-plan",
+    "required_fact": "action plan officially adopted"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(8):implement-action-plan-measures",
+    "reference": "IT-DLGS-19-2021:Art.31(8):establish-territorial-unit",
+    "required_fact": "territorial emergency unit established"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.31(9):modify-area-if-necessary",
+    "reference": "IT-DLGS-19-2021:Art.31(9):periodic-area-surveys",
+    "required_fact": "periodic survey findings available"
+  },
+  {
+    "consumer": "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
+    "reference": "IT-DLGS42-A146:Art.146(2)",
+    "required_fact": "complete landscape application submitted"
+  },
+  {
+    "consumer": "IT-DM-169819-2022:Art.7(11):revocation-after-cessation-notice",
+    "reference": "IT-DM-169819-2022:Art.7(11):cessation-notice",
+    "required_fact": "cessation notice completed"
+  },
+  {
+    "consumer": "IT-DM-169819-2022:Art.11(6):notify-adaptation",
+    "reference": "IT-DM-169819-2022:Art.11(6):adapt-to-annex-iii",
+    "required_fact": "Annex III adaptation completed"
+  },
+  {
+    "consumer": "IT-DM-169819-2022:entry-into-force",
+    "reference": "IT-DM-169819-2022:publication",
+    "required_fact": "Gazzetta publication occurred"
+  },
+  {
+    "consumer": "IT-ORD10-2025:Art.5(1):external-use",
+    "reference": "IT-ORD10-2025:Art.5(1):external-designation",
+    "required_fact": "receiving-service designation effective for the exact task"
+  },
+  {
+    "consumer": "IT-ORD10-2025:Art.6(2):external-laboratory-continuing-compliance",
+    "reference": "IT-ORD10-2025:Art.5(1):external-designation",
+    "required_fact": "Article 5 designation effective for the exact task"
+  },
+  {
+    "consumer": "EU-2016-2031:Art.31(2):more-stringent-measure-notification",
+    "reference": "EU-2016-2031:Art.31:more-stringent-national-measures",
+    "required_fact": "Article 31(1) measure actually taken"
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2025-00045:root-wood-completion",
+    "reference": "EU-2020-1201:8(1)",
+    "required_fact": "applicable Article 8(1) treatment performed"
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2025-00045:containment-root-wood-completion",
+    "reference": "EU-2020-1201:14(1)",
+    "required_fact": "applicable Article 14(1) treatment performed"
+  },
+  {
+    "consumer": "IT-DM-0677268-2021:Art.2(1):operate-within-competence",
+    "reference": "IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation",
+    "outcomes": {
+      "DESIGNATION_OPERATIVE_FROM_EXACT_COMMENCEMENT": true,
+      "LATER_EVENT_DESIGNATION_STATUS_ESTABLISHED_WITHOUT_RETROACTIVE_START_CONCLUSION": true,
+      "EXACT_COMMENCEMENT_EVIDENCE_REQUIRED": null,
+      "EVENT_TIME_DESIGNATION_STATUS_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "IT-DM-0677268-2021:Art.2(1):operate-within-competence",
+    "reference": "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation",
+    "outcomes": {
+      "DESIGNATION_OPERATIVE_FROM_EXACT_COMMENCEMENT": true,
+      "LATER_EVENT_DESIGNATION_STATUS_ESTABLISHED_WITHOUT_RETROACTIVE_START_CONCLUSION": true,
+      "EXACT_COMMENCEMENT_EVIDENCE_REQUIRED": null,
+      "EVENT_TIME_DESIGNATION_STATUS_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "IT-DTU8-REV2:official-laboratory-route-and-continuing-status",
+    "reference": "EU-2021-1353:Art.3:plant-health-partial-accreditation-derogation",
+    "outcomes": {
+      "PARTIAL_ACCREDITATION_DEROGATION_AVAILABLE": true,
+      "PARTIAL_ACCREDITATION_DEROGATION_UNAVAILABLE": false,
+      "DEROGATION_EVIDENCE_OR_ORGANISM_GROUP_INTERPRETATION_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2021-00069:canosa-reduced-buffer",
+    "reference": "PUG-LR4-2017:Art.3(2)",
+    "outcomes": {
+      "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED": true,
+      "SOURCE_STATED_GEOGRAPHY_HELD; ACT_VALIDITY_ADJUDICATION_REQUIRED": null,
+      "SOURCE_GEOGRAPHY_EVIDENCE_REQUIRED": null,
+      "AREA_ROUTE_OR_OPERATIVITY_NOT_ESTABLISHED": false,
+      "AREA_ROUTE_OR_EFFECTIVENESS_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2021-00177:revoke-canosa",
+    "reference": "PUG-LR4-2017:Art.3(2)",
+    "outcomes": {
+      "OPERATIVE_LEGAL_AREA_STATE_ESTABLISHED": true,
+      "SOURCE_STATED_GEOGRAPHY_HELD; ACT_VALIDITY_ADJUDICATION_REQUIRED": null,
+      "SOURCE_GEOGRAPHY_EVIDENCE_REQUIRED": null,
+      "AREA_ROUTE_OR_OPERATIVITY_NOT_ESTABLISHED": false,
+      "AREA_ROUTE_OR_EFFECTIVENESS_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "PUG-DGR1593-2024:Art7(3)-policy",
+    "reference": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+    "outcomes": {
+      "ARTICLE_7_3_RETENTION_VALIDLY_EXERCISED": true,
+      "REMOVAL_DUTY_CONTINUES": false,
+      "ARTICLE_7_3_UNAVAILABLE_FOR_THAT_GROUND": false,
+      "ARTICLE_7_3_DOMAIN_SAFEGUARD_OR_EXERCISE_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "PUG-DGR1075-2025:Art7(3)-policy",
+    "reference": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+    "outcomes": {
+      "ARTICLE_7_3_RETENTION_VALIDLY_EXERCISED": true,
+      "REMOVAL_DUTY_CONTINUES": false,
+      "ARTICLE_7_3_UNAVAILABLE_FOR_THAT_GROUND": false,
+      "ARTICLE_7_3_DOMAIN_SAFEGUARD_OR_EXERCISE_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer",
+    "reference": "PUG-LR4-2017:Art.6(2)",
+    "outcomes": {
+      "ARTICLE_13_REMOVAL_ACTIVATED": true,
+      "SCIENTIFIC_RETENTION; NO_CONTAINMENT_REMOVAL_REQUIREMENT; PRESERVE_ARTICLE_14_TREATMENT": false,
+      "ARTICLE_13_NOT_ESTABLISHED; EVALUATE_SEPARATE_EXACT_LEGAL_BASIS": false,
+      "CONTAINMENT_CHILD_NOT_APPLICABLE; ERADICATION_CONTROLS": false,
+      "LEGAL_CONFLICT_OR_AUTHORITY_ADJUDICATION_REQUIRED": null,
+      "CONTAINMENT_VALIDITY_ADJUDICATION_REQUIRED": null,
+      "VALID_AREA_REQUIRED; PRESERVE_ANY_OUTSTANDING_EU_ARTICLE_4_DUTY": null,
+      "CONTAINMENT_AUTHORITY_OR_SELECTION_EVIDENCE_REQUIRED": null,
+      "CONTAINMENT_PARENT_OR_ARTICLE_15_2_PROVENANCE_EVIDENCE_REQUIRED": null
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2025-00045:doubtful-result-route",
+    "reference": "REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification",
+    "outcomes": {
+      "POSITIVE_ANALYTICAL_RESULT": false,
+      "DOUBTFUL_ANALYTICAL_RESULT": true,
+      "NEGATIVE_ANALYTICAL_RESULT": false,
+      "AUTHORITY_INTERPRETATION_REQUIRED_FOR_BOUNDARY_VALUE": null,
+      "ANALYTICAL_EVIDENCE_REQUIRED": null,
+      "ANALYTICAL_CLASSIFICATION_UNRESOLVED": null
+    }
+  },
+  {
+    "consumer": "EU-2020-1201:6(2)",
+    "reference": "EU-2020-1201:5(1)",
+    "historical_result": true
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.32(3):determine-completion-costs",
+    "reference": "IT-DLGS-19-2021:Art.32(3):substitute-execution",
+    "required_fact": "lawful substitute-execution basis for this exact work, including the activities necessary for complete and correct implementation"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.32(3):recovery-right",
+    "reference": "IT-DLGS-19-2021:Art.32(3):determine-completion-costs",
+    "required_fact": "competent determination of the costs of lawful substitute execution for this exact work completed"
+  },
+  {
+    "consumer": "IT-DLGS-19-2021:Art.55(13):coercive-removal-costs",
+    "reference": "IT-DLGS-19-2021:Art.55(13):coercive-removal",
+    "required_fact": "lawful coercive-removal execution and its work and cost record established"
+  }
+]

@@ -1,0 +1,201 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/40",
+  "name": "Altre Specie - Campioni 2018-2019",
+  "captured_from": "2026-09-10T21:26:36.907154+00:00",
+  "captured_through": "2026-09-10T21:28:47.830689+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 15045,
+  "unique_oids": 15045,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "804a4f4bcd1e4bfa26be58ae3184579f1433e33e058556f435d64d06baa90cd0"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "e85a8db45bfc604eebc9fbb0e17f474d835522c5d54f77549b8078fe42d246b9"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "f8f3a8bae0007a9d770391cb9fe2c744f49bfe37834d435d6d5aec97d4e535c8"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "9f303867f739cb0b48191999848e828a150a685df2a3b70380f560997c2791eb"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "97f0b88750ebf5667e050b48f4257b6007d4b4af9d1f4f22097b2d9d2d0c7522"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "04c046f169b3053b60cb6def50ebbf3793047bf22d48a7bfe6130f3e7674eb72"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "29b8479dd9359a2246a3a2f2474731554ebdf99721cf788bea6f90fe3202db84"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "d75b05687553ba63f4b62080ad77d48441c20daae75fc7b50bf81fe2153be658"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "978716a6560e45d3b3b47e253ba8b035a39fb450fd2c54d071ea37f33d9a0c3f"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "8ec29f897df8258d72e23a527977bc5044adcc1e0a5cbe5f71819e0a8d060544"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 400,
+      "sha256": "97901de317c63b6e04705d196f6cefe91d8afc3aee8315fc87664e5d3cb18b1a"
+    },
+    {
+      "path": "00004400.json.gz",
+      "rows": 400,
+      "sha256": "458f73e23db181bf78bd3f2f89767209f92d3a7431a7c42c29b05afce082c46f"
+    },
+    {
+      "path": "00004800.json.gz",
+      "rows": 400,
+      "sha256": "eed65c19034359b4d85cc7af4e76115bef8d6a06f6f86edc1698b7755ce74860"
+    },
+    {
+      "path": "00005200.json.gz",
+      "rows": 400,
+      "sha256": "4dc8202d6673813a1a58271878e8a3177ffb2f43b8fd9772201e59be63604072"
+    },
+    {
+      "path": "00005600.json.gz",
+      "rows": 400,
+      "sha256": "469fd04e86a2e82cc9158b7ca52637892088578eb49899f1949c835a4235a1ca"
+    },
+    {
+      "path": "00006000.json.gz",
+      "rows": 400,
+      "sha256": "dcc7775c4c64f708e4b72b66ce2ff87eb512177228362ac83c391d107aa91769"
+    },
+    {
+      "path": "00006400.json.gz",
+      "rows": 400,
+      "sha256": "a796461d0b88af052d548f30387ed4c30d883b4948ae4d12321cb73902ad2074"
+    },
+    {
+      "path": "00006800.json.gz",
+      "rows": 400,
+      "sha256": "24f16dc7751225dd63cfb4d3fbfcfb0a54ffa63cd3bdd771b6185314f121ee6b"
+    },
+    {
+      "path": "00007200.json.gz",
+      "rows": 400,
+      "sha256": "a67cc4669ba667cc75eb63f4d4e8ee05a8fbc9e0c1917a2c89306e0901a1b5f7"
+    },
+    {
+      "path": "00007600.json.gz",
+      "rows": 400,
+      "sha256": "4cc75516e4accd353039ffb67c77287c2c31f4e357249c172d0702a0c421e50c"
+    },
+    {
+      "path": "00008000.json.gz",
+      "rows": 400,
+      "sha256": "ac1ed021c44d3b07afe1987c3a238ffdbfffc2aa0a14d876ea12bfc17c9caf0d"
+    },
+    {
+      "path": "00008400.json.gz",
+      "rows": 400,
+      "sha256": "c0828726cde35ab97d56fc9a712ec62a07417f98f698b52bad52716bd4867693"
+    },
+    {
+      "path": "00008800.json.gz",
+      "rows": 400,
+      "sha256": "4bcf9172bf991e393029367dffdd0d3f91948a636135510fb2a74b5499a187b8"
+    },
+    {
+      "path": "00009200.json.gz",
+      "rows": 400,
+      "sha256": "184fb48c1d7ec2dbbaa49a54541ac47cfcccee8377c2f3f1fc249ab419173c52"
+    },
+    {
+      "path": "00009600.json.gz",
+      "rows": 400,
+      "sha256": "16becc4fab7a3f7b46aea4a072e00173617ca8da4912d38035321db03a2706f1"
+    },
+    {
+      "path": "00010000.json.gz",
+      "rows": 400,
+      "sha256": "ab196703aed6600a66fccfa4b8bda72aed0eab0c83e02fe91a600b7b7fd17e05"
+    },
+    {
+      "path": "00010400.json.gz",
+      "rows": 400,
+      "sha256": "8939de409af7699e0f57a85b3eaf7752bff7a66b3d82f3f2e1892f2f3a1d84fc"
+    },
+    {
+      "path": "00010800.json.gz",
+      "rows": 400,
+      "sha256": "979b11cd80a6d6f40337e824615177e5e59d3d3aca8e9dccb7d04c24d29559ff"
+    },
+    {
+      "path": "00011200.json.gz",
+      "rows": 400,
+      "sha256": "ebdb81737e8448a29b2299760f01e2189010a0ab1f4d202d09cefe3b51d0e0ef"
+    },
+    {
+      "path": "00011600.json.gz",
+      "rows": 400,
+      "sha256": "2a3b3eb844a43d15d4a3adbf6265f331f7fd8e4bf22a178e0a6501c2abc89fac"
+    },
+    {
+      "path": "00012000.json.gz",
+      "rows": 400,
+      "sha256": "8a8f13c2021d627d2528cf4ea58494cd1fd1ffc4888c8b2fb33bb951b672de54"
+    },
+    {
+      "path": "00012400.json.gz",
+      "rows": 400,
+      "sha256": "287361f52d18ad52f495e7dea60f0dcbd3fdc9caae0f84dc23a0ec7c05a5b8b7"
+    },
+    {
+      "path": "00012800.json.gz",
+      "rows": 400,
+      "sha256": "96c2a7d6704af1fbd5271266c0d9392f0283c9a15461b4558fc0e6adf230b07c"
+    },
+    {
+      "path": "00013200.json.gz",
+      "rows": 400,
+      "sha256": "d1a649a5fec4a95555a8298727e60615187ba8ca831879734799d337628cae79"
+    },
+    {
+      "path": "00013600.json.gz",
+      "rows": 400,
+      "sha256": "2b4fde12af1be85f74510898a8db0be6db086e63355d631197cc8c1c241efe8a"
+    },
+    {
+      "path": "00014000.json.gz",
+      "rows": 400,
+      "sha256": "4dca720fb1ab175feba2197946bbd308ac9e792f6b5fa0059524d71672ee70d1"
+    },
+    {
+      "path": "00014400.json.gz",
+      "rows": 400,
+      "sha256": "a14b589c6a1ca5e4a2a3d087e5cdae66056d8ad0b92422450e99e39a6532efe2"
+    },
+    {
+      "path": "00014800.json.gz",
+      "rows": 245,
+      "sha256": "de6933185b01e7446e5ed46eb93dbb5b1752ca95db25e88c406b421ba71c922f"
+    }
+  ]
+}

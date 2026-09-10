@@ -700,6 +700,18 @@
               },
               {
                 "predicate": "area outside demarcated areas"
+              },
+              {
+                "not": {
+                  "all_of": [
+                    {
+                      "predicate": "second positive Annex IV molecular test on the same plant sample or, where appropriate, the same plant extract"
+                    },
+                    {
+                      "predicate": "different genome target"
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -792,12 +804,14 @@
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "the report itself",
-    "external_dependencies": [],
+    "external_dependencies": [
+      "EU-2016-2031:Art.22(3):annual-survey-results-report"
+    ],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "Article 22(3) of Regulation 2016/2031 supplies the annual 30 April deadline, preceding-calendar-year reporting period, payload and electronic route; Article 2(8) makes that framework deadline part of this Xylella survey-result reporting duty.",
     "condition_ast": {
       "predicate": "survey results exist"
     },
@@ -1217,18 +1231,30 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "establish a demarcated area",
-    "false_effect": "no duty arises",
+    "true_effect": "Establish a demarcated area without delay following an official plant finding unless the competent Article 5(3) no-immediate-demarcation exception is exercised.",
+    "false_effect": "An exercised Article 5(3) exception displaces immediate demarcation and activates its follow-up; absent a qualifying plant finding, this demarcation duty does not arise. Unresolved qualifying evidence is not a finding.",
     "reserved_decision_owner": "-",
     "evidence_contract": "the confirmation record and the establishing act",
-    "external_dependencies": [],
+    "external_dependencies": [
+      "EU-2020-1201:5(3)"
+    ],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "The 2020 text conditions the demarcation duty on official confirmation of the pest without stating the medium; the in-plants wording and the separate 2(4a) vector-investigation route are M5 text. Ruled 2026-09-01: this version difference reaches no operator decision — Article 4(2) constructs the infected zone only around a plant found infected, so a vector-only confirmation yields no constructible zone; the Region never demarcated on a vector positive in 2020–2024, and no held act or decision turns on the question. No pre-M5 demarcation output is generated from a vector-only finding. The text is held as written; the difference earns no structure, unknown or downstream emphasis.",
+    "semantic_note": "The original confirmation wording does not state a medium. Its operative demarcation output is plant-based because Article 4(2) constructs the infected zone around an infected plant; vector-only findings do not produce a demarcation output. Article 5(3) owns the exercised exception and the default duty-standing result. The default does not require an affirmative refusal of the exception.",
     "condition_ast": {
-      "predicate": "presence of the specified pest officially confirmed"
+      "all_of": [
+        {
+          "predicate": "presence officially confirmed in plants"
+        },
+        {
+          "result_ref": {
+            "producer_stable_provision_id": "EU-2020-1201:5(3)",
+            "allowed_effect": "ARTICLE_4_DEMARCATION_DUTY_STANDS"
+          }
+        }
+      ]
     },
     "higher_authority_dependencies": [],
     "documentary_source_instrument_id": "EU-2020-1201",
@@ -1256,18 +1282,30 @@
     "semantic_change": "YES",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "establish a demarcated area",
-    "false_effect": "no duty arises",
+    "true_effect": "Establish a demarcated area without delay following an official plant finding unless the competent Article 5(3) no-immediate-demarcation exception is exercised.",
+    "false_effect": "An exercised Article 5(3) exception displaces immediate demarcation and activates its follow-up; absent a qualifying plant finding, this demarcation duty does not arise. Unresolved qualifying evidence is not a finding.",
     "reserved_decision_owner": "-",
     "evidence_contract": "the confirmation record and the establishing act",
-    "external_dependencies": [],
+    "external_dependencies": [
+      "EU-2020-1201:5(3)"
+    ],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "Article 5(3) owns the exercised exception and the default duty-standing result. The default does not require an affirmative refusal of the exception.",
     "condition_ast": {
-      "predicate": "presence officially confirmed in plants"
+      "all_of": [
+        {
+          "predicate": "presence officially confirmed in plants"
+        },
+        {
+          "result_ref": {
+            "producer_stable_provision_id": "EU-2020-1201:5(3)",
+            "allowed_effect": "ARTICLE_4_DEMARCATION_DUTY_STANDS"
+          }
+        }
+      ]
     },
     "higher_authority_dependencies": [],
     "documentary_source_instrument_id": "EU-2020-1201",
@@ -1845,7 +1883,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "-",
-    "true_effect": "A survey at least once in the first year, in a zone at least 2,5 km around the infected zone, showing the pest absent, with host plants in that zone sampled and tested. The third sentence (survey design and sampling scheme able to identify, with at least 90 % of confidence, a level of presence of infected plants of 1 %) is present in the text but does not yet apply in this interval.",
+    "true_effect": "A survey at least once in the first year, in a zone at least 2,5 km around the infected zone, showing the pest absent, with host plants in that zone sampled and tested. The entire third sentence, including the 90 % confidence / 1 % prevalence design and the first 400 m higher-risk qualifier, does not yet apply in this interval; application starts on 1 January 2023.",
     "false_effect": "derogation unavailable",
     "reserved_decision_owner": "-",
     "evidence_contract": "first-year surrounding-zone survey plus host-plant sample/test records",
@@ -2869,18 +2907,24 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "immediately remove from the INFECTED ZONE the plants at (a) to (e)",
-    "false_effect": "-",
+    "true_effect": "Immediately remove the point-(a) to (e) population from the eradication infected zone only where the applicable Article 7(3) retention derogation has not been exercised. Point (e) supplies its event-time post-exception population.",
+    "false_effect": "No Article 7(1) removal duty for this plant outside that operative population; applicable retained-plant treatment, testing and surveillance remain.",
     "reserved_decision_owner": "-",
     "evidence_contract": "removal records per plant",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:7(1)(a)",
+      "EU-2020-1201:7(1)(b)",
+      "EU-2020-1201:7(1)(c)",
+      "EU-2020-1201:7(1)(d)",
+      "EU-2020-1201:7(1)(e)",
+      "EU-2020-1201:7(3)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "Population membership and operative removal are distinct. The absence of an exercised derogation does not require an affirmative refusal decision.",
     "condition_ast": {
       "route_table": [
         {
@@ -2896,7 +2940,34 @@
                 "predicate": "an infected zone established for the purpose of eradication exists"
               },
               {
-                "predicate": "the plant is one of those referred to in points (a) to (e)"
+                "any_of": [
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(a)"
+                  },
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(b)"
+                  },
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(c)"
+                  },
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(d)"
+                  },
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:7(1)(e)",
+                      "allowed_effect": "POINT_E_REMOVAL_POPULATION"
+                    }
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(3)",
+                    "allowed_effect": "RETENTION_DEROGATION_EXERCISED"
+                  }
+                }
               }
             ]
           },
@@ -2933,18 +3004,24 @@
     "semantic_change": "NO",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "immediately remove from the INFECTED ZONE the plants at (a) to (e)",
-    "false_effect": "-",
+    "true_effect": "Immediately remove the point-(a) to (e) population from the eradication infected zone only where the applicable Article 7(3) retention derogation has not been exercised. Point (e) supplies its event-time post-exception population.",
+    "false_effect": "No Article 7(1) removal duty for this plant outside that operative population; applicable retained-plant treatment, testing and surveillance remain.",
     "reserved_decision_owner": "-",
     "evidence_contract": "removal records per plant",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:7(1)(a)",
+      "EU-2020-1201:7(1)(b)",
+      "EU-2020-1201:7(1)(c)",
+      "EU-2020-1201:7(1)(d)",
+      "EU-2020-1201:7(1)(e)",
+      "EU-2020-1201:7(3)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "Population membership and operative removal are distinct. The absence of an exercised derogation does not require an affirmative refusal decision.",
     "condition_ast": {
       "route_table": [
         {
@@ -2960,7 +3037,34 @@
                 "predicate": "an infected zone established for the purpose of eradication exists"
               },
               {
-                "predicate": "the plant is one of those referred to in points (a) to (e)"
+                "any_of": [
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(a)"
+                  },
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(b)"
+                  },
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(c)"
+                  },
+                  {
+                    "provision_ref": "EU-2020-1201:7(1)(d)"
+                  },
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:7(1)(e)",
+                      "allowed_effect": "POINT_E_REMOVAL_POPULATION"
+                    }
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(3)",
+                    "allowed_effect": "RETENTION_DEROGATION_EXERCISED"
+                  }
+                }
               }
             ]
           },
@@ -2997,7 +3101,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove. Must be removed",
+    "true_effect": "Member of the point-(a) baseline removal population; not an independent post-exception removal command.",
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "confirmed test result per plant",
@@ -3036,7 +3140,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove. Must be removed",
+    "true_effect": "Member of the point-(b) baseline removal population; not an independent post-exception removal command.",
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "symptom observation record",
@@ -3075,7 +3179,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove. Must be removed",
+    "true_effect": "Member of the point-(c) baseline removal population; not an independent post-exception removal command.",
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "species identity of the infected plant and of each plant in the zone",
@@ -3114,7 +3218,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove. Must be removed",
+    "true_effect": "Member of the point-(d) baseline removal population; not an independent post-exception removal command.",
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "the demarcated area's species-level finding history",
@@ -3153,7 +3257,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove. Must be removed",
+    "true_effect": "Member of the operative point-(e) removal population; the parent resolves the eradication removal duty.",
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "sampling status per specified plant in the zone",
@@ -3212,11 +3316,14 @@
     "semantic_change": "YES",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove. Must be removed",
-    "false_effect": "-",
+    "true_effect": "Member of the operative point-(e) removal population; the parent resolves the eradication removal duty.",
+    "false_effect": "No point-(e) removal ground where the negative-test exemption or lawful immediate-sampling deferral applies; independent points (a) to (d) are unaffected.",
     "reserved_decision_owner": "-",
     "evidence_contract": "sampling status per specified plant in the zone",
-    "external_dependencies": [],
+    "external_dependencies": [
+      "EU-2020-1201:7(1)(e)-sub1",
+      "EU-2020-1201:7(1)(e)-sub2"
+    ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
@@ -3232,6 +3339,22 @@
               },
               {
                 "predicate": "not immediately subjected to sampling and molecular testing"
+              },
+              {
+                "not": {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)(e)-sub1",
+                    "allowed_effect": "POINT_E_PLANT_NOT_REMOVED"
+                  }
+                }
+              },
+              {
+                "not": {
+                  "result_ref": {
+                    "producer_stable_provision_id": "EU-2020-1201:7(1)(e)-sub2",
+                    "allowed_effect": "IMMEDIATE_SAMPLING_DEFERRED; ANNUAL_ARTICLE_10_SURVEY_APPLIES"
+                  }
+                }
               }
             ]
           },
@@ -3277,14 +3400,14 @@
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "The point-(e) class is identified before applying its exemption; do not require membership in the post-exception removal population.",
     "condition_ast": {
       "route_table": [
         {
           "when": {
             "all_of": [
               {
-                "predicate": "specified plant under point (e) tested negative for the presence of the specified pest"
+                "predicate": "specified plant other than points (c) and (d) tested negative for the presence of the specified pest"
               }
             ]
           },
@@ -3624,10 +3747,10 @@
     "semantic_change": "YES",
     "actor_role": "Member States",
     "modality": "may",
-    "true_effect": "grant a heritage derogation. Need not remove those individual plants",
+    "true_effect": "The Member State may retain eligible individual specified plants under any of the three grounds when the source safeguards hold and it exercises the derogation.",
     "false_effect": "removal under (b), (c) and (d) stands",
     "reserved_decision_owner": "Member States",
-    "evidence_contract": "the official designation and the two ongoing conditions",
+    "evidence_contract": "Individual specified-plant eligibility under the applicable ground: official historic-value designation, particular social/cultural/environmental value with unacceptable felling impact, or specific national/Union protective rules; both Article 7(3)(a)/(b) safeguards and the exercised competent retention choice, which an applicable policy covering the individual may supply.",
     "external_dependencies": [
       "EU-2020-1201:7(1)(a)",
       "EU-2020-1201:7(1)(b)",
@@ -3639,9 +3762,9 @@
     ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "YES",
-    "authority_judgment_kind": "retention decision on the designated or protected individual plant",
+    "authority_judgment_kind": "retention decision on the eligible individual specified plant",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "M5 widens the derogation population to three alternative limbs; v1/v2 reach only officially designated historic-value plants.",
+    "semantic_note": "M5 widens eligibility to three alternative grounds, all within individual specified plants. Earlier versions reach only officially designated historic-value specified plants.",
     "condition_ast": {
       "route_table": [
         {
@@ -3671,6 +3794,9 @@
                     }
                   ]
                 }
+              },
+              {
+                "predicate": "individual specified plant"
               },
               {
                 "any_of": [
@@ -3732,7 +3858,7 @@
     "true_effect": "derogation continues",
     "false_effect": "derogation falls",
     "reserved_decision_owner": "-",
-    "evidence_contract": "annual test result per designated plant",
+    "evidence_contract": "Annual inspection, sampling and Annex IV test evidence confirming that the individual plant concerned is not infected.",
     "external_dependencies": [],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
@@ -4235,12 +4361,13 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "may",
-    "true_effect": "limit destruction; roots removed or devitalised. Destruction limited to branches and foliage; wood treated instead",
-    "false_effect": "full destruction",
+    "true_effect": "Within the applicable destruction population, the competent risk-based decision permits destruction limited to branches and foliage, treatment of retained wood, and removal or devitalisation of roots.",
+    "false_effect": "Full destruction remains only within the applicable destruction population; no destruction route arises for a living plant lawfully retained outside it.",
     "reserved_decision_owner": "Member State concerned",
     "evidence_contract": "the risk basis and the root treatment",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:9(1)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "YES",
@@ -4253,24 +4380,47 @@
           "when": {
             "all_of": [
               {
-                "result_ref": {
-                  "producer_stable_provision_id": "EU-2020-1201:12",
-                  "allowed_effect": "ERADICATION_MEASURES_APPLY"
-                }
+                "provision_ref": "EU-2020-1201:9(1)"
               },
               {
-                "predicate": "risk level permits"
-              },
-              {
-                "predicate": "the Member State decides to limit destruction to branches and foliage"
+                "all_of": [
+                  {
+                    "predicate": "risk level permits"
+                  },
+                  {
+                    "predicate": "the Member State decides to limit destruction to branches and foliage"
+                  }
+                ]
               }
             ]
           },
           "effect": "LIMITED_DESTRUCTION_DECIDED; WOOD_TREATED_UNDER_ARTICLE_8_1; ROOTS_REMOVED_OR_DEVITALISED"
+        },
+        {
+          "when": {
+            "all_of": [
+              {
+                "provision_ref": "EU-2020-1201:9(1)"
+              },
+              {
+                "not": {
+                  "all_of": [
+                    {
+                      "predicate": "risk level permits"
+                    },
+                    {
+                      "predicate": "the Member State decides to limit destruction to branches and foliage"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "effect": "FULL_DESTRUCTION_UNDER_ARTICLE_9_1"
         }
       ],
       "otherwise": {
-        "effect": "FULL_DESTRUCTION_UNDER_ARTICLE_9_1"
+        "effect": "NO_ARTICLE_9_2_DESTRUCTION_ROUTE"
       }
     },
     "higher_authority_dependencies": [],
@@ -4814,7 +4964,7 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "remove ALL plants found infected",
+    "true_effect": "Remove all plants found infected through Article 15(2) monitoring, subject to the scientific non-removal derogation in Article 13(2).",
     "false_effect": "-",
     "reserved_decision_owner": "-",
     "evidence_contract": "confirmed test result per plant",
@@ -4825,7 +4975,7 @@
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "This is the baseline removal population, not a post-exception instruction to remove. Article 13(2) determines whether removal stands; timing and execution consume that outcome together with this baseline.",
     "condition_ast": {
       "route_table": [
         {
@@ -4845,7 +4995,7 @@
               }
             ]
           },
-          "effect": "ARTICLE_13_MANDATORY_REMOVAL"
+          "effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
         }
       ],
       "otherwise": {
@@ -4878,12 +5028,14 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "Remove immediately after the official identification of the presence of the specified pest; where the pest is detected outside the flight season of the vector, remove before the next flight season — two mutually exclusive timing routes; precautions during and after removal.",
-    "false_effect": "-",
+    "true_effect": "Where Article 13 removal stands after the scientific non-removal exception, remove immediately after official identification or, for detection outside the vector flight season, before the next flight season; take precautions during and after removal.",
+    "false_effect": "An exercised Article 13(2) scientific non-removal derogation displaces these removal timings, without displacing Article 14 treatment around retained plants.",
     "reserved_decision_owner": "-",
     "evidence_contract": "identification date and removal date against the flight season",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:13(1)",
+      "EU-2020-1201:13(2)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "NO",
@@ -4896,10 +5048,20 @@
           "when": {
             "all_of": [
               {
-                "result_ref": {
-                  "producer_stable_provision_id": "EU-2020-1201:13(1)",
-                  "allowed_effect": "ARTICLE_13_MANDATORY_REMOVAL"
-                }
+                "all_of": [
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                      "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                    }
+                  },
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                      "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                    }
+                  }
+                ]
               },
               {
                 "predicate": "the specified pest is detected outside the flight season of the vector"
@@ -4912,9 +5074,24 @@
           "when": {
             "all_of": [
               {
-                "result_ref": {
-                  "producer_stable_provision_id": "EU-2020-1201:13(1)",
-                  "allowed_effect": "ARTICLE_13_MANDATORY_REMOVAL"
+                "all_of": [
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                      "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                    }
+                  },
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                      "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                    }
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "predicate": "the specified pest is detected outside the flight season of the vector"
                 }
               }
             ]
@@ -4953,7 +5130,7 @@
     "actor_role": "Member State concerned",
     "modality": "may",
     "true_effect": "grant a scientific derogation. Need not remove those infected plants",
-    "false_effect": "removal under 13(1) stands",
+    "false_effect": "Within the Article 13(1) baseline population, removal stands unless the qualifying scientific non-removal discretion is exercised.",
     "reserved_decision_owner": "Member State concerned",
     "evidence_contract": "the site designation",
     "external_dependencies": [
@@ -4963,7 +5140,7 @@
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "scientific-purpose non-removal decision",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "The residual removal-stands result is conditional on the Article 13(1) baseline population; it is not independent removal authority outside that population.",
     "condition_ast": {
       "route_table": [
         {
@@ -4972,7 +5149,7 @@
               {
                 "result_ref": {
                   "producer_stable_provision_id": "EU-2020-1201:13(1)",
-                  "allowed_effect": "ARTICLE_13_MANDATORY_REMOVAL"
+                  "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
                 }
               },
               {
@@ -5021,7 +5198,9 @@
     "reserved_decision_owner": "-",
     "evidence_contract": "treatment records",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:13(1)",
+      "EU-2020-1201:13(2)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "NO",
@@ -5043,7 +5222,30 @@
                 "predicate": "an infected zone listed in Annex III under containment measures exists"
               },
               {
-                "predicate": "plants to be removed under 13(1), or retained under 13(2)"
+                "any_of": [
+                  {
+                    "all_of": [
+                      {
+                        "result_ref": {
+                          "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                          "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                        }
+                      },
+                      {
+                        "result_ref": {
+                          "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                          "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                      "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -5085,7 +5287,9 @@
     "reserved_decision_owner": "-",
     "evidence_contract": "treatment records",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:13(1)",
+      "EU-2020-1201:13(2)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "NO",
@@ -5107,7 +5311,30 @@
                 "predicate": "an infected zone listed in Annex III under containment measures exists"
               },
               {
-                "predicate": "plants to be removed under 13(1), or retained under 13(2)"
+                "any_of": [
+                  {
+                    "all_of": [
+                      {
+                        "result_ref": {
+                          "producer_stable_provision_id": "EU-2020-1201:13(1)",
+                          "allowed_effect": "ARTICLE_13_BASELINE_REMOVAL_POPULATION"
+                        }
+                      },
+                      {
+                        "result_ref": {
+                          "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                          "allowed_effect": "ARTICLE_13_REMOVAL_STANDS"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "result_ref": {
+                      "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                      "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -5817,18 +6044,19 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "shall",
-    "true_effect": "destroy the plants and parts in situ or nearby within the infected zone, preventing spread",
-    "false_effect": "-",
+    "true_effect": "Destroy infected plants and parts in situ or nearby within the Annex III infected zone, preventing spread; do not destroy the living plant lawfully retained under Article 13(2). Infected material actually removed remains subject to destruction.",
+    "false_effect": "No destruction duty for the living scientifically retained plant; its Article 14 treatment and applicable surveillance remain.",
     "reserved_decision_owner": "-",
     "evidence_contract": "destruction record and location",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:13(2)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "-",
+    "semantic_note": "Articles 13–16 read together: destruction cannot defeat lawful scientific retention, but retention does not exempt removed infected material.",
     "condition_ast": {
       "all_of": [
         {
@@ -5839,6 +6067,21 @@
         },
         {
           "predicate": "plants found infected in an Annex III infected zone"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "the plant or parts concerned have been removed"
+            },
+            {
+              "not": {
+                "result_ref": {
+                  "producer_stable_provision_id": "EU-2020-1201:13(2)",
+                  "allowed_effect": "SCIENTIFIC_NON_REMOVAL_DEROGATION_EXERCISED"
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -5868,12 +6111,13 @@
     "semantic_change": "INITIAL",
     "actor_role": "Member State concerned",
     "modality": "may",
-    "true_effect": "limit destruction; roots removed or devitalised. Destruction limited to branches and foliage; wood treated",
-    "false_effect": "full destruction",
+    "true_effect": "Within the applicable destruction population, the competent risk-based decision permits destruction limited to branches and foliage, treatment of retained wood, and removal or devitalisation of roots.",
+    "false_effect": "Full destruction remains only within the applicable destruction population; no destruction route arises for a living plant lawfully retained outside it.",
     "reserved_decision_owner": "Member State concerned",
     "evidence_contract": "the conclusion and the root treatment",
     "external_dependencies": [
-      "EU-2020-1201:12"
+      "EU-2020-1201:12",
+      "EU-2020-1201:16(1)"
     ],
     "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
     "authority_judgment_required": "YES",
@@ -5886,24 +6130,47 @@
           "when": {
             "all_of": [
               {
-                "result_ref": {
-                  "producer_stable_provision_id": "EU-2020-1201:12",
-                  "allowed_effect": "CONTAINMENT_MEASURES_APPLY_INSTEAD_OF_ERADICATION"
-                }
+                "provision_ref": "EU-2020-1201:16(1)"
               },
               {
-                "predicate": "the authority concludes the plants pose no risk of further spread"
-              },
-              {
-                "predicate": "the Member State decides to limit destruction to branches and foliage"
+                "all_of": [
+                  {
+                    "predicate": "the authority concludes the plants pose no risk of further spread"
+                  },
+                  {
+                    "predicate": "the Member State decides to limit destruction to branches and foliage"
+                  }
+                ]
               }
             ]
           },
           "effect": "LIMITED_DESTRUCTION_DECIDED; WOOD_TREATED_UNDER_ARTICLE_14_1; ROOTS_REMOVED_OR_DEVITALISED"
+        },
+        {
+          "when": {
+            "all_of": [
+              {
+                "provision_ref": "EU-2020-1201:16(1)"
+              },
+              {
+                "not": {
+                  "all_of": [
+                    {
+                      "predicate": "the authority concludes the plants pose no risk of further spread"
+                    },
+                    {
+                      "predicate": "the Member State decides to limit destruction to branches and foliage"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "effect": "FULL_DESTRUCTION_UNDER_ARTICLE_16_1"
         }
       ],
       "otherwise": {
-        "effect": "FULL_DESTRUCTION_UNDER_ARTICLE_16_1"
+        "effect": "NO_ARTICLE_16_2_DESTRUCTION_ROUTE"
       }
     },
     "higher_authority_dependencies": [],

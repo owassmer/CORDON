@@ -1,0 +1,18 @@
+Package: surveillance
+Type: Package
+Title: RiPEST
+Version: 1.0.0
+Date: 2023-09-11
+Author: Dagmar Bemelmans
+Maintainer: Dagmar Bemelmans <Dagmar.Bemelmans@openanalytics.eu>
+Description: User-friendly application for statistically sound 
+	and risk based surveys using RiBESS+.  
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports: shiny, devtools, shinyjs, shiny.router, jsonlite, htmltools,
+        rhandsontable, RSQLite, sf, leaflet, raster, stringi, xlsx,
+        knitr, DT, rmarkdown, efsaStyle, stringr, htmlwidgets, tmap,
+        ribess, flextable, openxlsx
+RoxygenNote: 7.2.3
+NeedsCompilation: no
+Packaged: 2023-09-11 15:49:45 UTC; dbemelmans

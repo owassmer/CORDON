@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from verify_stage_a import verify_result_references
+
 ROOT = Path(__file__).resolve().parents[1]
 JURISDICTION = ROOT / "regulation/jurisdiction"
 AUTHORING = JURISDICTION / "canonical/authoring.json"
@@ -47,13 +49,14 @@ def sha256(path: Path) -> str:
 
 def write_csv(path: Path, fields: list[str], rows: list[dict[str, Any]]) -> None:
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({
                 field: (
                     json.dumps(row.get(field), ensure_ascii=False, separators=(",", ":"))
-                    if isinstance(row.get(field), (list, dict)) else row.get(field, "")
+                    if isinstance(row.get(field), (list, dict)) else
+                    row[field].rstrip() if isinstance(row.get(field), str) else row.get(field, "")
                 )
                 for field in fields
             })
@@ -95,6 +98,8 @@ def main() -> None:
     authored = json.loads(AUTHORING.read_text(encoding="utf-8"))
     if not isinstance(authored, list) or not authored:
         raise AssertionError("canonical authoring must be a non-empty JSON array")
+    eu = json.loads((ROOT / "regulation/stage-a/authoring-eu.json").read_text(encoding="utf-8"))
+    verify_result_references(authored, eu + authored)
     OUT.mkdir(parents=True, exist_ok=True)
 
     stable_by_id: dict[str, dict[str, Any]] = {}

@@ -1,0 +1,8 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 1,
+  "reviewer": "Owen Wassmer",
+  "act": "I accept and authorize. One note - this acceptance does not permanently prevent reopening. It is acceptance of a currently sufficient A/B base. Now before any stage C work, let's do a bird's eye grounding into grilling session until we reach mutual understanding and alignment going into C. Then you will design the plan.",
+  "accepted_content_sha256": "0f34467a38e478a85d0bbbb69c38721198a88d2244fa61726f99b4051e98fb80",
+  "reviewed_candidate_sha256": "7142a1a09c44e580e30b9dd13c4bb11429cfee56062ba422f72abd0be1e4dee0"
+}

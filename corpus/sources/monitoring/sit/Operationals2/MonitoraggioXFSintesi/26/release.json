@@ -1,0 +1,31 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/26",
+  "name": "Positivi - Campioni 2020",
+  "captured_from": "2026-09-10T21:26:32.487396+00:00",
+  "captured_through": "2026-09-10T21:26:36.755861+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1220,
+  "unique_oids": 1220,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "22d76c28444e6b1a69fe9514698550a191f99f7f7c21f82fb7ae67bee5529848"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "dc143266661842ef3bdbf6743440cf74a97529b029bd1f23c45983f531095bc5"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "e9bdd14303c2bce7efc5e2b42ea6b55f06607f934224f82ee49edf27f4ef16a2"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 20,
+      "sha256": "d0a2ddebabb438c755920edaedd7d0086e320ee1ab9310677725a788ee07e0e1"
+    }
+  ]
+}

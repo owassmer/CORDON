@@ -7,7 +7,7 @@ description: Derive an operational decision system from legislation and administ
 
 Derive in semantic dependency order. Acquire point-in-time authority, identify atomic operative meanings and recursive dependencies, then separate legal meaning from clocks, computation, evidence binding, Actions, nouns, and platform representation.
 
-Read the source before serializing. Preserve actor, authority, trigger, condition, modality, effect, exception, effective interval, and evidence boundary only to the degree they vary independently or affect a consumer decision.
+Read the source before serializing, including the context needed to understand its operative meaning. Establish how the combined requirement affects the chosen decision chain before allocating representation. Preserve independently consequential distinctions; independent variability alone does not justify inclusion.
 
 Cases are falsification and instantiation surfaces. They do not define the population of law. A platform or schema is a downstream expression and cannot justify changing upstream meaning.
 

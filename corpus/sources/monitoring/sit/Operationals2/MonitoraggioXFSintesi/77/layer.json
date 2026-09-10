@@ -1,0 +1,155 @@
+{
+  "currentVersion": 10.11,
+  "id": 77,
+  "name": "Altre Specie - 2013-14",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 76,
+    "name": "ALTRE SPECIE"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "ac384964c5e7ea8f0d084ff6c2916fa4",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJZJREFUGJV1zyFuQkEARdFDM4GkdYPi28rqmiZsgBUgMN+zACyehA3g6koVu2hI6lgCf1CDwSDIIGiaQODYd80L/jQxvrdy7hcOWFXsIBSeEgs518W/eUNd8RV2jFG79ozPLetQGLmv3WIYEB8EdDrdgF+83g2Ox3XQ602lNMDLzfyz5ztUKW2aGPtynuHD5eayMHnjdAbErilGZfkpKgAAAABJRU5ErkJggg==",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "POSITIVO",
+          "label": "POSITIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "e39fd04f3a606e8912d870943d51fd44",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJ5JREFUGJVtyqFKQ2EYgOHnP3xO2Noxmb0Gi7AbsAzDEYPldC/Aah/sBmy2TRCEXYQM1nYNWzoYFhQc34pFOU993/DrJuvLE934wP6L92Wxg5CqJj3TtYkKQ2a3qZ0X82h4ULT+GiYvk7SKwn3qNQjuIqn7O1WengXWuOg9yvcqfpw/he01Rv/yx4LXeCvbTZP1mG6KK+ylxWfxqDgcASh4LEzcLkoVAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 6,
+            "height": 6,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "NEGATIVO",
+          "label": "NEGATIVO",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 578982.6562,
+    "ymin": 4410648.1354,
+    "xmax": 799307.1672,
+    "ymax": 4586718.1539,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "timeInfo": {
+    "startTimeField": "DATA_CAMPIONE",
+    "endTimeField": null,
+    "trackIdField": null,
+    "timeExtent": [
+      1384902000000,
+      1409007600000
+    ],
+    "timeReference": {
+      "timeZone": "W. Europe Standard Time",
+      "respectsDaylightSaving": false
+    },
+    "timeInterval": 14,
+    "timeIntervalUnits": "esriTimeUnitsDays",
+    "exportOptions": {
+      "useTime": true,
+      "timeDataCumulative": true,
+      "timeOffset": null,
+      "timeOffsetUnits": null
+    },
+    "hasLiveData": true
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeString",
+      "alias": "ID_CAMPIONE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

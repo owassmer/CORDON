@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals3/MonitoraggioXFMultiplexSintesiPrecedenti/MapServer/4",
+  "name": "Altre Aree - Campioni 2025 sub. multiplex",
+  "captured_from": "2026-09-10T21:36:29.858504+00:00",
+  "captured_through": "2026-09-10T21:36:42.335137+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 158,
+  "unique_oids": 158,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 158,
+      "sha256": "6e3f3479c6d465cf96ba2fdac3d378422ee886d2f127ddc422ea44c383cd9d56"
+    }
+  ]
+}

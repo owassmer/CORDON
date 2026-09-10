@@ -14,6 +14,10 @@ The product follows the operator's authority and live decision chain. Sources ar
 
 Cases test and instantiate law. They do not define the legal universe. Platforms express an accepted system. They do not define the domain.
 
+Evidence consumption must work for new records within understood source structures without case-specific code or registration. Particular facts, corrections and exact source locators are evidence; they must not act as an executable allowlist of supported cases. Curated examples cannot substitute for ordinary source-to-consumer integration.
+
+The operator's authority bounds the chosen decision chain; its full remit does not define the product aperture. Read the current chain and its other scope boundaries from state, preserving the dependencies and exceptions needed to make it faithful. Represent another actor only where its authority, action or result directly changes that chain, without importing its full workflow or making the operator responsible for it.
+
 ## Preserve epistemic boundaries
 
 Keep four things distinguishable:
@@ -25,9 +29,11 @@ Keep four things distinguishable:
 
 Provisional work cannot acquire authority by being polished, repeated, committed, or consumed downstream. Conflicts are explicit until competent evidence or an owner ruling resolves them.
 
+The law supplies meaning. Evidence and provenance serve that meaning; caution about what we know must not become an extra legal condition or an invented operator workflow. Confine uncertainty to the conclusion it actually prevents, and remove it when resolved. Preserve receipt, verification, or other evidentiary conditions where the law itself makes them consequential.
+
 ## One fact, one owner
 
-A fact has one authoritative representation. Other artifacts point to it. Dated reviews, migration records, and source captures may repeat what was observed because they are evidence of a moment, but they must identify themselves as records rather than authority.
+A fact has one authoritative representation. Other durable artifacts point to it. Temporary research may repeat an observation while a bounded unit is open; it expires into its owner, a directly consumed source population, or deletion when the unit closes.
 
 When an owner changes, find every consumer. Delete stale restatements instead of adding synchronization machinery around them.
 
@@ -39,13 +45,21 @@ An earlier stage reopens only through evidence that identifies the affected prop
 
 ## Minimum sufficient structure
 
-Prefer delete, then replace, then refine, then add. Model distinctions only when they vary independently or a consumer needs them. Put a consequential invariant in structure or a discriminating check before relying on prose.
+Prefer delete, then replace, then refine, then add. Derive the combined operative requirement before allocating representation. Preserve independently consequential distinctions; shared performance may satisfy overlapping requirements. Neither an evidence limitation nor a representational convenience creates an operator duty. Put a consequential invariant in structure or a discriminating check before relying on prose.
+
+Ask whether the full necessary meaning can survive a slimmer representation before adding a field, object, abstraction, document, test or gate. An avoidable addition is a finding, including a process rule where removing a step would suffice. Lean means fewer unnecessary surfaces for drift, not fewer words at the expense of meaning.
 
 Local defects receive local cures. Repeated failures of the same soundly tested class are evidence that the structure—not the latest instance—needs to change.
 
 ## Verification must discriminate
 
 Name the proposition a check claims to establish and create a condition under which the check would fail. Counts cannot prove meaning; schema validity cannot prove correctness; a write response cannot prove deployed state.
+
+An expected result must be established independently of the transformation it tests. Replaying authored conclusions, comparing two projections of the same assumptions, or passing one set as both expected and acquired cannot certify meaning or completeness. Integrity, serialization and selector tests retain those narrow claims; general capability requires unseen supported records and discriminating failures through ordinary consumer paths.
+
+Discovery scope and selected acquisition scope remain distinct. A publisher inventory can expose an omitted candidate, but only an accepted consumer admits a source. Once admitted, acquire and understand the complete within-aperture population. Unrelated catalogue entries need no durable per-row disposition, and a reconciled count cannot establish meaning or completion.
+
+Research expires into a canonical owner, a directly consumed source population, or deletion. Its chronology, failed attempts, reviews, and superseded interpretations are not durable program state. A live source binding stays small enough to explain: one source population, the accepted input it supplies, how it is obtained, and what remains unresolved.
 
 Acceptance binds only the content actually reviewed. If that content changes, acceptance no longer projects unless the owner explicitly accepts the changed content.
 

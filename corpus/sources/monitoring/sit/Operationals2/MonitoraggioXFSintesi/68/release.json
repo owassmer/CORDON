@@ -1,0 +1,41 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/68",
+  "name": "Altre specie - Campioni 2014-15",
+  "captured_from": "2026-09-10T21:31:55.374417+00:00",
+  "captured_through": "2026-09-10T21:32:32.748355+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 2399,
+  "unique_oids": 2399,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "860c13404730af0d59ec8a8b46bc115b07d6c2b55f5384ae75650dd97fa788a0"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "8105862a78e138a35432f4507fc948fba9834a7bef8fcf47f980c72511d92941"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "337b3dfe8b2622686f91e9bd12ae44bdbd9d24d77fde490b0f93a46b47a1de8a"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "6781bc6853ff5098099e37c0020fd486b4fe0893a9ddeb4ae1f8515cea3e6241"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "b611860cd08dc22e575b21a7c4fcbc53ee145d39ad82bfaccea4a580bdaf89d8"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 399,
+      "sha256": "9cd0dcbdd74c4fee70b116cd240f82d6627fdc0d1dd6b1b22198ec6b996b9869"
+    }
+  ]
+}

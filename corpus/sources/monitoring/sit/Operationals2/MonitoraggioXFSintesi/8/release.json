@@ -1,0 +1,26 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/8",
+  "name": "Fruttiferi - Campioni 2024 sub. pauca",
+  "captured_from": "2026-09-10T21:26:25.986195+00:00",
+  "captured_through": "2026-09-10T21:26:28.573883+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 992,
+  "unique_oids": 992,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "e7ec3ae862d9e6fa239b30c17ff699729d6bbd40028e7fdd2cf3a278a1a1eb1a"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "d53099c25f7d8010d4b7721bf03630b248cad0c7080499361a0e542e49af02db"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 192,
+      "sha256": "2bb522a39595297f18fa4e830f95b318a7030752e5cb493f25f93f7abdc47d3b"
+    }
+  ]
+}

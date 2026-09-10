@@ -1,0 +1,66 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/62",
+  "name": "Positivi - campioni 2014-15",
+  "captured_from": "2026-09-10T21:31:15.335802+00:00",
+  "captured_through": "2026-09-10T21:31:51.465802+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 4189,
+  "unique_oids": 4189,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "793ae30be97d2d3253cd5755d59ba627572eac894095a96a5dbc2d8405076211"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "d96cac15ba834fe66ccf1684cd7b99129fc78360b1776baf14eae4c66c65e42c"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "dcdc1f959ed4ae088728006a891c539da15d4f802389a0761cd790f24cf2098c"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "2041f6bfc82b1d4af143147679520474f36e32c3a541504fab39abf426b187ba"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "9fe077e73eecc92f9a3a3aa53ab95408439a56250d25de01c196b4d6453fa641"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "bc6cf83bc670559a99afad37d14fa9ba59820ae10ac0eabb179eed6fe7b20432"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "71d09b2b06667527f3d32e26cd2dbddf68003c2f2cc692d8c0f10afa4f965d50"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "4fcf76f026bc495c8790e5a749567ecd41a04ccc91d99b098c36b7641ac1cdd6"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "fc89ca66ad6417b650e0de8409c18c33210c8f97cba5f116b8b3bae710715e38"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 400,
+      "sha256": "03475719aa2d65662f6c909f68b2a2313057a4c56cfc38fd5dacd946ac28bd7c"
+    },
+    {
+      "path": "00004000.json.gz",
+      "rows": 189,
+      "sha256": "1619699704f9880a11fc1446106fe6b8a1e702246fee8098b9e0c1837dd9ea2d"
+    }
+  ]
+}

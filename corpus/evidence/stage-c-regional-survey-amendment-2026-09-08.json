@@ -1,0 +1,4013 @@
+{
+  "status": "PROPOSED_FOR_REVIEW_NOT_ACCEPTED",
+  "basis": "Named regional survey-design omission adjudicated in corpus/evidence/stage-c-derivation-2026-09-08.md. Accepted A/B files remain untouched. These exact additions and their stage dispositions are part of the C review unit.",
+  "source_read": "DGR1075 physical pages 23–31, printed pages 14–22; source tables visually read. Method/risk scope remains source-specific; plan display estimates and totals are evidence, not independently imposed targets for later campaigns.",
+  "accepted_base": {
+    "A_sha256": "b0423ccd58387aa6aca857ef8be10aba7abcef067287aa163109400bd59205db",
+    "B_sha256": "40c4a498f59928d2b21b25dbc03aafced131cc02b948c189074b2eb54dfe36f1"
+  },
+  "stage_a_additions": [
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.1",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.1:survey-method",
+      "parent_stable_provision_id": "",
+      "article": "4.1.1",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Use the operative one-step regional survey design with its source-defined risk strata and allocation qualifications; retain separate immediate post-finding surveillance and all applicable Union requirements.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "survey is planned under the operative DGR1075 regional design"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "L’applicazione del Ribess+ prevede una metodologia ad uno step con la quale si definisce il numero di piante da campionare nell’area interessata. La dimensione del campione all’interno delle aree da sottoporre a sorveglianza è determinata applicando 2 livelli di rischio: Alto (valore 2) e Base (valore 1). Tabular scope transcription: high relative risk 2; base relative risk 1. Pest-free high-risk zone: 1 km outside the buffer boundary. Delimited high-risk rings: 400 m wide, starting at the 50 m radius around previous-campaign infected plants. ST53 buffer also includes the 400 m interface strip. Source §4.1.1 additionally identifies intervening pest-free territory and allocation factors; two equal risk numbers do not erase overlapping geographic qualifications.",
+      "source_quote_sha256": "bdf50ad92224ad9ba0144f826985e46d3ab77724be203d8c429aa0a13a973761",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.2",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.2:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.2",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to Area indenne as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 2, Area indenne. Tabular transcription: olive: confidence 0.95, design prevalence 0.0005; olive high: 2765 plants to sample; olive base: 5537 plants to sample; vine: confidence 0.95, design prevalence 0.0009; vine high: 1541 plants to sample; vine base: 3084 plants to sample; fruit: confidence 0.95, design prevalence 0.0009; fruit high: 1560 plants to sample; fruit base: 3123 plants to sample; other: confidence 0.9, design prevalence 0.007; other high: 151 plants to sample; other base: 303 plants to sample.",
+      "source_quote_sha256": "396712d8541ae4e050da8e654bf1b00c64b7311253d4ac72eb0e39b8e5ab9a11",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.3",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.3:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.3",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST53 infected zone subject to containment as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 3, ST53 infected zone subject to containment. Tabular transcription: olive: confidence 0.95, design prevalence 0.0003; olive high: 4789 plants to sample; olive base: 9757 plants to sample; vine: confidence 0.95, design prevalence 0.005; vine high: 276 plants to sample; vine base: 555 plants to sample; fruit: confidence 0.95, design prevalence 0.0007; fruit high: 1767 plants to sample; fruit base: 3922 plants to sample; other: confidence 0.9, design prevalence 0.005; other high: 210 plants to sample; other base: 424 plants to sample.",
+      "source_quote_sha256": "e497ae73cff22affdff5b172fcda0a013a273c327bab0f8e44f25e41a4de29a0",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.4",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.4:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.4",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST53 buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 4, ST53 buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.0003; olive high: 5116 plants to sample; olive base: 10283 plants to sample; vine: confidence 0.95, design prevalence 0.005; vine high: 296 plants to sample; vine base: 593 plants to sample; fruit: confidence 0.95, design prevalence 0.0007; fruit high: 2107 plants to sample; fruit base: 4227 plants to sample; other: confidence 0.9, design prevalence 0.005; other high: 238 plants to sample; other base: 477 plants to sample.",
+      "source_quote_sha256": "8a14d2f49329dd508993c49e89af74f3e6b90323a3ac6aa20bb7b67f324af206",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.5",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.5:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.5",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST1 buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 5, ST1 buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.01; olive high: 183 plants to sample; olive base: 366 plants to sample; vine: confidence 0.95, design prevalence 0.0007; vine high: 2612 plants to sample; vine base: 5223 plants to sample; fruit: confidence 0.95, design prevalence 0.0009; fruit high: 1425 plants to sample; fruit base: 3214 plants to sample; other: confidence 0.9, design prevalence 0.005; other high: 180 plants to sample; other base: 423 plants to sample.",
+      "source_quote_sha256": "3432d306ed32b7d1170b44fa6f92b0e1a463c0943aae961f09d4cff362d14557",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.6",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.6:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.6",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Capurso buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 6, ST26 Capurso buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.007; olive high: 202 plants to sample; olive base: 406 plants to sample; vine: confidence 0.95, design prevalence 0.03; vine high: 48 plants to sample; vine base: 97 plants to sample; fruit: confidence 0.95, design prevalence 0.003; fruit high: 0 plants to sample; fruit base: 1722 plants to sample; other: confidence 0.9, design prevalence 0.05; other high: 0 plants to sample; other base: 81 plants to sample.",
+      "source_quote_sha256": "c268f21e1a3d04fb1393f9ebdd51b32b2d6593ad279ef07e9e2b1e77a710fedc",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.7",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.7:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.7",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Triggiano and Noicattaro buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 7, ST26 Triggiano and Noicattaro buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.007; olive high: 231 plants to sample; olive base: 462 plants to sample; vine: confidence 0.95, design prevalence 0.02; vine high: 73 plants to sample; vine base: 146 plants to sample; fruit: confidence 0.95, design prevalence 0.003; fruit high: 525 plants to sample; fruit base: 1078 plants to sample; other: confidence 0.9, design prevalence 0.05; other high: 21 plants to sample; other base: 42 plants to sample.",
+      "source_quote_sha256": "bba77eabecc52cb7fe9c2406e56e7f3ebf890830a8a1782882c4a155b76b96e7",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.8",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.8:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.8",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST53 Bari buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 8, ST53 Bari buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.001; olive high: 1462 plants to sample; olive base: 2958 plants to sample; vine: confidence 0.95, design prevalence 0.03; vine high: 46 plants to sample; vine base: 92 plants to sample; fruit: confidence 0.95, design prevalence 0.005; fruit high: 310 plants to sample; fruit base: 628 plants to sample; other: confidence 0.9, design prevalence 0.05; other high: 0 plants to sample; other base: 83 plants to sample.",
+      "source_quote_sha256": "c4d45b0a069ac2896c7c25c62f298a8c861cd416f4036f9ecc20373e8fd92a82",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.9",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.9:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.9",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Santeramo in Colle buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 9, ST26 Santeramo in Colle buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.003; olive high: 592 plants to sample; olive base: 1185 plants to sample; vine: confidence 0.95, design prevalence 0.02; vine high: 78 plants to sample; vine base: 156 plants to sample; fruit: confidence 0.95, design prevalence 0.002; fruit high: 865 plants to sample; fruit base: 1730 plants to sample; other: confidence 0.9, design prevalence 0.007; other high: 174 plants to sample; other base: 349 plants to sample.",
+      "source_quote_sha256": "d666a24b7ecbe70c9f2ed1bf971e99d016dabd7342f219a0943568e97bed8af6",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+      "temporal_status": "CURRENT"
+    },
+    {
+      "source_clause_id": "PUG-DGR1075-2025::4.1.10",
+      "instrument_id": "PUG-DGR1075-2025",
+      "stable_provision_id": "PUG-DGR1075-2025:§4.1.10:survey-design",
+      "parent_stable_provision_id": "",
+      "article": "4.1.10",
+      "structural_kind": "composite",
+      "effective_from": "2025-07-29",
+      "effective_to_exclusive": "",
+      "application_basis": "DGR1075 adopted 29 July 2025; the particular design applies only while operative for this campaign and area, without projecting displayed population estimates into a later campaign.",
+      "exact_change_kind": "INITIAL",
+      "semantic_change": "INITIAL",
+      "actor_role": "Regione Puglia — Osservatorio Fitosanitario",
+      "modality": "shall",
+      "true_effect": "Apply the source table’s host-specific regional design and planned stratum workload within its operative campaign.",
+      "false_effect": "This design does not apply outside its source-defined campaign, area and population.",
+      "reserved_decision_owner": "Regione Puglia — Osservatorio Fitosanitario",
+      "evidence_contract": "Operative adopted regional design for the campaign; exact source-defined area, host population and risk strata; applicable Union survey requirements; qualified current population and method; actual observations and performances for any achieved-survey claim.",
+      "external_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+      "authority_judgment_required": "YES",
+      "authority_judgment_kind": "operative campaign population and site selection",
+      "legal_linguistic_conflict": "-",
+      "semantic_note": "Table clauses are an identified tabular transcription, not a verbatim prose quotation. Planned regional design does not replace the independent Union requirement, determine geography, or establish performed-survey support. Displayed population estimates and table totals do not define future populations or prove achieved assurance.",
+      "condition_ast": {
+        "all_of": [
+          {
+            "predicate": "this source design is operative for the campaign and has not been superseded"
+          },
+          {
+            "predicate": "target population belongs to ST26 Ginosa buffer zone as defined by this source"
+          }
+        ]
+      },
+      "higher_authority_dependencies": [
+        "PUG-DGR1075-2025:Convention-3.1:osservatorio-survey-control",
+        "PUG-DGR1075-2025:§4.1.1:survey-method"
+      ],
+      "documentary_source_instrument_id": "PUG-DGR1075-2025",
+      "source_uri": "file:regulation/jurisdiction/regional/DGR-1075-2025-plan.vision-ocr.txt",
+      "source_paths": "corpus/evidence/stage-c-research-2026-09-08/DGR-1075-2025.pdf",
+      "source_snapshot_hashes": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "source_snapshot_dates": "2025-07-29",
+      "source_quote": "Table 10, ST26 Ginosa buffer zone. Tabular transcription: olive: confidence 0.95, design prevalence 0.007; olive high: 202 plants to sample; olive base: 411 plants to sample; vine: confidence 0.95, design prevalence 0.03; vine high: 49 plants to sample; vine base: 99 plants to sample; fruit: confidence 0.95, design prevalence 0.002; fruit high: 480 plants to sample; fruit base: 1357 plants to sample; other: confidence 0.9, design prevalence 0.04; other high: 28 plants to sample; other base: 56 plants to sample.",
+      "source_quote_sha256": "31af3ede3ae19445d25d479803276bf2c7dceac485dd8d4b0d84a29f3265d986",
+      "lineage_role": "IMPLEMENTING_ATOM",
+      "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+      "temporal_status": "CURRENT"
+    }
+  ],
+  "stage_b_additions": {
+    "clocks": [],
+    "parameters": [
+      {
+        "parameter_id": "B-PAR-DGR1075-survey-high-risk",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "source_phrase": "high relative risk 2",
+        "kind": "exact",
+        "value": "2",
+        "unit": null,
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.1:survey-method"
+        ],
+        "scope": {
+          "zone_type": "source-defined survey strata",
+          "purpose": "regional survey risk geometry/weight",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.1:survey-method",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-survey-base-risk",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "source_phrase": "base relative risk 1",
+        "kind": "exact",
+        "value": "1",
+        "unit": null,
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.1:survey-method"
+        ],
+        "scope": {
+          "zone_type": "source-defined survey strata",
+          "purpose": "regional survey risk geometry/weight",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.1:survey-method",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-survey-outside-band",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "source_phrase": "1 km outside the buffer boundary",
+        "kind": "exact",
+        "value": "1",
+        "unit": "km",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.1:survey-method"
+        ],
+        "scope": {
+          "zone_type": "source-defined survey strata",
+          "purpose": "regional survey risk geometry/weight",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.1:survey-method",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-survey-ring-width",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "source_phrase": "400 m wide",
+        "kind": "exact",
+        "value": "400",
+        "unit": "m",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.1:survey-method"
+        ],
+        "scope": {
+          "zone_type": "source-defined survey strata",
+          "purpose": "regional survey risk geometry/weight",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.1:survey-method",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-survey-ring-origin",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "source_phrase": "50 m radius",
+        "kind": "exact",
+        "value": "50",
+        "unit": "m",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.1:survey-method"
+        ],
+        "scope": {
+          "zone_type": "source-defined survey strata",
+          "purpose": "regional survey risk geometry/weight",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.1:survey-method",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.0005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "olive high: 2765 plants to sample",
+        "kind": "design_target",
+        "value": "2765",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "olive base: 5537 plants to sample",
+        "kind": "design_target",
+        "value": "5537",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.0009",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0900",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "vine high: 1541 plants to sample",
+        "kind": "design_target",
+        "value": "1541",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "vine base: 3084 plants to sample",
+        "kind": "design_target",
+        "value": "3084",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.0009",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0900",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "fruit high: 1560 plants to sample",
+        "kind": "design_target",
+        "value": "1560",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "fruit base: 3123 plants to sample",
+        "kind": "design_target",
+        "value": "3123",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "other high: 151 plants to sample",
+        "kind": "design_target",
+        "value": "151",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T2-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "source_phrase": "other base: 303 plants to sample",
+        "kind": "design_target",
+        "value": "303",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.2:survey-design"
+        ],
+        "scope": {
+          "zone_type": "Area indenne",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": null
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.2:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.0003",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0300",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "olive high: 4789 plants to sample",
+        "kind": "design_target",
+        "value": "4789",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "olive base: 9757 plants to sample",
+        "kind": "design_target",
+        "value": "9757",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "vine high: 276 plants to sample",
+        "kind": "design_target",
+        "value": "276",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "vine base: 555 plants to sample",
+        "kind": "design_target",
+        "value": "555",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.0007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "fruit high: 1767 plants to sample",
+        "kind": "design_target",
+        "value": "1767",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "fruit base: 3922 plants to sample",
+        "kind": "design_target",
+        "value": "3922",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "other high: 210 plants to sample",
+        "kind": "design_target",
+        "value": "210",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T3-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "source_phrase": "other base: 424 plants to sample",
+        "kind": "design_target",
+        "value": "424",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.3:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 infected zone subject to containment",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.3:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.0003",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0300",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "olive high: 5116 plants to sample",
+        "kind": "design_target",
+        "value": "5116",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "olive base: 10283 plants to sample",
+        "kind": "design_target",
+        "value": "10283",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "vine high: 296 plants to sample",
+        "kind": "design_target",
+        "value": "296",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "vine base: 593 plants to sample",
+        "kind": "design_target",
+        "value": "593",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.0007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "fruit high: 2107 plants to sample",
+        "kind": "design_target",
+        "value": "2107",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "fruit base: 4227 plants to sample",
+        "kind": "design_target",
+        "value": "4227",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "other high: 238 plants to sample",
+        "kind": "design_target",
+        "value": "238",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T4-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "source_phrase": "other base: 477 plants to sample",
+        "kind": "design_target",
+        "value": "477",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.4:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.4:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.01",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "1.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "olive high: 183 plants to sample",
+        "kind": "design_target",
+        "value": "183",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "olive base: 366 plants to sample",
+        "kind": "design_target",
+        "value": "366",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.0007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "vine high: 2612 plants to sample",
+        "kind": "design_target",
+        "value": "2612",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "vine base: 5223 plants to sample",
+        "kind": "design_target",
+        "value": "5223",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.0009",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.0900",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "fruit high: 1425 plants to sample",
+        "kind": "design_target",
+        "value": "1425",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "fruit base: 3214 plants to sample",
+        "kind": "design_target",
+        "value": "3214",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "other high: 180 plants to sample",
+        "kind": "design_target",
+        "value": "180",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T5-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "source_phrase": "other base: 423 plants to sample",
+        "kind": "design_target",
+        "value": "423",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.5:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST1 buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "fastidiosa"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.5:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "olive high: 202 plants to sample",
+        "kind": "design_target",
+        "value": "202",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "olive base: 406 plants to sample",
+        "kind": "design_target",
+        "value": "406",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.03",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "3.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "vine high: 48 plants to sample",
+        "kind": "design_target",
+        "value": "48",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "vine base: 97 plants to sample",
+        "kind": "design_target",
+        "value": "97",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.003",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.300",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "fruit high: 0 plants to sample",
+        "kind": "design_target",
+        "value": "0",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "fruit base: 1722 plants to sample",
+        "kind": "design_target",
+        "value": "1722",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.05",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "5.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "other high: 0 plants to sample",
+        "kind": "design_target",
+        "value": "0",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T6-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "source_phrase": "other base: 81 plants to sample",
+        "kind": "design_target",
+        "value": "81",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.6:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Capurso buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.6:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "olive high: 231 plants to sample",
+        "kind": "design_target",
+        "value": "231",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "olive base: 462 plants to sample",
+        "kind": "design_target",
+        "value": "462",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.02",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "2.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "vine high: 73 plants to sample",
+        "kind": "design_target",
+        "value": "73",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "vine base: 146 plants to sample",
+        "kind": "design_target",
+        "value": "146",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.003",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.300",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "fruit high: 525 plants to sample",
+        "kind": "design_target",
+        "value": "525",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "fruit base: 1078 plants to sample",
+        "kind": "design_target",
+        "value": "1078",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.05",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "5.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "other high: 21 plants to sample",
+        "kind": "design_target",
+        "value": "21",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T7-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "source_phrase": "other base: 42 plants to sample",
+        "kind": "design_target",
+        "value": "42",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.7:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Triggiano and Noicattaro buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.7:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.001",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.100",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "olive high: 1462 plants to sample",
+        "kind": "design_target",
+        "value": "1462",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "olive base: 2958 plants to sample",
+        "kind": "design_target",
+        "value": "2958",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.03",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "3.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "vine high: 46 plants to sample",
+        "kind": "design_target",
+        "value": "46",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "vine base: 92 plants to sample",
+        "kind": "design_target",
+        "value": "92",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.005",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.500",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "fruit high: 310 plants to sample",
+        "kind": "design_target",
+        "value": "310",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "fruit base: 628 plants to sample",
+        "kind": "design_target",
+        "value": "628",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.05",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "5.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "other high: 0 plants to sample",
+        "kind": "design_target",
+        "value": "0",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T8-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "source_phrase": "other base: 83 plants to sample",
+        "kind": "design_target",
+        "value": "83",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.8:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST53 Bari buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "pauca"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.8:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.003",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.300",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "olive high: 592 plants to sample",
+        "kind": "design_target",
+        "value": "592",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "olive base: 1185 plants to sample",
+        "kind": "design_target",
+        "value": "1185",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.02",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "2.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "vine high: 78 plants to sample",
+        "kind": "design_target",
+        "value": "78",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "vine base: 156 plants to sample",
+        "kind": "design_target",
+        "value": "156",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.002",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.200",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "fruit high: 865 plants to sample",
+        "kind": "design_target",
+        "value": "865",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "fruit base: 1730 plants to sample",
+        "kind": "design_target",
+        "value": "1730",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "other high: 174 plants to sample",
+        "kind": "design_target",
+        "value": "174",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T9-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "source_phrase": "other base: 349 plants to sample",
+        "kind": "design_target",
+        "value": "349",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.9:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Santeramo in Colle buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.9:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-olive-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "olive: confidence 0.95, design prevalence 0.007",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.700",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "olive regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-olive-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "olive high: 202 plants to sample",
+        "kind": "design_target",
+        "value": "202",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "olive high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-olive-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "olive base: 411 plants to sample",
+        "kind": "design_target",
+        "value": "411",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "olive base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-vine-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "vine: confidence 0.95, design prevalence 0.03",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "3.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "vine regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-vine-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "vine high: 49 plants to sample",
+        "kind": "design_target",
+        "value": "49",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "vine high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-vine-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "vine base: 99 plants to sample",
+        "kind": "design_target",
+        "value": "99",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "vine base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-fruit-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "fruit: confidence 0.95, design prevalence 0.002",
+        "kind": "design_target",
+        "value": {
+          "confidence": "95.00",
+          "confidence_bound": "exact",
+          "design_prevalence": "0.200",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "fruit regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-fruit-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "fruit high: 480 plants to sample",
+        "kind": "design_target",
+        "value": "480",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "fruit high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-fruit-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "fruit base: 1357 plants to sample",
+        "kind": "design_target",
+        "value": "1357",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "fruit base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-other-design",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "other: confidence 0.9, design prevalence 0.04",
+        "kind": "design_target",
+        "value": {
+          "confidence": "90.0",
+          "confidence_bound": "exact",
+          "design_prevalence": "4.00",
+          "design_prevalence_bound": "exact"
+        },
+        "unit": "percent",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "other regional survey design",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-other-high-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "other high: 28 plants to sample",
+        "kind": "design_target",
+        "value": "28",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "other high-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      },
+      {
+        "parameter_id": "B-PAR-DGR1075-T10-other-base-samples",
+        "producer_provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "source_phrase": "other base: 56 plants to sample",
+        "kind": "design_target",
+        "value": "56",
+        "unit": "count",
+        "comparator": null,
+        "legal_effect": "CONDITIONAL",
+        "applies_when": "This source design is operative for the campaign and exact area/population; the independently applicable Union requirement remains controlling.",
+        "dependencies": [
+          "PUG-DGR1075-2025:§4.1.10:survey-design"
+        ],
+        "scope": {
+          "zone_type": "ST26 Ginosa buffer zone",
+          "purpose": "other base-risk planned inspection-unit workload",
+          "branch": null,
+          "subspecies": "multiplex"
+        },
+        "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
+        "note": null
+      }
+    ],
+    "dispositions": [
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-survey-high-risk",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-survey-base-risk",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-survey-outside-band",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-survey-ring-width",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-survey-ring-origin",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+        "expression": "L’applicazione del Ribess+ prevede una metodologia ad uno step con la quale si definisce il numero di piante da campionare nell’area interessata. La dimensione del campione all’interno delle aree da sottoporre a sorveglianza è determinata applicando 2 livelli di rischio: Alto (valore 2) e Base (valore 1). Tabular scope transcription: high relative risk 2; base relative risk 1. Pest-free high-risk zone: 1 km outside the buffer boundary. Delimited high-risk rings: 400 m wide, starting at the 50 m radius around previous-campaign infected plants. ST53 buffer also includes the 400 m interface strip. Source §4.1.1 additionally identifies intervening pest-free territory and allocation factors; two equal risk numbers do not erase overlapping geographic qualifications.",
+        "disposition": "not_a_parameter",
+        "ref": null,
+        "why": "One step and two risk levels describe model composition; previous-campaign qualification and allocation factors remain semantic population inputs. Independently minted magnitudes resolve through their own source phrases.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T2-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T3-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T4-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T5-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T6-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T7-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T8-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T9-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-olive-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-olive-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-olive-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-vine-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-vine-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-vine-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-fruit-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-fruit-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-fruit-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-other-design",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-other-high-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "PUG-DGR1075-2025:§4.1.10:survey-design:v1",
+        "disposition": "parameter",
+        "ref": "B-PAR-DGR1075-T10-other-base-samples",
+        "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
+        "aperture": "IN_APERTURE"
+      }
+    ]
+  },
+  "population_additions": {
+    "1": [
+      "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
+      "PUG-DGR1075-2025:§4.1.2:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.3:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.4:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.5:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.6:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.7:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.8:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.9:survey-design:v1",
+      "PUG-DGR1075-2025:§4.1.10:survey-design:v1"
+    ]
+  },
+  "acceptance_effect": "On acceptance, merge each addition into its sole A/B/population owner, regenerate projections and acceptance bindings, and remove this proposal as a runtime input. It is never loaded by Snapshot.load()."
+}

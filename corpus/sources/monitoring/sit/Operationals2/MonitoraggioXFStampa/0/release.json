@@ -1,0 +1,61 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFStampa/MapServer/0",
+  "name": "Pianta positiva-Monitoraggio 2017-2018",
+  "captured_from": "2026-09-10T21:34:06.806299+00:00",
+  "captured_through": "2026-09-10T21:34:48.673120+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 3815,
+  "unique_oids": 3815,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 400,
+      "sha256": "8685354775b949f41539e38f7a019540b0e6315c7935f26e5425b4186f3baee9"
+    },
+    {
+      "path": "00000400.json.gz",
+      "rows": 400,
+      "sha256": "1a86c1cd5ccdff2e24a30cf860c85d3d65b1c829b69015e1f9066d8c85fc4cfd"
+    },
+    {
+      "path": "00000800.json.gz",
+      "rows": 400,
+      "sha256": "4747249b51cc70d82d00fcaab5819ad1c4e5634a322486320e0a93a0091ba60e"
+    },
+    {
+      "path": "00001200.json.gz",
+      "rows": 400,
+      "sha256": "e5199aec4593a414d62c131358db3e4583710d6f75031503712f194019e48c55"
+    },
+    {
+      "path": "00001600.json.gz",
+      "rows": 400,
+      "sha256": "a3d4e12bce560c21f200bb5a60d7b46706079ba4bd301d0c0d0b09b7b8e176ef"
+    },
+    {
+      "path": "00002000.json.gz",
+      "rows": 400,
+      "sha256": "99dc46d0c1a609918722048899b8edc5cdee8a897a5ebb2efd67a84755def2c1"
+    },
+    {
+      "path": "00002400.json.gz",
+      "rows": 400,
+      "sha256": "68612cfabb823c26e162cd3d93edefeae463b12d03ae805b614ac54b13fdf245"
+    },
+    {
+      "path": "00002800.json.gz",
+      "rows": 400,
+      "sha256": "7cf273e6f22c110eb8dce0f6cdcacb5f9b01d447bedc130140f8a9b864f71bf8"
+    },
+    {
+      "path": "00003200.json.gz",
+      "rows": 400,
+      "sha256": "aabdeef84b3e9612cabf1b520f74d89e28fff0043e1048a4ee8cc4f294861210"
+    },
+    {
+      "path": "00003600.json.gz",
+      "rows": 215,
+      "sha256": "5cea2632dab47b2ef7901aa7b87ddfc2dd2138deb45a6beb9e4eac7504b0c164"
+    }
+  ]
+}

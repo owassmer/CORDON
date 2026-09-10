@@ -1,0 +1,90 @@
+{
+  "status": "Dated evidence only; admission does not adopt research conclusions or amend A/B. See the collective adjudication in the Stage C derivation record.",
+  "files": [
+    {
+      "file": "connor-survey-web-REPORT.md",
+      "sha256": "7538398e38f69c2d5330e9e892eee7f33b5e99b7dbdf8aa74a547e8c10116a5e",
+      "original_path": "/Users/owenwassmer/dev/CORDON/corpus/workbench/stage-c-research/connor-survey-web/REPORT.md",
+      "source_metadata": {
+        "kind": "research report, not authority"
+      }
+    },
+    {
+      "file": "connor-time-space-web-REPORT.md",
+      "sha256": "a62aa4d9a3cf5874aadce834e21d10e590f6c83b8d477c5bdc3c06eeac6091fb",
+      "original_path": "/Users/owenwassmer/dev/CORDON/corpus/workbench/stage-c-research/connor-time-space-web/REPORT.md",
+      "source_metadata": {
+        "kind": "research report, not authority"
+      }
+    },
+    {
+      "file": "connor-archives-REPORT.md",
+      "sha256": "5001dee42ee1bf3d05ac2643d08655b8bd0df3668fc0b4cc9db7efbebc3f8a7f",
+      "original_path": "/Users/owenwassmer/dev/CORDON/corpus/workbench/stage-c-research/connor-archives/REPORT.md",
+      "source_metadata": {
+        "kind": "research report, not authority"
+      }
+    },
+    {
+      "file": "DGR_1593_2024_piano_2024-2026.pdf",
+      "sha256": "fdf68a9181157e9734c1546c130addf6cf3d4fb87ee45b811ac96b39d68033ca",
+      "original_path": "/Users/owenwassmer/dev/CORDON/corpus/workbench/stage-c-research/connor-survey-web/raw/DGR_1593_2024_piano_2024-2026.pdf",
+      "source_metadata": {
+        "file": "raw/DGR_1593_2024_piano_2024-2026.pdf",
+        "sha256": "fdf68a9181157e9734c1546c130addf6cf3d4fb87ee45b811ac96b39d68033ca",
+        "bytes": 5399744,
+        "retrieved_at": "2026-09-09T00:20:07.790525+00:00",
+        "captured_by": "connor branch 1",
+        "url": "https://www.agrometeopuglia.it/sites/default/files/2025-01/PIANO%20DI%20AZIONE%20XYLELLA%20FASTIDIOSA%202024-2026.pdf",
+        "title": "DGR 1593 del 25/11/2024 – Piano d’azione Xylella 2024-2026 (Allegato A)",
+        "issuer": "Regione Puglia – Giunta regionale (mirror agrometeopuglia)",
+        "date": "2024-11-25",
+        "status": "adopted plan"
+      }
+    },
+    {
+      "file": "sit-DatiPubbliciFasceXF-layers.json",
+      "sha256": "a96939759c33f0e499ac1f5ca1f3aecab9fd97b08f7f1363acdb8c1715e2a7a4",
+      "original_path": "/Users/owenwassmer/dev/CORDON/corpus/workbench/stage-c-research/connor-time-space-web/sit-DatiPubbliciFasceXF-layers.json",
+      "source_metadata": {
+        "file": "sit-DatiPubbliciFasceXF-layers.json",
+        "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/layers?f=pjson",
+        "sha256": "a96939759c33f0e499ac1f5ca1f3aecab9fd97b08f7f1363acdb8c1715e2a7a4",
+        "retrieved_at": "2026-09-08T23:56:59+00:00",
+        "title": "",
+        "issuer": "auto",
+        "date": "",
+        "note": "batch1",
+        "http_status": "200",
+        "size": 36653
+      }
+    },
+    {
+      "file": "ade-wms-documentazione-2026-03-03.pdf",
+      "sha256": "f19f5569e63cc776e61655a45c6c78de81248b26370e83dc86389a8594baf09d",
+      "original_path": "/Users/owenwassmer/dev/CORDON/corpus/workbench/stage-c-research/connor-time-space-web/ade-wms-documentazione-2026-03-03.pdf",
+      "source_metadata": {
+        "file": "ade-wms-documentazione-2026-03-03.pdf",
+        "url": "https://www.agenziaentrate.gov.it/portale/documents/d/guest/documentazione-descrittiva-del-servizio-di-consultazione-della-cartografia-catastale-20260303",
+        "sha256": "f19f5569e63cc776e61655a45c6c78de81248b26370e83dc86389a8594baf09d",
+        "retrieved_at": "2026-09-09T00:05:50+00:00",
+        "title": "AdE Documentazione descrittiva servizio consultazione cartografia catastale (WMS)",
+        "issuer": "Agenzia delle Entrate",
+        "date": "2026-03-03",
+        "note": "",
+        "http_status": "200",
+        "size": 513066
+      }
+    },
+    {
+      "file": "DGR-1075-2025.pdf",
+      "sha256": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+      "original_path": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/closure/DEL_1075_2025.pdf",
+      "source_metadata": {
+        "kind": "primary source recovered verbatim from provenance archive",
+        "expected_sha256": "6f907a1ed703fed0da3a3515c3812d80a490c28a3a7672b9e7fa497daa4fc311",
+        "identity_basis": "corpus/evidence/stage-b-regional-plan-source-parity-2026-09-04.json"
+      }
+    }
+  ]
+}

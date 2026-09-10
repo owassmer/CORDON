@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/11",
+  "name": "Positivi - Campioni 2023 sub. pauca",
+  "captured_from": "2026-09-10T21:26:28.534331+00:00",
+  "captured_through": "2026-09-10T21:26:31.941609+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 189,
+  "unique_oids": 189,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 189,
+      "sha256": "df849ef55aefa86f09385c3e0832d80c0a6ddb6db93562c91be1c09f04071ad7"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "currentVersion": 10.11,
+  "id": 1,
+  "name": "Positivi - Campioni 2025 sub. pauca",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "DATA_CAMPIONE >= TO_DATE('2025-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS') AND DATA_CAMPIONE <= TO_DATE('2025-12-31 00:00:00','YYYY-MM-DD HH24:MI:SS')",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 0,
+    "name": "Campionamento 2025"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "4767f72b3d9a2e237d5b3177fbd03106",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAPRJREFUKJGlz7Euw1EUB+Cv1fgPBknTpWXrIMEmIjGIjTBKrBKDxGIWYRAxVNIOnsBq8QAmkyfgDbR3kQ62W5FrKaFa1fht55x8OecU/COF34atLFuuxHg/Mg7F4kJqt2+fmJmmORJO7XYDE3nOsPtn3GILK91yp1UuNyohPAzFz4x3qH1p5YVQw+ZQ3OEA1Z72RivLVisx3g3EgVLiuN8rYrxILOVIgzafYrIvZjGwjesfuMlsYm8A/Mh54KbM6zeco97nkt5UsY/LTxyybC3FuD4EgsRJk6spXgqPjKUY63+B3ZTyWXYoxqPCHG+YHwETI3gHVXhE5T8lwegAAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 11,
+            "height": 10,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "POSITIVO",
+          "label": "POSITIVO",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 585747.2791,
+    "ymin": 4418428.7346,
+    "xmax": 795175.1696,
+    "ymax": 4561318.8736,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "RISULTATO",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "SQUADRA",
+      "type": "esriFieldTypeString",
+      "alias": "SQUADRA",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeString",
+      "alias": "ID_CAMPIONE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "SINTOMI",
+      "type": "esriFieldTypeString",
+      "alias": "SINTOMI",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "PROTOCOLLO",
+      "type": "esriFieldTypeString",
+      "alias": "PROTOCOLLO",
+      "length": 50,
+      "domain": null
+    },
+    {
+      "name": "DOCUMENTO_CONFERMA",
+      "type": "esriFieldTypeString",
+      "alias": "DOCUMENTO_CONFERMA",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

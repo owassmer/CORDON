@@ -1,0 +1,180 @@
+{
+  "currentVersion": 10.11,
+  "id": 64,
+  "name": "Olivo - Campioni 2014-15",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "DATA_CAMPIONE <= TO_DATE('2015-12-31 00:00:00','YYYY-MM-DD HH24:MI:SS')",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 63,
+    "name": "OLIVO"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "b7644b7b7ec2e178903f7f0f986b75a3",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAMFJREFUGJWFzr8KQXEYxvHvr/PLv7Io5Siu40zugE0dmSQXIAMDi4mFQXaRcrggq1LnZ7KYTsprQZwOnu19+9TzaCLi4TcFtXSxr+9/HYYbTBFkpiAFzH5ihYyAJMhgzXFRp3CJxNuMceQs7uPMWnGrS0A/EstZpoB6tQS0N5i5i20+sIdfA5zQqpRChkDrhVccEsAovP+Rxg4zqWLvNUCMWAcofsHWDRkDFb3Dz92g9wU+U/bifklXyZ+A9B8MAdwBvAY0MekoNEQAAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 8,
+            "height": 7,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "POSITIVO ESTIRPATO",
+          "label": "POSITIVO ESTIRPATO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "bfe99868287829b7338bd50b03ba2947",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAALNJREFUGJWFzrFKA0EUBdATMrhJwCYguAHzHan8A61jGcQPEAstTGOlTSzEXvwpW0HYSbVNqsFiLKIhCbt4m8e7nOIGDam47PBe8r3dh30YGWdeMLC+7TjziH5m/sXbCatGHIfDSa7r6e971C2KWyndN+Jc18/obIqUriOvJXEHV1xgsrdqkHnA1QZ/0rPe2pRZZFHyEeCAG4xbcDfzhPNQcYy7FviXs6ooTsOIJQ7/waTkB8agK8p65wkYAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 8,
+            "height": 7,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "POSITIVO",
+          "label": "POSITIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "a7b83916c673b7d5ca7eabc4bbabbc85",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAL5JREFUGJWFzr8ug2EcBeDnrTcpX2KRSEydXESn7iIsTYVBRMQFiEEHFotaGBq7MBvFpVjsTF0k+GL4WVT8eXG2c/IMJyukF7bmuThKXj/vuQBbGN5RYfgnFgaSKRwshPOb5LGIV2KmHUar73W2iuYe9X4Rh9Ep0rg3Ur2zHs4uk/svuBfW0P52qnoJh9j+wBth8onBj/+QbHbDyVVym+GZXbSKmIkGx1jOi2Eu6P8Cx1nqRrOTr5MHTP+DUXsDoV0w4MPbwG0AAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 8,
+            "height": 7,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "NEGATIVO",
+          "label": "NEGATIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "aa071aa9cc15da60a3c2debb6cb32d6b",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAMNJREFUGJV9zrFKw2AUxfH/xa+mBroUBKe+RWkgYJ/AznYU8QHEwQ7t0qld6hDcxTfp8AVcuvoIOmVxCCHCcTBSNWnudi4/DsfRdF7XHPPM0Mrfb1eDqQaIhJIQSNqxtAI7QSzY6omxfTTifqooE5dVPA06ui9g3ogz8QDYTy5kt3g9EtvbX+w1BaJ/o0JMS+Bmj3fqkrOq7QeQXeG1IbbXb5xzBwwaMRxhrIGJ40VnfDI7AKt2LgKvc8fI3oFeKwYK4AvdlTgqcLlwEQAAAABJRU5ErkJggg==",
+            "contentType": "image/png",
+            "width": 8,
+            "height": 7,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "IN ATTESA",
+          "label": "IN ATTESA",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "1ac4f36e883a7dc714baf7a1cb455047",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAMZJREFUGJWFzk8rBGEABvDf2JdlS0kpo+zn2JNvwHkdJbLlIgcOXJzWhcOSsSfxoVyVmnHalNqaHF4Xf6fBc3uefocnqEme2Uzm3KZdr9/3UIXFUDtGA89aGPyJY9THTEwcP164Wd71UouLbL4TjbrvdaEx2TygPKrFMRmdI/layr0ic5nuKH7g/No6OpVXrcgJtj7xw51pY/3qf5DYKK6cpT33AabG9tGuxTTihFOshXxoUXT4C/zIap41V8LStifM/oNRegOwMTTM6I3QxwAAAABJRU5ErkJggg==",
+            "contentType": "image/png",
+            "width": 8,
+            "height": 7,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "SINTOMATICO",
+          "label": "ISPEZIONE VISIVA PIANTA SINTOMATICA",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 513010.1666,
+    "ymin": 4415878.8002,
+    "xmax": 797370.1723,
+    "ymax": 4641005.8046,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "currentVersion": 10.11,
+  "id": 56,
+  "name": "VITE - 2016-17",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "DATA_CAMPIONE >= TO_DATE('2016-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS') AND DATA_CAMPIONE <= TO_DATE('2017-06-30 00:00:00','YYYY-MM-DD HH24:MI:SS')",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 55,
+    "name": "VITE"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "af92d4b63665284e97c06cc0e2ad5c8c",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAwAAAALCAYAAABLcGxfAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAL9JREFUKJGF0CFOA1EQgOFvmpfUt2oPgSBIblABluBQKEAjgMABSBAUg0dwChIuQCBcYd1Wr6AP0b6yaUv7u0n+fzKZpJBVOLREpXqvo/4qc+oE98LRclCrP2W7ws8i6Of+fqtdkefs4BTjWZD1Wu3DP3LhTvYiTBJOsLclGMpucZ4w2iLPCKMSXOFA9wHruYQkfJt6Es42yG/Cq8XWcINjDNfI04HBRaPRDSayazyu6Nlz02s+yvh3dxib/3oTv+r+LTQ+PeRhAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 9,
+            "height": 8,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "NEGATIVO",
+          "label": "NEGATIVO",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 757870.2962,
+    "ymin": 4444075.2198,
+    "xmax": 797065.0744,
+    "ymax": 4457740.6751,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

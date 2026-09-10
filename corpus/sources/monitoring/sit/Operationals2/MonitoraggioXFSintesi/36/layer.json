@@ -1,0 +1,111 @@
+{
+  "currentVersion": 10.11,
+  "id": 36,
+  "name": "Accertamenti 2019",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 31,
+    "name": "Campionamento 2019"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "simple",
+      "symbol": {
+        "type": "esriPMS",
+        "url": "1ac4f36e883a7dc714baf7a1cb455047",
+        "imageData": "iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAYAAABi8KSDAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAMZJREFUGJWFzk8rBGEABvDf2JdlS0kpo+zn2JNvwHkdJbLlIgcOXJzWhcOSsSfxoVyVmnHalNqaHF4Xf6fBc3uefocnqEme2Uzm3KZdr9/3UIXFUDtGA89aGPyJY9THTEwcP164Wd71UouLbL4TjbrvdaEx2TygPKrFMRmdI/layr0ic5nuKH7g/No6OpVXrcgJtj7xw51pY/3qf5DYKK6cpT33AabG9tGuxTTihFOshXxoUXT4C/zIap41V8LStifM/oNRegOwMTTM6I3QxwAAAABJRU5ErkJggg==",
+        "contentType": "image/png",
+        "width": 8,
+        "height": 7,
+        "angle": 0,
+        "xoffset": 0,
+        "yoffset": 0
+      },
+      "label": "",
+      "description": ""
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 650251.5317,
+    "ymin": 4465565.3479,
+    "xmax": 766785.0207,
+    "ymax": 4536981.939,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "SPECIE",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "ID_CAMPIONE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_CAMPIONE",
+      "domain": null
+    },
+    {
+      "name": "ID_GIORNALIERO",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_GIORNALIERO",
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "SHAPE",
+      "domain": null
+    },
+    {
+      "name": "TIPOLOGIA",
+      "type": "esriFieldTypeString",
+      "alias": "TIPOLOGIA",
+      "length": 255,
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

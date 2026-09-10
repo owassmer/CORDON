@@ -1,0 +1,392 @@
+{
+  "currentVersion": 10.11,
+  "id": 52,
+  "name": "Campioni del 2016 lungo infrastrutture trasporti",
+  "type": "Feature Layer",
+  "description": "",
+  "definitionExpression": "COD_TECNICI IN( 'CIC','CIC-GAG','RNL-GLM','Cappello-Mazzotta','BOZ','DE LILLO') AND DATA_CAMPIONE >= TO_DATE('2016-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS') AND DATA_CAMPIONE <= TO_DATE('2017-06-30 00:00:00','YYYY-MM-DD HH24:MI:SS')",
+  "geometryType": "esriGeometryPoint",
+  "copyrightText": "",
+  "parentLayer": {
+    "id": 49,
+    "name": "Campionamento campagna 2016-2017"
+  },
+  "subLayers": [],
+  "minScale": 0,
+  "maxScale": 0,
+  "drawingInfo": {
+    "renderer": {
+      "type": "uniqueValue",
+      "field1": "RISULTATO",
+      "field2": null,
+      "field3": null,
+      "fieldDelimiter": ", ",
+      "defaultSymbol": null,
+      "defaultLabel": null,
+      "uniqueValueInfos": [
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "a03e9e9bc5758c338e09073153f89f66",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAARlJREFUKJGlz7FLAmEYx/Fv50sXNQTh0uwQRFtE0BAtYSWHSNQaNAgtB8kZGTmERJh6Q2OTa0sh0lAtTf0FTS1O4ebQdG/avQ3KxeWlHv2Wh+d5+cDvFfwjYtCjnjVWZKn+EhrPHG4uthSPWPE5yg/voXBLCBvFFEwUgP3RccbYRrHaXdy92UzSbtq11+HYNMeJNIoo76I1oQgkhmPRMFHEfDfN3dKzqTVZunv+G+d2orSd06CfSPV5CSzDTyc/ls4ZGtNBGLQlrOQu5dpNPz5KzeN20sGwlzH3nBy3XND2Y7dT6WvyO4oYMnEA91ce1i0jLmFjIPTaa3ny61UKTx+CayLyjcpIsJuo7kweSzgRpPmC+kIIjOzNb4qRTrhSYIcUAAAAAElFTkSuQmCC",
+            "contentType": "image/png",
+            "width": 11,
+            "height": 10,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "NEGATIVO",
+          "label": "NEGATIVO",
+          "description": ""
+        },
+        {
+          "symbol": {
+            "type": "esriPMS",
+            "url": "6b5d4fbe2455a4b6ffb22c39acaa4af9",
+            "imageData": "iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAQNJREFUKJGlz7FKA1EQheF/dHELCYKksU4hiJ2IYCF2ipYL3qQSLBZsrEW0ELGIkBSWW9ndnSI+gJWVT+ArSLoUdhdjxiaK0Y3J4ulmho+ZifhHor+G3sebjUZ4Ko29X1wT6T2osuwcL6WwSK8NzJtxBRxNjb0nAbaG5aHqUtu57vNEnGXMidD81poZDLpNYH8irlQ4AWqjL7CnGm87Fx7H4jynCpwXvWIWboANwAqxCJdmLBRhYF2VA+fQX1iVFTPSMXC4nes8575e520Em9H6eUlBasAxcPuFvY93IOxOgJ+56HS4SxJeoyxjViS0poQA1X4/PoVwFqUp78BqCQwEAD4AIJtKrnlMIwYAAAAASUVORK5CYII=",
+            "contentType": "image/png",
+            "width": 11,
+            "height": 10,
+            "angle": 0,
+            "xoffset": 0,
+            "yoffset": 0
+          },
+          "value": "ISPEZIONE VISIVA",
+          "label": "ISPEZIONE VISIVA",
+          "description": ""
+        }
+      ]
+    },
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "defaultVisibility": true,
+  "extent": {
+    "xmin": 513010.1666,
+    "ymin": 4415878.8002,
+    "xmax": 797370.1723,
+    "ymax": 4641005.8046,
+    "spatialReference": {
+      "wkid": 32633,
+      "latestWkid": 32633
+    }
+  },
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "displayField": "AZIENDA",
+  "typeIdField": null,
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null
+    },
+    {
+      "name": "ALTITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "ALTITUDINE",
+      "domain": null
+    },
+    {
+      "name": "AZIENDA",
+      "type": "esriFieldTypeString",
+      "alias": "AZIENDA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "COD_TECNICI",
+      "type": "esriFieldTypeString",
+      "alias": "COD_TECNICI",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "COGNOME_ISPETTORE_1",
+      "type": "esriFieldTypeString",
+      "alias": "COGNOME_ISPETTORE_1",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "COGNOME_ISPETTORE_2",
+      "type": "esriFieldTypeString",
+      "alias": "COGNOME_ISPETTORE_2",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "COGNOME_ISPETTORE_3",
+      "type": "esriFieldTypeString",
+      "alias": "COGNOME_ISPETTORE_3",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "COMUNE",
+      "type": "esriFieldTypeString",
+      "alias": "COMUNE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "COMUNE_COD",
+      "type": "esriFieldTypeDouble",
+      "alias": "COMUNE_COD",
+      "domain": null
+    },
+    {
+      "name": "CRITICITA_NOTE",
+      "type": "esriFieldTypeString",
+      "alias": "CRITICITA_NOTE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "CUAA",
+      "type": "esriFieldTypeString",
+      "alias": "CUAA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "CULTIVAR",
+      "type": "esriFieldTypeString",
+      "alias": "CULTIVAR",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA",
+      "type": "esriFieldTypeString",
+      "alias": "DATA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ETA",
+      "type": "esriFieldTypeString",
+      "alias": "ETA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "FASE_FENOL",
+      "type": "esriFieldTypeString",
+      "alias": "FASE_FENOLOGICA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "FOGLI",
+      "type": "esriFieldTypeString",
+      "alias": "FOGLI",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ID_GIORNALIERO",
+      "type": "esriFieldTypeDouble",
+      "alias": "ID_GIORNALIERO",
+      "domain": null
+    },
+    {
+      "name": "IDANDROID",
+      "type": "esriFieldTypeString",
+      "alias": "IDANDROID",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "IMEI",
+      "type": "esriFieldTypeString",
+      "alias": "IMEI",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "LABORATORIO",
+      "type": "esriFieldTypeString",
+      "alias": "LABORATORIO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "LATITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "LATITUDINE",
+      "domain": null
+    },
+    {
+      "name": "LOCALITA",
+      "type": "esriFieldTypeString",
+      "alias": "LOCALITA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "LONGITUDINE",
+      "type": "esriFieldTypeDouble",
+      "alias": "LONGITUDINE",
+      "domain": null
+    },
+    {
+      "name": "NOME_DISPOSITIVO",
+      "type": "esriFieldTypeString",
+      "alias": "NOME_DISPOSITIVO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "NOME_ISPETTORE_1",
+      "type": "esriFieldTypeString",
+      "alias": "NOME_ISPETTORE_1",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "NOME_ISPETTORE_2",
+      "type": "esriFieldTypeString",
+      "alias": "NOME_ISPETTORE_2",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "NOME_ISPETTORE_3",
+      "type": "esriFieldTypeString",
+      "alias": "NOME_ISPETTORE_3",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "NUMERO_MAGLIA",
+      "type": "esriFieldTypeString",
+      "alias": "NUMERO_MAGLIA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "PARTICELLE",
+      "type": "esriFieldTypeString",
+      "alias": "PARTICELLE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SESTO",
+      "type": "esriFieldTypeString",
+      "alias": "SESTO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SESTO_LARG",
+      "type": "esriFieldTypeDouble",
+      "alias": "SESTO_LARG",
+      "domain": null
+    },
+    {
+      "name": "SESTO_LUNGH",
+      "type": "esriFieldTypeDouble",
+      "alias": "SESTO_LUNGH",
+      "domain": null
+    },
+    {
+      "name": "SINTOMO",
+      "type": "esriFieldTypeString",
+      "alias": "SINTOMO",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SINTOMO_ENTITA",
+      "type": "esriFieldTypeString",
+      "alias": "SINTOMO_ENTITA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SPECIE",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SPECIE_CONSOCIATA",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE_CONSOCIATA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SPECIE_PRINCIP",
+      "type": "esriFieldTypeString",
+      "alias": "SPECIE_PRINCIPALE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "STATO_COLTURALE",
+      "type": "esriFieldTypeString",
+      "alias": "STATO_COLTURALE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "STATO_COLTURALE_ENT",
+      "type": "esriFieldTypeString",
+      "alias": "STATO_COLTURALE_ENTITA",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "SUPERFICIE",
+      "type": "esriFieldTypeString",
+      "alias": "SUPERFICIE",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "ULTIME_OPER_COLTURE",
+      "type": "esriFieldTypeString",
+      "alias": "ULTIME_OPERAZIONI_COLTURALI",
+      "length": 255,
+      "domain": null
+    },
+    {
+      "name": "DATA_CAMPIONE",
+      "type": "esriFieldTypeDate",
+      "alias": "DATA_CAMPIONE",
+      "length": 36,
+      "domain": null
+    },
+    {
+      "name": "RISULTATO",
+      "type": "esriFieldTypeString",
+      "alias": "RISULTATO",
+      "length": 254,
+      "domain": null
+    },
+    {
+      "name": "SHAPE",
+      "type": "esriFieldTypeGeometry",
+      "alias": "Shape",
+      "domain": null
+    }
+  ],
+  "relationships": [],
+  "canModifyLayer": false,
+  "canScaleSymbols": false,
+  "hasLabels": false,
+  "capabilities": "Map,Query,Data",
+  "maxRecordCount": 1000,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportedQueryFormats": "JSON, AMF",
+  "ownershipBasedAccessControlForFeatures": {
+    "allowOthersToQuery": true
+  }
+}

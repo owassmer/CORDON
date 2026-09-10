@@ -1,0 +1,16 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 4,
+  "reviewer": "Owen Wassmer",
+  "act": "I accept. Prepare to open D.",
+  "accepted_content_sha256": "008f2f7fe341567161117c4255e4a8adef1f63d883c768096f9a1a1540fa87a3",
+  "preceding_acceptance": {
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-seam-4.json",
+    "record_sha256": "804d22f23fac7ed54f8847f92c8261ae209416ea57dc2bd1988a9aecfd926fa2"
+  },
+  "accepted_amendment": {
+    "path": "corpus/evidence/stage-c-regional-survey-amendment-2026-09-08.json",
+    "sha256": "904a34eaa597c4c200f3960682375ea68f16a9d9a70d1c81ccfb65d1b97c7cd0"
+  },
+  "scope": "Acceptance of the convergently reviewed whole C and exact regional A/B amendment; other seam meaning unchanged. Global A/population byte bindings are renewed after promotion."
+}

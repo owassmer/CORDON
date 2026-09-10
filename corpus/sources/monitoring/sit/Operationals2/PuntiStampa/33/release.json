@@ -1,0 +1,16 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/33",
+  "name": "Piante infette-Monitoraggio 2024 sub. pauca",
+  "captured_from": "2026-09-10T21:35:00.921412+00:00",
+  "captured_through": "2026-09-10T21:35:08.633547+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 86,
+  "unique_oids": 86,
+  "pages": [
+    {
+      "path": "00000000.json.gz",
+      "rows": 86,
+      "sha256": "77d2d1fa56c74a15dd91990972b54941666a035b348ee42c6a9db81c4b68000c"
+    }
+  ]
+}
