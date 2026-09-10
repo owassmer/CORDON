@@ -21,6 +21,8 @@ jobs:
             regulation/stage-d/requirements.txt
       - name: Install the Stage C and D reference environment
         run: python -m pip install -r regulation/stage-d/requirements.txt
+      - name: Generate the git-ignored Stage B projections from the canonical ledger
+        run: python scripts/generate_stage_b.py
       - name: Repository verification
         run: CORDON_PYTHON=python bash scripts/verify_all.sh
       - name: Stage D suite
