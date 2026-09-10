@@ -24,6 +24,6 @@ jobs:
       - name: Generate the git-ignored Stage B projections from the canonical ledger
         run: python scripts/generate_stage_b.py
       - name: Repository verification
-        run: CORDON_PYTHON=python bash scripts/verify_all.sh
+        run: CORDON_PYTHON="$(command -v python)" bash scripts/verify_all.sh
       - name: Stage D suite
         run: PYTHONPATH=regulation/stage-c:regulation/stage-d python -m unittest discover -s regulation/stage-d -p 'test_*.py'
