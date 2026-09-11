@@ -10,7 +10,7 @@ demonstrations confer no completion on the other rows.
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
 | What the laboratory actually reported | The official report linked from the monitoring record | One laboratory report containing one or more sample results | Follow every referenced report; join its rows to observations; preserve report corrections and distinct copies |
-| Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time |
+| Which legally adopted area contained the location on the event date | The adopting regional act and its cadastral annex; SIT demarcated-area geometry | One area statement the act makes: a zone, a place, and how far the zone reaches into it | Established for what the acts state. `cordon_d.areas.versions` gives each of A's 29 area versions the statement its own act makes; `zone_of` and `membership_evidence` answer which zone contained a place on a day. Meaning and limits below. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader |
@@ -108,6 +108,67 @@ What the population shows, read and not reconciled:
   the infected-plant layer and the workbook hold 1,769. The three extra are olive
   positives published by both the SIT positives view and the Olivo host view; the
   workbook, the CKAN CSV and the infected-plant layer omit them.
+
+## Demarcated areas
+
+The source population is the 28 regional acts that accepted Stage A reaches
+through its 29 area versions, from DDS 69/2021 to DDS 112/2026. A owns each
+version's identity, interval, subspecies and act-level state; this row adds
+the area statement the act itself makes. Of the 28, one adopts no geography —
+DDS 45/2025 states the procedure, that the act creates the area and
+InnovaPuglia transmits shapefiles afterwards — and DDS 148/2024's own body is
+not held, so it reads nothing and says so rather than borrowing a successor's
+annex. The other 26 acts are held as their published documents in the
+content-addressed store (`corpus/sources/areas/acts.json` names each by hash
+and origin); 25 of them annex a cadastral statement and 2 state their
+geography as a rule in the dispositivo alone.
+
+**What an act states, and how far it reaches.** The annex tabulates, per zone,
+the province or metropolitan city, the comune, and how far the zone reaches
+into it: the whole province, the whole comune, part of the comune, or named
+`fogli di mappa`, with the act's own asterisk where a sheet lies wholly inside
+rather than merely intersecting. Across the population that is **373
+statements over 4,316 stated sheets**, of which 1,561 carry the asterisk.
+
+**What the reader answers, and at which grain.** `zone_of` and
+`membership_evidence` take a day and a place and return the zone of each act
+version in force that decides it, with the annex row that decided it. The two
+questions are not the same question and are not answered alike: whether a
+*sheet* is reached by the zone, and whether a *point or parcel* lies inside
+it — which is what Stage A's predicate asks. A sheet the act marks wholly
+contained decides both. A sheet without the asterisk is reached by the zone
+while a particular parcel in it stays undecided, because the act does not say
+which part is inside. Named particelle decide only themselves. A question that
+identifies no comune or province is refused rather than answered.
+
+**What it does not supply.** No positional error bound: no source for these
+areas publishes one, so the metric consumers (`pest_free_hectare`,
+`inward_band`, `pni_geography_facts`) stay unfed and the distance work waits
+on a qualified frame. The published SIT polygons are captured as the
+publisher's representation at their capture time — 28 layers, 35 features,
+EPSG:32633 — and are not offered as an act's adopted geography: DDS 45/2025
+puts the shapefile transmission after the act, so a capture inside a version's
+interval can still show the previous geometry, and neither a second capture
+nor a matching sheet summary distinguishes a stale polygon from the adopted
+one. That correspondence needs evidence that names the version. The operative
+legal-area state is A's `PUG-LR4-2017:Art.3(2)` gate and Annex III eligibility
+is A's EU annex; neither is decided here.
+
+**Reading is all-or-nothing per cell.** A cell counts as read only when every
+consequential token in it is accounted for. Where something is left over the
+cell is reported unread and no statement is emitted from it, because a
+statement narrower than the act's answers "not in this zone" for territory the
+act includes. Four cells in the population are unread on that rule and are
+listed by their version. The forms the acts do use are read: inclusive ranges
+written both `da 15 a 32` and `161 a 172`, sections, particelle narrowing a
+sheet, a sviluppo attached to one, and the whole- and part-of-territory
+statements. No act in the population states an exclusion; none is assumed for
+one.
+
+**Zone and regime are two facts.** The acts print `ZONA INFETTA IN CUI SI
+APPLICANO MISURE DI CONTENIMENTO` and `ZONA CUSCINETTO IN CUI SI APPLICANO
+MISURE DI ERADICAZIONE`. The zone is what the caption names in head position;
+the measures it says apply there travel beside it rather than replacing it.
 
 ## Materials that are not standalone input gaps
 

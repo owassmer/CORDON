@@ -55,20 +55,23 @@
     },
     {
       "id": "official-areas",
-      "name": "Adopted demarcated-area geometry",
-      "purpose": "Supply the infected, containment, buffer and other legally consequential area containing a location on the event date.",
+      "name": "Adopted demarcated areas: the acts and their cadastral annexes",
+      "purpose": "Supply the infected, containment, buffer or focus zone that contained a location on the event date, as the adopting act states it.",
       "contracts": [
         "adopted-geography",
         "boundary-context",
         "evaluation-context"
       ],
       "routes": [
+        "The adopting regional act and its cadastral annex (BURP; the 26 acts reached by accepted A are held in the store, named by hash in corpus/sources/areas/acts.json)",
         "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFF/MapServer",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer",
         "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer"
       ],
-      "population": "Every geometry version required by an accepted A provision interval, together with the act that adopted it.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the current and consequential historical versions and bind each version to its adopting act."
+      "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes give 373 statements over 4,316 stated sheets. The publisher's current zone polygons are captured beside them: 28 layers, 35 features, EPSG:32633.",
+      "reader": "cordon_d.areas.versions, zone_of, membership_evidence; cordon_d.releases and cordon_d.spatial for the captured polygons",
+      "open": "A cell is read only when every consequential token in it is accounted for; four cells are unread on that rule and are named on their version. A sheet the act does not mark wholly contained reaches the sheet but leaves a parcel within it undecided. No source publishes a positional error bound, so the metric consumers stay unfed. A captured polygon is the publisher's representation at its capture time and is not the act's adopted geography: DDS 45/2025 puts the shapefile transmission after the act, and neither a repeated capture nor an agreeing sheet summary distinguishes a stale polygon from the adopted one - that needs evidence naming the version."
     },
     {
       "id": "cadastre",
