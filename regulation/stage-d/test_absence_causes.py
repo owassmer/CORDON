@@ -111,11 +111,71 @@ class AnAbsenceNamesItsCause(unittest.TestCase):
                                   'RISULTATO': None}))
         self.assertEqual(empty['result'], 'the field is published and carries no value')
 
+    def test_the_route_to_the_laboratory_report_names_why_it_is_absent(self):
+        # Row 2 reads this list. An empty one must not mean both "the publisher printed
+        # no route" and "a column was there that this reader could not read".
+        silent = self.causes(read({'ID_CAMPIONE': 50, 'DATA_CAMPIONE': 1713312000000,
+                                   'RISULTATO': 'Negativo'}))
+        self.assertEqual(silent['report_routes'], 'no such field is published in this record')
+        empty = self.causes(read({'ID_CAMPIONE': 51, 'DATA_CAMPIONE': 1713312000000,
+                                  'RISULTATO': 'Positivo', 'DOCUMENTO_DECRETO': None}))
+        self.assertEqual(empty['report_routes'], 'the field is published and carries no value')
+        sentinel = self.causes(read({'ID_CAMPIONE': 52, 'DATA_CAMPIONE': 1713312000000,
+                                     'RISULTATO': 'Positivo', 'DOCUMENTO_CONFERMA': '****'}))
+        self.assertEqual(sentinel['report_routes'],
+                         'the field is published and carries only a sentinel or blank')
+        routed = read({'ID_CAMPIONE': 53, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Positivo',
+                       'DOCUMENTO_CONFERMA': 'http://webadf.sit.puglia.it/doc/CONFERMA.pdf'})
+        self.assertNotIn('report_routes', self.causes(routed))
+
+    def test_an_observation_of_another_kind_is_not_a_missing_result(self):
+        visual = read({'ID_CAMPIONE': 60, 'DATA_CAMPIONE': 1713312000000,
+                       'RISULTATO': 'ISPEZIONE VISIVA'})
+        self.assertEqual(self.causes(visual)['result'],
+                         'the record publishes an observation of another kind, '
+                         'which is not an analytical result')
+        sentinel = read({'ID_CAMPIONE': 61, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': '****'})
+        self.assertEqual(self.causes(sentinel)['result'],
+                         'the field is published and carries only a sentinel or blank')
+        unfamiliar = read({'ID_CAMPIONE': 62, 'DATA_CAMPIONE': 1713312000000,
+                           'RISULTATO': 'Esito non conclusivo'})
+        self.assertEqual(self.causes(unfamiliar)['result'],
+                         'a value is published that this reader does not interpret')
+
+    def test_a_value_in_a_shape_this_reader_does_not_interpret_is_not_promoted(self):
+        # Rendering a mapping's Python repr would establish a fact the record does not
+        # state, and comparing that repr could manufacture a disagreement.
+        nested = read({'ID_CAMPIONE': 70, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Negativo',
+                       'COMUNE': {'nome': 'Ostuni', 'istat': 74011}})
+        self.assertEqual(dict(nested.attributes).get('COMUNE'), None)
+        self.assertEqual(self.causes(nested)['COMUNE'],
+                         'a value is published that this reader does not interpret')
+        listed = read({'ID_CAMPIONE': 71, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Negativo',
+                       'PROT_SELGE': [1, 2]})
+        self.assertEqual(dict(listed.carried).get('PROT_SELGE'), None)
+        self.assertEqual(self.causes(listed)['PROT_SELGE'],
+                         'a value is published that this reader does not interpret')
+
+    def test_geometry_this_reader_cannot_read_is_not_reported_as_no_geometry(self):
+        polygon = observation(Occurrence(
+            path='b', sha256='b', locator='l',
+            values={'attributes': {'ID_CAMPIONE': 80, 'DATA_CAMPIONE': 1713312000000,
+                                   'RISULTATO': 'Negativo'},
+                    'geometry': {'rings': [[[0, 0], [1, 1]]]},
+                    'spatialReference': {'wkid': 32633}}), release='r', view_name='v')
+        self.assertEqual(dict(polygon.causes)['coordinates'],
+                         'geometry is published in a shape this reader does not interpret')
+        none_at_all = read({'ID_CAMPIONE': 81, 'DATA_CAMPIONE': 1713312000000,
+                            'RISULTATO': 'Negativo'}, geometry=False)
+        self.assertEqual(dict(none_at_all.causes)['coordinates'],
+                         'no geometry is published in this record')
+
     def test_a_reading_that_carries_every_value_carries_no_cause(self):
         complete = read({'ID_CAMPIONE': 1669072, 'SPECIE': 'Fico (Ficus carica L.)',
                          'CULTIVAR': 'Ogliarola', 'SUBSPECIE': 'pauca', 'SINTOMO': 'Assente',
                          'TIPOLOGIA': 'Campione', 'DATA_CAMPIONE': 1713312000000,
-                         'RISULTATO': 'Negativo'})
+                         'RISULTATO': 'Positivo',
+                         'DOCUMENTO_CONFERMA': 'http://webadf.sit.puglia.it/doc/C.pdf'})
         self.assertEqual(complete.causes, ())
 
 
@@ -195,6 +255,17 @@ class RowOneCarriesWithoutInterpreting(unittest.TestCase):
         # and the owning row is named, so the literal is never mistaken for an adjudicated fact
         self.assertEqual(CARRIED_FOR['PROT_SELGE'], 'laboratory report')
         self.assertEqual(CARRIED_FOR['SCELTA_PROPRIETARIO'], 'owner response')
+
+    def test_a_published_zone_label_is_carried_for_the_demarcated_area_row(self):
+        # ZONA prints 'Zona Contenimento - Salento', 'Area delimitata Monopoli': a
+        # demarcated-zone status, which row 3 establishes from the adopting act.
+        reading = read({'ID_CAMPIONE': 90, 'DATA_CAMPIONE': 1713312000000,
+                        'RISULTATO': 'Positivo', 'ZONA': 'Zona Contenimento - Salento'})
+        self.assertEqual(dict(reading.carried)['ZONA'], 'Zona Contenimento - Salento')
+        self.assertEqual(CARRIED_FOR['ZONA'], 'demarcated area')
+        self.assertNotIn('ZONA', OBSERVATION_ATTRIBUTES)
+        self.assertNotIn('ZONA', COMPARED_FIELDS)
+        self.assertEqual(dict(reading.attributes), {})
 
     def test_a_carried_field_and_an_established_attribute_are_disjoint(self):
         self.assertEqual(set(CARRIED_FOR) & set(OBSERVATION_ATTRIBUTES), set())

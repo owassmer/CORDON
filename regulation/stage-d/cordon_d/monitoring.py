@@ -27,7 +27,7 @@ OBSERVATION_DATES = ('DATA_RILEVAMENTO', 'DATA_PRELIVEO', 'DATA_PRELIEVO',
 # Row 1's own subject: attributes of the observation event, established here. Who
 # performed it is one fact under several publisher names, from the single-technician
 # `TECNICO` to the team code and per-inspector columns of the 2016 infrastructure survey.
-OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
+OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
                           'SQUADRA', 'TECNICO', 'COD_TECNICI',
                           'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
                           'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3',
@@ -37,7 +37,7 @@ OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE
 # difference between them is a disagreement the operator must see. A free-text note, a
 # publication status and a device name are not: they describe the publication or its
 # instrument, not the observation.
-COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
+COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
                        'SQUADRA', 'TECNICO', 'COD_TECNICI',
                        'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
                        'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3')
@@ -46,6 +46,13 @@ COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
 # would manufacture disagreement. A value shared by hundreds of records is a label for the
 # campaign that produced them, not an identity, and is established as an attribute instead.
 PUBLISHER_IDENTIFIERS = ('ID_GIORNALIERO', 'NUMERO_ORDINE', 'OBJECTID', 'IDANDROID')
+# The published columns that route to the document owning the next fact.
+ROUTE_FIELDS = ('DOCUMENTO_CONFERMA', 'LNK_DOCUMENTO_SELGE', 'DOCUMENTO_DECRETO')
+# Published labels that carry no analytical result because the record states an
+# observation of another kind, and those where a result is genuinely absent.
+NO_ANALYTICAL_RESULT = frozenset({'published-visual-observation', 'published-symptom-label'})
+RESULT_ABSENCES = frozenset({'unpublished', 'not-a-result-record', 'unadjudicated-label',
+                             'publisher-annotation'})
 # Another row's subject, carried as the literal the monitoring publisher printed and
 # interpreted by nobody here. The owning row adjudicates what the fact is; a monitoring
 # transcription never outranks the act or the report it transcribes.
@@ -54,6 +61,10 @@ CARRIED_FOR = {
     'PROTOCOLLO': 'laboratory report', 'STRUTTURA_LABORATORIO': 'laboratory report',
     'LABORATORIO': 'laboratory report',
     'ZONA_DELIMITATA': 'demarcated area', 'BUFFER': 'demarcated area',
+    # `ZONA` prints `Zona Contenimento - Salento`, `Area delimitata Monopoli` and the
+    # like: a demarcated-zone status, which row 3 establishes from the adopting act. A
+    # publisher's label beside an observation never stands in for the area in force.
+    'ZONA': 'demarcated area',
     'FOGLIO': 'cadastral parcel', 'FOGLI': 'cadastral parcel', 'PARTICELLA': 'cadastral parcel',
     'PARTICELLE': 'cadastral parcel', 'SEZIONE': 'cadastral parcel', 'ID_PART': 'cadastral parcel',
     'COD_COMUNE': 'cadastral parcel', 'COMUNE_COD': 'cadastral parcel',
@@ -63,6 +74,16 @@ CARRIED_FOR = {
     'UCP_PPTR': 'protected plants', 'BP_PPTR': 'protected plants', 'PAI': 'protected plants',
     'RIF_DECRETO': 'removal execution', 'DATA_ESTIRPAZIONE': 'removal execution',
 }
+
+
+def _scalar_text(value):
+    """A published value this reader can carry as the string the publisher printed.
+
+    A list or mapping is a shape this reader does not interpret; rendering its Python
+    repr would establish a fact the record does not state, and comparing that repr could
+    manufacture a disagreement. Such a value is carried nowhere and says so instead.
+    """
+    return None if isinstance(value, (dict, list, tuple, set)) else meaningful_text(value)
 
 
 def _absence_cause(row, fields):
@@ -78,7 +99,8 @@ def _absence_cause(row, fields):
         return 'no such field is published in this record'
     if all(value is None for _, value in published):
         return 'the field is published and carries no value'
-    if all(meaningful_text(value) is None for _, value in published):
+    if all(_scalar_text(value) is None and not isinstance(value, (dict, list, tuple, set))
+           for _, value in published):
         return 'the field is published and carries only a sentinel or blank'
     return 'a value is published that this reader does not interpret'
 
@@ -211,11 +233,11 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
             coordinates = None
             issues.append('Invalid or incomplete coordinate pair')
     attributes = tuple((field, value) for field in OBSERVATION_ATTRIBUTES
-                       if (value := meaningful_text(row.get(field))) is not None)
+                       if (value := _scalar_text(row.get(field))) is not None)
     # The literal the publisher printed, for a fact another row establishes. The lossless
     # native value stays in the occurrence; nothing here interprets it.
     carried = tuple((field, str(row[field])) for field in CARRIED_FOR
-                    if field in row and meaningful_text(row[field]) is not None)
+                    if field in row and _scalar_text(row[field]) is not None)
     reading = MonitoringObservation(
         release, publication, identifiers, tuple(dates), kind,
         meaningful_text(row.get('SPECIE')), meaningful_text(row.get('CULTIVAR')),
@@ -223,10 +245,10 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
               if (value := meaningful_text(row.get(key))) is not None),
         meaningful_text(row.get('SUBSPECIE')), view_name, coordinates, crs, tuple(issues),
         attributes, carried)
-    return replace(reading, causes=_causes(reading, row, identifiers, issues))
+    return replace(reading, causes=_causes(reading, row, identifiers, issues, native, geometry))
 
 
-def _causes(reading, row, identifiers, issues):
+def _causes(reading, row, identifiers, issues, native, geometry):
     """For every value this reading does not carry, why — as a fact about this reading.
 
     A reading's silence is not the source's. Each cause here is established from the
@@ -250,33 +272,45 @@ def _causes(reading, row, identifiers, issues):
                              ('subspecies', ('SUBSPECIE',)), ('kind', ('TIPOLOGIA',))):
         if getattr(reading, field) is None:
             causes.append((field, _absence_cause(row, published)))
-    if reading.publication.result in ('unpublished', 'not-a-result-record'):
-        # campaign.py already distinguishes these two; the cause names the same distinction
-        # in the same words rather than opening a second vocabulary beside it.
-        causes.append(('result', 'no such field is published in this record'
-                       if reading.publication.result == 'not-a-result-record'
-                       else 'the field is published and carries no value'))
+    if reading.publication.result in NO_ANALYTICAL_RESULT:
+        # An observation the publisher describes rather than tests: the record states
+        # what it states, and no analytical result is missing from it.
+        causes.append(('result', 'the record publishes an observation of another kind, '
+                       'which is not an analytical result'))
+    elif reading.publication.result in RESULT_ABSENCES:
+        # The same causes as any other field, so a sentinel result is not filed as a
+        # silent one; campaign.py's own distinction is the first two of them.
+        causes.append(('result', _absence_cause(row, ('RISULTATO',))))
+    if not reading.publication.document_references:
+        # The route to the laboratory report. Row 2 reads this and must be able to tell a
+        # publisher that printed no route from a column this reader could not read.
+        causes.append(('report_routes', _absence_cause(row, ROUTE_FIELDS)))
     if reading.observation_date is None:
         days = {value for _, value in reading.observation_dates if value is not None}
         unreadable = next((issue for issue in issues if issue.split(':')[0] in OBSERVATION_DATES), None)
         causes.append(('day', 'the published observation dates disagree' if len(days) > 1
                        else unreadable or _absence_cause(row, OBSERVATION_DATES)))
     if reading.coordinates is None:
+        # A geometry key the record carries in a shape this reader does not read - a
+        # polygon, a ring, an explicit null - is published geometry, and saying none is
+        # published would deny what the record holds.
+        published_geometry = 'geometry' in native
         causes.append(('coordinates',
                        'a coordinate pair is published that this reader cannot use'
                        if 'Invalid or incomplete coordinate pair' in issues
+                       else 'geometry is published in a shape this reader does not interpret'
+                       if published_geometry and not (geometry and 'x' in geometry and 'y' in geometry)
                        else 'no geometry is published in this record'
-                       if 'LONGITUDINE' not in row and 'LATITUDINE' not in row
+                       if not published_geometry and 'LONGITUDINE' not in row and 'LATITUDINE' not in row
                        else _absence_cause(row, ('LONGITUDINE', 'LATITUDINE'))))
     causes.extend(_unheld(reading, row))
     return tuple(causes)
 
 
 # Fields whose absence is already named above under the reading's own name for the fact.
-NAMED_ABOVE = (frozenset(OBSERVATION_DATES)
+NAMED_ABOVE = (frozenset(OBSERVATION_DATES) | frozenset(ROUTE_FIELDS)
                | {'ID', 'ID_CAMPIONE', 'SPECIE', 'CULTIVAR', 'SUBSPECIE', 'SINTOMO', 'SINTOMI',
-                  'RISULTATO', 'TIPOLOGIA', 'LONGITUDINE', 'LATITUDINE',
-                  'DOCUMENTO_CONFERMA', 'LNK_DOCUMENTO_SELGE', 'DOCUMENTO_DECRETO'})
+                  'RISULTATO', 'TIPOLOGIA', 'LONGITUDINE', 'LATITUDINE'})
 # Every field some row of this stage has claimed, whether row 1 establishes it, carries it
 # for another row, or reads it into a fact under another name.
 CLAIMED_FIELDS = (NAMED_ABOVE | frozenset(OBSERVATION_ATTRIBUTES)
