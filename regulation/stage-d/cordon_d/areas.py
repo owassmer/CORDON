@@ -67,6 +67,30 @@ PAGE_NOISE = re.compile(r'Bollettino\s+Ufficiale|^\s*\d{1,5}\s*$|^\s*\f')
 
 ZONE_KINDS = {'INFETTA': 'infetta', 'CUSCINETTO': 'cuscinetto', 'CONTENIMENTO': 'contenimento'}
 
+# The causes an absence may name, in DESIGN_PRINCIPLES' own terms. They are
+# written out because they have different remedies - another source, a better
+# reading, an attachment, an owner's ruling - and become interchangeable the
+# moment they are allowed to share the one word "nothing".
+SOURCE_STATES_NONE = 'the source does not state the fact'
+MATERIAL_NOT_HELD = 'the material is not held'
+READING_DID_NOT_RECOVER = 'our reading did not recover it'
+RECOVERED_NOT_ATTACHED = 'it was recovered and could not be attached'
+RECOVERED_UNADJUDICATED = 'it was recovered and remains unadjudicated'
+
+# An act adopts an annex when it names one as an integral part of itself. The
+# acts write that both ways round - "Allegato 1 ... parte integrante" and
+# "Rappresentare i limiti ... con l'Allegato 1 ... che ne formano parte
+# integrante" - and in the plural, so the test is the two words in one clause
+# and not a phrasing. What the annex carries is answered by reading it, not by
+# the sentence that introduces it.
+ADOPTS_ANNEX = re.compile(
+    r'allegat\w*[^.;•]{0,200}?integrant\w*|integrant\w*[^.;•]{0,200}?allegat\w*', re.I)
+
+
+def adopts_an_annex(text) -> bool:
+    """Whether the act's own words adopt an annex as part of the act."""
+    return bool(ADOPTS_ANNEX.search(' '.join((text or '').split())))
+
 
 @dataclass(frozen=True)
 class Sheet:
@@ -197,10 +221,18 @@ class AreaVersion:
     temporal_status: str
     state: str                    # A's own words for subspecies and act-level state
     source_path: str
-    geography_form: str           # annexed | stated-rule | adopts-none | body-unheld
+    # What the act states about its own geography - a fact about the source,
+    # never a record of how far this reader got.
+    geography_form: str           # annexed | stated-rule | adopts-none | body-not-held
     annexes: tuple[Annex, ...]
     statements: tuple[CadastralStatement, ...]
     unresolved: tuple[str, ...]   # literal lines and tables the reader would not guess at
+    # Why this version supplies less than its act states, each entry naming its
+    # own cause. A reading's silence is not the source's, and the causes below
+    # have different remedies: a better reading, another source, an attachment,
+    # an owner's ruling. Recording them interchangeably - or as a property of
+    # the act - is what let two acts answer nothing and say nothing.
+    absence: tuple[str, ...] = ()
 
     @property
     def in_force_on(self):
@@ -562,17 +594,22 @@ def versions(root: Path):
                       key=lambda r: (r['effective_from'], r['provision_version_id'])):
         identity = row['provision_version_id']
         source_path = row.get('source_paths') or ''
+        absence = ()
         if 'unresolved' in identity:
-            form, statements, unread, found = 'body-unheld', (), (
-                'the act\'s own body is not held; its A row is written from a successor recital, '
-                'so no area statement is read for this interval',), ()
+            form, statements, unread, found = 'body-not-held', (), (), ()
+            absence = (MATERIAL_NOT_HELD + ': the act\'s own body is not held. Its A row '
+                       'is written from a successor\'s recital, so no area statement is '
+                       'read for this interval and no successor\'s annex stands in for it.',)
         elif 'area-act-before-gis' in identity:
             form, statements, unread, found = 'adopts-none', (), (), ()
+            absence = (SOURCE_STATES_NONE + ': this act states the order in which an area '
+                       'is created and its cartography transmitted; it adopts no geography '
+                       'of its own.',)
         else:
             text = _act_text(root, source_path)
             found = annexes(text)
             record = documents.get(row['instrument_id'])
-            statements, unread, form = (), (), None
+            statements, unread = (), ()
             if record:
                 # The act's own document bounds each annex cell, so a wrapped or
                 # centred value stays with its comune. The extracted text cannot
@@ -580,7 +617,6 @@ def versions(root: Path):
                 blob = blob_path(store, record['sha256'])
                 if blob.exists():
                     statements, unread = annex_statements(str(blob))
-                    form = 'annexed-document'
             if not statements:
                 # The fallback adds a second reading; it does not overwrite what
                 # the first one could not read. Losing that diagnostic would let
@@ -588,14 +624,25 @@ def versions(root: Path):
                 fallback, fallback_unread = cadastral_statements(text)
                 statements = fallback
                 unread = tuple(unread) + tuple(fallback_unread)
-                if fallback:
-                    form = 'annexed-text'
-            if not statements:
-                # An act states a rule only when nothing in it went unread. If a
-                # reader met an annex and failed on it, that is an unread annex,
-                # not an act that annexes nothing.
-                form = 'annex-unread' if (unread or found) else 'stated-rule'
+            # What the act states about its own geography. An annex table read
+            # from the document settles it; where none was read, the act's own
+            # words do. A missing hash list settles nothing - the 2021 and 2022
+            # acts adopt annexes and print no list.
+            form = 'annexed' if (statements or adopts_an_annex(text) or found) \
+                else 'stated-rule'
+            if not statements and form == 'annexed':
+                absence = (READING_DID_NOT_RECOVER + ': this act adopts an annexed '
+                           'geography and no annex table was read from its document. '
+                           'The geography is in the source; this reader has not '
+                           'recovered it.',)
+            elif not statements:
+                absence = (RECOVERED_NOT_ATTACHED + ': this act states its geography as a '
+                           'rule in its dispositivo rather than annexing it. The rule\'s '
+                           'radii are B\'s and the origin it names is a located positive, '
+                           'which the monitoring row owns; neither is supplied here, so '
+                           'no place is placed in a zone for this interval.',)
         out.append(AreaVersion(
+            absence=absence,
             provision_version_id=identity,
             instrument_id=row['instrument_id'],
             effective_from=_date(row['effective_from']),
@@ -630,10 +677,6 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
     """
     answers = []
     for version in in_force(versions_, day):
-        if version.geography_form in ('body-unheld', 'adopts-none'):
-            answers.append({'version': version.provision_version_id, 'zone': None,
-                            'basis': version.geography_form})
-            continue
         zones_given = set()
         for statement in version.statements:
             verdict = statement.covers(comune=comune, province=province, section=section,
@@ -643,10 +686,24 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                 answers.append({'version': version.provision_version_id, 'zone': statement.zone,
                                 'regime': statement.regime,
                                 'basis': 'act cadastral statement', 'statement': statement})
+        # Every version in force accounts for itself. A version that supplies
+        # nothing and says nothing is indistinguishable from a version that is
+        # not in force, and the operator reads both as no duty.
+        for cause in version.absence:
+            answers.append({'version': version.provision_version_id, 'zone': None,
+                            'basis': cause})
         if version.unresolved:
             answers.append({'version': version.provision_version_id, 'zone': None,
-                            'basis': 'part of this act was not read',
+                            'basis': READING_DID_NOT_RECOVER
+                                     + ': part of this act\'s annex was not read',
                             'unresolved': len(version.unresolved)})
+        if not zones_given and not version.absence and not version.unresolved:
+            # The act was read whole and places this place in none of its zones.
+            # That is the fourth state the decision needs - outside every
+            # demarcated area - and it is a conclusion, not an absence of one.
+            answers.append({'version': version.provision_version_id, 'zone': None,
+                            'basis': SOURCE_STATES_NONE + ': this act was read whole '
+                                     'and places this place in none of its zones'})
     return tuple(answers)
 
 

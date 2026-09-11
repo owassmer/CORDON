@@ -14,7 +14,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from cordon_d.areas import (CadastralStatement, Sheet, annexes, read_scope,
-                            versions, zone_of, membership_evidence, _zone_from)
+                            versions, zone_of, membership_evidence, _zone_from,
+                            MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
+                            RECOVERED_NOT_ATTACHED, SOURCE_STATES_NONE)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -191,11 +193,56 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
                     self.assertTrue(read_scope(s.text).fully_read)
 
     def test_an_unheld_body_reads_nothing_and_says_so(self):
-        held = [v for v in self.versions if v.geography_form == 'body-unheld']
+        held = [v for v in self.versions if v.geography_form == 'body-not-held']
         self.assertTrue(held)
         for version in held:
             self.assertEqual(version.statements, ())
-            self.assertTrue(version.unresolved)
+            self.assertTrue(any(c.startswith(MATERIAL_NOT_HELD) for c in version.absence))
+
+    def test_every_version_that_supplies_nothing_names_its_cause(self):
+        # A version that answers nothing and says nothing reads, to the
+        # operator, exactly like a version that is not in force: no duty.
+        for version in self.versions:
+            if version.statements:
+                continue
+            with self.subTest(version=version.provision_version_id):
+                self.assertTrue(version.absence,
+                                'supplies no statement and names no cause')
+
+    def test_a_reading_limit_is_not_recorded_as_the_act_s_silence(self):
+        # DDS 69/2021 adopts Allegato 1 as an integral part of itself. Calling
+        # it an act that states a rule would write this reader's limit into the
+        # owner as a property of the source.
+        version = next(v for v in self.versions
+                       if '2021-00069' in v.provision_version_id)
+        self.assertEqual(version.geography_form, 'annexed')
+        self.assertTrue(any(c.startswith(READING_DID_NOT_RECOVER)
+                            for c in version.absence))
+
+    def test_the_causes_are_distinguishable(self):
+        causes = {c.split(':')[0] for v in self.versions for c in v.absence}
+        self.assertIn(SOURCE_STATES_NONE, causes)
+        self.assertIn(MATERIAL_NOT_HELD, causes)
+        self.assertIn(READING_DID_NOT_RECOVER, causes)
+        self.assertIn(RECOVERED_NOT_ATTACHED, causes)
+
+    def test_a_version_in_force_always_accounts_for_itself(self):
+        # Asked about a place no act mentions, on a day four versions are in
+        # force, every one of them is answered for.
+        day = date(2026, 9, 1)
+        forced = {v.provision_version_id for v in self.versions if v.in_force_on(day)}
+        answered = {a['version'] for a in
+                    zone_of(self.versions, day, comune='MILANO', province='MILANO',
+                            foglio='1', grain='sheet')}
+        self.assertEqual(forced - answered, set())
+
+    def test_an_act_stating_a_rule_names_what_it_does_not_supply(self):
+        version = next(v for v in self.versions if v.geography_form == 'stated-rule')
+        answers = zone_of(self.versions, version.effective_from, comune='TRIGGIANO',
+                          province='BARI', foglio='3', grain='sheet')
+        mine = [a for a in answers if a['version'] == version.provision_version_id]
+        self.assertTrue(mine)
+        self.assertTrue(mine[0]['basis'].startswith(RECOVERED_NOT_ATTACHED))
 
     def test_the_fasano_range_reaches_the_consumer(self):
         answers = zone_of(self.versions, date(2023, 6, 1), comune='FASANO',
@@ -208,7 +255,8 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         answers = zone_of(self.versions, unread.effective_from, comune=s.comune,
                           province=s.province, grain='sheet')
         mine = [a for a in answers if a['version'] == unread.provision_version_id]
-        self.assertTrue(any(a['basis'] == 'part of this act was not read' for a in mine))
+        self.assertTrue(any(a['basis'].startswith(READING_DID_NOT_RECOVER)
+                            for a in mine))
 
     def test_an_unidentified_question_is_refused(self):
         with self.assertRaises(ValueError):

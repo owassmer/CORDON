@@ -135,13 +135,10 @@
     "instrument_id": "REG-PUGLIA-U181-DIR-2024-00148",
     "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition:unresolved-v1",
     "cited_source_path": "regulation/jurisdiction/regional/AREA-DDS-198-2024-Santeramo-Ginosa.txt",
-    "document_path": "regulation/jurisdiction/regional/AREA-DDS-198-2024-Santeramo-Ginosa.pdf",
     "captured_at": "2026-09-11T05:24:07.389395+00:00",
     "origin": "wedge1-aip provenance archive (migration manifest: inventoried for recovery)",
-    "publisher_refetch": "open: BURP document URL not recorded for these acts",
-    "bytes": 1103490,
-    "sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
-    "content_type": "application/pdf"
+    "publisher_refetch": "open: the act's own document has not been located at the publisher",
+    "error": "this act's own body is not held. Its A row is written from DDS 198/2024's recital, and the cited source path is that successor's document; recording the successor's bytes here would assert them as this act's own."
   },
   {
     "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
