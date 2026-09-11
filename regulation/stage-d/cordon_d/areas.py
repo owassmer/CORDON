@@ -45,6 +45,7 @@ HEADER_TEXT = re.compile(
     r'|PIANTE\s*RISULTATE|CATASTALI|PRESENTE\s*ALLEGATO|DIRIGENTE', re.I)
 WHOLE_PROVINCE = re.compile(r'INTERO\s+TERRITORIO\s+PROVINCIALE', re.I)
 WHOLE_COMUNE = re.compile(r'INTERO\s+TERRITORIO\s+COMUNALE', re.I)
+PART_COMUNE = re.compile(r'PARTE\s+TERRITORIO\s+COMUNALE', re.I)
 SECTION = re.compile(r'SEZIONE\s+([A-Z])\s*:?', re.I)
 SHEET_TOKEN = re.compile(r'(\d+)\s*(\*?)')
 PARCELS = re.compile(r'\bparticell\w*\b\s*:?', re.I)
@@ -88,6 +89,8 @@ class CadastralStatement:
                 return None
             return (self.province or '').upper() == province.upper() or None
         if comune is not None and (self.comune or '').upper() != comune.upper():
+            return None
+        if self.scope == 'part-comune-extent-unstated':
             return None
         if self.scope == 'whole-comune':
             return True
@@ -188,6 +191,10 @@ def _classify(text):
         return 'whole-province', ()
     if WHOLE_COMUNE.search(text):
         return 'whole-comune', ()
+    if PART_COMUNE.search(text) and not _parse_sheets(PART_COMUNE.split(text)[-1]):
+        # The act says part of the comune lies in the zone without saying which
+        # part. That is a statement, and it settles nothing about a sheet.
+        return 'part-comune-extent-unstated', ()
     if PARCELS.search(text):
         # Some annexes narrow a sheet to named particelle ("FOGLIO 5: particelle
         # 260, 264"). Only the sheet before the parcel list is a sheet; reading
@@ -526,12 +533,42 @@ def annex_statements(document) -> tuple:
                 if zone is None:
                     unresolved.append(f'annex table names no zone: {" | ".join(columns)[:120]}')
                     continue
+                # A cell shared down a run of comuni is drawn once, spanning
+                # their rows. The table reports that span as the cell's own
+                # height, so a comune is covered by the value whose cell
+                # vertically contains it - which is how the page reads.
+                boxes = [getattr(r, 'cells', None) for r in getattr(table, 'rows', [])]
+
+                def spans(column):
+                    found = []
+                    for index, row in enumerate(rows):
+                        cell = boxes[index][column] if index < len(boxes) and boxes[index] \
+                            and column < len(boxes[index]) else None
+                        if cell and index > header_at and len(row) > column and row[column].strip():
+                            found.append((cell[1], cell[3], row[column].strip()))
+                    return found
+
+                value_spans, province_spans = spans(value_col), spans(province_col)
+
+                def covering(spans_, cell):
+                    if not cell:
+                        return None
+                    middle = (cell[1] + cell[3]) / 2
+                    for top, bottom, text in spans_:
+                        if top - 0.5 <= middle <= bottom + 0.5:
+                            return text
+                    return None
+
                 province = None
-                for row in rows[header_at + 1:]:
+                for index, row in enumerate(rows[header_at + 1:], start=header_at + 1):
                     if len(row) <= max(province_col, comune_col, value_col):
                         continue
+                    cells = boxes[index] if index < len(boxes) and boxes[index] else []
+                    comune_box = cells[comune_col] if comune_col < len(cells) else None
                     if row[province_col]:
                         province = row[province_col]
+                    elif comune_box:
+                        province = covering(province_spans, comune_box) or province
                     comune = row[comune_col] or None
                     value = row[value_col]
                     if not value and comune and _classify(comune)[0] in (
@@ -539,12 +576,13 @@ def annex_statements(document) -> tuple:
                         # A province-wide statement is printed across the comune
                         # column, because it names no comune.
                         value, comune = comune, None
+                    if not value and comune and comune_box:
+                        value = covering(value_spans, comune_box)
                     if not value:
                         if comune:
                             unresolved.append(
-                                f'{heading} :: {comune} states no scope in its own row; the '
-                                f'table shares one cell down a run of comuni and the extractor '
-                                f'does not report that span')
+                                f'{heading} :: {comune} states no scope of its own and no cell '
+                                f'of this table covers its row')
                         continue
                     if HEADER_TEXT.search(value) and not re.search(r'\d|INTERO', value, re.I):
                         continue
