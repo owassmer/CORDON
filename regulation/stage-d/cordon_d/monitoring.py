@@ -78,15 +78,6 @@ class MonitoringObservation:
         return next(iter(values)) if len(values) == 1 else None
 
     @property
-    def published_positive(self):
-        if self.publication.result in {'published-positive', 'published-positive-duplicate-label',
-                                       'published-positive-and-removal-label'}:
-            return True
-        if self.publication.result == 'published-negative':
-            return False
-        return None
-
-    @property
     def symptom_presence(self):
         values = {value.casefold() for _, value in self.symptoms}
         if not values and self.publication.result == 'published-symptom-label':
@@ -103,13 +94,6 @@ class MonitoringObservation:
         # OBJECTID and daily/device IDs have different publisher meanings.
         values = {value for field, value in self.identifiers if field in {'ID', 'ID_CAMPIONE'}}
         return next(iter(values)) if len(values) == 1 else None
-
-    @property
-    def candidate_key(self):
-        """Candidate same observation, to compare before any deduplication."""
-        if self.observation_reference is None or self.observation_date is None:
-            return None
-        return self.observation_reference, self.observation_date
 
 
 def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
@@ -208,7 +192,10 @@ def observations(root: Path):
 
 POSITIVE_RESULTS = frozenset({'published-positive', 'published-positive-and-removal-label'})
 DUPLICATE_RESULT = 'published-positive-duplicate-label'
-UNKNOWN_RESULTS = frozenset({'unpublished', 'unadjudicated-label', 'not-a-result-record', 'publisher-annotation'})
+UNKNOWN_RESULTS = frozenset({'unpublished', 'unadjudicated-label', 'not-a-result-record', 'publisher-annotation',
+                             # A visual inspection or a symptom label is an observation, not an
+                             # analytical result; it can neither agree nor disagree with a test.
+                             'published-visual-observation', 'published-symptom-label'})
 COMPARED_FIELDS = ('result', 'species', 'cultivar', 'subspecies', 'kind', 'symptom_presence')
 
 

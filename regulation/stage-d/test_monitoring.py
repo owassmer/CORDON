@@ -15,19 +15,19 @@ class MonitoringTests(unittest.TestCase):
     def test_result_does_not_replace_observation_type_or_symptoms(self):
         result = self.row({'TIPOLOGIA': 'Ispezione visiva', 'RISULTATO': None,
                            'SINTOMO': 'Presente', 'SPECIE': 'Mandorlo'})
-        self.assertIsNone(result.published_positive)
+        self.assertEqual(result.publication.result, 'unpublished')
         self.assertTrue(result.symptom_presence)
         self.assertEqual(result.kind, 'Ispezione visiva')
         self.assertIsNone(self.row({'SINTOMO': 0}).symptom_presence)
-        self.assertFalse(self.row({'RISULTATO': 'Negativo'}).published_positive)
-        self.assertIsNone(self.row({'RISULTATO': 'Dubbio'}).published_positive)
+        self.assertEqual(self.row({'RISULTATO': 'Negativo'}).publication.result, 'published-negative')
+        self.assertEqual(self.row({'RISULTATO': 'Dubbio'}).publication.result, 'published-doubtful')
 
     def test_date_is_source_day_and_identifiers_are_not_plant_identity(self):
         book = self.row({'ID': 123.0, 'DATA_RILEVAMENTO': datetime(2023, 2, 4)})
         sit = self.row({'attributes': {'ID_CAMPIONE': '123', 'DATA_CAMPIONE': 1675468800000}},
                        view_name='Campioni 2022')
         self.assertEqual(sit.observation_date, date(2023, 2, 4))
-        self.assertEqual(book.candidate_key, sit.candidate_key)
+        self.assertEqual((book.observation_reference, book.observation_date), (sit.observation_reference, sit.observation_date))
         self.assertNotEqual(book.occurrence_key, replace(sit, release='another').occurrence_key)
         self.assertIsNone(self.row({'OBJECTID': 123, 'DATA_CAMPIONE': date(2023, 2, 4)}).observation_reference)
         self.assertNotEqual(self.row({'ID': '00123'}).observation_reference, book.observation_reference)

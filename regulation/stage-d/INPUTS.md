@@ -26,30 +26,35 @@ demonstrations confer no completion on the other rows.
 
 The source population is `corpus/sources/monitoring/`: the twelve campaign
 workbooks and the CKAN CSV under `campaign/`, and all 101 observation point
-layers of the eight SIT services that publish them under `sit/<service>/<layer>/`.
-Acquisition records name each release and page; `scripts/acquire_monitoring.py`
-recaptures them without reusing old bytes. Of the 194 SIT services these eight
-are the only ones with observation points. `MonitoraggioXFPasp` holds
-nursery-site and Leccino-planting polygons and is not an observation source;
-grid, cadastre and buffer polygons belong to the area, population and parcel rows.
+layers of the eight SIT services that publish them under `sit/<service>/<layer>/`,
+selected from the publisher's service inventory at capture. Acquisition records
+name each release and page; `scripts/acquire_monitoring.py` recaptures them
+without reusing old bytes. `MonitoraggioXFPasp` holds nursery-site and
+Leccino-planting polygons and is not an observation source; grid, cadastre and
+buffer polygons belong to the area, population and parcel rows. The tallies below
+describe the capture recorded in `campaign/releases.json` and the layer records
+(10 September 2026); a recapture changes them.
 
 `observations(root)` reads every record of every retained release through one
 path and keeps every original field: 4,318,100 observations. `distinct_observations(root)`
 relates them: one publisher reference on one day is one observation, wherever it
-is published. That gives 2,320,354 distinct observations — 1,867,537 identified by
-a reference, with at most five publications each (workbook, CSV, host view,
-positives view, infected-plant layer), and 452,817 that cannot be related to
-anything. Counts across releases and views are never additive: 688,519
-observations appear in workbook, CSV and SIT; 590,971 in workbook and SIT;
-587,422 only in SIT (visual inspections, assessments, the current campaign and
-the infected-plant layers); 549 only in a workbook.
+is published. That gives 2,320,354 distinct observations. 1,867,537 are
+identified by a reference, with at most five publications each (workbook, CSV,
+host view, positives view, infected-plant layer). 452,817 cannot be related to
+anything: 223,458 carry no reference (221,617 rows of the 2013–2017 workbooks and
+1,841 rows of early views without an identifier column), 229,358 carry a value
+their own view reuses on that day, and one workbook row has no readable day.
+Counts across releases and views are never additive: 688,519 observations appear
+in workbook, CSV and SIT; 590,971 in workbook and SIT; 587,422 only in SIT
+(visual inspections, assessments, the current campaign and the infected-plant
+layers); 549 only in a workbook; 76 in workbook and CSV.
 
 | Published fields | Usable input and meaning |
 |---|---|
-| `ID`, `ID_CAMPIONE`; earlier `NUMERO_ORDINE`, `OBJECTID`, daily and device identifiers | From 2018 the reference identifies one observation across its publications. In the 2013–2017 SIT views it is a daily counter: one value covers up to eleven plants of different species on one day. A value a view gives to several rows on one day is not an identifier; those rows stay single, uncorrelated observations. Administrative and view identifiers never identify a physical plant. |
+| `ID`, `ID_CAMPIONE`; earlier `NUMERO_ORDINE`, `OBJECTID`, daily and device identifiers | From 2018 the reference identifies one observation across its publications, with rare same-day reuse (144 rows) that the rule below leaves single. In the 2013–2017 SIT views it is a daily counter: one value covers up to eleven plants of different species on one day. A value a view gives to several rows on one day is not an identifier; those rows stay single, uncorrelated observations. Administrative and view identifiers never identify a physical plant. |
 | `DATA_RILEVAMENTO`, `DATA_CAMPIONE`, `DATA_PRELIVEO`, `DATA_RILIEVO` | The recorded observation or sampling day. Excel midnight is date storage; ArcGIS UTC epoch values are converted to the Puglia calendar day, and the early campaign's 23:00 UTC values belong to the following local day. Campaign names are not date boundaries. Report, protocol and removal dates remain separate fields. |
-| `TIPOLOGIA`; explicitly named visual-inspection and assessment views | Distinguish samples, visual inspections and assessments. An observation without an analytical result is not a negative test; the 2018–2020 inspection and assessment views have no result field at all. |
-| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato (the 2013–2017 removed-plant layers). A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the finding is the report's (next row). |
+| `TIPOLOGIA`; explicitly named visual-inspection and assessment views | Distinguish samples, visual inspections and assessments. An observation without an analytical result is not a negative test; the 2017–2020 inspection and assessment views have no result field at all, and a visual-inspection or symptom label is not a result. |
+| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato (the 2013–2017 removed-plant layers and the 2013–14 positives view). A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the finding is the report's (next row). |
 | `SPECIE`, `CULTIVAR`, `SUBSPECIE` | Recorded host, cultivar and explicit sample-level subspecies. A view's subspecies title is context; it is not substituted for an absent sample-level identification. All hosts and result states are retained. |
 | `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence/absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
 | Native geometry/CRS, latitude/longitude, municipality and cadastral fields | Published location. SIT supplies EPSG:32633; workbooks give longitude/latitude columns that establish axes, not a datum. Neither states positional error, so metric use waits for the population row's qualification. |
@@ -67,33 +72,41 @@ What the stream hands A–C, all as candidates:
 - Distinct observations with an agreed result per caller-defined occasion
   (`occasion_sets`) for negative-survey support. They are observations, not
   inspection units; unit identity needs the plant population row, so
-  `observation_inventory_complete` stays unsupplied.
-- Over 2013–2026: 29,770 distinct positive observations, 1,720,384 distinct
-  negatives, and 570,200 with no agreed result (inspections and assessments
+  `observation_inventory_complete` stays unsupplied. The positive set is
+  label-level: a published positive defeats a negative-survey conclusion in C
+  before any report is read, which is the conservative direction.
+- Over 2013–2026: 30,103 positive distinct observations, of which 9,867 are
+  identified observations from 2018 on and 20,236 are 2013–2017 publications,
+  where one observation can appear up to four times (workbook, host view,
+  positives view, removed-plant layer) and cannot be counted once; 1,721,362
+  distinct negatives; 568,889 with no agreed result (inspections and assessments
   without a result field, pending, doubtful, duplicate-only, blank, and the
-  disagreements below).
+  result disagreements below).
 
 What the population shows, read and not reconciled:
 
-- In 2013–2017 cross-release correspondence is unavailable: the workbooks carry
-  no reference (223,458 observations) and the SIT views use daily counters
-  (229,358 rows reused within their own view on one day). Those observations are
-  counted per publication.
+- In 2013–2017 cross-release identity is unreliable. The workbooks carry no
+  reference, and the SIT views use daily counters: a value a view reuses on a day
+  stays uncorrelated, but a value used once in each of two views on that day
+  still correlates them. Where those publications differ, the group is exposed
+  as a disagreement and withheld from the positive and negative counts; where
+  they agree, they merge and cannot be told from coincidence.
 - 16,569 identified observations (0.9%) have publications that disagree on a
-  field: species 16,523, coordinates 2,350, result 1,543, symptoms 2. From 2018
-  on the species disagreement is a spelling convention — the positives views
-  write `OLIVO` where the host views, infected-plant layers and workbooks write
+  field: species 16,523, coordinates 2,350, result 232, symptoms 2. From 2018 on
+  the species disagreement is a spelling convention — the positives views write
+  `OLIVO` where the host views, infected-plant layers and workbooks write
   `Olivo (Olea europaea)` for the same observation — so nearly every positive
-  carries one; it is exposed, not resolved, and it is not identity doubt. The
-  6,471 disagreeing observations of 2013–2017 are mostly counter collisions
-  across views, where a visual inspection and a sample share one value on one
-  day. Only a result disagreement withholds an observation from the positive
-  and negative counts. No publication is preferred.
+  carries one; it is exposed, not resolved, and it is not identity doubt. By
+  observation day, 6,471 of the disagreeing observations fall in 2013–2017, where
+  a sample and another view's row share one counter value on one day. Only a
+  result disagreement withholds an observation from the positive and negative
+  counts. No publication is preferred.
 - The publisher's projections disagree with each other. For 1 October–31 December
   2021, a period chosen after the reader was written, the adapter yields 1,772
   distinct positive observations on 33 days; the positives views hold 1,772 rows;
-  the infected-plant layer and the workbook hold 1,769. The three extra are
-  observations the positives view publishes and the other two do not.
+  the infected-plant layer and the workbook hold 1,769. The three extra are olive
+  positives published by both the SIT positives view and the Olivo host view; the
+  workbook, the CKAN CSV and the infected-plant layer omit them.
 
 ## Materials that are not standalone input gaps
 

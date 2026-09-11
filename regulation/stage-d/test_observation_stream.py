@@ -8,7 +8,9 @@ import unittest
 
 from openpyxl import Workbook
 
-from cordon_c.core import MissingInput
+from cordon_c.core import Evaluation, MissingInput
+from cordon_c.survey import observed_survey_support
+from cordon_c.temporal import no_detection_anchor
 from cordon_d.evidence import file_digest
 from cordon_d.monitoring import distinct_observations, detection_days, occasion_sets, located_positives
 from cordon_d.spatial import metric_point
@@ -152,6 +154,22 @@ class ObservationStream(unittest.TestCase):
         self.assertEqual(len(sets[3]['negative']), 6)  # 101 on 10 March, 404, two unreferenced, two reused-counter negatives
         self.assertEqual(len(sets[3]['other']), 2)     # the cross-release disagreement and the duplicate-only label
         self.assertTrue(sets[3]['positive'].isdisjoint(sets[3]['negative']))
+
+    def test_c_entry_points_take_the_candidates_and_refuse_to_conclude_without_the_missing_inputs(self):
+        with self.assertRaises(MissingInput):
+            no_detection_anchor(date(2022, 1, 1), detection_days(self.groups), date(2022, 12, 31),
+                                detection_record_complete=False)
+        sets = occasion_sets(self.groups, lambda g: g.day.month)[3]
+        given = dict(population_and_method_qualification=Evaluation(True), required_risk_structure=Evaluation(True),
+                     required_performances_complete=Evaluation(True), official_method_and_scope=Evaluation(True),
+                     independence_established=False, observation_inventory_complete=False)
+        with_positives = observed_survey_support(None, '', date(2022, 3, 31), strata=(), negative_units=(),
+                                                 positive_units=sets['positive'], **given)
+        self.assertIs(with_positives.truth, False)
+        without = observed_survey_support(None, '', date(2022, 3, 31), strata=(), negative_units=(sets['negative'],),
+                                          positive_units=frozenset(), **given)
+        self.assertIsNone(without.truth)
+        self.assertTrue(any('complete usable observation inventory' in need for need in without.needs))
 
     def test_located_positives_carry_sources_but_no_spatial_support(self):
         located = list(located_positives(self.groups))
