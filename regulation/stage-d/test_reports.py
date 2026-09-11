@@ -5,8 +5,8 @@ from pathlib import Path
 import unittest
 
 from cordon_d.findings import comparison, confirmation_candidates
-from cordon_d.reports import (Result, Row, _classify, _flat_rows, _header_role, _italian_date, _letter_facts,
-                              _line_rows, _merged_header, _table_rows, _transposed)
+from cordon_d.reports import (Result, Row, _classify, _designation, _flat_rows, _header_role, _italian_date,
+                              _letter_facts, _line_rows, _merged_header, _table_rows, _transposed)
 
 LETTER = {'assays': ('qPCR',), 'analytes': ('Xylella fastidiosa',), 'positives_only': False}
 
@@ -62,7 +62,6 @@ class HeaderReading(unittest.TestCase):
         rows, _ = _table_rows(2, 'text-layer', _Table(cells), LETTER)
         first, second = rows[0].results
         self.assertEqual((first.assay, second.assay), ('Esito qPCR 2010', 'Esito qPCR 2006'))
-        self.assertEqual((first.family, second.family), ('qPCR', 'qPCR'))  # a family, never an identity
         self.assertNotEqual(first.assay, second.assay)
 
     def test_a_column_designating_no_test_carries_no_designation(self):
@@ -71,15 +70,31 @@ class HeaderReading(unittest.TestCase):
         rows, _ = _table_rows(2, 'text-layer', _Table(cells), LETTER)
         result, = rows[0].results
         self.assertIsNone(result.assay)
-        self.assertEqual(result.family, 'qPCR')  # the letter names exactly one
 
-    def test_a_top_header_row_never_spans_into_the_column_beside_it(self):
-        cells = [['Codice committente', 'Data campionamento', 'Esito qPCR', None],
-                 ['123456', '01/06/2024', 'Positivo', 'Assente']]
-        header, _ = _merged_header(cells)
+    def test_a_header_does_not_span_into_an_unheaded_or_a_symptom_column(self):
+        unheaded = [['Codice committente', 'Data campionamento', 'Esito qPCR', None],
+                    ['123456', '01/06/2024', 'Positivo', 'Assente']]
+        header, _ = _merged_header(unheaded)
         self.assertEqual(header[3], '')  # the symptom column is not a second Esito qPCR
-        rows, _ = _table_rows(2, 'text-layer', _Table(cells), LETTER)
+        rows, _ = _table_rows(2, 'text-layer', _Table(unheaded), LETTER)
         self.assertEqual([r.kind for r in rows[0].results], ['positive'])
+        # A named symptom column: the span reaches it, so its own label must decide the role.
+        named = [['Codice committente', 'Data campionamento', 'Esito qPCR Harper 2010', None],
+                 [None, None, None, 'Sintomatologia'],
+                 ['123456', '01/06/2024', 'Positivo', 'Presente']]
+        rows, _ = _table_rows(2, 'text-layer', _Table(named), LETTER)
+        self.assertEqual([(r.assay, r.kind) for r in rows[0].results], [('Esito qPCR Harper 2010', 'positive')])
+
+    def test_a_column_stating_every_label_at_once_designates_no_test(self):
+        flat = 'Id Data rilevamento Specie Comune ESITO ANALISI - PCR in tempo reale Harper et al., 2010 Data saggio'
+        self.assertIsNone(_designation(flat, ''))
+        self.assertEqual(_designation('ANALISI / Esito qPCR Harper 2010', ''), 'Esito qPCR Harper 2010')
+
+    def test_the_subspecies_a_column_names_is_the_one_after_subsp(self):
+        cells = [['Codice committente', 'Data rilevamento', 'Esito Harper et al., 2010 - X. fastidiosa subsp. multiplex'],
+                 ['123456', '01/06/2024', 'Rilevata']]
+        rows, _ = _table_rows(2, 'text-layer', _Table(cells), LETTER)
+        self.assertEqual(rows[0].results[0].analyte, 'Xylella fastidiosa subsp. multiplex')
 
     def test_a_transposed_table_is_recognized_only_when_its_first_column_is_the_id_and_its_columns_are_codes(self):
         cells = [['Id', '1644899', '1645134'], ['Data rilevamento', '28/02/2024', '28/02/2024'], ['Esito laboratorio', 'Positivo', 'Positivo']]
@@ -132,22 +147,26 @@ class LineReading(unittest.TestCase):
                 '232278 16/03/2018 olivo 40,53 17,63 Francavilla Positivo Positivo 28/03/2018\n')
         rows = _line_rows(2, 'ocr:ita:200dpi', text, letter)
         self.assertTrue(all(x.assay is None for r in rows for x in r.results))
-        self.assertTrue(all(x.family is None for r in rows for x in r.results))  # the letter names two
         self.assertEqual([x.kind for x in rows[0].results], ['negative', 'positive'])
 
-    def test_a_scanned_line_carrying_more_results_than_its_page_has_columns_states_none(self):
+    def test_a_scanned_line_showing_a_second_row_states_no_result_but_a_complete_row_does(self):
+        # The second line absorbed a neighbour whose own code OCR lost: four dates, one code.
         text = ('231207 16/03/2018 olivo 40,50 17,55 Negativo Positivo 28/03/2018\n'
-                '231942 16/03/2018 olivo 40,53 17,63 Positivo Positivo 28/03/2018\n'
-                '232278 16/03/2018 olivo 40,53 17,63 Positivo Positivo 28/03/2018\n'
-                '40338086 17/03/2018 olivo 40,53 17,63 Positivo Dubbio Positivo Dubbio Negativo Dubbio 28/03/2018\n')
-        rows = _line_rows(3, 'ocr:ita:200dpi', text, LETTER)
-        self.assertEqual([len(r.results) for r in rows], [2, 2, 2, 0])
-        absorbed = rows[-1]
-        self.assertEqual(absorbed.reference, '40338086')
+                '155801 24/11/2017 olivo 40,50 17,61 Positivo Positivo 05/01/2018 24/11/2017 0livo 40,50 '
+                '17,61 Positivo Positivo 05/01/2018\n')
+        complete, absorbed = _line_rows(3, 'ocr:ita:200dpi', text, LETTER)
+        self.assertEqual([x.kind for x in complete.results], ['negative', 'positive'])
+        self.assertEqual(absorbed.results, ())
         self.assertTrue(absorbed.unread)
-        self.assertIn('Dubbio', absorbed.text)          # its text is kept
-        two = _line_rows(4, 'ocr:ita:200dpi', text.split('\n')[3] + '\n', LETTER)
-        self.assertEqual(len(two[0].results), 6)        # too few rows on the page to state a width
+        self.assertIn('05/01/2018', absorbed.text)      # its text is kept
+        # A line naming two sample codes is two rows however few results it shows. (A second
+        # code that follows a date is split into its own row earlier, so this one carries none.)
+        two_codes = _line_rows(4, 'ocr:ita:200dpi', '231207 olivo Positivo 231942 olivo Negativo\n', LETTER)
+        self.assertEqual(len(two_codes), 1)
+        self.assertEqual(two_codes[0].results, ())
+        # The rule is the line's own, so one complete row on a page of one is still read.
+        alone = _line_rows(5, 'ocr:ita:200dpi', text.split('\n')[0] + '\n', LETTER)
+        self.assertEqual([x.kind for x in alone[0].results], ['negative', 'positive'])
 
     def test_ocr_noise_is_unread_not_a_result_and_an_impossible_date_is_none(self):
         self.assertEqual(_classify('rostivo'), 'unread')
@@ -180,6 +199,12 @@ class LetterReading(unittest.TestCase):
         self.assertEqual(garbled['analytes'], ('Xylella fastidiosa',))
         self.assertEqual(_classify('Xy/ella'), 'unread')  # tolerance is for the subject, never a result
 
+    def test_a_report_number_with_a_letter_prefix_is_not_replaced_by_the_protocol_register(self):
+        facts = _letter_facts('RAPPORTO DI PROVA/TEST REPORT : N. XF 015/2024\nProt. Selge 17/2024\n')
+        self.assertEqual(facts['identity'], 'Rapporto di prova XF 015/2024')
+        self.assertEqual(_letter_facts('Rapporto di prova N. 89a/2024\n')['identity'], 'Rapporto di prova 89a/2024')
+        self.assertEqual(_letter_facts('RAPPORTO DI PROVA N° 1038/22\n')['identity'], 'Rapporto di prova 1038/22')
+
     def test_a_delivering_laboratory_in_a_sentence_is_not_the_reporting_laboratory(self):
         facts = _letter_facts('da parte del Laboratorio DAFNE consegnati il 04/06/2024\nOggetto: esiti\n')
         self.assertIsNone(facts['laboratory'])
@@ -187,7 +212,7 @@ class LetterReading(unittest.TestCase):
 
 class Comparison(unittest.TestCase):
     def results(self, *pairs):
-        return tuple(Result('c', 'Esito saggio Dupas', 'Dupas', analyte, text, _classify(text)) for analyte, text in pairs)
+        return tuple(Result('c', 'Esito saggio Dupas', analyte, text, _classify(text)) for analyte, text in pairs)
 
     def test_comparison_happens_at_the_level_the_report_states(self):
         subsp = self.results(('Xylella fastidiosa subsp. fastidiosa', 'Non rilevata'),
@@ -210,7 +235,7 @@ class ArticleTwoSix(unittest.TestCase):
     """What a report hands `confirmation_facts`, and what it makes C refuse."""
 
     def row(self, *columns):
-        results = tuple(Result(f'c{i}', designation, 'qPCR', 'Xylella fastidiosa', text, _classify(text))
+        results = tuple(Result(f'c{i}', designation, 'Xylella fastidiosa', text, _classify(text))
                         for i, (designation, text) in enumerate(columns))
         return Row(2, 'text-layer', '747145', 'sample', date(2020, 2, 20), 'olivo',
                    None, None, None, results, date(2020, 2, 25), 'row', False)
@@ -222,6 +247,14 @@ class ArticleTwoSix(unittest.TestCase):
         self.assertEqual(candidates['second_test'], 'Esito qPCR 2010')
         self.assertEqual(candidates['first_sample'], candidates['second_sample'])
         self.assertIsNone(candidates['first_genome_target'])
+
+    def test_the_same_assay_on_two_dates_or_marked_a_repetition_is_one_test(self):
+        for second in ('Esito qPCR Harper 2010 del 11/05/2021', 'Esito qPCR Harper 2010 (ripetizione)'):
+            row = self.row(('Esito qPCR Harper 2010 del 04/05/2021', 'Positivo'), (second, 'Positivo'))
+            self.assertIsNone(confirmation_candidates(row, sample='747145'), second)
+        two = self.row(('Esito qPCR Harper 2010 del 04/05/2021', 'Positivo'),
+                       ('Esito qPCR Ouyang 2013 del 04/05/2021', 'Positivo'))
+        self.assertIsNotNone(confirmation_candidates(two, sample='747145'))
 
     def test_one_column_or_one_designation_or_a_negative_column_supplies_no_candidate(self):
         self.assertIsNone(confirmation_candidates(self.row(('Esito qPCR 2010', 'Positivo')), sample='747145'))
@@ -253,25 +286,6 @@ class ArticleTwoSix(unittest.TestCase):
         self.assertIsNone(target.truth)
         self.assertIn('resolved genome-target identities', target.needs)
         self.assertEqual(facts[('EU-2020-1201:2(6):v1', 'different genome target')], target)
-
-    def test_the_same_designation_on_both_columns_would_refuse_confirmation_which_is_why_it_is_not_the_identity(self):
-        from cordon_c.bindings import confirmation_facts
-        from cordon_c.core import Evaluation, Snapshot
-        owner = json.loads((Path(__file__).resolve().parents[1] / 'stage-a/authoring-eu.json').read_text())
-        rows = owner if isinstance(owner, list) else owner['provision_versions']
-        snapshot = Snapshot([r for r in rows if r['stable_provision_id'] == 'EU-2020-1201:2(6)'],
-                            dict(clocks=[], parameters=[], dispositions=[]))
-        facts = confirmation_facts(snapshot, date(2021, 6, 1),
-                                   first_positive_annex_iv=Evaluation(True), second_positive_annex_iv=Evaluation(True),
-                                   first_test='qPCR', second_test='qPCR',          # the family name, wrongly used
-                                   first_sample='747145', second_sample='747145',
-                                   first_extract=None, second_extract=None,
-                                   first_genome_target=None, second_genome_target=None,
-                                   same_extract_route_appropriate=Evaluation(None),
-                                   inside_demarcated_area=Evaluation(True))
-        by_predicate = {predicate: value for (_, predicate), value in facts.items()}
-        self.assertIs(by_predicate['second positive Annex IV molecular test on the same plant sample'
-                                   ' or, where appropriate, the same plant extract'].truth, False)
 
 
 if __name__ == '__main__':

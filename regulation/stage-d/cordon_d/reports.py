@@ -3,14 +3,16 @@
 A report is read from what its pages contain: a text layer where present, OCR
 (Tesseract, Italian) where a page has none, with the method recorded per page.
 Identity, stated counts, assays and analytes are literal strings read from the
-letter; table rows are read by their printed headers, never by position, family,
-year, laboratory or file name. A line the reader cannot resolve is an `unread`
-row carrying its text; nothing is guessed. Reports supply the laboratory's
-diagnosis and the Article 2(6) test identities; they never print a Cq and are
-not the official confirmation decision. Relating what is read to observations
-belongs to `findings`, so a change there does not invalidate a reading.
+letter. A page with a text layer is read by its printed headers; a scanned page
+has none to recover, so its columns are read positionally and designate no test.
+No reading turns on a file name, a year or a laboratory. A line the reader cannot
+resolve is an `unread` row carrying its text; nothing is guessed. Reports supply
+the laboratory's diagnosis and, where a report designates two tests, the Article
+2(6) test and sample identities; they print no genome target, only nine print a
+Ct as a laboratory note, and none is the official confirmation decision.
+Relating what is read to observations belongs to `findings`, so a change there
+does not invalidate a reading.
 """
-import collections
 from dataclasses import asdict, dataclass
 from datetime import date
 from hashlib import sha256
@@ -44,6 +46,11 @@ ANALYTE = re.compile(r'(Xylella\s+fastidiosa(?:\s+(?:subsp\.?|sottospecie|sub\.)
 # Used for the letter only; a result is never read tolerantly.
 ANALYTE_OCR = re.compile(r'Xy[l1/|i]{1,2}e[l1/|i]{1,2}a\s+fast[il1]d[il1]osa(?:\s+(?:subsp\.?|sottospecie|sub\.)\s*(pauca|multiplex|fastidiosa))?', re.I)
 SUBSPECIES = re.compile(r'\b(pauca|multiplex|fastidiosa)\b', re.I)
+QUALIFIED_SUBSPECIES = re.compile(r'(?:subsp\.?|sottospecie|sub\.)\s*(pauca|multiplex|fastidiosa)', re.I)
+# The labels an annex prints for its other columns; a header text carrying several of
+# them is the whole header, not one column's designation.
+_LABELS = re.compile(r'data\s*(?:rilev|campion|prelie|saggio|prova)|specie|comune|latitud|longitud|'
+                     r'codice\s*(?:squadra|busta|pool)|sintom|operatore|\bzona\b|laboratorio', re.I)
 DATE = re.compile(r'\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})\b')
 CODE = re.compile(r'(?<![\d.,])(\d{5,9})(?![\d.,])')  # a date part never reaches five digits
 MONTHS = {'gennaio': 1, 'febbraio': 2, 'marzo': 3, 'aprile': 4, 'maggio': 5, 'giugno': 6, 'luglio': 7,
@@ -69,7 +76,6 @@ def reader_version() -> str:
 class Result:
     column: str          # the printed header, or 'letter' when the letter states the result for every listed sample
     assay: str | None    # the test as the column designates it, verbatim; None where the column designates none
-    family: str | None   # the assay name matched inside that designation; a family name, never a test identity
     analyte: str | None  # analyte the column or letter states
     text: str            # literal string read
     kind: str            # detected / not-detected / positive / negative / doubtful / undetermined / unread
@@ -180,9 +186,13 @@ def page_texts(document):
 
 def _letter_facts(text: str) -> dict:
     facts: dict = {}
-    m = re.search(r'Rapporto\s+di\s+prova\s*(?:N[°.]?|n[°.]?)?\s*([0-9]+[A-Za-z_]*(?:\s*/\s*[0-9]{2,4})?)', text, re.I)
+    # A report number may carry a letter prefix of its own (`N. XF 015/2024`); taking only
+    # the digits would fall through to the protocol register, a different number.
+    m = re.search(r'Rapporto\s+di\s+prova(?:\s*/\s*TEST\s+REPORT)?\s*:?\s*(?:N[°.]?|n[°.]?)?\s*'
+                  r'((?:[A-Z]{1,3}\s*)?[0-9]+[A-Za-z_]*(?:\s*/\s*[0-9]{2,4})?)', text, re.I)
     if m:
-        facts['identity'] = 'Rapporto di prova ' + re.sub(r'\s+', '', m.group(1)).rstrip('_')
+        printed = re.sub(r'\s*/\s*', '/', re.sub(r'\s+', ' ', m.group(1))).strip().rstrip('_')
+        facts['identity'] = 'Rapporto di prova ' + printed
     m = re.search(r'Prot\.?\s*(?:Selge|SELGE)?\s*(?:n\.?)?\s*([0-9]+\s*/\s*[0-9]{4})', text, re.I)
     if m and 'identity' not in facts:
         facts['identity'] = 'Prot. Selge ' + re.sub(r'\s+', '', m.group(1))
@@ -232,6 +242,10 @@ def _segment_role(header: str):
         return 'identifying-text'
     if re.match(r'data\b', h):
         return 'sampling_date' if re.search(r'rilev|campion|prelie|ricev', h) else 'result_date'
+    # A symptom column records what the surveyor saw, not what the laboratory found; naming
+    # it keeps a `Presente` from being read as a result when a header spans beside it.
+    if re.search(r'sintom', h):
+        return 'symptom'
     if re.search(r'esito|risultat|analisi\s*(diagnost|molecolar)', h):
         return 'result'
     if re.search(r'(?<!sotto)specie', h):
@@ -291,22 +305,25 @@ def _transposed(cells):
     return None
 
 
-def _designation(header, value, letter_assays):
-    """The test as this column designates it, and the assay name inside that designation.
+def _designation(header, value):
+    """The test as this column designates it, verbatim.
 
     Two columns of one report are two tests when the laboratory designates them
     differently ("Esito qPCR 2010" beside "Esito qPCR 2006"); the assay name they
-    share is a family, not an identity, so it is carried separately and never
-    stands in for one. A column that designates no test carries none; the letter's
-    assay supplies the family only when the letter names exactly one.
+    share is a family, not an identity, and never stands in for one. A column that
+    designates no test carries none: the letter's own assay names stay on the report
+    (`Report.assays`), which is where a column-less annex states them.
     """
     match = ASSAY_NAMES.search(header) or ASSAY_NAMES.search(value)
-    family = match.group(0) if match else (letter_assays[0] if len(letter_assays) == 1 else None)
     if match is None or match.string is not header:
-        return None, family
+        return None
     segments = [s.strip() for s in header.split(' / ') if s.strip()]
     printed = next((s for s in reversed(segments) if ASSAY_NAMES.search(s)), header)
-    return re.sub(r'\s+', ' ', printed), family
+    # A header with no separable segments states every column's label at once and so
+    # designates no single column's test.
+    if len(segments) == 1 and sum(1 for s in _LABELS.findall(printed)) > 1:
+        return None
+    return re.sub(r'\s+', ' ', printed)
 
 
 def _result(header, value, letter_assays, letter_analytes):
@@ -314,7 +331,8 @@ def _result(header, value, letter_assays, letter_analytes):
     # A sub-column named for a subspecies states that column's analyte; the spanning header
     # above it names the family assay, not the analyte.
     tail = header[assay.end():] if assay and assay.string is header else ''
-    subspecies = SUBSPECIES.search(tail)
+    # `subsp. multiplex` names the subspecies; the `fastidiosa` of the species name does not.
+    subspecies = QUALIFIED_SUBSPECIES.search(tail) or SUBSPECIES.search(tail)
     analyte = ANALYTE.search(header)
     stated = (f'Xylella fastidiosa subsp. {subspecies.group(1).lower()}' if subspecies else
               analyte.group(1) if analyte else
@@ -322,8 +340,7 @@ def _result(header, value, letter_assays, letter_analytes):
     # A result cell carrying more than one result is the collapsed cell of several rows;
     # which result belongs to this row is not stated, so the row states none.
     kind = 'unread' if len(CELL_RESULT_TOKEN.findall(value)) > 1 else _classify(value)
-    designation, family = _designation(header, value, letter_assays)
-    return Result(header.replace('\n', ' '), designation, family, stated, value, kind)
+    return Result(header.replace('\n', ' '), _designation(header, value), stated, value, kind)
 
 
 def _table_rows(page_number, method, table, letter, inherited=None):
@@ -365,8 +382,9 @@ def _table_rows(page_number, method, table, letter, inherited=None):
             elif role and role not in fields:
                 fields[role] = v
         if letter_result:
-            fields['results'].append(Result('letter', None, letter['assays'][0] if len(letter['assays']) == 1 else None,
-                                            letter['analytes'][0] if len(letter['analytes']) == 1 else None, 'Positivi', 'positive'))
+            fields['results'].append(Result('letter', None,
+                                            letter['analytes'][0] if len(letter['analytes']) == 1 else None,
+                                            'Positivi', 'positive'))
         ref = fields.get('reference') or ''
         code = CODE.search(ref) if reference_kind != 'daily' else re.search(r'\d+', ref)
         results = tuple(fields['results'])
@@ -395,7 +413,8 @@ def _flat_rows(page_number, method, text, letter):
     header_text = ' '.join(lines[anchor:starts[0]])
     if not re.search(r'Data\s*rilev', header_text, re.I):
         return []
-    designation, family = _designation(header_text, '', letter['assays'])
+    # A flat table prints one cell per line, so its columns are positional and designate
+    # no test; the letter's assays stay on the report.
     analyte = letter['analytes'][0] if len(letter['analytes']) == 1 else None
     out = []
     for n, start in enumerate(starts):
@@ -404,7 +423,7 @@ def _flat_rows(page_number, method, text, letter):
         body = ' | '.join(cells)
         dates = DATE.findall(body)
         hits = [m.group(0) for m in RESULT_TOKEN.finditer(body)]
-        results = tuple(Result('flat column', designation, family, analyte, t, _classify(t)) for t in hits)
+        results = tuple(Result('flat column', None, analyte, t, _classify(t)) for t in hits)
         species = next((c for c in cells if re.search(r'olea|olivo|prunus|mandorlo|oleandro|vite|nerium|polygala|rosmarin', c, re.I)), None)
         out.append(Row(page_number, method, cells[0], 'sample', _safe_date(dates[0]) if dates else None, species,
                        None, None, None, results, _safe_date(dates[-1]) if len(dates) > 1 else None, body[:400], not results))
@@ -417,10 +436,11 @@ def _line_rows(page_number, method, text, letter):
     that follows a result date on the same line starts the next row.
 
     A scanned annex prints no column headers this reader can recover, so its result
-    columns are positional and designate no test: `assay` is None and only the
-    letter's single assay supplies a family. A line yielding more results than the
-    page's own rows show columns has absorbed a neighbouring row, and which of them
-    belongs to this sample is not stated, so the row states none.
+    columns are positional and designate no test; the letter's assays stay on the
+    report. One annex row prints one sample code and at most a sampling and a result
+    date, so a line carrying more than that has absorbed a neighbour whose own code
+    OCR lost: which result belongs to this sample is not stated, and the row states
+    none while keeping its text.
     """
     buffers: list[str] = []
     for raw in text.split('\n'):
@@ -439,23 +459,19 @@ def _line_rows(page_number, method, text, letter):
                 buffers.append(piece)
             elif buffers and re.search(r'positiv|negativ|rilevat|determinabil|dubbi|\d{1,2}/\d{1,2}/\d{4}|[A-Za-zà]{3,}', piece, re.I):
                 buffers[-1] += ' ' + piece
-    rows = [(line, [m.group(0) for m in RESULT_TOKEN.finditer(line)]) for line in buffers
-            # A number with neither a date nor a result beside it is a postal code or a protocol
-            # number in the letter, not a sample row.
-            if len(line) >= 20 and (DATE.search(line) or RESULT_TOKEN.search(line))]
-    widths = [len(hits) for _, hits in rows if hits]
-    # The page's own rows state how many result columns its annex prints; a mode drawn
-    # from fewer than three of them states nothing, so no line is then held back.
-    columns = collections.Counter(widths).most_common(1)[0][0] if len(widths) >= 3 else None
-    family = letter['assays'][0] if len(letter['assays']) == 1 else None
     analyte = letter['analytes'][0] if len(letter['analytes']) == 1 else None
     out = []
-    for line, hits in rows:
-        code = CODE.search(line)
+    for line in buffers:
         dates = DATE.findall(line)
-        absorbed = columns is not None and len(hits) > columns
+        hits = [m.group(0) for m in RESULT_TOKEN.finditer(line)]
+        # A number with neither a date nor a result beside it is a postal code or a protocol
+        # number in the letter, not a sample row.
+        if len(line) < 20 or not (dates or hits):
+            continue
+        code = CODE.search(line)
+        absorbed = len(CODE.findall(line)) > 1 or len(dates) > 2
         results = () if absorbed else tuple(
-            Result(f'column {i + 1}', None, family, analyte, t, _classify(t)) for i, t in enumerate(hits))
+            Result(f'column {i + 1}', None, analyte, t, _classify(t)) for i, t in enumerate(hits))
         species = re.search(r'\b(olivo|oleandro|mandorlo|vite|ciliegio|prunus|olea|nerium|rosmarino|polygala|lavand\w+|mirto|acacia|quercus)[^|0-9]{0,30}', line, re.I)
         out.append(Row(page_number, method, code.group(1), 'sample', _safe_date(dates[0]) if dates else None,
                        species.group(0).strip() if species else None, None, None, None, results,

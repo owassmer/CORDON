@@ -21,13 +21,21 @@ MATCHABLE = {'sample', 'in-cell'}
 POSITIVE_LABELS = ('published-positive', 'published-positive-and-removal-label')
 COMPARABLE_LABELS = POSITIVE_LABELS + ('published-negative', 'published-doubtful')
 DETECTED = ('positive', 'detected')
+# A test designated by the same assay on another date, or marked a repetition, is that
+# assay run again, not a second test.
+_RUN = re.compile(r'\s*(?:\bdel\b\s*)?\d{1,2}[/.-]\d{1,2}[/.-]\d{2,4}|\(\s*ripetizion\w*\s*\)', re.I)
+
+
+def _test_identity(designation: str) -> str:
+    return _RUN.sub('', designation).strip(' -–,;').casefold()
 
 
 def confirmation_candidates(row, *, sample: str):
     """The Article 2(6) arguments a report row supplies, and the ones it cannot.
 
     Two result columns that the laboratory designates differently and that both
-    read as detected are two positive tests on one sample. The genome target each
+    read as detected are two positive tests on one sample; two designations that
+    differ only by a date or a repetition marker are one assay run twice. The genome target each
     assay amplifies is printed by no report in this population, and an assay name
     is not a genome target (`analytical-result`), so it is passed as unavailable
     and `cordon_c.bindings.confirmation_facts` refuses the Article 2(6) conclusion
@@ -35,10 +43,10 @@ def confirmation_candidates(row, *, sample: str):
     the row does not show two differently designated detected tests.
     """
     detected = [r for r in row.results if r.kind in DETECTED and r.assay]
-    designations = {r.assay for r in detected}
-    if len(detected) < 2 or len(designations) < 2:
+    distinct = {_test_identity(r.assay): r.assay for r in detected}
+    if len(detected) < 2 or len(distinct) < 2:
         return None
-    first, second = sorted(designations)[:2]
+    first, second = sorted(distinct.values())[:2]
     return {'first_test': first, 'second_test': second,
             'first_sample': sample, 'second_sample': sample,
             'first_extract': None, 'second_extract': None,
@@ -103,7 +111,9 @@ def findings(root: Path, store: Path):
                 'status': status, 'matches': matches, 'comparison': verdict,
                 'results': [(r.column, r.assay, r.analyte, r.kind) for r in row.results] if row else None,
                 'sampling_date': row.sampling_date if row else None,
-                'reference_kind': row.reference_kind if row else None}
+                'reference_kind': row.reference_kind if row else None,
+                # The sample identity is the observation's by construction: the row matched it.
+                'confirmation': confirmation_candidates(row, sample=reference) if row else None}
 
     def flush():
         if current is None:
