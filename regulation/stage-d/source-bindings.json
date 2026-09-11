@@ -39,7 +39,7 @@
     {
       "id": "result-documents",
       "name": "Official laboratory result documents",
-      "purpose": "Supply the laboratory's result, taxon or subspecies, method, report identity and report date for the sample named by the document.",
+      "purpose": "Supply the laboratory's stated result per assay with its analyte, the sample identity, the method and the report's identity and dates for the samples the report names.",
       "contracts": [
         "official-finding",
         "analytical-result",
@@ -47,11 +47,13 @@
         "sample-custody"
       ],
       "routes": [
-        "DOCUMENTO_CONFERMA links published in regional monitoring records"
+        "DOCUMENTO_CONFERMA, LNK_DOCUMENTO_SELGE and DOCUMENTO_DECRETO links published in regional monitoring records",
+        "https://webadf.sit.puglia.it/openDoc/apridocumento (confirmation letters and rapporti di prova)",
+        "http://cartografia.sit.puglia.it/doc/xylella/ (subspecies-identification rapporti)"
       ],
-      "population": "Every result document referenced by an admitted monitoring release, followed through its own source link.",
-      "reader": "cordon_d.campaign, cordon_d.releases and a source-structure report reader still to be completed",
-      "open": "Reacquire the referenced documents and derive report-row joins and corrections without a case list or authored expected answer."
+      "population": "Every document referenced by an admitted monitoring release: 1,918 routes naming 1,175 documents, of which 16 are not served by the publisher.",
+      "reader": "cordon_d.reports and cordon_d.findings",
+      "open": "A report supplies the laboratory's diagnosis, not the Regional Service's official confirmation and not a Cq; no public report in this population prints one. In the scanned confirmation letters OCR recovers fewer rows than the letter states in 233 documents, so 11,068 publications keep their label and gain no report row. Laboratory designation, accreditation and custody follow their own sources."
     },
     {
       "id": "official-areas",

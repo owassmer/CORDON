@@ -37,10 +37,12 @@ Acquisition records in the tree name each release by URL, capture time and hash;
 the tree holds no source bytes. `scripts/audit_store.py` re-hashes every blob.
 
 Beside the blobs, `derived/` holds regenerable Parquet keyed by blob hash and
-reader version: lossless native occurrences and typed readings per blob. It is a
-cache, never an owner; a changed reader invalidates it, and deleting it costs
-one ingest. DuckDB reads it in process; no spatial predicate or legal reading
-moves into SQL.
+reader version: lossless native occurrences and typed readings per observation
+release, and one reading per report document. It is a cache, never an owner; a
+changed reader invalidates it, and deleting it costs one ingest. A reader's
+version covers the modules that produce a reading and not those that relate
+readings to each other, so relating them again is free. DuckDB reads it in
+process; no spatial predicate or legal reading moves into SQL.
 
 ## Implementation rule
 
