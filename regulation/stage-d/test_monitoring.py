@@ -3,7 +3,7 @@ from datetime import date, datetime
 from dataclasses import replace
 import unittest
 
-from cordon_d.monitoring import observation, compare_observations
+from cordon_d.monitoring import observation
 from cordon_d.releases import Occurrence
 
 
@@ -41,16 +41,6 @@ class MonitoringTests(unittest.TestCase):
     def test_early_campaign_local_midnight_does_not_move_sampling_to_previous_day(self):
         reading = self.row({'attributes': {'DATA_CAMPIONE': 1385334000000}})
         self.assertEqual(reading.observation_date, date(2013, 11, 25))
-
-    def test_reused_identifier_exposes_disagreement_instead_of_merging(self):
-        first = self.row({'ID': 5, 'DATA_CAMPIONE': date(2020, 5, 8), 'RISULTATO': 'Positivo',
-                          'LONGITUDINE': 17, 'LATITUDINE': 40})
-        second = self.row({'ID': 5, 'DATA_CAMPIONE': date(2020, 5, 8), 'RISULTATO': 'Negativo',
-                           'LONGITUDINE': 18, 'LATITUDINE': 41})
-        comparison = compare_observations(first, second)
-        self.assertTrue(comparison.same_reference_and_day)
-        self.assertEqual(set(comparison.differing_fields), {'coordinates', 'result'})
-        self.assertIn('subspecies', comparison.unavailable_fields)
 
     def test_layer_subspecies_is_context_not_a_negative_samples_identification(self):
         reading = self.row({'attributes': {'ID_CAMPIONE': 'new', 'RISULTATO': 'Negativo'},

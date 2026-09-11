@@ -8,22 +8,33 @@
       "purpose": "Supply the observed sample, plant or survey unit; sampling date and location; species; published result; and links to the confirming report.",
       "contracts": [
         "official-finding",
-        "analytical-result",
-        "laboratory-status",
-        "sample-custody",
-        "plant-population",
-        "survey-design",
         "survey-performance",
-        "pest-classification",
+        "plant-population",
         "evaluation-context"
       ],
       "routes": [
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
         "https://webapps.sit.puglia.it/arcgis/rest/services"
       ],
-      "population": "All records in each admitted campaign release and SIT monitoring layer, including positive, negative and other result states.",
-      "reader": "cordon_d.campaign and cordon_d.releases",
-      "open": "Reacquire each admitted release and establish how repeated observations relate to the same physical plant or survey unit. A result label does not select the population."
+      "population": "Every record of the twelve campaign workbooks, the CKAN release and the 101 observation point layers of the eight SIT services that publish them: 4,318,100 observations, 2,320,354 distinct, all hosts and all result states.",
+      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_positives",
+      "open": "Cross-release identity is unavailable for 2013–2017, where the workbooks carry no reference and the SIT views use a daily counter; those observations are counted per publication. Plant identity, the official finding and metric location belong to the population, report and area rows."
+    },
+    {
+      "id": "adopted-plans-and-listings",
+      "name": "Adopted survey plans and pest listings",
+      "purpose": "Supply the operative survey design for a campaign, area and host population, and the pest and host listings that classify an observation.",
+      "contracts": [
+        "survey-design",
+        "pest-classification"
+      ],
+      "routes": [
+        "Regional plans and national programmes retained as Stage A sources under regulation/",
+        "EU quarantine-pest and host listings retained under regulation/closure/eu/"
+      ],
+      "population": "The plan and listing versions reached by accepted A provisions; their stated values are already Stage B parameters.",
+      "reader": "Stage B parameters supply the stated values; the finite population and strata per campaign are established with the plant and surface population row",
+      "open": "Establish the per-campaign target population and strata when the plant and surface population row exists."
     },
     {
       "id": "result-documents",
