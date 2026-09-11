@@ -3,7 +3,7 @@
 An observation is the input grain here. Sample-reference matches are exposed for
 comparison; they do not merge physical plants or choose a winning publication.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, datetime, timezone
 from decimal import Decimal
 import json
@@ -23,6 +23,55 @@ from .store import adopt, audit, blob_path as store_blob_path, derived_path, dum
 
 OBSERVATION_DATES = ('DATA_RILEVAMENTO', 'DATA_PRELIVEO', 'DATA_PRELIEVO',
                      'DATA_CAMPIONE', 'DATA_RILIEVO')
+
+# Row 1's own subject: attributes of the observation event, established here.
+OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
+                          'SQUADRA', 'TECNICO', 'NOME_DISPOSITIVO', 'STATO', 'NOTE_RILEVATORE')
+# Of those, the ones two publications of one observation should state alike, so a
+# difference between them is a disagreement the operator must see. A free-text note and
+# a publication status are not: they describe the publication, not the observation.
+COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
+                       'SQUADRA', 'TECNICO')
+# Published identifiers other than the sample reference. Carried per publication and never
+# compared: a view's own feature id differs between views by construction, so comparing it
+# would manufacture disagreement.
+PUBLISHER_IDENTIFIERS = ('CODICE_CAMPIONAMENTO', 'ID_GIORNALIERO', 'NUMERO_ORDINE',
+                         'OBJECTID', 'IDANDROID')
+# Another row's subject, carried as the literal the monitoring publisher printed and
+# interpreted by nobody here. The owning row adjudicates what the fact is; a monitoring
+# transcription never outranks the act or the report it transcribes.
+CARRIED_FOR = {
+    'PROT_SELGE': 'laboratory report', 'DATA_PROT_SELGE': 'laboratory report',
+    'PROTOCOLLO': 'laboratory report', 'STRUTTURA_LABORATORIO': 'laboratory report',
+    'LABORATORIO': 'laboratory report',
+    'ZONA_DELIMITATA': 'demarcated area', 'BUFFER': 'demarcated area',
+    'FOGLIO': 'cadastral parcel', 'FOGLI': 'cadastral parcel', 'PARTICELLA': 'cadastral parcel',
+    'PARTICELLE': 'cadastral parcel', 'SEZIONE': 'cadastral parcel', 'ID_PART': 'cadastral parcel',
+    'COD_COMUNE': 'cadastral parcel', 'COMUNE_COD': 'cadastral parcel',
+    'CUAA': 'land standing', 'AZIENDA': 'land standing',
+    'SCELTA_PROPRIETARIO': 'owner response',
+    'MONUMENTALE_ARIF': 'protected plants', 'VINCOLO_IDROGEOLOGICO': 'protected plants',
+    'UCP_PPTR': 'protected plants', 'BP_PPTR': 'protected plants', 'PAI': 'protected plants',
+    'RIF_DECRETO': 'removal execution', 'DATA_ESTIRPAZIONE': 'removal execution',
+}
+
+
+def _absence_cause(row, fields):
+    """Why this reader produced no value from these published fields, in the record's terms.
+
+    The causes are distinct remedies, not synonyms for emptiness: a source that states
+    nothing needs another source, a sentinel needs nothing, and a value this reader does
+    not interpret needs a better reading. The list is open; an unrecognised situation
+    says so rather than borrowing one of the others.
+    """
+    published = [(field, row[field]) for field in fields if field in row]
+    if not published:
+        return 'no such field is published in this record'
+    if all(value is None for _, value in published):
+        return 'the field is published and carries no value'
+    if all(meaningful_text(value) is None for _, value in published):
+        return 'the field is published and carries only a sentinel or blank'
+    return 'a value is published that this reader does not interpret'
 
 
 def reference(value):
@@ -69,6 +118,12 @@ class MonitoringObservation:
     coordinates: tuple[float, float] | None
     crs: str | None
     issues: tuple[str, ...]
+    # Attributes of the observation event this reader establishes, as the publisher names them.
+    attributes: tuple[tuple[str, str], ...] = ()
+    # Literals for facts another row establishes; nothing here interprets them.
+    carried: tuple[tuple[str, str], ...] = ()
+    # Why this reading carries no value for a field it reads.
+    causes: tuple[tuple[str, str], ...] = ()
 
     @property
     def occurrence_key(self):
@@ -147,12 +202,59 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
         except (TypeError, ValueError):
             coordinates = None
             issues.append('Invalid or incomplete coordinate pair')
-    return MonitoringObservation(
+    attributes = tuple((field, value) for field in OBSERVATION_ATTRIBUTES
+                       if (value := meaningful_text(row.get(field))) is not None)
+    # The literal the publisher printed, for a fact another row establishes. The lossless
+    # native value stays in the occurrence; nothing here interprets it.
+    carried = tuple((field, str(row[field])) for field in CARRIED_FOR
+                    if field in row and meaningful_text(row[field]) is not None)
+    reading = MonitoringObservation(
         release, publication, identifiers, tuple(dates), kind,
         meaningful_text(row.get('SPECIE')), meaningful_text(row.get('CULTIVAR')),
         tuple((key, value) for key in ('SINTOMO', 'SINTOMI')
               if (value := meaningful_text(row.get(key))) is not None),
-        meaningful_text(row.get('SUBSPECIE')), view_name, coordinates, crs, tuple(issues))
+        meaningful_text(row.get('SUBSPECIE')), view_name, coordinates, crs, tuple(issues),
+        attributes, carried)
+    return replace(reading, causes=_causes(reading, row, identifiers, issues))
+
+
+def _causes(reading, row, identifiers, issues):
+    """For every value this reading does not carry, why — as a fact about this reading.
+
+    A reading's silence is not the source's. Each cause here is established from the
+    record, and where the reader cannot establish one it says so rather than borrowing
+    a neighbouring cause. `DistinctObservation.uncorrelated_because` answers the group
+    question; these refine it at the grain of one publication and one field.
+    """
+    causes = []
+    if reading.observation_reference is None:
+        if 'ID' in row or 'ID_CAMPIONE' in row:
+            cause = _absence_cause(row, ('ID', 'ID_CAMPIONE'))
+        elif identifiers:
+            cause = ('the sample reference is not published; this record is identified by '
+                     + ', '.join(field for field, _ in identifiers))
+        else:
+            cause = 'no identifier is published in this record'
+        causes.append(('reference', cause))
+    if reading.symptom_presence is None:
+        causes.append(('symptom_presence', _absence_cause(row, ('SINTOMO', 'SINTOMI'))))
+    for field, published in (('species', ('SPECIE',)), ('cultivar', ('CULTIVAR',)),
+                             ('subspecies', ('SUBSPECIE',)), ('kind', ('TIPOLOGIA',))):
+        if getattr(reading, field) is None:
+            causes.append((field, _absence_cause(row, published)))
+    if reading.observation_date is None:
+        days = {value for _, value in reading.observation_dates if value is not None}
+        unreadable = next((issue for issue in issues if issue.split(':')[0] in OBSERVATION_DATES), None)
+        causes.append(('day', 'the published observation dates disagree' if len(days) > 1
+                       else unreadable or _absence_cause(row, OBSERVATION_DATES)))
+    if reading.coordinates is None:
+        causes.append(('coordinates',
+                       'a coordinate pair is published that this reader cannot use'
+                       if 'Invalid or incomplete coordinate pair' in issues
+                       else 'no geometry is published in this record'
+                       if 'LONGITUDINE' not in row and 'LATITUDINE' not in row
+                       else _absence_cause(row, ('LONGITUDINE', 'LATITUDINE'))))
+    return tuple(causes)
 
 
 @dataclass(frozen=True)
@@ -234,7 +336,15 @@ def _reading_row(reading: MonitoringObservation, store: Path, ordinal: int) -> d
             'species': reading.species, 'cultivar': reading.cultivar, 'subspecies': reading.subspecies,
             'symptom_presence': reading.symptom_presence, 'x': x, 'y': y, 'crs': reading.crs,
             'report_routes': [route for _, route in reading.publication.document_references],
-            'issues': list(reading.issues)}
+            'issues': list(reading.issues),
+            'identifiers': [{'field': f, 'value': v} for f, v in reading.identifiers],
+            'attributes': [{'field': f, 'value': v} for f, v in reading.attributes],
+            'carried': [{'field': f, 'value': v} for f, v in reading.carried],
+            'causes': [{'field': f, 'cause': c} for f, c in reading.causes]}
+
+
+def _pairs(values, second='value'):
+    return tuple((item['field'], item[second]) for item in values or ())
 
 
 READINGS_SCHEMA = None
@@ -252,8 +362,15 @@ def _readings_schema():
             ('cultivar', pyarrow.string()), ('subspecies', pyarrow.string()),
             ('symptom_presence', pyarrow.bool_()), ('x', pyarrow.float64()), ('y', pyarrow.float64()),
             ('crs', pyarrow.string()), ('report_routes', pyarrow.list_(pyarrow.string())),
-            ('issues', pyarrow.list_(pyarrow.string()))])
+            ('issues', pyarrow.list_(pyarrow.string())),
+            ('identifiers', _named(pyarrow, 'value')), ('attributes', _named(pyarrow, 'value')),
+            ('carried', _named(pyarrow, 'value')), ('causes', _named(pyarrow, 'cause'))])
     return READINGS_SCHEMA
+
+
+def _named(pyarrow, second):
+    """A published field name beside what this reader carries for it."""
+    return pyarrow.list_(pyarrow.struct([('field', pyarrow.string()), (second, pyarrow.string())]))
 
 
 def _ensure_derived(store: Path, release: Release, version: str) -> tuple[Path, Path, bool]:
@@ -327,7 +444,11 @@ UNKNOWN_RESULTS = frozenset({'unpublished', 'unadjudicated-label', 'not-a-result
                              # A visual inspection or a symptom label is an observation, not an
                              # analytical result; it can neither agree nor disagree with a test.
                              'published-visual-observation', 'published-symptom-label'})
-COMPARED_FIELDS = ('result', 'species', 'cultivar', 'subspecies', 'kind', 'symptom_presence')
+# An established fact whose conflicts are invisible is not established, so every attribute
+# this reader establishes is compared. Publisher identifiers are not: a view's own feature
+# id differs between views by construction.
+COMPARED_FIELDS = ('result', 'species', 'cultivar', 'subspecies', 'kind',
+                   'symptom_presence') + COMPARED_ATTRIBUTES
 
 
 @dataclass(frozen=True)
@@ -348,10 +469,22 @@ class Member:
     crs: str | None
     report_routes: tuple[str, ...]
     issues: tuple[str, ...]
+    identifiers: tuple[tuple[str, str], ...] = ()
+    attributes: tuple[tuple[str, str], ...] = ()
+    carried: tuple[tuple[str, str], ...] = ()
+    causes: tuple[tuple[str, str], ...] = ()
 
     @property
     def occurrence(self):
         return self.sha256, self.locator
+
+    def attribute(self, field):
+        """An established observation attribute under the name the publisher prints."""
+        return dict(self.attributes).get(field)
+
+    def cause(self, field):
+        """This reader's own answer to why it carries no value for that field."""
+        return dict(self.causes).get(field)
 
 
 def _same_point(a, b):
@@ -385,7 +518,7 @@ class DistinctObservation:
         """Distinct available values of one compared field across members."""
         found = set()
         for member in self.members:
-            value = getattr(member, field)
+            value = getattr(member, field) if hasattr(member, field) else member.attribute(field)
             if value is None or field == 'result' and value in UNKNOWN_RESULTS:
                 continue
             found.add(value)
@@ -438,7 +571,9 @@ def _member_from_row(row: dict) -> Member:
     coordinates = (row['x'], row['y']) if row['x'] is not None and row['y'] is not None else None
     return Member(row['release'], row['view'], row['path'], row['sha256'], row['locator'], row['result'],
                   row['kind'], row['species'], row['cultivar'], row['subspecies'], row['symptom_presence'],
-                  coordinates, row['crs'], tuple(row['report_routes'] or ()), tuple(row['issues'] or ()))
+                  coordinates, row['crs'], tuple(row['report_routes'] or ()), tuple(row['issues'] or ()),
+                  _pairs(row.get('identifiers')), _pairs(row.get('attributes')),
+                  _pairs(row.get('carried')), _pairs(row.get('causes'), 'cause'))
 
 
 def distinct_observations(root: Path):
