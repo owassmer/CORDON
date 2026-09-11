@@ -144,13 +144,14 @@ identifies no comune or province is refused rather than answered.
 **What it does not supply.** No positional error bound: no source for these
 areas publishes one, so the metric consumers (`pest_free_hectare`,
 `inward_band`, `pni_geography_facts`) stay unfed and the distance work waits
-on a qualified frame. The published SIT polygons are captured as the
-publisher's representation at their capture time — 28 layers, 35 features,
-EPSG:32633 — and are not offered as an act's adopted geography: DDS 45/2025
-puts the shapefile transmission after the act, so a capture inside a version's
-interval can still show the previous geometry, and neither a second capture
-nor a matching sheet summary distinguishes a stale polygon from the adopted
-one. That correspondence needs evidence that names the version. The operative
+on a qualified frame. The publisher's zone polygons are not acquired here,
+because nothing consumes them: DDS 45/2025 puts the shapefile transmission
+after the act, so a capture inside a version's interval can still show the
+previous geometry, and neither a second capture nor a matching sheet summary
+distinguishes a stale polygon from the adopted one. That correspondence needs
+evidence naming the version, so the polygons enter when a consumer exists — a
+qualified metric frame, or a cross-check on the annex reading — and not
+before. The operative
 legal-area state is A's `PUG-LR4-2017:Art.3(2)` gate and Annex III eligibility
 is A's EU annex; neither is decided here.
 

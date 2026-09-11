@@ -225,22 +225,5 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
             self.assertTrue(assertion.support[0].reading)
 
 
-class AcquisitionProvenance(unittest.TestCase):
-    """A resumed capture must not date old bytes to the run that reused them."""
-
-    def test_retained_pages_carry_their_own_capture_time(self):
-        records = sorted((ROOT / 'corpus/sources/areas/sit').glob('*/*/*/release.json'))
-        self.assertTrue(records)
-        for path in records:
-            record = json.loads(path.read_text())
-            with self.subTest(layer=record['name']):
-                for page in record['pages']:
-                    self.assertIsNotNone(page.get('captured_at'))
-                self.assertLessEqual(record['captured_from'], record['captured_through'])
-                # The interval reported is the pages' own, never the run's.
-                self.assertEqual(record['captured_from'],
-                                 min(p['captured_at'] for p in record['pages']))
-
-
 if __name__ == '__main__':
     unittest.main()

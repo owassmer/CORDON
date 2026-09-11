@@ -64,14 +64,11 @@
       ],
       "routes": [
         "The adopting regional act and its cadastral annex (BURP; the 26 acts reached by accepted A are held in the store, named by hash in corpus/sources/areas/acts.json)",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFF/MapServer",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer"
+        "The publisher's zone services under webapps.sit.puglia.it - an available route, not acquired: no consumer admits a polygon yet"
       ],
-      "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes give 373 statements over 4,316 stated sheets. The publisher's current zone polygons are captured beside them: 28 layers, 35 features, EPSG:32633.",
-      "reader": "cordon_d.areas.versions, zone_of, membership_evidence; cordon_d.releases and cordon_d.spatial for the captured polygons",
-      "open": "A cell is read only when every consequential token in it is accounted for; four cells are unread on that rule and are named on their version. A sheet the act does not mark wholly contained reaches the sheet but leaves a parcel within it undecided. No source publishes a positional error bound, so the metric consumers stay unfed. A captured polygon is the publisher's representation at its capture time and is not the act's adopted geography: DDS 45/2025 puts the shapefile transmission after the act, and neither a repeated capture nor an agreeing sheet summary distinguishes a stale polygon from the adopted one - that needs evidence naming the version."
+      "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes carry the area statements this input is read from.",
+      "reader": "cordon_d.areas.versions, zone_of, membership_evidence",
+      "open": "A cell is read only when every consequential token in it is accounted for; four cells are unread on that rule and are named on their version. A sheet the act does not mark wholly contained reaches the sheet but leaves a parcel within it undecided. No source publishes a positional error bound, so the metric consumers stay unfed. A published polygon is not the act's adopted geography: DDS 45/2025 puts the shapefile transmission after the act, and neither a repeated capture nor an agreeing sheet summary distinguishes a stale polygon from the adopted one - that needs evidence naming the version, which is why the zone services are not acquired until a consumer requires them."
     },
     {
       "id": "cadastre",
