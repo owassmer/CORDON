@@ -30,16 +30,19 @@ import json
 from pathlib import Path
 import re
 
+from .store import blob_path, store_root
+
 ZONE_HEADING = re.compile(r'ZONA\s+(INFETTA|CUSCINETTO|CONTENIMENTO)', re.I)
 ANNEX_MARKER = re.compile(r'ALLEGATO\s*2\b', re.I)
-HEADER_PROVINCE = re.compile(r'\bPROVINCIA\b')
+# Bari is a citta metropolitana, so the annexes head that column both ways.
+HEADER_PROVINCE = re.compile(r"\bPROVINCIA\b|\bCITTA'?\s*\n?\s*METROPOLITANA\b", re.I)
 HEADER_COMUNE = re.compile(r'\bCOMUNE\b')
 HEADER_SHEETS_TITLE = re.compile(r'\bFOGLI(?:O|A)?\b\s*DI\s*MAPPA', re.I)
 HEADER_SHEETS = re.compile(r'\bFOGLI(?:O|A)?\b', re.I)
 # Vocabulary the tables print as column headings and legends, never as data.
 HEADER_TEXT = re.compile(
     r'FOGLI\s*DI\s*MAPPA|IL\s*SIMBOLO|INTERAMENTE\s*CONTENUTO|RICADENT|BUFFER'
-    r'|PIANTE\s*RISULTATE|CATASTALI|PRESENTE\s*ALLEGATO|DIRIGENTE|METROPOLITANA', re.I)
+    r'|PIANTE\s*RISULTATE|CATASTALI|PRESENTE\s*ALLEGATO|DIRIGENTE', re.I)
 WHOLE_PROVINCE = re.compile(r'INTERO\s+TERRITORIO\s+PROVINCIALE', re.I)
 WHOLE_COMUNE = re.compile(r'INTERO\s+TERRITORIO\s+COMUNALE', re.I)
 SECTION = re.compile(r'SEZIONE\s+([A-Z])\s*:?', re.I)
@@ -378,6 +381,8 @@ def versions(root: Path):
     own body is not held states that and reads nothing, so a successor's annex is
     never borrowed for it.
     """
+    documents = act_documents(root)
+    store = store_root(root)
     rows = json.loads((root / 'regulation/jurisdiction/canonical/authoring.json').read_text())
     if not isinstance(rows, list):
         rows = list(rows.values())[0]
@@ -394,9 +399,23 @@ def versions(root: Path):
             form, statements, unread, found = 'adopts-none', (), (), ()
         else:
             text = _act_text(root, source_path)
-            statements, unread = cadastral_statements(text)
             found = annexes(text)
-            form = 'annexed' if statements or found else 'stated-rule'
+            record = documents.get(row['instrument_id'])
+            statements, unread, form = (), (), None
+            if record:
+                # The act's own document bounds each annex cell, so a wrapped or
+                # centred value stays with its comune. The extracted text cannot
+                # do that, so it is only the fallback.
+                blob = blob_path(store, record['sha256'])
+                if blob.exists():
+                    statements, unread = annex_statements(str(blob))
+                    form = 'annexed-document'
+            if not statements:
+                statements, unread = cadastral_statements(text)
+                form = 'annexed-text' if statements else form
+            if form is None or not statements:
+                form = 'annexed-text' if statements else (
+                    'stated-rule' if not found else 'annex-unread')
         out.append(AreaVersion(
             provision_version_id=identity,
             instrument_id=row['instrument_id'],
@@ -434,14 +453,127 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
             answers.append({'version': version.provision_version_id, 'zone': None,
                             'basis': version.geography_form})
             continue
-        decided = False
+        decided, zones_given = False, set()
         for statement in version.statements:
             verdict = statement.covers(comune=comune, province=province, section=section, foglio=foglio)
             if verdict:
+                decided = True
+                if statement.zone in zones_given:
+                    continue
+                zones_given.add(statement.zone)
                 answers.append({'version': version.provision_version_id, 'zone': statement.zone,
                                 'basis': 'act cadastral statement', 'statement': statement})
-                decided = True
         if not decided and version.unresolved:
             answers.append({'version': version.provision_version_id, 'zone': None,
                             'basis': 'unresolved in this act', 'unresolved': len(version.unresolved)})
     return tuple(answers)
+
+
+# --- reading the cadastral annex from the act's own table geometry ------------
+
+def _zone_from(text):
+    match = ZONE_HEADING.search(text or '')
+    return (ZONE_KINDS[match.group(1).upper()], match.group(0)) if match else (None, None)
+
+
+def annex_statements(document) -> tuple:
+    """Read every cadastral annex table in the act document.
+
+    The document carries the annex as a real table, so a value that wraps or
+    prints centred against its comune stays inside that comune's own cell. This
+    is what the text layer cannot do, and it is why the document rather than the
+    extracted text is this row's source.
+
+    Tables are located by their own printed header (PROVINCIA / COMUNE / a
+    sheets column), never by page number or act identity.
+    """
+    import pymupdf
+    statements, unresolved = [], []
+    opened = pymupdf.open(document) if not hasattr(document, 'page_count') else document
+    try:
+        for page in opened:
+            page_text = page.get_text()
+            for table in page.find_tables().tables:
+                rows = [[(c or '').strip() for c in row] for row in table.extract()]
+                header_at = None
+                for index, row in enumerate(rows):
+                    joined = ' '.join(row)
+                    if HEADER_PROVINCE.search(joined) and HEADER_COMUNE.search(joined):
+                        header_at = index
+                        break
+                if header_at is None:
+                    continue
+                columns = rows[header_at]
+                try:
+                    province_col = next(i for i, c in enumerate(columns) if HEADER_PROVINCE.search(c))
+                    comune_col = next(i for i, c in enumerate(columns) if HEADER_COMUNE.search(c))
+                    value_col = next(i for i, c in enumerate(columns)
+                                     if HEADER_SHEETS.search(c) or WHOLE_PROVINCE.search(c)
+                                     or re.search(r'CATASTAL', c, re.I))
+                except StopIteration:
+                    unresolved.append(f'table header without a sheets column: {" | ".join(columns)[:120]}')
+                    continue
+                # The zone is stated by the table's own caption row, or by the
+                # page text above it when the caption sits outside the table.
+                zone, heading = None, None
+                for row in rows[:header_at]:
+                    zone, heading = _zone_from(' '.join(row))
+                    if zone:
+                        heading = ' '.join(c for c in row if c).strip()
+                        break
+                if zone is None:
+                    zone, heading = _zone_from(page_text)
+                if zone is None:
+                    unresolved.append(f'annex table names no zone: {" | ".join(columns)[:120]}')
+                    continue
+                province = None
+                for row in rows[header_at + 1:]:
+                    if len(row) <= max(province_col, comune_col, value_col):
+                        continue
+                    if row[province_col]:
+                        province = row[province_col]
+                    comune = row[comune_col] or None
+                    value = row[value_col]
+                    if not value and comune and _classify(comune)[0] in (
+                            'whole-province', 'whole-comune'):
+                        # A province-wide statement is printed across the comune
+                        # column, because it names no comune.
+                        value, comune = comune, None
+                    if not value:
+                        if comune:
+                            unresolved.append(
+                                f'{heading} :: {comune} states no scope in its own row; the '
+                                f'table shares one cell down a run of comuni and the extractor '
+                                f'does not report that span')
+                        continue
+                    if HEADER_TEXT.search(value) and not re.search(r'\d|INTERO', value, re.I):
+                        continue
+                    scope, sheets = _classify(value)
+                    if scope is None:
+                        unresolved.append(f'{heading} :: unread cell: {value[:100]}')
+                        continue
+                    statements.append(CadastralStatement(
+                        zone, heading, province,
+                        None if scope == 'whole-province' else comune,
+                        scope, sheets, ' '.join(value.split())))
+    finally:
+        if not hasattr(document, 'page_count'):
+            opened.close()
+    unique, seen = [], set()
+    for statement in statements:
+        key = (statement.zone, statement.zone_heading, statement.province,
+               statement.comune, statement.text)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(statement)
+    return tuple(unique), tuple(dict.fromkeys(unresolved))
+
+
+def act_documents(root: Path):
+    """The acquired act documents, by instrument, from their acquisition records."""
+    record_path = root / 'corpus/sources/areas/acts.json'
+    if not record_path.exists():
+        return {}
+    return {r['instrument_id']: r for r in json.loads(record_path.read_text())
+            if r.get('sha256') and 'error' not in r}
