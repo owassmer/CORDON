@@ -1,6 +1,6 @@
 ---
 name: evidence-adjudication
-description: Separate retrieved evidence, quoted facts, facts a reading failed to recover, inference, and adjudicated state while resolving consequential source claims. Use for legal, scientific, policy, or data-source synthesis where provenance and conflicts affect decisions; not for casual background summaries.
+description: Keep retrieval, quotation, failed recovery, inference, and adjudication distinguishable, and make every recorded absence name its cause, while resolving consequential source claims. Use for legal, scientific, policy, or data-source synthesis where provenance and conflicts affect decisions; not for casual background summaries.
 ---
 
 # Evidence adjudication
@@ -13,7 +13,7 @@ Keep five epistemic classes explicit:
 4. inference or computation from those facts;
 5. the adjudicated state adopted for use.
 
-A reading's silence is not the source's. When recording that something is absent, say which class produced it: the source does not state it, the material is illegible, the reading did not recover it, or it was recovered and could not be attached. They call for different work — better reading, another source, another attachment — and must not collapse into one empty value. Never write a reading's limit into a durable artifact as a property of the source, and never pass it downstream as an input the source does not supply.
+A reading's silence is not the source's. When recording that something is absent, name its cause: the source does not state it, the material is illegible, the reading did not recover it, it was recovered and could not be attached, it was recovered and remains unadjudicated, or another cause you name. They call for different work — better reading, another source, another attachment, an owner ruling — and must not collapse into one empty value. Never write a reading's limit into a durable artifact as a property of the source, and never pass it downstream as an input the source does not supply.
 
 Where the question is whether a source was read correctly, establish the expected result by reading instances of the source directly. Agreement with an answer the consumer already holds measures agreement, not fidelity: an attachment can be wrong while preserving the expected category.
 

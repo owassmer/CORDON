@@ -28,7 +28,7 @@ Keep five things distinguishable:
 4. inferences or calculations made from it;
 5. adjudicated program state.
 
-A reading's silence is not the source's. Where an output records an absence, it names which of these produced it: the source does not state the fact, the retrieved material is illegible, our reading did not recover it, or it was recovered and could not be attached. Those have different remedies and must not become interchangeable because each currently yields nothing. A reading's limit is never written into an owner as a property of the source, and never handed to a later stage as an input the source does not supply.
+A reading's silence is not the source's. Where an output records an absence, it names its cause: the source does not state the fact, the retrieved material is illegible, our reading did not recover it, it was recovered and could not be attached, it was recovered and remains unadjudicated, or another cause the output names. Those have different remedies — better reading, another source, another attachment, an owner ruling — and must not become interchangeable because each currently yields nothing. A reading's limit is never written into an owner as a property of the source, and never handed to a later stage as an input the source does not supply.
 
 Provisional work cannot acquire authority by being polished, repeated, committed, or consumed downstream. Conflicts are explicit until competent evidence or an owner ruling resolves them.
 
@@ -60,7 +60,7 @@ Name the proposition a check claims to establish and create a condition under wh
 
 An expected result must be established independently of the transformation it tests. Replaying authored conclusions, comparing two projections of the same assumptions, or passing one set as both expected and acquired cannot certify meaning or completeness. Integrity, serialization and selector tests retain those narrow claims; general capability requires unseen supported records and discriminating failures through ordinary consumer paths.
 
-A result compared to an answer the consumer already holds measures agreement with that answer, not fidelity to the source: an attachment can be wrong while preserving the expected category, and an omission and an invention can cancel in a count. Such a comparison stays a useful cross-check and can never be the correctness evidence for a reading, nor the target it is tuned against. Where the question is whether a source was read, the expected result comes from reading the source.
+A result compared to an answer the consumer already holds measures agreement with that answer, not fidelity to the source: an attachment can be wrong while preserving the expected category. Such a comparison stays a useful cross-check and can never be the correctness evidence for a reading, nor the target it is tuned against. Where the question is whether a source was read, the expected result comes from reading the source.
 
 Discovery scope and selected acquisition scope remain distinct. A publisher inventory can expose an omitted candidate, but only an accepted consumer admits a source. Once admitted, acquire and understand the complete within-aperture population. Unrelated catalogue entries need no durable per-row disposition, and a reconciled count cannot establish meaning or completion.
 

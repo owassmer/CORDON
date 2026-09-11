@@ -34,7 +34,7 @@ A unit converges when the adjudicator can write, on the pull request, why the re
 
 Convergence is not three PASS returns, a passing suite, a round count, or exhaustion. Checks establish narrow mechanical claims; they never define the unit's quality. No reviewer is expected to return a finding count or meet a threshold. The adjudication names the commit it judged; a later commit reopens the judgment.
 
-A further implementation round follows whenever a repair changed meaning or a material risk remains open, and rounds continue until the judgment can be written. A falling residual is not that judgment: a failure class that recurs across rounds is evidence the structure is wrong and outranks the measured residual of its latest instance, whatever the round number. So is a unit the adjudicator still cannot judge after repeated rounds, however each round's findings were classified. Either is answered by re-planning, not by reviewing again.
+A further implementation round follows only when a repair changed meaning or a material risk remains open, and rounds continue until the judgment can be written. A falling residual is not that judgment, and neither is a round count. A unit the adjudicator still cannot judge after repeated rounds is re-planned rather than reviewed again; whether recurrence across rounds indicts the structure is decided under `DESIGN_PRINCIPLES.md`, "Minimum sufficient structure", which asks first whether the earlier rule was sound and merely unapplied.
 
 Owen merges the pull request. Merge accepts the unit's content as reviewed; changed content needs its own acceptance.
 
