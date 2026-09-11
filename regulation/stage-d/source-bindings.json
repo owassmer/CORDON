@@ -106,19 +106,23 @@
     {
       "id": "notice-and-response-records",
       "name": "Notice, publication and owner-response records",
-      "purpose": "Supply the actual sending, delivery, publication, receipt or response event when an accepted A or B rule depends on that event.",
+      "purpose": "Supply the notice route the act declares, the publication duty's record, the recipient-effect event and the owner's response when an accepted A or B rule depends on them.",
       "contracts": [
         "recipient-notice",
         "owner-response",
         "administrative-event"
       ],
       "routes": [
-        "The Osservatorio's protocol and PEC records",
-        "The relevant municipality's official publication register when the governing measure uses municipal publication"
+        "The determination's own text (declared route: reasoned immediate-effect clause, act-specific recipient-number finding)",
+        "The competent municipality's albo pretorio record of the seven-day publication",
+        "https://burp.regione.puglia.it/bollettini and the regional sites the plans name",
+        "The Osservatorio's communication record and municipal notification attempts (recipient effect)",
+        "PEC transmission to ARIF and the Prefettura (administrative event)",
+        "ARIF's authenticated election record or the owner's PEC (response)"
       ],
-      "population": "The event records attached to an admitted removal matter, not every notice published by every municipality.",
+      "population": "The act text, publication record, communication and response events attached to an admitted removal matter; not every notice published by every municipality.",
       "reader": "cordon_d.notices and cordon_d.events",
-      "open": "The intended operator's own event record is primary when it holds the event. Public register data is needed only for a legally consequential municipal publication fact."
+      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
     },
     {
       "id": "plant-protection-records",
@@ -146,12 +150,14 @@
         "boundary-context"
       ],
       "routes": [
+        "The removal determination's incorporated annex (addressees by comune, foglio, particella)",
+        "Later acts that correct listed owners",
         "The Osservatorio's case record and transmitted cadastral/owner data",
         "A competent public asset register when the affected parcel is public land"
       ],
-      "population": "Only the people and parcels reached by an admitted finding or removal measure.",
+      "population": "The addressee positions of an admitted removal measure and its corrections, and the people and parcels reached by an admitted finding.",
       "reader": "Generic record and document readers; no current source-specific consumer",
-      "open": "Current standing must come from the operator's matter or competent register. Old public-land catalogues and cadastral geometry do not by themselves prove current standing."
+      "open": "The annex establishes the position the act published for each parcel, not that the named person held the land; an effective correction act replaces the listed position for the parcels it names, with its effect against the corrected recipient following the notice route. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do."
     },
     {
       "id": "field-and-execution-records",
@@ -167,12 +173,13 @@
         "administrative-event"
       ],
       "routes": [
-        "The Osservatorio's casefile and field systems",
-        "ARIF or other executing-body records incorporated into the matter"
+        "The Osservatorio's casefile and field systems (presided execution record, countersignature, photograph, assignment, verification, cost determination)",
+        "ARIF or other executing-body records incorporated into the matter",
+        "Removal orders for the lawful work basis (removal-orders route)"
       ],
       "population": "The operational records for the admitted finding and resulting work, including corrections and completion evidence.",
       "reader": "cordon_d.evidence, cordon_d.events and source-specific readers still to be implemented",
-      "open": "No public procedure manual can supply an unseen operational fact. At deployment these are first-party operator inputs, with unavailable fields left unknown."
+      "open": "No public procedure manual can supply an unseen operational fact. A coercive-direction or execution-priority act is not proof of completed removal; a published removal label or removed-plant layer is a lead to a first-party record, not a removal occurrence, and the retained SIT capture holds no removed-plant layer after 2017. At deployment these are first-party operator inputs, with unavailable fields left unknown."
     },
     {
       "id": "vector-and-treatment-observations",
