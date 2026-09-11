@@ -74,6 +74,43 @@ class AnAbsenceNamesItsCause(unittest.TestCase):
             self.assertIsNone(reading.observation_reference)
             self.assertEqual(self.causes(reading)['reference'], cause, repr(value))
 
+    def test_a_field_this_reader_establishes_and_did_not_carry_names_why(self):
+        # The defect this unit exists to cure, on the surface this unit creates: an
+        # operator seeing no COMUNE must be able to tell a silent publisher from a
+        # sentinel from a value this reader did not read.
+        silent = self.causes(read({'ID_CAMPIONE': 20, 'DATA_CAMPIONE': 1713312000000,
+                                   'RISULTATO': 'Negativo'}))
+        self.assertNotIn('COMUNE', silent)          # not published at all: nothing to explain
+        null = self.causes(read({'ID_CAMPIONE': 21, 'DATA_CAMPIONE': 1713312000000,
+                                 'RISULTATO': 'Negativo', 'COMUNE': None}))
+        self.assertEqual(null['COMUNE'], 'the field is published and carries no value')
+        sentinel = self.causes(read({'ID_CAMPIONE': 22, 'DATA_CAMPIONE': 1713312000000,
+                                     'RISULTATO': 'Negativo', 'COMUNE': '****'}))
+        self.assertEqual(sentinel['COMUNE'],
+                         'the field is published and carries only a sentinel or blank')
+        carried_for_another_row = self.causes(read(
+            {'ID_CAMPIONE': 23, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Positivo',
+             'PROT_SELGE': None}))
+        self.assertEqual(carried_for_another_row['PROT_SELGE'],
+                         'the field is published and carries no value')
+
+    def test_a_field_no_row_claims_is_reported_rather_than_passed_over(self):
+        # A publisher may print a column this stage has never seen. It must surface the
+        # first time, not wait to be noticed in a survey.
+        unseen = self.causes(read({'ID_CAMPIONE': 30, 'DATA_CAMPIONE': 1713312000000,
+                                   'RISULTATO': 'Negativo', 'FASE_FENOL': 'Fioritura',
+                                   'SUPERFICIE': None}))
+        self.assertEqual(unseen['FASE_FENOL'], 'published, and no row of this stage claims it')
+        self.assertEqual(unseen['SUPERFICIE'],
+                         'published carrying no value, and no row of this stage claims it')
+
+    def test_a_result_absence_uses_the_vocabulary_campaign_already_has(self):
+        absent = self.causes(read({'ID_CAMPIONE': 40, 'DATA_CAMPIONE': 1713312000000}))
+        self.assertEqual(absent['result'], 'no such field is published in this record')
+        empty = self.causes(read({'ID_CAMPIONE': 41, 'DATA_CAMPIONE': 1713312000000,
+                                  'RISULTATO': None}))
+        self.assertEqual(empty['result'], 'the field is published and carries no value')
+
     def test_a_reading_that_carries_every_value_carries_no_cause(self):
         complete = read({'ID_CAMPIONE': 1669072, 'SPECIE': 'Fico (Ficus carica L.)',
                          'CULTIVAR': 'Ogliarola', 'SUBSPECIE': 'pauca', 'SINTOMO': 'Assente',
@@ -114,6 +151,30 @@ class RowOneReadsItsOwnSubject(unittest.TestCase):
     def test_no_publisher_identifier_is_ever_compared(self):
         for field in PUBLISHER_IDENTIFIERS:
             self.assertNotIn(field, COMPARED_FIELDS, field)
+
+    def test_who_performed_the_observation_is_read_under_every_name_the_publisher_uses(self):
+        # The 2016 infrastructure survey names the team and its inspectors in columns of
+        # its own; it is the same fact as TECNICO and must not be lost to the spelling.
+        reading = read({'ID_GIORNALIERO': 3, 'OBJECTID': 207687, 'DATA_CAMPIONE': 1478649600000,
+                        'RISULTATO': 'NEGATIVO', 'COD_TECNICI': 'CIC-GAG',
+                        'COGNOME_ISPETTORE_1': 'Ciciretti', 'NOME_ISPETTORE_1': 'Luciano'})
+        attributes = dict(reading.attributes)
+        self.assertEqual(attributes['COD_TECNICI'], 'CIC-GAG')
+        self.assertEqual(attributes['COGNOME_ISPETTORE_1'], 'Ciciretti')
+        for field in ('COD_TECNICI', 'COGNOME_ISPETTORE_1', 'NOME_ISPETTORE_1'):
+            self.assertIn(field, COMPARED_FIELDS, field)
+
+    def test_a_label_shared_by_many_records_is_not_an_identity(self):
+        # CODICE_CAMPIONAMENTO prints a campaign name such as '2019-II' on hundreds of
+        # records at once. Offering it as identity would answer a question the record
+        # does not answer.
+        reading = read({'OBJECTID': 4, 'CODICE_CAMPIONAMENTO': 'XF MULTIPLEX 2024',
+                        'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Negativo'})
+        self.assertNotIn('CODICE_CAMPIONAMENTO', PUBLISHER_IDENTIFIERS)
+        self.assertEqual(dict(reading.attributes)['CODICE_CAMPIONAMENTO'], 'XF MULTIPLEX 2024')
+        self.assertNotIn('CODICE_CAMPIONAMENTO', COMPARED_FIELDS)
+        self.assertEqual(dict(reading.causes)['reference'],
+                         'the sample reference is not published; this record is identified by OBJECTID')
 
 
 class RowOneCarriesWithoutInterpreting(unittest.TestCase):

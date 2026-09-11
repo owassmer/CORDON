@@ -24,19 +24,28 @@ from .store import adopt, audit, blob_path as store_blob_path, derived_path, dum
 OBSERVATION_DATES = ('DATA_RILEVAMENTO', 'DATA_PRELIVEO', 'DATA_PRELIEVO',
                      'DATA_CAMPIONE', 'DATA_RILIEVO')
 
-# Row 1's own subject: attributes of the observation event, established here.
+# Row 1's own subject: attributes of the observation event, established here. Who
+# performed it is one fact under several publisher names, from the single-technician
+# `TECNICO` to the team code and per-inspector columns of the 2016 infrastructure survey.
 OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
-                          'SQUADRA', 'TECNICO', 'NOME_DISPOSITIVO', 'STATO', 'NOTE_RILEVATORE')
+                          'SQUADRA', 'TECNICO', 'COD_TECNICI',
+                          'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
+                          'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3',
+                          'CODICE_CAMPIONAMENTO', 'NOME_DISPOSITIVO', 'STATO',
+                          'NOTE_RILEVATORE', 'CRITICITA_NOTE')
 # Of those, the ones two publications of one observation should state alike, so a
-# difference between them is a disagreement the operator must see. A free-text note and
-# a publication status are not: they describe the publication, not the observation.
+# difference between them is a disagreement the operator must see. A free-text note, a
+# publication status and a device name are not: they describe the publication or its
+# instrument, not the observation.
 COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'ZONA', 'LOCALITA', 'ALTITUDINE',
-                       'SQUADRA', 'TECNICO')
+                       'SQUADRA', 'TECNICO', 'COD_TECNICI',
+                       'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
+                       'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3')
 # Published identifiers other than the sample reference. Carried per publication and never
 # compared: a view's own feature id differs between views by construction, so comparing it
-# would manufacture disagreement.
-PUBLISHER_IDENTIFIERS = ('CODICE_CAMPIONAMENTO', 'ID_GIORNALIERO', 'NUMERO_ORDINE',
-                         'OBJECTID', 'IDANDROID')
+# would manufacture disagreement. A value shared by hundreds of records is a label for the
+# campaign that produced them, not an identity, and is established as an attribute instead.
+PUBLISHER_IDENTIFIERS = ('ID_GIORNALIERO', 'NUMERO_ORDINE', 'OBJECTID', 'IDANDROID')
 # Another row's subject, carried as the literal the monitoring publisher printed and
 # interpreted by nobody here. The owning row adjudicates what the fact is; a monitoring
 # transcription never outranks the act or the report it transcribes.
@@ -160,8 +169,7 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
     arcgis = 'attributes' in native
     row = native.get('attributes', native)
     publication = publication_reading(occurrence)
-    identifiers = tuple((key, value) for key in ('ID', 'ID_CAMPIONE', 'CODICE_CAMPIONAMENTO',
-                        'ID_GIORNALIERO', 'NUMERO_ORDINE', 'OBJECTID', 'IDANDROID')
+    identifiers = tuple((key, value) for key in ('ID', 'ID_CAMPIONE') + PUBLISHER_IDENTIFIERS
                         if (value := reference(row.get(key))) is not None)
     issues = []
     dates = []
@@ -242,6 +250,12 @@ def _causes(reading, row, identifiers, issues):
                              ('subspecies', ('SUBSPECIE',)), ('kind', ('TIPOLOGIA',))):
         if getattr(reading, field) is None:
             causes.append((field, _absence_cause(row, published)))
+    if reading.publication.result in ('unpublished', 'not-a-result-record'):
+        # campaign.py already distinguishes these two; the cause names the same distinction
+        # in the same words rather than opening a second vocabulary beside it.
+        causes.append(('result', 'no such field is published in this record'
+                       if reading.publication.result == 'not-a-result-record'
+                       else 'the field is published and carries no value'))
     if reading.observation_date is None:
         days = {value for _, value in reading.observation_dates if value is not None}
         unreadable = next((issue for issue in issues if issue.split(':')[0] in OBSERVATION_DATES), None)
@@ -254,7 +268,43 @@ def _causes(reading, row, identifiers, issues):
                        else 'no geometry is published in this record'
                        if 'LONGITUDINE' not in row and 'LATITUDINE' not in row
                        else _absence_cause(row, ('LONGITUDINE', 'LATITUDINE'))))
+    causes.extend(_unheld(reading, row))
     return tuple(causes)
+
+
+# Fields whose absence is already named above under the reading's own name for the fact.
+NAMED_ABOVE = (frozenset(OBSERVATION_DATES)
+               | {'ID', 'ID_CAMPIONE', 'SPECIE', 'CULTIVAR', 'SUBSPECIE', 'SINTOMO', 'SINTOMI',
+                  'RISULTATO', 'TIPOLOGIA', 'LONGITUDINE', 'LATITUDINE',
+                  'DOCUMENTO_CONFERMA', 'LNK_DOCUMENTO_SELGE', 'DOCUMENTO_DECRETO'})
+# Every field some row of this stage has claimed, whether row 1 establishes it, carries it
+# for another row, or reads it into a fact under another name.
+CLAIMED_FIELDS = (NAMED_ABOVE | frozenset(OBSERVATION_ATTRIBUTES)
+                  | frozenset(PUBLISHER_IDENTIFIERS) | frozenset(CARRIED_FOR))
+
+
+def _unheld(reading, row):
+    """Every field this record publishes that the reading does not carry, and why.
+
+    Derived from the record's own keys, not from a list of names, so a field no reader has
+    seen before is reported the first time a publisher prints it instead of disappearing.
+    The two outcomes are different remedies: a field this reader claims but did not carry
+    here needs the record read again or nothing at all, and a field no row claims needs an
+    owner before anyone can consume it.
+    """
+    held = ({field for field, _ in reading.attributes} | {field for field, _ in reading.carried}
+            | {field for field, _ in reading.identifiers})
+    unheld = []
+    for field in row:
+        if field in held or field in NAMED_ABOVE:
+            continue
+        if field in CLAIMED_FIELDS:
+            unheld.append((field, _absence_cause(row, (field,))))
+        else:
+            unheld.append((field, 'published, and no row of this stage claims it'
+                           if meaningful_text(row[field]) is not None else
+                           'published carrying no value, and no row of this stage claims it'))
+    return sorted(unheld)
 
 
 @dataclass(frozen=True)
