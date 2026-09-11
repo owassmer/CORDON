@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import unittest
 
-from cordon_d.findings import comparison, confirmation_candidates
+from cordon_d.findings import comparison, confirmation_candidates, document_name
 from cordon_d.reports import (Result, Row, _classify, _designation, _flat_rows, _header_role, _italian_date,
                               _letter_facts, _line_rows, _merged_header, _table_rows, _transposed)
 
@@ -168,6 +168,20 @@ class LineReading(unittest.TestCase):
         alone = _line_rows(5, 'ocr:ita:200dpi', text.split('\n')[0] + '\n', LETTER)
         self.assertEqual([x.kind for x in alone[0].results], ['negative', 'positive'])
 
+    def test_a_year_run_into_the_next_word_is_not_a_second_sample(self):
+        # OCR glues the year to the species (`16/03/20180lvo`) and prefixes a code with a
+        # stray letter; neither shows a second row, and the row states what it prints.
+        glued = _line_rows(2, 'ocr:ita:200dpi',
+                           '282377   16/03/20180lvo (lea europea) 40,48 17,53 Francavila Positivo Postivo 03/04/2019\n',
+                           LETTER)
+        # `Postivo` is not a result word, so the row states the one result it does print.
+        self.assertEqual([x.kind for x in glued[0].results], ['positive'])
+        prefixed = _line_rows(3, 'ocr:ita:200dpi',
+                              'L259726 04/04/2018 10livo (Olea europaea) 40,66 17,73 Positivo Positivo 07/05/2018\n',
+                              LETTER)
+        self.assertEqual(prefixed[0].reference, '259726')
+        self.assertEqual([x.kind for x in prefixed[0].results], ['positive', 'positive'])
+
     def test_ocr_noise_is_unread_not_a_result_and_an_impossible_date_is_none(self):
         self.assertEqual(_classify('rostivo'), 'unread')
         self.assertEqual(_classify('Non rilevata'), 'not-detected')
@@ -205,6 +219,16 @@ class LetterReading(unittest.TestCase):
         self.assertEqual(_letter_facts('Rapporto di prova N. 89a/2024\n')['identity'], 'Rapporto di prova 89a/2024')
         self.assertEqual(_letter_facts('RAPPORTO DI PROVA N° 1038/22\n')['identity'], 'Rapporto di prova 1038/22')
 
+    def test_a_number_the_text_layer_breaks_across_lines_is_read_whole(self):
+        # The publisher's own PDF emits `XF 0 1 9 / 202 4`; the number is one number.
+        broken = _letter_facts('RAPPORTO DI PROVA/TEST REPORT\n: N. \nXF\n0 1 9 / 202\n4 \nAffidamento del servizio\n')
+        self.assertEqual(broken['identity'], 'Rapporto di prova XF 019/2024')
+        suffixed = _letter_facts('RAPPORTO DI PROVA/TEST REPORT\n: N. \nXF\n2 1 _P /202 2\n')
+        self.assertEqual(suffixed['identity'], 'Rapporto di prova XF 21_P/2022')
+        # A two-digit year the publisher really prints is not widened.
+        self.assertEqual(_letter_facts('Rapporto di prova N. 41/24\nM 44\nRev. 3 del 09/02/2024\n')['identity'],
+                         'Rapporto di prova 41/24')
+
     def test_a_delivering_laboratory_in_a_sentence_is_not_the_reporting_laboratory(self):
         facts = _letter_facts('da parte del Laboratorio DAFNE consegnati il 04/06/2024\nOggetto: esiti\n')
         self.assertIsNone(facts['laboratory'])
@@ -229,6 +253,16 @@ class Comparison(unittest.TestCase):
         self.assertEqual(comparison('published-positive', 'Positivi - Campioni 2021', self.results(('Xylella fastidiosa', 'rostivo'))), 'not comparable')
         self.assertEqual(comparison('published-pending', 'Positivi - Campioni 2021', plain), 'not comparable')
         self.assertEqual(comparison('published-positive', 'Positivi - Campioni 2021', self.results((None, 'Positivo'))), 'not comparable')
+
+
+class RouteIdentity(unittest.TestCase):
+    def test_one_document_is_one_document_at_either_scheme(self):
+        http = 'http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_7.pdf'
+        https = http.replace('http://', 'https://')
+        self.assertEqual(document_name(http), 'RAPPORTO_PROVA_N_7.pdf')
+        self.assertEqual(document_name(http), document_name(https))
+        self.assertEqual(document_name('http://cartografia.sit.puglia.it/doc/xylella/x/RAPPORTO_PROVA_N_3P_2026_CNR.pdf'),
+                         'RAPPORTO_PROVA_N_3P_2026_CNR.pdf')
 
 
 class ArticleTwoSix(unittest.TestCase):

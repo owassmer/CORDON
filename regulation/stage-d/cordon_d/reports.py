@@ -53,6 +53,10 @@ _LABELS = re.compile(r'data\s*(?:rilev|campion|prelie|saggio|prova)|specie|comun
                      r'codice\s*(?:squadra|busta|pool)|sintom|operatore|\bzona\b|laboratorio', re.I)
 DATE = re.compile(r'\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})\b')
 CODE = re.compile(r'(?<![\d.,])(\d{5,9})(?![\d.,])')  # a date part never reaches five digits
+# A sample code stands alone. Under OCR a year runs into the word after it
+# (`16/03/20180lvo`) and a stray character precedes one (`L259726`); neither is a
+# second sample, so neither shows that a line carries a second row.
+STANDALONE_CODE = re.compile(r'(?<![\d.,A-Za-z])\d{5,9}(?![\d.,A-Za-z])')
 MONTHS = {'gennaio': 1, 'febbraio': 2, 'marzo': 3, 'aprile': 4, 'maggio': 5, 'giugno': 6, 'luglio': 7,
           'agosto': 8, 'settembre': 9, 'ottobre': 10, 'novembre': 11, 'dicembre': 12}
 
@@ -187,12 +191,17 @@ def page_texts(document):
 def _letter_facts(text: str) -> dict:
     facts: dict = {}
     # A report number may carry a letter prefix of its own (`N. XF 015/2024`); taking only
-    # the digits would fall through to the protocol register, a different number.
-    m = re.search(r'Rapporto\s+di\s+prova(?:\s*/\s*TEST\s+REPORT)?\s*:?\s*(?:N[°.]?|n[°.]?)?\s*'
-                  r'((?:[A-Z]{1,3}\s*)?[0-9]+[A-Za-z_]*(?:\s*/\s*[0-9]{2,4})?)', text, re.I)
-    if m:
-        printed = re.sub(r'\s*/\s*', '/', re.sub(r'\s+', ' ', m.group(1))).strip().rstrip('_')
-        facts['identity'] = 'Rapporto di prova ' + printed
+    # the digits would fall through to the protocol register, a different number. A text
+    # layer also breaks the number across lines (`XF 0 1 9 / 202 4`), so the window that
+    # follows the phrase is closed up between digits before the number is read.
+    phrase = re.search(r'Rapporto\s+di\s+prova(?:\s*/\s*TEST\s+REPORT)?\s*:?\s*(?:N[°.]?|n[°.]?)?\s*', text, re.I)
+    if phrase:
+        window = re.sub(r'(?<=[\d_])\s+(?=[\d/_])|(?<=[/_])\s+(?=\d)|(?<=\w)\s+(?=/\s*\d)',
+                        '', text[phrase.end():phrase.end() + 60])
+        m = re.match(r'((?:[A-Z]{1,3}\s*)?[0-9]+[A-Za-z_]*(?:\s*/\s*[0-9]{2,4})?)', window)
+        if m:
+            printed = re.sub(r'\s*/\s*', '/', re.sub(r'\s+', ' ', m.group(1))).strip().rstrip('_')
+            facts['identity'] = 'Rapporto di prova ' + printed
     m = re.search(r'Prot\.?\s*(?:Selge|SELGE)?\s*(?:n\.?)?\s*([0-9]+\s*/\s*[0-9]{4})', text, re.I)
     if m and 'identity' not in facts:
         facts['identity'] = 'Prot. Selge ' + re.sub(r'\s+', '', m.group(1))
@@ -469,7 +478,7 @@ def _line_rows(page_number, method, text, letter):
         if len(line) < 20 or not (dates or hits):
             continue
         code = CODE.search(line)
-        absorbed = len(CODE.findall(line)) > 1 or len(dates) > 2
+        absorbed = len(STANDALONE_CODE.findall(line)) > 1 or len(dates) > 2
         results = () if absorbed else tuple(
             Result(f'column {i + 1}', None, analyte, t, _classify(t)) for i, t in enumerate(hits))
         species = re.search(r'\b(olivo|oleandro|mandorlo|vite|ciliegio|prunus|olea|nerium|rosmarino|polygala|lavand\w+|mirto|acacia|quercus)[^|0-9]{0,30}', line, re.I)

@@ -53,7 +53,7 @@
       ],
       "population": "Every document referenced by an admitted monitoring release: 1,918 routes naming 1,186 documents, of which 1,175 are acquired and 11 are never served by the publisher (16 failing routes, 3 of them served on a sibling route).",
       "reader": "cordon_d.reports and cordon_d.findings",
-      "open": "A report supplies the laboratory's diagnosis, not the Regional Service's official confirmation under D.lgs. 19/2021 Art. 28(3). It supplies the Article 2(6) test and sample identities where it designates two tests, never the genome target, so that condition stays unresolved on this source; a classifying Cq stays open under analytical-result, 9 rapporti printing a Ct only as a laboratory note. 11,659 publications gain no report row, concentrated where OCR loses rows on a scanned annex (233 letters recover fewer distinct references than they state). Laboratory designation, accreditation and custody follow their own sources."
+      "open": "A report supplies the laboratory's diagnosis, not the Regional Service's official confirmation under D.lgs. 19/2021 Art. 28(3). It supplies the Article 2(6) test and sample identities where it designates two tests, never the genome target, so that condition stays unresolved on this source; a classifying Cq stays open under analytical-result, 10 rapporti printing a Ct only as a laboratory note. 11,657 publications gain no report row, concentrated where OCR loses rows on a scanned annex (233 letters recover fewer distinct references than they state). Laboratory designation, accreditation and custody follow their own sources."
     },
     {
       "id": "official-areas",

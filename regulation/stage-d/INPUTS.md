@@ -54,7 +54,7 @@ layers); 549 only in a workbook; 76 in workbook and CSV.
 | `ID`, `ID_CAMPIONE`; earlier `NUMERO_ORDINE`, `OBJECTID`, daily and device identifiers | From 2018 the reference identifies one observation across its publications, with rare same-day reuse (144 rows) that the rule below leaves single. In the 2013–2017 SIT views it is a daily counter: one value covers up to eleven plants of different species on one day. A value a view gives to several rows on one day is not an identifier; those rows stay single, uncorrelated observations. Administrative and view identifiers never identify a physical plant. |
 | `DATA_RILEVAMENTO`, `DATA_CAMPIONE`, `DATA_PRELIVEO`, `DATA_RILIEVO` | The recorded observation or sampling day. Excel midnight is date storage; ArcGIS UTC epoch values are converted to the Puglia calendar day, and the early campaign's 23:00 UTC values belong to the following local day. Campaign names are not date boundaries. Report, protocol and removal dates remain separate fields. |
 | `TIPOLOGIA`; explicitly named visual-inspection and assessment views | Distinguish samples, visual inspections and assessments. An observation without an analytical result is not a negative test; the 2017–2020 inspection and assessment views have no result field at all, and a visual-inspection or symptom label is not a result. |
-| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato (the 2013–2017 removed-plant layers and the 2013–14 positives view). A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the finding is the report's (next row). |
+| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato (the 2013–2017 removed-plant layers and the 2013–14 positives view). A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the diagnosis is the report's (next row). |
 | `SPECIE`, `CULTIVAR`, `SUBSPECIE` | Recorded host, cultivar and explicit sample-level subspecies. A view's subspecies title is context; it is not substituted for an absent sample-level identification. All hosts and result states are retained. |
 | `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence/absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
 | Native geometry/CRS, latitude/longitude, municipality and cadastral fields | Published location. SIT supplies EPSG:32633; workbooks give longitude/latitude columns that establish axes, not a datum. Neither states positional error, so metric use waits for the population row's qualification. |
@@ -65,7 +65,7 @@ What the stream hands A–C, all as candidates:
 
 - Positive observations with their day, agreed coordinates per frame and report
   route (`detection_days`, `located_positives`) for the no-detection anchor and
-  the finding location. The report decides the finding. `detection_record_complete`
+  the finding location. The report supplies the diagnosis the finding decision rests on. `detection_record_complete`
   is never set from the release inventory: the publisher says surveillance is not
   an inventory of all infected plants, and the inventory proves only that every
   retained release was read.
@@ -135,7 +135,7 @@ is read by its printed headers: a merged header spans only under its own parent 
 only into a column some header row names, a sub-column named for a subspecies states
 that column's analyte, and a table continuing across a page inherits the header above
 it. A scanned page has no recoverable headers, so its result columns are positional
-and designate no test. The reader reads 12,202 rows, of which 1,187 state no result it can
+and designate no test. The reader reads 12,202 rows, of which 1,153 state no result it can
 classify and are carried as unread with their text. Nothing is inferred: an OCR string
 that is not a result word is unread; a cell holding several rows' results states none of
 them; and a scanned line carrying a second sample code or more than two dates has
@@ -143,28 +143,28 @@ absorbed a neighbour whose own code OCR lost, so it states no result and keeps i
 
 | What a report supplies | What it does not |
 |---|---|
-| The laboratory's stated result for each column, under the test as that column designates it (`Esito qPCR 2010` beside `Esito qPCR 2006` are two tests; the assay name they share is a family and is never used as an identity, and two designations differing only by a date or a repetition marker are one assay run twice) | The genome target each test amplifies. No report prints one and an assay name is not a genome target (`analytical-result`), so the Article 2(6) different-target condition stays unresolved on this source |
+| The laboratory's stated result for each column, under the test as that column designates it (`Esito qPCR 2010` beside `Esito qPCR 2006` are two tests; the assay name they share is a family and is never used as an identity, and two designations differing only by a full test date or a repetition marker are one assay run twice, while a protocol year inside the designation is part of it) | The genome target each test amplifies. No report prints one and an assay name is not a genome target (`analytical-result`), so the Article 2(6) different-target condition stays unresolved on this source |
 | The sample identity the laboratory prints, its sampling date, species, coordinates and comune where the annex carries them, and the test dates | The official confirmation of the finding. Under D.lgs. 19/2021 Art. 28(3) the Regional Service decides that on the diagnosis; the report is the diagnosis |
-| Two differently designated tests both reading detected on one sample — the test and sample identities `cordon_c.bindings.confirmation_facts` takes for Article 2(6), carried on every matched finding by `findings.confirmation_candidates`. It reaches 3,772 of 30,968 publications, all from reports with a text layer (2020: 2,570, 2021: 880, 2024: 322): a scanned annex designates no test, so the confirmation letters carrying the 2015–2019 positives supply none, and for those years Stage E must supply the identities as well as the target | A classifying Cq. 9 rapporti print a Ct as a free-text laboratory note (31 values, e.g. `CT: 21,06`), which names neither the assay nor run validity; the Cq DDS 45 §IV.2 classifies stays open under `analytical-result` |
+| Two differently designated tests both reading detected on one sample — the test and sample identities `cordon_c.bindings.confirmation_facts` takes for Article 2(6), carried on every matched finding by `findings.confirmation_candidates`. It reaches 3,772 of 30,968 publications, all from reports with a text layer (2020: 2,570, 2021: 880, 2024: 322): a scanned annex designates no test, so the confirmation letters carrying the 2015–2019 positives supply none, and where such a positive falls outside a demarcated area — the case Article 2(6) governs — Stage E must supply the identities as well as the target | A classifying Cq. 8 rapporti print a Ct as a free-text laboratory note and 2 confirmation letters of 2017 print a Cq (33 values in all, e.g. `CT: 21,06`). Neither names the assay it belongs to nor the run's validity, which is what `REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification` classifies; that Cq stays open under `analytical-result` |
 | The laboratory, the report date and the delivery date the letter prints, as strings | Laboratory designation, accreditation and custody. The reader has no field for them and they follow their own A routes and sources |
 
 What the join shows, read and not reconciled:
 
 - 30,968 observation publications carry a route; every one of them is published positive
-  or positive-and-removal but two negatives and two doubtfuls. 19,309 match a row in
-  the report they name, of which 15,344 agree with the published label at the level the
-  report states (12,503 at species, 2,841 at subspecies), 4 disagree, and 3,961 cannot be
-  compared: 2,863 because no analyte is stated for any result, 670 because the row states
+  or positive-and-removal but two negatives and two doubtfuls. 19,311 match a row in
+  the report they name, of which 15,348 agree with the published label at the level the
+  report states (12,505 at species, 2,843 at subspecies), 4 disagree, and 3,959 cannot be
+  compared: 2,863 because no analyte is stated for any result, 668 because the row states
   no result, 322 because the report states another subspecies than the view names, and
   106 because the comparable result could not be read.
 - The disagreements are stated, never resolved. They are two samples, each published in
   two views. Sample 747145 of 2020-02-20, published negative in Positivi - Campioni 2019 (a negative label inside its publisher's own positives view), is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa. Sample 1931257 of 2026-01-13, published doubtful in Piante infette-Monitoraggio 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
-- The remaining 11,659 publications gain no report row: 9,467 name a report whose rows
+- The remaining 11,657 publications gain no report row: 9,471 name a report whose rows
   were read but which does not print that sample reference, 1,601 name a report whose
   annex yielded no readable row, 198 name one whose annex prints no sample
   reference this reader accepts, 30 name one that lists the same reference twice, and
-  363 name one of the 16 documents the publisher does not serve. They keep their
-  published label and gain nothing from a report.
+  357 name one of the 11 documents the publisher serves on no route.
+  They keep their published label and gain nothing from a report.
 - The publisher's own check on this reading is the letter's stated sample count: the
   distinct sample references recovered match it in 212 documents, fall short in
   233 and exceed it in 12 (718 letters state no count). It fails where OCR loses
@@ -176,7 +176,7 @@ What the join shows, read and not reconciled:
   reference with a `bis` suffix, which the reader drops; whether `bis` marks a repeat
   sample is unresolved.
 
-Reading all 1,175 documents costs about 11 minutes once per reader version; the join then
+Reading all 1,175 documents costs about 16 minutes once per reader version; the join then
 runs in 2 seconds over the derived layer.
 
 ## Materials that are not standalone input gaps

@@ -11,8 +11,15 @@ Reading a report belongs to `reports`; this module only relates what it read.
 import json
 from pathlib import Path
 import re
+from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, reports
+
+
+def document_name(route: str) -> str:
+    """The document a route names: the publisher's file name, whatever the scheme."""
+    parts = urlsplit(route)
+    return parse_qs(parts.query).get('nomeFile', [parts.path])[0].rsplit('/', 1)[-1]
 
 # A reference printed in its own column, or inside an identifying cell, identifies a
 # sample. A daily counter identifies one only when its value has the width of a sample
@@ -93,6 +100,10 @@ def findings(root: Path, store: Path):
     """
     import duckdb
     records = {r['url']: r for r in json.loads((root / 'records.json').read_text())}
+    # One document is served at http and at https. Where one route failed and the other
+    # carried the bytes, the document is acquired; the route's failure is not the
+    # publisher withholding it.
+    by_name = {document_name(r['url']): r['sha256'] for r in records.values() if 'sha256' in r}
     by_digest: dict[str, Report] = {}
     for url, item, record in reports(root, store):
         if isinstance(item, Report):
@@ -119,7 +130,7 @@ def findings(root: Path, store: Path):
         if current is None:
             return
         record = records.get(current)
-        digest = record.get('sha256') if record else None
+        digest = (record or {}).get('sha256') or by_name.get(document_name(current))
         item = by_digest.get(digest) if digest else None
         if item is None:
             for reference, day, view, label in group:
