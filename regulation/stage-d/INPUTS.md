@@ -79,11 +79,16 @@ What the population shows, read and not reconciled:
   no reference (223,458 observations) and the SIT views use daily counters
   (229,358 rows reused within their own view on one day). Those observations are
   counted per publication.
-- 16,569 identified observations (0.9%) have publications that disagree —
-  species 16,523, coordinates 2,350, result 1,543, symptoms 2 — almost all
-  residual counter collisions across the 2013–2017 views, where a visual
-  inspection and a sample share one value on one day. They count as neither
-  positive nor negative, and no publication is preferred.
+- 16,569 identified observations (0.9%) have publications that disagree on a
+  field: species 16,523, coordinates 2,350, result 1,543, symptoms 2. From 2018
+  on the species disagreement is a spelling convention — the positives views
+  write `OLIVO` where the host views, infected-plant layers and workbooks write
+  `Olivo (Olea europaea)` for the same observation — so nearly every positive
+  carries one; it is exposed, not resolved, and it is not identity doubt. The
+  6,471 disagreeing observations of 2013–2017 are mostly counter collisions
+  across views, where a visual inspection and a sample share one value on one
+  day. Only a result disagreement withholds an observation from the positive
+  and negative counts. No publication is preferred.
 - The publisher's projections disagree with each other. For 1 October–31 December
   2021, a period chosen after the reader was written, the adapter yields 1,772
   distinct positive observations on 33 days; the positives views hold 1,772 rows;
