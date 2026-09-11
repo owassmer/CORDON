@@ -93,6 +93,23 @@ def _matchable(row):
                               or (row.reference_kind == 'daily' and len(row.reference) >= 5))
 
 
+def why_not_comparable(label: str, view: str, results) -> str | None:
+    """Why this reader could not compare a row it matched, named as its own act.
+
+    Every cause here is a fact about the reading, not about the document: that no
+    analyte was recovered does not establish that the annex prints none.
+    """
+    if label not in COMPARABLE_LABELS:
+        return 'the published label is not one this reader compares'
+    if not results:
+        return 'no result recovered from the row'
+    if all(r.analyte is None for r in results):
+        return 'no analyte recovered for any result'
+    if any(r.kind == 'unread' for r in results):
+        return 'a comparable result was recovered but could not be classified'
+    return 'the analytes recovered name another subspecies than the view'
+
+
 def findings(root: Path, store: Path):
     """Every observation publication carrying a report route, with what its report says.
 
@@ -100,13 +117,15 @@ def findings(root: Path, store: Path):
     """
     import duckdb
     records = {r['url']: r for r in json.loads((root / 'records.json').read_text())}
-    # The publisher serves one report file name from more than one place — another host,
-    # another programme directory, another scheme — and a route can fail at one while the
-    # bytes are served at another. A name is not a document identity, so this resolution
-    # can only restore a candidate: a result reaches an observation solely where the
-    # report's annex prints that observation's own sample reference, so a name that
-    # pointed at a different report yields `not named by its report`, never a result.
-    by_name = {document_name(r['url']): r['sha256'] for r in records.values() if 'sha256' in r}
+    # The publisher serves one report file name from more than one place. Where the route
+    # an observation names failed and a route naming the same file carried bytes, that
+    # document is a *candidate* for the one referenced, never an equivalent: a file name
+    # is not a document identity. Candidates are kept whole, so a name carrying two
+    # documents resolves to neither rather than to whichever record was read last.
+    by_name: dict[str, set] = {}
+    for record in records.values():
+        if 'sha256' in record:
+            by_name.setdefault(document_name(record['url']), set()).add(record['sha256'])
     by_digest: dict[str, Report] = {}
     for url, item, record in reports(root, store):
         if isinstance(item, Report):
@@ -120,12 +139,20 @@ def findings(root: Path, store: Path):
         'FROM read_parquet($files)) ORDER BY route', {'files': files})
     current, group = None, []
 
-    def emit(reference, day, view, label, digest, status, matches=0, verdict='not comparable', row=None):
+    def emit(reference, day, view, label, digest, status, *, matches=0, verdict='not comparable', row=None,
+             resolution='route', day_constrained=None):
         return {'route': current, 'sha256': digest, 'observation': reference, 'day': day, 'view': view, 'label': label,
                 'status': status, 'matches': matches, 'comparison': verdict,
+                'why_not_comparable': why_not_comparable(label, view, row.results) if row and ' at ' not in verdict else None,
                 'results': [(r.column, r.assay, r.analyte, r.kind) for r in row.results] if row else None,
                 'sampling_date': row.sampling_date if row else None,
                 'reference_kind': row.reference_kind if row else None,
+                # How this document was reached: the route the observation names, or a
+                # candidate substituted because a route naming the same file carried bytes.
+                'document_resolution': resolution,
+                # Whether the report's own printed day agreed with the observation's, or
+                # was absent and so constrained nothing.
+                'day_constrained': day_constrained,
                 # The sample identity is the observation's by construction: the row matched it.
                 'confirmation': confirmation_candidates(row, sample=reference) if row else None}
 
@@ -133,15 +160,24 @@ def findings(root: Path, store: Path):
         if current is None:
             return
         record = records.get(current)
-        digest = (record or {}).get('sha256') or by_name.get(document_name(current))
+        digest, resolution = (record or {}).get('sha256'), 'route'
+        if digest is None:
+            candidates = by_name.get(document_name(current), set())
+            if len(candidates) == 1:
+                digest, resolution = next(iter(candidates)), 'substituted candidate of the same file name'
+            elif candidates:
+                resolution = 'several documents carry this file name; none substituted'
         item = by_digest.get(digest) if digest else None
         if item is None:
             for reference, day, view, label in group:
-                yield emit(reference, day, view, label, digest, 'report not acquired' if not digest else 'report unread')
+                yield emit(reference, day, view, label, digest,
+                           'no bytes acquired for this document' if not digest else 'document acquired but not read',
+                           resolution=resolution)
             return
         if not item.rows:
             for reference, day, view, label in group:
-                yield emit(reference, day, view, label, digest, 'report has no readable rows')
+                yield emit(reference, day, view, label, digest, 'no annex row recovered from this document',
+                           resolution=resolution)
             return
         sample_rows: dict[str, list] = {}
         for row in item.rows:
@@ -149,18 +185,30 @@ def findings(root: Path, store: Path):
                 sample_rows.setdefault(row.reference, []).append(row)
         for reference, day, view, label in group:
             candidates = sample_rows.get(reference or '', [])
-            if len(candidates) > 1:
-                dated = [r for r in candidates if r.sampling_date == day]
-                candidates = dated if len(dated) == 1 else candidates
-            if len(candidates) == 1:
-                row = candidates[0]
-                yield emit(reference, day, view, label, digest, 'matched', 1, comparison(label, view, row.results), row)
-            elif candidates:
-                yield emit(reference, day, view, label, digest, 'several rows', len(candidates))
+            # The printed day is a constraint on identity, not a tie-break among candidates:
+            # a row the report dates to another day is a different sampling event, whatever
+            # reference it shares. A row printing no day constrains nothing, and says so.
+            agreeing = [r for r in candidates if r.sampling_date == day]
+            undated = [r for r in candidates if r.sampling_date is None]
+            contradicting = [r for r in candidates if r.sampling_date is not None and r.sampling_date != day]
+            usable = agreeing or undated
+            if len(usable) == 1:
+                row = usable[0]
+                yield emit(reference, day, view, label, digest, 'matched', matches=1,
+                           verdict=comparison(label, view, row.results), row=row, resolution=resolution,
+                           day_constrained=bool(agreeing))
+            elif usable:
+                yield emit(reference, day, view, label, digest, 'several rows carry this reference',
+                           matches=len(usable), resolution=resolution)
+            elif contradicting:
+                yield emit(reference, day, view, label, digest, 'the reference is printed, dated to another day',
+                           matches=len(contradicting), resolution=resolution, day_constrained=False)
             elif not sample_rows:
-                yield emit(reference, day, view, label, digest, 'report prints no sample reference')
+                yield emit(reference, day, view, label, digest, 'no sample reference recovered from this document',
+                           resolution=resolution)
             else:
-                yield emit(reference, day, view, label, digest, 'not named by its report')
+                yield emit(reference, day, view, label, digest, 'document read, this reference not found in it',
+                           resolution=resolution)
 
     while True:
         batch = cursor.fetchmany(20000)

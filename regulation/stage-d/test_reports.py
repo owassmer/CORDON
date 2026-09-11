@@ -96,6 +96,27 @@ class HeaderReading(unittest.TestCase):
         rows, _ = _table_rows(2, 'text-layer', _Table(cells), LETTER)
         self.assertEqual(rows[0].results[0].analyte, 'Xylella fastidiosa subsp. multiplex')
 
+    def test_a_column_headed_for_the_species_is_not_raised_to_a_subspecies(self):
+        # `fastidiosa` is the second word of the species name as well as a subspecies.
+        species_only = [['Codice committente', 'Data rilevamento', 'Esito qPCR Harper 2010 - Xylella fastidiosa'],
+                        ['123456', '01/06/2024', 'Positivo']]
+        rows, _ = _table_rows(2, 'text-layer', _Table(species_only), LETTER)
+        self.assertEqual(rows[0].results[0].analyte, 'Xylella fastidiosa')
+        # ...and the comparison layer must not then claim agreement at subspecies level.
+        self.assertEqual(comparison('published-positive', 'Positivi - Campioni 2024 sub. fastidiosa',
+                                    rows[0].results), 'agree at species')
+        # A sub-column standing on its own under a spanning header is still a subspecies.
+        subcolumn = [['Codice committente', 'Data rilevamento',
+                      'ANALISI PER IDENTIFICAZIONE SOTTOSPECIE Xylella fastidiosa', None, None],
+                     [None, None, 'Esito saggio Dupas et al., 2019', None, None],
+                     [None, None, 'fastidiosa', 'multiplex', 'pauca'],
+                     ['123456', '01/06/2024', 'Non rilevata', 'Rilevata', 'Non rilevata']]
+        rows, _ = _table_rows(2, 'text-layer', _Table(subcolumn), LETTER)
+        self.assertEqual([r.analyte for r in rows[0].results],
+                         ['Xylella fastidiosa subsp. fastidiosa',
+                          'Xylella fastidiosa subsp. multiplex',
+                          'Xylella fastidiosa subsp. pauca'])
+
     def test_a_transposed_table_is_recognized_only_when_its_first_column_is_the_id_and_its_columns_are_codes(self):
         cells = [['Id', '1644899', '1645134'], ['Data rilevamento', '28/02/2024', '28/02/2024'], ['Esito laboratorio', 'Positivo', 'Positivo']]
         turned = _transposed(cells)

@@ -2,13 +2,13 @@
 
 This is the front door to Stage D. It starts with facts required by accepted A–C,
 then identifies the source that can supply them. After the 10 September purge,
-the bounded national calendar remained retained. The monitoring-observation and laboratory-report families are established (first two rows, details below); prior acquisitions and case
+the bounded national calendar remained retained. The monitoring-observation family is established (first row). The laboratory-report documents are acquired but their reading is not established (second row); prior acquisitions and case
 demonstrations confer no completion on the other rows.
 
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | The report each monitoring record links: confirmation letters of the SELGE network and CNR-IPSP, rapporti di prova of CNR-IPSP and of the first-level laboratories, and CNR subspecies-identification rapporti | One laboratory report: a letter stating its identity, laboratory, dates, assays and analyte, and an annex listing one row per sample with the result the laboratory states for it | Established for what a public report can supply. 1,918 report routes name 1,186 documents, of which 1,175 are acquired and 11 the publisher does not serve. `cordon_d.reports.report` reads each from its own structure and `cordon_d.findings.findings` relates its rows to the observations that reference it. A report supplies the laboratory's diagnosis per test with its stated analyte, the sample identity and the dates: the basis for the Osservatorio's official confirmation, not the confirmation itself, and never the genome target or a classifying Cq. Details below. |
+| What the laboratory actually reported | The report each monitoring record links: confirmation letters of the SELGE network and CNR-IPSP, rapporti di prova of CNR-IPSP and of the first-level laboratories, and CNR subspecies-identification rapporti | One laboratory report: a letter stating its identity, laboratory, dates, assays and analyte, and an annex listing one row per sample with the result the laboratory states for it | **Not established.** The documents are acquired: 1,918 report routes name 1,186 documents, 1,175 of them in the store. Reading them is not. Sources read independently of the reader show it recording its own extraction failures as facts about the publisher, over the majority of the population. What is acquired, what this reader currently recovers, and what the sources show it misses are below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry |
@@ -110,84 +110,99 @@ What the population shows, read and not reconciled:
 
 ## Laboratory reports
 
+### What is acquired
+
 Every report is reached from an observation: the monitoring stream publishes
 `DOCUMENTO_CONFERMA` and `LNK_DOCUMENTO_SELGE` on the positives views and
 infected-plant layers, and nowhere else (`DOCUMENTO_DECRETO` appears on the
 removed-plant layers but never carries a value). Those 1,918 routes name
 1,186 distinct documents, of which 1,175 are acquired into the
 content-addressed store by `scripts/acquire_reports.py` with one record per route.
-16 routes fail; 3 of those documents were served on a sibling route seconds
-later, so 11 documents are never served and are retried on the next run. Four
-families named by the publisher's own file naming, which the reader never uses:
-621 confirmation letters of the SELGE network and CNR-IPSP (469 scanned,
-150 with a text layer, 2 mixed); 373 rapporti di prova at the same host, from
-CNR-IPSP and from the first-level laboratories that sign their own (CRSFA, IAMB, UNIBA, UNIFG, UNILE), which
-carry nearly every routed positive of 2021–2023; 180 CNR subspecies-identification
-rapporti published beside the per-subspecies monitoring services; and 1 of another name.
+16 routes fail; 3 of those documents were served on a route naming the same
+file, so 11 documents are served on no route at all. This much is established.
 
-`report(digest, store)` reads one document: the text layer where a page has one
-(1,719 pages), Tesseract Italian OCR where it has none
-(1,359 pages), re-read at higher resolution when the first pass recovers
-almost no rows; the resolution used is recorded on every page. From the letter it
-reads identity, laboratory, report and delivery dates, the stated sample count, the
-assays and the analyte, each as the literal string printed. A page with a text layer
-is read by its printed headers: a merged header spans only under its own parent and
-only into a column some header row names, a sub-column named for a subspecies states
-that column's analyte, and a table continuing across a page inherits the header above
-it. A scanned page has no recoverable headers, so its result columns are positional
-and designate no test. The reader reads 12,202 rows, of which 1,153 state no result it can
-classify and are carried as unread with their text. Nothing is inferred: an OCR string
-that is not a result word is unread; a cell holding several rows' results states none of
-them; and a scanned line carrying a second sample code or more than two dates has
-absorbed a neighbour whose own code OCR lost, so it states no result and keeps its text.
+Of the acquired documents, 475 carry a scanned annex with no text layer and
+693 carry a text layer throughout. 17,761 of the 30,968 observation
+publications — 57% — route to a scanned annex, and nearly every routed positive
+of 2015 to 2020 is among them.
 
-| What a report supplies | What it does not |
+### What the sources state that this reader does not recover
+
+Read from page images, independently of the reader, and held out of it
+(`cordon-groundtruth/readings.json` in the profile cache, not in this repository):
+
+- A scanned annex **does print its column headers**, and they **do name assays**. The
+  2018, 2019 and 2020 SELGE annexes print `Esito qPCR 2010` beside `Esito qPCR 2006`
+  under `ANALISI DIAGNOSTICHE SECONDO LIVELLO`; the 2015 annex prints
+  `Esito analisi ELISA Lab. IAM` beside `qPCR (Harper et al., 2010)` and
+  `qPCR (Francis et al., 2006)`, with the performing laboratory named in the header.
+  This reader recovers none of them and previously recorded that as the document
+  designating no test. It does not. The two Annex IV tests that Article 2(6) asks
+  about are printed on the face of these annexes, for the years this row had
+  assigned to Stage E.
+- The 2015 annex identifies its samples by `Numero campione giornaliero` and
+  `Codice Laboratorio` (`O 1`, `O 2`), which this reader's five-to-nine-digit
+  pattern cannot accept. Its samples are identified; the reader cannot read the
+  identifiers.
+- Candidate recoveries measured on one such page: the flattened-line path recovers no
+  header; OCR word geometry banded by row recovers `Esito qPCR` but loses the year,
+  because the sub-header wraps onto a second line; an image-capable reading recovers
+  the full two-tier header, both years and the data rows. No method is settled, and
+  the evidence for choosing one is the ground-truth set, not this reader's output.
+
+Until that is repaired, every absence this row reports is a statement about the
+reading. Where the source is silent, where it is illegible, where extraction failed
+and where a recovered fact could not be attached are four different things, and this
+reader distinguishes only the last.
+
+### What this reader currently recovers
+
+`report(digest, store)` reads the text layer where a page has one (1,719 pages) and
+runs Tesseract Italian where it has none (1,359 pages), re-reading at higher
+resolution when the first pass recovers almost no rows. A page with a text layer is
+read by its printed headers; a scanned page is read positionally, for the reason
+above. It recovers 12,202 annex rows, 1,153 of which state no result it can classify.
+Nothing is invented: an unrecognised string is unread, a cell carrying several
+results states none, and a line carrying a second sample code or a third date has
+absorbed a neighbour and states none.
+
+`findings(root, store)` relates those rows to the observations whose own routes name
+the document. The sample reference the laboratory prints must match, and the day the
+report prints must not contradict the observation's: a row dated elsewhere is a
+different sampling event whatever reference it shares. Where the routed document was
+not served and another route names the same file, that document is offered as a
+candidate and recorded as a substitution; where a file name carries two documents,
+neither is substituted.
+
+| What a report supplies | What this reading does not establish |
 |---|---|
-| The laboratory's stated result for each column, under the test as that column designates it (`Esito qPCR 2010` beside `Esito qPCR 2006` are two tests; the assay name they share is a family and is never used as an identity, and two designations differing only by a full test date or a repetition marker are one assay run twice, while a protocol year inside the designation is part of it) | The genome target each test amplifies. No report prints one and an assay name is not a genome target (`analytical-result`), so the Article 2(6) different-target condition stays unresolved on this source |
-| The sample identity the laboratory prints, its sampling date, species, coordinates and comune where the annex carries them, and the test dates | The official confirmation of the finding. Under D.lgs. 19/2021 Art. 28(3) the Regional Service decides that on the diagnosis; the report is the diagnosis |
-| Two differently designated tests both reading detected on one sample — the test and sample identities `cordon_c.bindings.confirmation_facts` takes for Article 2(6), carried on every matched finding by `findings.confirmation_candidates`. It reaches 3,772 of 30,968 publications, all from reports with a text layer (2020: 2,570, 2021: 880, 2024: 322): a scanned annex designates no test, so the confirmation letters carrying the 2015–2019 positives supply none, and where such a positive falls outside a demarcated area — the case Article 2(6) governs — Stage E must supply the identities as well as the target | A classifying Cq. 10 reports print a measured cycle value as a free-text laboratory note (22 values, e.g. `CT: 20,07`), 2 more restate the act's own Cq thresholds rather than a sample's value, and 2 confirmation letters of 2017 carry one legible only under OCR. None of them names the assay it belongs to or the run's validity, which is what `REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification` classifies; that Cq stays open under `analytical-result` |
-| The laboratory, the report date and the delivery date the letter prints, as strings | Laboratory designation, accreditation and custody. The reader has no field for them and they follow their own A routes and sources |
+| The laboratory's stated result for each column it recovers, under the test as that column designates it, with the analyte the column states | Any fact it failed to recover. The scanned annexes print assay designations this reader does not read, so its silence on them is not the publisher's |
+| The sample identity the laboratory prints, where the identifier has a shape this reader accepts | The official confirmation of the finding. Under D.lgs. 19/2021 Art. 28(3) the Regional Service decides that on the diagnosis; the report is the diagnosis |
+| Where two differently designated tests both read detected on one sample, the Article 2(6) test and sample identities, carried on the finding by `findings.confirmation_candidates` | The genome target each test amplifies, which this reader has not been shown to recover from any document, and which an assay name does not establish (`analytical-result`) |
+| The laboratory, the report date and the delivery date the letter prints | Laboratory designation, accreditation and custody, which follow their own A routes and sources |
 
-What the join shows, read and not reconciled:
+### What the join currently shows
 
-- 30,968 observation publications carry a route; every one of them is published positive
-  or positive-and-removal but two negatives and two doubtfuls. 19,311 match a row in
-  the report they name, of which 15,348 agree with the published label at the level the
-  report states (12,505 at species, 2,843 at subspecies), 4 disagree, and 3,959 cannot be
-  compared: 2,863 because no analyte is stated for any result, 668 because the row states
-  no result, 322 because the report states another subspecies than the view names, and
-  106 because the comparable result could not be read.
-- The disagreements are stated, never resolved. They are two samples, each published in
-  two views. Sample 747145 of 2020-02-20, published negative in Positivi - Campioni 2019 (a negative label inside its publisher's own positives view), is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa. Sample 1931257 of 2026-01-13, published doubtful in Positivi - Campioni 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
-- The remaining 11,657 publications gain no report row: 9,471 name a report whose rows
-  were read but which does not print that sample reference, 1,601 name a report whose
-  annex yielded no readable row, 198 name one whose annex prints no sample
-  reference this reader accepts, 30 name one that lists the same reference twice, and
-  357 name one of the 11 documents the publisher serves on no route.
-  They keep their published label and gain nothing from a report.
-- The publisher's own check on this reading is the letter's stated sample count: the
-  distinct sample references recovered match it in 228 documents, fall short in
-  332 and exceed it in 12 (603 letters state no count). It fails where OCR loses
-  rows on a scanned annex, which is what the no-row counts above are concentrated in.
-  The recovered references are not all sample references: 522 scanned rows carry one with
-  no readable day, 158 of them shaped like a coordinate whose comma OCR lost, so the
-  check reads more favourably than the annexes support. Such a reference can still only
-  reach an observation that a report of its own route names, and 10 publications do.
-- The publisher serves one report file name from more than one place. Three documents
-  failed at the route an observation names and were served at another host or programme
-  directory; they are read from the route that served them. A file name is not a document
-  identity, so such a report only offers a candidate: a result reaches an observation
-  solely where the annex prints that observation's own sample reference, and four of the
-  six publications so resolved duly gain no row.
-- A match uses the sample reference the laboratory prints. Where a report's only
-  identifying column is an identifying cell it is read from that cell (102 matches), and
-  where it is a daily counter carrying sample-width values it is matched on the value
-  (44 matches); each finding records which column supplied it. One annex prints a
-  reference with a `bis` suffix, which the reader drops; whether `bis` marks a repeat
-  sample is unresolved.
+- 30,968 observation publications carry a route; every one is published positive or
+  positive-and-removal but two negatives and two doubtfuls. 19,184 match a row in the
+  document they name, 15,249 of those agreeing with the published label at the level the
+  report states, 4 disagreeing, 3,931 not comparable for causes the finding names.
+- The two disagreements are stated, never resolved. Sample 747145 of 2020-02-20, published negative in Positivi - Campioni 2019, is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa. Sample 1931257 of 2026-01-13, published doubtful in Positivi - Campioni 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
+- 11,784 publications gain no row. The causes are counted separately and none of them
+  is a statement about the document: 9,471 where the document was read
+  and this reference was not found in it, 1,601 where no annex row was recovered,
+  198 where no sample reference was recovered, 127 where the reference is
+  printed but dated to another day, 30 where several rows carry it, and
+  357 where no bytes were acquired.
+- Agreement with the published label is not evidence that the document was read
+  correctly: it compares this reading to the answer the publisher already holds, and
+  an attachment can be wrong while preserving the expected result category. The
+  letters' own stated sample counts are the same kind of check — they match the
+  references recovered in 228 documents and fall short in 332 — and neither can
+  stand as the correctness evidence for a reading.
 
-Reading all 1,175 documents costs about 11 minutes once per reader version; the join then
-runs in 1 seconds over the derived layer.
+Reading all 1,175 documents costs about 13 minutes once per reader version; the join
+then runs in 2 seconds over the derived layer.
 
 ## Materials that are not standalone input gaps
 

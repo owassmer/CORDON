@@ -48,6 +48,10 @@ ANALYTE = re.compile(r'(Xylella\s+fastidiosa(?:\s+(?:subsp\.?|sottospecie|sub\.)
 ANALYTE_OCR = re.compile(r'Xy[l1/|i]{1,2}e[l1/|i]{1,2}a\s+fast[il1]d[il1]osa(?:\s+(?:subsp\.?|sottospecie|sub\.)\s*(pauca|multiplex|fastidiosa))?', re.I)
 SUBSPECIES = re.compile(r'\b(pauca|multiplex|fastidiosa)\b', re.I)
 QUALIFIED_SUBSPECIES = re.compile(r'(?:subsp\.?|sottospecie|sub\.)\s*(pauca|multiplex|fastidiosa)', re.I)
+# `fastidiosa` is the second word of the species name as well as the name of a
+# subspecies. A bare token is read as a subspecies only where it stands apart from
+# the species name, so a column headed for the species is not raised to a subspecies.
+SPECIES_NAME = re.compile(r'\b(?:Xylella|X\.?)\s+fastidiosa\b', re.I)
 # The labels an annex prints for its other columns; a header text carrying several of
 # them is the whole header, not one column's designation.
 _LABELS = re.compile(r'data\s*(?:rilev|campion|prelie|saggio|prova)|specie|comune|latitud|longitud|'
@@ -342,8 +346,10 @@ def _result(header, value, letter_assays, letter_analytes):
     # A sub-column named for a subspecies states that column's analyte; the spanning header
     # above it names the family assay, not the analyte.
     tail = header[assay.end():] if assay and assay.string is header else ''
-    # `subsp. multiplex` names the subspecies; the `fastidiosa` of the species name does not.
-    subspecies = QUALIFIED_SUBSPECIES.search(tail) or SUBSPECIES.search(tail)
+    # `subsp. multiplex` names the subspecies; the `fastidiosa` of the species name does
+    # not, so the species name is masked out before a bare token is read as one. A
+    # sub-column label standing on its own (`… / Esito saggio Dupas / fastidiosa`) survives.
+    subspecies = QUALIFIED_SUBSPECIES.search(tail) or SUBSPECIES.search(SPECIES_NAME.sub(' ', tail))
     analyte = ANALYTE.search(header)
     stated = (f'Xylella fastidiosa subsp. {subspecies.group(1).lower()}' if subspecies else
               analyte.group(1) if analyte else
