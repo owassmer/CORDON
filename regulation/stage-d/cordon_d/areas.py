@@ -32,7 +32,18 @@ import re
 
 from .store import blob_path, store_root
 
-ZONE_HEADING = re.compile(r'ZONA\s+(INFETTA|CUSCINETTO|CONTENIMENTO)', re.I)
+# The annexes caption each table with the zone it states. Containment is
+# written "ZONA DI CONTENIMENTO" and also "ZONA INFETTA IN CUI SI APPLICANO
+# MISURE DI CONTENIMENTO", and an eradication focus is captioned "FOCOLAI",
+# so the more specific zone is tested first: reading a containment or focus
+# table as buffer would report the wrong regime for every sheet in it.
+ZONE_PATTERNS = (
+    ('focolaio', re.compile(r'\bFOCOLAI\w*\b', re.I)),
+    ('contenimento', re.compile(r'\bCONTENIMENTO\b', re.I)),
+    ('cuscinetto', re.compile(r'\bCUSCINETTO\b', re.I)),
+    ('infetta', re.compile(r'\bZONA\s+INFETTA\b|\bINFETTA\b', re.I)),
+)
+ZONE_HEADING = re.compile(r'\bFOCOLAI\w*\b|\bZONA\b[^\n]{0,80}?\b(INFETTA|CUSCINETTO|CONTENIMENTO)\b', re.I)
 ANNEX_MARKER = re.compile(r'ALLEGATO\s*2\b', re.I)
 # Bari is a citta metropolitana, so the annexes head that column both ways.
 HEADER_PROVINCE = re.compile(r"\bPROVINCIA\b|\bCITTA'?\s*\n?\s*METROPOLITANA\b", re.I)
@@ -332,8 +343,9 @@ def cadastral_statements(text):
     statements, unresolved = [], []
     for position, index in enumerate(headings):
         end = headings[position + 1] if position + 1 < len(headings) else len(lines)
-        match = ZONE_HEADING.search(lines[index])
-        zone = ZONE_KINDS[match.group(1).upper()]
+        zone, _ = _zone_from(lines[index])
+        if zone is None:
+            continue
         read, pending = _read_segment(lines, index, end, lines[index].strip(), zone)
         statements.extend(read)
         unresolved.extend(pending)
@@ -479,8 +491,12 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
 # --- reading the cadastral annex from the act's own table geometry ------------
 
 def _zone_from(text):
-    match = ZONE_HEADING.search(text or '')
-    return (ZONE_KINDS[match.group(1).upper()], match.group(0)) if match else (None, None)
+    text = text or ''
+    for kind, pattern in ZONE_PATTERNS:
+        match = pattern.search(text)
+        if match:
+            return kind, match.group(0)
+    return None, None
 
 
 def annex_statements(document) -> tuple:
@@ -539,9 +555,9 @@ def annex_statements(document) -> tuple:
                         heading = ' '.join(c for c in row if c).strip()
                         break
                 if zone is None:
-                    zone, heading = _zone_from(page_text)
-                if zone is None:
-                    unresolved.append(f'annex table names no zone: {" | ".join(columns)[:120]}')
+                    unresolved.append('annex table states no zone of its own; its rows are left '
+                                      'unread rather than given a neighbouring zone: '
+                                      + ' | '.join(columns)[:90])
                     continue
                 # A cell shared down a run of comuni is drawn once, spanning
                 # their rows. The table reports that span as the cell's own
@@ -637,3 +653,90 @@ def act_documents(root: Path):
         return {}
     return {r['instrument_id']: r for r in json.loads(record_path.read_text())
             if r.get('sha256') and 'error' not in r}
+
+
+# --- handing the act's statement to the accepted consumer ---------------------
+
+MEMBERSHIP_PREDICATE = ('the point or parcel lies within the geography adopted by '
+                        'this act and its annexes')
+INTERVAL_PREDICATE = "decision time within this version's effective interval"
+
+
+def _place_label(comune, province, section, foglio):
+    parts = []
+    if foglio:
+        parts.append(f'foglio {foglio}' + (f' sezione {section}' if section else ''))
+    if comune:
+        parts.append(str(comune))
+    if province:
+        parts.append(f'provincia {province}')
+    return ', '.join(parts) or 'the stated place'
+
+
+def membership_evidence(versions_, root: Path, day, *, comune=None, province=None,
+                        section=None, foglio=None, known_at=None):
+    """Build the Sources and Assertions that answer A's membership predicate.
+
+    Each assertion is supported by the exact annex row the act prints, in the
+    act document held in the store under its own hash. Nothing is asserted for
+    a version whose annex does not decide the place: an absent assertion leaves
+    the predicate unresolved, which is not the same as placing the parcel
+    outside the zone.
+    """
+    from datetime import datetime, timezone
+    from .evidence import Assertion, Source, Support
+    documents = act_documents(root)
+    store = store_root(root)
+    known_at = known_at or datetime.now(timezone.utc)
+    label = _place_label(comune, province, section, foglio)
+    sources, assertions = {}, []
+    for version in in_force(versions_, day):
+        record = documents.get(version.instrument_id)
+        if record is None or not version.statements:
+            continue
+        for statement in version.statements:
+            if not statement.covers(comune=comune, province=province,
+                                    section=section, foglio=foglio):
+                continue
+            digest = record['sha256']
+            identity = f'act:{version.instrument_id}'
+            if identity not in sources:
+                sources[identity] = Source(
+                    identity=identity,
+                    path=str(blob_path(store, digest).relative_to(store)),
+                    sha256=digest, role='official-record', access='public')
+            assertions.append(Assertion(
+                identity=f'{version.provision_version_id}|{statement.zone}|{label}',
+                contract='adopted-geography',
+                context=label,
+                event_date=day,
+                known_at=known_at,
+                consumer_version=version.provision_version_id,
+                predicate=MEMBERSHIP_PREDICATE,
+                value=True,
+                support=(Support(
+                    source=identity,
+                    selector=f'{statement.zone_heading} :: '
+                             f'{statement.province or "-"} / {statement.comune or "-"}',
+                    reading=f'the act places {label} in the {statement.zone} zone: '
+                            f'{statement.text}'),)))
+            break
+    return tuple(sources.values()), tuple(assertions)
+
+
+def evidence_for(versions_, root: Path, day, *, snapshot, comune=None, province=None,
+                 section=None, foglio=None, known_at=None):
+    """An Evidence over this row's assertions, ready for the accepted consumer."""
+    from .evidence import Evidence
+    contracts = json.loads((root / 'regulation/stage-d/contracts.json').read_text())
+    bindings = {}
+    for binding in json.loads(
+            (root / 'regulation/stage-d/predicate-contracts.json').read_text())['bindings']:
+        bindings.setdefault(binding['predicate'], set()).update(binding.get('contracts', ()))
+    bindings = {k: frozenset(v) for k, v in bindings.items()}
+    sources, assertions = membership_evidence(
+        versions_, root, day, comune=comune, province=province,
+        section=section, foglio=foglio, known_at=known_at)
+    return Evidence(snapshot, sources, assertions,
+                    {c['id']: c for c in contracts['contracts']}, bindings,
+                    store_root(root)), assertions
