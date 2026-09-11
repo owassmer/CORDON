@@ -3,18 +3,22 @@
 An observation is the input grain here. Sample-reference matches are exposed for
 comparison; they do not merge physical plants or choose a winning publication.
 """
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from decimal import Decimal
 import json
 from math import isfinite, ulp
 import os
 from pathlib import Path
+import shutil
+import tempfile
 from zoneinfo import ZoneInfo
 
 from .campaign import PublicationReading, meaningful_text, publication_reading
-from .evidence import file_digest
+from hashlib import sha256
+
 from .releases import Occurrence, workbook_occurrences, csv_occurrences, arcgis_occurrences
+from .store import adopt, audit, blob_path as store_blob_path, derived_path, dumps, loads, store_root, write_derived
 
 
 OBSERVATION_DATES = ('DATA_RILEVAMENTO', 'DATA_PRELIVEO', 'DATA_PRELIEVO',
@@ -151,41 +155,168 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
         meaningful_text(row.get('SUBSPECIE')), view_name, coordinates, crs, tuple(issues))
 
 
+@dataclass(frozen=True)
+class Release:
+    """One retained release or view page in stream order, as its acquisition record names it."""
+    url: str
+    view: str
+    digest: str
+    raw_path: Path
+    kind: str
+    options: dict
+    expected_rows: int | None = None
+
+
+def reader_version() -> str:
+    """Hash of the reader modules; a changed reader invalidates every derived file."""
+    digest = sha256()
+    for name in ('monitoring.py', 'releases.py', 'campaign.py', 'evidence.py', 'store.py'):
+        digest.update((Path(__file__).parent / name).read_bytes())
+    return digest.hexdigest()[:12]
+
+
+def releases(root: Path):
+    """Every retained release and page, in stream order, from the acquisition records."""
+    campaign = root / 'campaign'
+    for record in json.loads((campaign / 'releases.json').read_text()):
+        if 'error' in record:
+            raise ValueError(f"Incomplete campaign acquisition: {record['url']}")
+        suffix = Path(record['path']).suffix
+        if suffix == '.xlsx':
+            options = {}
+        elif suffix == '.csv':
+            options = {'encoding': record['encoding'], 'delimiter': record['delimiter']}
+        else:
+            raise ValueError(f"Uninterpreted release format: {record['path']}")
+        yield Release(record['url'], record['path'], record['sha256'], campaign / record['path'],
+                      suffix[1:], options)
+    for metadata_path in sorted((root / 'sit').glob('*/*/*/layer.json')):
+        directory = metadata_path.parent
+        record = json.loads((directory / 'release.json').read_text())
+        options = {'oid_field': record['oid_field'],
+                   'allow_repeated_oid': record['rows'] > record['unique_oids']}
+        for index, page in enumerate(record['pages']):
+            yield Release(record['url'], record['name'], page['sha256'], directory / page['path'], 'arcgis',
+                          options, record['rows'] if index == len(record['pages']) - 1 else None)
+
+
+def _raw_occurrences(kind: str, path: Path, options: dict):
+    if kind == 'xlsx':
+        return workbook_occurrences(path)
+    if kind == 'csv':
+        return csv_occurrences(path, **options)
+    return arcgis_occurrences(path, **options)
+
+
+def _ensure_blob(store: Path, release: Release) -> Path:
+    blob = store_blob_path(store, release.digest)
+    if blob.exists():
+        return blob
+    if not release.raw_path.exists():
+        raise ValueError(f'Missing source bytes for {release.url}: {release.digest}')
+    try:
+        if adopt(store, release.raw_path) != release.digest:
+            raise ValueError(f'Changed source release: {release.raw_path}')
+    except FileNotFoundError:
+        if not blob.exists():  # a concurrent ingest adopted it first, or it is gone
+            raise
+    return blob
+
+
+def _reading_row(reading: MonitoringObservation, store: Path, ordinal: int) -> dict:
+    occurrence = reading.publication.occurrence
+    x, y = reading.coordinates if reading.coordinates else (None, None)
+    return {'ordinal': ordinal, 'reference': reading.observation_reference, 'day': reading.observation_date,
+            'release': reading.release, 'view': reading.view_name,
+            'path': os.path.relpath(occurrence.path, store), 'sha256': occurrence.sha256,
+            'locator': occurrence.locator, 'result': reading.publication.result,
+            'restates': reading.publication.result == DUPLICATE_RESULT, 'kind': reading.kind,
+            'species': reading.species, 'cultivar': reading.cultivar, 'subspecies': reading.subspecies,
+            'symptom_presence': reading.symptom_presence, 'x': x, 'y': y, 'crs': reading.crs,
+            'report_routes': [route for _, route in reading.publication.document_references],
+            'issues': list(reading.issues)}
+
+
+READINGS_SCHEMA = None
+
+
+def _readings_schema():
+    global READINGS_SCHEMA
+    if READINGS_SCHEMA is None:
+        import pyarrow
+        READINGS_SCHEMA = pyarrow.schema([
+            ('ordinal', pyarrow.int64()), ('reference', pyarrow.string()), ('day', pyarrow.date32()),
+            ('release', pyarrow.string()), ('view', pyarrow.string()), ('path', pyarrow.string()),
+            ('sha256', pyarrow.string()), ('locator', pyarrow.string()), ('result', pyarrow.string()),
+            ('restates', pyarrow.bool_()), ('kind', pyarrow.string()), ('species', pyarrow.string()),
+            ('cultivar', pyarrow.string()), ('subspecies', pyarrow.string()),
+            ('symptom_presence', pyarrow.bool_()), ('x', pyarrow.float64()), ('y', pyarrow.float64()),
+            ('crs', pyarrow.string()), ('report_routes', pyarrow.list_(pyarrow.string())),
+            ('issues', pyarrow.list_(pyarrow.string()))])
+    return READINGS_SCHEMA
+
+
+def _ensure_derived(store: Path, release: Release, version: str) -> tuple[Path, Path, bool]:
+    """Occurrences and readings for one blob, ingested once per reader version."""
+    import pyarrow
+    occurrences = derived_path(store, 'monitoring/occurrences', release.digest, version)
+    readings = derived_path(store, 'monitoring/readings', release.digest, version)
+    blob = _ensure_blob(store, release)  # the cache never stands in for missing bytes
+    if occurrences.exists() and readings.exists():
+        return occurrences, readings, False
+    locators, values, rows = [], [], []
+    for ordinal, occurrence in enumerate(_raw_occurrences(release.kind, blob, release.options)):
+        locators.append(occurrence.locator)
+        values.append(dumps(occurrence.values))
+        rows.append(_reading_row(observation(occurrence, release=release.url, view_name=release.view),
+                                 store, ordinal))
+    write_derived(occurrences, pyarrow.table({'locator': locators, 'values': values}))
+    write_derived(readings, pyarrow.Table.from_pylist(rows, schema=_readings_schema()))
+    for current in (occurrences, readings):  # a superseded reader's output for this blob is dead
+        for stale in current.parent.glob(f'{release.digest}-*.parquet'):
+            if stale != current:
+                stale.unlink()
+    return occurrences, readings, True
+
+
+def ingest(root: Path) -> Path:
+    """Adopt every retained release into the store and derive it once; audit after any write."""
+    store = store_root(root)
+    version = reader_version()
+    wrote = False
+    for release in releases(root):
+        wrote |= _ensure_derived(store, release, version)[2]
+    if wrote:
+        mismatches = audit(store)
+        if mismatches:
+            raise ValueError(f'Store audit failed: {mismatches[:3]}')
+    return store
+
+
 def observations(root: Path):
-    """Stream every retained release; missing declared files fail visibly.
+    """Stream every retained release from the store; missing declared bytes fail visibly.
 
     Newly acquired native releases enter by their acquisition record, without
     registering a plant, case, expected answer or observation subset.
     """
-    campaign = root / 'campaign'
-    for release in json.loads((campaign / 'releases.json').read_text()):
-        if 'error' in release:
-            raise ValueError(f"Incomplete campaign acquisition: {release['url']}")
-        path = campaign / release['path']
-        if file_digest(path) != release['sha256']:
-            raise ValueError(f'Changed source release: {path}')
-        if path.suffix == '.xlsx':
-            rows = workbook_occurrences(path)
-        elif path.suffix == '.csv':
-            rows = csv_occurrences(path, encoding=release['encoding'], delimiter=release['delimiter'])
-        else:
-            raise ValueError(f'Uninterpreted release format: {path}')
-        for row in rows:
-            yield observation(row, release=release['url'], view_name=path.name)
-    for metadata_path in sorted((root / 'sit').glob('*/*/*/layer.json')):
-        directory = metadata_path.parent
-        release = json.loads((directory / 'release.json').read_text())
-        count = 0
-        for page in release['pages']:
-            path = directory / page['path']
-            if file_digest(path) != page['sha256']:
-                raise ValueError(f'Changed source page: {path}')
-            for row in arcgis_occurrences(path, oid_field=release['oid_field'],
-                                         allow_repeated_oid=release['rows'] > release['unique_oids']):
-                count += 1
-                yield observation(row, release=release['url'], view_name=release['name'])
-        if count != release['rows']:
-            raise ValueError(f'Incomplete retained layer: {release["url"]}')
+    import pyarrow.parquet as parquet
+    store = ingest(root)
+    version = reader_version()
+    count = 0
+    for release in releases(root):
+        occurrences, _, _ = _ensure_derived(store, release, version)
+        blob = str(store_blob_path(store, release.digest))
+        table = parquet.read_table(occurrences)
+        for locator, values in zip(table.column('locator').to_pylist(), table.column('values').to_pylist()):
+            count += 1
+            yield observation(Occurrence(blob, release.digest, locator, loads(values)),
+                              release=release.url, view_name=release.view)
+        if release.expected_rows is not None:
+            if count != release.expected_rows:
+                raise ValueError(f'Incomplete retained layer: {release.url}')
+            count = 0
+        elif release.kind != 'arcgis':
+            count = 0
 
 
 # --- distinct observations across every release and view ---------------------
@@ -303,83 +434,79 @@ class DistinctObservation:
         return tuple(sorted({route for member in self.members for route in member.report_routes}))
 
 
-def _member(reading: MonitoringObservation, root: Path) -> Member:
-    occurrence = reading.publication.occurrence
-    return Member(reading.release, reading.view_name, os.path.relpath(occurrence.path, root),
-                  occurrence.sha256, occurrence.locator, reading.publication.result, reading.kind,
-                  reading.species, reading.cultivar, reading.subspecies, reading.symptom_presence,
-                  reading.coordinates, reading.crs,
-                  tuple(route for _, route in reading.publication.document_references), reading.issues)
+def _member_from_row(row: dict) -> Member:
+    coordinates = (row['x'], row['y']) if row['x'] is not None and row['y'] is not None else None
+    return Member(row['release'], row['view'], row['path'], row['sha256'], row['locator'], row['result'],
+                  row['kind'], row['species'], row['cultivar'], row['subspecies'], row['symptom_presence'],
+                  coordinates, row['crs'], tuple(row['report_routes'] or ()), tuple(row['issues'] or ()))
 
 
 def distinct_observations(root: Path):
     """Group the whole stream by publisher reference and observation day.
 
-    Reads every retained release through `observations`; a temporary index
-    orders the stream and is discarded. Yields one group per (reference, day)
-    across all releases and views, then every uncorrelatable observation alone.
+    Reads the derived readings of every retained release through DuckDB, in
+    stream order. Yields one group per (reference, day) across all releases and
+    views, and every uncorrelatable observation alone.
 
     A reference identifies an observation only where its own publishing view
     uses it once on that day; a value one view gives to several rows on one day
     is a counter, not an identifier, and those rows stay uncorrelated. Only a
     duplicate-labelled row may share the reference of the positive it restates.
     """
-    import sqlite3
-    import tempfile
-    with tempfile.TemporaryDirectory() as temporary:
-        index = sqlite3.connect(Path(temporary) / 'index.sqlite')
-        # Small grouping keys and the large member payload live apart, so grouping
-        # and the reuse pass never read the payload.
-        index.execute('CREATE TABLE k (seq INTEGER PRIMARY KEY, ref TEXT, day TEXT, view TEXT, restates INTEGER)')
-        index.execute('CREATE TABLE p (seq INTEGER PRIMARY KEY, member TEXT)')
-        keys, payloads = [], []
-        for sequence, reading in enumerate(observations(root)):
-            reference, day = reading.observation_reference, reading.observation_date
-            member = _member(reading, root)
-            correlatable = reference is not None and day is not None
-            keys.append((sequence, reference if correlatable else None, day.isoformat() if day else None,
-                         member.release + '|' + member.view, int(member.result == DUPLICATE_RESULT)))
-            payloads.append((sequence, json.dumps(asdict(member))))
-            if len(keys) >= 50000:
-                index.executemany('INSERT INTO k VALUES (?, ?, ?, ?, ?)', keys)
-                index.executemany('INSERT INTO p VALUES (?, ?)', payloads)
-                keys.clear(); payloads.clear()
-        index.executemany('INSERT INTO k VALUES (?, ?, ?, ?, ?)', keys)
-        index.executemany('INSERT INTO p VALUES (?, ?)', payloads)
-        index.commit()
-        index.execute('CREATE INDEX v ON k (view, ref, day, restates)')
-        index.execute('CREATE TABLE reused AS SELECT view, ref, day FROM k WHERE ref IS NOT NULL '
-                      'GROUP BY view, ref, day HAVING SUM(restates = 0) > 1')
-        index.execute('CREATE INDEX r ON reused (view, ref, day)')
-        index.execute('UPDATE k SET ref = NULL, restates = -1 WHERE ref IS NOT NULL AND EXISTS '
-                      '(SELECT 1 FROM reused r WHERE r.view = k.view AND r.ref = k.ref AND r.day = k.day)')
-        index.commit()
-        index.execute('CREATE INDEX o ON k (ref, day, seq)')
+    import duckdb
+    store = ingest(root)
+    version = reader_version()
+    files = [(index, str(_ensure_derived(store, release, version)[1]))
+             for index, release in enumerate(releases(root))]
+    connection = duckdb.connect()
+    # Bounded by construction: two whole-population passes must fit beside each
+    # other on an 8 GiB machine, so each spills to disk instead of taking 80% of RAM.
+    spill = Path(tempfile.mkdtemp(prefix='cordon-duckdb-', dir=store))
+    connection.execute("SET memory_limit = '1.5GB'")
+    connection.execute('SET threads = 2')
+    connection.execute(f"SET temp_directory = '{spill}'")
+    try:
+        connection.execute('CREATE TABLE ordering (filename VARCHAR, release_index BIGINT)')
+        connection.executemany('INSERT INTO ordering VALUES (?, ?)', [(name, index) for index, name in files])
+        cursor = connection.execute(
+            'WITH r AS (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
+            '           FROM read_parquet($files, filename = true) p JOIN ordering o USING (filename)), '
+            'reused AS (SELECT release, view, reference, day FROM r '
+            '           WHERE reference IS NOT NULL AND day IS NOT NULL '
+            '           GROUP BY release, view, reference, day HAVING SUM(CASE WHEN restates THEN 0 ELSE 1 END) > 1) '
+            'SELECT r.*, CASE WHEN u.reference IS NULL AND r.day IS NOT NULL THEN r.reference END AS ref, '
+            '       u.reference IS NOT NULL AS reused '
+            'FROM r LEFT JOIN reused u ON u.release = r.release AND u.view = r.view '
+            '                          AND u.reference = r.reference AND u.day = r.day '
+            'ORDER BY ref NULLS FIRST, r.day NULLS FIRST, seq', {'files': [name for _, name in files]})
+        columns = [description[0] for description in cursor.description]
         current, members = None, []
-        for reference, day, _, restates, member in index.execute(
-                'SELECT k.ref, k.day, k.seq, k.restates, p.member FROM k JOIN p ON p.seq = k.seq '
-                'ORDER BY k.ref, k.day, k.seq'):
-            values = json.loads(member)
-            values['coordinates'] = tuple(values['coordinates']) if values['coordinates'] else None
-            for key in ('report_routes', 'issues'):
-                values[key] = tuple(values[key])
-            item = Member(**values)
-            if reference is None:
-                if members:
-                    yield DistinctObservation(current[0], date.fromisoformat(current[1]), tuple(members))
-                    current, members = None, []
-                because = ('reference reused within its publishing view on this day' if restates == -1
-                           else 'no observation day' if day is None else 'no publisher reference')
-                yield DistinctObservation(None, date.fromisoformat(day) if day else None, (item,), because)
-                continue
-            if (reference, day) != current:
-                if members:
-                    yield DistinctObservation(current[0], date.fromisoformat(current[1]), tuple(members))
-                current, members = (reference, day), []
-            members.append(item)
+        while True:
+            batch = cursor.fetchmany(50000)
+            if not batch:
+                break
+            for values in batch:
+                row = dict(zip(columns, values))
+                item = _member_from_row(row)
+                reference, day = row['ref'], row['day']
+                if reference is None:
+                    if members:
+                        yield DistinctObservation(current[0], current[1], tuple(members))
+                        current, members = None, []
+                    because = ('reference reused within its publishing view on this day' if row['reused']
+                               else 'no observation day' if day is None else 'no publisher reference')
+                    yield DistinctObservation(None, day, (item,), because)
+                    continue
+                if (reference, day) != current:
+                    if members:
+                        yield DistinctObservation(current[0], current[1], tuple(members))
+                    current, members = (reference, day), []
+                members.append(item)
         if members:
-            yield DistinctObservation(current[0], date.fromisoformat(current[1]), tuple(members))
-        index.close()
+            yield DistinctObservation(current[0], current[1], tuple(members))
+    finally:
+        connection.close()
+        shutil.rmtree(spill, ignore_errors=True)
 
 
 # --- the shapes C's entry points take ------------------------------------------

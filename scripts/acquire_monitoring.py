@@ -1,5 +1,9 @@
 """Capture the admitted monitoring releases; retain native records, all results.
 
+Captured bytes are adopted into the content-addressed store on completion; the
+source tree keeps acquisition records only. Identical bytes deduplicate and
+changed bytes receive a new name, so a refresh never overwrites a release.
+
 Run with the project Python. Service metadata is the selection input; point
 layers belong to observations, while grids, buffers and parcels have other D
 owners. A changed service list must be assessed before refreshing this selection.
@@ -12,12 +16,16 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import sys
 import time
 from threading import local
 from urllib.parse import urlencode, urljoin, urlsplit
 
 import requests
 from bs4 import BeautifulSoup
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-d'))
+from cordon_d.store import adopt, store_root  # noqa: E402
 
 
 TRANSPORT = local()
@@ -67,8 +75,6 @@ def capture_campaign(output):
     for url in dict.fromkeys(urls):
         name = Path(urlsplit(url).path).name
         path = directory / name
-        if path.exists():
-            raise ValueError('Use a new capture destination; a refresh must not reuse old campaign bytes')
         body = request(url)
         record = {'url': url, 'path': name, 'captured_at': datetime.now(timezone.utc).isoformat(),
                   'sha256': hashlib.sha256(body).hexdigest()}
@@ -94,6 +100,8 @@ def capture_campaign(output):
         temporary.replace(path)
         records.append(record)
         print(name, len(body), 'bytes', flush=True)
+    for record in records:
+        adopt(store_root(output), directory / record['path'])
     (directory / 'publisher.html').write_bytes(page)
     write_json(directory / 'ckan.json', package)
     write_json(directory / 'releases.json', records)
@@ -109,19 +117,16 @@ def prepare(metadata, output):
             directory = output / 'sit' / service / str(layer['id'])
             directory.mkdir(parents=True, exist_ok=True)
             write_json(directory / 'layer.json', layer)
-            layers.append((directory, service, layer))
+            layers.append((directory, service, layer, output))
     return layers
 
 
 def capture_layer(item):
-    directory, service, layer = item
+    directory, service, layer, output = item
     completed = directory / 'release.json'
     if completed.exists():
-        result = json.loads(completed.read_text())
-        for page in result['pages']:
-            if hashlib.sha256((directory / page['path']).read_bytes()).hexdigest() != page['sha256']:
-                raise ValueError(f'Changed retained page in {directory}')
-        return result
+        # The pages were adopted into the store by hash; the audit guards their bytes.
+        return json.loads(completed.read_text())
     url = 'https://webapps.sit.puglia.it/arcgis/rest/services/' + service + '/MapServer/' + str(layer['id'])
     started = datetime.now(timezone.utc).isoformat()
     count = query(url, where='1=1', returnCountOnly='true')['count']
@@ -174,6 +179,9 @@ def capture_layer(item):
     result = {'url': url, 'name': layer['name'], 'captured_from': started,
               'captured_through': datetime.now(timezone.utc).isoformat(),
               'oid_field': oid, 'rows': rows, 'unique_oids': len(ids), 'pages': chunks}
+    store = store_root(output)
+    for page in chunks:
+        adopt(store, directory / page['path'])
     write_json(directory / 'release.json', result)
     print(service, layer['id'], rows, 'complete', flush=True)
     return result

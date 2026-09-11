@@ -27,6 +27,21 @@ Some accepted source text calls their operative direction a `prescription`; that
 is the meaning of the `case-prescription` input contract. It is not a medical
 prescription or a separate product workflow.
 
+## Where bytes live
+
+Source bytes are the only irreplaceable data. They live in a content-addressed
+store outside the repository — `$CORDON_STORE`, or `<repository>-store` beside
+the main checkout, which every worktree resolves to the same path — as blobs
+named by their SHA-256, written once and never rewritten (`cordon_d.store`).
+Acquisition records in the tree name each release by URL, capture time and hash;
+the tree holds no source bytes. `scripts/audit_store.py` re-hashes every blob.
+
+Beside the blobs, `derived/` holds regenerable Parquet keyed by blob hash and
+reader version: lossless native occurrences and typed readings per blob. It is a
+cache, never an owner; a changed reader invalidates it, and deleting it costs
+one ingest. DuckDB reads it in process; no spatial predicate or legal reading
+moves into SQL.
+
 ## Implementation rule
 
 Ordinary readers accept source records without a named case, fixed hash, authored

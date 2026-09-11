@@ -2,6 +2,7 @@
 from datetime import date, datetime, timezone
 import gzip
 import json
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
@@ -12,7 +13,8 @@ from cordon_c.core import Evaluation, MissingInput
 from cordon_c.survey import observed_survey_support
 from cordon_c.temporal import no_detection_anchor
 from cordon_d.evidence import file_digest
-from cordon_d.monitoring import distinct_observations, detection_days, occasion_sets, located_positives
+from cordon_d.monitoring import distinct_observations, detection_days, occasion_sets, located_positives, ingest, observations, reader_version
+from cordon_d.store import audit, blob_path, derived_path, store_root
 from cordon_d.spatial import metric_point
 
 
@@ -88,6 +90,8 @@ class ObservationStream(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.directory = TemporaryDirectory()
+        # The suite never touches a shared store, whatever the environment names.
+        cls.configured_store = os.environ.pop('CORDON_STORE', None)
         cls.root = build_root(cls.directory.name)
         cls.groups = list(distinct_observations(cls.root))
         cls.by_reference = {}
@@ -97,6 +101,29 @@ class ObservationStream(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.directory.cleanup()
+        if cls.configured_store is not None:
+            os.environ['CORDON_STORE'] = cls.configured_store
+
+    def test_a_missing_blob_fails_visibly_even_when_its_derived_files_exist(self):
+        store = store_root(self.root)
+        digest = next(iter({m.sha256 for g in self.groups for m in g.members if m.view == 'camp.csv'}))
+        blob = blob_path(store, digest)
+        hidden = blob.with_name(blob.name + '.hidden')
+        blob.rename(hidden)
+        try:
+            with self.assertRaises(ValueError):
+                list(observations(self.root))
+        finally:
+            hidden.rename(blob)
+
+    def test_native_values_round_trip_with_their_types(self):
+        from datetime import time, timedelta
+        from cordon_d.store import dumps, loads
+        row = {'a': 5, 'b': 5.0, 'c': True, 'd': '=SUM(A1)', 'e': -0.0, 'f': 10 ** 20,
+               'g': time(10, 30), 'h': timedelta(days=1, seconds=7200), 'i': datetime(2022, 3, 4), 'j': None}
+        back = loads(dumps(row))
+        self.assertEqual([(k, type(v).__name__, repr(v)) for k, v in row.items()],
+                         [(k, type(v).__name__, repr(v)) for k, v in back.items()])
 
     def test_same_reference_and_day_is_one_observation_across_workbook_csv_and_view(self):
         march_fourth, march_tenth = sorted(self.by_reference['101'], key=lambda g: g.day)
@@ -178,9 +205,44 @@ class ObservationStream(unittest.TestCase):
             self.assertEqual(observation.support, ())
             self.assertTrue(all(s.role == 'official-dataset' for s in observation.sources))
             for source in observation.sources:
-                source.verify(self.root)
+                source.verify(store_root(self.root))
             with self.assertRaises(MissingInput):
-                metric_point(observation, context='test', event_date=date(2022, 3, 4), root=self.root)
+                metric_point(observation, context='test', event_date=date(2022, 3, 4), root=store_root(self.root))
+
+    def test_bytes_live_in_the_store_once_and_the_tree_keeps_only_records(self):
+        store = store_root(self.root)
+        self.assertEqual(store.resolve(), (Path(self.directory.name) / 'store').resolve())
+        self.assertFalse((self.root / 'campaign' / 'camp.xlsx').exists())
+        for record in json.loads((self.root / 'campaign' / 'releases.json').read_text()):
+            self.assertTrue(blob_path(store, record['sha256']).is_file())
+        digests = {m.sha256 for g in self.groups for m in g.members}
+        self.assertEqual(len(digests), 3)  # workbook, CSV, one view page
+        self.assertTrue(all(blob_path(store, d).stat().st_mode & 0o222 == 0 for d in digests))
+
+    def test_derived_files_are_keyed_by_reader_version_and_a_stale_one_is_not_read(self):
+        store = store_root(self.root)
+        digest = next(iter({m.sha256 for g in self.groups for m in g.members if m.view == 'camp.csv'}))
+        current = derived_path(store, 'monitoring/readings', digest, reader_version())
+        self.assertTrue(current.is_file())
+        stale = derived_path(store, 'monitoring/readings', digest, 'stale000000')
+        stale.parent.mkdir(parents=True, exist_ok=True)
+        stale.write_bytes(b'not parquet')
+        self.assertEqual(sum(1 for o in observations(self.root) if o.view_name == 'camp.csv'), 1)
+
+    def test_audit_fails_on_a_corrupted_blob(self):
+        store = store_root(self.root)
+        self.assertEqual(audit(store), [])
+        digest = next(iter({m.sha256 for g in self.groups for m in g.members if m.view == 'camp.csv'}))
+        blob = blob_path(store, digest)
+        blob.chmod(0o644)
+        original = blob.read_bytes()
+        try:
+            blob.write_bytes(original + b'\n')
+            self.assertEqual(audit(store), [blob])
+        finally:
+            blob.write_bytes(original)
+            blob.chmod(0o444)
+        self.assertEqual(audit(store), [])
 
 
 if __name__ == '__main__':

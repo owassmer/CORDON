@@ -41,7 +41,9 @@ def workbook_occurrences(path: Path):
     regardless of an incorrect Excel dimension declaration.
     """
     digest = file_digest(path)
-    book = load_workbook(path, read_only=True, data_only=False)
+    # Opened as a stream: the bytes, not the file name, decide what this is.
+    handle = open(path, 'rb')
+    book = load_workbook(handle, read_only=True, data_only=False)
     try:
         for sheet in book:
             sheet.reset_dimensions()
@@ -61,6 +63,7 @@ def workbook_occurrences(path: Path):
                 yield Occurrence(str(path), digest, f'{sheet.title}:physical-row:{number}', row)
     finally:
         book.close()
+        handle.close()
 
 
 def csv_occurrences(path: Path, *, encoding: str, delimiter: str):
@@ -93,7 +96,7 @@ def arcgis_occurrences(path: Path, *, oid_field: str, allow_repeated_oid: bool =
     """
     digest = file_digest(path)
     data = path.read_bytes()
-    if path.suffix == '.gz':
+    if data[:2] == b'\x1f\x8b':  # gzip by its own magic, not by file name
         data = gzip.decompress(data)
     document = json.loads(data)
     if 'error' in document or 'features' not in document:
