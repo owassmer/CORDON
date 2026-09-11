@@ -24,12 +24,13 @@ demonstrations confer no completion on the other rows.
 
 ## Monitoring observations
 
-The source population is `corpus/sources/monitoring/`: the twelve campaign
-workbooks and the CKAN CSV under `campaign/`, and all 101 observation point
-layers of the eight SIT services that publish them under `sit/<service>/<layer>/`,
-selected from the publisher's service inventory at capture. Acquisition records
-name each release and page; `scripts/acquire_monitoring.py` recaptures them
-without reusing old bytes. `MonitoraggioXFPasp` holds nursery-site and
+The source population is the twelve campaign workbooks and the CKAN CSV, and
+all 101 observation point layers of the eight SIT services that publish them,
+selected from the publisher's service inventory at capture. Their bytes live in
+the content-addressed store (`SPEC.md`); `corpus/sources/monitoring/` holds the
+acquisition records that name each release and page by hash, under `campaign/`
+and `sit/<service>/<layer>/`. `scripts/acquire_monitoring.py` recaptures into
+the store, where changed bytes get a new name. `MonitoraggioXFPasp` holds nursery-site and
 Leccino-planting polygons and is not an observation source; grid, cadastre and
 buffer polygons belong to the area, population and parcel rows. The tallies below
 describe the capture recorded in `campaign/releases.json` and the layer records
