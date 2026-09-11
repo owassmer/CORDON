@@ -502,14 +502,24 @@ def annex_statements(document) -> tuple:
             page_text = page.get_text()
             for table in page.find_tables().tables:
                 rows = [[(c or '').strip() for c in row] for row in table.extract()]
-                header_at = None
-                for index, row in enumerate(rows):
-                    joined = ' '.join(row)
-                    if HEADER_PROVINCE.search(joined) and HEADER_COMUNE.search(joined):
-                        header_at = index
-                        break
+
+                def header_of(matrix):
+                    for index, row in enumerate(matrix):
+                        joined = ' '.join(row)
+                        if HEADER_PROVINCE.search(joined) and HEADER_COMUNE.search(joined):
+                            return index
+                    return None
+
+                header_at, transposed = header_of(rows), False
                 if header_at is None:
-                    continue
+                    # Some annexes print the table on its side, with PROVINCIA
+                    # and COMUNE running down a column and one record per
+                    # column. Read it the same way, turned back.
+                    turned = [list(column) for column in zip(*rows)] if rows else []
+                    header_at = header_of(turned)
+                    if header_at is None:
+                        continue
+                    rows, transposed = turned, True
                 columns = rows[header_at]
                 try:
                     province_col = next(i for i, c in enumerate(columns) if HEADER_PROVINCE.search(c))
@@ -537,7 +547,17 @@ def annex_statements(document) -> tuple:
                 # their rows. The table reports that span as the cell's own
                 # height, so a comune is covered by the value whose cell
                 # vertically contains it - which is how the page reads.
-                boxes = [getattr(r, 'cells', None) for r in getattr(table, 'rows', [])]
+                # Cell spans belong to the printed rows; once the table is
+                # turned back they no longer describe these records.
+                boxes = [] if transposed else [
+                    getattr(r, 'cells', None) for r in getattr(table, 'rows', [])]
+                # In a turned table a record that names no comune is a wrapped
+                # continuation of the single comune the table names.
+                sole_comune = None
+                if transposed:
+                    named = {row[comune_col].strip() for row in rows[header_at + 1:]
+                             if len(row) > comune_col and row[comune_col].strip()}
+                    sole_comune = next(iter(named)) if len(named) == 1 else None
 
                 def spans(column):
                     found = []
@@ -578,6 +598,8 @@ def annex_statements(document) -> tuple:
                         value, comune = comune, None
                     if not value and comune and comune_box:
                         value = covering(value_spans, comune_box)
+                    if value and not comune and sole_comune:
+                        comune = sole_comune
                     if not value:
                         if comune:
                             unresolved.append(
