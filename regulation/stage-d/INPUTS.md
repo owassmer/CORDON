@@ -102,6 +102,10 @@ What the population shows, read and not reconciled:
   a sample and another view's row share one counter value on one day. Only a
   result disagreement withholds an observation from the positive and negative
   counts. No publication is preferred.
+- This figure predates the observation attributes this reader now establishes and
+  compares, so it understates the disagreements the population holds; recomputing it
+  needs the grouping pass, which needs more temporary disk than the machine has free
+  today. Pending, and stated as pending rather than restated from the old reading.
 - The publisher's projections disagree with each other. For 1 October–31 December
   2021, a period chosen after the reader was written, the adapter yields 1,772
   distinct positive observations on 33 days; the positives views hold 1,772 rows;
