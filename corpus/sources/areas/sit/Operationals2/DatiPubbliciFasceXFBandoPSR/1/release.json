@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer/1",
+  "service": "Operationals2/DatiPubbliciFasceXFBandoPSR",
+  "layer_id": 1,
+  "name": "Zona Infetta D.D.S. n.3 del 16 gennaio 2015",
+  "captured_from": "2026-09-11T05:12:02.071812+00:00",
+  "captured_through": "2026-09-11T05:12:26.531450+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "",
+  "pages": [
+    {
+      "path": "ids-2-2.json.gz",
+      "rows": 1,
+      "sha256": "d1efbff50bdced51cada5c467018da741ccf9d978ec552f7833091541fbbd4e8"
+    }
+  ]
+}

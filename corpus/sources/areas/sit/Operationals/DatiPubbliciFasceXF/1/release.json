@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/1",
+  "service": "Operationals/DatiPubbliciFasceXF",
+  "layer_id": 1,
+  "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca (Cagnano Varano)",
+  "captured_from": "2026-09-11T05:11:28.329782+00:00",
+  "captured_through": "2026-09-11T05:11:40.906548+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "DESCRIZIONE = 'Zona Cuscinetto Xylella Fastidiosa sub. pauca (Cagnano Varano)'",
+  "pages": [
+    {
+      "path": "ids-8324-8324.json.gz",
+      "rows": 1,
+      "sha256": "b72cc17dc8d9b8d8a7f5b266a7a393fd485e847d5287009a6285372ea144e15f"
+    }
+  ]
+}

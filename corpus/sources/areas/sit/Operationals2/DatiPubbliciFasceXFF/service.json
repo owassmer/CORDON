@@ -1,0 +1,16 @@
+{
+  "service": "Operationals2/DatiPubbliciFasceXFF",
+  "discovered_at": "2026-09-11T05:11:26.942081+00:00",
+  "layers": [
+    {
+      "id": 0,
+      "name": "Zona Infetta - Xylella Fastidiosa sub. fastidiosa",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 1,
+      "name": "Zona Cuscinetto - Xylella Fastidiosa sub. fastidiosa",
+      "geometryType": "esriGeometryPolygon"
+    }
+  ]
+}

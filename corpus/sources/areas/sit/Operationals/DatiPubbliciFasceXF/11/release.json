@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/11",
+  "service": "Operationals/DatiPubbliciFasceXF",
+  "layer_id": 11,
+  "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca (Bari)",
+  "captured_from": "2026-09-11T05:11:40.767143+00:00",
+  "captured_through": "2026-09-11T05:11:45.830213+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "DESCRIZIONE = 'Zona Cuscinetto Xylella Fastidiosa sub. pauca (Bari)'",
+  "pages": [
+    {
+      "path": "ids-6403-6403.json.gz",
+      "rows": 1,
+      "sha256": "8bb8ebea4b1c2aade082776ec576f0b2479b65229ce5649c85b4be54a524ae78"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/1",
+  "service": "Operationals2/DatiPubbliciFasceXFMultiplex",
+  "layer_id": 1,
+  "name": "Zona Cuscinetto - Xylella Fastidiosa sub. multiplex",
+  "captured_from": "2026-09-11T05:11:46.159896+00:00",
+  "captured_through": "2026-09-11T05:12:05.570162+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 4,
+  "unique_oids": 4,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "",
+  "pages": [
+    {
+      "path": "ids-323-642.json.gz",
+      "rows": 4,
+      "sha256": "027165bf692cbe0f61ced3945f858275657bdec1bd935a4657d1c9da616c3026"
+    }
+  ]
+}

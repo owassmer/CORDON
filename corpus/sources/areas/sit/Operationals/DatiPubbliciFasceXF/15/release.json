@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/15",
+  "service": "Operationals/DatiPubbliciFasceXF",
+  "layer_id": 15,
+  "name": "Zona Infetta - Xylella Fastidiosa sub. pauca ST53 ex Salento",
+  "captured_from": "2026-09-11T05:11:43.388298+00:00",
+  "captured_through": "2026-09-11T05:12:01.554844+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "DESCRIZIONE = 'Zona Infetta Xylella Fastidiosa sub. pauca'",
+  "pages": [
+    {
+      "path": "ids-6723-6723.json.gz",
+      "rows": 1,
+      "sha256": "a27a50546873d27015190703b582da491012c723cb7157ed47e3bd1ee45989c0"
+    }
+  ]
+}

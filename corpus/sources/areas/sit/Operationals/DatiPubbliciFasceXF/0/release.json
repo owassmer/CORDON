@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/0",
+  "service": "Operationals/DatiPubbliciFasceXF",
+  "layer_id": 0,
+  "name": "Zona Infetta - Xylella Fastidiosa sub. pauca (Cagnano Varano)",
+  "captured_from": "2026-09-11T05:11:28.328252+00:00",
+  "captured_through": "2026-09-11T05:11:39.718567+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "DESCRIZIONE = 'Zona Infetta Xylella Fastidiosa sub. pauca (Cagnano Varano)'",
+  "pages": [
+    {
+      "path": "ids-6084-6084.json.gz",
+      "rows": 1,
+      "sha256": "637ebdd60187a4981b85f60871318c0c1156f4b23aeeadbbcd3ba3516456283c"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "service": "Operationals2/DatiPubbliciFasceXFBandoPSR",
+  "discovered_at": "2026-09-11T05:11:28.317279+00:00",
+  "layers": [
+    {
+      "id": 0,
+      "name": "Zona Infetta D.D.S. n.157 del 18 aprile 2014",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 1,
+      "name": "Zona Infetta D.D.S. n.3 del 16 gennaio 2015",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 2,
+      "name": "Zona Infetta D.D.S. n.54 del 13 marzo 2015",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 3,
+      "name": "Zona Infetta D.D.S. n.571 del 5 novembre 2015",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 4,
+      "name": "Zona Infetta D.D.S. n.23 del 12 febbraio 2016",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 5,
+      "name": "Zona Infetta D.D.S. n.203 del 24 maggio 2016",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 6,
+      "name": "Zona Infetta D.D.S. n.59 del 21 maggio 2019",
+      "geometryType": "esriGeometryPolygon"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "service": "Operationals2/DatiPubbliciFasceXFMultiplex",
+  "discovered_at": "2026-09-11T05:11:27.663389+00:00",
+  "layers": [
+    {
+      "id": 0,
+      "name": "Zona Infetta - Xylella Fastidiosa sub. multiplex",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 1,
+      "name": "Zona Cuscinetto - Xylella Fastidiosa sub. multiplex",
+      "geometryType": "esriGeometryPolygon"
+    },
+    {
+      "id": 2,
+      "name": " Zona Cuscinetto Basilicata - Xylella Fastidiosa sub. multiplex (Santermo in Colle/Ginosa)",
+      "geometryType": "esriGeometryPolygon"
+    }
+  ]
+}

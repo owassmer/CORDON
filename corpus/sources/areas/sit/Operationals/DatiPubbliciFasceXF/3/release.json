@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/3",
+  "service": "Operationals/DatiPubbliciFasceXF",
+  "layer_id": 3,
+  "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca (Giovinazzo)",
+  "captured_from": "2026-09-11T05:11:28.332276+00:00",
+  "captured_through": "2026-09-11T05:11:37.953755+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "DESCRIZIONE = 'Zona Cuscinetto Xylella Fastidiosa sub. pauca (Giovinazzo)'",
+  "pages": [
+    {
+      "path": "ids-8323-8323.json.gz",
+      "rows": 1,
+      "sha256": "c0afe903e505884d9ff0be1c2416397c01a29b16a10cb2bdff2b196f4b5755a2"
+    }
+  ]
+}

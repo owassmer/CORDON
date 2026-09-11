@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer/5",
+  "service": "Operationals2/DatiPubbliciFasceXFBandoPSR",
+  "layer_id": 5,
+  "name": "Zona Infetta D.D.S. n.203 del 24 maggio 2016",
+  "captured_from": "2026-09-11T05:12:11.942364+00:00",
+  "captured_through": "2026-09-11T05:12:22.518865+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 1,
+  "unique_oids": 1,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "",
+  "pages": [
+    {
+      "path": "ids-322-322.json.gz",
+      "rows": 1,
+      "sha256": "833edff36e3b8625bdc1560d387f879f1aee566e8691feada4d0a5fc327b0755"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/2",
+  "service": "Operationals2/DatiPubbliciFasceXFMultiplex",
+  "layer_id": 2,
+  "name": " Zona Cuscinetto Basilicata - Xylella Fastidiosa sub. multiplex (Santermo in Colle/Ginosa)",
+  "captured_from": "2026-09-11T05:11:47.390730+00:00",
+  "captured_through": "2026-09-11T05:12:02.092065+00:00",
+  "oid_field": "OBJECTID",
+  "rows": 2,
+  "unique_oids": 2,
+  "spatial_reference": {
+    "wkid": 32633,
+    "latestWkid": 32633
+  },
+  "definition_expression": "",
+  "pages": [
+    {
+      "path": "ids-321-322.json.gz",
+      "rows": 2,
+      "sha256": "5fb9df04f262219a5cbe8d644b0995772f8ce1fd997268d1961c1f98a4865ca4"
+    }
+  ]
+}
