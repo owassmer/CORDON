@@ -8,7 +8,7 @@ ordinary reader, and exact unresolved limitation.
 The current plain-language input map is `INPUTS.md`. `contracts.json` owns the 27
 input kinds. `predicate-contracts.json` and `additional-input-contracts.json` bind
 accepted A–C requirements to those kinds. `source-bindings.json` owns the small set
-of source routes. `consumer-inventory.json` is a regenerable projection of A–C.
+of source routes. `inventory.py` computes the A–C consumer projection when it is needed; nothing stores it.
 
 ## Admission rule
 

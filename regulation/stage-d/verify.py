@@ -12,8 +12,6 @@ def verify():
     def read(name):
         return json.loads((D / name).read_text())
     actual = inventory(ROOT)
-    if actual != read('consumer-inventory.json'):
-        raise ValueError('D consumer projection is stale')
     contracts = read('contracts.json')['contracts']
     ids = {c['id'] for c in contracts}
     if len(ids) != len(contracts):

@@ -101,9 +101,6 @@ def inventory(root=ROOT):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--write", action="store_true", help="Write the mechanical projection; never assigns contracts")
     args = parser.parse_args()
     result = inventory()
-    if args.write:
-        (Path(__file__).parent / "consumer-inventory.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({k: len(result[k]) for k in ["predicates", "declared_evidence", "clocks", "parameters", "reference_bindings", "callables", "structures"]}))
