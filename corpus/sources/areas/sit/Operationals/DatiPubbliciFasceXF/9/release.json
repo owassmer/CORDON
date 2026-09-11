@@ -3,8 +3,11 @@
   "service": "Operationals/DatiPubbliciFasceXF",
   "layer_id": 9,
   "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca (Minervino Murge)",
-  "captured_from": "2026-09-11T05:11:38.854344+00:00",
-  "captured_through": "2026-09-11T05:11:43.382969+00:00",
+  "captured_from": "2026-09-11T17:50:50.159545+00:00",
+  "captured_through": "2026-09-11T17:50:50.159545+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:48.246419+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:51.338612+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-7043-7043.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:50.159545+00:00",
       "sha256": "6aa6ff5cfc432016f6e4ce585518c243c1a665f37a6aff617ba0c791ecddd8a8"
     }
   ]

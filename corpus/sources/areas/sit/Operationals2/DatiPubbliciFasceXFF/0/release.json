@@ -3,8 +3,11 @@
   "service": "Operationals2/DatiPubbliciFasceXFF",
   "layer_id": 0,
   "name": "Zona Infetta - Xylella Fastidiosa sub. fastidiosa",
-  "captured_from": "2026-09-11T05:11:44.352107+00:00",
-  "captured_through": "2026-09-11T05:12:11.938525+00:00",
+  "captured_from": "2026-09-11T17:50:56.187689+00:00",
+  "captured_through": "2026-09-11T17:50:56.187689+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:53.812593+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:57.376236+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-961-961.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:56.187689+00:00",
       "sha256": "c9c0694fd92315eb614b601f521a6aea9bc3e0d9700b4e7d3baa35c4d9b2efc0"
     }
   ]

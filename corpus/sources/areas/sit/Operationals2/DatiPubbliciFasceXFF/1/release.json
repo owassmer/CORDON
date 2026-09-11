@@ -3,8 +3,11 @@
   "service": "Operationals2/DatiPubbliciFasceXFF",
   "layer_id": 1,
   "name": "Zona Cuscinetto - Xylella Fastidiosa sub. fastidiosa",
-  "captured_from": "2026-09-11T05:11:45.846876+00:00",
-  "captured_through": "2026-09-11T05:12:03.675520+00:00",
+  "captured_from": "2026-09-11T17:51:00.526015+00:00",
+  "captured_through": "2026-09-11T17:51:00.526015+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:55.441581+00:00",
+  "inventory_checked_through": "2026-09-11T17:51:06.040921+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-961-961.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:51:00.526015+00:00",
       "sha256": "dbeda4409b547f1c48398be14987a10ebb46ec9b13587f0f38648d8e2fb47ed4"
     }
   ]

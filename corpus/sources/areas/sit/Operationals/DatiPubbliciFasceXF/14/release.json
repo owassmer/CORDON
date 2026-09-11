@@ -3,8 +3,11 @@
   "service": "Operationals/DatiPubbliciFasceXF",
   "layer_id": 14,
   "name": "Zona Contenimento - Xylella Fastidiosa sub. pauca ST53 ex Salento",
-  "captured_from": "2026-09-11T05:11:42.155604+00:00",
-  "captured_through": "2026-09-11T05:11:47.385913+00:00",
+  "captured_from": "2026-09-11T17:50:54.100152+00:00",
+  "captured_through": "2026-09-11T17:50:54.100152+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:51.620512+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:56.428331+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-3202-3202.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:54.100152+00:00",
       "sha256": "fcbd02945c0d664fef2b283b44eac7db9f2f63a802d4172d705df1293166cb14"
     }
   ]

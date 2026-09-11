@@ -3,8 +3,11 @@
   "service": "Operationals/DatiPubbliciFasceXF",
   "layer_id": 8,
   "name": "Zona Infetta - Xylella Fastidiosa sub. pauca (Minervino Murge)",
-  "captured_from": "2026-09-11T05:11:37.957791+00:00",
-  "captured_through": "2026-09-11T05:11:41.621832+00:00",
+  "captured_from": "2026-09-11T17:50:47.299559+00:00",
+  "captured_through": "2026-09-11T17:50:47.299559+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:45.451932+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:48.611058+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-5123-5123.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:47.299559+00:00",
       "sha256": "ffd6c486a9cdeec94613509e711dfca6e21cbcd622c59f37bfc42062f2c27d3f"
     }
   ]

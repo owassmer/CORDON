@@ -3,8 +3,11 @@
   "service": "Operationals/DatiPubbliciFasceXF",
   "layer_id": 2,
   "name": "Zona Infetta - Xylella Fastidiosa sub. pauca (Giovinazzo)",
-  "captured_from": "2026-09-11T05:11:28.330985+00:00",
-  "captured_through": "2026-09-11T05:11:37.295387+00:00",
+  "captured_from": "2026-09-11T17:50:44.140059+00:00",
+  "captured_through": "2026-09-11T17:50:44.140059+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:42.180829+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:45.418033+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-6083-6083.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:44.140059+00:00",
       "sha256": "4b54bc1efae4ac1f59c9aa2588bfc5ff39f9ce008677c8af5e47f20e065dad29"
     }
   ]

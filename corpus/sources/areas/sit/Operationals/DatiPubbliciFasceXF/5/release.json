@@ -3,8 +3,11 @@
   "service": "Operationals/DatiPubbliciFasceXF",
   "layer_id": 5,
   "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca (Modugno)",
-  "captured_from": "2026-09-11T05:11:28.334877+00:00",
-  "captured_through": "2026-09-11T05:11:37.618088+00:00",
+  "captured_from": "2026-09-11T17:50:49.505836+00:00",
+  "captured_through": "2026-09-11T17:50:49.505836+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:42.185211+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:50.705515+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-9283-9283.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:49.505836+00:00",
       "sha256": "e42a22e42bc0b41c18633f9cc2b7d8bd46c7c6e0dd411fe10cb4c3090833e60b"
     }
   ]

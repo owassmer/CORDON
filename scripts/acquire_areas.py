@@ -101,6 +101,20 @@ def prepare(output):
     return items
 
 
+def page_captures(layer_dir):
+    """When each retained page was actually served, by page name."""
+    record = layer_dir / 'captures.json'
+    return json.loads(record.read_text()) if record.exists() else {}
+
+
+def note_capture(layer_dir, name, instant):
+    captures = page_captures(layer_dir)
+    captures[name] = instant
+    temporary = layer_dir / 'captures.tmp'
+    temporary.write_text(json.dumps(captures, ensure_ascii=False, indent=2) + '\n')
+    temporary.replace(layer_dir / 'captures.json')
+
+
 def capture_layer(item):
     layer_dir, service, layer, output = item
     completed = layer_dir / 'release.json'
@@ -137,7 +151,9 @@ def capture_layer(item):
             temporary = path.with_suffix('.tmp')
             temporary.write_bytes(compressed)
             temporary.replace(path)
+            note_capture(layer_dir, path.name, datetime.now(timezone.utc).isoformat())
         return [{'path': path.name, 'rows': len(features),
+                 'captured_at': page_captures(layer_dir).get(path.name),
                  'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}]
 
     chunks, retained = [], set()
@@ -149,6 +165,7 @@ def capture_layer(item):
             raise ValueError(f'Overlapping or changed cached page population: {path}')
         retained.update(found)
         chunks.append({'path': path.name, 'rows': len(value['features']),
+                       'captured_at': page_captures(layer_dir).get(path.name),
                        'sha256': hashlib.sha256(path.read_bytes()).hexdigest()})
     remaining = [i for i in ids if i not in retained]
     for start in range(0, len(remaining), 25):
@@ -161,8 +178,19 @@ def capture_layer(item):
     if ids != sorted(set(ending.get('objectIds') or [])) or rows != count or count != end_count:
         raise RuntimeError(f'{url}: changing or incomplete population: '
                            f'start={count}, retained={rows}, end={end_count}')
+    # A resumed run must not date old bytes to the interval it ran in. The
+    # capture interval is the span of the pages actually retained, and pages
+    # served in an earlier run keep their own time; stable object IDs and a
+    # stable count are not evidence that the geometry behind them is unchanged.
+    instants = sorted(p['captured_at'] for p in chunks if p.get('captured_at'))
+    reused = [p['path'] for p in chunks
+              if p.get('captured_at') and p['captured_at'] < started]
     result = {'url': url, 'service': service, 'layer_id': layer['id'], 'name': layer['name'],
-              'captured_from': started, 'captured_through': datetime.now(timezone.utc).isoformat(),
+              'captured_from': instants[0] if instants else started,
+              'captured_through': instants[-1] if instants else datetime.now(timezone.utc).isoformat(),
+              'inventory_checked_from': started,
+              'inventory_checked_through': datetime.now(timezone.utc).isoformat(),
+              'pages_retained_from_an_earlier_run': reused,
               'oid_field': oid, 'rows': rows, 'unique_oids': len(ids),
               'spatial_reference': layer.get('extent', {}).get('spatialReference'),
               'definition_expression': layer.get('definitionExpression'),

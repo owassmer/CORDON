@@ -32,18 +32,21 @@ import re
 
 from .store import blob_path, store_root
 
-# The annexes caption each table with the zone it states. Containment is
-# written "ZONA DI CONTENIMENTO" and also "ZONA INFETTA IN CUI SI APPLICANO
-# MISURE DI CONTENIMENTO", and an eradication focus is captioned "FOCOLAI",
-# so the more specific zone is tested first: reading a containment or focus
-# table as buffer would report the wrong regime for every sheet in it.
-ZONE_PATTERNS = (
-    ('focolaio', re.compile(r'\bFOCOLAI\w*\b', re.I)),
-    ('contenimento', re.compile(r'\bCONTENIMENTO\b', re.I)),
-    ('cuscinetto', re.compile(r'\bCUSCINETTO\b', re.I)),
-    ('infetta', re.compile(r'\bZONA\s+INFETTA\b|\bINFETTA\b', re.I)),
-)
-ZONE_HEADING = re.compile(r'\bFOCOLAI\w*\b|\bZONA\b[^\n]{0,80}?\b(INFETTA|CUSCINETTO|CONTENIMENTO)\b', re.I)
+# A caption names its zone in head position and may then qualify it with
+# another zone or with the measures that apply there. The population prints
+# both: "ZONA INFETTA IN CUI SI APPLICANO MISURE DI CONTENIMENTO" is an
+# infected zone under containment measures, and "ZONA CUSCINETTO IN CUI SI
+# APPLICANO ... MISURE DI ERADICAZIONE" is a buffer zone under eradication.
+# So the head word decides the zone and the qualifier is kept as the regime;
+# collapsing the two loses which zone the act says it is. Ordering the words
+# by specificity instead reads the first caption as containment and the
+# second as a buffer with no regime, which is why it is not done that way.
+ZONE_WORD = re.compile(r'\b(FOCOLAI\w*|CUSCINETTO|CONTENIMENTO|INFETT[AO])\b', re.I)
+ZONE_OF_WORD = {'CUSCINETTO': 'cuscinetto', 'CONTENIMENTO': 'contenimento',
+                'INFETTA': 'infetta', 'INFETTO': 'infetta'}
+REGIME_CLAUSE = re.compile(
+    r'IN\s+CUI\s+SI\s+APPLICANO[^.;]*?\b(CONTENIMENTO|ERADICAZIONE)\b', re.I)
+ZONE_HEADING = ZONE_WORD
 ANNEX_MARKER = re.compile(r'ALLEGATO\s*2\b', re.I)
 # Bari is a citta metropolitana, so the annexes head that column both ways.
 HEADER_PROVINCE = re.compile(r"\bPROVINCIA\b|\bCITTA'?\s*\n?\s*METROPOLITANA\b", re.I)
@@ -67,10 +70,39 @@ ZONE_KINDS = {'INFETTA': 'infetta', 'CUSCINETTO': 'cuscinetto', 'CONTENIMENTO': 
 
 @dataclass(frozen=True)
 class Sheet:
-    """One cadastral sheet as the annex states it."""
+    """One cadastral sheet as the annex states it.
+
+    `wholly_contained` is the act's own asterisk: the sheet lies entirely in
+    the zone. Without it the act says only that the sheet intersects the zone,
+    which does not place any particular parcel inside it. `parcels` carries the
+    particelle where the act narrows a sheet to named ones, and `qualifier`
+    any development the act attaches to the sheet ("193 (SVILUPPO Z)").
+    """
     section: str | None
     number: str
     wholly_contained: bool
+    parcels: tuple[str, ...] = ()
+    qualifier: str | None = None
+
+
+@dataclass(frozen=True)
+class Scope:
+    """What an annex cell says about the extent of a place in its zone.
+
+    `residue` is the consequential source text the reader could not account
+    for. A scope with residue has not been read: the reader holds part of a
+    statement whose whole it cannot see, which is the condition under which a
+    partial reading silently becomes a wrong answer.
+    """
+    kind: str                       # whole-province | whole-comune
+                                    # | part-comune-extent-unstated | sheets
+    sheets: tuple[Sheet, ...]
+    text: str
+    residue: str = ''
+
+    @property
+    def fully_read(self) -> bool:
+        return not self.residue
 
 
 @dataclass(frozen=True)
@@ -83,34 +115,69 @@ class CadastralStatement:
     scope: str                    # whole-province | whole-comune | sheets
     sheets: tuple[Sheet, ...]
     text: str                     # literal cell text read
+    # The measures the caption says apply in this zone, where it says. An
+    # infected zone under containment measures is both facts at once, and A
+    # states them separately, so this row does not collapse them into one.
+    regime: str | None = None
 
     def covers(self, *, comune: str | None = None, province: str | None = None,
-               section: str | None = None, foglio: str | None = None) -> bool | None:
+               section: str | None = None, foglio: str | None = None,
+               particella: str | None = None, grain: str = 'parcel') -> bool | None:
         """Whether this statement places the named place in its zone.
 
-        True or False where the statement decides it; None where it is about a
-        different place or does not decide, so the caller keeps looking. A
-        whole-province statement decides only for a caller that states the
-        province: which province a comune belongs to is an administrative fact
-        this row does not hold, and assuming it would place comuni in or out of
-        an infected zone on no evidence.
+        `grain` is the question being asked, and the two are not the same
+        question. At `sheet` grain: is this cadastral sheet reached by the
+        zone. At `parcel` grain, which is what Stage A's predicate asks: does
+        this point or parcel lie inside it. A sheet the act marks with its
+        asterisk lies wholly in the zone, so both answers are yes. A sheet
+        without it only intersects the zone, so the sheet is reached and a
+        particular parcel within it is undecided - the act does not say which
+        part is inside.
+
+        True or False where the statement decides the question; None where it
+        does not, so the caller keeps looking and the predicate stays
+        unresolved rather than becoming a negative. An unidentified place is
+        never decided: a statement about one comune cannot answer a question
+        that names no comune, and a sheet the act files under a section cannot
+        answer a question that names no section.
         """
+        if grain not in ('sheet', 'parcel'):
+            raise ValueError("grain must be 'sheet' or 'parcel'")
         if self.scope == 'whole-province':
             if province is None:
                 return None
-            return (self.province or '').upper() == province.upper() or None
-        if comune is not None and (self.comune or '').upper() != comune.upper():
+            return True if (self.province or '').upper() == province.upper() else None
+        # Below here the statement is about one comune, so the question must
+        # name one. Province, where both state it, must not contradict.
+        if comune is None:
             return None
-        if self.scope == 'part-comune-extent-unstated':
+        if (self.comune or '').upper() != comune.upper():
+            return None
+        if province is not None and self.province and \
+                self.province.upper() != province.upper():
             return None
         if self.scope == 'whole-comune':
             return True
+        if self.scope == 'part-comune-extent-unstated':
+            return None
         if foglio is None:
             return None
         for sheet in self.sheets:
-            if sheet.number == str(foglio) and (section is None or sheet.section is None
-                                                or sheet.section.upper() == section.upper()):
+            if sheet.number != str(foglio):
+                continue
+            if sheet.section is not None and section is None:
+                return None          # the act files this sheet under a section
+            if sheet.section is not None and section is not None and \
+                    sheet.section.upper() != section.upper():
+                continue
+            if grain == 'sheet':
                 return True
+            if sheet.parcels:
+                # The act named the particelle it reaches inside this sheet.
+                if particella is None:
+                    return None
+                return True if str(particella) in sheet.parcels else False
+            return True if sheet.wholly_contained else None
         return False
 
 
@@ -182,38 +249,107 @@ def _column_offsets(lines, header_index):
     return province.start(), comune.start(), sheets_at
 
 
-def _parse_sheets(text):
-    """Read `SEZIONE A: FOGLIO 1, 2*` and `FOGLI 9, 11*` into stated sheets."""
+# The scope grammar, taken from what the acts print rather than from the ones
+# I happened to open. Enumerated over the whole population: whole-territory
+# statements for a comune or a province, a part-of-comune statement, sheet
+# lists under an optional section, inclusive ranges written "da 15 a 32" and
+# also "161 a 172", particelle narrowing a sheet, and a parenthesised
+# development on a sheet. Anything else is residue, and a cell with residue is
+# not read - which is how the next form the publisher uses becomes a finding
+# on first contact instead of a silently truncated answer.
+SCOPE_TOKENS = (
+    ('skip', re.compile(r'[\s,;:.()–—-]+')),
+    ('skip', re.compile(r'\b(?:e|ed)\b', re.I)),
+    ('whole-province', re.compile(r'INTERO\s+TERRITORIO\s+PROVINCIALE', re.I)),
+    ('whole-comune', re.compile(r'INTERO\s+TERRITORIO\s+COMUNALE', re.I)),
+    ('part-comune', re.compile(r'PARTE\s+TERRITORIO\s+COMUNALE', re.I)),
+    ('section', re.compile(r'SEZIONE\s+([A-Z])\b', re.I)),
+    ('sheet-word', re.compile(r'\bFOGLI(?:O|A|E)?\b(?:\s+DI\s+MAPPA)?'
+                              r'(?:\s+CATASTALI)?', re.I)),
+    ('parcels', re.compile(r'\bparticell\w*\b', re.I)),
+    ('range', re.compile(r'\bda\s+(\d+)\s+a\s+(\d+)\b', re.I)),
+    ('range', re.compile(r'\b(\d+)\s+a\s+(\d+)\b', re.I)),
+    ('sheet', re.compile(r'(\d+)\s*(\*?)\s*(\((?:SVILUPPO|Sviluppo)[^)]*\))?')),
+)
+# Residue that cannot change what the cell means: stray single letters and
+# punctuation left by extraction. Anything with a digit or a word in it can.
+TRIVIAL_RESIDUE = re.compile(r'^[\W\d_]*$|^[A-Za-z]$')
+
+
+def read_scope(text) -> Scope:
+    """Read an annex cell, accounting for every consequential token in it."""
+    source = ' '.join((text or '').split())
+    cursor, residue = 0, []
     sheets, section = [], None
-    for part in re.split(r'(SEZIONE\s+[A-Z]\s*:?)', text, flags=re.I):
-        if not part or not part.strip():
-            continue
-        marker = SECTION.fullmatch(part.strip())
-        if marker:
-            section = marker.group(1).upper()
-            continue
-        for number, star in SHEET_TOKEN.findall(part):
-            sheets.append(Sheet(section, number, star == '*'))
-    return tuple(sheets)
+    whole, part_marker, reading_parcels = None, False, False
+    while cursor < len(source):
+        for name, pattern in SCOPE_TOKENS:
+            match = pattern.match(source, cursor)
+            if not match:
+                continue
+            cursor = match.end()
+            if name == 'skip':
+                pass
+            elif name == 'sheet-word':
+                # A new FOGLIO heading starts a new sheet; without this a
+                # second clause's sheet number would be read as a parcel of
+                # the first clause's sheet.
+                reading_parcels = False
+            elif name in ('whole-province', 'whole-comune'):
+                whole = name
+            elif name == 'part-comune':
+                part_marker = True
+            elif name == 'section':
+                section, reading_parcels = match.group(1).upper(), False
+            elif name == 'parcels':
+                reading_parcels = True
+            elif name == 'range':
+                low, high = int(match.group(1)), int(match.group(2))
+                if low > high or high - low > 500:
+                    residue.append(match.group(0))
+                else:
+                    sheets.extend(Sheet(section, str(n), False)
+                                  for n in range(low, high + 1))
+                    reading_parcels = False
+            elif name == 'sheet':
+                if reading_parcels and sheets:
+                    last = sheets[-1]
+                    sheets[-1] = Sheet(last.section, last.number, last.wholly_contained,
+                                       last.parcels + (match.group(1),), last.qualifier)
+                else:
+                    sheets.append(Sheet(section, match.group(1), match.group(2) == '*',
+                                        (), (match.group(3) or None)))
+            break
+        else:
+            residue.append(source[cursor])
+            cursor += 1
+    leftover = ' '.join(''.join(residue).split())
+    if TRIVIAL_RESIDUE.match(leftover):
+        leftover = ''
+    # "PARTE TERRITORIO COMUNALE: FOGLIO 6" states which part: the sheets it
+    # lists. The part marker only leaves the extent unstated when the act
+    # lists nothing after it.
+    if sheets:
+        kind = 'sheets'
+    elif whole:
+        kind = whole
+    elif part_marker:
+        kind = 'part-comune-extent-unstated'
+    else:
+        kind = 'none'
+    return Scope(kind, tuple(sheets), source, leftover)
 
 
 def _classify(text):
-    if WHOLE_PROVINCE.search(text):
-        return 'whole-province', ()
-    if WHOLE_COMUNE.search(text):
-        return 'whole-comune', ()
-    if PART_COMUNE.search(text) and not _parse_sheets(PART_COMUNE.split(text)[-1]):
-        # The act says part of the comune lies in the zone without saying which
-        # part. That is a statement, and it settles nothing about a sheet.
-        return 'part-comune-extent-unstated', ()
-    if PARCELS.search(text):
-        # Some annexes narrow a sheet to named particelle ("FOGLIO 5: particelle
-        # 260, 264"). Only the sheet before the parcel list is a sheet; reading
-        # the parcel numbers as sheets would place whole sheets in the zone.
-        sheets = _parse_sheets(PARCELS.split(text)[0])
-        return ('sheet-parcels', sheets) if sheets else (None, ())
-    sheets = _parse_sheets(text)
-    return ('sheets', sheets) if sheets else (None, ())
+    """Backward-compatible shape for the text reader: (kind, sheets)."""
+    scope = read_scope(text)
+    if not scope.fully_read or scope.kind == 'none':
+        return None, ()
+    return scope.kind, scope.sheets
+
+
+def _parse_sheets(text):
+    return read_scope(text).sheets
 
 
 def _read_segment(lines, start, end, heading, zone):
@@ -343,7 +479,7 @@ def cadastral_statements(text):
     statements, unresolved = [], []
     for position, index in enumerate(headings):
         end = headings[position + 1] if position + 1 < len(headings) else len(lines)
-        zone, _ = _zone_from(lines[index])
+        zone, _, _ = _zone_from(lines[index])
         if zone is None:
             continue
         read, pending = _read_segment(lines, index, end, lines[index].strip(), zone)
@@ -361,16 +497,32 @@ def cadastral_statements(text):
 
 
 def annexes(text):
-    """The annexes the act names, with the hash it prints for each where it does."""
+    """The annexes the act names, with the hash it prints for each where it does.
+
+    The act prints these as a list under `ALLEGATI INTEGRANTI`, each entry a
+    document name followed by its SHA-256. The name is not always numbered:
+    DDS 92/2024 prints a single bundled `Allegato.pdf`. So entries are found by
+    the list's own shape - a document name ending in a file extension, followed
+    by a separator - rather than by a numbering convention, and each entry's
+    hash is taken from the text before the next entry begins, so one entry can
+    never borrow its neighbour's digest.
+    """
+    block = text
+    marker = re.search(r'ALLEGAT[IO]\s+INTEGRANT[IE]', text, re.I)
+    if marker:
+        block = text[marker.end():]
+        closing = re.search(r'\n\s*(Il presente Provvedimento|IL DIRIGENTE|'
+                            r'Bollettino Ufficiale)', block)
+        if closing:
+            block = block[:closing.start()]
+    entries = [(m.start(), m.end(), m.group(1).strip())
+               for m in re.finditer(r'^\s*([^\n]*?\.(?:pdf|p7m|zip|dwg|xlsx?))\s*-?\s*$',
+                                    block, re.M | re.I)]
     found = []
-    for match in re.finditer(r'^\s*(ALLEGAT[OI][^\n-]*?)\s*-\s*$', text, re.M):
-        name = match.group(1).strip()
-        rest = text[match.end():match.end() + 200]
-        digest = re.search(r'\b([0-9a-f]{64})\b', rest)
+    for index, (_, end, name) in enumerate(entries):
+        stop = entries[index + 1][0] if index + 1 < len(entries) else len(block)
+        digest = re.search(r'\b([0-9a-f]{64})\b', block[end:stop])
         found.append(Annex(name, digest.group(1) if digest else None))
-    if not found:
-        for match in re.finditer(r'\b(ALLEGATO\s*\d[^\n]{0,20}?\.pdf)', text, re.I):
-            found.append(Annex(match.group(1).strip(), None))
     return tuple(dict.fromkeys(found))
 
 
@@ -430,11 +582,19 @@ def versions(root: Path):
                     statements, unread = annex_statements(str(blob))
                     form = 'annexed-document'
             if not statements:
-                statements, unread = cadastral_statements(text)
-                form = 'annexed-text' if statements else form
-            if form is None or not statements:
-                form = 'annexed-text' if statements else (
-                    'stated-rule' if not found else 'annex-unread')
+                # The fallback adds a second reading; it does not overwrite what
+                # the first one could not read. Losing that diagnostic would let
+                # an unread annex leave no trace at all.
+                fallback, fallback_unread = cadastral_statements(text)
+                statements = fallback
+                unread = tuple(unread) + tuple(fallback_unread)
+                if fallback:
+                    form = 'annexed-text'
+            if not statements:
+                # An act states a rule only when nothing in it went unread. If a
+                # reader met an annex and failed on it, that is an unread annex,
+                # not an act that annexes nothing.
+                form = 'annex-unread' if (unread or found) else 'stated-rule'
         out.append(AreaVersion(
             provision_version_id=identity,
             instrument_id=row['instrument_id'],
@@ -457,14 +617,16 @@ def in_force(versions_, day: date):
 
 
 def zone_of(versions_, day: date, *, comune: str | None = None, province: str | None = None,
-            section: str | None = None,
-            foglio: str | None = None):
+            section: str | None = None, foglio: str | None = None,
+            particella: str | None = None, grain: str = 'parcel'):
     """Which zones of which act versions place this cadastral place, on this day.
 
-    Returns one entry per version in force that decides the question, with the
-    zone and the statement that decided it. A version that states nothing about
-    the place is absent; a version whose body or layout is unresolved is
-    returned with zone None so the caller sees that it was not answered.
+    One entry per version in force that decides the question, with the zone and
+    the statement that decided it. A version that left part of its own annex
+    unread is always reported alongside, whether or not another part of it
+    answered: an answered zone is not evidence that the rest of the act was
+    read, and treating it that way is how a partial reading passes for a whole
+    one.
     """
     answers = []
     for version in in_force(versions_, day):
@@ -472,31 +634,40 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
             answers.append({'version': version.provision_version_id, 'zone': None,
                             'basis': version.geography_form})
             continue
-        decided, zones_given = False, set()
+        zones_given = set()
         for statement in version.statements:
-            verdict = statement.covers(comune=comune, province=province, section=section, foglio=foglio)
-            if verdict:
-                decided = True
-                if statement.zone in zones_given:
-                    continue
+            verdict = statement.covers(comune=comune, province=province, section=section,
+                                       foglio=foglio, particella=particella, grain=grain)
+            if verdict and statement.zone not in zones_given:
                 zones_given.add(statement.zone)
                 answers.append({'version': version.provision_version_id, 'zone': statement.zone,
+                                'regime': statement.regime,
                                 'basis': 'act cadastral statement', 'statement': statement})
-        if not decided and version.unresolved:
+        if version.unresolved:
             answers.append({'version': version.provision_version_id, 'zone': None,
-                            'basis': 'unresolved in this act', 'unresolved': len(version.unresolved)})
+                            'basis': 'part of this act was not read',
+                            'unresolved': len(version.unresolved)})
     return tuple(answers)
 
 
 # --- reading the cadastral annex from the act's own table geometry ------------
 
 def _zone_from(text):
+    """The zone a caption names, and the measures regime it states for it.
+
+    The head word decides the zone: a caption that names a buffer and then
+    qualifies it with another zone is still about the buffer. The regime, when
+    the caption states one, is a separate fact and is returned separately.
+    """
     text = text or ''
-    for kind, pattern in ZONE_PATTERNS:
-        match = pattern.search(text)
-        if match:
-            return kind, match.group(0)
-    return None, None
+    match = ZONE_WORD.search(text)
+    if not match:
+        return None, None, None
+    word = match.group(1).upper()
+    zone = 'focolaio' if word.startswith('FOCOLAI') else ZONE_OF_WORD[word]
+    regime_match = REGIME_CLAUSE.search(text)
+    regime = regime_match.group(1).lower() if regime_match else None
+    return zone, match.group(0), regime
 
 
 def annex_statements(document) -> tuple:
@@ -515,8 +686,32 @@ def annex_statements(document) -> tuple:
     opened = pymupdf.open(document) if not hasattr(document, 'page_count') else document
     try:
         for page in opened:
-            page_text = page.get_text()
-            for table in page.find_tables().tables:
+            page_tables = page.find_tables().tables
+            table_tops = sorted(t.bbox[1] for t in page_tables)
+            # Captions printed above a ruled table rather than inside it. A
+            # caption belongs to the nearest table below it, so a block is a
+            # candidate for this table only when no other table stands between
+            # them - which is what stopped a table from taking a neighbour's
+            # zone when this was a page-wide search.
+            captions = []
+            for block in page.get_text('blocks'):
+                x0, y0, x1, y1, text = block[0], block[1], block[2], block[3], block[4]
+                zone, heading, regime = _zone_from(' '.join(text.split()))
+                if zone:
+                    captions.append((y1, ' '.join(text.split()), zone, regime))
+
+            def caption_above(top):
+                best = None
+                for bottom, text, zone, regime in captions:
+                    if bottom > top:
+                        continue
+                    if any(bottom < other < top - 0.5 for other in table_tops):
+                        continue
+                    if best is None or bottom > best[0]:
+                        best = (bottom, text, zone, regime)
+                return best
+
+            for table in page_tables:
                 rows = [[(c or '').strip() for c in row] for row in table.extract()]
 
                 def header_of(matrix):
@@ -547,17 +742,21 @@ def annex_statements(document) -> tuple:
                     unresolved.append(f'table header without a sheets column: {" | ".join(columns)[:120]}')
                     continue
                 # The zone is stated by the table's own caption row, or by the
-                # page text above it when the caption sits outside the table.
-                zone, heading = None, None
+                # caption printed immediately above it.
+                zone, heading, regime = None, None, None
                 for row in rows[:header_at]:
-                    zone, heading = _zone_from(' '.join(row))
+                    zone, _, regime = _zone_from(' '.join(row))
                     if zone:
                         heading = ' '.join(c for c in row if c).strip()
                         break
                 if zone is None:
-                    unresolved.append('annex table states no zone of its own; its rows are left '
-                                      'unread rather than given a neighbouring zone: '
-                                      + ' | '.join(columns)[:90])
+                    above = caption_above(table.bbox[1])
+                    if above:
+                        _, heading, zone, regime = above
+                if zone is None:
+                    unresolved.append('annex table states no zone of its own and no caption '
+                                      'stands above it; its rows are left unread rather than '
+                                      'given a neighbouring zone: ' + ' | '.join(columns)[:90])
                     continue
                 # A cell shared down a run of comuni is drawn once, spanning
                 # their rows. The table reports that span as the cell's own
@@ -624,14 +823,23 @@ def annex_statements(document) -> tuple:
                         continue
                     if HEADER_TEXT.search(value) and not re.search(r'\d|INTERO', value, re.I):
                         continue
-                    scope, sheets = _classify(value)
-                    if scope is None:
+                    scope = read_scope(value)
+                    if not scope.fully_read:
+                        # Part of this cell is a form the reader does not know.
+                        # Emitting the part it does know would be a statement
+                        # narrower than the act's, answering False for what the
+                        # act includes, so the cell is reported unread instead.
+                        unresolved.append(
+                            f'{heading} :: {comune or province or "?"} : cell not fully read; '
+                            f'unaccounted source text {scope.residue[:60]!r} in {value[:90]!r}')
+                        continue
+                    if scope.kind == 'none':
                         unresolved.append(f'{heading} :: unread cell: {value[:100]}')
                         continue
                     statements.append(CadastralStatement(
                         zone, heading, province,
-                        None if scope == 'whole-province' else comune,
-                        scope, sheets, ' '.join(value.split())))
+                        None if scope.kind == 'whole-province' else comune,
+                        scope.kind, scope.sheets, scope.text, regime))
     finally:
         if not hasattr(document, 'page_count'):
             opened.close()
@@ -674,17 +882,24 @@ def _place_label(comune, province, section, foglio):
 
 
 def membership_evidence(versions_, root: Path, day, *, comune=None, province=None,
-                        section=None, foglio=None, known_at=None):
+                        section=None, foglio=None, particella=None, known_at=None):
     """Build the Sources and Assertions that answer A's membership predicate.
 
-    Each assertion is supported by the exact annex row the act prints, in the
-    act document held in the store under its own hash. Nothing is asserted for
-    a version whose annex does not decide the place: an absent assertion leaves
-    the predicate unresolved, which is not the same as placing the parcel
-    outside the zone.
+    A's predicate is about a point or a parcel, so that is the grain asked
+    here: a sheet the act merely says intersects the zone does not place a
+    parcel inside it and yields no assertion. Each assertion is supported by
+    the exact annex row the act prints, in the act document held in the store
+    under its own hash.
+
+    The question must identify a place. An unidentified question has no
+    answer to give, and answering it anyway is how a statement about one
+    comune came to stand for any comune, so it is refused rather than
+    answered.
     """
     from datetime import datetime, timezone
     from .evidence import Assertion, Source, Support
+    if comune is None and province is None:
+        raise ValueError('a membership question must name a comune or a province')
     documents = act_documents(root)
     store = store_root(root)
     known_at = known_at or datetime.now(timezone.utc)
@@ -695,8 +910,8 @@ def membership_evidence(versions_, root: Path, day, *, comune=None, province=Non
         if record is None or not version.statements:
             continue
         for statement in version.statements:
-            if not statement.covers(comune=comune, province=province,
-                                    section=section, foglio=foglio):
+            if not statement.covers(comune=comune, province=province, section=section,
+                                    foglio=foglio, particella=particella, grain='parcel'):
                 continue
             digest = record['sha256']
             identity = f'act:{version.instrument_id}'
@@ -725,7 +940,7 @@ def membership_evidence(versions_, root: Path, day, *, comune=None, province=Non
 
 
 def evidence_for(versions_, root: Path, day, *, snapshot, comune=None, province=None,
-                 section=None, foglio=None, known_at=None):
+                 section=None, foglio=None, particella=None, known_at=None):
     """An Evidence over this row's assertions, ready for the accepted consumer."""
     from .evidence import Evidence
     contracts = json.loads((root / 'regulation/stage-d/contracts.json').read_text())
@@ -735,8 +950,8 @@ def evidence_for(versions_, root: Path, day, *, snapshot, comune=None, province=
         bindings.setdefault(binding['predicate'], set()).update(binding.get('contracts', ()))
     bindings = {k: frozenset(v) for k, v in bindings.items()}
     sources, assertions = membership_evidence(
-        versions_, root, day, comune=comune, province=province,
-        section=section, foglio=foglio, known_at=known_at)
+        versions_, root, day, comune=comune, province=province, section=section,
+        foglio=foglio, particella=particella, known_at=known_at)
     return Evidence(snapshot, sources, assertions,
                     {c['id']: c for c in contracts['contracts']}, bindings,
                     store_root(root)), assertions

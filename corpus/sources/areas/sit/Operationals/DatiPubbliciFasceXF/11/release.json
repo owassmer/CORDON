@@ -3,8 +3,11 @@
   "service": "Operationals/DatiPubbliciFasceXF",
   "layer_id": 11,
   "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca (Bari)",
-  "captured_from": "2026-09-11T05:11:40.767143+00:00",
-  "captured_through": "2026-09-11T05:11:45.830213+00:00",
+  "captured_from": "2026-09-11T17:50:50.875274+00:00",
+  "captured_through": "2026-09-11T17:50:50.875274+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:48.613474+00:00",
+  "inventory_checked_through": "2026-09-11T17:50:52.233390+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-6403-6403.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:50:50.875274+00:00",
       "sha256": "8bb8ebea4b1c2aade082776ec576f0b2479b65229ce5649c85b4be54a524ae78"
     }
   ]

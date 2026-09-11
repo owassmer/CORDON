@@ -3,8 +3,11 @@
   "service": "Operationals2/DatiPubbliciFasceXFMultiplex",
   "layer_id": 0,
   "name": "Zona Infetta - Xylella Fastidiosa sub. multiplex",
-  "captured_from": "2026-09-11T05:11:46.019839+00:00",
-  "captured_through": "2026-09-11T05:12:02.067491+00:00",
+  "captured_from": "2026-09-11T17:50:59.141932+00:00",
+  "captured_through": "2026-09-11T17:50:59.141932+00:00",
+  "inventory_checked_from": "2026-09-11T17:50:56.433523+00:00",
+  "inventory_checked_through": "2026-09-11T17:51:00.418564+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 4,
   "unique_oids": 4,
@@ -17,6 +20,7 @@
     {
       "path": "ids-643-962.json.gz",
       "rows": 4,
+      "captured_at": "2026-09-11T17:50:59.141932+00:00",
       "sha256": "60b57838f127be7731c46525568168d04cfe6ad129d7a684be759e1fc874d63b"
     }
   ]

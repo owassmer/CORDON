@@ -3,8 +3,11 @@
   "service": "Operationals2/DatiPubbliciFasceXFBandoPSR",
   "layer_id": 1,
   "name": "Zona Infetta D.D.S. n.3 del 16 gennaio 2015",
-  "captured_from": "2026-09-11T05:12:02.071812+00:00",
-  "captured_through": "2026-09-11T05:12:26.531450+00:00",
+  "captured_from": "2026-09-11T17:51:04.437793+00:00",
+  "captured_through": "2026-09-11T17:51:04.437793+00:00",
+  "inventory_checked_from": "2026-09-11T17:51:00.420252+00:00",
+  "inventory_checked_through": "2026-09-11T17:51:05.865908+00:00",
+  "pages_retained_from_an_earlier_run": [],
   "oid_field": "OBJECTID",
   "rows": 1,
   "unique_oids": 1,
@@ -17,6 +20,7 @@
     {
       "path": "ids-2-2.json.gz",
       "rows": 1,
+      "captured_at": "2026-09-11T17:51:04.437793+00:00",
       "sha256": "d1efbff50bdced51cada5c467018da741ccf9d978ec552f7833091541fbbd4e8"
     }
   ]
