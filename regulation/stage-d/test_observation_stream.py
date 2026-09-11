@@ -2,6 +2,7 @@
 from datetime import date, datetime, timezone
 import gzip
 import json
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
@@ -89,6 +90,8 @@ class ObservationStream(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.directory = TemporaryDirectory()
+        # The suite never touches a shared store, whatever the environment names.
+        cls.configured_store = os.environ.pop('CORDON_STORE', None)
         cls.root = build_root(cls.directory.name)
         cls.groups = list(distinct_observations(cls.root))
         cls.by_reference = {}
@@ -98,6 +101,29 @@ class ObservationStream(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.directory.cleanup()
+        if cls.configured_store is not None:
+            os.environ['CORDON_STORE'] = cls.configured_store
+
+    def test_a_missing_blob_fails_visibly_even_when_its_derived_files_exist(self):
+        store = store_root(self.root)
+        digest = next(iter({m.sha256 for g in self.groups for m in g.members if m.view == 'camp.csv'}))
+        blob = blob_path(store, digest)
+        hidden = blob.with_name(blob.name + '.hidden')
+        blob.rename(hidden)
+        try:
+            with self.assertRaises(ValueError):
+                list(observations(self.root))
+        finally:
+            hidden.rename(blob)
+
+    def test_native_values_round_trip_with_their_types(self):
+        from datetime import time, timedelta
+        from cordon_d.store import dumps, loads
+        row = {'a': 5, 'b': 5.0, 'c': True, 'd': '=SUM(A1)', 'e': -0.0, 'f': 10 ** 20,
+               'g': time(10, 30), 'h': timedelta(days=1, seconds=7200), 'i': datetime(2022, 3, 4), 'j': None}
+        back = loads(dumps(row))
+        self.assertEqual([(k, type(v).__name__, repr(v)) for k, v in row.items()],
+                         [(k, type(v).__name__, repr(v)) for k, v in back.items()])
 
     def test_same_reference_and_day_is_one_observation_across_workbook_csv_and_view(self):
         march_fourth, march_tenth = sorted(self.by_reference['101'], key=lambda g: g.day)

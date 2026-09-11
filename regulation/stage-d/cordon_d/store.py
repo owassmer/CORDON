@@ -118,7 +118,7 @@ def audit(store: Path):
 
 def encode(value):
     """Type-tagged JSON so a round trip returns the same Python type and value."""
-    from datetime import date, datetime
+    from datetime import date, datetime, time, timedelta
     if value is None:
         return None
     if isinstance(value, bool):
@@ -133,6 +133,10 @@ def encode(value):
         return ['datetime', value.isoformat()]
     if isinstance(value, date):
         return ['date', value.isoformat()]
+    if isinstance(value, time):
+        return ['time', value.isoformat()]
+    if isinstance(value, timedelta):
+        return ['timedelta', [value.days, value.seconds, value.microseconds]]
     if isinstance(value, dict):
         return ['dict', [[k, encode(v)] for k, v in value.items()]]
     if isinstance(value, (list, tuple)):
@@ -141,7 +145,7 @@ def encode(value):
 
 
 def decode(value):
-    from datetime import date, datetime
+    from datetime import date, datetime, time, timedelta
     if value is None:
         return None
     kind, payload = value
@@ -157,6 +161,10 @@ def decode(value):
         return datetime.fromisoformat(payload)
     if kind == 'date':
         return date.fromisoformat(payload)
+    if kind == 'time':
+        return time.fromisoformat(payload)
+    if kind == 'timedelta':
+        return timedelta(days=payload[0], seconds=payload[1], microseconds=payload[2])
     if kind == 'dict':
         return {k: decode(v) for k, v in payload}
     if kind == 'list':

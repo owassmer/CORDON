@@ -117,12 +117,12 @@ def prepare(metadata, output):
             directory = output / 'sit' / service / str(layer['id'])
             directory.mkdir(parents=True, exist_ok=True)
             write_json(directory / 'layer.json', layer)
-            layers.append((directory, service, layer))
+            layers.append((directory, service, layer, output))
     return layers
 
 
 def capture_layer(item):
-    directory, service, layer = item
+    directory, service, layer, output = item
     completed = directory / 'release.json'
     if completed.exists():
         # The pages were adopted into the store by hash; the audit guards their bytes.
@@ -179,7 +179,7 @@ def capture_layer(item):
     result = {'url': url, 'name': layer['name'], 'captured_from': started,
               'captured_through': datetime.now(timezone.utc).isoformat(),
               'oid_field': oid, 'rows': rows, 'unique_oids': len(ids), 'pages': chunks}
-    store = store_root(directory.parents[3])
+    store = store_root(output)
     for page in chunks:
         adopt(store, directory / page['path'])
     write_json(directory / 'release.json', result)

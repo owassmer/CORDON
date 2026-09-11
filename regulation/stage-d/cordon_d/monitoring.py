@@ -214,8 +214,12 @@ def _ensure_blob(store: Path, release: Release) -> Path:
         return blob
     if not release.raw_path.exists():
         raise ValueError(f'Missing source bytes for {release.url}: {release.digest}')
-    if adopt(store, release.raw_path) != release.digest:
-        raise ValueError(f'Changed source release: {release.raw_path}')
+    try:
+        if adopt(store, release.raw_path) != release.digest:
+            raise ValueError(f'Changed source release: {release.raw_path}')
+    except FileNotFoundError:
+        if not blob.exists():  # a concurrent ingest adopted it first, or it is gone
+            raise
     return blob
 
 
@@ -257,9 +261,9 @@ def _ensure_derived(store: Path, release: Release, version: str) -> tuple[Path, 
     import pyarrow
     occurrences = derived_path(store, 'monitoring/occurrences', release.digest, version)
     readings = derived_path(store, 'monitoring/readings', release.digest, version)
+    blob = _ensure_blob(store, release)  # the cache never stands in for missing bytes
     if occurrences.exists() and readings.exists():
         return occurrences, readings, False
-    blob = _ensure_blob(store, release)
     locators, values, rows = [], [], []
     for ordinal, occurrence in enumerate(_raw_occurrences(release.kind, blob, release.options)):
         locators.append(occurrence.locator)
@@ -461,46 +465,48 @@ def distinct_observations(root: Path):
     connection.execute("SET memory_limit = '1.5GB'")
     connection.execute('SET threads = 2')
     connection.execute(f"SET temp_directory = '{spill}'")
-    connection.execute('CREATE TABLE ordering (filename VARCHAR, release_index BIGINT)')
-    connection.executemany('INSERT INTO ordering VALUES (?, ?)', [(name, index) for index, name in files])
-    cursor = connection.execute(
-        'WITH r AS (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
-        '           FROM read_parquet($files, filename = true) p JOIN ordering o USING (filename)), '
-        'reused AS (SELECT release, view, reference, day FROM r '
-        '           WHERE reference IS NOT NULL AND day IS NOT NULL '
-        '           GROUP BY release, view, reference, day HAVING SUM(CASE WHEN restates THEN 0 ELSE 1 END) > 1) '
-        'SELECT r.*, CASE WHEN u.reference IS NULL AND r.day IS NOT NULL THEN r.reference END AS ref, '
-        '       u.reference IS NOT NULL AS reused '
-        'FROM r LEFT JOIN reused u ON u.release = r.release AND u.view = r.view '
-        '                          AND u.reference = r.reference AND u.day = r.day '
-        'ORDER BY ref NULLS FIRST, r.day, seq', {'files': [name for _, name in files]})
-    columns = [description[0] for description in cursor.description]
-    current, members = None, []
-    while True:
-        batch = cursor.fetchmany(50000)
-        if not batch:
-            break
-        for values in batch:
-            row = dict(zip(columns, values))
-            item = _member_from_row(row)
-            reference, day = row['ref'], row['day']
-            if reference is None:
-                if members:
-                    yield DistinctObservation(current[0], current[1], tuple(members))
-                    current, members = None, []
-                because = ('reference reused within its publishing view on this day' if row['reused']
-                           else 'no observation day' if day is None else 'no publisher reference')
-                yield DistinctObservation(None, day, (item,), because)
-                continue
-            if (reference, day) != current:
-                if members:
-                    yield DistinctObservation(current[0], current[1], tuple(members))
-                current, members = (reference, day), []
-            members.append(item)
-    if members:
-        yield DistinctObservation(current[0], current[1], tuple(members))
-    connection.close()
-    shutil.rmtree(spill, ignore_errors=True)
+    try:
+        connection.execute('CREATE TABLE ordering (filename VARCHAR, release_index BIGINT)')
+        connection.executemany('INSERT INTO ordering VALUES (?, ?)', [(name, index) for index, name in files])
+        cursor = connection.execute(
+            'WITH r AS (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
+            '           FROM read_parquet($files, filename = true) p JOIN ordering o USING (filename)), '
+            'reused AS (SELECT release, view, reference, day FROM r '
+            '           WHERE reference IS NOT NULL AND day IS NOT NULL '
+            '           GROUP BY release, view, reference, day HAVING SUM(CASE WHEN restates THEN 0 ELSE 1 END) > 1) '
+            'SELECT r.*, CASE WHEN u.reference IS NULL AND r.day IS NOT NULL THEN r.reference END AS ref, '
+            '       u.reference IS NOT NULL AS reused '
+            'FROM r LEFT JOIN reused u ON u.release = r.release AND u.view = r.view '
+            '                          AND u.reference = r.reference AND u.day = r.day '
+            'ORDER BY ref NULLS FIRST, r.day NULLS FIRST, seq', {'files': [name for _, name in files]})
+        columns = [description[0] for description in cursor.description]
+        current, members = None, []
+        while True:
+            batch = cursor.fetchmany(50000)
+            if not batch:
+                break
+            for values in batch:
+                row = dict(zip(columns, values))
+                item = _member_from_row(row)
+                reference, day = row['ref'], row['day']
+                if reference is None:
+                    if members:
+                        yield DistinctObservation(current[0], current[1], tuple(members))
+                        current, members = None, []
+                    because = ('reference reused within its publishing view on this day' if row['reused']
+                               else 'no observation day' if day is None else 'no publisher reference')
+                    yield DistinctObservation(None, day, (item,), because)
+                    continue
+                if (reference, day) != current:
+                    if members:
+                        yield DistinctObservation(current[0], current[1], tuple(members))
+                    current, members = (reference, day), []
+                members.append(item)
+        if members:
+            yield DistinctObservation(current[0], current[1], tuple(members))
+    finally:
+        connection.close()
+        shutil.rmtree(spill, ignore_errors=True)
 
 
 # --- the shapes C's entry points take ------------------------------------------
