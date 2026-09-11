@@ -10,6 +10,7 @@ diagnosis and the Article 2(6) test identities; they never print a Cq and are
 not the official confirmation decision. Relating what is read to observations
 belongs to `findings`, so a change there does not invalidate a reading.
 """
+import collections
 from dataclasses import asdict, dataclass
 from datetime import date
 from hashlib import sha256
@@ -67,7 +68,8 @@ def reader_version() -> str:
 @dataclass(frozen=True)
 class Result:
     column: str          # the printed header, or 'letter' when the letter states the result for every listed sample
-    assay: str | None    # assay name the column or letter states
+    assay: str | None    # the test as the column designates it, verbatim; None where the column designates none
+    family: str | None   # the assay name matched inside that designation; a family name, never a test identity
     analyte: str | None  # analyte the column or letter states
     text: str            # literal string read
     kind: str            # detected / not-detected / positive / negative / doubtful / undetermined / unread
@@ -260,13 +262,17 @@ def _merged_header(cells):
     if not header_rows:
         return None, []
     width = max(len(r) for r in cells)
+    # A column no header row names at all has no header, so nothing spans into it: the
+    # cell beside a header may be an unheaded data column, as a symptom column is.
+    named = [any(k < len(row) and row[k] for row in header_rows) for k in range(width)]
     filled = []
     for k, row in enumerate(header_rows):
         row = row + [None] * (width - len(row))
         parent = filled[k - 1] if k else [None] * width
         out = list(row)
         for j in range(1, width):
-            if out[j] is None and out[j - 1] is not None and parent[j] == parent[j - 1]:
+            # Below the top row a header also spans only under a parent that spans with it.
+            if out[j] is None and out[j - 1] is not None and named[j] and parent[j] == parent[j - 1]:
                 out[j] = out[j - 1]
         filled.append(out)
     header = [' / '.join(t for t in (r[j] for r in filled) if t) for j in range(width)]
@@ -285,6 +291,24 @@ def _transposed(cells):
     return None
 
 
+def _designation(header, value, letter_assays):
+    """The test as this column designates it, and the assay name inside that designation.
+
+    Two columns of one report are two tests when the laboratory designates them
+    differently ("Esito qPCR 2010" beside "Esito qPCR 2006"); the assay name they
+    share is a family, not an identity, so it is carried separately and never
+    stands in for one. A column that designates no test carries none; the letter's
+    assay supplies the family only when the letter names exactly one.
+    """
+    match = ASSAY_NAMES.search(header) or ASSAY_NAMES.search(value)
+    family = match.group(0) if match else (letter_assays[0] if len(letter_assays) == 1 else None)
+    if match is None or match.string is not header:
+        return None, family
+    segments = [s.strip() for s in header.split(' / ') if s.strip()]
+    printed = next((s for s in reversed(segments) if ASSAY_NAMES.search(s)), header)
+    return re.sub(r'\s+', ' ', printed), family
+
+
 def _result(header, value, letter_assays, letter_analytes):
     assay = ASSAY_NAMES.search(header) or ASSAY_NAMES.search(value)
     # A sub-column named for a subspecies states that column's analyte; the spanning header
@@ -298,8 +322,8 @@ def _result(header, value, letter_assays, letter_analytes):
     # A result cell carrying more than one result is the collapsed cell of several rows;
     # which result belongs to this row is not stated, so the row states none.
     kind = 'unread' if len(CELL_RESULT_TOKEN.findall(value)) > 1 else _classify(value)
-    return Result(header.replace('\n', ' '), assay.group(0) if assay else (letter_assays[0] if len(letter_assays) == 1 else None),
-                  stated, value, kind)
+    designation, family = _designation(header, value, letter_assays)
+    return Result(header.replace('\n', ' '), designation, family, stated, value, kind)
 
 
 def _table_rows(page_number, method, table, letter, inherited=None):
@@ -341,7 +365,7 @@ def _table_rows(page_number, method, table, letter, inherited=None):
             elif role and role not in fields:
                 fields[role] = v
         if letter_result:
-            fields['results'].append(Result('letter', letter['assays'][0] if len(letter['assays']) == 1 else None,
+            fields['results'].append(Result('letter', None, letter['assays'][0] if len(letter['assays']) == 1 else None,
                                             letter['analytes'][0] if len(letter['analytes']) == 1 else None, 'Positivi', 'positive'))
         ref = fields.get('reference') or ''
         code = CODE.search(ref) if reference_kind != 'daily' else re.search(r'\d+', ref)
@@ -371,8 +395,7 @@ def _flat_rows(page_number, method, text, letter):
     header_text = ' '.join(lines[anchor:starts[0]])
     if not re.search(r'Data\s*rilev', header_text, re.I):
         return []
-    header_assay = ASSAY_NAMES.search(header_text)
-    assay = header_assay.group(0) if header_assay else (letter['assays'][0] if len(letter['assays']) == 1 else None)
+    designation, family = _designation(header_text, '', letter['assays'])
     analyte = letter['analytes'][0] if len(letter['analytes']) == 1 else None
     out = []
     for n, start in enumerate(starts):
@@ -381,7 +404,7 @@ def _flat_rows(page_number, method, text, letter):
         body = ' | '.join(cells)
         dates = DATE.findall(body)
         hits = [m.group(0) for m in RESULT_TOKEN.finditer(body)]
-        results = tuple(Result('flat column', assay, analyte, t, _classify(t)) for t in hits)
+        results = tuple(Result('flat column', designation, family, analyte, t, _classify(t)) for t in hits)
         species = next((c for c in cells if re.search(r'olea|olivo|prunus|mandorlo|oleandro|vite|nerium|polygala|rosmarin', c, re.I)), None)
         out.append(Row(page_number, method, cells[0], 'sample', _safe_date(dates[0]) if dates else None, species,
                        None, None, None, results, _safe_date(dates[-1]) if len(dates) > 1 else None, body[:400], not results))
@@ -391,7 +414,14 @@ def _flat_rows(page_number, method, text, letter):
 def _line_rows(page_number, method, text, letter):
     """Rows from a scanned annex: a row starts at a line carrying a sample code and continues
     over following lines that carry no code, as a scanned table row wraps under OCR; a code
-    that follows a result date on the same line starts the next row."""
+    that follows a result date on the same line starts the next row.
+
+    A scanned annex prints no column headers this reader can recover, so its result
+    columns are positional and designate no test: `assay` is None and only the
+    letter's single assay supplies a family. A line yielding more results than the
+    page's own rows show columns has absorbed a neighbouring row, and which of them
+    belongs to this sample is not stated, so the row states none.
+    """
     buffers: list[str] = []
     for raw in text.split('\n'):
         line = _clean(raw)
@@ -409,18 +439,23 @@ def _line_rows(page_number, method, text, letter):
                 buffers.append(piece)
             elif buffers and re.search(r'positiv|negativ|rilevat|determinabil|dubbi|\d{1,2}/\d{1,2}/\d{4}|[A-Za-zà]{3,}', piece, re.I):
                 buffers[-1] += ' ' + piece
+    rows = [(line, [m.group(0) for m in RESULT_TOKEN.finditer(line)]) for line in buffers
+            # A number with neither a date nor a result beside it is a postal code or a protocol
+            # number in the letter, not a sample row.
+            if len(line) >= 20 and (DATE.search(line) or RESULT_TOKEN.search(line))]
+    widths = [len(hits) for _, hits in rows if hits]
+    # The page's own rows state how many result columns its annex prints; a mode drawn
+    # from fewer than three of them states nothing, so no line is then held back.
+    columns = collections.Counter(widths).most_common(1)[0][0] if len(widths) >= 3 else None
+    family = letter['assays'][0] if len(letter['assays']) == 1 else None
+    analyte = letter['analytes'][0] if len(letter['analytes']) == 1 else None
     out = []
-    for line in buffers:
+    for line, hits in rows:
         code = CODE.search(line)
         dates = DATE.findall(line)
-        # A number with neither a date nor a result beside it is a postal code or a protocol
-        # number in the letter, not a sample row.
-        if len(line) < 20 or (not dates and not RESULT_TOKEN.search(line)):
-            continue
-        hits = [m.group(0) for m in RESULT_TOKEN.finditer(line)]
-        results = tuple(Result(f'column {i + 1}', letter['assays'][i] if i < len(letter['assays']) else None,
-                               letter['analytes'][0] if len(letter['analytes']) == 1 else None, t, _classify(t))
-                        for i, t in enumerate(hits))
+        absorbed = columns is not None and len(hits) > columns
+        results = () if absorbed else tuple(
+            Result(f'column {i + 1}', None, family, analyte, t, _classify(t)) for i, t in enumerate(hits))
         species = re.search(r'\b(olivo|oleandro|mandorlo|vite|ciliegio|prunus|olea|nerium|rosmarino|polygala|lavand\w+|mirto|acacia|quercus)[^|0-9]{0,30}', line, re.I)
         out.append(Row(page_number, method, code.group(1), 'sample', _safe_date(dates[0]) if dates else None,
                        species.group(0).strip() if species else None, None, None, None, results,

@@ -8,7 +8,7 @@ demonstrations confer no completion on the other rows.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | The report each monitoring record links: CNR-IPSP and SELGE-network confirmation letters, CNR subspecies-identification rapporti di prova, and the first-level laboratories' own rapporti | One laboratory report: a letter stating its identity, laboratory, dates, assays and analyte, and an annex listing one row per sample with the result the laboratory states for it | Established for what a public report can supply. 1,918 report routes name 1,175 documents; all but 16 are acquired. `cordon_d.reports.report` reads each from its own structure and `cordon_d.findings.findings` relates its rows to the observations that reference it. A report supplies the laboratory's diagnosis per assay with its stated analyte, the sample identity and the dates: the basis for the Osservatorio's official confirmation, not the confirmation itself, and never a Cq. Details below. |
+| What the laboratory actually reported | The report each monitoring record links: confirmation letters of the SELGE network and CNR-IPSP, rapporti di prova of CNR-IPSP and of the first-level laboratories, and CNR subspecies-identification rapporti | One laboratory report: a letter stating its identity, laboratory, dates, assays and analyte, and an annex listing one row per sample with the result the laboratory states for it | Established for what a public report can supply. 1,918 report routes name 1,175 documents; all but 16 are acquired. `cordon_d.reports.report` reads each from its own structure and `cordon_d.findings.findings` relates its rows to the observations that reference it. A report supplies the laboratory's diagnosis per test with its stated analyte, the sample identity and the dates: the basis for the Osservatorio's official confirmation, not the confirmation itself, and never the genome target or a classifying Cq. Details below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry |
@@ -111,57 +111,71 @@ What the population shows, read and not reconciled:
 ## Laboratory reports
 
 Every report is reached from an observation: the monitoring stream publishes
-`DOCUMENTO_CONFERMA`, `LNK_DOCUMENTO_SELGE` or `DOCUMENTO_DECRETO` on the
-positives views and infected-plant layers, and nowhere else. Those
-1,918 routes name 1,175 distinct documents, acquired into the
-content-addressed store by `scripts/acquire_reports.py` with one record per
-route; 16 routes the publisher does not serve are recorded as failures and retried
-on the next run. Three publisher families, distinguished by what the page
-contains and never by file name: 621 scanned confirmation letters of the
-SELGE network and CNR-IPSP; 373 rapporti di prova at the same host, from
-CNR-IPSP and from the first-level laboratories that sign their own (CRSFA, IAMB,
-UNIBA, UNIFG, UNILE), which carry nearly every routed positive of 2021–2023; 179 CNR subspecies-identification
-rapporti published beside the per-subspecies monitoring services.
+`DOCUMENTO_CONFERMA` and `LNK_DOCUMENTO_SELGE` on the positives views and
+infected-plant layers, and nowhere else (`DOCUMENTO_DECRETO` appears on the
+removed-plant layers but never carries a value). Those 1,918 routes name
+1,175 distinct documents, acquired into the content-addressed store by
+`scripts/acquire_reports.py` with one record per route; 16 routes the publisher does
+not serve are recorded as failures and retried on the next run. Four publisher
+families, distinguished by what the page contains and never by file name:
+621 confirmation letters of the SELGE network and CNR-IPSP (469 scanned,
+150 with a text layer, 2 mixed); 373 rapporti di prova at the same host, from
+CNR-IPSP and from the first-level laboratories that sign their own (CRSFA, IAMB, UNIBA, UNIFG, UNILE), which
+carry nearly every routed positive of 2021–2023; 180 CNR subspecies-identification
+rapporti published beside the per-subspecies monitoring services; and 1 of another name.
 
 `report(digest, store)` reads one document: the text layer where a page has one
 (1,719 pages), Tesseract Italian OCR where it has none
-(1,359 pages), re-read at higher resolution when the first pass
-recovers almost no rows; the resolution used is recorded on every page. From the
-letter it reads identity, laboratory, report and delivery dates, the stated
-sample count, the assays and the analyte, each as the literal string printed. From
-the annex it reads one row per line, by the printed headers: a merged header spans
-only under its own parent, a sub-column named for a subspecies states that column's
-analyte, and a table that continues across a page inherits the header above it. It
-reads 12,202 rows, of which 906 state no result the reader can classify and are
-carried as unread with their text. Nothing is inferred: an OCR string that is not a
-result word is unread, not a result.
+(1,359 pages), re-read at higher resolution when the first pass recovers
+almost no rows; the resolution used is recorded on every page. From the letter it
+reads identity, laboratory, report and delivery dates, the stated sample count, the
+assays and the analyte, each as the literal string printed. A page with a text layer
+is read by its printed headers: a merged header spans only under its own parent and
+only into a column some header row names, a sub-column named for a subspecies states
+that column's analyte, and a table continuing across a page inherits the header above
+it. A scanned page has no recoverable headers, so its result columns are positional
+and designate no test. The reader reads 12,202 rows, of which 1,307 state no result it can
+classify and are carried as unread with their text. Nothing is inferred: an OCR string
+that is not a result word is unread, a cell holding several rows' results states none
+of them, and a scanned line yielding more results than its page's rows show columns
+has absorbed a neighbour and states none.
 
 | What a report supplies | What it does not |
 |---|---|
-| The laboratory's stated result per assay column, with the assay named and the analyte the column states (Xylella fastidiosa, or a named subspecies) | A Cq value. No public report in this population prints one; the Cq that DDS 45 §IV.2 classifies lives in the laboratory's worksheets and stays open under `analytical-result` |
+| The laboratory's stated result for each column, under the test as that column designates it (`Esito qPCR 2010` beside `Esito qPCR 2006` are two tests; the assay name they share is carried separately as a family, never as an identity) | The genome target each test amplifies. No report prints one and an assay name is not a genome target (`analytical-result`), so the Article 2(6) different-target condition stays unresolved on this source |
 | The sample identity the laboratory prints, its sampling date, species, coordinates and comune where the annex carries them, and the test dates | The official confirmation of the finding. Under D.lgs. 19/2021 Art. 28(3) the Regional Service decides that on the diagnosis; the report is the diagnosis |
-| Two positive Annex IV tests on one sample with distinct assay identities, where the report prints them — the identities `cordon_c.bindings.confirmation_facts` requires for Article 2(6) | Laboratory designation, accreditation or custody. Those follow their own A routes and sources |
+| Two differently designated tests both reading detected on one sample — the test and sample identities `cordon_c.bindings.confirmation_facts` takes for Article 2(6), supplied by `findings.confirmation_candidates` for 3,772 publications | A classifying Cq. 9 rapporti print a Ct as a free-text laboratory note (31 values, e.g. `CT: 21,06`), which names neither the assay nor run validity; the Cq DDS 45 §IV.2 classifies stays open under `analytical-result` |
+| Laboratory, custody and designation facts as printed strings | Laboratory designation, accreditation or custody as established facts. Those follow their own A routes and sources |
 
 What the join shows, read and not reconciled:
 
-- Of 30,968 observation publications carrying a route, 19,309 match a row in the report
-  they name. 15,474 agree with the published label at the level the report states,
-  4 disagree, and 15,490 are not comparable — the report states a subspecies
-  the view does not name, or the label is pending, duplicate or an inspection.
-- The disagreements are stated, never resolved. Sample 747145 of 2020-02-20, published negative in Pianta positiva-Monitoraggio 2019 — a negative label on a plant its own publisher lists among the positives — is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa on both of its assays. Sample 1931257 of 2026-01-13, published doubtful in Piante infette-Monitoraggio 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
-- 9,467 publications name a report whose rows were read but which does not
-  print that sample reference, and 1,601 name a report whose annex yielded no
-  readable row; both are concentrated in the scanned 2015–2021 confirmation letters,
-  where the letter's own stated sample count exceeds the rows recovered in 233
-  documents (212 match exactly, 12 recover more than the letter states, 718 state no count).
-  That count comparison is the publisher's own check on this reading and it fails where
-  OCR loses rows; the affected observations keep their published label and gain no report.
-- 198 name a report whose annex prints no sample reference this reader accepts,
-  30 name a report that lists the same reference twice, and 363 name one of the
-  16 documents the publisher does not serve.
+- 30,968 observation publications carry a route; every one of them is published positive
+  or positive-and-removal but two negatives and two doubtfuls. 19,309 match a row in
+  the report they name, of which 15,154 agree with the published label at the level the
+  report states (12,313 at species, 2,841 at subspecies), 4 disagree, and 4,151 cannot be
+  compared: 2,853 because no analyte is stated for any result, 870 because the row states
+  no result, 322 because the report states another subspecies than the view names, and
+  106 because the comparable result could not be read.
+- The disagreements are stated, never resolved. Sample 747145 of 2020-02-20, published negative in Positivi - Campioni 2019 — a negative label inside its publisher's own positives view — is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa. Sample 1931257 of 2026-01-13, published doubtful in Positivi - Campioni 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
+- The remaining 11,659 publications gain no report row: 9,467 name a report whose rows
+  were read but which does not print that sample reference, 1,601 name a report whose
+  annex yielded no readable row, 198 name one whose annex prints no sample
+  reference this reader accepts, 30 name one that lists the same reference twice, and
+  363 name one of the 16 documents the publisher does not serve. They keep their
+  published label and gain nothing from a report.
+- The publisher's own check on this reading is the letter's stated sample count: the
+  distinct sample references recovered match it in 212 documents, fall short in
+  233 and exceed it in 12 (718 letters state no count). It fails where OCR loses
+  rows on a scanned annex, which is what the no-row counts above are concentrated in.
+- A match uses the sample reference the laboratory prints. Where a report's only
+  identifying column is an identifying cell it is read from that cell (102 matches), and
+  where it is a daily counter carrying sample-width values it is matched on the value
+  (44 matches); each finding records which column supplied it. One annex prints a
+  reference with a `bis` suffix, which the reader drops; whether `bis` marks a repeat
+  sample is unresolved.
 
-Reading all 1,175 documents costs about 17 minutes once per reader version; the
-join then runs in seconds over the derived layer.
+Reading all 1,175 documents costs about 10 minutes once per reader version; the join then
+runs in 2 seconds over the derived layer.
 
 ## Materials that are not standalone input gaps
 

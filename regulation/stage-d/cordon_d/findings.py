@@ -20,6 +20,29 @@ from .reports import Report, reports
 MATCHABLE = {'sample', 'in-cell'}
 POSITIVE_LABELS = ('published-positive', 'published-positive-and-removal-label')
 COMPARABLE_LABELS = POSITIVE_LABELS + ('published-negative', 'published-doubtful')
+DETECTED = ('positive', 'detected')
+
+
+def confirmation_candidates(row, *, sample: str):
+    """The Article 2(6) arguments a report row supplies, and the ones it cannot.
+
+    Two result columns that the laboratory designates differently and that both
+    read as detected are two positive tests on one sample. The genome target each
+    assay amplifies is printed by no report in this population, and an assay name
+    is not a genome target (`analytical-result`), so it is passed as unavailable
+    and `cordon_c.bindings.confirmation_facts` refuses the Article 2(6) conclusion
+    for want of it rather than concluding against confirmation. Returns None where
+    the row does not show two differently designated detected tests.
+    """
+    detected = [r for r in row.results if r.kind in DETECTED and r.assay]
+    designations = {r.assay for r in detected}
+    if len(detected) < 2 or len(designations) < 2:
+        return None
+    first, second = sorted(designations)[:2]
+    return {'first_test': first, 'second_test': second,
+            'first_sample': sample, 'second_sample': sample,
+            'first_extract': None, 'second_extract': None,
+            'first_genome_target': None, 'second_genome_target': None}
 
 
 def comparison(label: str, view: str, results) -> str:
