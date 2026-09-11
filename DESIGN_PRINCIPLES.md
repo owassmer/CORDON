@@ -20,12 +20,15 @@ The operator's authority bounds the chosen decision chain; its full remit does n
 
 ## Preserve epistemic boundaries
 
-Keep four things distinguishable:
+Keep five things distinguishable:
 
 1. source material that was actually retrieved;
 2. facts directly stated by that source;
-3. inferences or calculations made from it;
-4. adjudicated program state.
+3. facts the source may state that our reading did not recover;
+4. inferences or calculations made from it;
+5. adjudicated program state.
+
+A reading's silence is not the source's. Where an output records an absence, it names which of these produced it: the source does not state the fact, the retrieved material is illegible, our reading did not recover it, or it was recovered and could not be attached. Those have different remedies and must not become interchangeable because each currently yields nothing. A reading's limit is never written into an owner as a property of the source, and never handed to a later stage as an input the source does not supply.
 
 Provisional work cannot acquire authority by being polished, repeated, committed, or consumed downstream. Conflicts are explicit until competent evidence or an owner ruling resolves them.
 
@@ -56,6 +59,8 @@ Local defects receive local cures. Repeated failures of the same soundly tested 
 Name the proposition a check claims to establish and create a condition under which the check would fail. Counts cannot prove meaning; schema validity cannot prove correctness; a write response cannot prove deployed state.
 
 An expected result must be established independently of the transformation it tests. Replaying authored conclusions, comparing two projections of the same assumptions, or passing one set as both expected and acquired cannot certify meaning or completeness. Integrity, serialization and selector tests retain those narrow claims; general capability requires unseen supported records and discriminating failures through ordinary consumer paths.
+
+A result compared to an answer the consumer already holds measures agreement with that answer, not fidelity to the source: an attachment can be wrong while preserving the expected category, and an omission and an invention can cancel in a count. Such a comparison stays a useful cross-check and can never be the correctness evidence for a reading, nor the target it is tuned against. Where the question is whether a source was read, the expected result comes from reading the source.
 
 Discovery scope and selected acquisition scope remain distinct. A publisher inventory can expose an omitted candidate, but only an accepted consumer admits a source. Once admitted, acquire and understand the complete within-aperture population. Unrelated catalogue entries need no durable per-row disposition, and a reconciled count cannot establish meaning or completion.
 

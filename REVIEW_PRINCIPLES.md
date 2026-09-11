@@ -10,9 +10,11 @@ The partition is by primary responsibility, not by evidence read. Assign each fi
 |---|---|---|
 | 1. Purpose and proportion | Is this the right work, and no more than it? | The decision served and the aperture read from state; admission of sources, dependencies and other actors by their effect on the chosen chain; and the lean challenge: whether the full necessary meaning survives with less structure, scope, process or ceremony. |
 | 2. Meaning and composition | Does it say what its authority says, and does the whole hold together? | Primary sources and accepted upstream meaning: conditions, quantities, actors, exceptions, time, and fact versus inference; coverage of the in-aperture universe; consistent shapes, names, units and contracts across owners and consumers; version seams. |
-| 3. Realization | Does it actually do that for an ordinary record it has never seen, and would the evidence show if it did not? | Consumer-visible behavior; recomputation from source; boundaries and failure paths; generality without case registration or authored answers; whether a check can fail; destination reads. A green signal is not the result. |
+| 3. Realization | Does it actually do that for an ordinary record it has never seen, and would the evidence show if it did not? | Consumer-visible behavior; recomputation from source; boundaries and failure paths; generality without case registration or authored answers; whether a check can fail; destination reads. A green signal is not the result. Where the unit reads a source family, instances of that family read independently of the reader, in every round. |
 
 Facet 1 decides what belongs and how much. Facet 2 checks meaning and coherence. Facet 3 checks the result and the evidence for it.
+
+Where a unit reads a source family, a review that consults only the unit's output audits a transformation against itself, and a reading that is self-consistent and wrong survives it. Facet 3's reviewer therefore reads instances of the source directly — the page, the document, the record, not the unit's rendering of it — and judges the reading against what those instances state. Realization owns this because the question is whether the reader recovers what the source carries; facet 2 continues to own whether a recovered fact says what its authority says. The reviewer establishes those readings; a unit that supplies them supplies the authored answer this facet forbids, which binds the reader under review, never the review.
 
 ## Plan review, once
 
@@ -32,7 +34,7 @@ A unit converges when the adjudicator can write, on the pull request, why the re
 
 Convergence is not three PASS returns, a passing suite, a round count, or exhaustion. Checks establish narrow mechanical claims; they never define the unit's quality. No reviewer is expected to return a finding count or meet a threshold. The adjudication names the commit it judged; a later commit reopens the judgment.
 
-A second implementation round follows only when a repair changed meaning or a material risk remains open. A third round is evidence that the plan or the structure is wrong: stop and re-plan instead of reviewing again.
+A further implementation round follows whenever a repair changed meaning or a material risk remains open, and rounds continue until the judgment can be written. A falling residual is not that judgment: a failure class that recurs across rounds is evidence the structure is wrong and outranks the measured residual of its latest instance, whatever the round number. So is a unit the adjudicator still cannot judge after repeated rounds, however each round's findings were classified. Either is answered by re-planning, not by reviewing again.
 
 Owen merges the pull request. Merge accepts the unit's content as reviewed; changed content needs its own acceptance.
 
