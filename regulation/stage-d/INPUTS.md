@@ -145,7 +145,7 @@ absorbed a neighbour whose own code OCR lost, so it states no result and keeps i
 |---|---|
 | The laboratory's stated result for each column, under the test as that column designates it (`Esito qPCR 2010` beside `Esito qPCR 2006` are two tests; the assay name they share is a family and is never used as an identity, and two designations differing only by a full test date or a repetition marker are one assay run twice, while a protocol year inside the designation is part of it) | The genome target each test amplifies. No report prints one and an assay name is not a genome target (`analytical-result`), so the Article 2(6) different-target condition stays unresolved on this source |
 | The sample identity the laboratory prints, its sampling date, species, coordinates and comune where the annex carries them, and the test dates | The official confirmation of the finding. Under D.lgs. 19/2021 Art. 28(3) the Regional Service decides that on the diagnosis; the report is the diagnosis |
-| Two differently designated tests both reading detected on one sample — the test and sample identities `cordon_c.bindings.confirmation_facts` takes for Article 2(6), carried on every matched finding by `findings.confirmation_candidates`. It reaches 3,772 of 30,968 publications, all from reports with a text layer (2020: 2,570, 2021: 880, 2024: 322): a scanned annex designates no test, so the confirmation letters carrying the 2015–2019 positives supply none, and where such a positive falls outside a demarcated area — the case Article 2(6) governs — Stage E must supply the identities as well as the target | A classifying Cq. 8 rapporti print a Ct as a free-text laboratory note and 2 confirmation letters of 2017 print a Cq (33 values in all, e.g. `CT: 21,06`). Neither names the assay it belongs to nor the run's validity, which is what `REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification` classifies; that Cq stays open under `analytical-result` |
+| Two differently designated tests both reading detected on one sample — the test and sample identities `cordon_c.bindings.confirmation_facts` takes for Article 2(6), carried on every matched finding by `findings.confirmation_candidates`. It reaches 3,772 of 30,968 publications, all from reports with a text layer (2020: 2,570, 2021: 880, 2024: 322): a scanned annex designates no test, so the confirmation letters carrying the 2015–2019 positives supply none, and where such a positive falls outside a demarcated area — the case Article 2(6) governs — Stage E must supply the identities as well as the target | A classifying Cq. 10 reports print a measured cycle value as a free-text laboratory note (22 values, e.g. `CT: 20,07`), 2 more restate the act's own Cq thresholds rather than a sample's value, and 2 confirmation letters of 2017 carry one legible only under OCR. None of them names the assay it belongs to or the run's validity, which is what `REG-PUGLIA-U181-DIR-2025-00045:cq-analytical-result-classification` classifies; that Cq stays open under `analytical-result` |
 | The laboratory, the report date and the delivery date the letter prints, as strings | Laboratory designation, accreditation and custody. The reader has no field for them and they follow their own A routes and sources |
 
 What the join shows, read and not reconciled:
@@ -158,7 +158,7 @@ What the join shows, read and not reconciled:
   no result, 322 because the report states another subspecies than the view names, and
   106 because the comparable result could not be read.
 - The disagreements are stated, never resolved. They are two samples, each published in
-  two views. Sample 747145 of 2020-02-20, published negative in Positivi - Campioni 2019 (a negative label inside its publisher's own positives view), is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa. Sample 1931257 of 2026-01-13, published doubtful in Piante infette-Monitoraggio 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
+  two views. Sample 747145 of 2020-02-20, published negative in Positivi - Campioni 2019 (a negative label inside its publisher's own positives view), is reported by CONFERMA_SELGE_Prot_93_2020 as positive for X. fastidiosa. Sample 1931257 of 2026-01-13, published doubtful in Positivi - Campioni 2026 sub. pauca, is reported by RAPPORTO_PROVA_N_3P_2026_CNR as detected for X. fastidiosa subsp. pauca; not-detected for X. fastidiosa subsp. fastidiosa, X. fastidiosa subsp. multiplex.
 - The remaining 11,657 publications gain no report row: 9,471 name a report whose rows
   were read but which does not print that sample reference, 1,601 name a report whose
   annex yielded no readable row, 198 name one whose annex prints no sample
@@ -166,9 +166,19 @@ What the join shows, read and not reconciled:
   357 name one of the 11 documents the publisher serves on no route.
   They keep their published label and gain nothing from a report.
 - The publisher's own check on this reading is the letter's stated sample count: the
-  distinct sample references recovered match it in 212 documents, fall short in
-  233 and exceed it in 12 (718 letters state no count). It fails where OCR loses
+  distinct sample references recovered match it in 228 documents, fall short in
+  332 and exceed it in 12 (603 letters state no count). It fails where OCR loses
   rows on a scanned annex, which is what the no-row counts above are concentrated in.
+  The recovered references are not all sample references: 522 scanned rows carry one with
+  no readable day, 158 of them shaped like a coordinate whose comma OCR lost, so the
+  check reads more favourably than the annexes support. Such a reference can still only
+  reach an observation that a report of its own route names, and 10 publications do.
+- The publisher serves one report file name from more than one place. Three documents
+  failed at the route an observation names and were served at another host or programme
+  directory; they are read from the route that served them. A file name is not a document
+  identity, so such a report only offers a candidate: a result reaches an observation
+  solely where the annex prints that observation's own sample reference, and four of the
+  six publications so resolved duly gain no row.
 - A match uses the sample reference the laboratory prints. Where a report's only
   identifying column is an identifying cell it is read from that cell (102 matches), and
   where it is a daily counter carrying sample-width values it is matched on the value
@@ -176,8 +186,8 @@ What the join shows, read and not reconciled:
   reference with a `bis` suffix, which the reader drops; whether `bis` marks a repeat
   sample is unresolved.
 
-Reading all 1,175 documents costs about 16 minutes once per reader version; the join then
-runs in 2 seconds over the derived layer.
+Reading all 1,175 documents costs about 11 minutes once per reader version; the join then
+runs in 1 seconds over the derived layer.
 
 ## Materials that are not standalone input gaps
 

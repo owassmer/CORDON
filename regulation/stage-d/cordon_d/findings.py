@@ -100,9 +100,12 @@ def findings(root: Path, store: Path):
     """
     import duckdb
     records = {r['url']: r for r in json.loads((root / 'records.json').read_text())}
-    # One document is served at http and at https. Where one route failed and the other
-    # carried the bytes, the document is acquired; the route's failure is not the
-    # publisher withholding it.
+    # The publisher serves one report file name from more than one place — another host,
+    # another programme directory, another scheme — and a route can fail at one while the
+    # bytes are served at another. A name is not a document identity, so this resolution
+    # can only restore a candidate: a result reaches an observation solely where the
+    # report's annex prints that observation's own sample reference, so a name that
+    # pointed at a different report yields `not named by its report`, never a result.
     by_name = {document_name(r['url']): r['sha256'] for r in records.values() if 'sha256' in r}
     by_digest: dict[str, Report] = {}
     for url, item, record in reports(root, store):

@@ -8,8 +8,9 @@ has none to recover, so its columns are read positionally and designate no test.
 No reading turns on a file name, a year or a laboratory. A line the reader cannot
 resolve is an `unread` row carrying its text; nothing is guessed. Reports supply
 the laboratory's diagnosis and, where a report designates two tests, the Article
-2(6) test and sample identities; they print no genome target, only nine print a
-Ct as a laboratory note, and none is the official confirmation decision.
+2(6) test and sample identities; they print no genome target, a few print a cycle
+value as a free-text note that names neither its assay nor the run's validity,
+and none is the official confirmation decision.
 Relating what is read to observations belongs to `findings`, so a change there
 does not invalidate a reading.
 """
@@ -208,7 +209,8 @@ def _letter_facts(text: str) -> dict:
     m = re.search(r'(?:consegnat\w*|raccolt\w*)[^.\n]{0,80}?(?:in\s+data\s+|il\s+)(\d{1,2}[\s_/]+(?:\d{1,2}|[A-Za-zà]+)[\s_/]+\d{4})', text, re.I)
     if m:
         facts['delivery_text'] = m.group(1)
-    m = re.search(r'n\.?\s*(\d{1,4})\s+campion', text, re.I)
+    # The letter states its own sample count as `n. 64 campioni` or `su 64 campioni`.
+    m = re.search(r'(?:n\.?|\bsu)\s*(\d{1,4})\s+campion', text, re.I)
     facts['stated_sample_count'] = int(m.group(1)) if m else None
     facts['assays'] = tuple(sorted({re.sub(r'\s+', ' ', a).strip() for a in ASSAY_NAMES.findall(text)}))
     analytes = {re.sub(r'\s+', ' ', a[0]).strip() for a in ANALYTE.findall(text)}

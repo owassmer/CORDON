@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import unittest
 
-from cordon_d.findings import comparison, confirmation_candidates, document_name
+from cordon_d.findings import _matchable, comparison, confirmation_candidates, document_name
 from cordon_d.reports import (Result, Row, _classify, _designation, _flat_rows, _header_role, _italian_date,
                               _letter_facts, _line_rows, _merged_header, _table_rows, _transposed)
 
@@ -256,13 +256,29 @@ class Comparison(unittest.TestCase):
 
 
 class RouteIdentity(unittest.TestCase):
-    def test_one_document_is_one_document_at_either_scheme(self):
-        http = 'http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_7.pdf'
-        https = http.replace('http://', 'https://')
-        self.assertEqual(document_name(http), 'RAPPORTO_PROVA_N_7.pdf')
-        self.assertEqual(document_name(http), document_name(https))
-        self.assertEqual(document_name('http://cartografia.sit.puglia.it/doc/xylella/x/RAPPORTO_PROVA_N_3P_2026_CNR.pdf'),
-                         'RAPPORTO_PROVA_N_3P_2026_CNR.pdf')
+    def test_the_same_file_name_is_recognised_across_host_directory_and_scheme(self):
+        # The three routes the publisher failed and served elsewhere differ by host and by
+        # programme directory, not only by scheme; this is the case the corpus exercises.
+        webadf = 'http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_10_2024_CNR.pdf'
+        carto = 'http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_10_2024_CNR.pdf'
+        multiplex = carto.replace('xff_sub_fastidiosa/risultati_xff', 'xf_sub_multiplex/risultati_xfmultiplex')
+        self.assertEqual(document_name(webadf), 'RAPPORTO_PROVA_N_10_2024_CNR.pdf')
+        self.assertEqual({document_name(u) for u in (webadf, carto, multiplex, webadf.replace('http://', 'https://'))},
+                         {'RAPPORTO_PROVA_N_10_2024_CNR.pdf'})
+
+    def test_a_row_of_another_report_is_matchable_only_under_its_own_reference(self):
+        # A file name is not a document identity, so a resolved name can offer the join a
+        # report that is not the routed one. The safety is that the join keys a report's
+        # rows by the reference the annex prints, which is what `_matchable` decides.
+        other = Row(2, 'text-layer', '999999', 'sample', date(2024, 6, 1), 'olivo',
+                    None, None, None,
+                    (Result('Esito qPCR Harper 2010', 'Esito qPCR Harper 2010', 'Xylella fastidiosa',
+                            'Positivo', 'positive'),),
+                    None, 'row of a different report', False)
+        self.assertTrue(_matchable(other))
+        keyed = {r.reference: r for r in [other] if _matchable(r)}
+        self.assertIsNone(keyed.get('1234567'))     # the routed observation finds nothing
+        self.assertIs(keyed.get('999999'), other)
 
 
 class ArticleTwoSix(unittest.TestCase):
