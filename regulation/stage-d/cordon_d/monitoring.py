@@ -7,27 +7,28 @@ from dataclasses import dataclass, replace
 from datetime import date, datetime, timezone
 from decimal import Decimal
 import json
-from math import isfinite, ulp
+from math import cos, hypot, isfinite, radians
 import os
 from pathlib import Path
 import shutil
 import tempfile
 from zoneinfo import ZoneInfo
 
-from .campaign import PublicationReading, meaningful_text, publication_reading
+from .campaign import (PublicationReading, REPORT_ROUTE_FIELDS, meaningful_text,
+                       publication_reading)
 from hashlib import sha256
 
 from .releases import Occurrence, workbook_occurrences, csv_occurrences, arcgis_occurrences
 from .store import adopt, audit, blob_path as store_blob_path, derived_path, dumps, loads, store_root, write_derived
 
 
-OBSERVATION_DATES = ('DATA_RILEVAMENTO', 'DATA_PRELIVEO', 'DATA_PRELIEVO',
+OBSERVATION_DATES = ('DATA', 'DATA_RILEVAMENTO', 'DATA_PRELIVEO', 'DATA_PRELIEVO',
                      'DATA_CAMPIONE', 'DATA_RILIEVO')
 
 # Row 1's own subject: attributes of the observation event, established here. Who
 # performed it is one fact under several publisher names, from the single-technician
 # `TECNICO` to the team code and per-inspector columns of the 2016 infrastructure survey.
-OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
+OBSERVATION_ATTRIBUTES = ('COMUNE', 'COMUNE_COD', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
                           'SQUADRA', 'TECNICO', 'COD_TECNICI',
                           'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
                           'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3',
@@ -37,7 +38,7 @@ OBSERVATION_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
 # difference between them is a disagreement the operator must see. A free-text note, a
 # publication status and a device name are not: they describe the publication or its
 # instrument, not the observation.
-COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
+COMPARED_ATTRIBUTES = ('COMUNE', 'COMUNE_COD', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
                        'SQUADRA', 'TECNICO', 'COD_TECNICI',
                        'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
                        'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3')
@@ -46,8 +47,24 @@ COMPARED_ATTRIBUTES = ('COMUNE', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
 # would manufacture disagreement. A value shared by hundreds of records is a label for the
 # campaign that produced them, not an identity, and is established as an attribute instead.
 PUBLISHER_IDENTIFIERS = ('ID_GIORNALIERO', 'NUMERO_ORDINE', 'OBJECTID', 'IDANDROID')
-# The published columns that route to the document owning the next fact.
-ROUTE_FIELDS = ('DOCUMENTO_CONFERMA', 'LNK_DOCUMENTO_SELGE', 'DOCUMENTO_DECRETO')
+# The frame every location is read into and compared in.
+#
+# The SIT services state EPSG:32633 on each page and the reader reads it. The campaign
+# workbooks and the CKAN CSV publish `LONGITUDINE`/`LATITUDINE` and state no datum
+# anywhere: not in the CKAN package, not on the download page, not in a sheet or header.
+# Those degrees are WGS 84, established from the publisher's own redundancy rather than
+# supposed. Over the 1,279,135 observations published both as a SIT feature and as a
+# campaign row, the SIT point reprojected here reproduces the printed pair to under a
+# centimetre for all but seventeen; the three workbooks that carry no observation
+# reference agree with their same-day SIT points to the same tolerance, with a median
+# offset of zero in both axes. ED50 and Monte Mario / Roma 40 are excluded by median
+# residuals of 127 m and 71 m. `scripts/check_frames.py` re-derives this from the store.
+GEOGRAPHIC_FRAME = 'EPSG:4326'
+# Two publications of one observation that agree reproduce each other to under a
+# centimetre; the nearest disagreement in the population is 3,554 km. Every tolerance
+# between those two gives the same answer, so this one is projection noise, not a
+# threshold on meaning.
+POINT_TOLERANCE_M = 0.01
 # Published labels that carry no analytical result because the record states an
 # observation of another kind, and those where a result is genuinely absent.
 NO_ANALYTICAL_RESULT = frozenset({'published-visual-observation', 'published-symptom-label'})
@@ -65,25 +82,21 @@ CARRIED_FOR = {
     # like: a demarcated-zone status, which row 3 establishes from the adopting act. A
     # publisher's label beside an observation never stands in for the area in force.
     'ZONA': 'demarcated area',
+    # `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is
+    # the ISTAT code (`71027` beside `COMUNE = 'LESINA'`), which is this observation's own
+    # administrative location and is established above rather than carried for row 5.
     'FOGLIO': 'cadastral parcel', 'FOGLI': 'cadastral parcel', 'PARTICELLA': 'cadastral parcel',
     'PARTICELLE': 'cadastral parcel', 'SEZIONE': 'cadastral parcel', 'ID_PART': 'cadastral parcel',
-    'COD_COMUNE': 'cadastral parcel', 'COMUNE_COD': 'cadastral parcel',
+    'COD_COMUNE': 'cadastral parcel',
     'CUAA': 'land standing', 'AZIENDA': 'land standing',
     'SCELTA_PROPRIETARIO': 'owner response',
     'MONUMENTALE_ARIF': 'protected plants', 'VINCOLO_IDROGEOLOGICO': 'protected plants',
     'UCP_PPTR': 'protected plants', 'BP_PPTR': 'protected plants', 'PAI': 'protected plants',
+    # The decree the act is published under, beside the removal date and reference already
+    # here. It is a route to the removal row's act, never a route to a laboratory report.
     'RIF_DECRETO': 'removal execution', 'DATA_ESTIRPAZIONE': 'removal execution',
+    'DOCUMENTO_DECRETO': 'removal execution',
 }
-
-
-def _scalar_text(value):
-    """A published value this reader can carry as the string the publisher printed.
-
-    A list or mapping is a shape this reader does not interpret; rendering its Python
-    repr would establish a fact the record does not state, and comparing that repr could
-    manufacture a disagreement. Such a value is carried nowhere and says so instead.
-    """
-    return None if isinstance(value, (dict, list, tuple, set)) else meaningful_text(value)
 
 
 def _absence_cause(row, fields):
@@ -99,7 +112,7 @@ def _absence_cause(row, fields):
         return 'no such field is published in this record'
     if all(value is None for _, value in published):
         return 'the field is published and carries no value'
-    if all(_scalar_text(value) is None and not isinstance(value, (dict, list, tuple, set))
+    if all(meaningful_text(value) is None and not isinstance(value, (dict, list, tuple, set))
            for _, value in published):
         return 'the field is published and carries only a sentinel or blank'
     return 'a value is published that this reader does not interpret'
@@ -213,15 +226,22 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
             kind = 'Accertamento'
     geometry = native.get('geometry') if arcgis else None
     coordinates = None
-    crs = None
-    if geometry and 'x' in geometry and 'y' in geometry:
+    # The frame the record states, read wherever it states it rather than only inside the
+    # branch that reads x and y, so a geometry this reader cannot use does not also lose
+    # the frame the record plainly gives.
+    # Only from the service's own page metadata: in a workbook `native` is the row, so a
+    # published column could otherwise be read as a declaration about the record.
+    spatial_reference = (native.get('spatialReference') or {}) if arcgis else {}
+    wkid = spatial_reference.get('latestWkid', spatial_reference.get('wkid'))
+    crs = f'EPSG:{wkid}' if wkid else meaningful_text(spatial_reference.get('wkt'))
+    if geometry and geometry.get('x') is not None and geometry.get('y') is not None:
         values = geometry['x'], geometry['y']
-        spatial_reference = native.get('spatialReference') or {}
-        wkid = spatial_reference.get('latestWkid', spatial_reference.get('wkid'))
-        crs = f'EPSG:{wkid}' if wkid else spatial_reference.get('wkt')
     else:
         values = row.get('LONGITUDINE'), row.get('LATITUDINE')
-        # Geographic column names establish axes, not a geodetic datum.
+        if crs is None and any(meaningful_text(v) is not None for v in values):
+            # Geographic column names establish the axes; the datum is established for
+            # this publisher's degree columns at GEOGRAPHIC_FRAME, from its own redundancy.
+            crs = GEOGRAPHIC_FRAME
     if any(meaningful_text(v) is not None for v in values):
         try:
             coordinates = tuple(float(v.replace(',', '.') if isinstance(v, str) else v) for v in values)
@@ -233,11 +253,11 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
             coordinates = None
             issues.append('Invalid or incomplete coordinate pair')
     attributes = tuple((field, value) for field in OBSERVATION_ATTRIBUTES
-                       if (value := _scalar_text(row.get(field))) is not None)
+                       if (value := meaningful_text(row.get(field))) is not None)
     # The literal the publisher printed, for a fact another row establishes. The lossless
     # native value stays in the occurrence; nothing here interprets it.
     carried = tuple((field, str(row[field])) for field in CARRIED_FOR
-                    if field in row and _scalar_text(row[field]) is not None)
+                    if field in row and meaningful_text(row[field]) is not None)
     reading = MonitoringObservation(
         release, publication, identifiers, tuple(dates), kind,
         meaningful_text(row.get('SPECIE')), meaningful_text(row.get('CULTIVAR')),
@@ -282,9 +302,10 @@ def _causes(reading, row, identifiers, issues, native, geometry):
         # silent one; campaign.py's own distinction is the first two of them.
         causes.append(('result', _absence_cause(row, ('RISULTATO',))))
     if not reading.publication.document_references:
-        # The route to the laboratory report. Row 2 reads this and must be able to tell a
-        # publisher that printed no route from a column this reader could not read.
-        causes.append(('report_routes', _absence_cause(row, ROUTE_FIELDS)))
+        # The route to the laboratory report, named over the report columns alone. A record
+        # publishing only a decree column is not told a report route is empty, which is a
+        # different remedy; the decree is carried for the removal row.
+        causes.append(('report_routes', _absence_cause(row, REPORT_ROUTE_FIELDS)))
     if reading.observation_date is None:
         days = {value for _, value in reading.observation_dates if value is not None}
         unreadable = next((issue for issue in issues if issue.split(':')[0] in OBSERVATION_DATES), None)
@@ -295,20 +316,32 @@ def _causes(reading, row, identifiers, issues, native, geometry):
         # polygon, a ring, an explicit null - is published geometry, and saying none is
         # published would deny what the record holds.
         published_geometry = 'geometry' in native
+        empty_geometry = published_geometry and (
+            geometry is None or ('x' in geometry and geometry.get('x') is None))
         causes.append(('coordinates',
                        'a coordinate pair is published that this reader cannot use'
                        if 'Invalid or incomplete coordinate pair' in issues
+                       else 'geometry is published carrying no coordinate values'
+                       if empty_geometry
                        else 'geometry is published in a shape this reader does not interpret'
                        if published_geometry and not (geometry and 'x' in geometry and 'y' in geometry)
                        else 'no geometry is published in this record'
                        if not published_geometry and 'LONGITUDINE' not in row and 'LATITUDINE' not in row
                        else _absence_cause(row, ('LONGITUDINE', 'LATITUDINE'))))
+    if reading.crs is None:
+        # Without a frame a coordinate pair is two numbers: it cannot be compared with
+        # another publication of the same observation, and it cannot be projected for a
+        # distance. The two causes are different remedies - acquire a location, or
+        # establish this publisher's frame as GEOGRAPHIC_FRAME was established.
+        causes.append(('crs', 'this record carries no coordinates to place in a frame'
+                       if reading.coordinates is None else
+                       'coordinates are published in a frame this reader cannot name'))
     causes.extend(_unheld(reading, row))
     return tuple(causes)
 
 
 # Fields whose absence is already named above under the reading's own name for the fact.
-NAMED_ABOVE = (frozenset(OBSERVATION_DATES) | frozenset(ROUTE_FIELDS)
+NAMED_ABOVE = (frozenset(OBSERVATION_DATES) | frozenset(REPORT_ROUTE_FIELDS)
                | {'ID', 'ID_CAMPIONE', 'SPECIE', 'CULTIVAR', 'SUBSPECIE', 'SINTOMO', 'SINTOMI',
                   'RISULTATO', 'TIPOLOGIA', 'LONGITUDINE', 'LATITUDINE'})
 # Every field some row of this stage has claimed, whether row 1 establishes it, carries it
@@ -419,7 +452,8 @@ def _reading_row(reading: MonitoringObservation, store: Path, ordinal: int) -> d
             'restates': reading.publication.result == DUPLICATE_RESULT, 'kind': reading.kind,
             'species': reading.species, 'cultivar': reading.cultivar, 'subspecies': reading.subspecies,
             'symptom_presence': reading.symptom_presence, 'x': x, 'y': y, 'crs': reading.crs,
-            'report_routes': [route for _, route in reading.publication.document_references],
+            'report_routes': [{'field': field, 'value': route}
+                              for field, route in reading.publication.document_references],
             'issues': list(reading.issues),
             'identifiers': [{'field': f, 'value': v} for f, v in reading.identifiers],
             'attributes': [{'field': f, 'value': v} for f, v in reading.attributes],
@@ -445,7 +479,7 @@ def _readings_schema():
             ('restates', pyarrow.bool_()), ('kind', pyarrow.string()), ('species', pyarrow.string()),
             ('cultivar', pyarrow.string()), ('subspecies', pyarrow.string()),
             ('symptom_presence', pyarrow.bool_()), ('x', pyarrow.float64()), ('y', pyarrow.float64()),
-            ('crs', pyarrow.string()), ('report_routes', pyarrow.list_(pyarrow.string())),
+            ('crs', pyarrow.string()), ('report_routes', _named(pyarrow, 'value')),
             ('issues', pyarrow.list_(pyarrow.string())),
             ('identifiers', _named(pyarrow, 'value')), ('attributes', _named(pyarrow, 'value')),
             ('carried', _named(pyarrow, 'value')), ('causes', _named(pyarrow, 'cause'))])
@@ -551,7 +585,9 @@ class Member:
     symptom_presence: bool | None
     coordinates: tuple[float, float] | None
     crs: str | None
-    report_routes: tuple[str, ...]
+    # Each route under the column that published it, so a consumer can tell the route to
+    # the laboratory report from any other document route the publisher prints.
+    report_routes: tuple[tuple[str, str], ...]
     issues: tuple[str, ...]
     identifiers: tuple[tuple[str, str], ...] = ()
     attributes: tuple[tuple[str, str], ...] = ()
@@ -571,8 +607,30 @@ class Member:
         return dict(self.causes).get(field)
 
 
+_TRANSFORMERS = {}
+
+
+def _in_geographic_frame(point, crs):
+    """One published location in the frame every location is compared in.
+
+    A frameless point is two numbers and is not placed; saying so is the whole reason
+    the frame is read. Transformers are built once per source frame.
+    """
+    if crs is None:
+        return None
+    if crs == GEOGRAPHIC_FRAME:
+        return point
+    if crs not in _TRANSFORMERS:
+        from pyproj import Transformer
+        _TRANSFORMERS[crs] = Transformer.from_crs(crs, GEOGRAPHIC_FRAME, always_xy=True)
+    return tuple(_TRANSFORMERS[crs].transform(*point))
+
+
 def _same_point(a, b):
-    return all(abs(p - q) <= max(ulp(p), ulp(q)) for p, q in zip(a, b))
+    """Whether two publications put one observation in the same place, on the ground."""
+    east = (a[0] - b[0]) * 111320.0 * cos(radians((a[1] + b[1]) / 2))
+    north = (a[1] - b[1]) * 110540.0
+    return hypot(east, north) <= POINT_TOLERANCE_M
 
 
 @dataclass(frozen=True)
@@ -610,17 +668,29 @@ class DistinctObservation:
             found.discard(DUPLICATE_RESULT)  # a duplicate label restates the positive it accompanies
         return found
 
-    def _points_by_crs(self):
-        by_crs = {}
+    def _placed_points(self):
+        """Every member's published location in one frame, and those that cannot be placed.
+
+        Publications of one observation in different published frames are reconciled here
+        rather than held apart: an observation happened in one place, and two publications
+        that put it in two places disagree whatever frames they were printed in.
+        """
+        points, unplaced = [], 0
         for member in self.members:
-            if member.coordinates is not None:
-                by_crs.setdefault(member.crs, []).append(member.coordinates)
-        return by_crs
+            if member.coordinates is None:
+                continue
+            placed = _in_geographic_frame(member.coordinates, member.crs)
+            if placed is None:
+                unplaced += 1
+            else:
+                points.append(placed)
+        return points, unplaced
 
     @property
     def disagreements(self):
         fields = [f for f in COMPARED_FIELDS if len(self.values(f)) > 1]
-        if any(not all(_same_point(points[0], p) for p in points) for points in self._points_by_crs().values()):
+        points, _ = self._placed_points()
+        if points and not all(_same_point(points[0], p) for p in points):
             fields.append('coordinates')
         return tuple(fields)
 
@@ -642,12 +712,21 @@ class DistinctObservation:
 
     @property
     def locations(self):
-        """Agreed published coordinates per coordinate reference system."""
-        return tuple((crs, points[0]) for crs, points in self._points_by_crs().items()
-                     if all(_same_point(points[0], p) for p in points))
+        """This observation's agreed location, in the frame locations are compared in.
+
+        One observation has one place, so this is one location or none. It is withheld
+        where the publications disagree, and where a member's frame cannot be named, since
+        an unplaced publication could be the one that disagrees. Either way the member's
+        own cause says which.
+        """
+        points, unplaced = self._placed_points()
+        if not points or unplaced or not all(_same_point(points[0], p) for p in points):
+            return ()
+        return ((GEOGRAPHIC_FRAME, points[0]),)
 
     @property
     def report_routes(self):
+        """Each route to the laboratory report, under the column that published it."""
         return tuple(sorted({route for member in self.members for route in member.report_routes}))
 
 
@@ -655,7 +734,7 @@ def _member_from_row(row: dict) -> Member:
     coordinates = (row['x'], row['y']) if row['x'] is not None and row['y'] is not None else None
     return Member(row['release'], row['view'], row['path'], row['sha256'], row['locator'], row['result'],
                   row['kind'], row['species'], row['cultivar'], row['subspecies'], row['symptom_presence'],
-                  coordinates, row['crs'], tuple(row['report_routes'] or ()), tuple(row['issues'] or ()),
+                  coordinates, row['crs'], _pairs(row.get('report_routes')), tuple(row['issues'] or ()),
                   _pairs(row.get('identifiers')), _pairs(row.get('attributes')),
                   _pairs(row.get('carried')), _pairs(row.get('causes'), 'cause'))
 
@@ -761,9 +840,11 @@ def occasion_sets(groups, occasion_of):
 
 
 def located_positives(groups):
-    """Published coordinates of positive observations, one per agreed coordinate frame.
+    """The agreed location of each positive observation, one per observation.
 
-    Each carries its releases as official-dataset sources and no spatial support:
+    Publications in different published frames are reconciled rather than emitted
+    separately, so one positive finding no longer reaches a consumer as two candidate
+    places. Each carries its releases as official-dataset sources and no spatial support:
     `spatial.metric_point` refuses a distance calculation until a source-grounded
     qualification exists, and the finding status remains row 2's.
     """
@@ -773,7 +854,7 @@ def located_positives(groups):
         if group.positive is not True:
             continue
         for crs, coordinates in group.locations:
-            members = tuple(m for m in group.members if m.crs == crs and m.coordinates is not None)
+            members = tuple(m for m in group.members if m.coordinates is not None)
             sources = tuple(Source(f'{m.release}|{m.view}', m.path, m.sha256, 'official-dataset', 'public')
                             for m in {m.sha256: m for m in members}.values())
             yield CoordinateObservation(group.identity, members[0].coordinates, coordinates, crs, sources, ())

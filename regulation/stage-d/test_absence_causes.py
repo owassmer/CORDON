@@ -118,7 +118,7 @@ class AnAbsenceNamesItsCause(unittest.TestCase):
                                    'RISULTATO': 'Negativo'}))
         self.assertEqual(silent['report_routes'], 'no such field is published in this record')
         empty = self.causes(read({'ID_CAMPIONE': 51, 'DATA_CAMPIONE': 1713312000000,
-                                  'RISULTATO': 'Positivo', 'DOCUMENTO_DECRETO': None}))
+                                  'RISULTATO': 'Positivo', 'DOCUMENTO_CONFERMA': None}))
         self.assertEqual(empty['report_routes'], 'the field is published and carries no value')
         sentinel = self.causes(read({'ID_CAMPIONE': 52, 'DATA_CAMPIONE': 1713312000000,
                                      'RISULTATO': 'Positivo', 'DOCUMENTO_CONFERMA': '****'}))
@@ -127,6 +127,20 @@ class AnAbsenceNamesItsCause(unittest.TestCase):
         routed = read({'ID_CAMPIONE': 53, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Positivo',
                        'DOCUMENTO_CONFERMA': 'http://webadf.sit.puglia.it/doc/CONFERMA.pdf'})
         self.assertNotIn('report_routes', self.causes(routed))
+        self.assertEqual([field for field, _ in routed.publication.document_references],
+                         ['DOCUMENTO_CONFERMA'])
+
+    def test_a_decree_route_is_the_removal_rows_literal_not_an_empty_report_route(self):
+        # The record publishes a route to the act, and no route to a report. Telling row 2
+        # that its report route is empty would name the wrong remedy for a column that is
+        # not its own; the decree goes to the row that owns the act.
+        decree = read({'ID_CAMPIONE': 54, 'DATA_CAMPIONE': 1713312000000, 'RISULTATO': 'Positivo',
+                       'DOCUMENTO_DECRETO': 'http://webadf.sit.puglia.it/doc/DECRETO.pdf'})
+        self.assertEqual(decree.publication.document_references, ())
+        self.assertEqual(self.causes(decree)['report_routes'],
+                         'no such field is published in this record')
+        self.assertIn(('DOCUMENTO_DECRETO', 'http://webadf.sit.puglia.it/doc/DECRETO.pdf'),
+                      decree.carried)
 
     def test_an_observation_of_another_kind_is_not_a_missing_result(self):
         visual = read({'ID_CAMPIONE': 60, 'DATA_CAMPIONE': 1713312000000,

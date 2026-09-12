@@ -50,7 +50,10 @@ class MonitoringTests(unittest.TestCase):
         self.assertIsNone(reading.subspecies)
         self.assertEqual(reading.crs, 'EPSG:32633')
         self.assertEqual(reading.coordinates, (590000, 4550000))
-        self.assertIsNone(self.row({'LATITUDINE': 40, 'LONGITUDINE': 17}).crs)
+        # The degree columns state the axes and no datum; the datum is established for
+        # this publisher at GEOGRAPHIC_FRAME from its own SIT publications of the same
+        # observations, so a location without a frame is no longer handed to a consumer.
+        self.assertEqual(self.row({'LATITUDINE': 40, 'LONGITUDINE': 17}).crs, 'EPSG:4326')
         self.assertEqual(self.row({'LATITUDINE': '40,75', 'LONGITUDINE': '17,25'}).coordinates,
                          (17.25, 40.75))
 
