@@ -35,6 +35,11 @@ the main checkout, which every worktree resolves to the same path — as blobs
 named by their SHA-256, written once and never rewritten (`cordon_d.store`).
 Acquisition records in the tree name each release by URL, capture time and hash;
 the tree holds no source bytes. `scripts/audit_store.py` re-hashes every blob.
+Where a reader establishes a fact from a publisher's own redundancy rather than
+from a statement the publisher makes, the check that re-derives it runs after any
+acquisition that adds or changes a release it covers, and before that reading is
+believed: for the coordinate frame of the monitoring degree columns that check is
+`scripts/check_frames.py`. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable Parquet keyed by blob hash and
 reader version: lossless native occurrences and typed readings per blob. It is a

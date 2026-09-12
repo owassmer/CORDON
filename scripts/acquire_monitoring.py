@@ -105,6 +105,12 @@ def capture_campaign(output):
     (directory / 'publisher.html').write_bytes(page)
     write_json(directory / 'ckan.json', package)
     write_json(directory / 'releases.json', records)
+    # These releases publish longitude and latitude and state no datum; the frame the
+    # reader gives them is established from the publisher's own redundancy, so a
+    # republication in another datum would move every location silently.
+    print('\ncaptured campaign releases publish an unstated coordinate frame:\n'
+          '  run scripts/check_frames.py after ingest, before believing their locations',
+          flush=True)
 
 
 def prepare(metadata, output):

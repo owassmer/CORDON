@@ -248,6 +248,13 @@ class ObservationStream(unittest.TestCase):
         for observation in located:
             degrees = abs(observation.raw_coordinates[0]) <= 180 and abs(observation.raw_coordinates[1]) <= 90
             self.assertEqual(degrees, observation.crs == 'EPSG:4326')
+        # The place comes from one publication; the provenance comes from all of them.
+        # Observation 101 is published by the workbook, the CSV and the SIT view, and the
+        # object a consumer reads to see what supports the location cites all three even
+        # though only one printed the pair it carries.
+        march_fourth, = [o for o in located if o.occurrence[1] == '101']
+        self.assertEqual(len(march_fourth.sources), 3)
+        self.assertEqual(len({s.identity for s in march_fourth.sources}), 3)
         for observation in located:
             self.assertEqual(observation.support, ())
             self.assertTrue(all(s.role == 'official-dataset' for s in observation.sources))

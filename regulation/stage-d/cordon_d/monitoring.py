@@ -7,7 +7,7 @@ from dataclasses import dataclass, replace
 from datetime import date, datetime, timezone
 from decimal import Decimal
 import json
-from math import cos, hypot, isfinite, radians
+from math import isfinite
 import os
 from pathlib import Path
 import shutil
@@ -63,11 +63,12 @@ GEOGRAPHIC_FRAME = 'EPSG:4326'
 # How near two publications of one observation must be to be the same place. This is a
 # threshold on meaning and the population's margin around it is finite, so both bounds are
 # stated: across the whole population the widest separation among agreeing publications is
-# 0.00073 m, and the nearest separation among disagreeing ones is 7.16 m. The headroom is
+# 0.00074 m, and the nearest separation among disagreeing ones is 7.17 m. The headroom is
 # about seven metres, not the three thousand kilometres the transposed rows suggest, and
 # the four positives of 9 December 2019 whose views differ by about 11 m sit just beyond
-# it. Both bounds are measured over the publications this reader compares, and
-# `INPUTS.md` row 1 states them for a reader of the owner rather than of this file.
+# it. Both bounds are measured over the publications this reader compares, geodesically
+# through Stage C, and `INPUTS.md` row 1 states them for a reader of the owner rather than
+# of this file.
 POINT_TOLERANCE_M = 0.01
 # Published labels that carry no analytical result because the record states an
 # observation of another kind, and those where a result is genuinely absent.
@@ -662,10 +663,14 @@ def _in_geographic_frame(point, crs):
 
 
 def _same_point(a, b):
-    """Whether two publications put one observation in the same place, on the ground."""
-    east = (a[0] - b[0]) * 111320.0 * cos(radians((a[1] + b[1]) / 2))
-    north = (a[1] - b[1]) * 110540.0
-    return hypot(east, north) <= POINT_TOLERANCE_M
+    """Whether two publications put one observation in the same place, on the ground.
+
+    Ground separation is Stage C's, through `cordon_c.spatial.ground_distance`: deciding
+    what counts as one place gates every location the operator receives, and the stage
+    that owns geometry owns that, not a constant pair in this reader.
+    """
+    from cordon_c.spatial import ground_distance
+    return ground_distance(a, b) <= POINT_TOLERANCE_M
 
 
 @dataclass(frozen=True)
@@ -899,7 +904,13 @@ def located_positives(groups):
         if group.positive is not True:
             continue
         for crs, coordinates in group.locations:
-            members = tuple(m for m in group.members if m.crs == crs and m.coordinates is not None)
+            # The pair and its frame come from one publication, because a coordinate pair
+            # means nothing apart from the frame it was printed in. The sources are every
+            # publication that places this observation here: they all agree, and citing
+            # only the emitting frame's would drop the corroboration from the one object
+            # the operator reads to see what supports a finding's location.
+            emitting = next(m for m in group.members if m.crs == crs and m.coordinates is not None)
+            placed = tuple(m for m in group.members if m.coordinates is not None)
             sources = tuple(Source(f'{m.release}|{m.view}', m.path, m.sha256, 'official-dataset', 'public')
-                            for m in {m.sha256: m for m in members}.values())
-            yield CoordinateObservation(group.identity, members[0].coordinates, coordinates, crs, sources, ())
+                            for m in {m.sha256: m for m in placed}.values())
+            yield CoordinateObservation(group.identity, emitting.coordinates, coordinates, crs, sources, ())
