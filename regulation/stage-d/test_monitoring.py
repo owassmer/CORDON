@@ -57,6 +57,36 @@ class MonitoringTests(unittest.TestCase):
         self.assertEqual(self.row({'LATITUDINE': '40,75', 'LONGITUDINE': '17,25'}).coordinates,
                          (17.25, 40.75))
 
+    def test_a_record_stating_its_place_twice_does_not_drop_one_statement(self):
+        """The publisher prints geometry and degree columns in the same record.
+
+        Taking one and dropping the other silently is the class this row exists to end,
+        and comparing them is the only thing that could see them disagree, which is what
+        exposed sixteen transposed rows across releases.
+        """
+        def reading(longitude, latitude):
+            return self.row({'attributes': {'ID_CAMPIONE': 'both', 'RISULTATO': 'Positivo',
+                                            'LONGITUDINE': longitude, 'LATITUDINE': latitude},
+                             'geometry': {'x': 719728.4347, 'y': 4502915.1329},
+                             'spatialReference': {'wkid': 32633}})
+
+        agreeing = reading(17.59873801, 40.64786488)
+        self.assertEqual(agreeing.coordinates, (719728.4347, 4502915.1329))
+        self.assertEqual(dict(agreeing.causes)['LONGITUDINE'],
+                         'the record also states this place as longitude and latitude '
+                         'columns, which this reading did not take')
+        # The same record with its axes transposed, which no range check can catch.
+        transposed = reading(40.64786488, 17.59873801)
+        self.assertEqual(dict(transposed.causes)['LATITUDINE'],
+                         'the record states this place twice and the two statements '
+                         'disagree; this reading took the geometry')
+        # A record that states its place once, in those columns, is not told it stated it
+        # twice: the cause belongs to the reading that took the other statement.
+        once = self.row({'ID': 1, 'LONGITUDINE': 17.5, 'LATITUDINE': 40.5})
+        self.assertEqual(once.coordinates, (17.5, 40.5))
+        self.assertNotIn('LONGITUDINE', dict(once.causes))
+        self.assertNotIn('LATITUDINE', dict(once.causes))
+
 
 if __name__ == '__main__':
     unittest.main()

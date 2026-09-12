@@ -60,10 +60,14 @@ PUBLISHER_IDENTIFIERS = ('ID_GIORNALIERO', 'NUMERO_ORDINE', 'OBJECTID', 'IDANDRO
 # offset of zero in both axes. ED50 and Monte Mario / Roma 40 are excluded by median
 # residuals of 127 m and 71 m. `scripts/check_frames.py` re-derives this from the store.
 GEOGRAPHIC_FRAME = 'EPSG:4326'
-# Two publications of one observation that agree reproduce each other to under a
-# centimetre; the nearest disagreement in the population is 3,554 km. Every tolerance
-# between those two gives the same answer, so this one is projection noise, not a
-# threshold on meaning.
+# How near two publications of one observation must be to be the same place. This is a
+# threshold on meaning and the population's margin around it is finite, so both bounds are
+# stated: across the whole population the widest separation among agreeing publications is
+# 0.00073 m, and the nearest separation among disagreeing ones is 7.16 m. The headroom is
+# about seven metres, not the three thousand kilometres the transposed rows suggest, and
+# the four positives of 9 December 2019 whose views differ by about 11 m sit just beyond
+# it. Both bounds are measured over the publications this reader compares, and
+# `INPUTS.md` row 1 states them for a reader of the owner rather than of this file.
 POINT_TOLERANCE_M = 0.01
 # Published labels that carry no analytical result because the record states an
 # observation of another kind, and those where a result is genuinely absent.
@@ -328,6 +332,29 @@ def _causes(reading, row, identifiers, issues, native, geometry):
                        else 'no geometry is published in this record'
                        if not published_geometry and 'LONGITUDINE' not in row and 'LATITUDINE' not in row
                        else _absence_cause(row, ('LONGITUDINE', 'LATITUDINE'))))
+    elif (geometry and geometry.get('x') is not None and geometry.get('y') is not None
+            and ('LONGITUDINE' in row or 'LATITUDINE' in row)):
+        # The record states the place twice: geometry, which this reading took, and the
+        # degree columns beside it. Taking one and dropping the other in silence is the
+        # class this row exists to end, and it is also the only thing that could see the
+        # two disagree - the redundancy that exposed sixteen transposed rows across
+        # releases, here inside one record.
+        printed = row.get('LONGITUDINE'), row.get('LATITUDINE')
+        second = None
+        if all(meaningful_text(value) is not None for value in printed):
+            try:
+                second = tuple(float(v.replace(',', '.') if isinstance(v, str) else v) for v in printed)
+            except (TypeError, ValueError):
+                second = None
+        here = _in_geographic_frame(reading.coordinates, reading.crs)
+        cause = ('the record states this place twice and the two statements disagree; '
+                 'this reading took the geometry'
+                 if second is not None and here is not None and not _same_point(here, second)
+                 else 'the record also states this place as longitude and latitude columns, '
+                      'which this reading did not take')
+        for field in ('LONGITUDINE', 'LATITUDINE'):
+            if field in row:
+                causes.append((field, cause))
     if reading.crs is None:
         # Without a frame a coordinate pair is two numbers: it cannot be compared with
         # another publication of the same observation, and it cannot be projected for a
@@ -677,28 +704,30 @@ class DistinctObservation:
         return found
 
     def _placed_points(self):
-        """Every member's published location in one frame, and those that cannot be placed.
+        """Each member that publishes a location, beside that location in one frame.
 
         Publications of one observation in different published frames are reconciled here
         rather than held apart: an observation happened in one place, and two publications
-        that put it in two places disagree whatever frames they were printed in.
+        that put it in two places disagree whatever frames they were printed in. The
+        member travels with its point because the comparison is this reader's work and the
+        location a consumer receives must still be one a publisher printed.
         """
-        points, unplaced = [], 0
+        placed, unplaced = [], 0
         for member in self.members:
             if member.coordinates is None:
                 continue
-            placed = _in_geographic_frame(member.coordinates, member.crs)
-            if placed is None:
+            point = _in_geographic_frame(member.coordinates, member.crs)
+            if point is None:
                 unplaced += 1
             else:
-                points.append(placed)
-        return points, unplaced
+                placed.append((member, point))
+        return placed, unplaced
 
     @property
     def disagreements(self):
         fields = [f for f in COMPARED_FIELDS if len(self.values(f)) > 1]
-        points, _ = self._placed_points()
-        if points and not all(_same_point(points[0], p) for p in points):
+        placed, _ = self._placed_points()
+        if placed and not all(_same_point(placed[0][1], point) for _, point in placed):
             fields.append('coordinates')
         return tuple(fields)
 
@@ -720,17 +749,24 @@ class DistinctObservation:
 
     @property
     def locations(self):
-        """This observation's agreed location, in the frame locations are compared in.
+        """This observation's agreed location, as one of its publishers printed it.
 
         One observation has one place, so this is one location or none. It is withheld
         where the publications disagree, and where a member's frame cannot be named, since
         an unplaced publication could be the one that disagrees. Either way the member's
         own cause says which.
+
+        What reaches a consumer is a pair a publisher printed, in the frame that publisher
+        stated. Reprojecting to compare is this reader's work: emitting the reprojection
+        instead would put a transformation this reader performed inside a value the
+        operator reads as published, and underneath `spatial.metric_point`, whose whole
+        purpose is to bound that error against a stated source frame.
         """
-        points, unplaced = self._placed_points()
-        if not points or unplaced or not all(_same_point(points[0], p) for p in points):
+        placed, unplaced = self._placed_points()
+        if not placed or unplaced or not all(_same_point(placed[0][1], point) for _, point in placed):
             return ()
-        return ((GEOGRAPHIC_FRAME, points[0]),)
+        member = placed[0][0]
+        return ((member.crs, member.coordinates),)
 
     @property
     def report_routes(self):
@@ -863,7 +899,7 @@ def located_positives(groups):
         if group.positive is not True:
             continue
         for crs, coordinates in group.locations:
-            members = tuple(m for m in group.members if m.coordinates is not None)
+            members = tuple(m for m in group.members if m.crs == crs and m.coordinates is not None)
             sources = tuple(Source(f'{m.release}|{m.view}', m.path, m.sha256, 'official-dataset', 'public')
                             for m in {m.sha256: m for m in members}.values())
             yield CoordinateObservation(group.identity, members[0].coordinates, coordinates, crs, sources, ())

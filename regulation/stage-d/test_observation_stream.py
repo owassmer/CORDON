@@ -238,6 +238,16 @@ class ObservationStream(unittest.TestCase):
         # transposed 707 yields none, because its publications disagree about the place.
         self.assertEqual(len(located), 4)
         self.assertEqual(len({o.occurrence for o in located}), 4)
+        # What reaches C is a pair a publisher printed, in the frame that publisher stated,
+        # never this reader's reprojection: the positive published only by the SIT view
+        # arrives as its own easting and northing under EPSG:32633, and every emitted
+        # object's raw pair belongs to the frame beside it.
+        sit_only, = [o for o in located if o.crs == 'EPSG:32633']
+        self.assertEqual(sit_only.coordinates, (640000.0, 4540000.0))
+        self.assertEqual(sit_only.raw_coordinates, sit_only.coordinates)
+        for observation in located:
+            degrees = abs(observation.raw_coordinates[0]) <= 180 and abs(observation.raw_coordinates[1]) <= 90
+            self.assertEqual(degrees, observation.crs == 'EPSG:4326')
         for observation in located:
             self.assertEqual(observation.support, ())
             self.assertTrue(all(s.role == 'official-dataset' for s in observation.sources))
