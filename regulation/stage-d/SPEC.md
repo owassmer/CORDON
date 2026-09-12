@@ -53,8 +53,8 @@ Ordinary readers accept source records without a named case, fixed hash, authore
 answer, correction allowlist or supported-record registry. Original bytes and
 source-native values remain distinguishable from derived values. Conflicting inputs
 remain visible to the accepted consumer, and an absence reaching it carries its
-cause, under the rule `DESIGN_PRINCIPLES.md` owns. A reader that does not yet do
-this says so on its row.
+cause, under the rule `DESIGN_PRINCIPLES.md` owns. A reader of source records
+that does not yet do this says so on its row.
 
 Research material under `corpus/workbench/` is temporary. At the end of a bounded
 unit, a result changes a canonical owner, remains as a directly consumed source

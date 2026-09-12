@@ -100,9 +100,9 @@ class AnAbsenceNamesItsCause(unittest.TestCase):
         unseen = self.causes(read({'ID_CAMPIONE': 30, 'DATA_CAMPIONE': 1713312000000,
                                    'RISULTATO': 'Negativo', 'FASE_FENOL': 'Fioritura',
                                    'SUPERFICIE': None}))
-        self.assertEqual(unseen['FASE_FENOL'], 'published, and no row of this stage claims it')
+        self.assertEqual(unseen['FASE_FENOL'], 'published, and no reader of this stage claims it')
         self.assertEqual(unseen['SUPERFICIE'],
-                         'published carrying no value, and no row of this stage claims it')
+                         'published carrying no value, and no reader of this stage claims it')
 
     def test_a_result_absence_uses_the_vocabulary_campaign_already_has(self):
         absent = self.causes(read({'ID_CAMPIONE': 40, 'DATA_CAMPIONE': 1713312000000}))

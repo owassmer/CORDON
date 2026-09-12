@@ -39,12 +39,25 @@ REQUIRED_AGREEMENT = 0.99
 
 
 def _metres(numpy, lon_a, lat_a, lon_b, lat_b):
-    east = (lon_a - lon_b) * 111320.0 * numpy.cos(numpy.radians((lat_a + lat_b) / 2))
-    return numpy.hypot(east, (lat_a - lat_b) * 110540.0)
+    """Ground separation, on the same ellipsoid the reader gates on.
+
+    `POINT_TOLERANCE_M` is applied here against the same measure
+    `monitoring._same_point` uses, so a release passing this check is one whose points
+    the reader would call the same place.
+    """
+    from pyproj import Geod
+    return numpy.asarray(Geod(ellps='WGS84').inv(lon_b, lat_b, lon_a, lat_a)[2])
 
 
 def _nearest(numpy, printed, stated):
-    """Offset from each printed point to the nearest stated point on its own day."""
+    """Offset from each printed point to the nearest stated point on its own day.
+
+    A flat approximation selects which stated point is nearest, because the alternative
+    is a geodesic over every pair of every day; the offset returned is then measured
+    geodesically for that one pair, so the reported number is on the same ellipsoid the
+    reader gates on. Selecting a neighbour is not a claim about meaning, and at this
+    extent the two measures order candidates identically.
+    """
     best = []
     for day, points in printed.items():
         others = stated.get(day)
@@ -54,7 +67,9 @@ def _nearest(numpy, printed, stated):
         scale = numpy.cos(numpy.radians(points[:, 1].mean())) * 111320.0
         east = points[:, 0][:, None] * scale - others[:, 0][None, :] * scale
         north = (points[:, 1][:, None] - others[:, 1][None, :]) * 110540.0
-        best.append(numpy.hypot(east, north).min(axis=1))
+        chosen = numpy.hypot(east, north).argmin(axis=1)
+        best.append(_metres(numpy, points[:, 0], points[:, 1],
+                            others[chosen, 0], others[chosen, 1]))
     return numpy.concatenate(best) if best else numpy.array([])
 
 

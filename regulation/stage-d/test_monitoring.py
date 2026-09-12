@@ -87,6 +87,26 @@ class MonitoringTests(unittest.TestCase):
         self.assertNotIn('LONGITUDINE', dict(once.causes))
         self.assertNotIn('LATITUDINE', dict(once.causes))
 
+    def test_a_pair_invalid_in_the_frame_its_record_states_is_refused_with_a_cause(self):
+        """Metres under a geographic frame: valid for the column, wrong for the record.
+
+        Every comparison downstream assumes a pair is usable in the frame beside it, so
+        this is refused where it is read rather than carried into a comparison that
+        cannot be made.
+        """
+        reading = self.row({'attributes': {'ID_CAMPIONE': 'x', 'RISULTATO': 'Positivo'},
+                            'geometry': {'x': 663995.63, 'y': 4546339.74},
+                            'spatialReference': {'wkid': 4326}})
+        self.assertIsNone(reading.coordinates)
+        self.assertEqual(dict(reading.causes)['coordinates'],
+                         'a coordinate pair is published that this reader cannot use')
+        # The frame a record states is still read, and a usable pair in it still passes.
+        usable = self.row({'attributes': {'ID_CAMPIONE': 'y'},
+                           'geometry': {'x': 17.5, 'y': 40.5},
+                           'spatialReference': {'wkid': 4326}})
+        self.assertEqual(usable.coordinates, (17.5, 40.5))
+        self.assertEqual(usable.crs, 'EPSG:4326')
+
 
 if __name__ == '__main__':
     unittest.main()

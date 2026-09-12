@@ -55,7 +55,7 @@ reference, and one has no readable day.
 | `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence and absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
 | Native geometry and spatial reference, `LONGITUDINE`, `LATITUDINE` | The published location, read into one frame. The SIT services state EPSG:32633 on every page. The campaign releases publish degrees and state no datum anywhere — not in the CKAN package, the download page, a sheet, a header or a legend — and those degrees are EPSG:4326, established from the publisher's own redundancy: over the 1,279,135 observations published both ways the stated SIT point reproduces the printed pair to under a centimetre, while ED50 and Monte Mario / Roma 40 miss by 127 m and 71 m. `scripts/check_frames.py` re-derives that per release from the store and fails when one stops fitting; `SPEC.md` says when it runs. Three releases cannot be tested that way: `CAMP_2013_2014`, `CAMP_2014_2015` and `CAMP_2016_2017` publish no observation reference in any of their 221,397 located rows, so nothing pairs them to a SIT publication by identity. Their frame rests instead on same-day proximity, because a datum shift translates a whole point cloud and shows without identity — 100%, 100% and 99.05% of their points fall within a centimetre of a same-day SIT point, where ED50 would put them 128 m away. What the redundancy cannot separate is which frame of that datum family the publisher would name: without an epoch the transformation between EPSG:4326 and EPSG:4258 is the identity, so both reproduce the printed pair exactly and the check reports them as tied. What it excludes are the frames that would move a location. Because every location has a frame, the publications of one observation are compared in one frame rather than held apart by the frame they were printed in; what a consumer receives is still a pair a publisher printed, in the frame that publisher stated, because the reprojection is this reader's and belongs under no value the operator reads as published. No source states positional error, so metric use waits for the population row's qualification. |
 | `COMUNE`, `COMUNE_COD`, `PROVINCIA`, `LOCALITA`, `ALTITUDINE` | The observation's own administrative location. `COMUNE_COD` is the ISTAT municipality code; the cadastral code is `COD_COMUNE`, which belongs to the parcel row. `LOCALITA` and `ALTITUDINE` are read and neither supplies a value: all 86 records publishing `LOCALITA` carry a sentinel, and all 86 publishing `ALTITUDINE` carry nothing. Those are different absences with different remedies, which is the distinction this row exists to keep. |
-| `SQUADRA`, `TECNICO`, `COD_TECNICI`, the inspector-name columns, `NOME_DISPOSITIVO`, `CODICE_CAMPIONAMENTO`, `STATO`, `NOTE_RILEVATORE`, `CRITICITA_NOTE` | Who performed the observation, with what instrument, in which campaign, and what they noted. One fact under several publisher names: the 2016 infrastructure survey prints a team code and per-inspector columns where later releases print `TECNICO`. `CODICE_CAMPIONAMENTO` names a campaign shared by hundreds of records and is never an identity. A note, a device name and a publication status describe the publication rather than the observation, so they are read and not compared. |
+| `SQUADRA`, `TECNICO`, `COD_TECNICI`, the inspector-name columns, `NOME_DISPOSITIVO`, `IMEI`, `CODICE_CAMPIONAMENTO`, `STATO`, `NOTE_RILEVATORE`, `NOTE`, `NOTE_SIT`, `CRITICITA_NOTE` | Who performed the observation, with what instrument, in which campaign, and what they noted. One fact under several publisher names: the 2016 infrastructure survey prints a team code and per-inspector columns where later releases print `TECNICO`. `CODICE_CAMPIONAMENTO` names a campaign shared by hundreds of records and is never an identity. A note, a device name and a publication status describe the publication rather than the observation, so they are read and not compared. |
 | `DOCUMENTO_CONFERMA`, `LNK_DOCUMENTO_SELGE` | The literal route to the laboratory report, under the column that published it: 22,206 and 8,762 routes. The document itself is unread here. |
 | Protocol, laboratory, cadastral, demarcated-area, protected-plant and removal fields, including `DOCUMENTO_DECRETO` | Carried as the literal the monitoring publisher printed, for the row that owns each fact, interpreted by nobody here. A transcription beside an observation does not fill a report, a parcel, a permission or a removal. |
 
@@ -82,7 +82,12 @@ What the stream hands A–C, all as candidates:
   removed-plant layer and cannot be counted once. Counts across releases and views are
   never additive for the same reason. Of the positives, 29,662 hand a consumer one agreed
   location; 337 hand none because their publications place them apart, and 104 because no
-  publication carries a place.
+  publication carries a place. The 337 are almost all an identity limit rather than a
+  dispute about one observation's place: 333 are dated before 2018, all 337 have
+  publications naming more than one host, and 333 have all their publications in one
+  frame — they are the daily-counter groups below, where two views used one counter on one
+  day for different plants, so the reader is comparing the places of two observations. The
+  remedy is identity, not another source of coordinates.
 
 What the population shows, read and not reconciled:
 
@@ -101,12 +106,13 @@ What the population shows, read and not reconciled:
   That is identity doubt and it is exposed as one. The 16,523 species disagreements are
   not split here, and the reason is worth stating: 1,334 print an observation kind
   (`accertamento`) in the species column rather than a host, which is checkable, but
-  separating a host named twice from two different hosts is not — `Olea Europaea` beside
-  `Olivo` on 11,551 and `Mandorlo` beside `Prunus dulcis` on 866 are one host under a
-  Latin binomial and an Italian vernacular name, while `Mandorlo` beside `Olivo` on 213
-  is two hosts, and telling them apart needs a host synonym list this row does not have.
-  Every disagreement is exposed either way; what the row does not do is claim a count it
-  cannot ground.
+  separating a host named twice from two different hosts is not: `OLIVO` beside
+  `Olivo (Olea europaea)` and `Mandorlo (Prunus dulcis)` beside `MANDORLO` are one host
+  under a Latin binomial and an Italian vernacular name, while `MANDORLO` beside `OLIVO`
+  is two hosts, and both shapes recur under several spellings apiece. Telling them apart
+  needs a host synonym list this row does not have, so no count is given for either —
+  three attempts at one produced three different numbers, which is the evidence that the
+  rule was being chosen after the fact. Every disagreement is exposed either way.
 - The publisher's own projections disagree with each other. For 1 October to 31 December
   2021 the stream yields 1,772 distinct positive observations on 33 days and the SIT
   positives views hold 1,772 rows, while the infected-plant layer and the workbook hold
@@ -119,28 +125,33 @@ What the population shows, read and not reconciled:
   nearest among disagreeing ones is 7.17 m. The headroom is about seven metres, not the
   thousands of kilometres the transposed rows below suggest, and the four positives of
   9 December 2019 whose SIT views differ by about 11 m sit just beyond it.
-- 21 observations have publications in two frames that place them apart, and 17 of them
-  are the publisher placing one observation on another continent: sixteen rows of
+- The coordinate disagreements are mostly the same identity limit: 2,341 of the 2,367 are
+  dated before 2018 and 2,074 are separated by more than a kilometre, which is two
+  observations sharing a counter rather than one observation disputed. Twenty-one have
+  publications in more than one frame, and 17 of those are the publisher placing one
+  observation on another continent: sixteen rows of
   `CAMP_2017_2018` on 22 February 2018 carry their axes transposed, about 3,400 km from
   where the SIT view puts them, and one row of `CAMP_2024` carries a corrupt pair 5,484 km
   out. All 17 are published negative. Both printed numbers are valid for the column they
   sit in, so only the publisher's other publication of the same observation exposes them.
   The remaining four are positives of 9 December 2019 whose SIT views differ by about
   11 m.
-- Every value a reading does not carry names why, in the record's own terms: 87 distinct
+- Every value a reading does not carry names why, in the record's own terms: 86 distinct
   field-and-cause pairs across 64 fields, distinguishing a field the record does not
   publish, one published carrying no value, one carrying only a sentinel, one carrying a
-  value this reader does not interpret, and one published that no row of this stage
-  claims — 18,728 entries over 16 field names. No published field is passed over in
-  silence. `DistinctObservation.uncorrelated_because` answers why a group could not
-  correlate; these answer, for one publication and one field, why this reader carries
-  nothing.
+  value this reader does not interpret, and one published that no reader of this stage
+  claims — 1,118 entries over 13 field names. That last says what the reader knows, which
+  is that it does not read the column; whether a row owns the fact behind it is a
+  judgment nobody has made, and several of the thirteen are plainly the plant and area
+  rows' subjects. No published field is passed over in silence.
+  `DistinctObservation.uncorrelated_because` answers why a group could not correlate;
+  these answer, for one publication and one field, why this reader carries nothing.
 - 12,663 records state their place twice, as an ArcGIS geometry and as `LONGITUDINE` and
   `LATITUDINE` columns beside it. The reading takes the geometry, and the two remaining
   causes above record that it did not take the printed pair — and say so differently where
   the two statements disagree, because within one record that is the only thing that could
   see a transposition of the kind found across releases above. Every one of the 12,663
-  agrees today, to under a millimetre.
+  agrees today, the widest by 1.2 mm.
 
 ## Materials that are not standalone input gaps
 

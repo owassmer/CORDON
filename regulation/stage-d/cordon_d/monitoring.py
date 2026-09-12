@@ -32,8 +32,8 @@ OBSERVATION_ATTRIBUTES = ('COMUNE', 'COMUNE_COD', 'PROVINCIA', 'LOCALITA', 'ALTI
                           'SQUADRA', 'TECNICO', 'COD_TECNICI',
                           'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
                           'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3',
-                          'CODICE_CAMPIONAMENTO', 'NOME_DISPOSITIVO', 'STATO',
-                          'NOTE_RILEVATORE', 'CRITICITA_NOTE')
+                          'CODICE_CAMPIONAMENTO', 'NOME_DISPOSITIVO', 'IMEI', 'STATO',
+                          'NOTE_RILEVATORE', 'NOTE', 'NOTE_SIT', 'CRITICITA_NOTE')
 # Of those, the ones two publications of one observation should state alike, so a
 # difference between them is a disagreement the operator must see. A free-text note, a
 # publication status and a device name are not: they describe the publication or its
@@ -252,7 +252,15 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
             coordinates = tuple(float(v.replace(',', '.') if isinstance(v, str) else v) for v in values)
             if not all(isfinite(v) for v in coordinates):
                 raise ValueError('nonfinite coordinates')
-            if geometry is None and not (-180 <= coordinates[0] <= 180 and -90 <= coordinates[1] <= 90):
+            # A pair must be valid in the frame the record states, whichever branch
+            # published it. The guard used to ask which branch the pair came from, so a
+            # page stating a geographic frame over metre geometry passed — the reader's
+            # own error class, a value valid for the column it sits in and wrong for what
+            # the record says it is. Every comparison downstream assumes this holds; when
+            # it did not, one such record stopped the whole stream instead of being
+            # exposed as the defect it is.
+            if crs == GEOGRAPHIC_FRAME and not (-180 <= coordinates[0] <= 180
+                                                and -90 <= coordinates[1] <= 90):
                 raise ValueError('longitude/latitude outside geographic range')
         except (TypeError, ValueError):
             coordinates = None
@@ -396,9 +404,14 @@ def _unheld(reading, row):
         if field in CLAIMED_FIELDS:
             unheld.append((field, _absence_cause(row, (field,))))
         else:
-            unheld.append((field, 'published, and no row of this stage claims it'
+            # What the reader can say is that no reader of this stage reads this column.
+            # Whether a row owns the fact behind it is a judgment about the world, and
+            # saying no row claims it would report that judgment as made when it is not:
+            # the grove and grid columns beside these plainly belong to the plant and area
+            # rows, and nobody has decided to read them.
+            unheld.append((field, 'published, and no reader of this stage claims it'
                            if meaningful_text(row[field]) is not None else
-                           'published carrying no value, and no row of this stage claims it'))
+                           'published carrying no value, and no reader of this stage claims it'))
     return sorted(unheld)
 
 
