@@ -34,14 +34,17 @@ OBSERVATION_ATTRIBUTES = ('COMUNE', 'COMUNE_COD', 'PROVINCIA', 'LOCALITA', 'ALTI
                           'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3',
                           'CODICE_CAMPIONAMENTO', 'NOME_DISPOSITIVO', 'IMEI', 'STATO',
                           'NOTE_RILEVATORE', 'NOTE', 'NOTE_SIT', 'CRITICITA_NOTE')
-# Of those, the ones two publications of one observation should state alike, so a
-# difference between them is a disagreement the operator must see. A free-text note, a
-# publication status and a device name are not: they describe the publication or its
-# instrument, not the observation.
-COMPARED_ATTRIBUTES = ('COMUNE', 'COMUNE_COD', 'PROVINCIA', 'LOCALITA', 'ALTITUDINE',
-                       'SQUADRA', 'TECNICO', 'COD_TECNICI',
-                       'COGNOME_ISPETTORE_1', 'COGNOME_ISPETTORE_2', 'COGNOME_ISPETTORE_3',
-                       'NOME_ISPETTORE_1', 'NOME_ISPETTORE_2', 'NOME_ISPETTORE_3')
+# Those of them that describe the publication or its instrument rather than the
+# observation, so two publications may state them differently without disagreeing about
+# anything: a free-text note, a publication status, a device and the campaign that
+# produced the record.
+UNCOMPARED_ATTRIBUTES = frozenset({'CODICE_CAMPIONAMENTO', 'NOME_DISPOSITIVO', 'IMEI',
+                                   'STATO', 'NOTE_RILEVATORE', 'NOTE', 'NOTE_SIT',
+                                   'CRITICITA_NOTE'})
+# Every other established attribute is compared, because an established fact whose
+# conflicts are invisible is not established. Derived rather than restated: a second list
+# would let a new attribute be established and silently never compared.
+COMPARED_ATTRIBUTES = tuple(f for f in OBSERVATION_ATTRIBUTES if f not in UNCOMPARED_ATTRIBUTES)
 # Published identifiers other than the sample reference. Carried per publication and never
 # compared: a view's own feature id differs between views by construction, so comparing it
 # would manufacture disagreement. A value shared by hundreds of records is a label for the
@@ -242,8 +245,13 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
     if geometry and geometry.get('x') is not None and geometry.get('y') is not None:
         values = geometry['x'], geometry['y']
     else:
+        # The frame belongs to the pair, not to the record. A service states its
+        # `spatialReference` for the geometry it publishes; seventeen of these layers print
+        # degree columns beside that geometry, and a feature there without geometry would
+        # otherwise take its degrees under the projected frame the page declared for
+        # something else.
         values = row.get('LONGITUDINE'), row.get('LATITUDINE')
-        if crs is None and any(meaningful_text(v) is not None for v in values):
+        if any(meaningful_text(v) is not None for v in values):
             # Geographic column names establish the axes; the datum is established for
             # this publisher's degree columns at GEOGRAPHIC_FRAME, from its own redundancy.
             crs = GEOGRAPHIC_FRAME
@@ -252,17 +260,21 @@ def observation(occurrence: Occurrence, *, release: str, view_name: str = ''):
             coordinates = tuple(float(v.replace(',', '.') if isinstance(v, str) else v) for v in values)
             if not all(isfinite(v) for v in coordinates):
                 raise ValueError('nonfinite coordinates')
-            # A pair must be valid in the frame the record states, whichever branch
-            # published it. The guard used to ask which branch the pair came from, so a
-            # page stating a geographic frame over metre geometry passed — the reader's
-            # own error class, a value valid for the column it sits in and wrong for what
-            # the record says it is. Every comparison downstream assumes this holds; when
-            # it did not, one such record stopped the whole stream instead of being
-            # exposed as the defect it is.
-            if crs == GEOGRAPHIC_FRAME and not (-180 <= coordinates[0] <= 180
-                                                and -90 <= coordinates[1] <= 90):
-                raise ValueError('longitude/latitude outside geographic range')
-        except (TypeError, ValueError):
+            # The precondition every comparison downstream needs is that this pair can be
+            # placed in the frame beside it, so this performs that placement rather than
+            # testing a condition that stands in for it. Enumerating frames is how the
+            # three previous attempts at this guard failed: each named one spelling of one
+            # frame, and a record stating any other was carried into a comparison that
+            # could not be made, where it either stopped the stream or produced a place
+            # the publisher never printed.
+            placed = _in_geographic_frame(coordinates, crs)
+            if placed is not None and not (-180 <= placed[0] <= 180 and -90 <= placed[1] <= 90):
+                raise ValueError('coordinates fall outside the earth in the frame this record states')
+        # Broad, and deliberately: a frame is a string a publisher chose, and the library
+        # that builds one raises its own classes for a name it cannot resolve and for
+        # malformed well-known text. Enumerating those is the same mistake as enumerating
+        # frames. A pair this reader cannot place is a pair it does not carry.
+        except Exception:
             coordinates = None
             issues.append('Invalid or incomplete coordinate pair')
     attributes = tuple((field, value) for field in OBSERVATION_ATTRIBUTES
@@ -404,14 +416,15 @@ def _unheld(reading, row):
         if field in CLAIMED_FIELDS:
             unheld.append((field, _absence_cause(row, (field,))))
         else:
-            # What the reader can say is that no reader of this stage reads this column.
-            # Whether a row owns the fact behind it is a judgment about the world, and
-            # saying no row claims it would report that judgment as made when it is not:
-            # the grove and grid columns beside these plainly belong to the plant and area
-            # rows, and nobody has decided to read them.
-            unheld.append((field, 'published, and no reader of this stage claims it'
-                           if meaningful_text(row[field]) is not None else
-                           'published carrying no value, and no reader of this stage claims it'))
+            # Two facts about one column, and each is the other's remedy. What the record
+            # printed comes from the same vocabulary every other absence uses, because a
+            # sentinel and a null are different absences and this is the row that keeps
+            # them apart. What the reader can add is that no reader of this stage reads the
+            # column: whether a row owns the fact behind it is a judgment about the world
+            # that nobody has made, and the grove and grid columns beside these plainly
+            # belong to the plant and area rows.
+            unheld.append((field, _absence_cause(row, (field,))
+                           + '; no reader of this stage claims it'))
     return sorted(unheld)
 
 
@@ -612,8 +625,8 @@ UNKNOWN_RESULTS = frozenset({'unpublished', 'unadjudicated-label', 'not-a-result
                              # analytical result; it can neither agree nor disagree with a test.
                              'published-visual-observation', 'published-symptom-label'})
 # An established fact whose conflicts are invisible is not established, so every attribute
-# this reader establishes is compared. Publisher identifiers are not: a view's own feature
-# id differs between views by construction.
+# outside `UNCOMPARED_ATTRIBUTES` is compared. Publisher identifiers are not: a view's own
+# feature id differs between views by construction.
 COMPARED_FIELDS = ('result', 'species', 'cultivar', 'subspecies', 'kind',
                    'symptom_presence') + COMPARED_ATTRIBUTES
 

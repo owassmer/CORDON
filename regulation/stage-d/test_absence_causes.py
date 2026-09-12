@@ -100,9 +100,20 @@ class AnAbsenceNamesItsCause(unittest.TestCase):
         unseen = self.causes(read({'ID_CAMPIONE': 30, 'DATA_CAMPIONE': 1713312000000,
                                    'RISULTATO': 'Negativo', 'FASE_FENOL': 'Fioritura',
                                    'SUPERFICIE': None}))
-        self.assertEqual(unseen['FASE_FENOL'], 'published, and no reader of this stage claims it')
+        # Two facts, and the first is the same vocabulary every other absence uses: an
+        # unclaimed column that carries a sentinel is a different absence from one that
+        # carries nothing, and the population's unclaimed columns are almost all sentinels.
+        self.assertEqual(unseen['FASE_FENOL'],
+                         'a value is published that this reader does not interpret; '
+                         'no reader of this stage claims it')
         self.assertEqual(unseen['SUPERFICIE'],
-                         'published carrying no value, and no reader of this stage claims it')
+                         'the field is published and carries no value; '
+                         'no reader of this stage claims it')
+        sentinel = self.causes(read({'ID_CAMPIONE': 31, 'DATA_CAMPIONE': 1713312000000,
+                                     'RISULTATO': 'Negativo', 'SUPERFICIE': '****'}))
+        self.assertEqual(sentinel['SUPERFICIE'],
+                         'the field is published and carries only a sentinel or blank; '
+                         'no reader of this stage claims it')
 
     def test_a_result_absence_uses_the_vocabulary_campaign_already_has(self):
         absent = self.causes(read({'ID_CAMPIONE': 40, 'DATA_CAMPIONE': 1713312000000}))
