@@ -395,7 +395,11 @@ def reader_version() -> str:
 
 
 def releases(root: Path):
-    """Every retained release and page, in stream order, from the acquisition records."""
+    """Every retained release and page, in stream order, from the acquisition records.
+
+    `root` is the monitoring source root holding `campaign/releases.json` and
+    `sit/<service>/<layer>/`, which is `corpus/sources/monitoring` in a checkout.
+    """
     campaign = root / 'campaign'
     for record in json.loads((campaign / 'releases.json').read_text()):
         if 'error' in record:
@@ -515,7 +519,10 @@ def _ensure_derived(store: Path, release: Release, version: str) -> tuple[Path, 
 
 
 def ingest(root: Path) -> Path:
-    """Adopt every retained release into the store and derive it once; audit after any write."""
+    """Adopt every retained release into the store and derive it once; audit after any write.
+
+    `root` is the monitoring source root, as `releases` takes it.
+    """
     store = store_root(root)
     version = reader_version()
     wrote = False
@@ -531,8 +538,9 @@ def ingest(root: Path) -> Path:
 def observations(root: Path):
     """Stream every retained release from the store; missing declared bytes fail visibly.
 
-    Newly acquired native releases enter by their acquisition record, without
-    registering a plant, case, expected answer or observation subset.
+    `root` is the monitoring source root, as `releases` takes it. Newly acquired native
+    releases enter by their acquisition record, without registering a plant, case,
+    expected answer or observation subset.
     """
     import pyarrow.parquet as parquet
     store = ingest(root)
@@ -742,9 +750,10 @@ def _member_from_row(row: dict) -> Member:
 def distinct_observations(root: Path):
     """Group the whole stream by publisher reference and observation day.
 
-    Reads the derived readings of every retained release through DuckDB, in
-    stream order. Yields one group per (reference, day) across all releases and
-    views, and every uncorrelatable observation alone.
+    `root` is the monitoring source root, as `releases` takes it. Reads the derived
+    readings of every retained release through DuckDB, in stream order. Yields one group
+    per (reference, day) across all releases and views, and every uncorrelatable
+    observation alone.
 
     A reference identifies an observation only where its own publishing view
     uses it once on that day; a value one view gives to several rows on one day
