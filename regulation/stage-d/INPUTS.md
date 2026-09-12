@@ -102,8 +102,15 @@ What the population shows, read and not reconciled:
   of it. Of the municipality disagreements 8,090 are casing alone; of the remaining 113,
   eleven are one municipality under two separators (`SAN VITO DEI NORMANNI` beside
   `SAN_VITO_DEI_NORMANNI`) and four print Carovigno's own ISTAT code beside its name, so
-  **98 name a different municipality** — `Francavilla Fontana` beside `Oria` on 71 of them.
-  That is identity doubt and it is exposed as one. The 16,523 species disagreements are
+  **98 name a different municipality** — `Francavilla Fontana` beside `Oria` on 71 of them,
+  `Capurso` beside `TRIGGIANO` on eight. Every one of the 98 is two adjacent municipalities,
+  and in every one of them the publications place the observation at a single agreed point
+  and name one host. So this is not identity doubt: 71 are 2017 publications, where a shared
+  daily counter can mean two observations, but 27 are dated 2020 to 2024 and correlate on a
+  reference that identifies one observation, and those are the publisher assigning one place
+  to two municipalities. The remedy differs accordingly — ask the publisher, or resolve the
+  point against municipal geometry in the area row — and it matters because the albo pretorio
+  publication duty attaches to a municipality. The 16,523 species disagreements are
   not split here, and the reason is worth stating: 1,334 print an observation kind
   (`accertamento`) in the species column rather than a host, which is checkable, but
   separating a host named twice from two different hosts is not: `OLIVO` beside
