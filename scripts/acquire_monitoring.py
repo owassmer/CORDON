@@ -16,6 +16,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 import time
 from threading import local
@@ -218,6 +219,17 @@ def main():
                 print('FAILED', failures[-1], flush=True)
     if failures:
         raise SystemExit(f'{len(failures)} layers incomplete; see console. Completed releases remain reusable.')
+    # The campaign releases publish longitude and latitude and state no datum anywhere, so
+    # the frame the reader gives them is established from this publisher's own redundancy
+    # rather than from a statement. A republication in another datum would move every one
+    # of their locations and state nothing about it, so the establishment is re-derived
+    # here, on the event that could invalidate it. Derive the readings first: the check
+    # reads them, and a capture is not yet a reading.
+    if args.campaign:
+        from cordon_d.monitoring import ingest  # noqa: E402
+        ingest(args.output)
+        check = Path(__file__).with_name('check_frames.py')
+        raise SystemExit(subprocess.call([sys.executable, str(check), str(args.output)]))
 
 
 if __name__ == '__main__':
