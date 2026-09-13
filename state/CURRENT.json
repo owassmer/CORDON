@@ -1,6 +1,6 @@
 {
   "schema": "cordon-current-state-v1",
-  "as_of": "2026-09-10",
+  "as_of": "2026-09-13",
   "operator": "Regione Puglia — Sezione Osservatorio Fitosanitario",
   "telos": "Reduce projected Xylella loss through a legally and evidentially faithful computational decision instrument.",
   "current_stage": "D",
@@ -86,10 +86,10 @@
         "source_bindings": "regulation/stage-d/source-bindings.json"
       },
       "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
-      "current_capability": "The monitoring-observation family is established (regulation/stage-d/INPUTS.md, first row). The laboratory-report documents are acquired — 1,918 routes naming 1,186 documents, 1,175 in the store — and are read by cordon_d.reports, but that reading is NOT established: sources read independently of the reader show it recording its own extraction failures as facts about the publisher over the 57% of publications whose annex is scanned. Row 2 is open pending a reading repaired and evaluated against independently read sources. No other source population is claimed acquired or semantically complete.",
+      "current_capability": "The monitoring-observation family remains established (INPUTS.md row 1). Referenced laboratory PDFs are retained, and a replacement report reader and conservative observation join are implemented. Bounded source comparisons still expose report-role and qualification-scope defects; population reading and semantic establishment remain incomplete. INPUTS.md row 2 owns these limits and acquisition failures. No other source population is claimed semantically complete.",
       "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent review under REVIEW_PRINCIPLES.md and Owen acceptance.",
       "next": [
-        "Replace the laboratory-report reading and evaluate it against the held-out source readings, then restate row 2 (INPUTS.md row 2).",
+        "Complete laboratory report source verification, remaining readings and their observation/correction relationships (INPUTS.md row 2).",
         "Acquire every demarcated-area geometry version reached by A and bind each to its adopting act (row 3).",
         "Establish the plant, surface and parcel populations C's distance and survey calculations require (rows 4-5).",
         "Read the removal determinations and their incorporated annexes through one general reader (row 6).",

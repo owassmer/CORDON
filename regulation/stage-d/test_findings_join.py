@@ -1,129 +1,127 @@
-"""Identity constraints of the join, exercised end to end on documents it has never seen.
-
-Every case here is built as a document and a publication stream and run through
-`findings()` itself, because the defects these cover were all invisible to tests
-of the reader's parts: a contradictory sampling day, a file name carrying two
-documents, and a species-only column. Hand-authored rows would not have shown them.
-"""
-from datetime import date
+"""Joins through actual release fixtures and the accepted observation grouping."""
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
-from cordon_d.findings import findings
-from cordon_d.store import put_bytes, store_root
-
-
-def document(identity, rows, *, column='Esito laboratorio'):
-    """A rapporto di prova with a flat annex: one cell per line, as the publisher's own."""
-    import pymupdf
-    lines = [f'Rapporto di prova N. {identity}', 'Bari', '01/07/2024',
-             'Oggetto: trasmissione esito saggi diagnostici molecolari per Xylella fastidiosa',
-             'eseguiti con protocollo Harper et al. (2010).',
-             'Id', 'Data rilevamento', 'Specie', column]
-    for reference, day, result in rows:
-        lines += [reference, day, 'Olivo (Olea europaea)', result]
-    with pymupdf.open() as pdf:
-        page = pdf.new_page()
-        for n, line in enumerate(lines):
-            page.insert_text((40, 40 + n * 11), line, fontsize=9)
-        return pdf.tobytes()
+from openpyxl import Workbook
+from cordon_d.findings import findings, confirmation_inputs
+from cordon_d.monitoring import distinct_observations
+from cordon_d.store import file_digest, put_bytes
+from test_reports import block
 
 
 class JoinIdentity(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        import pyarrow
-        import pyarrow.parquet as parquet
-        cls.configured = os.environ.pop('CORDON_STORE', None)
-        cls.directory = TemporaryDirectory()
-        base = Path(cls.directory.name)
-        cls.root = base / 'reports'
-        cls.root.mkdir()
-        store = store_root(cls.root)
-        cls.store = store
+    def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None):
+        with TemporaryDirectory() as directory, patch.dict(os.environ):
+            base = Path(directory)
+            store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
+            monitoring = base / 'monitoring'; campaign = monitoring / 'campaign'; campaign.mkdir(parents=True)
+            workbook = Workbook(); sheet = workbook.active
+            sheet.append(['ID', 'DATA_RILEVAMENTO', 'RISULTATO', 'DOCUMENTO_CONFERMA'])
+            route = 'https://publisher.example/report.pdf'
+            for reference, date_text in publications:
+                sheet.append([reference, datetime.fromisoformat(date_text), 'POSITIVO', route])
+            path = campaign / 'release.xlsx'; workbook.save(path)
+            (campaign / 'releases.json').write_text(json.dumps([
+                {'url': 'https://publisher.example/release.xlsx', 'path': path.name, 'sha256': file_digest(path)}]))
+            reports = base / 'reports'; reports.mkdir()
+            digest = put_bytes(store, b'%PDF-test-source')
+            actual_route = 'https://other.example/report.pdf' if missing_route else route
+            captures = [{'url': actual_route, 'captured_at': '2026-01-01T00:00:00+00:00', 'sha256': digest}]
+            if second_version:
+                other = put_bytes(store, b'%PDF-second-rendition')
+                captures.append({'url': route, 'captured_at': '2026-01-02T00:00:00+00:00', 'sha256': other})
+            if missing_route:
+                captures.append({'url': route, 'captured_at': '2026-01-01T00:00:00+00:00', 'error': 'HTTP 404'})
+            (reports / 'records.json').write_text(json.dumps(captures))
+            cache = store / 'derived/reports/v' / digest / 'report.json'; cache.parent.mkdir(parents=True)
+            item = block(report_rows)
+            if two_results:
+                table = item['reading']['tables'][0]
+                table['columns'].append(dict(table['columns'][2], heading=['Esito B'], test='Esito B'))
+                for row in table['rows']:
+                    row['cells'].append({'text': 'Positivo'})
+            cache.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'v',
+                'page_count': 1, 'blocks': [item]}))
+            return list(findings(distinct_observations(monitoring), reports, store,
+                                extraction_version='v', known_through=cutoff or datetime(2026, 2, 1, tzinfo=timezone.utc)))
 
-        # Two documents the publisher serves under one file name, naming the same sample
-        # on the same day with opposite results; and one ordinary report.
-        same_name_a = document('10/2024', [('700001', '01/06/2024', 'Positivo')])
-        same_name_b = document('11/2024', [('700001', '01/06/2024', 'Negativo')])
-        ordinary = document('12/2024', [('700002', '01/06/2024', 'Positivo'),      # day agrees
-                                        ('700003', '09/09/2023', 'Positivo'),      # day contradicts
-                                        ('700004', '01/06/2024', 'Positivo')])     # published twice
-        routes = [
-            ('http://a.example/doc/COLLIDE.pdf', same_name_a),
-            ('http://b.example/doc/COLLIDE.pdf', same_name_b),
-            ('http://a.example/doc/ORDINARY.pdf', ordinary),
-        ]
-        records = [{'url': url, 'captured_at': '2026-01-01T00:00:00+00:00', 'status': 200,
-                    'sha256': put_bytes(store, body)} for url, body in routes]
-        # The route an observation names failed; the same file name was served elsewhere.
-        records.append({'url': 'https://a.example/doc/COLLIDE.pdf', 'error': 'HTTP 500'})
-        (cls.root / 'records.json').write_text(json.dumps(records))
+    def test_a_unique_route_reference_and_day_match(self):
+        result = self.run_join([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
+        self.assertEqual(result[0]['status'], 'matched')
+        self.assertEqual(result[0]['matches'][0]['temporal'], 'agrees')
 
-        publications = [
-            # reference, day, view, result, routes
-            ('700001', date(2024, 6, 1), 'Positivi - Campioni 2024', 'published-positive',
-             ['https://a.example/doc/COLLIDE.pdf']),
-            ('700002', date(2024, 6, 1), 'Positivi - Campioni 2024', 'published-positive',
-             ['http://a.example/doc/ORDINARY.pdf']),
-            ('700003', date(2024, 6, 1), 'Positivi - Campioni 2024', 'published-positive',
-             ['http://a.example/doc/ORDINARY.pdf']),
-            ('700004', date(2024, 6, 1), 'Positivi - Campioni 2024', 'published-positive',
-             ['http://a.example/doc/ORDINARY.pdf']),
-            ('700004', date(2024, 6, 1), 'Piante infette-Monitoraggio 2024', 'published-positive',
-             ['http://a.example/doc/ORDINARY.pdf']),
-        ]
-        readings = store / 'derived/monitoring/readings'
-        readings.mkdir(parents=True)
-        table = pyarrow.table({
-            'reference': [p[0] for p in publications],
-            'day': pyarrow.array([p[1] for p in publications], pyarrow.date32()),
-            'view': [p[2] for p in publications],
-            'result': [p[3] for p in publications],
-            'report_routes': [p[4] for p in publications]})
-        parquet.write_table(table, readings / 'test.parquet')
-        cls.found = {(f['observation'], f['view']): f for f in findings(cls.root, store)}
+    def test_same_filename_never_substitutes_for_a_failed_route(self):
+        result = self.run_join([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']], missing_route=True)
+        self.assertEqual(result[0]['matches'], [])
+        self.assertTrue(result[0]['links'][0]['alternative_candidates'])
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.directory.cleanup()
-        if cls.configured is not None:
-            os.environ['CORDON_STORE'] = cls.configured
+    def test_multiple_captured_renditions_do_not_choose_the_readable_one(self):
+        result = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']], second_version=True)[0]
+        self.assertFalse(result['matches'])
+        self.assertTrue(all(link['rendition_ambiguity'] for link in result['links']))
 
-    def test_a_row_the_report_dates_to_another_day_is_a_different_sampling_event(self):
-        contradicted = self.found[('700003', 'Positivi - Campioni 2024')]
-        self.assertEqual(contradicted['status'], 'the reference is printed, dated to another day')
-        self.assertIsNone(contradicted['results'])
-        self.assertIs(contradicted['day_constrained'], False)
-        # ...while the same document's agreeing row does match, and says the day held it.
-        agreed = self.found[('700002', 'Positivi - Campioni 2024')]
-        self.assertEqual(agreed['status'], 'matched')
-        self.assertIs(agreed['day_constrained'], True)
-        self.assertEqual(agreed['comparison'], 'agree at species')
+    def test_capture_after_knowledge_cutoff_is_not_available(self):
+        result = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']],
+            cutoff=datetime(2025, 12, 31, tzinfo=timezone.utc))[0]
+        self.assertFalse(result['matches'])
+        self.assertEqual(result['links'][0]['status'], 'source route not acquired at knowledge cutoff')
 
-    def test_a_file_name_carrying_two_documents_substitutes_neither(self):
-        collided = self.found[('700001', 'Positivi - Campioni 2024')]
-        self.assertEqual(collided['document_resolution'],
-                         'several documents carry this file name; none substituted')
-        self.assertEqual(collided['status'], 'no bytes acquired for this document')
-        self.assertIsNone(collided['results'])
-        # The two documents disagree, so whichever had been chosen would have decided the
-        # verdict by acquisition order rather than by evidence.
+    def test_one_undated_row_cannot_match_two_observation_days(self):
+        result = self.run_join([['123', '2024-06-01'], ['123', '2024-06-02']],
+                               [['123', None, 'Positivo', '02/06/2024']])
+        self.assertTrue(all(not item['matches'] for item in result))
+        self.assertTrue(all('several eligible observation' in item['status'] for item in result))
 
-    def test_one_observation_published_twice_matches_in_both_views(self):
-        for view in ('Positivi - Campioni 2024', 'Piante infette-Monitoraggio 2024'):
-            publication = self.found[('700004', view)]
-            self.assertEqual(publication['status'], 'matched', view)
-            self.assertEqual(publication['comparison'], 'agree at species', view)
+    def test_dated_row_does_not_discard_an_undated_competitor(self):
+        result = self.run_join([['123', '2024-06-01']], [
+            ['123', '01/06/2024', 'Positivo', '02/06/2024'], ['123', None, 'Negativo', '02/06/2024']])
+        self.assertEqual(result[0]['matches'], [])
+        self.assertIn('several eligible source-row', result[0]['status'])
 
-    def test_every_absence_names_the_reading_that_produced_it(self):
-        # No status in this population asserts a property of the document itself.
-        for finding in self.found.values():
-            self.assertNotIn('report has no', finding['status'])
-            self.assertNotIn('not named by its report', finding['status'])
+    def test_unique_undated_relationship_cannot_supply_date_dependent_confirmation(self):
+        joined = self.run_join([['123', '2024-06-01']],
+            [['123', None, 'Positivo', '02/06/2024']], two_results=True)[0]
+        self.assertEqual(joined['status'], 'provisional-match')
+        pair = [(joined['matches'][0]['key'][0], r.locator) for r in joined['matches'][0]['row'].results]
+        with self.assertRaises(ValueError):
+            confirmation_inputs(joined, result_pair=pair, qualification={})
+
+    def test_contradictory_day_is_exposed_without_a_match(self):
+        result = self.run_join([['123', '2024-06-01']], [['123', '02/06/2024', 'Positivo', '03/06/2024']])
+        self.assertEqual(result[0]['matches'], [])
+        self.assertEqual(result[0]['links'][0]['candidates'][0]['temporal'], 'conflicts')
+
+    def test_monitoring_reused_id_is_not_repaired_by_digit_width(self):
+        result = self.run_join([['123456', '2024-06-01'], ['123456', '2024-06-01']],
+                               [['123456', '01/06/2024', 'Positivo', '02/06/2024']])
+        self.assertEqual(len(result), 2)
+        self.assertTrue(all(not item['matches'] for item in result))
+
+
+    def test_ordinary_join_reaches_c_without_inventing_qualified_identities(self):
+        from cordon_c import core
+        from cordon_c.bindings import confirmation_facts
+        from datetime import date
+        joined = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']], two_results=True)[0]
+        pair = tuple((joined['matches'][0]['key'][0], r.locator) for r in joined['matches'][0]['row'].results)
+        inputs = confirmation_inputs(joined, result_pair=pair, qualification={})
+        self.assertIsNone(inputs['first_test'])
+        self.assertIsNone(inputs['first_positive_annex_iv'].truth)
+        owner = Path(core.__file__).resolve().parents[2] / 'stage-a/authoring-eu.json'
+        data = json.loads(owner.read_text())
+        rows = data if isinstance(data, list) else data['provision_versions']
+        snapshot = core.Snapshot([r for r in rows if r['stable_provision_id'] == 'EU-2020-1201:2(6)'],
+                                 dict(clocks=[], parameters=[], dispositions=[]))
+        facts = confirmation_facts(snapshot, date(2024, 6, 1), **inputs)
+        self.assertTrue(any(value.needs for value in facts.values()))
 
 
 if __name__ == '__main__':

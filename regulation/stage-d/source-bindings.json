@@ -51,9 +51,9 @@
         "https://webadf.sit.puglia.it/openDoc/apridocumento (confirmation letters and rapporti di prova)",
         "http://cartografia.sit.puglia.it/doc/xylella/ (subspecies-identification rapporti)"
       ],
-      "population": "Every document referenced by an admitted monitoring release: 1,918 routes naming 1,186 documents, 1,175 acquired and 11 served on no route.",
-      "reader": "cordon_d.reports and cordon_d.findings",
-      "open": "Acquisition is established; reading is not. Sources read independently of the reader show that the scanned annexes — 475 documents carrying 17,761 of 30,968 publications — print column headers naming their assays, which this reader does not recover and formerly recorded as the document designating no test. Until the reading is repaired and evaluated against those sources, every absence this binding reports is a property of the reading: what the source does not state, what is illegible, what extraction did not recover and what was recovered but not attached are distinguished only in the last case. The report is the diagnosis, never the Regional Service's confirmation under D.lgs. 19/2021 Art. 28(3). Laboratory designation, accreditation and custody follow their own sources."
+      "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
+      "reader": "cordon_d.reports and cordon_d.findings; explicit extraction through scripts/read_reports.py",
+      "open": "Population reading and source verification remain open on INPUTS.md row 2, including failed routes, identity correspondence, repeated representations and correction/version scope. The report supplies its diagnosis, not the Service's official confirmation; other qualifications follow their contract owners."
     },
     {
       "id": "official-areas",

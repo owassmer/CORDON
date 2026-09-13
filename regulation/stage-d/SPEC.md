@@ -42,13 +42,21 @@ coordinate frame of the monitoring degree columns that check is
 `scripts/check_frames.py`, and `scripts/acquire_monitoring.py --campaign` derives
 the readings and runs it. Neither runs in CI, which has no store.
 
-Beside the blobs, `derived/` holds regenerable Parquet keyed by blob hash and
-reader version: lossless native occurrences and typed readings per observation
-release, and one reading per report document. It is a cache, never an owner; a
-changed reader invalidates it, and deleting it costs one ingest. A reader's
-version covers the modules that produce a reading and not those that relate
-readings to each other, so relating them again is free. DuckDB reads it in
-process; no spatial predicate or legal reading moves into SQL.
+Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
+and typed readings remain Parquet keyed by source hash and reader version.
+Reports use compact JSON blocks and an assembled reading under source hash and
+extraction version. Exact-request raw model responses are cached separately so a
+changed deterministic projection can reuse them without another paid call.
+Model, prompt, page/context images, rendering settings and code version are named;
+no join change invalidates extraction. These are caches, not owners. Deleting
+report responses can incur new extraction cost, unlike replaying retained responses.
+
+Report acquisition-of-readings is explicit through `scripts/read_reports.py` with
+a spending cap and recorded token prices. Ordinary report consumption and joins
+never dispatch a model call. Partial readings retain recovered facts and identify
+unread pages/regions. Page dispositions and schema checks establish structural
+coverage only. Observation identity stays in `monitoring.distinct_observations`;
+report joins cannot redefine it from a cache directory, filename or code width.
 
 ## Implementation rule
 

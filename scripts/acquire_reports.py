@@ -2,40 +2,35 @@
 """Capture every laboratory report the observation stream references into the store.
 
 The population is every distinct report route in the derived monitoring readings;
-no route is skipped for its answer, year, host or name. Each route gets one
-acquisition record (URL, capture time, HTTP status, content type, bytes, sha256 or
+no route is skipped for its answer, year, host or name. Each route gets retained
+acquisition versions (URL, capture time, HTTP status, content type, bytes, sha256 or
 error) under corpus/sources/reports/records.json; identical bytes at two routes
-are one blob. A failed route is recorded, retried once on the next run, and
-never silently dropped. Rerunning resumes: routes with a sha256 are not refetched.
+are one blob. A failed route is recorded and retried on the next run, and
+never silently dropped. Rerunning resumes; successful current routes are refetched only with --recapture.
 
-Usage: scripts/acquire_reports.py [output-root]   (default: corpus/sources/reports)
+Usage: scripts/acquire_reports.py --help
 """
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
-import glob
+import argparse
 import json
 from pathlib import Path
 import sys
 from threading import Lock, local
 
-import duckdb
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-d'))
 from cordon_d.store import put_bytes, store_root  # noqa: E402
+from cordon_d.monitoring import observations  # noqa: E402
 
 TRANSPORT = local()
 
 
-def routes(store: Path) -> list[str]:
-    files = glob.glob(str(store / 'derived/monitoring/readings/*.parquet'))
-    connection = duckdb.connect()
-    connection.execute("SET memory_limit = '1GB'")
-    connection.execute('SET threads = 2')
-    rows = connection.execute('SELECT DISTINCT route FROM (SELECT unnest(report_routes) AS route '
-                              'FROM read_parquet($files)) ORDER BY route', {'files': files}).fetchall()
-    connection.close()
-    return [r[0] for r in rows]
+def routes(monitoring_root: Path) -> list[str]:
+    """Declared release population through its ordinary reader, never a cache glob."""
+    return sorted({url for observation in observations(monitoring_root)
+                   for _, url in observation.publication.document_references})
 
 
 def fetch(url: str, store: Path) -> dict:
@@ -45,6 +40,7 @@ def fetch(url: str, store: Path) -> dict:
     try:
         response = TRANSPORT.session.get(url, timeout=(20, 120))
         record['status'] = response.status_code
+        record['final_url'] = response.url
         record['content_type'] = response.headers.get('Content-Type')
         body = response.content
         record['bytes'] = len(body)
@@ -60,19 +56,40 @@ def fetch(url: str, store: Path) -> dict:
 
 
 def main() -> None:
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else 'corpus/sources/reports')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output-root', type=Path, default=Path('corpus/sources/reports'))
+    parser.add_argument('--monitoring-root', type=Path, default=Path('corpus/sources/monitoring'))
+    parser.add_argument('--recapture', action='append', default=[])
+    parser.add_argument('--source-links', type=Path,
+                        help='Derived reached links with source_sha256 and source_locator')
+    args = parser.parse_args()
+    root = args.output_root
     root.mkdir(parents=True, exist_ok=True)
     store = store_root(root)
     path = root / 'records.json'
-    records = {r['url']: r for r in json.loads(path.read_text())} if path.exists() else {}
-    pending = [u for u in routes(store) if 'sha256' not in records.get(u, {})]
-    print(f'routes {len(records) + len([u for u in pending if u not in records])} pending {len(pending)} store {store}', flush=True)
+    records = json.loads(path.read_text()) if path.exists() else []
+    current = {r['url']: r for r in sorted(records, key=lambda r: r['captured_at'])}
+    admitted = set(routes(args.monitoring_root))
+    links = json.loads(args.source_links.read_text()) if args.source_links else []
+    parents = {r['url']: r['referred_by'] for r in records if r.get('referred_by')}
+    admitted.update(parents)
+    for link in links:
+        if not all(link.get(k) for k in ('url', 'source_sha256', 'source_locator')):
+            raise ValueError('A reached report link requires its source and locator')
+        if not any(r.get('sha256') == link['source_sha256'] for r in records):
+            raise ValueError('Referring report is not in the acquired population')
+        parents.setdefault(link['url'], []).append({k: link[k] for k in ('source_sha256', 'source_locator')})
+        admitted.add(link['url'])
+    if not set(args.recapture) <= admitted:
+        raise ValueError('Recapture must concern an admitted source route')
+    pending = sorted(u for u in admitted if 'sha256' not in current.get(u, {}) or u in args.recapture)
+    print(f'routes {len(admitted)} pending {len(pending)} store {store}', flush=True)
     lock = Lock()
     done = failed = 0
 
     def save():
         temporary = path.with_suffix('.tmp')
-        temporary.write_text(json.dumps(sorted(records.values(), key=lambda r: r['url']), ensure_ascii=False, indent=1) + '\n')
+        temporary.write_text(json.dumps(sorted(records, key=lambda r: (r['url'], r['captured_at'])), ensure_ascii=False, indent=1) + '\n')
         temporary.replace(path)
 
     with ThreadPoolExecutor(max_workers=6) as pool:
@@ -80,16 +97,20 @@ def main() -> None:
         for future in as_completed(futures):
             record = future.result()
             with lock:
-                records[record['url']] = record
+                # Retain successful acquisition versions; only the current failed attempt is needed.
+                records[:] = [r for r in records if r['url'] != record['url'] or 'sha256' in r]
+                if record['url'] in parents:
+                    record['referred_by'] = parents[record['url']]
+                records.append(record)
                 done += 1
                 failed += 'error' in record
                 if done % 50 == 0 or done == len(pending):
                     save()
                     print(f'{done}/{len(pending)} failed {failed}', flush=True)
     save()
-    print(f'complete: {sum(1 for r in records.values() if "sha256" in r)} acquired, '
-          f'{sum(1 for r in records.values() if "error" in r)} failed, '
-          f'{len({r["sha256"] for r in records.values() if "sha256" in r})} distinct documents', flush=True)
+    print(f'complete: {sum(1 for r in records if "sha256" in r)} acquired, '
+          f'{sum(1 for r in records if "error" in r)} failed, '
+          f'{len({r["sha256"] for r in records if "sha256" in r})} distinct documents', flush=True)
 
 
 if __name__ == '__main__':

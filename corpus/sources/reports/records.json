@@ -953,8 +953,9 @@
  },
  {
   "url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_36_2024_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:07.483392+00:00",
+  "captured_at": "2026-09-13T21:58:07.574981+00:00",
   "status": 404,
+  "final_url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_36_2024_CNR.pdf",
   "content_type": "text/html; charset=UTF-8",
   "bytes": 1635,
   "error": "HTTP 404"
@@ -2169,8 +2170,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_172_2020.pdf",
-  "captured_at": "2026-09-11T04:14:07.483814+00:00",
+  "captured_at": "2026-09-13T21:58:07.575247+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_172_2020.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
   "error": "HTTP 500"
@@ -2417,8 +2419,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_196_2020.pdf",
-  "captured_at": "2026-09-11T04:14:07.483926+00:00",
+  "captured_at": "2026-09-13T21:58:07.575331+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_196_2020.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
   "error": "HTTP 500"
@@ -2449,8 +2452,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_197_2020.pdf",
-  "captured_at": "2026-09-11T04:14:07.484017+00:00",
+  "captured_at": "2026-09-13T21:58:07.575410+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_197_2020.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
   "error": "HTTP 500"
@@ -4769,8 +4773,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_10_2024_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:07.484110+00:00",
+  "captured_at": "2026-09-13T21:58:07.575527+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_10_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
   "error": "HTTP 500"
@@ -6177,8 +6182,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_2_2024_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:07.484172+00:00",
+  "captured_at": "2026-09-13T21:58:07.575586+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_2_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
   "error": "HTTP 500"
@@ -6601,8 +6607,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_5_2024_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:07.795210+00:00",
+  "captured_at": "2026-09-13T21:58:08.547613+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_5_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
   "error": "HTTP 500"
@@ -6929,8 +6936,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_7_2021.pdf",
-  "captured_at": "2026-09-11T04:14:07.795989+00:00",
+  "captured_at": "2026-09-13T21:58:08.556588+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_7_2021.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1694,
   "error": "HTTP 500"
@@ -7041,8 +7049,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_2021.pdf",
-  "captured_at": "2026-09-11T04:14:07.796223+00:00",
+  "captured_at": "2026-09-13T21:58:08.569539+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_2021.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1694,
   "error": "HTTP 500"
@@ -7081,8 +7090,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_POSITIVI_UNIFG.pdf",
-  "captured_at": "2026-09-11T04:14:07.796419+00:00",
+  "captured_at": "2026-09-13T21:58:08.579893+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_POSITIVI_UNIFG.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1704,
   "error": "HTTP 500"
@@ -7193,8 +7203,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_9_2024_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:07.796571+00:00",
+  "captured_at": "2026-09-13T21:58:08.580053+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_9_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
   "error": "HTTP 500"
@@ -7233,8 +7244,9 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_848.pdf",
-  "captured_at": "2026-09-11T04:14:07.796714+00:00",
+  "captured_at": "2026-09-13T21:58:08.581536+00:00",
   "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_848.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
   "error": "HTTP 500"
@@ -7377,11 +7389,12 @@
  },
  {
   "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_46F_2026_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:08.064843+00:00",
-  "status": 404,
-  "content_type": "text/html; charset=UTF-8",
-  "bytes": 1635,
-  "error": "HTTP 404"
+  "captured_at": "2026-09-13T21:58:08.857566+00:00",
+  "status": 200,
+  "final_url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_46F_2026_CNR.pdf",
+  "content_type": "application/pdf",
+  "bytes": 422653,
+  "sha256": "def00962f9e197918df142699ca3bf76377085ff980a9a4156b9d3f3810d669a"
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_02_2018.pdf",
@@ -14873,8 +14886,9 @@
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_70M_2026_CNR.pdf",
-  "captured_at": "2026-09-11T04:14:08.067212+00:00",
+  "captured_at": "2026-09-13T21:58:08.857936+00:00",
   "status": 500,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_70M_2026_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1700,
   "error": "HTTP 500"
@@ -15129,8 +15143,9 @@
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_POSITIVI_UNIFG.pdf",
-  "captured_at": "2026-09-11T04:14:08.068093+00:00",
+  "captured_at": "2026-09-13T21:58:08.860639+00:00",
   "status": 500,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_POSITIVI_UNIFG.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1704,
   "error": "HTTP 500"
@@ -15321,8 +15336,9 @@
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_848.pdf",
-  "captured_at": "2026-09-11T04:14:08.071088+00:00",
+  "captured_at": "2026-09-13T21:58:08.865543+00:00",
   "status": 500,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_848.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
   "error": "HTTP 500"
