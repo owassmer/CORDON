@@ -53,7 +53,7 @@
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
       "reader": "cordon_d.reports and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "Population reading and source verification remain open on INPUTS.md row 2, including failed routes, identity correspondence, repeated representations and correction/version scope. The report supplies its diagnosis, not the Service's official confirmation; other qualifications follow their contract owners."
+      "open": "Population reading and source verification remain open on INPUTS.md row 2: failed routes, scanned-table date and identifier-role errors, identity correspondence, repeated representations and correction/version scope. The real observation-to-C adapter runs, but diagnosis does not establish official confirmation; unresolved qualifications remain with their contract owners."
     },
     {
       "id": "official-areas",

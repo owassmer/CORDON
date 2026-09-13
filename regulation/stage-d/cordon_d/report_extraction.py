@@ -19,6 +19,7 @@ from .store import blob_path
 @dataclass(frozen=True)
 class ExtractionConfig:
     model: str = 'claude-sonnet-5'
+    effort: str = 'medium'
     target_pages: int = 2
     dpi: int = 180
     max_tokens: int = 18000
@@ -55,14 +56,19 @@ For an annotated publisher ID, keep the entire cell literal and optionally retur
 identifier and annotation as two exact substrings whose concatenation reconstructs
 the full cell (allowing only whitespace variation); retain the pool qualification.
 A specimen or pool identifier is not an individual plant identity.
+On a continuation page, read the supplied original table headings and their
+qualifications before assigning column roles. Cite the physical heading page in
+support; do not replace a missing heading with an invented label or a method's
+publication year. A year in a method citation is not an analyte.
 Do not select only rows matching monitoring labels. Join visual wraps within one
 identifier only when the source shows a single value; do not repair spelling.
 Native cells are proposals, not an exhaustive inventory; choose one only if it
 faithfully supplies the whole visual cell. Otherwise transcribe the visual value.
 
 facts: [{id: unique fact ID, role: printed statement/date/identity/relation role, page, locator,
+ section: pN/exact enclosing printed section heading including markers, or null,
  text: exact relevant statement, value: literal date/identifier component if relevant,
- applies_to:[report|tableID|tableID/rowID|tableID/cN|factID|unattached]}].
+ applies_to:[report|tableID|tableID/rowID|tableID/cN|factID|section:pN/heading|unattached]}].
 Capture document identity, issuer, distinct date labels, received versus listed
 sample counts, annex/correction references, result qualifications and relevant
 notes. Preserve their actual scope. A test, analyte or qualification from the
@@ -73,6 +79,22 @@ one-based output-column position. Refer to individual fact IDs when a qualifier
 applies to marked client/sampling fields in the letter. Keep reproduction, source
 responsibility and result-use qualifications. Give distinct date roles and the
 literal date component in value; do not supply an invented parsed date.
+Date roles follow the printed event: sampling_date, delivery_date, acceptance_date,
+test_date, report_date and revision_date are distinct. Quote the event label with
+its date. Equal dates do not make delivery or acceptance into sampling. A count
+statement mentioning delivery retains that delivery role even beside sample data.
+Preserve the enclosing section on EVERY field in it. When a qualifier marks a
+section heading, use section:pN/<exact heading> in its applies_to, as well as the
+individually marked table columns. The section ends at the next peer heading;
+a marker need not repeat on each field. Do not replace section scope by report
+scope or only the marked table columns. N identifies the physical page where
+that section begins; repeated headings in different documents are not one section.
+For result columns, carry the full printed method/technique designation and the
+separately stated analyte when the report establishes their scope. A generic
+category in a row does not erase a more precise report-wide method statement.
+Every text field on a fact or support MUST quote the source in its original
+language. Do not put your explanations, translations or descriptions of layout
+in those fields. Put an unstated or uncertain relationship in issues instead.
 Never merge a second physical representation of a table into the first, even when
 it repeats the same samples or is transposed. Return both source occurrences,
 with a literal relationship fact if the source establishes repetition.
@@ -107,7 +129,7 @@ def output_schema():
                 'identifier': string, 'annotation': string}, [])
     row = obj({'id': string, 'cells': array(cell)})
     table = obj({'id': string, 'page': integer, 'columns': array(column), 'rows': array(row)})
-    fact = obj({'id': string, 'role': string, 'page': integer, 'locator': string,
+    fact = obj({'id': string, 'role': string, 'page': integer, 'locator': string, 'section': nullable,
                 'text': string, 'value': nullable, 'applies_to': array(string)})
     return obj({'pages': array(obj({'page': integer, 'disposition': {'enum': ['read', 'partly_read', 'unreadable']},
                                    'regions': array(region)})),
@@ -218,6 +240,28 @@ class OutputLimit(ValueError):
     pass
 
 
+def unattached_sampling_scopes(reading):
+    return [f['id'] for f in reading['facts']
+            if f.get('role') == 'sampling_date' and f.get('section')
+            and set(f.get('applies_to', ())) == {'section:' + f['section']}]
+
+
+ATTACHMENT_REPAIR = '''Read the supplied source pages afresh, concentrating on
+sampling-date attachment and qualifications. A field's section records where it is printed;
+applies_to records WHICH SAMPLES the date describes. A sampling date that points
+only to its own section has not been attached to any sample. Use report, table,
+row or unattached as supported by the source. Printed layout and shared report
+descriptors are source evidence: a date need not repeat beside each row to govern
+the report's samples. Distinguish such shared metadata from a statement explicitly
+limited to one sample or subset. Check all qualifications on the
+enclosing section heading, not just marks on individual table columns, and attach
+the corresponding qualifier to section:pN/heading. Preserve exact identifiers;
+for an annotated identifier return the identifier and annotation components along
+with the entire source cell. Return the full block in the same schema. Do not change a source value to obtain
+a match; if a relationship cannot be recovered, name that limitation in issues.
+'''
+
+
 def _call(request, *, config, budget, request_id, raw_path):
     if budget is None:
         raise RuntimeError('No retained response for this block; explicit paid execution is required')
@@ -271,18 +315,20 @@ def extract_report(digest, store, *, config, budget):
             request = {'model': config.model, 'max_tokens': config.max_tokens,
                        'messages': [{'role': 'user', 'content': content}]}
             legacy_id = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
-            request['output_config'] = {'format': {'type': 'json_schema', 'schema': output_schema()}}
+            request['output_config'] = {'effort': config.effort,
+                                       'format': {'type': 'json_schema', 'schema': output_schema()}}
             request_id = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
             path = directory / 'blocks' / f'{request_id}.json'
-            if path.exists():
-                item = json.loads(path.read_text())
+            cached = json.loads(path.read_text()) if path.exists() else None
+            if cached and not cached.get('attachment_repair_pending'):
+                item = cached
             else:
                 reading, reused = None, None
                 legacy = store / 'derived/reports/responses' / f'{legacy_id}.json'
-                if legacy.exists():
+                if config.effort == 'high' and legacy.exists():
                     try:
                         candidate = target_reading(response_reading(json.loads(legacy.read_text())['response'], config.model), targets, supplied_context)
-                        validate_block(candidate, targets=targets, page_count=page_count, native_cells=native, native_regions=regions)
+                        validate_block(candidate, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
                         reading, reused = candidate, legacy_id
                     except OutputLimit:
                         raise  # Split the known oversized region, without paying to repeat it.
@@ -296,11 +342,47 @@ def extract_report(digest, store, *, config, budget):
                         reading = _call(request, config=config, budget=budget,
                                         request_id=request_id, raw_path=raw_path)
                     reading = target_reading(reading, targets, supplied_context)
-                    validate_block(reading, targets=targets, page_count=page_count, native_cells=native, native_regions=regions)
+                    validate_block(reading, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
+                prior_request = reused or request_id
+                effort = config.effort
+                if unattached_sampling_scopes(reading):
+                    # One source reread for a concrete attachment failure. Never
+                    # recurse until a preferred answer appears.
+                    effort = 'high'
+                    repair = dict(request, output_config=dict(request['output_config'], effort=effort),
+                        messages=[{'role': 'user', 'content': content + [
+                            {'type': 'text', 'text': ATTACHMENT_REPAIR}]}])
+                    repair_id = sha256(json.dumps(repair, sort_keys=True).encode()).hexdigest()
+                    raw_path = store / 'derived/reports/responses' / f'{repair_id}.json'
+                    prior_reading = reading
+                    try:
+                        if raw_path.exists():
+                            reading = response_reading(json.loads(raw_path.read_text())['response'], config.model)
+                        else:
+                            reading = _call(repair, config=config, budget=budget,
+                                            request_id=repair_id, raw_path=raw_path)
+                        reading = target_reading(reading, targets, supplied_context)
+                        validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
+                                       native_regions=regions, supplied_pages=pages)
+                    except (RuntimeError, requests.RequestException, ValueError) as error:
+                        item = {'targets': targets, 'context_pages': sorted(supplied_context),
+                            'request_sha256': prior_request, 'reading': prior_reading,
+                            'native_cells': native, 'native_regions': regions,
+                            'attachment_repair_pending': str(error)}
+                        write_json(path, item)
+                        blocks.append(item)
+                        save()
+                        raise RuntimeError('Attachment reread stopped: ' + str(error)) from error
+                    if remaining := unattached_sampling_scopes(reading):
+                        reading['issues'].append({'scope': ','.join(remaining),
+                            'cause': 'sampling date remains attached only to its section after one source reread; no sample scope established'})
+                    reused = repair_id
                 item = {'targets': targets, 'context_pages': sorted(supplied_context), 'request_sha256': reused or request_id,
                         'reading': reading, 'native_cells': native, 'native_regions': regions}
+                if reused and reused != prior_request:
+                    item.update(prior_request_sha256=prior_request, effort=effort)
                 write_json(path, item)
-            validate_block(item['reading'], targets=targets, page_count=page_count, native_cells=item['native_cells'], native_regions=item.get('native_regions', []))
+            validate_block(item['reading'], targets=targets, page_count=page_count, native_cells=item['native_cells'], native_regions=item.get('native_regions', []), supplied_pages=pages)
             blocks.append(item)
             context.update(item['reading']['context_pages'])
             headed = [table['page'] for table in item['reading']['tables']
@@ -308,19 +390,26 @@ def extract_report(digest, store, *, config, budget):
             if headed:
                 # Supply the latest printed table header as evidence, without
                 # automatically assigning its meaning to a following table.
+                # Keep the original heading page too: a continuation's recovered
+                # headings do not prove that it physically reprints them.
+                first_heading = min(heading_context | set(headed))
                 heading_context.clear()
-                heading_context.add(max(headed))
+                heading_context.update((first_heading, max(headed)))
             save()
             logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': targets,
                 'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
-        for first in range(1, page_count + 1, config.target_pages):
-            targets = list(range(first, min(first + config.target_pages, page_count + 1)))
+        first, width = 1, config.target_pages
+        while first <= page_count:
+            targets = list(range(first, min(first + width, page_count + 1)))
             try:
                 read(targets)
             except OutputLimit as error:
                 if len(targets) == 1:
                     write_json(directory / 'limitation.json', {'targets': targets, 'cause': str(error)})
                     raise
+                # Once this document exceeds the paired-page budget, retain
+                # the smaller partition for its remaining pages.
+                width = 1
                 for number in targets:
                     try:
                         read([number])
@@ -328,6 +417,7 @@ def extract_report(digest, store, *, config, budget):
                         write_json(directory / 'limitation.json', {'targets': [number],
                             'cause': str(single_error) + '; single-page geometric subdivision is not implemented'})
                         raise
+            first += len(targets)
         materialize(digest, revision, page_count, blocks)
         save(complete=True)
     return target

@@ -20,7 +20,8 @@ from threading import Lock, local
 
 import requests
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-d'))
+REPOSITORY = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(REPOSITORY / 'regulation/stage-d'), str(REPOSITORY / 'regulation/stage-c')]
 from cordon_d.store import put_bytes, store_root  # noqa: E402
 from cordon_d.monitoring import observations  # noqa: E402
 

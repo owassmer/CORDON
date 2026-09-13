@@ -58,6 +58,27 @@ unread pages/regions. Page dispositions and schema checks establish structural
 coverage only. Observation identity stays in `monitoring.distinct_observations`;
 report joins cannot redefine it from a cache directory, filename or code width.
 
+The extraction configuration records effort explicitly (default `medium` for
+Sonnet 5); thinking and response text share the reserved output-token allowance.
+Printed section membership uses `pN/heading`, with qualifiers scoped to
+`section:pN/heading`, so repeated section headings in a PDF do not become one
+section and section qualifiers do not become report-wide assertions. Both the
+original table-heading page and the latest headed page remain available during
+continuation reading. A source statement cannot cite a page that its extraction
+request did not supply. These constraints preserve provenance and scope; they do
+not certify the model's transcription or interpretation. Unique exact printed
+`§` markers link a section to its same-page note with recorded derivation; reused
+marks remain unresolved. A literal `(Pool)` suffix can expose the identifier
+component while retaining the complete cell and annotation. Neither derivation
+establishes individual-plant identity or verifies the proposed transcription.
+
+A sampling-date fact scoped only to its own section triggers one bounded,
+source-only reread at high effort. The prior proposed answer is not supplied to
+that reread. A failed or unaffordable reread preserves the original rows and
+names the remaining attachment limit. After a paired-page output overflow, the
+remaining pages of that document use single-page requests; single-page overflow
+still stops explicitly until geometric subdivision is implemented.
+
 ## Implementation rule
 
 Ordinary readers accept source records without a named case, fixed hash, authored

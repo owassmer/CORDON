@@ -20,6 +20,30 @@ def classify(text):
     return RESULTS.get(' '.join(text.casefold().split()), 'unclassified') if text else 'unread'
 
 
+def link_section_marks(facts):
+    """Resolve unique printed § anchors on one page, retaining the derivation."""
+    notes = {}
+    for fact in facts:
+        marker = re.match(r'^(§+)\s*[^§\s]', fact['text'].strip())
+        if marker:
+            notes.setdefault((fact['page'], marker[1]), []).append(fact)
+    for field in facts:
+        section = field.get('section')
+        if not section or not (marker := re.search(r'(§+)$', section)):
+            continue
+        page = int(section.split('/', 1)[0][1:])
+        candidates = notes.get((page, marker[1]), [])
+        if len({' '.join(f['text'].split()) for f in candidates}) != 1:
+            continue  # Reused marks require source-position evidence we do not have.
+        scope = 'section:' + section
+        for note in candidates:
+            if scope not in note['applies_to']:
+                note['applies_to'].append(scope)
+                note.setdefault('scope_derivations', []).append({
+                    'scope': scope, 'rule': 'unique printed section mark on the same page',
+                    'marker': marker[1]})
+
+
 @dataclass(frozen=True)
 class LiteralDate:
     text: str | None
@@ -76,7 +100,7 @@ class Row:
     @property
     def date_cause(self):
         if not self.sampling_dates:
-            return 'no sampling-date column recovered'
+            return 'no sampling date attached to this row'
         if self.sampling_date is not None:
             return None
         return 'conflicting, invalid or unread sampling-date values'
@@ -108,7 +132,7 @@ def _scope_support(statement, page_count):
         raise ValueError('Source statement requires its page locator')
 
 
-def validate_block(block, *, targets, page_count, native_cells, native_regions=()):
+def validate_block(block, *, targets, page_count, native_cells, native_regions=(), supplied_pages=None):
     """Structural validation only; source fidelity needs independent source inspection."""
     if set(block) != {'pages', 'tables', 'facts', 'issues', 'context_pages'}:
         raise ValueError('Unexpected or missing block fields')
@@ -119,6 +143,11 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
         raise ValueError('Invalid page disposition')
     if any(type(p) is not int or not 1 <= p <= page_count for p in block['context_pages']):
         raise ValueError('Invalid context page')
+    supplied_pages = set(targets if supplied_pages is None else supplied_pages)
+    def support(statement):
+        _scope_support(statement, page_count)
+        if statement['page'] not in supplied_pages:
+            raise ValueError('Source support cites a page not supplied to this reading')
     table_ids = set()
     region_ids = {r['id']: r for r in native_regions if r['page'] in targets}
     dispositions = [r for page in block['pages'] for r in page.get('regions', [])]
@@ -144,8 +173,8 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
         for column in columns:
             if column['role'] not in ROLES or not isinstance(column['heading'], list):
                 raise ValueError('Invalid column role or heading path')
-            for support in column.get('support', []):
-                _scope_support(support, page_count)
+            for statement in column.get('support', []):
+                support(statement)
             if column['role'] == 'result' and not column.get('support'):
                 raise ValueError('Result role requires heading/scope evidence')
         row_ids = set()
@@ -182,11 +211,17 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
     if len(fact_ids) != len(set(fact_ids)):
         raise ValueError('Fact identifiers must be unique within a block')
     for fact in block['facts']:
-        _scope_support(fact, page_count)
+        support(fact)
         if not fact.get('role') or not fact.get('applies_to'):
             raise ValueError('Fact requires a role and explicit scope or unattached marker')
         if fact.get('value') is not None and not isinstance(fact['value'], str):
             raise ValueError('Fact components must remain source strings')
+        if fact.get('section') is not None and not isinstance(fact['section'], str):
+            raise ValueError('A source section must retain its printed heading')
+        if fact.get('section') is not None:
+            section = re.fullmatch(r'p([1-9]\d*)/(\S.*)', fact['section'])
+            if section and int(section[1]) not in supplied_pages:
+                raise ValueError('Section cites a page not supplied to this reading')
     for issue in block['issues']:
         if not issue.get('cause') or not issue.get('scope'):
             raise ValueError('Reading limitation requires cause and scope')
@@ -199,6 +234,9 @@ def materialize(digest, version, page_count, blocks):
         ids = {f['id']: f'b{block_number}/{f["id"]}' for f in item['reading']['facts'] if 'id' in f}
         for original in item['reading']['facts']:
             fact = dict(original, basis="model_proposed_reading")
+            if fact.get('section') and not re.fullmatch(r'p([1-9]\d*)/(\S.*)', fact['section']):
+                fact['section_reading'] = fact.pop('section')
+                fact['section_cause'] = 'section heading recovered without its physical occurrence; scope unattached'
             if 'id' in fact:
                 fact['id'] = ids[fact['id']]
             fact['applies_to'] = [ids.get(scope, scope) for scope in fact['applies_to']]
@@ -206,9 +244,13 @@ def materialize(digest, version, page_count, blocks):
                 fact.pop('value')
                 fact['value_cause'] = 'model component was not literal; see raw response; no typed value supplied'
             facts.append(fact)
+    link_section_marks(facts)
     facts = tuple(facts)
     issues = tuple(i for item in blocks for i in item['reading']['issues'])
     for item in blocks:
+        if item.get('attachment_repair_pending'):
+            issues += ({'scope': 'pages ' + ','.join(map(str, item['targets'])),
+                        'cause': 'sampling-date attachment reread pending: ' + item['attachment_repair_pending']},)
         known_regions = {r['id'] for r in item.get('native_regions', [])}
         for page in item['reading']['pages']:
             for region in page.get('regions', []):
@@ -218,7 +260,9 @@ def materialize(digest, version, page_count, blocks):
     rows, covered, locators, encountered = [], set(), set(), set()
     for item in blocks:
         data, native = item['reading'], item['native_cells']
-        validate_block(data, targets=item['targets'], page_count=page_count, native_cells=native, native_regions=item.get('native_regions', []))
+        validate_block(data, targets=item['targets'], page_count=page_count, native_cells=native,
+                       native_regions=item.get('native_regions', []),
+                       supplied_pages=set(item['targets']) | set(item.get('context_pages', [])))
         for disposition in data['pages']:
             if disposition['page'] in encountered:
                 raise ValueError('Overlapping target pages cannot be silently combined')
@@ -240,6 +284,11 @@ def materialize(digest, version, page_count, blocks):
                     value = dict(cell, text=text, basis='native_cell_copy' if 'native_cell' in cell else 'vision_transcription',
                                  role=column['role'], heading=column['heading'],
                                  locator=f'{locator}/c{index + 1}')
+                    if column['role'] == 'publisher_id' and 'identifier' not in value and text:
+                        annotation = re.fullmatch(r'\s*([^()\r\n]+?)\s*(\(Pool\))\s*', text)
+                        if annotation and annotation[1].strip():
+                            value.update(identifier=annotation[1].strip(), annotation=annotation[2],
+                                         identifier_basis='literal (Pool) suffix; complete cell retained')
                     cells.append(value)
                     by_role.setdefault(column['role'], []).append(value)
                     if column['role'] == 'result':
@@ -260,6 +309,7 @@ def materialize(digest, version, page_count, blocks):
                 while True:
                     scoped = tuple(f for f in facts if scopes.intersection(f['applies_to']))
                     expanded = scopes | {f['id'] for f in scoped if 'id' in f}
+                    expanded.update('section:' + f['section'] for f in scoped if f.get('section'))
                     if expanded == scopes:
                         break
                     scopes = expanded

@@ -34,6 +34,8 @@ def main():
     parser.add_argument('--reports-root', type=Path, default=Path('corpus/sources/reports'))
     parser.add_argument('--monitoring-root', type=Path, default=Path('corpus/sources/monitoring'))
     parser.add_argument('--model', default=ExtractionConfig.model)
+    parser.add_argument('--effort', choices=['low', 'medium', 'high', 'xhigh', 'max'],
+                        default=ExtractionConfig.effort)
     parser.add_argument('--extraction-version', help='Select a retained reading version for local consumption only')
     execution = parser.add_mutually_exclusive_group()
     execution.add_argument('--execute', action='store_true')
@@ -52,7 +54,7 @@ def main():
                         default=datetime.now(timezone.utc))
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
-    config = ExtractionConfig(model=args.model)
+    config = ExtractionConfig(model=args.model, effort=args.effort)
     if args.extraction_version and (args.execute or args.rebuild_cache):
         parser.error('--extraction-version selects existing readings; it cannot execute or rebuild them')
     revision = args.extraction_version or version(config)
@@ -67,6 +69,7 @@ def main():
         return path.exists() and json.loads(path.read_text()).get('assembly_complete') is True
     pending = [d for d in selected if not complete(d)]
     print(json.dumps({'execution_model': config.model if args.execute else None, 'extraction_version': revision,
+                      'execution_effort': config.effort if args.execute else None,
                       'documents': len(digests), 'selected': len(selected), 'pending': len(pending), 'paid_execution': args.execute}), flush=True)
     def process(budget):
         for index, digest in enumerate(pending, 1):
