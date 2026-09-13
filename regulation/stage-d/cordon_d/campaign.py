@@ -15,11 +15,23 @@ RESULTS = {'POSITIVO': 'published-positive', 'NEGATIVO': 'published-negative',
            'DA RICAMPIONARE': 'published-further-observation-request',
            'ISPEZIONE VISIVA': 'published-visual-observation',
            'SINTOMATICO': 'published-symptom-label', 'POSITIVO ESTIRPATO': 'published-positive-and-removal-label'}
+# The columns routing to the laboratory report that owns the finding. `DOCUMENTO_DECRETO`
+# routes to a removal decree, which the removal row owns, so it is carried as that row's
+# literal rather than merged into a report route a consumer could not attribute.
+REPORT_ROUTE_FIELDS = ('DOCUMENTO_CONFERMA', 'LNK_DOCUMENTO_SELGE')
 
 
 def meaningful_text(value):
-    """Source placeholders supply neither a document route nor a negative fact."""
-    if value is None:
+    """Source placeholders supply neither a document route nor a negative fact.
+
+    A mapping or sequence is a shape this reader does not interpret. Rendering its
+    Python repr would establish a fact the record does not state, and comparing that
+    repr could manufacture a disagreement between two publications of one observation,
+    so the value is carried nowhere and its field names the absence instead. The rule
+    belongs here because this is the one function answering what this reader can carry
+    as the text a publisher printed.
+    """
+    if value is None or isinstance(value, (dict, list, tuple, set)):
         return None
     value = str(value).strip()
     return None if value.upper() in SENTINELS else value
@@ -49,7 +61,7 @@ def publication_reading(occurrence: Occurrence) -> PublicationReading:
     raw = meaningful_text(row.get('RISULTATO'))
     result = 'publisher-annotation' if annotation else RESULTS.get(
         raw.upper() if raw else '', ('not-a-result-record' if 'RISULTATO' not in row else 'unpublished') if raw is None else 'unadjudicated-label')
-    references = tuple((k, reference) for k in ('DOCUMENTO_CONFERMA', 'LNK_DOCUMENTO_SELGE', 'DOCUMENTO_DECRETO')
+    references = tuple((k, reference) for k in REPORT_ROUTE_FIELDS
                        if (value := meaningful_text(row.get(k))) is not None
                        for reference in document_references(value))
     dates = tuple((k, v) for k, v in row.items() if k.startswith('DATA_'))

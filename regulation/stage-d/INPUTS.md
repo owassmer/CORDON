@@ -1,112 +1,170 @@
 # Stage D input map
 
-This is the front door to Stage D. It starts with facts required by accepted A–C,
-then identifies the source that can supply them. After the 10 September purge,
-the bounded national calendar remained retained. The monitoring-observation family is established (first row). The laboratory-report documents are acquired but their reading is not established (second row); prior acquisitions and case
-demonstrations confer no completion on the other rows.
+This is the front door to Stage D. Each row names a fact accepted A–C requires, the
+source that supplies it, what one of that source's records means, and what D must
+establish. The monitoring-observation family and the bounded national calendar are
+established; no other row is.
 
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | The report each monitoring record links: confirmation letters of the SELGE network and CNR-IPSP, rapporti di prova of CNR-IPSP and of the first-level laboratories, and CNR subspecies-identification rapporti | One laboratory report: a letter stating its identity, laboratory, dates, assays and analyte, and an annex listing one row per sample with the result the laboratory states for it | **Not established.** The documents are acquired: 1,918 report routes name 1,186 documents, 1,175 of them in the store. Reading them is not. Sources read independently of the reader show it recording its own extraction failures as facts about the publisher, over the majority of the population. What is acquired, what this reader currently recovers, and what the sources show it misses are below. |
-| Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time |
+| What the laboratory actually reported | The official report linked from the monitoring record | One laboratory report containing one or more sample results | Follow every referenced report; join its rows to observations; preserve report corrections and distinct copies. The observation row carries, uninterpreted, the report identity and performing laboratory the monitoring publisher prints beside the observation: `PROTOCOLLO` on 22,245 records, `STRUTTURA_LABORATORIO` on 14,490, `PROT_SELGE` on 8,762, `DATA_PROT_SELGE` on 8,760, `LABORATORIO` on 82. They are a publisher's transcription and establish nothing here; the report establishes what the report says. |
+| Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
-| Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry |
+| Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader |
-| Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. |
-| Who has the consequential relationship to the affected land | The determination's incorporated annex naming addressees by comune, foglio and particella; later acts that correct listed owners; the Osservatorio's matter and transmitted cadastral and owner data; a competent public-asset register for public land | One addressee position in one act version, or one stated ownership, occupation, management or other legally relevant relationship | The annex establishes the position the act published for each parcel, not that the named person held the land. An effective correction act replaces the listed position for the parcels it names; its effect against the corrected recipient follows the notice route above. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do. |
-| Whether an affected plant has protected status | The regional monumental-tree register and the matter's exact plant evidence | One registered or provisional protected-plant occurrence | Match the affected plant and select the status in force at the event time |
-| Whether protected status requires another permission for this removal | The exact PPTR/local rule and competent authority decision reached by that plant and intervention | One applicable protection rule or one issued decision | Investigate this only for an affected protected plant; the full Puglia landscape-proceeding catalogue is not the population |
-| Who was assigned, what field work occurred, whether removal was completed and what lawful cost resulted | Osservatorio and executing-body casefile and field records: the presided execution record, countersignature and photograph, assignment, verification and cost determination; the lawful work basis stated by the removal orders (the removal-order row) | One assignment, assessment, treatment, removal, inspection, completion or cost event | Read the actual first-party records for the matter; public procedure manuals cannot fill absent events. A coercive-direction or execution-priority act is not proof of completed removal. A published removal label or removed-plant layer (the observation row) is a lead to a first-party record, not a removal occurrence; the retained SIT capture holds no removed-plant layer after 2017. |
+| Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. The monitoring stream publishes a `SCELTA_PROPRIETARIO` column on 8,762 records and carries no value in any of them, so it supplies no owner election; the observation row records that. |
+| Who has the consequential relationship to the affected land | The determination's incorporated annex naming addressees by comune, foglio and particella; later acts that correct listed owners; the Osservatorio's matter and transmitted cadastral and owner data; a competent public-asset register for public land | One addressee position in one act version, or one stated ownership, occupation, management or other legally relevant relationship | The annex establishes the position the act published for each parcel, not that the named person held the land. An effective correction act replaces the listed position for the parcels it names; its effect against the corrected recipient follows the notice route above. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do. The monitoring stream publishes `CUAA` and `AZIENDA` columns on 86 records and carries a sentinel in every one, so it supplies no holder identity; the observation row records that. |
+| Whether an affected plant has protected status | The regional monumental-tree register and the matter's exact plant evidence | One registered or provisional protected-plant occurrence | Match the affected plant and select the status in force at the event time. The observation row carries, uninterpreted, `MONUMENTALE_ARIF` on 586 records — a monitoring publisher's flag beside the observation, not a register entry, and no substitute for matching the plant in the register. |
+| Whether protected status requires another permission for this removal | The exact PPTR/local rule and competent authority decision reached by that plant and intervention | One applicable protection rule or one issued decision | Investigate this only for an affected protected plant; the full Puglia landscape-proceeding catalogue is not the population. The observation row carries, uninterpreted, the landscape and hydrogeological flags the monitoring publisher prints beside the observation: `UCP_PPTR` on 7,078 records, `VINCOLO_IDROGEOLOGICO` on 1,462, `BP_PPTR` on 1,172, `PAI` on 215. A flag is a lead to the applicable rule, never the decision. |
+| Who was assigned, what field work occurred, whether removal was completed and what lawful cost resulted | Osservatorio and executing-body casefile and field records: the presided execution record, countersignature and photograph, assignment, verification and cost determination; the lawful work basis stated by the removal orders (the removal-order row) | One assignment, assessment, treatment, removal, inspection, completion or cost event | Read the actual first-party records for the matter; public procedure manuals cannot fill absent events. A coercive-direction or execution-priority act is not proof of completed removal. A published removal label or removed-plant layer (the observation row) is a lead to a first-party record, not a removal occurrence; the retained SIT capture holds no removed-plant layer after 2017. The observation row carries, uninterpreted, `DATA_ESTIRPAZIONE` on 806 records and `RIF_DECRETO` on 803 — the removal date and decree reference the monitoring publisher prints beside the observation. Like the removal label beside them, they are a lead to a first-party record, never a removal occurrence. It also records that the monitoring stream publishes a `DOCUMENTO_DECRETO` column in 970 records of the 2014-15 and 2016-17 removed-plant layers: 591 carry nothing and 379 carry a sentinel, so that column supplies no route to a decree either way. |
 | Any vector or treatment observation required by an accepted calculation | Official Osservatorio, ARIF or incorporated scientific monitoring | One observation for a stated place, period, method and subject | Name the exact C consumer first, then acquire the corresponding observation population |
 | Which days count for a working-day clock | Italian holiday law and enacted one-off changes | One national calendar rule | Maintain only the years reached by accepted B clocks |
 
 ## Monitoring observations
 
-The source population is the twelve campaign workbooks and the CKAN CSV, and
-all 101 observation point layers of the eight SIT services that publish them,
-selected from the publisher's service inventory at capture. Their bytes live in
-the content-addressed store (`SPEC.md`); `corpus/sources/monitoring/` holds the
-acquisition records that name each release and page by hash, under `campaign/`
-and `sit/<service>/<layer>/`. `scripts/acquire_monitoring.py` recaptures into
-the store, where changed bytes get a new name. `MonitoraggioXFPasp` holds nursery-site and
-Leccino-planting polygons and is not an observation source; grid, cadastre and
-buffer polygons belong to the area, population and parcel rows. The tallies below
-describe the capture recorded in `campaign/releases.json` and the layer records
-(10 September 2026); a recapture changes them.
+The source is every observation the Regione publishes: twelve campaign workbooks, the
+CKAN CSV, and the 101 observation point layers of the eight SIT services that carry
+them. `catalogue/service-inventory.json` retains the publisher's whole advertised
+inventory — 194 services, 3,726 layers, 105 tables, captured without a keyword filter —
+and it is what supports the selection: 61 services publish point layers, and of those
+eight publish monitoring observations. `MonitoraggioXFPasp` publishes nursery sites and
+Leccino plantings, and the grid, buffer and cadastral polygons belong to the area,
+population and parcel rows. Bytes live in the content-addressed store (`SPEC.md`), the
+acquisition records under `corpus/sources/monitoring/` name every release and page by
+hash, and `scripts/acquire_monitoring.py` recaptures into the store, where changed bytes
+take a new name. Every figure below describes this capture; a recapture changes them.
 
-`observations(root)` reads every record of every retained release through one
-path and keeps every original field: 4,318,100 observations. `distinct_observations(root)`
-relates them: one publisher reference on one day is one observation, wherever it
-is published. That gives 2,320,354 distinct observations. 1,867,537 are
-identified by a reference, with at most five publications each (workbook, CSV,
-host view, positives view, infected-plant layer). 452,817 cannot be related to
-anything: 223,458 carry no reference (221,617 rows of the 2013–2017 workbooks and
-1,841 rows of early views without an identifier column), 229,358 carry a value
-their own view reuses on that day, and one workbook row has no readable day.
-Counts across releases and views are never additive: 688,519 observations appear
-in workbook, CSV and SIT; 590,971 in workbook and SIT; 587,422 only in SIT
-(visual inspections, assessments, the current campaign and the infected-plant
-layers); 549 only in a workbook; 76 in workbook and CSV.
+One record is one published observation: a sample, a visual inspection or an assessment,
+on one day, with whatever result its publisher printed. `observations(root)` reads all
+4,318,100 of them through one path and keeps every original field.
+`distinct_observations(root)` relates them — one publisher reference on one day is one
+observation wherever it appears — giving 2,320,354 distinct observations with at most
+five publications each. 1,867,537 carry a usable reference; the rest stay single,
+because 229,358 carry a value their own view reuses that day, 223,458 carry no
+reference, and one has no readable day.
 
-| Published fields | Usable input and meaning |
+| Published fields | What the reader takes from them |
 |---|---|
-| `ID`, `ID_CAMPIONE`; earlier `NUMERO_ORDINE`, `OBJECTID`, daily and device identifiers | From 2018 the reference identifies one observation across its publications, with rare same-day reuse (144 rows) that the rule below leaves single. In the 2013–2017 SIT views it is a daily counter: one value covers up to eleven plants of different species on one day. A value a view gives to several rows on one day is not an identifier; those rows stay single, uncorrelated observations. Administrative and view identifiers never identify a physical plant. |
-| `DATA_RILEVAMENTO`, `DATA_CAMPIONE`, `DATA_PRELIVEO`, `DATA_RILIEVO` | The recorded observation or sampling day. Excel midnight is date storage; ArcGIS UTC epoch values are converted to the Puglia calendar day, and the early campaign's 23:00 UTC values belong to the following local day. Campaign names are not date boundaries. Report, protocol and removal dates remain separate fields. |
-| `TIPOLOGIA`; explicitly named visual-inspection and assessment views | Distinguish samples, visual inspections and assessments. An observation without an analytical result is not a negative test; the 2017–2020 inspection and assessment views have no result field at all, and a visual-inspection or symptom label is not a result. |
-| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato (the 2013–2017 removed-plant layers and the 2013–14 positives view). A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the diagnosis is the report's (next row). |
-| `SPECIE`, `CULTIVAR`, `SUBSPECIE` | Recorded host, cultivar and explicit sample-level subspecies. A view's subspecies title is context; it is not substituted for an absent sample-level identification. All hosts and result states are retained. |
-| `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence/absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
-| Native geometry/CRS, latitude/longitude, municipality and cadastral fields | Published location. SIT supplies EPSG:32633; workbooks give longitude/latitude columns that establish axes, not a datum. Neither states positional error, so metric use waits for the population row's qualification. |
-| `DOCUMENTO_CONFERMA`, `LNK_DOCUMENTO_SELGE`, `DOCUMENTO_DECRETO`; protocol and laboratory fields | Literal routes and identifiers for the report or act owning the next fact, exposed without interpreting the unread document. |
-| Team, field notes, inspection details, removal labels and protection/parcel annotations | Retained on their own observation. They can lead the respective input owner to a source fact; an annotation does not fill a removal, permission or completion event. |
+| `ID`, `ID_CAMPIONE` | The observation reference. From 2018 it identifies one observation across its publications. In the 2013–2017 SIT views it is a daily counter covering up to eleven plants of different species, so a value a view gives to several rows on one day is not an identifier and those rows stay uncorrelated. No identifier here identifies a physical plant. |
+| `OBJECTID`, `ID_GIORNALIERO`, `NUMERO_ORDINE`, `IDANDROID` | The publisher's other identifiers, carried under their own names, never merged into the reference and never compared: a view's feature id differs between views by construction. 12,940 observations the reference cannot identify are identified by one of these. |
+| `DATA`, `DATA_RILEVAMENTO`, `DATA_CAMPIONE`, `DATA_PRELIVEO`, `DATA_RILIEVO` | The recorded observation or sampling day. Excel midnight is date storage; ArcGIS UTC epochs become the Puglia calendar day, and the early campaign's 23:00 UTC values belong to the following local day. Campaign names are not date boundaries. Report, protocol and removal dates stay separate fields. |
+| `TIPOLOGIA`, and the explicitly named inspection and assessment views | Samples, visual inspections and assessments, kept apart. An observation without an analytical result is not a negative test: the 2017–2020 inspection and assessment views have no result field at all. |
+| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato. A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the laboratory diagnosis is the report's; official confirmation remains the Service's decision. |
+| `SPECIE`, `CULTIVAR`, `SUBSPECIE` | Recorded host, cultivar and sample-level subspecies. A view's subspecies title is context and is never substituted for an absent sample-level identification. Every host and every result state is retained. |
+| `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence and absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
+| Native geometry and spatial reference, `LONGITUDINE`, `LATITUDINE` | The published location, read into one frame. The SIT services state EPSG:32633 on every page. The campaign releases publish degrees and state no datum anywhere — not in the CKAN package, the download page, a sheet, a header or a legend — and those degrees are EPSG:4326, established from the publisher's own redundancy: over 1,279,135 testable pairs — an observation published both ways, with one point on each side — the stated SIT point reproduces the printed pair to under a centimetre, while ED50 and Monte Mario / Roma 40 miss by 127 m and 71 m. `scripts/check_frames.py` re-derives that per release from the store and fails when one stops fitting; `SPEC.md` says when it runs. Three releases cannot be tested that way: `CAMP_2013_2014`, `CAMP_2014_2015` and `CAMP_2016_2017` publish no observation reference in any of their 221,397 located rows, so nothing pairs them to a SIT publication by identity. Their frame rests instead on same-day proximity, because a datum shift translates a whole point cloud and shows without identity — `CAMP_2014_2015` and `CAMP_2016_2017` place 100% of their points within a centimetre of a same-day SIT point, and `CAMP_2013_2014` places 99.05%, where ED50 would put them 128 m away. That last figure is the weakest ground in the family and sits 0.05 points above the agreement the check requires, so a recapture of that release is the one to read rather than assume. What the redundancy cannot separate is which frame of that datum family the publisher would name: without an epoch the transformation between EPSG:4326 and EPSG:4258 is the identity, so both reproduce the printed pair exactly and the check reports them as tied. What it excludes are the frames that would move a location. The frame belongs to the pair rather than to the record: a service states its spatial reference for the geometry it publishes, and seventeen of these layers print degree columns beside that geometry, so degrees taken from the columns are read at EPSG:4326 whatever the page declared for its geometry. A pair this reader cannot place in the frame beside it is not carried, and its absence says so. Because every location has a frame, the publications of one observation are compared in one frame rather than held apart by the frame they were printed in; what a consumer receives is still a pair a publisher printed, in the frame that publisher stated, because the reprojection is this reader's and belongs under no value the operator reads as published. No source states positional error, so metric use waits for the population row's qualification. |
+| `COMUNE`, `COMUNE_COD`, `PROVINCIA`, `LOCALITA`, `ALTITUDINE` | The observation's own administrative location. `COMUNE_COD` is the ISTAT municipality code; the cadastral code is `COD_COMUNE`, which belongs to the parcel row. `LOCALITA` and `ALTITUDINE` are read and neither supplies a value: all 86 records publishing `LOCALITA` carry a sentinel, and all 86 publishing `ALTITUDINE` carry nothing. Those are different absences with different remedies, which is the distinction this row exists to keep. |
+| `SQUADRA`, `TECNICO`, `COD_TECNICI`, the inspector-name columns, `NOME_DISPOSITIVO`, `IMEI`, `CODICE_CAMPIONAMENTO`, `STATO`, `NOTE_RILEVATORE`, `NOTE`, `NOTE_SIT`, `CRITICITA_NOTE` | Who performed the observation, with what instrument, in which campaign, and what they noted. One fact under several publisher names: the 2016 infrastructure survey prints a team code and per-inspector columns where later releases print `TECNICO`. `CODICE_CAMPIONAMENTO` names a campaign shared by hundreds of records and is never an identity. A note, a device name and a publication status describe the publication rather than the observation, so they are read and not compared. |
+| `DOCUMENTO_CONFERMA`, `LNK_DOCUMENTO_SELGE` | The literal route to the laboratory report, under the column that published it: 22,206 and 8,762 routes. The document itself is unread here. |
+| Protocol, laboratory, cadastral, demarcated-area, protected-plant and removal fields, including `DOCUMENTO_DECRETO` | Carried as the literal the monitoring publisher printed, for the row that owns each fact, interpreted by nobody here. A transcription beside an observation does not fill a report, a parcel, a permission or a removal. |
 
 What the stream hands A–C, all as candidates:
 
-- Positive observations with their day, agreed coordinates per frame and report
-  route (`detection_days`, `located_positives`) for the no-detection anchor and
-  the finding location. The report supplies the diagnosis the finding decision rests on. `detection_record_complete`
-  is never set from the release inventory: the publisher says surveillance is not
-  an inventory of all infected plants, and the inventory proves only that every
-  retained release was read.
+- Positive observations with their day, their agreed location and their report route
+  (`detection_days`, `located_positives`) for the no-detection anchor and the finding
+  location. The report supplies the diagnosis beneath the finding decision. `detection_record_complete` is never set
+  from the release inventory: the publisher states that surveillance is not an inventory
+  of all infected plants, and the inventory proves only that every retained release was
+  read.
 - Distinct observations with an agreed result per caller-defined occasion
-  (`occasion_sets`) for negative-survey support. They are observations, not
-  inspection units; unit identity needs the plant population row, so
-  `observation_inventory_complete` stays unsupplied. The positive set is
-  label-level: a published positive defeats a negative-survey conclusion in C
-  before any report is read, which is the conservative direction.
-- Over 2013–2026: 30,103 positive distinct observations, of which 9,867 are
-  identified observations from 2018 on and 20,236 are 2013–2017 publications,
-  where one observation can appear up to four times (workbook, host view,
-  positives view, removed-plant layer) and cannot be counted once; 1,721,362
-  distinct negatives; 568,889 with no agreed result (inspections and assessments
-  without a result field, pending, doubtful, duplicate-only, blank, and the
-  result disagreements below).
+  (`occasion_sets`) for negative-survey support. They are observations, not inspection
+  units — unit identity belongs to the plant population row, so
+  `observation_inventory_complete` stays unsupplied. The positive set is label-level, so
+  a published positive defeats a negative-survey conclusion before any report is read,
+  which is the conservative direction.
+- Across 2013–2026: 30,103 positive distinct observations, 1,721,362 negative, and
+  568,889 with no agreed result — inspections and assessments with no result field,
+  pending, doubtful, duplicate-only, blank, and the result disagreements below. The
+  positives are not 30,103 findings: 9,867 are dated 2018 on, 55 of those uncorrelated,
+  and 20,236 are 2013–2017 publications, 13,399 of them uncorrelated singletons, where one
+  observation can appear in the workbook, the host view, the positives view and the
+  removed-plant layer and cannot be counted once. Counts across releases and views are
+  never additive for the same reason. Of the positives, 29,662 hand a consumer one agreed
+  location; 337 hand none because their publications place them apart, and 104 because no
+  publication carries a place. The 337 are almost all an identity limit rather than a
+  dispute about one observation's place: 333 are dated before 2018, all 337 have
+  publications naming more than one host, and 333 have all their publications in one
+  frame — they are the daily-counter groups below, where two views used one counter on one
+  day for different plants, so the reader is comparing the places of two observations. The
+  remedy is identity, not another source of coordinates.
 
 What the population shows, read and not reconciled:
 
-- In 2013–2017 cross-release identity is unreliable. The workbooks carry no
-  reference, and the SIT views use daily counters: a value a view reuses on a day
-  stays uncorrelated, but a value used once in each of two views on that day
-  still correlates them. Where those publications differ, the group is exposed
-  as a disagreement and withheld from the positive and negative counts; where
-  they agree, they merge and cannot be told from coincidence.
-- 16,569 identified observations (0.9%) have publications that disagree on a
-  field: species 16,523, coordinates 2,350, result 232, symptoms 2. From 2018 on
-  the species disagreement is a spelling convention — the positives views write
-  `OLIVO` where the host views, infected-plant layers and workbooks write
-  `Olivo (Olea europaea)` for the same observation — so nearly every positive
-  carries one; it is exposed, not resolved, and it is not identity doubt. By
-  observation day, 6,471 of the disagreeing observations fall in 2013–2017, where
-  a sample and another view's row share one counter value on one day. Only a
-  result disagreement withholds an observation from the positive and negative
-  counts. No publication is preferred.
-- The publisher's projections disagree with each other. For 1 October–31 December
-  2021, a period chosen after the reader was written, the adapter yields 1,772
-  distinct positive observations on 33 days; the positives views hold 1,772 rows;
-  the infected-plant layer and the workbook hold 1,769. The three extra are olive
-  positives published by both the SIT positives view and the Olivo host view; the
-  workbook, the CKAN CSV and the infected-plant layer omit them.
+- In 2013–2017 cross-release identity is unreliable. The workbooks carry no reference and
+  the SIT views use daily counters, so a reused value stays uncorrelated while a value
+  used once in each of two views on one day still correlates them. Where those
+  publications agree they merge and cannot be told from coincidence.
+- 16,630 observations have publications that disagree on a field: species 16,523,
+  `COMUNE` 8,203, coordinates 2,367, result 232, symptoms 2. Each is exposed and no
+  publication is preferred. Only a result disagreement withholds an observation from the
+  positive and negative counts. Much of it is the publisher's own convention, but not all
+  of it. Of the municipality disagreements 8,090 are casing alone; of the remaining 113,
+  eleven are one municipality under two separators (`SAN VITO DEI NORMANNI` beside
+  `SAN_VITO_DEI_NORMANNI`) and four print Carovigno's own ISTAT code beside its name, so
+  **98 name a different municipality** — `Francavilla Fontana` beside `Oria` on 71 of them,
+  `Capurso` beside `TRIGGIANO` on eight. Every one of the 98 is two adjacent municipalities,
+  and in every one of them the publications place the observation at a single agreed point
+  and name one host. So this is not identity doubt: 71 are 2017 publications, where a shared
+  daily counter can mean two observations, but 27 are dated 2020 to 2024 and correlate on a
+  reference that identifies one observation, and those are the publisher assigning one place
+  to two municipalities. The remedy differs accordingly — ask the publisher, or resolve the
+  point against municipal geometry in the area row — and it matters because the albo pretorio
+  publication duty attaches to a municipality. The 16,523 species disagreements are
+  not split here, and the reason is worth stating: 1,334 print an observation kind
+  (`accertamento`) in the species column rather than a host, which is checkable, but
+  separating a host named twice from two different hosts is not: `OLIVO` beside
+  `Olivo (Olea europaea)` and `Mandorlo (Prunus dulcis)` beside `MANDORLO` are one host
+  under a Latin binomial and an Italian vernacular name, while `MANDORLO` beside `OLIVO`
+  is two hosts, and both shapes recur under several spellings apiece. Telling them apart
+  needs a host synonym list this row does not have, so no count is given for either —
+  three attempts at one produced three different numbers, which is the evidence that the
+  rule was being chosen after the fact. Every disagreement is exposed either way.
+- The publisher's own projections disagree with each other. For 1 October to 31 December
+  2021 the stream yields 1,772 distinct positive observations on 33 days and the SIT
+  positives views hold 1,772 rows, while the infected-plant layer and the workbook hold
+  1,769: three olive positives are published by the positives view and the Olivo host view
+  and omitted by the workbook, the CKAN CSV and the infected-plant layer.
+- Two publications are the same place when they sit within a centimetre of each other on
+  the ground, measured by Stage C's geodesic because the stage that owns geometry owns
+  what counts as one place. That is a threshold on meaning with a finite margin: across
+  the population the widest separation among agreeing publications is 0.00074 m and the
+  nearest among disagreeing ones is 7.17 m. The headroom is about seven metres, not the
+  thousands of kilometres the transposed rows below suggest, and the four positives of
+  9 December 2019 whose SIT views differ by about 11 m sit just beyond it.
+- The coordinate disagreements are mostly the same identity limit: 2,341 of the 2,367 are
+  dated before 2018 and 2,075 are separated by more than a kilometre, which is two
+  observations sharing a counter rather than one observation disputed. Twenty-one have
+  publications in more than one frame, and 17 of those are the publisher placing one
+  observation on another continent: sixteen rows of
+  `CAMP_2017_2018` on 22 February 2018 carry their axes transposed, about 3,400 km from
+  where the SIT view puts them, and one row of `CAMP_2024` carries a corrupt pair 5,484 km
+  out. All 17 are published negative. Both printed numbers are valid for the column they
+  sit in, so only the publisher's other publication of the same observation exposes them.
+  The remaining four are positives of 9 December 2019 whose SIT views differ by about
+  11 m.
+- Every value a reading does not carry names why, in the record's own terms: 87 distinct
+  field-and-cause pairs across 64 fields, distinguishing a field the record does not
+  publish, one published carrying no value, one carrying only a sentinel, and one
+  carrying a value this reader does not interpret. No published field is passed over in
+  silence. `DistinctObservation.uncorrelated_because` answers why a group could not
+  correlate; these answer, for one publication and one field, why this reader carries
+  nothing.
+- 1,118 of those entries, over 13 field names, add that no reader of this stage claims
+  the column. That is what the reader knows; whether a row owns the fact behind it is a
+  judgment nobody has made, and several of the thirteen — the grove attributes and the
+  grid cell — are plainly the plant and area rows' subjects. They also state what the
+  record printed, because an unclaimed column carrying a sentinel and one carrying
+  nothing are different absences: 942 sentinels and 176 empty. No unclaimed column
+  carries a value this reader could have read, anywhere in the population, so the pending
+  ownership judgment costs no fact today. All thirteen appear in one release, the 86-row
+  2016 infrastructure survey.
+- 12,663 records state their place twice, as an ArcGIS geometry and as `LONGITUDINE` and
+  `LATITUDINE` columns beside it. The reading takes the geometry, and the two remaining
+  causes above record that it did not take the printed pair — and say so differently where
+  the two statements disagree, because within one record that is the only thing that could
+  see a transposition of the kind found across releases above. Every one of the 12,663
+  agrees today, the widest by 1.2 mm.
 
 ## Laboratory reports
 

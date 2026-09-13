@@ -24,7 +24,7 @@ Research and reviews are evidence. They never override the owners above. If two 
 
 - Optimize for the loss-reduction objective and the operator's real decision, not for an artifact, platform, or attractive dataset.
 - Give each fact one owner. Link to it everywhere else.
-- Keep quoted evidence, inference, adjudication, and provisional work distinguishable.
+- Keep the epistemic classes `DESIGN_PRINCIPLES.md` names distinguishable, including provisional work, and never record a reading's own limit as the source's silence: an absence names its cause.
 - Read the authoritative source before serializing meaning. Sources and other actors enter only where they directly affect the chosen decision chain; the current operator's full remit is not the product aperture.
 - Respect stage boundaries. A downstream representation need cannot rewrite upstream meaning.
 - Delete > replace > refine > add. Preserve full necessary meaning with the least structure and operator burden; complexity and process need a named decision or prevented failure.

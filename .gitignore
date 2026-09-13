@@ -7,5 +7,12 @@ corpus/workbench/*
 !corpus/workbench/.gitkeep
 regulation/stage-b/generated/
 
+# Source bytes live in the content-addressed store and nowhere else (SPEC.md); the tree
+# keeps the acquisition records that name them by hash. A checkout that also holds the
+# bytes gives one fact two homes, and `build_catalog.py` indexes whatever git will show it.
+corpus/sources/monitoring/campaign/*.xlsx
+corpus/sources/monitoring/campaign/*.csv
+corpus/sources/monitoring/sit/**/*.json.gz
+
 .playwright-cli/
 output/playwright/
