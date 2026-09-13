@@ -34,6 +34,7 @@ def main():
     parser.add_argument('--reports-root', type=Path, default=Path('corpus/sources/reports'))
     parser.add_argument('--monitoring-root', type=Path, default=Path('corpus/sources/monitoring'))
     parser.add_argument('--model', default=ExtractionConfig.model)
+    parser.add_argument('--extraction-version', help='Select a retained reading version for local consumption only')
     execution = parser.add_mutually_exclusive_group()
     execution.add_argument('--execute', action='store_true')
     execution.add_argument('--rebuild-cache', action='store_true', help='Reassemble retained responses with no provider access')
@@ -52,7 +53,9 @@ def main():
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     config = ExtractionConfig(model=args.model)
-    revision = version(config)
+    if args.extraction_version and (args.execute or args.rebuild_cache):
+        parser.error('--extraction-version selects existing readings; it cannot execute or rebuild them')
+    revision = args.extraction_version or version(config)
     store = store_root(args.reports_root)
     captures = json.loads((args.reports_root / 'records.json').read_text())
     digests = sorted({r['sha256'] for r in captures if 'sha256' in r})
@@ -63,7 +66,7 @@ def main():
         path = store / 'derived/reports' / revision / digest / 'report.json'
         return path.exists() and json.loads(path.read_text()).get('assembly_complete') is True
     pending = [d for d in selected if not complete(d)]
-    print(json.dumps({'model': config.model, 'extraction_version': revision,
+    print(json.dumps({'execution_model': config.model if args.execute else None, 'extraction_version': revision,
                       'documents': len(digests), 'selected': len(selected), 'pending': len(pending), 'paid_execution': args.execute}), flush=True)
     def process(budget):
         for index, digest in enumerate(pending, 1):
@@ -100,6 +103,8 @@ def main():
                 if output:
                     output.write(json.dumps(item, default=encoded, ensure_ascii=False) + '\n')
                 counts['observations'] += 1
+                if counts['observations'] % 250000 == 0:
+                    print(json.dumps({'joined_observations': counts['observations']}), flush=True)
                 statuses[item.get('status', 'no report route recovered')] += 1
                 counts['matched_relationships'] += len(item['matches'])
                 for link in item['links']:
@@ -115,21 +120,6 @@ def main():
         counts['routed_observations'] = len(routed)
         counts['distinct_routed_urls'] = len(routed_urls)
         counts['unacquired_routed_urls'] = len(unacquired_urls)
-        if args.confirmation_request:
-            from cordon_c.core import Snapshot
-            from cordon_c.bindings import confirmation_facts
-            request = json.loads(args.confirmation_request.read_text())
-            selected = [item for item in routed if list(item['observation'].identity) == request['observation']]
-            if len(selected) != 1:
-                raise ValueError('Requested observation is not uniquely present in the ordinary joined stream')
-            inputs = confirmation_inputs(selected[0], result_pair=request['result_pair'], qualification={})
-            facts = confirmation_facts(Snapshot.load(REPOSITORY), date.fromisoformat(request['event_date']), **inputs)
-            destination = (args.join_output or args.join_summary).with_suffix('.confirmation.json')
-            destination.write_text(json.dumps({'observation': request['observation'],
-                'result_pair': request['result_pair'], 'event_date': request['event_date'],
-                'extraction_version': revision, 'inputs': inputs,
-                'evaluations': [{'consumer': key, 'evaluation': value} for key, value in facts.items()]},
-                default=encoded, indent=2) + '\n')
         reading_statuses = Counter()
         def readings():
             for reading in reports(args.reports_root, store, extraction_version=revision, known_through=args.known_through):
@@ -157,6 +147,27 @@ def main():
                 'known_through': args.known_through.isoformat(), 'counts': counts,
                 'observation_statuses': statuses, 'route_statuses': limitations,
                 'reading_statuses': reading_statuses, 'unacquired_routes': sorted(unacquired_urls)}, indent=2) + '\n')
+
+        if args.confirmation_request:
+            destination = (args.join_output or args.join_summary).with_suffix('.confirmation.json')
+            try:
+                from cordon_c.core import Snapshot
+                from cordon_c.bindings import confirmation_facts
+                request = json.loads(args.confirmation_request.read_text())
+                selected = [item for item in routed if list(item['observation'].identity) == request['observation']]
+                if len(selected) != 1:
+                    raise ValueError('Requested observation is not uniquely present in the ordinary joined stream')
+                inputs = confirmation_inputs(selected[0], result_pair=request['result_pair'], qualification={})
+                facts = confirmation_facts(Snapshot.load(REPOSITORY), date.fromisoformat(request['event_date']), **inputs)
+                destination.write_text(json.dumps({'observation': request['observation'],
+                    'result_pair': request['result_pair'], 'event_date': request['event_date'],
+                    'extraction_version': revision, 'inputs': inputs,
+                    'evaluations': [{'consumer': key, 'evaluation': value} for key, value in facts.items()]},
+                    default=encoded, indent=2) + '\n')
+            except (ValueError, KeyError) as error:
+                destination.write_text(json.dumps({'request_path': str(args.confirmation_request),
+                    'cause': str(error), 'evaluations': None}, indent=2) + '\n')
+                raise
 
 
 if __name__ == '__main__':

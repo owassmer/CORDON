@@ -158,6 +158,26 @@ class LiteralReport(unittest.TestCase):
                 _call({}, config=ExtractionConfig(), budget=None, request_id='missing', raw_path=Path('unused'))
             credential.assert_not_called()
 
+    def test_table_header_page_is_supplied_to_a_later_continuation(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                for _ in range(3):
+                    pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            first = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])['reading']
+            first['pages'] = [{'page': 1, 'disposition': 'read'}, {'page': 2, 'disposition': 'read'}]
+            first['tables'][0]['page'] = 2
+            last = {'pages': [{'page': 3, 'disposition': 'read'}], 'tables': [],
+                    'facts': [], 'issues': [], 'context_pages': []}
+            with patch('cordon_d.report_extraction._call', side_effect=[first, last]) as call:
+                extract_report(digest, store, config=ExtractionConfig(), budget=None)
+            texts = [c.get('text', '') for c in call.call_args_list[-1].args[0]['messages'][0]['content']]
+            self.assertIn('PHYSICAL PAGE 2: CONTEXT ONLY', texts)
+            self.assertIn('PHYSICAL PAGE 3: TARGET', texts)
+
     def test_cache_miss_does_not_call_a_provider(self):
         with TemporaryDirectory() as directory:
             value = report('missing', Path(directory), extraction_version='v')

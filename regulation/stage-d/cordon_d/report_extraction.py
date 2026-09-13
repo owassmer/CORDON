@@ -256,7 +256,7 @@ def extract_report(digest, store, *, config, budget):
     target = directory / 'report.json'
     if target.exists() and json.loads(target.read_text()).get('assembly_complete') is True:
         return target
-    blocks, context = [], set()
+    blocks, context, heading_context = [], set(), set()
     with pymupdf.open(blob_path(store, digest)) as document:
         page_count = len(document)
         def save(complete=False):
@@ -265,7 +265,8 @@ def extract_report(digest, store, *, config, budget):
                                'assembly_complete': complete, 'blocks': blocks})
         save()
         def read(targets):
-            pages = sorted(context | set(targets))
+            supplied_context = context | heading_context
+            pages = sorted(supplied_context | set(targets))
             content, native, regions = _page_content(document, pages, targets, config)
             request = {'model': config.model, 'max_tokens': config.max_tokens,
                        'messages': [{'role': 'user', 'content': content}]}
@@ -280,7 +281,7 @@ def extract_report(digest, store, *, config, budget):
                 legacy = store / 'derived/reports/responses' / f'{legacy_id}.json'
                 if legacy.exists():
                     try:
-                        candidate = target_reading(response_reading(json.loads(legacy.read_text())['response'], config.model), targets, context)
+                        candidate = target_reading(response_reading(json.loads(legacy.read_text())['response'], config.model), targets, supplied_context)
                         validate_block(candidate, targets=targets, page_count=page_count, native_cells=native, native_regions=regions)
                         reading, reused = candidate, legacy_id
                     except OutputLimit:
@@ -294,14 +295,21 @@ def extract_report(digest, store, *, config, budget):
                     else:
                         reading = _call(request, config=config, budget=budget,
                                         request_id=request_id, raw_path=raw_path)
-                    reading = target_reading(reading, targets, context)
+                    reading = target_reading(reading, targets, supplied_context)
                     validate_block(reading, targets=targets, page_count=page_count, native_cells=native, native_regions=regions)
-                item = {'targets': targets, 'context_pages': sorted(context), 'request_sha256': reused or request_id,
+                item = {'targets': targets, 'context_pages': sorted(supplied_context), 'request_sha256': reused or request_id,
                         'reading': reading, 'native_cells': native, 'native_regions': regions}
                 write_json(path, item)
             validate_block(item['reading'], targets=targets, page_count=page_count, native_cells=item['native_cells'], native_regions=item.get('native_regions', []))
             blocks.append(item)
             context.update(item['reading']['context_pages'])
+            headed = [table['page'] for table in item['reading']['tables']
+                      if any(column['heading'] for column in table['columns'])]
+            if headed:
+                # Supply the latest printed table header as evidence, without
+                # automatically assigning its meaning to a following table.
+                heading_context.clear()
+                heading_context.add(max(headed))
             save()
             logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': targets,
                 'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
