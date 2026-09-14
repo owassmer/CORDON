@@ -1,0 +1,46 @@
+[
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_74_20_6_2024.pdf/f2e47f81-3c3f-a130-9783-23befeac956a?t=1719500141090&version=1.0",
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_74_20_6_2024.pdf/f2e47f81-3c3f-a130-9783-23befeac956a?t=1719500141090&version=1.0",
+  "captured_at": "2026-09-14T01:31:33.175836+00:00",
+  "status": 200,
+  "content_type": "application/pdf",
+  "bytes": 5833927,
+  "sha256": "44f299b0d9183377a846fd2c6e9125cbbd7d69e2edac29718b3e5112d1b1c321",
+  "referred_by": [
+   {
+    "source_sha256": "cd0e1b6951a5108912002d2aa5470e41c11d7857bdc0046f1958f01ddd0fb77c",
+    "source_locator": "Report page 1 identifies report 73F/2024 dated 21/05/2024. Publisher search for that report reached this act; the report does not print this URL. Act page 3 and Annex 1/C pages 28 and 33 supply the adopted report-to-plant associations needed by the finding identity and correction consumers."
+   }
+  ]
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2545751/DET_138_28_10_2024.pdf/812e064e-ccf7-60dc-a664-806ec0d8011a?t=1730997544591&version=1.0",
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2545751/DET_138_28_10_2024.pdf/812e064e-ccf7-60dc-a664-806ec0d8011a?t=1730997544591&version=1.0",
+  "captured_at": "2026-09-14T01:29:41.239217+00:00",
+  "status": 200,
+  "content_type": "application/pdf",
+  "bytes": 7152730,
+  "sha256": "138add2778567999e2852335f6a79469f2677df68891e88ca1af9bbac089b0e5",
+  "referred_by": [
+   {
+    "source_sha256": "fa9f934794243c5098e41c787fe0495d7033f7fd87fb0dd56b4be26402b1876c",
+    "source_locator": "Revision page 1 identifies report 73F/2024 dated 03/10/2024 and cancellation of an earlier rendition. Publisher search for that report reached this act; the report does not print this URL. Act page 3 and Annex 1/C page 18 supply the adopted report-to-plant association needed by the finding identity and correction consumers."
+   }
+  ]
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/dir_estirpazione_xff/181_DIR_2024_00052.pdf",
+  "captured_at": "2026-09-14T01:17:59.460249+00:00",
+  "status": 200,
+  "content_type": "application/pdf",
+  "bytes": 22739726,
+  "sha256": "f8a0ac9cfcec014cf53ec6e22954e2475a77d334bb83667fe3e047f2af9e5bf2",
+  "referred_by": [
+   {
+    "source_sha256": "01e232d91840bef7901b5ce20ee2e40b1217b11f49e53699ae3872f3f46fba24",
+    "source_locator": "Report page 1 identifies CNR 23/2024 dated 18/03/2024. Publisher search for that cited report reached this determination; the report does not print this URL. Annex 1/C supplies the plant-to-report association needed by the finding identity consumer."
+   }
+  ]
+ }
+]

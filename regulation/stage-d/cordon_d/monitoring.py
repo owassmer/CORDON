@@ -843,7 +843,7 @@ def distinct_observations(root: Path):
         connection.execute('CREATE TABLE ordering (filename VARCHAR, release_index BIGINT)')
         connection.executemany('INSERT INTO ordering VALUES (?, ?)', [(name, index) for index, name in files])
         cursor = connection.execute(
-            'WITH r AS (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
+            'WITH r AS NOT MATERIALIZED (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
             '           FROM read_parquet($files, filename = true) p JOIN ordering o USING (filename)), '
             'reused AS (SELECT release, view, reference, day FROM r '
             '           WHERE reference IS NOT NULL AND day IS NOT NULL '
