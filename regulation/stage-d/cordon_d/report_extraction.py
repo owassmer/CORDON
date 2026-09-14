@@ -722,6 +722,7 @@ def extract_report(digest, store, *, config, budget, execute=True):
                                        native_regions=regions, supplied_pages=supplied)
                     except (RuntimeError, requests.RequestException, ValueError) as error:
                         item = {'targets': targets, 'context_pages': sorted(supplied_context),
+                            'supplied_pages': supplied,
                             'request_sha256': prior_request, 'reading': prior_reading,
                             'native_cells': native, 'native_regions': regions,
                             'attachment_repair_pending': str(error)}
@@ -733,7 +734,8 @@ def extract_report(digest, store, *, config, budget, execute=True):
                         reading['issues'].append({'scope': ','.join(remaining),
                             'cause': 'sampling date remains attached only to its section after one source reread; no sample scope established'})
                     reused = repair_id
-                item = {'targets': targets, 'context_pages': sorted(supplied_context), 'request_sha256': reused or request_id,
+                item = {'targets': targets, 'context_pages': sorted(supplied_context), 'supplied_pages': supplied,
+                        'request_sha256': reused or request_id,
                         'reading': reading, 'native_cells': native, 'native_regions': regions}
                 if reused and reused != prior_request:
                     item.update(prior_request_sha256=prior_request, effort=effort)

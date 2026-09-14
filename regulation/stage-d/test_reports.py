@@ -460,6 +460,29 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(materialize('hash', 'v', 1, [item]).complete_pages, frozenset())
 
 
+class ShownPages(unittest.TestCase):
+    def test_a_block_may_cite_any_page_it_was_shown_and_no_other(self):
+        item = block([['101', '01/03/2024', 'Positivo', '02/03/2024']])
+        item['targets'] = [2]
+        item['reading']['pages'] = [{'page': 2, 'disposition': 'read'}]
+        item['reading']['tables'][0]['page'] = 2
+        item['reading']['context_pages'] = []
+        item['reading']['facts'] = [{'id': 'f1', 'role': 'qualification', 'page': 1, 'locator': 'letter',
+                                     'section': None, 'text': 'as received', 'value': None, 'applies_to': ['report']}]
+        with self.assertRaisesRegex(ValueError, 'not supplied'):
+            materialize('hash', 'v', 2, [copy.deepcopy(item)])
+        item['supplied_pages'] = [1, 2]
+        self.assertEqual(materialize('hash', 'v', 2, [item]).pages, 2)
+
+    def test_identifier_annotation_reconstructs_the_cell_in_either_order(self):
+        item = block([['*513077', '01/03/2024', 'Positivo', '02/03/2024']])
+        item['reading']['tables'][0]['rows'][0]['cells'][0].update(identifier='513077', annotation='*')
+        validate_block(item['reading'], targets=[1], page_count=1, native_cells={})
+        item['reading']['tables'][0]['rows'][0]['cells'][0].update(annotation='(Pool)')
+        with self.assertRaisesRegex(ValueError, 'reconstruct'):
+            validate_block(item['reading'], targets=[1], page_count=1, native_cells={})
+
+
 class RetainedResponses(unittest.TestCase):
     def test_a_failed_subscription_envelope_is_set_aside_and_never_replayed_as_a_reading(self):
         from cordon_d.report_extraction import _retained_reading

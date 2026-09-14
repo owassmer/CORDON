@@ -231,8 +231,12 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
                     raise ValueError('Source values must remain strings')
                 if 'identifier' in cell:
                     text = native_cells[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
-                    combined = str(cell['identifier']) + ' ' + str(cell.get('annotation', ''))
-                    if not isinstance(cell['identifier'], str) or not text or ' '.join(combined.split()) != ' '.join(text.split()):
+                    identifier, annotation = str(cell['identifier']), str(cell.get('annotation', ''))
+                    # The annotation may be printed before or after the identifier (`*513077`, `1640733 (Pool)`).
+                    forms = {' '.join(identifier.split()) + ' ' + ' '.join(annotation.split()),
+                             ' '.join(annotation.split()) + ' ' + ' '.join(identifier.split())}
+                    if (not isinstance(cell['identifier'], str) or not text
+                            or ''.join(text.split()) not in {''.join(form.split()) for form in forms}):
                         raise ValueError('Identifier and annotation must reconstruct the literal source cell')
     for region in dispositions:
         outputs = set(region.get('output_tables', []))
@@ -346,9 +350,12 @@ def materialize(digest, version, page_count, blocks):
     rows, covered, locators, encountered = [], set(), set(), set()
     for item in blocks:
         data, native = item['reading'], item['native_cells']
+        # The pages the model was shown for this block: recorded on the block when it was
+        # read (the whole document under the subscription); otherwise targets and context.
         validate_block(data, targets=item['targets'], page_count=page_count, native_cells=native,
                        native_regions=item.get('native_regions', []),
-                       supplied_pages=set(item['targets']) | set(item.get('context_pages', [])))
+                       supplied_pages=set(item.get('supplied_pages')
+                                          or set(item['targets']) | set(item.get('context_pages', []))))
         for disposition in data['pages']:
             if disposition['page'] in encountered:
                 raise ValueError('Overlapping target pages cannot be silently combined')
