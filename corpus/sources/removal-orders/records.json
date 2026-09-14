@@ -279,5 +279,175 @@
   "content_type": "application/pdf",
   "bytes": 26841261,
   "sha256": "7ac5228c2f9b1091aef21c58b71f22261eefac3c8d08fe7247b654425be46001"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1814748/DET_6_8_2_2022.pdf/8d154951-4c81-9436-c3e7-8d59932c2488",
+  "captured_at": "2026-09-14T20:42:17.928204+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer:v1; REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1; REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-6-2022-FITO-.pdf",
+  "bytes": 1790561,
+  "sha256": "8810254890c14e1a0b2cdfa54bc82fe5e7c41a0844bcc5e5cdf490193185055a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2551508/DET_165_25_11_2024.pdf/77c34321-bfb7-c5dd-1fc8-50211b09a3bb",
+  "captured_at": "2026-09-14T20:42:17.943355+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.pdf",
+  "bytes": 2256599,
+  "sha256": "2500ea7aabe86ed07f3be6d9830eb91ebc54b0ffb633b9c021d53bd292c58194"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2787381/DET_63_3_4_2026.pdf/00e2c6c5-ac0d-999f-41a1-33aa6ec28702",
+  "captured_at": "2026-09-14T20:42:17.961501+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1; REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.pdf",
+  "bytes": 779652,
+  "sha256": "bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2009961/DET_2_25_1_2023.pdf/1edc4a4a-ab7c-73a5-03f7-7db26346f7e2",
+  "captured_at": "2026-09-14T20:42:17.992459+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1; REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.pdf",
+  "bytes": 2937673,
+  "sha256": "78fd9586462370550657a129c069c4acb3cfbf88e3e1392ffbfb4c11cf9556d1",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=78fd9586462370550657a129c069c4acb3cfbf88e3e1392ffbfb4c11cf9556d1"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2159322/DET_45_9_5_2023.pdf/130e8312-7440-ee51-f541-21f0f9de9858",
+  "captured_at": "2026-09-14T20:42:18.037615+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1; REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.pdf",
+  "bytes": 1316233,
+  "sha256": "8277847ffa75478a80d20e4b9b0d4c9024ffe8b0f7a3206d5565cd398bc17108",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=8277847ffa75478a80d20e4b9b0d4c9024ffe8b0f7a3206d5565cd398bc17108"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2161755/DET_51_19_5_2023.pdf/464d12ec-d0e0-810c-29fe-676eb2bb3194",
+  "captured_at": "2026-09-14T20:42:18.060238+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved:v1; REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-51-2023-FITO-db9ed41fcfb9.pdf",
+  "bytes": 1084403,
+  "sha256": "db9ed41fcfb9f01dcede65d0a101296b22d8de3f1f3cc48c623476eb187ff0cb",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=db9ed41fcfb9f01dcede65d0a101296b22d8de3f1f3cc48c623476eb187ff0cb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2198200/DET_96_28_8_2023.pdf/f5cd4d54-2cd6-c56f-5e11-8b5ea2e35c75",
+  "captured_at": "2026-09-14T20:42:18.074541+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1; REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-96-2023-FITO-dd5bebb3616b.pdf",
+  "bytes": 1298144,
+  "sha256": "dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2453368/DET_27_8_4_2024.pdf/b1310042-08ce-b608-1377-716943bdedb7?t=1712848659124&version=1.0",
+  "captured_at": "2026-09-14T20:42:18.135073+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1; REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/DDS-27-2024-standard-art13.pdf",
+  "bytes": 1293108,
+  "sha256": "4fdc0e65e31c39b98008acfcbec06cd0180127af6ee7b3d68b976e9865e83d0c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2547230/DET_151_14_11_2024.pdf/16962fd7-32d6-794c-e108-9d94139c2540",
+  "captured_at": "2026-09-14T20:42:18.177459+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text:v1; REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-151-2024-FITO-.pdf",
+  "bytes": 2359945,
+  "sha256": "d1087498afc5e6e7f6f59aa93a1cc5f36f68c32145ff06646ab4e36609105de8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2662768/DET_115_25_6_2025.pdf/2013e7e0-c2b0-46c2-90e9-e92506f2545a",
+  "captured_at": "2026-09-14T20:42:18.203600+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1; REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-115-2025-FITO-ed7ecbb460e2.pdf",
+  "bytes": 1138714,
+  "sha256": "ed7ecbb460e2d09c136b76c87319931aeee729dc91d82a6ed55323891a91f9e5",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=ed7ecbb460e2d09c136b76c87319931aeee729dc91d82a6ed55323891a91f9e5"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2753944/DET_35_9_3_2026.pdf/288791bb-8459-97e5-8c49-4c37c19eedc5",
+  "captured_at": "2026-09-14T20:42:18.223259+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text:v1; REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-35-2026-FITO-76d363b7ece1.pdf",
+  "bytes": 2376320,
+  "sha256": "76d363b7ece15145f9892f12bcad90d9dd1e7632c2516597db78185bb8b655f2",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=76d363b7ece15145f9892f12bcad90d9dd1e7632c2516597db78185bb8b655f2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1763690/DET_135_9_11_2021.pdf/47297e08-e7e7-4652-c1fe-a72cadb04b02",
+  "captured_at": "2026-09-14T20:42:18.258970+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment:v1; REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-135-2021-FITO-.pdf",
+  "bytes": 3840269,
+  "sha256": "cba7890acf17bfe84beacb7449e51149f67e77f6a0efb58da6fb57aab7987ab2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1814748/DET_4_8_2_2022.pdf/48194c9f-5f4f-b47a-ff6f-3b7389c45b62",
+  "captured_at": "2026-09-14T20:42:18.320843+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1; REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.pdf",
+  "bytes": 2589745,
+  "sha256": "469f59fbd0a4848825e79bb0b316cc6d9872d24b19d0319eecfdabb7499f805f"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2716376/DET_201_24_11_2025.pdf/2baae0d7-98f1-b793-553a-22e91831b116",
+  "captured_at": "2026-09-14T20:42:18.371458+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1; REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-201-2025-FITO-11d2e495c708.pdf",
+  "bytes": 2732390,
+  "sha256": "11d2e495c7086656af827c7910eb7f7232e708c69886869a883f6346e5c6b5aa",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=11d2e495c7086656af827c7910eb7f7232e708c69886869a883f6346e5c6b5aa"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2547763/DET_147_8_11_2024.pdf/d0ffb356-bb3c-9140-c3be-5e7d5157c08f",
+  "captured_at": "2026-09-14T20:42:18.420683+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-147-2024-FITO-.pdf",
+  "bytes": 9206296,
+  "sha256": "4f71105dde5944ffa76f5967e155f69665af8a16c576e7d2e1dc713d87672173"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2703581/DET_173_24_10_2025.pdf/37d75313-0cd4-e40c-3606-a48e1dc4524f?t=1763038672509&version=1.0",
+  "captured_at": "2026-09-14T20:42:18.521607+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/DDS-173-2025-standard-art7.pdf",
+  "bytes": 3711033,
+  "sha256": "e727cde2ec8639655cd35ce77a62619b947d033f09ae363f675f15f42618126b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2514548/DET_108_16_8_2024.pdf/8551bd21-105b-c34a-f588-c9915e9eb2a8",
+  "captured_at": "2026-09-14T20:42:18.653092+00:00",
+  "kind": "act",
+  "referred_by": "Capurso native register 306336cb7351e151a29fa8738f81a8694e35b54d6eeb50b5273aaacc5bbfee63: content DDS108/2024; operative-act and administrative-event consumers",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-108-2024-FITO-.pdf",
+  "bytes": 1006182,
+  "sha256": "47b107a6525606934c79125d5b4f565d7193ab92aef801b80b21d25bc3a51a3d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1755327/DET_129_4_11_2021.pdf/b5c10864-c709-2e99-1946-170d67d890ea",
+  "captured_at": "2026-09-14T20:42:18.702236+00:00",
+  "kind": "act",
+  "referred_by": "DDS6/2022 original heading explicitly names corrected DDS129/2021; operative-act correction scope",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-129-2021-FITO-.pdf",
+  "bytes": 13312360,
+  "sha256": "aa4a6a625b06bba23f277c057a428e240f600edf3767d5ddcb194f3de7d9e5ac"
  }
 ]
