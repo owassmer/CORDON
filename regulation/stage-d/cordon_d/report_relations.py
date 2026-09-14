@@ -365,21 +365,38 @@ def replacements(edges, digest):
     return reached
 
 
+def replacement_ancestors(edges, digest, *, possible=False):
+    """Possible predecessors constrain eligibility without establishing supersession."""
+    ancestors, pending = set(), [digest]
+    while pending:
+        current = pending.pop()
+        if current in ancestors:
+            continue
+        ancestors.add(current)
+        for edge in edges:
+            if edge['effect'] == 'replaces' and edge['successor'] == current:
+                if possible:
+                    pending.extend(edge['candidates'])
+                elif edge['status'] == 'resolved':
+                    pending.append(edge['predecessor'])
+    return ancestors
+
+
 def current_limitation(edges, digest):
     incoming = [e for e in edges if digest in e['candidates'] and e['effect'] in {'replaces', 'amends'}]
     if not incoming:
         resolved = [e for e in edges if e['effect'] == 'replaces' and e['status'] == 'resolved']
-        ancestors, pending = set(), [digest]
-        while pending:
-            current = pending.pop()
-            if current in ancestors:
-                continue
-            ancestors.add(current)
-            pending.extend(e['predecessor'] for e in resolved if e['successor'] == current)
+        ancestors = replacement_ancestors(edges, digest)
+        possible = replacement_ancestors(edges, digest, possible=True)
         # Every branch from an ancestor must explicitly reach this rendition.
         # Extending one competing branch does not supersede the other branch.
-        if any(e['predecessor'] in ancestors and e['successor'] not in ancestors for e in resolved):
+        if any(e['predecessor'] in possible and e['successor'] not in ancestors for e in resolved):
             return 'competing source-declared replacements; current rendition unresolved'
+        if any(e['effect'] in {'replaces', 'amends'}
+               and possible.intersection(e['candidates'])
+               and e['successor'] not in ancestors for e in edges):
+            return ('source-declared correction may affect replacement ancestry; '
+                    'predecessor identity or amendment scope remains unresolved')
         return None
     if any(e['effect'] == 'replaces' and e['status'] == 'resolved' and e['predecessor'] == digest for e in incoming):
         return 'source declares this report superseded; retained as historical evidence'

@@ -41,14 +41,15 @@ class ReportCompletion(unittest.TestCase):
         self.captures = []
         self.identities = {}
 
-    def add_report(self, label, *, predecessors=(), item=None):
+    def add_report(self, label, *, predecessors=(), item=None, number=None, date='01/03/2024'):
+        number = number or label + '/2024'
         with pymupdf.open() as pdf:
-            pdf.new_page().insert_text((40, 40), 'Laboratory A ' + label + '/2024')
+            pdf.new_page().insert_text((40, 40), 'Laboratory A ' + number + ' ' + date)
             digest = put_bytes(self.store, pdf.tobytes())
         route = 'https://publisher.example/' + label + '.pdf'
         self.captures.append({'url': route, 'sha256': digest,
                               'captured_at': '2026-01-01T00:00:00+00:00'})
-        relations = reading(number=label + '/2024').relations
+        relations = reading(number=number, date=date).relations
         for predecessor in predecessors:
             relations['corrections'].extend(reading(previous=self.identities[predecessor]).relations['corrections'])
         self.identities[label] = relations['identity']
@@ -107,6 +108,56 @@ class ReportCompletion(unittest.TestCase):
                 joined = self.join(route)
                 self.assertEqual(joined['status'], 'matched')
                 self.assertEqual({m['key'][0] for m in joined['matches']}, {d})
+
+    def test_potential_predecessor_in_ancestry_remains_consequential(self):
+        a, route_a, _ = self.add_report('A')
+        a2, _, _ = self.add_report('A2', number='A/2024', date='02/03/2024')
+        b, route_b, _ = self.add_report('B', predecessors=['A'])
+        d, route_d, _ = self.add_report('D', predecessors=['B'])
+        c, route_c, _ = self.add_report('C', predecessors=['A'])
+        target = report_relations.path(self.store, c)
+        payload = json.loads(target.read_text())
+        previous = payload['reading']['corrections'][0]['predecessor']
+        previous['date'] = None
+        previous['component_support']['date'] = []
+        target.write_text(json.dumps(payload))
+        sources = {digest: report(digest, self.store, extraction_version='v') for digest in (a, a2, b, c, d)}
+        edge, = [e for e in report_relations.correspondences(sources) if e['successor'] == c]
+        self.assertEqual(set(edge['candidates']), {a, a2})
+        self.assertEqual(edge['status'], 'unresolved')
+        for route in (route_a, route_b, route_c, route_d):
+            with self.subTest(phase='ambiguous predecessor', route=route):
+                joined = self.join(route)
+                self.assertEqual(joined['matches'], [])
+                self.assertTrue(any(link['document_cause'] for link in joined['links']))
+        # A source-supported date identifies the other A, outside D's ancestry.
+        payload['reading']['corrections'][0]['predecessor'] = self.identities['A2']
+        target.write_text(json.dumps(payload))
+        for route in (route_a, route_b, route_d):
+            with self.subTest(phase='disjoint predecessor', route=route):
+                self.assertEqual({m['key'][0] for m in self.join(route)['matches']}, {d})
+        # Restoring uncertainty is also resolvable by explicit whole-report reconciliation.
+        payload['reading']['corrections'][0]['predecessor'] = previous
+        target.write_text(json.dumps(payload))
+        e, route_e, _ = self.add_report('E', predecessors=['C', 'D'])
+        for route in (route_a, route_b, route_c, route_d, route_e):
+            with self.subTest(phase='explicit reconciliation', route=route):
+                joined = self.join(route)
+                self.assertEqual(joined['status'], 'matched')
+                self.assertEqual({m['key'][0] for m in joined['matches']}, {e})
+
+    def test_unresolved_amendment_scope_is_not_erased_by_descendants(self):
+        a, route_a, _ = self.add_report('A')
+        b, route_b, _ = self.add_report('B', predecessors=['A'])
+        d, route_d, _ = self.add_report('D', predecessors=['B'])
+        c, _, _ = self.add_report('C', predecessors=['A'])
+        target = report_relations.path(self.store, c)
+        payload = json.loads(target.read_text())
+        payload['reading']['corrections'][0]['effect'] = 'amends'
+        target.write_text(json.dumps(payload))
+        for route in (route_a, route_b, route_d):
+            with self.subTest(route=route):
+                self.assertEqual(self.join(route)['matches'], [])
 
     def test_failed_continuation_producer_cannot_supply_complete_consumer_evidence(self):
         for failure in ('issue', 'no facts', None):

@@ -310,6 +310,8 @@ an observation's original route; the earlier source remains historical evidence.
 Amendments, ambiguous predecessors and cycles cannot silently select a current row.
 Competing replacement branches remain unresolved through their descendants until
 explicit source relationships reconcile them, irrespective of observation route.
+This includes competition through ambiguous candidate predecessors; possible
+ancestry constrains eligibility without establishing supersession.
 Consumer completion also requires the producer's record-assembly attestation;
 page coverage and a complete document-relationship inventory cannot replace it.
 Failed or pending assembly preserves recovered occurrences and independent facts,

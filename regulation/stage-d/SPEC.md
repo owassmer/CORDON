@@ -159,6 +159,10 @@ history and unverified components, and rejects ambiguous or cyclic supersession.
 Every competing branch from a rendition's replacement ancestry must explicitly
 reach that rendition before it can be current. Extending one branch cannot settle
 the fork, and the observation's entry route cannot change this determination.
+Potential predecessors also constrain eligibility: an ambiguous replacement or
+unresolved amendment affecting that ancestry cannot disappear through descendants.
+Possible ancestry never becomes a resolved supersession link. Source-supported
+disambiguation or explicit whole-report reconciliation can remove the competition.
 The graph is a proposed source reading, not legal adjudication. Bundled-document
 identity and amendment scope require further source resolution when not recovered.
 An explicit source-review finding can request a fresh relationship reading even
