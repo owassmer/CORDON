@@ -186,3 +186,24 @@ What the population shows, read and not reconciled:
 - “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
   work that a particular row may require. They are not separate source families or
   reasons to expand the aperture.
+
+
+## Monitoring positional qualification
+
+The monitoring frame is established; its ground-position error is separate work on
+PR #14. The population is every located positive in the retained monitoring releases,
+independent of whether a measurement succeeds. Establish source-linked plant identity
+and an independent position or enclosure, then derive the greatest displacement from
+the published point, including reference, delineation, transformation and
+consuming-domain grid-to-ground distortion error. Empirical establishment is allowed;
+no publisher-only accuracy restriction applies.
+
+The reached original field/plant evidence and applicable imagery-control evidence
+must supply identity, event-time applicability and reference error before population
+imagery acquisition. The retained exploratory tiles do not yet establish these inputs.
+Live inspection of the 2023 regional image service and its metadata confirmed pixel
+size and frame but supplied no numerical accuracy. The inherited register probe's
+empty proximity results were a query artifact, not absent plants. A nearest-crown
+edge distance or a sample maximum cannot silently become the whole population's
+error bound. The revised method and its adjudicated plan are on PR #14; no numerical
+qualification or source-family completion is claimed by this method checkpoint.
