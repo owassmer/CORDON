@@ -111,15 +111,12 @@ def identity_issuer_match(first, second):
     return sorted((first_labels & second_labels) - {''})
 
 
-def _quote_present(quote, page):
-    """Accept contiguous native text or the same tokens in reading order.
+def _tokens(text):
+    """Whitespace tokens with punctuation removed; empty tokens dropped."""
+    return [t for t in (re.sub(r'[^0-9a-z]+', '', token) for token in norm(text).split()) if t]
 
-    PDF text layers can interleave adjacent table columns, so a visual heading can
-    be discontinuous in extracted text even when every token remains in order.
-    """
-    wanted, available = norm(quote).split(), norm(page).split()
-    if norm(quote) in norm(page):
-        return True
+
+def _in_order(wanted, available):
     position = 0
     for token in available:
         if position < len(wanted) and token == wanted[position]:
@@ -127,7 +124,55 @@ def _quote_present(quote, page):
     return bool(wanted) and position == len(wanted)
 
 
-def _validate_identity(identity, page_text):
+def _quote_present(quote, page):
+    """Accept contiguous native text, or the same tokens in reading order.
+
+    PDF text layers interleave adjacent table columns, split or glue punctuation
+    and insert spaces inside printed values, so a visual heading can be
+    discontinuous in extracted text even when every token remains in order.
+    """
+    wanted, available = norm(quote), norm(page)
+    if wanted in available:
+        return True
+    if _in_order(wanted.split(), available.split()) or _in_order(_tokens(quote), _tokens(page)):
+        return True
+    flat_wanted, flat_available = re.sub(r'[^0-9a-z]+', '', wanted), re.sub(r'[^0-9a-z]+', '', available)
+    return len(flat_wanted) >= 6 and flat_wanted in flat_available
+
+
+class EffectNotExplicit(ValueError):
+    """A proposed correction whose effect word the cited support does not print."""
+
+
+def _locator(evidence, page_text):
+    page = evidence['page']
+    if type(page) is not int or not 1 <= page <= len(page_text) or not evidence['text']:
+        raise ValueError('Invalid report relationship source locator')
+    return page
+
+
+def _confirm(evidence, page_text, image_bearing, what):
+    """Check one quotation against the cited page's text layer.
+
+    A text layer can confirm a quotation. It refutes one only on a page whose text
+    layer is the whole page: where the page also carries images or vector drawings,
+    printed text may live outside the layer, so an unconfirmed quotation is retained
+    from the page reading and recorded as unconfirmed. A scanned page has nothing to
+    check against. Returns the advisory, or None when confirmed or uncheckable.
+    """
+    page = _locator(evidence, page_text)
+    native = page_text[page - 1]
+    if not native.strip() or _quote_present(evidence['text'], native):
+        return None
+    if image_bearing is not None and image_bearing[page - 1]:
+        return (f'{what} quotation {evidence["text"][:80]!r} is not confirmed by the text layer of '
+                f'physical page {page}, which also carries image or vector content; retained from '
+                'the page reading, unconfirmed')
+    raise ValueError('Report relationship quote is not present in the cited native page')
+
+
+def _validate_identity(identity, page_text, image_bearing=None):
+    advisories = []
     for field in ('issuer', 'number', 'date', 'protocol'):
         value = identity.get(field)
         evidence = identity['component_support'][field]
@@ -140,7 +185,8 @@ def _validate_identity(identity, page_text):
     labels = identity['issuer_labels']
     if identity.get('issuer') and not any(norm(x['value']) in norm(identity['issuer'])
             or norm(identity['issuer']) in norm(x['value']) for x in labels):
-        raise ValueError('Primary issuer has no corresponding source-supported issuer label')
+        advisories.append(f'primary issuer {identity["issuer"]!r} is not among the issuer labels '
+                          f'{[x["value"] for x in labels]}; both are retained as printed')
     for label in labels:
         if not label['support'] or not any(norm(label['value']) in norm(item['text']) for item in label['support']):
             raise ValueError('Issuer label is not literal in its own support')
@@ -148,26 +194,29 @@ def _validate_identity(identity, page_text):
     for assertion in assertions:
         evidence_items = assertion['support'] if 'support' in assertion else [assertion]
         for evidence in evidence_items:
-            page = evidence['page']
-            if type(page) is not int or not 1 <= page <= len(page_text) or not evidence['text']:
-                raise ValueError('Invalid report relationship source locator')
-            native = page_text[page - 1]
-            if native.strip() and not _quote_present(evidence['text'], native):
-                raise ValueError('Report relationship quote is not present in the cited native page')
+            if note := _confirm(evidence, page_text, image_bearing, 'identity'):
+                advisories.append(note)
+    return advisories
 
 
-def validate(reading, page_text):
-    """Check locators and native quotations, not the truth of proposed interpretation."""
+def validate(reading, page_text, image_bearing=None):
+    """Check locators and native quotations, not the truth of proposed interpretation.
+
+    Raises on what a page refutes; returns the advisories its text layer could not settle.
+    """
     if set(reading) != {'identity', 'corrections', 'limitations'}:
         raise ValueError('Invalid report relationship fields')
-    identity = reading['identity']
-    _validate_identity(identity, page_text)
-    assertions = []
+    advisories = _validate_identity(reading['identity'], page_text, image_bearing)
     for correction in reading['corrections']:
         if correction['effect'] not in {'replaces', 'amends', 'annex'} or not correction['scope']:
             raise ValueError('Correction requires an effect and literal scope')
-        _validate_identity(correction['predecessor'], page_text)
-        if not any(norm(correction['scope']) in norm(x['text']) for x in correction['support']):
+        advisories += _validate_identity(correction['predecessor'], page_text, image_bearing)
+        if not correction['support']:
+            raise ValueError('Report identity/relationship requires source support')
+        pages = {_locator(item, page_text) for item in correction['support']}
+        # The operative scope must be printed: in the quoted support, or on a cited page.
+        if not (any(norm(correction['scope']) in norm(x['text']) for x in correction['support'])
+                or any(_quote_present(correction['scope'], page_text[page - 1]) for page in pages)):
             raise ValueError('Correction scope is not literal in its support')
         words = {
             'replaces': ('annulla e sostituisce', 'annulla e si sostituisce', 'cancels and replaces', 'replaces'),
@@ -175,30 +224,36 @@ def validate(reading, page_text):
             'annex': ('allegat', 'annex'),
         }[correction['effect']]
         if not any(word in norm(item['text']) for word in words for item in correction['support']):
-            raise ValueError('Correction effect is not explicit in its source support')
-        pages = {item['page'] for item in correction['support']}
+            raise EffectNotExplicit('Correction effect is not explicit in its source support')
         for heading in correction['changed_columns']:
-            if not any(_quote_present(heading, page_text[page - 1]) for page in pages):
+            notes = []
+            for page in pages:
+                try:
+                    notes.append(_confirm({'page': page, 'text': heading}, page_text, image_bearing, 'changed column'))
+                except ValueError:
+                    pass
+            if not notes:
                 raise ValueError('Changed column is not printed on a cited support page')
-        assertions.append(correction)
-    for assertion in assertions:
-        if not assertion['support']:
-            raise ValueError('Report identity/relationship requires source support')
-        for evidence in assertion['support']:
-            page = evidence['page']
-            if type(page) is not int or not 1 <= page <= len(page_text) or not evidence['text']:
-                raise ValueError('Invalid report relationship source locator')
-            native = page_text[page - 1]
-            if native.strip() and not _quote_present(evidence['text'], native):
-                raise ValueError('Report relationship quote is not present in the cited native page')
+            if all(notes):
+                advisories.append(notes[0])
+        for evidence in correction['support']:
+            if note := _confirm(evidence, page_text, image_bearing, 'correction'):
+                advisories.append(note)
+    return advisories
 
 
-def validated_components(reading, page_text):
-    """Preserve separately supported components when another quotation fails."""
-    failures = []
+def validated_components(reading, page_text, image_bearing=None):
+    """Preserve separately supported components when another quotation fails.
+
+    A cross-reference proposed as an annex without annex wording is kept as a
+    reference: it is a printed relationship to another report, not a correction,
+    and it does not make the correction inventory incomplete. A replacement or
+    amendment without its wording is rejected, because that effect is consequential.
+    """
+    failures, advisories, references = [], [], []
     identity = reading['identity']
     try:
-        validate(dict(identity=identity, corrections=[], limitations=[]), page_text)
+        advisories += validate(dict(identity=identity, corrections=[], limitations=[]), page_text, image_bearing)
     except ValueError as error:
         failures.append('identity reading rejected: ' + str(error))
         empty = {'issuer': [], 'number': [], 'date': [], 'protocol': []}
@@ -207,13 +262,19 @@ def validated_components(reading, page_text):
     corrections = []
     for index, correction in enumerate(reading['corrections'], 1):
         try:
-            validate(dict(identity=identity, corrections=[correction], limitations=[]), page_text)
+            advisories += validate(dict(identity=identity, corrections=[correction], limitations=[]),
+                                   page_text, image_bearing)
+        except EffectNotExplicit as error:
+            if correction['effect'] == 'annex':
+                references.append(dict(correction, cause=f'{error}; retained as a cross-reference, not a correction'))
+                continue
+            failures.append(f'correction {index} reading rejected: {error}; inventory remains incomplete')
         except ValueError as error:
             failures.append(f'correction {index} reading rejected: {error}; inventory remains incomplete')
         else:
             corrections.append(correction)
-    return dict(identity=identity, corrections=corrections,
-                limitations=reading['limitations'] + failures), failures
+    return dict(identity=identity, corrections=corrections, references=references,
+                limitations=reading['limitations'] + list(dict.fromkeys(advisories)) + failures), failures
 
 
 def dated(value):

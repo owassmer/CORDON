@@ -15,7 +15,8 @@ from uuid import uuid4
 
 REPOSITORY = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(REPOSITORY / 'regulation/stage-d'), str(REPOSITORY / 'regulation/stage-c')]
-from cordon_d.report_extraction import Budget, BudgetStopped, ExtractionConfig, extract_report, extract_relationships, version
+from cordon_d.report_extraction import (Budget, BudgetStopped, ExtractionConfig, NoRetainedResponse,
+                                        extract_report, extract_relationships, version)
 from cordon_d import report_relations
 from cordon_d.reports import Report, reports
 from cordon_d.findings import findings, report_rows, confirmation_inputs
@@ -34,46 +35,71 @@ def encoded(value):
     raise TypeError(type(value).__name__)
 
 
-def extract_job(digest, store, config, ledger, budget_options, revision, relationships=False):
+def extract_job(digest, store, config, ledger, budget_options, revision, relationships=False, execute=True):
     try:
         if not relationships and version(config) != revision:
             raise RuntimeError('Reader implementation changed before worker startup; no paid request dispatched')
         reader = extract_relationships if relationships else extract_report
-        budget = Budget(ledger, **budget_options) if config.provider == 'api' else None
-        reader(digest, store, config=config, budget=budget)
+        budget = Budget(ledger, **budget_options) if config.provider == 'api' and execute else None
+        reader(digest, store, config=config, budget=budget, execute=execute)
         partial = relationships and not report_relations.load(store, digest, exact=True).get('reading_complete', False)
         return {'document': digest, 'status': 'partial relationship reading' if partial else 'assembled'}
+    except NoRetainedResponse as error:
+        return {'document': digest, 'status': 'unread', 'cause': str(error)}
     except Exception as error:
         return {'document': digest, 'status': 'stopped', 'cause': str(error),
                 'budget_stopped': isinstance(error, BudgetStopped)}
 
 
-def process_parallel(pending, *, workers, store, config, ledger, options, revision, relationships):
-    """Keep at most one job per worker queued; stop dispatch after the first defect."""
-    failures, source = [], iter(pending)
+CONSECUTIVE_STOPS = 3
+
+
+def process_parallel(pending, *, workers, store, config, ledger, options, revision, relationships, execute=True):
+    """Keep at most one job per worker queued.
+
+    A document that stops is recorded and the next one is dispatched: one source's
+    defect does not hold the population. Three stops in a row look like the run's
+    own failure -- a provider limit, a full disk, a changed implementation -- so
+    dispatch halts and the summary says so. The exit status distinguishes the two.
+    """
+    failures, source, consecutive, halted = [], iter(pending), 0, False
+    counts = Counter()
+
+    def submit(pool, digest):
+        return pool.submit(extract_job, digest, store, config, ledger, options, revision, relationships, execute)
+
     with ProcessPoolExecutor(max_workers=workers) as pool:
-        jobs = {}
-        for digest in islice(source, workers):
-            jobs[pool.submit(extract_job, digest, store, config, ledger, options,
-                             revision, relationships)] = digest
+        jobs = {submit(pool, digest): digest for digest in islice(source, workers)}
         completed = 0
         while jobs:
             job = next(as_completed(jobs))
             jobs.pop(job)
             result = job.result()
             completed += 1
+            counts[result['status']] += 1
             print(json.dumps(dict(result, progress=[completed, len(pending)])), flush=True)
             if result['status'] == 'stopped':
                 failures.append(result)
-            if not failures:
+                consecutive += 1
+            else:
+                consecutive = 0
+            if consecutive >= CONSECUTIVE_STOPS:
+                halted = True
+            if not halted:
                 try:
                     digest = next(source)
                 except StopIteration:
                     pass
                 else:
-                    jobs[pool.submit(extract_job, digest, store, config, ledger, options,
-                                     revision, relationships)] = digest
-    return failures
+                    jobs[submit(pool, digest)] = digest
+    print(json.dumps({'summary': dict(counts), 'pending_at_start': len(pending),
+                      'halted_after_consecutive_stops': halted,
+                      'stopped_documents': [{'document': f['document'], 'cause': f['cause']} for f in failures]}),
+          flush=True)
+    if halted:
+        raise SystemExit(2)
+    if failures:
+        raise SystemExit(1)
 
 
 def main():
@@ -98,8 +124,8 @@ def main():
     parser.add_argument('--input-usd-per-million', type=float)
     parser.add_argument('--output-usd-per-million', type=float)
     parser.add_argument('--ledger', type=Path)
-    parser.add_argument('--workers', type=int, choices=range(1, 4), default=1,
-                        help='Independent PDF processes sharing one locked spending ledger (1-3)')
+    parser.add_argument('--workers', type=int, choices=range(1, 7), default=1,
+                        help='Independent PDF processes; API execution shares one locked spending ledger (1-6)')
     parser.add_argument('--retain-interrupted-reservation', metavar='REQUEST_SHA256',
                         help='With execution and its ledger locked, retain an interrupted request at its full reserved cost')
     parser.add_argument('--retry-interrupted-request', action='append', default=[], metavar='REQUEST_SHA256',
@@ -138,6 +164,7 @@ def main():
                       'retained_partial_relationship_readings': sum(1 for d in selected if args.relationships
                           and (value := report_relations.load(store, d, exact=True)) and not value['reading_complete']),
                       'documents': len(digests), 'selected': len(selected), 'pending': len(pending),
+                      'workers': args.workers,
                       'execution_provider': config.provider if args.execute else None,
                       'metered_model_execution': bool(args.execute and config.provider == 'api'),
                       'subscription_execution': bool(args.execute and config.provider == 'subscription')}), flush=True)
@@ -161,15 +188,8 @@ def main():
         if args.provider == 'subscription':
             if any((args.max_cost_usd, args.input_usd_per_million, args.output_usd_per_million, args.ledger)):
                 parser.error('Subscription execution does not use API prices or the dollar ledger')
-            options = {}
-            if args.workers == 1:
-                process(None)
-            else:
-                failures = process_parallel(pending, workers=args.workers, store=store,
-                    config=config, ledger=None, options=options, revision=revision,
-                    relationships=args.relationships)
-                if failures:
-                    raise SystemExit(1)
+            process_parallel(pending, workers=args.workers, store=store, config=config, ledger=None,
+                             options={}, revision=revision, relationships=args.relationships)
         else:
             args.ledger.parent.mkdir(parents=True, exist_ok=True)
             with args.ledger.with_suffix(args.ledger.suffix + '.lock').open('a') as lock:
@@ -186,13 +206,13 @@ def main():
                 if args.workers == 1:
                     process(budget)
                 else:
-                    failures = process_parallel(pending, workers=args.workers, store=store,
+                    process_parallel(pending, workers=args.workers, store=store,
                         config=config, ledger=args.ledger, options=options, revision=revision,
                         relationships=args.relationships)
-                    if failures:
-                        raise SystemExit(1)
     elif args.rebuild_cache:
-        process(None)
+        # Reassemble from retained responses only; a document with none is reported unread.
+        process_parallel(pending, workers=args.workers, store=store, config=config, ledger=None,
+                         options={}, revision=revision, relationships=args.relationships, execute=False)
     if args.confirmation_request and not (args.join_output or args.join_summary):
         parser.error('--confirmation-request requires --join-output or --join-summary')
     if args.join_output or args.join_summary:

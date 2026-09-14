@@ -460,5 +460,21 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(materialize('hash', 'v', 1, [item]).complete_pages, frozenset())
 
 
+class RetainedResponses(unittest.TestCase):
+    def test_a_failed_subscription_envelope_is_set_aside_and_never_replayed_as_a_reading(self):
+        from cordon_d.report_extraction import _retained_reading
+        with TemporaryDirectory() as temporary:
+            raw = Path(temporary) / 'responses' / 'abc.json'
+            raw.parent.mkdir()
+            raw.write_text(json.dumps({'provider': 'claude-code-subscription', 'request_sha256': 'abc',
+                                       'response': {'is_error': True, 'result': 'limit reached'}}))
+            self.assertIsNone(_retained_reading(raw, 'claude-sonnet-5'))
+            self.assertFalse(raw.exists())
+            self.assertEqual(len(list((raw.parent / 'failed').glob('abc-*.json'))), 1)
+            raw.write_text(json.dumps({'provider': 'claude-code-subscription', 'request_sha256': 'abc',
+                                       'response': {'structured_output': {'pages': []}}}))
+            self.assertEqual(_retained_reading(raw, 'claude-sonnet-5'), {'pages': []})
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -2,7 +2,8 @@
 from types import SimpleNamespace
 import unittest
 
-from cordon_d.report_relations import correspondences, validate, project_identity, current_limitation
+from cordon_d.report_relations import (correspondences, validate, validated_components, project_identity,
+                                       current_limitation)
 
 
 def reading(number='31/2024', date='01/03/2024', *, issuer='Laboratory A', previous=None, effect='replaces'):
@@ -104,6 +105,42 @@ class ReportRelationships(unittest.TestCase):
         validate(value, ['Laboratory A 31/2024 01/03/2024 Report identity'])
         with self.assertRaisesRegex(ValueError, 'quote'):
             validate(value, ['A different source'])
+
+    def test_text_layer_confirms_but_cannot_refute_on_an_image_bearing_page(self):
+        value = {key: value for key, value in reading().relations.items() if key != 'reading_complete'}
+        # Split values, glued punctuation and interleaved columns in a text layer still confirm.
+        self.assertEqual(validate(value, ['Laboratory - A 31 / 2024 01/03/2024 Report identity']), [])
+        # Unconfirmed on a page whose text layer is the whole page: refuted.
+        with self.assertRaisesRegex(ValueError, 'quote'):
+            validate(value, ['A different source'], [False])
+        # Unconfirmed on a page that also carries an image: retained, and said so.
+        notes = validate(value, ['A different source'], [True])
+        self.assertTrue(notes)
+        self.assertTrue(all('not confirmed by the text layer' in note for note in notes))
+
+    def test_issuer_outside_its_labels_is_recorded_not_rejected(self):
+        value = {key: value for key, value in reading().relations.items() if key != 'reading_complete'}
+        value['identity']['issuer_labels'] = [{'value': 'Lab A', 'support': [{'page': 1, 'text': 'Lab A'}]}]
+        notes = validate(value, ['Laboratory A 31/2024 01/03/2024 Report identity Lab A'])
+        self.assertTrue(any('not among the issuer labels' in note for note in notes))
+
+    def test_reference_without_annex_wording_is_a_reference_not_a_rejected_correction(self):
+        old = reading()
+        new = reading(date='04/03/2024', previous=old.relations['identity'], effect='annex')
+        new.relations['corrections'][0].update(scope='Same data as the preceding report', changed_columns=[],
+            support=[{'page': 1, 'text': 'Same data as the preceding report'}])
+        value = {key: value for key, value in new.relations.items() if key != 'reading_complete'}
+        page = 'Laboratory A 31/2024 01/03/2024 04/03/2024 Report identity Same data as the preceding report'
+        result, failures = validated_components(value, [page])
+        self.assertEqual(failures, [])
+        self.assertEqual(result['corrections'], [])
+        self.assertEqual(len(result['references']), 1)
+        self.assertIn('cross-reference', result['references'][0]['cause'])
+        # The same wording claimed as an amendment is consequential, and is rejected.
+        value['corrections'][0]['effect'] = 'amends'
+        result, failures = validated_components(value, [page])
+        self.assertEqual(result['corrections'], [])
+        self.assertTrue(failures and 'not explicit' in failures[0])
 
 
 if __name__ == '__main__':

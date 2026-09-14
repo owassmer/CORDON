@@ -29,8 +29,12 @@ class ExtractionConfig:
     target_pages: int = 2
     dpi: int = 180
     max_tokens: int = 18000
-    timeout_seconds: int = 240
+    timeout_seconds: int = 600
     deskew: bool = True
+
+
+class NoRetainedResponse(RuntimeError):
+    """A block or document has no saved reading and execution was not requested."""
 
 
 PROMPT = '''Read every target PDF page as source evidence. Context pages supply headings
@@ -418,27 +422,52 @@ def _subscription_call(*, prompt, schema, digest, source, config, request_id, ra
             '--tools', 'Read', '--allowedTools', 'Read', '--permission-mode', 'dontAsk',
             '--add-dir', directory, '--no-session-persistence', '--output-format', 'json',
             '--json-schema', json.dumps(schema, sort_keys=True), instruction]
-        completed = subprocess.run(command, capture_output=True, text=True,
-                                   timeout=config.timeout_seconds)
+        try:
+            completed = subprocess.run(command, capture_output=True, text=True,
+                                       timeout=config.timeout_seconds)
+        except subprocess.TimeoutExpired as error:
+            raise RuntimeError(f'Claude subscription call exceeded {config.timeout_seconds} s; '
+                               'no reading retained') from error
+    captured = datetime.now(timezone.utc)
     try:
         envelope = json.loads(completed.stdout)
     except json.JSONDecodeError as error:
+        _record_failure(raw_path, request_id, captured, {'stdout': completed.stdout[-2000:],
+                        'stderr': completed.stderr[-2000:], 'returncode': completed.returncode})
         raise RuntimeError('Claude subscription returned no JSON envelope: ' + completed.stderr.strip()) from error
-    write_json(raw_path, {'provider': 'claude-code-subscription', 'request_sha256': request_id,
-                         'captured_at': datetime.now(timezone.utc).isoformat(),
-                         'response': envelope})
     if completed.returncode or envelope.get('is_error') or not isinstance(envelope.get('structured_output'), dict):
+        # A failed call is evidence about the run, never a retained reading: it is kept
+        # beside the responses, under a name the resume path does not read, so the next
+        # run asks the source again instead of replaying the failure.
+        _record_failure(raw_path, request_id, captured, {'response': envelope,
+                        'stderr': completed.stderr[-2000:], 'returncode': completed.returncode})
         reason = envelope.get('errors') or envelope.get('result') or completed.stderr.strip()
         raise RuntimeError('Claude subscription reading incomplete: ' + str(reason))
+    write_json(raw_path, {'provider': 'claude-code-subscription', 'request_sha256': request_id,
+                         'captured_at': captured.isoformat(), 'response': envelope})
     return envelope['structured_output']
 
 
+def _record_failure(raw_path, request_id, captured, detail):
+    stamp = captured.strftime('%Y%m%dT%H%M%SZ')
+    write_json(raw_path.parent / 'failed' / f'{request_id}-{stamp}.json',
+               dict(provider='claude-code-subscription', request_sha256=request_id,
+                    captured_at=captured.isoformat(), **detail))
+
+
 def _retained_reading(raw_path, model):
+    """The saved reading for a request, or None when what is saved is not a reading."""
     payload = json.loads(raw_path.read_text())
     if payload.get('provider') == 'claude-code-subscription':
         reading = payload.get('response', {}).get('structured_output')
         if not isinstance(reading, dict):
-            raise ValueError('Retained subscription response has no structured reading')
+            # An error envelope saved by an earlier implementation. Set it aside as
+            # failure evidence so it cannot block this request from being asked again.
+            _record_failure(raw_path, payload.get('request_sha256', raw_path.stem),
+                            datetime.now(timezone.utc), {'response': payload.get('response'),
+                            'set_aside_from': raw_path.name})
+            raw_path.unlink()
+            return None
         return reading
     return response_reading(payload['response'], model)
 
@@ -452,7 +481,7 @@ def target_reading(reading, targets, context):
     return dict(reading, pages=[p for p in reading['pages'] if p['page'] in targets])
 
 
-def extract_relationships(digest, store, *, config, budget):
+def extract_relationships(digest, store, *, config, budget, execute=True):
     """Read document identities and operative references without retranscribing tables."""
     import pymupdf
     from . import report_relations as relations
@@ -460,11 +489,14 @@ def extract_relationships(digest, store, *, config, budget):
     if ((existing := relations.load(store, digest, exact=True))
             and existing.get('reading_complete') is True):
         return target.parent.parent / existing['reading_version'] / target.name
-    content, page_text = [], []
+    content, page_text, image_bearing = [], [], []
     with pymupdf.open(blob_path(store, digest)) as document:
         for number, page in enumerate(document, 1):
             native = page.get_text(sort=True)
             page_text.append(native)
+            # A text layer can confirm a quotation; on a page that also carries images
+            # or vector drawings it cannot refute one, because printed text can live there.
+            image_bearing.append(bool(page.get_images()) or bool(page.get_drawings()))
             content.append({'type': 'text', 'text': f'PHYSICAL PAGE {number}\n' + native})
             png = page.get_pixmap(dpi=config.dpi).tobytes('png')
             content.append({'type': 'image', 'source': {'type': 'base64',
@@ -492,12 +524,13 @@ def extract_relationships(digest, store, *, config, budget):
             target = target.parent.parent / reading_version / target.name
     complete = True
     try:
-        if raw.exists():
-            reading = _retained_reading(raw, config.model)
-        elif config.provider == 'subscription':
+        reading = _retained_reading(raw, config.model) if raw.exists() else None
+        if reading is None and not execute:
+            raise NoRetainedResponse('No retained relationship reading for this document; explicit execution is required')
+        if reading is None and config.provider == 'subscription':
             reading = _subscription_call(prompt=subscription_prompt, schema=relations.schema(), digest=digest,
                 source=blob_path(store, digest), config=config, request_id=request_id, raw_path=raw)
-        else:
+        elif reading is None:
             reading = _call(request, config=config, budget=budget, request_id=request_id, raw_path=raw)
     except ValueError:
         if not raw.exists():
@@ -517,7 +550,7 @@ def extract_relationships(digest, store, *, config, budget):
         reading = {'identity': identity, 'corrections': [], 'limitations': [
             f"Generation stopped ({body['stop_reason']}); only its complete identity object recovered; correction inventory unread"]}
         complete = False
-    reading, rejected = relations.validated_components(reading, page_text)
+    reading, rejected = relations.validated_components(reading, page_text, image_bearing)
     if rejected and config.provider == 'subscription':
         repair_prompt = (subscription_prompt + '\n\nRead the complete source afresh. The prior proposal failed '
             'local source checks for these reasons: ' + '; '.join(rejected) +
@@ -529,12 +562,14 @@ def extract_relationships(digest, store, *, config, budget):
             'schema': relations.schema()}
         repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
         repair_raw = store / 'derived/reports/responses' / (repair_id + '.json')
-        candidate = (_retained_reading(repair_raw, repair_config.model) if repair_raw.exists() else
-            _subscription_call(prompt=repair_prompt, schema=relations.schema(), digest=digest,
+        candidate = _retained_reading(repair_raw, repair_config.model) if repair_raw.exists() else None
+        if candidate is None and execute:
+            candidate = _subscription_call(prompt=repair_prompt, schema=relations.schema(), digest=digest,
                 source=blob_path(store, digest), config=repair_config,
-                request_id=repair_id, raw_path=repair_raw))
-        reading, rejected = relations.validated_components(candidate, page_text)
-        request_id = repair_id
+                request_id=repair_id, raw_path=repair_raw)
+        if candidate is not None:
+            reading, rejected = relations.validated_components(candidate, page_text, image_bearing)
+            request_id = repair_id
     complete = complete and not rejected
     write_json(target, {'source_sha256': digest, 'reading_version': reading_version,
         'request_sha256': request_id, 'model': config.model, 'effort': config.effort,
@@ -545,7 +580,7 @@ def extract_relationships(digest, store, *, config, budget):
     return target
 
 
-def extract_report(digest, store, *, config, budget):
+def extract_report(digest, store, *, config, budget, execute=True):
     import pymupdf
     revision = version(config)
     directory = store / 'derived/reports' / revision / digest
@@ -596,11 +631,13 @@ def extract_report(digest, store, *, config, budget):
                     raw_path = store / 'derived/reports/responses' / f'{request_id}.json'
                     if raw_path.exists():
                         reading = _retained_reading(raw_path, config.model)
-                    elif config.provider == 'subscription':
+                    if reading is None and not execute:
+                        raise NoRetainedResponse('No retained response for this block; explicit execution is required')
+                    if reading is None and config.provider == 'subscription':
                         reading = _subscription_call(prompt=subscription_prompt, schema=output_schema(),
                             digest=digest, source=blob_path(store, digest), config=config,
                             request_id=request_id, raw_path=raw_path)
-                    else:
+                    elif reading is None:
                         reading = _call(request, config=config, budget=budget,
                                         request_id=request_id, raw_path=raw_path)
                     reading = target_reading(reading, targets, supplied_context)
@@ -628,14 +665,15 @@ def extract_report(digest, store, *, config, budget):
                     raw_path = store / 'derived/reports/responses' / f'{repair_id}.json'
                     prior_reading = reading
                     try:
-                        if raw_path.exists():
-                            reading = _retained_reading(raw_path, config.model)
-                        elif config.provider == 'subscription':
+                        reading = _retained_reading(raw_path, config.model) if raw_path.exists() else None
+                        if reading is None and not execute:
+                            raise NoRetainedResponse('No retained response for this repair reread; explicit execution is required')
+                        if reading is None and config.provider == 'subscription':
                             reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
                                 digest=digest, source=blob_path(store, digest),
                                 config=replace(config, effort=effort), request_id=repair_id,
                                 raw_path=raw_path)
-                        else:
+                        elif reading is None:
                             reading = _call(repair, config=config, budget=budget,
                                             request_id=repair_id, raw_path=raw_path)
                         reading = target_reading(reading, targets, supplied_context)
