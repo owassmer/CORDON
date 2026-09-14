@@ -1,0 +1,29 @@
+{
+  "model": "weecology/deepforest-tree",
+  "revision": "cc21436bc5d572dde8ff5f93c1e71a32f563cace",
+  "implementation_revision": "be14411e35720bb0b3a1e8d2dca09666e0343d3e",
+  "license": "MIT",
+  "captured_at": "2026-09-14T22:05:16.477773+00:00",
+  "files": [
+    {
+      "name": "model.safetensors",
+      "url": "https://huggingface.co/weecology/deepforest-tree/resolve/cc21436bc5d572dde8ff5f93c1e71a32f563cace/model.safetensors",
+      "sha256": "d37a7af0b5ba2754282a80d41b4c7b66e8c7149234df5bf3f41bdaf57d329fc8"
+    },
+    {
+      "name": "config.json",
+      "url": "https://huggingface.co/weecology/deepforest-tree/resolve/cc21436bc5d572dde8ff5f93c1e71a32f563cace/config.json",
+      "sha256": "521e0149f0b060237c6994a69bffdff53ce5deb3beb854dad2752a3f8dd49bc4"
+    },
+    {
+      "name": "README.md",
+      "url": "https://huggingface.co/weecology/deepforest-tree/resolve/cc21436bc5d572dde8ff5f93c1e71a32f563cace/README.md",
+      "sha256": "4b56889b14f19c883e938aa28dca0474afdf43c0219b7ea5582cadbe0c0ef801"
+    },
+    {
+      "name": "reader-config.yaml",
+      "url": "https://raw.githubusercontent.com/weecology/DeepForest/be14411e35720bb0b3a1e8d2dca09666e0343d3e/src/deepforest/conf/config.yaml",
+      "sha256": "7ffca6f8b2b834dc3e623bd489a7e7e0efe9f0f54824994ca4043402e9d96f86"
+    }
+  ]
+}

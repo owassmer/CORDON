@@ -10,8 +10,8 @@ established; no other row is.
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
 | What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The repaired reader has 209 documents with completed page readings and 391 completed relationship readings; the remaining population must be read and joined through the same path. Subscription vision resumes after 15:20 America/New_York on 14 September 2026. Current consumer results and consequential source work below. |
 | Which legally adopted area contained the location on the event date | The adopting regional act and its cadastral annex; SIT demarcated-area geometry | One adopted area version, with its cadastral statements and map geometry | In progress. `cordon_d.areas.versions` binds the ordinary annex reader to A's versions; `membership_evidence` supplies supported cadastral membership. Complete the retained page readings and source checks, establish the adopted map geometry required by metric consumers. Population and remaining work below. |
-| Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
-| Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
+| Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | The observed-subject connection consumes the whole established monitoring stream through `cordon_d.subjects` and the report reader, with EPPO taxonomy and event-time Annex II qualification (`Observed subjects` below). It preserves observations without inventing plants. The public repeated-tree lead has been inspected, but the first scene matcher was falsified: containment and a resampling note did not establish observation-to-subject membership. Its replacement must produce source readings and reconcile taxon, source grain and C population/time scope, including observations without notes; this remains an open implementation requirement, not an unavailable-public-evidence claim. The required surrounding plant and survey-surface populations remain open; never substitute positives for all plants. |
+| Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel geometry population and preserve the source identifier; do not infer ownership from geometry. `subjects.parcel_references` reads the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. The retained ISTAT municipality table resolves cadastral codes; conflicting municipality or compound references remain conflicts. `subjects.cadastral_memberships` composes the observation’s published parcel location with the adopted-area consumer. Whole-parcel inclusion can establish that published location’s membership; a named partial parcel establishes intersection only. This does not locate a plant within an intersected portion, establish its later location, or supply ownership. |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader. DDS 52/2024, 74/2024 and 138/2024 are retained and independently read-back verified in R2 as report-identity dependencies. The native annex reader supplies 183 identified plant/report associations and seven unresolved page-boundary fragments, not whole-act semantics. DDS 74/2024 links old code 1673519 to a different host/place from the laboratory row; DDS 138/2024 adopts corrected 1674070 at the report location. Any correction or withdrawal of the earlier administrative target remains unestablished and must be investigated by this consumer; laboratory replacement alone cannot supply it. |
 | Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. The monitoring stream publishes a `SCELTA_PROPRIETARIO` column on 8,762 records and carries no value in any of them, so it supplies no owner election; the observation row records that. |
 | Who has the consequential relationship to the affected land | The determination's incorporated annex naming addressees by comune, foglio and particella; later acts that correct listed owners; the Osservatorio's matter and transmitted cadastral and owner data; a competent public-asset register for public land | One addressee position in one act version, or one stated ownership, occupation, management or other legally relevant relationship | The annex establishes the position the act published for each parcel, not that the named person held the land. An effective correction act replaces the listed position for the parcels it names; its effect against the corrected recipient follows the notice route above. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do. The monitoring stream publishes `CUAA` and `AZIENDA` columns on 86 records and carries a sentinel in every one, so it supplies no holder identity; the observation row records that. |
@@ -441,3 +441,94 @@ version remains a specific correspondence question; use a concrete existing
 package or publisher lead if it can resolve that version. Do not substitute a
 later boundary or restart an exhaustive search. Continue retained cadastral
 membership and current-map correspondence independently of that recovery.
+
+## Observed subjects
+
+`cordon_d.subjects.observed_subjects` preserves every observation from
+`monitoring.distinct_observations`, including negative and other published results.
+Its host evidence and `finding_host`'s report-host evidence retain separate sources.
+`subject_with_finding` can refine that observation’s host from its own unambiguous
+report, preserving genuine conflicts. Common names cannot refine an explicit
+scientific genus to a species; a supported scientific name can.
+`species_category_facts` supplies C's Article 7(c), (d) and residual (e) inputs.
+Elsewhere-infected species require a qualified local finding in the relevant
+adopted area, by the event date; one negative sample cannot close that inventory.
+Official finding qualification remains the report/finding owner's input.
+An unresolved plant identity does not erase a separately readable species or
+published parcel location. Neither these observations nor the reports enumerate
+the surrounding plants required by the distance and survey calculations.
+
+`cordon_d.hosts` reads retained EPPO Global Database v2 JSON name lookups, complete
+names, ranks and ancestry. `corpus/sources/host-names/api.json` owns their captures;
+`specification.json` names the retained official API specification. EPPO supplies
+taxonomy, not infection or legal host status. Synonyms use EPPO codes. A genus
+never becomes its only acquired species. Common-name resolution considers complete
+name-lookup responses and the monitoring publisher's explicit scientific/common
+pairs; an unacquired candidate prevents a unique identity. A conflicting or
+unknown name remains a limitation of that identity. The API key is local and
+is never retained in source records. Attribution: EPPO Global Database, downloaded
+14 September 2026. No endorsement is implied.
+
+Specified-host membership follows the retained EU 2020/1201 consolidated Annex II
+version at the event date and its subspecies section, with A's separate non-seed
+plant-for-planting qualification. Current taxonomy does not replace historical
+legal scope. The ordinary reader does not extend a species-specific listing to
+an unresolved genus. Relevant local infection evidence comes from the report and
+area consumers, never from EPPO's pest-host coverage.
+
+`subject_references` preserves literal tag, explicit prior-sample and resampling
+candidates together. It does not establish identity. `InspectionUnitReading`
+accepts source-established identifier schemes; `SubjectCorrespondence` also
+accepts sufficient direct same/different-subject evidence without a registry.
+The rejected scene matcher and supplied-scene loader have been removed. The
+replacement must produce image readings from source bytes, retrieve candidates
+without treating containment as membership, and reconcile taxon, source grain
+and the required C population/time scope. Resampling notes are corroboration,
+not a membership prerequisite. This is current implementation work; the earlier
+successful pair test did not establish the general reader's sufficiency.
+The pinned local RGB detector now produces versioned crown candidates from
+retained image bytes; these do not enter C as inspection units. A deterministic
+selection from 2020, 2021 and 2023 observations, made before reading results,
+hosts or notes, yielded nine published negative samples and three other
+observations. Direct reading of their original SIT records includes wild
+asparagus, Cistus, laurel, olives and an assessment without a recorded species.
+All lack resampling notes in the selected publication. The corresponding 24
+public source frames are retained. A tree detector cannot establish that an
+understory observation belongs to its overlying tree; taxonomic compatibility
+alone also cannot establish membership. These are local identity limits, not a
+reason to discard observations or require authenticated access.
+
+The official SIT 2019, 2022 and 2023 image-service metadata and source frames are retained
+in `corpus/sources/subject-imagery/records.json`. Independent source inspection
+supports the olive observations of 28 July and 29 September 2023 at the same
+distinguishable crown: the later field note explicitly states that the plant was
+resampled, and the dated scenes corroborate the correspondence. This is an
+inference from the composed public evidence, not a registry identity. The samples
+1584989 and 1617087 are verification examples, never production rules. The source
+workbook and SIT records agree on their dates and published negative/positive
+results. Image editions establish years, not exact flight days; 0.2 m native pixel
+size is not an accuracy bound. No authenticated ARIF access is required for this
+connection, and no #14 positional bound is manufactured.
+
+`inspection_units` retains both formal and direct evidence, including conflicts.
+`observed_subject_survey` requires an explicit period and supplies C with independently established units within the operative
+[start, end) observation period. Both observations and results survive: the
+September result cannot enter a July-only period. Result/confirmation, method,
+independence and complete survey-population qualification remain separate inputs;
+published monitoring labels alone do not certify them. The independently read repeated-tree example has not yet been recovered by a
+generalized source-to-identity producer. It does not establish the surrounding plant population or a successful negative
+survey. Other observation identities remain unknown where their direct evidence
+has not been resolved, without losing their useful observation results.
+
+The DGR 1491/2020 original in `corpus/sources/subject-references/records.json`
+defines an approval/application-based unique-code scheme on pages 3 and 5. It
+does not establish municipality-plus-monitoring-tag uniqueness. The examined
+explicit prior-sample numbers have missing targets or conflicting locations;
+they do not exhaust affirmative resampling notes in the whole stream. The public
+note scan recovers six occurrences, including two affirmative “pianta ricampionata”
+notes. The other note's 2019/2022 scene and all published observations in its
+vicinity were inspected: the depicted tree arrangement changes, and the earlier
+published observation does not identify the resampled tree. That relationship
+remains unresolved; no completed removal is inferred from an absent later crown. No protected status or exercised
+retention exception follows from these tags, and no broader protected-register
+investigation is part of this unit.

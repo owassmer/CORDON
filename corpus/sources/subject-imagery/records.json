@@ -1,0 +1,468 @@
+[
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer?f=pjson",
+    "sha256": "0da5f7fa3b8fac6ebba02207baf29ee6b4adcbd885f619fb34debdce2dd6f1e4",
+    "captured_at": "2026-09-14T21:12:42.892904+00:00",
+    "role": "imagery-service-metadata"
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer?f=pjson",
+    "sha256": "9fde202238b89475e2f9b9fb1949ce9ed21dc01ac39ffd4094508bf10deb6f41",
+    "captured_at": "2026-09-14T21:12:43.427380+00:00",
+    "role": "imagery-service-metadata"
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=691610%2C4534800%2C691690%2C4534880&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "f54b0dbe9e43c20ed6a11607af99eb4a309c91eb33faffd3d3ab2363fbb7d7d5",
+    "captured_at": "2026-09-14T21:18:38.081125+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      691610,
+      4534800,
+      691690,
+      4534880
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer/exportImage?bbox=691610%2C4534800%2C691690%2C4534880&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "f8cd2054704066b134a92eedfc1bbd5693049301b144c6b64e1b3463ba21931c",
+    "captured_at": "2026-09-14T21:18:39.526524+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2023,
+    "extent": [
+      691610,
+      4534800,
+      691690,
+      4534880
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=687454%2C4496175%2C687534%2C4496255&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "a99853a8105d2a32c6986c413d6253af34055c9ecacec12683b612702a6e2678",
+    "captured_at": "2026-09-14T21:39:31.772262+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      687454,
+      4496175,
+      687534,
+      4496255
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=687454%2C4496175%2C687534%2C4496255&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "ffe9b5a615d33c8f392c3657ec2e681af5552dbcbad092b08235f33c2e4dc588",
+    "captured_at": "2026-09-14T21:39:33.080806+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      687454,
+      4496175,
+      687534,
+      4496255
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer?f=pjson",
+    "sha256": "4fd2ae89cad8e05c2f7e0cb111fe7866fb9a4dd51fd05aa121640fb33d410a7b",
+    "captured_at": "2026-09-14T21:39:53.038503+00:00",
+    "role": "imagery-service-metadata"
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=672360%2C4486280%2C672520%2C4486440&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "0126ba30abf72ef30acf08c38169d87b5a543c8a0cc86c60ad4025a60749cca0",
+    "captured_at": "2026-09-14T22:03:59.249369+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      672360,
+      4486280,
+      672520,
+      4486440
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=672360%2C4486280%2C672520%2C4486440&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "d12642df9879d7a69d140a2e11d3a6a2cd67425e02abcf0a9ce05789ab1902fd",
+    "captured_at": "2026-09-14T22:04:12.000279+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      672360,
+      4486280,
+      672520,
+      4486440
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=705400%2C4495240%2C705560%2C4495400&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "4282f938260493c901088eb40020557f7ce5eecb60eb31b98dc9f81ed485ec0c",
+    "captured_at": "2026-09-14T22:04:45.878616+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      705400,
+      4495240,
+      705560,
+      4495400
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=705400%2C4495240%2C705560%2C4495400&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "f2beb5e63c2acbc515a08f401cb8c46dec9df3ecd83b0ecb636e484c718e8b86",
+    "captured_at": "2026-09-14T22:04:51.392640+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      705400,
+      4495240,
+      705560,
+      4495400
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=700360%2C4501080%2C700520%2C4501240&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "56e06ade39ba1391f30a76e458e955b653bf534e79e136442581cc825d476d26",
+    "captured_at": "2026-09-14T22:05:04.755802+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      700360,
+      4501080,
+      700520,
+      4501240
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=700360%2C4501080%2C700520%2C4501240&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "0613f306c005ab49f1b3a19d9a258796fb2c38e9b9d39b377180962c39e42401",
+    "captured_at": "2026-09-14T22:05:12.829518+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      700360,
+      4501080,
+      700520,
+      4501240
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=716440%2C4518520%2C716600%2C4518680&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "c1ffabdada6edf9fc3f72286335c12833321c06fa9cf42eafb5535d79c236d5f",
+    "captured_at": "2026-09-14T22:05:29.260112+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      716440,
+      4518520,
+      716600,
+      4518680
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=716440%2C4518520%2C716600%2C4518680&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "9f7a17ad14a6671eb9cc0c52d562c0760dc0514176bbb2e141ba146117467999",
+    "captured_at": "2026-09-14T22:05:36.593940+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      716440,
+      4518520,
+      716600,
+      4518680
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=677480%2C4509880%2C677640%2C4510040&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "ada1fbe5c020d5252a54bece70aaa20dd0b5b4309a26c160358994db9e38592f",
+    "captured_at": "2026-09-14T22:05:56.903000+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      677480,
+      4509880,
+      677640,
+      4510040
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=677480%2C4509880%2C677640%2C4510040&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "e0b8156a0f78db3d0b9d0150fa5370207e9e3eb7be0d074888d9aba3953b786b",
+    "captured_at": "2026-09-14T22:06:02.753807+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      677480,
+      4509880,
+      677640,
+      4510040
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=700680%2C4523240%2C700840%2C4523400&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "d61297958536a2002c05a3467bd7344fe156d0cb67960f6ae0e8db92cdec4dbd",
+    "captured_at": "2026-09-14T22:06:22.103405+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      700680,
+      4523240,
+      700840,
+      4523400
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=700680%2C4523240%2C700840%2C4523400&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "8fc08f997a3461a9d1156e2ae926dbb8f9516b53ac017e6c17e999c35939c71a",
+    "captured_at": "2026-09-14T22:06:44.698967+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      700680,
+      4523240,
+      700840,
+      4523400
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=689960%2C4517080%2C690120%2C4517240&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "71fc993712efc62bcf9e83f1649cf5f08e042b0fc8b76766c4167bb0a28ab856",
+    "captured_at": "2026-09-14T22:07:27.151704+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      689960,
+      4517080,
+      690120,
+      4517240
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=689960%2C4517080%2C690120%2C4517240&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "33cb07c5ee2e9388e87588716760d582ccbe0d9ad97265021861d013abe1579c",
+    "captured_at": "2026-09-14T22:07:38.365149+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      689960,
+      4517080,
+      690120,
+      4517240
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer/exportImage?bbox=683800%2C4493880%2C683960%2C4494040&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "372e39bdaf3a72df4426cd4b2cc9f1b0d3914aa5b37b4ea08bd64d1dae807bd5",
+    "captured_at": "2026-09-14T22:07:49.639660+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2019,
+    "extent": [
+      683800,
+      4493880,
+      683960,
+      4494040
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=683800%2C4493880%2C683960%2C4494040&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "055f31810c2f41cbc12cf5a434b15bc73b08877d203e356b7ed71fe940525b0a",
+    "captured_at": "2026-09-14T22:08:01.103213+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      683800,
+      4493880,
+      683960,
+      4494040
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=690280%2C4520920%2C690440%2C4521080&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "d1598492fc077a01cef22d3030123f57203fe3d18c202bd5cc024cd7368955a6",
+    "captured_at": "2026-09-14T22:08:12.263394+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      690280,
+      4520920,
+      690440,
+      4521080
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer/exportImage?bbox=690280%2C4520920%2C690440%2C4521080&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "618d157fa14e9e30adfc7b0135e0407dac8f1d10cd656cc8f1651441e4bf5598",
+    "captured_at": "2026-09-14T22:08:29.640932+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2023,
+    "extent": [
+      690280,
+      4520920,
+      690440,
+      4521080
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=693160%2C4513400%2C693320%2C4513560&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "1ff793c29d24acce07173399c46ba358d4619515f46ccc1ee74abf7f94735ce9",
+    "captured_at": "2026-09-14T22:08:34.746010+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      693160,
+      4513400,
+      693320,
+      4513560
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=685400%2C4521640%2C685560%2C4521800&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "9298ba160134933bc2269725f8761ce41aa0d273ca799d6acbae11820e23dfc2",
+    "captured_at": "2026-09-14T22:09:24.793804+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      685400,
+      4521640,
+      685560,
+      4521800
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer/exportImage?bbox=693160%2C4513400%2C693320%2C4513560&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "b0991a826edb7f81b50cee7e08db08435d5ccefb46999000001b8955a84fc25c",
+    "captured_at": "2026-09-14T22:09:37.741680+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2023,
+    "extent": [
+      693160,
+      4513400,
+      693320,
+      4513560
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer/exportImage?bbox=685400%2C4521640%2C685560%2C4521800&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "e5f920b1b8f93a85061d17accacf3398e7643bc81e07abd1489e76b5188b1f1d",
+    "captured_at": "2026-09-14T22:09:45.881583+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2023,
+    "extent": [
+      685400,
+      4521640,
+      685560,
+      4521800
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer/exportImage?bbox=693400%2C4519240%2C693560%2C4519400&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "df154acdcd3ea6bb60dcd1a4e7e71412c2b9c02c1f13f7324fa8e9e9d5969ca5",
+    "captured_at": "2026-09-14T22:10:12.922045+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2022,
+    "extent": [
+      693400,
+      4519240,
+      693560,
+      4519400
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  },
+  {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer/exportImage?bbox=693400%2C4519240%2C693560%2C4519400&bboxSR=32633&imageSR=32633&size=800%2C800&format=png&f=image&interpolation=RSP_NearestNeighbor",
+    "sha256": "20bd6cdacd661ea236d434555857cec8390d6396992e9456e232b4a92b49c993",
+    "captured_at": "2026-09-14T22:10:17.898310+00:00",
+    "role": "orthophoto-frame",
+    "edition": 2023,
+    "extent": [
+      693400,
+      4519240,
+      693560,
+      4519400
+    ],
+    "crs": "EPSG:32633",
+    "width": 800,
+    "height": 800
+  }
+]

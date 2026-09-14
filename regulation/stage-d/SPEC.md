@@ -174,3 +174,72 @@ PYTHONPATH=regulation/stage-c:regulation/stage-d .venv/bin/python \
 `verify.py` checks that the A–C projection, contracts and compact source map agree.
 It rejects workbench paths and historical evidence fields. Neither tests nor the
 verifier certify source meaning or Stage D completion.
+
+## Observed-subject composition
+
+`cordon_d.subjects.observed_subjects` accepts the unchanged complete monitoring
+iterator. Each result retains its observation, separate host reading, published
+parcel references and literal correspondence candidates. It does not enumerate
+physical plants. `HostNames.load` reads the retained EPPO structured sources;
+`specified_versions` reads the historical Annex II texts. The captures and current
+limits belong to the plant/population and parcel rows of `INPUTS.md`.
+
+`subject_with_finding` can refine an observed genus using the scientific species
+in that observation’s own unambiguous report, preserving genuine conflicts.
+Pass the existing finding join to `finding_host` for the finding's species, rather
+than borrowing the observation's host. `infected_species` combines the readable
+explicitly selected `(source hash, result locator)` occurrences with separately
+supplied Xylella finding qualification and adopted-area
+membership. Evaluate that membership against the decision's relevant area version;
+keep the earlier sampling date on the finding. The supplied finding qualification
+includes applicability to the area’s operative pest scope, which remains owned by
+A and the area/finding evidence. Annex II host-list selection does not itself
+qualify a diagnostic result or redefine C’s species-history input. `species_category_facts` accepts
+the resulting scoped history and supplies `eradication_species_facts` without
+changing C. A complete infected-species inventory requires `RequiredPopulation`
+with scope `json.dumps([area, event_date.isoformat()], separators=(',', ':'))` and
+its own evidence; a negative observation cannot supply it.
+
+`cadastral_memberships` composes the published observation location with
+`areas.membership_evidence`. It returns whole-parcel inclusion, partial
+intersection and subject-location membership separately, with source supports.
+It locates the observation as published, not an individual plant at a later date.
+Conflicting reference components prevent a positive subject-location conclusion.
+Partial intersection provides no numerical position or error bound and cannot
+bypass the positional owner. It establishes neither title nor standing.
+
+`InspectionUnitReading` admits formal identity schemes with exact observation
+membership. `SubjectCorrespondence` also admits sufficient direct evidence that
+observations concern the same or different subject; no registry or published
+identifier scheme is required for that route. Literal note patterns supply only
+`ReferenceReading` candidates. Reconciliation retains conflicting readings and
+both tag and previous-sample relationships. `observed_subject_survey` counts only
+established distinct units through C; it retains an independently qualified
+positive observation even when persistent identity is unavailable. Both survey
+adapters require the operative `period=(start, end)` and select [start, end)
+observation dates before qualifying results. `stratum_of` selects membership in
+the required population; `None` excludes an observation. Unit identity cannot
+move results across periods or establish C's separate method, population,
+performance and independence qualifications.
+
+`scripts/read_subjects.py` consumes every observation and supplies
+host/report/cadastral connections. The rejected supplied-scene loader and
+containment matcher have been removed. A reproducible public-source identity
+producer, including records without resampling notes, remains incomplete.
+
+`scripts/read_subject_images.py` reads retained RGB frames locally through the
+pinned public DeepForest tree detector. Install `subject-images-requirements.txt`
+in a separate environment. Model bytes, published prediction configuration and
+source imagery are hash-verified; code, configuration and exact package pins
+version the derived readings. No observation result, note or expected pair enters
+pixel inference. `cordon_d.subject_images.crown_candidates` converts its pixel
+rectangles to the frame's published coordinate system. These are retrieval
+candidates, not observation-to-plant memberships, survey units, or positional
+bounds. In particular, a tree rectangle does not identify a shrub beneath it.
+The image reader currently contributes no inspection-unit identities to C.
+
+`scripts/acquire_host_names.py --report-reading-version <revision>` acquires only
+the taxonomy reached by monitoring and that explicit retained report reading,
+including all returned candidates and genus ancestry. Existing responses are
+reused; credentials are read from `~/.config/cordon/eppo-api-key` and sent only as
+an API header. This command never acquires report readings or calls a model.
