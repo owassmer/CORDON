@@ -101,6 +101,17 @@ reconciliation. No saved successful response is retransmitted. Reader versions
 describe the implementation loaded into the process, avoiding cache mislabelling
 if source files change during a run.
 
+Reading issues survive both forward observation links and reverse report-row
+output. A limitation naming an exact table/column locator is attached to that
+field without interpreting keywords in its cause. At an identifier column this
+withholds the typed identity; its literal value remains candidate evidence.
+Issues whose scopes cannot be bound remain visible at report level, not silently
+resolved. This local projection does not certify the remaining role assignments.
+The C adapter rejects ambiguous selection, but not an otherwise eligible pair
+solely because its sampling date is unknown or other pages remain unread. Unread
+report scope leaves the selected result's qualified polarity unknown; independent
+inputs survive. Date-dependent consumers still require their own date evidence.
+
 ## Implementation rule
 
 Ordinary readers accept source records without a named case, fixed hash, authored

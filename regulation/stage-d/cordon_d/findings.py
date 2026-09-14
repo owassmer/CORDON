@@ -101,8 +101,8 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
         if isinstance(reading, Report):
             index = defaultdict(list)
             for row in reading.rows:
-                if row.reference is not None:
-                    index[row.reference].append(row)
+                if row.candidate_reference is not None:
+                    index[row.candidate_reference].append(row)
             row_index[digest] = index
     routed, reverse = [], defaultdict(set)
     for group in groups:
@@ -129,6 +129,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     if not isinstance(reading, Report):
                         link['status'] = reading.cause
                         continue
+                    link['reading_issues'] = reading.issues
                     if not group.correlatable:
                         link['status'] = group.uncorrelated_because or 'observation identity unresolved'
                         continue
@@ -140,10 +141,16 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         temporal = ('agrees' if dated == group.day else 'conflicts') if dated else 'unresolved'
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
                                      'date_cause': row.date_cause,
+                                     'identity_cause': ('publisher identifier reading remains unresolved'
+                                                        if row.reference is None else None),
+                                     'reading_issues': reading.issues,
                                      'reading_complete': len(reading.complete_pages) == reading.pages,
                                      'comparisons': _comparable(member, row.results)}
                         link['candidates'].append(candidate)
-                        if temporal != 'conflicts' and len(digests) == 1:
+                        if candidate['identity_cause']:
+                            output['limitations'].append({'sha256': digest, 'row': row.locator,
+                                                         'cause': candidate['identity_cause']})
+                        if row.reference is not None and temporal != 'conflicts' and len(digests) == 1:
                             eligible[key] = candidate
                             reverse[key].add(group.identity)
         routed.append((output, eligible))
@@ -187,6 +194,7 @@ def report_rows(readings, joined):
         if isinstance(reading, Report):
             for row in reading.rows:
                 yield {'sha256': reading.sha256, 'row': row,
+                       'reading_issues': reading.issues,
                        'observations': sorted(matched[(reading.sha256, row.locator)], key=str)}
 
 
@@ -203,8 +211,6 @@ def confirmation_inputs(joined, *, result_pair, qualification):
         raise ValueError('Select two distinct (source hash, result locator) occurrences')
     eligible = []
     for match in joined['matches']:
-        if not match['reading_complete'] or match['temporal'] != 'agrees':
-            continue
         results = {(match['key'][0], r.locator): r for r in match['row'].results}
         if all(tuple(key) in results for key in result_pair):
             eligible.append((match, results))
@@ -222,8 +228,11 @@ def confirmation_inputs(joined, *, result_pair, qualification):
         return missing('classifiable reported result: ' + value.locator)
     output = {}
     for prefix, result in [('first', first), ('second', second)]:
+        polarity = (positive(result) if candidate['reading_complete'] else
+                    missing('unread report scope may qualify selected result: ' + result.locator))
         output[prefix + '_positive_annex_iv'] = conjunction([
-            positive(result), qualification.get(prefix + '_annex_iv', missing('Annex IV qualification: ' + result.locator))])
+            polarity,
+            qualification.get(prefix + '_annex_iv', missing('Annex IV qualification: ' + result.locator))])
         # Displayed headings remain on Result; canonical identities need their own support.
         output[prefix + '_test'] = qualification.get(prefix + '_test')
         output[prefix + '_sample'] = qualification.get(prefix + '_sample')

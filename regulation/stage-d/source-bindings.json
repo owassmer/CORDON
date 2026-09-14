@@ -53,7 +53,7 @@
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
       "reader": "cordon_d.reports and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "Population reading and semantic verification remain open on INPUTS.md row 2: published and predecessor-route failures, unresolved identifier origin and client-code correspondence, correction predecessor/scope/event-time resolution, and proposed date-role errors. Scanned-date and repeated-display repairs pass bounded source comparisons, not population certification. The real observation-to-C adapter runs; legal qualifications remain with their contract owners."
+      "open": "Population reading and semantic verification remain open on INPUTS.md row 2: published and predecessor-route failures, identifier origin/client-code correspondence, unbound reading limitations, correction predecessor/scope/event-time resolution and proposed date-role errors. Bounded scan-date and repeated-display comparisons pass. Review withdrew the earlier CNR73-to-C handoff; explicit identifier uncertainty now prevents that relationship. Legal qualifications remain with their contract owners."
     },
     {
       "id": "official-areas",

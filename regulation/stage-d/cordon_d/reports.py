@@ -99,6 +99,12 @@ class Row:
     projection: dict | None = None
 
     @property
+    def candidate_reference(self):
+        values = [c.get('identifier', c['text']) for c in self.cells
+                  if c['role'] == 'publisher_id' and c['text'] is not None]
+        return values[0] if len(values) == 1 else None
+
+    @property
     def sampling_date(self):
         values = {d.value for d in self.sampling_dates if d.value is not None}
         return next(iter(values)) if len(values) == 1 and all(d.value for d in self.sampling_dates) else None
@@ -348,6 +354,14 @@ def materialize(digest, version, page_count, blocks):
                     value = dict(cell, text=text, basis='native_cell_copy' if 'native_cell' in cell else 'vision_transcription',
                                  role=column['role'], heading=column['heading'],
                                  locator=f'{locator}/c{index + 1}')
+                    field = f"{table['id']}/c{index + 1}"
+                    # Bind explicit field locators, never interpret words in the cause.
+                    field_issues = tuple(issue for issue in issues if re.search(
+                        r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope']))
+                    if field_issues:
+                        value['reading_issues'] = field_issues
+                        if column['role'] in {'publisher_id', 'laboratory_id'}:
+                            value['role_cause'] = 'unresolved reading at identifier column; see reading_issues'
                     if column['role'] == 'publisher_id' and 'identifier' not in value and text:
                         annotation = re.fullmatch(r'\s*([^()\r\n]+?)\s*(\(Pool\))\s*', text)
                         if annotation and annotation[1].strip():
@@ -364,7 +378,10 @@ def materialize(digest, version, page_count, blocks):
                             assay, analyte, text, classify(text), cell.get('cause'),
                             tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())), assay_cause))
                 def sole(role):
-                    values = [c.get('identifier', c['text']) for c in by_role.get(role, []) if c['text'] is not None]
+                    fields = by_role.get(role, [])
+                    if any(c.get('role_cause') for c in fields):
+                        return None
+                    values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
                     return values[0] if len(values) == 1 else None
                 scopes = {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}
                 scopes.update(f"{table['id']}/c{i + 1}" for i in range(len(cells)))
@@ -418,7 +435,10 @@ def positioned_identifiers(reading, source):
                             source_bbox=list(bounds))
                 cells.append(cell)
             def sole(role):
-                values = [c.get('identifier', c['text']) for c in cells if c['role'] == role and c['text'] is not None]
+                fields = [c for c in cells if c['role'] == role]
+                if any(c.get('role_cause') for c in fields):
+                    return None
+                values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
                 return values[0] if len(values) == 1 else None
             rows.append(replace(row, cells=tuple(cells), reference=sole('publisher_id'),
                                 laboratory_reference=sole('laboratory_id')))

@@ -9,7 +9,8 @@ import unittest
 from unittest.mock import patch
 
 from openpyxl import Workbook
-from cordon_d.findings import findings, confirmation_inputs
+from cordon_d.findings import findings, confirmation_inputs, report_rows as reverse_rows
+from cordon_d.reports import materialize
 from cordon_d.monitoring import distinct_observations
 from cordon_d.store import file_digest, put_bytes
 from test_reports import block
@@ -17,7 +18,7 @@ from test_reports import block
 
 class JoinIdentity(unittest.TestCase):
     def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
-                 repeated=False, repetition_support=True, differing_repeat=False):
+                 repeated=False, repetition_support=True, differing_repeat=False, reading_issues=()):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
@@ -42,6 +43,7 @@ class JoinIdentity(unittest.TestCase):
             (reports / 'records.json').write_text(json.dumps(captures))
             cache = store / 'derived/reports/v' / digest / 'report.json'; cache.parent.mkdir(parents=True)
             item = block(report_rows)
+            item['reading']['issues'] = list(reading_issues)
             if two_results:
                 table = item['reading']['tables'][0]
                 table['columns'].append(dict(table['columns'][2], heading=['Esito B'], test='Esito B'))
@@ -66,6 +68,23 @@ class JoinIdentity(unittest.TestCase):
         result = self.run_join([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
         self.assertEqual(result[0]['status'], 'matched')
         self.assertEqual(result[0]['matches'][0]['temporal'], 'agrees')
+
+    def test_uncertain_identifier_stays_candidate_with_issues_in_both_directions(self):
+        issue = {'scope': 'p1-t1/c1 (ID)', 'cause': 'Identifier origin is unresolved.'}
+        values = [['123', '01/06/2024', 'Positivo', '02/06/2024']]
+        result = self.run_join([['123', '2024-06-01']], values, reading_issues=[issue])[0]
+        self.assertFalse(result['matches'])
+        candidate = result['links'][0]['candidates'][0]
+        self.assertEqual(candidate['row'].candidate_reference, '123')
+        self.assertIsNone(candidate['row'].reference)
+        self.assertTrue(candidate['identity_cause'])
+        self.assertIn(issue, result['links'][0]['reading_issues'])
+        item = block(values); item['reading']['issues'] = [issue]
+        reverse = list(reverse_rows([materialize('hash', 'v', 1, [item])], []))[0]
+        self.assertIn(issue, reverse['reading_issues'])
+        self.assertTrue(reverse['row'].cells[0]['role_cause'])
+        with self.assertRaises(ValueError):
+            confirmation_inputs(result, result_pair=[('hash', 'a'), ('hash', 'b')], qualification={})
 
     def test_repeated_representation_keeps_both_occurrences_and_requires_all_fields(self):
         args = ([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
@@ -108,13 +127,28 @@ class JoinIdentity(unittest.TestCase):
         self.assertEqual(result[0]['matches'], [])
         self.assertIn('several eligible source-row', result[0]['status'])
 
-    def test_unique_undated_relationship_cannot_supply_date_dependent_confirmation(self):
+    def test_unique_undated_relationship_preserves_independent_result_evidence(self):
+        from cordon_c.core import Evaluation
         joined = self.run_join([['123', '2024-06-01']],
             [['123', None, 'Positivo', '02/06/2024']], two_results=True)[0]
         self.assertEqual(joined['status'], 'provisional-match')
         pair = [(joined['matches'][0]['key'][0], r.locator) for r in joined['matches'][0]['row'].results]
-        with self.assertRaises(ValueError):
-            confirmation_inputs(joined, result_pair=pair, qualification={})
+        inputs = confirmation_inputs(joined, result_pair=pair, qualification={'first_annex_iv': Evaluation(True)})
+        self.assertTrue(inputs['first_positive_annex_iv'].truth)
+        self.assertIsNone(inputs['second_positive_annex_iv'].truth)
+        self.assertTrue(joined['matches'][0]['date_cause'])
+        joined['matches'][0]['reading_complete'] = False
+        inputs = confirmation_inputs(joined, result_pair=pair, qualification={
+            'first_annex_iv': Evaluation(True), 'inside_demarcated_area': Evaluation(True)})
+        self.assertIsNone(inputs['first_positive_annex_iv'].truth)
+        self.assertTrue(any('unread report scope' in need for need in inputs['first_positive_annex_iv'].needs))
+        self.assertTrue(inputs['inside_demarcated_area'].truth)
+        negative = self.run_join([['123', '2024-06-01']],
+            [['123', None, 'Negativo', '02/06/2024']], two_results=True)[0]
+        negative['matches'][0]['reading_complete'] = False
+        pair = [(negative['matches'][0]['key'][0], r.locator) for r in negative['matches'][0]['row'].results]
+        self.assertIsNone(confirmation_inputs(negative, result_pair=pair,
+            qualification={'first_annex_iv': Evaluation(True)})['first_positive_annex_iv'].truth)
 
     def test_contradictory_day_is_exposed_without_a_match(self):
         result = self.run_join([['123', '2024-06-01']], [['123', '02/06/2024', 'Positivo', '03/06/2024']])
