@@ -104,7 +104,7 @@ class JoinIdentity(unittest.TestCase):
                 item['reading']['pages'].append({'page': 2, 'disposition': 'read'})
                 item['targets'] = [1, 2]
             cache.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'v',
-                'page_count': 2 if continued else 1, 'blocks': [item]}))
+                'page_count': 2 if continued else 1, 'assembly_complete': True, 'blocks': [item]}))
             from cordon_d import report_relations
             from test_report_relations import reading
             relation_cache = report_relations.path(store, digest)

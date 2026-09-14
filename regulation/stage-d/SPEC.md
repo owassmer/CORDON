@@ -110,6 +110,14 @@ quotations must cite the identity-bearing physical page. Ambiguous source struct
 and goes through that reader's page-completion repair. A failure never authorizes
 a second semantic extraction path or an invented correspondence.
 
+The ordinary loader carries the producer's `assembly_complete` attestation.
+Physical pages read, document relationships read, and record assembly complete
+are separate requirements for a complete candidate. A failed, pending or
+unattested assembly retains its cells, occurrences and independent qualifications;
+it cannot supply complete-reading polarity to the confirmation adapter. The
+assembly attestation is document-wide: it does not establish that an occurrence
+is unaffected by an unresolved continuation merely because its own cells exist.
+
 
 For native identifier cells, ordinary consumption checks the retained extraction
 against the source cell, then reads its coordinate-sorted text. A changed order is
@@ -148,6 +156,9 @@ registration identifier, not an analytical method or incoming delivery note.
 Unsupported protocol proposals remain visible without acquiring typed identity.
 A cache-only relationship graph follows explicitly supported replacements, retains
 history and unverified components, and rejects ambiguous or cyclic supersession.
+Every competing branch from a rendition's replacement ancestry must explicitly
+reach that rendition before it can be current. Extending one branch cannot settle
+the fork, and the observation's entry route cannot change this determination.
 The graph is a proposed source reading, not legal adjudication. Bundled-document
 identity and amendment scope require further source resolution when not recovered.
 An explicit source-review finding can request a fresh relationship reading even

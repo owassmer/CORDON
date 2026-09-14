@@ -342,7 +342,11 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                                         if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
                                      'reading_issues': reading.issues,
                                      'document_cause': link['document_cause'],
+                                     'assembly_complete': reading.assembly_complete,
+                                     'assembly_cause': (None if reading.assembly_complete is True else
+                                         'report record assembly is incomplete or not established'),
                                      'reading_complete': (len(reading.complete_pages) == reading.pages
+                                         and reading.assembly_complete is True
                                          and reading.relations is not None
                                          and reading.relations.get('reading_complete') is True),
                                      'comparisons': _comparable(member, row.results)}
@@ -436,7 +440,8 @@ def confirmation_inputs(joined, *, result_pair, qualification):
     output = {}
     for prefix, result in [('first', first), ('second', second)]:
         polarity = (positive(result) if candidate['reading_complete'] else
-                    missing('unread report scope may qualify selected result: ' + result.locator))
+                    missing((candidate.get('assembly_cause') or
+                             'unread report scope may qualify selected result') + ': ' + result.locator))
         output[prefix + '_positive_annex_iv'] = conjunction([
             polarity,
             qualification.get(prefix + '_annex_iv', missing('Annex IV qualification: ' + result.locator))])

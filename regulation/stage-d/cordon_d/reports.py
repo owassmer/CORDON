@@ -153,6 +153,7 @@ class Report:
     issues: tuple[dict, ...]
     complete_pages: frozenset[int]
     relations: dict | None = None
+    assembly_complete: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -640,7 +641,8 @@ def report(digest: str, store: Path, *, extraction_version: str):
     if any('native_cell' in c and c['role'] in {'identifier', 'publisher_id', 'laboratory_id'} for r in reading.rows for c in r.cells):
         reading = positioned_identifiers(reading, blob_path(store, digest))
     from .report_relations import load
-    return replace(reading, relations=load(store, digest, exact=True))
+    return replace(reading, relations=load(store, digest, exact=True),
+                   assembly_complete=payload.get('assembly_complete'))
 
 
 def reports(root: Path, store: Path, *, extraction_version: str, known_through=None):

@@ -368,13 +368,18 @@ def replacements(edges, digest):
 def current_limitation(edges, digest):
     incoming = [e for e in edges if digest in e['candidates'] and e['effect'] in {'replaces', 'amends'}]
     if not incoming:
-        for edge in edges:
-            if edge['successor'] != digest or edge['effect'] != 'replaces' or edge['status'] != 'resolved':
+        resolved = [e for e in edges if e['effect'] == 'replaces' and e['status'] == 'resolved']
+        ancestors, pending = set(), [digest]
+        while pending:
+            current = pending.pop()
+            if current in ancestors:
                 continue
-            siblings = [e['successor'] for e in edges if e['predecessor'] == edge['predecessor']
-                        and e['effect'] == 'replaces' and e['status'] == 'resolved' and e['successor'] != digest]
-            if any(digest not in replacements(edges, other) for other in siblings):
-                return 'competing source-declared replacements; current rendition unresolved'
+            ancestors.add(current)
+            pending.extend(e['predecessor'] for e in resolved if e['successor'] == current)
+        # Every branch from an ancestor must explicitly reach this rendition.
+        # Extending one competing branch does not supersede the other branch.
+        if any(e['predecessor'] in ancestors and e['successor'] not in ancestors for e in resolved):
+            return 'competing source-declared replacements; current rendition unresolved'
         return None
     if any(e['effect'] == 'replaces' and e['status'] == 'resolved' and e['predecessor'] == digest for e in incoming):
         return 'source declares this report superseded; retained as historical evidence'

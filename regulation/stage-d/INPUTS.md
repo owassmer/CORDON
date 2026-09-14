@@ -308,6 +308,12 @@ relationship and affected scope; recency and filename suffixes cannot adjudicate
 from row transcription. A resolved whole-report replacement can be followed from
 an observation's original route; the earlier source remains historical evidence.
 Amendments, ambiguous predecessors and cycles cannot silently select a current row.
+Competing replacement branches remain unresolved through their descendants until
+explicit source relationships reconcile them, irrespective of observation route.
+Consumer completion also requires the producer's record-assembly attestation;
+page coverage and a complete document-relationship inventory cannot replace it.
+Failed or pending assembly preserves recovered occurrences and independent facts,
+but cannot supply complete-reading polarity to the confirmation adapter.
 The graph preserves model-proposed provenance and unverified identity components.
 It does not establish administrative effect or turn a cited predecessor date into
 this rendition's issue date. Quotation and locator checks validate literal support; semantic source reading establishes
