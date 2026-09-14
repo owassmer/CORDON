@@ -94,6 +94,31 @@ class DocumentSubscriptionTests(unittest.TestCase):
                 self.read(execute=True)
             call.assert_not_called()
 
+    def test_nonfinite_numbers_are_rejected_without_retry(self):
+        schema = {'type': 'object', 'properties': {'distance': {'type': 'number',
+                  'minimum': 0, 'maximum': 50}}, 'required': ['distance']}
+        for token in ('NaN', 'Infinity', '-Infinity', '1e999'):
+            with self.subTest(token=token), TemporaryDirectory() as temporary:
+                store = Path(temporary)
+                source = self.store / 'blobs/sha256' / self.digests[0][:2] / self.digests[0]
+                digest = put_bytes(store, source.read_bytes())
+                output = '{"distance": ' + token + '}'
+                with patch('cordon_d.document_subscription._call', return_value=output) as call:
+                    for execute in (True, False, True):
+                        with self.assertRaises(ValueError):
+                            read_documents([digest], store, prompt='Read distance.',
+                                           schema=schema, execute=execute)
+                    self.assertEqual(call.call_count, 1)
+                retained, = (store / 'derived/document-readings').glob('*.json')
+                self.assertEqual(json.loads(retained.read_text())['output'], output)
+
+        with patch('cordon_d.document_subscription._call', return_value='{"distance":25.5}') as call:
+            for execute in (True, False):
+                result = read_documents(self.digests, self.store, prompt='Read distance.',
+                                        schema=schema, execute=execute)
+                self.assertEqual(result['reading'], {'distance': 25.5})
+            self.assertEqual(call.call_count, 1)
+
     def test_schema_references_resolve_locally_without_network_retrieval(self):
         self.schema = {'$defs': {'measure': self.schema}, '$ref': '#/$defs/measure'}
         with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}'), \

@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 import fcntl
 import json
+from math import isfinite
 import os
 from pathlib import Path
 import subprocess
@@ -13,6 +14,13 @@ from jsonschema.validators import validator_for
 from referencing import Registry
 
 from .store import blob_path
+
+
+def _finite_number(token):
+    number = float(token)
+    if not isfinite(number):
+        raise ValueError('Reading contains a non-finite JSON number')
+    return number
 
 
 def _call(prompt, schema, images, directory, model, effort, timeout):
@@ -99,6 +107,7 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
                 temporary_response = target.with_suffix('.tmp')
                 temporary_response.write_text(json.dumps(response, ensure_ascii=False) + '\n')
                 os.replace(temporary_response, target)
-        reading = json.loads(response['output'])
+        reading = json.loads(response['output'], parse_constant=_finite_number,
+                             parse_float=_finite_number)
         validator.validate(reading)
         return dict(response, reading=reading)
