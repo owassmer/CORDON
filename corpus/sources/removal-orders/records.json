@@ -449,5 +449,87 @@
   "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-129-2021-FITO-.pdf",
   "bytes": 13312360,
   "sha256": "aa4a6a625b06bba23f277c057a428e240f600edf3767d5ddcb194f3de7d9e5ac"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_94_26_5_2026.pdf/18bb7e3d-99b0-b19c-8a36-fb13b9441346",
+  "captured_at": "2026-09-14T21:04:03.347246+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-94-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-94-2026-FITO-9ffa2fce8222.pdf",
+  "bytes": 1364202,
+  "sha256": "9ffa2fce8222d7208d1b6354ba810296a286630cfed04593df6e89450fd8f2e8",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=9ffa2fce8222d7208d1b6354ba810296a286630cfed04593df6e89450fd8f2e8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2809915/DET_103_9_6_2026.pdf/3b39a450-92a8-1034-c61a-db59e10b9c7b",
+  "captured_at": "2026-09-14T21:04:03.354539+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-103-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-103-2026-FITO-36f48ba0eae7.pdf",
+  "bytes": 1095010,
+  "sha256": "36f48ba0eae749a4487eebe5ac00fbbc4e60549f8fa01b3585fdd54f4f8a3bb3",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=36f48ba0eae749a4487eebe5ac00fbbc4e60549f8fa01b3585fdd54f4f8a3bb3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2815387/DET_114_14_7_2026.pdf/65be6d9e-9546-224b-a15d-f445723f9937",
+  "captured_at": "2026-09-14T21:04:03.359964+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-114-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-114-2026-FITO-eaa9f80d6d01.pdf",
+  "bytes": 1204632,
+  "sha256": "eaa9f80d6d016c351e1c614011d60f3aea3ae6a83cae49faf6f894ef6da482bb",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=eaa9f80d6d016c351e1c614011d60f3aea3ae6a83cae49faf6f894ef6da482bb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2758021/DET_55_30_3_2026.pdf/621093e3-1781-87a2-a2b5-2a8162116963",
+  "captured_at": "2026-09-14T21:04:03.363988+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-55-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-55-2026-FITO-c04c38b150c9.pdf",
+  "bytes": 1160073,
+  "sha256": "c04c38b150c9f10481594ad859cb0b399476d21d9b54fa115fb542eb52c7949d",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=c04c38b150c9f10481594ad859cb0b399476d21d9b54fa115fb542eb52c7949d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2809915/DET_102_9_6_2026.pdf/e0166510-3f99-b289-56e1-0a22ecf7315d",
+  "captured_at": "2026-09-14T21:04:03.367849+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-102-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-102-2026-FITO-0b61c4166b22.pdf",
+  "bytes": 1639241,
+  "sha256": "0b61c4166b2227556fb6f499eb42b856c435a27e310d3337d69b3a2e6cd64f78",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=0b61c4166b2227556fb6f499eb42b856c435a27e310d3337d69b3a2e6cd64f78"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2809915/DET_104_9_6_2026.pdf/bf85ce5d-350c-3633-9d18-6225fd49ed73",
+  "captured_at": "2026-09-14T21:04:03.373836+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-104-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-104-2026-FITO-c9a00d310b51.pdf",
+  "bytes": 1053819,
+  "sha256": "c9a00d310b516711de8cbe789ffc8a72e3b57d00bc40510dff19251900b8dfa9",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=c9a00d310b516711de8cbe789ffc8a72e3b57d00bc40510dff19251900b8dfa9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_93_26_5_2026.pdf/02b94ece-b0a8-7c2c-610b-d1c00bfef3af",
+  "captured_at": "2026-09-14T21:04:03.379514+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-93-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-93-2026-FITO-1aff76013b66.pdf",
+  "bytes": 1332369,
+  "sha256": "1aff76013b663e4fe47b1319d500b0701667ac45f989d34f3a54593a92151e40",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=1aff76013b663e4fe47b1319d500b0701667ac45f989d34f3a54593a92151e40"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_95_26_5_2026.pdf/d9976a2f-2974-507e-300e-834c3f48718b",
+  "captured_at": "2026-09-14T21:04:33.351149+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3 register 5906/2026; archive hash-matched original not located in regional PDF directory; operative-act discovery, meaning held",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_95_26_5_2026.pdf/d9976a2f-2974-507e-300e-834c3f48718b",
+  "content_type": "application/pdf",
+  "bytes": 3515327,
+  "sha256": "0bafd5f8bf9291fd7c94db1f0cc914eb837d234bc1566ef716e8e1da021469d0",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=0bafd5f8bf9291fd7c94db1f0cc914eb837d234bc1566ef716e8e1da021469d0"
  }
 ]

@@ -102,3 +102,65 @@ class RetainedMunicipalPublication(unittest.TestCase):
         p = readings['REG-PUGLIA-U181-DIR-2025-00022']
         self.assertEqual(p.document_date, date(2025, 2, 15))
         self.assertEqual([e.occurred for e in p.events], [date(2025, 2, 17), date(2025, 2, 24)])
+
+
+class RetainedRegionalPublication(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from cordon_d.store import blob_path, store_root
+        cls.paths = [blob_path(store_root(Path(__file__).resolve()), h) for h in [
+            'b232863e6f680c8df35ab260b14e3429a512f17837ee197df4a41ba9bc632150',
+            '25a01b41e4b5911c6a32a16b8f55a99ba8528bec99d760be7d58d4eed9ecd135',
+            '4c66e7b53bdba441cb4ff0b974e649dbd411834ae27fc6bf5c954b7d7853a98e',
+            '822245cda207a70106222fc0627300c042a6d6dd6f9fb46a76cd91d74b9f00db']]
+        if not all(p.exists() for p in cls.paths):
+            raise unittest.SkipTest('Retained regional source store not present')
+
+    def test_actual_supplement_and_containment_publications(self):
+        from cordon_d.removal_events import regional_publication
+        # Independently read labelled detail fields: 63's subject references 173;
+        # 94's proposal identifier is 93. Neither is the published adoption number.
+        expected = [(63, '2026-04-03', '2026-04-03', '2026-04-20'),
+                    (94, '2026-05-26', '2026-05-27', '2026-06-11'),
+                    (104, '2026-06-09', '2026-06-10', '2026-06-25'),
+                    (102, '2026-06-09', '2026-06-10', '2026-06-25')]
+        for path, (number, adopted, start, end) in zip(self.paths, expected):
+            p = regional_publication(path)
+            document = f'REG-PUGLIA-U181-DIR-2026-{number:05d}'
+            self.assertEqual(p.document, document)
+            self.assertEqual(p.document_date, date.fromisoformat(adopted))
+            self.assertEqual(p.source_fields['Stato Pubblicazione'], 'Conclusa')
+            for event, kind, day in zip(p.events,
+                    ['regional-publication-start', 'regional-publication-end'], [start, end]):
+                self.assertEqual(event.anchor(kind=kind, document=document,
+                    recipient=None, precision='date'), date.fromisoformat(day))
+                for wrong in ['municipal-publication-end', 'recipient-notification', 'removal-completed']:
+                    with self.assertRaises(ValueError):
+                        event.anchor(kind=wrong, document=document, recipient=None, precision='date')
+            with self.assertRaises(ValueError):
+                publication_deadline(Snapshot.load(), 'B-CLK-DGR1075-owner-election',
+                    p.document_date, p, document=document, competent_publisher=p.publisher,
+                    zone=ZoneInfo('Europe/Rome'), calendar=national_calendar())
+        p = regional_publication(self.paths[1])
+        self.assertEqual(p.source_fields['Codice Cifra (Identificativo Proposta)'], '181/DIR/2026/00093')
+        self.assertEqual(p.source_fields['Data registrazione albo pretorio'], '2026-05-27 12:15:17.545')
+
+    def test_unregistered_identity_and_unfinished_publication(self):
+        from bs4 import BeautifulSoup
+        from cordon_d.removal_events import regional_publication
+        soup = BeautifulSoup(self.paths[1].read_bytes(), 'html.parser')
+        def set_field(label, value):
+            node = next(n for n in soup.select('label') if n.get_text(strip=True) == label)
+            node.find_next_sibling('span').string = value
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / 'detail.html'
+            set_field('Numero Adozione Atto', '00999')
+            path.write_text(str(soup))
+            p = regional_publication(path)
+            self.assertEqual(p.document, 'REG-PUGLIA-U181-DIR-2026-00999')
+            self.assertEqual(len(p.events), 2)
+            set_field('Stato Pubblicazione', 'Da pubblicare')
+            path.write_text(str(soup))
+            p = regional_publication(path)
+            self.assertEqual(p.events, ())
+            self.assertEqual(p.source_fields['Data Fine Pubblicazione'], '2026-06-11 23:59:59.0')
