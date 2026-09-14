@@ -11,6 +11,33 @@ from zoneinfo import ZoneInfo
 from cordon_c import Snapshot
 from cordon_d.calendar import national_calendar
 from cordon_d.removal_events import publication_records, publication_deadline, connected_publications
+from cordon_d.notices import parsec_publication_declarations
+
+
+class ParsecPublication(unittest.TestCase):
+    def test_retained_history_preserves_separate_correction_publications(self):
+        from cordon_d.store import store_root
+        digest = '1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854'
+        path = store_root(Path(__file__)) / 'blobs/sha256' / digest[:2] / digest
+        if not path.exists():
+            self.skipTest('Retained source store unavailable')
+        rows = list(parsec_publication_declarations(path, publisher='Comune di Cagnano Varano',
+                    source_url='https://trasparenza.parsec326.it/en/widget/web/cagnano-varano/albo-pretorio'))
+        self.assertEqual(len(rows), 9)
+        by_number = {r.values['source_fields']['Nro']: r for r in rows}
+        self.assertEqual(by_number['958'].values['declared_dates'], {
+            'Data inizio pubb.': '2025-10-27', 'Data fine pubb.': '2025-11-03'})
+        self.assertEqual(by_number['369'].values['declared_dates'], {
+            'Data inizio pubb.': '2026-04-03', 'Data fine pubb.': '2026-04-10'})
+        for number, attachment in [('1110', '3814497_ATT_000135887_31693.pdf'),
+                                   ('1109', '3814484_ATT_000135886_31692.pdf')]:
+            row = by_number[number]
+            self.assertEqual(row.values['declared_dates']['Data fine pubb.'], '2025-12-03')
+            self.assertTrue(row.values['document_routes'][0]['url'].endswith(attachment))
+        self.assertIn('ERRATA CORRIGE', by_number['1110'].values['source_fields']['Oggetto'])
+        self.assertNotEqual(by_number['1110'].locator, by_number['1109'].locator)
+        self.assertNotIn('document', by_number['369'].values)
+        self.assertNotIn('events', by_number['1110'].values)
 
 
 class MunicipalPublication(unittest.TestCase):
