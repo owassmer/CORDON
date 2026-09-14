@@ -114,8 +114,11 @@ can be replayed. Request identity includes the source hashes, actual prompt and
 schema, rendered image hashes, model, effort and transport version. A lock prevents
 duplicate dispatch of an identical request; it does not coordinate different
 providers or different tasks on one document. Raw output, elapsed call time and
-provenance are retained in the regenerable store. Invalid JSON remains retained and
-cannot become a returned reading. Source-review instructions change the request;
+provenance are retained in the regenerable store. Invalid JSON or output that
+violates the caller's schema remains retained and cannot become a returned reading,
+on either execution or replay. Schema validity is checked before dispatch; schema
+references must resolve within the supplied schema, without network retrieval.
+Source-review instructions change the request;
 replay never secretly spends another call. API-key fallback and model tools are
 disabled. A bounded subprocess timeout applies.
 

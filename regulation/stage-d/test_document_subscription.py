@@ -7,6 +7,8 @@ import unittest
 from unittest.mock import patch
 
 import pymupdf
+from jsonschema.exceptions import SchemaError, ValidationError
+from referencing.exceptions import Unresolvable
 
 from cordon_d.document_subscription import read_documents
 from cordon_d.store import put_bytes
@@ -47,13 +49,13 @@ class DocumentSubscriptionTests(unittest.TestCase):
             self.assertEqual(call.call_count, 1)
 
     def test_configuration_change_cannot_reuse_another_request(self):
-        with patch('cordon_d.document_subscription._call', return_value='{}'):
+        with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}'):
             self.read(execute=True)
         with self.assertRaises(FileNotFoundError):
             self.read(effort='medium')
 
     def test_concurrent_identical_requests_dispatch_once(self):
-        with patch('cordon_d.document_subscription._call', return_value='{}') as call:
+        with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}') as call:
             with ThreadPoolExecutor(max_workers=2) as pool:
                 jobs = [pool.submit(self.read, execute=True) for _ in range(2)]
                 results = [job.result(timeout=10) for job in jobs]
@@ -66,6 +68,43 @@ class DocumentSubscriptionTests(unittest.TestCase):
                 with self.assertRaises(json.JSONDecodeError):
                     self.read(execute=execute)
             self.assertEqual(call.call_count, 1)
+
+    def test_schema_invalid_json_is_retained_and_rejected_on_every_return_path(self):
+        for value in ({}, {'direction': 17}, {'direction': 'proposed', 'unexpected': True}):
+            with self.subTest(value=value), TemporaryDirectory() as temporary:
+                store = Path(temporary)
+                document = pymupdf.open()
+                document.new_page().insert_text((40, 40), 'Schema boundary')
+                digest = put_bytes(store, document.tobytes())
+                document.close()
+                output = json.dumps(value)
+                with patch('cordon_d.document_subscription._call', return_value=output) as call:
+                    for execute in (True, False, True):
+                        with self.assertRaises(ValidationError):
+                            read_documents([digest], store, prompt='Read direction.',
+                                           schema=self.schema, execute=execute)
+                    self.assertEqual(call.call_count, 1)
+                retained, = (store / 'derived/document-readings').glob('*.json')
+                self.assertEqual(json.loads(retained.read_text())['output'], output)
+
+    def test_invalid_schema_is_rejected_before_dispatch(self):
+        self.schema = {'type': 'not-a-json-schema-type'}
+        with patch('cordon_d.document_subscription._call') as call:
+            with self.assertRaises(SchemaError):
+                self.read(execute=True)
+            call.assert_not_called()
+
+    def test_schema_references_resolve_locally_without_network_retrieval(self):
+        self.schema = {'$defs': {'measure': self.schema}, '$ref': '#/$defs/measure'}
+        with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}'), \
+                patch('urllib.request.urlopen', side_effect=AssertionError('Network retrieval')) as network:
+            self.assertEqual(self.read(execute=True)['reading'], {'direction': 'proposed'})
+            self.assertEqual(self.read()['reading'], {'direction': 'proposed'})
+            self.schema = {'$ref': 'https://example.invalid/measure-schema'}
+            for execute in (True, False):
+                with self.assertRaises(Unresolvable):
+                    self.read(execute=execute)
+            network.assert_not_called()
 
     def test_transport_disables_tools_and_api_key_fallback(self):
         from types import SimpleNamespace

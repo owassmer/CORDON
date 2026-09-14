@@ -9,6 +9,9 @@ import subprocess
 from tempfile import TemporaryDirectory
 from time import monotonic
 
+from jsonschema.validators import validator_for
+from referencing import Registry
+
 from .store import blob_path
 
 
@@ -44,6 +47,9 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
     A source-review request must state its changed instruction explicitly.
     """
     import pymupdf
+    validator_class = validator_for(schema)
+    validator_class.check_schema(schema)
+    validator = validator_class(schema, registry=Registry())
     digests = list(digests)
     if not digests or len(set(digests)) != len(digests):
         raise ValueError('Supply distinct source hashes in document order')
@@ -93,4 +99,6 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
                 temporary_response = target.with_suffix('.tmp')
                 temporary_response.write_text(json.dumps(response, ensure_ascii=False) + '\n')
                 os.replace(temporary_response, target)
-        return dict(response, reading=json.loads(response['output']))
+        reading = json.loads(response['output'])
+        validator.validate(reading)
+        return dict(response, reading=reading)
