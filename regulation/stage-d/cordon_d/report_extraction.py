@@ -378,6 +378,16 @@ a match; if a relationship cannot be recovered, name that limitation in issues.
 '''
 
 
+STRUCTURE_REPAIR = '''Read the supplied source pages afresh. The prior reading failed a structural
+check of this reader: {defect}. Return the complete block again in the same schema,
+satisfying that check without changing any source value: every detected native table
+listed in the input needs exactly one region disposition on its own page; support and
+sections cite only physical pages of this document; identifier and annotation components
+must reconstruct the literal cell exactly; every target page needs exactly one
+disposition and no other page a disposition. Name in issues anything the source leaves
+unresolved rather than forcing it.'''
+
+
 def _call(request, *, config, budget, request_id, raw_path):
     if budget is None:
         raise RuntimeError('No retained response for this block; explicit paid execution is required')
@@ -598,6 +608,10 @@ def extract_report(digest, store, *, config, budget, execute=True):
         def read(targets):
             supplied_context = context | heading_context
             pages = sorted(supplied_context | set(targets))
+            # Through the API the model sees only the pages sent, so a citation outside
+            # them is fabricated. Through the subscription it reads the whole original
+            # document, so any physical page of it is a page it was shown.
+            supplied = pages if config.provider == 'api' else list(range(1, page_count + 1))
             content, native, regions = _page_content(document, pages, targets, config)
             request = {'model': config.model, 'max_tokens': config.max_tokens,
                        'messages': [{'role': 'user', 'content': content}]}
@@ -640,8 +654,35 @@ def extract_report(digest, store, *, config, budget, execute=True):
                     elif reading is None:
                         reading = _call(request, config=config, budget=budget,
                                         request_id=request_id, raw_path=raw_path)
-                    reading = target_reading(reading, targets, supplied_context)
-                    validate_block(reading, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
+                    structural_prior = None
+                    try:
+                        reading = target_reading(reading, targets, supplied)
+                        validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
+                                       native_regions=regions, supplied_pages=supplied)
+                    except ValueError as defect:
+                        if config.provider != 'subscription':
+                            raise
+                        # One bounded reread naming the structural defect, retained under its
+                        # own request. A second failure stands as this document's stop.
+                        repair_prompt = subscription_prompt + '\n\n' + STRUCTURE_REPAIR.format(defect=defect)
+                        repair_identity = {'provider': 'claude-code-subscription', 'model': config.model,
+                            'effort': config.effort, 'source_sha256': digest, 'target_pages': targets,
+                            'context_pages': sorted(supplied_context), 'prompt': repair_prompt,
+                            'schema': output_schema()}
+                        repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
+                        repair_raw = store / 'derived/reports/responses' / f'{repair_id}.json'
+                        reading = _retained_reading(repair_raw, config.model) if repair_raw.exists() else None
+                        if reading is None and not execute:
+                            raise NoRetainedResponse('No retained response for this structural reread; '
+                                                     'explicit execution is required') from defect
+                        if reading is None:
+                            reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
+                                digest=digest, source=blob_path(store, digest), config=config,
+                                request_id=repair_id, raw_path=repair_raw)
+                        reading = target_reading(reading, targets, supplied)
+                        validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
+                                       native_regions=regions, supplied_pages=supplied)
+                        structural_prior, request_id = (request_id, str(defect)), repair_id
                 prior_request = reused or request_id
                 effort = config.effort
                 sampling_repair = bool(unattached_sampling_scopes(reading))
@@ -676,9 +717,9 @@ def extract_report(digest, store, *, config, budget, execute=True):
                         elif reading is None:
                             reading = _call(repair, config=config, budget=budget,
                                             request_id=repair_id, raw_path=raw_path)
-                        reading = target_reading(reading, targets, supplied_context)
+                        reading = target_reading(reading, targets, supplied)
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
-                                       native_regions=regions, supplied_pages=pages)
+                                       native_regions=regions, supplied_pages=supplied)
                     except (RuntimeError, requests.RequestException, ValueError) as error:
                         item = {'targets': targets, 'context_pages': sorted(supplied_context),
                             'request_sha256': prior_request, 'reading': prior_reading,
@@ -696,8 +737,11 @@ def extract_report(digest, store, *, config, budget, execute=True):
                         'reading': reading, 'native_cells': native, 'native_regions': regions}
                 if reused and reused != prior_request:
                     item.update(prior_request_sha256=prior_request, effort=effort)
+                if structural_prior:
+                    item.update(structural_repair_of=structural_prior[0], structural_defect=structural_prior[1])
                 write_json(path, item)
-            validate_block(item['reading'], targets=targets, page_count=page_count, native_cells=item['native_cells'], native_regions=item.get('native_regions', []), supplied_pages=pages)
+            validate_block(item['reading'], targets=targets, page_count=page_count, native_cells=item['native_cells'],
+                           native_regions=item.get('native_regions', []), supplied_pages=supplied)
             blocks.append(item)
             context.update(item['reading']['context_pages'])
             headed = [table['page'] for table in item['reading']['tables']
