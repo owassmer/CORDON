@@ -198,7 +198,72 @@
     "publisher_refetch": "open: BURP document URL not recorded for these acts",
     "bytes": 2655842,
     "sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
-    "content_type": "application/pdf"
+    "content_type": "application/pdf",
+    "publisher_geometry_candidates": [
+      {
+        "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/0/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=32633",
+        "captured_at": "2026-09-14T18:39:38.586125+00:00",
+        "sha256": "b122f8b8bc6b4f7d38d02e3aa1d7edcb77f7cd5d692fbb4146fcb20d00597d58",
+        "bytes": 826018,
+        "content_type": "text/plain;charset=utf-8",
+        "format": "arcgis",
+        "oid_field": "OBJECTID",
+        "population_check": {
+          "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/0/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "sha256": "ddd3d99b824124ae35d32a6943d1128d44a21deb014f8229f020951dcad0db71",
+          "count": 4
+        },
+        "correspondence": "Publisher geometry candidates for comparison with the adopted maps. No act identifier, version interval or positional-error bound is stated by this feature response; no adopted-version assignment is inferred from capture date.",
+        "source_comparison": {
+          "source_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+          "source_locator": "physical page 10, ALLEGATO 1 GINOSA",
+          "scope": "Ginosa features only",
+          "reading": "Direct rendered-map comparison agrees on three infected components, their relative arrangement, the buffer outline and the separate Basilicata component. This supports depicted-area correspondence; it does not establish a numerical georeferencing error or an unchanged version interval."
+        }
+      },
+      {
+        "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/1/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=32633",
+        "captured_at": "2026-09-14T18:39:50.416589+00:00",
+        "sha256": "425b2b9be3b663f141499bd07bc13091327a6cefb0d5469adbf74bd61793b1c3",
+        "bytes": 1378257,
+        "content_type": "text/plain;charset=utf-8",
+        "format": "arcgis",
+        "oid_field": "OBJECTID",
+        "population_check": {
+          "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/1/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "sha256": "f67485a0112fd17978a948a3ef562689f0c8196440856c68a694aebc3c68f6f6",
+          "count": 4
+        },
+        "correspondence": "Publisher geometry candidates for comparison with the adopted maps. No act identifier, version interval or positional-error bound is stated by this feature response; no adopted-version assignment is inferred from capture date.",
+        "source_comparison": {
+          "source_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+          "source_locator": "physical page 10, ALLEGATO 1 GINOSA",
+          "scope": "Ginosa features only",
+          "reading": "Direct rendered-map comparison agrees on three infected components, their relative arrangement, the buffer outline and the separate Basilicata component. This supports depicted-area correspondence; it does not establish a numerical georeferencing error or an unchanged version interval."
+        }
+      },
+      {
+        "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/2/query?f=json&where=1%3D1&outFields=%2A&returnGeometry=true&outSR=32633",
+        "captured_at": "2026-09-14T18:39:55.269075+00:00",
+        "sha256": "656751b048bec25f1ee77afcf58f4e1ded8973a9a4dc73bbd692faf323a51be2",
+        "bytes": 75902,
+        "content_type": "text/plain;charset=utf-8",
+        "format": "arcgis",
+        "oid_field": "OBJECTID",
+        "population_check": {
+          "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFMultiplex/MapServer/2/query?f=json&where=1%3D1&returnIdsOnly=true",
+          "sha256": "9c973167ecc986ccdf7115032c405aaee098bc2f4b9afdd6fb8898dbee1622c1",
+          "count": 2
+        },
+        "correspondence": "Publisher geometry candidates for comparison with the adopted maps. No act identifier, version interval or positional-error bound is stated by this feature response; no adopted-version assignment is inferred from capture date.",
+        "source_comparison": {
+          "source_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+          "source_locator": "physical page 10, ALLEGATO 1 GINOSA",
+          "scope": "Ginosa features only",
+          "reading": "Direct rendered-map comparison agrees on three infected components, their relative arrangement, the buffer outline and the separate Basilicata component. This supports depicted-area correspondence; it does not establish a numerical georeferencing error or an unchanged version interval."
+        }
+      }
+    ]
   },
   {
     "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",

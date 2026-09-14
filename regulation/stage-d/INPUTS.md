@@ -240,14 +240,34 @@ The cadastral tables are useful evidence within their stated extent, not a subst
 for the missing map correspondence. Operative legal-area state and Annex III
 eligibility remain upstream A meanings.
 
-DDS 45/2025 physical page 34 (annex printed page 27) identifies the consequential
-geometry source: the post-adoption shapefile package InnovaPuglia transmits to the
-Osservatorio and ARIF. Owen owns external recovery. The specific first packages
-needed are those implementing DDS 148/2024 (12 November 2024, Santeramo ST26) and
-DDS 106/2025 (Santeramo/Ginosa, including the Basilicata extent), with the transmittal
-record identifying the adopted act, coordinate system and applicable precision.
-The 27 retained act PDFs contain no embedded geospatial coordinate dictionaries.
-Their map pages remain source evidence, but do not directly supply georeferenced
-vector boundaries. The act reader also recovers 49 named annex byte identities;
-none of those standalone byte hashes is currently in the shared store. This does
-not mean the corresponding annex pages are absent from the retained bundled PDFs.
+DDS 45/2025 physical page 34 (annex printed page 27) names the post-adoption
+shapefile transmission from InnovaPuglia to the Osservatorio and ARIF. A shapefile
+is one sufficient route, not a prescribed prerequisite where equivalent geometry
+and correspondence evidence exists. The current multiplex publisher service is
+retained in the existing act acquisition records and read by
+`cordon_d.areas.published_geography`: ten native polygon occurrences, including
+Santeramo and Ginosa's separate Basilicata buffer components, in EPSG:32633.
+Each layer's returned object IDs were checked against its independent ID response.
+The features do not state an adopting-act identity or positional bound; capture
+date and place labels alone cannot establish their adopted-version applicability.
+Direct comparison with DDS 106/2025 physical page 10 agrees on Ginosa's three
+infected components, relative arrangement, buffer outline and Basilicata component.
+That supports depicted-area correspondence; numerical georeferencing and version
+applicability still need sufficient evidence. Another copy of these polygons is
+not the missing input.
+
+The 27 act PDFs already contain bundled map annexes. They have no embedded
+geospatial coordinate dictionaries. The 49 named standalone annex hashes are
+not held as separate blobs; that does not make their bundled contents absent.
+Prior acquisition records name further geographic packages and imagery-service
+metadata, but the records alone do not establish possession of those source bytes.
+The current shared store contains no ZIP archive with shapefile members.
+No original plant photographs/sampling sheets or imagery accuracy assessment has
+been established from the examined retained sources. Those facts remain owned by
+the positional and plant rows, rather than becoming a new map-document checklist.
+
+DDS 148/2024 is not an active search priority. Its Santeramo ST26 intermediate
+version remains a specific correspondence question; use a concrete existing
+package or publisher lead if it can resolve that version. Do not substitute a
+later boundary or restart an exhaustive search. Continue retained cadastral
+membership and current-map correspondence independently of that recovery.

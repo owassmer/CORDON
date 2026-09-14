@@ -18,9 +18,46 @@ from cordon_d.areas import (CadastralStatement, Sheet, annexes, read_scope,
                             versions, zone_of, membership_evidence, _zone_from,
                             MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
                             RECOVERED_NOT_ATTACHED, RECOVERED_UNADJUDICATED, SOURCE_STATES_NONE,
-                            pinned_statements)
+                            pinned_statements, published_geography)
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+class PublishedGeography(unittest.TestCase):
+    def test_native_parts_and_capture_time_survive_without_adopted_assignment(self):
+        from unittest.mock import patch
+        from cordon_d.store import put_bytes, blob_path
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            store = root / 'store'
+            rings = [[[0, 0], [0, 10], [10, 10], [10, 0], [0, 0]],
+                     [[2, 2], [8, 2], [8, 8], [2, 8], [2, 2]]]
+            data = {'spatialReference': {'wkid': 32633}, 'features': [
+                {'attributes': {'OID': 7, 'label': 'Buffer in another region'},
+                 'geometry': {'rings': rings}}]}
+            digest = put_bytes(store, json.dumps(data).encode())
+            capture = dict(url='https://publisher.example/layer', sha256=digest,
+                           captured_at='2026-09-14T12:00:00+00:00',
+                           format='arcgis', oid_field='OID')
+            path = root / 'corpus/sources/areas/acts.json'
+            path.parent.mkdir(parents=True)
+            path.write_text(json.dumps([{'publisher_geometry_candidates': [capture]}]))
+            with patch.dict('os.environ', {'CORDON_STORE': str(store)}):
+                self.assertEqual(list(published_geography(root, known_through=
+                    datetime(2026, 9, 13, tzinfo=timezone.utc))), [])
+                context, occurrence = next(published_geography(root, known_through=
+                    datetime(2026, 9, 15, tzinfo=timezone.utc)))
+                self.assertEqual(occurrence.values['geometry']['rings'], rings)
+                self.assertEqual(occurrence.locator, 'feature:0:OID:7')
+                self.assertEqual(context, capture)
+                with self.assertRaisesRegex(ValueError, 'timezone'):
+                    list(published_geography(root, known_through=datetime(2026, 9, 15)))
+                blob = blob_path(store, digest)
+                blob.chmod(0o644)
+                blob.write_bytes(b'changed')
+                with self.assertRaisesRegex(ValueError, 'bytes changed'):
+                    list(published_geography(root, known_through=
+                        datetime(2026, 9, 15, tzinfo=timezone.utc)))
 
 
 def statement(scope, sheets=(), *, zone='infetta', comune='TRIGGIANO',

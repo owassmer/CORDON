@@ -28,7 +28,7 @@ unresolved with their literal text; nothing is guessed.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, datetime
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -637,6 +637,37 @@ def act_documents(root: Path):
         return {}
     return {r['instrument_id']: r for r in json.loads(record_path.read_text())
             if r.get('sha256') and 'error' not in r}
+
+
+def published_geography(root: Path, *, known_through: datetime):
+    """Native publisher occurrences retained for adopted-map correspondence.
+
+    A candidate's filing under an act does not assign its polygons to that act.
+    Return capture context with every occurrence; no metric or legal qualification
+    follows from a feature label or acquisition date.
+    """
+    from .releases import arcgis_occurrences
+    from .store import file_digest
+    if known_through.tzinfo is None or known_through.utcoffset() is None:
+        raise ValueError('Geography consumption needs a timezone-aware knowledge cutoff')
+    records = json.loads((root / 'corpus/sources/areas/acts.json').read_text())
+    seen = set()
+    for record in records:
+        for capture in record.get('publisher_geometry_candidates', []):
+            at = datetime.fromisoformat(capture['captured_at'])
+            if at.tzinfo is None:
+                raise ValueError('Geography capture has no timezone')
+            key = capture['url'], capture['sha256'], capture['captured_at']
+            if at > known_through or key in seen:
+                continue
+            seen.add(key)
+            path = blob_path(store_root(root), capture['sha256'])
+            if file_digest(path) != capture['sha256']:
+                raise ValueError('Publisher geometry source bytes changed')
+            if capture['format'] != 'arcgis':
+                raise ValueError('Publisher geometry capture needs its native format reader')
+            for occurrence in arcgis_occurrences(path, oid_field=capture['oid_field']):
+                yield capture, occurrence
 
 
 # --- handing the act's statement to the accepted consumer ---------------------
