@@ -498,6 +498,19 @@ understory observation belongs to its overlying tree; taxonomic compatibility
 alone also cannot establish membership. These are local identity limits, not a
 reason to discard observations or require authenticated access.
 
+The complete retained note population contains 995 occurrences and 418 distinct
+literal texts. Reading all those texts, rather than only resampling keywords,
+recovers five vine observations with row/ordinal/landmark descriptions. Their
+retained 2022/2023 scenes show field layout, but do not resolve every counting
+origin, landmark, plant position or event-time continuity. A missing counting
+origin is not supplied by choosing the nearest visible plant. One 2023 frame for
+the unanchored “third plant in the row” description timed out; its 2022 frame is
+retained. This does not establish an absence of later public imagery.
+The procedure distinguishes individual plant samples from the pool assembled
+from them. A note mentioning an incomplete pool therefore does not by itself
+establish aggregate observation grain, just as a sample label does not establish
+persistent plant identity. Method dependence remains a separate C qualification.
+
 The official SIT 2019, 2022 and 2023 image-service metadata and source frames are retained
 in `corpus/sources/subject-imagery/records.json`. Independent source inspection
 supports the olive observations of 28 July and 29 September 2023 at the same
