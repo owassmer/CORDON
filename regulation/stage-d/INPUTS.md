@@ -399,3 +399,10 @@ Direct inspection and source rereading of SELGE 139/2015 page 2 resolve the lati
 to the printed 40.42257829 for daily sample 1. The source's daily and laboratory codes
 remain distinct. No code chooses an identifier namespace or repairs a digit from
 result agreement.
+
+The removal-measure and administrative-event readers (rows 6–8 and 11) are the
+first intended users of the independent Codex document transport described in
+SPEC.md. This supplies subscription access, not their missing whole-measure meaning
+or consumer connections. Their source-specific contract and first full
+source-to-consumer qualification remain with PR #15; no measure-reading coverage
+or production dispatch is established by the transport change.
