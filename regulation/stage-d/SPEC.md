@@ -43,6 +43,14 @@ limitation. The calculation does not establish recipient effect, uninterrupted
 posting, election, silence, default or completed removal. No clause wording,
 layout or adoption date generates an assignment or performance event.
 
+`cordon_d.notices.parsec_publication_declarations` reads the publisher's labelled
+table, including native ICEfaces historical-search responses. It preserves each
+publication occurrence, declared dates, requesting office and emitted original
+routes. A correction-labelled entry and another entry can serve identical PDFs
+without becoming one publication or establishing an amendment. These declarations
+remain available while whole-measure attachment and its dependent consumers are
+held; the reader does not guess act identity from a referenced predecessor.
+
 ## Where bytes live
 
 Source bytes are the only irreplaceable data. They live in a content-addressed
