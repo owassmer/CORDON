@@ -1,0 +1,77 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+ "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "738273137df022d528a854d5598683c4a0b86ca57ec3059300dd872a1ccfd33f",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:27:22.692336+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 8839,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5974,
+   "cache_read_input_tokens": 6623,
+   "output_tokens": 452,
+   "output_tokens_details": {
+    "thinking_tokens": 18
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5974,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 305,
+     "cache_read_input_tokens": 4337,
+     "cache_creation_input_tokens": 3923,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3923
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.031646600000000004,
+  "session_id": "cabcd7b5-f36e-4550-b4e1-018175fe8ab4"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano",
+   "E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano",
+   "E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

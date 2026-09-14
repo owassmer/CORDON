@@ -1,0 +1,831 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 12,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "08760ea6256d3915f76aab7f94022d4c8ca57cf127b29b1f97c604f29b69383f",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:31:30.270833+00:00",
+ "native_tables": [
+  {
+   "id": "p12-t1",
+   "bbox": [
+    54.2,
+    83.6,
+    534.8,
+    192.3
+   ]
+  },
+  {
+   "id": "p12-t2",
+   "bbox": [
+    54.2,
+    200.9,
+    534.8,
+    450.8
+   ]
+  }
+ ],
+ "native_cells": {
+  "p12-t1-r1-c1": {
+   "text": "-\nXylella fastidiosa – sottospecie multiplex ST26- Santeramo in Colle - ZONA INFETTA\n7",
+   "table": "p12-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    54.2,
+    83.6,
+    534.8,
+    95.9
+   ]
+  },
+  "p12-t1-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p12-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    54.2,
+    95.9,
+    134.3,
+    113.5
+   ]
+  },
+  "p12-t1-r2-c2": {
+   "text": "6-1\nCOMUNE",
+   "table": "p12-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    134.3,
+    95.9,
+    262.0,
+    113.5
+   ]
+  },
+  "p12-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE\nPIANTE RISULTATE INFETTE.",
+   "table": "p12-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    262.0,
+    95.9,
+    534.8,
+    113.5
+   ]
+  },
+  "p12-t1-r3-c1": {
+   "text": "BARI",
+   "table": "p12-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    54.2,
+    113.5,
+    134.3,
+    192.3
+   ]
+  },
+  "p12-t1-r3-c2": {
+   "text": "ACQUAVIVA DELLE FONTI 0",
+   "table": "p12-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    134.3,
+    113.5,
+    262.0,
+    122.2
+   ]
+  },
+  "p12-t1-r3-c3": {
+   "text": "FOGLIO 82, 83",
+   "table": "p12-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    262.0,
+    113.5,
+    534.8,
+    122.2
+   ]
+  },
+  "p12-t1-r4-c2": {
+   "text": "2025-\nALTAMURA",
+   "table": "p12-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    134.3,
+    122.2,
+    262.0,
+    148.5
+   ]
+  },
+  "p12-t1-r4-c3": {
+   "text": "FOGLIO 112, 113, 145, 146, 147, 149, 150, 151, 178, 179, 183, 185, 186, 187, 189,\n190, 191, 192, 194, 195, 196, 197, 199, 206, 207, 222, 231, 241, 242, 243, 253, 264,\n267, 276, 277",
+   "table": "p12-t1",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    262.0,
+    122.2,
+    534.8,
+    148.5
+   ]
+  },
+  "p12-t1-r5-c2": {
+   "text": "CASSANO DELLE MURGE\n-",
+   "table": "p12-t1",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    134.3,
+    148.5,
+    262.0,
+    157.2
+   ]
+  },
+  "p12-t1-r5-c3": {
+   "text": "FOGLIO 53, 54, 55, 61, 62, 64, 70, 71, 72, 73, 77, 78",
+   "table": "p12-t1",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    262.0,
+    148.5,
+    534.8,
+    157.2
+   ]
+  },
+  "p12-t1-r6-c2": {
+   "text": "1\nSANTERAMO IN COLLE -\n0\n-",
+   "table": "p12-t1",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    134.3,
+    157.2,
+    262.0,
+    192.3
+   ]
+  },
+  "p12-t1-r6-c3": {
+   "text": "FOGLIO 1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29,\n32, 34, 37, 38, 39, 40, 41, 42, 43, 46, 47, 52, 53, 55, 57, 58, 59, 60, 61, 66, 67, 68, 69,\n70, 72, 77, 78, 79, 80, 81, 82, 83, 85, 86, 90, 91, 93, 96,101, 102, 106, 110, 111",
+   "table": "p12-t1",
+   "row": 6,
+   "column": 3,
+   "bbox": [
+    262.0,
+    157.2,
+    534.8,
+    192.3
+   ]
+  },
+  "p12-t2-r1-c1": {
+   "text": "Xylella fastidiosa – sottospecie multiplex ST26- Santeramo in Colle - ZONA CUSCINETTO 33",
+   "table": "p12-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    54.2,
+    200.9,
+    534.8,
+    213.4
+   ]
+  },
+  "p12-t2-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p12-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    54.2,
+    213.4,
+    134.3,
+    239.8
+   ]
+  },
+  "p12-t2-r2-c2": {
+   "text": "C_I\nCOMUNE",
+   "table": "p12-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    134.3,
+    213.4,
+    262.0,
+    239.8
+   ]
+  },
+  "p12-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p12-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    262.0,
+    213.4,
+    534.8,
+    239.8
+   ]
+  },
+  "p12-t2-r3-c1": {
+   "text": "BARI",
+   "table": "p12-t2",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    54.2,
+    239.8,
+    134.3,
+    432.7
+   ]
+  },
+  "p12-t2-r3-c2": {
+   "text": "ACQUAVIVA DELLE FONTI",
+   "table": "p12-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    134.3,
+    239.8,
+    262.0,
+    266.0
+   ]
+  },
+  "p12-t2-r3-c3": {
+   "text": "FOGLIO 55, 56, 61*, 62*, 63, 64, 65, 72*, 73*, 74, 75, 76, 81*, 82, 83, 84*, 85, 86, 92*,\n93*, 94*, 95, 99*, 100*, 101*, 102*, 103, 104, 105, 106*, 107*, 108*, 109*, 110, 111,\n112",
+   "table": "p12-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    262.0,
+    239.8,
+    534.8,
+    266.0
+   ]
+  },
+  "p12-t2-r4-c2": {
+   "text": "ALTAMURA",
+   "table": "p12-t2",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    134.3,
+    266.0,
+    262.0,
+    344.9
+   ]
+  },
+  "p12-t2-r4-c3": {
+   "text": "FOGLIO 76, 77, 108, 109, 110*, 111*, 112, 113, 133, 137, 138, 139, 140, 141*, 142*,\n143*, 144*, 145, 146, 147, 148*, 149, 150, 151, 158, 159, 161, 162, 163*, 164, 165,\n166, 167, 168*, 169*, 170*, 171, 172, 173, 174, 175,176, 177*,178, 179, 180*, 181*,\n182*, 183, 184*, 185, 186, 187, 188*, 189, 190, 191, 192, 193*, 194, 195, 196, 197,\n198*, 199, 204, 205*, 206, 207, 208*, 209*, 210*, 211*, 217, 218, 219, 220*, 221*,\n222, 223*, 224*, 225*, 226*, 227*, 228*, 229*, 230*, 231, 237, 238, 239*, 240*, 241,\n242, 243, 244*, 245*, 246*, 247*, 248*, 249*, 250*, 251*, 252*, 253, 254*, 260, 261*,\n262*, 263*, 264, 265*, 266*, 267, 268*, 269*, 270*, 271*, 272*, 273*, 274*, 275*, 276,\n277, 278*, 279",
+   "table": "p12-t2",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    262.0,
+    266.0,
+    534.8,
+    344.9
+   ]
+  },
+  "p12-t2-r5-c2": {
+   "text": "CASSANO DELLE MURGE",
+   "table": "p12-t2",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    134.3,
+    344.9,
+    262.0,
+    371.2
+   ]
+  },
+  "p12-t2-r5-c3": {
+   "text": "FOGLIO 31, 33, 34, 35, 36*, 37, 38, 39, 40, 41, 42, 43, 44, 45*, 46*, 47*, 48*, 49*, 50,\n51, 52, 53, 54, 55, 56*, 57*, 58*, 59*, 60*, 61, 62, 63*, 64, 65*, 66*, 67*, 68*, 69*, 70,\n71, 72, 73, 74*, 75*, 76*, 77, 78",
+   "table": "p12-t2",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    262.0,
+    344.9,
+    534.8,
+    371.2
+   ]
+  },
+  "p12-t2-r6-c2": {
+   "text": "GIOIA DEL COLLE",
+   "table": "p12-t2",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    134.3,
+    371.2,
+    262.0,
+    380.0
+   ]
+  },
+  "p12-t2-r6-c3": {
+   "text": "FOGLIO 27, 41, 57, 135, 136, 147*, 148, 149, 166",
+   "table": "p12-t2",
+   "row": 6,
+   "column": 3,
+   "bbox": [
+    262.0,
+    371.2,
+    534.8,
+    380.0
+   ]
+  },
+  "p12-t2-r7-c2": {
+   "text": "SANTERAMO IN COLLE",
+   "table": "p12-t2",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    134.3,
+    380.0,
+    262.0,
+    432.7
+   ]
+  },
+  "p12-t2-r7-c3": {
+   "text": "FOGLIO 1, 2, 3*, 4, 5, 6*, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20*, 21*, 22*,\n23*, 24*, 25, 26, 27, 28, 29, 30*, 31*, 32, 33*, 34, 35*, 36*, 37, 38, 39, 40, 41, 42, 43,\n44*, 45*, 46, 47, 48*, 49*, 50*, 51*, 52, 53, 54*, 55, 56*, 57, 58, 59, 60, 61, 62*, 63*,\n64*, 65*, 66, 67, 68, 69, 70, 71*, 72, 73*, 74*, 75*, 76*, 77, 78, 79, 80, 81, 82, 83, 84*,\n85, 86, 87*, 88*, 89*, 90, 91, 92*, 93, 94*, 95*, 96, 97*, 98*, 99, 100*, 101, 102, 103*,\n104, 105*, 106, 108, 109*, 110, 111, 112*",
+   "table": "p12-t2",
+   "row": 7,
+   "column": 3,
+   "bbox": [
+    262.0,
+    380.0,
+    534.8,
+    432.7
+   ]
+  },
+  "p12-t2-r8-c1": {
+   "text": "TARANTO",
+   "table": "p12-t2",
+   "row": 8,
+   "column": 1,
+   "bbox": [
+    54.2,
+    432.7,
+    134.3,
+    450.8
+   ]
+  },
+  "p12-t2-r8-c2": {
+   "text": "LATERZA",
+   "table": "p12-t2",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    134.3,
+    432.7,
+    262.0,
+    450.8
+   ]
+  },
+  "p12-t2-r8-c3": {
+   "text": "FOGLIO 4, 5, 6",
+   "table": "p12-t2",
+   "row": 8,
+   "column": 3,
+   "bbox": [
+    262.0,
+    432.7,
+    534.8,
+    450.8
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 29856,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 11981,
+   "cache_read_input_tokens": 12598,
+   "output_tokens": 3540,
+   "output_tokens_details": {
+    "thinking_tokens": 1844
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 11981,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 3362,
+     "cache_read_input_tokens": 10312,
+     "cache_creation_input_tokens": 3955,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3955
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.09305059999999998,
+  "session_id": "bc5be343-188e-419a-b005-c4bb505f2f36"
+ },
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- Santeramo in Colle - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "ACQUAVIVA DELLE FONTI"
+      },
+      "scope": {
+       "native_cell": "p12-t1-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "ALTAMURA"
+      },
+      "scope": {
+       "native_cell": "p12-t1-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "CASSANO DELLE MURGE"
+      },
+      "scope": {
+       "native_cell": "p12-t1-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "SANTERAMO IN COLLE"
+      },
+      "scope": {
+       "native_cell": "p12-t1-r6-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- Santeramo in Colle - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r6-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r6-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r7-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r7-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r8-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r8-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r8-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p12-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p12-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2 - SANTERAMO IN COLLE",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059 (page watermark, repeated vertically)",
+   "4 (page number)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- Santeramo in Colle - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "ACQUAVIVA DELLE FONTI",
+       "transcribed": true
+      },
+      "scope": {
+       "text": "FOGLIO 82, 83",
+       "copied_from": "p12-t1-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "ALTAMURA",
+       "transcribed": true
+      },
+      "scope": {
+       "text": "FOGLIO 112, 113, 145, 146, 147, 149, 150, 151, 178, 179, 183, 185, 186, 187, 189,\n190, 191, 192, 194, 195, 196, 197, 199, 206, 207, 222, 231, 241, 242, 243, 253, 264,\n267, 276, 277",
+       "copied_from": "p12-t1-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "CASSANO DELLE MURGE",
+       "transcribed": true
+      },
+      "scope": {
+       "text": "FOGLIO 53, 54, 55, 61, 62, 64, 70, 71, 72, 73, 77, 78",
+       "copied_from": "p12-t1-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "SANTERAMO IN COLLE",
+       "transcribed": true
+      },
+      "scope": {
+       "text": "FOGLIO 1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29,\n32, 34, 37, 38, 39, 40, 41, 42, 43, 46, 47, 52, 53, 55, 57, 58, 59, 60, 61, 66, 67, 68, 69,\n70, 72, 77, 78, 79, 80, 81, 82, 83, 85, 86, 90, 91, 93, 96,101, 102, 106, 110, 111",
+       "copied_from": "p12-t1-r6-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- Santeramo in Colle - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "text": "ACQUAVIVA DELLE FONTI",
+       "copied_from": "p12-t2-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 55, 56, 61*, 62*, 63, 64, 65, 72*, 73*, 74, 75, 76, 81*, 82, 83, 84*, 85, 86, 92*,\n93*, 94*, 95, 99*, 100*, 101*, 102*, 103, 104, 105, 106*, 107*, 108*, 109*, 110, 111,\n112",
+       "copied_from": "p12-t2-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "text": "ALTAMURA",
+       "copied_from": "p12-t2-r4-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 76, 77, 108, 109, 110*, 111*, 112, 113, 133, 137, 138, 139, 140, 141*, 142*,\n143*, 144*, 145, 146, 147, 148*, 149, 150, 151, 158, 159, 161, 162, 163*, 164, 165,\n166, 167, 168*, 169*, 170*, 171, 172, 173, 174, 175,176, 177*,178, 179, 180*, 181*,\n182*, 183, 184*, 185, 186, 187, 188*, 189, 190, 191, 192, 193*, 194, 195, 196, 197,\n198*, 199, 204, 205*, 206, 207, 208*, 209*, 210*, 211*, 217, 218, 219, 220*, 221*,\n222, 223*, 224*, 225*, 226*, 227*, 228*, 229*, 230*, 231, 237, 238, 239*, 240*, 241,\n242, 243, 244*, 245*, 246*, 247*, 248*, 249*, 250*, 251*, 252*, 253, 254*, 260, 261*,\n262*, 263*, 264, 265*, 266*, 267, 268*, 269*, 270*, 271*, 272*, 273*, 274*, 275*, 276,\n277, 278*, 279",
+       "copied_from": "p12-t2-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "text": "CASSANO DELLE MURGE",
+       "copied_from": "p12-t2-r5-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 31, 33, 34, 35, 36*, 37, 38, 39, 40, 41, 42, 43, 44, 45*, 46*, 47*, 48*, 49*, 50,\n51, 52, 53, 54, 55, 56*, 57*, 58*, 59*, 60*, 61, 62, 63*, 64, 65*, 66*, 67*, 68*, 69*, 70,\n71, 72, 73, 74*, 75*, 76*, 77, 78",
+       "copied_from": "p12-t2-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "text": "GIOIA DEL COLLE",
+       "copied_from": "p12-t2-r6-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 27, 41, 57, 135, 136, 147*, 148, 149, 166",
+       "copied_from": "p12-t2-r6-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "text": "SANTERAMO IN COLLE",
+       "copied_from": "p12-t2-r7-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 1, 2, 3*, 4, 5, 6*, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20*, 21*, 22*,\n23*, 24*, 25, 26, 27, 28, 29, 30*, 31*, 32, 33*, 34, 35*, 36*, 37, 38, 39, 40, 41, 42, 43,\n44*, 45*, 46, 47, 48*, 49*, 50*, 51*, 52, 53, 54*, 55, 56*, 57, 58, 59, 60, 61, 62*, 63*,\n64*, 65*, 66, 67, 68, 69, 70, 71*, 72, 73*, 74*, 75*, 76*, 77, 78, 79, 80, 81, 82, 83, 84*,\n85, 86, 87*, 88*, 89*, 90, 91, 92*, 93, 94*, 95*, 96, 97*, 98*, 99, 100*, 101, 102, 103*,\n104, 105*, 106, 108, 109*, 110, 111, 112*",
+       "copied_from": "p12-t2-r7-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p12-t2-r8-c1"
+      },
+      "comune": {
+       "text": "LATERZA",
+       "copied_from": "p12-t2-r8-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 4, 5, 6",
+       "copied_from": "p12-t2-r8-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2 - SANTERAMO IN COLLE",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059 (page watermark, repeated vertically)",
+   "4 (page number)"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p12-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p12-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "tables_visible": 2
+ },
+ "resolution_problems": []
+}

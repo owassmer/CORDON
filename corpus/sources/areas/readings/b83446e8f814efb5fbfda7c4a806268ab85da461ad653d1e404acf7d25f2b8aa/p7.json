@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+ "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "55d9254c443b865582a5811460c85391da85d729ff5cafaa871e63a626889be0",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:27:30.678975+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6938,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5849,
+   "cache_read_input_tokens": 6501,
+   "output_tokens": 529,
+   "output_tokens_details": {
+    "thinking_tokens": 16
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5849,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 386,
+     "cache_read_input_tokens": 4215,
+     "cache_creation_input_tokens": 3920,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3920
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0318292,
+  "session_id": "8679c44d-f59d-4ff2-87f2-bc924cbc5e10"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "Legenda: Area Delimitata XF sub. pauca (Bisceglie) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Bisceglie) - Zona Infetta; Confini Comunali; Confini Provinciali",
+   "Map labels: MOLFETTA, BISCEGLIE, TRANI, Prov. BA, Prov. BT"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "Legenda: Area Delimitata XF sub. pauca (Bisceglie) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Bisceglie) - Zona Infetta; Confini Comunali; Confini Provinciali",
+   "Map labels: MOLFETTA, BISCEGLIE, TRANI, Prov. BA, Prov. BT"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

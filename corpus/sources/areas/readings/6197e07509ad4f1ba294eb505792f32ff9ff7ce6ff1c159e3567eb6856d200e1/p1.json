@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+ "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "aab6eec304131fde812c794529c8b0b1c9de64380196da1c3b512050730de618",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:27:43.492414+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6659,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7817,
+   "cache_read_input_tokens": 8451,
+   "output_tokens": 517,
+   "output_tokens_details": {
+    "thinking_tokens": 33
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7817,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 355,
+     "cache_read_input_tokens": 6165,
+     "cache_creation_input_tokens": 3938,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3938
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.041508199999999995,
+  "session_id": "3596747f-aee5-4c80-98b9-b4b4242eacd2"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Giovinazzo (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE2020/1201 e s.m.i.",
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 12 agosto 2025, n. 147"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Giovinazzo (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE2020/1201 e s.m.i.",
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 12 agosto 2025, n. 147"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

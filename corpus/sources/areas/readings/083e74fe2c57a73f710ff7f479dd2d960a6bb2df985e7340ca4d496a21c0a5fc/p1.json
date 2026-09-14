@@ -1,0 +1,77 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+ "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "b38e986789a74c49ded4f000428f8c837b2aa9c6360e7c27c0a46849528ff5bd",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:22:53.185281+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 11988,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7626,
+   "cache_read_input_tokens": 8255,
+   "output_tokens": 645,
+   "output_tokens_details": {
+    "thinking_tokens": 39
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7626,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 478,
+     "cache_read_input_tokens": 5969,
+     "cache_creation_input_tokens": 3943,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3943
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.041789,
+  "session_id": "16a9aaed-30be-42e7-9c9b-aced4fede7ac"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Header: \"49794 Bollettino Ufficiale della Regione Puglia - n. 62 del 1-8-2024\"",
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 22 luglio 2024, n. 92 — Reg. (UE) 2020/1201 -Istituzione area delimitata a \"Xylella fastidiosa sottospecie - Pauca ST53 - Bari\" ai sensi dell'art. 4 del Reg. (UE) 2020/1201.",
+   "This page contains only the preamble sections IL DIRIGENTE DELLA STRUTTURA PROPONENTE, VISTI, and VISTI ALTRESI' listing legislative and prior-determination citations; no cadastral annex table appears."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Header: \"49794 Bollettino Ufficiale della Regione Puglia - n. 62 del 1-8-2024\"",
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 22 luglio 2024, n. 92 — Reg. (UE) 2020/1201 -Istituzione area delimitata a \"Xylella fastidiosa sottospecie - Pauca ST53 - Bari\" ai sensi dell'art. 4 del Reg. (UE) 2020/1201.",
+   "This page contains only the preamble sections IL DIRIGENTE DELLA STRUTTURA PROPONENTE, VISTI, and VISTI ALTRESI' listing legislative and prior-determination citations; no cadastral annex table appears."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,91 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+ "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "0eb206dac9666dfa9bc7e7f78de83dd51620519d86c60fbe806c3c644726d0e4",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:31:45.783945+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 16335,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7496,
+   "cache_read_input_tokens": 8115,
+   "output_tokens": 1277,
+   "output_tokens_details": {
+    "thinking_tokens": 49
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7496,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1100,
+     "cache_read_input_tokens": 5829,
+     "cache_creation_input_tokens": 3953,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3953
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.047467,
+  "session_id": "32189cd7-3f70-476f-8777-305c91a10151"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall’organismo nocivo specificato;",
+   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
+   "Le zone cuscinetto attorno alle zone infette generate dalle n. 30 piante positive si sovrappongono parzialmente o in toto alla zona cuscinetto dell’area delimitata per “Xylella fastidiosa – sottospecie pauca - Modugno (BA), di cui alle determine dirigenziali n° 126/2025 e n. 132/2025.",
+   "L’Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l’area delimitata “Xylella fastidiosa – sottospecie pauca ST53- Modugno (BA)”;",
+   "l’Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia;",
+   "l’Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell’area delimitata “Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)”.",
+   "Di dovere aggiornare l’area delimitata per “Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)”, di cui alle determine dirigenziali n° 126/2025 e n. 132/2025, ai sensi dell’art. 4 del Reg (UE) 2020/1201, costituita da: zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53.",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.;",
+   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall’Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate;",
+   "Di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto è necessario applicare le misure di eradicazione per contrastare l’ulteriore diffusione della malattia."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall’organismo nocivo specificato;",
+   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
+   "Le zone cuscinetto attorno alle zone infette generate dalle n. 30 piante positive si sovrappongono parzialmente o in toto alla zona cuscinetto dell’area delimitata per “Xylella fastidiosa – sottospecie pauca - Modugno (BA), di cui alle determine dirigenziali n° 126/2025 e n. 132/2025.",
+   "L’Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l’area delimitata “Xylella fastidiosa – sottospecie pauca ST53- Modugno (BA)”;",
+   "l’Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia;",
+   "l’Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell’area delimitata “Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)”.",
+   "Di dovere aggiornare l’area delimitata per “Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)”, di cui alle determine dirigenziali n° 126/2025 e n. 132/2025, ai sensi dell’art. 4 del Reg (UE) 2020/1201, costituita da: zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53.",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.;",
+   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall’Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate;",
+   "Di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto è necessario applicare le misure di eradicazione per contrastare l’ulteriore diffusione della malattia."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

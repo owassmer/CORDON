@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+ "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "54314f738cfe6e62a1bf13cb78653eb01c83bb1628fffb0c3621d79693007fd1",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:23:40.206084+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 5801,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5919,
+   "cache_read_input_tokens": 6556,
+   "output_tokens": 417,
+   "output_tokens_details": {
+    "thinking_tokens": 30
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5919,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 258,
+     "cache_read_input_tokens": 4270,
+     "cache_creation_input_tokens": 3935,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3935
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0310232,
+  "session_id": "a4a3b340-388d-4753-8698-5bcd9361e820"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "Map legend: Area delimitata Xylella fastidiosa sub. fastidiosa; Area delimitata Xylella fastidiosa sub. pauca; Confini Provinciali"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "Map legend: Area delimitata Xylella fastidiosa sub. fastidiosa; Area delimitata Xylella fastidiosa sub. pauca; Confini Provinciali"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

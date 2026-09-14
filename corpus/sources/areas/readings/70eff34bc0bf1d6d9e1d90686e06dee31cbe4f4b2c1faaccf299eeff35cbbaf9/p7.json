@@ -1,0 +1,2824 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+ "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "high",
+ "dpi": 200,
+ "request_sha256": "f643dc60604763ca982a3bc9ab68a3b78c25cd9fef1009a3a6f596b34885129f",
+ "prompt_sha256": "c8d9a52040f6f4cb",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:37:56.034958+00:00",
+ "native_tables": [
+  {
+   "id": "p7-t1",
+   "bbox": [
+    100.7,
+    137.1,
+    434.9,
+    165.2
+   ]
+  },
+  {
+   "id": "p7-t2",
+   "bbox": [
+    100.7,
+    174.3,
+    434.9,
+    202.4
+   ]
+  },
+  {
+   "id": "p7-t3",
+   "bbox": [
+    100.7,
+    208.6,
+    434.9,
+    369.4
+   ]
+  },
+  {
+   "id": "p7-t4",
+   "bbox": [
+    100.7,
+    375.7,
+    434.9,
+    404.1
+   ]
+  },
+  {
+   "id": "p7-t5",
+   "bbox": [
+    100.7,
+    410.2,
+    434.9,
+    507.6
+   ]
+  },
+  {
+   "id": "p7-t6",
+   "bbox": [
+    100.7,
+    513.7,
+    434.9,
+    560.6
+   ]
+  },
+  {
+   "id": "p7-t7",
+   "bbox": [
+    100.7,
+    566.7,
+    434.9,
+    626.3
+   ]
+  },
+  {
+   "id": "p7-t8",
+   "bbox": [
+    100.7,
+    632.4,
+    434.9,
+    679.3
+   ]
+  }
+ ],
+ "native_cells": {
+  "p7-t1-r1-c1": {
+   "text": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI LECCE",
+   "table": "p7-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    137.1,
+    434.9,
+    146.0
+   ]
+  },
+  "p7-t1-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    146.0,
+    156.3,
+    152.4
+   ]
+  },
+  "p7-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    146.0,
+    245.2,
+    152.4
+   ]
+  },
+  "p7-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA CATASTALI",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    146.0,
+    434.9,
+    152.4
+   ]
+  },
+  "p7-t1-r4-c1": {
+   "text": "LECCE",
+   "table": "p7-t1",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    100.7,
+    158.6,
+    156.3,
+    165.2
+   ]
+  },
+  "p7-t1-r4-c2": {
+   "text": "INTERO TERRITORIO PROVINCIALE",
+   "table": "p7-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    158.6,
+    434.9,
+    165.2
+   ]
+  },
+  "p7-t2-r1-c1": {
+   "text": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI BRINDISI",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    174.3,
+    434.9,
+    183.3
+   ]
+  },
+  "p7-t2-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    183.3,
+    156.3,
+    189.6
+   ]
+  },
+  "p7-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    183.3,
+    245.2,
+    189.6
+   ]
+  },
+  "p7-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA CATASTALI",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    183.3,
+    434.9,
+    189.6
+   ]
+  },
+  "p7-t2-r4-c1": {
+   "text": "BRINDISI",
+   "table": "p7-t2",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    100.7,
+    195.9,
+    156.3,
+    202.4
+   ]
+  },
+  "p7-t2-r4-c2": {
+   "text": "INTERO TERRITORIO PROVINCIALE",
+   "table": "p7-t2",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    195.9,
+    434.9,
+    202.4
+   ]
+  },
+  "p7-t3-r1-c1": {
+   "text": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI TARANTO",
+   "table": "p7-t3",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    208.6,
+    434.9,
+    217.7
+   ]
+  },
+  "p7-t3-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t3",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    217.7,
+    156.3,
+    224.0
+   ]
+  },
+  "p7-t3-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t3",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    217.7,
+    245.2,
+    224.0
+   ]
+  },
+  "p7-t3-r2-c3": {
+   "text": "FOGLI DI MAPPA CATASTALI",
+   "table": "p7-t3",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    217.7,
+    434.9,
+    224.0
+   ]
+  },
+  "p7-t3-r4-c1": {
+   "text": "TARANTO",
+   "table": "p7-t3",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    100.7,
+    230.3,
+    156.3,
+    369.4
+   ]
+  },
+  "p7-t3-r4-c2": {
+   "text": "AVETRANA",
+   "table": "p7-t3",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    230.3,
+    245.2,
+    236.6
+   ]
+  },
+  "p7-t3-r4-c3": {
+   "text": "INTERO TERRITORIO COMUNALE",
+   "table": "p7-t3",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    245.2,
+    230.3,
+    434.9,
+    369.4
+   ]
+  },
+  "p7-t3-r5-c2": {
+   "text": "CAROSINO",
+   "table": "p7-t3",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    156.3,
+    236.6,
+    245.2,
+    243.0
+   ]
+  },
+  "p7-t3-r6-c2": {
+   "text": "CRISPIANO",
+   "table": "p7-t3",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    156.3,
+    243.0,
+    245.2,
+    249.3
+   ]
+  },
+  "p7-t3-r7-c2": {
+   "text": "FAGGIANO",
+   "table": "p7-t3",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    156.3,
+    249.3,
+    245.2,
+    255.6
+   ]
+  },
+  "p7-t3-r8-c2": {
+   "text": "FRAGAGNANO",
+   "table": "p7-t3",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    156.3,
+    255.6,
+    245.2,
+    261.9
+   ]
+  },
+  "p7-t3-r9-c2": {
+   "text": "GROTTAGLIE",
+   "table": "p7-t3",
+   "row": 9,
+   "column": 2,
+   "bbox": [
+    156.3,
+    261.9,
+    245.2,
+    268.2
+   ]
+  },
+  "p7-t3-r10-c2": {
+   "text": "LEPORANO",
+   "table": "p7-t3",
+   "row": 10,
+   "column": 2,
+   "bbox": [
+    156.3,
+    268.2,
+    245.2,
+    274.5
+   ]
+  },
+  "p7-t3-r11-c2": {
+   "text": "LIZZANO",
+   "table": "p7-t3",
+   "row": 11,
+   "column": 2,
+   "bbox": [
+    156.3,
+    274.5,
+    245.2,
+    280.8
+   ]
+  },
+  "p7-t3-r12-c2": {
+   "text": "MANDURIA",
+   "table": "p7-t3",
+   "row": 12,
+   "column": 2,
+   "bbox": [
+    156.3,
+    280.8,
+    245.2,
+    287.2
+   ]
+  },
+  "p7-t3-r13-c2": {
+   "text": "MARTINA FRANCA",
+   "table": "p7-t3",
+   "row": 13,
+   "column": 2,
+   "bbox": [
+    156.3,
+    287.2,
+    245.2,
+    293.5
+   ]
+  },
+  "p7-t3-r14-c2": {
+   "text": "MARUGGIO",
+   "table": "p7-t3",
+   "row": 14,
+   "column": 2,
+   "bbox": [
+    156.3,
+    293.5,
+    245.2,
+    299.8
+   ]
+  },
+  "p7-t3-r15-c2": {
+   "text": "MONTEIASI",
+   "table": "p7-t3",
+   "row": 15,
+   "column": 2,
+   "bbox": [
+    156.3,
+    299.8,
+    245.2,
+    306.1
+   ]
+  },
+  "p7-t3-r16-c2": {
+   "text": "MONTEMESOLA",
+   "table": "p7-t3",
+   "row": 16,
+   "column": 2,
+   "bbox": [
+    156.3,
+    306.1,
+    245.2,
+    312.4
+   ]
+  },
+  "p7-t3-r17-c2": {
+   "text": "MONTEPARANO",
+   "table": "p7-t3",
+   "row": 17,
+   "column": 2,
+   "bbox": [
+    156.3,
+    312.4,
+    245.2,
+    318.7
+   ]
+  },
+  "p7-t3-r18-c2": {
+   "text": "PULSANO",
+   "table": "p7-t3",
+   "row": 18,
+   "column": 2,
+   "bbox": [
+    156.3,
+    318.7,
+    245.2,
+    325.0
+   ]
+  },
+  "p7-t3-r19-c2": {
+   "text": "ROCCAFORZATA",
+   "table": "p7-t3",
+   "row": 19,
+   "column": 2,
+   "bbox": [
+    156.3,
+    325.0,
+    245.2,
+    331.4
+   ]
+  },
+  "p7-t3-r20-c2": {
+   "text": "SAN GIORGIO IONICO",
+   "table": "p7-t3",
+   "row": 20,
+   "column": 2,
+   "bbox": [
+    156.3,
+    331.4,
+    245.2,
+    337.7
+   ]
+  },
+  "p7-t3-r21-c2": {
+   "text": "SAN MARZANO DI SAN GIUSEPPE",
+   "table": "p7-t3",
+   "row": 21,
+   "column": 2,
+   "bbox": [
+    156.3,
+    337.7,
+    245.2,
+    344.0
+   ]
+  },
+  "p7-t3-r22-c2": {
+   "text": "SAVA",
+   "table": "p7-t3",
+   "row": 22,
+   "column": 2,
+   "bbox": [
+    156.3,
+    344.0,
+    245.2,
+    350.3
+   ]
+  },
+  "p7-t3-r23-c2": {
+   "text": "STATTE",
+   "table": "p7-t3",
+   "row": 23,
+   "column": 2,
+   "bbox": [
+    156.3,
+    350.3,
+    245.2,
+    356.6
+   ]
+  },
+  "p7-t3-r24-c2": {
+   "text": "TARANTO",
+   "table": "p7-t3",
+   "row": 24,
+   "column": 2,
+   "bbox": [
+    156.3,
+    356.6,
+    245.2,
+    362.9
+   ]
+  },
+  "p7-t3-r25-c2": {
+   "text": "TORRICELLA",
+   "table": "p7-t3",
+   "row": 25,
+   "column": 2,
+   "bbox": [
+    156.3,
+    362.9,
+    245.2,
+    369.4
+   ]
+  },
+  "p7-t4-r1-c1": {
+   "text": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI BARI",
+   "table": "p7-t4",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    375.7,
+    434.9,
+    384.7
+   ]
+  },
+  "p7-t4-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t4",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    384.7,
+    156.3,
+    391.0
+   ]
+  },
+  "p7-t4-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t4",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    384.7,
+    245.2,
+    391.0
+   ]
+  },
+  "p7-t4-r2-c3": {
+   "text": "FOGLI DI MAPPA CATASTALI",
+   "table": "p7-t4",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    384.7,
+    434.9,
+    391.0
+   ]
+  },
+  "p7-t4-r4-c1": {
+   "text": "BARI",
+   "table": "p7-t4",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    100.7,
+    397.3,
+    156.3,
+    404.1
+   ]
+  },
+  "p7-t4-r4-c2": {
+   "text": "LOCOROTONDO",
+   "table": "p7-t4",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    397.3,
+    245.2,
+    404.1
+   ]
+  },
+  "p7-t4-r4-c3": {
+   "text": "INTERO TERRITORIO COMUNALE",
+   "table": "p7-t4",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    245.2,
+    397.3,
+    434.9,
+    404.1
+   ]
+  },
+  "p7-t5-r1-c1": {
+   "text": "AREA DELIMITATA SALENTO - ZONA DI CONTENIMENTO",
+   "table": "p7-t5",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    410.2,
+    434.9,
+    419.1
+   ]
+  },
+  "p7-t5-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t5",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    419.1,
+    156.3,
+    425.4
+   ]
+  },
+  "p7-t5-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t5",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    419.1,
+    245.2,
+    425.4
+   ]
+  },
+  "p7-t5-r2-c3": {
+   "text": "FOGLI DI MAPPA CATASTALI",
+   "table": "p7-t5",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    419.1,
+    434.9,
+    425.4
+   ]
+  },
+  "p7-t5-r4-c1": {
+   "text": "BRINDISI",
+   "table": "p7-t5",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    100.7,
+    431.7,
+    156.3,
+    444.3
+   ]
+  },
+  "p7-t5-r4-c2": {
+   "text": "FASANO",
+   "table": "p7-t5",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    431.7,
+    245.2,
+    444.3
+   ]
+  },
+  "p7-t5-r4-c3": {
+   "text": "FOGLI: da 15 a 32; da 34 a 44; da 48 a 56; da 61 a 65; da 73 a 75; 84, 85; da 103 a\n115",
+   "table": "p7-t5",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    245.2,
+    431.7,
+    434.9,
+    444.3
+   ]
+  },
+  "p7-t5-r5-c1": {
+   "text": "BARI",
+   "table": "p7-t5",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    100.7,
+    444.3,
+    156.3,
+    463.3
+   ]
+  },
+  "p7-t5-r5-c2": {
+   "text": "LOCOROTONDO",
+   "table": "p7-t5",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    156.3,
+    444.3,
+    245.2,
+    463.3
+   ]
+  },
+  "p7-t5-r5-c3": {
+   "text": "FOGLI: da 1 a 17; da 21 a 28; da 32 a 37; 40, 41, 43, 46, 54",
+   "table": "p7-t5",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    245.2,
+    444.3,
+    434.9,
+    463.3
+   ]
+  },
+  "p7-t5-r7-c1": {
+   "text": "TARANTO",
+   "table": "p7-t5",
+   "row": 7,
+   "column": 1,
+   "bbox": [
+    100.7,
+    469.6,
+    156.3,
+    507.6
+   ]
+  },
+  "p7-t5-r7-c2": {
+   "text": "CRISPIANO",
+   "table": "p7-t5",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    156.3,
+    469.6,
+    245.2,
+    475.9
+   ]
+  },
+  "p7-t5-r7-c3": {
+   "text": "FOGLI: da 1 a 6; da 11 a 18; da 26 a 33; da 51 a 58; da 66 a 74; da 82 a 87",
+   "table": "p7-t5",
+   "row": 7,
+   "column": 3,
+   "bbox": [
+    245.2,
+    469.6,
+    434.9,
+    475.9
+   ]
+  },
+  "p7-t5-r8-c2": {
+   "text": "STATTE",
+   "table": "p7-t5",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    156.3,
+    475.9,
+    245.2,
+    482.2
+   ]
+  },
+  "p7-t5-r8-c3": {
+   "text": "FOGLI: da 1 a 13; da 22 a 27; 30, 40, 41, 49, 50",
+   "table": "p7-t5",
+   "row": 8,
+   "column": 3,
+   "bbox": [
+    245.2,
+    475.9,
+    434.9,
+    482.2
+   ]
+  },
+  "p7-t5-r9-c2": {
+   "text": "MARTINA FRANCA",
+   "table": "p7-t5",
+   "row": 9,
+   "column": 2,
+   "bbox": [
+    156.3,
+    482.2,
+    245.2,
+    494.8
+   ]
+  },
+  "p7-t5-r9-c3": {
+   "text": "FOGLI: da 1 a 42; da 46 a 57; da 70 a 81; 83; da 98 a 101; da 114 a 118; da 138 a\n142; da 160 a 163; da 182 a 187",
+   "table": "p7-t5",
+   "row": 9,
+   "column": 3,
+   "bbox": [
+    245.2,
+    482.2,
+    434.9,
+    494.8
+   ]
+  },
+  "p7-t5-r10-c2": {
+   "text": "TARANTO",
+   "table": "p7-t5",
+   "row": 10,
+   "column": 2,
+   "bbox": [
+    156.3,
+    494.8,
+    245.2,
+    507.6
+   ]
+  },
+  "p7-t5-r10-c3": {
+   "text": "FOGLI SEZIONE A: 114, 116; da 132 a 137; da 161 a 172; da 181 a 184; 190,\n193(SVILUPPO Z)",
+   "table": "p7-t5",
+   "row": 10,
+   "column": 3,
+   "bbox": [
+    245.2,
+    494.8,
+    434.9,
+    507.6
+   ]
+  },
+  "p7-t6-r1-c1": {
+   "text": "AREA DELIMITATA VALLE D'ITRIA - ZONA INFETTA",
+   "table": "p7-t6",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    513.7,
+    434.9,
+    522.6
+   ]
+  },
+  "p7-t6-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t6",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    522.6,
+    156.3,
+    529.0
+   ]
+  },
+  "p7-t6-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t6",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    522.6,
+    245.2,
+    529.0
+   ]
+  },
+  "p7-t6-r2-c3": {
+   "text": "FOGLI DI MAPPA CATASTALI",
+   "table": "p7-t6",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    522.6,
+    434.9,
+    529.0
+   ]
+  },
+  "p7-t6-r3-c1": {
+   "text": "BARI",
+   "table": "p7-t6",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.7,
+    529.0,
+    156.3,
+    560.6
+   ]
+  },
+  "p7-t6-r3-c2": {
+   "text": "ALBEROBELLO",
+   "table": "p7-t6",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    156.3,
+    529.0,
+    245.2,
+    535.3
+   ]
+  },
+  "p7-t6-r3-c3": {
+   "text": "INTERO TERRITORIO COMUNALE",
+   "table": "p7-t6",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    245.2,
+    529.0,
+    434.9,
+    535.3
+   ]
+  },
+  "p7-t6-r4-c2": {
+   "text": "CASTELLANA GROTTE",
+   "table": "p7-t6",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    535.3,
+    245.2,
+    547.9
+   ]
+  },
+  "p7-t6-r4-c3": {
+   "text": "FOGLI: da 4 a 6; da 15 a 17; da 22 a 24; 30, 31, da 37 a 39; 44, 48, 49, 53, 57, 58, da\n62 a 64; 68, 69, 72, 74, 75",
+   "table": "p7-t6",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    245.2,
+    535.3,
+    434.9,
+    547.9
+   ]
+  },
+  "p7-t6-r5-c2": {
+   "text": "MONOPOLI",
+   "table": "p7-t6",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    156.3,
+    547.9,
+    245.2,
+    554.2
+   ]
+  },
+  "p7-t6-r5-c3": {
+   "text": "INTERO TERRITORIO COMUNALE",
+   "table": "p7-t6",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    245.2,
+    547.9,
+    434.9,
+    560.6
+   ]
+  },
+  "p7-t6-r6-c2": {
+   "text": "POLIGNANO A MARE",
+   "table": "p7-t6",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    156.3,
+    554.2,
+    245.2,
+    560.6
+   ]
+  },
+  "p7-t7-r1-c1": {
+   "text": "AREA DELIMITATA VALLE D'ITRIA - ZONA CUSCINETTO",
+   "table": "p7-t7",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    566.7,
+    434.9,
+    575.7
+   ]
+  },
+  "p7-t7-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t7",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    575.7,
+    156.3,
+    588.3
+   ]
+  },
+  "p7-t7-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t7",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    575.7,
+    245.2,
+    588.3
+   ]
+  },
+  "p7-t7-r2-c3": {
+   "text": "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5\nCHILOMETRI DALLA ZONA INFETTA VALLE D'ITRIA",
+   "table": "p7-t7",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    575.7,
+    434.9,
+    588.3
+   ]
+  },
+  "p7-t7-r3-c2": {
+   "text": "CASTELLANA GROTTE",
+   "table": "p7-t7",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    156.3,
+    588.3,
+    245.2,
+    594.6
+   ]
+  },
+  "p7-t7-r3-c3": {
+   "text": "PARTE TERRITORIO COMUNALE",
+   "table": "p7-t7",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    245.2,
+    588.3,
+    434.9,
+    619.9
+   ]
+  },
+  "p7-t7-r4-c2": {
+   "text": "CONVERSANO",
+   "table": "p7-t7",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    156.3,
+    594.6,
+    245.2,
+    600.9
+   ]
+  },
+  "p7-t7-r5-c2": {
+   "text": "MOLA DI BARI",
+   "table": "p7-t7",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    156.3,
+    600.9,
+    245.2,
+    607.2
+   ]
+  },
+  "p7-t7-r6-c2": {
+   "text": "NOCI",
+   "table": "p7-t7",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    156.3,
+    607.2,
+    245.2,
+    613.5
+   ]
+  },
+  "p7-t7-r7-c2": {
+   "text": "PUTIGNANO",
+   "table": "p7-t7",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    156.3,
+    613.5,
+    245.2,
+    619.9
+   ]
+  },
+  "p7-t8-r1-c1": {
+   "text": "AREA DELIMITATA SALENTO - ZONA CUSCINETTO",
+   "table": "p7-t8",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.7,
+    632.4,
+    434.9,
+    641.3
+   ]
+  },
+  "p7-t8-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p7-t8",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.7,
+    641.3,
+    156.3,
+    654.0
+   ]
+  },
+  "p7-t8-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t8",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    156.3,
+    641.3,
+    245.2,
+    654.0
+   ]
+  },
+  "p7-t8-r2-c3": {
+   "text": "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5\nCHILOMETRI DALLA ZONA CONTENIMENTO",
+   "table": "p7-t8",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    245.2,
+    641.3,
+    434.9,
+    654.0
+   ]
+  },
+  "p7-t8-r3-c2": {
+   "text": "NOCI",
+   "table": "p7-t8",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    156.3,
+    654.0,
+    245.2,
+    660.3
+   ]
+  },
+  "p7-t8-r3-c3": {
+   "text": "PARTE TERRITORIO COMUNALE",
+   "table": "p7-t8",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    245.2,
+    654.0,
+    434.9,
+    660.3
+   ]
+  },
+  "p7-t8-r5-c1": {
+   "text": "TARANTO",
+   "table": "p7-t8",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    100.7,
+    666.6,
+    156.3,
+    679.3
+   ]
+  },
+  "p7-t8-r5-c2": {
+   "text": "MASSAFRA",
+   "table": "p7-t8",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    156.3,
+    666.6,
+    245.2,
+    672.9
+   ]
+  },
+  "p7-t8-r5-c3": {
+   "text": "PARTE TERRITORIO COMUNALE",
+   "table": "p7-t8",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    245.2,
+    666.6,
+    434.9,
+    679.3
+   ]
+  },
+  "p7-t8-r6-c2": {
+   "text": "MOTTOLA",
+   "table": "p7-t8",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    156.3,
+    672.9,
+    245.2,
+    679.3
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 88113,
+  "num_turns": 6,
+  "usage": {
+   "input_tokens": 6,
+   "cache_creation_input_tokens": 22887,
+   "cache_read_input_tokens": 35256,
+   "output_tokens": 11309,
+   "output_tokens_details": {
+    "thinking_tokens": 5834
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 22887,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 8212,
+     "cache_read_input_tokens": 18448,
+     "cache_creation_input_tokens": 6725,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 6725
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.22233419999999998,
+  "session_id": "f0d9f92b-bb33-403c-af17-7d3ad7cfd544"
+ },
+ "reading": {
+  "tables_visible": 8,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI LECCE",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t1-r4-c1"
+      },
+      "comune": null,
+      "scope": {
+       "native_cell": "p7-t1-r4-c2"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI BRINDISI",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t2-r4-c1"
+      },
+      "comune": null,
+      "scope": {
+       "native_cell": "p7-t2-r4-c2"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 3,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI TARANTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r6-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r7-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r8-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r9-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r10-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r11-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r12-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r13-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r14-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r15-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r16-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r17-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r18-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r19-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r20-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r21-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r22-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r23-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r24-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t3-r25-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t3-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 4,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI BARI",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t4-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t4-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t4-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 5,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA DI CONTENIMENTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t5-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t5-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t5-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t5-r5-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t5-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t5-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t5-r7-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t5-r7-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t5-r8-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t5-r8-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t5-r9-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t5-r9-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t5-r10-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t5-r10-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 6,
+    "caption_verbatim": "AREA DELIMITATA  VALLE D'ITRIA - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t6-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t6-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t6-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t6-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t6-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t6-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t6-r6-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t6-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 7,
+    "caption_verbatim": "AREA DELIMITATA  VALLE D'ITRIA - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5 CHILOMETRI DALLA ZONA INFETTA VALLE D'ITRIA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI"
+      },
+      "comune": {
+       "native_cell": "p7-t7-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI"
+      },
+      "comune": {
+       "native_cell": "p7-t7-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI"
+      },
+      "comune": {
+       "native_cell": "p7-t7-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI"
+      },
+      "comune": {
+       "native_cell": "p7-t7-r6-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI"
+      },
+      "comune": {
+       "native_cell": "p7-t7-r7-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t7-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 8,
+    "caption_verbatim": "AREA DELIMITATA  SALENTO - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5 CHILOMETRI DALLA ZONA CONTENIMENTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI"
+      },
+      "comune": {
+       "native_cell": "p7-t8-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t8-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t8-r5-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t8-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t8-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t8-r5-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t8-r6-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t8-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p7-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t3",
+    "disposition": "represented",
+    "output_tables": [
+     3
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t4",
+    "disposition": "represented",
+    "output_tables": [
+     4
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t5",
+    "disposition": "represented",
+    "output_tables": [
+     5
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t6",
+    "disposition": "represented",
+    "output_tables": [
+     6
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t7",
+    "disposition": "represented",
+    "output_tables": [
+     7
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t8",
+    "disposition": "represented",
+    "output_tables": [
+     8
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "73622",
+   "Bollettino Ufficiale della Regione Puglia - n. 128 del 24-11-2022",
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "SALVATORE INFANTINO 17.11.2022 13:38:40 GMT+00:00"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI LECCE",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "LECCE",
+       "copied_from": "p7-t1-r4-c1"
+      },
+      "comune": null,
+      "scope": {
+       "text": "INTERO TERRITORIO PROVINCIALE",
+       "copied_from": "p7-t1-r4-c2"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI BRINDISI",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BRINDISI",
+       "copied_from": "p7-t2-r4-c1"
+      },
+      "comune": null,
+      "scope": {
+       "text": "INTERO TERRITORIO PROVINCIALE",
+       "copied_from": "p7-t2-r4-c2"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 3,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI TARANTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "AVETRANA",
+       "copied_from": "p7-t3-r4-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "CAROSINO",
+       "copied_from": "p7-t3-r5-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "CRISPIANO",
+       "copied_from": "p7-t3-r6-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "FAGGIANO",
+       "copied_from": "p7-t3-r7-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "FRAGAGNANO",
+       "copied_from": "p7-t3-r8-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "GROTTAGLIE",
+       "copied_from": "p7-t3-r9-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "LEPORANO",
+       "copied_from": "p7-t3-r10-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "LIZZANO",
+       "copied_from": "p7-t3-r11-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "MANDURIA",
+       "copied_from": "p7-t3-r12-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "MARTINA FRANCA",
+       "copied_from": "p7-t3-r13-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "MARUGGIO",
+       "copied_from": "p7-t3-r14-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "MONTEIASI",
+       "copied_from": "p7-t3-r15-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "MONTEMESOLA",
+       "copied_from": "p7-t3-r16-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "MONTEPARANO",
+       "copied_from": "p7-t3-r17-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "PULSANO",
+       "copied_from": "p7-t3-r18-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "ROCCAFORZATA",
+       "copied_from": "p7-t3-r19-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "SAN GIORGIO IONICO",
+       "copied_from": "p7-t3-r20-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "SAN MARZANO DI SAN GIUSEPPE",
+       "copied_from": "p7-t3-r21-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "SAVA",
+       "copied_from": "p7-t3-r22-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "STATTE",
+       "copied_from": "p7-t3-r23-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r24-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t3-r4-c1"
+      },
+      "comune": {
+       "text": "TORRICELLA",
+       "copied_from": "p7-t3-r25-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t3-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 4,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA INFETTA IN PROVINCIA DI BARI",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t4-r4-c1"
+      },
+      "comune": {
+       "text": "LOCOROTONDO",
+       "copied_from": "p7-t4-r4-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t4-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 5,
+    "caption_verbatim": "AREA DELIMITATA SALENTO - ZONA DI CONTENIMENTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BRINDISI",
+       "copied_from": "p7-t5-r4-c1"
+      },
+      "comune": {
+       "text": "FASANO",
+       "copied_from": "p7-t5-r4-c2"
+      },
+      "scope": {
+       "text": "FOGLI: da 15 a 32; da 34 a 44; da 48 a 56; da 61 a 65; da 73 a 75; 84, 85; da 103 a\n115",
+       "copied_from": "p7-t5-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t5-r5-c1"
+      },
+      "comune": {
+       "text": "LOCOROTONDO",
+       "copied_from": "p7-t5-r5-c2"
+      },
+      "scope": {
+       "text": "FOGLI: da 1 a 17; da 21 a 28; da 32 a 37; 40, 41, 43, 46, 54",
+       "copied_from": "p7-t5-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "text": "CRISPIANO",
+       "copied_from": "p7-t5-r7-c2"
+      },
+      "scope": {
+       "text": "FOGLI: da 1 a 6; da 11 a 18; da 26 a 33; da 51 a 58; da 66 a 74; da 82 a 87",
+       "copied_from": "p7-t5-r7-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "text": "STATTE",
+       "copied_from": "p7-t5-r8-c2"
+      },
+      "scope": {
+       "text": "FOGLI: da 1 a 13; da 22 a 27; 30, 40, 41, 49, 50",
+       "copied_from": "p7-t5-r8-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "text": "MARTINA FRANCA",
+       "copied_from": "p7-t5-r9-c2"
+      },
+      "scope": {
+       "text": "FOGLI: da 1 a 42; da 46 a 57; da 70 a 81; 83; da 98 a 101; da 114 a 118; da 138 a\n142; da 160 a 163; da 182 a 187",
+       "copied_from": "p7-t5-r9-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t5-r7-c1"
+      },
+      "comune": {
+       "text": "TARANTO",
+       "copied_from": "p7-t5-r10-c2"
+      },
+      "scope": {
+       "text": "FOGLI SEZIONE A: 114, 116; da 132 a 137; da 161 a 172; da 181 a 184; 190,\n193(SVILUPPO Z)",
+       "copied_from": "p7-t5-r10-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 6,
+    "caption_verbatim": "AREA DELIMITATA  VALLE D'ITRIA - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA CATASTALI"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "text": "ALBEROBELLO",
+       "copied_from": "p7-t6-r3-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t6-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "text": "CASTELLANA GROTTE",
+       "copied_from": "p7-t6-r4-c2"
+      },
+      "scope": {
+       "text": "FOGLI: da 4 a 6; da 15 a 17; da 22 a 24; 30, 31, da 37 a 39; 44, 48, 49, 53, 57, 58, da\n62 a 64; 68, 69, 72, 74, 75",
+       "copied_from": "p7-t6-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "text": "MONOPOLI",
+       "copied_from": "p7-t6-r5-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t6-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t6-r3-c1"
+      },
+      "comune": {
+       "text": "POLIGNANO A MARE",
+       "copied_from": "p7-t6-r6-c2"
+      },
+      "scope": {
+       "text": "INTERO TERRITORIO COMUNALE",
+       "copied_from": "p7-t6-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 7,
+    "caption_verbatim": "AREA DELIMITATA  VALLE D'ITRIA - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5 CHILOMETRI DALLA ZONA INFETTA VALLE D'ITRIA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "transcribed": true
+      },
+      "comune": {
+       "text": "CASTELLANA GROTTE",
+       "copied_from": "p7-t7-r3-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "transcribed": true
+      },
+      "comune": {
+       "text": "CONVERSANO",
+       "copied_from": "p7-t7-r4-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "transcribed": true
+      },
+      "comune": {
+       "text": "MOLA DI BARI",
+       "copied_from": "p7-t7-r5-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "transcribed": true
+      },
+      "comune": {
+       "text": "NOCI",
+       "copied_from": "p7-t7-r6-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t7-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "transcribed": true
+      },
+      "comune": {
+       "text": "PUTIGNANO",
+       "copied_from": "p7-t7-r7-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t7-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 8,
+    "caption_verbatim": "AREA DELIMITATA  SALENTO - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5 CHILOMETRI DALLA ZONA CONTENIMENTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "transcribed": true
+      },
+      "comune": {
+       "text": "NOCI",
+       "copied_from": "p7-t8-r3-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t8-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t8-r5-c1"
+      },
+      "comune": {
+       "text": "MASSAFRA",
+       "copied_from": "p7-t8-r5-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t8-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p7-t8-r5-c1"
+      },
+      "comune": {
+       "text": "MOTTOLA",
+       "copied_from": "p7-t8-r6-c2"
+      },
+      "scope": {
+       "text": "PARTE TERRITORIO COMUNALE",
+       "copied_from": "p7-t8-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "unattached": [
+   "73622",
+   "Bollettino Ufficiale della Regione Puglia - n. 128 del 24-11-2022",
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "SALVATORE INFANTINO 17.11.2022 13:38:40 GMT+00:00"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p7-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t3",
+    "disposition": "represented",
+    "output_tables": [
+     3
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t4",
+    "disposition": "represented",
+    "output_tables": [
+     4
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t5",
+    "disposition": "represented",
+    "output_tables": [
+     5
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t6",
+    "disposition": "represented",
+    "output_tables": [
+     6
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t7",
+    "disposition": "represented",
+    "output_tables": [
+     7
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t8",
+    "disposition": "represented",
+    "output_tables": [
+     8
+    ],
+    "cause": null
+   }
+  ],
+  "tables_visible": 8
+ },
+ "resolution_problems": []
+}

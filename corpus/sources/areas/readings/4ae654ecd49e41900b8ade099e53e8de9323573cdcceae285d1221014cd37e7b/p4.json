@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+ "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "78f5413cfebc5040048e1669ddc236c29e0fe4c1f1ec5adb5d15525d6d8a48c9",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:32:36.851192+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 10555,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7320,
+   "cache_read_input_tokens": 7951,
+   "output_tokens": 754,
+   "output_tokens_details": {
+    "thinking_tokens": 36
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7320,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 589,
+     "cache_read_input_tokens": 5665,
+     "cache_creation_input_tokens": 3941,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3941
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0413632,
+  "session_id": "f7ca2e09-7bf1-4f1a-a090-524d1fd5d056"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "\"Aggiornare l'area delimitata a Xylella fastidiosa sottospecie pauca ST53 ex Salento ai sensi del Reg. UE 2024/2507, costituita da: zona infetta; zona infetta in cui si applicano misure di contenimento che comprende un territorio di larghezza di 2 chilometri dalla zona infetta che si estende dallo Jonio all'Adriatico; focolai puntiformi in agro di Mola di Bari e Noci in cui si applicano misure di eradicazione; zona cuscinetto che comprende un territorio che si estende dallo Jonio all'Adriatico;\"",
+   "\"Rappresentare con gli Allegati 1 e 1 bis, parti integranti e sostanziali del presente atto, i limiti geografici territoriali della: zona infetta; zona in cui si applicano misure di contenimento (di seguito contenimento); focolai puntiformi in agro di Mola di Bari e Noci in cui si applicano misure di eradicazione; zona cuscinetto; della nuova area delimitata a \"Xylella fastidiosa subspecie pauca ex Salento\";\""
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "\"Aggiornare l'area delimitata a Xylella fastidiosa sottospecie pauca ST53 ex Salento ai sensi del Reg. UE 2024/2507, costituita da: zona infetta; zona infetta in cui si applicano misure di contenimento che comprende un territorio di larghezza di 2 chilometri dalla zona infetta che si estende dallo Jonio all'Adriatico; focolai puntiformi in agro di Mola di Bari e Noci in cui si applicano misure di eradicazione; zona cuscinetto che comprende un territorio che si estende dallo Jonio all'Adriatico;\"",
+   "\"Rappresentare con gli Allegati 1 e 1 bis, parti integranti e sostanziali del presente atto, i limiti geografici territoriali della: zona infetta; zona in cui si applicano misure di contenimento (di seguito contenimento); focolai puntiformi in agro di Mola di Bari e Noci in cui si applicano misure di eradicazione; zona cuscinetto; della nuova area delimitata a \"Xylella fastidiosa subspecie pauca ex Salento\";\""
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

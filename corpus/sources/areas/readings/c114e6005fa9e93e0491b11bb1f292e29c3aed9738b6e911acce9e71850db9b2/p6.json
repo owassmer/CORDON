@@ -1,0 +1,73 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+ "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "361da84a5275f2dfd3f58df7cbdb4eb6e7cedd2ea06267c34ec701728918d78f",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:23:51.125183+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 9102,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6530,
+   "cache_read_input_tokens": 7155,
+   "output_tokens": 430,
+   "output_tokens_details": {
+    "thinking_tokens": 42
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6530,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 259,
+     "cache_read_input_tokens": 4869,
+     "cache_creation_input_tokens": 3947,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3947
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.034178,
+  "session_id": "a25db5a8-7740-4665-aabe-764831291f08"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "è unicamente formato con mezzi informatici e firmato digitalmente, è composto da 8 (otto) facciate e dagli allegati 1, 1 BIS e 2 , composti rispettivamente da n. 1 facciata"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "è unicamente formato con mezzi informatici e firmato digitalmente, è composto da 8 (otto) facciate e dagli allegati 1, 1 BIS e 2 , composti rispettivamente da n. 1 facciata"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

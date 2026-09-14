@@ -1,0 +1,69 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 48,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "60c9100f284a7405571db590bf676e9964de39d43b834c9332a54e455f07fc96",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:36.482900+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6327,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7383,
+   "cache_read_input_tokens": 7983,
+   "output_tokens": 375,
+   "output_tokens_details": {
+    "thinking_tokens": 68
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7383,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 179,
+     "cache_read_input_tokens": 5697,
+     "cache_creation_input_tokens": 3972,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3972
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.037778599999999996,
+  "session_id": "fcd8ee73-503d-43a7-9ac9-cae020e25c51"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

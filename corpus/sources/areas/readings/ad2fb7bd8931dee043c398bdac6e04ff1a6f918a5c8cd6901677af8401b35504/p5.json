@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+ "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "2a7b594493ca25789dff9cf067da15bd405ef45473361d1327b3f670ee2a16cb",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:30:54.187069+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7616,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7490,
+   "cache_read_input_tokens": 8123,
+   "output_tokens": 626,
+   "output_tokens_details": {
+    "thinking_tokens": 35
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7490,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 463,
+     "cache_read_input_tokens": 5837,
+     "cache_creation_input_tokens": 3939,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3939
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.040927599999999995,
+  "session_id": "ddba23f3-530b-4de2-b994-772abd508daf"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di istituire l'area delimitata per \"Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA)\", ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201 e s.m.i., costituita da: una zona infetta (aree con raggio di almeno 50 m attorno alle piante infette a Xylella fastidiosa sottospecie pauca); una zona cuscinetto di almeno 2,5 km attorno alla zona infetta;",
+   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca ST 53 - Valenzano (BA)\";"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Di istituire l'area delimitata per \"Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA)\", ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201 e s.m.i., costituita da: una zona infetta (aree con raggio di almeno 50 m attorno alle piante infette a Xylella fastidiosa sottospecie pauca); una zona cuscinetto di almeno 2,5 km attorno alla zona infetta;",
+   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca ST 53 - Valenzano (BA)\";"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

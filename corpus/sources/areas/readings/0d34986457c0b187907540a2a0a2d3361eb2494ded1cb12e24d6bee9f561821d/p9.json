@@ -1,0 +1,633 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+ "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+ "page": 9,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "40b55fd7de46ca744dede1b64416892a8b3894e0a86b315a18201378835d8bff",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:32:17.782665+00:00",
+ "native_tables": [
+  {
+   "id": "p9-t1",
+   "bbox": [
+    100.8,
+    151.6,
+    489.9,
+    212.7
+   ]
+  },
+  {
+   "id": "p9-t2",
+   "bbox": [
+    100.8,
+    220.4,
+    489.9,
+    393.9
+   ]
+  }
+ ],
+ "native_cells": {
+  "p9-t1-r1-c1": {
+   "text": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA ST 53 - Modugno (BA) - ZONA INFETTA",
+   "table": "p9-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    151.6,
+    489.9,
+    161.8
+   ]
+  },
+  "p9-t1-r2-c1": {
+   "text": "CITTA'\nMETROPOLITANA",
+   "table": "p9-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    161.8,
+    165.5,
+    176.4
+   ]
+  },
+  "p9-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p9-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    165.5,
+    161.8,
+    268.9,
+    176.4
+   ]
+  },
+  "p9-t1-r2-c3": {
+   "text": "FOGLIO DI MAPPA PARZIALMENTE RICADENTI NEl BUFFER DI 50 METRI\nDALLA PIANTA RISULTATA INFETTA.",
+   "table": "p9-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    268.9,
+    161.8,
+    489.9,
+    176.4
+   ]
+  },
+  "p9-t1-r3-c1": {
+   "text": "BA",
+   "table": "p9-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    176.4,
+    165.5,
+    212.7
+   ]
+  },
+  "p9-t1-r3-c2": {
+   "text": "BARI",
+   "table": "p9-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    165.5,
+    176.4,
+    268.9,
+    190.9
+   ]
+  },
+  "p9-t1-r3-c3": {
+   "text": "SEZIONE E: FOGLIO 3\nSEZIONE A: FOGLIO 5, 47",
+   "table": "p9-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    268.9,
+    176.4,
+    489.9,
+    190.9
+   ]
+  },
+  "p9-t1-r4-c2": {
+   "text": "BITONTO",
+   "table": "p9-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    165.5,
+    190.9,
+    268.9,
+    198.2
+   ]
+  },
+  "p9-t1-r4-c3": {
+   "text": "FOGLIO 29",
+   "table": "p9-t1",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    268.9,
+    190.9,
+    489.9,
+    198.2
+   ]
+  },
+  "p9-t1-r5-c2": {
+   "text": "MODUGNO",
+   "table": "p9-t1",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    165.5,
+    198.2,
+    268.9,
+    212.7
+   ]
+  },
+  "p9-t1-r5-c3": {
+   "text": "FOGLIO 6, 7, 9, 11, 21, 23",
+   "table": "p9-t1",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    268.9,
+    198.2,
+    489.9,
+    212.7
+   ]
+  },
+  "p9-t2-r1-c1": {
+   "text": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA ST 53 - Modugno (BA) - ZONA CUSCINETTO",
+   "table": "p9-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    220.4,
+    489.9,
+    230.7
+   ]
+  },
+  "p9-t2-r2-c1": {
+   "text": "CITTA'\nMETROPOLITANA",
+   "table": "p9-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    230.7,
+    165.5,
+    252.5
+   ]
+  },
+  "p9-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p9-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    165.5,
+    230.7,
+    268.9,
+    252.5
+   ]
+  },
+  "p9-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p9-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    268.9,
+    230.7,
+    489.9,
+    252.5
+   ]
+  },
+  "p9-t2-r3-c1": {
+   "text": "BA",
+   "table": "p9-t2",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    252.5,
+    165.5,
+    306.6
+   ]
+  },
+  "p9-t2-r3-c2": {
+   "text": "BARI",
+   "table": "p9-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    165.5,
+    252.5,
+    268.9,
+    306.6
+   ]
+  },
+  "p9-t2-r3-c3": {
+   "text": "SEZIONE A: FOGLIO 1, 2*, 3*, 4, 5, 6, 7, 10*, 11, 12, 13, 16*, 17, 18, 20*, 21*, 22, 23,\n24, 26*, 27*, 35*, 36*, 37*, 38*, 39, 45*, 46*, 47, 48, 57*, 58, 65*, 66*, 67, 73, 74, 75,\n79, 101, 102, 104, 105, 106, 107, 108*, 110, 111\nSEZIONE B: FOGLIO 1*, 2, 3, 4\nSEZIONE C: FOGLIO 1\nSEZIONE E: FOGLIO 1, 2*, 3, 4*, 5*\nSEZIONE F: FOGLI 3, 6, 7, 8, 9*, 10*, 11*, 12*, 13*, 14*",
+   "table": "p9-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    268.9,
+    252.5,
+    489.9,
+    306.6
+   ]
+  },
+  "p9-t2-r4-c1": {
+   "text": "BA",
+   "table": "p9-t2",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    100.8,
+    306.6,
+    165.5,
+    350.3
+   ]
+  },
+  "p9-t2-r4-c2": {
+   "text": "BITONTO",
+   "table": "p9-t2",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    165.5,
+    306.6,
+    268.9,
+    350.3
+   ]
+  },
+  "p9-t2-r4-c3": {
+   "text": "FOGLI 13, 14*, 18, 19*, 20*, 27, 28, 29, 30*, 41, 42*, 43*, 51, 52, 53*, 54, 64, 65*, 76,\n93",
+   "table": "p9-t2",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    268.9,
+    306.6,
+    489.9,
+    350.3
+   ]
+  },
+  "p9-t2-r5-c1": {
+   "text": "BA",
+   "table": "p9-t2",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    100.8,
+    350.3,
+    165.5,
+    393.9
+   ]
+  },
+  "p9-t2-r5-c2": {
+   "text": "MODUGNO",
+   "table": "p9-t2",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    165.5,
+    350.3,
+    268.9,
+    393.9
+   ]
+  },
+  "p9-t2-r5-c3": {
+   "text": "FOGLI 5*, 6, 7, 8*, 9, 10*, 11, 12*, 13*, 14*, 15*, 16, 17*, 18, 19, 20*, 21, 22*, 23, 24*,\n25, 26*, 27, 28*, 29, 30, 31, 32, 35*",
+   "table": "p9-t2",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    268.9,
+    350.3,
+    489.9,
+    393.9
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 17357,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 9463,
+   "cache_read_input_tokens": 10099,
+   "output_tokens": 1628,
+   "output_tokens_details": {
+    "thinking_tokens": 299
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 9463,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1469,
+     "cache_read_input_tokens": 7813,
+     "cache_creation_input_tokens": 3936,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3936
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.061003800000000004,
+  "session_id": "71515ae0-dfce-4e2b-9e19-621c0e449e31"
+ },
+ "reading": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA ST 53 - Modugno (BA) - ZONA INFETTA",
+    "caption_position": "above the table",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLIO DI MAPPA PARZIALMENTE RICADENTI NEl BUFFER DI 50 METRI DALLA PIANTA RISULTATA INFETTA."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t1-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t1-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t1-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t1-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t1-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t1-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA ST 53 - Modugno (BA) - ZONA CUSCINETTO",
+    "caption_position": "above the table",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r4-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r5-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "tables_visible": 2,
+  "native_tables_accounted": [
+   {
+    "native_table": "p9-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p9-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA ST 53 - Modugno (BA) - ZONA INFETTA",
+    "caption_position": "above the table",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLIO DI MAPPA PARZIALMENTE RICADENTI NEl BUFFER DI 50 METRI DALLA PIANTA RISULTATA INFETTA."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BA",
+       "copied_from": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "text": "BARI",
+       "copied_from": "p9-t1-r3-c2"
+      },
+      "scope": {
+       "text": "SEZIONE E: FOGLIO 3\nSEZIONE A: FOGLIO 5, 47",
+       "copied_from": "p9-t1-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BA",
+       "copied_from": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "text": "BITONTO",
+       "copied_from": "p9-t1-r4-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 29",
+       "copied_from": "p9-t1-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BA",
+       "copied_from": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "text": "MODUGNO",
+       "copied_from": "p9-t1-r5-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 6, 7, 9, 11, 21, 23",
+       "copied_from": "p9-t1-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA ST 53 - Modugno (BA) - ZONA CUSCINETTO",
+    "caption_position": "above the table",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BA",
+       "copied_from": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "text": "BARI",
+       "copied_from": "p9-t2-r3-c2"
+      },
+      "scope": {
+       "text": "SEZIONE A: FOGLIO 1, 2*, 3*, 4, 5, 6, 7, 10*, 11, 12, 13, 16*, 17, 18, 20*, 21*, 22, 23,\n24, 26*, 27*, 35*, 36*, 37*, 38*, 39, 45*, 46*, 47, 48, 57*, 58, 65*, 66*, 67, 73, 74, 75,\n79, 101, 102, 104, 105, 106, 107, 108*, 110, 111\nSEZIONE B: FOGLIO 1*, 2, 3, 4\nSEZIONE C: FOGLIO 1\nSEZIONE E: FOGLIO 1, 2*, 3, 4*, 5*\nSEZIONE F: FOGLI 3, 6, 7, 8, 9*, 10*, 11*, 12*, 13*, 14*",
+       "copied_from": "p9-t2-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BA",
+       "copied_from": "p9-t2-r4-c1"
+      },
+      "comune": {
+       "text": "BITONTO",
+       "copied_from": "p9-t2-r4-c2"
+      },
+      "scope": {
+       "text": "FOGLI 13, 14*, 18, 19*, 20*, 27, 28, 29, 30*, 41, 42*, 43*, 51, 52, 53*, 54, 64, 65*, 76,\n93",
+       "copied_from": "p9-t2-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BA",
+       "copied_from": "p9-t2-r5-c1"
+      },
+      "comune": {
+       "text": "MODUGNO",
+       "copied_from": "p9-t2-r5-c2"
+      },
+      "scope": {
+       "text": "FOGLI 5*, 6, 7, 8*, 9, 10*, 11, 12*, 13*, 14*, 15*, 16, 17*, 18, 19, 20*, 21, 22*, 23, 24*,\n25, 26*, 27, 28*, 29, 30, 31, 32, 35*",
+       "copied_from": "p9-t2-r5-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "unattached": [
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p9-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p9-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "tables_visible": 2
+ },
+ "resolution_problems": []
+}

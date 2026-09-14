@@ -1,0 +1,433 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 13,
+ "model": "claude-sonnet-5",
+ "effort": "high",
+ "dpi": 200,
+ "request_sha256": "7ba59ccd75a198639b3035f87ed0c1334a700b54731d338882243e7a40d4df3e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:22:58.801821+00:00",
+ "native_tables": [
+  {
+   "id": "p13-t1",
+   "bbox": [
+    54.2,
+    83.6,
+    534.8,
+    130.9
+   ]
+  },
+  {
+   "id": "p13-t2",
+   "bbox": [
+    54.2,
+    139.7,
+    534.8,
+    225.5
+   ]
+  }
+ ],
+ "native_cells": {
+  "p13-t1-r1-c1": {
+   "text": "-\nXylella fastidiosa – sottospecie multiplex ST26- Ginosa - ZONA INFETTA\n7",
+   "table": "p13-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    54.2,
+    83.6,
+    534.8,
+    95.9
+   ]
+  },
+  "p13-t1-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p13-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    54.2,
+    95.9,
+    134.3,
+    113.5
+   ]
+  },
+  "p13-t1-r2-c2": {
+   "text": "6-1\nCOMUNE",
+   "table": "p13-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    134.3,
+    95.9,
+    262.0,
+    113.5
+   ]
+  },
+  "p13-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE\nPIANTE RISULTATE INFETTE.",
+   "table": "p13-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    262.0,
+    95.9,
+    534.8,
+    113.5
+   ]
+  },
+  "p13-t1-r3-c2": {
+   "text": "0",
+   "table": "p13-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    134.3,
+    113.5,
+    262.0,
+    122.2
+   ]
+  },
+  "p13-t1-r4-c1": {
+   "text": "TARANTO",
+   "table": "p13-t1",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    54.2,
+    122.2,
+    134.3,
+    130.9
+   ]
+  },
+  "p13-t1-r4-c2": {
+   "text": "GINOSA 5-",
+   "table": "p13-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    134.3,
+    122.2,
+    262.0,
+    130.9
+   ]
+  },
+  "p13-t1-r4-c3": {
+   "text": "FOGLIO 36, 51, 53, 65",
+   "table": "p13-t1",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    262.0,
+    122.2,
+    534.8,
+    130.9
+   ]
+  },
+  "p13-t2-r1-c1": {
+   "text": "20\nXylella fastidiosa – sottospecie multiplex ST26- GINOSA - ZONA CUSCINETTO",
+   "table": "p13-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    54.2,
+    139.7,
+    534.8,
+    152.1
+   ]
+  },
+  "p13-t2-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p13-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    54.2,
+    152.1,
+    134.3,
+    178.4
+   ]
+  },
+  "p13-t2-r2-c2": {
+   "text": "-\n1\nCOMUNE -",
+   "table": "p13-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    134.3,
+    152.1,
+    262.0,
+    178.4
+   ]
+  },
+  "p13-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p13-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    262.0,
+    152.1,
+    534.8,
+    178.4
+   ]
+  },
+  "p13-t2-r3-c2": {
+   "text": "0",
+   "table": "p13-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    134.3,
+    178.4,
+    262.0,
+    187.1
+   ]
+  },
+  "p13-t2-r4-c1": {
+   "text": "TARANTO",
+   "table": "p13-t2",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    54.2,
+    187.1,
+    134.3,
+    225.5
+   ]
+  },
+  "p13-t2-r4-c2": {
+   "text": "-\n_I330\nGINOSA",
+   "table": "p13-t2",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    134.3,
+    187.1,
+    262.0,
+    225.5
+   ]
+  },
+  "p13-t2-r4-c3": {
+   "text": "FOGLIO 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29*, 30*, 31*, 32*, 33, 34, 35*, 36, 37*,\n38*, 39, 40, 45, 46*, 47*, 48*, 49*, 50*, 51, 52*, 53, 54*, 55*, 56*, 57*, 58, 59, 64*, 65,\n66*, 67*, 68*, 69*, 70*, 71*, 72*, 73*, 74*, 75*, 76, 77, 82, 83, 84*, 85, 86, 87, 88, 89,\n144",
+   "table": "p13-t2",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    262.0,
+    187.1,
+    534.8,
+    225.5
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 36428,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 10374,
+   "cache_read_input_tokens": 6457,
+   "output_tokens": 3591,
+   "output_tokens_details": {
+    "thinking_tokens": 2584
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 10374,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 3451,
+     "cache_read_input_tokens": 6457,
+     "cache_creation_input_tokens": 3917,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3917
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0824104,
+  "session_id": "1c1214cc-cbe7-482f-8501-6c0ed6d4d1a5"
+ },
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- Ginosa - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p13-t1-r4-c1"
+      },
+      "comune": {
+       "text": "GINOSA"
+      },
+      "scope": {
+       "native_cell": "p13-t1-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- GINOSA - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p13-t2-r4-c1"
+      },
+      "comune": {
+       "text": "GINOSA"
+      },
+      "scope": {
+       "native_cell": "p13-t2-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p13-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p13-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2 - GINOSA",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059 (vertical document stamp overlapping both tables)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- Ginosa - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p13-t1-r4-c1"
+      },
+      "comune": {
+       "text": "GINOSA",
+       "transcribed": true
+      },
+      "scope": {
+       "text": "FOGLIO 36, 51, 53, 65",
+       "copied_from": "p13-t1-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26- GINOSA - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "TARANTO",
+       "copied_from": "p13-t2-r4-c1"
+      },
+      "comune": {
+       "text": "GINOSA",
+       "transcribed": true
+      },
+      "scope": {
+       "text": "FOGLIO 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29*, 30*, 31*, 32*, 33, 34, 35*, 36, 37*,\n38*, 39, 40, 45, 46*, 47*, 48*, 49*, 50*, 51, 52*, 53, 54*, 55*, 56*, 57*, 58, 59, 64*, 65,\n66*, 67*, 68*, 69*, 70*, 71*, 72*, 73*, 74*, 75*, 76, 77, 82, 83, 84*, 85, 86, 87, 88, 89,\n144",
+       "copied_from": "p13-t2-r4-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2 - GINOSA",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059 (vertical document stamp overlapping both tables)"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p13-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p13-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "tables_visible": 2
+ },
+ "resolution_problems": []
+}

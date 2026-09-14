@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+ "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "14f8c9f5534575d284733c8b5bfe29e5bfdc20cab7d221b1aebc23255218361d",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:28:13.433135+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 13894,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7061,
+   "cache_read_input_tokens": 7696,
+   "output_tokens": 678,
+   "output_tokens_details": {
+    "thinking_tokens": 34
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7061,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 517,
+     "cache_read_input_tokens": 5410,
+     "cache_creation_input_tokens": 3937,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3937
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0393192,
+  "session_id": "cb77ee60-5b09-4dc3-96a5-6181b61fb400"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table: Documento - Impronta (SHA256) | Allegato1.pdf - 66d26117bc013f623faa152d72055fa1952e4e2855c7ded16361e5e54cb658ad | Allegato1BIS.pdf - 6dd84b1ad085e3e566f8af6cbcb68bd36201147bd018901e017f78732e4df838 | ALLEGATO2_GIOVINAZZO.pdf - 30cce965432c22f4d5a0360c920932e88e1355d1298ad196a4818acbd2a30d3c (this is a document-hash table, not a cadastral scope annex table)",
+   "Di dare atto altresì che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table: Documento - Impronta (SHA256) | Allegato1.pdf - 66d26117bc013f623faa152d72055fa1952e4e2855c7ded16361e5e54cb658ad | Allegato1BIS.pdf - 6dd84b1ad085e3e566f8af6cbcb68bd36201147bd018901e017f78732e4df838 | ALLEGATO2_GIOVINAZZO.pdf - 30cce965432c22f4d5a0360c920932e88e1355d1298ad196a4818acbd2a30d3c (this is a document-hash table, not a cadastral scope annex table)",
+   "Di dare atto altresì che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

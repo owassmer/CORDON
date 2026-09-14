@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 21,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8694242c4a9cf5c889d0d3bf4e455b7bca0e9910b35e874274d9fac41fd3aed2",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:39.819817+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7611,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5812,
+   "cache_read_input_tokens": 6480,
+   "output_tokens": 338,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5812,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 211,
+     "cache_read_input_tokens": 4194,
+     "cache_creation_input_tokens": 3904,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3904
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.029738,
+  "session_id": "d226cd26-10e7-4513-8463-0c2569e7681b"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "PARTE II",
+   "SORVEGLIANZA E CAMPIONAMENTO IN CAMPO"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "PARTE II",
+   "SORVEGLIANZA E CAMPIONAMENTO IN CAMPO"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

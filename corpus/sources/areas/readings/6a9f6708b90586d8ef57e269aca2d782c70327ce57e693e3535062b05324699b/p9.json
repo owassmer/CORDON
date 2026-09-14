@@ -1,0 +1,77 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 9,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "aa211c23c5f0b2e9487f40908b6cecb7b90078ba81e10b2cfb05e4b968a5c5f4",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:06.326529+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6979,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5912,
+   "cache_read_input_tokens": 6561,
+   "output_tokens": 353,
+   "output_tokens_details": {
+    "thinking_tokens": 18
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5912,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 206,
+     "cache_read_input_tokens": 4275,
+     "cache_creation_input_tokens": 3923,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3923
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0303642,
+  "session_id": "dee88fc1-e81c-4f45-a6dd-a395172fd31a"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Firmato digitalmente da:",
+   "Il Dirigente della Sezione Osservatorio Fitosanitario",
+   "Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Firmato digitalmente da:",
+   "Il Dirigente della Sezione Osservatorio Fitosanitario",
+   "Salvatore Infantino"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

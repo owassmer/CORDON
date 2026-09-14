@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+ "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "c791d904e0869df55ebde299696266ab97386a5a38169e837e30fa071abde3a1",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:33:54.439136+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 13767,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7591,
+   "cache_read_input_tokens": 8234,
+   "output_tokens": 907,
+   "output_tokens_details": {
+    "thinking_tokens": 26
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7591,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 754,
+     "cache_read_input_tokens": 5948,
+     "cache_creation_input_tokens": 3929,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3929
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0442688,
+  "session_id": "136288a7-58cb-45ef-8767-ee4606066215"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate;",
+   "Di aggiornare, ai sensi dell'art. 4 del Reg (UE) 2020/1201, l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026 con l'inclusione dell'area delimitata per Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026.",
+   "Di aggiornare l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", ai sensi dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; Zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53;",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate;",
+   "Di aggiornare, ai sensi dell'art. 4 del Reg (UE) 2020/1201, l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026 con l'inclusione dell'area delimitata per Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026.",
+   "Di aggiornare l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", ai sensi dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; Zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53;",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,347 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "4c1213a76163ddb5776f433383e515c9d58e022055598dd98cefe35d8736d790",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:33.362372+00:00",
+ "native_tables": [
+  {
+   "id": "p1-t1",
+   "bbox": [
+    297.9,
+    215.5,
+    506.9,
+    366.5
+   ]
+  },
+  {
+   "id": "p1-t2",
+   "bbox": [
+    297.9,
+    371.7,
+    506.9,
+    396.5
+   ]
+  }
+ ],
+ "native_cells": {
+  "p1-t1-r1-c1": {
+   "text": "Codifica adempimenti L.R. 15/08 (trasparenza)",
+   "table": "p1-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    297.9,
+    215.5,
+    506.9,
+    231.0
+   ]
+  },
+  "p1-t1-r2-c1": {
+   "text": "Ufficio istruttore",
+   "table": "p1-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    297.9,
+    231.0,
+    402.4,
+    256.4
+   ]
+  },
+  "p1-t1-r2-c2": {
+   "text": "Sezione Osservatorio\nFitosanitario",
+   "table": "p1-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    402.4,
+    231.0,
+    506.9,
+    256.4
+   ]
+  },
+  "p1-t1-r3-c1": {
+   "text": "Tipo materia",
+   "table": "p1-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    297.9,
+    256.4,
+    402.4,
+    272.2
+   ]
+  },
+  "p1-t1-r3-c2": {
+   "text": "ALTRO",
+   "table": "p1-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    402.4,
+    256.4,
+    506.9,
+    272.2
+   ]
+  },
+  "p1-t1-r4-c1": {
+   "text": "Materia",
+   "table": "p1-t1",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    297.9,
+    272.2,
+    402.4,
+    288.0
+   ]
+  },
+  "p1-t1-r4-c2": {
+   "text": "ALTRO",
+   "table": "p1-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    402.4,
+    272.2,
+    506.9,
+    288.0
+   ]
+  },
+  "p1-t1-r5-c1": {
+   "text": "Sotto Materia",
+   "table": "p1-t1",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    297.9,
+    288.0,
+    402.4,
+    303.8
+   ]
+  },
+  "p1-t1-r5-c2": {
+   "text": "ALTRO",
+   "table": "p1-t1",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    402.4,
+    288.0,
+    506.9,
+    303.8
+   ]
+  },
+  "p1-t1-r6-c1": {
+   "text": "Riservato",
+   "table": "p1-t1",
+   "row": 6,
+   "column": 1,
+   "bbox": [
+    297.9,
+    303.8,
+    402.4,
+    319.5
+   ]
+  },
+  "p1-t1-r6-c2": {
+   "text": "NO",
+   "table": "p1-t1",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    402.4,
+    303.8,
+    506.9,
+    319.5
+   ]
+  },
+  "p1-t1-r7-c1": {
+   "text": "Pubblicazione integrale",
+   "table": "p1-t1",
+   "row": 7,
+   "column": 1,
+   "bbox": [
+    297.9,
+    319.5,
+    402.4,
+    335.3
+   ]
+  },
+  "p1-t1-r7-c2": {
+   "text": "SI",
+   "table": "p1-t1",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    402.4,
+    319.5,
+    506.9,
+    335.3
+   ]
+  },
+  "p1-t1-r8-c1": {
+   "text": "Obblighi D.Lgs 33/2013",
+   "table": "p1-t1",
+   "row": 8,
+   "column": 1,
+   "bbox": [
+    297.9,
+    335.3,
+    402.4,
+    351.1
+   ]
+  },
+  "p1-t1-r8-c2": {
+   "text": "NO",
+   "table": "p1-t1",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    402.4,
+    335.3,
+    506.9,
+    351.1
+   ]
+  },
+  "p1-t1-r9-c1": {
+   "text": "Tipologia",
+   "table": "p1-t1",
+   "row": 9,
+   "column": 1,
+   "bbox": [
+    297.9,
+    351.1,
+    402.4,
+    366.5
+   ]
+  },
+  "p1-t1-r9-c2": {
+   "text": "Nessuno",
+   "table": "p1-t1",
+   "row": 9,
+   "column": 2,
+   "bbox": [
+    402.4,
+    351.1,
+    506.9,
+    366.5
+   ]
+  },
+  "p1-t2-r1-c1": {
+   "text": "Adempimenti di\ninventariazione",
+   "table": "p1-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    297.9,
+    371.7,
+    402.4,
+    396.5
+   ]
+  },
+  "p1-t2-r1-c2": {
+   "text": "NO",
+   "table": "p1-t2",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    402.4,
+    371.7,
+    506.9,
+    396.5
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 8451,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7822,
+   "cache_read_input_tokens": 8404,
+   "output_tokens": 750,
+   "output_tokens_details": {
+    "thinking_tokens": 86
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7822,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 536,
+     "cache_read_input_tokens": 6118,
+     "cache_creation_input_tokens": 3990,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3990
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0440408,
+  "session_id": "edb8a420-d7ff-4d56-9114-193764d5a0eb"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p1-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Administrative metadata table 'Codifica adempimenti L.R. 15/08 (trasparenza)' listing office, subject-matter codes, publication flags — not a cadastral scope annex table."
+   },
+   {
+    "native_table": "p1-t2",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Continuation of the metadata table ('Adempimenti di inventariazione' / NO) — not a cadastral scope annex table."
+   }
+  ],
+  "unattached": [
+   "OGGETTO: Reg. (UE) 2020/1201 – Aggiornamento dell’area delimitata per “Xylella fastidiosa sottospecie -multiplex ST26 - Santeramo in Colle ” e dell’area delimitata per “Xylella fastidiosa sottospecie -multiplex ST26 – Ginosa”, ai sensi dell’art. 4 del Reg. UE 2020/1201 s.m.i.."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "OGGETTO: Reg. (UE) 2020/1201 – Aggiornamento dell’area delimitata per “Xylella fastidiosa sottospecie -multiplex ST26 - Santeramo in Colle ” e dell’area delimitata per “Xylella fastidiosa sottospecie -multiplex ST26 – Ginosa”, ai sensi dell’art. 4 del Reg. UE 2020/1201 s.m.i.."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p1-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Administrative metadata table 'Codifica adempimenti L.R. 15/08 (trasparenza)' listing office, subject-matter codes, publication flags — not a cadastral scope annex table."
+   },
+   {
+    "native_table": "p1-t2",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Continuation of the metadata table ('Adempimenti di inventariazione' / NO) — not a cadastral scope annex table."
+   }
+  ],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}
