@@ -186,3 +186,10 @@ What the population shows, read and not reconciled:
 - “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
   work that a particular row may require. They are not separate source families or
   reasons to expand the aperture.
+
+The removal-measure and administrative-event readers (rows 6–8 and 11) are the
+first intended users of the independent Codex document transport described in
+SPEC.md. This supplies subscription access, not their missing whole-measure meaning
+or consumer connections. Their source-specific contract and first full
+source-to-consumer qualification remain with PR #15; no measure-reading coverage
+or production dispatch is established by the transport change.
