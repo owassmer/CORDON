@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 
 from cordon_c.quantities import clock_boundary
+from cordon_c.core import MissingInput
 from .evidence import Support, file_digest
 from .events import AdministrativeEvent
 
@@ -104,8 +105,55 @@ def regional_publication(path: Path):
 
 def connected_publications(publications, measures):
     """Require the issued act and its adoption date, not a municipality's protocol."""
-    identities = {(m.identity, m.adopted) for m in measures}
+    identities = set()
+    for measure in measures:
+        try:
+            identities.add((measure.identity, measure.adopted))
+        except MissingInput:
+            continue
     return tuple(p for p in publications if (p.document, p.document_date) in identities)
+
+
+def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
+    """Bind native declarations through acquired originals, never subject mentions.
+
+    Multiple publications of the same original remain separate occurrences.
+    Unresolved or competing attachment identities retain the declaration without
+    supplying a document-specific event or a clock anchor.
+    """
+    from .notices import parsec_publication_declarations
+    routes = {}
+    for record in acquisitions:
+        if record.get('sha256'):
+            for key in ('url', 'final_url'):
+                if record.get(key):
+                    routes.setdefault(record[key], set()).add(record['sha256'])
+    originals = {}
+    for measure in measures:
+        digest = measure.response['request']['sources'][0]
+        try:
+            identity = measure.identity, measure.adopted
+        except MissingInput:
+            continue
+        originals.setdefault(digest, set()).add(identity)
+    for row in parsec_publication_declarations(path, publisher=publisher, source_url=source_url):
+        values = row.values
+        candidates = {identity for route in values['document_routes']
+                      for digest in routes.get(route['url'], ())
+                      for identity in originals.get(digest, ())}
+        document, adopted = next(iter(candidates)) if len(candidates) == 1 else (None, None)
+        support = Support(row.sha256, row.locator,
+                          'Municipal register declaration: ' + values['source_fields']['Oggetto'])
+        events = []
+        if document:
+            for field, kind in [('Data inizio pubb.', 'municipal-publication-start'),
+                                ('Data fine pubb.', 'municipal-publication-end')]:
+                if values['declared_dates'][field]:
+                    events.append(AdministrativeEvent(row.sha256 + ':' + row.locator + ':' + kind,
+                                  kind, document, None,
+                                  date.fromisoformat(values['declared_dates'][field]), support))
+        yield Publication(row.sha256 + ':' + row.locator, publisher, document,
+                          adopted, values, tuple(events), support)
 
 
 CLOCK_ANCHORS = {

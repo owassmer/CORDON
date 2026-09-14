@@ -10,11 +10,50 @@ from zoneinfo import ZoneInfo
 
 from cordon_c import Snapshot
 from cordon_d.calendar import national_calendar
-from cordon_d.removal_events import publication_records, publication_deadline, connected_publications
+from cordon_d.removal_events import publication_records, publication_deadline, connected_publications, parsec_publications
 from cordon_d.notices import parsec_publication_declarations
 
 
 class ParsecPublication(unittest.TestCase):
+    def test_attachment_connection_preserves_corrections_and_predecessor_mentions(self):
+        from cordon_d.store import store_root
+        digest = '1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854'
+        path = store_root(Path(__file__)) / 'blobs/sha256' / digest[:2] / digest
+        if not path.exists():
+            self.skipTest('Retained source store unavailable')
+        root = Path(__file__).resolve().parents[2]
+        acquisitions = json.loads((root / 'corpus/sources/removal-orders/records.json').read_text())
+        # Binding-only fixtures: identities independently read on original first
+        # pages. This check does not qualify their whole-measure interpretation.
+        measures = [SimpleNamespace(identity=identity, adopted=date.fromisoformat(adopted),
+                    response={'request': {'sources': [source]}}) for identity, adopted, source in [
+            ('REG-PUGLIA-U181-DIR-2025-00201', '2025-11-24',
+             'ed2da089d5285f2ec4c8b58202095bc0852cc8fb934c978c82779d3cd06d14f4'),
+            ('REG-PUGLIA-U181-DIR-2026-00063', '2026-04-03',
+             '92cf97a3346c10626894979321e114dd57d2c1f5edd6f473a1faa880df31dd28')]]
+        kwargs = dict(publisher='Comune di Cagnano Varano',
+                      source_url='https://trasparenza.parsec326.it/en/widget/web/cagnano-varano/albo-pretorio',
+                      acquisitions=acquisitions)
+        rows = {p.source_fields['source_fields']['Nro']: p
+                for p in parsec_publications(path, measures=measures, **kwargs)}
+        self.assertEqual(rows['369'].document, measures[1].identity)
+        self.assertEqual(rows['369'].events[1].occurred, date(2026, 4, 10))
+        self.assertEqual(rows['1109'].document, rows['1110'].document)
+        self.assertNotEqual(rows['1109'].events[0].identity, rows['1110'].events[0].identity)
+        self.assertTrue(all(not p.events for p in parsec_publications(path, measures=[], **kwargs)))
+        from cordon_c.core import MissingInput
+        class UnresolvedMeasure:
+            response = {'request': {'sources': ['unresolved-source']}}
+
+            @property
+            def identity(self):
+                raise MissingInput('Unrecovered issuing authority')
+
+        mixed = list(parsec_publications(path, measures=[UnresolvedMeasure(), *measures], **kwargs))
+        self.assertEqual(mixed, list(rows.values()))
+        self.assertEqual(connected_publications(mixed, [UnresolvedMeasure(), *measures]),
+                         connected_publications(mixed, measures))
+
     def test_retained_history_preserves_separate_correction_publications(self):
         from cordon_d.store import store_root
         digest = '1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854'

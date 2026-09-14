@@ -1,0 +1,92 @@
+Read the supplied complete administrative act and its incorporated annex context as
+actual source evidence for the responsible phytosanitary operator's finding-to-removal
+decision. Return the strict JSON object requested. This is a proposed source reading,
+not legal adjudication. Read every supplied page, including rotated tables, maps,
+forms, marginal qualifications and continuation pages. Images are authoritative
+where native text is absent, broken or misordered. Do not use outside knowledge to
+repair what the source says. Quote the original Italian and explain meanings plainly.
+
+Identify the principal adopted measure, its actual issuing office, act number and
+adoption date. Do not substitute proposal, protocol, registration, publication or
+signature dates. Mark authority puglia-osservatorio only when the issuing body is
+Regione Puglia's Sezione Osservatorio Fitosanitario. Leave unresolved dates/numbers
+null and explain the particular limitation. ISO dates are YYYY-MM-DD only when an
+exact calendar day is actually established. A source date range, deadline or relative
+time must remain in time_statement, not become an invented actual event day.
+
+Recover every consequential operative direction, recipient position, condition,
+branch, exclusion, temporal qualification and correction. Keep work ordered now,
+conditional work, deferred prescriptions, general-law recitals and declared effect
+distinct. Do not turn a recital of the wider required work into the work this act
+actually prescribes. Keep legal citations exactly as stated, including inconsistencies;
+the accepted legal owner will resolve their significance. Avoid unrelated funding or
+penalty detail unless it changes the chosen removal chain. An immediately executable
+act does not itself prove recipient notification, election, assignment or performance.
+Recover the act-specific reasons and conditions for its selected communication route,
+including any justification for mass publicity instead of individual delivery. A
+general statutory citation alone does not preserve those reasons. Classify coercive
+removal as removal, retaining its triggering condition; the absence of a response is
+not itself the work directed. Spell out consequential categories instead of replacing
+them with phrases such as "the general categories".
+
+Describe all incorporated parts and their actual physical pages. Preserve qualifications
+on maps: depicted plants or parcels can exceed the operative targets, and a removed
+plant symbol is not a presided execution record. Do not digitize geometry or establish
+a plant census. Identify missing referenced material without pretending the supplied
+rendition is complete merely because every supplied page was read. Distinguish printed
+original folio counts from a publisher's differently paginated rendition.
+
+Preserve every operative target-table occurrence and its source identifier, cadastral
+references and published addressee text. A grouped or merged addressee cell has a stated
+row scope; preserve that scope, do not invent one owner per plant or identify separate
+people from line breaks. Published positions do not establish current ownership.
+The target reference is the exact printed identifier value and reference_label is its
+exact printed column heading. Never manufacture a row identifier, prefix the printed
+value with an annex label, or substitute a descriptive label for the heading. A support
+locator already identifies the row occurrence. Read the actual table grid, including
+its orientation and merged-cell boundaries, before assigning an addressee. Copy the
+complete shared cell to every row it spans and describe that span in position_scope.
+Do not borrow a name from adjacent cells or complete a name from expectation. Compare
+each copied name and identifier with the visible source before returning the object.
+position_scope describes only the addressee cell's applicability; do not duplicate
+laboratory results or other columns there.
+Target direction_ids identify the source-supported direction(s) governing that row.
+If a row belongs only to a deferred or corrective scope, do not attach it to present
+removal. Laboratory report columns are owned by the existing association reader:
+read their relevance, but do not re-extract report results or build a competing join.
+
+Record consequential references with their literal identities and relationships:
+incorporation, administrative correction, replacement, supplement, adopting geography,
+laboratory evidence or governing law. A cited predecessor is not automatically replaced;
+a laboratory correction does not amend an administrative act. Describe the exact
+payload changed and its stated temporal effect; leave unresolved scope explicit.
+
+For events, distinguish direct records, source-reported actual events, intentions and
+blank forms. An operative instruction phrased in the present tense is still intended
+performance unless the source actually attests completion. Blank annex forms cannot
+supply an election, receipt or execution. Keep publication, transmission, recipient
+delivery/effect, response, assignment, commencement, treatment, removal and verification
+separate. Use document_reference 'this-act' only for events about the principal measure;
+otherwise preserve the exact other payload reference. Use recipient-notification only
+for an actually completed notice to the particular recipient, not intended publicity.
+Use municipal-publication-start/end and regional-publication-start/end distinctly.
+Publication in BURP is burp-publication, distinct from posting on the regional albo.
+Other event kinds should plainly describe the actual record. Keep reported performance
+within its exact targets and precision; do not turn an account of earlier eradication
+into a dated per-plant completion record.
+
+Every substantive item needs support: supplied source hash, physical page, precise
+clause/table-row/cell or map locator, and a short exact quotation (or exact visible
+labels for image content). No source-free conclusions.
+Quotation means contiguous visible source text: use separate citations for separate
+fragments, without stitched ellipses or reconstructed values. The support must contain
+the source evidence for the attached value, not merely nearby text.
+An issue names its cause and
+the affected aspect: source-not-stated, unreadable, not-recovered, not-supplied or
+conflict. Record limits locally; do not let one unresolved annex erase an independently
+read direction, identity or event. Do not claim all records of a real-world history
+are present from an empty list. Keep full necessary meaning, without repetitive
+citations to background law that has no consequence for this act's operative scope.
+Use unreadable only for genuinely illegible source content, not a reader's failure to
+resolve a readable shared cell. Ordinary map qualifications belong in the part's
+qualifications; they are not conflicts merely because the map covers a wider population.

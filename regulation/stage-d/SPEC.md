@@ -33,8 +33,8 @@ prescription or a separate product workflow.
 Capurso/Akropolis register JSON. It preserves all fields and identifies the
 regional act from its explicitly labelled subject, separately from the municipal
 incoming protocol and date. `connected_publications` requires the act identity
-and adoption date from the measure consumer; that connection remains held with
-the whole-measure readings. Independent register declarations remain available.
+and adoption date from the measure consumer. Whole-measure qualification precedes
+population dispatch; independent register declarations remain available.
 
 `publication_deadline` passes the exact event kind, document and competent
 municipality to accepted B/C clock calculations. It requires the caller's
@@ -48,8 +48,11 @@ table, including native ICEfaces historical-search responses. It preserves each
 publication occurrence, declared dates, requesting office and emitted original
 routes. A correction-labelled entry and another entry can serve identical PDFs
 without becoming one publication or establishing an amendment. These declarations
-remain available while whole-measure attachment and its dependent consumers are
-held; the reader does not guess act identity from a referenced predecessor.
+remain available independently of whole-measure qualification.
+`removal_events.parsec_publications` attaches the exact emitted document route through
+its acquired source hash to the measure identity and adoption date. It preserves
+separate publication occurrences even when they serve identical documents; a
+referenced predecessor in a subject does not replace the attached act.
 
 ## Where bytes live
 
@@ -290,3 +293,25 @@ The calling reader uses the shared store and retains the request reference besid
 its interpreted output. No second source inventory, scheduler, extraction schema,
 or evidence-acceptance model is introduced here. Laboratory relationship batching
 can reuse the transport later; it is not an implemented caller in this unit.
+
+## Removal-measure reading
+
+`cordon_d.measures` supplies a caller-owned whole-act contract to the accepted
+subscription transport. `measure-reading.txt` owns the source-reading instruction.
+The reader takes one complete act and its necessary annex context, preserving
+source citations, current versus deferred directions, incorporated target
+occurrences, published addressee positions, corrections, actual versus intended
+events and conclusion-specific limitations. `scripts/read_measures.py` replays by
+default; `--execute` uses the allocated single Codex worker. A changed source-review
+instruction is explicit and yields a different transport request.
+
+`MeasureReading` connects act identity and adoption to the existing publication
+adapter, retains the actual prescribed target rows separately from A–C's required
+population, and reuses the accepted association reader for report relationships.
+Dated actual events use `AdministrativeEvent`; plans, blank forms, other unresolved
+payload identities and imprecise event times remain source readings rather than
+invented anchors. Source-boundary validation checks citations and references, not
+legal truth. Qualification requires independently read originals and an actual
+consumer connection; schema validity, page counts and retained responses cannot
+establish it. The subject-population owner still supplies plants, parcels and
+protected-status populations; the measure's named positions do not establish title.
