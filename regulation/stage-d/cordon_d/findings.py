@@ -7,7 +7,8 @@ import json
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
-from .reports import Report, report
+from .reports import Report, report, record_rows
+from .monitoring import day as observation_day
 from .report_relations import correspondences, related, replacements, current_limitation, norm, dated
 
 
@@ -83,32 +84,30 @@ def _comparable(member, results):
 
 
 def _repeated_representations(candidates):
-    """Relate source-supported repetitions; keep every row and result occurrence."""
+    """Derive equal report displays; keep every row and result occurrence."""
     rows = [c['row'] for c in candidates.values()]
-    if len({r.page for r in rows}) != 1:
+    if not rows or not rows[0].identifiers or len({row.identifiers for row in rows}) != 1:
         return False
     tables = {r.locator.split('/')[1] for r in rows}
     if len(tables) != len(rows):
         return False  # Repeated rows within one table are not a second representation.
-    common = set.intersection(*[{f['id'] for f in row.facts
-        if f['role'] == 'repeated_representation' and tables <= set(f['applies_to'])}
-        for row in rows])
-    if not common:
-        return False
     def values(row):
         if any(c['text'] is None and c.get('cause') != 'not_stated' for c in row.cells):
             return None
-        cells = sorted((tuple(c['heading']), c['role'], ' '.join((c['text'] or '').split())) for c in row.cells)
-        facts = sorted(json.dumps({k: f.get(k) for k in ('role', 'text', 'value', 'section')}, sort_keys=True)
-                       for f in row.facts if f['role'] != 'repeated_representation')
+        cells = sorted((tuple(c['heading']), c['role'], c.get('section') or '', ' '.join((c['text'] or '').split()))
+                       for c in row.cells if c['text'] and c['text'].strip())
         results = [(r.assay, r.analyte, r.text) for r in row.results]
-        return cells, facts, results
+        return cells, results, row.sampling_date, row.date_cause
+    sections = {frozenset(f['section'].split('/', 1)[-1] for f in row.facts if f.get('section'))
+                for row in rows}
+    if len(sections - {frozenset()}) > 1:
+        return False
     first = values(rows[0])
     return first is not None and all(values(r) == first for r in rows[1:])
 
 
 def _coordinate_relation(row, association):
-    """Compare literal pairs at the administrative source's printed precision.
+    """Compare literal pairs at the referring source's published precision.
 
     This is derived occurrence evidence inside an explicitly named report, never
     a free spatial join or a declaration that two identifier strings are aliases.
@@ -159,15 +158,66 @@ def _associations(reading, records):
     return result
 
 
+def _monitoring_associations(group, route):
+    """Use an accepted observation's explicit report reference and native degrees.
+
+    No transformed coordinate acquires invented decimal precision. Source members
+    remain linked through the observation reader's existing identity, not proximity.
+    """
+    positions = [m for m in group.members if m.coordinates and m.crs == 'EPSG:4326']
+    result = []
+    for member in group.members:
+        if route not in {url for _, url in member.report_routes}:
+            continue
+        carried = dict(member.carried)
+        references = {norm(carried[key]): carried[key] for key in ('PROT_SELGE', 'PROTOCOLLO')
+                      if carried.get(key)}
+        date_text = carried.get('DATA_PROT_SELGE')
+        if len(references) != 1 or not date_text:
+            continue
+        reference = next(iter(references.values()))
+        try:
+            raw_date = int(date_text) if member.locator.startswith('feature:') and date_text.isdecimal() else date_text
+            date = observation_day(raw_date, arcgis=member.locator.startswith('feature:'))
+        except (ValueError, OverflowError, OSError):
+            continue
+        if date is None:
+            continue
+        for position in positions:
+            # A float's synthetic .0 must not turn integer degrees into decimal evidence.
+            if any(value.is_integer() for value in position.coordinates):
+                continue
+            fields = {'plant_id': group.reference, 'report_reference': reference,
+                      'report_date': date.isoformat(), 'longitude': str(position.coordinates[0]),
+                      'latitude': str(position.coordinates[1])}
+            if position.species:
+                fields['host'] = position.species
+            result.append({'fields': {key: {'text': value} for key, value in fields.items()},
+                'source_kind': 'monitoring publication',
+                'support': [{'sha256': m.sha256, 'locator': m.locator, 'release': m.release}
+                            for m in (member, position)],
+                'report_date_literal': date_text, 'issues': list(member.issues + position.issues)})
+    return result
+
+
 def _host_relation(row, association):
     printed = association['fields'].get('host', {}).get('text')
     if not printed:
-        return 'not supplied by administrative association'
-    values = [cell['text'] for cell in row.cells if cell['role'] == 'host' and cell.get('text') is not None]
+        return 'not supplied by source association'
+    cells = [cell for cell in row.cells if cell['role'] == 'host']
+    if any(cell.get('role_cause') or cell.get('reading_issues') for cell in cells):
+        return 'unresolved'
+    values = [cell['text'] for cell in cells if cell.get('text') is not None]
     if len(values) != 1:
         return 'unresolved'
-    base = lambda value: norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))
-    return 'agrees on printed host' if base(values[0]) == base(printed) else 'conflicts'
+    def labels(value):
+        result = {norm(value), norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))}
+        # A printed binomial beside a common name is an explicit second label.
+        match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)\s*$', value)
+        if match:
+            result.add(norm(match[1]))
+        return result
+    return 'agrees on printed host' if labels(values[0]) & labels(printed) else 'conflicts'
 
 
 def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through, association_readings=()):
@@ -192,11 +242,12 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
             if reference:
                 association_index[reference].append(dict(association,
                     reading_issues=source.issues, reading_scope=source.scope))
-    row_index = {}
+    row_index, records_by_document = {}, {}
     for digest, reading in readings.items():
         if isinstance(reading, Report):
             index = defaultdict(list)
-            for row in reading.rows:
+            records_by_document[digest] = record_rows(reading)
+            for row in records_by_document[digest]:
                 for identifier in row.identifiers:
                     index[identifier].append(row)
             row_index[digest] = index
@@ -246,20 +297,22 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     if not group.correlatable:
                         link['status'] = group.uncorrelated_because or 'observation identity unresolved'
                         continue
-                    source_links = _associations(reading, association_index.get(group.reference, []))
+                    source_links = _associations(reading, [*association_index.get(group.reference, []),
+                                                          *_monitoring_associations(group, route)])
                     link['source_associations'] = source_links
                     coordinate_links = {row.locator: [_coordinate_relation(row, a) for a in source_links]
-                                        for row in reading.rows} if source_links else {}
+                                        for row in records_by_document[digest]} if source_links else {}
                     host_links = {row.locator: [_host_relation(row, a) for a in source_links]
-                                  for row in reading.rows} if source_links else {}
+                                  for row in records_by_document[digest]} if source_links else {}
                     link['association_comparisons'] = coordinate_links
-                    derived = {row.locator for row in reading.rows if source_links
+                    derived = {row.locator for row in records_by_document[digest] if source_links
+                        and len(reading.complete_pages) == reading.pages
                         and all(value == 'agrees at published decimal precision' for value in coordinate_links[row.locator])
-                        and all(value in {'agrees on printed host', 'not supplied by administrative association'}
+                        and all(value in {'agrees on printed host', 'not supplied by source association'}
                                 for value in host_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
                     # Every compatible row competes. Result polarity cannot select identity.
-                    rows = [row for row in reading.rows if row in row_index[digest].get(group.reference, [])
+                    rows = [row for row in records_by_document[digest] if row in row_index[digest].get(group.reference, [])
                             or row.locator in derived]
 
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
@@ -269,11 +322,11 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         temporal = ('agrees' if dated == group.day else 'conflicts') if dated else 'unresolved'
                         association_cause = None
                         if 'conflicts' in coordinate_links.get(row.locator, []):
-                            association_cause = 'administrative plant-to-report association conflicts with report-row coordinates'
+                            association_cause = 'source plant-to-report association conflicts with report-row coordinates'
                         elif 'conflicts' in host_links.get(row.locator, []):
-                            association_cause = 'administrative plant-to-report association conflicts with report-row host'
+                            association_cause = 'source plant-to-report association conflicts with report-row host'
                         elif 'unresolved' in host_links.get(row.locator, []):
-                            association_cause = 'report-row host needed by the administrative association remains unresolved'
+                            association_cause = 'report-row host needed by the source association remains unresolved'
                         derived_identity = row.locator in derived
                         exact_identity = group.reference in row.identifiers
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
@@ -285,11 +338,15 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                      'source_associations': source_links,
                                      'association_comparisons': coordinate_links.get(row.locator, []),
                                      'host_comparisons': host_links.get(row.locator, []),
-                                     'identity_basis': ('derived occurrence correspondence: observation route, explicit administrative report identity/date, host and unique coordinates at printed precision; client identifiers remain distinct'
+                                     'identity_basis': ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct'
                                                         if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
                                      'reading_issues': reading.issues,
                                      'document_cause': link['document_cause'],
+                                     'assembly_complete': reading.assembly_complete,
+                                     'assembly_cause': (None if reading.assembly_complete is True else
+                                         'report record assembly is incomplete or not established'),
                                      'reading_complete': (len(reading.complete_pages) == reading.pages
+                                         and reading.assembly_complete is True
                                          and reading.relations is not None
                                          and reading.relations.get('reading_complete') is True),
                                      'comparisons': _comparable(member, row.results)}
@@ -319,7 +376,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                 continue
             for candidate in candidates.values():
                 if repeated:
-                    candidate['relationship_basis'] = 'model-proposed repeated representation; all recovered fields and qualifications agree'
+                    candidate['relationship_basis'] = 'derived repeated display: populated fields and analytical results agree; each occurrence retains its own qualifications'
                 output['matches'].append(candidate)
         if output['matches']:
             output['status'] = ('matched' if all(c['reading_complete'] and c['temporal'] == 'agrees' for c in output['matches'])
@@ -339,6 +396,8 @@ def report_rows(readings, joined):
     for finding in joined:
         for item in finding['matches']:
             matched[item['key']].add(finding['observation'].identity)
+            for part in (item['row'].projection or {}).get('parts', ()):
+                matched[(item['key'][0], part)].add(finding['observation'].identity)
     for reading in readings:
         if isinstance(reading, Report):
             for row in reading.rows:
@@ -381,7 +440,8 @@ def confirmation_inputs(joined, *, result_pair, qualification):
     output = {}
     for prefix, result in [('first', first), ('second', second)]:
         polarity = (positive(result) if candidate['reading_complete'] else
-                    missing('unread report scope may qualify selected result: ' + result.locator))
+                    missing((candidate.get('assembly_cause') or
+                             'unread report scope may qualify selected result') + ': ' + result.locator))
         output[prefix + '_positive_annex_iv'] = conjunction([
             polarity,
             qualification.get(prefix + '_annex_iv', missing('Annex IV qualification: ' + result.locator))])

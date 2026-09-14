@@ -25,6 +25,38 @@ def reading(number='31/2024', date='01/03/2024', *, issuer='Laboratory A', previ
 
 
 class ReportRelationships(unittest.TestCase):
+    def test_source_review_rereads_completed_inventory_and_retains_its_reason(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+        import pymupdf
+        from cordon_d import report_relations
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import ExtractionConfig, extract_relationships
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            document = pymupdf.open()
+            document.new_page().insert_text((40, 40), 'Laboratory A\n31/2024\n01/03/2024\nReport identity')
+            digest = put_bytes(store, document.tobytes())
+            document.close()
+            value = reading().relations
+            value.pop('reading_complete')
+            target = report_relations.path(store, digest)
+            target.parent.mkdir(parents=True)
+            target.write_text(json.dumps({'source_sha256': digest,
+                'reading_version': report_relations.READING_VERSION, 'complete': True, 'reading': value}))
+            config = ExtractionConfig(provider='subscription', effort='high')
+            with patch('cordon_d.report_extraction._subscription_call', return_value=value) as call:
+                extract_relationships(digest, store, config=config, budget=None,
+                                      source_review='Examine correction scope against the source.')
+                self.assertEqual(call.call_count, 1)
+                self.assertIn('Examine correction scope', call.call_args.kwargs['prompt'])
+                extract_relationships(digest, store, config=config, budget=None)
+                self.assertEqual(call.call_count, 1)
+            self.assertEqual(json.loads(target.read_text())['source_review'],
+                             'Examine correction scope against the source.')
+
     def test_explicit_replacement_and_abbreviated_year_keep_source_identity(self):
         old = reading()
         target = dict(old.relations['identity'], number='31/24')

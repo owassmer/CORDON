@@ -82,22 +82,59 @@ still stops explicitly until geometric subdivision is implemented.
 Scanned pages receive a small affine rotation estimated from horizontal ink;
 native-text pages retain their original rendering. This changes the supplied
 image, never the source bytes. Deskew does not certify cell association. A
-transposed repeated display becomes sample rows only when its complete matrix
-equals a source-related companion table. Original axes and cell positions remain
-available. The join accepts repeated occurrences only when every recovered field,
-qualification and result agrees, and preserves all occurrences.
+transposed display becomes sample rows when its printed field-label axis and
+complete value matrix equal a unique companion table. A publisher need not add
+a prose declaration of repetition. Original axes and cell positions remain
+available. Qualification attachment follows those original positions: a sample
+column stays sample-specific, and a field-row qualifier reaches that field across
+its samples. Projected column indexes never replace the original scope selectors. Matching source-supported identifiers, populated fields and analytical results can establish repeated
+displays across report pages; rows repeated within one table remain competing
+occurrences. Blank extra display fields supply no additional value. Each occurrence
+retains its own qualifications; correspondence does not assert that qualifications
+agree or authorize moving them between occurrences. Sampling dates and
+conflicting recovered section headings still constrain correspondence. A
+record continuation is recovered explicitly by the established document reader as
+one `record_continuation` fact, quoting the printed identity and naming every
+physical part. `reports.record_rows` resolves those exact selectors and assembles
+the declared parts; it does not discover continuation from layout or equal results.
+It works without a separate complete display. Native-cell anchors or exact output
+row selectors permit different source layouts and cross-block references. Each
+cell retains its physical locator, and each qualification retains its original
+scope. The reverse consumer returns every physical part with its observation link.
+Unbound, conflicting or overlapping declarations trigger a bounded reread through
+the same document reader. When cells are already retained, `extract_report` accepts
+`continuation_from=<retained version>` to recover only omitted continuation facts
+through its existing prompt, schema and provider. That repair preserves the original
+blocks and request provenance; it does not retranscribe the tables. Identity-only
+quotations must cite the identity-bearing physical page. Ambiguous source structure is read as partly recovered
+and goes through that reader's page-completion repair. A failure never authorizes
+a second semantic extraction path or an invented correspondence.
+
+The ordinary loader carries the producer's `assembly_complete` attestation.
+Physical pages read, document relationships read, and record assembly complete
+are separate requirements for a complete candidate. A failed, pending or
+unattested assembly retains its cells, occurrences and independent qualifications;
+it cannot supply complete-reading polarity to the confirmation adapter. The
+assembly attestation is document-wide: it does not establish that an occurrence
+is unaffected by an unresolved continuation merely because its own cells exist.
+
 
 For native identifier cells, ordinary consumption checks the retained extraction
 against the source cell, then reads its coordinate-sorted text. A changed order is
 used only when every non-whitespace character is conserved; original native text,
 cell bounds and derivation remain attached. This repairs displaced punctuation,
 not identifier origin or correspondence between different codes.
+Two-digit date years resolve only against a unique matching full year in scoped
+source date statements. The literal date and supporting statement IDs survive;
+no current-year assumption or platform century cutoff supplies the year.
 
 Extraction permits one to three independent PDF processes under one shared,
 transaction-locked spending ledger. Returned usage and interrupted requests are
 different states. An explicit interrupted-request retry retains the full old
 reservation and reserves the new attempt separately; it does not claim invoice
-reconciliation. No saved successful response is retransmitted. Reader versions
+reconciliation. No saved successful response is retransmitted. Independent subscription runners
+lock the exact request before dispatch and reuse a response completed by the
+lock holder, preventing concurrent duplicate calls. Reader versions
 describe the implementation loaded into the process, avoiding cache mislabelling
 if source files change during a run.
 
@@ -119,8 +156,18 @@ registration identifier, not an analytical method or incoming delivery note.
 Unsupported protocol proposals remain visible without acquiring typed identity.
 A cache-only relationship graph follows explicitly supported replacements, retains
 history and unverified components, and rejects ambiguous or cyclic supersession.
+Every competing branch from a rendition's replacement ancestry must explicitly
+reach that rendition before it can be current. Extending one branch cannot settle
+the fork, and the observation's entry route cannot change this determination.
+Potential predecessors also constrain eligibility: an ambiguous replacement or
+unresolved amendment affecting that ancestry cannot disappear through descendants.
+Possible ancestry never becomes a resolved supersession link. Source-supported
+disambiguation or explicit whole-report reconciliation can remove the competition.
 The graph is a proposed source reading, not legal adjudication. Bundled-document
 identity and amendment scope require further source resolution when not recovered.
+An explicit source-review finding can request a fresh relationship reading even
+after structural completion. Its instruction and exact request remain retained;
+the finding names what to examine and supplies no replacement answer.
 
 Native administrative association tables use printed header labels and verified
 annex continuity (consecutive physical pages/printed folios and the same ruled
@@ -131,6 +178,13 @@ report number, date, plant reference and unique matching coordinates at printed
 decimal precision. It preserves competing associations, distinct client codes and
 source access time; no positive-result filter selects a plant. An association is
 not an operative-act reading, a land-standing fact or proof of withdrawal.
+The monitoring publication itself can supply that explicit report identity and
+date. Its native geographic coordinates are compared at published precision;
+transformed coordinates never acquire invented printed precision. The accepted
+observation grouping links its source publications. Derived correspondence requires
+complete report-page coverage and uniqueness in both directions, preserves the
+source locations, and does not equate distinct field and laboratory codes. An
+explicitly printed parenthetical binomial can supply a second host label.
 
 ## Implementation rule
 
@@ -174,6 +228,44 @@ PYTHONPATH=regulation/stage-c:regulation/stage-d .venv/bin/python \
 `verify.py` checks that the A–C projection, contracts and compact source map agree.
 It rejects workbench paths and historical evidence fields. Neither tests nor the
 verifier certify source meaning or Stage D completion.
+
+## Subscription document transport
+
+`cordon_d.document_subscription.read_documents` sends complete retained PDFs,
+including native text and every rendered page, through the authenticated Codex
+subscription. The caller supplies ordered source hashes, its prompt and its strict
+JSON output schema. An act and separate annexes can therefore form one request
+without being forced into a laboratory-report representation. This transport has
+no dependency on the laboratory reader and does not dispatch Claude jobs.
+
+The first intended caller is the removal-measure reader (INPUTS rows 6–8 and 11).
+Its initial allocation is one worker, one complete act with necessary annex context
+per request, with `gpt-5.6-luna` at `high` effort as a candidate setting. That setting
+is not yet qualified for whole-measure meaning: the caller must exercise its own
+source-to-consumer contract before population dispatch. Source admission, document
+relationships, qualifications, validation and publication of accepted readings
+remain with that reader. The transport returns a proposed reading, never a
+completion or legal-effect assertion.
+
+Execution is explicit (`execute=True`); otherwise only an identical retained request
+can be replayed. Request identity includes the source hashes, actual prompt and
+schema, rendered image hashes, model, effort and transport version. A lock prevents
+duplicate dispatch of an identical request; it does not coordinate different
+providers or different tasks on one document. Raw output, elapsed call time and
+provenance are retained in the regenerable store. Invalid JSON or output that
+violates the caller's schema remains retained and cannot become a returned reading,
+on either execution or replay. Non-JSON numeric constants and numbers that overflow
+to non-finite floating-point values are rejected before validation. Schema validity
+is checked before dispatch; schema
+references must resolve within the supplied schema, without network retrieval.
+Source-review instructions change the request;
+replay never secretly spends another call. API-key fallback and model tools are
+disabled. A bounded subprocess timeout applies.
+
+The calling reader uses the shared store and retains the request reference beside
+its interpreted output. No second source inventory, scheduler, extraction schema,
+or evidence-acceptance model is introduced here. Laboratory relationship batching
+can reuse the transport later; it is not an implemented caller in this unit.
 
 ## Observed-subject composition
 

@@ -54,11 +54,16 @@ class LiteralDate:
     text: str | None
     value: date | None
     cause: str | None
+    year_support: tuple[str, ...] = ()
 
 
-def literal_date(text, cause=None):
+def literal_date(text, cause=None, *, year_context=()):
     if text is None:
         return LiteralDate(None, None, cause or 'not_recovered')
+    stated_absence = {'non disponibile': 'source_states_unavailable',
+                      'non applicabile': 'source_states_not_applicable'}
+    if absence := stated_absence.get(' '.join(text.casefold().split())):
+        return LiteralDate(text, None, absence)
     formats = ((r'\d{1,2}/\d{1,2}/\d{4}', '%d/%m/%Y'),
                (r'\d{1,2}-\d{1,2}-\d{4}', '%d-%m-%Y'),
                (r'\d{1,2}\.\d{1,2}\.\d{4}', '%d.%m.%Y'),
@@ -69,6 +74,19 @@ def literal_date(text, cause=None):
                 return LiteralDate(text, datetime.strptime(text.strip(), pattern).date(), None)
             except ValueError:
                 return LiteralDate(text, None, 'invalid_calendar_date')
+    short = re.fullmatch(r'(\d{1,2})([/.-])(\d{1,2})\2(\d{2})', text.strip())
+    if short:
+        # Resolve only against a full year actually stated in this row's source
+        # context. No current-year assumption or platform %y century cutoff.
+        candidates = {year for year, _ in year_context if year % 100 == int(short[4])}
+        if len(candidates) != 1:
+            return LiteralDate(text, None, 'year_not_established_by_source_context')
+        year = next(iter(candidates))
+        support = tuple(dict.fromkeys(locator for value, locator in year_context if value == year))
+        try:
+            return LiteralDate(text, date(year, int(short[3]), int(short[1])), None, support)
+        except ValueError:
+            return LiteralDate(text, None, 'invalid_calendar_date', support)
     return LiteralDate(text, None, 'unparsed_date_literal')
 
 
@@ -121,7 +139,8 @@ class Row:
             return 'no sampling date attached to this row'
         if self.sampling_date is not None:
             return None
-        return 'conflicting, invalid or unread sampling-date values'
+        causes = {value.cause for value in self.sampling_dates if value.cause}
+        return '; '.join(sorted(causes)) if causes else 'conflicting sampling-date values'
 
 
 @dataclass(frozen=True)
@@ -134,6 +153,7 @@ class Report:
     issues: tuple[dict, ...]
     complete_pages: frozenset[int]
     relations: dict | None = None
+    assembly_complete: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -272,6 +292,41 @@ def record_tables(reading, native):
     tables, issues, incomplete = [], [], set()
     for table in reading['tables']:
         columns = table['columns']
+        # A printed label axis makes a transpose independently checkable; the
+        # publisher need not also state in prose that its two displays repeat.
+        labelled = (len(columns) > 1 and not columns[0]['heading']
+                    and all(c['role'] in {'identifier', 'publisher_id'} and c['heading']
+                            for c in columns[1:]))
+        if labelled:
+            candidates = []
+            labels = [text(row['cells'][0]) for row in table['rows']]
+            for companion in reading['tables']:
+                if companion['id'] == table['id'] or companion['page'] != table['page']:
+                    continue
+                headings = [' '.join(' '.join(c['heading']).split()) for c in companion['columns']]
+                ids = [i for i, c in enumerate(companion['columns']) if c['role'] in {'identifier', 'publisher_id'}]
+                if len(ids) != 1 or len(set(headings)) != len(headings) or labels != headings:
+                    continue
+                source = {text(row['cells'][ids[0]]): row for row in companion['rows']}
+                keys = [c['heading'][-1] for c in columns[1:]]
+                if len(source) != len(companion['rows']) or len(set(keys)) != len(keys) or not set(keys) <= source.keys():
+                    continue
+                if any(text(raw['cells'][j + 1]) is None
+                       or text(raw['cells'][j + 1]) != text(source[key]['cells'][i])
+                       for j, key in enumerate(keys) for i, raw in enumerate(table['rows'])):
+                    continue
+                rows = [{'id': f'sample-column{j + 2}', 'cells': [dict(raw['cells'][j + 1],
+                         source_position={'table': table['id'], 'reading_row': raw['id'], 'reading_column': j + 2})
+                         for raw in table['rows']]} for j in range(len(keys))]
+                candidates.append(dict(table, columns=companion['columns'], rows=rows,
+                    projection={'rule': 'printed label axis and complete matrix equality',
+                                'companion_table': companion['id']}))
+            if len(candidates) == 1:
+                tables.append(candidates[0])
+            else:
+                incomplete.add(table['page'])
+                issues.append({'scope': table['id'], 'cause': 'labelled transpose has no unique complete matrix correspondence; source display retained'})
+            continue
         transposed = len(columns) > 1 and all(c['role'] in {'identifier', 'publisher_id'} and len(c['heading']) > 1 for c in columns)
         if not transposed:
             tables.append(table)
@@ -301,7 +356,8 @@ def record_tables(reading, native):
             rows = []
             for j, column in enumerate(columns):
                 cells = [None] * len(companion['columns'])
-                cells[identifier] = {'text': column['heading'][-1], 'source_heading': column['heading']}
+                cells[identifier] = {'text': column['heading'][-1], 'source_heading': column['heading'],
+                    'source_position': {'table': table['id'], 'reading_column': j + 1}}
                 for raw, field in zip(table['rows'], fields):
                     cells[field] = dict(raw['cells'][j], source_position={
                         'table': table['id'], 'reading_row': raw['id'], 'reading_column': j + 1})
@@ -315,6 +371,95 @@ def record_tables(reading, native):
             incomplete.add(table['page'])
             issues.append({'scope': table['id'], 'cause': 'sample identities appear in column headings; no unique fully checked transpose correspondence; raw table retained without inventing sample rows'})
     return tables, issues, incomplete
+
+
+def record_rows(reading):
+    """Assemble only continuations explicitly recovered by the document reader.
+
+    Physical rows, cells and qualification scopes remain unchanged in the reading.
+    No layout, neighbouring values or duplicate display establishes this relation.
+    """
+    rows = reading.rows
+    anchors = {}
+    for row in rows:
+        for anchor in {row.locator, row.locator.split('/', 1)[-1],
+                       *('native:' + c['native_cell'] for c in row.cells if c.get('native_cell'))}:
+            anchors.setdefault(anchor, []).append(row)
+    groups, used = [], set()
+    for fact in reading.facts:
+        if fact['role'] != 'record_continuation':
+            continue
+        parts = []
+        for scope in fact['applies_to']:
+            candidates = anchors.get(scope, ())
+            if len(candidates) != 1:
+                raise ValueError('Continuation needs one physical record part at ' + scope)
+            if candidates[0] not in parts:
+                parts.append(candidates[0])
+        identity = fact.get('value')
+        if len(parts) < 2 or not identity or not any(identity in row.identifiers for row in parts):
+            raise ValueError('Continuation needs at least two parts and their printed identity')
+        if fact.get('text') != identity or not any(
+                row.page == fact.get('page') and identity in row.identifiers for row in parts):
+            raise ValueError('Continuation must quote its printed identity at the identity-bearing page')
+        keys = {row.locator for row in parts}
+        if used.intersection(keys):
+            # Repeated declarations of exactly the same relationship are harmless.
+            if any(keys == {r.locator for r in group} for group in groups):
+                continue
+            raise ValueError('A physical part belongs to conflicting continuations')
+        used.update(keys)
+        groups.append(parts)
+    assembled = {}
+    for parts in groups:
+        # Order follows physical occurrences, not the order of model selectors.
+        parts = sorted(parts, key=lambda row: rows.index(row))
+        fields = {}
+        for row in parts:
+            for cell in row.cells:
+                key = (tuple(cell['heading']), cell['role'])
+                fields.setdefault(key, []).append(cell)
+        selected = []
+        for cells in fields.values():
+            populated = [c for c in cells if c['text'] is not None]
+            if len(populated) > 1:
+                # Separate result occurrences are never collapsed into one test.
+                if (populated[0]['role'] == 'result' or
+                        len({c['text'] for c in populated}) != 1):
+                    raise ValueError('Continuation contains overlapping or conflicting fields')
+            selected.extend(populated or cells[:1])
+        selected_locators = {c['locator'] for c in selected}
+        results = tuple(result for row in parts for result in row.results
+                        if result.locator in selected_locators)
+        facts = tuple(f for i, row in enumerate(parts) for f in row.facts
+                      if not any(f == old for earlier in parts[:i] for old in earlier.facts))
+        dates = tuple(d for row in parts for d in row.sampling_dates)
+        def sole(role):
+            values = {c.get('identifier', c['text']) for c in selected
+                      if c['role'] == role and c['text'] is not None}
+            return next(iter(values)) if len(values) == 1 else None
+        assembled[parts[0].locator] = replace(parts[0], cells=tuple(selected), results=results,
+            reference=sole('publisher_id') or sole('identifier'), laboratory_reference=sole('laboratory_id'),
+            sampling_dates=dates, facts=facts,
+            projection={'rule': 'assembly of reader-declared record continuation',
+                        'parts': [row.locator for row in parts]})
+    return tuple(assembled.get(row.locator, row) for row in rows
+                 if row.locator not in used or row.locator in assembled)
+
+
+def source_scopes(cell, table, raw, index):
+    """Selectors of the original cell, including its original row and column."""
+    position = cell.get('source_position', {
+        'table': table['id'], 'reading_row': raw['id'], 'reading_column': index + 1})
+    owner, column = position['table'], position['reading_column']
+    scopes = {f'{owner}/c{column}'}
+    if row := position.get('reading_row'):
+        source_row = f'{owner}/{row}'
+        scopes.update({source_row, f"p{table['page']}/{source_row}",
+                       f'{source_row}/c{column}', f"p{table['page']}/{source_row}/c{column}"})
+    if cell.get('native_cell'):
+        scopes.add('native:' + cell['native_cell'])
+    return scopes
 
 
 def materialize(digest, version, page_count, blocks):
@@ -374,6 +519,7 @@ def materialize(digest, version, page_count, blocks):
                     raise ValueError('Repeated source-row locator')
                 locators.add(locator)
                 cells, results = [], []
+                scopes = {'report', table['id']}
                 by_role = {}
                 for index, (column, cell) in enumerate(zip(table['columns'], raw['cells'])):
                     text = native[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
@@ -384,10 +530,12 @@ def materialize(digest, version, page_count, blocks):
                         value['identifier_authority'] = column.get('identifier_authority')
                         value['authority_support'] = tuple(dict(s, basis='model_proposed_reading')
                             for s in column.get('authority_support', ()))
-                    field = f"{table['id']}/c{index + 1}"
+                    field_scopes = source_scopes(cell, table, raw, index)
+                    scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
-                    field_issues = tuple(issue for issue in issues if re.search(
-                        r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope']))
+                    field_issues = tuple(issue for issue in issues if any(re.search(
+                        r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope'])
+                        for field in field_scopes))
                     if field_issues:
                         value['reading_issues'] = field_issues
                         if column['role'] in {'publisher_id', 'laboratory_id'}:
@@ -413,8 +561,7 @@ def materialize(digest, version, page_count, blocks):
                         return None
                     values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
                     return values[0] if len(values) == 1 else None
-                scopes = {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}
-                scopes.update(f"{table['id']}/c{i + 1}" for i in range(len(cells)))
+                direct_scopes = set(scopes)
                 # A qualifier of an included statement travels with that statement.
                 # Keep its exact scope; inclusion in row context does not broaden it.
                 while True:
@@ -424,10 +571,15 @@ def materialize(digest, version, page_count, blocks):
                     if expanded == scopes:
                         break
                     scopes = expanded
-                dates = tuple(literal_date(c['text'], c.get('cause')) for c in by_role.get('sampling_date', []))
-                shared_dates = tuple(literal_date(None, f['value_cause']) if f.get('value_cause') else literal_date(f.get('value') or f['text']) for f in scoped
+                year_context = tuple((int(year), f['id']) for f in scoped
+                    if f['role'] in {'date', 'report_date', 'delivery_date', 'sampling_date', 'test_date', 'acceptance_date'}
+                    and not f.get('value_cause')
+                    for year in re.findall(r'(?<!\d)(\d{4})(?!\d)', f.get('value') or f['text']))
+                dates = tuple(literal_date(c['text'], c.get('cause'), year_context=year_context)
+                              for c in by_role.get('sampling_date', []))
+                shared_dates = tuple(literal_date(None, f['value_cause']) if f.get('value_cause') else literal_date(f.get('value') or f['text'], year_context=year_context) for f in scoped
                                      if f['role'] == 'sampling_date' and
-                                     {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}.intersection(f['applies_to']))
+                                     direct_scopes.intersection(f['applies_to']))
                 dates += shared_dates
                 generic = sole('identifier')
                 rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),
@@ -489,7 +641,8 @@ def report(digest: str, store: Path, *, extraction_version: str):
     if any('native_cell' in c and c['role'] in {'identifier', 'publisher_id', 'laboratory_id'} for r in reading.rows for c in r.cells):
         reading = positioned_identifiers(reading, blob_path(store, digest))
     from .report_relations import load
-    return replace(reading, relations=load(store, digest, exact=True))
+    return replace(reading, relations=load(store, digest, exact=True),
+                   assembly_complete=payload.get('assembly_complete'))
 
 
 def reports(root: Path, store: Path, *, extraction_version: str, known_through=None):

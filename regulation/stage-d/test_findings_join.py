@@ -19,16 +19,17 @@ from test_reports import block
 class JoinIdentity(unittest.TestCase):
     def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
                  repeated=False, repetition_support=True, differing_repeat=False, reading_issues=(), replacement=None, association_rows=(), recovery=False,
-                 identifier_display=False):
+                 identifier_display=False, monitoring_fields=None, differing_qualification=False, continued=False):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
             monitoring = base / 'monitoring'; campaign = monitoring / 'campaign'; campaign.mkdir(parents=True)
             workbook = Workbook(); sheet = workbook.active
-            sheet.append(['ID', 'DATA_RILEVAMENTO', 'RISULTATO', 'DOCUMENTO_CONFERMA'])
+            extra = monitoring_fields or {}
+            sheet.append(['ID', 'DATA_RILEVAMENTO', 'RISULTATO', 'DOCUMENTO_CONFERMA', *extra])
             route = 'https://publisher.example/report.pdf'
             for reference, date_text in publications:
-                sheet.append([reference, datetime.fromisoformat(date_text), 'POSITIVO', route])
+                sheet.append([reference, datetime.fromisoformat(date_text), 'POSITIVO', route, *extra.values()])
             path = campaign / 'release.xlsx'; workbook.save(path)
             (campaign / 'releases.json').write_text(json.dumps([
                 {'url': 'https://publisher.example/release.xlsx', 'path': path.name, 'sha256': file_digest(path)}]))
@@ -70,19 +71,40 @@ class JoinIdentity(unittest.TestCase):
                 if differing_repeat:
                     duplicate['rows'][0]['cells'][3]['text'] = '03/06/2024'
                 item['reading']['tables'].append(duplicate)
+                if differing_qualification:
+                    item['reading']['facts'].append({'id': 'qualifier', 'role': 'result_qualification',
+                        'page': 1, 'locator': 'second display note', 'text': 'Risultato preliminare',
+                        'applies_to': ['p1-t2']})
                 if repetition_support:
                     item['reading']['facts'].append({'id': 'repeat', 'role': 'repeated_representation',
                         'page': 1, 'locator': 'shared heading', 'text': 'Risultati dei campioni',
                         'applies_to': ['p1-t1', 'p1-t2']})
-            if association_rows:
+            if association_rows or monitoring_fields:
                 table = item['reading']['tables'][0]
                 for role, value in (('latitude', '41.123456789'), ('longitude', '16.987654321'),
                                     ('host', 'Vite europea')):
                     table['columns'].append(dict(table['columns'][0], role=role, heading=[role]))
                     for row in table['rows']:
                         row['cells'].append({'text': value})
+            if continued:
+                table = item['reading']['tables'][0]
+                tail = copy.deepcopy(table)
+                tail['id'] = 'p2-tail'; tail['page'] = 2
+                tail['columns'] = tail['columns'][2:]
+                table['columns'] = table['columns'][:2]
+                for prefix_row, tail_row in zip(table['rows'], tail['rows']):
+                    tail_row['cells'] = tail_row['cells'][2:]
+                    prefix_row['cells'] = prefix_row['cells'][:2]
+                    identity = prefix_row['cells'][0]['text']
+                    item['reading']['facts'].append({'id': 'continuation-' + prefix_row['id'],
+                        'role': 'record_continuation', 'page': 1, 'locator': 'identity header',
+                        'text': identity, 'value': identity,
+                        'applies_to': [table['id'] + '/' + prefix_row['id'], tail['id'] + '/' + tail_row['id']]})
+                item['reading']['tables'].append(tail)
+                item['reading']['pages'].append({'page': 2, 'disposition': 'read'})
+                item['targets'] = [1, 2]
             cache.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'v',
-                'page_count': 1, 'blocks': [item]}))
+                'page_count': 2 if continued else 1, 'assembly_complete': True, 'blocks': [item]}))
             from cordon_d import report_relations
             from test_report_relations import reading
             relation_cache = report_relations.path(store, digest)
@@ -119,9 +141,21 @@ class JoinIdentity(unittest.TestCase):
                     relation_cache.write_text(json.dumps({'source_sha256': key,
                         'reading_version': report_relations.READING_VERSION, 'complete': True,
                         'reading': value}))
-            return list(findings(distinct_observations(monitoring), reports, store,
+            joined = list(findings(distinct_observations(monitoring), reports, store,
                                 extraction_version='v', known_through=cutoff or datetime(2026, 2, 1, tzinfo=timezone.utc),
                                 association_readings=association_rows))
+            if continued:
+                return joined, list(reverse_rows([materialize(digest, "v", 2, [item])], joined))
+            return joined
+
+    def test_continued_record_without_complete_duplicate_reaches_consumer(self):
+        joined, reverse = self.run_join([('00123', '2024-06-01')],
+            [['00123', '01/06/2024', 'Positivo', '02/06/2024']], continued=True)
+        self.assertEqual(joined[0]['status'], 'matched')
+        self.assertEqual(len(joined[0]['matches']), 1)
+        self.assertEqual(len(reverse), 2)
+        self.assertTrue(all(item['observations'] for item in reverse))
+        self.assertEqual(joined[0]['matches'][0]['row'].results[0].kind, 'positive')
 
     def test_reconciled_alternative_reaches_the_join_after_recovery_date(self):
         args = ([('00091', '2024-06-01')], [('00091', '01/06/2024', 'Positivo', '02/06/2024')])
@@ -161,6 +195,27 @@ class JoinIdentity(unittest.TestCase):
         self.assertIn('derived occurrence', match['identity_basis'])
         self.assertEqual(joined['observation'].reference, 'public-9')
         self.assertEqual(match['row'].results[0].kind, 'negative')
+
+    def test_monitoring_reference_and_published_degrees_relate_distinct_codes(self):
+        fields = dict(PROT_SELGE='31/2024 Laboratory A', DATA_PROT_SELGE='01/03/2024',
+                      LATITUDINE=41.12345679, LONGITUDINE=16.98765432, SPECIE='Vite europea')
+        rows = [['client-4', '01/06/2024', 'Negativo', '02/06/2024']]
+        joined = self.run_join([['public-9', '2024-06-01']], rows, monitoring_fields=fields)[0]
+        self.assertEqual(joined['matches'][0]['row'].reference, 'client-4')
+        self.assertEqual(joined['matches'][0]['row'].results[0].kind, 'negative')
+        self.assertEqual(joined['matches'][0]['source_associations'][0]['source_kind'], 'monitoring publication')
+        for field, value in [('DATA_PROT_SELGE', None), ('LONGITUDINE', 16.98766), ('LONGITUDINE', 17.0),
+                             ('PROT_SELGE', '32/2024 Laboratory A'), ('SPECIE', 'Olea europaea')]:
+            with self.subTest(field=field):
+                changed = dict(fields, **{field: value})
+                self.assertFalse(self.run_join([['public-9', '2024-06-01']], rows,
+                                               monitoring_fields=changed)[0]['matches'])
+        duplicated = self.run_join([['public-9', '2024-06-01'], ['public-10', '2024-06-01']],
+                                   rows, monitoring_fields=fields)
+        self.assertTrue(all(not item['matches'] for item in duplicated))
+        two_rows = rows + [['client-5', '01/06/2024', 'Positivo', '02/06/2024']]
+        self.assertFalse(self.run_join([['public-9', '2024-06-01']], two_rows,
+                                      monitoring_fields=fields)[0]['matches'])
 
     def test_conflicting_act_association_is_not_selected_away(self):
         joined = self.run_join([['public-9', '2024-06-01']],
@@ -254,7 +309,14 @@ class JoinIdentity(unittest.TestCase):
         self.assertEqual(joined['status'], 'matched')
         self.assertEqual(len(joined['matches']), 2)
         self.assertNotEqual(joined['matches'][0]['key'], joined['matches'][1]['key'])
-        for options in ({'repetition_support': False}, {'differing_repeat': True}):
+        unlabelled = self.run_join(*args, repeated=True, repetition_support=False)[0]
+        self.assertEqual(unlabelled['status'], 'matched')
+        self.assertEqual(len(unlabelled['matches']), 2)
+        qualified = self.run_join(*args, repeated=True, differing_qualification=True)[0]
+        self.assertEqual(qualified['status'], 'matched')
+        self.assertEqual(sum(any(f['role'] == 'result_qualification' for f in m['row'].facts)
+                             for m in qualified['matches']), 1)
+        for options in ({'differing_repeat': True},):
             rejected = self.run_join(*args, repeated=True, **options)[0]
             self.assertFalse(rejected['matches'])
             self.assertIn('several eligible source-row', rejected['status'])
