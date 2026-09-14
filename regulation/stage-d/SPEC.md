@@ -27,6 +27,22 @@ Some accepted source text calls their operative direction a `prescription`; that
 is the meaning of the `case-prescription` input contract. It is not a medical
 prescription or a separate product workflow.
 
+## Administrative publication records
+
+`cordon_d.removal_events.publication_records` consumes the retained native
+Capurso/Akropolis register JSON. It preserves all fields and identifies the
+regional act from its explicitly labelled subject, separately from the municipal
+incoming protocol and date. `connected_publications` requires the act identity
+and adoption date from the measure consumer; that connection remains held with
+the whole-measure readings. Independent register declarations remain available.
+
+`publication_deadline` passes the exact event kind, document and competent
+municipality to accepted B/C clock calculations. It requires the caller's
+calendar. A result using `national_calendar()` has that baseline's local-holiday
+limitation. The calculation does not establish recipient effect, uninterrupted
+posting, election, silence, default or completed removal. No clause wording,
+layout or adoption date generates an assignment or performance event.
+
 ## Where bytes live
 
 Source bytes are the only irreplaceable data. They live in a content-addressed

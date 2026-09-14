@@ -42,5 +42,242 @@
     "source_locator": "Report page 1 identifies CNR 23/2024 dated 18/03/2024. Publisher search for that cited report reached this determination; the report does not print this URL. Annex 1/C supplies the plant-to-report association needed by the finding identity consumer."
    }
   ]
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2439662/DET_13_27_2_2024.pdf/fe31ba94-c959-b92e-6adc-201aae6b8bc9",
+  "captured_at": "2026-09-14T19:46:33.379651+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-13-2024-FITO-.pdf",
+  "bytes": 2529651,
+  "sha256": "4915eb7cbe0454dfba981ba164efec52a103d6172da6731586cb5c5c8538fcbc"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2473290/DET_52_6_5_2024.pdf/58d5f8bb-804f-0c2b-a4f4-5fa9496cd834",
+  "captured_at": "2026-09-14T19:46:33.384801+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.pdf",
+  "bytes": 21183410,
+  "sha256": "0b3031e28ab1c196401644ac742ba72ccd47022e4ec09c80c7324fff86d4bb0d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2481340/DET_58_16_5_2024.pdf/306180ab-2191-5d02-3d9f-e58d10a43582",
+  "captured_at": "2026-09-14T19:46:33.423942+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-58-2024-FITO-.pdf",
+  "bytes": 1275414,
+  "sha256": "936eb652ee9425e627e00d62b81429ecbafa89e36e3a53515331cb2c8cf5a632"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_63_24_5_2024.pdf/44c73b91-3a4d-e059-8765-0ce31b8a9cb6",
+  "captured_at": "2026-09-14T19:46:33.441393+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-63-2024-FITO-.pdf",
+  "bytes": 7039800,
+  "sha256": "3b5813789b43ef0861c283175ab607fa32cfba7c1d2057a55b291aa8f8097a48"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_74_20_6_2024.pdf/f2e47f81-3c3f-a130-9783-23befeac956a",
+  "captured_at": "2026-09-14T19:46:33.481461+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-74-2024-FITO-.pdf",
+  "bytes": 5833927,
+  "sha256": "44f299b0d9183377a846fd2c6e9125cbbd7d69e2edac29718b3e5112d1b1c321"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2503904/DET_82_9_7_2024.pdf/c3ad3bfe-8a91-27f3-6d57-af159c520e72",
+  "captured_at": "2026-09-14T19:46:33.498620+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-82-2024-FITO-.pdf",
+  "bytes": 3898948,
+  "sha256": "1562cd87658f61de9ffd103ba2eb33cc44fae1d59511f60c3bd03119d02088e9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2509064/DET_96_25_7_2024.pdf/69488d6d-3ef3-7b89-7cca-1cf1c212e5e1",
+  "captured_at": "2026-09-14T19:46:33.528922+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-96-2024-FITO-.pdf",
+  "bytes": 2201223,
+  "sha256": "0124b03173155a8c36a3e0da3bbcbf07285ee3da907869e2235894e23f651e5c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2509064/DET_97_25_7_2024.pdf/845fea47-04f0-e0ca-a6c5-c56ae631f152",
+  "captured_at": "2026-09-14T19:46:33.544070+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-97-2024-FITO-.pdf",
+  "bytes": 4143324,
+  "sha256": "02290c6fa219b23b69bf91396029f4f3b66b4519636ef8fe3cad3714eefac72d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2524651/DET_116_16_9_2024.pdf/ef50662c-2f31-02ad-e8e4-ea1a70ae8028",
+  "captured_at": "2026-09-14T19:46:33.563220+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-116-2024-FITO-.pdf",
+  "bytes": 11095952,
+  "sha256": "c1634b3e15707cf8fbe27f08f33e343de62fd7b7e8c5146fd9a10c11b7e7475c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2545751/DET_138_28_10_2024.pdf/812e064e-ccf7-60dc-a664-806ec0d8011a",
+  "captured_at": "2026-09-14T19:46:33.592883+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-138-2024-FITO-.pdf",
+  "bytes": 7152730,
+  "sha256": "138add2778567999e2852335f6a79469f2677df68891e88ca1af9bbac089b0e5"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2555218/DET_179_3_12_2024.pdf/e17811cd-3b07-258a-c2ee-bf4a38c5904d",
+  "captured_at": "2026-09-14T19:46:33.610632+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-179-2024-FITO-.pdf",
+  "bytes": 3082702,
+  "sha256": "266f46b253898678e209cf66b2afaa8e44d5b10e8b8498c698df77c999306df8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2565745/DET_188_12_12_2024.pdf/efa90488-5fca-c924-645f-deb3f392d404",
+  "captured_at": "2026-09-14T19:46:33.620884+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-188-2024-FITO-.pdf",
+  "bytes": 5898971,
+  "sha256": "882c0020ab2ce0e55c06c9d72b36b3bd0204d02a48b6c35120c81bc050d958cd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2601720/DET_11_5_2_2025.pdf/2cb1e292-fdda-929c-72bc-8697fc99bdcc",
+  "captured_at": "2026-09-14T19:46:33.638741+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.pdf",
+  "bytes": 639044,
+  "sha256": "c05d3c4d118686a184a804d0048aebc1c1a79f45d8b0464048488cab69d2bff8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2603465/DET_22_15_2_2025.pdf/16df0dec-959b-15a4-c3eb-2d841cd29081",
+  "captured_at": "2026-09-14T19:46:33.644249+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-22-2025-FITO-.pdf",
+  "bytes": 702739,
+  "sha256": "f45ce9bce8a17707e9c5e21c89536a5e3051b7f5b9c69a12efd7ed4fbf358d94"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2619098/DET_43_21_3_2025.pdf/38cfbc36-e103-7cd3-c8e3-06c43323848c",
+  "captured_at": "2026-09-14T19:46:33.647922+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-43-2025-FITO-.pdf",
+  "bytes": 3315507,
+  "sha256": "8e90240666712b38ba635d04e195e23df9dd7fcbbf501928090a0ee96041d955"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2664200/DET_117_27_6_2025.pdf/92130dd6-9946-3612-5a65-91b821d1ae87",
+  "captured_at": "2026-09-14T19:46:57.120201+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 and DDS43/2025 annex corrections",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.pdf",
+  "bytes": 1071400,
+  "sha256": "1d2e9b6111cdb33de96f1b1abeb49c1d3ad35019994404a74e59320d7850c2aa"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/426bc4c8-e203-41c7-9b5f-b2731774113f",
+  "captured_at": "2026-09-14T20:01:04.094231+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/b2958e59-d9ad-4fb4-91a1-577d116f6305",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/426bc4c8-e203-41c7-9b5f-b2731774113f",
+  "content_type": "application/octet-stream",
+  "bytes": 22739726,
+  "sha256": "f8a0ac9cfcec014cf53ec6e22954e2475a77d334bb83667fe3e047f2af9e5bf2"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/d0d66a61-b9c8-4de0-93d2-d02794a8ed8e",
+  "captured_at": "2026-09-14T20:01:29.193500+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/623ef680-8fe3-4803-a007-e803654e1dc1",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/d0d66a61-b9c8-4de0-93d2-d02794a8ed8e",
+  "content_type": "application/octet-stream",
+  "bytes": 1639638,
+  "sha256": "dfe5e6335223215e4042a39b9333a03dde415f20bf28ab2f570ec94f9ef2ba7c"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/fb1baa75-101b-454c-ac50-5b5b024eb3d6",
+  "captured_at": "2026-09-14T20:01:32.177491+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/0f5cd32c-d597-4b26-8e7d-720fc00ca145",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/fb1baa75-101b-454c-ac50-5b5b024eb3d6",
+  "content_type": "application/octet-stream",
+  "bytes": 4234178,
+  "sha256": "bedc6cb454aec22945e82ef16ee35fe48f55630559203aa8a08b974d6ec6a71d"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/3451f5ce-7f5f-4c34-90ba-c92fd9263126",
+  "captured_at": "2026-09-14T20:01:38.722655+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/96084a0c-fa06-4d64-81e4-9a78bc2dce1b",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/3451f5ce-7f5f-4c34-90ba-c92fd9263126",
+  "content_type": "application/octet-stream",
+  "bytes": 297333,
+  "sha256": "8ce9f82f3838a8042085f9c87078c15ae9adb4340a6553841ed387a6dd70cf3c"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/e4836b1c-4538-4e0d-91e0-c05b19f7b686",
+  "captured_at": "2026-09-14T20:01:40.296428+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/9137212d-7bf8-4660-aa30-4734861ede2c",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/e4836b1c-4538-4e0d-91e0-c05b19f7b686",
+  "content_type": "application/octet-stream",
+  "bytes": 3500151,
+  "sha256": "54925eb02e29cb0274354f86fcd0ff79022de3bd98429c19f442895b430116ab"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_11_12_2_2026.pdf/e968fa10-d844-cd1a-0a36-e5dc2127d108",
+  "captured_at": "2026-09-14T20:05:21.815378+00:00",
+  "kind": "act",
+  "referred_by": "DDS22/2025 successor measure; current assignment for the admitted ST1 zones (including later expanded geography)",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-11-2026-FITO-46921ff54da6.pdf",
+  "bytes": 25360861,
+  "sha256": "46921ff54da6868fb14f79243810264a5c67d04c723d4a339050a6939c87c361"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_12_12_2_2026.pdf/aae9a2f5-6563-e0c1-a364-3af8ec7b882e?t=1772722061266&download=true",
+  "captured_at": "2026-09-14T20:05:21.855621+00:00",
+  "kind": "act",
+  "referred_by": "DDS22/2025 successor measure; current assignment for the admitted ST1 zones (including later expanded geography)",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-12-2026-FITO-a5b57a900dcc.pdf",
+  "bytes": 27267469,
+  "sha256": "a5b57a900dcca4f32d8cd634ae5d6984e17dea652835a2391286f8d488a7a360"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_14_12_2_2026.pdf/80533c14-1997-b031-9959-fa2e4ad500fa?t=1772722062332&download=true",
+  "captured_at": "2026-09-14T20:05:21.903640+00:00",
+  "kind": "act",
+  "referred_by": "DDS22/2025 successor measure; current assignment for the admitted ST1 zones (including later expanded geography)",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-14-2026-FITO-e4b09a4fad5c.pdf",
+  "bytes": 8419192,
+  "sha256": "e4b09a4fad5c5d38bd7c7c98b3dda85acd76cf8efd00061095cc685f5252982a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_13_12_2_2026.pdf/15035eea-0970-4957-b4e2-396750640b36",
+  "captured_at": "2026-09-14T20:06:12.881686+00:00",
+  "kind": "act",
+  "referred_by": "BURP18/2026 sibling execution assignments for the ST1 cohort; DDS22/2025 successor",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_13_12_2_2026.pdf/15035eea-0970-4957-b4e2-396750640b36",
+  "content_type": "application/pdf",
+  "bytes": 26841261,
+  "sha256": "7ac5228c2f9b1091aef21c58b71f22261eefac3c8d08fe7247b654425be46001"
  }
 ]
