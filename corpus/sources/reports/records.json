@@ -1,5 +1,117 @@
 [
  {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_7_2021_result_tables.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 147329,
+  "sha256": "59db0196946b9e8baa3e996c9e967e36888e49e16aa66f9a7ca0709576826ac4",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "IAMB",
+   "number": "7",
+   "date": null,
+   "source_page": 1
+  },
+  "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+ },
+ {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_8_2021_result_tables.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 209859,
+  "sha256": "2d0e625dbd7fad0559e20564caf7506077610bc13999b50cd118c0362bb47a14",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "IAMB",
+   "number": "8",
+   "date": null,
+   "source_page": 1
+  },
+  "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+ },
+ {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_DIR_02_848_result_tables.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 131814,
+  "sha256": "bf202600553a8be0e2a9fc30c3c2a0d39dceaaa908e8ea13d20e6d8fb2606705",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "IAMB",
+   "number": "4",
+   "date": null,
+   "source_page": 1
+  },
+  "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+ },
+ {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/RAPPORTO_PROVA_N_02_2024_CNR.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 232793,
+  "sha256": "5caa62f29c0d9a6c2c9221069cf2696864bfbfbb4afc3fe9a9c45ff65be693ce",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "CNR-IPSP",
+   "number": "2/2024",
+   "date": "2024-02-09",
+   "source_page": 1
+  },
+  "completeness": "Complete printed sequence 1/5 through 5/5, including transmission letter, result tables, qualifications and signed closing page."
+ },
+ {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/RAPPORTO_PROVA_N_05_2024_CNR.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 264856,
+  "sha256": "874dcf99193242e6a6352a834d554b9c1290d0798748c081b5aa7aa3e02f3af6",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "CNR-IPSP",
+   "number": "5/2024",
+   "date": "2024-02-09",
+   "source_page": 1
+  },
+  "completeness": "Complete printed sequence 1/8 through 8/8, including transmission letter, result tables, qualifications and signed closing page."
+ },
+ {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/RAPPORTO_PROVA_N_09_2024_CNR.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 299667,
+  "sha256": "b6016c9c6ce3dd95bb35ff5fe00e28442ef75dba326e848f6098421a7f9cfbe1",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "CNR-IPSP",
+   "number": "9/2024",
+   "date": "2024-02-09",
+   "source_page": 1
+  },
+  "completeness": "Complete printed sequence 1/7 through 7/7, including transmission letter, result tables, qualifications and signed closing page."
+ },
+ {
+  "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/UNIFG_8_POS_2021.pdf",
+  "captured_at": "2026-09-14T18:35:20.857979+00:00",
+  "content_type": "application/pdf",
+  "bytes": 625456,
+  "sha256": "f8718d7cf58d786b5631f79366871bda12aac49cb0901be72c1852987338590d",
+  "acquisition_method": "user-supplied local recovery",
+  "provided_by": "Owen Wassmer",
+  "identity": {
+   "issuer": "UNIFG",
+   "number": "8_POSITIVI",
+   "date": "2021-09-24",
+   "source_page": 1
+  },
+  "completeness": "Transmission letter dated 24 September 2021 and its 18-row annex are present. Letter names 8_POSITIVI; annex heading names 8_DUBB in conferma. Both printed identities are retained; the annex rows themselves state Positivo."
+ },
+ {
   "url": "http://cartografia.sit.puglia.it/doc/xylella/xf_sub_multiplex/risultati_xfmultiplex/RAPPORTO_PROVA_N_100M_2024_CNR.pdf",
   "captured_at": "2026-09-11T03:56:06.429662+00:00",
   "status": 200,
@@ -2514,7 +2626,13 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_196_2020.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "retry_disposition": {
+   "action": "do_not_retry",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "basis": "Owen reports explicit server-side FileNotFoundException for the backing file; repeating this URL cannot recover that file. Check retained alternative identities/copies instead.",
+   "provenance": "user-reported access result, 2026-09-14"
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_197_2017.pdf",
@@ -2547,7 +2665,13 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_197_2020.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "retry_disposition": {
+   "action": "do_not_retry",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "basis": "Owen reports explicit server-side FileNotFoundException for the backing file; repeating this URL cannot recover that file. Check retained alternative identities/copies instead.",
+   "provenance": "user-reported access result, 2026-09-14"
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_199_2017.pdf",
@@ -6333,7 +6457,45 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_2_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/RAPPORTO_PROVA_N_02_2024_CNR.pdf",
+   "sha256": "5caa62f29c0d9a6c2c9221069cf2696864bfbfbb4afc3fe9a9c45ff65be693ce",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "CNR-IPSP",
+    "number": "2/2024",
+    "date": "2024-02-09",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "24735e404569a52450d93588f9e3d84ce1e7e346b2182bf2cd3404dce3e8be5b",
+     "source_locator": "feature:103:OBJECTID:76482",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/29",
+     "observation_reference": "11200007",
+     "observation_day": "2024-01-23",
+     "published_report_identity": "RAPPORTO PROVA 2/2024 CNR",
+     "published_report_date": "1707436800000",
+     "report_page": 2,
+     "report_locator": "table row 7; Codice committente 130074",
+     "comparison": "Printed issuer, report number and issue date agree with the referring publication; unique row coordinates agree after transforming the referring geometry to EPSG:4326 within 0.0000001 degree. Different observation and client codes remain distinct."
+    },
+    {
+     "source_sha256": "24735e404569a52450d93588f9e3d84ce1e7e346b2182bf2cd3404dce3e8be5b",
+     "source_locator": "feature:256:OBJECTID:76481",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/29",
+     "observation_reference": "11200015",
+     "observation_day": "2024-01-23",
+     "published_report_identity": "RAPPORTO PROVA 2/2024 CNR",
+     "published_report_date": "1707436800000",
+     "report_page": 3,
+     "report_locator": "table row 6; Codice committente 130082",
+     "comparison": "Printed issuer, report number and issue date agree with the referring publication; unique row coordinates agree after transforming the referring geometry to EPSG:4326 within 0.0000001 degree. Different observation and client codes remain distinct."
+    }
+   ],
+   "completeness": "Complete printed sequence 1/5 through 5/5, including transmission letter, result tables, qualifications and signed closing page."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_2_POS_UNIFG_2022.pdf",
@@ -6788,7 +6950,33 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_5_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/RAPPORTO_PROVA_N_05_2024_CNR.pdf",
+   "sha256": "874dcf99193242e6a6352a834d554b9c1290d0798748c081b5aa7aa3e02f3af6",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "CNR-IPSP",
+    "number": "5/2024",
+    "date": "2024-02-09",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "24735e404569a52450d93588f9e3d84ce1e7e346b2182bf2cd3404dce3e8be5b",
+     "source_locator": "feature:195:OBJECTID:76483",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/29",
+     "observation_reference": "11000069",
+     "observation_day": "2024-01-23",
+     "published_report_identity": "RAPPORTO PROVA 5/2024 CNR",
+     "published_report_date": "1707436800000",
+     "report_page": 8,
+     "report_locator": "table row 5; Codice committente 129987",
+     "comparison": "Printed issuer, report number and issue date agree with the referring publication; unique row coordinates agree after transforming the referring geometry to EPSG:4326 within 0.0000001 degree. Different observation and client codes remain distinct."
+    }
+   ],
+   "completeness": "Complete printed sequence 1/8 through 8/8, including transmission letter, result tables, qualifications and signed closing page."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_5_POSITIVI_UNIFG_2021.pdf",
@@ -7117,7 +7305,57 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_7_2021.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1694,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_7_2021_result_tables.pdf",
+   "sha256": "59db0196946b9e8baa3e996c9e967e36888e49e16aa66f9a7ca0709576826ac4",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "IAMB",
+    "number": "7",
+    "date": null,
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "8dbb65c912ffd700a8f7dc8f99167b5b46b055a7b2389226f77d14c016d17d22",
+     "source_locator": "feature:329:OBJECTID:46893",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
+     "observation_reference": "1214009",
+     "observation_day": "2021-09-29",
+     "published_report_identity": "RAPPORTO 7/2021",
+     "published_report_date": "1633910400000",
+     "report_page": 1,
+     "report_locator": "Id 1214009",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "8dbb65c912ffd700a8f7dc8f99167b5b46b055a7b2389226f77d14c016d17d22",
+     "source_locator": "feature:377:OBJECTID:46894",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
+     "observation_reference": "1214618",
+     "observation_day": "2021-09-29",
+     "published_report_identity": "RAPPORTO 7/2021",
+     "published_report_date": "1633910400000",
+     "report_page": 1,
+     "report_locator": "Id 1214618",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "8dbb65c912ffd700a8f7dc8f99167b5b46b055a7b2389226f77d14c016d17d22",
+     "source_locator": "feature:325:OBJECTID:46848",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
+     "observation_reference": "1216231",
+     "observation_day": "2021-09-30",
+     "published_report_identity": "RAPPORTO 7/2021",
+     "published_report_date": "1633910400000",
+     "report_page": 1,
+     "report_locator": "Id 1216231",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    }
+   ],
+   "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_7_2024_POS_UNIFG.pdf",
@@ -7230,7 +7468,57 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_2021.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1694,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_8_2021_result_tables.pdf",
+   "sha256": "2d0e625dbd7fad0559e20564caf7506077610bc13999b50cd118c0362bb47a14",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "IAMB",
+    "number": "8",
+    "date": null,
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "e1ec7ebe69579a61a02ffff352bb469f45f33057a24d326cf57f6d74d6d8798c",
+     "source_locator": "feature:62:OBJECTID:47468",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
+     "observation_reference": "1219024",
+     "observation_day": "2021-10-04",
+     "published_report_identity": "RAPPORTO 8/2021",
+     "published_report_date": "1634256000000",
+     "report_page": 2,
+     "report_locator": "Id 1219024",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "e1ec7ebe69579a61a02ffff352bb469f45f33057a24d326cf57f6d74d6d8798c",
+     "source_locator": "feature:6:OBJECTID:47469",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
+     "observation_reference": "1219129",
+     "observation_day": "2021-10-04",
+     "published_report_identity": "RAPPORTO 8/2021",
+     "published_report_date": "1634256000000",
+     "report_page": 2,
+     "report_locator": "Id 1219129",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "8dbb65c912ffd700a8f7dc8f99167b5b46b055a7b2389226f77d14c016d17d22",
+     "source_locator": "feature:283:OBJECTID:47059",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
+     "observation_reference": "1219211",
+     "observation_day": "2021-10-04",
+     "published_report_identity": "RAPPORTO 8/2021",
+     "published_report_date": "1634256000000",
+     "report_page": 1,
+     "report_locator": "Id 1219211",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    }
+   ],
+   "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_2022_IAMB.pdf",
@@ -7271,7 +7559,57 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_POSITIVI_UNIFG.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1704,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/UNIFG_8_POS_2021.pdf",
+   "sha256": "f8718d7cf58d786b5631f79366871bda12aac49cb0901be72c1852987338590d",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "UNIFG",
+    "number": "8_POSITIVI",
+    "date": "2021-09-24",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:188:OBJECTID:50387",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1184215",
+     "observation_day": "2021-09-14",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1184215",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:99:OBJECTID:50485",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1184222",
+     "observation_day": "2021-09-14",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1184222",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:139:OBJECTID:50417",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1184242",
+     "observation_day": "2021-09-14",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1184242",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    }
+   ],
+   "completeness": "Transmission letter dated 24 September 2021 and its 18-row annex are present. Letter names 8_POSITIVI; annex heading names 8_DUBB in conferma. Both printed identities are retained; the annex rows themselves state Positivo."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8b_2021.pdf",
@@ -7384,7 +7722,33 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_9_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/RAPPORTO_PROVA_N_09_2024_CNR.pdf",
+   "sha256": "b6016c9c6ce3dd95bb35ff5fe00e28442ef75dba326e848f6098421a7f9cfbe1",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "CNR-IPSP",
+    "number": "9/2024",
+    "date": "2024-02-09",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "24735e404569a52450d93588f9e3d84ce1e7e346b2182bf2cd3404dce3e8be5b",
+     "source_locator": "feature:257:OBJECTID:76484",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/29",
+     "observation_reference": "11000096",
+     "observation_day": "2024-01-24",
+     "published_report_identity": "RAPPORTO PROVA 9/2024 CNR",
+     "published_report_date": "1707436800000",
+     "report_page": 4,
+     "report_locator": "table row 7; Codice committente 03157948",
+     "comparison": "Printed issuer, report number and issue date agree with the referring publication; unique row coordinates agree after transforming the referring geometry to EPSG:4326 within 0.0000001 degree. Different observation and client codes remain distinct."
+    }
+   ],
+   "completeness": "Complete printed sequence 1/7 through 7/7, including transmission letter, result tables, qualifications and signed closing page."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_9_POSITIVI_ZONA_CONTENIMENTO.pdf",
@@ -7425,7 +7789,57 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_848.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_DIR_02_848_result_tables.pdf",
+   "sha256": "bf202600553a8be0e2a9fc30c3c2a0d39dceaaa908e8ea13d20e6d8fb2606705",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "IAMB",
+    "number": "4",
+    "date": null,
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:398:OBJECTID:50514",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1199722",
+     "observation_day": "2021-09-21",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1199722",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:390:OBJECTID:50467",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1199836",
+     "observation_day": "2021-09-21",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1199836",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:149:OBJECTID:50472",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1200106",
+     "observation_day": "2021-09-21",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 1,
+     "report_locator": "Id 1200106",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    }
+   ],
+   "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_867.pdf",
@@ -15410,7 +15824,57 @@
   "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8_POSITIVI_UNIFG.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1704,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/UNIFG_8_POS_2021.pdf",
+   "sha256": "f8718d7cf58d786b5631f79366871bda12aac49cb0901be72c1852987338590d",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "UNIFG",
+    "number": "8_POSITIVI",
+    "date": "2021-09-24",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:188:OBJECTID:50387",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1184215",
+     "observation_day": "2021-09-14",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1184215",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:99:OBJECTID:50485",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1184222",
+     "observation_day": "2021-09-14",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1184222",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:139:OBJECTID:50417",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1184242",
+     "observation_day": "2021-09-14",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1184242",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    }
+   ],
+   "completeness": "Transmission letter dated 24 September 2021 and its 18-row annex are present. Letter names 8_POSITIVI; annex heading names 8_DUBB in conferma. Both printed identities are retained; the annex rows themselves state Positivo."
+  }
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_8b_2021.pdf",
@@ -15603,7 +16067,57 @@
   "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_848.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1698,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_DIR_02_848_result_tables.pdf",
+   "sha256": "bf202600553a8be0e2a9fc30c3c2a0d39dceaaa908e8ea13d20e6d8fb2606705",
+   "established_at": "2026-09-14T18:35:20.857979+00:00",
+   "identity": {
+    "issuer": "IAMB",
+    "number": "4",
+    "date": null,
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:398:OBJECTID:50514",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1199722",
+     "observation_day": "2021-09-21",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1199722",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:390:OBJECTID:50467",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1199836",
+     "observation_day": "2021-09-21",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 2,
+     "report_locator": "Id 1199836",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    },
+    {
+     "source_sha256": "6fefd5176b4053da5677cbd5630367262a1fee499cf2f9be15be20cb87bc543c",
+     "source_locator": "feature:149:OBJECTID:50472",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/21",
+     "observation_reference": "1200106",
+     "observation_day": "2021-09-21",
+     "published_report_identity": null,
+     "published_report_date": null,
+     "report_page": 1,
+     "report_locator": "Id 1200106",
+     "comparison": "Printed laboratory/report context and sampling year agree; the referring observation identifier appears in the supplied result table. Recovery establishes the retained result-table component, not an unseen covering letter."
+    }
+   ],
+   "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+  }
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_DIR_02_867.pdf",

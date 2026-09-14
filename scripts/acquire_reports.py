@@ -5,8 +5,9 @@ The population is every distinct report route in the derived monitoring readings
 no route is skipped for its answer, year, host or name. Each route gets retained
 acquisition versions (URL, capture time, HTTP status, content type, bytes, sha256 or
 error) under corpus/sources/reports/records.json; identical bytes at two routes
-are one blob. A failed route is recorded and retried on the next run, and
-never silently dropped. Rerunning resumes; successful current routes are refetched only with --recapture.
+are one blob. Rerunning retries eligible failures; source-reconciled recoveries
+and explicit do-not-retry dispositions remain retained and are skipped.
+An explicit --recapture overrides the existing acquisition disposition.
 
 Usage: scripts/acquire_reports.py --help
 """
@@ -88,7 +89,11 @@ def main() -> None:
         admitted.add(link['url'])
     if not set(args.recapture) <= admitted:
         raise ValueError('Recapture must concern an admitted source route')
-    pending = sorted(u for u in admitted if 'sha256' not in current.get(u, {}) or u in args.recapture)
+    recovered = {r['url'] for r in records if r.get('document_recovery')}
+    stopped = {r['url'] for r in records
+               if r.get('retry_disposition', {}).get('action') == 'do_not_retry'}
+    pending = sorted(u for u in admitted if u in args.recapture or (
+        'sha256' not in current.get(u, {}) and u not in recovered and u not in stopped))
     print(f'routes {len(admitted)} pending {len(pending)} store {store}', flush=True)
     lock = Lock()
     done = failed = 0
@@ -106,7 +111,8 @@ def main() -> None:
                 # Preserve source-reconciled recovery evidence as well as bytes;
                 # a later failed transport cannot erase an established document.
                 records[:] = [r for r in records if r['url'] != record['url']
-                              or 'sha256' in r or r.get('document_recovery')]
+                              or 'sha256' in r or r.get('document_recovery')
+                              or r.get('retry_disposition')]
                 if record['url'] in parents:
                     record['referred_by'] = parents[record['url']]
                 records.append(record)

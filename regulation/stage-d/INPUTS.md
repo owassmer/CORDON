@@ -8,7 +8,7 @@ established; no other row is.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,176 retained PDFs (3,081 pages). The repaired reader has 209 documents with completed page readings and 391 completed relationship readings; the remaining population must be read and joined through the same path. Subscription vision resumes after 15:20 America/New_York on 14 September 2026. Current consumer results and consequential source work below. |
+| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The repaired reader has 209 documents with completed page readings and 391 completed relationship readings; the remaining population must be read and joined through the same path. Subscription vision resumes after 15:20 America/New_York on 14 September 2026. Current consumer results and consequential source work below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
@@ -168,9 +168,9 @@ What the population shows, read and not reconciled:
 
 ## Laboratory reports
 
-The retained population comprises 1,903 successful captures and 1,176 distinct PDFs.
+The retained population comprises 1,910 captures with source bytes and 1,180 distinct PDFs.
 The current offline rebuild recovers 209 complete document page readings without
-provider calls; 967 documents still require completed extraction. There are 391
+provider calls; 971 documents still require completed extraction. There are 391
 completed document-relationship readings. The ordinary full-observation join after
 the reader repairs covers all 2,320,354 observations: 2,923 have a unique matched
 report row, 168 have a provisional match, 106 have competing report-row occurrences,
@@ -189,22 +189,49 @@ revision-date proposal from its source. The generic identifier role does not req
 guessing which organization assigned a literal code; attachment still requires the
 observation's report route, source identity and bidirectional uniqueness.
 
-The inherited Frankfurt retry left 15 failed published routes. Source reconciliation
-now resolves four of them through already-retained copies: CNR-IPSP 36/2024
-(27 March), 10/2024 (9 February), 70M/2026 (31 August), and SELGE 173/2020
-(27 July), whose referring URL incorrectly names 172. The three CNR copies agree
-with the referring report identities/dates and sample locations; 70M also agrees
-on both sample identifiers. SELGE 173 agrees on all three sample identifiers and
-sampling dates. The acquisition records retain these located recovery grounds,
-the successful alternative URL/hash and the failed transport response. The ordinary
-consumer follows the recovery only after its establishment time; matching filenames
-alone still supply candidates. The CNR sample-row readings await the subscription;
-recovered documents are not automatically completed readings. Eleven published
-routes, naming nine other documents, still require external recovery by Owen. The inferred
-HTTP/HTTPS routes for SELGE355/2020, IAMB34/2022 and IAMB4/2023 also failed; the earlier
-archive requests were rate-limited or timed out. No external acquisition hunt is authorized in this continuation. Owen owns these
-recoveries, including predecessor reports and the missing adopting act; supplied
-documents are to be stored, replicated and integrated as they arrive. The reached ARIF application requires
+The failed published routes are reconciled in the existing acquisition records.
+Four retained alternatives resolve CNR-IPSP 36/2024, 10/2024, 70M/2026 and SELGE
+173/2020 (the URL incorrectly names 172). Owen's seven supplied PDFs resolve the
+other nine failed routes: CNR 2/2024, 5/2024 and 9/2024; IAMB 7/2021, 8/2021 and
+report 4 / Dir 02/848; and UNIFG 8_POSITIVI/2021. The three supplied CNR files are
+byte-identical to already-held zero-padded publisher copies. All seven supplied
+files are stored with user-intake provenance and replicated to R2 with matching
+readback hashes. Their readings run through the ordinary subscription reader;
+route recovery alone does not establish a completed analytical join.
+
+The IAMB components contain the full rows referring observations name: 72, 104
+and 42 respectively. Report 8 contains 105 rows, including additional ID 1222184.
+The supplied components omit their covering letters. Their result tables can
+supply literal results and sample correspondence; establishing the particular
+analytical method and issuance from the laboratory itself still requires the
+covering letters or equivalent evidence for IAMB 7 (published issue date
+11 October 2021), 8 (15 October 2021) and 4 / Dir 02/848 (30 September 2021).
+These tables are recovered and are not active document searches. UNIFG's letter
+names 8_POSITIVI, while its 18-row annex names 8_DUBB in conferma; both headings
+and the annex's positive results must survive reading.
+
+Only SELGE 196/2020 and 197/2020 remain unrecovered among the published observation
+routes. Owen reports server-side FileNotFoundException for their backing files;
+the acquisition records prohibit automatic retries. Searching the retained PDF
+text layers found no alternative carrying either identity; scanned-only identities
+still depend on completion of the retained vision population. No new broad hunt
+is authorized.
+
+The originals SELGE 355/2020, IAMB 34/2022 (15 September, Dir 02/1097) and IAMB
+4/2023 (14 September, Dir 02/1034) are needed for the earlier report's content and
+an exact before/after correction comparison. They are not blanket prerequisites
+for the successor's independently stated results. Retained SELGE 360/2020 page 1
+expressly cancels and replaces 355 and supplies its own two-method statement and
+12-sample result annex. IAMB 39/2022 pages 1–2 independently supply the corrected
+9 September Monopoli positive list and Harper real-time PCR method. IAMB report
+4 rettificato, issued 3 October 2023 (file named 9/2023), independently supplies
+the 7 September Castellana Grotte positive list, Harper method and received-sample
+qualification. Neither IAMB correction identifies which individual values changed;
+no changed-column delta may be inferred merely from the word Positivi. Recovery
+of a predecessor is required when a consumer actually needs that earlier state
+or delta, not to consume these independently stated corrected facts.
+
+The reached ARIF application requires
 regional login; no authenticated records have been accessed. Laboratory designation,
 status and custody evidence remain necessary where the accepted confirmation branch
 requires them; report extraction alone cannot supply those facts.
