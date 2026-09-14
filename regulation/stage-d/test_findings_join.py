@@ -1,6 +1,7 @@
 """Joins through actual release fixtures and the accepted observation grouping."""
 from datetime import datetime, timezone
 import json
+import copy
 import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -15,7 +16,8 @@ from test_reports import block
 
 
 class JoinIdentity(unittest.TestCase):
-    def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None):
+    def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
+                 repeated=False, repetition_support=True, differing_repeat=False):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
@@ -45,6 +47,16 @@ class JoinIdentity(unittest.TestCase):
                 table['columns'].append(dict(table['columns'][2], heading=['Esito B'], test='Esito B'))
                 for row in table['rows']:
                     row['cells'].append({'text': 'Positivo'})
+            if repeated:
+                duplicate = copy.deepcopy(item['reading']['tables'][0])
+                duplicate['id'] = 'p1-t2'
+                if differing_repeat:
+                    duplicate['rows'][0]['cells'][3]['text'] = '03/06/2024'
+                item['reading']['tables'].append(duplicate)
+                if repetition_support:
+                    item['reading']['facts'].append({'id': 'repeat', 'role': 'repeated_representation',
+                        'page': 1, 'locator': 'shared heading', 'text': 'Risultati dei campioni',
+                        'applies_to': ['p1-t1', 'p1-t2']})
             cache.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'v',
                 'page_count': 1, 'blocks': [item]}))
             return list(findings(distinct_observations(monitoring), reports, store,
@@ -54,6 +66,17 @@ class JoinIdentity(unittest.TestCase):
         result = self.run_join([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
         self.assertEqual(result[0]['status'], 'matched')
         self.assertEqual(result[0]['matches'][0]['temporal'], 'agrees')
+
+    def test_repeated_representation_keeps_both_occurrences_and_requires_all_fields(self):
+        args = ([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
+        joined = self.run_join(*args, repeated=True)[0]
+        self.assertEqual(joined['status'], 'matched')
+        self.assertEqual(len(joined['matches']), 2)
+        self.assertNotEqual(joined['matches'][0]['key'], joined['matches'][1]['key'])
+        for options in ({'repetition_support': False}, {'differing_repeat': True}):
+            rejected = self.run_join(*args, repeated=True, **options)[0]
+            self.assertFalse(rejected['matches'])
+            self.assertIn('several eligible source-row', rejected['status'])
 
     def test_same_filename_never_substitutes_for_a_failed_route(self):
         result = self.run_join([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']], missing_route=True)

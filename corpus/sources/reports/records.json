@@ -3524,6 +3524,21 @@
   "sha256": "aaaf298d5057154aa21d26614f5bd8dc2deaafde15a04f8ad55bf29b80f90166"
  },
  {
+  "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
+  "captured_at": "2026-09-14T00:05:42.445594+00:00",
+  "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1699,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "3726c8214b2632811d92c68fa1c2a4e5abfcc3a61f004b03ffe5a6ef80bccae2",
+    "source_locator": "p1: Si precisa che la presente nota annulla e sostituisce la nota Selge Prot. 355/2020. URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   }
+  ]
+ },
+ {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_357_2020.pdf",
   "captured_at": "2026-09-11T04:00:56.378735+00:00",
   "status": 200,
@@ -6246,6 +6261,21 @@
   "sha256": "3ad5f3b337df3ec1c02b90bd4f4349f5225fce1a2ae80c998ea3f846c44ac241"
  },
  {
+  "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
+  "captured_at": "2026-09-14T00:05:42.447020+00:00",
+  "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1700,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "3b4cea167c1cce4e7103dcc48cfde5d06e1a81e9657c906bcc963fa672bfb324",
+    "source_locator": "p1: A rettifica del rapporto di prova n. 34 del 15/09/2022 (Dir 02/1097). URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   }
+  ]
+ },
+ {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_35_2022_IAMB.pdf",
   "captured_at": "2026-09-11T04:05:16.190283+00:00",
   "status": 200,
@@ -6444,6 +6474,21 @@
   "content_type": "application/pdf",
   "bytes": 544811,
   "sha256": "e1c0ded90cde5fba0452233931147dc74e180fb460cf9eb297b6db1632967a6d"
+ },
+ {
+  "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
+  "captured_at": "2026-09-14T00:05:42.447111+00:00",
+  "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1699,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "e2c2d54a3e21dfc9ac1c04fe8133da2ac3833ead131ce21e94544c8502296858",
+    "source_locator": "p1: Rettifica del rapporto di Prova n.4 (Dir 02/1034) del 14/09/2023. URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   }
+  ]
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_50P_2025_CNR.pdf",
@@ -10485,6 +10530,21 @@
   "sha256": "aaaf298d5057154aa21d26614f5bd8dc2deaafde15a04f8ad55bf29b80f90166"
  },
  {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
+  "captured_at": "2026-09-14T00:05:42.447183+00:00",
+  "status": 500,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_355_2020.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1699,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "3726c8214b2632811d92c68fa1c2a4e5abfcc3a61f004b03ffe5a6ef80bccae2",
+    "source_locator": "p1: Si precisa che la presente nota annulla e sostituisce la nota Selge Prot. 355/2020. URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   }
+  ]
+ },
+ {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_357_2020.pdf",
   "captured_at": "2026-09-11T04:10:00.353398+00:00",
   "status": 200,
@@ -14213,6 +14273,21 @@
   "sha256": "3ad5f3b337df3ec1c02b90bd4f4349f5225fce1a2ae80c998ea3f846c44ac241"
  },
  {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
+  "captured_at": "2026-09-14T00:05:42.447244+00:00",
+  "status": 500,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1700,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "3b4cea167c1cce4e7103dcc48cfde5d06e1a81e9657c906bcc963fa672bfb324",
+    "source_locator": "p1: A rettifica del rapporto di prova n. 34 del 15/09/2022 (Dir 02/1097). URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   }
+  ]
+ },
+ {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_35_2022_IAMB.pdf",
   "captured_at": "2026-09-11T04:13:05.574841+00:00",
   "status": 200,
@@ -14467,6 +14542,21 @@
   "content_type": "application/pdf",
   "bytes": 382606,
   "sha256": "74d6c5593b846639177a39e6c2c6ee7a49d1b36a98c213194b92fffcbe33cd73"
+ },
+ {
+  "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
+  "captured_at": "2026-09-14T00:05:42.447291+00:00",
+  "status": 500,
+  "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1699,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "e2c2d54a3e21dfc9ac1c04fe8133da2ac3833ead131ce21e94544c8502296858",
+    "source_locator": "p1: Rettifica del rapporto di Prova n.4 (Dir 02/1034) del 14/09/2023. URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   }
+  ]
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_50P_2025_CNR.pdf",

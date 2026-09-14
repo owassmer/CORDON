@@ -57,6 +57,31 @@ def _comparable(member, results):
     return comparisons
 
 
+def _repeated_representations(candidates):
+    """Relate source-supported repetitions; keep every row and result occurrence."""
+    rows = [c['row'] for c in candidates.values()]
+    if len({r.page for r in rows}) != 1:
+        return False
+    tables = {r.locator.split('/')[1] for r in rows}
+    if len(tables) != len(rows):
+        return False  # Repeated rows within one table are not a second representation.
+    common = set.intersection(*[{f['id'] for f in row.facts
+        if f['role'] == 'repeated_representation' and tables <= set(f['applies_to'])}
+        for row in rows])
+    if not common:
+        return False
+    def values(row):
+        if any(c['text'] is None and c.get('cause') != 'not_stated' for c in row.cells):
+            return None
+        cells = sorted((tuple(c['heading']), c['role'], ' '.join((c['text'] or '').split())) for c in row.cells)
+        facts = sorted(json.dumps({k: f.get(k) for k in ('role', 'text', 'value', 'section')}, sort_keys=True)
+                       for f in row.facts if f['role'] != 'repeated_representation')
+        results = [(r.assay, r.analyte, r.text) for r in row.results]
+        return cells, facts, results
+    first = values(rows[0])
+    return first is not None and all(values(r) == first for r in rows[1:])
+
+
 def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through):
     """One output per accepted observation identity; unresolved candidates never disappear.
 
@@ -129,16 +154,19 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
             by_document[key[0]][key] = candidate
         output['ambiguities'] = []
         for digest, candidates in by_document.items():
-            if len(candidates) != 1:
+            repeated = len(candidates) > 1 and _repeated_representations(candidates)
+            if len(candidates) != 1 and not repeated:
                 output['ambiguities'].append({'sha256': digest,
                     'cause': 'observation has several eligible source-row occurrences'})
                 continue
-            key, candidate = next(iter(candidates.items()))
-            if reverse[key] != {identity}:
+            if any(reverse[key] != {identity} for key in candidates):
                 output['ambiguities'].append({'sha256': digest,
                     'cause': 'report row has several eligible observation identities'})
                 continue
-            output['matches'].append(candidate)
+            for candidate in candidates.values():
+                if repeated:
+                    candidate['relationship_basis'] = 'model-proposed repeated representation; all recovered fields and qualifications agree'
+                output['matches'].append(candidate)
         if output['matches']:
             output['status'] = ('matched' if all(c['reading_complete'] and c['temporal'] == 'agrees' for c in output['matches'])
                                 else 'provisional-match')

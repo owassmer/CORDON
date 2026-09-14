@@ -63,17 +63,22 @@ def main() -> None:
     parser.add_argument('--recapture', action='append', default=[])
     parser.add_argument('--source-links', type=Path,
                         help='Derived reached links with source_sha256 and source_locator')
+    parser.add_argument('--only-source-links', action='store_true',
+                        help='Acquire this reached-link batch without retrying unrelated known failures')
     args = parser.parse_args()
+    if args.only_source_links and not args.source_links:
+        parser.error('--only-source-links requires --source-links')
     root = args.output_root
     root.mkdir(parents=True, exist_ok=True)
     store = store_root(root)
     path = root / 'records.json'
     records = json.loads(path.read_text()) if path.exists() else []
     current = {r['url']: r for r in sorted(records, key=lambda r: r['captured_at'])}
-    admitted = set(routes(args.monitoring_root))
+    admitted = set() if args.only_source_links else set(routes(args.monitoring_root))
     links = json.loads(args.source_links.read_text()) if args.source_links else []
     parents = {r['url']: r['referred_by'] for r in records if r.get('referred_by')}
-    admitted.update(parents)
+    if not args.only_source_links:
+        admitted.update(parents)
     for link in links:
         if not all(link.get(k) for k in ('url', 'source_sha256', 'source_locator')):
             raise ValueError('A reached report link requires its source and locator')

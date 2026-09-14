@@ -79,6 +79,28 @@ names the remaining attachment limit. After a paired-page output overflow, the
 remaining pages of that document use single-page requests; single-page overflow
 still stops explicitly until geometric subdivision is implemented.
 
+Scanned pages receive a small affine rotation estimated from horizontal ink;
+native-text pages retain their original rendering. This changes the supplied
+image, never the source bytes. Deskew does not certify cell association. A
+transposed repeated display becomes sample rows only when its complete matrix
+equals a source-related companion table. Original axes and cell positions remain
+available. The join accepts repeated occurrences only when every recovered field,
+qualification and result agrees, and preserves all occurrences.
+
+For native identifier cells, ordinary consumption checks the retained extraction
+against the source cell, then reads its coordinate-sorted text. A changed order is
+used only when every non-whitespace character is conserved; original native text,
+cell bounds and derivation remain attached. This repairs displaced punctuation,
+not identifier origin or correspondence between different codes.
+
+Extraction permits one to three independent PDF processes under one shared,
+transaction-locked spending ledger. Returned usage and interrupted requests are
+different states. An explicit interrupted-request retry retains the full old
+reservation and reserves the new attempt separately; it does not claim invoice
+reconciliation. No saved successful response is retransmitted. Reader versions
+describe the implementation loaded into the process, avoiding cache mislabelling
+if source files change during a run.
+
 ## Implementation rule
 
 Ordinary readers accept source records without a named case, fixed hash, authored

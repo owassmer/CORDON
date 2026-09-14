@@ -1,5 +1,7 @@
 """Explicit paid extraction; ordinary report and observation readers never import this."""
 import base64
+from contextlib import contextmanager
+import fcntl
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -12,7 +14,9 @@ import subprocess
 
 import requests
 
-from .reports import ROLES, materialize, validate_block
+from .reports import ROLES, READER_IMPLEMENTATION, materialize, validate_block
+
+IMPLEMENTATION = Path(__file__).read_bytes()
 from .store import blob_path
 
 
@@ -24,6 +28,7 @@ class ExtractionConfig:
     dpi: int = 180
     max_tokens: int = 18000
     timeout_seconds: int = 240
+    deskew: bool = True
 
 
 PROMPT = '''Read every target PDF page as source evidence. Context pages supply headings
@@ -152,8 +157,8 @@ def version(config):
     import pymupdf
     digest = sha256(json.dumps(asdict(config), sort_keys=True).encode())
     digest.update(PROMPT.encode())
-    digest.update(Path(__file__).read_bytes())
-    digest.update(Path(__file__).with_name('reports.py').read_bytes())
+    digest.update(IMPLEMENTATION)
+    digest.update(READER_IMPLEMENTATION)
     digest.update(pymupdf.VersionBind.encode())
     return digest.hexdigest()[:20]
 
@@ -179,46 +184,122 @@ def credential():
     raise RuntimeError('Configure ANTHROPIC_API_KEY or keychain service cordon-anthropic')
 
 
+class BudgetStopped(RuntimeError):
+    pass
+
+
 class Budget:
-    """Local request reservation at explicit prices; not a provider invoice guarantee."""
-    def __init__(self, path, *, limit, input_rate, output_rate):
+    """Shared request reservations at explicit prices; not a provider invoice."""
+    def __init__(self, path, *, limit, input_rate, output_rate, run_id=None):
         self.path = path
         self.limit = Decimal(str(limit))
         self.input_rate, self.output_rate = Decimal(str(input_rate)), Decimal(str(output_rate))
+        self.run_id = run_id
         self.entries = json.loads(path.read_text()) if path.exists() else []
         if self.limit <= 0 or min(self.input_rate, self.output_rate) <= 0:
             raise ValueError('Positive cap and explicit per-million token prices required')
 
+    @contextmanager
+    def transaction(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        with self.path.with_suffix(self.path.suffix + '.transaction.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            self.entries = json.loads(self.path.read_text()) if self.path.exists() else []
+            yield
+
     def cost(self, inputs, outputs):
         return (inputs * self.input_rate + outputs * self.output_rate) / 1000000
 
+    def active_here(self, entry):
+        if not self.run_id or entry.get('run_id') != self.run_id or not entry.get('pid'):
+            return False
+        try:
+            os.kill(entry['pid'], 0)
+            return True
+        except ProcessLookupError:
+            return False
+
     def reserve(self, request_id, inputs, outputs):
-        if any(x['state'] == 'pending' for x in self.entries):
-            raise RuntimeError('A previous request has unresolved billing; inspect before resuming')
-        spent = sum(Decimal(x['usd']) for x in self.entries)
-        amount = self.cost(inputs, outputs)
-        if spent + amount > self.limit:
-            raise RuntimeError('Remaining budget cannot cover this request reservation')
-        self.entries.append({'request': request_id, 'state': 'pending', 'usd': str(amount),
-                             'reserved_input_tokens': inputs,
-                             'input_rate': str(self.input_rate), 'output_rate': str(self.output_rate)})
-        write_json(self.path, self.entries)
+        with self.transaction():
+            previous = next((x for x in reversed(self.entries) if x['request'] == request_id), None)
+            if previous:
+                if previous['state'] != 'reserved_unknown' or not previous.get('retry_authorized'):
+                    raise BudgetStopped('Request already dispatched; recover its response or retain its unresolved cost')
+                previous['retry_authorized'] = False
+            if any(x['state'] == 'pending' and not self.active_here(x) for x in self.entries):
+                raise BudgetStopped('A previous request has unresolved billing; inspect before resuming')
+            spent = sum(Decimal(x['usd']) for x in self.entries)
+            amount = self.cost(inputs, outputs)
+            if spent + amount > self.limit:
+                raise BudgetStopped('Remaining budget cannot cover this request reservation')
+            self.entries.append({'request': request_id, 'state': 'pending', 'usd': str(amount),
+                                 'reserved_input_tokens': inputs, 'run_id': self.run_id, 'pid': os.getpid(),
+                                 'input_rate': str(self.input_rate), 'output_rate': str(self.output_rate)})
+            write_json(self.path, self.entries)
 
     def settle(self, request_id, usage):
-        entry = next(x for x in self.entries if x['request'] == request_id and x['state'] == 'pending')
-        entry.update(state='returned', usage=usage,
-                     usd=str(self.cost(usage['input_tokens'], usage['output_tokens'])))
-        write_json(self.path, self.entries)
+        with self.transaction():
+            entry = next(x for x in self.entries if x['request'] == request_id and x['state'] == 'pending')
+            entry.update(state='returned', usage=usage,
+                         usd=str(self.cost(usage['input_tokens'], usage['output_tokens'])))
+            entry.pop('pid', None)
+            write_json(self.path, self.entries)
+
+    def dispatch_finished(self, request_id):
+        with self.transaction():
+            entry = next(x for x in reversed(self.entries) if x['request'] == request_id)
+            if entry['state'] == 'pending':
+                entry.pop('pid', None)  # The request is no longer active; billing is unresolved.
+                write_json(self.path, self.entries)
+
+    def retain_interrupted_reservation(self, request_id, *, retry=False):
+        """Keep the full estimated charge, without claiming provider settlement."""
+        with self.transaction():
+            entry = next(x for x in reversed(self.entries) if x['request'] == request_id)
+            if entry['state'] not in {'pending', 'reserved_unknown'}:
+                raise BudgetStopped('Only an unresolved request can retain an estimated charge')
+            if self.active_here(entry):
+                raise BudgetStopped('Cannot retire a request active in this run')
+            entry.update(state='reserved_unknown', cause='Interrupted request; response unavailable; full reservation retained')
+            entry.pop('pid', None)
+            entry['retry_authorized'] = retry
+            write_json(self.path, self.entries)
+
+
+def scan_rotation(page):
+    """Estimate a small affine correction from the scanned page's horizontal ink."""
+    import numpy as np
+    import pymupdf
+    if page.get_text().strip():
+        return 0.0
+    pixmap = page.get_pixmap(colorspace=pymupdf.csGRAY, alpha=False)
+    pixels = np.frombuffer(pixmap.samples, dtype=np.uint8).reshape(pixmap.height, pixmap.width)
+    y, x = np.nonzero(pixels < 100)
+    if not len(x):
+        return 0.0
+    angles = np.linspace(-3, 3, 121)
+    scores = []
+    for angle in angles:
+        bins = y - np.rint(np.tan(np.deg2rad(angle)) * (x - pixmap.width / 2)).astype(int) + pixmap.height
+        counts = np.bincount(bins).astype(float)
+        scores.append(float(counts @ counts))
+    return -float(angles[int(np.argmax(scores))])
 
 
 def _page_content(document, pages, targets, config):
+    import pymupdf
     content, native = [], {}
     regions = []
     for number in pages:
         page = document[number - 1]
-        png = page.get_pixmap(dpi=config.dpi).tobytes('png')
+        rotation = scan_rotation(page) if config.deskew else 0.0
+        png = (page.get_pixmap(matrix=pymupdf.Matrix(config.dpi / 72, config.dpi / 72).prerotate(rotation))
+               if rotation else page.get_pixmap(dpi=config.dpi)).tobytes('png')
+        label = f'PHYSICAL PAGE {number}: ' + ('TARGET' if number in targets else 'CONTEXT ONLY')
+        if rotation:
+            label += f'; affine source rendering rotated {rotation:.2f} degrees to align printed rows; same physical page'
         content.extend([
-            {'type': 'text', 'text': f'PHYSICAL PAGE {number}: ' + ('TARGET' if number in targets else 'CONTEXT ONLY')},
+            {'type': 'text', 'text': label},
             {'type': 'image', 'source': {'type': 'base64', 'media_type': 'image/png',
                                         'data': base64.b64encode(png).decode()}}])
         cells = []
@@ -244,6 +325,28 @@ def unattached_sampling_scopes(reading):
     return [f['id'] for f in reading['facts']
             if f.get('role') == 'sampling_date' and f.get('section')
             and set(f.get('applies_to', ())) == {'section:' + f['section']}]
+
+
+def untyped_representation_scopes(reading):
+    tables = {t['id']: t['page'] for t in reading['tables']}
+    return [f['id'] for f in reading['facts'] if f['role'] == 'relation'
+            and len(set(tables).intersection(f['applies_to'])) > 1
+            and len({tables[t] for t in f['applies_to'] if t in tables}) == 1]
+
+
+REPRESENTATION_REPAIR = '''Read the supplied source pages afresh. If the source
+shows two visual representations of the same records (including a transposed view),
+retain every occurrence and use a fact with role repeated_representation, applies_to
+containing only the two table IDs, and text quoting their shared printed caption or
+other printed evidence of common scope. Put the visual relationship explanation in
+issues, not in a purported quotation. A shared ID or equal results alone do not
+establish repetition. If their source context does not establish repetition, leave
+the relationship unresolved in issues. Preserve distinct dates, complete fields,
+method designations and qualifications. For an examined, visibly blank cell return
+text:"". A blank in this cell does not claim absence elsewhere in the report.
+Use null with not_recovered only when you cannot read whether that cell contains
+a value. Do not infer a blank from the other representation. Return the complete
+requested JSON reading.'''
 
 
 ATTACHMENT_REPAIR = '''Read the supplied source pages afresh, concentrating on
@@ -274,15 +377,19 @@ def _call(request, *, config, budget, request_id, raw_path):
     # always retain actual usage. The cap is local estimated spend, not an invoice.
     inputs = response.json()['input_tokens']
     budget.reserve(request_id, int(inputs * 1.1) + 1024, config.max_tokens)
-    response = requests.post('https://api.anthropic.com/v1/messages', headers=headers,
-                             json=request, timeout=config.timeout_seconds)
-    body = response.json()
-    write_json(raw_path, {'http_status': response.status_code, 'response': body,
-                         'captured_at': datetime.now(timezone.utc).isoformat()})
-    if 'usage' in body:
-        budget.settle(request_id, body['usage'])
-    response.raise_for_status()
-    return response_reading(body, config.model)
+    try:
+        response = requests.post('https://api.anthropic.com/v1/messages', headers=headers,
+                                 json=request, timeout=config.timeout_seconds)
+        body = response.json()
+        write_json(raw_path, {'http_status': response.status_code, 'response': body,
+                             'captured_at': datetime.now(timezone.utc).isoformat()})
+        if 'usage' in body:
+            budget.settle(request_id, body['usage'])
+        response.raise_for_status()
+        return response_reading(body, config.model)
+    finally:
+        budget.dispatch_finished(request_id)
+
 
 
 def target_reading(reading, targets, context):
@@ -345,13 +452,17 @@ def extract_report(digest, store, *, config, budget):
                     validate_block(reading, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
                 prior_request = reused or request_id
                 effort = config.effort
-                if unattached_sampling_scopes(reading):
+                sampling_repair = bool(unattached_sampling_scopes(reading))
+                representation_repair = bool(untyped_representation_scopes(reading))
+                if sampling_repair or representation_repair:
                     # One source reread for a concrete attachment failure. Never
                     # recurse until a preferred answer appears.
-                    effort = 'high'
+                    effort = 'high' if sampling_repair else config.effort
+                    instruction = '\n'.join(([ATTACHMENT_REPAIR] if sampling_repair else []) +
+                                            ([REPRESENTATION_REPAIR] if representation_repair else []))
                     repair = dict(request, output_config=dict(request['output_config'], effort=effort),
                         messages=[{'role': 'user', 'content': content + [
-                            {'type': 'text', 'text': ATTACHMENT_REPAIR}]}])
+                            {'type': 'text', 'text': instruction}]}])
                     repair_id = sha256(json.dumps(repair, sort_keys=True).encode()).hexdigest()
                     raw_path = store / 'derived/reports/responses' / f'{repair_id}.json'
                     prior_reading = reading

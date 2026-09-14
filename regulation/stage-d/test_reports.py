@@ -6,8 +6,17 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from cordon_d.reports import literal_date, materialize, report, UnreadReport, validate_block
-from cordon_d.report_extraction import Budget, ExtractionConfig, target_reading, extract_report, OutputLimit
+from cordon_d.reports import literal_date, materialize, report, UnreadReport, validate_block, positioned_identifiers
+from cordon_d.report_extraction import Budget, ExtractionConfig, target_reading, extract_report, OutputLimit, scan_rotation, version
+
+
+def reserve_in_process(args):
+    path, request = args
+    try:
+        Budget(Path(path), limit=.03, input_rate=2, output_rate=10, run_id='concurrent-check').reserve(request, 1000, 1000)
+        return True
+    except RuntimeError:
+        return False
 
 
 def block(rows):
@@ -26,6 +35,31 @@ def block(rows):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_native_identifier_uses_source_geometry_and_preserves_original(self):
+        import pymupdf
+        with TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
+            before = materialize('hash', 'v', 1, [item])
+            after = positioned_identifiers(before, path)
+            self.assertEqual(after.rows[0].reference, 'A_ B')
+            self.assertEqual(after.rows[0].cells[0]['native_text'], 'A B\n_')
+            self.assertEqual(before.rows[0].reference, 'A B\n_')
+            item['native_cells']['p1-t1-r1-c1']['text'] = 'different source'
+            with self.assertRaisesRegex(ValueError, 'differs from its source cell'):
+                positioned_identifiers(materialize('hash', 'v', 1, [item]), path)
+
     def test_invalid_date_retains_literal_and_does_not_become_a_result(self):
         reading = materialize('hash', 'v', 1, [block([['00123', '29/02/2023', 'Positivo', '01/03/2023']])])
         row = reading.rows[0]
@@ -35,11 +69,45 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(len(row.results), 1)
         self.assertEqual(row.results[0].kind, 'positive')
 
+    def test_feminine_result_wording_keeps_literal_and_polarity(self):
+        reading = materialize('hash', 'v', 1, [block([
+            ['1', '01/06/2024', 'rilevata', '02/06/2024'],
+            ['2', '01/06/2024', 'non rilevata', '02/06/2024']])])
+        self.assertEqual([(r.results[0].text, r.results[0].kind) for r in reading.rows],
+                         [('rilevata', 'detected'), ('non rilevata', 'not-detected')])
+
     def test_duplicate_source_rows_are_not_deduplicated_by_identifier(self):
         values = ['123', '01/06/2024', 'Negativo', '02/06/2024']
         reading = materialize('hash', 'v', 1, [block([values, values])])
         self.assertEqual(len(reading.rows), 2)
         self.assertNotEqual(reading.rows[0].locator, reading.rows[1].locator)
+
+    def test_checked_transpose_preserves_occurrences_and_rejects_disagreement(self):
+        item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['00456', '01/06/2024', 'Negativo', '02/06/2024']])
+        source = item['reading']['tables'][0]
+        transpose = {'id': 'p1-t2', 'page': 1,
+            'columns': [dict(source['columns'][0], heading=['ID', r['cells'][0]['text']]) for r in source['rows']],
+            'rows': [{'id': f'field{i}', 'cells': [copy.deepcopy(r['cells'][i]) for r in source['rows']]}
+                     for i in range(1, 4)]}
+        item['reading']['tables'].append(transpose)
+        item['reading']['facts'].append({'id': 'repeat', 'role': 'repeated_representation', 'page': 1,
+            'locator': 'shared heading', 'text': 'Risultati', 'applies_to': ['p1-t1', 'p1-t2']})
+        reading = materialize('hash', 'v', 1, [item])
+        self.assertEqual([r.reference for r in reading.rows], ['00123', '00456', '00123', '00456'])
+        self.assertEqual(reading.rows[-1].results[0].kind, 'negative')
+        self.assertEqual(reading.rows[-1].cells[2]['source_position']['reading_row'], 'field2')
+        self.assertEqual(len(transpose['rows']), 3)  # The physical reading was not rewritten.
+        transpose['rows'][1]['cells'][1]['text'] = 'Positivo'
+        incomplete = materialize('hash', 'v', 1, [item])
+        self.assertEqual(len(incomplete.rows), 2)
+        self.assertFalse(incomplete.complete_pages)
+        self.assertIn('no unique fully checked transpose', incomplete.issues[-1]['cause'])
+
+    def test_extraction_version_describes_loaded_code_not_later_disk_edits(self):
+        expected = version(ExtractionConfig())
+        with patch('pathlib.Path.read_bytes', side_effect=AssertionError('late disk read')):
+            self.assertEqual(version(ExtractionConfig()), expected)
 
     def test_native_value_is_copied_and_unknown_reference_fails(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
@@ -301,6 +369,60 @@ class LiteralReport(unittest.TestCase):
                 budget.reserve('retry', 1000, 1000)
             budget.settle('pending', {'input_tokens': 1000, 'output_tokens': 100})
             budget.reserve('next', 1000, 1000)
+
+    def test_interrupted_reservation_is_counted_and_cannot_be_retried(self):
+        with TemporaryDirectory() as directory:
+            budget = Budget(Path(directory) / 'usage.json', limit=.03, input_rate=2, output_rate=10)
+            budget.reserve('lost', 1000, 1000)
+            budget.retain_interrupted_reservation('lost')
+            self.assertEqual(budget.entries[0]['usd'], '0.012')
+            self.assertNotIn('usage', budget.entries[0])
+            with self.assertRaisesRegex(RuntimeError, 'already dispatched'):
+                budget.reserve('lost', 1000, 1000)
+            budget.reserve('new', 1000, 1000)
+            budget.retain_interrupted_reservation('new')
+            with self.assertRaisesRegex(RuntimeError, 'Remaining budget'):
+                budget.reserve('over-cap', 1000, 1000)
+
+    def test_processes_cannot_oversubscribe_the_shared_cap(self):
+        from concurrent.futures import ProcessPoolExecutor
+        from decimal import Decimal
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / 'usage.json'
+            with ProcessPoolExecutor(max_workers=3) as pool:
+                accepted = list(pool.map(reserve_in_process, [(str(path), str(i)) for i in range(9)]))
+            entries = json.loads(path.read_text())
+            self.assertEqual(sum(accepted), 2)
+            self.assertEqual(len(entries), 2)
+            self.assertLessEqual(sum(Decimal(e['usd']) for e in entries), Decimal('.03'))
+            with self.assertRaisesRegex(RuntimeError, 'unresolved billing'):
+                Budget(path, limit=1, input_rate=2, output_rate=10, run_id='new-run').reserve('after-restart', 1, 1)
+
+    def test_explicit_retry_retains_both_charges_and_cannot_repeat_automatically(self):
+        with TemporaryDirectory() as directory:
+            budget = Budget(Path(directory) / 'usage.json', limit=.03, input_rate=2, output_rate=10)
+            budget.reserve('lost', 1000, 1000)
+            budget.retain_interrupted_reservation('lost', retry=True)
+            budget.reserve('lost', 1000, 1000)
+            budget.dispatch_finished('lost')
+            self.assertNotIn('pid', budget.entries[-1])
+            self.assertEqual(len(budget.entries), 2)
+            self.assertEqual(budget.entries[0]['usd'], '0.012')
+            with self.assertRaisesRegex(RuntimeError, 'already dispatched'):
+                budget.reserve('lost', 1000, 1000)
+
+    def test_scan_rotation_corrects_slanted_lines_and_leaves_native_text(self):
+        import pymupdf
+        with pymupdf.open() as pdf:
+            source = pdf.new_page(width=400, height=300)
+            for y in range(40, 260, 20):
+                source.draw_line((20, y), (380, y + 10), width=1)
+            png = source.get_pixmap().tobytes('png')
+            scan = pdf.new_page(width=400, height=300)
+            scan.insert_image(scan.rect, stream=png)
+            self.assertAlmostEqual(scan_rotation(scan), -1.6, delta=.15)
+            scan.insert_text((20, 20), 'native text')
+            self.assertEqual(scan_rotation(scan), 0)
 
     def test_annotated_identifier_keeps_qualification_and_exact_id_component(self):
         item = block([['00123 (Pool)', '01/06/2024', 'Positivo', '02/06/2024']])

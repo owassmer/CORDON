@@ -9,10 +9,12 @@ import fcntl
 import logging
 from pathlib import Path
 import sys
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from uuid import uuid4
 
 REPOSITORY = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(REPOSITORY / 'regulation/stage-d'), str(REPOSITORY / 'regulation/stage-c')]
-from cordon_d.report_extraction import Budget, ExtractionConfig, extract_report, version
+from cordon_d.report_extraction import Budget, BudgetStopped, ExtractionConfig, extract_report, version
 from cordon_d.reports import Report, reports
 from cordon_d.findings import findings, report_rows, confirmation_inputs
 from cordon_d.monitoring import distinct_observations
@@ -27,6 +29,17 @@ def encoded(value):
     if hasattr(value, 'isoformat'):
         return value.isoformat()
     raise TypeError(type(value).__name__)
+
+
+def extract_job(digest, store, config, ledger, budget_options, revision):
+    try:
+        if version(config) != revision:
+            raise RuntimeError('Reader implementation changed before worker startup; no paid request dispatched')
+        extract_report(digest, store, config=config, budget=Budget(ledger, **budget_options))
+        return {'document': digest, 'status': 'assembled'}
+    except Exception as error:
+        return {'document': digest, 'status': 'stopped', 'cause': str(error),
+                'budget_stopped': isinstance(error, BudgetStopped)}
 
 
 def main():
@@ -46,6 +59,12 @@ def main():
     parser.add_argument('--input-usd-per-million', type=float)
     parser.add_argument('--output-usd-per-million', type=float)
     parser.add_argument('--ledger', type=Path)
+    parser.add_argument('--workers', type=int, choices=range(1, 4), default=1,
+                        help='Independent PDF processes sharing one locked spending ledger (1-3)')
+    parser.add_argument('--retain-interrupted-reservation', metavar='REQUEST_SHA256',
+                        help='With execution and its ledger locked, retain an interrupted request at its full reserved cost')
+    parser.add_argument('--retry-interrupted-request', action='append', default=[], metavar='REQUEST_SHA256',
+                        help='Explicitly permit one retry with no saved response, charging both the old reservation and new attempt')
     parser.add_argument('--join-output', type=Path)
     parser.add_argument('--join-summary', type=Path, help='Full-population consumer census without copying all publication rows')
     parser.add_argument('--confirmation-request', type=Path,
@@ -53,6 +72,8 @@ def main():
     parser.add_argument('--known-through', type=datetime.fromisoformat,
                         default=datetime.now(timezone.utc))
     args = parser.parse_args()
+    if (args.retain_interrupted_reservation or args.retry_interrupted_request) and not args.execute:
+        parser.error('--retain-interrupted-reservation requires --execute and its ledger')
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     config = ExtractionConfig(model=args.model, effort=args.effort)
     if args.extraction_version and (args.execute or args.rebuild_cache):
@@ -86,8 +107,34 @@ def main():
         args.ledger.parent.mkdir(parents=True, exist_ok=True)
         with args.ledger.with_suffix(args.ledger.suffix + '.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            process(Budget(args.ledger, limit=args.max_cost_usd,
-                           input_rate=args.input_usd_per_million, output_rate=args.output_usd_per_million))
+            options = dict(limit=args.max_cost_usd, input_rate=args.input_usd_per_million,
+                           output_rate=args.output_usd_per_million, run_id=str(uuid4()))
+            budget = Budget(args.ledger, **options)
+            if args.retain_interrupted_reservation:
+                budget.retain_interrupted_reservation(args.retain_interrupted_reservation)
+            for request_id in args.retry_interrupted_request:
+                if (store / 'derived/reports/responses' / f'{request_id}.json').exists():
+                    parser.error('A saved response exists for this request; inspect it instead of retransmitting')
+                budget.retain_interrupted_reservation(request_id, retry=True)
+            if args.workers == 1:
+                process(budget)
+            else:
+                failures = []
+                with ProcessPoolExecutor(max_workers=args.workers) as pool:
+                    jobs = {pool.submit(extract_job, digest, store, config, args.ledger, options, revision): digest
+                            for digest in pending}
+                    for index, job in enumerate(as_completed(jobs), 1):
+                        if job.cancelled():
+                            continue
+                        result = job.result()
+                        print(json.dumps(dict(result, progress=[index, len(pending)])), flush=True)
+                        if result['status'] == 'stopped':
+                            failures.append(result)
+                        if result.get('budget_stopped'):
+                            for queued in jobs:
+                                queued.cancel()
+                if failures:
+                    raise SystemExit(1)
     elif args.rebuild_cache:
         process(None)
     if args.confirmation_request and not (args.join_output or args.join_summary):

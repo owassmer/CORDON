@@ -1,11 +1,15 @@
 """Literal report readings and local projections. This module never calls a model."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+from collections import Counter
 from datetime import date, datetime
 import json
 import re
 from pathlib import Path
+from hashlib import sha256
 
 from .store import blob_path
+
+READER_IMPLEMENTATION = sha256(Path(__file__).read_bytes()).digest()
 
 ROLES = frozenset({'publisher_id', 'laboratory_id', 'pool_id', 'extract_id',
                    'sampling_date', 'test_date', 'host', 'municipality',
@@ -13,6 +17,7 @@ ROLES = frozenset({'publisher_id', 'laboratory_id', 'pool_id', 'extract_id',
 CAUSES = frozenset({'unreadable', 'not_recovered', 'unattached', 'not_stated'})
 RESULTS = {'positivo': 'positive', 'negativo': 'negative', 'rilevato': 'detected',
            'non rilevato': 'not-detected', 'non determinabile': 'undetermined',
+           'rilevata': 'detected', 'non rilevata': 'not-detected',
            'dubbio': 'doubtful', 'presente': 'detected', 'assente': 'not-detected'}
 
 
@@ -91,6 +96,7 @@ class Row:
     cells: tuple[dict, ...]
     results: tuple[Result, ...]
     facts: tuple[dict, ...]
+    projection: dict | None = None
 
     @property
     def sampling_date(self):
@@ -227,6 +233,61 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
             raise ValueError('Reading limitation requires cause and scope')
 
 
+def record_tables(reading, native):
+    """Normalize a repeated transpose only after checking its complete matrix."""
+    def text(cell):
+        value = native[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
+        if value is None and cell.get('cause') != 'not_stated':
+            return None
+        return ' '.join((value or '').split())
+    tables, issues, incomplete = [], [], set()
+    for table in reading['tables']:
+        columns = table['columns']
+        transposed = len(columns) > 1 and all(c['role'] == 'publisher_id' and len(c['heading']) > 1 for c in columns)
+        if not transposed:
+            tables.append(table)
+            continue
+        projected = []
+        for companion in reading['tables']:
+            pair = {table['id'], companion['id']}
+            if len(pair) != 2 or companion['page'] != table['page'] or not any(
+                    f['role'] == 'repeated_representation' and pair <= set(f['applies_to']) for f in reading['facts']):
+                continue
+            ids = [i for i, c in enumerate(companion['columns']) if c['role'] == 'publisher_id']
+            if len(ids) != 1 or len(companion['rows']) != len(columns):
+                continue
+            identifier = ids[0]
+            fields = [i for i in range(len(companion['columns'])) if i != identifier]
+            if len(fields) != len(table['rows']):
+                continue
+            source = {text(r['cells'][identifier]): r for r in companion['rows']}
+            headings = [' '.join(c['heading'][-1].split()) for c in columns]
+            if None in source or len(source) != len(columns) or set(headings) != set(source):
+                continue
+            if any(c['heading'][:-1] != companion['columns'][identifier]['heading'] for c in columns):
+                continue
+            if any(text(raw['cells'][j]) is None or text(raw['cells'][j]) != text(source[headings[j]]['cells'][field])
+                   for j in range(len(columns)) for raw, field in zip(table['rows'], fields)):
+                continue
+            rows = []
+            for j, column in enumerate(columns):
+                cells = [None] * len(companion['columns'])
+                cells[identifier] = {'text': column['heading'][-1], 'source_heading': column['heading']}
+                for raw, field in zip(table['rows'], fields):
+                    cells[field] = dict(raw['cells'][j], source_position={
+                        'table': table['id'], 'reading_row': raw['id'], 'reading_column': j + 1})
+                rows.append({'id': f'sample-column{j + 1}', 'cells': cells})
+            projected.append(dict(table, columns=companion['columns'], rows=rows,
+                projection={'rule': 'complete matrix equality under a proposed repeated-representation relationship',
+                            'companion_table': companion['id']}))
+        if len(projected) == 1:
+            tables.append(projected[0])
+        else:
+            incomplete.add(table['page'])
+            issues.append({'scope': table['id'], 'cause': 'sample identities appear in column headings; no unique fully checked transpose correspondence; raw table retained without inventing sample rows'})
+    return tables, issues, incomplete
+
+
 def materialize(digest, version, page_count, blocks):
     """Copy literal values, then project roles. Never merge rows by sample identifier."""
     facts = []
@@ -269,7 +330,10 @@ def materialize(digest, version, page_count, blocks):
             encountered.add(disposition['page'])
             if disposition['disposition'] == 'read':
                 covered.add(disposition['page'])
-        for table in data['tables']:
+        tables, projection_issues, incomplete = record_tables(data, native)
+        issues += tuple(projection_issues)
+        covered.difference_update(incomplete)
+        for table in tables:
             if not any(c['role'] in {'publisher_id', 'laboratory_id', 'result'} for c in table['columns']):
                 continue  # Non-sample tables remain in the literal block, not sample counts.
             for raw in table['rows']:
@@ -319,12 +383,46 @@ def materialize(digest, version, page_count, blocks):
                                      {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}.intersection(f['applies_to']))
                 dates += shared_dates
                 rows.append(Row(locator, table['page'], sole('publisher_id'), sole('laboratory_id'),
-                                dates, tuple(cells), tuple(results), scoped))
+                                dates, tuple(cells), tuple(results), scoped, table.get('projection')))
     missing = set(range(1, page_count + 1)) - encountered
     if missing:
         issues += ({'scope': 'pages ' + ','.join(map(str, sorted(missing))),
                     'cause': 'no accepted block reading is present'},)
     return Report(digest, version, page_count, tuple(rows), facts, issues, frozenset(covered))
+
+
+def positioned_identifiers(reading, source):
+    """Recover native identifier order from its cell geometry; retain both readings."""
+    import pymupdf
+    rows, tables = [], {}
+    with pymupdf.open(source) as document:
+        for row in reading.rows:
+            cells = []
+            for cell in row.cells:
+                key = re.fullmatch(r'p(\d+)-t(\d+)-r(\d+)-c(\d+)', cell.get('native_cell', ''))
+                if key and cell['role'] in {'publisher_id', 'laboratory_id'} and 'identifier' not in cell:
+                    page, ti, ri, ci = (int(x) - 1 for x in key.groups())
+                    if page not in tables:
+                        tables[page] = document[page].find_tables().tables
+                    table = tables[page][ti]
+                    if table.extract()[ri][ci] != cell['text']:
+                        raise ValueError('Retained native identifier differs from its source cell')
+                    bounds = table.rows[ri].cells[ci]
+                    positioned = '\n'.join(line.strip() for line in document[page].get_text(
+                        'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
+                    characters = lambda text: Counter(c for c in text if not c.isspace())
+                    if (' '.join(positioned.split()) != ' '.join(cell['text'].split())
+                            and characters(positioned) == characters(cell['text'])):
+                        cell = dict(cell, text=positioned, native_text=cell['text'],
+                            basis='native cell geometry order; identical non-whitespace character inventory',
+                            source_bbox=list(bounds))
+                cells.append(cell)
+            def sole(role):
+                values = [c.get('identifier', c['text']) for c in cells if c['role'] == role and c['text'] is not None]
+                return values[0] if len(values) == 1 else None
+            rows.append(replace(row, cells=tuple(cells), reference=sole('publisher_id'),
+                                laboratory_reference=sole('laboratory_id')))
+    return replace(reading, rows=tuple(rows))
 
 
 def report(digest: str, store: Path, *, extraction_version: str):
@@ -336,7 +434,10 @@ def report(digest: str, store: Path, *, extraction_version: str):
     payload = json.loads(path.read_text())
     if payload['source_sha256'] != digest or payload['extraction_version'] != extraction_version:
         raise ValueError('Reading identity does not match requested source/version')
-    return materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
+    reading = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
+    if any('native_cell' in c and c['role'] in {'publisher_id', 'laboratory_id'} for r in reading.rows for c in r.cells):
+        reading = positioned_identifiers(reading, blob_path(store, digest))
+    return reading
 
 
 def reports(root: Path, store: Path, *, extraction_version: str, known_through=None):
