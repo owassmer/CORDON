@@ -1,0 +1,89 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+ "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "c2f2c5f93c4a3acb5893ea9ae63132bea3240f09311267cd8367925e10df194b",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:23:05.616313+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 15688,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7437,
+   "cache_read_input_tokens": 8082,
+   "output_tokens": 1926,
+   "output_tokens_details": {
+    "thinking_tokens": 25
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7437,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1775,
+     "cache_read_input_tokens": 5796,
+     "cache_creation_input_tokens": 3927,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3927
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.05370040000000001,
+  "session_id": "ebb25eea-586c-4d68-8e32-d6abde84bce1"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Titolo atto: \"2020/1201 – Aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi del dell'art. 4 del Reg. UE 2020/1201\".",
+   "PREMESSO CHE: L'Osservatorio fitosanitario, con determina n° 33 del 16/04/2024, ha aggiudicato il \"Servizio di analisi di laboratorio ufficiali per rilevare la presenza di Xylella fastidiosa sul territorio della Regione Puglia\", ai sensi dell'art. 76 del D.lgs. n. 36 del 31 marzo 2023, ai laboratori ufficiali designati e autorizzati ai sensi dell'art. 14 del D. Lgs 19/2021 ad operare nel territorio regionale e facenti parte della Rete nazionale dei laboratori, in particolare: CIHEAM - Istituto Agronomico Mediterraneo -Valenzano (BA); Centro di Ricerca, Sperimentazione e Formazione in Agricoltura \"Basile Caramia\" Locorotondo (BA); Dipartimento di Scienze Agrarie, Alimenti Risorse Naturali e Ingegneria - Univ. Foggia; Dipartimento di scienze del suolo, della pianta e degli alimenti - Univ. Bari-",
+   "L'Osservatorio, considerata la presenza nel territorio regionale di 3 sottospecie di Xylella fastidiosa, ha disposto che ogni pianta risultata infetta alle analisi molecolari venga analizzata dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) – CNR, laboratorio accreditato ISO/IEC 17025:2017 per prove di biologia molecolare per Xylella fastidiosa, incaricato dall'Osservatorio della caratterizzazione del ceppo.",
+   "CONSIDERATO CHE: L'intera area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 di cui alle determine n° 8/2024, n° 12/2024 e n° 45 del 24/04/2024, è stata oggetto di una sorveglianza rafforzata, al fine di verificare l'ampiezza e le piante suscettibili.",
+   "Nel corso della suddetta attività di monitoraggio sono stati individuati inizialmente n° 3 mandorli e successivamente n° 4 olivi infetti da Xylella fastidiosa sottospecie pauca (Rapporto di Prova del CNR n. 74P/2024 e Rapporto di Prova del CNR n. 87P/2024).",
+   "Considerato che le suddette piante infette sono site in zona cuscinetto dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, il CNR ha effettuato la caratterizzazione della sottospecie e del genotipo come previsto dall'Allegato IV del Regolamento di Esecuzione (UE) 2020/1201.",
+   "PRESO ATTO CHE: L'Istituto per la Protezione Sostenibile delle Piante (IPSP) – CNR, con nota del 30/05/2024 e del 18/06/2024, ha comunicato i risultati della caratterizzazione della sottospecie e del genotipo e sia i mandorli che gli olivi sono risultati infetti da Xylella fastidiosa sottospecie pauca ST53.",
+   "RICHIAMATO: Il comma 2 - lettera a) dell'art. 4 del Reg. (UE) 2020/1201 che stabilisce \"L'area delimitata è costituita da una zona infetta e da una zona cuscinetto. La zona infetta ha un raggio di almeno 50 m attorno alla pianta che è risultata infetta dall'organismo nocivo specificato. La larghezza della zona cuscinetto è la seguente: a) almeno 2,5 km quando la zona infetta è stabilita ai fini dell'adozione delle misure di eradicazione di cui agli articoli da 7 a 11…\".",
+   "RITENUTO NECESSARIO: Istituire una nuova area delimitata a Xylella fastidiosa sottospecie pauca ST53 identificata come \"Xylella fastidiosa sottospecie pauca ST53–Bari\", ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Titolo atto: \"2020/1201 – Aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi del dell'art. 4 del Reg. UE 2020/1201\".",
+   "PREMESSO CHE: L'Osservatorio fitosanitario, con determina n° 33 del 16/04/2024, ha aggiudicato il \"Servizio di analisi di laboratorio ufficiali per rilevare la presenza di Xylella fastidiosa sul territorio della Regione Puglia\", ai sensi dell'art. 76 del D.lgs. n. 36 del 31 marzo 2023, ai laboratori ufficiali designati e autorizzati ai sensi dell'art. 14 del D. Lgs 19/2021 ad operare nel territorio regionale e facenti parte della Rete nazionale dei laboratori, in particolare: CIHEAM - Istituto Agronomico Mediterraneo -Valenzano (BA); Centro di Ricerca, Sperimentazione e Formazione in Agricoltura \"Basile Caramia\" Locorotondo (BA); Dipartimento di Scienze Agrarie, Alimenti Risorse Naturali e Ingegneria - Univ. Foggia; Dipartimento di scienze del suolo, della pianta e degli alimenti - Univ. Bari-",
+   "L'Osservatorio, considerata la presenza nel territorio regionale di 3 sottospecie di Xylella fastidiosa, ha disposto che ogni pianta risultata infetta alle analisi molecolari venga analizzata dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) – CNR, laboratorio accreditato ISO/IEC 17025:2017 per prove di biologia molecolare per Xylella fastidiosa, incaricato dall'Osservatorio della caratterizzazione del ceppo.",
+   "CONSIDERATO CHE: L'intera area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 di cui alle determine n° 8/2024, n° 12/2024 e n° 45 del 24/04/2024, è stata oggetto di una sorveglianza rafforzata, al fine di verificare l'ampiezza e le piante suscettibili.",
+   "Nel corso della suddetta attività di monitoraggio sono stati individuati inizialmente n° 3 mandorli e successivamente n° 4 olivi infetti da Xylella fastidiosa sottospecie pauca (Rapporto di Prova del CNR n. 74P/2024 e Rapporto di Prova del CNR n. 87P/2024).",
+   "Considerato che le suddette piante infette sono site in zona cuscinetto dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, il CNR ha effettuato la caratterizzazione della sottospecie e del genotipo come previsto dall'Allegato IV del Regolamento di Esecuzione (UE) 2020/1201.",
+   "PRESO ATTO CHE: L'Istituto per la Protezione Sostenibile delle Piante (IPSP) – CNR, con nota del 30/05/2024 e del 18/06/2024, ha comunicato i risultati della caratterizzazione della sottospecie e del genotipo e sia i mandorli che gli olivi sono risultati infetti da Xylella fastidiosa sottospecie pauca ST53.",
+   "RICHIAMATO: Il comma 2 - lettera a) dell'art. 4 del Reg. (UE) 2020/1201 che stabilisce \"L'area delimitata è costituita da una zona infetta e da una zona cuscinetto. La zona infetta ha un raggio di almeno 50 m attorno alla pianta che è risultata infetta dall'organismo nocivo specificato. La larghezza della zona cuscinetto è la seguente: a) almeno 2,5 km quando la zona infetta è stabilita ai fini dell'adozione delle misure di eradicazione di cui agli articoli da 7 a 11…\".",
+   "RITENUTO NECESSARIO: Istituire una nuova area delimitata a Xylella fastidiosa sottospecie pauca ST53 identificata come \"Xylella fastidiosa sottospecie pauca ST53–Bari\", ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53;"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

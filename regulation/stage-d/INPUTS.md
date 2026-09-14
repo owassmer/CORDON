@@ -10,7 +10,7 @@ demonstrations confer no completion on the other rows.
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
 | What the laboratory actually reported | The official report linked from the monitoring record | One laboratory report containing one or more sample results | Follow every referenced report; join its rows to observations; preserve report corrections and distinct copies |
-| Which legally adopted area contained the location on the event date | The adopting regional act and its cadastral annex; SIT demarcated-area geometry | One area statement the act makes: a zone, a place, and how far the zone reaches into it | Established for what the acts state. `cordon_d.areas.versions` gives each of A's 29 area versions the statement its own act makes; `zone_of` and `membership_evidence` answer which zone contained a place on a day. Meaning and limits below. |
+| Which legally adopted area contained the location on the event date | The adopting regional act and its cadastral annex; SIT demarcated-area geometry | One adopted area version, with its cadastral statements and map geometry | In progress. `cordon_d.areas.versions` binds the ordinary annex reader to A's versions; `membership_evidence` supplies supported cadastral membership. Complete the retained page readings and source checks, recover DDS 148/2024, and establish the adopted map geometry required by metric consumers. Population and remaining work below. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader |
@@ -111,83 +111,50 @@ What the population shows, read and not reconciled:
 
 ## Demarcated areas
 
-The source population is the 28 regional acts that accepted Stage A reaches
-through its 29 area versions, from DDS 69/2021 to DDS 112/2026. A owns each
-version's identity, interval, subspecies and act-level state; this row adds
-the area statement the act itself makes. Of the 28, one adopts no geography —
-DDS 45/2025 states the procedure, that the act creates the area and
-InnovaPuglia transmits shapefiles afterwards — and DDS 148/2024's own body is
-not held, so it reads nothing and says so rather than borrowing a successor's
-annex. The other 26 acts are held as their published documents in the
-content-addressed store (`corpus/sources/areas/acts.json` names each by hash
-and origin); 25 of them annex a cadastral statement and 2 state their
-geography as a rule in the dispositivo alone.
+Accepted A reaches 28 instruments through 29 area versions. A owns their identity,
+interval, subspecies and operative legal meaning. The acquisition records in
+`corpus/sources/areas/acts.json` retain 27 documents (273 pages), including the
+procedure act DDS 45/2025. DDS 148/2024's own body still needs recovery; a successor's
+recital does not supply its annex. DDS 69/2021 adopts maps without a cadastral table.
 
-**What an act states, and how far it reaches.** The annex tabulates, per zone,
-the province or metropolitan city, the comune, and how far the zone reaches
-into it: the whole province, the whole comune, part of the comune, or named
-`fogli di mappa`, with the act's own asterisk where a sheet lies wholly inside
-rather than merely intersecting. Across the population that is **373
-statements over 4,316 stated sheets**, of which 1,561 carry the asterisk.
+`scripts/read_annexes.py` reads every physical page of each retained document through
+Claude subscription vision (`claude-sonnet-5`, medium effort). Native cells are
+candidates for exact copying; the model binds captions and rows and transcribes values
+not faithfully represented by those cells. There is no exhibit registry or keyword
+page exclusion. The 154 saved page readings are retained under
+`corpus/sources/areas/readings/`; 119 pages remain to be read after the subscription
+reset at 15:20 America/New_York on 14 September 2026. Re-reading an erroneous page
+preserves the previous response in the derived store. This is the current reading
+population, not a claim of source-family completion.
 
-**What the reader answers, and at which grain.** `zone_of` and
-`membership_evidence` take a day and a place and return the zone of each act
-version in force that decides it, with the annex row that decided it. The two
-questions are not the same question and are not answered alike: whether a
-*sheet* is reached by the zone, and whether a *point or parcel* lies inside
-it — which is what Stage A's predicate asks. A sheet the act marks wholly
-contained decides both. A sheet without the asterisk is reached by the zone
-while a particular parcel in it stays undecided, because the act does not say
-which part is inside. Named particelle decide only themselves. A question that
-identifies no comune or province is refused rather than answered.
+`cordon_d.areas` projects the saved readings into zone, province, municipality and
+cadastral scope. Table headings, qualifications, row notes and physical page/table/row
+locations travel with each statement into membership support. Page prose stays with
+its version; A remains the owner of its legal effect. Repeated physical statements
+remain source occurrences. A missing reading or inventory cannot establish that an
+act contains no cadastral table.
 
-**What it does not supply.** No positional error bound: no source for these
-areas publishes one, so the metric consumers (`pest_free_hectare`,
-`inward_band`, `pni_geography_facts`) stay unfed and the distance work waits
-on a qualified frame. The publisher's zone polygons are not acquired here,
-because nothing consumes them: DDS 45/2025 puts the shapefile transmission
-after the act, so a capture inside a version's interval can still show the
-previous geometry, and neither a second capture nor a matching sheet summary
-distinguishes a stale polygon from the adopted one. That correspondence needs
-evidence naming the version, so the polygons enter when a consumer exists — a
-qualified metric frame, or a cross-check on the annex reading — and not
-before. The operative
-legal-area state is A's `PUG-LR4-2017:Art.3(2)` gate and Annex III eligibility
-is A's EU annex; neither is decided here.
+The reader distinguishes a reached sheet from a parcel wholly inside the zone.
+The annex's asterisk is retained at the grain it qualifies: a sheet asterisk covers
+the sheet; a parcel asterisk covers that parcel. An unstarred listed parcel merely
+intersects the zone and does not establish whole-parcel membership. Sections and
+named sheet developments remain distinct. An unmatched cadastral query does not
+establish that the place is outside the adopted map. Zone and stated measures regime
+remain separate facts.
 
-**Reading is all-or-nothing per cell.** A cell counts as read only when every
-consequential token in it is accounted for. Where something is left over the
-cell is reported unread and no statement is emitted from it, because a
-statement narrower than the act's answers "not in this zone" for territory the
-act includes. Four cells in the population are unread on that rule and are
-listed by their version. The forms the acts do use are read: inclusive ranges
-written both `da 15 a 32` and `161 a 172`, sections, particelle narrowing a
-sheet, a sviluppo attached to one, and the whole- and part-of-territory
-statements. No act in the population states an exclusion; none is assumed for
-one.
+Complete the outstanding page readings and resolve the watermark-contaminated
+municipality cells on DDS 106/2025 page 13 through the general reader. Direct source
+checks of DDS 158/2024 page 7 and DDS 8/2024 page 7 distinguish repeated tables and
+merged cells from the earlier comparison transcription's divisions; those reference
+comparisons are not correctness certificates. Continue the remaining table checks
+through membership evidence. The old heuristic-reader sheet totals are withdrawn.
 
-**Zone and regime are two facts.** The acts print `ZONA INFETTA IN CUI SI
-APPLICANO MISURE DI CONTENIMENTO` and `ZONA CUSCINETTO IN CUI SI APPLICANO
-MISURE DI ERADICAZIONE`. The zone is what the caption names in head position;
-the measures it says apply there travel beside it rather than replacing it.
-
-## Materials that are not standalone input gaps
-
-- The BURP URL census is a way to locate regional acts. It is not itself a decision
-  input.
-- The 194-service SIT catalogue is a discovery surface. A service enters only when
-  one of the rows above requires it; there is no remaining obligation to adjudicate
-  194 services for their own sake.
-- Municipal archives are used only for a required publication or notice event.
-  Their complete general history is not a CORDON population.
-- Historical removal records enter only when an accepted present or prospective
-  input needs that history.
-- Public and state land data enter only for standing or permission on affected
-  land.
-- PPTR, municipal plans and landscape proceedings enter only for an affected plant
-  whose accepted branch requires that protection or permission.
-- Large-file backup and repository preservation are engineering concerns. They are
-  not evidence inputs and are not Stage D completion conditions.
-- “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
-  work that a particular row may require. They are not separate source families or
-  reasons to expand the aperture.
+The metric consumers already admit adopted geometry. Obtain the consequential
+version's map or publisher geometry, establish its correspondence to the adopting
+act, and qualify its frame and positional error. A publication date alone does not
+bind a polygon to an adopted version. An empirically established error bound is
+permitted; a publisher-stated bound is not the only route. DDS 106/2025's mapped
+extension into Basilicata and the acts' partial-parcel rules must survive this binding.
+The cadastral tables are useful evidence within their stated extent, not a substitute
+for the missing map correspondence. Operative legal-area state and Annex III
+eligibility remain upstream A meanings.

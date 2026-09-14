@@ -1,0 +1,81 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 17,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f3bf5b080beb81db69c62b1499d790c703923d8a0753a111c77d49e3cea5190c",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:25.382570+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 9205,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6134,
+   "cache_read_input_tokens": 6777,
+   "output_tokens": 740,
+   "output_tokens_details": {
+    "thinking_tokens": 26
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6134,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 587,
+     "cache_read_input_tokens": 4491,
+     "cache_creation_input_tokens": 3929,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3929
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0353404,
+  "session_id": "08a511a6-ae5a-4e65-98ab-a5d9eb79d804"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Bruscatura fogliare del mandorlo",
+   "Il sintomo più caratteristico associato a X. fastidiosa sul mandorlo è la bruscatura delle foglie, seguita da una diminuzione della produttività e da un generale declino dell'albero.",
+   "Nella bruscatura, solitamente, una stretta fascia di tessuto giallo (clorotico) si interpone tra il tessuto necrotico marrone e il tessuto verde della foglia. Questa banda gialla può non svilupparsi quando la bruscatura è dovuta alle alte temperature. Con il progredire della malattia, i rametti colpiti muoiono dall'apice (Mircetich et al., 1976).",
+   "Nel focolaio di Alicante (Spagna) e come riportato in letteratura, sono altresì riportati fenomeni più gravi di infezione, con la sindrome nota come \"Golden death\", che prende il nome dall'aspetto di clorosi e giallume diffuso della chioma delle piante infette, a cui può seguire la morte delle piante.",
+   "Photo caption: Xylella fastidiosa (XYLEFA) - https://gd.eppo.int"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Bruscatura fogliare del mandorlo",
+   "Il sintomo più caratteristico associato a X. fastidiosa sul mandorlo è la bruscatura delle foglie, seguita da una diminuzione della produttività e da un generale declino dell'albero.",
+   "Nella bruscatura, solitamente, una stretta fascia di tessuto giallo (clorotico) si interpone tra il tessuto necrotico marrone e il tessuto verde della foglia. Questa banda gialla può non svilupparsi quando la bruscatura è dovuta alle alte temperature. Con il progredire della malattia, i rametti colpiti muoiono dall'apice (Mircetich et al., 1976).",
+   "Nel focolaio di Alicante (Spagna) e come riportato in letteratura, sono altresì riportati fenomeni più gravi di infezione, con la sindrome nota come \"Golden death\", che prende il nome dall'aspetto di clorosi e giallume diffuso della chioma delle piante infette, a cui può seguire la morte delle piante.",
+   "Photo caption: Xylella fastidiosa (XYLEFA) - https://gd.eppo.int"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

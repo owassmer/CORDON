@@ -8,6 +8,7 @@ surfaced as a confident answer rather than as a failure.
 import json
 import sys
 import unittest
+from tempfile import TemporaryDirectory
 from datetime import date, datetime, timezone
 from pathlib import Path
 
@@ -16,7 +17,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cordon_d.areas import (CadastralStatement, Sheet, annexes, read_scope,
                             versions, zone_of, membership_evidence, _zone_from,
                             MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
-                            RECOVERED_NOT_ATTACHED, SOURCE_STATES_NONE)
+                            RECOVERED_NOT_ATTACHED, RECOVERED_UNADJUDICATED, SOURCE_STATES_NONE,
+                            pinned_statements)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -53,6 +55,29 @@ class ScopeGrammar(unittest.TestCase):
         scope = read_scope('FOGLIO 5: particelle 260, 264; FOGLIO 6: particelle 10, 11')
         self.assertEqual([(s.number, s.parcels) for s in scope.sheets],
                          [('5', ('260', '264')), ('6', ('10', '11'))])
+
+    def test_sheet_annex_keeps_its_identity_and_asterisk(self):
+        scope = read_scope('FOGLI 19, 19-ALLEGATO A*, 20*')
+        self.assertTrue(scope.fully_read)
+        self.assertEqual([(s.number, s.qualifier, s.wholly_contained) for s in scope.sheets],
+                         [('19', None, False), ('19', 'ALLEGATO A', True), ('20', None, True)])
+        self.assertIsNone(statement('sheets', scope.sheets).covers(comune='TRIGGIANO', foglio='19'))
+
+    def test_missing_inventory_cannot_be_a_complete_empty_reading(self):
+        with TemporaryDirectory() as directory:
+            statements, unresolved, _, _ = pinned_statements(Path(directory), 'source')
+        self.assertFalse(statements)
+        self.assertTrue(unresolved)
+
+    def test_previously_excluded_page_still_requires_a_reading(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            readings = root / 'corpus/sources/areas/readings'
+            readings.mkdir(parents=True)
+            (readings / 'INVENTORY.json').write_text(json.dumps([
+                {'act_sha256': 'source', 'page': 1, 'candidate': False}]))
+            _, _, _, unread = pinned_statements(root, 'source')
+            self.assertEqual(unread, (1,))
 
     def test_part_of_a_comune_with_its_sheets_is_those_sheets(self):
         scope = read_scope('PARTE TERRITORIO COMUNALE: FOGLIO: 6')
@@ -120,8 +145,12 @@ class WhatAStatementDecides(unittest.TestCase):
         self.assertIs(s.covers(comune='TRIGGIANO', foglio='3', grain='parcel'), True)
 
     def test_named_parcels_decide_only_those_parcels(self):
-        s = statement('sheets', [Sheet(None, '5', False, ('260', '264'))])
-        self.assertIs(s.covers(comune='TRIGGIANO', foglio='5', particella='260'), True)
+        scope = read_scope('FOGLIO 5: particelle 260, 264*; FOGLIO 10: particelle 19*, 20')
+        s = statement('sheets', scope.sheets)
+        self.assertIsNone(s.covers(comune='TRIGGIANO', foglio='5', particella='260'))
+        self.assertIs(s.covers(comune='TRIGGIANO', foglio='5', particella='264'), True)
+        self.assertIs(s.covers(comune='TRIGGIANO', foglio='10', particella='19'), True)
+        self.assertIsNone(s.covers(comune='TRIGGIANO', foglio='10', particella='20'))
         self.assertIs(s.covers(comune='TRIGGIANO', foglio='5', particella='999'), False)
         self.assertIsNone(s.covers(comune='TRIGGIANO', foglio='5'))
 
@@ -209,21 +238,34 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
                 self.assertTrue(version.absence,
                                 'supplies no statement and names no cause')
 
-    def test_a_reading_limit_is_not_recorded_as_the_act_s_silence(self):
-        # DDS 69/2021 adopts Allegato 1 as an integral part of itself. Calling
-        # it an act that states a rule would write this reader's limit into the
-        # owner as a property of the source.
+    def test_an_act_adopting_maps_is_not_blamed_on_the_reader(self):
+        # DDS 69/2021 adopts Allegato 1 and 1 bis as integral parts of itself,
+        # and both are maps: all seven pages read, no cadastral table printed.
+        # Calling it an act that states a rule would write a reading limit into
+        # the owner as a property of the source; calling the absence a reading
+        # failure points the operator at a reader when the remedy is map
+        # registration. Until its pages are all read, the reading is the cause.
         version = next(v for v in self.versions
                        if '2021-00069' in v.provision_version_id)
         self.assertEqual(version.geography_form, 'annexed')
-        self.assertTrue(any(c.startswith(READING_DID_NOT_RECOVER)
-                            for c in version.absence))
+        self.assertEqual(version.statements, ())
+        self.assertEqual(len(version.absence), 1)
+        cause = version.absence[0]
+        if 'pages have not all been read' in cause:
+            self.assertTrue(cause.startswith(READING_DID_NOT_RECOVER))
+        else:
+            self.assertTrue(cause.startswith(SOURCE_STATES_NONE))
+            self.assertIn('complete page reading', cause)
 
     def test_the_causes_are_distinguishable(self):
+        vocabulary = {SOURCE_STATES_NONE, MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
+                      RECOVERED_NOT_ATTACHED, RECOVERED_UNADJUDICATED}
         causes = {c.split(':')[0] for v in self.versions for c in v.absence}
+        self.assertTrue(causes <= vocabulary, causes - vocabulary)
+        # The population exercises three of them whatever the state of reading:
+        # an act adopting maps, an act whose body is not held, an act stating a rule.
         self.assertIn(SOURCE_STATES_NONE, causes)
         self.assertIn(MATERIAL_NOT_HELD, causes)
-        self.assertIn(READING_DID_NOT_RECOVER, causes)
         self.assertIn(RECOVERED_NOT_ATTACHED, causes)
 
     def test_a_version_in_force_always_accounts_for_itself(self):
@@ -264,13 +306,15 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
 
     def test_assertions_carry_the_annex_row_that_supports_them(self):
         _, assertions = membership_evidence(
-            self.versions, ROOT, date(2026, 9, 1), comune='CAROSINO',
+            self.versions, ROOT, date(2024, 11, 20), comune='CAROSINO',
             known_at=datetime(2026, 9, 11, tzinfo=timezone.utc))
         self.assertTrue(assertions)
         for assertion in assertions:
             self.assertTrue(assertion.value)
             self.assertTrue(assertion.support)
             self.assertTrue(assertion.support[0].reading)
+            self.assertIn('p7 table', assertion.support[0].selector)
+            self.assertIn('FOGLI', assertion.support[0].reading)
 
 
 if __name__ == '__main__':

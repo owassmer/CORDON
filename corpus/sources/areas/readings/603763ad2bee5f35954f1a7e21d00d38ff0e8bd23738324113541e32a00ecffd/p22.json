@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 22,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "031ea296359f8b592c65f7c83649685fde0b2a18483985fd6facc5b0a417dcea",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:47.687403+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6772,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7118,
+   "cache_read_input_tokens": 7747,
+   "output_tokens": 498,
+   "output_tokens_details": {
+    "thinking_tokens": 40
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7118,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 331,
+     "cache_read_input_tokens": 5461,
+     "cache_creation_input_tokens": 3943,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3943
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.037742399999999995,
+  "session_id": "6a77c675-da86-4b99-b557-ab42c6830410"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "1. LA SORVEGLIANZA",
+   "L'attività di sorveglianza è impostata su tre livelli di indagine: nell'area indenne per verificare che il batterio non è presente; nella zona infetta in cui si applicano misure di contenimento, per verificare che il batterio è confinato in una determinata area; nella zona cuscinetto per verificare che il batterio non è presente oppure che è presente con un livello basso di diffusione."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "1. LA SORVEGLIANZA",
+   "L'attività di sorveglianza è impostata su tre livelli di indagine: nell'area indenne per verificare che il batterio non è presente; nella zona infetta in cui si applicano misure di contenimento, per verificare che il batterio è confinato in una determinata area; nella zona cuscinetto per verificare che il batterio non è presente oppure che è presente con un livello basso di diffusione."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

@@ -63,12 +63,12 @@
         "evaluation-context"
       ],
       "routes": [
-        "The adopting regional act and its cadastral annex (BURP; the 26 acts reached by accepted A are held in the store, named by hash in corpus/sources/areas/acts.json)",
+        "Adopting regional acts and incorporated annexes; acquisitions in corpus/sources/areas/acts.json",
         "The publisher's zone services under webapps.sit.puglia.it - an available route, not acquired: no consumer admits a polygon yet"
       ],
       "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes carry the area statements this input is read from.",
-      "reader": "cordon_d.areas.versions, zone_of, membership_evidence",
-      "open": "A cell is read only when every consequential token in it is accounted for; four cells are unread on that rule and are named on their version. A sheet the act does not mark wholly contained reaches the sheet but leaves a parcel within it undecided. No source publishes a positional error bound, so the metric consumers stay unfed. A published polygon is not the act's adopted geography: DDS 45/2025 puts the shapefile transmission after the act, and neither a repeated capture nor an agreeing sheet summary distinguishes a stale polygon from the adopted one - that needs evidence naming the version, which is why the zone services are not acquired until a consumer requires them."
+      "reader": "cordon_d.areas; explicit page reading through scripts/read_annexes.py",
+      "open": "Complete retained page readings and source verification, recover the missing adopting act, and establish adopted map correspondence and spatial qualification. INPUTS.md row 3 owns the source limits."
     },
     {
       "id": "cadastre",

@@ -1,0 +1,413 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+ "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "395e2361dd359c9919cfa7b683c27ddab934fb0a7e4644b484fcf3ef85c1f179",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:22:02.962524+00:00",
+ "native_tables": [
+  {
+   "id": "p7-t1",
+   "bbox": [
+    100.8,
+    159.9,
+    490.5,
+    219.8
+   ]
+  },
+  {
+   "id": "p7-t2",
+   "bbox": [
+    100.8,
+    227.7,
+    490.5,
+    317.8
+   ]
+  }
+ ],
+ "native_cells": {
+  "p7-t1-r1-c1": {
+   "text": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE MULTIPLEX - ZONA INFETTA",
+   "table": "p7-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    159.9,
+    490.5,
+    178.4
+   ]
+  },
+  "p7-t1-r2-c1": {
+   "text": "PROVINCIA/CITTA'\nMETROPOLITANA",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    178.4,
+    167.3,
+    204.4
+   ]
+  },
+  "p7-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    167.3,
+    178.4,
+    263.4,
+    204.4
+   ]
+  },
+  "p7-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 50 METRI\nDALLE PIANTE RISULTATE INFETTE. IL SIMBOLO * INDICA CHE LA PARTICELLA E'\nINTERAMENTE CONTENUTA",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    263.4,
+    178.4,
+    490.5,
+    204.4
+   ]
+  },
+  "p7-t1-r3-c1": {
+   "text": "BARI",
+   "table": "p7-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    204.4,
+    167.3,
+    219.8
+   ]
+  },
+  "p7-t1-r3-c2": {
+   "text": "SANTERAMO IN COLLE",
+   "table": "p7-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    167.3,
+    204.4,
+    263.4,
+    219.8
+   ]
+  },
+  "p7-t1-r3-c3": {
+   "text": "FOGLIO 57: particelle 262, 263, 271*, 272, 273, 302, 310, 312",
+   "table": "p7-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    263.4,
+    204.4,
+    490.5,
+    219.8
+   ]
+  },
+  "p7-t2-r1-c1": {
+   "text": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE MULTIPLEX - ZONA CUSCINETTO",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    227.7,
+    490.5,
+    248.0
+   ]
+  },
+  "p7-t2-r2-c1": {
+   "text": "PROVINCIA/CITTA'\nMETROPOLITANA",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    248.0,
+    167.3,
+    273.1
+   ]
+  },
+  "p7-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    167.3,
+    248.0,
+    263.4,
+    273.1
+   ]
+  },
+  "p7-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    263.4,
+    248.0,
+    490.5,
+    273.1
+   ]
+  },
+  "p7-t2-r3-c1": {
+   "text": "BARI",
+   "table": "p7-t2",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    273.1,
+    167.3,
+    317.8
+   ]
+  },
+  "p7-t2-r3-c2": {
+   "text": "SANTERAMO IN COLLE",
+   "table": "p7-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    167.3,
+    273.1,
+    263.4,
+    317.8
+   ]
+  },
+  "p7-t2-r3-c3": {
+   "text": "FOGLI 27, 28, 38, 39, 40, 41, 42, 44, 54, 55, 56*, 57*, 58*, 59, 66, 67*, 68*, 69, 70,\n76, 77*, 78, 79*, 80, 81, 88, 90, 91, 112*",
+   "table": "p7-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    263.4,
+    273.1,
+    490.5,
+    317.8
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 10247,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7954,
+   "cache_read_input_tokens": 8609,
+   "output_tokens": 1162,
+   "output_tokens_details": {
+    "thinking_tokens": 13
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7954,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1022,
+     "cache_read_input_tokens": 6323,
+     "cache_creation_input_tokens": 3917,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3917
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0486968,
+  "session_id": "17b83eff-327e-4c10-9962-f4b85576e089"
+ },
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE MULTIPLEX - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA/CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE. IL SIMBOLO * INDICA CHE LA PARTICELLA E' INTERAMENTE CONTENUTA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t1-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE MULTIPLEX - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA/CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p7-t2-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p7-t2-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p7-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "25466",
+   "Bollettino Ufficiale della Regione Puglia - n. 32 del 18-4-2024",
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "SALVATORE INFANTINO 10.04.2024 10:42:46 GMT+00:00"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE MULTIPLEX - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA/CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE. IL SIMBOLO * INDICA CHE LA PARTICELLA E' INTERAMENTE CONTENUTA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t1-r3-c1"
+      },
+      "comune": {
+       "text": "SANTERAMO IN COLLE",
+       "copied_from": "p7-t1-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 57: particelle 262, 263, 271*, 272, 273, 302, 310, 312",
+       "copied_from": "p7-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE MULTIPLEX - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA/CITTA' METROPOLITANA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t2-r3-c1"
+      },
+      "comune": {
+       "text": "SANTERAMO IN COLLE",
+       "copied_from": "p7-t2-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLI 27, 28, 38, 39, 40, 41, 42, 44, 54, 55, 56*, 57*, 58*, 59, 66, 67*, 68*, 69, 70,\n76, 77*, 78, 79*, 80, 81, 88, 90, 91, 112*",
+       "copied_from": "p7-t2-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "unattached": [
+   "25466",
+   "Bollettino Ufficiale della Regione Puglia - n. 32 del 18-4-2024",
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "SALVATORE INFANTINO 10.04.2024 10:42:46 GMT+00:00"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p7-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "tables_visible": 2
+ },
+ "resolution_problems": []
+}

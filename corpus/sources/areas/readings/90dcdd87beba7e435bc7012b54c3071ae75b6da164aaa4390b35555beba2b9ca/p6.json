@@ -1,0 +1,168 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+ "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "862fd4313d7121ff61517f7ef83caadd0a96e54565b067799e7aaaaa682d9a47",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:18:37.862261+00:00",
+ "native_tables": [
+  {
+   "id": "p6-t1",
+   "bbox": [
+    62.6,
+    54.1,
+    486.7,
+    816.5
+   ]
+  }
+ ],
+ "native_cells": {
+  "p6-t1-r1-c1": {
+   "text": "3938",
+   "table": "p6-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    62.6,
+    54.1,
+    167.4,
+    63.7
+   ]
+  },
+  "p6-t1-r1-c2": {
+   "text": "B o l l e ttino U",
+   "table": "p6-t1",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    167.4,
+    54.1,
+    218.6,
+    63.7
+   ]
+  },
+  "p6-t1-r1-c3": {
+   "text": "fficiale della Regione Puglia - n. 10",
+   "table": "p6-t1",
+   "row": 1,
+   "column": 3,
+   "bbox": [
+    218.6,
+    54.1,
+    359.6,
+    63.7
+   ]
+  },
+  "p6-t1-r1-c4": {
+   "text": "5 del 12-8-2021",
+   "table": "p6-t1",
+   "row": 1,
+   "column": 4,
+   "bbox": [
+    359.6,
+    54.1,
+    486.7,
+    63.7
+   ]
+  },
+  "p6-t1-r3-c1": {
+   "text": "Foglio 59 Foglio 61 ALLEGATO 1 Firmato digitalmente da: SALVATORE INFANTINO IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO Regione Puglia F o 6 Il DoIgli RI G7ENTE DELLA SEZIONE Firmato il: 27-07-2021 22:17:33 Foglio 65 Seriale certificato: 904277 DOTT. SALVATORE INFANTINO Valido dal 09-02-2021 al 09-02-2024 Foglio 68 Foglio 66 Foglio 66 Foglio 71 CANOSA DI PUGLIA Foglio 69 Foglio 70 Foglio 77 Foglio 71 Foglio 2 Legenda Zona Infetta Canosa di Puglia Foglio 3 Zona Cuscinetto Canosa di Puglia MINERVINO MURGE Foglio 8 Fogli Catastali Foglio 77 Confini comunali",
+   "table": "p6-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    62.6,
+    88.8,
+    486.7,
+    781.8
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 10571,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7032,
+   "cache_read_input_tokens": 7646,
+   "output_tokens": 996,
+   "output_tokens_details": {
+    "thinking_tokens": 54
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7032,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 814,
+     "cache_read_input_tokens": 5360,
+     "cache_creation_input_tokens": 3958,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3958
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0423942,
+  "session_id": "181bb049-cd30-4efd-9ec0-1c3db81b9834"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p6-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "The bounding box covers the whole page, which is a cadastral map (ALLEGATO 1) with a legend, not a data table. The 'cells' the PDF detected are actually scattered map labels (Foglio numbers, comune names, legend entries, signature block) run together, not tabular rows/columns."
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 1 - IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "Il DIRIGENTE DELLA SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Zona Infetta Canosa di Puglia (red); Zona Cuscinetto Canosa di Puglia (magenta); Fogli Catastali (blue); Confini comunali (black)",
+   "Map labels: Foglio 2, Foglio 3, Foglio 5, Foglio 6, Foglio 8, Foglio 9, Foglio 10, Foglio 59, Foglio 61, Foglio 65, Foglio 66 (x2), Foglio 67, Foglio 69, Foglio 70, Foglio 71 (x2), Foglio 77 (x2), Foglio 68, Foglio 14",
+   "Comuni labeled on map: CANOSA DI PUGLIA, MINERVINO MURGE",
+   "Firmato digitalmente da: SALVATORE INFANTINO, Regione Puglia, Firmato il: 27-07-2021 22:17:33, Seriale certificato: 904277, Valido dal 09-02-2021 al 09-02-2024"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATO 1 - IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "Il DIRIGENTE DELLA SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Zona Infetta Canosa di Puglia (red); Zona Cuscinetto Canosa di Puglia (magenta); Fogli Catastali (blue); Confini comunali (black)",
+   "Map labels: Foglio 2, Foglio 3, Foglio 5, Foglio 6, Foglio 8, Foglio 9, Foglio 10, Foglio 59, Foglio 61, Foglio 65, Foglio 66 (x2), Foglio 67, Foglio 69, Foglio 70, Foglio 71 (x2), Foglio 77 (x2), Foglio 68, Foglio 14",
+   "Comuni labeled on map: CANOSA DI PUGLIA, MINERVINO MURGE",
+   "Firmato digitalmente da: SALVATORE INFANTINO, Regione Puglia, Firmato il: 27-07-2021 22:17:33, Seriale certificato: 904277, Valido dal 09-02-2021 al 09-02-2024"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p6-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "The bounding box covers the whole page, which is a cadastral map (ALLEGATO 1) with a legend, not a data table. The 'cells' the PDF detected are actually scattered map labels (Foglio numbers, comune names, legend entries, signature block) run together, not tabular rows/columns."
+   }
+  ],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

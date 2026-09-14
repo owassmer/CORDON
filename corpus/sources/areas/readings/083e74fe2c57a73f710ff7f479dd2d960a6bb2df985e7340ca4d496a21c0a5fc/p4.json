@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+ "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "2e53a7cf1ea3dbd187783409f1eae0db3f9f23f1eee157ee088aebabcf5caa3a",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:23:14.328997+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7976,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7131,
+   "cache_read_input_tokens": 7768,
+   "output_tokens": 718,
+   "output_tokens_details": {
+    "thinking_tokens": 32
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7131,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 559,
+     "cache_read_input_tokens": 5482,
+     "cache_creation_input_tokens": 3935,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3935
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.040110599999999996,
+  "session_id": "7dabd316-453a-4fcb-811d-59944a90bace"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" dell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\".",
+   "Di adottare nell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\", le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nell'area delimitata.",
+   "Table: Documento - Impronta (SHA256) | Allegato.pdf - 488c69ff21aaa6e162dfcb7d140ae070b1abb57bfcf7a40bf0666f67dd2fd3a7 (this is a document hash table, not an annex cadastral table)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Di riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" dell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\".",
+   "Di adottare nell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\", le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nell'area delimitata.",
+   "Table: Documento - Impronta (SHA256) | Allegato.pdf - 488c69ff21aaa6e162dfcb7d140ae070b1abb57bfcf7a40bf0666f67dd2fd3a7 (this is a document hash table, not an annex cadastral table)"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

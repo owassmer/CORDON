@@ -1,0 +1,93 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+ "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "1e81436b6b4e172f99237b916d725c924d18939de83d1ab9c80bcf014319bfb3",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:18:51.110913+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 12364,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7349,
+   "cache_read_input_tokens": 7975,
+   "output_tokens": 1049,
+   "output_tokens_details": {
+    "thinking_tokens": 43
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7349,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 880,
+     "cache_read_input_tokens": 5689,
+     "cache_creation_input_tokens": 3946,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3946
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.044473,
+  "session_id": "b7b3bf12-79e7-46ca-8aae-24c19154c89d"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "intero agro comunale dei comuni di Polignano, Monopoli e Alberobello;",
+   "area di 100 m attorno ai siti in cui c’è notevole passaggio e sosta di veicoli, presenti nei comuni succitati e lungo le strade di grande percorrenza;",
+   "area larga 400 m posta a nord della zona contenimento che si estende dallo Jonio all’Adriatico.",
+   "n. 39 piante infette nell’area indenne compresa tra le aree delimitate di Monopoli e Polignano;",
+   "n. 76 piante infette nell’area delimitata di Monopoli;",
+   "n. 4 piante infette nell’area delimitata di Polignano;",
+   "n. 117 nella zona di applicazione delle misure di contenimento dell’area delimitata ‘Salento’;",
+   "n. 4 piante infette nella zona cuscinetto dell’area delimitata ‘Salento’.",
+   "Di dovere istituire una nuova area delimitata denominata “Valle D’Itria” la cui zona infetta comprenda l’intero agro comunale di Polignano, Monopoli, Alberobello e parte dell’agro di Castellana Grotte nelle quali adottare misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "La nuova area delimitata “Valle D’Itria” debba comprendere una zona cuscinetto pari a 5 km.",
+   "Di dovere confermare la zona in cui si attuano misure di contenimento dell’area infetta di cui all’allegato III – parte A del Reg. UE 2020/1201 (indicata come area infetta Salento), definita ai sensi della lettera b) - comma 2 dell’art. 4 dello stesso Regolamento."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "intero agro comunale dei comuni di Polignano, Monopoli e Alberobello;",
+   "area di 100 m attorno ai siti in cui c’è notevole passaggio e sosta di veicoli, presenti nei comuni succitati e lungo le strade di grande percorrenza;",
+   "area larga 400 m posta a nord della zona contenimento che si estende dallo Jonio all’Adriatico.",
+   "n. 39 piante infette nell’area indenne compresa tra le aree delimitate di Monopoli e Polignano;",
+   "n. 76 piante infette nell’area delimitata di Monopoli;",
+   "n. 4 piante infette nell’area delimitata di Polignano;",
+   "n. 117 nella zona di applicazione delle misure di contenimento dell’area delimitata ‘Salento’;",
+   "n. 4 piante infette nella zona cuscinetto dell’area delimitata ‘Salento’.",
+   "Di dovere istituire una nuova area delimitata denominata “Valle D’Itria” la cui zona infetta comprenda l’intero agro comunale di Polignano, Monopoli, Alberobello e parte dell’agro di Castellana Grotte nelle quali adottare misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "La nuova area delimitata “Valle D’Itria” debba comprendere una zona cuscinetto pari a 5 km.",
+   "Di dovere confermare la zona in cui si attuano misure di contenimento dell’area infetta di cui all’allegato III – parte A del Reg. UE 2020/1201 (indicata come area infetta Salento), definita ai sensi della lettera b) - comma 2 dell’art. 4 dello stesso Regolamento."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

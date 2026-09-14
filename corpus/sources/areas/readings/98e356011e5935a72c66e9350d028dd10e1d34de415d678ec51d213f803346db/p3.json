@@ -1,0 +1,73 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "675a4a1eacff634f147aa885cc151cba1703a23385f73c1b0f5a28a17f7eb249",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:36.717265+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 10577,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7350,
+   "cache_read_input_tokens": 7985,
+   "output_tokens": 476,
+   "output_tokens_details": {
+    "thinking_tokens": 34
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7350,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 315,
+     "cache_read_input_tokens": 5699,
+     "cache_creation_input_tokens": 3937,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3937
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.038744,
+  "session_id": "84f28919-c680-4c91-96f7-c1a475c5f949"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "le aree delimitate per Xylella fastidiosa, sottospecie multiplex ST26 - Santeramo in Colle e Xylella fastidiosa, sottospecie multiplex ST26 - Ginosa, di cui alla determina dirigenziale n° 198 del 18/12/2024 coinvolgono anche parte del territorio della Basilicata (zona cuscinetto);"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "le aree delimitate per Xylella fastidiosa, sottospecie multiplex ST26 - Santeramo in Colle e Xylella fastidiosa, sottospecie multiplex ST26 - Ginosa, di cui alla determina dirigenziale n° 198 del 18/12/2024 coinvolgono anche parte del territorio della Basilicata (zona cuscinetto);"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

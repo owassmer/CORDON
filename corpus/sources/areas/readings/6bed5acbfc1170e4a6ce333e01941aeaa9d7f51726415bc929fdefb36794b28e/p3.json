@@ -1,0 +1,99 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+ "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f6eb621819a18293660e51ba3ae445b5eef7d0cb41caa65604c667d377508144",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:33:20.084889+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 21258,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7594,
+   "cache_read_input_tokens": 8216,
+   "output_tokens": 1825,
+   "output_tokens_details": {
+    "thinking_tokens": 45
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7594,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1651,
+     "cache_read_input_tokens": 5930,
+     "cache_creation_input_tokens": 3950,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3950
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0534552,
+  "session_id": "23991bec-46fe-46e0-bf5a-9bea4dff578b"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Area delimitata per Xylella fastidiosa sottospecie pauca ST53, aggiornata con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 158 del 18/11/2024 con la quale è stata ridotta la zona infetta in cui si applicano misure di contenimento da 5 km a 2 km, in applicazione del Reg. (UE) 2024/2507 del 26 settembre 2024;",
+   "Area delimitata per Xylella fastidiosa sottospecie pauca - Bisceglie (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 113 del 23/06/2025.",
+   "Area delimitata per Xylella fastidiosa sottospecie pauca - Modugno (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 129 del 14/07/2025.",
+   "In area indenne nell'agro di Bari (BA) nel 2025 sono stati prelevati e analizzati n. 521 campioni vegetali da piante della specie Olea europaea (381 olivi), Prunus dulcis (125 mandorli), Nerium Oleander (9 pianta), Rhamnus alaternus (4 piante) e Laurus nobilis (2 piante) specie ospiti a Xylella fastidiosa.",
+   "Il Centro di Ricerca, Sperimentazione e Formazione in agricoltura \"Basile Caramia\" di Locorotondo (CRSFA), con il rapporto di prova n. Prot.1389/Ldf/2025 del 14/07/2025, ha comunicato che n. 8 (otto) piante di olivo sono risultate infette da Xylella fastidiosa;",
+   "Il CNR, incaricato dall'Osservatorio della caratterizzazione della sottospecie, con il rapporto di prova n. 63P/2025 del 16/07/2025, ha comunicato che la sottospecie individuata nelle otto piante di olivo infette è Xylella fastidiosa sottospecie pauca;",
+   "È stata programmata un'attività di sorveglianza rafforzata dell'area di 400 m attorno alla zona infetta, finalizzata a verificare la presenza di ulteriori piante infette.",
+   "l'area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alle piante risultate infette dall'organismo nocivo specificato;",
+   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
+   "La zona cuscinetto attorno alle zone infette generate dalle 8 piante di olivo positive rinvenute in agro di Bari si sovrappone parzialmente alla zona cuscinetto dell'area delimitata per \"Xylella fastidiosa sottospecie pauca – Modugno (BA)\", di cui all'atto dirigenziale n° 129 del 14/07/2025.",
+   "L'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa sottospecie pauca - Modugno (BA)\";",
+   "l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia;",
+   "l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca - Modugno (BA)\".",
+   "Di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie pauca – Modugno (BA)\", di cui all'atto dirigenziale n° 129 del 14/07/2025, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: zona infetta di almeno 50 m attorno alle piante infette a Xylella fastidiosa sottospecie pauca;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Area delimitata per Xylella fastidiosa sottospecie pauca ST53, aggiornata con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 158 del 18/11/2024 con la quale è stata ridotta la zona infetta in cui si applicano misure di contenimento da 5 km a 2 km, in applicazione del Reg. (UE) 2024/2507 del 26 settembre 2024;",
+   "Area delimitata per Xylella fastidiosa sottospecie pauca - Bisceglie (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 113 del 23/06/2025.",
+   "Area delimitata per Xylella fastidiosa sottospecie pauca - Modugno (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 129 del 14/07/2025.",
+   "In area indenne nell'agro di Bari (BA) nel 2025 sono stati prelevati e analizzati n. 521 campioni vegetali da piante della specie Olea europaea (381 olivi), Prunus dulcis (125 mandorli), Nerium Oleander (9 pianta), Rhamnus alaternus (4 piante) e Laurus nobilis (2 piante) specie ospiti a Xylella fastidiosa.",
+   "Il Centro di Ricerca, Sperimentazione e Formazione in agricoltura \"Basile Caramia\" di Locorotondo (CRSFA), con il rapporto di prova n. Prot.1389/Ldf/2025 del 14/07/2025, ha comunicato che n. 8 (otto) piante di olivo sono risultate infette da Xylella fastidiosa;",
+   "Il CNR, incaricato dall'Osservatorio della caratterizzazione della sottospecie, con il rapporto di prova n. 63P/2025 del 16/07/2025, ha comunicato che la sottospecie individuata nelle otto piante di olivo infette è Xylella fastidiosa sottospecie pauca;",
+   "È stata programmata un'attività di sorveglianza rafforzata dell'area di 400 m attorno alla zona infetta, finalizzata a verificare la presenza di ulteriori piante infette.",
+   "l'area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alle piante risultate infette dall'organismo nocivo specificato;",
+   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
+   "La zona cuscinetto attorno alle zone infette generate dalle 8 piante di olivo positive rinvenute in agro di Bari si sovrappone parzialmente alla zona cuscinetto dell'area delimitata per \"Xylella fastidiosa sottospecie pauca – Modugno (BA)\", di cui all'atto dirigenziale n° 129 del 14/07/2025.",
+   "L'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa sottospecie pauca - Modugno (BA)\";",
+   "l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia;",
+   "l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca - Modugno (BA)\".",
+   "Di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie pauca – Modugno (BA)\", di cui all'atto dirigenziale n° 129 del 14/07/2025, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: zona infetta di almeno 50 m attorno alle piante infette a Xylella fastidiosa sottospecie pauca;"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}
