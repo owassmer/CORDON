@@ -8,11 +8,11 @@ established; no other row is.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | The official report linked from the monitoring record | One laboratory report containing one or more sample results | Follow every referenced report; join its rows to observations; preserve report corrections and distinct copies. The observation row carries, uninterpreted, the report identity and performing laboratory the monitoring publisher prints beside the observation: `PROTOCOLLO` on 22,245 records, `STRUTTURA_LABORATORIO` on 14,490, `PROT_SELGE` on 8,762, `DATA_PROT_SELGE` on 8,760, `LABORATORIO` on 82. They are a publisher's transcription and establish nothing here; the report establishes what the report says. |
+| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The repaired reader has 209 documents with completed page readings and 391 completed relationship readings; the remaining population must be read and joined through the same path. Subscription vision resumes after 15:20 America/New_York on 14 September 2026. Current consumer results and consequential source work below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
-| Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader |
+| Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader. DDS 52/2024, 74/2024 and 138/2024 are retained and independently read-back verified in R2 as report-identity dependencies. The native annex reader supplies 183 identified plant/report associations and seven unresolved page-boundary fragments, not whole-act semantics. DDS 74/2024 links old code 1673519 to a different host/place from the laboratory row; DDS 138/2024 adopts corrected 1674070 at the report location. Any correction or withdrawal of the earlier administrative target remains unestablished and must be investigated by this consumer; laboratory replacement alone cannot supply it. |
 | Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. The monitoring stream publishes a `SCELTA_PROPRIETARIO` column on 8,762 records and carries no value in any of them, so it supplies no owner election; the observation row records that. |
 | Who has the consequential relationship to the affected land | The determination's incorporated annex naming addressees by comune, foglio and particella; later acts that correct listed owners; the Osservatorio's matter and transmitted cadastral and owner data; a competent public-asset register for public land | One addressee position in one act version, or one stated ownership, occupation, management or other legally relevant relationship | The annex establishes the position the act published for each parcel, not that the named person held the land. An effective correction act replaces the listed position for the parcels it names; its effect against the corrected recipient follows the notice route above. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do. The monitoring stream publishes `CUAA` and `AZIENDA` columns on 86 records and carries a sentinel in every one, so it supplies no holder identity; the observation row records that. |
 | Whether an affected plant has protected status | The regional monumental-tree register and the matter's exact plant evidence | One registered or provisional protected-plant occurrence | Match the affected plant and select the status in force at the event time. The observation row carries, uninterpreted, `MONUMENTALE_ARIF` on 586 records — a monitoring publisher's flag beside the observation, not a register entry, and no substitute for matching the plant in the register. |
@@ -50,7 +50,7 @@ reference, and one has no readable day.
 | `OBJECTID`, `ID_GIORNALIERO`, `NUMERO_ORDINE`, `IDANDROID` | The publisher's other identifiers, carried under their own names, never merged into the reference and never compared: a view's feature id differs between views by construction. 12,940 observations the reference cannot identify are identified by one of these. |
 | `DATA`, `DATA_RILEVAMENTO`, `DATA_CAMPIONE`, `DATA_PRELIVEO`, `DATA_RILIEVO` | The recorded observation or sampling day. Excel midnight is date storage; ArcGIS UTC epochs become the Puglia calendar day, and the early campaign's 23:00 UTC values belong to the following local day. Campaign names are not date boundaries. Report, protocol and removal dates stay separate fields. |
 | `TIPOLOGIA`, and the explicitly named inspection and assessment views | Samples, visual inspections and assessments, kept apart. An observation without an analytical result is not a negative test: the 2017–2020 inspection and assessment views have no result field at all. |
-| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato. A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the finding is the laboratory report's. |
+| `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato. A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the laboratory diagnosis is the report's; official confirmation remains the Service's decision. |
 | `SPECIE`, `CULTIVAR`, `SUBSPECIE` | Recorded host, cultivar and sample-level subspecies. A view's subspecies title is context and is never substituted for an absent sample-level identification. Every host and every result state is retained. |
 | `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence and absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
 | Native geometry and spatial reference, `LONGITUDINE`, `LATITUDINE` | The published location, read into one frame. The SIT services state EPSG:32633 on every page. The campaign releases publish degrees and state no datum anywhere — not in the CKAN package, the download page, a sheet, a header or a legend — and those degrees are EPSG:4326, established from the publisher's own redundancy: over 1,279,135 testable pairs — an observation published both ways, with one point on each side — the stated SIT point reproduces the printed pair to under a centimetre, while ED50 and Monte Mario / Roma 40 miss by 127 m and 71 m. `scripts/check_frames.py` re-derives that per release from the store and fails when one stops fitting; `SPEC.md` says when it runs. Three releases cannot be tested that way: `CAMP_2013_2014`, `CAMP_2014_2015` and `CAMP_2016_2017` publish no observation reference in any of their 221,397 located rows, so nothing pairs them to a SIT publication by identity. Their frame rests instead on same-day proximity, because a datum shift translates a whole point cloud and shows without identity — `CAMP_2014_2015` and `CAMP_2016_2017` place 100% of their points within a centimetre of a same-day SIT point, and `CAMP_2013_2014` places 99.05%, where ED50 would put them 128 m away. That last figure is the weakest ground in the family and sits 0.05 points above the agreement the check requires, so a recapture of that release is the one to read rather than assume. What the redundancy cannot separate is which frame of that datum family the publisher would name: without an epoch the transformation between EPSG:4326 and EPSG:4258 is the identity, so both reproduce the printed pair exactly and the check reports them as tied. What it excludes are the frames that would move a location. The frame belongs to the pair rather than to the record: a service states its spatial reference for the geometry it publishes, and seventeen of these layers print degree columns beside that geometry, so degrees taken from the columns are read at EPSG:4326 whatever the page declared for its geometry. A pair this reader cannot place in the frame beside it is not carried, and its absence says so. Because every location has a frame, the publications of one observation are compared in one frame rather than held apart by the frame they were printed in; what a consumer receives is still a pair a publisher printed, in the frame that publisher stated, because the reprojection is this reader's and belongs under no value the operator reads as published. No source states positional error, so metric use waits for the population row's qualification. |
@@ -63,7 +63,7 @@ What the stream hands A–C, all as candidates:
 
 - Positive observations with their day, their agreed location and their report route
   (`detection_days`, `located_positives`) for the no-detection anchor and the finding
-  location. The report decides the finding. `detection_record_complete` is never set
+  location. The report supplies the diagnosis beneath the finding decision. `detection_record_complete` is never set
   from the release inventory: the publisher states that surveillance is not an inventory
   of all infected plants, and the inventory proves only that every retained release was
   read.
@@ -166,6 +166,164 @@ What the population shows, read and not reconciled:
   see a transposition of the kind found across releases above. Every one of the 12,663
   agrees today, the widest by 1.2 mm.
 
+## Laboratory reports
+
+The retained population comprises 1,910 captures with source bytes and 1,180 distinct PDFs.
+The current offline rebuild recovers 209 complete document page readings without
+provider calls; 971 documents still require completed extraction. There are 391
+completed document-relationship readings. The ordinary full-observation join after
+the reader repairs covers all 2,320,354 observations: 2,923 have a unique matched
+report row, 168 have a provisional match, 106 have competing report-row occurrences,
+and four have competing observation identities for their report row. The reverse view
+contains 1,322 unmatched report rows. These figures describe retained extraction
+version `bf12550befda11586c24`, before further subscription reading, and do not establish
+source-family completeness or official confirmation.
+
+Finish the interrupted page readings and their joins, including the fine-print attachment whose source has 13 rows but whose saved reading
+recovered 12. A saved complete-document response formerly rejected by the page-pair
+partition now assembles through the ordinary reader without another model call. The runner
+rereads an incomplete page with magnified source views before declaring its document
+assembled. Continue full-population relationship reading, resolve unbound source
+qualifications and multi-document identity/scope, and correct the older CNR91P
+revision-date proposal from its source. The generic identifier role does not require
+guessing which organization assigned a literal code; attachment still requires the
+observation's report route, source identity and bidirectional uniqueness.
+
+The failed published routes are reconciled in the existing acquisition records.
+Four retained alternatives resolve CNR-IPSP 36/2024, 10/2024, 70M/2026 and SELGE
+173/2020 (the URL incorrectly names 172). Owen's seven supplied PDFs resolve the
+other nine failed routes: CNR 2/2024, 5/2024 and 9/2024; IAMB 7/2021, 8/2021 and
+report 4 / Dir 02/848; and UNIFG 8_POSITIVI/2021. The three supplied CNR files are
+byte-identical to already-held zero-padded publisher copies. All seven supplied
+files are stored with user-intake provenance and replicated to R2 with matching
+readback hashes. Their readings run through the ordinary subscription reader;
+route recovery alone does not establish a completed analytical join.
+
+The IAMB components contain the full rows referring observations name: 72, 104
+and 42 respectively. Report 8 contains 105 rows, including additional ID 1222184.
+The supplied components omit their covering letters. Their result tables can
+supply literal results and sample correspondence; establishing the particular
+analytical method and issuance from the laboratory itself still requires the
+covering letters or equivalent evidence for IAMB 7 (published issue date
+11 October 2021), 8 (15 October 2021) and 4 / Dir 02/848 (30 September 2021).
+These tables are recovered and are not active document searches. UNIFG's letter
+names 8_POSITIVI, while its 18-row annex names 8_DUBB in conferma; both headings
+and the annex's positive results must survive reading.
+
+Only SELGE 196/2020 and 197/2020 remain unrecovered among the published observation
+routes. Owen reports server-side FileNotFoundException for their backing files;
+the acquisition records prohibit automatic retries. Searching the retained PDF
+text layers found no alternative carrying either identity; scanned-only identities
+still depend on completion of the retained vision population. No new broad hunt
+is authorized.
+
+The originals SELGE 355/2020, IAMB 34/2022 (15 September, Dir 02/1097) and IAMB
+4/2023 (14 September, Dir 02/1034) are needed for the earlier report's content and
+an exact before/after correction comparison. They are not blanket prerequisites
+for the successor's independently stated results. Retained SELGE 360/2020 page 1
+expressly cancels and replaces 355 and supplies its own two-method statement and
+12-sample result annex. IAMB 39/2022 pages 1–2 independently supply the corrected
+9 September Monopoli positive list and Harper real-time PCR method. IAMB report
+4 rettificato, issued 3 October 2023 (file named 9/2023), independently supplies
+the 7 September Castellana Grotte positive list, Harper method and received-sample
+qualification. Neither IAMB correction identifies which individual values changed;
+no changed-column delta may be inferred merely from the word Positivi. Recovery
+of a predecessor is required when a consumer actually needs that earlier state
+or delta, not to consume these independently stated corrected facts.
+
+The reached ARIF application requires
+regional login; no authenticated records have been accessed. Laboratory designation,
+status and custody evidence remain necessary where the accepted confirmation branch
+requires them; report extraction alone cannot supply those facts.
+
+Administrative annexes retained from DDS 52/2024, 74/2024 and 138/2024 supply 183
+identified associations. All seven page-boundary fragments have been visually
+reconciled: they complete host/zone cells of the preceding row. The reader derives
+continuation only across the same annex, consecutive physical and printed pages,
+matching columns and blank identity cells, retaining both cell locations. All 183
+associations survive; no fragment is treated as another plant. The seven affected
+observation joins currently still need their laboratory report readings.
+An act can establish a derived occurrence correspondence without equating different
+literal identifier strings. The older CNR73F act association conflicts with its report
+row; the corrected report and later act agree. Laboratory replacement does not prove
+administrative withdrawal. Source-declared correction relationships and their date
+conflicts survive; an exact cancellation phrase is not a prerequisite for reading a
+cancellation. Whole-report replacement does not assert that every column changed.
+
+`corpus/sources/reports/records.json` owns the route captures. Successful captures
+and distinct byte versions are retained; a current failed attempt names its cause.
+A filename shared by a failed and successful route supplies an acquisition
+candidate. Located source reconciliation in the same acquisition record can establish
+the recovered document independently of the failed transport. `scripts/acquire_reports.py`
+discovers report routes through the declared monitoring releases and can follow
+source-located references and explicitly recapture an admitted route.
+
+`cordon_d.report_extraction` reads the original page images with bounded vision
+and native-cell candidates. Schema-constrained output keeps one machine-readable response. Its representation carries literal tables, source-row occurrences,
+header roles and scoped report statements. The original and latest table-header pages are supplied as context to later blocks; its meaning is not assigned to them automatically. The model is explicitly configured;
+`claude-sonnet-5` at medium effort is the selected baseline, with a source-only high-effort reread for an incomplete page or detected unattached sampling date. Fine-print page completion receives overlapping 240-dpi source views as well as the original PDF. Specialist OCR is not a mandatory pass.
+An unresolved region is a reading limitation, never proof of source silence.
+Code copies selected native values and materializes rows; identifiers remain
+strings and invalid dates retain their original text and named parsing limit.
+Statements carry model_proposed_reading provenance; they are claims about the source, not certified quotations. Selected native cell copies and visual transcriptions carry distinct provenance. Rejected nonliteral components retain a cause.
+
+`cordon_d.reports.report(digest, store, extraction_version=...)` reads the selected
+cache without network access; `read_reports.py --extraction-version` selects a retained version explicitly. Missing or partial readings are visible. A missing
+coordinate, unparsed date or incomplete metadata component does not discard a
+separately readable diagnostic result. Page accounting is structural coverage,
+not certification that every source meaning was recovered.
+
+`cordon_d.findings.findings(groups, reports_root, store, extraction_version=...,
+known_through=...)` consumes `monitoring.distinct_observations(...)`. It preserves
+the publishing field and route on each member. Matches require the referenced
+source rendition, a source-supported literal identifier and a relationship unique
+in both directions within that report. Valid contradictory sampling dates remain
+conflicts; undated candidates are not silently displaced by dated ones. Separate
+reports can each attach to one observation without one replacing the other.
+Repeated physical rows remain available. Corrections require their own source
+relationship and affected scope; recency and filename suffixes cannot adjudicate them.
+
+`cordon_d.report_relations` reads source-declared document relationships separately
+from row transcription. A resolved whole-report replacement can be followed from
+an observation's original route; the earlier source remains historical evidence.
+Amendments, ambiguous predecessors and cycles cannot silently select a current row.
+The graph preserves model-proposed provenance and unverified identity components.
+It does not establish administrative effect or turn a cited predecessor date into
+this rendition's issue date. Quotation and locator checks validate literal support; semantic source reading establishes
+the proposed effect. A contradictory printed issue date does not erase an explicitly
+named predecessor or become an inferred corrected date. Retained responses preserve
+their model and prompt provenance.
+
+`cordon_d.source_associations` reads native ruled administrative tables through
+printed headers and source-qualified annex continuation. It preserves source
+coordinates, unresolved fragments and unexamined tables; personal owner columns
+are outside this association reader. The finding join requires the observation's
+own report route, an explicit act report number/date, the published plant reference,
+and unique report-row coordinates agreeing at the act's printed decimal precision.
+That is derived occurrence correspondence, not an identifier alias. Competing act
+rows and conflicts survive. Both report and act acquisition respect the knowledge
+cutoff; the act's assertion is not backdated to sample collection.
+
+Each diagnostic column and its stated analyte stays separate, with comparison to
+the original publication label and a cause where comparison cannot be made.
+Agreement is a cross-check, not a correctness test. The reverse view retains rows
+with no observation, including negative results. `confirmation_inputs` selects
+explicit source-result occurrences and supplies the unchanged Stage C interface;
+canonical identities and legal qualifications require evidence and otherwise
+remain unresolved. Neither a report row nor two differently spelled test labels
+establishes the Service's official confirmation. Laboratory designation, custody,
+run qualifications and official confirmation retain their existing contract owners.
+
+`scripts/read_reports.py` inventories work by default. Paid extraction is explicit,
+capped and resumable, with raw responses reusable independently of deterministic
+projection changes. The same command emits the local forward/reverse join and can
+exercise the C adapter for an explicitly selected observation and result pair.
+Single-page output overflow stops with a reading limitation; geometric row subdivision is not implemented. A detected-table inventory can expose an omitted native region, but cannot certify discovery on scanned pages.
+
+The remaining population must be read and its consequential source relationships
+resolved before row 2 is established; bounded source checks and passing software
+tests do not confer that status.
+
 ## Materials that are not standalone input gaps
 
 - The BURP URL census is a way to locate regional acts. It is not itself a decision
@@ -186,3 +344,15 @@ What the population shows, read and not reconciled:
 - “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
   work that a particular row may require. They are not separate source families or
   reasons to expand the aperture.
+
+The join retains identifier-only display occurrences but requires an analytical
+result before they compete as finding-result rows. Direct inspection of UNIBA
+87/2023 confirms the small table and expanded transposed display; five competing
+joins are resolved by this correction. Further source rereading is required for
+its remaining display relationships, UNIBA 15/2024 and 66/2023, and the early
+reports whose daily counters and laboratory identifiers collide. Direct inspection of SELGE 139/2015 page 2 confirms a transcription error:
+the source prints 40.42257829 for daily sample 1, while the saved reading has
+40.22257829. The monitoring coordinate agrees with the source. The affected pages
+and the three UNIBA display readings are scheduled for a source-only high-effort
+reread after reset, before the general row population. No code
+chooses an identifier namespace or repairs a digit from result agreement.

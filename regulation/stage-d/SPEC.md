@@ -42,11 +42,95 @@ coordinate frame of the monitoring degree columns that check is
 `scripts/check_frames.py`, and `scripts/acquire_monitoring.py --campaign` derives
 the readings and runs it. Neither runs in CI, which has no store.
 
-Beside the blobs, `derived/` holds regenerable Parquet keyed by blob hash and
-reader version: lossless native occurrences and typed readings per blob. It is a
-cache, never an owner; a changed reader invalidates it, and deleting it costs
-one ingest. DuckDB reads it in process; no spatial predicate or legal reading
-moves into SQL.
+Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
+and typed readings remain Parquet keyed by source hash and reader version.
+Reports use compact JSON blocks and an assembled reading under source hash and
+extraction version. Exact-request raw model responses are cached separately so a
+changed deterministic projection can reuse them without another paid call.
+Model, prompt, page/context images, rendering settings and code version are named;
+no join change invalidates extraction. These are caches, not owners. Deleting
+report responses can incur new extraction cost, unlike replaying retained responses.
+
+Report acquisition-of-readings is explicit through `scripts/read_reports.py` with
+a spending cap and recorded token prices. Ordinary report consumption and joins
+never dispatch a model call. Partial readings retain recovered facts and identify
+unread pages/regions. Page dispositions and schema checks establish structural
+coverage only. Observation identity stays in `monitoring.distinct_observations`;
+report joins cannot redefine it from a cache directory, filename or code width.
+
+The extraction configuration records effort explicitly (default `medium` for
+Sonnet 5); thinking and response text share the reserved output-token allowance.
+Printed section membership uses `pN/heading`, with qualifiers scoped to
+`section:pN/heading`, so repeated section headings in a PDF do not become one
+section and section qualifiers do not become report-wide assertions. Both the
+original table-heading page and the latest headed page remain available during
+continuation reading. A source statement cannot cite a page that its extraction
+request did not supply. These constraints preserve provenance and scope; they do
+not certify the model's transcription or interpretation. Unique exact printed
+`§` markers link a section to its same-page note with recorded derivation; reused
+marks remain unresolved. A literal `(Pool)` suffix can expose the identifier
+component while retaining the complete cell and annotation. Neither derivation
+establishes individual-plant identity or verifies the proposed transcription.
+
+A sampling-date fact scoped only to its own section triggers one bounded,
+source-only reread at high effort. The prior proposed answer is not supplied to
+that reread. A failed or unaffordable reread preserves the original rows and
+names the remaining attachment limit. After a paired-page output overflow, the
+remaining pages of that document use single-page requests; single-page overflow
+still stops explicitly until geometric subdivision is implemented.
+
+Scanned pages receive a small affine rotation estimated from horizontal ink;
+native-text pages retain their original rendering. This changes the supplied
+image, never the source bytes. Deskew does not certify cell association. A
+transposed repeated display becomes sample rows only when its complete matrix
+equals a source-related companion table. Original axes and cell positions remain
+available. The join accepts repeated occurrences only when every recovered field,
+qualification and result agrees, and preserves all occurrences.
+
+For native identifier cells, ordinary consumption checks the retained extraction
+against the source cell, then reads its coordinate-sorted text. A changed order is
+used only when every non-whitespace character is conserved; original native text,
+cell bounds and derivation remain attached. This repairs displaced punctuation,
+not identifier origin or correspondence between different codes.
+
+Extraction permits one to three independent PDF processes under one shared,
+transaction-locked spending ledger. Returned usage and interrupted requests are
+different states. An explicit interrupted-request retry retains the full old
+reservation and reserves the new attempt separately; it does not claim invoice
+reconciliation. No saved successful response is retransmitted. Reader versions
+describe the implementation loaded into the process, avoiding cache mislabelling
+if source files change during a run.
+
+Reading issues survive both forward observation links and reverse report-row
+output. A limitation naming an exact table/column locator is attached to that
+field without interpreting keywords in its cause. At an identifier column this
+withholds the typed identity; its literal value remains candidate evidence.
+Issues whose scopes cannot be bound remain visible at report level, not silently
+resolved. This local projection does not certify the remaining role assignments.
+The C adapter rejects ambiguous selection, but not an otherwise eligible pair
+solely because its sampling date is unknown or other pages remain unread. Unread
+report scope leaves the selected result's qualified polarity unknown; independent
+inputs survive. Date-dependent consumers still require their own date evidence.
+
+Whole-document relationship acquisition uses `read_reports.py --relationships`.
+It supplies every physical page, keeps its response/request version separately
+from row extraction, and never retranscribes the tables. A protocol is a document
+registration identifier, not an analytical method or incoming delivery note.
+Unsupported protocol proposals remain visible without acquiring typed identity.
+A cache-only relationship graph follows explicitly supported replacements, retains
+history and unverified components, and rejects ambiguous or cyclic supersession.
+The graph is a proposed source reading, not legal adjudication. Bundled-document
+identity and amendment scope require further source resolution when not recovered.
+
+Native administrative association tables use printed header labels and verified
+annex continuity (consecutive physical pages/printed folios and the same ruled
+column boundaries). Unresolved fragments survive without fill-down. Source boxes
+map back to the immutable original. The report join may derive an occurrence
+correspondence from an observation's own report route plus an act's explicit
+report number, date, plant reference and unique matching coordinates at printed
+decimal precision. It preserves competing associations, distinct client codes and
+source access time; no positive-result filter selects a plant. An association is
+not an operative-act reading, a land-standing fact or proof of withdrawal.
 
 ## Implementation rule
 
