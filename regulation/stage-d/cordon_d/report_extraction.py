@@ -714,7 +714,9 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
     return target
 
 
-def extract_report(digest, store, *, config, budget, execute=True, continuation_from=None):
+def extract_report(digest, store, *, config, budget, execute=True, continuation_from=None, resume_from=None):
+    if continuation_from is not None and resume_from is not None:
+        raise ValueError('Choose page-reading resume or continuation repair, not both')
     if continuation_from is not None:
         return _repair_continuations(digest, store, extraction_version=continuation_from,
                                      config=config, budget=budget, execute=execute)
@@ -724,16 +726,52 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
     target = directory / 'report.json'
     if target.exists():
         saved = json.loads(target.read_text())
-        if saved.get('assembly_complete') is True and all(not b['targets'] or fully_read(b['reading']) for b in saved['blocks']):
+        if (saved.get('assembly_complete') is True
+                and (resume_from is None or saved.get('replayed_from_extraction_version') == resume_from)
+                and all(not b['targets'] or fully_read(b['reading']) for b in saved['blocks'])):
             return target
+    prior = None
+    if resume_from is not None:
+        prior = json.loads((store / 'derived/reports' / resume_from / digest / 'report.json').read_text())
+        if prior['source_sha256'] != digest or prior['extraction_version'] != resume_from:
+            raise ValueError('Resume reading identity does not match requested source/version')
+        if any(not item['targets'] for item in prior['blocks']):
+            raise ValueError('Continuation-only blocks require continuation repair, not page-reading resume')
     blocks, context, heading_context = [], set(), set()
     with pymupdf.open(blob_path(store, digest)) as document:
         page_count = len(document)
+        if prior is not None and prior['page_count'] != page_count:
+            raise ValueError('Resume page count differs from the retained source')
         def save(complete=False):
             write_json(target, {'source_sha256': digest, 'extraction_version': revision,
                                'page_count': page_count, 'config': asdict(config),
-                               'assembly_complete': complete, 'blocks': blocks})
+                               'assembly_complete': complete, 'blocks': blocks,
+                               **({'replayed_from_extraction_version': resume_from} if resume_from else {})})
         save()
+        def accept(item):
+            blocks.append(item)
+            context.update(item['reading']['context_pages'])
+            headed = [table['page'] for table in item['reading']['tables']
+                      if any(column['heading'] for column in table['columns'])]
+            if headed:
+                first_heading = min(heading_context | set(headed))
+                heading_context.clear()
+                heading_context.update((first_heading, max(headed)))
+            save()
+            logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': item['targets'],
+                'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
+        if prior is not None:
+            covered = set()
+            for item in prior['blocks']:
+                if not fully_read(item['reading']) or item.get('attachment_repair_pending'):
+                    continue
+                if covered.intersection(item['targets']):
+                    raise ValueError('Resume blocks overlap physical target pages')
+                validate_block(item['reading'], targets=item['targets'], page_count=page_count,
+                    native_cells=item['native_cells'], native_regions=item.get('native_regions', []),
+                    supplied_pages=item.get('supplied_pages', item['targets'] + item.get('context_pages', [])))
+                accept(item)
+                covered.update(item['targets'])
         def read(targets, continuation_review=None):
             supplied_context = context | heading_context
             pages = sorted(supplied_context | set(targets))
@@ -931,24 +969,15 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                 write_json(path, item)
                 if not fully_read(reading):
                     raise RuntimeError('Target page remains incomplete after source rereading')
-            blocks.append(item)
-            context.update(item['reading']['context_pages'])
-            headed = [table['page'] for table in item['reading']['tables']
-                      if any(column['heading'] for column in table['columns'])]
-            if headed:
-                # Supply the latest printed table header as evidence, without
-                # automatically assigning its meaning to a following table.
-                # Keep the original heading page too: a continuation's recovered
-                # headings do not prove that it physically reprints them.
-                first_heading = min(heading_context | set(headed))
-                heading_context.clear()
-                heading_context.update((first_heading, max(headed)))
-            save()
-            logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': targets,
-                'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
+            accept(item)
         first, width = 1, config.target_pages
         while first <= page_count:
-            targets = list(range(first, min(first + width, page_count + 1)))
+            covered = {page for item in blocks for page in item['targets']}
+            if first in covered:
+                first += 1
+                continue
+            end = min(first + width, page_count + 1)
+            targets = list(range(first, min([page for page in covered if first < page < end] or [end])))
             try:
                 read(targets)
             except OutputLimit as error:
@@ -966,6 +995,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                             'cause': str(single_error) + '; single-page geometric subdivision is not implemented'})
                         raise
             first += len(targets)
+        blocks.sort(key=lambda item: min(item['targets']))
         assembled = materialize(digest, revision, page_count, blocks)
         try:
             record_rows(assembled)

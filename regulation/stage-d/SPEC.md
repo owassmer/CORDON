@@ -48,7 +48,7 @@ Reports use compact JSON blocks and an assembled reading under source hash and
 extraction version. Exact-request raw model responses are cached separately so a
 changed deterministic projection can reuse them without another paid call.
 Model, prompt, page/context images, rendering settings and code version are named;
-no join change invalidates extraction. These are caches, not owners. Deleting
+no join change invalidates extraction. `extract_report(resume_from=...)` can retain validated, fully read page blocks from an explicitly selected prior version and request only uncovered pages. It preserves those blocks and their original request identifiers; a smaller configured page width applies only to the remaining reading. Incomplete page blocks are reread, and continuation-only repairs retain their separate existing entry point. These are caches, not owners. Deleting
 report responses can incur new extraction cost, unlike replaying retained responses.
 
 Report acquisition-of-readings is explicit through `scripts/read_reports.py` with
@@ -153,9 +153,16 @@ Whole-document relationship acquisition uses `read_reports.py --relationships`.
 It supplies every physical page, keeps its response/request version separately
 from row extraction, and never retranscribes the tables. A protocol is a document
 registration identifier, not an analytical method or incoming delivery note.
-Unsupported protocol proposals remain visible without acquiring typed identity.
+The source reader assigns that role. Deterministic projection checks only that the
+proposed identifier occurs within its own component quotation; spelling, prefixes
+and numeric shape cannot establish or reject administrative meaning. Unsupported
+proposals remain visible without acquiring typed identity.
 A cache-only relationship graph follows explicitly supported replacements, retains
 history and unverified components, and rejects ambiguous or cyclic supersession.
+The graph consumes every available relationship inventory, including documents
+whose sample rows remain unread. Row materialization is limited to documents
+reached by the observation routes and that graph; an unread replacement cannot
+make its predecessor eligible.
 Every competing branch from a rendition's replacement ancestry must explicitly
 reach that rendition before it can be current. Extending one branch cannot settle
 the fork, and the observation's entry route cannot change this determination.

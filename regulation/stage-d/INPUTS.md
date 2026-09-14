@@ -169,7 +169,9 @@ What the population shows, read and not reconciled:
 ## Laboratory reports
 
 The retained population comprises 1,910 captures with source bytes and 1,180 distinct PDFs.
-Page and relationship readings continue through the subscription in the background.
+PR #7 supplies the accepted reader and join implementation. The laboratory lane owns completion of this row on successor PR #18. Page and relationship readings continue through the subscription in the background; stopped sources and available joins are repaired concurrently, without waiting for the whole queue.
+
+The stopped SELGE protocol 17/2018 reading now supplies all 104 sample rows across five pages, with 208 positive test occurrences and 104 forward and reverse observation links verified against the original pages. CNR 65/2024 now supports the three formerly pending annex correspondences (1669854, 1669920, 1669995); printed host names retain their meaning across line wrapping. The four other pending annex observations (1668283, 1669711, 1672360, 1675006) await the already-retained CNR 62/2024, 68F/2024, 70F/2024 and 75F/2024 readings in this lane. These are reading work, not external recovery requests.
 The bounded recovered-source and continuation consumer results below describe what
 has been verified; they do not establish completion of the retained population or
 official confirmation. Whole-population reading and ordinary joins remain required.
@@ -257,8 +259,8 @@ identified associations. All seven page-boundary fragments have been visually
 reconciled: they complete host/zone cells of the preceding row. The reader derives
 continuation only across the same annex, consecutive physical and printed pages,
 matching columns and blank identity cells, retaining both cell locations. All 183
-associations survive; no fragment is treated as another plant. The seven affected
-observation joins currently still need their laboratory report readings.
+associations survive; no fragment is treated as another plant. Three affected observation joins now consume CNR 65/2024; the other four await
+the retained laboratory readings identified above.
 An act can establish a derived occurrence correspondence without equating different
 literal identifier strings. The older CNR73F act association conflicts with its report
 row; the corrected report and later act agree. Laboratory replacement does not prove

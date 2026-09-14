@@ -82,22 +82,20 @@ def norm(value):
 
 
 def project_identity(identity):
-    """Keep protocol proposals separate unless an explicit registration label supports them.
+    """Preserve the reader's role assignment when its own component quote supports it.
 
-    This guard recognizes the numeric registration notation of the admitted sources;
-    it does not extract a different code or interpret a laboratory method as identity.
-    Other notation remains a proposal with a named reading limit.
+    Identifier spelling cannot establish administrative versus analytical meaning.
+    The document reader supplies that interpretation; this projection only checks
+    that the proposed value is attached to a single quotation for this component.
     """
     identity = dict(identity)
     value = identity.get('protocol')
     if value:
-        numeric = r"(?:prot\.?|protocollo)?\s*(?:cnr\s*)?(?:n\.?\s*)?[0-9]+(?:/[0-9]+)?(?:\s+del\s+[0-9/.-]+)?"
-        quotes = ' '.join(norm(s['text']) for s in identity['support'])
-        labelled = re.search(r'\b(?:prot\.|protocollo)\s*(?:cnr\s*)?(?:n\.?\s*)?[0-9]', quotes)
-        if not re.fullmatch(numeric, norm(value)) or not labelled or norm(value) not in quotes:
+        support = identity.get('component_support', {}).get('protocol', [])
+        if not any(norm(value) in norm(item.get('text')) for item in support):
             identity['protocol_proposal'] = value
             identity['protocol'] = None
-            identity['protocol_cause'] = 'administrative registration identity not established by supported numeric notation and a registration-labelled quotation'
+            identity['protocol_cause'] = 'protocol value lacks its own supporting component quotation'
     return identity
 
 
