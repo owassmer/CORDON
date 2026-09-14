@@ -52,8 +52,8 @@
         "http://cartografia.sit.puglia.it/doc/xylella/ (subspecies-identification rapporti)"
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
-      "reader": "cordon_d.reports and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "Population reading and semantic verification remain open on INPUTS.md row 2: published and predecessor-route failures, identifier origin/client-code correspondence, unbound reading limitations, correction predecessor/scope/event-time resolution and proposed date-role errors. Bounded scan-date and repeated-display comparisons pass. Review withdrew the earlier CNR73-to-C handoff; explicit identifier uncertainty now prevents that relationship. Legal qualifications remain with their contract owners."
+      "reader": "cordon_d.reports, cordon_d.report_relations and cordon_d.findings; explicit extraction through scripts/read_reports.py",
+      "open": "Population reading, unbound qualifications and multi-document identity/scope remain incomplete. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. Source and access limits are owned by INPUTS.md row 2."
     },
     {
       "id": "official-areas",
@@ -99,11 +99,12 @@
       ],
       "routes": [
         "https://burp.regione.puglia.it/bollettini",
-        "https://www.regione.puglia.it/documents/736605/"
+        "https://www.regione.puglia.it/documents/736605/",
+        "https://cartografia.sit.puglia.it/doc/xylella/ (determinations reached from admitted report identities)"
       ],
       "population": "Every Osservatorio determination required by an admitted finding or by a correction relationship reached from it.",
-      "reader": "Not yet implemented after the D purge",
-      "open": "Reacquire the admitted originals and implement one general reader across the population. Prescription means the Osservatorio's formal direction to remove named plants or parcels."
+      "reader": "cordon_d.source_associations for native plant/report annex associations; whole-act operative reading remains unimplemented",
+      "open": "Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
     },
     {
       "id": "notice-and-response-records",

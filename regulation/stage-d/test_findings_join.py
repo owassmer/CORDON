@@ -18,7 +18,7 @@ from test_reports import block
 
 class JoinIdentity(unittest.TestCase):
     def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
-                 repeated=False, repetition_support=True, differing_repeat=False, reading_issues=()):
+                 repeated=False, repetition_support=True, differing_repeat=False, reading_issues=(), replacement=None, association_rows=()):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
@@ -59,32 +59,160 @@ class JoinIdentity(unittest.TestCase):
                     item['reading']['facts'].append({'id': 'repeat', 'role': 'repeated_representation',
                         'page': 1, 'locator': 'shared heading', 'text': 'Risultati dei campioni',
                         'applies_to': ['p1-t1', 'p1-t2']})
+            if association_rows:
+                table = item['reading']['tables'][0]
+                for role, value in (('latitude', '41.123456789'), ('longitude', '16.987654321'),
+                                    ('host', 'Vite europea')):
+                    table['columns'].append(dict(table['columns'][0], role=role, heading=[role]))
+                    for row in table['rows']:
+                        row['cells'].append({'text': value})
             cache.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'v',
                 'page_count': 1, 'blocks': [item]}))
+            from cordon_d import report_relations
+            from test_report_relations import reading
+            relation_cache = report_relations.path(store, digest)
+            relation_cache.parent.mkdir(parents=True, exist_ok=True)
+            relation_cache.write_text(json.dumps({'source_sha256': digest,
+                'reading_version': report_relations.READING_VERSION, 'complete': True,
+                'reading': reading().relations}))
+            if second_version:
+                relation_cache = report_relations.path(store, other)
+                relation_cache.parent.mkdir(parents=True, exist_ok=True)
+                relation_cache.write_text(json.dumps({'source_sha256': other,
+                    'reading_version': report_relations.READING_VERSION, 'complete': True,
+                    'reading': reading().relations}))
+            if replacement:
+                from cordon_d import report_relations
+                from test_report_relations import reading
+                successor = put_bytes(store, b'%PDF-replacement-source')
+                captures.append({'url': route if replacement == 'same_route' else 'https://publisher.example/revised.pdf',
+                    'captured_at': '2026-01-02T00:00:00+00:00', 'sha256': successor})
+                (reports / 'records.json').write_text(json.dumps(captures))
+                new_cache = cache.parents[1] / successor / 'report.json'
+                new_cache.parent.mkdir(parents=True)
+                payload = json.loads(cache.read_text()); payload['source_sha256'] = successor
+                new_cache.write_text(json.dumps(payload))
+                previous = reading().relations
+                target = dict(previous['identity'])
+                if replacement == 'missing_protocol':
+                    target['protocol'] = '170245'
+                later = reading(date='04/03/2024', previous=target,
+                                effect='amends' if replacement == 'amends' else 'replaces').relations
+                for key, value in ((digest, previous), (successor, later)):
+                    relation_cache = report_relations.path(store, key)
+                    relation_cache.parent.mkdir(parents=True, exist_ok=True)
+                    relation_cache.write_text(json.dumps({'source_sha256': key,
+                        'reading_version': report_relations.READING_VERSION, 'complete': True,
+                        'reading': value}))
             return list(findings(distinct_observations(monitoring), reports, store,
-                                extraction_version='v', known_through=cutoff or datetime(2026, 2, 1, tzinfo=timezone.utc)))
+                                extraction_version='v', known_through=cutoff or datetime(2026, 2, 1, tzinfo=timezone.utc),
+                                association_readings=association_rows))
+
+    def association(self, reference='public-9', longitude='16.98765432',
+                    report_reference='31/2024 Laboratory A', host='Vite europea (Vitis L.)'):
+        from types import SimpleNamespace
+        fields = {key: {'text': value} for key, value in dict(plant_id=reference,
+            report_reference=report_reference, report_date='01/03/2024', host=host,
+            latitude='41.12345679', longitude=longitude).items()}
+        return SimpleNamespace(rows=[dict(source_sha256='act-source', page=2, table=1, row=1,
+            fields=fields, issues=[], basis={'kind': 'printed_header'})], issues=[], scope='native association table')
+
+    def test_explicit_act_association_can_relate_distinct_client_code_without_aliasing(self):
+        joined = self.run_join([['public-9', '2024-06-01']],
+            [['client-4', '01/06/2024', 'Negativo', '02/06/2024']],
+            association_rows=[self.association()])[0]
+        self.assertEqual(len(joined['matches']), 1)
+        match = joined['matches'][0]
+        self.assertEqual(match['row'].reference, 'client-4')
+        self.assertIn('derived occurrence', match['identity_basis'])
+        self.assertEqual(joined['observation'].reference, 'public-9')
+        self.assertEqual(match['row'].results[0].kind, 'negative')
+
+    def test_conflicting_act_association_is_not_selected_away(self):
+        joined = self.run_join([['public-9', '2024-06-01']],
+            [['client-4', '01/06/2024', 'Positivo', '02/06/2024']],
+            association_rows=[self.association(), self.association(longitude='16.11111111')])[0]
+        self.assertFalse(joined['matches'])
+        self.assertEqual(len(joined['links'][0]['source_associations']), 2)
+
+    def test_association_requires_source_supported_issuer_label(self):
+        joined = self.run_join([['public-9', '2024-06-01']],
+            [['client-4', '01/06/2024', 'Negativo', '02/06/2024']],
+            association_rows=[self.association(report_reference='31/2024 Other Laboratory')])[0]
+        self.assertFalse(joined['matches'])
+        self.assertEqual(joined['links'][0]['source_associations'], [])
+
+    def test_conflicting_host_withholds_administrative_correspondence(self):
+        joined = self.run_join([['public-9', '2024-06-01']],
+            [['public-9', '01/06/2024', 'Negativo', '02/06/2024']],
+            association_rows=[self.association(host='Mandorlo (Prunus dulcis)')])[0]
+        self.assertFalse(joined['matches'])
+        self.assertIn('host', joined['links'][0]['candidates'][0]['association_cause'])
+
+    def test_act_conflict_with_identical_id_is_exposed_and_withholds_match(self):
+        joined = self.run_join([['public-9', '2024-06-01']],
+            [['public-9', '01/06/2024', 'Positivo', '02/06/2024']],
+            association_rows=[self.association(longitude='16.11111111')])[0]
+        self.assertFalse(joined['matches'])
+        self.assertIn('conflicts', joined['links'][0]['candidates'][0]['association_cause'])
+
+    def test_same_report_coordinates_do_not_disambiguate_two_sample_rows(self):
+        joined = self.run_join([['public-9', '2024-06-01']],
+            [['client-4', '01/06/2024', 'Positivo', '02/06/2024'],
+             ['client-5', '01/06/2024', 'Negativo', '02/06/2024']],
+            association_rows=[self.association()])[0]
+        self.assertFalse(joined['matches'])
+        self.assertIn('several eligible source-row', joined['status'])
+
+    def test_replacement_is_followed_through_original_route_and_keeps_history(self):
+        joined = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']], replacement='replaces')[0]
+        self.assertEqual(len(joined['matches']), 1)
+        original = next(link for link in joined['links'] if not link['replacement_chain'])
+        successor = next(link for link in joined['links'] if link['replacement_chain'])
+        self.assertIn('historical', original['document_cause'])
+        self.assertEqual(joined['matches'][0]['key'][0], successor['sha256'])
+        self.assertNotEqual(successor['sha256'], original['sha256'])
+
+    def test_explicit_replacement_resolves_renditions_captured_on_same_route(self):
+        joined = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']], replacement='same_route')[0]
+        self.assertEqual(len(joined['matches']), 1)
+        self.assertFalse(any(link['rendition_ambiguity'] for link in joined['links']))
+
+    def test_replacement_after_cutoff_does_not_rewrite_earlier_snapshot(self):
+        joined = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']], replacement='replaces',
+            cutoff=datetime(2026, 1, 1, 12, tzinfo=timezone.utc))[0]
+        self.assertEqual(len(joined['matches']), 1)
+        self.assertFalse(joined['links'][0]['replacement_chain'])
+        self.assertIsNone(joined['links'][0]['document_cause'])
+
+    def test_amendment_does_not_silently_select_an_unamended_row(self):
+        joined = self.run_join([['123', '2024-06-01']],
+            [['123', '01/06/2024', 'Positivo', '02/06/2024']], replacement='amends')[0]
+        self.assertFalse(joined['matches'])
+        self.assertIn('amendment scope', joined['links'][0]['document_cause'])
 
     def test_a_unique_route_reference_and_day_match(self):
         result = self.run_join([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
         self.assertEqual(result[0]['status'], 'matched')
         self.assertEqual(result[0]['matches'][0]['temporal'], 'agrees')
 
-    def test_uncertain_identifier_stays_candidate_with_issues_in_both_directions(self):
+    def test_literal_identifier_matches_while_assignment_authority_stays_unresolved(self):
         issue = {'scope': 'p1-t1/c1 (ID)', 'cause': 'Identifier origin is unresolved.'}
         values = [['123', '01/06/2024', 'Positivo', '02/06/2024']]
         result = self.run_join([['123', '2024-06-01']], values, reading_issues=[issue])[0]
-        self.assertFalse(result['matches'])
+        self.assertEqual(result['status'], 'matched')
         candidate = result['links'][0]['candidates'][0]
         self.assertEqual(candidate['row'].candidate_reference, '123')
         self.assertIsNone(candidate['row'].reference)
-        self.assertTrue(candidate['identity_cause'])
+        self.assertIsNone(candidate['identity_cause'])
         self.assertIn(issue, result['links'][0]['reading_issues'])
         item = block(values); item['reading']['issues'] = [issue]
         reverse = list(reverse_rows([materialize('hash', 'v', 1, [item])], []))[0]
         self.assertIn(issue, reverse['reading_issues'])
         self.assertTrue(reverse['row'].cells[0]['role_cause'])
-        with self.assertRaises(ValueError):
-            confirmation_inputs(result, result_pair=[('hash', 'a'), ('hash', 'b')], qualification={})
 
     def test_repeated_representation_keeps_both_occurrences_and_requires_all_fields(self):
         args = ([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])

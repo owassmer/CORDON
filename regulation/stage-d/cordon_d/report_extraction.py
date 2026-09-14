@@ -2,7 +2,7 @@
 import base64
 from contextlib import contextmanager
 import fcntl
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from datetime import datetime, timezone
 from decimal import Decimal
 from hashlib import sha256
@@ -11,6 +11,7 @@ import logging
 import os
 from pathlib import Path
 import subprocess
+from tempfile import TemporaryDirectory
 
 import requests
 
@@ -24,6 +25,7 @@ from .store import blob_path
 class ExtractionConfig:
     model: str = 'claude-sonnet-5'
     effort: str = 'medium'
+    provider: str = 'api'
     target_pages: int = 2
     dpi: int = 180
     max_tokens: int = 18000
@@ -40,8 +42,10 @@ Return only JSON with keys pages, tables, facts, issues, context_pages.
 pages: [{page: physical integer, disposition: read|partly_read|unreadable}].
 tables: [{id: unique pN-tN label, page: physical integer,
  columns: [{heading: [complete printed parent, child headings],
- role: publisher_id|laboratory_id|pool_id|extract_id|sampling_date|test_date|host|
+ role: identifier|publisher_id|laboratory_id|pool_id|extract_id|sampling_date|test_date|host|
  municipality|latitude|longitude|result|other,
+ identifier_authority: publisher|laboratory|null,
+ authority_support: [{page, locator, text: literal statement establishing who assigned it}],
  test: literal designation or null, analyte: literal analyte or null,
  support: [{page, locator, text: literal heading or qualifying statement}]}],
  rows: [{id: unique row label within table, cells: [cell, ...]}]}].
@@ -52,9 +56,12 @@ examined_scope. A blank field is not proof an entire report lacks the fact.
 Keep dates separate from results, including under a common analysis heading.
 Keep identifiers as strings, with leading zeros. Preserve every row occurrence,
 negative results, literal invalid dates, exact coordinate strings and all columns.
-Publisher_id means the sample identifier supplied by the client/monitoring publisher.
-Laboratory_id means an identifier the source establishes as assigned by the laboratory.
-An Id marked client-provided is publisher_id, not laboratory_id. Envelope/bag,
+Use identifier for a literal sample/plant ID even when the source does not establish
+who assigned it. Keep that separate question in identifier_authority; null is correct
+when assignment authority is unstated. Publisher_id and laboratory_id are retained
+only when the source expressly identifies that authority. An Id marked client-provided
+is publisher_id. Do not add an issue solely because identifier_authority is null.
+Envelope/bag,
 team, protocol and counter codes are other unless a source explicitly establishes
 sample correspondence. Do not infer a role merely because the PDF is a lab report.
 For an annotated publisher ID, keep the entire cell literal and optionally return
@@ -129,6 +136,8 @@ def output_schema():
     region = obj({'native_table': string, 'disposition': {'enum': ['represented', 'not_sample_table', 'not_recovered']},
                   'output_tables': array(string), 'cause': string})
     column = obj({'heading': array(string), 'role': {'enum': sorted(ROLES)},
+                  'identifier_authority': {'enum': ['publisher', 'laboratory', None]},
+                  'authority_support': array(support),
                   'test': nullable, 'analyte': nullable, 'support': array(support)})
     cell = obj({'text': nullable, 'native_cell': string, 'cause': string, 'examined_scope': string,
                 'identifier': string, 'annotation': string}, [])
@@ -391,6 +400,49 @@ def _call(request, *, config, budget, request_id, raw_path):
         budget.dispatch_finished(request_id)
 
 
+def _subscription_call(*, prompt, schema, digest, source, config, request_id, raw_path):
+    """Read one retained PDF through the authenticated Claude subscription."""
+    if config.provider != 'subscription':
+        raise RuntimeError('Subscription execution was not selected')
+    with TemporaryDirectory(prefix='cordon-claude-') as directory:
+        pdf = Path(directory) / f'{digest}.pdf'
+        pdf.symlink_to(source)
+        instruction = (prompt + f'\nRead the original PDF at {pdf}. Physical page numbers start at 1. '
+                       'Return the structured result only after reading every requested page.')
+        command = [
+            'claude', '-p', '--model', config.model, '--effort', config.effort,
+            '--system-prompt', ('You read one named local source document and return only '
+                'schema-conforming source facts. Use Read only on that source. Do not search, '
+                'write, delegate, or inspect the repository.'),
+            '--disable-slash-commands', '--strict-mcp-config', '--no-chrome',
+            '--tools', 'Read', '--allowedTools', 'Read', '--permission-mode', 'dontAsk',
+            '--add-dir', directory, '--no-session-persistence', '--output-format', 'json',
+            '--json-schema', json.dumps(schema, sort_keys=True), instruction]
+        completed = subprocess.run(command, capture_output=True, text=True,
+                                   timeout=config.timeout_seconds)
+    try:
+        envelope = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise RuntimeError('Claude subscription returned no JSON envelope: ' + completed.stderr.strip()) from error
+    write_json(raw_path, {'provider': 'claude-code-subscription', 'request_sha256': request_id,
+                         'captured_at': datetime.now(timezone.utc).isoformat(),
+                         'response': envelope})
+    if completed.returncode or envelope.get('is_error') or not isinstance(envelope.get('structured_output'), dict):
+        reason = envelope.get('errors') or envelope.get('result') or completed.stderr.strip()
+        raise RuntimeError('Claude subscription reading incomplete: ' + str(reason))
+    return envelope['structured_output']
+
+
+def _retained_reading(raw_path, model):
+    payload = json.loads(raw_path.read_text())
+    if payload.get('provider') == 'claude-code-subscription':
+        reading = payload.get('response', {}).get('structured_output')
+        if not isinstance(reading, dict):
+            raise ValueError('Retained subscription response has no structured reading')
+        return reading
+    return response_reading(payload['response'], model)
+
+
 
 def target_reading(reading, targets, context):
     """Discard only dispositions for explicitly supplied context; retain the raw response."""
@@ -398,6 +450,99 @@ def target_reading(reading, targets, context):
     if not extra <= set(context):
         raise ValueError('Response names an unsupplied page')
     return dict(reading, pages=[p for p in reading['pages'] if p['page'] in targets])
+
+
+def extract_relationships(digest, store, *, config, budget):
+    """Read document identities and operative references without retranscribing tables."""
+    import pymupdf
+    from . import report_relations as relations
+    target = relations.path(store, digest)
+    if ((existing := relations.load(store, digest, exact=True))
+            and existing.get('reading_complete') is True):
+        return target.parent.parent / existing['reading_version'] / target.name
+    content, page_text = [], []
+    with pymupdf.open(blob_path(store, digest)) as document:
+        for number, page in enumerate(document, 1):
+            native = page.get_text(sort=True)
+            page_text.append(native)
+            content.append({'type': 'text', 'text': f'PHYSICAL PAGE {number}\n' + native})
+            png = page.get_pixmap(dpi=config.dpi).tobytes('png')
+            content.append({'type': 'image', 'source': {'type': 'base64',
+                'media_type': 'image/png', 'data': base64.b64encode(png).decode()}})
+    content.append({'type': 'text', 'text': relations.PROMPT})
+    request = {'model': config.model, 'max_tokens': config.max_tokens,
+        'messages': [{'role': 'user', 'content': content}],
+        'output_config': {'effort': config.effort, 'format': {'type': 'json_schema', 'schema': relations.schema()}}}
+    subscription_prompt = '\n\n'.join(item['text'] for item in content if item['type'] == 'text')
+    request_identity = (request if config.provider == 'api' else {
+        'provider': 'claude-code-subscription', 'model': config.model, 'effort': config.effort,
+        'source_sha256': digest, 'prompt': subscription_prompt, 'schema': relations.schema()})
+    request_id = sha256(json.dumps(request_identity, sort_keys=True).encode()).hexdigest()
+    raw = store / 'derived/reports/responses' / (request_id + '.json')
+    reading_version = relations.READING_VERSION
+    if config.provider == 'api' and not raw.exists():
+        # Exact-request replay of the previous prompt never relabels its provenance.
+        previous = dict(request, messages=[{'role': 'user', 'content': [
+            *content[:-1], {'type': 'text', 'text': relations.PREVIOUS_PROMPT}]}])
+        previous_id = sha256(json.dumps(previous, sort_keys=True).encode()).hexdigest()
+        previous_raw = raw.with_name(previous_id + '.json')
+        if previous_raw.exists():
+            raw, request_id = previous_raw, previous_id
+            reading_version = relations.PREVIOUS_READING_VERSION
+            target = target.parent.parent / reading_version / target.name
+    complete = True
+    try:
+        if raw.exists():
+            reading = _retained_reading(raw, config.model)
+        elif config.provider == 'subscription':
+            reading = _subscription_call(prompt=subscription_prompt, schema=relations.schema(), digest=digest,
+                source=blob_path(store, digest), config=config, request_id=request_id, raw_path=raw)
+        else:
+            reading = _call(request, config=config, budget=budget, request_id=request_id, raw_path=raw)
+    except ValueError:
+        if not raw.exists():
+            raise
+        payload = json.loads(raw.read_text())
+        if payload.get('provider') == 'claude-code-subscription':
+            raise
+        body = payload['response']
+        text = ''.join(part.get('text', '') for part in body.get('content', []))
+        # A complete JSON identity can survive an incomplete trailing relationship list.
+        # This does not reinterpret a refusal as a complete source reading or retry it.
+        import re
+        prefix = re.match(r'^\s*\{\s*"identity"\s*:\s*', text)
+        if body.get('stop_reason') not in {'refusal', 'max_tokens'} or not prefix:
+            raise
+        identity, _ = json.JSONDecoder().raw_decode(text[prefix.end():])
+        reading = {'identity': identity, 'corrections': [], 'limitations': [
+            f"Generation stopped ({body['stop_reason']}); only its complete identity object recovered; correction inventory unread"]}
+        complete = False
+    reading, rejected = relations.validated_components(reading, page_text)
+    if rejected and config.provider == 'subscription':
+        repair_prompt = (subscription_prompt + '\n\nRead the complete source afresh. The prior proposal failed '
+            'local source checks for these reasons: ' + '; '.join(rejected) +
+            '. Correct those defects without dropping any identity or correction relationship. '
+            'Every support quote must be exact and contiguous in the cited physical page.')
+        repair_config = replace(config, effort='high')
+        repair_identity = {'provider': 'claude-code-subscription', 'model': repair_config.model,
+            'effort': repair_config.effort, 'source_sha256': digest, 'prompt': repair_prompt,
+            'schema': relations.schema()}
+        repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
+        repair_raw = store / 'derived/reports/responses' / (repair_id + '.json')
+        candidate = (_retained_reading(repair_raw, repair_config.model) if repair_raw.exists() else
+            _subscription_call(prompt=repair_prompt, schema=relations.schema(), digest=digest,
+                source=blob_path(store, digest), config=repair_config,
+                request_id=repair_id, raw_path=repair_raw))
+        reading, rejected = relations.validated_components(candidate, page_text)
+        request_id = repair_id
+    complete = complete and not rejected
+    write_json(target, {'source_sha256': digest, 'reading_version': reading_version,
+        'request_sha256': request_id, 'model': config.model, 'effort': config.effort,
+        'provider': config.provider,
+        'complete': complete, 'reading': reading})
+    if not complete:
+        raise RuntimeError('Relationship inventory failed source validation; incomplete reading retained for diagnosis')
+    return target
 
 
 def extract_report(digest, store, *, config, budget):
@@ -424,7 +569,13 @@ def extract_report(digest, store, *, config, budget):
             legacy_id = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
             request['output_config'] = {'effort': config.effort,
                                        'format': {'type': 'json_schema', 'schema': output_schema()}}
-            request_id = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
+            subscription_prompt = '\n\n'.join(item['text'] for item in content if item['type'] == 'text')
+            request_identity = (request if config.provider == 'api' else {
+                'provider': 'claude-code-subscription', 'model': config.model,
+                'effort': config.effort, 'source_sha256': digest, 'target_pages': targets,
+                'context_pages': sorted(supplied_context), 'prompt': subscription_prompt,
+                'schema': output_schema()})
+            request_id = sha256(json.dumps(request_identity, sort_keys=True).encode()).hexdigest()
             path = directory / 'blocks' / f'{request_id}.json'
             cached = json.loads(path.read_text()) if path.exists() else None
             if cached and not cached.get('attachment_repair_pending'):
@@ -432,7 +583,7 @@ def extract_report(digest, store, *, config, budget):
             else:
                 reading, reused = None, None
                 legacy = store / 'derived/reports/responses' / f'{legacy_id}.json'
-                if config.effort == 'high' and legacy.exists():
+                if config.provider == 'api' and config.effort == 'high' and legacy.exists():
                     try:
                         candidate = target_reading(response_reading(json.loads(legacy.read_text())['response'], config.model), targets, supplied_context)
                         validate_block(candidate, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
@@ -444,7 +595,11 @@ def extract_report(digest, store, *, config, budget):
                 if reading is None:
                     raw_path = store / 'derived/reports/responses' / f'{request_id}.json'
                     if raw_path.exists():
-                        reading = response_reading(json.loads(raw_path.read_text())['response'], config.model)
+                        reading = _retained_reading(raw_path, config.model)
+                    elif config.provider == 'subscription':
+                        reading = _subscription_call(prompt=subscription_prompt, schema=output_schema(),
+                            digest=digest, source=blob_path(store, digest), config=config,
+                            request_id=request_id, raw_path=raw_path)
                     else:
                         reading = _call(request, config=config, budget=budget,
                                         request_id=request_id, raw_path=raw_path)
@@ -463,12 +618,23 @@ def extract_report(digest, store, *, config, budget):
                     repair = dict(request, output_config=dict(request['output_config'], effort=effort),
                         messages=[{'role': 'user', 'content': content + [
                             {'type': 'text', 'text': instruction}]}])
-                    repair_id = sha256(json.dumps(repair, sort_keys=True).encode()).hexdigest()
+                    repair_prompt = subscription_prompt + '\n\n' + instruction
+                    repair_identity = (repair if config.provider == 'api' else {
+                        'provider': 'claude-code-subscription', 'model': config.model,
+                        'effort': effort, 'source_sha256': digest, 'target_pages': targets,
+                        'context_pages': sorted(supplied_context), 'prompt': repair_prompt,
+                        'schema': output_schema()})
+                    repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
                     raw_path = store / 'derived/reports/responses' / f'{repair_id}.json'
                     prior_reading = reading
                     try:
                         if raw_path.exists():
-                            reading = response_reading(json.loads(raw_path.read_text())['response'], config.model)
+                            reading = _retained_reading(raw_path, config.model)
+                        elif config.provider == 'subscription':
+                            reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
+                                digest=digest, source=blob_path(store, digest),
+                                config=replace(config, effort=effort), request_id=repair_id,
+                                raw_path=raw_path)
                         else:
                             reading = _call(repair, config=config, budget=budget,
                                             request_id=repair_id, raw_path=raw_path)

@@ -1,11 +1,14 @@
 """Attach literal report rows to the accepted distinct-observation stream."""
 from collections import defaultdict
 from datetime import datetime
+from decimal import Decimal, InvalidOperation
+import re
 import json
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, report
+from .report_relations import correspondences, related, replacements, current_limitation, norm, dated
 
 
 def document_name(route):
@@ -82,7 +85,70 @@ def _repeated_representations(candidates):
     return first is not None and all(values(r) == first for r in rows[1:])
 
 
-def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through):
+def _coordinate_relation(row, association):
+    """Compare literal pairs at the administrative source's printed precision.
+
+    This is derived occurrence evidence inside an explicitly named report, never
+    a free spatial join or a declaration that two identifier strings are aliases.
+    """
+    for role in ('latitude', 'longitude'):
+        cells = [c for c in row.cells if c['role'] == role]
+        if any(c.get('role_cause') or c.get('reading_issues') for c in cells):
+            return 'unresolved'
+        values = [c['text'] for c in cells if c.get('text') is not None]
+        printed = association['fields'].get(role, {}).get('text')
+        if len(values) != 1 or not printed:
+            return 'unresolved'
+        try:
+            expected = Decimal(''.join(printed.split()).replace(',', '.'))
+            actual = Decimal(''.join(values[0].split()).replace(',', '.'))
+            if not expected.is_finite() or not actual.is_finite():
+                return 'unresolved'
+            # A reported integer coordinate is insufficient precision for this relation.
+            if expected.as_tuple().exponent >= 0:
+                return 'unresolved'
+            if abs(actual - expected) > Decimal(5).scaleb(expected.as_tuple().exponent - 1):
+                return 'conflicts'
+        except InvalidOperation:
+            return 'unresolved'
+    return 'agrees at published decimal precision'
+
+
+def _associations(reading, records):
+    if not reading.relations:
+        return []
+    identity = reading.relations['identity']
+    number, day = identity.get('number'), dated(identity.get('date'))
+    if not number or not day:
+        return []
+    labels = [label['value'] for label in identity.get('issuer_labels', [])]
+    primary_tokens = re.findall(r'(?<!\w)[A-ZÀ-ÖØ-Þ]{2,}(?!\w)', identity.get('issuer') or '')
+    labels.extend(primary_tokens)
+    result = []
+    for record in records:
+        fields = record['fields']
+        reference = fields.get('report_reference', {}).get('text', '')
+        literal_issuer = any(re.search(r'(?<!\w)' + re.escape(norm(label)) + r'(?!\w)', norm(reference))
+                             for label in labels if norm(label))
+        if (literal_issuer
+                and re.search(r'(?<![\w/])' + re.escape(norm(number)) + r'(?![\w/])', norm(reference))
+                and dated(''.join(fields.get('report_date', {}).get('text', '').split())) == day):
+            result.append(record)
+    return result
+
+
+def _host_relation(row, association):
+    printed = association['fields'].get('host', {}).get('text')
+    if not printed:
+        return 'not supplied by administrative association'
+    values = [cell['text'] for cell in row.cells if cell['role'] == 'host' and cell.get('text') is not None]
+    if len(values) != 1:
+        return 'unresolved'
+    base = lambda value: norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))
+    return 'agrees on printed host' if base(values[0]) == base(printed) else 'conflicts'
+
+
+def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through, association_readings=()):
     """One output per accepted observation identity; unresolved candidates never disappear.
 
     Index only routed observations. The caller supplies the full accepted stream.
@@ -96,13 +162,21 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                 by_name[document_name(route)].add(digest)
                 if digest not in readings:
                     readings[digest] = report(digest, store, extraction_version=extraction_version)
+    edges = correspondences(readings)
+    association_index = defaultdict(list)
+    for source in association_readings:
+        for association in source.rows:
+            reference = ''.join(association['fields'].get('plant_id', {}).get('text', '').split())
+            if reference:
+                association_index[reference].append(dict(association,
+                    reading_issues=source.issues, reading_scope=source.scope))
     row_index = {}
     for digest, reading in readings.items():
         if isinstance(reading, Report):
             index = defaultdict(list)
             for row in reading.rows:
-                if row.candidate_reference is not None:
-                    index[row.candidate_reference].append(row)
+                for identifier in row.identifiers:
+                    index[identifier].append(row)
             row_index[digest] = index
     routed, reverse = [], defaultdict(set)
     for group in groups:
@@ -121,36 +195,84 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         'status': 'source route not acquired at knowledge cutoff',
                         'alternative_candidates': sorted(by_name.get(document_name(route), set()))})
                     continue
-                for digest in sorted(digests):
+                superseded = {e['predecessor'] for e in edges
+                              if e['effect'] == 'replaces' and e['status'] == 'resolved'}
+                destinations = {}
+                for routed_digest in sorted(digests):
+                    for destination, chain in replacements(edges, routed_digest).items():
+                        destinations.setdefault(destination, chain)
+                rendition_ambiguity = len(set(destinations) - superseded) > 1
+                for digest, chain in sorted(destinations.items()):
                     reading = readings[digest]
                     link = {'route': route, 'route_field': route_field, 'member': member, 'sha256': digest, 'candidates': [],
-                            'rendition_ambiguity': len(digests) > 1}
+                            'rendition_ambiguity': rendition_ambiguity}
                     output['links'].append(link)
+                    link['document_relationships'] = related(edges, digest)
+                    link['replacement_chain'] = chain
+                    link['document_cause'] = current_limitation(edges, digest)
                     if not isinstance(reading, Report):
                         link['status'] = reading.cause
                         continue
                     link['reading_issues'] = reading.issues
+                    link['relationship_reading'] = reading.relations
+                    if reading.relations is None:
+                        link['document_cause'] = 'current relationship inventory unread'
+                    elif reading.relations.get('reading_complete') is not True:
+                        link['document_cause'] = 'current relationship inventory incomplete'
                     if not group.correlatable:
                         link['status'] = group.uncorrelated_because or 'observation identity unresolved'
                         continue
-                    rows = row_index[digest].get(group.reference, [])
+                    source_links = _associations(reading, association_index.get(group.reference, []))
+                    link['source_associations'] = source_links
+                    coordinate_links = {row.locator: [_coordinate_relation(row, a) for a in source_links]
+                                        for row in reading.rows} if source_links else {}
+                    host_links = {row.locator: [_host_relation(row, a) for a in source_links]
+                                  for row in reading.rows} if source_links else {}
+                    link['association_comparisons'] = coordinate_links
+                    derived = {row.locator for row in reading.rows if source_links
+                        and all(value == 'agrees at published decimal precision' for value in coordinate_links[row.locator])
+                        and all(value in {'agrees on printed host', 'not supplied by administrative association'}
+                                for value in host_links[row.locator])
+                        and not any(a.get('issues') for a in source_links)}
+                    # Every compatible row competes. Result polarity cannot select identity.
+                    rows = [row for row in reading.rows if row in row_index[digest].get(group.reference, [])
+                            or row.locator in derived]
+
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
                     for row in rows:
                         key = digest, row.locator
                         dated = row.sampling_date
                         temporal = ('agrees' if dated == group.day else 'conflicts') if dated else 'unresolved'
+                        association_cause = None
+                        if 'conflicts' in coordinate_links.get(row.locator, []):
+                            association_cause = 'administrative plant-to-report association conflicts with report-row coordinates'
+                        elif 'conflicts' in host_links.get(row.locator, []):
+                            association_cause = 'administrative plant-to-report association conflicts with report-row host'
+                        elif 'unresolved' in host_links.get(row.locator, []):
+                            association_cause = 'report-row host needed by the administrative association remains unresolved'
+                        derived_identity = row.locator in derived
+                        exact_identity = group.reference in row.identifiers
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
                                      'date_cause': row.date_cause,
-                                     'identity_cause': ('publisher identifier reading remains unresolved'
-                                                        if row.reference is None else None),
+                                     'identity_cause': ('no literal report-row identifier or source association establishes this observation'
+                                                        if not exact_identity and not derived_identity else None),
+                                     'association_cause': association_cause,
+                                     'source_associations': source_links,
+                                     'association_comparisons': coordinate_links.get(row.locator, []),
+                                     'host_comparisons': host_links.get(row.locator, []),
+                                     'identity_basis': ('derived occurrence correspondence: observation route, explicit administrative report identity/date, host and unique coordinates at printed precision; client identifiers remain distinct'
+                                                        if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
                                      'reading_issues': reading.issues,
-                                     'reading_complete': len(reading.complete_pages) == reading.pages,
+                                     'document_cause': link['document_cause'],
+                                     'reading_complete': (len(reading.complete_pages) == reading.pages
+                                         and reading.relations is not None
+                                         and reading.relations.get('reading_complete') is True),
                                      'comparisons': _comparable(member, row.results)}
                         link['candidates'].append(candidate)
                         if candidate['identity_cause']:
                             output['limitations'].append({'sha256': digest, 'row': row.locator,
                                                          'cause': candidate['identity_cause']})
-                        if row.reference is not None and temporal != 'conflicts' and len(digests) == 1:
+                        if (exact_identity or derived_identity) and not association_cause and not link['document_cause'] and temporal != 'conflicts' and not rendition_ambiguity:
                             eligible[key] = candidate
                             reverse[key].add(group.identity)
         routed.append((output, eligible))
@@ -186,6 +308,8 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
 
 def report_rows(readings, joined):
     """Reverse view: retain every source-row occurrence, including unmatched negatives."""
+    readings = list(readings)
+    edges = correspondences({r.sha256: r for r in readings})
     matched = defaultdict(set)
     for finding in joined:
         for item in finding['matches']:
@@ -195,6 +319,9 @@ def report_rows(readings, joined):
             for row in reading.rows:
                 yield {'sha256': reading.sha256, 'row': row,
                        'reading_issues': reading.issues,
+                       'document_relationships': related(edges, reading.sha256),
+                       'relationship_reading': reading.relations,
+                       'document_cause': current_limitation(edges, reading.sha256),
                        'observations': sorted(matched[(reading.sha256, row.locator)], key=str)}
 
 

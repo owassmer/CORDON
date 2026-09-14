@@ -112,6 +112,26 @@ solely because its sampling date is unknown or other pages remain unread. Unread
 report scope leaves the selected result's qualified polarity unknown; independent
 inputs survive. Date-dependent consumers still require their own date evidence.
 
+Whole-document relationship acquisition uses `read_reports.py --relationships`.
+It supplies every physical page, keeps its response/request version separately
+from row extraction, and never retranscribes the tables. A protocol is a document
+registration identifier, not an analytical method or incoming delivery note.
+Unsupported protocol proposals remain visible without acquiring typed identity.
+A cache-only relationship graph follows explicitly supported replacements, retains
+history and unverified components, and rejects ambiguous or cyclic supersession.
+The graph is a proposed source reading, not legal adjudication. Bundled-document
+identity and amendment scope require further source resolution when not recovered.
+
+Native administrative association tables use printed header labels and verified
+annex continuity (consecutive physical pages/printed folios and the same ruled
+column boundaries). Unresolved fragments survive without fill-down. Source boxes
+map back to the immutable original. The report join may derive an occurrence
+correspondence from an observation's own report route plus an act's explicit
+report number, date, plant reference and unique matching coordinates at printed
+decimal precision. It preserves competing associations, distinct client codes and
+source access time; no positive-result filter selects a plant. An association is
+not an operative-act reading, a land-standing fact or proof of withdrawal.
+
 ## Implementation rule
 
 Ordinary readers accept source records without a named case, fixed hash, authored

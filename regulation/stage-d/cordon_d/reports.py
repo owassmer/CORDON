@@ -11,7 +11,7 @@ from .store import blob_path
 
 READER_IMPLEMENTATION = sha256(Path(__file__).read_bytes()).digest()
 
-ROLES = frozenset({'publisher_id', 'laboratory_id', 'pool_id', 'extract_id',
+ROLES = frozenset({'identifier', 'publisher_id', 'laboratory_id', 'pool_id', 'extract_id',
                    'sampling_date', 'test_date', 'host', 'municipality',
                    'latitude', 'longitude', 'result', 'other'})
 CAUSES = frozenset({'unreadable', 'not_recovered', 'unattached', 'not_stated'})
@@ -100,9 +100,15 @@ class Row:
 
     @property
     def candidate_reference(self):
-        values = [c.get('identifier', c['text']) for c in self.cells
-                  if c['role'] == 'publisher_id' and c['text'] is not None]
+        values = list(self.identifiers)
         return values[0] if len(values) == 1 else None
+
+    @property
+    def identifiers(self):
+        values = [c.get('identifier', c['text']) for c in self.cells
+                  if c['role'] in {'identifier', 'publisher_id', 'laboratory_id'}
+                  and c['text'] is not None]
+        return tuple(dict.fromkeys(values))
 
     @property
     def sampling_date(self):
@@ -127,6 +133,7 @@ class Report:
     facts: tuple[dict, ...]
     issues: tuple[dict, ...]
     complete_pages: frozenset[int]
+    relations: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -187,6 +194,18 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
                 raise ValueError('Invalid column role or heading path')
             for statement in column.get('support', []):
                 support(statement)
+            authority = column.get('identifier_authority')
+            authority_support = column.get('authority_support', [])
+            if authority not in {None, 'publisher', 'laboratory'}:
+                raise ValueError('Invalid identifier authority')
+            for statement in authority_support:
+                support(statement)
+            if authority is not None and not authority_support:
+                raise ValueError('Identifier authority requires source support')
+            if column['role'] == 'publisher_id' and authority not in {None, 'publisher'}:
+                raise ValueError('Publisher identifier conflicts with its authority')
+            if column['role'] == 'laboratory_id' and authority not in {None, 'laboratory'}:
+                raise ValueError('Laboratory identifier conflicts with its authority')
             if column['role'] == 'result' and not column.get('support'):
                 raise ValueError('Result role requires heading/scope evidence')
         row_ids = set()
@@ -249,7 +268,7 @@ def record_tables(reading, native):
     tables, issues, incomplete = [], [], set()
     for table in reading['tables']:
         columns = table['columns']
-        transposed = len(columns) > 1 and all(c['role'] == 'publisher_id' and len(c['heading']) > 1 for c in columns)
+        transposed = len(columns) > 1 and all(c['role'] in {'identifier', 'publisher_id'} and len(c['heading']) > 1 for c in columns)
         if not transposed:
             tables.append(table)
             continue
@@ -259,7 +278,7 @@ def record_tables(reading, native):
             if len(pair) != 2 or companion['page'] != table['page'] or not any(
                     f['role'] == 'repeated_representation' and pair <= set(f['applies_to']) for f in reading['facts']):
                 continue
-            ids = [i for i, c in enumerate(companion['columns']) if c['role'] == 'publisher_id']
+            ids = [i for i, c in enumerate(companion['columns']) if c['role'] in {'identifier', 'publisher_id'}]
             if len(ids) != 1 or len(companion['rows']) != len(columns):
                 continue
             identifier = ids[0]
@@ -340,7 +359,7 @@ def materialize(digest, version, page_count, blocks):
         issues += tuple(projection_issues)
         covered.difference_update(incomplete)
         for table in tables:
-            if not any(c['role'] in {'publisher_id', 'laboratory_id', 'result'} for c in table['columns']):
+            if not any(c['role'] in {'identifier', 'publisher_id', 'laboratory_id', 'result'} for c in table['columns']):
                 continue  # Non-sample tables remain in the literal block, not sample counts.
             for raw in table['rows']:
                 locator = f"p{table['page']}/{table['id']}/{raw['id']}"
@@ -354,6 +373,10 @@ def materialize(digest, version, page_count, blocks):
                     value = dict(cell, text=text, basis='native_cell_copy' if 'native_cell' in cell else 'vision_transcription',
                                  role=column['role'], heading=column['heading'],
                                  locator=f'{locator}/c{index + 1}')
+                    if column['role'] in {'identifier', 'publisher_id', 'laboratory_id'}:
+                        value['identifier_authority'] = column.get('identifier_authority')
+                        value['authority_support'] = tuple(dict(s, basis='model_proposed_reading')
+                            for s in column.get('authority_support', ()))
                     field = f"{table['id']}/c{index + 1}"
                     # Bind explicit field locators, never interpret words in the cause.
                     field_issues = tuple(issue for issue in issues if re.search(
@@ -362,7 +385,7 @@ def materialize(digest, version, page_count, blocks):
                         value['reading_issues'] = field_issues
                         if column['role'] in {'publisher_id', 'laboratory_id'}:
                             value['role_cause'] = 'unresolved reading at identifier column; see reading_issues'
-                    if column['role'] == 'publisher_id' and 'identifier' not in value and text:
+                    if column['role'] in {'identifier', 'publisher_id'} and 'identifier' not in value and text:
                         annotation = re.fullmatch(r'\s*([^()\r\n]+?)\s*(\(Pool\))\s*', text)
                         if annotation and annotation[1].strip():
                             value.update(identifier=annotation[1].strip(), annotation=annotation[2],
@@ -399,7 +422,8 @@ def materialize(digest, version, page_count, blocks):
                                      if f['role'] == 'sampling_date' and
                                      {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}.intersection(f['applies_to']))
                 dates += shared_dates
-                rows.append(Row(locator, table['page'], sole('publisher_id'), sole('laboratory_id'),
+                generic = sole('identifier')
+                rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),
                                 dates, tuple(cells), tuple(results), scoped, table.get('projection')))
     missing = set(range(1, page_count + 1)) - encountered
     if missing:
@@ -417,7 +441,7 @@ def positioned_identifiers(reading, source):
             cells = []
             for cell in row.cells:
                 key = re.fullmatch(r'p(\d+)-t(\d+)-r(\d+)-c(\d+)', cell.get('native_cell', ''))
-                if key and cell['role'] in {'publisher_id', 'laboratory_id'} and 'identifier' not in cell:
+                if key and cell['role'] in {'identifier', 'publisher_id', 'laboratory_id'} and 'identifier' not in cell:
                     page, ti, ri, ci = (int(x) - 1 for x in key.groups())
                     if page not in tables:
                         tables[page] = document[page].find_tables().tables
@@ -440,7 +464,7 @@ def positioned_identifiers(reading, source):
                     return None
                 values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
                 return values[0] if len(values) == 1 else None
-            rows.append(replace(row, cells=tuple(cells), reference=sole('publisher_id'),
+            rows.append(replace(row, cells=tuple(cells), reference=sole('publisher_id') or sole('identifier'),
                                 laboratory_reference=sole('laboratory_id')))
     return replace(reading, rows=tuple(rows))
 
@@ -455,9 +479,10 @@ def report(digest: str, store: Path, *, extraction_version: str):
     if payload['source_sha256'] != digest or payload['extraction_version'] != extraction_version:
         raise ValueError('Reading identity does not match requested source/version')
     reading = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
-    if any('native_cell' in c and c['role'] in {'publisher_id', 'laboratory_id'} for r in reading.rows for c in r.cells):
+    if any('native_cell' in c and c['role'] in {'identifier', 'publisher_id', 'laboratory_id'} for r in reading.rows for c in r.cells):
         reading = positioned_identifiers(reading, blob_path(store, digest))
-    return reading
+    from .report_relations import load
+    return replace(reading, relations=load(store, digest, exact=True))
 
 
 def reports(root: Path, store: Path, *, extraction_version: str, known_through=None):

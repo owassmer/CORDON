@@ -6,6 +6,7 @@ from dataclasses import asdict, is_dataclass
 from datetime import date, datetime, timezone
 import json
 import fcntl
+from itertools import islice
 import logging
 from pathlib import Path
 import sys
@@ -14,10 +15,12 @@ from uuid import uuid4
 
 REPOSITORY = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(REPOSITORY / 'regulation/stage-d'), str(REPOSITORY / 'regulation/stage-c')]
-from cordon_d.report_extraction import Budget, BudgetStopped, ExtractionConfig, extract_report, version
+from cordon_d.report_extraction import Budget, BudgetStopped, ExtractionConfig, extract_report, extract_relationships, version
+from cordon_d import report_relations
 from cordon_d.reports import Report, reports
 from cordon_d.findings import findings, report_rows, confirmation_inputs
 from cordon_d.monitoring import distinct_observations
+from cordon_d.source_associations import associations
 from cordon_d.store import store_root
 
 
@@ -31,25 +34,61 @@ def encoded(value):
     raise TypeError(type(value).__name__)
 
 
-def extract_job(digest, store, config, ledger, budget_options, revision):
+def extract_job(digest, store, config, ledger, budget_options, revision, relationships=False):
     try:
-        if version(config) != revision:
+        if not relationships and version(config) != revision:
             raise RuntimeError('Reader implementation changed before worker startup; no paid request dispatched')
-        extract_report(digest, store, config=config, budget=Budget(ledger, **budget_options))
-        return {'document': digest, 'status': 'assembled'}
+        reader = extract_relationships if relationships else extract_report
+        budget = Budget(ledger, **budget_options) if config.provider == 'api' else None
+        reader(digest, store, config=config, budget=budget)
+        partial = relationships and not report_relations.load(store, digest, exact=True).get('reading_complete', False)
+        return {'document': digest, 'status': 'partial relationship reading' if partial else 'assembled'}
     except Exception as error:
         return {'document': digest, 'status': 'stopped', 'cause': str(error),
                 'budget_stopped': isinstance(error, BudgetStopped)}
+
+
+def process_parallel(pending, *, workers, store, config, ledger, options, revision, relationships):
+    """Keep at most one job per worker queued; stop dispatch after the first defect."""
+    failures, source = [], iter(pending)
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        jobs = {}
+        for digest in islice(source, workers):
+            jobs[pool.submit(extract_job, digest, store, config, ledger, options,
+                             revision, relationships)] = digest
+        completed = 0
+        while jobs:
+            job = next(as_completed(jobs))
+            jobs.pop(job)
+            result = job.result()
+            completed += 1
+            print(json.dumps(dict(result, progress=[completed, len(pending)])), flush=True)
+            if result['status'] == 'stopped':
+                failures.append(result)
+            if not failures:
+                try:
+                    digest = next(source)
+                except StopIteration:
+                    pass
+                else:
+                    jobs[pool.submit(extract_job, digest, store, config, ledger, options,
+                                     revision, relationships)] = digest
+    return failures
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--reports-root', type=Path, default=Path('corpus/sources/reports'))
     parser.add_argument('--monitoring-root', type=Path, default=Path('corpus/sources/monitoring'))
+    parser.add_argument('--association-root', type=Path, default=Path('corpus/sources/removal-orders'))
     parser.add_argument('--model', default=ExtractionConfig.model)
+    parser.add_argument('--provider', choices=['api', 'subscription'], default=ExtractionConfig.provider,
+                        help='Use metered API execution or the authenticated Claude subscription')
     parser.add_argument('--effort', choices=['low', 'medium', 'high', 'xhigh', 'max'],
                         default=ExtractionConfig.effort)
     parser.add_argument('--extraction-version', help='Select a retained reading version for local consumption only')
+    parser.add_argument('--relationships', action='store_true',
+                        help='Read whole-document identities and operative references without retranscribing rows')
     execution = parser.add_mutually_exclusive_group()
     execution.add_argument('--execute', action='store_true')
     execution.add_argument('--rebuild-cache', action='store_true', help='Reassemble retained responses with no provider access')
@@ -75,8 +114,9 @@ def main():
     if (args.retain_interrupted_reservation or args.retry_interrupted_request) and not args.execute:
         parser.error('--retain-interrupted-reservation requires --execute and its ledger')
     logging.basicConfig(level=logging.INFO, format="%(message)s")
-    config = ExtractionConfig(model=args.model, effort=args.effort)
-    if args.extraction_version and (args.execute or args.rebuild_cache):
+    config = ExtractionConfig(model=args.model, effort=args.effort, provider=args.provider,
+                              max_tokens=4000 if args.relationships else ExtractionConfig.max_tokens)
+    if args.extraction_version and (args.execute or args.rebuild_cache) and not args.relationships:
         parser.error('--extraction-version selects existing readings; it cannot execute or rebuild them')
     revision = args.extraction_version or version(config)
     store = store_root(args.reports_root)
@@ -86,55 +126,71 @@ def main():
         parser.error('--document must name an acquired source hash')
     selected = sorted(set(args.document)) if args.document else digests
     def complete(digest):
+        if args.relationships:
+            reading = report_relations.load(store, digest, exact=True)
+            return reading is not None and reading.get('reading_complete') is True
         path = store / 'derived/reports' / revision / digest / 'report.json'
         return path.exists() and json.loads(path.read_text()).get('assembly_complete') is True
     pending = [d for d in selected if not complete(d)]
     print(json.dumps({'execution_model': config.model if args.execute else None, 'extraction_version': revision,
                       'execution_effort': config.effort if args.execute else None,
-                      'documents': len(digests), 'selected': len(selected), 'pending': len(pending), 'paid_execution': args.execute}), flush=True)
+                      'relationship_reading_version': report_relations.READING_VERSION if args.relationships else None,
+                      'retained_partial_relationship_readings': sum(1 for d in selected if args.relationships
+                          and (value := report_relations.load(store, d, exact=True)) and not value['reading_complete']),
+                      'documents': len(digests), 'selected': len(selected), 'pending': len(pending),
+                      'execution_provider': config.provider if args.execute else None,
+                      'metered_model_execution': bool(args.execute and config.provider == 'api'),
+                      'subscription_execution': bool(args.execute and config.provider == 'subscription')}), flush=True)
     def process(budget):
         for index, digest in enumerate(pending, 1):
             try:
-                extract_report(digest, store, config=config, budget=budget)
-                print(json.dumps({'document': digest, 'status': 'assembled', 'progress': [index, len(pending)]}), flush=True)
+                reader = extract_relationships if args.relationships else extract_report
+                reader(digest, store, config=config, budget=budget)
+                partial = args.relationships and not report_relations.load(store, digest, exact=True)['reading_complete']
+                print(json.dumps({'document': digest,
+                    'status': 'partial relationship reading' if partial else 'assembled',
+                    'progress': [index, len(pending)]}), flush=True)
             except Exception as error:
                 print(json.dumps({'document': digest, 'status': 'stopped', 'cause': str(error)}), flush=True)
                 # Preserve completed blocks. Do not dispatch after an uncertain paid failure.
                 raise SystemExit(1) from error
     if args.execute:
-        if not all((args.max_cost_usd, args.input_usd_per_million, args.output_usd_per_million, args.ledger)):
+        if args.provider == 'api' and not all((args.max_cost_usd, args.input_usd_per_million,
+                                              args.output_usd_per_million, args.ledger)):
             parser.error('--execute requires a cap, explicit token prices and a resumable ledger path')
-        args.ledger.parent.mkdir(parents=True, exist_ok=True)
-        with args.ledger.with_suffix(args.ledger.suffix + '.lock').open('a') as lock:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            options = dict(limit=args.max_cost_usd, input_rate=args.input_usd_per_million,
-                           output_rate=args.output_usd_per_million, run_id=str(uuid4()))
-            budget = Budget(args.ledger, **options)
-            if args.retain_interrupted_reservation:
-                budget.retain_interrupted_reservation(args.retain_interrupted_reservation)
-            for request_id in args.retry_interrupted_request:
-                if (store / 'derived/reports/responses' / f'{request_id}.json').exists():
-                    parser.error('A saved response exists for this request; inspect it instead of retransmitting')
-                budget.retain_interrupted_reservation(request_id, retry=True)
+        if args.provider == 'subscription':
+            if any((args.max_cost_usd, args.input_usd_per_million, args.output_usd_per_million, args.ledger)):
+                parser.error('Subscription execution does not use API prices or the dollar ledger')
+            options = {}
             if args.workers == 1:
-                process(budget)
+                process(None)
             else:
-                failures = []
-                with ProcessPoolExecutor(max_workers=args.workers) as pool:
-                    jobs = {pool.submit(extract_job, digest, store, config, args.ledger, options, revision): digest
-                            for digest in pending}
-                    for index, job in enumerate(as_completed(jobs), 1):
-                        if job.cancelled():
-                            continue
-                        result = job.result()
-                        print(json.dumps(dict(result, progress=[index, len(pending)])), flush=True)
-                        if result['status'] == 'stopped':
-                            failures.append(result)
-                        if result.get('budget_stopped'):
-                            for queued in jobs:
-                                queued.cancel()
+                failures = process_parallel(pending, workers=args.workers, store=store,
+                    config=config, ledger=None, options=options, revision=revision,
+                    relationships=args.relationships)
                 if failures:
                     raise SystemExit(1)
+        else:
+            args.ledger.parent.mkdir(parents=True, exist_ok=True)
+            with args.ledger.with_suffix(args.ledger.suffix + '.lock').open('a') as lock:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                options = dict(limit=args.max_cost_usd, input_rate=args.input_usd_per_million,
+                               output_rate=args.output_usd_per_million, run_id=str(uuid4()))
+                budget = Budget(args.ledger, **options)
+                if args.retain_interrupted_reservation:
+                    budget.retain_interrupted_reservation(args.retain_interrupted_reservation)
+                for request_id in args.retry_interrupted_request:
+                    if (store / 'derived/reports/responses' / f'{request_id}.json').exists():
+                        parser.error('A saved response exists for this request; inspect it instead of retransmitting')
+                    budget.retain_interrupted_reservation(request_id, retry=True)
+                if args.workers == 1:
+                    process(budget)
+                else:
+                    failures = process_parallel(pending, workers=args.workers, store=store,
+                        config=config, ledger=args.ledger, options=options, revision=revision,
+                        relationships=args.relationships)
+                    if failures:
+                        raise SystemExit(1)
     elif args.rebuild_cache:
         process(None)
     if args.confirmation_request and not (args.join_output or args.join_summary):
@@ -144,7 +200,9 @@ def main():
         destination.parent.mkdir(parents=True, exist_ok=True)
         routed = []
         stream = findings(distinct_observations(args.monitoring_root), args.reports_root, store,
-                          extraction_version=revision, known_through=args.known_through)
+                          extraction_version=revision, known_through=args.known_through,
+                          association_readings=associations(args.association_root, store, known_through=args.known_through)
+                              if (args.association_root / 'records.json').exists() else ())
         counts, statuses, limitations = Counter(), Counter(), Counter()
         routed_urls, unacquired_urls = set(), set()
         output = args.join_output.open('w') if args.join_output else None
