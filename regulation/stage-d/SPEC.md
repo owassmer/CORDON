@@ -305,6 +305,14 @@ events and conclusion-specific limitations. `scripts/read_measures.py` replays b
 default; `--execute` uses the allocated single Codex worker. A changed source-review
 instruction is explicit and yields a different transport request.
 
+| Accepted D contract | Measure contribution and limit |
+|---|---|
+| `case-prescription` | `directions`, `targets`, `parts` and `references` retain the prescribed scope, each source occurrence and the exact stated correction. `prescribed_targets()` selects present removal directions only; deferred and corrective occurrences remain in the reading. |
+| `operative-status`, `evaluation-context` | Identity, adoption, declared effect and conditions supply source facts. Adoption does not establish recipient effect or choose the applicable A route by itself. |
+| `recipient-notice`, `administrative-event` | Route reasons and timing remain in the directions. Actual dated events about the resolved measure reach `AdministrativeEvent`; publication adapters connect independent register records. An unresolved measure leaves other measures' supported publications usable. |
+| `party-land-standing` | Published addressee cells and their row scope supply positions in the act. They do not supply independent title or establish a corrected recipient's notice. |
+| `owner-response`, `removal-performance` | Completed records can supply their stated events; intentions, blank forms and missing histories cannot. A free-text work description does not establish required-work coverage or completed removal. |
+
 `MeasureReading` connects act identity and adoption to the existing publication
 adapter, retains the actual prescribed target rows separately from A–C's required
 population, and reuses the accepted association reader for report relationships.
