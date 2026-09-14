@@ -186,3 +186,53 @@ What the population shows, read and not reconciled:
 - “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
   work that a particular row may require. They are not separate source families or
   reasons to expand the aperture.
+
+
+## Monitoring positional qualification
+
+The monitoring frame is established; its ground-position error is separate work on
+PR #14. The population is every located positive in the retained monitoring releases,
+independent of whether a measurement succeeds. Establish source-linked plant identity
+and an independent position or enclosure, then derive the greatest displacement from
+the published point, including reference, delineation, transformation and
+consuming-domain grid-to-ground distortion error. Empirical establishment is allowed;
+no publisher-only accuracy restriction applies.
+
+The retained DDS 45/2025, physical page 28 (annex printed page 21), directs the
+recorder to stand at the canopy edge; page 30 (printed page 23) requires a whole-plant
+photograph with identifying landmarks. A monitoring coordinate is therefore not
+a source-stated stem-centre measurement. Page 43 lists the sample coordinates
+available to laboratories: a report repeating those coordinates is not independent
+position evidence. For the first reconciliation, sufficient evidence must independently identify
+the sampled plants and their event-time positions or enclosures for observations
+1968569 and 1968577, sampled 5 August 2026 in Noicattaro. Original identifying
+photographs, sampling records or an equivalent source can establish this; a
+prescribed bundle of every document type is not required. If imagery supplies the
+reference, establish the relevant image's acquisition date and a defensible
+position/delineation error, using publisher assessment or independent control.
+A nominal pixel size cannot do that.
+
+Retained monitoring and report records contain published coordinates and sampling
+context; the procedure act describes the field workflow. The examined current
+source populations and prior acquisition records do not supply those plants'
+original photographs, sampling sheets or independent fix records. Earlier imagery
+acquisitions identified service metadata and exploratory tiles, not a numerical
+accuracy assessment or the event-time plant correspondence. Equivalent sufficient
+evidence may close either requirement; no broad external acquisition assignment
+is implied.
+
+The metric adapter now accepts the ordinary monitoring output with its verified
+source bytes when a separate occurrence-, date- and context-specific qualification
+is supplied. It verifies all listed sources even when the observation has no
+spatial support of its own. A fixture passes through the actual distance consumer;
+this repairs integration without assigning a bound to a real observation.
+
+The reached original field/plant evidence and applicable imagery-control evidence
+must supply identity, event-time applicability and reference error before population
+imagery acquisition. The retained exploratory tiles do not yet establish these inputs.
+Live inspection of the 2023 regional image service and its metadata confirmed pixel
+size and frame but supplied no numerical accuracy. The inherited register probe's
+empty proximity results were a query artifact, not absent plants. A nearest-crown
+edge distance or a sample maximum cannot silently become the whole population's
+error bound. The revised method and its adjudicated plan are on PR #14; no numerical
+qualification or source-family completion is claimed by this method checkpoint.
