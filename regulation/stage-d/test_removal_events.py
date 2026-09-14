@@ -130,6 +130,7 @@ class RetainedRegionalPublication(unittest.TestCase):
             self.assertEqual(p.document, document)
             self.assertEqual(p.document_date, date.fromisoformat(adopted))
             self.assertEqual(p.source_fields['Stato Pubblicazione'], 'Conclusa')
+            self.assertEqual(len(p.events), 2)
             for event, kind, day in zip(p.events,
                     ['regional-publication-start', 'regional-publication-end'], [start, end]):
                 self.assertEqual(event.anchor(kind=kind, document=document,
