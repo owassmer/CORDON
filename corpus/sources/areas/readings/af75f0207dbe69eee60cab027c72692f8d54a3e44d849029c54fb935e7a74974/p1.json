@@ -1,0 +1,77 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+ "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "5b715e295f270f77a9859e51339b9726293926aaa2f1267433e01cd5e9ccd00a",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:19:08.867436+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 8592,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7465,
+   "cache_read_input_tokens": 8097,
+   "output_tokens": 743,
+   "output_tokens_details": {
+    "thinking_tokens": 36
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7465,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 579,
+     "cache_read_input_tokens": 5811,
+     "cache_creation_input_tokens": 3940,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3940
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0419484,
+  "session_id": "073957e7-cae7-4f0d-a1fc-1f285fc64d87"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 21 febbraio 2024, n. 8 - Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) - Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201.",
+   "La Determinazione del Dirigente Sezione Osservatorio Fitosanitario n. 127 del 17/12/2022 che ha aggiornato le aree delimitate alla Xylella fastidiosa sottospecie pauca ST53, alla luce del rinvenimento di piante infette in zona indenne.",
+   "Le deliberazioni n° 1866 del 12/12/2022 e n° 570 del 26/04/2023 con le quali la Giunta regionale, ha approvato il Piano d'azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia nel triennio 2023-2024-2025."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 21 febbraio 2024, n. 8 - Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) - Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201.",
+   "La Determinazione del Dirigente Sezione Osservatorio Fitosanitario n. 127 del 17/12/2022 che ha aggiornato le aree delimitate alla Xylella fastidiosa sottospecie pauca ST53, alla luce del rinvenimento di piante infette in zona indenne.",
+   "Le deliberazioni n° 1866 del 12/12/2022 e n° 570 del 26/04/2023 con le quali la Giunta regionale, ha approvato il Piano d'azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia nel triennio 2023-2024-2025."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 57,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "6b57602e2b3d1069695e3a43c2a6baa7929077211ee42bd8735d32f7a6b7ee65",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:29:41.150992+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 8635,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7001,
+   "cache_read_input_tokens": 7639,
+   "output_tokens": 629,
+   "output_tokens_details": {
+    "thinking_tokens": 30
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7001,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 471,
+     "cache_read_input_tokens": 5353,
+     "cache_creation_input_tokens": 3934,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3934
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0385128,
+  "session_id": "df5199c2-b63a-46da-9aa2-2533856c1fe3"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "2. MISURE DI CONTENIMENTO — In caso di individuazione di piante infette in zona contenimento si applicano le misure di contenimento ai sensi dell'art. 15 del Reg. UE 2020/1201.",
+   "Tale trattamento non si applica nel periodo novembre- marzo in quanto non necessario.",
+   "Ai sensi del comma 2 dell'art. 9 del Reg. UE 2020/1201, in caso di particolari situazioni... è possibile limitare la distruzione delle piante tagliando il tronco con rami e fogliame e lasciando l'apparato radicale.",
+   "3. ORGANIZZAZIONE ESTIRPAZIONI — L'estirpazione delle piante infette può essere eseguita direttamente dal proprietario oppure questi può avvalersi di ARIF."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "2. MISURE DI CONTENIMENTO — In caso di individuazione di piante infette in zona contenimento si applicano le misure di contenimento ai sensi dell'art. 15 del Reg. UE 2020/1201.",
+   "Tale trattamento non si applica nel periodo novembre- marzo in quanto non necessario.",
+   "Ai sensi del comma 2 dell'art. 9 del Reg. UE 2020/1201, in caso di particolari situazioni... è possibile limitare la distruzione delle piante tagliando il tronco con rami e fogliame e lasciando l'apparato radicale.",
+   "3. ORGANIZZAZIONE ESTIRPAZIONI — L'estirpazione delle piante infette può essere eseguita direttamente dal proprietario oppure questi può avvalersi di ARIF."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

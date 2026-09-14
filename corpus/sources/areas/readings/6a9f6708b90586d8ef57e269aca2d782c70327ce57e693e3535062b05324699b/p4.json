@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "bd1d29fb753991dbe20894438cc24f1d760f9c5d755a49dae9085539c0722b80",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:01.404073+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 12560,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7108,
+   "cache_read_input_tokens": 7747,
+   "output_tokens": 649,
+   "output_tokens_details": {
+    "thinking_tokens": 29
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7108,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 492,
+     "cache_read_input_tokens": 5461,
+     "cache_creation_input_tokens": 3933,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3933
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.039295399999999994,
+  "session_id": "8a8d1e5d-18ba-4fe0-9a83-b75a4667de6b"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Nell'agro di Minervino Murge (BT) è stata individuata una pianta di olivo infetta da Xylella fastidiosa, comunicata dal CRSFA con il rapporto prot.541/Ldf/2025 del 19 marzo 2025",
+   "Il CNR, con rapporto di prova n. 28P/2025 del 20/03/2025, ha comunicato che la sottospecie individuata è Xylella fastidiosa sottospecie pauca",
+   "E' stata effettuata un'attività di sorveglianza rafforzata dell'area di 400 m attorno alla zona infetta, finalizzata a verificare la presenza di ulteriori piante infette e di conseguenza l'estensione dell'area infetta",
+   "E' stata confermata la presenza di Xylella fastidiosa sottospecie pauca solo su n. 1 pianta di olivo in agro di Minervino Murge (BT) sulla base dei rapporti di prova del CRSFA e CNR innanzi citati"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Nell'agro di Minervino Murge (BT) è stata individuata una pianta di olivo infetta da Xylella fastidiosa, comunicata dal CRSFA con il rapporto prot.541/Ldf/2025 del 19 marzo 2025",
+   "Il CNR, con rapporto di prova n. 28P/2025 del 20/03/2025, ha comunicato che la sottospecie individuata è Xylella fastidiosa sottospecie pauca",
+   "E' stata effettuata un'attività di sorveglianza rafforzata dell'area di 400 m attorno alla zona infetta, finalizzata a verificare la presenza di ulteriori piante infette e di conseguenza l'estensione dell'area infetta",
+   "E' stata confermata la presenza di Xylella fastidiosa sottospecie pauca solo su n. 1 pianta di olivo in agro di Minervino Murge (BT) sulla base dei rapporti di prova del CRSFA e CNR innanzi citati"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

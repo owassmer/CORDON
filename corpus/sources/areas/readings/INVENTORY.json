@@ -1,0 +1,2459 @@
+[
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 1,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+  "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+  "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 8,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+  "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00012",
+  "act_sha256": "31040450baa1ae868c7699877123a3874e2fda63f055e21484ed3d1ab356a482",
+  "page": 1,
+  "pages_in_document": 3,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00012",
+  "act_sha256": "31040450baa1ae868c7699877123a3874e2fda63f055e21484ed3d1ab356a482",
+  "page": 2,
+  "pages_in_document": 3,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00012",
+  "act_sha256": "31040450baa1ae868c7699877123a3874e2fda63f055e21484ed3d1ab356a482",
+  "page": 3,
+  "pages_in_document": 3,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 3,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+  "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+  "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+  "page": 1,
+  "pages_in_document": 6,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+  "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+  "page": 2,
+  "pages_in_document": 6,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+  "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+  "page": 3,
+  "pages_in_document": 6,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+  "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+  "page": 4,
+  "pages_in_document": 6,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+  "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+  "page": 5,
+  "pages_in_document": 6,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+  "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+  "page": 6,
+  "pages_in_document": 6,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00092",
+  "act_sha256": "083e74fe2c57a73f710ff7f479dd2d960a6bb2df985e7340ca4d496a21c0a5fc",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+  "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 1,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 2,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 3,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 4,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 5,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 6,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 7,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 8,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 9,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+  "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+  "page": 10,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 1,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 2,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 3,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 4,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 5,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 6,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 7,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+  "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+  "page": 8,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 1,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 2,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 3,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 4,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 5,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 6,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+  "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+  "page": 7,
+  "pages_in_document": 7,
+  "candidate": true,
+  "native_tables": 5,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+  "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 1,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 2,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 3,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 4,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 5,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 6,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 7,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 8,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 9,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 10,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 11,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 12,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 13,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 14,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 15,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 16,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 17,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 18,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 19,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 1,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 20,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 1,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 21,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 22,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 23,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 24,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 25,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 26,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 27,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 28,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 29,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 30,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 31,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 32,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 33,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 34,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 1,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 35,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 36,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 37,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 38,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 39,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 40,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 41,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 3,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 42,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 43,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 44,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 45,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 46,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 47,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 48,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 49,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 1,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 50,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 51,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 52,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 53,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 54,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 55,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 56,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 57,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+  "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+  "page": 58,
+  "pages_in_document": 58,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 1,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 2,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 3,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 4,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 5,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 6,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 7,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 8,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 9,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 10,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 11,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+  "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+  "page": 12,
+  "pages_in_document": 12,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 1,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 2,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 3,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 4,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 5,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 6,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 7,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 8,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 9,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 10,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 11,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 12,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+  "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+  "page": 13,
+  "pages_in_document": 13,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 1,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 2,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 3,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 4,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 5,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 6,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 7,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+  "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+  "page": 8,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 1,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 2,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 3,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 4,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 5,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 6,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 7,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+  "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+  "page": 8,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 1,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 2,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 3,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 4,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 5,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 6,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 7,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00132",
+  "act_sha256": "6bed5acbfc1170e4a6ce333e01941aeaa9d7f51726415bc929fdefb36794b28e",
+  "page": 8,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+  "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 1,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 2,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 3,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 4,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 5,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 6,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 7,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+  "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+  "page": 8,
+  "pages_in_document": 8,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+  "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+  "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+  "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+  "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 1,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 2,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 3,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 4,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 5,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 6,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 7,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 8,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+  "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+  "page": 9,
+  "pages_in_document": 9,
+  "candidate": true,
+  "native_tables": 7,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 1,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 2,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 3,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 4,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 5,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 6,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 7,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 8,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 9,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 0,
+  "cause": null
+ },
+ {
+  "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+  "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+  "page": 10,
+  "pages_in_document": 10,
+  "candidate": true,
+  "native_tables": 2,
+  "cause": null
+ }
+]

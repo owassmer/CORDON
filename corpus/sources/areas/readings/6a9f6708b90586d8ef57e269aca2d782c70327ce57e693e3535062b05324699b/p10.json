@@ -1,0 +1,89 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 10,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "95227bdc1d3eae8f95ab83c45918e3388bec489be4f44cc13d79f4e6c0d2767c",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:14.266226+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 9913,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5743,
+   "cache_read_input_tokens": 6398,
+   "output_tokens": 560,
+   "output_tokens_details": {
+    "thinking_tokens": 12
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5743,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 420,
+     "cache_read_input_tokens": 4112,
+     "cache_creation_input_tokens": 3917,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3917
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.031598600000000004,
+  "session_id": "34f7e6cd-bd64-4451-865d-d7a2797792d0"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "Legenda: Area Delimitata XF sub. pauca (Minervino Murge) - Zona Cuscinetto",
+   "Legenda: Area Delimitata XF sub. pauca (Minervino Murge) - Zona Infetta",
+   "Legenda: Confini Comunali",
+   "Legenda: Confini Provinciali",
+   "Map labels: CANOSA DI PUGLIA, MINERVINO MURGE, Prov. BT",
+   "Scale bar: 1,5 Km"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "Legenda: Area Delimitata XF sub. pauca (Minervino Murge) - Zona Cuscinetto",
+   "Legenda: Area Delimitata XF sub. pauca (Minervino Murge) - Zona Infetta",
+   "Legenda: Confini Comunali",
+   "Legenda: Confini Provinciali",
+   "Map labels: CANOSA DI PUGLIA, MINERVINO MURGE, Prov. BT",
+   "Scale bar: 1,5 Km"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}
