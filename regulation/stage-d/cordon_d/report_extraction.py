@@ -414,7 +414,7 @@ def _call(request, *, config, budget, request_id, raw_path):
         budget.dispatch_finished(request_id)
 
 
-def _subscription_call(*, prompt, schema, digest, source, config, request_id, raw_path):
+def _subscription_call(*, prompt, schema, digest, source, config, request_id, raw_path, render_pages=()):
     """Read one retained PDF through the authenticated Claude subscription."""
     if config.provider != 'subscription':
         raise RuntimeError('Subscription execution was not selected')
@@ -423,10 +423,24 @@ def _subscription_call(*, prompt, schema, digest, source, config, request_id, ra
         pdf.symlink_to(source)
         instruction = (prompt + f'\nRead the original PDF at {pdf}. Physical page numbers start at 1. '
                        'Return the structured result only after reading every requested page.')
+        if render_pages:
+            import pymupdf
+            with pymupdf.open(source) as document:
+                instruction += '\nMagnified overlapping views of the same physical pages follow. '
+                instruction += 'They repeat source content; do not count their overlap as additional rows.\n'
+                for number in render_pages:
+                    page = document[number - 1]
+                    width, height = page.rect.width, page.rect.height
+                    for index, (left, top) in enumerate(((0, 0), (.45, 0), (0, .45), (.45, .45)), 1):
+                        clip = pymupdf.Rect(left * width, top * height,
+                                            min(left + .55, 1) * width, min(top + .55, 1) * height)
+                        image = Path(directory) / f'page-{number}-view-{index}.png'
+                        page.get_pixmap(dpi=240, clip=clip).save(image)
+                        instruction += f'Physical page {number}, page-point bounds {tuple(clip)}: {image}\n'
         command = [
             'claude', '-p', '--model', config.model, '--effort', config.effort,
             '--system-prompt', ('You read one named local source document and return only '
-                'schema-conforming source facts. Use Read only on that source. Do not search, '
+                'schema-conforming source facts. Use Read only on that source and its named page renderings. Do not search, '
                 'write, delegate, or inspect the repository.'),
             '--disable-slash-commands', '--strict-mcp-config', '--no-chrome',
             '--tools', 'Read', '--allowedTools', 'Read', '--permission-mode', 'dontAsk',
@@ -489,6 +503,14 @@ def target_reading(reading, targets, context):
     if not extra <= set(context):
         raise ValueError('Response names an unsupplied page')
     return dict(reading, pages=[p for p in reading['pages'] if p['page'] in targets])
+
+
+def fully_read(reading):
+    """Whether every target page and its table regions were recovered."""
+    return bool(reading['pages']) and all(
+        page['disposition'] == 'read'
+        and all(region['disposition'] != 'not_recovered' for region in page.get('regions', ()))
+        for page in reading['pages'])
 
 
 def extract_relationships(digest, store, *, config, budget, execute=True):
@@ -595,8 +617,10 @@ def extract_report(digest, store, *, config, budget, execute=True):
     revision = version(config)
     directory = store / 'derived/reports' / revision / digest
     target = directory / 'report.json'
-    if target.exists() and json.loads(target.read_text()).get('assembly_complete') is True:
-        return target
+    if target.exists():
+        saved = json.loads(target.read_text())
+        if saved.get('assembly_complete') is True and all(fully_read(b['reading']) for b in saved['blocks']):
+            return target
     blocks, context, heading_context = [], set(), set()
     with pymupdf.open(blob_path(store, digest)) as document:
         page_count = len(document)
@@ -629,6 +653,7 @@ def extract_report(digest, store, *, config, budget, execute=True):
             cached = json.loads(path.read_text()) if path.exists() else None
             if cached and not cached.get('attachment_repair_pending'):
                 item = cached
+                targets[:] = item['targets']
             else:
                 reading, reused = None, None
                 legacy = store / 'derived/reports/responses' / f'{legacy_id}.json'
@@ -654,6 +679,20 @@ def extract_report(digest, store, *, config, budget, execute=True):
                     elif reading is None:
                         reading = _call(request, config=config, budget=budget,
                                         request_id=request_id, raw_path=raw_path)
+                    # The subscription sees the complete PDF. If its first response
+                    # validly recovers that whole document, retain it as one block
+                    # instead of forcing an already complete reading into page pairs.
+                    if (config.provider == 'subscription' and not blocks and fully_read(reading)
+                            and not unattached_sampling_scopes(reading)
+                            and not untyped_representation_scopes(reading)):
+                        whole = list(range(1, page_count + 1))
+                        try:
+                            validate_block(reading, targets=whole, page_count=page_count, native_cells=native,
+                                           native_regions=regions, supplied_pages=supplied)
+                        except ValueError:
+                            pass
+                        else:
+                            targets[:] = whole
                     structural_prior = None
                     try:
                         reading = target_reading(reading, targets, supplied)
@@ -744,6 +783,45 @@ def extract_report(digest, store, *, config, budget, execute=True):
                 write_json(path, item)
             validate_block(item['reading'], targets=targets, page_count=page_count, native_cells=item['native_cells'],
                            native_regions=item.get('native_regions', []), supplied_pages=supplied)
+            if not fully_read(item['reading']):
+                # Complete this physical page before counting the document complete.
+                # A table continuing onto another target page is not missing content
+                # on this page; an illegible cell or omitted row is.
+                repair_prompt = subscription_prompt + (
+                    '\n\nThe previous reading did not finish these target pages: '
+                    + json.dumps(item['reading']['pages'], ensure_ascii=False)
+                    + '\nRead those physical pages again at sufficient magnification to recover '
+                    'every printed row and cell. Return the complete target-page reading. '
+                    'A table continuing on a later page does not make this page partly read. '
+                    'A cover-letter count does not prove the number of rows in this attachment; '
+                    'account for the actual source. Preserve genuine source illegibility.')
+                repair_config = replace(config, effort='high')
+                render_pages = [page['page'] for page in item['reading']['pages']
+                                if not fully_read({'pages': [page]})]
+                repair_identity = {'provider': config.provider, 'model': config.model,
+                    'effort': 'high', 'source_sha256': digest, 'prompt': repair_prompt,
+                    'render_pages': render_pages, 'render_dpi': 240, 'overlapping_views': [.45, .55],
+                    'schema': output_schema()}
+                repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
+                repair_raw = store / 'derived/reports/responses' / f'{repair_id}.json'
+                reading = _retained_reading(repair_raw, config.model) if repair_raw.exists() else None
+                if reading is None:
+                    if not execute:
+                        raise NoRetainedResponse('Page completion needs a source rereading; no retained response')
+                    if config.provider != 'subscription':
+                        raise RuntimeError('Incomplete page requires explicit subscription rereading')
+                    reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
+                        digest=digest, source=blob_path(store, digest), config=repair_config,
+                        request_id=repair_id, raw_path=repair_raw, render_pages=render_pages)
+                reading = target_reading(reading, targets, supplied)
+                validate_block(reading, targets=targets, page_count=page_count,
+                               native_cells=item['native_cells'], native_regions=item.get('native_regions', []),
+                               supplied_pages=supplied)
+                item = dict(item, reading=reading, completion_repair_of=item['request_sha256'],
+                            request_sha256=repair_id, effort='high')
+                write_json(path, item)
+                if not fully_read(reading):
+                    raise RuntimeError('Target page remains incomplete after source rereading')
             blocks.append(item)
             context.update(item['reading']['context_pages'])
             headed = [table['page'] for table in item['reading']['tables']

@@ -181,6 +181,54 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual(call.call_args.args[0]['output_config']['effort'], 'medium')
             self.assertTrue(json.loads(first.read_text())['assembly_complete'])
 
+    def test_incomplete_page_is_reread_before_document_completion(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            incomplete = {'pages': [{'page': 1, 'disposition': 'partly_read'}],
+                          'tables': [], 'facts': [], 'issues': [], 'context_pages': []}
+            complete = dict(incomplete, pages=[{'page': 1, 'disposition': 'read'}])
+            config = ExtractionConfig(provider='subscription')
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=[incomplete, complete]) as call:
+                path = extract_report(digest, store, config=config, budget=None)
+                extract_report(digest, store, config=config, budget=None)
+                self.assertEqual(call.call_count, 2)
+                self.assertEqual(call.call_args.kwargs['config'].effort, 'high')
+            self.assertTrue(json.loads(path.read_text())['assembly_complete'])
+            with patch('cordon_d.report_extraction._subscription_call', return_value=incomplete):
+                path.unlink()
+                for cached in path.parent.glob('blocks/*.json'):
+                    cached.unlink()
+                with self.assertRaisesRegex(RuntimeError, 'remains incomplete'):
+                    extract_report(digest, store, config=config, budget=None)
+            self.assertFalse(json.loads(path.read_text())['assembly_complete'])
+
+    def test_complete_document_response_is_not_forced_into_page_pairs(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                for _ in range(3):
+                    pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            reading = {'pages': [{'page': n, 'disposition': 'read'} for n in (1, 2, 3)],
+                       'tables': [], 'facts': [], 'issues': [], 'context_pages': []}
+            config = ExtractionConfig(provider='subscription')
+            with patch('cordon_d.report_extraction._subscription_call', return_value=reading) as call:
+                path = extract_report(digest, store, config=config, budget=None)
+                self.assertEqual(call.call_count, 1)
+                saved = json.loads(path.read_text())
+                self.assertEqual(saved['blocks'][0]['targets'], [1, 2, 3])
+                self.assertTrue(saved['assembly_complete'])
+                path.unlink()  # replay the retained block, including its complete page scope
+                extract_report(digest, store, config=config, budget=None)
+                self.assertEqual(call.call_count, 1)
+
     def test_output_limit_splits_target_pages_without_accepting_truncation(self):
         import pymupdf
         from cordon_d.store import put_bytes

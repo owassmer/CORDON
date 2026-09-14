@@ -140,10 +140,6 @@ def _quote_present(quote, page):
     return len(flat_wanted) >= 6 and flat_wanted in flat_available
 
 
-class EffectNotExplicit(ValueError):
-    """A proposed correction whose effect word the cited support does not print."""
-
-
 def _locator(evidence, page_text):
     page = evidence['page']
     if type(page) is not int or not 1 <= page <= len(page_text) or not evidence['text']:
@@ -218,13 +214,11 @@ def validate(reading, page_text, image_bearing=None):
         if not (any(norm(correction['scope']) in norm(x['text']) for x in correction['support'])
                 or any(_quote_present(correction['scope'], page_text[page - 1]) for page in pages)):
             raise ValueError('Correction scope is not literal in its support')
-        words = {
-            'replaces': ('annulla e sostituisce', 'annulla e si sostituisce', 'cancels and replaces', 'replaces'),
-            'amends': ('rettifica', 'modifica', 'errata corrige', 'amends', 'corrects'),
-            'annex': ('allegat', 'annex'),
-        }[correction['effect']]
-        if not any(word in norm(item['text']) for word in words for item in correction['support']):
-            raise EffectNotExplicit('Correction effect is not explicit in its source support')
+        # Effect is the source reader's interpretation of the quoted clause.
+        # A phrase allowlist cannot validate it: a valid cancellation need not
+        # use that phrase, and quoting it under a negation proves nothing.
+        # This function checks source locators and literals; semantic fidelity
+        # is established by reading the source, as for the document's other facts.
         for heading in correction['changed_columns']:
             notes = []
             for page in pages:
@@ -243,13 +237,7 @@ def validate(reading, page_text, image_bearing=None):
 
 
 def validated_components(reading, page_text, image_bearing=None):
-    """Preserve separately supported components when another quotation fails.
-
-    A cross-reference proposed as an annex without annex wording is kept as a
-    reference: it is a printed relationship to another report, not a correction,
-    and it does not make the correction inventory incomplete. A replacement or
-    amendment without its wording is rejected, because that effect is consequential.
-    """
+    """Preserve separately supported components when another quotation fails."""
     failures, advisories, references = [], [], []
     identity = reading['identity']
     try:
@@ -264,11 +252,6 @@ def validated_components(reading, page_text, image_bearing=None):
         try:
             advisories += validate(dict(identity=identity, corrections=[correction], limitations=[]),
                                    page_text, image_bearing)
-        except EffectNotExplicit as error:
-            if correction['effect'] == 'annex':
-                references.append(dict(correction, cause=f'{error}; retained as a cross-reference, not a correction'))
-                continue
-            failures.append(f'correction {index} reading rejected: {error}; inventory remains incomplete')
         except ValueError as error:
             failures.append(f'correction {index} reading rejected: {error}; inventory remains incomplete')
         else:
@@ -327,20 +310,20 @@ def correspondences(readings):
                         continue
                     if previous.get('protocol') and identity.get('protocol') and norm(previous['protocol']) != norm(identity['protocol']):
                         continue
-                    # A replacement cannot be its predecessor's predecessor.
-                    old_date, new_date = dated(identity.get('date')), dated(own.get('date'))
-                    if old_date and new_date and old_date > new_date:
-                        continue
                     candidates.append(digest)
             edge = dict(successor=successor, predecessor=candidates[0] if len(candidates) == 1 else None,
                 candidates=sorted(candidates), effect=correction['effect'], scope=correction['scope'],
-                changed_columns=correction['changed_columns'], support=correction['support'],
+                changed_columns=correction['changed_columns'] if correction['effect'] == 'amends' else [],
+                support=correction['support'],
                 declared_predecessor=previous, successor_identity=own,
                 basis='model-proposed source relationship and unique retained issuer/report identity',
                 provenance='model_proposed_reading',
                 cause=None if len(candidates) == 1 else 'predecessor not uniquely identified in retained relationship readings')
             if edge['predecessor']:
                 identity = identities[edge['predecessor']]
+                old_date, new_date = dated(identity.get('date')), dated(own.get('date'))
+                if old_date and new_date and old_date > new_date:
+                    edge['date_conflict'] = 'the declared predecessor is dated after the replacing document'
                 edge['issuer_labels'] = identity_issuer_match(previous, identity)
                 edge['issuer_match_basis'] = 'exact shared source-supported issuer label'
                 edge['unobserved_candidate_components'] = [field for field in ('date', 'protocol')

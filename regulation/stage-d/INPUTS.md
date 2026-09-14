@@ -8,7 +8,7 @@ established; no other row is.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | The official report linked from the monitoring record and consequential report/annex/correction references reached from it | One laboratory report with source-located sample/result occurrences, scoped statements and distinct renditions | The retained population is 1,176 PDFs (3,081 pages) from 1,903 successful captures. The 15 published-route failures remain after Frankfurt retry; six further HTTP/HTTPS predecessor candidates also failed. Archive lookups were rate-limited or timed out, not evidence of source absence. The bounded reading covers 26 PDFs, 79 pages and 377 sample occurrences; 1,150 PDFs remain unread. Deskew is implemented for scans. All 1,491 checked SELGE02 positions now agree after direct page inspection corrected seventeen reference date errors; this verifies selected fields, not all coordinates or prose. All 213 SELGE02 identifiers now lack an eligible publisher-origin projection: 62 had no such role and 151 carried explicit column-scoped uncertainty. The printed generic ID heading alone does not establish publisher origin or monitoring correspondence. Reading issues survive forward and reverse joins; explicit column-locator limits prevent identifier promotion, while unbound issue scopes remain visible for resolution. UNIBA's repeated/transposed views preserve six occurrences and can join only after complete field/qualification agreement; geometric native-cell ordering repairs displaced identifier punctuation while retaining the original extraction. The original and revised CNR73F pair exposes the corrected client/laboratory codes and cancellation clause. Correction clauses from the 21 discovered documents survive. The cache-only relationship graph now preserves declared predecessor, scope, issuer/date/protocol proposals, replacement chains and knowledge cutoffs; unsupported or competing identities remain unresolved. Whole-document relationship reading has 21 complete responses and five explicit partial readings among 26 selected PDFs: one generation refusal retained only a complete identity object, while four readings rejected unsupported source-quotation components and retained the independently supported remainder. Administrative protocol projections withhold seven unsupported proposals, including analytical methods; raw proposals survive and the next request prompt distinguishes the roles. The singular identity schema cannot establish the identities and scopes of a multi-document bundle. CNR91P retains a misassigned proposed revision-date fact; separate relationship metadata distinguishes current issue date from predecessor citations, but does not certify the older fact. CNR23 now has a derived occurrence correspondence through DDS 52/2024: the act names monitoring ID 11700049, report 23/2024 and the location matching its unique report row. Client code 2466181 remains a different identifier. The CNR73F predecessor candidate lacks independent protocol/issuer correspondence; DDS 74/2024 associates its old code with a different host/place, while DDS 138/2024 adopts the corrected code/location. The ordinary consumer exposes that conflict and withholds the old association; replacement of the laboratory report does not prove withdrawal of the administrative act. The reached ARIF application requires regional login and no authenticated data was accessed; CIHEAM custody/initial-analysis records remain the direct dependency for a literal CNR23 code crosswalk. Correction predecessors SELGE355/2020, IAMB34/2022 and IAMB4/2023 remain unrecovered. Native-text discovery is not a correction census on scans. The full-observation join yields 125 relationships across 122 observations, with 252 report rows unmatched. Administrative associations are read from source headers and qualified annex continuations, with every competing row retained and no positive-result filtering. Review withdrew the earlier CNR73 handoff: its uncertain publisher identifier had lost its qualification before reaching C; the repaired consumer rejects that selection. The adapter preserves independent inputs for eligible partial/undated relationships, without claiming an official-confirmation verdict. Full-population paid reading, geometric subdivision and specialist OCR were not performed. Diagnosis, page coverage and successful joins do not establish official confirmation or semantic completeness.
+| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,176 retained PDFs (3,081 pages). The repaired reader has 209 documents with completed page readings and 391 completed relationship readings; the remaining population must be read and joined through the same path. Subscription vision resumes after 15:20 America/New_York on 14 September 2026. Current consumer results and consequential source work below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
@@ -168,6 +168,45 @@ What the population shows, read and not reconciled:
 
 ## Laboratory reports
 
+The retained population comprises 1,903 successful captures and 1,176 distinct PDFs.
+The current offline rebuild recovers 209 complete document page readings without
+provider calls; 967 documents still require completed extraction. There are 391
+completed document-relationship readings. The ordinary full-observation join after
+the reader repairs covers all 2,320,354 observations: 2,918 have a unique matched
+report row, 168 have a provisional match, 111 have competing report-row occurrences,
+and four have competing observation identities for its report row. The reverse view
+contains 1,327 unmatched report rows. These figures describe retained extraction
+version `bf12550befda11586c24`, before further subscription reading, and do not establish
+source-family completeness or official confirmation.
+
+Finish the interrupted page readings and their joins, including the fine-print attachment whose source has 13 rows but whose saved reading
+recovered 12. A saved complete-document response formerly rejected by the page-pair
+partition now assembles through the ordinary reader without another model call. The runner
+rereads an incomplete page with magnified source views before declaring its document
+assembled. Continue full-population relationship reading, resolve unbound source
+qualifications and multi-document identity/scope, and correct the older CNR91P
+revision-date proposal from its source. The generic identifier role does not require
+guessing which organization assigned a literal code; attachment still requires the
+observation's report route, source identity and bidirectional uniqueness.
+
+The 15 published report routes failed in the inherited Frankfurt retry. The inferred
+HTTP/HTTPS routes for SELGE355/2020, IAMB34/2022 and IAMB4/2023 also failed; the earlier
+archive requests were rate-limited or timed out. These routes were not retried during
+this offline repair. Follow consequential publisher alternatives and predecessor
+references as the remaining documents are read. The reached ARIF application requires
+regional login; no authenticated records have been accessed. Laboratory designation,
+status and custody evidence remain necessary where the accepted confirmation branch
+requires them; report extraction alone cannot supply those facts.
+
+Administrative annexes retained from DDS 52/2024, 74/2024 and 138/2024 supply 183
+identified associations and seven fragments to reconcile with their source context.
+An act can establish a derived occurrence correspondence without equating different
+literal identifier strings. The older CNR73F act association conflicts with its report
+row; the corrected report and later act agree. Laboratory replacement does not prove
+administrative withdrawal. Source-declared correction relationships and their date
+conflicts survive; an exact cancellation phrase is not a prerequisite for reading a
+cancellation. Whole-report replacement does not assert that every column changed.
+
 `corpus/sources/reports/records.json` owns the route captures. Successful captures
 and distinct byte versions are retained; a current failed attempt names its cause.
 A filename shared by a failed and successful route supplies an acquisition
@@ -178,7 +217,7 @@ source-located references and explicitly recapture an admitted route.
 `cordon_d.report_extraction` reads the original page images with bounded vision
 and native-cell candidates. Schema-constrained output keeps one machine-readable response. Its representation carries literal tables, source-row occurrences,
 header roles and scoped report statements. The original and latest table-header pages are supplied as context to later blocks; its meaning is not assigned to them automatically. The model is explicitly configured;
-`claude-sonnet-5` at medium effort is the selected baseline, with one source-only high-effort reread for a detected unattached sampling date. Specialist OCR is not a mandatory pass.
+`claude-sonnet-5` at medium effort is the selected baseline, with a source-only high-effort reread for an incomplete page or detected unattached sampling date. Fine-print page completion receives overlapping 240-dpi source views as well as the original PDF. Specialist OCR is not a mandatory pass.
 An unresolved region is a reading limitation, never proof of source silence.
 Code copies selected native values and materializes rows; identifiers remain
 strings and invalid dates retain their original text and named parsing limit.
@@ -193,7 +232,7 @@ not certification that every source meaning was recovered.
 `cordon_d.findings.findings(groups, reports_root, store, extraction_version=...,
 known_through=...)` consumes `monitoring.distinct_observations(...)`. It preserves
 the publishing field and route on each member. Matches require the referenced
-source rendition, source-qualified sample identifier and a relationship unique
+source rendition, a source-supported literal identifier and a relationship unique
 in both directions within that report. Valid contradictory sampling dates remain
 conflicts; undated candidates are not silently displaced by dated ones. Separate
 reports can each attach to one observation without one replacing the other.
@@ -206,9 +245,10 @@ an observation's original route; the earlier source remains historical evidence.
 Amendments, ambiguous predecessors and cycles cannot silently select a current row.
 The graph preserves model-proposed provenance and unverified identity components.
 It does not establish administrative effect or turn a cited predecessor date into
-this rendition's issue date. A stopped generation can retain a complete identity
-object, explicitly without a completed correction inventory. Older cached readings
-retain their original prompt version and unsupported protocol proposals.
+this rendition's issue date. Quotation and locator checks validate literal support; semantic source reading establishes
+the proposed effect. A contradictory printed issue date does not erase an explicitly
+named predecessor or become an inferred corrected date. Retained responses preserve
+their model and prompt provenance.
 
 `cordon_d.source_associations` reads native ruled administrative tables through
 printed headers and source-qualified annex continuation. It preserves source

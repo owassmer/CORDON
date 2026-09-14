@@ -124,23 +124,29 @@ class ReportRelationships(unittest.TestCase):
         notes = validate(value, ['Laboratory A 31/2024 01/03/2024 Report identity Lab A'])
         self.assertTrue(any('not among the issuer labels' in note for note in notes))
 
-    def test_reference_without_annex_wording_is_a_reference_not_a_rejected_correction(self):
+    def test_literal_validation_does_not_require_a_cancellation_catchphrase(self):
         old = reading()
-        new = reading(date='04/03/2024', previous=old.relations['identity'], effect='annex')
-        new.relations['corrections'][0].update(scope='Same data as the preceding report', changed_columns=[],
-            support=[{'page': 1, 'text': 'Same data as the preceding report'}])
+        clause = 'si trasmette il documento corretto con preghiera di voler annullare la precedente comunicazione'
+        new = reading(date='04/03/2024', previous=old.relations['identity'])
+        new.relations['corrections'][0].update(scope=clause, changed_columns=[],
+            support=[{'page': 1, 'text': clause}])
         value = {key: value for key, value in new.relations.items() if key != 'reading_complete'}
-        page = 'Laboratory A 31/2024 01/03/2024 04/03/2024 Report identity Same data as the preceding report'
+        page = 'Laboratory A 31/2024 01/03/2024 04/03/2024 Report identity ' + clause
         result, failures = validated_components(value, [page])
         self.assertEqual(failures, [])
+        self.assertEqual(result['corrections'][0]['effect'], 'replaces')
+        result, failures = validated_components(value, [page.replace(clause, '')])
         self.assertEqual(result['corrections'], [])
-        self.assertEqual(len(result['references']), 1)
-        self.assertIn('cross-reference', result['references'][0]['cause'])
-        # The same wording claimed as an amendment is consequential, and is rejected.
-        value['corrections'][0]['effect'] = 'amends'
-        result, failures = validated_components(value, [page])
-        self.assertEqual(result['corrections'], [])
-        self.assertTrue(failures and 'not explicit' in failures[0])
+        self.assertTrue(failures)
+
+    def test_date_conflict_does_not_erase_an_explicitly_named_predecessor(self):
+        old = reading()
+        new = reading(number='32/2024', date='01/03/2023', previous=old.relations['identity'])
+        edge, = correspondences({'old': old, 'new': new})
+        self.assertEqual(edge['predecessor'], 'old')
+        self.assertIn('date_conflict', edge)
+        self.assertEqual(edge['successor_identity']['date'], '01/03/2023')
+        self.assertEqual(edge['changed_columns'], [])
 
 
 if __name__ == '__main__':

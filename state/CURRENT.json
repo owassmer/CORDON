@@ -1,6 +1,6 @@
 {
   "schema": "cordon-current-state-v1",
-  "as_of": "2026-09-13",
+  "as_of": "2026-09-14",
   "operator": "Regione Puglia — Sezione Osservatorio Fitosanitario",
   "telos": "Reduce projected Xylella loss through a legally and evidentially faithful computational decision instrument.",
   "current_stage": "D",
@@ -86,14 +86,14 @@
         "source_bindings": "regulation/stage-d/source-bindings.json"
       },
       "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
-      "current_capability": "The monitoring-observation family remains established (INPUTS.md row 1). The report reader accounts for 26 PDFs and 79 pages; 1,150 PDFs remain unread. The ordinary full-observation join yields 125 relationships across 122 observations. Source-declared correction graphs preserve predecessor uncertainty, scope, historical renditions and knowledge cutoffs. Native administrative annex reading supplies 183 identified associations and seven unresolved fragments from three retained, R2-verified acts. CNR23 now joins through an explicit act report/location association while preserving its distinct client code. The old CNR73F administrative target conflicts with its laboratory row; the corrected target joins, without implying withdrawal of the earlier act. Whole-document relationship reading has 21 complete and five explicitly partial responses; bundle identity, unbound qualifications, predecessor correspondence and population reading remain open. INPUTS rows 2 and 6 own the material limits. PR #7 remains in progress; no source-family closure or merge is implied.",
+      "current_capability": "The monitoring-observation stream and bounded national calendar remain established. Laboratory reports and observation joins are in progress on PR #7, adopted-area reading and geography binding on PR #8, and monitoring positional qualification on PR #14. INPUTS.md rows 1-3 own their scope, current coverage and remaining source work. The Claude subscription is the authorized extraction route. No Stage D closure, source-population acceptance or merge is implied.",
       "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent review under REVIEW_PRINCIPLES.md and Owen acceptance.",
       "next": [
-        "Complete laboratory report source verification, remaining readings and their observation/correction relationships (INPUTS.md row 2).",
-        "Acquire every demarcated-area geometry version reached by A and bind each to its adopting act (row 3).",
-        "Establish the plant, surface and parcel populations C's distance and survey calculations require (rows 4-5).",
-        "Read the removal determinations and their incorporated annexes through one general reader (row 6).",
-        "Run whole-D convergent review, present D for Owen acceptance, then open Stage E."
+        "Complete laboratory report reading, source relationships and bidirectional observation joins (INPUTS.md row 2; PR #7).",
+        "Complete adopted-area page reading, source verification and adopting-act/map correspondence (row 3; PR #8).",
+        "Establish sourced positional qualification for monitoring locations (row 1; PR #14), then required plant, surface and parcel populations (rows 4-5).",
+        "Continue removal orders, notice and response events, standing, protected plants and execution records.",
+        "Run whole-D convergent review and present D for Owen acceptance before opening Stage E."
       ]
     },
     "E": {
