@@ -15,7 +15,7 @@ from tempfile import TemporaryDirectory
 
 import requests
 
-from .reports import ROLES, READER_IMPLEMENTATION, materialize, validate_block
+from .reports import ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows
 
 IMPLEMENTATION = Path(__file__).read_bytes()
 from .store import blob_path
@@ -84,7 +84,7 @@ faithfully supplies the whole visual cell. Otherwise transcribe the visual value
 facts: [{id: unique fact ID, role: printed statement/date/identity/relation role, page, locator,
  section: pN/exact enclosing printed section heading including markers, or null,
  text: exact relevant statement, value: literal date/identifier component if relevant,
- applies_to:[report|tableID|tableID/rowID|tableID/cN|factID|section:pN/heading|unattached]}].
+ applies_to:[report|tableID|tableID/rowID|native:nativeCellID|tableID/cN|factID|section:pN/heading|unattached]}].
 Capture document identity, issuer, distinct date labels, received versus listed
 sample counts, annex/correction references, result qualifications and relevant
 notes. Preserve their actual scope. A test, analyte or qualification from the
@@ -111,6 +111,21 @@ category in a row does not erase a more precise report-wide method statement.
 Every text field on a fact or support MUST quote the source in its original
 language. Do not put your explanations, translations or descriptions of layout
 in those fields. Put an unstated or uncertain relationship in issues instead.
+When one record continues across physical pages, retain each physical part as its
+own row, containing only fields printed in that part. Recover the continuation
+explicitly as a fact with role record_continuation. Quote the printed sample
+identity in text and value; cite its actual physical header in page and locator.
+Its applies_to must name every part using exact tableID/rowID selectors, or one
+native:<native_cell ID> anchor belonging uniquely to each part. Include only the
+parts of that continued occurrence, never a separate complete duplicate display.
+This is your reading of source structure, not a publisher prose assertion. Establish
+it from the actual headings and continuation across the source pages, never from
+equal analytical values, row IDs you invented, or proximity alone. Preserve the
+scope of each part's qualifications. For an ambiguous continuation, mark the page
+partly_read and identify the unresolved parts in issues so the existing source
+reread can resolve them. Do not silently leave a continuation anonymous or invent
+unread cells for fields printed on the next page. This applies equally to native,
+scanned, transposed and differently formatted records.
 Never merge a second physical representation of a table into the first, even when
 it repeats the same samples or is transposed. Return both source occurrences,
 with a literal relationship fact if the source establishes repetition.
@@ -458,6 +473,7 @@ def _run_subscription_call(*, prompt, schema, digest, source, config, request_id
             '--disable-slash-commands', '--strict-mcp-config', '--no-chrome',
             '--tools', 'Read', '--allowedTools', 'Read', '--permission-mode', 'dontAsk',
             '--add-dir', directory, '--no-session-persistence', '--output-format', 'json',
+            '--debug-file', str(raw_path.with_suffix('.debug.log')),
             '--json-schema', json.dumps(schema, sort_keys=True), instruction]
         try:
             completed = subprocess.run(command, capture_output=True, text=True,
@@ -629,14 +645,86 @@ def extract_relationships(digest, store, *, config, budget, execute=True, source
     return target
 
 
-def extract_report(digest, store, *, config, budget, execute=True):
+def _repair_continuations(digest, store, *, extraction_version, config, budget, execute=True):
+    """Ask the established reader for omitted bindings, preserving retained cells."""
+    import pymupdf
+    prior = store / 'derived/reports' / extraction_version / digest / 'report.json'
+    payload = json.loads(prior.read_text())
+    if payload['source_sha256'] != digest:
+        raise ValueError('Continuation repair source differs from retained reading')
+    revision = version(config)
+    original = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
+    parts = [{'selector': row.locator, 'page': row.page,
+              'native_cells': [c['native_cell'] for c in row.cells if c.get('native_cell')]}
+             for row in original.rows]
+    with pymupdf.open(blob_path(store, digest)) as document:
+        pages = list(range(1, len(document) + 1))
+        content, native, _ = _page_content(document, pages, [], config)
+    instruction = (
+        'Repair omitted record-continuation relationships in an existing reading. '
+        'Read the original source and return only facts with role record_continuation, '
+        'using the continuation contract above. Each fact text and value must contain '
+        'ONLY its literal printed identifier, with page and locator pointing to the '
+        'actual identity header, not the continuation page. Never stitch quotes, insert '
+        'ellipses or put a layout explanation in text. issues is ONLY for unresolved '
+        'required bindings; do not put explanatory exclusions or complete displays there. '
+        'Return pages:[], tables:[]; preserve '
+        'every retained cell by not retranscribing tables. The following inventory '
+        'provides selectors for physical parts, NOT evidence of identity or correspondence. '
+        'Choose identities and relationships from the original PDF. Each fact must bind '
+        'all parts of one continued occurrence, excluding separate complete displays. '
+        'Use exact selector strings from this inventory in applies_to. If the source '
+        'cannot establish a binding, state its exact cause in issues.\n' + json.dumps(parts))
+    content.append({'type': 'text', 'text': instruction})
+    prompt = '\n\n'.join(c['text'] for c in content if c['type'] == 'text')
+    request = {'model': config.model, 'max_tokens': config.max_tokens,
+               'messages': [{'role': 'user', 'content': content}],
+               'output_config': {'effort': config.effort,
+                                 'format': {'type': 'json_schema', 'schema': output_schema()}}}
+    identity = request if config.provider == 'api' else {
+        'provider': config.provider, 'model': config.model, 'effort': config.effort,
+        'source_sha256': digest, 'prompt': prompt, 'schema': output_schema()}
+    request_id = sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+    raw = store / 'derived/reports/responses' / (request_id + '.json')
+    reading = _retained_reading(raw, config.model) if raw.exists() else None
+    if reading is None and not execute:
+        raise NoRetainedResponse('Continuation binding needs a source reading')
+    if reading is None:
+        reading = (_subscription_call(prompt=prompt, schema=output_schema(), digest=digest,
+            source=blob_path(store, digest), config=config, request_id=request_id, raw_path=raw)
+            if config.provider == 'subscription' else
+            _call(request, config=config, budget=budget, request_id=request_id, raw_path=raw))
+    validate_block(reading, targets=[], page_count=payload['page_count'],
+                   native_cells=native, supplied_pages=pages)
+    if reading['tables'] or any(f['role'] != 'record_continuation' for f in reading['facts']):
+        raise ValueError('Continuation-only repair cannot replace cells or unrelated facts')
+    item = {'targets': [], 'supplied_pages': pages, 'context_pages': pages,
+            'reading': reading, 'native_cells': native, 'request_sha256': request_id}
+    payload = dict(payload, extraction_version=revision, assembly_complete=False,
+                   replayed_from_extraction_version=extraction_version,
+                   blocks=[*payload['blocks'], item])
+    target = store / 'derived/reports' / revision / digest / 'report.json'
+    write_json(target, payload)
+    assembled = materialize(digest, revision, payload['page_count'], payload['blocks'])
+    record_rows(assembled)
+    if reading['issues'] or not reading['facts']:
+        raise ValueError('Source continuation relationships remain unresolved')
+    payload['assembly_complete'] = len(assembled.complete_pages) == assembled.pages
+    write_json(target, payload)
+    return target
+
+
+def extract_report(digest, store, *, config, budget, execute=True, continuation_from=None):
+    if continuation_from is not None:
+        return _repair_continuations(digest, store, extraction_version=continuation_from,
+                                     config=config, budget=budget, execute=execute)
     import pymupdf
     revision = version(config)
     directory = store / 'derived/reports' / revision / digest
     target = directory / 'report.json'
     if target.exists():
         saved = json.loads(target.read_text())
-        if saved.get('assembly_complete') is True and all(fully_read(b['reading']) for b in saved['blocks']):
+        if saved.get('assembly_complete') is True and all(not b['targets'] or fully_read(b['reading']) for b in saved['blocks']):
             return target
     blocks, context, heading_context = [], set(), set()
     with pymupdf.open(blob_path(store, digest)) as document:
@@ -646,7 +734,7 @@ def extract_report(digest, store, *, config, budget, execute=True):
                                'page_count': page_count, 'config': asdict(config),
                                'assembly_complete': complete, 'blocks': blocks})
         save()
-        def read(targets):
+        def read(targets, continuation_review=None):
             supplied_context = context | heading_context
             pages = sorted(supplied_context | set(targets))
             # Through the API the model sees only the pages sent, so a citation outside
@@ -654,6 +742,8 @@ def extract_report(digest, store, *, config, budget, execute=True):
             # document, so any physical page of it is a page it was shown.
             supplied = pages if config.provider == 'api' else list(range(1, page_count + 1))
             content, native, regions = _page_content(document, pages, targets, config)
+            if continuation_review:
+                content.append({'type': 'text', 'text': continuation_review})
             request = {'model': config.model, 'max_tokens': config.max_tokens,
                        'messages': [{'role': 'user', 'content': content}]}
             legacy_id = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
@@ -809,7 +899,9 @@ def extract_report(digest, store, *, config, budget, execute=True):
                     + json.dumps(item['reading']['pages'], ensure_ascii=False)
                     + '\nRead those physical pages again at sufficient magnification to recover '
                     'every printed row and cell. Return the complete target-page reading. '
-                    'A table continuing on a later page does not make this page partly read. '
+                    'A continuation with an established record binding does not make this page partly read. '
+                    'Resolve ambiguous continuations from the source headings and physical parts; '
+                    'do not mark their correspondence complete merely because their cells are legible. '
                     'A cover-letter count does not prove the number of rows in this attachment; '
                     'account for the actual source. Preserve genuine source illegibility.')
                 repair_config = replace(config, effort='high')
@@ -874,6 +966,33 @@ def extract_report(digest, store, *, config, budget, execute=True):
                             'cause': str(single_error) + '; single-page geometric subdivision is not implemented'})
                         raise
             first += len(targets)
-        materialize(digest, revision, page_count, blocks)
-        save(complete=True)
+        assembled = materialize(digest, revision, page_count, blocks)
+        try:
+            record_rows(assembled)
+        except ValueError as defect:
+            # A failed explicit binding returns to the same source reader once.
+            # Re-read blocks containing declared parts together, not unrelated PDFs.
+            affected = [item for item in blocks if any(
+                fact['role'] == 'record_continuation' for fact in item['reading']['facts'])]
+            scopes = {scope for item in affected for fact in item['reading']['facts']
+                      if fact['role'] == 'record_continuation' for scope in fact['applies_to']}
+            for item in blocks:
+                if item in affected:
+                    continue
+                part_scopes = {f"{table['id']}/{row['id']}" for table in item['reading']['tables']
+                               for row in table['rows']}
+                part_scopes.update('native:' + key for key in item['native_cells'])
+                if scopes.intersection(part_scopes):
+                    affected.append(item)
+            targets = sorted({page for item in affected for page in item['targets']})
+            blocks[:] = [item for item in blocks if item not in affected]
+            save()
+            read(targets, 'Resolve this record-continuation binding defect from the original PDF: '
+                 + str(defect) + '. Re-read all target parts and their actual identity headers. '
+                 'Retain every physical occurrence and its qualifications. Equal results do not '
+                 'establish correspondence. Return explicit, uniquely bound continuation facts.')
+            blocks.sort(key=lambda item: min(item['targets']))
+            assembled = materialize(digest, revision, page_count, blocks)
+            record_rows(assembled)
+        save(complete=len(assembled.complete_pages) == page_count)
     return target

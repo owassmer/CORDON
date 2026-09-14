@@ -169,15 +169,10 @@ What the population shows, read and not reconciled:
 ## Laboratory reports
 
 The retained population comprises 1,910 captures with source bytes and 1,180 distinct PDFs.
-The current offline rebuild recovers 209 complete document page readings without
-provider calls; 971 documents still require completed extraction. There are 391
-completed document-relationship readings. The ordinary full-observation join after
-the reader repairs covers all 2,320,354 observations: 2,923 have a unique matched
-report row, 168 have a provisional match, 106 have competing report-row occurrences,
-and four have competing observation identities for their report row. The reverse view
-contains 1,322 unmatched report rows. These figures describe retained extraction
-version `bf12550befda11586c24`, before further subscription reading, and do not establish
-source-family completeness or official confirmation.
+Page and relationship readings continue through the subscription in the background.
+The bounded recovered-source and continuation consumer results below describe what
+has been verified; they do not establish completion of the retained population or
+official confirmation. Whole-population reading and ordinary joins remain required.
 
 The fine-print SELGE 27/2015 attachment now supplies all 13 source rows. Direct
 page comparison verifies 28 February for its first sample and 26 February for the
@@ -217,7 +212,8 @@ That identifier is present in the accepted observation stream, sampled 5 October
 2021, and refers to the retained `RAPPORTO_PROVA_N_02_906_2021.pdf`. All four pages
 of that protocol-numbered copy have identical native text and rendered content to
 the supplied report-8 PDF. The acquisition entry records this correspondence;
-both byte versions and their routes remain retained.
+both byte versions and their routes remain retained. The additional observation
+1222184 now matches through that protocol copy.
 The supplied components omit their covering letters. Their result tables can
 supply literal results and sample correspondence; establishing the particular
 analytical method and issuance from the laboratory itself still requires the
@@ -245,8 +241,11 @@ expressly cancels and replaces 355 and supplies its own two-method statement and
 the 7 September Castellana Grotte positive list, Harper method and received-sample
 qualification. Neither IAMB correction identifies which individual values changed;
 no changed-column delta may be inferred merely from the word Positivi. Recovery
-of a predecessor is required when a consumer actually needs that earlier state
-or delta, not to consume these independently stated corrected facts.
+of a predecessor is required to establish whether a named sample/result was already
+reported in that earlier rendition, or which value the correction changed. The
+original alone would still not prove the Service's official-confirmation or notice
+event. The present corrected-result attachments do not wait for these originals;
+no additional unrestricted predecessor search is assigned.
 
 The reached ARIF application requires
 regional login; no authenticated records have been accessed. Laboratory designation,
@@ -368,15 +367,27 @@ tests do not confer that status.
   reasons to expand the aperture.
 
 The join retains identifier-only display occurrences but requires an analytical
-result before they compete as finding-result rows. Direct inspection of UNIBA
-87/2023 confirms the small table and expanded transposed display; five competing
-joins are resolved by this correction. Further source rereading is required for
-its remaining display relationships, UNIBA 15/2024 and 66/2023, and the early
-reports whose daily counters and laboratory identifiers collide. Direct inspection and source rereading of SELGE 139/2015 page 2 resolve the
-latitude to the printed 40.42257829 for daily sample 1. The source's daily and
-laboratory codes remain distinct. Source checks of UNIBA 15/2024 and 66/2023 found unresolved transposed-field
-attachment and nonliteral relationship support respectively; bounded source
-rereads are running before their display correspondence is accepted. UNIBA
-87/2023's fresh reading exceeded the subscription call timeout; its bounded retry
-runs separately from the remaining population. No code chooses an identifier
-namespace or repairs a digit from result agreement.
+result before they compete as finding-result rows. Printed field labels and complete
+matrix equality now derive a transposed display's correspondence to a unique
+companion table without requiring a publisher's prose declaration of repetition.
+Matching source identifiers, populated fields and analytical results establish repeated displays;
+every physical occurrence and its own qualifications remain available. This does
+not declare the qualifications identical. UNIBA 15/2024's three repeated sample
+displays and UNIBA 66/2023's repeated positive row reach the ordinary join without
+invented source quotations. UNIBA 87/2023's five continued records are now bound by
+source-reader facts citing their actual page-2 identity headers. The bounded
+consumer check matches all 19 referring observations across these three reports.
+The reverse view preserves 35, 6 and 5 physical occurrences respectively: all of
+the first two reports' occurrences link, while the third retains its three negative
+rows without a corresponding published observation. Repeated displays cannot
+supply two independent tests to the confirmation adapter.
+Cross-page correspondence belongs to the established document reader: it must
+recover each continued record's printed identity and exact physical parts.
+Deterministic assembly resolves only that declared relationship, preserving source
+cells and qualification scopes; it does not infer relationships from layout or
+analytical agreement. The reverse view retains all physical occurrences. Invalid
+bindings return to the same reader for bounded source resolution.
+Direct inspection and source rereading of SELGE 139/2015 page 2 resolve the latitude
+to the printed 40.42257829 for daily sample 1. The source's daily and laboratory codes
+remain distinct. No code chooses an identifier namespace or repairs a digit from
+result agreement.

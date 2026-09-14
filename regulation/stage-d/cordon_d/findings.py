@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
-from .reports import Report, report
+from .reports import Report, report, record_rows
 from .monitoring import day as observation_day
 from .report_relations import correspondences, related, replacements, current_limitation, norm, dated
 
@@ -84,26 +84,24 @@ def _comparable(member, results):
 
 
 def _repeated_representations(candidates):
-    """Relate source-supported repetitions; keep every row and result occurrence."""
+    """Derive equal report displays; keep every row and result occurrence."""
     rows = [c['row'] for c in candidates.values()]
-    if len({r.page for r in rows}) != 1:
+    if not rows or not rows[0].identifiers or len({row.identifiers for row in rows}) != 1:
         return False
     tables = {r.locator.split('/')[1] for r in rows}
     if len(tables) != len(rows):
         return False  # Repeated rows within one table are not a second representation.
-    common = set.intersection(*[{f['id'] for f in row.facts
-        if f['role'] == 'repeated_representation' and tables <= set(f['applies_to'])}
-        for row in rows])
-    if not common:
-        return False
     def values(row):
         if any(c['text'] is None and c.get('cause') != 'not_stated' for c in row.cells):
             return None
-        cells = sorted((tuple(c['heading']), c['role'], ' '.join((c['text'] or '').split())) for c in row.cells)
-        facts = sorted(json.dumps({k: f.get(k) for k in ('role', 'text', 'value', 'section')}, sort_keys=True)
-                       for f in row.facts if f['role'] != 'repeated_representation')
+        cells = sorted((tuple(c['heading']), c['role'], c.get('section') or '', ' '.join((c['text'] or '').split()))
+                       for c in row.cells if c['text'] and c['text'].strip())
         results = [(r.assay, r.analyte, r.text) for r in row.results]
-        return cells, facts, results
+        return cells, results, row.sampling_date, row.date_cause
+    sections = {frozenset(f['section'].split('/', 1)[-1] for f in row.facts if f.get('section'))
+                for row in rows}
+    if len(sections - {frozenset()}) > 1:
+        return False
     first = values(rows[0])
     return first is not None and all(values(r) == first for r in rows[1:])
 
@@ -186,6 +184,9 @@ def _monitoring_associations(group, route):
         if date is None:
             continue
         for position in positions:
+            # A float's synthetic .0 must not turn integer degrees into decimal evidence.
+            if any(value.is_integer() for value in position.coordinates):
+                continue
             fields = {'plant_id': group.reference, 'report_reference': reference,
                       'report_date': date.isoformat(), 'longitude': str(position.coordinates[0]),
                       'latitude': str(position.coordinates[1])}
@@ -241,11 +242,12 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
             if reference:
                 association_index[reference].append(dict(association,
                     reading_issues=source.issues, reading_scope=source.scope))
-    row_index = {}
+    row_index, records_by_document = {}, {}
     for digest, reading in readings.items():
         if isinstance(reading, Report):
             index = defaultdict(list)
-            for row in reading.rows:
+            records_by_document[digest] = record_rows(reading)
+            for row in records_by_document[digest]:
                 for identifier in row.identifiers:
                     index[identifier].append(row)
             row_index[digest] = index
@@ -299,18 +301,18 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                                           *_monitoring_associations(group, route)])
                     link['source_associations'] = source_links
                     coordinate_links = {row.locator: [_coordinate_relation(row, a) for a in source_links]
-                                        for row in reading.rows} if source_links else {}
+                                        for row in records_by_document[digest]} if source_links else {}
                     host_links = {row.locator: [_host_relation(row, a) for a in source_links]
-                                  for row in reading.rows} if source_links else {}
+                                  for row in records_by_document[digest]} if source_links else {}
                     link['association_comparisons'] = coordinate_links
-                    derived = {row.locator for row in reading.rows if source_links
+                    derived = {row.locator for row in records_by_document[digest] if source_links
                         and len(reading.complete_pages) == reading.pages
                         and all(value == 'agrees at published decimal precision' for value in coordinate_links[row.locator])
                         and all(value in {'agrees on printed host', 'not supplied by source association'}
                                 for value in host_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
                     # Every compatible row competes. Result polarity cannot select identity.
-                    rows = [row for row in reading.rows if row in row_index[digest].get(group.reference, [])
+                    rows = [row for row in records_by_document[digest] if row in row_index[digest].get(group.reference, [])
                             or row.locator in derived]
 
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
@@ -370,7 +372,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                 continue
             for candidate in candidates.values():
                 if repeated:
-                    candidate['relationship_basis'] = 'model-proposed repeated representation; all recovered fields and qualifications agree'
+                    candidate['relationship_basis'] = 'derived repeated display: populated fields and analytical results agree; each occurrence retains its own qualifications'
                 output['matches'].append(candidate)
         if output['matches']:
             output['status'] = ('matched' if all(c['reading_complete'] and c['temporal'] == 'agrees' for c in output['matches'])
@@ -390,6 +392,8 @@ def report_rows(readings, joined):
     for finding in joined:
         for item in finding['matches']:
             matched[item['key']].add(finding['observation'].identity)
+            for part in (item['row'].projection or {}).get('parts', ()):
+                matched[(item['key'][0], part)].add(finding['observation'].identity)
     for reading in readings:
         if isinstance(reading, Report):
             for row in reading.rows:

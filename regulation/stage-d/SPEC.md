@@ -82,10 +82,32 @@ still stops explicitly until geometric subdivision is implemented.
 Scanned pages receive a small affine rotation estimated from horizontal ink;
 native-text pages retain their original rendering. This changes the supplied
 image, never the source bytes. Deskew does not certify cell association. A
-transposed repeated display becomes sample rows only when its complete matrix
-equals a source-related companion table. Original axes and cell positions remain
-available. The join accepts repeated occurrences only when every recovered field,
-qualification and result agrees, and preserves all occurrences.
+transposed display becomes sample rows when its printed field-label axis and
+complete value matrix equal a unique companion table. A publisher need not add
+a prose declaration of repetition. Original axes and cell positions remain
+available. Matching source-supported identifiers, populated fields and analytical results can establish repeated
+displays across report pages; rows repeated within one table remain competing
+occurrences. Blank extra display fields supply no additional value. Each occurrence
+retains its own qualifications; correspondence does not assert that qualifications
+agree or authorize moving them between occurrences. Sampling dates and
+conflicting recovered section headings still constrain correspondence. A
+record continuation is recovered explicitly by the established document reader as
+one `record_continuation` fact, quoting the printed identity and naming every
+physical part. `reports.record_rows` resolves those exact selectors and assembles
+the declared parts; it does not discover continuation from layout or equal results.
+It works without a separate complete display. Native-cell anchors or exact output
+row selectors permit different source layouts and cross-block references. Each
+cell retains its physical locator, and each qualification retains its original
+scope. The reverse consumer returns every physical part with its observation link.
+Unbound, conflicting or overlapping declarations trigger a bounded reread through
+the same document reader. When cells are already retained, `extract_report` accepts
+`continuation_from=<retained version>` to recover only omitted continuation facts
+through its existing prompt, schema and provider. That repair preserves the original
+blocks and request provenance; it does not retranscribe the tables. Identity-only
+quotations must cite the identity-bearing physical page. Ambiguous source structure is read as partly recovered
+and goes through that reader's page-completion repair. A failure never authorizes
+a second semantic extraction path or an invented correspondence.
+
 
 For native identifier cells, ordinary consumption checks the retained extraction
 against the source cell, then reads its coordinate-sorted text. A changed order is

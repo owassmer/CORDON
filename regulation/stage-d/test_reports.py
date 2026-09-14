@@ -160,6 +160,114 @@ class LiteralReport(unittest.TestCase):
         self.assertFalse(incomplete.complete_pages)
         self.assertIn('no unique fully checked transpose', incomplete.issues[-1]['cause'])
 
+    def test_labelled_transpose_is_derived_without_a_duplicate_declaration(self):
+        item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['00456', '01/06/2024', 'Negativo', '02/06/2024']])
+        source = item['reading']['tables'][0]
+        labels = {'heading': [], 'role': 'other', 'test': None, 'analyte': None, 'support': []}
+        transpose = {'id': 'p1-t2', 'page': 1,
+            'columns': [labels] + [dict(source['columns'][0], heading=[r['cells'][0]['text']])
+                                   for r in source['rows']],
+            'rows': [{'id': f'field{i}', 'cells': [{'text': ' '.join(c['heading'])}] +
+                     [copy.deepcopy(r['cells'][i]) for r in source['rows']]}
+                     for i, c in enumerate(source['columns'])]}
+        item['reading']['tables'].append(transpose)
+        reading = materialize('hash', 'v', 1, [item])
+        self.assertEqual([r.reference for r in reading.rows], ['00123', '00456', '00123', '00456'])
+        self.assertEqual(reading.rows[-1].projection['companion_table'], 'p1-t1')
+        transpose['rows'][2]['cells'][2]['text'] = 'Positivo'
+        rejected = materialize('hash', 'v', 1, [item])
+        self.assertEqual(len(rejected.rows), 2)
+        self.assertFalse(rejected.complete_pages)
+
+    def test_reader_declared_continuation_preserves_parts_and_qualifications(self):
+        from dataclasses import replace
+        from cordon_d.reports import record_rows
+        reading = materialize('hash', 'v', 1, [block([
+            ['00123', '01/06/2024', 'Positivo', '02/06/2024']])])
+        original = reading.rows[0]
+        prefix = replace(original, cells=original.cells[:2], results=())
+        note = {'id': 'tail-note', 'role': 'qualification', 'text': 'Solo il risultato',
+                'applies_to': ['p2/tail/r1']}
+        tail = replace(original, page=2, locator='p2/tail/r1', reference=None,
+                       cells=original.cells[2:], sampling_dates=(), facts=(note,))
+        raw = replace(reading, rows=(prefix, tail))
+        self.assertEqual(record_rows(raw), (prefix, tail))  # No relationship from identical values.
+        continuation = {'id': 'relation', 'role': 'record_continuation', 'value': '00123',
+                        'text': '00123', 'page': 1, 'locator': prefix.cells[0]['locator'],
+                        'applies_to': [prefix.locator, tail.locator]}
+        declared = replace(raw, facts=(continuation,))
+        assembled, = record_rows(declared)
+        self.assertEqual(assembled.reference, '00123')
+        self.assertEqual(assembled.cells, original.cells)
+        self.assertEqual(assembled.results, original.results)
+        self.assertEqual(assembled.sampling_date, original.sampling_date)
+        self.assertEqual(assembled.projection['parts'], [prefix.locator, tail.locator])
+        self.assertEqual(assembled.facts, (note,))
+        self.assertEqual(note['applies_to'], ['p2/tail/r1'])
+        self.assertEqual(declared.rows, (prefix, tail))
+        self.assertFalse(tail.identifiers)
+        # A client code and a laboratory code can belong to the same specimen.
+        laboratory_id = dict(prefix.cells[0], role='laboratory_id', heading=['Lab ID'],
+                             text='LAB-9', locator=prefix.locator + '/lab')
+        with_lab = replace(declared, rows=(replace(prefix, cells=(*prefix.cells, laboratory_id)), tail))
+        self.assertEqual(record_rows(with_lab)[0].laboratory_reference, 'LAB-9')
+        for invalid in (
+                replace(declared, rows=(prefix,)),
+                replace(declared, facts=(dict(continuation, value='different'),)),
+                replace(declared, facts=(dict(continuation, page=2),)),
+                replace(declared, facts=(dict(continuation, text='00123 ... Positivo'),)),
+                replace(declared, facts=(dict(continuation, applies_to=['report', tail.locator]),)),
+                replace(declared, rows=(prefix, replace(tail, cells=(
+                    dict(original.cells[1], text='02/06/2024'), *tail.cells)))),
+                replace(declared, facts=(continuation, dict(continuation,
+                    applies_to=[prefix.locator, 'missing'])))):
+            with self.assertRaises(ValueError):
+                record_rows(invalid)
+
+    def test_swapped_source_headers_require_a_new_reader_binding(self):
+        import pymupdf
+        from dataclasses import replace
+        from cordon_d.reports import record_rows
+        original = materialize('hash', 'v', 1, [block([
+            ['A', '01/06/2024', 'Positivo', '02/06/2024'],
+            ['B', '01/06/2024', 'Positivo', '02/06/2024']])])
+        def declared(header):
+            parts, facts = [], []
+            for i, identifier in enumerate(header):
+                base = original.rows[i]
+                prefix = replace(base, reference=identifier, cells=(dict(base.cells[0], text=identifier,
+                    native_cell=f'p1-t1-r1-c{i + 2}'), base.cells[1]), results=())
+                tail = replace(base, page=2, locator=f'p2/tail/r{i}', reference=None,
+                               cells=base.cells[2:], sampling_dates=())
+                parts.extend((prefix, tail))
+                facts.append({'role': 'record_continuation', 'value': identifier, 'text': identifier, 'page': 1,
+                              'applies_to': [f'native:p1-t1-r1-c{i + 2}', tail.locator]})
+            return replace(original, rows=tuple(parts), facts=tuple(facts))
+        def source(header, path):
+            with pymupdf.open() as document:
+                page = document.new_page()
+                for x in (40, 140, 240, 340):
+                    page.draw_line((x, 40), (x, 100))
+                for y in (40, 70, 100):
+                    page.draw_line((40, y), (340, y))
+                for i, value in enumerate(('Id', *header)):
+                    page.insert_text((45 + 100 * i, 60), value)
+                for i, value in enumerate(('Date', 'same', 'same')):
+                    page.insert_text((45 + 100 * i, 90), value)
+                document.new_page()
+                document.save(path)
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'swapped.pdf'
+            source(['B', 'A'], path)
+            with self.assertRaisesRegex(ValueError, 'differs from its source cell'):
+                positioned_identifiers(declared(['A', 'B']), path)
+            fresh = positioned_identifiers(declared(['B', 'A']), path)
+            records = record_rows(fresh)
+            self.assertEqual([row.reference for row in records], ['B', 'A'])
+            self.assertEqual([row.results[0].text for row in records], ['Positivo', 'Positivo'])
+            self.assertEqual(len(record_rows(replace(fresh, facts=()))), 4)
+
     def test_extraction_version_describes_loaded_code_not_later_disk_edits(self):
         expected = version(ExtractionConfig())
         with patch('pathlib.Path.read_bytes', side_effect=AssertionError('late disk read')):
@@ -236,6 +344,75 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual(call.call_count, 1)
             self.assertEqual(call.call_args.args[0]['output_config']['effort'], 'medium')
             self.assertTrue(json.loads(first.read_text())['assembly_complete'])
+
+    def test_continuation_only_repair_preserves_retained_reading(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.reports import record_rows
+        original = block([['00123', '01/06/2024', None, None],
+                          [None, None, 'Positivo', '02/06/2024']])
+        proposal = {'pages': [], 'tables': [], 'context_pages': [1], 'issues': [],
+                    'facts': [{'id': 'continued', 'role': 'record_continuation',
+                        'page': 1, 'locator': 'header', 'text': '00123', 'value': '00123',
+                        'applies_to': ['p1-t1/r1', 'p1-t1/r2']}]}
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            prior = store / 'derived/reports/old' / digest / 'report.json'
+            prior.parent.mkdir(parents=True)
+            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'old',
+                'page_count': 1, 'assembly_complete': True, 'blocks': [original]}))
+            before = prior.read_bytes()
+            with patch('cordon_d.report_extraction._subscription_call', return_value=proposal) as call:
+                path = extract_report(digest, store, continuation_from='old',
+                                      config=ExtractionConfig(provider='subscription'), budget=None)
+            self.assertEqual(call.call_count, 1)
+            self.assertIn('preserve every retained cell', call.call_args.kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved['blocks'][0], original)
+            self.assertEqual(prior.read_bytes(), before)
+            self.assertEqual(saved['replayed_from_extraction_version'], 'old')
+            rows = record_rows(materialize(digest, 'v', 1, saved['blocks']))
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0].results[0].kind, 'positive')
+
+    def test_unbound_continuation_returns_to_established_reader(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.reports import record_rows
+        data = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])['reading']
+        prefix = data['tables'][0]
+        tail = copy.deepcopy(prefix)
+        tail['id'] = 'p2-tail'; tail['page'] = 2
+        prefix['columns'] = prefix['columns'][:2]
+        prefix['rows'][0]['cells'] = prefix['rows'][0]['cells'][:2]
+        tail['columns'] = tail['columns'][2:]
+        tail['rows'][0]['cells'] = tail['rows'][0]['cells'][2:]
+        data['tables'].append(tail)
+        data['pages'].append({'page': 2, 'disposition': 'read'})
+        data['facts'] = [{'id': 'continued', 'role': 'record_continuation',
+                          'page': 1, 'locator': 'header', 'text': '00123', 'value': '00123',
+                          'applies_to': ['p1-t1/r1', 'missing-part']}]
+        repaired = copy.deepcopy(data)
+        repaired['facts'][0]['applies_to'][-1] = 'p2-tail/r1'
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page(); pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            config = ExtractionConfig(provider='subscription')
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=[data, repaired]) as call:
+                path = extract_report(digest, store, config=config, budget=None)
+            self.assertEqual(call.call_count, 2)
+            self.assertIn('Resolve this record-continuation binding defect', call.call_args.kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            reading = materialize(digest, 'v', 2, saved['blocks'])
+            self.assertEqual(len(reading.rows), 2)
+            self.assertEqual(len(record_rows(reading)), 1)
+            self.assertEqual(record_rows(reading)[0].reference, '00123')
 
     def test_incomplete_page_is_reread_before_document_completion(self):
         import pymupdf
