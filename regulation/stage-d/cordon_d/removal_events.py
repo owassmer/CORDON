@@ -61,6 +61,47 @@ def publication_records(path: Path):
         yield Publication(row['id'], publisher, document, adopted, row, tuple(events), support)
 
 
+def regional_publication(path: Path):
+    """Read labelled regional Albo detail fields, without interpreting the act.
+
+    A concluded regional publication is neither municipal posting nor recipient
+    notice. Preserve the portal timestamps as text; expose dates, not an inferred
+    timezone or proof that posting was uninterrupted.
+    """
+    from bs4 import BeautifulSoup
+
+    path = Path(path)
+    soup = BeautifulSoup(path.read_bytes(), 'html.parser')
+    fields = {}
+    for label in soup.select('label'):
+        value = label.find_next_sibling('span')
+        if value is not None:
+            key = compact(label.get_text(' ', strip=True))
+            if key in fields:
+                raise ValueError('Regional publication has duplicate labelled fields')
+            fields[key] = compact(value.get_text(' ', strip=True))
+    number = fields['Numero Adozione Atto']
+    adopted = date.fromisoformat(fields['Data Adozione Atto'].split()[0])
+    document = None
+    if (fields['Tipo Atto o Tipo Documento'] == 'Determinazione Dirigenziale'
+            and '181 - Sezione Osservatorio Fitosanitario' in fields['Struttura proponente']
+            and number.isdecimal()):
+        document = act_id(number, adopted.year)
+    registered = date.fromisoformat(fields['Data registrazione albo pretorio'].split()[0])
+    identity = f"regional-albo:{registered.year}:{fields['Num. registro albo pretorio']}"
+    digest = file_digest(path)
+    support = Support(digest, identity, 'Regional Albo detail: '+fields['Oggetto'])
+    events = []
+    if document and fields['Stato Pubblicazione'] == 'Conclusa':
+        for key, kind in [('Data Inizio Pubblicazione', 'regional-publication-start'),
+                          ('Data Fine Pubblicazione', 'regional-publication-end')]:
+            occurred = date.fromisoformat(fields[key].split()[0])
+            events.append(AdministrativeEvent(digest+':'+kind, kind, document,
+                                               None, occurred, support))
+    return Publication(identity, 'Regione Puglia', document, adopted, fields,
+                       tuple(events), support)
+
+
 def connected_publications(publications, measures):
     """Require the issued act and its adoption date, not a municipality's protocol."""
     identities = {(m.identity, m.adopted) for m in measures}
