@@ -699,7 +699,7 @@ def membership_evidence(versions_, root: Path, day, *, comune=None, province=Non
                     path=str(blob_path(store, digest).relative_to(store)),
                     sha256=digest, role='official-record', access='public')
             assertions.append(Assertion(
-                identity=f'{version.provision_version_id}|{statement.zone}|{label}',
+                identity=f'{version.provision_version_id}|{statement.zone}|{label}|{statement.locator}',
                 contract='adopted-geography',
                 context=label,
                 event_date=day,
@@ -715,7 +715,6 @@ def membership_evidence(versions_, root: Path, day, *, comune=None, province=Non
                             f'{statement.text}'
                             + (f'; {statement.qualification}' if statement.qualification else '')
                             + (f'; {statement.note}' if statement.note else '')),)))
-            break
     return tuple(sources.values()), tuple(assertions)
 
 

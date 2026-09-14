@@ -224,8 +224,11 @@ Complete the outstanding page readings and resolve the watermark-contaminated
 municipality cells on DDS 106/2025 page 13 through the general reader. Direct source
 checks of DDS 158/2024 page 7 and DDS 8/2024 page 7 distinguish repeated tables and
 merged cells from the earlier comparison transcription's divisions; those reference
-comparisons are not correctness certificates. Continue the remaining table checks
-through membership evidence. The old heuristic-reader sheet totals are withdrawn.
+comparisons are not correctness certificates. The remaining DDS 93/2024 pages 9–10 and DDS 94/2024 page 8
+comparisons likewise introduced section separators absent from the source. Direct
+inspection and membership checks confirm the section identities and asterisks.
+Membership now carries every supporting physical statement, with distinct source
+locators, rather than stopping after the first match. The old heuristic-reader sheet totals are withdrawn.
 
 The metric consumers already admit adopted geometry. Obtain the consequential
 version's map or publisher geometry, establish its correspondence to the adopting
@@ -236,3 +239,15 @@ extension into Basilicata and the acts' partial-parcel rules must survive this b
 The cadastral tables are useful evidence within their stated extent, not a substitute
 for the missing map correspondence. Operative legal-area state and Annex III
 eligibility remain upstream A meanings.
+
+DDS 45/2025 physical page 34 (annex printed page 27) identifies the consequential
+geometry source: the post-adoption shapefile package InnovaPuglia transmits to the
+Osservatorio and ARIF. Owen owns external recovery. The specific first packages
+needed are those implementing DDS 148/2024 (12 November 2024, Santeramo ST26) and
+DDS 106/2025 (Santeramo/Ginosa, including the Basilicata extent), with the transmittal
+record identifying the adopted act, coordinate system and applicable precision.
+The 27 retained act PDFs contain no embedded geospatial coordinate dictionaries.
+Their map pages remain source evidence, but do not directly supply georeferenced
+vector boundaries. The act reader also recovers 49 named annex byte identities;
+none of those standalone byte hashes is currently in the shared store. This does
+not mean the corresponding annex pages are absent from the retained bundled PDFs.

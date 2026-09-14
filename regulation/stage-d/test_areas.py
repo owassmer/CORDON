@@ -330,6 +330,31 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         self.assertTrue(all('particella 260' in a.context for a in intersecting))
         self.assertFalse({a.context for a in assertions} & {a.context for a in intersecting})
 
+    def test_membership_preserves_each_supporting_physical_statement(self):
+        from dataclasses import replace
+        version = next(v for v in self.versions if '2024-00158' in v.provision_version_id)
+        original = next(s for s in version.statements if s.comune == 'CAROSINO')
+        repeated = replace(original, locator='p8 table 1 row 1')
+        version = replace(version, statements=(original, repeated))
+        _, assertions = membership_evidence((version,), ROOT, version.effective_from, comune='CAROSINO')
+        self.assertEqual(len(assertions), 2)
+        self.assertEqual(len({a.identity for a in assertions}), 2)
+        self.assertEqual(len({a.support[0].selector for a in assertions}), 2)
+
+    def test_retained_section_boundaries_survive_to_membership(self):
+        cases = [('2024-00093', 'A', '76', 'p9 table 2 row 1'),
+                 ('2024-00093', 'G', '3', 'p10 table 2 row 1'),
+                 ('2024-00094', 'G', '2', 'p8 table 2 row 1')]
+        for instrument, section, sheet, locator in cases:
+            with self.subTest(instrument=instrument, section=section, sheet=sheet):
+                version = next(v for v in self.versions if instrument in v.provision_version_id)
+                _, assertions = membership_evidence((version,), ROOT, version.effective_from,
+                                                    comune='BARI', section=section, foglio=sheet)
+                self.assertTrue(any(locator in a.support[0].selector for a in assertions))
+                _, unnamed = membership_evidence((version,), ROOT, version.effective_from,
+                                                 comune='BARI', foglio=sheet)
+                self.assertFalse(unnamed)
+
 
 if __name__ == '__main__':
     unittest.main()
