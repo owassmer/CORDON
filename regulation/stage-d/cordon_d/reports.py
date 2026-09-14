@@ -355,7 +355,8 @@ def record_tables(reading, native):
             rows = []
             for j, column in enumerate(columns):
                 cells = [None] * len(companion['columns'])
-                cells[identifier] = {'text': column['heading'][-1], 'source_heading': column['heading']}
+                cells[identifier] = {'text': column['heading'][-1], 'source_heading': column['heading'],
+                    'source_position': {'table': table['id'], 'reading_column': j + 1}}
                 for raw, field in zip(table['rows'], fields):
                     cells[field] = dict(raw['cells'][j], source_position={
                         'table': table['id'], 'reading_row': raw['id'], 'reading_column': j + 1})
@@ -445,6 +446,21 @@ def record_rows(reading):
                  if row.locator not in used or row.locator in assembled)
 
 
+def source_scopes(cell, table, raw, index):
+    """Selectors of the original cell, including its original row and column."""
+    position = cell.get('source_position', {
+        'table': table['id'], 'reading_row': raw['id'], 'reading_column': index + 1})
+    owner, column = position['table'], position['reading_column']
+    scopes = {f'{owner}/c{column}'}
+    if row := position.get('reading_row'):
+        source_row = f'{owner}/{row}'
+        scopes.update({source_row, f"p{table['page']}/{source_row}",
+                       f'{source_row}/c{column}', f"p{table['page']}/{source_row}/c{column}"})
+    if cell.get('native_cell'):
+        scopes.add('native:' + cell['native_cell'])
+    return scopes
+
+
 def materialize(digest, version, page_count, blocks):
     """Copy literal values, then project roles. Never merge rows by sample identifier."""
     facts = []
@@ -502,6 +518,7 @@ def materialize(digest, version, page_count, blocks):
                     raise ValueError('Repeated source-row locator')
                 locators.add(locator)
                 cells, results = [], []
+                scopes = {'report', table['id']}
                 by_role = {}
                 for index, (column, cell) in enumerate(zip(table['columns'], raw['cells'])):
                     text = native[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
@@ -512,10 +529,12 @@ def materialize(digest, version, page_count, blocks):
                         value['identifier_authority'] = column.get('identifier_authority')
                         value['authority_support'] = tuple(dict(s, basis='model_proposed_reading')
                             for s in column.get('authority_support', ()))
-                    field = f"{table['id']}/c{index + 1}"
+                    field_scopes = source_scopes(cell, table, raw, index)
+                    scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
-                    field_issues = tuple(issue for issue in issues if re.search(
-                        r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope']))
+                    field_issues = tuple(issue for issue in issues if any(re.search(
+                        r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope'])
+                        for field in field_scopes))
                     if field_issues:
                         value['reading_issues'] = field_issues
                         if column['role'] in {'publisher_id', 'laboratory_id'}:
@@ -541,9 +560,7 @@ def materialize(digest, version, page_count, blocks):
                         return None
                     values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
                     return values[0] if len(values) == 1 else None
-                scopes = {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}
-                scopes.update(f"{table['id']}/c{i + 1}" for i in range(len(cells)))
-                scopes.update('native:' + c['native_cell'] for c in cells if c.get('native_cell'))
+                direct_scopes = set(scopes)
                 # A qualifier of an included statement travels with that statement.
                 # Keep its exact scope; inclusion in row context does not broaden it.
                 while True:
@@ -561,7 +578,7 @@ def materialize(digest, version, page_count, blocks):
                               for c in by_role.get('sampling_date', []))
                 shared_dates = tuple(literal_date(None, f['value_cause']) if f.get('value_cause') else literal_date(f.get('value') or f['text'], year_context=year_context) for f in scoped
                                      if f['role'] == 'sampling_date' and
-                                     {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}.intersection(f['applies_to']))
+                                     direct_scopes.intersection(f['applies_to']))
                 dates += shared_dates
                 generic = sole('identifier')
                 rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),

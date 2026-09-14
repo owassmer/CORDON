@@ -180,6 +180,51 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(len(rejected.rows), 2)
         self.assertFalse(rejected.complete_pages)
 
+    def test_transposed_qualifications_use_original_sample_and_field_scopes(self):
+        for labelled in (False, True):
+            with self.subTest(labelled=labelled):
+                item = block([['SCOPE-A', '01/06/2024', 'Positivo', '02/06/2024'],
+                              ['SCOPE-B', '01/06/2024', 'Negativo', '02/06/2024']])
+                source = item['reading']['tables'][0]
+                columns = [dict(source['columns'][0], heading=([] if labelled else ['ID']) +
+                           [row['cells'][0]['text']]) for row in source['rows']]
+                offset = 2 if labelled else 1
+                if labelled:
+                    columns.insert(0, {'heading': [], 'role': 'other', 'support': []})
+                transpose = {'id': 'p1-transpose', 'page': 1, 'columns': columns,
+                    'rows': [{'id': f'field{i}', 'cells':
+                             ([{'text': ' '.join(column['heading'])}] if labelled else []) +
+                             [copy.deepcopy(row['cells'][i]) for row in source['rows']]}
+                             for i, column in enumerate(source['columns']) if labelled or i != 0]}
+                item['reading']['tables'].append(transpose)
+                def note(name, scope):
+                    return {'id': name, 'role': 'qualification', 'page': 1,
+                            'locator': scope, 'text': name, 'applies_to': [scope]}
+                item['reading']['facts'] = [
+                    {'id': 'repeat', 'role': 'repeated_representation', 'page': 1,
+                     'locator': 'heading', 'text': 'Risultati', 'applies_to': ['p1-t1', 'p1-transpose']},
+                    note('sample-only', f'p1-transpose/c{offset}'),
+                    note('field-row', 'p1-transpose/field2'),
+                    note('one-cell', f'p1-transpose/field2/c{offset}'),
+                    note('outside-source', 'p1-transpose/c4'),
+                    note('attached-qualification', 'sample-only')]
+                before = copy.deepcopy(item)
+                reading = materialize('hash', 'v', 1, [item])
+                self.assertEqual(item, before)
+                first, second = reading.rows[-2:]
+                names = lambda row: {f['text'] for f in row.facts if f['role'] == 'qualification'}
+                self.assertEqual(names(first), {'sample-only', 'field-row', 'one-cell', 'attached-qualification'})
+                self.assertEqual(names(second), {'field-row'})
+                self.assertFalse(any(names(row) for row in reading.rows[:2]))
+                sample_note = next(f for f in first.facts if f['text'] == 'sample-only')
+                self.assertEqual(sample_note['applies_to'], [f'p1-transpose/c{offset}'])
+                # A source-scoped date uses the same membership as its qualifications.
+                item['reading']['facts'].append(dict(note('sample-date', f'p1-transpose/c{offset}'),
+                    role='sampling_date', text='02/06/2024', value='02/06/2024'))
+                dated = materialize('hash', 'v', 1, [item]).rows[-2:]
+                self.assertIsNone(dated[0].sampling_date)
+                self.assertEqual(dated[1].sampling_date.isoformat(), '2024-06-01')
+
     def test_reader_declared_continuation_preserves_parts_and_qualifications(self):
         from dataclasses import replace
         from cordon_d.reports import record_rows

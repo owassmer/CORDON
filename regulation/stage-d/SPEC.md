@@ -85,7 +85,9 @@ image, never the source bytes. Deskew does not certify cell association. A
 transposed display becomes sample rows when its printed field-label axis and
 complete value matrix equal a unique companion table. A publisher need not add
 a prose declaration of repetition. Original axes and cell positions remain
-available. Matching source-supported identifiers, populated fields and analytical results can establish repeated
+available. Qualification attachment follows those original positions: a sample
+column stays sample-specific, and a field-row qualifier reaches that field across
+its samples. Projected column indexes never replace the original scope selectors. Matching source-supported identifiers, populated fields and analytical results can establish repeated
 displays across report pages; rows repeated within one table remain competing
 occurrences. Blank extra display fields supply no additional value. Each occurrence
 retains its own qualifications; correspondence does not assert that qualifications
