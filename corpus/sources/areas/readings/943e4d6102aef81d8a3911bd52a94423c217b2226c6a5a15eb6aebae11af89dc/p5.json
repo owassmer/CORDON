@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+ "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "a9f963f3fbc76fe33a03f47e501b5615e459837e9bf8aaa88cf4dfe3e55a6762",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:31.946097+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 8909,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6903,
+   "cache_read_input_tokens": 7535,
+   "output_tokens": 781,
+   "output_tokens_details": {
+    "thinking_tokens": 36
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6903,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 617,
+     "cache_read_input_tokens": 5249,
+     "cache_creation_input_tokens": 3940,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3940
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.03956,
+  "session_id": "4f33998d-db66-4a5f-9d2a-c0fefb17daad"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Documento - Impronta (SHA256) table listing ALLEGATO_1_MODUGNO_20250709.pdf, ALLEGATO_1BIS_MODUGNO_20250709.pdf, ALLEGATO2_MODUGNO_20250709_REV.pdf with their SHA256 hashes — this is a document/attachment index table, not a cadastral zone annex table.",
+   "Di trasmettere copia del presente atto: Ai Comuni di Bari, Bitonto (BA) e Modugno (BA); alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Provincia di Bari; all'ANCI Puglia; all'ARIF",
+   "Basato sulla proposta n. 181/DIR/2025/00129 dei sottoscrittori della proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano; E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Documento - Impronta (SHA256) table listing ALLEGATO_1_MODUGNO_20250709.pdf, ALLEGATO_1BIS_MODUGNO_20250709.pdf, ALLEGATO2_MODUGNO_20250709_REV.pdf with their SHA256 hashes — this is a document/attachment index table, not a cadastral zone annex table.",
+   "Di trasmettere copia del presente atto: Ai Comuni di Bari, Bitonto (BA) e Modugno (BA); alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Provincia di Bari; all'ANCI Puglia; all'ARIF",
+   "Basato sulla proposta n. 181/DIR/2025/00129 dei sottoscrittori della proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano; E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

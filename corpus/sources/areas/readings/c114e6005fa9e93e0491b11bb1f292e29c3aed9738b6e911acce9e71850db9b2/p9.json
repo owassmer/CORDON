@@ -3,12 +3,12 @@
  "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
  "page": 9,
  "model": "claude-sonnet-5",
- "effort": "medium",
+ "effort": "high",
  "dpi": 200,
- "request_sha256": "255f9464c64836ea0e294d05a008cb2bdf64d6b2e589fdfcf9adafb90d5ce1cf",
- "prompt_sha256": "0b292643005cc2f1",
+ "request_sha256": "d57b43ecf04e6602eeb2ba18c0262863382189869def9636588ff8b731c40806",
+ "prompt_sha256": "c8d9a52040f6f4cb",
  "schema_sha256": "990fa3e2958327e6",
- "captured_at": "2026-09-14T15:22:06.961076+00:00",
+ "captured_at": "2026-09-14T19:38:16.576657+00:00",
  "native_tables": [
   {
    "id": "p9-t1",
@@ -1097,15 +1097,15 @@
   }
  },
  "envelope": {
-  "duration_ms": 57521,
-  "num_turns": 4,
+  "duration_ms": 108594,
+  "num_turns": 6,
   "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 14767,
-   "cache_read_input_tokens": 15406,
-   "output_tokens": 7652,
+   "input_tokens": 6,
+   "cache_creation_input_tokens": 23019,
+   "cache_read_input_tokens": 32870,
+   "output_tokens": 15094,
    "output_tokens_details": {
-    "thinking_tokens": 2667
+    "thinking_tokens": 9819
    },
    "server_tool_use": {
     "web_search_requests": 0,
@@ -1113,19 +1113,19 @@
    },
    "service_tier": "standard",
    "cache_creation": {
-    "ephemeral_1h_input_tokens": 14767,
+    "ephemeral_1h_input_tokens": 23019,
     "ephemeral_5m_input_tokens": 0
    },
    "inference_geo": "not_available",
    "iterations": [
     {
      "input_tokens": 2,
-     "output_tokens": 7496,
-     "cache_read_input_tokens": 13120,
-     "cache_creation_input_tokens": 3933,
+     "output_tokens": 10582,
+     "cache_read_input_tokens": 17345,
+     "cache_creation_input_tokens": 7960,
      "cache_creation": {
       "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3933
+      "ephemeral_1h_input_tokens": 7960
      },
      "type": "message"
     }
@@ -1133,8 +1133,8 @@
    "speed": "standard"
   },
   "stop_reason": "tool_use",
-  "total_cost_usd": 0.1480692,
-  "session_id": "bc7590eb-59ba-4d81-bfa6-8dace8449199"
+  "total_cost_usd": 0.259075,
+  "session_id": "61d2c345-aab8-4cef-837d-f86199c54152"
  },
  "reading": {
   "tables_visible": 3,
@@ -1512,7 +1512,7 @@
     "index": 2,
     "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SUBSPECIE PAUCA\nZONA INFETTA IN CUI SI APPLICANO MISURE DI CONTENIMENTO",
     "caption_position": "inside the table first row",
-    "qualification_verbatim": null,
+    "qualification_verbatim": "IN CUI SI APPLICANO MISURE DI CONTENIMENTO",
     "column_headings_verbatim": [
      "PROVINCIA",
      "COMUNE",
@@ -1657,11 +1657,11 @@
     "index": 3,
     "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SUBSPECIE PAUCA\nZONA CUSCINETTO IN CUI SI APPLICANO E MISURE DI ERADICAZIONE",
     "caption_position": "inside the table first row",
-    "qualification_verbatim": null,
+    "qualification_verbatim": "IN CUI SI APPLICANO E MISURE DI ERADICAZIONE",
     "column_headings_verbatim": [
      "PROVINCIA",
      "COMUNE",
-     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5 CHILOMETRI DALLA ZONA DI CONTENIMENTO"
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5\nCHILOMETRI DALLA ZONA DI CONTENIMENTO"
     ],
     "rows": [
      {
@@ -1782,9 +1782,7 @@
    "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
    "IL DIRIGENTE DELLA SEZIONE"
   ],
-  "uncertain": [
-   "The BARI provincia label for the CONVERSANO/MOLA DI BARI/NOCI/PUTIGNANO/TURI group in table 3 is visible in the image but not present among the listed native cells, so it was transcribed as text rather than referenced by native_cell ID."
-  ]
+  "uncertain": []
  },
  "resolved": {
   "tables": [
@@ -2249,7 +2247,7 @@
     "index": 2,
     "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SUBSPECIE PAUCA\nZONA INFETTA IN CUI SI APPLICANO MISURE DI CONTENIMENTO",
     "caption_position": "inside the table first row",
-    "qualification_verbatim": null,
+    "qualification_verbatim": "IN CUI SI APPLICANO MISURE DI CONTENIMENTO",
     "column_headings_verbatim": [
      "PROVINCIA",
      "COMUNE",
@@ -2427,11 +2425,11 @@
     "index": 3,
     "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SUBSPECIE PAUCA\nZONA CUSCINETTO IN CUI SI APPLICANO E MISURE DI ERADICAZIONE",
     "caption_position": "inside the table first row",
-    "qualification_verbatim": null,
+    "qualification_verbatim": "IN CUI SI APPLICANO E MISURE DI ERADICAZIONE",
     "column_headings_verbatim": [
      "PROVINCIA",
      "COMUNE",
-     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5 CHILOMETRI DALLA ZONA DI CONTENIMENTO"
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 5\nCHILOMETRI DALLA ZONA DI CONTENIMENTO"
     ],
     "rows": [
      {
@@ -2547,9 +2545,7 @@
    "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
    "IL DIRIGENTE DELLA SEZIONE"
   ],
-  "uncertain": [
-   "The BARI provincia label for the CONVERSANO/MOLA DI BARI/NOCI/PUTIGNANO/TURI group in table 3 is visible in the image but not present among the listed native cells, so it was transcribed as text rather than referenced by native_cell ID."
-  ],
+  "uncertain": [],
   "native_tables_accounted": [
    {
     "native_table": "p9-t1",

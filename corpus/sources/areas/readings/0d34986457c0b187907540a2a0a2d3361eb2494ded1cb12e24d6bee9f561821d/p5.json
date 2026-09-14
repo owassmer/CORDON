@@ -1,0 +1,83 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00004",
+ "act_sha256": "0d34986457c0b187907540a2a0a2d3361eb2494ded1cb12e24d6bee9f561821d",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "bb13c84f81b5c18e3f82f794566aeaa83bb284e90e38bc8e505eb65e1c700251",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:31:47.399614+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 9619,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7574,
+   "cache_read_input_tokens": 8209,
+   "output_tokens": 935,
+   "output_tokens_details": {
+    "thinking_tokens": 35
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7574,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 774,
+     "cache_read_input_tokens": 5923,
+     "cache_creation_input_tokens": 3937,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3937
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.044414800000000004,
+  "session_id": "3bf4b78a-afcd-4ba8-b07b-03906516d935"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di aggiornare l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", ai sensi dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; Zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53.",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.",
+   "Di approvare l'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53- Modugno (BA)\".",
+   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia.",
+   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\".",
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Di aggiornare l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", ai sensi dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; Zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53.",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.",
+   "Di approvare l'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53- Modugno (BA)\".",
+   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia.",
+   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\".",
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

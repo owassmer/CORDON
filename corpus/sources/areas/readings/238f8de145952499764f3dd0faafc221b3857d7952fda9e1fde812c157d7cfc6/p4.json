@@ -1,0 +1,77 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+ "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "fd8706fcd219a9e847551eed8b6cce9e5fe8cd70d44713c5db3f4f9e6dd4109e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:05.686354+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 10917,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6579,
+   "cache_read_input_tokens": 7205,
+   "output_tokens": 619,
+   "output_tokens_details": {
+    "thinking_tokens": 42
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6579,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 449,
+     "cache_read_input_tokens": 4919,
+     "cache_creation_input_tokens": 3946,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3946
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.036315,
+  "session_id": "3f98f331-fede-4f2b-afd2-b133838f5f7a"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table (Documento - Impronta (SHA256)) listing ALLEGATO1_merged.pdf hash - not a cadastral annex table.",
+   "Il presente atto ... è composto da n 6.(sei) facciate e dagli allegati: 1 - 1bis - 2, composti rispettivamente da 1 facciata",
+   "Basato sulla proposta n. 181/DIR/2024/00100 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco; Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table (Documento - Impronta (SHA256)) listing ALLEGATO1_merged.pdf hash - not a cadastral annex table.",
+   "Il presente atto ... è composto da n 6.(sei) facciate e dagli allegati: 1 - 1bis - 2, composti rispettivamente da 1 facciata",
+   "Basato sulla proposta n. 181/DIR/2024/00100 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco; Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

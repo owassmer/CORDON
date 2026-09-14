@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+ "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "9431b33bc86ec17961f0f4854d8577b2686f1a30c9200941bff884daeb254745",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:30:24.536304+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7126,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7733,
+   "cache_read_input_tokens": 8361,
+   "output_tokens": 550,
+   "output_tokens_details": {
+    "thinking_tokens": 39
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7733,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 382,
+     "cache_read_input_tokens": 6075,
+     "cache_creation_input_tokens": 3944,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3944
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0414042,
+  "session_id": "b0233b8e-3018-4ca0-9b1c-3b7f21fb12dc"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Title: DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 12 gennaio 2026, n. 2 - Individuazione di focolaio di Xylella fastidiosa sottospecie pauca ST53 in agro di Valenzano (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201 e s.m.i.",
+   "Focolaio location named in prose: agro di Valenzano (BA)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Title: DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 12 gennaio 2026, n. 2 - Individuazione di focolaio di Xylella fastidiosa sottospecie pauca ST53 in agro di Valenzano (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201 e s.m.i.",
+   "Focolaio location named in prose: agro di Valenzano (BA)"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

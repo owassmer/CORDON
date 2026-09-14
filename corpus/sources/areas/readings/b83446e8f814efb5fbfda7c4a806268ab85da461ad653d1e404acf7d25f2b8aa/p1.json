@@ -1,0 +1,73 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+ "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "fdef651c39c003cd1a5eda0778701a622385dca8fab89804cfa0d3dacaca902e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:53.443693+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6431,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7748,
+   "cache_read_input_tokens": 8379,
+   "output_tokens": 520,
+   "output_tokens_details": {
+    "thinking_tokens": 37
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7748,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 355,
+     "cache_read_input_tokens": 6093,
+     "cache_creation_input_tokens": 3941,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3941
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0412068,
+  "session_id": "7b2a0b71-e52c-42c6-a255-f0c0d4a93aa5"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 6 agosto 2025, n. 141 — Reg. (UE) 2020/1201 – Aggiornamento dell'area delimitata per \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\", ai sensi dell'art. 4 del Reg. UE 2020/1201 s.m.i."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 6 agosto 2025, n. 141 — Reg. (UE) 2020/1201 – Aggiornamento dell'area delimitata per \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\", ai sensi dell'art. 4 del Reg. UE 2020/1201 s.m.i."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

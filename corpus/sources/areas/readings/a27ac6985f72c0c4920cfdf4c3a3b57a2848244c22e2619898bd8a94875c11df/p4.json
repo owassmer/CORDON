@@ -1,0 +1,85 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+ "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "250b0324e67f97a441bcf71fa5dbd92be943cc30b10a8ed28fb4e6d7e69fa4d5",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:33:39.769684+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 15219,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7577,
+   "cache_read_input_tokens": 8214,
+   "output_tokens": 1804,
+   "output_tokens_details": {
+    "thinking_tokens": 31
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7577,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1645,
+     "cache_read_input_tokens": 5928,
+     "cache_creation_input_tokens": 3935,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3935
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.05317379999999999,
+  "session_id": "27d699f7-9ee6-4264-a201-ce2ac0aef1da"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
+   "Un campionamento in agro di Bari, in area indenne, è stato eseguito a seguito di segnalazione (Ns. protocollo Prot. 0336862 del 11/06/2026); Nell'attività di cui al punto precedente sono state campionate n. 2 piante di olivo che sono risultate infette da Xylella fastidiosa (rapporto di prova dell' Agronomico Mediterraneo di Valenzano CIHEAM n. 25/2026 del 22/06/2026); Il laboratorio del CNR di Bari... ha comunicato che la sottospecie individuata nelle 2 (due) piante infette di cui al punto precedente è Xylella fastidiosa sottospecie pauca",
+   "La zona cuscinetto attorno alla zona infetta, generata dalle n. 2 piante positive, si sovrappone parzialmente alla zona cuscinetto delle aree delimitate per: \"Xylella fastidiosa sottospecie pauca ST 53- Modugno (BA), di cui alle determine dirigenziali n° 126/2025, n. 132/2025 e n. 4 del 04/01/2026; Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026.",
+   "Il rinvenimento delle due piante positive di cui al rapporto di prova del CNR n. 55P/2026 del 19/06/2026 genera una zona cuscinetto che congiunge le seguenti aree delimitate: \"Xylella fastidiosa sottospecie pauca ST 53 - Modugno (BA), di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026; Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026.",
+   "L'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53- Modugno (BA)\"; l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia; l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\".",
+   "Di dovere aggiornare, ai sensi dell'art. 4 del Reg (UE) 2020/1201, l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026 con l'inclusione dell'area delimitata per Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026;",
+   "Di dovere aggiornare l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026, ai sensi dell'art. 4 del Reg (UE) 2020/1201, costituita da : zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
+   "Un campionamento in agro di Bari, in area indenne, è stato eseguito a seguito di segnalazione (Ns. protocollo Prot. 0336862 del 11/06/2026); Nell'attività di cui al punto precedente sono state campionate n. 2 piante di olivo che sono risultate infette da Xylella fastidiosa (rapporto di prova dell' Agronomico Mediterraneo di Valenzano CIHEAM n. 25/2026 del 22/06/2026); Il laboratorio del CNR di Bari... ha comunicato che la sottospecie individuata nelle 2 (due) piante infette di cui al punto precedente è Xylella fastidiosa sottospecie pauca",
+   "La zona cuscinetto attorno alla zona infetta, generata dalle n. 2 piante positive, si sovrappone parzialmente alla zona cuscinetto delle aree delimitate per: \"Xylella fastidiosa sottospecie pauca ST 53- Modugno (BA), di cui alle determine dirigenziali n° 126/2025, n. 132/2025 e n. 4 del 04/01/2026; Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026.",
+   "Il rinvenimento delle due piante positive di cui al rapporto di prova del CNR n. 55P/2026 del 19/06/2026 genera una zona cuscinetto che congiunge le seguenti aree delimitate: \"Xylella fastidiosa sottospecie pauca ST 53 - Modugno (BA), di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026; Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026.",
+   "L'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53- Modugno (BA)\"; l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia; l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\".",
+   "Di dovere aggiornare, ai sensi dell'art. 4 del Reg (UE) 2020/1201, l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026 con l'inclusione dell'area delimitata per Xylella fastidiosa sottospecie pauca ST 53 – Valenzano (BA), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 2 del 12/01/2026;",
+   "Di dovere aggiornare l'area delimitata per \"Xylella fastidiosa – sottospecie pauca ST53 - Modugno (BA)\", di cui alle determine dirigenziali n. 126/2025, n. 132/2025 e n. 4 del 04/01/2026, ai sensi dell'art. 4 del Reg (UE) 2020/1201, costituita da : zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53;"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

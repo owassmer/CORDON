@@ -199,11 +199,11 @@ recital does not supply its annex. DDS 69/2021 adopts maps without a cadastral t
 Claude subscription vision (`claude-sonnet-5`, medium effort). Native cells are
 candidates for exact copying; the model binds captions and rows and transcribes values
 not faithfully represented by those cells. There is no exhibit registry or keyword
-page exclusion. The 154 saved page readings are retained under
-`corpus/sources/areas/readings/`; 119 pages remain to be read after the subscription
-reset at 15:20 America/New_York on 14 September 2026. Re-reading an erroneous page
-preserves the previous response in the derived store. This is the current reading
-population, not a claim of source-family completion.
+page exclusion. All 273 retained pages have readings under
+`corpus/sources/areas/readings/`. The current 29-version projection contains 373
+cadastral statements and no unresolved table readings. Re-reading an erroneous
+page preserves the previous response in the derived store. Page coverage does not
+establish the remaining adopting-act/map correspondence or source-family completion.
 
 `cordon_d.areas` projects the saved readings into zone, province, municipality and
 cadastral scope. Table headings, qualifications, row notes and physical page/table/row
@@ -220,15 +220,15 @@ named sheet developments remain distinct. An unmatched cadastral query does not
 establish that the place is outside the adopted map. Zone and stated measures regime
 remain separate facts.
 
-Complete the outstanding page readings and resolve the watermark-contaminated
-municipality cells on DDS 106/2025 page 13 through the general reader. Direct source
-checks of DDS 158/2024 page 7 and DDS 8/2024 page 7 distinguish repeated tables and
-merged cells from the earlier comparison transcription's divisions; those reference
-comparisons are not correctness certificates. The remaining DDS 93/2024 pages 9–10 and DDS 94/2024 page 8
-comparisons likewise introduced section separators absent from the source. Direct
-inspection and membership checks confirm the section identities and asterisks.
-Membership now carries every supporting physical statement, with distinct source
-locators, rather than stopping after the first match. The old heuristic-reader sheet totals are withdrawn.
+DDS 106/2025 page 13 now reads GINOSA independently of the overlapping watermark.
+The ordinary evidence consumer establishes buffer membership for a parcel on
+sheet 29 from the starred sheet entry. Sheet 36 intersects both zones, but those
+entries do not establish membership of an arbitrary parcel on that sheet.
+Direct source inspection also resolves the visible BARI/BA province cells on
+DDS 127/2022 page 7, DDS 18/2024 page 9 and DDS 112/2026 page 10. Faithful visual
+transcription is not a reading uncertainty merely because a native cell is absent.
+Membership retains every supporting physical statement and its source location;
+section identities, asterisks and repeated tables survive the ordinary projection.
 
 The metric consumers already admit adopted geometry. Obtain the consequential
 version's map or publisher geometry, establish its correspondence to the adopting

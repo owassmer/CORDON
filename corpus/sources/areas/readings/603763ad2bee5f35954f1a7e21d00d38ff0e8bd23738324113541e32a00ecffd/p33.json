@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 33,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8e2d7d6516a7914a1577e8f50940663a9294eb2ec3a66603983f225ae789b794",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:18.957224+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 6335,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5942,
+   "cache_read_input_tokens": 6574,
+   "output_tokens": 460,
+   "output_tokens_details": {
+    "thinking_tokens": 35
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5942,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 296,
+     "cache_read_input_tokens": 4288,
+     "cache_creation_input_tokens": 3940,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3940
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0315658,
+  "session_id": "c674d9f2-642b-45cc-81b5-744dfd7cdcd4"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Scheda illustrativa - Campionamento pianta di olivo con presenza di sintomatologia sospetta - Le porzioni da cui prelevare rametti ben lignificati sono cerchiate in verde.",
+   "Rametti lignificati idonei per il campionamento di mandorlo o ciliegio"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Scheda illustrativa - Campionamento pianta di olivo con presenza di sintomatologia sospetta - Le porzioni da cui prelevare rametti ben lignificati sono cerchiate in verde.",
+   "Rametti lignificati idonei per il campionamento di mandorlo o ciliegio"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

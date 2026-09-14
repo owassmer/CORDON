@@ -70,6 +70,9 @@ native table listed: represented (by which output tables), not_annex_table, or
 not_recovered. Put anything consequential on the page that is not an annex table row
 (a partial-parcel rule, a region named in prose but absent from the tables, a footnote)
 in unattached, quoted. Put anything you cannot read with confidence in uncertain.
+Faithful visual transcription is not uncertainty merely because a native cell is
+unavailable or has different whitespace. Use uncertain only for content or attachment
+that you cannot recover from the page itself.
 '''
 
 

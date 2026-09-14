@@ -329,9 +329,11 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         self.assertIn('contenimento', [a['zone'] for a in answers])
 
     def test_an_act_that_left_something_unread_says_so_even_when_it_answers(self):
-        unread = next(v for v in self.versions if v.unresolved and v.statements)
+        from dataclasses import replace
+        unread = replace(next(v for v in self.versions if v.statements),
+                         unresolved=('fixture: one annex region remains unread',))
         s = unread.statements[0]
-        answers = zone_of(self.versions, unread.effective_from, comune=s.comune,
+        answers = zone_of((unread,), unread.effective_from, comune=s.comune,
                           province=s.province, grain='sheet')
         mine = [a for a in answers if a['version'] == unread.provision_version_id]
         self.assertTrue(any(a['basis'].startswith(READING_DID_NOT_RECOVER)

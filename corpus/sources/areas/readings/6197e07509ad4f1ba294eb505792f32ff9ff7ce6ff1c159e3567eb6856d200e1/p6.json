@@ -1,0 +1,83 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+ "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "76fe8de127051e0b1fc04690b57b923a52ceb724bc4a55730057775df3b529cf",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:28:11.432665+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7104,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5848,
+   "cache_read_input_tokens": 6503,
+   "output_tokens": 529,
+   "output_tokens_details": {
+    "thinking_tokens": 12
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5848,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 389,
+     "cache_read_input_tokens": 4217,
+     "cache_creation_input_tokens": 3917,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3917
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0318356,
+  "session_id": "5facb700-cdfc-4a7b-96a8-60c4df3e9128"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Confini comunali; Confini provinciali; Area delimitata Xylella Fastidiosa sub. pauca (Giovinazzo) - Zona Infetta; Area delimitata Xylella Fastidiosa sub. pauca (Giovinazzo) - Zona Cuscinetto",
+   "GIOVINAZZO",
+   "Prov. BA"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Confini comunali; Confini provinciali; Area delimitata Xylella Fastidiosa sub. pauca (Giovinazzo) - Zona Infetta; Area delimitata Xylella Fastidiosa sub. pauca (Giovinazzo) - Zona Cuscinetto",
+   "GIOVINAZZO",
+   "Prov. BA"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

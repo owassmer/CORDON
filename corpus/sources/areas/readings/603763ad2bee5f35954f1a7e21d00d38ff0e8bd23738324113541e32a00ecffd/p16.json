@@ -1,0 +1,77 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 16,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "6265cf7cf9f2e69deaa5bf6cac2cac816ec23469f192624629305be302970fc7",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:44.883742+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 9154,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6226,
+   "cache_read_input_tokens": 6845,
+   "output_tokens": 746,
+   "output_tokens_details": {
+    "thinking_tokens": 48
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6226,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 569,
+     "cache_read_input_tokens": 4559,
+     "cache_creation_input_tokens": 3953,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3953
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.035813,
+  "session_id": "a1e02ef0-108a-438d-9f08-6794e2d6e772"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Disseccamento rapido dell'olivo — E' tra le più gravi malattie causate dai ceppi della sottospecie pauca di X. fastidiosa.",
+   "Le manifestazioni iniziali consistono nella comparsa di clorosi e avvizzimento fogliare su alcune branche (generalmente nella parte alta della chioma); successivamente, queste branche sono interessate rapidamente da fenomeni di disseccamento, con le foglie che seccano completamente (spesso accartocciate lungo la nervatura centrale verso la pagina inferiore) e che restano attaccate ai rami, anch'essi disseccati, per lungo tempo sino ad eventi atmosferici che ne determinano il distacco e la caduta.",
+   "Dall'esperienza sinora maturata in campo i primi sintomi su olivo compaiono dapprima nella parte alta della chioma esposta a sud, sud-ovest, con molta probabilità in conseguenza degli eventi di trasmissione da parte degli insetti vettori che prediligono le parti più esposte a sud."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Disseccamento rapido dell'olivo — E' tra le più gravi malattie causate dai ceppi della sottospecie pauca di X. fastidiosa.",
+   "Le manifestazioni iniziali consistono nella comparsa di clorosi e avvizzimento fogliare su alcune branche (generalmente nella parte alta della chioma); successivamente, queste branche sono interessate rapidamente da fenomeni di disseccamento, con le foglie che seccano completamente (spesso accartocciate lungo la nervatura centrale verso la pagina inferiore) e che restano attaccate ai rami, anch'essi disseccati, per lungo tempo sino ad eventi atmosferici che ne determinano il distacco e la caduta.",
+   "Dall'esperienza sinora maturata in campo i primi sintomi su olivo compaiono dapprima nella parte alta della chioma esposta a sud, sud-ovest, con molta probabilità in conseguenza degli eventi di trasmissione da parte degli insetti vettori che prediligono le parti più esposte a sud."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

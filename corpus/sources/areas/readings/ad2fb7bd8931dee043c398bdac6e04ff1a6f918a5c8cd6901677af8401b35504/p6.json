@@ -1,0 +1,81 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00002",
+ "act_sha256": "ad2fb7bd8931dee043c398bdac6e04ff1a6f918a5c8cd6901677af8401b35504",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "4c5f44c01be72b88a7d2571d84737419484ae0eebd32c4273558d7aca27fb84c",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:30:56.399116+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 8713,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6324,
+   "cache_read_input_tokens": 6975,
+   "output_tokens": 763,
+   "output_tokens_details": {
+    "thinking_tokens": 53
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6324,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 618,
+     "cache_read_input_tokens": 4689,
+     "cache_creation_input_tokens": 3921,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3921
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.036526,
+  "session_id": "8c0f6426-a3d6-4450-9d9b-a64064546de0"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table lists: Documento - Impronta (SHA256) with rows ALLEGATO1.pdf - a2d1db06a135cda66d47a0630bcb2d27b5aebc5ba7ae78cdf19d2045187e9196; ALLEGATO1BIS.pdf - 9fa7044e5ae9493dc77f2fe8077b79c72c9da02788b7139aaac0d4f9518655a0; ALLEGATO2.pdf - 42823cb452b98f5d1ce14507270d007d4f416b560088f11615de7fceaa12bafd (this is a document-hash table, not an annex cadastral table)",
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Come Proposta: Codice Cifra 181/DIR/2026/00003",
+   "Sottoscrittori Proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano; E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table lists: Documento - Impronta (SHA256) with rows ALLEGATO1.pdf - a2d1db06a135cda66d47a0630bcb2d27b5aebc5ba7ae78cdf19d2045187e9196; ALLEGATO1BIS.pdf - 9fa7044e5ae9493dc77f2fe8077b79c72c9da02788b7139aaac0d4f9518655a0; ALLEGATO2.pdf - 42823cb452b98f5d1ce14507270d007d4f416b560088f11615de7fceaa12bafd (this is a document-hash table, not an annex cadastral table)",
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Come Proposta: Codice Cifra 181/DIR/2026/00003",
+   "Sottoscrittori Proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano; E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

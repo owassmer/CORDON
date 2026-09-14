@@ -1,0 +1,83 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "bf9eafddc57aff906744ed15393b9a758cdc824e0e3a5fc27bbe5c9c619c065a",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:27.185026+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 12323,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7094,
+   "cache_read_input_tokens": 7722,
+   "output_tokens": 1139,
+   "output_tokens_details": {
+    "thinking_tokens": 39
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7094,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 971,
+     "cache_read_input_tokens": 5436,
+     "cache_creation_input_tokens": 3944,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3944
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0440474,
+  "session_id": "54bb165f-8527-4e1d-a217-cf8d20b16b34"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "TENUTO CONTO CHE — L'Osservatorio ha predisposto le \"Procedure di attuazione della sorveglianza, campionamento, analisi di specie vegetali per il contrasto ed il controllo di Xylella fastidiosa e applicazione delle misure di estirpazione delle piante infette\" allegato A del presente provvedimento per formarne parte integrante e sostanziale.",
+   "Tali procedure sono state discusse e approvate con tutti i soggetti attuatori: ARIF, laboratori, Innovapuglia, Mermec, nella riunione tenutasi il 12 marzo 2025, come da verbale agli atti dell'Ufficio.",
+   "RITENUTO NECESSARIO Di adottare le \"Procedure operative per la sorveglianza, il campionamento, le analisi diagnostiche e l'applicazione delle misure di estirpazione delle piante infette nell'ambito del piano per il contrasto ed il controllo di Xylella fastidiosa\", allegato A del presente provvedimento per formarne parte integrante e sostanziale, necessarie per l'attività di sorveglianza fitosanitaria, dichiarandone l'immediata esecutività.",
+   "VERIFICA AI SENSI DEI D. Lgs 196/03 e del Reg. (UE) n. 679/2016 — Garanzie alla riservatezza (full paragraph on data protection and publication)",
+   "ADEMPIMENTI CONTABILI di cui alla l.r. n. 28/2001 e s.m.i. e d.lgs. 118/2011 e s.m.i. — Il presente provvedimento non comporta alcun mutamento qualitativo o quantitativo di entrata o di spesa né a carico del bilancio regionale né a carico degli enti per i cui debiti i creditori potrebbero rivalersi sulla Regione ed è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto dal bilancio regionale",
+   "DETERMINA (heading, body begins on next page)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "TENUTO CONTO CHE — L'Osservatorio ha predisposto le \"Procedure di attuazione della sorveglianza, campionamento, analisi di specie vegetali per il contrasto ed il controllo di Xylella fastidiosa e applicazione delle misure di estirpazione delle piante infette\" allegato A del presente provvedimento per formarne parte integrante e sostanziale.",
+   "Tali procedure sono state discusse e approvate con tutti i soggetti attuatori: ARIF, laboratori, Innovapuglia, Mermec, nella riunione tenutasi il 12 marzo 2025, come da verbale agli atti dell'Ufficio.",
+   "RITENUTO NECESSARIO Di adottare le \"Procedure operative per la sorveglianza, il campionamento, le analisi diagnostiche e l'applicazione delle misure di estirpazione delle piante infette nell'ambito del piano per il contrasto ed il controllo di Xylella fastidiosa\", allegato A del presente provvedimento per formarne parte integrante e sostanziale, necessarie per l'attività di sorveglianza fitosanitaria, dichiarandone l'immediata esecutività.",
+   "VERIFICA AI SENSI DEI D. Lgs 196/03 e del Reg. (UE) n. 679/2016 — Garanzie alla riservatezza (full paragraph on data protection and publication)",
+   "ADEMPIMENTI CONTABILI di cui alla l.r. n. 28/2001 e s.m.i. e d.lgs. 118/2011 e s.m.i. — Il presente provvedimento non comporta alcun mutamento qualitativo o quantitativo di entrata o di spesa né a carico del bilancio regionale né a carico degli enti per i cui debiti i creditori potrebbero rivalersi sulla Regione ed è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto dal bilancio regionale",
+   "DETERMINA (heading, body begins on next page)"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}
