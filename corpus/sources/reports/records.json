@@ -958,7 +958,48 @@
   "final_url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_36_2024_CNR.pdf",
   "content_type": "text/html; charset=UTF-8",
   "bytes": 1635,
-  "error": "HTTP 404"
+  "error": "HTTP 404",
+  "document_recovery": {
+   "url": "http://cartografia.sit.puglia.it/doc/xylella/xf_sub_multiplex/risultati_xfmultiplex/RAPPORTO_PROVA_N_36_2024_CNR.pdf",
+   "sha256": "a415483eb0e114f55355c321bf2bec0006d1ab9d1bfe3749cd1bd40d72d2ac46",
+   "established_at": "2026-09-14T17:11:12.553335+00:00",
+   "identity": {
+    "issuer": "Laboratorio multisito CNR-IPSP, sede di Bari",
+    "number": "36/2024",
+    "date": "2024-03-27",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "9b7f657f7be111b21ef921c7370e1a8823b51acd3013e3e5a3de9c22873e4b79",
+     "source_locator": "feature:95:OBJECTID:78742",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/25",
+     "observation_reference": "11200333",
+     "observation_day": "2024-03-20",
+     "published_report_identity": "RAPPORTO PROVA 36/2024 CNR",
+     "published_report_date": "1711497600000",
+     "report_page": 2,
+     "report_locator": "Codice univoco campione 9_EXP36/24_2471663; Codice committente 2471663",
+     "report_latitude": "40.784532504068636",
+     "report_longitude": "16.73660740127856",
+     "comparison": "Same stated report number, issuer and issue day; source sample locations agree with the referring observation coordinates transformed from EPSG:32633 to EPSG:4326 within 0.0000001 degree. This resolves the document route, not equality of different sample identifiers."
+    },
+    {
+     "source_sha256": "9b7f657f7be111b21ef921c7370e1a8823b51acd3013e3e5a3de9c22873e4b79",
+     "source_locator": "feature:205:OBJECTID:78741",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/25",
+     "observation_reference": "11200338",
+     "observation_day": "2024-03-20",
+     "published_report_identity": "RAPPORTO PROVA 36/2024 CNR",
+     "published_report_date": "1711497600000",
+     "report_page": 3,
+     "report_locator": "Codice univoco campione 14_EXP36/24_2471668; Codice committente 2471668",
+     "report_latitude": "40.78418048437822",
+     "report_longitude": "16.73659857169341",
+     "comparison": "Same stated report number, issuer and issue day; source sample locations agree with the referring observation coordinates transformed from EPSG:32633 to EPSG:4326 within 0.0000001 degree. This resolves the document route, not equality of different sample identifiers."
+    }
+   ]
+  }
  },
  {
   "url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_38_2024_CNR.pdf",
@@ -2175,7 +2216,56 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_172_2020.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_173_2020.pdf",
+   "sha256": "01067129a3808e2c66ea8afc6f006e5b188349aab625f36e402d238c48decd5a",
+   "established_at": "2026-09-14T17:20:16.110056+00:00",
+   "identity": {
+    "issuer": "CNR-IPSP / Rete SELGE",
+    "number": "173/2020",
+    "date": "2020-07-27",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "e640b2a24a5648f3a01f3918ccc95a6b08ec01529d63a677a6c57009b9adc17d",
+     "source_locator": "feature:112:OBJECTID:22082",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/49",
+     "observation_reference": "808111",
+     "observation_day": "2020-07-16",
+     "published_report_identity": "SELGE 173/2020",
+     "published_report_date": "1595808000000",
+     "report_page": 2,
+     "report_locator": "ID 808111",
+     "comparison": "Printed report identity 173/2020 and date 27/07/2020 agree with the referring record; all three literal sample IDs, sampling dates and olive host agree. The failed URL names 172, contradicting its referring record. The report is issued by CNR-IPSP/SELGE for confirmation of samples submitted by IAMB, matching the originating laboratory context."
+    },
+    {
+     "source_sha256": "e640b2a24a5648f3a01f3918ccc95a6b08ec01529d63a677a6c57009b9adc17d",
+     "source_locator": "feature:62:OBJECTID:22083",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/49",
+     "observation_reference": "809106",
+     "observation_day": "2020-07-16",
+     "published_report_identity": "SELGE 173/2020",
+     "published_report_date": "1595808000000",
+     "report_page": 2,
+     "report_locator": "ID 809106",
+     "comparison": "Printed report identity 173/2020 and date 27/07/2020 agree with the referring record; all three literal sample IDs, sampling dates and olive host agree. The failed URL names 172, contradicting its referring record. The report is issued by CNR-IPSP/SELGE for confirmation of samples submitted by IAMB, matching the originating laboratory context."
+    },
+    {
+     "source_sha256": "e640b2a24a5648f3a01f3918ccc95a6b08ec01529d63a677a6c57009b9adc17d",
+     "source_locator": "feature:250:OBJECTID:22081",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/49",
+     "observation_reference": "812576",
+     "observation_day": "2020-07-17",
+     "published_report_identity": "SELGE 173/2020",
+     "published_report_date": "1595808000000",
+     "report_page": 2,
+     "report_locator": "ID 812576",
+     "comparison": "Printed report identity 173/2020 and date 27/07/2020 agree with the referring record; all three literal sample IDs, sampling dates and olive host agree. The failed URL names 172, contradicting its referring record. The report is issued by CNR-IPSP/SELGE for confirmation of samples submitted by IAMB, matching the originating laboratory context."
+    }
+   ]
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/CONFERMA_SELGE_Prot_173_2018.pdf",
@@ -4793,7 +4883,48 @@
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_10_2024_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1699,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_10_2024_CNR.pdf",
+   "sha256": "8c765188349b9091b4741f09e22839f47d2b8299fca0c2531633d4df6404cdde",
+   "established_at": "2026-09-14T17:11:12.554231+00:00",
+   "identity": {
+    "issuer": "Laboratorio multisito CNR-IPSP, sede di Bari",
+    "number": "10/2024",
+    "date": "2024-02-09",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "24735e404569a52450d93588f9e3d84ce1e7e346b2182bf2cd3404dce3e8be5b",
+     "source_locator": "feature:27:OBJECTID:76486",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/29",
+     "observation_reference": "10600097",
+     "observation_day": "2024-01-25",
+     "published_report_identity": "RAPPORTO PROVA 10/2024 CNR",
+     "published_report_date": "1707436800000",
+     "report_page": 3,
+     "report_locator": "Codice univoco campione 15_EXP10/24_03148809; Codice committente 03148809",
+     "report_latitude": "41.07420919",
+     "report_longitude": "16.94227858",
+     "comparison": "Same stated report number, issuer and issue day; source sample locations agree with the referring observation coordinates transformed from EPSG:32633 to EPSG:4326 within 0.0000001 degree. This resolves the document route, not equality of different sample identifiers."
+    },
+    {
+     "source_sha256": "24735e404569a52450d93588f9e3d84ce1e7e346b2182bf2cd3404dce3e8be5b",
+     "source_locator": "feature:66:OBJECTID:76485",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/29",
+     "observation_reference": "10600099",
+     "observation_day": "2024-01-25",
+     "published_report_identity": "RAPPORTO PROVA 10/2024 CNR",
+     "published_report_date": "1707436800000",
+     "report_page": 3,
+     "report_locator": "Codice univoco campione 17_EXP10/24_03148811; Codice committente 03148811",
+     "report_latitude": "41.07420908",
+     "report_longitude": "16.94234925",
+     "comparison": "Same stated report number, issuer and issue day; source sample locations agree with the referring observation coordinates transformed from EPSG:32633 to EPSG:4326 within 0.0000001 degree. This resolves the document route, not equality of different sample identifiers."
+    }
+   ]
+  }
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_10_2024_IAMB.pdf",
@@ -14981,7 +15112,48 @@
   "final_url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_70M_2026_CNR.pdf",
   "content_type": "text/html;charset=utf-8",
   "bytes": 1700,
-  "error": "HTTP 500"
+  "error": "HTTP 500",
+  "document_recovery": {
+   "url": "https://cartografia.sit.puglia.it/doc/xylella/xf_sub_multiplex/risultati_xfmultiplex/RAPPORTO_PROVA_N_70M_2026_CNR.pdf",
+   "sha256": "f3ab33c97c43dc48ff1a1df673e083d15adab3b141c8e7ad6fc1aadb8de7759f",
+   "established_at": "2026-09-14T17:11:12.554730+00:00",
+   "identity": {
+    "issuer": "Laboratorio multisito CNR-IPSP, sede di Bari",
+    "number": "70M/2026",
+    "date": "2026-08-31",
+    "source_page": 1
+   },
+   "support": [
+    {
+     "source_sha256": "c6bd1fa47712630dd0afd63dc09e30c6601e342e45f4601976c707c4077de8b6",
+     "source_locator": "feature:3:OBJECTID:100513",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/1",
+     "observation_reference": "1968569",
+     "observation_day": "2026-08-05",
+     "published_report_identity": "70M/2026 CNR",
+     "published_report_date": "1788134400000",
+     "report_page": 2,
+     "report_locator": "Codice univoco campione 1_EXP70/26_856/6-2; Codice committente 1968569",
+     "report_latitude": "41.08046922",
+     "report_longitude": "16.98283017",
+     "comparison": "Same stated report number, issuer and issue day; source sample locations agree with the referring observation coordinates transformed from EPSG:32633 to EPSG:4326 within 0.0000001 degree. This resolves the document route, not equality of different sample identifiers."
+    },
+    {
+     "source_sha256": "c6bd1fa47712630dd0afd63dc09e30c6601e342e45f4601976c707c4077de8b6",
+     "source_locator": "feature:11:OBJECTID:100514",
+     "source_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/1",
+     "observation_reference": "1968577",
+     "observation_day": "2026-08-05",
+     "published_report_identity": "70M/2026 CNR",
+     "published_report_date": "1788134400000",
+     "report_page": 2,
+     "report_locator": "Codice univoco campione 2_EXP70/26_856/6-4; Codice committente 1968577",
+     "report_latitude": "41.08026065",
+     "report_longitude": "16.98297559",
+     "comparison": "Same stated report number, issuer and issue day; source sample locations agree with the referring observation coordinates transformed from EPSG:32633 to EPSG:4326 within 0.0000001 degree. This resolves the document route, not equality of different sample identifiers."
+    }
+   ]
+  }
  },
  {
   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_70P_2025_CNR.pdf",

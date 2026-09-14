@@ -26,6 +26,28 @@ def _captures(root, known_through):
             raise ValueError('Capture has no timezone')
         if at <= known_through:
             by_route[capture['url']].append(capture)
+    # A failed transport can have a source-reconciled copy at another retained
+    # route. Keep the failed request intact and carry the recovery evidence.
+    recovered = []
+    for route, captures in by_route.items():
+        for capture in captures:
+            recovery = capture.get('document_recovery')
+            if not recovery:
+                continue
+            established = datetime.fromisoformat(recovery['established_at'])
+            if established.tzinfo is None:
+                raise ValueError('Document recovery has no timezone')
+            if established > known_through:
+                continue
+            if not recovery.get('identity') or not recovery.get('support'):
+                raise ValueError('Document recovery requires source identity and located support')
+            alternatives = by_route.get(recovery['url'], [])
+            if not any(c.get('sha256') == recovery['sha256'] for c in alternatives):
+                raise ValueError('Recovered document is not acquired at the knowledge cutoff')
+            recovered.append((route, {'sha256': recovery['sha256'],
+                                     'document_recovery': recovery}))
+    for route, capture in recovered:
+        by_route[route].append(capture)
     return by_route
 
 
@@ -206,6 +228,8 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     reading = readings[digest]
                     link = {'route': route, 'route_field': route_field, 'member': member, 'sha256': digest, 'candidates': [],
                             'rendition_ambiguity': rendition_ambiguity}
+                    link['route_recoveries'] = [v['document_recovery'] for v in versions
+                        if v.get('sha256') in digests and v.get('document_recovery')]
                     output['links'].append(link)
                     link['document_relationships'] = related(edges, digest)
                     link['replacement_chain'] = chain
@@ -253,6 +277,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         derived_identity = row.locator in derived
                         exact_identity = group.reference in row.identifiers
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
+                                     'result_cause': None if row.results else 'no analytical result recovered for this occurrence',
                                      'date_cause': row.date_cause,
                                      'identity_cause': ('no literal report-row identifier or source association establishes this observation'
                                                         if not exact_identity and not derived_identity else None),
@@ -272,7 +297,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         if candidate['identity_cause']:
                             output['limitations'].append({'sha256': digest, 'row': row.locator,
                                                          'cause': candidate['identity_cause']})
-                        if (exact_identity or derived_identity) and not association_cause and not link['document_cause'] and temporal != 'conflicts' and not rendition_ambiguity:
+                        if row.results and (exact_identity or derived_identity) and not association_cause and not link['document_cause'] and temporal != 'conflicts' and not rendition_ambiguity:
                             eligible[key] = candidate
                             reverse[key].add(group.identity)
         routed.append((output, eligible))

@@ -188,9 +188,25 @@ def _read_pdf(digest, version, path):
                     if missing:
                         issues.append({'cause': 'association identity fields blank or merged; no fill-down', 'fields': missing})
                     if r == start and missing and basis['kind'] == 'annex_continuation' and previous['last_row'] is not None:
-                        # A printed fragment on the next page may qualify a preceding
-                        # row. Preserve both; do not silently splice their meanings.
-                        result.rows[previous['last_row']]['issues'].append({
+                        preceding = result.rows[previous['last_row']]
+                        populated = {role for role, cell in fields.items() if (cell['text'] or '').strip()}
+                        if (set(missing) == REQUIRED and populated
+                                and all((preceding['fields'][role]['text'] or '').strip()
+                                        for role in REQUIRED | populated)
+                                and not preceding['issues'] and not unread_columns):
+                            # Same annex, successive physical/printed pages and
+                            # identical columns establish this split row's context.
+                            for role in populated:
+                                prior, fragment = preceding['fields'][role], fields[role]
+                                parts = prior.setdefault('parts', [dict(prior,
+                                    page=preceding['page'], table=preceding['table'], row=preceding['row'])])
+                                parts.append(dict(fragment, page=number, table=table_index, row=r + 1))
+                                prior['text'] = prior['text'].rstrip() + '\n' + fragment['text'].lstrip()
+                                prior['derivation'] = 'cell continues across verified annex page boundary'
+                            preceding.setdefault('continuations', []).append({
+                                'page': number, 'table': table_index, 'row': r + 1, 'basis': basis})
+                            continue
+                        preceding['issues'].append({
                             'cause': 'following page begins with a fragment lacking association identity; row continuation unresolved',
                             'page': number, 'table': table_index, 'row': r + 1})
                     result.rows.append({'source_sha256': digest, 'page': number,

@@ -129,6 +129,23 @@ class SourceAssociations(unittest.TestCase):
             with patch('cordon_d.source_associations._read_pdf', side_effect=AssertionError('unexpected parse')):
                 self.assertEqual(read_associations(digest, store), first)
 
+    def test_split_cell_rejoins_only_across_verified_annex_continuity(self):
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = source(store, [
+                {'annex': 'ALLEGATO 7/C', 'folio': 1, 'headings': HEADERS[:3] + ['SPECIE'],
+                 'rows': [['A', 'R 1', '1/2/2025', 'Mandorlo (Prunus']]},
+                {'header': False, 'folio': 2,
+                 'rows': [['', '', '', 'dulcis)'], ['B', 'R 2', '2/2/2025', 'Olivo']]},
+            ])
+            reading = read_associations(digest, store)
+            self.assertEqual(len(reading.rows), 2)
+            first = reading.rows[0]
+            self.assertEqual(' '.join(first['fields']['host']['text'].split()), 'Mandorlo (Prunus dulcis)')
+            self.assertEqual([p['page'] for p in first['fields']['host']['parts']], [1, 2])
+            self.assertFalse(first['issues'])
+            self.assertEqual(first['continuations'][0]['basis']['kind'], 'annex_continuation')
+
     def test_knowledge_cutoff_uses_capture_time_not_report_date(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)

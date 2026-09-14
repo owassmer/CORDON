@@ -172,10 +172,10 @@ The retained population comprises 1,903 successful captures and 1,176 distinct P
 The current offline rebuild recovers 209 complete document page readings without
 provider calls; 967 documents still require completed extraction. There are 391
 completed document-relationship readings. The ordinary full-observation join after
-the reader repairs covers all 2,320,354 observations: 2,918 have a unique matched
-report row, 168 have a provisional match, 111 have competing report-row occurrences,
-and four have competing observation identities for its report row. The reverse view
-contains 1,327 unmatched report rows. These figures describe retained extraction
+the reader repairs covers all 2,320,354 observations: 2,923 have a unique matched
+report row, 168 have a provisional match, 106 have competing report-row occurrences,
+and four have competing observation identities for their report row. The reverse view
+contains 1,322 unmatched report rows. These figures describe retained extraction
 version `bf12550befda11586c24`, before further subscription reading, and do not establish
 source-family completeness or official confirmation.
 
@@ -189,17 +189,33 @@ revision-date proposal from its source. The generic identifier role does not req
 guessing which organization assigned a literal code; attachment still requires the
 observation's report route, source identity and bidirectional uniqueness.
 
-The 15 published report routes failed in the inherited Frankfurt retry. The inferred
+The inherited Frankfurt retry left 15 failed published routes. Source reconciliation
+now resolves four of them through already-retained copies: CNR-IPSP 36/2024
+(27 March), 10/2024 (9 February), 70M/2026 (31 August), and SELGE 173/2020
+(27 July), whose referring URL incorrectly names 172. The three CNR copies agree
+with the referring report identities/dates and sample locations; 70M also agrees
+on both sample identifiers. SELGE 173 agrees on all three sample identifiers and
+sampling dates. The acquisition records retain these located recovery grounds,
+the successful alternative URL/hash and the failed transport response. The ordinary
+consumer follows the recovery only after its establishment time; matching filenames
+alone still supply candidates. The CNR sample-row readings await the subscription;
+recovered documents are not automatically completed readings. Eleven published
+routes, naming nine other documents, still require external recovery by Owen. The inferred
 HTTP/HTTPS routes for SELGE355/2020, IAMB34/2022 and IAMB4/2023 also failed; the earlier
-archive requests were rate-limited or timed out. These routes were not retried during
-this offline repair. Follow consequential publisher alternatives and predecessor
-references as the remaining documents are read. The reached ARIF application requires
+archive requests were rate-limited or timed out. No external acquisition hunt is authorized in this continuation. Owen owns these
+recoveries, including predecessor reports and the missing adopting act; supplied
+documents are to be stored, replicated and integrated as they arrive. The reached ARIF application requires
 regional login; no authenticated records have been accessed. Laboratory designation,
 status and custody evidence remain necessary where the accepted confirmation branch
 requires them; report extraction alone cannot supply those facts.
 
 Administrative annexes retained from DDS 52/2024, 74/2024 and 138/2024 supply 183
-identified associations and seven fragments to reconcile with their source context.
+identified associations. All seven page-boundary fragments have been visually
+reconciled: they complete host/zone cells of the preceding row. The reader derives
+continuation only across the same annex, consecutive physical and printed pages,
+matching columns and blank identity cells, retaining both cell locations. All 183
+associations survive; no fragment is treated as another plant. The seven affected
+observation joins currently still need their laboratory report readings.
 An act can establish a derived occurrence correspondence without equating different
 literal identifier strings. The older CNR73F act association conflicts with its report
 row; the corrected report and later act agree. Laboratory replacement does not prove
@@ -210,7 +226,8 @@ cancellation. Whole-report replacement does not assert that every column changed
 `corpus/sources/reports/records.json` owns the route captures. Successful captures
 and distinct byte versions are retained; a current failed attempt names its cause.
 A filename shared by a failed and successful route supplies an acquisition
-candidate, never an established equivalent document. `scripts/acquire_reports.py`
+candidate. Located source reconciliation in the same acquisition record can establish
+the recovered document independently of the failed transport. `scripts/acquire_reports.py`
 discovers report routes through the declared monitoring releases and can follow
 source-located references and explicitly recapture an admitted route.
 
@@ -300,3 +317,15 @@ tests do not confer that status.
 - “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
   work that a particular row may require. They are not separate source families or
   reasons to expand the aperture.
+
+The join retains identifier-only display occurrences but requires an analytical
+result before they compete as finding-result rows. Direct inspection of UNIBA
+87/2023 confirms the small table and expanded transposed display; five competing
+joins are resolved by this correction. Further source rereading is required for
+its remaining display relationships, UNIBA 15/2024 and 66/2023, and the early
+reports whose daily counters and laboratory identifiers collide. Direct inspection of SELGE 139/2015 page 2 confirms a transcription error:
+the source prints 40.42257829 for daily sample 1, while the saved reading has
+40.22257829. The monitoring coordinate agrees with the source. The affected pages
+and the three UNIBA display readings are scheduled for a source-only high-effort
+reread after reset, before the general row population. No code
+chooses an identifier namespace or repairs a digit from result agreement.

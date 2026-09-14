@@ -18,7 +18,8 @@ from test_reports import block
 
 class JoinIdentity(unittest.TestCase):
     def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
-                 repeated=False, repetition_support=True, differing_repeat=False, reading_issues=(), replacement=None, association_rows=()):
+                 repeated=False, repetition_support=True, differing_repeat=False, reading_issues=(), replacement=None, association_rows=(), recovery=False,
+                 identifier_display=False):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
@@ -40,9 +41,23 @@ class JoinIdentity(unittest.TestCase):
                 captures.append({'url': route, 'captured_at': '2026-01-02T00:00:00+00:00', 'sha256': other})
             if missing_route:
                 captures.append({'url': route, 'captured_at': '2026-01-01T00:00:00+00:00', 'error': 'HTTP 404'})
+                if recovery:
+                    captures[-1]['document_recovery'] = {
+                        'url': actual_route, 'sha256': digest,
+                        'established_at': '2026-01-03T00:00:00+00:00',
+                        'identity': {'issuer': 'Laboratory A', 'number': '31/2024'},
+                        'support': [{'source_sha256': file_digest(path), 'source_locator': 'sheet row 2',
+                                     'report_page': 1, 'report_locator': 'sample 00091'}]}
             (reports / 'records.json').write_text(json.dumps(captures))
             cache = store / 'derived/reports/v' / digest / 'report.json'; cache.parent.mkdir(parents=True)
             item = block(report_rows)
+            if identifier_display:
+                display = copy.deepcopy(item['reading']['tables'][0])
+                display['id'] = 'p1-display'
+                display['columns'] = display['columns'][:1]
+                for row in display['rows']:
+                    row['cells'] = row['cells'][:1]
+                item['reading']['tables'].append(display)
             item['reading']['issues'] = list(reading_issues)
             if two_results:
                 table = item['reading']['tables'][0]
@@ -107,6 +122,25 @@ class JoinIdentity(unittest.TestCase):
             return list(findings(distinct_observations(monitoring), reports, store,
                                 extraction_version='v', known_through=cutoff or datetime(2026, 2, 1, tzinfo=timezone.utc),
                                 association_readings=association_rows))
+
+    def test_reconciled_alternative_reaches_the_join_after_recovery_date(self):
+        args = ([('00091', '2024-06-01')], [('00091', '01/06/2024', 'Positivo', '02/06/2024')])
+        recovered = self.run_join(*args, missing_route=True, recovery=True)[0]
+        self.assertTrue(recovered['matches'])
+        self.assertTrue(recovered['links'][0]['route_recoveries'])
+        earlier = self.run_join(*args, missing_route=True, recovery=True,
+                               cutoff=datetime(2026, 1, 2, tzinfo=timezone.utc))[0]
+        self.assertFalse(earlier['matches'])
+        self.assertEqual(earlier['links'][0]['status'], 'source route not acquired at knowledge cutoff')
+
+    def test_identifier_display_does_not_compete_as_an_analytical_result(self):
+        result = self.run_join([('00091', '2024-06-01')],
+            [('00091', '01/06/2024', 'Positivo', '02/06/2024')], identifier_display=True)[0]
+        self.assertEqual(result['status'], 'matched')
+        self.assertEqual(len(result['links'][0]['candidates']), 2)
+        self.assertEqual(len(result['matches']), 1)
+        display = next(c for c in result['links'][0]['candidates'] if not c['row'].results)
+        self.assertTrue(display['result_cause'])
 
     def association(self, reference='public-9', longitude='16.98765432',
                     report_reference='31/2024 Laboratory A', host='Vite europea (Vitis L.)'):

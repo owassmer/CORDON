@@ -103,8 +103,10 @@ def main() -> None:
         for future in as_completed(futures):
             record = future.result()
             with lock:
-                # Retain successful acquisition versions; only the current failed attempt is needed.
-                records[:] = [r for r in records if r['url'] != record['url'] or 'sha256' in r]
+                # Preserve source-reconciled recovery evidence as well as bytes;
+                # a later failed transport cannot erase an established document.
+                records[:] = [r for r in records if r['url'] != record['url']
+                              or 'sha256' in r or r.get('document_recovery')]
                 if record['url'] in parents:
                     record['referred_by'] = parents[record['url']]
                 records.append(record)
