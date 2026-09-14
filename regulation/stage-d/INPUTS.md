@@ -198,6 +198,24 @@ the published point, including reference, delineation, transformation and
 consuming-domain grid-to-ground distortion error. Empirical establishment is allowed;
 no publisher-only accuracy restriction applies.
 
+The retained DDS 45/2025, physical page 28 (annex printed page 21), directs the
+recorder to stand at the canopy edge; page 30 (printed page 23) requires a whole-plant
+photograph with identifying landmarks. A monitoring coordinate is therefore not
+a source-stated stem-centre measurement. Page 43 lists the sample coordinates
+available to laboratories: a report repeating those coordinates is not independent
+position evidence. For a concrete first reconciliation, the external recovery handoff to Owen is the App
+Xylella sampling sheets and original identifying photographs for observations
+1968569 and 1968577, sampled 5 August 2026 in Noicattaro, together with any retained
+GNSS fix/accuracy record. The imagery route needs the Ortofoto Puglia 2023 production
+and acceptance accuracy report, independent checkpoints, and acquisition dates for
+the relevant tiles; pixel size alone cannot supply that qualification.
+
+The metric adapter now accepts the ordinary monitoring output with its verified
+source bytes when a separate occurrence-, date- and context-specific qualification
+is supplied. It verifies all listed sources even when the observation has no
+spatial support of its own. A fixture passes through the actual distance consumer;
+this repairs integration without assigning a bound to a real observation.
+
 The reached original field/plant evidence and applicable imagery-control evidence
 must supply identity, event-time applicability and reference error before population
 imagery acquisition. The retained exploratory tiles do not yet establish these inputs.
