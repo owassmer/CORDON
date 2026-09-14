@@ -54,11 +54,16 @@ class LiteralDate:
     text: str | None
     value: date | None
     cause: str | None
+    year_support: tuple[str, ...] = ()
 
 
-def literal_date(text, cause=None):
+def literal_date(text, cause=None, *, year_context=()):
     if text is None:
         return LiteralDate(None, None, cause or 'not_recovered')
+    stated_absence = {'non disponibile': 'source_states_unavailable',
+                      'non applicabile': 'source_states_not_applicable'}
+    if absence := stated_absence.get(' '.join(text.casefold().split())):
+        return LiteralDate(text, None, absence)
     formats = ((r'\d{1,2}/\d{1,2}/\d{4}', '%d/%m/%Y'),
                (r'\d{1,2}-\d{1,2}-\d{4}', '%d-%m-%Y'),
                (r'\d{1,2}\.\d{1,2}\.\d{4}', '%d.%m.%Y'),
@@ -69,6 +74,19 @@ def literal_date(text, cause=None):
                 return LiteralDate(text, datetime.strptime(text.strip(), pattern).date(), None)
             except ValueError:
                 return LiteralDate(text, None, 'invalid_calendar_date')
+    short = re.fullmatch(r'(\d{1,2})([/.-])(\d{1,2})\2(\d{2})', text.strip())
+    if short:
+        # Resolve only against a full year actually stated in this row's source
+        # context. No current-year assumption or platform %y century cutoff.
+        candidates = {year for year, _ in year_context if year % 100 == int(short[4])}
+        if len(candidates) != 1:
+            return LiteralDate(text, None, 'year_not_established_by_source_context')
+        year = next(iter(candidates))
+        support = tuple(dict.fromkeys(locator for value, locator in year_context if value == year))
+        try:
+            return LiteralDate(text, date(year, int(short[3]), int(short[1])), None, support)
+        except ValueError:
+            return LiteralDate(text, None, 'invalid_calendar_date', support)
     return LiteralDate(text, None, 'unparsed_date_literal')
 
 
@@ -121,7 +139,8 @@ class Row:
             return 'no sampling date attached to this row'
         if self.sampling_date is not None:
             return None
-        return 'conflicting, invalid or unread sampling-date values'
+        causes = {value.cause for value in self.sampling_dates if value.cause}
+        return '; '.join(sorted(causes)) if causes else 'conflicting sampling-date values'
 
 
 @dataclass(frozen=True)
@@ -424,8 +443,13 @@ def materialize(digest, version, page_count, blocks):
                     if expanded == scopes:
                         break
                     scopes = expanded
-                dates = tuple(literal_date(c['text'], c.get('cause')) for c in by_role.get('sampling_date', []))
-                shared_dates = tuple(literal_date(None, f['value_cause']) if f.get('value_cause') else literal_date(f.get('value') or f['text']) for f in scoped
+                year_context = tuple((int(year), f['id']) for f in scoped
+                    if f['role'] in {'date', 'report_date', 'delivery_date', 'sampling_date', 'test_date', 'acceptance_date'}
+                    and not f.get('value_cause')
+                    for year in re.findall(r'(?<!\d)(\d{4})(?!\d)', f.get('value') or f['text']))
+                dates = tuple(literal_date(c['text'], c.get('cause'), year_context=year_context)
+                              for c in by_role.get('sampling_date', []))
+                shared_dates = tuple(literal_date(None, f['value_cause']) if f.get('value_cause') else literal_date(f.get('value') or f['text'], year_context=year_context) for f in scoped
                                      if f['role'] == 'sampling_date' and
                                      {'report', table['id'], locator, f"{table['id']}/{raw['id']}"}.intersection(f['applies_to']))
                 dates += shared_dates

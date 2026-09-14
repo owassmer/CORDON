@@ -19,6 +19,31 @@ def reserve_in_process(args):
         return False
 
 
+def subscription_in_process(args):
+    import time
+    from cordon_d.report_extraction import _subscription_call, write_json
+    directory, slot = args
+    directory = Path(directory)
+    (directory / f'ready-{slot}').touch()
+    deadline = time.monotonic() + 10
+    while len(list(directory.glob('ready-*'))) < 2:
+        if time.monotonic() > deadline:
+            raise RuntimeError('second test process did not start')
+        time.sleep(.01)
+    def provider(**kwargs):
+        with (directory / 'dispatches').open('a') as output:
+            output.write('dispatch\n')
+        time.sleep(.2)
+        value = {'source': 'retained reading'}
+        write_json(kwargs['raw_path'], {'provider': 'claude-code-subscription',
+                                        'response': {'structured_output': value}})
+        return value
+    with patch('cordon_d.report_extraction._run_subscription_call', side_effect=provider):
+        return _subscription_call(prompt='Read source', schema={}, digest='source', source=directory / 'source.pdf',
+            config=ExtractionConfig(provider='subscription'), request_id='same-request',
+            raw_path=directory / 'same-request.json')
+
+
 def block(rows):
     roles = [('publisher_id', 'ID'), ('sampling_date', 'Data rilevamento'),
              ('result', 'Esito A'), ('test_date', 'Data saggio')]
@@ -35,6 +60,37 @@ def block(rows):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_explicit_unavailable_date_is_not_a_transcription_failure(self):
+        item = block([['x', 'non disponibile', 'Positivo', '02/03/2024']])
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertEqual(row.date_cause, 'source_states_unavailable')
+        self.assertEqual(row.sampling_dates[0].text, 'non disponibile')
+        self.assertIsNone(row.sampling_date)
+
+    def test_independent_subscription_runners_share_one_exact_request(self):
+        from concurrent.futures import ProcessPoolExecutor
+        with TemporaryDirectory() as directory:
+            with ProcessPoolExecutor(max_workers=2) as pool:
+                results = list(pool.map(subscription_in_process, [(directory, 1), (directory, 2)]))
+            self.assertEqual(results, [{'source': 'retained reading'}] * 2)
+            self.assertEqual((Path(directory) / 'dispatches').read_text(), 'dispatch\n')
+
+    def test_short_year_requires_unique_full_year_in_scoped_source_dates(self):
+        item = block([['x', '28/02/15', 'Positivo', '02/03/2015']])
+        fact = {'id': 'issue', 'role': 'report_date', 'page': 1, 'locator': 'letter date',
+                'text': '9/3/2015', 'value': '9/3/2015', 'applies_to': ['report']}
+        item['reading']['facts'] = [fact]
+        value = materialize('hash', 'v', 1, [item]).rows[0].sampling_dates[0]
+        self.assertEqual(value.text, '28/02/15')
+        self.assertEqual(value.value.isoformat(), '2015-02-28')
+        self.assertEqual(value.year_support, ('b1/issue',))
+        for facts in ([], [dict(fact, applies_to=['other-table'])],
+                      [fact, dict(fact, id='conflict', text='9/3/2115', value='9/3/2115')]):
+            item['reading']['facts'] = facts
+            self.assertIsNone(materialize('hash', 'v', 1, [item]).rows[0].sampling_date)
+        self.assertEqual(literal_date('29/02/15', year_context=((2015, 'issue'),)).cause,
+                         'invalid_calendar_date')
+
     def test_native_identifier_uses_source_geometry_and_preserves_original(self):
         import pymupdf
         with TemporaryDirectory() as temporary:

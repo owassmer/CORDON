@@ -29,7 +29,12 @@
    "date": null,
    "source_page": 1
   },
-  "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component."
+  "completeness": "Result-table component: all supplied pages render and the last row is complete. No covering letter, issue date, signature or method statement is present in this component.",
+  "equivalent_retained_copy": {
+   "url": "https://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_02_906_2021.pdf",
+   "sha256": "ccea8438ee3601d24740567c0930f2223e877bf4eaa46fd00bb7e2106750ad00",
+   "basis": "All four physical pages have identical dimensions, complete native text and rendered pixels at 108 dpi. Both copies print IAMB report 8; neither supplies a covering letter. Different file hashes are retained."
+  }
  },
  {
   "url": "file:///Users/owenwassmer/dev/CORDON-store/intake/source-recovery-2026-09-14/reports/IAMB_DIR_02_848_result_tables.pdf",

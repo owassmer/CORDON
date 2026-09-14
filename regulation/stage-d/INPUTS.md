@@ -8,7 +8,7 @@ established; no other row is.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
-| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The repaired reader has 209 documents with completed page readings and 391 completed relationship readings; the remaining population must be read and joined through the same path. Subscription vision resumes after 15:20 America/New_York on 14 September 2026. Current consumer results and consequential source work below. |
+| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The seven supplied PDFs have completed page and relationship readings; the remaining population is being read and joined through the same path. Subscription vision is running independently of consumer and implementation work. Current consumer results and consequential source work below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
@@ -179,15 +179,17 @@ contains 1,322 unmatched report rows. These figures describe retained extraction
 version `bf12550befda11586c24`, before further subscription reading, and do not establish
 source-family completeness or official confirmation.
 
-Finish the interrupted page readings and their joins, including the fine-print attachment whose source has 13 rows but whose saved reading
-recovered 12. A saved complete-document response formerly rejected by the page-pair
-partition now assembles through the ordinary reader without another model call. The runner
-rereads an incomplete page with magnified source views before declaring its document
-assembled. Continue full-population relationship reading, resolve unbound source
-qualifications and multi-document identity/scope, and correct the older CNR91P
-revision-date proposal from its source. The generic identifier role does not require
-guessing which organization assigned a literal code; attachment still requires the
-observation's report route, source identity and bidirectional uniqueness.
+The fine-print SELGE 27/2015 attachment now supplies all 13 source rows. Direct
+page comparison verifies 28 February for its first sample and 26 February for the
+other twelve; scoped full-year statements resolve the printed short years. CNR
+91P/2025 now attaches 23 October to the cited predecessor protocol and retains
+28 October as this rendition's issue date. IAMB 39/2022 is read as an amendment
+without an invented changed-column delta. The ordinary reader and source-only
+reread recovered these meanings; no report-specific runtime rule supplies them.
+Continue full-population row and relationship reading and reconcile its ordinary
+joins. The generic identifier role does not require guessing which organization
+assigned a literal code; attachment still requires the observation's report route,
+source identity and bidirectional uniqueness.
 
 The failed published routes are reconciled in the existing acquisition records.
 Four retained alternatives resolve CNR-IPSP 36/2024, 10/2024, 70M/2026 and SELGE
@@ -196,11 +198,26 @@ other nine failed routes: CNR 2/2024, 5/2024 and 9/2024; IAMB 7/2021, 8/2021 and
 report 4 / Dir 02/848; and UNIFG 8_POSITIVI/2021. The three supplied CNR files are
 byte-identical to already-held zero-padded publisher copies. All seven supplied
 files are stored with user-intake provenance and replicated to R2 with matching
-readback hashes. Their readings run through the ordinary subscription reader;
-route recovery alone does not establish a completed analytical join.
+readback hashes. All seven have completed page and relationship readings through the ordinary
+subscription reader. Independent source comparison recovers all 387 sample rows
+without omitted or duplicated sample identifiers and retains every compared native
+cell literal. The observation and reverse-row consumers determine correspondence;
+route recovery and page accounting alone do not establish it. The recovered-document
+consumer now links all 240 referring observations: 236 matches and four with the
+report's explicit sampling-date unavailability. The latter preserve the dated
+monitoring observations and the source result; no sampling date is invented for
+the laboratory. They are CNR 2/2024 field samples 11200007 and 11200015, CNR 5/2024
+sample 11000069 and CNR 9/2024 sample 11000096. Source report identity/date, native
+coordinates, host and bidirectional uniqueness establish their distinct laboratory
+code correspondence.
 
 The IAMB components contain the full rows referring observations name: 72, 104
 and 42 respectively. Report 8 contains 105 rows, including additional ID 1222184.
+That identifier is present in the accepted observation stream, sampled 5 October
+2021, and refers to the retained `RAPPORTO_PROVA_N_02_906_2021.pdf`. All four pages
+of that protocol-numbered copy have identical native text and rendered content to
+the supplied report-8 PDF. The acquisition entry records this correspondence;
+both byte versions and their routes remain retained.
 The supplied components omit their covering letters. Their result tables can
 supply literal results and sample correspondence; establishing the particular
 analytical method and issuance from the laboratory itself still requires the
@@ -249,6 +266,11 @@ row; the corrected report and later act agree. Laboratory replacement does not p
 administrative withdrawal. Source-declared correction relationships and their date
 conflicts survive; an exact cancellation phrase is not a prerequisite for reading a
 cancellation. Whole-report replacement does not assert that every column changed.
+The ordinary join also consumes explicit report identity/date and native degree
+coordinates from the monitoring publications, with source locations and distinct
+codes preserved. This supplies a source-based route for CNR's different field and
+client identifiers; completed report reading, agreement and bidirectional uniqueness
+still determine the actual join.
 
 `corpus/sources/reports/records.json` owns the route captures. Successful captures
 and distinct byte versions are retained; a current failed attempt names its cause.
@@ -350,9 +372,11 @@ result before they compete as finding-result rows. Direct inspection of UNIBA
 87/2023 confirms the small table and expanded transposed display; five competing
 joins are resolved by this correction. Further source rereading is required for
 its remaining display relationships, UNIBA 15/2024 and 66/2023, and the early
-reports whose daily counters and laboratory identifiers collide. Direct inspection of SELGE 139/2015 page 2 confirms a transcription error:
-the source prints 40.42257829 for daily sample 1, while the saved reading has
-40.22257829. The monitoring coordinate agrees with the source. The affected pages
-and the three UNIBA display readings are scheduled for a source-only high-effort
-reread after reset, before the general row population. No code
-chooses an identifier namespace or repairs a digit from result agreement.
+reports whose daily counters and laboratory identifiers collide. Direct inspection and source rereading of SELGE 139/2015 page 2 resolve the
+latitude to the printed 40.42257829 for daily sample 1. The source's daily and
+laboratory codes remain distinct. Source checks of UNIBA 15/2024 and 66/2023 found unresolved transposed-field
+attachment and nonliteral relationship support respectively; bounded source
+rereads are running before their display correspondence is accepted. UNIBA
+87/2023's fresh reading exceeded the subscription call timeout; its bounded retry
+runs separately from the remaining population. No code chooses an identifier
+namespace or repairs a digit from result agreement.

@@ -19,16 +19,17 @@ from test_reports import block
 class JoinIdentity(unittest.TestCase):
     def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
                  repeated=False, repetition_support=True, differing_repeat=False, reading_issues=(), replacement=None, association_rows=(), recovery=False,
-                 identifier_display=False):
+                 identifier_display=False, monitoring_fields=None):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
             monitoring = base / 'monitoring'; campaign = monitoring / 'campaign'; campaign.mkdir(parents=True)
             workbook = Workbook(); sheet = workbook.active
-            sheet.append(['ID', 'DATA_RILEVAMENTO', 'RISULTATO', 'DOCUMENTO_CONFERMA'])
+            extra = monitoring_fields or {}
+            sheet.append(['ID', 'DATA_RILEVAMENTO', 'RISULTATO', 'DOCUMENTO_CONFERMA', *extra])
             route = 'https://publisher.example/report.pdf'
             for reference, date_text in publications:
-                sheet.append([reference, datetime.fromisoformat(date_text), 'POSITIVO', route])
+                sheet.append([reference, datetime.fromisoformat(date_text), 'POSITIVO', route, *extra.values()])
             path = campaign / 'release.xlsx'; workbook.save(path)
             (campaign / 'releases.json').write_text(json.dumps([
                 {'url': 'https://publisher.example/release.xlsx', 'path': path.name, 'sha256': file_digest(path)}]))
@@ -74,7 +75,7 @@ class JoinIdentity(unittest.TestCase):
                     item['reading']['facts'].append({'id': 'repeat', 'role': 'repeated_representation',
                         'page': 1, 'locator': 'shared heading', 'text': 'Risultati dei campioni',
                         'applies_to': ['p1-t1', 'p1-t2']})
-            if association_rows:
+            if association_rows or monitoring_fields:
                 table = item['reading']['tables'][0]
                 for role, value in (('latitude', '41.123456789'), ('longitude', '16.987654321'),
                                     ('host', 'Vite europea')):
@@ -161,6 +162,27 @@ class JoinIdentity(unittest.TestCase):
         self.assertIn('derived occurrence', match['identity_basis'])
         self.assertEqual(joined['observation'].reference, 'public-9')
         self.assertEqual(match['row'].results[0].kind, 'negative')
+
+    def test_monitoring_reference_and_published_degrees_relate_distinct_codes(self):
+        fields = dict(PROT_SELGE='31/2024 Laboratory A', DATA_PROT_SELGE='01/03/2024',
+                      LATITUDINE=41.12345679, LONGITUDINE=16.98765432, SPECIE='Vite europea')
+        rows = [['client-4', '01/06/2024', 'Negativo', '02/06/2024']]
+        joined = self.run_join([['public-9', '2024-06-01']], rows, monitoring_fields=fields)[0]
+        self.assertEqual(joined['matches'][0]['row'].reference, 'client-4')
+        self.assertEqual(joined['matches'][0]['row'].results[0].kind, 'negative')
+        self.assertEqual(joined['matches'][0]['source_associations'][0]['source_kind'], 'monitoring publication')
+        for field, value in [('DATA_PROT_SELGE', None), ('LONGITUDINE', 16.98766),
+                             ('PROT_SELGE', '32/2024 Laboratory A'), ('SPECIE', 'Olea europaea')]:
+            with self.subTest(field=field):
+                changed = dict(fields, **{field: value})
+                self.assertFalse(self.run_join([['public-9', '2024-06-01']], rows,
+                                               monitoring_fields=changed)[0]['matches'])
+        duplicated = self.run_join([['public-9', '2024-06-01'], ['public-10', '2024-06-01']],
+                                   rows, monitoring_fields=fields)
+        self.assertTrue(all(not item['matches'] for item in duplicated))
+        two_rows = rows + [['client-5', '01/06/2024', 'Positivo', '02/06/2024']]
+        self.assertFalse(self.run_join([['public-9', '2024-06-01']], two_rows,
+                                      monitoring_fields=fields)[0]['matches'])
 
     def test_conflicting_act_association_is_not_selected_away(self):
         joined = self.run_join([['public-9', '2024-06-01']],

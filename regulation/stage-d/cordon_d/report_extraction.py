@@ -415,6 +415,19 @@ def _call(request, *, config, budget, request_id, raw_path):
 
 
 def _subscription_call(*, prompt, schema, digest, source, config, request_id, raw_path, render_pages=()):
+    """Serialize the same exact request across independent subscription runners."""
+    raw_path.parent.mkdir(parents=True, exist_ok=True)
+    with raw_path.with_suffix('.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        if raw_path.exists():
+            retained = _retained_reading(raw_path, config.model)
+            if retained is not None:
+                return retained
+        return _run_subscription_call(prompt=prompt, schema=schema, digest=digest, source=source,
+            config=config, request_id=request_id, raw_path=raw_path, render_pages=render_pages)
+
+
+def _run_subscription_call(*, prompt, schema, digest, source, config, request_id, raw_path, render_pages=()):
     """Read one retained PDF through the authenticated Claude subscription."""
     if config.provider != 'subscription':
         raise RuntimeError('Subscription execution was not selected')
@@ -513,12 +526,12 @@ def fully_read(reading):
         for page in reading['pages'])
 
 
-def extract_relationships(digest, store, *, config, budget, execute=True):
+def extract_relationships(digest, store, *, config, budget, execute=True, source_review=None):
     """Read document identities and operative references without retranscribing tables."""
     import pymupdf
     from . import report_relations as relations
     target = relations.path(store, digest)
-    if ((existing := relations.load(store, digest, exact=True))
+    if (not source_review and (existing := relations.load(store, digest, exact=True))
             and existing.get('reading_complete') is True):
         return target.parent.parent / existing['reading_version'] / target.name
     content, page_text, image_bearing = [], [], []
@@ -534,6 +547,10 @@ def extract_relationships(digest, store, *, config, budget, execute=True):
             content.append({'type': 'image', 'source': {'type': 'base64',
                 'media_type': 'image/png', 'data': base64.b64encode(png).decode()}})
     content.append({'type': 'text', 'text': relations.PROMPT})
+    if source_review:
+        content.append({'type': 'text', 'text':
+            'Read the complete source afresh to resolve this source-review finding. '
+            'The finding identifies what to examine, not an answer to copy:\n' + source_review})
     request = {'model': config.model, 'max_tokens': config.max_tokens,
         'messages': [{'role': 'user', 'content': content}],
         'output_config': {'effort': config.effort, 'format': {'type': 'json_schema', 'schema': relations.schema()}}}
@@ -544,7 +561,7 @@ def extract_relationships(digest, store, *, config, budget, execute=True):
     request_id = sha256(json.dumps(request_identity, sort_keys=True).encode()).hexdigest()
     raw = store / 'derived/reports/responses' / (request_id + '.json')
     reading_version = relations.READING_VERSION
-    if config.provider == 'api' and not raw.exists():
+    if config.provider == 'api' and not raw.exists() and not source_review:
         # Exact-request replay of the previous prompt never relabels its provenance.
         previous = dict(request, messages=[{'role': 'user', 'content': [
             *content[:-1], {'type': 'text', 'text': relations.PREVIOUS_PROMPT}]}])
@@ -605,7 +622,7 @@ def extract_relationships(digest, store, *, config, budget, execute=True):
     complete = complete and not rejected
     write_json(target, {'source_sha256': digest, 'reading_version': reading_version,
         'request_sha256': request_id, 'model': config.model, 'effort': config.effort,
-        'provider': config.provider,
+        'provider': config.provider, 'source_review': source_review,
         'complete': complete, 'reading': reading})
     if not complete:
         raise RuntimeError('Relationship inventory failed source validation; incomplete reading retained for diagnosis')

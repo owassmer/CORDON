@@ -92,12 +92,17 @@ against the source cell, then reads its coordinate-sorted text. A changed order 
 used only when every non-whitespace character is conserved; original native text,
 cell bounds and derivation remain attached. This repairs displaced punctuation,
 not identifier origin or correspondence between different codes.
+Two-digit date years resolve only against a unique matching full year in scoped
+source date statements. The literal date and supporting statement IDs survive;
+no current-year assumption or platform century cutoff supplies the year.
 
 Extraction permits one to three independent PDF processes under one shared,
 transaction-locked spending ledger. Returned usage and interrupted requests are
 different states. An explicit interrupted-request retry retains the full old
 reservation and reserves the new attempt separately; it does not claim invoice
-reconciliation. No saved successful response is retransmitted. Reader versions
+reconciliation. No saved successful response is retransmitted. Independent subscription runners
+lock the exact request before dispatch and reuse a response completed by the
+lock holder, preventing concurrent duplicate calls. Reader versions
 describe the implementation loaded into the process, avoiding cache mislabelling
 if source files change during a run.
 
@@ -121,6 +126,9 @@ A cache-only relationship graph follows explicitly supported replacements, retai
 history and unverified components, and rejects ambiguous or cyclic supersession.
 The graph is a proposed source reading, not legal adjudication. Bundled-document
 identity and amendment scope require further source resolution when not recovered.
+An explicit source-review finding can request a fresh relationship reading even
+after structural completion. Its instruction and exact request remain retained;
+the finding names what to examine and supplies no replacement answer.
 
 Native administrative association tables use printed header labels and verified
 annex continuity (consecutive physical pages/printed folios and the same ruled
@@ -131,6 +139,13 @@ report number, date, plant reference and unique matching coordinates at printed
 decimal precision. It preserves competing associations, distinct client codes and
 source access time; no positive-result filter selects a plant. An association is
 not an operative-act reading, a land-standing fact or proof of withdrawal.
+The monitoring publication itself can supply that explicit report identity and
+date. Its native geographic coordinates are compared at published precision;
+transformed coordinates never acquire invented printed precision. The accepted
+observation grouping links its source publications. Derived correspondence requires
+complete report-page coverage and uniqueness in both directions, preserves the
+source locations, and does not equate distinct field and laboratory codes. An
+explicitly printed parenthetical binomial can supply a second host label.
 
 ## Implementation rule
 
