@@ -50,9 +50,85 @@ class MonitoringTests(unittest.TestCase):
         self.assertIsNone(reading.subspecies)
         self.assertEqual(reading.crs, 'EPSG:32633')
         self.assertEqual(reading.coordinates, (590000, 4550000))
-        self.assertIsNone(self.row({'LATITUDINE': 40, 'LONGITUDINE': 17}).crs)
+        # The degree columns state the axes and no datum; the datum is established for
+        # this publisher at GEOGRAPHIC_FRAME from its own SIT publications of the same
+        # observations, so a location without a frame is no longer handed to a consumer.
+        self.assertEqual(self.row({'LATITUDINE': 40, 'LONGITUDINE': 17}).crs, 'EPSG:4326')
         self.assertEqual(self.row({'LATITUDINE': '40,75', 'LONGITUDINE': '17,25'}).coordinates,
                          (17.25, 40.75))
+
+    def test_a_record_stating_its_place_twice_does_not_drop_one_statement(self):
+        """The publisher prints geometry and degree columns in the same record.
+
+        Taking one and dropping the other silently is the class this row exists to end,
+        and comparing them is the only thing that could see them disagree, which is what
+        exposed sixteen transposed rows across releases.
+        """
+        def reading(longitude, latitude):
+            return self.row({'attributes': {'ID_CAMPIONE': 'both', 'RISULTATO': 'Positivo',
+                                            'LONGITUDINE': longitude, 'LATITUDINE': latitude},
+                             'geometry': {'x': 719728.4347, 'y': 4502915.1329},
+                             'spatialReference': {'wkid': 32633}})
+
+        agreeing = reading(17.59873801, 40.64786488)
+        self.assertEqual(agreeing.coordinates, (719728.4347, 4502915.1329))
+        self.assertEqual(dict(agreeing.causes)['LONGITUDINE'],
+                         'the record also states this place as longitude and latitude '
+                         'columns, which this reading did not take')
+        # The same record with its axes transposed, which no range check can catch.
+        transposed = reading(40.64786488, 17.59873801)
+        self.assertEqual(dict(transposed.causes)['LATITUDINE'],
+                         'the record states this place twice and the two statements '
+                         'disagree; this reading took the geometry')
+        # A record that states its place once, in those columns, is not told it stated it
+        # twice: the cause belongs to the reading that took the other statement.
+        once = self.row({'ID': 1, 'LONGITUDINE': 17.5, 'LATITUDINE': 40.5})
+        self.assertEqual(once.coordinates, (17.5, 40.5))
+        self.assertNotIn('LONGITUDINE', dict(once.causes))
+        self.assertNotIn('LATITUDINE', dict(once.causes))
+
+    def test_a_pair_this_reader_cannot_place_in_its_own_frame_is_refused_with_a_cause(self):
+        """The precondition every comparison needs, performed rather than approximated.
+
+        Three earlier versions of this guard each named one spelling of one frame, and a
+        record stating any other was carried into a comparison that could not be made.
+        These are the frames those versions missed, and none of them is exotic: a datum
+        this row's own text calls indistinguishable from the one it names, the well-known
+        text shape the same service publishes, and a name no projection library can build.
+        """
+        for frame in ({'wkid': 4326}, {'wkid': 4258}, {'wkid': 987654},
+                      {'wkt': 'GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID'
+                              '["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],'
+                              'UNIT["Degree",0.0174532925199433]]'}):
+            reading = self.row({'attributes': {'ID_CAMPIONE': 'x', 'RISULTATO': 'Positivo'},
+                                'geometry': {'x': 663995.63, 'y': 4546339.74},
+                                'spatialReference': frame})
+            self.assertIsNone(reading.coordinates, frame)
+            self.assertEqual(dict(reading.causes)['coordinates'],
+                             'a coordinate pair is published that this reader cannot use', frame)
+        # The frame a record states is still read, and a usable pair in it still passes.
+        usable = self.row({'attributes': {'ID_CAMPIONE': 'y'},
+                           'geometry': {'x': 17.5, 'y': 40.5},
+                           'spatialReference': {'wkid': 4326}})
+        self.assertEqual(usable.coordinates, (17.5, 40.5))
+        self.assertEqual(usable.crs, 'EPSG:4326')
+
+    def test_the_frame_belongs_to_the_pair_not_to_the_record(self):
+        """A service states `spatialReference` for its geometry, not for its columns.
+
+        Seventeen of these layers print degree columns beside their geometry. A feature
+        there without geometry used to take its degrees under the projected frame the page
+        declared for something else, which placed it in the Gulf of Guinea and said
+        nothing: the pair was in range for the columns it sat in and the reader's range
+        guard only ever looked at one frame name.
+        """
+        reading = self.row({'attributes': {'ID_CAMPIONE': 'z', 'RISULTATO': 'Positivo',
+                                           'LONGITUDINE': 17.5, 'LATITUDINE': 40.7},
+                            'geometry': None,
+                            'spatialReference': {'wkid': 32633}})
+        self.assertEqual(reading.coordinates, (17.5, 40.7))
+        self.assertEqual(reading.crs, 'EPSG:4326')
+        self.assertNotIn('coordinates', dict(reading.causes))
 
 
 if __name__ == '__main__':

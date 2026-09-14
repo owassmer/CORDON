@@ -42,6 +42,11 @@ def build_root(directory):
         [404, datetime(2022, 3, 7), 'Campione', 'Olivo', None, 41.0, 18.0, 'A', 'NEGATIVO', 'Assente'],
         [505, datetime(2022, 3, 8), 'Campione', 'Olivo', None, 41.1, 18.1, 'A', 'POSITIVO DUPLICATO', 'Assente'],
         [606, datetime(2022, 3, 9), 'Campione', 'Olivo', None, 41.2, 18.2, 'A', 'POSITIVO', 'Assente'],
+        # The publisher prints this row's axes the wrong way round: 17.6 under LATITUDINE
+        # and 40.6 under LONGITUDINE, where its other publication places it at 17.6 E,
+        # 40.6 N. Both numbers are in range for the column they sit in, so only the other
+        # publication of the same observation can expose it.
+        [707, datetime(2022, 3, 12), 'Campione', 'Olivo', None, 17.6, 40.6, 'A', 'POSITIVO', 'Assente'],
     ]:
         sheet.append(row)
     book.save(campaign / 'camp.xlsx')
@@ -57,17 +62,22 @@ def build_root(directory):
     (campaign / 'releases.json').write_text(json.dumps(releases))
     layer = root / 'sit' / 'Operationals2' / 'View' / '1'
     layer.mkdir(parents=True)
+    # A SIT feature and a campaign row publishing one observation carry one place in two
+    # frames: these eastings and northings are the workbook's degrees in EPSG:32633.
     features = [
         {'attributes': {'OBJECTID': 1, 'ID_CAMPIONE': '101', 'DATA_CAMPIONE': local_midnight_ms(2022, 3, 4),
                         'RISULTATO': 'Positivo', 'SPECIE': 'Olivo', 'TIPOLOGIA': 'Campione',
                         'DOCUMENTO_CONFERMA': 'https://publisher/report-101.pdf'},
-         'geometry': {'x': 600000.0, 'y': 4500000.0}},
+         'geometry': {'x': 711845.2910668278, 'y': 4486257.351409613}},        # 17.5 E, 40.5 N
         {'attributes': {'OBJECTID': 2, 'ID_CAMPIONE': '303', 'DATA_CAMPIONE': local_midnight_ms(2022, 3, 6),
                         'RISULTATO': 'Positivo', 'SPECIE': 'Olivo', 'TIPOLOGIA': 'Campione'},
-         'geometry': {'x': 610000.0, 'y': 4510000.0}},
+         'geometry': {'x': 744277.7556391398, 'y': 4531705.685991928}},        # 17.9 E, 40.9 N
         {'attributes': {'OBJECTID': 3, 'ID_CAMPIONE': '606', 'DATA_CAMPIONE': local_midnight_ms(2022, 3, 9),
                         'RISULTATO': 'Negativo', 'SPECIE': 'Olivo', 'TIPOLOGIA': 'Campione'},
-         'geometry': {'x': 620000.0, 'y': 4520000.0}},
+         'geometry': {'x': 768328.439718151, 'y': 4565897.757137436}},         # 18.2 E, 41.2 N
+        {'attributes': {'OBJECTID': 6, 'ID_CAMPIONE': '707', 'DATA_CAMPIONE': local_midnight_ms(2022, 3, 12),
+                        'RISULTATO': 'Positivo', 'SPECIE': 'Olivo', 'TIPOLOGIA': 'Campione'},
+         'geometry': {'x': 719992.2609708478, 'y': 4497604.338792484}},        # 17.6 E, 40.6 N
         # An early-style view: one counter value for two different plants on one day.
         {'attributes': {'OBJECTID': 4, 'ID_CAMPIONE': '1', 'DATA_CAMPIONE': local_midnight_ms(2022, 3, 11),
                         'RISULTATO': 'Negativo', 'SPECIE': 'Oleandro'},
@@ -81,7 +91,7 @@ def build_root(directory):
     (layer / 'layer.json').write_text('{}')
     (layer / 'release.json').write_text(json.dumps({
         'url': 'https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/View/MapServer/1',
-        'name': 'Positivi - Campioni 2022 sub. pauca', 'oid_field': 'OBJECTID', 'rows': 5, 'unique_oids': 5,
+        'name': 'Positivi - Campioni 2022 sub. pauca', 'oid_field': 'OBJECTID', 'rows': 6, 'unique_oids': 6,
         'pages': [{'path': page.name, 'sha256': file_digest(page)}]}))
     return root
 
@@ -133,8 +143,14 @@ class ObservationStream(unittest.TestCase):
         self.assertEqual(march_fourth.result, 'published-positive')
         self.assertTrue(march_fourth.positive)
         self.assertEqual(march_fourth.disagreements, ())
-        self.assertEqual(dict(march_fourth.locations), {None: (17.5, 40.5), 'EPSG:32633': (600000.0, 4500000.0)})
-        self.assertEqual(march_fourth.report_routes, ('https://publisher/report-101.pdf',))
+        # One observation, one place: the workbook degrees and the SIT easting and northing
+        # are compared in one frame rather than kept apart as two candidate locations.
+        (frame, point), = march_fourth.locations
+        self.assertEqual(frame, 'EPSG:4326')
+        self.assertAlmostEqual(point[0], 17.5, places=9)
+        self.assertAlmostEqual(point[1], 40.5, places=9)
+        self.assertEqual(march_fourth.report_routes,
+                         (('DOCUMENTO_CONFERMA', 'https://publisher/report-101.pdf'),))
         self.assertEqual(len(march_tenth.members), 1)
         self.assertFalse(march_tenth.positive)
 
@@ -153,7 +169,21 @@ class ObservationStream(unittest.TestCase):
         self.assertEqual(group.disagreements, ('result',))
         self.assertIsNone(group.result)
         self.assertIsNone(group.positive)
-        self.assertEqual(len(group.locations), 2)  # each frame agrees with itself; the result does not
+        self.assertEqual(len(group.locations), 1)  # the two publications agree on the place, not the result
+
+    def test_publications_in_different_frames_that_place_one_observation_apart_disagree(self):
+        """The publisher's transposed axes, caught only by its own other publication.
+
+        Both printed numbers are in range for the column they sit in, so nothing in the
+        record alone shows the defect. Held apart by frame the two publications never met;
+        compared in one frame they place the same observation 3,500 km apart.
+        """
+        group, = self.by_reference['707']
+        self.assertEqual({m.view for m in group.members}, {'camp.xlsx', 'Positivi - Campioni 2022 sub. pauca'})
+        self.assertIn('coordinates', group.disagreements)
+        self.assertTrue(group.positive)          # the result is agreed; the place is not
+        self.assertEqual(group.locations, ())    # so no location reaches a consumer
+        self.assertNotIn(group.identity, {o.occurrence for o in located_positives(self.groups)})
 
     def test_observations_without_a_reference_stay_separate_even_at_the_same_place(self):
         unreferenced = [g for g in self.by_reference[None] if g.uncorrelated_because == 'no publisher reference']
@@ -170,14 +200,18 @@ class ObservationStream(unittest.TestCase):
         self.assertIsNone(alone.positive)
 
     def test_detection_days_count_each_observation_once_and_exclude_disagreements(self):
-        # 4 March: 101 (three publications) and one reused-counter positive; 6 March: 303; 11 March: a counter positive.
-        self.assertEqual(detection_days(self.groups), (date(2022, 3, 4), date(2022, 3, 6), date(2022, 3, 11)))
-        self.assertEqual(detection_days(self.groups, select=lambda g: g.correlatable), (date(2022, 3, 4), date(2022, 3, 6)))
+        # 4 March: 101 (three publications) and one reused-counter positive; 6 March: 303;
+        # 11 March: a counter positive; 12 March: 707, whose result is agreed although its
+        # publications place it apart, so it is a detection day with no usable location.
+        self.assertEqual(detection_days(self.groups),
+                         (date(2022, 3, 4), date(2022, 3, 6), date(2022, 3, 11), date(2022, 3, 12)))
+        self.assertEqual(detection_days(self.groups, select=lambda g: g.correlatable),
+                         (date(2022, 3, 4), date(2022, 3, 6), date(2022, 3, 12)))
 
     def test_occasion_sets_are_observation_identities_split_by_agreed_result(self):
         sets = occasion_sets(self.groups, lambda g: g.day.month)
         self.assertEqual(set(sets), {3})
-        self.assertEqual(len(sets[3]['positive']), 4)  # 101, 303, and two reused-counter positives
+        self.assertEqual(len(sets[3]['positive']), 5)  # 101, 303, 707, and two reused-counter positives
         self.assertEqual(len(sets[3]['negative']), 6)  # 101 on 10 March, 404, two unreferenced, two reused-counter negatives
         self.assertEqual(len(sets[3]['other']), 2)     # the cross-release disagreement and the duplicate-only label
         self.assertTrue(sets[3]['positive'].isdisjoint(sets[3]['negative']))
@@ -200,7 +234,27 @@ class ObservationStream(unittest.TestCase):
 
     def test_located_positives_carry_sources_but_no_spatial_support(self):
         located = list(located_positives(self.groups))
-        self.assertEqual(len(located), 6)  # 101: two frames; 303: two frames; two reused-counter positives, one frame each
+        # One per positive observation: 101, 303 and the two reused-counter positives. The
+        # transposed 707 yields none, because its publications disagree about the place.
+        self.assertEqual(len(located), 4)
+        self.assertEqual(len({o.occurrence for o in located}), 4)
+        # What reaches C is a pair a publisher printed, in the frame that publisher stated,
+        # never this reader's reprojection: the positive published only by the SIT view
+        # arrives as its own easting and northing under EPSG:32633, and every emitted
+        # object's raw pair belongs to the frame beside it.
+        sit_only, = [o for o in located if o.crs == 'EPSG:32633']
+        self.assertEqual(sit_only.coordinates, (640000.0, 4540000.0))
+        self.assertEqual(sit_only.raw_coordinates, sit_only.coordinates)
+        for observation in located:
+            degrees = abs(observation.raw_coordinates[0]) <= 180 and abs(observation.raw_coordinates[1]) <= 90
+            self.assertEqual(degrees, observation.crs == 'EPSG:4326')
+        # The place comes from one publication; the provenance comes from all of them.
+        # Observation 101 is published by the workbook, the CSV and the SIT view, and the
+        # object a consumer reads to see what supports the location cites all three even
+        # though only one printed the pair it carries.
+        march_fourth, = [o for o in located if o.occurrence[1] == '101']
+        self.assertEqual(len(march_fourth.sources), 3)
+        self.assertEqual(len({s.identity for s in march_fourth.sources}), 3)
         for observation in located:
             self.assertEqual(observation.support, ())
             self.assertTrue(all(s.role == 'official-dataset' for s in observation.sources))

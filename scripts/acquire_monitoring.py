@@ -16,6 +16,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import sys
 import time
 from threading import local
@@ -218,6 +219,19 @@ def main():
                 print('FAILED', failures[-1], flush=True)
     if failures:
         raise SystemExit(f'{len(failures)} layers incomplete; see console. Completed releases remain reusable.')
+    # The campaign releases publish longitude and latitude and state no datum anywhere, so
+    # the frame the reader gives them is established from this publisher's own redundancy
+    # rather than from a statement, and a republication in another datum would move every
+    # one of their locations while stating nothing about it. The establishment is therefore
+    # re-derived on any acquisition, not only a campaign one: the equation has two sides,
+    # and the SIT geometry is the side it is measured against - for the three releases that
+    # publish no observation reference it is the only ground there is. Guarding the side
+    # that carries the unstated frame leaves the reference side free to move unchecked.
+    # Derive the readings first, because the check reads them and a capture is not a reading.
+    from cordon_d.monitoring import ingest  # noqa: E402
+    ingest(args.output)
+    check = Path(__file__).with_name('check_frames.py')
+    raise SystemExit(subprocess.call([sys.executable, str(check), str(args.output)]))
 
 
 if __name__ == '__main__':

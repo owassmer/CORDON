@@ -35,6 +35,12 @@ the main checkout, which every worktree resolves to the same path — as blobs
 named by their SHA-256, written once and never rewritten (`cordon_d.store`).
 Acquisition records in the tree name each release by URL, capture time and hash;
 the tree holds no source bytes. `scripts/audit_store.py` re-hashes every blob.
+Where a reader establishes a fact from a publisher's own redundancy rather than
+from a statement the publisher makes, the check that re-derives it is run by the
+acquisition that could invalidate it, not left to be remembered: for the
+coordinate frame of the monitoring degree columns that check is
+`scripts/check_frames.py`, and `scripts/acquire_monitoring.py --campaign` derives
+the readings and runs it. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable Parquet keyed by blob hash and
 reader version: lossless native occurrences and typed readings per blob. It is a
@@ -46,8 +52,10 @@ moves into SQL.
 
 Ordinary readers accept source records without a named case, fixed hash, authored
 answer, correction allowlist or supported-record registry. Original bytes and
-source-native values remain distinguishable from derived values. Missing or
-conflicting inputs remain visible to the accepted consumer.
+source-native values remain distinguishable from derived values. Conflicting inputs
+remain visible to the accepted consumer, and an absence reaching it carries its
+cause, under the rule `DESIGN_PRINCIPLES.md` owns. A reader of source records
+that does not yet do this says so on its row.
 
 Research material under `corpus/workbench/` is temporary. At the end of a bounded
 unit, a result changes a canonical owner, remains as a directly consumed source

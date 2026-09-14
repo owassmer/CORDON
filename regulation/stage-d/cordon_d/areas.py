@@ -646,10 +646,12 @@ MEMBERSHIP_PREDICATE = ('the point or parcel lies within the geography adopted b
 INTERVAL_PREDICATE = "decision time within this version's effective interval"
 
 
-def _place_label(comune, province, section, foglio):
+def _place_label(comune, province, section, foglio, particella=None):
     parts = []
     if foglio:
         parts.append(f'foglio {foglio}' + (f' sezione {section}' if section else ''))
+    if particella:
+        parts.append(f'particella {particella}')
     if comune:
         parts.append(str(comune))
     if province:
@@ -679,7 +681,7 @@ def membership_evidence(versions_, root: Path, day, *, comune=None, province=Non
     documents = act_documents(root)
     store = store_root(root)
     known_at = known_at or datetime.now(timezone.utc)
-    label = _place_label(comune, province, section, foglio)
+    label = _place_label(comune, province, section, foglio, particella)
     sources, assertions = {}, []
     for version in in_force(versions_, day):
         record = documents.get(version.instrument_id)

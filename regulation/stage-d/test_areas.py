@@ -316,6 +316,20 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
             self.assertIn('p7 table', assertion.support[0].selector)
             self.assertIn('FOGLI', assertion.support[0].reading)
 
+    def test_parcel_membership_cannot_be_reused_as_sheet_membership(self):
+        version = next(v for v in self.versions if '2024-00008' in v.provision_version_id)
+        _, assertions = membership_evidence(
+            (version,), ROOT, version.effective_from, comune='TRIGGIANO',
+            foglio='5', particella='818')
+        self.assertTrue(assertions)
+        self.assertTrue(all('particella 818' in a.context for a in assertions))
+        _, intersecting = membership_evidence(
+            (version,), ROOT, version.effective_from, comune='TRIGGIANO',
+            foglio='5', particella='260')
+        self.assertTrue(intersecting)  # the buffer table separately includes the whole sheet
+        self.assertTrue(all('particella 260' in a.context for a in intersecting))
+        self.assertFalse({a.context for a in assertions} & {a.context for a in intersecting})
+
 
 if __name__ == '__main__':
     unittest.main()
