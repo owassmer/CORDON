@@ -203,12 +203,23 @@ recorder to stand at the canopy edge; page 30 (printed page 23) requires a whole
 photograph with identifying landmarks. A monitoring coordinate is therefore not
 a source-stated stem-centre measurement. Page 43 lists the sample coordinates
 available to laboratories: a report repeating those coordinates is not independent
-position evidence. For a concrete first reconciliation, the external recovery handoff to Owen is the App
-Xylella sampling sheets and original identifying photographs for observations
-1968569 and 1968577, sampled 5 August 2026 in Noicattaro, together with any retained
-GNSS fix/accuracy record. The imagery route needs the Ortofoto Puglia 2023 production
-and acceptance accuracy report, independent checkpoints, and acquisition dates for
-the relevant tiles; pixel size alone cannot supply that qualification.
+position evidence. For the first reconciliation, sufficient evidence must independently identify
+the sampled plants and their event-time positions or enclosures for observations
+1968569 and 1968577, sampled 5 August 2026 in Noicattaro. Original identifying
+photographs, sampling records or an equivalent source can establish this; a
+prescribed bundle of every document type is not required. If imagery supplies the
+reference, establish the relevant image's acquisition date and a defensible
+position/delineation error, using publisher assessment or independent control.
+A nominal pixel size cannot do that.
+
+Retained monitoring and report records contain published coordinates and sampling
+context; the procedure act describes the field workflow. The examined current
+source populations and prior acquisition records do not supply those plants'
+original photographs, sampling sheets or independent fix records. Earlier imagery
+acquisitions identified service metadata and exploratory tiles, not a numerical
+accuracy assessment or the event-time plant correspondence. Equivalent sufficient
+evidence may close either requirement; no broad external acquisition assignment
+is implied.
 
 The metric adapter now accepts the ordinary monitoring output with its verified
 source bytes when a separate occurrence-, date- and context-specific qualification
