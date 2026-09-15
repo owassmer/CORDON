@@ -1,5 +1,6 @@
 """Actual retained measure -> targets, report associations and accepted C clock."""
 from datetime import date
+from dataclasses import replace
 from pathlib import Path
 import re
 import unittest
@@ -7,7 +8,7 @@ from zoneinfo import ZoneInfo
 
 from cordon_c import Snapshot
 from cordon_d.calendar import national_calendar
-from cordon_d.measures import read_measure
+from cordon_d.measures import retained_measure
 from cordon_d.removal_events import connected_publications, publication_deadline, publication_records
 from cordon_d.store import blob_path, store_root
 
@@ -20,7 +21,7 @@ class RetainedWholeMeasure(unittest.TestCase):
         if not blob_path(cls.store, cls.digest).exists():
             raise unittest.SkipTest('Retained source store unavailable')
         try:
-            cls.measure = read_measure([cls.digest], cls.store)
+            cls.measure = retained_measure('6f31e677689ecf211f5103abfa7ccd1c33c32ec9ff50130e8614b57527de764d', cls.store)
         except FileNotFoundError:
             raise unittest.SkipTest('Whole-measure response not retained; no extraction in tests')
 
@@ -33,6 +34,9 @@ class RetainedWholeMeasure(unittest.TestCase):
         self.assertEqual(set(targets), {'1662907', '1663853', '1663690', '1662223', '1662073'})
         self.assertEqual(targets['1662907']['sheet'], '13')
         self.assertEqual(targets['1662907']['parcel'], '105')
+        self.assertEqual(re.findall(r'[A-Z]+', targets['1663853']['addressee_text'].upper()),
+                         ['PONTRELLI', 'ANNA', 'VERDONI', 'GIOVANNI'])
+        self.assertGreater(len(tuple(measure.targets())), len(targets))
         for key in ('1662223', '1662073'):
             self.assertEqual(targets[key]['parcel'], '389')
             self.assertEqual(re.findall(r'[A-Z]+', targets[key]['addressee_text'].upper()),
@@ -69,3 +73,9 @@ class RetainedWholeMeasure(unittest.TestCase):
         for key, report in expected.items():
             self.assertEqual(len(linked[key]), 1)
             self.assertEqual(linked[key][0]['fields']['report_reference']['text'], report)
+
+    def test_interpretation_request_is_not_the_administrative_event_identity(self):
+        replay = replace(self.measure, response=dict(self.measure.response, request_sha256='another-proposal'))
+        self.assertEqual(tuple(self.measure.administrative_events()), tuple(replay.administrative_events()))
+        adoption, = (e for e in replay.administrative_events() if e.kind == 'adoption')
+        self.assertEqual(adoption.identity, replay.identity + ':adoption')

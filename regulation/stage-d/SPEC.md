@@ -271,15 +271,20 @@ no dependency on the laboratory reader and does not dispatch Claude jobs.
 
 The first intended caller is the removal-measure reader (INPUTS rows 6–8 and 11).
 Its initial allocation is one worker, one complete act with necessary annex context
-per request, with `gpt-5.6-luna` at `high` effort as a candidate setting. That setting
-is not yet qualified for whole-measure meaning: the caller must exercise its own
+per request. Luna-high failed native target and shared-cell fidelity on the first
+measure; repeating its instructions and extending its timeout did not repair that
+failure. The caller now qualifies Astra-medium with separated native ownership
+and administrative interpretation. Neither setting is a permanent constraint;
+the caller must exercise its own
 source-to-consumer contract before population dispatch. Source admission, document
 relationships, qualifications, validation and publication of accepted readings
 remain with that reader. The transport returns a proposed reading, never a
 completion or legal-effect assertion.
 
-Execution is explicit (`execute=True`); otherwise only an identical retained request
-can be replayed. Request identity includes the source hashes, actual prompt and
+Execution is explicit (`execute=True`). `read_retained(request_id, store)` consumes
+an explicit retained request with its original context, independently of a later
+caller's prompt. It verifies request identity and validates the retained output;
+it cannot dispatch. Request identity includes the source hashes, actual prompt and
 schema, rendered image hashes, model, effort and transport version. A lock prevents
 duplicate dispatch of an identical request; it does not coordinate different
 providers or different tasks on one document. Raw output, elapsed call time and
@@ -311,7 +316,7 @@ instruction is explicit and yields a different transport request.
 
 | Accepted D contract | Measure contribution and limit |
 |---|---|
-| `case-prescription` | `directions`, `targets`, `parts` and `references` retain the prescribed scope, each source occurrence and the exact stated correction. `prescribed_targets()` selects present removal directions only; deferred and corrective occurrences remain in the reading. |
+| `case-prescription` | `directions`, source-position selections, `parts` and `references` retain prescribed scope, occurrences and the exact stated correction. `prescribed_targets()` selects identified plant/parcel positions in operative parts under present removal directions; map context, deferred and corrective positions remain available. |
 | `operative-status`, `evaluation-context` | Identity, adoption, declared effect and conditions supply source facts. Adoption does not establish recipient effect or choose the applicable A route by itself. |
 | `recipient-notice`, `administrative-event` | Route reasons and timing remain in the directions. Actual dated events about the resolved measure reach `AdministrativeEvent`; publication adapters connect independent register records. An unresolved measure leaves other measures' supported publications usable. |
 | `party-land-standing` | Published addressee cells and their row scope supply positions in the act. They do not supply independent title or establish a corrected recipient's notice. |
@@ -320,6 +325,24 @@ instruction is explicit and yields a different transport request.
 `MeasureReading` connects act identity and adoption to the existing publication
 adapter, retains the actual prescribed target rows separately from A–C's required
 population, and reuses the accepted association reader for report relationships.
+The association owner supplies sample/report identity, printed dates, host,
+coordinates and cadastral fields with its verified row continuations. The model
+does not output another version of these values. `measure_sources` exposes native
+source addresses using that owner's orientation and row coordinates. Interpretation
+selects row populations, additional field columns, prose spans, directions and
+document-part roles; composition copies native characters and reuses the original
+association object. Shared physical cells and verified split rows retain all their
+fragments. Layout establishes source locations, never operative meaning or time.
+Image-only and vector-outlined content uses explicitly model-transcribed positions
+from the full rendered page. Complete source pages remain in every request; native
+addresses supplement them. Municipality mentions and contextual map labels do not
+become ordered targets merely by referring to an operative direction.
+
+`retained_measure` and `scripts/read_measures.py --request` consume a named retained
+interpretation offline, requiring its measure schema and source addresses to match
+the composition contract. This preserves the original interpretation and source
+context when the surrounding consumer changes; it does not patch rejected readings
+or silently dispatch a replacement. Source checks remain distinct from qualification.
 Dated actual events use `AdministrativeEvent`; plans, blank forms, other unresolved
 payload identities and imprecise event times remain source readings rather than
 invented anchors. Source-boundary validation checks citations and references, not

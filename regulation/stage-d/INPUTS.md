@@ -459,12 +459,18 @@ whole-measure reading awaits the qualified measure consumer. The remaining page 
 source families; their presence does not establish removal work.
 
 The earlier 25-PDF hold was sequencing, not population acceptance. Owen has now
-authorized the merged PR #17 Codex transport for PR #15: one Luna-high worker,
-one complete act with necessary annex context per request. The initial whole-act
-contract and source-to-consumer qualification are being exercised before population
-dispatch. The measure-to-publication clock connection has been exercised; native
-target identifiers and shared addressee cells have not yet passed source verification. Other retained originals remain unextracted; the Claude allocation and
-its readers are untouched.
+authorized the merged PR #17 Codex transport for PR #15: one worker, one complete
+act with necessary annex context per request. Luna-high repeatedly misread identifiers
+and shared cells; prompt and timeout retries did not establish fidelity. The repaired
+contract leaves those native values with the association owner and source cells,
+and assigns administrative scope and relationships to interpretation. Astra-medium
+now passes DDS58's five-target, shared-addressee, report-link and municipal election
+clock checks against independent source readings. Contextual map positions remain
+available without becoming extra ordered targets. DDS74's independently viewed split
+addressee composes into one association with both name fragments; that verifies native
+composition, not its complete act meaning. Prose corrections and rendered-page-only
+annexes remain under qualification before population dispatch. Other retained
+originals remain unextracted; the Claude allocation and its readers are untouched.
 The established extraction approach must recover source meaning and relationships,
 with native characters copied only where their attachment is supported. Ordinary
 consumption remains deterministic and offline.
