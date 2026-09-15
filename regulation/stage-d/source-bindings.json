@@ -100,11 +100,12 @@
       "routes": [
         "https://burp.regione.puglia.it/bollettini",
         "https://www.regione.puglia.it/documents/736605/",
-        "https://cartografia.sit.puglia.it/doc/xylella/ (determinations reached from admitted report identities)"
+        "https://cartografia.sit.puglia.it/doc/xylella/ (determinations reached from admitted report identities)",
+        "Consequential municipal publisher copies and correction/publication attachments reached from the admitted measure"
       ],
       "population": "Every Osservatorio determination required by an admitted finding or by a correction relationship reached from it.",
-      "reader": "cordon_d.source_associations for native plant/report annex associations; whole-act operative reading remains unimplemented",
-      "open": "Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
+      "reader": "cordon_d.measures uses the accepted document_subscription transport; whole-measure qualification is in progress. Report associations reuse cordon_d.source_associations from accepted main e58b663316f07b382b39d7a5b74253c9fe50e538 without a competing reader.",
+      "open": "The required population is consumer-defined, not limited by year, subspecies, municipality or retained batch. It includes consequential incorporated, correcting, replacing and supplementary material. The original 25 PDF hold was a sequencing instruction; Owen now authorizes one Codex worker through merged PR #17, with whole-measure consumer qualification before population dispatch. The initial Luna-high candidate failed source fidelity; native association/cell ownership is now separated from administrative interpretation, with Astra-medium under qualification. Retained-byte and heading reconciliation has expanded intake across the regional archive and municipal copies, but whole-measure meaning, finding attachment and complete annex/correction chains remain unestablished. INPUTS rows 6-8 and 11 distinguish inspected coverage, unlocated acquisition claims, pending readings and unexamined dependencies. Laboratory correction alone does not amend a measure; an ERRATA CORRIGE register label alone does not identify an administrative delta."
     },
     {
       "id": "notice-and-response-records",
@@ -121,11 +122,12 @@
         "https://burp.regione.puglia.it/bollettini and the regional sites the plans name",
         "The Osservatorio's communication record and municipal notification attempts (recipient effect)",
         "PEC transmission to ARIF and the Prefettura (administrative event)",
-        "ARIF's authenticated election record or the owner's PEC (response)"
+        "ARIF's authenticated election record or the owner's PEC (response)",
+        "The competent municipal historical register and its emitted original-document routes, including native Akropolis, Parsec and JCityGov publications reached from admitted measures"
       ],
       "population": "The act text, publication record, communication and response events attached to an admitted removal matter; not every notice published by every municipality.",
-      "reader": "cordon_d.notices and cordon_d.events",
-      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
+      "reader": "cordon_d.notices (native publication declarations and original routes), cordon_d.events and cordon_d.removal_events (native municipal/regional records and exact publication-clock adapter)",
+      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. Six Capurso publication declarations for regional removal acts are retained, including DDS108/2024 multiplex; five reach accepted C election-clock calculations with the national calendar baseline. They do not establish continuity, service, recipient effect, election, silence or removal. Other municipal and first-party access limitations remain on INPUTS rows 7 and 11. All nine followed regional Albo detail records for source-stated removal/supplement entries on the retained search page explicitly mark publication Conclusa; the reader supplies regional-publication-start/end events with source timestamps retained and date precision exposed. These cannot anchor the municipal election clock. Adoption number, proposal code, registration time and declared executivity remain distinct. The Parsec historical reader preserves all native rows and emitted original routes, including separate Cagnano correction-labelled publications that serve identical PDFs. It does not infer the attached act, amendment, recipient delivery or a clock from a referenced act or PEC subject. Whole-measure attachment awaits qualified reading. The remaining municipal query and first-party access limitations are specific to INPUTS row 7."
     },
     {
       "id": "plant-protection-records",
@@ -178,11 +180,12 @@
       "routes": [
         "The Osservatorio's casefile and field systems (presided execution record, countersignature, photograph, assignment, verification, cost determination)",
         "ARIF or other executing-body records incorporated into the matter",
-        "Removal orders for the lawful work basis (removal-orders route)"
+        "Removal orders for the lawful work basis (removal-orders route)",
+        "Official Prefettura case reports and competent municipal completion certificates with their incorporated work ledgers, where they bear on admitted work"
       ],
       "population": "The operational records for the admitted finding and resulting work, including corrections and completion evidence.",
       "reader": "cordon_d.evidence, cordon_d.events and source-specific readers still to be implemented",
-      "open": "No public procedure manual can supply an unseen operational fact. A coercive-direction or execution-priority act is not proof of completed removal; a published removal label or removed-plant layer is a lead to a first-party record, not a removal occurrence, and the retained SIT capture holds no removed-plant layer after 2017. At deployment these are first-party operator inputs, with unavailable fields left unknown."
+      "open": "Public manuals cannot supply unseen events. Official reported eradication and municipal work certificates are retained, with direct source readings and scope limitations on INPUTS row 11. Municipal brush clearing and the separately listed adult-tree fellings are not silently equated to execution of an Osservatorio prescription; infected-target correspondence, relevant record completeness and source identifier/date inconsistencies remain unresolved where required. The Prefettura report establishes reported work within its stated outbreak, not an exact removal day or later-measure completion. No per-target removal-performance consumer is complete. HTTP 403 responses on ARIF public routes are pending VPN-on retry, not durable source restrictions. Exact routes and distinct TLS/transport failures remain in acquisition records and INPUTS. First-party service, response and execution histories remain required for their exact conclusions."
     },
     {
       "id": "vector-and-treatment-observations",

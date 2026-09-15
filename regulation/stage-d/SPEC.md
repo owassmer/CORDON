@@ -27,6 +27,37 @@ Some accepted source text calls their operative direction a `prescription`; that
 is the meaning of the `case-prescription` input contract. It is not a medical
 prescription or a separate product workflow.
 
+## Administrative publication records
+
+`cordon_d.removal_events.publication_records` consumes the retained native
+Capurso/Akropolis register JSON. It preserves all fields and identifies the
+regional act from its explicitly labelled subject, separately from the municipal
+incoming protocol and date. `connected_publications` requires the act identity
+and adoption date from the measure consumer. Whole-measure qualification precedes
+population dispatch; independent register declarations remain available.
+
+`publication_deadline` passes the exact event kind, document and competent
+municipality to accepted B/C clock calculations. It requires the caller's
+calendar. A result using `national_calendar()` has that baseline's local-holiday
+limitation. The calculation does not establish recipient effect, uninterrupted
+posting, election, silence, default or completed removal. No clause wording,
+layout or adoption date generates an assignment or performance event.
+
+`cordon_d.notices.parsec_publication_declarations` reads the publisher's labelled
+table, including native ICEfaces historical-search responses. It preserves each
+publication occurrence, declared dates, requesting office and emitted original
+routes. A correction-labelled entry and another entry can serve identical PDFs
+without becoming one publication or establishing an amendment. These declarations
+remain available independently of whole-measure qualification.
+`removal_events.parsec_publications` attaches the exact emitted document route through
+its acquired source hash to the measure identity and adoption date. It preserves
+separate publication occurrences even when they serve identical documents; a
+referenced predecessor in a subject does not replace the attached act.
+The adapter also requires the register capture's acquisition record before emitting
+events. Displayed future dates remain declarations, and an end date becomes an
+occurred anchor only after that local calendar day has elapsed. This does not prove
+uninterrupted posting or recipient effect.
+
 ## Where bytes live
 
 Source bytes are the only irreplaceable data. They live in a content-addressed
@@ -240,15 +271,20 @@ no dependency on the laboratory reader and does not dispatch Claude jobs.
 
 The first intended caller is the removal-measure reader (INPUTS rows 6–8 and 11).
 Its initial allocation is one worker, one complete act with necessary annex context
-per request, with `gpt-5.6-luna` at `high` effort as a candidate setting. That setting
-is not yet qualified for whole-measure meaning: the caller must exercise its own
+per request. Luna-high failed native target and shared-cell fidelity on the first
+measure; repeating its instructions and extending its timeout did not repair that
+failure. The caller now qualifies Astra-medium with separated native ownership
+and administrative interpretation. Neither setting is a permanent constraint;
+the caller must exercise its own
 source-to-consumer contract before population dispatch. Source admission, document
 relationships, qualifications, validation and publication of accepted readings
 remain with that reader. The transport returns a proposed reading, never a
 completion or legal-effect assertion.
 
-Execution is explicit (`execute=True`); otherwise only an identical retained request
-can be replayed. Request identity includes the source hashes, actual prompt and
+Execution is explicit (`execute=True`). `read_retained(request_id, store)` consumes
+an explicit retained request with its original context, independently of a later
+caller's prompt. It verifies request identity and validates the retained output;
+it cannot dispatch. Request identity includes the source hashes, actual prompt and
 schema, rendered image hashes, model, effort and transport version. A lock prevents
 duplicate dispatch of an identical request; it does not coordinate different
 providers or different tasks on one document. Raw output, elapsed call time and
@@ -266,3 +302,51 @@ The calling reader uses the shared store and retains the request reference besid
 its interpreted output. No second source inventory, scheduler, extraction schema,
 or evidence-acceptance model is introduced here. Laboratory relationship batching
 can reuse the transport later; it is not an implemented caller in this unit.
+
+## Removal-measure reading
+
+`cordon_d.measures` supplies a caller-owned whole-act contract to the accepted
+subscription transport. `measure-reading.txt` owns the source-reading instruction.
+The reader takes one complete act and its necessary annex context, preserving
+source citations, current versus deferred directions, incorporated target
+occurrences, published addressee positions, corrections, actual versus intended
+events and conclusion-specific limitations. `scripts/read_measures.py` replays by
+default; `--execute` uses the allocated single Codex worker. A changed source-review
+instruction is explicit and yields a different transport request.
+
+| Accepted D contract | Measure contribution and limit |
+|---|---|
+| `case-prescription` | `directions`, source-position selections, `parts` and `references` retain prescribed scope, occurrences and the exact stated correction. `prescribed_targets()` selects identified plant/parcel positions in operative parts under present removal directions; map context, deferred and corrective positions remain available. |
+| `operative-status`, `evaluation-context` | Identity, adoption, declared effect and conditions supply source facts. Adoption does not establish recipient effect or choose the applicable A route by itself. |
+| `recipient-notice`, `administrative-event` | Route reasons and timing remain in the directions. Actual dated events about the resolved measure reach `AdministrativeEvent`; publication adapters connect independent register records. An unresolved measure leaves other measures' supported publications usable. |
+| `party-land-standing` | Published addressee cells and their row scope supply positions in the act. They do not supply independent title or establish a corrected recipient's notice. |
+| `owner-response`, `removal-performance` | Completed records can supply their stated events; intentions, blank forms and missing histories cannot. A free-text work description does not establish required-work coverage or completed removal. |
+
+`MeasureReading` connects act identity and adoption to the existing publication
+adapter, retains the actual prescribed target rows separately from A–C's required
+population, and reuses the accepted association reader for report relationships.
+The association owner supplies sample/report identity, printed dates, host,
+coordinates and cadastral fields with its verified row continuations. The model
+does not output another version of these values. `measure_sources` exposes native
+source addresses using that owner's orientation and row coordinates. Interpretation
+selects row populations, additional field columns, prose spans, directions and
+document-part roles; composition copies native characters and reuses the original
+association object. Shared physical cells and verified split rows retain all their
+fragments. Layout establishes source locations, never operative meaning or time.
+Image-only and vector-outlined content uses explicitly model-transcribed positions
+from the full rendered page. Complete source pages remain in every request; native
+addresses supplement them. Municipality mentions and contextual map labels do not
+become ordered targets merely by referring to an operative direction.
+
+`retained_measure` and `scripts/read_measures.py --request` consume a named retained
+interpretation offline, requiring its measure schema and source addresses to match
+the composition contract. This preserves the original interpretation and source
+context when the surrounding consumer changes; it does not patch rejected readings
+or silently dispatch a replacement. Source checks remain distinct from qualification.
+Dated actual events use `AdministrativeEvent`; plans, blank forms, other unresolved
+payload identities and imprecise event times remain source readings rather than
+invented anchors. Source-boundary validation checks citations and references, not
+legal truth. Qualification requires independently read originals and an actual
+consumer connection; schema validity, page counts and retained responses cannot
+establish it. The subject-population owner still supplies plants, parcels and
+protected-status populations; the measure's named positions do not establish title.

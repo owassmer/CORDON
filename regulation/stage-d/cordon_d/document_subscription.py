@@ -23,6 +23,23 @@ def _finite_number(token):
     return number
 
 
+def read_retained(request_id, store):
+    """Replay an explicit retained request without dispatch or a new prompt."""
+    if len(request_id) != 64 or any(c not in '0123456789abcdef' for c in request_id):
+        raise ValueError('Expected retained request SHA-256')
+    response = json.loads((store / 'derived/document-readings' / (request_id + '.json')).read_text())
+    request = response['request']
+    if (response['request_sha256'] != request_id or
+            sha256(json.dumps(request, sort_keys=True).encode()).hexdigest() != request_id):
+        raise ValueError('Retained request identity mismatch')
+    schema = request['schema']
+    validator_class = validator_for(schema)
+    validator_class.check_schema(schema)
+    reading = json.loads(response['output'], parse_constant=_finite_number, parse_float=_finite_number)
+    validator_class(schema, registry=Registry()).validate(reading)
+    return dict(response, reading=reading)
+
+
 def _call(prompt, schema, images, directory, model, effort, timeout):
     schema_path = directory / 'schema.json'
     schema_path.write_text(json.dumps(schema))
@@ -57,7 +74,6 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
     import pymupdf
     validator_class = validator_for(schema)
     validator_class.check_schema(schema)
-    validator = validator_class(schema, registry=Registry())
     digests = list(digests)
     if not digests or len(set(digests)) != len(digests):
         raise ValueError('Supply distinct source hashes in document order')
@@ -107,7 +123,4 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
                 temporary_response = target.with_suffix('.tmp')
                 temporary_response.write_text(json.dumps(response, ensure_ascii=False) + '\n')
                 os.replace(temporary_response, target)
-        reading = json.loads(response['output'], parse_constant=_finite_number,
-                             parse_float=_finite_number)
-        validator.validate(reading)
-        return dict(response, reading=reading)
+        return read_retained(request_id, store)
