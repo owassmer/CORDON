@@ -71,6 +71,12 @@ sample correspondence. Do not infer a role merely because the PDF is a lab repor
 For an annotated publisher ID, keep the entire cell literal and optionally return
 identifier and annotation as two exact substrings whose concatenation reconstructs
 the full cell (allowing only whitespace variation); retain the pool qualification.
+For an annotated result, keep the entire cell and return result_value and annotation
+as exact source substrings reconstructing it (allowing only whitespace variation).
+Interpret the split from the source; do not infer a result from an unexplained code.
+Preserve the annotation's qualification and attach its explanatory source statement
+to the exact affected result cells, including across pages. Sample-specific statements
+must target those sample occurrences, not report scope merely because printed in a letter.
 A specimen or pool identifier is not an individual plant identity.
 On a continuation page, read the supplied original table headings and their
 qualifications before assigning column roles. Cite the physical heading page in
@@ -159,7 +165,7 @@ def output_schema():
                   'authority_support': array(support),
                   'test': nullable, 'analyte': nullable, 'support': array(support)})
     cell = obj({'text': nullable, 'native_cell': string, 'cause': string, 'examined_scope': string,
-                'identifier': string, 'annotation': string}, [])
+                'identifier': string, 'result_value': string, 'annotation': string}, [])
     row = obj({'id': string, 'cells': array(cell)})
     table = obj({'id': string, 'page': integer, 'columns': array(column), 'rows': array(row)})
     fact = obj({'id': string, 'role': string, 'page': integer, 'locator': string, 'section': nullable,

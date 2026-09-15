@@ -233,7 +233,7 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
             if row['id'] in row_ids or len(row['cells']) != len(columns):
                 raise ValueError('Repeated row locator or wrong cell count')
             row_ids.add(row['id'])
-            for cell in row['cells']:
+            for index, cell in enumerate(row['cells']):
                 if 'native_cell' in cell:
                     key = cell['native_cell']
                     if key not in native_cells:
@@ -249,15 +249,21 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
                         raise ValueError('Source-not-stated claim needs an examined scope')
                 elif not isinstance(cell['text'], str):
                     raise ValueError('Source values must remain strings')
-                if 'identifier' in cell:
+                if 'identifier' in cell and 'result_value' in cell:
+                    raise ValueError('A cell cannot supply both identifier and result components')
+                for component in ('identifier', 'result_value'):
+                    if component not in cell:
+                        continue
+                    if component == 'result_value' and table['columns'][index]['role'] != 'result':
+                        raise ValueError('Result component requires a result column')
                     text = native_cells[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
-                    identifier, annotation = str(cell['identifier']), str(cell.get('annotation', ''))
-                    # The annotation may be printed before or after the identifier (`*513077`, `1640733 (Pool)`).
-                    forms = {' '.join(identifier.split()) + ' ' + ' '.join(annotation.split()),
-                             ' '.join(annotation.split()) + ' ' + ' '.join(identifier.split())}
-                    if (not isinstance(cell['identifier'], str) or not text
-                            or ''.join(text.split()) not in {''.join(form.split()) for form in forms}):
-                        raise ValueError('Identifier and annotation must reconstruct the literal source cell')
+                    value, annotation = cell[component], cell.get('annotation', '')
+                    if (not isinstance(value, str) or not isinstance(annotation, str)
+                            or component == 'result_value' and not value.strip()):
+                        raise ValueError('Cell components require literal strings and a nonempty result value')
+                    forms = {''.join((value + annotation).split()), ''.join((annotation + value).split())}
+                    if not text or ''.join(text.split()) not in forms:
+                        raise ValueError('Cell value and annotation must reconstruct the literal source cell')
     for region in dispositions:
         outputs = set(region.get('output_tables', []))
         if not outputs <= table_ids or region['disposition'] == 'represented' and not outputs:
@@ -553,7 +559,7 @@ def materialize(digest, version, page_count, blocks):
                         if assay and analyte and assay.casefold().strip() == analyte.casefold().strip():
                             assay, assay_cause = None, 'test field repeats analyte; distinct test designation not recovered here'
                         results.append(Result(value['locator'], tuple(column['heading']),
-                            assay, analyte, text, classify(text), cell.get('cause'),
+                            assay, analyte, text, classify(cell.get('result_value', text)), cell.get('cause'),
                             tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())), assay_cause))
                 def sole(role):
                     fields = by_role.get(role, [])

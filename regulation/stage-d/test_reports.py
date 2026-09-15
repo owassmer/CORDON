@@ -60,6 +60,38 @@ def block(rows):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):
+        item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024'],
+                      ['B', '01/06/2024', 'non rilevato†', '02/06/2024']])
+        for raw, value, mark in zip(item['reading']['tables'][0]['rows'],
+                                    ['rilevato', 'non rilevato'], ['*', '†']):
+            raw['cells'][2].update(result_value=value, annotation=mark)
+        item['reading']['facts'] = [dict(id='f1', role='qualification', page=1,
+            locator='footnote', section=None, text='* Non-accredited test', value=None,
+            applies_to=['p1-t1/r1/c3'])]
+        rows = materialize('source', 'v', 1, [item]).rows
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'not-detected'])
+        self.assertEqual([r.results[0].text for r in rows], ['rilevato*', 'non rilevato†'])
+        self.assertEqual(rows[0].cells[2]['result_value'], 'rilevato')
+        self.assertEqual([f['text'] for f in rows[0].facts], ['* Non-accredited test'])
+        self.assertEqual(rows[0].facts[0]['applies_to'], ['p1-t1/r1/c3'])
+        self.assertEqual(rows[1].facts, ())
+        # With no reader-supplied decomposition, punctuation is not stripped.
+        del item['reading']['tables'][0]['rows'][0]['cells'][2]['result_value']
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+
+    def test_result_components_require_supported_literal_and_result_column(self):
+        for value, mark, index in [('non rilevato', '*', 2), ('rilevato', '', 2),
+                                   ('', 'rilevato*', 2), ('A', '', 0)]:
+            with self.subTest(value=value, mark=mark, index=index):
+                item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024']])
+                item['reading']['tables'][0]['rows'][0]['cells'][index].update(result_value=value, annotation=mark)
+                with self.assertRaises(ValueError):
+                    materialize('source', 'v', 1, [item])
+        item = block([['A', '01/06/2024', '* non rilevato', '02/06/2024']])
+        item['reading']['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'not-detected')
+
     def test_explicit_unavailable_date_is_not_a_transcription_failure(self):
         item = block([['x', 'non disponibile', 'Positivo', '02/03/2024']])
         row = materialize('hash', 'v', 1, [item]).rows[0]

@@ -171,7 +171,7 @@ What the population shows, read and not reconciled:
 The retained population comprises 1,910 captures with source bytes and 1,180 distinct PDFs.
 PR #7 supplies the accepted reader and join implementation. The laboratory lane owns completion of this row on successor PR #18. Page and relationship readings continue through the subscription in the background; stopped sources and available joins are repaired concurrently, without waiting for the whole queue.
 
-The stopped SELGE protocol 17/2018 reading now supplies all 104 sample rows across five pages, with 208 positive test occurrences and 104 forward and reverse observation links verified against the original pages. CNR 65/2024 now supports the three formerly pending annex correspondences (1669854, 1669920, 1669995); printed host names retain their meaning across line wrapping. The four other pending annex observations (1668283, 1669711, 1672360, 1675006) await the already-retained CNR 62/2024, 68F/2024, 70F/2024 and 75F/2024 readings in this lane. These are reading work, not external recovery requests.
+The stopped SELGE protocol 17/2018 reading now supplies all 104 sample rows across five pages, with 208 positive test occurrences and 104 forward and reverse observation links verified against the original pages. CNR 65/2024 now supports the three formerly pending annex correspondences (1669854, 1669920, 1669995); printed host names retain their meaning across line wrapping. The other four annex observations (1668283, 1669711, 1672360, 1675006) now consume CNR 62/2024, 68F/2024, 70F/2024 and 75F/2024. Original-page checks recover all 53 sample rows and 135 result occurrences across those four reports; 47 observations match. CNR 62 retains its printed September test dates, marked-result literals, field-scoped non-accreditation and aliquot notes, and sample-specific undetermined-subspecies statements. Result/annotation decomposition belongs to the source reader; deterministic projection checks literal reconstruction and preserves the full cell. The resumed subscription runs retain ownership of stopped readings; SELGE 19/2016 has recovered from its provider timeout, while stopped readings that propose a whole table as one continued record require a general binding repair in this lane, including SELGE 102/2018 and 145/2019.
 The bounded recovered-source and continuation consumer results below describe what
 has been verified; they do not establish completion of the retained population or
 official confirmation. Whole-population reading and ordinary joins remain required.
@@ -259,8 +259,12 @@ identified associations. All seven page-boundary fragments have been visually
 reconciled: they complete host/zone cells of the preceding row. The reader derives
 continuation only across the same annex, consecutive physical and printed pages,
 matching columns and blank identity cells, retaining both cell locations. All 183
-associations survive; no fragment is treated as another plant. Three affected observation joins now consume CNR 65/2024; the other four await
-the retained laboratory readings identified above.
+associations survive; no fragment is treated as another plant. All seven affected observation joins now consume their laboratory readings. The
+remaining source-population work stays with this lane.
+For CNR 62/2024, three negative source rows (1669912, 1669914, 1669668) have retained monitoring entries without laboratory routes. Samples 1668471 and 1668624 have two genus-detection results and an expressly undetermined subspecies result; a targeted query across all 4,211 retained monitoring release files found no matching published reference for either. These five report rows remain independently available through the report-row consumer; no observation or attachment is invented.
+
+CNR 68F/2024 sample 1669924 has a source-coordinate conflict: report page 2 prints longitude 16.94561750, while DDS 74/2024 page 31 and monitoring print 16.94456175 (latitude 41.05335918 in both). The read relationship inventory contains no resolving correction. This lane owns reconciliation against retained evidence; a corrected report, corrected administrative record or equivalent official sample-location evidence must resolve the discrepancy before this correspondence becomes eligible. The other source rows remain independently consumable.
+
 An act can establish a derived occurrence correspondence without equating different
 literal identifier strings. The older CNR73F act association conflicts with its report
 row; the corrected report and later act agree. Laboratory replacement does not prove
