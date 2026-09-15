@@ -1,0 +1,85 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+ "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "72414c67a65966b9ffebfabad737c49dba0accf80130f845a3e22bab11fe0627",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:22:23.078818+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 15250,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7323,
+   "cache_read_input_tokens": 7966,
+   "output_tokens": 1076,
+   "output_tokens_details": {
+    "thinking_tokens": 24
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7323,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 923,
+     "cache_read_input_tokens": 5680,
+     "cache_creation_input_tokens": 3929,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3929
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0446162,
+  "session_id": "0f7fb1be-1232-4f5f-a74d-b2672f8c2d06"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ACCERTATA: La presenza di Xylella fastidiosa sottospecie fastidiosa ST1 in 157 piante, sulla base dei rapporti di prova deli laboratori e dei risultati della caratterizzazione della sottospecie e del genotipo, comunicati dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) - CNR.",
+   "TENUTO CONTO CHE: Le piante infette sono distribuite in numerosi focolai e molte piante infette sono ubicate sul confine sud dell'attuale area delimitata.",
+   "RICHIAMATO: Il comma 1 dell'art. 4 del Reg. (UE) 2020/1201 che stabilisce '....Qualora sia confermata solo la presenza di una o più particolari sottospecie dell'organismo nocivo specificato, lo Stato membro interessato può delimitare un'area in relazione unicamente a tali sottospecie. …'.",
+   "RITENUTO NECESSARIO: Aggiornare l'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201.",
+   "RITENUTO NECESSARIO: Delimitare l'ampiezza della zona cuscinetto dell'area delimitata alla Xylella fastidiosa sottospecie fastidiosa ST1 pari a 2,5 km.",
+   "RITENUTO NECESSARIO: Dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia.",
+   "DETERMINA (partial, page continues): Aggiornare l'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201; Definire in 2,5 Km la larghezza della zona cuscinetto dell'area delimitata alla Xylella fastidiosa sottospecie fastidiosa ST1;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ACCERTATA: La presenza di Xylella fastidiosa sottospecie fastidiosa ST1 in 157 piante, sulla base dei rapporti di prova deli laboratori e dei risultati della caratterizzazione della sottospecie e del genotipo, comunicati dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) - CNR.",
+   "TENUTO CONTO CHE: Le piante infette sono distribuite in numerosi focolai e molte piante infette sono ubicate sul confine sud dell'attuale area delimitata.",
+   "RICHIAMATO: Il comma 1 dell'art. 4 del Reg. (UE) 2020/1201 che stabilisce '....Qualora sia confermata solo la presenza di una o più particolari sottospecie dell'organismo nocivo specificato, lo Stato membro interessato può delimitare un'area in relazione unicamente a tali sottospecie. …'.",
+   "RITENUTO NECESSARIO: Aggiornare l'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201.",
+   "RITENUTO NECESSARIO: Delimitare l'ampiezza della zona cuscinetto dell'area delimitata alla Xylella fastidiosa sottospecie fastidiosa ST1 pari a 2,5 km.",
+   "RITENUTO NECESSARIO: Dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia.",
+   "DETERMINA (partial, page continues): Aggiornare l'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201; Definire in 2,5 Km la larghezza della zona cuscinetto dell'area delimitata alla Xylella fastidiosa sottospecie fastidiosa ST1;"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

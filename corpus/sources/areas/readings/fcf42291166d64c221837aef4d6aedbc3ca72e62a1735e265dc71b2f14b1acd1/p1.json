@@ -1,0 +1,73 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+ "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "081d2a24c1ce7142e93a3bbbbb049c1f80420eac22e9c7e044dd8377c4212972",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:31:25.479249+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7119,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7687,
+   "cache_read_input_tokens": 8319,
+   "output_tokens": 514,
+   "output_tokens_details": {
+    "thinking_tokens": 35
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7687,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 350,
+     "cache_read_input_tokens": 6033,
+     "cache_creation_input_tokens": 3940,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3940
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.040839799999999996,
+  "session_id": "5cdff82e-e440-488e-90ec-b73121780c51"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 23 giugno 2025, n. 113 - Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Bisceglie (BT) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201 e s.m.i."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 23 giugno 2025, n. 113 - Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Bisceglie (BT) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201 e s.m.i."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

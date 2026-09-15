@@ -9,9 +9,9 @@ established; no other row is.
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
 | What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The seven supplied PDFs have completed page and relationship readings; the remaining population is being read and joined through the same path. Subscription vision is running independently of consumer and implementation work. Current consumer results and consequential source work below. |
-| Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
-| Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
-| Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
+| Which legally adopted area contained the location on the event date | The adopting regional act and its cadastral annex; SIT demarcated-area geometry | One adopted area version, with its cadastral statements and map geometry | In progress. `cordon_d.areas.versions` binds the ordinary annex reader to A's versions; `membership_evidence` supplies supported cadastral membership. Complete the retained page readings and source checks, establish the adopted map geometry required by metric consumers. Population and remaining work below. |
+| Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | The observed-subject connection consumes the whole established monitoring stream through `cordon_d.subjects` and the report reader, with EPPO taxonomy and event-time Annex II qualification (`Observed subjects` below). It preserves observations without inventing plants. The source reader supplies sufficient standalone membership from public records and dated imagery, reconciles species/source grain and applies counting uncertainty within C's population/time scope. Three fixed retained scenes verify five note-free olive units and preserve ambiguous scrub/nursery observations. The repeated-unit scene remains under verification with the current reader; it is an implementation requirement, not an unavailable-public-evidence claim. The required surrounding plant and survey-surface populations remain open; never substitute positives for all plants. |
+| Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel geometry population and preserve the source identifier; do not infer ownership from geometry. `subjects.parcel_references` reads the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. The retained ISTAT municipality table resolves cadastral codes; conflicting municipality or compound references remain conflicts. `subjects.cadastral_memberships` composes the observation’s published parcel location with the adopted-area consumer. Whole-parcel inclusion can establish that published location’s membership; a named partial parcel establishes intersection only. This does not locate a plant within an intersected portion, establish its later location, or supply ownership. |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader. DDS 52/2024, 74/2024 and 138/2024 are retained and independently read-back verified in R2 as report-identity dependencies. The native annex reader supplies 183 identified plant/report associations and seven unresolved page-boundary fragments, not whole-act semantics. DDS 74/2024 links old code 1673519 to a different host/place from the laboratory row; DDS 138/2024 adopts corrected 1674070 at the report location. Any correction or withdrawal of the earlier administrative target remains unestablished and must be investigated by this consumer; laboratory replacement alone cannot supply it. |
 | Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. The monitoring stream publishes a `SCELTA_PROPRIETARIO` column on 8,762 records and carries no value in any of them, so it supplies no owner election; the observation row records that. |
 | Who has the consequential relationship to the affected land | The determination's incorporated annex naming addressees by comune, foglio and particella; later acts that correct listed owners; the Osservatorio's matter and transmitted cadastral and owner data; a competent public-asset register for public land | One addressee position in one act version, or one stated ownership, occupation, management or other legally relevant relationship | The annex establishes the position the act published for each parcel, not that the named person held the land. An effective correction act replaces the listed position for the parcels it names; its effect against the corrected recipient follows the notice route above. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do. The monitoring stream publishes `CUAA` and `AZIENDA` columns on 86 records and carries a sentinel in every one, so it supplies no holder identity; the observation row records that. |
@@ -406,3 +406,179 @@ SPEC.md. This supplies subscription access, not their missing whole-measure mean
 or consumer connections. Their source-specific contract and first full
 source-to-consumer qualification remain with PR #15; no measure-reading coverage
 or production dispatch is established by the transport change.
+
+## Demarcated areas
+
+The area implementation and coverage below are pinned to unmerged PR #8 revision
+`88fea2e017a84e0d0c13c85395ed1b0b7b6ab548`; they do not report the live extraction
+queue or acceptance of that source population.
+
+Accepted A reaches 28 instruments through 29 area versions. A owns their identity,
+interval, subspecies and operative legal meaning. The acquisition records in
+`corpus/sources/areas/acts.json` retain 27 documents (273 pages), including the
+procedure act DDS 45/2025. DDS 148/2024's own body still needs recovery; a successor's
+recital does not supply its annex. DDS 69/2021 adopts maps without a cadastral table.
+
+`scripts/read_annexes.py` reads every physical page of each retained document through
+Claude subscription vision (`claude-sonnet-5`, medium effort). Native cells are
+candidates for exact copying; the model binds captions and rows and transcribes values
+not faithfully represented by those cells. There is no exhibit registry or keyword
+page exclusion. The 154 saved page readings are retained under
+`corpus/sources/areas/readings/`; 119 pages remain to be read after the subscription
+reset at 15:20 America/New_York on 14 September 2026. Re-reading an erroneous page
+preserves the previous response in the derived store. This is the current reading
+population, not a claim of source-family completion.
+
+`cordon_d.areas` projects the saved readings into zone, province, municipality and
+cadastral scope. Table headings, qualifications, row notes and physical page/table/row
+locations travel with each statement into membership support. Page prose stays with
+its version; A remains the owner of its legal effect. Repeated physical statements
+remain source occurrences. A missing reading or inventory cannot establish that an
+act contains no cadastral table.
+
+The reader distinguishes a reached sheet from a parcel wholly inside the zone.
+The annex's asterisk is retained at the grain it qualifies: a sheet asterisk covers
+the sheet; a parcel asterisk covers that parcel. An unstarred listed parcel merely
+intersects the zone and does not establish whole-parcel membership. Sections and
+named sheet developments remain distinct. An unmatched cadastral query does not
+establish that the place is outside the adopted map. Zone and stated measures regime
+remain separate facts.
+
+Complete the outstanding page readings and resolve the watermark-contaminated
+municipality cells on DDS 106/2025 page 13 through the general reader. Direct source
+checks of DDS 158/2024 page 7 and DDS 8/2024 page 7 distinguish repeated tables and
+merged cells from the earlier comparison transcription's divisions; those reference
+comparisons are not correctness certificates. The remaining DDS 93/2024 pages 9–10 and DDS 94/2024 page 8
+comparisons likewise introduced section separators absent from the source. Direct
+inspection and membership checks confirm the section identities and asterisks.
+Membership now carries every supporting physical statement, with distinct source
+locators, rather than stopping after the first match. The old heuristic-reader sheet totals are withdrawn.
+
+The metric consumers already admit adopted geometry. Obtain the consequential
+version's map or publisher geometry, establish its correspondence to the adopting
+act, and qualify its frame and positional error. A publication date alone does not
+bind a polygon to an adopted version. An empirically established error bound is
+permitted; a publisher-stated bound is not the only route. DDS 106/2025's mapped
+extension into Basilicata and the acts' partial-parcel rules must survive this binding.
+The cadastral tables are useful evidence within their stated extent, not a substitute
+for the missing map correspondence. Operative legal-area state and Annex III
+eligibility remain upstream A meanings.
+
+DDS 45/2025 physical page 34 (annex printed page 27) names the post-adoption
+shapefile transmission from InnovaPuglia to the Osservatorio and ARIF. A shapefile
+is one sufficient route, not a prescribed prerequisite where equivalent geometry
+and correspondence evidence exists. The current multiplex publisher service is
+retained in the existing act acquisition records and read by
+`cordon_d.areas.published_geography`: ten native polygon occurrences, including
+Santeramo and Ginosa's separate Basilicata buffer components, in EPSG:32633.
+Each layer's returned object IDs were checked against its independent ID response.
+The features do not state an adopting-act identity or positional bound; capture
+date and place labels alone cannot establish their adopted-version applicability.
+Direct comparison with DDS 106/2025 physical page 10 agrees on Ginosa's three
+infected components, relative arrangement, buffer outline and Basilicata component.
+That supports depicted-area correspondence; numerical georeferencing and version
+applicability still need sufficient evidence. Another copy of these polygons is
+not the missing input.
+
+The 27 act PDFs already contain bundled map annexes. They have no embedded
+geospatial coordinate dictionaries. The 49 named standalone annex hashes are
+not held as separate blobs; that does not make their bundled contents absent.
+Prior acquisition records name further geographic packages and imagery-service
+metadata, but the records alone do not establish possession of those source bytes.
+The current shared store contains no ZIP archive with shapefile members.
+No original plant photographs/sampling sheets or imagery accuracy assessment has
+been established from the examined retained sources. Those facts remain owned by
+the positional and plant rows, rather than becoming a new map-document checklist.
+
+DDS 148/2024 is not an active search priority. Its Santeramo ST26 intermediate
+version remains a specific correspondence question; use a concrete existing
+package or publisher lead if it can resolve that version. Do not substitute a
+later boundary or restart an exhaustive search. Continue retained cadastral
+membership and current-map correspondence independently of that recovery.
+
+## Observed subjects
+
+`cordon_d.subjects.observed_subjects` preserves every observation from
+`monitoring.distinct_observations`, including negative and other published results.
+Its host evidence and `finding_host`'s report-host evidence retain separate sources.
+`subject_with_finding` can refine that observation’s host from its own unambiguous
+report, preserving genuine conflicts. Common names cannot refine an explicit
+scientific genus to a species; a supported scientific name can.
+`species_category_facts` supplies C's Article 7(c), (d) and residual (e) inputs.
+Elsewhere-infected species require a qualified local finding in the relevant
+adopted area, by the event date; one negative sample cannot close that inventory.
+Official finding qualification remains the report/finding owner's input.
+An unresolved plant identity does not erase a separately readable species or
+published parcel location. Neither these observations nor the reports enumerate
+the surrounding plants required by the distance and survey calculations.
+
+`cordon_d.hosts` reads retained EPPO Global Database v2 JSON name lookups, complete
+names, ranks and ancestry. `corpus/sources/host-names/api.json` owns their captures;
+`specification.json` names the retained official API specification. EPPO supplies
+taxonomy, not infection or legal host status. Synonyms use EPPO codes. A genus
+never becomes its only acquired species. Common-name resolution considers complete
+name-lookup responses and the monitoring publisher's explicit scientific/common
+pairs; an unacquired candidate prevents a unique identity. A conflicting or
+unknown name remains a limitation of that identity. The API key is local and
+is never retained in source records. Attribution: EPPO Global Database, downloaded
+14 September 2026. No endorsement is implied.
+
+Specified-host membership follows the retained EU 2020/1201 consolidated Annex II
+version at the event date and its subspecies section, with A's separate non-seed
+plant-for-planting qualification. Current taxonomy does not replace historical
+legal scope. The ordinary reader does not extend a species-specific listing to
+an unresolved genus. Relevant local infection evidence comes from the report and
+area consumers, never from EPPO's pest-host coverage.
+
+`subject_references` preserves literal tag, explicit prior-sample and resampling
+candidates together. They do not establish identity. `InspectionUnitReading`
+accepts source-established identifier schemes; `DirectSubjectMembership` accepts
+sufficient direct membership of a standalone observation in an individual plant;
+`SubjectCorrespondence` accepts direct same/different-subject evidence. Neither a
+registry nor a second observation is required. Conflicting relationships survive
+reconciliation instead of overwriting one another.
+
+`cordon_d.subject_reading` retrieves candidates through the whole ordinary stream
+and the consumer's operative period. All publications, outcomes, hosts and notes
+enter. Retained SIT 2019/2022/2023 frames and separately marked coordinate copies
+form a reproducible viewing aid. The Codex subscription reader produces semantic
+membership and correspondence readings citing original sources. The compiler
+reconciles species ancestry, individual grain, conflicting positions and contrary
+readings. Notes corroborate; containment retrieves candidates; neither establishes
+identity by itself. The unused tree detector and extra image panels were removed.
+
+Independent readings of three fixed scenes cover 14 observations: five standalone,
+note-free olive samples connect to five distinguishable subjects through C; the
+nearby olive visual observation retains unresolved identity. The two scrub visual
+observations and six nursery/trackside samples retain their species, dates and
+results without assigning them to the nearest canopy or nursery plant. Their
+membership is unresolved by the composed public evidence. The fixed selection was
+made by observation identity and date before inspecting answers. Tests replay the
+retained readings without extraction. Sampling results retain their own dates;
+monitoring negatives do not certify official method or negative-survey sufficiency.
+The repeated-unit scene is still being verified under this reader configuration;
+its completion remains part of this bounded unit.
+
+`inspection_units` preserves established correspondence separately from physical
+distinctness. `observed_subject_survey` selects the required population and operative
+[start, end) observation dates before evaluating counting uncertainty. An unrelated
+2020 correspondence group cannot erase a supported 2023 unit from a 2023 survey.
+Missing dates affect the relevant counts, without erasing another dated subject.
+C's method, performance, independence and complete population qualifications remain
+separate. These observed subjects do not establish the surrounding plant population.
+
+Official image-service metadata and source frames are retained in
+`corpus/sources/subject-imagery/records.json`. Edition years are not exact flight
+days, and native pixel size is not an accuracy bound. No authenticated ARIF access
+or invented #14 positional bound is required by this reader. Ambiguous overlapping
+crowns, understory plants and nursery rows remain local membership limits.
+
+The complete note population includes row/ordinal/landmark descriptions, but the
+retained scenes do not resolve every counting origin or event-time position. One
+2023 frame for an unanchored ordinal description could not be fetched; its 2022
+frame is retained. This does not establish an absence of later public imagery.
+The DGR 1491/2020 original in `corpus/sources/subject-references/records.json`
+defines an approval/application-based unique-code scheme. It does not establish
+municipality-plus-monitoring-tag uniqueness. Protected identity and an exercised
+retention exception do not follow from a monitoring tag. No broader register hunt
+is part of this unit.

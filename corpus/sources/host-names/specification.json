@@ -1,0 +1,6 @@
+{
+  "url": "https://api.eppo.int/gd/v2/eppo_api_gd_v2.yml",
+  "sha256": "c76c883dfc251ffcc026f85ae18b65f0dacd0e0f844c6f92ee19199f0dd42d13",
+  "retained_at": "2026-09-14T20:39:58.819736+00:00",
+  "spec_version": "2.0.4 - 2026.07.04 00:00"
+}

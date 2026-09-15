@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 15,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8f4f30c60f026279e050dbee531ce2fe0207f0e26081aad8b9560666f293c4f7",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:20.370057+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 8955,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6694,
+   "cache_read_input_tokens": 7344,
+   "output_tokens": 567,
+   "output_tokens_details": {
+    "thinking_tokens": 18
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6694,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 421,
+     "cache_read_input_tokens": 5058,
+     "cache_creation_input_tokens": 3922,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3922
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0363588,
+  "session_id": "5abe7c95-5144-4ee7-8d3d-27045f944f34"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Map legend (Legenda): Zona cuscinetto XF fastidiosa; Zona cuscinetto XF multiplex; Zona cuscinetto XF multiplex - Basilicata; Zona cuscinetto XF pauca; Zona contenimento XF pauca; Zona infetta XF pauca; Confini provinciali",
+   "Section heading: '2. SINTOMATOLOGIA E MALATTIE CAUSATE DA X. FASTIDIOSA' followed by descriptive prose on symptoms and diseases (Pierce's disease, Almond leaf scorch, plum leaf scald, phony peach, Citrus variegated chlorosis, Olive leaf scorching and quick decline) - not tabular data."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Map legend (Legenda): Zona cuscinetto XF fastidiosa; Zona cuscinetto XF multiplex; Zona cuscinetto XF multiplex - Basilicata; Zona cuscinetto XF pauca; Zona contenimento XF pauca; Zona infetta XF pauca; Confini provinciali",
+   "Section heading: '2. SINTOMATOLOGIA E MALATTIE CAUSATE DA X. FASTIDIOSA' followed by descriptive prose on symptoms and diseases (Pierce's disease, Almond leaf scorch, plum leaf scald, phony peach, Citrus variegated chlorosis, Olive leaf scorching and quick decline) - not tabular data."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

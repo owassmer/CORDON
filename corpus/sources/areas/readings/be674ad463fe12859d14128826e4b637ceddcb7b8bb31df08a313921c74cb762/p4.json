@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+ "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "ceec4f1be595bc982e29f7c33d0e229376b6635612c329921cc2831a4f8b49de",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:25:23.213295+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 12693,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7342,
+   "cache_read_input_tokens": 7976,
+   "output_tokens": 725,
+   "output_tokens_details": {
+    "thinking_tokens": 34
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7342,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 563,
+     "cache_read_input_tokens": 5690,
+     "cache_creation_input_tokens": 3938,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3938
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0411822,
+  "session_id": "18c501f2-7e55-4af4-b4bc-4c4c5a82c4c8"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di adottare nell'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1, misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate.",
+   "Di riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" dell'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1.",
+   "Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie fastidiosa ST1; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie fastidiosa ST1."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Di adottare nell'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1, misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate.",
+   "Di riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" dell'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1.",
+   "Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie fastidiosa ST1; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie fastidiosa ST1."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

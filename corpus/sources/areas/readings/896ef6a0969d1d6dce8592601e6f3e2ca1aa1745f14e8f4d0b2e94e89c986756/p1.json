@@ -1,0 +1,81 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+ "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "e5490920e9a0fc0dc85f33f4f6497499332818e770f940876aac90a5e96c449e",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:24:06.983477+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 14618,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7697,
+   "cache_read_input_tokens": 8328,
+   "output_tokens": 989,
+   "output_tokens_details": {
+    "thinking_tokens": 38
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7697,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 824,
+     "cache_read_input_tokens": 6042,
+     "cache_creation_input_tokens": 3941,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3941
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0455826,
+  "session_id": "6466a379-7c64-4db6-a99b-57cf06c19d36"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Titolo: Reg. (UE) 2020/1201 - Istituzione delle aree delimitate: \"Xylella fastidiosa - sottospecie multiplex ST26 - Noicattaro e Triggiano\" e\" Xylella fastidiosa - sottospecie multiplex ST26 - Capurso\", ai sensi del dell'art. 4 del Reg. UE 2020/1201.",
+   "La determina dirigenziale n° 8 del 21/02/2024 \"Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) – Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\";",
+   "La determina dirigenziale n° 12 del 27/02/2024 \"Integrazione alla determina n° 8 del 21/02/2024 \"Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) – Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\";",
+   "La determina dirigenziale n°45 del 24/04/2024 \"Reg. (UE) 2020/1201 – Aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi del dell'art. 4 del Reg. UE 2020/1201\".",
+   "La determina dirigenziale n° 29 del 08/04/2024 \"Individuazione di focolaio di Xylella fastidiosa sottospecie multiplex ST26 in agro di Santeramo in Colle (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\"."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Titolo: Reg. (UE) 2020/1201 - Istituzione delle aree delimitate: \"Xylella fastidiosa - sottospecie multiplex ST26 - Noicattaro e Triggiano\" e\" Xylella fastidiosa - sottospecie multiplex ST26 - Capurso\", ai sensi del dell'art. 4 del Reg. UE 2020/1201.",
+   "La determina dirigenziale n° 8 del 21/02/2024 \"Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) – Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\";",
+   "La determina dirigenziale n° 12 del 27/02/2024 \"Integrazione alla determina n° 8 del 21/02/2024 \"Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) – Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\";",
+   "La determina dirigenziale n°45 del 24/04/2024 \"Reg. (UE) 2020/1201 – Aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi del dell'art. 4 del Reg. UE 2020/1201\".",
+   "La determina dirigenziale n° 29 del 08/04/2024 \"Individuazione di focolaio di Xylella fastidiosa sottospecie multiplex ST26 in agro di Santeramo in Colle (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\"."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

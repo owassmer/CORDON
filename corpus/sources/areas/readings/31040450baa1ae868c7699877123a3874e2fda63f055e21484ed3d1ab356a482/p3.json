@@ -1,0 +1,75 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00012",
+ "act_sha256": "31040450baa1ae868c7699877123a3874e2fda63f055e21484ed3d1ab356a482",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "5cebe683f61f467150e3e38d64eddbd88aa09704eb88704240461eff0a07d064",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:20:30.655431+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7775,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6743,
+   "cache_read_input_tokens": 7379,
+   "output_tokens": 447,
+   "output_tokens_details": {
+    "thinking_tokens": 33
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6743,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 287,
+     "cache_read_input_tokens": 5093,
+     "cache_creation_input_tokens": 3936,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3936
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0354358,
+  "session_id": "4f234151-0074-4393-b94d-b11c540934e6"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti, ciascuno, da una zona infetta di 50 m attorno ai 6 mandorli infetti;",
+   "zona cuscinetto di 2,5 km di raggio attorno alle predette zone infette."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti, ciascuno, da una zona infetta di 50 m attorno ai 6 mandorli infetti;",
+   "zona cuscinetto di 2,5 km di raggio attorno alle predette zone infette."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}
