@@ -237,7 +237,7 @@
     {
       "id": "observed-subject-correspondence",
       "name": "Public field notes and dated subject imagery",
-      "purpose": "Supply supported repeated inspection-unit correspondence for the accepted C survey consumer.",
+      "purpose": "Supply supported individual membership and repeated inspection-unit correspondence for the accepted C survey consumer.",
       "contracts": [
         "plant-population",
         "survey-performance"
@@ -248,9 +248,9 @@
         "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer",
         "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer"
       ],
-      "population": "Observed subjects whose field evidence can be connected across observations; images are admitted for subject correspondence, not a landscape catalogue or complete plant census.",
-      "reader": "cordon_d.subject_images: versioned local RGB crown-candidate reading; cordon_d.subjects: evidence reconciliation and required-period survey adapter",
-      "open": "Candidate image measurements do not establish observation-to-subject membership. The public-source correspondence producer, including note-free records and reconciliation of taxon, source grain and population/time scope, remains an implementation requirement. Neither image edition years nor pixels establish exact flight dates or positional accuracy. No repeated-unit consumer demonstration currently establishes completion. INPUTS.md row 4 owns the limitation."
+      "population": "All observations in the required inspection period within reached retained image extents, including standalone, note-free, negative and other records. Images support subject correspondence, not a complete plant census.",
+      "reader": "cordon_d.subject_reading: reproducible source views and subscription semantic reading; cordon_d.subjects: evidence reconciliation and population/period-scoped survey adapter",
+      "open": "The ordinary producer supplies five verified standalone note-free olive units; scrub/nursery membership remains unresolved by its composed public evidence. Repeated-unit verification under the current reader remains required. Neither image edition years nor pixels establish exact flight dates or positional accuracy. Surrounding plant and complete survey populations remain separate inputs. INPUTS.md row 4 owns the limitation."
     }
   ]
 }

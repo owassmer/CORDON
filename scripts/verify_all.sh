@@ -14,5 +14,6 @@ PYTHONPATH=regulation/stage-c "$cordon_python" -m unittest discover -s regulatio
 PYTHONPATH=regulation/stage-c "$cordon_python" regulation/stage-c/check_mutations.py
 PYTHONPATH=regulation/stage-c:regulation/stage-d "$cordon_python" -m unittest discover -s regulation/stage-d -p test_contracts.py
 PYTHONPATH=regulation/stage-c:regulation/stage-d "$cordon_python" -m unittest discover -s regulation/stage-d -p test_subjects.py
+PYTHONPATH=regulation/stage-c:regulation/stage-d "$cordon_python" -m unittest discover -s regulation/stage-d -p test_subject_reading.py
 PYTHONPATH=regulation/stage-c:regulation/stage-d "$cordon_python" regulation/stage-d/verify.py
 python3 scripts/verify_repository.py

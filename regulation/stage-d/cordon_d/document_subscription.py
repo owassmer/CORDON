@@ -31,6 +31,10 @@ def _call(prompt, schema, images, directory, model, effort, timeout):
                '--skip-git-repo-check', '--sandbox', 'read-only', '-C', str(directory),
                '-m', model, '-c', f'model_reasoning_effort="{effort}"',
                '-c', 'features.shell_tool=false', '-c', 'features.multi_agent=false',
+               '-c', 'features.apps=false', '-c', 'features.plugins=false',
+               '-c', 'features.skill_search=false', '-c', 'features.skip_host_skill_discovery=true',
+               '-c', 'features.in_app_browser=false', '-c', 'features.image_generation=false',
+               '-c', 'features.view_image=false', '-c', 'features.sleep_tool=false',
                '-c', 'web_search="disabled"', '--json', '--output-schema', str(schema_path),
                '-o', str(output)]
     for image in images:

@@ -260,7 +260,8 @@ is checked before dispatch; schema
 references must resolve within the supplied schema, without network retrieval.
 Source-review instructions change the request;
 replay never secretly spends another call. API-key fallback and model tools are
-disabled. A bounded subprocess timeout applies.
+disabled explicitly, including app/plugin discovery and built-in image/browser tools.
+A bounded subprocess timeout applies.
 
 The calling reader uses the shared store and retains the request reference beside
 its interpreted output. No second source inventory, scheduler, extraction schema,
@@ -315,20 +316,39 @@ move results across periods or establish C's separate method, population,
 performance and independence qualifications.
 
 `scripts/read_subjects.py` consumes every observation and supplies
-host/report/cadastral connections. The rejected supplied-scene loader and
-containment matcher have been removed. A reproducible public-source identity
-producer, including records without resampling notes, remains incomplete.
+host/report/cadastral connections. `--subject-reading <request SHA256>` replays
+an exact retained reading through `cordon_d.subject_reading`; it never launches
+extraction. The source population and reader revision must still match.
 
-`scripts/read_subject_images.py` reads retained RGB frames locally through the
-pinned public DeepForest tree detector. Install `subject-images-requirements.txt`
-in a separate environment. Model bytes, published prediction configuration and
-source imagery are hash-verified; code, configuration and exact package pins
-version the derived readings. No observation result, note or expected pair enters
-pixel inference. `cordon_d.subject_images.crown_candidates` converts its pixel
-rectangles to the frame's published coordinate system. These are retrieval
-candidates, not observation-to-plant memberships, survey units, or positional
-bounds. In particular, a tree rectangle does not identify a shrub beneath it.
-The image reader currently contributes no inspection-unit identities to C.
+`scripts/read_subject_correspondence.py --start <date> --end <date>` retrieves
+scene candidates through the whole ordinary observation iterator, then applies
+the operative inspection period without filtering outcomes, hosts or notes.
+`--frame <source SHA256>` selects a retained extent and all its dated frames;
+without it, the command covers every retained extent. Only explicit `--execute`
+permits uncached source readings through the accepted, tool-disabled Codex
+subscription transport, with no API-key fallback or Claude invocation.
+
+The source reader makes a deterministic PDF viewing aid from verified original
+frames, separate coordinate-marked copies and every publication of each candidate.
+The generated view is identified as a derivative, never an official document.
+Its semantic contract requests individual membership, source grain, temporal
+continuity, alternatives and same/different/unknown correspondence, citing original
+sources. Image containment only retrieves candidates. The compiler reconciles all
+scene readings together, preserves contrary evidence, and rejects incompatible
+EPPO branches across an entire connected component, aggregate membership and conflicting published positions. Missing observation
+dates affect period-qualified counting, without erasing supported correspondence.
+`DirectSubjectMembership` supplies sufficient individual membership even for a
+standalone observation. Distinctness uncertainty is evaluated only among units
+in the consumer’s selected population and period. Taxonomy does not establish identity.
+
+The current source reader uses `gpt-6-astra` at high effort. Replay uses that same
+configuration; a different model's probe is not an accepted reading of this reader.
+Independent retained-source checks cover separated orchard crowns, adjoining scrub
+and densely arranged nursery plants. Five standalone, note-free olive samples reach
+C as five units; nine other observations retain evidence without invented subjects.
+The repeated-unit scene remains under verification. INPUTS.md row 4 owns that
+remaining requirement. Exact flight dates, positional accuracy and full survey
+population/method qualification are not supplied by these imagery connections.
 
 `scripts/acquire_host_names.py --report-reading-version <revision>` acquires only
 the taxonomy reached by monitoring and that explicit retained report reading,

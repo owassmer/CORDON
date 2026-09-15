@@ -97,6 +97,7 @@ class ObservedSubject:
     inspection_unit: tuple | None
     unit_support: tuple[tuple[str, str], ...]
     references: tuple[ReferenceReading, ...] = ()
+    distinct_units: frozenset[tuple] = frozenset()
 
 
 def observed_subjects(observations, names, municipalities, units=None):
@@ -106,7 +107,8 @@ def observed_subjects(observations, names, municipalities, units=None):
         labels = observation.values('species')
         host = names.resolve(labels, tuple(m.occurrence for m in observation.members if m.species))
         identity, support = units.get(observation.identity, (None, ()))
-        yield ObservedSubject(observation, host, parcel_references(observation, municipalities), identity, support, tuple(subject_references(observation)))
+        distinct = units.distinct_from(identity) if isinstance(units, InspectionUnits) else frozenset()
+        yield ObservedSubject(observation, host, parcel_references(observation, municipalities), identity, support, tuple(subject_references(observation)), distinct)
 
 
 # A literal prior-sample relation, not fuzzy note interpretation. Numeric strings
@@ -184,13 +186,43 @@ class SubjectCorrespondence:
             raise ValueError('Subject correspondence needs a supported direct reading')
 
 
-def inspection_units(readings, correspondences=()):
+@dataclass(frozen=True)
+class DirectSubjectMembership:
+    """Direct membership in a source reader's distinguished physical subject.
+
+    The reading scope names an interpretation of source evidence, not a public
+    identifier scheme. Within that scope, different subject names explicitly
+    denote distinguishable individuals; arbitrary monitoring tags cannot supply
+    this type. Across scopes, different names do not establish distinctness.
+    """
+    observation: tuple
+    subject: tuple[str, str]
+    support: tuple[Support, ...]
+
+    def __post_init__(self):
+        if (not self.observation or len(self.subject) != 2 or not all(self.subject) or
+                not self.support or not all(isinstance(s, Support) for s in self.support)):
+            raise ValueError('Direct membership needs a distinguished subject and source support')
+
+
+class InspectionUnits(dict):
+    """Correspondence classes and separately sourced physical distinctness."""
+    def __init__(self, values, distinct):
+        super().__init__(values)
+        self.distinct = frozenset(distinct)
+
+    def distinct_from(self, unit):
+        return frozenset(b if a == unit else a for a, b in self.distinct if unit in (a, b))
+
+
+def inspection_units(readings, correspondences=(), memberships=()):
     """Reconcile formal identities and sufficient direct subject evidence.
 
     All evidence survives. Contradictory same/different-subject readings or
     competing formal identities prevent a unit conclusion for their component.
     """
     by_observation = defaultdict(list)
+    by_membership = defaultdict(list)
     parent = {}
     def root(observation):
         parent.setdefault(observation, observation)
@@ -211,6 +243,16 @@ def inspection_units(readings, correspondences=()):
             raise TypeError('Literal reference candidates cannot establish inspection units')
         by_observation[reading.observation].append(reading)
         root(reading.observation)
+    distinguished = defaultdict(list)
+    for reading in memberships:
+        if not isinstance(reading, DirectSubjectMembership):
+            raise TypeError('Direct membership requires a source reading of an individual')
+        by_membership[reading.observation].append(reading)
+        distinguished[reading.subject].append(reading.observation)
+        root(reading.observation)
+    for observations in distinguished.values():
+        for observation in observations[1:]:
+            connect(observations[0], observation)
     correspondences = tuple(correspondences)
     for reading in correspondences:
         if not isinstance(reading, SubjectCorrespondence):
@@ -235,24 +277,48 @@ def inspection_units(readings, correspondences=()):
     result = {}
     for members in components.values():
         values = [v for observation in members for v in by_observation[observation]]
+        depicted = [v for observation in members for v in by_membership[observation]]
         direct = [r for r in correspondences if r.left in members or r.right in members]
         support = {s for v in values for r in (v.scheme, v.membership) for s in r.support}
         support.update(s for r in direct for s in r.support)
+        support.update(s for r in depicted for s in r.support)
         identities = {v.unit for v in values}
         schemes = defaultdict(set)
         for namespace, identifier in identities:
             schemes[namespace].add(identifier)
+        depictions = defaultdict(set)
+        for value in depicted:
+            depictions[value.subject[0]].add(value.subject[1])
         # A correspondence component is an evidence-scoped inspection unit,
         # not a new permanent plant identifier or a registry entry.
         unit = (next(iter(identities)) if len(identities) == 1 else
                 ('subject-correspondence', min(json.dumps(o, separators=(',', ':')) for o in members)))
         if (conflicts & members or any(len(ids) > 1 for ids in schemes.values())
-                or (not values and not any(r.same_subject for r in direct))):
+                or any(len(ids) > 1 for ids in depictions.values())
+                or (not values and not depicted and not any(r.same_subject for r in direct))):
             unit = None
         provenance = tuple(sorted((s.source, s.selector + ': ' + s.reading) for s in support))
         for observation in members:
             result[observation] = unit, provenance
-    return result
+    # Distinctness is consumed only after C selects its population and period.
+    # An unrelated subject elsewhere must not erase this subject's identity.
+    qualified = [(members, result[next(iter(members))][0]) for members in components.values()
+                 if result[next(iter(members))][0] is not None]
+    distinct = set()
+    for index, (left, left_unit) in enumerate(qualified):
+        left_ids = {v.unit for o in left for v in by_observation[o]}
+        left_subjects = {v.subject for o in left for v in by_membership[o]}
+        for right, right_unit in qualified[index+1:]:
+            right_ids = {v.unit for o in right for v in by_observation[o]}
+            right_subjects = {v.subject for o in right for v in by_membership[o]}
+            distinct_scheme = any(a[0] == b[0] and a[1] != b[1] for a in left_ids for b in right_ids)
+            distinguished_subjects = any(a[0] == b[0] and a[1] != b[1] for a in left_subjects for b in right_subjects)
+            distinct_reading = any(not r.same_subject and
+                ((r.left in left and r.right in right) or (r.right in left and r.left in right))
+                for r in correspondences)
+            if distinct_scheme or distinct_reading or distinguished_subjects:
+                distinct.add((left_unit, right_unit))
+    return InspectionUnits(result, distinct)
 
 
 def survey_unit_sets(subjects, *, stratum_of, result_of, period):
@@ -270,6 +336,7 @@ def survey_unit_sets(subjects, *, stratum_of, result_of, period):
             or any(type(day) is not date for day in period) or period[0] >= period[1]):
         raise ValueError('Survey observation period requires start < end, end exclusive')
     negatives, positives, unavailable = defaultdict(set), set(), []
+    counted = defaultdict(list)
     for subject in subjects:
         stratum = stratum_of(subject)
         if stratum is None:
@@ -290,9 +357,20 @@ def survey_unit_sets(subjects, *, stratum_of, result_of, period):
             unavailable.append(subject.observation.identity)
         elif result is False:
             negatives[stratum].add(unit)
+            counted[unit].append(subject)
         else:
             raise TypeError('A source-qualified survey result is True, False or None')
-    return ({key: frozenset(values) for key, values in negatives.items()},
+    ambiguous = set()
+    units = list(counted)
+    for index, left in enumerate(units):
+        for right in units[index+1:]:
+            if not any(right in s.distinct_units for s in counted[left]) and not any(left in s.distinct_units for s in counted[right]):
+                ambiguous.update((left, right))
+    for unit in ambiguous:
+        unavailable.extend(s.observation.identity for s in counted[unit])
+    for values in negatives.values():
+        values.difference_update(ambiguous)
+    return ({key: frozenset(values) for key, values in negatives.items() if values},
             frozenset(positives), tuple(unavailable))
 
 

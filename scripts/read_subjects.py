@@ -19,11 +19,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report-reading-version', help='Explicit retained report revision; never launches extraction')
     parser.add_argument('--area-date', type=date.fromisoformat, help='Evaluate published locations against this area date; defaults to observation date')
+    parser.add_argument('--subject-reading', action='append', default=[], help='Exact retained subject-reading request SHA256; replay only')
     args = parser.parse_args()
     names = HostNames.load(ROOT)
     municipalities = Municipalities.load(ROOT)
     factory = lambda: distinct_observations(ROOT/'corpus/sources/monitoring')
     units = inspection_units(())
+    if args.subject_reading:
+        from cordon_d.subject_reading import retained_scene, compile_scenes
+        units = compile_scenes([retained_scene(ROOT, request, names) for request in args.subject_reading], names)
     count, results, hosts, records = Counter(),Counter(),Counter(),Counter()
     if args.report_reading_version:
         from cordon_d.findings import findings
