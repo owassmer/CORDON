@@ -53,6 +53,10 @@ remain available independently of whole-measure qualification.
 its acquired source hash to the measure identity and adoption date. It preserves
 separate publication occurrences even when they serve identical documents; a
 referenced predecessor in a subject does not replace the attached act.
+The adapter also requires the register capture's acquisition record before emitting
+events. Displayed future dates remain declarations, and an end date becomes an
+occurred anchor only after that local calendar day has elapsed. This does not prove
+uninterrupted posting or recipient effect.
 
 ## Where bytes live
 

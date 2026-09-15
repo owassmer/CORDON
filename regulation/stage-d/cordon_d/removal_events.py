@@ -1,10 +1,11 @@
 """Attach actual administrative records to issued measures and accepted clocks."""
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 from html import unescape
 import json
 from pathlib import Path
 import re
+from zoneinfo import ZoneInfo
 
 from cordon_c.quantities import clock_boundary
 from cordon_c.core import MissingInput
@@ -123,7 +124,13 @@ def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
     """
     from .notices import parsec_publication_declarations
     routes = {}
+    capture_days = []
+    source_digest = file_digest(Path(path))
     for record in acquisitions:
+        if record.get('sha256') == source_digest and record.get('captured_at'):
+            captured = datetime.fromisoformat(record['captured_at'])
+            if captured.tzinfo is not None:
+                capture_days.append(captured.astimezone(ZoneInfo('Europe/Rome')).date())
         if record.get('sha256'):
             for key in ('url', 'final_url'):
                 if record.get(key):
@@ -137,7 +144,7 @@ def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
             continue
         originals.setdefault(digest, set()).add(identity)
     for row in parsec_publication_declarations(path, publisher=publisher, source_url=source_url):
-        values = row.values
+        values = dict(row.values, observed_on=max(capture_days).isoformat() if capture_days else None)
         candidates = {identity for route in values['document_routes']
                       for digest in routes.get(route['url'], ())
                       for identity in originals.get(digest, ())}
@@ -148,10 +155,16 @@ def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
         if document:
             for field, kind in [('Data inizio pubb.', 'municipal-publication-start'),
                                 ('Data fine pubb.', 'municipal-publication-end')]:
-                if values['declared_dates'][field]:
+                declared = values['declared_dates'][field]
+                observed = values['observed_on']
+                # A displayed future date is a plan, not an occurred anchor. The
+                # end day must have elapsed; this still does not certify continuity.
+                occurred = (declared and observed and
+                            (declared <= observed if kind.endswith('-start') else declared < observed))
+                if occurred:
                     events.append(AdministrativeEvent(row.sha256 + ':' + row.locator + ':' + kind,
                                   kind, document, None,
-                                  date.fromisoformat(values['declared_dates'][field]), support))
+                                  date.fromisoformat(declared), support))
         yield Publication(row.sha256 + ':' + row.locator, publisher, document,
                           adopted, values, tuple(events), support)
 

@@ -23,6 +23,8 @@ class ParsecPublication(unittest.TestCase):
             self.skipTest('Retained source store unavailable')
         root = Path(__file__).resolve().parents[2]
         acquisitions = json.loads((root / 'corpus/sources/removal-orders/records.json').read_text())
+        captures = json.loads((root / 'corpus/sources/removal-events/records.json').read_text())
+        acquisitions += [r for r in captures if r.get('sha256') == digest]
         # Binding-only fixtures: identities independently read on original first
         # pages. This check does not qualify their whole-measure interpretation.
         measures = [SimpleNamespace(identity=identity, adopted=date.fromisoformat(adopted),
@@ -53,6 +55,15 @@ class ParsecPublication(unittest.TestCase):
         self.assertEqual(mixed, list(rows.values()))
         self.assertEqual(connected_publications(mixed, [UnresolvedMeasure(), *measures]),
                          connected_publications(mixed, measures))
+        for captured, expected in [('2026-04-02T12:00:00+00:00', []),
+                                   ('2026-04-10T12:00:00+00:00', ['municipal-publication-start'])]:
+            earlier = [dict(r, captured_at=captured) if r.get('sha256') == digest else r
+                       for r in acquisitions]
+            declarations = list(parsec_publications(path, measures=measures,
+                                **dict(kwargs, acquisitions=earlier)))
+            row = next(p for p in declarations if p.source_fields['source_fields']['Nro'] == '369')
+            self.assertEqual([e.kind for e in row.events], expected)
+            self.assertEqual(row.source_fields['declared_dates']['Data fine pubb.'], '2026-04-10')
 
     def test_retained_history_preserves_separate_correction_publications(self):
         from cordon_d.store import store_root
