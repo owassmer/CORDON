@@ -283,6 +283,19 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
             section = re.fullmatch(r'p([1-9]\d*)/(\S.*)', fact['section'])
             if section and int(section[1]) not in supplied_pages:
                 raise ValueError('Section cites a page not supplied to this reading')
+        if fact['role'] == 'record_continuation':
+            # The relation binds the physical parts of one record printed across pages.
+            # A whole table, a section heading or a fact is not a part of a record, and
+            # a table whose rows simply continue under a heading printed once is not a
+            # record continuation at all; that reading returns to the reader by name.
+            parts = fact['applies_to']
+            if len(parts) < 2 or any(not isinstance(scope, str) or not (
+                    scope.startswith('native:') or ('/' in scope and not scope.startswith('section:')))
+                    for scope in parts):
+                raise ValueError('record_continuation must name at least two physical parts of one '
+                                 'continued record as tableID/rowID or native:<cell> selectors; a table '
+                                 'or section that continues onto a later page is not a record continuation, '
+                                 'and its column roles cite the heading page in support instead')
     for issue in block['issues']:
         if not issue.get('cause') or not issue.get('scope'):
             raise ValueError('Reading limitation requires cause and scope')

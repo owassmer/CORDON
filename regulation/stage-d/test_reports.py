@@ -471,7 +471,7 @@ class LiteralReport(unittest.TestCase):
         data['pages'].append({'page': 2, 'disposition': 'read'})
         data['facts'] = [{'id': 'continued', 'role': 'record_continuation',
                           'page': 1, 'locator': 'header', 'text': '00123', 'value': '00123',
-                          'applies_to': ['p1-t1/r1', 'missing-part']}]
+                          'applies_to': ['p1-t1/r1', 'p2-tail/r9']}]
         repaired = copy.deepcopy(data)
         repaired['facts'][0]['applies_to'][-1] = 'p2-tail/r1'
         with TemporaryDirectory() as directory:
