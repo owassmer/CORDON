@@ -32,12 +32,15 @@ treatment row) are complete over that reach, negatives as much as positives; out
 it a record keeps three uses — continuity evidence for an identity, a rendition an
 in-reach fact's correction or replacement chain requires, and read-verification
 material for a reader — and is not otherwise completed. Act-dated facts with live
-effect (rows 3, 6, 7, 8 and 11) are bounded by liveness, not by date: an order is in
+effect (rows 6, 7, 8 and 11) are bounded by liveness, not by date: an order is in
 the population until execution or withdrawal closes it; a notice, publication,
-response or standing fact follows the order it concerns; an area version is acquired
-when A's interval for it overlaps an event date inside the reach. Identity-over-time
-facts (rows 4, 5, 9 and 10) are decided on the current state; history enters per
-identity as continuity evidence, never as a population to complete. An undated
+response or standing fact follows the order it concerns. Adopted area versions
+(row 3) are acquired when A's interval for the version overlaps an event date
+inside the reach. Identity-over-time facts (rows 4, 5, 9 and 10) are completed as
+the identity currently stands; a status that varies in time, such as protection
+or a parcel reference, is read at the in-reach event date from that identity's
+own history, which enters per identity and is never a register population to
+complete. An undated
 record is outside the rule: it is dated, or it stays visible with the cause. Rows
 outside the reach are not resolved by it; they are outside the bar.
 
