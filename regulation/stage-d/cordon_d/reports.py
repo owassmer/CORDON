@@ -55,6 +55,13 @@ class LiteralDate:
     value: date | None
     cause: str | None
     year_support: tuple[str, ...] = ()
+    date_range: tuple[date, date] | None = None
+    listed_dates: tuple[date, ...] = ()
+
+    def permits(self, value):
+        if self.date_range is not None:
+            return self.date_range[0] <= value <= self.date_range[1]
+        return value == self.value or value in self.listed_dates
 
 
 def literal_date(text, cause=None, *, year_context=()):
@@ -87,6 +94,33 @@ def literal_date(text, cause=None, *, year_context=()):
             return LiteralDate(text, date(year, int(short[3]), int(short[1])), None, support)
         except ValueError:
             return LiteralDate(text, None, 'invalid_calendar_date', support)
+    months = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+              'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
+    named = re.fullmatch(r'(\d{1,2}(?:\s*[-–]\s*\d{1,2}|(?:\s+e\s+\d{1,2})+)?)'
+                         r'\s+(' + '|'.join(months) + r')(?:\s+(\d{4}))?',
+                         text.strip().casefold())
+    if named:
+        support = ()
+        if named[3]:
+            year = int(named[3])
+        else:
+            candidates = {year for year, _ in year_context}
+            if len(candidates) != 1:
+                return LiteralDate(text, None, 'year_not_established_by_source_context')
+            year = next(iter(candidates))
+            support = tuple(dict.fromkeys(locator for value, locator in year_context if value == year))
+        try:
+            days = tuple(date(year, months.index(named[2]) + 1, int(day))
+                         for day in re.findall(r'\d+', named[1]))
+        except ValueError:
+            return LiteralDate(text, None, 'invalid_calendar_date', support)
+        if re.search(r'[-–]', named[1]):
+            if days[0] > days[1]:
+                return LiteralDate(text, None, 'invalid_date_range', support)
+            return LiteralDate(text, None, None, support, date_range=days)
+        if len(days) > 1:
+            return LiteralDate(text, None, None, support, listed_dates=days)
+        return LiteralDate(text, days[0], None, support)
     return LiteralDate(text, None, 'unparsed_date_literal')
 
 
@@ -131,7 +165,11 @@ class Row:
     @property
     def sampling_date(self):
         values = {d.value for d in self.sampling_dates if d.value is not None}
-        return next(iter(values)) if len(values) == 1 and all(d.value for d in self.sampling_dates) else None
+        if len(values) != 1:
+            return None
+        value = next(iter(values))
+        # A range/list constrains a separately stated day; it never supplies one.
+        return value if all(d.permits(value) for d in self.sampling_dates) else None
 
     @property
     def date_cause(self):
@@ -140,7 +178,13 @@ class Row:
         if self.sampling_date is not None:
             return None
         causes = {value.cause for value in self.sampling_dates if value.cause}
-        return '; '.join(sorted(causes)) if causes else 'conflicting sampling-date values'
+        exact = {d.value for d in self.sampling_dates if d.value is not None}
+        if len(exact) > 1 or any(not d.permits(value) for value in exact
+                                for d in self.sampling_dates if not d.cause):
+            causes.add('conflicting sampling-date values')
+        if not causes:
+            causes.add('sampling-date range or list does not establish an exact day')
+        return '; '.join(sorted(causes))
 
 
 @dataclass(frozen=True)

@@ -123,6 +123,86 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(literal_date('29/02/15', year_context=((2015, 'issue'),)).cause,
                          'invalid_calendar_date')
 
+    def test_italian_sampling_dates_preserve_agreement_and_real_conflict(self):
+        for text, day in [('12 novembre 2021', '12/11/2021'),
+                          ('25 Marzo 2017', '25/03/2017'),
+                          ('25 agosto 2022', '26/08/2022')]:
+            with self.subTest(text=text):
+                item = block([['x', day, 'Positivo', '01/12/2024']])
+                item['reading']['facts'] = [dict(id='sampling', role='sampling_date', page=1,
+                    locator='cover sampling statement', text=text, value=text, applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.sampling_dates[1].text, text)
+                if text == '25 agosto 2022':
+                    self.assertIsNone(row.sampling_date)
+                    self.assertEqual(row.date_cause, 'conflicting sampling-date values')
+                else:
+                    self.assertEqual(row.sampling_date, literal_date(day).value)
+                    self.assertIsNone(row.date_cause)
+
+    def test_missing_spelled_year_requires_unique_scoped_source_support(self):
+        item = block([['x', '29 gennaio', 'Positivo', '01/02/2015']])
+        fact = dict(id='sampling', role='sampling_date', page=1, locator='annex heading',
+                    text='29/01/2015', value='29/01/2015', applies_to=['report'])
+        item['reading']['facts'] = [fact]
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertEqual(row.sampling_date.isoformat(), '2015-01-29')
+        self.assertEqual(row.sampling_dates[0].text, '29 gennaio')
+        self.assertEqual(row.sampling_dates[0].year_support, ('b1/sampling',))
+        for facts in ([], [dict(fact, applies_to=['other-table'])],
+                      [fact, dict(fact, id='other', text='29/01/2016', value='29/01/2016')]):
+            item['reading']['facts'] = facts
+            row = materialize('hash', 'v', 1, [item]).rows[0]
+            self.assertIsNone(row.sampling_date)
+            self.assertIn('year_not_established_by_source_context', row.date_cause)
+
+    def test_ranges_and_lists_constrain_but_never_supply_exact_sampling_day(self):
+        for text, accepted, rejected in [('4-6 Aprile', '05/04/2017', '07/04/2017'),
+                                         ('4 e 6 aprile 2017', '06/04/2017', '05/04/2017')]:
+            with self.subTest(text=text):
+                item = block([['x', text, 'Positivo', '10/04/2017']])
+                item['reading']['facts'] = [dict(id='issue', role='report_date', page=1,
+                    locator='dateline', text='24/5/2017', value='24/5/2017', applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertIsNone(row.sampling_date)
+                self.assertIn('does not establish an exact day', row.date_cause)
+                constraint = row.sampling_dates[0]
+                self.assertEqual(constraint.text, text)
+                self.assertIsNone(constraint.value)
+                if text == '4-6 Aprile':
+                    self.assertEqual(constraint.year_support, ('b1/issue',))
+                    self.assertEqual(tuple(d.isoformat() for d in constraint.date_range),
+                                     ('2017-04-04', '2017-04-06'))
+                else:
+                    self.assertEqual(tuple(d.isoformat() for d in constraint.listed_dates),
+                                     ('2017-04-04', '2017-04-06'))
+                for day in (accepted, rejected):
+                    item['reading']['facts'] = item['reading']['facts'][:1] + [dict(
+                        id='exact', role='sampling_date', page=1, locator='sample date',
+                        text=day, value=day, applies_to=['report'])]
+                    row = materialize('hash', 'v', 1, [item]).rows[0]
+                    if day == accepted:
+                        self.assertEqual(row.sampling_date, literal_date(day).value)
+                        self.assertIsNone(row.date_cause)
+                    else:
+                        self.assertIsNone(row.sampling_date)
+                        self.assertEqual(row.date_cause, 'conflicting sampling-date values')
+
+    def test_invalid_unparsed_and_unsupported_date_constraints_stay_unresolved(self):
+        for text, cause in [('29 febbraio 2023', 'invalid_calendar_date'),
+                            ('28-31 febbraio 2024', 'invalid_calendar_date'),
+                            ('6-4 aprile 2017', 'invalid_date_range'),
+                            ('5/140/2017', 'unparsed_date_literal'),
+                            ('4 aprile - 6 maggio 2017', 'unparsed_date_literal')]:
+            with self.subTest(text=text):
+                item = block([['x', '05/04/2017', 'Positivo', '10/04/2017']])
+                item['reading']['facts'] = [dict(id='sampling', role='sampling_date', page=1,
+                    locator='cover sampling statement', text=text, value=text, applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.sampling_dates[1].text, text)
+                self.assertIsNone(row.sampling_date)
+                self.assertEqual(row.date_cause, cause)
+
     def test_native_identifier_uses_source_geometry_and_preserves_original(self):
         import pymupdf
         with TemporaryDirectory() as temporary:

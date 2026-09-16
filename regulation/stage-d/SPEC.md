@@ -136,7 +136,10 @@ cell bounds and derivation remain attached. This repairs displaced punctuation,
 not identifier origin or correspondence between different codes.
 Two-digit date years resolve only against a unique matching full year in scoped
 source date statements. The literal date and supporting statement IDs survive;
-no current-year assumption or platform century cutoff supplies the year.
+no current-year assumption or platform century cutoff supplies the year. A date
+spelled with an Italian month name resolves the same way. A printed date range or
+list constrains a separately stated sampling day and never supplies one; a row
+whose only date statement is a range or list has no exact day, and says so.
 
 Extraction permits one to three independent PDF processes under one shared,
 transaction-locked spending ledger. Returned usage and interrupted requests are
