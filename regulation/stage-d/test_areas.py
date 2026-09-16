@@ -452,10 +452,16 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         # ownership of the predicate and the source role are enforced. Ginosa
         # sheet 29 is starred in DDS 106/2025's buffer table; sheet 36 is not.
         from cordon_c.core import Snapshot
-        from cordon_d.areas import evidence_for
-        snapshot = Snapshot.load(ROOT)
+        from cordon_d.areas import act_documents, evidence_for
+        from cordon_d.store import blob_path, store_root
         day = date(2025, 7, 1)
         version = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        record = act_documents(ROOT)[version.instrument_id]
+        if not blob_path(store_root(ROOT), record['sha256']).exists():
+            # The evidence object verifies the act's bytes; without the store this
+            # check has no source to verify against and says so instead of passing.
+            self.skipTest('the act document is not in the content-addressed store here')
+        snapshot = Snapshot.load(ROOT)
         evidence, assertions = evidence_for((version,), ROOT, day, snapshot=snapshot,
                                             comune='GINOSA', foglio='29', particella='5')
         self.assertEqual(len(assertions), 1)
