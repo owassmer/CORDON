@@ -18,6 +18,32 @@ the publisher's unrelated catalogue does not enter with it. Positive results do
 not define a plant population: negative observations, unobserved specified plants,
 parcels, surfaces and protected uninfected plants can all be consequential.
 
+Admission has a temporal half. A source population is complete for a consumer when
+it covers every event date that consumer's accepted clocks can reach from any
+decision date on or after the evaluation's own knowledge cutoff (`contracts.json`).
+The reach is derived from accepted B, is decision-date-relative, moves with the
+epidemic, and is never written as a year. Today the longest reachable backward
+period is four years: `B-CLK-EU-6(1)-four-negative-years`, beside the two-year
+`B-CLK-EU-7(1)(e)-sub2-two-year-lookback`; the five-year
+`B-CLK-LR4-3(4)-pre-LR45-five-year-no-detection` applies only to a decision in the
+pre-L.R. 45 interval and cannot be reached. Three kinds of fact take the rule
+differently. Observation-dated facts (`INPUTS.md` rows 1, 2 and the vector and
+treatment row) are complete over that reach, negatives as much as positives; outside
+it a record keeps three uses — continuity evidence for an identity, a rendition an
+in-reach fact's correction or replacement chain requires, and read-verification
+material for a reader — and is not otherwise completed. Act-dated facts with live
+effect (rows 6, 7, 8 and 11) are bounded by liveness, not by date: an order is in
+the population until execution or withdrawal closes it; a notice, publication,
+response or standing fact follows the order it concerns. Adopted area versions
+(row 3) are acquired when A's interval for the version overlaps an event date
+inside the reach. Identity-over-time facts (rows 4, 5, 9 and 10) are completed as
+the identity currently stands; a status that varies in time, such as protection
+or a parcel reference, is read at the in-reach event date from that identity's
+own history, which enters per identity and is never a register population to
+complete. An undated
+record is outside the rule: it is dated, or it stays visible with the cause. Rows
+outside the reach are not resolved by it; they are outside the bar.
+
 The Osservatorio's own casefile, protocol, notice, response, assignment and field
 records are first-party inputs. Public manuals describing those systems do not
 supply the underlying facts and are not part of the D baseline.
