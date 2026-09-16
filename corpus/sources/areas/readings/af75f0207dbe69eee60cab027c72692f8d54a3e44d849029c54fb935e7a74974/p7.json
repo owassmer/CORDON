@@ -1,0 +1,578 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+ "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "0b78a874d0df198d36f7c5c2a71ab37093ea0878b2192ff54ed4a7539dba839a",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:20:21.991541+00:00",
+ "native_tables": [
+  {
+   "id": "p7-t1",
+   "bbox": [
+    147.7,
+    148.1,
+    293.4,
+    739.8
+   ]
+  },
+  {
+   "id": "p7-t2",
+   "bbox": [
+    303.7,
+    148.1,
+    470.2,
+    739.8
+   ]
+  }
+ ],
+ "native_cells": {
+  "p7-t1-r1-c1": {
+   "text": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE FASTIDIOSA - ZONA INFETTA",
+   "table": "p7-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    147.7,
+    148.1,
+    177.9,
+    739.8
+   ]
+  },
+  "p7-t1-r1-c2": {
+   "text": "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE. IL SIMBOLO * INDICA CHE LA PARTICELLA E' INTERAMENTE CONTENUTA",
+   "table": "p7-t1",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    177.9,
+    148.1,
+    220.7,
+    495.7
+   ]
+  },
+  "p7-t1-r1-c3": {
+   "text": "FOGLIO 5: particelle 260, 264, 269, 273, 274, 365, 704, 705, 706, 707, 708, 817, 818*",
+   "table": "p7-t1",
+   "row": 1,
+   "column": 3,
+   "bbox": [
+    220.7,
+    148.1,
+    253.2,
+    495.7
+   ]
+  },
+  "p7-t1-r1-c4": {
+   "text": "FOGLIO 10: particelle 2, 5, 7, 8, 12, 15, 17, 18, 19*, 20*, 21*, 22, 23, 24, 25, 26, 29, 30, 31, 197, 198*, 200*, 201, 218, 221, 302, 303, 305, 306, 466*, 467*, 468*, 469*, 477, 478, 651, 656, 658, 692, 693",
+   "table": "p7-t1",
+   "row": 1,
+   "column": 4,
+   "bbox": [
+    253.2,
+    148.1,
+    293.4,
+    495.7
+   ]
+  },
+  "p7-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    177.9,
+    495.7,
+    220.7,
+    645.8
+   ]
+  },
+  "p7-t1-r2-c3": {
+   "text": "TRIGGIANO",
+   "table": "p7-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    220.7,
+    495.7,
+    293.4,
+    645.8
+   ]
+  },
+  "p7-t1-r3-c2": {
+   "text": "PROVINCIA",
+   "table": "p7-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    177.9,
+    645.8,
+    220.7,
+    739.8
+   ]
+  },
+  "p7-t1-r3-c3": {
+   "text": "BARI",
+   "table": "p7-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    220.7,
+    645.8,
+    293.4,
+    739.8
+   ]
+  },
+  "p7-t2-r1-c1": {
+   "text": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE FASTIDIOSA - ZONA CUSCINETTO",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    303.7,
+    148.1,
+    329.2,
+    739.8
+   ]
+  },
+  "p7-t2-r1-c2": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    329.2,
+    148.1,
+    363.7,
+    495.7
+   ]
+  },
+  "p7-t2-r1-c3": {
+   "text": "SEZIONE G: FOGLIO 1 SEZIONE A: FOGLIO 53, 55, 56, 61, 62, 63*, 64*, 70, 71, 72*",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 3,
+   "bbox": [
+    363.7,
+    148.1,
+    397.8,
+    495.7
+   ]
+  },
+  "p7-t2-r1-c4": {
+   "text": "FOGLI 11, 12, 13, 14",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 4,
+   "bbox": [
+    397.8,
+    148.1,
+    415.4,
+    495.7
+   ]
+  },
+  "p7-t2-r1-c5": {
+   "text": "FOGLIO 7",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 5,
+   "bbox": [
+    415.4,
+    148.1,
+    444.8,
+    495.7
+   ]
+  },
+  "p7-t2-r1-c6": {
+   "text": "FOGLI 1*, 2, 3, 4*, 5*, 6*, 7, 8*, 9*, 10*, 11, 12*, 13*, 14, 15, 16*, 17*, 18, 19, 19-ALLEGATO A*, 20*, 21, 22, 23*",
+   "table": "p7-t2",
+   "row": 1,
+   "column": 6,
+   "bbox": [
+    444.8,
+    148.1,
+    470.2,
+    495.7
+   ]
+  },
+  "p7-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    329.2,
+    495.7,
+    363.7,
+    645.8
+   ]
+  },
+  "p7-t2-r2-c3": {
+   "text": "BARI",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    363.7,
+    495.7,
+    397.8,
+    645.8
+   ]
+  },
+  "p7-t2-r2-c4": {
+   "text": "CAPURSO",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 4,
+   "bbox": [
+    397.8,
+    495.7,
+    415.4,
+    645.8
+   ]
+  },
+  "p7-t2-r2-c5": {
+   "text": "NOICATTARO",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 5,
+   "bbox": [
+    415.4,
+    495.7,
+    444.8,
+    645.8
+   ]
+  },
+  "p7-t2-r2-c6": {
+   "text": "TRIGGIANO",
+   "table": "p7-t2",
+   "row": 2,
+   "column": 6,
+   "bbox": [
+    444.8,
+    495.7,
+    470.2,
+    645.8
+   ]
+  },
+  "p7-t2-r3-c2": {
+   "text": "PROVINCIA",
+   "table": "p7-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    329.2,
+    645.8,
+    363.7,
+    739.8
+   ]
+  },
+  "p7-t2-r3-c3": {
+   "text": "BARI",
+   "table": "p7-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    363.7,
+    645.8,
+    470.2,
+    739.8
+   ]
+  }
+ },
+ "envelope": {
+  "duration_ms": 25015,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 8897,
+   "cache_read_input_tokens": 9551,
+   "output_tokens": 2943,
+   "output_tokens_details": {
+    "thinking_tokens": 1425
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 8897,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 2802,
+     "cache_read_input_tokens": 7265,
+     "cache_creation_input_tokens": 3918,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3918
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0712592,
+  "session_id": "1127f7d1-97f7-4a2d-b495-9b2bc2c7d2e1"
+ },
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE FASTIDIOSA  - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE. IL SIMBOLO * INDICA CHE LA PARTICELLA E' INTERAMENTE CONTENUTA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t1-r3-c3"
+      },
+      "comune": {
+       "native_cell": "p7-t1-r2-c3"
+      },
+      "scope": {
+       "text": "FOGLIO 5: particelle 260, 264, 269, 273, 274, 365, 704, 705, 706, 707, 708, 817, 818* FOGLIO 10: particelle 2, 5, 7, 8, 12, 15, 17, 18, 19*, 20*, 21*, 22, 23, 24, 25, 26, 29, 30, 31, 197, 198*, 200*, 201, 218, 221, 302, 303, 305, 306, 466*, 467*, 468*, 469*, 477, 478, 651, 656, 658, 692, 693"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE FASTIDIOSA  - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "native_cell": "p7-t2-r2-c3"
+      },
+      "scope": {
+       "native_cell": "p7-t2-r1-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "native_cell": "p7-t2-r2-c4"
+      },
+      "scope": {
+       "native_cell": "p7-t2-r1-c4"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "native_cell": "p7-t2-r2-c5"
+      },
+      "scope": {
+       "native_cell": "p7-t2-r1-c5"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "native_cell": "p7-t2-r2-c6"
+      },
+      "scope": {
+       "native_cell": "p7-t2-r1-c6"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p7-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "14938",
+   "Bollettino Ufficiale della Regione Puglia - n. 18 del 29-2-2024",
+   "3"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE FASTIDIOSA  - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA E PARTICELLE CATASTALI RICADENTI NEL BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE. IL SIMBOLO * INDICA CHE LA PARTICELLA E' INTERAMENTE CONTENUTA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t1-r3-c3"
+      },
+      "comune": {
+       "text": "TRIGGIANO",
+       "copied_from": "p7-t1-r2-c3"
+      },
+      "scope": {
+       "text": "FOGLIO 5: particelle 260, 264, 269, 273, 274, 365, 704, 705, 706, 707, 708, 817, 818* FOGLIO 10: particelle 2, 5, 7, 8, 12, 15, 17, 18, 19*, 20*, 21*, 22, 23, 24, 25, 26, 29, 30, 31, 197, 198*, 200*, 201, 218, 221, 302, 303, 305, 306, 466*, 467*, 468*, 469*, 477, 478, 651, 656, 658, 692, 693",
+       "transcribed": true
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "AREA DELIMITATA XYLELLA FASTIDIOSA SOTTOSPECIE FASTIDIOSA  - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "text": "BARI",
+       "copied_from": "p7-t2-r2-c3"
+      },
+      "scope": {
+       "text": "SEZIONE G: FOGLIO 1 SEZIONE A: FOGLIO 53, 55, 56, 61, 62, 63*, 64*, 70, 71, 72*",
+       "copied_from": "p7-t2-r1-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "text": "CAPURSO",
+       "copied_from": "p7-t2-r2-c4"
+      },
+      "scope": {
+       "text": "FOGLI 11, 12, 13, 14",
+       "copied_from": "p7-t2-r1-c4"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "text": "NOICATTARO",
+       "copied_from": "p7-t2-r2-c5"
+      },
+      "scope": {
+       "text": "FOGLIO 7",
+       "copied_from": "p7-t2-r1-c5"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p7-t2-r3-c3"
+      },
+      "comune": {
+       "text": "TRIGGIANO",
+       "copied_from": "p7-t2-r2-c6"
+      },
+      "scope": {
+       "text": "FOGLI 1*, 2, 3, 4*, 5*, 6*, 7, 8*, 9*, 10*, 11, 12*, 13*, 14, 15, 16*, 17*, 18, 19, 19-ALLEGATO A*, 20*, 21, 22, 23*",
+       "copied_from": "p7-t2-r1-c6"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "14938",
+   "Bollettino Ufficiale della Regione Puglia - n. 18 del 29-2-2024",
+   "3"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p7-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p7-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "tables_visible": 2
+ },
+ "resolution_problems": []
+}

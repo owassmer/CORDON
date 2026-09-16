@@ -260,9 +260,98 @@ is checked before dispatch; schema
 references must resolve within the supplied schema, without network retrieval.
 Source-review instructions change the request;
 replay never secretly spends another call. API-key fallback and model tools are
-disabled. A bounded subprocess timeout applies.
+disabled explicitly, including app/plugin discovery and built-in image/browser tools.
+A bounded subprocess timeout applies.
 
 The calling reader uses the shared store and retains the request reference beside
 its interpreted output. No second source inventory, scheduler, extraction schema,
 or evidence-acceptance model is introduced here. Laboratory relationship batching
 can reuse the transport later; it is not an implemented caller in this unit.
+
+## Observed-subject composition
+
+`cordon_d.subjects.observed_subjects` accepts the unchanged complete monitoring
+iterator. Each result retains its observation, separate host reading, published
+parcel references and literal correspondence candidates. It does not enumerate
+physical plants. `HostNames.load` reads the retained EPPO structured sources;
+`specified_versions` reads the historical Annex II texts. The captures and current
+limits belong to the plant/population and parcel rows of `INPUTS.md`.
+
+`subject_with_finding` can refine an observed genus using the scientific species
+in that observation’s own unambiguous report, preserving genuine conflicts.
+Pass the existing finding join to `finding_host` for the finding's species, rather
+than borrowing the observation's host. `infected_species` combines the readable
+explicitly selected `(source hash, result locator)` occurrences with separately
+supplied Xylella finding qualification and adopted-area
+membership. Evaluate that membership against the decision's relevant area version;
+keep the earlier sampling date on the finding. The supplied finding qualification
+includes applicability to the area’s operative pest scope, which remains owned by
+A and the area/finding evidence. Annex II host-list selection does not itself
+qualify a diagnostic result or redefine C’s species-history input. `species_category_facts` accepts
+the resulting scoped history and supplies `eradication_species_facts` without
+changing C. A complete infected-species inventory requires `RequiredPopulation`
+with scope `json.dumps([area, event_date.isoformat()], separators=(',', ':'))` and
+its own evidence; a negative observation cannot supply it.
+
+`cadastral_memberships` composes the published observation location with
+`areas.membership_evidence`. It returns whole-parcel inclusion, partial
+intersection and subject-location membership separately, with source supports.
+It locates the observation as published, not an individual plant at a later date.
+Conflicting reference components prevent a positive subject-location conclusion.
+Partial intersection provides no numerical position or error bound and cannot
+bypass the positional owner. It establishes neither title nor standing.
+
+`InspectionUnitReading` admits formal identity schemes with exact observation
+membership. `SubjectCorrespondence` also admits sufficient direct evidence that
+observations concern the same or different subject; no registry or published
+identifier scheme is required for that route. Literal note patterns supply only
+`ReferenceReading` candidates. Reconciliation retains conflicting readings and
+both tag and previous-sample relationships. `observed_subject_survey` counts only
+established distinct units through C; it retains an independently qualified
+positive observation even when persistent identity is unavailable. Both survey
+adapters require the operative `period=(start, end)` and select [start, end)
+observation dates before qualifying results. `stratum_of` selects membership in
+the required population; `None` excludes an observation. Unit identity cannot
+move results across periods or establish C's separate method, population,
+performance and independence qualifications.
+
+`scripts/read_subjects.py` consumes every observation and supplies
+host/report/cadastral connections. `--subject-reading <request SHA256>` replays
+an exact retained reading through `cordon_d.subject_reading`; it never launches
+extraction. The source population and reader revision must still match.
+
+`scripts/read_subject_correspondence.py --start <date> --end <date>` retrieves
+scene candidates through the whole ordinary observation iterator, then applies
+the operative inspection period without filtering outcomes, hosts or notes.
+`--frame <source SHA256>` selects a retained extent and all its dated frames;
+without it, the command covers every retained extent. Only explicit `--execute`
+permits uncached source readings through the accepted, tool-disabled Codex
+subscription transport, with no API-key fallback or Claude invocation.
+
+The source reader makes a deterministic PDF viewing aid from verified original
+frames, separate coordinate-marked copies and every publication of each candidate.
+The generated view is identified as a derivative, never an official document.
+Its semantic contract requests individual membership, source grain, temporal
+continuity, alternatives and same/different/unknown correspondence, citing original
+sources. Image containment only retrieves candidates. The compiler reconciles all
+scene readings together, preserves contrary evidence, and rejects incompatible
+EPPO branches across an entire connected component, aggregate membership and conflicting published positions. Missing observation
+dates affect period-qualified counting, without erasing supported correspondence.
+`DirectSubjectMembership` supplies sufficient individual membership even for a
+standalone observation. Distinctness uncertainty is evaluated only among units
+in the consumer’s selected population and period. Taxonomy does not establish identity.
+
+The current source reader uses `gpt-6-astra` at high effort. Replay uses that same
+configuration; a different model's probe is not an accepted reading of this reader.
+Independent retained-source checks cover separated orchard crowns, adjoining scrub
+and densely arranged nursery plants. Five standalone, note-free olive samples reach
+C as five units; nine other observations retain evidence without invented subjects.
+The repeated-unit scene remains under verification. INPUTS.md row 4 owns that
+remaining requirement. Exact flight dates, positional accuracy and full survey
+population/method qualification are not supplied by these imagery connections.
+
+`scripts/acquire_host_names.py --report-reading-version <revision>` acquires only
+the taxonomy reached by monitoring and that explicit retained report reading,
+including all returned candidates and genus ancestry. Existing responses are
+reused; credentials are read from `~/.config/cordon/eppo-api-key` and sent only as
+an API header. This command never acquires report readings or calls a model.

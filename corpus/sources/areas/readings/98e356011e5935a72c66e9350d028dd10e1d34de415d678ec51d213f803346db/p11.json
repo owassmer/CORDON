@@ -1,0 +1,79 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 11,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "3736977396fb5455e16e8930da3ec208579cb4d03cbf13cee742015f5f6de5fa",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:31:05.831671+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 7117,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 5755,
+   "cache_read_input_tokens": 6424,
+   "output_tokens": 456,
+   "output_tokens_details": {
+    "thinking_tokens": 0
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5755,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 330,
+     "cache_read_input_tokens": 4138,
+     "cache_creation_input_tokens": 3903,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3903
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.030653800000000002,
+  "session_id": "744c25d1-c628-4d94-8d4d-cdbcc25243ee"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 BIS",
+   "Legenda (map legend listing zone color codes, not a data table)",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE - DOTT. SALVATORE INFANTINO",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "ALLEGATO 1 BIS",
+   "Legenda (map legend listing zone color codes, not a data table)",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE - DOTT. SALVATORE INFANTINO",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,87 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+ "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "95d29d628c937ba7a237c96a987a76de162cb897b99432c5714310e8a8b43091",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:22:35.086711+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 13001,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 6902,
+   "cache_read_input_tokens": 7539,
+   "output_tokens": 871,
+   "output_tokens_details": {
+    "thinking_tokens": 30
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 6902,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 712,
+     "cache_read_input_tokens": 5253,
+     "cache_creation_input_tokens": 3935,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3935
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0404558,
+  "session_id": "ad9d7f14-9bc3-45c7-b1c7-03ff1988cbdb"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Rappresentare con l'Allegato 1 e 1 bis, parti integranti del presente atto, i limiti geografici territoriali dell'area delimitata;",
+   "Riportare nell'Allegato 2, parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente le zone \"infetta\" e \"cuscinetto\" ;",
+   "Informare che sul sito www.emergenzaxylella.it è possibile individuare per ogni particella catastale, se ricade in \"zona infetta\"- \"zona cuscinetto\" o \"area indenne\";",
+   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle aree/zone delimitate;",
+   "Dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia;",
+   "Stabilire che detta delimitazione è consultabile sui portali istituzionali della Regione Puglia www.regione.puglia.it e sul sito istituzionale www.emergenzaxylella.it;",
+   "Trasmettere copia del presente atto: ai comuni interessati; alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Città Metropolitana di Bari; all'ANCI Puglia;",
+   "Pubblicare il presente provvedimento sul BUR Puglia."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "Rappresentare con l'Allegato 1 e 1 bis, parti integranti del presente atto, i limiti geografici territoriali dell'area delimitata;",
+   "Riportare nell'Allegato 2, parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente le zone \"infetta\" e \"cuscinetto\" ;",
+   "Informare che sul sito www.emergenzaxylella.it è possibile individuare per ogni particella catastale, se ricade in \"zona infetta\"- \"zona cuscinetto\" o \"area indenne\";",
+   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle aree/zone delimitate;",
+   "Dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia;",
+   "Stabilire che detta delimitazione è consultabile sui portali istituzionali della Regione Puglia www.regione.puglia.it e sul sito istituzionale www.emergenzaxylella.it;",
+   "Trasmettere copia del presente atto: ai comuni interessati; alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Città Metropolitana di Bari; all'ANCI Puglia;",
+   "Pubblicare il presente provvedimento sul BUR Puglia."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

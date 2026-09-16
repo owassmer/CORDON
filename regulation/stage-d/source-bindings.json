@@ -21,6 +21,25 @@
       "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. Plant identity, the official finding and metric location belong to the population, report and area rows."
     },
     {
+      "id": "observed-host-names",
+      "name": "Observed host taxonomy and event-time specified hosts",
+      "purpose": "Supply subject and finding species identities and event-time specified-host qualification for accepted C removal categories.",
+      "contracts": [
+        "plant-population",
+        "pest-classification"
+      ],
+      "routes": [
+        "https://api.eppo.int/gd/v2/tools/name2codes",
+        "https://api.eppo.int/gd/v2/taxons/taxon/{code}/overview",
+        "https://api.eppo.int/gd/v2/taxons/taxon/{code}/names",
+        "https://api.eppo.int/gd/v2/taxons/taxon/{code}/taxonomy",
+        "regulation/source/consolidations/02020R1201-*.txt"
+      ],
+      "population": "Names reached by the entire established monitoring stream and an explicit retained report-reading revision; all returned taxon candidates and their reached genera. Event-time Annex II versions are the retained EU consolidations.",
+      "reader": "cordon_d.hosts; scripts/acquire_host_names.py reuses retained responses; cordon_d.subjects supplies the existing C consumers",
+      "open": "Unresolved names, genus-only identity and genuine conflicts limit species conclusions. Local infection and official qualification come from findings, never taxonomy; INPUTS.md owns the current evidence limits."
+    },
+    {
       "id": "adopted-plans-and-listings",
       "name": "Adopted survey plans and pest listings",
       "purpose": "Supply the operative survey design for a campaign, area and host population, and the pest and host listings that classify an observation.",
@@ -57,20 +76,20 @@
     },
     {
       "id": "official-areas",
-      "name": "Adopted demarcated-area geometry",
-      "purpose": "Supply the infected, containment, buffer and other legally consequential area containing a location on the event date.",
+      "name": "Adopted demarcated areas: the acts and their cadastral annexes",
+      "purpose": "Supply the infected, containment, buffer or focus zone that contained a location on the event date, as the adopting act states it.",
       "contracts": [
         "adopted-geography",
         "boundary-context",
         "evaluation-context"
       ],
       "routes": [
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer"
+        "Adopting regional acts and incorporated annexes; acquisitions in corpus/sources/areas/acts.json",
+        "Publisher zone services; retained native geometry captures in corpus/sources/areas/acts.json"
       ],
-      "population": "Every geometry version required by an accepted A provision interval, together with the act that adopted it.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the current and consequential historical versions and bind each version to its adopting act."
+      "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes carry the area statements this input is read from.",
+      "reader": "cordon_d.areas, including published_geography for native polygon occurrences; explicit act-page reading through scripts/read_annexes.py",
+      "open": "Complete retained page readings and source verification; establish adopted-version correspondence and spatial qualification for metric use. DDS 148/2024 remains a bounded intermediate-version question, not an active exhaustive search. INPUTS.md row 3 owns the source limits."
     },
     {
       "id": "cadastre",
@@ -81,11 +100,12 @@
       ],
       "routes": [
         "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2"
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2",
+        "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.csv"
       ],
       "population": "The parcels spatially reached by an admitted finding or removal population; national AdE geometry is the current reference where available.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the required parcel population and preserve source cadastral identifiers. Geometry alone does not establish ownership or authority to enter."
+      "reader": "cordon_d.subjects.parcel_references and cadastral_memberships compose published references and the retained ISTAT code table with cordon_d.areas; cordon_d.releases and cordon_d.spatial admit geometry",
+      "open": "Reached parcel geometry remains unestablished. Partial intersection does not locate an individual plant; published observation location does not establish later plant location or ownership. INPUTS.md owns the source limits."
     },
     {
       "id": "removal-orders",
@@ -213,6 +233,24 @@
       "population": "The bounded calendar years required by accepted B clocks.",
       "reader": "cordon_d.calendar",
       "open": "Extend only when an accepted clock reaches a year not currently represented."
+    },
+    {
+      "id": "observed-subject-correspondence",
+      "name": "Public field notes and dated subject imagery",
+      "purpose": "Supply supported individual membership and repeated inspection-unit correspondence for the accepted C survey consumer.",
+      "contracts": [
+        "plant-population",
+        "survey-performance"
+      ],
+      "routes": [
+        "The established complete monitoring stream and its original field notes",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2019/ImageServer",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2022/ImageServer",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto2023/ImageServer"
+      ],
+      "population": "All observations in the required inspection period within reached retained image extents, including standalone, note-free, negative and other records. Images support subject correspondence, not a complete plant census.",
+      "reader": "cordon_d.subject_reading: reproducible source views and subscription semantic reading; cordon_d.subjects: evidence reconciliation and population/period-scoped survey adapter",
+      "open": "The ordinary producer supplies five verified standalone note-free olive units; scrub/nursery membership remains unresolved by its composed public evidence. Repeated-unit verification under the current reader remains required. Neither image edition years nor pixels establish exact flight dates or positional accuracy. Surrounding plant and complete survey populations remain separate inputs. INPUTS.md row 4 owns the limitation."
     }
   ]
 }

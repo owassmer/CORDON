@@ -1,0 +1,85 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+ "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "11acfd99f309fe2460f42541f05634fbb78bd1684f64d60194473578e8e4713a",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:25:09.568725+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 11845,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7560,
+   "cache_read_input_tokens": 8210,
+   "output_tokens": 1377,
+   "output_tokens_details": {
+    "thinking_tokens": 17
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7560,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1232,
+     "cache_read_input_tokens": 5924,
+     "cache_creation_input_tokens": 3922,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3922
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.048763,
+  "session_id": "8c82ea26-63c5-4860-ba0b-a854311330b4"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "La determina dirigenziale n°92 del 22/07/2024 \"Reg. (UE) 2020/1201 –Istituzione area delimitata a \"Xylella fastidiosa sottospecie pauca ST53 - Bari\" ai sensi dell'art. 4 del Reg. (UE) 2020/1201.\"",
+   "La determina dirigenziale n°93 del 23/07/2024 \"Reg. (UE) 2020/1201 – Istituzione delle aree delimitate: \"Xylella fastidiosa sottospecie multiplex ST26 - Noicattaro e Triggiano\" e\" Xylella fastidiosa sottospecie multiplex ST26 - Capurso\", ai sensi dell'art. 4 del Reg. UE 2020/1201.\"",
+   "L'intera area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 di cui alle determine n° 8/2024, n° 12/2024 e n° 45/2024, è stata oggetto di sorveglianza rafforzata e tutte le superfici in cui erano presenti specie specificate alla sottospecie fastidiosa sono state ispezionate e campionate.",
+   "In tale area delimitata alla data del 18/07/2024 sono state campionate oltre 38.000 piante di cui n° 404 sono risultate infette a diverse sottospecie di Xylella fastidiosa. In particolare: n° 324 piante sono risultate infette da Xylella fastidiosa sottospecie fastidiosa ST1; n° 45 piante sono risultate infette da Xylella fastidiosa sottospecie multiplex ST26; n° 9 piante sono risultate infette da Xylella fastidiosa sottospecie pauca ST53.",
+   "A seguito dell'individuazione di piante infette dalle altre sottospecie di Xylella all'interno dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, con atti dirigenziali n° 92 del 22/07/2024 e n° 93 del 23/07/2024, innanzi citati, sono state istituite le nuove aree delimitate per Xylella fastidiosa sottospecie pauca ST53 e Xylella fastidiosa sottospecie multiplex ST26.",
+   "ACCERTATA La presenza di Xylella fastidiosa sottospecie fastidiosa ST1 su 324 piante tra mandorlo, vite, ciliegio, sulla base dei rapporti di prova e dei risultati della caratterizzazione della sottospecie e del genotipo, comunicati dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) - CNR.",
+   "VALUTATO CHE Le piante infette sono distribuite in numerosi focolai siti nella zona cuscinetto dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, istituita con determina n° 45/2024."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "La determina dirigenziale n°92 del 22/07/2024 \"Reg. (UE) 2020/1201 –Istituzione area delimitata a \"Xylella fastidiosa sottospecie pauca ST53 - Bari\" ai sensi dell'art. 4 del Reg. (UE) 2020/1201.\"",
+   "La determina dirigenziale n°93 del 23/07/2024 \"Reg. (UE) 2020/1201 – Istituzione delle aree delimitate: \"Xylella fastidiosa sottospecie multiplex ST26 - Noicattaro e Triggiano\" e\" Xylella fastidiosa sottospecie multiplex ST26 - Capurso\", ai sensi dell'art. 4 del Reg. UE 2020/1201.\"",
+   "L'intera area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 di cui alle determine n° 8/2024, n° 12/2024 e n° 45/2024, è stata oggetto di sorveglianza rafforzata e tutte le superfici in cui erano presenti specie specificate alla sottospecie fastidiosa sono state ispezionate e campionate.",
+   "In tale area delimitata alla data del 18/07/2024 sono state campionate oltre 38.000 piante di cui n° 404 sono risultate infette a diverse sottospecie di Xylella fastidiosa. In particolare: n° 324 piante sono risultate infette da Xylella fastidiosa sottospecie fastidiosa ST1; n° 45 piante sono risultate infette da Xylella fastidiosa sottospecie multiplex ST26; n° 9 piante sono risultate infette da Xylella fastidiosa sottospecie pauca ST53.",
+   "A seguito dell'individuazione di piante infette dalle altre sottospecie di Xylella all'interno dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, con atti dirigenziali n° 92 del 22/07/2024 e n° 93 del 23/07/2024, innanzi citati, sono state istituite le nuove aree delimitate per Xylella fastidiosa sottospecie pauca ST53 e Xylella fastidiosa sottospecie multiplex ST26.",
+   "ACCERTATA La presenza di Xylella fastidiosa sottospecie fastidiosa ST1 su 324 piante tra mandorlo, vite, ciliegio, sulla base dei rapporti di prova e dei risultati della caratterizzazione della sottospecie e del genotipo, comunicati dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) - CNR.",
+   "VALUTATO CHE Le piante infette sono distribuite in numerosi focolai siti nella zona cuscinetto dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, istituita con determina n° 45/2024."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,89 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+ "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "eaa4690c47776e5612d54e2a9eb3b9756bdb81db7a9192af08eedf105efdfbba",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:20:48.481111+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 16326,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7572,
+   "cache_read_input_tokens": 8212,
+   "output_tokens": 1071,
+   "output_tokens_details": {
+    "thinking_tokens": 28
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7572,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 915,
+     "cache_read_input_tokens": 5926,
+     "cache_creation_input_tokens": 3932,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3932
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.0458084,
+  "session_id": "6074bf98-44f8-41fb-9460-77874a3a800e"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "nell'intero agro comunale dei comuni di Polignano, Monopoli e Alberobello;",
+   "nell'area di 100 m attorno ai siti in cui c'è un notevole passaggio e sosta di veicoli, presenti nei comuni succitati e lungo le strade di grande percorrenza;",
+   "nell'area larga 400 m posta a nord della zona in cui si applicano misure di contenimento che si estende dallo Jonio all'Adriatico;",
+   "area larga 400 m (da 50 a 450 m) intorno al buffer di 50 m di ciascuna pianta risultata infetta nel monitoraggio 2022 (Area delimitata \"Salento\"- zona infetta in cui si attuano misure di contenimento);",
+   "area larga 400 m al confine con la zona contenimento Salento e i comuni di Polignano, Monopoli, Alberobello e parte di Castellana Grotte, dallo Jonio all'Adriatico (Aree delimitate \"Valle D 'Itria\" e \"Salento\" – zona cuscinetto) ;",
+   "aree di 100 m lungo le strade di grande percorrenza su entrambi i lati e aree limitrofe a tutti i centri di rimessaggio, stazioni di servizio, agriturismi, parcheggi aperti al pubblico (Aree delimitate \"Valle D 'Itria\" e \"Salento\" – zona cuscinetto);",
+   "area di 1 km dei comuni limitrofi alla regione Basilicata (Area indenne);",
+   "Nel suddetto Piano d'azione, la zona infetta \"Valle D'Itria\" è stata considerata un territorio con un livello di rischio fitosanitario molto alto, in cui applicare la sorveglianza di tutte le superfici investite a: olivo, mandorlo, ciliegio, macchia, boschi e verde urbano, ivi ricadenti;",
+   "il numero dei focolai è passato da 8 nel 2020 (con 67 piante infette) a 37 nel 2023 (con 307 piante infette), distribuiti tra: Monopoli, Polignano a Mare, Castellana Grotte, Alberobello"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "nell'intero agro comunale dei comuni di Polignano, Monopoli e Alberobello;",
+   "nell'area di 100 m attorno ai siti in cui c'è un notevole passaggio e sosta di veicoli, presenti nei comuni succitati e lungo le strade di grande percorrenza;",
+   "nell'area larga 400 m posta a nord della zona in cui si applicano misure di contenimento che si estende dallo Jonio all'Adriatico;",
+   "area larga 400 m (da 50 a 450 m) intorno al buffer di 50 m di ciascuna pianta risultata infetta nel monitoraggio 2022 (Area delimitata \"Salento\"- zona infetta in cui si attuano misure di contenimento);",
+   "area larga 400 m al confine con la zona contenimento Salento e i comuni di Polignano, Monopoli, Alberobello e parte di Castellana Grotte, dallo Jonio all'Adriatico (Aree delimitate \"Valle D 'Itria\" e \"Salento\" – zona cuscinetto) ;",
+   "aree di 100 m lungo le strade di grande percorrenza su entrambi i lati e aree limitrofe a tutti i centri di rimessaggio, stazioni di servizio, agriturismi, parcheggi aperti al pubblico (Aree delimitate \"Valle D 'Itria\" e \"Salento\" – zona cuscinetto);",
+   "area di 1 km dei comuni limitrofi alla regione Basilicata (Area indenne);",
+   "Nel suddetto Piano d'azione, la zona infetta \"Valle D'Itria\" è stata considerata un territorio con un livello di rischio fitosanitario molto alto, in cui applicare la sorveglianza di tutte le superfici investite a: olivo, mandorlo, ciliegio, macchia, boschi e verde urbano, ivi ricadenti;",
+   "il numero dei focolai è passato da 8 nel 2020 (con 67 piante infette) a 37 nel 2023 (con 307 piante infette), distribuiti tra: Monopoli, Polignano a Mare, Castellana Grotte, Alberobello"
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}

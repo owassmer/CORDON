@@ -1,0 +1,91 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+ "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "dfeedd0225f7e265f1771a920c71447d619780996046a82447b0b79f4b45b5e3",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:19:33.931895+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "envelope": {
+  "duration_ms": 13338,
+  "num_turns": 4,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 7409,
+   "cache_read_input_tokens": 8042,
+   "output_tokens": 1220,
+   "output_tokens_details": {
+    "thinking_tokens": 35
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 7409,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 1058,
+     "cache_read_input_tokens": 5756,
+     "cache_creation_input_tokens": 3939,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 3939
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "stop_reason": "tool_use",
+  "total_cost_usd": 0.046458400000000004,
+  "session_id": "6aa140e7-aaae-4f64-9c45-237705681547"
+ },
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti rispettivamente da una zona infetta di 50 m attorno ai 6 mandorli infetti;",
+   "zona cuscinetto di 2,5 km di raggio attorno alle zone infette.",
+   "Di rappresentare con l’Allegato 1, parte integrante e sostanziale del presente provvedimento, i limiti geografici territoriali a livello regionale della zona “infetta” e “cuscinetto” dell’area delimitata a Xylella fastidiosa sottospecie fastidiosa;",
+   "Di rappresentare con l’Allegato 1 bis, parte integrante del presente atto, il dettaglio dei 3 focolai puntiformi siti in agro di Triggiano (BA).",
+   "Di riportare nell’Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona “infetta” e “cuscinetto” dei 3 focolai puntiformi in agro di Triggiano (BA).",
+   "Di adottare nell’area delimitata a Xylella fastidiosa sottospecie fastidiosa misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Di applicare le misure fitosanitarie obbligatorie prescritte dall’Osservatorio Fitosanitario in tutte le particelle catastali che rientrano anche parzialmente nell’ area delimitata.",
+   "Di definire con uno specifico provvedimento il piano di azione per Xylella fastidiosa sottospecie fastidiosa.",
+   "Di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l’ulteriore diffusione della malattia.",
+   "Di istituire l’area delimitata a Xylella fastidiosa sottospecie fastidiosa, ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201, costituita da: n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti rispettivamente da una zona infetta di 50 m attorno ai 6 mandorli infetti; zona cuscinetto di 2,5 km di raggio attorno alle zone infette."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [],
+  "unattached": [
+   "n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti rispettivamente da una zona infetta di 50 m attorno ai 6 mandorli infetti;",
+   "zona cuscinetto di 2,5 km di raggio attorno alle zone infette.",
+   "Di rappresentare con l’Allegato 1, parte integrante e sostanziale del presente provvedimento, i limiti geografici territoriali a livello regionale della zona “infetta” e “cuscinetto” dell’area delimitata a Xylella fastidiosa sottospecie fastidiosa;",
+   "Di rappresentare con l’Allegato 1 bis, parte integrante del presente atto, il dettaglio dei 3 focolai puntiformi siti in agro di Triggiano (BA).",
+   "Di riportare nell’Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona “infetta” e “cuscinetto” dei 3 focolai puntiformi in agro di Triggiano (BA).",
+   "Di adottare nell’area delimitata a Xylella fastidiosa sottospecie fastidiosa misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Di applicare le misure fitosanitarie obbligatorie prescritte dall’Osservatorio Fitosanitario in tutte le particelle catastali che rientrano anche parzialmente nell’ area delimitata.",
+   "Di definire con uno specifico provvedimento il piano di azione per Xylella fastidiosa sottospecie fastidiosa.",
+   "Di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l’ulteriore diffusione della malattia.",
+   "Di istituire l’area delimitata a Xylella fastidiosa sottospecie fastidiosa, ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201, costituita da: n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti rispettivamente da una zona infetta di 50 m attorno ai 6 mandorli infetti; zona cuscinetto di 2,5 km di raggio attorno alle zone infette."
+  ],
+  "uncertain": [],
+  "native_tables_accounted": [],
+  "tables_visible": 0
+ },
+ "resolution_problems": []
+}
