@@ -25,6 +25,45 @@ def classify(text):
     return RESULTS.get(' '.join(text.casefold().split()), 'unclassified') if text else 'unread'
 
 
+def _leading_mark(text):
+    """The printed marker a note begins with ('*', '**', 'a'), or None."""
+    match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(])', text or '')
+    return match[1] if match else None
+
+
+def resolve_marks(result, scoped):
+    """A trailing printed mark on a result literal classifies only through the note it points at.
+
+    The source reader may already have separated `result_value` from an annotation; this
+    handles the cell it returned whole. A mark is separated only where a result
+    qualification recovered from the same document, scoped to this row, begins with that
+    mark; the base is then classified and the note travels with the row as it already does.
+    A mark with no recovered note leaves the result unclassified and names that cause. The
+    complete literal survives either way.
+    """
+    if result.kind != 'unclassified' or not result.text:
+        return result
+    marks = {mark for fact in scoped if fact.get('role') == 'result_qualification'
+             for mark in [_leading_mark(fact.get('text'))] if mark}
+    base, used = result.text.strip().casefold(), []
+    while True:
+        mark = next((m for m in sorted(marks, key=len, reverse=True)
+                     if base.endswith(m) and len(base) > len(m)), None)
+        if mark is None:
+            break
+        base, used = base[:-len(mark)].rstrip(), used + [mark]
+    if used and classify(base) != 'unclassified':
+        return replace(result, kind=classify(base))
+    text = result.text.strip().casefold()
+    for n in (1, 2, 3):
+        if n >= len(text):
+            break
+        mark, unmarked = text[-n:], text[:-n]
+        if re.fullmatch(r'(\*+|[a-z]|\*+[a-z]|[a-z]\*+)', mark) and classify(unmarked.strip()) != 'unclassified':
+            return replace(result, cause='printed mark; note not recovered by the reading')
+    return result
+
+
 def link_section_marks(facts):
     """Resolve unique printed § anchors on one page, retaining the derivation."""
     notes = {}
@@ -697,6 +736,7 @@ def materialize(digest, version, page_count, blocks):
                                      direct_scopes.intersection(f['applies_to']))
                 dates += shared_dates
                 generic = sole('identifier')
+                results = [resolve_marks(result, scoped) for result in results]
                 rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),
                                 dates, tuple(cells), tuple(results), scoped, table.get('projection')))
     missing = set(range(1, page_count + 1)) - encountered

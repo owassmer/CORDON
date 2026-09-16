@@ -201,6 +201,24 @@ class ReportRelationships(unittest.TestCase):
         self.assertEqual(edge['successor_identity']['date'], '01/03/2023')
         self.assertEqual(edge['changed_columns'], [])
 
+    def test_unresolved_predecessor_cause_names_what_is_absent(self):
+        unheld = dict(issuer='Laboratory A', number='30/2024', date='01/01/2024', protocol=None)
+        replaces = reading(previous=unheld, effect='replaces')
+        annex = reading(previous=unheld, effect='annex')
+        amends = reading(previous=unheld, effect='amends')
+        edges = correspondences({'replaces': replaces, 'annex': annex, 'amends': amends})
+        by_effect = {edge['effect']: edge['cause'] for edge in edges}
+        self.assertEqual(by_effect['replaces'],
+            'predecessor not held or not identified; this rendition is current and the replaced rendition is absent as history')
+        self.assertEqual(by_effect['annex'],
+            'the report this annex belongs to is not held or not identified; these rows stand and the fuller report is absent')
+        self.assertEqual(by_effect['amends'],
+            'the amended base is not held or not identified; these rows stand and the unamended rows of the base are absent')
+        old = reading()
+        new = reading(date='04/03/2024', previous=old.relations['identity'])
+        edge, = correspondences({'old': old, 'another': reading(), 'new': new})
+        self.assertTrue(edge['cause'].startswith('predecessor ambiguous among retained readings: '))
+
 
 if __name__ == '__main__':
     unittest.main()

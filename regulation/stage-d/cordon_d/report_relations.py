@@ -309,6 +309,17 @@ def correspondences(readings):
                     if previous.get('protocol') and identity.get('protocol') and norm(previous['protocol']) != norm(identity['protocol']):
                         continue
                     candidates.append(digest)
+            existing = 'predecessor not uniquely identified in retained relationship readings'
+            if len(candidates) == 0:
+                cause = {
+                    'replaces': 'predecessor not held or not identified; this rendition is current and the replaced rendition is absent as history',
+                    'annex': 'the report this annex belongs to is not held or not identified; these rows stand and the fuller report is absent',
+                    'amends': 'the amended base is not held or not identified; these rows stand and the unamended rows of the base are absent',
+                }.get(correction['effect'], existing)
+            elif len(candidates) > 1:
+                cause = 'predecessor ambiguous among retained readings: ' + existing
+            else:
+                cause = None
             edge = dict(successor=successor, predecessor=candidates[0] if len(candidates) == 1 else None,
                 candidates=sorted(candidates), effect=correction['effect'], scope=correction['scope'],
                 changed_columns=correction['changed_columns'] if correction['effect'] == 'amends' else [],
@@ -316,7 +327,7 @@ def correspondences(readings):
                 declared_predecessor=previous, successor_identity=own,
                 basis='model-proposed source relationship and unique retained issuer/report identity',
                 provenance='model_proposed_reading',
-                cause=None if len(candidates) == 1 else 'predecessor not uniquely identified in retained relationship readings')
+                cause=cause)
             if edge['predecessor']:
                 identity = identities[edge['predecessor']]
                 old_date, new_date = dated(identity.get('date')), dated(own.get('date'))

@@ -937,6 +937,33 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(literal_date('29/02/2023').cause, 'invalid_calendar_date')
         self.assertEqual(literal_date('last Tuesday').cause, 'unparsed_date_literal')
 
+    def test_printed_mark_classifies_only_through_its_recovered_note(self):
+        # CNR prints "non rilevato*" with "*Prova non accreditata da Accredia." below the table.
+        item = block([['123', '02/06/2024', 'non rilevato*', '03/06/2024'],
+                      ['124', '02/06/2024', 'rilevatoa', '03/06/2024'],
+                      ['125', '02/06/2024', 'Positivo**', '03/06/2024']])
+        item['reading']['facts'] = [
+            {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': '*Prova non accreditata da Accredia.', 'value': None, 'applies_to': ['p1-t1/r1']},
+            {'id': 'f2', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': "a L'esito si riferisce a ciascun campione suddiviso in aliquote.", 'value': None,
+             'applies_to': ['p1-t1/c3']}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        first, second, third = (row.results[0] for row in rows)
+        self.assertEqual((first.kind, first.text, first.cause), ('not-detected', 'non rilevato*', None))
+        self.assertIn('f1', {f['id'].split('/')[-1] for f in rows[0].facts})
+        self.assertEqual((second.kind, second.text), ('detected', 'rilevatoa'))
+        # A mark no recovered note explains keeps the result unclassified and says why.
+        self.assertEqual((third.kind, third.cause), ('unclassified', 'printed mark; note not recovered by the reading'))
+        # A note is never a licence to strip: a bare literal without a mark is untouched, and a
+        # word that merely ends in the marker letter is not a marked result.
+        item = block([['126', '02/06/2024', 'rilevata', '03/06/2024'], ['127', '02/06/2024', 'Sospetto', '03/06/2024']])
+        item['reading']['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                     'text': 'a nota', 'value': None, 'applies_to': ['report']}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
+        self.assertIsNone(rows[1].results[0].cause)
+
     def test_an_omitted_detected_table_cannot_claim_page_coverage(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
         item['native_regions'] = [{'id': 'n1', 'page': 1}]
