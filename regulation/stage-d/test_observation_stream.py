@@ -263,6 +263,31 @@ class ObservationStream(unittest.TestCase):
             with self.assertRaises(MissingInput):
                 metric_point(observation, context='test', event_date=date(2022, 3, 4), root=store_root(self.root))
 
+    def test_separate_qualification_reaches_distance_consumer(self):
+        from dataclasses import replace
+        from shapely.geometry import Point
+        from cordon_c.spatial import MetricGeometry, distance_test
+        from cordon_d.evidence import Support
+        from cordon_d.spatial import SpatialQualification
+        observation = next(o for o in located_positives(self.groups) if o.crs == 'EPSG:32633')
+        qualification = SpatialQualification(observation.occurrence, 'distance-domain', date(2022, 3, 4),
+            observation.crs, observation.crs, 10, observation.sources,
+            (Support(observation.sources[0].identity, 'fixture spatial qualification',
+                     'Fixture establishes identity, applicability and total enclosing error of 10 m.'),))
+        point = metric_point(observation, context=qualification.context, event_date=qualification.event_date,
+                             root=store_root(self.root), qualification=qualification)
+        self.assertEqual(point.error_m, 10)
+        for separation, expected in [(3, True), (50, None), (80, False)]:
+            other = MetricGeometry(Point(point.geometry.x + separation, point.geometry.y), point.crs, 10)
+            self.assertIs(distance_test(point, other, 50, '<=').truth, expected)
+        with self.assertRaises(ValueError):
+            metric_point(observation, context='another-domain', event_date=qualification.event_date,
+                         root=store_root(self.root), qualification=qualification)
+        changed = replace(observation, sources=(replace(observation.sources[0], sha256='0' * 64),))
+        with self.assertRaisesRegex(ValueError, 'Source changed'):
+            metric_point(changed, context=qualification.context, event_date=qualification.event_date,
+                         root=store_root(self.root), qualification=qualification)
+
     def test_bytes_live_in_the_store_once_and_the_tree_keeps_only_records(self):
         store = store_root(self.root)
         self.assertEqual(store.resolve(), (Path(self.directory.name) / 'store').resolve())

@@ -7,7 +7,7 @@ established; no other row is.
 
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
-| What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
+| What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Observation stream established; positional qualification remains open below. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
 | What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The seven supplied PDFs have completed page and relationship readings; the remaining population is being read and joined through the same path. Subscription vision is running independently of consumer and implementation work. Current consumer results and consequential source work below. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
@@ -53,7 +53,7 @@ reference, and one has no readable day.
 | `RISULTATO` | The publisher's label: Positivo, Negativo, Dubbio, In attesa, Positivo duplicato, Da ricampionare, Ispezione visiva, Sintomatico, Positivo estirpato. A blank is unpublished. A duplicate label restates the positive it accompanies and is not a positive by itself. The label is the observation-result part of `official-finding` and `survey-performance`; the laboratory diagnosis is the report's; official confirmation remains the Service's decision. |
 | `SPECIE`, `CULTIVAR`, `SUBSPECIE` | Recorded host, cultivar and sample-level subspecies. A view's subspecies title is context and is never substituted for an absent sample-level identification. Every host and every result state is retained. |
 | `SINTOMO`, `SINTOMI` | Recorded visible drying symptoms. `Presente` and `Assente` become presence and absence; the unexplained code `0` stays unknown. The publisher states that drying symptoms are not a diagnosis. |
-| Native geometry and spatial reference, `LONGITUDINE`, `LATITUDINE` | The published location, read into one frame. The SIT services state EPSG:32633 on every page. The campaign releases publish degrees and state no datum anywhere — not in the CKAN package, the download page, a sheet, a header or a legend — and those degrees are EPSG:4326, established from the publisher's own redundancy: over 1,279,135 testable pairs — an observation published both ways, with one point on each side — the stated SIT point reproduces the printed pair to under a centimetre, while ED50 and Monte Mario / Roma 40 miss by 127 m and 71 m. `scripts/check_frames.py` re-derives that per release from the store and fails when one stops fitting; `SPEC.md` says when it runs. Three releases cannot be tested that way: `CAMP_2013_2014`, `CAMP_2014_2015` and `CAMP_2016_2017` publish no observation reference in any of their 221,397 located rows, so nothing pairs them to a SIT publication by identity. Their frame rests instead on same-day proximity, because a datum shift translates a whole point cloud and shows without identity — `CAMP_2014_2015` and `CAMP_2016_2017` place 100% of their points within a centimetre of a same-day SIT point, and `CAMP_2013_2014` places 99.05%, where ED50 would put them 128 m away. That last figure is the weakest ground in the family and sits 0.05 points above the agreement the check requires, so a recapture of that release is the one to read rather than assume. What the redundancy cannot separate is which frame of that datum family the publisher would name: without an epoch the transformation between EPSG:4326 and EPSG:4258 is the identity, so both reproduce the printed pair exactly and the check reports them as tied. What it excludes are the frames that would move a location. The frame belongs to the pair rather than to the record: a service states its spatial reference for the geometry it publishes, and seventeen of these layers print degree columns beside that geometry, so degrees taken from the columns are read at EPSG:4326 whatever the page declared for its geometry. A pair this reader cannot place in the frame beside it is not carried, and its absence says so. Because every location has a frame, the publications of one observation are compared in one frame rather than held apart by the frame they were printed in; what a consumer receives is still a pair a publisher printed, in the frame that publisher stated, because the reprojection is this reader's and belongs under no value the operator reads as published. No source states positional error, so metric use waits for the population row's qualification. |
+| Native geometry and spatial reference, `LONGITUDINE`, `LATITUDINE` | The published location, read into one frame. The SIT services state EPSG:32633 on every page. The campaign releases publish degrees and state no datum anywhere — not in the CKAN package, the download page, a sheet, a header or a legend — and those degrees are EPSG:4326, established from the publisher's own redundancy: over 1,279,135 testable pairs — an observation published both ways, with one point on each side — the stated SIT point reproduces the printed pair to under a centimetre, while ED50 and Monte Mario / Roma 40 miss by 127 m and 71 m. `scripts/check_frames.py` re-derives that per release from the store and fails when one stops fitting; `SPEC.md` says when it runs. Three releases cannot be tested that way: `CAMP_2013_2014`, `CAMP_2014_2015` and `CAMP_2016_2017` publish no observation reference in any of their 221,397 located rows, so nothing pairs them to a SIT publication by identity. Their frame rests instead on same-day proximity, because a datum shift translates a whole point cloud and shows without identity — `CAMP_2014_2015` and `CAMP_2016_2017` place 100% of their points within a centimetre of a same-day SIT point, and `CAMP_2013_2014` places 99.05%, where ED50 would put them 128 m away. That last figure is the weakest ground in the family and sits 0.05 points above the agreement the check requires, so a recapture of that release is the one to read rather than assume. What the redundancy cannot separate is which frame of that datum family the publisher would name: without an epoch the transformation between EPSG:4326 and EPSG:4258 is the identity, so both reproduce the printed pair exactly and the check reports them as tied. What it excludes are the frames that would move a location. The frame belongs to the pair rather than to the record: a service states its spatial reference for the geometry it publishes, and seventeen of these layers print degree columns beside that geometry, so degrees taken from the columns are read at EPSG:4326 whatever the page declared for its geometry. A pair this reader cannot place in the frame beside it is not carried, and its absence says so. Because every location has a frame, the publications of one observation are compared in one frame rather than held apart by the frame they were printed in; what a consumer receives is still a pair a publisher printed, in the frame that publisher stated, because the reprojection is this reader's and belongs under no value the operator reads as published. No monitoring source states positional error; metric use requires the separate qualification owned by this observation row. |
 | `COMUNE`, `COMUNE_COD`, `PROVINCIA`, `LOCALITA`, `ALTITUDINE` | The observation's own administrative location. `COMUNE_COD` is the ISTAT municipality code; the cadastral code is `COD_COMUNE`, which belongs to the parcel row. `LOCALITA` and `ALTITUDINE` are read and neither supplies a value: all 86 records publishing `LOCALITA` carry a sentinel, and all 86 publishing `ALTITUDINE` carry nothing. Those are different absences with different remedies, which is the distinction this row exists to keep. |
 | `SQUADRA`, `TECNICO`, `COD_TECNICI`, the inspector-name columns, `NOME_DISPOSITIVO`, `IMEI`, `CODICE_CAMPIONAMENTO`, `STATO`, `NOTE_RILEVATORE`, `NOTE`, `NOTE_SIT`, `CRITICITA_NOTE` | Who performed the observation, with what instrument, in which campaign, and what they noted. One fact under several publisher names: the 2016 infrastructure survey prints a team code and per-inspector columns where later releases print `TECNICO`. `CODICE_CAMPIONAMENTO` names a campaign shared by hundreds of records and is never an identity. A note, a device name and a publication status describe the publication rather than the observation, so they are read and not compared. |
 | `DOCUMENTO_CONFERMA`, `LNK_DOCUMENTO_SELGE` | The literal route to the laboratory report, under the column that published it: 22,206 and 8,762 routes. The document itself is unread here. |
@@ -406,3 +406,82 @@ SPEC.md. This supplies subscription access, not their missing whole-measure mean
 or consumer connections. Their source-specific contract and first full
 source-to-consumer qualification remain with PR #15; no measure-reading coverage
 or production dispatch is established by the transport change.
+
+
+## Monitoring positional qualification
+
+The monitoring frame is established; its ground-position error is separate work on
+PR #14. The population is every located positive in the retained monitoring releases,
+independent of whether a measurement succeeds. Establish source-linked plant identity
+and an independent position or enclosure, then derive the greatest displacement from
+the published point, including reference, delineation, transformation and
+consuming-domain grid-to-ground distortion error. Empirical establishment is allowed;
+no publisher-only accuracy restriction applies.
+
+The retained DDS 45/2025, physical page 28 (annex printed page 21), directs the
+recorder to stand at the canopy edge; page 30 (printed page 23) requires a whole-plant
+photograph with identifying landmarks. A monitoring coordinate is therefore not
+a source-stated stem-centre measurement. Page 43 lists the sample coordinates
+available to laboratories: a report repeating those coordinates is not independent
+position evidence. Sufficient evidence must independently identify the sampled subject and its
+event-time position or enclosure. The earlier Noicattaro examples (1968569 and
+1968577, sampled 5 August 2026) are unresolved instances, not a gate or a limit
+on the affected population. Original identifying
+photographs, sampling records or an equivalent source can establish this; a
+prescribed bundle of every document type is not required. If imagery supplies the
+reference, establish the relevant image's acquisition date and a defensible
+position/delineation error, using publisher assessment or independent control.
+A nominal pixel size cannot do that.
+
+The ordinary monitoring output reaches `metric_point` only with a separate
+occurrence-, event-date- and context-specific qualification. The adapter verifies
+all listed source bytes, including when the observation has no spatial support
+of its own. Its fixture exercises C's distance consumer; no real observation has
+a recomputable bound yet. Coordinate agreement, nominal pixel size, a nearest-crown
+edge residual and a sample maximum do not independently establish a population
+bound. Every supported candidate must be enclosed. Original identifying photographs,
+sampling sheets and independent fix records were not recovered from the examined
+monitoring/report populations. Exploratory images and service metadata alone do
+not establish the missing identity, event-time applicability or reference error.
+The corrected register query is a usable route; earlier empty proximity results
+were a query artifact, not absent plants.
+
+The positional reference sources are retained in
+[`positional-reference/records.json`](../../corpus/sources/positional-reference/records.json).
+InnovaPuglia's *Relazione quinquennale 2020–2025*, physical pages 55–56
+(printed 31–32), connects the regional 2023 imagery to dedicated aerial flights
+under the cartographic update contract; DIT/005/2023 identifies that procurement
+as CIG 9428158A1A. The report's conformity statement concerns DBT, CTR and
+land-use 2019. DIT/202/2023 pages 3–5 commissions support for those products;
+neither statement establishes the 2023 image's physical error. The applicable
+image flight records and control results have not been recovered. The public
+award route yielded the determinations, not the technical attachments; EmPULIA
+connection timed out. This is an acquisition limit, not evidence that controls
+were absent.
+
+For the alternative AGEA 2022 reference, the SIAN remote-sensing tender's
+Allegato 7 Appendix 1, page 3, explicitly schedules Puglia in 2022. Allegato 7
+page 15 requires per-frame capture dates/times (deliverable 13), surveyed ground
+control and independent check points; page 17 requires triangulation residuals
+and identifiable control-point monographs (deliverables 16–17). Those are
+concrete routes to temporal and reference-error evidence. The specified ground
+point accuracies are requirements on control measurements, not observed accuracy
+of the served orthophoto. The executed lot, actual delivery/control results and
+correspondence to the regional service remain unverified. The AGEA download
+portal and its user manual returned HTTP 403 during direct retrieval; original
+tile metadata were therefore not inspected. No bound follows from these
+procurement sources alone.
+
+The next evidence-producing operation is to recover an applicable original
+image/block and its date and control evidence, or an equivalent independent
+surveyed reference, for an occurrence supported by the subject lane. The subject
+lane supplies physical correspondence, event-time support and unresolved
+alternatives; the administrative lane supplies independently supported target,
+parcel or location evidence where its source carries it; the area lane supplies
+the adopted geography and version used by the consumer. None of those facts alone
+qualifies the monitoring position. Their sufficient evidence can be reused without
+waiting for their entire populations to close. The positional lane must still
+enclose every supported candidate and account for reference, delineation,
+transformation and consuming-domain distortion. No real observation is qualified
+by this acquisition checkpoint, and the full located-positive population remains
+in scope.

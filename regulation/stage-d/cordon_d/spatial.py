@@ -61,10 +61,14 @@ def metric_point(observation: CoordinateObservation, *, context: str, event_date
         raise ValueError('Spatial qualification belongs to another occurrence, context or date')
     for record in (observation, qualification):
         sources = {s.identity: s for s in record.sources}
-        if len(sources) != len(record.sources) or not record.support:
+        if len(sources) != len(record.sources) or not sources or (record is qualification and not record.support):
             raise ValueError('Spatial evidence needs distinct sources and an explicit reading')
         for support in record.support:
-            source = sources[support.source]
+            if support.source not in sources:
+                raise ValueError('Spatial support names an unlisted source')
+        # Monitoring supplies the published coordinates and source bytes; the
+        # separate qualification supplies their scoped spatial interpretation.
+        for source in sources.values():
             if source.access == 'controlled' and source.identity not in permitted_controlled_sources:
                 raise MissingInput('authorized spatial qualification evidence')
             if source.role not in {'official-record', 'official-dataset', 'qualified-observation'}:
