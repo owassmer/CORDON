@@ -677,6 +677,11 @@ def _run_subscription_call(*, prompt, schema, digest, source, config, request_id
         _record_failure(raw_path, request_id, captured, {'response': envelope,
                         'stderr': completed.stderr[-2000:], 'returncode': completed.returncode})
         reason = envelope.get('errors') or envelope.get('result') or completed.stderr.strip()
+        if 'output token maximum' in str(reason):
+            # The subscription's own output ceiling, reached while emitting a long
+            # table: the same limit the metered route reports as max_tokens, and
+            # the same remedy applies - the caller partitions to single pages.
+            raise OutputLimit('Claude subscription output ceiling: ' + str(reason)[:160])
         raise RuntimeError('Claude subscription reading incomplete: ' + str(reason))
     write_json(raw_path, {'provider': 'claude-code-subscription', 'request_sha256': request_id,
                          'captured_at': captured.isoformat(), 'response': envelope})

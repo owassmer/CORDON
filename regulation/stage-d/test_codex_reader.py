@@ -94,6 +94,32 @@ class CodexReader(unittest.TestCase):
             self.assertEqual(runner.call_count, 1)
 
 
+class ClaudeOutputCeiling(unittest.TestCase):
+    def test_the_subscription_output_ceiling_is_an_output_limit_the_caller_can_partition(self):
+        from cordon_d.report_extraction import OutputLimit
+        config = ExtractionConfig(provider='subscription')
+
+        def ceiling_run(command, **kwargs):
+            class Completed:
+                returncode = 1
+                stdout = json.dumps({'is_error': True, 'subtype': 'success', 'result':
+                    "API Error: Claude's response exceeded the 32000 output token maximum. To configure this "
+                    "behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable."})
+                stderr = ''
+            return Completed()
+
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest, source = two_page_source(store)
+            raw = store / 'derived/reports/responses/request.json'
+            with patch('cordon_d.report_extraction.subprocess.run', side_effect=ceiling_run):
+                with self.assertRaises(OutputLimit):
+                    _subscription_call(prompt='Read source', schema={}, digest=digest, source=source,
+                                       config=config, request_id='request', raw_path=raw)
+            self.assertFalse(raw.exists())
+            self.assertEqual(len(list((raw.parent / 'failed').glob('request-*.json'))), 1)
+
+
 class StrictSchema(unittest.TestCase):
     def test_optional_properties_become_required_nullable_and_their_nulls_are_dropped(self):
         from cordon_d.report_extraction import strict_schema, drop_optional_nulls, output_schema
