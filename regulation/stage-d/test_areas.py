@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from cordon_d.areas import (CadastralStatement, Sheet, annexes, read_scope,
                             versions, zone_of, membership_evidence, _zone_from,
                             MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
-                            RECOVERED_NOT_ATTACHED, RECOVERED_UNADJUDICATED, SOURCE_STATES_NONE,
+                            RECOVERED_NOT_ATTACHED, SOURCE_STATES_NONE,
                             pinned_statements, published_geography)
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -341,6 +341,53 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         _, assertions = membership_evidence((version,), ROOT, day, comune='GINOSA', foglio='36', particella='5')
         self.assertEqual(assertions, ())
 
+    def test_a_whole_province_statement_the_question_cannot_name_is_reported(self):
+        # DDS 127/2022 places the whole provinces of Lecce and Brindisi in the
+        # infected zone and lists Fasano's containment sheets. A question that
+        # carries no province cannot be placed in a province here, and the
+        # strictest zone the act states must not vanish from the answer, nor
+        # a Lecce comune read like Milan.
+        day = date(2023, 6, 1)
+        version = next(v for v in self.versions if '2022-00127' in v.provision_version_id)
+        def bases(**q):
+            return zone_of((version,), day, **q)
+        fasano = bases(comune='FASANO', foglio='20', particella='3')
+        self.assertEqual({a.get('reached_zone') for a in fasano} - {None}, {'contenimento'})
+        self.assertEqual({a.get('unaddressed_zone') for a in fasano} - {None}, {'infetta'})
+        # Each province the act names is reported, once.
+        self.assertEqual(sorted(a['statement'].province for a in fasano if a.get('unaddressed_zone')),
+                         ['BRINDISI', 'LECCE'])
+        with_province = bases(comune='FASANO', foglio='20', particella='3', province='BRINDISI')
+        self.assertIn('infetta', [a['zone'] for a in with_province])
+        self.assertFalse(any(a.get('unaddressed_zone') for a in with_province))
+        galatina = bases(comune='GALATINA', foglio='10', particella='5')
+        self.assertEqual({a.get('unaddressed_zone') for a in galatina}, {'infetta'})
+        self.assertTrue(all('no cadastral statement establishes' not in a['basis'] for a in galatina))
+        # Without a province the reader cannot tell a Lecce comune from Milan; it
+        # says so through the same unaddressed statement rather than declaring
+        # either place unmentioned. An act with no whole-province statement
+        # still answers an unmentioned place as unmentioned.
+        milano = bases(comune='MILANO', foglio='1', particella='1')
+        self.assertEqual({a.get('unaddressed_zone') for a in milano}, {'infetta'})
+        self.assertFalse(any(a.get('reached_zone') or a['zone'] for a in milano))
+        ginosa_act = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        self.assertEqual([a['basis'] for a in zone_of((ginosa_act,), date(2025, 7, 1), comune='MILANO', foglio='1')],
+                         ['no cadastral statement establishes membership for this place'])
+        # Neither unaddressed answer reaches the accepted consumer as an assertion.
+        _, assertions = membership_evidence((version,), ROOT, day, comune='GALATINA', foglio='10', particella='5')
+        self.assertEqual(assertions, ())
+
+    def test_a_comune_listed_by_sheets_asked_without_a_sheet_is_reached(self):
+        # A monitoring record carries a comune and rarely a sheet. The act that
+        # lists Fasano's sheets is not silent about Fasano.
+        day = date(2023, 6, 1)
+        version = next(v for v in self.versions if '2022-00127' in v.provision_version_id)
+        fasano = zone_of((version,), day, comune='FASANO')
+        self.assertEqual({a.get('reached_zone') for a in fasano} - {None}, {'contenimento'})
+        self.assertTrue(any('names no sheet' in a['basis'] for a in fasano))
+        milano = zone_of((version,), day, comune='MILANO')
+        self.assertNotEqual([a['basis'] for a in fasano], [a['basis'] for a in milano])
+
     def test_a_response_cut_off_by_the_model_is_not_a_page_read(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
@@ -362,7 +409,7 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
 
     def test_the_causes_are_distinguishable(self):
         vocabulary = {SOURCE_STATES_NONE, MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
-                      RECOVERED_NOT_ATTACHED, RECOVERED_UNADJUDICATED}
+                      RECOVERED_NOT_ATTACHED}
         causes = {c.split(':')[0] for v in self.versions for c in v.absence}
         self.assertTrue(causes <= vocabulary, causes - vocabulary)
         # The population exercises three of them whatever the state of reading:
@@ -456,26 +503,27 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         from cordon_d.store import blob_path, store_root
         day = date(2025, 7, 1)
         version = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
-        record = act_documents(ROOT)[version.instrument_id]
-        if not blob_path(store_root(ROOT), record['sha256']).exists():
-            # The evidence object verifies the act's bytes; without the store this
-            # check has no source to verify against and says so instead of passing.
-            self.skipTest('the act document is not in the content-addressed store here')
-        snapshot = Snapshot.load(ROOT)
-        evidence, assertions = evidence_for((version,), ROOT, day, snapshot=snapshot,
-                                            comune='GINOSA', foglio='29', particella='5')
+        # The assertions themselves need no source bytes and are checked everywhere.
+        _, assertions = membership_evidence((version,), ROOT, day, comune='GINOSA', foglio='29', particella='5')
         self.assertEqual(len(assertions), 1)
         self.assertEqual(assertions[0].contract, 'adopted-geography')
         self.assertIn('cuscinetto', assertions[0].identity)
-        self.assertTrue(evidence)
-        _, none = evidence_for((version,), ROOT, day, snapshot=snapshot,
-                               comune='GINOSA', foglio='36', particella='5')
+        _, none = membership_evidence((version,), ROOT, day, comune='GINOSA', foglio='36', particella='5')
         self.assertEqual(none, ())
         # The same parcel answers identically whatever the caller calls the province.
         for province in ('TA', 'TARANTO', None):
-            _, again = evidence_for((version,), ROOT, day, snapshot=snapshot, province=province,
-                                    comune='GINOSA', foglio='29', particella='5')
+            _, again = membership_evidence((version,), ROOT, day, province=province,
+                                           comune='GINOSA', foglio='29', particella='5')
             self.assertEqual(len(again), 1, province)
+        record = act_documents(ROOT)[version.instrument_id]
+        if not blob_path(store_root(ROOT), record['sha256']).exists():
+            # The evidence object verifies the act's bytes; without the store that
+            # last step has no source to verify against and says so.
+            self.skipTest('the act document is not in the content-addressed store here')
+        evidence, admitted = evidence_for((version,), ROOT, day, snapshot=Snapshot.load(ROOT),
+                                          comune='GINOSA', foglio='29', particella='5')
+        self.assertEqual(len(admitted), 1)
+        self.assertTrue(evidence)
 
     def test_retained_section_boundaries_survive_to_membership(self):
         cases = [('2024-00093', 'A', '76', 'p9 table 2 row 1'),

@@ -61,7 +61,6 @@ SOURCE_STATES_NONE = 'the source does not state the fact'
 MATERIAL_NOT_HELD = 'the material is not held'
 READING_DID_NOT_RECOVER = 'our reading did not recover it'
 RECOVERED_NOT_ATTACHED = 'it was recovered and could not be attached'
-RECOVERED_UNADJUDICATED = 'it was recovered and remains unadjudicated'
 
 # An act adopts an annex when it names one as an integral part of itself. The
 # acts write that both ways round - "Allegato 1 ... parte integrante" and
@@ -615,7 +614,7 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
     """
     answers = []
     for version in in_force(versions_, day):
-        zones_given, zones_reached = set(), set()
+        zones_given, zones_reached, provinces_unaddressed = set(), set(), set()
         for statement in version.statements:
             verdict = statement.covers(comune=comune, province=province, section=section,
                                        foglio=foglio, particella=particella, grain=grain)
@@ -624,15 +623,16 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                 answers.append({'version': version.provision_version_id, 'zone': statement.zone,
                                 'regime': statement.regime,
                                 'basis': 'act cadastral statement', 'statement': statement})
-            elif verdict is None and statement.zone not in zones_given | zones_reached:
+            elif verdict is None and (statement.scope == 'whole-province'
+                                      or statement.zone not in zones_given | zones_reached):
                 # The act reaches the place and stops short of deciding it at
                 # the grain asked: an unstarred sheet the zone cuts through, or
                 # a part of the comune whose extent the table does not state.
                 # That is a different answer from an act that never mentions
                 # the place - here the adopted map decides, there nothing does -
                 # and the two were reaching the operator as one sentence.
-                reached = statement.scope == 'part-comune-extent-unstated' and comune is not None \
-                    and (statement.comune or '').upper() == comune.upper()
+                same_comune = comune is not None and (statement.comune or '').upper() == comune.upper()
+                reached = statement.scope == 'part-comune-extent-unstated' and same_comune
                 if not reached and grain == 'parcel' and foglio is not None:
                     reached = statement.covers(comune=comune, province=province, section=section,
                                                foglio=foglio, grain='sheet') is True
@@ -643,6 +643,30 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                                     'basis': (f'the act reaches this place in its {statement.zone} zone '
                                               'and does not state which part of it lies inside; the '
                                               'adopted map decides the parcel'),
+                                    'statement': statement})
+                elif statement.scope == 'sheets' and same_comune and foglio is None:
+                    # The act reaches this comune by listed sheets and the question
+                    # names none - the ordinary shape of a monitoring record, which
+                    # carries a comune and rarely a sheet. The act is not silent.
+                    zones_reached.add(statement.zone)
+                    answers.append({'version': version.provision_version_id, 'zone': None,
+                                    'reached_zone': statement.zone, 'regime': statement.regime,
+                                    'basis': (f'the act reaches {statement.comune} by listed sheets in its '
+                                              f'{statement.zone} zone; this question names no sheet'),
+                                    'statement': statement})
+                elif statement.scope == 'whole-province' and province is None \
+                        and (statement.zone, statement.province) not in provinces_unaddressed:
+                    # The act places a whole province in a zone and the question
+                    # names no province. Whether this place lies in that province
+                    # is not known here; the statement is unaddressed, not absent,
+                    # and each province the act names is reported once.
+                    provinces_unaddressed.add((statement.zone, statement.province))
+                    answers.append({'version': version.provision_version_id, 'zone': None,
+                                    'unaddressed_zone': statement.zone, 'regime': statement.regime,
+                                    'basis': (f'the act places the whole province of {statement.province} '
+                                              f'in its {statement.zone} zone; this question names no '
+                                              'province, and nothing here resolves a municipality to '
+                                              'its province'),
                                     'statement': statement})
         # Every version in force accounts for itself. A version that supplies
         # nothing and says nothing is indistinguishable from a version that is
@@ -655,7 +679,8 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                             'basis': READING_DID_NOT_RECOVER
                                      + ': part of this act\'s annex was not read',
                             'unresolved': len(version.unresolved)})
-        if not zones_given and not zones_reached and not version.absence and not version.unresolved:
+        if not zones_given and not zones_reached and not provinces_unaddressed \
+                and not version.absence and not version.unresolved:
             answers.append({'version': version.provision_version_id, 'zone': None,
                             'basis': 'no cadastral statement establishes membership for this place'})
     return tuple(answers)
