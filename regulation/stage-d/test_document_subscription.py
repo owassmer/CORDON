@@ -10,7 +10,7 @@ import pymupdf
 from jsonschema.exceptions import SchemaError, ValidationError
 from referencing.exceptions import Unresolvable
 
-from cordon_d.document_subscription import read_documents
+from cordon_d.document_subscription import read_documents, read_retained
 from cordon_d.store import put_bytes
 
 
@@ -53,6 +53,20 @@ class DocumentSubscriptionTests(unittest.TestCase):
             self.read(execute=True)
         with self.assertRaises(FileNotFoundError):
             self.read(effort='medium')
+
+    def test_named_replay_preserves_original_context_and_checks_request_integrity(self):
+        with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}') as call:
+            response = self.read(execute=True)
+            request_id = response['request_sha256']
+            replayed = read_retained(request_id, self.store)
+            self.assertEqual(replayed, response)
+            self.assertEqual(call.call_count, 1)
+        retained = self.store / 'derived/document-readings' / (request_id + '.json')
+        altered = json.loads(retained.read_text())
+        altered['request']['prompt'] = 'Different evidence'
+        retained.write_text(json.dumps(altered))
+        with self.assertRaisesRegex(ValueError, 'identity mismatch'):
+            read_retained(request_id, self.store)
 
     def test_concurrent_identical_requests_dispatch_once(self):
         with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}') as call:

@@ -141,3 +141,64 @@ def read_publications(annual_paths, detail_sources, *, publisher: str):
                 **row.values,
                 'detail_candidates': [asdict(detail) for detail in matches],
             })
+
+
+def parsec_publication_declarations(path: Path, *, publisher: str, source_url: str):
+    """Read native Parsec rows, including a retained ICEfaces table response.
+
+    Register number, requesting office, subject and attachment routes remain
+    source fields. Neither a referenced act nor a PEC subject identifies the
+    attached document's legal effect or proves recipient delivery.
+    """
+    import re
+    from urllib.parse import urljoin
+    from xml.etree import ElementTree
+    from bs4 import BeautifulSoup
+    from .evidence import file_digest
+    from .releases import Occurrence
+
+    if not publisher.strip() or not source_url:
+        raise ValueError('Publication declarations need their publisher and source URL')
+    path = Path(path)
+    content = path.read_bytes()
+    if content.lstrip().startswith(b'<partial-response>'):
+        updates = [e for e in ElementTree.fromstring(content).findall('.//update')
+                   if e.get('id', '').endswith(':elencoPubblicazioni')]
+        if len(updates) != 1:
+            raise ValueError('Expected the native publication table update')
+        content = updates[0].text or ''
+    soup = BeautifulSoup(content, 'html.parser')
+    tables = soup.select('div[id$=":elencoPubblicazioni"] > div > table')
+    if len(tables) != 1:
+        raise ValueError('Expected one native Parsec publication table')
+    table = tables[0]
+    headers = [e.get_text(' ', strip=True) for e in table.select('thead > tr > th')]
+    required = {'Nro', 'Tipo atto', 'Oggetto', 'Richiedente',
+                'Data inizio pubb.', 'Data fine pubb.'}
+    named = [h for h in headers if h]
+    if not required <= set(named) or len(named) != len(set(named)):
+        raise ValueError('Unrecognized native publication columns')
+    digest = file_digest(path)
+    for index, row in enumerate(table.select('tbody > tr')):
+        cells = row.find_all('td', recursive=False)
+        if len(cells) != len(headers):
+            raise ValueError('Publication row does not match its source columns')
+        fields = {h: c.get_text(' ', strip=True) for h, c in zip(headers, cells) if h}
+        routes = []
+        for a in row.find_all('a', onclick=True):
+            # The publisher emits a literal repository URL in window.open.
+            # Copy that route; do not execute JavaScript or classify its text.
+            match = re.search(r"(/repo/docs/[^\s'\"\\]+)", a['onclick'])
+            if match:
+                routes.append({'url': urljoin(source_url, match.group(1)),
+                               'label': a.img.get('title', '') if a.img else ''})
+        dates = {key: _register_date(fields[key]) for key in
+                 ('Data inizio pubb.', 'Data fine pubb.')}
+        yield Occurrence(str(path), digest, f'publication-table/row[{index}]', {
+            'publisher': publisher, 'source_url': source_url,
+            'source_fields': fields,
+            'declared_dates': {k: v.isoformat() if v else None for k, v in dates.items()},
+            'date_issues': {k: 'Unrecognized source date; original value retained'
+                            for k, v in dates.items() if fields[k] and v is None},
+            'document_routes': routes,
+        })
