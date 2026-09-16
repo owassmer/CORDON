@@ -25,6 +25,45 @@ def classify(text):
     return RESULTS.get(' '.join(text.casefold().split()), 'unclassified') if text else 'unread'
 
 
+def _leading_mark(text):
+    """The printed marker a note begins with ('*', '**', 'a'), or None."""
+    match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(])', text or '')
+    return match[1] if match else None
+
+
+def resolve_marks(result, scoped):
+    """A trailing printed mark on a result literal classifies only through the note it points at.
+
+    The source reader may already have separated `result_value` from an annotation; this
+    handles the cell it returned whole. A mark is separated only where a result
+    qualification recovered from the same document, scoped to this row, begins with that
+    mark; the base is then classified and the note travels with the row as it already does.
+    A mark with no recovered note leaves the result unclassified and names that cause. The
+    complete literal survives either way.
+    """
+    if result.kind != 'unclassified' or not result.text:
+        return result
+    marks = {mark for fact in scoped if fact.get('role') == 'result_qualification'
+             for mark in [_leading_mark(fact.get('text'))] if mark}
+    base, used = result.text.strip().casefold(), []
+    while True:
+        mark = next((m for m in sorted(marks, key=len, reverse=True)
+                     if base.endswith(m) and len(base) > len(m)), None)
+        if mark is None:
+            break
+        base, used = base[:-len(mark)].rstrip(), used + [mark]
+    if used and classify(base) != 'unclassified':
+        return replace(result, kind=classify(base))
+    text = result.text.strip().casefold()
+    for n in (1, 2, 3):
+        if n >= len(text):
+            break
+        mark, unmarked = text[-n:], text[:-n]
+        if re.fullmatch(r'(\*+|[a-z]|\*+[a-z]|[a-z]\*+)', mark) and classify(unmarked.strip()) != 'unclassified':
+            return replace(result, cause='printed mark; note not recovered by the reading')
+    return result
+
+
 def link_section_marks(facts):
     """Resolve unique printed § anchors on one page, retaining the derivation."""
     notes = {}
@@ -55,6 +94,13 @@ class LiteralDate:
     value: date | None
     cause: str | None
     year_support: tuple[str, ...] = ()
+    date_range: tuple[date, date] | None = None
+    listed_dates: tuple[date, ...] = ()
+
+    def permits(self, value):
+        if self.date_range is not None:
+            return self.date_range[0] <= value <= self.date_range[1]
+        return value == self.value or value in self.listed_dates
 
 
 def literal_date(text, cause=None, *, year_context=()):
@@ -87,6 +133,33 @@ def literal_date(text, cause=None, *, year_context=()):
             return LiteralDate(text, date(year, int(short[3]), int(short[1])), None, support)
         except ValueError:
             return LiteralDate(text, None, 'invalid_calendar_date', support)
+    months = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+              'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
+    named = re.fullmatch(r'(\d{1,2}(?:\s*[-–]\s*\d{1,2}|(?:\s+e\s+\d{1,2})+)?)'
+                         r'\s+(' + '|'.join(months) + r')(?:\s+(\d{4}))?',
+                         text.strip().casefold())
+    if named:
+        support = ()
+        if named[3]:
+            year = int(named[3])
+        else:
+            candidates = {year for year, _ in year_context}
+            if len(candidates) != 1:
+                return LiteralDate(text, None, 'year_not_established_by_source_context')
+            year = next(iter(candidates))
+            support = tuple(dict.fromkeys(locator for value, locator in year_context if value == year))
+        try:
+            days = tuple(date(year, months.index(named[2]) + 1, int(day))
+                         for day in re.findall(r'\d+', named[1]))
+        except ValueError:
+            return LiteralDate(text, None, 'invalid_calendar_date', support)
+        if re.search(r'[-–]', named[1]):
+            if days[0] > days[1]:
+                return LiteralDate(text, None, 'invalid_date_range', support)
+            return LiteralDate(text, None, None, support, date_range=days)
+        if len(days) > 1:
+            return LiteralDate(text, None, None, support, listed_dates=days)
+        return LiteralDate(text, days[0], None, support)
     return LiteralDate(text, None, 'unparsed_date_literal')
 
 
@@ -131,7 +204,11 @@ class Row:
     @property
     def sampling_date(self):
         values = {d.value for d in self.sampling_dates if d.value is not None}
-        return next(iter(values)) if len(values) == 1 and all(d.value for d in self.sampling_dates) else None
+        if len(values) != 1:
+            return None
+        value = next(iter(values))
+        # A range/list constrains a separately stated day; it never supplies one.
+        return value if all(d.permits(value) for d in self.sampling_dates) else None
 
     @property
     def date_cause(self):
@@ -140,7 +217,13 @@ class Row:
         if self.sampling_date is not None:
             return None
         causes = {value.cause for value in self.sampling_dates if value.cause}
-        return '; '.join(sorted(causes)) if causes else 'conflicting sampling-date values'
+        exact = {d.value for d in self.sampling_dates if d.value is not None}
+        if len(exact) > 1 or any(not d.permits(value) for value in exact
+                                for d in self.sampling_dates if not d.cause):
+            causes.add('conflicting sampling-date values')
+        if not causes:
+            causes.add('sampling-date range or list does not establish an exact day')
+        return '; '.join(sorted(causes))
 
 
 @dataclass(frozen=True)
@@ -233,7 +316,7 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
             if row['id'] in row_ids or len(row['cells']) != len(columns):
                 raise ValueError('Repeated row locator or wrong cell count')
             row_ids.add(row['id'])
-            for cell in row['cells']:
+            for index, cell in enumerate(row['cells']):
                 if 'native_cell' in cell:
                     key = cell['native_cell']
                     if key not in native_cells:
@@ -249,15 +332,21 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
                         raise ValueError('Source-not-stated claim needs an examined scope')
                 elif not isinstance(cell['text'], str):
                     raise ValueError('Source values must remain strings')
-                if 'identifier' in cell:
+                if 'identifier' in cell and 'result_value' in cell:
+                    raise ValueError('A cell cannot supply both identifier and result components')
+                for component in ('identifier', 'result_value'):
+                    if component not in cell:
+                        continue
+                    if component == 'result_value' and table['columns'][index]['role'] != 'result':
+                        raise ValueError('Result component requires a result column')
                     text = native_cells[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
-                    identifier, annotation = str(cell['identifier']), str(cell.get('annotation', ''))
-                    # The annotation may be printed before or after the identifier (`*513077`, `1640733 (Pool)`).
-                    forms = {' '.join(identifier.split()) + ' ' + ' '.join(annotation.split()),
-                             ' '.join(annotation.split()) + ' ' + ' '.join(identifier.split())}
-                    if (not isinstance(cell['identifier'], str) or not text
-                            or ''.join(text.split()) not in {''.join(form.split()) for form in forms}):
-                        raise ValueError('Identifier and annotation must reconstruct the literal source cell')
+                    value, annotation = cell[component], cell.get('annotation', '')
+                    if (not isinstance(value, str) or not isinstance(annotation, str)
+                            or component == 'result_value' and not value.strip()):
+                        raise ValueError('Cell components require literal strings and a nonempty result value')
+                    forms = {''.join((value + annotation).split()), ''.join((annotation + value).split())}
+                    if not text or ''.join(text.split()) not in forms:
+                        raise ValueError('Cell value and annotation must reconstruct the literal source cell')
     for region in dispositions:
         outputs = set(region.get('output_tables', []))
         if not outputs <= table_ids or region['disposition'] == 'represented' and not outputs:
@@ -277,6 +366,19 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
             section = re.fullmatch(r'p([1-9]\d*)/(\S.*)', fact['section'])
             if section and int(section[1]) not in supplied_pages:
                 raise ValueError('Section cites a page not supplied to this reading')
+        if fact['role'] in {'record_continuation', 'field_continuation'}:
+            # The relation binds the physical parts of one record printed across pages.
+            # A whole table, a section heading or a fact is not a part of a record, and
+            # a table whose rows simply continue under a heading printed once is not a
+            # record continuation at all; that reading returns to the reader by name.
+            parts = fact['applies_to']
+            if len(parts) < 2 or any(not isinstance(scope, str) or not (
+                    scope.startswith('native:') or ('/' in scope and not scope.startswith('section:')))
+                    for scope in parts):
+                raise ValueError('record_continuation must name at least two physical parts of one '
+                                 'continued record as tableID/rowID or native:<cell> selectors; a table '
+                                 'or section that continues onto a later page is not a record continuation, '
+                                 'and its column roles cite the heading page in support instead')
     for issue in block['issues']:
         if not issue.get('cause') or not issue.get('scope'):
             raise ValueError('Reading limitation requires cause and scope')
@@ -410,7 +512,45 @@ def record_rows(reading):
             raise ValueError('A physical part belongs to conflicting continuations')
         used.update(keys)
         groups.append(parts)
+    # A record binding does not by itself say that different field values are
+    # fragments of one cell. Resolve the reader's explicit cell bindings first.
+    cell_anchors = {}
+    for row in rows:
+        for cell in row.cells:
+            for anchor in {cell['locator'], cell['locator'].split('/', 1)[-1],
+                           *(['native:' + cell['native_cell']] if cell.get('native_cell') else [])}:
+                cell_anchors.setdefault(anchor, []).append((row, cell))
+    fragments = {}
+    for fact in reading.facts:
+        if fact['role'] != 'field_continuation':
+            continue
+        bound = []
+        for scope in fact['applies_to']:
+            matches = cell_anchors.get(scope, ())
+            if len(matches) != 1:
+                raise ValueError('Field continuation needs one physical cell at ' + scope)
+            bound.append(matches[0])
+        locators = frozenset(c['locator'] for _, c in bound)
+        if len(locators) != len(bound) or len(bound) < 2:
+            raise ValueError('Field continuation needs distinct physical fragments')
+        group = next((group for group in groups if all(row in group for row, _ in bound)), None)
+        if group is None:
+            raise ValueError('Field fragments must belong to one declared record continuation')
+        if (fact.get('text') != fact.get('value') or not fact.get('value') or not any(
+                row.page == fact.get('page') and fact['value'] in row.identifiers for row in group)):
+            raise ValueError('Field continuation must quote the record identity at its physical page')
+        cells = [cell for _, cell in sorted(bound, key=lambda pair: rows.index(pair[0]))]
+        if (len({(tuple(c['heading']), c['role']) for c in cells}) != 1
+                or cells[0]['role'] not in {'host', 'municipality', 'other'}
+                or any(not c['text'] or not c['text'].strip() for c in cells)):
+            raise ValueError('Field continuation requires populated fragments of one descriptive field')
+        if any(locators & previous and locators != previous for previous in fragments):
+            raise ValueError('A physical cell belongs to conflicting field continuations')
+        fragments[locators] = dict(cells[0], text=' '.join(c['text'].strip() for c in cells),
+            basis='assembly of reader-declared field continuation', source_fragments=cells,
+            reading_issues=tuple(i for c in cells for i in c.get('reading_issues', ())))
     assembled = {}
+    consumed_fragments = set()
     for parts in groups:
         # Order follows physical occurrences, not the order of model selectors.
         parts = sorted(parts, key=lambda row: rows.index(row))
@@ -421,7 +561,12 @@ def record_rows(reading):
                 fields.setdefault(key, []).append(cell)
         selected = []
         for cells in fields.values():
-            populated = [c for c in cells if c['text'] is not None]
+            populated = [c for c in cells if c['text'] and c['text'].strip()]
+            binding = frozenset(c['locator'] for c in populated)
+            if binding in fragments:
+                selected.append(fragments[binding])
+                consumed_fragments.add(binding)
+                continue
             if len(populated) > 1:
                 # Separate result occurrences are never collapsed into one test.
                 if (populated[0]['role'] == 'result' or
@@ -433,7 +578,8 @@ def record_rows(reading):
                         if result.locator in selected_locators)
         facts = tuple(f for i, row in enumerate(parts) for f in row.facts
                       if not any(f == old for earlier in parts[:i] for old in earlier.facts))
-        dates = tuple(d for row in parts for d in row.sampling_dates)
+        dates = tuple(d for row in parts for d in row.sampling_dates
+                      if d.text is None or d.text.strip())
         def sole(role):
             values = {c.get('identifier', c['text']) for c in selected
                       if c['role'] == role and c['text'] is not None}
@@ -443,6 +589,8 @@ def record_rows(reading):
             sampling_dates=dates, facts=facts,
             projection={'rule': 'assembly of reader-declared record continuation',
                         'parts': [row.locator for row in parts]})
+    if consumed_fragments != fragments.keys():
+        raise ValueError('Field continuation does not account for every populated field occurrence')
     return tuple(assembled.get(row.locator, row) for row in rows
                  if row.locator not in used or row.locator in assembled)
 
@@ -492,6 +640,8 @@ def materialize(digest, version, page_count, blocks):
                 if region.get('native_table') not in known_regions:
                     issues += ({'scope': region.get('native_table', 'unidentified region'),
                         'cause': 'model named a native-table region absent from the supplied detector inventory; visual output tables retained separately'},)
+    continued_parts = {scope for f in facts if f['role'] == 'record_continuation'
+                       for scope in f['applies_to']}
     rows, covered, locators, encountered = [], set(), set(), set()
     for item in blocks:
         data, native = item['reading'], item['native_cells']
@@ -511,10 +661,14 @@ def materialize(digest, version, page_count, blocks):
         issues += tuple(projection_issues)
         covered.difference_update(incomplete)
         for table in tables:
-            if not any(c['role'] in {'identifier', 'publisher_id', 'laboratory_id', 'result'} for c in table['columns']):
-                continue  # Non-sample tables remain in the literal block, not sample counts.
+            sample_table = any(c['role'] in {'identifier', 'publisher_id', 'laboratory_id', 'result'}
+                               for c in table['columns'])
             for raw in table['rows']:
                 locator = f"p{table['page']}/{table['id']}/{raw['id']}"
+                anchors = {locator, f"{table['id']}/{raw['id']}",
+                           *('native:' + c['native_cell'] for c in raw['cells'] if c.get('native_cell'))}
+                if not sample_table and not anchors.intersection(continued_parts):
+                    continue
                 if locator in locators:
                     raise ValueError('Repeated source-row locator')
                 locators.add(locator)
@@ -553,7 +707,7 @@ def materialize(digest, version, page_count, blocks):
                         if assay and analyte and assay.casefold().strip() == analyte.casefold().strip():
                             assay, assay_cause = None, 'test field repeats analyte; distinct test designation not recovered here'
                         results.append(Result(value['locator'], tuple(column['heading']),
-                            assay, analyte, text, classify(text), cell.get('cause'),
+                            assay, analyte, text, classify(cell.get('result_value', text)), cell.get('cause'),
                             tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())), assay_cause))
                 def sole(role):
                     fields = by_role.get(role, [])
@@ -582,6 +736,7 @@ def materialize(digest, version, page_count, blocks):
                                      direct_scopes.intersection(f['applies_to']))
                 dates += shared_dates
                 generic = sole('identifier')
+                results = [resolve_marks(result, scoped) for result in results]
                 rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),
                                 dates, tuple(cells), tuple(results), scoped, table.get('projection')))
     missing = set(range(1, page_count + 1)) - encountered

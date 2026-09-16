@@ -1,5 +1,7 @@
 """Attach literal report rows to the accepted distinct-observation stream."""
 from collections import defaultdict
+from dataclasses import replace
+from types import SimpleNamespace
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
 import re
@@ -9,7 +11,7 @@ from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, report, record_rows
 from .monitoring import day as observation_day
-from .report_relations import correspondences, related, replacements, current_limitation, norm, dated
+from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, load as load_relations
 
 
 def document_name(route):
@@ -211,6 +213,7 @@ def _host_relation(row, association):
     if len(values) != 1:
         return 'unresolved'
     def labels(value):
+        value = ' '.join(value.split())
         result = {norm(value), norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))}
         # A printed binomial beside a common name is an explicit second label.
         match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)\s*$', value)
@@ -227,14 +230,15 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
     This function performs no acquisition, model calls or observation regrouping.
     """
     captures = _captures(reports_root, known_through)
-    by_name, readings = defaultdict(set), {}
+    by_name, readings, relation_readings = defaultdict(set), {}, {}
     for route, versions in captures.items():
         for capture in versions:
             if digest := capture.get('sha256'):
                 by_name[document_name(route)].add(digest)
-                if digest not in readings:
-                    readings[digest] = report(digest, store, extraction_version=extraction_version)
-    edges = correspondences(readings)
+                if digest not in relation_readings:
+                    relation_readings[digest] = load_relations(store, digest, exact=True)
+    edges = correspondences({digest: SimpleNamespace(relations=value)
+                             for digest, value in relation_readings.items()})
     association_index = defaultdict(list)
     for source in association_readings:
         for association in source.rows:
@@ -243,14 +247,6 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                 association_index[reference].append(dict(association,
                     reading_issues=source.issues, reading_scope=source.scope))
     row_index, records_by_document = {}, {}
-    for digest, reading in readings.items():
-        if isinstance(reading, Report):
-            index = defaultdict(list)
-            records_by_document[digest] = record_rows(reading)
-            for row in records_by_document[digest]:
-                for identifier in row.identifiers:
-                    index[identifier].append(row)
-            row_index[digest] = index
     routed, reverse = [], defaultdict(set)
     for group in groups:
         output = {'observation': group, 'links': [], 'limitations': [], 'matches': []}
@@ -276,6 +272,17 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         destinations.setdefault(destination, chain)
                 rendition_ambiguity = len(set(destinations) - superseded) > 1
                 for digest, chain in sorted(destinations.items()):
+                    if digest not in readings:
+                        reading = report(digest, store, extraction_version=extraction_version)
+                        if isinstance(reading, Report):
+                            reading = replace(reading, relations=relation_readings[digest])
+                            records_by_document[digest] = record_rows(reading)
+                            index = defaultdict(list)
+                            for row in records_by_document[digest]:
+                                for identifier in row.identifiers:
+                                    index[identifier].append(row)
+                            row_index[digest] = index
+                        readings[digest] = reading
                     reading = readings[digest]
                     link = {'route': route, 'route_field': route_field, 'member': member, 'sha256': digest, 'candidates': [],
                             'rendition_ambiguity': rendition_ambiguity}
