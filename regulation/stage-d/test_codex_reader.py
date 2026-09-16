@@ -100,21 +100,27 @@ class StrictSchema(unittest.TestCase):
         schema = output_schema()
         strict = strict_schema(schema)
         cell = strict['properties']['tables']['items']['properties']['rows']['items']['properties']['cells']['items']
-        self.assertEqual(set(cell['required']), set(cell['properties']))
-        self.assertEqual(cell['properties']['native_cell'], {'anyOf': [{'type': 'string'}, {'type': 'null'}]})
-        self.assertEqual(cell['properties']['text'], {'type': ['string', 'null']})
+        # Every union branch lists all of its properties as required; optional ones are nullable.
+        for option in cell['anyOf']:
+            self.assertEqual(set(option['required']), set(option['properties']))
+        annotated = cell['anyOf'][3]
+        self.assertEqual(annotated['properties']['annotation'], {'anyOf': [{'type': 'string'}, {'type': 'null'}]})
+        self.assertEqual(annotated['properties']['identifier'], {'type': 'string'})
+        absent = cell['anyOf'][2]
+        self.assertEqual(absent['properties']['examined_scope'], {'anyOf': [{'type': 'string'}, {'type': 'null'}]})
         # Already-required properties keep their exact form.
         self.assertEqual(strict['properties']['tables']['items']['required'], ['id', 'page', 'columns', 'rows'])
         returned = {'pages': [{'page': 1, 'disposition': 'read', 'regions': []}], 'context_pages': [1], 'facts': [],
                     'issues': [], 'tables': [{'id': 'p1-t1', 'page': 1, 'columns': [], 'rows': [{'id': 'r1', 'cells': [
-                        {'text': '00123', 'native_cell': None, 'cause': None, 'examined_scope': None,
-                         'identifier': None, 'result_value': None, 'annotation': None},
-                        {'text': None, 'native_cell': None, 'cause': 'unreadable', 'examined_scope': None,
-                         'identifier': None, 'result_value': None, 'annotation': None},
-                        {'text': None, 'native_cell': 'p1-t1-r1-c3', 'cause': None, 'examined_scope': None,
-                         'identifier': None, 'result_value': None, 'annotation': None}]}]}]}
+                        {'text': '00123'},
+                        {'text': None, 'cause': 'unreadable', 'examined_scope': None},
+                        {'native_cell': 'p1-t1-r1-c3'},
+                        {'text': 'Positivo*', 'result_value': 'Positivo', 'annotation': '*'},
+                        {'text': '00124 (Pool)', 'identifier': '00124', 'annotation': None}]}]}]}
         cells = drop_optional_nulls(returned, schema)['tables'][0]['rows'][0]['cells']
-        self.assertEqual(cells, [{'text': '00123'}, {'cause': 'unreadable'}, {'native_cell': 'p1-t1-r1-c3'}])
+        self.assertEqual(cells, [{'text': '00123'}, {'text': None, 'cause': 'unreadable'}, {'native_cell': 'p1-t1-r1-c3'},
+                                 {'text': 'Positivo*', 'result_value': 'Positivo', 'annotation': '*'},
+                                 {'text': '00124 (Pool)', 'identifier': '00124'}])
         # validate_block sees the shapes it always saw: a null text with a cause, a native copy.
         self.assertIsNone(cells[1].get('text'))
 

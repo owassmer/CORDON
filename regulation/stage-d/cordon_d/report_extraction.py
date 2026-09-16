@@ -181,8 +181,17 @@ def output_schema():
                   'identifier_authority': {'enum': ['publisher', 'laboratory', None]},
                   'authority_support': array(support),
                   'test': nullable, 'analyte': nullable, 'support': array(support)})
-    cell = obj({'text': nullable, 'native_cell': string, 'cause': string, 'examined_scope': string,
-                'identifier': string, 'result_value': string, 'annotation': string}, [])
+    # A cell has one of these shapes; the union keeps every returned cell to the keys it
+    # uses, which is what the local checks assume and what keeps long tables short.
+    null = {'type': 'null'}
+    cell = {'anyOf': [
+        obj({'text': string}),
+        obj({'native_cell': string}),
+        obj({'text': null, 'cause': string, 'examined_scope': string}, ['text', 'cause']),
+        obj({'text': string, 'identifier': string, 'annotation': string}, ['text', 'identifier']),
+        obj({'native_cell': string, 'identifier': string, 'annotation': string}, ['native_cell', 'identifier']),
+        obj({'text': string, 'result_value': string, 'annotation': string}, ['text', 'result_value']),
+        obj({'native_cell': string, 'result_value': string, 'annotation': string}, ['native_cell', 'result_value'])]}
     row = obj({'id': string, 'cells': array(cell)})
     table = obj({'id': string, 'page': integer, 'columns': array(column), 'rows': array(row)})
     fact = obj({'id': string, 'role': string, 'page': integer, 'locator': string, 'section': nullable,
@@ -501,6 +510,14 @@ def _nullable(schema):
 
 def drop_optional_nulls(value, schema):
     """Remove null values of properties the original schema did not require."""
+    if isinstance(schema, dict) and 'anyOf' in schema and isinstance(value, dict):
+        # The branch whose required keys the value carries; a strict reading carries
+        # exactly one branch's keys.
+        for option in schema['anyOf']:
+            if option.get('type') == 'object' and set(option.get('required', [])) <= set(value) \
+                    and set(value) <= set(option.get('properties', {})):
+                return drop_optional_nulls(value, option)
+        return value
     if isinstance(schema, dict) and schema.get('type') == 'object' and isinstance(value, dict):
         required = set(schema.get('required', []))
         properties = schema.get('properties', {})
