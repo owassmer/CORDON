@@ -811,8 +811,15 @@ def membership_evidence(versions_, root: Path, day, *, comune=None, province=Non
 
 def evidence_for(versions_, root: Path, day, *, snapshot, comune=None, province=None,
                  section=None, foglio=None, particella=None, known_at=None):
-    """An Evidence over this row's assertions, ready for the accepted consumer."""
-    from .evidence import Evidence
+    """Supported membership and reading limits at the accepted consumer."""
+    from dataclasses import replace
+    from cordon_c.bindings import leaves
+    from datetime import timezone
+    from os.path import commonpath
+    from .evidence import Evidence, Source, Support, Unresolved, file_digest
+    root = root.resolve()
+    versions_ = tuple(versions_)
+    known_at = known_at or datetime.now(timezone.utc)
     contracts = json.loads((root / 'regulation/stage-d/contracts.json').read_text())
     bindings = {}
     for binding in json.loads(
@@ -822,6 +829,48 @@ def evidence_for(versions_, root: Path, day, *, snapshot, comune=None, province=
     sources, assertions = membership_evidence(
         versions_, root, day, comune=comune, province=province, section=section,
         foglio=foglio, particella=particella, known_at=known_at)
-    return Evidence(snapshot, sources, assertions,
+    # Act bytes and a missing act's retained successor source have distinct
+    # locations. Keep both verifiable without claiming the missing body is held.
+    store = store_root(root)
+    evidence_root = Path(commonpath((root.resolve(), store.resolve())))
+    sources = {s.identity: replace(s, path=str((store / s.path).relative_to(evidence_root)))
+               for s in sources}
+    documents = act_documents(root)
+    by_version = {v.provision_version_id: v for v in versions_}
+    label = _place_label(comune, province, section, foglio, particella)
+    unresolved = []
+    for answer in zone_of(versions_, day, comune=comune, province=province, section=section,
+                          foglio=foglio, particella=particella):
+        if answer['zone'] is not None:
+            continue
+        version = by_version[answer['version']]
+        owner = snapshot.version(version.provision_version_id, day)
+        if MEMBERSHIP_PREDICATE not in leaves(owner['condition_ast']):
+            continue
+        record = documents.get(version.instrument_id)
+        if record:
+            identity = f'act:{version.instrument_id}'
+            path, digest = blob_path(store, record['sha256']), record['sha256']
+        else:
+            identity = f'retained-source:{version.source_path}'
+            path = root / version.source_path
+            digest = file_digest(path)
+        sources[identity] = Source(identity, str(path.relative_to(evidence_root)), digest,
+                                   'official-record', 'public')
+        statement = answer.get('statement')
+        selector = (f'{statement.locator} {statement.zone_heading} :: '
+                    f'{statement.province or "-"} / {statement.comune or "-"}'
+                    if statement else f'{version.provision_version_id}; geography reading of {label}')
+        cause = answer['basis']
+        if answer.get('unresolved'):
+            cause += ': ' + '; '.join(version.unresolved)
+        unresolved.append(Unresolved(
+            identity=f'{version.provision_version_id}|unresolved|{label}|'
+                     + sha256((selector + '\0' + cause).encode()).hexdigest(),
+            contract='adopted-geography', context=label, event_date=day, known_at=known_at,
+            consumer_version=version.provision_version_id, predicate=MEMBERSHIP_PREDICATE,
+            cause=cause, support=(Support(identity, selector,
+                statement.text if statement else cause),)))
+    return Evidence(snapshot, tuple(sources.values()), assertions,
                     {c['id']: c for c in contracts['contracts']}, bindings,
-                    store_root(root)), assertions
+                    evidence_root, unresolved=tuple(unresolved)), assertions

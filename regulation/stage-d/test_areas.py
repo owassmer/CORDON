@@ -610,6 +610,104 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         self.assertEqual(len(admitted), 1)
         self.assertTrue(evidence)
 
+    def test_c_consumer_preserves_distinct_ginosa_causes_and_positive_membership(self):
+        from cordon_c.core import Snapshot
+        from cordon_d.areas import evidence_for, act_documents, MEMBERSHIP_PREDICATE
+        from cordon_d.store import blob_path, store_root
+        version = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        record = act_documents(ROOT)[version.instrument_id]
+        if not blob_path(store_root(ROOT), record['sha256']).exists():
+            self.skipTest('the act document is not in the content-addressed store here')
+        snapshot = Snapshot.load(ROOT)
+        day, known = date(2025, 7, 1), datetime(2026, 9, 11, tzinfo=timezone.utc)
+        cases = [('GINOSA', '36', 'does not state which part', 'p13 table'),
+                 ('GINOSA', None, 'this question names no sheet', 'p13 table'),
+                 ('GINOSA', '999', 'no cadastral statement establishes membership', version.provision_version_id),
+                 ('MILANO', '1', 'no cadastral statement establishes membership', version.provision_version_id)]
+        results = []
+        for comune, sheet, cause, locator in cases:
+            with self.subTest(comune=comune, sheet=sheet):
+                evidence, assertions = evidence_for((version,), ROOT, day, snapshot=snapshot,
+                    comune=comune, foglio=sheet, particella='5', known_at=known)
+                self.assertEqual(assertions, ())
+                context = next(iter(evidence.readings.values())).context
+                view = evidence.view(context=context, event_date=day, known_through=known)
+                result = view.reader(snapshot.version(version.provision_version_id, day), MEMBERSHIP_PREDICATE)
+                self.assertIsNone(result.truth)
+                self.assertTrue(any(cause in n and locator in n for n in result.needs), result.needs)
+                self.assertIn('act:' + version.instrument_id, result.provisions)
+                # Causes also survive C's composition, alongside its other missing inputs.
+                self.assertTrue(result.needs <= view.evaluate(version.provision_version_id).needs)
+                historical = evidence.view(context=context, event_date=day,
+                    known_through=datetime(2026, 9, 10, tzinfo=timezone.utc)).reader(
+                        snapshot.version(version.provision_version_id, day), MEMBERSHIP_PREDICATE)
+                self.assertFalse(historical.provisions)
+                self.assertFalse(any(cause in n for n in historical.needs))
+                results.append(result.needs)
+        self.assertEqual(len(set(results)), 4)
+        evidence, assertions = evidence_for((version,), ROOT, day, snapshot=snapshot,
+            comune='GINOSA', foglio='29', particella='5', known_at=known)
+        result = evidence.view(context=assertions[0].context, event_date=day, known_through=known).reader(
+            snapshot.version(version.provision_version_id, day), MEMBERSHIP_PREDICATE)
+        self.assertTrue(result.truth)
+        self.assertTrue(all(type(a.value) is bool for a in assertions))
+
+    def test_c_consumer_carries_population_limits_only_to_owned_membership(self):
+        from dataclasses import replace
+        from cordon_c.core import Snapshot
+        from cordon_c.bindings import leaves
+        from cordon_d.areas import evidence_for, act_documents, MEMBERSHIP_PREDICATE
+        from cordon_d.store import blob_path, store_root
+        snapshot, documents = Snapshot.load(ROOT), act_documents(ROOT)
+        known = datetime(2026, 9, 11, tzinfo=timezone.utc)
+        checked = 0
+        for version in self.versions:
+            row = snapshot.version(version.provision_version_id, version.effective_from)
+            if MEMBERSHIP_PREDICATE not in leaves(row['condition_ast']):
+                evidence, assertions = evidence_for((version,), ROOT, version.effective_from,
+                    snapshot=snapshot, comune='MILANO', province='MILANO', known_at=known)
+                self.assertFalse(evidence.readings)
+                continue
+            record = documents.get(version.instrument_id)
+            if not record or not blob_path(store_root(ROOT), record['sha256']).exists():
+                continue
+            evidence, _ = evidence_for((version,), ROOT, version.effective_from, snapshot=snapshot,
+                comune='MILANO', province='MILANO', foglio='1', known_at=known)
+            context = next(iter(evidence.readings.values())).context
+            result = evidence.view(context=context, event_date=version.effective_from,
+                                   known_through=known).reader(row, MEMBERSHIP_PREDICATE)
+            self.assertIsNone(result.truth)
+            self.assertTrue(result.provisions)
+            self.assertTrue(all('[' in n for n in result.needs))
+            checked += 1
+        if not checked:
+            self.skipTest('no membership-eligible act bytes are held here')
+        version = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        if not blob_path(store_root(ROOT), documents[version.instrument_id]['sha256']).exists():
+            self.skipTest('Ginosa act bytes are not held here for synthetic absence projection')
+        # These are transport counterexamples, not new interpretations of the act.
+        for cause in (SOURCE_STATES_NONE, MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
+                      RECOVERED_NOT_ATTACHED):
+            fixture = replace(version, statements=(), absence=(cause + ': synthetic limit',))
+            evidence, _ = evidence_for((fixture,), ROOT, fixture.effective_from, snapshot=snapshot,
+                                      comune='GINOSA', known_at=known)
+            context = next(iter(evidence.readings.values())).context
+            result = evidence.view(context=context, event_date=fixture.effective_from,
+                                   known_through=known).reader(
+                                       snapshot.version(fixture.provision_version_id, fixture.effective_from),
+                                       MEMBERSHIP_PREDICATE)
+            self.assertIsNone(result.truth)
+            self.assertTrue(any(cause in n for n in result.needs))
+        fixture = replace(version, unresolved=('p13: synthetic unread region',))
+        evidence, _ = evidence_for((fixture,), ROOT, fixture.effective_from, snapshot=snapshot,
+                                  comune='GINOSA', foglio='36', known_at=known)
+        context = next(iter(evidence.readings.values())).context
+        result = evidence.view(context=context, event_date=fixture.effective_from,
+                               known_through=known).reader(
+                                   snapshot.version(fixture.provision_version_id, fixture.effective_from),
+                                   MEMBERSHIP_PREDICATE)
+        self.assertTrue(any('p13: synthetic unread region' in n for n in result.needs))
+
     def test_retained_section_boundaries_survive_to_membership(self):
         cases = [('2024-00093', 'A', '76', 'p9 table 2 row 1'),
                  ('2024-00093', 'G', '3', 'p10 table 2 row 1'),
