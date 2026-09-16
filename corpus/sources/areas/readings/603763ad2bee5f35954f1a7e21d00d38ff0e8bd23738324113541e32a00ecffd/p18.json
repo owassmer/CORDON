@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:24:54.212954+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8429,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6194,
-   "cache_read_input_tokens": 6822,
-   "output_tokens": 700,
-   "output_tokens_details": {
-    "thinking_tokens": 41
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6194,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 532,
-     "cache_read_input_tokens": 4536,
-     "cache_creation_input_tokens": 3944,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3944
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0351934,
-  "session_id": "8436f7d3-81de-4765-9867-9546713dae79"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Malattia di Pierce su vite",
-   "Il sintomo principale su vite è la bruscatura fogliare. Un segno precoce di infezione è la necrosi settoriale delle foglie, con porzioni che diventano di colore marrone, mentre i tessuti adiacenti diventano gialli o rossi. I germogli e i tralci possono presentare un grado di lignificazione irregolare, mostrando parti non lignificate (verdi) su tralci lignificati (livello internodi). Tuttavia, questo tipo di alterazione non sembra essere costantemente associato alle infezioni, come dimostrato nei rilievi effettuati nei vigneti colpiti dalle infezioni in Puglia.",
-   "Oltre al disseccamento dei germogli e dei tralci che nel corso degli anni possono portare a morte l'intera pianta, è possibile osservare anche il disseccamento dei grappoli che rimangono attaccati al tralcio, mentre il tronco non presenta alterazioni a livello del legno."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:34:22.103989+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 9247,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5853,
-   "cache_read_input_tokens": 6503,
-   "output_tokens": 492,
-   "output_tokens_details": {
-    "thinking_tokens": 17
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5853,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 347,
-     "cache_read_input_tokens": 4217,
-     "cache_creation_input_tokens": 3922,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3922
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.031486600000000003,
-  "session_id": "b7bfb393-9349-4436-955a-7a5eca895c67"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Area Delimitata XF sub. pauca (Modugno) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Modugno) - Zona Infetta; Confini Comunali; Confini Provinciali"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

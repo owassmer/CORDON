@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:23:41.105693+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 11337,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5905,
-   "cache_read_input_tokens": 6536,
-   "output_tokens": 582,
-   "output_tokens_details": {
-    "thinking_tokens": 36
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5905,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 417,
-     "cache_read_input_tokens": 4250,
-     "cache_creation_input_tokens": 3941,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3941
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.032610200000000006,
-  "session_id": "bc648c2c-04bc-4fde-9674-0e518c4bcc56"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 BIS (title of map page)",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Zona Indenne; Area Delimitata Valle D'Itria - Zona Infetta; Area Delimitata Valle D'Itria - Zona Cuscinetto; Area Delimitata Salento - Zona Infetta; Area Delimitata Salento - Zona Contenimento; Area Delimitata Salento - Zona Cuscinetto; Confini provinciali"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

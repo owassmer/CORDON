@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:28:05.973070+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8408,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6290,
-   "cache_read_input_tokens": 6924,
-   "output_tokens": 818,
-   "output_tokens_details": {
-    "thinking_tokens": 33
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6290,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 656,
-     "cache_read_input_tokens": 4638,
-     "cache_creation_input_tokens": 3938,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3938
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.036862799999999994,
-  "session_id": "1efe2191-1ecb-48eb-9733-8298b63b44f3"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -66,18 +27,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ne della pianta in campo mediante coordinate geografiche, la tracciabilità tra il campione prelevato, il risultato delle relative analisi di laboratorio e l'estirpazione della pianta se risultata infetta.",
-   "La \"scheda tecnica campione\" deve essere compilata in maniera puntuale e non approssimativa in tutti i campi, ponendo particolare attenzione a: georeferenziare le piante con estrema precisione, ponendosi sull'estremità della chioma dell'albero al fine di consentire un buon ricevimento del segnale satellitare",
-   "indicare nella colonna \"SINTOMO\" la presenza o assenza di sintomi",
-   "specificare nella colonna \" TIPO DI SINTOMO\": ascrivibile a Xylella e specificare se sono disseccamenti o bruscature; altro e specificare di cosa si tratta, es. rogna, oppure da altri patogeni",
-   "se si tratta di olivo monumentale indicare nella colonna \"MONUMENTALE\" e inserire il numero di targa se presente.",
-   "VITE - nel caso specifico del campionamento in un vigneto, la scheda deve contenere anche i seguenti dati, che devono essere accuratamente compilati dall'assistente fitosanitario: vigneto da tavola; vigneto da vino; varietà; sesto di impianto; stato colturale; forma di allevamento."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

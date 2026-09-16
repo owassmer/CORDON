@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:19:08.867436+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8592,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7465,
-   "cache_read_input_tokens": 8097,
-   "output_tokens": 743,
-   "output_tokens_details": {
-    "thinking_tokens": 36
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7465,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 579,
-     "cache_read_input_tokens": 5811,
-     "cache_creation_input_tokens": 3940,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3940
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0419484,
-  "session_id": "073957e7-cae7-4f0d-a1fc-1f285fc64d87"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 21 febbraio 2024, n. 8 - Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa in agro di Triggiano (BA) - Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201.",
-   "La Determinazione del Dirigente Sezione Osservatorio Fitosanitario n. 127 del 17/12/2022 che ha aggiornato le aree delimitate alla Xylella fastidiosa sottospecie pauca ST53, alla luce del rinvenimento di piante infette in zona indenne.",
-   "Le deliberazioni n° 1866 del 12/12/2022 e n° 570 del 26/04/2023 con le quali la Giunta regionale, ha approvato il Piano d'azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia nel triennio 2023-2024-2025."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

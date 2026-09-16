@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:31:53.959208+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 11573,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7533,
-   "cache_read_input_tokens": 8169,
-   "output_tokens": 841,
-   "output_tokens_details": {
-    "thinking_tokens": 32
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7533,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 681,
-     "cache_read_input_tokens": 5883,
-     "cache_creation_input_tokens": 3936,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3936
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0433238,
-  "session_id": "26438816-3c65-41b7-b7a6-af50371c4e0c"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Di istituire l'area delimitata per \"Xylella fastidiosa sottospecie pauca – Bisceglie (BT)\", ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201, costituita da: zona infetta di almeno 50 m attorno alle 4 piante infette a Xylella fastidiosa sottospecie pauca; una zona cuscinetto di 2,5 km attorno alla zona infetta.",
-   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.",
-   "Di approvare l'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\".",
-   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia.",
-   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\"."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

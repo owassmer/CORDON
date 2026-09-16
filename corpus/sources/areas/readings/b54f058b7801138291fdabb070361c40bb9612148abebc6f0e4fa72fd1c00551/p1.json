@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:21:22.934642+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8274,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7457,
-   "cache_read_input_tokens": 8089,
-   "output_tokens": 657,
-   "output_tokens_details": {
-    "thinking_tokens": 35
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7457,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 493,
-     "cache_read_input_tokens": 5803,
-     "cache_creation_input_tokens": 3940,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3940
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0410868,
-  "session_id": "e060416b-f45d-4672-9c7b-ea1b708d7db6"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Individuazione di focolaio di Xylella fastidiosa sottospecie multiplex ST26 in agro di Santeramo in Colle (BA) - Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201.",
-   "La determina n° 8 del 21/02/2024 e la Determina n° 12 del 27/02/2024. \"Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa ST1 in agro di Triggiano (BA) – Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\",",
-   "La determina n° 18 del 14/03/2024 \"Aggiornamento dell'area delimitata a Xylella fastidiosa sottospecie Pauca ST53 - ai sensi dell'art. 4 del Reg. UE 2020/1201\"."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

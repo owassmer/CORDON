@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:25:37.942023+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 13731,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5798,
-   "cache_read_input_tokens": 6445,
-   "output_tokens": 865,
-   "output_tokens_details": {
-    "thinking_tokens": 22
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5798,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 717,
-     "cache_read_input_tokens": 4159,
-     "cache_creation_input_tokens": 3925,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3925
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.034932,
-  "session_id": "201bbfb9-c4ca-4ff5-a689-b317449c57ec"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -74,26 +35,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 BIS",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
-   "Il Dirigente di Sezione Dott. Salvatore Infantino",
-   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Infetta",
-   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Cuscinetto",
-   "Legenda: Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Infetta",
-   "Legenda: Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Cuscinetto",
-   "Legenda: Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Infetta",
-   "Legenda: Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto",
-   "Legenda: Area delimitata Xylella fastidiosa sub. pauca - Zona Cuscinetto",
-   "Legenda: Area delimitata Xylella fastidiosa sub. pauca - Zona Contenimento",
-   "Legenda: Area delimitata Xylella fastidiosa sub. pauca - Zona Infetta",
-   "Legenda: Confini Provinciali",
-   "Map shows provinces Prov. FG, Prov. BT, Prov. BA, Prov. TA, Prov. BR, Prov. LE with colored zone overlays but no tabular data"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

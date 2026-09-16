@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:31:01.965066+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 6557,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5818,
-   "cache_read_input_tokens": 6488,
-   "output_tokens": 505,
-   "output_tokens_details": {
-    "thinking_tokens": 0
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5818,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 380,
-     "cache_read_input_tokens": 4202,
-     "cache_creation_input_tokens": 3902,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3902
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0314506,
-  "session_id": "b9b27782-a8ef-4cbf-a1cf-210077248d9e"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO DI SEZIONE - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Area Delimitata XF sub. pauca (Valenzano) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Valenzano) - Zona Infetta; Confini Comunali; Confini Provinciali",
-   "Prov. BA (label on map)"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

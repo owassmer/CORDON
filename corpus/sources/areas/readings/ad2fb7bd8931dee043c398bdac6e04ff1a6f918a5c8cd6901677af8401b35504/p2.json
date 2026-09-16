@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:30:32.999488+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7279,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7834,
-   "cache_read_input_tokens": 8468,
-   "output_tokens": 676,
-   "output_tokens_details": {
-    "thinking_tokens": 34
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7834,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 514,
-     "cache_read_input_tokens": 6182,
-     "cache_creation_input_tokens": 3938,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3938
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.043147599999999994,
-  "session_id": "d74086bd-db0b-4a94-86f4-db091f439913"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n° 8 del 21/02/2024 e aggiornata con le determine dirigenziali n. 12 del 27/02/2024, n. 45 del 24/04/2024, n. 94 del 24/07/2024 e n. 236 del 18 dicembre 2025;",
-   "Area delimitata per \"Xylella fastidiosa sottospecie – pauca ST53 – Bari, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 92 del 22/07/2024;",
-   "Area delimitata per Xylella fastidiosa sottospecie multiplex ST26 - Santeramo in Colle, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 29 dell'8/04/2024,"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:15:37.688564+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8793,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7301,
-   "cache_read_input_tokens": 7945,
-   "output_tokens": 839,
-   "output_tokens_details": {
-    "thinking_tokens": 24
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7301,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 687,
-     "cache_read_input_tokens": 5659,
-     "cache_creation_input_tokens": 3928,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3928
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.042115,
-  "session_id": "e9272bfb-fd1f-4b17-a0d9-4d5c50d211dd"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Stabilire che in tutta la zona infetta in cui si applicano le misure di contenimento e definita con il presente provvedimento, si applicano le misure di cui agli articoli da 13 a 17 del Reg.(UE) 2020/1201 e smi.",
-   "Aggiornare l'area delimitata a Xylella fastidiosa sottospecie pauca ST53 ai sensi del Reg. UE 2024/2507, costituita da: zona infetta in cui si applicano misure di contenimento che comprende un territorio di larghezza di 2 chilometri dalla zona infetta che si estende dallo Jonio all'Adriatico; zona cuscinetto che comprende un territorio di larghezza di 5 chilometri dalla zona infetta che si estende dallo Jonio all'Adriatico.",
-   "Rappresentare con gli Allegati 1 e 1 bis, parti integranti e sostanziali del presente atto, i limiti geografici territoriali della: zona infetta; zona in cui si pplicano misure di contenimento (di seguito contenimento); zona cuscinetto della nuova area delimitata a \"Xylella fastidiosa subspecie Pauca\";",
-   "Riportare nell'Allegato 2, parte integrante e sostanziale del presente atto, i riferimenti catastali che consentono di individuare territorialmente le zone \"infetta\", \"contenimento\" e \"cuscinetto\" della nuova area delimitata \"Xylella fastidiosa subspecie Pauca\";"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

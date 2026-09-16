@@ -1510,46 +1510,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 91692,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 21298,
-   "cache_read_input_tokens": 21936,
-   "output_tokens": 13337,
-   "output_tokens_details": {
-    "thinking_tokens": 7086
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 21298,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 13180,
-     "cache_read_input_tokens": 19650,
-     "cache_creation_input_tokens": 3934,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3934
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.2376952,
-  "session_id": "b622106e-467d-467b-aab0-532462cc0429"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 7,
   "tables": [
@@ -3264,58 +3225,7 @@
      }
     ]
    }
-  ],
-  "unattached": [
-   "ALLEGATO 2",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
-   "IL DIRIGENTE DELLA SEZIONE"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p7-t1",
-    "disposition": "represented",
-    "output_tables": [
-     1
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p7-t2",
-    "disposition": "represented",
-    "output_tables": [
-     2
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p7-t3",
-    "disposition": "represented",
-    "output_tables": [
-     3
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p7-t4",
-    "disposition": "represented",
-    "output_tables": [
-     4,
-     5
-    ],
-    "cause": "This native table region contains two visually distinct annex tables (separated caption bands): ZONA INFETTA IN PROVINCIA DI BARI and ZONA DI CONTENIMENTO, split into output tables 4 and 5."
-   },
-   {
-    "native_table": "p7-t5",
-    "disposition": "represented",
-    "output_tables": [
-     6,
-     7
-    ],
-    "cause": "This native table region contains two consecutive annex tables both captioned AREA DELIMITATA - ZONA CUSCINETTO (one with FOGLI lists, one with PARTE TERRITORIO COMUNALE), split into output tables 6 and 7."
-   }
-  ],
-  "tables_visible": 7
+  ]
  },
  "resolution_problems": []
 }

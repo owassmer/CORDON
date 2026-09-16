@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:26:19.628229+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7974,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6852,
-   "cache_read_input_tokens": 7476,
-   "output_tokens": 675,
-   "output_tokens_details": {
-    "thinking_tokens": 43
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6852,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 503,
-     "cache_read_input_tokens": 5190,
-     "cache_creation_input_tokens": 3948,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3948
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0382462,
-  "session_id": "f3872a59-80a5-423c-ba3d-e8ff02457d13"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATI INTEGRANTI table: Documento - Impronta (SHA256) listing ALLEGATO1_santeramo.pdf, ALLEGATO1_ginosa.pdf, ALLEGATO1BIS.pdf, ALLEGATO2_SANTERAMO.pdf, ALLEGATO2_GINOSA.pdf with SHA256 hashes — not an annex cadastral scope table",
-   "di pubblicare il presente provvedimento sul BUR Puglia.",
-   "è composto da pagine tutte progressivamente numerate e da n° 5 allegati composti rispettivamente da 1 facciata"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -76,46 +76,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 9389,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6442,
-   "cache_read_input_tokens": 7015,
-   "output_tokens": 906,
-   "output_tokens_details": {
-    "thinking_tokens": 94
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6442,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 683,
-     "cache_read_input_tokens": 4729,
-     "cache_creation_input_tokens": 3999,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3999
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.038506,
-  "session_id": "52092ebe-271b-4b88-a2ed-97d0ec1c16ab"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -150,37 +111,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Schema per costituire il campione pool:",
-   "Bustone (CODICE CAMPIONE POOL) (max 7 buste con i campioni della stessa specie e raccolti nella stessa maglia)",
-   "IDxxx 1, IDxxx 2, IDxxx 3, IDxxxx 4, IDxxx 5, IDxxx 6, IDxxxx 7",
-   "Prelevare da ogni busta 4 rametti e tagliare da ogni rametto una porzione di materiale vegetale",
-   "Costituire il pool unendo le 4 porzioni di rametti recuperati da ciascuno dei 7 campioni vegetali presenti nel bustone (tot. 28 porzioni ca. 1.2-2 grammi)",
-   "BIOREBA (label on sample bag in photo)"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p41-t1",
-    "disposition": "not_annex_table",
-    "output_tables": [],
-    "cause": "Box in a flowchart diagram (Bustone code 'IDxxxx 4'), not a cadastral annex table."
-   },
-   {
-    "native_table": "p41-t2",
-    "disposition": "not_annex_table",
-    "output_tables": [],
-    "cause": "Box in a flowchart diagram (Bustone code 'IDxxx 5'), not a cadastral annex table."
-   },
-   {
-    "native_table": "p41-t3",
-    "disposition": "not_annex_table",
-    "output_tables": [],
-    "cause": "Box in a flowchart diagram (Bustone code 'IDxxx 6'), not a cadastral annex table."
-   }
-  ],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

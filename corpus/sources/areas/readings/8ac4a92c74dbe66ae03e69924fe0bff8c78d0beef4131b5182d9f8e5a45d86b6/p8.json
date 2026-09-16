@@ -199,46 +199,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 12546,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7704,
-   "cache_read_input_tokens": 8359,
-   "output_tokens": 992,
-   "output_tokens_details": {
-    "thinking_tokens": 13
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7704,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 852,
-     "cache_read_input_tokens": 6073,
-     "cache_creation_input_tokens": 3917,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3917
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0457638,
-  "session_id": "5e0798b0-6c2e-4b36-965f-5236388efc58"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables": [
    {
@@ -376,32 +337,7 @@
      }
     ]
    }
-  ],
-  "unattached": [
-   "ALLEGATO 2- GINOSA",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
-   "IL DIRIGENTE DELLA SEZIONE"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p8-t1",
-    "disposition": "represented",
-    "output_tables": [
-     1
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p8-t2",
-    "disposition": "represented",
-    "output_tables": [
-     2
-    ],
-    "cause": null
-   }
-  ],
-  "tables_visible": 2
+  ]
  },
  "resolution_problems": []
 }

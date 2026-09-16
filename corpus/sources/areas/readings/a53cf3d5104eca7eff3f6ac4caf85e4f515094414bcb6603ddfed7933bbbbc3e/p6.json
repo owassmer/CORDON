@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:29:02.184583+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 6403,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6043,
-   "cache_read_input_tokens": 6682,
-   "output_tokens": 530,
-   "output_tokens_details": {
-    "thinking_tokens": 29
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6043,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 373,
-     "cache_read_input_tokens": 4396,
-     "cache_creation_input_tokens": 3933,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3933
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0327634,
-  "session_id": "cfc77483-1372-493c-8972-9f0dda7da0d5"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Il presente Provvedimento è direttamente esecutivo.",
-   "Basato sulla proposta n. 181/DIR/2025/00167 dei sottoscrittori della proposta:",
-   "E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano",
-   "E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
-   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

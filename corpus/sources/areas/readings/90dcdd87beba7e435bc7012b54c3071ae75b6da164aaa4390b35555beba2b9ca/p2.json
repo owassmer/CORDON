@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:18:16.727421+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8253,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7464,
-   "cache_read_input_tokens": 8113,
-   "output_tokens": 813,
-   "output_tokens_details": {
-    "thinking_tokens": 20
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7464,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 667,
-     "cache_read_input_tokens": 5827,
-     "cache_creation_input_tokens": 3923,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3923
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.042671600000000004,
-  "session_id": "e4aeeb36-85e3-41d9-994b-708a538f0d75"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -66,18 +27,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "alla luce delle zone infette individuate in agro di Canosa di Puglia, Monopoli e Polignano",
-   "il Piano di azione per il focolaio di Canosa, trasmesso al MIPAAF con nota prot. 77 del 18/01/2021",
-   "la Deliberazione della Giunta Regionale n. 538 del 06/04/2021 \"Approvazione Piano d'azione 2021, redatto ai sensi dell'art. 27 del Reg. UE n. 2016/2031 e del Reg. UE 2020/1201, per contrastare la diffusione di Xylella fastidiosa subspecie pauca ST53 nel territorio regionale\"",
-   "la Determinazione del Dirigente Sezione Osservatorio Fitosanitario n. 35 del 29/04/2021 che ha aggiornato le aree delimitate alla Xylella fastidiosa sottospecie pauca ST53, alla luce del rinvenimento di piante infette in zona indenne e della DGR 538/2021",
-   "A novembre 2020 sono state individuate piante di Dodonea viscosa infette da Xylella fastidiosa subspecie pauca ST53 in un sito produttivo di proprietà di due Operatori Professionali (di seguito O.P.) in agro di Canosa Di Puglia",
-   "Tutte le piante specificate situate nella zona infetta attorno ai lotti infetti di Dodonea, indipendentemente..."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

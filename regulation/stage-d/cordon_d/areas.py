@@ -154,6 +154,16 @@ class CadastralStatement:
         never decided: a statement about one comune cannot answer a question
         that names no comune, and a sheet the act files under a section cannot
         answer a question that names no section.
+
+        Inside a comune-scoped row the province column is the act's label on
+        a place the comune already identifies, and the acts print it both ways
+        - "BARI" and "BA", "BAT" and "BT" - for one province. So the province
+        the question names never decides a comune-scoped statement: treating
+        the two spellings as a contradiction dropped the row and reported the
+        act as silent. The act's own province travels with every assertion in
+        its support selector, where a caller can see it. A whole-province
+        statement is about the province and nothing else, so there the
+        question must name it, as the act prints it.
         """
         if grain not in ('sheet', 'parcel'):
             raise ValueError("grain must be 'sheet' or 'parcel'")
@@ -162,13 +172,10 @@ class CadastralStatement:
                 return None
             return True if (self.province or '').upper() == province.upper() else None
         # Below here the statement is about one comune, so the question must
-        # name one. Province, where both state it, must not contradict.
+        # name one.
         if comune is None:
             return None
         if (self.comune or '').upper() != comune.upper():
-            return None
-        if province is not None and self.province and \
-                self.province.upper() != province.upper():
             return None
         if self.scope == 'whole-comune':
             return True
@@ -258,7 +265,7 @@ def reader_version() -> str:
 # not read - which is how the next form the publisher uses becomes a finding
 # on first contact instead of a silently truncated answer.
 SCOPE_TOKENS = (
-    ('skip', re.compile(r'[\s,;:.()–—-]+')),
+    ('skip', re.compile(r'[\s,;:.()]+')),
     ('skip', re.compile(r'\b(?:e|ed)\b', re.I)),
     ('whole-province', re.compile(r'INTERO\s+TERRITORIO\s+PROVINCIALE', re.I)),
     ('whole-comune', re.compile(r'INTERO\s+TERRITORIO\s+COMUNALE', re.I)),
@@ -270,11 +277,14 @@ SCOPE_TOKENS = (
     ('range', re.compile(r'\bda\s+(\d+)\s+a\s+(\d+)\b', re.I)),
     ('range', re.compile(r'\b(\d+)\s+a\s+(\d+)\b', re.I)),
     ('annex-sheet', re.compile(r'(\d+)\s*-\s*(ALLEGATO\s+[A-Z])\s*(\*?)', re.I)),
+    # A dash between two numbers is a form no held act uses for a range; it is
+    # residue, so the cell is reported unread instead of read as its endpoints.
+    ('unread', re.compile(r'\d+\s*[–—-]\s*\d+')),
     ('sheet', re.compile(r'(\d+)\s*(\*?)\s*(\((?:SVILUPPO|Sviluppo)[^)]*\))?')),
 )
 # Residue that cannot change what the cell means: stray single letters and
 # punctuation left by extraction. Anything with a digit or a word in it can.
-TRIVIAL_RESIDUE = re.compile(r'^[\W\d_]*$|^[A-Za-z]$')
+TRIVIAL_RESIDUE = re.compile(r'^[\W_]*$|^[A-Za-z]$')
 
 
 def read_scope(text) -> Scope:
@@ -304,9 +314,15 @@ def read_scope(text) -> Scope:
                 section, reading_parcels = match.group(1).upper(), False
             elif name == 'parcels':
                 reading_parcels = True
+            elif name == 'unread':
+                residue.append(match.group(0))
             elif name == 'range':
                 low, high = int(match.group(1)), int(match.group(2))
-                if low > high or high - low > 500:
+                if reading_parcels:
+                    # A range of particelle is a form no held act uses; reading
+                    # it as sheets would place sheets the act never names.
+                    residue.append(match.group(0))
+                elif low > high or high - low > 500:
                     residue.append(match.group(0))
                 else:
                     sheets.extend(Sheet(section, str(n), False)
@@ -422,19 +438,27 @@ def pinned_statements(root: Path, digest: str):
         pinned = json.loads(path.read_text())
         if pinned.get('act_sha256') != digest or pinned.get('page') != page['page']:
             raise ValueError('Area reading belongs to another document or physical page')
-        resolved = pinned.get('resolved')
+        resolved, reading = pinned.get('resolved'), pinned.get('reading') or {}
         if not resolved:
             unread.append(page['page'])
             continue
+        # A response cut off at a token limit is a reading limit, not a page
+        # read; the pinned reading keeps the one field of the model envelope
+        # that says so.
+        if pinned.get('stop_reason') not in ('end_turn', 'tool_use'):
+            unread.append(page['page'])
+            unresolved.append(f'p{page["page"]}: the model response stopped with '
+                              f'{pinned.get("stop_reason")!r}, not a complete reading')
+            continue
         for problem in pinned.get('resolution_problems', ()):
             unresolved.append(f'p{page["page"]}: {problem}')
-        for region in resolved.get('native_tables_accounted', ()):
+        for region in reading.get('native_tables_accounted', ()):
             if region['disposition'] == 'not_recovered':
                 unresolved.append(f'p{page["page"]}: native table {region["native_table"]} not recovered: '
                                   f'{region.get("cause") or "no cause given"}')
-        for item in resolved.get('uncertain', ()):
+        for item in reading.get('uncertain', ()):
             unresolved.append(f'p{page["page"]}: uncertain: {item}')
-        unattached.extend(f'p{page["page"]}: {item}' for item in resolved.get('unattached', ()))
+        unattached.extend(f'p{page["page"]}: {item}' for item in reading.get('unattached', ()))
         for table in resolved['tables']:
             heading = ' '.join(table['caption_verbatim'].split())
             zone, _, regime = _zone_from(heading)
@@ -496,7 +520,6 @@ def versions(root: Path):
     never borrowed for it.
     """
     documents = act_documents(root)
-    store = store_root(root)
     rows = json.loads((root / 'regulation/jurisdiction/canonical/authoring.json').read_text())
     if not isinstance(rows, list):
         rows = list(rows.values())[0]
@@ -540,9 +563,15 @@ def versions(root: Path):
                               else '; ' + '; '.join(unread) if unread
                               else '; its document is not held') + '.',)
             elif not statements and form == 'annexed':
-                absence = (SOURCE_STATES_NONE + ': this act adopts an annexed geography '
-                           'and no cadastral table was found in its complete page reading. '
-                           'Its adopted geography must be supplied by the annex itself.',)
+                # The act states its geography - as a map annex, with the sheets
+                # drawn on the map face - and no cadastral table is printed. A map
+                # read as an image and not recovered into zones is this reading's
+                # limit, not the source's silence; the remedy is registering the map.
+                absence = (READING_DID_NOT_RECOVER + ': this act adopts its geography as '
+                           'map annexes; all its pages were read and no cadastral table is '
+                           'printed. The zones the maps depict are recoverable only by '
+                           'registering the maps, which is the adopted-map correspondence '
+                           'this row still owes.',)
             elif not statements:
                 absence = (RECOVERED_NOT_ATTACHED + ': this act states its geography as a '
                            'rule in its dispositivo rather than annexing it. The rule\'s '
@@ -586,7 +615,7 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
     """
     answers = []
     for version in in_force(versions_, day):
-        zones_given = set()
+        zones_given, zones_reached = set(), set()
         for statement in version.statements:
             verdict = statement.covers(comune=comune, province=province, section=section,
                                        foglio=foglio, particella=particella, grain=grain)
@@ -595,6 +624,26 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                 answers.append({'version': version.provision_version_id, 'zone': statement.zone,
                                 'regime': statement.regime,
                                 'basis': 'act cadastral statement', 'statement': statement})
+            elif verdict is None and statement.zone not in zones_given | zones_reached:
+                # The act reaches the place and stops short of deciding it at
+                # the grain asked: an unstarred sheet the zone cuts through, or
+                # a part of the comune whose extent the table does not state.
+                # That is a different answer from an act that never mentions
+                # the place - here the adopted map decides, there nothing does -
+                # and the two were reaching the operator as one sentence.
+                reached = statement.scope == 'part-comune-extent-unstated' and comune is not None \
+                    and (statement.comune or '').upper() == comune.upper()
+                if not reached and grain == 'parcel' and foglio is not None:
+                    reached = statement.covers(comune=comune, province=province, section=section,
+                                               foglio=foglio, grain='sheet') is True
+                if reached:
+                    zones_reached.add(statement.zone)
+                    answers.append({'version': version.provision_version_id, 'zone': None,
+                                    'reached_zone': statement.zone, 'regime': statement.regime,
+                                    'basis': (f'the act reaches this place in its {statement.zone} zone '
+                                              'and does not state which part of it lies inside; the '
+                                              'adopted map decides the parcel'),
+                                    'statement': statement})
         # Every version in force accounts for itself. A version that supplies
         # nothing and says nothing is indistinguishable from a version that is
         # not in force, and the operator reads both as no duty.
@@ -606,7 +655,7 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                             'basis': READING_DID_NOT_RECOVER
                                      + ': part of this act\'s annex was not read',
                             'unresolved': len(version.unresolved)})
-        if not zones_given and not version.absence and not version.unresolved:
+        if not zones_given and not zones_reached and not version.absence and not version.unresolved:
             answers.append({'version': version.provision_version_id, 'zone': None,
                             'basis': 'no cadastral statement establishes membership for this place'})
     return tuple(answers)

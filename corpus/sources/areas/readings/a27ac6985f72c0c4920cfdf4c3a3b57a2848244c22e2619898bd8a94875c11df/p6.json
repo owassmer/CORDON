@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:34:02.717743+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7358,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7279,
-   "cache_read_input_tokens": 7916,
-   "output_tokens": 628,
-   "output_tokens_details": {
-    "thinking_tokens": 31
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7279,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 469,
-     "cache_read_input_tokens": 5630,
-     "cache_creation_input_tokens": 3935,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3935
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.039899199999999996,
-  "session_id": "d5bb1ffe-6941-4e0c-9e33-cc9b535e2053"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -62,14 +23,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate.",
-   "Documento - Impronta (SHA256) table: ALLEGATO1.pdf - c9b0ad8f250613851d039da9090790f796cc6fe18ae5206b3940661a0d2d7351; ALLEGATO1BIS.pdf - f4b8d6883a819ee0ee75155a39af4398d9ad013c18f04beca10cb0a7573ada0f; ALLEGATO2.pdf - ccb6866b516e007cdfb787f979a20b551b9b37bd59287d23dc42ac5ec7b7e1f0 (not a cadastral annex table)"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

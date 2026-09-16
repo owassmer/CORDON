@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:28:55.562365+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 10634,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6926,
-   "cache_read_input_tokens": 7554,
-   "output_tokens": 959,
-   "output_tokens_details": {
-    "thinking_tokens": 39
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6926,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 791,
-     "cache_read_input_tokens": 5268,
-     "cache_creation_input_tokens": 3944,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3944
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0414118,
-  "session_id": "b479033e-3279-425c-ba7a-c888e2c81cc7"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ZONA CONTENIMENTO e CUSCINETTO - il campione singolo deve essere consegnato al CNR-IPSP per l’identificazione della sottospecie, utilizzando il protocollo qPCR descritto da Dupas et al. (2019) come previsto nel Reg. (UE) 2024/2507 che modifica l'Allegato IV del Regolamento UE 1201/2020.",
-   "ZONA INDENNE - il campione singolo positivo deve essere consegnato al IPSP - CNR che procede all’identificazione della sottospecie dapprima con il protocollo qPCR descritto da Dupas et al. (2019) e successivamente mediante analisi MLST (Multi Locus Sequence Typing) sulla base di Yuan et al. (2010) come previsto dall’Allegato IV del Reg.(UE) 2020/1201.",
-   "Table at bottom of page: laboratory sample reporting format with headings 'Codice univoco campione', 'Codice committente', 'Latitudine', 'Longitudine', 'data campionamento', 'Codice Pool di appartenenza', 'Specie', 'DNA/ Tessuto vegetale', 'Campione pool/singolo', 'ANALISI MOLECOLARE PER IDENTIFICAZIONE SOTTOSPECIE Xylella fastidiosa' spanning 'Esito saggio Dupas et al., 2019' (fastidiosa, multiplex, pauca) and 'Data prova' - this is a lab reporting form, not a cadastral scope annex table (no PROVINCIA/COMUNE/scope columns), so excluded per instructions."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

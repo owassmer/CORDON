@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:27:11.797839+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 17543,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7674,
-   "cache_read_input_tokens": 8302,
-   "output_tokens": 1352,
-   "output_tokens_details": {
-    "thinking_tokens": 41
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7674,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1184,
-     "cache_read_input_tokens": 6016,
-     "cache_creation_input_tokens": 3944,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3944
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0491284,
-  "session_id": "15398a34-d704-4705-97a6-f106a8906fd5"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -71,23 +32,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Aree delimitate per Xylella fastidiosa – sottospecie multiplex ST26 - Noicattaro e Triggiano e per Xylella fastidiosa – sottospecie multiplex ST26 - Capurso, istituite con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 93 del 23/07/2024",
-   "Area delimitata per Xylella fastidiosa sottospecie pauca - Minervino delle Murge (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 59 del 14/04/2025",
-   "Area delimitata per Xylella fastidiosa sottospecie pauca ST53, aggiornata con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 158 del 18/11/2024 con la quale è stata ridotta la zona infetta in cui si applicano misure di contenimento da 5 km a 2 km, in applicazione del Reg. (UE) 2024/2507 del 26 settembre 2024",
-   "Area delimitata per Xylella fastidiosa sottospecie pauca - Bisceglie (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 113 del 23/06/2025",
-   "Area delimitata per Xylella fastidiosa sottospecie pauca - Modugno (BA), aggiornata con determinazione del Dirigente della Sezione Osservatorio Fitosanitario N. 132 del 18/07/2025",
-   "l'area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alle piante risultate infette dall'organismo nocivo specificato",
-   "la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione",
-   "La zona cuscinetto attorno alla zona infetta generata dalla piante di olivo positiva rinvenuta in agro di Bisceglie (BT) si sovrappone parzialmente alla zona cuscinetto dell'area delimitata per \"Xylella fastidiosa sottospecie pauca – Bisceglie (BT)\", di cui all'atto dirigenziale n. 113 del 23/06/2025",
-   "L'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\"",
-   "l'Allegato 1 BIS, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia",
-   "l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -283,46 +283,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 25015,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 8897,
-   "cache_read_input_tokens": 9551,
-   "output_tokens": 2943,
-   "output_tokens_details": {
-    "thinking_tokens": 1425
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 8897,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 2802,
-     "cache_read_input_tokens": 7265,
-     "cache_creation_input_tokens": 3918,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3918
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0712592,
-  "session_id": "1127f7d1-97f7-4a2d-b495-9b2bc2c7d2e1"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 2,
   "tables": [
@@ -544,35 +505,7 @@
      }
     ]
    }
-  ],
-  "unattached": [
-   "ALLEGATO 2",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
-   "IL DIRIGENTE DELLA SEZIONE",
-   "14938",
-   "Bollettino Ufficiale della Regione Puglia - n. 18 del 29-2-2024",
-   "3"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p7-t1",
-    "disposition": "represented",
-    "output_tables": [
-     1
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p7-t2",
-    "disposition": "represented",
-    "output_tables": [
-     2
-    ],
-    "cause": null
-   }
-  ],
-  "tables_visible": 2
+  ]
  },
  "resolution_problems": []
 }

@@ -403,46 +403,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 29856,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 11981,
-   "cache_read_input_tokens": 12598,
-   "output_tokens": 3540,
-   "output_tokens_details": {
-    "thinking_tokens": 1844
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 11981,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 3362,
-     "cache_read_input_tokens": 10312,
-     "cache_creation_input_tokens": 3955,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3955
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.09305059999999998,
-  "session_id": "bc5be343-188e-419a-b005-c4bb505f2f36"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 2,
   "tables": [
@@ -798,34 +759,7 @@
      }
     ]
    }
-  ],
-  "unattached": [
-   "ALLEGATO 2 - SANTERAMO IN COLLE",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
-   "IL DIRIGENTE DELLA SEZIONE",
-   "C_I330 - 0 - 1 - 2025-06-17 - 0017059 (page watermark, repeated vertically)",
-   "4 (page number)"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p12-t1",
-    "disposition": "represented",
-    "output_tables": [
-     1
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p12-t2",
-    "disposition": "represented",
-    "output_tables": [
-     2
-    ],
-    "cause": null
-   }
-  ],
-  "tables_visible": 2
+  ]
  },
  "resolution_problems": []
 }

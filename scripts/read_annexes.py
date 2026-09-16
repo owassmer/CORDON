@@ -193,8 +193,11 @@ def read_page(digest, number, instrument_id, store, reread=False):
               'prompt_sha256': sha256(PROMPT.encode()).hexdigest()[:16],
               'schema_sha256': sha256(json.dumps(schema, sort_keys=True).encode()).hexdigest()[:16],
               'captured_at': captured, 'native_tables': tables, 'native_cells': cells,
-              'envelope': {k: envelope.get(k) for k in ('duration_ms', 'num_turns', 'usage', 'stop_reason',
-                                                        'total_cost_usd', 'session_id')},
+              # The pinned reading is a source population: the response, the
+              # configuration and the cells shown. Of the model envelope only the
+              # stop reason is consequential - a response cut off at a limit is
+              # not a page read - so only it is kept; run accounting is not.
+              'stop_reason': (envelope or {}).get('stop_reason'),
               'reading': reading, 'resolved': resolved, 'resolution_problems': problems}
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists():
@@ -255,9 +258,9 @@ def resolve(reading, cells, native_tables=()):
         if item['disposition'] == 'represented' and (
                 not item['output_tables'] or not set(item['output_tables']) <= set(indexes)):
             problems.append(f'native table {item["native_table"]} names no valid representing table')
-    return {'tables': tables, 'unattached': reading['unattached'], 'uncertain': reading['uncertain'],
-            'native_tables_accounted': reading['native_tables_accounted'],
-            'tables_visible': reading['tables_visible']}, problems
+    # Only the copied cells are new here; unattached, uncertain, table dispositions
+    # and the visible-table count are the reading's own and are read from it.
+    return {'tables': tables}, problems
 
 
 def job(args):

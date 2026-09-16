@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:32:33.974601+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 19055,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7518,
-   "cache_read_input_tokens": 8134,
-   "output_tokens": 1514,
-   "output_tokens_details": {
-    "thinking_tokens": 52
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7518,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1334,
-     "cache_read_input_tokens": 5848,
-     "cache_creation_input_tokens": 3956,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3956
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0499598,
-  "session_id": "bcaab481-c6f4-47e5-99b2-a793c50c750e"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -69,21 +30,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Area delimitata per Xylella fastidiosa sottospecie pauca ST53, aggiornata con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 158 del 18/11/2024 con la quale è stata ridotta la zona infetta in cui si applicano misure di contenimento da 5 km a 2 km, in applicazione del Reg. (UE) 2024/2507 del 26 settembre 2024;",
-   "Area delimitata per Xylella fastidiosa sottospecie pauca - Bisceglie (BT), istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 113 del 23/06/2025.",
-   "Nell’agro di Modugno (BA) nel 2025 sono stati prelevati e analizzati n. 31 campioni vegetali da piante della specie Nerium oleander (6 piante), Prunus dulcis (10 Mandorli), Ficus carica (1 pianta) e Olea europea (14) specie ospiti a Xylella fastidiosa.",
-   "Il Centro di Ricerca, Sperimentazione e Formazione in agricoltura “Basile Caramia” di Locorotondo (CRSFA), con il rapporto di prova n. Prot.1355/Ldf/2025 del 07/07/2025, ha comunicato che n. 1 (una) pianta di oleandro è risultata infetta da Xylella fastidiosa;",
-   "Il CNR, incaricato dall’Osservatorio della caratterizzazione della sottospecie, con il rapporto di prova n. 57P/2025 del 07/07/2025, ha comunicato che la sottospecie individuata nella pianta di oleandro infetta è Xylella fastidiosa sottospecie pauca;",
-   "E’ stata programmata un’attività di sorveglianza rafforzata dell’area di 400 m attorno alla zona infetta, finalizzata a verificare la presenza di ulteriori piante infette.",
-   "L’area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall’organismo nocivo specificato; la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
-   "L’Allegato 1 riporta l’area delimitata “Xylella fastidiosa sottospecie pauca - Modugno (BA)”; l’Allegato 1 bis riporta tutte le aree delimitate per Xylella fastidiosa in Puglia; l’Allegato 2 riporta i riferimenti catastali dell’area delimitata “Xylella fastidiosa sottospecie pauca - Modugno (BA)”.",
-   "Di dovere istituire l’area delimitata per “Xylella fastidiosa sottospecie pauca – Modugno (BA)”, costituita da: zona infetta di almeno 50 m attorno alla pianta infetta; una zona cuscinetto di 2,5 km attorno alla zona infetta; di dovere adottare le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:32:54.440153+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7564,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5852,
-   "cache_read_input_tokens": 6503,
-   "output_tokens": 646,
-   "output_tokens_details": {
-    "thinking_tokens": 16
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5852,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 502,
-     "cache_read_input_tokens": 4217,
-     "cache_creation_input_tokens": 3921,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3921
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0330016,
-  "session_id": "4c75b8ba-6fe2-4d1b-88de-fcf2b2388421"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -69,21 +30,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Area delimitata a Xylella fastidiosa Pauca ST53 ex Salento - Zona Contenimento",
-   "Legenda: Area delimitata a Xylella fastidiosa Pauca ST53 ex Salento - Zona Infetta",
-   "Legenda: Area delimitata a Xylella fastidiosa Pauca ST53 ex Salento - Zona Cuscinetto",
-   "Legenda: Area delimitata a Xylella fastidiosa Pauca ST53 ex Salento - Focolai di Mola di Bari e Noci",
-   "Legenda: Confini Comunali",
-   "Legenda: Confini Provinciali",
-   "www.emergenzaxylella.it"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

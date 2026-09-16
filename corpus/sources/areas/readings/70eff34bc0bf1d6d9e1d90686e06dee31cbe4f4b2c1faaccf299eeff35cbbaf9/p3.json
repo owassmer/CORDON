@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:18:54.272692+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 13116,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7245,
-   "cache_read_input_tokens": 7896,
-   "output_tokens": 805,
-   "output_tokens_details": {
-    "thinking_tokens": 18
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7245,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 661,
-     "cache_read_input_tokens": 5610,
-     "cache_creation_input_tokens": 3921,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3921
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0414872,
-  "session_id": "72fb0156-3937-4a5f-8122-0779a9e399ac"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Istituire una nuova area delimitata denominata \"Valle D'Itria\" la cui zona infetta comprenda l'intero agro comunale di Polignano, Monopoli, Alberobello e parte dell'agro di Castellana Grotte nelle quali adottare misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
-   "Stabilire che la zona cuscinetto della nuova area delimitata \"Valle D'Itria\" comprenda un territorio di larghezza di 5 chilometri dalla zona infetta.",
-   "Confermare la zona in cui si attuano misure di contenimento dell'area infetta di cui all'allegato III – parte A del Reg. UE 2020/1201 (indicata come area infetta Salento), definita ai sensi della lettera b) - comma 2 dell'art. 4 dello stesso Regolamento.",
-   "Di applicare le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario in tutte le particelle catastali che rientrano anche parzialmente nelle aree delimitate.",
-   "Di rappresentare i limiti territoriali delle aree delimitate con l'Allegato 1 e 1bis al presente provvedimento che ne formano parte integrante e sostanziale;"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

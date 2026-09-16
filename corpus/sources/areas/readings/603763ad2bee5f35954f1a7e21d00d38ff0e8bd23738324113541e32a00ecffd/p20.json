@@ -562,46 +562,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 13487,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 10191,
-   "cache_read_input_tokens": 10746,
-   "output_tokens": 692,
-   "output_tokens_details": {
-    "thinking_tokens": 112
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 10191,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 451,
-     "cache_read_input_tokens": 8460,
-     "cache_creation_input_tokens": 4017,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 4017
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.055427199999999996,
-  "session_id": "41437ee5-51e1-4b91-a230-94980f7bd2b8"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -619,20 +580,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Sul sito ufficiale della Regione Puglia www.emergenzaxylella.it e sul sito dei progetti europei H2020 XF-ACTORS e POnTE: https://www.xfactorsproject.eu/communication/photo-gallery/ sono pubblicate le immagini delle specie ospiti sia sintomatiche che asintomatiche a Xylella fastidiosa subsp. pauca ST53."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p20-t1",
-    "disposition": "not_annex_table",
-    "output_tables": [],
-    "cause": "Table lists host plant species (numbered 21-35) with botanical names and symptom descriptions; it has no provincia/comune/cadastral scope columns and does not name a demarcated zone."
-   }
-  ],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

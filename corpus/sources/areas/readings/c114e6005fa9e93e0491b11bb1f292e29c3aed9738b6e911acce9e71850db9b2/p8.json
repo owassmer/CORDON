@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:21:13.884682+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8623,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5771,
-   "cache_read_input_tokens": 6439,
-   "output_tokens": 492,
-   "output_tokens_details": {
-    "thinking_tokens": 0
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5771,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 365,
-     "cache_read_input_tokens": 4153,
-     "cache_creation_input_tokens": 3904,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3904
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.031078799999999997,
-  "session_id": "f54f3eb9-6e2e-45c5-a830-db2a9f0d917b"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 BIS",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - Il Dirigente di Sezione Dott. Salvatore Infantino",
-   "Map legend: Zona Cuscinetto X.f. sub. pauca; Zona Contenimento X.f. sub. pauca; Zona Infetta X.f. sub. pauca; Zona Cuscinetto X.f. sub. fastidiosa; Zona Infetta X.f. sub. fastidiosa; Confini Provinciali"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

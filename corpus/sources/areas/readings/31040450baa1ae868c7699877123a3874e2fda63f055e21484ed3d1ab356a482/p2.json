@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:20:30.237739+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 9275,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7253,
-   "cache_read_input_tokens": 7898,
-   "output_tokens": 722,
-   "output_tokens_details": {
-    "thinking_tokens": 24
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7253,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 571,
-     "cache_read_input_tokens": 5612,
-     "cache_creation_input_tokens": 3927,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3927
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.040705599999999995,
-  "session_id": "26347348-7293-47bb-b820-adee1909cf8d"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti, ciascuno, da una zona infetta di 50 m attorno ai 6 mandorli infetti;",
-   "zona cuscinetto di 2,5 km di raggio attorno alle predette zone infette.",
-   "La presenza di Xylella fastidiosa sottospecie fastidiosa ST1 su 6 piante di mandorlo in agro di Triggiano (BA) sulla base dei rapporti di prova, dei risultati della caratterizzazione della sottospecie e del genotipo, comunicati dall'Istituto per la Protezione Sostenibile delle Piante (IPSP) - CNR.",
-   "Di integrare la determina n° 8 del 21/02/2024 istituendo l'area delimitata a Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da:"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

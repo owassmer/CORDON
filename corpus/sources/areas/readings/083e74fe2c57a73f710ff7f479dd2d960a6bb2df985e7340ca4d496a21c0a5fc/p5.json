@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:23:13.709414+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7113,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5768,
-   "cache_read_input_tokens": 6437,
-   "output_tokens": 533,
-   "output_tokens_details": {
-    "thinking_tokens": 0
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5768,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 407,
-     "cache_read_input_tokens": 4151,
-     "cache_creation_input_tokens": 3903,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3903
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0314824,
-  "session_id": "5b59981b-3fec-424f-a286-38b86d8fcb86"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE - DOTT. SALVATORE INFANTINO",
-   "Legenda: Confini Comunali; Confini Provinciali; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto",
-   "Map labels visible: BARI, Prov. BA, NOICATTARO, TRIGGIANO, MOLA DI BARI"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

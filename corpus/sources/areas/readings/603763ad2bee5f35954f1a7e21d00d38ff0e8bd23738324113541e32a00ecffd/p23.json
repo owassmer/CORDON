@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:27:56.653149+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 15832,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7294,
-   "cache_read_input_tokens": 7938,
-   "output_tokens": 1466,
-   "output_tokens_details": {
-    "thinking_tokens": 24
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7294,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1314,
-     "cache_read_input_tokens": 5652,
-     "cache_creation_input_tokens": 3928,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3928
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0483986,
-  "session_id": "f9a6fe73-1ef7-4e21-b24a-d6309a6ef3d3"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "2. SORVEGLIANZA SUL TERRITORIO REGIONALE IN AREE DELIMITATE E IN AREE INDENNI",
-   "Premesso che per zona infetta si intende: zona di almeno 50 metri attorno alla pianta infetta, le attuali aree delimitate istituite ai sensi dell'art. 4 del Reg. (UE) 2020/1201e s.m.i. sono:",
-   "\"Xylella fastidiosa sottospecie pauca ST53\" costituita da: 1. Zona infetta che comprende l'intera provincia di Lecce, Brindisi, parte della provincia di Taranto e Bari, con relativa zona infetta di cui all'Allegato III del Reg. 2020/1201, come modificata dal Reg. UE 2024/2507, della larghezza di 2 km, in cui si attuano misure di contenimento di cui agli articoli da 12 a 17 del Reg. UE 2020/1201 e zona cuscinetto adiacente alla succitata zona infetta della larghezza di 5 km; 2. Zona infetta in agro di Bari in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i. e relativa zona cuscinetto adiacente alla succitata zona infetta della larghezza di 2,5 km.",
-   "\"Xylella fastidiosa sottospecie fastidiosa ST1\" costituita da: 1. Zona infetta in agro di Bari, Capurso, Triggiano e Noicattaro (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta.",
-   "\"Xylella fastidiosa sottospecie multiplex ST26\" costituita da: 1. Zona infetta in agro di Santeramo in Colle (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta; 2. Zona infetta in agro di Ginosa (TA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta; 3. Zona infetta in agro di Capurso (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta; 4. Zona infetta in agro di Noicattaro – Triggiano (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

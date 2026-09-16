@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:25:55.875951+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7252,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7556,
-   "cache_read_input_tokens": 8183,
-   "output_tokens": 603,
-   "output_tokens_details": {
-    "thinking_tokens": 40
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7556,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 434,
-     "cache_read_input_tokens": 5897,
-     "cache_creation_input_tokens": 3945,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3945
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.041020600000000004,
-  "session_id": "30764739-2216-4191-900c-e14a473359d0"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "n° 517 piante distribuite negli agri di Santeramo in Colle, Altamura, Cassano delle Murge e di Ginosa (TA) sono risultate infette a Xylella fastidiosa sottospecie multiplex ST26;",
-   "quattro piante infette sono state rinvenute in area indenne di cui n. 3 in agro di Altamura e n. 1 in agro di Ginosa, in prossimità del confine con la Regione Basilicata;",
-   "l'aggiornamento della area delimitata di Santeramo e l'istituzione della nuova area delimitata per il focolaio di Ginosa coinvolgono anche parte del territorio della Basilicata (zona cuscinetto);"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

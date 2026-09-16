@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:31:09.135177+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 11726,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5847,
-   "cache_read_input_tokens": 6503,
-   "output_tokens": 1322,
-   "output_tokens_details": {
-    "thinking_tokens": 11
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5847,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1183,
-     "cache_read_input_tokens": 4217,
-     "cache_creation_input_tokens": 3916,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3916
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.039745600000000006,
-  "session_id": "a16a6388-a0d3-4189-9472-80199039d588"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -66,18 +27,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 BIS (title)",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda list of map symbols (not a table): Area delimitata Xylella fastidiosa sub. multiplex - Zona Infetta; Area delimitata Xylella fastidiosa sub. multiplex - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Infetta; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Cuscinetto; Area Delimitata XF sub. pauca (Valenzano) - Zona Infetta; Area Delimitata XF sub. pauca (Valenzano) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Cagnano Varano) - Zona Infetta; Area Delimitata XF sub. pauca (Cagnano Varano) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Giovinazzo) - Zona Infetta; Area Delimitata XF sub. pauca (Giovinazzo) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Bisceglie) - Zona Infetta; Area Delimitata XF sub. pauca (Bisceglie) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Modugno) - Zona Infetta; Area Delimitata XF sub. pauca (Modugno) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca (Minervino Murge) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Minervino Murge) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca - Zona Contenimento; Area delimitata Xylella fastidiosa sub. pauca - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca - Zona Cuscinetto; Confini Provinciali; Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle/Ginosa) - Zona Cuscinetto in Basilicata; Regione Basilicata",
-   "Map labels: Prov. FG, Prov. BT, Prov. BA, Prov. TA, Prov. BR, Prov. LE, Puglia, Basilicata",
-   "www.emergenzaxylella.it",
-   "Scale bar 0-15-30-60 Km and north arrow"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:23:22.501071+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7974,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5789,
-   "cache_read_input_tokens": 6447,
-   "output_tokens": 754,
-   "output_tokens_details": {
-    "thinking_tokens": 10
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5789,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 617,
-     "cache_read_input_tokens": 4161,
-     "cache_creation_input_tokens": 3914,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3914
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0337864,
-  "session_id": "701549d7-3341-4248-9890-b427d7492ed0"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 BIS",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
-   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Infetta; Area delimitata Xylella fastidiosa sub. multiplex - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Infetta; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca - Zona Contenimento; Area delimitata Xylella fastidiosa sub. pauca - Zona Infetta; Confini Provinciali",
-   "www.emergenzaxylella.it"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

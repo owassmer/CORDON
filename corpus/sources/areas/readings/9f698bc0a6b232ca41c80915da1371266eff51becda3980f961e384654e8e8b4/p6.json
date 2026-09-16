@@ -343,46 +343,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 12913,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 9177,
-   "cache_read_input_tokens": 9826,
-   "output_tokens": 1574,
-   "output_tokens_details": {
-    "thinking_tokens": 50
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 9177,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1428,
-     "cache_read_input_tokens": 7540,
-     "cache_creation_input_tokens": 3923,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3923
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0590472,
-  "session_id": "bfd0bae7-cce7-4cff-a776-839df9596361"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 2,
   "tables": [
@@ -682,32 +643,7 @@
      }
     ]
    }
-  ],
-  "unattached": [
-   "ALLEGATO 2",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
-   "IL DIRIGENTE DELLA SEZIONE"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p6-t1",
-    "disposition": "represented",
-    "output_tables": [
-     1
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p6-t2",
-    "disposition": "represented",
-    "output_tables": [
-     2
-    ],
-    "cause": null
-   }
-  ],
-  "tables_visible": 2
+  ]
  },
  "resolution_problems": []
 }

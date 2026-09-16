@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:24:13.863908+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7188,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6093,
-   "cache_read_input_tokens": 6733,
-   "output_tokens": 566,
-   "output_tokens_details": {
-    "thinking_tokens": 28
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6093,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 410,
-     "cache_read_input_tokens": 4447,
-     "cache_creation_input_tokens": 3932,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3932
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.033378599999999994,
-  "session_id": "b8795ec7-51df-4f67-b0f2-c077d1e904c2"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Documento - Impronta (SHA256) table: Allegato_merged.pdf - 88d30d1797067f1b361c07a264a4042d3d85fe5aaf1eff2f2984da9cec7f3f9e (document hash table, not an annex cadastral table)",
-   "Il presente Provvedimento è direttamente esecutivo.",
-   "Basato sulla proposta n. 181/DIR/2024/00104 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
-   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

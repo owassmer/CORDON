@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:26:14.787498+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7453,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7236,
-   "cache_read_input_tokens": 7877,
-   "output_tokens": 606,
-   "output_tokens_details": {
-    "thinking_tokens": 26
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7236,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 451,
-     "cache_read_input_tokens": 5591,
-     "cache_creation_input_tokens": 3931,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3931
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0394694,
-  "session_id": "02a37973-8f90-457e-a288-06cb2e78f602"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -62,14 +23,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "di dovere stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, in particolare le misure di lotta al vettore, si applichino in tutte le particelle catastali che rientrano anche parzialmente nelle aree delimitate che ricadono nel territorio regionale.",
-   "di aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 –Santeramo in Colle\", di cui all' atto dirigenziale n° 198 del 18/12/2024, ai sensi dei ... (continues on next page)"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -196,9 +196,29 @@ class WhatAStatementDecides(unittest.TestCase):
         self.assertIsNone(s.covers())
         self.assertIs(s.covers(comune='TRIGGIANO'), True)
 
-    def test_a_contradicting_province_is_not_a_match(self):
-        s = statement('whole-comune')
-        self.assertIsNone(s.covers(comune='TRIGGIANO', province='LECCE'))
+    def test_the_province_never_decides_a_comune_scoped_statement(self):
+        # The acts print one province as "BARI" in one act and "BA" in the
+        # next. Treating the spelling the question uses as a contradiction
+        # dropped the row and reported the act as silent about the place; the
+        # comune identifies the place, and the act's own province stays in
+        # the assertion's support for the caller to see.
+        s = statement('whole-comune', province='BA')
+        for province in ('BA', 'BARI', 'LECCE', None):
+            with self.subTest(province=province):
+                self.assertIs(s.covers(comune='TRIGGIANO', province=province), True)
+        self.assertIsNone(s.covers(comune='CAPURSO', province='BA'))
+
+    def test_unfamiliar_range_forms_are_not_read_at_all(self):
+        # A dash range read as its endpoints drops every sheet between them;
+        # a range of particelle read as sheets places sheets the act never
+        # names. No held act writes either form, so both must surface as
+        # unread on first contact rather than as a confident answer.
+        for text in ('FOGLI: 100-105', 'FOGLI 12 – 15, 18',
+                     'FOGLIO 5: particelle da 260 a 264', 'FOGLI: 1, 2, particelle 5 a 9'):
+            with self.subTest(text=text):
+                self.assertFalse(read_scope(text).fully_read)
+        # The one dash the population prints keeps its own reading.
+        self.assertTrue(read_scope('FOGLI 19, 19-ALLEGATO A*').fully_read)
 
     def test_a_sectioned_sheet_needs_its_section(self):
         s = statement('sheets', [Sheet('G', '2', True)])
@@ -275,24 +295,70 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
                 self.assertTrue(version.absence,
                                 'supplies no statement and names no cause')
 
-    def test_an_act_adopting_maps_is_not_blamed_on_the_reader(self):
+    def test_an_act_adopting_maps_states_its_geography_unread(self):
         # DDS 69/2021 adopts Allegato 1 and 1 bis as integral parts of itself,
-        # and both are maps: all seven pages read, no cadastral table printed.
-        # Calling it an act that states a rule would write a reading limit into
-        # the owner as a property of the source; calling the absence a reading
-        # failure points the operator at a reader when the remedy is map
-        # registration. Until its pages are all read, the reading is the cause.
+        # and both are maps with the cadastral sheets drawn on the map face:
+        # all seven pages read, no cadastral table printed. The act states its
+        # geography; a map read as an image and not recovered into zones is
+        # this reading's limit, never the source's silence, and the cause
+        # names the remedy - registering the maps - so the operator is not
+        # told the question is closed against the act.
         version = next(v for v in self.versions
                        if '2021-00069' in v.provision_version_id)
         self.assertEqual(version.geography_form, 'annexed')
         self.assertEqual(version.statements, ())
         self.assertEqual(len(version.absence), 1)
         cause = version.absence[0]
-        if 'pages have not all been read' in cause:
-            self.assertTrue(cause.startswith(READING_DID_NOT_RECOVER))
-        else:
-            self.assertTrue(cause.startswith(SOURCE_STATES_NONE))
-            self.assertIn('complete page reading', cause)
+        self.assertTrue(cause.startswith(READING_DID_NOT_RECOVER))
+        self.assertFalse(cause.startswith(SOURCE_STATES_NONE))
+        self.assertIn('registering the maps', cause)
+
+    def test_a_reached_place_and_an_unmentioned_place_get_different_answers(self):
+        # DDS 106/2025 lists Ginosa sheet 36 unstarred in its buffer table and
+        # partially in its infected table: the zone reaches the sheet and the
+        # act does not say which part. Sheet 999 it never mentions. Both yield
+        # no membership assertion, and they must not yield the same sentence:
+        # the adopted map decides the first, nothing decides the second.
+        day = date(2025, 7, 1)
+        version = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        reached = [a for a in zone_of((version,), day, comune='GINOSA', foglio='36', particella='5')]
+        unmentioned = [a for a in zone_of((version,), day, comune='GINOSA', foglio='999', particella='5')]
+        self.assertTrue(reached)
+        self.assertTrue(all(a['zone'] is None for a in reached))
+        self.assertEqual({a['reached_zone'] for a in reached}, {'cuscinetto', 'infetta'})
+        self.assertTrue(all('does not state which part' in a['basis'] for a in reached))
+        self.assertEqual([a['basis'] for a in unmentioned],
+                         ['no cadastral statement establishes membership for this place'])
+        for a in reached:
+            self.assertIn('p13 table', a['statement'].locator)
+        # A part of a comune whose extent the table leaves unstated is reached too.
+        part = statement('part-comune-extent-unstated', comune='CONVERSANO', zone='cuscinetto')
+        from dataclasses import replace
+        fixture = replace(version, statements=(part,))
+        answers = zone_of((fixture,), day, comune='CONVERSANO', foglio='40', particella='1')
+        self.assertEqual([a.get('reached_zone') for a in answers], ['cuscinetto'])
+        # And neither reaches the accepted consumer as an assertion.
+        _, assertions = membership_evidence((version,), ROOT, day, comune='GINOSA', foglio='36', particella='5')
+        self.assertEqual(assertions, ())
+
+    def test_a_response_cut_off_by_the_model_is_not_a_page_read(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            readings = root / 'corpus/sources/areas/readings'
+            (readings / 'source').mkdir(parents=True)
+            (readings / 'INVENTORY.json').write_text(json.dumps([
+                {'act_sha256': 'source', 'page': 1, 'pages_in_document': 1, 'candidate': True}]))
+            pinned = {'act_sha256': 'source', 'page': 1, 'stop_reason': 'max_tokens',
+                      'reading': {'tables': [], 'unattached': [], 'uncertain': [],
+                                  'native_tables_accounted': [], 'tables_visible': 0},
+                      'resolved': {'tables': []}, 'resolution_problems': []}
+            (readings / 'source/p1.json').write_text(json.dumps(pinned))
+            statements, unresolved, _, unread = pinned_statements(root, 'source')
+            self.assertEqual(unread, (1,))
+            self.assertTrue(any('max_tokens' in u for u in unresolved))
+            pinned['stop_reason'] = 'tool_use'
+            (readings / 'source/p1.json').write_text(json.dumps(pinned))
+            self.assertEqual(pinned_statements(root, 'source')[3], ())
 
     def test_the_causes_are_distinguishable(self):
         vocabulary = {SOURCE_STATES_NONE, MATERIAL_NOT_HELD, READING_DID_NOT_RECOVER,
@@ -379,6 +445,31 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         self.assertEqual(len(assertions), 2)
         self.assertEqual(len({a.identity for a in assertions}), 2)
         self.assertEqual(len({a.support[0].selector for a in assertions}), 2)
+
+    def test_the_route_to_the_accepted_consumer_admits_a_decided_parcel_and_nothing_else(self):
+        # evidence_for is the only path from a pinned reading to the Stage C
+        # evidence object, where contract admission, the event-time version's
+        # ownership of the predicate and the source role are enforced. Ginosa
+        # sheet 29 is starred in DDS 106/2025's buffer table; sheet 36 is not.
+        from cordon_c.core import Snapshot
+        from cordon_d.areas import evidence_for
+        snapshot = Snapshot.load(ROOT)
+        day = date(2025, 7, 1)
+        version = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        evidence, assertions = evidence_for((version,), ROOT, day, snapshot=snapshot,
+                                            comune='GINOSA', foglio='29', particella='5')
+        self.assertEqual(len(assertions), 1)
+        self.assertEqual(assertions[0].contract, 'adopted-geography')
+        self.assertIn('cuscinetto', assertions[0].identity)
+        self.assertTrue(evidence)
+        _, none = evidence_for((version,), ROOT, day, snapshot=snapshot,
+                               comune='GINOSA', foglio='36', particella='5')
+        self.assertEqual(none, ())
+        # The same parcel answers identically whatever the caller calls the province.
+        for province in ('TA', 'TARANTO', None):
+            _, again = evidence_for((version,), ROOT, day, snapshot=snapshot, province=province,
+                                    comune='GINOSA', foglio='29', particella='5')
+            self.assertEqual(len(again), 1, province)
 
     def test_retained_section_boundaries_survive_to_membership(self):
         cases = [('2024-00093', 'A', '76', 'p9 table 2 row 1'),

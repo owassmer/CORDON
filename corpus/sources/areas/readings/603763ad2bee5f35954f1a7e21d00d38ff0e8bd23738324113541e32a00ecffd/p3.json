@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:26:51.338577+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 5970,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7270,
-   "cache_read_input_tokens": 7897,
-   "output_tokens": 364,
-   "output_tokens_details": {
-    "thinking_tokens": 42
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7270,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 195,
-     "cache_read_input_tokens": 5611,
-     "cache_creation_input_tokens": 3945,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3945
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0372194,
-  "session_id": "a08f72c8-4b2f-43c8-b3b3-32b14bed000d"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -59,11 +20,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

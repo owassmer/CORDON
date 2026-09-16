@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:23:05.435179+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 11129,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7447,
-   "cache_read_input_tokens": 8084,
-   "output_tokens": 1151,
-   "output_tokens_details": {
-    "thinking_tokens": 30
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7447,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 992,
-     "cache_read_input_tokens": 5798,
-     "cache_creation_input_tokens": 3935,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3935
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.04597280000000001,
-  "session_id": "f66fbd38-9942-4d84-b96f-60d3bb355147"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -67,19 +28,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Rappresentare con l'Allegato 1 e 1 bis, parte integrante e sostanziale del presente provvedimento, i limiti geografici territoriali a livello regionale della zona \"infetta\" e \"cuscinetto\" dell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\";",
-   "Riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" dell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\".",
-   "Adottare nell'area delimitata per \"Xylella fastidiosa sottospecie pauca ST53- Bari\", le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
-   "Stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario si applicano a tutte le particelle catastali che rientrano, anche parzialmente, nelle zone delimitate;",
-   "Dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia.",
-   "Di istituire una nuova area delimitata per a Xylella fastidiosa sottospecie pauca ST53 identificata come \"Xylella fastidiosa sottospecie pauca ST53–Bari\", ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: Zone infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie pauca ST53; zona cuscinetto di almeno 2,5 km attorno ad ogni zona infetta di 50 m di Xylella fastidiosa sottospecie pauca ST53.",
-   "Di rappresentare con l'Allegato 1 e 1 bis, parte integrante e sostanziale del presente provvedimento, i limiti geografici territoriali a livello regionale della zona \"infetta\" e \"cuscinetto\" dell'area delimitata a \"Xylella fastidiosa sottospecie pauca ST53- Bari\"."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -82,46 +82,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 10571,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7032,
-   "cache_read_input_tokens": 7646,
-   "output_tokens": 996,
-   "output_tokens_details": {
-    "thinking_tokens": 54
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7032,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 814,
-     "cache_read_input_tokens": 5360,
-     "cache_creation_input_tokens": 3958,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3958
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0423942,
-  "session_id": "181bb049-cd30-4efd-9ec0-1c3db81b9834"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -144,25 +105,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 - IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
-   "Il DIRIGENTE DELLA SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Zona Infetta Canosa di Puglia (red); Zona Cuscinetto Canosa di Puglia (magenta); Fogli Catastali (blue); Confini comunali (black)",
-   "Map labels: Foglio 2, Foglio 3, Foglio 5, Foglio 6, Foglio 8, Foglio 9, Foglio 10, Foglio 59, Foglio 61, Foglio 65, Foglio 66 (x2), Foglio 67, Foglio 69, Foglio 70, Foglio 71 (x2), Foglio 77 (x2), Foglio 68, Foglio 14",
-   "Comuni labeled on map: CANOSA DI PUGLIA, MINERVINO MURGE",
-   "Firmato digitalmente da: SALVATORE INFANTINO, Regione Puglia, Firmato il: 27-07-2021 22:17:33, Seriale certificato: 904277, Valido dal 09-02-2021 al 09-02-2024"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p6-t1",
-    "disposition": "not_annex_table",
-    "output_tables": [],
-    "cause": "The bounding box covers the whole page, which is a cadastral map (ALLEGATO 1) with a legend, not a data table. The 'cells' the PDF detected are actually scattered map labels (Foglio numbers, comune names, legend entries, signature block) run together, not tabular rows/columns."
-   }
-  ],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

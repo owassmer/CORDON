@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:25:55.249740+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7475,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7334,
-   "cache_read_input_tokens": 7970,
-   "output_tokens": 639,
-   "output_tokens_details": {
-    "thinking_tokens": 33
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7334,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 479,
-     "cache_read_input_tokens": 5684,
-     "cache_creation_input_tokens": 3936,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3936
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.040292999999999995,
-  "session_id": "0d1cae6e-1bff-4711-a32a-648d4e0c0405"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -61,13 +22,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Elenco laboratori ufficiali designati e autorizzati ad operare nel territorio regionale, affidato con Determina N. 190 del 12/12/2024: Centro di ricerca, sperimentazione e formazione in agricoltura \"Basile Caramia\" di Locorotondo (CRSFA); Dipartimento di scienze del suolo, della pianta e degli alimenti - Univ. Bari; CIHEAM - Istituto Agronomico Mediterraneo -Valenzano; Dipartimento di Scienze Agrarie degli alimenti e dell'ambiente (SAFE) - Univ. Foggia; CNR - Istituto per la Protezione Sostenibile delle Piante (IPSP) di Bari; in quanto accreditati EN ISO/IEC 17025 o in via di accreditamento;"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

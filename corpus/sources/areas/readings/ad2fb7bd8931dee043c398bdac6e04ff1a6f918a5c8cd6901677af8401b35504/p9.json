@@ -319,46 +319,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 17512,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 8868,
-   "cache_read_input_tokens": 9525,
-   "output_tokens": 1667,
-   "output_tokens_details": {
-    "thinking_tokens": 127
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 8868,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1529,
-     "cache_read_input_tokens": 7239,
-     "cache_creation_input_tokens": 3915,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3915
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.058423,
-  "session_id": "d371176f-896b-46b6-bf75-d244cb3cdb1e"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 2,
   "tables": [
@@ -631,32 +592,7 @@
      }
     ]
    }
-  ],
-  "unattached": [
-   "ALLEGATO 2",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
-   "IL DIRIGENTE DELLA SEZIONE"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p9-t1",
-    "disposition": "represented",
-    "output_tables": [
-     1
-    ],
-    "cause": null
-   },
-   {
-    "native_table": "p9-t2",
-    "disposition": "represented",
-    "output_tables": [
-     2
-    ],
-    "cause": null
-   }
-  ],
-  "tables_visible": 2
+  ]
  },
  "resolution_problems": []
 }

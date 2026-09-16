@@ -58,46 +58,7 @@
    ]
   }
  },
- "envelope": {
-  "duration_ms": 9547,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6765,
-   "cache_read_input_tokens": 7403,
-   "output_tokens": 990,
-   "output_tokens_details": {
-    "thinking_tokens": 29
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6765,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 832,
-     "cache_read_input_tokens": 5117,
-     "cache_creation_input_tokens": 3934,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3934
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0409906,
-  "session_id": "015b76e1-d8e0-4722-b3c1-8a53d3df0722"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -121,26 +82,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Tralci lignificati idonei per il campionamento di vite",
-   "CONSEGNA CAMPIONI: I campioni devono essere consegnati ai laboratori nella stessa giornata del prelievo e devono essere trasportati in borse frigo con siberine.",
-   "La squadra di Assistenti fitosanitari consegna i campioni al personale ARIF appositamente incaricato del trasporto ai laboratori ufficiali.",
-   "I due Assistenti fitosanitari componenti la squadra e l’autista firmano il verbale di consegna digitalmente attraverso la App mobile.",
-   "Il personale autorizzato al trasporto attesta la consegna al laboratorio controfirmando il verbale digitalmente attraverso la App mobile.",
-   "ISTITUZIONE/AGGIORNAMENTO AREA DELIMITATA: L’Osservatorio sulla base delle risultanze dell’attività di monitoraggio e dei risultati delle analisi di laboratorio, con atto dirigenziale istituisce o aggiorna l’area delimitata ai sensi dell’art. 4 del Reg. UE 2020/1201 e s.m.i. avvalendosi di Innovapuglia per gli elaborati cartografici.",
-   "Successivamente all’emissione dell’atto, InnovaPuglia, trasmette gli elaborati cartografici in formato shapefile all’Osservatorio e ad ARIF, che provvede ad inserirli nell’App Xylella, in modo che le schede di rilevazione dell’App Xylella contengano sempre informazioni aggiornate."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [
-   {
-    "native_table": "p34-t1",
-    "disposition": "not_annex_table",
-    "output_tables": [],
-    "cause": "This is a paragraph of prose text under heading 'ISTITUZIONE/AGGIORNAMENTO AREA DELIMITATA', not a table with provincia/comune/scope columns."
-   }
-  ],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

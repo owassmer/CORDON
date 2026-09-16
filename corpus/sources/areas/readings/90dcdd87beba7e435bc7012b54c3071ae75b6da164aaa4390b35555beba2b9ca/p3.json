@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:18:31.910005+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 23659,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7607,
-   "cache_read_input_tokens": 8246,
-   "output_tokens": 2105,
-   "output_tokens_details": {
-    "thinking_tokens": 28
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7607,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1948,
-     "cache_read_input_tokens": 5960,
-     "cache_creation_input_tokens": 3933,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3933
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0562782,
-  "session_id": "25063851-b39a-4a4c-a392-40a72f3245c9"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -69,21 +30,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "dal loro stato sanitario, sono state immediatamente sottoposte a campionamento e sono state estirpate e pertanto si ritiene soddisfatta la condizione di cui alla lettera a) del comma 1 dell'art. 5 del Reg. UE 2020/1201.",
-   "Sono state prelevati campioni dai lotti di piante ospiti di Xylella fatidiosa limitrofi alla zona infetta per un totale di 4.838 piante campionate (campioni singoli e poll), analizzati dal CRSFA mediante analisi molecolari e nessun'altra pianta è risultata infetta, pertanto si ritiene soddisfatta la condizione di cui alla lettera b) del comma 1 dell'art. 5 del Reg. UE 2020/1201.",
-   "A dicembre 2020 è stato effettuato il monitoraggio dell'area esterna al sito produttivo, per un raggio di 100 m, sono stati campionati 347 olivi, i campioni vegetali sono stati analizzati dal CRSFA con analisi molecolari e sono risultati tutti negativi. Successivamente in ottemperanza al Reg. UE 2020/1201, alla DGR 538/2021 e secondo le indicazioni della scheda di sorveglianza fitosanitaria dell'Autorità relativa alla Xylella fastidiosa (EFSA), sono state campionate: • 9.695 piante (campioni singoli e pool) dei lotti di specie specificate presenti nei siti produttivi degli O.P., ricadenti nella zona cuscinetto dell'area delimitata di Canosa di cui alla DDS 35/2021; • 2.980 piante specificate (campioni singoli e pool) nella zona cuscinetto. Tutti i campioni analizzati con analisi molecolari sono risultati negativi e pertanto si ritiene soddisfatta la condizione di cui alla lettera c) del comma 1 dell'art.5 del Reg. UE 2020/1201.",
-   "A novembre 2020 è stato effettuato un primo monitoraggio dei vettori nella zona infetta e nelle zone limitrofe, gli insetti catturati sono stati analizzati singolarmente con analisi molecolari dal CRSFA e non sono risultati infetti da xylella (nota del CRSFA prot.2458 del 3/12/2020 agli atti dell'ufficio). Il monitoraggio dei vettori è stato rifatto a Luglio 2021 sia nella zona infetta che nella zona cuscinetto dell'area delimitata di Canosa, gli insetti catturati sono stati sottoposti ad analisi molecolari e sono risultati negativi (rapporto di prova del CRSFA prot. 1488 del 24/07/2021 agli atti dell'ufficio), pertanto si ritiene soddisfatta la condizione di cui alla lettera d) del comma 1 dell'art.5 del Reg. UE 2020/1201.",
-   "CONSIDERATO CHE Il monitoraggio dei vettori nell'area delimitata di Canosa continuerà con ispezioni mensili sino ad ottobre 2021, per verificare la presenza di eventuali vettori infetti.",
-   "E' vietata la movimentazione verso l'esterno delle piante specificate alla Xylella fastidiosa subspecie pauca presenti nei siti produttivi degli O.P. ubicati nell'area delimitata di Canosa.",
-   "Le specie specificate alla Xylella fastidiosa subspecie pauca presenti nei siti produttivi degli O.P. ricadenti nell'area delimitata saranno comunque sottoposti ad ispezione ed eventuale campionamento.",
-   "RITENUTO CHE Nell'area delimitata di Canosa si può applicare la deroga di cui al comma 1 dell'art. 5 del Reg. UE 2020/1201, riducendo la zona cuscinetto a una larghezza non inferiore a 1 km in quanto, essendo soddisfatte tutte le condizioni di cui alle lettere a),b),c),d), è possibile concludere, con un livello elevato di confidenza, che la presenza iniziale della xylella fastidiosa non ne ha comportato la sua diffusione.",
-   "VERIFICA AI SENSI DEL D. Lgs 196/03 - Garanzie alla riservatezza: La pubblicazione dell'atto all'albo, salve le garanzie previste dalla legge 241/90 in tema di accesso ai documenti amministrativi, avviene nel rispetto della tutela alla riservatezza dei cittadini, secondo quanto disposto dal D. Lgs. 196/03 in materia di protezione dei dati personali, nonché dal vigente regolamento regionale n. 5/2006 per il trattamento dei dati sensibili e giudiziari. Ai fini della pubblicità legale, l'atto destinato alla pubblicazione è redatto in modo da evitare la diffusione di dati personali identificativi non necessari, ovvero il riferimento a dati sensibili."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

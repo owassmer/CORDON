@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:23:20.254197+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8354,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 8432,
-   "cache_read_input_tokens": 4498,
-   "output_tokens": 577,
-   "output_tokens_details": {
-    "thinking_tokens": 29
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 8432,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 419,
-     "cache_read_input_tokens": 4498,
-     "cache_creation_input_tokens": 3934,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3934
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.042435600000000004,
-  "session_id": "5d6af1b0-b106-4a70-a8a6-1854007b4c63"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "del 31.07.2015, mediante affissione per 10 giorni lavorativi a decorrere dalla data della sua adozione, all’Albo delle Determinazioni Dirigenziali tramite la piattaforma regionale CIFRA, ai sensi delle Linee Guida del Segretario generale della Giunta Regionale e del Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020;",
-   "sarà pubblicizzato nella sezione “Amministrazione trasparente”, sotto sezione “Provvedimenti dirigenti amministrativi” del sito www.regione.puglia.it.",
-   "IL DIRIGENTE DELLA SEZIONE (Dr. Salvatore Infantino)"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

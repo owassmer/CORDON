@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:21:08.671543+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 9112,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5792,
-   "cache_read_input_tokens": 6445,
-   "output_tokens": 863,
-   "output_tokens_details": {
-    "thinking_tokens": 16
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5792,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 721,
-     "cache_read_input_tokens": 4159,
-     "cache_creation_input_tokens": 3919,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3919
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.03489299999999999,
-  "session_id": "6432c0b5-309d-4370-b605-b294793b3ca4"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - Il Dirigente di Sezione Dott. Salvatore Infantino",
-   "Legenda: Zona Cuscinetto X.f. sub. pauca; Zona Contenimento X.f. sub. pauca; Zona Infetta X.f. sub. pauca; Zona Cuscinetto X.f. sub. fastidiosa; Zona Infetta X.f. sub. fastidiosa; Confini Comunali; Confini Provinciali",
-   "Map depicts province boundaries Prov. BR, Prov. TA, Prov. BA and municipalities including Carovigno, Ostuni, Cisternino, Locorotondo, Fasano, Monopoli, Polignano a Mare, Castellana Grotte, Alberobello, Martina Franca, Crispiano, Statte, Massafra, Taranto, Grottaglie, Francavilla Fontana, Latiano, Oria, Sava, Mottola, Palagiano, Castellaneta, Laterza, Ginosa, Noci, Gioia del Colle, Putignano, Conversano, Mola di Bari, Triggiano (highlighted with pink dot), Noicattaro, Rutigliano, Capurso, Casamassima, Adelfia, Turi, Santeramo in Colle, Cassano delle Murge, Altamura, Bari, Modugno, Bitetto, Palo del Colle, Grumo Appula, Toritto, Bitonto, Terlizzi"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

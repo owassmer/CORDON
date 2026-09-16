@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:30:06.633686+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 15307,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6681,
-   "cache_read_input_tokens": 7317,
-   "output_tokens": 802,
-   "output_tokens_details": {
-    "thinking_tokens": 33
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6681,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 642,
-     "cache_read_input_tokens": 5031,
-     "cache_creation_input_tokens": 3936,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3936
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0386634,
-  "session_id": "826d5745-7609-4601-a500-f5d4dfa09980"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATI INTEGRANTI table lists: ALLEGATO1_20251212.pdf (SHA256: 6b3ab4a100b1b156de99854b2aadc684976ec621082ebb2635afb3bd1e7e52f3), ALLEGATO1BIS_20251212.pdf (SHA256: 3823e85d58fd6756faa928b7e4bc1999575092eea42bcf85ad5492ba41e6fc38), ALLEGATO2.pdf (SHA256: 23bb91ff71a05f342465663cf485656c3c14b18972f9d74aff0270f0cb3bf1b2) — this is a document/hash index, not a cadastral scope annex table.",
-   "Il presente Provvedimento è direttamente esecutivo.",
-   "Come Proposta: Codice Cifra 181/DIR/2025/00239",
-   "Sottoscrittori Proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa fastidiosa\" - Claudio Zaza; E.Q.\"Programmazione e gestione fitosanitaria\" - Anna Percoco",
-   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

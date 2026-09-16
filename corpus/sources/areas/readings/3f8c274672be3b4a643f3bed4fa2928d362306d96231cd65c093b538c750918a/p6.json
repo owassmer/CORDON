@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:15:47.820181+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 8853,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 5789,
-   "cache_read_input_tokens": 6443,
-   "output_tokens": 825,
-   "output_tokens_details": {
-    "thinking_tokens": 16
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 5789,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 684,
-     "cache_read_input_tokens": 4157,
-     "cache_creation_input_tokens": 3918,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3918
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0344946,
-  "session_id": "eda45bc6-adbd-4f9d-9daf-080e0e5b7ac8"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -65,17 +26,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATO 1 BIS",
-   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
-   "Il DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
-   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Infetta; Area delimitata Xylella fastidiosa sub. multiplex - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle/Ginosa) - Zona Cuscinetto in Basilicata; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Infetta; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca (Jani) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca - Zona Contenimento; Area delimitata Xylella fastidiosa sub. pauca - Zona Infetta; Regione Basilicata; Confini Provinciali",
-   "www.emergenzaxylella.it"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

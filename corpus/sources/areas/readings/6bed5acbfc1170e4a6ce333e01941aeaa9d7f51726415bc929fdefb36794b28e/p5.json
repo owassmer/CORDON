@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:33:35.916700+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 15091,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7081,
-   "cache_read_input_tokens": 7663,
-   "output_tokens": 826,
-   "output_tokens_details": {
-    "thinking_tokens": 85
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7081,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 612,
-     "cache_read_input_tokens": 5377,
-     "cache_creation_input_tokens": 3990,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3990
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.04086959999999999,
-  "session_id": "2adb9e90-06ce-4cfb-ac97-8decf196d59b"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Di trasmettere copia del presente atto: Ai Comuni di Bari, Bitonto (BA) e Modugno (BA); alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Provincia di Bari; all'ANCI Puglia; all'ARIF",
-   "è composto da pagine tutte progressivamente numerate e da n° 3 allegati composti rispettivamente da 1 facciata",
-   "Documento - Impronta (SHA256) table: ALLEGATO_1_aggiornamento_MODUGNO_20250717.pdf - e077dd873548a301c4f7b5b3883df04b8e1cc0c71f40526eca3779e921998b4a; ALLEGATO_1BIS_aggiornamento_MODUGNO_20250717.pdf - 32843db96021d8f2d374fa376ba734a9c145ea1b825ddc9e2a323d88f60c5317; ALLEGATO2_MODUGNO_20250717.pdf - b81afa63824b32a475483292fa2e685afd17badfbc0e7075fa474e7eb0d630bf"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

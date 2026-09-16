@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:20:47.852844+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 15642,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7329,
-   "cache_read_input_tokens": 7968,
-   "output_tokens": 1774,
-   "output_tokens_details": {
-    "thinking_tokens": 28
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7329,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1617,
-     "cache_read_input_tokens": 5682,
-     "cache_creation_input_tokens": 3933,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3933
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0516446,
-  "session_id": "7bed80c4-c03b-4469-b223-dc31f979d103"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -73,25 +34,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "e Putignano.",
-   "Alcuni focolai individuati in agro di Putignano e Castellana Grotte ricadono nella zona cuscinetto dell'area delimitata \"Valle D'Itria\".",
-   "Il numero di piante infette individuate nell'area delimitata 'Valle d'Itria' è tale da escludere che la Xylella fastidiosa si possa eradicare nella zona infetta della predetta area, in quanto le piante infette non sono localizzate in una zona circoscritta ma sono distribuite in numerosi focolai diffusi nel territorio.",
-   "L'individuazione di piante infette in agro di Putignano e Castellana Grotte, nella zona cuscinetto, rende necessario aggiornare e ridefinire le aree delimitate di cui alla Determina n. 127 del 17/11/2022.",
-   "Il Comitato Scientifico dell'Assessore all'Agricoltura della Regione Puglia nominato con D.G.R. N. 15 del 11/01/2021 e le Organizzazioni Professionali agricole convocate il 16/11/2023, hanno convenuto sull'impossibilità di eradicare il patogeno nella zona infetta dell'area delimitata 'Valle d'Itria' e hanno espresso parere favorevole all'applicazione di misure di contenimento e non di eradicazione nei comuni di: Alberobello, Castellana Grotte, Monopoli, Polignano a Mare e parte di Putignano.",
-   "La proposta di applicare una strategia di contenimento nell'area infetta della \"Valle D'Itria\" con conseguente modifica dell'allegato III del Reg. (UE) 2020/1201, è stata discussa e approvata nel Comitato Fitosanitario Nazionale del 30 novembre 2023.",
-   "L'Osservatorio con nota prot.11056 del 28/12/2023, ha chiesto alla Commissione Europea per il tramite del Ministero dell'agricoltura, della sovranità alimentare e delle foreste (di seguito MASAF), la modifica dell'Allegato III del Reg.(UE)2020/1201, inserendo i comuni di: Alberobello, Castellana Grotte, Monopoli, Polignano a Mare e parte di Putignano, nell'area infetta in cui si applicano misure di contenimento, di cui agli articoli da 13 a 17 del Reg.(UE)2020/1201.",
-   "Il MASAF ha trasmesso alla DG competente della Commissione Europea, la richiesta di modifica di cui sopra.",
-   "Nelle more delle decisioni che assumerà la Commissione europea, in conseguenza della quale l'Osservatorio assumerà tutte le conseguenti opportune determinazioni, anche correttive e modificative - ove necessario - degli atti e provvedimenti già assunti:",
-   "di dover istituire in Puglia un'unica area delimitata a \"Xylella fastidiosa subspecie Pauca ST53\";",
-   "di stabilire che l'area infetta a \"Xylella fastidiosa subspecie Pauca ST53\" in cui si attuano misure di contenimento (di seguito zona contenimento), di cui agli articoli da 13 a 17 del Reg.(UE) 2020/1201, comprende: intero agro comunale di: Alberobello, Castellana Grotte, Monopoli, Polignano a Mare e parte dell'agro di Putignano, 5 km a nord della ex zona infetta \"Salento\" come dettagliato nell'allegato 2 al presente provvedimento, che ne forma parte integrante e sostanziale;",
-   "di stabilire che la zona cuscinetto della nuova area delimitata a \"Xylella fastidiosa subspecie Pauca ST53\" comprende un territorio di larghezza di 5 chilometri dalla zona infetta che si estende dallo Jonio all'Adriatico;",
-   "di rappresentare con gli Allegati 1 e 1 bis al presente provvedimento, che ne formano parte integrante e sostanziale, i limiti geografici territoriali della: zona infetta"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

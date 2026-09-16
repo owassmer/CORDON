@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:27:02.507776+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 10120,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6063,
-   "cache_read_input_tokens": 6708,
-   "output_tokens": 606,
-   "output_tokens_details": {
-    "thinking_tokens": 22
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6063,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 455,
-     "cache_read_input_tokens": 4422,
-     "cache_creation_input_tokens": 3927,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3927
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.033616599999999996,
-  "session_id": "cb292401-2f3a-4e4f-8206-44ae7de1ecef"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -64,16 +25,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "PREMESSA (heading)",
-   "Le procedure operative descritte in questo documento tengono conto degli aggiornamenti sull'evoluzione dell'epidemia e dei focolai, sulla normativa, le conoscenze sviluppate dai programmi di ricerca scientifica in corso e altre informazioni acquisite negli altri Stati Membri.",
-   "L'obiettivo di questo documento è quello di illustrare nel dettaglio le procedure operative da seguire nelle varie fasi del programma di sorveglianza: dal sopralluogo in campo, al campionamento e trasporto del materiale vegetale, all'analisi in laboratorio e all'estirpazione delle piante infette.",
-   "Ciò, al fine di fornire delle procedure da adottare in maniera omogenea da parte di tutto il personale coinvolto nelle predette attività."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

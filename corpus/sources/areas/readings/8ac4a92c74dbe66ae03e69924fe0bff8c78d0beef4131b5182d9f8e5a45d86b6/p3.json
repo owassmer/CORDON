@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:26:02.201859+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 13640,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7313,
-   "cache_read_input_tokens": 7956,
-   "output_tokens": 1148,
-   "output_tokens_details": {
-    "thinking_tokens": 26
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7313,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 995,
-     "cache_read_input_tokens": 5670,
-     "cache_creation_input_tokens": 3929,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3929
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.045291200000000004,
-  "session_id": "a5a4bc5b-0bf7-49c1-8a28-2100a79edf85"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -67,19 +28,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Il Servizio Fitosanitario della Basilicata, con nota prot. 0266963 del 06/12/2024, ha comunicato al Ministero e al Servizio fitosanitario della Regione Puglia che, prendendo atto della determina dirigenziale di istituzione delle aree delimitate per Xylella fastidiosa multiplex della Regione Puglia, svolgerà le attività di monitoraggio nella zona cuscinetto ricadente nell'area di propria competenza;",
-   "nelle aree delimitate in cui si applicano misure di eradicazione la zona cuscinetto è larga almeno 2,5 km;",
-   "di dovere istituire l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 – Ginosa\", ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: una zona infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie multiplex ST26; una zona cuscinetto di 2,5 km attorno ad ogni zona infetta;.",
-   "di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 –Santeramo in Colle\", di cui all' atto dirigenziale n° 148 del 12/11/2024, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201;",
-   "gli Allegati 1 e 1 bis, parti integranti e sostanziali del presente provvedimento, che riportano le aree delimitate \"Xylella fastidiosa sottospecie multiplex ST26- Santeramo in Colle\" e \"Xylella fastidiosa sottospecie multiplex ST26- Ginosa\";",
-   "l'Allegato2- Santeramo e l'Allegato2- Ginosa, parti integranti e sostanziali del presente provvedimento, che riportano i riferimenti catastali delle aree delimitate nelle due regioni;",
-   "di dovere stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, in particolare le misure di lotta al vettore, si applichino in tutte le particelle catastali che rientrano anche parzialmente nelle aree delimitate che ricadono nel territorio regionale."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:23:28.841395+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 7702,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7432,
-   "cache_read_input_tokens": 8069,
-   "output_tokens": 422,
-   "output_tokens_details": {
-    "thinking_tokens": 32
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7432,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 263,
-     "cache_read_input_tokens": 5783,
-     "cache_creation_input_tokens": 3935,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3935
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.038573800000000005,
-  "session_id": "82bf87ab-10bc-443c-9bb3-6484097426a7"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -61,13 +22,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "la Determinazione del Dirigente Sezione Osservatorio Fitosanitario n° 177 del 30/12/2021 di revoca dell’area delimitata di Canosa di Puglia."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

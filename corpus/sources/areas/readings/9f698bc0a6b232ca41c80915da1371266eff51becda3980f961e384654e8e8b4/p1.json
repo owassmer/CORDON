@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:22:21.164938+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 17417,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7646,
-   "cache_read_input_tokens": 8282,
-   "output_tokens": 679,
-   "output_tokens_details": {
-    "thinking_tokens": 32
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7646,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 519,
-     "cache_read_input_tokens": 5996,
-     "cache_creation_input_tokens": 3936,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3936
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0422164,
-  "session_id": "0a1942ea-fa36-4b85-82a2-aae391d1e72a"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -63,15 +24,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 24 aprile 2024, n. 45 - Reg. (UE) 2020/1201 - Aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi del dell'art. 4 del Reg. UE 2020/1201.",
-   "L'intera area delimitata per Xylella fastidiosa sottospecie fastidiosa di cui alle determine n° 8/2024 e n° 12/2024, è stata oggetto di sorveglianza rafforzata; tutte le superfici con presenza di specie specificate alla sub specie fastidiosa sono state ispezionate e campionate.",
-   "Alla data del 19/04/2024 sono state campionate n° 19.226 piante di cui n° 157 sono risultate infette."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

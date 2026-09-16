@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:30:13.703331+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 11296,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7117,
-   "cache_read_input_tokens": 7754,
-   "output_tokens": 1047,
-   "output_tokens_details": {
-    "thinking_tokens": 31
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7117,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 888,
-     "cache_read_input_tokens": 5468,
-     "cache_creation_input_tokens": 3935,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3935
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.043323799999999996,
-  "session_id": "6e00bb48-62ae-4809-a456-43ecd6523547"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -68,20 +29,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Di istituire l’area delimitata per “Xylella fastidiosa sottospecie pauca – Minervino Murge”, ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201, costituita da: n. 1 focolaio puntiforme sito in agro di Minervino Murge (BT) costituito da una zona infetta di 50 m attorno a 1 olivo infetto; zona cuscinetto di 2,5 km di raggio attorno alla zona infetta;",
-   "Di approvare l’Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l’area delimitata “Xylella fastidiosa sottospecie pauca - Minervino Murge”;",
-   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta le aree delimitate per Xylella fastidiosa in Puglia;",
-   "Di approvare l’Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell’area delimitata dell’area delimitata “Xylella fastidiosa sottospecie pauca - Minervino Murge”;",
-   "Di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia;",
-   "Di stabilire che detta delimitazione è consultabile sui portali istituzionali della Regione Puglia www.regione.puglia.it e sul sito istituzionale www.emergenzaxylella.it;",
-   "di dare atto altresì che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;",
-   "Di trasmettere copia del presente atto: Al Comune di Minervino Murge (BT); alla Prefettura di BT;"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

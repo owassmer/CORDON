@@ -70,7 +70,7 @@
       ],
       "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes carry the area statements this input is read from.",
       "reader": "cordon_d.areas, including published_geography for native polygon occurrences; explicit act-page reading through scripts/read_annexes.py",
-      "open": "Complete retained page readings and source verification; establish adopted-version correspondence and spatial qualification for metric use. DDS 148/2024 remains a bounded intermediate-version question, not an active exhaustive search. INPUTS.md row 3 owns the source limits."
+      "open": "Bind the publisher's polygons to the adopted version they represent, with a frame and a positional error, for the metric consumers and for membership questions that arrive as coordinates; register DDS 69/2021's map annexes, which adopt geography with no cadastral table; recover DDS 148/2024's own body, a bounded intermediate-version question and not an active exhaustive search. Whole-province statements are keyed on the province alone and the retained observations carry none; the cadastral-geometry unit owns resolving a comune or its cadastral code to its province. INPUTS.md row 3 owns the source limits."
     },
     {
       "id": "cadastre",

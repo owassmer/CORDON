@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T19:27:24.438364+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 11610,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7265,
-   "cache_read_input_tokens": 7898,
-   "output_tokens": 1025,
-   "output_tokens_details": {
-    "thinking_tokens": 34
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7265,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 862,
-     "cache_read_input_tokens": 5612,
-     "cache_creation_input_tokens": 3939,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3939
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0438196,
-  "session_id": "f6b7d801-6111-4b5c-85e6-a59b30fb2f76"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -66,18 +27,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "ALLEGATI INTEGRANTI table: Documento - Impronta (SHA256) | ALLEGATO1_BISCEGLIE.pdf - 3c715f0f1c7e288d8569f11324594b4c9cb156ec1cc1f6474bf33d79592a3c17 | ALLEGATO1BIS_BISCEGLIE.pdf - 1dd05c5c411e558fd475329a605d1562fd7947da4e705764d2378ea800aecd17 | ALLEGATO2_BISCEGLIE.pdf - 9a4cb0c9050faa510913950bc3abed967f171e776d7ad4cc69a3f243165849d3 (a document hash table, not an annex cadastral scope table)",
-   "Di approvare l'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata 'Xylella fastidiosa sottospecie pauca - Bisceglie (BT)'.",
-   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia.",
-   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata 'Xylella fastidiosa sottospecie pauca - Bisceglie (BT)'.",
-   "Di dare atto che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;",
-   "Ai Comuni di Bisceglie (BT) e Trani (BT); alla Prefettura di BT; al Comando Regionale Carabinieri Forestali – Puglia; alla Provincia Barletta-Andria-Trani; all'ANCI Puglia; all'ARIF"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

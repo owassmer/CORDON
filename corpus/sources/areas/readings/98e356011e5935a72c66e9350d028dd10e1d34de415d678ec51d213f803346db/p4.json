@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:30:48.550562+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 14214,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7089,
-   "cache_read_input_tokens": 7732,
-   "output_tokens": 1492,
-   "output_tokens_details": {
-    "thinking_tokens": 25
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7089,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1339,
-     "cache_read_input_tokens": 5446,
-     "cache_creation_input_tokens": 3929,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3929
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0476084,
-  "session_id": "2a69aab0-af1e-418a-9e62-2290d4ccf576"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -72,24 +33,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "nel corso dell'attività di monitoraggio nell'area delimitata per Xylella fastidiosa, sottospecie multiplex ST26 - Santeramo in Colle di cui alla determina dirigenziale n° 198 del 18/12/2024, alla data del 23/05/2025 sono state campionate n° 39.368 piante;",
-   "nel corso dell'attività di monitoraggio nell'area delimitata per Xylella fastidiosa, sottospecie multiplex ST26 - Ginosa di cui alla determina dirigenziale n° 198 del 18/12/2024, alla data del 23/05/2025 sono state campionate n° 5.811 piante;",
-   "n° 566 piante distribuite negli agri di Santeramo in Colle, Altamura, Cassano delle Murge, Acquaviva delle Fonti e n. 3 piante nell'agro di Ginosa (TA) sono risultate infette da Xylella fastidiosa sottospecie multiplex ST26;",
-   "le richiamate 569 piante infette sono distribuite sia all'interno delle aree già delimitate con determina dirigenziale n° 198 del 18/12/2024 che sul perimetro esterno delle zone cuscinetto;",
-   "quattro piante infette sono state rinvenute in area indenne di cui n. 2 in agro di Altamura, n. 1 in agro di Acquaviva delle Fonti e n. 1 in agro di Santeramo in Colle;",
-   "l'aggiornamento della area delimitata Xylella fastidiosa, sottospecie multiplex ST26 - Santeramo in Colle coinvolge una parte ulteriore del territorio della Basilicata (zona cuscinetto);",
-   "l'area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall'organismo nocivo specificato;",
-   "nelle aree delimitate in cui si applicano misure di eradicazione la zona cuscinetto è larga almeno 2,5 km;",
-   "gli Allegati 1 (Santeramo in Colle e Ginosa) e 1 bis, parti integranti e sostanziali del presente provvedimento, che riportano le aree delimitate \"Xylella fastidiosa sottospecie multiplex ST26- Santeramo in Colle\" e \"Xylella fastidiosa sottospecie multiplex ST26- Ginosa\";",
-   "l'Allegato2- Santeramo e l'Allegato2- Ginosa, parti integranti e sostanziali del presente provvedimento, che riportano i riferimenti catastali delle aree delimitate nelle due regioni;",
-   "di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 –Santeramo in Colle\", di cui all'atto dirigenziale n° 198 del 18/12/2024, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201;",
-   "di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 – Ginosa\", di cui all'atto dirigenziale n° 198 del 18/12/2024, ai [continues on next page]"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

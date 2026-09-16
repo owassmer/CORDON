@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:31:43.844221+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 12578,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 7523,
-   "cache_read_input_tokens": 8158,
-   "output_tokens": 1364,
-   "output_tokens_details": {
-    "thinking_tokens": 34
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 7523,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 1203,
-     "cache_read_input_tokens": 5872,
-     "cache_creation_input_tokens": 3937,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3937
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.048515600000000006,
-  "session_id": "ca4f8eeb-de32-4d21-a1bf-2e9b34ec0bd4"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -67,19 +28,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "Area delimitata per Xylella fastidiosa sottospecie pauca ST53, aggiornata con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 158 del 18/11/2024 con la quale è stata ridotta la zona infetta in cui si applicano misure di contenimento da 5 km a 2 km, in applicazione del Reg. (UE) 2024/2507 del 26 settembre 2024.",
-   "Nell'agro di Bisceglie (BT) nel 2025 sono stati prelevati e analizzati n. 249 campioni vegetali da piante della specie Prunus avium (4 piante) e Olea europea (245) specie ospiti a Xylella fastidiosa.",
-   "L'Istituto Agronomico Mediterraneo (CIHEAM), con i rapporti di prova n. 8/2025 del 13/06/2025 e n. 10/2025 del 17/06/2025, ha comunicato che n. 4 (quattro) piante di olivo sono risultate infette da Xylella fastidiosa;",
-   "E' stata programmata un'attività di sorveglianza rafforzata dell'area di 400 m attorno alla zona infetta, finalizzata a verificare la presenza di ulteriori piante infette.",
-   "l'area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall'organismo nocivo specificato; la zona cuscinetto è larga almeno 2,5 km nelle aree delimitate in cui si applicano misure di eradicazione.",
-   "L'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\"; l'Allegato 1 bis ... che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia; l'Allegato 2 ... che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\".",
-   "Di dovere istituire l'area delimitata per \"Xylella fastidiosa sottospecie pauca – Bisceglie (BT)\", ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: zona infetta di almeno 50 m attorno alle 4 piante infette a Xylella fastidiosa sottospecie pauca; una zona cuscinetto di 2,5 km attorno alla zona infetta; di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i."
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }

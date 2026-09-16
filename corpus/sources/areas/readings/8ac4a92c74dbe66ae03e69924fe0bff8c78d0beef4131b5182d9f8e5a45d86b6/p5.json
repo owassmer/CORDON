@@ -11,46 +11,7 @@
  "captured_at": "2026-09-14T15:26:21.785929+00:00",
  "native_tables": [],
  "native_cells": {},
- "envelope": {
-  "duration_ms": 18927,
-  "num_turns": 4,
-  "usage": {
-   "input_tokens": 4,
-   "cache_creation_input_tokens": 6934,
-   "cache_read_input_tokens": 7561,
-   "output_tokens": 1047,
-   "output_tokens_details": {
-    "thinking_tokens": 40
-   },
-   "server_tool_use": {
-    "web_search_requests": 0,
-    "web_fetch_requests": 0
-   },
-   "service_tier": "standard",
-   "cache_creation": {
-    "ephemeral_1h_input_tokens": 6934,
-    "ephemeral_5m_input_tokens": 0
-   },
-   "inference_geo": "not_available",
-   "iterations": [
-    {
-     "input_tokens": 2,
-     "output_tokens": 878,
-     "cache_read_input_tokens": 5275,
-     "cache_creation_input_tokens": 3945,
-     "cache_creation": {
-      "ephemeral_5m_input_tokens": 0,
-      "ephemeral_1h_input_tokens": 3945
-     },
-     "type": "message"
-    }
-   ],
-   "speed": "standard"
-  },
-  "stop_reason": "tool_use",
-  "total_cost_usd": 0.0423712,
-  "session_id": "b656f415-b019-4c73-9324-0b2a21120e24"
- },
+ "stop_reason": "tool_use",
  "reading": {
   "tables_visible": 0,
   "tables": [],
@@ -67,19 +28,7 @@
   "uncertain": []
  },
  "resolved": {
-  "tables": [],
-  "unattached": [
-   "di dare atto altresì che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;",
-   "di trasmettere copia del presente atto: ai comuni interessati; alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Città Metropolitana di Bari; all'ANCI Puglia; all'ARIF; al Servizio fitosanitario della Basilicata;",
-   "di pubblicare il presente provvedimento sul BUR Puglia.",
-   "è composto da pagine tutte progressivamente numerate e da n° 4 allegati composti rispettivamente da 1 facciata",
-   "ALLEGATI INTEGRANTI table: Documento - Impronta (SHA256): ALLEGATO1.pdf - 70c63cea1ab3265e2d46a76af560e9472fcb05df493c537cb46e459f1f52d96a; ALLEGATO1BIS .pdf - b2e0d8a7827ec3c8be00e3c05bc91a29ce1eede3a311ec32af954a6c0a80d4b3; ALLEGATO 2_GINOSA.pdf - 42336b1215512ae19baafb12d1c49cca85922befeaec532a7bf8ee74cbff13b0; ALLEGATO 2_SANTERAMO.pdf - 55d6b67edf2c9a4387abe3dc2deabd6d4dbd7d19282e4f06392f55ffff0ffa63",
-   "Basato sulla proposta n. 181/DIR/2024/00209 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
-   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
-  ],
-  "uncertain": [],
-  "native_tables_accounted": [],
-  "tables_visible": 0
+  "tables": []
  },
  "resolution_problems": []
 }
