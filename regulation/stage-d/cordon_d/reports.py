@@ -283,7 +283,7 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
             section = re.fullmatch(r'p([1-9]\d*)/(\S.*)', fact['section'])
             if section and int(section[1]) not in supplied_pages:
                 raise ValueError('Section cites a page not supplied to this reading')
-        if fact['role'] == 'record_continuation':
+        if fact['role'] in {'record_continuation', 'field_continuation'}:
             # The relation binds the physical parts of one record printed across pages.
             # A whole table, a section heading or a fact is not a part of a record, and
             # a table whose rows simply continue under a heading printed once is not a
@@ -429,7 +429,45 @@ def record_rows(reading):
             raise ValueError('A physical part belongs to conflicting continuations')
         used.update(keys)
         groups.append(parts)
+    # A record binding does not by itself say that different field values are
+    # fragments of one cell. Resolve the reader's explicit cell bindings first.
+    cell_anchors = {}
+    for row in rows:
+        for cell in row.cells:
+            for anchor in {cell['locator'], cell['locator'].split('/', 1)[-1],
+                           *(['native:' + cell['native_cell']] if cell.get('native_cell') else [])}:
+                cell_anchors.setdefault(anchor, []).append((row, cell))
+    fragments = {}
+    for fact in reading.facts:
+        if fact['role'] != 'field_continuation':
+            continue
+        bound = []
+        for scope in fact['applies_to']:
+            matches = cell_anchors.get(scope, ())
+            if len(matches) != 1:
+                raise ValueError('Field continuation needs one physical cell at ' + scope)
+            bound.append(matches[0])
+        locators = frozenset(c['locator'] for _, c in bound)
+        if len(locators) != len(bound) or len(bound) < 2:
+            raise ValueError('Field continuation needs distinct physical fragments')
+        group = next((group for group in groups if all(row in group for row, _ in bound)), None)
+        if group is None:
+            raise ValueError('Field fragments must belong to one declared record continuation')
+        if (fact.get('text') != fact.get('value') or not fact.get('value') or not any(
+                row.page == fact.get('page') and fact['value'] in row.identifiers for row in group)):
+            raise ValueError('Field continuation must quote the record identity at its physical page')
+        cells = [cell for _, cell in sorted(bound, key=lambda pair: rows.index(pair[0]))]
+        if (len({(tuple(c['heading']), c['role']) for c in cells}) != 1
+                or cells[0]['role'] not in {'host', 'municipality', 'other'}
+                or any(not c['text'] or not c['text'].strip() for c in cells)):
+            raise ValueError('Field continuation requires populated fragments of one descriptive field')
+        if any(locators & previous and locators != previous for previous in fragments):
+            raise ValueError('A physical cell belongs to conflicting field continuations')
+        fragments[locators] = dict(cells[0], text=' '.join(c['text'].strip() for c in cells),
+            basis='assembly of reader-declared field continuation', source_fragments=cells,
+            reading_issues=tuple(i for c in cells for i in c.get('reading_issues', ())))
     assembled = {}
+    consumed_fragments = set()
     for parts in groups:
         # Order follows physical occurrences, not the order of model selectors.
         parts = sorted(parts, key=lambda row: rows.index(row))
@@ -440,7 +478,12 @@ def record_rows(reading):
                 fields.setdefault(key, []).append(cell)
         selected = []
         for cells in fields.values():
-            populated = [c for c in cells if c['text'] is not None]
+            populated = [c for c in cells if c['text'] and c['text'].strip()]
+            binding = frozenset(c['locator'] for c in populated)
+            if binding in fragments:
+                selected.append(fragments[binding])
+                consumed_fragments.add(binding)
+                continue
             if len(populated) > 1:
                 # Separate result occurrences are never collapsed into one test.
                 if (populated[0]['role'] == 'result' or
@@ -452,7 +495,8 @@ def record_rows(reading):
                         if result.locator in selected_locators)
         facts = tuple(f for i, row in enumerate(parts) for f in row.facts
                       if not any(f == old for earlier in parts[:i] for old in earlier.facts))
-        dates = tuple(d for row in parts for d in row.sampling_dates)
+        dates = tuple(d for row in parts for d in row.sampling_dates
+                      if d.text is None or d.text.strip())
         def sole(role):
             values = {c.get('identifier', c['text']) for c in selected
                       if c['role'] == role and c['text'] is not None}
@@ -462,6 +506,8 @@ def record_rows(reading):
             sampling_dates=dates, facts=facts,
             projection={'rule': 'assembly of reader-declared record continuation',
                         'parts': [row.locator for row in parts]})
+    if consumed_fragments != fragments.keys():
+        raise ValueError('Field continuation does not account for every populated field occurrence')
     return tuple(assembled.get(row.locator, row) for row in rows
                  if row.locator not in used or row.locator in assembled)
 
@@ -511,6 +557,8 @@ def materialize(digest, version, page_count, blocks):
                 if region.get('native_table') not in known_regions:
                     issues += ({'scope': region.get('native_table', 'unidentified region'),
                         'cause': 'model named a native-table region absent from the supplied detector inventory; visual output tables retained separately'},)
+    continued_parts = {scope for f in facts if f['role'] == 'record_continuation'
+                       for scope in f['applies_to']}
     rows, covered, locators, encountered = [], set(), set(), set()
     for item in blocks:
         data, native = item['reading'], item['native_cells']
@@ -530,10 +578,14 @@ def materialize(digest, version, page_count, blocks):
         issues += tuple(projection_issues)
         covered.difference_update(incomplete)
         for table in tables:
-            if not any(c['role'] in {'identifier', 'publisher_id', 'laboratory_id', 'result'} for c in table['columns']):
-                continue  # Non-sample tables remain in the literal block, not sample counts.
+            sample_table = any(c['role'] in {'identifier', 'publisher_id', 'laboratory_id', 'result'}
+                               for c in table['columns'])
             for raw in table['rows']:
                 locator = f"p{table['page']}/{table['id']}/{raw['id']}"
+                anchors = {locator, f"{table['id']}/{raw['id']}",
+                           *('native:' + c['native_cell'] for c in raw['cells'] if c.get('native_cell'))}
+                if not sample_table and not anchors.intersection(continued_parts):
+                    continue
                 if locator in locators:
                     raise ValueError('Repeated source-row locator')
                 locators.add(locator)

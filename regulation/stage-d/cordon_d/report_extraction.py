@@ -154,6 +154,17 @@ scanned, transposed and differently formatted records. A table whose complete ro
 simply continue onto later pages under a heading printed once is NOT a record
 continuation: keep each page's rows in that page's table, cite the heading page in
 column support, and emit no record_continuation fact for it.
+When a descriptive field (host, municipality, or other) itself crosses a page
+boundary, keep the printed fragments in their physical cells. In addition to the
+record_continuation, emit a field_continuation fact for each split field. Its text,
+value, page and locator quote that record's printed identity at the identity-bearing
+page. Its applies_to names ONLY the exact cells of that one field using
+page/table/row/cN or native:<cell> selectors. Establish from the original page
+structure that these are successive word fragments of one field, not conflicting
+values. The consumer joins them in physical order with a space and retains all
+fragments. Do not use this relation for separate results, identifiers, numbers or
+dates, or a word split that requires changing characters: identify an unresolved
+reading in issues instead. Equal headings alone do not establish field continuation.
 Never merge a second physical representation of a table into the first, even when
 it repeats the same samples or is transposed. Return both source occurrences,
 with a literal relationship fact if the source establishes repetition.
@@ -842,14 +853,14 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
     revision = version(config)
     original = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
     parts = [{'selector': row.locator, 'page': row.page,
-              'native_cells': [c['native_cell'] for c in row.cells if c.get('native_cell')]}
+              'cells': [{'selector': c['locator'], 'native_cell': c.get('native_cell')} for c in row.cells]}
              for row in original.rows]
     with pymupdf.open(blob_path(store, digest)) as document:
         pages = list(range(1, len(document) + 1))
         content, native, _ = _page_content(document, pages, [], config)
     instruction = (
         'Repair omitted record-continuation relationships in an existing reading. '
-        'Read the original source and return only facts with role record_continuation, '
+        'Read the original source and return only record_continuation and field_continuation facts, '
         'using the continuation contract above. Each fact text and value must contain '
         'ONLY its literal printed identifier, with page and locator pointing to the '
         'actual identity header, not the continuation page. Never stitch quotes, insert '
@@ -858,8 +869,9 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
         'Return pages:[], tables:[]; preserve '
         'every retained cell by not retranscribing tables. The following inventory '
         'provides selectors for physical parts, NOT evidence of identity or correspondence. '
-        'Choose identities and relationships from the original PDF. Each fact must bind '
-        'all parts of one continued occurrence, excluding separate complete displays. '
+        'Choose identities and relationships from the original PDF. A record_continuation binds '
+        'all physical row parts of one continued occurrence; a field_continuation binds '
+        'only the cell selectors for that split field. Exclude separate complete displays. '
         'Use exact selector strings from this inventory in applies_to. If the source '
         'cannot establish a binding, state its exact cause in issues.\n' + json.dumps(parts))
     content.append({'type': 'text', 'text': instruction})
@@ -883,7 +895,7 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
             _call(request, config=config, budget=budget, request_id=request_id, raw_path=raw))
     validate_block(reading, targets=[], page_count=payload['page_count'],
                    native_cells=native, supplied_pages=pages)
-    if reading['tables'] or any(f['role'] != 'record_continuation' for f in reading['facts']):
+    if reading['tables'] or any(f['role'] not in {'record_continuation', 'field_continuation'} for f in reading['facts']):
         raise ValueError('Continuation-only repair cannot replace cells or unrelated facts')
     item = {'targets': [], 'supplied_pages': pages, 'context_pages': pages,
             'reading': reading, 'native_cells': native, 'request_sha256': request_id}
@@ -1200,7 +1212,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                             'cause': str(single_error) + '; single-page geometric subdivision is not implemented'})
                         raise
             first += len(targets)
-        blocks.sort(key=lambda item: min(item['targets']))
+        blocks.sort(key=lambda item: min(item['targets'], default=page_count + 1))
         assembled = materialize(digest, revision, page_count, blocks)
         try:
             record_rows(assembled)
@@ -1208,14 +1220,15 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
             # A failed explicit binding returns to the same source reader once.
             # Re-read blocks containing declared parts together, not unrelated PDFs.
             affected = [item for item in blocks if any(
-                fact['role'] == 'record_continuation' for fact in item['reading']['facts'])]
+                fact['role'] in {'record_continuation', 'field_continuation'} for fact in item['reading']['facts'])]
             scopes = {scope for item in affected for fact in item['reading']['facts']
-                      if fact['role'] == 'record_continuation' for scope in fact['applies_to']}
+                      if fact['role'] in {'record_continuation', 'field_continuation'} for scope in fact['applies_to']}
             for item in blocks:
                 if item in affected:
                     continue
-                part_scopes = {f"{table['id']}/{row['id']}" for table in item['reading']['tables']
-                               for row in table['rows']}
+                part_scopes = {scope for table in item['reading']['tables'] for row in table['rows']
+                    for base in (f"{table['id']}/{row['id']}", f"p{table['page']}/{table['id']}/{row['id']}")
+                    for scope in (base, *(f'{base}/c{i + 1}' for i in range(len(row['cells']))))}
                 part_scopes.update('native:' + key for key in item['native_cells'])
                 if scopes.intersection(part_scopes):
                     affected.append(item)
@@ -1226,7 +1239,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                  + str(defect) + '. Re-read all target parts and their actual identity headers. '
                  'Retain every physical occurrence and its qualifications. Equal results do not '
                  'establish correspondence. Return explicit, uniquely bound continuation facts.')
-            blocks.sort(key=lambda item: min(item['targets']))
+            blocks.sort(key=lambda item: min(item['targets'], default=page_count + 1))
             assembled = materialize(digest, revision, page_count, blocks)
             record_rows(assembled)
         save(complete=len(assembled.complete_pages) == page_count)

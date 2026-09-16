@@ -97,6 +97,16 @@ record continuation is recovered explicitly by the established document reader a
 one `record_continuation` fact, quoting the printed identity and naming every
 physical part. `reports.record_rows` resolves those exact selectors and assembles
 the declared parts; it does not discover continuation from layout or equal results.
+A bound fragment-only table remains a physical record part even without its own
+identifier or result column. When a descriptive field itself spans pages, a
+`field_continuation` fact binds its exact cells and quotes the record identity at
+its physical page. The assembler joins successive word fragments with whitespace,
+retains every original cell under `source_fragments`, and preserves qualification
+scopes. Matching headers or differing values alone do not establish a split field.
+Overlaps, conflicting bindings and unsupported splits of identifiers, results,
+numbers, dates or within-word characters remain failures requiring source reading;
+no generic string concatenation resolves them. Empty printed placeholders supply
+no conflicting field or sampling date. Binding-only blocks survive cache replay.
 It works without a separate complete display. Native-cell anchors or exact output
 row selectors permit different source layouts and cross-block references. Each
 cell retains its physical locator, and each qualification retains its original

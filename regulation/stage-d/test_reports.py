@@ -302,6 +302,51 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaises(ValueError):
                 record_rows(invalid)
 
+    def test_fragment_only_table_and_explicit_split_field_reach_ordinary_consumers(self):
+        from copy import deepcopy
+        from dataclasses import replace
+        from cordon_d.reports import record_rows
+        from cordon_d.findings import _host_relation
+        item = block([['00123', '01/06/2024', 'Negativo', '02/06/2024']])
+        data = item['reading']
+        head = data['tables'][0]
+        head['columns'].append({'role': 'host', 'heading': ['Host']})
+        head['rows'][0]['cells'].append({'text': 'Asparagus'})
+        tail = deepcopy(head)
+        tail.update(id='tail', page=2, columns=[head['columns'][-1]],
+                    rows=[{'id': 'r1', 'cells': [{'text': 'acutifolius'}]}])
+        data['tables'].append(tail)
+        data['pages'].append({'page': 2, 'disposition': 'read'})
+        item['targets'].append(2)
+        row_scope = head['id'] + '/' + head['rows'][0]['id']
+        relation = {'role': 'record_continuation', 'text': '00123', 'value': '00123',
+                    'page': 1, 'locator': row_scope + '/c1',
+                    'applies_to': [row_scope, 'tail/r1']}
+        data['facts'].append(relation)
+        raw = materialize('hash', 'v', 2, [item])
+        self.assertEqual(len(raw.rows), 2)  # Fragment has neither identifier nor result.
+        with self.assertRaisesRegex(ValueError, 'conflicting fields'):
+            record_rows(raw)
+        field = dict(relation, role='field_continuation',
+                     applies_to=[row_scope + '/c5', 'tail/r1/c1'])
+        complete = replace(raw, facts=(*raw.facts, field))
+        row, = record_rows(complete)
+        host, = [c for c in row.cells if c['role'] == 'host']
+        self.assertEqual(host['text'], 'Asparagus acutifolius')
+        self.assertEqual([c['text'] for c in host['source_fragments']], ['Asparagus', 'acutifolius'])
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Asparagus acutifolius'}}}),
+                         'agrees on printed host')
+        self.assertEqual(row.results, raw.rows[0].results)
+        self.assertEqual(complete.rows, raw.rows)
+        for invalid in (dict(field, applies_to=[row_scope + '/c5', 'missing']),
+                        dict(field, value='another'), dict(field, page=2),
+                        dict(field, applies_to=[row_scope + '/c5'] * 2)):
+            with self.assertRaises(ValueError):
+                record_rows(replace(raw, facts=(*raw.facts, invalid)))
+        # Neither equal headings nor an unbound fragment creates a sample row.
+        data['facts'].remove(relation)
+        self.assertEqual(len(materialize('hash', 'v', 2, [item]).rows), 1)
+
     def test_swapped_source_headers_require_a_new_reader_binding(self):
         import pymupdf
         from dataclasses import replace
@@ -454,6 +499,13 @@ class LiteralReport(unittest.TestCase):
             rows = record_rows(materialize(digest, 'v', 1, saved['blocks']))
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0].results[0].kind, 'positive')
+            with patch('cordon_d.report_extraction._subscription_call') as call:
+                replay = extract_report(digest, store, resume_from=saved['extraction_version'],
+                    config=ExtractionConfig(provider='subscription', target_pages=1), budget=None, execute=False)
+            call.assert_not_called()
+            rebuilt = json.loads(replay.read_text())
+            self.assertTrue(rebuilt['assembly_complete'])
+            self.assertEqual(record_rows(materialize(digest, 'v', 1, rebuilt['blocks'])), rows)
 
     def test_unbound_continuation_returns_to_established_reader(self):
         import pymupdf
