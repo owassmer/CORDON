@@ -1,0 +1,39 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 11,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "1d15ef2f7778293b063ea8d6db4c828700c23a2e29afe8f3009c0ee55c9b1c52",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:46.363511+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "EPPO Standard on Diagnostics -PM 7/24 (5) Xylella fastidiosa (revisione febbraio 2023).",
+   "La legge regionale 4 giugno 2007, n. 14 \"Tutela e valorizzazione del paesaggio degli ulivi monumentali della Puglia\".",
+   "La legge regionale 29 marzo 2017, n. 4 \"Gestione della batteriosi da Xylella fastidiosa nel territorio della regione Puglia\" e s.m.i.\".",
+   "La legge regionale 30 aprile 2019, n. 19 che assegna all'Agenzia Regionale per le attività Irrigue e Forestali funzioni di supporto all'Osservatorio fitosanitario regionale, in particolare nella lotta alla Xylella.",
+   "La D.G.R. n. 994 del 15/07/2024 che ha istituito il regime di aiuto per sostenere le imprese vivaistiche, proprietari e conduttori di terreni agricoli che estirpano le piante infette da Xylella e ha approvato i criteri e la metodologia di stima degli indennizzi.",
+   "Le Determine n° 12 del 27/02/2024, n° 45 del 24/04/2024 e n° 94 del 24/07/2024 di istituzione e aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1.",
+   "La determina n° 93 del 23/07/2024 di istituzione dell'area delimitata per Xylella fastidiosa sottospecie multiplex ST26 - Noicattaro e Triggiano e dell'area delimitata per Xylella fastidiosa sottospecie multiplex ST26 – Capurso.",
+   "La determina n° 92 del 22/07/2024 di istituzione dell'area delimitata per Xylella fastidiosa sottospecie pauca ST53 – Bari.",
+   "Le determine n° 29 del 08/04/2024, n° 91 del 22/07/2024, n° 148 del 12/11/2024 e n° 198 del 18/12/2024 di istituzione e aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie multiplex ST26 in agro di Santeramo in Colle (BA) e Ginosa.",
+   "La determina dirigenziale n° 158 del 18/11/2024 di aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie pauca ST53.",
+   "La DGR n. 1593 del 25/11/2024 che ha approvato il Piano d'azione per contrastare la diffusione di Xylella fastidiosa (Well et al.) in Puglia 2024-2026\".",
+   "La Determina n° 190 del 12/12/2024 di \"Affidamento del \"Servizio di analisi di laboratorio ufficiali per rilevare la presenza di Xylella fastidiosa sul territorio della Regione Puglia\", ai sensi dell'art. 76 del D.lgs. n. 36 del 31 marzo 2023 - Determina a contrarre e impegno di spesa\"."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

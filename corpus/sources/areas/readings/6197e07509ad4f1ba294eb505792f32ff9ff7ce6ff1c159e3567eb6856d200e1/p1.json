@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+ "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "aab6eec304131fde812c794529c8b0b1c9de64380196da1c3b512050730de618",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:27:43.492414+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Giovinazzo (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE2020/1201 e s.m.i.",
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 12 agosto 2025, n. 147"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

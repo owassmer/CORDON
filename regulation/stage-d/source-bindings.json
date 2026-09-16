@@ -57,20 +57,20 @@
     },
     {
       "id": "official-areas",
-      "name": "Adopted demarcated-area geometry",
-      "purpose": "Supply the infected, containment, buffer and other legally consequential area containing a location on the event date.",
+      "name": "Adopted demarcated areas: the acts and their cadastral annexes",
+      "purpose": "Supply the infected, containment, buffer or focus zone that contained a location on the event date, as the adopting act states it.",
       "contracts": [
         "adopted-geography",
         "boundary-context",
         "evaluation-context"
       ],
       "routes": [
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer"
+        "Adopting regional acts and incorporated annexes; acquisitions in corpus/sources/areas/acts.json",
+        "Publisher zone services; retained native geometry captures in corpus/sources/areas/acts.json"
       ],
-      "population": "Every geometry version required by an accepted A provision interval, together with the act that adopted it.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the current and consequential historical versions and bind each version to its adopting act."
+      "population": "Every area version accepted A reaches: 29 versions over 28 acts, of which 26 are held and state geography. Their annexes carry the area statements this input is read from.",
+      "reader": "cordon_d.areas, including published_geography for native polygon occurrences; explicit act-page reading through scripts/read_annexes.py",
+      "open": "Bind the publisher's polygons to the adopted version they represent, with a frame and a positional error, for the metric consumers and for membership questions that arrive as coordinates; register DDS 69/2021's map annexes, which adopt geography with no cadastral table; recover DDS 148/2024's own body, a bounded intermediate-version question and not an active exhaustive search. Whole-province statements are keyed on the province alone; observations publishing `PROVINCIA` (688,623 occurrences; eight more carry the unavailable marker) reach them, and the cadastral-geometry unit owns resolving the others' comune or cadastral code to a province."
     },
     {
       "id": "cadastre",

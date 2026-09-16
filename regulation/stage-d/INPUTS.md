@@ -9,7 +9,7 @@ established; no other row is.
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. |
 | What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | In progress over 1,180 retained PDFs (3,092 pages). The seven supplied PDFs have completed page and relationship readings; the remaining population is being read and joined through the same path. Subscription vision is running independently of consumer and implementation work. Current consumer results and consequential source work below. |
-| Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. |
+| Which legally adopted area contained the location on the event date | The adopting regional act and its cadastral annex; SIT demarcated-area geometry | One adopted area version, with its cadastral statements and map geometry | Cadastral page readings established: `cordon_d.areas.versions` binds every retained page of every retained act to A's versions and `membership_evidence` supplies supported membership at sheet and parcel grain. The ordinary query preserves reaching statements and their unresolved causes, including named sheet developments that the query cannot identify. `evidence_for` carries those causes and source locators through the accepted C membership consumer as supported unresolved readings, subject to the same contract, event-time, knowledge-time, access, correction and source-verification gates as boolean assertions. This projection applies only to A versions that own the membership predicate; the other versions retain their own query-level absences. One matching operation supplies both the verdict and its explanation; competing sheet and parcel entries are evaluated without first-entry suppression. A named development never lends its extent to an unqualified sheet query. The changed implementation awaits renewed review before merge. Still owed: the adopted map geometry bound to its version with a frame and positional error (for the metric consumers, and for a finding that arrives as coordinates); DDS 69/2021's map-only annexes; DDS 148/2024's own body; a municipality-to-province resolution for the observations that publish no `PROVINCIA`, so the whole-province statements reach them (owned by the cadastral-geometry unit). The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it; its `BUFFER` column is published with no value in any record. Population and remaining work below. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Read identity, operative clause, branch, annex incorporation and correction relationships through one general reader. DDS 52/2024, 74/2024 and 138/2024 are retained and independently read-back verified in R2 as report-identity dependencies. The native annex reader supplies 183 identified plant/report associations and seven unresolved page-boundary fragments, not whole-act semantics. DDS 74/2024 links old code 1673519 to a different host/place from the laboratory row; DDS 138/2024 adopts corrected 1674070 at the report location. Any correction or withdrawal of the earlier administrative target remains unestablished and must be investigated by this consumer; laboratory replacement alone cannot supply it. |
@@ -373,6 +373,101 @@ tests do not confer that status.
 - “Difficult source tables,” “copy relationships,” and “adoption lineage” describe
   work that a particular row may require. They are not separate source families or
   reasons to expand the aperture.
+
+## Demarcated areas
+
+Accepted A reaches 28 instruments through 29 area versions. A owns their identity,
+interval, subspecies and operative legal meaning. The acquisition records in
+`corpus/sources/areas/acts.json` retain 27 documents (273 pages), including the
+procedure act DDS 45/2025. DDS 148/2024's own body still needs recovery; a successor's
+recital does not supply its annex. DDS 69/2021 adopts maps without a cadastral table.
+
+`scripts/read_annexes.py` reads every physical page of each retained document through
+Claude subscription vision (`claude-sonnet-5`, medium effort). Native cells are
+candidates for exact copying; the model binds captions and rows and transcribes values
+not faithfully represented by those cells. There is no exhibit registry or keyword
+page exclusion. All 273 retained pages have readings under
+`corpus/sources/areas/readings/`. The current 29-version projection contains 373
+cadastral statements and no unresolved table readings. Re-reading an erroneous
+page preserves the previous response in the derived store. Page coverage does not
+establish the remaining adopting-act/map correspondence or source-family completion.
+
+`cordon_d.areas` projects the saved readings into zone, province, municipality and
+cadastral scope. Table headings, qualifications, row notes and physical page/table/row
+locations travel with each statement into membership support. Page prose stays with
+its version; A remains the owner of its legal effect. Repeated physical statements
+remain source occurrences. A missing reading or inventory cannot establish that an
+act contains no cadastral table.
+
+The reader distinguishes a reached sheet from a parcel wholly inside the zone.
+The annex's asterisk is retained at the grain it qualifies: a sheet asterisk covers
+the sheet; a parcel asterisk covers that parcel. An unstarred listed parcel merely
+intersects the zone and does not establish whole-parcel membership. Sections and
+named sheet developments remain distinct. An unmatched cadastral query does not
+establish that the place is outside the adopted map. Zone and stated measures regime
+remain separate facts.
+
+A stamp or watermark overlapping a cell is separate from the cell's value, and a
+faithful visual transcription is not a reading uncertainty merely because a native
+cell is absent. Membership retains every supporting physical statement and its
+source location; section identities, asterisks and repeated tables survive the
+ordinary projection. The acts print a province both in full and abbreviated
+(`BARI` and `BA`, `BAT` and `BT`) for one province; inside a comune-scoped row
+the comune identifies the place and the province the question names never
+decides the row, while the act's own province travels in the assertion's
+support. A place the act reaches without deciding — an unstarred sheet the zone
+cuts through, or a part of a comune whose extent the table leaves unstated — is
+answered as reached and undecided, with the statement that reached it; a place
+no act mentions is answered as such. The two are different absences with
+different remedies: the adopted map decides the first, nothing decides the
+second. An incomplete cadastral reference is named as such, not blamed on the
+map: a comune the act lists by sheets asked without a sheet, a sheet the act
+files under a section asked without the section, a sheet the act narrows to
+named parcels asked without a parcel, are each answered as reached, with what
+the question lacks; completing the reference answers them from the annex.
+The whole-province statements (Lecce and Brindisi, infected zone, from DDS
+127/2022 onward) are keyed on the province alone. The monitoring publisher
+prints `PROVINCIA` in full (`Bari`, `Brindisi`, `Taranto`,
+`Barletta-Andria-Trani`, `Foggia`) on 688,623 of the retained occurrences and
+the unavailable marker `#N/D` on eight, and a question that carries a province
+reaches those statements through the ordinary path.
+The occurrences that carry none — all 8,762 that carry a cadastral sheet among
+them — need the comune or its cadastral code resolved to a province, which the
+cadastral-geometry unit (row 5) owns; until then the reader reports such a
+statement as unaddressed by the question, never as absent from the act.
+
+The metric consumers already admit adopted geometry. Obtain the consequential
+version's map or publisher geometry, establish its correspondence to the adopting
+act, and qualify its frame and positional error. A publication date alone does not
+bind a polygon to an adopted version. An empirically established error bound is
+permitted; a publisher-stated bound is not the only route. DDS 106/2025's mapped
+extension into Basilicata and the acts' partial-parcel rules must survive this binding.
+The cadastral tables are useful evidence within their stated extent, not a substitute
+for the missing map correspondence. Operative legal-area state and Annex III
+eligibility remain upstream A meanings.
+
+DDS 45/2025 physical page 34 (annex printed page 27) names the post-adoption
+shapefile transmission from InnovaPuglia to the Osservatorio and ARIF. A shapefile
+is one sufficient route, not a prescribed prerequisite where equivalent geometry
+and correspondence evidence exists. The current multiplex publisher service is
+retained in the existing act acquisition records and read by
+`cordon_d.areas.published_geography`: ten native polygon occurrences, including
+Santeramo and Ginosa's separate Basilicata buffer components, in EPSG:32633.
+They are candidate geometry: the features state no adopting-act identity and no
+positional bound, and their adopted-version correspondence is not established.
+Another copy of these polygons is not the missing input.
+
+The act PDFs carry their map annexes bundled; the 49 standalone annex hashes
+the acts print are not held as separate blobs, and that does not make the bundled
+contents absent. DDS 69/2021 adopts its geography by map alone: all its pages are
+read, no cadastral table is printed, and the zones its maps depict are recoverable
+only by registering the maps — our reading's limit, not the act's silence.
+
+DDS 148/2024 is not an active search priority. Its Santeramo ST26 intermediate
+version remains a specific correspondence question; use a concrete existing
+package or publisher lead if it can resolve that version. Do not substitute a
+later boundary or restart an exhaustive search. Continue retained cadastral
+membership and current-map correspondence independently of that recovery.
 
 The join retains identifier-only display occurrences but requires an analytical
 result before they compete as finding-result rows. Printed field labels and complete
