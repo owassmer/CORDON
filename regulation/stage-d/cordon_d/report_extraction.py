@@ -58,6 +58,11 @@ procedures, infer missing facts, or give legal conclusions.
 
 Return only JSON with keys pages, tables, facts, issues, context_pages.
 pages: [{page: physical integer, disposition: read|partly_read|unreadable}].
+A page is read when every printed value on it is either recovered or marked at the
+cell as unreadable (source illegibility, including values the source itself prints
+as ## or clips); partly_read is only for content this reading has not yet recovered.
+Every row you emit is a row printed in the source with exactly one cell per column;
+never emit a placeholder, cancelled or partial row.
 tables: [{id: unique pN-tN label, page: physical integer,
  columns: [{heading: [complete printed parent, child headings],
  role: identifier|publisher_id|laboratory_id|pool_id|extract_id|sampling_date|test_date|host|
@@ -1040,9 +1045,11 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                             raise
                         # One bounded reread naming the structural defect, retained under its
                         # own request. A second failure stands as this document's stop.
+                        # The structural reread is a targeted correction and runs at high
+                        # effort, like the attachment and page-completion rereads.
                         repair_prompt = subscription_prompt + '\n\n' + STRUCTURE_REPAIR.format(defect=defect)
                         repair_identity = {'provider': provider_label(config), 'model': config.model,
-                            'effort': config.effort, 'source_sha256': digest, 'target_pages': targets,
+                            'effort': 'high', 'source_sha256': digest, 'target_pages': targets,
                             'context_pages': sorted(supplied_context), 'prompt': repair_prompt,
                             'schema': output_schema()}
                         repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
@@ -1053,7 +1060,8 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                                                      'explicit execution is required') from defect
                         if reading is None:
                             reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
-                                digest=digest, source=blob_path(store, digest), config=config,
+                                digest=digest, source=blob_path(store, digest),
+                                config=replace(config, effort='high'),
                                 request_id=repair_id, raw_path=repair_raw)
                         reading = target_reading(reading, targets, supplied)
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
