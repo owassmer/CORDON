@@ -147,6 +147,8 @@ def main():
                         help='Replay fully read blocks retained under these earlier versions (no model call) and read only uncovered pages')
     parser.add_argument('--effort', choices=['low', 'medium', 'high', 'xhigh', 'max'],
                         default=ExtractionConfig.effort)
+    parser.add_argument('--timeout-seconds', type=int, default=ExtractionConfig.timeout_seconds,
+                        help='Seconds one model request may take before it is recorded as a failed run')
     parser.add_argument('--extraction-version', help='Select a retained reading version for local consumption only')
     parser.add_argument('--relationships', action='store_true',
                         help='Read whole-document identities and operative references without retranscribing rows')
@@ -177,6 +179,7 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     model = args.model or (CODEX_DEFAULT_MODEL if args.provider == 'codex' else ExtractionConfig.model)
     config = ExtractionConfig(model=model, effort=args.effort, provider=args.provider,
+                              timeout_seconds=args.timeout_seconds,
                               max_tokens=4000 if args.relationships else ExtractionConfig.max_tokens)
     if args.resume_from and args.relationships:
         parser.error('--resume-from applies to page readings, not relationship inventories')
