@@ -235,3 +235,41 @@ PYTHONPATH=regulation/stage-c:regulation/stage-d .venv/bin/python \
 `verify.py` checks that the A–C projection, contracts and compact source map agree.
 It rejects workbench paths and historical evidence fields. Neither tests nor the
 verifier certify source meaning or Stage D completion.
+
+## Subscription document transport
+
+`cordon_d.document_subscription.read_documents` sends complete retained PDFs,
+including native text and every rendered page, through the authenticated Codex
+subscription. The caller supplies ordered source hashes, its prompt and its strict
+JSON output schema. An act and separate annexes can therefore form one request
+without being forced into a laboratory-report representation. This transport has
+no dependency on the laboratory reader and does not dispatch Claude jobs.
+
+The first intended caller is the removal-measure reader (INPUTS rows 6–8 and 11).
+Its initial allocation is one worker, one complete act with necessary annex context
+per request, with `gpt-5.6-luna` at `high` effort as a candidate setting. That setting
+is not yet qualified for whole-measure meaning: the caller must exercise its own
+source-to-consumer contract before population dispatch. Source admission, document
+relationships, qualifications, validation and publication of accepted readings
+remain with that reader. The transport returns a proposed reading, never a
+completion or legal-effect assertion.
+
+Execution is explicit (`execute=True`); otherwise only an identical retained request
+can be replayed. Request identity includes the source hashes, actual prompt and
+schema, rendered image hashes, model, effort and transport version. A lock prevents
+duplicate dispatch of an identical request; it does not coordinate different
+providers or different tasks on one document. Raw output, elapsed call time and
+provenance are retained in the regenerable store. Invalid JSON or output that
+violates the caller's schema remains retained and cannot become a returned reading,
+on either execution or replay. Non-JSON numeric constants and numbers that overflow
+to non-finite floating-point values are rejected before validation. Schema validity
+is checked before dispatch; schema
+references must resolve within the supplied schema, without network retrieval.
+Source-review instructions change the request;
+replay never secretly spends another call. API-key fallback and model tools are
+disabled. A bounded subprocess timeout applies.
+
+The calling reader uses the shared store and retains the request reference beside
+its interpreted output. No second source inventory, scheduler, extraction schema,
+or evidence-acceptance model is introduced here. Laboratory relationship batching
+can reuse the transport later; it is not an implemented caller in this unit.
