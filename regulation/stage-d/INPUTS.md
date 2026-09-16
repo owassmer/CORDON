@@ -420,13 +420,17 @@ cuts through, or a part of a comune whose extent the table leaves unstated — i
 answered as reached and undecided, with the statement that reached it; a place
 no act mentions is answered as such. The two are different absences with
 different remedies: the adopted map decides the first, nothing decides the
-second. A comune the act lists by sheets, asked about without a sheet — the
-ordinary shape of a monitoring record — is likewise answered as reached, not as
-unmentioned. The whole-province statements (Lecce and Brindisi, infected zone,
-from DDS 127/2022 onward) are keyed on the province alone. The monitoring
-publisher prints `PROVINCIA` in full (`Bari`, `Brindisi`, `Taranto`,
-`Barletta-Andria-Trani`, `Foggia`) on 688,631 of the retained occurrences, and a
-question that carries it reaches those statements through the ordinary path.
+second. An incomplete cadastral reference is named as such, not blamed on the
+map: a comune the act lists by sheets asked without a sheet, a sheet the act
+files under a section asked without the section, a sheet the act narrows to
+named parcels asked without a parcel, are each answered as reached, with what
+the question lacks; completing the reference answers them from the annex.
+The whole-province statements (Lecce and Brindisi, infected zone, from DDS
+127/2022 onward) are keyed on the province alone. The monitoring publisher
+prints `PROVINCIA` in full (`Bari`, `Brindisi`, `Taranto`,
+`Barletta-Andria-Trani`, `Foggia`) on 688,623 of the retained occurrences and
+the unavailable marker `#N/D` on eight, and a question that carries a province
+reaches those statements through the ordinary path.
 The occurrences that carry none — all 8,762 that carry a cadastral sheet among
 them — need the comune or its cadastral code resolved to a province, which the
 cadastral-geometry unit (row 5) owns; until then the reader reports such a

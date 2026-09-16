@@ -633,16 +633,34 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                 # and the two were reaching the operator as one sentence.
                 same_comune = comune is not None and (statement.comune or '').upper() == comune.upper()
                 reached = statement.scope == 'part-comune-extent-unstated' and same_comune
-                if not reached and grain == 'parcel' and foglio is not None:
-                    reached = statement.covers(comune=comune, province=province, section=section,
-                                               foglio=foglio, grain='sheet') is True
+                basis = ('the act reaches this place in its {zone} zone and does not state which '
+                         'part of it lies inside; the adopted map decides the parcel')
+                if not reached and same_comune and foglio is not None:
+                    # The question may be incomplete rather than the act undecided:
+                    # the act files this sheet under a section, or narrows it to named
+                    # parcels, and the question names neither. Those are answered by
+                    # completing the cadastral reference, not by the map.
+                    listed = [s for s in statement.sheets if s.number == str(foglio)]
+                    sections = sorted({s.section for s in listed if s.section} - {None})
+                    if listed and sections and section is None:
+                        reached = True
+                        basis = ('the act files sheet {foglio} of {comune} under section '
+                                 + ', '.join(sections) + ' in its {zone} zone; this question names no section')
+                    elif any(s.parcels for s in listed) and particella is None and section is None \
+                            or any(s.parcels and (s.section or '').upper() == (section or '').upper()
+                                   for s in listed) and particella is None:
+                        reached = True
+                        basis = ('the act narrows sheet {foglio} of {comune} to named parcels in its '
+                                 '{zone} zone; this question names no parcel')
+                    elif grain == 'parcel':
+                        reached = statement.covers(comune=comune, province=province, section=section,
+                                                   foglio=foglio, grain='sheet') is True
                 if reached:
                     zones_reached.add(statement.zone)
                     answers.append({'version': version.provision_version_id, 'zone': None,
                                     'reached_zone': statement.zone, 'regime': statement.regime,
-                                    'basis': (f'the act reaches this place in its {statement.zone} zone '
-                                              'and does not state which part of it lies inside; the '
-                                              'adopted map decides the parcel'),
+                                    'basis': basis.format(zone=statement.zone, foglio=foglio,
+                                                          comune=statement.comune),
                                     'statement': statement})
                 elif statement.scope == 'sheets' and same_comune and foglio is None:
                     # The act reaches this comune by listed sheets and the question

@@ -388,6 +388,32 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         milano = zone_of((version,), day, comune='MILANO')
         self.assertNotEqual([a['basis'] for a in fasano], [a['basis'] for a in milano])
 
+    def test_an_incomplete_cadastral_reference_is_named_not_blamed_on_the_map(self):
+        # DDS 132/2025 page 8 files Bari sheet 2 under sections A and E, starred;
+        # DDS 8/2024 page 7 narrows Triggiano sheet 5 to named parcels, 818
+        # wholly contained. Asked without the section or the parcel, the act is
+        # neither silent nor undecided: the reference is incomplete, and saying
+        # so points the operator at the annex rather than at the deferred map.
+        bari_act = next(v for v in self.versions if '2025-00132' in v.provision_version_id)
+        mine = [a for a in zone_of((bari_act,), bari_act.effective_from, comune='BARI', foglio='2', particella='1')
+                if a.get('reached_zone')]
+        self.assertEqual([a['reached_zone'] for a in mine], ['cuscinetto'])
+        self.assertIn('section A, E', mine[0]['basis'])
+        self.assertIn('names no section', mine[0]['basis'])
+        decided = zone_of((bari_act,), bari_act.effective_from, comune='BARI', foglio='2', section='A', particella='1')
+        self.assertIn('cuscinetto', [a['zone'] for a in decided])
+        triggiano_act = next(v for v in self.versions if '2024-00008' in v.provision_version_id)
+        mine = [a for a in zone_of((triggiano_act,), triggiano_act.effective_from, comune='TRIGGIANO', foglio='5')
+                if a.get('reached_zone')]
+        self.assertEqual([a['reached_zone'] for a in mine], ['infetta'])
+        self.assertIn('names no parcel', mine[0]['basis'])
+        self.assertNotIn('adopted map', mine[0]['basis'])
+        # An unstarred sheet with no parcels and no section keeps the map answer.
+        ginosa_act = next(v for v in self.versions if '2025-00106' in v.provision_version_id)
+        mine = [a for a in zone_of((ginosa_act,), date(2025, 7, 1), comune='GINOSA', foglio='36', particella='5')
+                if a.get('reached_zone')]
+        self.assertTrue(mine and all('adopted map decides' in a['basis'] for a in mine))
+
     def test_a_response_cut_off_by_the_model_is_not_a_page_read(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
