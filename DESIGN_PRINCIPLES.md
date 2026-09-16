@@ -52,7 +52,7 @@ Prefer delete, then replace, then refine, then add. Derive the combined operativ
 
 Ask whether the full necessary meaning can survive a slimmer representation before adding a field, object, abstraction, document, test or gate. An avoidable addition is a finding, including a process rule where removing a step would suffice. Lean means fewer unnecessary surfaces for drift, not fewer words at the expense of meaning.
 
-Local defects receive local cures. Repeated failures of the same soundly tested class are evidence that the structure—not the latest instance—needs to change.
+Size the repair by the cause and its affected population and consumers, using the least structure that preserves the full required capability. Repeated failures of the same soundly tested class are evidence that the structure—not the latest instance—needs to change.
 
 ## Verification must discriminate
 
