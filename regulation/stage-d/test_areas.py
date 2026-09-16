@@ -436,6 +436,43 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
                 if a.get('reached_zone')]
         self.assertTrue(mine and all('adopted map decides' in a['basis'] for a in mine))
 
+    def test_qualified_sheet_population_remains_reached_without_borrowing_extent(self):
+        from dataclasses import replace
+        checked = 0
+        for version in self.versions:
+            for row in version.statements:
+                for sheet in row.sheets:
+                    if not sheet.qualifier:
+                        continue
+                    isolated = replace(version, statements=(replace(row, sheets=(sheet,)),))
+                    query = dict(comune=row.comune, province=row.province,
+                                 section=sheet.section, foglio=sheet.number)
+                    for grain in ('sheet', 'parcel'):
+                        answer, = zone_of((isolated,), version.effective_from, grain=grain, **query)
+                        self.assertIsNone(answer['zone'])
+                        self.assertEqual(answer['reached_zone'], row.zone)
+                        self.assertEqual(answer['regime'], row.regime)
+                        self.assertIn(sheet.qualifier, answer['basis'])
+                    _, assertions = membership_evidence((isolated,), ROOT, version.effective_from, **query)
+                    self.assertEqual(assertions, ())
+                    checked += 1
+        self.assertGreater(checked, 0)
+
+    def test_matching_sheet_alternatives_do_not_depend_on_order(self):
+        from dataclasses import replace
+        alternatives = (Sheet('A', '17', False, qualifier='(SVILUPPO Q)'),
+                        Sheet('B', '17', True), Sheet('A', '17', True))
+        row = statement('sheets', alternatives)
+        for sheets in (alternatives, alternatives[::-1]):
+            s = replace(row, sheets=sheets)
+            self.assertTrue(s.covers(comune='TRIGGIANO', section='A', foglio='17'))
+            self.assertFalse(s.covers(comune='TRIGGIANO', section='Z', foglio='17'))
+        parcels = (Sheet(None, '17', False, parcels=('1',)),
+                   Sheet(None, '17', False, parcels=('2',), wholly_contained_parcels=('2',)))
+        for sheets in (parcels, parcels[::-1]):
+            self.assertTrue(replace(row, sheets=sheets).covers(
+                comune='TRIGGIANO', foglio='17', particella='2'))
+
     def test_a_response_cut_off_by_the_model_is_not_a_page_read(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)

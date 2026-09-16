@@ -164,47 +164,64 @@ class CadastralStatement:
         statement is about the province and nothing else, so there the
         question must name it, as the act prints it.
         """
+        return self.membership(comune=comune, province=province, section=section,
+                               foglio=foglio, particella=particella, grain=grain)[0]
+
+    def membership(self, *, comune=None, province=None, section=None, foglio=None,
+                   particella=None, grain='parcel'):
+        """Verdict and unresolved cause from the same cadastral matching operation.
+
+        None without a cause means this statement cannot be attached to the place.
+        Matching alternatives are disjunctive: an unresolved development or section
+        cannot hide a different sheet entry that establishes membership.
+        """
         if grain not in ('sheet', 'parcel'):
             raise ValueError("grain must be 'sheet' or 'parcel'")
         if self.scope == 'whole-province':
             if province is None:
-                return None
-            return True if (self.province or '').upper() == province.upper() else None
-        # Below here the statement is about one comune, so the question must
-        # name one.
-        if comune is None:
-            return None
-        if (self.comune or '').upper() != comune.upper():
-            return None
+                return None, (f'the act places the whole province of {self.province} '
+                              f'in its {self.zone} zone; this question names no province, '
+                              'and nothing here resolves a municipality to its province')
+            return (True if (self.province or '').upper() == province.upper() else None), None
+        if comune is None or (self.comune or '').upper() != comune.upper():
+            return None, None
         if self.scope == 'whole-comune':
-            return True
+            return True, None
+        map_cause = (f'the act reaches this place in its {self.zone} zone and does not state '
+                     'which part of it lies inside; the adopted map decides the parcel')
         if self.scope == 'part-comune-extent-unstated':
-            return None
+            return None, map_cause
         if foglio is None:
-            return None
-        for sheet in self.sheets:
-            if sheet.number != str(foglio):
+            return None, (f'the act reaches {self.comune} by listed sheets in its '
+                          f'{self.zone} zone; this question names no sheet')
+        listed = [s for s in self.sheets if s.number == str(foglio)]
+        causes = []
+        sections = sorted({s.section for s in listed if s.section})
+        for sheet in listed:
+            if sheet.section and section and sheet.section.upper() != section.upper():
+                continue
+            if sheet.section and section is None:
+                causes.append('the act files this sheet under section ' + ', '.join(sections)
+                              + '; this question names no section')
                 continue
             if sheet.qualifier:
-                # The question has not identified the named sheet development.
-                # Its number alone must not borrow that development's extent.
-                return None
-            if sheet.section is not None and section is None:
-                return None          # the act files this sheet under a section
-            if sheet.section is not None and section is not None and \
-                    sheet.section.upper() != section.upper():
+                causes.append(f'the act identifies sheet {foglio} as {sheet.qualifier}; '
+                              'this question does not identify that sheet development')
                 continue
             if grain == 'sheet':
-                return True
+                return True, None
             if sheet.parcels:
-                # The act named the particelle it reaches inside this sheet.
                 if particella is None:
-                    return None
-                if str(particella) not in sheet.parcels:
-                    return False
-                return True if str(particella) in sheet.wholly_contained_parcels else None
-            return True if sheet.wholly_contained else None
-        return False
+                    causes.append('the act narrows this sheet to named parcels; this question names no parcel')
+                elif str(particella) in sheet.wholly_contained_parcels:
+                    return True, None
+                elif str(particella) in sheet.parcels:
+                    causes.append(map_cause)
+            elif sheet.wholly_contained:
+                return True, None
+            else:
+                causes.append(map_cause)
+        return (None, '; '.join(sorted(set(causes)))) if causes else (False, None)
 
 
 @dataclass(frozen=True)
@@ -615,83 +632,28 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
     """
     answers = []
     for version in in_force(versions_, day):
-        # Answers are combined per zone and regime: an infected zone and an
-        # infected zone under containment measures are two facts the act states
-        # separately, and combining by zone alone dropped whichever the act
-        # printed second.
+        # Retain every reaching statement; only identical decided zone/regime
+        # answers are coalesced. Uncertainty must not depend on row order.
         zones_given, zones_reached, provinces_unaddressed = set(), set(), set()
-        for statement in version.statements:
-            verdict = statement.covers(comune=comune, province=province, section=section,
-                                       foglio=foglio, particella=particella, grain=grain)
+        assessed = [(statement, *statement.membership(
+            comune=comune, province=province, section=section, foglio=foglio,
+            particella=particella, grain=grain)) for statement in version.statements]
+        decided = {(s.zone, s.regime) for s, verdict, _ in assessed if verdict is True}
+        for statement, verdict, cause in assessed:
             key = (statement.zone, statement.regime)
-            if verdict and key not in zones_given:
+            answer = {'version': version.provision_version_id, 'regime': statement.regime,
+                      'statement': statement}
+            if verdict is True and key not in zones_given:
                 zones_given.add(key)
-                answers.append({'version': version.provision_version_id, 'zone': statement.zone,
-                                'regime': statement.regime,
-                                'basis': 'act cadastral statement', 'statement': statement})
-            elif verdict is None and (statement.scope == 'whole-province'
-                                      or key not in zones_given | zones_reached):
-                # The act reaches the place and stops short of deciding it at
-                # the grain asked: an unstarred sheet the zone cuts through, or
-                # a part of the comune whose extent the table does not state.
-                # That is a different answer from an act that never mentions
-                # the place - here the adopted map decides, there nothing does -
-                # and the two were reaching the operator as one sentence.
-                same_comune = comune is not None and (statement.comune or '').upper() == comune.upper()
-                reached = statement.scope == 'part-comune-extent-unstated' and same_comune
-                basis = ('the act reaches this place in its {zone} zone and does not state which '
-                         'part of it lies inside; the adopted map decides the parcel')
-                if not reached and same_comune and foglio is not None:
-                    # The question may be incomplete rather than the act undecided:
-                    # the act files this sheet under a section, or narrows it to named
-                    # parcels, and the question names neither. Those are answered by
-                    # completing the cadastral reference, not by the map.
-                    listed = [s for s in statement.sheets if s.number == str(foglio)]
-                    sections = sorted({s.section for s in listed if s.section} - {None})
-                    if listed and sections and section is None:
-                        reached = True
-                        basis = ('the act files sheet {foglio} of {comune} under section '
-                                 + ', '.join(sections) + ' in its {zone} zone; this question names no section')
-                    elif any(s.parcels for s in listed) and particella is None and section is None \
-                            or any(s.parcels and (s.section or '').upper() == (section or '').upper()
-                                   for s in listed) and particella is None:
-                        reached = True
-                        basis = ('the act narrows sheet {foglio} of {comune} to named parcels in its '
-                                 '{zone} zone; this question names no parcel')
-                    elif grain == 'parcel':
-                        reached = statement.covers(comune=comune, province=province, section=section,
-                                                   foglio=foglio, grain='sheet') is True
-                if reached:
-                    zones_reached.add(key)
-                    answers.append({'version': version.provision_version_id, 'zone': None,
-                                    'reached_zone': statement.zone, 'regime': statement.regime,
-                                    'basis': basis.format(zone=statement.zone, foglio=foglio,
-                                                          comune=statement.comune),
-                                    'statement': statement})
-                elif statement.scope == 'sheets' and same_comune and foglio is None:
-                    # The act reaches this comune by listed sheets and the question
-                    # names none - the ordinary shape of a monitoring record, which
-                    # carries a comune and rarely a sheet. The act is not silent.
-                    zones_reached.add(key)
-                    answers.append({'version': version.provision_version_id, 'zone': None,
-                                    'reached_zone': statement.zone, 'regime': statement.regime,
-                                    'basis': (f'the act reaches {statement.comune} by listed sheets in its '
-                                              f'{statement.zone} zone; this question names no sheet'),
-                                    'statement': statement})
-                elif statement.scope == 'whole-province' and province is None \
-                        and (statement.zone, statement.province) not in provinces_unaddressed:
-                    # The act places a whole province in a zone and the question
-                    # names no province. Whether this place lies in that province
-                    # is not known here; the statement is unaddressed, not absent,
-                    # and each province the act names is reported once.
-                    provinces_unaddressed.add((statement.zone, statement.province))
-                    answers.append({'version': version.provision_version_id, 'zone': None,
-                                    'unaddressed_zone': statement.zone, 'regime': statement.regime,
-                                    'basis': (f'the act places the whole province of {statement.province} '
-                                              f'in its {statement.zone} zone; this question names no '
-                                              'province, and nothing here resolves a municipality to '
-                                              'its province'),
-                                    'statement': statement})
+                answers.append(dict(answer, zone=statement.zone, basis='act cadastral statement'))
+            elif cause and statement.scope == 'whole-province':
+                province_key = (*key, statement.province)
+                if province_key not in provinces_unaddressed:
+                    provinces_unaddressed.add(province_key)
+                    answers.append(dict(answer, zone=None, unaddressed_zone=statement.zone, basis=cause))
+            elif cause and key not in decided:
+                zones_reached.add(key)
+                answers.append(dict(answer, zone=None, reached_zone=statement.zone, basis=cause))
         # Every version in force accounts for itself. A version that supplies
         # nothing and says nothing is indistinguishable from a version that is
         # not in force, and the operator reads both as no duty.
