@@ -762,6 +762,36 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(rows[0].cells[0]['annotation'], '(Pool)')
         self.assertEqual(rows[1].reference, '00124 (Field)')
 
+    def test_printed_id_label_is_not_part_of_the_identifier(self):
+        item = block([['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['1401424', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['IDANDROID 12', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['Id 1610615', '01/06/2024', 'Positivo', '02/06/2024']])
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual(rows[0].cells[0]['identifier'], '11200165')
+        self.assertEqual(rows[0].cells[0]['annotation'], 'ID:')
+        self.assertEqual(rows[0].cells[0]['text'], 'ID: 11200165')
+        self.assertEqual(rows[0].cells[0]['identifier_basis'],
+                         'literal ID label prefix; complete cell retained')
+        self.assertEqual(rows[0].identifiers, ('11200165',))
+        self.assertEqual(rows[1].reference, '1401424')
+        self.assertNotIn('identifier', rows[1].cells[0])
+        self.assertEqual(rows[2].reference, 'IDANDROID 12')
+        self.assertNotIn('identifier', rows[2].cells[0])
+        self.assertEqual(rows[3].cells[0]['identifier'], '1610615')
+        self.assertEqual(rows[3].cells[0]['annotation'], 'Id')
+        self.assertEqual(rows[3].cells[0]['text'], 'Id 1610615')
+
+    def test_two_identifier_cells_keep_every_value_on_the_row(self):
+        item = block([['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append(dict(table['columns'][0], heading=['CODICE ID']))
+        table['rows'][0]['cells'].append({'text': '0147/24-1'})
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertIsNone(row.reference)
+        self.assertEqual(row.identifiers, ('11200165', '0147/24-1'))
+        self.assertEqual(row.cells[0]['text'], 'ID: 11200165')
+
     def test_sampling_attachment_gets_one_reread_and_can_remain_unresolved(self):
         import pymupdf
         from cordon_d.store import put_bytes

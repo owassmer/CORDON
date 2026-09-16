@@ -10,8 +10,30 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, report, record_rows
-from .monitoring import day as observation_day
+from .monitoring import day as observation_day, PUBLISHER_IDENTIFIERS
 from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, load as load_relations
+
+
+_CARRIED_IDENTIFIER_FIELDS = ('ID', 'ID_CAMPIONE') + PUBLISHER_IDENTIFIERS
+
+
+def _observation_identifier_literals(group):
+    """Reference plus every publisher-carried identifier value, as literals.
+
+    Values stay under the field that printed them. Nothing is merged into
+    `reference`.
+    """
+    carried = group.carried_identifiers()
+    literals = {value for _, value in carried}
+    if group.reference is not None:
+        literals.add(group.reference)
+    return literals, carried
+
+
+def _matching_observation_field(carried, identifiers):
+    held = set(identifiers)
+    matched = {field for field, value in carried if value in held}
+    return next((field for field in _CARRIED_IDENTIFIER_FIELDS if field in matched), None)
 
 
 def document_name(route):
@@ -319,8 +341,11 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                 for value in host_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
                     # Every compatible row competes. Result polarity cannot select identity.
-                    rows = [row for row in records_by_document[digest] if row in row_index[digest].get(group.reference, [])
-                            or row.locator in derived]
+                    literals, carried = _observation_identifier_literals(group)
+                    indexed = {row.locator for value in literals
+                               for row in row_index[digest].get(value, [])}
+                    rows = [row for row in records_by_document[digest]
+                            if row.locator in indexed or row.locator in derived]
 
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
                     for row in rows:
@@ -335,7 +360,14 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         elif 'unresolved' in host_links.get(row.locator, []):
                             association_cause = 'report-row host needed by the source association remains unresolved'
                         derived_identity = row.locator in derived
-                        exact_identity = group.reference in row.identifiers
+                        exact_identity = any(value in row.identifiers for value in literals)
+                        identity_field = _matching_observation_field(carried, row.identifiers)
+                        if derived_identity:
+                            identity_basis = ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct')
+                        else:
+                            identity_basis = 'literal identifier equality within the observation’s explicit report route'
+                            if identity_field:
+                                identity_basis += f' (observation field {identity_field})'
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
                                      'result_cause': None if row.results else 'no analytical result recovered for this occurrence',
                                      'date_cause': row.date_cause,
@@ -345,8 +377,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                      'source_associations': source_links,
                                      'association_comparisons': coordinate_links.get(row.locator, []),
                                      'host_comparisons': host_links.get(row.locator, []),
-                                     'identity_basis': ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct'
-                                                        if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
+                                     'identity_basis': identity_basis,
                                      'reading_issues': reading.issues,
                                      'document_cause': link['document_cause'],
                                      'assembly_complete': reading.assembly_complete,

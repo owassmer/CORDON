@@ -699,6 +699,11 @@ def materialize(digest, version, page_count, blocks):
                         if annotation and annotation[1].strip():
                             value.update(identifier=annotation[1].strip(), annotation=annotation[2],
                                          identifier_basis='literal (Pool) suffix; complete cell retained')
+                        else:
+                            labelled = re.fullmatch(r'\s*(ID:?)\s+(\S.*?)\s*', text, re.IGNORECASE)
+                            if labelled and labelled[2].strip():
+                                value.update(identifier=labelled[2].strip(), annotation=labelled[1],
+                                             identifier_basis='literal ID label prefix; complete cell retained')
                     cells.append(value)
                     by_role.setdefault(column['role'], []).append(value)
                     if column['role'] == 'result':

@@ -8,7 +8,7 @@ established; no other row is.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. Reach (`SPEC.md`, admission): observation-dated; complete over the longest reachable backward period from the decision date, negatives included; earlier observations serve identity continuity, a rendition an in-reach correction chain requires, and reader verification. |
-| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | All 1,180 retained PDFs (3,092 pages) have page readings and completed record assemblies in ordinary consumption version `0afeee85d8fc59f4705b`. Original Claude and Codex request provenance survives cache rebuilding. All 1,180 document-relationship inventories are marked complete. Fragment-only rows explicitly bound by the document reader survive ordinary materialization; explicitly bound descriptive-field fragments assemble while their physical cells and qualification scopes remain retained. Binding-only blocks replay without new provider calls. Whole-population consumer verification is distinct from semantic acceptance: independent source review and full bidirectional reconciliation remain pending, including cause-specific adjudication of unclassified and unread result occurrences; a blank physical fragment is not itself a missing assay. Current consumer results and consequential source work below. Reach (`SPEC.md`, admission): observation-dated by sampling date; complete over the longest reachable backward period from the decision date, every result polarity included; an earlier rendition enters only where an in-reach result's correction or replacement chain requires it. |
+| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | All 1,180 retained PDFs (3,092 pages) have page readings and completed record assemblies in ordinary consumption version `0afeee85d8fc59f4705b`. Original Claude and Codex request provenance survives cache rebuilding. All 1,180 document-relationship inventories are marked complete. Fragment-only rows explicitly bound by the document reader survive ordinary materialization; explicitly bound descriptive-field fragments assemble while their physical cells and qualification scopes remain retained. Binding-only blocks replay without new provider calls. Whole-population consumer verification is distinct from semantic acceptance: independent source review and full bidirectional reconciliation remain pending, including cause-specific adjudication of unclassified and unread result occurrences; a blank physical fragment is not itself a missing assay. In-reach ordinary-consumer residue (e809d04) and its owners are in Laboratory reports below: forward 2,352 routed, 2,190 matched, 162 not; reverse 750 rows without an observation. Whole-population verification of the identifier-join repairs is pending the derived-once unit (PR #22). Reach (`SPEC.md`, admission): observation-dated by sampling date; complete over the longest reachable backward period from the decision date, every result polarity included; an earlier rendition enters only where an in-reach result's correction or replacement chain requires it. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A whose interval overlaps an event date inside the reach; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. Reach (`SPEC.md`, admission): by A's interval overlapping an in-reach event date; whether the four-year rule reads the area as it stood at the time is an A question. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
@@ -169,24 +169,34 @@ What the population shows, read and not reconciled:
 ## Laboratory reports
 
 The retained population comprises 1,910 captures with source bytes and 1,180 distinct PDFs.
-PR #7 supplies the accepted reader and join implementation. The laboratory lane owns completion of this row on successor PR #18. Page and relationship readings continue through the subscription in the background; stopped sources and available joins are repaired concurrently, without waiting for the whole queue.
+Ordinary consumption version `0afeee85d8fc59f4705b` holds page readings and completed record
+assemblies for all 1,180, with all document-relationship inventories marked complete.
 
-The stopped SELGE protocol 17/2018 reading now supplies all 104 sample rows across five pages, with 208 positive test occurrences and 104 forward and reverse observation links verified against the original pages. CNR 65/2024 now supports the three formerly pending annex correspondences (1669854, 1669920, 1669995); printed host names retain their meaning across line wrapping. The other four annex observations (1668283, 1669711, 1672360, 1675006) now consume CNR 62/2024, 68F/2024, 70F/2024 and 75F/2024. Original-page checks recover all 53 sample rows and 135 result occurrences across those four reports; 47 observations match. CNR 62 retains its printed September test dates, marked-result literals, field-scoped non-accreditation and aliquot notes, and sample-specific undetermined-subspecies statements. Result/annotation decomposition belongs to the source reader; deterministic projection checks literal reconstruction and preserves the full cell. The resumed subscription runs retain ownership of stopped readings; SELGE 19/2016 has recovered from its provider timeout, while stopped readings that propose a whole table as one continued record require a general binding repair in this lane, including SELGE 102/2018 and 145/2019.
-The bounded recovered-source and continuation consumer results below describe what
-has been verified; they do not establish completion of the retained population or
-official confirmation. Whole-population reading and ordinary joins remain required.
+In reach, the ordinary consumers (at e809d04) route 2,352 observations: 2,190 matched and 162
+not (118 unmatched, 22 provisional, 22 ambiguous). Reverse, 750 rows have no observation
+(436 negative, 183 positive, 109 unclassified, 22 without result; 563 with a reference no
+observation claims, 187 with none). 333 rows are undated (177 print "non disponibile", 73 have
+no date field, 21 conflicting, 15 unparsed literals, 7 month-first, 7 year unresolved).
 
-The fine-print SELGE 27/2015 attachment now supplies all 13 source rows. Direct
-page comparison verifies 28 February for its first sample and 26 February for the
-other twelve; scoped full-year statements resolve the printed short years. CNR
-91P/2025 now attaches 23 October to the cited predecessor protocol and retains
-28 October as this rendition's issue date. IAMB 39/2022 is read as an amendment
-without an invented changed-column delta. The ordinary reader and source-only
-reread recovered these meanings; no report-specific runtime rule supplies them.
-Continue full-population row and relationship reading and reconcile its ordinary
-joins. The generic identifier role does not require guessing which organization
-assigned a literal code; attachment still requires the observation's report route,
-source identity and bidirectional uniqueness.
+Source classes (the source's own facts): CRSFA 2022–23 annexes print `CODICE ID` and
+busta/campione codes, not the monitoring id (58 observations, three reports); CNR 2024 prints
+the accession and `Codice committente`, not the monitoring id (178 rows, five reports);
+UNIBA 32/2022 prints five-digit pool ids; UNIBA 35/2023 prints no sample id; CNR prints
+"non disponibile" as the sampling date.
+
+Reader classes repaired here: the ID label inside a cell; the second identifier cell emptying
+the reference. A row's identifiers meet every publisher-carried identifier of the observation,
+and a printed ID label inside a cell is not part of the identifier. `reference` remains empty
+when several identifier cells carry different values; the join uses every value. Whole-population
+verification of these repairs is pending the derived-once unit (PR #22).
+
+The generic identifier role does not require guessing which organization assigned a literal code;
+attachment still requires the observation's report route, source identity and bidirectional
+uniqueness.
+
+Reread when the subscription returns: 187 marked results whose note the reading did not recover
+(122 of 2024), UNIFG 2_POS/2022's merged rows, UNIBA 87/2023's continued table, nine image-only
+SELGE scans.
 
 The failed published routes are reconciled in the existing acquisition records.
 Four retained alternatives resolve CNR-IPSP 36/2024, 10/2024, 70M/2026 and SELGE
