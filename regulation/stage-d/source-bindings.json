@@ -14,7 +14,8 @@
       ],
       "routes": [
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
-        "https://webapps.sit.puglia.it/arcgis/rest/services"
+        "https://webapps.sit.puglia.it/arcgis/rest/services",
+        "corpus/sources/positional-reference/records.json (regional 2023 imagery production and AGEA 2022 flight/control routes)"
       ],
       "population": "Every record of the twelve campaign workbooks, the CKAN release and the 101 observation point layers of the eight SIT services that publish them: 4,318,100 observations, 2,320,354 distinct, all hosts and all result states.",
       "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_positives",
