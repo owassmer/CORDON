@@ -213,10 +213,13 @@ class WhatAStatementDecides(unittest.TestCase):
         # a range of particelle read as sheets places sheets the act never
         # names. No held act writes either form, so both must surface as
         # unread on first contact rather than as a confident answer.
-        for text in ('FOGLI: 100-105', 'FOGLI 12 – 15, 18',
+        for text in ('FOGLI: 100-105', 'FOGLI 12 – 15, 18', 'FOGLI 7*-9*', 'FOGLI da 7 a 9*',
                      'FOGLIO 5: particelle da 260 a 264', 'FOGLI: 1, 2, particelle 5 a 9'):
             with self.subTest(text=text):
                 self.assertFalse(read_scope(text).fully_read)
+        # An asterisk the grammar did not attach is consequential residue; a
+        # stray comma is not.
+        self.assertTrue(read_scope('FOGLI: 1*, 2,').fully_read)
         # The one dash the population prints keeps its own reading.
         self.assertTrue(read_scope('FOGLI 19, 19-ALLEGATO A*').fully_read)
 
@@ -387,6 +390,25 @@ class AgainstTheAcceptedPopulation(unittest.TestCase):
         self.assertTrue(any('names no sheet' in a['basis'] for a in fasano))
         milano = zone_of((version,), day, comune='MILANO')
         self.assertNotEqual([a['basis'] for a in fasano], [a['basis'] for a in milano])
+
+    def test_a_separately_stated_regime_survives_whatever_the_statement_order(self):
+        # DDS 18/2024 page 9 lists Alberobello's whole territory under "ZONA
+        # INFETTA" and again under "ZONA INFETTA IN CUI SI APPLICANO MISURE DI
+        # CONTENIMENTO": one zone, two facts. Combining answers by zone alone
+        # kept whichever the act printed first.
+        from dataclasses import replace
+        version = next(v for v in self.versions if '2024-00018:area-state-transition:v1' in v.provision_version_id)
+        def regimes(v):
+            return sorted(((a['zone'], a.get('regime') or '') for a in zone_of((v,), v.effective_from, comune='ALBEROBELLO')
+                           if a['zone']))
+        expected = [('infetta', ''), ('infetta', 'contenimento')]
+        self.assertEqual(regimes(version), expected)
+        self.assertEqual(regimes(replace(version, statements=tuple(reversed(version.statements)))), expected)
+        # Locorotondo's containment statement lists sheets; asked without a sheet
+        # it is reached with its regime, beside the decided plain infected zone.
+        answers = zone_of((version,), version.effective_from, comune='LOCOROTONDO')
+        self.assertEqual(sorted((a.get('reached_zone'), a.get('regime')) for a in answers if a.get('reached_zone')),
+                         [('infetta', 'contenimento')])
 
     def test_an_incomplete_cadastral_reference_is_named_not_blamed_on_the_map(self):
         # DDS 132/2025 page 8 files Bari sheet 2 under sections A and E, starred;

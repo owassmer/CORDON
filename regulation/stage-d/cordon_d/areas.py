@@ -278,12 +278,13 @@ SCOPE_TOKENS = (
     ('annex-sheet', re.compile(r'(\d+)\s*-\s*(ALLEGATO\s+[A-Z])\s*(\*?)', re.I)),
     # A dash between two numbers is a form no held act uses for a range; it is
     # residue, so the cell is reported unread instead of read as its endpoints.
-    ('unread', re.compile(r'\d+\s*[–—-]\s*\d+')),
+    ('unread', re.compile(r'\d+\s*\*?\s*[–—-]\s*\d+')),
     ('sheet', re.compile(r'(\d+)\s*(\*?)\s*(\((?:SVILUPPO|Sviluppo)[^)]*\))?')),
 )
 # Residue that cannot change what the cell means: stray single letters and
-# punctuation left by extraction. Anything with a digit or a word in it can.
-TRIVIAL_RESIDUE = re.compile(r'^[\W_]*$|^[A-Za-z]$')
+# separator punctuation left by extraction. A digit, a word, an asterisk (the
+# act's own whole-containment mark) or a dash (a range no held act writes) can.
+TRIVIAL_RESIDUE = re.compile(r'^[^\w*–—-]*$|^[A-Za-z]$')
 
 
 def read_scope(text) -> Scope:
@@ -614,17 +615,22 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
     """
     answers = []
     for version in in_force(versions_, day):
+        # Answers are combined per zone and regime: an infected zone and an
+        # infected zone under containment measures are two facts the act states
+        # separately, and combining by zone alone dropped whichever the act
+        # printed second.
         zones_given, zones_reached, provinces_unaddressed = set(), set(), set()
         for statement in version.statements:
             verdict = statement.covers(comune=comune, province=province, section=section,
                                        foglio=foglio, particella=particella, grain=grain)
-            if verdict and statement.zone not in zones_given:
-                zones_given.add(statement.zone)
+            key = (statement.zone, statement.regime)
+            if verdict and key not in zones_given:
+                zones_given.add(key)
                 answers.append({'version': version.provision_version_id, 'zone': statement.zone,
                                 'regime': statement.regime,
                                 'basis': 'act cadastral statement', 'statement': statement})
             elif verdict is None and (statement.scope == 'whole-province'
-                                      or statement.zone not in zones_given | zones_reached):
+                                      or key not in zones_given | zones_reached):
                 # The act reaches the place and stops short of deciding it at
                 # the grain asked: an unstarred sheet the zone cuts through, or
                 # a part of the comune whose extent the table does not state.
@@ -656,7 +662,7 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                         reached = statement.covers(comune=comune, province=province, section=section,
                                                    foglio=foglio, grain='sheet') is True
                 if reached:
-                    zones_reached.add(statement.zone)
+                    zones_reached.add(key)
                     answers.append({'version': version.provision_version_id, 'zone': None,
                                     'reached_zone': statement.zone, 'regime': statement.regime,
                                     'basis': basis.format(zone=statement.zone, foglio=foglio,
@@ -666,7 +672,7 @@ def zone_of(versions_, day: date, *, comune: str | None = None, province: str | 
                     # The act reaches this comune by listed sheets and the question
                     # names none - the ordinary shape of a monitoring record, which
                     # carries a comune and rarely a sheet. The act is not silent.
-                    zones_reached.add(statement.zone)
+                    zones_reached.add(key)
                     answers.append({'version': version.provision_version_id, 'zone': None,
                                     'reached_zone': statement.zone, 'regime': statement.regime,
                                     'basis': (f'the act reaches {statement.comune} by listed sheets in its '
