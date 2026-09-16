@@ -39,7 +39,7 @@
     {
       "id": "result-documents",
       "name": "Official laboratory result documents",
-      "purpose": "Supply the laboratory's result, taxon or subspecies, method, report identity and report date for the sample named by the document.",
+      "purpose": "Supply the laboratory's stated result for each designated test with its analyte, the sample identity, and the report's identity and dates for the samples the report names.",
       "contracts": [
         "official-finding",
         "analytical-result",
@@ -47,11 +47,13 @@
         "sample-custody"
       ],
       "routes": [
-        "DOCUMENTO_CONFERMA links published in regional monitoring records"
+        "DOCUMENTO_CONFERMA and LNK_DOCUMENTO_SELGE links published in regional monitoring records",
+        "https://webadf.sit.puglia.it/openDoc/apridocumento (confirmation letters and rapporti di prova)",
+        "http://cartografia.sit.puglia.it/doc/xylella/ (subspecies-identification rapporti)"
       ],
-      "population": "Every result document referenced by an admitted monitoring release, followed through its own source link.",
-      "reader": "cordon_d.campaign, cordon_d.releases and a source-structure report reader still to be completed",
-      "open": "Reacquire the referenced documents and derive report-row joins and corrections without a case list or authored expected answer."
+      "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
+      "reader": "cordon_d.reports, cordon_d.report_relations and cordon_d.findings; explicit extraction through scripts/read_reports.py",
+      "open": "Population reading, unbound qualifications and multi-document identity/scope remain incomplete. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. Source and access limits are owned by INPUTS.md row 2."
     },
     {
       "id": "official-areas",
@@ -97,11 +99,12 @@
       ],
       "routes": [
         "https://burp.regione.puglia.it/bollettini",
-        "https://www.regione.puglia.it/documents/736605/"
+        "https://www.regione.puglia.it/documents/736605/",
+        "https://cartografia.sit.puglia.it/doc/xylella/ (determinations reached from admitted report identities)"
       ],
       "population": "Every Osservatorio determination required by an admitted finding or by a correction relationship reached from it.",
-      "reader": "Not yet implemented after the D purge",
-      "open": "Reacquire the admitted originals and implement one general reader across the population. Prescription means the Osservatorio's formal direction to remove named plants or parcels."
+      "reader": "cordon_d.source_associations for native plant/report annex associations; whole-act operative reading remains unimplemented",
+      "open": "Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
     },
     {
       "id": "notice-and-response-records",
