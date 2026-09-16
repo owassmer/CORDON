@@ -28,7 +28,7 @@ Research and reviews are evidence. They never override the owners above. If two 
 - Read the authoritative source before serializing meaning. Sources and other actors enter only where they directly affect the chosen decision chain; the current operator's full remit is not the product aperture.
 - Respect stage boundaries. A downstream representation need cannot rewrite upstream meaning.
 - Delete > replace > refine > add. Preserve full necessary meaning with the least structure and operator burden; complexity and process need a named decision or prevented failure.
-- Keep the cure local. A finding does not authorize scope expansion, a broader rewrite, or another review ritual.
+- Keep the cure local to the cause and its consequences. A finding does not authorize unrelated work or another review ritual.
 - Prefer the smallest structure that makes the wrong state unrepresentable; otherwise use a discriminating check before a prose reminder.
 - Verify the resulting state from its consumer surface. A successful command, review, or build is only a signal.
 - Treat missing reachable evidence as acquisition work. Treat genuine ambiguity as unresolved; never fabricate closure.
