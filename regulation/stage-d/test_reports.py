@@ -93,7 +93,10 @@ class LiteralReport(unittest.TestCase):
 
     def test_native_identifier_uses_source_geometry_and_preserves_original(self):
         import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
         with TemporaryDirectory() as temporary:
+            store = Path(temporary)
             path = Path(temporary) / 'source.pdf'
             with pymupdf.open() as document:
                 page = document.new_page()
@@ -104,17 +107,30 @@ class LiteralReport(unittest.TestCase):
                                        ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
                     page.insert_text(position, text, fontsize=11)
                 document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            source = store / 'blobs' / 'sha256' / digest[:2] / digest
             item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
             item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
             item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
-            before = materialize('hash', 'v', 1, [item])
-            after = positioned_identifiers(before, path)
+            before = materialize(digest, 'v', 1, [item])
+            after = positioned_identifiers(before, source)
             self.assertEqual(after.rows[0].reference, 'A_ B')
             self.assertEqual(after.rows[0].cells[0]['native_text'], 'A B\n_')
             self.assertEqual(before.rows[0].reference, 'A B\n_')
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            loaded = report(digest, store, extraction_version='v')
+            self.assertEqual(loaded.rows[0].reference, 'A_ B')
+            payload = json.loads(target.read_text())
+            payload['blocks'][0]['native_cells']['p1-t1-r1-c1']['text'] = 'A B\n_X'
+            target.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
+                report(digest, store, extraction_version='v')
             item['native_cells']['p1-t1-r1-c1']['text'] = 'different source'
             with self.assertRaisesRegex(ValueError, 'differs from its source cell'):
-                positioned_identifiers(materialize('hash', 'v', 1, [item]), path)
+                write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                         'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
 
     def test_invalid_date_retains_literal_and_does_not_become_a_result(self):
         reading = materialize('hash', 'v', 1, [block([['00123', '29/02/2023', 'Positivo', '01/03/2023']])])
@@ -784,6 +800,72 @@ class LiteralReport(unittest.TestCase):
             materialize('hash', 'v', 1, [item])
         item['reading']['pages'][0]['disposition'] = 'partly_read'
         self.assertEqual(materialize('hash', 'v', 1, [item]).complete_pages, frozenset())
+
+
+    def test_tampered_native_identifier_on_assembled_reading_is_refused(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            self.assertTrue(payload.get('positioned_identifiers'))
+            payload['blocks'][0]['native_cells']['p1-t1-r1-c1']['text'] = 'A B\n_X'
+            target.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
+                report(digest, store, extraction_version='v')
+
+    def test_retained_cell_that_disagrees_with_source_is_refused_on_assembly(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'different source', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            with self.assertRaisesRegex(ValueError, 'Retained native identifier differs from its source cell'):
+                write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                         'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+
+    def test_write_assembled_refuses_a_payload_under_another_extraction_version(self):
+        from cordon_d.report_extraction import write_assembled
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            digest = 'abc'
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            with self.assertRaisesRegex(ValueError, 'never written under another extraction version'):
+                write_assembled(target, {'source_sha256': digest, 'extraction_version': 'other',
+                                         'page_count': 1, 'blocks': []}, store, digest)
 
 
 class ShownPages(unittest.TestCase):

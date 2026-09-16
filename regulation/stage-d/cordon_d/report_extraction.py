@@ -15,7 +15,8 @@ from tempfile import TemporaryDirectory
 
 import requests
 
-from .reports import ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows
+from .reports import (ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows,
+                      positioned_identifier_records)
 
 IMPLEMENTATION = Path(__file__).read_bytes()
 from .store import blob_path
@@ -196,6 +197,18 @@ def write_json(path, value):
     temporary = path.with_suffix(path.suffix + '.tmp')
     temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n')
     temporary.replace(path)
+
+
+def write_assembled(path, payload, store, digest):
+    """Write report.json at the payload's extraction version, with positioned identifiers."""
+    revision = payload.get('extraction_version')
+    if revision is None or Path(path).parent.parent.name != revision:
+        raise ValueError('A reading is never written under another extraction version')
+    if payload.get('blocks') is not None and payload.get('page_count') is not None:
+        reading = materialize(digest, revision, payload['page_count'], payload['blocks'])
+        payload = dict(payload, positioned_identifiers=positioned_identifier_records(
+            reading, blob_path(store, digest)))
+    write_json(path, payload)
 
 
 def credential():
@@ -704,13 +717,13 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
                    replayed_from_extraction_version=extraction_version,
                    blocks=[*payload['blocks'], item])
     target = store / 'derived/reports' / revision / digest / 'report.json'
-    write_json(target, payload)
+    write_assembled(target, payload, store, digest)
     assembled = materialize(digest, revision, payload['page_count'], payload['blocks'])
     record_rows(assembled)
     if reading['issues'] or not reading['facts']:
         raise ValueError('Source continuation relationships remain unresolved')
     payload['assembly_complete'] = len(assembled.complete_pages) == assembled.pages
-    write_json(target, payload)
+    write_assembled(target, payload, store, digest)
     return target
 
 
@@ -730,9 +743,9 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
     with pymupdf.open(blob_path(store, digest)) as document:
         page_count = len(document)
         def save(complete=False):
-            write_json(target, {'source_sha256': digest, 'extraction_version': revision,
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': revision,
                                'page_count': page_count, 'config': asdict(config),
-                               'assembly_complete': complete, 'blocks': blocks})
+                               'assembly_complete': complete, 'blocks': blocks}, store, digest)
         save()
         def read(targets, continuation_review=None):
             supplied_context = context | heading_context

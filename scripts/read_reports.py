@@ -218,85 +218,89 @@ def main():
     if args.join_output or args.join_summary:
         destination = args.join_output or args.join_summary
         destination.parent.mkdir(parents=True, exist_ok=True)
-        routed = []
-        stream = findings(distinct_observations(args.monitoring_root), args.reports_root, store,
-                          extraction_version=revision, known_through=args.known_through,
-                          association_readings=associations(args.association_root, store, known_through=args.known_through)
-                              if (args.association_root / 'records.json').exists() else ())
-        counts, statuses, limitations = Counter(), Counter(), Counter()
-        routed_urls, unacquired_urls = set(), set()
-        output = args.join_output.open('w') if args.join_output else None
+        import cordon_d.reports as report_mod
+        report_mod.REPORT_MEMO = {}
         try:
-            for item in stream:
-                if output:
-                    output.write(json.dumps(item, default=encoded, ensure_ascii=False) + '\n')
-                counts['observations'] += 1
-                if counts['observations'] % 250000 == 0:
-                    print(json.dumps({'joined_observations': counts['observations']}), flush=True)
-                statuses[item.get('status', 'no report route recovered')] += 1
-                counts['matched_relationships'] += len(item['matches'])
-                for link in item['links']:
-                    routed_urls.add(link['route'])
-                    if link.get('status') == 'source route not acquired at knowledge cutoff':
-                        unacquired_urls.add(link['route'])
-                    limitations[link.get('status', 'unspecified')] += 1
-                if item['observation'].report_routes:
-                    routed.append(item)
-        finally:
-            if output:
-                output.close()
-        counts['routed_observations'] = len(routed)
-        counts['distinct_routed_urls'] = len(routed_urls)
-        counts['unacquired_routed_urls'] = len(unacquired_urls)
-        reading_statuses = Counter()
-        def readings():
-            for reading in reports(args.reports_root, store, extraction_version=revision, known_through=args.known_through):
-                if isinstance(reading, Report):
-                    status = 'all pages accounted for' if len(reading.complete_pages) == reading.pages else 'partial page reading'
-                    counts['pages_in_started_reports'] += reading.pages
-                    counts['pages_reported_read'] += len(reading.complete_pages)
-                else:
-                    status = reading.cause
-                reading_statuses[status] += 1
-                yield reading
-        output = args.join_output.with_suffix('.report-rows.jsonl').open('w') if args.join_output else None
-        try:
-            for row in report_rows(readings(), routed):
-                counts['read_report_rows'] += 1
-                counts['unmatched_report_rows'] += not bool(row['observations'])
-                if output:
-                    output.write(json.dumps(row, default=encoded, ensure_ascii=False) + '\n')
-        finally:
-            if output:
-                output.close()
-        if args.join_summary:
-            args.join_summary.parent.mkdir(parents=True, exist_ok=True)
-            args.join_summary.write_text(json.dumps({'extraction_version': revision,
-                'known_through': args.known_through.isoformat(), 'counts': counts,
-                'observation_statuses': statuses, 'route_statuses': limitations,
-                'reading_statuses': reading_statuses, 'unacquired_routes': sorted(unacquired_urls)}, indent=2) + '\n')
-
-        if args.confirmation_request:
-            destination = (args.join_output or args.join_summary).with_suffix('.confirmation.json')
+            routed = []
+            stream = findings(distinct_observations(args.monitoring_root), args.reports_root, store,
+                              extraction_version=revision, known_through=args.known_through,
+                              association_readings=associations(args.association_root, store, known_through=args.known_through)
+                                  if (args.association_root / 'records.json').exists() else ())
+            counts, statuses, limitations = Counter(), Counter(), Counter()
+            routed_urls, unacquired_urls = set(), set()
+            output = args.join_output.open('w') if args.join_output else None
             try:
-                from cordon_c.core import Snapshot
-                from cordon_c.bindings import confirmation_facts
-                request = json.loads(args.confirmation_request.read_text())
-                selected = [item for item in routed if list(item['observation'].identity) == request['observation']]
-                if len(selected) != 1:
-                    raise ValueError('Requested observation is not uniquely present in the ordinary joined stream')
-                inputs = confirmation_inputs(selected[0], result_pair=request['result_pair'], qualification={})
-                facts = confirmation_facts(Snapshot.load(REPOSITORY), date.fromisoformat(request['event_date']), **inputs)
-                destination.write_text(json.dumps({'observation': request['observation'],
-                    'result_pair': request['result_pair'], 'event_date': request['event_date'],
-                    'extraction_version': revision, 'inputs': inputs,
-                    'evaluations': [{'consumer': key, 'evaluation': value} for key, value in facts.items()]},
-                    default=encoded, indent=2) + '\n')
-            except (ValueError, KeyError) as error:
-                destination.write_text(json.dumps({'request_path': str(args.confirmation_request),
-                    'cause': str(error), 'evaluations': None}, indent=2) + '\n')
-                raise
+                for item in stream:
+                    if output:
+                        output.write(json.dumps(item, default=encoded, ensure_ascii=False) + '\n')
+                    counts['observations'] += 1
+                    if counts['observations'] % 250000 == 0:
+                        print(json.dumps({'joined_observations': counts['observations']}), flush=True)
+                    statuses[item.get('status', 'no report route recovered')] += 1
+                    counts['matched_relationships'] += len(item['matches'])
+                    for link in item['links']:
+                        routed_urls.add(link['route'])
+                        if link.get('status') == 'source route not acquired at knowledge cutoff':
+                            unacquired_urls.add(link['route'])
+                        limitations[link.get('status', 'unspecified')] += 1
+                    if item['observation'].report_routes:
+                        routed.append(item)
+            finally:
+                if output:
+                    output.close()
+            counts['routed_observations'] = len(routed)
+            counts['distinct_routed_urls'] = len(routed_urls)
+            counts['unacquired_routed_urls'] = len(unacquired_urls)
+            reading_statuses = Counter()
+            def readings():
+                for reading in reports(args.reports_root, store, extraction_version=revision, known_through=args.known_through):
+                    if isinstance(reading, Report):
+                        status = 'all pages accounted for' if len(reading.complete_pages) == reading.pages else 'partial page reading'
+                        counts['pages_in_started_reports'] += reading.pages
+                        counts['pages_reported_read'] += len(reading.complete_pages)
+                    else:
+                        status = reading.cause
+                    reading_statuses[status] += 1
+                    yield reading
+            output = args.join_output.with_suffix('.report-rows.jsonl').open('w') if args.join_output else None
+            try:
+                for row in report_rows(readings(), routed):
+                    counts['read_report_rows'] += 1
+                    counts['unmatched_report_rows'] += not bool(row['observations'])
+                    if output:
+                        output.write(json.dumps(row, default=encoded, ensure_ascii=False) + '\n')
+            finally:
+                if output:
+                    output.close()
+            if args.join_summary:
+                args.join_summary.parent.mkdir(parents=True, exist_ok=True)
+                args.join_summary.write_text(json.dumps({'extraction_version': revision,
+                    'known_through': args.known_through.isoformat(), 'counts': counts,
+                    'observation_statuses': statuses, 'route_statuses': limitations,
+                    'reading_statuses': reading_statuses, 'unacquired_routes': sorted(unacquired_urls)}, indent=2) + '\n')
 
+            if args.confirmation_request:
+                destination = (args.join_output or args.join_summary).with_suffix('.confirmation.json')
+                try:
+                    from cordon_c.core import Snapshot
+                    from cordon_c.bindings import confirmation_facts
+                    request = json.loads(args.confirmation_request.read_text())
+                    selected = [item for item in routed if list(item['observation'].identity) == request['observation']]
+                    if len(selected) != 1:
+                        raise ValueError('Requested observation is not uniquely present in the ordinary joined stream')
+                    inputs = confirmation_inputs(selected[0], result_pair=request['result_pair'], qualification={})
+                    facts = confirmation_facts(Snapshot.load(REPOSITORY), date.fromisoformat(request['event_date']), **inputs)
+                    destination.write_text(json.dumps({'observation': request['observation'],
+                        'result_pair': request['result_pair'], 'event_date': request['event_date'],
+                        'extraction_version': revision, 'inputs': inputs,
+                        'evaluations': [{'consumer': key, 'evaluation': value} for key, value in facts.items()]},
+                        default=encoded, indent=2) + '\n')
+                except (ValueError, KeyError) as error:
+                    destination.write_text(json.dumps({'request_path': str(args.confirmation_request),
+                        'cause': str(error), 'evaluations': None}, indent=2) + '\n')
+                    raise
+        finally:
+            report_mod.REPORT_MEMO = None
 
 if __name__ == '__main__':
     main()

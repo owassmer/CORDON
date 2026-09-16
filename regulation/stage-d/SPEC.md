@@ -69,9 +69,13 @@ coordinate frame of the monitoring degree columns that check is
 the readings and runs it. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
-and typed readings remain Parquet keyed by source hash and reader version.
-Reports use compact JSON blocks and an assembled reading under source hash and
-extraction version. Exact-request raw model responses are cached separately so a
+and typed readings remain Parquet keyed by source hash and reader version. The
+grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
+`(url, view, sha256)` sequence of retained releases, the reader version and the
+DuckDB version. Reports use compact JSON blocks and an assembled reading under
+source hash and extraction version; positioned native identifier text, bounds and
+check outcome are stored on that assembled reading and are likewise regenerable.
+Exact-request raw model responses are cached separately so a
 changed deterministic projection can reuse them without another paid call.
 Model, prompt, page/context images, rendering settings and code version are named;
 no join change invalidates extraction. These are caches, not owners. Deleting

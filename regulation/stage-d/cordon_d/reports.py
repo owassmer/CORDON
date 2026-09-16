@@ -591,44 +591,80 @@ def materialize(digest, version, page_count, blocks):
     return Report(digest, version, page_count, tuple(rows), facts, issues, frozenset(covered))
 
 
-def positioned_identifiers(reading, source):
-    """Recover native identifier order from its cell geometry; retain both readings."""
+def _nonwhitespace(text):
+    return Counter(c for c in (text or '') if not c.isspace())
+
+
+def positioned_identifier_records(reading, source):
+    """Compare each native identifier cell to the source PDF; record geometry order."""
     import pymupdf
-    rows, tables = [], {}
+    records, tables = [], {}
     with pymupdf.open(source) as document:
         for row in reading.rows:
-            cells = []
             for cell in row.cells:
                 key = re.fullmatch(r'p(\d+)-t(\d+)-r(\d+)-c(\d+)', cell.get('native_cell', ''))
-                if key and cell['role'] in {'identifier', 'publisher_id', 'laboratory_id'} and 'identifier' not in cell:
-                    page, ti, ri, ci = (int(x) - 1 for x in key.groups())
-                    if page not in tables:
-                        tables[page] = document[page].find_tables().tables
-                    table = tables[page][ti]
-                    if table.extract()[ri][ci] != cell['text']:
-                        raise ValueError('Retained native identifier differs from its source cell')
-                    bounds = table.rows[ri].cells[ci]
-                    positioned = '\n'.join(line.strip() for line in document[page].get_text(
-                        'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
-                    characters = lambda text: Counter(c for c in text if not c.isspace())
-                    if (' '.join(positioned.split()) != ' '.join(cell['text'].split())
-                            and characters(positioned) == characters(cell['text'])):
-                        cell = dict(cell, text=positioned, native_text=cell['text'],
-                            basis='native cell geometry order; identical non-whitespace character inventory',
-                            source_bbox=list(bounds))
-                cells.append(cell)
-            def sole(role):
-                fields = [c for c in cells if c['role'] == role]
-                if any(c.get('role_cause') for c in fields):
-                    return None
-                values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
-                return values[0] if len(values) == 1 else None
-            rows.append(replace(row, cells=tuple(cells), reference=sole('publisher_id') or sole('identifier'),
-                                laboratory_reference=sole('laboratory_id')))
+                if not (key and cell['role'] in {'identifier', 'publisher_id', 'laboratory_id'}
+                        and 'identifier' not in cell):
+                    continue
+                page, ti, ri, ci = (int(x) - 1 for x in key.groups())
+                if page not in tables:
+                    tables[page] = document[page].find_tables().tables
+                table = tables[page][ti]
+                if table.extract()[ri][ci] != cell['text']:
+                    raise ValueError('Retained native identifier differs from its source cell')
+                bounds = table.rows[ri].cells[ci]
+                positioned = '\n'.join(line.strip() for line in document[page].get_text(
+                    'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
+                native = cell['text']
+                reordered = (' '.join(positioned.split()) != ' '.join(native.split())
+                             and _nonwhitespace(positioned) == _nonwhitespace(native))
+                records.append({
+                    'locator': cell['locator'],
+                    'text': positioned if reordered else native,
+                    'native_text': native,
+                    'source_bbox': list(bounds),
+                    'check': ('native cell geometry order; identical non-whitespace character inventory'
+                              if reordered else 'retained native order'),
+                })
+    return records
+
+
+def apply_positioned_identifiers(reading, records):
+    """Apply stored geometry readings; refuse if a cell's inventory diverges from its native cell."""
+    by_locator = {item['locator']: item for item in records}
+    rows = []
+    for row in reading.rows:
+        cells = []
+        for cell in row.cells:
+            item = by_locator.get(cell['locator'])
+            if item:
+                if _nonwhitespace(item['text']) != _nonwhitespace(cell['text']):
+                    raise ValueError('Positioned identifier does not conserve its retained native cell')
+                cell = dict(cell, text=item['text'], native_text=item['native_text'],
+                            basis=item['check'], source_bbox=item['source_bbox'])
+            cells.append(cell)
+        def sole(role):
+            fields = [c for c in cells if c['role'] == role]
+            if any(c.get('role_cause') for c in fields):
+                return None
+            values = [c.get('identifier', c['text']) for c in fields if c['text'] is not None]
+            return values[0] if len(values) == 1 else None
+        rows.append(replace(row, cells=tuple(cells), reference=sole('publisher_id') or sole('identifier'),
+                            laboratory_reference=sole('laboratory_id')))
     return replace(reading, rows=tuple(rows))
 
 
+def positioned_identifiers(reading, source):
+    """Recover native identifier order from its cell geometry; retain both readings."""
+    return apply_positioned_identifiers(reading, positioned_identifier_records(reading, source))
+
+
+REPORT_MEMO = None
+
+
 def report(digest: str, store: Path, *, extraction_version: str):
+    if REPORT_MEMO is not None and (digest, extraction_version) in REPORT_MEMO:
+        return REPORT_MEMO[(digest, extraction_version)]
     if not blob_path(store, digest).exists():
         return UnreadReport(digest, 'declared source bytes unavailable')
     path = store / 'derived/reports' / extraction_version / digest / 'report.json'
@@ -638,11 +674,13 @@ def report(digest: str, store: Path, *, extraction_version: str):
     if payload['source_sha256'] != digest or payload['extraction_version'] != extraction_version:
         raise ValueError('Reading identity does not match requested source/version')
     reading = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
-    if any('native_cell' in c and c['role'] in {'identifier', 'publisher_id', 'laboratory_id'} for r in reading.rows for c in r.cells):
-        reading = positioned_identifiers(reading, blob_path(store, digest))
+    reading = apply_positioned_identifiers(reading, payload.get('positioned_identifiers') or ())
     from .report_relations import load
-    return replace(reading, relations=load(store, digest, exact=True),
-                   assembly_complete=payload.get('assembly_complete'))
+    reading = replace(reading, relations=load(store, digest, exact=True),
+                      assembly_complete=payload.get('assembly_complete'))
+    if REPORT_MEMO is not None:
+        REPORT_MEMO[(digest, extraction_version)] = reading
+    return reading
 
 
 def reports(root: Path, store: Path, *, extraction_version: str, known_through=None):
