@@ -755,6 +755,7 @@ POSITIONED_ROLES = frozenset({'identifier', 'publisher_id', 'laboratory_id'})
 REORDERED_CHECK = 'geometry order applied; inventory identical'
 AGREED_CHECK = 'geometry order agrees with the native cell'
 UNREAD_CHECK = 'geometry recovered no comparable text; native cell retained'
+DIVERGED_CHECK = 'geometry read disagrees with the retained cell; native cell retained'
 
 
 def _positioned_cell(cell):
@@ -765,12 +766,23 @@ def _positioned_cell(cell):
 
 
 def _geometry_outcome(positioned, native):
-    """Say what the geometry read of a native identifier cell found, in its own words."""
+    """Say what the geometry read of a native identifier cell found, in its own words.
+
+    `positioned` is what the clip returned. A clip that recovered nothing and a clip
+    that recovered other text are different facts with different remedies — bounds
+    that missed the text against bounds that took a neighbour's — and are never one
+    cause because each leaves the native cell in place.
+    """
     if _nonwhitespace(positioned) != _nonwhitespace(native):
-        return UNREAD_CHECK
+        return UNREAD_CHECK if not _nonwhitespace(positioned) else DIVERGED_CHECK
     if ' '.join(positioned.split()) == ' '.join(native.split()):
         return AGREED_CHECK
     return REORDERED_CHECK
+
+
+def _owes_positioned_records(reading):
+    """Whether this reading has a native identifier cell that a record must speak for."""
+    return any(_positioned_cell(cell) is not None for row in reading.rows for cell in row.cells)
 
 
 def positioned_identifier_records(reading, source):
@@ -794,12 +806,15 @@ def positioned_identifier_records(reading, source):
                     'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
                 native = cell['text']
                 outcome = _geometry_outcome(positioned, native)
-                records.append({
+                record = {
                     'locator': cell['locator'],
                     'text': positioned if outcome == REORDERED_CHECK else native,
                     'source_bbox': list(bounds),
                     'check': outcome,
-                })
+                }
+                if outcome == DIVERGED_CHECK:
+                    record['geometry_text'] = positioned  # what the clip read, kept apart
+                records.append(record)
     return records
 
 
@@ -815,16 +830,17 @@ def apply_positioned_identifiers(reading, records):
             if item is None:
                 if _positioned_cell(cell) is not None:
                     raise ValueError(
-                        'Native identifier cell without a positioned record; reading assembled '
-                        'before positioned identifiers were derived, or records removed — '
-                        'reassemble at the current extraction version')
+                        'Native identifier cell without a positioned record; records removed '
+                        'from a reading that carries them — reassemble at the current '
+                        'extraction version')
             else:
                 native = cell['text']
                 if _nonwhitespace(item['text']) != _nonwhitespace(native):
                     raise ValueError('Positioned identifier does not conserve its retained native cell')
-                cell = dict(cell, text=item['text'], native_text=native,
+                cell = dict(cell, text=item['text'],
                             source_bbox=item['source_bbox'], check=item['check'])
                 if item['text'] != native:
+                    cell['native_text'] = native
                     cell['basis'] = 'native cell geometry order; identical non-whitespace character inventory'
             cells.append(cell)
         def sole(role):
@@ -858,6 +874,10 @@ def report(digest: str, store: Path, *, extraction_version: str):
     if payload['source_sha256'] != digest or payload['extraction_version'] != extraction_version:
         raise ValueError('Reading identity does not match requested source/version')
     reading = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
+    if 'positioned_identifiers' not in payload and _owes_positioned_records(reading):
+        # An earlier retained version is a reading this reader cannot read, not a false one.
+        return UnreadReport(digest, 'assembled before positioned identifiers were derived; '
+                                    'reassemble at this extraction version')
     reading = apply_positioned_identifiers(reading, payload.get('positioned_identifiers') or ())
     from .report_relations import load
     reading = replace(reading, relations=load(store, digest, exact=True),

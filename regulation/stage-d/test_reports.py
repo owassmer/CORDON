@@ -265,11 +265,11 @@ class LiteralReport(unittest.TestCase):
             after = positioned_identifiers(materialize('hash', 'v', 1, [item]), path)
             cell = after.rows[0].cells[0]
             self.assertEqual(cell['text'], '00123')
-            self.assertEqual(cell['native_text'], '00123')
+            self.assertNotIn('native_text', cell)  # nothing changed; there is no second reading
             self.assertEqual(cell['basis'], 'native_cell_copy')
             self.assertEqual(cell['check'], 'geometry order agrees with the native cell')
 
-    def test_check_says_what_the_geometry_read_found_in_each_of_its_three_outcomes(self):
+    def test_check_says_what_the_geometry_read_found_in_each_of_its_four_outcomes(self):
         from cordon_d.reports import _geometry_outcome
         self.assertEqual(_geometry_outcome('A_ B', 'A B\n_'),
                          'geometry order applied; inventory identical')
@@ -277,6 +277,39 @@ class LiteralReport(unittest.TestCase):
                          'geometry order agrees with the native cell')
         self.assertEqual(_geometry_outcome('', '1334933'),
                          'geometry recovered no comparable text; native cell retained')
+        self.assertEqual(_geometry_outcome('  \n ', '1334933'),
+                         'geometry recovered no comparable text; native cell retained')
+        # A clip that read other text is a disagreement, not an absence: the remedies differ.
+        self.assertEqual(_geometry_outcome('1943754\ni it CNR IPSP', '1943754'),
+                         'geometry read disagrees with the retained cell; native cell retained')
+
+    def test_a_divergent_geometry_read_keeps_the_native_cell_and_records_what_it_read(self):
+        import pymupdf
+        from cordon_d.reports import positioned_identifier_records
+        with TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                # 'Y' sits in the row below, but its glyph box reaches into the cell's bounds.
+                for position, text in [((50, 60), '00123'), ((105, 60), 'X'),
+                                       ((50, 78), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': '00123', 'page': 1}
+            reading = materialize('hash', 'v', 1, [item])
+            record, = positioned_identifier_records(reading, path)
+            self.assertEqual(record['check'],
+                             'geometry read disagrees with the retained cell; native cell retained')
+            self.assertEqual(record['text'], '00123')
+            self.assertEqual(record['geometry_text'], '00123\nY')
+            cell = positioned_identifiers(reading, path).rows[0].cells[0]
+            self.assertEqual(cell['text'], '00123')
+            self.assertNotIn('native_text', cell)
 
     def test_invalid_date_retains_literal_and_does_not_become_a_result(self):
         reading = materialize('hash', 'v', 1, [block([['00123', '29/02/2023', 'Positivo', '01/03/2023']])])
@@ -1057,7 +1090,42 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
                 report(digest, store, extraction_version='v')
 
-    def test_a_native_identifier_cell_without_a_positioned_record_is_refused(self):
+    def test_tampered_unreordered_native_identifier_on_assembled_reading_is_refused(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), '00123'), ((105, 60), 'X'),
+                                       ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': '00123', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            record, = payload['positioned_identifiers']
+            # The positioned reading of an unchanged cell is that cell's text, and the
+            # read path compares against it; the majority of positioned cells are these.
+            self.assertEqual(record['text'], '00123')
+            self.assertEqual(record['check'], 'geometry order agrees with the native cell')
+            self.assertEqual(report(digest, store, extraction_version='v').rows[0].reference, '00123')
+            payload['blocks'][0]['native_cells']['p1-t1-r1-c1']['text'] = '00124'
+            target.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
+                report(digest, store, extraction_version='v')
+
+    def test_a_native_identifier_cell_whose_record_was_removed_is_refused(self):
         import pymupdf
         from cordon_d.report_extraction import write_assembled
         from cordon_d.store import put_bytes
@@ -1084,11 +1152,52 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual([sorted(record) for record in payload['positioned_identifiers']],
                              [['check', 'locator', 'source_bbox', 'text']])
             self.assertEqual(report(digest, store, extraction_version='v').rows[0].reference, 'A_ B')
-            for absent in ([], None):
+            for absent in ([], None):  # the reading carries the key; its records were removed
                 payload['positioned_identifiers'] = absent
                 target.write_text(json.dumps(payload))
                 with self.assertRaisesRegex(ValueError, 'without a positioned record'):
                     report(digest, store, extraction_version='v')
+
+    def test_a_reading_assembled_before_positioned_identifiers_reads_as_unread(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.reports import reports
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            # An earlier retained version carries no such key at all: unread, not fatal.
+            del payload['positioned_identifiers']
+            target.write_text(json.dumps(payload))
+            unread = report(digest, store, extraction_version='v')
+            self.assertEqual(unread, UnreadReport(digest, 'assembled before positioned identifiers '
+                                                          'were derived; reassemble at this extraction version'))
+            root = store / 'reports'
+            root.mkdir()
+            (root / 'records.json').write_text(json.dumps([
+                {'url': 'https://publisher.example/a.pdf', 'captured_at': '2026-01-01T00:00:00+00:00',
+                 'sha256': digest},
+                {'url': 'https://publisher.example/b.pdf', 'captured_at': '2026-01-02T00:00:00+00:00',
+                 'sha256': 'f' * 64}]))
+            self.assertEqual([read.cause for read in reports(root, store, extraction_version='v')],
+                             [unread.cause, 'declared source bytes unavailable'])
 
     def test_retained_cell_that_disagrees_with_source_is_refused_on_assembly(self):
         import pymupdf

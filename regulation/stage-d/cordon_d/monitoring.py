@@ -894,9 +894,24 @@ def _observations_from_rows(rows):
         yield DistinctObservation(current[0], current[1], tuple(members))
 
 
-def _read_grouped(path: Path):
-    import pyarrow.parquet as parquet
-    reader = parquet.ParquetFile(path)
+def _sweep_grouped(target: Path, keep: int = 3) -> None:
+    """Retire the oldest grouped files, keeping the newest few.
+
+    A grouped file under another key belongs to another release sequence, reader or
+    DuckDB, which a concurrent lane may be streaming; it is never opened here and
+    costs six minutes to rebuild, so age alone retires it.
+    """
+    dated = []
+    for path in target.parent.glob('*.parquet'):
+        try:
+            dated.append((path.stat().st_mtime, path.name, path))
+        except FileNotFoundError:  # another lane retired it first
+            continue
+    for _, _, path in sorted(dated, reverse=True)[keep:]:
+        path.unlink(missing_ok=True)
+
+
+def _read_grouped(reader):
     columns = None
     def rows():
         nonlocal columns
@@ -921,17 +936,20 @@ def distinct_observations(root: Path):
     is a counter, not an identifier, and those rows stay uncorrelated. Only a
     duplicate-labelled row may share the reference of the positive it restates.
     """
+    import pyarrow
+    import pyarrow.parquet as parquet
     store = ingest(root)
     version = reader_version()
     files = [(index, str(_ensure_derived(store, release, version)[1]))
              for index, release in enumerate(releases(root))]
     target = derived_path(store, 'monitoring/groups', _grouping_key(root), version)
-    if not target.exists():
+    try:  # open the file itself: an absent or unreadable one is regenerated, not raced
+        reader = parquet.ParquetFile(target)
+    except (OSError, pyarrow.ArrowInvalid):
         _write_grouped(store, files, target)
-        for stale in target.parent.glob('*.parquet'):
-            if stale != target:
-                stale.unlink()
-    yield from _read_grouped(target)
+        _sweep_grouped(target)
+        reader = parquet.ParquetFile(target)
+    yield from _read_grouped(reader)
 
 
 # --- the shapes C's entry points take ------------------------------------------

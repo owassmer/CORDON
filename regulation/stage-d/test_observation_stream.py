@@ -295,20 +295,38 @@ class ObservationStream(unittest.TestCase):
             foreign.write_bytes(b'not parquet')
             self.assertEqual(len(list(distinct_observations(root))), len(groups))
             self.assertEqual(foreign.read_bytes(), b'not parquet')
-            extra = root / 'campaign' / 'extra.csv'
-            extra.write_text(
-                'ID;DATA_RILEVAMENTO;TIPOLOGIA;SPECIE;CULTIVAR;LATITUDINE;LONGITUDINE;COMUNE;RISULTATO;SINTOMO\n'
-                '808;13/03/2022;Campione;Olivo;;40,3;17,3;A;NEGATIVO;Assente\n', encoding='latin-1')
-            records = json.loads((root / 'campaign' / 'releases.json').read_text())
-            records.append({'url': 'http://publisher/extra.csv', 'path': 'extra.csv', 'captured_at': 'x',
-                            'sha256': file_digest(extra), 'encoding': 'latin-1', 'delimiter': ';'})
-            (root / 'campaign' / 'releases.json').write_text(json.dumps(records))
+            def add_release(name, identifier):
+                extra = root / 'campaign' / name
+                extra.write_text(
+                    'ID;DATA_RILEVAMENTO;TIPOLOGIA;SPECIE;CULTIVAR;LATITUDINE;LONGITUDINE;COMUNE;RISULTATO;SINTOMO\n'
+                    f'{identifier};13/03/2022;Campione;Olivo;;40,3;17,3;A;NEGATIVO;Assente\n', encoding='latin-1')
+                records = json.loads((root / 'campaign' / 'releases.json').read_text())
+                records.append({'url': f'http://publisher/{name}', 'path': name, 'captured_at': 'x',
+                                'sha256': file_digest(extra), 'encoding': 'latin-1', 'delimiter': ';'})
+                (root / 'campaign' / 'releases.json').write_text(json.dumps(records))
+            add_release('extra.csv', 808)
             grown = list(distinct_observations(root))
             self.assertEqual(len(grown), len(groups) + 1)
-            self.assertFalse(foreign.exists())
-            remaining = list(grouped.glob('*.parquet'))
-            self.assertEqual(len(remaining), 1)
-            self.assertNotEqual(remaining[0].name, current[0].name)
+            # Another key's file is another lane's live grouping; a regeneration keeps it.
+            self.assertEqual(foreign.read_bytes(), b'not parquet')
+            remaining = {path.name for path in grouped.glob('*.parquet')}
+            self.assertEqual(len(remaining), 3)
+            self.assertIn(current[0].name, remaining)
+            newest, = remaining - {foreign.name, current[0].name}
+            eldest = grouped / 'eldestkey-stale.parquet'
+            eldest.write_bytes(b'not parquet')
+            clock = 1_700_000_000
+            for offset, name in enumerate([eldest.name, current[0].name, foreign.name, newest]):
+                os.utime(grouped / name, (clock + offset, clock + offset))
+            add_release('third.csv', 909)
+            self.assertEqual(len(list(distinct_observations(root))), len(groups) + 2)
+            survivors = {path.name for path in grouped.glob('*.parquet')}
+            self.assertEqual(len(survivors), 3)  # the newest three, the regenerated one among them
+            self.assertNotIn(eldest.name, survivors)
+            self.assertNotIn(current[0].name, survivors)
+            self.assertIn(foreign.name, survivors)
+            self.assertIn(newest, survivors)
+            self.assertEqual(foreign.read_bytes(), b'not parquet')
 
     def test_audit_fails_on_a_corrupted_blob(self):
         store = store_root(self.root)
