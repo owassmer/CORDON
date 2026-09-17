@@ -73,8 +73,14 @@ and typed readings remain Parquet keyed by source hash and reader version. The
 grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
 `(url, view, sha256)` sequence of retained releases, the reader version and the
 DuckDB version. Reports use compact JSON blocks and an assembled reading under
-source hash and extraction version; positioned native identifier text, bounds and
-check outcome are stored on that assembled reading and are likewise regenerable.
+source hash and extraction version. Each native identifier cell of that assembled
+reading carries one regenerable record holding the positioned text, the source
+cell bounds and what the geometry read found; the retained cell is the native
+text and the record keeps no second copy of it. The read path establishes that
+the stored positioned text has not diverged in content from that retained cell,
+and refuses a reading whose native identifier cell carries no record until it is
+reassembled; that the stored order is the source order is established only at
+assembly under the extraction version.
 Exact-request raw model responses are cached separately so a
 changed deterministic projection can reuse them without another paid call.
 Model, prompt, page/context images, rendering settings and code version are named;

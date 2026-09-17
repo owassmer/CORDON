@@ -750,6 +750,29 @@ def _nonwhitespace(text):
     return Counter(c for c in (text or '') if not c.isspace())
 
 
+POSITIONED_ROLES = frozenset({'identifier', 'publisher_id', 'laboratory_id'})
+
+REORDERED_CHECK = 'geometry order applied; inventory identical'
+AGREED_CHECK = 'geometry order agrees with the native cell'
+UNREAD_CHECK = 'geometry recovered no comparable text; native cell retained'
+
+
+def _positioned_cell(cell):
+    """The native table cell owed a positioned record, as its parsed locator, or None."""
+    if cell.get('role') not in POSITIONED_ROLES or 'identifier' in cell:
+        return None
+    return re.fullmatch(r'p(\d+)-t(\d+)-r(\d+)-c(\d+)', cell.get('native_cell') or '')
+
+
+def _geometry_outcome(positioned, native):
+    """Say what the geometry read of a native identifier cell found, in its own words."""
+    if _nonwhitespace(positioned) != _nonwhitespace(native):
+        return UNREAD_CHECK
+    if ' '.join(positioned.split()) == ' '.join(native.split()):
+        return AGREED_CHECK
+    return REORDERED_CHECK
+
+
 def positioned_identifier_records(reading, source):
     """Compare each native identifier cell to the source PDF; record geometry order."""
     import pymupdf
@@ -757,9 +780,8 @@ def positioned_identifier_records(reading, source):
     with pymupdf.open(source) as document:
         for row in reading.rows:
             for cell in row.cells:
-                key = re.fullmatch(r'p(\d+)-t(\d+)-r(\d+)-c(\d+)', cell.get('native_cell', ''))
-                if not (key and cell['role'] in {'identifier', 'publisher_id', 'laboratory_id'}
-                        and 'identifier' not in cell):
+                key = _positioned_cell(cell)
+                if key is None:
                     continue
                 page, ti, ri, ci = (int(x) - 1 for x in key.groups())
                 if page not in tables:
@@ -771,34 +793,38 @@ def positioned_identifier_records(reading, source):
                 positioned = '\n'.join(line.strip() for line in document[page].get_text(
                     'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
                 native = cell['text']
-                reordered = (' '.join(positioned.split()) != ' '.join(native.split())
-                             and _nonwhitespace(positioned) == _nonwhitespace(native))
+                outcome = _geometry_outcome(positioned, native)
                 records.append({
                     'locator': cell['locator'],
-                    'text': positioned if reordered else native,
-                    'native_text': native,
+                    'text': positioned if outcome == REORDERED_CHECK else native,
                     'source_bbox': list(bounds),
-                    'check': ('native cell geometry order; identical non-whitespace character inventory'
-                              if reordered else
-                              'native order retained; identical non-whitespace character inventory'),
+                    'check': outcome,
                 })
     return records
 
 
 def apply_positioned_identifiers(reading, records):
-    """Apply stored geometry readings; refuse if a cell's inventory diverges from its native cell."""
+    """Apply stored geometry readings; refuse a native identifier cell that carries none,
+    or a positioned text whose inventory diverges from its retained native cell."""
     by_locator = {item['locator']: item for item in records}
     rows = []
     for row in reading.rows:
         cells = []
         for cell in row.cells:
             item = by_locator.get(cell['locator'])
-            if item:
-                if _nonwhitespace(item['text']) != _nonwhitespace(cell['text']):
+            if item is None:
+                if _positioned_cell(cell) is not None:
+                    raise ValueError(
+                        'Native identifier cell without a positioned record; reading assembled '
+                        'before positioned identifiers were derived, or records removed — '
+                        'reassemble at the current extraction version')
+            else:
+                native = cell['text']
+                if _nonwhitespace(item['text']) != _nonwhitespace(native):
                     raise ValueError('Positioned identifier does not conserve its retained native cell')
-                cell = dict(cell, text=item['text'], native_text=item['native_text'],
+                cell = dict(cell, text=item['text'], native_text=native,
                             source_bbox=item['source_bbox'], check=item['check'])
-                if item['text'] != item['native_text']:
+                if item['text'] != native:
                     cell['basis'] = 'native cell geometry order; identical non-whitespace character inventory'
             cells.append(cell)
         def sole(role):
