@@ -8,7 +8,7 @@ established; no other row is.
 | A–C needs to know | Real source | What one record means | What D must establish |
 |---|---|---|---|
 | What was observed, where and when, including positive, negative and other results | Regional campaign workbooks, CKAN CSV and SIT monitoring point layers | One published observation, sample, visual inspection or assessment | Established. `cordon_d.monitoring.observations` streams every retained release; `distinct_observations` relates the publications of one observation; `detection_days`, `occasion_sets` and `located_positives` hand C its candidates. Meaning and limits below. Reach (`SPEC.md`, admission): observation-dated; complete over the longest reachable backward period from the decision date, negatives included; earlier observations serve identity continuity, a rendition an in-reach correction chain requires, and reader verification. |
-| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | All 1,180 retained PDFs (3,092 pages) have page readings and completed record assemblies in ordinary consumption version `0afeee85d8fc59f4705b`. Original Claude and Codex request provenance survives cache rebuilding. All 1,180 document-relationship inventories are marked complete. Fragment-only rows explicitly bound by the document reader survive ordinary materialization; explicitly bound descriptive-field fragments assemble while their physical cells and qualification scopes remain retained. Binding-only blocks replay without new provider calls. Whole-population consumer verification is distinct from semantic acceptance: independent source review and full bidirectional reconciliation remain pending, including cause-specific adjudication of unclassified and unread result occurrences; a blank physical fragment is not itself a missing assay. In-reach ordinary-consumer residue (e809d04) and its owners are in Laboratory reports below: forward 2,352 routed, 2,190 matched, 162 not; reverse 750 rows without an observation. Whole-population verification of the identifier-join repairs is pending the derived-once unit (PR #22). Reach (`SPEC.md`, admission): observation-dated by sampling date; complete over the longest reachable backward period from the decision date, every result polarity included; an earlier rendition enters only where an in-reach result's correction or replacement chain requires it. |
+| What the laboratory actually reported | Official reports linked from monitoring and their consequential annex/correction references | One report rendition with source-located sample results and document relationships | All 1,180 retained PDFs (3,092 pages) have page readings and completed record assemblies in ordinary consumption version `0afeee85d8fc59f4705b`. Original Claude and Codex request provenance survives cache rebuilding. All 1,180 document-relationship inventories are marked complete. Fragment-only rows explicitly bound by the document reader survive ordinary materialization; explicitly bound descriptive-field fragments assemble while their physical cells and qualification scopes remain retained. Binding-only blocks replay without new provider calls. Whole-population consumer verification is distinct from semantic acceptance: independent source review and full bidirectional reconciliation remain pending, including cause-specific adjudication of unclassified and unread result occurrences; a blank physical fragment is not itself a missing assay. In-reach ordinary-consumer residue (e809d04) and its owners are in Laboratory reports below: forward 2,352 routed, 2,190 matched, 162 not; reverse 750 rows without an observation. Whole-population verification of the identifier-join repairs is pending the derived-once unit (PR #22). Of the 38 earlier renditions an in-reach chain names, one is held (CNR-IPSP 73F/2024) and 37 are not publicly held: 17 CNR routes serve the replacement letter that overwrote the predecessor in place, so the current rows stand and the earlier rendition's content is absent; four routes exist and fail at the publisher (three amendment bases HTTP 500, CNR 77a HTTP 404), so the unamended base rows are absent; and 16 CRSFA full reports were never linked, only their positives-only annexes, so those annexes stand and the fuller report's negative population is absent. The search read every retained capture, all 34 live SIT document-route layers, the publisher's directory paths and the successors' own text, so these absences are what the publisher holds, not a reading limit; Laboratory reports below carries each class. Reach (`SPEC.md`, admission): observation-dated by sampling date; complete over the longest reachable backward period from the decision date, every result polarity included; an earlier rendition enters only where an in-reach result's correction or replacement chain requires it. |
 | Which legally adopted area contained the location on the event date | SIT demarcated-area geometry and the adopting regional act | One published area feature in one legal version | Acquire every version reached by A whose interval overlaps an event date inside the reach; bind geometry to its adopting act; use the version in force at the event time. The observation row carries, uninterpreted, `ZONA` on 219,120 records and `ZONA_DELIMITATA` on 8,762 — the zone status and area name the monitoring publisher prints beside the observation (`Zona Contenimento - Salento`, `Area delimitata Monopoli`), which are not the adopted geometry in force and do not stand in for it. Its `BUFFER` column is published with no value in any record. Reach (`SPEC.md`, admission): by A's interval overlapping an in-reach event date; whether the four-year rule reads the area as it stood at the time is an A question. |
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
@@ -235,29 +235,43 @@ These tables are recovered and are not active document searches. UNIFG's letter
 names 8_POSITIVI, while its 18-row annex names 8_DUBB in conferma; both headings
 and the annex's positive results must survive reading.
 
-Only SELGE 196/2020 and 197/2020 remain unrecovered among the published observation
-routes. Owen reports server-side FileNotFoundException for their backing files;
-the acquisition records prohibit automatic retries. Searching the retained PDF
-text layers found no alternative carrying either identity; scanned-only identities
-still depend on completion of the retained vision population. No new broad hunt
-is authorized.
+Of the 38 earlier renditions an in-reach correction or replacement chain names, one is
+held: CNR-IPSP 73F/2024, whose replacement is the separate `_rev.pdf`. The other 37 are
+not publicly held, in three classes, and each class names what its absence costs.
 
-The originals SELGE 355/2020, IAMB 34/2022 (15 September, Dir 02/1097) and IAMB
-4/2023 (14 September, Dir 02/1034) are needed for the earlier report's content and
-an exact before/after correction comparison. They are not blanket prerequisites
-for the successor's independently stated results. Retained SELGE 360/2020 page 1
-expressly cancels and replaces 355 and supplies its own two-method statement and
-12-sample result annex. IAMB 39/2022 pages 1–2 independently supply the corrected
-9 September Monopoli positive list and Harper real-time PCR method. IAMB report
-4 rettificato, issued 3 October 2023 (file named 9/2023), independently supplies
-the 7 September Castellana Grotte positive list, Harper method and received-sample
-qualification. Neither IAMB correction identifies which individual values changed;
-no changed-column delta may be inferred merely from the word Positivi. Recovery
-of a predecessor is required to establish whether a named sample/result was already
-reported in that earlier rendition, or which value the correction changed. The
-original alone would still not prove the Service's official-confirmation or notice
-event. The present corrected-result attachments do not wait for these originals;
-no additional unrestricted predecessor search is assigned.
+Seventeen CNR-IPSP predecessors were overwritten in place. Each declared route returns
+the successor's own "annulla e sostituisce" modification letter, byte-identical to the
+referring document; the replaced rendition is not publicly held. The current rows are the
+replacement's and are unaffected. What is absent is the earlier rendition's own content,
+so no named sample or value can be shown to have already stood in it.
+
+Four routes exist and fail at the publisher: the amendment bases DiSSPA/UNIBA 32/2023,
+IAMB 34 del 15/09/2022 (Dir 02/1097) and IAMB 4 del 14/09/2023 (Dir 02/1034) return
+HTTP 500, and CNR-IPSP 77a (CNR 179282/2024) returns HTTP 404. The unamended rows of each
+base are absent; the route exists and fails, and nothing further is reachable without the
+laboratory itself. IAMB 39/2022 pages 1–2 independently supply the corrected 9 September
+Monopoli positive list and Harper real-time PCR method, and IAMB report 4 rettificato,
+issued 3 October 2023 (file named 9/2023), independently supplies the 7 September
+Castellana Grotte positive list, Harper method and received-sample qualification. Neither
+IAMB correction identifies which individual values changed; no changed-column delta may
+be inferred merely from the word Positivi. A held base would still not prove the Service's
+official-confirmation or notice event.
+
+Sixteen CRSFA full reports were never linked by the publisher. Only their positives-only
+annexes (`…Ldf…`) are linked, and those annexes are the rows that stand; what is absent is
+the fuller report's negative population, which the annex by its own scope does not carry.
+
+SELGE 196/2020, 197/2020 and 355/2020 are outside the reach and no in-reach chain names
+them, so this row does not complete them; the backing files of 196 and 197 return a
+server-side FileNotFoundException. Retained SELGE 360/2020 page 1 expressly cancels and
+replaces 355 and supplies its own two-method statement and 12-sample result annex.
+
+These absences are the publisher's, not a limit of the reading. The search that
+establishes them read every retained monitoring capture, all 34 live SIT layers carrying
+a document route, the publisher's directory paths — which deny listing, and whose document
+servlet has no index — and all 39 successor PDFs, none of which prints a laboratory
+publication URL. It found no route to any of the 37. `corpus/sources/reports/records.json`
+carries the four failed attempts with their referring document.
 
 The reached ARIF application requires
 regional login; no authenticated records have been accessed. Laboratory designation,
