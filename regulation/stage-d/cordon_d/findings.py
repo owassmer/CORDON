@@ -1,5 +1,7 @@
 """Attach literal report rows to the accepted distinct-observation stream."""
 from collections import defaultdict
+from dataclasses import replace
+from types import SimpleNamespace
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
 import re
@@ -8,8 +10,30 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, report, record_rows
-from .monitoring import day as observation_day
-from .report_relations import correspondences, related, replacements, current_limitation, norm, dated
+from .monitoring import day as observation_day, PUBLISHER_IDENTIFIERS
+from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, load as load_relations
+
+
+_CARRIED_IDENTIFIER_FIELDS = ('ID', 'ID_CAMPIONE') + PUBLISHER_IDENTIFIERS
+
+
+def _observation_identifier_literals(group):
+    """Reference plus every publisher-carried identifier value, as literals.
+
+    Values stay under the field that printed them. Nothing is merged into
+    `reference`.
+    """
+    carried = group.carried_identifiers()
+    literals = {value for _, value in carried}
+    if group.reference is not None:
+        literals.add(group.reference)
+    return literals, carried
+
+
+def _matching_observation_field(carried, identifiers):
+    held = set(identifiers)
+    matched = {field for field, value in carried if value in held}
+    return next((field for field in _CARRIED_IDENTIFIER_FIELDS if field in matched), None)
 
 
 def document_name(route):
@@ -211,6 +235,7 @@ def _host_relation(row, association):
     if len(values) != 1:
         return 'unresolved'
     def labels(value):
+        value = ' '.join(value.split())
         result = {norm(value), norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))}
         # A printed binomial beside a common name is an explicit second label.
         match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)\s*$', value)
@@ -227,14 +252,15 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
     This function performs no acquisition, model calls or observation regrouping.
     """
     captures = _captures(reports_root, known_through)
-    by_name, readings = defaultdict(set), {}
+    by_name, readings, relation_readings = defaultdict(set), {}, {}
     for route, versions in captures.items():
         for capture in versions:
             if digest := capture.get('sha256'):
                 by_name[document_name(route)].add(digest)
-                if digest not in readings:
-                    readings[digest] = report(digest, store, extraction_version=extraction_version)
-    edges = correspondences(readings)
+                if digest not in relation_readings:
+                    relation_readings[digest] = load_relations(store, digest, exact=True)
+    edges = correspondences({digest: SimpleNamespace(relations=value)
+                             for digest, value in relation_readings.items()})
     association_index = defaultdict(list)
     for source in association_readings:
         for association in source.rows:
@@ -243,14 +269,6 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                 association_index[reference].append(dict(association,
                     reading_issues=source.issues, reading_scope=source.scope))
     row_index, records_by_document = {}, {}
-    for digest, reading in readings.items():
-        if isinstance(reading, Report):
-            index = defaultdict(list)
-            records_by_document[digest] = record_rows(reading)
-            for row in records_by_document[digest]:
-                for identifier in row.identifiers:
-                    index[identifier].append(row)
-            row_index[digest] = index
     routed, reverse = [], defaultdict(set)
     for group in groups:
         output = {'observation': group, 'links': [], 'limitations': [], 'matches': []}
@@ -276,6 +294,17 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         destinations.setdefault(destination, chain)
                 rendition_ambiguity = len(set(destinations) - superseded) > 1
                 for digest, chain in sorted(destinations.items()):
+                    if digest not in readings:
+                        reading = report(digest, store, extraction_version=extraction_version)
+                        if isinstance(reading, Report):
+                            reading = replace(reading, relations=relation_readings[digest])
+                            records_by_document[digest] = record_rows(reading)
+                            index = defaultdict(list)
+                            for row in records_by_document[digest]:
+                                for identifier in row.identifiers:
+                                    index[identifier].append(row)
+                            row_index[digest] = index
+                        readings[digest] = reading
                     reading = readings[digest]
                     link = {'route': route, 'route_field': route_field, 'member': member, 'sha256': digest, 'candidates': [],
                             'rendition_ambiguity': rendition_ambiguity}
@@ -312,8 +341,11 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                 for value in host_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
                     # Every compatible row competes. Result polarity cannot select identity.
-                    rows = [row for row in records_by_document[digest] if row in row_index[digest].get(group.reference, [])
-                            or row.locator in derived]
+                    literals, carried = _observation_identifier_literals(group)
+                    indexed = {row.locator for value in literals
+                               for row in row_index[digest].get(value, [])}
+                    rows = [row for row in records_by_document[digest]
+                            if row.locator in indexed or row.locator in derived]
 
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
                     for row in rows:
@@ -328,7 +360,14 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         elif 'unresolved' in host_links.get(row.locator, []):
                             association_cause = 'report-row host needed by the source association remains unresolved'
                         derived_identity = row.locator in derived
-                        exact_identity = group.reference in row.identifiers
+                        exact_identity = any(value in row.identifiers for value in literals)
+                        identity_field = _matching_observation_field(carried, row.identifiers)
+                        if derived_identity:
+                            identity_basis = ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct')
+                        else:
+                            identity_basis = 'literal identifier equality within the observation’s explicit report route'
+                            if identity_field:
+                                identity_basis += f' (observation field {identity_field})'
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
                                      'result_cause': None if row.results else 'no analytical result recovered for this occurrence',
                                      'date_cause': row.date_cause,
@@ -338,8 +377,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                      'source_associations': source_links,
                                      'association_comparisons': coordinate_links.get(row.locator, []),
                                      'host_comparisons': host_links.get(row.locator, []),
-                                     'identity_basis': ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct'
-                                                        if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
+                                     'identity_basis': identity_basis,
                                      'reading_issues': reading.issues,
                                      'document_cause': link['document_cause'],
                                      'assembly_complete': reading.assembly_complete,

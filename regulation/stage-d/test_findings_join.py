@@ -148,6 +148,21 @@ class JoinIdentity(unittest.TestCase):
                 return joined, list(reverse_rows([materialize(digest, "v", 2, [item])], joined))
             return joined
 
+    def test_wrapped_literal_host_label_does_not_create_a_species_conflict(self):
+        from cordon_d.findings import _host_relation
+        item = block([['UNSEEN', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append(dict(table['columns'][0], role='host', heading=['Specie']))
+        table['rows'][0]['cells'].append({'text': 'Prunus\ndulcis'})
+        row, = materialize('source', 'v', 1, [item]).rows
+        for text in ('Mandorlo (Prunus dulcis)', 'Mandorlo\n(Prunus\ndulcis)'):
+            with self.subTest(text=text):
+                association = {'fields': {'host': {'text': text}}}
+                self.assertEqual(_host_relation(row, association), 'agrees on printed host')
+                self.assertEqual(association['fields']['host']['text'], text)
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Olivo\n(Olea\neuropaea)'}}}), 'conflicts')
+        self.assertEqual(row.cells[-1]['text'], 'Prunus\ndulcis')
+
     def test_continued_record_without_complete_duplicate_reaches_consumer(self):
         joined, reverse = self.run_join([('00123', '2024-06-01')],
             [['00123', '01/06/2024', 'Positivo', '02/06/2024']], continued=True)
@@ -384,6 +399,31 @@ class JoinIdentity(unittest.TestCase):
                                [['123456', '01/06/2024', 'Positivo', '02/06/2024']])
         self.assertEqual(len(result), 2)
         self.assertTrue(all(not item['matches'] for item in result))
+
+    def test_printed_id_label_matches_the_observation_reference(self):
+        result = self.run_join([['11200165', '2024-06-01']],
+            [['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024']])[0]
+        self.assertEqual(result['status'], 'matched')
+        self.assertEqual(result['matches'][0]['row'].identifiers, ('11200165',))
+        self.assertEqual(result['observation'].reference, '11200165')
+
+    def test_publisher_carried_identifier_matches_without_merging_into_reference(self):
+        result = self.run_join([['11200165', '2024-06-01']],
+            [['03158374', '01/06/2024', 'Positivo', '02/06/2024']],
+            monitoring_fields={'NUMERO_ORDINE': '03158374'})[0]
+        self.assertEqual(result['status'], 'matched')
+        self.assertEqual(result['observation'].reference, '11200165')
+        self.assertIn('NUMERO_ORDINE', result['matches'][0]['identity_basis'])
+        self.assertEqual(result['matches'][0]['row'].reference, '03158374')
+
+    def test_two_observations_carrying_the_same_publisher_identifier_stay_ambiguous(self):
+        result = self.run_join(
+            [['11200165', '2024-06-01'], ['11200166', '2024-06-01']],
+            [['03158374', '01/06/2024', 'Positivo', '02/06/2024']],
+            monitoring_fields={'NUMERO_ORDINE': '03158374'})
+        self.assertTrue(all(not item['matches'] for item in result))
+        self.assertTrue(all('several eligible observation' in item['status'] for item in result))
+        self.assertTrue(all(item['observation'].reference != '03158374' for item in result))
 
 
     def test_ordinary_join_reaches_c_without_inventing_qualified_identities(self):

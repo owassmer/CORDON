@@ -33,6 +33,20 @@ class ExtractionConfig:
     deskew: bool = True
 
 
+# Providers whose model reads the whole original document, not only the pages sent:
+# 'subscription' is the authenticated Claude Code subscription, 'codex' the authenticated
+# Codex subscription. Both are exact-request, replayable and never metered.
+SUBSCRIPTION_PROVIDERS = frozenset({'subscription', 'codex'})
+PROVIDER_LABELS = {'subscription': 'claude-code-subscription', 'codex': 'codex-subscription'}
+SUBSCRIPTION_LABELS = frozenset(PROVIDER_LABELS.values())
+CODEX_DEFAULT_MODEL = 'gpt-6-astra'
+
+
+def provider_label(config):
+    """The provenance label a retained response carries for this configuration."""
+    return PROVIDER_LABELS.get(config.provider, config.provider)
+
+
 class NoRetainedResponse(RuntimeError):
     """A block or document has no saved reading and execution was not requested."""
 
@@ -44,6 +58,11 @@ procedures, infer missing facts, or give legal conclusions.
 
 Return only JSON with keys pages, tables, facts, issues, context_pages.
 pages: [{page: physical integer, disposition: read|partly_read|unreadable}].
+A page is read when every printed value on it is either recovered or marked at the
+cell as unreadable (source illegibility, including values the source itself prints
+as ## or clips); partly_read is only for content this reading has not yet recovered.
+Every row you emit is a row printed in the source with exactly one cell per column;
+never emit a placeholder, cancelled or partial row.
 tables: [{id: unique pN-tN label, page: physical integer,
  columns: [{heading: [complete printed parent, child headings],
  role: identifier|publisher_id|laboratory_id|pool_id|extract_id|sampling_date|test_date|host|
@@ -71,6 +90,12 @@ sample correspondence. Do not infer a role merely because the PDF is a lab repor
 For an annotated publisher ID, keep the entire cell literal and optionally return
 identifier and annotation as two exact substrings whose concatenation reconstructs
 the full cell (allowing only whitespace variation); retain the pool qualification.
+For an annotated result, keep the entire cell and return result_value and annotation
+as exact source substrings reconstructing it (allowing only whitespace variation).
+Interpret the split from the source; do not infer a result from an unexplained code.
+Preserve the annotation's qualification and attach its explanatory source statement
+to the exact affected result cells, including across pages. Sample-specific statements
+must target those sample occurrences, not report scope merely because printed in a letter.
 A specimen or pool identifier is not an individual plant identity.
 On a continuation page, read the supplied original table headings and their
 qualifications before assigning column roles. Cite the physical heading page in
@@ -125,7 +150,21 @@ scope of each part's qualifications. For an ambiguous continuation, mark the pag
 partly_read and identify the unresolved parts in issues so the existing source
 reread can resolve them. Do not silently leave a continuation anonymous or invent
 unread cells for fields printed on the next page. This applies equally to native,
-scanned, transposed and differently formatted records.
+scanned, transposed and differently formatted records. A table whose complete rows
+simply continue onto later pages under a heading printed once is NOT a record
+continuation: keep each page's rows in that page's table, cite the heading page in
+column support, and emit no record_continuation fact for it.
+When a descriptive field (host, municipality, or other) itself crosses a page
+boundary, keep the printed fragments in their physical cells. In addition to the
+record_continuation, emit a field_continuation fact for each split field. Its text,
+value, page and locator quote that record's printed identity at the identity-bearing
+page. Its applies_to names ONLY the exact cells of that one field using
+page/table/row/cN or native:<cell> selectors. Establish from the original page
+structure that these are successive word fragments of one field, not conflicting
+values. The consumer joins them in physical order with a space and retains all
+fragments. Do not use this relation for separate results, identifiers, numbers or
+dates, or a word split that requires changing characters: identify an unresolved
+reading in issues instead. Equal headings alone do not establish field continuation.
 Never merge a second physical representation of a table into the first, even when
 it repeats the same samples or is transposed. Return both source occurrences,
 with a literal relationship fact if the source establishes repetition.
@@ -158,8 +197,17 @@ def output_schema():
                   'identifier_authority': {'enum': ['publisher', 'laboratory', None]},
                   'authority_support': array(support),
                   'test': nullable, 'analyte': nullable, 'support': array(support)})
-    cell = obj({'text': nullable, 'native_cell': string, 'cause': string, 'examined_scope': string,
-                'identifier': string, 'annotation': string}, [])
+    # A cell has one of these shapes; the union keeps every returned cell to the keys it
+    # uses, which is what the local checks assume and what keeps long tables short.
+    null = {'type': 'null'}
+    cell = {'anyOf': [
+        obj({'text': string}),
+        obj({'native_cell': string}),
+        obj({'text': null, 'cause': string, 'examined_scope': string}, ['text', 'cause']),
+        obj({'text': string, 'identifier': string, 'annotation': string}, ['text', 'identifier']),
+        obj({'native_cell': string, 'identifier': string, 'annotation': string}, ['native_cell', 'identifier']),
+        obj({'text': string, 'result_value': string, 'annotation': string}, ['text', 'result_value']),
+        obj({'native_cell': string, 'result_value': string, 'annotation': string}, ['native_cell', 'result_value'])]}
     row = obj({'id': string, 'cells': array(cell)})
     table = obj({'id': string, 'page': integer, 'columns': array(column), 'rows': array(row)})
     fact = obj({'id': string, 'role': string, 'page': integer, 'locator': string, 'section': nullable,
@@ -438,8 +486,153 @@ def _subscription_call(*, prompt, schema, digest, source, config, request_id, ra
             retained = _retained_reading(raw_path, config.model)
             if retained is not None:
                 return retained
-        return _run_subscription_call(prompt=prompt, schema=schema, digest=digest, source=source,
+        runner = _run_codex_call if config.provider == 'codex' else _run_subscription_call
+        return runner(prompt=prompt, schema=schema, digest=digest, source=source,
             config=config, request_id=request_id, raw_path=raw_path, render_pages=render_pages)
+
+
+def strict_schema(schema):
+    """The same contract in the form Codex structured output accepts.
+
+    Codex requires every property of every object to be listed as required. An
+    optional property therefore becomes required-but-nullable; `drop_optional_nulls`
+    is the exact inverse on the returned reading, so the reader's own schema and
+    validation see the shape they always saw.
+    """
+    if isinstance(schema, dict):
+        strict = {key: strict_schema(value) for key, value in schema.items()
+                  if key not in ('properties', 'required')}
+        if schema.get('type') == 'object' and 'properties' in schema:
+            required = set(schema.get('required', []))
+            properties = {}
+            for name, value in schema['properties'].items():
+                value = strict_schema(value)
+                if name not in required:
+                    value = value if _nullable(value) else {'anyOf': [value, {'type': 'null'}]}
+                properties[name] = value
+            strict['properties'] = properties
+            strict['required'] = list(schema['properties'])
+        return strict
+    if isinstance(schema, list):
+        return [strict_schema(value) for value in schema]
+    return schema
+
+
+def _nullable(schema):
+    kind = schema.get('type')
+    return (isinstance(kind, list) and 'null' in kind) or None in schema.get('enum', []) \
+        or any(_nullable(option) for option in schema.get('anyOf', []))
+
+
+def drop_optional_nulls(value, schema):
+    """Remove null values of properties the original schema did not require."""
+    if isinstance(schema, dict) and 'anyOf' in schema and isinstance(value, dict):
+        # The branch whose required keys the value carries; a strict reading carries
+        # exactly one branch's keys.
+        for option in schema['anyOf']:
+            if option.get('type') == 'object' and set(option.get('required', [])) <= set(value) \
+                    and set(value) <= set(option.get('properties', {})):
+                return drop_optional_nulls(value, option)
+        return value
+    if isinstance(schema, dict) and schema.get('type') == 'object' and isinstance(value, dict):
+        required = set(schema.get('required', []))
+        properties = schema.get('properties', {})
+        return {key: drop_optional_nulls(item, properties.get(key, {})) for key, item in value.items()
+                if key in required or item is not None}
+    if isinstance(schema, dict) and schema.get('type') == 'array' and isinstance(value, list):
+        return [drop_optional_nulls(item, schema.get('items', {})) for item in value]
+    return value
+
+
+def _run_codex_call(*, prompt, schema, digest, source, config, request_id, raw_path, render_pages=()):
+    """Read one retained PDF through the authenticated Codex subscription.
+
+    Codex cannot open the PDF itself, so every physical page is attached as an image in
+    physical order: the whole original document, as the Claude route reads it. Magnified
+    views follow the page images, labelled. Tools, plugins, web search and API keys are
+    disabled; the exact request is retained with its raw event stream, and a failed run
+    is retained as failure evidence, never as a reading.
+    """
+    import pymupdf
+    if config.provider != 'codex':
+        raise RuntimeError('Codex execution was not selected')
+    with TemporaryDirectory(prefix='cordon-codex-') as temporary:
+        directory = Path(temporary)
+        images = []
+        instruction = (prompt + '\nThe original PDF is attached as page images in physical page order, '
+                       'one image per page from page 1. Physical page numbers start at 1. '
+                       'Return the structured result only after reading every requested page.')
+        with pymupdf.open(source) as document:
+            for number, page in enumerate(document, 1):
+                image = directory / f'page-{number}.png'
+                page.get_pixmap(dpi=config.dpi).save(image)
+                images.append(image)
+            if render_pages:
+                instruction += ('\nMagnified overlapping views of the same physical pages follow the page '
+                                'images, in this order. They repeat source content; do not count their '
+                                'overlap as additional rows.\n')
+                for number in render_pages:
+                    page = document[number - 1]
+                    width, height = page.rect.width, page.rect.height
+                    for index, (left, top) in enumerate(((0, 0), (.45, 0), (0, .45), (.45, .45)), 1):
+                        clip = pymupdf.Rect(left * width, top * height,
+                                            min(left + .55, 1) * width, min(top + .55, 1) * height)
+                        image = directory / f'page-{number}-view-{index}.png'
+                        page.get_pixmap(dpi=240, clip=clip).save(image)
+                        images.append(image)
+                        instruction += f'Physical page {number}, view {index}, page-point bounds {tuple(clip)}\n'
+        schema_path = directory / 'schema.json'
+        schema_path.write_text(json.dumps(strict_schema(schema), sort_keys=True))
+        output = directory / 'reading.json'
+        command = ['codex', 'exec', '--ignore-user-config', '--ephemeral', '--skip-git-repo-check',
+                   '--sandbox', 'read-only', '-C', str(directory), '-m', config.model,
+                   '-c', f'model_reasoning_effort="{config.effort}"',
+                   '-c', 'features.shell_tool=false', '-c', 'features.multi_agent=false',
+                   '-c', 'features.apps=false', '-c', 'features.plugins=false',
+                   '-c', 'features.skill_search=false', '-c', 'features.skip_host_skill_discovery=true',
+                   '-c', 'features.in_app_browser=false', '-c', 'features.image_generation=false',
+                   '-c', 'features.view_image=false', '-c', 'features.sleep_tool=false',
+                   '-c', 'web_search="disabled"', '--json', '--output-schema', str(schema_path),
+                   '-o', str(output)]
+        for image in images:
+            command.extend(['-i', str(image)])
+        env = dict(os.environ)
+        for key in ('OPENAI_API_KEY', 'CODEX_API_KEY'):
+            env.pop(key, None)
+        started = datetime.now(timezone.utc)
+        try:
+            completed = subprocess.run(command + ['-'], input=instruction, text=True,
+                                       capture_output=True, env=env, timeout=config.timeout_seconds)
+        except subprocess.TimeoutExpired as error:
+            partial = error.stdout.decode(errors='replace') if isinstance(error.stdout, bytes) else (error.stdout or '')
+            _record_failure(raw_path, request_id, datetime.now(timezone.utc),
+                            {'cause': f'timeout after {config.timeout_seconds} s', 'stdout': partial[-4000:]},
+                            label='codex-subscription')
+            raise RuntimeError(f'Codex subscription call exceeded {config.timeout_seconds} s; '
+                               'no reading retained') from error
+        captured = datetime.now(timezone.utc)
+        detail = {'stdout': completed.stdout[-4000:], 'stderr': completed.stderr[-2000:],
+                  'returncode': completed.returncode}
+        if completed.returncode or not output.exists():
+            _record_failure(raw_path, request_id, captured, detail, label='codex-subscription')
+            raise RuntimeError('Codex subscription reading incomplete: ' + (completed.stderr.strip()[-600:] or 'no output file'))
+        try:
+            strict = json.loads(output.read_text())
+        except json.JSONDecodeError as error:
+            _record_failure(raw_path, request_id, captured, dict(detail, output=output.read_text()[-4000:]),
+                            label='codex-subscription')
+            raise RuntimeError('Codex subscription returned no JSON reading') from error
+        if not isinstance(strict, dict):
+            _record_failure(raw_path, request_id, captured, dict(detail, output=str(strict)[:4000]),
+                            label='codex-subscription')
+            raise RuntimeError('Codex subscription returned a non-object reading')
+        reading = drop_optional_nulls(strict, schema)
+        write_json(raw_path, {'provider': 'codex-subscription', 'request_sha256': request_id,
+                             'captured_at': captured.isoformat(), 'model': config.model,
+                             'effort': config.effort, 'seconds': round((captured - started).total_seconds(), 3),
+                             'response': {'structured_output': reading, 'strict_output': strict,
+                                          'events': completed.stdout[-20000:]}})
+        return reading
 
 
 def _run_subscription_call(*, prompt, schema, digest, source, config, request_id, raw_path, render_pages=()):
@@ -495,23 +688,28 @@ def _run_subscription_call(*, prompt, schema, digest, source, config, request_id
         _record_failure(raw_path, request_id, captured, {'response': envelope,
                         'stderr': completed.stderr[-2000:], 'returncode': completed.returncode})
         reason = envelope.get('errors') or envelope.get('result') or completed.stderr.strip()
+        if 'output token maximum' in str(reason):
+            # The subscription's own output ceiling, reached while emitting a long
+            # table: the same limit the metered route reports as max_tokens, and
+            # the same remedy applies - the caller partitions to single pages.
+            raise OutputLimit('Claude subscription output ceiling: ' + str(reason)[:160])
         raise RuntimeError('Claude subscription reading incomplete: ' + str(reason))
     write_json(raw_path, {'provider': 'claude-code-subscription', 'request_sha256': request_id,
                          'captured_at': captured.isoformat(), 'response': envelope})
     return envelope['structured_output']
 
 
-def _record_failure(raw_path, request_id, captured, detail):
+def _record_failure(raw_path, request_id, captured, detail, label='claude-code-subscription'):
     stamp = captured.strftime('%Y%m%dT%H%M%SZ')
     write_json(raw_path.parent / 'failed' / f'{request_id}-{stamp}.json',
-               dict(provider='claude-code-subscription', request_sha256=request_id,
+               dict(provider=label, request_sha256=request_id,
                     captured_at=captured.isoformat(), **detail))
 
 
 def _retained_reading(raw_path, model):
     """The saved reading for a request, or None when what is saved is not a reading."""
     payload = json.loads(raw_path.read_text())
-    if payload.get('provider') == 'claude-code-subscription':
+    if payload.get('provider') in SUBSCRIPTION_LABELS:
         reading = payload.get('response', {}).get('structured_output')
         if not isinstance(reading, dict):
             # An error envelope saved by an earlier implementation. Set it aside as
@@ -572,7 +770,7 @@ def extract_relationships(digest, store, *, config, budget, execute=True, source
         'output_config': {'effort': config.effort, 'format': {'type': 'json_schema', 'schema': relations.schema()}}}
     subscription_prompt = '\n\n'.join(item['text'] for item in content if item['type'] == 'text')
     request_identity = (request if config.provider == 'api' else {
-        'provider': 'claude-code-subscription', 'model': config.model, 'effort': config.effort,
+        'provider': provider_label(config), 'model': config.model, 'effort': config.effort,
         'source_sha256': digest, 'prompt': subscription_prompt, 'schema': relations.schema()})
     request_id = sha256(json.dumps(request_identity, sort_keys=True).encode()).hexdigest()
     raw = store / 'derived/reports/responses' / (request_id + '.json')
@@ -592,7 +790,7 @@ def extract_relationships(digest, store, *, config, budget, execute=True, source
         reading = _retained_reading(raw, config.model) if raw.exists() else None
         if reading is None and not execute:
             raise NoRetainedResponse('No retained relationship reading for this document; explicit execution is required')
-        if reading is None and config.provider == 'subscription':
+        if reading is None and config.provider in SUBSCRIPTION_PROVIDERS:
             reading = _subscription_call(prompt=subscription_prompt, schema=relations.schema(), digest=digest,
                 source=blob_path(store, digest), config=config, request_id=request_id, raw_path=raw)
         elif reading is None:
@@ -601,7 +799,7 @@ def extract_relationships(digest, store, *, config, budget, execute=True, source
         if not raw.exists():
             raise
         payload = json.loads(raw.read_text())
-        if payload.get('provider') == 'claude-code-subscription':
+        if payload.get('provider') in SUBSCRIPTION_LABELS:
             raise
         body = payload['response']
         text = ''.join(part.get('text', '') for part in body.get('content', []))
@@ -616,13 +814,13 @@ def extract_relationships(digest, store, *, config, budget, execute=True, source
             f"Generation stopped ({body['stop_reason']}); only its complete identity object recovered; correction inventory unread"]}
         complete = False
     reading, rejected = relations.validated_components(reading, page_text, image_bearing)
-    if rejected and config.provider == 'subscription':
+    if rejected and config.provider in SUBSCRIPTION_PROVIDERS:
         repair_prompt = (subscription_prompt + '\n\nRead the complete source afresh. The prior proposal failed '
             'local source checks for these reasons: ' + '; '.join(rejected) +
             '. Correct those defects without dropping any identity or correction relationship. '
             'Every support quote must be exact and contiguous in the cited physical page.')
         repair_config = replace(config, effort='high')
-        repair_identity = {'provider': 'claude-code-subscription', 'model': repair_config.model,
+        repair_identity = {'provider': provider_label(repair_config), 'model': repair_config.model,
             'effort': repair_config.effort, 'source_sha256': digest, 'prompt': repair_prompt,
             'schema': relations.schema()}
         repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
@@ -655,14 +853,14 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
     revision = version(config)
     original = materialize(digest, extraction_version, payload['page_count'], payload['blocks'])
     parts = [{'selector': row.locator, 'page': row.page,
-              'native_cells': [c['native_cell'] for c in row.cells if c.get('native_cell')]}
+              'cells': [{'selector': c['locator'], 'native_cell': c.get('native_cell')} for c in row.cells]}
              for row in original.rows]
     with pymupdf.open(blob_path(store, digest)) as document:
         pages = list(range(1, len(document) + 1))
         content, native, _ = _page_content(document, pages, [], config)
     instruction = (
         'Repair omitted record-continuation relationships in an existing reading. '
-        'Read the original source and return only facts with role record_continuation, '
+        'Read the original source and return only record_continuation and field_continuation facts, '
         'using the continuation contract above. Each fact text and value must contain '
         'ONLY its literal printed identifier, with page and locator pointing to the '
         'actual identity header, not the continuation page. Never stitch quotes, insert '
@@ -671,8 +869,9 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
         'Return pages:[], tables:[]; preserve '
         'every retained cell by not retranscribing tables. The following inventory '
         'provides selectors for physical parts, NOT evidence of identity or correspondence. '
-        'Choose identities and relationships from the original PDF. Each fact must bind '
-        'all parts of one continued occurrence, excluding separate complete displays. '
+        'Choose identities and relationships from the original PDF. A record_continuation binds '
+        'all physical row parts of one continued occurrence; a field_continuation binds '
+        'only the cell selectors for that split field. Exclude separate complete displays. '
         'Use exact selector strings from this inventory in applies_to. If the source '
         'cannot establish a binding, state its exact cause in issues.\n' + json.dumps(parts))
     content.append({'type': 'text', 'text': instruction})
@@ -692,11 +891,11 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
     if reading is None:
         reading = (_subscription_call(prompt=prompt, schema=output_schema(), digest=digest,
             source=blob_path(store, digest), config=config, request_id=request_id, raw_path=raw)
-            if config.provider == 'subscription' else
+            if config.provider in SUBSCRIPTION_PROVIDERS else
             _call(request, config=config, budget=budget, request_id=request_id, raw_path=raw))
     validate_block(reading, targets=[], page_count=payload['page_count'],
                    native_cells=native, supplied_pages=pages)
-    if reading['tables'] or any(f['role'] != 'record_continuation' for f in reading['facts']):
+    if reading['tables'] or any(f['role'] not in {'record_continuation', 'field_continuation'} for f in reading['facts']):
         raise ValueError('Continuation-only repair cannot replace cells or unrelated facts')
     item = {'targets': [], 'supplied_pages': pages, 'context_pages': pages,
             'reading': reading, 'native_cells': native, 'request_sha256': request_id}
@@ -714,7 +913,9 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
     return target
 
 
-def extract_report(digest, store, *, config, budget, execute=True, continuation_from=None):
+def extract_report(digest, store, *, config, budget, execute=True, continuation_from=None, resume_from=None):
+    if continuation_from is not None and resume_from is not None:
+        raise ValueError('Choose page-reading resume or continuation repair, not both')
     if continuation_from is not None:
         return _repair_continuations(digest, store, extraction_version=continuation_from,
                                      config=config, budget=budget, execute=execute)
@@ -724,16 +925,67 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
     target = directory / 'report.json'
     if target.exists():
         saved = json.loads(target.read_text())
-        if saved.get('assembly_complete') is True and all(not b['targets'] or fully_read(b['reading']) for b in saved['blocks']):
+        if (saved.get('assembly_complete') is True
+                and (resume_from is None or saved.get('replayed_from_extraction_version') == resume_from)
+                and all(not b['targets'] or fully_read(b['reading']) for b in saved['blocks'])):
             return target
+    prior = None
+    if resume_from is not None:
+        prior = json.loads((store / 'derived/reports' / resume_from / digest / 'report.json').read_text())
+        if prior['source_sha256'] != digest or prior['extraction_version'] != resume_from:
+            raise ValueError('Resume reading identity does not match requested source/version')
     blocks, context, heading_context = [], set(), set()
     with pymupdf.open(blob_path(store, digest)) as document:
         page_count = len(document)
+        if prior is not None and prior['page_count'] != page_count:
+            raise ValueError('Resume page count differs from the retained source')
         def save(complete=False):
             write_json(target, {'source_sha256': digest, 'extraction_version': revision,
                                'page_count': page_count, 'config': asdict(config),
-                               'assembly_complete': complete, 'blocks': blocks})
+                               'assembly_complete': complete, 'blocks': blocks,
+                               **({'replayed_from_extraction_version': resume_from} if resume_from else {})})
         save()
+        def accept(item):
+            blocks.append(item)
+            context.update(item['reading']['context_pages'])
+            headed = [table['page'] for table in item['reading']['tables']
+                      if any(column['heading'] for column in table['columns'])]
+            if headed:
+                first_heading = min(heading_context | set(headed))
+                heading_context.clear()
+                heading_context.update((first_heading, max(headed)))
+            save()
+            logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': item['targets'],
+                'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
+        if prior is not None:
+            covered = set()
+            for item in prior['blocks']:
+                if not item['targets']:
+                    # A continuation-only block from an earlier repair carries reader-declared
+                    # bindings and no page dispositions; replay it as declared, so the
+                    # replayed assembly cannot silently lose a recovered relationship.
+                    validate_block(item['reading'], targets=[], page_count=page_count,
+                                   native_cells=item.get('native_cells', {}),
+                                   supplied_pages=item.get('supplied_pages', list(range(1, page_count + 1))))
+                    accept(item)
+                    continue
+                if not fully_read(item['reading']) or item.get('attachment_repair_pending'):
+                    continue
+                if covered.intersection(item['targets']):
+                    raise ValueError('Resume blocks overlap physical target pages')
+                try:
+                    validate_block(item['reading'], targets=item['targets'], page_count=page_count,
+                        native_cells=item['native_cells'], native_regions=item.get('native_regions', []),
+                        supplied_pages=item.get('supplied_pages', item['targets'] + item.get('context_pages', [])))
+                except ValueError as defect:
+                    # A retained page block this reader now rejects is the earlier reading's
+                    # limit, not the source's: its response stays retained, its pages are
+                    # read again through the ordinary path, and the cause is logged.
+                    logging.getLogger(__name__).info(json.dumps({'document': digest, 'resumed_from': resume_from,
+                        'rejected_prior_block': item['targets'], 'cause': str(defect)}))
+                    continue
+                accept(item)
+                covered.update(item['targets'])
         def read(targets, continuation_review=None):
             supplied_context = context | heading_context
             pages = sorted(supplied_context | set(targets))
@@ -751,7 +1003,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                                        'format': {'type': 'json_schema', 'schema': output_schema()}}
             subscription_prompt = '\n\n'.join(item['text'] for item in content if item['type'] == 'text')
             request_identity = (request if config.provider == 'api' else {
-                'provider': 'claude-code-subscription', 'model': config.model,
+                'provider': provider_label(config), 'model': config.model,
                 'effort': config.effort, 'source_sha256': digest, 'target_pages': targets,
                 'context_pages': sorted(supplied_context), 'prompt': subscription_prompt,
                 'schema': output_schema()})
@@ -779,7 +1031,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                         reading = _retained_reading(raw_path, config.model)
                     if reading is None and not execute:
                         raise NoRetainedResponse('No retained response for this block; explicit execution is required')
-                    if reading is None and config.provider == 'subscription':
+                    if reading is None and config.provider in SUBSCRIPTION_PROVIDERS:
                         reading = _subscription_call(prompt=subscription_prompt, schema=output_schema(),
                             digest=digest, source=blob_path(store, digest), config=config,
                             request_id=request_id, raw_path=raw_path)
@@ -789,7 +1041,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     # The subscription sees the complete PDF. If its first response
                     # validly recovers that whole document, retain it as one block
                     # instead of forcing an already complete reading into page pairs.
-                    if (config.provider == 'subscription' and not blocks and fully_read(reading)
+                    if (config.provider in SUBSCRIPTION_PROVIDERS and not blocks and fully_read(reading)
                             and not unattached_sampling_scopes(reading)
                             and not untyped_representation_scopes(reading)):
                         whole = list(range(1, page_count + 1))
@@ -806,13 +1058,15 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
                                        native_regions=regions, supplied_pages=supplied)
                     except ValueError as defect:
-                        if config.provider != 'subscription':
+                        if config.provider not in SUBSCRIPTION_PROVIDERS:
                             raise
                         # One bounded reread naming the structural defect, retained under its
                         # own request. A second failure stands as this document's stop.
+                        # The structural reread is a targeted correction and runs at high
+                        # effort, like the attachment and page-completion rereads.
                         repair_prompt = subscription_prompt + '\n\n' + STRUCTURE_REPAIR.format(defect=defect)
-                        repair_identity = {'provider': 'claude-code-subscription', 'model': config.model,
-                            'effort': config.effort, 'source_sha256': digest, 'target_pages': targets,
+                        repair_identity = {'provider': provider_label(config), 'model': config.model,
+                            'effort': 'high', 'source_sha256': digest, 'target_pages': targets,
                             'context_pages': sorted(supplied_context), 'prompt': repair_prompt,
                             'schema': output_schema()}
                         repair_id = sha256(json.dumps(repair_identity, sort_keys=True).encode()).hexdigest()
@@ -823,7 +1077,8 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                                                      'explicit execution is required') from defect
                         if reading is None:
                             reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
-                                digest=digest, source=blob_path(store, digest), config=config,
+                                digest=digest, source=blob_path(store, digest),
+                                config=replace(config, effort='high'),
                                 request_id=repair_id, raw_path=repair_raw)
                         reading = target_reading(reading, targets, supplied)
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
@@ -844,7 +1099,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                             {'type': 'text', 'text': instruction}]}])
                     repair_prompt = subscription_prompt + '\n\n' + instruction
                     repair_identity = (repair if config.provider == 'api' else {
-                        'provider': 'claude-code-subscription', 'model': config.model,
+                        'provider': provider_label(config), 'model': config.model,
                         'effort': effort, 'source_sha256': digest, 'target_pages': targets,
                         'context_pages': sorted(supplied_context), 'prompt': repair_prompt,
                         'schema': output_schema()})
@@ -855,7 +1110,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                         reading = _retained_reading(raw_path, config.model) if raw_path.exists() else None
                         if reading is None and not execute:
                             raise NoRetainedResponse('No retained response for this repair reread; explicit execution is required')
-                        if reading is None and config.provider == 'subscription':
+                        if reading is None and config.provider in SUBSCRIPTION_PROVIDERS:
                             reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
                                 digest=digest, source=blob_path(store, digest),
                                 config=replace(config, effort=effort), request_id=repair_id,
@@ -917,7 +1172,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                 if reading is None:
                     if not execute:
                         raise NoRetainedResponse('Page completion needs a source rereading; no retained response')
-                    if config.provider != 'subscription':
+                    if config.provider not in SUBSCRIPTION_PROVIDERS:
                         raise RuntimeError('Incomplete page requires explicit subscription rereading')
                     reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
                         digest=digest, source=blob_path(store, digest), config=repair_config,
@@ -931,24 +1186,15 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                 write_json(path, item)
                 if not fully_read(reading):
                     raise RuntimeError('Target page remains incomplete after source rereading')
-            blocks.append(item)
-            context.update(item['reading']['context_pages'])
-            headed = [table['page'] for table in item['reading']['tables']
-                      if any(column['heading'] for column in table['columns'])]
-            if headed:
-                # Supply the latest printed table header as evidence, without
-                # automatically assigning its meaning to a following table.
-                # Keep the original heading page too: a continuation's recovered
-                # headings do not prove that it physically reprints them.
-                first_heading = min(heading_context | set(headed))
-                heading_context.clear()
-                heading_context.update((first_heading, max(headed)))
-            save()
-            logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': targets,
-                'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
+            accept(item)
         first, width = 1, config.target_pages
         while first <= page_count:
-            targets = list(range(first, min(first + width, page_count + 1)))
+            covered = {page for item in blocks for page in item['targets']}
+            if first in covered:
+                first += 1
+                continue
+            end = min(first + width, page_count + 1)
+            targets = list(range(first, min([page for page in covered if first < page < end] or [end])))
             try:
                 read(targets)
             except OutputLimit as error:
@@ -966,6 +1212,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                             'cause': str(single_error) + '; single-page geometric subdivision is not implemented'})
                         raise
             first += len(targets)
+        blocks.sort(key=lambda item: min(item['targets'], default=page_count + 1))
         assembled = materialize(digest, revision, page_count, blocks)
         try:
             record_rows(assembled)
@@ -973,14 +1220,15 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
             # A failed explicit binding returns to the same source reader once.
             # Re-read blocks containing declared parts together, not unrelated PDFs.
             affected = [item for item in blocks if any(
-                fact['role'] == 'record_continuation' for fact in item['reading']['facts'])]
+                fact['role'] in {'record_continuation', 'field_continuation'} for fact in item['reading']['facts'])]
             scopes = {scope for item in affected for fact in item['reading']['facts']
-                      if fact['role'] == 'record_continuation' for scope in fact['applies_to']}
+                      if fact['role'] in {'record_continuation', 'field_continuation'} for scope in fact['applies_to']}
             for item in blocks:
                 if item in affected:
                     continue
-                part_scopes = {f"{table['id']}/{row['id']}" for table in item['reading']['tables']
-                               for row in table['rows']}
+                part_scopes = {scope for table in item['reading']['tables'] for row in table['rows']
+                    for base in (f"{table['id']}/{row['id']}", f"p{table['page']}/{table['id']}/{row['id']}")
+                    for scope in (base, *(f'{base}/c{i + 1}' for i in range(len(row['cells']))))}
                 part_scopes.update('native:' + key for key in item['native_cells'])
                 if scopes.intersection(part_scopes):
                     affected.append(item)
@@ -991,7 +1239,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                  + str(defect) + '. Re-read all target parts and their actual identity headers. '
                  'Retain every physical occurrence and its qualifications. Equal results do not '
                  'establish correspondence. Return explicit, uniquely bound continuation facts.')
-            blocks.sort(key=lambda item: min(item['targets']))
+            blocks.sort(key=lambda item: min(item['targets'], default=page_count + 1))
             assembled = materialize(digest, revision, page_count, blocks)
             record_rows(assembled)
         save(complete=len(assembled.complete_pages) == page_count)

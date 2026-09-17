@@ -60,6 +60,38 @@ def block(rows):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):
+        item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024'],
+                      ['B', '01/06/2024', 'non rilevato†', '02/06/2024']])
+        for raw, value, mark in zip(item['reading']['tables'][0]['rows'],
+                                    ['rilevato', 'non rilevato'], ['*', '†']):
+            raw['cells'][2].update(result_value=value, annotation=mark)
+        item['reading']['facts'] = [dict(id='f1', role='qualification', page=1,
+            locator='footnote', section=None, text='* Non-accredited test', value=None,
+            applies_to=['p1-t1/r1/c3'])]
+        rows = materialize('source', 'v', 1, [item]).rows
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'not-detected'])
+        self.assertEqual([r.results[0].text for r in rows], ['rilevato*', 'non rilevato†'])
+        self.assertEqual(rows[0].cells[2]['result_value'], 'rilevato')
+        self.assertEqual([f['text'] for f in rows[0].facts], ['* Non-accredited test'])
+        self.assertEqual(rows[0].facts[0]['applies_to'], ['p1-t1/r1/c3'])
+        self.assertEqual(rows[1].facts, ())
+        # With no reader-supplied decomposition, punctuation is not stripped.
+        del item['reading']['tables'][0]['rows'][0]['cells'][2]['result_value']
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+
+    def test_result_components_require_supported_literal_and_result_column(self):
+        for value, mark, index in [('non rilevato', '*', 2), ('rilevato', '', 2),
+                                   ('', 'rilevato*', 2), ('A', '', 0)]:
+            with self.subTest(value=value, mark=mark, index=index):
+                item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024']])
+                item['reading']['tables'][0]['rows'][0]['cells'][index].update(result_value=value, annotation=mark)
+                with self.assertRaises(ValueError):
+                    materialize('source', 'v', 1, [item])
+        item = block([['A', '01/06/2024', '* non rilevato', '02/06/2024']])
+        item['reading']['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'not-detected')
+
     def test_explicit_unavailable_date_is_not_a_transcription_failure(self):
         item = block([['x', 'non disponibile', 'Positivo', '02/03/2024']])
         row = materialize('hash', 'v', 1, [item]).rows[0]
@@ -90,6 +122,86 @@ class LiteralReport(unittest.TestCase):
             self.assertIsNone(materialize('hash', 'v', 1, [item]).rows[0].sampling_date)
         self.assertEqual(literal_date('29/02/15', year_context=((2015, 'issue'),)).cause,
                          'invalid_calendar_date')
+
+    def test_italian_sampling_dates_preserve_agreement_and_real_conflict(self):
+        for text, day in [('12 novembre 2021', '12/11/2021'),
+                          ('25 Marzo 2017', '25/03/2017'),
+                          ('25 agosto 2022', '26/08/2022')]:
+            with self.subTest(text=text):
+                item = block([['x', day, 'Positivo', '01/12/2024']])
+                item['reading']['facts'] = [dict(id='sampling', role='sampling_date', page=1,
+                    locator='cover sampling statement', text=text, value=text, applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.sampling_dates[1].text, text)
+                if text == '25 agosto 2022':
+                    self.assertIsNone(row.sampling_date)
+                    self.assertEqual(row.date_cause, 'conflicting sampling-date values')
+                else:
+                    self.assertEqual(row.sampling_date, literal_date(day).value)
+                    self.assertIsNone(row.date_cause)
+
+    def test_missing_spelled_year_requires_unique_scoped_source_support(self):
+        item = block([['x', '29 gennaio', 'Positivo', '01/02/2015']])
+        fact = dict(id='sampling', role='sampling_date', page=1, locator='annex heading',
+                    text='29/01/2015', value='29/01/2015', applies_to=['report'])
+        item['reading']['facts'] = [fact]
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertEqual(row.sampling_date.isoformat(), '2015-01-29')
+        self.assertEqual(row.sampling_dates[0].text, '29 gennaio')
+        self.assertEqual(row.sampling_dates[0].year_support, ('b1/sampling',))
+        for facts in ([], [dict(fact, applies_to=['other-table'])],
+                      [fact, dict(fact, id='other', text='29/01/2016', value='29/01/2016')]):
+            item['reading']['facts'] = facts
+            row = materialize('hash', 'v', 1, [item]).rows[0]
+            self.assertIsNone(row.sampling_date)
+            self.assertIn('year_not_established_by_source_context', row.date_cause)
+
+    def test_ranges_and_lists_constrain_but_never_supply_exact_sampling_day(self):
+        for text, accepted, rejected in [('4-6 Aprile', '05/04/2017', '07/04/2017'),
+                                         ('4 e 6 aprile 2017', '06/04/2017', '05/04/2017')]:
+            with self.subTest(text=text):
+                item = block([['x', text, 'Positivo', '10/04/2017']])
+                item['reading']['facts'] = [dict(id='issue', role='report_date', page=1,
+                    locator='dateline', text='24/5/2017', value='24/5/2017', applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertIsNone(row.sampling_date)
+                self.assertIn('does not establish an exact day', row.date_cause)
+                constraint = row.sampling_dates[0]
+                self.assertEqual(constraint.text, text)
+                self.assertIsNone(constraint.value)
+                if text == '4-6 Aprile':
+                    self.assertEqual(constraint.year_support, ('b1/issue',))
+                    self.assertEqual(tuple(d.isoformat() for d in constraint.date_range),
+                                     ('2017-04-04', '2017-04-06'))
+                else:
+                    self.assertEqual(tuple(d.isoformat() for d in constraint.listed_dates),
+                                     ('2017-04-04', '2017-04-06'))
+                for day in (accepted, rejected):
+                    item['reading']['facts'] = item['reading']['facts'][:1] + [dict(
+                        id='exact', role='sampling_date', page=1, locator='sample date',
+                        text=day, value=day, applies_to=['report'])]
+                    row = materialize('hash', 'v', 1, [item]).rows[0]
+                    if day == accepted:
+                        self.assertEqual(row.sampling_date, literal_date(day).value)
+                        self.assertIsNone(row.date_cause)
+                    else:
+                        self.assertIsNone(row.sampling_date)
+                        self.assertEqual(row.date_cause, 'conflicting sampling-date values')
+
+    def test_invalid_unparsed_and_unsupported_date_constraints_stay_unresolved(self):
+        for text, cause in [('29 febbraio 2023', 'invalid_calendar_date'),
+                            ('28-31 febbraio 2024', 'invalid_calendar_date'),
+                            ('6-4 aprile 2017', 'invalid_date_range'),
+                            ('5/140/2017', 'unparsed_date_literal'),
+                            ('4 aprile - 6 maggio 2017', 'unparsed_date_literal')]:
+            with self.subTest(text=text):
+                item = block([['x', '05/04/2017', 'Positivo', '10/04/2017']])
+                item['reading']['facts'] = [dict(id='sampling', role='sampling_date', page=1,
+                    locator='cover sampling statement', text=text, value=text, applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.sampling_dates[1].text, text)
+                self.assertIsNone(row.sampling_date)
+                self.assertEqual(row.date_cause, cause)
 
     def test_native_identifier_uses_source_geometry_and_preserves_original(self):
         import pymupdf
@@ -270,6 +382,51 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaises(ValueError):
                 record_rows(invalid)
 
+    def test_fragment_only_table_and_explicit_split_field_reach_ordinary_consumers(self):
+        from copy import deepcopy
+        from dataclasses import replace
+        from cordon_d.reports import record_rows
+        from cordon_d.findings import _host_relation
+        item = block([['00123', '01/06/2024', 'Negativo', '02/06/2024']])
+        data = item['reading']
+        head = data['tables'][0]
+        head['columns'].append({'role': 'host', 'heading': ['Host']})
+        head['rows'][0]['cells'].append({'text': 'Asparagus'})
+        tail = deepcopy(head)
+        tail.update(id='tail', page=2, columns=[head['columns'][-1]],
+                    rows=[{'id': 'r1', 'cells': [{'text': 'acutifolius'}]}])
+        data['tables'].append(tail)
+        data['pages'].append({'page': 2, 'disposition': 'read'})
+        item['targets'].append(2)
+        row_scope = head['id'] + '/' + head['rows'][0]['id']
+        relation = {'role': 'record_continuation', 'text': '00123', 'value': '00123',
+                    'page': 1, 'locator': row_scope + '/c1',
+                    'applies_to': [row_scope, 'tail/r1']}
+        data['facts'].append(relation)
+        raw = materialize('hash', 'v', 2, [item])
+        self.assertEqual(len(raw.rows), 2)  # Fragment has neither identifier nor result.
+        with self.assertRaisesRegex(ValueError, 'conflicting fields'):
+            record_rows(raw)
+        field = dict(relation, role='field_continuation',
+                     applies_to=[row_scope + '/c5', 'tail/r1/c1'])
+        complete = replace(raw, facts=(*raw.facts, field))
+        row, = record_rows(complete)
+        host, = [c for c in row.cells if c['role'] == 'host']
+        self.assertEqual(host['text'], 'Asparagus acutifolius')
+        self.assertEqual([c['text'] for c in host['source_fragments']], ['Asparagus', 'acutifolius'])
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Asparagus acutifolius'}}}),
+                         'agrees on printed host')
+        self.assertEqual(row.results, raw.rows[0].results)
+        self.assertEqual(complete.rows, raw.rows)
+        for invalid in (dict(field, applies_to=[row_scope + '/c5', 'missing']),
+                        dict(field, value='another'), dict(field, page=2),
+                        dict(field, applies_to=[row_scope + '/c5'] * 2)):
+            with self.assertRaises(ValueError):
+                record_rows(replace(raw, facts=(*raw.facts, invalid)))
+        # Neither equal headings nor an unbound fragment creates a sample row.
+        data['facts'].remove(relation)
+        self.assertEqual(len(materialize('hash', 'v', 2, [item]).rows), 1)
+
     def test_swapped_source_headers_require_a_new_reader_binding(self):
         import pymupdf
         from dataclasses import replace
@@ -422,6 +579,13 @@ class LiteralReport(unittest.TestCase):
             rows = record_rows(materialize(digest, 'v', 1, saved['blocks']))
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0].results[0].kind, 'positive')
+            with patch('cordon_d.report_extraction._subscription_call') as call:
+                replay = extract_report(digest, store, resume_from=saved['extraction_version'],
+                    config=ExtractionConfig(provider='subscription', target_pages=1), budget=None, execute=False)
+            call.assert_not_called()
+            rebuilt = json.loads(replay.read_text())
+            self.assertTrue(rebuilt['assembly_complete'])
+            self.assertEqual(record_rows(materialize(digest, 'v', 1, rebuilt['blocks'])), rows)
 
     def test_unbound_continuation_returns_to_established_reader(self):
         import pymupdf
@@ -439,7 +603,7 @@ class LiteralReport(unittest.TestCase):
         data['pages'].append({'page': 2, 'disposition': 'read'})
         data['facts'] = [{'id': 'continued', 'role': 'record_continuation',
                           'page': 1, 'locator': 'header', 'text': '00123', 'value': '00123',
-                          'applies_to': ['p1-t1/r1', 'missing-part']}]
+                          'applies_to': ['p1-t1/r1', 'p2-tail/r9']}]
         repaired = copy.deepcopy(data)
         repaired['facts'][0]['applies_to'][-1] = 'p2-tail/r1'
         with TemporaryDirectory() as directory:
@@ -597,6 +761,36 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(rows[0].cells[0]['text'], '00123\n(Pool)')
         self.assertEqual(rows[0].cells[0]['annotation'], '(Pool)')
         self.assertEqual(rows[1].reference, '00124 (Field)')
+
+    def test_printed_id_label_is_not_part_of_the_identifier(self):
+        item = block([['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['1401424', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['IDANDROID 12', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['Id 1610615', '01/06/2024', 'Positivo', '02/06/2024']])
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual(rows[0].cells[0]['identifier'], '11200165')
+        self.assertEqual(rows[0].cells[0]['annotation'], 'ID:')
+        self.assertEqual(rows[0].cells[0]['text'], 'ID: 11200165')
+        self.assertEqual(rows[0].cells[0]['identifier_basis'],
+                         'literal ID label prefix; complete cell retained')
+        self.assertEqual(rows[0].identifiers, ('11200165',))
+        self.assertEqual(rows[1].reference, '1401424')
+        self.assertNotIn('identifier', rows[1].cells[0])
+        self.assertEqual(rows[2].reference, 'IDANDROID 12')
+        self.assertNotIn('identifier', rows[2].cells[0])
+        self.assertEqual(rows[3].cells[0]['identifier'], '1610615')
+        self.assertEqual(rows[3].cells[0]['annotation'], 'Id')
+        self.assertEqual(rows[3].cells[0]['text'], 'Id 1610615')
+
+    def test_two_identifier_cells_keep_every_value_on_the_row(self):
+        item = block([['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append(dict(table['columns'][0], heading=['CODICE ID']))
+        table['rows'][0]['cells'].append({'text': '0147/24-1'})
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertIsNone(row.reference)
+        self.assertEqual(row.identifiers, ('11200165', '0147/24-1'))
+        self.assertEqual(row.cells[0]['text'], 'ID: 11200165')
 
     def test_sampling_attachment_gets_one_reread_and_can_remain_unresolved(self):
         import pymupdf
@@ -772,6 +966,33 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(len(row.results), 1)
         self.assertEqual(literal_date('29/02/2023').cause, 'invalid_calendar_date')
         self.assertEqual(literal_date('last Tuesday').cause, 'unparsed_date_literal')
+
+    def test_printed_mark_classifies_only_through_its_recovered_note(self):
+        # CNR prints "non rilevato*" with "*Prova non accreditata da Accredia." below the table.
+        item = block([['123', '02/06/2024', 'non rilevato*', '03/06/2024'],
+                      ['124', '02/06/2024', 'rilevatoa', '03/06/2024'],
+                      ['125', '02/06/2024', 'Positivo**', '03/06/2024']])
+        item['reading']['facts'] = [
+            {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': '*Prova non accreditata da Accredia.', 'value': None, 'applies_to': ['p1-t1/r1']},
+            {'id': 'f2', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': "a L'esito si riferisce a ciascun campione suddiviso in aliquote.", 'value': None,
+             'applies_to': ['p1-t1/c3']}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        first, second, third = (row.results[0] for row in rows)
+        self.assertEqual((first.kind, first.text, first.cause), ('not-detected', 'non rilevato*', None))
+        self.assertIn('f1', {f['id'].split('/')[-1] for f in rows[0].facts})
+        self.assertEqual((second.kind, second.text), ('detected', 'rilevatoa'))
+        # A mark no recovered note explains keeps the result unclassified and says why.
+        self.assertEqual((third.kind, third.cause), ('unclassified', 'printed mark; note not recovered by the reading'))
+        # A note is never a licence to strip: a bare literal without a mark is untouched, and a
+        # word that merely ends in the marker letter is not a marked result.
+        item = block([['126', '02/06/2024', 'rilevata', '03/06/2024'], ['127', '02/06/2024', 'Sospetto', '03/06/2024']])
+        item['reading']['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                     'text': 'a nota', 'value': None, 'applies_to': ['report']}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
+        self.assertIsNone(rows[1].results[0].cause)
 
     def test_an_omitted_detected_table_cannot_claim_page_coverage(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
