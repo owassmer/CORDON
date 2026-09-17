@@ -227,6 +227,8 @@ class LiteralReport(unittest.TestCase):
             before = materialize(digest, 'v', 1, [item])
             after = positioned_identifiers(before, source)
             self.assertEqual(after.rows[0].reference, 'A_ B')
+            self.assertEqual(after.rows[0].cells[0]['basis'],
+                             'native cell geometry order; identical non-whitespace character inventory')
             self.assertEqual(after.rows[0].cells[0]['native_text'], 'A B\n_')
             self.assertEqual(before.rows[0].reference, 'A B\n_')
             target = store / 'derived/reports/v' / digest / 'report.json'
@@ -243,6 +245,30 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'differs from its source cell'):
                 write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
                                          'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+
+    def test_unreordered_positioned_identifier_keeps_native_copy_basis(self):
+        import pymupdf
+        with TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), '00123'), ((105, 60), 'X'),
+                                       ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': '00123', 'page': 1}
+            after = positioned_identifiers(materialize('hash', 'v', 1, [item]), path)
+            cell = after.rows[0].cells[0]
+            self.assertEqual(cell['text'], '00123')
+            self.assertEqual(cell['native_text'], '00123')
+            self.assertEqual(cell['basis'], 'native_cell_copy')
+            self.assertEqual(cell['check'],
+                             'native order retained; identical non-whitespace character inventory')
 
     def test_invalid_date_retains_literal_and_does_not_become_a_result(self):
         reading = materialize('hash', 'v', 1, [block([['00123', '29/02/2023', 'Positivo', '01/03/2023']])])

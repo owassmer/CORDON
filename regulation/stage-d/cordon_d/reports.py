@@ -779,7 +779,8 @@ def positioned_identifier_records(reading, source):
                     'native_text': native,
                     'source_bbox': list(bounds),
                     'check': ('native cell geometry order; identical non-whitespace character inventory'
-                              if reordered else 'retained native order'),
+                              if reordered else
+                              'native order retained; identical non-whitespace character inventory'),
                 })
     return records
 
@@ -796,7 +797,9 @@ def apply_positioned_identifiers(reading, records):
                 if _nonwhitespace(item['text']) != _nonwhitespace(cell['text']):
                     raise ValueError('Positioned identifier does not conserve its retained native cell')
                 cell = dict(cell, text=item['text'], native_text=item['native_text'],
-                            basis=item['check'], source_bbox=item['source_bbox'])
+                            source_bbox=item['source_bbox'], check=item['check'])
+                if item['text'] != item['native_text']:
+                    cell['basis'] = 'native cell geometry order; identical non-whitespace character inventory'
             cells.append(cell)
         def sole(role):
             fields = [c for c in cells if c['role'] == role]
