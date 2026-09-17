@@ -69,12 +69,22 @@ coordinate frame of the monitoring degree columns that check is
 the readings and runs it. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
-and typed readings remain Parquet keyed by source hash and reader version.
-Reports use compact JSON blocks and an assembled reading under source hash and
-extraction version. Exact-request raw model responses are cached separately so a
+and typed readings remain Parquet keyed by source hash and reader version. The
+grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
+`(url, view, sha256)` sequence of retained releases, the reader version and the
+DuckDB version. Reports use compact JSON blocks and an assembled reading under
+source hash and extraction version. Each native identifier cell of that assembled
+reading carries one regenerable record holding the positioned text, the source
+cell bounds and what the geometry read found; the retained cell is the native
+text and the record keeps no second copy of it. The read path establishes that
+the stored positioned text has not diverged in content from that retained cell,
+and refuses a reading whose native identifier cell carries no record until it is
+reassembled; that the stored order is the source order is established only at
+assembly under the extraction version.
+Exact-request raw model responses are cached separately so a
 changed deterministic projection can reuse them without another paid call.
 Model, prompt, page/context images, rendering settings and code version are named;
-no join change invalidates extraction. These are caches, not owners. Deleting
+no join change invalidates extraction. For an annotated result, the source reader may return `result_value` and `annotation` alongside the complete cell. Their concatenation must reproduce the cell (with only whitespace variation), and `result_value` is allowed only in a result column. Polarity is projected from that supported component; the original literal and precisely scoped qualifications remain available. The projection never strips presumed footnote suffixes on its own. `extract_report(resume_from=...)` can retain validated, fully read page blocks from an explicitly selected prior version and request only uncovered pages. It preserves those blocks and their original request identifiers; a smaller configured page width applies only to the remaining reading. Incomplete page blocks are reread, and continuation-only repairs retain their separate existing entry point. These are caches, not owners. Deleting
 report responses can incur new extraction cost, unlike replaying retained responses.
 
 Report acquisition-of-readings is explicit through `scripts/read_reports.py` with
@@ -123,6 +133,16 @@ record continuation is recovered explicitly by the established document reader a
 one `record_continuation` fact, quoting the printed identity and naming every
 physical part. `reports.record_rows` resolves those exact selectors and assembles
 the declared parts; it does not discover continuation from layout or equal results.
+A bound fragment-only table remains a physical record part even without its own
+identifier or result column. When a descriptive field itself spans pages, a
+`field_continuation` fact binds its exact cells and quotes the record identity at
+its physical page. The assembler joins successive word fragments with whitespace,
+retains every original cell under `source_fragments`, and preserves qualification
+scopes. Matching headers or differing values alone do not establish a split field.
+Overlaps, conflicting bindings and unsupported splits of identifiers, results,
+numbers, dates or within-word characters remain failures requiring source reading;
+no generic string concatenation resolves them. Empty printed placeholders supply
+no conflicting field or sampling date. Binding-only blocks survive cache replay.
 It works without a separate complete display. Native-cell anchors or exact output
 row selectors permit different source layouts and cross-block references. Each
 cell retains its physical locator, and each qualification retains its original
@@ -152,7 +172,10 @@ cell bounds and derivation remain attached. This repairs displaced punctuation,
 not identifier origin or correspondence between different codes.
 Two-digit date years resolve only against a unique matching full year in scoped
 source date statements. The literal date and supporting statement IDs survive;
-no current-year assumption or platform century cutoff supplies the year.
+no current-year assumption or platform century cutoff supplies the year. A date
+spelled with an Italian month name resolves the same way. A printed date range or
+list constrains a separately stated sampling day and never supplies one; a row
+whose only date statement is a range or list has no exact day, and says so.
 
 Extraction permits one to three independent PDF processes under one shared,
 transaction-locked spending ledger. Returned usage and interrupted requests are
@@ -179,9 +202,16 @@ Whole-document relationship acquisition uses `read_reports.py --relationships`.
 It supplies every physical page, keeps its response/request version separately
 from row extraction, and never retranscribes the tables. A protocol is a document
 registration identifier, not an analytical method or incoming delivery note.
-Unsupported protocol proposals remain visible without acquiring typed identity.
+The source reader assigns that role. Deterministic projection checks only that the
+proposed identifier occurs within its own component quotation; spelling, prefixes
+and numeric shape cannot establish or reject administrative meaning. Unsupported
+proposals remain visible without acquiring typed identity.
 A cache-only relationship graph follows explicitly supported replacements, retains
 history and unverified components, and rejects ambiguous or cyclic supersession.
+The graph consumes every available relationship inventory, including documents
+whose sample rows remain unread. Row materialization is limited to documents
+reached by the observation routes and that graph; an unread replacement cannot
+make its predecessor eligible.
 Every competing branch from a rendition's replacement ancestry must explicitly
 reach that rendition before it can be current. Extending one branch cannot settle
 the fork, and the observation's entry route cannot change this determination.

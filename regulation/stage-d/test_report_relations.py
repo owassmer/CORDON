@@ -97,14 +97,35 @@ class ReportRelationships(unittest.TestCase):
         edges = correspondences({'first': first, 'second': second})
         self.assertTrue(all(e['predecessor'] is None and 'cyclic' in e['cause'] for e in edges))
 
-    def test_method_protocol_is_never_a_document_registration_identifier(self):
-        value = dict(protocol='Example et al. (2020)', support=[
-            {'page': 1, 'text': 'analisi eseguite con protocollo Example et al. (2020)'}])
-        projected = project_identity(value)
+    def test_analytical_text_does_not_supply_a_registration_role(self):
+        # The source reader assigns analytical meaning; projection must not promote
+        # a number from another statement to administrative identity.
+        identity = dict(protocol=None, component_support={'protocol': []}, support=[
+            {'page': 1, 'text': 'protocollo analitico 2010'}])
+        self.assertIsNone(project_identity(identity)['protocol'])
+        identity['protocol'] = '2010'
+        projected = project_identity(identity)
         self.assertIsNone(projected['protocol'])
-        self.assertEqual(projected['protocol_proposal'], value['protocol'])
-        value = dict(protocol='3203', support=[{'page': 1, 'text': 'Prot. N. 3203'}])
-        self.assertEqual(project_identity(value)['protocol'], '3203')
+        self.assertEqual(projected['protocol_proposal'], '2010')
+
+    def test_protocol_projection_checks_component_attachment_not_identifier_shape(self):
+        for literal in ('Prot. Selge 17/2018', 'Prot. ABC-123/2024', '3203'):
+            with self.subTest(literal=literal):
+                identity = dict(protocol=literal, component_support={'protocol': [
+                    {'page': 1, 'text': literal}]}, support=[])
+                self.assertEqual(project_identity(identity)['protocol'], literal)
+        # Even a wrongly assigned role is a reader defect, not something an
+        # identifier-format classifier can certify or correct.
+        identity = dict(protocol='protocollo analitico 2010', component_support={'protocol': [
+            {'page': 1, 'text': 'protocollo analitico 2010'}]})
+        self.assertEqual(project_identity(identity)['protocol'], identity['protocol'])
+        unsupported = dict(protocol='ABC-123/2024', component_support={'protocol': [
+            {'page': 1, 'text': 'Prot. ABC-124/2024'}]}, support=[
+            {'page': 2, 'text': 'ABC-123/2024'}])
+        self.assertIsNone(project_identity(unsupported)['protocol'])
+        split = dict(protocol='ABC-123/2024', component_support={'protocol': [
+            {'page': 1, 'text': 'ABC-'}, {'page': 2, 'text': '123/2024'}]})
+        self.assertIsNone(project_identity(split)['protocol'])
 
     def test_missing_candidate_protocol_is_exposed_without_defeating_unique_report_identity(self):
         old = reading()
@@ -179,6 +200,24 @@ class ReportRelationships(unittest.TestCase):
         self.assertIn('date_conflict', edge)
         self.assertEqual(edge['successor_identity']['date'], '01/03/2023')
         self.assertEqual(edge['changed_columns'], [])
+
+    def test_unresolved_predecessor_cause_names_what_is_absent(self):
+        unheld = dict(issuer='Laboratory A', number='30/2024', date='01/01/2024', protocol=None)
+        replaces = reading(previous=unheld, effect='replaces')
+        annex = reading(previous=unheld, effect='annex')
+        amends = reading(previous=unheld, effect='amends')
+        edges = correspondences({'replaces': replaces, 'annex': annex, 'amends': amends})
+        by_effect = {edge['effect']: edge['cause'] for edge in edges}
+        self.assertEqual(by_effect['replaces'],
+            'predecessor not held or not identified; this rendition is current and the replaced rendition is absent as history')
+        self.assertEqual(by_effect['annex'],
+            'the report this annex belongs to is not held or not identified; these rows stand and the fuller report is absent')
+        self.assertEqual(by_effect['amends'],
+            'the amended base is not held or not identified; these rows stand and the unamended rows of the base are absent')
+        old = reading()
+        new = reading(date='04/03/2024', previous=old.relations['identity'])
+        edge, = correspondences({'old': old, 'another': reading(), 'new': new})
+        self.assertTrue(edge['cause'].startswith('predecessor ambiguous among retained readings: '))
 
 
 if __name__ == '__main__':

@@ -99,6 +99,22 @@ class ReportCompletion(unittest.TestCase):
                 self.assertEqual(joined['status'], 'matched')
                 self.assertEqual({m['key'][0] for m in joined['matches']}, {e})
 
+    def test_unread_successor_still_disqualifies_replaced_report(self):
+        a, route, _ = self.add_report('A')
+        b, _, payload = self.add_report('B', predecessors=['A'])
+        payload.unlink()
+        joined = self.join(route)
+        self.assertEqual(joined['matches'], [])
+        self.assertEqual({link['sha256'] for link in joined['links']}, {a, b})
+
+    def test_unrelated_rows_are_not_materialized(self):
+        a, route, _ = self.add_report('A')
+        self.add_report('Unrelated')
+        with patch('cordon_d.findings.report', wraps=report) as loader:
+            joined = self.join(route)
+        self.assertEqual(joined['status'], 'matched')
+        self.assertEqual([call.args[0] for call in loader.call_args_list], [a])
+
     def test_ordinary_replacement_chain_remains_usable(self):
         a, route_a, _ = self.add_report('A')
         c, route_c, _ = self.add_report('C', predecessors=['A'])

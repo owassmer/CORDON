@@ -283,6 +283,33 @@ class ObservationStream(unittest.TestCase):
         stale.write_bytes(b'not parquet')
         self.assertEqual(sum(1 for o in observations(self.root) if o.view_name == 'camp.csv'), 1)
 
+    def test_grouped_observations_ignore_another_key_and_regenerate_when_a_release_is_added(self):
+        with TemporaryDirectory() as directory:
+            root = build_root(directory)
+            groups = list(distinct_observations(root))
+            store = store_root(root)
+            grouped = store / 'derived' / 'monitoring' / 'groups'
+            current = list(grouped.glob('*.parquet'))
+            self.assertEqual(len(current), 1)
+            foreign = grouped / 'otherkey-stale.parquet'
+            foreign.write_bytes(b'not parquet')
+            self.assertEqual(len(list(distinct_observations(root))), len(groups))
+            self.assertEqual(foreign.read_bytes(), b'not parquet')
+            extra = root / 'campaign' / 'extra.csv'
+            extra.write_text(
+                'ID;DATA_RILEVAMENTO;TIPOLOGIA;SPECIE;CULTIVAR;LATITUDINE;LONGITUDINE;COMUNE;RISULTATO;SINTOMO\n'
+                '808;13/03/2022;Campione;Olivo;;40,3;17,3;A;NEGATIVO;Assente\n', encoding='latin-1')
+            records = json.loads((root / 'campaign' / 'releases.json').read_text())
+            records.append({'url': 'http://publisher/extra.csv', 'path': 'extra.csv', 'captured_at': 'x',
+                            'sha256': file_digest(extra), 'encoding': 'latin-1', 'delimiter': ';'})
+            (root / 'campaign' / 'releases.json').write_text(json.dumps(records))
+            grown = list(distinct_observations(root))
+            self.assertEqual(len(grown), len(groups) + 1)
+            self.assertFalse(foreign.exists())
+            remaining = list(grouped.glob('*.parquet'))
+            self.assertEqual(len(remaining), 1)
+            self.assertNotEqual(remaining[0].name, current[0].name)
+
     def test_audit_fails_on_a_corrupted_blob(self):
         store = store_root(self.root)
         self.assertEqual(audit(store), [])
