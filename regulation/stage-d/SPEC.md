@@ -397,9 +397,20 @@ An infected-plant reference printed beside surrounding parcels remains
 report association. Additional columns cannot rename or duplicate a column already
 supplied by the association owner.
 Image-only and vector-outlined content uses explicitly model-transcribed positions
-from the full rendered page. Complete source pages remain in every request; native
+from the full rendered page. Each logical table row remains one position, with
+shared cells attached to each row they govern. Parallel lists of identifiers,
+parcels or addressees cannot stand in for their row relationships. Source-authored
+prose groups remain groups. Complete source pages remain in every request; native
 addresses supplement them. Municipality mentions and contextual map labels do not
 become ordered targets merely by referring to an operative direction.
+For a correction that carries forward an unchanged native sample/report
+association, an image position can explicitly select that source table and row.
+The relationship needs the operative correction and both source positions as
+support. Composition reuses the association object and rejects retranscription of
+its fields; the corrected addressee retains its own image provenance. The current
+position’s part role determines target admission, independently of the predecessor
+field locations. An absent selection stays absent, including in earlier retained readings. No field-value
+match creates the relationship.
 Context documents support the principal act's incorporation without importing
 unaffected predecessor targets into a partial correction. The reading must retain
 both the incorporating clause and the incorporated work and conditions.

@@ -9,7 +9,8 @@ from .evidence import Support
 from .events import AdministrativeEvent
 from .removal_events import act_id
 from .store import blob_path
-from .measure_sources import source_material, material_context, context_matches, table_fields, native_span
+from .measure_sources import (source_material, material_context, context_matches,
+                              table_fields, native_span, selected_association)
 
 
 def _object(**properties):
@@ -34,6 +35,8 @@ FIELD_ROLE = _choice('plant_id', 'reference_plant_id', 'municipality', 'cadastra
                      'sheet', 'parcel', 'addressee')
 SPAN = _object(line_ref=TEXT, first_word={'type': 'integer', 'minimum': 0},
                end_word={'type': 'integer', 'minimum': 1})
+ASSOCIATION_REF = {'anyOf': [
+    _object(table_ref=TEXT, row={'type': 'integer', 'minimum': 1}), {'type': 'null'}]}
 SCHEMA = _object(
     identity=_object(issuer=TEXT, authority=_choice('puglia-osservatorio', 'other', 'unresolved'),
                      number=OPTIONAL_TEXT, adopted=OPTIONAL_TEXT, title=TEXT, support=CITATIONS),
@@ -55,7 +58,7 @@ SCHEMA = _object(
                         direction_ids=_array(TEXT), meaning=TEXT, support=CITATIONS)),
     prose_positions=_array(_object(fields=_array(_object(role=FIELD_ROLE, spans=_array(SPAN))),
                                    direction_ids=_array(TEXT), meaning=TEXT, support=CITATIONS)),
-    image_positions=_array(_object(image_ref=TEXT,
+    image_positions=_array(_object(image_ref=TEXT, association_ref=ASSOCIATION_REF,
                          fields=_array(_object(role=FIELD_ROLE, transcription=TEXT)),
                          direction_ids=_array(TEXT), meaning=TEXT, support=CITATIONS)),
     references=_array(_object(identity_literal=TEXT,
@@ -122,7 +125,10 @@ class MeasureReading:
                 for fragment in fragments:
                     source = fragment.get('source')
                     page = fragment.get('page')
-                    if target['association'] is not None:
+                    if target.get('source_position') is not None:
+                        source = target['source_position']['source']
+                        page = target['source_position']['page']
+                    elif target['association'] is not None:
                         source = target['association']['source_sha256']
                         page = target['association']['page']
                     parts = [p for p in self.values['parts'] if p['source'] == source and page in p['pages']]
@@ -178,20 +184,27 @@ class MeasureReading:
             yield self._target(fields, None, position, f'prose:{index}')
         for index, position in enumerate(self.values['image_positions']):
             image = (self.material['images'] | self.material['pages'])[position['image_ref']]
-            fields = {f['role']: dict(image, text=f['transcription'],
-                                      derivation='model transcription of source image')
-                      for f in position['fields']}
-            yield self._target(fields, None, position, f"{position['image_ref']}/position:{index}")
+            association = selected_association(self.material, position.get('association_ref'))
+            fields = dict(association['fields']) if association else {}
+            for field in position['fields']:
+                if field['role'] in fields:
+                    raise ValueError('Selected association already supplies this image-position field')
+                fields[field['role']] = dict(image, text=field['transcription'],
+                                             derivation='model transcription of source image')
+            target = self._target(fields, association, position, f"{position['image_ref']}/position:{index}")
+            target['source_position'] = image
+            yield target
 
     def associations(self, store):
         """Reuse the accepted report-association owner without another table reader."""
         return self.association_readings
 
     def target_associations(self, store):
-        """Attach source-native sample references at their actual cited pages.
+        """Attach the explicitly selected source-native association occurrence.
 
         Parcel-only target rows need not have a report association. Empty matches
-        remain empty; neither a name nor a nearby location supplies a report join.
+        remain empty; a corrected image position can select a predecessor row only
+        through its source-supported relationship, never by matching a field value.
         """
         for target in self.prescribed_targets():
             matches = (target['association'],) if target['association'] is not None else ()
@@ -278,6 +291,15 @@ def _validate_reading(reading, sources, store, material):
                 native_span(material, span)
     for position in reading['image_positions']:
         image = (material['images'] | material['pages'])[position['image_ref']]
+        association = selected_association(material, position.get('association_ref'))
+        if association and any(f['role'] in association['fields'] for f in position['fields']):
+            raise ValueError('Selected association already supplies this image-position field')
+        if association:
+            cited = {(c['source'], c['page']) for c in position['support']}
+            required = {(image['source'], image['page']),
+                        (association['source_sha256'], association['page'])}
+            if not required <= cited:
+                raise ValueError('Association continuity needs both source positions as support')
         if any(t['source'] == image['source'] and t['page'] == image['page']
                for t in material['tables'].values()):
             raise ValueError('Use native table cells rather than retranscribing that page')
@@ -310,9 +332,15 @@ def retained_measure(request_id, store):
     """Consume a named interpretation with its original context, without re-extraction."""
     response = read_retained(request_id, store)
     from jsonschema import Draft202012Validator
+    from copy import deepcopy
     # Additive source roles need not invalidate an otherwise compatible reading.
     # The old generated-target contract still cannot satisfy this composition.
-    Draft202012Validator(SCHEMA).validate(response['reading'])
+    compatible = deepcopy(response['reading'])
+    for position in compatible['image_positions']:
+        # Earlier contracts could not select an association for an image row.
+        # Absence means no selection, never an inferred cross-document match.
+        position.setdefault('association_ref', None)
+    Draft202012Validator(SCHEMA).validate(compatible)
     sources = response['request']['sources']
     material, associations = source_material(sources, store)
     if not context_matches(response['request']['prompt'], material):

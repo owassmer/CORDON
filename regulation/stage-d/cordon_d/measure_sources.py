@@ -91,10 +91,14 @@ CONTEXT_MARKER = '\nSOURCE ADDRESSES (one-based rows/columns; zero-based word of
 def _address_values(addresses):
     """Only values the model selects; geometry remains with native composition."""
     return {
-        'tables': {ref: dict(cells={key: cell['text'] for key, cell in table['cells'].items()},
-                            rows=table['rows'])
+        'tables': {ref: dict(cells={key: cell['text'] if isinstance(cell, dict) else cell
+                                   for key, cell in table['cells'].items()},
+                            rows=[{key: value for key, value in row.items()
+                                   if key != 'association' or value is not None}
+                                  for row in table['rows']])
                    for ref, table in addresses['tables'].items()},
-        'lines': {ref: line['words'] for ref, line in addresses['lines'].items()},
+        'lines': {ref: line['words'] if isinstance(line, dict) else line
+                  for ref, line in addresses['lines'].items()},
         'images': sorted(addresses['images']),
     }
 
@@ -125,10 +129,22 @@ def context_matches(prompt, material):
     if CONTEXT_MARKER not in prompt:
         return False
     supplied, _ = json.JSONDecoder().raw_decode(prompt.split(CONTEXT_MARKER, 1)[1])
-    # Earlier requests supplied the same addresses with redundant source boxes.
-    if isinstance(supplied.get('images'), dict):
-        supplied = _address_values(supplied)
-    return supplied == material_addresses(material)
+    # Earlier requests supplied redundant source boxes and empty row attributes.
+    return _address_values(supplied) == material_addresses(material)
+
+
+def selected_association(material, reference):
+    """An explicit source-row selection, never an identifier-value match."""
+    if reference is None:
+        return None
+    table = material['tables'][reference['table_ref']]
+    row = reference['row']
+    if not 1 <= row <= len(table['rows']):
+        raise ValueError('Association selection outside its source table')
+    association = table['rows'][row - 1]['association']
+    if association is None:
+        raise ValueError('Selected source row has no established association')
+    return association
 
 
 def table_fields(material, table_ref, row_number, columns):

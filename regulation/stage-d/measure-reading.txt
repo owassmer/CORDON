@@ -50,6 +50,7 @@ mechanical source locations, not interpreted identifiers or evidence of operativ
 scope. The accepted association reader already owns every field in a table row's
 association object, including sample identity, report reference/date, municipality,
 sheet and parcel where printed. Do not output another version of those fields.
+An omitted row association entry means that row has no established native association.
 
 Use target_scopes to select each operative or consequential corrected/deferred table
 population: exact table_ref, inclusive one-based first_row/last_row, and all applicable
@@ -80,9 +81,24 @@ operative correction supplies the changed position. Include all relevant paragra
 not only tables. Use image_positions only where the rendered source page carries
 target content unavailable through native cells/words, including vector-outlined
 glyphs. Its image_ref names an embedded image address or S{document index}P{physical
-page}, with zero-based document index and one-based page. Transcribe faithfully,
-preserving source-supported grouping and any
+page}, with zero-based document index and one-based page. Transcribe faithfully.
+For a table, each image_position represents one logical data row. Preserve a shared
+cell's value on each row it governs and preserve a row's verified continuation;
+never compress distinct rows into delimiter-separated field values or parallel
+lists. In particular, a plant_id field identifies that row's plant, and the parcel
+and addressee fields belong together on that row. A prose position preserves a
+group only when the source itself states the position as a group. Describe any
 specific unreadable part. This is an explicitly model-read fallback, not native text.
+
+An image position's association_ref is normally null. When a correction expressly
+carries forward an unchanged sample/report association from a supplied native row,
+select that exact table_ref and one-based row. Establish the relationship from the
+operative correction and the visible current and predecessor positions, and cite
+both. Matching identifier text alone does not establish it. The consumer then
+reuses that association's fields: do not retranscribe those fields in the image
+position. Transcribe only additional fields, such as the corrected addressee.
+Do not select an association when its fields have changed or continuity is unresolved;
+retain the current visible values and explain that particular missing connection.
 
 Published addressee positions do not automatically establish current ownership.
 Preserve additional source-attested transfer or verification evidence on its own stated
