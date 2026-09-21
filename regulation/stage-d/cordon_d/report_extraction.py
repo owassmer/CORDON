@@ -424,7 +424,7 @@ def untyped_representation_scopes(reading):
             and len({tables[t] for t in f['applies_to'] if t in tables}) == 1]
 
 
-def unresolved_mark_scopes(reading):
+def unresolved_mark_scopes(reading, native_cells):
     """Row locators of result cells whose trailing printed mark has no scoped note."""
     scopes = []
     seen = set()
@@ -432,9 +432,10 @@ def unresolved_mark_scopes(reading):
         columns = table.get('columns', ())
         for row in table.get('rows', ()):
             for index, (column, cell) in enumerate(zip(columns, row.get('cells', ()))):
-                if column.get('role') != 'result':
+                if column.get('role') != 'result' or 'result_value' in cell:
                     continue
-                text = (cell.get('text') or '').casefold().strip()
+                literal = native_cells[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
+                text = (literal or '').casefold().strip()
                 mark = next((text[-n:] for n in (1, 2, 3) if n < len(text)
                              and re.fullmatch(r'(\*+|[a-z]|\*+[a-z]|[a-z]\*+)', text[-n:])
                              and classify(text[:-n].strip()) != 'unclassified'), None)
@@ -1038,7 +1039,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     logging.getLogger(__name__).info(json.dumps({'document': digest, 'resumed_from': resume_from,
                         'rejected_prior_block': item['targets'], 'cause': str(defect)}))
                     continue
-                if unresolved_mark_scopes(item['reading']):
+                if unresolved_mark_scopes(item['reading'], item['native_cells']):
                     # Retain the fully read block; repair uses it as prior_reading
                     # instead of issuing a fresh first request for its pages.
                     mark_replay.append(item)
@@ -1112,7 +1113,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     if (config.provider in SUBSCRIPTION_PROVIDERS and not blocks and fully_read(reading)
                             and not unattached_sampling_scopes(reading)
                             and not untyped_representation_scopes(reading)
-                            and not unresolved_mark_scopes(reading)):
+                            and not unresolved_mark_scopes(reading, native)):
                         whole = list(range(1, page_count + 1))
                         try:
                             validate_block(reading, targets=whole, page_count=page_count, native_cells=native,
@@ -1158,7 +1159,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                 effort = config.effort
                 sampling_repair = bool(unattached_sampling_scopes(reading)) if prior_block is None else False
                 representation_repair = bool(untyped_representation_scopes(reading)) if prior_block is None else False
-                mark_scopes = unresolved_mark_scopes(reading)
+                mark_scopes = unresolved_mark_scopes(reading, native)
                 mark_repair = bool(mark_scopes)
                 if sampling_repair or representation_repair or mark_repair:
                     # One source reread for a concrete attachment failure. Never
@@ -1224,7 +1225,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     if remaining := unattached_sampling_scopes(reading):
                         reading['issues'].append({'scope': ','.join(remaining),
                             'cause': 'sampling date remains attached only to its section after one source reread; no sample scope established'})
-                    if remaining := unresolved_mark_scopes(reading):
+                    if remaining := unresolved_mark_scopes(reading, native):
                         reading['issues'].append({'scope': ','.join(remaining),
                             'cause': 'result mark note remains unrecovered after one source reread'})
                     reused = repair_id
