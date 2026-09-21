@@ -1028,10 +1028,52 @@ class LiteralReport(unittest.TestCase):
                                               resume_from='prior', execute=False)
                     provider.assert_not_called()
                     saved = json.loads(path.read_text())
-                    self.assertTrue(saved['assembly_complete'])
+                    self.assertFalse(saved['assembly_complete'])
                     self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
                     self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
                     self.assertIn('mark note reread pending:', saved['blocks'][0]['attachment_repair_pending'])
+
+    def test_pending_mark_reread_leaves_assembly_unattested(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import MARK_REPAIR
+        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
+        marked.update(request_sha256='retained-request', context_pages=[1],
+                      supplied_pages=[1], native_regions=[])
+        repaired = copy.deepcopy(marked['reading'])
+        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
+            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
+            'applies_to': ['p1-t1/r1']}]
+        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            prior = store / 'derived/reports/prior' / digest / 'report.json'
+            prior.parent.mkdir(parents=True)
+            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
+                'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=AssertionError('dispatch')) as provider:
+                path = extract_report(digest, store, config=config, budget=None,
+                                      resume_from='prior', execute=False)
+            provider.assert_not_called()
+            saved = json.loads(path.read_text())
+            self.assertFalse(saved['assembly_complete'])
+            self.assertIn('mark note reread pending:', saved['blocks'][0]['attachment_repair_pending'])
+            loaded = report(digest, store, extraction_version=saved['extraction_version'])
+            self.assertNotIsInstance(loaded, UnreadReport)
+            self.assertIs(loaded.assembly_complete, False)
+            self.assertFalse(path.exists() and json.loads(path.read_text()).get('assembly_complete') is True)
+            with patch('cordon_d.report_extraction._subscription_call', return_value=repaired) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 1)
+            self.assertIn(MARK_REPAIR.format(rows='p1-t1/r1'), provider.call_args.kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertNotIn('attachment_repair_pending', saved['blocks'][0])
 
     def test_unresolved_result_mark_remains_after_one_source_reread(self):
         import pymupdf

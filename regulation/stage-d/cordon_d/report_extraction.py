@@ -996,7 +996,9 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
         def save(complete=False):
             write_assembled(target, {'source_sha256': digest, 'extraction_version': revision,
                                'page_count': page_count, 'config': asdict(config),
-                               'assembly_complete': complete, 'blocks': blocks,
+                               'assembly_complete': complete and not any(
+                                   item.get('attachment_repair_pending') for item in blocks),
+                               'blocks': blocks,
                                **({'replayed_from_extraction_version': resume_from} if resume_from else {})}, store, digest)
         save()
         def accept(item):
