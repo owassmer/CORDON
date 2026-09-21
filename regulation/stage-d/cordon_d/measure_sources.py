@@ -2,7 +2,7 @@
 import json
 
 from .source_associations import read_associations, _lines, _orientation
-from .store import blob_path
+from .store import blob_path, file_digest
 
 
 def source_material(sources, store):
@@ -17,13 +17,16 @@ def source_material(sources, store):
     material = {'tables': {}, 'lines': {}, 'images': {}, 'pages': {}}
     associations = []
     for index, digest in enumerate(sources):
+        path = blob_path(store, digest)
+        if file_digest(path) != digest:
+            raise ValueError('Measure source bytes differ from their content address')
         reading = read_associations(digest, store)
         associations.append(reading)
         owned = {(r['page'], r['table'], r['row']): r for r in reading.rows}
         for row in reading.rows:
             for fragment in row.get('continuations', []):
                 owned[(fragment['page'], fragment['table'], fragment['row'])] = row
-        with pymupdf.open(blob_path(store, digest)) as document:
+        with pymupdf.open(path) as document:
             for number, page in enumerate(document, 1):
                 prefix = f'S{index}P{number}'
                 material['pages'][prefix] = {
@@ -82,7 +85,21 @@ def source_material(sources, store):
     return material, tuple(associations)
 
 
-def material_context(material):
+CONTEXT_MARKER = '\nSOURCE ADDRESSES (one-based rows/columns; zero-based word offsets)\n'
+
+
+def _address_values(addresses):
+    """Only values the model selects; geometry remains with native composition."""
+    return {
+        'tables': {ref: dict(cells={key: cell['text'] for key, cell in table['cells'].items()},
+                            rows=table['rows'])
+                   for ref, table in addresses['tables'].items()},
+        'lines': {ref: line['words'] for ref, line in addresses['lines'].items()},
+        'images': sorted(addresses['images']),
+    }
+
+
+def material_addresses(material):
     """References are source addresses, not replacements for printed identifiers."""
     tables = {ref: dict(t, rows=[dict(row, association=(list(row['association']['fields'])
                             if row['association'] else None)) for row in t['rows']])
@@ -95,9 +112,23 @@ def material_context(material):
                and t['bbox'][1] <= (y0+y1)/2 <= t['bbox'][3] for t in tables.values()):
             continue
         lines[ref] = line
-    return '\nSOURCE ADDRESSES (one-based rows/columns; zero-based word offsets)\n' + json.dumps(
-        dict(tables=tables, lines=lines, images=material['images']),
-        ensure_ascii=False, separators=(',', ':'))
+    return _address_values(dict(tables=tables, lines=lines, images=material['images']))
+
+
+def material_context(material):
+    return CONTEXT_MARKER + json.dumps(material_addresses(material),
+                                       ensure_ascii=False, separators=(',', ':'))
+
+
+def context_matches(prompt, material):
+    """Replay both retained address renderings, verifying values rather than verbosity."""
+    if CONTEXT_MARKER not in prompt:
+        return False
+    supplied, _ = json.JSONDecoder().raw_decode(prompt.split(CONTEXT_MARKER, 1)[1])
+    # Earlier requests supplied the same addresses with redundant source boxes.
+    if isinstance(supplied.get('images'), dict):
+        supplied = _address_values(supplied)
+    return supplied == material_addresses(material)
 
 
 def table_fields(material, table_ref, row_number, columns):
@@ -108,6 +139,8 @@ def table_fields(material, table_ref, row_number, columns):
     for role, column in columns.items():
         if role in fields:
             raise ValueError('The association owner already supplies this field')
+        if association and any(f['column'] == column for f in association['fields'].values()):
+            raise ValueError('The association owner already supplies this source column')
         if not 1 <= column <= len(row['cells']):
             raise ValueError('Column outside the source table')
         cell = row['cells'][column - 1]

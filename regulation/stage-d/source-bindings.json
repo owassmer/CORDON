@@ -161,7 +161,7 @@
         "A competent public asset register when the affected parcel is public land"
       ],
       "population": "The addressee positions of an admitted removal measure and its corrections, and the people and parcels reached by an admitted finding.",
-      "reader": "Generic record and document readers; no current source-specific consumer",
+      "reader": "cordon_d.measures supplies source-bound published addressee positions, including shared native cells and qualified correction readings. It does not establish independent title or current standing.",
       "open": "The annex establishes the position the act published for each parcel, not that the named person held the land; an effective correction act replaces the listed position for the parcels it names, with its effect against the corrected recipient following the notice route. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do."
     },
     {

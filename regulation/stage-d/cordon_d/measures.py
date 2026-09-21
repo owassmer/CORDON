@@ -9,7 +9,7 @@ from .evidence import Support
 from .events import AdministrativeEvent
 from .removal_events import act_id
 from .store import blob_path
-from .measure_sources import source_material, material_context, table_fields, native_span
+from .measure_sources import source_material, material_context, context_matches, table_fields, native_span
 
 
 def _object(**properties):
@@ -30,7 +30,8 @@ OPTIONAL_TEXT = {'type': ['string', 'null']}
 CITATION = _object(source=TEXT, page={'type': 'integer', 'minimum': 1},
                    locator=TEXT, quote=TEXT)
 CITATIONS = _array(CITATION)
-FIELD_ROLE = _choice('plant_id', 'municipality', 'sheet', 'parcel', 'addressee')
+FIELD_ROLE = _choice('plant_id', 'reference_plant_id', 'municipality', 'cadastral_section',
+                     'sheet', 'parcel', 'addressee')
 SPAN = _object(line_ref=TEXT, first_word={'type': 'integer', 'minimum': 0},
                end_word={'type': 'integer', 'minimum': 1})
 SCHEMA = _object(
@@ -139,7 +140,7 @@ class MeasureReading:
             return fields.get(role, {}).get('text')
         return dict(occurrence=occurrence, fields=fields, association=association,
                     reference=value('plant_id'), municipality=value('municipality'),
-                    sheet=value('sheet'), parcel=value('parcel'),
+                    cadastral_section=value('cadastral_section'), sheet=value('sheet'), parcel=value('parcel'),
                     addressee_text=value('addressee'), position_scope=scope['meaning'],
                     direction_ids=scope['direction_ids'], support=scope['support'])
 
@@ -308,11 +309,13 @@ def read_measure(sources, store, *, execute=False, review_instruction='', timeou
 def retained_measure(request_id, store):
     """Consume a named interpretation with its original context, without re-extraction."""
     response = read_retained(request_id, store)
-    if response['request']['schema'] != SCHEMA:
-        raise ValueError('Retained interpretation uses a different measure contract')
+    from jsonschema import Draft202012Validator
+    # Additive source roles need not invalidate an otherwise compatible reading.
+    # The old generated-target contract still cannot satisfy this composition.
+    Draft202012Validator(SCHEMA).validate(response['reading'])
     sources = response['request']['sources']
     material, associations = source_material(sources, store)
-    if material_context(material) not in response['request']['prompt']:
+    if not context_matches(response['request']['prompt'], material):
         raise ValueError('Retained interpretation source addresses differ from the current source material')
     _validate_reading(response['reading'], sources, store, material)
     return MeasureReading(response, material, associations)

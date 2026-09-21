@@ -333,14 +333,30 @@ selects row populations, additional field columns, prose spans, directions and
 document-part roles; composition copies native characters and reuses the original
 association object. Shared physical cells and verified split rows retain all their
 fragments. Layout establishes source locations, never operative meaning or time.
+An infected-plant reference printed beside surrounding parcels remains
+`reference_plant_id`, distinct from an ordered plant's `plant_id`; it supplies no
+report association. Additional columns cannot rename or duplicate a column already
+supplied by the association owner.
 Image-only and vector-outlined content uses explicitly model-transcribed positions
 from the full rendered page. Complete source pages remain in every request; native
 addresses supplement them. Municipality mentions and contextual map labels do not
 become ordered targets merely by referring to an operative direction.
+Context documents support the principal act's incorporation without importing
+unaffected predecessor targets into a partial correction. The reading must retain
+both the incorporating clause and the incorporated work and conditions.
+Direction links apply to the position as printed, including its addressee. An old
+position can support the correction without carrying present removal work; that
+work belongs to the operative corrected position. Native composition preserves
+the old name rather than silently replacing it. Distinct performance clocks retain
+their stated scope and anchor; their operative combination belongs to accepted A–C.
 
 `retained_measure` and `scripts/read_measures.py --request` consume a named retained
 interpretation offline, requiring its measure schema and source addresses to match
-the composition contract. This preserves the original interpretation and source
+the composition contract. Native source bytes are hash-checked. Request addresses
+carry cell text, row membership and line words; repeated geometry stays with the
+native composition. Earlier, more verbose address renderings replay against the
+same values, and compatible readings survive additive field roles. This preserves
+the original interpretation and source
 context when the surrounding consumer changes; it does not patch rejected readings
 or silently dispatch a replacement. Source checks remain distinct from qualification.
 Dated actual events use `AdministrativeEvent`; plans, blank forms, other unresolved

@@ -13,7 +13,7 @@ established; no other row is.
 | Which plants or surfaces fall inside C's distance and survey calculations | Monitoring observations, PuntiStampa, land-use or host-bearing surfaces, parcels and other population records required by the calculation | An observation, published point or polygon, parcel, grid cell or host-bearing surface according to its own source | Establish the actual population represented by each source and never substitute positives for all plants |
 | Which cadastral parcel contains or intersects a relevant location | Agenzia delle Entrate and SIT cadastral geometry | One parcel geometry with its cadastral reference | Acquire the reached parcel population and preserve the source identifier; do not infer ownership from geometry. The observation row carries, uninterpreted, the cadastral references the monitoring publisher prints beside the observation: `FOGLIO`, `PARTICELLA` and `COD_COMUNE` on 8,762 records each, `ID_PART` on 8,761, `SEZIONE` on 193. `COD_COMUNE` is the cadastral municipality code (`G187`, `B809`); `COMUNE_COD` is the ISTAT code and is the observation's own administrative location, not a cadastral reference. A parcel string on an observation is not a parcel, and ownership is never inferred from it. |
 | Whether the Osservatorio issued a removal measure and which plants or parcels it covered | Regional removal determination and its incorporated annexes | One adopted act plus its source-defined subject rows | Required population: every Osservatorio determination required by an admitted finding or a reached correction relationship, with consequential incorporated, replacing and supplementary material. No 2024/ST1/municipality exclusion is established. The initial 25 PDF renditions are a processing batch, not coverage of this population. Existing #7 associations supply 183 plant/report links for the three entry acts, including repaired continuations; they do not supply whole-act meaning. The allocated Codex whole-measure reader is undergoing source-to-consumer qualification; population dispatch remains pending. Inspected coverage and unexamined dependencies are stated below under removal measures. |
-| Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. The monitoring stream publishes a `SCELTA_PROPRIETARIO` column on 8,762 records and carries no value in any of them, so it supplies no owner election; the observation row records that. The retained Capurso native register supplies actual publication declarations for six regional removal acts through `cordon_d.removal_events`: DDS 52, 58, 82, 108 and 188/2024 and 22/2025. Five declarations have been positively checked through C’s election boundary using the national calendar baseline; local calendar completeness and recipient effect remain separate. These records do not supply uninterrupted-posting certificates, personal service, PEC delivery, election history or performance. All nine followed regional Albo detail records for the retained search page’s source-stated removal/supplement entries explicitly state publication Conclusa; `regional_publication` supplies their regional start/end declarations through AdministrativeEvent, separately from municipal publication. It uses the labelled adoption number, preserving the different proposal identifier (DDS94 has proposal code 93), registration timestamp and executivity field without promoting them to notice or performance. Triggiano’s reached detail gives a 2031 archive end, not the seven-day publication end; Noicattaro’s reached historical query supplies no admitted order. Bari’s homepage timed out, but its separate Albo was reached: the old archive and current search returned no Xylella result, while the historical mode of the newer service returned HTTP 500. Cagnano Varano’s native historical query supplies nine rows, including four publications linked to removal originals. `notices.parsec_publication_declarations` preserves their separate dates, subjects, requesting offices and original-document routes; act attachment and clock selection await qualified whole-measure readings. Two DDS201/2025 entries, one labelled ERRATA CORRIGE, serve byte-identical PDFs. Their incoming protocols differ; the label alone establishes no amendment or recipient delivery. These query outcomes do not establish source silence or absence of service. |
+| Whether a legally consequential notice, delivery, publication, receipt or response happened | The determination's own text for its declared route; the competent municipality's albo pretorio record for the seven-day publication every plan version requires; BURP and the regional sites the plans name; the Osservatorio's communication record and municipal notification attempts for recipient effect; PEC transmission to ARIF and the Prefettura; ARIF's authenticated election record or the owner's PEC for the response | One event at one time concerning one document, one sender and one recipient under one route; or one publication with its start, continuity and end | Select the source by the route A selects for the act and recipient: completed personal communication, including the code-of-civil-procedure forms for unreachable recipients; mass publicity only where the act establishes that recipient number made personal communication impossible or particularly burdensome; a reasoned immediate-effect clause in a non-sanctioning measure; or cautionary-and-urgent character. An immediate-effect or cautionary clause makes the measure operative; it is not notification, and a clock anchored on notice or publication runs only from that event. A publication record proves the publication duty, and its end date anchors the election window; publication alone establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct. The monitoring stream publishes a `SCELTA_PROPRIETARIO` column on 8,762 records and carries no value in any of them, so it supplies no owner election; the observation row records that. The retained Capurso native register supplies actual publication declarations for six regional removal acts through `cordon_d.removal_events`: DDS 52, 58, 82, 108 and 188/2024 and 22/2025. Five declarations have been positively checked through C’s election boundary using the national calendar baseline; local calendar completeness and recipient effect remain separate. These records do not supply uninterrupted-posting certificates, personal service, PEC delivery, election history or performance. All nine followed regional Albo detail records for the retained search page’s source-stated removal/supplement entries explicitly state publication Conclusa; `regional_publication` supplies their regional start/end declarations through AdministrativeEvent, separately from municipal publication. It uses the labelled adoption number, preserving the different proposal identifier (DDS94 has proposal code 93), registration timestamp and executivity field without promoting them to notice or performance. Triggiano’s reached detail gives a 2031 archive end, not the seven-day publication end. Its retained DDS11 entry concerns 12 February 2026, not the 5 February 2025 correction: it cannot supply the latter’s publication or recipient effect. Historical publication of the 2025 corrections remains unestablished from those captures; Noicattaro’s reached historical query supplies no admitted order. Bari’s homepage timed out, but its separate Albo was reached: the old archive and current search returned no Xylella result, while the historical mode of the newer service returned HTTP 500. Cagnano Varano’s native historical query supplies nine rows, including four publications linked to removal originals. `notices.parsec_publication_declarations` preserves their separate dates, subjects, requesting offices and original-document routes; act attachment and clock selection await qualified whole-measure readings. Two DDS201/2025 entries, one labelled ERRATA CORRIGE, serve byte-identical PDFs. Their incoming protocols differ; the label alone establishes no amendment or recipient delivery. These query outcomes do not establish source silence or absence of service. |
 | Who has the consequential relationship to the affected land | The determination's incorporated annex naming addressees by comune, foglio and particella; later acts that correct listed owners; the Osservatorio's matter and transmitted cadastral and owner data; a competent public-asset register for public land | One addressee position in one act version, or one stated ownership, occupation, management or other legally relevant relationship | The annex establishes the position the act published for each parcel, not that the named person held the land. An effective correction act replaces the listed position for the parcels it names; its effect against the corrected recipient follows the notice route above. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do. The monitoring stream publishes `CUAA` and `AZIENDA` columns on 86 records and carries a sentinel in every one, so it supplies no holder identity; the observation row records that. DDS 11/2025 and 117/2025 originals are retained for source-grounded correction reading; their unpublished underlying correspondence and current standing are not supplied by the public annex names. |
 | Whether an affected plant has protected status | The regional monumental-tree register and the matter's exact plant evidence | One registered or provisional protected-plant occurrence | Match the affected plant and select the status in force at the event time. The observation row carries, uninterpreted, `MONUMENTALE_ARIF` on 586 records — a monitoring publisher's flag beside the observation, not a register entry, and no substitute for matching the plant in the register. |
 | Whether protected status requires another permission for this removal | The exact PPTR/local rule and competent authority decision reached by that plant and intervention | One applicable protection rule or one issued decision | Investigate this only for an affected protected plant; the full Puglia landscape-proceeding catalogue is not the population. The observation row carries, uninterpreted, the landscape and hydrogeological flags the monitoring publisher prints beside the observation: `UCP_PPTR` on 7,078 records, `VINCOLO_IDROGEOLOGICO` on 1,462, `BP_PPTR` on 1,172, `PAI` on 215. A flag is a lead to the applicable rule, never the decision. |
@@ -400,12 +400,10 @@ to the printed 40.42257829 for daily sample 1. The source's daily and laboratory
 remain distinct. No code chooses an identifier namespace or repairs a digit from
 result agreement.
 
-The removal-measure and administrative-event readers (rows 6–8 and 11) are the
-first intended users of the independent Codex document transport described in
-SPEC.md. This supplies subscription access, not their missing whole-measure meaning
-or consumer connections. Their source-specific contract and first full
-source-to-consumer qualification remain with PR #15; no measure-reading coverage
-or production dispatch is established by the transport change.
+The removal-measure reader (rows 6–8 and 11) uses the independent Codex document
+transport described in SPEC.md. Its source-specific contract and qualification
+belong to PR #15; transport availability does not establish source meaning or
+population coverage.
 
 ### Removal measures: required population and present coverage
 
@@ -427,67 +425,50 @@ consequential older or newer acts and events reached from it remain in scope.
 Unrelated new monitoring releases do not silently enlarge that reconciliation.
 This does not narrow the enduring population in the binding.
 
-Inspected coverage is narrower. The initial 25 PDF renditions were retained and
-selected pages read directly, but no established whole-measure extraction exists.
-The earlier local OCR and verb/layout classifications were retired and their
-outputs deleted; they confer no operative or event evidence. Native Capurso JSON
-has been read directly, including its DDS108/2024 multiplex publication, which the
-former scope restriction wrongly omitted. The captured Triggiano register also
-names DDS35/2026, a later ST1 finding measure; its archive end is not a seven-day
-publication end. Working register-to-clock behavior survives this correction.
-
-Local reconciliation against accepted A’s case-delta source references, archive
-originals, acquisition manifests and hash-matched acquisition records retained 18
-additional PDFs without new public acquisition or model calls. These include the
-DDS147/2024–165/2024 amendment pair, DDS173/2025–63/2026 supplement relationship,
-DDS135/2021 containment prescription, DDS51/2023 correction, DDS35/2026, and the
-already published DDS108/2024. Their source headings and byte identities were
-checked; their complete clauses, annex populations and event histories were not.
-The DDS6/2022 heading reaches DDS129/2021, whose original was also reconciled.
-These concrete dependencies are neither a production case list nor evidence that
-all consequential measures have been discovered.
+Inspected coverage is narrower than the required population. Retained headings
+reach the DDS147/2024–165/2024 amendment pair, DDS173/2025–63/2026 supplement,
+DDS135/2021 containment prescription, DDS51/2023 correction, DDS35/2026 and
+DDS108/2024. DDS6/2022 reaches the retained DDS129/2021 original. Their byte
+identities and headings have been checked; their complete clauses, annex
+populations and event histories remain unread. These are consequential pending
+dependencies, not a production case list. Native Capurso JSON has been read,
+including DDS108/2024's multiplex publication. Triggiano's register also names
+DDS35/2026, but its archive end cannot supply the seven-day publication end.
 
 The retained regional Albo search (`19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3`)
 returns 24 rows and reports one page; this is the query's coverage, not the
 historical regional measure population. Its source-stated removal subjects reach
-eight further 2026 originals: seven reconciled from local bytes and DDS95 recovered
-from its recorded BURP URL with an identical archived acquisition hash. None has
+eight further 2026 originals, all retained with verified source hashes. None has
 been read for whole-measure meaning. All nine followed detail records explicitly
 distinguish regional publication completion from adoption, registration and
 executivity. Their regional event declarations are consumable; attachment to a
-whole-measure reading awaits the qualified measure consumer. The remaining page subjects concern other
-source families; their presence does not establish removal work.
+whole-measure reading awaits the qualified measure consumer. The remaining page
+subjects concern other source families; their presence does not establish removal work.
 
-The earlier 25-PDF hold was sequencing, not population acceptance. Owen has now
-authorized the merged PR #17 Codex transport for PR #15: one worker, one complete
-act with necessary annex context per request. Luna-high repeatedly misread identifiers
-and shared cells; prompt and timeout retries did not establish fidelity. The repaired
-contract leaves those native values with the association owner and source cells,
-and assigns administrative scope and relationships to interpretation. Astra-medium
-now passes DDS58's five-target, shared-addressee, report-link and municipal election
-clock checks against independent source readings. Contextual map positions remain
-available without becoming extra ordered targets. DDS74's independently viewed split
-addressee composes into one association with both name fragments; that verifies native
-composition, not its complete act meaning. Prose corrections and rendered-page-only
-annexes remain under qualification before population dispatch. Other retained
-originals remain unextracted; the Claude allocation and its readers are untouched.
-The established extraction approach must recover source meaning and relationships,
-with native characters copied only where their attachment is supported. Ordinary
-consumption remains deterministic and offline.
+The allocated reader uses one Codex worker, one complete act with necessary annex
+context per request. Native identifiers and shared cells stay with the association
+owner and source addresses; administrative scope and relationships are proposed by
+interpretation. The retained DDS58 reading passes independent checks of its five
+targets, shared addressees, report links and municipal election clock. Contextual
+map positions remain available without becoming extra ordered targets. DDS74's
+independently viewed split addressee composes into one association with both name
+fragments; that verifies native composition, not its complete act meaning. DDS43's
+printed cadastral section and surrounding-plant references retain their distinct
+roles. Prose corrections and rendered-page-only annexes remain under qualification
+before population dispatch. Ordinary consumption is deterministic and offline.
 
-Retained-byte reconciliation now covers the 325 acquisition-metadata entries and
+Retained-byte reconciliation covers the 325 acquisition-metadata entries and
 216 additional regional-directory originals in the provenance archive. Bytes were
 located for 132 metadata entries; 193 metadata entries have no located local
 original in that reconciliation. The latter are acquisition claims, not acquired
 sources or established access failures. All 348 located originals were inspected
 for identity and subject, and all 129 rows of the retained native regional
 publisher catalogue were read. The legacy title-classified removal CSV was not
-accepted as legal meaning or coverage. This pass retained 188 additional removal
-renditions from existing bytes. Together with the earlier 51 and three distinct
-Cagnano municipal renditions, the removal source store holds 242 PDF renditions.
-These are source candidates and copies, not 242 admitted proceedings or completed
-measure readings. Area acts, plans and unrelated financial proceedings do not
-become removal evidence by appearing in the same archive.
+accepted as legal meaning or coverage. The removal source store holds 242 PDF
+renditions, including three distinct Cagnano municipal renditions. These are source
+candidates and copies, not 242 admitted proceedings or completed measure readings.
+Area acts, plans and unrelated financial proceedings do not become removal
+evidence by appearing in the same archive.
 
 The complete finding-to-measure and incorporated-target reconciliation is still
 unestablished: it depends on whole-measure and annex meaning, not just these
