@@ -69,9 +69,22 @@ coordinate frame of the monitoring degree columns that check is
 the readings and runs it. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
-and typed readings remain Parquet keyed by source hash and reader version.
-Reports use compact JSON blocks and an assembled reading under source hash and
-extraction version. Exact-request raw model responses are cached separately so a
+and typed readings remain Parquet keyed by source hash and reader version. The
+grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
+`(url, view, sha256)` sequence of retained releases, the reader version and the
+DuckDB version. Reports use compact JSON blocks and an assembled reading under
+source hash and extraction version. Each native identifier cell of that assembled
+reading carries one regenerable record holding the positioned reading of the cell,
+the source cell bounds and what the geometry read found. For an unchanged cell
+that positioned reading is the cell's own text, and it is what the read path
+compares against. The read path establishes that the stored positioned text has
+not diverged in content from that retained cell, and refuses a reading whose
+native identifier cell carries no record until it is reassembled; that the stored
+order is the source order is established only at assembly under the extraction
+version. The moved byte check has a cost: an inventory-preserving corruption of
+the retained native cell is not detected on read, because the comparison against
+the source cell runs at assembly under the extraction version.
+Exact-request raw model responses are cached separately so a
 changed deterministic projection can reuse them without another paid call.
 Model, prompt, page/context images, rendering settings and code version are named;
 no join change invalidates extraction. For an annotated result, the source reader may return `result_value` and `annotation` alongside the complete cell. Their concatenation must reproduce the cell (with only whitespace variation), and `result_value` is allowed only in a result column. Polarity is projected from that supported component; the original literal and precisely scoped qualifications remain available. The projection never strips presumed footnote suffixes on its own. `extract_report(resume_from=...)` can retain validated, fully read page blocks from an explicitly selected prior version and request only uncovered pages. It preserves those blocks and their original request identifiers; a smaller configured page width applies only to the remaining reading. Incomplete page blocks are reread, and continuation-only repairs retain their separate existing entry point. These are caches, not owners. Deleting

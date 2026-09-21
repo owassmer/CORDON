@@ -831,11 +831,120 @@ def _member_from_row(row: dict) -> Member:
                   _pairs(row.get('carried')), _pairs(row.get('causes'), 'cause'))
 
 
+def _grouping_key(root: Path) -> str:
+    """Digest of the ordered release sequence, this reader, and the DuckDB that groups it."""
+    import duckdb
+    digest = sha256()
+    for release in releases(root):
+        digest.update(release.url.encode())
+        digest.update(b'\0')
+        digest.update(release.view.encode())
+        digest.update(b'\0')
+        digest.update(release.digest.encode())
+        digest.update(b'\n')
+    digest.update(reader_version().encode())
+    digest.update(b'\0')
+    digest.update(duckdb.__version__.encode())
+    return digest.hexdigest()
+
+
+_GROUPED_SQL = (
+    'WITH r AS NOT MATERIALIZED (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
+    '           FROM read_parquet($files, filename = true) p JOIN ordering o USING (filename)), '
+    'reused AS (SELECT release, view, reference, day FROM r '
+    '           WHERE reference IS NOT NULL AND day IS NOT NULL '
+    '           GROUP BY release, view, reference, day HAVING SUM(CASE WHEN restates THEN 0 ELSE 1 END) > 1) '
+    'SELECT r.*, CASE WHEN u.reference IS NULL AND r.day IS NOT NULL THEN r.reference END AS ref, '
+    '       u.reference IS NOT NULL AS reused '
+    'FROM r LEFT JOIN reused u ON u.release = r.release AND u.view = r.view '
+    '                          AND u.reference = r.reference AND u.day = r.day '
+    'ORDER BY ref NULLS FIRST, r.day NULLS FIRST, seq')
+
+
+def _write_grouped(store: Path, files, target: Path) -> None:
+    import duckdb
+    connection = duckdb.connect()
+    # Bounded by construction: two whole-population passes must fit beside each
+    # other on an 8 GiB machine, so each spills to disk instead of taking 80% of RAM.
+    spill = Path(tempfile.mkdtemp(prefix='cordon-duckdb-', dir=store))
+    connection.execute("SET memory_limit = '1.5GB'")
+    connection.execute('SET threads = 2')
+    connection.execute(f"SET temp_directory = '{spill}'")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    handle, temporary = tempfile.mkstemp(dir=target.parent, prefix='.tmp-')
+    os.close(handle)
+    temporary = Path(temporary)
+    try:
+        connection.execute('CREATE TABLE ordering (filename VARCHAR, release_index BIGINT)')
+        connection.executemany('INSERT INTO ordering VALUES (?, ?)', [(name, index) for index, name in files])
+        path = str(temporary).replace("'", "''")
+        connection.execute(f"COPY ({_GROUPED_SQL}) TO '{path}' (FORMAT PARQUET, COMPRESSION ZSTD)",
+                           {'files': [name for _, name in files]})
+        os.chmod(temporary, 0o444)
+        os.replace(temporary, target)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+        connection.close()
+        shutil.rmtree(spill, ignore_errors=True)
+
+
+def _observations_from_rows(rows):
+    current, members = None, []
+    for row in rows:
+        item = _member_from_row(row)
+        reference, day = row['ref'], row['day']
+        if reference is None:
+            if members:
+                yield DistinctObservation(current[0], current[1], tuple(members))
+                current, members = None, []
+            because = ('reference reused within its publishing view on this day' if row['reused']
+                       else 'no observation day' if day is None else 'no publisher reference')
+            yield DistinctObservation(None, day, (item,), because)
+            continue
+        if (reference, day) != current:
+            if members:
+                yield DistinctObservation(current[0], current[1], tuple(members))
+            current, members = (reference, day), []
+        members.append(item)
+    if members:
+        yield DistinctObservation(current[0], current[1], tuple(members))
+
+
+def _sweep_grouped(target: Path, keep: int = 3) -> None:
+    """Retire the oldest grouped files, keeping the newest few.
+
+    A grouped file under another key belongs to another release sequence, reader or
+    DuckDB, which a concurrent lane may be streaming; it is never opened here and
+    costs six minutes to rebuild, so age alone retires it.
+    """
+    dated = []
+    for path in target.parent.glob('*.parquet'):
+        try:
+            dated.append((path.stat().st_mtime, path.name, path))
+        except FileNotFoundError:  # another lane retired it first
+            continue
+    for _, _, path in sorted(dated, reverse=True)[keep:]:
+        path.unlink(missing_ok=True)
+
+
+def _read_grouped(reader):
+    columns = None
+    def rows():
+        nonlocal columns
+        for batch in reader.iter_batches(batch_size=50000):
+            columns = batch.column_names
+            for values in zip(*(batch.column(name).to_pylist() for name in columns)):
+                yield dict(zip(columns, values))
+    yield from _observations_from_rows(rows())
+
+
 def distinct_observations(root: Path):
     """Group the whole stream by publisher reference and observation day.
 
     `root` is the monitoring source root, as `releases` takes it. Reads the derived
-    readings of every retained release through DuckDB, in stream order. Yields one group
+    readings of every retained release through DuckDB, in stream order, once per
+    population key, and streams the grouped Parquet thereafter. Yields one group
     per (reference, day) across all releases and views, and every uncorrelatable
     observation alone.
 
@@ -844,60 +953,20 @@ def distinct_observations(root: Path):
     is a counter, not an identifier, and those rows stay uncorrelated. Only a
     duplicate-labelled row may share the reference of the positive it restates.
     """
-    import duckdb
+    import pyarrow
+    import pyarrow.parquet as parquet
     store = ingest(root)
     version = reader_version()
     files = [(index, str(_ensure_derived(store, release, version)[1]))
              for index, release in enumerate(releases(root))]
-    connection = duckdb.connect()
-    # Bounded by construction: two whole-population passes must fit beside each
-    # other on an 8 GiB machine, so each spills to disk instead of taking 80% of RAM.
-    spill = Path(tempfile.mkdtemp(prefix='cordon-duckdb-', dir=store))
-    connection.execute("SET memory_limit = '1.5GB'")
-    connection.execute('SET threads = 2')
-    connection.execute(f"SET temp_directory = '{spill}'")
-    try:
-        connection.execute('CREATE TABLE ordering (filename VARCHAR, release_index BIGINT)')
-        connection.executemany('INSERT INTO ordering VALUES (?, ?)', [(name, index) for index, name in files])
-        cursor = connection.execute(
-            'WITH r AS NOT MATERIALIZED (SELECT p.*, o.release_index * 4294967296 + p.ordinal AS seq '
-            '           FROM read_parquet($files, filename = true) p JOIN ordering o USING (filename)), '
-            'reused AS (SELECT release, view, reference, day FROM r '
-            '           WHERE reference IS NOT NULL AND day IS NOT NULL '
-            '           GROUP BY release, view, reference, day HAVING SUM(CASE WHEN restates THEN 0 ELSE 1 END) > 1) '
-            'SELECT r.*, CASE WHEN u.reference IS NULL AND r.day IS NOT NULL THEN r.reference END AS ref, '
-            '       u.reference IS NOT NULL AS reused '
-            'FROM r LEFT JOIN reused u ON u.release = r.release AND u.view = r.view '
-            '                          AND u.reference = r.reference AND u.day = r.day '
-            'ORDER BY ref NULLS FIRST, r.day NULLS FIRST, seq', {'files': [name for _, name in files]})
-        columns = [description[0] for description in cursor.description]
-        current, members = None, []
-        while True:
-            batch = cursor.fetchmany(50000)
-            if not batch:
-                break
-            for values in batch:
-                row = dict(zip(columns, values))
-                item = _member_from_row(row)
-                reference, day = row['ref'], row['day']
-                if reference is None:
-                    if members:
-                        yield DistinctObservation(current[0], current[1], tuple(members))
-                        current, members = None, []
-                    because = ('reference reused within its publishing view on this day' if row['reused']
-                               else 'no observation day' if day is None else 'no publisher reference')
-                    yield DistinctObservation(None, day, (item,), because)
-                    continue
-                if (reference, day) != current:
-                    if members:
-                        yield DistinctObservation(current[0], current[1], tuple(members))
-                    current, members = (reference, day), []
-                members.append(item)
-        if members:
-            yield DistinctObservation(current[0], current[1], tuple(members))
-    finally:
-        connection.close()
-        shutil.rmtree(spill, ignore_errors=True)
+    target = derived_path(store, 'monitoring/groups', _grouping_key(root), version)
+    try:  # open the file itself: an absent or unreadable one is regenerated, not raced
+        reader = parquet.ParquetFile(target)
+    except (OSError, pyarrow.ArrowInvalid):
+        _write_grouped(store, files, target)
+        _sweep_grouped(target)
+        reader = parquet.ParquetFile(target)
+    yield from _read_grouped(reader)
 
 
 # --- the shapes C's entry points take ------------------------------------------
