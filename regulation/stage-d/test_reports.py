@@ -60,6 +60,38 @@ def block(rows):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):
+        item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024'],
+                      ['B', '01/06/2024', 'non rilevato†', '02/06/2024']])
+        for raw, value, mark in zip(item['reading']['tables'][0]['rows'],
+                                    ['rilevato', 'non rilevato'], ['*', '†']):
+            raw['cells'][2].update(result_value=value, annotation=mark)
+        item['reading']['facts'] = [dict(id='f1', role='qualification', page=1,
+            locator='footnote', section=None, text='* Non-accredited test', value=None,
+            applies_to=['p1-t1/r1/c3'])]
+        rows = materialize('source', 'v', 1, [item]).rows
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'not-detected'])
+        self.assertEqual([r.results[0].text for r in rows], ['rilevato*', 'non rilevato†'])
+        self.assertEqual(rows[0].cells[2]['result_value'], 'rilevato')
+        self.assertEqual([f['text'] for f in rows[0].facts], ['* Non-accredited test'])
+        self.assertEqual(rows[0].facts[0]['applies_to'], ['p1-t1/r1/c3'])
+        self.assertEqual(rows[1].facts, ())
+        # With no reader-supplied decomposition, punctuation is not stripped.
+        del item['reading']['tables'][0]['rows'][0]['cells'][2]['result_value']
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+
+    def test_result_components_require_supported_literal_and_result_column(self):
+        for value, mark, index in [('non rilevato', '*', 2), ('rilevato', '', 2),
+                                   ('', 'rilevato*', 2), ('A', '', 0)]:
+            with self.subTest(value=value, mark=mark, index=index):
+                item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024']])
+                item['reading']['tables'][0]['rows'][0]['cells'][index].update(result_value=value, annotation=mark)
+                with self.assertRaises(ValueError):
+                    materialize('source', 'v', 1, [item])
+        item = block([['A', '01/06/2024', '* non rilevato', '02/06/2024']])
+        item['reading']['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'not-detected')
+
     def test_explicit_unavailable_date_is_not_a_transcription_failure(self):
         item = block([['x', 'non disponibile', 'Positivo', '02/03/2024']])
         row = materialize('hash', 'v', 1, [item]).rows[0]
@@ -91,9 +123,92 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(literal_date('29/02/15', year_context=((2015, 'issue'),)).cause,
                          'invalid_calendar_date')
 
+    def test_italian_sampling_dates_preserve_agreement_and_real_conflict(self):
+        for text, day in [('12 novembre 2021', '12/11/2021'),
+                          ('25 Marzo 2017', '25/03/2017'),
+                          ('25 agosto 2022', '26/08/2022')]:
+            with self.subTest(text=text):
+                item = block([['x', day, 'Positivo', '01/12/2024']])
+                item['reading']['facts'] = [dict(id='sampling', role='sampling_date', page=1,
+                    locator='cover sampling statement', text=text, value=text, applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.sampling_dates[1].text, text)
+                if text == '25 agosto 2022':
+                    self.assertIsNone(row.sampling_date)
+                    self.assertEqual(row.date_cause, 'conflicting sampling-date values')
+                else:
+                    self.assertEqual(row.sampling_date, literal_date(day).value)
+                    self.assertIsNone(row.date_cause)
+
+    def test_missing_spelled_year_requires_unique_scoped_source_support(self):
+        item = block([['x', '29 gennaio', 'Positivo', '01/02/2015']])
+        fact = dict(id='sampling', role='sampling_date', page=1, locator='annex heading',
+                    text='29/01/2015', value='29/01/2015', applies_to=['report'])
+        item['reading']['facts'] = [fact]
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertEqual(row.sampling_date.isoformat(), '2015-01-29')
+        self.assertEqual(row.sampling_dates[0].text, '29 gennaio')
+        self.assertEqual(row.sampling_dates[0].year_support, ('b1/sampling',))
+        for facts in ([], [dict(fact, applies_to=['other-table'])],
+                      [fact, dict(fact, id='other', text='29/01/2016', value='29/01/2016')]):
+            item['reading']['facts'] = facts
+            row = materialize('hash', 'v', 1, [item]).rows[0]
+            self.assertIsNone(row.sampling_date)
+            self.assertIn('year_not_established_by_source_context', row.date_cause)
+
+    def test_ranges_and_lists_constrain_but_never_supply_exact_sampling_day(self):
+        for text, accepted, rejected in [('4-6 Aprile', '05/04/2017', '07/04/2017'),
+                                         ('4 e 6 aprile 2017', '06/04/2017', '05/04/2017')]:
+            with self.subTest(text=text):
+                item = block([['x', text, 'Positivo', '10/04/2017']])
+                item['reading']['facts'] = [dict(id='issue', role='report_date', page=1,
+                    locator='dateline', text='24/5/2017', value='24/5/2017', applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertIsNone(row.sampling_date)
+                self.assertIn('does not establish an exact day', row.date_cause)
+                constraint = row.sampling_dates[0]
+                self.assertEqual(constraint.text, text)
+                self.assertIsNone(constraint.value)
+                if text == '4-6 Aprile':
+                    self.assertEqual(constraint.year_support, ('b1/issue',))
+                    self.assertEqual(tuple(d.isoformat() for d in constraint.date_range),
+                                     ('2017-04-04', '2017-04-06'))
+                else:
+                    self.assertEqual(tuple(d.isoformat() for d in constraint.listed_dates),
+                                     ('2017-04-04', '2017-04-06'))
+                for day in (accepted, rejected):
+                    item['reading']['facts'] = item['reading']['facts'][:1] + [dict(
+                        id='exact', role='sampling_date', page=1, locator='sample date',
+                        text=day, value=day, applies_to=['report'])]
+                    row = materialize('hash', 'v', 1, [item]).rows[0]
+                    if day == accepted:
+                        self.assertEqual(row.sampling_date, literal_date(day).value)
+                        self.assertIsNone(row.date_cause)
+                    else:
+                        self.assertIsNone(row.sampling_date)
+                        self.assertEqual(row.date_cause, 'conflicting sampling-date values')
+
+    def test_invalid_unparsed_and_unsupported_date_constraints_stay_unresolved(self):
+        for text, cause in [('29 febbraio 2023', 'invalid_calendar_date'),
+                            ('28-31 febbraio 2024', 'invalid_calendar_date'),
+                            ('6-4 aprile 2017', 'invalid_date_range'),
+                            ('5/140/2017', 'unparsed_date_literal'),
+                            ('4 aprile - 6 maggio 2017', 'unparsed_date_literal')]:
+            with self.subTest(text=text):
+                item = block([['x', '05/04/2017', 'Positivo', '10/04/2017']])
+                item['reading']['facts'] = [dict(id='sampling', role='sampling_date', page=1,
+                    locator='cover sampling statement', text=text, value=text, applies_to=['report'])]
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.sampling_dates[1].text, text)
+                self.assertIsNone(row.sampling_date)
+                self.assertEqual(row.date_cause, cause)
+
     def test_native_identifier_uses_source_geometry_and_preserves_original(self):
         import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
         with TemporaryDirectory() as temporary:
+            store = Path(temporary)
             path = Path(temporary) / 'source.pdf'
             with pymupdf.open() as document:
                 page = document.new_page()
@@ -104,17 +219,97 @@ class LiteralReport(unittest.TestCase):
                                        ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
                     page.insert_text(position, text, fontsize=11)
                 document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            source = store / 'blobs' / 'sha256' / digest[:2] / digest
             item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
             item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
             item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
-            before = materialize('hash', 'v', 1, [item])
-            after = positioned_identifiers(before, path)
+            before = materialize(digest, 'v', 1, [item])
+            after = positioned_identifiers(before, source)
             self.assertEqual(after.rows[0].reference, 'A_ B')
+            self.assertEqual(after.rows[0].cells[0]['basis'],
+                             'native cell geometry order; identical non-whitespace character inventory')
             self.assertEqual(after.rows[0].cells[0]['native_text'], 'A B\n_')
             self.assertEqual(before.rows[0].reference, 'A B\n_')
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            loaded = report(digest, store, extraction_version='v')
+            self.assertEqual(loaded.rows[0].reference, 'A_ B')
+            payload = json.loads(target.read_text())
+            payload['blocks'][0]['native_cells']['p1-t1-r1-c1']['text'] = 'A B\n_X'
+            target.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
+                report(digest, store, extraction_version='v')
             item['native_cells']['p1-t1-r1-c1']['text'] = 'different source'
             with self.assertRaisesRegex(ValueError, 'differs from its source cell'):
-                positioned_identifiers(materialize('hash', 'v', 1, [item]), path)
+                write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                         'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+
+    def test_unreordered_positioned_identifier_keeps_native_copy_basis(self):
+        import pymupdf
+        with TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), '00123'), ((105, 60), 'X'),
+                                       ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': '00123', 'page': 1}
+            after = positioned_identifiers(materialize('hash', 'v', 1, [item]), path)
+            cell = after.rows[0].cells[0]
+            self.assertEqual(cell['text'], '00123')
+            self.assertNotIn('native_text', cell)  # nothing changed; there is no second reading
+            self.assertEqual(cell['basis'], 'native_cell_copy')
+            self.assertEqual(cell['check'], 'geometry order agrees with the native cell')
+
+    def test_check_says_what_the_geometry_read_found_in_each_of_its_four_outcomes(self):
+        from cordon_d.reports import _geometry_outcome
+        self.assertEqual(_geometry_outcome('A_ B', 'A B\n_'),
+                         'geometry order applied; inventory identical')
+        self.assertEqual(_geometry_outcome('00123', '00123'),
+                         'geometry order agrees with the native cell')
+        self.assertEqual(_geometry_outcome('', '1334933'),
+                         'geometry recovered no comparable text; native cell retained')
+        self.assertEqual(_geometry_outcome('  \n ', '1334933'),
+                         'geometry recovered no comparable text; native cell retained')
+        # A clip that read other text is a disagreement, not an absence: the remedies differ.
+        self.assertEqual(_geometry_outcome('1943754\ni it CNR IPSP', '1943754'),
+                         'geometry read disagrees with the retained cell; native cell retained')
+
+    def test_a_divergent_geometry_read_keeps_the_native_cell_and_records_what_it_read(self):
+        import pymupdf
+        from cordon_d.reports import positioned_identifier_records
+        with TemporaryDirectory() as temporary:
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                # 'Y' sits in the row below, but its glyph box reaches into the cell's bounds.
+                for position, text in [((50, 60), '00123'), ((105, 60), 'X'),
+                                       ((50, 78), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': '00123', 'page': 1}
+            reading = materialize('hash', 'v', 1, [item])
+            record, = positioned_identifier_records(reading, path)
+            self.assertEqual(record['check'],
+                             'geometry read disagrees with the retained cell; native cell retained')
+            self.assertEqual(record['text'], '00123')
+            self.assertEqual(record['geometry_text'], '00123\nY')
+            cell = positioned_identifiers(reading, path).rows[0].cells[0]
+            self.assertEqual(cell['text'], '00123')
+            self.assertNotIn('native_text', cell)
 
     def test_invalid_date_retains_literal_and_does_not_become_a_result(self):
         reading = materialize('hash', 'v', 1, [block([['00123', '29/02/2023', 'Positivo', '01/03/2023']])])
@@ -270,6 +465,51 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaises(ValueError):
                 record_rows(invalid)
 
+    def test_fragment_only_table_and_explicit_split_field_reach_ordinary_consumers(self):
+        from copy import deepcopy
+        from dataclasses import replace
+        from cordon_d.reports import record_rows
+        from cordon_d.findings import _host_relation
+        item = block([['00123', '01/06/2024', 'Negativo', '02/06/2024']])
+        data = item['reading']
+        head = data['tables'][0]
+        head['columns'].append({'role': 'host', 'heading': ['Host']})
+        head['rows'][0]['cells'].append({'text': 'Asparagus'})
+        tail = deepcopy(head)
+        tail.update(id='tail', page=2, columns=[head['columns'][-1]],
+                    rows=[{'id': 'r1', 'cells': [{'text': 'acutifolius'}]}])
+        data['tables'].append(tail)
+        data['pages'].append({'page': 2, 'disposition': 'read'})
+        item['targets'].append(2)
+        row_scope = head['id'] + '/' + head['rows'][0]['id']
+        relation = {'role': 'record_continuation', 'text': '00123', 'value': '00123',
+                    'page': 1, 'locator': row_scope + '/c1',
+                    'applies_to': [row_scope, 'tail/r1']}
+        data['facts'].append(relation)
+        raw = materialize('hash', 'v', 2, [item])
+        self.assertEqual(len(raw.rows), 2)  # Fragment has neither identifier nor result.
+        with self.assertRaisesRegex(ValueError, 'conflicting fields'):
+            record_rows(raw)
+        field = dict(relation, role='field_continuation',
+                     applies_to=[row_scope + '/c5', 'tail/r1/c1'])
+        complete = replace(raw, facts=(*raw.facts, field))
+        row, = record_rows(complete)
+        host, = [c for c in row.cells if c['role'] == 'host']
+        self.assertEqual(host['text'], 'Asparagus acutifolius')
+        self.assertEqual([c['text'] for c in host['source_fragments']], ['Asparagus', 'acutifolius'])
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Asparagus acutifolius'}}}),
+                         'agrees on printed host')
+        self.assertEqual(row.results, raw.rows[0].results)
+        self.assertEqual(complete.rows, raw.rows)
+        for invalid in (dict(field, applies_to=[row_scope + '/c5', 'missing']),
+                        dict(field, value='another'), dict(field, page=2),
+                        dict(field, applies_to=[row_scope + '/c5'] * 2)):
+            with self.assertRaises(ValueError):
+                record_rows(replace(raw, facts=(*raw.facts, invalid)))
+        # Neither equal headings nor an unbound fragment creates a sample row.
+        data['facts'].remove(relation)
+        self.assertEqual(len(materialize('hash', 'v', 2, [item]).rows), 1)
+
     def test_swapped_source_headers_require_a_new_reader_binding(self):
         import pymupdf
         from dataclasses import replace
@@ -422,6 +662,13 @@ class LiteralReport(unittest.TestCase):
             rows = record_rows(materialize(digest, 'v', 1, saved['blocks']))
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0].results[0].kind, 'positive')
+            with patch('cordon_d.report_extraction._subscription_call') as call:
+                replay = extract_report(digest, store, resume_from=saved['extraction_version'],
+                    config=ExtractionConfig(provider='subscription', target_pages=1), budget=None, execute=False)
+            call.assert_not_called()
+            rebuilt = json.loads(replay.read_text())
+            self.assertTrue(rebuilt['assembly_complete'])
+            self.assertEqual(record_rows(materialize(digest, 'v', 1, rebuilt['blocks'])), rows)
 
     def test_unbound_continuation_returns_to_established_reader(self):
         import pymupdf
@@ -439,7 +686,7 @@ class LiteralReport(unittest.TestCase):
         data['pages'].append({'page': 2, 'disposition': 'read'})
         data['facts'] = [{'id': 'continued', 'role': 'record_continuation',
                           'page': 1, 'locator': 'header', 'text': '00123', 'value': '00123',
-                          'applies_to': ['p1-t1/r1', 'missing-part']}]
+                          'applies_to': ['p1-t1/r1', 'p2-tail/r9']}]
         repaired = copy.deepcopy(data)
         repaired['facts'][0]['applies_to'][-1] = 'p2-tail/r1'
         with TemporaryDirectory() as directory:
@@ -773,6 +1020,33 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(literal_date('29/02/2023').cause, 'invalid_calendar_date')
         self.assertEqual(literal_date('last Tuesday').cause, 'unparsed_date_literal')
 
+    def test_printed_mark_classifies_only_through_its_recovered_note(self):
+        # CNR prints "non rilevato*" with "*Prova non accreditata da Accredia." below the table.
+        item = block([['123', '02/06/2024', 'non rilevato*', '03/06/2024'],
+                      ['124', '02/06/2024', 'rilevatoa', '03/06/2024'],
+                      ['125', '02/06/2024', 'Positivo**', '03/06/2024']])
+        item['reading']['facts'] = [
+            {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': '*Prova non accreditata da Accredia.', 'value': None, 'applies_to': ['p1-t1/r1']},
+            {'id': 'f2', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': "a L'esito si riferisce a ciascun campione suddiviso in aliquote.", 'value': None,
+             'applies_to': ['p1-t1/c3']}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        first, second, third = (row.results[0] for row in rows)
+        self.assertEqual((first.kind, first.text, first.cause), ('not-detected', 'non rilevato*', None))
+        self.assertIn('f1', {f['id'].split('/')[-1] for f in rows[0].facts})
+        self.assertEqual((second.kind, second.text), ('detected', 'rilevatoa'))
+        # A mark no recovered note explains keeps the result unclassified and says why.
+        self.assertEqual((third.kind, third.cause), ('unclassified', 'printed mark; note not recovered by the reading'))
+        # A note is never a licence to strip: a bare literal without a mark is untouched, and a
+        # word that merely ends in the marker letter is not a marked result.
+        item = block([['126', '02/06/2024', 'rilevata', '03/06/2024'], ['127', '02/06/2024', 'Sospetto', '03/06/2024']])
+        item['reading']['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                     'text': 'a nota', 'value': None, 'applies_to': ['report']}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
+        self.assertIsNone(rows[1].results[0].cause)
+
     def test_an_omitted_detected_table_cannot_claim_page_coverage(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
         item['native_regions'] = [{'id': 'n1', 'page': 1}]
@@ -784,6 +1058,181 @@ class LiteralReport(unittest.TestCase):
             materialize('hash', 'v', 1, [item])
         item['reading']['pages'][0]['disposition'] = 'partly_read'
         self.assertEqual(materialize('hash', 'v', 1, [item]).complete_pages, frozenset())
+
+
+    def test_tampered_native_identifier_on_assembled_reading_is_refused(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            self.assertTrue(payload.get('positioned_identifiers'))
+            payload['blocks'][0]['native_cells']['p1-t1-r1-c1']['text'] = 'A B\n_X'
+            target.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
+                report(digest, store, extraction_version='v')
+
+    def test_tampered_unreordered_native_identifier_on_assembled_reading_is_refused(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), '00123'), ((105, 60), 'X'),
+                                       ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['00123', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': '00123', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            record, = payload['positioned_identifiers']
+            # The positioned reading of an unchanged cell is that cell's text, and the
+            # read path compares against it; the majority of positioned cells are these.
+            self.assertEqual(record['text'], '00123')
+            self.assertEqual(record['check'], 'geometry order agrees with the native cell')
+            self.assertEqual(report(digest, store, extraction_version='v').rows[0].reference, '00123')
+            payload['blocks'][0]['native_cells']['p1-t1-r1-c1']['text'] = '00124'
+            target.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'does not conserve its retained native cell'):
+                report(digest, store, extraction_version='v')
+
+    def test_a_native_identifier_cell_whose_record_was_removed_is_refused(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            self.assertEqual([sorted(record) for record in payload['positioned_identifiers']],
+                             [['check', 'locator', 'source_bbox', 'text']])
+            self.assertEqual(report(digest, store, extraction_version='v').rows[0].reference, 'A_ B')
+            for absent in ([], None):  # the reading carries the key; its records were removed
+                payload['positioned_identifiers'] = absent
+                target.write_text(json.dumps(payload))
+                with self.assertRaisesRegex(ValueError, 'without a positioned record'):
+                    report(digest, store, extraction_version='v')
+
+    def test_a_reading_assembled_before_positioned_identifiers_reads_as_unread(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.reports import reports
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'A B\n_', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                     'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+            payload = json.loads(target.read_text())
+            # An earlier retained version carries no such key at all: unread, not fatal.
+            del payload['positioned_identifiers']
+            target.write_text(json.dumps(payload))
+            unread = report(digest, store, extraction_version='v')
+            self.assertEqual(unread, UnreadReport(digest, 'assembled before positioned identifiers '
+                                                          'were derived; reassemble at this extraction version'))
+            root = store / 'reports'
+            root.mkdir()
+            (root / 'records.json').write_text(json.dumps([
+                {'url': 'https://publisher.example/a.pdf', 'captured_at': '2026-01-01T00:00:00+00:00',
+                 'sha256': digest},
+                {'url': 'https://publisher.example/b.pdf', 'captured_at': '2026-01-02T00:00:00+00:00',
+                 'sha256': 'f' * 64}]))
+            self.assertEqual([read.cause for read in reports(root, store, extraction_version='v')],
+                             [unread.cause, 'declared source bytes unavailable'])
+
+    def test_retained_cell_that_disagrees_with_source_is_refused_on_assembly(self):
+        import pymupdf
+        from cordon_d.report_extraction import write_assembled
+        from cordon_d.store import put_bytes
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            path = Path(temporary) / 'source.pdf'
+            with pymupdf.open() as document:
+                page = document.new_page()
+                page.draw_rect((40, 40, 150, 100))
+                page.draw_line((40, 70), (150, 70))
+                page.draw_line((95, 40), (95, 100))
+                for position, text in [((50, 60), 'A'), ((64, 60), 'B'), ((57, 61.5), '_'),
+                                       ((105, 60), 'X'), ((50, 90), 'Y'), ((105, 90), 'Z')]:
+                    page.insert_text(position, text, fontsize=11)
+                document.save(path)
+            digest = put_bytes(store, path.read_bytes())
+            item = block([['ignored', '01/06/2024', 'Positivo', '02/06/2024']])
+            item['reading']['tables'][0]['rows'][0]['cells'][0] = {'native_cell': 'p1-t1-r1-c1'}
+            item['native_cells']['p1-t1-r1-c1'] = {'text': 'different source', 'page': 1}
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            with self.assertRaisesRegex(ValueError, 'Retained native identifier differs from its source cell'):
+                write_assembled(target, {'source_sha256': digest, 'extraction_version': 'v',
+                                         'page_count': 1, 'assembly_complete': True, 'blocks': [item]}, store, digest)
+
+    def test_write_assembled_refuses_a_payload_under_another_extraction_version(self):
+        from cordon_d.report_extraction import write_assembled
+        with TemporaryDirectory() as temporary:
+            store = Path(temporary)
+            digest = 'abc'
+            target = store / 'derived/reports/v' / digest / 'report.json'
+            with self.assertRaisesRegex(ValueError, 'never written under another extraction version'):
+                write_assembled(target, {'source_sha256': digest, 'extraction_version': 'other',
+                                         'page_count': 1, 'blocks': []}, store, digest)
 
 
 class ShownPages(unittest.TestCase):
