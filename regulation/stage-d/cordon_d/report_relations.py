@@ -82,22 +82,20 @@ def norm(value):
 
 
 def project_identity(identity):
-    """Keep protocol proposals separate unless an explicit registration label supports them.
+    """Preserve the reader's role assignment when its own component quote supports it.
 
-    This guard recognizes the numeric registration notation of the admitted sources;
-    it does not extract a different code or interpret a laboratory method as identity.
-    Other notation remains a proposal with a named reading limit.
+    Identifier spelling cannot establish administrative versus analytical meaning.
+    The document reader supplies that interpretation; this projection only checks
+    that the proposed value is attached to a single quotation for this component.
     """
     identity = dict(identity)
     value = identity.get('protocol')
     if value:
-        numeric = r"(?:prot\.?|protocollo)?\s*(?:cnr\s*)?(?:n\.?\s*)?[0-9]+(?:/[0-9]+)?(?:\s+del\s+[0-9/.-]+)?"
-        quotes = ' '.join(norm(s['text']) for s in identity['support'])
-        labelled = re.search(r'\b(?:prot\.|protocollo)\s*(?:cnr\s*)?(?:n\.?\s*)?[0-9]', quotes)
-        if not re.fullmatch(numeric, norm(value)) or not labelled or norm(value) not in quotes:
+        support = identity.get('component_support', {}).get('protocol', [])
+        if not any(norm(value) in norm(item.get('text')) for item in support):
             identity['protocol_proposal'] = value
             identity['protocol'] = None
-            identity['protocol_cause'] = 'administrative registration identity not established by supported numeric notation and a registration-labelled quotation'
+            identity['protocol_cause'] = 'protocol value lacks its own supporting component quotation'
     return identity
 
 
@@ -311,6 +309,17 @@ def correspondences(readings):
                     if previous.get('protocol') and identity.get('protocol') and norm(previous['protocol']) != norm(identity['protocol']):
                         continue
                     candidates.append(digest)
+            existing = 'predecessor not uniquely identified in retained relationship readings'
+            if len(candidates) == 0:
+                cause = {
+                    'replaces': 'predecessor not held or not identified; this rendition is current and the replaced rendition is absent as history',
+                    'annex': 'the report this annex belongs to is not held or not identified; these rows stand and the fuller report is absent',
+                    'amends': 'the amended base is not held or not identified; these rows stand and the unamended rows of the base are absent',
+                }.get(correction['effect'], existing)
+            elif len(candidates) > 1:
+                cause = 'predecessor ambiguous among retained readings: ' + existing
+            else:
+                cause = None
             edge = dict(successor=successor, predecessor=candidates[0] if len(candidates) == 1 else None,
                 candidates=sorted(candidates), effect=correction['effect'], scope=correction['scope'],
                 changed_columns=correction['changed_columns'] if correction['effect'] == 'amends' else [],
@@ -318,7 +327,7 @@ def correspondences(readings):
                 declared_predecessor=previous, successor_identity=own,
                 basis='model-proposed source relationship and unique retained issuer/report identity',
                 provenance='model_proposed_reading',
-                cause=None if len(candidates) == 1 else 'predecessor not uniquely identified in retained relationship readings')
+                cause=cause)
             if edge['predecessor']:
                 identity = identities[edge['predecessor']]
                 old_date, new_date = dated(identity.get('date')), dated(own.get('date'))
