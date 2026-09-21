@@ -831,6 +831,93 @@ class LiteralReport(unittest.TestCase):
                 if resolved is False:
                     self.assertIn('after one source reread', payload['blocks'][0]['reading']['issues'][-1]['cause'])
 
+    def test_unresolved_mark_scopes_need_a_matching_qualification(self):
+        from cordon_d.report_extraction import unresolved_mark_scopes
+        item = block([['123', '02/06/2024', 'non rilevato*', '03/06/2024']])
+        reading = item['reading']
+        self.assertEqual(unresolved_mark_scopes(reading), ['p1-t1/r1'])
+        note = {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                'text': '*Prova non accreditata da Accredia.', 'value': None, 'applies_to': ['p1-t1/r1']}
+        reading['facts'] = [note]
+        self.assertEqual(unresolved_mark_scopes(reading), [])
+        reading['facts'] = [dict(note, applies_to=['p1-t1/c3'])]
+        self.assertEqual(unresolved_mark_scopes(reading), [])
+
+    def test_unresolved_result_mark_triggers_one_repair_and_replays_retained(self):
+        import pymupdf
+        from hashlib import sha256
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import MARK_REPAIR, NoRetainedResponse, write_json
+        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
+        repaired = copy.deepcopy(marked)
+        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
+            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
+            'applies_to': ['p1-t1/r1']}]
+        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        def envelope(reading, model):
+            return {'response': {'model': model, 'stop_reason': 'end_turn',
+                                 'content': [{'text': json.dumps(reading)}]}}
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            def fake_call(request, *, config, budget, request_id, raw_path):
+                reading = repaired if 'trailing printed mark' in json.dumps(request) else marked
+                write_json(raw_path, envelope(reading, config.model))
+                return reading
+            with patch('cordon_d.report_extraction._call', side_effect=fake_call) as call:
+                path = extract_report(digest, store, config=ExtractionConfig(), budget=None)
+            self.assertEqual(call.call_count, 2)
+            repair_request = call.call_args_list[1].args[0]
+            self.assertEqual(repair_request['output_config']['effort'], 'high')
+            self.assertIn(json.dumps(MARK_REPAIR)[1:-1], json.dumps(repair_request))
+            path.unlink()
+            for cached in path.parent.glob('blocks/*.json'):
+                cached.unlink()
+            with patch('cordon_d.report_extraction._call', side_effect=AssertionError('dispatch')):
+                replay = extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+            self.assertTrue(json.loads(replay.read_text())['assembly_complete'])
+            path.unlink()
+            for cached in path.parent.glob('blocks/*.json'):
+                cached.unlink()
+            repair_id = sha256(json.dumps(repair_request, sort_keys=True).encode()).hexdigest()
+            (store / 'derived/reports/responses' / f'{repair_id}.json').unlink()
+            with self.assertRaises(NoRetainedResponse):
+                extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+
+    def test_unresolved_result_mark_remains_after_one_source_reread(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            with patch('cordon_d.report_extraction._call', side_effect=[marked, copy.deepcopy(marked)]) as call:
+                path = extract_report(digest, store, config=ExtractionConfig(), budget=None)
+                extract_report(digest, store, config=ExtractionConfig(), budget=None)
+            self.assertEqual(call.call_count, 2)
+            issue = json.loads(path.read_text())['blocks'][0]['reading']['issues'][-1]
+            self.assertEqual(issue['cause'], 'result mark note remains unrecovered after one source reread')
+            self.assertEqual(issue['scope'], 'p1-t1/r1')
+
+    def test_sospetto_does_not_trigger_mark_repair(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import unresolved_mark_scopes
+        reading = block([['123', '01/06/2024', 'Sospetto', '02/06/2024']])['reading']
+        self.assertEqual(unresolved_mark_scopes(reading), [])
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            with patch('cordon_d.report_extraction._call', return_value=reading) as call:
+                extract_report(digest, store, config=ExtractionConfig(), budget=None)
+            self.assertEqual(call.call_count, 1)
+
     def test_extra_model_region_is_not_promoted_into_detector_evidence(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
         item['native_regions'] = [{'id': 'n1', 'page': 1}]

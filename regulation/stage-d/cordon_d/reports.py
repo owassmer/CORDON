@@ -632,8 +632,11 @@ def materialize(digest, version, page_count, blocks):
     issues = tuple(i for item in blocks for i in item['reading']['issues'])
     for item in blocks:
         if item.get('attachment_repair_pending'):
+            pending = item['attachment_repair_pending']
+            cause = pending if 'reread pending:' in pending else (
+                'sampling-date attachment reread pending: ' + pending)
             issues += ({'scope': 'pages ' + ','.join(map(str, item['targets'])),
-                        'cause': 'sampling-date attachment reread pending: ' + item['attachment_repair_pending']},)
+                        'cause': cause},)
         known_regions = {r['id'] for r in item.get('native_regions', [])}
         for page in item['reading']['pages']:
             for region in page.get('regions', []):

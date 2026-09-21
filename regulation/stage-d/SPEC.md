@@ -100,7 +100,9 @@ establishes individual-plant identity or verifies the proposed transcription.
 
 A sampling-date fact scoped only to its own section triggers one bounded,
 source-only reread at high effort. The prior proposed answer is not supplied to
-that reread. A failed or unaffordable reread preserves the original rows and
+that reread. A result literal carrying a printed mark whose note the reading did
+not recover and scope triggers the same one bounded, source-only reread at high
+effort; the note text is never supplied to it. A failed or unaffordable reread preserves the original rows and
 names the remaining attachment limit. After a paired-page output overflow, the
 remaining pages of that document use single-page requests; single-page overflow
 still stops explicitly until geometric subdivision is implemented.

@@ -10,12 +10,13 @@ import json
 import logging
 import os
 from pathlib import Path
+import re
 import subprocess
 from tempfile import TemporaryDirectory
 
 import requests
 
-from .reports import ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows
+from .reports import ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows, classify, _leading_mark
 
 IMPLEMENTATION = Path(__file__).read_bytes()
 from .store import blob_path
@@ -410,6 +411,37 @@ def untyped_representation_scopes(reading):
             and len({tables[t] for t in f['applies_to'] if t in tables}) == 1]
 
 
+def unresolved_mark_scopes(reading):
+    """Row locators of result cells whose trailing printed mark has no scoped note."""
+    scopes = []
+    seen = set()
+    for table in reading.get('tables', ()):
+        columns = table.get('columns', ())
+        for row in table.get('rows', ()):
+            for index, (column, cell) in enumerate(zip(columns, row.get('cells', ()))):
+                if column.get('role') != 'result':
+                    continue
+                text = (cell.get('text') or '').casefold().strip()
+                mark = next((text[-n:] for n in (1, 2, 3) if n < len(text)
+                             and re.fullmatch(r'(\*+|[a-z]|\*+[a-z]|[a-z]\*+)', text[-n:])
+                             and classify(text[:-n].strip()) != 'unclassified'), None)
+                if not mark:
+                    continue
+                row_scope = f"{table['id']}/{row['id']}"
+                reached = {table['id'], f"{table['id']}/c{index + 1}", row_scope,
+                           f"p{table['page']}/{row_scope}", f"{row_scope}/c{index + 1}",
+                           f"p{table['page']}/{row_scope}/c{index + 1}"}
+                if any(fact.get('role') == 'result_qualification'
+                       and _leading_mark(fact.get('text')) == mark
+                       and reached.intersection(fact.get('applies_to', ()))
+                       for fact in reading.get('facts', ())):
+                    continue
+                if row_scope not in seen:
+                    seen.add(row_scope)
+                    scopes.append(row_scope)
+    return scopes
+
+
 REPRESENTATION_REPAIR = '''Read the supplied source pages afresh. If the source
 shows two visual representations of the same records (including a transposed view),
 retain every occurrence and use a fact with role repeated_representation, applies_to
@@ -438,6 +470,14 @@ the corresponding qualifier to section:pN/heading. Preserve exact identifiers;
 for an annotated identifier return the identifier and annotation components along
 with the entire source cell. Return the full block in the same schema. Do not change a source value to obtain
 a match; if a relationship cannot be recovered, name that limitation in issues.
+'''
+
+
+MARK_REPAIR = '''Read the supplied source pages afresh. Results in the named rows
+carry a trailing printed mark; recover the printed note that the mark points at as a
+result_qualification fact with its exact scope (the rows or the column it applies to),
+and where the cell's value and mark are separable, return result_value and annotation
+for the cell. Return the full block in the same schema.
 '''
 
 
@@ -969,7 +1009,8 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                                    supplied_pages=item.get('supplied_pages', list(range(1, page_count + 1))))
                     accept(item)
                     continue
-                if not fully_read(item['reading']) or item.get('attachment_repair_pending'):
+                if not fully_read(item['reading']) or item.get('attachment_repair_pending') \
+                        or unresolved_mark_scopes(item['reading']):
                     continue
                 if covered.intersection(item['targets']):
                     raise ValueError('Resume blocks overlap physical target pages')
@@ -1043,7 +1084,8 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     # instead of forcing an already complete reading into page pairs.
                     if (config.provider in SUBSCRIPTION_PROVIDERS and not blocks and fully_read(reading)
                             and not unattached_sampling_scopes(reading)
-                            and not untyped_representation_scopes(reading)):
+                            and not untyped_representation_scopes(reading)
+                            and not unresolved_mark_scopes(reading)):
                         whole = list(range(1, page_count + 1))
                         try:
                             validate_block(reading, targets=whole, page_count=page_count, native_cells=native,
@@ -1088,12 +1130,14 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                 effort = config.effort
                 sampling_repair = bool(unattached_sampling_scopes(reading))
                 representation_repair = bool(untyped_representation_scopes(reading))
-                if sampling_repair or representation_repair:
+                mark_repair = bool(unresolved_mark_scopes(reading))
+                if sampling_repair or representation_repair or mark_repair:
                     # One source reread for a concrete attachment failure. Never
                     # recurse until a preferred answer appears.
-                    effort = 'high' if sampling_repair else config.effort
+                    effort = 'high' if sampling_repair or mark_repair else config.effort
                     instruction = '\n'.join(([ATTACHMENT_REPAIR] if sampling_repair else []) +
-                                            ([REPRESENTATION_REPAIR] if representation_repair else []))
+                                            ([REPRESENTATION_REPAIR] if representation_repair else []) +
+                                            ([MARK_REPAIR] if mark_repair else []))
                     repair = dict(request, output_config=dict(request['output_config'], effort=effort),
                         messages=[{'role': 'user', 'content': content + [
                             {'type': 'text', 'text': instruction}]}])
@@ -1121,12 +1165,16 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                         reading = target_reading(reading, targets, supplied)
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
                                        native_regions=regions, supplied_pages=supplied)
+                    except NoRetainedResponse:
+                        raise
                     except (RuntimeError, requests.RequestException, ValueError) as error:
+                        pending = (('mark note reread pending: ' if mark_repair and not sampling_repair else '')
+                                   + str(error))
                         item = {'targets': targets, 'context_pages': sorted(supplied_context),
                             'supplied_pages': supplied,
                             'request_sha256': prior_request, 'reading': prior_reading,
                             'native_cells': native, 'native_regions': regions,
-                            'attachment_repair_pending': str(error)}
+                            'attachment_repair_pending': pending}
                         write_json(path, item)
                         blocks.append(item)
                         save()
@@ -1134,6 +1182,9 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     if remaining := unattached_sampling_scopes(reading):
                         reading['issues'].append({'scope': ','.join(remaining),
                             'cause': 'sampling date remains attached only to its section after one source reread; no sample scope established'})
+                    if remaining := unresolved_mark_scopes(reading):
+                        reading['issues'].append({'scope': ','.join(remaining),
+                            'cause': 'result mark note remains unrecovered after one source reread'})
                     reused = repair_id
                 item = {'targets': targets, 'context_pages': sorted(supplied_context), 'supplied_pages': supplied,
                         'request_sha256': reused or request_id,
