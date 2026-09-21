@@ -83,6 +83,48 @@ class RetainedWholeMeasure(unittest.TestCase):
         self.assertEqual(adoption.identity, replay.identity + ':adoption')
 
 
+class RetainedSharedOwnerFields(unittest.TestCase):
+    def test_each_plant_keeps_its_identity_and_the_complete_shared_cross_page_field(self):
+        store = store_root(Path(__file__).resolve())
+        digest = '44f299b0d9183377a846fd2c6e9125cbbd7d69e2edac29718b3e5112d1b1c321'
+        try:
+            measure = retained_measure(
+                '09d2b80056783c2babade9f5dc85b85e7075c8f6230f6a504a9b791d9bdeb717', store)
+        except FileNotFoundError:
+            self.skipTest('Retained DDS74 sources/response unavailable; no extraction in tests')
+        # Independently viewed DDS74 pp30–32. These checks qualify the shared
+        # owner fields and native identities, not the rest of the interpretation.
+        expected = [
+            (('1669995', '1669998'), (30, 31), '177', 'OTTOLINO MARIA OTTOLINO ANGELA'),
+            (('1669854', '1669872'), (31, 32), '219',
+             'NITTI AGATA NITTI ANNA SALIANO BENEDETTO MARIA NITTI SALIANO GIUSEPPE '
+             'NITTI GIUSEPPE LUCIANO NITTI SALIANO AGATA SALIANO RAFFAELLA NITTI MARIA '
+             'TERESA TRAVAGLIO DOMENICA NITTI GIOVANNI TRAVAGLIO GIUSEPPE TRAVAGLIO '
+             'NICOLA NITTI ANGELA NITTI MICHELE'),
+        ]
+        targets = {t['reference']: t for t in measure.prescribed_targets()}
+        for identifiers, pages, parcel, owner in expected:
+            for identifier, page in zip(identifiers, pages):
+                with self.subTest(plant=identifier):
+                    target = targets[identifier]
+                    association = target['association']
+                    self.assertEqual((target['sheet'], target['parcel']), ('20', parcel))
+                    self.assertEqual(association['source_sha256'], digest)
+                    self.assertEqual(association['page'], page)
+                    self.assertEqual(association['fields']['plant_id']['text'], identifier)
+                    self.assertIs(target['fields']['plant_id'], association['fields']['plant_id'])
+                    self.assertEqual(re.findall(r'[A-Z]+', target['addressee_text']), owner.split())
+                    fragments = target['fields']['addressee']['fragments']
+                    self.assertEqual([f['page'] for f in fragments], list(pages))
+                    self.assertTrue(all(f['source'] == digest and f['bbox']
+                                        and f['locator'].startswith(f"S0P{f['page']}T1/cell:")
+                                        for f in fragments))
+            self.assertEqual(targets[identifiers[0]]['fields']['addressee'],
+                             targets[identifiers[1]]['fields']['addressee'])
+            self.assertIsNot(targets[identifiers[0]]['fields']['plant_id'],
+                             targets[identifiers[1]]['fields']['plant_id'])
+
+
 class RetainedLaterPrescription(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
