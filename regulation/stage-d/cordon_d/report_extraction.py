@@ -17,7 +17,8 @@ from tempfile import TemporaryDirectory
 import requests
 
 from .reports import (ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows,
-                      classify, _leading_mark, positioned_identifier_records)
+                      classify, _leading_mark, positioned_identifier_records,
+                      row_source_scopes, scoped_facts)
 
 IMPLEMENTATION = Path(__file__).read_bytes()
 from .store import blob_path
@@ -425,12 +426,19 @@ def untyped_representation_scopes(reading):
 
 
 def unresolved_mark_scopes(reading, native_cells):
-    """Row locators of result cells whose trailing printed mark has no scoped note."""
+    """Row locators of result cells whose trailing printed mark has no scoped note.
+
+    A note reaches the row with exactly the reach materialization uses to classify it:
+    the report, the table, the row, its columns and native cells, and anything
+    `applies_to` expansion adds. Both read that reach from `scoped_facts`, so this
+    detector cannot call unresolved a mark the classifier already resolves.
+    """
     scopes = []
     seen = set()
     for table in reading.get('tables', ()):
         columns = table.get('columns', ())
         for row in table.get('rows', ()):
+            reached = scoped_facts(row_source_scopes(table, row), reading.get('facts', ()))[1]
             for index, (column, cell) in enumerate(zip(columns, row.get('cells', ()))):
                 if column.get('role') != 'result' or 'result_value' in cell:
                     continue
@@ -442,13 +450,9 @@ def unresolved_mark_scopes(reading, native_cells):
                 if not mark:
                     continue
                 row_scope = f"{table['id']}/{row['id']}"
-                reached = {table['id'], f"{table['id']}/c{index + 1}", row_scope,
-                           f"p{table['page']}/{row_scope}", f"{row_scope}/c{index + 1}",
-                           f"p{table['page']}/{row_scope}/c{index + 1}"}
                 if any(fact.get('role') == 'result_qualification'
                        and _leading_mark(fact.get('text')) == mark
-                       and reached.intersection(fact.get('applies_to', ()))
-                       for fact in reading.get('facts', ())):
+                       for fact in reached):
                     continue
                 if row_scope not in seen:
                     seen.add(row_scope)
@@ -1183,20 +1187,55 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     raw_path = store / 'derived/reports/responses' / f'{repair_id}.json'
                     prior_reading = reading
                     try:
-                        reading = _retained_reading(raw_path, config.model) if raw_path.exists() else None
-                        if reading is None and not execute:
-                            raise NoRetainedResponse('No retained response for this repair reread; explicit execution is required')
-                        if reading is None and config.provider in SUBSCRIPTION_PROVIDERS:
-                            reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
-                                digest=digest, source=blob_path(store, digest),
-                                config=replace(config, effort=effort), request_id=repair_id,
-                                raw_path=raw_path)
-                        elif reading is None:
-                            reading = _call(repair, config=config, budget=budget,
-                                            request_id=repair_id, raw_path=raw_path)
-                        reading = target_reading(reading, targets, supplied)
-                        validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
-                                       native_regions=regions, supplied_pages=supplied)
+                        try:
+                            reading = _retained_reading(raw_path, config.model) if raw_path.exists() else None
+                            if reading is None and not execute:
+                                raise NoRetainedResponse('No retained response for this repair reread; explicit execution is required')
+                            if reading is None and config.provider in SUBSCRIPTION_PROVIDERS:
+                                reading = _subscription_call(prompt=repair_prompt, schema=output_schema(),
+                                    digest=digest, source=blob_path(store, digest),
+                                    config=replace(config, effort=effort), request_id=repair_id,
+                                    raw_path=raw_path)
+                            elif reading is None:
+                                reading = _call(repair, config=config, budget=budget,
+                                                request_id=repair_id, raw_path=raw_path)
+                            reading = target_reading(reading, targets, supplied)
+                            validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
+                                           native_regions=regions, supplied_pages=supplied)
+                        except OutputLimit:
+                            raise  # An oversized region is a subdivision, not a structural defect.
+                        except ValueError as defect:
+                            # A malformed repair response gets the one structural correction a
+                            # first reading gets: one further request naming the defect, at high
+                            # effort, retained under its own identity. Never a third request; a
+                            # second failure is this document's stop and names both failures.
+                            if config.provider not in SUBSCRIPTION_PROVIDERS:
+                                raise
+                            correction_prompt = repair_prompt + '\n\n' + STRUCTURE_REPAIR.format(defect=defect)
+                            correction_identity = {'provider': provider_label(config), 'model': config.model,
+                                'effort': 'high', 'source_sha256': digest, 'target_pages': targets,
+                                'context_pages': sorted(supplied_context), 'prompt': correction_prompt,
+                                'schema': output_schema()}
+                            correction_id = sha256(json.dumps(correction_identity, sort_keys=True).encode()).hexdigest()
+                            correction_raw = store / 'derived/reports/responses' / f'{correction_id}.json'
+                            corrected = _retained_reading(correction_raw, config.model) if correction_raw.exists() else None
+                            if corrected is None and not execute:
+                                raise NoRetainedResponse('No retained response for this structural correction; '
+                                                         'explicit execution is required') from defect
+                            if corrected is None:
+                                corrected = _subscription_call(prompt=correction_prompt, schema=output_schema(),
+                                    digest=digest, source=blob_path(store, digest),
+                                    config=replace(config, effort='high'),
+                                    request_id=correction_id, raw_path=correction_raw)
+                            try:
+                                corrected = target_reading(corrected, targets, supplied)
+                                validate_block(corrected, targets=targets, page_count=page_count, native_cells=native,
+                                               native_regions=regions, supplied_pages=supplied)
+                            except ValueError as second:
+                                raise ValueError(f'{defect}; the structural correction also failed: '
+                                                 f'{second}') from second
+                            structural_prior = (repair_id, str(defect))
+                            reading, effort, repair_id = corrected, 'high', correction_id
                     except NoRetainedResponse as error:
                         if prior_block is None:
                             raise

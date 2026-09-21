@@ -610,6 +610,33 @@ def source_scopes(cell, table, raw, index):
     return scopes
 
 
+def row_source_scopes(table, raw):
+    """Every selector naming this source row directly: the report, its table, its cells."""
+    scopes = {'report', table['id']}
+    for index, cell in enumerate(raw['cells']):
+        scopes |= source_scopes(cell, table, raw, index)
+    return scopes
+
+
+def scoped_facts(scopes, facts):
+    """Facts reaching these scopes, with the scope set expanded through `applies_to`.
+
+    A qualifier of a reached statement travels with that statement, so a reached fact's
+    own ID and printed section become scopes in turn until the set stops growing.
+    Materialization classifies a row's results through exactly this reach; the reader's
+    mark detector asks the same question of this same helper, so what the classifier
+    resolves and what the detector calls unresolved cannot drift apart.
+    """
+    scopes = set(scopes)
+    while True:
+        scoped = tuple(f for f in facts if scopes.intersection(f.get('applies_to', ())))
+        expanded = scopes | {f['id'] for f in scoped if 'id' in f}
+        expanded.update('section:' + f['section'] for f in scoped if f.get('section'))
+        if expanded == scopes:
+            return scopes, scoped
+        scopes = expanded
+
+
 def materialize(digest, version, page_count, blocks):
     """Copy literal values, then project roles. Never merge rows by sample identifier."""
     facts = []
@@ -676,7 +703,7 @@ def materialize(digest, version, page_count, blocks):
                     raise ValueError('Repeated source-row locator')
                 locators.add(locator)
                 cells, results = [], []
-                scopes = {'report', table['id']}
+                scopes = row_source_scopes(table, raw)
                 by_role = {}
                 for index, (column, cell) in enumerate(zip(table['columns'], raw['cells'])):
                     text = native[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
@@ -688,7 +715,6 @@ def materialize(digest, version, page_count, blocks):
                         value['authority_support'] = tuple(dict(s, basis='model_proposed_reading')
                             for s in column.get('authority_support', ()))
                     field_scopes = source_scopes(cell, table, raw, index)
-                    scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
                     field_issues = tuple(issue for issue in issues if any(re.search(
                         r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope'])
@@ -726,13 +752,7 @@ def materialize(digest, version, page_count, blocks):
                 direct_scopes = set(scopes)
                 # A qualifier of an included statement travels with that statement.
                 # Keep its exact scope; inclusion in row context does not broaden it.
-                while True:
-                    scoped = tuple(f for f in facts if scopes.intersection(f['applies_to']))
-                    expanded = scopes | {f['id'] for f in scoped if 'id' in f}
-                    expanded.update('section:' + f['section'] for f in scoped if f.get('section'))
-                    if expanded == scopes:
-                        break
-                    scopes = expanded
+                scopes, scoped = scoped_facts(scopes, facts)
                 year_context = tuple((int(year), f['id']) for f in scoped
                     if f['role'] in {'date', 'report_date', 'delivery_date', 'sampling_date', 'test_date', 'acceptance_date'}
                     and not f.get('value_cause')

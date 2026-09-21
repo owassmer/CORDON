@@ -1075,6 +1075,127 @@ class LiteralReport(unittest.TestCase):
             self.assertTrue(saved['assembly_complete'])
             self.assertNotIn('attachment_repair_pending', saved['blocks'][0])
 
+    def _mark_reread_source(self, store, marked):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        with pymupdf.open() as pdf:
+            pdf.new_page()
+            digest = put_bytes(store, pdf.tobytes())
+        prior = store / 'derived/reports/prior' / digest / 'report.json'
+        prior.parent.mkdir(parents=True)
+        prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
+            'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
+        return digest
+
+    @staticmethod
+    def _mark_reread_block():
+        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
+        marked.update(request_sha256='retained-request', context_pages=[1],
+                      supplied_pages=[1], native_regions=[])
+        repaired = copy.deepcopy(marked['reading'])
+        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
+            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
+            'applies_to': ['p1-t1/r1']}]
+        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        malformed = copy.deepcopy(repaired)
+        malformed['tables'][0]['rows'][0]['cells'].append({'text': 'a cell with no column'})
+        return marked, repaired, malformed
+
+    def test_malformed_repair_response_gets_one_structural_correction(self):
+        from cordon_d.report_extraction import MARK_REPAIR, STRUCTURE_REPAIR
+        marked, repaired, malformed = self._mark_reread_block()
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._mark_reread_source(store, marked)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[malformed, repaired]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 2)
+            defect = 'Repeated row locator or wrong cell count'
+            correction = provider.call_args_list[1].kwargs
+            self.assertEqual(correction['config'].effort, 'high')
+            self.assertIn(MARK_REPAIR.format(rows='p1-t1/r1'), correction['prompt'])
+            self.assertIn(STRUCTURE_REPAIR.format(defect=defect), correction['prompt'])
+            saved = json.loads(path.read_text())['blocks'][0]
+            self.assertEqual(saved['structural_repair_of'], provider.call_args_list[0].kwargs['request_id'])
+            self.assertEqual(saved['structural_defect'], defect)
+            self.assertEqual(saved['request_sha256'], correction['request_id'])
+            self.assertEqual(saved['prior_request_sha256'], 'retained-request')
+            self.assertEqual(saved['effort'], 'high')
+            self.assertNotIn('attachment_repair_pending', saved)
+            self.assertTrue(json.loads(path.read_text())['assembly_complete'])
+
+    def test_second_structural_failure_stops_the_document_with_both_causes(self):
+        marked, _, malformed = self._mark_reread_block()
+        unknown = copy.deepcopy(malformed)
+        unknown['tables'][0]['rows'][0]['cells'] = unknown['tables'][0]['rows'][0]['cells'][:4]
+        unknown['tables'][0]['rows'][0]['cells'][2] = {'native_cell': 'p1-t1-r1-c3'}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._mark_reread_source(store, marked)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[malformed, unknown]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 2)
+            saved = json.loads(path.read_text())
+            pending = saved['blocks'][0]['attachment_repair_pending']
+            self.assertTrue(pending.startswith('mark note reread pending: '))
+            self.assertIn('Repeated row locator or wrong cell count', pending)
+            self.assertIn('the structural correction also failed: Unknown native cell', pending)
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+            self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
+            self.assertFalse(saved['assembly_complete'])
+
+    def test_structural_correction_without_a_retained_response_writes_pending(self):
+        from cordon_d.report_extraction import write_json
+        marked, _, malformed = self._mark_reread_block()
+        config = ExtractionConfig(provider='subscription')
+        requests_made = []
+        def retaining(**kwargs):
+            requests_made.append(kwargs['request_id'])
+            write_json(kwargs['raw_path'], {'provider': 'claude-code-subscription',
+                                            'response': {'structured_output': malformed}})
+            return malformed
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._mark_reread_source(store, marked)
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=retaining):
+                extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(requests_made), 2)
+            (store / 'derived/reports/responses' / f'{requests_made[1]}.json').unlink()
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=AssertionError('dispatch')) as provider:
+                path = extract_report(digest, store, config=config, budget=None,
+                                      resume_from='prior', execute=False)
+            provider.assert_not_called()
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                'mark note reread pending: No retained response for this structural correction; '
+                'explicit execution is required')
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+            self.assertFalse(saved['assembly_complete'])
+
+    def test_a_note_reaches_the_row_for_the_detector_as_it_does_for_the_classifier(self):
+        from cordon_d.report_extraction import unresolved_mark_scopes
+        note = {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                'text': '* Prova non accreditata da Accredia.', 'value': None,
+                'applies_to': ['report']}
+        reaching = {'report-wide note': [note],
+                    'note on a reached statement': [dict(note, applies_to=['f2']),
+                        {'id': 'f2', 'role': 'qualification', 'page': 1, 'locator': 'caption',
+                         'text': 'Esiti della prova', 'value': None, 'applies_to': ['p1-t1/r1']}]}
+        for reach, facts in reaching.items():
+            with self.subTest(reach=reach):
+                item = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
+                item['reading']['facts'] = facts
+                self.assertEqual(unresolved_mark_scopes(item['reading'], {}), [])
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.results[0].kind, 'not-detected')
+                self.assertEqual(row.results[0].text, 'non rilevato*')
+                self.assertIsNone(row.results[0].cause)
+
     def test_unresolved_result_mark_remains_after_one_source_reread(self):
         import pymupdf
         from cordon_d.store import put_bytes
