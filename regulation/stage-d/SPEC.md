@@ -392,6 +392,14 @@ selects row populations, additional field columns, prose spans, directions and
 document-part roles; composition copies native characters and reuses the original
 association object. Shared physical cells and verified split rows retain all their
 fragments. Layout establishes source locations, never operative meaning or time.
+Within a ruled table, a missing logical association cell uses only the unique drawn
+cell that actually covers its position; a separate blank cell stays blank. Across
+pages, interpretation explicitly selects the ordered native cells or non-table word
+spans composing an additional field, with support on every affected page. The
+consumer retains those fragments and the target's own cell, including a blank
+continuation cell. Shared addressees can govern several target rows; owner-only
+fragments do not become plants. No parcel-value match or automatic forward filling
+establishes the relationship, and selection cannot copy an association-owned column.
 An infected-plant reference printed beside surrounding parcels remains
 `reference_plant_id`, distinct from an ordered plant's `plant_id`; it supplies no
 report association. Additional columns cannot rename or duplicate a column already
@@ -431,7 +439,9 @@ context when the surrounding consumer changes; it does not patch rejected readin
 or silently dispatch a replacement. Source checks remain distinct from qualification.
 Dated actual events use `AdministrativeEvent`; plans, blank forms, other unresolved
 payload identities and imprecise event times remain source readings rather than
-invented anchors. Source-boundary validation checks citations and references, not
+invented anchors. A blank form can still state consequential response or capacity
+requirements; those remain directions or part qualifications, not actual responses.
+Source-boundary validation checks citations and references, not
 legal truth. Qualification requires independently read originals and an actual
 consumer connection; schema validity, page counts and retained responses cannot
 establish it. The subject-population owner still supplies plants, parcels and

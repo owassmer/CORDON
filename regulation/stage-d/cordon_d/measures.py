@@ -35,6 +35,7 @@ FIELD_ROLE = _choice('plant_id', 'reference_plant_id', 'municipality', 'cadastra
                      'sheet', 'parcel', 'addressee')
 SPAN = _object(line_ref=TEXT, first_word={'type': 'integer', 'minimum': 0},
                end_word={'type': 'integer', 'minimum': 1})
+FIELD_FRAGMENT = {'anyOf': [_object(table_ref=TEXT, cell=TEXT), SPAN]}
 ASSOCIATION_REF = {'anyOf': [
     _object(table_ref=TEXT, row={'type': 'integer', 'minimum': 1}), {'type': 'null'}]}
 SCHEMA = _object(
@@ -54,7 +55,8 @@ SCHEMA = _object(
     target_scopes=_array(_object(table_ref=TEXT,
                         first_row={'type': 'integer', 'minimum': 1},
                         last_row={'type': 'integer', 'minimum': 1},
-                        columns=_array(_object(role=FIELD_ROLE, column={'type': 'integer', 'minimum': 1})),
+                        columns=_array(_object(role=FIELD_ROLE, column={'type': 'integer', 'minimum': 1},
+                                               fragments=_array(FIELD_FRAGMENT))),
                         direction_ids=_array(TEXT), meaning=TEXT, support=CITATIONS)),
     prose_positions=_array(_object(fields=_array(_object(role=FIELD_ROLE, spans=_array(SPAN))),
                                    direction_ids=_array(TEXT), meaning=TEXT, support=CITATIONS)),
@@ -155,8 +157,9 @@ class MeasureReading:
         targets = {}
         for scope in self.values['target_scopes']:
             columns = {c['role']: c['column'] for c in scope['columns']}
+            selected = {c['role']: c.get('fragments', []) for c in scope['columns']}
             for row in range(scope['first_row'], scope['last_row'] + 1):
-                fields, association = table_fields(self.material, scope['table_ref'], row, columns)
+                fields, association = table_fields(self.material, scope['table_ref'], row, columns, selected)
                 native = self.material['tables'][scope['table_ref']]['rows'][row - 1]
                 occurrence = native.get('continuation_of', f"{scope['table_ref']}R{row}")
                 if occurrence not in targets:
@@ -169,8 +172,9 @@ class MeasureReading:
                         new = fields[role]
                         prior = target['fields'].get(role)
                         fragments = prior.get('fragments', [prior]) if prior else []
-                        if not any(f['locator'] == new['locator'] for f in fragments):
-                            fragments = [*fragments, new]
+                        for fragment in new.get('fragments', [new]):
+                            if not any(f['locator'] == fragment['locator'] for f in fragments):
+                                fragments = [*fragments, fragment]
                         target['fields'][role] = {'text': '\n'.join(f['text'] or '' for f in fragments),
                                                   'fragments': fragments}
                     target['addressee_text'] = target['fields'].get('addressee', {}).get('text')
@@ -278,7 +282,16 @@ def _validate_reading(reading, sources, store, material):
             if key in occupied:
                 raise ValueError('One source occurrence needs one composed scope')
             occupied.add(key)
-            table_fields(material, scope['table_ref'], row, {c['role']: c['column'] for c in scope['columns']})
+            fields, _ = table_fields(material, scope['table_ref'], row,
+                                    {c['role']: c['column'] for c in scope['columns']},
+                                    {c['role']: c.get('fragments', []) for c in scope['columns']})
+            for column in scope['columns']:
+                if column.get('fragments'):
+                    cited = {(c['source'], c['page']) for c in scope['support']}
+                    required = {(f['source'], f['page'])
+                                for f in fields[column['role']]['fragments']}
+                    if not required <= cited:
+                        raise ValueError('Field continuation needs every source page as support')
     for position in [*reading['prose_positions'], *reading['image_positions']]:
         roles = [f['role'] for f in position['fields']]
         if len(roles) != len(set(roles)):
@@ -336,6 +349,10 @@ def retained_measure(request_id, store):
     # Additive source roles need not invalidate an otherwise compatible reading.
     # The old generated-target contract still cannot satisfy this composition.
     compatible = deepcopy(response['reading'])
+    for scope in compatible['target_scopes']:
+        for column in scope['columns']:
+            # Earlier readings select only the physical row's own field cell.
+            column.setdefault('fragments', [])
     for position in compatible['image_positions']:
         # Earlier contracts could not select an association for an image row.
         # Absence means no selection, never an inferred cross-document match.

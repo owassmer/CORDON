@@ -147,7 +147,29 @@ def selected_association(material, reference):
     return association
 
 
-def table_fields(material, table_ref, row_number, columns):
+def field_fragment(material, reference):
+    """Copy an explicitly selected additional-field fragment, never owned fields."""
+    if 'line_ref' in reference:
+        fragment = native_span(material, reference)
+        x0, y0, x1, y1 = fragment['bbox']
+        if any(t['source'] == fragment['source'] and t['page'] == fragment['page']
+               and t['bbox'][0] <= (x0 + x1) / 2 <= t['bbox'][2]
+               and t['bbox'][1] <= (y0 + y1) / 2 <= t['bbox'][3]
+               for t in material['tables'].values()):
+            raise ValueError('Use source cells for a fragment inside a native table')
+        return fragment
+    table_ref, cell = reference['table_ref'], reference['cell']
+    table = material['tables'][table_ref]
+    for row in table['rows']:
+        association = row['association']
+        if association and any(row['cells'][field['column'] - 1] == cell
+                               for field in association['fields'].values()):
+            raise ValueError('The association owner already supplies this source column')
+    return dict(table['cells'][cell], source=table['source'], page=table['page'],
+                locator=f'{table_ref}/cell:{cell}')
+
+
+def table_fields(material, table_ref, row_number, columns, fragments=None):
     table = material['tables'][table_ref]
     row = table['rows'][row_number - 1]
     association = row['association']
@@ -164,6 +186,25 @@ def table_fields(material, table_ref, row_number, columns):
             raise ValueError('No unique physical cell at the selected source position')
         fields[role] = dict(table['cells'][cell], source=table['source'], page=table['page'],
                             locator=f'{table_ref}/cell:{cell}')
+        references = (fragments or {}).get(role, [])
+        if references:
+            parts = [field_fragment(material, reference) for reference in references]
+            keys = [(p['source'], p['page'], p['locator']) for p in parts]
+            if len(keys) != len(set(keys)):
+                raise ValueError('A composed source field repeats a fragment')
+            if any(p['source'] != table['source'] for p in parts):
+                raise ValueError('A field continuation must stay within its source document')
+            if fields[role]['locator'] not in {p['locator'] for p in parts}:
+                raise ValueError('A field continuation must retain its selected row cell')
+            spans = [r for r in references if 'line_ref' in r]
+            if any(a['line_ref'] == b['line_ref']
+                   and max(a['first_word'], b['first_word']) < min(a['end_word'], b['end_word'])
+                   for i, a in enumerate(spans) for b in spans[i + 1:]):
+                raise ValueError('A composed source field has overlapping spans')
+            if not any((p['text'] or '').strip() for p in parts):
+                raise ValueError('A field continuation has no recovered source text')
+            fields[role] = {'text': '\n'.join(p['text'] or '' for p in parts),
+                            'fragments': parts}
     return fields, association
 
 

@@ -9,7 +9,7 @@ from unittest.mock import patch
 import pymupdf
 
 from cordon_d.source_associations import associations, read_associations
-from cordon_d.store import put_bytes
+from cordon_d.store import blob_path, put_bytes, store_root
 
 
 HEADERS = ['ID CAMPIONE', 'RAPPORTO PROVA', 'DATA RAPPORTO PROVA', 'PROPRIETARIO']
@@ -27,13 +27,17 @@ def source(store, pages):
                 xs.append(xs[-1] + width)
             if spec.get('annex'):
                 page.insert_text((40, 65), spec['annex'], fontsize=10)
+            spans = spec.get('row_spans', [])
             for y in range(len(rows) + 1):
-                page.draw_line((xs[0], 100 + y * 44), (xs[-1], 100 + y * 44))
+                for c in range(len(widths)):
+                    if not any(column == c and first < y <= last for column, first, last in spans):
+                        page.draw_line((xs[c], 100 + y * 44), (xs[c+1], 100 + y * 44))
             for x in xs:
                 page.draw_line((x, 100), (x, 100 + len(rows) * 44))
             for r, row in enumerate(rows):
                 for c, text in enumerate(row):
-                    page.insert_textbox((xs[c] + 4, 104 + r*44, xs[c+1] - 4, 140 + r*44),
+                    end = next((last for column, first, last in spans if column == c and first == r), r)
+                    page.insert_textbox((xs[c] + 4, 104 + r*44, xs[c+1] - 4, 140 + end*44),
                                         text, fontsize=8)
             if 'folio' in spec:
                 page.insert_text((450, 450), str(spec['folio']), fontsize=10)
@@ -44,6 +48,45 @@ def source(store, pages):
 
 
 class SourceAssociations(unittest.TestCase):
+    def test_shared_printed_cells_preserve_groups_and_do_not_fill_separate_blanks(self):
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = source(store, [{
+                'headings': HEADERS[:3] + ['FOGLIO', 'PARTICELLA'],
+                'widths': [80, 110, 130, 65, 65],
+                'rows': [['A', 'R 1', '1/2/2025', '5', '95'],
+                         ['B', 'R 1', '1/2/2025', '', ''],
+                         ['C', 'R 1', '1/2/2025', '5', '473'],
+                         ['D', 'R 1', '1/2/2025', '', ''],
+                         ['E', 'R 1', '1/2/2025', '', '']],
+                'row_spans': [(3, 1, 2), (4, 1, 2), (3, 3, 4), (4, 3, 4)],
+            }])
+            rows = read_associations(digest, store).rows
+            self.assertEqual([(r['fields']['sheet']['text'], r['fields']['parcel']['text']) for r in rows],
+                             [('5', '95'), ('5', '95'), ('5', '473'), ('5', '473'), ('', '')])
+            for first, second in [(0, 1), (2, 3)]:
+                self.assertEqual(rows[first]['fields']['parcel']['bbox'], rows[second]['fields']['parcel']['bbox'])
+                self.assertIn('shared printed cell', rows[second]['fields']['parcel']['derivation'])
+            self.assertNotIn('derivation', rows[4]['fields']['parcel'])
+
+    def test_retained_shared_cadastral_cells_reach_every_printed_plant(self):
+        store = store_root(Path(__file__).resolve())
+        digest = '266f46b253898678e209cf66b2afaa8e44d5b10e8b8498c698df77c999306df8'
+        if not blob_path(store, digest).exists():
+            self.skipTest('Retained DDS179 source store unavailable')
+        # DDS179 physical page 14: six vines share parcel 95, three parcel 473.
+        # Those are two printed cells, not values inferred from neighbouring rows.
+        rows = read_associations(digest, store).rows
+        expected = dict.fromkeys(['1753094', '1753262', '1753459', '1753292', '1753432', '1753481'], '95')
+        expected.update(dict.fromkeys(['1753069', '1752990', '1753058'], '473'))
+        self.assertEqual({r['fields']['plant_id']['text']: r['fields']['parcel']['text'] for r in rows}, expected)
+        self.assertTrue(all(r['fields']['sheet']['text'] == '5' and not r['issues'] for r in rows))
+        with pymupdf.open(blob_path(store, digest)) as original:
+            for row in rows:
+                field = row['fields']['parcel']
+                self.assertEqual(original[13].get_text(clip=pymupdf.Rect(field['bbox'])).strip(),
+                                 field['text'])
+
     def test_printed_reordered_headers_and_private_column_exclusion(self):
         with TemporaryDirectory() as directory:
             store = Path(directory)

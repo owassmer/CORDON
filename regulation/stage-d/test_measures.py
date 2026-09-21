@@ -83,6 +83,78 @@ class RetainedWholeMeasure(unittest.TestCase):
         self.assertEqual(adoption.identity, replay.identity + ':adoption')
 
 
+class RetainedLaterPrescription(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.store = store_root(Path(__file__).resolve())
+        cls.digest = '138add2778567999e2852335f6a79469f2677df68891e88ca1af9bbac089b0e5'
+        try:
+            cls.measure = retained_measure(
+                'd2d28d922db280b80fd840cada611d6796c3ef05e1bf686c2b82a380e9a7c734', cls.store)
+        except FileNotFoundError:
+            raise unittest.SkipTest('Retained DDS138 sources/response unavailable; no extraction in tests')
+
+    def test_six_native_positions_keep_reports_and_addressees_without_deferred_targets(self):
+        # Independently read DDS138 operative p6 and original Annex 1/C pp18–19.
+        expected = {
+            '1699662': ('12', '86', 'LAGIOIA ROSA SILVANA ROBERTO GIANLUCA'),
+            '1699576': ('12', '154', 'QUARANTA FILOMENA QUARANTA ROSSANA QUARANTA VINCENZO'),
+            '1699797': ('12', '176', 'PONTRELLI ANNA MARIA CARMELA'),
+            '1674070': ('17', '1151', 'GIANNELLI NATALINA'),
+            '1699929': ('20', '85', 'CAPUTO MARIO'),
+            '1699892': ('20', '100', 'DE MARCO MARIA DICINTIO GIOVANNI'),
+        }
+        linked = tuple(self.measure.target_associations(self.store))
+        self.assertEqual(len(linked), 6)
+        self.assertEqual({t['reference']: (t['sheet'], t['parcel'], ' '.join(t['addressee_text'].split()))
+                          for t, _ in linked}, expected)
+        for target, matches in linked:
+            self.assertEqual(len(matches), 1)
+            association, = matches
+            self.assertEqual(association['source_sha256'], self.digest)
+            self.assertEqual(association['page'], 19 if target['reference'] == '1699892' else 18)
+            self.assertIs(target['fields']['plant_id'], association['fields']['plant_id'])
+            self.assertIs(target['fields']['report_reference'], association['fields']['report_reference'])
+            report, day = ('73F/2024 CNR', '03/10/2024') if target['reference'] == '1674070' else (
+                '114F/2024 CNR', '17/07/2024')
+            self.assertEqual(' '.join(association['fields']['report_reference']['text'].split()), report)
+            self.assertEqual(association['fields']['report_date']['text'], day)
+        deferred = [d for d in self.measure.values['directions']
+                    if (d['mode'], d['work']) == ('deferred-prescription', 'removal')]
+        self.assertTrue(any(c['source'] == self.digest and c['page'] == 6
+                            and 'successivamente' in c['quote'] and '50 m' in c['quote']
+                            for d in deferred for c in d['support']))
+
+    def test_adoption_and_burp_cannot_start_the_recipient_notice_clock(self):
+        measure = self.measure
+        self.assertEqual(measure.identity, 'REG-PUGLIA-U181-DIR-2024-00138')
+        self.assertEqual(measure.adopted, date(2024, 10, 28))
+        events = tuple(measure.administrative_events())
+        self.assertEqual({e.kind: e.occurred for e in events},
+                         {'adoption': date(2024, 10, 28), 'burp-publication': date(2024, 11, 7)})
+        for event in events:
+            with self.subTest(kind=event.kind), self.assertRaisesRegex(ValueError, 'Wrong event kind'):
+                event_deadline(Snapshot.load(), 'B-CLK-DDS138-2024-notification-noncommencement',
+                               measure.adopted, event, document=measure.identity,
+                               recipient='GIANNELLI NATALINA', zone=ZoneInfo('Europe/Rome'))
+
+    def test_blank_form_preserves_non_addressee_capacity_evidence_requirement(self):
+        # Original p16 requires supporting documentation if the responder differs
+        # from the named addressee. Its unchecked choices are no actual election.
+        response = [d for d in self.measure.values['directions']
+                    if (d['mode'], d['work']) == ('ordered-now', 'response')]
+        self.assertTrue(any(d['conditions'] and c['source'] == self.digest and c['page'] == 16
+                            and 'diverso' in c['quote'] and 'intestatario' in c['quote']
+                            and 'documentazione probatoria' in c['quote']
+                            for d in response for c in d['support']))
+        forms = [e for e in self.measure.values['events'] if e['evidence'] == 'blank-form'
+                 and any(c['source'] == self.digest and c['page'] == 16 for c in e['support'])]
+        self.assertTrue(forms)
+        self.assertTrue(all(e['occurred_on'] is None for e in forms))
+        self.assertEqual({e.kind for e in self.measure.administrative_events()},
+                         {'adoption', 'burp-publication'})
+
+
 class RetainedIncorporatedCorrection(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

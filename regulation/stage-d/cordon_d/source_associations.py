@@ -105,6 +105,28 @@ def _bbox(box, inverse):
     return list(pymupdf.Rect(box) * inverse) if box is not None else None
 
 
+def _shared_cells(table, values):
+    """Locate omitted logical cells within the table's original drawn cells."""
+    printed = {tuple(box): values[r][c]
+               for r, row in enumerate(table.rows)
+               for c, box in enumerate(row.cells) if box is not None}
+    xs = sorted({box[i] for box in printed for i in (0, 2)})
+    ys = sorted({box[i] for box in printed for i in (1, 3)})
+    if len(xs) != table.col_count + 1 or len(ys) != table.row_count + 1:
+        return {}
+    resolved = {}
+    for r, row in enumerate(table.rows):
+        for c, box in enumerate(row.cells):
+            if box is not None:
+                continue
+            x, y = (xs[c] + xs[c + 1]) / 2, (ys[r] + ys[r + 1]) / 2
+            covering = [b for b in printed if b[0] < x < b[2] and b[1] < y < b[3]]
+            if len(covering) == 1:
+                box, = covering
+                resolved[r, c] = (printed[box], box)
+    return resolved
+
+
 def _read_pdf(digest, version, path):
     import pymupdf
     result = AssociationReading(digest, version, 0, [], [])
@@ -140,6 +162,7 @@ def _read_pdf(digest, version, path):
             candidates = []
             for table_index, table in enumerate(tables, 1):
                 values = table.extract()
+                shared = _shared_cells(table, values)
                 headers = _header(values)
                 grid = _boundaries(table)
                 folio = _folio(lines, table.bbox)
@@ -177,9 +200,12 @@ def _read_pdf(digest, version, path):
                 row_indices = []
                 for r in range(start, len(values)):
                     row = values[r]
-                    fields = {role: {'text': row[c], 'column': c + 1,
-                                     'bbox': _bbox(table.rows[r].cells[c], inverse)}
-                              for c, role in roles.items()}
+                    fields = {}
+                    for c, role in roles.items():
+                        text, box = shared.get((r, c), (row[c], table.rows[r].cells[c]))
+                        fields[role] = {'text': text, 'column': c + 1, 'bbox': _bbox(box, inverse)}
+                        if (r, c) in shared:
+                            fields[role]['derivation'] = 'shared printed cell covers this row and column'
                     issues = []
                     if unread_columns:
                         issues.append({'cause': 'additional source columns outside this association reading',
