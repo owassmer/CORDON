@@ -473,7 +473,7 @@ a match; if a relationship cannot be recovered, name that limitation in issues.
 '''
 
 
-MARK_REPAIR = '''Read the supplied source pages afresh. Results in the named rows
+MARK_REPAIR = '''Read the supplied source pages afresh. Results in rows {rows}
 carry a trailing printed mark; recover the printed note that the mark points at as a
 result_qualification fact with its exact scope (the rows or the column it applies to),
 and where the cell's value and mark are separable, return result_value and annotation
@@ -997,6 +997,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
             save()
             logging.getLogger(__name__).info(json.dumps({'document': digest, 'accepted_pages': item['targets'],
                 'document_pages': page_count, 'source_rows': sum(len(t['rows']) for t in item['reading']['tables'])}))
+        mark_replay = []
         if prior is not None:
             covered = set()
             for item in prior['blocks']:
@@ -1009,8 +1010,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                                    supplied_pages=item.get('supplied_pages', list(range(1, page_count + 1))))
                     accept(item)
                     continue
-                if not fully_read(item['reading']) or item.get('attachment_repair_pending') \
-                        or unresolved_mark_scopes(item['reading']):
+                if not fully_read(item['reading']) or item.get('attachment_repair_pending'):
                     continue
                 if covered.intersection(item['targets']):
                     raise ValueError('Resume blocks overlap physical target pages')
@@ -1025,16 +1025,26 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     logging.getLogger(__name__).info(json.dumps({'document': digest, 'resumed_from': resume_from,
                         'rejected_prior_block': item['targets'], 'cause': str(defect)}))
                     continue
+                if unresolved_mark_scopes(item['reading']):
+                    # Retain the fully read block; repair uses it as prior_reading
+                    # instead of issuing a fresh first request for its pages.
+                    mark_replay.append(item)
+                    covered.update(item['targets'])
+                    continue
                 accept(item)
                 covered.update(item['targets'])
-        def read(targets, continuation_review=None):
-            supplied_context = context | heading_context
+        def read(targets, continuation_review=None, prior_block=None):
+            supplied_context = (set(prior_block.get('context_pages', []))
+                                if prior_block is not None else context | heading_context)
             pages = sorted(supplied_context | set(targets))
             # Through the API the model sees only the pages sent, so a citation outside
             # them is fabricated. Through the subscription it reads the whole original
             # document, so any physical page of it is a page it was shown.
             supplied = pages if config.provider == 'api' else list(range(1, page_count + 1))
             content, native, regions = _page_content(document, pages, targets, config)
+            if prior_block is not None:
+                native = prior_block['native_cells']
+                regions = prior_block.get('native_regions', [])
             if continuation_review:
                 content.append({'type': 'text', 'text': continuation_review})
             request = {'model': config.model, 'max_tokens': config.max_tokens,
@@ -1051,21 +1061,25 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
             request_id = sha256(json.dumps(request_identity, sort_keys=True).encode()).hexdigest()
             path = directory / 'blocks' / f'{request_id}.json'
             cached = json.loads(path.read_text()) if path.exists() else None
-            if cached and not cached.get('attachment_repair_pending'):
+            if prior_block is None and cached and not cached.get('attachment_repair_pending'):
                 item = cached
                 targets[:] = item['targets']
             else:
                 reading, reused = None, None
-                legacy = store / 'derived/reports/responses' / f'{legacy_id}.json'
-                if config.provider == 'api' and config.effort == 'high' and legacy.exists():
-                    try:
-                        candidate = target_reading(response_reading(json.loads(legacy.read_text())['response'], config.model), targets, supplied_context)
-                        validate_block(candidate, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
-                        reading, reused = candidate, legacy_id
-                    except OutputLimit:
-                        raise  # Split the known oversized region, without paying to repeat it.
-                    except (ValueError, KeyError, TypeError):
-                        pass  # A malformed legacy serialization cannot supply an accepted block.
+                structural_prior = None
+                if prior_block is not None:
+                    reading, prior_request = prior_block['reading'], prior_block['request_sha256']
+                else:
+                    legacy = store / 'derived/reports/responses' / f'{legacy_id}.json'
+                    if config.provider == 'api' and config.effort == 'high' and legacy.exists():
+                        try:
+                            candidate = target_reading(response_reading(json.loads(legacy.read_text())['response'], config.model), targets, supplied_context)
+                            validate_block(candidate, targets=targets, page_count=page_count, native_cells=native, native_regions=regions, supplied_pages=pages)
+                            reading, reused = candidate, legacy_id
+                        except OutputLimit:
+                            raise  # Split the known oversized region, without paying to repeat it.
+                        except (ValueError, KeyError, TypeError):
+                            pass  # A malformed legacy serialization cannot supply an accepted block.
                 if reading is None:
                     raw_path = store / 'derived/reports/responses' / f'{request_id}.json'
                     if raw_path.exists():
@@ -1126,18 +1140,20 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
                                        native_regions=regions, supplied_pages=supplied)
                         structural_prior, request_id = (request_id, str(defect)), repair_id
-                prior_request = reused or request_id
+                if prior_block is None:
+                    prior_request = reused or request_id
                 effort = config.effort
-                sampling_repair = bool(unattached_sampling_scopes(reading))
-                representation_repair = bool(untyped_representation_scopes(reading))
-                mark_repair = bool(unresolved_mark_scopes(reading))
+                sampling_repair = bool(unattached_sampling_scopes(reading)) if prior_block is None else False
+                representation_repair = bool(untyped_representation_scopes(reading)) if prior_block is None else False
+                mark_scopes = unresolved_mark_scopes(reading)
+                mark_repair = bool(mark_scopes)
                 if sampling_repair or representation_repair or mark_repair:
                     # One source reread for a concrete attachment failure. Never
                     # recurse until a preferred answer appears.
                     effort = 'high' if sampling_repair or mark_repair else config.effort
                     instruction = '\n'.join(([ATTACHMENT_REPAIR] if sampling_repair else []) +
                                             ([REPRESENTATION_REPAIR] if representation_repair else []) +
-                                            ([MARK_REPAIR] if mark_repair else []))
+                                            ([MARK_REPAIR.format(rows=', '.join(mark_scopes))] if mark_repair else []))
                     repair = dict(request, output_config=dict(request['output_config'], effort=effort),
                         messages=[{'role': 'user', 'content': content + [
                             {'type': 'text', 'text': instruction}]}])
@@ -1165,11 +1181,24 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                         reading = target_reading(reading, targets, supplied)
                         validate_block(reading, targets=targets, page_count=page_count, native_cells=native,
                                        native_regions=regions, supplied_pages=supplied)
-                    except NoRetainedResponse:
-                        raise
+                    except NoRetainedResponse as error:
+                        if prior_block is None:
+                            raise
+                        pending = 'mark note reread pending: ' + str(error)
+                        item = dict(prior_block)
+                        item['attachment_repair_pending'] = pending
+                        write_json(path, item)
+                        accept(item)
+                        return
                     except (RuntimeError, requests.RequestException, ValueError) as error:
                         pending = (('mark note reread pending: ' if mark_repair and not sampling_repair else '')
                                    + str(error))
+                        if prior_block is not None:
+                            item = dict(prior_block)
+                            item['attachment_repair_pending'] = pending
+                            write_json(path, item)
+                            accept(item)
+                            return
                         item = {'targets': targets, 'context_pages': sorted(supplied_context),
                             'supplied_pages': supplied,
                             'request_sha256': prior_request, 'reading': prior_reading,
@@ -1238,6 +1267,8 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                 if not fully_read(reading):
                     raise RuntimeError('Target page remains incomplete after source rereading')
             accept(item)
+        for item in mark_replay:
+            read(item['targets'], prior_block=item)
         first, width = 1, config.target_pages
         while first <= page_count:
             covered = {page for item in blocks for page in item['targets']}

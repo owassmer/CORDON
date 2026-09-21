@@ -871,7 +871,7 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual(call.call_count, 2)
             repair_request = call.call_args_list[1].args[0]
             self.assertEqual(repair_request['output_config']['effort'], 'high')
-            self.assertIn(json.dumps(MARK_REPAIR)[1:-1], json.dumps(repair_request))
+            self.assertIn(json.dumps(MARK_REPAIR.format(rows='p1-t1/r1'))[1:-1], json.dumps(repair_request))
             path.unlink()
             for cached in path.parent.glob('blocks/*.json'):
                 cached.unlink()
@@ -885,6 +885,58 @@ class LiteralReport(unittest.TestCase):
             (store / 'derived/reports/responses' / f'{repair_id}.json').unlink()
             with self.assertRaises(NoRetainedResponse):
                 extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+
+    def test_resume_repairs_unresolved_mark_without_rereading_the_block(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import MARK_REPAIR
+        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
+        marked.update(request_sha256='retained-request', context_pages=[1],
+                      supplied_pages=[1], native_regions=[])
+        repaired = copy.deepcopy(marked['reading'])
+        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
+            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
+            'applies_to': ['p1-t1/r1']}]
+        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            prior = store / 'derived/reports/prior' / digest / 'report.json'
+            prior.parent.mkdir(parents=True)
+            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
+                'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
+            with patch('cordon_d.report_extraction._subscription_call', return_value=repaired) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 1)
+            self.assertEqual(provider.call_args.kwargs['config'].effort, 'high')
+            self.assertIn('p1-t1/r1', provider.call_args.kwargs['prompt'])
+            self.assertIn(MARK_REPAIR.format(rows='p1-t1/r1'), provider.call_args.kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved['blocks'][0]['prior_request_sha256'], 'retained-request')
+            self.assertEqual(saved['blocks'][0]['request_sha256'] != 'retained-request', True)
+            self.assertTrue(saved['assembly_complete'])
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            prior = store / 'derived/reports/prior' / digest / 'report.json'
+            prior.parent.mkdir(parents=True)
+            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
+                'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=AssertionError('dispatch')) as provider:
+                path = extract_report(digest, store, config=config, budget=None,
+                                      resume_from='prior', execute=False)
+            provider.assert_not_called()
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+            self.assertIn('mark note reread pending:', saved['blocks'][0]['attachment_repair_pending'])
 
     def test_unresolved_result_mark_remains_after_one_source_reread(self):
         import pymupdf
