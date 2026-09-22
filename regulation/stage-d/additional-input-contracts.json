@@ -2785,7 +2785,8 @@
         "evaluation-context",
         "recipient-notice",
         "removal-performance",
-        "calendar"
+        "calendar",
+        "case-prescription"
       ],
       "kind": "evidence-or-derived-input"
     },
@@ -2892,7 +2893,8 @@
     {
       "consumer": "quantities.scalar",
       "contracts": [
-        "evaluation-context"
+        "evaluation-context",
+        "case-prescription"
       ],
       "kind": "accepted-B-quantity-and-C-arithmetic"
     },
@@ -2953,7 +2955,8 @@
       "consumer": "quantities.clock_boundary",
       "contracts": [
         "evaluation-context",
-        "calendar"
+        "calendar",
+        "case-prescription"
       ],
       "kind": "exact-B-anchor-event-contract"
     },
@@ -2982,7 +2985,8 @@
       "consumer": "quantities.timely_completion",
       "contracts": [
         "evaluation-context",
-        "calendar"
+        "calendar",
+        "case-prescription"
       ],
       "kind": "exact-B-consumer-event-and-performance-contract"
     },
@@ -3804,8 +3808,15 @@
       "contracts": [
         "calendar"
       ]
+    },
+    "core.PrescribedTerm": {
+      "owner": "The operative source clause supplies its period and exact document/clause/recipient/commencement-work context. B owns the admitted temporal form; C owns counting. This typed input is not proof of correspondence or legal applicability.",
+      "contracts": [
+        "case-prescription",
+        "operative-act"
+      ]
     }
   },
-  "clock_binding": "Each clock uses its exact accepted B consumer and anchor; the consumer's predicate, declared-evidence and performance contracts supply events. Numeric magnitude/unit/ordering remain B-owned. Calendar convention remains C-owned.",
+  "clock_binding": "Each clock uses its exact accepted B consumer and anchor; the consumer’s predicate, declared-evidence and performance contracts supply events. B owns a fixed quantity or the explicitly admitted source-term binding. A source-bound period comes from the same operative clause and qualified recipient/commencement-work context; no term is borrowed from another act. Calendar qualification remains C-owned. Availability of proposed forms requires acceptance of their exact upstream owner content.",
   "parameter_binding": "Each B parameter retains its exact accepted consumer and applicability. Observed quantities and population/method scope use that consumer's declared-evidence and callable contracts; source-stated constants are not reminted in D."
 }

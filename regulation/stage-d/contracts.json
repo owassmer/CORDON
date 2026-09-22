@@ -130,9 +130,10 @@
     {
       "id": "case-prescription",
       "claim": "The particular act governs the stated work population and recipient positions.",
-      "grain": "one source-annex occurrence linked to its instrument and case",
+      "grain": "one operative clause or source-annex occurrence linked to its instrument and case",
       "keys": [
         "instrument identity",
+        "operative clause occurrence",
         "annex/row occurrence",
         "native plant/sample reference",
         "municipality/sheet/parcel"
@@ -142,13 +143,16 @@
         "plant/sample/report references",
         "recipient positions",
         "predecessor and exact corrected payload",
-        "governing A references"
+        "governing A references",
+        "express operative conditional direction and its trigger, distinct from recital or discretionary wording",
+        "source-stated term magnitude, unit and anchor for concrete commencement",
+        "separate commencement-work and directed coercive populations, service and executor"
       ],
       "acquisition_routes": [
         "original BURP prescription and complete annexes",
         "official correction and supplement acts"
       ],
-      "sufficiency": "Read original clauses and preserve each annex occurrence. A partial-parcel intersection is not a plant census; several listed positions are not necessarily distinct people. Old generic Article 7/13 classifications and default state columns are not admitted as legal or event facts.",
+      "sufficiency": "Read original clauses and preserve each annex occurrence. A partial-parcel intersection is not a plant census; several listed positions are not necessarily distinct people. Old generic Article 7/13 classifications and default state columns are not admitted as legal or event facts. A source-bound period requires a supported correspondence from that exact clause through the operative recipient and commencement work to its notice and performance evidence. The conditional direction and coercive population remain source-owned; an identifier match alone does not establish this correspondence. A reading that has not recovered the condition or period supplies no default.",
       "absence": "Missing annex relations remain unresolved; do not turn an omitted row into exclusion from the lawful plant population.",
       "admissible_instance_roles": [
         "official-record",
