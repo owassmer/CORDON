@@ -664,5 +664,145 @@
       "B-CLK-DDS6-2022-notification-noncommencement",
       "B-CLK-DDS96-2023-notification-noncommencement"
     ]
+  },
+  "stage_d": {
+    "base_sha256": {
+      "regulation/stage-d/predicate-contracts.json": "d72a88517c70e991c9d6383d6f45863b49a55ab0c44ffa1bce6408b6473a28e3",
+      "regulation/stage-d/additional-input-contracts.json": "343a581c017ab4a6c7a97cff206e29ad09f5673272133cc6b16f75f6d8c1b975"
+    },
+    "predicate_bindings": {
+      "remove": [
+        "removal of infected plants and the prescribed plants in the Bisceglie infected area is lawfully due from this recipient under this clause",
+        "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause",
+        "removal of infected plants only is lawfully due from this recipient under this clause",
+        "this operative DDS 115/2025 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 117/2025 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 135/2021 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 138/2024 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 147/2024 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 151/2024 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 173/2025 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 188/2024 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 2/2023 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 201/2025 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 27/2024 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 35/2026 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 4/2022 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 45/2023 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 51/2023 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 52/2024 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 6/2022 prescription, including any applicable correction, governs this recipient",
+        "this operative DDS 96/2023 prescription, including any applicable correction, governs this recipient"
+      ],
+      "add": [
+        {
+          "predicate": "an operative obligation-creating prescription states the execution term and methods for this subject and work",
+          "contracts": [
+            "case-prescription"
+          ]
+        },
+        {
+          "predicate": "the administrative act is effective and calls for this execution",
+          "contracts": [
+            "operative-act"
+          ]
+        },
+        {
+          "predicate": "the applicable prior diffida has been legally satisfied for this coercive execution",
+          "contracts": [
+            "recipient-notice",
+            "operative-assessment"
+          ]
+        },
+        {
+          "predicate": "the execution is due now under the law and the operative act itself",
+          "contracts": [
+            "operative-act",
+            "operative-assessment"
+          ]
+        },
+        {
+          "predicate": "the general Article21-ter coercive-execution route applies in the statutory case and manner",
+          "contracts": [
+            "operative-act",
+            "operative-assessment"
+          ]
+        },
+        {
+          "predicate": "the operative prescription expressly directs coercive removal after noncommencement within its stated notification-based term",
+          "contracts": [
+            "case-prescription"
+          ]
+        },
+        {
+          "predicate": "the person has not complied with the effective obligation",
+          "contracts": [
+            "removal-performance",
+            "operative-assessment"
+          ]
+        },
+        {
+          "predicate": "the prescribed coercive population remains lawfully due under this direction",
+          "contracts": [
+            "operative-act",
+            "case-prescription"
+          ]
+        },
+        {
+          "predicate": "the prescribed commencement work is lawfully due from this recipient under this clause",
+          "contracts": [
+            "operative-act",
+            "case-prescription"
+          ]
+        },
+        {
+          "predicate": "this operative prescription, including applicable corrections, governs this recipient and commencement work",
+          "contracts": [
+            "operative-act",
+            "case-prescription"
+          ]
+        }
+      ]
+    },
+    "declared_evidence": {
+      "remove": [
+        "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline."
+      ],
+      "add": [
+        {
+          "evidence": "Applicable statutory coercive-execution route; effective obligation and noncompliance; content and legally sufficient communication of the applicable prior diffida; any established special-law procedure; actual execution is separately evidenced.",
+          "contracts": [
+            "operative-act",
+            "operative-assessment",
+            "recipient-notice",
+            "removal-performance"
+          ]
+        },
+        {
+          "evidence": "Effective administrative act; execution required by its operative content; any different execution timing established by applicable law or the act itself.",
+          "contracts": [
+            "operative-act",
+            "operative-assessment"
+          ]
+        },
+        {
+          "evidence": "Exact operative prescription and clause; source-stated conditional direction and executor; separately identified commencement and coercive populations; obligated recipient; applicable legal and correction context; source-qualified notice-based term; legally sufficient notification; actual commencement history through the source deadline.",
+          "contracts": [
+            "case-prescription",
+            "operative-act",
+            "party-land-standing",
+            "recipient-notice",
+            "removal-performance"
+          ]
+        },
+        {
+          "evidence": "Operative obligation-creating prescription; exact clause, obligated recipient and required work; expressly stated execution term, triggering event and methods; source-supported corrections and inheritance.",
+          "contracts": [
+            "case-prescription",
+            "operative-act"
+          ]
+        }
+      ]
+    }
   }
 }

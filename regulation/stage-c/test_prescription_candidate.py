@@ -8,6 +8,8 @@ from hashlib import sha256
 import io
 import json
 from pathlib import Path
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -26,6 +28,8 @@ JURISDICTION = 'regulation/jurisdiction/canonical/authoring.json'
 LEDGER = 'regulation/stage-b/clocks-and-parameters.json'
 POPULATION = 'regulation/stage-b/population.json'
 CALENDAR = 'regulation/stage-c/calendar-rules.json'
+PREDICATES = 'regulation/stage-d/predicate-contracts.json'
+ADDITIONAL = 'regulation/stage-d/additional-input-contracts.json'
 sys.path.insert(0, str(ROOT / 'scripts'))
 import verify_jurisdiction_stage_a as jurisdiction_verifier
 import verify_stage_b as b_verifier
@@ -123,20 +127,65 @@ def expand_candidate(proposal=None, *, root=ROOT):
         raise ValueError('Calendar-removal clock is absent')
     documents[CALENDAR] = {group: [identity for identity in identities if identity not in removed]
                            for group, identities in calendar.items()}
+    d = proposal['stage_d']
+    if set(d['base_sha256']) != {PREDICATES, ADDITIONAL}:
+        raise ValueError('Candidate must identify its exact affected D owners')
+    for relative, digest in d['base_sha256'].items():
+        raw = (root / relative).read_bytes()
+        if sha256(raw).hexdigest() != digest:
+            raise ValueError(f'D owner base changed: {relative}')
+        documents[relative] = json.loads(raw)
+    documents[PREDICATES]['bindings'] = sorted(_patch_rows(
+        documents[PREDICATES]['bindings'], lambda row: row['predicate'],
+        **d['predicate_bindings']), key=lambda row: row['predicate'])
+    documents[ADDITIONAL]['declared_evidence'] = sorted(_patch_rows(
+        documents[ADDITIONAL]['declared_evidence'], lambda row: row['evidence'],
+        **d['declared_evidence']), key=lambda row: row['evidence'])
     return documents
 
 
-def verified_candidate_snapshot(proposal=None):
-    """Run A/B mechanics on temporary expansion, then construct C explicitly."""
-    documents = expand_candidate(proposal)
+@contextlib.contextmanager
+def candidate_files(proposal=None, *, root=ROOT):
+    """Materialize a disposable, explicitly OPEN review tree for unchanged checks."""
+    documents = expand_candidate(proposal, root=root)
     with tempfile.TemporaryDirectory(prefix='cordon-prescription-candidate-') as directory:
         temporary = Path(directory)
         for relative, document in documents.items():
             path = temporary / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + '\n')
+        copy_paths = [f'regulation/stage-d/{name}' for name in
+                      ('contracts.json', 'source-bindings.json', 'inventory.py', 'verify.py')]
+        copy_paths += ['regulation/stage-c/reference-bindings.json']
+        copy_paths += [str(path.relative_to(root)) for path in
+                       (root / 'regulation/stage-c/cordon_c').glob('*.py')]
+        for relative in copy_paths:
+            target = temporary / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(root / relative, target)
+        # The copied inventory checks exact candidate bytes. This review-only
+        # manifest deliberately cannot pass ordinary accepted Snapshot.load().
+        entry = lambda relative: dict(path=relative,
+            sha256=sha256((temporary / relative).read_bytes()).hexdigest())
+        state = dict(schema='cordon-review-candidate-not-accepted', stages={
+            'A': dict(status='OPEN', canonical_artifacts={'eu': entry(EU),
+                                                        'italy_and_puglia': entry(JURISDICTION)}),
+            'B': dict(status='OPEN', canonical=entry(LEDGER), population=entry(POPULATION))})
+        (temporary / 'state').mkdir()
+        (temporary / 'state/CURRENT.json').write_text(json.dumps(state) + '\n')
+        yield temporary, documents
+
+
+def verified_candidate_snapshot(proposal=None):
+    """Verify the proposed A/B/D graph, then construct review C explicitly."""
+    with candidate_files(proposal) as (temporary, documents):
         jurisdiction_verifier.verify(temporary / JURISDICTION, check_projection=False, check_authority=False)
         b_verifier.main(temporary / LEDGER, (temporary / EU, temporary / JURISDICTION), temporary / POPULATION)
+        result = subprocess.run([sys.executable, str(temporary / 'regulation/stage-d/verify.py')],
+                                text=True, capture_output=True)
+        if result.returncode:
+            raise ValueError('Candidate D owner graph: ' + result.stderr.strip())
+        print(result.stdout.strip())
     references = json.loads((ROOT / 'regulation/stage-c/reference-bindings.json').read_text())
     return Snapshot(documents[EU] + documents[JURISDICTION], documents[LEDGER], references)
 
@@ -189,6 +238,35 @@ class PrescriptionCandidate(unittest.TestCase):
             self.assertEqual(row['status'], 'OPEN')
             for field in ('reread', 'semantic_reviewer', 'acceptance_act', 'acceptance_evidence', 'accepted_content_sha256'):
                 self.assertIsNone(row[field])
+
+    def test_copied_candidate_tree_cannot_be_loaded_as_accepted(self):
+        with candidate_files() as (temporary, _):
+            with self.assertRaisesRegex(ValueError, 'C requires accepted upstream meaning'):
+                Snapshot.load(temporary)
+
+    def test_candidate_d_bindings_are_verified_against_changed_upstream(self):
+        original = json.loads((ROOT / PROPOSAL).read_text())
+        for field, removal, expected in (
+                ('predicate_bindings', 'add', 'Factual consumer coverage'),
+                ('predicate_bindings', 'remove', 'Factual consumer coverage'),
+                ('declared_evidence', 'add', 'Consumer coverage differs: declared_evidence')):
+            changed = copy.deepcopy(original)
+            changed['stage_d'][field][removal].pop()
+            with self.subTest(field=field, removal=removal):
+                with contextlib.redirect_stdout(io.StringIO()):
+                    with self.assertRaisesRegex(ValueError, expected):
+                        verified_candidate_snapshot(changed)
+        changed = copy.deepcopy(original)
+        changed['stage_d']['predicate_bindings']['add'][0]['contracts'] = ['invented-family']
+        with contextlib.redirect_stdout(io.StringIO()):
+            with self.assertRaisesRegex(ValueError, 'Binding points outside the contract owner'):
+                verified_candidate_snapshot(changed)
+
+    def test_candidate_d_patch_cannot_apply_to_another_owner_base(self):
+        changed = json.loads((ROOT / PROPOSAL).read_text())
+        changed['stage_d']['base_sha256'][PREDICATES] = '0' * 64
+        with self.assertRaisesRegex(ValueError, 'D owner base changed'):
+            expand_candidate(changed)
 
     def test_interpretation_cannot_masquerade_as_a_statutory_provision(self):
         proposal = json.loads((ROOT / PROPOSAL).read_text())

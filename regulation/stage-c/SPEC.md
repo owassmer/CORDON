@@ -33,13 +33,26 @@ implicit current-time lookup.
 
 The exact temporary [owner patch](../../corpus/workbench/prescription-clause-amendment.json)
 is **not accepted**. It changes no accepted A/B file or acceptance record.
-`test_prescription_candidate.py` checks the stated accepted-base hashes, expands
-the patch only into temporary files, verifies A/B, and constructs an explicit
-`Snapshot`. Ordinary `Snapshot.load()` retains its accepted-owner hash gates.
+`test_prescription_candidate.py` checks the stated accepted A/B hashes and exact
+affected D-owner bases. It expands the patch only into temporary files, verifies
+A/B and the copied D owner graph, and constructs an explicit review `Snapshot`.
+The review tree's A/B state is OPEN; ordinary `Snapshot.load()` rejects it.
+The candidate includes removal/addition of factual and declared-evidence bindings
+in the existing D owners, so proposed predicates must pass the ordinary Evidence
+contract before they can reach the decision consumer. A qualified source clause
+does not supply missing applicability, notice, lawfulness or performance facts.
+Ordinary `Snapshot.load()` retains its accepted-owner hash gates.
 The changed C package intentionally does not match the CLOSED C digest in
 `CURRENT`; review checks are not acceptance. Promotion requires Owen's acceptance
 of the exact reviewed content, updated acceptance bindings and deletion of the
 temporary patch and its expansion harness.
+
+`test_prescription_migration.py` preserves the retired registration tests'
+substantive condition, source-bound serialization and correction-meaning demands
+against the candidate. The C noncommencement regression uses an explicit source
+fixture rather than a retired act ID. Actual differing-population and inherited
+recipient/work/notice relationships still require their ordinary D source evidence;
+these mechanism tests do not establish them.
 
 In the proposed A content, statutory execution rules and the
 `SOURCE-CLAUSE:notification-noncommencement-direction` interpretation have

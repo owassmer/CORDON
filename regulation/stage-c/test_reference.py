@@ -923,30 +923,25 @@ class ComposedTemporalCases(unittest.TestCase):
 
     def test_case_commencement_is_not_completion_and_requires_evidence(self):
         from cordon_c.bindings import noncommencement_facts
-        s = Snapshot.load()
-        identity = "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement"
-        row = s.version(identity, AT)
-        # This fixture explicitly establishes the recipient, lawful work and
-        # notification. Only the two temporal leaves come from the calculation.
-        facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])
-                 if p not in {"the source notification-based commencement deadline has elapsed",
-                              "noncommencement of that work by the source deadline is established"}}
+        from test_prescribed_terms import CLOCK, snapshot_fixture, term
+        s = snapshot_fixture()
+        # This source-bound fixture isolates temporal behavior. The explicit
+        # candidate tests exercise the operative clause's remaining legal guards.
         args = dict(notification=datetime(2026, 8, 3, 10, tzinfo=ROME),
                     evaluated_at=datetime(2026, 8, 14, tzinfo=ROME),
+                    prescribed_term=term(),
                     zone=ROME, calendar=WorkingCalendar(date(2026,1,1),date(2027,1,1),frozenset(),frozenset({5,6})))
-        clock = "B-CLK-DDS147-2024-notification-noncommencement"
-        for events, complete, expected in [({}, True, "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"),
-                ({"actual-start": datetime(2026, 8, 5, 12, tzinfo=ROME)}, True, "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"),
+        for events, complete, expected in [({}, True, "TEMPORAL_CONDITION_ESTABLISHED"),
+                ({"actual-start": datetime(2026, 8, 5, 12, tzinfo=ROME)}, True, "NOT_ESTABLISHED"),
                 ({}, False, None)]:
-            computed = noncommencement_facts(s, clock, AT, **args,
+            computed = noncommencement_facts(s, CLOCK, AT, **args,
                         qualifying_commencements=events, commencement_records_complete=complete)
-            self.assertEqual(evaluate(s, identity, AT, merge_facts(facts, computed)).effect, expected)
+            self.assertEqual(evaluate(s, "fixture", AT, computed).effect, expected)
         # Work that began before notification does not need to begin again.
-        computed = noncommencement_facts(s, clock, AT, **args,
+        computed = noncommencement_facts(s, CLOCK, AT, **args,
                     qualifying_commencements={"early-start": datetime(2026, 8, 2, tzinfo=ROME)},
                     commencement_records_complete=False)
-        self.assertEqual(evaluate(s, identity, AT, merge_facts(facts, computed)).effect,
-                         "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED")
+        self.assertEqual(evaluate(s, "fixture", AT, computed).effect, "NOT_ESTABLISHED")
 
     def test_early_election_defeats_silence_without_waiting_for_publication_end(self):
         from cordon_c.bindings import election_window_facts
