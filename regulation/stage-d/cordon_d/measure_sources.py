@@ -1,8 +1,28 @@
 """Source addresses for administrative interpretation; no operative classification."""
 import json
+import unicodedata
 
 from .source_associations import read_associations, _header, _lines, _orientation
 from .store import blob_path, file_digest
+
+
+def native_text_issue(text):
+    """Name structural extraction loss, without guessing the printed characters."""
+    if text is None:
+        return 'Native cell text was not extracted'
+    if any(unicodedata.category(character) in {'Co', 'Cs'} or character == '\ufffd'
+           for character in text):
+        return 'Native text contains opaque or replacement characters; read the rendered source cell'
+    return None
+
+
+def _cell_field(table, table_ref, cell):
+    field = dict(table['cells'][cell], source=table['source'], page=table['page'],
+                 locator=f'{table_ref}/cell:{cell}')
+    issue = native_text_issue(field['text'])
+    if issue:
+        field.update(native_text=field['text'], text=None, native_text_issue=issue)
+    return field
 
 
 def source_material(sources, store):
@@ -101,13 +121,20 @@ CONTEXT_MARKER = '\nSOURCE ADDRESSES (one-based rows/columns; zero-based word of
 
 def _address_values(addresses):
     """Only values the model selects; geometry remains with native composition."""
+    tables = {}
+    for ref, table in addresses['tables'].items():
+        cells = {key: cell['text'] if isinstance(cell, dict) else cell
+                 for key, cell in table['cells'].items()}
+        tables[ref] = dict(cells=cells,
+                          rows=[{key: value for key, value in row.items()
+                                 if key != 'association' or value is not None}
+                                for row in table['rows']])
+        issues = {key: issue for key, value in cells.items()
+                  if (issue := native_text_issue(value))}
+        if issues:
+            tables[ref]['native_text_issues'] = issues
     return {
-        'tables': {ref: dict(cells={key: cell['text'] if isinstance(cell, dict) else cell
-                                   for key, cell in table['cells'].items()},
-                            rows=[{key: value for key, value in row.items()
-                                   if key != 'association' or value is not None}
-                                  for row in table['rows']])
-                   for ref, table in addresses['tables'].items()},
+        'tables': tables,
         'lines': {ref: line['words'] if isinstance(line, dict) else line
                   for ref, line in addresses['lines'].items()},
         'images': sorted(addresses['images']),
@@ -176,8 +203,15 @@ def field_fragment(material, reference):
         if association and any(row['cells'][field['column'] - 1] == cell
                                for field in association['fields'].values()):
             raise ValueError('The association owner already supplies this source column')
-    return dict(table['cells'][cell], source=table['source'], page=table['page'],
-                locator=f'{table_ref}/cell:{cell}')
+    field = _cell_field(table, table_ref, cell)
+    if 'transcription' in reference:
+        if not field.get('native_text_issue'):
+            raise ValueError('Use the native source cell value, including a printed blank')
+        text = reference['transcription']
+        if not text.strip() or native_text_issue(text):
+            raise ValueError('A visual cell reading needs recovered source text')
+        field.update(text=text, derivation='model transcription of rendered source cell')
+    return field
 
 
 def table_fields(material, table_ref, row_number, columns, fragments=None):
@@ -195,8 +229,7 @@ def table_fields(material, table_ref, row_number, columns, fragments=None):
         cell = row['cells'][column - 1]
         if cell is None:
             raise ValueError('No unique physical cell at the selected source position')
-        fields[role] = dict(table['cells'][cell], source=table['source'], page=table['page'],
-                            locator=f'{table_ref}/cell:{cell}')
+        fields[role] = _cell_field(table, table_ref, cell)
         references = (fragments or {}).get(role, [])
         if references:
             parts = [field_fragment(material, reference) for reference in references]
@@ -214,7 +247,8 @@ def table_fields(material, table_ref, row_number, columns, fragments=None):
                 raise ValueError('A composed source field has overlapping spans')
             if not any((p['text'] or '').strip() for p in parts):
                 raise ValueError('A field continuation has no recovered source text')
-            fields[role] = {'text': '\n'.join(p['text'] or '' for p in parts),
+            fields[role] = {'text': (None if any(p['text'] is None for p in parts) else
+                                    '\n'.join(p['text'] for p in parts)),
                             'fragments': parts}
     header = table.get('native_header')
     if association is None and header and row_number > header['row']:
@@ -227,8 +261,7 @@ def table_fields(material, table_ref, row_number, columns, fragments=None):
             heading = table['rows'][header['row'] - 1]['cells'][column - 1]
             if cell is None or heading is None:
                 continue
-            fields[role] = dict(table['cells'][cell], column=column,
-                source=table['source'], page=table['page'], locator=f'{table_ref}/cell:{cell}',
+            fields[role] = dict(_cell_field(table, table_ref, cell), column=column,
                 header=dict(table['cells'][heading], source=table['source'], page=table['page'],
                             locator=f'{table_ref}/cell:{heading}'))
     return fields, association

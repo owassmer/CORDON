@@ -145,8 +145,8 @@ class MeasureFindings(unittest.TestCase):
         self.assertFalse(output['candidates'])
         self.assertFalse(output['matches'])
 
-    def test_source_host_and_coordinate_conflicts_do_not_attach(self):
-        for fields, reason in [({'host': 'Prunus dulcis'}, 'host conflicts'),
+    def test_unknown_host_equivalence_and_coordinate_conflicts_do_not_attach(self):
+        for fields, reason in [({'host': 'Prunus dulcis'}, 'host unresolved label equivalence'),
                                ({'longitude': '18,29996696'}, 'coordinates conflicts'),
                                ({'latitude': None}, 'coordinates unresolved')]:
             with self.subTest(fields=fields):

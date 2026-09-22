@@ -177,13 +177,19 @@ CLOCK_ANCHORS = {
 }
 
 
-def event_deadline(snapshot, clock_id, at, event, *, document, recipient, zone, calendar=None):
+def event_deadline(snapshot, clock_id, at, event, *, document, recipient, zone, calendar=None,
+                   prescribed_term=None):
     """Supply B's exact anchor to C, preserving what the calculation establishes.
 
     This computes the boundary. B's applies_when / A's recipient effect and a
     complete history remain independent inputs to any breach/silence conclusion.
     """
-    quantity = snapshot.quantity(clock_id, at)
+    term_input = {}
+    if prescribed_term is not None:
+        if (document, recipient) != (prescribed_term.document, prescribed_term.recipient):
+            raise ValueError('Prescribed term belongs to another document or recipient context')
+        term_input['prescribed_term'] = prescribed_term
+    quantity = snapshot.quantity(clock_id, at, **term_input)
     meaning = quantity['anchor'].get('event')
     if meaning not in CLOCK_ANCHORS:
         raise ValueError('This clock requires another source event meaning')
@@ -192,7 +198,8 @@ def event_deadline(snapshot, clock_id, at, event, *, document, recipient, zone, 
         raise ValueError('A municipal posting is not a recipient-specific event')
     anchor = event.anchor(kind=kind, document=document, recipient=recipient,
                           precision='instant' if quantity['unit'] == 'hours' else 'date')
-    return clock_boundary(snapshot, clock_id, at, anchor, zone=zone, calendar=calendar)
+    return clock_boundary(snapshot, clock_id, at, anchor, zone=zone, calendar=calendar,
+                          **term_input)
 
 
 def publication_deadline(snapshot, clock_id, at, publication, *, document,

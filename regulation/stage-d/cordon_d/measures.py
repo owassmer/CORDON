@@ -2,6 +2,9 @@
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
+from copy import deepcopy
+from decimal import Decimal, InvalidOperation
+import json
 
 from cordon_c.core import MissingInput
 from .document_subscription import read_documents, read_retained
@@ -10,7 +13,8 @@ from .events import AdministrativeEvent
 from .removal_events import act_id
 from .store import blob_path
 from .measure_sources import (source_material, material_context, context_matches,
-                              table_fields, native_span, selected_association)
+                              table_fields, native_span, selected_association, native_text_issue)
+from .source_associations import HEADINGS
 
 
 def _object(**properties):
@@ -31,13 +35,33 @@ OPTIONAL_TEXT = {'type': ['string', 'null']}
 CITATION = _object(source=TEXT, page={'type': 'integer', 'minimum': 1},
                    locator=TEXT, quote=TEXT)
 CITATIONS = _array(CITATION)
-FIELD_ROLE = _choice('plant_id', 'reference_plant_id', 'municipality', 'cadastral_section',
-                     'sheet', 'parcel', 'addressee')
+FIELD_ROLE = _choice(*sorted(set(HEADINGS.values()) |
+                            {'reference_plant_id', 'cadastral_section', 'addressee'}))
 SPAN = _object(line_ref=TEXT, first_word={'type': 'integer', 'minimum': 0},
                end_word={'type': 'integer', 'minimum': 1})
-FIELD_FRAGMENT = {'anyOf': [_object(table_ref=TEXT, cell=TEXT), SPAN]}
+FIELD_FRAGMENT = {'anyOf': [_object(table_ref=TEXT, cell=TEXT), SPAN,
+                            _object(table_ref=TEXT, cell=TEXT, transcription=TEXT)]}
 ASSOCIATION_REF = {'anyOf': [
     _object(table_ref=TEXT, row={'type': 'integer', 'minimum': 1}), {'type': 'null'}]}
+COMMENCEMENT_COMPONENTS = {'anyOf': [
+    {'type': 'null'}, _array(_object(
+        trigger=_choice('noncommencement', 'other', 'unresolved'),
+        performance=_choice('concrete-commencement', 'completion', 'other', 'unresolved'),
+        required_actor=OPTIONAL_TEXT, commencement_work=OPTIONAL_TEXT,
+        commencement_direction_ids=_array(TEXT),
+        period={'anyOf': [{'type': 'null'}, _object(
+            magnitude=OPTIONAL_TEXT,
+            unit=_choice('days', 'working-days', 'months', 'years', 'hours', 'other', 'unresolved'),
+            bound=_choice('within-maximum', 'other', 'unresolved'),
+            literal=TEXT, anchor=_choice('notification', 'other', 'unresolved'),
+            anchor_statement=TEXT)]},
+        commitment=_choice('will-direct', 'may-direct', 'other', 'unresolved'),
+        support=CITATIONS))]}
+ISSUES = _array(_object(source=TEXT, page={'type': ['integer', 'null'], 'minimum': 1},
+                       aspect=_choice('identity', 'targets', 'scope', 'timing',
+                                      'relationships', 'events', 'coverage'),
+                       cause=_choice('source-not-stated', 'unreadable', 'not-recovered',
+                                     'not-supplied', 'conflict'), detail=TEXT))
 SCHEMA = _object(
     identity=_object(issuer=TEXT, authority=_choice('puglia-osservatorio', 'other', 'unresolved'),
                      number=OPTIONAL_TEXT, adopted=OPTIONAL_TEXT, title=TEXT, support=CITATIONS),
@@ -47,7 +71,8 @@ SCHEMA = _object(
         work=_choice('removal', 'treatment', 'destruction', 'supervision', 'communication',
                      'response', 'effectiveness', 'other'),
         scope=TEXT, recipients=TEXT, conditions=TEXT, timing=TEXT,
-        authority_references=_array(TEXT), support=CITATIONS)),
+        authority_references=_array(TEXT), support=CITATIONS,
+        commencement_components=COMMENCEMENT_COMPONENTS)),
     parts=_array(_object(label=TEXT, source=TEXT, pages=_array({'type': 'integer', 'minimum': 1}),
                         role=_choice('act', 'target-table', 'map', 'blank-form',
                                      'completed-record', 'other'),
@@ -80,11 +105,7 @@ SCHEMA = _object(
                          evidence=_choice('direct-record', 'reported-event', 'intended', 'blank-form'),
                          occurred_on=OPTIONAL_TEXT, time_statement=TEXT,
                          scope=TEXT, support=CITATIONS)),
-    issues=_array(_object(source=TEXT, page={'type': ['integer', 'null'], 'minimum': 1},
-                         aspect=_choice('identity', 'targets', 'scope', 'timing',
-                                        'relationships', 'events', 'coverage'),
-                         cause=_choice('source-not-stated', 'unreadable', 'not-recovered',
-                                       'not-supplied', 'conflict'), detail=TEXT)),
+    issues=ISSUES,
 )
 PROMPT = (Path(__file__).resolve().parents[1] / 'measure-reading.txt').read_text()
 
@@ -99,10 +120,54 @@ class MeasureReading:
     response: dict
     material: dict
     association_readings: tuple
+    component_responses: tuple = ()
 
     @property
     def values(self):
         return self.response['reading']
+
+    def commencement_components(self, direction_id):
+        """Source components only; their presence does not qualify an A form.
+
+        Explicit follow-ups supply only the selected component projection. The
+        original direction, scope, targets and response remain unchanged.
+        """
+        directions = [d for d in self.values['directions'] if d['id'] == direction_id]
+        if len(directions) != 1:
+            raise ValueError('Select one existing direction from this reading')
+        direction = directions[0]
+        readings = tuple(
+            dict(request_sha256=response['request_sha256'],
+                 components=entry['commencement_components'],
+                 issues=tuple(response['reading']['issues']))
+            for response in self.component_responses
+            for entry in response['reading']['directions'] if entry['id'] == direction_id)
+        if readings and direction.get('commencement_components') is not None:
+            # A selected supplement does not supersede an already stated base
+            # reading, including an explicit source absence. An unread base can
+            # gain recovered components without manufacturing a contradiction.
+            readings = (dict(request_sha256=self.response['request_sha256'],
+                             components=direction['commencement_components'],
+                             issues=tuple(self.values['issues'])), *readings)
+        if not readings:
+            if 'commencement_components' not in direction:
+                return dict(direction=direction, components=None,
+                            cause='not-recovered: retained contract did not request structured commencement components',
+                            readings=(), issues=tuple(self.values['issues']))
+            readings = (dict(request_sha256=self.response['request_sha256'],
+                             components=direction['commencement_components'],
+                             issues=tuple(self.values['issues'])),)
+        values = [reading['components'] for reading in readings]
+        issues = tuple(issue for reading in readings for issue in reading['issues'])
+        if any(value != values[0] for value in values[1:]):
+            return dict(direction=direction, components=None,
+                        cause='conflict: explicitly selected component readings disagree',
+                        readings=readings, issues=issues)
+        return dict(direction=direction,
+                    components=tuple(values[0]) if values[0] is not None else None,
+                    cause=None if values[0] is not None else
+                    'unresolved: structured commencement reading; see source-scoped issues',
+                    readings=readings, issues=issues)
 
     @property
     def identity(self):
@@ -152,7 +217,8 @@ class MeasureReading:
     @staticmethod
     def _target(fields, association, scope, occurrence):
         def value(role):
-            return fields.get(role, {}).get('text')
+            text = fields.get(role, {}).get('text')
+            return text if native_text_issue(text) is None else None
         return dict(occurrence=occurrence, fields=fields, association=association,
                     reference=value('plant_id'), municipality=value('municipality'),
                     cadastral_section=value('cadastral_section'), sheet=value('sheet'), parcel=value('parcel'),
@@ -172,8 +238,19 @@ class MeasureReading:
                 if occurrence not in targets:
                     targets[occurrence] = self._target(fields, association, scope, occurrence)
                     issue = self.material['tables'][scope['table_ref']].get('native_field_issue')
-                    if association is None and 'plant_id' in fields and issue:
+                    missing_columns = set(range(1, len(native['cells']) + 1)) - set(columns.values())
+                    if association is None and 'plant_id' in fields and issue and missing_columns:
                         targets[occurrence]['native_field_issue'] = issue
+                    unavailable = []
+                    for field in fields.values():
+                        for fragment in field.get('fragments', [field]):
+                            issue = native_text_issue(fragment.get('text'))
+                            if fragment.get('text') is None:
+                                issue = fragment.get('native_text_issue', issue)
+                            if issue:
+                                unavailable.append(issue)
+                    if unavailable:
+                        targets[occurrence]['native_field_issue'] = '; '.join(dict.fromkeys(unavailable))
                 else:
                     target = targets[occurrence]
                     target['direction_ids'] = sorted(set(target['direction_ids']) | set(scope['direction_ids']))
@@ -341,6 +418,54 @@ class MeasureReading:
                                       date.fromisoformat(event['occurred_on']), support)
 
 
+def _validate_direction_components(direction, ids, issues):
+    if 'commencement_components' not in direction:
+        return
+    components = direction['commencement_components']
+
+    def needs_issue(support, *, unresolved=False):
+        pages = {(c['source'], c['page']) for c in support}
+        causes = {'unreadable', 'not-recovered', 'not-supplied', 'conflict'}
+        if not unresolved:
+            causes.add('source-not-stated')
+        if not any(i['aspect'] in {'scope', 'timing', 'relationships', 'coverage'}
+                   and i['cause'] in causes and i['detail'].strip()
+                   and any(i['source'] == source and i['page'] in {None, number}
+                           for source, number in pages) for i in issues):
+            raise ValueError('Unavailable commencement component needs its source-scoped cause')
+
+    if components is None:
+        needs_issue(direction['support'], unresolved=True)
+        return
+    for component in components:
+        selected = component['commencement_direction_ids']
+        if len(selected) != len(set(selected)) or not set(selected) <= set(ids):
+            raise ValueError('Commencement work refers to an absent or repeated direction')
+        missing = any(component[field] is None for field in ('required_actor', 'commencement_work'))
+        for field in ('required_actor', 'commencement_work'):
+            if component[field] is not None and not component[field].strip():
+                raise ValueError('A recovered commencement statement cannot be blank')
+        missing |= any(component[field] == 'unresolved' for field in ('trigger', 'performance', 'commitment'))
+        period = component['period']
+        if period is None:
+            missing = True
+        else:
+            if not period['literal'].strip() or not period['anchor_statement'].strip():
+                raise ValueError('A period needs its literal source term and anchor statement')
+            magnitude = period['magnitude']
+            if magnitude is not None:
+                try:
+                    finite = Decimal(magnitude).is_finite()
+                except InvalidOperation:
+                    finite = False
+                if not finite:
+                    raise ValueError('A recovered period magnitude must be a finite source number')
+            missing |= (magnitude is None or period['unit'] == 'unresolved'
+                        or period['anchor'] == 'unresolved' or period['bound'] == 'unresolved')
+        if missing:
+            needs_issue(component['support'])
+
+
 def _validate_reading(reading, sources, store, material):
     """Check source bindings and internal references; this does not certify meaning."""
     import pymupdf
@@ -403,10 +528,13 @@ def _validate_reading(reading, sources, store, material):
     ids = [d['id'] for d in reading['directions']]
     if any(not x for x in ids) or len(ids) != len(set(ids)):
         raise ValueError('Direction references must be distinct within this reading')
+    for direction in reading['directions']:
+        _validate_direction_components(direction, ids, reading['issues'])
     for target in [*reading['target_scopes'], *reading['prose_positions'], *reading['image_positions']]:
         if not set(target['direction_ids']) <= set(ids):
             raise ValueError('Target refers to an absent direction')
     occupied = set()
+    visual_cells = {}
     for scope in reading['target_scopes']:
         table = material['tables'][scope['table_ref']]
         if not 1 <= scope['first_row'] <= scope['last_row'] <= len(table['rows']):
@@ -414,6 +542,14 @@ def _validate_reading(reading, sources, store, material):
         roles = [c['role'] for c in scope['columns']]
         if len(roles) != len(set(roles)):
             raise ValueError('A source field has more than one column assignment')
+        for column in scope['columns']:
+            for fragment in column.get('fragments', []):
+                if 'transcription' in fragment:
+                    key = fragment['table_ref'], fragment['cell']
+                    text = fragment['transcription']
+                    if key in visual_cells and visual_cells[key] != text:
+                        raise ValueError('One source cell has conflicting visual readings')
+                    visual_cells[key] = text
         for row in range(scope['first_row'], scope['last_row'] + 1):
             key = scope['table_ref'], row
             if key in occupied:
@@ -483,14 +619,17 @@ def read_measure(sources, store, *, execute=False, review_instruction='', timeou
     return MeasureReading(response, material, associations)
 
 
-def retained_measure(request_id, store):
+def retained_measure(request_id, store, *, component_requests=()):
     """Consume a named interpretation with its original context, without re-extraction."""
     response = read_retained(request_id, store)
     from jsonschema import Draft202012Validator
-    from copy import deepcopy
     # Additive source roles need not invalidate an otherwise compatible reading.
     # The old generated-target contract still cannot satisfy this composition.
     compatible = deepcopy(response['reading'])
+    for direction in compatible['directions']:
+        # Validation compatibility is not a source-stated absence. The original
+        # response stays unchanged and the accessor names its missing reading.
+        direction.setdefault('commencement_components', None)
     for reference in compatible['references']:
         reference.setdefault('documents', [])
         reference.setdefault('acts', [])
@@ -508,4 +647,94 @@ def retained_measure(request_id, store):
     if not context_matches(response['request']['prompt'], material):
         raise ValueError('Retained interpretation source addresses differ from the current source material')
     _validate_reading(response['reading'], sources, store, material)
-    return MeasureReading(response, material, associations)
+    measure = MeasureReading(response, material, associations)
+    component_requests = tuple(component_requests)
+    if len(component_requests) != len(set(component_requests)):
+        raise ValueError('Select distinct component-reading requests')
+    supplements = []
+    for identity in component_requests:
+        supplement = read_retained(identity, store)
+        _validate_component_response(measure, supplement, store)
+        supplements.append(supplement)
+    return MeasureReading(response, material, associations, tuple(supplements))
+
+
+def _component_schema(base_request, direction_ids):
+    return _object(base_request={'type': 'string', 'const': base_request},
+                   directions=_array(_object(id=_choice(*direction_ids),
+                                             commencement_components=COMMENCEMENT_COMPONENTS)),
+                   issues=ISSUES)
+
+
+def _validate_component_response(measure, response, store):
+    from jsonschema import Draft202012Validator
+    base = measure.response['request_sha256']
+    reading = response['reading']
+    if reading.get('base_request') != base:
+        raise ValueError('Component reading belongs to another retained base request')
+    if response['request']['sources'] != measure.response['request']['sources']:
+        raise ValueError('Component reading must supply the same complete original sources')
+    if not context_matches(response['request']['prompt'], measure.material):
+        raise ValueError('Component reading source addresses differ from the retained measure')
+    directions = {d['id']: d for d in measure.values['directions']}
+    schema = response['request']['schema']
+    try:
+        selected = schema['properties']['directions']['items']['properties']['id']['enum']
+    except KeyError as error:
+        raise ValueError('Component request has no explicit direction selection') from error
+    if (not selected or len(selected) != len(set(selected)) or not set(selected) <= directions.keys()
+            or schema != _component_schema(base, selected)):
+        raise ValueError('Component request differs from its exact base and source-direction contract')
+    Draft202012Validator(schema).validate(reading)
+    returned = [entry['id'] for entry in reading['directions']]
+    if len(returned) != len(set(returned)) or set(returned) != set(selected):
+        raise ValueError('Component response must account for every selected direction exactly once')
+    projected = deepcopy(measure.values)
+    by_id = {d['id']: d for d in projected['directions']}
+    for entry in reading['directions']:
+        target = by_id[entry['id']]
+        target['commencement_components'] = entry['commencement_components']
+        selected_pages = {(c['source'], c['page']) for c in target['support']}
+        for component in entry['commencement_components'] or ():
+            if not selected_pages.intersection((c['source'], c['page']) for c in component['support']):
+                raise ValueError('Component support must attach to the selected source clause')
+        _validate_direction_components(target, directions, reading['issues'])
+    projected['issues'].extend(reading['issues'])
+    _validate_reading(projected, response['request']['sources'], store, measure.material)
+
+
+def read_measure_components(base_request, direction_ids, store, *, execute=False,
+                            review_instruction='', timeout=1800,
+                            model='gpt-6-astra', effort='medium'):
+    """Read only reached components against the same complete original sources.
+
+    This is the measure owner's additive reading, bound to an exact retained
+    request. It supplies no old period, scope or expected interpretation as an
+    answer, and never replaces the parent's targets, events or raw response.
+    """
+    measure = retained_measure(base_request, store)
+    selected = tuple(direction_ids)
+    directions = {d['id']: d for d in measure.values['directions']}
+    if not selected or len(selected) != len(set(selected)) or not set(selected) <= directions.keys():
+        raise ValueError('Select distinct existing directions from the retained request')
+    schema = _component_schema(base_request, selected)
+    instructions = PROMPT.split('\nCommencement components\n', 1)[1]
+    prompt = (
+        'Read the selected source clauses from the supplied complete originals. '
+        'Return only the requested commencement components and their scoped issues, '
+        'bound to the exact base_request in the schema. The retained IDs and quotations '
+        'locate source clauses; the actual original prevails over any prior interpretation. '
+        'Do not reconstruct identity, targets, unrelated directions or events. '
+        'Return every selected direction, using null with a cause when unresolved.\n'
+        + instructions + material_context(measure.material)
+        + '\nSELECTED COMPONENT OUTPUT IDS\n' + json.dumps(selected)
+        + '\nDIRECTION SOURCE SUPPORT (all retained direction addresses; only selected IDs are outputs)\n'
+        + json.dumps([dict(id=identity, support=direction['support'])
+                      for identity, direction in directions.items()], ensure_ascii=False)
+        + '\n' + review_instruction)
+    response = read_documents(measure.response['request']['sources'], store,
+                              prompt=prompt, schema=schema, model=model, effort=effort,
+                              execute=execute, timeout=timeout,
+                              supplement_page_rotations=True)
+    _validate_component_response(measure, response, store)
+    return response

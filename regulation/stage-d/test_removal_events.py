@@ -91,6 +91,19 @@ class ParsecPublication(unittest.TestCase):
 
 
 class MunicipalPublication(unittest.TestCase):
+    def test_source_term_cannot_change_the_requested_event_context(self):
+        from cordon_d.removal_events import event_deadline
+        for document, recipient in [('another-document', 'recipient-one'),
+                                    ('document-one', 'another-recipient')]:
+            with self.subTest(document=document, recipient=recipient):
+                term = SimpleNamespace(document=document, recipient=recipient)
+                # Refusal precedes arithmetic; this does not qualify a source
+                # term or activate the proposed upstream clock.
+                with self.assertRaisesRegex(ValueError, 'another document or recipient'):
+                    event_deadline(None, 'clock', date(2026, 9, 1), None,
+                                   document='document-one', recipient='recipient-one',
+                                   zone=ZoneInfo('Europe/Rome'), prescribed_term=term)
+
     def read(self, row):
         with TemporaryDirectory() as directory:
             path = Path(directory) / 'register.json'

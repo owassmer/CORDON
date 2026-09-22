@@ -68,6 +68,10 @@ calendar. A result using `national_calendar()` has that baseline's local-holiday
 limitation. The calculation does not establish recipient effect, uninterrupted
 posting, election, silence, default or completed removal. No clause wording,
 layout or adoption date generates an assignment or performance event.
+`event_deadline` can forward an explicitly supplied prescribed term to its
+upstream quantity and boundary consumers, checking its document/recipient context.
+It imports no proposed type and supplies no acceptance bypass: that source-bound
+clock and type require their own accepted A–C owners before ordinary use.
 
 `cordon_d.notices.parsec_publication_declarations` reads the publisher's labelled
 table, including native ICEfaces historical-search responses. It preserves each
@@ -431,6 +435,14 @@ plant-bearing header and actual physical cells are required; explicit field sele
 remain intact. Header ambiguity is a reading limitation, and blank cells stay blank.
 These additional native fields do not change retained source-address contexts or
 admit another target population.
+Where native geometry survives but cell text is structurally unavailable (no
+extracted text, opaque private-use characters, surrogates or replacement characters),
+the existing field-fragment selection can carry a visual transcription at that exact
+cell. Original text, geometry and extraction limitation remain attached. Usable
+native values, printed blanks and fields owned by an existing association cannot be
+replaced this way. Cross-page/shared fields retain their original fragments;
+conflicting transcriptions of the same cell are rejected. This mechanical recovery
+does not certify the proposed reading or detect every valid-Unicode extraction error.
 Image-only and vector-outlined content uses explicitly model-transcribed positions
 from the rendered source. An embedded image can supply a target beside a native
 table only when their source regions are disjoint. Overlapping image selections
@@ -465,6 +477,23 @@ or unsupplied documents remain unselected. The consumer does not resolve free pr
 by matching numbers or filenames. Earlier references without selections supply no document binding; their existing
 native per-row associations remain consumable.
 
+Directions may additionally expose source-stated `commencement_components`:
+required actor and work, trigger/performance, term magnitude/unit/bound/anchor,
+and the expressed commitment, with complete clause support. The parent's full
+conditions and coercive scope remain intact. Components never establish actual
+notice, noncommencement or the applicability of an A rule. A prior response that
+did not request them carries a reading limitation, not source absence; a recovered
+minimum or unknown bound cannot be treated as a maximum deadline.
+`read_measure_components(base_request, direction_ids, ...)` uses the same owner
+and complete original sources to recover only reached components. It supplies
+source addresses and quotations, without prior expected values. Explicitly
+selected component requests replay through `retained_measure(...,
+component_requests=...)`; raw readings, targets and events remain unchanged.
+Known conflicting readings, including a prior explicit empty result, remain
+conflicting. `commencement_components(direction_id)` exposes the components,
+their source-reading provenance and precise limitation; it does not certify
+legal form from matching labels.
+
 Administrative references may additionally carry source-supported typed act
 components: issuing authority, literal issuer, number, year and adoption date.
 Unstated components remain null; the principal act does not lend its identity to a
@@ -495,6 +524,9 @@ the original association, selection and support. Passing that population as
 `findings(..., report_bindings=...)` makes the same scoped associations available
 to the ordinary occurrence comparison, within each observation's acquired report
 route. It supplies neither a host equivalence nor missing report fields.
+Unequal printed host labels remain unresolved equivalence. Their difference
+alone does not establish a biological disagreement, and cannot support a join
+that requires host agreement.
 The consumer retains the cited rendition and every relationship. Amendments and newer
 dates alone do not expand that population. Native identifiers are compared only
 inside this source-bound population, with the existing host and coordinate checks

@@ -64,7 +64,7 @@ def measure_findings(measure, *, report_population, findings, report_rows):
                 causes.append('ordinary finding has not resolved this report occurrence')
             if coordinates in {'conflicts', 'unresolved'}:
                 causes.append('target/report coordinates ' + coordinates)
-            if host in {'conflicts', 'unresolved'}:
+            if host in {'unresolved label equivalence', 'unresolved'}:
                 causes.append('target/report host ' + host)
             reversed_rows = tuple(reverse.get(key, ()))
             if not reversed_rows:

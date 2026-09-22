@@ -221,7 +221,8 @@ def _host_relation(row, association):
         if match:
             result.add(norm(match[1]))
         return result
-    return 'agrees on printed host' if labels(values[0]) & labels(printed) else 'conflicts'
+    return ('agrees on printed host' if labels(values[0]) & labels(printed)
+            else 'unresolved label equivalence')
 
 
 def _bound_associations(binding, reference):
@@ -355,8 +356,8 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         association_cause = None
                         if 'conflicts' in coordinate_links.get(row.locator, []):
                             association_cause = 'source plant-to-report association conflicts with report-row coordinates'
-                        elif 'conflicts' in host_links.get(row.locator, []):
-                            association_cause = 'source plant-to-report association conflicts with report-row host'
+                        elif 'unresolved label equivalence' in host_links.get(row.locator, []):
+                            association_cause = 'source association and report-row host labels have no established equivalence'
                         elif 'unresolved' in host_links.get(row.locator, []):
                             association_cause = 'report-row host needed by the source association remains unresolved'
                         derived_identity = row.locator in derived

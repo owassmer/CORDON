@@ -51,6 +51,9 @@ scope. The accepted association reader already owns every field in a table row's
 association object, including sample identity, report reference/date, municipality,
 sheet and parcel where printed. Do not output another version of those fields.
 An omitted row association entry means that row has no established native association.
+native_text_issues identifies cells whose extracted characters cannot supply their
+printed values. Their raw characters and addresses remain available; this is an
+extraction limitation, not an illegible original or a missing plant-bearing header.
 
 Use target_scopes to select each operative or consequential corrected/deferred table
 population: exact table_ref, inclusive one-based first_row/last_row, and all applicable
@@ -74,6 +77,19 @@ copies its own row cell. When a shared or split field continues across pages, re
 the printed relationship and select its complete ordered fragments explicitly.
 A fragment is either {table_ref, cell} for a supplied cell address or an exact
 native line_ref/first_word/end_word span where that text has no native table address.
+For a cell with native_text_issues, use {table_ref, cell, transcription} to read
+that exact rendered source cell. Use target_scopes and the existing row/column
+addresses even when every field in a table needs visual reading; split scopes by
+row where their transcriptions differ. Copy usable native cells through ordinary
+fragments or empty fragments; never retranscribe them or association-owned fields.
+An extracted blank string remains blank and cannot receive a visual replacement.
+A verified continuation may combine that blank address with its actual source
+fragments, each read by its own native or visual route. Keep native and visual
+fragments together when the source field crosses pages. Read report_reference,
+report_date, host, longitude, latitude and zone where printed, using these existing
+association field meanings without creating a report association. Cite every
+visually read cell's page and visible value. A detected table does not make its
+extracted characters usable; absence of a plant header does not make them unusable.
 Include the selected row's own cell, even when blank, and every necessary preceding
 or following fragment. Cite every affected source page. A shared field can govern
 several target rows; give each affected scope the full same field, splitting scopes
@@ -91,8 +107,10 @@ The consumer copies those words; select the precise source occurrence and preser
 groups and actual stated applicability. Do not choose a narrative mention where an
 operative correction supplies the changed position. Include all relevant paragraphs,
 not only tables. Use image_positions only where the rendered source page carries
-target content unavailable through native cells/words, including vector-outlined
-glyphs. Its image_ref names an embedded image address or S{document index}P{physical
+target content without supplied table-cell addresses or usable native words,
+including vector-outlined glyphs. Addressed cells with native_text_issues use the
+target_scopes visual fragments above, including on mixed native/image pages.
+Its image_ref names an embedded image address or S{document index}P{physical
 page}, with zero-based document index and one-based page. Transcribe faithfully.
 For a table, each image_position represents one logical data row. Preserve a shared
 cell's value on each row it governs and preserve a row's verified continuation;
@@ -188,3 +206,47 @@ states them; adjudication of their operative combination belongs to accepted A-C
 Use unreadable only for genuinely illegible source content, not a reader's failure to
 resolve a readable shared cell. Ordinary map qualifications belong in the part's
 qualifications; they are not conflicts merely because the map covers a wider population.
+
+Commencement components
+
+Within each direction, commencement_components records source-stated components of
+any condition concerning commencement of the prescribed work. This is an additive
+reading of the same source clause, not a legal qualification or a new direction.
+Use an empty array when the examined direction states no such condition. Use null
+when the component reading remains unresolved, with an issue naming its source,
+page, affected aspect and actual cause. A missing structured reading in an older
+response is not evidence that the source states no condition.
+
+Preserve the trigger and the required performance: concrete commencement differs
+from completion, election or refusal. required_actor and commencement_work retain
+the actual source wording for who must begin and what must begin. Select existing
+commencement_direction_ids only where the source establishes that relationship;
+similar words or shared parcels do not establish equal work. Keep a readable work
+statement even where no direction reference is established. The commencement work
+may differ from the parent direction's coercive scope. Do not copy or silently
+equate those populations, or replace the parent direction's full meaning.
+
+For a stated period, magnitude is its source-supported numerical value as a string,
+unit is its source unit family, bound distinguishes an express within/maximum term
+from other or unresolved bounds, and literal preserves the complete actual term
+and its qualifications. An at-least/minimum period is other, never within-maximum.
+anchor and anchor_statement
+preserve the source trigger. Notification, publication, the owner's communication
+and another event cannot lend each other an anchor. Days are a source unit family,
+not a choice of legal counting convention. Preserve other or unresolved meanings
+instead of coercing them to the familiar form. Use null for an unavailable period
+or magnitude and give the precise source-scoped cause. No default period follows.
+
+commitment distinguishes an express will-direct from a may-direct statement;
+neither is established merely by a statutory citation or a recital. Keep any other
+material condition in the parent direction and do not certify the accepted legal
+form by matching these component labels. One complete clause support set supplies
+the source hash, physical pages, exact locators and contiguous original quotations
+for the components. Use separate citations for a clause crossing pages; do not
+stitch quotations. The original source controls every value. If prior interpretation
+is incomplete or conflicts with the original, preserve the actual reading and name
+the affected scope or timing issue; never fill gaps with prior expected answers.
+
+Several components may be needed for genuinely distinct source conditions. Do not
+merge their periods or recipient/work scopes. This reading establishes neither
+actual notice or performance nor legal validity, applicability or default.

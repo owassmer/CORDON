@@ -1898,5 +1898,71 @@
   "content_type": "text/html; charset=UTF-8",
   "bytes": 194560,
   "sha256": "3761702b269504d0c27ca97030e12c57554e9dfa1c3c3cc531c7f6e37cf8d2e2"
+ },
+ {
+  "url": "https://www.consiglio.puglia.it/en/-/xylella-a-cagnano-varano.-cera-intervento-tempestivo-focolaio-circoscritto.-ora-prevenzione-e-vigilanza-per-proteggere-l-olivicoltura-pugliese-",
+  "captured_at": "2026-09-22T15:28:32.053879+00:00",
+  "started_at": "2026-09-22T15:28:27.485601+00:00",
+  "kind": "performance",
+  "referred_by": "Fixed-snapshot Cagnano observation/report -> removal/performance dependency; official Commission hearing5Mar2026",
+  "status": 200,
+  "final_url": "https://www.consiglio.puglia.it/en/-/xylella-a-cagnano-varano.-cera-intervento-tempestivo-focolaio-circoscritto.-ora-prevenzione-e-vigilanza-per-proteggere-l-olivicoltura-pugliese-",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 85828,
+  "sha256": "89f5ad3522dc354e6ac61ba38369eb4a32f1cc9ca574e85311271380ed39f1d9",
+  "complete_body": true,
+  "error": null,
+  "capture_method": "Complete HTTP response body, without DOM rewriting"
+ },
+ {
+  "url": "https://www.consiglio.puglia.it/-/xylella-nel-gargano.-la-%C2%A0iv-commissione-ascolta-l-assessore-paolicelli-.",
+  "captured_at": "2026-09-22T15:28:32.173412+00:00",
+  "started_at": "2026-09-22T15:28:27.485638+00:00",
+  "kind": "performance",
+  "referred_by": "Fixed-snapshot Cagnano observation/report -> removal/performance dependency; official Commission hearing5Mar2026",
+  "status": 200,
+  "final_url": "https://www.consiglio.puglia.it/-/xylella-nel-gargano.-la-%C2%A0iv-commissione-ascolta-l-assessore-paolicelli-.",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 84653,
+  "sha256": "56f2f0315d34a3c0f7c7af9f93fd3a97d4afedd5e27bd148525a52534d782a2c",
+  "complete_body": true,
+  "error": null,
+  "capture_method": "Complete HTTP response body, without DOM rewriting"
+ },
+ {
+  "url": "https://giac.consiglio.puglia.it/web/comm/odg/view/1278",
+  "captured_at": "2026-09-22T15:53:58.602207+00:00",
+  "capture_time_basis": "local curl output file modification time; successful HTTP200 observed in tool output",
+  "kind": "discovery",
+  "referred_by": "commission4-page2.html: 05/03/2026 Audizione",
+  "status": 200,
+  "final_url": "https://giac.consiglio.puglia.it/web/comm/odg/view/1278",
+  "bytes": 27025,
+  "sha256": "03e776738f30aca6a602b12528db69e36140edb9ee0f320663f296498de8551a",
+  "capture_method": "Complete HTTP response body, without DOM rewriting"
+ },
+ {
+  "url": "https://giac.consiglio.puglia.it/web/files/view/18507",
+  "captured_at": "2026-09-22T15:53:23.777097+00:00",
+  "capture_time_basis": "local curl output file modification time; successful HTTP200 observed in tool output",
+  "kind": "discovery",
+  "referred_by": "hearing-1278.html: CONVOCAZIONE_IV_DEL 05.03.2026",
+  "status": 200,
+  "final_url": "https://giac.consiglio.puglia.it/web/files/view/18507",
+  "bytes": 573663,
+  "sha256": "03e456ba5d230d77b824b4dddcca1ce919fd2a94a659437578dad6415154886d",
+  "capture_method": "Complete HTTP response body, without DOM rewriting"
+ },
+ {
+  "url": "https://giac.consiglio.puglia.it/web/files/view/18548",
+  "captured_at": "2026-09-22T15:54:26.053155+00:00",
+  "capture_time_basis": "local curl output file modification time; successful HTTP200 observed in tool output",
+  "kind": "discovery",
+  "referred_by": "hearing-1278.html: Integrazione (Audizione congiunta I - IV)",
+  "status": 200,
+  "final_url": "https://giac.consiglio.puglia.it/web/files/view/18548",
+  "bytes": 370179,
+  "sha256": "542e3136a5eff1cc5ae8e834544866b484e9118c3a5639e950509f319e1f94e9",
+  "capture_method": "Complete HTTP response body, without DOM rewriting"
  }
 ]
