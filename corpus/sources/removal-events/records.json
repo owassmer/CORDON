@@ -1876,5 +1876,27 @@
   "final_url": "http://hosting.soluzionipa.it/arif/trasparenza/",
   "content_type": "text/html",
   "error": "403 Client Error: Forbidden for url: http://hosting.soluzionipa.it/arif/trasparenza/"
+ },
+ {
+  "url": "https://www.arifpuglia.it/?s=38047",
+  "captured_at": "2026-09-22T14:55:42.328156+00:00",
+  "kind": "discovery",
+  "referred_by": "43ca0d6abd27ade18a8d0d511594d8b99412664de33d54b94dfe62914a74720d native GET search form action https://www.arifpuglia.it/ field s; exact dependency ARIF note38047/17 March2026 cited by DDS63/2026 physicalp3 bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/?s=38047",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 194535,
+  "sha256": "3d045909d6d7bf63f0d13e2c7ad0e5194013f5c23885b7d257155dfa420525e5"
+ },
+ {
+  "url": "https://www.arifpuglia.it/?s=1892726",
+  "captured_at": "2026-09-22T14:55:43.740167+00:00",
+  "kind": "discovery",
+  "referred_by": "43ca0d6abd27ade18a8d0d511594d8b99412664de33d54b94dfe62914a74720d native GET search form action https://www.arifpuglia.it/ field s; exact dependency ARIF note38047/17 March2026 cited by DDS63/2026 physicalp3 bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/?s=1892726",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 194560,
+  "sha256": "3761702b269504d0c27ca97030e12c57554e9dfa1c3c3cc531c7f6e37cf8d2e2"
  }
 ]

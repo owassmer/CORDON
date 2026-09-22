@@ -224,11 +224,31 @@ def _host_relation(row, association):
     return 'agrees on printed host' if labels(values[0]) & labels(printed) else 'conflicts'
 
 
-def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through, association_readings=()):
+def _bound_associations(binding, reference):
+    """Reuse the original rows qualified by a source-bound report population."""
+    if not binding or binding.get('cause'):
+        return []
+    accepted = set(binding.get('target_occurrences', ()))
+    result = []
+    for support in binding.get('references', ()):
+        association = support.get('association')
+        if (association is None or support.get('cause')
+                or not accepted.intersection(support.get('target_occurrences', ()))):
+            continue
+        literal = association['fields'].get('plant_id', {}).get('text', '')
+        if ''.join(literal.split()) == reference:
+            result.append(dict(association, report_binding=support))
+    return result
+
+
+def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through,
+             association_readings=(), report_bindings=None):
     """One output per accepted observation identity; unresolved candidates never disappear.
 
     Index only routed observations. The caller supplies the full accepted stream.
     This function performs no acquisition, model calls or observation regrouping.
+    Optional report_bindings reuses scoped associations from a measure's ordinary
+    report_population; it cannot admit a report outside an observation's route.
     """
     captures = _captures(reports_root, known_through)
     by_name, readings, relation_readings = defaultdict(set), {}, {}
@@ -287,6 +307,9 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     reading = readings[digest]
                     link = {'route': route, 'route_field': route_field, 'member': member, 'sha256': digest, 'candidates': [],
                             'rendition_ambiguity': rendition_ambiguity}
+                    binding = (report_bindings or {}).get(digest)
+                    if binding is not None:
+                        link['report_binding'] = binding
                     link['route_recoveries'] = [v['document_recovery'] for v in versions
                         if v.get('sha256') in digests and v.get('document_recovery')]
                     output['links'].append(link)
@@ -305,8 +328,9 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     if not group.correlatable:
                         link['status'] = group.uncorrelated_because or 'observation identity unresolved'
                         continue
-                    source_links = _associations(reading, [*association_index.get(group.reference, []),
-                                                          *_monitoring_associations(group, route)])
+                    source_links = [*_associations(reading, [*association_index.get(group.reference, []),
+                                                            *_monitoring_associations(group, route)]),
+                                    *_bound_associations(binding, group.reference)]
                     link['source_associations'] = source_links
                     coordinate_links = {row.locator: [_coordinate_relation(row, a) for a in source_links]
                                         for row in records_by_document[digest]} if source_links else {}

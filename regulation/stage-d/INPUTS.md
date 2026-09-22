@@ -430,6 +430,14 @@ The retained population still requires independent source review and consequenti
 relationship reconciliation before row 2 is established; bounded source checks and passing software
 tests do not confer that status.
 
+The removal consumer additionally reaches CRSFA1038/2022 through DDS126/2022.
+The retained report reading leaves readable labelled specimen fields on page 2
+unexposed; page 3's specimen description and the act's host label also need
+source-qualified interpretation before occurrence comparison. These failures
+prevent finding attachments despite the supported document correspondence.
+They require repair at the report/field interpretation owner, not a guessed
+identifier alias, an act-specific taxon synonym or a claim of biological conflict.
+
 ## Materials that are not standalone input gaps
 
 - The BURP URL census is a way to locate regional acts. It is not itself a decision
@@ -517,6 +525,17 @@ classification is not accepted as a source conclusion. The ordinary bridge suppl
 the correspondence without inventing a native association. Row 2 owns laboratory
 qualifications and source disagreements; a match does not adjudicate them.
 
+A source-selected report can also supply context for a native row's bare report
+number and date. The original row still constrains that correspondence; competing
+selected reports remain ambiguous. The ordinary finding reader now accepts those
+same scoped bindings within the observation's acquired route. In the reached
+DDS126/2022–CRSFA1038/2022 family, this repairs the missing contextual connection,
+but does not yet establish the ten finding links: report page 2's labelled specimen
+fields are not exposed by its retained reading, and page 3's printed specimen/host
+description needs source-qualified interpretation. These are laboratory reading
+and comparison limitations, not established biological disagreements or absent
+source evidence. Row 2 owns their repair; no act-specific host synonym is introduced.
+
 Remaining work falls into four consumer requirements:
 
 - **Complete acts and their dependencies.** Whole-act qualification remains pending
@@ -529,11 +548,19 @@ Remaining work falls into four consumer requirements:
   attachment requirement. A complete reread is pending for those response/standing
   meanings; the supported target correspondences remain usable. Direct reading establishes the ten predecessors' infected-plant work
   and their deferred surrounding prescriptions; it does not supply their remaining
-  ordinary readings or administrative histories. Further reached clauses and annexes
-  remain unread in the DDS147/2024–165/2024 amendment pair, DDS173/2025–63/2026 supplement,
-  DDS51/2023 correction, DDS35/2026, DDS108/2024,
-  and DDS6/2022 with its retained DDS129/2021 original. The eight further 2026 removal
-  originals reached by the retained regional Albo search also await whole-act reading.
+  ordinary readings or administrative histories. Complete independent original
+  readings now cover the DDS147/2024–165/2024 amendment pair, DDS173/2025–63/2026 supplement,
+  and DDS6/2022 with its retained DDS129/2021 original; ordinary readings and their
+  consumer qualification remain pending. DDS51/2023, DDS35/2026 and DDS108/2024
+  still require complete source and ordinary-reader qualification. The eight further 2026 removal originals
+  reached by the retained regional Albo search have also been independently read
+  and await ordinary-reader qualification. DDS188's first ordinary request returned
+  no completed reading after repeated connection failures and a response-decoding
+  error. An unchanged retry is pending; this is a transport failure, not evidence
+  that the original's meaning cannot be recovered. The reached DDS135/2024,
+  DDS6/2026, DDS20/2023 and DDS149/2024 annex populations also require complete
+  ordinary reading. DDS6's private-use glyph encoding limits native-text discovery;
+  it is not an absence of readable original targets.
   These references locate consequential unfinished work, not an allowed-case list.
 - **Resolve consequential source disagreements and administrative relationships.**
   DDS52/2024's report-51 recital says Triggiano while its incorporated target
@@ -567,7 +594,7 @@ Remaining work falls into four consumer requirements:
   requires the particular A producer, B clock and calendar binding. This missing
   source-instance binding affects both this row and notice/response row 7, even
   if complete factual event evidence were supplied. The bounded upstream repair
-  must retain each original's term, applicability and scope without making case
+  is proposed on PR #23 and must retain each original's term, applicability and scope without making case
   registration a condition of ordinary consumption or inventing a universal
   ten-day rule. Borrowing a neighbouring act's clock is not a remedy. Changed
   A/B/C content requires its own review and Owen's acceptance; factual notice
@@ -584,7 +611,28 @@ Remaining work falls into four consumer requirements:
   layer's decree references likewise require an admitted present consequence;
   their removal labels cannot close an order once admitted.
   Regional catalogue and register discovery has not established the complete
-  finding-to-measure population. The retained Albo search
+  finding-to-measure population. Reconciliation of the fixed monitoring snapshot
+  through the ordinary report consumer reaches 76 printed act identities from
+  849 matched and 38 provisional observation occurrences with native administrative
+  associations. Fifty-three identities lie outside the initial 34-act processing
+  queue, three with earlier requests. The queue therefore cannot establish coverage.
+  These edges preserve their occurrence qualifications and do not establish legal
+  confirmation or the current operative workload. At the explicit report version
+  `c3bbaa68538bcf398de6`, all 365 reached report renditions are readable; the earlier
+  stale-assembly diagnosis belonged to a different version and is not a current
+  population limitation. Another 353 routed positive-containing observations lack
+  an identified act/target relationship, including later Cagnano findings that
+  cannot be absorbed into DDS63/2026's narrow supplement. All 73 positives without
+  a published report route carry a star in the CAMP_2024 workbook, whose original
+  cell A119730 explicitly states non-removal following DDS158/2024's area update.
+  Same-day unstarred SIT occurrences have report routes and agreeing published
+  positions. This supported publication correspondence still requires the
+  source-annotation owner's integration; it is not a general star-stripping rule,
+  a plant-identity alias or withdrawal of an order. Sixty-three of those routed
+  counterparts are included in the 353 above, so the groups cannot be added as
+  separate missing populations. None of these counts is a count of missing
+  prescriptions.
+  The retained Albo search
   (`19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3`) has one reported
   page; its regional publication declarations remain consumable while attachment
   awaits whole-measure qualification. Native-text discovery does not exhaust sparse
@@ -641,6 +689,16 @@ removal/treatment completion and do not admit a municipal procurement or service
 workflow. Their source inconsistencies are not repaired to manufacture that
 connection. A later source-supported correspondence would reopen this conclusion;
 the current remedy is not a dedicated reader for unrelated municipal work.
+
+DDS63/2026 reports ARIF's inability to finish work because an omitted proprietor
+had not consented, citing note 38047 of 17 March 2026. This is reported impeded
+work, not completed eradication or legally established refusal. Its narrow
+surrounding-parcel supplement remains distinct from later Cagnano findings.
+The underlying note has not been recovered: the reached act copies contain a
+citation but no original attachment, and the publisher's actual exact searches
+for the note number and named plant reference returned zero results. Those search
+responses are retained in the event source population. They do not close casefile
+coverage or establish the scope and outcome of subsequent performance.
 
 Renewed live public-route checks preserve distinct limitations. ARIF's current
 and historical register, notice and current transparency routes return HTTP 403;

@@ -227,16 +227,16 @@ class MeasureReading:
     def report_population(self, report_readings):
         """Resolve native row references and supplied selections through their owners."""
         from .findings import _associations
-        from .report_relations import correspondences, replacements, current_limitation
+        from .report_relations import correspondences, replacements, current_limitation, number, dated
         report_readings = tuple(report_readings)
         readings = {r.sha256: r for r in report_readings}
         if len(readings) != len(report_readings):
             raise ValueError('Supply one ordinary report reading per source')
         edges = correspondences(readings)
         population = {}
-        targets = self.prescribed_targets()
+        targets = tuple(self.prescribed_targets())
 
-        def bind(source, support, occurrences):
+        def bind(source, support, occurrences, *, reference_cause=None):
             for digest, chain in replacements(edges, source).items():
                 reading = readings.get(digest)
                 relations = getattr(reading, 'relations', None)
@@ -254,10 +254,11 @@ class MeasureReading:
                     reading_issues=getattr(reading, 'issues', ()), cause=cause,
                     request_sha256=self.response.get('request_sha256'),
                     provenance='model_proposed_reading'))
-                binding['target_occurrences'] = tuple(dict.fromkeys(
-                    (*binding['target_occurrences'], *occurrences)))
+                if reference_cause is None:
+                    binding['target_occurrences'] = tuple(dict.fromkeys(
+                        (*binding['target_occurrences'], *occurrences)))
                 binding['references'].append(dict(support, target_occurrences=occurrences,
-                                                  replacement_chain=chain))
+                                                  replacement_chain=chain, cause=reference_cause))
 
         for target in targets:
             association = target['association']
@@ -269,11 +270,39 @@ class MeasureReading:
 
         unbound = tuple(target['occurrence'] for target in targets
                         if target['association'] is None)
+        selections = []
         for reference in self.values['references']:
             if reference['relationship'] != 'laboratory-evidence':
                 continue
             for selected in reference.get('documents', []):
                 bind(selected['source'], dict(reference=reference, selection=selected), unbound)
+                selections.append((reference, selected))
+
+        for target in targets:
+            association = target['association']
+            if association is None:
+                continue
+            fields = association['fields']
+            literal = fields.get('report_reference', {}).get('text')
+            day = dated(''.join((fields.get('report_date', {}).get('text') or '').split()))
+            if not literal or day is None:
+                continue
+            candidates = []
+            for reference, selected in selections:
+                reading = readings.get(selected['source'])
+                relations = getattr(reading, 'relations', None)
+                identity = relations.get('identity') if relations else None
+                # The selection supplies document context; the complete native
+                # reference and its own date still constrain this particular row.
+                if (identity and dated(identity.get('date')) == day
+                        and number(literal, {'date': day.isoformat()})
+                        == number(identity.get('number'), identity)):
+                    candidates.append((reference, selected))
+            cause = ('native report reference matches several explicitly selected documents'
+                     if len({selected['source'] for _, selected in candidates}) > 1 else None)
+            for reference, selected in candidates:
+                bind(selected['source'], dict(association=association, reference=reference,
+                     selection=selected), (target['occurrence'],), reference_cause=cause)
         return population
 
     def finding_links(self, joined, report_readings):

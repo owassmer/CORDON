@@ -486,6 +486,15 @@ to ordinary `findings()` and `report_rows()` outputs. Its report population come
 from existing native per-row report associations or explicit document selections,
 and the report owner's resolved replacement chains. Each native association confines
 its own target to the report it names; a collective reference cannot override it.
+When a native row states only a report number and date, an explicit two-sided
+document selection may supply its report context. The entire native reference
+and its own date must match the selected report through the report identity
+owner. Competing selected documents remain ambiguous for that occurrence;
+another row's unambiguous reference remains usable. `report_population()` retains
+the original association, selection and support. Passing that population as
+`findings(..., report_bindings=...)` makes the same scoped associations available
+to the ordinary occurrence comparison, within each observation's acquired report
+route. It supplies neither a host equivalence nor missing report fields.
 The consumer retains the cited rendition and every relationship. Amendments and newer
 dates alone do not expand that population. Native identifiers are compared only
 inside this source-bound population, with the existing host and coordinate checks
