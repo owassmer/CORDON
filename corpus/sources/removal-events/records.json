@@ -1964,5 +1964,121 @@
   "bytes": 370179,
   "sha256": "542e3136a5eff1cc5ae8e834544866b484e9118c3a5639e950509f319e1f94e9",
   "capture_method": "Complete HTTP response body, without DOM rewriting"
+ },
+ {
+  "url": "https://sedutecommissionionline.consiglio.puglia.it/result.php?endDate=05%2F03%2F2026&startDate=05%2F03%2F2026&view_result=list&sa=1",
+  "captured_at": "2026-09-22T16:03:38.990896+00:00",
+  "kind": "discovery",
+  "referred_by": "Official Commission archive native date-search form for5March2026; supplies actual hearing link and unrevised publication status",
+  "status": 200,
+  "final_url": "https://sedutecommissionionline.consiglio.puglia.it/result.php?endDate=05%2F03%2F2026&startDate=05%2F03%2F2026&view_result=list&sa=1",
+  "content_type": "text/html",
+  "bytes": 622704,
+  "sha256": "d356151af49f0f740202e8f99fc8d150f36278870bc89dc9fa6677dfc8c416b1"
+ },
+ {
+  "url": "https://sedutecommissionionline.consiglio.puglia.it/play.php?flv=COM_118040_139057_001_20260305&q=&odg_q=&time=&istance=&b=0",
+  "captured_at": "2026-09-22T16:04:16.624337+00:00",
+  "kind": "performance",
+  "referred_by": "Official5March2026 Commission archive result IV Commissione05.03.26",
+  "status": 200,
+  "final_url": "https://sedutecommissionionline.consiglio.puglia.it/play.php?flv=COM_118040_139057_001_20260305&q=&odg_q=&time=&istance=&b=0",
+  "content_type": "text/html",
+  "bytes": 696551,
+  "sha256": "8e1efeeb261614f61e018cae229437d453613c243cea77941daf116352c3d2ba"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/playlist.m3u8",
+  "captured_at": "2026-09-22T16:05:44.807534+00:00",
+  "kind": "performance",
+  "referred_by": "Official hearing HTML native cedatPlayer.init.hls source",
+  "status": 200,
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/playlist.m3u8",
+  "content_type": "application/vnd.apple.mpegurl",
+  "bytes": 138,
+  "sha256": "661584f774c82d4f68ae2a00c900aed080386634fd5904e4581a557a587028f3"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/chunklist_w1443414139.m3u8",
+  "captured_at": "2026-09-22T16:06:29.117018+00:00",
+  "kind": "performance",
+  "referred_by": "Native hearing HLS playlist child URL",
+  "status": 200,
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/chunklist_w1443414139.m3u8",
+  "content_type": "application/vnd.apple.mpegurl",
+  "bytes": 6570,
+  "sha256": "11a64ee37080bbb2b3526e396a0ded24a11bd7a2b95e804bd1e9fcc838f12147"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_53.ts",
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_53.ts",
+  "status": 200,
+  "content_type": "video/MP2T",
+  "started_at": "2026-09-22T16:07:09.977434+00:00",
+  "captured_at": "2026-09-22T16:07:13.581066+00:00",
+  "bytes": 1718132,
+  "sha256": "266a2026a3d851409cedcebe971931ccbb2d854ce74ced78d00cfed8cdabd56b",
+  "kind": "performance",
+  "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_54.ts",
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_54.ts",
+  "status": 200,
+  "content_type": "video/MP2T",
+  "started_at": "2026-09-22T16:07:13.582645+00:00",
+  "captured_at": "2026-09-22T16:07:18.015915+00:00",
+  "bytes": 1695384,
+  "sha256": "01984a0f169052596c320fa565f2315e5e5b4e430a921a39fc9f524afb6568fb",
+  "kind": "performance",
+  "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_65.ts",
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_65.ts",
+  "status": 200,
+  "content_type": "video/MP2T",
+  "started_at": "2026-09-22T16:07:18.017898+00:00",
+  "captured_at": "2026-09-22T16:07:22.205893+00:00",
+  "bytes": 1681096,
+  "sha256": "099fbe30a0d658029f634efac94a5a33a5b94177d3e34ae60392ce83084d237b",
+  "kind": "performance",
+  "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_96.ts",
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_96.ts",
+  "status": 200,
+  "content_type": "video/MP2T",
+  "started_at": "2026-09-22T16:07:22.207377+00:00",
+  "captured_at": "2026-09-22T16:07:25.870903+00:00",
+  "bytes": 1699144,
+  "sha256": "5b7a457f424f6f424d6580e841c9c5d75ee8e58acbd41304f871d4f55cdcb998",
+  "kind": "performance",
+  "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_97.ts",
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_97.ts",
+  "status": 200,
+  "content_type": "video/MP2T",
+  "started_at": "2026-09-22T16:07:25.871674+00:00",
+  "captured_at": "2026-09-22T16:07:29.410471+00:00",
+  "bytes": 1696888,
+  "sha256": "ab7622b341f58bdd88cffba4122a0bdeb1dcd14a019f7acf4c105d3c91ef64f2",
+  "kind": "performance",
+  "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
+ },
+ {
+  "url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_98.ts",
+  "final_url": "https://stream.magnetofono.it/trascrivi/_definst_/COM/COM_118040_139057_001_20260305.mp4/media_w1443414139_98.ts",
+  "status": 200,
+  "content_type": "video/MP2T",
+  "started_at": "2026-09-22T16:07:29.412115+00:00",
+  "captured_at": "2026-09-22T16:07:32.832512+00:00",
+  "bytes": 1671884,
+  "sha256": "9c0612f13a04cdccf4a323ca64d71b982e62d16fc959397ed3afc5128277d413",
+  "kind": "performance",
+  "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
  }
 ]

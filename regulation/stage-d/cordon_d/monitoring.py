@@ -507,6 +507,7 @@ def _reading_row(reading: MonitoringObservation, store: Path, ordinal: int) -> d
             'release': reading.release, 'view': reading.view_name,
             'path': os.path.relpath(occurrence.path, store), 'sha256': occurrence.sha256,
             'locator': occurrence.locator, 'result': reading.publication.result,
+            'publisher_annotation': reading.publication.publisher_annotation,
             'restates': reading.publication.result == DUPLICATE_RESULT, 'kind': reading.kind,
             'species': reading.species, 'cultivar': reading.cultivar, 'subspecies': reading.subspecies,
             'symptom_presence': reading.symptom_presence, 'x': x, 'y': y, 'crs': reading.crs,
@@ -534,6 +535,7 @@ def _readings_schema():
             ('ordinal', pyarrow.int64()), ('reference', pyarrow.string()), ('day', pyarrow.date32()),
             ('release', pyarrow.string()), ('view', pyarrow.string()), ('path', pyarrow.string()),
             ('sha256', pyarrow.string()), ('locator', pyarrow.string()), ('result', pyarrow.string()),
+            ('publisher_annotation', pyarrow.string()),
             ('restates', pyarrow.bool_()), ('kind', pyarrow.string()), ('species', pyarrow.string()),
             ('cultivar', pyarrow.string()), ('subspecies', pyarrow.string()),
             ('symptom_presence', pyarrow.bool_()), ('x', pyarrow.float64()), ('y', pyarrow.float64()),
@@ -655,6 +657,8 @@ class Member:
     attributes: tuple[tuple[str, str], ...] = ()
     carried: tuple[tuple[str, str], ...] = ()
     causes: tuple[tuple[str, str], ...] = ()
+    # The annotation on this occurrence, without attaching it to other rows.
+    publisher_annotation: str | None = None
 
     @property
     def occurrence(self):
@@ -807,11 +811,15 @@ class DistinctObservation:
 
 def _member_from_row(row: dict) -> Member:
     coordinates = (row['x'], row['y']) if row['x'] is not None and row['y'] is not None else None
+    causes = _pairs(row.get('causes'), 'cause')
+    if 'publisher_annotation' not in row and row['result'] == 'publisher-annotation':
+        causes += (('publisher_annotation',
+                    'the selected derived reading predates publisher-annotation transport'),)
     return Member(row['release'], row['view'], row['path'], row['sha256'], row['locator'], row['result'],
                   row['kind'], row['species'], row['cultivar'], row['subspecies'], row['symptom_presence'],
                   coordinates, row['crs'], _pairs(row.get('report_routes')), tuple(row['issues'] or ()),
                   _pairs(row.get('identifiers')), _pairs(row.get('attributes')),
-                  _pairs(row.get('carried')), _pairs(row.get('causes'), 'cause'))
+                  _pairs(row.get('carried')), causes, row.get('publisher_annotation'))
 
 
 def _grouping_key(root: Path) -> str:

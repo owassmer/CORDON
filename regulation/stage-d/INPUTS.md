@@ -168,11 +168,15 @@ What the population shows, read and not reconciled:
 
 The removal consumer reaches a material publication annotation: CAMP_2024 cell
 A119730 explains the 73 marked positive rows as not removed following the
-DDS158/2024 area update. `campaign.PublicationReading` retains that footer, but
-`monitoring.Member` does not yet expose its source/sheet-scoped relationship to the
-marked rows. Their literal identifiers and ordinary group identities remain
-unchanged. The supported same-day SIT counterparts and current legal disposition
-are separate questions; source annotation is not proof of withdrawal or completion.
+DDS158/2024 area update. The existing `campaign.PublicationReading` annotation now
+survives typed serialization into `monitoring.Member`, preserving its exact text and
+source row/field citation. Bounded replay of the retained native footer verifies this
+ordinary consumer path. Older grouped annotation rows retain an explicit derived
+reading limitation; the shared population has not been rebuilt or relabelled under
+the new reader version. The source/sheet-scoped relationship to marked rows remains
+unestablished by an ordinary reader. Literal identifiers and group identities stay
+unchanged. Supported same-day SIT counterparts and current legal disposition remain
+separate questions; the annotation does not prove withdrawal or completion.
 
 ## Laboratory reports
 
@@ -452,6 +456,17 @@ must remain scoped to the cited populations, not become a global taxon alias or 
 biological-conflict claim. Report-field repair alone does not resolve this separate
 comparison limit. Rows 2 and 4 retain these responsibilities.
 
+Two further consequential report relationships remain unresolved. DDS43/2024
+incorporates CNR36 Modifica1 on physical pages 13–17, expressly replacing the held
+27 March report for sampling-date corrections. Its page 18 typing note covers only
+one of two prescribed positions; the act's broader genotype recital cannot expand
+that result. No standalone corrected report was found in the retained routes or
+relationship inventory; the actual embedded source is readable, but the existing
+report entrypoint has no scoped embedded-report consumption. DDS108/2022 cites
+CRSFA1692/2022 as a positive subset of CRSFA1691/2022. The parent's exact retained
+route was not found, and its consequential qualifications remain unexamined.
+These are source-reading/acquisition dependencies, not laboratory silence.
+
 ## Materials that are not standalone input gaps
 
 - The BURP URL census is a way to locate regional acts. It is not itself a decision
@@ -672,8 +687,8 @@ Remaining work falls into four consumer requirements:
   workbook. Its original cell A119730 explicitly states non-removal following
   DDS158/2024's area update. All have same-day unstarred SIT counterparts with report
   routes and agreeing published positions; 63 of those counterparts overlap the
-  353 above. The monitoring owner retains the footer as a publisher annotation but
-  does not yet expose its marked-row relationship through ordinary Member consumption.
+  353 above. The monitoring owner now transports the footer's exact publisher
+  annotation through Member; its marked-row relationship remains unestablished.
   This source-scoped evidence is not a general star-stripping rule, a plant-identity
   alias or withdrawal of an order. Seventy-one of the 73 lack a published cadastral
   sheet; current legal area/work scope remains a separate rows 3–5 question.

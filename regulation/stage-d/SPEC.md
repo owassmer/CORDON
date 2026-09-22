@@ -104,8 +104,14 @@ coordinate frame of the monitoring degree columns that check is
 the readings and runs it. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
-and typed readings remain Parquet keyed by source hash and reader version. The
-grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
+and typed readings remain Parquet keyed by source hash and reader version.
+`Member.publisher_annotation` carries the existing campaign owner's exact literal
+on that occurrence, with its retained source row citation. It neither attaches the
+annotation to other rows nor changes their identifiers or grouping. A legacy
+annotation row whose selected cache predates this field exposes that derived
+reading limitation; absent-column and present-null states are distinct. Changed
+reader versions do not relabel old cache contents.
+The grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
 `(url, view, sha256)` sequence of retained releases, the reader version and the
 DuckDB version. Reports use compact JSON blocks and an assembled reading under
 source hash and extraction version. Each native identifier cell of that assembled
