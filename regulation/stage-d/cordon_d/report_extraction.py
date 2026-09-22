@@ -517,8 +517,15 @@ Each entry:
 text: the note exactly as printed, in its original language, including its mark.
 page: the physical page number it is printed on.
 locator: where on that page it is printed, for example "footnote below the table".
-qualification: what the note says about the result: provisional, retest, damaged_sample,
-or other. Use other for anything else, for example accreditation or aliquots.
+qualification: what the note says about the result, as printed:
+  provisional: the note says the result is provisional, preliminary, not final or awaiting
+  confirmation;
+  retest: the note recommends or requires another sample, a resampling or a repeated analysis;
+  damaged_sample: the note says the sample was damaged, degraded, insufficient or unsuitable;
+  other: anything else, for example accreditation, aliquots, or a value near a threshold
+  that the note does not call provisional.
+When a note says more than one of these, use the first it says in this order:
+damaged_sample, provisional, retest, other.
 qualification_text: the exact words of the note that say it.
 applies_to: the selectors, from the list above, of the marked cells the note applies to.
 names_cells: true only when the note itself names the samples, rows or columns it applies

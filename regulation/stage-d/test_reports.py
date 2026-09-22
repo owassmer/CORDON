@@ -1552,6 +1552,21 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
         self.assertIsNone(rows[1].results[0].cause)
 
+    def test_a_letter_mark_equal_to_the_literals_last_letter_is_separated_once(self):
+        # CNR prints the feminine "rilevataa" and "non rilevataa": the mark a follows a word
+        # that itself ends in a. The mark is separated once, where the base is a result.
+        item = block([['123', '02/06/2024', 'rilevataa', '03/06/2024'],
+                      ['124', '02/06/2024', 'non rilevataa', '03/06/2024']])
+        item['reading']['facts'] = [
+            {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': "a L'esito delle analisi si riferisce ai risultati ottenuti sul campione suddiviso in aliquote.",
+             'value': None, 'applies_to': ['p1-t1/c3'], 'mark': 'a', 'qualification': 'other'}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual([(r.results[0].kind, r.results[0].text, r.results[0].cause, r.results[0].qualification)
+                          for r in rows],
+                         [('detected', 'rilevataa', None, ('other',)),
+                          ('not-detected', 'non rilevataa', None, ('other',))])
+
     def test_an_omitted_detected_table_cannot_claim_page_coverage(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
         item['native_regions'] = [{'id': 'n1', 'page': 1}]

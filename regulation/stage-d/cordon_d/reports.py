@@ -59,7 +59,9 @@ def resolve_marks(result, scoped):
     notes = [fact for fact in scoped if fact.get('role') == 'result_qualification' and note_mark(fact)]
     marks = {note_mark(fact) for fact in notes}
     base, used = result.text.strip().casefold(), []
-    while True:
+    # Separation stops at the first base that is a result: in "rilevataa" the mark a is
+    # separated once, and the a that ends "rilevata" is the word's own.
+    while classify(base) == 'unclassified':
         mark = next((m for m in sorted(marks, key=len, reverse=True)
                      if base.endswith(m) and len(base) > len(m)), None)
         if mark is None:
