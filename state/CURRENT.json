@@ -1,6 +1,6 @@
 {
   "schema": "cordon-current-state-v1",
-  "as_of": "2026-09-14",
+  "as_of": "2026-09-22",
   "operator": "Regione Puglia — Sezione Osservatorio Fitosanitario",
   "telos": "Reduce projected Xylella loss through a legally and evidentially faithful computational decision instrument.",
   "current_stage": "D",
@@ -86,14 +86,14 @@
         "source_bindings": "regulation/stage-d/source-bindings.json"
       },
       "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
-      "current_capability": "The monitoring-observation stream and bounded national calendar remain established. Laboratory reports and observation joins are in progress on PR #7, adopted-area reading and geography binding on PR #8, and monitoring positional qualification on PR #14. INPUTS.md rows 1-3 own their scope, current coverage and remaining source work. The Claude subscription is the authorized extraction route. No Stage D closure, source-population acceptance or merge is implied.",
+      "current_capability": "Row 1, monitoring observations, and the bounded national calendar are established. PRs #20, #21 and #22 are merged. Laboratory completion is on PR #18. Row 3 adopted geography is being rebuilt on PR #8. Monitoring positional error is on PR #14. Subject populations (PR #16) resume after PR #8. PRs #15, #23 and #24 were orphaned by the ended Codex thread and are under triage. PRs #13 and #19 are closed. No Stage D closure or source-population acceptance is implied.",
       "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent review under REVIEW_PRINCIPLES.md and Owen acceptance.",
       "next": [
-        "Complete laboratory report reading, source relationships and bidirectional observation joins (INPUTS.md row 2; PR #7).",
-        "Complete adopted-area page reading, source verification and adopting-act/map correspondence (row 3; PR #8).",
-        "Establish sourced positional qualification for monitoring locations (row 1; PR #14), then required plant, surface and parcel populations (rows 4-5).",
-        "Continue removal orders, notice and response events, standing, protected plants and execution records.",
-        "Run whole-D convergent review and present D for Owen acceptance before opening Stage E."
+        "Complete laboratory readings and bidirectional observation joins (INPUTS.md row 2; PR #18).",
+        "Rebuild row 3 adopted geography as each adopting act defines the zone (PR #8).",
+        "Establish sourced positional error for monitoring locations (row 1; PR #14).",
+        "Triage PRs #15, #23 and #24; then resume subject populations (rows 4-5; PR #16) on the rebuilt PR #8.",
+        "Continue removal orders, notice and response events, standing, protected plants and execution records; then run whole-D convergent review for Owen acceptance before Stage E."
       ]
     },
     "E": {
