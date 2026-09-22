@@ -26,9 +26,19 @@ def classify(text):
 
 
 def _leading_mark(text):
-    """The printed marker a note begins with ('*', '**', 'a'), or None."""
-    match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(])', text or '')
+    """The printed marker a note begins with ('*', '**', 'a', '**='), or None."""
+    match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(=:)])', text or '')
     return match[1] if match else None
+
+
+def note_mark(fact):
+    """The mark a note answers: the one its mark reading names, else its leading marker."""
+    return fact.get('mark') or _leading_mark(fact.get('text'))
+
+
+def mark_components(mark):
+    """The separate printed marks in a trailing mark: '*a' is '*' and 'a'."""
+    return re.findall(r'\*+|[a-z]', mark)
 
 
 def resolve_marks(result, scoped):
@@ -36,15 +46,18 @@ def resolve_marks(result, scoped):
 
     The source reader may already have separated `result_value` from an annotation; this
     handles the cell it returned whole. A mark is separated only where a result
-    qualification recovered from the same document, scoped to this row, begins with that
+    qualification recovered from the same document, scoped to this row, answers that
     mark; the base is then classified and the note travels with the row as it already does.
-    A mark with no recovered note leaves the result unclassified and names that cause. The
-    complete literal survives either way.
+    What a mark note says about the result (provisional, retest, damaged sample, other)
+    becomes the result's qualification. A mark the document prints without a meaning, found
+    after every page was examined, classifies the result as printed and carries that
+    qualification (mark_without_meaning). A mark with no recovered note leaves the result
+    unclassified and names that cause. The complete literal survives either way.
     """
     if result.kind != 'unclassified' or not result.text:
         return result
-    marks = {mark for fact in scoped if fact.get('role') == 'result_qualification'
-             for mark in [_leading_mark(fact.get('text'))] if mark}
+    notes = [fact for fact in scoped if fact.get('role') == 'result_qualification' and note_mark(fact)]
+    marks = {note_mark(fact) for fact in notes}
     base, used = result.text.strip().casefold(), []
     while True:
         mark = next((m for m in sorted(marks, key=len, reverse=True)
@@ -53,7 +66,9 @@ def resolve_marks(result, scoped):
             break
         base, used = base[:-len(mark)].rstrip(), used + [mark]
     if used and classify(base) != 'unclassified':
-        return replace(result, kind=classify(base))
+        qualification = tuple(dict.fromkeys(fact['qualification'] for fact in notes
+                                            if note_mark(fact) in used and fact.get('qualification')))
+        return replace(result, kind=classify(base), qualification=qualification)
     text = result.text.strip().casefold()
     for n in (1, 2, 3):
         if n >= len(text):
@@ -175,6 +190,7 @@ class Result:
     cause: str | None
     support: tuple[dict, ...]
     assay_cause: str | None = None
+    qualification: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

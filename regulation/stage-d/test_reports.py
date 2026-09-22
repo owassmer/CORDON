@@ -933,128 +933,296 @@ class LiteralReport(unittest.TestCase):
             'native_cell': 'p1-t1-r1-c3', 'result_value': 'rilevato', 'annotation': '*'}
         self.assertEqual(unresolved_mark_scopes(reading, native), [])
 
-    def test_unresolved_result_mark_triggers_one_repair_and_replays_retained(self):
+    @staticmethod
+    def _note_answer(text='* Si consiglia di ripetere il prelievo.', qualification='retest',
+                     wording='Si consiglia di ripetere il prelievo', applies=('p1-t1/r1/c3',), names=False):
+        return {'notes': [{'text': text, 'page': 1, 'locator': 'footnote below the table',
+                           'qualification': qualification, 'qualification_text': wording,
+                           'applies_to': list(applies), 'names_cells': names}]}
+
+    def test_first_reading_with_a_mark_reads_only_its_note_and_replays_retained(self):
         import pymupdf
-        from hashlib import sha256
         from cordon_d.store import put_bytes
-        from cordon_d.report_extraction import MARK_REPAIR, NoRetainedResponse, write_json
+        from cordon_d.report_extraction import PROMPT, NOTE_PROMPT, note_schema, write_json
         marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
-        repaired = copy.deepcopy(marked)
-        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
-            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
-            'applies_to': ['p1-t1/r1']}]
-        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
-        def envelope(reading, model):
-            return {'response': {'model': model, 'stop_reason': 'end_turn',
-                                 'content': [{'text': json.dumps(reading)}]}}
+        answer = self._note_answer()
         with TemporaryDirectory() as directory:
             store = Path(directory)
             with pymupdf.open() as pdf:
                 pdf.new_page()
                 digest = put_bytes(store, pdf.tobytes())
             def fake_call(request, *, config, budget, request_id, raw_path):
-                reading = repaired if 'trailing printed mark' in json.dumps(request) else marked
-                write_json(raw_path, envelope(reading, config.model))
-                return reading
+                reading = answer if request['output_config']['format']['schema'] == note_schema() else marked
+                write_json(raw_path, {'response': {'model': config.model, 'stop_reason': 'end_turn',
+                                                   'content': [{'text': json.dumps(reading)}]}})
+                return copy.deepcopy(reading)
             with patch('cordon_d.report_extraction._call', side_effect=fake_call) as call:
                 path = extract_report(digest, store, config=ExtractionConfig(), budget=None)
             self.assertEqual(call.call_count, 2)
-            repair_request = call.call_args_list[1].args[0]
-            self.assertEqual(repair_request['output_config']['effort'], 'high')
-            self.assertIn(json.dumps(MARK_REPAIR.format(rows='p1-t1/r1'))[1:-1], json.dumps(repair_request))
-            path.unlink()
-            for cached in path.parent.glob('blocks/*.json'):
-                cached.unlink()
+            request = call.call_args_list[1].args[0]
+            self.assertEqual(request['output_config']['format']['schema'], note_schema())
+            self.assertEqual(request['output_config']['effort'], 'medium')
+            content = request['messages'][0]['content']
+            self.assertEqual([part['type'] for part in content], ['text', 'image', 'text'])
+            self.assertEqual(content[0]['text'], 'PHYSICAL PAGE 1: page image')
+            self.assertNotIn(PROMPT, content[-1]['text'])
+            self.assertTrue(content[-1]['text'].startswith(NOTE_PROMPT.split('{mark}')[0]))
+            self.assertIn('"selector": "p1-t1/r1/c3"', content[-1]['text'])
+            self.assertIn('"printed_value": "non rilevato*"', content[-1]['text'])
+            self.assertIn('"row_identity": ["123"]', content[-1]['text'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            item = saved['blocks'][0]
+            self.assertEqual(item['reading']['tables'], marked['tables'])
+            note = item['reading']['facts'][-1]
+            self.assertEqual((note['role'], note['mark'], note['text'], note['qualification'], note['applies_to']),
+                             ('result_qualification', '*', '* Si consiglia di ripetere il prelievo.', 'retest',
+                              ['p1-t1/r1/c3']))
+            self.assertEqual(item['mark_notes'][0]['mark'], '*')
+            self.assertGreater(item['mark_notes'][0]['request_bytes'], 0)
+            def forget_assembly():
+                path.unlink()
+                for cached in path.parent.glob('blocks/*.json'):
+                    cached.unlink()
+            forget_assembly()
             with patch('cordon_d.report_extraction._call', side_effect=AssertionError('dispatch')):
                 replay = extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
-            self.assertTrue(json.loads(replay.read_text())['assembly_complete'])
-            path.unlink()
-            for cached in path.parent.glob('blocks/*.json'):
-                cached.unlink()
-            repair_id = sha256(json.dumps(repair_request, sort_keys=True).encode()).hexdigest()
-            (store / 'derived/reports/responses' / f'{repair_id}.json').unlink()
-            with self.assertRaises(NoRetainedResponse):
-                extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+            self.assertEqual(json.loads(replay.read_text()), saved)
+            forget_assembly()
+            (store / 'derived/reports/responses' / f"{item['mark_notes'][0]['request_sha256']}.json").unlink()
+            with patch('cordon_d.report_extraction._call', side_effect=AssertionError('dispatch')):
+                replay = extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+            unread = json.loads(replay.read_text())
+            self.assertFalse(unread['assembly_complete'])
+            self.assertEqual(unread['blocks'][0]['reading'], marked)
+            self.assertTrue(unread['blocks'][0]['attachment_repair_pending'].startswith('mark note reread pending: '))
 
-    def test_resume_repairs_unresolved_mark_without_rereading_the_block(self):
+    def test_a_combined_mark_needs_a_note_for_each_of_its_marks(self):
+        from cordon_d.report_extraction import unresolved_marked_cells
+        def note(text, applies_to, **extra):
+            return dict({'id': f'f{len(text)}', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                         'text': text, 'value': None, 'applies_to': applies_to}, **extra)
+        item = block([['123', '02/06/2024', 'rilevato*a', '03/06/2024']])
+        item['reading']['facts'] = [note('*Prova non accreditata da Accredia.', ['p1-t1/r1'])]
+        self.assertEqual([c['marks'] for c in unresolved_marked_cells(item['reading'], {})], [['a']])
+        item['reading']['facts'].append(note("a L'esito si riferisce al campione suddiviso in aliquote.", ['p1-t1/c3']))
+        self.assertEqual(unresolved_marked_cells(item['reading'], {}), [])
+        self.assertEqual(materialize('hash', 'v', 1, [item]).rows[0].results[0].kind, 'detected')
+        # '**=' begins a note for '**'; a note read for its mark need not begin with it.
+        item = block([['124', '02/06/2024', 'Negativo**', '03/06/2024']])
+        item['reading']['facts'] = [note('**= Si consiglia di ricampionare la pianta', ['p1-t1/r1/c3'])]
+        self.assertEqual(unresolved_marked_cells(item['reading'], {}), [])
+        item['reading']['facts'] = [note('Prova non accreditata da Accredia**', ['p1-t1/r1/c3'], mark='**')]
+        self.assertEqual(unresolved_marked_cells(item['reading'], {}), [])
+        self.assertEqual(materialize('hash', 'v', 1, [item]).rows[0].results[0].kind, 'negative')
+
+    def _note_source(self, store, blocks, page_text=None, pages=1):
         import pymupdf
         from cordon_d.store import put_bytes
-        from cordon_d.report_extraction import MARK_REPAIR
-        for native_ref in (False, True):
-            with self.subTest(native_ref=native_ref):
-                marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
-                if native_ref:
-                    marked['reading']['tables'][0]['rows'][0]['cells'][2] = {'native_cell': 'p1-t1-r1-c3'}
-                    marked['native_cells'] = {'p1-t1-r1-c3': {'text': 'non rilevato*', 'page': 1}}
-                marked.update(request_sha256='retained-request', context_pages=[1],
-                              supplied_pages=[1], native_regions=[])
-                repaired = copy.deepcopy(marked['reading'])
-                repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
-                    'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
-                    'applies_to': ['p1-t1/r1']}]
-                repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
-                config = ExtractionConfig(provider='subscription')
-                with TemporaryDirectory() as directory:
-                    store = Path(directory)
-                    with pymupdf.open() as pdf:
-                        pdf.new_page()
-                        digest = put_bytes(store, pdf.tobytes())
-                    prior = store / 'derived/reports/prior' / digest / 'report.json'
-                    prior.parent.mkdir(parents=True)
-                    prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
-                        'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
-                    with patch('cordon_d.report_extraction._subscription_call', return_value=repaired) as provider:
-                        path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-                    self.assertEqual(provider.call_count, 1)
-                    self.assertEqual(provider.call_args.kwargs['config'].effort, 'high')
-                    self.assertIn('p1-t1/r1', provider.call_args.kwargs['prompt'])
-                    self.assertIn(MARK_REPAIR.format(rows='p1-t1/r1'), provider.call_args.kwargs['prompt'])
-                    saved = json.loads(path.read_text())
-                    self.assertEqual(saved['blocks'][0]['prior_request_sha256'], 'retained-request')
-                    self.assertEqual(saved['blocks'][0]['request_sha256'] != 'retained-request', True)
-                    self.assertTrue(saved['assembly_complete'])
-                with TemporaryDirectory() as directory:
-                    store = Path(directory)
-                    with pymupdf.open() as pdf:
-                        pdf.new_page()
-                        digest = put_bytes(store, pdf.tobytes())
-                    prior = store / 'derived/reports/prior' / digest / 'report.json'
-                    prior.parent.mkdir(parents=True)
-                    prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
-                        'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
-                    with patch('cordon_d.report_extraction._subscription_call',
-                               side_effect=AssertionError('dispatch')) as provider:
-                        path = extract_report(digest, store, config=config, budget=None,
-                                              resume_from='prior', execute=False)
-                    provider.assert_not_called()
-                    saved = json.loads(path.read_text())
-                    self.assertFalse(saved['assembly_complete'])
-                    self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
-                    self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
-                    self.assertIn('mark note reread pending:', saved['blocks'][0]['attachment_repair_pending'])
+        with pymupdf.open() as pdf:
+            page = pdf.new_page()
+            if page_text:
+                for index, line in enumerate(page_text):
+                    page.insert_text((72, 100 + 400 * index), line)
+            for number in range(2, pages + 1):
+                pdf.new_page().draw_rect((72, 72, 72 + number * 10, 90))  # Distinct scanned-like pages.
+            digest = put_bytes(store, pdf.tobytes())
+        read = {page for item in blocks for page in item['targets']}
+        blocks = [*blocks, *({'targets': [n], 'request_sha256': f'retained-{n}', 'context_pages': [],
+                              'supplied_pages': [n], 'native_cells': {}, 'native_regions': [], 'reading': {
+                                  'pages': [{'page': n, 'disposition': 'read'}], 'tables': [], 'facts': [],
+                                  'issues': [], 'context_pages': []}}
+                             for n in range(1, pages + 1) if n not in read)]
+        prior = store / 'derived/reports/prior' / digest / 'report.json'
+        prior.parent.mkdir(parents=True)
+        prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
+            'page_count': pages, 'assembly_complete': True, 'blocks': blocks}))
+        return digest
 
-    def test_pending_mark_reread_leaves_assembly_unattested(self):
-        import pymupdf
-        from cordon_d.store import put_bytes
-        from cordon_d.report_extraction import MARK_REPAIR
-        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
-        marked.update(request_sha256='retained-request', context_pages=[1],
-                      supplied_pages=[1], native_regions=[])
-        repaired = copy.deepcopy(marked['reading'])
-        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
-            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
-            'applies_to': ['p1-t1/r1']}]
-        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+    def test_note_search_reads_later_pages_one_at_a_time_until_the_note_is_found(self):
+        marked = self._retained_block()
+        found = {'notes': [dict(self._note_answer()['notes'][0], page=3)]}
         config = ExtractionConfig(provider='subscription')
         with TemporaryDirectory() as directory:
             store = Path(directory)
-            with pymupdf.open() as pdf:
-                pdf.new_page()
-                digest = put_bytes(store, pdf.tobytes())
-            prior = store / 'derived/reports/prior' / digest / 'report.json'
-            prior.parent.mkdir(parents=True)
-            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
-                'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
+            unmarked = [{'targets': [n], 'request_sha256': f'retained-{n}', 'context_pages': [], 'supplied_pages': [n],
+                         'native_cells': {}, 'native_regions': [], 'reading': {
+                             'pages': [{'page': n, 'disposition': 'read'}], 'tables': [], 'facts': [],
+                             'issues': [], 'context_pages': []}} for n in (2, 3, 4)]
+            digest = self._note_source(store, [marked, *unmarked], pages=4)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[{'notes': []}, {'notes': []}, found]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 3)
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 2: page image'],
+                              ['PHYSICAL PAGE 3: page image']])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual([r['notes'] for r in saved['blocks'][0]['mark_notes']], [0, 0, 1])
+            self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 3)
+            self.assertIn(3, saved['blocks'][0]['supplied_pages'])
+
+    def test_a_note_cited_on_a_page_not_shown_is_read_from_that_page(self):
+        marked = self._retained_block()
+        elsewhere = {'notes': [dict(self._note_answer()['notes'][0], page=3)]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=4)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[elsewhere, elsewhere]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            # The page the answer named is shown next, ahead of the ordinary order; no correction.
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 3: page image']])
+            self.assertNotIn('failed a check', provider.call_args_list[1].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            records = saved['blocks'][0]['mark_notes']
+            self.assertEqual([(r['notes'], r.get('cites_unshown_pages')) for r in records], [(0, [3]), (1, None)])
+            note = saved['blocks'][0]['reading']['facts'][-1]
+            self.assertEqual((note['page'], note['note_request_sha256']), (3, records[1]['request_sha256']))
+        # A page already shown is not shown again: an answer citing it gets the one correction,
+        # and the note is accepted only from the page the request showed.
+        from cordon_d.report_extraction import NOTE_CORRECTION
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            on_two = {'notes': [dict(elsewhere['notes'][0], page=2)]}
+            answers = [{'notes': []}, {'notes': [dict(elsewhere['notes'][0], page=1)]}, on_two]
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=answers) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 2: page image'],
+                              ['PHYSICAL PAGE 2: page image']])
+            cites_one = ('Mark note cites page 1, which was not supplied; a note read from the supplied source has '
+                         'its physical page number, 2, whatever page number is printed on the page')
+            self.assertIn(NOTE_CORRECTION.format(defect=cites_one), provider.call_args_list[2].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 2)
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            on_one = {'notes': [dict(elsewhere['notes'][0], page=1)]}
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[{'notes': []}, on_one, on_one]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 3)
+            saved = json.loads(path.read_text())
+            self.assertFalse(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                             f'mark note reread pending: {cites_one}; the note correction also failed: {cites_one}')
+        # When the named page does not hold the note, the set-aside answer gets its one correction
+        # from the page it was given, and its note is accepted there.
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            on_one = {'notes': [dict(elsewhere['notes'][0], page=1)]}
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[elsewhere, {'notes': []}, elsewhere, on_one]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            calls = provider.call_args_list
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in calls],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 3: page image'],
+                              ['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 1: page image']])
+            self.assertEqual(calls[2].kwargs['request_id'], calls[0].kwargs['request_id'])
+            self.assertIn(NOTE_CORRECTION.format(defect=(
+                'Mark note cites page 3, which was not supplied; a note read from the supplied source has its '
+                'physical page number, 1, whatever page number is printed on the page')), calls[3].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 1)
+
+    def test_a_note_printed_anywhere_defines_its_mark_for_every_marked_cell(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
+                                       ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
+        later = {'notes': [dict(self._note_answer(applies=('p1-t1/r1/c3',))['notes'][0], page=2)]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[{'notes': []}, later, {'notes': []}]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 3)
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            found, extended = saved['blocks'][0]['reading']['facts'][-2:]
+            self.assertEqual((found['applies_to'], extended['applies_to']), (['p1-t1/r1/c3'], ['p1-t1/r2/c3']))
+            self.assertEqual((extended['text'], extended['page'], extended['note_request_sha256']),
+                             (found['text'], 2, found['note_request_sha256']))
+            self.assertEqual(extended['scope_basis'],
+                             'linked by the printed mark; the only note printed for it in the document')
+            rows = report(digest, store, extraction_version=saved['extraction_version']).rows
+            self.assertEqual([(r.results[0].kind, r.results[0].qualification) for r in rows],
+                             [('negative', ('retest',)), ('positive', ('retest',))])
+
+    def test_a_mark_no_page_defines_is_recorded_as_printed_without_a_meaning(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),))
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[{'notes': []}] * 3) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+                             [[f'PHYSICAL PAGE {n}: page image'] for n in (1, 2, 3)])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            fact = saved['blocks'][0]['reading']['facts'][-1]
+            self.assertEqual((fact['role'], fact['mark'], fact['text'], fact['qualification'], fact['applies_to'],
+                              fact['pages_examined'], fact['scope_basis']),
+                             ('result_qualification', '*', '*', 'mark_without_meaning', ['p1-t1/r1/c3'], [1, 2, 3],
+                              'the document prints the mark without a meaning'))
+            self.assertNotIn('note_request_sha256', fact)
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.text, result.cause, result.qualification),
+                             ('negative', 'negativo*', None, ('mark_without_meaning',)))
+
+    @staticmethod
+    def _retained_block(rows=(('123', '01/06/2024', 'non rilevato*', '02/06/2024'),)):
+        marked = block([list(row) for row in rows])
+        marked.update(request_sha256='retained-request', context_pages=[1],
+                      supplied_pages=[1], native_regions=[])
+        return marked
+
+    def test_resume_resolves_a_mark_from_its_note_alone(self):
+        from cordon_d.report_extraction import PROMPT
+        marked = self._retained_block()
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       return_value=self._note_answer()) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 1)
+            request = provider.call_args.kwargs
+            self.assertEqual(request['config'].effort, 'medium')
+            self.assertEqual([(name, label) for name, _, label in request['attachments']],
+                             [('note-1-page-1.png', 'PHYSICAL PAGE 1: page image')])
+            self.assertTrue(request['attachments'][0][1].startswith(b'\x89PNG'))
+            self.assertNotIn(PROMPT, request['prompt'])
+            self.assertIn('p1-t1/r1/c3', request['prompt'])
+            saved = json.loads(path.read_text())
+            item = saved['blocks'][0]
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(item['request_sha256'], 'retained-request')
+            self.assertEqual(item['reading']['tables'], marked['reading']['tables'])
+            self.assertEqual(item['mark_notes'][0]['request_sha256'], request['request_id'])
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.text, result.cause, result.qualification),
+                             ('not-detected', 'non rilevato*', None, ('retest',)))
+
+    def test_pending_note_read_leaves_assembly_unattested_until_executed(self):
+        marked = self._retained_block()
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
             with patch('cordon_d.report_extraction._subscription_call',
                        side_effect=AssertionError('dispatch')) as provider:
                 path = extract_report(digest, store, config=config, budget=None,
@@ -1062,120 +1230,130 @@ class LiteralReport(unittest.TestCase):
             provider.assert_not_called()
             saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
-            self.assertIn('mark note reread pending:', saved['blocks'][0]['attachment_repair_pending'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                'mark note reread pending: No retained response for this mark note read; '
+                'explicit execution is required')
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
             loaded = report(digest, store, extraction_version=saved['extraction_version'])
-            self.assertNotIsInstance(loaded, UnreadReport)
             self.assertIs(loaded.assembly_complete, False)
-            self.assertFalse(path.exists() and json.loads(path.read_text()).get('assembly_complete') is True)
-            with patch('cordon_d.report_extraction._subscription_call', return_value=repaired) as provider:
-                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            # A notes-only execution reads the note and nothing else.
+            with patch('cordon_d.report_extraction._subscription_call',
+                       return_value=self._note_answer()) as provider:
+                path = extract_report(digest, store, config=config, budget=None,
+                                      resume_from='prior', execute='mark notes')
             self.assertEqual(provider.call_count, 1)
-            self.assertIn(MARK_REPAIR.format(rows='p1-t1/r1'), provider.call_args.kwargs['prompt'])
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             self.assertNotIn('attachment_repair_pending', saved['blocks'][0])
 
-    def _mark_reread_source(self, store, marked):
-        import pymupdf
-        from cordon_d.store import put_bytes
-        with pymupdf.open() as pdf:
-            pdf.new_page()
-            digest = put_bytes(store, pdf.tobytes())
-        prior = store / 'derived/reports/prior' / digest / 'report.json'
-        prior.parent.mkdir(parents=True)
-        prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
-            'page_count': 1, 'assembly_complete': True, 'blocks': [marked]}))
-        return digest
-
-    @staticmethod
-    def _mark_reread_block():
-        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
-        marked.update(request_sha256='retained-request', context_pages=[1],
-                      supplied_pages=[1], native_regions=[])
-        repaired = copy.deepcopy(marked['reading'])
-        repaired['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1,
-            'locator': 'footnote', 'text': '*note recovered from the page', 'value': None,
-            'applies_to': ['p1-t1/r1']}]
-        repaired['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
-        malformed = copy.deepcopy(repaired)
-        malformed['tables'][0]['rows'][0]['cells'].append({'text': 'a cell with no column'})
-        return marked, repaired, malformed
-
-    def test_malformed_repair_response_gets_one_structural_correction(self):
-        from cordon_d.report_extraction import MARK_REPAIR, STRUCTURE_REPAIR
-        marked, repaired, malformed = self._mark_reread_block()
+    def test_a_note_that_does_not_name_its_cells_is_linked_by_its_mark(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
+                                       ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
+        answer = self._note_answer(text='*Prova non accreditata da Accredia.', qualification='other',
+                                   wording='Prova non accreditata da Accredia', applies=())
         config = ExtractionConfig(provider='subscription')
         with TemporaryDirectory() as directory:
             store = Path(directory)
-            digest = self._mark_reread_source(store, marked)
-            with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[malformed, repaired]) as provider:
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call', return_value=answer) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 2)
-            defect = 'Repeated row locator or wrong cell count'
-            correction = provider.call_args_list[1].kwargs
-            self.assertEqual(correction['config'].effort, 'high')
-            self.assertIn(MARK_REPAIR.format(rows='p1-t1/r1'), correction['prompt'])
-            self.assertIn(STRUCTURE_REPAIR.format(defect=defect), correction['prompt'])
-            saved = json.loads(path.read_text())['blocks'][0]
-            self.assertEqual(saved['structural_repair_of'], provider.call_args_list[0].kwargs['request_id'])
-            self.assertEqual(saved['structural_defect'], defect)
-            self.assertEqual(saved['request_sha256'], correction['request_id'])
-            self.assertEqual(saved['prior_request_sha256'], 'retained-request')
-            self.assertEqual(saved['effort'], 'high')
-            self.assertNotIn('attachment_repair_pending', saved)
-            self.assertTrue(json.loads(path.read_text())['assembly_complete'])
-
-    def test_second_structural_failure_stops_the_document_with_both_causes(self):
-        marked, _, malformed = self._mark_reread_block()
-        unknown = copy.deepcopy(malformed)
-        unknown['tables'][0]['rows'][0]['cells'] = unknown['tables'][0]['rows'][0]['cells'][:4]
-        unknown['tables'][0]['rows'][0]['cells'][2] = {'native_cell': 'p1-t1-r1-c3'}
-        config = ExtractionConfig(provider='subscription')
-        with TemporaryDirectory() as directory:
-            store = Path(directory)
-            digest = self._mark_reread_source(store, marked)
-            with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[malformed, unknown]) as provider:
-                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 2)
+            self.assertEqual(provider.call_count, 1)
+            self.assertIn('p1-t1/r2/c3', provider.call_args.kwargs['prompt'])
             saved = json.loads(path.read_text())
-            pending = saved['blocks'][0]['attachment_repair_pending']
-            self.assertTrue(pending.startswith('mark note reread pending: '))
-            self.assertIn('Repeated row locator or wrong cell count', pending)
-            self.assertIn('the structural correction also failed: Unknown native cell', pending)
-            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
-            self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
+            self.assertTrue(saved['assembly_complete'])
+            note = saved['blocks'][0]['reading']['facts'][-1]
+            self.assertEqual(note['applies_to'], ['p1-t1/r1/c3', 'p1-t1/r2/c3'])
+            self.assertEqual(note['scope_basis'], 'linked by the printed mark')
+            rows = report(digest, store, extraction_version=saved['extraction_version']).rows
+            self.assertEqual([(r.results[0].kind, r.results[0].qualification) for r in rows],
+                             [('negative', ('other',)), ('positive', ('other',))])
+
+    def test_a_note_that_names_some_cells_leaves_the_others_pending(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
+                                       ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
+        answer = self._note_answer(text='* Campione 123 pervenuto danneggiato.', qualification='damaged_sample',
+                                   wording='pervenuto danneggiato', applies=('p1-t1/r1/c3',), names=True)
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call', return_value=answer):
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
-
-    def test_structural_correction_without_a_retained_response_writes_pending(self):
-        from cordon_d.report_extraction import write_json
-        marked, _, malformed = self._mark_reread_block()
-        config = ExtractionConfig(provider='subscription')
-        requests_made = []
-        def retaining(**kwargs):
-            requests_made.append(kwargs['request_id'])
-            write_json(kwargs['raw_path'], {'provider': 'claude-code-subscription',
-                                            'response': {'structured_output': malformed}})
-            return malformed
-        with TemporaryDirectory() as directory:
-            store = Path(directory)
-            digest = self._mark_reread_source(store, marked)
-            with patch('cordon_d.report_extraction._subscription_call', side_effect=retaining):
-                extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(len(requests_made), 2)
-            (store / 'derived/reports/responses' / f'{requests_made[1]}.json').unlink()
-            with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=AssertionError('dispatch')) as provider:
-                path = extract_report(digest, store, config=config, budget=None,
-                                      resume_from='prior', execute=False)
-            provider.assert_not_called()
-            saved = json.loads(path.read_text())
             self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
-                'mark note reread pending: No retained response for this structural correction; '
-                'explicit execution is required')
-            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+                'mark note reread pending: no printed note for mark * recovered for p1-t1/r2/c3 '
+                'from page 1 page image')
+            rows = report(digest, store, extraction_version=saved['extraction_version']).rows
+            self.assertEqual((rows[0].results[0].kind, rows[0].results[0].qualification),
+                             ('negative', ('damaged_sample',)))
+            self.assertEqual((rows[1].results[0].kind, rows[1].results[0].cause),
+                             ('unclassified', 'printed mark; note not recovered by the reading'))
+
+    def test_malformed_note_answer_gets_one_correction(self):
+        from cordon_d.report_extraction import NOTE_CORRECTION
+        marked = self._retained_block()
+        misquoted = self._note_answer(wording='Si raccomanda un nuovo prelievo')
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[misquoted, self._note_answer()]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 2)
+            correction = provider.call_args_list[1].kwargs
+            defect = 'Qualification wording must quote the note'
+            self.assertIn(NOTE_CORRECTION.format(defect=defect), correction['prompt'])
+            self.assertEqual(correction['config'].effort, 'medium')
+            self.assertEqual(correction['attachments'], provider.call_args_list[0].kwargs['attachments'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            record = saved['blocks'][0]['mark_notes'][0]
+            self.assertEqual((record['correction_of'], record['defect'], record['request_sha256']),
+                             (provider.call_args_list[0].kwargs['request_id'], defect, correction['request_id']))
+        malformed = {'notes': [dict(self._note_answer()['notes'][0], applies_to=['p9-t9/r9/c9'])]}
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=[misquoted, malformed]) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(provider.call_count, 2)
+            saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                'mark note reread pending: Qualification wording must quote the note; the note correction '
+                'also failed: Mark note names a cell that was not supplied')
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+
+    def test_text_layer_supplies_only_the_note_region_and_checks_its_quotation(self):
+        from cordon_d.report_extraction import note_source_steps, accepted_notes
+        import pymupdf
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [self._retained_block()],
+                                       page_text=['Rapporto di prova 123', '* Si consiglia di ripetere il prelievo.'])
+            from cordon_d.store import blob_path
+            cells = [{'cell': 'p1-t1/r1/c3', 'page': 1, 'text': 'non rilevato*', 'marks': ['*']}]
+            with pymupdf.open(blob_path(store, digest)) as document:
+                steps = list(note_source_steps(document, '*', cells, [], 72))
+                sources = steps[0]
+                self.assertEqual([(s['page'], s['kind'], s['text']) for s in sources],
+                                 [(1, 'text region', '* Si consiglia di ripetere il prelievo.')])
+                # If the region does not answer, the search continues with the page image.
+                self.assertEqual([[(s['page'], s['kind']) for s in step] for step in steps[1:]],
+                                 [[(1, 'page image')]])
+                self.assertLess(sources[0]['bbox'][3] - sources[0]['bbox'][1], 40)
+                check = dict(mark='*', cells=cells, sources=sources, page_text=lambda n: document[n - 1].get_text())
+                self.assertEqual(accepted_notes(self._note_answer(), **check)[0]['qualification'], 'retest')
+                with self.assertRaisesRegex(ValueError, 'not printed in the text layer of page 1'):
+                    accepted_notes(self._note_answer(text='* Si consiglia di ripetere il campione.',
+                                                     wording='ripetere'), **check)
+                with self.assertRaisesRegex(ValueError, 'does not carry its printed mark'):
+                    accepted_notes(self._note_answer(text='Si consiglia di ripetere il prelievo.'), **check)
+                with self.assertRaisesRegex(ValueError, 'names no supplied cell'):
+                    accepted_notes(self._note_answer(applies=(), names=True), **check)
 
     def test_a_note_reaches_the_row_for_the_detector_as_it_does_for_the_classifier(self):
         from cordon_d.report_extraction import unresolved_mark_scopes
@@ -1195,23 +1373,6 @@ class LiteralReport(unittest.TestCase):
                 self.assertEqual(row.results[0].kind, 'not-detected')
                 self.assertEqual(row.results[0].text, 'non rilevato*')
                 self.assertIsNone(row.results[0].cause)
-
-    def test_unresolved_result_mark_remains_after_one_source_reread(self):
-        import pymupdf
-        from cordon_d.store import put_bytes
-        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
-        with TemporaryDirectory() as directory:
-            store = Path(directory)
-            with pymupdf.open() as pdf:
-                pdf.new_page()
-                digest = put_bytes(store, pdf.tobytes())
-            with patch('cordon_d.report_extraction._call', side_effect=[marked, copy.deepcopy(marked)]) as call:
-                path = extract_report(digest, store, config=ExtractionConfig(), budget=None)
-                extract_report(digest, store, config=ExtractionConfig(), budget=None)
-            self.assertEqual(call.call_count, 2)
-            issue = json.loads(path.read_text())['blocks'][0]['reading']['issues'][-1]
-            self.assertEqual(issue['cause'], 'result mark note remains unrecovered after one source reread')
-            self.assertEqual(issue['scope'], 'p1-t1/r1')
 
     def test_sospetto_does_not_trigger_mark_repair(self):
         import pymupdf
