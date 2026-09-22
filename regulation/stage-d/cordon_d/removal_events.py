@@ -123,14 +123,29 @@ def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
     supplying a document-specific event or a clock anchor.
     """
     from .notices import parsec_publication_declarations
+    rows = parsec_publication_declarations(path, publisher=publisher, source_url=source_url)
+    yield from _attached_publications(rows, measures=measures, acquisitions=acquisitions)
+
+
+def domino_publication(path, *, publisher, source_url, measures, acquisitions):
+    """Connect a Domino declaration by its acquired originals, not its subject."""
+    from .notices import domino_publication_detail
+    row = domino_publication_detail(path, publisher=publisher, source_url=source_url)
+    return next(_attached_publications((row,), measures=measures, acquisitions=acquisitions))
+
+
+def _attached_publications(rows, *, measures, acquisitions):
+    """Share only acquired-route attachment and dated declaration event handling."""
+    rows = tuple(rows)
+    source_digests = {row.sha256 for row in rows}
     routes = {}
-    capture_days = []
-    source_digest = file_digest(Path(path))
+    capture_days = {}
     for record in acquisitions:
-        if record.get('sha256') == source_digest and record.get('captured_at'):
+        if record.get('sha256') in source_digests and record.get('captured_at'):
             captured = datetime.fromisoformat(record['captured_at'])
             if captured.tzinfo is not None:
-                capture_days.append(captured.astimezone(ZoneInfo('Europe/Rome')).date())
+                capture_days.setdefault(record['sha256'], []).append(
+                    captured.astimezone(ZoneInfo('Europe/Rome')).date())
         if record.get('sha256'):
             for key in ('url', 'final_url'):
                 if record.get(key):
@@ -143,11 +158,19 @@ def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
         except MissingInput:
             continue
         originals.setdefault(digest, set()).add(identity)
-    for row in parsec_publication_declarations(path, publisher=publisher, source_url=source_url):
-        values = dict(row.values, observed_on=max(capture_days).isoformat() if capture_days else None)
-        candidates = {identity for route in values['document_routes']
-                      for digest in routes.get(route['url'], ())
+    for row in rows:
+        observed = capture_days.get(row.sha256, ())
+        values = dict(row.values, observed_on=max(observed).isoformat() if observed else None)
+        acquired = {digest for route in values['document_routes']
+                    for digest in routes.get(route['url'], ())}
+        candidates = {identity for digest in acquired
                       for identity in originals.get(digest, ())}
+        values['attachment_issue'] = (
+            'No native document route' if not values['document_routes'] else
+            'Native document routes have no held source acquisition' if not acquired else
+            'Acquired route sources lack a qualified measure identity and adoption date' if not candidates else
+            'Acquired route sources resolve to competing measure identities or adoption dates'
+            if len(candidates) > 1 else None)
         document, adopted = next(iter(candidates)) if len(candidates) == 1 else (None, None)
         support = Support(row.sha256, row.locator,
                           'Municipal register declaration: ' + values['source_fields']['Oggetto'])
@@ -161,11 +184,13 @@ def parsec_publications(path, *, publisher, source_url, measures, acquisitions):
                 # end day must have elapsed; this still does not certify continuity.
                 occurred = (declared and observed and
                             (declared <= observed if kind.endswith('-start') else declared < observed))
+                if kind.endswith('-end') and values.get('publication_status', 'NO') != 'NO':
+                    occurred = False
                 if occurred:
                     events.append(AdministrativeEvent(row.sha256 + ':' + row.locator + ':' + kind,
                                   kind, document, None,
                                   date.fromisoformat(declared), support))
-        yield Publication(row.sha256 + ':' + row.locator, publisher, document,
+        yield Publication(row.sha256 + ':' + row.locator, values['publisher'], document,
                           adopted, values, tuple(events), support)
 
 

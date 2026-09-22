@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 
 from cordon_c import Snapshot
 from cordon_d.calendar import national_calendar
-from cordon_d.removal_events import publication_records, publication_deadline, connected_publications, parsec_publications
+from cordon_d.removal_events import publication_records, publication_deadline, connected_publications, parsec_publications, domino_publication
 from cordon_d.notices import parsec_publication_declarations
 
 
@@ -88,6 +88,90 @@ class ParsecPublication(unittest.TestCase):
         self.assertNotEqual(by_number['1110'].locator, by_number['1109'].locator)
         self.assertNotIn('document', by_number['369'].values)
         self.assertNotIn('events', by_number['1110'].values)
+
+
+class DominoPublication(unittest.TestCase):
+    def read(self, *, captured='2026-03-20T12:00:00+00:00', status='NO',
+             duplicate_period=False, measures=None, acquired=True):
+        from cordon_d.evidence import file_digest
+        period = '<tr><td>In Pubblicazione</td><td></td><td>dal 03/07/2026 al 03/14/2026</td></tr>'
+        with TemporaryDirectory() as directory:
+            path = Path(directory)/'detail.html'
+            path.write_text('''<table>
+<tr><td>Protocollo Generale</td><td></td><td>20269876543</td></tr>
+<tr><td>Tipo Provvedimento</td><td></td><td>Avviso</td></tr>
+<tr><td>Ente/Amministrazione</td><td></td><td>Regional office</td></tr>
+<tr><td>Oggetto</td><td></td><td>DDS999/2026 amends DDS998/2025</td></tr>
+<tr><td>N. Repertorio Albo</td><td></td><td>2026/Albo/9991</td></tr>''' + period +
+                f'<tr><td>In Pubblicazione</td><td></td><td>{status}</td></tr>' +
+                (period if duplicate_period else '') + '''</table>
+<a href="/native/$FILE/unknown.pdf">Original document</a>
+<a href="/native/$FILE/other.pdf">Certificato di Pubblicazione</a>''')
+            captures = [{'sha256': file_digest(path), 'captured_at': captured}]
+            if acquired:
+                captures += [{'url': 'https://example.org/native/$FILE/unknown.pdf', 'sha256': 'principal'},
+                             {'url': 'https://example.org/native/$FILE/other.pdf', 'sha256': 'attachment'}]
+            # An unrelated timestamp cannot qualify or break this declaration.
+            captures += [{'sha256': 'unrelated', 'captured_at': 'unrecognized'}]
+            measures = [self.measure()] if measures is None else measures
+            return domino_publication(path, publisher='Unseen municipality',
+                source_url='https://example.org/detail', measures=measures, acquisitions=captures)
+
+    def measure(self, source='principal', identity='issued-act', adopted=date(2026, 3, 5)):
+        return SimpleNamespace(identity=identity, adopted=adopted,
+                               response={'request': {'sources': [source]}})
+
+    def test_only_acquired_original_identity_supplies_document_events(self):
+        p = self.read()
+        self.assertEqual((p.document, p.document_date), ('issued-act', date(2026, 3, 5)))
+        self.assertEqual([e.occurred for e in p.events], [date(2026, 3, 7), date(2026, 3, 14)])
+        self.assertTrue(all(e.document == p.document and e.recipient is None for e in p.events))
+        self.assertTrue(all(e.support.source == p.support.source for e in p.events))
+        self.assertIsNone(p.source_fields['attachment_issue'])
+        self.assertEqual(p.source_fields['source_fields']['Protocollo Generale'], '20269876543')
+        self.assertEqual(len(p.source_fields['document_routes']), 2)
+        self.assertEqual(connected_publications([p], [self.measure(identity='another-act')]), ())
+        with self.assertRaises(ValueError):
+            p.events[0].anchor(kind='recipient-notification', document=p.document,
+                               recipient='named-owner', precision='date')
+        for measures, acquired, cause in [
+                ([self.measure(source='not-the-linked-original')], True, 'qualified measure identity'),
+                ([], True, 'qualified measure identity'),
+                ([self.measure()], False, 'no held source acquisition'),
+                ([self.measure(), self.measure('attachment', 'another-act')], True, 'competing'),
+                ([self.measure(), self.measure(adopted=date(2026, 3, 6))], True, 'competing')]:
+            with self.subTest(cause=cause):
+                row = self.read(measures=measures, acquired=acquired)
+                self.assertIsNone(row.document)
+                self.assertEqual(row.events, ())
+                self.assertIn(cause, row.source_fields['attachment_issue'])
+                self.assertEqual(row.source_fields['declared_dates']['Data fine pubb.'], '2026-03-14')
+        from cordon_c.core import MissingInput
+        class Unqualified:
+            response = {'request': {'sources': ['principal']}}
+
+            @property
+            def identity(self):
+                raise MissingInput('Issuing authority not recovered')
+
+        self.assertIsNone(self.read(measures=[Unqualified()]).document)
+
+    def test_future_missing_capture_active_status_and_duplicate_period_refuse_end(self):
+        for captured, kinds in [(None, []), ('2026-03-06T12:00:00+00:00', []),
+                                ('2026-03-07T12:00:00+00:00', ['municipal-publication-start']),
+                                ('2026-03-14T12:00:00+00:00', ['municipal-publication-start']),
+                                ('2026-03-15T12:00:00+00:00',
+                                 ['municipal-publication-start', 'municipal-publication-end'])]:
+            with self.subTest(captured=captured):
+                self.assertEqual([e.kind for e in self.read(captured=captured).events], kinds)
+        for status in ['SI', 'unrecognized', '']:
+            p = self.read(status=status)
+            self.assertEqual([e.kind for e in p.events], ['municipal-publication-start'])
+            self.assertEqual(p.source_fields['publication_status'], status)
+        p = self.read(duplicate_period=True)
+        self.assertEqual(p.events, ())
+        self.assertEqual(len(p.source_fields['source_fields']['In Pubblicazione']), 3)
+        self.assertIn('one native', p.source_fields['date_issues']['In Pubblicazione'])
 
 
 class MunicipalPublication(unittest.TestCase):

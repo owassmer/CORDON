@@ -8,7 +8,8 @@ import unittest
 import pymupdf
 
 from cordon_d.measure_sources import (source_material, table_fields, material_context,
-                                      context_matches, selected_association, CONTEXT_MARKER)
+                                      context_matches, selected_association, CONTEXT_MARKER,
+                                      native_span)
 from cordon_d.measures import MeasureReading, retained_measure, _validate_reading
 from cordon_d.store import blob_path, put_bytes, store_root
 from test_source_associations import source
@@ -157,6 +158,151 @@ class MixedSourceComposition(unittest.TestCase):
                     values['image_positions'][0]['image_ref'] = 'S0P1'
                     with self.assertRaisesRegex(ValueError, 'Use native table cells'):
                         _validate_reading(values, [digest], store, material)
+
+
+class NativeWordPositions(unittest.TestCase):
+    def setUp(self):
+        temporary = TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.store = Path(temporary.name)
+        self.digest = source(self.store, [dict(
+            headings=['ID CAMPIONE', 'SPECIE'], widths=[240, 240],
+            rows=[['SAME SAME', 'Olivo']]), dict(
+            headings=['COMUNE', 'PROPRIETARIO'], widths=[240, 240],
+            rows=[['Town', 'OWNER FAMILY']])])
+        self.material, self.associations = source_material([self.digest], self.store)
+        self.plants = self.line(['SAME', 'SAME'])
+        self.host = self.line(['Olivo'])
+        self.owner = self.line(['OWNER', 'FAMILY'])
+        self.values = dict(identity=dict(adopted=None), events=[], issues=[], references=[],
+            directions=[dict(id='work', mode='ordered-now', work='removal')],
+            parts=[dict(source=self.digest, pages=[1, 2], role='target-table')],
+            target_scopes=[], image_positions=[],
+            prose_positions=[self.position(0), self.position(1)])
+
+    def line(self, words):
+        return next(ref for ref, line in self.material['lines'].items() if line['words'] == words)
+
+    def span(self, ref, start=0, end=1):
+        return dict(line_ref=ref, first_word=start, end_word=end)
+
+    def position(self, start):
+        return dict(fields=[dict(role='plant_id', spans=[self.span(self.plants, start, start + 1)]),
+                            dict(role='host', spans=[self.span(self.host)])],
+                    direction_ids=['work'], meaning='One selected printed occurrence',
+                    support=[dict(source=self.digest, page=1, locator='Printed native words', quote='SAME')])
+
+    def validate(self):
+        _validate_reading(self.values, [self.digest], self.store, self.material)
+
+    def test_cell_interior_words_keep_distinct_occurrences_and_shared_context(self):
+        self.validate()
+        targets = MeasureReading({'reading': self.values}, self.material,
+                                 self.associations).prescribed_targets()
+        self.assertEqual([t['reference'] for t in targets], ['SAME', 'SAME'])
+        self.assertNotEqual(targets[0]['occurrence'], targets[1]['occurrence'])
+        self.assertNotEqual(targets[0]['fields']['plant_id']['fragments'][0]['locator'],
+                            targets[1]['fields']['plant_id']['fragments'][0]['locator'])
+        self.assertEqual(targets[0]['fields']['host'], targets[1]['fields']['host'])
+        context, _ = json.JSONDecoder().raw_decode(material_context(self.material)[len(CONTEXT_MARKER):])
+        self.assertEqual(context['lines'][self.plants], ['SAME', 'SAME'])
+        self.assertNotIn('word_boxes', material_context(self.material))
+        fragment = native_span(self.material, self.span(self.plants))
+        self.assertNotIn('word_boxes', fragment)
+        self.assertEqual(fragment['bbox'], self.material['lines'][self.plants]['bbox'])
+
+    def test_duplicate_or_overlapping_identifying_spans_are_not_new_positions(self):
+        for start, end in [(0, 1), (0, 2)]:
+            with self.subTest(start=start, end=end):
+                self.values['prose_positions'][1]['fields'][0]['spans'] = [
+                    self.span(self.plants, start, end)]
+                with self.assertRaisesRegex(ValueError, 'one selection'):
+                    self.validate()
+        self.values['prose_positions'] = [self.position(0)]
+        self.values['prose_positions'][0]['fields'][0]['spans'] *= 2
+        with self.assertRaisesRegex(ValueError, 'repeated or overlapping'):
+            self.validate()
+
+    def test_native_cell_and_words_cannot_select_the_same_position_twice(self):
+        self.values['target_scopes'] = [dict(table_ref='S0P1T1', first_row=2, last_row=2,
+            columns=[], direction_ids=['work'], meaning='Printed cell',
+            support=self.values['prose_positions'][0]['support'])]
+        with self.assertRaisesRegex(ValueError, 'one selection'):
+            self.validate()
+
+    def test_table_continuation_span_does_not_occupy_other_words_on_its_line(self):
+        digest = source(self.store, [dict(headings=['ID CAMPIONE', 'SPECIE'],
+                                         widths=[240, 240], rows=[['', 'Olivo']])])
+        with pymupdf.open(blob_path(self.store, digest)) as document:
+            document.new_page().insert_text((40, 60), 'FIRST SECOND')
+            self.digest = put_bytes(self.store, document.tobytes())
+        self.material, self.associations = source_material([self.digest], self.store)
+        line = self.line(['FIRST', 'SECOND'])
+        support = [dict(source=self.digest, page=page, locator='Printed occurrence', quote=text)
+                   for page, text in [(1, 'Olivo'), (2, 'FIRST SECOND')]]
+        own_cell = self.material['tables']['S0P1T1']['rows'][1]['cells'][0]
+        self.values = dict(identity=dict(adopted=None), directions=[], events=[], issues=[], parts=[],
+            image_positions=[], target_scopes=[dict(table_ref='S0P1T1', first_row=2, last_row=2,
+                columns=[dict(role='plant_id', column=1, fragments=[
+                    dict(table_ref='S0P1T1', cell=own_cell), self.span(line)])],
+                direction_ids=[], meaning='Continued native field', support=support)],
+            prose_positions=[dict(fields=[dict(role='plant_id', spans=[self.span(line, 1, 2)])],
+                                  direction_ids=[], meaning='Separate position', support=support)])
+        self.validate()
+        self.values['prose_positions'][0]['fields'][0]['spans'] = [self.span(line)]
+        with self.assertRaisesRegex(ValueError, 'one selection'):
+            self.validate()
+
+    def test_shared_cross_page_field_requires_its_own_source_support(self):
+        for position in self.values['prose_positions']:
+            position['fields'].append(dict(role='addressee', spans=[self.span(self.owner, 0, 2)]))
+        with self.assertRaisesRegex(ValueError, 'every selected source page'):
+            self.validate()
+        for position in self.values['prose_positions']:
+            position['support'].append(dict(source=self.digest, page=2, locator='Shared owner',
+                                            quote='OWNER FAMILY'))
+        self.validate()
+        targets = tuple(MeasureReading({'reading': self.values}, self.material, self.associations).targets())
+        self.assertEqual([t['addressee_text'] for t in targets], ['OWNER FAMILY', 'OWNER FAMILY'])
+        self.material['lines'][self.owner]['source'] = 'another-supplied-document'
+        with self.assertRaisesRegex(ValueError, 'within its source document'):
+            self.validate()
+
+    def test_partial_address_context_is_neither_current_nor_legacy(self):
+        complete = material_context(self.material)
+        self.assertTrue(context_matches(complete, self.material))
+        context, _ = json.JSONDecoder().raw_decode(complete[len(CONTEXT_MARKER):])
+        del context['lines'][self.plants]
+        self.assertFalse(context_matches(CONTEXT_MARKER + json.dumps(context), self.material))
+        # A modified source word is never excused by compatibility.
+        changed = deepcopy(self.material)
+        changed['lines'][self.host]['words'] = ['another literal']
+        self.assertFalse(context_matches(complete, changed))
+
+    def test_ownership_uses_selected_words_not_the_center_of_their_line(self):
+        digest = source(self.store, [dict(rows=[['A', 'R 1', '1/2/2025', 'OWNER']])])
+        with pymupdf.open(blob_path(self.store, digest)) as document:
+            # One native line begins outside the table and ends in its owned
+            # plant cell. Its first and last words have different ownership.
+            document[0].insert_text((0, 160), 'LEFT      OWNED', fontsize=10)
+            self.digest = put_bytes(self.store, document.tobytes())
+        self.material, self.associations = source_material([self.digest], self.store)
+        line = self.line(['LEFT', 'OWNED'])
+        position = dict(fields=[dict(role='parcel', spans=[self.span(line)])],
+                        direction_ids=[], meaning='Outside the table',
+                        support=[dict(source=self.digest, page=1, locator='Native line', quote='LEFT')])
+        self.values = dict(identity=dict(adopted=None), directions=[], events=[], issues=[], parts=[],
+                           target_scopes=[], image_positions=[], prose_positions=[position])
+        self.validate()
+        position['fields'][0]['spans'] = [self.span(line, 1, 2)]
+        with self.assertRaisesRegex(ValueError, 'association owner'):
+            self.validate()
+        position['fields'][0]['spans'] = [self.span(line)]
+        self.material['lines'][line]['word_boxes'] = None
+        with self.assertRaisesRegex(ValueError, 'exact word geometry'):
+            self.validate()
+        self.values['prose_positions'] = []
+        self.validate()  # The unselected limitation does not block other reading content.
 
 
 class RetainedSourceComposition(unittest.TestCase):

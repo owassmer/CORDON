@@ -101,10 +101,15 @@ In a surrounding-parcel table, a printed reference to the infected plant is
 reference_plant_id, not the identity of a plant ordered removed in that parcel.
 Keep that reference distinct from plant_id; it does not establish a report join.
 
-For consequential positions stated in prose rather than tables, use prose_positions.
+Use prose_positions for consequential positions selected through native words,
+including printed table positions that the detected cells combine or cannot separate.
 Fields contain native line_ref and zero-based word spans, with end_word exclusive.
 The consumer copies those words; select the precise source occurrence and preserve
-groups and actual stated applicability. Do not choose a narrative mention where an
+groups and actual stated applicability. Select each printed position once, through
+table cells or native spans; do not restate association-owned fields through spans.
+Shared contextual fields may govern several positions, but the same selected plant
+or parcel occurrence must not create another position. Cite every selected page.
+Do not choose a narrative mention where an
 operative correction supplies the changed position. Include all relevant paragraphs,
 not only tables. Use image_positions only where the rendered source page carries
 target content without supplied table-cell addresses or usable native words,

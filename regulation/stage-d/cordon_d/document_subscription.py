@@ -6,6 +6,7 @@ import json
 from math import isfinite
 import os
 from pathlib import Path
+import re
 import subprocess
 from tempfile import TemporaryDirectory
 from time import monotonic
@@ -93,6 +94,8 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
     Optional supplemental views rotate complete rendered pages using exact
     orthogonal image placement, including the page's own rotation. Shear,
     reflection, other angles and orientation within image pixels are not inferred.
+    Supplemental PDF text compacts ASCII space/tab runs; original page images and
+    caller-owned source addresses preserve layout. Other characters stay literal.
     Explicit HTML/text inputs supply their complete UTF-8 source, without script
     execution, linked-asset retrieval or invented physical pages. The caller owns
     whether native text is sufficient for its particular source claim.
@@ -137,7 +140,8 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
             with pymupdf.open(source) as document:
                 supplied += f'\nDOCUMENT {digest}; {len(document)} page images\n'
                 for number, page in enumerate(document, 1):
-                    supplied += f'PHYSICAL PAGE {number}\n{page.get_text(sort=True)}\n'
+                    text = re.sub(r'[ \t]+', ' ', page.get_text(sort=True))
+                    supplied += f'PHYSICAL PAGE {number}\n{text}\n'
                     png = page.get_pixmap(dpi=dpi).tobytes('png')
                     image = directory / f'{digest}-{number}.png'
                     image.write_bytes(png)

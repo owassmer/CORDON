@@ -16,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('sources', nargs='*', help='Ordered source SHA-256 values; act first')
     parser.add_argument('--request', help='Replay this retained request with its original context')
-    parser.add_argument('--execute', action='store_true', help='Use the allocated Codex subscription worker')
+    parser.add_argument('--execute', action='store_true', help='Dispatch the requested source reading')
     parser.add_argument('--review-instruction', default='', help='Explicit source-reading correction request')
     args = parser.parse_args()
     if args.request:

@@ -5,10 +5,12 @@ Osservatorio can actually obtain and use. For every required input it establishe
 the source population, record meaning and grain, identity and time relationship,
 ordinary reader, and exact unresolved limitation.
 
-The current plain-language input map is `INPUTS.md`. `contracts.json` owns the 27
-input kinds. `predicate-contracts.json` and `additional-input-contracts.json` bind
-accepted A–C requirements to those kinds. `source-bindings.json` owns the small set
-of source routes. `inventory.py` computes the A–C consumer projection when it is needed; nothing stores it.
+The [input map](INPUTS.md) owns current source coverage and limitations.
+[contracts.json](contracts.json) owns the input kinds;
+[predicate-contracts.json](predicate-contracts.json) and
+[additional-input-contracts.json](additional-input-contracts.json) bind accepted
+A–C requirements to them. [source-bindings.json](source-bindings.json) owns source
+routes. `inventory.py` computes the A–C consumer projection when needed.
 
 ## Admission rule
 
@@ -55,38 +57,21 @@ prescription or a separate product workflow.
 
 ## Administrative publication records
 
-`cordon_d.removal_events.publication_records` consumes the retained native
-Capurso/Akropolis register JSON. It preserves all fields and identifies the
-regional act from its explicitly labelled subject, separately from the municipal
-incoming protocol and date. `connected_publications` requires the act identity
-and adoption date from the measure consumer. Whole-measure qualification precedes
-population dispatch; independent register declarations remain available.
+[notices](cordon_d/notices.py) retains native register declarations, their separate
+publication occurrences, dates, offices and original-document routes.
+[removal_events](cordon_d/removal_events.py) connects them to measure identity and
+adoption through explicit act identifiers or acquired document attachments.
+Incoming protocol, adoption, publication and recipient effect remain distinct;
+identical attached bytes do not merge publication occurrences or prove amendment.
+Attachment adapters require the acquisition record and keep future dates as
+unoccurred declarations.
 
-`publication_deadline` passes the exact event kind, document and competent
-municipality to accepted B/C clock calculations. It requires the caller's
-calendar. A result using `national_calendar()` has that baseline's local-holiday
-limitation. The calculation does not establish recipient effect, uninterrupted
-posting, election, silence, default or completed removal. No clause wording,
-layout or adoption date generates an assignment or performance event.
-`event_deadline` can forward an explicitly supplied prescribed term to its
-upstream quantity and boundary consumers, checking its document/recipient context.
-It imports no proposed type and supplies no acceptance bypass: that source-bound
-clock and type require their own accepted A–C owners before ordinary use.
-
-`cordon_d.notices.parsec_publication_declarations` reads the publisher's labelled
-table, including native ICEfaces historical-search responses. It preserves each
-publication occurrence, declared dates, requesting office and emitted original
-routes. A correction-labelled entry and another entry can serve identical PDFs
-without becoming one publication or establishing an amendment. These declarations
-remain available independently of whole-measure qualification.
-`removal_events.parsec_publications` attaches the exact emitted document route through
-its acquired source hash to the measure identity and adoption date. It preserves
-separate publication occurrences even when they serve identical documents; a
-referenced predecessor in a subject does not replace the attached act.
-The adapter also requires the register capture's acquisition record before emitting
-events. Displayed future dates remain declarations, and an end date becomes an
-occurred anchor only after that local calendar day has elapsed. This does not prove
-uninterrupted posting or recipient effect.
+`publication_deadline` and `event_deadline` check the document, event kind and
+recipient or competent publisher before invoking accepted B/C calculations.
+The caller supplies the calendar; `national_calendar()` retains its local-holiday
+limitation. Prescribed terms remain subject to their accepted A–C type and clock.
+A declared posting interval does not prove uninterrupted posting, recipient
+notification, response, default or performance.
 
 ## Where bytes live
 
@@ -105,12 +90,9 @@ the readings and runs it. Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable readings. Monitoring occurrences
 and typed readings remain Parquet keyed by source hash and reader version.
-`Member.publisher_annotation` carries the existing campaign owner's exact literal
-on that occurrence, with its retained source row citation. It neither attaches the
-annotation to other rows nor changes their identifiers or grouping. A legacy
-annotation row whose selected cache predates this field exposes that derived
-reading limitation; absent-column and present-null states are distinct. Changed
-reader versions do not relabel old cache contents.
+`Member.publisher_annotation` preserves the campaign source's literal and citation
+on its own occurrence without changing identity or grouping. An older cache
+missing that reading remains distinguishable from an absent column or null value.
 The grouped distinct-observation stream is a regenerable Parquet keyed by the ordered
 `(url, view, sha256)` sequence of retained releases, the reader version and the
 DuckDB version. Reports use compact JSON blocks and an assembled reading under
@@ -138,8 +120,6 @@ unread pages/regions. Page dispositions and schema checks establish structural
 coverage only. Observation identity stays in `monitoring.distinct_observations`;
 report joins cannot redefine it from a cache directory, filename or code width.
 
-The extraction configuration records effort explicitly (default `medium` for
-Sonnet 5); thinking and response text share the reserved output-token allowance.
 Printed section membership uses `pN/heading`, with qualifiers scoped to
 `section:pN/heading`, so repeated section headings in a PDF do not become one
 section and section qualifiers do not become report-wide assertions. Both the
@@ -221,15 +201,11 @@ spelled with an Italian month name resolves the same way. A printed date range o
 list constrains a separately stated sampling day and never supplies one; a row
 whose only date statement is a range or list has no exact day, and says so.
 
-Extraction permits one to three independent PDF processes under one shared,
-transaction-locked spending ledger. Returned usage and interrupted requests are
-different states. An explicit interrupted-request retry retains the full old
-reservation and reserves the new attempt separately; it does not claim invoice
-reconciliation. No saved successful response is retransmitted. Independent subscription runners
-lock the exact request before dispatch and reuse a response completed by the
-lock holder, preventing concurrent duplicate calls. Reader versions
-describe the implementation loaded into the process, avoiding cache mislabelling
-if source files change during a run.
+Extraction retains spending reservations and returned usage separately; an
+interrupted retry does not erase its earlier reservation. Exact-request locks
+prevent duplicate dispatch and reuse saved responses. Reader versions describe
+the implementation loaded into the process, so changing files cannot relabel a
+running extraction's cache.
 
 Reading issues survive both forward observation links and reverse report-row
 output. A limitation naming an exact table/column locator is attached to that
@@ -300,21 +276,12 @@ unit, a result changes a canonical owner, remains as a directly consumed source
 population, or is deleted. Workbench paths, dated investigations and review
 packets may not appear in `source-bindings.json`.
 
-## Current state
+## Stage status
 
-The earlier D acquisition and integration state was purged on 10 September 2026
-because it mixed live inputs with case studies, investigation history, failed
-routes, redundant manifests and superseded interpretations. No earlier D review,
-file count or acquisition claim survives the purge.
-
-Generic readers for tabular, geographic, document, event, evidence and calendar
-inputs remain. They are implementation starting points, not claims that a source
-population is currently acquired or semantically complete. Each source family in
-`INPUTS.md` is open until its complete within-aperture population and ordinary
-consumer path are established.
-
-Stage D does not define government Actions, durable domain nouns or the platform.
-Those remain Stages E, F and G.
+[state/CURRENT.json](../../state/CURRENT.json) owns acceptance and the next gate;
+[INPUTS.md](INPUTS.md) owns each source family's sufficiency. Reader availability
+does not establish source-population completeness. Government Actions, domain
+nouns and platform compilation remain Stages E, F and G.
 
 ## Verification
 
@@ -331,260 +298,94 @@ verifier certify source meaning or Stage D completion.
 
 ## Subscription document transport
 
-`cordon_d.document_subscription.read_documents` sends complete retained PDFs,
-including native text and every rendered page, through the authenticated Codex
-subscription. The caller supplies ordered source hashes, its prompt and its strict
-JSON output schema. An act and separate annexes can therefore form one request
-without being forced into a laboratory-report representation. This transport has
-no dependency on the laboratory reader and does not dispatch Claude jobs.
+[document_subscription.read_documents](cordon_d/document_subscription.py) supplies
+complete retained PDFs, native text and rendered pages to a caller's prompt and
+strict JSON schema. Callers may explicitly supply complete native HTML or plain
+text; linked assets are not fetched, so layout-dependent meaning still requires
+the relevant source views. Supplemental rotations retain the originals and their
+image provenance. Admission, source relationships and semantic qualification
+belong to the calling reader.
 
-The first intended caller is the removal-measure reader (INPUTS rows 6–8 and 11).
-Its initial allocation is one worker, one complete act with necessary annex context
-per request. Luna-high failed native target and shared-cell fidelity on the first
-measure; repeating its instructions and extending its timeout did not repair that
-failure. The caller now qualifies Astra-medium with separated native ownership
-and administrative interpretation. Neither setting is a permanent constraint;
-the caller must exercise its own
-source-to-consumer contract before population dispatch. Source admission, document
-relationships, qualifications, validation and publication of accepted readings
-remain with that reader. The transport returns a proposed reading, never a
-completion or legal-effect assertion.
-
-Callers may explicitly supply complete native UTF-8 HTML or plain text through
-`source_formats`. Those bytes are hash-checked and included verbatim; no scripts
-run, linked resources load, or physical pages get invented. Mixed requests retain
-their supplied order and the complete PDF views. Format declarations enter request
-identity only when supplied, preserving existing PDF-only identities. The caller
-must establish whether the native source carries the relevant meaning; this option
-cannot stand in for visual reading where layout or omitted assets matter.
-
-The measure caller also requests supplemental complete-page views when exact,
-non-reflected image-placement geometry establishes a quarter-turn. The page's own
-rotation is included. All original pages remain first and unchanged; supplemental
-views preserve visible clipping, masks and overlays. Their source, physical page,
-clockwise turn, triggering image occurrences and transforms, attachment index and
-image hash remain in request provenance. Shear, arbitrary angles and orientation
-inside the image pixels are not inferred. This changes source presentation, not
-source meaning or semantic acceptance. Other callers retain their existing default
-presentation and request identity.
-
-Execution is explicit (`execute=True`). `read_retained(request_id, store)` consumes
-an explicit retained request with its original context, independently of a later
-caller's prompt. It verifies request identity and validates the retained output;
-it cannot dispatch. Request identity includes the source hashes, actual prompt and
-schema, rendered image hashes, model, effort and transport version. A lock prevents
-duplicate dispatch of an identical request; it does not coordinate different
-providers or different tasks on one document. Raw output, elapsed call time and
-provenance are retained in the regenerable store. Invalid JSON or output that
-violates the caller's schema remains retained and cannot become a returned reading,
-on either execution or replay. Non-JSON numeric constants and numbers that overflow
-to non-finite floating-point values are rejected before validation. Schema validity
-is checked before dispatch; schema
-references must resolve within the supplied schema, without network retrieval.
-Source-review instructions change the request;
-replay never secretly spends another call. API-key fallback, shell tools, multi-agent dispatch and web search are
-disabled. A bounded subprocess timeout applies.
-
-The calling reader uses the shared store and retains the request reference beside
-its interpreted output. No second source inventory, scheduler, extraction schema,
-or evidence-acceptance model is introduced here. Laboratory relationship batching
-can reuse the transport later; it is not an implemented caller in this unit.
+Execution is explicit. `read_retained(request_id, store)` validates and replays the
+named request offline without dispatch. Request identity binds source hashes,
+prompt, schema, rendered images, model, effort and transport version. Raw responses
+and provenance remain retained; invalid JSON, non-finite numbers or schema failures
+cannot become returned readings. Identical requests share a lock and successful
+response. Schema references resolve locally; source-reading calls have no API-key
+fallback, shell, web or agent tools. Runtime settings remain with the implementation.
 
 ## Removal-measure reading
 
-`cordon_d.measures` supplies a caller-owned whole-act contract to the accepted
-subscription transport. `measure-reading.txt` owns the source-reading instruction.
-The reader takes one complete act and its necessary annex context, preserving
-source citations, current versus deferred directions, incorporated target
-occurrences, published addressee positions, corrections, actual versus intended
-events and conclusion-specific limitations. `scripts/read_measures.py` replays by
-default; `--execute` uses the allocated single Codex worker. A changed source-review
-instruction is explicit and yields a different transport request.
+[measures](cordon_d/measures.py) reads a complete act and its necessary annex/context
+documents under [measure-reading.txt](measure-reading.txt).
+`scripts/read_measures.py` replays by default and dispatches only with `--execute`;
+`retained_measure(request_id, store)` preserves an explicit reading's original
+request, source addresses and limitations.
 
-| Accepted D contract | Measure contribution and limit |
-|---|---|
-| `case-prescription` | `directions`, source-position selections, `parts` and `references` retain prescribed scope, occurrences and the exact stated correction. `prescribed_targets()` selects identified plant/parcel positions in operative parts under present removal directions; map context, deferred and corrective positions remain available. |
-| `operative-status`, `evaluation-context` | Identity, adoption, declared effect and conditions supply source facts. Adoption does not establish recipient effect or choose the applicable A route by itself. |
-| `recipient-notice`, `administrative-event` | Route reasons and timing remain in the directions. Actual dated events about the resolved measure reach `AdministrativeEvent`; publication adapters connect independent register records. An unresolved measure leaves other measures' supported publications usable. |
-| `party-land-standing` | Published addressee cells and their row scope supply positions in the act. They do not supply independent title or establish a corrected recipient's notice. |
-| `owner-response`, `removal-performance` | Completed records can supply their stated events; intentions, blank forms and missing histories cannot. A free-text work description does not establish required-work coverage or completed removal. |
+`MeasureReading.targets()` retains source-defined positions and direction links.
+`prescribed_targets()` selects identified plant/parcel positions in operative parts
+under present removal directions. Maps, deferred work and superseded addressee
+positions remain distinguishable. Published addressees do not establish title;
+blank forms may state response or capacity requirements but supply no response.
+Adoption, declared effect, intended procedure and actual dated events retain their
+separate meanings; only supported events about the resolved measure become
+`AdministrativeEvent` values.
 
-`MeasureReading` connects act identity and adoption to the existing publication
-adapter, retains the actual prescribed target rows separately from A–C's required
-population, and reuses the accepted association reader for report relationships.
-For rows it can associate, the association owner supplies sample/report identity,
-printed dates, host, coordinates and cadastral fields with verified row continuations. The model
-does not output another version of these values. `measure_sources` exposes native
-source addresses using that owner's orientation and row coordinates. Interpretation
-selects row populations, additional field columns, prose spans, directions and
-document-part roles; composition copies native characters and reuses the original
-association object. Shared physical cells and verified split rows retain all their
-fragments. Layout establishes source locations, never operative meaning or time.
-Within a ruled table, a missing logical association cell uses only the unique drawn
-cell that actually covers its position; a separate blank cell stays blank. Across
-pages, interpretation explicitly selects the ordered native cells or non-table word
-spans composing an additional field, with support on every affected page. The
-consumer retains those fragments and the target's own cell, including a blank
-continuation cell. An empty quotation can support only a target scope's explicitly
-selected, recovered blank native fragment on that source page; a locator and full
-fragment support remain required. Unrecovered text, other claims and unrelated
-blank cells cannot use that allowance. Shared addressees can govern several target rows; owner-only
-fragments do not become plants. No parcel-value match or automatic forward filling
-establishes the relationship, and selection cannot copy an association-owned column.
-An infected-plant reference printed beside surrounding parcels remains
-`reference_plant_id`, distinct from an ordered plant's `plant_id`; it supplies no
-report association. Additional columns cannot rename or duplicate a column already
-supplied by the association owner.
-Where report columns are absent, the same native header owner can supply the
-selected row's other printed fields without creating a report association. A unique
-plant-bearing header and actual physical cells are required; explicit field selections
-remain intact. Header ambiguity is a reading limitation, and blank cells stay blank.
-These additional native fields do not change retained source-address contexts or
-admit another target population.
-Where native geometry survives but cell text is structurally unavailable (no
-extracted text, opaque private-use characters, surrogates or replacement characters),
-the existing field-fragment selection can carry a visual transcription at that exact
-cell. Original text, geometry and extraction limitation remain attached. Usable
-native values, printed blanks and fields owned by an existing association cannot be
-replaced this way. Cross-page/shared fields retain their original fragments;
-conflicting transcriptions of the same cell are rejected. This mechanical recovery
-does not certify the proposed reading or detect every valid-Unicode extraction error.
-Image-only and vector-outlined content uses explicitly model-transcribed positions
-from the rendered source. An embedded image can supply a target beside a native
-table only when their source regions are disjoint. Overlapping image selections
-and whole-page retranscription cannot bypass native ownership. Each logical table
-row remains one position, with
-shared cells attached to each row they govern. Parallel lists of identifiers,
-parcels or addressees cannot stand in for their row relationships. Source-authored
-prose groups remain groups. Complete source pages remain in every request; native
-addresses supplement them. Municipality mentions and contextual map labels do not
-become ordered targets merely by referring to an operative direction.
-For a correction that carries forward an unchanged native sample/report
-association, an image position can explicitly select that source table and row.
-The relationship needs the operative correction and both source positions as
-support. Composition reuses the association object and rejects retranscription of
-its fields; the corrected addressee retains its own image provenance. The current
-position’s part role determines target admission, independently of the predecessor
-field locations. An absent selection stays absent, including in earlier retained readings. No field-value
-match creates the relationship.
-Context documents support the principal act's incorporation without importing
-unaffected predecessor targets into a partial correction. The reading must retain
-both the incorporating clause and the incorporated work and conditions.
-Direction links apply to the position as printed, including its addressee. An old
-position can support the correction without carrying present removal work; that
-work belongs to the operative corrected position. Native composition preserves
-the old name rather than silently replacing it. Distinct performance clocks retain
-their stated scope and anchor; their operative combination belongs to accepted A–C.
+[measure_sources](cordon_d/measure_sources.py) composes selected native cells and
+word spans while reusing the existing association owner's fields and occurrences.
+Shared cells and cross-page fields require source-supported applicability and keep
+their fragments; owner-only continuations do not create targets. Native spans may
+select positions combined by a detected table, but cannot duplicate selected
+positions or association-owned fields. Image recovery preserves its source region
+and extraction limitation without overwriting usable native values or printed
+blanks. A surrounding parcel's `reference_plant_id` remains distinct from an ordered
+plant's `plant_id` and supplies no report association. Source-authored groups and
+row relationships survive composition; field-value equality establishes neither.
 
-Each reference can explicitly select supplied context documents, with support on
-both the citing source and each selected document. This includes reports named
-collectively in prose; their rows do not become administrative targets. Unresolved
-or unsupplied documents remain unselected. The consumer does not resolve free prose
-by matching numbers or filenames. Earlier references without selections supply no document binding; their existing
-native per-row associations remain consumable.
+`referenced_measures(readings)` resolves source-declared act identities or selected
+principal documents against separately read measures, retaining candidates,
+conflicts and missing correspondence. It does not apply corrections, choose an
+operative version or import predecessor targets. Incorporated work and corrections
+need their own source support, including the affected position and addressee.
 
-Directions may additionally expose source-stated `commencement_components`:
-required actor and work, trigger/performance, term magnitude/unit/bound/anchor,
-and the expressed commitment, with complete clause support. The parent's full
-conditions and coercive scope remain intact. Components never establish actual
-notice, noncommencement or the applicability of an A rule. A prior response that
-did not request them carries a reading limitation, not source absence; a recovered
-minimum or unknown bound cannot be treated as a maximum deadline.
-`read_measure_components(base_request, direction_ids, ...)` uses the same owner
-and complete original sources to recover only reached components. It supplies
-source addresses and quotations, without prior expected values. Explicitly
-selected component requests replay through `retained_measure(...,
-component_requests=...)`; raw readings, targets and events remain unchanged.
-Known conflicting readings, including a prior explicit empty result, remain
-conflicting. `commencement_components(direction_id)` exposes the components,
-their source-reading provenance and precise limitation; it does not certify
-legal form from matching labels.
+`read_measure_components` and `commencement_components(direction_id)` recover and
+expose source-stated actor, work, trigger, term and commitment through the same
+whole-source reader. Selected supplements retain their provenance and conflicts;
+missing structured readings remain reading limitations. These components establish
+neither actual noncommencement nor the applicability of an A rule.
 
-Administrative references may additionally carry source-supported typed act
-components: issuing authority, literal issuer, number, year and adoption date.
-Unstated components remain null; the principal act does not lend its identity to a
-reference. `MeasureReading.referenced_measures(readings)` corresponds these claims
-to existing measure readings, or resolves a selected document by its principal
-source hash. It preserves the original reference, affected payload, candidates,
-conflicts and missing correspondence. Resolved authority, number and year may
-identify an act without a separately stated literal issuer; adoption dates, when
-stated, must agree. Multiple candidate readings remain ambiguous. An incompatible
-document selection remains unresolved without suppressing an independently
-supported reference. Context hashes never substitute for principal identities.
-This operation does not select an operative version, apply a correction, combine
-work populations or import predecessor targets. Those meanings need their own
-source support. Older retained readings replay without fabricated act components;
-absence of a structured administrative identity remains a reading limitation.
+`report_population()` binds existing per-row report associations or explicitly
+selected documents through the report owner's identity and replacement relations.
+A collective reference cannot override a row's own report reference and date.
+`findings(..., report_bindings=...)` consumes those bindings within each observation's
+acquired report route. `finding_links(joined, report_readings)` connects prescribed
+positions to those findings and reverse `report_rows()`, preserving host/coordinate
+comparisons, uniqueness, provisional readings and disagreements. Callers supply all reached
+observation identities and consequential report renditions; filtering to expected
+targets cannot establish uniqueness or population completeness.
 
-`MeasureReading.finding_links(joined, report_readings)` connects prescribed positions
-to ordinary `findings()` and `report_rows()` outputs. Its report population comes
-from existing native per-row report associations or explicit document selections,
-and the report owner's resolved replacement chains. Each native association confines
-its own target to the report it names; a collective reference cannot override it.
-When a native row states only a report number and date, an explicit two-sided
-document selection may supply its report context. The entire native reference
-and its own date must match the selected report through the report identity
-owner. Competing selected documents remain ambiguous for that occurrence;
-another row's unambiguous reference remains usable. `report_population()` retains
-the original association, selection and support. Passing that population as
-`findings(..., report_bindings=...)` makes the same scoped associations available
-to the ordinary occurrence comparison, within each observation's acquired report
-route. It supplies neither a host equivalence nor missing report fields.
-Unequal printed host labels remain unresolved equivalence. Their difference
-alone does not establish a biological disagreement, and cannot support a join
-that requires host agreement.
-The consumer retains the cited rendition and every relationship. Amendments and newer
-dates alone do not expand that population. Native identifiers are compared only
-inside this source-bound population, with the existing host and coordinate checks
-where supplied. Each target needs one finding, and each finding one prescribed
-position in this act; repeated report displays remain with their original finding.
-Competing candidates, reading failures, provisional status and source disagreements
-stay visible. A link establishes occurrence correspondence, never official
-confirmation, standing, administrative amendment or completed removal. The caller
-must supply all observation identities referring to the selected report population
-and its consequential renditions; filtering to expected target IDs cannot establish
-reverse uniqueness. Full source-population reconciliation remains a separate duty.
+An explicit source clause may connect an exact report rendition's whole specimen
+population to stated host words. That correspondence requires complete unique
+coverage of report records and bound targets, including negatives, with compatible
+dates, coordinates and qualifications. Unsupported subsets, extra or competing
+occurrences remain unresolved. Literal host labels and unresolved equivalence stay
+intact; unequal labels alone establish no biological disagreement, and neither equal
+counts nor a replacement relation establishes equivalence. A finding link
+establishes occurrence correspondence, not official confirmation, standing,
+administrative amendment or completed removal.
 
-`retained_measure` and `scripts/read_measures.py --request` consume a named retained
-interpretation offline, requiring its measure schema and source addresses to match
-the composition contract. Native source bytes are hash-checked. Request addresses
-carry cell text, row membership and line words; repeated geometry stays with the
-native composition. Earlier, more verbose address renderings replay against the
-same values, and compatible readings survive additive field roles. This preserves
-the original interpretation and source
-context when the surrounding consumer changes; it does not patch rejected readings
-or silently dispatch a replacement. Source checks remain distinct from qualification.
-Dated actual events use `AdministrativeEvent`; plans, blank forms, other unresolved
-payload identities and imprecise event times remain source readings rather than
-invented anchors. A blank form can still state consequential response or capacity
-requirements; those remain directions or part qualifications, not actual responses.
-Source-boundary validation checks citations and references, not
-legal truth. Qualification requires independently read originals and an actual
-consumer connection; schema validity, page counts and retained responses cannot
-establish it. The subject-population owner still supplies plants, parcels and
-protected-status populations; the measure's named positions do not establish title.
+Qualification requires independently read originals and the resulting ordinary
+consumer behavior. Exact retained address contexts remain replayable, but successful
+replay, structural coverage and source-address validation do not certify meaning.
+Current source populations and unresolved work belong in [INPUTS.md](INPUTS.md).
 
 ## Official performance reports
 
-`cordon_d.performance` reads complete retained native HTML through the same
-subscription transport and replays an explicit retained request offline. It keeps
-the reporting document, stated operation, literal work scope, performer/reporting
-actor, timing, source citations and limitations. A direct record, an official
-reported event and an intended operation remain distinct. Native CSS selectors
-must locate one source element and support a contiguous quotation; scripts, styles
-and template content cannot supply visible evidence. Unknown exact dates retain
-their causes and the actual timing statement. A publication date alone cannot
-become the operation date. These checks verify source addresses and structural
-distinctions, not semantic truth.
-
-`PerformanceReading.removal_occurrences()` exposes actual direct or reported
-removal with existing `Support` objects and retained model-reading provenance.
-Intentions and other work remain in the reading but do not become removal
-occurrences. Literal outbreak-level performance can be useful even when the
-source supplies no exact day, executor or target list. The consumer retains that
-scope; without a supported prescription/target correspondence and sufficient work
-coverage, it establishes no per-target completion assertion or clock anchor.
-Qualification requires independent reading of the original reports. A municipal
-service certificate enters this chain only through a supported relationship to
-required removal or treatment; its existence does not admit an unrelated service
-or procurement workflow. INPUTS row 11 owns current source coverage and limits.
+[performance](cordon_d/performance.py) reads complete retained native HTML and
+replays explicit requests offline. Source selectors support the stated operation,
+actor, timing, work scope and limitations. `removal_occurrences()` exposes direct
+or officially reported removal; intentions remain separate. Publication dates do
+not become operation dates. An outbreak-level report can supply useful evidence
+without an exact day or target list, but per-target completion requires supported
+prescription/target correspondence and sufficient work coverage. Coverage and
+remaining acquisition needs belong to the execution row of [INPUTS.md](INPUTS.md).

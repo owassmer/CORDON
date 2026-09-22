@@ -25,6 +25,37 @@ def _cell_field(table, table_ref, cell):
     return field
 
 
+def _word_geometry(page, lines):
+    """Locate the existing line words in the same PDF characters, without reflow."""
+    extracted = []
+    for block in page.get_text('rawdict')['blocks']:
+        for line in block.get('lines', []):
+            words, boxes, characters = [], [], []
+
+            def finish():
+                if characters:
+                    words.append(''.join(c['c'] for c in characters))
+                    boxes.append([min(c['bbox'][0] for c in characters),
+                                  min(c['bbox'][1] for c in characters),
+                                  max(c['bbox'][2] for c in characters),
+                                  max(c['bbox'][3] for c in characters)])
+                    characters.clear()
+
+            for span in line['spans']:
+                for character in span['chars']:
+                    if character['c'].isspace():
+                        finish()
+                    else:
+                        characters.append(character)
+            finish()
+            if words:
+                extracted.append((words, boxes, list(line['bbox'])))
+    if len(extracted) != len(lines):
+        return [None] * len(lines)
+    return [boxes if words == text.split() and box == list(native_box) else None
+            for (words, boxes, box), (text, native_box, _) in zip(extracted, lines)]
+
+
 def source_material(sources, store):
     """Reuse association occurrences and expose native cells, words and images.
 
@@ -51,14 +82,16 @@ def source_material(sources, store):
                 prefix = f'S{index}P{number}'
                 material['pages'][prefix] = {
                     'source': digest, 'page': number, 'bbox': list(page.rect)}
-                for line_number, (text, box, _) in enumerate(_lines(page), 1):
+                lines = tuple(_lines(page))
+                geometry = _word_geometry(page, lines)
+                for line_number, ((text, box, _), word_boxes) in enumerate(zip(lines, geometry), 1):
                     material['lines'][f'{prefix}L{line_number}'] = {
                         'source': digest, 'page': number, 'bbox': list(box),
-                        'words': text.split()}
+                        'words': text.split(), 'word_boxes': word_boxes}
                 for image_number, entry in enumerate(page.get_image_info(), 1):
                     material['images'][f'{prefix}I{image_number}'] = {
                         'source': digest, 'page': number, 'bbox': list(entry['bbox'])}
-                angle = _orientation(list(_lines(page)))
+                angle = _orientation(lines)
                 if angle is None:
                     continue
                 page.set_rotation(angle)
@@ -146,15 +179,22 @@ def material_addresses(material):
     tables = {ref: dict(t, rows=[dict(row, association=(list(row['association']['fields'])
                             if row['association'] else None)) for row in t['rows']])
               for ref, t in material['tables'].items()}
+    return _address_values(dict(tables=tables, lines=material['lines'], images=material['images']))
+
+
+def _legacy_addresses(material):
+    """The exact earlier context omitted every line centered inside a table."""
+    addresses = material_addresses(material)
     lines = {}
     for ref, line in material['lines'].items():
         x0, y0, x1, y1 = line['bbox']
         if any(t['source'] == line['source'] and t['page'] == line['page']
                and t['bbox'][0] <= (x0+x1)/2 <= t['bbox'][2]
-               and t['bbox'][1] <= (y0+y1)/2 <= t['bbox'][3] for t in tables.values()):
+               and t['bbox'][1] <= (y0+y1)/2 <= t['bbox'][3]
+               for t in material['tables'].values()):
             continue
-        lines[ref] = line
-    return _address_values(dict(tables=tables, lines=lines, images=material['images']))
+        lines[ref] = line['words']
+    return dict(addresses, lines=lines)
 
 
 def material_context(material):
@@ -163,12 +203,13 @@ def material_context(material):
 
 
 def context_matches(prompt, material):
-    """Replay both retained address renderings, verifying values rather than verbosity."""
+    """Replay exact current or earlier contexts, never arbitrary address subsets."""
     if CONTEXT_MARKER not in prompt:
         return False
     supplied, _ = json.JSONDecoder().raw_decode(prompt.split(CONTEXT_MARKER, 1)[1])
     # Earlier requests supplied redundant source boxes and empty row attributes.
-    return _address_values(supplied) == material_addresses(material)
+    values = _address_values(supplied)
+    return values == material_addresses(material) or values == _legacy_addresses(material)
 
 
 def selected_association(material, reference):
@@ -189,11 +230,7 @@ def field_fragment(material, reference):
     """Copy an explicitly selected additional-field fragment, never owned fields."""
     if 'line_ref' in reference:
         fragment = native_span(material, reference)
-        x0, y0, x1, y1 = fragment['bbox']
-        if any(t['source'] == fragment['source'] and t['page'] == fragment['page']
-               and t['bbox'][0] <= (x0 + x1) / 2 <= t['bbox'][2]
-               and t['bbox'][1] <= (y0 + y1) / 2 <= t['bbox'][3]
-               for t in material['tables'].values()):
+        if span_overlaps(material, reference, material['tables'].values()):
             raise ValueError('Use source cells for a fragment inside a native table')
         return fragment
     table_ref, cell = reference['table_ref'], reference['cell']
@@ -272,5 +309,40 @@ def native_span(material, span):
     start, end = span['first_word'], span['end_word']
     if not 0 <= start < end <= len(line['words']):
         raise ValueError('Word selection outside its source line')
-    return dict(line, text=' '.join(line['words'][start:end]),
+    return dict({key: value for key, value in line.items() if key != 'word_boxes'},
+                text=' '.join(line['words'][start:end]),
                 locator=f"{span['line_ref']}/words:{start}:{end}")
+
+
+def span_overlaps(material, span, areas):
+    """Compare selected native words to source areas, never neighbouring positions."""
+    native_span(material, span)
+    line = material['lines'][span['line_ref']]
+
+    def intersects(left, right):
+        return (max(left[0], right[0]) < min(left[2], right[2])
+                and max(left[1], right[1]) < min(left[3], right[3]))
+
+    reached = [area for area in areas
+               if (area['source'], area['page']) == (line['source'], line['page'])
+               and intersects(line['bbox'], area['bbox'])]
+    if not reached:
+        return False
+    boxes = line.get('word_boxes')
+    if boxes is None:
+        raise ValueError('Native span lacks exact word geometry for source-cell overlap; '
+                         'use the source cells or retain this reading limitation')
+    return any(intersects(box, area['bbox'])
+               for box in boxes[span['first_word']:span['end_word']] for area in reached)
+
+
+def association_areas(material):
+    """Source cells already owned by native associations, including continuations."""
+    for table in material['tables'].values():
+        for row in table['rows']:
+            if row['association']:
+                for field in row['association']['fields'].values():
+                    cell = row['cells'][field['column'] - 1]
+                    if cell is not None:
+                        yield dict(source=table['source'], page=table['page'],
+                                   bbox=table['cells'][cell]['bbox'])

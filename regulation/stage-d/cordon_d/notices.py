@@ -36,12 +36,12 @@ def publication_declarations(path: Path, *, publisher: str, encoding: str = 'utf
         })
 
 
-def _register_date(value):
+def _register_date(value, date_format='%d/%m/%Y'):
     if not isinstance(value, str):
         return None
     try:
-        parsed = datetime.strptime(value, '%d/%m/%Y').date()
-        return parsed if parsed.strftime('%d/%m/%Y') == value else None
+        parsed = datetime.strptime(value, date_format).date()
+        return parsed if parsed.strftime(date_format) == value else None
     except ValueError:
         return None
 
@@ -202,3 +202,71 @@ def parsec_publication_declarations(path: Path, *, publisher: str, source_url: s
                             for k, v in dates.items() if fields[k] and v is None},
             'document_routes': routes,
         })
+
+
+def domino_publication_detail(path: Path, *, publisher: str, source_url: str):
+    """Read a native Domino detail; its period and active status are separate.
+
+    Repeated labels retain their source order. This publisher renders dates as
+    month/day/year; no act identity or certificate meaning comes from its labels.
+    """
+    import re
+    from urllib.parse import urljoin
+    from bs4 import BeautifulSoup
+    from .evidence import file_digest
+    from .releases import Occurrence
+
+    if not publisher.strip() or not source_url:
+        raise ValueError('Publication detail needs its publisher and source URL')
+    path = Path(path)
+    soup = BeautifulSoup(path.read_bytes(), 'html.parser')
+    required = {'Protocollo Generale', 'Tipo Provvedimento', 'Ente/Amministrazione',
+                'Oggetto', 'N. Repertorio Albo', 'In Pubblicazione'}
+    candidates = []
+    for index, table in enumerate(soup.find_all('table')):
+        fields = {}
+        for row in table.find_all('tr'):
+            if row.find_parent('table') is not table:
+                continue
+            cells = row.find_all('td', recursive=False)
+            if len(cells) == 3 and not cells[1].get_text(strip=True):
+                key = cells[0].get_text(' ', strip=True)
+                fields.setdefault(key, []).append(cells[2].get_text(' ', strip=True))
+        if required <= fields.keys():
+            candidates.append((index, fields))
+    if len(candidates) != 1:
+        raise ValueError('Expected one native Domino publication-detail table')
+    index, fields = candidates[0]
+    if any(len(fields[key]) != 1 for key in required - {'In Pubblicazione'}):
+        raise ValueError('Repeated native detail identity field requires interpretation')
+    periods, statuses = [], []
+    for value in fields['In Pubblicazione']:
+        period = re.fullmatch(r'dal\s+(\S+)\s+al\s+(\S+)', value)
+        (periods if period else statuses).append(period.groups() if period else value)
+    dates = {'Data inizio pubb.': None, 'Data fine pubb.': None}
+    issues = {}
+    if len(periods) == 1:
+        for key, value in zip(dates, periods[0]):
+            parsed = _register_date(value, '%m/%d/%Y')
+            dates[key] = parsed.isoformat() if parsed else None
+            if parsed is None:
+                issues[key] = 'Unrecognized month/day/year source date; original value retained'
+        if all(dates.values()) and dates['Data fine pubb.'] < dates['Data inizio pubb.']:
+            issues['In Pubblicazione'] = 'Declared publication end precedes its start'
+            dates = dict.fromkeys(dates)
+    else:
+        issues['In Pubblicazione'] = 'Expected one native declared publication period'
+    status = statuses[0] if len(statuses) == 1 else None
+    routes = [{'locator': f'a[{i}]', 'label': a.get_text(' ', strip=True),
+               'href': a['href'], 'url': urljoin(source_url, a['href'])}
+              for i, a in enumerate(soup.find_all('a', href=True)) if '/$file/' in a['href'].lower()]
+    return Occurrence(str(path), file_digest(path), f'publication-detail/table[{index}]', {
+        'publisher': publisher, 'source_url': source_url,
+        'source_fields': {key: tuple(values) if key == 'In Pubblicazione' or len(values) > 1
+                          else values[0] for key, values in fields.items()},
+        'declared_dates': dates, 'date_issues': issues,
+        'publication_status': status,
+        'status_issue': (None if status in ('SI', 'NO') else
+                         'Missing, repeated or unrecognized native active-publication status'),
+        'document_routes': routes,
+    })

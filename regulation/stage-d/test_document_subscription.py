@@ -55,10 +55,55 @@ class DocumentSubscriptionTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             self.read(effort='medium')
 
+    def test_pdf_padding_compacts_without_changing_source_addresses_characters_or_images(self):
+        native = 'Left' + ' ' * 2101 + 'right\t\tvalue\n\n  next\r\nA\u00a0\u00a0B\fC  '
+        expected = 'Left right value\n\n next\r\nA\u00a0\u00a0B\fC '
+        caller = 'Read source.\nSOURCE ADDRESSES\n{"cell":"A   B\\tC"}\n'
+        captured = []
+
+        def call(prompt, schema, images, *options):
+            captured.extend(image.read_bytes() for image in images)
+            return '{"direction":"proposed"}'
+
+        with patch.object(pymupdf.Page, 'get_text', return_value=native), \
+             patch('cordon_d.document_subscription._call', side_effect=call) as dispatch:
+            result = read_documents(self.digests, self.store, prompt=caller,
+                                    schema=self.schema, execute=True)
+            replay = read_documents(self.digests, self.store, prompt=caller, schema=self.schema)
+        self.assertEqual(dispatch.call_count, 1)
+        self.assertEqual(replay, result)
+        supplied = dispatch.call_args.args[0]
+        self.assertEqual(result['request']['prompt'], supplied)
+        self.assertTrue(supplied.startswith(caller))
+        self.assertEqual(supplied.count('PHYSICAL PAGE 1\n' + expected + '\nEND DOCUMENT'), 2)
+        self.assertEqual(''.join(c for c in native if c not in ' \t'),
+                         ''.join(c for c in expected if c not in ' \t'))
+        for digest, png in zip(self.digests, captured):
+            source = self.store / 'blobs/sha256' / digest[:2] / digest
+            self.assertEqual(sha256(source.read_bytes()).hexdigest(), digest)
+            with pymupdf.open(source) as document:
+                self.assertEqual(png, document[0].get_pixmap(dpi=180).tobytes('png'))
+        self.assertEqual(result['request']['images'], [sha256(png).hexdigest() for png in captured])
+
+        # A named older request remains byte-for-byte its original supplied text.
+        old = dict(result, request=dict(result['request'], prompt=supplied.replace(expected, native)))
+        old.pop('reading')
+        old_id = sha256(json.dumps(old['request'], sort_keys=True).encode()).hexdigest()
+        old['request_sha256'] = old_id
+        retained = self.store / 'derived/document-readings' / (old_id + '.json')
+        retained.write_text(json.dumps(old))
+        before = retained.read_bytes()
+        with patch('cordon_d.document_subscription._call') as dispatch:
+            old_replay = read_retained(old_id, self.store)
+        dispatch.assert_not_called()
+        self.assertNotEqual(old_id, result['request_sha256'])
+        self.assertEqual(old_replay['request'], old['request'])
+        self.assertEqual(retained.read_bytes(), before)
+
     def test_native_html_keeps_complete_source_and_no_fictitious_page(self):
         html = ('<!doctype html><html><head><meta charset="utf-8"></head><body>\n'
                 '<nav>Other work</nav><article><h1>Reported work</h1>\n'
-                '<p>Completed before the meeting; exact day unstated.</p>'
+                '<p>Completed   before\tthe meeting; exact day unstated.</p>'
                 '<img src="https://example.invalid/photo"><script>remote()</script>'
                 '</article></body></html>')
         digest = put_bytes(self.store, html.encode())

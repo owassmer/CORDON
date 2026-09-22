@@ -14,7 +14,8 @@ from .removal_events import act_id
 from .store import blob_path
 from .measure_sources import (source_material, material_context, context_matches,
                               table_fields, native_span, field_fragment,
-                              selected_association, native_text_issue)
+                              selected_association, native_text_issue,
+                              span_overlaps, association_areas)
 from .source_associations import HEADINGS
 
 
@@ -597,6 +598,8 @@ def _validate_reading(reading, sources, store, material):
             raise ValueError('Target refers to an absent direction')
     occupied = set()
     visual_cells = {}
+    table_position_areas = []
+    table_position_words = set()
     for scope in reading['target_scopes']:
         table = material['tables'][scope['table_ref']]
         if not 1 <= scope['first_row'] <= scope['last_row'] <= len(table['rows']):
@@ -620,6 +623,26 @@ def _validate_reading(reading, sources, store, material):
             fields, _ = table_fields(material, scope['table_ref'], row,
                                     {c['role']: c['column'] for c in scope['columns']},
                                     {c['role']: c.get('fragments', []) for c in scope['columns']})
+            cited = {(c['source'], c['page']) for c in scope['support']}
+            if (table['source'], table['page']) not in cited:
+                raise ValueError('A selected table position needs its source page as support')
+            # Shared contextual fields do not identify another position. Plants
+            # within one printed parcel retain their separate plant occurrences.
+            identifying_role = next((role for role in ('plant_id', 'parcel') if fields.get(role)), None)
+            if identifying_role:
+                identifying = fields[identifying_role]
+                spans = {native_span(material, span)['locator']: span
+                         for column in scope['columns'] if column['role'] == identifying_role
+                         for span in column.get('fragments', []) if 'line_ref' in span}
+                for fragment in identifying.get('fragments', [identifying]):
+                    if fragment.get('locator') in spans:
+                        span = spans[fragment['locator']]
+                        table_position_words.update((span['line_ref'], index)
+                            for index in range(span['first_word'], span['end_word']))
+                        continue
+                    table_position_areas.append(dict(
+                        source=fragment.get('source', table['source']),
+                        page=fragment.get('page', table['page']), bbox=fragment['bbox']))
             for column in scope['columns']:
                 if column.get('fragments'):
                     cited = {(c['source'], c['page']) for c in scope['support']}
@@ -631,12 +654,38 @@ def _validate_reading(reading, sources, store, material):
         roles = [f['role'] for f in position['fields']]
         if len(roles) != len(set(roles)):
             raise ValueError('A source position assigns the same field more than once')
+    owned_areas = tuple(association_areas(material))
+    selected_words = set()
     for position in reading['prose_positions']:
+        cited = {(c['source'], c['page']) for c in position['support']}
+        source_pages = set()
+        spans_by_role = {}
         for field in position['fields']:
             if not field['spans']:
                 raise ValueError('Native fields require a source span')
+            field_words = set()
             for span in field['spans']:
-                native_span(material, span)
+                fragment = native_span(material, span)
+                source_pages.add((fragment['source'], fragment['page']))
+                words = {(span['line_ref'], index)
+                         for index in range(span['first_word'], span['end_word'])}
+                if field_words & words:
+                    raise ValueError('A native field has repeated or overlapping source spans')
+                field_words.update(words)
+                if span_overlaps(material, span, owned_areas):
+                    raise ValueError('The association owner already supplies this source field')
+            spans_by_role[field['role']] = field['spans']
+        if len({source for source, _ in source_pages}) > 1:
+            raise ValueError('A native position must stay within its source document')
+        if not source_pages <= cited:
+            raise ValueError('A native position needs every selected source page as support')
+        identifying = spans_by_role.get('plant_id') or spans_by_role.get('parcel', ())
+        position_words = {(span['line_ref'], index) for span in identifying
+                          for index in range(span['first_word'], span['end_word'])}
+        if position_words & (selected_words | table_position_words) or any(
+                span_overlaps(material, span, table_position_areas) for span in identifying):
+            raise ValueError('One source position needs one selection, without overlapping identifying spans')
+        selected_words.update(position_words)
     for position in reading['image_positions']:
         image = (material['images'] | material['pages'])[position['image_ref']]
         association = selected_association(material, position.get('association_ref'))

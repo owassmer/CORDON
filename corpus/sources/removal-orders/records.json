@@ -2274,5 +2274,47 @@
   "kind": "act",
   "referred_by": "Official municipal Minervino published DDS65/2025 attachment route, recovered through primary-source web search after native municipal news connection reset",
   "error": "('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/DOC/xylella/xf_sub_multiplex/dir_estirpazione_xfmultiplex/181_DIR_2024_00043.pdf",
+  "captured_at": "2026-09-22T16:50:04.256979+00:00",
+  "bytes": 5056371,
+  "sha256": "772b58c02e56255971ff7b39d2d9f6a83e8a4d658f23cefb1af4d013dd064e2d",
+  "kind": "act",
+  "referred_by": "Source-named CNR36/2024 correction reached through the DDS43/2024 publisher original; corrected report remains incorporated on physical pages17–21, separately from typing note22. Standalone route still supplies the predecessor."
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/9A9400389FD466BFC1258E3E00321C82/$FILE/Provvedimento - 20260724110724.pdf",
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/9A9400389FD466BFC1258E3E00321C82/$FILE/Provvedimento%20-%2020260724110724.pdf",
+  "referred_by": "32aa6b3e737b0d4acf5458df161acf3e6b5634062df3290e2c0149da22823077",
+  "source_label": "Provvedimento - 20260724110724.pdf (1196 KB)",
+  "captured_at": "2026-09-22T17:03:14.375421+00:00",
+  "status": 200,
+  "bytes": 1224622,
+  "sha256": "952297f83c1dfc28f52bb1a19f3e7366b8e6101d9d81108f3f20883d8d716ba1",
+  "content_type": "application/pdf",
+  "kind": "removal-order"
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/87511831C8AADC28C1258CDE00407388/$FILE/Provvedimento - 20250806134401.pdf",
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/87511831C8AADC28C1258CDE00407388/$FILE/Provvedimento%20-%2020250806134401.pdf",
+  "referred_by": "0edebc29208345320ec4c28487ae8d6889899e9f307cea78e59230b6b80a918d",
+  "source_label": "Provvedimento - 20250806134401.pdf (3394 KB)",
+  "captured_at": "2026-09-22T17:25:38.461703+00:00",
+  "status": 200,
+  "bytes": 3475917,
+  "sha256": "ed5367fa28fb32d8cbde914b3b5807be4366d42588cb341dd214fab70416e4db",
+  "content_type": "application/pdf"
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/79FAA2C16CF3D294C1258CFC004A8BDE/$FILE/Provvedimento - 20250905153416.pdf",
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/79FAA2C16CF3D294C1258CFC004A8BDE/$FILE/Provvedimento%20-%2020250905153416.pdf",
+  "referred_by": "7c817f3ff329d068e72411c77b6e4e82c82e0eb1ff2ee0af830bbf8b1a106c7a",
+  "source_label": "Provvedimento - 20250905153416.pdf (3100 KB)",
+  "captured_at": "2026-09-22T17:25:40.181529+00:00",
+  "status": 200,
+  "bytes": 3174389,
+  "sha256": "372a9d85ff33fc454a09262e3408d7be707ce7dbca32824e4a44d3c2aeac6858",
+  "content_type": "application/pdf"
  }
 ]
