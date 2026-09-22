@@ -66,7 +66,7 @@ def observation(reference='public-one', digest='report-one'):
         day=date(2024, 9, 29), correlatable=True, report_routes=(route,), members=(member,))
 
 
-def join(groups, reports, bindings=None):
+def join(groups, reports, bindings=None, *, associations=()):
     readings = {r.sha256: r for r in reports}
     captures = {'https://publisher.example/' + digest + '.pdf': [{'sha256': digest}]
                 for digest in readings}
@@ -74,7 +74,28 @@ def join(groups, reports, bindings=None):
          patch('cordon_d.findings.load_relations', side_effect=lambda store, digest, **kw: readings[digest].relations), \
          patch('cordon_d.findings.report', side_effect=lambda digest, store, **kw: readings[digest]):
         return list(findings(groups, Path('reports'), Path('store'), extraction_version='version',
-                    known_through=datetime(2026, 1, 1, tzinfo=timezone.utc), report_bindings=bindings))
+                    known_through=datetime(2026, 1, 1, tzinfo=timezone.utc), report_bindings=bindings,
+                    association_readings=associations))
+
+
+def host_population():
+    """Two distinct specimens, including a negative; no common-name alias is assumed."""
+    first = target(host='Faggio')
+    second = target('public-two', 'act:p12:r2', host='Faggio', latitude='40.87349595')
+    reading = report(host='Fagus sylvatica')
+    other = report(reference='client-two', host='Fagus sylvatica', latitude='40.87349595').rows[0]
+    other = replace(other, locator='p2/table/r2', cells=tuple(
+        dict(c, locator=c['locator'].replace('/r1/', '/r2/')) for c in other.cells))
+    reading = replace(reading, rows=(reading.rows[0], other))
+    citation = reference('report-one')
+    citation['documents'][0]['host_population'] = dict(scope='whole-report',
+        host_fragments=[dict(line_ref='act:host-words', first_word=0, end_word=1)],
+        support=[dict(source='act', page=2, locator='connecting clause',
+                      quote='The cited report describes the entire Faggio population.')])
+    owner = measure([first, second], [citation])
+    owner.material = dict(tables={}, lines={'act:host-words': dict(source='act', page=2,
+        words=['Faggio'], bbox=(0, 0, 10, 10))})
+    return owner, reading, [observation(), observation('public-two')]
 
 
 class MeasureReportContext(unittest.TestCase):
@@ -199,6 +220,176 @@ class MeasureReportContext(unittest.TestCase):
         self.assertEqual({m['key'][0] for m in joined[0]['matches']}, {'report-two'})
         new.relations['corrections'][0]['effect'] = 'amends'
         self.assertNotIn('report-two', population(owner, [old, new]))
+
+    def test_whole_population_relationship_preserves_unequal_labels_and_negative_result(self):
+        owner, reading, groups = host_population()
+        original = deepcopy(reading)
+        bindings = population(owner, [reading])
+        joined = join(groups, [reading], bindings)
+        self.assertEqual([f['status'] for f in joined], ['matched', 'matched'])
+        for finding in joined:
+            match, = finding['matches']
+            self.assertEqual(set(match['host_comparisons']), {'unresolved label equivalence'})
+            self.assertEqual(match['row'].results[0].kind, 'not-detected')
+            self.assertEqual(match['comparisons'][0]['verdict'], 'disagree')
+            self.assertFalse(finding['limitations'])
+        outputs = measure_findings(owner, report_population=bindings, findings=joined,
+                                   report_rows=report_rows([reading], joined))
+        self.assertEqual([o['status'] for o in outputs], ['matched', 'matched'])
+        for output in outputs:
+            candidate, = output['matches']
+            self.assertEqual(candidate['host_relation'], 'unresolved label equivalence')
+            self.assertIs(candidate['population_correspondence'],
+                          candidate['match']['population_correspondence'])
+        self.assertEqual(reading, original)
+        self.assertEqual([t['fields']['host']['text'] for t in owner.prescribed_targets()],
+                         ['Faggio', 'Faggio'])
+        # An independently established literal identifier keeps its stronger basis.
+        row = reading.rows[0]
+        row = replace(row, reference='public-one', cells=tuple(
+            dict(c, text='public-one') if c['role'] == 'identifier' else c for c in row.cells))
+        reading = replace(reading, rows=(row, reading.rows[1]))
+        joined = join(groups, [reading], population(owner, [reading]))
+        self.assertEqual([f['status'] for f in joined], ['matched', 'matched'])
+        self.assertIn('literal identifier equality', joined[0]['matches'][0]['identity_basis'])
+
+    def test_equal_counts_and_unique_coordinates_do_not_create_an_unread_population_claim(self):
+        owner, reading, groups = host_population()
+        del owner.values['references'][0]['documents'][0]['host_population']
+        joined = join(groups, [reading], population(owner, [reading]))
+        self.assertTrue(all(not f['matches'] for f in joined))
+        self.assertTrue(all(f['links'][0]['candidates'][0]['host_comparisons']
+                           == ['unresolved label equivalence'] for f in joined))
+
+    def test_subset_and_unread_image_claim_cannot_expand_to_whole_report(self):
+        for scope, fragments in [('selected-occurrences', True), ('unresolved', True),
+                                 ('whole-report', False)]:
+            with self.subTest(scope=scope, fragments=fragments):
+                owner, reading, groups = host_population()
+                claim = owner.values['references'][0]['documents'][0]['host_population']
+                claim['scope'] = scope
+                if not fragments:
+                    claim['host_fragments'] = []
+                bindings = population(owner, [reading])
+                joined = join(groups, [reading], bindings)
+                self.assertTrue(all(not f['matches'] for f in joined))
+                self.assertTrue(joined[0]['links'][0]['population_correspondence']['causes'])
+                outputs = measure_findings(owner, report_population=bindings, findings=joined,
+                                           report_rows=report_rows([reading], joined))
+                for output in outputs:
+                    candidate, = output['candidates']
+                    self.assertIs(candidate['population_correspondence'],
+                                  candidate['match']['population_correspondence'])
+                    self.assertTrue(set(candidate['population_correspondence']['causes'])
+                                    <= set(output['causes']))
+
+    def test_extra_unmapped_negative_and_omitted_observation_prevent_population_closure(self):
+        for extra_row in (False, True):
+            with self.subTest(extra_row=extra_row):
+                owner, reading, groups = host_population()
+                if extra_row:
+                    extra = replace(reading.rows[1], locator='p2/table/extra')
+                    reading = replace(reading, rows=(*reading.rows, extra))
+                else:
+                    groups = groups[:1]
+                joined = join(groups, [reading], population(owner, [reading]))
+                self.assertTrue(all(not f['matches'] for f in joined))
+                self.assertIn('every report record', ' '.join(
+                    joined[0]['links'][0]['population_correspondence']['causes']))
+
+    def test_mixed_unread_and_conflicting_host_populations_remain_unresolved(self):
+        for failure in ('report-host', 'target-host', 'report-field', 'target-field', 'claims'):
+            with self.subTest(failure=failure):
+                owner, reading, groups = host_population()
+                if failure.startswith('report'):
+                    row = reading.rows[1]
+                    cells = tuple(dict(c, **({'text': 'Quercus robur'} if failure == 'report-host'
+                                            else {'reading_issues': ['field unread']}))
+                                  if c['role'] == 'host' else c for c in row.cells)
+                    reading = replace(reading, rows=(reading.rows[0], replace(row, cells=cells)))
+                elif failure.startswith('target'):
+                    field = owner.prescribed_targets()[1]['fields']['host']
+                    field.update({'text': 'Quercia'} if failure == 'target-host'
+                                 else {'role_cause': 'host qualification unresolved'})
+                else:
+                    other = deepcopy(owner.values['references'][0])
+                    other['documents'][0]['host_population']['host_fragments'][0]['line_ref'] = 'other-host'
+                    owner.material['lines']['other-host'] = dict(source='act', page=2,
+                        words=['Quercia'], bbox=(0, 10, 10, 20))
+                    owner.values['references'].append(other)
+                joined = join(groups, [reading], population(owner, [reading]))
+                self.assertTrue(all(not f['matches'] for f in joined))
+
+    def test_pre_host_competitors_dates_and_reading_limits_cannot_be_overridden(self):
+        for failure in ('coordinates', 'same-count-wrong-coordinate', 'rival-observation',
+                        'assembly', 'sampling-date', 'measure-coverage'):
+            with self.subTest(failure=failure):
+                owner, reading, groups = host_population()
+                if failure in {'coordinates', 'same-count-wrong-coordinate'}:
+                    value = '40.86349595' if failure == 'coordinates' else '42.00000000'
+                    row = reading.rows[1]
+                    row = replace(row, cells=tuple(dict(c, text=value) if c['role'] == 'latitude'
+                                                   else c for c in row.cells))
+                    reading = replace(reading, rows=(reading.rows[0], row))
+                elif failure == 'rival-observation':
+                    rival = observation()
+                    rival.identity = ('distinct-observation', '2024-09-29')
+                    groups.append(rival)
+                elif failure == 'assembly':
+                    reading = replace(reading, assembly_complete=False)
+                elif failure == 'sampling-date':
+                    groups[1].day = date(2024, 9, 30)
+                else:
+                    owner.values['issues'] = [dict(source='act', page=None, aspect='coverage',
+                                                  detail='A target annex is unread')]
+                joined = join(groups, [reading], population(owner, [reading]))
+                self.assertTrue(all(not f['matches'] for f in joined))
+
+    def test_population_claim_is_not_inherited_by_replacement_or_another_measure(self):
+        owner, old, groups = host_population()
+        new = replace(old, sha256='report-two', relations=relationship('472/24', '20/10/2024',
+            previous=old.relations['identity']).relations)
+        bindings = population(owner, [old, new])
+        self.assertNotIn('host_populations', bindings['report-two'])
+        self.assertTrue(all(not f['matches'] for f in join(groups, [old, new], bindings)))
+
+        bindings = population(owner, [old])
+        joined = join(groups, [old], bindings)
+        other = deepcopy(bindings)
+        other['report-one']['request_sha256'] = 'another-retained-reading'
+        outputs = measure_findings(owner, report_population=other, findings=joined,
+                                   report_rows=report_rows([old], joined))
+        self.assertTrue(all(not o['matches'] for o in outputs))
+
+    def test_scoped_assertion_cannot_waive_another_associations_host_disagreement(self):
+        owner, reading, groups = host_population()
+        association = deepcopy(owner.prescribed_targets()[0]['association'])
+        association['fields']['report_reference']['text'] = '471/24 Laboratory A'
+        association['fields']['host']['text'] = 'Quercia'
+        other_source = SimpleNamespace(rows=[association], issues=[], scope={})
+        joined = join(groups, [reading], population(owner, [reading]), associations=[other_source])
+        self.assertTrue(all(not f['matches'] for f in joined))
+        self.assertIn('another source association host', ' '.join(
+            joined[0]['links'][0]['population_correspondence']['causes']))
+
+    def test_unrelated_context_and_independently_bound_target_issues_do_not_spill(self):
+        owner, reading, groups = host_population()
+        other = report('report-two', number='999/24', reference='unrelated-client')
+        position = target('unrelated-target', 'act:p15:r1', number='999/24', host='Quercia')
+        position['association']['page'] = 15
+        original_targets = owner.prescribed_targets()
+        owner.prescribed_targets = lambda: (*original_targets, position)
+        owner.values['references'].append(reference('report-two'))
+        owner.values['issues'] = [dict(source='unrelated-context', page=None, aspect='coverage'),
+                                 dict(source='act', page=15, aspect='targets')]
+        bindings = population(owner, [reading, other])
+        self.assertEqual(bindings['report-one']['measure_population_issues'], ())
+        self.assertTrue(all(f['status'] == 'matched' for f in join(groups, [reading, other], bindings)))
+        owner.values['issues'].append(dict(source='act', page=16, aspect='targets'))
+        joined = join(groups, [reading, other], population(owner, [reading, other]))
+        self.assertTrue(all(not f['matches'] for f in joined))
+        self.assertIn('unresolved issues', ' '.join(
+            joined[0]['links'][0]['population_correspondence']['causes']))
 
 
 if __name__ == '__main__':

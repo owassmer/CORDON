@@ -202,6 +202,17 @@ def _monitoring_associations(group, route):
     return result
 
 
+def _host_labels(value):
+    value = ' '.join(value.split())
+    result = {norm(value), norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))}
+    # A printed binomial beside a common name is an explicit second label;
+    # redundant closing delimiters do not change that label.
+    match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)+\s*$', value)
+    if match:
+        result.add(norm(match[1]))
+    return result
+
+
 def _host_relation(row, association):
     printed = association['fields'].get('host', {}).get('text')
     if not printed:
@@ -212,16 +223,7 @@ def _host_relation(row, association):
     values = [cell['text'] for cell in cells if cell.get('text') is not None]
     if len(values) != 1:
         return 'unresolved'
-    def labels(value):
-        value = ' '.join(value.split())
-        result = {norm(value), norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))}
-        # A printed binomial beside a common name is an explicit second label;
-        # redundant closing delimiters do not change that label.
-        match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)+\s*$', value)
-        if match:
-            result.add(norm(match[1]))
-        return result
-    return ('agrees on printed host' if labels(values[0]) & labels(printed)
+    return ('agrees on printed host' if _host_labels(values[0]) & _host_labels(printed)
             else 'unresolved label equivalence')
 
 
@@ -240,6 +242,119 @@ def _bound_associations(binding, reference):
         if ''.join(literal.split()) == reference:
             result.append(dict(association, report_binding=support))
     return result
+
+
+def _population_correspondences(routed, records, bindings, reverse):
+    """Qualify source population claims against the existing pre-host candidate graph.
+
+    This never discovers a specimen relationship. Every edge was already compared
+    inside its observation route, using the ordinary source report and coordinates.
+    """
+    for digest, binding in (bindings or {}).items():
+        claims = binding.get('host_populations', ())
+        if not claims:
+            continue
+        causes = []
+        evidence = dict(source=digest, host_populations=claims,
+                        request_sha256=binding.get('request_sha256'),
+                        status='unresolved', causes=causes, correspondences=[])
+        entries = []
+        for output, eligible in routed:
+            for link in output['links']:
+                if link.get('sha256') == digest:
+                    link['population_correspondence'] = evidence
+                    for candidate in link.get('candidates', ()):
+                        candidate['population_correspondence'] = evidence
+                        entries.append((output, eligible, link, candidate))
+        if binding.get('cause'):
+            causes.append(binding['cause'])
+        if binding.get('measure_population_issues'):
+            causes.append('the measure target population reading has unresolved issues')
+        if any(c['claim']['scope'] != 'whole-report' for c in claims):
+            causes.append('unresolved population scope: no established selected-occurrence binding')
+        hosts = [c['host'].get('text') for c in claims]
+        if not all(hosts):
+            causes.append('source population host words were not recovered')
+        elif not set.intersection(*(_host_labels(h) for h in hosts)):
+            causes.append('source population host assertions conflict')
+        targets = binding.get('targets', ())
+        target_by_reference = {t['reference']: t for t in targets}
+        if (not targets or len(target_by_reference) != len(targets)
+                or not all(target_by_reference)):
+            causes.append('the bound target population lacks distinct readable identities')
+        for target in targets:
+            field = target['fields'].get('host', {})
+            if (target.get('native_field_issue') or field.get('reading_issues')
+                    or field.get('role_cause') or not field.get('text')
+                    or not all(h and _host_labels(h) & _host_labels(field['text']) for h in hosts)):
+                causes.append('a bound target host is unread, qualified or outside the source assertion')
+                break
+        rows = records.get(digest, ())
+        row_hosts = [[c for c in row.cells if c['role'] == 'host'] for row in rows]
+        if (not rows or any(len(cells) != 1 or not cells[0].get('text')
+                           or cells[0].get('reading_issues') or cells[0].get('role_cause')
+                           for cells in row_hosts)):
+            causes.append('the full report population lacks one established host field per record')
+        elif not set.intersection(*(_host_labels(cells[0]['text']) for cells in row_hosts)):
+            causes.append('the report contains mixed printed host populations')
+
+        # Count all candidate edges, including literal-ID competitors. Filtering to
+        # successful host matches, positive results or expected target IDs is unsound.
+        graph, inverse = defaultdict(set), defaultdict(set)
+        for output, _, _, candidate in entries:
+            identity, key = output['observation'].identity, candidate['key']
+            graph[identity].add(key)
+            inverse[key].add(identity)
+        if (set(inverse) != {(digest, row.locator) for row in rows}
+                or any(len(keys) != 1 for keys in graph.values())
+                or any(len(identities) != 1 for identities in inverse.values())):
+            causes.append('the complete pre-host graph does not uniquely cover every report record')
+        reached, target_for_identity = defaultdict(set), {}
+        for output, _, link, candidate in entries:
+            observation = output['observation']
+            target = target_by_reference.get(observation.reference)
+            if target is None:
+                causes.append('a report occurrence reaches an observation outside the bound targets')
+                continue
+            reached[target['occurrence']].add(observation.identity)
+            target_for_identity[observation.identity] = target['occurrence']
+            comparisons = candidate['association_comparisons']
+            if (not comparisons or any(c != 'agrees at published decimal precision' for c in comparisons)
+                    or candidate['temporal'] != 'agrees' or not candidate['reading_complete']
+                    or not candidate['row'].results or candidate['document_cause']
+                    or link['rendition_ambiguity']
+                    or any(a.get('issues') for a in candidate['source_associations'])
+                    or any(h not in {'agrees on printed host', 'unresolved label equivalence',
+                                     'not supplied by source association'} for h in candidate['host_comparisons'])):
+                causes.append('a population edge has incomplete or incompatible source evidence')
+            if any(relation == 'unresolved label equivalence'
+                   and not all(h and _host_labels(h) & _host_labels(
+                       association['fields']['host']['text']) for h in hosts)
+                   for association, relation in zip(candidate['source_associations'],
+                                                    candidate['host_comparisons'])):
+                causes.append('another source association host is outside the population assertion')
+        if (set(reached) != {t['occurrence'] for t in targets}
+                or any(len(identities) != 1 for identities in reached.values())):
+            causes.append('the pre-host graph does not uniquely cover every bound target')
+        evidence['causes'] = tuple(dict.fromkeys(causes))
+        if causes:
+            continue
+        evidence['status'] = 'established source population correspondence'
+        evidence['correspondences'] = tuple(dict(key=key, observation=identity,
+            target_occurrence=target_for_identity[identity])
+            for identity, keys in graph.items() for key in keys)
+        for output, eligible, _, candidate in entries:
+            output['limitations'] = [item for item in output['limitations']
+                if not (isinstance(item, dict) and item.get('sha256') == digest
+                        and item.get('row') == candidate['row'].locator
+                        and item.get('cause') == candidate['identity_cause'])]
+            if candidate['identity_cause']:
+                candidate['identity_cause'] = None
+                candidate['identity_basis'] = ('source-supported population correspondence through the '
+                    'complete unique report/date/coordinate graph; literal host equivalence remains separate')
+            candidate['association_cause'] = None
+            eligible[candidate['key']] = candidate
+            reverse[candidate['key']].add(output['observation'].identity)
 
 
 def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through,
@@ -338,15 +453,16 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     host_links = {row.locator: [_host_relation(row, a) for a in source_links]
                                   for row in records_by_document[digest]} if source_links else {}
                     link['association_comparisons'] = coordinate_links
-                    derived = {row.locator for row in records_by_document[digest] if source_links
+                    coordinate_derived = {row.locator for row in records_by_document[digest] if source_links
                         and len(reading.complete_pages) == reading.pages
                         and all(value == 'agrees at published decimal precision' for value in coordinate_links[row.locator])
-                        and all(value in {'agrees on printed host', 'not supplied by source association'}
-                                for value in host_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
+                    derived = {locator for locator in coordinate_derived
+                        if all(value in {'agrees on printed host', 'not supplied by source association'}
+                                for value in host_links[locator])}
                     # Every compatible row competes. Result polarity cannot select identity.
                     rows = [row for row in records_by_document[digest] if row in row_index[digest].get(group.reference, [])
-                            or row.locator in derived]
+                            or row.locator in coordinate_derived]
 
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
                     for row in rows:
@@ -391,6 +507,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                             eligible[key] = candidate
                             reverse[key].add(group.identity)
         routed.append((output, eligible))
+    _population_correspondences(routed, records_by_document, report_bindings, reverse)
     for output, eligible in routed:
         identity = output['observation'].identity
         by_document = defaultdict(dict)

@@ -13,7 +13,8 @@ from .events import AdministrativeEvent
 from .removal_events import act_id
 from .store import blob_path
 from .measure_sources import (source_material, material_context, context_matches,
-                              table_fields, native_span, selected_association, native_text_issue)
+                              table_fields, native_span, field_fragment,
+                              selected_association, native_text_issue)
 from .source_associations import HEADINGS
 
 
@@ -41,6 +42,9 @@ SPAN = _object(line_ref=TEXT, first_word={'type': 'integer', 'minimum': 0},
                end_word={'type': 'integer', 'minimum': 1})
 FIELD_FRAGMENT = {'anyOf': [_object(table_ref=TEXT, cell=TEXT), SPAN,
                             _object(table_ref=TEXT, cell=TEXT, transcription=TEXT)]}
+HOST_POPULATION = {'anyOf': [{'type': 'null'}, _object(
+    scope=_choice('whole-report', 'selected-occurrences', 'unresolved'),
+    host_fragments=_array(FIELD_FRAGMENT), support=CITATIONS)]}
 ASSOCIATION_REF = {'anyOf': [
     _object(table_ref=TEXT, row={'type': 'integer', 'minimum': 1}), {'type': 'null'}]}
 COMMENCEMENT_COMPONENTS = {'anyOf': [
@@ -93,7 +97,8 @@ SCHEMA = _object(
                                                   'supplements', 'adopted-geography',
                                                   'laboratory-evidence', 'governing-law', 'other'),
                              affected_payload=TEXT, support=CITATIONS,
-                             documents=_array(_object(source=TEXT, support=CITATIONS)),
+                             documents=_array(_object(source=TEXT, support=CITATIONS,
+                                                      host_population=HOST_POPULATION)),
                              acts=_array(_object(
                                  issuer=OPTIONAL_TEXT,
                                  authority=_choice('puglia-osservatorio', 'other', 'unresolved'),
@@ -380,6 +385,49 @@ class MeasureReading:
             for reference, selected in candidates:
                 bind(selected['source'], dict(association=association, reference=reference,
                      selection=selected), (target['occurrence'],), reference_cause=cause)
+        for digest, binding in population.items():
+            claims = []
+            for reference, selected in selections:
+                claim = selected.get('host_population')
+                # A whole-report replacement does not establish an unchanged host
+                # population. Keep the original selection without extending its claim.
+                if selected['source'] != digest or claim is None:
+                    continue
+                fragments = [field_fragment(self.material, f) for f in claim['host_fragments']]
+                claims.append(dict(claim=claim, reference=reference, selection=selected,
+                    host=dict(text=(' '.join(f['text'] for f in fragments)
+                                    if fragments and all(f.get('text') and
+                                        native_text_issue(f['text']) is None for f in fragments) else None),
+                              fragments=fragments)))
+            if claims:
+                binding['host_populations'] = tuple(claims)
+                binding['targets'] = tuple(t for t in targets
+                    if t['occurrence'] in binding['target_occurrences'])
+                def position_pages(target):
+                    fields = [f for field in target['fields'].values()
+                              for f in field.get('fragments', [field])]
+                    located = {(f['source'], f['page']) for f in fields
+                               if 'source' in f and 'page' in f}
+                    if target.get('source_position'):
+                        position = target['source_position']
+                        located.add((position['source'], position['page']))
+                    if target.get('association'):
+                        association = target['association']
+                        located.add((association['source_sha256'], association['page']))
+                    return located or {(c['source'], c['page']) for c in target.get('support', ())}
+                reached_pages = {(c['source'], c['page']) for claim in claims
+                                 for c in claim['claim']['support']}
+                reached_pages.update(p for t in binding['targets'] for p in position_pages(t))
+                other_occurrences = {o for source, other in population.items() if source != digest
+                                     and not other.get('cause') for o in other['target_occurrences']}
+                other_pages = {p for t in targets if t['occurrence'] in other_occurrences
+                               and t['occurrence'] not in binding['target_occurrences']
+                               for p in position_pages(t)} - reached_pages
+                reached_sources = {source for source, _ in reached_pages} | {digest}
+                binding['measure_population_issues'] = tuple(i for i in self.values.get('issues', ())
+                    if i['aspect'] in {'targets', 'coverage'} and i['source'] in reached_sources
+                    and (i['source'] == digest or i['page'] is None
+                         or (i['source'], i['page']) not in other_pages))
         return population
 
     def finding_links(self, joined, report_readings):
@@ -525,6 +573,20 @@ def _validate_reading(reading, sources, store, material):
             cited = {c['source'] for c in selected['support']}
             if source not in cited or not (cited & (citing_sources - {source})):
                 raise ValueError('Document relationship needs both citing and referenced source support')
+            claim = selected.get('host_population')
+            if claim is not None:
+                if reference['relationship'] != 'laboratory-evidence':
+                    raise ValueError('Host population belongs to a laboratory document relationship')
+                support_pages = {(c['source'], c['page']) for c in claim['support']}
+                if not ({s for s, _ in support_pages} & (citing_sources - {source})):
+                    raise ValueError('Host population needs its citing source connecting clause')
+                fragments = [field_fragment(material, f) for f in claim['host_fragments']]
+                if any(f['source'] not in citing_sources - {source}
+                       or (f['source'], f['page']) not in support_pages for f in fragments):
+                    raise ValueError('Host words need supported fragments from the citing source')
+                keys = [(f['source'], f['page'], f['locator']) for f in fragments]
+                if len(keys) != len(set(keys)):
+                    raise ValueError('Host population repeats a source fragment')
     ids = [d['id'] for d in reading['directions']]
     if any(not x for x in ids) or len(ids) != len(set(ids)):
         raise ValueError('Direction references must be distinct within this reading')
@@ -633,6 +695,8 @@ def retained_measure(request_id, store, *, component_requests=()):
     for reference in compatible['references']:
         reference.setdefault('documents', [])
         reference.setdefault('acts', [])
+        for selected in reference['documents']:
+            selected.setdefault('host_population', None)
     for scope in compatible['target_scopes']:
         for column in scope['columns']:
             # Earlier readings select only the physical row's own field cell.

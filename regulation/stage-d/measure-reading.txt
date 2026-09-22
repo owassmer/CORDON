@@ -150,6 +150,20 @@ not laboratory rows; the ordinary consumer will compare native target fields to
 that reader's occurrences. A report supplied as context contributes evidence to
 the principal act; its result table is not another administrative target population.
 
+A selected laboratory document may carry host_population only when a source clause
+connects that exact report's stated specimen population to a named host population.
+Quote that connecting clause, including its qualifications; separate quotations of
+a report number and host word do not establish the relationship. Use existing
+host_fragments to select the citing source's actual host words, never a taxonomic
+translation. Set scope whole-report only if the statement reaches the entire report
+population, including any negatives or other specimen classes. Equal totals or a
+positive-only subset cannot establish that scope. Use selected-occurrences or
+unresolved for narrower or unclear statements and preserve their exact limitation;
+the current consumer cannot resolve a subset without an existing source selection.
+Use null when no such relationship is read. An unaddressable image-only host statement
+retains its citation and unresolved scope with empty host_fragments. Do not infer
+host equivalence from outside knowledge, another report, or a replacement relationship.
+
 Where a reference declares administrative acts, record each in acts, even if the
 referenced original is not supplied. Preserve its stated issuer, authority, act
 number, full year and adoption date with source support. Leave unstated components

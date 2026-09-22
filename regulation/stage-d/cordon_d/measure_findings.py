@@ -64,8 +64,20 @@ def measure_findings(measure, *, report_population, findings, report_rows):
                 causes.append('ordinary finding has not resolved this report occurrence')
             if coordinates in {'conflicts', 'unresolved'}:
                 causes.append('target/report coordinates ' + coordinates)
-            if host in {'unresolved label equivalence', 'unresolved'}:
+            population = match.get('population_correspondence')
+            population_bound = (population is not None
+                and population['source'] == key[0]
+                and population['request_sha256'] == binding.get('request_sha256')
+                and population['host_populations'] == binding.get('host_populations'))
+            population_applies = (population_bound
+                and population['status'] == 'established source population correspondence'
+                and any(c['key'] == key and c['observation'] == observation.identity
+                        and c['target_occurrence'] == target['occurrence']
+                        for c in population['correspondences']))
+            if host == 'unresolved' or (host == 'unresolved label equivalence' and not population_applies):
                 causes.append('target/report host ' + host)
+                if population_bound:
+                    causes.extend(population['causes'])
             reversed_rows = tuple(reverse.get(key, ()))
             if not reversed_rows:
                 causes.append('reverse report occurrence is unavailable')
@@ -75,7 +87,8 @@ def measure_findings(measure, *, report_population, findings, report_rows):
             output['candidates'].append(dict(
                 finding=finding, match=match, report_binding=binding,
                 reverse_rows=reversed_rows, coordinate_relation=coordinates,
-                host_relation=host, causes=tuple(causes)))
+                host_relation=host, population_correspondence=(population if population_bound else None),
+                causes=tuple(causes)))
 
         eligible = [c for c in output['candidates'] if not c['causes']]
         identities = {c['finding']['observation'].identity for c in eligible}

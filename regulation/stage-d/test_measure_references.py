@@ -6,8 +6,10 @@ from types import SimpleNamespace
 import unittest
 
 import pymupdf
+from jsonschema import Draft202012Validator, ValidationError
 
-from cordon_d.measures import MeasureReading, _validate_reading
+from cordon_d.measures import MeasureReading, SCHEMA, _validate_reading
+from cordon_d.measure_sources import source_material
 from cordon_d.store import put_bytes
 
 
@@ -17,7 +19,7 @@ class MeasureReferences(unittest.TestCase):
         self.addCleanup(self.directory.cleanup)
         self.store = Path(self.directory.name)
         self.sources = []
-        for text in ('Act cites two laboratory reports', 'Laboratory report one',
+        for text in ('Act cites two laboratory reports about Faggio', 'Laboratory report one',
                      'Laboratory report two'):
             with pymupdf.open() as document:
                 page = document.new_page()
@@ -107,6 +109,54 @@ class MeasureReferences(unittest.TestCase):
         self.assertEqual(set(measure.report_population([first, second])), {self.first})
         second.relations['corrections'] = []
         self.assertEqual(set(measure.report_population([first, second])), {self.first})
+
+    def test_population_schema_uses_real_native_host_fragments_and_citing_support(self):
+        self.material, _ = source_material(self.sources, self.store)
+        line_ref, line = next((ref, value) for ref, value in self.material['lines'].items()
+                              if value['source'] == self.act and 'Faggio' in value['words'])
+        start = line['words'].index('Faggio')
+        claim = dict(scope='whole-report', host_fragments=[dict(
+            line_ref=line_ref, first_word=start, end_word=start + 1)], support=[dict(
+                source=self.act, page=1, locator='complete connecting clause',
+                quote='Act cites two laboratory reports about Faggio')])
+        reading = deepcopy(self.reading)
+        reading['identity'] = dict(issuer='Osservatorio', authority='puglia-osservatorio',
+            number='1', adopted='2025-01-01', title='Measure', support=[self.citation])
+        reading['references'][0]['acts'] = []
+        for selected in reading['references'][0]['documents']:
+            selected['host_population'] = None
+        selected = reading['references'][0]['documents'][0]
+        selected['host_population'] = claim
+        Draft202012Validator(SCHEMA).validate(reading)
+        self.validate(reading)
+        owner = MeasureReading(dict(reading=reading), self.material, ())
+        host, = owner.report_population([])[self.first]['host_populations']
+        self.assertEqual(host['host']['text'], 'Faggio')
+        self.assertEqual(host['host']['fragments'][0]['source'], self.act)
+        self.assertEqual(host['host']['fragments'][0]['locator'],
+                         f'{line_ref}/words:{start}:{start + 1}')
+        self.assertIs(host['claim'], claim)
+
+        for failure in ('other-source', 'no-citing-clause', 'bad-span', 'authored-value'):
+            with self.subTest(failure=failure):
+                broken = deepcopy(reading)
+                value = broken['references'][0]['documents'][0]['host_population']
+                if failure == 'other-source':
+                    other_ref = next(ref for ref, line in self.material['lines'].items()
+                                     if line['source'] == self.first)
+                    value['host_fragments'] = [dict(line_ref=other_ref, first_word=0, end_word=1)]
+                elif failure == 'no-citing-clause':
+                    value['support'] = [dict(source=self.first, page=1,
+                                            locator='report', quote='Laboratory report one')]
+                elif failure == 'bad-span':
+                    value['host_fragments'][0]['end_word'] = 10000
+                else:
+                    value['host_fragments'][0]['text'] = 'invented taxonomic equivalent'
+                    with self.assertRaises(ValidationError):
+                        Draft202012Validator(SCHEMA).validate(broken)
+                    continue
+                with self.assertRaises(ValueError):
+                    self.validate(broken)
 
 
 if __name__ == '__main__':
