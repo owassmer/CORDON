@@ -448,8 +448,14 @@ tests do not confer that status.
 The removal consumer additionally reaches CRSFA1038/2022 through DDS126/2022.
 Independent reading of all four report pages found readable labelled specimen
 fields unexposed on page 2, misplaced sampling/procedure/temperature and test-date
-fields, and an overbroad client-data note on page 3. A fresh whole-source reading
-through the existing report owner is pending. The report's printed specimen/host
+fields, and an overbroad client-data note on page 3. The fresh whole-source reading
+corrects those header and qualification errors and preserves all ten complete
+specimen-cell literals. It does not expose their host, coordinate and sample-code
+components: the current one-cell-per-printed-column contract leaves each compound
+cell as `other`. Its structural completeness therefore does not repair ordinary
+finding attachment. That reading has not replaced the prior shared body; generic
+component exposure belongs to the existing report-field owner; dependent PR #24
+contains its bounded repair plan. The report's printed specimen/host
 phrase and the act's `Olivo` label also lack an exposed source-qualified equivalence.
 The act expressly connects this report to ten infected olive plants; that evidence
 must remain scoped to the cited populations, not become a global taxon alias or a
@@ -466,6 +472,10 @@ report entrypoint has no scoped embedded-report consumption. DDS108/2022 cites
 CRSFA1692/2022 as a positive subset of CRSFA1691/2022. The parent's exact retained
 route was not found, and its consequential qualifications remain unexamined.
 These are source-reading/acquisition dependencies, not laboratory silence.
+The DDS201/2025 chain additionally names CNR's genotype communication under regional
+protocol 0552255/2025. It was not found in the checked retained metadata; public
+acquisition is pending. The three held reports support subspecies assay results,
+not the act's separately reported ST53 genotype.
 
 ## Materials that are not standalone input gaps
 
@@ -558,10 +568,12 @@ A source-selected report can also supply context for a native row's bare report
 number and date. The original row still constrains that correspondence; competing
 selected reports remain ambiguous. The ordinary finding reader now accepts those
 same scoped bindings within the observation's acquired route. In the reached
-DDS126/2022–CRSFA1038/2022 family, this repairs the missing contextual connection,
-but does not yet establish the ten finding links: report page 2's labelled specimen
-fields are not exposed by its retained reading, and page 3's printed specimen/host
-description needs source-qualified interpretation. These are laboratory reading
+DDS126/2022–CRSFA1038/2022 family, this repairs the missing contextual connection.
+The qualified ordinary administrative reading preserves all ten target positions,
+forms, directions and the report selection. All ten finding links remain unresolved:
+the fresh complete report reading retains the specimen cells but does not expose
+their components, and the printed host descriptions need source-qualified
+interpretation. These are laboratory reading
 and comparison limitations, not established biological disagreements or absent
 source evidence. Row 2 owns their repair; no act-specific host synonym is introduced.
 
@@ -576,7 +588,12 @@ Remaining work falls into four consumer requirements:
   exact native target/addressee positions, the form's legal-landholder signer
   role and its voluntary-removal-only identity-copy requirement. Its generic
   form-reading repair preserves the other directions and event distinctions;
-  adoption and BURP publication still cannot anchor owner election. Direct reading establishes the ten predecessors' infected-plant work
+  adoption and BURP publication still cannot anchor owner election. DDS126's
+  administrative reading also preserves the source's maximum ten-day commencement
+  clause. Its omitted statutory appeal-remedy sentence is a serialization limit;
+  no affected accepted consumer was identified, and it supplies no actual appeal,
+  suspension or notice event. Consequential appeal evidence is not excluded by that
+  bounded conclusion. Direct reading establishes the ten predecessors' infected-plant work
   and their deferred surrounding prescriptions; it does not supply their remaining
   ordinary readings or administrative histories. Complete independent original
   readings now cover the DDS147/2024–165/2024 amendment pair, DDS173/2025–63/2026 supplement,
@@ -648,7 +665,15 @@ Remaining work falls into four consumer requirements:
   a reading limitation; explicit empty or conflicting readings remain distinct.
   The proposed typed-term adapter on PR #23 preserves the complete parent and source
   context without deciding the separate legal applicability predicates. Its actual
-  DDS58 component-to-consumer check is pending; no new clock is accepted here.
+  DDS58 component-to-consumer check recovers the actual maximum ten-day term and
+  rejects adoption as notice; the neighbouring election, completion, nonresponse
+  and refusal directions supply no such component. This verifies the quantity,
+  not actual expiry or a coercive decision. Independent PR #23 review found ten
+  proposed factual predicates and four declared-evidence requirements missing from
+  its dependent D bindings, with 21 obsolete predicates still bound. The candidate
+  owner graph and affected B/C regression consumers require repair before acceptance;
+  those implementation omissions are distinct from missing notice or performance.
+  No new clock is accepted here.
 - **Establish the population and actual history.** Acquisition records under
   `corpus/sources/removal-orders/` name retained bytes and publisher copies.
   Of 193 legacy acquisition-metadata claims initially lacking originals, all 28
@@ -679,10 +704,17 @@ Remaining work falls into four consumer requirements:
   Three Bari observations reach DDS114/2026 and two Noicattaro observations reach
   DDS107/2024 by source parcel scope. Eighty remain without an identified competent
   prescription: 33 Crispiano, 45 Bari and two Mola. Their actual report rows supply
-  their municipalities. Reached regional searches and current municipal publication
-  queries did not identify further principals; they do not establish historical
-  completeness. Bari's historical query failed HTTP500, and the Parsec manual route
-  failed DNS; authenticated case records remain unaccessed.
+  their municipalities. Reached regional searches did not identify further principals.
+  Initial direct municipal form submissions failed known-current controls, so their
+  empty results are not validated searches. Subsequent actual browser interactions
+  passed historical controls in Crispiano's and Mola's managerial and political
+  archives. Crispiano's Xylella searches returned no rows; all three recovered Mola
+  originals concern vector control and supply no relationship to the two findings.
+  These categories cover municipal acts, not an established historical population
+  of external regional orders. Crispiano's current Albo omits an expired control
+  recovered in its archive. The remaining external-order/case routes are unresolved;
+  Bari's historical query failed HTTP500, and the Parsec manual route failed DNS.
+  Authenticated case records remain unaccessed.
   All 73 positives without a published report route carry a star in the CAMP_2024
   workbook. Its original cell A119730 explicitly states non-removal following
   DDS158/2024's area update. All have same-day unstarred SIT counterparts with report
@@ -710,7 +742,16 @@ DDS201/2025 and DDS63/2026 respectively. Both 1109 and the ERRATA CORRIGE entry
 1110 currently serve the same PDF (`ed2da089d5285f2ec4c8b58202095bc0852cc8fb934c978c82779d3cd06d14f4`).
 The reader retains both occurrences and their different incoming protocol labels.
 No correction delta, recipient effect or clock is inferred from the label, a
-referenced predecessor or the common bytes. Full act meaning remains pending qualified reading.
+referenced predecessor or the common bytes. Independent complete reading of DDS201
+and its three reports establishes 106 exact target codes/coordinates and 64
+surrounding-parcel occurrences across 56 distinct parcels, retaining collective
+scope and owner continuations. Ordinary act consumption remains pending. CNR91P
+and 92P replace earlier reports; their subspecies assays do not establish ST53.
+The act's separate genotype communication, regional protocol 0552255/2025, is not
+held in the checked metadata and its public acquisition remains pending in row 2.
+DDS173's 34-page municipal and 30-page BURP renditions have been independently
+compared throughout; reflowed body and common annex supply the same consequential
+meaning. Their publication evidence remains distinct.
 
 Locorotondo's reached native historical searches (Xylella across all years, and
 number 135/year 2021) supplied unrelated municipal records, not DDS135/2021's
@@ -742,8 +783,12 @@ Xylella portal, not an additional case history.
 Two complete Council releases about the same 5 March 2026 hearing report 331
 Cagnano removals; one additionally states 177 monumental olives within that total.
 They do not establish two separate totals, individual targets, actual executor or
-removal dates. The original HTML pair is retained and independently read; ordinary
-performance reading remains pending. The actual hearing page
+removal dates. The original HTML pair is retained and independently read. Its first
+ordinary response preserves those meanings but fails citation validation: 23
+quotations exist in the originals while their CSS paths select no element in the
+native parsed tree. The validator remains strict; the generic reading instruction
+now states the actual parser semantics, and a complete corrective reading is pending.
+The actual hearing page
 (`03e776738f30aca6a602b12528db69e36140edb9ee0f320663f296498de8551a`)
 expressly lists no published minutes and no other substantive documentation. Its
 linked PDFs concern convocation and scheduling, not performance. The distinct
@@ -756,7 +801,13 @@ monumental-tree counts and transcription artifacts. Original media fragments hav
 been captured, but independent listening is unavailable in this runtime; visual
 frames do not validate the spoken words. Ordinary transcript consumption and any
 prescription correspondence remain pending. No field execution record has yet
-been recovered.
+been recovered. A successful Cagnano native historical query for Xylella and
+1 October 2025–31 March 2026 returned only the three held DDS173/201 publications;
+all attachments were verified against the retained bytes. This resolves the earlier
+unattempted filter route for that span, not every possible record or search term.
+The separate managerial archive remains unexhausted. The hearing mentions a written
+chronology, but no published copy was recovered through its actual links and the
+bounded official-domain search.
 
 Direct reading of the reached Monopoli approvals, certificates and ledgers
 establishes municipal service completion, principally brush clearing. One 2026

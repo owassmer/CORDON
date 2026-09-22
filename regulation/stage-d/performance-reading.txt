@@ -43,7 +43,11 @@ conflict. Do not classify your failure to recover readable evidence as source si
 Every document and statement needs source support. A citation contains the
 supplied source hash, a precise native CSS selector that selects exactly one
 element of that HTML, and a short contiguous quotation from its visible text.
-Use selectors based on the supplied DOM, including nth-of-type where necessary.
+Selectors are validated against BeautifulSoup with Python's html.parser, which
+can preserve invalid nesting differently from a browser. Do not assume browser
+repairs. Use a unique source ID or a reliably identifiable ancestor containing
+the quotation when fine-grained child positions cannot be established from
+the supplied markup.
 Do not invent physical pages for HTML. HTML entities represent their displayed
 characters. Whitespace may be normalized; do not stitch quotation fragments or
 paraphrase inside quotes. Each statement's citations belong to that statement's

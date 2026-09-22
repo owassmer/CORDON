@@ -2080,5 +2080,28 @@
   "sha256": "9c0612f13a04cdccf4a323ca64d71b982e62d16fc959397ed3afc5128277d413",
   "kind": "performance",
   "referred_by": "Native HLS chunklist for official IV Commission5March2026 hearing; original timed media fragment"
+ },
+ {
+  "url": "https://trasparenza.parsec326.it/en/widget/web/cagnano-varano/albo-pretorio/-/pubblicazionionline_WAR_pubblicazionionlineportlet",
+  "captured_at": "2026-09-22T16:18:33.210282+00:00",
+  "kind": "discovery",
+  "referred_by": "DDS173/201 target-identification and performance-verbale dependency; native municipalAlbo advanced historical query, subject xylella, registration1Oct2025–31Mar2026",
+  "method": "POST",
+  "request_data": {
+   "A3756:form:inputDaNroAtto": "",
+   "A3756:form:inputANroAtto": "",
+   "A3756:form:inputDaDataAtto_input": "",
+   "A3756:form:inputADataAtto_input": "",
+   "A3756:form:inputDaDataRegistrazione_input": "01/10/2025",
+   "A3756:form:inputADataRegistrazione_input": "31/03/2026",
+   "A3756:form:inputOggetto": "xylella",
+   "A3756:form:inputStorico": "on",
+   "A3756:form:j_idt139": "Applica"
+  },
+  "status": 200,
+  "final_url": "https://trasparenza.parsec326.it/en/widget/web/cagnano-varano/albo-pretorio;jsessionid=EE07056DB4248927BB49D9191F421178?p_auth=K6fhbzdG&p_p_id=pubblicazionionline_WAR_pubblicazionionlineportlet&p_p_lifecycle=1&p_p_state=maximized&p_p_mode=view&p_p_col_id=&p_p_col_count=0&_pubblicazionionline_WAR_pubblicazionionlineportlet__facesViewIdRender=%2Fviews%2Fview.xhtml",
+  "content_type": "text/html",
+  "bytes": 429084,
+  "sha256": "ba4cb5638f3398fda4c390d89f0cc8c0bcca8d75039a9a9aae5196a41a79b00d"
  }
 ]
