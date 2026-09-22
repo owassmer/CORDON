@@ -1331,5 +1331,550 @@
   "bytes": 150356,
   "sha256": "0b77185217528ad18b76ced5d949f74ecfbad6198f1fc1cf0ea12538f409c155",
   "capture_method": "Playwright network response-body text, UTF-8 rendition; no DOM rewriting"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio.php",
+  "captured_at": "2026-09-14T22:49:37.117672+00:00",
+  "kind": "discovery",
+  "referred_by": "12fe85abc663e61952f0e6a2e978c60dc54f0419469fc79e72bb431e7eeebf46",
+  "status": 200,
+  "final_url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio.php",
+  "content_type": "text/html; charset=ISO-8859-15",
+  "bytes": 23592,
+  "sha256": "81895b762a799483451ba6fdc9c65b1101d7519aeafbecf7b92b383b8c47915e",
+  "access_context": "Owen reports Palermo Italy VPN enabled; ordinary public request"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=101&CSRF=f765fd5db50c6a5b53df172396dc331d",
+  "captured_at": "2026-09-14T22:49:37.117320+00:00",
+  "kind": "discovery",
+  "referred_by": "ARIF official homepage12fe85 Atti di notifica link; exact notification evidence consumer",
+  "error": "HTTPSConnectionPool(host='arif.soluzionipa.it', port=443): Read timed out.",
+  "access_context": "Owen reports Palermo Italy VPN enabled; ordinary public request"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/",
+  "captured_at": "2026-09-14T22:49:37.117742+00:00",
+  "kind": "discovery",
+  "referred_by": "ARIF official homepage12fe85 current transparency link; executed assignments and case-record publication",
+  "status": 200,
+  "final_url": "https://arif.soluzionipa.it/openweb/trasparenza/",
+  "content_type": "text/html; charset=ISO-8859-15",
+  "bytes": 49717,
+  "sha256": "42c906297761cb51216c0aba52aa84692ec39d0a7f431f920bd151eac6b1a892",
+  "access_context": "Owen reports Palermo Italy VPN enabled; ordinary public request"
+ },
+ {
+  "url": "http://hosting.soluzionipa.it/arif/trasparenza/",
+  "captured_at": "2026-09-14T22:49:37.117868+00:00",
+  "kind": "discovery",
+  "referred_by": "ARIF homepage footer alternative published transparency route; same record holders, not a new institutional hunt",
+  "status": 404,
+  "final_url": "http://hosting.soluzionipa.it/arif/trasparenza/",
+  "content_type": "text/html; charset=iso-8859-1",
+  "error": "404 Client Error: Not Found for url: http://hosting.soluzionipa.it/arif/trasparenza/",
+  "access_context": "Owen reports Palermo Italy VPN enabled; ordinary public request"
+ },
+ {
+  "url": "https://www.comune.modugno.ba.it/notizia/misure-fitosanitarie-di-lotta-al-vettore-nellambito-del-piano-per-il-contrasto-ed-il-controllo-della-xylella-fastidiosa-prescrizione-di-misure-di-eradicazione-per-n-5-piante-infett/",
+  "captured_at": "2026-09-14T22:49:56.586317+00:00",
+  "kind": "discovery",
+  "referred_by": "Municipal notice of DDS7/2026 reached from retained Modugno removal original; actual municipal publication/notice route",
+  "status": 403,
+  "final_url": "https://www.comune.modugno.ba.it/notizia/misure-fitosanitarie-di-lotta-al-vettore-nellambito-del-piano-per-il-contrasto-ed-il-controllo-della-xylella-fastidiosa-prescrizione-di-misure-di-eradicazione-per-n-5-piante-infett/",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://www.comune.modugno.ba.it/notizia/misure-fitosanitarie-di-lotta-al-vettore-nellambito-del-piano-per-il-contrasto-ed-il-controllo-della-xylella-fastidiosa-prescrizione-di-misure-di-eradicazione-per-n-5-piante-infett/",
+  "access_context": "Owen reports Palermo Italy VPN enabled; ordinary public request"
+ },
+ {
+  "url": "https://www.arifpuglia.it/",
+  "captured_at": "2026-09-14T22:50:16.276951+00:00",
+  "kind": "discovery",
+  "referred_by": "Executing body named by admitted removal measures; current public notice and performance navigation",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 230064,
+  "sha256": "ca76246257fab744528de72673efdb4611743913cd09642e2ff6c0a267ed22b9",
+  "access_context": "Owen reports Palermo Italy VPN enabled; ordinary public request"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=101",
+  "captured_at": "2026-09-14T22:53:32.575540+00:00",
+  "kind": "discovery",
+  "referred_by": "42c906297761cb51216c0aba52aa84692ec39d0a7f431f920bd151eac6b1a892 Atti di notifica",
+  "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=46",
+  "captured_at": "2026-09-14T22:53:32.575772+00:00",
+  "kind": "discovery",
+  "referred_by": "42c906297761cb51216c0aba52aa84692ec39d0a7f431f920bd151eac6b1a892 Provvedimenti Direttore Generale",
+  "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=47",
+  "captured_at": "2026-09-14T22:53:32.575834+00:00",
+  "kind": "discovery",
+  "referred_by": "42c906297761cb51216c0aba52aa84692ec39d0a7f431f920bd151eac6b1a892 Provvedimenti dirigenti",
+  "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio_full.php",
+  "captured_at": "2026-09-14T22:53:32.575867+00:00",
+  "kind": "discovery",
+  "referred_by": "81895b762a799483451ba6fdc9c65b1101d7519aeafbecf7b92b383b8c47915e historical register",
+  "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+ },
+ {
+  "url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio_full.php",
+  "captured_at": "2026-09-14T22:53:46.116600+00:00",
+  "kind": "discovery",
+  "referred_by": "Previously successful competent municipal historical Albo; DDS7/2026 and other reached removal measures",
+  "status": 200,
+  "final_url": "https://servizi.comune.modugno.ba.it:443/portal/autenticazione/login?service=https%3A%2F%2Fservizi.comune.modugno.ba.it%2Fopenweb%2Falbo%2Falbo_pretorio_full.php",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 2721,
+  "sha256": "47e12cf1a6a9d7822e532cc7b326e819af93ba1731e390bd600a9b5c9c6e82ab"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/",
+  "captured_at": "2026-09-14T22:56:39.017497+00:00",
+  "kind": "discovery",
+  "referred_by": "Retest child access with current public session from working ARIF index",
+  "error": "HTTPSConnectionPool(host='arif.soluzionipa.it', port=443): Read timed out. (read timeout=15)"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=101",
+  "captured_at": "2026-09-14T22:57:04.560514+00:00",
+  "kind": "discovery",
+  "referred_by": "42c906297761cb51216c0aba52aa84692ec39d0a7f431f920bd151eac6b1a892 current native links with public session",
+  "error": "HTTPSConnectionPool(host='arif.soluzionipa.it', port=443): Max retries exceeded with url: /openweb/trasparenza/pagina.php?id=101 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio_full.php",
+  "captured_at": "2026-09-14T22:57:37.308459+00:00",
+  "kind": "discovery",
+  "referred_by": "42c906297761cb51216c0aba52aa84692ec39d0a7f431f920bd151eac6b1a892 current native links with public session",
+  "error": "HTTPSConnectionPool(host='arif.soluzionipa.it', port=443): Read timed out. (read timeout=15)"
+ },
+ {
+  "url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio.php",
+  "captured_at": "2026-09-14T23:03:49.813097+00:00",
+  "kind": "discovery",
+  "referred_by": "Competent municipal Albo current navigation; historical URL returned unpopulated application shell",
+  "status": 200,
+  "final_url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio.php",
+  "content_type": "text/html; charset=ISO-8859-15",
+  "bytes": 35579,
+  "sha256": "8b02a2ad2e6f764bb20912f9a70a1d3a6aecc2a6c5a26dedc474341818d12e44"
+ },
+ {
+  "url": "https://www.arifpuglia.it/amministrazione-trasparente/",
+  "captured_at": "2026-09-14T23:03:49.813754+00:00",
+  "kind": "discovery",
+  "referred_by": "ca76246257fab744528de72673efdb4611743913cd09642e2ff6c0a267ed22b9 official pre2021 transparency route; consequential historical event sources",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/amministrazione-trasparente/",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 224337,
+  "sha256": "1078bb7a18ee760892a66ac5dd01e7707917bb051e4006072e6b29b1e5a171b6"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio.php?",
+  "captured_at": "2026-09-14T23:03:49.813788+00:00",
+  "kind": "discovery",
+  "referred_by": "81895b762a799483451ba6fdc9c65b1101d7519aeafbecf7b92b383b8c47915e current register public subject query",
+  "method": "POST",
+  "request_data": {
+   "search_albo[OGGETTO]": "xylella",
+   "tabella_albo[page]": "1",
+   "tabella_albo[start]": "0",
+   "submit": "Cerca"
+  },
+  "error": "HTTPSConnectionPool(host='arif.soluzionipa.it', port=443): Max retries exceeded with url: /openweb/albo/albo_pretorio.php (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+ },
+ {
+  "url": "https://www.arifpuglia.it/",
+  "captured_at": "2026-09-22T13:57:32.623828+00:00",
+  "kind": "discovery",
+  "referred_by": "Executing body of admitted removal measures; current public navigation to notice and execution evidence",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 230045,
+  "sha256": "43ca0d6abd27ade18a8d0d511594d8b99412664de33d54b94dfe62914a74720d"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio.php",
+  "captured_at": "2026-09-22T13:57:33.898026+00:00",
+  "kind": "discovery",
+  "referred_by": "ARIF homepage official Albo route; historical publication and execution records for admitted measures",
+  "status": 403,
+  "final_url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio.php",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://arif.soluzionipa.it/openweb/albo/albo_pretorio.php"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/",
+  "captured_at": "2026-09-22T13:57:35.675356+00:00",
+  "kind": "discovery",
+  "referred_by": "ARIF homepage official current transparency route; notified and executed work",
+  "status": 403,
+  "final_url": "https://arif.soluzionipa.it/openweb/trasparenza/",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://arif.soluzionipa.it/openweb/trasparenza/"
+ },
+ {
+  "url": "https://www.comune.modugno.ba.it/",
+  "captured_at": "2026-09-22T13:57:36.330935+00:00",
+  "kind": "discovery",
+  "referred_by": "Competent municipality of retained DDS7/2026 removal act; current public notice navigation",
+  "status": 403,
+  "final_url": "https://www.comune.modugno.ba.it/",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://www.comune.modugno.ba.it/"
+ },
+ {
+  "url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio.php",
+  "captured_at": "2026-09-22T13:57:37.387806+00:00",
+  "kind": "discovery",
+  "referred_by": "Retained official municipal current-register route8b02a2; discovery of historical notice publication for admitted measures",
+  "status": 403,
+  "final_url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio.php",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio.php"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=101&CSRF=f765fd5db50c6a5b53df172396dc331d",
+  "captured_at": "2026-09-22T14:00:07.772915+00:00",
+  "kind": "discovery",
+  "referred_by": "43ca0d6abd27ade18a8d0d511594d8b99412664de33d54b94dfe62914a74720d current official Atti di notifica link; actual notice evidence for admitted measures",
+  "status": 403,
+  "final_url": "https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=101&CSRF=f765fd5db50c6a5b53df172396dc331d",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://arif.soluzionipa.it/openweb/trasparenza/pagina.php?id=101&CSRF=f765fd5db50c6a5b53df172396dc331d"
+ },
+ {
+  "url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio_full.php?",
+  "captured_at": "2026-09-22T14:00:08.008195+00:00",
+  "kind": "discovery",
+  "referred_by": "81895b762a799483451ba6fdc9c65b1101d7519aeafbecf7b92b383b8c47915e exact Consultazione Storico Albo public link",
+  "status": 403,
+  "final_url": "https://arif.soluzionipa.it/openweb/albo/albo_pretorio_full.php",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://arif.soluzionipa.it/openweb/albo/albo_pretorio_full.php"
+ },
+ {
+  "url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio_full.php",
+  "captured_at": "2026-09-22T14:00:08.136230+00:00",
+  "kind": "discovery",
+  "referred_by": "Retained Modugno historical Albo route; current public access check after current register403",
+  "status": 403,
+  "final_url": "https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio_full.php",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://servizi.comune.modugno.ba.it/openweb/albo/albo_pretorio_full.php"
+ },
+ {
+  "url": "https://www.comune.modugno.ba.it/notizia/misure-fitosanitarie-di-lotta-al-vettore-nellambito-del-piano-per-il-contrasto-ed-il-controllo-della-xylella-fastidiosa-prescrizione-di-misure-di-eradicazione-per-n-5-piante-infett/",
+  "captured_at": "2026-09-22T14:00:08.495761+00:00",
+  "kind": "discovery",
+  "referred_by": "Retained competent municipal DDS7/2026 notice route; direct current notice retrieval",
+  "status": 403,
+  "final_url": "https://www.comune.modugno.ba.it/notizia/misure-fitosanitarie-di-lotta-al-vettore-nellambito-del-piano-per-il-contrasto-ed-il-controllo-della-xylella-fastidiosa-prescrizione-di-misure-di-eradicazione-per-n-5-piante-infett/",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: https://www.comune.modugno.ba.it/notizia/misure-fitosanitarie-di-lotta-al-vettore-nellambito-del-piano-per-il-contrasto-ed-il-controllo-della-xylella-fastidiosa-prescrizione-di-misure-di-eradicazione-per-n-5-piante-infett/"
+ },
+ {
+  "url": "https://servizionline.hspromilaprod.hypersicapp.net/cmsbisceglie/portale/albopretorio/archivioalbopretorio.aspx?P=500",
+  "captured_at": "2026-09-22T14:01:12.889360+00:00",
+  "kind": "discovery",
+  "referred_by": "Retained official Bisceglie historical-register route; actual publication for admitted DDS115/150 and consequential measures",
+  "status": 200,
+  "final_url": "https://servizionline.hspromilaprod.hypersicapp.net/cmsbisceglie/portale/albopretorio/archivioalbopretorio.aspx?P=500",
+  "content_type": "text/html; charset=utf-8",
+  "bytes": 148211,
+  "sha256": "d90b7947268303faaccde04d6efc1d58640065db2a423c89a8ffe6bc1ce4cba8"
+ },
+ {
+  "url": "https://albobari.egov.ba.it/AlboPretorio/",
+  "captured_at": "2026-09-22T14:01:14.345880+00:00",
+  "kind": "discovery",
+  "referred_by": "Retained official Bari current/historical Albo route; DDS188 competent municipality publication",
+  "status": 200,
+  "final_url": "https://albobari.egov.ba.it/AlboPretorio/",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 812,
+  "sha256": "d038f2505b15e3d8f4ec4d6668b737469d7bb913156c9a9e8be41b9400d30335"
+ },
+ {
+  "url": "https://www.comune.minervinomurge.bt.it/c110006/po/elenco_news.php?area=H",
+  "captured_at": "2026-09-22T14:01:15.753337+00:00",
+  "kind": "discovery",
+  "referred_by": "Retained Minervino route from Prefettura68bcc3 earlier outbreak; consequential measure notice and performance history",
+  "error": "('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))"
+ },
+ {
+  "url": "https://www.halleyweb.com/c110006/po/elenco_news.php?area=H",
+  "captured_at": "2026-09-22T14:03:05.167043+00:00",
+  "kind": "discovery",
+  "referred_by": "Public municipal Minervino news indexed under municipality and provider host; follow April2025 removal notice and its exact attachments, not an unrelated catalogue",
+  "error": "('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))"
+ },
+ {
+  "url": "https://old.comune.locorotondo.ba.it/comune-di-locorotondo",
+  "captured_at": "2026-09-22T13:59:55.074641+00:00",
+  "kind": "discovery",
+  "referred_by": "Official current Locorotondo homepage links old municipal site; municipal publication of admitted DDS135/2021",
+  "status": 200,
+  "final_url": "https://old.comune.locorotondo.ba.it/comune-di-locorotondo",
+  "content_type": "text/html; charset=iso-8859-1",
+  "bytes": 54116,
+  "sha256": "287bc5530377714f8b7f85c00c2cea6b60cc1bfc66578fda153516d2ff5e5da4"
+ },
+ {
+  "url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/albo-pretorio",
+  "captured_at": "2026-09-22T14:00:18.454609+00:00",
+  "kind": "discovery",
+  "referred_by": "287bc5530377714f8b7f85c00c2cea6b60cc1bfc66578fda153516d2ff5e5da4 municipal Albo link, HTTPS equivalent",
+  "status": 200,
+  "final_url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/albo-pretorio",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 141391,
+  "sha256": "d5f83fa6df5a70eee9551baa88c09a3ad3bf6b835192860fc745c67e826100c9"
+ },
+ {
+  "url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/dettaglio-albo-pretorio?p_p_id=jcitygovmenutrasversaleleftcolumn_WAR_jcitygovalbiportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_jcitygovmenutrasversaleleftcolumn_WAR_jcitygovalbiportlet_current-page-parent=0&_jcitygovmenutrasversaleleftcolumn_WAR_jcitygovalbiportlet_current-page=40837",
+  "captured_at": "2026-09-22T14:00:56.524987+00:00",
+  "kind": "discovery",
+  "referred_by": "d5f83fa6df5a70eee9551baa88c09a3ad3bf6b835192860fc745c67e826100c9 / Storico atti",
+  "status": 200,
+  "final_url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/dettaglio-albo-pretorio?p_p_id=jcitygovmenutrasversaleleftcolumn_WAR_jcitygovalbiportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_jcitygovmenutrasversaleleftcolumn_WAR_jcitygovalbiportlet_current-page-parent=0&_jcitygovmenutrasversaleleftcolumn_WAR_jcitygovalbiportlet_current-page=40837",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 147795,
+  "sha256": "04e9e7a8f09fb47e4521498d2c56b147594d7e5d43d3d97d54ddc2374a0eacd1"
+ },
+ {
+  "url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/papca-sa/-/papca/igrid/45619",
+  "captured_at": "2026-09-22T14:02:51.884785+00:00",
+  "kind": "discovery",
+  "referred_by": "04e9e7a8f09fb47e4521498d2c56b147594d7e5d43d3d97d54ddc2374a0eacd1 / data-mainurl Storico atti",
+  "status": 200,
+  "final_url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/papca-sa/-/papca/igrid/45619",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 81719,
+  "sha256": "9c3b16b96f48aac28919db3fcf17b21a4f8629eb82c936eccf76f02ea8b7acd3"
+ },
+ {
+  "url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/papca-sa?p_p_id=jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet&p_p_lifecycle=1&p_p_state=pop_up&p_p_mode=view&_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_action=eseguiOrdinamentoLista",
+  "captured_at": "2026-09-22T14:02:54.589215+00:00",
+  "kind": "discovery",
+  "referred_by": "9c3b16b96f48aac28919db3fcf17b21a4f8629eb82c936eccf76f02ea8b7acd3 / native Storico atti form: Oggetto xylella, all years",
+  "method": "POST",
+  "request_data": {
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_formDate": "1790085773830",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_simpleSearchEnable": "true",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_mostraSoloLista": "true",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_searchTag": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_oggetto": "xylella",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_mittente": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_annoRegistrazioneDa": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_numeroRegistrazioneDa": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_dataPubblicazioneDa": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_dataPubblicazioneA": "",
+   "submitButton": "doFilter"
+  },
+  "status": 200,
+  "final_url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/papca-sa?p_p_id=jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet&p_p_lifecycle=1&p_p_state=pop_up&p_p_mode=view&_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_action=eseguiOrdinamentoLista",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 57634,
+  "sha256": "3eee1464604f8d666191483f2d9cbfdbca7c0d735a538a8c3259148126426b75"
+ },
+ {
+  "url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/papca-sa?p_p_id=jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet&p_p_lifecycle=1&p_p_state=pop_up&p_p_mode=view&_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_action=eseguiOrdinamentoLista",
+  "captured_at": "2026-09-22T14:04:22.093961+00:00",
+  "kind": "discovery",
+  "referred_by": "3eee1464604f8d666191483f2d9cbfdbca7c0d735a538a8c3259148126426b75 / native Storico atti form: number135/year2021 over source-described register/act/protocol fields",
+  "method": "POST",
+  "request_data": {
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_formDate": "1790085775089",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_simpleSearchEnable": "true",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_mostraSoloLista": "true",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_searchTag": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_oggetto": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_mittente": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_annoRegistrazioneDa": "2021",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_numeroRegistrazioneDa": "135",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_dataPubblicazioneDa": "",
+   "_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_dataPubblicazioneA": "",
+   "submitButton": "doFilter"
+  },
+  "status": 200,
+  "final_url": "https://locorotondo.trasparenza-valutazione-merito.it/web/trasparenza/papca-sa?p_p_id=jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet&p_p_lifecycle=1&p_p_state=pop_up&p_p_mode=view&_jcitygovalbopubblicazioni_WAR_jcitygovalbiportlet_action=eseguiOrdinamentoLista",
+  "content_type": "text/html;charset=UTF-8",
+  "bytes": 51365,
+  "sha256": "bcc3a471862e46463636930870e05bac173d2723e5e2206853e7e80ad0970bb0"
+ },
+ {
+  "url": "http://pubblicazioni.saga.it/publishing/index.do?org=locorotondo",
+  "captured_at": "2026-09-22T14:00:18.454583+00:00",
+  "kind": "discovery",
+  "referred_by": "287bc5530377714f8b7f85c00c2cea6b60cc1bfc66578fda153516d2ff5e5da4 municipal Atti Amministrativi link",
+  "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/Websearch.nsf/SearchAlboPretorio?OpenForm",
+  "captured_at": "2026-09-22T14:10:45.236549+00:00",
+  "kind": "discovery",
+  "referred_by": "7269eacfe783861127461e9bea30cb607c03b75d597e8cf761aad1087a64ddc6 exact retained native historical search route; current app links Vecchio Albo, whose browser homepage now reports a block",
+  "status": 200,
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/Websearch.nsf/SearchAlboPretorio?OpenForm",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 28007,
+  "sha256": "be0a727514803468070180370aa9675270da73c182b925b99bae1f999bce097d"
+ },
+ {
+  "url": "https://albobari.egov.ba.it/AlboPretorio/dispatcher/alboPretorioServlet/invoke",
+  "captured_at": "2026-09-22T14:17:26.620829+00:00",
+  "kind": "discovery",
+  "referred_by": "d303dedcb98bdd013bf0076299253bdf43ee39aefe14f16b29d7580b7f9bc9fd; replay of retained public historical-mode route with its source-published request headers",
+  "method": "POST",
+  "request_data": {
+   "dataInputXml": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><filtriAlboPretorio><filtroAlbo><name>FULL_TEXT</name><value>xylella*</value></filtroAlbo></filtriAlboPretorio>",
+   "nameService": "search"
+  },
+  "public_request_headers": {
+   "isMultiEnte": "false",
+   "codEnte": "",
+   "isStorico": "true",
+   "isStoricoAut": "false"
+  },
+  "status": 500,
+  "final_url": "https://albobari.egov.ba.it/AlboPretorio/dispatcher/alboPretorioServlet/invoke",
+  "content_type": "application/json;charset=UTF-8",
+  "error": "500 Server Error:  for url: https://albobari.egov.ba.it/AlboPretorio/dispatcher/alboPretorioServlet/invoke"
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/Websearch.nsf/SearchAlboPretorio?OpenForm&Seq=1",
+  "captured_at": "2026-09-22T14:17:27.789719+00:00",
+  "kind": "discovery",
+  "referred_by": "be0a727514803468070180370aa9675270da73c182b925b99bae1f999bce097d; native Ricerca button; Oggetto xylella, other filters blank; form labels acts currently in publication",
+  "method": "POST",
+  "request_data": {
+   "__Click": "C1256FD90044E70E.86d6892536b1ff5bc1256fdb00375d33/$Body/0.2C9E",
+   "mainTextScroller": "",
+   "%%Surrogate__fdphvanqkd5o6uh3fcdqmqpbeehng_": "1",
+   "_bdphvanqicljmisrke9nk6sjfdpnmorr7d5hmu_": "",
+   "%%Surrogate__vdpivanq1dpn6uh35dhkm4pbic5t6irreck_": "1",
+   "%%Surrogate__ndphvanqdclpmah35dhkm4pbic5t6irreck_": "1",
+   "inputDataInizioPubblicazione": "",
+   "%%Surrogate__0dphvanq5dpq6ak3idto6urj5dpq6a_": "1",
+   "_ndphvanqfctjmat3kds_": "xylella",
+   "NomeForm": "SearchAlboPretorio",
+   "DB": "AlboPretorio/BA_PubblicIntranet.nsf",
+   "DB_Search": "AlboPretorio/Websearch.nsf",
+   "DB_Organigramma": "AlboPretorio/Organigr.nsf",
+   "Path_Info": "/AlboPretorio/Websearch.nsf/SearchAlboPretorio?OpenForm",
+   "SaveOptions": "0",
+   "UniqueID": "C0297F4A52922E99C1258E7A004DE11A",
+   "$PublicAccess": "1",
+   "Form": "SearchAlboPretorio",
+   "_ld1ivanq6dtp6q_": "Atti Esecutivi",
+   "_4d1ivanq9dp87aoj2dhkm6obqd5nmspajd576u_": "SI",
+   "_ndphvanqicljmisrke9nl6s35cdkm2r35_": "",
+   "_9dpivanq4c5q62ibed5t6irqgelh64r39cdgnkqbfdpig_": "",
+   "CurrentDB": "AlboPretorio/Websearch.nsf",
+   "DocsFound": "",
+   "HTML_Pages": "",
+   "NumPagina": "",
+   "NumPagine": "",
+   "Message": "",
+   "SrcQuery": "",
+   "Pages": "",
+   "serverlist": "",
+   "dbfilelist": "",
+   "dblisttitle": "",
+   "dblistdocsfound": "",
+   "Body": "",
+   "Html_Body": "",
+   "_fdphvanqkd5o6uh3fcdqmqpbeehng_": "",
+   "_vdpivanq1dpn6uh35dhkm4pbic5t6irreck_": "",
+   "_ndphvanqdclpmah35dhkm4pbic5t6irreck_": "",
+   "_0dphvanq5dpq6ak3idto6urj5dpq6a_": ""
+  },
+  "status": 200,
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/Websearch.nsf/SearchAlboPretorio?OpenForm&Seq=1",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 28160,
+  "sha256": "94bb6a42cef283e81368c4193db9fe751dbd0f7d4ba2fe008a3502a1d20b0890"
+ },
+ {
+  "url": "https://servizionline.hspromilaprod.hypersicapp.net/cmsbisceglie/portale/albopretorio/archivioalbopretorio.aspx?P=500",
+  "captured_at": "2026-09-22T14:03:43.389649+00:00",
+  "kind": "discovery",
+  "referred_by": "d90b7947268303faaccde04d6efc1d58640065db2a423c89a8ffe6bc1ce4cba8; native historical search submit returned Ricerca with Risultati disabled and no explicit zero-result statement",
+  "method": "POST",
+  "public_search_fields": {
+   "Oggetto": "xylella",
+   "Pubblicato dal": "",
+   "Pubblicato al": ""
+  },
+  "status": 200,
+  "final_url": "https://servizionline.hspromilaprod.hypersicapp.net/cmsbisceglie/portale/albopretorio/archivioalbopretorio.aspx?P=500",
+  "bytes": 149114,
+  "sha256": "a203dabd04109c5a681072922cbf88b6391174a281c3d4e587d87ab0f4522923",
+  "capture_method": "Playwright network response-body text, UTF-8 rendition; no DOM rewriting",
+  "capture_time_basis": "Time the browser network response-body rendition was saved locally"
+ },
+ {
+  "url": "https://albobari.egov.ba.it/AlboPretorio/dispatcher/alboPretorioServlet/invoke",
+  "captured_at": "2026-09-22T14:16:56.186643+00:00",
+  "kind": "discovery",
+  "referred_by": "d038f2505b15e3d8f4ec4d6668b737469d7bb913156c9a9e8be41b9400d30335; actual current-publication browser form, all date and act filters blank, annulled-publications exclusion unchecked; no historical coverage established",
+  "method": "POST",
+  "public_search_fields": {
+   "FULL_TEXT": "xylella*",
+   "NASCONDI_ANNULLATE": "",
+   "date_filters": "blank",
+   "other_filters": "blank"
+  },
+  "status": 200,
+  "final_url": "https://albobari.egov.ba.it/AlboPretorio/dispatcher/alboPretorioServlet/invoke",
+  "bytes": 12,
+  "sha256": "25ac29823ea32c588d7536a57d86d5eca0f9a65b9f951dabc9de7e8c6560ad90",
+  "capture_method": "Playwright network response-body text, UTF-8 rendition; no DOM rewriting",
+  "capture_time_basis": "Time the browser network response-body rendition was saved locally"
+ },
+ {
+  "url": "https://www.arifpuglia.it/amministrazione-trasparente/",
+  "captured_at": "2026-09-22T14:22:38.678731+00:00",
+  "kind": "discovery",
+  "referred_by": "43ca0d6abd27ade18a8d0d511594d8b99412664de33d54b94dfe62914a74720d published pre-2021 transparency link; distinguish reachable navigation from blocked current register",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/amministrazione-trasparente/",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 224333,
+  "sha256": "143d2ae830f7c8335a6bfa920751e342d271a81df499a8be741f2de6a25f20cb"
+ },
+ {
+  "url": "https://www.arifpuglia.it/trasparenza/provvedimenti-dirigenti/",
+  "captured_at": "2026-09-22T14:22:40.225174+00:00",
+  "kind": "discovery",
+  "referred_by": "1078bb7a18ee760892a66ac5dd01e7707917bb051e4006072e6b29b1e5a171b6 native Provvedimenti dirigenti link; historical executing-body acts consequential to admitted orders",
+  "status": 200,
+  "final_url": "https://www.arifpuglia.it/trasparenza/provvedimenti-dirigenti/",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 197783,
+  "sha256": "29791f8d6c8c03420f8b2c68936ddac90105ab600dcf465d1616ba6b0d0cf2e2"
+ },
+ {
+  "url": "http://hosting.soluzionipa.it/arif/trasparenza/",
+  "captured_at": "2026-09-22T14:23:33.193529+00:00",
+  "kind": "discovery",
+  "referred_by": "29791f8d6c8c03420f8b2c68936ddac90105ab600dcf465d1616ba6b0d0cf2e2 actual footer Amministrazione Trasparente link; pre-2021 Provvedimenti dirigenti category reports no content",
+  "status": 403,
+  "final_url": "http://hosting.soluzionipa.it/arif/trasparenza/",
+  "content_type": "text/html",
+  "error": "403 Client Error: Forbidden for url: http://hosting.soluzionipa.it/arif/trasparenza/"
  }
 ]

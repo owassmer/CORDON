@@ -2267,5 +2267,12 @@
   "content_type": "application/pdf",
   "bytes": 3387948,
   "sha256": "e6c72295784086bb0a559bec7fcc7f564a1d47e3f496732a7b59ca7c6118436a"
+ },
+ {
+  "url": "https://www.halleyweb.com/c110006/po/attachment_news.php?id=1589",
+  "captured_at": "2026-09-22T14:05:50.705972+00:00",
+  "kind": "act",
+  "referred_by": "Official municipal Minervino published DDS65/2025 attachment route, recovered through primary-source web search after native municipal news connection reset",
+  "error": "('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))"
  }
 ]

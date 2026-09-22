@@ -55,6 +55,62 @@ class DocumentSubscriptionTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             self.read(effort='medium')
 
+    def test_native_html_keeps_complete_source_and_no_fictitious_page(self):
+        html = ('<!doctype html><html><head><meta charset="utf-8"></head><body>\n'
+                '<nav>Other work</nav><article><h1>Reported work</h1>\n'
+                '<p>Completed before the meeting; exact day unstated.</p>'
+                '<img src="https://example.invalid/photo"><script>remote()</script>'
+                '</article></body></html>')
+        digest = put_bytes(self.store, html.encode())
+        with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}') as call:
+            result = read_documents([digest], self.store, prompt='Read the reported work.',
+                                    schema=self.schema, execute=True,
+                                    source_formats={digest: 'text/html'})
+            supplied, _, images, *_ = call.call_args.args
+            self.assertIn(html, supplied)
+            self.assertIn('No scripts are executed or linked assets supplied', supplied)
+            self.assertNotIn('PHYSICAL PAGE', supplied)
+            self.assertEqual(images, [])
+            self.assertEqual(result['request']['source_formats'], {digest: 'text/html'})
+            replay = read_documents([digest], self.store, prompt='Read the reported work.',
+                                    schema=self.schema, source_formats={digest: 'text/html'})
+            self.assertEqual(replay, result)
+            self.assertEqual(call.call_count, 1)
+            with self.assertRaises(FileNotFoundError):
+                read_documents([digest], self.store, prompt='Read the reported work.',
+                               schema=self.schema, source_formats={digest: 'text/plain'})
+
+    def test_native_text_context_preserves_pdf_image_and_source_order(self):
+        digest = put_bytes(self.store, b'Complete native context\nincluding its qualification.')
+        captured = []
+
+        def call(prompt, schema, images, *options):
+            captured.extend(image.read_bytes() for image in images)
+            return '{"direction":"proposed"}'
+
+        with patch('cordon_d.document_subscription._call', side_effect=call):
+            result = read_documents([digest, self.digests[0]], self.store, prompt='Read sources.',
+                                    schema=self.schema, execute=True,
+                                    source_formats={digest: 'text/plain'})
+        self.assertEqual(len(captured), 1)
+        self.assertLess(result['request']['prompt'].index(digest),
+                        result['request']['prompt'].index(self.digests[0]))
+        pdf = self.store / 'blobs/sha256' / self.digests[0][:2] / self.digests[0]
+        with pymupdf.open(pdf) as document:
+            self.assertEqual(captured[0], document[0].get_pixmap(dpi=180).tobytes('png'))
+
+    def test_native_text_declaration_never_silently_changes_supplied_bytes(self):
+        digest = put_bytes(self.store, b'\xffnot UTF-8')
+        with patch('cordon_d.document_subscription._call') as call:
+            for formats in ({'f' * 64: 'text/html'}, {digest: 'image/png'}):
+                with self.assertRaises(ValueError):
+                    read_documents([digest], self.store, prompt='Read.', schema=self.schema,
+                                   execute=True, source_formats=formats)
+            with self.assertRaises(UnicodeDecodeError):
+                read_documents([digest], self.store, prompt='Read.', schema=self.schema,
+                               execute=True, source_formats={digest: 'text/html'})
+            call.assert_not_called()
+
     def test_default_presentation_preserves_original_request_identity(self):
         prompt = ('Read the act and incorporated annex.\nOriginal source images follow in '
                   'document order, then physical page order. Source hashes identify bytes, '

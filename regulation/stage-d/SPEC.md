@@ -340,6 +340,14 @@ relationships, qualifications, validation and publication of accepted readings
 remain with that reader. The transport returns a proposed reading, never a
 completion or legal-effect assertion.
 
+Callers may explicitly supply complete native UTF-8 HTML or plain text through
+`source_formats`. Those bytes are hash-checked and included verbatim; no scripts
+run, linked resources load, or physical pages get invented. Mixed requests retain
+their supplied order and the complete PDF views. Format declarations enter request
+identity only when supplied, preserving existing PDF-only identities. The caller
+must establish whether the native source carries the relevant meaning; this option
+cannot stand in for visual reading where layout or omitted assets matter.
+
 The measure caller also requests supplemental complete-page views when exact,
 non-reflected image-placement geometry establishes a quarter-turn. The page's own
 rotation is included. All original pages remain first and unchanged; supplemental
@@ -457,6 +465,22 @@ or unsupplied documents remain unselected. The consumer does not resolve free pr
 by matching numbers or filenames. Earlier references without selections supply no document binding; their existing
 native per-row associations remain consumable.
 
+Administrative references may additionally carry source-supported typed act
+components: issuing authority, literal issuer, number, year and adoption date.
+Unstated components remain null; the principal act does not lend its identity to a
+reference. `MeasureReading.referenced_measures(readings)` corresponds these claims
+to existing measure readings, or resolves a selected document by its principal
+source hash. It preserves the original reference, affected payload, candidates,
+conflicts and missing correspondence. Resolved authority, number and year may
+identify an act without a separately stated literal issuer; adoption dates, when
+stated, must agree. Multiple candidate readings remain ambiguous. An incompatible
+document selection remains unresolved without suppressing an independently
+supported reference. Context hashes never substitute for principal identities.
+This operation does not select an operative version, apply a correction, combine
+work populations or import predecessor targets. Those meanings need their own
+source support. Older retained readings replay without fabricated act components;
+absence of a structured administrative identity remains a reading limitation.
+
 `MeasureReading.finding_links(joined, report_readings)` connects prescribed positions
 to ordinary `findings()` and `report_rows()` outputs. Its report population comes
 from existing native per-row report associations or explicit document selections,
@@ -492,3 +516,28 @@ legal truth. Qualification requires independently read originals and an actual
 consumer connection; schema validity, page counts and retained responses cannot
 establish it. The subject-population owner still supplies plants, parcels and
 protected-status populations; the measure's named positions do not establish title.
+
+## Official performance reports
+
+`cordon_d.performance` reads complete retained native HTML through the same
+subscription transport and replays an explicit retained request offline. It keeps
+the reporting document, stated operation, literal work scope, performer/reporting
+actor, timing, source citations and limitations. A direct record, an official
+reported event and an intended operation remain distinct. Native CSS selectors
+must locate one source element and support a contiguous quotation; scripts, styles
+and template content cannot supply visible evidence. Unknown exact dates retain
+their causes and the actual timing statement. A publication date alone cannot
+become the operation date. These checks verify source addresses and structural
+distinctions, not semantic truth.
+
+`PerformanceReading.removal_occurrences()` exposes actual direct or reported
+removal with existing `Support` objects and retained model-reading provenance.
+Intentions and other work remain in the reading but do not become removal
+occurrences. Literal outbreak-level performance can be useful even when the
+source supplies no exact day, executor or target list. The consumer retains that
+scope; without a supported prescription/target correspondence and sufficient work
+coverage, it establishes no per-target completion assertion or clock anchor.
+Qualification requires independent reading of the original reports. A municipal
+service certificate enters this chain only through a supported relationship to
+required removal or treatment; its existence does not admit an unrelated service
+or procurement workflow. INPUTS row 11 owns current source coverage and limits.

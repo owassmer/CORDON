@@ -163,6 +163,32 @@ class JoinIdentity(unittest.TestCase):
         self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Olivo\n(Olea\neuropaea)'}}}), 'conflicts')
         self.assertEqual(row.cells[-1]['text'], 'Prunus\ndulcis')
 
+    def test_host_binomial_tolerates_only_redundant_terminal_delimiters(self):
+        from copy import deepcopy
+        from types import SimpleNamespace
+        from cordon_d.findings import _host_relation
+        plain = 'Fagus\nsylvatica'
+        for labelled in ('Faggio (Fagus sylvatica)', 'Faggio\n(Fagus\nsylvatica))',
+                         'Faggio (Fagus sylvatica)))'):
+            for reported, associated in ((plain, labelled), (labelled, plain)):
+                with self.subTest(reported=reported, associated=associated):
+                    row = SimpleNamespace(cells=[{'role': 'host', 'text': reported}])
+                    association = {'fields': {'host': {'text': associated}}}
+                    before = deepcopy((row.cells, association))
+                    self.assertEqual(_host_relation(row, association), 'agrees on printed host')
+                    self.assertEqual((row.cells, association), before)
+        row = SimpleNamespace(cells=[{'role': 'host', 'text': plain}])
+        for text in ('Faggio (Fagus orientalis))',
+                     'Faggio (Fagus sylvatica / Betula pendula))',
+                     'Faggio (cf. Fagus sylvatica))',
+                     'Faggio (Fagus sylvatica var. purpurea))',
+                     'Faggio (Fagus sylvatica)) da verificare'):
+            with self.subTest(text=text):
+                association = {'fields': {'host': {'text': text}}}
+                before = deepcopy((row.cells, association))
+                self.assertEqual(_host_relation(row, association), 'conflicts')
+                self.assertEqual((row.cells, association), before)
+
     def test_continued_record_without_complete_duplicate_reaches_consumer(self):
         joined, reverse = self.run_join([('00123', '2024-06-01')],
             [['00123', '01/06/2024', 'Positivo', '02/06/2024']], continued=True)

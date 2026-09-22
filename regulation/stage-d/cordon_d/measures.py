@@ -68,7 +68,13 @@ SCHEMA = _object(
                                                   'supplements', 'adopted-geography',
                                                   'laboratory-evidence', 'governing-law', 'other'),
                              affected_payload=TEXT, support=CITATIONS,
-                             documents=_array(_object(source=TEXT, support=CITATIONS)))),
+                             documents=_array(_object(source=TEXT, support=CITATIONS)),
+                             acts=_array(_object(
+                                 issuer=OPTIONAL_TEXT,
+                                 authority=_choice('puglia-osservatorio', 'other', 'unresolved'),
+                                 number=OPTIONAL_TEXT,
+                                 year={'type': ['string', 'null'], 'pattern': '^[0-9]{4}$'},
+                                 adopted=OPTIONAL_TEXT, support=CITATIONS)))),
     events=_array(_object(kind=TEXT, document_reference=TEXT, sender=OPTIONAL_TEXT,
                          recipient=OPTIONAL_TEXT,
                          evidence=_choice('direct-record', 'reported-event', 'intended', 'blank-form'),
@@ -278,6 +284,11 @@ class MeasureReading:
         return measure_findings(self, report_population=self.report_population(report_readings),
                                 findings=joined, report_rows=tuple(report_rows(report_readings, joined)))
 
+    def referenced_measures(self, readings):
+        """Correspond source references to existing readings without applying their scope."""
+        from .measure_references import referenced_measures
+        return referenced_measures(self, readings)
+
     def administrative_events(self):
         """Exact dated facts about this measure; instructions never become events.
 
@@ -347,6 +358,11 @@ def _validate_reading(reading, sources, store, material):
     for reference in reading.get('references', []):
         selected_sources = set()
         citing_sources = {c['source'] for c in reference['support']}
+        for act in reference.get('acts', []):
+            if not ({c['source'] for c in act['support']} & citing_sources):
+                raise ValueError('Referenced act identity needs support from its citing source')
+            if act['adopted'] is not None:
+                date.fromisoformat(act['adopted'])
         for selected in reference.get('documents', []):
             source = selected['source']
             if source not in counts or source == sources[0] or source in selected_sources:
@@ -448,6 +464,7 @@ def retained_measure(request_id, store):
     compatible = deepcopy(response['reading'])
     for reference in compatible['references']:
         reference.setdefault('documents', [])
+        reference.setdefault('acts', [])
     for scope in compatible['target_scopes']:
         for column in scope['columns']:
             # Earlier readings select only the physical row's own field cell.

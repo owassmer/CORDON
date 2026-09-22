@@ -215,8 +215,9 @@ def _host_relation(row, association):
     def labels(value):
         value = ' '.join(value.split())
         result = {norm(value), norm(re.sub(r'\s*\([^)]*\)\s*$', '', value))}
-        # A printed binomial beside a common name is an explicit second label.
-        match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)\s*$', value)
+        # A printed binomial beside a common name is an explicit second label;
+        # redundant closing delimiters do not change that label.
+        match = re.search(r'\(([A-Z][a-z]+ [a-z]+)\)+\s*$', value)
         if match:
             result.add(norm(match[1]))
         return result
