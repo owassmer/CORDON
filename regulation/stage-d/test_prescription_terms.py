@@ -87,6 +87,21 @@ class PrescriptionTerms(unittest.TestCase):
         self.assertIsNone(result.effect)
         self.assertTrue(any('legally sufficient notification' in need for need in result.needs))
 
+    def test_combined_parent_keeps_its_meaning_without_overconstraining_the_term(self):
+        self.direction.update(mode='ordered-now', work='other',
+            scope='Immediate treatment and removal directions with a distinct conditional consequence')
+        result = self.bind()
+        self.assertIs(result['direction'], self.direction)
+        self.assertEqual(result['direction']['mode'], 'ordered-now')
+        self.assertEqual(str(result['term'].magnitude), '3')
+        evaluation = evaluate(self.snapshot,
+            'SOURCE-CLAUSE:notification-noncommencement-direction', self.at, {})
+        self.assertIsNone(evaluation.truth)
+        self.assertIsNone(evaluation.effect)
+        self.component['performance'] = 'completion'
+        with self.assertRaisesRegex(ValueError, 'Source performance is outside this'):
+            self.bind()
+
     def test_different_source_forms_cannot_borrow_the_notification_clock(self):
         for owner, field, value in [('component', 'trigger', 'other'),
                                     ('component', 'performance', 'completion'),

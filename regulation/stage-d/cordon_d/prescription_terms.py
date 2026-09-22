@@ -39,8 +39,6 @@ def measure_prescribed_term(snapshot, at, measure, direction_id, component_index
     if 'bound' not in period:
         raise MissingInput('Source period bound is unavailable')
     for name, value, required in (
-            ('direction mode', direction['mode'], 'conditional-order'),
-            ('direction work', direction['work'], 'removal'),
             ('trigger', component['trigger'], 'noncommencement'),
             ('performance', component['performance'], 'concrete-commencement'),
             ('anchor', period['anchor'], 'notification'),
