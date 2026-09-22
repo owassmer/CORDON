@@ -768,8 +768,14 @@ def materialize(digest, version, page_count, blocks):
                             locator=f"{value['locator']}/fact:{fact['id']}",
                             basis='literal component of a reader-selected source cell',
                             source_fragments=(value,), source_span=component['span'], support=(fact,))
-                        if value.get('reading_issues'):
-                            field['reading_issues'] = value['reading_issues']
+                        # Fact IDs belong to this block. A precise issue constrains
+                        # that component; a broader parent issue still travels with it.
+                        component_issues = field_issues + tuple(issue for issue in data['issues']
+                            if issue not in field_issues and re.search(
+                                r'(?<![\w/-])' + re.escape(component['fact']['id']) + r'(?![\w/-])',
+                                issue['scope']))
+                        if component_issues:
+                            field['reading_issues'] = component_issues
                         if fact['role'] == 'identifier':
                             field.update(identifier=fact['value'], identifier_authority=None, authority_support=())
                         cells.append(field)

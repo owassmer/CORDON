@@ -211,6 +211,70 @@ class CompoundFields(unittest.TestCase):
         self.assertEqual(_coordinate_relation(row, {'fields': {'latitude': {'text': '41.123456789'},
             'longitude': {'text': '16.987654321'}}}), 'unresolved')
 
+    def test_unassigned_numeric_fact_issue_does_not_constrain_host(self):
+        from cordon_d.findings import _host_relation, _coordinate_relation
+        item = compound_block()
+        item['reading']['facts'] = [f for f in item['reading']['facts']
+                                    if f['role'] not in {'latitude', 'longitude'}]
+        item['reading']['facts'].append(dict(id='numeric-pair', role='other', page=1,
+            locator='specimen clause', text='16.987654321; North: 41.123456789',
+            value='16.987654321; North: 41.123456789', applies_to=['p1/p1-t1/r1/c5']))
+        issue = {'scope': 'numeric-pair', 'cause': 'The reading does not establish these numeric roles'}
+        item['reading']['issues'] = [issue]
+        reading = materialize('source', 'v', 1, [item])
+        row = reading.rows[0]
+        self.assertEqual(reading.issues, (issue,))
+        self.assertTrue(any(f['id'] == 'b1/numeric-pair' for f in row.facts))
+        self.assertFalse(any(c.get('reading_issues') for c in row.cells if c.get('source_span')))
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Fictiona nova'}}}),
+                         'agrees on printed host')
+        self.assertEqual(_coordinate_relation(row, {'fields': {'latitude': {'text': '41.123456789'},
+            'longitude': {'text': '16.987654321'}}}), 'unresolved')
+
+    def test_component_fact_issue_constrains_only_its_selected_component(self):
+        from cordon_d.findings import _host_relation, _coordinate_relation
+        item = compound_block()
+        issue = {'scope': 'host', 'cause': 'The host role remains unresolved'}
+        item['reading']['issues'] = [issue]
+        row = materialize('source', 'v', 1, [item]).rows[0]
+        fields = {c['role']: c for c in row.cells if c.get('source_span')}
+        self.assertEqual(fields['host']['reading_issues'], (issue,))
+        self.assertTrue(all(not c.get('reading_issues') for role, c in fields.items() if role != 'host'))
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Fictiona nova'}}}), 'unresolved')
+        self.assertEqual(_coordinate_relation(row, {'fields': {'latitude': {'text': '41.123456789'},
+            'longitude': {'text': '16.987654321'}}}), 'agrees at published decimal precision')
+
+    def test_broad_column_issue_still_constrains_all_components(self):
+        item = compound_block()
+        issue = {'scope': 'p1-t1/c5', 'cause': 'The complete descriptive column is unresolved'}
+        item['reading']['issues'] = [issue]
+        row = materialize('source', 'v', 1, [item]).rows[0]
+        self.assertTrue(all(c['reading_issues'] == (issue,) for c in row.cells if c.get('source_span')))
+        self.assertEqual(next(c for c in row.cells if c['role'] == 'other')['reading_issues'], (issue,))
+
+    def test_component_fact_issue_never_crosses_block_or_fact_id_boundaries(self):
+        first, second = compound_block(), compound_block()
+        issue = {'scope': 'host', 'cause': 'The first block host remains unresolved'}
+        first['reading']['issues'] = [issue]
+        second['targets'] = second['reading']['context_pages'] = [2]
+        second['reading']['pages'][0]['page'] = 2
+        table = second['reading']['tables'][0]
+        table.update(id='p2-t1', page=2)
+        for column in table['columns']:
+            for support in column['support']:
+                support['page'] = 2
+        for fact in second['reading']['facts']:
+            fact['page'] = 2
+            fact['applies_to'] = [scope.replace('p1', 'p2') for scope in fact['applies_to']]
+            if fact.get('section'):
+                fact['section'] = fact['section'].replace('p1', 'p2')
+        second['reading']['issues'] = [{'scope': 'host-note', 'cause': 'Different fact ID remains unresolved'}]
+        rows = materialize('source', 'v', 2, [first, second]).rows
+        first_host = next(c for c in rows[0].cells if c['role'] == 'host')
+        second_host = next(c for c in rows[2].cells if c['role'] == 'host')
+        self.assertEqual(first_host['reading_issues'], (issue,))
+        self.assertNotIn('reading_issues', second_host)
+
 
 class LiteralReport(unittest.TestCase):
     def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):

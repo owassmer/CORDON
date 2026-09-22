@@ -129,6 +129,11 @@ already typed field. Keep any qualification attached to the actual component fac
 cell or printed section it constrains. If a relevant component or its role remains
 unrecovered or ambiguous, name that reading limitation in issues; do not silently
 leave a readable compound cell unexamined or claim source silence.
+Scope a component-only issue to that component's fact ID, not to the whole cell
+or column. If a readable clause has an unresolved role, retain it as an other
+fact with its literal text/value and exact cell selector, and scope the issue to
+that fact ID. Whole-cell or column limitations keep their broader scope. Do not
+omit an issue or narrow its scope merely to make a component usable.
 Capture document identity, issuer, distinct date labels, received versus listed
 sample counts, annex/correction references, result qualifications and relevant
 notes. Preserve their actual scope. A test, analyte or qualification from the
