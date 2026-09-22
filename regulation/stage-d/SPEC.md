@@ -70,8 +70,10 @@ unoccurred declarations.
 recipient or competent publisher before invoking accepted B/C calculations.
 The caller supplies the calendar; `national_calendar()` retains its local-holiday
 limitation. Prescribed terms remain subject to their accepted A–C type and clock.
-A declared posting interval does not prove uninterrupted posting, recipient
-notification, response, default or performance.
+A declared posting interval does not prove uninterrupted posting. Complete
+publication certificates supply their own attested interval; unresolved act
+identity can be connected through the acquired certificate and principal routes.
+Neither record supplies recipient notification, response, default or performance.
 
 ## Where bytes live
 
@@ -311,8 +313,9 @@ named request offline without dispatch. Request identity binds source hashes,
 prompt, schema, rendered images, model, effort and transport version. Raw responses
 and provenance remain retained; invalid JSON, non-finite numbers or schema failures
 cannot become returned readings. Identical requests share a lock and successful
-response. Schema references resolve locally; source-reading calls have no API-key
-fallback, shell, web or agent tools. Runtime settings remain with the implementation.
+response. Schema references resolve locally. CLI dispatch disables API-key fallback,
+shell, web and agent tools; retained requests preserve the actual provider and source
+presentation used. Runtime settings remain with the implementation.
 
 ## Removal-measure reading
 
@@ -384,7 +387,8 @@ Current source populations and unresolved work belong in [INPUTS.md](INPUTS.md).
 [performance](cordon_d/performance.py) reads complete retained native HTML and
 replays explicit requests offline. Source selectors support the stated operation,
 actor, timing, work scope and limitations. `removal_occurrences()` exposes direct
-or officially reported removal; intentions remain separate. Publication dates do
+or officially reported removal with its source document and reading limitations;
+intentions remain separate. Publication dates do
 not become operation dates. An outbreak-level report can supply useful evidence
 without an exact day or target list, but per-target completion requires supported
 prescription/target correspondence and sufficient work coverage. Coverage and

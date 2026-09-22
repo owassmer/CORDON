@@ -1,5 +1,5 @@
 """Attach actual administrative records to issued measures and accepted clocks."""
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, datetime
 from html import unescape
 import json
@@ -30,6 +30,229 @@ class Publication:
     source_fields: dict
     events: tuple[AdministrativeEvent, ...]
     support: Support
+
+
+def _object(**properties):
+    return dict(type='object', properties=properties, required=list(properties),
+                additionalProperties=False)
+
+
+_TEXT = {'type': 'string'}
+_CAUSE = {'type': ['string', 'null'], 'enum': [None, 'source-not-stated', 'unreadable',
+                                           'not-recovered', 'not-supplied', 'conflict']}
+_CITATIONS = {'type': 'array', 'items': _object(source=_TEXT,
+    page={'type': 'integer', 'minimum': 1}, locator=_TEXT, quote=_TEXT), 'minItems': 1}
+_VALUE = _object(value={'type': ['string', 'null']}, cause=_CAUSE,
+                 support=dict(_CITATIONS, minItems=0))
+PUBLICATION_ATTESTATION_SCHEMA = _object(
+    publisher=_VALUE, register_reference=_VALUE, document_reference=_TEXT,
+    act=_object(authority=_object(**dict(_VALUE['properties'], value={
+        'type': ['string', 'null'], 'enum': [None, 'puglia-osservatorio', 'other']})),
+        number=_VALUE, adopted=_VALUE),
+    period=_object(start=_VALUE, end=_VALUE,
+        coverage={'type': 'string', 'enum': ['completed-interval', 'partial-publication',
+                                           'intended', 'blank-form', 'unresolved']},
+        statement=_TEXT, qualification={'type': ['string', 'null']}, support=_CITATIONS),
+    signer=_VALUE, signature_statement=_VALUE, issued_on=_VALUE,
+    issues={'type': 'array', 'items': _object(aspect=_TEXT,
+        cause=dict(_CAUSE, type='string', enum=_CAUSE['enum'][1:]), detail=_TEXT)},
+    support=_CITATIONS,
+)
+PUBLICATION_ATTESTATION_PROMPT = (
+    Path(__file__).resolve().parents[1] / 'publication-attestation-reading.txt').read_text()
+
+
+def _attestation(response, store):
+    """Validate a PDF reading and expose its own claims, not source qualification."""
+    import pymupdf
+    from jsonschema import Draft202012Validator
+    from .store import blob_path
+
+    request, reading = response['request'], response['reading']
+    if (request['schema'] != PUBLICATION_ATTESTATION_SCHEMA
+            or len(request['sources']) != 1 or request.get('source_formats')):
+        raise ValueError('Publication attestation requires its exact single-PDF contract')
+    Draft202012Validator(PUBLICATION_ATTESTATION_SCHEMA).validate(reading)
+    source, = request['sources']
+    path = blob_path(Path(store), source)
+    if file_digest(path) != source:
+        raise ValueError('Attestation source bytes do not match their hash')
+    with pymupdf.open(path) as document:
+        pages = len(document)
+
+    def visit(item):
+        if isinstance(item, dict):
+            if set(item) == {'source', 'page', 'locator', 'quote'}:
+                if (item['source'] != source or not 1 <= item['page'] <= pages
+                        or not item['locator'].strip() or not item['quote'].strip()):
+                    raise ValueError('Attestation citation requires its source page, locator and quotation')
+            if set(item) == {'value', 'cause', 'support'}:
+                if item['value'] is None:
+                    if item['cause'] is None:
+                        raise ValueError('An unrecovered component needs its own absence cause')
+                elif not item['value'].strip() or item['cause'] is not None or not item['support']:
+                    raise ValueError('A recovered component needs support and no absence cause')
+            for value in item.values():
+                visit(value)
+        elif isinstance(item, list):
+            for value in item:
+                visit(value)
+    visit(reading)
+    components = {key: reading[key] for key in ('publisher', 'register_reference',
+                                               'signer', 'signature_statement', 'issued_on')}
+    components.update({'act.' + key: value for key, value in reading['act'].items()})
+    components.update({'period.' + key: reading['period'][key] for key in ('start', 'end')})
+    for issue in reading['issues']:
+        if issue['cause'] != 'conflict':
+            continue
+        aspect = issue['aspect']
+        if aspect == 'period.coverage':
+            if reading['period']['coverage'] != 'unresolved':
+                raise ValueError('Conflicting publication coverage must remain unresolved')
+        elif aspect not in components:
+            raise ValueError('A conflict must name its exact existing component path')
+        elif components[aspect]['value'] is not None or components[aspect]['cause'] != 'conflict':
+            raise ValueError('A conflicting component must be null with cause conflict')
+    for item in [reading['act']['adopted'], reading['period']['start'],
+                 reading['period']['end'], reading['issued_on']]:
+        if item['value'] is not None and date.fromisoformat(item['value']).isoformat() != item['value']:
+            raise ValueError('A recovered day must use an exact ISO date')
+    number = reading['act']['number']['value']
+    if number is not None and (not number.isdecimal() or int(number) < 1):
+        raise ValueError('Act number must be its source-supported numeric component')
+    period = reading['period']
+    if not period['statement'].strip():
+        raise ValueError('Preserve the source publication statement or unreadable-area description')
+    document, adopted = None, None
+    if (reading['act']['authority']['value'] == 'puglia-osservatorio'
+            and number and reading['act']['adopted']['value']):
+        adopted = date.fromisoformat(reading['act']['adopted']['value'])
+        document = act_id(number, adopted.year)
+    citation = reading['support'][0]
+    support = Support(source, f"page:{citation['page']}/{citation['locator']}", citation['quote'])
+    publication = Publication(source + ':publication-attestation', reading['publisher']['value'] or '',
+        document, adopted, dict(attestation=reading, request_sha256=response['request_sha256'],
+        reading_captured_at=response.get('captured_at'), provenance='model_proposed_reading',
+        attachment_issues=[], period_conflicts={}), (), support)
+    return _attestation_events(publication)
+
+
+def _attestation_events(publication):
+    reading = publication.source_fields['attestation']
+    period = reading['period']
+    conflicts = dict(publication.source_fields['period_conflicts'])
+    start, end = (period[key]['value'] for key in ('start', 'end'))
+    if start and end and end < start:
+        conflicts.update(start='Attested end precedes start', end='Attested end precedes start')
+    captured = publication.source_fields.get('reading_captured_at')
+    if captured is not None:
+        captured = datetime.fromisoformat(captured)
+        if captured.tzinfo is not None:
+            known_day = captured.astimezone(ZoneInfo('Europe/Rome')).date().isoformat()
+            for key in ('start', 'end'):
+                if period[key]['value'] and period[key]['value'] > known_day:
+                    conflicts[key] = 'Attested day follows capture of the source reading'
+    events = []
+    if publication.document and publication.publisher:
+        for key in ('start', 'end'):
+            completed = period['coverage'] == 'completed-interval'
+            actual = completed or (key == 'start' and period['coverage'] == 'partial-publication')
+            value = period[key]
+            if not actual or value['value'] is None or key in conflicts:
+                continue
+            cite = value['support'][0]
+            support = Support(cite['source'], f"page:{cite['page']}/{cite['locator']}",
+                              period['coverage'] + ': ' + period['statement'] + '; ' + cite['quote'])
+            kind = 'municipal-publication-' + key
+            events.append(AdministrativeEvent(publication.identity + ':' + kind, kind,
+                publication.document, None, date.fromisoformat(value['value']), support))
+    return replace(publication, events=tuple(events),
+                   source_fields=dict(publication.source_fields, period_conflicts=conflicts))
+
+
+def read_publication_attestation(source, store, *, execute=False, **options):
+    """Read one complete certificate; unresolved act identity does not erase its interval."""
+    from .document_subscription import read_documents
+    response = read_documents((source,), Path(store), prompt=PUBLICATION_ATTESTATION_PROMPT,
+        schema=PUBLICATION_ATTESTATION_SCHEMA, execute=execute, **options)
+    return _attestation(response, store)
+
+
+def retained_publication_attestation(request_id, store):
+    """Replay the named certificate reading without rereading a principal or dispatching."""
+    from .document_subscription import read_retained
+    return _attestation(read_retained(request_id, Path(store)), store)
+
+
+def connect_publication_attestation(attestation, publications, *, acquisitions):
+    """Use an acquired certificate route and its exact native register occurrence.
+
+    The native declaration's existing attachment binder owns principal identity.
+    This connection supplies no identity from filenames, subjects or protocols.
+    Certificate claims survive unavailable or conflicting declaration connections.
+    """
+    acquisitions = tuple(acquisitions)
+    reading = attestation.source_fields['attestation']
+    routes = _acquired_routes(acquisitions)
+    issues, matched = [], []
+    for publication in publications:
+        values = publication.source_fields
+        if not any(attestation.support.source in routes.get(link['url'], ())
+                   for link in values.get('document_routes', ())):
+            continue
+        fields = values.get('source_fields', {})
+        reference = fields.get('N. Repertorio Albo', fields.get('Nro'))
+        if (not reading['publisher']['value'] or not reading['register_reference']['value']
+                or compact(publication.publisher).casefold() != compact(attestation.publisher).casefold()
+                or reference != reading['register_reference']['value']):
+            issues.append(dict(publication=publication.identity,
+                               cause='Certificate publisher or repertory does not match the native declaration'))
+            continue
+        matched.append(publication)
+    candidates = {(p.document, p.document_date) for p in matched
+                  if p.document is not None and p.document_date is not None}
+    document, adopted = attestation.document, attestation.document_date
+    if any(component['cause'] == 'conflict' for component in reading['act'].values()):
+        document, adopted = None, None
+        issues.append(dict(cause='Certificate act component remains in conflict; native attachment cannot resolve it'))
+    elif len(candidates) > 1:
+        document, adopted = None, None
+        issues.append(dict(cause='Native attachments resolve to competing act identities or adoption dates'))
+    elif candidates:
+        candidate, candidate_date = next(iter(candidates))
+        act = reading['act']
+        number, stated_date = act['number']['value'], act['adopted']['value']
+        contradicts = (act['authority']['value'] == 'other'
+            or (number and candidate != act_id(number, candidate_date.year))
+            or (stated_date and stated_date != candidate_date.isoformat())
+            or (document and (document, adopted) != (candidate, candidate_date)))
+        if contradicts:
+            document, adopted = None, None
+            issues.append(dict(cause='Certificate act components conflict with the acquired native attachment'))
+        else:
+            document, adopted = candidate, candidate_date
+    elif not document:
+        issues.append(dict(cause=('Matching native declaration has no resolved principal identity'
+                                  if matched else 'No matching acquired native certificate route and repertory')))
+    conflicts = dict(attestation.source_fields['period_conflicts'])
+    for publication in matched:
+        for key, field in [('start', 'Data inizio pubb.'), ('end', 'Data fine pubb.')]:
+            declared = publication.source_fields.get('declared_dates', {}).get(field)
+            certified = reading['period'][key]['value']
+            if declared and certified and declared != certified:
+                conflicts[key] = 'Certified date conflicts with the native register declaration'
+    for record in acquisitions:
+        if record.get('sha256') == attestation.support.source and record.get('captured_at'):
+            captured = datetime.fromisoformat(record['captured_at'])
+            if captured.tzinfo is not None:
+                for key in ('start', 'end'):
+                    day = reading['period'][key]['value']
+                    if day and day > captured.astimezone(ZoneInfo('Europe/Rome')).date().isoformat():
+                        conflicts[key] = 'Attested day follows acquisition of the certificate'
+    return _attestation_events(replace(attestation, document=document, document_date=adopted,
+        publisher=matched[0].publisher if matched else attestation.publisher,
+        source_fields=dict(attestation.source_fields, attachment_issues=issues,
+            declarations=tuple(matched), period_conflicts=conflicts)))
 
 
 def publication_records(path: Path):
@@ -134,11 +357,22 @@ def domino_publication(path, *, publisher, source_url, measures, acquisitions):
     return next(_attached_publications((row,), measures=measures, acquisitions=acquisitions))
 
 
+def _acquired_routes(acquisitions):
+    routes = {}
+    for record in acquisitions:
+        if record.get('sha256'):
+            for key in ('url', 'final_url'):
+                if record.get(key):
+                    routes.setdefault(record[key], set()).add(record['sha256'])
+    return routes
+
+
 def _attached_publications(rows, *, measures, acquisitions):
     """Share only acquired-route attachment and dated declaration event handling."""
     rows = tuple(rows)
+    acquisitions = tuple(acquisitions)
     source_digests = {row.sha256 for row in rows}
-    routes = {}
+    routes = _acquired_routes(acquisitions)
     capture_days = {}
     for record in acquisitions:
         if record.get('sha256') in source_digests and record.get('captured_at'):
@@ -146,10 +380,6 @@ def _attached_publications(rows, *, measures, acquisitions):
             if captured.tzinfo is not None:
                 capture_days.setdefault(record['sha256'], []).append(
                     captured.astimezone(ZoneInfo('Europe/Rome')).date())
-        if record.get('sha256'):
-            for key in ('url', 'final_url'):
-                if record.get(key):
-                    routes.setdefault(record[key], set()).add(record['sha256'])
     originals = {}
     for measure in measures:
         digest = measure.response['request']['sources'][0]

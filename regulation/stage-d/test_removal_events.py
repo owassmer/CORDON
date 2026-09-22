@@ -339,3 +339,257 @@ class RetainedRegionalPublication(unittest.TestCase):
             p = regional_publication(path)
             self.assertEqual(p.events, ())
             self.assertEqual(p.source_fields['Data Fine Pubblicazione'], '2026-06-11 23:59:59.0')
+
+
+class PublicationAttestation(unittest.TestCase):
+    """Synthetic source/consumer boundaries, not qualifications of actual certificates."""
+    def setUp(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.removal_events import PUBLICATION_ATTESTATION_SCHEMA
+        temporary = TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.store = Path(temporary.name)
+        with pymupdf.open() as pdf:
+            pdf.new_page().insert_text((30, 30), 'Publication certificate; completed interval.')
+            pdf.new_page().insert_text((30, 30), 'Printed signature claim, not verified.')
+            self.source = put_bytes(self.store, pdf.tobytes())
+        self.reading = dict(publisher=self.value('Unseen municipality'),
+            register_reference=self.value('2026/Albo/9876'), document_reference='DDS 991 of 6 May 2024',
+            act=dict(authority=self.value('puglia-osservatorio'), number=self.value('991'),
+                     adopted=self.value('2024-05-06')),
+            period=dict(start=self.value('2024-05-08'), end=self.value('2024-05-15'),
+                        coverage='completed-interval', statement='Publication is certified from 8 to 15 May.',
+                        qualification=None, support=[self.cite()]),
+            signer=self.value('Example signer'), signature_statement=self.value('Printed signature claim'),
+            issued_on=self.value(), issues=[], support=[self.cite()])
+        self.response = dict(request=dict(sources=[self.source], schema=PUBLICATION_ATTESTATION_SCHEMA),
+                             request_sha256='a'*64, reading=self.reading)
+
+    def cite(self):
+        return dict(source=self.source, page=1, locator='publication clause',
+                    quote='completed interval')
+
+    def value(self, value=None, cause='source-not-stated'):
+        return dict(value=value, cause=cause if value is None else None,
+                    support=[] if value is None else [self.cite()])
+
+    def read(self):
+        from cordon_d.removal_events import _attestation
+        return _attestation(self.response, self.store)
+
+    def declaration(self, **changes):
+        from cordon_d.evidence import Support
+        from cordon_d.removal_events import Publication
+        return replace(Publication('native-row', 'Unseen municipality',
+            'REG-PUGLIA-U181-DIR-2024-00991', date(2024, 5, 6),
+            dict(source_fields={'N. Repertorio Albo': '2026/Albo/9876'},
+                 document_routes=[{'url': 'https://example.org/exact-attachment'}],
+                 declared_dates={'Data inizio pubb.': '2024-05-08', 'Data fine pubb.': '2024-05-15'}),
+            (), Support('native-hash', 'native-row', 'Register declaration')), **changes)
+
+    def connect(self, publication, declarations, acquisitions=None):
+        from cordon_d.removal_events import connect_publication_attestation
+        return connect_publication_attestation(publication, declarations,
+            acquisitions=acquisitions if acquisitions is not None else [
+                {'url': 'https://example.org/exact-attachment', 'sha256': self.source}])
+
+    def test_certified_interval_enters_existing_clock_without_issuance_or_continuity_phrase(self):
+        p = self.read()
+        self.assertEqual([e.occurred for e in p.events], [date(2024, 5, 8), date(2024, 5, 15)])
+        self.assertIsNone(p.source_fields['attestation']['issued_on']['value'])
+        self.assertEqual(p.source_fields['provenance'], 'model_proposed_reading')
+        self.assertEqual(p.source_fields['request_sha256'], self.response['request_sha256'])
+        self.assertTrue(all(e.support.source == self.source and e.recipient is None for e in p.events))
+        boundary = publication_deadline(Snapshot.load(), 'B-CLK-DGR1866-owner-election', p.document_date,
+            p, document=p.document, competent_publisher=p.publisher,
+            zone=ZoneInfo('Europe/Rome'), calendar=national_calendar())
+        self.assertEqual(boundary, datetime(2024, 5, 21, tzinfo=ZoneInfo('Europe/Rome')))
+        self.assertEqual(connected_publications([p], [SimpleNamespace(identity=p.document,
+                         adopted=date(2024, 5, 7))]), ())
+        with self.assertRaises(ValueError):
+            p.events[0].anchor(kind='recipient-notification', document=p.document,
+                               recipient='owner', precision='date')
+
+    def test_unresolved_act_keeps_interval_and_uses_existing_exact_native_attachment(self):
+        self.reading['act'] = {key: self.value() for key in ('authority', 'number', 'adopted')}
+        p = self.read()
+        self.assertIsNone(p.document)
+        self.assertFalse(p.events)
+        self.assertEqual(p.source_fields['attestation']['period']['end']['value'], '2024-05-15')
+        declaration = self.declaration()
+        bound = self.connect(p, [declaration])
+        self.assertEqual(bound.document, declaration.document)
+        self.assertEqual(len(bound.events), 2)
+        self.assertIs(bound.source_fields['declarations'][0], declaration)
+        self.assertIsNone(p.document)
+        unresolved = self.connect(p, [self.declaration(document=None, document_date=None)])
+        self.assertIsNone(unresolved.document)
+        self.assertIn('no resolved principal', unresolved.source_fields['attachment_issues'][0]['cause'])
+        for row, captures in [(declaration, []), (self.declaration(publisher='Other municipality'), None)]:
+            result = self.connect(p, [row], captures)
+            self.assertIsNone(result.document)
+            self.assertFalse(result.events)
+            self.assertTrue(result.source_fields['attachment_issues'])
+        wrong = self.declaration()
+        wrong.source_fields['source_fields']['N. Repertorio Albo'] = '2026/Albo/9877'
+        self.assertIsNone(self.connect(p, [wrong]).document)
+
+    def test_component_and_competing_identity_conflicts_refuse_without_erasing_certified_period(self):
+        p = self.read()
+        wrong = self.declaration(document='REG-PUGLIA-U181-DIR-2024-00992')
+        for rows in [[wrong], [self.declaration(), wrong],
+                     [self.declaration(document_date=date(2024, 5, 7))]]:
+            result = self.connect(p, rows)
+            self.assertIsNone(result.document)
+            self.assertFalse(result.events)
+            self.assertTrue(result.source_fields['attachment_issues'])
+            self.assertEqual(result.source_fields['attestation']['period'], self.reading['period'])
+        self.reading['act']['authority'] = self.value('other')
+        self.assertIsNone(self.connect(self.read(), [self.declaration()]).document)
+        self.reading['act']['authority'] = self.value()
+        self.reading['act']['adopted'] = self.value()
+        self.reading['act']['number'] = self.value('992')
+        self.assertIsNone(self.connect(self.read(), [self.declaration()]).document)
+
+    def test_unrelated_native_occurrence_does_not_erase_independent_certificate_identity(self):
+        self.reading['document_reference'] += '; supplements DDS 990 and DDS 989'
+        p = self.read()
+        self.assertEqual({e.document for e in p.events}, {'REG-PUGLIA-U181-DIR-2024-00991'})
+        unrelated = self.declaration(publisher='Another municipality', document='another-act')
+        connected = self.connect(p, [unrelated, self.declaration()])
+        self.assertEqual(connected.document, p.document)
+        self.assertEqual(len(connected.events), 2)
+        self.assertEqual(len(connected.source_fields['attachment_issues']), 1)
+        self.assertEqual(self.connect(p, [unrelated], []).events, p.events)
+
+    def test_period_conflict_is_local_and_native_status_does_not_override_certificate(self):
+        declaration = self.declaration()
+        declaration.source_fields['declared_dates']['Data fine pubb.'] = '2024-05-16'
+        result = self.connect(self.read(), [declaration])
+        self.assertEqual([e.kind for e in result.events], ['municipal-publication-start'])
+        self.assertIn('end', result.source_fields['period_conflicts'])
+        self.assertEqual(result.source_fields['attestation']['period']['end']['value'], '2024-05-15')
+        self.assertEqual(declaration.source_fields['declared_dates']['Data fine pubb.'], '2024-05-16')
+        declaration = self.declaration()
+        declaration.source_fields['publication_status'] = 'SI'
+        self.assertEqual(len(self.connect(self.read(), [declaration]).events), 2)
+        captures = [{'url': 'https://example.org/exact-attachment', 'sha256': self.source,
+                     'captured_at': '2024-05-14T12:00:00+00:00'}]
+        self.assertEqual([e.kind for e in self.connect(self.read(), [declaration], captures).events],
+                         ['municipal-publication-start'])
+
+    def test_partial_unknown_and_nonactual_records_remain_distinct(self):
+        self.reading['period']['coverage'] = 'partial-publication'
+        self.reading['period']['qualification'] = 'Posting interrupted before completion.'
+        self.assertEqual([e.kind for e in self.read().events], ['municipal-publication-start'])
+        for coverage in ['blank-form', 'intended', 'unresolved']:
+            self.reading['period']['coverage'] = coverage
+            self.assertFalse(self.read().events)
+        self.reading['period']['coverage'] = 'completed-interval'
+        self.reading['period']['end'] = self.value(cause='not-recovered')
+        self.assertEqual([e.kind for e in self.read().events], ['municipal-publication-start'])
+        self.assertEqual(self.read().source_fields['attestation']['period']['end']['cause'], 'not-recovered')
+        self.reading['period']['end'] = self.value('2024-05-07')
+        self.assertFalse(self.read().events)
+        self.assertEqual(set(self.read().source_fields['period_conflicts']), {'start', 'end'})
+
+    def test_source_boundary_rejects_missing_causes_unsupported_dates_and_other_pages(self):
+        from copy import deepcopy
+        original = deepcopy(self.reading)
+        mutations = [lambda r: r['period']['end'].update(value=None, cause=None),
+                     lambda r: r['period']['end'].update(support=[]),
+                     lambda r: r['period']['end'].update(value='2024-02-30'),
+                     lambda r: r['support'][0].update(source='b'*64),
+                     lambda r: r['support'][0].update(page=3),
+                     lambda r: r['support'][0].update(quote='')]
+        for mutate in mutations:
+            self.response['reading'] = deepcopy(original)
+            mutate(self.response['reading'])
+            with self.assertRaises(ValueError):
+                self.read()
+
+    def test_retained_capture_day_qualifies_each_endpoint_before_any_connection(self):
+        from hashlib import sha256
+        from cordon_d.removal_events import retained_publication_attestation
+        request = self.response['request']
+        identity = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
+        target = self.store/'derived/document-readings'/f'{identity}.json'
+        target.parent.mkdir(parents=True)
+        for captured, expected in [('2024-05-07T12:00:00+00:00', []),
+                                  ('2024-05-14T12:00:00+00:00', ['municipal-publication-start']),
+                                  ('2024-05-14T22:30:00+00:00',
+                                   ['municipal-publication-start', 'municipal-publication-end'])]:
+            with self.subTest(captured=captured):
+                target.write_text(json.dumps(dict(request=request, request_sha256=identity,
+                    captured_at=captured, output=json.dumps(self.reading))))
+                result = retained_publication_attestation(identity, self.store)
+                self.assertEqual([e.kind for e in result.events], expected)
+                self.assertEqual(result.source_fields['reading_captured_at'], captured)
+                self.assertEqual(result.source_fields['attestation']['period']['end']['value'], '2024-05-15')
+                self.assertEqual([e.kind for e in self.connect(result, [self.declaration()]).events], expected)
+
+    def test_conflicts_belong_to_existing_components_and_cannot_be_filled_by_attachment(self):
+        from copy import deepcopy
+        original = deepcopy(self.reading)
+        for aspect in ['period.start', 'period.end', 'act.authority', 'act.number', 'act.adopted']:
+            with self.subTest(aspect=aspect):
+                self.response['reading'] = deepcopy(original)
+                reading = self.response['reading']
+                reading['issues'] = [dict(aspect=aspect, cause='conflict', detail='Two explicit source values disagree.')]
+                with self.assertRaisesRegex(ValueError, 'conflicting component'):
+                    self.read()
+                group, key = aspect.split('.')
+                reading[group][key] = self.value(cause='conflict')
+                publication = self.read()
+                expected = ([] if group == 'act' else
+                            ['municipal-publication-' + ('end' if key == 'start' else 'start')])
+                self.assertEqual([e.kind for e in publication.events], expected)
+                connected = self.connect(publication, [self.declaration()])
+                self.assertEqual([e.kind for e in connected.events], expected)
+                if group == 'act':
+                    self.assertIsNone(connected.document)
+                    self.assertIn('cannot resolve', connected.source_fields['attachment_issues'][0]['cause'])
+                self.assertEqual(connected.source_fields['attestation'][group][key]['cause'], 'conflict')
+
+    def test_coverage_conflict_and_unaddressed_conflict_are_not_decorative_issues(self):
+        self.reading['issues'] = [dict(aspect='period.coverage', cause='conflict',
+                                      detail='Completion is disputed within the source.')]
+        with self.assertRaisesRegex(ValueError, 'coverage must remain unresolved'):
+            self.read()
+        self.reading['period']['coverage'] = 'unresolved'
+        self.assertFalse(self.read().events)
+        self.reading['issues'][0]['aspect'] = 'some prose about an end date'
+        with self.assertRaisesRegex(ValueError, 'exact existing component path'):
+            self.read()
+        self.reading['period']['coverage'] = 'completed-interval'
+        self.reading['issues'] = [dict(aspect='signature verification', cause='not-supplied',
+                                      detail='No cryptographic verification result was supplied.')]
+        self.assertEqual(len(self.read().events), 2)
+        self.reading['signature_statement'] = self.value(cause='conflict')
+        self.reading['issues'].append(dict(aspect='signature_statement', cause='conflict',
+                                          detail='Signature descriptions disagree.'))
+        self.assertEqual(len(self.read().events), 2)
+
+    def test_retained_replay_and_single_certificate_dispatch_do_not_supply_a_principal(self):
+        from hashlib import sha256
+        from unittest.mock import patch
+        from cordon_d.removal_events import (retained_publication_attestation,
+                                             read_publication_attestation)
+        request = self.response['request']
+        identity = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
+        target = self.store/'derived/document-readings'/f'{identity}.json'
+        target.parent.mkdir(parents=True)
+        target.write_text(json.dumps(dict(request=request, request_sha256=identity,
+                                         output=json.dumps(self.reading))))
+        with patch('cordon_d.document_subscription.read_documents', side_effect=AssertionError('No dispatch')):
+            replay = retained_publication_attestation(identity, self.store)
+        self.assertEqual(len(replay.events), 2)
+        self.assertEqual(replay.source_fields['request_sha256'], identity)
+        with patch('cordon_d.document_subscription.read_documents', return_value=self.response) as call:
+            self.assertEqual(read_publication_attestation(self.source, self.store).events, self.read().events)
+        self.assertEqual(call.call_args.args[0], (self.source,))
+        self.assertFalse(call.call_args.kwargs['execute'])
+        target.write_text(target.read_text().replace(identity, 'b'*64))
+        with self.assertRaisesRegex(ValueError, 'identity mismatch'):
+            retained_publication_attestation(identity, self.store)

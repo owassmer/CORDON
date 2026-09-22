@@ -136,11 +136,14 @@ class PerformanceReading:
 
     def removal_occurrences(self):
         """Actual reported/direct removal in its literal scope, not adjudicated completion."""
+        documents = {row['source']: row for row in self.values['documents']}
         for index, statement in enumerate(self.values['statements']):
             if (statement['operation'] != 'removal'
                     or statement['evidence'] not in {'direct-record', 'reported-event'}):
                 continue
             yield dict(statement=statement, occurrence=f'{self.response["request_sha256"]}:{index}',
+                       document=documents[statement['source']],
+                       reading_issues=tuple(self.values['issues']),
                        support=tuple(Support(c['source'], c['locator'], c['quote'])
                                      for c in statement['support']),
                        provenance='model_proposed_reading',

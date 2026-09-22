@@ -92,6 +92,17 @@ class PerformanceTests(unittest.TestCase):
         self.response['reading']['statements'] = [self.statement(evidence='direct-record')]
         self.assertEqual(len(tuple(reading.removal_occurrences())), 1)
 
+    def test_population_limit_and_own_document_survive_occurrence_projection(self):
+        issue = dict(aspect='linked supporting record', cause='not-supplied',
+                     detail='The supplied account refers to minutes not supplied here.')
+        self.reading['issues'] = [issue]
+        _validate(self.response, self.store)
+        occurrence, = PerformanceReading(self.response).removal_occurrences()
+        self.assertIs(occurrence['document'], self.reading['documents'][0])
+        self.assertEqual(occurrence['reading_issues'], (issue,))
+        self.assertEqual(occurrence['statement']['issues'], self.reading['statements'][0]['issues'])
+        self.assertEqual(occurrence['statement']['evidence'], 'reported-event')
+
     def test_publication_date_cannot_supply_operation_date_support(self):
         statement = self.reading['statements'][0]
         statement['occurred_on'] = deepcopy(self.reading['documents'][0]['published_on'])
