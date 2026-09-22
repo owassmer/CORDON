@@ -116,7 +116,7 @@ def native_cells(page, number):
 
 
 def inventory(acts, store):
-    """Every page of every held act, with whether it is read and why not."""
+    """Every page of every held act, counted from the act's own bytes; nothing is written."""
     import pymupdf
     pages = []
     for record in acts:
@@ -283,7 +283,6 @@ def main():
     store = store_root(REPOSITORY / 'corpus/sources/areas')
     pages = inventory(acts, store)
     READINGS.mkdir(parents=True, exist_ok=True)
-    (READINGS / 'INVENTORY.json').write_text(json.dumps(pages, ensure_ascii=False, indent=1) + '\n')
     candidates = [p for p in pages if p['candidate'] and args.only in p['instrument_id']
                   and (not args.page or p['page'] in args.page)]
     pending = [p for p in candidates if args.reread or not pinned_path(p['act_sha256'], p['page']).exists()]

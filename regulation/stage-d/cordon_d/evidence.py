@@ -83,41 +83,9 @@ class Assertion:
         return self.context, self.event_date, self.consumer_version, self.predicate
 
 
-@dataclass(frozen=True)
-class Unresolved:
-    """A supported limit of a reading, never a boolean assertion."""
-    identity: str
-    contract: str
-    context: str
-    event_date: date
-    known_at: datetime
-    consumer_version: str
-    predicate: str
-    cause: str
-    support: tuple[Support, ...]
-    supersedes: tuple[str, ...] = ()
-
-    def __post_init__(self):
-        if type(self.event_date) is not date:
-            raise TypeError('An unresolved reading requires an explicit event date')
-        instant(self.known_at)
-        if not all((self.identity, self.contract, self.context, self.consumer_version,
-                    self.predicate, self.cause, self.support)):
-            raise ValueError('An unresolved reading requires its consumer, cause and evidence')
-
-    @property
-    def key(self):
-        return self.context, self.event_date, self.consumer_version, self.predicate
-
-
 class Evidence:
     def __init__(self, snapshot: Snapshot, sources: tuple[Source, ...], assertions: tuple[Assertion, ...],
-                 contracts: Mapping[str, dict], bindings: Mapping[str, frozenset[str]], root: Path,
-                 *, unresolved: tuple[Unresolved, ...] = ()):
-        if any(not isinstance(a, Assertion) for a in assertions) or any(
-                not isinstance(a, Unresolved) for a in unresolved):
-            raise TypeError('Assertions and unresolved readings must retain their distinct types')
-        readings = (*assertions, *unresolved)
+                 contracts: Mapping[str, dict], bindings: Mapping[str, frozenset[str]], root: Path):
         self.snapshot, self.root = snapshot, root
         # The D owner controls admission even for direct construction and custom
         # evidence roots; caller-supplied family bindings cannot widen aperture.
@@ -125,12 +93,11 @@ class Evidence:
         self.deferred_consumers = json.loads(owner.read_text())['deferred_consumers']
         self.sources = {source.identity: source for source in sources}
         self.assertions = {row.identity: row for row in assertions}
-        self.readings = {row.identity: row for row in readings}
-        if len(self.sources) != len(sources) or len(self.readings) != len(readings):
-            raise ValueError('Duplicate source or reading identity')
+        if len(self.sources) != len(sources) or len(self.assertions) != len(assertions):
+            raise ValueError('Duplicate source or assertion identity')
         for source in sources:
             source.verify(root)
-        for row in readings:
+        for row in assertions:
             owner = snapshot.version(row.consumer_version, row.event_date)
             self.require_admitted(owner['provision_version_id'])
             if row.consumer_version != owner['provision_version_id']:
@@ -146,7 +113,7 @@ class Evidence:
                 if source.role not in permitted:
                     raise ValueError(f'{source.role} does not establish an instance fact under {row.contract}')
             for predecessor in row.supersedes:
-                previous = self.readings[predecessor]
+                previous = self.assertions[predecessor]
                 if previous.key != row.key or previous.known_at >= row.known_at:
                     raise ValueError('Correction must concern the same fact and follow its predecessor')
 
@@ -173,11 +140,11 @@ class EvidenceView:
         key = self.context, self.event_date, row['provision_version_id'], predicate
         # Corrections apply even when their private replacement is not readable:
         # permission loss cannot resurrect a known superseded public assertion.
-        candidates = [a for a in self.evidence.readings.values()
+        candidates = [a for a in self.evidence.assertions.values()
                       if a.key == key and a.known_at <= self.known_through]
         superseded = {old for a in candidates for old in a.supersedes}
         current = [a for a in candidates if a.identity not in superseded]
-        conflicted = len({a.value for a in current if isinstance(a, Assertion)}) > 1
+        conflicted = len({a.value for a in current}) > 1
         unreadable = []
         for a in current:
             if any(self.evidence.sources[s.source].access == 'controlled' and s.source not in self.permitted
@@ -191,22 +158,15 @@ class EvidenceView:
         for a in current:
             for support in a.support:
                 self.evidence.sources[support.source].verify(self.evidence.root)
-        values = {a.value for a in current if isinstance(a, Assertion)}
-        needs = frozenset(
-            f'{a.cause} [{s.source}; {s.selector}]'
-            for a in current if isinstance(a, Unresolved) for s in a.support)
+        values = {a.value for a in current}
         provenance = frozenset(s.source for a in current for s in a.support)
         if conflicted and unreadable:
-            return Evaluation(None, needs=needs | {f'authorized evidence for {predicate} in {self.context}'},
+            return Evaluation(None, needs=frozenset({f'authorized evidence for {predicate} in {self.context}'}),
                               provisions=provenance)
-        if not values:
-            if unreadable:
-                needs |= {f'authorized evidence for {predicate} in {self.context}'}
-            return Evaluation(None, needs=needs, provisions=provenance)
         if len(values) != 1:
-            return Evaluation(None, needs=needs | {f'unresolved conflicting evidence for {predicate}'},
+            return Evaluation(None, needs=frozenset({f'unresolved conflicting evidence for {predicate}'}),
                               provisions=provenance)
-        return Evaluation(next(iter(values)), needs=needs, provisions=provenance)
+        return Evaluation(next(iter(values)), provisions=provenance)
 
     def evaluate(self, identity: str) -> Evaluation:
         # This adapter supplies factual readings only. Mathematical performance

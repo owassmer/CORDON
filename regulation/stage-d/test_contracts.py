@@ -9,7 +9,7 @@ import unittest
 from cordon_c.core import MissingInput, Snapshot
 from cordon_c.temporal import deadline
 from cordon_d.calendar import national_calendar
-from cordon_d.evidence import (Assertion, Evidence, Source, Support, Unresolved, file_digest,
+from cordon_d.evidence import (Assertion, Evidence, Source, Support, file_digest,
                                PublishedPopulation, RequiredPopulation, completion_support)
 from cordon_d.events import AdministrativeEvent
 from cordon_d.readers import sampling_date
@@ -40,9 +40,8 @@ class EvidenceTests(unittest.TestCase):
                              datetime(2026, 2, 2, tzinfo=timezone.utc), raw['consumer_version'],
                              raw['predicate'], True, (Support('public', 'test locator', 'Synthetic counterexample only'),))
 
-    def evidence(self, *rows, sources=None, unresolved=()):
-        return Evidence(self.snapshot, sources or (self.public,), rows, self.contracts, self.bindings,
-                        self.root, unresolved=unresolved)
+    def evidence(self, *rows, sources=None):
+        return Evidence(self.snapshot, sources or (self.public,), rows, self.contracts, self.bindings, self.root)
 
     def view(self, evidence, *, through=datetime(2026, 9, 8, tzinfo=timezone.utc), permitted=frozenset(), context='test-context'):
         return evidence.view(context=context, event_date=self.row.event_date,
@@ -95,74 +94,6 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.view(self.evidence(self.row)).evaluate(self.row.consumer_version, facts={})
 
-
-    def test_unresolved_readings_obey_admission_time_access_and_source_checks(self):
-        row = self.row
-        missing = Unresolved('missing', row.contract, row.context, row.event_date, row.known_at,
-                             row.consumer_version, row.predicate, 'not recovered from test record',
-                             row.support)
-        evidence = self.evidence(unresolved=(missing,))
-        result = self.read(self.view(evidence))
-        self.assertIsNone(result.truth)
-        self.assertEqual(result.provisions, frozenset({'public'}))
-        self.assertIn('not recovered from test record [public; test locator]', result.needs)
-        for view in (self.view(evidence, context='other'),
-                     self.view(evidence, through=datetime(2026, 2, 1, tzinfo=timezone.utc)),
-                     evidence.view(context=row.context, event_date=date(2026, 1, 13),
-                                   known_through=row.known_at)):
-            hidden = self.read(view)
-            self.assertIsNone(hidden.truth)
-            self.assertFalse(hidden.provisions)
-            self.assertFalse(any('not recovered' in n for n in hidden.needs))
-        private = replace(missing, support=(replace(row.support[0], source='private'),))
-        evidence = self.evidence(unresolved=(private,), sources=(self.private,))
-        hidden = self.read(self.view(evidence))
-        self.assertFalse(hidden.provisions)
-        self.assertFalse(any('not recovered' in n or 'test locator' in n for n in hidden.needs))
-        self.assertIn('private', self.read(self.view(evidence, permitted={'private'})).provisions)
-        for wrong in (replace(missing, contract='calendar'),
-                      replace(missing, predicate='not an owned predicate'),
-                      replace(missing, consumer_version='PUG-LR4-2017:Art.2(3)'),
-                      replace(missing, event_date=date(2010, 1, 1)),
-                      replace(missing, consumer_version='IT-DLGS-19-2021:Art.55(13):omitted-removal-sanction:v1')):
-            with self.subTest(wrong=wrong), self.assertRaises((ValueError, MissingInput)):
-                self.evidence(unresolved=(wrong,))
-        with self.assertRaises(ValueError):
-            self.evidence(unresolved=(missing,), sources=(replace(self.public, role='official-format'),))
-        with self.assertRaises(TypeError):
-            replace(row, value=None)
-        with self.assertRaises(TypeError):
-            self.evidence(missing)
-        view = self.view(self.evidence(unresolved=(missing,)))
-        (self.root / 'public.txt').write_text('Changed source')
-        with self.assertRaises(ValueError):
-            self.read(view)
-
-    def test_unresolved_corrections_do_not_restore_old_facts_or_hide_new_facts(self):
-        row = self.row
-        missing = Unresolved('missing', row.contract, row.context, row.event_date,
-                             datetime(2026, 3, 1, tzinfo=timezone.utc), row.consumer_version,
-                             row.predicate, 'reading withdrawn for review', row.support, ('a',))
-        evidence = self.evidence(row, unresolved=(missing,))
-        self.assertIsNone(self.read(self.view(evidence)).truth)
-        self.assertTrue(self.read(self.view(evidence, through=row.known_at)).truth)
-        correction = replace(row, identity='fixed', known_at=datetime(2026, 4, 1, tzinfo=timezone.utc),
-                             supersedes=('missing',))
-        result = self.read(self.view(self.evidence(row, correction, unresolved=(missing,))))
-        self.assertTrue(result.truth)
-        self.assertFalse(result.needs)
-        private = replace(missing, support=(replace(row.support[0], source='private'),))
-        result = self.read(self.view(self.evidence(row, unresolved=(private,),
-                                                  sources=(self.public, self.private))))
-        self.assertIsNone(result.truth)
-        self.assertFalse(result.provisions)
-        # A separate supported positive survives a limit of another reading.
-        independent = replace(row, identity='independent')
-        self.assertTrue(self.read(self.view(self.evidence(row, independent, unresolved=(missing,)))).truth)
-        with self.assertRaises(ValueError):
-            self.evidence(row, unresolved=(replace(missing, context='other'),))
-        with self.assertRaises(ValueError):
-            self.evidence(row, unresolved=(replace(missing, known_at=row.known_at),))
 
     def test_finding_is_not_receipt_of_a_report_by_the_regional_service(self):
         receipt = replace(self.row, contract='administrative-event',
