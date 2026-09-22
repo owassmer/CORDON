@@ -623,9 +623,9 @@ def scoped_facts(scopes, facts):
 
     A qualifier of a reached statement travels with that statement, so a reached fact's
     own ID and printed section become scopes in turn until the set stops growing.
-    Materialization classifies a row's results through exactly this reach; the reader's
-    mark detector asks the same question of this same helper, so what the classifier
-    resolves and what the detector calls unresolved cannot drift apart.
+    Materialization and the mark detector share this helper and `row_source_scopes`.
+    The classifier also sees other blocks and `link_section_marks`; the detector sees
+    one reading's facts.
     """
     scopes = set(scopes)
     while True:
