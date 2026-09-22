@@ -174,6 +174,74 @@ class JoinIdentity(unittest.TestCase):
             association_rows=[self.association(host='Fictiona nova', longitude='16.11111111')])[0]
         self.assertFalse(conflicting['matches'])
 
+    def test_uncertain_identifier_cannot_reach_forward_reverse_or_confirmation(self):
+        from cordon_c.core import Evaluation
+        for scope in ('identifier', 'p1-t1/c5'):
+            with self.subTest(scope=scope):
+                item = compound_block()
+                issue = {'scope': scope, 'cause': 'The selected identifier reading is unresolved'}
+                item['reading']['issues'] = [issue]
+                joined = self.run_join([['specimen-22', '2024-06-01']], [],
+                    report_item=item, reading_issues=[issue], two_results=True)[0]
+                self.assertFalse(joined['matches'])
+                candidate, = joined['links'][0]['candidates']
+                self.assertIn('specimen-22', candidate['row'].identifiers)
+                field = next(c for c in candidate['row'].cells if c.get('identifier') == 'specimen-22')
+                self.assertEqual(field['reading_issues'], (issue,))
+                self.assertEqual(field['source_fragments'][0]['text'],
+                                 item['reading']['tables'][0]['rows'][0]['cells'][4]['text'])
+                self.assertTrue(candidate['identity_cause'])
+                self.assertIsNone(candidate['identity_basis'])
+                source = materialize(candidate['key'][0], 'v', 1, [item])
+                self.assertTrue(all(not r['observations'] for r in reverse_rows([source], [joined])))
+                pair = [(candidate['key'][0], r.locator) for r in candidate['row'].results]
+                with self.assertRaisesRegex(ValueError, 'unambiguous source relationship'):
+                    confirmation_inputs(joined, result_pair=pair, qualification={
+                        'first_annex_iv': Evaluation(True), 'second_annex_iv': Evaluation(True)})
+
+    def test_unaffected_identifier_and_independent_association_remain_usable(self):
+        from cordon_c import core
+        from cordon_c.core import Evaluation
+        from cordon_c.bindings import confirmation_facts
+        from datetime import date
+        item = compound_block()
+        issue = {'scope': 'identifier', 'cause': 'The component identifier reading is unresolved'}
+        item['reading']['issues'] = [issue]
+        joined = self.run_join([['lab-7', '2024-06-01'], ['specimen-22', '2024-06-01']], [],
+            report_item=item, reading_issues=[issue], two_results=True)
+        by_reference = {j['observation'].reference: j for j in joined}
+        self.assertEqual(by_reference['lab-7']['status'], 'matched')
+        self.assertFalse(by_reference['specimen-22']['matches'])
+        match, = by_reference['lab-7']['matches']
+        source = materialize(match['key'][0], 'v', 1, [item])
+        reverse = list(reverse_rows([source], joined))
+        self.assertEqual(reverse[0]['observations'], [by_reference['lab-7']['observation'].identity])
+        self.assertFalse(reverse[1]['observations'])
+        pair = [(match['key'][0], r.locator) for r in match['row'].results]
+        inputs = confirmation_inputs(by_reference['lab-7'], result_pair=pair, qualification={
+            'first_annex_iv': Evaluation(True), 'second_annex_iv': Evaluation(True),
+            'first_test': 'qualified-test-a', 'second_test': 'qualified-test-b',
+            'first_sample': 'qualified-sample', 'second_sample': 'qualified-sample',
+            'first_genome_target': 'target-a', 'second_genome_target': 'target-b',
+            'inside_demarcated_area': Evaluation(True)})
+        self.assertTrue(inputs['first_positive_annex_iv'].truth)
+        self.assertTrue(inputs['second_positive_annex_iv'].truth)
+        owner = Path(core.__file__).resolve().parents[2] / 'stage-a/authoring-eu.json'
+        data = json.loads(owner.read_text())
+        provisions = data if isinstance(data, list) else data['provision_versions']
+        snapshot = core.Snapshot([r for r in provisions if r['stable_provision_id'] == 'EU-2020-1201:2(6)'],
+                                 dict(clocks=[], parameters=[], dispositions=[]))
+        at = date(2024, 6, 1)
+        facts = confirmation_facts(snapshot, at, **inputs)
+        self.assertTrue(core.evaluate(snapshot, 'EU-2020-1201:2(6)', at, facts).truth)
+        associated = self.run_join([['specimen-22', '2024-06-01']], [], report_item=item,
+            reading_issues=[issue], association_rows=[self.association(reference='specimen-22',
+                host='Fictiona nova')])[0]
+        self.assertEqual(associated['status'], 'matched')
+        self.assertIn('derived occurrence', associated['matches'][0]['identity_basis'])
+        self.assertIsNone(associated['matches'][0]['identity_cause'])
+        self.assertIn(issue, associated['matches'][0]['reading_issues'])
+
     def test_wrapped_literal_host_label_does_not_create_a_species_conflict(self):
         from cordon_d.findings import _host_relation
         item = block([['UNSEEN', '01/06/2024', 'Positivo', '02/06/2024']])
@@ -330,19 +398,20 @@ class JoinIdentity(unittest.TestCase):
         self.assertEqual(result[0]['matches'][0]['temporal'], 'agrees')
 
     def test_literal_identifier_matches_while_assignment_authority_stays_unresolved(self):
-        issue = {'scope': 'p1-t1/c1 (ID)', 'cause': 'Identifier origin is unresolved.'}
         values = [['123', '01/06/2024', 'Positivo', '02/06/2024']]
-        result = self.run_join([['123', '2024-06-01']], values, reading_issues=[issue])[0]
+        item = block(values)
+        item['reading']['tables'][0]['columns'][0].update(role='identifier', identifier_authority=None)
+        result = self.run_join([['123', '2024-06-01']], [], report_item=item)[0]
         self.assertEqual(result['status'], 'matched')
         candidate = result['links'][0]['candidates'][0]
         self.assertEqual(candidate['row'].candidate_reference, '123')
-        self.assertIsNone(candidate['row'].reference)
+        self.assertIsNone(candidate['row'].cells[0]['identifier_authority'])
         self.assertIsNone(candidate['identity_cause'])
-        self.assertIn(issue, result['links'][0]['reading_issues'])
-        item = block(values); item['reading']['issues'] = [issue]
-        reverse = list(reverse_rows([materialize('hash', 'v', 1, [item])], []))[0]
-        self.assertIn(issue, reverse['reading_issues'])
-        self.assertTrue(reverse['row'].cells[0]['role_cause'])
+        issue = {'scope': 'p1-t1/c1', 'cause': 'The identifier column reading is unresolved'}
+        rejected = self.run_join([['123', '2024-06-01']], [], report_item=item,
+                                 reading_issues=[issue])[0]
+        self.assertFalse(rejected['matches'])
+        self.assertIn('123', rejected['links'][0]['candidates'][0]['row'].identifiers)
 
     def test_repeated_representation_keeps_both_occurrences_and_requires_all_fields(self):
         args = ([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])

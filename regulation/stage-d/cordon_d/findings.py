@@ -335,7 +335,11 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         elif 'unresolved' in host_links.get(row.locator, []):
                             association_cause = 'report-row host needed by the source association remains unresolved'
                         derived_identity = row.locator in derived
-                        exact_identity = group.reference in row.identifiers
+                        exact_identity = any(
+                            cell['role'] in {'identifier', 'publisher_id', 'laboratory_id'}
+                            and group.reference == cell.get('identifier', cell['text'])
+                            and not (cell.get('reading_issues') or cell.get('role_cause'))
+                            for cell in row.cells)
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
                                      'result_cause': None if row.results else 'no analytical result recovered for this occurrence',
                                      'date_cause': row.date_cause,
@@ -346,7 +350,8 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                      'association_comparisons': coordinate_links.get(row.locator, []),
                                      'host_comparisons': host_links.get(row.locator, []),
                                      'identity_basis': ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct'
-                                                        if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
+                                                        if derived_identity else 'literal identifier equality within the observation’s explicit report route'
+                                                        if exact_identity else None),
                                      'reading_issues': reading.issues,
                                      'document_cause': link['document_cause'],
                                      'assembly_complete': reading.assembly_complete,
