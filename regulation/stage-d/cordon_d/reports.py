@@ -665,6 +665,16 @@ def source_scopes(cell, table, raw, index):
     return scopes
 
 
+def scoped_reading_issues(issues, selectors):
+    """Keep an explicitly scoped assigning-authority limit off the literal field."""
+    matched = tuple(issue for issue in issues if any(re.search(
+        r'(?<![\w/-])' + re.escape(selector) + r'(?![\w/-])', issue['scope'])
+        for selector in selectors))
+    authority_scopes = {selector + ' identifier_authority' for selector in selectors}
+    authority = tuple(issue for issue in matched if issue['scope'].strip() in authority_scopes)
+    return tuple(issue for issue in matched if issue not in authority), authority
+
+
 def materialize(digest, version, page_count, blocks):
     """Copy literal values, then project roles. Never merge rows by sample identifier."""
     facts = []
@@ -744,9 +754,9 @@ def materialize(digest, version, page_count, blocks):
                     field_scopes = source_scopes(cell, table, raw, index)
                     scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
-                    field_issues = tuple(issue for issue in issues if any(re.search(
-                        r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope'])
-                        for field in field_scopes))
+                    field_issues, authority_issues = scoped_reading_issues(issues, field_scopes)
+                    if authority_issues:
+                        value['identifier_authority_issues'] = authority_issues
                     if field_issues:
                         value['reading_issues'] = field_issues
                         if column['role'] in {'publisher_id', 'laboratory_id'}:
@@ -770,14 +780,18 @@ def materialize(digest, version, page_count, blocks):
                             source_fragments=(value,), source_span=component['span'], support=(fact,))
                         # Fact IDs belong to this block. A precise issue constrains
                         # that component; a broader parent issue still travels with it.
-                        component_issues = field_issues + tuple(issue for issue in data['issues']
-                            if issue not in field_issues and re.search(
-                                r'(?<![\w/-])' + re.escape(component['fact']['id']) + r'(?![\w/-])',
-                                issue['scope']))
+                        own_issues, own_authority_issues = scoped_reading_issues(
+                            data['issues'], {component['fact']['id']})
+                        component_issues = field_issues + tuple(issue for issue in own_issues
+                                                              if issue not in field_issues)
                         if component_issues:
                             field['reading_issues'] = component_issues
                         if fact['role'] == 'identifier':
                             field.update(identifier=fact['value'], identifier_authority=None, authority_support=())
+                            component_authority = authority_issues + tuple(issue for issue in own_authority_issues
+                                                                          if issue not in authority_issues)
+                            if component_authority:
+                                field['identifier_authority_issues'] = component_authority
                         cells.append(field)
                         by_role.setdefault(fact['role'], []).append(field)
                     if column['role'] == 'result':

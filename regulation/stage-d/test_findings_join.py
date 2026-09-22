@@ -401,17 +401,54 @@ class JoinIdentity(unittest.TestCase):
         values = [['123', '01/06/2024', 'Positivo', '02/06/2024']]
         item = block(values)
         item['reading']['tables'][0]['columns'][0].update(role='identifier', identifier_authority=None)
-        result = self.run_join([['123', '2024-06-01']], [], report_item=item)[0]
+        authority_issue = {'scope': 'p1-t1/c1 identifier_authority',
+                           'cause': 'The assigning authority is not established'}
+        result = self.run_join([['123', '2024-06-01']], [], report_item=item,
+                               reading_issues=[authority_issue])[0]
         self.assertEqual(result['status'], 'matched')
         candidate = result['links'][0]['candidates'][0]
         self.assertEqual(candidate['row'].candidate_reference, '123')
         self.assertIsNone(candidate['row'].cells[0]['identifier_authority'])
+        self.assertEqual(candidate['row'].cells[0]['identifier_authority_issues'], (authority_issue,))
+        self.assertNotIn('reading_issues', candidate['row'].cells[0])
+        self.assertIn(authority_issue, candidate['reading_issues'])
         self.assertIsNone(candidate['identity_cause'])
         issue = {'scope': 'p1-t1/c1', 'cause': 'The identifier column reading is unresolved'}
         rejected = self.run_join([['123', '2024-06-01']], [], report_item=item,
                                  reading_issues=[issue])[0]
         self.assertFalse(rejected['matches'])
         self.assertIn('123', rejected['links'][0]['candidates'][0]['row'].identifiers)
+
+    def test_authority_property_scope_preserves_component_and_c_consumers(self):
+        from cordon_c.core import Evaluation
+        item = compound_block()
+        issue = {'scope': 'identifier identifier_authority',
+                 'cause': 'The assigning authority is not established'}
+        item['reading']['issues'] = [issue]
+        joined = self.run_join([['specimen-22', '2024-06-01']], [], report_item=item,
+                               reading_issues=[issue], two_results=True)[0]
+        self.assertEqual(joined['status'], 'matched')
+        match, = joined['matches']
+        field = next(c for c in match['row'].cells if c.get('identifier') == 'specimen-22')
+        self.assertEqual(field['identifier_authority_issues'], (issue,))
+        self.assertIsNone(field['identifier_authority'])
+        self.assertNotIn('reading_issues', field)
+        source = materialize(match['key'][0], 'v', 1, [item])
+        self.assertEqual(list(reverse_rows([source], [joined]))[0]['observations'],
+                         [joined['observation'].identity])
+        pair = [(match['key'][0], r.locator) for r in match['row'].results]
+        inputs = confirmation_inputs(joined, result_pair=pair, qualification={
+            'first_annex_iv': Evaluation(True), 'second_annex_iv': Evaluation(True)})
+        self.assertTrue(inputs['first_positive_annex_iv'].truth)
+        self.assertTrue(inputs['second_positive_annex_iv'].truth)
+        # The same cause cannot narrow a broad, conflated or extended scope.
+        for scope in ('identifier', 'identifier (Id)', 'identifier identifier_authority and literal'):
+            with self.subTest(scope=scope):
+                rejected = self.run_join([['specimen-22', '2024-06-01']], [], report_item=item,
+                    reading_issues=[dict(issue, scope=scope)])[0]
+                self.assertFalse(rejected['matches'])
+                self.assertEqual(rejected['links'][0]['candidates'][0]['row'].identifiers,
+                                 ('lab-7', 'specimen-22'))
 
     def test_repeated_representation_keeps_both_occurrences_and_requires_all_fields(self):
         args = ([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])

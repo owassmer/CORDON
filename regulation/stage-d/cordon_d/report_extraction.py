@@ -85,6 +85,9 @@ who assigned it. Keep that separate question in identifier_authority; null is co
 when assignment authority is unstated. Publisher_id and laboratory_id are retained
 only when the source expressly identifies that authority. An Id marked client-provided
 is publisher_id. Do not add an issue solely because identifier_authority is null.
+An issue that constrains only identifier_authority uses scope "<exact cell/column
+selector or fact ID> identifier_authority". An unresolved identifier literal or
+role instead constrains the field or fact itself; keep these meanings distinct.
 Envelope/bag,
 team, protocol and counter codes are other unless a source explicitly establishes
 sample correspondence. Do not infer a role merely because the PDF is a lab report.
