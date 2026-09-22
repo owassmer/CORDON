@@ -110,7 +110,25 @@ faithfully supplies the whole visual cell. Otherwise transcribe the visual value
 facts: [{id: unique fact ID, role: printed statement/date/identity/relation role, page, locator,
  section: pN/exact enclosing printed section heading including markers, or null,
  text: exact relevant statement, value: literal date/identifier component if relevant,
- applies_to:[report|tableID|tableID/rowID|native:nativeCellID|tableID/cN|factID|section:pN/heading|unattached]}].
+applies_to:[report|tableID|tableID/rowID|native:nativeCellID|tableID/cN|factID|section:pN/heading|unattached]}].
+When one printed descriptive cell contains several separately readable fields,
+keep that complete cell as role other; do not invent additional printed columns.
+Recover its host, identifier, municipality, latitude or longitude components as
+facts using those roles, one fact per component. Each applies_to names exactly one
+native:<cell> or page/tableID/rowID/cN selector for that physical cell. Quote an exact
+contiguous clause of the retained cell in text and the exact literal component in
+value. Both the clause inside the cell and the value inside that clause must locate
+one occurrence unambiguously. Preserve the complete host description, source
+spelling, separators and qualifications in the parent cell; no synonym or default
+taxon supplies a component. A component role is your reading of the source, not a
+consequence of substring containment. Establish coordinate axes from source
+evidence, never numeric magnitude or an assumed pair order. A specimen-code label
+does not establish publisher or laboratory assignment authority: use identifier.
+Do not apply component facts to a whole row, column or report, or reinterpret an
+already typed field. Keep any qualification attached to the actual component fact,
+cell or printed section it constrains. If a relevant component or its role remains
+unrecovered or ambiguous, name that reading limitation in issues; do not silently
+leave a readable compound cell unexamined or claim source silence.
 Capture document identity, issuer, distinct date labels, received versus listed
 sample counts, annex/correction references, result qualifications and relevant
 notes. Preserve their actual scope. A test, analyte or qualification from the

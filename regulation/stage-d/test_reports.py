@@ -59,6 +59,159 @@ def block(rows):
     return {'targets': [1], 'reading': data, 'native_cells': {}}
 
 
+def compound_block(*, native=False):
+    item = block([['lab-7', '01/06/2024', 'Positivo', '02/06/2024'],
+                  ['lab-8', '01/06/2024', 'Negativo', '02/06/2024']])
+    table = item['reading']['tables'][0]
+    table['columns'][0]['role'] = 'identifier'
+    table['columns'].append(dict(role='other', heading=['Specimen'], support=[], test=None, analyte=None))
+    text = 'Host: Fictiona nova; Code: specimen-22; East: 16.987654321; North: 41.123456789'
+    for index, row in enumerate(table['rows'], 1):
+        value = text if index == 1 else 'Host: Diversa altera; Code: specimen-23; coordinates not supplied'
+        if native:
+            key = f'p1-t1-r{index}-c5'
+            row['cells'].append({'native_cell': key})
+            item['native_cells'][key] = {'page': 1, 'text': value}
+        else:
+            row['cells'].append({'text': value})
+    selector = 'native:p1-t1-r1-c5' if native else 'p1/p1-t1/r1/c5'
+    for role, clause, value in [('host', 'Host: Fictiona nova', 'Fictiona nova'),
+                              ('identifier', 'Code: specimen-22', 'specimen-22'),
+                              ('longitude', 'East: 16.987654321', '16.987654321'),
+                              ('latitude', 'North: 41.123456789', '41.123456789')]:
+        item['reading']['facts'].append(dict(id=role, role=role, page=1, locator='specimen cell',
+            section='p1/Client data #', text=clause, value=value, applies_to=[selector]))
+    item['reading']['facts'] += [
+        dict(id='host-note', role='qualification', page=1, locator='host note',
+             text='Host supplied by client', value=None, applies_to=['host']),
+        dict(id='section-note', role='qualification', page=1, locator='section note',
+             text='# Client data', value=None, applies_to=['section:p1/Client data #'])]
+    return item
+
+
+class CompoundFields(unittest.TestCase):
+    def test_literal_components_reach_comparisons_with_originals_and_scopes_intact(self):
+        from cordon_d.findings import _coordinate_relation, _host_relation
+        for native in (False, True):
+            with self.subTest(native=native):
+                item = compound_block(native=native)
+                untouched = copy.deepcopy(item)
+                report = materialize('source', 'v', 1, [item])
+                self.assertEqual(item, untouched)
+                row, other = report.rows
+                parent = next(c for c in row.cells if c['role'] == 'other')
+                fields = {c['role']: c for c in row.cells if c.get('source_fragments')}
+                self.assertEqual(set(fields), {'host', 'identifier', 'longitude', 'latitude'})
+                for field in fields.values():
+                    self.assertEqual(field['source_fragments'], (parent,))
+                    self.assertEqual(parent['text'][slice(*field['source_span'])], field['text'])
+                    self.assertEqual(field['support'][0]['applies_to'],
+                                     ['native:p1-t1-r1-c5' if native else 'p1/p1-t1/r1/c5'])
+                self.assertEqual(row.identifiers, ('lab-7', 'specimen-22'))
+                self.assertIsNone(fields['identifier']['identifier_authority'])
+                self.assertEqual(fields['identifier']['authority_support'], ())
+                self.assertEqual(row.results[0].kind, 'positive')
+                self.assertEqual(other.results[0].kind, 'negative')
+                self.assertEqual(other.identifiers, ('lab-8',))
+                self.assertFalse(any(c.get('source_fragments') for c in other.cells))
+                notes = {f['id']: f for f in row.facts}
+                self.assertEqual(notes['b1/host-note']['applies_to'], ['b1/host'])
+                self.assertEqual(notes['b1/section-note']['applies_to'], ['section:p1/Client data #'])
+                self.assertEqual(other.facts, ())
+                self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Fictiona nova'}}}),
+                                 'agrees on printed host')
+                self.assertNotEqual(_host_relation(row, {'fields': {'host': {'text': 'Different host'}}}),
+                                    'agrees on printed host')
+                association = {'fields': {'latitude': {'text': '41.12345679'},
+                                          'longitude': {'text': '16.98765432'}}}
+                self.assertEqual(_coordinate_relation(row, association), 'agrees at published decimal precision')
+                association['fields']['latitude']['text'] = '40.12345679'
+                self.assertEqual(_coordinate_relation(row, association), 'conflicts')
+
+    def test_no_components_or_broad_context_never_invent_row_fields(self):
+        item = compound_block()
+        item['reading']['facts'] = [dict(f, applies_to=['report']) for f in item['reading']['facts'][:4]]
+        rows = materialize('source', 'v', 1, [item]).rows
+        self.assertTrue(all(not any(c.get('source_fragments') for c in row.cells) for row in rows))
+        self.assertEqual(rows[0].identifiers, ('lab-7',))
+        self.assertEqual(len(rows[0].facts), 4)
+        item['reading']['facts'] = []
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].cells, rows[0].cells)
+
+    def test_negative_occurrence_components_and_distinct_conflicting_fields_are_preserved(self):
+        item = compound_block()
+        item['reading']['facts'].append(dict(id='negative-code', role='identifier', page=1,
+            locator='negative specimen', text='Code: specimen-23', value='specimen-23',
+            applies_to=['p1/p1-t1/r2/c5']))
+        other = materialize('source', 'v', 1, [item]).rows[1]
+        self.assertEqual(other.identifiers, ('lab-8', 'specimen-23'))
+        self.assertEqual(other.results[0].kind, 'negative')
+        item['reading']['tables'][0]['rows'][0]['cells'][4]['text'] += '; Disputed host: Diversa altera'
+        item['reading']['facts'].append(dict(id='different-host', role='host', page=1,
+            locator='same specimen', text='Disputed host: Diversa altera', value='Diversa altera',
+            applies_to=['p1/p1-t1/r1/c5']))
+        row = materialize('source', 'v', 1, [item]).rows[0]
+        self.assertEqual([c['text'] for c in row.cells if c['role'] == 'host'], ['Fictiona nova', 'Diversa altera'])
+        from cordon_d.findings import _host_relation
+        self.assertNotEqual(_host_relation(row, {'fields': {'host': {'text': 'Fictiona nova'}}}),
+                            'agrees on printed host')
+
+    def test_unique_clause_distinguishes_equal_component_literals(self):
+        item = compound_block()
+        item['reading']['tables'][0]['rows'][0]['cells'][4]['text'] = 'North: 8.5; East: 8.5'
+        item['reading']['facts'] = [dict(id=role, role=role, page=1, locator='coordinates',
+            text=label + ': 8.5', value='8.5', applies_to=['p1/p1-t1/r1/c5'])
+            for role, label in [('latitude', 'North'), ('longitude', 'East')]]
+        fields = [c for c in materialize('source', 'v', 1, [item]).rows[0].cells if c.get('source_fragments')]
+        self.assertEqual([c['text'] for c in fields], ['8.5', '8.5'])
+        self.assertNotEqual(fields[0]['source_span'], fields[1]['source_span'])
+
+    def test_invalid_component_cannot_become_a_field(self):
+        changes = [dict(value='Invented host'), dict(text='Host: Invented host', value='Invented host'),
+                   dict(value=''), dict(applies_to=['native:unknown']),
+                   dict(applies_to=['native:p1-t1-r2-c5']),
+                   dict(applies_to=['native:p1-t1-r1-c5', 'report']), dict(page=2)]
+        for change in changes:
+            with self.subTest(change=change):
+                item = compound_block(native=True)
+                item['supplied_pages'] = [1, 2]
+                item['reading']['facts'][0].update(change)
+                with self.assertRaises(ValueError):
+                    materialize('source', 'v', 2, [item])
+
+    def test_ambiguous_spans_and_reused_native_occurrences_are_refused(self):
+        for kind in ('repeated-clause', 'overlap', 'reused-cell', 'overlapping-substring'):
+            with self.subTest(kind=kind):
+                item = compound_block(native=True)
+                if kind == 'repeated-clause':
+                    item['native_cells']['p1-t1-r1-c5']['text'] += '; Host: Fictiona nova'
+                elif kind == 'overlap':
+                    item['reading']['facts'][1].update(text='Fictiona nova', value='Fictiona nova')
+                elif kind == 'reused-cell':
+                    item['reading']['tables'][0]['rows'][1]['cells'][4] = {'native_cell': 'p1-t1-r1-c5'}
+                else:
+                    item['native_cells']['p1-t1-r1-c5']['text'] = 'aaa'
+                    item['reading']['facts'] = [dict(item['reading']['facts'][0], text='aa', value='a')]
+                with self.assertRaises(ValueError):
+                    materialize('source', 'v', 1, [item])
+
+    def test_existing_typed_cell_and_cell_specific_limit_survive(self):
+        item = compound_block()
+        item['reading']['facts'] = [dict(item['reading']['facts'][0], role='identifier',
+            text='lab-7', value='lab-7', applies_to=['p1/p1-t1/r1/c1'])]
+        row = materialize('source', 'v', 1, [item]).rows[0]
+        self.assertEqual(row.identifiers, ('lab-7',))
+        self.assertFalse(any(c.get('source_fragments') for c in row.cells))
+        item = compound_block()
+        issue = {'scope': 'p1/p1-t1/r1/c5', 'cause': 'source reading remains provisional'}
+        item['reading']['issues'] = [issue]
+        row = materialize('source', 'v', 1, [item]).rows[0]
+        self.assertTrue(all(c['reading_issues'] == (issue,) for c in row.cells if c.get('source_fragments')))
+        from cordon_d.findings import _coordinate_relation
+        self.assertEqual(_coordinate_relation(row, {'fields': {'latitude': {'text': '41.123456789'},
+            'longitude': {'text': '16.987654321'}}}), 'unresolved')
+
+
 class LiteralReport(unittest.TestCase):
     def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):
         item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024'],

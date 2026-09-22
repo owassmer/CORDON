@@ -13,13 +13,14 @@ from cordon_d.findings import findings, confirmation_inputs, report_rows as reve
 from cordon_d.reports import materialize
 from cordon_d.monitoring import distinct_observations
 from cordon_d.store import file_digest, put_bytes
-from test_reports import block
+from test_reports import block, compound_block
 
 
 class JoinIdentity(unittest.TestCase):
     def run_join(self, publications, report_rows, *, missing_route=False, two_results=False, second_version=False, cutoff=None,
                  repeated=False, repetition_support=True, differing_repeat=False, reading_issues=(), replacement=None, association_rows=(), recovery=False,
-                 identifier_display=False, monitoring_fields=None, differing_qualification=False, continued=False):
+                 identifier_display=False, monitoring_fields=None, differing_qualification=False, continued=False,
+                 report_item=None):
         with TemporaryDirectory() as directory, patch.dict(os.environ):
             base = Path(directory)
             store = base / 'store'; os.environ['CORDON_STORE'] = str(store)
@@ -51,7 +52,7 @@ class JoinIdentity(unittest.TestCase):
                                      'report_page': 1, 'report_locator': 'sample 00091'}]}
             (reports / 'records.json').write_text(json.dumps(captures))
             cache = store / 'derived/reports/v' / digest / 'report.json'; cache.parent.mkdir(parents=True)
-            item = block(report_rows)
+            item = copy.deepcopy(report_item) if report_item is not None else block(report_rows)
             if identifier_display:
                 display = copy.deepcopy(item['reading']['tables'][0])
                 display['id'] = 'p1-display'
@@ -79,7 +80,7 @@ class JoinIdentity(unittest.TestCase):
                     item['reading']['facts'].append({'id': 'repeat', 'role': 'repeated_representation',
                         'page': 1, 'locator': 'shared heading', 'text': 'Risultati dei campioni',
                         'applies_to': ['p1-t1', 'p1-t2']})
-            if association_rows or monitoring_fields:
+            if (association_rows or monitoring_fields) and report_item is None:
                 table = item['reading']['tables'][0]
                 for role, value in (('latitude', '41.123456789'), ('longitude', '16.987654321'),
                                     ('host', 'Vite europea')):
@@ -147,6 +148,31 @@ class JoinIdentity(unittest.TestCase):
             if continued:
                 return joined, list(reverse_rows([materialize(digest, "v", 2, [item])], joined))
             return joined
+
+    def test_compound_components_reach_ordinary_forward_and_reverse_consumers(self):
+        item = compound_block()
+        joined = self.run_join([['specimen-22', '2024-06-01']], [], report_item=item)[0]
+        self.assertEqual(joined['status'], 'matched')
+        row = joined['matches'][0]['row']
+        self.assertEqual(row.identifiers, ('lab-7', 'specimen-22'))
+        self.assertEqual(row.cells[4]['role'], 'other')
+        self.assertTrue(any(f['id'] == 'b1/section-note' for f in row.facts))
+        source = materialize(joined['matches'][0]['key'][0], 'v', 1, [item])
+        reverse = list(reverse_rows([source], [joined]))
+        self.assertEqual(len(reverse), 2)
+        self.assertEqual(len(reverse[0]['observations']), 1)
+        self.assertEqual(reverse[1]['observations'], [])
+        unknown = self.run_join([['absent-code', '2024-06-01']], [], report_item=item)[0]
+        self.assertFalse(unknown['matches'])
+
+    def test_compound_coordinates_use_existing_report_association_checks(self):
+        item = compound_block()
+        result = self.run_join([['public-9', '2024-06-01']], [], report_item=item,
+                              association_rows=[self.association(host='Fictiona nova')])[0]
+        self.assertEqual(result['status'], 'matched')
+        conflicting = self.run_join([['public-9', '2024-06-01']], [], report_item=item,
+            association_rows=[self.association(host='Fictiona nova', longitude='16.11111111')])[0]
+        self.assertFalse(conflicting['matches'])
 
     def test_wrapped_literal_host_label_does_not_create_a_species_conflict(self):
         from cordon_d.findings import _host_relation

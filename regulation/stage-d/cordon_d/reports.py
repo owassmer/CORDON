@@ -15,6 +15,7 @@ ROLES = frozenset({'identifier', 'publisher_id', 'laboratory_id', 'pool_id', 'ex
                    'sampling_date', 'test_date', 'host', 'municipality',
                    'latitude', 'longitude', 'result', 'other'})
 CAUSES = frozenset({'unreadable', 'not_recovered', 'unattached', 'not_stated'})
+COMPONENT_ROLES = frozenset({'host', 'identifier', 'municipality', 'latitude', 'longitude'})
 RESULTS = {'positivo': 'positive', 'negativo': 'negative', 'rilevato': 'detected',
            'non rilevato': 'not-detected', 'non determinabile': 'undetermined',
            'rilevata': 'detected', 'non rilevata': 'not-detected',
@@ -254,6 +255,59 @@ def _scope_support(statement, page_count):
         raise ValueError('Source statement requires its page locator')
 
 
+def cell_components(block, native):
+    """Bind literal component facts to one physical cell, never to a nearby value."""
+    anchors, contextual = {}, {'report', 'unattached'}
+    contextual.update(f['id'] for f in block['facts'] if 'id' in f)
+    contextual.update('section:' + f['section'] for f in block['facts'] if f.get('section'))
+    for table in block['tables']:
+        contextual.add(table['id'])
+        for raw in table['rows']:
+            row = f"{table['id']}/{raw['id']}"
+            contextual.update({row, f"p{table['page']}/{row}"})
+            for index, (column, cell) in enumerate(zip(table['columns'], raw['cells']), 1):
+                contextual.add(f"{table['id']}/c{index}")
+                short = f'{row}/c{index}'
+                locator = f"p{table['page']}/{short}"
+                selectors = {short, locator}
+                if cell.get('native_cell'):
+                    selectors.add('native:' + cell['native_cell'])
+                for selector in selectors:
+                    anchors.setdefault(selector, []).append((locator, table['page'], column, cell))
+
+    def span(text, value):
+        if not isinstance(value, str) or not value.strip() or not isinstance(text, str):
+            raise ValueError('Cell component requires nonempty literal source text and value')
+        start = text.find(value)
+        if start < 0 or text.find(value, start + 1) >= 0:
+            raise ValueError('Cell component requires a unique literal source span')
+        return start, start + len(value)
+
+    components = {}
+    for fact in block['facts']:
+        if fact['role'] not in COMPONENT_ROLES:
+            continue
+        selectors = fact['applies_to']
+        if all(selector in contextual for selector in selectors):
+            continue  # Existing broadly scoped facts remain context, not row fields.
+        if len(selectors) != 1 or len(anchors.get(selectors[0], ())) != 1:
+            raise ValueError('Cell component must select one unique physical cell')
+        locator, page, column, cell = anchors[selectors[0]][0]
+        if column['role'] == fact['role']:
+            continue  # A fact about an already typed field adds no second field.
+        if column['role'] != 'other' or fact['page'] != page:
+            raise ValueError('Cell component requires an untyped cell on its cited page')
+        text = native[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
+        clause = span(text, fact['text'])
+        value = span(fact['text'], fact.get('value'))
+        bounds = (clause[0] + value[0], clause[0] + value[1])
+        previous = components.setdefault(locator, [])
+        if any(max(bounds[0], item['span'][0]) < min(bounds[1], item['span'][1]) for item in previous):
+            raise ValueError('Cell component spans overlap; their distinct meanings are unresolved')
+        previous.append({'fact': fact, 'span': bounds})
+    return components
+
+
 def validate_block(block, *, targets, page_count, native_cells, native_regions=(), supplied_pages=None):
     """Structural validation only; source fidelity needs independent source inspection."""
     if set(block) != {'pages', 'tables', 'facts', 'issues', 'context_pages'}:
@@ -382,6 +436,7 @@ def validate_block(block, *, targets, page_count, native_cells, native_regions=(
     for issue in block['issues']:
         if not issue.get('cause') or not issue.get('scope'):
             raise ValueError('Reading limitation requires cause and scope')
+    cell_components(block, native_cells)
 
 
 def record_tables(reading, native):
@@ -643,7 +698,7 @@ def materialize(digest, version, page_count, blocks):
     continued_parts = {scope for f in facts if f['role'] == 'record_continuation'
                        for scope in f['applies_to']}
     rows, covered, locators, encountered = [], set(), set(), set()
-    for item in blocks:
+    for block_number, item in enumerate(blocks, 1):
         data, native = item['reading'], item['native_cells']
         # The pages the model was shown for this block: recorded on the block when it was
         # read (the whole document under the subscription); otherwise targets and context.
@@ -651,6 +706,8 @@ def materialize(digest, version, page_count, blocks):
                        native_regions=item.get('native_regions', []),
                        supplied_pages=set(item.get('supplied_pages')
                                           or set(item['targets']) | set(item.get('context_pages', []))))
+        components = cell_components(data, native)
+        component_facts = {f['id']: f for f in facts if f.get('id', '').startswith(f'b{block_number}/')}
         for disposition in data['pages']:
             if disposition['page'] in encountered:
                 raise ValueError('Overlapping target pages cannot be silently combined')
@@ -701,6 +758,22 @@ def materialize(digest, version, page_count, blocks):
                                          identifier_basis='literal (Pool) suffix; complete cell retained')
                     cells.append(value)
                     by_role.setdefault(column['role'], []).append(value)
+                    physical = cell.get('source_position', {
+                        'table': table['id'], 'reading_row': raw['id'], 'reading_column': index + 1})
+                    source_cell = (f"p{table['page']}/{physical['table']}/"
+                                   f"{physical.get('reading_row')}/c{physical['reading_column']}")
+                    for component in components.get(source_cell, ()):
+                        fact = component_facts[f"b{block_number}/{component['fact']['id']}"]
+                        field = dict(text=fact['value'], role=fact['role'], heading=column['heading'],
+                            locator=f"{value['locator']}/fact:{fact['id']}",
+                            basis='literal component of a reader-selected source cell',
+                            source_fragments=(value,), source_span=component['span'], support=(fact,))
+                        if value.get('reading_issues'):
+                            field['reading_issues'] = value['reading_issues']
+                        if fact['role'] == 'identifier':
+                            field.update(identifier=fact['value'], identifier_authority=None, authority_support=())
+                        cells.append(field)
+                        by_role.setdefault(fact['role'], []).append(field)
                     if column['role'] == 'result':
                         assay, analyte = column.get('test'), column.get('analyte')
                         assay_cause = None
