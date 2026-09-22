@@ -12,12 +12,12 @@ import json
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .core import Evaluation, MissingInput, Snapshot
+from .core import Evaluation, MissingInput, PrescribedTerm, Snapshot
 from .temporal import WorkingCalendar, add_months, deadline, elapsed_hours, end_of_day, month_window, utc, recurrence_coverage, ordering, interval_coverage
 
 
-def scalar(snapshot: Snapshot, identity: str, at: date) -> Decimal:
-    row = snapshot.quantity(identity, at)
+def scalar(snapshot: Snapshot, identity: str, at: date, *, prescribed_term: PrescribedTerm | None = None) -> Decimal:
+    row = snapshot.quantity(identity, at, prescribed_term=prescribed_term)
     value = row.get("value", row.get("magnitude"))
     if not isinstance(value, str):
         raise TypeError("This quantity has no scalar magnitude")
@@ -101,17 +101,35 @@ def operative_period_rule(identity: str, calendar: WorkingCalendar | None) -> tu
     return PeriodRule(True, name == "eu_period"), selected
 
 
+def _prescribed_execution_rule(unit: str, calendar: WorkingCalendar | None) -> tuple[PeriodRule, WorkingCalendar | None]:
+    """The understood source-input form owns physical-execution counting."""
+    if unit == "hours":
+        return PeriodRule(False), calendar
+    if unit not in {"calendar_days", "working_days", "months", "years"}:
+        raise ValueError("Prescribed execution deadline requires a resolved supported unit")
+    if calendar is None:
+        raise MissingInput("prescribed execution deadline: applicable bounded holiday calendar")
+    weekends = frozenset({5, 6}) if unit == "working_days" else frozenset({6})
+    selected = WorkingCalendar(calendar.start, calendar.end_exclusive, calendar.holidays, weekends)
+    return PeriodRule(True), selected
+
+
 def clock_boundary(snapshot: Snapshot, identity: str, at: date, anchor: date | datetime,
                    *, zone: ZoneInfo, calendar: WorkingCalendar | None = None,
-                   rule: PeriodRule | None = None) -> datetime:
-    row = snapshot.quantity(identity, at)
+                   rule: PeriodRule | None = None,
+                   prescribed_term: PrescribedTerm | None = None) -> datetime:
+    row = snapshot.quantity(identity, at, prescribed_term=prescribed_term)
     kind, unit = row["kind"], row["unit"]
+    if isinstance(row.get("prescribed_term"), PrescribedTerm):
+        if rule is not None:
+            raise ValueError("A prescribed execution deadline uses its source-form counting convention")
+        rule, calendar = _prescribed_execution_rule(unit, calendar)
     if kind == "same_calendar_day":
         day = utc(anchor).astimezone(zone).date() if isinstance(anchor, datetime) else anchor
         return end_of_day(day, zone)
     if kind in {"promptness_standard", "ordering_constraint", "recurrence"}:
         raise MissingInput(f"{identity}: operative timing/period input ({row['anchor']})")
-    magnitude = scalar(snapshot, identity, at)
+    magnitude = scalar(snapshot, identity, at, prescribed_term=prescribed_term)
     if magnitude != int(magnitude):
         raise ValueError("Fractional source period needs a specific counting rule")
     magnitude = int(magnitude)
@@ -144,7 +162,8 @@ def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
                         anchor: date | datetime, completed_at: datetime | None,
                         evaluated_at: datetime, completion_history_complete: bool,
                         zone: ZoneInfo, calendar: WorkingCalendar | None = None,
-                        rule: PeriodRule | None = None) -> Evaluation:
+                        rule: PeriodRule | None = None,
+                        prescribed_term: PrescribedTerm | None = None) -> Evaluation:
     """Whether this clock's own qualifying performance occurred in time.
 
     The event must satisfy B's exact completion and anchor meanings. This is
@@ -153,11 +172,11 @@ def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
     is established only from a complete performance history. Early performance
     is not rejected by a generic lower bound absent a source requirement.
     """
-    row = snapshot.quantity(identity, at)
+    row = snapshot.quantity(identity, at, prescribed_term=prescribed_term)
     if row["kind"] not in {"deadline", "same_calendar_day"}:
         raise ValueError("A deadline or same-day completion clock is required")
     boundary = clock_boundary(snapshot, identity, at, anchor, zone=zone,
-                               calendar=calendar, rule=rule)
+                               calendar=calendar, rule=rule, prescribed_term=prescribed_term)
     through = utc(evaluated_at)
     if completed_at is not None:
         completed = utc(completed_at)

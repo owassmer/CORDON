@@ -8,7 +8,7 @@ bind those facts and the typed mathematical inputs to evidence.
 from datetime import date, datetime
 from collections.abc import Mapping
 
-from .core import Evaluation, MissingInput, Snapshot, evaluate, negation, disjunction, predicate_value
+from .core import Evaluation, MissingInput, PrescribedTerm, Snapshot, evaluate, negation, disjunction, predicate_value
 from .diagnostic import AssayResult, analytical_predicates
 from .quantities import scalar, clock_boundary, PeriodRule, timely_completion, clock_ordering
 from .temporal import elapsed_hours, utc, WorkingCalendar, occurrence_in_window
@@ -328,25 +328,28 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
                           qualifying_commencements: Mapping[str, datetime],
                           commencement_records_complete: bool,
                           zone: ZoneInfo, rule: PeriodRule | None = None,
-                          calendar: WorkingCalendar | None = None) -> dict:
+                          calendar: WorkingCalendar | None = None,
+                          prescribed_term: PrescribedTerm | None = None) -> dict:
     """Only the temporal components of the case-qualified enforcement condition.
 
     Notification, work identity and lawful prescription remain A's conditions.
     The performances must concern this exact work. Commencement before notice
     also defeats noncommencement; no second commencement is demanded.
     """
-    clock = snapshot.quantity(clock_id, at)
+    clock = snapshot.quantity(clock_id, at, prescribed_term=prescribed_term)
     row = snapshot.version(clock["consumer_decision"], at)
     required = {"the source notification-based commencement deadline has elapsed",
                 "noncommencement of that work by the source deadline is established"}
     if not required <= set(leaves(row["condition_ast"])):
         raise ValueError("Clock does not feed the case noncommencement condition")
-    end = clock_boundary(snapshot, clock_id, at, notification, zone=zone, rule=rule, calendar=calendar)
+    end = clock_boundary(snapshot, clock_id, at, notification, zone=zone, rule=rule,
+                         calendar=calendar, prescribed_term=prescribed_term)
     through = utc(evaluated_at)
     if any(utc(t) > through for t in qualifying_commencements.values()):
         raise ValueError("Performance evidence is later than the evaluation time")
-    elapsed = through >= utc(end)
-    begun = any(utc(t) < utc(end) for t in qualifying_commencements.values())
+    elapsed = through > utc(end) if clock["unit"] == "hours" else through >= utc(end)
+    begun = any(utc(t) <= utc(end) if clock["unit"] == "hours" else utc(t) < utc(end)
+                for t in qualifying_commencements.values())
     absent = (False if begun else True if elapsed and commencement_records_complete
               else Evaluation(None, needs=frozenset({"commencement evidence through the source deadline"})))
     return bind(row, {"the source notification-based commencement deadline has elapsed": elapsed,

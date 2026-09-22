@@ -29,6 +29,62 @@ actions, F the necessary nouns and relationships, G their platform compilation.
 These reference functions perform no network request, operational write or
 implicit current-time lookup.
 
+## Proposed prescription-clause amendment
+
+The exact temporary [owner patch](../../corpus/workbench/prescription-clause-amendment.json)
+is **not accepted**. It changes no accepted A/B file or acceptance record.
+`test_prescription_candidate.py` checks the stated accepted-base hashes, expands
+the patch only into temporary files, verifies A/B, and constructs an explicit
+`Snapshot`. Ordinary `Snapshot.load()` retains its accepted-owner hash gates.
+The changed C package intentionally does not match the CLOSED C digest in
+`CURRENT`; review checks are not acceptance. Promotion requires Owen's acceptance
+of the exact reviewed content, updated acceptance bindings and deletion of the
+temporary patch and its expansion harness.
+
+In the proposed A content, statutory execution rules and the
+`SOURCE-CLAUSE:notification-noncommencement-direction` interpretation have
+different identities. The interpretation is explicitly typed, has no legislative
+instrument identity, and names the original operative clauses that support the
+understood form. It reuses the condition evaluator without presenting the
+particular act's conditional command as the text of Article 21-quater. Each
+instance remains responsible for its own operative clause, actual command,
+recipient, commencement work, coercive population, executor and legal context.
+An absent, recited, discretionary or materially different clause cannot supply
+this interpretation's affirmative operative-form predicate.
+
+The proposed B row binds `magnitude: {"source_input": "prescribed-term"}`
+instead of registering a fixed number for each act. `PrescribedTerm` retains the
+document, clause, recipient and **commencement work** identities, together with
+a positive whole Decimal magnitude and its source-qualified unit. These identities
+preserve context; they do not establish legal validity or correspondence to
+notice/performance evidence. The coercive population is a distinct A/D input.
+`bound: exact` fixes the stated maximum period's length; it does not require
+commencement exactly on its last day. A missing period has no default.
+
+`Snapshot.quantity`, `scalar`, `clock_boundary`, `timely_completion` and
+`noncommencement_facts` accept this typed term only for that source-bound clock
+shape. Resolution returns a fresh row and cannot replace a fixed quantity or
+mutate the snapshot. The semantic form selects existing physical-execution
+calendar conventions by unit: Sunday/public-holiday final-day extension for
+calendar days/months/years, the existing working-day convention when expressly
+stated, and exact elapsed hours. A caller cannot override this qualification
+with `PeriodRule`. A different or unresolved counting form requires its own
+source disposition. Missing commencement history remains unresolved; qualifying
+earlier commencement defeats noncommencement. The result establishes neither
+physical execution nor its separate procedural readiness.
+
+The candidate retires the eighteen duplicated clock registrations and their
+calendar assignments while retaining genuine correction, authority-conflict and
+other execution routes. Different scope and inherited terms must survive through
+the ordinary D source/relationship consumer before this amendment is complete.
+
+To verify the proposed owners and arithmetic explicitly:
+
+```sh
+PYTHONPATH=regulation/stage-c .venv/bin/python -m unittest discover -s regulation/stage-c -p 'test_prescri*.py'
+python3 -m unittest discover -s scripts -p test_prescribed_clock_schema.py
+```
+
 ## Mathematical surface
 
 | Requirement | Calculation and required semantic inputs |

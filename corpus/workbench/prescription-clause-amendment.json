@@ -1,0 +1,668 @@
+{
+  "schema": "cordon-prescription-clause-amendment-v1",
+  "status": "PROPOSED_FOR_REVIEW_NOT_ACCEPTED",
+  "accepted_base": {
+    "regulation/stage-a/authoring-eu.json": "7411f4251b1e6843f11dbac0c579e9373e352fccc6b42187621b60ab8ffbb0be",
+    "regulation/jurisdiction/canonical/authoring.json": "1398dd1be2c734fc6a1c635463f7c99165d13cdeb7bb39aa2400e13fafe246ed",
+    "regulation/stage-b/clocks-and-parameters.json": "efa7650b93978b91a30b82d9c9c30955e873334d7824057e97c7fcd8f6b0dc85",
+    "regulation/stage-b/population.json": "d00217fcf1729d94723b1ea5a7bd15f3e1acde3bbda85f6f4b994eeadf4228e6"
+  },
+  "basis": "PR23: source-bound execution terms and operative conditional directions; no case registry, numeric default or presumed authority for actual coercive execution. Delete this temporary patch when the exact reviewed content is accepted and promoted.",
+  "stage_a": {
+    "remove": [
+      "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1"
+    ],
+    "replace": [
+      {
+        "source_quote_sha256": "ab7f97eb1fadfefc7cbf2335486279bf2d3ee5a869a2a5bb727b9336741b63e5",
+        "application_basis": "Genuine case-specific operative delta",
+        "effective_from": "2024-11-25",
+        "external_dependencies": [
+          "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition",
+          "EU-2020-1201:7(1)",
+          "SOURCE-CLAUSE:notification-noncommencement-direction"
+        ],
+        "source_paths": "regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.txt",
+        "article": "case operative delta",
+        "condition_ast": {
+          "all_of": [
+            {
+              "predicate": "predecessor order"
+            },
+            {
+              "predicate": "material annex error"
+            },
+            {
+              "predicate": "corrected municipality payload"
+            }
+          ],
+          "otherwise": {
+            "effect": "No new removal rule, branch, population, owner duty, or area state is created."
+          }
+        },
+        "higher_authority_dependencies": [
+          "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition",
+          "EU-2020-1201:7(1)"
+        ],
+        "effective_to_exclusive": "",
+        "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+        "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction:v1",
+        "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00165",
+        "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction::source",
+        "legal_linguistic_conflict": "-",
+        "temporal_status": "CURRENT",
+        "actor_role": "Regional Plant Health Service",
+        "true_effect": "Replace the erroneous municipality value in the annex and confirm every other operative effect of the predecessor order.",
+        "lineage_role": "RETAINED_ATOM",
+        "authority_judgment_kind": "case-specific correction or source-conflict resolution",
+        "parent_stable_provision_id": "",
+        "instrument_id": "REG-PUGLIA-U181-DIR-2024-00165",
+        "source_quote": "RILEVATO CHE\nLa tabella “Area delimitata Xylella fastidiosa – sottospecie multiplex ST26 – Santeramo in colle - PIANTE\nINFETTE MONITORAGGIO 2024” dell’Allegato 1/C di cui alla DDS N. 00147 del 08/11/2024, per mero errore\nmateriale, riporta l’agro di Santeramo in Colle mentre le piante infette sono tutte site in agro di Altamura.\n\nRITENUTO NECESSARIO\ndovere sostituire l’allegato 1/C della DDS N. 00147 del 08/11/2024 con l’allegato 1/C al presente provvedimento\nper formarne parte integrante e sostanzile che contiene, nella prima colonna della tabella “Area delimitata\nXylella fastidiosa – sottospecie multiplex ST26 – Santeramo in colle - PIANTE INFETTE MONITORAGGIO 2024”,\nriportando il dato corretto relativo all’agro di Altamura in cui insistono tutte le piante infette.\nDETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\n\n                           Bollettino Ufficiale della Regione Puglia - n. 96 del 28-11-2024                     81089\n\n\n  1.   Di sostituire l’allegato 1/C della DDS N. 00147 del 08/11/2024 con l’allegato 1/C al presente\n       provvedimento che contiene, nella prima colonna della tabella “Area delimitata Xylella fastidiosa –\n       sottospecie multiplex ST26 – Santeramo in colle - PIANTE INFETTE MONITORAGGIO 2024”, riportando\n       il dato corretto relativo all’agro di Altamura in cui insistono tutte le piante infette.\n  2.   Di confermare quanto disposto con DDS N. 00147 del 08/11/2024.",
+        "source_snapshot_dates": "2024-11-25",
+        "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.txt",
+        "semantic_change": "INITIAL",
+        "structural_kind": "paragraph",
+        "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. The predecessor source prescription owns its terms. Its supported correction/supplement relationship supplies the applicable recipient and work context to the general source-bound clause consumer; it does not duplicate a clock or automatically restart valid notice.",
+        "authority_judgment_required": "YES",
+        "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
+        "reserved_decision_owner": "Regional Plant Health Service",
+        "modality": "shall",
+        "false_effect": "No new removal rule, branch, population, owner duty, or area state is created.",
+        "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction",
+        "source_snapshot_hashes": "ad67720f2bd2474b99fafa08353c23923d3fae81c88195caf01bb6be29a77755",
+        "exact_change_kind": "INITIAL"
+      },
+      {
+        "source_quote_sha256": "907e246cac8dacefba5f1bb0fa66a035119304121c954ca0b4ddf1b41efb164d",
+        "application_basis": "Genuine case-specific operative delta",
+        "effective_from": "2025-02-05",
+        "external_dependencies": [
+          "EU-2020-1201:7(1)",
+          "PUG-DGR1593-2024:notice-owner-identification",
+          "SOURCE-CLAUSE:notification-noncommencement-direction"
+        ],
+        "source_paths": "regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.txt",
+        "article": "case operative delta",
+        "condition_ast": {
+          "all_of": [
+            {
+              "predicate": "predecessor eradication order"
+            },
+            {
+              "predicate": "ownership-transfer evidence"
+            },
+            {
+              "predicate": "corrected annex"
+            }
+          ],
+          "otherwise": {
+            "effect": "Old-listed ownership does not prove current duty; no transfer follows without the correction."
+          }
+        },
+        "higher_authority_dependencies": [
+          "EU-2020-1201:7(1)",
+          "PUG-DGR1593-2024:notice-owner-identification"
+        ],
+        "effective_to_exclusive": "",
+        "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+        "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction:v1",
+        "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00011",
+        "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction::source",
+        "legal_linguistic_conflict": "-",
+        "temporal_status": "CURRENT",
+        "actor_role": "Regional Plant Health Service",
+        "true_effect": "Replace obsolete owner identities with current owners and carry the predecessor eradication measures to those current recipient relations.",
+        "lineage_role": "RETAINED_ATOM",
+        "authority_judgment_kind": "case-specific correction or source-conflict resolution",
+        "parent_stable_provision_id": "",
+        "instrument_id": "REG-PUGLIA-U181-DIR-2025-00011",
+        "source_quote": "dal bilancio regionale.\n                                                     DETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\nRettificare l’allegato 1/C della DDS 188/2024, inserendo gli attuali proprietari delle seguenti particelle :\n    • Agro di Triggiano, Fg 21 - P.lle: 713, 715, 717, 719, 721 – Proprietà: Acquedotto Pugliese S.p.A;\n    • Agro di Triggiano, Fg 20 - P.lla: 1168 – Proprietà: Acquedotto Pugliese S.p.A;\n    • Agro di Triggiano, Fg 17 - P.lle: 1143, 1146, 1148, 1150, 1152, 1154, 1156, 1158, 1186, 1189 – Proprietà:\n      Acquedotto Pugliese S.p.A;\n    • Agro di Triggiano, Fg 12 - P.lle: 40, 41 – Proprietà: Sig. Ragone Matteo.\n\nStabilire che in caso di cambio di proprietà di ulteriori particelle inserite nell’allegato 1/C della DDS 188/2024,\nil proprietario riportato nell’allegato deve comunicare la variazione all’Osservatorio indicando il nome\ndell’attuale proprietario, entro massimo 3 giorni dal termine del periodo di pubblicazione, ai seguenti indirizzi\nmail: gestionefitosanitaria@pec.rupar.puglia.it, protocollo@pec.arifpuglia.it, c.zaza@regione.puglia.it;\n\nStabilire che l’Acquedotto Pugliese S.p.A e il Sig. Ragone Matteo, devono applicare le misure di eradicazione\ncome riportato nella DDS 188/2024.",
+        "source_snapshot_dates": "2025-02-05",
+        "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.txt",
+        "semantic_change": "INITIAL",
+        "structural_kind": "paragraph",
+        "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. [SPAN 2026-09-01] Quote completed to its sentence end from the same source span (it had been cut mid-word by an earlier extraction); meaning unchanged. The predecessor source prescription owns its terms. Its supported correction/supplement relationship supplies the applicable recipient and work context to the general source-bound clause consumer; it does not duplicate a clock or automatically restart valid notice.",
+        "authority_judgment_required": "YES",
+        "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
+        "reserved_decision_owner": "Regional Plant Health Service",
+        "modality": "shall",
+        "false_effect": "Old-listed ownership does not prove current duty; no transfer follows without the correction.",
+        "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction",
+        "source_snapshot_hashes": "78af2c3a7a6f4dfd2555d6b10925b023370aac0b968126ba099713fa4dce4dd1",
+        "exact_change_kind": "INITIAL"
+      },
+      {
+        "source_quote_sha256": "e55cfa8c483983f0274b498f926ebb9bfe5a4c474effd397044d52584408c0e3",
+        "application_basis": "Genuine case-specific operative delta",
+        "effective_from": "2026-04-03",
+        "external_dependencies": [
+          "EU-2020-1201:7(1)",
+          "REG-PUGLIA-U181-DIR-2025-00163:area-state-transition",
+          "SOURCE-CLAUSE:notification-noncommencement-direction"
+        ],
+        "source_paths": "regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
+        "article": "case operative delta",
+        "condition_ast": {
+          "all_of": [
+            {
+              "predicate": "predecessor order"
+            },
+            {
+              "predicate": "omitted parcel within exact 50 m population"
+            },
+            {
+              "predicate": "current owner evidence"
+            },
+            {
+              "predicate": "effective supplement"
+            }
+          ],
+          "otherwise": {
+            "effect": "The supplement does not create a new removal rule or rewrite already valid predecessor relations."
+          }
+        },
+        "higher_authority_dependencies": [
+          "EU-2020-1201:7(1)",
+          "REG-PUGLIA-U181-DIR-2025-00163:area-state-transition"
+        ],
+        "effective_to_exclusive": "",
+        "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+        "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1",
+        "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2026-00063",
+        "source_clause_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement::source",
+        "legal_linguistic_conflict": "-",
+        "temporal_status": "CURRENT",
+        "actor_role": "Regional Plant Health Service",
+        "true_effect": "Add the omitted parcel/current-owner relation to the predecessor eradication order and apply that order’s existing measures and timing to the supplemented relation.",
+        "lineage_role": "RETAINED_ATOM",
+        "authority_judgment_kind": "case-specific correction or source-conflict resolution",
+        "parent_stable_provision_id": "",
+        "instrument_id": "REG-PUGLIA-U181-DIR-2026-00063",
+        "source_quote": "Di integrare la determina n. 173 del 24/10/2025 con l’allegato 1/B che forma parte integrante e sostanziale\ndel presente provvedimento, che riporta la p.lla 208 del foglio 8 dell’agro di Cagnano Varano, ricadente nella\nzona buffer di 50 attorno alla pianta infetta con ID 1892726 e i relativi proprietari.\n\nDi prescrivere l’applicazione con immediatezza delle misure di eradicazione con le modalità e la tempistica\nindicate nella determina n. 173/2025.",
+        "source_snapshot_dates": "2026-04-03",
+        "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
+        "semantic_change": "INITIAL",
+        "structural_kind": "paragraph",
+        "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. The source loosely labels the 50 m infected-zone radius a \"zona buffer di 50\"; the supplemented parcel joins the predecessor order’s exact Article 4 population. The predecessor source prescription owns its terms. Its supported correction/supplement relationship supplies the applicable recipient and work context to the general source-bound clause consumer; it does not duplicate a clock or automatically restart valid notice.",
+        "authority_judgment_required": "YES",
+        "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
+        "reserved_decision_owner": "Regional Plant Health Service",
+        "modality": "shall",
+        "false_effect": "The supplement does not create a new removal rule or rewrite already valid predecessor relations.",
+        "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement",
+        "source_snapshot_hashes": "c88d31c97d7f81e6c891fcbeeb727ca54308c63e11ccda56f67bf15cf1637b48",
+        "exact_change_kind": "INITIAL"
+      }
+    ],
+    "add": [
+      {
+        "source_clause_id": "IT-L241-1990::21-ter(1):prescribed-execution-terms",
+        "instrument_id": "IT-L241-1990",
+        "stable_provision_id": "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms",
+        "parent_stable_provision_id": "",
+        "article": "21-ter(1):prescribed-execution-terms",
+        "structural_kind": "paragraph",
+        "effective_from": "2005-03-08",
+        "effective_to_exclusive": "",
+        "application_basis": "Law 241/1990 provision inserted by Law 15/2005 Article 14, effective 8 March 2005; the quoted paragraph is unchanged in the official current reproduction. Applied only where directly consequential in the chosen plant-health chain.",
+        "exact_change_kind": "INITIAL",
+        "semantic_change": "INITIAL",
+        "actor_role": "Administration issuing the obligation-creating act",
+        "modality": "shall",
+        "true_effect": "The obligation-creating act supplies the obligated subject's execution term and methods; use those operative source terms for this prescription and recipient.",
+        "false_effect": "No particular prescribed term is established through this route. Absence of a recovered term does not supply a default or suspend another applicable duty.",
+        "reserved_decision_owner": "Competent public administration",
+        "evidence_contract": "Operative obligation-creating prescription; exact clause, obligated recipient and required work; expressly stated execution term, triggering event and methods; source-supported corrections and inheritance.",
+        "external_dependencies": [],
+        "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+        "authority_judgment_required": "YES",
+        "authority_judgment_kind": "operative prescription and applicable statutory route",
+        "legal_linguistic_conflict": "-",
+        "semantic_note": "This owns the source of a particular prescribed term, not a universal numeric period. Its existence does not prove notification, breach or lawful coercive execution. The same paragraph separately preserves prior diffida and statutory limits for coercive execution; its warning is not an extra numeric grace period.",
+        "condition_ast": {
+          "predicate": "an operative obligation-creating prescription states the execution term and methods for this subject and work"
+        },
+        "higher_authority_dependencies": [],
+        "documentary_source_instrument_id": "IT-L241-1990",
+        "source_uri": "https://def.giustiziatributaria.gov.it/DocTribFrontend/executePrintArticolo.do?articolo=Articolo+21+ter&codiceOrdinamento=0000000000000219999900003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&id=%7B00CBF74C-1642-41D9-AE4F-6CD18551724F%7D",
+        "source_paths": "",
+        "source_snapshot_hashes": "a554db17b2d49cae23008596f078dda4606743692e00f3f85e9f5f26936657d5",
+        "source_snapshot_dates": "2026-09-22",
+        "source_quote": "Nei casi e con le modalita' stabiliti dalla legge, le pubbliche amministrazioni possono imporre coattivamente l'adempimento degli obblighi nei loro confronti. Il provvedimento costitutivo di obblighi indica il termine e le modalita' dell'esecuzione da parte del soggetto obbligato. Qualora l'interessato non ottemperi, le pubbliche amministrazioni, previa diffida, possono provvedere all'esecuzione coattiva nelle ipotesi e secondo le modalita' previste dalla legge.",
+        "source_quote_sha256": "ae7e928ef72fe814e3c6adda4d3878485ea712bc8e95cbca08466cc7ee78ee9c",
+        "lineage_role": "PROCEDURAL_ATOM",
+        "provision_version_id": "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms:v1",
+        "temporal_status": "CURRENT"
+      },
+      {
+        "source_clause_id": "IT-L241-1990::21-ter(1):coercive-execution-safeguards",
+        "instrument_id": "IT-L241-1990",
+        "stable_provision_id": "IT-L241-1990:Art.21-ter(1):coercive-execution-safeguards",
+        "parent_stable_provision_id": "",
+        "article": "21-ter(1):coercive-execution-safeguards",
+        "structural_kind": "paragraph",
+        "effective_from": "2005-03-08",
+        "effective_to_exclusive": "",
+        "application_basis": "Law 241/1990 provision inserted by Law 15/2005 Article 14, effective 8 March 2005; the quoted paragraph is unchanged in the official current reproduction. Applied only where directly consequential in the chosen plant-health chain.",
+        "exact_change_kind": "INITIAL",
+        "semantic_change": "INITIAL",
+        "actor_role": "Competent public administration",
+        "modality": "may",
+        "true_effect": "Where this general coercive-execution route applies, the administration may proceed with coercive execution following noncompliance and prior diffida, only in the statutory cases and manner.",
+        "false_effect": "Coercive execution is not established as permissible through this general route. A missing fact does not prove invalidity or displace an independently applicable special-law route.",
+        "reserved_decision_owner": "Competent public administration",
+        "evidence_contract": "Applicable statutory coercive-execution route; effective obligation and noncompliance; content and legally sufficient communication of the applicable prior diffida; any established special-law procedure; actual execution is separately evidenced.",
+        "external_dependencies": [],
+        "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+        "authority_judgment_required": "YES",
+        "authority_judgment_kind": "operative prescription and applicable statutory route",
+        "legal_linguistic_conflict": "-",
+        "semantic_note": "The statute prescribes prior diffida for this general route and states no numerical additional period. This does not decide that every plant-health execution uses this route, that any notice automatically satisfies diffida, or that special law automatically waives it. The conditional duty to direct the source-stated next step is not proof or permission that physical coercive execution can already occur. Monetary collection in paragraph2 is outside the chosen chain.",
+        "condition_ast": {
+          "all_of": [
+            {
+              "predicate": "the general Article21-ter coercive-execution route applies in the statutory case and manner"
+            },
+            {
+              "predicate": "the person has not complied with the effective obligation"
+            },
+            {
+              "predicate": "the applicable prior diffida has been legally satisfied for this coercive execution"
+            }
+          ]
+        },
+        "higher_authority_dependencies": [],
+        "documentary_source_instrument_id": "IT-L241-1990",
+        "source_uri": "https://def.giustiziatributaria.gov.it/DocTribFrontend/executePrintArticolo.do?articolo=Articolo+21+ter&codiceOrdinamento=0000000000000219999900003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&id=%7B00CBF74C-1642-41D9-AE4F-6CD18551724F%7D",
+        "source_paths": "",
+        "source_snapshot_hashes": "a554db17b2d49cae23008596f078dda4606743692e00f3f85e9f5f26936657d5",
+        "source_snapshot_dates": "2026-09-22",
+        "source_quote": "Nei casi e con le modalita' stabiliti dalla legge, le pubbliche amministrazioni possono imporre coattivamente l'adempimento degli obblighi nei loro confronti. Il provvedimento costitutivo di obblighi indica il termine e le modalita' dell'esecuzione da parte del soggetto obbligato. Qualora l'interessato non ottemperi, le pubbliche amministrazioni, previa diffida, possono provvedere all'esecuzione coattiva nelle ipotesi e secondo le modalita' previste dalla legge.",
+        "source_quote_sha256": "ae7e928ef72fe814e3c6adda4d3878485ea712bc8e95cbca08466cc7ee78ee9c",
+        "lineage_role": "PROCEDURAL_ATOM",
+        "provision_version_id": "IT-L241-1990:Art.21-ter(1):coercive-execution-safeguards:v1",
+        "temporal_status": "CURRENT"
+      },
+      {
+        "source_clause_id": "IT-L241-1990::21-quater(1)",
+        "instrument_id": "IT-L241-1990",
+        "stable_provision_id": "IT-L241-1990:Art.21-quater(1):effective-act-execution",
+        "parent_stable_provision_id": "",
+        "article": "21-quater(1)",
+        "structural_kind": "paragraph",
+        "effective_from": "2005-03-08",
+        "effective_to_exclusive": "",
+        "application_basis": "Law 241/1990 Article 21-quater(1), inserted by Law 15/2005 Article 14 and effective 8 March 2005; paragraph 1 is unchanged in the current official reproduction.",
+        "exact_change_kind": "INITIAL",
+        "semantic_change": "INITIAL",
+        "actor_role": "Administration responsible for execution of the effective act",
+        "modality": "shall",
+        "true_effect": "Execute an effective administrative act immediately, unless the law or that act itself establishes otherwise.",
+        "false_effect": "The execution timing of this act is not established through this condition.",
+        "reserved_decision_owner": "Competent public administration",
+        "evidence_contract": "Effective administrative act; execution required by its operative content; any different execution timing established by applicable law or the act itself.",
+        "external_dependencies": [],
+        "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+        "authority_judgment_required": "YES",
+        "authority_judgment_kind": "effective act and applicable execution timing",
+        "legal_linguistic_conflict": "-",
+        "semantic_note": "This is the literal general execution rule. It supplies no particular conditional coercive-removal command, term, scope or executor. Those come from the operative act. Actual suspension or another legal effectiveness issue changes the act context; missing records do not create a suspension.",
+        "condition_ast": {
+          "all_of": [
+            {
+              "predicate": "the administrative act is effective and calls for this execution"
+            },
+            {
+              "predicate": "the execution is due now under the law and the operative act itself"
+            }
+          ]
+        },
+        "higher_authority_dependencies": [],
+        "documentary_source_instrument_id": "IT-L241-1990",
+        "source_uri": "https://def.giustiziatributaria.gov.it/DocTribFrontend/executePrintArticolo.do?codiceOrdinamento=0000000000000219999900004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&id=%7B57646D3D-0555-407D-AC24-7C67B85D5CF3%7D&idAttoNormativo=%7B00CBF74C-1642-41D9-AE4F-6CD18551724F%7D",
+        "source_paths": "",
+        "source_snapshot_hashes": "4028abddf204a02c544dcbf42bf46c6376a0d18e95cc07adbcd1613728889e66",
+        "source_snapshot_dates": "2026-09-22",
+        "source_quote": "I provvedimenti amministrativi efficaci sono eseguiti immediatamente, salvo che sia diversamente stabilito dalla legge o dal provvedimento medesimo.",
+        "source_quote_sha256": "a44ae165c31f4546a56beda1a4a43e862701a7f12a55eab464190492bfb9125b",
+        "lineage_role": "PROCEDURAL_ATOM",
+        "provision_version_id": "IT-L241-1990:Art.21-quater(1):effective-act-execution:v1",
+        "temporal_status": "CURRENT"
+      },
+      {
+        "source_clause_id": "",
+        "instrument_id": "",
+        "stable_provision_id": "SOURCE-CLAUSE:notification-noncommencement-direction",
+        "parent_stable_provision_id": "",
+        "article": "",
+        "structural_kind": "source_clause_interpretation",
+        "effective_from": "2021-03-13",
+        "effective_to_exclusive": "",
+        "application_basis": "Interpretive binding of an expressly stated operative administrative direction within the post-13-March-2021 plant-health authority context. This record is not a legislative provision or a universal DDS rule. Its version dates delimit this accepted interpretation and do not date, activate or validate an individual prescription.",
+        "exact_change_kind": "INITIAL",
+        "semantic_change": "INITIAL",
+        "actor_role": "Responsible regional plant-health service",
+        "modality": "shall",
+        "true_effect": "The responsible service must direct the coercive removal expressly specified by this operative clause, through its source-specified executor and only for the population whose removal remains lawfully due. This result does not establish actual execution, its procedural readiness or completion.",
+        "false_effect": "This source-prescribed noncommencement ground is not established. Missing evidence does not prove default, discharge removal or prevent another applicable intervention route.",
+        "reserved_decision_owner": "Competent public administration",
+        "evidence_contract": "Exact operative prescription and clause; source-stated conditional direction and executor; separately identified commencement and coercive populations; obligated recipient; applicable legal and correction context; source-qualified notice-based term; legally sufficient notification; actual commencement history through the source deadline.",
+        "external_dependencies": [
+          "IT-L241-1990:Art.21-quater(1):effective-act-execution",
+          "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms",
+          "IT-L241-1990:Art.21-ter(1):coercive-execution-safeguards",
+          "IT-DLGS-19-2021:Art.32(3):substitute-execution",
+          "IT-DLGS-19-2021:Art.55(13):coercive-removal",
+          "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+          "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
+        ],
+        "rule_determinacy": "DETERMINISTIC_RULE__EVIDENCE_OR_POLICY_REQUIRED",
+        "authority_judgment_required": "YES",
+        "authority_judgment_kind": "operative prescription and applicable statutory route",
+        "legal_linguistic_conflict": "-",
+        "semantic_note": "[INTERPRETATION, NOT LITERAL STATUTORY TEXT] In the operative determination, “Stabilire che, qualora … disporrà” expressly commits the named service to the stated subsequent direction when the stated condition holds. This retains the mandatory interpretation already held for the eighteen named case atoms, while binding it to the actual supplied clause instead of its DDS number. Article 21-quater supplies the general execution rule, not this conditional command; Article 21-ter supplies the act-specific term and statutory limits. The three cited originals demonstrate this understood form and differing scopes; they are source support for the interpretation, not a case registry or a source of defaults. A newly supplied clause must itself state the same operative conditional commitment; recitals, discretionary wording, different anchors or unrecognized conditions cannot be normalized into it. The instance owns its term, recipient, commencement work, directed coercive population, service and executor. This result requires a lawful commencement obligation and a lawful coercive scope separately; it is not proof or permission of completed or procedurally ready physical execution. Applicable special-law safeguards, actual correction/suspension effects and authority conflicts remain controlling. No extra grace period, universal new warning requirement or proof of defect-free history is created. Pre-13-March-2021 authority remains the accepted bounded unknown.",
+        "condition_ast": {
+          "route_table": [
+            {
+              "when": {
+                "all_of": [
+                  {
+                    "predicate": "the operative prescription expressly directs coercive removal after noncommencement within its stated notification-based term"
+                  },
+                  {
+                    "predicate": "this operative prescription, including applicable corrections, governs this recipient and commencement work"
+                  },
+                  {
+                    "predicate": "the prescribed commencement work is lawfully due from this recipient under this clause"
+                  },
+                  {
+                    "predicate": "the prescribed coercive population remains lawfully due under this direction"
+                  },
+                  {
+                    "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                  },
+                  {
+                    "predicate": "the source notification-based commencement deadline has elapsed"
+                  },
+                  {
+                    "predicate": "noncommencement of that work by the source deadline is established"
+                  }
+                ]
+              },
+              "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+            }
+          ],
+          "otherwise": {
+            "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+          }
+        },
+        "higher_authority_dependencies": [
+          "IT-L241-1990:Art.21-quater(1):effective-act-execution",
+          "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms",
+          "IT-L241-1990:Art.21-ter(1):coercive-execution-safeguards",
+          "IT-DLGS-19-2021:Art.32(3):substitute-execution",
+          "IT-DLGS-19-2021:Art.55(13):coercive-removal",
+          "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+          "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
+        ],
+        "documentary_source_instrument_id": "",
+        "source_uri": "https://burp.regione.puglia.it/documents/20135/2491695/DET_63_24_5_2024.pdf/44c73b91-3a4d-e059-8765-0ce31b8a9cb6\nhttps://burp.regione.puglia.it/documents/20135/2514548/DET_108_16_8_2024.pdf/8551bd21-105b-c34a-f588-c9915e9eb2a8\nhttps://burp.regione.puglia.it/documents/20135/2632884/DET_65_18_4_2025.pdf/1df62839-82fc-89f3-9e36-2581dbcbd727",
+        "source_paths": "",
+        "source_snapshot_hashes": "3b5813789b43ef0861c283175ab607fa32cfba7c1d2057a55b291aa8f8097a48;47b107a6525606934c79125d5b4f565d7193ab92aef801b80b21d25bc3a51a3d;f1b9c46173957f9c885df4565195d18beaf352ebd1c584315555602f8d827f93",
+        "source_snapshot_dates": "2026-09-22",
+        "source_quote": "Di stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante, per il tramite dell’ARIF\n\nDi stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF\n\nDi stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite dell’ARIF",
+        "source_quote_sha256": "4e019fb191a4534a15ee488da26dfd617fc84f8405a131a27998fa48815f16e8",
+        "lineage_role": "SOURCE_CLAUSE_INTERPRETATION",
+        "provision_version_id": "SOURCE-CLAUSE:notification-noncommencement-direction:v1",
+        "temporal_status": "CURRENT",
+        "record_kind": "SOURCE_CLAUSE_INTERPRETATION",
+        "source_support": [
+          {
+            "instrument_id": "REG-PUGLIA-U181-DIR-2024-00063",
+            "source_uri": "https://burp.regione.puglia.it/documents/20135/2491695/DET_63_24_5_2024.pdf/44c73b91-3a4d-e059-8765-0ce31b8a9cb6",
+            "sha256": "3b5813789b43ef0861c283175ab607fa32cfba7c1d2057a55b291aa8f8097a48",
+            "locator": "physical page(s) 7, 8; operative point 9",
+            "source_quote": "Di stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante, per il tramite dell’ARIF",
+            "source_quote_sha256": "7bbf7a684d1e85ca463ec2e49a6397bbe71ddbcda971534ba80ca18720348fee"
+          },
+          {
+            "instrument_id": "REG-PUGLIA-U181-DIR-2024-00108",
+            "source_uri": "https://burp.regione.puglia.it/documents/20135/2514548/DET_108_16_8_2024.pdf/8551bd21-105b-c34a-f588-c9915e9eb2a8",
+            "sha256": "47b107a6525606934c79125d5b4f565d7193ab92aef801b80b21d25bc3a51a3d",
+            "locator": "physical page(s) 8; operative point 11",
+            "source_quote": "Di stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF",
+            "source_quote_sha256": "6f76996f761ba3b1077a6384ab002df1bb0468338f1bdeca7fc8df40cdde7404"
+          },
+          {
+            "instrument_id": "REG-PUGLIA-U181-DIR-2025-00065",
+            "source_uri": "https://burp.regione.puglia.it/documents/20135/2632884/DET_65_18_4_2025.pdf/1df62839-82fc-89f3-9e36-2581dbcbd727",
+            "sha256": "f1b9c46173957f9c885df4565195d18beaf352ebd1c584315555602f8d827f93",
+            "locator": "physical page(s) 8; operative point 11",
+            "source_quote": "Di stabilire che, qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite dell’ARIF",
+            "source_quote_sha256": "49bc23bb8edd0797b516afbc3ab33e5befcb0189604a59d09fe4dad4ed1faab2"
+          }
+        ]
+      }
+    ]
+  },
+  "stage_b": {
+    "schema": "stage-b-essence-v7",
+    "conventions": {
+      "clock.magnitude": "numeric string, or {source_input: prescribed-term} for the understood notification-based concrete-commencement deadline. The binding resolves a positive whole magnitude and unit from the same operative prescription clause and context. Its bound exact fixes the source period length, not equality of performance; earlier commencement is allowed. A source-bound row has unit null before resolution and cannot supply a default or caller-selected counting rule."
+    },
+    "remove_clocks": [
+      "B-CLK-DDS147-2024-notification-noncommencement",
+      "B-CLK-DDS173-2025-notification-noncommencement",
+      "B-CLK-DDS27-2024-notification-noncommencement",
+      "B-CLK-DDS115-2025-notification-noncommencement",
+      "B-CLK-DDS117-2025-notification-noncommencement",
+      "B-CLK-DDS135-2021-notification-noncommencement",
+      "B-CLK-DDS138-2024-notification-noncommencement",
+      "B-CLK-DDS151-2024-notification-noncommencement",
+      "B-CLK-DDS188-2024-notification-noncommencement",
+      "B-CLK-DDS2-2023-notification-noncommencement",
+      "B-CLK-DDS201-2025-notification-noncommencement",
+      "B-CLK-DDS35-2026-notification-noncommencement",
+      "B-CLK-DDS4-2022-notification-noncommencement",
+      "B-CLK-DDS45-2023-notification-noncommencement",
+      "B-CLK-DDS51-2023-notification-noncommencement",
+      "B-CLK-DDS52-2024-notification-noncommencement",
+      "B-CLK-DDS6-2022-notification-noncommencement",
+      "B-CLK-DDS96-2023-notification-noncommencement"
+    ],
+    "add_clocks": [
+      {
+        "clock_id": "B-CLK-prescription-notification-noncommencement",
+        "producer_provision_version_id": "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms:v1",
+        "source_phrase": "il termine e le modalita' dell'esecuzione",
+        "kind": "deadline",
+        "anchor": {
+          "kind": "event",
+          "event": "legally sufficient notification of the operative prescription to this recipient",
+          "record": "OPERATOR_RECORD"
+        },
+        "magnitude": {
+          "source_input": "prescribed-term"
+        },
+        "bound": "exact",
+        "unit": null,
+        "recurrence": null,
+        "relation": null,
+        "window": null,
+        "applies_when": "The effective prescription expressly states a maximum notice-based period for concrete commencement and a conditional coercive-removal direction. Resolve the period from that same clause and exact recipient/commencement-work context; lawful coercive scope and applicability remain A conditions.",
+        "legal_duty_owner": "OWNER_OR_HOLDER",
+        "executor": "OWNER_OR_HOLDER",
+        "consumer_decision": "SOURCE-CLAUSE:notification-noncommencement-direction",
+        "consequence_on_expiry": {
+          "kind": "none",
+          "ref": null
+        },
+        "completion": {
+          "kind": "record",
+          "ref": "concrete commencement of the removal work specified by this prescription clause"
+        },
+        "note": null
+      }
+    ],
+    "remove_disposition_producers": [
+      "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1"
+    ],
+    "replace_dispositions": [
+      {
+        "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1",
+        "expression": "Di prescrivere l’applicazione con immediatezza delle misure di eradicazione con le modalità e la tempistica",
+        "disposition": "not_a_clock",
+        "ref": null,
+        "why": "The source correction or supplement applies the predecessor prescription's own operative terms to its expressly affected recipient/work relation. No additional period or automatic notice restart is created; the generic source-bound clause consumer uses the supported inherited term.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1",
+        "expression": "estirpazione della pianta infetta entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio",
+        "disposition": "implements_clock",
+        "ref": "B-CLK-prescription-notification-noncommencement",
+        "why": "The source span includes this act’s own notification/concrete-commencement term. It resolves through the prescribed-term binding for its exact clause, recipient and work; this authority-conflict atom remains independently controlling and no universal ten-day value is implied.",
+        "aperture": "IN_APERTURE"
+      }
+    ],
+    "add_dispositions": [
+      {
+        "provision_version_id": "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms:v1",
+        "disposition": "clock",
+        "ref": "B-CLK-prescription-notification-noncommencement",
+        "why": "The act supplies its own execution term. This source-bound deadline resolves only the explicitly stated notification/concrete-commencement clause form; magnitude and unit are not inferred from another act.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "IT-L241-1990:Art.21-ter(1):coercive-execution-safeguards:v1",
+        "expression": "previa diffida",
+        "disposition": "not_a_clock",
+        "ref": null,
+        "why": "Prior warning is a procedural condition of the general coercive-execution route. The source states no numerical period; no added grace interval is minted.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "IT-L241-1990:Art.21-quater(1):effective-act-execution:v1",
+        "expression": "sono eseguiti immediatamente, salvo che sia diversamente stabilito dalla legge o dal provvedimento medesimo",
+        "disposition": "not_a_clock",
+        "ref": null,
+        "why": "The general execution rule preserves different timing established by applicable law or the effective act. It states no numeric period; immediacy remains its source-owned standard.",
+        "aperture": "IN_APERTURE"
+      },
+      {
+        "provision_version_id": "SOURCE-CLAUSE:notification-noncommencement-direction:v1",
+        "expression": "entro massimo 10 giorni",
+        "disposition": "not_a_clock",
+        "ref": null,
+        "why": "The quoted originals are interpretive support for the clause form, not a universal ten-day producer. Each operative instance supplies its own period to the source-bound prescribed-term clock; no quantity is copied from these examples.",
+        "aperture": "IN_APERTURE"
+      }
+    ]
+  },
+  "population": {
+    "remove": [
+      "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+      "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1"
+    ],
+    "add": {
+      "4": [
+        "IT-L241-1990:Art.21-ter(1):prescribed-execution-terms:v1",
+        "IT-L241-1990:Art.21-ter(1):coercive-execution-safeguards:v1",
+        "IT-L241-1990:Art.21-quater(1):effective-act-execution:v1",
+        "SOURCE-CLAUSE:notification-noncommencement-direction:v1"
+      ]
+    }
+  },
+  "source_confirmation": {
+    "original_inserting_act": {
+      "url": "https://def.finanze.it/DocTribFrontend/executePrintArticolo.do?codiceOrdinamento=200001400000000&id=%7B918503E0-92F3-447F-B8EA-EE20E96F89F9%7D&idAttoNormativo=%7BF3B81AB5-4A4F-47DB-9398-0D4784977D47%7D",
+      "sha256": "ae4c4ee9e9f56dd4218c1778ed15692d25389fc5d7f2ba04f138bd2c158c529b",
+      "locator": "Article 14, physical p1; effective 8 March 2005"
+    },
+    "current_articles": [
+      {
+        "url": "https://def.giustiziatributaria.gov.it/DocTribFrontend/executePrintArticolo.do?articolo=Articolo+21+ter&codiceOrdinamento=0000000000000219999900003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&id=%7B00CBF74C-1642-41D9-AE4F-6CD18551724F%7D",
+        "sha256": "a554db17b2d49cae23008596f078dda4606743692e00f3f85e9f5f26936657d5",
+        "locator": "physical p1"
+      },
+      {
+        "url": "https://def.giustiziatributaria.gov.it/DocTribFrontend/executePrintArticolo.do?codiceOrdinamento=0000000000000219999900004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&id=%7B57646D3D-0555-407D-AC24-7C67B85D5CF3%7D&idAttoNormativo=%7B00CBF74C-1642-41D9-AE4F-6CD18551724F%7D",
+        "sha256": "4028abddf204a02c544dcbf42bf46c6376a0d18e95cc07adbcd1613728889e66",
+        "locator": "physical p1"
+      }
+    ]
+  },
+  "acceptance_effect": "Accepted A/B/C content and CURRENT remain unchanged. Explicit candidate construction only. A/population/convention changes invalidate all four existing B content fingerprints; acceptance cannot be copied. Promotion requires Owen acceptance of the reviewed content and C code, exact owner updates, retained independent case meanings, actual D integration, renewed acceptance records and deletion of this patch.",
+  "stage_c": {
+    "remove_calendar_clocks": [
+      "B-CLK-DDS147-2024-notification-noncommencement",
+      "B-CLK-DDS173-2025-notification-noncommencement",
+      "B-CLK-DDS27-2024-notification-noncommencement",
+      "B-CLK-DDS115-2025-notification-noncommencement",
+      "B-CLK-DDS117-2025-notification-noncommencement",
+      "B-CLK-DDS135-2021-notification-noncommencement",
+      "B-CLK-DDS138-2024-notification-noncommencement",
+      "B-CLK-DDS151-2024-notification-noncommencement",
+      "B-CLK-DDS188-2024-notification-noncommencement",
+      "B-CLK-DDS2-2023-notification-noncommencement",
+      "B-CLK-DDS201-2025-notification-noncommencement",
+      "B-CLK-DDS35-2026-notification-noncommencement",
+      "B-CLK-DDS4-2022-notification-noncommencement",
+      "B-CLK-DDS45-2023-notification-noncommencement",
+      "B-CLK-DDS51-2023-notification-noncommencement",
+      "B-CLK-DDS52-2024-notification-noncommencement",
+      "B-CLK-DDS6-2022-notification-noncommencement",
+      "B-CLK-DDS96-2023-notification-noncommencement"
+    ]
+  }
+}

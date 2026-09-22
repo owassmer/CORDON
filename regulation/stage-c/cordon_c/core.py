@@ -11,6 +11,7 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from datetime import date
+from decimal import Decimal
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -22,6 +23,34 @@ ROOT = Path(__file__).resolve().parents[3]
 
 class MissingInput(Exception):
     """A named semantic input is not available for this calculation."""
+
+
+@dataclass(frozen=True)
+class PrescribedTerm:
+    """A source-stated period for one exact commencement-work context.
+
+    These identifiers retain the input's context; they do not establish the
+    prescription's legal validity or its correspondence to event evidence.
+    """
+    document: str
+    clause: str
+    recipient: str
+    commencement_work: str
+    magnitude: Decimal
+    unit: str
+
+    def __post_init__(self):
+        if any(not isinstance(value, str) or not value.strip()
+               for value in (self.document, self.clause, self.recipient, self.commencement_work)):
+            raise ValueError("Exact prescription, clause, recipient and commencement-work identities required")
+        if not isinstance(self.magnitude, Decimal):
+            raise TypeError("Prescribed period requires a Decimal magnitude")
+        if not self.magnitude.is_finite() or self.magnitude <= 0:
+            raise ValueError("Prescribed period must be positive and finite")
+        if self.magnitude != self.magnitude.to_integral_value():
+            raise ValueError("Fractional source period needs a specific counting rule")
+        if self.unit not in ("calendar_days", "working_days", "months", "years", "hours"):
+            raise ValueError("Unsupported prescribed-period unit")
 
 
 @dataclass(frozen=True)
@@ -124,13 +153,26 @@ class Snapshot:
             end = following["effective_to_exclusive"]
         return date.fromisoformat(producer["effective_from"]), date.fromisoformat(end) if end else None
 
-    def quantity(self, identity: str, at: date) -> dict:
+    def quantity(self, identity: str, at: date, *, prescribed_term: PrescribedTerm | None = None) -> dict:
         row = self.clocks.get(identity) or self.parameters.get(identity)
         if row is None:
             raise KeyError(identity)
         start, end = self.quantity_interval(row)
         if not start <= at or end is not None and at >= end:
             raise MissingInput(f"applicable clock/parameter: {identity} at {at}")
+        magnitude = row.get("magnitude")
+        if isinstance(magnitude, dict) and "source_input" in magnitude:
+            if (magnitude != {"source_input": "prescribed-term"} or identity not in self.clocks
+                    or row["kind"] != "deadline" or row["bound"] != "exact" or row["unit"] is not None):
+                raise ValueError("Unsupported source-bound quantity form")
+            if prescribed_term is None:
+                raise MissingInput(f"{identity}: prescribed term for the exact document, clause, recipient and commencement work")
+            if not isinstance(prescribed_term, PrescribedTerm):
+                raise TypeError("A typed PrescribedTerm is required")
+            return dict(row, magnitude=str(prescribed_term.magnitude), unit=prescribed_term.unit,
+                        prescribed_term=prescribed_term)
+        if prescribed_term is not None:
+            raise ValueError("A prescribed term cannot replace a fixed or unsupported quantity")
         return row
 
     def historical_result(self, consumer: str, reference: str, at: date,

@@ -42,6 +42,8 @@ def classify(rel: str) -> tuple[str, str, str, str]:
         return "working_corpus", "retained_evidence", "VERBATIM", "user-supplied source copy; native provenance and consumer meaning require source reading"
     if rel.startswith("corpus/workbench/stage-c-research/"):
         return "working_corpus", "retained_evidence", "VERBATIM", "retained acquisition or research evidence; source roles and limits in consuming stage contracts"
+    if rel.startswith("corpus/workbench/") and rel != "corpus/workbench/.gitkeep":
+        return "working_corpus", "provisional_work", "REAUTHORED", "temporary proposed content; no acceptance or operational authority"
     if rel.startswith("skills/"):
         return "procedure", "skill", "REAUTHORED", "generalized intellectual procedure"
     if rel.startswith("scripts/"):

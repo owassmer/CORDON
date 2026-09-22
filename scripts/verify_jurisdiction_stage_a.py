@@ -103,6 +103,26 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
     for row in rows:
         if hashlib.sha256(row["source_quote"].encode()).hexdigest() != row["source_quote_sha256"]:
             fail(f"{row['provision_version_id']}: source quote hash mismatch")
+        if row.get("record_kind") == "SOURCE_CLAUSE_INTERPRETATION":
+            # An interpretation remains an A owner, but cannot impersonate the
+            # statute or one of the documentary clauses that supports it.
+            if (not row["stable_provision_id"].startswith("SOURCE-CLAUSE:")
+                    or any(row[key] for key in ("instrument_id", "documentary_source_instrument_id",
+                                               "source_clause_id", "article"))
+                    or row["structural_kind"] != "source_clause_interpretation"):
+                fail(f"{row['provision_version_id']}: interpretation presented as a source provision")
+            support = row.get("source_support", [])
+            if not support or not row.get("higher_authority_dependencies"):
+                fail(f"{row['provision_version_id']}: interpretation lacks source or authority support")
+            for source in support:
+                if (not all(source.get(key) for key in ("instrument_id", "source_uri", "locator", "source_quote"))
+                        or not re.fullmatch(r"[0-9a-f]{64}", source.get("sha256", ""))
+                        or hashlib.sha256(source["source_quote"].encode()).hexdigest() != source.get("source_quote_sha256")):
+                    fail(f"{row['provision_version_id']}: invalid interpretive source support")
+            if row["source_quote"] != "\n\n".join(source["source_quote"] for source in support):
+                fail(f"{row['provision_version_id']}: interpretation quotation differs from source support")
+        elif row.get("record_kind") or row["stable_provision_id"].startswith("SOURCE-CLAUSE:"):
+            fail(f"{row['provision_version_id']}: unrecognized A record kind")
         bad_paths = nested_otherwise(row["condition_ast"])
         if bad_paths:
             fail(f"{row['provision_version_id']}: nested otherwise at {bad_paths[0]}")

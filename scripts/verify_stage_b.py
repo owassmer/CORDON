@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage B bounded mechanical checks (regression only — never acceptance). Schema stage-b-essence-v6."""
+"""Stage B bounded mechanical checks (regression only — never acceptance), v6/v7."""
 import argparse, copy, hashlib, json, re, subprocess, sys, tempfile
 from calendar import monthrange
 from decimal import Decimal
@@ -103,8 +103,25 @@ def source_value_matches(parameter):
         return True
     return False
 
-def clock_value_matches(clock):
+def prescribed_clock_matches(clock, schema):
+    """The v7 source-input member has one understood temporal meaning."""
+    anchor = clock.get('anchor')
+    return (schema == 'stage-b-essence-v7'
+            and clock.get('magnitude') == {'source_input': 'prescribed-term'}
+            and clock.get('kind') == 'deadline' and clock.get('bound') == 'exact'
+            and clock.get('unit') is None
+            and isinstance(anchor, dict) and anchor.get('kind') == 'event'
+            and anchor.get('event') == 'legally sufficient notification of the operative prescription to this recipient'
+            and clock.get('completion') == {
+                'kind': 'record',
+                'ref': 'concrete commencement of the removal work specified by this prescription clause'}
+            and all(clock.get(field) is None for field in ('recurrence', 'relation', 'window')))
+
+
+def clock_value_matches(clock, schema='stage-b-essence-v6'):
     """Bounded lexical checks of stated quantities, not a legal or calendar-arithmetic engine."""
+    if isinstance(clock['magnitude'], dict):
+        return prescribed_clock_matches(clock, schema)
     text = norm(clock['source_phrase'])
     words = '|'.join(NUMBER_WORDS)
     units = {'hours': r'ore|hours?', 'calendar_days': r'gg|giorni(?! lavorativi)|days?(?! working)',
@@ -173,7 +190,7 @@ def acceptance_fingerprint(b, manifest, seams, stage_a_paths, population_path):
 def main(ledger_path=B, stage_a_paths=None, population_path=POPULATION):
     stage_a_paths = stage_a_paths or tuple(ROOT / p for p in STAGE_A_LOGICAL)
     b = json.loads(ledger_path.read_text(encoding='utf-8'))
-    if b.get('schema') != 'stage-b-essence-v6': fail('schema tag')
+    if b.get('schema') not in ('stage-b-essence-v6', 'stage-b-essence-v7'): fail('schema tag')
     if 'stage_a_inputs' in b: fail('canonical carries source paths/hashes; integrity metadata belongs in generation-status.json (essence-only boundary)')
     A = {}
     for p in stage_a_paths:
@@ -253,14 +270,17 @@ def main(ledger_path=B, stage_a_paths=None, population_path=POPULATION):
                 elif rec is not None:
                     fail(f'{rid}: non-recurrence clock carries recurrence semantics')
                 m = r['magnitude']
-                if m is not None and not re.fullmatch(r'\d+(\.\d+)?', m): fail(f'{rid}: magnitude not numeric')
+                if isinstance(m, dict):
+                    if not prescribed_clock_matches(r, b['schema']): fail(f'{rid}: unsupported source-bound clock form')
+                elif m is not None and (not isinstance(m, str) or not re.fullmatch(r'\d+(\.\d+)?', m)):
+                    fail(f'{rid}: magnitude not numeric')
                 if r['bound'] not in (None, 'exact', 'floor'): fail(f'{rid}: bound vocabulary')
                 if (m is None) != (r['bound'] is None): fail(f'{rid}: bound must be set iff magnitude is set')
                 if r['kind'] in ('deadline', 'not_before', 'minimum_duration', 'eligibility_threshold', 'lookback_window') and m is None: fail(f'{rid}: {r["kind"]} needs a magnitude')
                 if r['kind'] in ('not_before', 'eligibility_threshold') and r['bound'] != 'floor': fail(f'{rid}: {r["kind"]} is a floor')
                 if r['kind'] in ('eligibility_threshold', 'lookback_window') and r['completion']['kind'] == 'a_effect':
                     fail(f'{rid}: a threshold or lookback completes on its own evidenced condition, not the downstream decision')
-                if not clock_value_matches(r): fail(f'{rid}: clock quantity or calendar date is not evidenced by source_phrase')
+                if not clock_value_matches(r, b['schema']): fail(f'{rid}: clock quantity or calendar date is not evidenced by source_phrase')
                 if r['kind'] == 'ordering_constraint' and not r['relation']: fail(f'{rid}: ordering needs relation')
                 if r['kind'] == 'same_calendar_day' and (m is not None or r['unit'] is not None): fail(f'{rid}: same_calendar_day carries no magnitude')
                 if r['kind'] == 'promptness_standard' and (m is not None or r['unit'] != 'indefinite'): fail(f'{rid}: promptness standard is open')
