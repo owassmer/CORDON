@@ -340,6 +340,16 @@ relationships, qualifications, validation and publication of accepted readings
 remain with that reader. The transport returns a proposed reading, never a
 completion or legal-effect assertion.
 
+The measure caller also requests supplemental complete-page views when exact,
+non-reflected image-placement geometry establishes a quarter-turn. The page's own
+rotation is included. All original pages remain first and unchanged; supplemental
+views preserve visible clipping, masks and overlays. Their source, physical page,
+clockwise turn, triggering image occurrences and transforms, attachment index and
+image hash remain in request provenance. Shear, arbitrary angles and orientation
+inside the image pixels are not inferred. This changes source presentation, not
+source meaning or semantic acceptance. Other callers retain their existing default
+presentation and request identity.
+
 Execution is explicit (`execute=True`). `read_retained(request_id, store)` consumes
 an explicit retained request with its original context, independently of a later
 caller's prompt. It verifies request identity and validates the retained output;
@@ -354,7 +364,7 @@ to non-finite floating-point values are rejected before validation. Schema valid
 is checked before dispatch; schema
 references must resolve within the supplied schema, without network retrieval.
 Source-review instructions change the request;
-replay never secretly spends another call. API-key fallback and model tools are
+replay never secretly spends another call. API-key fallback, shell tools, multi-agent dispatch and web search are
 disabled. A bounded subprocess timeout applies.
 
 The calling reader uses the shared store and retains the request reference beside
@@ -384,8 +394,8 @@ instruction is explicit and yields a different transport request.
 `MeasureReading` connects act identity and adoption to the existing publication
 adapter, retains the actual prescribed target rows separately from A–C's required
 population, and reuses the accepted association reader for report relationships.
-The association owner supplies sample/report identity, printed dates, host,
-coordinates and cadastral fields with its verified row continuations. The model
+For rows it can associate, the association owner supplies sample/report identity,
+printed dates, host, coordinates and cadastral fields with verified row continuations. The model
 does not output another version of these values. `measure_sources` exposes native
 source addresses using that owner's orientation and row coordinates. Interpretation
 selects row populations, additional field columns, prose spans, directions and
@@ -397,15 +407,27 @@ cell that actually covers its position; a separate blank cell stays blank. Acros
 pages, interpretation explicitly selects the ordered native cells or non-table word
 spans composing an additional field, with support on every affected page. The
 consumer retains those fragments and the target's own cell, including a blank
-continuation cell. Shared addressees can govern several target rows; owner-only
+continuation cell. An empty quotation can support only a target scope's explicitly
+selected, recovered blank native fragment on that source page; a locator and full
+fragment support remain required. Unrecovered text, other claims and unrelated
+blank cells cannot use that allowance. Shared addressees can govern several target rows; owner-only
 fragments do not become plants. No parcel-value match or automatic forward filling
 establishes the relationship, and selection cannot copy an association-owned column.
 An infected-plant reference printed beside surrounding parcels remains
 `reference_plant_id`, distinct from an ordered plant's `plant_id`; it supplies no
 report association. Additional columns cannot rename or duplicate a column already
 supplied by the association owner.
+Where report columns are absent, the same native header owner can supply the
+selected row's other printed fields without creating a report association. A unique
+plant-bearing header and actual physical cells are required; explicit field selections
+remain intact. Header ambiguity is a reading limitation, and blank cells stay blank.
+These additional native fields do not change retained source-address contexts or
+admit another target population.
 Image-only and vector-outlined content uses explicitly model-transcribed positions
-from the full rendered page. Each logical table row remains one position, with
+from the rendered source. An embedded image can supply a target beside a native
+table only when their source regions are disjoint. Overlapping image selections
+and whole-page retranscription cannot bypass native ownership. Each logical table
+row remains one position, with
 shared cells attached to each row they govern. Parallel lists of identifiers,
 parcels or addressees cannot stand in for their row relationships. Source-authored
 prose groups remain groups. Complete source pages remain in every request; native
@@ -427,6 +449,30 @@ position can support the correction without carrying present removal work; that
 work belongs to the operative corrected position. Native composition preserves
 the old name rather than silently replacing it. Distinct performance clocks retain
 their stated scope and anchor; their operative combination belongs to accepted A–C.
+
+Each reference can explicitly select supplied context documents, with support on
+both the citing source and each selected document. This includes reports named
+collectively in prose; their rows do not become administrative targets. Unresolved
+or unsupplied documents remain unselected. The consumer does not resolve free prose
+by matching numbers or filenames. Earlier references without selections supply no document binding; their existing
+native per-row associations remain consumable.
+
+`MeasureReading.finding_links(joined, report_readings)` connects prescribed positions
+to ordinary `findings()` and `report_rows()` outputs. Its report population comes
+from existing native per-row report associations or explicit document selections,
+and the report owner's resolved replacement chains. Each native association confines
+its own target to the report it names; a collective reference cannot override it.
+The consumer retains the cited rendition and every relationship. Amendments and newer
+dates alone do not expand that population. Native identifiers are compared only
+inside this source-bound population, with the existing host and coordinate checks
+where supplied. Each target needs one finding, and each finding one prescribed
+position in this act; repeated report displays remain with their original finding.
+Competing candidates, reading failures, provisional status and source disagreements
+stay visible. A link establishes occurrence correspondence, never official
+confirmation, standing, administrative amendment or completed removal. The caller
+must supply all observation identities referring to the selected report population
+and its consequential renditions; filtering to expected target IDs cannot establish
+reverse uniqueness. Full source-population reconciliation remains a separate duty.
 
 `retained_measure` and `scripts/read_measures.py --request` consume a named retained
 interpretation offline, requiring its measure schema and source addresses to match

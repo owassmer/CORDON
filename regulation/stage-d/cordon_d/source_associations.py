@@ -66,11 +66,11 @@ def _orientation(lines):
     return ranked[0]
 
 
-def _header(values):
+def _header(values, *, required=REQUIRED):
     matches = []
     for i, row in enumerate(values):
         roles = {c: HEADINGS[_key(text)] for c, text in enumerate(row) if _key(text) in HEADINGS}
-        if REQUIRED <= set(roles.values()) and len(roles) == len(set(roles.values())):
+        if required <= set(roles.values()) and len(roles) == len(set(roles.values())):
             matches.append((i, roles))
     return matches
 

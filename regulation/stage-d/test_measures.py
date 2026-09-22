@@ -108,6 +108,7 @@ class RetainedSharedOwnerFields(unittest.TestCase):
                 with self.subTest(plant=identifier):
                     target = targets[identifier]
                     association = target['association']
+                    self.assertNotIn('native_field_issue', target)
                     self.assertEqual((target['sheet'], target['parcel']), ('20', parcel))
                     self.assertEqual(association['source_sha256'], digest)
                     self.assertEqual(association['page'], page)

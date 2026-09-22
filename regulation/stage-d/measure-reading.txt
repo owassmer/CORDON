@@ -119,6 +119,19 @@ establishes that objection, not every allegation it contains. Laboratory results
 report associations remain with their accepted owner. Native fields can exist without
 an association: never join those fields to reports by proximity, name or parcel alone.
 
+For each reference, documents explicitly selects any supplied context document
+whose identity and relationship the source establishes. Use an empty array where
+the referenced document is not supplied or correspondence is unresolved. Each
+selection names its source hash and cites both the referring source and the
+selected document's own identity. A compound reference may select several supplied
+reports; preserve their separate identities and any ambiguity. Do not match a
+number alone, infer a rendition from its filename, or treat a later report as the
+one originally cited merely because it is later. Laboratory identity, results and
+replacement relationships remain with their existing reader. Select documents,
+not laboratory rows; the ordinary consumer will compare native target fields to
+that reader's occurrences. A report supplied as context contributes evidence to
+the principal act; its result table is not another administrative target population.
+
 Record consequential references with their literal identities and relationships:
 incorporation, administrative correction, replacement, supplement, adopting geography,
 laboratory evidence or governing law. A cited predecessor is not automatically replaced;

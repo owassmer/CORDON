@@ -1,5 +1,6 @@
 """Transport isolation, replay and source fidelity; no semantic certification."""
 from concurrent.futures import ThreadPoolExecutor
+from hashlib import sha256
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -53,6 +54,110 @@ class DocumentSubscriptionTests(unittest.TestCase):
             self.read(execute=True)
         with self.assertRaises(FileNotFoundError):
             self.read(effort='medium')
+
+    def test_default_presentation_preserves_original_request_identity(self):
+        prompt = ('Read the act and incorporated annex.\nOriginal source images follow in '
+                  'document order, then physical page order. Source hashes identify bytes, '
+                  'not interpreted document relationships.\n')
+        hashes = []
+        for digest in self.digests:
+            source = self.store / 'blobs/sha256' / digest[:2] / digest
+            with pymupdf.open(source) as document:
+                prompt += f'\nDOCUMENT {digest}; {len(document)} page images\n'
+                for number, page in enumerate(document, 1):
+                    prompt += f'PHYSICAL PAGE {number}\n{page.get_text(sort=True)}\n'
+                    hashes.append(sha256(page.get_pixmap(dpi=180).tobytes('png')).hexdigest())
+                prompt += 'END DOCUMENT\n'
+        original = {'transport_version': 1, 'provider': 'codex-subscription',
+                    'model': 'gpt-5.6-luna', 'effort': 'high', 'sources': self.digests,
+                    'prompt': prompt, 'schema': self.schema, 'images': hashes, 'dpi': 180}
+        with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}') as call:
+            response = self.read(execute=True)
+            self.assertEqual(response['request'], original)
+            self.assertEqual(response['request_sha256'],
+                             sha256(json.dumps(original, sort_keys=True).encode()).hexdigest())
+            self.assertEqual(self.read(supplement_page_rotations=False), response)
+            with self.assertRaises(FileNotFoundError):
+                self.read(supplement_page_rotations=True)
+            self.assertEqual(call.call_count, 1)
+
+    def rotated_image_source(self, page_rotation=0):
+        with pymupdf.open() as image_document:
+            image_page = image_document.new_page(width=100, height=60)
+            image_page.draw_rect((0, 0, 50, 60), color=None, fill=(1, 0, 0))
+            image_page.draw_rect((50, 0, 100, 30), color=None, fill=(0, 0, 1))
+            # The transparent quadrant becomes a PDF image mask.
+            png = image_page.get_pixmap(alpha=True).tobytes('png')
+        with pymupdf.open() as document:
+            page = document.new_page(width=180, height=120)
+            page.draw_rect(page.rect, color=None, fill=(0, 1, 0))
+            for rect in ((10, 10, 110, 110), (140, 10, 160, 30)):
+                page.insert_image(rect, stream=png, rotate=90, keep_proportion=False)
+            page.draw_rect((30, 30, 70, 70), color=None, fill=(0, 0, 0))
+            page.set_cropbox((20, 0, 170, 120))
+            page.set_rotation(page_rotation)
+            return put_bytes(self.store, document.tobytes())
+
+    def test_supplemental_views_preserve_visible_page_and_attachment_provenance(self):
+        digest = self.rotated_image_source()
+        captured = []
+
+        def call(prompt, schema, images, *options):
+            captured.extend(image.read_bytes() for image in images)
+            return '{"direction":"proposed"}'
+
+        with patch('cordon_d.document_subscription._call', side_effect=call):
+            response = read_documents([digest, self.digests[1]], self.store,
+                                      prompt='Read source', schema=self.schema, dpi=72,
+                                      execute=True, supplement_page_rotations=True)
+        self.assertEqual(len(captured), 3)  # Both originals precede the one duplicate view.
+        original, supplementary = pymupdf.Pixmap(captured[0]), pymupdf.Pixmap(captured[2])
+        self.assertEqual((original.width, original.height), (150, 120))
+        self.assertEqual((supplementary.width, supplementary.height), (120, 150))
+        # Exact visible pixel rotation retains crop, transparent mask and black overlay.
+        for y in range(original.height):
+            for x in range(original.width):
+                self.assertEqual(original.pixel(x, y),
+                                 supplementary.pixel(original.height - 1 - y, x))
+        self.assertEqual(original.pixel(25, 45), (0, 0, 0))
+        self.assertEqual(original.pixel(100, 100), (0, 255, 0))
+        view, = response['request']['supplemental_page_rotations']
+        self.assertEqual((view['source'], view['page'], view['clockwise_degrees'],
+                          view['page_rotation'], view['image_index']), (digest, 1, 90, 0, 3))
+        self.assertEqual([entry['occurrence'] for entry in view['image_occurrences']], [1, 2])
+        source = self.store / 'blobs/sha256' / digest[:2] / digest
+        with pymupdf.open(source) as document:
+            self.assertTrue(all(entry['has-mask'] for entry in document[0].get_image_info()))
+            self.assertEqual([entry['transform'] for entry in view['image_occurrences']],
+                             [list(entry['transform']) for entry in document[0].get_image_info()])
+        self.assertEqual(view['image_sha256'], sha256(captured[2]).hexdigest())
+        self.assertEqual(response['request']['images'], [sha256(png).hexdigest() for png in captured])
+        self.assertIn(json.dumps(view, sort_keys=True), response['request']['prompt'])
+        self.assertEqual(read_retained(response['request_sha256'], self.store), response)
+
+    def test_page_rotation_composes_before_supplemental_rotation(self):
+        for page_rotation, expected in ((0, [90]), (90, []), (180, [270]), (270, [180])):
+            with self.subTest(page_rotation=page_rotation):
+                digest = self.rotated_image_source(page_rotation)
+                with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}'):
+                    response = read_documents([digest], self.store, prompt='Read source',
+                                              schema=self.schema, dpi=72, execute=True,
+                                              supplement_page_rotations=True)
+                views = response['request']['supplemental_page_rotations']
+                self.assertEqual([view['clockwise_degrees'] for view in views], expected)
+                self.assertTrue(all(view['page_rotation'] == page_rotation for view in views))
+
+    def test_shear_reflection_and_nonorthogonal_placements_do_not_infer_rotation(self):
+        from types import SimpleNamespace
+        from cordon_d.document_subscription import _image_rotation_views
+        for transform in ((1, 0, 0, 1, 0, 0), (-1, 0, 0, 1, 0, 0),
+                          (0, -1, -1, 0, 0, 0), (1, 0.1, 0, 1, 0, 0),
+                          (0.707, -0.707, 0.707, 0.707, 0, 0),
+                          (0, -1, 1, 0.000001, 0, 0)):
+            with self.subTest(transform=transform):
+                page = SimpleNamespace(rotation_matrix=pymupdf.Matrix(1, 1),
+                                       get_image_info=lambda: [{'transform': transform}])
+                self.assertEqual(_image_rotation_views(page), {})
 
     def test_named_replay_preserves_original_context_and_checks_request_integrity(self):
         with patch('cordon_d.document_subscription._call', return_value='{"direction":"proposed"}') as call:

@@ -1,7 +1,7 @@
 """Source addresses for administrative interpretation; no operative classification."""
 import json
 
-from .source_associations import read_associations, _lines, _orientation
+from .source_associations import read_associations, _header, _lines, _orientation
 from .store import blob_path, file_digest
 
 
@@ -82,6 +82,17 @@ def source_material(sources, store):
                         'source': digest, 'page': number, 'table': table_number,
                         'bbox': list(pymupdf.Rect(table.bbox) * inverse),
                         'cells': cells, 'rows': rows}
+                    native_table = material['tables'][f'{prefix}T{table_number}']
+                    headers = _header(values, required={'plant_id'})
+                    if len(headers) == 1:
+                        header_row, roles = headers[0]
+                        native_table['native_header'] = {
+                            'row': header_row + 1,
+                            'columns': {role: column + 1 for column, role in roles.items()}}
+                    else:
+                        native_table['native_field_issue'] = (
+                            'Native reading did not establish one unique plant-bearing header; '
+                            'additional native field roles remain unavailable')
     return material, tuple(associations)
 
 
@@ -205,6 +216,21 @@ def table_fields(material, table_ref, row_number, columns, fragments=None):
                 raise ValueError('A field continuation has no recovered source text')
             fields[role] = {'text': '\n'.join(p['text'] or '' for p in parts),
                             'fragments': parts}
+    header = table.get('native_header')
+    if association is None and header and row_number > header['row']:
+        for role, column in header['columns'].items():
+            # Explicit positions can give a column a different source-supported
+            # role, such as a reference plant in a surrounding-parcel table.
+            if role in fields or column in columns.values():
+                continue
+            cell = row['cells'][column - 1]
+            heading = table['rows'][header['row'] - 1]['cells'][column - 1]
+            if cell is None or heading is None:
+                continue
+            fields[role] = dict(table['cells'][cell], column=column,
+                source=table['source'], page=table['page'], locator=f'{table_ref}/cell:{cell}',
+                header=dict(table['cells'][heading], source=table['source'], page=table['page'],
+                            locator=f'{table_ref}/cell:{heading}'))
     return fields, association
 
 

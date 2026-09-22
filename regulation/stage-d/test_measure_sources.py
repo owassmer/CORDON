@@ -1,13 +1,162 @@
 """Native composition checks, distinct from whole-act semantic qualification."""
 from pathlib import Path
 from copy import deepcopy
+from tempfile import TemporaryDirectory
 import json
 import unittest
+
+import pymupdf
 
 from cordon_d.measure_sources import (source_material, table_fields, material_context,
                                       context_matches, selected_association, CONTEXT_MARKER)
 from cordon_d.measures import MeasureReading, retained_measure, _validate_reading
-from cordon_d.store import blob_path, store_root
+from cordon_d.store import blob_path, put_bytes, store_root
+from test_source_associations import source
+
+
+class NativeTargetFields(unittest.TestCase):
+    def test_printed_native_fields_do_not_need_or_create_a_report_association(self):
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = source(store, [{
+                'headings': ['ID CAMPIONE', 'SPECIE', 'LONGITUDINE', 'LATITUDINE'],
+                'rows': [['A', 'Olivo', '17,123400', '40,567800'], ['B', 'Mandorlo', '', '']]}])
+            material, associations = source_material([digest], store)
+            fields, association = table_fields(material, 'S0P1T1', 2, {})
+            self.assertIsNone(association)
+            self.assertFalse(associations[0].rows)
+            self.assertEqual({role: field['text'] for role, field in fields.items()},
+                             dict(plant_id='A', host='Olivo', longitude='17,123400', latitude='40,567800'))
+            self.assertEqual(fields['longitude']['header']['text'], 'LONGITUDINE')
+            self.assertEqual(fields['longitude']['source'], digest)
+            self.assertTrue(fields['longitude']['bbox'])
+            self.assertNotEqual(fields['longitude']['locator'], fields['longitude']['header']['locator'])
+            blank, _ = table_fields(material, 'S0P1T1', 3, {})
+            self.assertEqual((blank['longitude']['text'], blank['latitude']['text']), ('', ''))
+            reference, _ = table_fields(material, 'S0P1T1', 2, {'reference_plant_id': 1})
+            self.assertNotIn('plant_id', reference)
+            self.assertEqual(reference['reference_plant_id']['text'], 'A')
+            self.assertNotIn('native_header', material_context(material))
+            unselected = dict(target_scopes=[], prose_positions=[], image_positions=[])
+            self.assertFalse(tuple(MeasureReading({'reading': unselected}, material, associations).targets()))
+
+    def test_ambiguous_header_does_not_assign_native_roles(self):
+        headers = ['ID CAMPIONE', 'SPECIE', 'LONGITUDINE', 'LATITUDINE']
+        cases = [dict(headings=['ID CAMPIONE', 'SPECIE', 'SPECIE', 'LATITUDINE'],
+                      rows=[['A', 'Olivo', 'Mandorlo', '40,5']]),
+                 dict(headings=headers, rows=[['A', 'Olivo', '17,1', '40,5'], headers,
+                                              ['B', 'Mandorlo', '17,2', '40,6']])]
+        for spec in cases:
+            with self.subTest(spec=spec), TemporaryDirectory() as directory:
+                store = Path(directory)
+                digest = source(store, [spec])
+                material, _ = source_material([digest], store)
+                fields, association = table_fields(material, 'S0P1T1', 2, {})
+                self.assertFalse(fields)
+                self.assertIsNone(association)
+                self.assertIn('did not establish one unique',
+                              material['tables']['S0P1T1']['native_field_issue'])
+                self.assertNotIn('native_field_issue', material_context(material))
+
+    def test_existing_association_and_its_field_objects_are_unchanged(self):
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = source(store, [{
+                'headings': ['ID CAMPIONE', 'RAPPORTO PROVA', 'DATA RAPPORTO PROVA',
+                             'SPECIE', 'LONGITUDINE', 'LATITUDINE', 'PROPRIETARIO'],
+                'widths': [55, 70, 105, 70, 70, 70, 80],
+                'rows': [['A', 'R 1', '1/2/2025', 'Olivo', '17,1', '40,5', 'OWNER A']]}])
+            material, associations = source_material([digest], store)
+            original, = associations[0].rows
+            before = deepcopy(original)
+            fields, association = table_fields(material, 'S0P1T1', 2, {'addressee': 7})
+            self.assertIs(association, original)
+            self.assertEqual(original, before)
+            for role, field in original['fields'].items():
+                self.assertIs(fields[role], field)
+            self.assertEqual(fields['addressee']['text'], 'OWNER A')
+
+    def test_retained_request_gains_only_printed_fields_without_changing_source_context(self):
+        store = store_root(Path(__file__).resolve())
+        digest = 'cba7890acf17bfe84beacb7449e51149f67e77f6a0efb58da6fb57aab7987ab2'
+        try:
+            measure = retained_measure(
+                'a0052a8c6a338dbb053480dc90fbbf7417bf2889cad2809e48e4479816d14ec8', store)
+        except FileNotFoundError:
+            self.skipTest('Retained source/response unavailable; no extraction in tests')
+        # Independently viewed DDS135 Annex C, physical page 15. The table
+        # prints these values but no report-reference or report-date columns.
+        expected = {'1250279': ('17,32672096', '40,77161778'),
+                    '1249548': ('17,3272942', '40,77127073'),
+                    '1250102': ('17,32682455', '40,77134573'),
+                    '1250770': ('17,32670868', '40,77135487'),
+                    '1247330': ('17,29996696', '40,76160935')}
+        targets = {t['reference']: t for t in measure.prescribed_targets()}
+        self.assertEqual(set(targets), set(expected))
+        self.assertTrue(context_matches(measure.response['request']['prompt'], measure.material))
+        with pymupdf.open(blob_path(store, digest)) as original:
+            for reference, coordinates in expected.items():
+                target = targets[reference]
+                self.assertIsNone(target['association'])
+                self.assertNotIn('report_reference', target['fields'])
+                self.assertNotIn('report_date', target['fields'])
+                self.assertEqual(target['fields']['host']['text'], 'Olivo')
+                self.assertEqual(tuple(target['fields'][role]['text'] for role in ('longitude', 'latitude')),
+                                 coordinates)
+                for role in ('host', 'longitude', 'latitude'):
+                    field = target['fields'][role]
+                    self.assertEqual((field['source'], field['page']), (digest, 15))
+                    self.assertEqual(original[14].get_text(clip=pymupdf.Rect(field['bbox'])).strip(), field['text'])
+        self.assertTrue(all(not matches for _, matches in measure.target_associations(store)))
+
+
+class MixedSourceComposition(unittest.TestCase):
+    def test_disjoint_image_row_keeps_native_table_but_overlap_and_whole_page_are_refused(self):
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            native = source(store, [{'rows': [['A', 'R 1', '1/2/2025', 'OWNER A']]}])
+            with pymupdf.open() as image_document:
+                page = image_document.new_page(width=500, height=60)
+                page.insert_text((10, 30), 'B | PARCEL 7 | OWNER B', fontsize=14)
+                pixels = page.get_pixmap().tobytes('png')
+            for name, box in [('disjoint', (40, 300, 540, 360)),
+                              ('overlap', (40, 150, 540, 210))]:
+                with self.subTest(layout=name), pymupdf.open(blob_path(store, native)) as document:
+                    document[0].insert_image(pymupdf.Rect(box), stream=pixels)
+                    digest = put_bytes(store, document.tobytes())
+                    material, associations = source_material([digest], store)
+                    table_ref, = material['tables']
+                    image_ref, = material['images']
+                    support = [dict(source=digest, page=1, locator='raster row',
+                                    quote='B | PARCEL 7 | OWNER B')]
+                    values = dict(identity=dict(adopted=None), events=[], issues=[],
+                        directions=[dict(id='work', mode='ordered-now', work='removal')],
+                        parts=[dict(source=digest, pages=[1], role='target-table')],
+                        target_scopes=[dict(table_ref=table_ref, first_row=2, last_row=2,
+                            columns=[dict(role='addressee', column=4)], direction_ids=['work'],
+                            meaning='native row', support=[dict(source=digest, page=1,
+                                locator='native table row 2', quote='A')])],
+                        prose_positions=[], image_positions=[dict(image_ref=image_ref,
+                            association_ref=None, direction_ids=['work'], meaning='raster row',
+                            fields=[dict(role='plant_id', transcription='B'),
+                                    dict(role='parcel', transcription='7'),
+                                    dict(role='addressee', transcription='OWNER B')], support=support)])
+                    if name == 'overlap':
+                        with self.assertRaisesRegex(ValueError, 'Use native table cells'):
+                            _validate_reading(values, [digest], store, material)
+                        continue
+                    _validate_reading(values, [digest], store, material)
+                    targets = {t['reference']: t for t in
+                               MeasureReading({'reading': values}, material, associations).prescribed_targets()}
+                    self.assertEqual(set(targets), {'A', 'B'})
+                    self.assertIs(targets['A']['association'], associations[0].rows[0])
+                    self.assertEqual(targets['B']['parcel'], '7')
+                    self.assertEqual(targets['B']['fields']['plant_id']['derivation'],
+                                     'model transcription of source image')
+                    self.assertEqual(targets['B']['source_position']['bbox'], list(box))
+                    values['image_positions'][0]['image_ref'] = 'S0P1'
+                    with self.assertRaisesRegex(ValueError, 'Use native table cells'):
+                        _validate_reading(values, [digest], store, material)
 
 
 class RetainedSourceComposition(unittest.TestCase):

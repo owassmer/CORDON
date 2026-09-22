@@ -67,7 +67,8 @@ SCHEMA = _object(
                              relationship=_choice('incorporates', 'corrects', 'replaces',
                                                   'supplements', 'adopted-geography',
                                                   'laboratory-evidence', 'governing-law', 'other'),
-                             affected_payload=TEXT, support=CITATIONS)),
+                             affected_payload=TEXT, support=CITATIONS,
+                             documents=_array(_object(source=TEXT, support=CITATIONS)))),
     events=_array(_object(kind=TEXT, document_reference=TEXT, sender=OPTIONAL_TEXT,
                          recipient=OPTIONAL_TEXT,
                          evidence=_choice('direct-record', 'reported-event', 'intended', 'blank-form'),
@@ -164,6 +165,9 @@ class MeasureReading:
                 occurrence = native.get('continuation_of', f"{scope['table_ref']}R{row}")
                 if occurrence not in targets:
                     targets[occurrence] = self._target(fields, association, scope, occurrence)
+                    issue = self.material['tables'][scope['table_ref']].get('native_field_issue')
+                    if association is None and 'plant_id' in fields and issue:
+                        targets[occurrence]['native_field_issue'] = issue
                 else:
                     target = targets[occurrence]
                     target['direction_ids'] = sorted(set(target['direction_ids']) | set(scope['direction_ids']))
@@ -214,6 +218,66 @@ class MeasureReading:
             matches = (target['association'],) if target['association'] is not None else ()
             yield target, matches
 
+    def report_population(self, report_readings):
+        """Resolve native row references and supplied selections through their owners."""
+        from .findings import _associations
+        from .report_relations import correspondences, replacements, current_limitation
+        report_readings = tuple(report_readings)
+        readings = {r.sha256: r for r in report_readings}
+        if len(readings) != len(report_readings):
+            raise ValueError('Supply one ordinary report reading per source')
+        edges = correspondences(readings)
+        population = {}
+        targets = self.prescribed_targets()
+
+        def bind(source, support, occurrences):
+            for digest, chain in replacements(edges, source).items():
+                reading = readings.get(digest)
+                relations = getattr(reading, 'relations', None)
+                identity = relations.get('identity') if relations else None
+                cause = current_limitation(edges, digest)
+                if reading is None:
+                    cause = 'selected report has no supplied ordinary reading'
+                elif not relations or relations.get('reading_complete') is not True:
+                    cause = 'selected report identity and relationship reading is incomplete'
+                elif not identity.get('issuer') or not identity.get('number'):
+                    cause = 'selected report lacks a source-supported issuer or report identity'
+                binding = population.setdefault(digest, dict(
+                    references=[], target_occurrences=(), report_identity=identity,
+                    relationship_reading=relations,
+                    reading_issues=getattr(reading, 'issues', ()), cause=cause,
+                    request_sha256=self.response.get('request_sha256'),
+                    provenance='model_proposed_reading'))
+                binding['target_occurrences'] = tuple(dict.fromkeys(
+                    (*binding['target_occurrences'], *occurrences)))
+                binding['references'].append(dict(support, target_occurrences=occurrences,
+                                                  replacement_chain=chain))
+
+        for target in targets:
+            association = target['association']
+            if association is None:
+                continue
+            for digest, reading in readings.items():
+                if _associations(reading, [association]):
+                    bind(digest, dict(association=association), (target['occurrence'],))
+
+        unbound = tuple(target['occurrence'] for target in targets
+                        if target['association'] is None)
+        for reference in self.values['references']:
+            if reference['relationship'] != 'laboratory-evidence':
+                continue
+            for selected in reference.get('documents', []):
+                bind(selected['source'], dict(reference=reference, selection=selected), unbound)
+        return population
+
+    def finding_links(self, joined, report_readings):
+        """Connect prescribed positions to the existing ordinary finding results."""
+        from .findings import report_rows
+        from .measure_findings import measure_findings
+        joined, report_readings = tuple(joined), tuple(report_readings)
+        return measure_findings(self, report_population=self.report_population(report_readings),
+                                findings=joined, report_rows=tuple(report_rows(report_readings, joined)))
+
     def administrative_events(self):
         """Exact dated facts about this measure; instructions never become events.
 
@@ -249,20 +313,48 @@ def _validate_reading(reading, sources, store, material):
         if source not in counts or not 1 <= number <= counts[source]:
             raise ValueError('Reading cites an unsupplied source page')
 
-    def visit(value):
+    def visit(value, selected_blank_pages=()):
         if isinstance(value, dict):
             if set(value) == {'source', 'page', 'locator', 'quote'}:
                 page(value['source'], value['page'])
-                if not value['quote'].strip() or not value['locator'].strip():
+                if (not value['locator'].strip() or
+                        (not value['quote'].strip() and
+                         (value['source'], value['page']) not in selected_blank_pages)):
                     raise ValueError('Evidence needs a quotation and exact source locator')
             for key, item in value.items():
                 if key == 'support' and not item:
                     raise ValueError('A source claim needs source support')
-                visit(item)
+                if key == 'target_scopes':
+                    for scope in item:
+                        blank_pages = set()
+                        for column in scope['columns']:
+                            for fragment in column.get('fragments', []):
+                                if 'table_ref' not in fragment:
+                                    continue
+                                table = material['tables'][fragment['table_ref']]
+                                text = table['cells'][fragment['cell']]['text']
+                                # A selected blank cell can evidence continuation;
+                                # unavailable text cannot. Composition is checked below.
+                                if isinstance(text, str) and not text.strip():
+                                    blank_pages.add((table['source'], table['page']))
+                        visit(scope, blank_pages)
+                else:
+                    visit(item, selected_blank_pages if key == 'support' else ())
         elif isinstance(value, list):
             for item in value:
-                visit(item)
+                visit(item, selected_blank_pages)
     visit(reading)
+    for reference in reading.get('references', []):
+        selected_sources = set()
+        citing_sources = {c['source'] for c in reference['support']}
+        for selected in reference.get('documents', []):
+            source = selected['source']
+            if source not in counts or source == sources[0] or source in selected_sources:
+                raise ValueError('Reference must select distinct supplied context documents')
+            selected_sources.add(source)
+            cited = {c['source'] for c in selected['support']}
+            if source not in cited or not (cited & (citing_sources - {source})):
+                raise ValueError('Document relationship needs both citing and referenced source support')
     ids = [d['id'] for d in reading['directions']]
     if any(not x for x in ids) or len(ids) != len(set(ids)):
         raise ValueError('Direction references must be distinct within this reading')
@@ -313,9 +405,13 @@ def _validate_reading(reading, sources, store, material):
                         (association['source_sha256'], association['page'])}
             if not required <= cited:
                 raise ValueError('Association continuity needs both source positions as support')
+        x0, y0, x1, y1 = image['bbox']
         if any(t['source'] == image['source'] and t['page'] == image['page']
+               and (position['image_ref'] in material['pages']
+                    or (max(x0, t['bbox'][0]) < min(x1, t['bbox'][2])
+                        and max(y0, t['bbox'][1]) < min(y1, t['bbox'][3])))
                for t in material['tables'].values()):
-            raise ValueError('Use native table cells rather than retranscribing that page')
+            raise ValueError('Use native table cells rather than retranscribing their source area')
     for part in reading['parts']:
         for number in part['pages']:
             page(part['source'], number)
@@ -336,7 +432,8 @@ def read_measure(sources, store, *, execute=False, review_instruction='', timeou
     material, associations = source_material(sources, store)
     response = read_documents(sources, store, prompt=PROMPT + material_context(material) + '\n' + review_instruction,
                               schema=SCHEMA, model=model, effort=effort,
-                              execute=execute, timeout=timeout)
+                              execute=execute, timeout=timeout,
+                              supplement_page_rotations=True)
     _validate_reading(response['reading'], response['request']['sources'], store, material)
     return MeasureReading(response, material, associations)
 
@@ -349,6 +446,8 @@ def retained_measure(request_id, store):
     # Additive source roles need not invalidate an otherwise compatible reading.
     # The old generated-target contract still cannot satisfy this composition.
     compatible = deepcopy(response['reading'])
+    for reference in compatible['references']:
+        reference.setdefault('documents', [])
     for scope in compatible['target_scopes']:
         for column in scope['columns']:
             # Earlier readings select only the physical row's own field cell.

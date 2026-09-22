@@ -62,14 +62,37 @@ def _call(prompt, schema, images, directory, model, effort, timeout):
     return output.read_text()
 
 
+def _image_rotation_views(page):
+    """Inverse quarter-turns established by unreflected image placement only."""
+    import pymupdf
+    rotations = {}
+    for occurrence, image in enumerate(page.get_image_info(), 1):
+        a, b, c, d, _, _ = pymupdf.Matrix(image['transform']) * page.rotation_matrix
+        if b == c == 0 and a < 0 and d < 0:
+            angle = 180
+        elif a == d == 0 and b < 0 < c:
+            angle = 90
+        elif a == d == 0 and c < 0 < b:
+            angle = 270
+        else:
+            continue
+        rotations.setdefault(angle, []).append({
+            'occurrence': occurrence, 'transform': list(image['transform'])})
+    return rotations
+
+
 def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
-                   effort='high', dpi=180, timeout=240, execute=False):
+                   effort='high', dpi=180, timeout=240, execute=False,
+                   supplement_page_rotations=False):
     """Supply complete PDFs to a caller-owned contract; return a proposed reading.
 
     Digests are ordered: an act and its annexes can share one request. This does
     not classify documents, allocate a population, or certify output semantics.
     Identical requests replay their response, including after a caller rejects it.
     A source-review request must state its changed instruction explicitly.
+    Optional supplemental views rotate complete rendered pages using exact
+    orthogonal image placement, including the page's own rotation. Shear,
+    reflection, other angles and orientation within image pixels are not inferred.
     """
     import pymupdf
     validator_class = validator_for(schema)
@@ -79,13 +102,15 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
         raise ValueError('Supply distinct source hashes in document order')
     if any(len(d) != 64 or any(c not in '0123456789abcdef' for c in d) for d in digests):
         raise ValueError('Expected source SHA-256 identifiers')
-    if effort not in {'low', 'medium', 'high', 'xhigh', 'max'} or dpi <= 0 or timeout <= 0:
+    if (effort not in {'low', 'medium', 'high', 'xhigh', 'max'} or dpi <= 0 or timeout <= 0
+            or not isinstance(supplement_page_rotations, bool)):
         raise ValueError('Invalid reading configuration')
     with TemporaryDirectory(prefix='cordon-codex-documents-') as temporary:
         directory = Path(temporary)
         supplied = (prompt + '\nOriginal source images follow in document order, then physical '
                     'page order. Source hashes identify bytes, not interpreted document relationships.\n')
         images, image_hashes = [], []
+        supplemental_images, supplemental_views = [], []
         for digest in digests:
             source = blob_path(store, digest)
             if sha256(source.read_bytes()).hexdigest() != digest:
@@ -99,10 +124,35 @@ def read_documents(digests, store, *, prompt, schema, model='gpt-5.6-luna',
                     image.write_bytes(png)
                     images.append(image)
                     image_hashes.append(sha256(png).hexdigest())
+                    if supplement_page_rotations:
+                        for angle, occurrences in sorted(_image_rotation_views(page).items()):
+                            matrix = pymupdf.Matrix(dpi / 72, dpi / 72).prerotate(angle)
+                            png = page.get_pixmap(matrix=matrix).tobytes('png')
+                            image = directory / f'{digest}-{number}-rotated-{angle}.png'
+                            image.write_bytes(png)
+                            supplemental_images.append(image)
+                            supplemental_views.append({
+                                'source': digest, 'page': number,
+                                'clockwise_degrees': angle, 'page_rotation': page.rotation,
+                                'image_occurrences': occurrences,
+                                'image_sha256': sha256(png).hexdigest()})
                 supplied += 'END DOCUMENT\n'
+        if supplement_page_rotations:
+            supplied += ('\nSUPPLEMENTAL COMPLETE PAGE VIEWS follow all original page images. '
+                         'Each is the same visible page rendered with the stated clockwise '
+                         'turn, preserving page clipping, masks and overlays. '
+                         'Image indices are one-based attachment positions. '
+                         'Cite its original source and physical page.\n')
+            for image, view in zip(supplemental_images, supplemental_views):
+                images.append(image)
+                image_hashes.append(view['image_sha256'])
+                view['image_index'] = len(images)
+                supplied += json.dumps(view, sort_keys=True) + '\n'
         request = {'transport_version': 1, 'provider': 'codex-subscription', 'model': model,
                    'effort': effort, 'sources': digests, 'prompt': supplied,
                    'schema': schema, 'images': image_hashes, 'dpi': dpi}
+        if supplement_page_rotations:
+            request['supplemental_page_rotations'] = supplemental_views
         request_id = sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
         target = store / 'derived/document-readings' / (request_id + '.json')
         target.parent.mkdir(parents=True, exist_ok=True)
