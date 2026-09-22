@@ -450,6 +450,66 @@ class JoinIdentity(unittest.TestCase):
                 self.assertEqual(rejected['links'][0]['candidates'][0]['row'].identifiers,
                                  ('lab-7', 'specimen-22'))
 
+    def test_annotated_property_scope_resolves_only_existing_field_selectors(self):
+        item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'][0].update(role='identifier', identifier_authority=None)
+        table['columns'].append(dict(table['columns'][0], heading=['Independent code']))
+        table['rows'][0]['cells'].append({'text': 'other-42'})
+        for scope in ("p1-t1/c1 (Unseen heading) identifier_authority",
+                      "p1-t1/c1 'Printed heading' identifier_authority",
+                      'p1-t1/c1 and p1-t1/c5 (ID column) identifier_authority',
+                      'p1-t1/c1,c5 (Two code columns) identifier_authority'):
+            with self.subTest(scope=scope):
+                issue = {'scope': scope, 'cause': 'Unstated assignment authority'}
+                joined = self.run_join([['123', '2024-06-01']], [], report_item=item,
+                                       reading_issues=[issue])[0]
+                self.assertEqual(joined['status'], 'matched')
+                cells = joined['matches'][0]['row'].cells
+                self.assertEqual(cells[0]['identifier_authority_issues'], (issue,))
+                self.assertNotIn('reading_issues', cells[0])
+                self.assertEqual(bool(cells[-1].get('identifier_authority_issues')), 'c5' in scope)
+        for scope in ('p1-t1/c1 literal and identifier_authority',
+                      'p1-t1/c1 and missing-field identifier_authority'):
+            with self.subTest(scope=scope):
+                rejected = self.run_join([['123', '2024-06-01']], [], report_item=item,
+                    reading_issues=[{'scope': scope, 'cause': 'Unstated assignment authority'}])[0]
+                self.assertFalse(rejected['matches'])
+
+    def test_explicit_row_cell_issue_does_not_constrain_independent_identifier(self):
+        item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append(dict(table['columns'][0], heading=['Independent code']))
+        table['rows'][0]['cells'].append({'text': 'other-42'})
+        row = table['id'] + '/' + table['rows'][0]['id']
+        for scope in (row + '/c1', row + ' cell c1 (Printed identifier)',
+                      'fact f9 vs ' + row + ' cell c1 (Printed identifier)'):
+            with self.subTest(scope=scope):
+                issue = {'scope': scope, 'cause': 'The selected cell is unresolved'}
+                joined = self.run_join([['other-42', '2024-06-01']], [], report_item=item,
+                                       reading_issues=[issue], two_results=True)[0]
+                self.assertEqual(joined['status'], 'matched')
+                match, = joined['matches']
+                self.assertEqual(match['row'].cells[0]['reading_issues'], (issue,))
+                independent = next(c for c in match['row'].cells if c['text'] == 'other-42')
+                self.assertNotIn('reading_issues', independent)
+                source = materialize(match['key'][0], 'v', 1, [item])
+                self.assertEqual(list(reverse_rows([source], [joined]))[0]['observations'],
+                                 [joined['observation'].identity])
+                pair = [(match['key'][0], result.locator) for result in match['row'].results]
+                inputs = confirmation_inputs(joined, result_pair=pair, qualification={})
+                self.assertIsNone(inputs['first_positive_annex_iv'].truth)
+                self.assertIsNone(inputs['second_positive_annex_iv'].truth)
+                rejected = self.run_join([['123', '2024-06-01']], [], report_item=item,
+                                         reading_issues=[issue])[0]
+                self.assertFalse(rejected['matches'])
+                self.assertIn('123', rejected['links'][0]['candidates'][0]['row'].identifiers)
+        # A whole-row limit and an unresolved relative list remain broad.
+        for scope in (row, row + ' cell c1 and c5'):
+            rejected = self.run_join([['other-42', '2024-06-01']], [], report_item=item,
+                reading_issues=[{'scope': scope, 'cause': 'The selected fields are unresolved'}])[0]
+            self.assertFalse(rejected['matches'])
+
     def test_repeated_representation_keeps_both_occurrences_and_requires_all_fields(self):
         args = ([['123', '2024-06-01']], [['123', '01/06/2024', 'Positivo', '02/06/2024']])
         joined = self.run_join(*args, repeated=True)[0]

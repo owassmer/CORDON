@@ -665,14 +665,43 @@ def source_scopes(cell, table, raw, index):
     return scopes
 
 
-def scoped_reading_issues(issues, selectors):
-    """Keep an explicitly scoped assigning-authority limit off the literal field."""
-    matched = tuple(issue for issue in issues if any(re.search(
-        r'(?<![\w/-])' + re.escape(selector) + r'(?![\w/-])', issue['scope'])
-        for selector in selectors))
-    authority_scopes = {selector + ' identifier_authority' for selector in selectors}
-    authority = tuple(issue for issue in matched if issue['scope'].strip() in authority_scopes)
-    return tuple(issue for issue in matched if issue not in authority), authority
+def scoped_reading_issues(issues, selectors, *, known_selectors=None):
+    """Bind explicit source selectors and property scopes, never issue explanations."""
+    known = selectors if known_selectors is None else known_selectors
+    fields, authority = [], []
+    for issue in issues:
+        scope = issue['scope'].strip()
+        property_scope = scope.removesuffix(' identifier_authority')
+        if property_scope != scope:
+            # Parentheses/quotes annotate the selected heading. Every reference,
+            # including a relative column in a list, must resolve to a real field.
+            references = re.sub(r"\([^()]*\)|'[^']*'", '', property_scope).strip()
+            targets, previous = set(), None
+            for reference in re.split(r'\s*,\s*|\s+(?:and|e)\s+', references):
+                reference = reference.strip()
+                if previous and re.fullmatch(r'c[1-9]\d*', reference):
+                    reference = previous.rsplit('/', 1)[0] + '/' + reference
+                if reference not in known:
+                    targets = None
+                    break
+                targets.add(reference)
+                previous = reference
+            if targets is not None:
+                if targets.intersection(selectors):
+                    authority.append(issue)
+                continue
+        selected = False
+        for selector in selectors:
+            for match in re.finditer(r'(?<![\w/-])' + re.escape(selector) + r'(?![\w/-])', scope):
+                # A row followed by an explicit cell reference selects that cell,
+                # not all independent fields in the row. Unknown syntax stays broad.
+                cell = re.match(r'\s+cell\s+(c[1-9]\d*)(?=\s*\(|$)', scope[match.end():])
+                if cell and selector + '/' + cell[1] not in selectors:
+                    continue
+                selected = True
+        if selected:
+            fields.append(issue)
+    return tuple(fields), tuple(authority)
 
 
 def materialize(digest, version, page_count, blocks):
@@ -726,6 +755,10 @@ def materialize(digest, version, page_count, blocks):
                 covered.add(disposition['page'])
         tables, projection_issues, incomplete = record_tables(data, native)
         issues += tuple(projection_issues)
+        known_selectors = {selector for table in tables for raw in table['rows']
+                           for index, cell in enumerate(raw['cells'])
+                           for selector in source_scopes(cell, table, raw, index)}
+        known_selectors.update(f['id'] for f in data['facts'] if 'id' in f)
         covered.difference_update(incomplete)
         for table in tables:
             sample_table = any(c['role'] in {'identifier', 'publisher_id', 'laboratory_id', 'result'}
@@ -754,7 +787,8 @@ def materialize(digest, version, page_count, blocks):
                     field_scopes = source_scopes(cell, table, raw, index)
                     scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
-                    field_issues, authority_issues = scoped_reading_issues(issues, field_scopes)
+                    field_issues, authority_issues = scoped_reading_issues(issues, field_scopes,
+                                                                                known_selectors=known_selectors)
                     if authority_issues:
                         value['identifier_authority_issues'] = authority_issues
                     if field_issues:
@@ -781,7 +815,7 @@ def materialize(digest, version, page_count, blocks):
                         # Fact IDs belong to this block. A precise issue constrains
                         # that component; a broader parent issue still travels with it.
                         own_issues, own_authority_issues = scoped_reading_issues(
-                            data['issues'], {component['fact']['id']})
+                            data['issues'], {component['fact']['id']}, known_selectors=known_selectors)
                         component_issues = field_issues + tuple(issue for issue in own_issues
                                                               if issue not in field_issues)
                         if component_issues:
