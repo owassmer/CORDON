@@ -1418,7 +1418,7 @@
       ]
     },
     {
-      "evidence": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
+      "evidence": "Operative prescription and applicable correction, its stated commencement term and anchor, recipient, lawfully due commencement and coercive populations, executor, legally sufficient notification date, and evidence establishing whether concrete removal work began by the stated term.",
       "contracts": [
         "case-prescription",
         "evaluation-context",
@@ -2783,6 +2783,7 @@
       "consumer": "bindings.noncommencement_facts",
       "contracts": [
         "evaluation-context",
+        "case-prescription",
         "recipient-notice",
         "removal-performance",
         "calendar"
@@ -2953,6 +2954,7 @@
       "consumer": "quantities.clock_boundary",
       "contracts": [
         "evaluation-context",
+        "case-prescription",
         "calendar"
       ],
       "kind": "exact-B-anchor-event-contract"

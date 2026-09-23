@@ -328,9 +328,12 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
                           qualifying_commencements: Mapping[str, datetime],
                           commencement_records_complete: bool,
                           zone: ZoneInfo, rule: PeriodRule | None = None,
-                          calendar: WorkingCalendar | None = None) -> dict:
+                          calendar: WorkingCalendar | None = None,
+                          stated_term: tuple[str, str] | None = None) -> dict:
     """Only the temporal components of the case-qualified enforcement condition.
 
+    The period is the prescription's own stated term (number, printed unit
+    word); without it the deadline is unknown.
     Notification, work identity and lawful prescription remain A's conditions.
     The performances must concern this exact work. Commencement before notice
     also defeats noncommencement; no second commencement is demanded.
@@ -341,7 +344,8 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
                 "noncommencement of that work by the source deadline is established"}
     if not required <= set(leaves(row["condition_ast"])):
         raise ValueError("Clock does not feed the case noncommencement condition")
-    end = clock_boundary(snapshot, clock_id, at, notification, zone=zone, rule=rule, calendar=calendar)
+    end = clock_boundary(snapshot, clock_id, at, notification, zone=zone, rule=rule, calendar=calendar,
+                         stated_term=stated_term)
     through = utc(evaluated_at)
     if any(utc(t) > through for t in qualifying_commencements.values()):
         raise ValueError("Performance evidence is later than the evaluation time")

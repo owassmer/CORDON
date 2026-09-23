@@ -1,0 +1,14 @@
+{
+  "schema": "cordon-stage-c-acceptance-v1",
+  "accepted_by": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
+  "date": "2026-09-23",
+  "promoted_package_sha256": "31217394f07f558a4dc69234d7c3f21a40a922d172022b74134472158c2b6d01",
+  "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
+  "preceding_acceptance": {
+    "path": "corpus/evidence/stage-c-acceptance-2026-09-08.json",
+    "sha256": "3548e36c38301c65c47e0549bd33f6cc74f268e08155654bbdf1b0ca3d7a0ded"
+  },
+  "preceding_package_sha256": "6f053bb34a9d4801716387d5e943d826b2e501a92256985938b944ed19a4bd44",
+  "scope": "clock_boundary and noncommencement_facts read the prescription's stated term for a clock whose magnitude B reserves to it; the calendar rules list that one clock. Binding takes effect only on merge."
+}

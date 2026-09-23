@@ -87,6 +87,20 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
         present = removed_fields.intersection(row)
         if present:
             fail(f"{row['provision_version_id']}: removed schema field reintroduced: {sorted(present)[0]}")
+    # A correction or supplement names the instruments it corrects; its own quote cites each one.
+    act_id = re.compile(r"(.+)-(\d{4})-(\d{5})")
+    for row in rows:
+        if "corrects_instrument_ids" not in row:
+            continue
+        corrected, own = row["corrects_instrument_ids"], act_id.fullmatch(row["instrument_id"])
+        if not own or not isinstance(corrected, list) or not corrected or len(set(corrected)) != len(corrected):
+            fail(f"{row['provision_version_id']}: corrects_instrument_ids is a non-empty list of distinct instruments")
+        for instrument in corrected:
+            match = act_id.fullmatch(instrument) if isinstance(instrument, str) else None
+            if not match or match[1] != own[1] or instrument == row["instrument_id"]:
+                fail(f"{row['provision_version_id']}: {instrument} is not another act of the same series")
+            if not re.search(rf"\b0*{int(match[3])}\b[^\n]{{0,30}}?{match[2]}", row["source_quote"]):
+                fail(f"{row['provision_version_id']}: source quote does not cite corrected instrument {instrument}")
     for row in rows:
         higher = set(row.get("higher_authority_dependencies", []))
         external = set(row.get("external_dependencies", []))
@@ -343,6 +357,7 @@ def run_mutations(authoring: Path) -> None:
 
     mutations.append(("allow retained wood as full destruction", allow_retained_wood))
     mutations.append(("remove Article 13 provenance", lambda rows: setattr_proxy(next(row for row in rows if row["stable_provision_id"] == "PUG-LR4-2017:Art.6(2)" and row.get("temporal_status") != "SUPERSEDED"), "condition_ast", {"predicate": "official infected-plant finding"})))
+    mutations.append(("correction names an instrument its quote does not cite", lambda rows: setattr_proxy(next(row for row in rows if row["stable_provision_id"] == "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction"), "corrects_instrument_ids", ["REG-PUGLIA-U181-DIR-2024-00146"])))
     mutations.append(("restore unsupported DGR343 policy", lambda rows: rows.append({**rows[-1], "stable_provision_id": "PUG-DGR343-2022:Art13(2)-scientific-retention-policy", "provision_version_id": "mutant:dgr343"})))
 
     for label, mutate in mutations:
