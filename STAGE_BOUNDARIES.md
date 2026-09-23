@@ -44,7 +44,7 @@ An accepted stage reopens only when a named proposition and source show that its
 
 **Purpose:** specify how every required input is obtained, identified, versioned, corrected, and judged complete enough for its consumer.
 
-D supplies what accepted A–C consume, in the fields their contracts name, and nothing else. It never qualifies, patches or explains A–C. A field, channel or case that no accepted consumer reads, or that the held population does not contain, is not D's work, whoever proposes it.
+D supplies what accepted A–C consume, in the fields their contracts name, and nothing else. It supplies the qualifications A–C name and adds no condition, patch or explanation of its own to their meaning. It designs nothing for a field, channel or case that no accepted consumer reads, whoever proposes it; a consumer-named input the population does not yet hold is acquisition work.
 
 **Owns:** source roles; grain and keys; provenance; cadence; joins; missingness; conflict behavior; public and controlled evidence boundaries; correction and acquisition routes.
 
