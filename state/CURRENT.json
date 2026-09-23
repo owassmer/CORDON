@@ -17,10 +17,10 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "1398dd1be2c734fc6a1c635463f7c99165d13cdeb7bb39aa2400e13fafe246ed",
-          "provision_versions": 442,
-          "national_prefix_rows": 219,
-          "national_prefix_sha256": "bb5a100f3c5f1d50c51f706e141de17453b372443a87b66167c082f893da7c68"
+          "sha256": "3e0ee815de5957e43bdf446100266c0b28cf9406660967c5b22464cd193cb361",
+          "provision_versions": 425,
+          "national_prefix_rows": 220,
+          "national_prefix_sha256": "a8351f7eb868b735a7cc53fa1f96db90747059ab913cf5e8f5bdad0b8471de63"
         }
       },
       "bounded_unknowns": [
@@ -35,22 +35,22 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "efa7650b93978b91a30b82d9c9c30955e873334d7824057e97c7fcd8f6b0dc85",
+        "sha256": "8636ec128ab6965d9cedeb9eb3712140d49e66018ba81818828129a0ba26d9a6",
         "schema": "stage-b-essence-v6",
         "counts": {
-          "clocks": 142,
+          "clocks": 125,
           "parameters": 169,
-          "dispositions": 929
+          "dispositions": 903
         }
       },
       "population": {
         "path": "regulation/stage-b/population.json",
-        "sha256": "d00217fcf1729d94723b1ea5a7bd15f3e1acde3bbda85f6f4b994eeadf4228e6",
+        "sha256": "0fe7caf1e34394ac7ba3c6491b3928119979fa58afd16ba571b0948432105a1f",
         "seams": {
           "1": 160,
           "2": 100,
           "3": 126,
-          "4": 179
+          "4": 162
         }
       },
       "accepted_by": "Owen Wassmer",
@@ -67,12 +67,12 @@
       },
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
-        "path": "corpus/evidence/stage-c-acceptance-2026-09-08.json",
-        "sha256": "3548e36c38301c65c47e0549bd33f6cc74f268e08155654bbdf1b0ca3d7a0ded"
+        "path": "corpus/evidence/stage-c-acceptance-2026-09-23-pr29.json",
+        "sha256": "10a8fa1cb924afdc755609795fdc59e240f447126e4d4be9743f32fd86c12a81"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "6f053bb34a9d4801716387d5e943d826b2e501a92256985938b944ed19a4bd44",
+        "sha256": "31217394f07f558a4dc69234d7c3f21a40a922d172022b74134472158c2b6d01",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },
@@ -86,10 +86,9 @@
         "source_bindings": "regulation/stage-d/source-bindings.json"
       },
       "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
-      "current_capability": "Row 1, monitoring observations, and the bounded national calendar are established. PRs #20, #21 and #22 are merged. Laboratory completion is on PR #18. Row 3 adopted geography is being rebuilt on PR #8. Monitoring positional error is on PR #14. Subject populations (PR #16) resume after PR #8. PRs #15, #23 and #24 were orphaned by the ended Codex thread and are under triage. PRs #13 and #19 are closed. No Stage D closure or source-population acceptance is implied.",
+      "current_capability": "Row 1, monitoring observations, and the bounded national calendar are established. PRs #20, #21 and #22 are merged. Row 2 (PR #18) supplies laboratory rows read from all 1,180 held reports and joined to monitoring observations in both directions inside the four-year reach; each row or observation left unjoined carries the cause its reading establishes. Open in reach: the CNR 68F/2024 coordinate disagreement, the UNIBA XF 35/2023 row that prints no sample identity, and the two CRSFA 849/2024 rows whose identity is printed above the table. Row 3 adopted geography is being rebuilt on PR #8. Monitoring positional error is on PR #14. Subject populations (PR #16) resume after PR #8. PRs #15, #23 and #24 were orphaned by the ended Codex thread and are under triage. PRs #13 and #19 are closed. No Stage D closure or source-population acceptance is implied.",
       "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent review under REVIEW_PRINCIPLES.md and Owen acceptance.",
       "next": [
-        "Complete laboratory readings and bidirectional observation joins (INPUTS.md row 2; PR #18).",
         "Rebuild row 3 adopted geography as each adopting act defines the zone (PR #8).",
         "Establish sourced positional error for monitoring locations (row 1; PR #14).",
         "Triage PRs #15, #23 and #24; then resume subject populations (rows 4-5; PR #16) on the rebuilt PR #8.",

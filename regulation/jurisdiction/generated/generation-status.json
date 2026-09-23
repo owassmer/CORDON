@@ -1,26 +1,26 @@
 {
   "status": "DETERMINISTIC_PROJECTION_OF_CANONICAL_AUTHORING",
   "canonical_authoring": "regulation/jurisdiction/canonical/authoring.json",
-  "canonical_authoring_sha256": "1398dd1be2c734fc6a1c635463f7c99165d13cdeb7bb39aa2400e13fafe246ed",
+  "canonical_authoring_sha256": "3e0ee815de5957e43bdf446100266c0b28cf9406660967c5b22464cd193cb361",
   "counts": {
-    "stable_provisions": 421,
-    "provision_versions": 442,
-    "condition_graphs": 348,
+    "stable_provisions": 404,
+    "provision_versions": 425,
+    "condition_graphs": 331,
     "historical_versions_excluded_from_current_graph": 94,
-    "dependencies": 953
+    "dependencies": 866
   },
   "generated": {
     "stable-provisions.csv": {
-      "sha256": "d7e034a26e76f76e7090ef99ed967ceb6d82e0d858d19fd192dacf4d8bac5250"
+      "sha256": "b2d95a724ee72847ea4a57577f7c40ce79b397d4330a0f2fc360091bcff05601"
     },
     "provision-versions.csv": {
-      "sha256": "cd8a7800d3bd9e35126d41ebdba7a55420b90aca366cd27ceba61be49b1f1c56"
+      "sha256": "15420b99d7697e872175c28a6a21ece0b903760a7d3557e74f1e025a65cff07a"
     },
     "condition-graph.json": {
-      "sha256": "aab6d4664cb0740c117b244d42d32d2d11b1069f17e4daf366eb8a07a6c5da7b"
+      "sha256": "5f5e54812d5c54cc542a010e428d5e541d934dbd30692979880e2f2cf38c2b88"
     },
     "dependency-manifest.csv": {
-      "sha256": "c142b50e9d2f541955fc7acb898a248e46bbe90d2f0ea195b8e3f596d99bc719"
+      "sha256": "3cb622232e7363c91d2217cc838a6bdb4d52fc234073df2b3e9ffc17321056cb"
     }
   }
 }

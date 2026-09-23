@@ -44,6 +44,29 @@ def subscription_in_process(args):
             raw_path=directory / 'same-request.json')
 
 
+FIELDS_NONE = {'cq': None, 'accreditation': None}
+
+
+def note_provider(notes, fields=FIELDS_NONE):
+    """A subscription stand-in: a note request takes the next note answer, a note fields request `fields`."""
+    from cordon_d.report_extraction import note_fields_schema
+    answers = iter(notes) if isinstance(notes, list) else None
+    def provider(**kwargs):
+        if kwargs['schema'] == note_fields_schema():
+            return copy.deepcopy(fields)
+        value = next(answers) if answers is not None else notes
+        if isinstance(value, BaseException):
+            raise value
+        return copy.deepcopy(value)
+    return provider
+
+
+def note_calls(provider):
+    """The calls a stand-in received for mark notes, not for their fields."""
+    from cordon_d.report_extraction import note_fields_schema
+    return [c for c in provider.call_args_list if c.kwargs['schema'] != note_fields_schema()]
+
+
 def block(rows):
     roles = [('publisher_id', 'ID'), ('sampling_date', 'Data rilevamento'),
              ('result', 'Esito A'), ('test_date', 'Data saggio')]
@@ -123,7 +146,7 @@ class CompoundFields(unittest.TestCase):
                                     'agrees on printed host')
                 association = {'fields': {'latitude': {'text': '41.12345679'},
                                           'longitude': {'text': '16.98765432'}}}
-                self.assertEqual(_coordinate_relation(row, association), 'agrees at published decimal precision')
+                self.assertEqual(_coordinate_relation(row, association), 'agrees at printed decimal precision')
                 association['fields']['latitude']['text'] = '40.12345679'
                 self.assertEqual(_coordinate_relation(row, association), 'conflicts')
 
@@ -241,7 +264,7 @@ class CompoundFields(unittest.TestCase):
         self.assertTrue(all(not c.get('reading_issues') for role, c in fields.items() if role != 'host'))
         self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Fictiona nova'}}}), 'unresolved')
         self.assertEqual(_coordinate_relation(row, {'fields': {'latitude': {'text': '41.123456789'},
-            'longitude': {'text': '16.987654321'}}}), 'agrees at published decimal precision')
+            'longitude': {'text': '16.987654321'}}}), 'agrees at printed decimal precision')
 
     def test_broad_column_issue_still_constrains_all_components(self):
         item = compound_block()
@@ -276,25 +299,96 @@ class CompoundFields(unittest.TestCase):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_text_read_as_latin1_enters_the_reading_as_its_utf8_text(self):
+        from cordon_d.reports import decoded
+        # The text layer prints byte 0xA0, the second byte of à, as a space.
+        self.assertEqual(decoded('AttivitÃ di controllo'), 'Attività di controllo')
+        self.assertEqual(decoded('AttivitÃ  di controllo'), 'Attività di controllo')
+        self.assertEqual(decoded('AttivitÃ\xa0 di controllo'), 'Attività di controllo')
+        self.assertEqual(decoded('cittÃ .'), 'città.')
+        self.assertEqual(decoded('Ã¨ stato'), 'è stato')
+        for text in ('Attività di controllo', 'È stato', 'PIÙ DI', 'Olivo (Olea europaea)', None, ''):
+            self.assertEqual(decoded(text), text)
+        item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append({'role': 'other', 'heading': ['Contesto'], 'test': None, 'analyte': None,
+                                 'support': [{'page': 1, 'locator': 'table heading', 'text': 'Contesto'}]})
+        table['rows'][0]['cells'].append({'native_cell': 'p1-t1-r2-c5'})
+        item['native_cells'] = {'p1-t1-r2-c5': {'text': 'AttivitÃ di controllo', 'page': 1,
+                                                'table_bbox': [0, 0, 100, 100]}}
+        [row] = materialize('source', 'v', 1, [item]).rows
+        self.assertEqual(row.cells[-1]['text'], 'Attività di controllo')
+        self.assertEqual(item['native_cells']['p1-t1-r2-c5']['text'], 'AttivitÃ di controllo')
+
     def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):
         item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024'],
                       ['B', '01/06/2024', 'non rilevato†', '02/06/2024']])
         for raw, value, mark in zip(item['reading']['tables'][0]['rows'],
                                     ['rilevato', 'non rilevato'], ['*', '†']):
             raw['cells'][2].update(result_value=value, annotation=mark)
-        item['reading']['facts'] = [dict(id='f1', role='qualification', page=1,
-            locator='footnote', section=None, text='* Non-accredited test', value=None,
-            applies_to=['p1-t1/r1/c3'])]
+        note = dict(id='f1', role='result_qualification', page=1, locator='footnote', section=None,
+                    text='* Non-accredited test', value=None, applies_to=['p1-t1/r1/c3'])
+        # A split mark, like a printed one, is classified only through its note.
         rows = materialize('source', 'v', 1, [item]).rows
-        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'not-detected'])
+        self.assertEqual([(r.results[0].kind, r.results[0].cause) for r in rows],
+                         [('unclassified', 'printed mark; note not recovered by the reading'),
+                          ('unclassified', None)])
+        item['reading']['facts'] = [note]
+        rows = materialize('source', 'v', 1, [item]).rows
+        # '†' is not a mark this parser knows, so it stays part of the printed result.
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
         self.assertEqual([r.results[0].text for r in rows], ['rilevato*', 'non rilevato†'])
+        self.assertEqual(rows[0].results[0].marks, ('*',))
         self.assertEqual(rows[0].cells[2]['result_value'], 'rilevato')
         self.assertEqual([f['text'] for f in rows[0].facts], ['* Non-accredited test'])
         self.assertEqual(rows[0].facts[0]['applies_to'], ['p1-t1/r1/c3'])
         self.assertEqual(rows[1].facts, ())
-        # With no reader-supplied decomposition, punctuation is not stripped.
+        # The same cell unsplit reads the same way: one parser for both shapes.
         del item['reading']['tables'][0]['rows'][0]['cells'][2]['result_value']
-        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+        whole = materialize('source', 'v', 1, [item]).rows[0].results[0]
+        self.assertEqual((whole.kind, whole.marks), ('detected', ('*',)))
+
+    def test_one_parser_reads_marks_with_or_without_a_separator_split_or_whole(self):
+        from cordon_d.reports import printed_marks, result_marks
+        self.assertEqual(printed_marks('*,a'), ('*', 'a'))
+        self.assertEqual(printed_marks('* a'), ('*', 'a'))
+        self.assertEqual(printed_marks('*a'), ('*', 'a'))
+        self.assertIsNone(printed_marks('debole'))
+        self.assertIsNone(printed_marks('†'))
+        self.assertEqual(printed_marks('ᵇ'), ('b',))
+        for literal in ('non rilevato*,a', 'non\nrilevato*,a', 'non rilevato* a', 'non rilevato*a'):
+            with self.subTest(literal=literal):
+                self.assertEqual(result_marks(literal)[1], ('*', 'a'))
+                self.assertEqual(' '.join(result_marks(literal)[0].split()), 'non rilevato')
+        self.assertEqual(result_marks('non rilevato*', {'result_value': 'non rilevato', 'annotation': '*,a'}),
+                         ('non rilevato', ('*', 'a')))
+        self.assertEqual(result_marks('rilevataa'), ('rilevata', ('a',)))
+        self.assertEqual(result_marks('dubbioᵇ'), ('dubbio', ('b',)))
+        self.assertIsNone(result_marks('non rilevata'))
+        self.assertIsNone(result_marks('positivo debole'))
+        note = lambda mark, id: {'id': id, 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                 'text': f'{mark} nota', 'value': None, 'applies_to': ['p1-t1/r1/c3']}
+        for cell in ({'text': 'non rilevato*,a'},
+                     {'text': 'non rilevato*,a', 'result_value': 'non rilevato', 'annotation': '*,a'}):
+            with self.subTest(cell=cell):
+                item = block([['123', '02/06/2024', 'x', '03/06/2024']])
+                item['reading']['tables'][0]['rows'][0]['cells'][2] = cell
+                item['reading']['facts'] = [note('*', 'n1')]
+                result = materialize('hash', 'v', 1, [item]).rows[0].results[0]
+                self.assertEqual((result.kind, result.cause), ('unclassified',
+                                                               'printed mark; note not recovered by the reading'))
+                item['reading']['facts'].append(note('a', 'n2'))
+                result = materialize('hash', 'v', 1, [item]).rows[0].results[0]
+                self.assertEqual((result.kind, result.marks, result.cause), ('not-detected', ('*', 'a'), None))
+
+    def test_a_split_word_after_the_result_is_part_of_the_printed_result(self):
+        item = block([['123', '02/06/2024', 'POSITIVO DEBOLE', '03/06/2024'],
+                      ['124', '02/06/2024', 'POSITIVO (dopo ricampionamento)', '03/06/2024']])
+        rows = item['reading']['tables'][0]['rows']
+        rows[0]['cells'][2].update(result_value='POSITIVO', annotation='DEBOLE')
+        rows[1]['cells'][2].update(result_value='POSITIVO', annotation='(dopo ricampionamento)')
+        self.assertEqual([r.results[0].kind for r in materialize('hash', 'v', 1, [item]).rows],
+                         ['unclassified', 'positive'])
 
     def test_result_components_require_supported_literal_and_result_column(self):
         for value, mark, index in [('non rilevato', '*', 2), ('rilevato', '', 2),
@@ -306,6 +400,9 @@ class LiteralReport(unittest.TestCase):
                     materialize('source', 'v', 1, [item])
         item = block([['A', '01/06/2024', '* non rilevato', '02/06/2024']])
         item['reading']['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+        item['reading']['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                     'text': '* nota', 'value': None, 'applies_to': ['p1-t1/r1/c3']}]
         self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'not-detected')
 
     def test_explicit_unavailable_date_is_not_a_transcription_failure(self):
@@ -338,6 +435,22 @@ class LiteralReport(unittest.TestCase):
             self.assertIsNone(materialize('hash', 'v', 1, [item]).rows[0].sampling_date)
         self.assertEqual(literal_date('29/02/15', year_context=((2015, 'issue'),)).cause,
                          'invalid_calendar_date')
+
+    def test_printed_date_shapes_an_abbreviated_month_an_aside_and_a_day_range(self):
+        from datetime import date
+        context = ((2018, 'issue'),)
+        value = literal_date('08-mag-18', year_context=context)
+        self.assertEqual((value.text, value.value.isoformat(), value.year_support), ('08-mag-18', '2018-05-08', ('issue',)))
+        self.assertEqual(literal_date('08-mag-18').cause, 'year_not_established_by_source_context')
+        self.assertEqual(literal_date('8 set. 2017').value.isoformat(), '2017-09-08')
+        self.assertEqual(literal_date('31-feb-18', year_context=context).cause, 'invalid_calendar_date')
+        self.assertEqual(literal_date('08-xyz-18', year_context=context).cause, 'unparsed_date_literal')
+        aside = literal_date('12/2/2018 (prelievo effettuato dal Dr. Boscia)')
+        self.assertEqual((aside.text, aside.value.isoformat()),
+                         ('12/2/2018 (prelievo effettuato dal Dr. Boscia)', '2018-02-12'))
+        days = literal_date('13-16/5/2016')
+        self.assertEqual((days.value, days.cause, days.date_range), (None, None, (date(2016, 5, 13), date(2016, 5, 16))))
+        self.assertEqual(literal_date('16-13/5/2016').cause, 'invalid_date_range')
 
     def test_italian_sampling_dates_preserve_agreement_and_real_conflict(self):
         for text, day in [('12 novembre 2021', '12/11/2021'),
@@ -1061,6 +1174,36 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(rows[0].cells[0]['annotation'], '(Pool)')
         self.assertEqual(rows[1].reference, '00124 (Field)')
 
+    def test_printed_id_label_is_not_part_of_the_identifier(self):
+        item = block([['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['1401424', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['IDANDROID 12', '01/06/2024', 'Positivo', '02/06/2024'],
+                      ['Id 1610615', '01/06/2024', 'Positivo', '02/06/2024']])
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual(rows[0].cells[0]['identifier'], '11200165')
+        self.assertEqual(rows[0].cells[0]['annotation'], 'ID:')
+        self.assertEqual(rows[0].cells[0]['text'], 'ID: 11200165')
+        self.assertEqual(rows[0].cells[0]['identifier_basis'],
+                         'literal ID label prefix; complete cell retained')
+        self.assertEqual(rows[0].identifiers, ('11200165',))
+        self.assertEqual(rows[1].reference, '1401424')
+        self.assertNotIn('identifier', rows[1].cells[0])
+        self.assertEqual(rows[2].reference, 'IDANDROID 12')
+        self.assertNotIn('identifier', rows[2].cells[0])
+        self.assertEqual(rows[3].cells[0]['identifier'], '1610615')
+        self.assertEqual(rows[3].cells[0]['annotation'], 'Id')
+        self.assertEqual(rows[3].cells[0]['text'], 'Id 1610615')
+
+    def test_two_identifier_cells_keep_every_value_on_the_row(self):
+        item = block([['ID: 11200165', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append(dict(table['columns'][0], heading=['CODICE ID']))
+        table['rows'][0]['cells'].append({'text': '0147/24-1'})
+        row = materialize('hash', 'v', 1, [item]).rows[0]
+        self.assertIsNone(row.reference)
+        self.assertEqual(row.identifiers, ('11200165', '0147/24-1'))
+        self.assertEqual(row.cells[0]['text'], 'ID: 11200165')
+
     def test_sampling_attachment_gets_one_reread_and_can_remain_unresolved(self):
         import pymupdf
         from cordon_d.store import put_bytes
@@ -1099,6 +1242,576 @@ class LiteralReport(unittest.TestCase):
                     self.assertIn('prior_request_sha256', payload['blocks'][0])
                 if resolved is False:
                     self.assertIn('after one source reread', payload['blocks'][0]['reading']['issues'][-1]['cause'])
+
+    def test_unresolved_mark_scopes_need_a_matching_qualification(self):
+        from cordon_d.report_extraction import unresolved_mark_scopes
+        item = block([['123', '02/06/2024', 'non rilevato*', '03/06/2024']])
+        reading = item['reading']
+        self.assertEqual(unresolved_mark_scopes(reading, {}), ['p1-t1/r1'])
+        note = {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                'text': '*Prova non accreditata da Accredia.', 'value': None, 'applies_to': ['p1-t1/r1']}
+        reading['facts'] = [note]
+        self.assertEqual(unresolved_mark_scopes(reading, {}), [])
+        reading['facts'] = [dict(note, applies_to=['p1-t1/c3'])]
+        self.assertEqual(unresolved_mark_scopes(reading, {}), [])
+        native = {'p1-t1-r1-c3': {'text': 'rilevato*', 'page': 1}}
+        reading['facts'] = []
+        reading['tables'][0]['rows'][0]['cells'][2] = {'native_cell': 'p1-t1-r1-c3'}
+        self.assertEqual(unresolved_mark_scopes(reading, native), ['p1-t1/r1'])
+        # A mark the source reader split off needs its note just the same.
+        reading['tables'][0]['rows'][0]['cells'][2] = {
+            'native_cell': 'p1-t1-r1-c3', 'result_value': 'rilevato', 'annotation': '*'}
+        self.assertEqual(unresolved_mark_scopes(reading, native), ['p1-t1/r1'])
+        reading['facts'] = [note]
+        self.assertEqual(unresolved_mark_scopes(reading, native), [])
+
+    @staticmethod
+    def _note_answer(text='* Si consiglia di ripetere il prelievo.', applies=('p1-t1/r1/c3',), names=False):
+        return {'notes': [{'text': text, 'page': 1, 'locator': 'footnote below the table',
+                           'applies_to': list(applies), 'names_cells': names}]}
+
+    def test_first_reading_with_a_mark_reads_only_its_note_and_replays_retained(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import (PROMPT, NOTE_PROMPT, NOTE_FIELDS_PROMPT, note_schema,
+                                                note_fields_schema, write_json)
+        marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
+        printed = '* Valori di ciclo quantitativo >30, si consiglia di ricampionare le piante'
+        answer = self._note_answer(text=printed)
+        # The note prints a bound, not an exact Cq: the answer names it and it fills nothing.
+        stated = {'cq': {'words': 'ciclo quantitativo >30', 'value': '30'}, 'accreditation': None}
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            def fake_call(request, *, config, budget, request_id, raw_path):
+                schema = request['output_config']['format']['schema']
+                reading = (answer if schema == note_schema() else stated if schema == note_fields_schema()
+                           else marked)
+                write_json(raw_path, {'response': {'model': config.model, 'stop_reason': 'end_turn',
+                                                   'content': [{'text': json.dumps(reading)}]}})
+                return copy.deepcopy(reading)
+            with patch('cordon_d.report_extraction._call', side_effect=fake_call) as call:
+                path = extract_report(digest, store, config=ExtractionConfig(), budget=None)
+            self.assertEqual(call.call_count, 3)
+            # The fields request carries only the note's printed text.
+            fields_request = call.call_args_list[2].args[0]
+            self.assertEqual(fields_request['messages'][0]['content'],
+                             [{'type': 'text', 'text': NOTE_FIELDS_PROMPT.format(note=printed)}])
+            request = call.call_args_list[1].args[0]
+            self.assertEqual(request['output_config']['format']['schema'], note_schema())
+            self.assertEqual(request['output_config']['effort'], 'medium')
+            content = request['messages'][0]['content']
+            self.assertEqual([part['type'] for part in content], ['text', 'image', 'text'])
+            self.assertEqual(content[0]['text'], 'PHYSICAL PAGE 1: page image')
+            self.assertNotIn(PROMPT, content[-1]['text'])
+            self.assertTrue(content[-1]['text'].startswith(NOTE_PROMPT.split('{mark}')[0]))
+            self.assertIn('"selector": "p1-t1/r1/c3"', content[-1]['text'])
+            self.assertIn('"printed_value": "non rilevato*"', content[-1]['text'])
+            self.assertIn('"row_identity": ["123"]', content[-1]['text'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            item = saved['blocks'][0]
+            self.assertEqual(item['reading']['tables'], marked['tables'])
+            note = item['reading']['facts'][-1]
+            self.assertEqual((note['role'], note['mark'], note['text'], note['applies_to']),
+                             ('result_qualification', '*', printed, ['p1-t1/r1/c3']))
+            self.assertNotIn('qualification', note)
+            self.assertEqual({k: v for k, v in note['fields'].items() if k != 'request_sha256'},
+                             {'cq': None, 'accreditation': None})
+            self.assertEqual(item['mark_notes'][0]['mark'], '*')
+            self.assertGreater(item['mark_notes'][0]['request_bytes'], 0)
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.marks, result.accreditation), ('not-detected', ('*',), ()))
+            self.assertEqual(result.cq, ())
+            def forget_assembly():
+                path.unlink()
+                for cached in path.parent.glob('blocks/*.json'):
+                    cached.unlink()
+            forget_assembly()
+            with patch('cordon_d.report_extraction._call', side_effect=AssertionError('dispatch')):
+                replay = extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+            self.assertEqual(json.loads(replay.read_text()), saved)
+            forget_assembly()
+            (store / 'derived/reports/responses' / f"{item['mark_notes'][0]['request_sha256']}.json").unlink()
+            with patch('cordon_d.report_extraction._call', side_effect=AssertionError('dispatch')):
+                replay = extract_report(digest, store, config=ExtractionConfig(), budget=None, execute=False)
+            unread = json.loads(replay.read_text())
+            self.assertFalse(unread['assembly_complete'])
+            self.assertEqual(unread['blocks'][0]['reading'], marked)
+            self.assertTrue(unread['blocks'][0]['attachment_repair_pending'].startswith('mark note reread pending: '))
+
+    def test_a_superscript_mark_note_carries_its_letter(self):
+        from cordon_d.report_extraction import accepted_notes
+        cells = [{'cell': 'p1-t1/r1/c3', 'page': 1, 'text': 'DUBBIOᵇ', 'marks': ['b']}]
+        answer = self._note_answer(text='ᵇ Si consiglia di ripetere il prelievo.')
+        facts = accepted_notes(answer, mark='b', cells=cells, sources=[{'page': 1, 'kind': 'page image'}],
+                               page_text=lambda n: '')
+        self.assertEqual((facts[0]['mark'], facts[0]['text']), ('b', 'ᵇ Si consiglia di ripetere il prelievo.'))
+
+    def test_note_fields_must_be_printed_in_the_note(self):
+        from cordon_d.report_extraction import accepted_note_fields
+        # An exact printed Cq fills the field.
+        note = '** Ciclo soglia 32,15; si consiglia di prelevare un ulteriore campione.'
+        exact = {'words': 'Ciclo soglia 32,15', 'value': '32,15'}
+        self.assertEqual(accepted_note_fields({'cq': exact, 'accreditation': None}, note),
+                         {'cq': exact, 'accreditation': None})
+        for cq, defect in [(dict(exact, words='ciclo soglia 35'), 'cq words must quote the note'),
+                           (dict(exact, value='35'), 'cq value must be a number printed in its words'),
+                           (dict(exact, value='circa 32'), 'cq value must be a number printed')]:
+            with self.subTest(cq=cq), self.assertRaisesRegex(ValueError, defect):
+                accepted_note_fields({'cq': cq, 'accreditation': None}, note)
+        # Any other Cq wording, a bound or a range, fills nothing.
+        for printed, words, value in [('** Valori di ciclo soglia >32.00.', 'ciclo soglia >32.00', '32.00'),
+                                      ('** Cq compreso tra 30 e 35.', 'Cq compreso tra 30 e 35', '30')]:
+            with self.subTest(words=words):
+                self.assertEqual(accepted_note_fields({'cq': {'words': words, 'value': value},
+                                                       'accreditation': None}, printed),
+                                 {'cq': None, 'accreditation': None})
+        printed = '*Prova non accreditata da Accredia.'
+        stated = {'words': 'Prova non accreditata da Accredia', 'accredited': False, 'body': 'Accredia'}
+        self.assertEqual(accepted_note_fields({'cq': None, 'accreditation': stated}, printed)['accreditation'], stated)
+        with self.assertRaisesRegex(ValueError, 'accredited true or false'):
+            accepted_note_fields({'cq': None, 'accreditation': dict(stated, accredited=None)}, printed)
+        with self.assertRaisesRegex(ValueError, 'exactly the keys'):
+            accepted_note_fields({'cq': None}, printed)
+
+    def test_a_note_already_read_gets_only_its_fields_read_and_they_reach_the_result(self):
+        from cordon_d.report_extraction import note_fields_schema, write_json
+        marked = self._retained_block((('123', '01/06/2024', 'rilevato*', '02/06/2024'),))
+        printed = '*Prova non accreditata da Accredia.'
+        stated = {'cq': None, 'accreditation': {'words': 'Prova non accreditata da Accredia', 'accredited': False,
+                                                'body': 'Accredia'}}
+        config = ExtractionConfig(provider='subscription')
+
+        def retaining_notes(provider):
+            # The note answer is retained, as a real subscription call retains it; the fields
+            # answer is not, as for a note read before its fields were asked for.
+            def call(**kwargs):
+                value = provider(**kwargs)
+                if kwargs['schema'] != note_fields_schema():
+                    write_json(kwargs['raw_path'], {'provider': 'claude-code-subscription',
+                                                    'response': {'structured_output': value}})
+                return value
+            return call
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            answer = self._note_answer(text=printed)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=retaining_notes(note_provider([answer]))) as provider:
+                first = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 1)
+            first.unlink()
+            for cached in first.parent.glob('blocks/*.json'):
+                cached.unlink()
+            # A resumed block reads its notes again: the retained note answer replays and only
+            # the fields request, never answered, is sent.
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([], fields=stated)) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual((provider.call_count, note_calls(provider)), (1, []))
+            self.assertEqual(provider.call_args.kwargs['attachments'], [])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.cq), ('detected', ()))
+            self.assertEqual([{k: v for k, v in a.items() if k != 'note'} for a in result.accreditation],
+                             [stated['accreditation']])
+
+    def test_a_combined_mark_needs_a_note_for_each_of_its_marks(self):
+        from cordon_d.report_extraction import unresolved_marked_cells
+        def note(text, applies_to, **extra):
+            return dict({'id': f'f{len(text)}', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                         'text': text, 'value': None, 'applies_to': applies_to}, **extra)
+        item = block([['123', '02/06/2024', 'rilevato*a', '03/06/2024']])
+        item['reading']['facts'] = [note('*Prova non accreditata da Accredia.', ['p1-t1/r1'])]
+        self.assertEqual([c['marks'] for c in unresolved_marked_cells(item['reading'], {})], [['a']])
+        item['reading']['facts'].append(note("a L'esito si riferisce al campione suddiviso in aliquote.", ['p1-t1/c3']))
+        self.assertEqual(unresolved_marked_cells(item['reading'], {}), [])
+        self.assertEqual(materialize('hash', 'v', 1, [item]).rows[0].results[0].kind, 'detected')
+        # '**=' begins a note for '**'; a note read for its mark need not begin with it.
+        item = block([['124', '02/06/2024', 'Negativo**', '03/06/2024']])
+        item['reading']['facts'] = [note('**= Si consiglia di ricampionare la pianta', ['p1-t1/r1/c3'])]
+        self.assertEqual(unresolved_marked_cells(item['reading'], {}), [])
+        item['reading']['facts'] = [note('Prova non accreditata da Accredia**', ['p1-t1/r1/c3'], mark='**')]
+        self.assertEqual(unresolved_marked_cells(item['reading'], {}), [])
+        self.assertEqual(materialize('hash', 'v', 1, [item]).rows[0].results[0].kind, 'negative')
+
+    def _note_source(self, store, blocks, page_text=None, pages=1):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        with pymupdf.open() as pdf:
+            page = pdf.new_page()
+            if page_text:
+                for index, line in enumerate(page_text):
+                    page.insert_text((72, 100 + 400 * index), line)
+            for number in range(2, pages + 1):
+                pdf.new_page().draw_rect((72, 72, 72 + number * 10, 90))  # Distinct scanned-like pages.
+            digest = put_bytes(store, pdf.tobytes())
+        read = {page for item in blocks for page in item['targets']}
+        blocks = [*blocks, *({'targets': [n], 'request_sha256': f'retained-{n}', 'context_pages': [],
+                              'supplied_pages': [n], 'native_cells': {}, 'native_regions': [], 'reading': {
+                                  'pages': [{'page': n, 'disposition': 'read'}], 'tables': [], 'facts': [],
+                                  'issues': [], 'context_pages': []}}
+                             for n in range(1, pages + 1) if n not in read)]
+        prior = store / 'derived/reports/prior' / digest / 'report.json'
+        prior.parent.mkdir(parents=True)
+        prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior',
+            'page_count': pages, 'assembly_complete': True, 'blocks': blocks}))
+        return digest
+
+    def test_note_search_reads_later_pages_one_at_a_time_until_the_note_is_found(self):
+        marked = self._retained_block()
+        found = {'notes': [dict(self._note_answer()['notes'][0], page=3)]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            unmarked = [{'targets': [n], 'request_sha256': f'retained-{n}', 'context_pages': [], 'supplied_pages': [n],
+                         'native_cells': {}, 'native_regions': [], 'reading': {
+                             'pages': [{'page': n, 'disposition': 'read'}], 'tables': [], 'facts': [],
+                             'issues': [], 'context_pages': []}} for n in (2, 3, 4)]
+            digest = self._note_source(store, [marked, *unmarked], pages=4)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([{'notes': []}, {'notes': []}, found])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 3)
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 2: page image'],
+                              ['PHYSICAL PAGE 3: page image']])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual([r['notes'] for r in saved['blocks'][0]['mark_notes']], [0, 0, 1])
+            self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 3)
+            self.assertIn(3, saved['blocks'][0]['supplied_pages'])
+
+    def test_a_note_cited_on_a_page_not_shown_is_read_from_that_page(self):
+        marked = self._retained_block()
+        elsewhere = {'notes': [dict(self._note_answer()['notes'][0], page=3)]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=4)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([elsewhere, elsewhere])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            # The page the answer named is shown next, ahead of the ordinary order; no correction.
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 3: page image']])
+            self.assertNotIn('failed a check', note_calls(provider)[1].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            records = saved['blocks'][0]['mark_notes']
+            self.assertEqual([(r['notes'], r.get('cites_unshown_pages')) for r in records], [(0, [3]), (1, None)])
+            note = saved['blocks'][0]['reading']['facts'][-1]
+            self.assertEqual((note['page'], note['note_request_sha256']), (3, records[1]['request_sha256']))
+        # A page already shown is not shown again: an answer citing it gets the one correction,
+        # and the note is accepted only from the page the request showed.
+        from cordon_d.report_extraction import NOTE_CORRECTION
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            on_two = {'notes': [dict(elsewhere['notes'][0], page=2)]}
+            answers = [{'notes': []}, {'notes': [dict(elsewhere['notes'][0], page=1)]}, on_two]
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=note_provider(answers)) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 2: page image'],
+                              ['PHYSICAL PAGE 2: page image']])
+            cites_one = ('Mark note cites page 1, which was not supplied; a note read from the supplied source has '
+                         'its physical page number, 2, whatever page number is printed on the page')
+            self.assertIn(NOTE_CORRECTION.format(defect=cites_one), note_calls(provider)[2].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 2)
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            on_one = {'notes': [dict(elsewhere['notes'][0], page=1)]}
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([{'notes': []}, on_one, on_one])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 3)
+            saved = json.loads(path.read_text())
+            self.assertFalse(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                             f'mark note reread pending: {cites_one}; the note correction also failed: {cites_one}')
+        # When the named page does not hold the note, the set-aside answer gets its one correction
+        # from the page it was given, and its note is accepted there.
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            on_one = {'notes': [dict(elsewhere['notes'][0], page=1)]}
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([elsewhere, {'notes': []}, elsewhere, on_one])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            calls = note_calls(provider)
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in calls],
+                             [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 3: page image'],
+                              ['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 1: page image']])
+            self.assertEqual(calls[2].kwargs['request_id'], calls[0].kwargs['request_id'])
+            self.assertIn(NOTE_CORRECTION.format(defect=(
+                'Mark note cites page 3, which was not supplied; a note read from the supplied source has its '
+                'physical page number, 1, whatever page number is printed on the page')), calls[3].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 1)
+
+    def test_a_note_printed_anywhere_defines_its_mark_for_every_marked_cell(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
+                                       ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
+        later = {'notes': [dict(self._note_answer(applies=('p1-t1/r1/c3',))['notes'][0], page=2)]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([{'notes': []}, later, {'notes': []}])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 3)
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            found, extended = saved['blocks'][0]['reading']['facts'][-2:]
+            self.assertEqual((found['applies_to'], extended['applies_to']), (['p1-t1/r1/c3'], ['p1-t1/r2/c3']))
+            self.assertEqual((extended['text'], extended['page'], extended['note_request_sha256']),
+                             (found['text'], 2, found['note_request_sha256']))
+            self.assertEqual(extended['scope_basis'],
+                             'linked by the printed mark; the only note printed for it in the document')
+            rows = report(digest, store, extraction_version=saved['extraction_version']).rows
+            self.assertEqual([(r.results[0].kind, r.results[0].marks) for r in rows],
+                             [('negative', ('*',)), ('positive', ('*',))])
+
+    def test_a_mark_no_page_defines_is_recorded_as_printed_without_a_meaning(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),))
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked], pages=3)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([{'notes': []}] * 3)) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
+                             [[f'PHYSICAL PAGE {n}: page image'] for n in (1, 2, 3)])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            fact = saved['blocks'][0]['reading']['facts'][-1]
+            self.assertEqual((fact['role'], fact['mark'], fact['text'], fact['applies_to'],
+                              fact['pages_examined'], fact['scope_basis']),
+                             ('result_qualification', '*', '*', ['p1-t1/r1/c3'], [1, 2, 3],
+                              'the document prints the mark without a meaning'))
+            # A mark printed without a meaning has no note text, so nothing reads its fields.
+            self.assertNotIn('fields', fact)
+            self.assertNotIn('note_request_sha256', fact)
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.text, result.cause, result.marks, result.cq),
+                             ('negative', 'negativo*', None, ('*',), ()))
+
+    @staticmethod
+    def _retained_block(rows=(('123', '01/06/2024', 'non rilevato*', '02/06/2024'),)):
+        marked = block([list(row) for row in rows])
+        marked.update(request_sha256='retained-request', context_pages=[1],
+                      supplied_pages=[1], native_regions=[])
+        return marked
+
+    def test_resume_resolves_a_mark_from_its_note_alone(self):
+        from cordon_d.report_extraction import PROMPT
+        marked = self._retained_block()
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider(self._note_answer())) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 1)
+            request = note_calls(provider)[-1].kwargs
+            self.assertEqual(request['config'].effort, 'medium')
+            self.assertEqual([(name, label) for name, _, label in request['attachments']],
+                             [('note-1-page-1.png', 'PHYSICAL PAGE 1: page image')])
+            self.assertTrue(request['attachments'][0][1].startswith(b'\x89PNG'))
+            self.assertNotIn(PROMPT, request['prompt'])
+            self.assertIn('p1-t1/r1/c3', request['prompt'])
+            saved = json.loads(path.read_text())
+            item = saved['blocks'][0]
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(item['request_sha256'], 'retained-request')
+            self.assertEqual(item['reading']['tables'], marked['reading']['tables'])
+            self.assertEqual(item['mark_notes'][0]['request_sha256'], request['request_id'])
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.text, result.cause, result.marks, result.cq),
+                             ('not-detected', 'non rilevato*', None, ('*',), ()))
+
+    def test_pending_note_read_leaves_assembly_unattested_until_executed(self):
+        marked = self._retained_block()
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=AssertionError('dispatch')) as provider:
+                path = extract_report(digest, store, config=config, budget=None,
+                                      resume_from='prior', execute=False)
+            provider.assert_not_called()
+            saved = json.loads(path.read_text())
+            self.assertFalse(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                'mark note reread pending: No retained response for this mark note read; '
+                'explicit execution is required')
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+            loaded = report(digest, store, extraction_version=saved['extraction_version'])
+            self.assertIs(loaded.assembly_complete, False)
+            # A notes-only execution reads the note and nothing else.
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider(self._note_answer())) as provider:
+                path = extract_report(digest, store, config=config, budget=None,
+                                      resume_from='prior', execute='bounded requests')
+            self.assertEqual(len(note_calls(provider)), 1)
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertNotIn('attachment_repair_pending', saved['blocks'][0])
+
+    def test_a_note_that_does_not_name_its_cells_is_linked_by_its_mark(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
+                                       ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
+        answer = self._note_answer(text='*Prova non accreditata da Accredia.', applies=())
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=note_provider(answer)) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 1)
+            self.assertIn('p1-t1/r2/c3', note_calls(provider)[-1].kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            note = saved['blocks'][0]['reading']['facts'][-1]
+            self.assertEqual(note['applies_to'], ['p1-t1/r1/c3', 'p1-t1/r2/c3'])
+            self.assertEqual(note['scope_basis'], 'linked by the printed mark')
+            rows = report(digest, store, extraction_version=saved['extraction_version']).rows
+            self.assertEqual([(r.results[0].kind, r.results[0].marks) for r in rows],
+                             [('negative', ('*',)), ('positive', ('*',))])
+
+    def test_a_note_that_names_some_cells_leaves_the_others_pending(self):
+        marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
+                                       ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
+        answer = self._note_answer(text='* Campione 123 pervenuto danneggiato.', applies=('p1-t1/r1/c3',),
+                                   names=True)
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=note_provider(answer)):
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            saved = json.loads(path.read_text())
+            self.assertFalse(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                'mark note reread pending: no printed note for mark * recovered for p1-t1/r2/c3 '
+                'from page 1 page image')
+            rows = report(digest, store, extraction_version=saved['extraction_version']).rows
+            self.assertEqual((rows[0].results[0].kind, rows[0].results[0].marks), ('negative', ('*',)))
+            self.assertEqual((rows[1].results[0].kind, rows[1].results[0].cause),
+                             ('unclassified', 'printed mark; note not recovered by the reading'))
+
+    def test_malformed_note_answer_gets_one_correction(self):
+        from cordon_d.report_extraction import NOTE_CORRECTION
+        marked = self._retained_block()
+        misquoted = self._note_answer(text='Si consiglia di ripetere il prelievo.')
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([misquoted, self._note_answer()])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 2)
+            correction = note_calls(provider)[1].kwargs
+            defect = 'Mark note text does not carry its printed mark *'
+            self.assertIn(NOTE_CORRECTION.format(defect=defect), correction['prompt'])
+            self.assertEqual(correction['config'].effort, 'medium')
+            self.assertEqual(correction['attachments'], note_calls(provider)[0].kwargs['attachments'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            record = saved['blocks'][0]['mark_notes'][0]
+            self.assertEqual((record['correction_of'], record['defect'], record['request_sha256']),
+                             (note_calls(provider)[0].kwargs['request_id'], defect, correction['request_id']))
+        malformed = {'notes': [dict(self._note_answer()['notes'][0], applies_to=['p9-t9/r9/c9'])]}
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([misquoted, malformed])) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 2)
+            saved = json.loads(path.read_text())
+            self.assertFalse(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
+                'mark note reread pending: Mark note text does not carry its printed mark *; the note correction '
+                'also failed: Mark note names a cell that was not supplied')
+            self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
+
+    def test_text_layer_supplies_only_the_note_region_and_checks_its_quotation(self):
+        from cordon_d.report_extraction import note_source_steps, accepted_notes
+        import pymupdf
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [self._retained_block()],
+                                       page_text=['Rapporto di prova 123', '* Si consiglia di ripetere il prelievo.'])
+            from cordon_d.store import blob_path
+            cells = [{'cell': 'p1-t1/r1/c3', 'page': 1, 'text': 'non rilevato*', 'marks': ['*']}]
+            with pymupdf.open(blob_path(store, digest)) as document:
+                steps = list(note_source_steps(document, '*', cells, [], 72))
+                sources = steps[0]
+                self.assertEqual([(s['page'], s['kind'], s['text']) for s in sources],
+                                 [(1, 'text region', '* Si consiglia di ripetere il prelievo.')])
+                # If the region does not answer, the search continues with the page image.
+                self.assertEqual([[(s['page'], s['kind']) for s in step] for step in steps[1:]],
+                                 [[(1, 'page image')]])
+                self.assertLess(sources[0]['bbox'][3] - sources[0]['bbox'][1], 40)
+                check = dict(mark='*', cells=cells, sources=sources, page_text=lambda n: document[n - 1].get_text())
+                self.assertEqual(accepted_notes(self._note_answer(), **check)[0]['text'],
+                                 '* Si consiglia di ripetere il prelievo.')
+                with self.assertRaisesRegex(ValueError, 'not printed in the text layer of page 1'):
+                    accepted_notes(self._note_answer(text='* Si consiglia di ripetere il campione.'), **check)
+                with self.assertRaisesRegex(ValueError, 'does not carry its printed mark'):
+                    accepted_notes(self._note_answer(text='Si consiglia di ripetere il prelievo.'), **check)
+                with self.assertRaisesRegex(ValueError, 'names no supplied cell'):
+                    accepted_notes(self._note_answer(applies=(), names=True), **check)
+
+    def test_a_note_reaches_the_row_for_the_detector_as_it_does_for_the_classifier(self):
+        from cordon_d.report_extraction import unresolved_mark_scopes
+        note = {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                'text': '* Prova non accreditata da Accredia.', 'value': None,
+                'applies_to': ['report']}
+        reaching = {'report-wide note': [note],
+                    'note on a reached statement': [dict(note, applies_to=['f2']),
+                        {'id': 'f2', 'role': 'qualification', 'page': 1, 'locator': 'caption',
+                         'text': 'Esiti della prova', 'value': None, 'applies_to': ['p1-t1/r1']}]}
+        for reach, facts in reaching.items():
+            with self.subTest(reach=reach):
+                item = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])
+                item['reading']['facts'] = facts
+                self.assertEqual(unresolved_mark_scopes(item['reading'], {}), [])
+                row = materialize('hash', 'v', 1, [item]).rows[0]
+                self.assertEqual(row.results[0].kind, 'not-detected')
+                self.assertEqual(row.results[0].text, 'non rilevato*')
+                self.assertIsNone(row.results[0].cause)
+
+    def test_sospetto_does_not_trigger_mark_repair(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        from cordon_d.report_extraction import unresolved_mark_scopes
+        reading = block([['123', '01/06/2024', 'Sospetto', '02/06/2024']])['reading']
+        self.assertEqual(unresolved_mark_scopes(reading, {}), [])
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                pdf.new_page()
+                digest = put_bytes(store, pdf.tobytes())
+            with patch('cordon_d.report_extraction._call', return_value=reading) as call:
+                extract_report(digest, store, config=ExtractionConfig(), budget=None)
+            self.assertEqual(call.call_count, 1)
 
     def test_extra_model_region_is_not_promoted_into_detector_evidence(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
@@ -1262,6 +1975,21 @@ class LiteralReport(unittest.TestCase):
         rows = materialize('hash', 'v', 1, [item]).rows
         self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
         self.assertIsNone(rows[1].results[0].cause)
+
+    def test_a_letter_mark_equal_to_the_literals_last_letter_is_separated_once(self):
+        # CNR prints the feminine "rilevataa" and "non rilevataa": the mark a follows a word
+        # that itself ends in a. The mark is separated once, where the base is a result.
+        item = block([['123', '02/06/2024', 'rilevataa', '03/06/2024'],
+                      ['124', '02/06/2024', 'non rilevataa', '03/06/2024']])
+        item['reading']['facts'] = [
+            {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
+             'text': "a L'esito delle analisi si riferisce ai risultati ottenuti sul campione suddiviso in aliquote.",
+             'value': None, 'applies_to': ['p1-t1/c3'], 'mark': 'a'}]
+        rows = materialize('hash', 'v', 1, [item]).rows
+        self.assertEqual([(r.results[0].kind, r.results[0].text, r.results[0].cause, r.results[0].marks)
+                          for r in rows],
+                         [('detected', 'rilevataa', None, ('a',)),
+                          ('not-detected', 'non rilevataa', None, ('a',))])
 
     def test_an_omitted_detected_table_cannot_claim_page_coverage(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
@@ -1449,6 +2177,101 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'never written under another extraction version'):
                 write_assembled(target, {'source_sha256': digest, 'extraction_version': 'other',
                                          'page_count': 1, 'blocks': []}, store, digest)
+
+    @staticmethod
+    def _continued_blocks():
+        """Page 1 prints the sample identity; page 2 prints its result and no identity."""
+        head = LiteralReport._retained_block((('00123', '01/06/2024', None, None),))
+        head['reading']['tables'][0]['columns'] = head['reading']['tables'][0]['columns'][:2]
+        for row in head['reading']['tables'][0]['rows']:
+            row['cells'] = row['cells'][:2]
+        tail = LiteralReport._retained_block((('Positivo', '02/06/2024'),))
+        table = tail['reading']['tables'][0]
+        table.update(id='p2-t1', page=2, columns=table['columns'][2:])
+        for column in table['columns']:
+            column['support'] = [dict(s, page=2) for s in column['support']]
+        tail.update(targets=[2], request_sha256='retained-2', context_pages=[2], supplied_pages=[2])
+        tail['reading'].update(pages=[{'page': 2, 'disposition': 'read'}], context_pages=[2])
+        return head, tail
+
+    def test_a_result_part_with_no_identity_gets_one_bounded_binding_request(self):
+        from cordon_d.report_extraction import output_schema
+        from cordon_d.reports import record_rows
+        binding = {'pages': [], 'tables': [], 'context_pages': [], 'issues': [], 'facts': [
+            {'id': 'bound', 'role': 'record_continuation', 'page': 1, 'locator': 'table row', 'section': None,
+             'text': '00123', 'value': '00123', 'applies_to': ['p1-t1/r1', 'p2-t1/r1']}]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, list(self._continued_blocks()), pages=2)
+            with patch('cordon_d.report_extraction._subscription_call', return_value=binding) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior',
+                                      execute='bounded requests')
+            self.assertEqual(provider.call_count, 1)
+            request = provider.call_args.kwargs
+            self.assertEqual(request['schema'], output_schema())
+            self.assertIn('["p2/p2-t1/r1"]', request['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][-1]['continuation_binding'], ['p2/p2-t1/r1'])
+            [row] = record_rows(report(digest, store, extraction_version=saved['extraction_version']))
+            self.assertEqual((row.identifiers, [r.kind for r in row.results]), (('00123',), ['positive']))
+
+    def test_a_binding_answer_that_reads_tables_gets_one_correction_then_keeps_its_cause(self):
+        from cordon_d.report_extraction import BINDING_CORRECTION
+        from cordon_d.reports import record_rows
+        head, tail = self._continued_blocks()
+        reread = {'pages': [], 'tables': copy.deepcopy(tail['reading']['tables']), 'context_pages': [],
+                  'issues': [], 'facts': []}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [head, tail], pages=2)
+            with patch('cordon_d.report_extraction._subscription_call', return_value=reread) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior',
+                                      execute='bounded requests')
+            self.assertEqual(provider.call_count, 2)
+            defect = 'A continuation binding returns only record and field continuation facts'
+            self.assertIn(BINDING_CORRECTION.format(defect=defect), provider.call_args.kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            [issue] = saved['blocks'][-1]['reading']['issues']
+            self.assertEqual(issue['scope'], 'p2/p2-t1/r1')
+            self.assertTrue(issue['cause'].startswith('continuation binding not established: ' + defect))
+            rows = record_rows(report(digest, store, extraction_version=saved['extraction_version']))
+            self.assertEqual(len(rows), 2)
+
+    def test_the_heading_read_is_stored_at_assembly_with_the_pdf_library(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        item = self._retained_block((('00123', '01/06/2024', None, None),))
+        item['native_regions'] = [{'id': 'p1-native-t1', 'page': 1, 'bbox': [24, 99, 700, 170]}]
+        item['reading']['pages'] = [{'page': 1, 'disposition': 'read', 'regions': [
+            {'native_table': 'p1-native-t1', 'disposition': 'represented', 'output_tables': ['p1-t1']}]}]
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                page = pdf.new_page()
+                page.insert_text((30, 60), 'Esito dei campioni singoli positivi', fontsize=11)
+                page.insert_text((30, 120), '00123  01/06/2024', fontsize=11)
+                digest = put_bytes(store, pdf.tobytes())
+            prior = store / 'derived/reports/prior' / digest / 'report.json'
+            prior.parent.mkdir(parents=True)
+            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior', 'page_count': 1,
+                                         'assembly_complete': True, 'blocks': [item]}))
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=AssertionError('dispatch')):
+                path = extract_report(digest, store, config=ExtractionConfig(provider='subscription'), budget=None,
+                                      resume_from='prior', execute=False)
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved['pdf_library'], f'PyMuPDF {pymupdf.VersionBind}')
+            self.assertEqual(saved['table_headings'], {'p1-t1': [1, 'Esito dei campioni singoli positivi']})
+            version = saved['extraction_version']
+            [row] = report(digest, store, extraction_version=version).rows
+            self.assertEqual([(r.text, r.kind) for r in row.results], [('positivi', 'positive')])
+            # A reading assembled before the heading was stored is reassembled, never read at consumption.
+            path.write_text(json.dumps({k: v for k, v in saved.items() if k != 'table_headings'}))
+            unread = report(digest, store, extraction_version=version)
+            self.assertIsInstance(unread, UnreadReport)
+            self.assertIn('assembled before table headings were derived', unread.cause)
 
 
 class ShownPages(unittest.TestCase):
