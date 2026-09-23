@@ -776,8 +776,10 @@ def named_plants(sources: Sources, version, observations) -> dict:
     No act in the population prints its plants' coordinates or sample identifiers. Each
     names them by subspecies, comune and date, and lists in its infected-zone or focus
     table the sheets and parcels the plants' zone covers. A plant it names is a positive
-    of that subspecies observed up to the act that lies in a listed unit: by its position,
-    or, where row 1 prints the plant's cadastral reference, by that sheet or parcel.
+    observed up to the act that lies in a listed unit, by its position or, where row 1
+    prints the plant's cadastral reference, by that sheet or parcel; and that row 1 types
+    as the act's subspecies or does not type (row 1 publishes a subspecies only after the
+    typing the act reports).
     `observations` are `Observation`s or (day, subspecies, x, y) tuples. Returns per role
     the (x, y) positions of the located plants.
     """
@@ -825,6 +827,7 @@ def named_plants(sources: Sources, version, observations) -> dict:
             return False
 
         found[role] = tuple(sorted({(o.x, o.y) for o in observations if o.x is not None
-                                    and any(name in o.subspecies and listed(o, geometry, references)
+                                    and any((name in o.subspecies or not o.subspecies)
+                                            and listed(o, geometry, references)
                                             for name, geometry, references in wanted)}))
     return found
