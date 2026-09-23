@@ -100,9 +100,14 @@ extraction cost. Replaying a retained response does not.
 For an annotated result, the source reader may return `result_value` and
 `annotation` alongside the complete cell. Their concatenation must reproduce the
 cell, whitespace aside, and `result_value` is allowed only in a result column.
-Polarity is projected from that supported component. The original literal and the
-precisely scoped qualifications remain available. The projection never strips a
-presumed footnote suffix on its own.
+The original literal and the precisely scoped qualifications remain available.
+A result followed by printed marks, split or whole, is classified only when each
+mark has a note from the same document that reaches its row; otherwise it stays
+unclassified with that cause, and a mark no page defines leaves the result as
+printed. Any other annotation, except a parenthesized aside, is part of the
+printed result. A note fills only the contract fields its printed text states: a
+Cq bound or range for the result, never an exact Cq, and whether the test is
+accredited.
 
 A resume keeps validated, fully read page blocks from an explicitly selected
 prior version and requests only uncovered pages. It preserves those blocks and

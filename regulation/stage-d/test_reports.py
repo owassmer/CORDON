@@ -44,6 +44,29 @@ def subscription_in_process(args):
             raw_path=directory / 'same-request.json')
 
 
+FIELDS_NONE = {'cq': None, 'accreditation': None}
+
+
+def note_provider(notes, fields=FIELDS_NONE):
+    """A subscription stand-in: a note request takes the next note answer, a note fields request `fields`."""
+    from cordon_d.report_extraction import note_fields_schema
+    answers = iter(notes) if isinstance(notes, list) else None
+    def provider(**kwargs):
+        if kwargs['schema'] == note_fields_schema():
+            return copy.deepcopy(fields)
+        value = next(answers) if answers is not None else notes
+        if isinstance(value, BaseException):
+            raise value
+        return copy.deepcopy(value)
+    return provider
+
+
+def note_calls(provider):
+    """The calls a stand-in received for mark notes, not for their fields."""
+    from cordon_d.report_extraction import note_fields_schema
+    return [c for c in provider.call_args_list if c.kwargs['schema'] != note_fields_schema()]
+
+
 def block(rows):
     roles = [('publisher_id', 'ID'), ('sampling_date', 'Data rilevamento'),
              ('result', 'Esito A'), ('test_date', 'Data saggio')]
@@ -66,19 +89,69 @@ class LiteralReport(unittest.TestCase):
         for raw, value, mark in zip(item['reading']['tables'][0]['rows'],
                                     ['rilevato', 'non rilevato'], ['*', '†']):
             raw['cells'][2].update(result_value=value, annotation=mark)
-        item['reading']['facts'] = [dict(id='f1', role='qualification', page=1,
-            locator='footnote', section=None, text='* Non-accredited test', value=None,
-            applies_to=['p1-t1/r1/c3'])]
+        note = dict(id='f1', role='result_qualification', page=1, locator='footnote', section=None,
+                    text='* Non-accredited test', value=None, applies_to=['p1-t1/r1/c3'])
+        # A split mark, like a printed one, is classified only through its note.
         rows = materialize('source', 'v', 1, [item]).rows
-        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'not-detected'])
+        self.assertEqual([(r.results[0].kind, r.results[0].cause) for r in rows],
+                         [('unclassified', 'printed mark; note not recovered by the reading'),
+                          ('unclassified', None)])
+        item['reading']['facts'] = [note]
+        rows = materialize('source', 'v', 1, [item]).rows
+        # '†' is not a mark this parser knows, so it stays part of the printed result.
+        self.assertEqual([r.results[0].kind for r in rows], ['detected', 'unclassified'])
         self.assertEqual([r.results[0].text for r in rows], ['rilevato*', 'non rilevato†'])
+        self.assertEqual(rows[0].results[0].marks, ('*',))
         self.assertEqual(rows[0].cells[2]['result_value'], 'rilevato')
         self.assertEqual([f['text'] for f in rows[0].facts], ['* Non-accredited test'])
         self.assertEqual(rows[0].facts[0]['applies_to'], ['p1-t1/r1/c3'])
         self.assertEqual(rows[1].facts, ())
-        # With no reader-supplied decomposition, punctuation is not stripped.
+        # The same cell unsplit reads the same way: one parser for both shapes.
         del item['reading']['tables'][0]['rows'][0]['cells'][2]['result_value']
-        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+        whole = materialize('source', 'v', 1, [item]).rows[0].results[0]
+        self.assertEqual((whole.kind, whole.marks), ('detected', ('*',)))
+
+    def test_one_parser_reads_marks_with_or_without_a_separator_split_or_whole(self):
+        from cordon_d.reports import printed_marks, result_marks
+        self.assertEqual(printed_marks('*,a'), ('*', 'a'))
+        self.assertEqual(printed_marks('* a'), ('*', 'a'))
+        self.assertEqual(printed_marks('*a'), ('*', 'a'))
+        self.assertIsNone(printed_marks('debole'))
+        self.assertIsNone(printed_marks('†'))
+        self.assertEqual(printed_marks('ᵇ'), ('b',))
+        for literal in ('non rilevato*,a', 'non\nrilevato*,a', 'non rilevato* a', 'non rilevato*a'):
+            with self.subTest(literal=literal):
+                self.assertEqual(result_marks(literal)[1], ('*', 'a'))
+                self.assertEqual(' '.join(result_marks(literal)[0].split()), 'non rilevato')
+        self.assertEqual(result_marks('non rilevato*', {'result_value': 'non rilevato', 'annotation': '*,a'}),
+                         ('non rilevato', ('*', 'a')))
+        self.assertEqual(result_marks('rilevataa'), ('rilevata', ('a',)))
+        self.assertEqual(result_marks('dubbioᵇ'), ('dubbio', ('b',)))
+        self.assertIsNone(result_marks('non rilevata'))
+        self.assertIsNone(result_marks('positivo debole'))
+        note = lambda mark, id: {'id': id, 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                 'text': f'{mark} nota', 'value': None, 'applies_to': ['p1-t1/r1/c3']}
+        for cell in ({'text': 'non rilevato*,a'},
+                     {'text': 'non rilevato*,a', 'result_value': 'non rilevato', 'annotation': '*,a'}):
+            with self.subTest(cell=cell):
+                item = block([['123', '02/06/2024', 'x', '03/06/2024']])
+                item['reading']['tables'][0]['rows'][0]['cells'][2] = cell
+                item['reading']['facts'] = [note('*', 'n1')]
+                result = materialize('hash', 'v', 1, [item]).rows[0].results[0]
+                self.assertEqual((result.kind, result.cause), ('unclassified',
+                                                               'printed mark; note not recovered by the reading'))
+                item['reading']['facts'].append(note('a', 'n2'))
+                result = materialize('hash', 'v', 1, [item]).rows[0].results[0]
+                self.assertEqual((result.kind, result.marks, result.cause), ('not-detected', ('*', 'a'), None))
+
+    def test_a_split_word_after_the_result_is_part_of_the_printed_result(self):
+        item = block([['123', '02/06/2024', 'POSITIVO DEBOLE', '03/06/2024'],
+                      ['124', '02/06/2024', 'POSITIVO (dopo ricampionamento)', '03/06/2024']])
+        rows = item['reading']['tables'][0]['rows']
+        rows[0]['cells'][2].update(result_value='POSITIVO', annotation='DEBOLE')
+        rows[1]['cells'][2].update(result_value='POSITIVO', annotation='(dopo ricampionamento)')
+        self.assertEqual([r.results[0].kind for r in materialize('hash', 'v', 1, [item]).rows],
+                         ['unclassified', 'positive'])
 
     def test_result_components_require_supported_literal_and_result_column(self):
         for value, mark, index in [('non rilevato', '*', 2), ('rilevato', '', 2),
@@ -90,6 +163,9 @@ class LiteralReport(unittest.TestCase):
                     materialize('source', 'v', 1, [item])
         item = block([['A', '01/06/2024', '* non rilevato', '02/06/2024']])
         item['reading']['tables'][0]['rows'][0]['cells'][2].update(result_value='non rilevato', annotation='*')
+        self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'unclassified')
+        item['reading']['facts'] = [{'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote',
+                                     'text': '* nota', 'value': None, 'applies_to': ['p1-t1/r1/c3']}]
         self.assertEqual(materialize('source', 'v', 1, [item]).rows[0].results[0].kind, 'not-detected')
 
     def test_explicit_unavailable_date_is_not_a_transcription_failure(self):
@@ -929,8 +1005,11 @@ class LiteralReport(unittest.TestCase):
         reading['facts'] = []
         reading['tables'][0]['rows'][0]['cells'][2] = {'native_cell': 'p1-t1-r1-c3'}
         self.assertEqual(unresolved_mark_scopes(reading, native), ['p1-t1/r1'])
+        # A mark the source reader split off needs its note just the same.
         reading['tables'][0]['rows'][0]['cells'][2] = {
             'native_cell': 'p1-t1-r1-c3', 'result_value': 'rilevato', 'annotation': '*'}
+        self.assertEqual(unresolved_mark_scopes(reading, native), ['p1-t1/r1'])
+        reading['facts'] = [note]
         self.assertEqual(unresolved_mark_scopes(reading, native), [])
 
     @staticmethod
@@ -943,22 +1022,32 @@ class LiteralReport(unittest.TestCase):
     def test_first_reading_with_a_mark_reads_only_its_note_and_replays_retained(self):
         import pymupdf
         from cordon_d.store import put_bytes
-        from cordon_d.report_extraction import PROMPT, NOTE_PROMPT, note_schema, write_json
+        from cordon_d.report_extraction import (PROMPT, NOTE_PROMPT, NOTE_FIELDS_PROMPT, note_schema,
+                                                note_fields_schema, write_json)
         marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
-        answer = self._note_answer()
+        printed = '* Valori di ciclo quantitativo >30, si consiglia di ricampionare le piante'
+        answer = self._note_answer(text=printed, wording='si consiglia di ricampionare le piante')
+        stated = {'cq': {'words': 'ciclo quantitativo >30', 'relation': '>', 'values': ['30']},
+                  'accreditation': None}
         with TemporaryDirectory() as directory:
             store = Path(directory)
             with pymupdf.open() as pdf:
                 pdf.new_page()
                 digest = put_bytes(store, pdf.tobytes())
             def fake_call(request, *, config, budget, request_id, raw_path):
-                reading = answer if request['output_config']['format']['schema'] == note_schema() else marked
+                schema = request['output_config']['format']['schema']
+                reading = (answer if schema == note_schema() else stated if schema == note_fields_schema()
+                           else marked)
                 write_json(raw_path, {'response': {'model': config.model, 'stop_reason': 'end_turn',
                                                    'content': [{'text': json.dumps(reading)}]}})
                 return copy.deepcopy(reading)
             with patch('cordon_d.report_extraction._call', side_effect=fake_call) as call:
                 path = extract_report(digest, store, config=ExtractionConfig(), budget=None)
-            self.assertEqual(call.call_count, 2)
+            self.assertEqual(call.call_count, 3)
+            # The fields request carries only the note's printed text.
+            fields_request = call.call_args_list[2].args[0]
+            self.assertEqual(fields_request['messages'][0]['content'],
+                             [{'type': 'text', 'text': NOTE_FIELDS_PROMPT.format(note=printed)}])
             request = call.call_args_list[1].args[0]
             self.assertEqual(request['output_config']['format']['schema'], note_schema())
             self.assertEqual(request['output_config']['effort'], 'medium')
@@ -975,11 +1064,15 @@ class LiteralReport(unittest.TestCase):
             item = saved['blocks'][0]
             self.assertEqual(item['reading']['tables'], marked['tables'])
             note = item['reading']['facts'][-1]
-            self.assertEqual((note['role'], note['mark'], note['text'], note['qualification'], note['applies_to']),
-                             ('result_qualification', '*', '* Si consiglia di ripetere il prelievo.', 'retest',
-                              ['p1-t1/r1/c3']))
+            self.assertEqual((note['role'], note['mark'], note['text'], note['applies_to']),
+                             ('result_qualification', '*', printed, ['p1-t1/r1/c3']))
+            self.assertNotIn('qualification', note)
+            self.assertEqual({k: v for k, v in note['fields'].items() if k != 'request_sha256'}, stated)
             self.assertEqual(item['mark_notes'][0]['mark'], '*')
             self.assertGreater(item['mark_notes'][0]['request_bytes'], 0)
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.marks, result.accreditation), ('not-detected', ('*',), ()))
+            self.assertEqual(result.cq, (dict(stated['cq'], note=result.cq[0]['note']),))
             def forget_assembly():
                 path.unlink()
                 for cached in path.parent.glob('blocks/*.json'):
@@ -996,6 +1089,51 @@ class LiteralReport(unittest.TestCase):
             self.assertFalse(unread['assembly_complete'])
             self.assertEqual(unread['blocks'][0]['reading'], marked)
             self.assertTrue(unread['blocks'][0]['attachment_repair_pending'].startswith('mark note reread pending: '))
+
+    def test_note_fields_must_be_printed_in_the_note(self):
+        from cordon_d.report_extraction import accepted_note_fields
+        note = '** Valori di ciclo soglia >32.00; si consiglia di prelevare un ulteriore campione.'
+        bound = {'words': 'ciclo soglia >32.00', 'relation': '>', 'values': ['32.00']}
+        self.assertEqual(accepted_note_fields({'cq': bound, 'accreditation': None}, note),
+                         {'cq': bound, 'accreditation': None})
+        for cq, defect in [(dict(bound, words='ciclo soglia >35'), 'cq words must quote the note'),
+                           (dict(bound, relation='between'), 'cq between needs two values'),
+                           (dict(bound, values=['35']), 'cq values must be numbers printed in its words'),
+                           (dict(bound, values=['circa 32']), 'cq values must be numbers printed')]:
+            with self.subTest(cq=cq), self.assertRaisesRegex(ValueError, defect):
+                accepted_note_fields({'cq': cq, 'accreditation': None}, note)
+        printed = '*Prova non accreditata da Accredia.'
+        stated = {'words': 'Prova non accreditata da Accredia', 'accredited': False, 'body': 'Accredia'}
+        self.assertEqual(accepted_note_fields({'cq': None, 'accreditation': stated}, printed)['accreditation'], stated)
+        with self.assertRaisesRegex(ValueError, 'accredited true or false'):
+            accepted_note_fields({'cq': None, 'accreditation': dict(stated, accredited=None)}, printed)
+        with self.assertRaisesRegex(ValueError, 'exactly the keys'):
+            accepted_note_fields({'cq': None}, printed)
+
+    def test_a_note_already_read_gets_only_its_fields_read_and_they_reach_the_result(self):
+        marked = self._retained_block((('123', '01/06/2024', 'rilevato*', '02/06/2024'),))
+        printed = '*Prova non accreditata da Accredia.'
+        marked['reading']['facts'] = [{'id': 'mark-note-1', 'role': 'result_qualification', 'page': 1,
+                                       'locator': 'footnote', 'section': None, 'text': printed, 'value': None,
+                                       'applies_to': ['p1-t1/r1/c3'], 'mark': '*'}]
+        stated = {'cq': None, 'accreditation': {'words': 'Prova non accreditata da Accredia', 'accredited': False,
+                                                'body': 'Accredia'}}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [marked])
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=note_provider([], fields=stated)) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual((provider.call_count, note_calls(provider)), (1, []))
+            self.assertEqual(provider.call_args.kwargs['attachments'], [])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][0]['request_sha256'], 'retained-request')
+            result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
+            self.assertEqual((result.kind, result.cq), ('detected', ()))
+            self.assertEqual([{k: v for k, v in a.items() if k != 'note'} for a in result.accreditation],
+                             [stated['accreditation']])
 
     def test_a_combined_mark_needs_a_note_for_each_of_its_marks(self):
         from cordon_d.report_extraction import unresolved_marked_cells
@@ -1051,10 +1189,10 @@ class LiteralReport(unittest.TestCase):
                              'issues': [], 'context_pages': []}} for n in (2, 3, 4)]
             digest = self._note_source(store, [marked, *unmarked], pages=4)
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[{'notes': []}, {'notes': []}, found]) as provider:
+                       side_effect=note_provider([{'notes': []}, {'notes': []}, found])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 3)
-            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+            self.assertEqual(len(note_calls(provider)), 3)
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
                              [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 2: page image'],
                               ['PHYSICAL PAGE 3: page image']])
             saved = json.loads(path.read_text())
@@ -1071,12 +1209,12 @@ class LiteralReport(unittest.TestCase):
             store = Path(directory)
             digest = self._note_source(store, [marked], pages=4)
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[elsewhere, elsewhere]) as provider:
+                       side_effect=note_provider([elsewhere, elsewhere])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
             # The page the answer named is shown next, ahead of the ordinary order; no correction.
-            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
                              [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 3: page image']])
-            self.assertNotIn('failed a check', provider.call_args_list[1].kwargs['prompt'])
+            self.assertNotIn('failed a check', note_calls(provider)[1].kwargs['prompt'])
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             records = saved['blocks'][0]['mark_notes']
@@ -1091,14 +1229,14 @@ class LiteralReport(unittest.TestCase):
             digest = self._note_source(store, [marked], pages=3)
             on_two = {'notes': [dict(elsewhere['notes'][0], page=2)]}
             answers = [{'notes': []}, {'notes': [dict(elsewhere['notes'][0], page=1)]}, on_two]
-            with patch('cordon_d.report_extraction._subscription_call', side_effect=answers) as provider:
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=note_provider(answers)) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
                              [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 2: page image'],
                               ['PHYSICAL PAGE 2: page image']])
             cites_one = ('Mark note cites page 1, which was not supplied; a note read from the supplied source has '
                          'its physical page number, 2, whatever page number is printed on the page')
-            self.assertIn(NOTE_CORRECTION.format(defect=cites_one), provider.call_args_list[2].kwargs['prompt'])
+            self.assertIn(NOTE_CORRECTION.format(defect=cites_one), note_calls(provider)[2].kwargs['prompt'])
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             self.assertEqual(saved['blocks'][0]['reading']['facts'][-1]['page'], 2)
@@ -1107,9 +1245,9 @@ class LiteralReport(unittest.TestCase):
             digest = self._note_source(store, [marked], pages=3)
             on_one = {'notes': [dict(elsewhere['notes'][0], page=1)]}
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[{'notes': []}, on_one, on_one]) as provider:
+                       side_effect=note_provider([{'notes': []}, on_one, on_one])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 3)
+            self.assertEqual(len(note_calls(provider)), 3)
             saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
             self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
@@ -1121,9 +1259,9 @@ class LiteralReport(unittest.TestCase):
             digest = self._note_source(store, [marked], pages=3)
             on_one = {'notes': [dict(elsewhere['notes'][0], page=1)]}
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[elsewhere, {'notes': []}, elsewhere, on_one]) as provider:
+                       side_effect=note_provider([elsewhere, {'notes': []}, elsewhere, on_one])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            calls = provider.call_args_list
+            calls = note_calls(provider)
             self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in calls],
                              [['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 3: page image'],
                               ['PHYSICAL PAGE 1: page image'], ['PHYSICAL PAGE 1: page image']])
@@ -1144,9 +1282,9 @@ class LiteralReport(unittest.TestCase):
             store = Path(directory)
             digest = self._note_source(store, [marked], pages=3)
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[{'notes': []}, later, {'notes': []}]) as provider:
+                       side_effect=note_provider([{'notes': []}, later, {'notes': []}])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 3)
+            self.assertEqual(len(note_calls(provider)), 3)
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             found, extended = saved['blocks'][0]['reading']['facts'][-2:]
@@ -1156,8 +1294,8 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual(extended['scope_basis'],
                              'linked by the printed mark; the only note printed for it in the document')
             rows = report(digest, store, extraction_version=saved['extraction_version']).rows
-            self.assertEqual([(r.results[0].kind, r.results[0].qualification) for r in rows],
-                             [('negative', ('retest',)), ('positive', ('retest',))])
+            self.assertEqual([(r.results[0].kind, r.results[0].marks) for r in rows],
+                             [('negative', ('*',)), ('positive', ('*',))])
 
     def test_a_mark_no_page_defines_is_recorded_as_printed_without_a_meaning(self):
         marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),))
@@ -1166,21 +1304,23 @@ class LiteralReport(unittest.TestCase):
             store = Path(directory)
             digest = self._note_source(store, [marked], pages=3)
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[{'notes': []}] * 3) as provider:
+                       side_effect=note_provider([{'notes': []}] * 3)) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in provider.call_args_list],
+            self.assertEqual([[label for _, _, label in c.kwargs['attachments']] for c in note_calls(provider)],
                              [[f'PHYSICAL PAGE {n}: page image'] for n in (1, 2, 3)])
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             fact = saved['blocks'][0]['reading']['facts'][-1]
-            self.assertEqual((fact['role'], fact['mark'], fact['text'], fact['qualification'], fact['applies_to'],
+            self.assertEqual((fact['role'], fact['mark'], fact['text'], fact['applies_to'],
                               fact['pages_examined'], fact['scope_basis']),
-                             ('result_qualification', '*', '*', 'mark_without_meaning', ['p1-t1/r1/c3'], [1, 2, 3],
+                             ('result_qualification', '*', '*', ['p1-t1/r1/c3'], [1, 2, 3],
                               'the document prints the mark without a meaning'))
+            # A mark printed without a meaning has no note text, so nothing reads its fields.
+            self.assertNotIn('fields', fact)
             self.assertNotIn('note_request_sha256', fact)
             result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
-            self.assertEqual((result.kind, result.text, result.cause, result.qualification),
-                             ('negative', 'negativo*', None, ('mark_without_meaning',)))
+            self.assertEqual((result.kind, result.text, result.cause, result.marks, result.cq),
+                             ('negative', 'negativo*', None, ('*',), ()))
 
     @staticmethod
     def _retained_block(rows=(('123', '01/06/2024', 'non rilevato*', '02/06/2024'),)):
@@ -1197,10 +1337,10 @@ class LiteralReport(unittest.TestCase):
             store = Path(directory)
             digest = self._note_source(store, [marked])
             with patch('cordon_d.report_extraction._subscription_call',
-                       return_value=self._note_answer()) as provider:
+                       side_effect=note_provider(self._note_answer())) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 1)
-            request = provider.call_args.kwargs
+            self.assertEqual(len(note_calls(provider)), 1)
+            request = note_calls(provider)[-1].kwargs
             self.assertEqual(request['config'].effort, 'medium')
             self.assertEqual([(name, label) for name, _, label in request['attachments']],
                              [('note-1-page-1.png', 'PHYSICAL PAGE 1: page image')])
@@ -1214,8 +1354,8 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual(item['reading']['tables'], marked['reading']['tables'])
             self.assertEqual(item['mark_notes'][0]['request_sha256'], request['request_id'])
             result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
-            self.assertEqual((result.kind, result.text, result.cause, result.qualification),
-                             ('not-detected', 'non rilevato*', None, ('retest',)))
+            self.assertEqual((result.kind, result.text, result.cause, result.marks, result.cq),
+                             ('not-detected', 'non rilevato*', None, ('*',), ()))
 
     def test_pending_note_read_leaves_assembly_unattested_until_executed(self):
         marked = self._retained_block()
@@ -1238,10 +1378,10 @@ class LiteralReport(unittest.TestCase):
             self.assertIs(loaded.assembly_complete, False)
             # A notes-only execution reads the note and nothing else.
             with patch('cordon_d.report_extraction._subscription_call',
-                       return_value=self._note_answer()) as provider:
+                       side_effect=note_provider(self._note_answer())) as provider:
                 path = extract_report(digest, store, config=config, budget=None,
                                       resume_from='prior', execute='mark notes')
-            self.assertEqual(provider.call_count, 1)
+            self.assertEqual(len(note_calls(provider)), 1)
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             self.assertNotIn('attachment_repair_pending', saved['blocks'][0])
@@ -1255,18 +1395,18 @@ class LiteralReport(unittest.TestCase):
         with TemporaryDirectory() as directory:
             store = Path(directory)
             digest = self._note_source(store, [marked])
-            with patch('cordon_d.report_extraction._subscription_call', return_value=answer) as provider:
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=note_provider(answer)) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 1)
-            self.assertIn('p1-t1/r2/c3', provider.call_args.kwargs['prompt'])
+            self.assertEqual(len(note_calls(provider)), 1)
+            self.assertIn('p1-t1/r2/c3', note_calls(provider)[-1].kwargs['prompt'])
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             note = saved['blocks'][0]['reading']['facts'][-1]
             self.assertEqual(note['applies_to'], ['p1-t1/r1/c3', 'p1-t1/r2/c3'])
             self.assertEqual(note['scope_basis'], 'linked by the printed mark')
             rows = report(digest, store, extraction_version=saved['extraction_version']).rows
-            self.assertEqual([(r.results[0].kind, r.results[0].qualification) for r in rows],
-                             [('negative', ('other',)), ('positive', ('other',))])
+            self.assertEqual([(r.results[0].kind, r.results[0].marks) for r in rows],
+                             [('negative', ('*',)), ('positive', ('*',))])
 
     def test_a_note_that_names_some_cells_leaves_the_others_pending(self):
         marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
@@ -1277,7 +1417,7 @@ class LiteralReport(unittest.TestCase):
         with TemporaryDirectory() as directory:
             store = Path(directory)
             digest = self._note_source(store, [marked])
-            with patch('cordon_d.report_extraction._subscription_call', return_value=answer):
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=note_provider(answer)):
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
             saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
@@ -1285,8 +1425,7 @@ class LiteralReport(unittest.TestCase):
                 'mark note reread pending: no printed note for mark * recovered for p1-t1/r2/c3 '
                 'from page 1 page image')
             rows = report(digest, store, extraction_version=saved['extraction_version']).rows
-            self.assertEqual((rows[0].results[0].kind, rows[0].results[0].qualification),
-                             ('negative', ('damaged_sample',)))
+            self.assertEqual((rows[0].results[0].kind, rows[0].results[0].marks), ('negative', ('*',)))
             self.assertEqual((rows[1].results[0].kind, rows[1].results[0].cause),
                              ('unclassified', 'printed mark; note not recovered by the reading'))
 
@@ -1299,27 +1438,27 @@ class LiteralReport(unittest.TestCase):
             store = Path(directory)
             digest = self._note_source(store, [marked])
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[misquoted, self._note_answer()]) as provider:
+                       side_effect=note_provider([misquoted, self._note_answer()])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 2)
-            correction = provider.call_args_list[1].kwargs
+            self.assertEqual(len(note_calls(provider)), 2)
+            correction = note_calls(provider)[1].kwargs
             defect = 'Qualification wording must quote the note'
             self.assertIn(NOTE_CORRECTION.format(defect=defect), correction['prompt'])
             self.assertEqual(correction['config'].effort, 'medium')
-            self.assertEqual(correction['attachments'], provider.call_args_list[0].kwargs['attachments'])
+            self.assertEqual(correction['attachments'], note_calls(provider)[0].kwargs['attachments'])
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
             record = saved['blocks'][0]['mark_notes'][0]
             self.assertEqual((record['correction_of'], record['defect'], record['request_sha256']),
-                             (provider.call_args_list[0].kwargs['request_id'], defect, correction['request_id']))
+                             (note_calls(provider)[0].kwargs['request_id'], defect, correction['request_id']))
         malformed = {'notes': [dict(self._note_answer()['notes'][0], applies_to=['p9-t9/r9/c9'])]}
         with TemporaryDirectory() as directory:
             store = Path(directory)
             digest = self._note_source(store, [marked])
             with patch('cordon_d.report_extraction._subscription_call',
-                       side_effect=[misquoted, malformed]) as provider:
+                       side_effect=note_provider([misquoted, malformed])) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
-            self.assertEqual(provider.call_count, 2)
+            self.assertEqual(len(note_calls(provider)), 2)
             saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
             self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
@@ -1346,7 +1485,8 @@ class LiteralReport(unittest.TestCase):
                                  [[(1, 'page image')]])
                 self.assertLess(sources[0]['bbox'][3] - sources[0]['bbox'][1], 40)
                 check = dict(mark='*', cells=cells, sources=sources, page_text=lambda n: document[n - 1].get_text())
-                self.assertEqual(accepted_notes(self._note_answer(), **check)[0]['qualification'], 'retest')
+                self.assertEqual(accepted_notes(self._note_answer(), **check)[0]['text'],
+                                 '* Si consiglia di ripetere il prelievo.')
                 with self.assertRaisesRegex(ValueError, 'not printed in the text layer of page 1'):
                     accepted_notes(self._note_answer(text='* Si consiglia di ripetere il campione.',
                                                      wording='ripetere'), **check)
@@ -1560,12 +1700,12 @@ class LiteralReport(unittest.TestCase):
         item['reading']['facts'] = [
             {'id': 'f1', 'role': 'result_qualification', 'page': 1, 'locator': 'footnote below table',
              'text': "a L'esito delle analisi si riferisce ai risultati ottenuti sul campione suddiviso in aliquote.",
-             'value': None, 'applies_to': ['p1-t1/c3'], 'mark': 'a', 'qualification': 'other'}]
+             'value': None, 'applies_to': ['p1-t1/c3'], 'mark': 'a'}]
         rows = materialize('hash', 'v', 1, [item]).rows
-        self.assertEqual([(r.results[0].kind, r.results[0].text, r.results[0].cause, r.results[0].qualification)
+        self.assertEqual([(r.results[0].kind, r.results[0].text, r.results[0].cause, r.results[0].marks)
                           for r in rows],
-                         [('detected', 'rilevataa', None, ('other',)),
-                          ('not-detected', 'non rilevataa', None, ('other',))])
+                         [('detected', 'rilevataa', None, ('a',)),
+                          ('not-detected', 'non rilevataa', None, ('a',))])
 
     def test_an_omitted_detected_table_cannot_claim_page_coverage(self):
         item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])

@@ -4,6 +4,7 @@ from collections import Counter
 from datetime import date, datetime
 import json
 import re
+import unicodedata
 from pathlib import Path
 from hashlib import sha256
 
@@ -36,15 +37,19 @@ def note_mark(fact):
     return fact.get('mark') or _leading_mark(fact.get('text'))
 
 
+def _folded(text):
+    """Casefolded text with compatibility forms unified, so a superscript mark is its letter."""
+    return unicodedata.normalize('NFKC', text or '').casefold()
+
+
 def printed_marks(text):
     """The printed marks a text consists of, in order, or None if it is not only marks.
 
     A mark is a run of '*' or one letter. A comma, semicolon or space may separate marks.
     Two letters with nothing between them are a word, not two marks. At most three marks.
     """
-    folded = (text or '').casefold()
     marks, previous = [], None
-    for token in re.findall(r'\*+|[a-z]|[\s,;]+|.', folded, re.DOTALL):
+    for token in re.findall(r'\*+|[a-z]|[\s,;]+|.', _folded(text), re.DOTALL):
         if re.fullmatch(r'[\s,;]+', token):
             previous = None
             continue
@@ -58,14 +63,17 @@ def printed_marks(text):
 def result_marks(text, cell=None):
     """(result, marks) for a result cell that prints marks after its result, else None.
 
-    A cell the source reader split carries its marks in `annotation`. A whole cell ends
-    with them; the split takes the shortest ending that is marks and leaves a result, so
-    in "rilevataa" the mark is the last a and the a ending "rilevata" is the word's own.
+    One parser serves both shapes. A cell the source reader split carries its marks in
+    `annotation`. A whole cell ends with them; the split takes the shortest ending that is
+    marks and leaves a result, so in "rilevataa" the mark is the last a and the a ending
+    "rilevata" is the word's own. A whole cell that is already a result prints no marks.
     """
     if cell is not None and 'result_value' in cell:
         base, marks = cell['result_value'], printed_marks(cell.get('annotation'))
         return (base, marks) if marks and base and classify(base) != 'unclassified' else None
-    folded = (text or '').casefold().rstrip()
+    folded = _folded(text).rstrip()
+    if classify(folded) != 'unclassified':
+        return None
     for start in range(len(folded) - 1, max(len(folded) - 12, 0), -1):
         marks = printed_marks(folded[start:])
         if marks and classify(folded[:start]) != 'unclassified':
@@ -73,34 +81,47 @@ def result_marks(text, cell=None):
     return None
 
 
+def printed_result(text, cell):
+    """The literal a result is classified from.
+
+    A split whose annotation is printed marks or a parenthesized aside leaves the source
+    reader's `result_value`; the marks go through their notes. Any other annotation is
+    part of the printed result, so a split cell classifies as its whole literal does.
+    """
+    if 'result_value' in cell:
+        annotation = (cell.get('annotation') or '').strip()
+        if printed_marks(annotation) or re.fullmatch(r'\(.*\)', annotation, re.DOTALL):
+            return cell['result_value']
+    return text
+
+
 def is_mark_note(fact):
-    """A note the note-only reader recovered for a printed mark, with what it says by kind."""
-    return fact.get('role') == 'result_qualification' and isinstance(fact.get('qualifications'), list)
+    """A note recovered from the document for a printed mark."""
+    return fact.get('role') == 'result_qualification' and note_mark(fact) is not None
 
 
 def resolve_marks(result, scoped, cell=None):
     """A result that prints marks is classified only through the notes they point at.
 
-    Whether or not the source reader split the cell, each mark needs a note the note-only
-    reader recovered from the same document and that reaches this row. The note is the one
-    owner of what the mark says about the result; `result_notes` reads it. A mark the
-    document prints without a meaning, found after every page was examined, has such a
-    note too, and the result is as printed. A mark with no such note leaves the result
-    unclassified and names that cause. The complete literal survives either way.
+    Whether or not the source reader split the cell, each mark needs a note recovered from
+    the same document that reaches this row. A mark the document prints without a meaning,
+    found after every page was examined, has such a note too. With every mark noted, the
+    result is as printed and carries its marks, with the Cq bound and accreditation their
+    notes state. A mark with no such note leaves the result unclassified and names that
+    cause. The complete literal survives either way.
     """
     split = result_marks(result.text, cell)
     if split is None:
         return result
     base, marks = split
-    noted = {note_mark(fact) for fact in scoped if is_mark_note(fact)}
-    if all(mark in noted for mark in marks):
-        return replace(result, kind=classify(base), marks=marks)
-    return replace(result, kind='unclassified', cause='printed mark; note not recovered by the reading', marks=marks)
-
-
-def result_notes(row, result):
-    """The mark notes that reach this row and answer a mark this result prints."""
-    return tuple(fact for fact in row.facts if is_mark_note(fact) and note_mark(fact) in result.marks)
+    notes = [fact for fact in scoped if is_mark_note(fact) and note_mark(fact) in marks]
+    if {note_mark(fact) for fact in notes} != set(marks):
+        return replace(result, kind='unclassified', cause='printed mark; note not recovered by the reading',
+                       marks=marks)
+    stated = {name: tuple(dict(fact['fields'][name], note=fact['id']) for fact in notes
+                          if (fact.get('fields') or {}).get(name))
+              for name in ('cq', 'accreditation')}
+    return replace(result, kind=classify(base), marks=marks, **stated)
 
 
 def link_section_marks(facts):
@@ -214,7 +235,13 @@ class Result:
     cause: str | None
     support: tuple[dict, ...]
     assay_cause: str | None = None
-    qualification: tuple[str, ...] = ()
+    # The printed marks after the result, and what their notes state for the contracts:
+    # `cq` the result's Cq as the note prints it, a bound or range, never an exact value
+    # (analytical-result "result/Cq"); `accreditation` whether the test is accredited
+    # (laboratory-status "accreditation scope"). Each entry names its note.
+    marks: tuple[str, ...] = ()
+    cq: tuple[dict, ...] = ()
+    accreditation: tuple[dict, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -780,9 +807,10 @@ def materialize(digest, version, page_count, blocks):
                         assay_cause = None
                         if assay and analyte and assay.casefold().strip() == analyte.casefold().strip():
                             assay, assay_cause = None, 'test field repeats analyte; distinct test designation not recovered here'
-                        results.append(Result(value['locator'], tuple(column['heading']),
-                            assay, analyte, text, classify(cell.get('result_value', text)), cell.get('cause'),
-                            tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())), assay_cause))
+                        results.append((Result(value['locator'], tuple(column['heading']),
+                            assay, analyte, text, classify(printed_result(text, cell)), cell.get('cause'),
+                            tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())),
+                            assay_cause), cell))
                 def sole(role):
                     fields = by_role.get(role, [])
                     if any(c.get('role_cause') for c in fields):
@@ -804,7 +832,7 @@ def materialize(digest, version, page_count, blocks):
                                      direct_scopes.intersection(f['applies_to']))
                 dates += shared_dates
                 generic = sole('identifier')
-                results = [resolve_marks(result, scoped) for result in results]
+                results = [resolve_marks(result, scoped, cell) for result, cell in results]
                 rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),
                                 dates, tuple(cells), tuple(results), scoped, table.get('projection')))
     missing = set(range(1, page_count + 1)) - encountered
