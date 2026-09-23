@@ -26,7 +26,7 @@ One cycle: findings are adjudicated, the plan is revised in place, and the revis
 
 A draft pull request means the work is in progress. When the change is complete on its branch and "Result" is filled, the pull request leaves draft, and three independent reviewers, one per facet, read the plan and the diff read-only, using the implementation brief below. Collect all three before adjudicating; do not exchange interim conclusions or repair from the first return.
 
-Adjudicate together: verify consequential assertions against authority and actual consumers, reproduce counterexamples, resolve duplicates and conflicts, and distinguish defects, assurance limits, rejected assertions and genuine owner decisions. Reject bloated cures even when the diagnosis is valid. A finding outside the unit's plan becomes a new unit unless it falsifies the plan's purpose.
+Adjudicate together: verify consequential assertions against authority and actual consumers, reproduce counterexamples, resolve duplicates and conflicts, and distinguish defects, assurance limits, rejected assertions and genuine owner decisions. Reject bloated cures even when the diagnosis is valid. A finding carries weight in proportion to what the adjudicator verifies of it, and a cure only as far as it serves an actual consumer; agreement among reviewers is not verification. A finding outside the unit's plan becomes a new unit unless it falsifies the plan's purpose.
 
 ## Convergence is a judgment
 
