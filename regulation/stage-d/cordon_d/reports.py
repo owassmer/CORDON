@@ -257,9 +257,9 @@ class Result:
     support: tuple[dict, ...]
     assay_cause: str | None = None
     # The printed marks after the result, and what their notes state for the contracts:
-    # `cq` the result's Cq as the note prints it, a value, a bound or a range; a bound or
-    # range is never an exact Cq (analytical-result "result/Cq"); `accreditation` whether the test is accredited
-    # (laboratory-status "accreditation scope"). Each entry names its note.
+    # `cq` the exact Cq value the note prints for the result (analytical-result "result/Cq
+    # as exact decimal"); a note that prints any other Cq wording fills nothing; `accreditation`
+    # whether the test is accredited (laboratory-status "accreditation scope"). Each entry names its note.
     marks: tuple[str, ...] = ()
     cq: tuple[dict, ...] = ()
     accreditation: tuple[dict, ...] = ()

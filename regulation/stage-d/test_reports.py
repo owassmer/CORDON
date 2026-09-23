@@ -1040,9 +1040,9 @@ class LiteralReport(unittest.TestCase):
                                                 note_fields_schema, write_json)
         marked = block([['123', '01/06/2024', 'non rilevato*', '02/06/2024']])['reading']
         printed = '* Valori di ciclo quantitativo >30, si consiglia di ricampionare le piante'
-        answer = self._note_answer(text=printed, wording='si consiglia di ricampionare le piante')
-        stated = {'cq': {'words': 'ciclo quantitativo >30', 'relation': '>', 'values': ['30']},
-                  'accreditation': None}
+        answer = self._note_answer(text=printed)
+        # The note prints a bound, not an exact Cq: the answer names it and it fills nothing.
+        stated = {'cq': {'words': 'ciclo quantitativo >30', 'value': '30'}, 'accreditation': None}
         with TemporaryDirectory() as directory:
             store = Path(directory)
             with pymupdf.open() as pdf:
@@ -1081,12 +1081,13 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual((note['role'], note['mark'], note['text'], note['applies_to']),
                              ('result_qualification', '*', printed, ['p1-t1/r1/c3']))
             self.assertNotIn('qualification', note)
-            self.assertEqual({k: v for k, v in note['fields'].items() if k != 'request_sha256'}, stated)
+            self.assertEqual({k: v for k, v in note['fields'].items() if k != 'request_sha256'},
+                             {'cq': None, 'accreditation': None})
             self.assertEqual(item['mark_notes'][0]['mark'], '*')
             self.assertGreater(item['mark_notes'][0]['request_bytes'], 0)
             result = report(digest, store, extraction_version=saved['extraction_version']).rows[0].results[0]
             self.assertEqual((result.kind, result.marks, result.accreditation), ('not-detected', ('*',), ()))
-            self.assertEqual(result.cq, (dict(stated['cq'], note=result.cq[0]['note']),))
+            self.assertEqual(result.cq, ())
             def forget_assembly():
                 path.unlink()
                 for cached in path.parent.glob('blocks/*.json'):
@@ -1114,16 +1115,23 @@ class LiteralReport(unittest.TestCase):
 
     def test_note_fields_must_be_printed_in_the_note(self):
         from cordon_d.report_extraction import accepted_note_fields
-        note = '** Valori di ciclo soglia >32.00; si consiglia di prelevare un ulteriore campione.'
-        bound = {'words': 'ciclo soglia >32.00', 'relation': '>', 'values': ['32.00']}
-        self.assertEqual(accepted_note_fields({'cq': bound, 'accreditation': None}, note),
-                         {'cq': bound, 'accreditation': None})
-        for cq, defect in [(dict(bound, words='ciclo soglia >35'), 'cq words must quote the note'),
-                           (dict(bound, relation='between'), 'cq between needs two values'),
-                           (dict(bound, values=['35']), 'cq values must be numbers printed in its words'),
-                           (dict(bound, values=['circa 32']), 'cq values must be numbers printed')]:
+        # An exact printed Cq fills the field.
+        note = '** Ciclo soglia 32,15; si consiglia di prelevare un ulteriore campione.'
+        exact = {'words': 'Ciclo soglia 32,15', 'value': '32,15'}
+        self.assertEqual(accepted_note_fields({'cq': exact, 'accreditation': None}, note),
+                         {'cq': exact, 'accreditation': None})
+        for cq, defect in [(dict(exact, words='ciclo soglia 35'), 'cq words must quote the note'),
+                           (dict(exact, value='35'), 'cq value must be a number printed in its words'),
+                           (dict(exact, value='circa 32'), 'cq value must be a number printed')]:
             with self.subTest(cq=cq), self.assertRaisesRegex(ValueError, defect):
                 accepted_note_fields({'cq': cq, 'accreditation': None}, note)
+        # Any other Cq wording, a bound or a range, fills nothing.
+        for printed, words, value in [('** Valori di ciclo soglia >32.00.', 'ciclo soglia >32.00', '32.00'),
+                                      ('** Cq compreso tra 30 e 35.', 'Cq compreso tra 30 e 35', '30')]:
+            with self.subTest(words=words):
+                self.assertEqual(accepted_note_fields({'cq': {'words': words, 'value': value},
+                                                       'accreditation': None}, printed),
+                                 {'cq': None, 'accreditation': None})
         printed = '*Prova non accreditata da Accredia.'
         stated = {'words': 'Prova non accreditata da Accredia', 'accredited': False, 'body': 'Accredia'}
         self.assertEqual(accepted_note_fields({'cq': None, 'accreditation': stated}, printed)['accreditation'], stated)

@@ -106,8 +106,8 @@ mark has a note from the same document that reaches its row; otherwise it stays
 unclassified with that cause, and a mark no page defines leaves the result as
 printed. Any other annotation, except a parenthesized aside, is part of the
 printed result. A note fills only the contract fields its printed text states:
-the result's Cq as printed, a value, a bound or a range, and whether the test is
-accredited.
+the result's exact printed Cq, and whether the test is accredited. A bound, a
+range or any other Cq wording fills no Cq.
 
 A result printed in a table heading applies to the rows beneath it that print no
 result of their own. The heading is the text the page's text layer prints nearest

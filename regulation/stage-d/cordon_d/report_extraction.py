@@ -835,13 +835,12 @@ The note:
 {note}
 
 Return only JSON with the keys cq and accreditation.
-cq: what the note states about the quantification or threshold cycle (Cq, Ct, ciclo soglia,
-ciclo quantitativo) of the marked results themselves; null when it states no number for it. A
-threshold or limit the note names, without stating where the results' own cycle lies relative
-to it, is not a statement about their cycle.
+cq: the exact quantification or threshold cycle value (Cq, Ct, ciclo soglia, ciclo
+quantitativo) the note prints for the marked results themselves; null when the note prints
+no exact value for it. A bound (such as >30), a range, or a threshold or limit the note
+names is not an exact value, and gives null.
   words: the exact words of the note that state it.
-  relation: one of "=", ">", ">=", "<", "<=", "between".
-  values: the number or numbers, as printed.
+  value: the number, as printed.
 accreditation: what the note states about whether the test is accredited; null when it states
 nothing about that.
   words: the exact words of the note that state it.
@@ -850,11 +849,10 @@ nothing about that.
 
 
 def note_fields_schema():
-    """The contract fields a mark note can state: a Cq bound and the test's accreditation."""
+    """The contract fields a mark note can state: an exact Cq and the test's accreditation."""
     string = {'type': 'string'}
-    cq = {'type': 'object', 'additionalProperties': False, 'required': ['words', 'relation', 'values'],
-          'properties': {'words': string, 'relation': {'enum': ['=', '>', '>=', '<', '<=', 'between']},
-                         'values': {'type': 'array', 'items': string}}}
+    cq = {'type': 'object', 'additionalProperties': False, 'required': ['words', 'value'],
+          'properties': {'words': string, 'value': string}}
     accreditation = {'type': 'object', 'additionalProperties': False, 'required': ['words', 'accredited', 'body'],
                      'properties': {'words': string, 'accredited': {'type': 'boolean'},
                                     'body': {'anyOf': [string, {'type': 'null'}]}}}
@@ -875,16 +873,15 @@ def accepted_note_fields(answer, note):
         if not isinstance(words, str) or not words.strip() or _squashed(words) not in _squashed(note):
             raise ValueError(f'{name} words must quote the note')
     if cq is not None:
-        values = cq.get('values')
-        if cq.get('relation') not in ('=', '>', '>=', '<', '<=', 'between') or not isinstance(values, list):
-            raise ValueError('cq needs a relation and its values')
-        if len(values) != (2 if cq['relation'] == 'between' else 1):
-            raise ValueError('cq between needs two values; any other relation one')
-        for value in values:
-            if not isinstance(value, str) or not re.fullmatch(r'\d+(?:[.,]\d+)?', value.strip()) \
-                    or _squashed(value) not in _squashed(cq['words']):
-                raise ValueError('cq values must be numbers printed in its words')
-        cq = {'words': cq['words'], 'relation': cq['relation'], 'values': [v.strip() for v in values]}
+        value = cq.get('value')
+        if not isinstance(value, str) or not re.fullmatch(r'\d+(?:[.,]\d+)?', value.strip()) \
+                or _squashed(value) not in _squashed(cq['words']):
+            raise ValueError('cq value must be a number printed in its words')
+        # analytical-result names an exact Cq or none. Words that print a relation sign or a
+        # second number state a bound or a range, which is not an exact Cq: they fill nothing.
+        exact = (not re.search(r'[<>≤≥]', cq['words'])
+                 and len(re.findall(r'\d+(?:[.,]\d+)?', cq['words'])) == 1)
+        cq = {'words': cq['words'], 'value': value.strip()} if exact else None
     if accreditation is not None:
         if type(accreditation.get('accredited')) is not bool:
             raise ValueError('accreditation needs accredited true or false')
