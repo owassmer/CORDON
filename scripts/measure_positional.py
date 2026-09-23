@@ -1,15 +1,22 @@
 """Measure the positional error of located positives from retained chips and control points.
 
+    python scripts/measure_positional.py population --positives POSITIVES.csv --frame FRAME.json --requests R.json
+    python scripts/acquire_positional.py chips R.json
+    python scripts/measure_positional.py vertices --frame FRAME.json --vertices V.json --requests CR.json
+    python scripts/acquire_positional.py chips CR.json --records corpus/sources/positional-reference/control-chips.jsonl
+    python scripts/acquire_positional.py register POSITIVES.csv
     python scripts/measure_positional.py control  --control-chips C.jsonl --vertices V.json --out FIT.json
     python scripts/measure_positional.py measure  --frame FRAME.json --chips A.jsonl [B.jsonl ...]
                                                   --fit FIT.json --out RESULTS.jsonl [--workers 4]
     python scripts/measure_positional.py table    --positives POSITIVES.csv --frame FRAME.json
                                                   --results RESULTS.jsonl --out-table T.json --out-rows Q.csv
 
-`control` locates every ground-level control vertex in every image year and fits each year's
-local shift with its leave-one-out residuals. `measure` applies `cordon_d.positional.measure`
-to every positive of the frame (bracketed by imagery, under a single-plant removal rule),
-with every other held image for the persistence rule; it appends and resumes. `table` states
+`population` reads every located positive from the ordinary reader and fixes the frame before any
+chip is read. `vertices` selects the ground-level control vertices near it. `control` locates
+every ground-level control vertex in every image year and fits each year's local shift with its
+leave-one-out residuals. `measure` applies `cordon_d.positional.measure` to every positive of
+the frame (bracketed by imagery, under a single-plant removal rule), with every other held image
+for the persistence rule; it appends and resumes. `table` states
 every located positive's status and error, and the per-release counts and bound.
 """
 import argparse
@@ -27,6 +34,81 @@ from cordon_d import positional as P  # noqa: E402
 from cordon_d.store import blob_path, store_root  # noqa: E402
 
 TILE_M = 20000  # reporting cell for fitted shifts; the 2015-2023 services publish no tile footprints
+
+
+CARRY = ['DATA_ESTIRPAZIONE', 'RIF_DECRETO', 'MONUMENTALE_ARIF', 'ZONA', 'ZONA_DELIMITATA',
+         'FOGLIO', 'PARTICELLA', 'COD_COMUNE', 'PROT_SELGE']
+CONTROL_REACH_M = 15000  # control vertices read within this distance of a frame positive
+
+
+def population(args):
+    """Every located positive of the ordinary reader; the frame (bracketed by held imagery, under a
+    single-plant removal rule); and chip requests for every held image of every frame positive."""
+    from pyproj import Transformer
+    from cordon_d.monitoring import distinct_observations
+    to_utm = Transformer.from_crs('EPSG:4326', 'EPSG:32633', always_xy=True)
+    frame, requests, located = [], {}, 0
+    with open(args.positives, 'w', newline='') as stream:
+        w = csv.writer(stream)
+        w.writerow(['identity', 'reference', 'day', 'year', 'releases', 'views', 'n_members', 'species', 'crs', 'x',
+                    'y', 'e32633', 'n32633', 'removal_layer'] + CARRY)
+        for g in distinct_observations(ROOT / 'corpus/sources/monitoring'):
+            if g.positive is not True or not g.locations:
+                continue
+            located += 1
+            crs, (x, y) = g.locations[0]
+            e, n = (x, y) if crs == 'EPSG:32633' else to_utm.transform(x, y)
+            carried = {}
+            for m in g.members:
+                for k, v in m.carried:
+                    if k in CARRY and v not in (None, ''):
+                        carried.setdefault(k, set()).add(str(v))
+            views = sorted({m.view or '' for m in g.members})
+            releases = sorted({(m.release or '').rsplit('/', 1)[-1] for m in g.members})
+            identity = '|'.join(map(str, g.identity))
+            row = [identity, g.reference, g.day, g.day.year if g.day else '', '|'.join(releases), '|'.join(views),
+                   len(g.members), '|'.join(sorted({m.species for m in g.members if m.species})), crs, x, y,
+                   round(e, 3), round(n, 3), int(any('estirpat' in (m.view or '').lower() for m in g.members))]
+            w.writerow(row + ['|'.join(sorted(carried.get(k, ()))) for k in CARRY])
+            e, n = round(e, 3), round(n, 3)
+            zones = ['|'.join(sorted(carried.get(k, ()))) for k in ('ZONA', 'ZONA_DELIMITATA')]
+            pair = P.bracket(g.day, e, n) if g.day else None
+            if pair and P.single_removal_rule(zones, views):
+                frame.append({'identity': identity, 'day': g.day.isoformat(), 'e': e, 'n': n, 'pre': pair[0],
+                              'post': pair[1], 'release': P.release_of(releases, views, g.day)})
+                for year in sum(P.held(g.day, e, n), []):
+                    request = P.chip_request(year, e, n, P.CHIP_HALF_M)
+                    requests.setdefault(P.chip_key(request), request)
+    Path(args.frame).write_text(json.dumps(frame) + '\n')
+    Path(args.requests).write_text(json.dumps(list(requests.values())) + '\n')
+    print('located positives', located, 'frame', len(frame), 'chip requests', len(requests))
+
+
+def vertices(args):
+    """Ground-level cadastral and photo-control vertices within reach of the frame, and their chip
+    requests in every image year that covers them."""
+    import numpy as np
+    from scipy.spatial import cKDTree
+    from cordon_d.store import blob_path
+    store = store_root(ROOT)
+    found = {}
+    for page in json.loads((ROOT / 'corpus/sources/positional-reference/control.json').read_text())['pages']:
+        for f in json.loads(blob_path(store, page['sha256']).read_bytes())['features']:
+            a = f['attributes']
+            found[(page['layer'], a['OBJECTID'])] = {
+                'id': f"{page['layer']}:{a['OBJECTID']}:{a['VERTICE']}", 'legend': a['LEGENDA'], 'descr': a['DESCR'],
+                'e': f['geometry']['x'], 'n': f['geometry']['y']}
+    use = [v for v in found.values()
+           if v['legend'] in ('Appoggio Catastali', 'Fotografici Appoggio') and P.ground_level(v['descr'])]
+    frame = json.loads(Path(args.frame).read_text())
+    distance, _ = cKDTree(np.array([[f['e'], f['n']] for f in frame])).query(np.array([[v['e'], v['n']] for v in use]))
+    near = [v for v, d in zip(use, distance) if d <= CONTROL_REACH_M]
+    requests = [P.chip_request(year, v['e'], v['n'], P.CONTROL_HALF_M) for year in P.IMAGES for v in near
+                if P.IMAGES[year]['extent'][0] <= v['e'] <= P.IMAGES[year]['extent'][2]
+                and P.IMAGES[year]['extent'][1] <= v['n'] <= P.IMAGES[year]['extent'][3]]
+    Path(args.vertices).write_text(json.dumps(near) + '\n')
+    Path(args.requests).write_text(json.dumps(requests) + '\n')
+    print('vertices', len(found), 'ground-level control', len(use), 'within reach', len(near), 'requests', len(requests))
 
 
 def read_records(paths):
@@ -213,6 +295,14 @@ def table(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest='command', required=True)
+    p = sub.add_parser('population')
+    p.add_argument('--positives', required=True)
+    p.add_argument('--frame', required=True)
+    p.add_argument('--requests', required=True)
+    v = sub.add_parser('vertices')
+    v.add_argument('--frame', required=True)
+    v.add_argument('--vertices', required=True)
+    v.add_argument('--requests', required=True)
     c = sub.add_parser('control')
     c.add_argument('--control-chips', required=True)
     c.add_argument('--vertices', required=True)
@@ -231,4 +321,5 @@ if __name__ == '__main__':
     t.add_argument('--out-rows', required=True)
     t.add_argument('--register', help="acquire_positional.py register's record, to refute bounds")
     args = parser.parse_args()
-    {'control': control, 'measure': measure, 'table': table}[args.command](args)
+    {'population': population, 'vertices': vertices, 'control': control, 'measure': measure,
+     'table': table}[args.command](args)
