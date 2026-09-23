@@ -94,6 +94,31 @@ def on_page(quote, text):
     return bool(parts) and all(_plain(p) in plain for p in parts)
 
 
+def on_cited(words, pages, numbers):
+    """Words occur on one cited page, or run from one cited page onto the next cited page.
+
+    A clause printed across a page break has the running header and footer
+    between its halves; each half must still occur on its own page.
+    """
+    parts = [p for p in re.split(r'\s*(?:…|\.\.\.|\[…\])\s*', words or '') if p.strip()]
+    texts = {n: _plain(pages[n]) for n in numbers}
+
+    def found(part):
+        part = _plain(part)
+        if any(part in text for text in texts.values()):
+            return True
+        return any(_straddles(texts[n], texts[n + 1], part[:k], part[k:])
+                   for n in texts if n + 1 in texts for k in range(1, len(part)))
+    return bool(parts) and all(found(p) for p in parts)
+
+
+def _straddles(first, second, head, tail, margin=400):
+    """The head closes the first page's text, before its footer; the tail opens the next page's
+    text, after its header. Margins are in non-whitespace characters."""
+    end, start = first.rfind(head), second.find(tail)
+    return end >= 0 and start >= 0 and end + len(head) >= len(first) - margin and start <= margin
+
+
 def validate(reading, pages):
     """Bind every claim to its supplied page; this does not certify meaning."""
     def cited(support, what):
@@ -102,7 +127,7 @@ def validate(reading, pages):
         for citation in support:
             if citation['page'] not in pages or not on_page(citation['quote'], pages[citation['page']]):
                 raise ValueError(f'{what}: quotation is not on page {citation["page"]}')
-        return ' '.join(pages[c['page']] for c in support)
+        return sorted({c['page'] for c in support})
 
     cited(reading['identity']['support'], 'identity')
     if reading['identity']['adopted']:
@@ -111,12 +136,12 @@ def validate(reading, pages):
         cited(item['support'], f'prescribed work {index}')
     for index, item in enumerate(reading['enforcement_clauses']):
         what = f'enforcement clause {index}'
-        text = cited(item['support'], what)
+        numbers = cited(item['support'], what)
         if not item['work_indices'] or not set(item['work_indices']) <= set(range(len(reading['prescribed_work']))):
             raise ValueError(f'{what}: enforces no listed prescribed work')
         term = item['term']
         if term is not None:
-            if not on_page(term['literal'], text):
+            if not on_cited(term['literal'], pages, numbers):
                 raise ValueError(f'{what}: term is not on its cited pages')
             if not (term['number'].strip() and term['unit_word'].strip()):
                 raise ValueError(f'{what}: term needs its printed number and unit word')
@@ -124,7 +149,7 @@ def validate(reading, pages):
                 raise ValueError(f'{what}: number and unit word are not printed together in the term')
         words = [item['consequence'], item['executor'], item['anchor']['literal'],
                  *item['coercive_population'].values()]
-        if any(w and w.strip() and not on_page(w, text) for w in words):
+        if any(w and w.strip() and not on_cited(w, pages, numbers) for w in words):
             raise ValueError(f'{what}: a copied field is not on its cited pages')
     for index, item in enumerate(reading['relationships']):
         cited(item['support'], f'relationship {index}')

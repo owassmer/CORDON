@@ -13,7 +13,7 @@ import unittest
 from cordon_c.core import Snapshot
 from cordon_d.calendar import national_calendar
 from cordon_d.case_prescriptions import (NOTICE, PrescriptionReading, apply_references, c_result, clause,
-                                         governing_references, validate)
+                                         governing_references, on_cited, validate)
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
@@ -79,6 +79,17 @@ class CasePrescriptionRecords(unittest.TestCase):
             target[path[-1]] = value
             with self.subTest(path=path), self.assertRaises(ValueError):
                 validate(broken, PAGES)
+
+    def test_a_clause_may_run_across_a_page_break_but_not_be_assembled_from_elsewhere(self):
+        header = 'Bollettino Ufficiale della Regione Puglia - n. 68 del 22-8-2024\n'
+        pages = {7: 'Di stabilire che … la Sezione Osservatorio fitosanitario disporrà l’abbattimento\n'
+                    + header,
+                 8: header + 'coatto delle piante infette, per il tramite dell’ARIF,\n' + 'x ' * 400
+                    + 'delle piante infette\n'}
+        self.assertTrue(on_cited('disporrà l’abbattimento coatto delle piante infette', pages, [7, 8]))
+        self.assertFalse(on_cited('disporrà l’abbattimento coatto delle piante infette', pages, [7]))
+        far = {**pages, 8: header + 'x ' * 400 + 'coatto delle piante infette\n'}
+        self.assertFalse(on_cited('disporrà l’abbattimento coatto delle piante infette', far, [7, 8]))
 
     def test_term_is_its_printed_number_and_unit_word(self):
         broken = copy.deepcopy(READING)
