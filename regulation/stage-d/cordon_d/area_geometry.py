@@ -768,7 +768,26 @@ def inward_band(zone: BaseGeometry, metres: float, adjacent: BaseGeometry) -> Ba
     border = zone.boundary.intersection(_envelope(adjacent, APPROXIMATION_M).geometry)
     if border.is_empty:
         return shapely.Polygon()
-    return _envelope(border, metres).geometry.intersection(zone)
+    if shapely.get_num_coordinates(border) <= SEAL_TILED_ABOVE:
+        return _envelope(border, metres).geometry.intersection(zone)
+    # A band is local: its part in a tile is the band of the border within its reach of the
+    # tile. A long border is banded tile by tile, so memory stays bounded by a tile.
+    reach = metres + 2 * APPROXIMATION_M + SEAM_M
+    xmin, ymin, xmax, ymax = border.bounds
+    pieces = []
+    for x in numpy.arange(xmin - reach, xmax + reach, SEAL_TILE_M):
+        for y in numpy.arange(ymin - reach, ymax + reach, SEAL_TILE_M):
+            near = shapely.clip_by_rect(border, x - reach, y - reach, x + SEAL_TILE_M + reach, y + SEAL_TILE_M + reach)
+            if near.is_empty:
+                continue
+            band = shapely.clip_by_rect(_envelope(near, metres).geometry, x, y, x + SEAL_TILE_M, y + SEAL_TILE_M)
+            if band.is_empty:
+                continue
+            local = shapely.make_valid(shapely.clip_by_rect(zone, x - 1, y - 1, x + SEAL_TILE_M + 1, y + SEAL_TILE_M + 1))
+            piece = polygonal(shapely.make_valid(band).intersection(local))
+            if not piece.is_empty:
+                pieces.append(piece)
+    return polygonal(shapely.union_all(pieces)) if pieces else shapely.Polygon()
 
 
 class _Builder:
