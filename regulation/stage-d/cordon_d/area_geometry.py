@@ -32,11 +32,17 @@ the adopted line exists only on the act's map; the Region's published layer that
 that map (INPUTS row 3) supplies the part. Only a zone for which the operative text states
 no rule is defined by the annex, by the units it lists.
 
-Positional error is local and measured (`corpus/sources/areas/geometry.json`,
-`positional-error`): the cadastre's against the Region's surveyed control fixes
-(`cordon_d.area_error`), the Region's layer against the cadastral outline of the units the
-act places wholly, a plant's from its unit. An area supplied to C carries the error of the
-outline near the place C tests.
+Positional error is measured and stated in one reference frame, the cadastral map, the frame
+the acts' units are defined in (`corpus/sources/areas/geometry.json`, `positional-error`). C
+adds the errors of the two geometries it compares, so errors stated against different frames
+would count their shared error twice. An outline built from cadastral sheets or parcels, and a
+plant placed by a cadastral unit its act lists, carry only the construction tolerance (the seal
+residue). ISTAT's line carries its measured distance from the cadastre, the Region's layer its
+measured distance from the cadastral outline of the units the act places wholly. A plant placed
+by a ground position carries that position's error in the cadastral frame. The cadastre's
+ground error against the Region's surveyed fixes (`cordon_d.area_error`) belongs to such a
+ground position, never to an outline built from the map. An area supplied to C carries the
+error of the outline near the place C tests.
 """
 from __future__ import annotations
 
@@ -433,8 +439,16 @@ class Sources:
     # --- measured errors ---------------------------------------------------------
 
     @cached_property
+    def construction_tolerance(self) -> float | None:
+        """The error of an outline built from cadastral sheets or parcels in the cadastral frame:
+        the measured seal residue."""
+        found = [r for r in records(self.root, 'positional-error') if r['source'] == 'cadastre-construction']
+        return float(found[0]['tolerance_m']) if found else None
+
+    @cached_property
     def cadastral_error(self) -> ErrorField | None:
-        """The cadastre's error at any place, from the surveyed control fixes."""
+        """The cadastral map's ground error at any place, from the surveyed control fixes. It
+        belongs to a position measured on the ground, not to an outline built from the map."""
         found = [r for r in records(self.root, 'positional-error') if r['source'] == 'cadastre']
         if not found:
             return None
@@ -1071,21 +1085,18 @@ def act_plants(sources: Sources, version, role, radius_m, *, build=None, operati
     The act lists the units its plants' zone reaches: the parcels, where it lists them
     ("particelle catastali ricadenti nel buffer di 50 metri dalle piante risultate
     infette"), else the sheets. A plant is placed by each listed unit: the parcel's or
-    sheet's geometry, with the cadastre's measured error there. A unit the cadastre does
-    not hold places nothing (geometry None).
+    sheet's geometry. In the cadastral frame the unit carries no positional error, only the
+    construction tolerance. A unit the cadastre does not hold places nothing (geometry None).
     """
     build = build or _Builder(sources, version)
     operative = operative or dispositivo(_act_text(sources.root, version.source_path))
-    field = sources.cadastral_error
+    tolerance = sources.construction_tolerance
     found = []
     for label, geometry in build.units_of(_plant_statements(sources, version, build, role, operative)):
         if geometry is None or geometry.is_empty:
             found.append(Plant(None, None, label))
             continue
-        error = None
-        if field is not None:
-            error = float(numpy.max(field.at(shapely.get_coordinates(shapely.convex_hull(geometry)))))
-        found.append(Plant(geometry, error, label))
+        found.append(Plant(geometry, tolerance, label))
     return tuple(found)
 
 
@@ -1121,11 +1132,12 @@ def _plant_errors(plants, reach_m) -> tuple[ErrorPart, ...]:
 
 
 def _source_errors(sources: Sources, used, build=None) -> tuple[ErrorPart, ...]:
-    """The cadastre's measured field wherever the zone's outline runs; ISTAT's measured per-comune
-    bound only along the outline ISTAT itself draws (where no held sheet does)."""
+    """In the cadastral frame: the construction tolerance wherever the zone's outline runs;
+    ISTAT's measured per-comune distance from the cadastre only along the outline ISTAT itself
+    draws (where no held sheet does)."""
     out = []
     if 'cadastre' in used:
-        out.append(ErrorPart('cadastre', None, None, sources.cadastral_error))
+        out.append(ErrorPart('cadastre', None, sources.construction_tolerance))
     if 'istat-boundaries' in used and build is not None:
         for code, geometry in build.istat_drawn:
             line = geometry.boundary.difference(sources.cadastral_outline(code))
