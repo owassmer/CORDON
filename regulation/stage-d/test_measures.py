@@ -177,7 +177,7 @@ class RetainedLaterPrescription(unittest.TestCase):
                          {'adoption': date(2024, 10, 28), 'burp-publication': date(2024, 11, 7)})
         for event in events:
             with self.subTest(kind=event.kind), self.assertRaisesRegex(ValueError, 'Wrong event kind'):
-                event_deadline(Snapshot.load(), 'B-CLK-DDS138-2024-notification-noncommencement',
+                event_deadline(Snapshot.load(), 'B-CLK-IT-L241-21TER-stated-commencement-term',
                                measure.adopted, event, document=measure.identity,
                                recipient='GIANNELLI NATALINA', zone=ZoneInfo('Europe/Rome'))
 
@@ -265,7 +265,7 @@ class RetainedIncorporatedCorrection(unittest.TestCase):
         publication, = (e for e in events if e.kind == 'burp-publication')
         self.assertEqual(publication.occurred, date(2025, 2, 13))
         with self.assertRaisesRegex(ValueError, 'Wrong event kind'):
-            event_deadline(Snapshot.load(), 'B-CLK-DDS188-2024-notification-noncommencement',
+            event_deadline(Snapshot.load(), 'B-CLK-IT-L241-21TER-stated-commencement-term',
                            measure.adopted, publication, document=measure.identity,
                            recipient='Acquedotto Pugliese S.p.A', zone=ZoneInfo('Europe/Rome'))
 
@@ -310,7 +310,7 @@ class RetainedVisibleAnnex(unittest.TestCase):
         publication, = (e for e in events if e.kind == 'burp-publication')
         self.assertEqual(publication.occurred, date(2025, 7, 10))
         with self.assertRaisesRegex(ValueError, 'Wrong event kind'):
-            event_deadline(Snapshot.load(), 'B-CLK-DDS117-2025-notification-noncommencement',
+            event_deadline(Snapshot.load(), 'B-CLK-IT-L241-21TER-stated-commencement-term',
                            measure.adopted, publication, document=measure.identity,
                            recipient='NITTI VINCENZO', zone=ZoneInfo('Europe/Rome'))
         # Unlike DDS188, DDS117 explicitly prescribes treatment before removal.

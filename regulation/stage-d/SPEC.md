@@ -81,7 +81,10 @@ absent column or a null value. The grouped distinct-observation stream is Parque
 keyed by the ordered
 `(url, view, sha256)` sequence of retained releases, the reader version and the
 DuckDB version. Reports are compact JSON blocks and an assembled reading under
-source hash and extraction version.
+source hash and extraction version. A document reading, including a
+case-prescription reading, is JSON under the hash of its request, which binds the
+source hashes, prompt, schema and model; its reader replays it. The tree holds
+neither the reading nor the records derived from it.
 
 Each native identifier cell of that assembled reading carries one regenerable
 record holding the positioned reading of the cell, the source cell bounds and
