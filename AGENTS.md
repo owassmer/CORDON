@@ -14,7 +14,7 @@ CORDON exists to reduce projected Xylella loss by giving the responsible public 
 | Legal meaning | `regulation/stage-a/authoring-eu.json` and `regulation/jurisdiction/canonical/authoring.json` |
 | Clocks and parameters | `regulation/stage-b/clocks-and-parameters.json` |
 | Stage C mathematical reference | `regulation/stage-c/SPEC.md` and its package; acceptance status in `state/CURRENT.json` |
-| Stage D inputs and source bindings | `regulation/stage-d/INPUTS.md`, `regulation/stage-d/SPEC.md`, and their package; acceptance status in `state/CURRENT.json` |
+| Stage D inputs and source bindings | `regulation/stage-d/INPUTS.md`, `regulation/stage-d/SPEC.md`, and their package; status in `state/CURRENT.json` |
 | Source and evidence classification | `corpus/CATALOG.csv` |
 | Migration provenance and exclusions | `migration/MANIFEST.csv` and `migration/EXCLUSIONS.md` |
 
@@ -49,4 +49,4 @@ Stage research is disposable. During a bounded unit, `corpus/workbench/` may hol
 
 End substantive turns with findings, the immediate next five steps, and a concrete restatement of how the work serves the telos. Findings must disclose material failed or unattempted access routes, unexamined dependencies, and changed conclusions alongside completed work. Material means capable of changing Owen's understanding of sufficiency, priority, or the next decision. A qualification buried in an attachment is not disclosure in the final report. Distinguish direct live inspection, retained-source reading, inherited reports, and unverified claims; never imply access or grounding that did not occur.
 
-Derive the next steps from CURRENT and the current stage owner. In Stage D, place each material issue on the affected row of `regulation/stage-d/INPUTS.md` or resolve it before ending the unit; do not create a parallel gap ledger. An issue omitted from the immediate five remains visibly pending in its canonical row; omission never closes it. Read the resulting current state and user-facing report together for semantic consistency. This is a reporting obligation, not a claim that a checklist proves completeness.
+Derive the next steps from CURRENT and the current stage owner. A unit resolves its issues before it ends. What a unit found and why live in its pull request body, under "Changes since plan review" and "Result"; current status and next steps live in `state/CURRENT.json`. `regulation/stage-d/INPUTS.md` states only what A–C need, the real source, what one record means and what D must establish; it carries no status, counts, hashes or narration. Do not create a parallel gap ledger. Read the resulting current state and user-facing report together for semantic consistency. This is a reporting obligation, not a claim that a checklist proves completeness.

@@ -105,7 +105,7 @@
       ],
       "population": "Every Osservatorio determination required by an admitted finding or by a correction relationship reached from it.",
       "reader": "cordon_d.measures supplies source-bound interpretations and retained offline composition. Native sample/report associations remain with cordon_d.source_associations; laboratory facts remain with the report owner.",
-      "open": "Full finding-to-measure reconciliation, whole-act and consequential annex/correction reading, and actual administrative histories remain incomplete. INPUTS.md rows 6–8 and 11 own current coverage and unresolved dependencies, including the upstream source-instance binding needed for expressly stated notification/noncommencement clauses not covered by accepted A/B/C. An admitted live order requires an evidenced administrative disposition or performance to close it; laboratory correction or a register label alone cannot supply that change."
+      "open": "Finding-to-measure reconciliation over the live orders, whole-act and consequential annex, correction and continuation reading, and actual administrative histories. A live order closes only on an evidenced withdrawal or execution; a laboratory correction or a register label cannot supply that change."
     },
     {
       "id": "notice-and-response-records",
@@ -127,7 +127,7 @@
       ],
       "population": "The act text, publication record, communication and response events attached to an admitted removal matter; not every notice published by every municipality.",
       "reader": "cordon_d.notices retains native declarations and attachment routes; cordon_d.removal_events reads publication certificates, connects source-supported act identity and supplies the accepted publication-clock adapter.",
-      "open": "Qualified act attachment and complete notice/response histories remain incomplete. Publication, transmission, delivery, recipient effect and response have separate evidence requirements; a publication cannot establish silence, default or performance. INPUTS.md row 7 owns current coverage and access limitations."
+      "open": "Exact act attachment and the notice and response histories of live orders. Publication, transmission, delivery, recipient effect and response need separate evidence; a publication cannot establish silence, default or performance."
     },
     {
       "id": "plant-protection-records",
@@ -185,7 +185,7 @@
       ],
       "population": "The operational records for the admitted finding and resulting work, including corrections and completion evidence.",
       "reader": "cordon_d.performance (native official HTML reports), cordon_d.evidence and cordon_d.events; target-specific operational record readers remain required where their sources are available",
-      "open": "Official reported work is usable within its source-stated scope. Prescribed-target correspondence, complete performance and cost histories remain incomplete, including the required controlled records. Unrelated municipal service work cannot supply those facts. INPUTS.md row 11 owns coverage, source qualifications and access limitations."
+      "open": "Official reported work is usable within its source-stated scope. Prescribed-target correspondence and performance and cost histories need the first-party records. Unrelated municipal service work cannot supply those facts."
     },
     {
       "id": "vector-and-treatment-observations",
