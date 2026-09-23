@@ -18,7 +18,7 @@ from shapely.geometry import Point, box
 from cordon_c.core import MissingInput
 from cordon_c.spatial import MetricGeometry, adopted_membership, partial_parcel
 from cordon_d.area_geometry import (AdoptedGeography, Observation, Sources, Unplaced, Zone, adopted_geography,
-                                    boundary_distances,
+                                    boundary_distances, construct,
                                     dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
                                     _inspire_zoning)
@@ -241,6 +241,50 @@ class ReachAndPopulation(unittest.TestCase):
             Observation(date(2025, 4, 1), ('PAUCA',), 1.0, 1.0, 'F220', '061', None),
             Observation(date(2025, 4, 1), ('PAUCA',), 2.0, 2.0, 'F220', '999', None)])
         self.assertEqual(by_reference, {'infected': ((1.0, 1.0),)})
+
+
+class AnnexBeyondTheRule(unittest.TestCase):
+    """The annex still speaks where the rule leaves room: beyond B's floor, and for each named plant."""
+
+    def version(self, identity):
+        return next(v for v in versions(ROOT) if v.provision_version_id == identity)
+
+    @unittest.skipUnless(held('cadastre-fogli'), 'the geometry sources are not in this store')
+    def test_a_listed_infected_sheet_no_supplied_plant_reaches_is_quoted(self):
+        sources = Sources(ROOT)
+        version = self.version('REG-PUGLIA-U181-DIR-2025-00059:area-state-transition:v1')
+        inside = sources.sheets[('F220', '', '61')][0][1].representative_point()
+        reached = {z.role: z for z in construct(sources, version, plants={'infected': ((inside.x, inside.y),)})}
+        self.assertEqual(reached['infected'].unplaced, ())
+        elsewhere = {z.role: z for z in construct(sources, version, plants={'infected': ((inside.x + 10_000, inside.y),)})}
+        unit, = elsewhere['infected'].unplaced
+        self.assertEqual(unit.place, 'Minervino Murge foglio 61')
+        self.assertIn('INPUTS row 1', unit.by)
+        self.assertTrue(unit.geometry.buffer(-2_500).covers(inside))    # its plant's zones reach 2.55 km
+
+    @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
+    def test_a_buffer_without_a_width_holds_the_units_its_annex_places_wholly_in_it(self):
+        sources = Sources(ROOT)
+        version = self.version('REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1')
+        buffer = {z.role: z for z in construct(sources, version)}['buffer']
+        noci = lambda n: shapely.union_all([g for _, g in sources.sheets[('F915', '', n)]])
+        # 'NOCI ... 39*, 40*, 41*': wholly in the buffer, beyond 5 km of the infected zone.
+        for sheet in ('39', '40', '41'):
+            self.assertGreater(noci(sheet).intersection(buffer.geometry).area / noci(sheet).area, 0.99)
+        # 'NOCI ... 33, ... 38': partly in it, where only the act's map places the part.
+        self.assertTrue({'Noci foglio 33', 'Noci foglio 38'} <= {u.place for u in buffer.unplaced})
+        self.assertIn('annex places wholly', buffer.rule)
+
+    @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
+    def test_a_unit_placed_wholly_in_the_buffer_is_in_it_beyond_the_stated_band(self):
+        sources = Sources(ROOT)
+        version = self.version('REG-PUGLIA-U181-DIR-2024-00158:area-state-transition:v1')
+        zones = {z.role: z for z in construct(sources, version)}
+        # 'CONVERSANO ... 45*, 51*, 52': foglio 51 starts 4.99 km from the infected zone and
+        # reaches 1.65 km beyond the 5 km band; the sheets it places partly add no quote.
+        c51 = shapely.union_all([g for _, g in sources.sheets[('C975', '', '51')]])
+        self.assertGreater(c51.intersection(zones['buffer'].geometry).area / c51.area, 0.99)
+        self.assertEqual(zones['buffer'].unplaced, ())
 
 
 if __name__ == '__main__':

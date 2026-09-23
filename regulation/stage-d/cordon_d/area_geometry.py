@@ -17,7 +17,12 @@ result rendered per unit, not drawn lines:
   offset at the width.
 
 A width is B's: the act's own figure where it states one, B's floor where it states
-"almeno" or applies the Regulation without a figure. Only a zone for which the
+"almeno" or applies the Regulation without a figure. A unit the annex places wholly in
+the buffer zone is in it, also where it lies beyond the band; where the act states no
+width, B's floor is only a minimum, and a unit the annex places partly in the buffer is
+quoted. Each sheet the annex lists for a plant-defined infected zone holds part of
+a named plant's radius; a listed sheet that no supplied plant reaches is quoted, with the
+land its plant's zones could reach. Only a zone for which the
 operative text states no rule is defined by the annex, by the units it lists: whole
 provinces and comuni from ISTAT, sheets and parcels from the cadastre. Where the act's
 legend marks a sheet as only partly in such a zone, the act states nothing that places
@@ -84,6 +89,7 @@ class Unplaced:
     place: str
     quote: str                             # the act's words: its legend and the cell
     geometry: BaseGeometry | None          # the whole unit, where the cadastre holds it
+    by: str = 'its map alone'              # what places the part
 
 
 @dataclass(frozen=True)
@@ -143,7 +149,7 @@ class AdoptedGeography:
         if self.unplaced:
             u = self.unplaced[0]
             raise MissingInput(f'{self.provision_version_id}: the act places part of {u.place} in its '
-                               f'{u.role} zone by its map alone: "{u.quote}"')
+                               f'{u.role} zone by {u.by}: "{u.quote}"')
         if self.error_m is None:
             unbounded = sorted({s for z in self.zones for s in z.sources} - set(self.bounds))
             raise MissingInput(f'{self.provision_version_id}: no positional error bound is supplied for '
@@ -550,6 +556,20 @@ class _Builder:
                     unplaced.append(Unplaced(role, s.locator, label, f'{s.qualification}: {s.text}', geometry))
         return (shapely.union_all(parts) if parts else None), tuple(unplaced)
 
+    def listed(self, role):
+        """Each sheet the annex lists for `role`: (statement, label, sheet geometry or None)."""
+        for s in self.by_role[role]:
+            if s.scope != 'sheets':
+                continue
+            comune = self.comune(s.comune, s.province)
+            for sheet in s.sheets:
+                label = f"{comune.name} {'sezione ' + sheet.section + ' ' if sheet.section else ''}foglio {sheet.number}"
+                try:
+                    geometry = self.sheet(comune, sheet)[0]
+                except ValueError:
+                    geometry = None
+                yield s, label, geometry
+
     def words(self, role):
         return tuple(dict.fromkeys(s.zone_heading for s in self.by_role[role]))
 
@@ -604,8 +624,20 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
     if 'infected' in roles:
         metres, width, quote = rules.radius or (floor, INFECTED_RADIUS, 'Article 4(2), applied by the act '
                                                 'to the infected plants it names')
-        zones['infected'] = Zone('infected', build.words('infected'), _circles(plants.get('infected'), metres),
-                                 quote, ('plants',), width)
+        circles = _circles(plants.get('infected'), metres)
+        # Each sheet the annex lists for the infected zone holds part of a named plant's radius.
+        # A listed sheet no supplied plant's radius reaches holds a plant the act names whose
+        # position is not supplied; its zones reach up to the radius plus the buffer width.
+        missing = ()
+        if circles is not None:
+            p = sources.parameters[ERADICATION_BUFFER]
+            reach = metres + (rules.buffer[0] if rules.buffer else _metres(p['value'], p['unit']))
+            missing = tuple(
+                Unplaced('infected', s.locator, label, f'{s.qualification}: {s.text}',
+                         None if g is None else g.buffer(reach).intersection(land),
+                         'an infected plant it names whose position is not supplied (INPUTS row 1)')
+                for s, label, g in build.listed('infected') if g is None or g.distance(circles) > 0)
+        zones['infected'] = Zone('infected', build.words('infected'), circles, quote, ('plants',), width, missing)
     else:
         geometry, unplaced = build.annex('infected', build.by_role['infected'])
         rule = 'annex'
@@ -667,11 +699,22 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
             p = sources.parameters[ERADICATION_BUFFER]
             origins.append((focus.geometry, _metres(p['value'], p['unit'])))
         inner = _union(*(o for o, _ in origins))
+        # Each unit the annex places wholly in the buffer is in it. A unit it places partly
+        # is placed by the width the act states; where it states none, B's floor is only a
+        # minimum, so that unit is quoted.
+        before, annexed, partial = set(build.used), None, ()
+        if build.by_role['buffer']:
+            annexed, partial = build.annex('buffer', build.by_role['buffer'])
+            partial = partial if rules.buffer is None else ()
+            if annexed is not None:
+                quote = f'{quote}, with the units its annex places wholly in it'
         geometry = None
         if infected is not None:
-            geometry = _union(*(outward_band(o, m, land) for o, m in origins if o is not None)).difference(inner)
-        used = tuple(sorted({s for z in zones.values() if z.role in ('infected', 'focus') for s in z.sources}))
-        zones['buffer'] = Zone('buffer', build.words('buffer'), geometry, quote, used, width)
+            geometry = _union(*(outward_band(o, m, land) for o, m in origins if o is not None),
+                              annexed).difference(inner)
+        used = tuple(sorted({s for z in zones.values() if z.role in ('infected', 'focus') for s in z.sources}
+                            | (build.used - before)))
+        zones['buffer'] = Zone('buffer', build.words('buffer'), geometry, quote, used, width, partial)
     return tuple(zones[r] for r in ROLES if r in zones)
 
 
