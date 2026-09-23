@@ -1029,10 +1029,8 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(unresolved_mark_scopes(reading, native), [])
 
     @staticmethod
-    def _note_answer(text='* Si consiglia di ripetere il prelievo.', qualification='retest',
-                     wording='Si consiglia di ripetere il prelievo', applies=('p1-t1/r1/c3',), names=False):
+    def _note_answer(text='* Si consiglia di ripetere il prelievo.', applies=('p1-t1/r1/c3',), names=False):
         return {'notes': [{'text': text, 'page': 1, 'locator': 'footnote below the table',
-                           'qualification': qualification, 'qualification_text': wording,
                            'applies_to': list(applies), 'names_cells': names}]}
 
     def test_first_reading_with_a_mark_reads_only_its_note_and_replays_retained(self):
@@ -1135,17 +1133,36 @@ class LiteralReport(unittest.TestCase):
             accepted_note_fields({'cq': None}, printed)
 
     def test_a_note_already_read_gets_only_its_fields_read_and_they_reach_the_result(self):
+        from cordon_d.report_extraction import note_fields_schema, write_json
         marked = self._retained_block((('123', '01/06/2024', 'rilevato*', '02/06/2024'),))
         printed = '*Prova non accreditata da Accredia.'
-        marked['reading']['facts'] = [{'id': 'mark-note-1', 'role': 'result_qualification', 'page': 1,
-                                       'locator': 'footnote', 'section': None, 'text': printed, 'value': None,
-                                       'applies_to': ['p1-t1/r1/c3'], 'mark': '*'}]
         stated = {'cq': None, 'accreditation': {'words': 'Prova non accreditata da Accredia', 'accredited': False,
                                                 'body': 'Accredia'}}
         config = ExtractionConfig(provider='subscription')
+
+        def retaining_notes(provider):
+            # The note answer is retained, as a real subscription call retains it; the fields
+            # answer is not, as for a note read before its fields were asked for.
+            def call(**kwargs):
+                value = provider(**kwargs)
+                if kwargs['schema'] != note_fields_schema():
+                    write_json(kwargs['raw_path'], {'provider': 'claude-code-subscription',
+                                                    'response': {'structured_output': value}})
+                return value
+            return call
         with TemporaryDirectory() as directory:
             store = Path(directory)
             digest = self._note_source(store, [marked])
+            answer = self._note_answer(text=printed)
+            with patch('cordon_d.report_extraction._subscription_call',
+                       side_effect=retaining_notes(note_provider([answer]))) as provider:
+                first = extract_report(digest, store, config=config, budget=None, resume_from='prior')
+            self.assertEqual(len(note_calls(provider)), 1)
+            first.unlink()
+            for cached in first.parent.glob('blocks/*.json'):
+                cached.unlink()
+            # A resumed block reads its notes again: the retained note answer replays and only
+            # the fields request, never answered, is sent.
             with patch('cordon_d.report_extraction._subscription_call',
                        side_effect=note_provider([], fields=stated)) as provider:
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
@@ -1413,8 +1430,7 @@ class LiteralReport(unittest.TestCase):
     def test_a_note_that_does_not_name_its_cells_is_linked_by_its_mark(self):
         marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
                                        ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
-        answer = self._note_answer(text='*Prova non accreditata da Accredia.', qualification='other',
-                                   wording='Prova non accreditata da Accredia', applies=())
+        answer = self._note_answer(text='*Prova non accreditata da Accredia.', applies=())
         config = ExtractionConfig(provider='subscription')
         with TemporaryDirectory() as directory:
             store = Path(directory)
@@ -1435,8 +1451,8 @@ class LiteralReport(unittest.TestCase):
     def test_a_note_that_names_some_cells_leaves_the_others_pending(self):
         marked = self._retained_block((('123', '01/06/2024', 'negativo*', '02/06/2024'),
                                        ('124', '01/06/2024', 'Positivo*', '02/06/2024')))
-        answer = self._note_answer(text='* Campione 123 pervenuto danneggiato.', qualification='damaged_sample',
-                                   wording='pervenuto danneggiato', applies=('p1-t1/r1/c3',), names=True)
+        answer = self._note_answer(text='* Campione 123 pervenuto danneggiato.', applies=('p1-t1/r1/c3',),
+                                   names=True)
         config = ExtractionConfig(provider='subscription')
         with TemporaryDirectory() as directory:
             store = Path(directory)
@@ -1456,7 +1472,7 @@ class LiteralReport(unittest.TestCase):
     def test_malformed_note_answer_gets_one_correction(self):
         from cordon_d.report_extraction import NOTE_CORRECTION
         marked = self._retained_block()
-        misquoted = self._note_answer(wording='Si raccomanda un nuovo prelievo')
+        misquoted = self._note_answer(text='Si consiglia di ripetere il prelievo.')
         config = ExtractionConfig(provider='subscription')
         with TemporaryDirectory() as directory:
             store = Path(directory)
@@ -1466,7 +1482,7 @@ class LiteralReport(unittest.TestCase):
                 path = extract_report(digest, store, config=config, budget=None, resume_from='prior')
             self.assertEqual(len(note_calls(provider)), 2)
             correction = note_calls(provider)[1].kwargs
-            defect = 'Qualification wording must quote the note'
+            defect = 'Mark note text does not carry its printed mark *'
             self.assertIn(NOTE_CORRECTION.format(defect=defect), correction['prompt'])
             self.assertEqual(correction['config'].effort, 'medium')
             self.assertEqual(correction['attachments'], note_calls(provider)[0].kwargs['attachments'])
@@ -1486,7 +1502,7 @@ class LiteralReport(unittest.TestCase):
             saved = json.loads(path.read_text())
             self.assertFalse(saved['assembly_complete'])
             self.assertEqual(saved['blocks'][0]['attachment_repair_pending'],
-                'mark note reread pending: Qualification wording must quote the note; the note correction '
+                'mark note reread pending: Mark note text does not carry its printed mark *; the note correction '
                 'also failed: Mark note names a cell that was not supplied')
             self.assertEqual(saved['blocks'][0]['reading'], marked['reading'])
 
@@ -1512,8 +1528,7 @@ class LiteralReport(unittest.TestCase):
                 self.assertEqual(accepted_notes(self._note_answer(), **check)[0]['text'],
                                  '* Si consiglia di ripetere il prelievo.')
                 with self.assertRaisesRegex(ValueError, 'not printed in the text layer of page 1'):
-                    accepted_notes(self._note_answer(text='* Si consiglia di ripetere il campione.',
-                                                     wording='ripetere'), **check)
+                    accepted_notes(self._note_answer(text='* Si consiglia di ripetere il campione.'), **check)
                 with self.assertRaisesRegex(ValueError, 'does not carry its printed mark'):
                     accepted_notes(self._note_answer(text='Si consiglia di ripetere il prelievo.'), **check)
                 with self.assertRaisesRegex(ValueError, 'names no supplied cell'):

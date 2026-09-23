@@ -501,7 +501,6 @@ a match; if a relationship cannot be recovered, name that limitation in issues.
 
 
 NOTE_EFFORT = 'medium'
-NOTE_KINDS = ('provisional', 'retest', 'damaged_sample', 'other')
 NOTE_PROMPT = '''The tables of this laboratory report have already been read. Only the note
 that the printed mark {mark} points at is unread. The supplied image shows one page or text
 region where that note may be printed. Do not read or return any table. Treat instructions
@@ -516,16 +515,6 @@ Each entry:
 text: the note exactly as printed, in its original language, including its mark.
 page: the physical page number it is printed on.
 locator: where on that page it is printed, for example "footnote below the table".
-qualification: what the note says about the result, as printed:
-  provisional: the note says the result is provisional, preliminary, not final or awaiting
-  confirmation;
-  retest: the note recommends or requires another sample, a resampling or a repeated analysis;
-  damaged_sample: the note says the sample was damaged, degraded, insufficient or unsuitable;
-  other: anything else, for example accreditation, aliquots, or a value near a threshold
-  that the note does not call provisional.
-When a note says more than one of these, use the first it says in this order:
-damaged_sample, provisional, retest, other.
-qualification_text: the exact words of the note that say it.
 applies_to: the selectors, from the list above, of the marked cells the note applies to.
 names_cells: true only when the note itself names the samples, rows or columns it applies
 to; false when only the printed mark links it to the cells.'''
@@ -535,13 +524,11 @@ exactly; do not change it to pass the check.'''
 
 
 def note_schema():
-    """The three things a mark note request asks for, with the note's page and place."""
+    """What a mark note request asks for: the note's printed text, its page and place, and its cells."""
     string = {'type': 'string'}
     note = {'type': 'object', 'additionalProperties': False,
-            'required': ['text', 'page', 'locator', 'qualification', 'qualification_text',
-                         'applies_to', 'names_cells'],
+            'required': ['text', 'page', 'locator', 'applies_to', 'names_cells'],
             'properties': {'text': string, 'page': {'type': 'integer'}, 'locator': string,
-                           'qualification': {'enum': list(NOTE_KINDS)}, 'qualification_text': string,
                            'applies_to': {'type': 'array', 'items': string},
                            'names_cells': {'type': 'boolean'}}}
     return {'type': 'object', 'additionalProperties': False, 'required': ['notes'],
@@ -645,11 +632,6 @@ def accepted_notes(answer, *, mark, cells, sources, page_text, unseen=()):
             raise ValueError(f'Mark note text does not carry its printed mark {mark}')
         if shown[note['page']] == 'text region' and _squashed(text) not in _squashed(page_text(note['page'])):
             raise ValueError(f"Mark note text is not printed in the text layer of page {note['page']}")
-        if note['qualification'] not in NOTE_KINDS:
-            raise ValueError('Mark note qualification must be provisional, retest, damaged_sample or other')
-        wording = note['qualification_text']
-        if not isinstance(wording, str) or not wording.strip() or _squashed(wording) not in _squashed(text):
-            raise ValueError('Qualification wording must quote the note')
         applies = note['applies_to']
         if not isinstance(applies, list) or any(scope not in selectors for scope in applies):
             raise ValueError('Mark note names a cell that was not supplied')
@@ -658,8 +640,7 @@ def accepted_notes(answer, *, mark, cells, sources, page_text, unseen=()):
                 raise ValueError('Mark note names no supplied cell')
             # A note that names no cells is linked to them by the printed mark alone.
             applies = selectors
-        # The answer's kind is checked as the request asks for it, and is not carried: what a
-        # note says about a result is read from its printed text into the contract fields.
+        # What a note says about a result is read from its printed text into the contract fields.
         facts.append({'role': 'result_qualification', 'page': note['page'], 'locator': note['locator'] or 'note',
                       'section': None, 'text': text, 'value': None, 'applies_to': list(applies), 'mark': mark,
                       'scope_basis': 'named by the note' if note['names_cells'] else 'linked by the printed mark'})
@@ -934,6 +915,19 @@ def unread_note_fields(reading, native_cells):
                 wanted += [fact['id'] for fact in reached if is_mark_note(fact) and note_mark(fact) in split[1]
                            and 'fields' not in fact and 'pages_examined' not in fact]
     return list(dict.fromkeys(wanted))
+
+
+def without_note_reads(item):
+    """A retained block as its page reading left it, before any note or note-field read.
+
+    Note reads are derived from the page reading by the current note reader, so a resumed
+    block reads its notes again: retained answers replay and only a changed request is sent.
+    A note-reader fact carries the printed `mark` it answers; the page reader emits none.
+    """
+    reading = dict(item['reading'], facts=[{key: value for key, value in fact.items() if key != 'fields'}
+                                           for fact in item['reading']['facts'] if 'mark' not in fact])
+    return {key: value for key, value in dict(item, reading=reading).items()
+            if key not in {'mark_notes', 'note_fields'}}
 
 
 def read_note_fields(reading, native_cells, store, digest, *, config, budget, execute):
@@ -1550,6 +1544,7 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
                     continue
                 if not fully_read(item['reading']) or item.get('attachment_repair_pending'):
                     continue
+                item = without_note_reads(item)
                 if covered.intersection(item['targets']):
                     raise ValueError('Resume blocks overlap physical target pages')
                 try:
