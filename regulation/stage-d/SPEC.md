@@ -91,6 +91,12 @@ has a cost: an inventory-preserving corruption of the retained native cell is no
 detected on read, because the comparison against the source cell runs at assembly
 under the extraction version.
 
+One real text has one representation. Text from the page's text layer enters
+the reading decoded: a text that round-trips Latin-1 to UTF-8 into valid,
+different text reads as that text. The text layer prints byte 0xA0, the second
+byte of à, as a space, so a space after Ã or Â is read as that byte first. The
+retained native cell and the request that showed it are unchanged.
+
 Exact-request raw model responses are cached separately, so a changed
 deterministic projection can reuse them without another paid call. Model, prompt,
 page and context images, rendering settings and code version are named. No join

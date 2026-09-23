@@ -83,6 +83,27 @@ def block(rows):
 
 
 class LiteralReport(unittest.TestCase):
+    def test_text_read_as_latin1_enters_the_reading_as_its_utf8_text(self):
+        from cordon_d.reports import decoded
+        # The text layer prints byte 0xA0, the second byte of à, as a space.
+        self.assertEqual(decoded('AttivitÃ di controllo'), 'Attività di controllo')
+        self.assertEqual(decoded('AttivitÃ  di controllo'), 'Attività di controllo')
+        self.assertEqual(decoded('AttivitÃ\xa0 di controllo'), 'Attività di controllo')
+        self.assertEqual(decoded('cittÃ .'), 'città.')
+        self.assertEqual(decoded('Ã¨ stato'), 'è stato')
+        for text in ('Attività di controllo', 'È stato', 'PIÙ DI', 'Olivo (Olea europaea)', None, ''):
+            self.assertEqual(decoded(text), text)
+        item = block([['123', '01/06/2024', 'Positivo', '02/06/2024']])
+        table = item['reading']['tables'][0]
+        table['columns'].append({'role': 'other', 'heading': ['Contesto'], 'test': None, 'analyte': None,
+                                 'support': [{'page': 1, 'locator': 'table heading', 'text': 'Contesto'}]})
+        table['rows'][0]['cells'].append({'native_cell': 'p1-t1-r2-c5'})
+        item['native_cells'] = {'p1-t1-r2-c5': {'text': 'AttivitÃ di controllo', 'page': 1,
+                                                'table_bbox': [0, 0, 100, 100]}}
+        [row] = materialize('source', 'v', 1, [item]).rows
+        self.assertEqual(row.cells[-1]['text'], 'Attività di controllo')
+        self.assertEqual(item['native_cells']['p1-t1-r2-c5']['text'], 'AttivitÃ di controllo')
+
     def test_reader_separates_annotated_results_without_losing_scope_or_literal(self):
         item = block([['A', '01/06/2024', 'rilevato*', '02/06/2024'],
                       ['B', '01/06/2024', 'non rilevato†', '02/06/2024']])

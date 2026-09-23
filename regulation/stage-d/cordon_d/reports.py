@@ -26,6 +26,36 @@ def classify(text):
     return RESULTS.get(' '.join(text.casefold().split()), 'unclassified') if text else 'unread'
 
 
+_LEAD_SPACE = re.compile('([\u00c2\u00c3]) (?=\\w)|([\u00c2\u00c3]) ')
+
+
+def decoded(text):
+    """One real text gets one representation: UTF-8 text read as Latin-1 reads as that UTF-8 text.
+
+    A text that round-trips Latin-1 -> UTF-8 into valid, different text is replaced by that
+    text ('AttivitÃ\\xa0 di' is 'Attività di'). A PDF text layer prints the Latin-1 no-break
+    space, byte 0xA0 and the second byte of à, as a space, so a space after Ã or Â is first read
+    as that byte; a word space still separates it from a following word. Any other text is
+    returned unchanged.
+    """
+    if not isinstance(text, str) or text.isascii():
+        return text
+    spaced = _LEAD_SPACE.sub(lambda m: m[1] + '\xa0 ' if m[1] else m[2] + '\xa0', text)
+    for candidate in dict.fromkeys((text, spaced)):
+        try:
+            repaired = candidate.encode('latin-1').decode('utf-8')
+        except UnicodeError:
+            continue
+        if repaired != candidate:
+            return repaired
+    return text
+
+
+def decoded_cells(native_cells):
+    """The text layer's cells as they enter a reading, each text read by `decoded`."""
+    return {key: dict(cell, text=decoded(cell.get('text'))) for key, cell in native_cells.items()}
+
+
 def _leading_mark(text):
     """The printed marker a note begins with ('*', '**', 'a', '**='), or None."""
     match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(=:)])', text or '')
@@ -762,10 +792,13 @@ def materialize(digest, version, page_count, blocks):
                        for scope in f['applies_to']}
     rows, covered, locators, encountered = [], set(), set(), set()
     for item in blocks:
-        data, native = item['reading'], item['native_cells']
+        data = item['reading']
+        # The block is checked against the text layer as the reader was shown it; the text
+        # enters the reading decoded, so one real text has one representation.
+        native = decoded_cells(item['native_cells'])
         # The pages the model was shown for this block: recorded on the block when it was
         # read (the whole document under the subscription); otherwise targets and context.
-        validate_block(data, targets=item['targets'], page_count=page_count, native_cells=native,
+        validate_block(data, targets=item['targets'], page_count=page_count, native_cells=item['native_cells'],
                        native_regions=item.get('native_regions', []),
                        supplied_pages=set(item.get('supplied_pages')
                                           or set(item['targets']) | set(item.get('context_pages', []))))
@@ -916,11 +949,11 @@ def positioned_identifier_records(reading, source):
                 if page not in tables:
                     tables[page] = document[page].find_tables().tables
                 table = tables[page][ti]
-                if table.extract()[ri][ci] != cell['text']:
+                if decoded(table.extract()[ri][ci]) != cell['text']:
                     raise ValueError('Retained native identifier differs from its source cell')
                 bounds = table.rows[ri].cells[ci]
-                positioned = '\n'.join(line.strip() for line in document[page].get_text(
-                    'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
+                positioned = decoded('\n'.join(line.strip() for line in document[page].get_text(
+                    'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines()))
                 native = cell['text']
                 outcome = _geometry_outcome(positioned, native)
                 record = {
@@ -1074,7 +1107,7 @@ def table_headings(reading, payload, source):
     with pymupdf.open(source) as document:
         for table in sorted(wanted):
             page, bbox, others = boxes[table]
-            blocks = [(b[1], b[3], b[4]) for b in document[page - 1].get_text('blocks') if b[6] == 0]
+            blocks = [(b[1], b[3], decoded(b[4])) for b in document[page - 1].get_text('blocks') if b[6] == 0]
             if text := heading_above(blocks, bbox, others):
                 headings[table] = (page, text)
     return headings
