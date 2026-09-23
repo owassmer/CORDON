@@ -924,7 +924,7 @@ class ComposedTemporalCases(unittest.TestCase):
     def test_case_commencement_is_not_completion_and_requires_evidence(self):
         from cordon_c.bindings import noncommencement_facts
         s = Snapshot.load()
-        identity = "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement"
+        identity = "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
         row = s.version(identity, AT)
         # This fixture explicitly establishes the recipient, lawful work and
         # notification. Only the two temporal leaves come from the calculation.
@@ -932,9 +932,9 @@ class ComposedTemporalCases(unittest.TestCase):
                  if p not in {"the source notification-based commencement deadline has elapsed",
                               "noncommencement of that work by the source deadline is established"}}
         args = dict(notification=datetime(2026, 8, 3, 10, tzinfo=ROME),
-                    evaluated_at=datetime(2026, 8, 14, tzinfo=ROME),
+                    evaluated_at=datetime(2026, 8, 14, tzinfo=ROME), stated_term=("10", "giorni"),
                     zone=ROME, calendar=WorkingCalendar(date(2026,1,1),date(2027,1,1),frozenset(),frozenset({5,6})))
-        clock = "B-CLK-DDS147-2024-notification-noncommencement"
+        clock = "B-CLK-IT-L241-21TER-stated-commencement-term"
         for events, complete, expected in [({}, True, "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"),
                 ({"actual-start": datetime(2026, 8, 5, 12, tzinfo=ROME)}, True, "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"),
                 ({}, False, None)]:
@@ -947,6 +947,23 @@ class ComposedTemporalCases(unittest.TestCase):
                     commencement_records_complete=False)
         self.assertEqual(evaluate(s, identity, AT, merge_facts(facts, computed)).effect,
                          "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED")
+        # The term is the prescription's own: 10 days has elapsed by 14 August, 15 days has not,
+        # and a missing term is unknown rather than ten.
+        longer = noncommencement_facts(s, clock, AT, **dict(args, stated_term=("15", "giorni")),
+                                       qualifying_commencements={}, commencement_records_complete=True)
+        self.assertEqual(evaluate(s, identity, AT, merge_facts(facts, longer)).effect,
+                         "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED")
+        for term in (None, ("10", "settimane")):
+            with self.assertRaises(MissingInput):
+                noncommencement_facts(s, clock, AT, **dict(args, stated_term=term),
+                                      qualifying_commencements={}, commencement_records_complete=True)
+        self.assertIsNone(s.clocks[clock]["unit"])
+        # A stated term never replaces a period B fixes.
+        fixed = next(c for c in json.loads((Path(__file__).parent / "calendar-rules.json").read_text())["italian_deadline"]
+                     if c != clock)
+        with self.assertRaisesRegex(ValueError, "fixes this period"):
+            clock_boundary(s, fixed, s.quantity_interval(s.clocks[fixed])[0], date(2026, 8, 3), zone=ROME,
+                           calendar=args["calendar"], stated_term=("10", "giorni"))
 
     def test_early_election_defeats_silence_without_waiting_for_publication_end(self):
         from cordon_c.bindings import election_window_facts
