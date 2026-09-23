@@ -2474,10 +2474,14 @@ class Round13Repairs(unittest.TestCase):
         rule = self.a['IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1']
         work, coerce = (p for p in rule['condition_ast']['route_table'][0]['when']['all_of'][1::4])
         self.assertNotEqual(work['predicate'], coerce['predicate'])
-        for year, number in ((2025, 11), (2024, 165), (2026, 63)):
+        for year, number, corrected in ((2025, 11, 'REG-PUGLIA-U181-DIR-2024-00188'),
+                                        (2024, 165, 'REG-PUGLIA-U181-DIR-2024-00147'),
+                                        (2026, 63, 'REG-PUGLIA-U181-DIR-2025-00173')):
             candidates = [r for r in self.rows if r['instrument_id'] == f'REG-PUGLIA-U181-DIR-{year}-{number:05d}'
                           and ':case-delta:' in r['stable_provision_id']]
             self.assertTrue(any(rule['stable_provision_id'] in r['external_dependencies'] for r in candidates))
+            # The correction names the order it corrects, which then requires it (Stage D `lawfully_due`).
+            self.assertTrue(any(r.get('corrects_instrument_ids') == [corrected] for r in candidates))
             self.assertFalse(any(c['producer_provision_version_id'] in {r['provision_version_id'] for r in candidates}
                                  and 'noncommencement' in c['clock_id'] for c in self.b['clocks']))
         self.assertFalse(any('cases mint no clock' in (d['why'] or '').lower() for d in self.b['dispositions']))
@@ -2498,6 +2502,18 @@ class StatedTermClock(unittest.TestCase):
         mutant = copy.deepcopy(self.base)
         next(c for c in mutant['clocks'] if c['clock_id'] == rid).update(magnitude='10', unit='calendar_days', bound='exact')
         self.reject(mutant, 'not evidenced by source_phrase')
+
+    def test_unit_words_have_one_owner(self):
+        # The convention holds the word held orders print; the verifier reads it rather than its own copy.
+        self.assertEqual(self.base['conventions']['clock.unit_words'], {'giorni': 'calendar_days'})
+        mutant = copy.deepcopy(self.base)
+        mutant['conventions']['clock.unit_words'] = {}
+        self.reject(mutant, 'not evidenced by source_phrase')
+        clock = dict(kind='deadline', magnitude='10', unit='calendar_days', bound='exact', recurrence=None,
+                     source_phrase='entro 10 giorni lavorativi')
+        self.assertFalse(verifier.clock_value_matches(clock))
+        self.assertTrue(verifier.clock_value_matches(dict(clock, unit='working_days')))
+        self.assertTrue(verifier.clock_value_matches(dict(clock, source_phrase='entro 10 giorni')))
 
 
 class Round13StoredStatus(unittest.TestCase):

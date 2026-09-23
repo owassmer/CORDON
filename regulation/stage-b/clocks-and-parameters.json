@@ -45,12 +45,7 @@
     "dispositions.ref": "one minted id, or an ordered list of successive versions of one target proposition when the source expression spans their intervals. A list is temporal resolution, not multiple dispositions or simultaneous duties. Its intervals must be contiguous, non-overlapping and cover the source interval",
     "clock.magnitude": "normalized numeric string | {open_term, reserved_to}: an open term is stated by the named instrument; unit and bound stay null in B, and there is no default",
     "clock.unit_words": {
-      "giorni": "calendar_days",
-      "gg": "calendar_days",
-      "giorni lavorativi": "working_days",
-      "ore": "hours",
-      "mesi": "months",
-      "anni": "years"
+      "giorni": "calendar_days"
     }
   },
   "clocks": [
@@ -15024,10 +15019,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-1.json",
-        "record_sha256": "861866ea9cb805704183365a8ab8791454861d17fcb5d3272f00ac9e243a0736"
+        "record_sha256": "b40c7fcbc36319b129af9e0db1a7b86c60c3d868446147bc6bc92ad66c221f93"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "e7d7a3b23be35adac3e8b57849abdbcca53c65b80035214f76bcbbe40347e839"
+      "accepted_content_sha256": "a789702b234277bbafab31fa30e57e5a27a8152846261ed97e156bb0a4dda98d"
     },
     {
       "seam": 2,
@@ -15038,10 +15033,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-2.json",
-        "record_sha256": "832ade63bdfbc04dd025e8ad463dfb8905e43153bfa4bcaac5c8e2d6538a2277"
+        "record_sha256": "3414ef8e114c72c7398f6e3fd8519da3f15b082c75a1f924502a5e6cab9e03cc"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "0574855cde487fd4839bbcad1b4f72f5727d6bdec62c295e7fcbd538789d0ae9"
+      "accepted_content_sha256": "5be83e86d0dc44433d94fc1b9e4bc46967cd2994dd4412176a11c0add66f5189"
     },
     {
       "seam": 3,
@@ -15052,10 +15047,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-3.json",
-        "record_sha256": "2733237c18ee5be6625ee19dbf4f846e37e73a5067718353788c41e1fddb0770"
+        "record_sha256": "73a181c9cef9cb41cee2f45986ce7a05c77b76b7fb7e35e58412160f8ffc573a"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "a55588c8794f83b0a562220f8c432c93df8b98be93db9f7ccb889201d4a53434"
+      "accepted_content_sha256": "ccd2b207c787246fcb531718be0411947c9aaf233e51cf5adfde2307208d40b8"
     },
     {
       "seam": 4,
@@ -15066,10 +15061,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-4.json",
-        "record_sha256": "a454226cf1e1e000b814305bb959a6b25b5c45556465a0d8166b2d12dacd4672"
+        "record_sha256": "ea6a4aa907422db79588d9951064aefb894b36193b673fdb23a79480c32e8eb8"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "6fd5dc3e8cce00210279bba73e173166b2377c693fc7fdc9f178676e3630c420"
+      "accepted_content_sha256": "7b4ab9c8165d93530ff619e6d1e278e6322e6b20df94ac7e19d7496d24c5590c"
     }
   ]
 }

@@ -31,8 +31,10 @@ NOTICE = 'legally sufficient notification of that prescription to this recipient
 # delle piante ricadenti nei 50 m entro massimo 10 giorni dall'avvenuta notifica, la Sezione Osservatorio
 # fitosanitario disporrà l'abbattimento coatto delle piante infette, per il tramite dell'ARIF". No A row names it.
 DDS108 = dict(instrument='REG-PUGLIA-U181-DIR-2024-00108', clause=True, term=('10', 'giorni'),
-              anchor="dall'avvenuta notifica", commencement='la pianta infetta e le piante ricadenti nei 50 m',
-              coercive='le piante infette', executor='ARIF')
+              commencement='la pianta infetta e le piante ricadenti nei 50 m', coercive='le piante infette',
+              executor='ARIF')
+CORRECTION_165 = 'REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction'
+CORRECTION_11 = 'REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction'
 
 
 class StatedTermRule(unittest.TestCase):
@@ -55,6 +57,14 @@ class StatedTermRule(unittest.TestCase):
                 qualifying_commencements=commencements or {}, commencement_records_complete=True,
                 zone=ROME, calendar=self.calendar))
         return evaluate(self.s, RULE, at, facts).effect
+
+    def settled(self, sid, at):
+        """A governing row's result with every leaf established; only its resolution matters here."""
+        row = self.s.version(sid, at)
+        result = evaluate(self.s, sid, at, {(row['provision_version_id'], p): True
+                                            for p in leaves(row['condition_ast'])})
+        self.assertIsNotNone(result.truth)
+        return result
 
     def test_unregistered_order_computes_from_its_own_stated_term(self):
         at, notified = date(2024, 9, 2), datetime(2024, 9, 2, 9, tzinfo=ROME)
@@ -87,10 +97,35 @@ class StatedTermRule(unittest.TestCase):
         record = dict(DDS108, instrument='REG-PUGLIA-U181-DIR-2024-00147')
         at, notified = date(2024, 12, 2), datetime(2024, 12, 2, 9, tzinfo=ROME)
         evaluated = notified + timedelta(days=12)
-        self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, coerce=True),
+        reached = dict(refs=(CORRECTION_165,), results={CORRECTION_165: self.settled(CORRECTION_165, at)})
+        self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, coerce=True, **reached),
                          'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
-        self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, coerce=False),
+        self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, coerce=False, **reached),
                          'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
+
+    def test_correction_holds_the_order_it_corrects(self):
+        # DDS 165/2024 replaces DDS 147/2024's annex 1/C; DDS 11/2025 replaces owners listed in DDS 188/2024.
+        # A record that omits the correction leaves lawful dueness unknown, so no direction follows.
+        for instrument, correction, at in (('REG-PUGLIA-U181-DIR-2024-00147', CORRECTION_165, date(2024, 12, 2)),
+                                           ('REG-PUGLIA-U181-DIR-2024-00188', CORRECTION_11, date(2025, 3, 3))):
+            with self.subTest(instrument=instrument):
+                record = dict(DDS108, instrument=instrument)
+                notified = datetime.combine(at, datetime.min.time(), ROME).replace(hour=9)
+                evaluated = notified + timedelta(days=12)
+                self.assertIn(instrument, self.s.version(correction, at)['corrects_instrument_ids'])
+                own = tuple(need.removeprefix('governing A reference: ') for need in lawfully_due(
+                    self.s, at, instrument=instrument, governing_references=(), results={}, reading=True).needs
+                    if need != f'governing A reference: {correction}')
+                results = {sid: self.settled(sid, at) for sid in own + (correction,)}
+                due = lawfully_due(self.s, at, instrument=instrument, governing_references=own, results=results,
+                                   reading=True)
+                self.assertIsNone(due.truth)
+                self.assertEqual(due.needs, {f'governing A reference: {correction}'})
+                self.assertIsNone(self.effect(record, at, notified=notified, evaluated=evaluated, refs=own,
+                                              results=results))
+                self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated,
+                                             refs=own + (correction,), results=results),
+                                 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
 
     def test_case_delta_of_the_instrument_holds_lawful_dueness(self):
         hold = 'REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold'

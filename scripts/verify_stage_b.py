@@ -103,16 +103,30 @@ def source_value_matches(parameter):
         return True
     return False
 
-def clock_value_matches(clock):
-    """Bounded lexical checks of stated quantities, not a legal or calendar-arithmetic engine."""
+def clock_value_matches(clock, unit_words=None):
+    """Bounded lexical checks of stated quantities, not a legal or calendar-arithmetic engine.
+
+    B's `clock.unit_words` convention owns the unit words it maps; the lists below
+    hold only the other words fixed clocks' phrases print.
+    """
     text = norm(clock['source_phrase'])
     words = '|'.join(NUMBER_WORDS)
-    units = {'hours': r'ore|hours?', 'calendar_days': r'gg|giorni(?! lavorativi)|days?(?! working)',
-             'working_days': r'(?:giorni|gg) lavorativi|working days?', 'months': r'mesi|months?', 'years': r'anni|years?'}
+    units = {'hours': ['ore', 'hours?'], 'calendar_days': ['gg', 'days?(?! working)'],
+             'working_days': ['(?:giorni|gg) lavorativi', 'working days?'], 'months': ['mesi', 'months?'], 'years': ['anni', 'years?']}
+    if unit_words is None:
+        unit_words = json.loads(B.read_text(encoding='utf-8'))['conventions']['clock.unit_words']
+    for word, unit in unit_words.items():
+        units[unit].append(re.escape(word))
     if isinstance(clock['magnitude'], str):
         if clock['unit'] not in units: return False
-        matches = [m for m in re.finditer(rf'\b({NUMBER}|{words})\s+(?:{units[clock["unit"]]})\b', text)
-                   if decimal(NUMBER_WORDS.get(m[1], m[1])) == Decimal(clock['magnitude'])]
+        # A stated number takes the longest unit phrase after it, so "giorni lavorativi" is never "giorni".
+        stated = {}
+        for unit, alternatives in units.items():
+            for m in re.finditer(rf'\b({NUMBER}|{words})\s+(?:{"|".join(alternatives)})\b', text):
+                if m.start() not in stated or m.end() > stated[m.start()][1].end():
+                    stated[m.start()] = (unit, m)
+        matches = [m for unit, m in stated.values()
+                   if unit == clock['unit'] and decimal(NUMBER_WORDS.get(m[1], m[1])) == Decimal(clock['magnitude'])]
         if not matches: return False
         if clock['kind'] in ('not_before', 'eligibility_threshold'):
             if clock['bound'] != 'floor': return False
@@ -175,6 +189,9 @@ def main(ledger_path=B, stage_a_paths=None, population_path=POPULATION):
     b = json.loads(ledger_path.read_text(encoding='utf-8'))
     if b.get('schema') != 'stage-b-essence-v6': fail('schema tag')
     if 'stage_a_inputs' in b: fail('canonical carries source paths/hashes; integrity metadata belongs in generation-status.json (essence-only boundary)')
+    unit_words = b['conventions'].get('clock.unit_words')
+    if not isinstance(unit_words, dict) or not set(unit_words.values()) <= UNITS - {None, 'indefinite'}:
+        fail('clock.unit_words maps printed unit words to B units')
     A = {}
     for p in stage_a_paths:
         for r in json.loads(p.read_text(encoding='utf-8')): A[r['provision_version_id']] = r
@@ -267,7 +284,7 @@ def main(ledger_path=B, stage_a_paths=None, population_path=POPULATION):
                 if r['kind'] in ('not_before', 'eligibility_threshold') and r['bound'] != 'floor': fail(f'{rid}: {r["kind"]} is a floor')
                 if r['kind'] in ('eligibility_threshold', 'lookback_window') and r['completion']['kind'] == 'a_effect':
                     fail(f'{rid}: a threshold or lookback completes on its own evidenced condition, not the downstream decision')
-                if not clock_value_matches(r): fail(f'{rid}: clock quantity or calendar date is not evidenced by source_phrase')
+                if not clock_value_matches(r, unit_words): fail(f'{rid}: clock quantity or calendar date is not evidenced by source_phrase')
                 if r['kind'] == 'ordering_constraint' and not r['relation']: fail(f'{rid}: ordering needs relation')
                 if r['kind'] == 'same_calendar_day' and (m is not None or r['unit'] is not None): fail(f'{rid}: same_calendar_day carries no magnitude')
                 if r['kind'] == 'promptness_standard' and (m is not None or r['unit'] != 'indefinite'): fail(f'{rid}: promptness standard is open')

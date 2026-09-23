@@ -3,7 +3,7 @@
   "seam": 3,
   "reviewer": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
-  "accepted_content_sha256": "a55588c8794f83b0a562220f8c432c93df8b98be93db9f7ccb889201d4a53434",
+  "accepted_content_sha256": "ccd2b207c787246fcb531718be0411947c9aaf233e51cf5adfde2307208d40b8",
   "preceding_acceptance": {
     "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-stage-c-seam-3.json",
     "record_sha256": "c38e95e10ffec78827ebee7365d576713c5ee479720e665f2ff640be54a53b69"

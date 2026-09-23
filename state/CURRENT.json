@@ -17,10 +17,10 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "603e9bd4ed342b39d21c3d855e9f0b67ed2bfc1ab058c4035a58cb0ddd57c7fd",
+          "sha256": "3e0ee815de5957e43bdf446100266c0b28cf9406660967c5b22464cd193cb361",
           "provision_versions": 425,
           "national_prefix_rows": 220,
-          "national_prefix_sha256": "8f6ebfedb78e26019b656a16b65303b25cab8a8d67a87399dcb86ea6a2f2a0b7"
+          "national_prefix_sha256": "a8351f7eb868b735a7cc53fa1f96db90747059ab913cf5e8f5bdad0b8471de63"
         }
       },
       "bounded_unknowns": [
@@ -35,7 +35,7 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "332ee1e4fd1a81dd3064ff404699568cdb7c732f63500ff4c8675fd54160d06e",
+        "sha256": "8636ec128ab6965d9cedeb9eb3712140d49e66018ba81818828129a0ba26d9a6",
         "schema": "stage-b-essence-v6",
         "counts": {
           "clocks": 125,
