@@ -179,6 +179,16 @@ class CasePrescriptionRecords(unittest.TestCase):
         self.assertEqual(composed['recipients'], ('il nuovo proprietario',))
         self.assertEqual(composed['stated_term'], ('10', 'giorni'))
         self.assertIs(clause(composed), True)
+        # A bulletin copy and a posted copy of the referenced order that read the same clause
+        # are one clause; copies that read it differently leave the work unknown.
+        copy_same = dict(order, occurrence='c' * 64 + ':clause:0', source='c' * 64,
+                         coercive_population=' ' + order['coercive_population'])
+        twice = [r for r in apply_references([order, copy_same, own]) if r['occurrence'] == own['occurrence']][0]
+        self.assertEqual(twice['stated_term'], ('10', 'giorni'))
+        copy_other = dict(copy_same, stated_term=('15', 'giorni'))
+        split = [r for r in apply_references([order, copy_other, own]) if r['occurrence'] == own['occurrence']][0]
+        self.assertIsNone(split['stated_term'])
+        self.assertIsNone(clause(split).truth)
 
     def test_a_clause_reading_limit_leaves_the_clause_unknown(self):
         record = dict(next(reading().records(self.s)), limits=('term words cut at the page edge',))

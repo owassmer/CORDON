@@ -234,6 +234,13 @@ class PrescriptionReading:
                 coercive_words=None, executor=None, limits=(), support=tuple(item['support']))
 
 
+def _clause_terms(record):
+    """What a composed record takes from the referenced clause, whitespace and quotes aside."""
+    return (tuple(_plain(part) for part in record['stated_term']), record['anchor']['kind'],
+            record['commitment'], _plain(record['commencement_population']),
+            _plain(record['coercive_population']), _plain(record['executor']))
+
+
 def apply_references(records):
     """Compose work applied by reference with the referenced order's own clause record.
 
@@ -253,7 +260,9 @@ def apply_references(records):
             yield record
             continue
         found = clauses.get(reference, ())
-        if len(found) != 1:
+        # Retained copies of the same order (a bulletin copy and a posted copy) that read the
+        # same clause are one clause; copies that read it differently leave the work unknown.
+        if len({_clause_terms(r) for r in found}) != 1:
             yield record
             continue
         base = found[0]
