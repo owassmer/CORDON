@@ -260,7 +260,8 @@ def layers(args):
     from cordon_d.area_geometry import Sources, adopted_geography, region_layer_samples, REGION_REACH_M
     sources = Sources(ROOT)
     out = []
-    for geography in adopted_geography(ROOT, decision=date.fromisoformat(args.decision), sources=sources):
+    for geography in adopted_geography(ROOT, decision=date.fromisoformat(args.decision), sources=sources,
+                                       only=set(args.version)):
         for record, samples in region_layer_samples(sources, geography):
             distances = numpy.array([d for _, _, d in samples])
             out.append({'kind': 'positional-error', 'source': 'region-layer', 'layer': record['layer'],
@@ -277,7 +278,8 @@ def layers(args):
                         'script': 'scripts/measure_positional_error.py',
                         'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')})
             print(record['layer'], record['name'], out[-1]['error_m'])
-    _replace(lambda r: r['kind'] == 'positional-error' and r['source'] == 'region-layer', out)
+    _replace(lambda r: (r['kind'] == 'positional-error' and r['source'] == 'region-layer'
+                        and r['provision_version_id'] in args.version), out)
 
 
 def main():
@@ -290,6 +292,8 @@ def main():
     ist.add_argument('comuni', nargs='+', help='cadastral codes of the comuni whose outline ISTAT draws')
     lay = sub.add_parser('layers')
     lay.add_argument('--decision', default='2026-09-22')
+    lay.add_argument('version', nargs='+', help='the provision version ids whose layers are measured, one '
+                     'version per run to bound memory')
     args = parser.parse_args()
     {'windows': windows, 'measure': measure, 'istat': istat, 'layers': layers}[args.command](args)
 

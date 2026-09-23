@@ -153,16 +153,33 @@ class AdministrativeUnits:
 
     @cached_property
     def _archive(self):
-        return ZipFile(BytesIO(_blob(self.root, self.boundaries_record).read_bytes()))
+        return ZipFile(_blob(self.root, self.boundaries_record))
+
+    @cached_property
+    def _extracted(self) -> Path:
+        """A private directory the shapefile members are read from: pyshp reads a shape by
+        seeking, so the members stay on disk rather than in memory."""
+        import tempfile
+        import weakref
+        import shutil
+        directory = Path(tempfile.mkdtemp(prefix='istat-'))
+        weakref.finalize(self, shutil.rmtree, directory, True)
+        return directory
 
     def _reader(self, member):
         import shapefile
         stem = member[:-4]
         archive = self._archive
         projection = archive.read(stem + '.prj').decode('utf-8-sig')
-        reader = shapefile.Reader(shp=BytesIO(archive.read(member)), shx=BytesIO(archive.read(stem + '.shx')),
-                                  dbf=BytesIO(archive.read(stem + '.dbf')),
-                                  encoding=self.boundaries_record['encoding'])
+        paths = {}
+        for suffix in ('.shp', '.shx', '.dbf'):
+            path = self._extracted / Path(stem + suffix).name
+            if not path.exists():
+                with archive.open(stem + suffix) as source, path.open('wb') as target:
+                    while chunk := source.read(1 << 20):
+                        target.write(chunk)
+            paths[suffix[1:]] = path.open('rb')
+        reader = shapefile.Reader(**paths, encoding=self.boundaries_record['encoding'])
         transformer = Transformer.from_crs(CRS.from_wkt(projection), CRS.from_user_input(TARGET_CRS),
                                            always_xy=True, allow_ballpark=False, only_best=True)
         return reader, transformer

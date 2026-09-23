@@ -17,12 +17,11 @@ result rendered per unit, not drawn lines:
   to land; outward for a buffer zone, inward for a zone under containment measures from the
   zone's border with the buffer zone (Article 15(2)(a): "from the border of the infected
   zone with the buffer zone");
-- a radius the act states around the infected plants it names: their positions offset at
-  the width. The act establishes each plant (`official-finding`) and places it by the unit
-  it lists for the plant's zone: the plant lies within the radius of that sheet or parcel.
-  Its position is the centre of the unit's smallest enclosing circle, its error that
-  circle's radius plus the radius. A located row 1 positive with a measured error (INPUTS
-  row 1) places a plant more closely and replaces the units it reaches.
+- a radius the act states around the infected plants it names: the places that hold them
+  offset at the width. The act establishes each plant (`official-finding`) and places it
+  by the units it lists for the plant's zone: each parcel it lists, with the cadastre's
+  local error there; the sheet only where it lists the sheet alone. A row 1 positive with
+  its measured error (INPUTS row 1) places a plant where the listed unit is not held.
 
 A width is B's: the act's own figure where it states one, B's floor where it states
 "almeno" or applies the Regulation without a figure. A unit the annex places wholly in a
@@ -108,10 +107,14 @@ class Unplaced:
 
 @dataclass(frozen=True)
 class Plant:
-    """An infected plant the act names, at a position with its error."""
-    x: float
-    y: float
-    error_m: float | None                  # None: a position without a measured error
+    """An infected plant the act names: the place that holds it, with that place's error.
+
+    The place is the parcel the act lists, the sheet where the act lists the sheet alone,
+    or a point: coordinates at their printed precision, or a row 1 positive with its
+    measured error.
+    """
+    geometry: BaseGeometry | None          # None: the listed unit is not held
+    error_m: float | None                  # None: a place without a measured error
     by: str                                # the unit or observation that places it
 
 
@@ -302,18 +305,56 @@ def polygonal(geometry: BaseGeometry | None) -> BaseGeometry | None:
     return shapely.union_all(parts) if parts else shapely.Polygon()
 
 
+# A seal is local: closing a seam moves no line farther than the mitre limit (5) times half
+# the seam width. A large geometry is sealed tile by tile, each tile read with a margin well
+# beyond that reach, so the result is the same and memory stays bounded by a tile.
+SEAL_TILE_M = 10_000.0
+SEAL_MARGIN_M = 20 * SEAM_M
+SEAL_TILED_ABOVE = 50_000               # coordinates
+
+
+def _sealed(geometry: BaseGeometry) -> BaseGeometry:
+    closed = geometry.buffer(SEAM_M / 2, join_style='mitre').buffer(-SEAM_M / 2, join_style='mitre')
+    return shapely.union_all([geometry, closed])
+
+
 def seal(geometry: BaseGeometry) -> BaseGeometry:
     """Close the seams narrower than SEAM_M between drawn sheets; they are not territory."""
-    closed = geometry.buffer(SEAM_M / 2, join_style='mitre').buffer(-SEAM_M / 2, join_style='mitre')
-    return polygonal(shapely.union_all([geometry, closed]))
+    if geometry.is_empty or shapely.get_num_coordinates(geometry) <= SEAL_TILED_ABOVE:
+        return polygonal(_sealed(geometry))
+    xmin, ymin, xmax, ymax = geometry.bounds
+    pieces = []
+    for x in numpy.arange(xmin, xmax, SEAL_TILE_M):
+        for y in numpy.arange(ymin, ymax, SEAL_TILE_M):
+            part = shapely.clip_by_rect(geometry, x - SEAL_MARGIN_M, y - SEAL_MARGIN_M,
+                                        x + SEAL_TILE_M + SEAL_MARGIN_M, y + SEAL_TILE_M + SEAL_MARGIN_M)
+            if part.is_empty:
+                continue
+            piece = polygonal(shapely.clip_by_rect(_sealed(shapely.make_valid(part)), x, y,
+                                                   x + SEAL_TILE_M, y + SEAL_TILE_M))
+            if not piece.is_empty:
+                pieces.append(piece)
+    return polygonal(shapely.union_all(pieces))
 
 
 class Sources:
-    """The retained geometry sources, measured errors and A/B inputs, read from their records."""
+    """The retained geometry sources, measured errors and A/B inputs, read from their records.
 
-    def __init__(self, root: Path):
+    `comuni`, when given, bounds the cadastral records read to those comuni (cadastral
+    codes): a caller that builds one comune's units reads that comune's sheets and parcels,
+    not the population. Without it every held record is read.
+    """
+
+    def __init__(self, root: Path, comuni=None):
         self.root = Path(root)
+        self.comuni = None if comuni is None else frozenset(comuni)
         self._unpublished, self._extent = {}, {}
+
+    def _records(self, kind) -> list[dict]:
+        found = records(self.root, kind)
+        if self.comuni is None:
+            return found
+        return [r for r in found if r.get('selection', {}).get('comune') in self.comuni]
 
     @cached_property
     def administrative(self) -> AdministrativeUnits:
@@ -327,19 +368,32 @@ class Sources:
         (allegato) and development (sviluppo) it carries. Where a release repeats one
         identity, the repeats are one feature.
         """
+        import hashlib
         found, seen = {}, set()
-        for record in records(self.root, 'cadastre-fogli'):
+        for record in self._records('cadastre-fogli'):
             body = _blob(self.root, record).read_bytes()
             features = (_inspire_zoning(body, record) if record['format'] == 'inspire-gml'
                         else _arcgis_sheets(body, record))
+            del body
             for a, geometry in features:
                 identity = (a['COMUNE'], a['SEZIONE'], a['FOGLIO'], a['ALLEGATO'], a['SVILUPPO'],
-                            geometry.wkb if record['format'] != 'inspire-gml' else None)
+                            hashlib.sha1(geometry.wkb).digest() if record['format'] != 'inspire-gml' else None)
                 if identity in seen:
                     continue
                 seen.add(identity)
                 found.setdefault((a['COMUNE'], a['SEZIONE'], a['FOGLIO']), []).append((a, geometry))
         return found
+
+    @cached_property
+    def _sheet_index(self):
+        """An STRtree over every held sheet, for the sheets near a place."""
+        geometries = [g for found in self.sheets.values() for _, g in found]
+        return shapely.STRtree(geometries), geometries
+
+    def sheets_near(self, geometry: BaseGeometry) -> list:
+        """The held sheets whose extent meets `geometry`'s envelope."""
+        tree, geometries = self._sheet_index
+        return [geometries[i] for i in tree.query(geometry.envelope)]
 
     @cached_property
     def held(self) -> frozenset:
@@ -349,7 +403,7 @@ class Sources:
     @cached_property
     def parcels(self) -> dict:
         found = {}
-        for record in records(self.root, 'cadastre-particelle'):
+        for record in self._records('cadastre-particelle'):
             document = json.loads(_blob(self.root, record).read_bytes())
             for feature in document['features']:
                 a = feature['attributes']
@@ -404,20 +458,23 @@ class Sources:
         key = ('outline', code)
         if key not in self._extent:
             territory = self.administrative.comune_geometry(self.administrative.comune(catastale=code))
-            near = [g for (c, _, _), found in self.sheets.items() for _, g in found
-                    if g.intersects(territory.envelope)]
+            near = self.sheets_near(territory)
             self._extent[key] = seal(shapely.union_all([shapely.make_valid(g) for g in near])).boundary.buffer(5.0)
         return self._extent[key]
 
-    @cached_property
-    def region_layers(self) -> dict:
-        """(provision version, role) -> (record, geometry) of the Region's published layer."""
-        out = {}
-        for record in records(self.root, 'region-layer'):
-            document = json.loads(_blob(self.root, record).read_bytes())
-            geometry = shapely.union_all([_esri_polygon(f['geometry']) for f in document['features']])
-            out[(record['provision_version_id'], record['role'])] = (record, shapely.make_valid(geometry))
-        return out
+    def region_layer(self, version_id, role):
+        """(record, geometry) of the Region's published layer for a version's zone, or None."""
+        key = ('region-layer', version_id, role)
+        if key not in self._extent:
+            found = [r for r in records(self.root, 'region-layer')
+                     if (r['provision_version_id'], r['role']) == (version_id, role)]
+            layer = None
+            if found:
+                document = json.loads(_blob(self.root, found[0]).read_bytes())
+                geometry = shapely.union_all([_esri_polygon(f['geometry']) for f in document['features']])
+                layer = (found[0], shapely.make_valid(geometry))
+            self._extent[key] = layer
+        return self._extent[key]
 
     @cached_property
     def region_errors(self) -> dict:
@@ -469,19 +526,29 @@ class Sources:
             self._extent[key] = (seal(shapely.union_all(parts)), tuple(sorted(used)))
         return self._extent[key]
 
-    @cached_property
-    def cadastral_land(self) -> BaseGeometry:
-        """The territory of every comune whose sheets are held."""
-        units = self.administrative
-        return shapely.union_all([self.comune_extent(units.comune(catastale=c))[0] for c in sorted(self.held)])
+    def cadastral_near(self, geometry: BaseGeometry) -> BaseGeometry:
+        """The held sheets' territory near `geometry`, its seams closed."""
+        sheets = [shapely.make_valid(g) for g in self.sheets_near(geometry.buffer(SEAM_M).envelope)]
+        return seal(shapely.union_all(sheets)) if sheets else shapely.Polygon()
 
     @cached_property
-    def land(self) -> BaseGeometry:
-        """Land a band may cover: ISTAT's regions and every held sheet. It only stops a band at
-        the sea; a band's limits on land are its distance from its origin."""
+    def _land_provinces(self) -> list:
         units = self.administrative
         parts = [units.province_geometry(p) for p in units.provinces.values() if p.region in LAND_REGIONS]
-        return shapely.union_all([p for p in parts if p is not None] + [self.cadastral_land])
+        return [p for p in parts if p is not None]
+
+    def land_near(self, origin: BaseGeometry, metres: float) -> BaseGeometry:
+        """Land a band of `metres` from `origin` may cover: ISTAT's provinces of LAND_REGIONS and
+        every held sheet, within the band's reach. It only stops a band at the sea; a band's
+        limits on land are its distance from its origin."""
+        xmin, ymin, xmax, ymax = origin.bounds
+        reach = metres + 2 * APPROXIMATION_M + SEAM_M
+        window = shapely.box(xmin - reach, ymin - reach, xmax + reach, ymax + reach)
+        parts = [shapely.clip_by_rect(p, *window.bounds) for p in self._land_provinces]
+        sheets = [shapely.make_valid(g) for g in self.sheets_near(window)]
+        if sheets:
+            parts.append(seal(shapely.union_all(sheets)))
+        return polygonal(shapely.union_all([p for p in parts if not p.is_empty]))
 
     def unpublished(self, comune) -> tuple[tuple[str, ...], BaseGeometry | None]:
         """The comune's sheets neither cadastre publishes, and the territory they occupy.
@@ -503,8 +570,7 @@ class Sources:
         if not missing:
             return (), None
         territory = self.administrative.comune_geometry(comune)
-        near = [g for (c, _, _), found in self.sheets.items() for _, g in found
-                if g.intersects(territory.envelope)]
+        near = self.sheets_near(territory)
         gap = territory.difference(seal(shapely.union_all([shapely.make_valid(g) for g in near])))
         gap = gap.buffer(-50, join_style='mitre').buffer(50, join_style='mitre').intersection(gap)
         pieces = [p for p in getattr(gap, 'geoms', [gap]) if p.geom_type == 'Polygon' and p.area > 0]
@@ -780,7 +846,7 @@ class _Builder:
         return (seal(shapely.union_all(parts)) if parts else None), tuple(unplaced)
 
     def units_of(self, statements):
-        """Each unit the statements list: (label, geometry or None). A parcel where held, else its sheet."""
+        """Each unit the statements list: (label, geometry or None). Each listed parcel, else the sheet."""
         for s in statements:
             if s.scope == 'whole-province':
                 yield s.province, self.province(s.province)
@@ -794,17 +860,15 @@ class _Builder:
                 continue
             for sheet in s.sheets:
                 label = f"{comune.name} {'sezione ' + sheet.section + ' ' if sheet.section else ''}foglio {sheet.number}"
+                if sheet.parcels:
+                    for n in sheet.parcels:
+                        g = self.sources.parcels.get((comune.catastale, sheet.section or '', sheet.number, n))
+                        yield f'{label} particella {n}', shapely.union_all(g) if g else None
+                    continue
                 try:
-                    whole = self.sheet(comune, sheet)[0]
+                    yield label, self.sheet(comune, sheet)[0]
                 except ValueError:
-                    whole = None
-                parcels = [(n, self.sources.parcels.get((comune.catastale, sheet.section or '', sheet.number, n)))
-                           for n in sheet.parcels]
-                if parcels and all(g for _, g in parcels):
-                    for n, g in parcels:
-                        yield f'{label} particella {n}', shapely.union_all(g)
-                else:
-                    yield label, whole
+                    yield label, None
 
     def words(self, role):
         return tuple(dict.fromkeys(s.zone_heading for s in self.by_role[role]))
@@ -856,40 +920,41 @@ def _plant_statements(sources: Sources, version, build, role, operative):
 def act_plants(sources: Sources, version, role, radius_m, *, build=None, operative=None) -> tuple[Plant, ...]:
     """The plants the act names for a plant-defined role, each placed by the unit it lists.
 
-    Each listed unit meets a plant's radius, so a plant lies within `radius_m` of the unit.
-    Its position is the centre of the unit's smallest enclosing circle; its error is that
-    circle's radius plus `radius_m`.
+    The act lists the units its plants' zone reaches: the parcels, where it lists them
+    ("particelle catastali ricadenti nel buffer di 50 metri dalle piante risultate
+    infette"), else the sheets. A plant is placed by each listed unit: the parcel's or
+    sheet's geometry, with the cadastre's measured error there. A unit the cadastre does
+    not hold places nothing (geometry None).
     """
     build = build or _Builder(sources, version)
     operative = operative or dispositivo(_act_text(sources.root, version.source_path))
+    field = sources.cadastral_error
     found = []
     for label, geometry in build.units_of(_plant_statements(sources, version, build, role, operative)):
         if geometry is None or geometry.is_empty:
-            found.append(Plant(float('nan'), float('nan'), None, label))
+            found.append(Plant(None, None, label))
             continue
-        circle = shapely.minimum_bounding_circle(geometry)
-        centre = circle.centroid
-        found.append(Plant(centre.x, centre.y, shapely.minimum_bounding_radius(geometry) + radius_m, label))
+        error = None
+        if field is not None:
+            error = float(numpy.max(field.at(shapely.get_coordinates(shapely.convex_hull(geometry)))))
+        found.append(Plant(geometry, error, label))
     return tuple(found)
 
 
 def _plants(sources, version, role, radius_m, supplied, build, operative) -> tuple[Plant, ...]:
-    """The act's plants, with a supplied plant (row 1, with its error) in place of each unit it reaches."""
+    """The act's plants; where a listed unit is not held, the supplied row 1 plants (with their
+    errors) that the act names."""
     listed = act_plants(sources, version, role, radius_m, build=build, operative=operative)
-    supplied = tuple(p if isinstance(p, Plant) else Plant(p[0], p[1], p[2] if len(p) > 2 else None, 'row 1')
+    supplied = tuple(p if isinstance(p, Plant) else Plant(Point(p[0], p[1]), p[2] if len(p) > 2 else None, 'row 1')
                      for p in supplied or ())
-    if not supplied:
+    placed = tuple(p for p in listed if p.geometry is not None)
+    if len(placed) == len(listed) or not supplied:
         return listed
-    points = [Point(p.x, p.y) for p in supplied]
-    units = dict(build.units_of(_plant_statements(sources, version, build, role, operative)))
-    kept = tuple(p for p in listed
-                 if units.get(p.by) is None or not any(units[p.by].distance(q) <= radius_m for q in points))
-    return supplied + kept
+    return placed + supplied
 
 
 def _circles(plants, metres) -> BaseGeometry | None:
-    located = [Point(p.x, p.y) for p in plants if p.error_m is not None or p.by == 'row 1']
-    located = [q for q in located if not numpy.isnan(q.x)]
+    located = [p.geometry for p in plants if p.geometry is not None]
     if not located:
         return None
     return _envelope(shapely.union_all(located), metres).geometry
@@ -899,11 +964,11 @@ def _plant_errors(plants, reach_m) -> tuple[ErrorPart, ...]:
     """Each plant bounds the outline it draws: within its reach plus its error of its position."""
     out = []
     for p in plants:
-        if numpy.isnan(p.x):
+        if p.geometry is None:
             out.append(ErrorPart('plants', None, None))
         else:
-            out.append(ErrorPart('plants', Point(p.x, p.y).buffer(reach_m + (p.error_m or 0) + 2 * APPROXIMATION_M,
-                                                                  quad_segs=8), p.error_m))
+            out.append(ErrorPart('plants', p.geometry.buffer(reach_m + (p.error_m or 0) + 2 * APPROXIMATION_M,
+                                                             quad_segs=8), p.error_m))
     return tuple(out)
 
 
@@ -923,7 +988,7 @@ def _source_errors(sources: Sources, used, build=None) -> tuple[ErrorPart, ...]:
 
 def _drawn(sources: Sources, version, role, unplaced):
     """The parts of partly-placed units the Region's layer supplies: (geometry, still unplaced, error parts)."""
-    layer = sources.region_layers.get((version.provision_version_id, role))
+    layer = sources.region_layer(version.provision_version_id, role)
     if layer is None or not unplaced:
         return None, unplaced, ()
     record, geometry = layer
@@ -937,6 +1002,17 @@ def _drawn(sources: Sources, version, role, unplaced):
     return drawn, tuple(u for u in unplaced if u.geometry is None), (part,)
 
 
+def buffer_extent(sources: Sources, origins, annexed=None, drawn=None) -> BaseGeometry | None:
+    """The buffer zone: land within each origin's width, the units the annex places wholly in
+    it and the parts the Region's layer supplies, outside the origins. `origins` is
+    [(geometry, metres)]."""
+    inner = _union(*(o for o, _ in origins))
+    if inner is None:
+        return None
+    return _union(*(outward_band(o, m, sources.land_near(o, m)) for o, m in origins if o is not None),
+                  annexed, drawn).difference(inner)
+
+
 def construct(sources: Sources, version, *, plants=None, adopted: date | None = None) -> tuple[Zone, ...]:
     """The zones of one version, each from its operative rule or, failing one, its annex.
 
@@ -947,7 +1023,6 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
     operative = dispositivo(_act_text(sources.root, version.source_path))
     rules = read_rules(sources, version, operative)
     build = _Builder(sources, version)
-    land = sources.land
     roles = plant_roles(sources, version)
     floor = _metres(sources.parameters[INFECTED_RADIUS]['value'], sources.parameters[INFECTED_RADIUS]['unit'])
     eradication = _metres(sources.parameters[ERADICATION_BUFFER]['value'],
@@ -1002,7 +1077,6 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         focus = zones.get('focus')
         if focus is not None and focus.geometry is not None:
             origins.append((focus.geometry, eradication))
-        inner = _union(*(o for o, _ in origins))
         # Each unit the annex places wholly in the buffer is in it. A unit it places partly
         # is placed by the width the act states; where it states none, B's floor is only a
         # minimum, and the Region's layer places the part.
@@ -1013,10 +1087,7 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
             if annexed is not None:
                 quote = f'{quote}, with the units its annex places wholly in it'
         drawn, partial, drawn_errors = _drawn(sources, version, 'buffer', partial)
-        geometry = None
-        if inner is not None:
-            geometry = _union(*(outward_band(o, m, land) for o, m in origins if o is not None),
-                              annexed, drawn).difference(inner)
+        geometry = buffer_extent(sources, origins, annexed, drawn)
         used = {s for z in zones.values() for s in z.sources} | build.used
         used |= {'region-layer'} if drawn is not None else set()
         errors = tuple(p for z in zones.values() for p in z.errors) + _source_errors(sources, build.used, build) \
@@ -1036,7 +1107,7 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         former = None
         if rules.former:
             zone = build.annex_iii(adopted or version.effective_from)
-            former = inward_band(zone, rules.former[0], land.difference(zone))
+            former = inward_band(zone, rules.former[0], sources.land_near(zone, SEAM_M).difference(zone))
         used = set(build.used)
         zones['containment'] = Zone('containment', build.words('containment'), _union(*named, part, former),
                                     rules.quotes[0], tuple(sorted(used)),
@@ -1050,7 +1121,7 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         metres, width, quote = rules.inward
         buffer = zones.get('buffer')
         band = inward_band(infected, metres, buffer.geometry if buffer and buffer.geometry is not None
-                           else land.difference(infected))
+                           else sources.land_near(infected, SEAM_M).difference(infected))
         listed, partial = None, ()
         if build.by_role['containment']:
             listed, partial = build.annex('containment', build.by_role['containment'])
@@ -1074,11 +1145,11 @@ def region_layer_samples(sources: Sources, geography: AdoptedGeography):
     away from the units the act places partly (whose part the layer itself supplies)."""
     out = []
     for zone in geography.zones:
-        layer = sources.region_layers.get((geography.provision_version_id, zone.role))
+        layer = sources.region_layer(geography.provision_version_id, zone.role)
         if layer is None or zone.listed is None or zone.geometry is None:
             continue
         record, drawn = layer
-        outside = sources.cadastral_land.difference(zone.geometry.buffer(APPROXIMATION_M))
+        outside = sources.cadastral_near(zone.listed).difference(zone.geometry.buffer(APPROXIMATION_M))
         edge = zone.listed.boundary.intersection(zone.geometry.boundary.buffer(APPROXIMATION_M))
         edge = edge.intersection(outside.buffer(2 * APPROXIMATION_M))
         partial = [u.geometry for u in zone.unplaced if u.geometry is not None]
@@ -1129,8 +1200,10 @@ def in_reach(version, start: date, decision: date) -> bool:
 
 
 def adopted_geography(root: Path, *, decision: date, plants=None, plant_error_m: float | None = None,
-                      sources: Sources | None = None):
-    """Every consumed, in-reach A area version's `adopted-geography`, in A's order.
+                      sources: Sources | None = None, only=None):
+    """Every consumed, in-reach A area version's `adopted-geography`, in A's order; with
+    `only`, those of the listed provision version ids. Each is built when it is reached, so
+    a caller that keeps one at a time holds one version's geometry.
 
     `plants` maps a provision version id to `named_plants`' result for it: per
     plant-defined role, the (x, y) EPSG:32633 positions of the row 1 positives that are the
@@ -1147,6 +1220,8 @@ def adopted_geography(root: Path, *, decision: date, plants=None, plant_error_m:
         adopted[v.instrument_id] = min(adopted.get(v.instrument_id, v.effective_from), v.effective_from)
     for version in all_versions:
         if not version.consumed or not in_reach(version, start, decision):
+            continue
+        if only is not None and version.provision_version_id not in only:
             continue
         if version.statements is None:
             raise FileNotFoundError(f'{version.provision_version_id}: the act document is not in this store')
