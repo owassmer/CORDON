@@ -34,13 +34,13 @@ A unit converges when the adjudicator can write, on the pull request, why the re
 
 Convergence is not three PASS returns, a passing suite, a round count, or exhaustion. Checks establish narrow mechanical claims; they never define the unit's quality. No reviewer is expected to return a finding count or meet a threshold. The adjudication names the commit it judged; a later commit reopens the judgment.
 
-A further implementation round follows only when a repair changed meaning or a material risk remains open, and rounds continue until the judgment can be written. A falling residual is not that judgment, and neither is a round count. A unit the adjudicator still cannot judge after repeated rounds is re-planned rather than reviewed again; whether recurrence across rounds indicts the structure is decided under `DESIGN_PRINCIPLES.md`, "Minimum sufficient structure", which asks first whether the earlier rule was sound and merely unapplied.
+A further implementation round follows only when a repair changed meaning or a material risk remains open, and rounds continue until the judgment can be written. A later round resumes each reviewer's own session with the round brief and the adjudication of its previous round. The reviewer that raised a finding knows what it meant, so it can tell a faithful cure from a cosmetic one; it still reads the whole change again. Fresh reviewers in every round sample new objections and never judge whether the earlier ones were cured. A fresh reviewer replaces a resumed one when the unit is re-planned, or when the adjudication finds that reviewer's own framing is what prevents judgment. A second plan review resumes the plan reviewer the same way. A falling residual is not that judgment, and neither is a round count. A unit the adjudicator still cannot judge after repeated rounds is re-planned rather than reviewed again; whether recurrence across rounds indicts the structure is decided under `DESIGN_PRINCIPLES.md`, "Minimum sufficient structure", which asks first whether the earlier rule was sound and merely unapplied.
 
 Owen merges the pull request. Merge accepts the unit's content as reviewed; changed content needs its own acceptance.
 
 ## Briefs
 
-Supply only the pull request number, the checkout path and, for implementation review, the assigned facet. PASS means no finding within the reviewer's stated coverage; it is a coverage statement, not a verdict. Reports go on the pull request as comments, one per reviewer and one adjudication. Nothing from a review enters the tree.
+Supply only the pull request number and commit, the checkout path, for implementation review the assigned facet, and for a later round the adjudication it answers. PASS means no finding within the reviewer's stated coverage; it is a coverage statement, not a verdict. Reports go on the pull request as comments, one per reviewer and one adjudication. Nothing from a review enters the tree.
 
 Plan brief:
 
@@ -49,3 +49,7 @@ Plan brief:
 Implementation brief:
 
 > Review independently under AGENTS.md, DESIGN_PRINCIPLES.md, the applicable STAGE_BOUNDARIES.md contract, REVIEW_PRINCIPLES.md and state/CURRENT.json. The unit's plan is the body of the named pull request; the change is its diff, checked out at the named path. Your facet is a primary responsibility, not a restriction on following evidence. Test the result against the plan's "done means" and against authority and actual consumers, including an ordinary record the work never registered. The plan carries weight; reality outranks it, so report where they disagree. Prior findings and passing checks are assertions to evaluate. Work read-only and without peer reports. Return PASS within stated coverage or FINDINGS. For each finding give the affected claim, the evidence, the practical consequence for the operator's decision, and the smallest faithful remedy. Distinguish a material defect from an optional improvement or something outside the unit. Do not change state or presume adjudication.
+
+Round brief:
+
+> Continue your review of the named pull request, now at the named commit, under the brief you were first given. The adjudication of your previous round follows; it accepted, rejected or deferred each finding with its reason. Read the whole change again, not only your earlier findings. Judge whether each accepted cure is faithful to its finding and local to its cause, whether anything regressed or a new drift entered, and whether each rejection holds. Your earlier findings are assertions like any other; renew a rejected one only with evidence the adjudication did not weigh. Work read-only. Return PASS within stated coverage or FINDINGS in the same form as before.
