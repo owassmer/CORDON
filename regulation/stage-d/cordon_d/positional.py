@@ -41,6 +41,13 @@ CHANGE = {'ring_m': (1.0, 3.0), 'present_below': 0.8, 'absent_above': 0.9, 'min_
           # 0.8 m| of brightness, median) at most this multiple of its ring's; a leafless or
           # pruned tree keeps branches and fails it, cleared ground passes
           'texture_sigma_m': (0.2, 0.8), 'texture_ratio_max': 1.2,
+          # absent also means no canopy left on the crown's footprint, widened by the margin: a
+          # pruned tree's regrowth or a tree the images place a little apart keeps canopy there
+          'absent_margin_m': 0.6, 'absent_canopy_max': 0.1,
+          # absent also means the earlier crown-in-ring pattern is gone: its best correlation with
+          # the image within this residual shift stays below `persist_max`; standing trees the
+          # images place 1-2 m apart are the commonest false removal
+          'persist_search_m': 2.0, 'persist_max': 0.4,
           'min_width_m': 1.2}   # candidate crown's inscribed diameter; thinner objects are slivers
 CONTROL = {'harris_sigma_m': 0.4, 'harris_k': 0.05, 'search_m': 5.0, 'neighbours': 8, 'min_years': 3,
            # every year's control chip is co-registered to the sharpest year's before the corner is sought
@@ -269,6 +276,8 @@ class Crown:
     before: float          # crown/ring brightness ratio in the earlier image
     after: float           # the same ratio in the co-registered later image
     edge: bool             # the crown touches the chip edge
+    row: float = 0.0       # crown centroid in the earlier chip (pixels), for inspection
+    col: float = 0.0
 
 
 def _layer(image: np.ndarray, shift: tuple[int, int]):
@@ -280,14 +289,42 @@ def _layer(image: np.ndarray, shift: tuple[int, int]):
             shifted(canopy(image).astype(np.float64), dy, dx, fill=0.0) > 0.5)
 
 
-def _state(layer, crown, dilated, grown, box):
-    """(brightness ratio, texture ratio) of one crown's pixels against its ring in `layer`, or None."""
+def _state(layer, crown, dilated, grown, box, footprint, canopy_mask=None):
+    """(brightness ratio, texture ratio, canopy share) of one crown in `layer`, or None: the
+    crown's pixels against its ring, and the share of its widened footprint that is canopy
+    in `canopy_mask` (default: the layer's own)."""
     v, texture, mask = layer
     y0, y1, x0, x1 = box
     ring = dilated & ~grown & ~mask[y0:y1, x0:x1]
     brightness = _contrast(v[y0:y1, x0:x1], crown, ring)
     fine = _contrast(texture[y0:y1, x0:x1], crown, ring)
-    return None if brightness is None or fine is None else (brightness, fine)
+    share = float((mask if canopy_mask is None else canopy_mask)[y0:y1, x0:x1][footprint].mean())
+    return None if brightness is None or fine is None else (brightness, fine, share)
+
+
+def _persistence(v_before, v_other, rr, cc) -> float:
+    """Largest correlation of the earlier image's brightness over one crown and its own ring
+    (pixels `rr`, `cc`) with another image's, over small residual shifts. A standing tree keeps
+    its dark-crown-in-bright-ring pattern whatever the radiometry; cleared ground loses it."""
+    a = v_before[rr, cc]
+    a = (a - a.mean()) / (a.std() + 1e-9)
+    h, w = v_other.shape
+    s = int(round(CHANGE['persist_search_m'] / PIXEL_M))
+    best = -1.0
+    for dy in range(-s, s + 1):
+        for dx in range(-s, s + 1):
+            r, c = rr + dy, cc + dx
+            ok = (r >= 0) & (r < h) & (c >= 0) & (c < w)
+            if ok.mean() < 0.9:
+                continue
+            b = v_other[r[ok], c[ok]]
+            keep = np.isfinite(b)
+            if keep.sum() < CHANGE['min_pixels']:
+                continue
+            x, y = a[ok][keep], b[keep]
+            y = (y - y.mean()) / (y.std() + 1e-9)
+            best = max(best, float(((x - x.mean()) * y).mean()))
+    return best
 
 
 def _present(state) -> bool:
@@ -295,7 +332,8 @@ def _present(state) -> bool:
 
 
 def _absent(state) -> bool:
-    return state[0] > CHANGE['absent_above'] and state[1] <= CHANGE['texture_ratio_max']
+    return (state[0] > CHANGE['absent_above'] and state[1] <= CHANGE['texture_ratio_max']
+            and state[2] <= CHANGE['absent_canopy_max'] and state[3] < CHANGE['persist_max'])
 
 
 def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, int],
@@ -314,6 +352,7 @@ def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, in
     before_mask = primary[0][2]
     labels = crowns(before_mask)
     inner, outer = (int(round(r / PIXEL_M)) for r in CHANGE['ring_m'])
+    margin = int(round(CHANGE['absent_margin_m'] / PIXEL_M))
     grown = ndimage.binary_dilation(before_mask, iterations=inner)
     h, w = before_mask.shape
     found, rejected, undetermined = [], [], []
@@ -334,27 +373,41 @@ def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, in
         if d.min() > SEARCH_RADIUS_M:
             continue
         dilated = ndimage.binary_dilation(crown, iterations=outer)
+        footprint = ndimage.binary_dilation(crown, iterations=margin)
         grown_box = grown[y0:y1, x0:x1]
         # the primary ring also excludes the later image's canopy, as a removal leaves open ground
         ring_mask = primary[1][2]
         v_a, t_a, _ = primary[0]
-        before = _state((v_a, t_a, ring_mask), crown, dilated, grown_box, box)
-        after = _state(primary[1], crown, dilated, grown_box, box)
+        before = _state((v_a, t_a, ring_mask), crown, dilated, grown_box, box, footprint)
+        after = _state(primary[1], crown, dilated, grown_box, box, footprint)
         if before is None or after is None:
             continue
         width = 2 * float(ndimage.distance_transform_edt(np.pad(crown, 1)).max()) * PIXEL_M
-        if not (_present(before) and _absent(after) and width >= CHANGE['min_width_m']):
+        if not (_present(before) and width >= CHANGE['min_width_m']):
+            continue
+        # the crown and its own ring, other crowns excluded, for the persistence correlation
+        rr, cc = np.nonzero(dilated & ~(before_mask[y0:y1, x0:x1] & ~crown))
+        rr, cc = rr + y0, cc + x0
+
+        def absent(layer, state):
+            # the correlation is computed only where the cheaper tests already read absence
+            if state is None or not _absent(state + (-1.0,)):
+                return False
+            return _absent(state + (_persistence(v_a, layer[0], rr, cc),))
+
+        if not absent(primary[1], after):
             continue
         edge = bool(rows.min() == 0 or cols.min() == 0 or rows.max() == h - 1 or cols.max() == w - 1)
         record = Crown(round(float(d.min()), 2), round(float(d.max()) + PIXEL_M / 2, 2),
-                       round(area, 1), round(before[0], 3), round(after[0], 3), edge)
+                       round(area, 1), round(before[0], 3), round(after[0], 3), edge,
+                       round(float(rows.mean()), 1), round(float(cols.mean()), 1))
         verdict = 'candidate'
         for relation, year, layer in layers:
-            state = _state(layer, crown, dilated, grown_box, box)
+            state = _state(layer, crown, dilated, grown_box, box, footprint)
             if state is None:
                 verdict = 'undetermined' if verdict == 'candidate' else verdict
                 continue
-            if not (_present(state) if relation == 'before' else _absent(state)):
+            if not (_present(state) if relation == 'before' else absent(layer, state)):
                 verdict = 'rejected'
                 break
         {'candidate': found, 'rejected': rejected, 'undetermined': undetermined}[verdict].append(record)
