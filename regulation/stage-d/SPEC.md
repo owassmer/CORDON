@@ -448,7 +448,10 @@ order's own text, under `prescription-reading.txt`, through `read_native_text`.
 `--execute`. The reading lists the removal work the operative part prescribes to
 recipients and every clause stating what follows if they do not begin or perform
 it. Every quotation, and every copied field, must occur on the page its citation
-names; otherwise the reading is refused.
+names; a field printed across a page break must close one cited page and open the
+next. Otherwise the reading is refused. A refused reading gets one source-only
+reread whose request states the refusal; a second refusal stands as a named
+reading failure.
 
 One record is one enforcement clause over the work it enforces: instrument,
 recipients and cohort as printed, the prescribed scope, the commencement work and

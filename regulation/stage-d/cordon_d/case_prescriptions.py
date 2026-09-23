@@ -265,9 +265,20 @@ def apply_references(records):
                    request_sha256=(record['request_sha256'], base['request_sha256']))
 
 
-def read_prescription(source, store, *, execute=False, model='opus', effort='medium', timeout=900):
-    """Read one order's complete native text; replay unless `execute`."""
-    response = read_native_text([source], store, prompt=PROMPT, schema=SCHEMA, model=model,
+REREAD = ('A previous reading of this act was refused: {cause}. Read the act again from its supplied '
+          'text. Cite every quotation on the physical page where it is printed, and copy every field '
+          'from the pages its own citations name.')
+
+
+def read_prescription(source, store, *, execute=False, model='opus', effort='medium', timeout=900,
+                      refused=None):
+    """Read one order's complete native text; replay unless `execute`.
+
+    `refused` names the validation cause of a refused reading. It makes one bounded,
+    source-only reread whose request states that cause; the refused answer is not supplied.
+    """
+    prompt = PROMPT if refused is None else PROMPT + '\n' + REREAD.format(cause=refused) + '\n'
+    response = read_native_text([source], store, prompt=prompt, schema=SCHEMA, model=model,
                                 effort=effort, timeout=timeout, execute=execute)
     validate(response['reading'], page_texts(source, store))
     return PrescriptionReading(response)

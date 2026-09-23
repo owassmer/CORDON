@@ -145,8 +145,14 @@ def main():
         entry = dict(printed_identity=identity, source=digest, url=url)
         started = datetime.now(timezone.utc)
         try:
-            reading = read_prescription(digest, store, execute=arguments.execute, model=arguments.model,
-                                        effort=arguments.effort, timeout=arguments.timeout)
+            options = dict(execute=arguments.execute, model=arguments.model, effort=arguments.effort,
+                           timeout=arguments.timeout)
+            try:
+                reading = read_prescription(digest, store, **options)
+            except ValueError as refusal:
+                # One bounded source-only reread states the refusal; a second refusal stands.
+                entry['refused_first'] = str(refusal)
+                reading = read_prescription(digest, store, refused=str(refusal), **options)
             entry['request_sha256'] = reading.response['request_sha256']
             entry['seconds'] = reading.response.get('seconds')
             entry['identity'] = reading.values['identity']
