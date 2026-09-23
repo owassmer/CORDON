@@ -42,7 +42,16 @@
     "parameter.dependencies": "stable Stage A propositions that control or qualify the parameter",
     "dispositions.aperture": "IN_APERTURE | EXTERNAL_ANCHOR | DEFERRED; structured scope controls routing, never words mined from why",
     "acceptance_evidence": "an ACCEPTED seam names a repository JSON record and hash; schema cordon-stage-b-acceptance-v1 records seam, reviewer, act and accepted_content_sha256 matching the manifest. This establishes a bound record, not authentication or the soundness of human judgment",
-    "dispositions.ref": "one minted id, or an ordered list of successive versions of one target proposition when the source expression spans their intervals. A list is temporal resolution, not multiple dispositions or simultaneous duties. Its intervals must be contiguous, non-overlapping and cover the source interval"
+    "dispositions.ref": "one minted id, or an ordered list of successive versions of one target proposition when the source expression spans their intervals. A list is temporal resolution, not multiple dispositions or simultaneous duties. Its intervals must be contiguous, non-overlapping and cover the source interval",
+    "clock.magnitude": "normalized numeric string | {open_term, reserved_to}: an open term is stated by the named instrument; unit and bound stay null in B, and there is no default",
+    "clock.unit_words": {
+      "giorni": "calendar_days",
+      "gg": "calendar_days",
+      "giorni lavorativi": "working_days",
+      "ore": "hours",
+      "mesi": "months",
+      "anni": "years"
+    }
   },
   "clocks": [
     {
@@ -4110,542 +4119,35 @@
       "note": null
     },
     {
-      "clock_id": "B-CLK-DDS147-2024-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
+      "clock_id": "B-CLK-IT-L241-21TER-stated-commencement-term",
+      "producer_provision_version_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1",
+      "source_phrase": "indica il termine",
       "kind": "deadline",
       "anchor": {
         "kind": "event",
         "event": "legally sufficient notification of the operative prescription to this recipient",
         "record": "OPERATOR_RECORD"
       },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
+      "magnitude": {
+        "open_term": "the commencement term the prescription states, with its printed unit word",
+        "reserved_to": "operative prescription"
+      },
+      "bound": null,
+      "unit": null,
       "recurrence": null,
       "relation": null,
       "window": null,
-      "applies_when": "Operative DDS 147/2024 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
+      "applies_when": "An operative removal prescription that states in its operative part a commencement term running from notification and a committed coercive direction, with its commencement work lawfully due from this recipient.",
       "legal_duty_owner": "OWNER_OR_HOLDER",
       "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement",
+      "consumer_decision": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
       "consequence_on_expiry": {
         "kind": "none",
         "ref": null
       },
       "completion": {
         "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS173-2025-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 173/2025 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS27-2024-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 27/2024 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS115-2025-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 115/2025 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants in the Bisceglie infected area lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS117-2025-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 117/2025 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS135-2021-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 135/2021 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS138-2024-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 138/2024 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS151-2024-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 151/2024 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS188-2024-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 188/2024 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS2-2023-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 2/2023 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS201-2025-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 201/2025 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS35-2026-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 35/2026 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS4-2022-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 4/2022 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS45-2023-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 45/2023 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS51-2023-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 51/2023 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS52-2024-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 52/2024 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS6-2022-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 6/2022 recipient relation, including applicable corrections, with removal of infected plants only lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
-      },
-      "note": null
-    },
-    {
-      "clock_id": "B-CLK-DDS96-2023-notification-noncommencement",
-      "producer_provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
-      "source_phrase": "entro massimo 10 giorni",
-      "kind": "deadline",
-      "anchor": {
-        "kind": "event",
-        "event": "legally sufficient notification of the operative prescription to this recipient",
-        "record": "OPERATOR_RECORD"
-      },
-      "magnitude": "10",
-      "bound": "exact",
-      "unit": "calendar_days",
-      "recurrence": null,
-      "relation": null,
-      "window": null,
-      "applies_when": "Operative DDS 96/2023 recipient relation, including applicable corrections, with removal of infected plants and the prescribed plants within 50 m lawfully due from this recipient.",
-      "legal_duty_owner": "OWNER_OR_HOLDER",
-      "executor": "OWNER_OR_HOLDER",
-      "consumer_decision": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement",
-      "consequence_on_expiry": {
-        "kind": "none",
-        "ref": null
-      },
-      "completion": {
-        "kind": "record",
-        "ref": "concrete commencement of the removal work specified by this case clause"
+        "ref": "concrete commencement of the removal work the prescription specifies"
       },
       "note": null
     }
@@ -10666,7 +10168,7 @@
       "expression": "Di prescrivere l’applicazione con immediatezza delle misure di eradicazione con le modalità e la tempistica",
       "disposition": "not_a_clock",
       "ref": null,
-      "why": "This supplement expressly applies DDS 173/2025 measures and timing to the omitted parcel and recipient relation. It adds no separate temporal requirement; the predecessor noncommencement clock remains owned by B-CLK-DDS173-2025-notification-noncommencement, subject to legally sufficient notice for the affected recipient.",
+      "why": "This supplement expressly applies DDS 173/2025 measures and timing to the omitted parcel and recipient relation. It adds no separate temporal requirement; the predecessor's stated commencement term runs through B-CLK-IT-L241-21TER-stated-commencement-term, subject to legally sufficient notice for the affected recipient.",
       "aperture": "IN_APERTURE"
     },
     {
@@ -12369,7 +11871,7 @@
       "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1",
       "expression": "estirpazione della pianta infetta entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio",
       "disposition": "implements_clock",
-      "ref": "B-CLK-DDS27-2024-notification-noncommencement",
+      "ref": "B-CLK-IT-L241-21TER-stated-commencement-term",
       "why": "The broad source span repeats the case-qualified commencement term; its exact meaning and temporal owner are the dedicated noncommencement proposition and linked clock.",
       "aperture": "IN_APERTURE"
     },
@@ -14698,209 +14200,18 @@
       "aperture": "IN_APERTURE"
     },
     {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+      "provision_version_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1",
       "disposition": "clock",
-      "ref": "B-CLK-DDS147-2024-notification-noncommencement",
+      "ref": "B-CLK-IT-L241-21TER-stated-commencement-term",
       "why": null,
       "aperture": "IN_APERTURE"
     },
     {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
+      "provision_version_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1",
+      "expression": "previa diffida",
+      "disposition": "not_a_clock",
       "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS173-2025-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS27-2024-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS115-2025-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS117-2025-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS135-2021-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS138-2024-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS151-2024-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS188-2024-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS2-2023-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS201-2025-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS35-2026-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS4-2022-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS45-2023-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS51-2023-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS52-2024-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS6-2022-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
-      "disposition": "clock",
-      "ref": "B-CLK-DDS96-2023-notification-noncommencement",
-      "why": null,
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
-      "expression": "50 m",
-      "disposition": "not_a_parameter",
-      "ref": null,
-      "why": "Identifies the population prescribed in this case; does not create another infected-zone radius or replace the operative Article 7 population.",
+      "why": "A notified prescription that states its own term and coercive consequence is the prior warning; no further period runs (A semantic note).",
       "aperture": "IN_APERTURE"
     },
     {
@@ -15710,13 +15021,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "I accept. Prepare to open D.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-stage-c-seam-1.json",
-        "record_sha256": "9f9611d3d67aec8300451818ea978f6f1f47c00edec183a223160dc7d97a7cc7"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-1.json",
+        "record_sha256": "861866ea9cb805704183365a8ab8791454861d17fcb5d3272f00ac9e243a0736"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "38bb8e6387f16e40be0bfdfd4f45ddb35d8c725b7010dbe3e93ff72ad8f6b97d"
+      "accepted_content_sha256": "e7d7a3b23be35adac3e8b57849abdbcca53c65b80035214f76bcbbe40347e839"
     },
     {
       "seam": 2,
@@ -15724,13 +15035,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "I accept. Prepare to open D.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-stage-c-seam-2.json",
-        "record_sha256": "b054c0204aa7016d1c881d5de6765a1d455731cfaa606efd0c8d64170d15a5ff"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-2.json",
+        "record_sha256": "832ade63bdfbc04dd025e8ad463dfb8905e43153bfa4bcaac5c8e2d6538a2277"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "82a04f9af291f40d23224ab29033d79e1107b27247200909a03fe207293d7ee6"
+      "accepted_content_sha256": "0574855cde487fd4839bbcad1b4f72f5727d6bdec62c295e7fcbd538789d0ae9"
     },
     {
       "seam": 3,
@@ -15738,13 +15049,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "I accept. Prepare to open D.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-stage-c-seam-3.json",
-        "record_sha256": "c38e95e10ffec78827ebee7365d576713c5ee479720e665f2ff640be54a53b69"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-3.json",
+        "record_sha256": "2733237c18ee5be6625ee19dbf4f846e37e73a5067718353788c41e1fddb0770"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "cf2422cb971b2d07a3778f2111820417b0942682d774ee8f43003ceea956f397"
+      "accepted_content_sha256": "a55588c8794f83b0a562220f8c432c93df8b98be93db9f7ccb889201d4a53434"
     },
     {
       "seam": 4,
@@ -15752,13 +15063,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "I accept. Prepare to open D.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-stage-c-seam-4.json",
-        "record_sha256": "4f6ffbb18d7431c0069337a4d656d4b6127ac323f6b95f7c0cf7cda38b941f66"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-4.json",
+        "record_sha256": "a454226cf1e1e000b814305bb959a6b25b5c45556465a0d8166b2d12dacd4672"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "008f2f7fe341567161117c4255e4a8adef1f63d883c768096f9a1a1540fa87a3"
+      "accepted_content_sha256": "6fd5dc3e8cce00210279bba73e173166b2377c693fc7fdc9f178676e3630c420"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 4,
+  "reviewer": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
+  "accepted_content_sha256": "6fd5dc3e8cce00210279bba73e173166b2377c693fc7fdc9f178676e3630c420",
+  "preceding_acceptance": {
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-08-stage-c-seam-4.json",
+    "record_sha256": "4f6ffbb18d7431c0069337a4d656d4b6127ac323f6b95f7c0cf7cda38b941f66"
+  },
+  "scope": "One Law 241/1990 Art. 21-ter stated-term rule and one open-term clock replace 18 act-keyed provisions and clocks; B conventions map the printed unit word. Binding takes effect only on merge."
+}

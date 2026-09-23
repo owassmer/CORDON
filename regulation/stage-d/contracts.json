@@ -139,6 +139,7 @@
       ],
       "fields": [
         "source-stated prescribed scope",
+        "stated commencement term as printed (number and unit word) with its anchor, the coercive population and the executor",
         "plant/sample/report references",
         "recipient positions",
         "predecessor and exact corrected payload",
@@ -148,7 +149,7 @@
         "original BURP prescription and complete annexes",
         "official correction and supplement acts"
       ],
-      "sufficiency": "Read original clauses and preserve each annex occurrence. A partial-parcel intersection is not a plant census; several listed positions are not necessarily distinct people. Old generic Article 7/13 classifications and default state columns are not admitted as legal or event facts.",
+      "sufficiency": "Read original clauses and preserve each annex occurrence. A partial-parcel intersection is not a plant census; several listed positions are not necessarily distinct people. Old generic Article 7/13 classifications and default state columns are not admitted as legal or event facts. Governing A references name every accepted A row of the instrument and every correction or supplement naming it.",
       "absence": "Missing annex relations remain unresolved; do not turn an omitted row into exclusion from the lawful plant population.",
       "admissible_instance_roles": [
         "official-record",

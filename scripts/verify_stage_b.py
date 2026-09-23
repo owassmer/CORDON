@@ -109,7 +109,7 @@ def clock_value_matches(clock):
     words = '|'.join(NUMBER_WORDS)
     units = {'hours': r'ore|hours?', 'calendar_days': r'gg|giorni(?! lavorativi)|days?(?! working)',
              'working_days': r'(?:giorni|gg) lavorativi|working days?', 'months': r'mesi|months?', 'years': r'anni|years?'}
-    if clock['magnitude'] is not None:
+    if isinstance(clock['magnitude'], str):
         if clock['unit'] not in units: return False
         matches = [m for m in re.finditer(rf'\b({NUMBER}|{words})\s+(?:{units[clock["unit"]]})\b', text)
                    if decimal(NUMBER_WORDS.get(m[1], m[1])) == Decimal(clock['magnitude'])]
@@ -253,10 +253,17 @@ def main(ledger_path=B, stage_a_paths=None, population_path=POPULATION):
                 elif rec is not None:
                     fail(f'{rid}: non-recurrence clock carries recurrence semantics')
                 m = r['magnitude']
-                if m is not None and not re.fullmatch(r'\d+(\.\d+)?', m): fail(f'{rid}: magnitude not numeric')
+                if isinstance(m, dict):
+                    # A term the named instrument states: B holds no number, unit or bound, and no default.
+                    if set(m) != PVALUE[3] or not all(isinstance(x, str) and x for x in m.values()) or r['kind'] != 'deadline' \
+                            or r['unit'] is not None or r['bound'] is not None \
+                            or re.search(rf'\b(?:{NUMBER}|{"|".join(NUMBER_WORDS)})\b', norm(r['source_phrase'])):
+                        fail(f'{rid}: a reserved term is a deadline whose phrase, unit and bound carry no quantity')
+                    m = None
+                elif m is not None and not re.fullmatch(r'\d+(\.\d+)?', m): fail(f'{rid}: magnitude not numeric')
                 if r['bound'] not in (None, 'exact', 'floor'): fail(f'{rid}: bound vocabulary')
                 if (m is None) != (r['bound'] is None): fail(f'{rid}: bound must be set iff magnitude is set')
-                if r['kind'] in ('deadline', 'not_before', 'minimum_duration', 'eligibility_threshold', 'lookback_window') and m is None: fail(f'{rid}: {r["kind"]} needs a magnitude')
+                if r['kind'] in ('deadline', 'not_before', 'minimum_duration', 'eligibility_threshold', 'lookback_window') and m is None and not isinstance(r['magnitude'], dict): fail(f'{rid}: {r["kind"]} needs a magnitude')
                 if r['kind'] in ('not_before', 'eligibility_threshold') and r['bound'] != 'floor': fail(f'{rid}: {r["kind"]} is a floor')
                 if r['kind'] in ('eligibility_threshold', 'lookback_window') and r['completion']['kind'] == 'a_effect':
                     fail(f'{rid}: a threshold or lookback completes on its own evidenced condition, not the downstream decision')

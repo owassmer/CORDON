@@ -2435,61 +2435,69 @@ class Round13Repairs(unittest.TestCase):
     surfaces = Round6Repairs.surfaces
 
     def test_case_noncommencement_is_not_completion_election_or_missing_evidence(self):
-        cases = [(2021, 135), (2022, 4), (2022, 6), (2023, 2), (2023, 45), (2023, 51),
-                 (2023, 96), (2024, 27), (2024, 52), (2024, 138), (2024, 147),
-                 (2024, 151), (2024, 188), (2025, 115), (2025, 117), (2025, 173),
-                 (2025, 201), (2026, 35)]
-        for year, number in cases:
-            vid = f'REG-PUGLIA-U181-DIR-{year}-{number:05d}:case-delta:noncommencement-enforcement:v1'
-            with self.subTest(case=vid):
-                row = self.a[vid]
-                self.assertIn('concreto avvio', row['source_quote'])
-                self.assertIn(row['source_quote'], (verifier.ROOT / row['source_paths']).read_text())
-                clock = next(c for c in self.b['clocks'] if c['producer_provision_version_id'] == vid)
-                self.assertEqual((clock['magnitude'], clock['unit']), ('10', 'calendar_days'))
-                self.assertIn('notification', clock['anchor']['event'])
-                self.assertNotIn('election', clock['anchor']['event'])
-                self.assertIn('commencement', clock['completion']['ref'])
-                self.assertEqual(clock['consequence_on_expiry'], {'kind': 'none', 'ref': None})
-                with (verifier.ROOT / 'regulation/stage-b/generated/clocks.csv').open(newline='') as handle:
-                    emitted = next(c for c in csv.DictReader(handle) if c['clock_id'] == clock['clock_id'])
-                for field, value in clock.items():
-                    self.assertEqual(emitted[field], generator.flat(value))
-                for ast in self.surfaces(row):
-                    facts = StageARepairs.facts(ast)
-                    self.assertEqual(self.result(ast, facts), {'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED'})
-                    for atom in ast['route_table'][0]['when']['all_of']:
-                        for value in (False, None):
-                            mutant = dict(facts, **{self.key(atom): value})
-                            self.assertNotIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(ast, mutant))
-                            missing_guard = copy.deepcopy(ast)
-                            missing_guard['route_table'][0]['when']['all_of'].remove(atom)
-                            # Removing this qualification falsely authorizes the direction on the same facts.
-                            self.assertIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(missing_guard, mutant))
-                    # A missing completion record does not prove failure to commence.
-                    facts[self.key({'predicate': 'removal completion recorded'})] = False
-                    facts[self.key({'predicate': 'noncommencement of that work by the source deadline is established'})] = None
-                    self.assertNotIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(ast, facts))
-                self.assertIn('not a grace period', row['semantic_note'])
-                self.assertIn('does not prove', row['false_effect'])
+        vid = 'IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1'
+        row = self.a[vid]
+        self.assertIn('indica il termine', row['source_quote'])
+        self.assertIn('disporrà', row['semantic_note'])
+        self.assertFalse([r for r in self.rows if ':case-delta:noncommencement-enforcement' in r['stable_provision_id']])
+        clock, = [c for c in self.b['clocks'] if c['producer_provision_version_id'] == vid]
+        # The term is the prescription's own: B holds no number, unit or bound.
+        self.assertEqual(set(clock['magnitude']), {'open_term', 'reserved_to'})
+        self.assertEqual((clock['unit'], clock['bound']), (None, None))
+        self.assertIn('notification', clock['anchor']['event'])
+        self.assertNotIn('election', clock['anchor']['event'])
+        self.assertIn('commencement', clock['completion']['ref'])
+        self.assertEqual(clock['consequence_on_expiry'], {'kind': 'none', 'ref': None})
+        with (verifier.ROOT / 'regulation/stage-b/generated/clocks.csv').open(newline='') as handle:
+            emitted = next(c for c in csv.DictReader(handle) if c['clock_id'] == clock['clock_id'])
+        for field, value in clock.items():
+            self.assertEqual(emitted[field], generator.flat(value))
+        for ast in self.surfaces(row):
+            facts = StageARepairs.facts(ast)
+            self.assertEqual(self.result(ast, facts), {'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED'})
+            for atom in ast['route_table'][0]['when']['all_of']:
+                for value in (False, None):
+                    mutant = dict(facts, **{self.key(atom): value})
+                    self.assertNotIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(ast, mutant))
+                    missing_guard = copy.deepcopy(ast)
+                    missing_guard['route_table'][0]['when']['all_of'].remove(atom)
+                    # Removing this qualification falsely authorizes the direction on the same facts.
+                    self.assertIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(missing_guard, mutant))
+            # A missing completion record does not prove failure to commence.
+            facts[self.key({'predicate': 'removal completion recorded'})] = False
+            facts[self.key({'predicate': 'noncommencement of that work by the source deadline is established'})] = None
+            self.assertNotIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(ast, facts))
+        self.assertIn('not a grace period', row['semantic_note'])
+        self.assertIn('does not prove', row['false_effect'])
 
     def test_case_scope_and_inheritance_are_not_homogenized(self):
-        def row(year, number):
-            return self.a[f'REG-PUGLIA-U181-DIR-{year}-{number:05d}:case-delta:noncommencement-enforcement:v1']
-        for year, number in ((2024, 147), (2024, 151), (2024, 188), (2025, 117)):
-            r = row(year, number)
-            self.assertIn('50 m', r['condition_ast']['route_table'][0]['when']['all_of'][1]['predicate'])
-            self.assertIn('infected plants only', r['true_effect'])
-        self.assertIn('Bisceglie infected area', row(2025, 115)['true_effect'])
-        for year, number, predecessor in ((2025, 11, row(2024, 188)),
-                                          (2024, 165, row(2024, 147)),
-                                          (2026, 63, row(2025, 173))):
+        rule = self.a['IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1']
+        work, coerce = (p for p in rule['condition_ast']['route_table'][0]['when']['all_of'][1::4])
+        self.assertNotEqual(work['predicate'], coerce['predicate'])
+        for year, number in ((2025, 11), (2024, 165), (2026, 63)):
             candidates = [r for r in self.rows if r['instrument_id'] == f'REG-PUGLIA-U181-DIR-{year}-{number:05d}'
                           and ':case-delta:' in r['stable_provision_id']]
-            self.assertTrue(any(predecessor['stable_provision_id'] in r['external_dependencies'] for r in candidates))
+            self.assertTrue(any(rule['stable_provision_id'] in r['external_dependencies'] for r in candidates))
             self.assertFalse(any(c['producer_provision_version_id'] in {r['provision_version_id'] for r in candidates}
                                  and 'noncommencement' in c['clock_id'] for c in self.b['clocks']))
         self.assertFalse(any('cases mint no clock' in (d['why'] or '').lower() for d in self.b['dispositions']))
+
+
+class StatedTermClock(unittest.TestCase):
+    setUp = StageBRepairs.setUp
+    check = StageBRepairs.check
+    reject = StageBRepairs.reject
+
+    def test_reserved_term_carries_no_quantity_and_admits_no_default(self):
+        rid = 'B-CLK-IT-L241-21TER-stated-commencement-term'
+        for field, value in (('unit', 'calendar_days'), ('bound', 'exact'), ('kind', 'not_before'),
+                             ('magnitude', {'open_term': 'x', 'reserved_to': 'y', 'default': '10'})):
+            mutant = copy.deepcopy(self.base)
+            next(c for c in mutant['clocks'] if c['clock_id'] == rid)[field] = value
+            self.reject(mutant, 'a reserved term is a deadline')
+        mutant = copy.deepcopy(self.base)
+        next(c for c in mutant['clocks'] if c['clock_id'] == rid).update(magnitude='10', unit='calendar_days', bound='exact')
+        self.reject(mutant, 'not evidenced by source_phrase')
 
 
 class Round13StoredStatus(unittest.TestCase):

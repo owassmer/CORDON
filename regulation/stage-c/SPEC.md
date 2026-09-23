@@ -53,7 +53,10 @@ An explicit calculation with no matching A predicate is rejected. Election
 timing uses the end-of-publication date as its upper-bound anchor while allowing
 a valid earlier election. Case noncommencement uses concrete commencement of the
 exact required work, including a commencement before notice. Neither elapsed
-time nor an incomplete execution record proves noncommencement.
+time nor an incomplete execution record proves noncommencement. Its period is
+the term the prescription states, as a number and printed unit word that B's
+conventions map; a missing term is unknown, and a stated term passed to a clock
+B fixes is refused.
 `timely_completion` compares this clock's own qualifying performance with its
 boundary. Equality satisfies an elapsed-hour deadline; the following midnight
 is outside a whole-day deadline. Missing performance evidence and a still-open
