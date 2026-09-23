@@ -297,6 +297,28 @@ class CompoundFields(unittest.TestCase):
         self.assertEqual(first_host['reading_issues'], (issue,))
         self.assertNotIn('reading_issues', second_host)
 
+    def test_component_of_a_latin1_read_cell_enters_the_reading_decoded(self):
+        # The text layer prints UTF-8 read as Latin-1; the reader may quote either form.
+        printed = 'Comune: CittÃ  Nuova; Code: specimen-22'
+        for clause, value in [('Comune: CittÃ  Nuova', 'CittÃ  Nuova'),
+                              ('Comune: Città Nuova', 'Città Nuova')]:
+            with self.subTest(quoted=clause):
+                item = compound_block(native=True)
+                item['native_cells']['p1-t1-r1-c5']['text'] = printed
+                item['reading']['facts'] = [
+                    dict(id='place', role='municipality', page=1, locator='specimen cell', section=None,
+                         text=clause, value=value, applies_to=['native:p1-t1-r1-c5']),
+                    dict(id='code', role='identifier', page=1, locator='specimen cell', section=None,
+                         text='Code: specimen-22', value='specimen-22', applies_to=['native:p1-t1-r1-c5'])]
+                row = materialize('source', 'v', 1, [item]).rows[0]
+                parent = next(c for c in row.cells if c['role'] == 'other')
+                fields = {c['role']: c for c in row.cells if c.get('source_fragments')}
+                self.assertEqual(parent['text'], 'Comune: Città Nuova; Code: specimen-22')
+                self.assertEqual(fields['municipality']['text'], 'Città Nuova')
+                self.assertEqual(fields['identifier']['identifier'], 'specimen-22')
+                for field in fields.values():
+                    self.assertEqual(parent['text'][slice(*field['source_span'])], field['text'])
+
 
 class LiteralReport(unittest.TestCase):
     def test_text_read_as_latin1_enters_the_reading_as_its_utf8_text(self):
