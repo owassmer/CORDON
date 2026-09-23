@@ -666,15 +666,17 @@ def source_scopes(cell, table, raw, index):
 
 
 def scoped_reading_issues(issues, selectors, *, known_selectors=None):
-    """Bind explicit source selectors and property scopes, never issue explanations."""
+    """Bind explicit source selectors, never issue explanations."""
     known = selectors if known_selectors is None else known_selectors
-    fields, authority = [], []
+    fields = []
     for issue in issues:
         scope = issue['scope'].strip()
         property_scope = scope.removesuffix(' identifier_authority')
         if property_scope != scope:
-            # Parentheses/quotes annotate the selected heading. Every reference,
-            # including a relative column in a list, must resolve to a real field.
+            # Who assigned an identifier is read by no accepted consumer, so an
+            # issue limited to it constrains no field. Every reference, after
+            # heading annotations, must resolve to a real field; otherwise the
+            # scope is conflated or broad and binds as written.
             references = re.sub(r"\([^()]*\)|'[^']*'", '', property_scope).strip()
             targets, previous = set(), None
             for reference in re.split(r'\s*,\s*|\s+(?:and|e)\s+', references):
@@ -687,8 +689,6 @@ def scoped_reading_issues(issues, selectors, *, known_selectors=None):
                 targets.add(reference)
                 previous = reference
             if targets is not None:
-                if targets.intersection(selectors):
-                    authority.append(issue)
                 continue
         selected = False
         for selector in selectors:
@@ -701,7 +701,7 @@ def scoped_reading_issues(issues, selectors, *, known_selectors=None):
                 selected = True
         if selected:
             fields.append(issue)
-    return tuple(fields), tuple(authority)
+    return tuple(fields)
 
 
 def materialize(digest, version, page_count, blocks):
@@ -787,10 +787,7 @@ def materialize(digest, version, page_count, blocks):
                     field_scopes = source_scopes(cell, table, raw, index)
                     scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
-                    field_issues, authority_issues = scoped_reading_issues(issues, field_scopes,
-                                                                                known_selectors=known_selectors)
-                    if authority_issues:
-                        value['identifier_authority_issues'] = authority_issues
+                    field_issues = scoped_reading_issues(issues, field_scopes, known_selectors=known_selectors)
                     if field_issues:
                         value['reading_issues'] = field_issues
                         if column['role'] in {'publisher_id', 'laboratory_id'}:
@@ -814,18 +811,14 @@ def materialize(digest, version, page_count, blocks):
                             source_fragments=(value,), source_span=component['span'], support=(fact,))
                         # Fact IDs belong to this block. A precise issue constrains
                         # that component; a broader parent issue still travels with it.
-                        own_issues, own_authority_issues = scoped_reading_issues(
+                        own_issues = scoped_reading_issues(
                             data['issues'], {component['fact']['id']}, known_selectors=known_selectors)
                         component_issues = field_issues + tuple(issue for issue in own_issues
                                                               if issue not in field_issues)
                         if component_issues:
                             field['reading_issues'] = component_issues
                         if fact['role'] == 'identifier':
-                            field.update(identifier=fact['value'], identifier_authority=None, authority_support=())
-                            component_authority = authority_issues + tuple(issue for issue in own_authority_issues
-                                                                          if issue not in authority_issues)
-                            if component_authority:
-                                field['identifier_authority_issues'] = component_authority
+                            field['identifier'] = fact['value']
                         cells.append(field)
                         by_role.setdefault(fact['role'], []).append(field)
                     if column['role'] == 'result':

@@ -408,8 +408,7 @@ class JoinIdentity(unittest.TestCase):
         self.assertEqual(result['status'], 'matched')
         candidate = result['links'][0]['candidates'][0]
         self.assertEqual(candidate['row'].candidate_reference, '123')
-        self.assertIsNone(candidate['row'].cells[0]['identifier_authority'])
-        self.assertEqual(candidate['row'].cells[0]['identifier_authority_issues'], (authority_issue,))
+        self.assertNotIn('identifier_authority_issues', candidate['row'].cells[0])
         self.assertNotIn('reading_issues', candidate['row'].cells[0])
         self.assertIn(authority_issue, candidate['reading_issues'])
         self.assertIsNone(candidate['identity_cause'])
@@ -430,8 +429,7 @@ class JoinIdentity(unittest.TestCase):
         self.assertEqual(joined['status'], 'matched')
         match, = joined['matches']
         field = next(c for c in match['row'].cells if c.get('identifier') == 'specimen-22')
-        self.assertEqual(field['identifier_authority_issues'], (issue,))
-        self.assertIsNone(field['identifier_authority'])
+        self.assertNotIn('identifier_authority_issues', field)
         self.assertNotIn('reading_issues', field)
         source = materialize(match['key'][0], 'v', 1, [item])
         self.assertEqual(list(reverse_rows([source], [joined]))[0]['observations'],
@@ -466,9 +464,8 @@ class JoinIdentity(unittest.TestCase):
                                        reading_issues=[issue])[0]
                 self.assertEqual(joined['status'], 'matched')
                 cells = joined['matches'][0]['row'].cells
-                self.assertEqual(cells[0]['identifier_authority_issues'], (issue,))
                 self.assertNotIn('reading_issues', cells[0])
-                self.assertEqual(bool(cells[-1].get('identifier_authority_issues')), 'c5' in scope)
+                self.assertNotIn('reading_issues', cells[-1])
         for scope in ('p1-t1/c1 literal and identifier_authority',
                       'p1-t1/c1 and missing-field identifier_authority'):
             with self.subTest(scope=scope):

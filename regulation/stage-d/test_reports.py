@@ -108,8 +108,7 @@ class CompoundFields(unittest.TestCase):
                     self.assertEqual(field['support'][0]['applies_to'],
                                      ['native:p1-t1-r1-c5' if native else 'p1/p1-t1/r1/c5'])
                 self.assertEqual(row.identifiers, ('lab-7', 'specimen-22'))
-                self.assertIsNone(fields['identifier']['identifier_authority'])
-                self.assertEqual(fields['identifier']['authority_support'], ())
+                self.assertNotIn('identifier_authority', fields['identifier'])
                 self.assertEqual(row.results[0].kind, 'positive')
                 self.assertEqual(other.results[0].kind, 'negative')
                 self.assertEqual(other.identifiers, ('lab-8',))
