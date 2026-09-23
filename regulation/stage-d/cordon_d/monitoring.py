@@ -1004,16 +1004,26 @@ def occasion_sets(groups, occasion_of):
 def located_positives(groups):
     """The agreed location of each positive observation, one per observation.
 
+    The finding status remains row 2's.
+    """
+    return located_observations(groups, select=lambda group: group.positive is True)
+
+
+def located_observations(groups, *, select=lambda group: True):
+    """The agreed location of each observation, of every result state, one per observation.
+
     Publications in different published frames are reconciled rather than emitted
-    separately, so one positive finding no longer reaches a consumer as two candidate
-    places. Each carries its releases as official-dataset sources and no spatial support:
+    separately, so one observation never reaches a consumer as two candidate places.
+    Each carries its releases as official-dataset sources, its observation day, every
+    locality (`COMUNE`) its publications print, and no spatial support:
     `spatial.metric_point` refuses a distance calculation until a source-grounded
-    qualification exists, and the finding status remains row 2's.
+    qualification exists (`spatial.positional_qualification`).
     """
     from .evidence import Source
     from .spatial import CoordinateObservation
+    shared = {}  # one Source object per publication, however many observations cite it
     for group in groups:
-        if group.positive is not True:
+        if not select(group):
             continue
         for crs, coordinates in group.locations:
             # The pair and its frame come from one publication, because a coordinate pair
@@ -1023,6 +1033,10 @@ def located_positives(groups):
             # the operator reads to see what supports a finding's location.
             emitting = next(m for m in group.members if m.crs == crs and m.coordinates is not None)
             placed = tuple(m for m in group.members if m.coordinates is not None)
-            sources = tuple(Source(f'{m.release}|{m.view}', m.path, m.sha256, 'official-dataset', 'public')
+            sources = tuple(shared.setdefault((m.release, m.view, m.path, m.sha256),
+                                              Source(f'{m.release}|{m.view}', m.path, m.sha256,
+                                                     'official-dataset', 'public'))
                             for m in {m.sha256: m for m in placed}.values())
-            yield CoordinateObservation(group.identity, emitting.coordinates, coordinates, crs, sources, ())
+            yield CoordinateObservation(group.identity, emitting.coordinates, coordinates, crs, sources, (),
+                                        observed_on=group.day,
+                                        localities=tuple(sorted(group.values('COMUNE'))))

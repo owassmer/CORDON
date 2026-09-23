@@ -1,0 +1,40 @@
+[
+ {
+  "id": "usfs-ntdp-tested-horizontal-accuracies-2024-02-20",
+  "use": "device term",
+  "publisher": "USDA Forest Service, National Technology and Development Program",
+  "title": "Tested Horizontal Accuracies",
+  "index": "https://www.fs.usda.gov/database/gps/mtdcrept/accuracy/index.htm",
+  "role": "qualified-observation",
+  "access": "public",
+  "url": "https://www.fs.usda.gov/database/gps/mtdcrept/accuracy/documents/Tested%20Horizontal%20Accuracies.pdf",
+  "final_url": "https://www.fs.usda.gov/database/gps/mtdcrept/accuracy/documents/Tested%20Horizontal%20Accuracies.pdf",
+  "status": 200,
+  "bytes": 489786,
+  "sha256": "c71d0debe361936eb46fdf45132cf4fc5945c083242e2a0a66954768756a08a6",
+  "captured_at": "2026-09-23T21:29:34.097790+00:00",
+  "content_type": "application/pdf",
+  "last_modified": "Wed, 21 Feb 2024 15:42:23 GMT",
+  "selector": "page 24, table 'Tested Accuracies By Canopy Type' (NSSDA = horiz RMS x 1.7308), dated Tuesday, February 20, 2024; row Samsung | Galaxy Tab Active3 | WAAS | Glonass Yes | Ext. Antanna No | Position 1 | Post Process No; column Light - Medium NSSDA",
+  "value_m": 6.67,
+  "statistic": "NSSDA 95% horizontal accuracy (horizontal RMS x 1.7308), from a published test",
+  "reading": "The row reads 1.58 m open, 6.67 m light-medium and 10.67 m heavy-closed canopy. The recorded host is olive in groves, sampled at the crown's edge: partial obstruction, the light-medium canopy class. The app's averaging is not documented, so the single-position row applies; it is also the largest light-medium figure of the three Tab Active3 rows (6.67, 5.12, 6.12 m). The table has no Tab Active5 row; the Tab Active3 is the newest tested member of the line."
+ },
+ {
+  "id": "arif-tuttogare-gara-42",
+  "use": "device class",
+  "publisher": "ARIF Puglia, TuttoGare procurement platform",
+  "title": "Gara #42: Fornitura di \"Attrezzature tecnologiche\" connesse al rischio incendi, al monitoraggio Xylella e al supporto delle attivita decisionali",
+  "role": "official-record",
+  "access": "public",
+  "url": "https://arifpuglia.tuttogare.it/gare/dettaglio.php?codice=42",
+  "final_url": "https://arifpuglia.tuttogare.it/gare/dettaglio.php?codice=42",
+  "status": 200,
+  "bytes": 35542,
+  "sha256": "783a6bfae6bf899dcba03d8b4817293ba62cc7fca43356e1a60755c60cf5cb39",
+  "captured_at": "2026-09-23T21:29:36.504259+00:00",
+  "content_type": "text/html; charset=UTF-8",
+  "selector": "Informazioni appalto: Pubblicazione 11/09/2024; Procedura Affidamento diretto / RDO; CIG B30D7ACCE3; status 'Aggiudicazione definitiva'; Descrizione 'n. 120 GALAXY TAB ACTIVE 5 5G + accessori'; Scadenze: Apertura offerte 16/09/2024 10:00",
+  "reading": "ARIF procured 120 Galaxy Tab Active5 5G tablets for, among other uses, Xylella monitoring. The page states the status 'Aggiudicazione definitiva' and opened offers on 16/09/2024. It states no award date, no delivery date and no GNSS requirement. No monitoring record states its device."
+ }
+]

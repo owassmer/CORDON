@@ -83,6 +83,20 @@ class Assertion:
         return self.context, self.event_date, self.consumer_version, self.predicate
 
 
+def require_admissible(contract: dict, sources, *, field: str | None = None):
+    """Every source's role is one the contract admits, for the whole instance or for one field.
+
+    A field admits the roles its contract lists for it under `field_roles`; a field the
+    contract does not list there admits the contract's instance roles.
+    """
+    if field is not None and field not in contract['fields']:
+        raise ValueError(f'{contract["id"]} has no field {field}')
+    permitted = set(contract.get('field_roles', {}).get(field, contract['admissible_instance_roles']))
+    for source in sources:
+        if source.role not in permitted:
+            raise ValueError(f'{source.role} does not establish an instance fact under {contract["id"]}')
+
+
 class Evidence:
     def __init__(self, snapshot: Snapshot, sources: tuple[Source, ...], assertions: tuple[Assertion, ...],
                  contracts: Mapping[str, dict], bindings: Mapping[str, frozenset[str]], root: Path):
@@ -107,11 +121,7 @@ class Evidence:
             from cordon_c.bindings import leaves
             if row.predicate not in set(leaves(owner['condition_ast'])):
                 raise ValueError('Assertion predicate is not owned by its event-time A version')
-            permitted = set(contracts[row.contract]['admissible_instance_roles'])
-            for support in row.support:
-                source = self.sources[support.source]
-                if source.role not in permitted:
-                    raise ValueError(f'{source.role} does not establish an instance fact under {row.contract}')
+            require_admissible(contracts[row.contract], [self.sources[s.source] for s in row.support])
             for predecessor in row.supersedes:
                 previous = self.assertions[predecessor]
                 if previous.key != row.key or previous.known_at >= row.known_at:
