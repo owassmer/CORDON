@@ -42,9 +42,19 @@ CHANGE = {'ring_m': (1.0, 3.0), 'present_below': 0.8, 'absent_above': 0.9, 'min_
           # pruned tree keeps branches and fails it, cleared ground passes
           'texture_sigma_m': (0.2, 0.8), 'texture_ratio_max': 1.2,
           'min_width_m': 1.2}   # candidate crown's inscribed diameter; thinner objects are slivers
-CONTROL = {'harris_sigma_m': 0.4, 'harris_k': 0.05, 'search_m': 5.0, 'neighbours': 8,
+CONTROL = {'harris_sigma_m': 0.4, 'harris_k': 0.05, 'search_m': 5.0, 'neighbours': 8, 'min_years': 3,
+           # every year's control chip is co-registered to the sharpest year's before the corner is sought
+           'coregister_search_m': 5.0, 'coregister_margin_m': 5.4, 'response_percentile': 99,
+           # a year whose control chip co-registers below this is not located at that vertex: below it
+           # the year's offset departs from the vertex's other years by a median 1.7-4 m
+           'min_ncc': 0.5,
            'ground_level': ('RECINZ', 'MURO', 'MURETTO', 'POZZO', 'CISTERNA', 'CONFINE', 'CANCELL',
                             'PILASTR', 'CORDOL', 'MARCIAPIED', 'CUNETTA', 'CANALE', 'PONTE')}
+# Removal's signature: a candidate crown is present in every held image before the finding and
+# absent from every held image after it. Where more than one image pair brackets the finding, the
+# pair whose stated flight windows fall in the same season (window midpoints within this many days
+# of the year) is preferred; otherwise the tightest bracket.
+SAME_SEASON_DAYS = 45
 NODATA_LIMIT = 0.02             # share of pure-black or pure-white chip pixels tolerated
 
 # Regional orthophotos on the SIT Puglia ImageServers reached without the VPN. The flight
@@ -93,11 +103,34 @@ def _covers(year: int, east: float, north: float) -> bool:
     return x0 + CHIP_HALF_M <= east <= x1 - CHIP_HALF_M and y0 + CHIP_HALF_M <= north <= y1 - CHIP_HALF_M
 
 
-def bracket(event: date, east: float, north: float):
-    """The latest image before the event and the earliest after it that cover the point."""
+def held(event: date, east: float, north: float):
+    """(before, after): every image year covering the point flown wholly before / after the event.
+    An image whose flight window contains the event is in neither."""
     before = [y for y in IMAGES if _before(y, event) and _covers(y, east, north)]
     after = [y for y in IMAGES if _after(y, event) and _covers(y, east, north)]
-    return (max(before), min(after)) if before and after else None
+    return before, after
+
+
+def same_season(a: int, b: int) -> bool:
+    """Both images state a flight window and the windows' midpoints fall within
+    `SAME_SEASON_DAYS` of each other in the year."""
+    wa, wb = IMAGES[a]['window'], IMAGES[b]['window']
+    if not wa or not wb:
+        return False
+    mid = [(w[0].timetuple().tm_yday + (w[1] - w[0]).days / 2) % 365 for w in (wa, wb)]
+    gap = abs(mid[0] - mid[1])
+    return min(gap, 365 - gap) <= SAME_SEASON_DAYS
+
+
+def bracket(event: date, east: float, north: float):
+    """The image pair candidates are detected in: among pairs bracketing the event, those of one
+    season first, then the tightest bracket (latest before, earliest after)."""
+    before, after = held(event, east, north)
+    if not before or not after:
+        return None
+    pairs = [(b, a) for b in before for a in after]
+    pool = [p for p in pairs if same_season(*p)] or pairs
+    return min(pool, key=lambda p: (p[1] - p[0], -p[0]))
 
 
 def single_removal_rule(zone_labels, views) -> bool:
@@ -149,16 +182,18 @@ def _ncc_search(a, b, margin, candidates):
     return best
 
 
-def coregister(earlier: np.ndarray, later: np.ndarray, coarse: int = 4):
+def coregister(earlier: np.ndarray, later: np.ndarray, coarse: int = 4, *, search_m: float | None = None,
+               margin_m: float | None = None, reference=None):
     """Integer pixel shift (dy, dx) placing `later` on `earlier`, maximising the normalised
     cross-correlation of band-passed brightness over the chip interior.
 
     Exhaustive over the search window at `coarse` times the pixel, then exhaustive over
     the neighbouring coarse cell at full resolution.
     """
-    a, b = _band_pass(earlier), _band_pass(later)
-    s = int(round(COREGISTRATION['search_m'] / PIXEL_M))
-    m = int(round(COREGISTRATION['margin_m'] / PIXEL_M))
+    a = _band_pass(earlier) if reference is None else reference   # `reference`: band-passed `earlier`
+    b = _band_pass(later)
+    s = int(round((search_m or COREGISTRATION['search_m']) / PIXEL_M))
+    m = int(round((margin_m or COREGISTRATION['margin_m']) / PIXEL_M))
     h, w = (x - x % coarse for x in a.shape)
     small = [x[:h, :w].reshape(h // coarse, coarse, w // coarse, coarse).mean(axis=(1, 3)) for x in (a, b)]
     sc = -(-s // coarse)
@@ -236,28 +271,59 @@ class Crown:
     edge: bool             # the crown touches the chip edge
 
 
-def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, int],
-                    point_px: tuple[float, float]) -> list[Crown]:
-    """Crowns present in `earlier` and absent from `later`, nearest pixel within the radius
-    of `point_px` (row, column in the earlier chip)."""
+def _layer(image: np.ndarray, shift: tuple[int, int]):
+    """An image's smoothed brightness, fine texture and canopy, placed on the earlier chip."""
     from scipy import ndimage
     dy, dx = shift
-    va = ndimage.gaussian_filter(earlier.mean(axis=2), 1.5)
-    vb = shifted(ndimage.gaussian_filter(later.mean(axis=2), 1.5), dy, dx)
-    tb = shifted(_texture(later), dy, dx)
-    before_mask = canopy(earlier)
-    after_mask = shifted(canopy(later).astype(np.float64), dy, dx, fill=0.0) > 0.5
+    return (shifted(ndimage.gaussian_filter(image.mean(axis=2), 1.5), dy, dx),
+            shifted(_texture(image), dy, dx),
+            shifted(canopy(image).astype(np.float64), dy, dx, fill=0.0) > 0.5)
+
+
+def _state(layer, crown, dilated, grown, box):
+    """(brightness ratio, texture ratio) of one crown's pixels against its ring in `layer`, or None."""
+    v, texture, mask = layer
+    y0, y1, x0, x1 = box
+    ring = dilated & ~grown & ~mask[y0:y1, x0:x1]
+    brightness = _contrast(v[y0:y1, x0:x1], crown, ring)
+    fine = _contrast(texture[y0:y1, x0:x1], crown, ring)
+    return None if brightness is None or fine is None else (brightness, fine)
+
+
+def _present(state) -> bool:
+    return state[0] < CHANGE['present_below']
+
+
+def _absent(state) -> bool:
+    return state[0] > CHANGE['absent_above'] and state[1] <= CHANGE['texture_ratio_max']
+
+
+def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, int],
+                    point_px: tuple[float, float], others=()):
+    """Crowns carrying removal's signature, nearest pixel within the radius of `point_px`
+    (row, column in the earlier chip): present in `earlier` and absent from `later`, and in
+    each of `others` — (relation, year, image, shift) with relation 'before' or 'after' the
+    finding — present if before and absent if after.
+
+    Returns (candidates, rejected, undetermined): a crown that reappears or was absent
+    earlier is rejected; one whose state cannot be read in some image is undetermined.
+    """
+    from scipy import ndimage
+    primary = (_layer(earlier, (0, 0)), _layer(later, shift))
+    layers = [(relation, year, _layer(image, s)) for relation, year, image, s in others]
+    before_mask = primary[0][2]
     labels = crowns(before_mask)
     inner, outer = (int(round(r / PIXEL_M)) for r in CHANGE['ring_m'])
     grown = ndimage.binary_dilation(before_mask, iterations=inner)
     h, w = before_mask.shape
-    found = []
+    found, rejected, undetermined = [], [], []
     for index, window in enumerate(ndimage.find_objects(labels), 1):
         if window is None:
             continue
         # Work inside the crown's box padded by the ring; results equal the whole-chip ones.
         y0, y1 = max(0, window[0].start - outer - 1), min(h, window[0].stop + outer + 1)
         x0, x1 = max(0, window[1].start - outer - 1), min(w, window[1].stop + outer + 1)
+        box = (y0, y1, x0, x1)
         crown = labels[y0:y1, x0:x1] == index
         area = float(crown.sum()) * PIXEL_M ** 2
         if area < CROWNS['min_area_m2']:
@@ -267,20 +333,33 @@ def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, in
         d = np.hypot(rows + 0.5 - point_px[0], cols + 0.5 - point_px[1]) * PIXEL_M
         if d.min() > SEARCH_RADIUS_M:
             continue
-        ring = (ndimage.binary_dilation(crown, iterations=outer) & ~grown[y0:y1, x0:x1]
-                & ~after_mask[y0:y1, x0:x1])
-        before = _contrast(va[y0:y1, x0:x1], crown, ring)
-        after = _contrast(vb[y0:y1, x0:x1], crown, ring)
-        texture = _contrast(tb[y0:y1, x0:x1], crown, ring)
-        if before is None or after is None or texture is None:
+        dilated = ndimage.binary_dilation(crown, iterations=outer)
+        grown_box = grown[y0:y1, x0:x1]
+        # the primary ring also excludes the later image's canopy, as a removal leaves open ground
+        ring_mask = primary[1][2]
+        v_a, t_a, _ = primary[0]
+        before = _state((v_a, t_a, ring_mask), crown, dilated, grown_box, box)
+        after = _state(primary[1], crown, dilated, grown_box, box)
+        if before is None or after is None:
             continue
         width = 2 * float(ndimage.distance_transform_edt(np.pad(crown, 1)).max()) * PIXEL_M
-        if (before < CHANGE['present_below'] and after > CHANGE['absent_above']
-                and texture <= CHANGE['texture_ratio_max'] and width >= CHANGE['min_width_m']):
-            edge = bool(rows.min() == 0 or cols.min() == 0 or rows.max() == h - 1 or cols.max() == w - 1)
-            found.append(Crown(round(float(d.min()), 2), round(float(d.max()) + PIXEL_M / 2, 2),
-                               round(area, 1), round(before, 3), round(after, 3), edge))
-    return sorted(found, key=lambda c: c.near_m)
+        if not (_present(before) and _absent(after) and width >= CHANGE['min_width_m']):
+            continue
+        edge = bool(rows.min() == 0 or cols.min() == 0 or rows.max() == h - 1 or cols.max() == w - 1)
+        record = Crown(round(float(d.min()), 2), round(float(d.max()) + PIXEL_M / 2, 2),
+                       round(area, 1), round(before[0], 3), round(after[0], 3), edge)
+        verdict = 'candidate'
+        for relation, year, layer in layers:
+            state = _state(layer, crown, dilated, grown_box, box)
+            if state is None:
+                verdict = 'undetermined' if verdict == 'candidate' else verdict
+                continue
+            if not (_present(state) if relation == 'before' else _absent(state)):
+                verdict = 'rejected'
+                break
+        {'candidate': found, 'rejected': rejected, 'undetermined': undetermined}[verdict].append(record)
+    order = lambda c: c.near_m  # noqa: E731
+    return sorted(found, key=order), sorted(rejected, key=order), sorted(undetermined, key=order)
 
 
 # --- the imagery term from surveyed control points ------------------------------
@@ -290,9 +369,7 @@ def ground_level(description: str) -> bool:
     return 'FABBRICAT' not in text and any(word in text for word in CONTROL['ground_level'])
 
 
-def locate_corner(image: np.ndarray):
-    """(dx_m, dy_m) east/north of the chip centre to the strongest Harris corner within
-    the control search radius, or None."""
+def _harris(image: np.ndarray) -> np.ndarray:
     from scipy import ndimage
     v = image.mean(axis=2)
     sigma = CONTROL['harris_sigma_m'] / PIXEL_M
@@ -300,16 +377,50 @@ def locate_corner(image: np.ndarray):
     sxx = ndimage.gaussian_filter(gx * gx, sigma)
     syy = ndimage.gaussian_filter(gy * gy, sigma)
     sxy = ndimage.gaussian_filter(gx * gy, sigma)
-    response = sxx * syy - sxy ** 2 - CONTROL['harris_k'] * (sxx + syy) ** 2
-    h, w = v.shape
+    return sxx * syy - sxy ** 2 - CONTROL['harris_k'] * (sxx + syy) ** 2
+
+
+def locate_vertex(chips: dict) -> dict:
+    """{year: (dx_m, dy_m)}: east/north from a surveyed vertex (each chip's centre) to the
+    physical corner as each image year shows it.
+
+    The corner is identified once for all years, not per year: every year's chip is
+    co-registered to the sharpest year's, each year's corner response is normalised and
+    placed on that chip, and the corner is the strongest point of the median response
+    within the search radius. Each year's offset follows from its co-registration. A
+    vertex with fewer than `min_years` usable years is not located.
+    """
+    import warnings
+    usable = {y: im for y, im in chips.items() if nodata_share(im) <= NODATA_LIMIT}
+    if len(usable) < CONTROL['min_years']:
+        return {}
+    reference = max(usable, key=lambda y: (float(np.var(_band_pass(usable[y]))), y))
+    shifts = {reference: (0, 0)}
+    for year, image in usable.items():
+        if year != reference:
+            score, dy, dx = coregister(usable[reference], image, search_m=CONTROL['coregister_search_m'],
+                                       margin_m=CONTROL['coregister_margin_m'])
+            if score >= CONTROL['min_ncc']:
+                shifts[year] = (dy, dx)
+    if len(shifts) < CONTROL['min_years']:
+        return {}
+    stack = []
+    for year, (dy, dx) in shifts.items():
+        response = np.clip(_harris(usable[year]), 0, None)
+        response = response / (np.percentile(response, CONTROL['response_percentile']) + 1e-12)
+        stack.append(shifted(response, dy, dx))
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore', RuntimeWarning)
+        consensus = np.nanmedian(np.stack(stack), axis=0)
+    h, w = consensus.shape
     rows, cols = np.mgrid[:h, :w]
-    centre = (h / 2, w / 2)
-    inside = np.hypot(rows + 0.5 - centre[0], cols + 0.5 - centre[1]) * PIXEL_M <= CONTROL['search_m']
-    if not inside.any() or response[inside].max() <= 0:
-        return None
-    flat = np.where(inside, response, -np.inf)
+    inside = np.hypot(rows + 0.5 - h / 2, cols + 0.5 - w / 2) * PIXEL_M <= CONTROL['search_m']
+    flat = np.where(inside & np.isfinite(consensus), consensus, -np.inf)
+    if not np.isfinite(flat.max()) or flat.max() <= 0:
+        return {}
     r, c = np.unravel_index(int(np.argmax(flat)), flat.shape)
-    return ((c + 0.5 - centre[1]) * PIXEL_M, -(r + 0.5 - centre[0]) * PIXEL_M)
+    return {year: (round((c - dx + 0.5 - w / 2) * PIXEL_M, 3), round(-(r - dy + 0.5 - h / 2) * PIXEL_M, 3))
+            for year, (dy, dx) in shifts.items()}
 
 
 @dataclass(frozen=True)
@@ -368,25 +479,43 @@ def grid_to_ground_m(east: float, north: float, distance_m: float) -> float:
 # --- per-positive measurement and release bounds --------------------------------
 
 def measure(earlier: np.ndarray, later: np.ndarray, point_px: tuple[float, float],
-            correction: tuple[float, float]):
-    """One positive's measurement from its two chips and the earlier image's correction.
+            correction: tuple[float, float], others=()):
+    """One positive's measurement from its bracketing chips, every other held image, and the
+    earlier image's correction.
 
     `point_px` is the recorded point in the earlier chip; `correction` is that image's
     fitted (east, north) shift of image content from ground. The point is moved by the
-    shift so distances to crowns in the image are ground distances.
-    Returns (status, detail).
+    shift so distances to crowns in the image are ground distances. `others` are
+    (relation, year, image) for every other image held at the point, relation 'before' or
+    'after' the finding. The candidate set is fixed by removal's signature before any
+    candidate's distance is used. Returns (status, detail).
     """
     for image in (earlier, later):
         if nodata_share(image) > NODATA_LIMIT:
             return 'unmeasured', {'cause': 'image has no data at the point'}
-    ncc, dy, dx = coregister(earlier, later)
+    reference = _band_pass(earlier)
+    ncc, dy, dx = coregister(earlier, later, reference=reference)
     if ncc < COREGISTRATION['min_ncc']:
         return 'unmeasured', {'cause': 'co-registration below threshold', 'ncc': round(ncc, 3)}
+    registered, not_held = [], []
+    for relation, year, image in others:
+        if nodata_share(image) > NODATA_LIMIT:
+            not_held.append(year)
+            continue
+        score, oy, ox = coregister(earlier, image, reference=reference)
+        if score < COREGISTRATION['min_ncc']:
+            return 'unmeasured', {'cause': f'co-registration below threshold in {year}', 'ncc': round(score, 3)}
+        registered.append((relation, year, image, (oy, ox)))
     corrected = (point_px[0] - correction[1] / PIXEL_M, point_px[1] + correction[0] / PIXEL_M)
-    found = vanished_crowns(earlier, later, (dy, dx), corrected)
-    detail = {'ncc': round(ncc, 3), 'shift_px': [dy, dx], 'candidates': [c.__dict__ for c in found]}
+    found, rejected, undetermined = vanished_crowns(earlier, later, (dy, dx), corrected, registered)
+    detail = {'ncc': round(ncc, 3), 'shift_px': [dy, dx], 'candidates': [c.__dict__ for c in found],
+              'rejected': len(rejected), 'undetermined': len(undetermined),
+              'years_before': sorted(y for r, y, *_ in registered if r == 'before'),
+              'years_after': sorted(y for r, y, *_ in registered if r == 'after'), 'not_held': sorted(not_held)}
+    if undetermined:
+        return 'unmeasured', {**detail, 'cause': "a candidate's state is unreadable in a held image"}
     if not found:
-        return 'unmeasured', {**detail, 'cause': 'no crown vanished within the radius'}
+        return 'unmeasured', {**detail, 'cause': "no crown carries removal's signature within the radius"}
     if any(c.edge for c in found):
         return 'unmeasured', {**detail, 'cause': 'a candidate crown crosses the chip edge'}
     detail['distance_m'] = max(c.far_m for c in found)

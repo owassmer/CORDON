@@ -76,7 +76,32 @@ class ImageSteps(unittest.TestCase):
     def test_no_vanished_crown_is_unmeasured_not_dropped(self):
         before = scene(CROWNS)
         status, detail = P.measure(before, scene(CROWNS, rng_seed=2), CENTRE, (0.0, 0.0))
-        self.assertEqual((status, detail['cause']), ('unmeasured', 'no crown vanished within the radius'))
+        self.assertEqual((status, detail['cause']), ('unmeasured', "no crown carries removal's signature within the radius"))
+
+    def test_a_crown_that_reappears_later_is_not_a_candidate(self):
+        before = scene(CROWNS)
+        after = scene(CROWNS, rng_seed=2, removed={0, 1})
+        later = translate(scene(CROWNS, rng_seed=4, removed={0}), -2, 1)      # crown 1 is back
+        status, detail = P.measure(before, after, CENTRE, (0.0, 0.0), [('after', 2023, later)])
+        self.assertEqual(status, 'measured')
+        self.assertEqual([round(c['near_m']) for c in detail['candidates']], [3])
+        self.assertEqual((detail['rejected'], detail['years_after']), (1, [2023]))
+
+    def test_a_crown_absent_before_the_finding_is_not_a_candidate(self):
+        before = scene(CROWNS)
+        after = scene(CROWNS, rng_seed=2, removed={0, 1})
+        earlier = scene(CROWNS, rng_seed=5, removed={1})                     # crown 1 not yet there
+        status, detail = P.measure(before, after, CENTRE, (0.0, 0.0), [('before', 2011, earlier)])
+        self.assertEqual([round(c['near_m']) for c in detail['candidates']], [3])
+        self.assertEqual(detail['rejected'], 1)
+
+    def test_a_removal_absent_in_every_later_image_stays_a_candidate(self):
+        before = scene(CROWNS)
+        after = scene(CROWNS, rng_seed=2, removed={0, 1})
+        others = [('after', 2022, scene(CROWNS, rng_seed=6, removed={0, 1})),
+                  ('before', 2011, translate(scene(CROWNS, rng_seed=7), 2, 2))]
+        status, detail = P.measure(before, after, CENTRE, (0.0, 0.0), others)
+        self.assertEqual((status, len(detail['candidates']), detail['rejected']), ('measured', 2, 0))
 
     def test_the_control_correction_moves_the_point_before_distances(self):
         before = scene(CROWNS)
@@ -105,6 +130,26 @@ class ControlPoints(unittest.TestCase):
         term = P.imagery_term(offsets, loo, 702000, 4451000)
         self.assertEqual(term[2], loo['outlier'])     # the largest residual of the fitting features
 
+    def test_the_vertex_is_located_once_and_each_year_offset_follows_its_registration(self):
+        size = int(round(2 * P.CONTROL_HALF_M / PX))
+        rng = np.random.default_rng(9)
+        ground = 170 + rng.normal(0, 3, (size, size))
+        for r, c in rng.integers(10, size - 10, (25, 2)):                 # stable texture to register on
+            ground[r - 3:r + 3, c - 3:c + 3] = rng.choice([90, 230])
+        corner = (size // 2 - 2, size // 2 + 5)                           # the wall corner, 1.1-1.7 m east
+        ground[corner[0]:corner[0] + 3, :corner[1] + 3] = 60                # a wall running west
+        ground[corner[0]:, corner[1]:corner[1] + 3] = 60                    # and one running south
+        chips, shifts = {}, {2016: (0, 0), 2019: (3, -2), 2022: (-4, 1), 2023: (1, 4)}
+        for year, (dy, dx) in shifts.items():
+            image = np.repeat((ground + rng.normal(0, 2, ground.shape))[..., None], 3, axis=2)
+            chips[year] = translate(image.clip(0, 255).astype(np.float32), dy, dx)
+        located = P.locate_vertex(chips)
+        self.assertEqual(set(located), set(shifts))
+        east = [located[y][0] - shifts[y][1] * PX for y in shifts]
+        north = [located[y][1] + shifts[y][0] * PX for y in shifts]
+        self.assertLess(np.ptp(east) + np.ptp(north), 0.01)                 # one physical corner
+        self.assertLess(np.hypot(east[0] - 1.4, north[0]), 0.7)               # on the wall's corner
+
     def test_ground_level_features_only(self):
         self.assertTrue(P.ground_level('SPIGOLO RECINZIONE'))
         self.assertTrue(P.ground_level('SPIGOL0 ESTERNO MURETTO A SECCO'))
@@ -121,6 +166,24 @@ class Reach(unittest.TestCase):
         self.assertEqual(P.bracket(date(2015, 12, 1), *lecce), (2015, 2016))   # after the 2015 flight
         self.assertEqual(P.bracket(date(2016, 3, 1), *bari), (2013, 2019))     # 2015 does not cover Bari
         self.assertIsNone(P.bracket(date(2023, 5, 1), *lecce))
+        self.assertEqual(P.held(date(2020, 10, 27), *lecce), ([2011, 2013, 2015, 2016, 2019], [2022, 2023]))
+
+    def test_a_same_season_pair_is_preferred_over_the_tightest(self):
+        self.assertFalse(P.same_season(2011, 2015))        # January-June against May-November
+        self.assertFalse(P.same_season(2019, 2022))        # no stated window
+        saved = dict(P.IMAGES[2013])
+        try:
+            P.IMAGES[2013]['window'] = (date(2013, 6, 1), date(2013, 9, 30))
+            self.assertTrue(P.same_season(2013, 2015))
+            self.assertEqual(P.bracket(date(2014, 3, 1), 770000.0, 4470000.0), (2013, 2015))
+            P.IMAGES[2013]['window'] = (date(2013, 1, 1), date(2013, 2, 28))
+            self.assertEqual(P.bracket(date(2014, 3, 1), 770000.0, 4470000.0), (2013, 2015))  # tightest
+            P.IMAGES[2011]['window'], saved_2011 = (date(2011, 6, 1), date(2011, 9, 30)), P.IMAGES[2011]['window']
+            self.assertEqual(P.bracket(date(2014, 3, 1), 770000.0, 4470000.0), (2011, 2015))  # same season wins
+            P.IMAGES[2011]['window'] = saved_2011
+        finally:
+            P.IMAGES[2013].clear()
+            P.IMAGES[2013].update(saved)
 
     def test_removal_rule_and_release_class(self):
         self.assertTrue(P.single_removal_rule(['Zona Contenimento - Salento'], ['Positivi']))
