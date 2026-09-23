@@ -1,4 +1,4 @@
-"""Positional error from removal identity: image steps, control correction, bounds, consumer."""
+"""Positional error as removal excess: image steps, control correction, radial bound, consumer."""
 from datetime import date
 from hashlib import sha256
 from pathlib import Path
@@ -41,9 +41,10 @@ def translate(image, dy, dx):
     return out
 
 
-# crowns: (row, col, radius m); crown 0 sits 6 m east of the point
+# crowns: (row, col, radius m); crown 0 sits 6 m east of the point, crown 6 56.6 m north-east
 CROWNS = [(CENTRE[0], CENTRE[1] + 30, 3.0), (CENTRE[0] - 60, CENTRE[1] - 50, 3.0), (CENTRE[0] + 70, CENTRE[1] + 60, 2.5),
-          (CENTRE[0] - 120, CENTRE[1] + 110, 3.0), (CENTRE[0] + 150, CENTRE[1] - 140, 3.0), (CENTRE[0] + 20, CENTRE[1] - 90, 2.5)]
+          (CENTRE[0] - 120, CENTRE[1] + 110, 3.0), (CENTRE[0] + 150, CENTRE[1] - 140, 3.0), (CENTRE[0] + 20, CENTRE[1] - 90, 2.5),
+          (CENTRE[0] - 200, CENTRE[1] + 200, 3.0)]
 
 
 class ImageSteps(unittest.TestCase):
@@ -54,24 +55,24 @@ class ImageSteps(unittest.TestCase):
         self.assertEqual((dy, dx), (-3, 2))
         self.assertGreater(score, P.COREGISTRATION['min_ncc'])
 
-    def test_every_removed_crown_is_a_candidate_and_the_error_is_its_far_edge(self):
+    def test_every_removed_crown_of_the_chip_is_found_and_none_is_chosen(self):
         before = scene(CROWNS)
-        after = translate(scene(CROWNS, rng_seed=2, removed={0, 1}), 3, -2)
+        after = translate(scene(CROWNS, rng_seed=2, removed={0, 1, 6}), 3, -2)
         status, detail = P.measure(before, after, CENTRE, (0.0, 0.0))
-        self.assertEqual(status, 'measured')
-        near = sorted(c['near_m'] for c in detail['candidates'])
-        self.assertEqual(len(near), 2)
-        self.assertAlmostEqual(near[0], 6 - 3, delta=0.5)                      # crown 0
-        self.assertAlmostEqual(near[1], np.hypot(60, 50) * PX - 3, delta=0.5)  # crown 1
-        far_of_1 = np.hypot(60, 50) * PX + 3.0
-        self.assertAlmostEqual(detail['distance_m'], far_of_1, delta=0.5)   # the farthest, not the nearest
+        self.assertEqual(status, 'counted')
+        centres = sorted(c['centre_m'] for c in detail['vanished'])
+        self.assertEqual(len(centres), 3)
+        self.assertAlmostEqual(centres[0], 6.0, delta=0.3)                        # crown 0
+        self.assertAlmostEqual(centres[1], np.hypot(60, 50) * PX, delta=0.3)      # crown 1
+        self.assertAlmostEqual(centres[2], np.hypot(200, 200) * PX, delta=0.3)    # crown 6, beyond 50 m
+        self.assertNotIn('distance_m', detail)
 
     def test_a_leafless_tree_is_not_a_removal(self):
         before = scene(CROWNS)
         after = scene(CROWNS, rng_seed=2, removed={0}, leafless={2})
         status, detail = P.measure(before, after, CENTRE, (0.0, 0.0))
-        self.assertEqual(status, 'measured')
-        self.assertEqual([round(c['near_m']) for c in detail['candidates']], [3])
+        self.assertEqual(status, 'counted')
+        self.assertEqual([round(c['centre_m']) for c in detail['vanished']], [6])
 
     def test_the_register_only_refutes_a_bound(self):
         trees = [(100.0, 30.0), (140.0, 0.0)]
@@ -98,88 +99,119 @@ class ImageSteps(unittest.TestCase):
         self.assertGreater(standing, P.CHANGE['persist_max'])
         self.assertLess(gone, P.CHANGE['persist_max'])
 
-    def test_no_vanished_crown_is_unmeasured_not_dropped(self):
+    def test_the_persistence_correlation_equals_the_direct_sum(self):
+        rng = np.random.default_rng(11)
+        a, b = rng.normal(size=(80, 80)), rng.normal(size=(80, 80))
+        b[:5, :] = np.nan                                                     # not held in the other image
+        rows, cols = np.mgrid[:80, :80]
+        rr, cc = np.nonzero(np.hypot(rows - 12, cols - 40) <= 9)             # near the chip edge
+        x = (a[rr, cc] - a[rr, cc].mean()) / (a[rr, cc].std() + 1e-9)
+        s, best = int(round(P.CHANGE['persist_search_m'] / PX)), -1.0
+        for dy in range(-s, s + 1):
+            for dx in range(-s, s + 1):
+                r, c = rr + dy, cc + dx
+                ok = (r >= 0) & (r < 80) & (c >= 0) & (c < 80)
+                if ok.mean() < 0.9:
+                    continue
+                y = b[r[ok], c[ok]]
+                keep = np.isfinite(y)
+                if keep.sum() < P.CHANGE['min_pixels']:
+                    continue
+                u, v = x[ok][keep], y[keep]
+                best = max(best, float(((u - u.mean()) * (v - v.mean()) / (v.std() + 1e-9)).mean()))
+        self.assertAlmostEqual(P._persistence(a, b, rr, cc), best, places=6)
+
+    def test_no_vanished_crown_is_counted_not_dropped(self):
         before = scene(CROWNS)
         status, detail = P.measure(before, scene(CROWNS, rng_seed=2), CENTRE, (0.0, 0.0))
-        self.assertEqual((status, detail['cause']), ('unmeasured', "no crown carries removal's signature within the radius"))
+        self.assertEqual((status, detail['vanished']), ('counted', []))
+        self.assertEqual(len(detail['ring_area_m2']), int(P.RADIAL['background_m'][1] / P.RADIAL['ring_m']))
 
-    def test_a_crown_that_reappears_later_is_not_a_candidate(self):
+    def test_a_crown_that_reappears_later_is_not_vanished(self):
         before = scene(CROWNS)
         after = scene(CROWNS, rng_seed=2, removed={0, 1})
         later = translate(scene(CROWNS, rng_seed=4, removed={0}), -2, 1)      # crown 1 is back
         status, detail = P.measure(before, after, CENTRE, (0.0, 0.0), [('after', 2023, later)])
-        self.assertEqual(status, 'measured')
-        self.assertEqual([round(c['near_m']) for c in detail['candidates']], [3])
+        self.assertEqual(status, 'counted')
+        self.assertEqual([round(c['centre_m']) for c in detail['vanished']], [6])
         self.assertEqual((detail['rejected'], detail['years_after']), (1, [2023]))
 
-    def test_a_crown_absent_before_the_finding_is_not_a_candidate(self):
+    def test_a_crown_absent_before_the_finding_is_not_vanished(self):
         before = scene(CROWNS)
         after = scene(CROWNS, rng_seed=2, removed={0, 1})
         earlier = scene(CROWNS, rng_seed=5, removed={1})                     # crown 1 not yet there
         status, detail = P.measure(before, after, CENTRE, (0.0, 0.0), [('before', 2011, earlier)])
-        self.assertEqual([round(c['near_m']) for c in detail['candidates']], [3])
+        self.assertEqual([round(c['centre_m']) for c in detail['vanished']], [6])
         self.assertEqual(detail['rejected'], 1)
 
-    def test_a_removal_absent_in_every_later_image_stays_a_candidate(self):
+    def test_a_removal_absent_in_every_later_image_stays_vanished(self):
         before = scene(CROWNS)
         after = scene(CROWNS, rng_seed=2, removed={0, 1})
         others = [('after', 2022, scene(CROWNS, rng_seed=6, removed={0, 1})),
                   ('before', 2011, translate(scene(CROWNS, rng_seed=7), 2, 2))]
         status, detail = P.measure(before, after, CENTRE, (0.0, 0.0), others)
-        self.assertEqual((status, len(detail['candidates']), detail['rejected']), ('measured', 2, 0))
+        self.assertEqual((status, len(detail['vanished']), detail['rejected']), ('counted', 2, 0))
 
     def test_the_control_correction_moves_the_point_before_distances(self):
         before = scene(CROWNS)
         after = scene(CROWNS, rng_seed=2, removed={0})
         _, plain = P.measure(before, after, CENTRE, (0.0, 0.0))
         _, corrected = P.measure(before, after, CENTRE, (2.0, 0.0))  # image content 2 m east of ground
-        self.assertAlmostEqual(plain['distance_m'] - corrected['distance_m'], 2.0, delta=0.3)
+        self.assertAlmostEqual(plain['vanished'][0]['centre_m'] - corrected['vanished'][0]['centre_m'], 2.0, delta=0.3)
+
+    def test_ring_areas_cover_the_interior_only(self):
+        areas = P.ring_areas(CENTRE, (SIZE, SIZE))
+        for k in (0, 10, 40, 53):
+            self.assertAlmostEqual(areas[k], np.pi * ((k + 1) ** 2 - k ** 2), delta=0.03 * np.pi * (2 * k + 1) + 0.2)
+        corner = P.ring_areas((60.0, 60.0), (SIZE, SIZE))                   # point 12 m from two edges
+        self.assertLess(corner[30], 0.6 * areas[30])
 
 
-class ControlPoints(unittest.TestCase):
-    def offsets(self):
-        rng = np.random.default_rng(3)
-        rows = [P.ControlOffset(f'v{i}', 700000 + 1000 * (i % 5), 4450000 + 1000 * (i // 5),
-                                1.0 + rng.normal(0, 0.1), -0.5 + rng.normal(0, 0.1)) for i in range(20)]
-        rows.append(P.ControlOffset('outlier', 702000, 4451000, 4.0, -0.5))
-        return rows
+def synthetic_release(n, spread_m, background_per_m2, seed=0, share=1.0):
+    """Per-positive (counts, areas): full annuli, Poisson background crowns and, for a `share` of
+    positives, the recorded tree at a 2-D normal offset of `spread_m` per axis."""
+    rng = np.random.default_rng(seed)
+    rings = int(P.RADIAL['background_m'][1] / P.RADIAL['ring_m'])
+    edges = np.arange(rings + 1) * P.RADIAL['ring_m']
+    areas = np.pi * (edges[1:] ** 2 - edges[:-1] ** 2)
+    counts = rng.poisson(background_per_m2 * areas, size=(n, rings)).astype(float)
+    for i in range(n):
+        if rng.random() < share:
+            k = int(np.hypot(*rng.normal(0, spread_m, 2)) / P.RADIAL['ring_m'])
+            if k < rings:
+                counts[i, k] += 1
+    return counts, np.tile(areas, (n, 1))
 
-    def test_local_fit_takes_the_systematic_shift_and_carries_only_the_residual(self):
-        offsets = self.offsets()
-        dx, dy, near = P.local_shift(offsets, 702000, 4451000)
-        self.assertAlmostEqual(dx, 1.0, delta=0.15)
-        self.assertAlmostEqual(dy, -0.5, delta=0.15)
-        loo = P.residuals(offsets)
-        self.assertGreater(loo['outlier'], 2.5)
-        self.assertLess(np.percentile([v for k, v in loo.items() if k != 'outlier'], 95), 0.5)
-        term = P.imagery_term(offsets, loo, 702000, 4451000)
-        self.assertEqual(term[2], loo['outlier'])     # the largest residual of the fitting features
 
-    def test_the_vertex_is_located_once_and_each_year_offset_follows_its_registration(self):
-        size = int(round(2 * P.CONTROL_HALF_M / PX))
-        rng = np.random.default_rng(9)
-        ground = 170 + rng.normal(0, 3, (size, size))
-        for r, c in rng.integers(10, size - 10, (25, 2)):                 # stable texture to register on
-            ground[r - 3:r + 3, c - 3:c + 3] = rng.choice([90, 230])
-        corner = (size // 2 - 2, size // 2 + 5)                           # the wall corner, 1.1-1.7 m east
-        ground[corner[0]:corner[0] + 3, :corner[1] + 3] = 60                # a wall running west
-        ground[corner[0]:, corner[1]:corner[1] + 3] = 60                    # and one running south
-        chips, shifts = {}, {2016: (0, 0), 2019: (3, -2), 2022: (-4, 1), 2023: (1, 4)}
-        for year, (dy, dx) in shifts.items():
-            image = np.repeat((ground + rng.normal(0, 2, ground.shape))[..., None], 3, axis=2)
-            chips[year] = translate(image.clip(0, 255).astype(np.float32), dy, dx)
-        located = P.locate_vertex(chips)
-        self.assertEqual(set(located), set(shifts))
-        east = [located[y][0] - shifts[y][1] * PX for y in shifts]
-        north = [located[y][1] + shifts[y][0] * PX for y in shifts]
-        self.assertLess(np.ptp(east) + np.ptp(north), 0.01)                 # one physical corner
-        self.assertLess(np.hypot(east[0] - 1.4, north[0]), 0.7)               # on the wall's corner
+class RadialBound(unittest.TestCase):
+    def test_the_excess_over_background_locates_the_recorded_trees(self):
+        counts, areas = synthetic_release(800, 3.0, 2e-4, share=0.6)
+        bound = P.radial_bound(counts, areas)
+        self.assertIsNone(bound['cause'])
+        self.assertAlmostEqual(bound['background_per_m2'], 2e-4, delta=0.3e-4)
+        self.assertGreater(bound['excess_lower'], 400)                   # about 480 recorded trees were placed
+        self.assertLess(bound['excess_lower'], 520)
+        # a 2-D normal with 3 m per axis holds 99% within 9.1 m and 99.9% within 11.1 m
+        self.assertGreaterEqual(bound['radius_m'], 8.0)
+        self.assertLessEqual(bound['radius_m'], 14.0)
+        self.assertGreaterEqual(bound['beyond_upper'], 0)
 
-    def test_ground_level_features_only(self):
-        self.assertTrue(P.ground_level('SPIGOLO RECINZIONE'))
-        self.assertTrue(P.ground_level('SPIGOL0 ESTERNO MURETTO A SECCO'))
-        self.assertFalse(P.ground_level('SPIGOLO FABBRICATO'))
-        self.assertFalse(P.ground_level('SPIGOLO MURO FABBRICATO'))
+    def test_a_small_release_states_how_much_it_could_hide_beyond_its_bound(self):
+        large = P.radial_bound(*synthetic_release(800, 3.0, 2e-4, share=0.6))
+        small = P.radial_bound(*synthetic_release(60, 3.0, 2e-4, share=0.6, seed=3))
+        self.assertIsNone(small['cause'])
+        self.assertGreater(small['beyond_upper_share'], large['beyond_upper_share'])
+
+    def test_no_excess_gives_no_bound(self):
+        bound = P.radial_bound(*synthetic_release(400, 3.0, 2e-4, share=0.0))
+        self.assertIsNone(bound['radius_m'])
+        self.assertEqual(bound['cause'], 'no excess of vanished crowns over background near the points')
+
+    def test_an_excess_reaching_the_background_band_gives_no_bound(self):
+        bound = P.radial_bound(*synthetic_release(800, 20.0, 1e-4, share=1.0))
+        self.assertIsNone(bound['radius_m'])
+        # the recorded trees spill into the band: either its density is not flat or the excess reaches it
+        self.assertIn(bound['cause'], ('the excess reaches the background band', 'the background band is not flat'))
 
 
 class Reach(unittest.TestCase):
@@ -210,13 +242,20 @@ class Reach(unittest.TestCase):
             P.IMAGES[2013].clear()
             P.IMAGES[2013].update(saved)
 
-    def test_removal_rule_and_release_class(self):
-        self.assertTrue(P.single_removal_rule(['Zona Contenimento - Salento'], ['Positivi']))
-        self.assertTrue(P.single_removal_rule([''], ['Piante estirpate 2016']))
-        self.assertFalse(P.single_removal_rule(['Zona infetta'], ['Positivi']))
+    def test_release_class(self):
         self.assertEqual(P.release_of(['64', 'CAMP_2021.xlsx'], [], date(2021, 1, 1)), ('campaign-workbook', 'CAMP_2021.xlsx'))
         self.assertEqual(P.release_of(['camp_2020_2022.csv'], [], date(2021, 1, 1)), ('campaign-csv', 'camp_2020_2022.csv'))
         self.assertEqual(P.release_of(['45'], ['Positivi 2016'], date(2016, 4, 1)), ('sit', 'SIT 2016'))
+
+
+def counted_rows(release, counts, areas, imagery_m):
+    ring = P.RADIAL['ring_m']
+    rows = []
+    for c, a in zip(counts, areas):
+        vanished = [{'centre_m': (k + 0.5) * ring, 'interior': True} for k in np.repeat(np.arange(len(c)), c.astype(int))]
+        rows.append({'source': 'campaign-workbook', 'release': release, 'status': 'counted', 'vanished': vanished,
+                     'ring_area_m2': list(a), 'imagery_m': imagery_m, 'grid_m_per_m': 4e-4})
+    return rows
 
 
 class Consumer(unittest.TestCase):
@@ -226,62 +265,71 @@ class Consumer(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.root = Path(self.directory.name)
         blobs = {}
-        for name in ('monitoring', 'chip-2019', 'chip-2022', 'bounds'):
+        for name in ('monitoring', 'bounds'):
             data = name.encode() * 10
             (self.root / name).write_bytes(data)
             blobs[name] = Source(name, name, sha256(data).hexdigest(), 'official-dataset', 'public')
         self.sources = blobs
         self.observation = CoordinateObservation(('observation', '1'), (770000.0, 4470000.0), (770000.0, 4470000.0),
                                                  'EPSG:32633', (blobs['monitoring'],), ())
-        self.rows = [
-            {'source': 'campaign-workbook', 'release': 'CAMP_2021.xlsx', 'status': 'measured', 'distance_m': 7.7,
-             'imagery_m': 0.9, 'grid_m': 0.003, 'candidates': [{}], 'pre': 2019, 'post': 2022},
-            {'source': 'campaign-workbook', 'release': 'CAMP_2021.xlsx', 'status': 'measured', 'distance_m': 12.4,
-             'imagery_m': 1.3, 'grid_m': 0.005, 'candidates': [{}, {}], 'pre': 2019, 'post': 2022},
-            {'source': 'campaign-workbook', 'release': 'CAMP_2021.xlsx', 'status': 'unmeasured',
-             'cause': 'no crown vanished within the radius'},
-            {'source': 'campaign-workbook', 'release': 'CAMP_2024.xlsx', 'status': 'out_of_reach'},
-            {'source': 'campaign-workbook', 'release': 'CAMP_2024.xlsx', 'status': 'unmeasured', 'cause': 'x'},
+        self.rows = counted_rows('CAMP_2021.xlsx', *synthetic_release(800, 2.0, 2e-4, share=0.6), 0.9)
+        self.rows[0]['imagery_m'] = 1.3
+        self.rows += [
+            {'source': 'campaign-workbook', 'release': 'CAMP_2021.xlsx', 'status': 'unread', 'cause': 'x'},
+            {'source': 'campaign-workbook', 'release': 'CAMP_2021.xlsx', 'status': 'out_of_reach',
+             'cause': 'no held image after the finding'},
+            {'source': 'campaign-workbook', 'release': 'CAMP_2024.xlsx', 'status': 'out_of_reach',
+             'cause': 'no held image after the finding'},
         ]
         self.bounds = P.release_bounds(self.rows)
 
     def tearDown(self):
         self.directory.cleanup()
 
-    def test_release_bound_is_the_largest_measured_error_plus_the_imagery_term(self):
+    def test_release_bound_is_the_radius_plus_the_imagery_term_and_grid(self):
         entry = self.bounds[('campaign-workbook', 'CAMP_2021.xlsx')]
-        self.assertEqual((entry['measured'], entry['unmeasured'], entry['out_of_reach']), (2, 1, 0))
-        self.assertAlmostEqual(entry['bound_m'], 12.4 + 1.3 + 0.005, places=2)
+        self.assertEqual((entry['counted'], entry['unread'], entry['out_of_reach'], entry['n']), (800, 1, 1, 800))
+        self.assertAlmostEqual(entry['bound_m'], entry['radius_m'] + 1.3 + entry['radius_m'] * 4e-4, places=2)
         self.assertIsNone(self.bounds[('campaign-workbook', 'CAMP_2024.xlsx')]['bound_m'])
 
-    def test_measured_and_unmeasured_positives_reach_the_distance_consumer(self):
+    def test_every_positive_of_the_release_reaches_the_distance_consumer(self):
         from shapely.geometry import Point
         from cordon_c.spatial import MetricGeometry, distance_test
         from cordon_d.spatial import metric_point
         day = date(2021, 5, 4)
-        measured = P.qualify(self.observation, self.rows[0], self.bounds, context='removal-radius', event_date=day,
-                             sources=(self.sources['chip-2019'], self.sources['chip-2022']))
-        self.assertAlmostEqual(measured.error_m, 8.6, places=2)
-        unmeasured = P.qualify(self.observation, self.rows[2], self.bounds, context='removal-radius', event_date=day,
-                               sources=(self.sources['bounds'],))
-        self.assertAlmostEqual(unmeasured.error_m, 13.7, places=1)
-        self.assertIn('n=2', unmeasured.support[0].reading)
-        for qualification in (measured, unmeasured):
+        entry = self.bounds[('campaign-workbook', 'CAMP_2021.xlsx')]
+        for row in (self.rows[0], self.rows[-3], self.rows[-2]):
+            qualification = P.qualify(self.observation, row, self.bounds, context='removal-radius', event_date=day,
+                                      sources=(self.sources['bounds'],))
+            self.assertEqual(qualification.error_m, entry['bound_m'])
+            self.assertIn('n=800', qualification.support[0].reading)
             point = metric_point(self.observation, context='removal-radius', event_date=day, root=self.root,
                                  qualification=qualification)
             self.assertEqual(point.error_m, qualification.error_m)
-        point = metric_point(self.observation, context='removal-radius', event_date=day, root=self.root,
-                             qualification=unmeasured)
+        self.assertLess(entry['bound_m'], 20)
         for separation, expected in [(3, True), (50, None), (80, False)]:
             other = MetricGeometry(Point(point.geometry.x + separation, point.geometry.y), point.crs, 10)
             self.assertIs(distance_test(point, other, 50, '<=').truth, expected)
 
+    def test_a_changed_measurement_changes_the_consumer_result(self):
+        from shapely.geometry import Point
+        from cordon_c.spatial import MetricGeometry, distance_test
+        from cordon_d.spatial import metric_point
+        day = date(2021, 5, 4)
+        wide = P.release_bounds(counted_rows('CAMP_2021.xlsx', *synthetic_release(800, 6.0, 2e-4, share=0.6), 0.9))
+        results = []
+        for bounds in (self.bounds, wide):
+            q = P.qualify(self.observation, self.rows[0], bounds, context='removal-radius', event_date=day,
+                          sources=(self.sources['bounds'],))
+            point = metric_point(self.observation, context='removal-radius', event_date=day, root=self.root,
+                                 qualification=q)
+            other = MetricGeometry(Point(point.geometry.x + 62, point.geometry.y), point.crs, 0)
+            results.append(distance_test(point, other, 50, '<=').truth)
+        self.assertEqual(results, [False, None])
+
     def test_no_bound_and_out_of_reach_are_refused(self):
         with self.assertRaises(MissingInput):
-            P.qualify(self.observation, self.rows[4], self.bounds, context='c', event_date=date(2024, 1, 1),
-                      sources=(self.sources['bounds'],))
-        with self.assertRaises(MissingInput):
-            P.qualify(self.observation, self.rows[3], self.bounds, context='c', event_date=date(2024, 1, 1),
+            P.qualify(self.observation, self.rows[-1], self.bounds, context='c', event_date=date(2024, 1, 1),
                       sources=(self.sources['bounds'],))
 
 

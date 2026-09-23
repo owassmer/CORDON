@@ -15,11 +15,14 @@
       "routes": [
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
         "https://webapps.sit.puglia.it/arcgis/rest/services",
-        "corpus/sources/positional-reference/records.json (regional 2023 imagery production and AGEA 2022 flight/control routes)"
+        "corpus/sources/positional-reference/records.json (regional 2023 imagery production and AGEA 2022 flight/control routes)",
+        "corpus/sources/positional-reference/chips.jsonl and control-chips.jsonl (SIT Puglia regional orthophoto exports, 2011–2023, around frame positives and control vertices)",
+        "corpus/sources/positional-reference/control.json (SIT RetiGeodetiche surveyed vertices)",
+        "corpus/sources/positional-reference/register.json (SIT UliviMonumentali register near flagged positives; a falsifier only)"
       ],
       "population": "Every record of the twelve campaign workbooks, the CKAN release and the 101 observation point layers of the eight SIT services that publish them: 4,318,100 observations, 2,320,354 distinct, all hosts and all result states.",
-      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_positives",
-      "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. Plant identity and the official finding belong to the population and report rows. Monitoring positional qualification is owned by INPUTS row 1; its source-linked enclosure and error evidence remain to be established."
+      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_positives; cordon_d.positional.measure and qualify (scripts/measure_positional.py)",
+      "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. Plant identity and the official finding belong to the population and report rows. Positional error is a release bound read from positives that two held orthophotos bracket; a release with no bracketed positive has no bound until a later official orthophoto is held."
     },
     {
       "id": "adopted-plans-and-listings",

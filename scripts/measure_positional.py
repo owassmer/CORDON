@@ -15,9 +15,9 @@
 chip is read. `vertices` selects the ground-level control vertices near it. `control` locates
 every ground-level control vertex in every image year and fits each year's local shift with its
 leave-one-out residuals. `measure` applies `cordon_d.positional.measure` to every positive of
-the frame (bracketed by imagery, under a single-plant removal rule), with every other held image
-for the persistence rule; it appends and resumes. `table` states
-every located positive's status and error, and the per-release counts and bound.
+the frame (bracketed by imagery), with every other held image for the persistence rule; it
+appends and resumes. `table` pools each release's readings into its radial bound and states
+every located positive's status and the bound it carries.
 """
 import argparse
 import csv
@@ -42,8 +42,8 @@ CONTROL_REACH_M = 15000  # control vertices read within this distance of a frame
 
 
 def population(args):
-    """Every located positive of the ordinary reader; the frame (bracketed by held imagery, under a
-    single-plant removal rule); and chip requests for every held image of every frame positive."""
+    """Every located positive of the ordinary reader; the frame (bracketed by held imagery); and
+    chip requests for every held image of every frame positive."""
     from pyproj import Transformer
     from cordon_d.monitoring import distinct_observations
     to_utm = Transformer.from_crs('EPSG:4326', 'EPSG:32633', always_xy=True)
@@ -71,9 +71,8 @@ def population(args):
                    round(e, 3), round(n, 3), int(any('estirpat' in (m.view or '').lower() for m in g.members))]
             w.writerow(row + ['|'.join(sorted(carried.get(k, ()))) for k in CARRY])
             e, n = round(e, 3), round(n, 3)
-            zones = ['|'.join(sorted(carried.get(k, ()))) for k in ('ZONA', 'ZONA_DELIMITATA')]
             pair = P.bracket(g.day, e, n) if g.day else None
-            if pair and P.single_removal_rule(zones, views):
+            if pair:
                 frame.append({'identity': identity, 'day': g.day.isoformat(), 'e': e, 'n': n, 'pre': pair[0],
                               'post': pair[1], 'release': P.release_of(releases, views, g.day)})
                 for year in sum(P.held(g.day, e, n), []):
@@ -190,16 +189,16 @@ def measure_one(f):
     offsets, loo = _STATE['control'].get(pre, ([], {}))
     term = P.imagery_term(offsets, loo, e, n)
     if term is None:
-        return {**base, 'status': 'unmeasured', 'cause': f'no control fit for {pre}'}
+        return {**base, 'status': 'unread', 'cause': f'no control fit for {pre}'}
     x0, y0, x1, y1 = records[keys[pre]]['bbox']
     point = ((y1 - n) / P.PIXEL_M, (e - x0) / P.PIXEL_M)
     others = [('before', y, images[y]) for y in before if y != pre] + [('after', y, images[y]) for y in after if y != post]
     status, detail = P.measure(images[pre], images[post], point, (term[0], term[1]), others)
     row = {**base, 'status': status, **detail, 'correction_m': [round(term[0], 3), round(term[1], 3)],
            'control_vertices': list(term[3]), 'chips': {str(y): records[k]['sha256'] for y, k in keys.items()}}
-    if status == 'measured':
+    if status == 'counted':
         row['imagery_m'] = term[2]
-        row['grid_m'] = round(P.grid_to_ground_m(e, n, detail['distance_m']), 4)
+        row['grid_m_per_m'] = round(P.grid_to_ground_m(e, n, 1.0), 7)
     return row
 
 
@@ -242,19 +241,19 @@ def table(args):
         source, release = P.release_of(p['releases'].split('|'), p['views'].split('|'), day)
         e, n = float(p['e32633']), float(p['n32633'])
         if p['identity'] in frame:
-            cause = 'measurement pending'
-        elif P.bracket(day, e, n) is None:
-            cause = 'no held image after the finding' if P.held(day, e, n)[0] else 'no held image before the finding'
+            status, cause = 'pending', 'reading pending'
         else:
-            cause = 'no single-plant removal rule'
+            status = 'out_of_reach'
+            cause = 'no held image after the finding' if P.held(day, e, n)[0] else 'no held image before the finding'
         rows.append({'identity': p['identity'], 'source': source, 'release': release, 'day': p['day'],
-                     'status': 'out_of_reach' if cause != 'measurement pending' else 'unmeasured', 'cause': cause})
+                     'status': status, 'cause': cause})
     bounds = P.release_bounds(rows)
     for key, entry in bounds.items():
         causes = {}
         for r in rows:
-            if (r['source'], r['release']) == key and r['status'] != 'measured':
+            if (r['source'], r['release']) == key and r['status'] != 'counted':
                 causes[r['cause']] = causes.get(r['cause'], 0) + 1
+        entry['pending'] = sum(r['status'] == 'pending' for r in rows if (r['source'], r['release']) == key)
         entry['causes'] = causes
     register = {}
     if args.register:
@@ -265,14 +264,12 @@ def table(args):
         entry['register'] = {'flagged_with_error': 0, 'refuted': 0, 'beyond_reach': 0}
     with open(args.out_rows, 'w', newline='') as stream:
         w = csv.writer(stream)
-        w.writerow(['identity', 'source', 'release', 'day', 'status', 'cause', 'pre', 'post', 'candidates',
-                    'distance_m', 'imagery_m', 'grid_m', 'error_m', 'error_basis', 'n', 'register_refutes'])
+        w.writerow(['identity', 'source', 'release', 'day', 'status', 'cause', 'pre', 'post', 'vanished',
+                    'imagery_m', 'error_m', 'error_basis', 'n', 'register_refutes'])
         for r in rows:
             entry = bounds[(r['source'], r['release'])]
-            if r['status'] == 'measured':
-                error, basis, n = round(r['distance_m'] + r['imagery_m'] + r['grid_m'], 2), 'own measurement', ''
-            elif r['status'] == 'unmeasured' and entry['bound_m'] is not None:
-                error, basis, n = entry['bound_m'], 'release bound', entry['measured']
+            if entry['bound_m'] is not None:
+                error, basis, n = entry['bound_m'], 'release bound', entry['n']
             else:
                 error, basis, n = '', 'none', ''
             refutes = ''
@@ -283,13 +280,14 @@ def table(args):
                 entry['register']['beyond_reach' if verdict is None else 'refuted'] += verdict is not False
                 refutes = '' if verdict is None else verdict
             w.writerow([r['identity'], r['source'], r['release'], r['day'], r['status'], r.get('cause', ''),
-                        r.get('pre', ''), r.get('post', ''), len(r.get('candidates', [])) if r['status'] == 'measured' else '',
-                        r.get('distance_m', ''), r.get('imagery_m', ''), r.get('grid_m', ''), error, basis, n, refutes])
+                        r.get('pre', ''), r.get('post', ''), len(r['vanished']) if r['status'] == 'counted' else '',
+                        r.get('imagery_m', ''), error, basis, n, refutes])
     out = [{'source': s, 'release': rel, **entry} for (s, rel), entry in sorted(bounds.items())]
     Path(args.out_table).write_text(json.dumps(out, indent=1) + '\n')
     for e in out:
-        print(f"{e['source']:18} {e['release']:28} measured {e['measured']:5} unmeasured {e['unmeasured']:5} "
-              f"out {e['out_of_reach']:5} max {e['max_distance_m']} imagery {e['imagery_m']} bound {e['bound_m']}")
+        print(f"{e['source']:18} {e['release']:28} counted {e['counted']:5} unread {e['unread']:5} "
+              f"pending {e['pending']:5} out {e['out_of_reach']:5} radius {e['radius_m']} imagery {e['imagery_m']} "
+              f"bound {e['bound_m']} {e.get('cause') or ''}")
 
 
 if __name__ == '__main__':

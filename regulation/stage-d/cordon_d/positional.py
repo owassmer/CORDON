@@ -1,13 +1,20 @@
-"""Positional error of monitoring positives, measured from the removed crown.
+"""Positional error of monitoring positives, measured as a population excess of removed crowns.
 
-Identity comes from the removal, never from the nearest crown. For a positive under a
-single-plant removal rule that falls between two regional orthophotos, the candidates
-are every crown present in the earlier image and absent from the later one within
-`SEARCH_RADIUS_M` of the recorded point. They are fixed before any distance is taken.
-The positive's error is the distance from the recorded point to the far edge of the
-farthest candidate, in ground coordinates corrected for the earlier image's own
-systematic shift, plus that image's residual after the correction. A positive with no
-candidate is unmeasured and stays in the counts.
+No crown is chosen as the recorded tree. For each positive that two regional orthophotos
+bracket, every crown with removal's signature is found
+across the whole chip: present in every held image before the finding and absent from
+every held image after it. The same rule runs everywhere in the chip. Each such crown's
+centre is placed relative to the recorded point, which is first corrected for the earlier
+image's own shift from the ground.
+
+Per source and release, the vanished crowns of all its positives are pooled into a radial
+density (crowns per m2 in 1 m rings). Removals unrelated to the recorded tree make a
+background density, read from an outer band of the same chips. The recorded trees show as
+an excess over that background near the point. The release bound is the distance that
+contains the excess: beyond it the remaining excess is indistinguishable from zero, and at
+least `coverage` of the excess lies within it, both at the stated confidence under
+resampling of positives. The release's largest imagery residual and the grid-to-ground
+difference are added.
 
 The image steps are deterministic functions of the stored chip bytes and the constants
 below. The imagery term comes from the region's surveyed control points: each image
@@ -25,9 +32,14 @@ import numpy as np
 
 # --- fixed before measuring -----------------------------------------------------
 
-SEARCH_RADIUS_M = 50.0          # the legal distance; candidates are sought within it
 PIXEL_M = 0.2                   # requested chip resolution for every image year
-CHIP_HALF_M = 62.0              # removal chip: radius plus a crown beyond it
+CHIP_HALF_M = 62.0              # removal chip: half its side
+# The radial measurement. Crowns are counted, and ring areas taken, only in the chip interior
+# (at least `interior_margin_m` inside every edge: the co-registration search plus a margin), so a
+# ring's count and its area cover the same ground. The background band ends at the largest ring
+# wholly inside every interior. `coverage` and `confidence` are the stated choice, not tuned.
+RADIAL = {'ring_m': 1.0, 'interior_margin_m': 8.0, 'background_m': (30.0, 54.0),
+          'coverage': 0.95, 'confidence': 0.95, 'resamples': 2000, 'seed': 20260922}
 CONTROL_HALF_M = 15.0           # control chip
 IMAGE_PARAMETERS = {
     'format': 'jpg', 'compressionQuality': 90, 'interpolation': 'RSP_BilinearInterpolation',
@@ -138,13 +150,6 @@ def bracket(event: date, east: float, north: float):
     pairs = [(b, a) for b in before for a in after]
     pool = [p for p in pairs if same_season(*p)] or pairs
     return min(pool, key=lambda p: (p[1] - p[0], -p[0]))
-
-
-def single_removal_rule(zone_labels, views) -> bool:
-    """A positive whose publisher places it under removal of the infected plant alone:
-    a containment-zone label, or publication in a removed-plant layer."""
-    return (any('conten' in (z or '').lower() for z in zone_labels)
-            or any('estirpat' in (v or '').lower() for v in views))
 
 
 def release_of(releases, views, day: date | None) -> tuple[str, str]:
@@ -270,12 +275,14 @@ def _texture(image):
 
 @dataclass(frozen=True)
 class Crown:
+    centre_m: float        # crown centroid to the corrected point
     near_m: float          # nearest crown pixel to the corrected point
     far_m: float           # farthest crown pixel to the corrected point
     area_m2: float
     before: float          # crown/ring brightness ratio in the earlier image
     after: float           # the same ratio in the co-registered later image
     edge: bool             # the crown touches the chip edge
+    interior: bool         # the centroid lies in the chip interior, where crowns are counted
     row: float = 0.0       # crown centroid in the earlier chip (pixels), for inspection
     col: float = 0.0
 
@@ -306,25 +313,42 @@ def _persistence(v_before, v_other, rr, cc) -> float:
     """Largest correlation of the earlier image's brightness over one crown and its own ring
     (pixels `rr`, `cc`) with another image's, over small residual shifts. A standing tree keeps
     its dark-crown-in-bright-ring pattern whatever the radiometry; cleared ground loses it."""
+    from scipy import fft
     a = v_before[rr, cc]
     a = (a - a.mean()) / (a.std() + 1e-9)
     h, w = v_other.shape
     s = int(round(CHANGE['persist_search_m'] / PIXEL_M))
-    best = -1.0
-    for dy in range(-s, s + 1):
-        for dx in range(-s, s + 1):
-            r, c = rr + dy, cc + dx
-            ok = (r >= 0) & (r < h) & (c >= 0) & (c < w)
-            if ok.mean() < 0.9:
-                continue
-            b = v_other[r[ok], c[ok]]
-            keep = np.isfinite(b)
-            if keep.sum() < CHANGE['min_pixels']:
-                continue
-            x, y = a[ok][keep], b[keep]
-            y = (y - y.mean()) / (y.std() + 1e-9)
-            best = max(best, float(((x - x.mean()) * y).mean()))
-    return best
+    r0, c0 = int(rr.min()), int(cc.min())
+    hh, ww = int(rr.max()) - r0 + 1, int(cc.max()) - c0 + 1
+    region, x = np.zeros((hh, ww)), np.zeros((hh, ww))
+    region[rr - r0, cc - c0] = 1.0
+    x[rr - r0, cc - c0] = a
+    # the other image over the region's box widened by the search; outside the chip is not held
+    window = np.full((hh + 2 * s, ww + 2 * s), np.nan)
+    in_chip = np.zeros(window.shape)
+    ys, xs = max(0, r0 - s), max(0, c0 - s)
+    ye, xe = min(h, r0 + hh + s), min(w, c0 + ww + s)
+    window[ys - r0 + s:ye - r0 + s, xs - c0 + s:xe - c0 + s] = v_other[ys:ye, xs:xe]
+    in_chip[ys - r0 + s:ye - r0 + s, xs - c0 + s:xe - c0 + s] = 1.0
+    valid = np.isfinite(window)
+    b = np.where(valid, window, 0.0)
+    # every shift at once: out[i, j] sums template[p, q] * image[p + i, q + j] for shift (i - s, j - s).
+    # The template is padded to the window's size; for i, j <= 2s no index wraps, so the circular
+    # correlation equals the direct sum.
+    shape = window.shape
+    spectrum = {name: np.conj(fft.rfft2(t, shape)) for name, t in (('region', region), ('x', x))}
+    over = lambda image, template: fft.irfft2(fft.rfft2(image) * spectrum[template], shape)[:2 * s + 1, :2 * s + 1]  # noqa: E731
+    valid = valid.astype(float)
+    inside = np.rint(over(in_chip, 'region'))
+    count = np.rint(over(valid, 'region'))
+    with np.errstate(divide='ignore', invalid='ignore'):
+        mean_x = over(valid, 'x') / count
+        mean_y = over(b, 'region') / count
+        covariance = over(b, 'x') / count - mean_x * mean_y
+        spread = np.sqrt(np.clip(over(b * b, 'region') / count - mean_y ** 2, 0, None))
+        score = covariance / (spread + 1e-9)
+    usable = (inside >= 0.9 * region.sum()) & (count >= CHANGE['min_pixels'])
+    return float(score[usable].max()) if usable.any() else -1.0
 
 
 def _present(state) -> bool:
@@ -338,12 +362,12 @@ def _absent(state) -> bool:
 
 def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, int],
                     point_px: tuple[float, float], others=()):
-    """Crowns carrying removal's signature, nearest pixel within the radius of `point_px`
-    (row, column in the earlier chip): present in `earlier` and absent from `later`, and in
-    each of `others` — (relation, year, image, shift) with relation 'before' or 'after' the
-    finding — present if before and absent if after.
+    """Every crown of the chip carrying removal's signature: present in `earlier` and absent
+    from `later`, and in each of `others` — (relation, year, image, shift) with relation
+    'before' or 'after' the finding — present if before and absent if after. Distances are
+    taken from `point_px` (row, column in the earlier chip); they select nothing.
 
-    Returns (candidates, rejected, undetermined): a crown that reappears or was absent
+    Returns (vanished, rejected, undetermined): a crown that reappears or was absent
     earlier is rejected; one whose state cannot be read in some image is undetermined.
     """
     from scipy import ndimage
@@ -370,8 +394,6 @@ def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, in
         rows, cols = np.nonzero(crown)
         rows, cols = rows + y0, cols + x0
         d = np.hypot(rows + 0.5 - point_px[0], cols + 0.5 - point_px[1]) * PIXEL_M
-        if d.min() > SEARCH_RADIUS_M:
-            continue
         dilated = ndimage.binary_dilation(crown, iterations=outer)
         footprint = ndimage.binary_dilation(crown, iterations=margin)
         grown_box = grown[y0:y1, x0:x1]
@@ -398,9 +420,13 @@ def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, in
         if not absent(primary[1], after):
             continue
         edge = bool(rows.min() == 0 or cols.min() == 0 or rows.max() == h - 1 or cols.max() == w - 1)
-        record = Crown(round(float(d.min()), 2), round(float(d.max()) + PIXEL_M / 2, 2),
+        cy, cx = float(rows.mean()) + 0.5, float(cols.mean()) + 0.5
+        inset = RADIAL['interior_margin_m'] / PIXEL_M
+        record = Crown(round(float(np.hypot(cy - point_px[0], cx - point_px[1])) * PIXEL_M, 2),
+                       round(float(d.min()), 2), round(float(d.max()) + PIXEL_M / 2, 2),
                        round(area, 1), round(before[0], 3), round(after[0], 3), edge,
-                       round(float(rows.mean()), 1), round(float(cols.mean()), 1))
+                       bool(inset <= cy <= h - inset and inset <= cx <= w - inset),
+                       round(cy - 0.5, 1), round(cx - 0.5, 1))
         verdict = 'candidate'
         for relation, year, layer in layers:
             state = _state(layer, crown, dilated, grown_box, box, footprint)
@@ -411,7 +437,7 @@ def vanished_crowns(earlier: np.ndarray, later: np.ndarray, shift: tuple[int, in
                 verdict = 'rejected'
                 break
         {'candidate': found, 'rejected': rejected, 'undetermined': undetermined}[verdict].append(record)
-    order = lambda c: c.near_m  # noqa: E731
+    order = lambda c: c.centre_m  # noqa: E731
     return sorted(found, key=order), sorted(rejected, key=order), sorted(undetermined, key=order)
 
 
@@ -545,27 +571,41 @@ def register_refutes(east: float, north: float, error_m: float, trees) -> bool |
     return not any(hypot(x - east, y - north) <= error_m for x, y in trees)
 
 
-# --- per-positive measurement and release bounds --------------------------------
+# --- per-positive reading -------------------------------------------------------
+
+def ring_areas(point_px: tuple[float, float], shape: tuple[int, int]) -> list[float]:
+    """Interior area (m2) of each `RADIAL` ring about `point_px`, out to the background band's
+    outer edge. A crown is counted in a ring only where its centre lies in the same interior."""
+    ring, inset = RADIAL['ring_m'], RADIAL['interior_margin_m'] / PIXEL_M
+    rings = int(round(RADIAL['background_m'][1] / ring))
+    h, w = shape
+    rows, cols = np.mgrid[:h, :w] + 0.5
+    inside = (rows >= inset) & (rows <= h - inset) & (cols >= inset) & (cols <= w - inset)
+    index = (np.hypot(rows - point_px[0], cols - point_px[1])[inside] * PIXEL_M / ring).astype(int)
+    area = np.bincount(index[index < rings], minlength=rings) * PIXEL_M ** 2
+    return [round(float(a), 2) for a in area]
+
 
 def measure(earlier: np.ndarray, later: np.ndarray, point_px: tuple[float, float],
             correction: tuple[float, float], others=()):
-    """One positive's measurement from its bracketing chips, every other held image, and the
+    """One positive's reading from its bracketing chips, every other held image, and the
     earlier image's correction.
 
     `point_px` is the recorded point in the earlier chip; `correction` is that image's
     fitted (east, north) shift of image content from ground. The point is moved by the
     shift so distances to crowns in the image are ground distances. `others` are
     (relation, year, image) for every other image held at the point, relation 'before' or
-    'after' the finding. The candidate set is fixed by removal's signature before any
-    candidate's distance is used. Returns (status, detail).
+    'after' the finding. Returns ('counted', detail) with every crown of the chip carrying
+    removal's signature and the interior ring areas about the corrected point, or
+    ('unread', detail) with the cause. No crown is chosen as the recorded tree.
     """
     for image in (earlier, later):
         if nodata_share(image) > NODATA_LIMIT:
-            return 'unmeasured', {'cause': 'image has no data at the point'}
+            return 'unread', {'cause': 'image has no data at the point'}
     reference = _band_pass(earlier)
     ncc, dy, dx = coregister(earlier, later, reference=reference)
     if ncc < COREGISTRATION['min_ncc']:
-        return 'unmeasured', {'cause': 'co-registration below threshold', 'ncc': round(ncc, 3)}
+        return 'unread', {'cause': 'co-registration below threshold', 'ncc': round(ncc, 3)}
     registered, not_held = [], []
     for relation, year, image in others:
         if nodata_share(image) > NODATA_LIMIT:
@@ -573,78 +613,152 @@ def measure(earlier: np.ndarray, later: np.ndarray, point_px: tuple[float, float
             continue
         score, oy, ox = coregister(earlier, image, reference=reference)
         if score < COREGISTRATION['min_ncc']:
-            return 'unmeasured', {'cause': f'co-registration below threshold in {year}', 'ncc': round(score, 3)}
+            return 'unread', {'cause': f'co-registration below threshold in {year}', 'ncc': round(score, 3)}
         registered.append((relation, year, image, (oy, ox)))
     corrected = (point_px[0] - correction[1] / PIXEL_M, point_px[1] + correction[0] / PIXEL_M)
     found, rejected, undetermined = vanished_crowns(earlier, later, (dy, dx), corrected, registered)
-    detail = {'ncc': round(ncc, 3), 'shift_px': [dy, dx], 'candidates': [c.__dict__ for c in found],
-              'rejected': len(rejected), 'undetermined': len(undetermined),
-              'years_before': sorted(y for r, y, *_ in registered if r == 'before'),
-              'years_after': sorted(y for r, y, *_ in registered if r == 'after'), 'not_held': sorted(not_held)}
-    if undetermined:
-        return 'unmeasured', {**detail, 'cause': "a candidate's state is unreadable in a held image"}
-    if not found:
-        return 'unmeasured', {**detail, 'cause': "no crown carries removal's signature within the radius"}
-    if any(c.edge for c in found):
-        return 'unmeasured', {**detail, 'cause': 'a candidate crown crosses the chip edge'}
-    detail['distance_m'] = max(c.far_m for c in found)
-    return 'measured', detail
+    return 'counted', {
+        'ncc': round(ncc, 3), 'shift_px': [dy, dx], 'point_px': [round(v, 2) for v in corrected],
+        'vanished': [c.__dict__ for c in found], 'rejected': len(rejected), 'undetermined': len(undetermined),
+        'undetermined_interior': sum(c.interior for c in undetermined),
+        'years_before': sorted(y for r, y, *_ in registered if r == 'before'),
+        'years_after': sorted(y for r, y, *_ in registered if r == 'after'), 'not_held': sorted(not_held),
+        'ring_area_m2': ring_areas(corrected, earlier.shape[:2])}
+
+
+def radial_profile(detail: dict):
+    """(counts, areas) per ring: interior vanished-crown centres and interior area."""
+    areas = np.asarray(detail['ring_area_m2'], dtype=float)
+    counts = np.zeros(len(areas))
+    for crown in detail['vanished']:
+        index = int(crown['centre_m'] / RADIAL['ring_m'])
+        if crown['interior'] and index < len(areas):
+            counts[index] += 1
+    return counts, areas
+
+
+# --- the release bound: signal over background -----------------------------------
+
+def radial_bound(counts, areas) -> dict:
+    """The distance that contains a release's excess of vanished crowns over background.
+
+    `counts` and `areas` are (positives x rings). The background density is the pooled
+    density in the background band. The excess in each inner ring is its count less the
+    background density times its area; T(r) is the excess beyond distance r, up to the band.
+    The bound is the smallest ring edge r beyond which T is indistinguishable from zero: no
+    edge at or beyond r has T above zero under a one-sided simultaneous band over all ring
+    edges at the stated confidence. The band comes from resampling positives with
+    replacement (`resamples`, fixed seed), so crowns shared by one chip move together, and
+    the background is re-estimated in each resample. With the bound come the upper limit of
+    the excess left beyond it, in crowns and as a share of the excess: how much a release
+    of this n could still hide there.
+
+    No bound where the band's density is not flat (its inner and outer halves differ at the
+    stated confidence), where the excess over background is not established, or where it
+    reaches the band.
+    """
+    counts, areas = np.asarray(counts, dtype=float), np.asarray(areas, dtype=float)
+    n = counts.shape[0]
+    ring = RADIAL['ring_m']
+    b0, b1 = (int(round(x / ring)) for x in RADIAL['background_m'])
+    alpha = 1 - RADIAL['confidence']
+    out = {'n': n, 'vanished_counted': int(counts.sum()), 'radius_m': None}
+    if n == 0:
+        return {**out, 'cause': 'no positive read'}
+    rng = np.random.default_rng(RADIAL['seed'])
+    weights = np.vstack([np.ones(n), rng.multinomial(n, np.full(n, 1 / n), size=RADIAL['resamples'])])
+    C, A = weights @ counts, weights @ areas
+    background = C[:, b0:b1].sum(axis=1) / A[:, b0:b1].sum(axis=1)
+    excess = C[:, :b0] - background[:, None] * A[:, :b0]
+    tail = np.cumsum(excess[:, ::-1], axis=1)[:, ::-1]           # T at ring edges 0 .. b0 - 1
+    spread = tail[1:].std(axis=0)
+    band = float(np.quantile(((tail[1:] - tail[0]) / spread).max(axis=1), RADIAL['confidence']))
+    lower, upper = tail[0] - band * spread, tail[0] + band * spread
+    half = (b0 + b1) // 2
+    inner = C[:, b0:half].sum(axis=1) / A[:, b0:half].sum(axis=1)
+    outer = C[:, half:b1].sum(axis=1) / A[:, half:b1].sum(axis=1)
+    flat = inner / outer
+    out.update({
+        'background_per_m2': float(background[0]),
+        'background_ci': [float(np.quantile(background[1:], alpha / 2)), float(np.quantile(background[1:], 1 - alpha / 2))],
+        'background_band_m': list(RADIAL['background_m']),
+        'flatness_inner_over_outer': float(flat[0]),
+        'flatness_ci': [float(np.quantile(flat[1:], alpha / 2)), float(np.quantile(flat[1:], 1 - alpha / 2))],
+        'excess': float(tail[0, 0]), 'excess_lower': float(lower[0]), 'band_z': round(band, 3),
+        'excess_profile': [round(float(x), 2) for x in excess[0]],
+        'ring_counts': [int(x) for x in C[0]], 'ring_areas_m2': [round(float(x), 1) for x in A[0]]})
+    if not (out['flatness_ci'][0] <= 1 <= out['flatness_ci'][1]):
+        return {**out, 'cause': 'the background band is not flat'}
+    if not lower[0] > 0:
+        return {**out, 'cause': 'no excess of vanished crowns over background near the points'}
+    radius = (int(np.nonzero(lower > 0)[0].max()) + 1) * ring
+    out['significance_edge_m'] = radius
+    if radius >= RADIAL['background_m'][0]:
+        return {**out, 'cause': 'the excess reaches the background band'}
+    k = int(round(radius / ring))
+    left = max(0.0, float(upper[k]))
+    return {**out, 'radius_m': radius, 'within_m': float(tail[0, 0] - tail[0, k]), 'beyond_upper': round(left, 1),
+            'beyond_upper_share': round(left / float(tail[0, 0]), 4), 'cause': None}
 
 
 def release_bounds(rows):
-    """Per (source, release): counts and the bound = max measured distance + imagery term.
+    """Per (source, release): counts by status, the radial bound over its counted positives,
+    and the bound = radius + largest imagery residual + grid-to-ground at the radius.
 
-    `rows` are per-positive dicts with source, release, status and, when measured,
-    distance_m, imagery_m and grid_m. The imagery term is the largest carried by a
-    measured positive of that release.
+    `rows` are per-positive dicts with source, release, status ('counted', 'unread',
+    'out_of_reach') and, when counted, the reading's vanished crowns and ring areas,
+    imagery_m and grid_m_per_m.
     """
-    table = {}
+    groups = {}
     for row in rows:
-        entry = table.setdefault((row['source'], row['release']),
-                                 {'measured': 0, 'unmeasured': 0, 'out_of_reach': 0,
-                                  'max_distance_m': None, 'imagery_m': None, 'grid_m': None})
-        entry[row['status']] += 1
-        if row['status'] == 'measured':
-            for key, field in (('max_distance_m', 'distance_m'), ('imagery_m', 'imagery_m'), ('grid_m', 'grid_m')):
-                entry[key] = max(entry[key] or 0.0, row[field])
-    for entry in table.values():
-        entry['bound_m'] = (round(entry['max_distance_m'] + entry['imagery_m'] + entry['grid_m'], 2)
-                            if entry['measured'] else None)
+        groups.setdefault((row['source'], row['release']), []).append(row)
+    table = {}
+    for key, members in groups.items():
+        status = {s: sum(r['status'] == s for r in members) for s in ('counted', 'unread', 'out_of_reach')}
+        counted = [r for r in members if r['status'] == 'counted']
+        profiles = [radial_profile(r) for r in counted]
+        entry = {**status, 'imagery_m': max((r['imagery_m'] for r in counted), default=None),
+                 'grid_m_per_m': max((r['grid_m_per_m'] for r in counted), default=None)}
+        if profiles:
+            entry.update(radial_bound(np.vstack([p[0] for p in profiles]), np.vstack([p[1] for p in profiles])))
+        else:
+            entry.update({'n': 0, 'radius_m': None, 'cause': 'no positive read'})
+        entry['bound_m'] = None
+        if entry['radius_m'] is not None:
+            entry['grid_m'] = round(entry['grid_m_per_m'] * entry['radius_m'], 4)
+            entry['bound_m'] = round(entry['radius_m'] + entry['imagery_m'] + entry['grid_m'], 2)
+        table[key] = entry
     return table
 
 
 def qualify(observation, result: dict, bounds: dict, *, context: str, event_date: date, sources):
-    """The `SpatialQualification` for one located positive.
-
-    A measured positive carries its own error: the farthest candidate's far edge, the
-    earlier image's residual after its control-point correction, and grid-to-ground.
-    An unmeasured positive carries its release's bound (Owen's ruling, 22 Sep 2026),
-    stated with the measured n. An out-of-reach positive, or a release with no measured
-    positive, has no qualification. `sources` are store-relative records of the chips,
-    control points or bound document the reading rests on.
+    """The `SpatialQualification` for one located positive: its release's bound (Owen's
+    ruling, 22 Sep 2026), stated with n and the method. A positive of a release with no
+    bound has no qualification. `sources` are store-relative
+    records of the chips, control points or bound document the reading rests on.
     """
     from cordon_c.core import MissingInput
     from .evidence import Support
     from .spatial import SpatialQualification
-    key = (result['source'], result['release'])
-    if result['status'] == 'measured':
-        error = result['distance_m'] + result['imagery_m'] + result['grid_m']
-        reading = (f"Removal identity: {len(result['candidates'])} crown(s) present in {result['pre']} and absent in "
-                   f"{result['post']} within {SEARCH_RADIUS_M:g} m; farthest far edge {result['distance_m']:.2f} m after "
-                   f"the {result['pre']} local control correction; imagery residual {result['imagery_m']:.2f} m; "
-                   f"grid-to-ground {result['grid_m']:.3f} m.")
-    elif result['status'] == 'unmeasured':
-        entry = bounds.get(key)
-        if entry is None or entry.get('bound_m') is None:
-            raise MissingInput(f'a measured positional bound for release {key[1]}')
-        error = entry['bound_m']
-        reading = (f"Release bound of {key[1]} ({key[0]}): largest measured error {entry['max_distance_m']:.2f} m over "
-                   f"n={entry['measured']} measured positives, plus imagery {entry['imagery_m']:.2f} m and grid "
-                   f"{entry['grid_m']:.3f} m; applied to this unmeasured positive ({result.get('cause')}) by Owen's "
-                   f"ruling of 22 Sep 2026. It is the release's largest measured error, not a guaranteed maximum.")
-    else:
-        raise MissingInput('bracketing regional orthophotos under a single-plant removal rule')
+    source, release = result['source'], result['release']
+    entry = bounds.get((source, release))
+    if entry is None or entry.get('bound_m') is None:
+        if result['status'] == 'out_of_reach' and 'image' in (result.get('cause') or ''):
+            raise MissingInput('bracketing regional orthophotos for the positive')
+        raise MissingInput(f"a positional bound for release {release}"
+                           + (f": {entry['cause']}" if entry and entry.get('cause') else ''))
+    low, high = RADIAL['background_m']
+    reading = (f"Release bound of {release} ({source}): vanished crowns (present in every held orthophoto before "
+               f"the finding, absent in every later one) around n={entry['n']} positives read, pooled by distance; "
+               f"background {entry['background_per_m2']:.2e} per m2 from {low:g}-{high:g} m; excess over background "
+               f"{entry['excess']:.0f} crowns, contained within {entry['radius_m']:g} m: beyond it the remaining "
+               f"excess is indistinguishable from zero under a one-sided simultaneous {RADIAL['confidence']:.0%} band "
+               f"over ring edges from resampling positives, and at most {entry['beyond_upper']:.0f} crowns "
+               f"({entry['beyond_upper_share']:.0%} of the excess) at that confidence; plus the release's largest "
+               f"imagery residual {entry['imagery_m']:.2f} m after control-point correction and grid-to-ground "
+               f"{entry['grid_m']:.3f} m. It states where the release's recorded trees lie relative to their "
+               f"points; it is not a guaranteed maximum for this positive.")
     sources = tuple(sources)
     return SpatialQualification(observation.occurrence, context, event_date, observation.crs, 'EPSG:32633',
-                                round(float(error), 2), sources,
+                                round(float(entry['bound_m']), 2), sources,
                                 tuple(Support(s.identity, 'whole record', reading) for s in sources))
