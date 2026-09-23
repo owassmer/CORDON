@@ -12,6 +12,8 @@ cadastral map.
     layers                     measure the Region's published zone layer against the
                                cadastral outline where the act fixes the line by listed
                                units; write its `positional-error` records
+    localities                 per held comune, how far away the fixes giving its error
+                               lie; written into the cadastre's record
 
 `C.json` lists the retained Rete Planoaltimetrica pages (ServicesArcIMS/RetiGeodetiche
 layer 0). Run with the Stage C/D environment:
@@ -282,6 +284,53 @@ def layers(args):
                         and r['provision_version_id'] in args.version), out)
 
 
+LOCALITY_METHOD = (
+    "Per comune whose sheets are held, at the centroid of each of its sheets: the distance to the nearest measured "
+    f"fix and to the {E.K}th nearest (the fixes whose errors give the place's value), and how many of those "
+    f"{E.K} fixes lie in the comune. Where they lie far away the value is measured elsewhere, not locally; the "
+    "distance says how far.")
+
+
+def localities(args):
+    """How far from each held comune the fixes giving its error lie; written into the cadastre record."""
+    from scipy.spatial import cKDTree
+    from cordon_d.area_geometry import Sources
+    sources = Sources(ROOT)
+    document = json.loads(CONTROL.read_text())
+    measured = [f for f in document['fixes'] if 'error_m' in f]
+    xy = numpy.array([[f['x'], f['y']] for f in measured])
+    comune_of = numpy.array([f['comune'] for f in measured])
+    field = E.ErrorField(xy, numpy.array([f['error_m'] for f in measured]))
+    tree = cKDTree(xy)
+    centroids = {}
+    for (code, _, _), found in sources.sheets.items():
+        centroids.setdefault(code, []).extend(shapely.get_coordinates(g.centroid)[0] for _, g in found)
+    units = sources.administrative
+    rows = []
+    for code in sorted(centroids):
+        at = numpy.array(centroids[code])
+        distance, index = tree.query(at, k=E.K)
+        inside = (comune_of[index] == code).sum(axis=1)
+        error = field.at(at)
+        rows.append({'comune': code, 'name': units.comune(catastale=code).name, 'sheets': int(len(at)),
+                     'fixes_in_comune': int((comune_of == code).sum()),
+                     'nearest_fix_m': {'median': round(float(numpy.median(distance[:, 0]))),
+                                       'max': round(float(distance[:, 0].max()))},
+                     f'fix_{E.K}_m': {'median': round(float(numpy.median(distance[:, -1]))),
+                                      'max': round(float(distance[:, -1].max()))},
+                     f'of_{E.K}_in_comune': {'median': int(numpy.median(inside)), 'min': int(inside.min())},
+                     'error_m': {'median': round(float(numpy.median(error)), 1), 'max': round(float(error.max()), 1)}})
+    path = ROOT / RECORDS
+    kept = json.loads(path.read_text())
+    record = next(r for r in kept if r['kind'] == 'positional-error' and r['source'] == 'cadastre')
+    record['locality_method'] = LOCALITY_METHOD
+    record['localities'] = rows
+    path.write_text(json.dumps(kept, indent=1, ensure_ascii=False) + '\n')
+    far = sorted(rows, key=lambda r: -r[f'fix_{E.K}_m']['median'])
+    for r in far[:15]:
+        print(r['comune'], r['name'], r['fixes_in_comune'], r['nearest_fix_m'], r[f'fix_{E.K}_m'], r['error_m'])
+
+
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest='command', required=True)
@@ -294,8 +343,10 @@ def main():
     lay.add_argument('--decision', default='2026-09-22')
     lay.add_argument('version', nargs='+', help='the provision version ids whose layers are measured, one '
                      'version per run to bound memory')
+    sub.add_parser('localities')
     args = parser.parse_args()
-    {'windows': windows, 'measure': measure, 'istat': istat, 'layers': layers}[args.command](args)
+    {'windows': windows, 'measure': measure, 'istat': istat, 'layers': layers,
+     'localities': localities}[args.command](args)
 
 
 if __name__ == '__main__':

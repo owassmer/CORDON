@@ -6320,6 +6320,3749 @@
    }
   ],
   "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-23T03:08:03+00:00"
+  "measured_at": "2026-09-23T03:08:03+00:00",
+  "locality_method": "Per comune whose sheets are held, at the centroid of each of its sheets: the distance to the nearest measured fix and to the 20th nearest (the fixes whose errors give the place's value), and how many of those 20 fixes lie in the comune. Where they lie far away the value is measured elsewhere, not locally; the distance says how far.",
+  "localities": [
+   {
+    "comune": "A048",
+    "name": "Acquaviva delle Fonti",
+    "sheets": 129,
+    "fixes_in_comune": 14,
+    "nearest_fix_m": {
+     "median": 1112,
+     "max": 3832
+    },
+    "fix_20_m": {
+     "median": 8298,
+     "max": 12184
+    },
+    "of_20_in_comune": {
+     "median": 11,
+     "min": 2
+    },
+    "error_m": {
+     "median": 7.4,
+     "max": 39.4
+    }
+   },
+   {
+    "comune": "A149",
+    "name": "Alberobello",
+    "sheets": 54,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1384,
+     "max": 2482
+    },
+    "fix_20_m": {
+     "median": 7530,
+     "max": 8425
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 2
+    },
+    "error_m": {
+     "median": 68.5,
+     "max": 81.9
+    }
+   },
+   {
+    "comune": "A184",
+    "name": "Alessano",
+    "sheets": 34,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1690,
+     "max": 2862
+    },
+    "fix_20_m": {
+     "median": 7553,
+     "max": 10785
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 10.7,
+     "max": 15.9
+    }
+   },
+   {
+    "comune": "A185",
+    "name": "Alezio",
+    "sheets": 22,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1030,
+     "max": 1770
+    },
+    "fix_20_m": {
+     "median": 7843,
+     "max": 8234
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 42.5,
+     "max": 50.5
+    }
+   },
+   {
+    "comune": "A208",
+    "name": "Alliste",
+    "sheets": 31,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1264,
+     "max": 2250
+    },
+    "fix_20_m": {
+     "median": 9048,
+     "max": 10423
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "A225",
+    "name": "Altamura",
+    "sheets": 307,
+    "fixes_in_comune": 35,
+    "nearest_fix_m": {
+     "median": 1453,
+     "max": 6680
+    },
+    "fix_20_m": {
+     "median": 9322,
+     "max": 19938
+    },
+    "of_20_in_comune": {
+     "median": 20,
+     "min": 9
+    },
+    "error_m": {
+     "median": 41.3,
+     "max": 90.7
+    }
+   },
+   {
+    "comune": "A281",
+    "name": "Andrano",
+    "sheets": 24,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1311,
+     "max": 2794
+    },
+    "fix_20_m": {
+     "median": 8059,
+     "max": 8967
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 6.5,
+     "max": 12.8
+    }
+   },
+   {
+    "comune": "A350",
+    "name": "Aradeo",
+    "sheets": 12,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1482,
+     "max": 2085
+    },
+    "fix_20_m": {
+     "median": 8117,
+     "max": 8632
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 11.8,
+     "max": 24.5
+    }
+   },
+   {
+    "comune": "A425",
+    "name": "Arnesano",
+    "sheets": 16,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1135,
+     "max": 2151
+    },
+    "fix_20_m": {
+     "median": 7032,
+     "max": 7662
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 27.5,
+     "max": 37.3
+    }
+   },
+   {
+    "comune": "A514",
+    "name": "Avetrana",
+    "sheets": 66,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1436,
+     "max": 3383
+    },
+    "fix_20_m": {
+     "median": 10203,
+     "max": 11767
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 5
+    },
+    "error_m": {
+     "median": 23.8,
+     "max": 45.5
+    }
+   },
+   {
+    "comune": "A572",
+    "name": "Bagnolo del Salento",
+    "sheets": 8,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1141,
+     "max": 1643
+    },
+    "fix_20_m": {
+     "median": 7622,
+     "max": 8156
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 23.9,
+     "max": 66.9
+    }
+   },
+   {
+    "comune": "A662",
+    "name": "Bari",
+    "sheets": 347,
+    "fixes_in_comune": 11,
+    "nearest_fix_m": {
+     "median": 1480,
+     "max": 4645
+    },
+    "fix_20_m": {
+     "median": 10177,
+     "max": 12693
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 2
+    },
+    "error_m": {
+     "median": 8.0,
+     "max": 23.1
+    }
+   },
+   {
+    "comune": "A883",
+    "name": "Bisceglie",
+    "sheets": 102,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1836,
+     "max": 3197
+    },
+    "fix_20_m": {
+     "median": 14653,
+     "max": 18581
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 5
+    },
+    "error_m": {
+     "median": 44.2,
+     "max": 44.2
+    }
+   },
+   {
+    "comune": "A893",
+    "name": "Bitonto",
+    "sheets": 157,
+    "fixes_in_comune": 20,
+    "nearest_fix_m": {
+     "median": 1304,
+     "max": 3950
+    },
+    "fix_20_m": {
+     "median": 9769,
+     "max": 15451
+    },
+    "of_20_in_comune": {
+     "median": 14,
+     "min": 6
+    },
+    "error_m": {
+     "median": 12.5,
+     "max": 90.7
+    }
+   },
+   {
+    "comune": "B086",
+    "name": "Botrugno",
+    "sheets": 16,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1444,
+     "max": 2235
+    },
+    "fix_20_m": {
+     "median": 7545,
+     "max": 7791
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 23.1,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "B180",
+    "name": "Brindisi",
+    "sheets": 235,
+    "fixes_in_comune": 26,
+    "nearest_fix_m": {
+     "median": 1562,
+     "max": 3975
+    },
+    "fix_20_m": {
+     "median": 9742,
+     "max": 14248
+    },
+    "of_20_in_comune": {
+     "median": 16,
+     "min": 4
+    },
+    "error_m": {
+     "median": 23.7,
+     "max": 32.1
+    }
+   },
+   {
+    "comune": "B357",
+    "name": "Cagnano Varano",
+    "sheets": 84,
+    "fixes_in_comune": 10,
+    "nearest_fix_m": {
+     "median": 1346,
+     "max": 4428
+    },
+    "fix_20_m": {
+     "median": 83527,
+     "max": 95660
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 10
+    },
+    "error_m": {
+     "median": 13.3,
+     "max": 13.3
+    }
+   },
+   {
+    "comune": "B413",
+    "name": "Calimera",
+    "sheets": 13,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1346,
+     "max": 2296
+    },
+    "fix_20_m": {
+     "median": 7698,
+     "max": 8366
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 49.0,
+     "max": 49.0
+    }
+   },
+   {
+    "comune": "B506",
+    "name": "Campi Salentina",
+    "sheets": 58,
+    "fixes_in_comune": 7,
+    "nearest_fix_m": {
+     "median": 1003,
+     "max": 2149
+    },
+    "fix_20_m": {
+     "median": 6997,
+     "max": 8188
+    },
+    "of_20_in_comune": {
+     "median": 7,
+     "min": 5
+    },
+    "error_m": {
+     "median": 7.5,
+     "max": 14.7
+    }
+   },
+   {
+    "comune": "B616",
+    "name": "Cannole",
+    "sheets": 22,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1490,
+     "max": 2509
+    },
+    "fix_20_m": {
+     "median": 7701,
+     "max": 8110
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    }
+   },
+   {
+    "comune": "B690",
+    "name": "Caprarica di Lecce",
+    "sheets": 16,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1420,
+     "max": 2358
+    },
+    "fix_20_m": {
+     "median": 7708,
+     "max": 7947
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 41.7,
+     "max": 49.0
+    }
+   },
+   {
+    "comune": "B716",
+    "name": "Capurso",
+    "sheets": 19,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1374,
+     "max": 2366
+    },
+    "fix_20_m": {
+     "median": 10491,
+     "max": 11277
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
+    }
+   },
+   {
+    "comune": "B792",
+    "name": "Carmiano",
+    "sheets": 29,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1445,
+     "max": 2480
+    },
+    "fix_20_m": {
+     "median": 7052,
+     "max": 7591
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 17.6,
+     "max": 37.3
+    }
+   },
+   {
+    "comune": "B808",
+    "name": "Carosino",
+    "sheets": 12,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1261,
+     "max": 2257
+    },
+    "fix_20_m": {
+     "median": 9450,
+     "max": 9737
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 84.1,
+     "max": 104.3
+    }
+   },
+   {
+    "comune": "B809",
+    "name": "Carovigno",
+    "sheets": 106,
+    "fixes_in_comune": 12,
+    "nearest_fix_m": {
+     "median": 1267,
+     "max": 2495
+    },
+    "fix_20_m": {
+     "median": 8713,
+     "max": 11316
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 5
+    },
+    "error_m": {
+     "median": 13.1,
+     "max": 17.5
+    }
+   },
+   {
+    "comune": "B822",
+    "name": "Carpignano Salentino",
+    "sheets": 49,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1200,
+     "max": 2332
+    },
+    "fix_20_m": {
+     "median": 7712,
+     "max": 8591
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 3
+    },
+    "error_m": {
+     "median": 49.0,
+     "max": 66.9
+    }
+   },
+   {
+    "comune": "B936",
+    "name": "Casarano",
+    "sheets": 42,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1196,
+     "max": 2285
+    },
+    "fix_20_m": {
+     "median": 7791,
+     "max": 8785
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "B998",
+    "name": "Cassano delle Murge",
+    "sheets": 103,
+    "fixes_in_comune": 10,
+    "nearest_fix_m": {
+     "median": 1035,
+     "max": 2589
+    },
+    "fix_20_m": {
+     "median": 8606,
+     "max": 11109
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 5
+    },
+    "error_m": {
+     "median": 12.9,
+     "max": 22.6
+    }
+   },
+   {
+    "comune": "C134",
+    "name": "Castellana Grotte",
+    "sheets": 89,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1204,
+     "max": 2398
+    },
+    "fix_20_m": {
+     "median": 6635,
+     "max": 7342
+    },
+    "of_20_in_comune": {
+     "median": 7,
+     "min": 3
+    },
+    "error_m": {
+     "median": 14.9,
+     "max": 19.7
+    }
+   },
+   {
+    "comune": "C334",
+    "name": "Castri di Lecce",
+    "sheets": 16,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 993,
+     "max": 2020
+    },
+    "fix_20_m": {
+     "median": 7214,
+     "max": 7604
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 18.0,
+     "max": 49.0
+    }
+   },
+   {
+    "comune": "C335",
+    "name": "Castrignano de' Greci",
+    "sheets": 15,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1565,
+     "max": 2223
+    },
+    "fix_20_m": {
+     "median": 7686,
+     "max": 8586
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 94.3,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "C336",
+    "name": "Castrignano del Capo",
+    "sheets": 35,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1068,
+     "max": 2255
+    },
+    "fix_20_m": {
+     "median": 12186,
+     "max": 14968
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    }
+   },
+   {
+    "comune": "C377",
+    "name": "Cavallino",
+    "sheets": 29,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1204,
+     "max": 2367
+    },
+    "fix_20_m": {
+     "median": 7188,
+     "max": 7683
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 18.5,
+     "max": 18.7
+    }
+   },
+   {
+    "comune": "C424",
+    "name": "Ceglie Messapica",
+    "sheets": 141,
+    "fixes_in_comune": 15,
+    "nearest_fix_m": {
+     "median": 1268,
+     "max": 2742
+    },
+    "fix_20_m": {
+     "median": 7803,
+     "max": 8627
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 5
+    },
+    "error_m": {
+     "median": 13.4,
+     "max": 37.0
+    }
+   },
+   {
+    "comune": "C436",
+    "name": "Cellamare",
+    "sheets": 9,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1376,
+     "max": 1686
+    },
+    "fix_20_m": {
+     "median": 10870,
+     "max": 11285
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
+    }
+   },
+   {
+    "comune": "C448",
+    "name": "Cellino San Marco",
+    "sheets": 37,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1308,
+     "max": 2278
+    },
+    "fix_20_m": {
+     "median": 8749,
+     "max": 9546
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 3
+    },
+    "error_m": {
+     "median": 12.8,
+     "max": 19.7
+    }
+   },
+   {
+    "comune": "C741",
+    "name": "Cisternino",
+    "sheets": 58,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1180,
+     "max": 2239
+    },
+    "fix_20_m": {
+     "median": 7881,
+     "max": 8613
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 4
+    },
+    "error_m": {
+     "median": 11.3,
+     "max": 18.2
+    }
+   },
+   {
+    "comune": "C865",
+    "name": "Collepasso",
+    "sheets": 19,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1348,
+     "max": 1961
+    },
+    "fix_20_m": {
+     "median": 8111,
+     "max": 8513
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 19.3,
+     "max": 44.5
+    }
+   },
+   {
+    "comune": "C975",
+    "name": "Conversano",
+    "sheets": 135,
+    "fixes_in_comune": 16,
+    "nearest_fix_m": {
+     "median": 1259,
+     "max": 3086
+    },
+    "fix_20_m": {
+     "median": 7681,
+     "max": 9753
+    },
+    "of_20_in_comune": {
+     "median": 11,
+     "min": 7
+    },
+    "error_m": {
+     "median": 12.0,
+     "max": 23.2
+    }
+   },
+   {
+    "comune": "C978",
+    "name": "Copertino",
+    "sheets": 75,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1150,
+     "max": 2089
+    },
+    "fix_20_m": {
+     "median": 7724,
+     "max": 8759
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 32.4,
+     "max": 37.1
+    }
+   },
+   {
+    "comune": "D006",
+    "name": "Corigliano d'Otranto",
+    "sheets": 32,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1643,
+     "max": 3326
+    },
+    "fix_20_m": {
+     "median": 7865,
+     "max": 8431
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 94.3,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "D044",
+    "name": "Corsano",
+    "sheets": 12,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1263,
+     "max": 1782
+    },
+    "fix_20_m": {
+     "median": 9853,
+     "max": 10811
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 5.2,
+     "max": 10.7
+    }
+   },
+   {
+    "comune": "D171",
+    "name": "Crispiano",
+    "sheets": 99,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1507,
+     "max": 3560
+    },
+    "fix_20_m": {
+     "median": 8819,
+     "max": 9943
+    },
+    "of_20_in_comune": {
+     "median": 8,
+     "min": 0
+    },
+    "error_m": {
+     "median": 31.4,
+     "max": 106.8
+    }
+   },
+   {
+    "comune": "D223",
+    "name": "Cursi",
+    "sheets": 9,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1305,
+     "max": 2208
+    },
+    "fix_20_m": {
+     "median": 7311,
+     "max": 8002
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 66.9,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "D237",
+    "name": "Cutrofiano",
+    "sheets": 67,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1346,
+     "max": 2847
+    },
+    "fix_20_m": {
+     "median": 7777,
+     "max": 8496
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 3
+    },
+    "error_m": {
+     "median": 27.8,
+     "max": 44.5
+    }
+   },
+   {
+    "comune": "D305",
+    "name": "Diso",
+    "sheets": 23,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1498,
+     "max": 2338
+    },
+    "fix_20_m": {
+     "median": 8756,
+     "max": 9945
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 6.5,
+     "max": 9.9
+    }
+   },
+   {
+    "comune": "D422",
+    "name": "Erchie",
+    "sheets": 42,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1480,
+     "max": 2896
+    },
+    "fix_20_m": {
+     "median": 8352,
+     "max": 9042
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 29.1,
+     "max": 29.1
+    }
+   },
+   {
+    "comune": "D463",
+    "name": "Faggiano",
+    "sheets": 23,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1763,
+     "max": 2832
+    },
+    "fix_20_m": {
+     "median": 10128,
+     "max": 11010
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    }
+   },
+   {
+    "comune": "D508",
+    "name": "Fasano",
+    "sheets": 156,
+    "fixes_in_comune": 10,
+    "nearest_fix_m": {
+     "median": 1455,
+     "max": 3549
+    },
+    "fix_20_m": {
+     "median": 9208,
+     "max": 12272
+    },
+    "of_20_in_comune": {
+     "median": 8,
+     "min": 4
+    },
+    "error_m": {
+     "median": 19.8,
+     "max": 22.6
+    }
+   },
+   {
+    "comune": "D754",
+    "name": "Fragagnano",
+    "sheets": 24,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1430,
+     "max": 3023
+    },
+    "fix_20_m": {
+     "median": 9429,
+     "max": 10000
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 13.3,
+     "max": 63.0
+    }
+   },
+   {
+    "comune": "D761",
+    "name": "Francavilla Fontana",
+    "sheets": 183,
+    "fixes_in_comune": 18,
+    "nearest_fix_m": {
+     "median": 1238,
+     "max": 2967
+    },
+    "fix_20_m": {
+     "median": 7938,
+     "max": 9018
+    },
+    "of_20_in_comune": {
+     "median": 11,
+     "min": 6
+    },
+    "error_m": {
+     "median": 10.2,
+     "max": 64.0
+    }
+   },
+   {
+    "comune": "D851",
+    "name": "Gagliano del Capo",
+    "sheets": 26,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1481,
+     "max": 3488
+    },
+    "fix_20_m": {
+     "median": 11488,
+     "max": 15133
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 10.6,
+     "max": 15.9
+    }
+   },
+   {
+    "comune": "D862",
+    "name": "Galatina",
+    "sheets": 113,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1638,
+     "max": 3397
+    },
+    "fix_20_m": {
+     "median": 8700,
+     "max": 9379
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 3
+    },
+    "error_m": {
+     "median": 24.5,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "D863",
+    "name": "Galatone",
+    "sheets": 56,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1340,
+     "max": 2454
+    },
+    "fix_20_m": {
+     "median": 8060,
+     "max": 9403
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    }
+   },
+   {
+    "comune": "D883",
+    "name": "Gallipoli",
+    "sheets": 98,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1364,
+     "max": 2956
+    },
+    "fix_20_m": {
+     "median": 9361,
+     "max": 12464
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 42.5,
+     "max": 50.5
+    }
+   },
+   {
+    "comune": "E036",
+    "name": "Ginosa",
+    "sheets": 164,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1747,
+     "max": 6237
+    },
+    "fix_20_m": {
+     "median": 20152,
+     "max": 29348
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 7
+    },
+    "error_m": {
+     "median": 7.2,
+     "max": 15.9
+    }
+   },
+   {
+    "comune": "E038",
+    "name": "Gioia del Colle",
+    "sheets": 196,
+    "fixes_in_comune": 22,
+    "nearest_fix_m": {
+     "median": 1560,
+     "max": 5560
+    },
+    "fix_20_m": {
+     "median": 8037,
+     "max": 12788
+    },
+    "of_20_in_comune": {
+     "median": 13,
+     "min": 5
+    },
+    "error_m": {
+     "median": 34.1,
+     "max": 93.2
+    }
+   },
+   {
+    "comune": "E047",
+    "name": "Giovinazzo",
+    "sheets": 57,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1379,
+     "max": 3411
+    },
+    "fix_20_m": {
+     "median": 10913,
+     "max": 12791
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 6
+    },
+    "error_m": {
+     "median": 12.5,
+     "max": 12.5
+    }
+   },
+   {
+    "comune": "E053",
+    "name": "Giuggianello",
+    "sheets": 12,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1993,
+     "max": 2456
+    },
+    "fix_20_m": {
+     "median": 7702,
+     "max": 8043
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 23.9,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "E061",
+    "name": "Giurdignano",
+    "sheets": 15,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 967,
+     "max": 1891
+    },
+    "fix_20_m": {
+     "median": 8297,
+     "max": 9540
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 12.9,
+     "max": 12.9
+    }
+   },
+   {
+    "comune": "E205",
+    "name": "Grottaglie",
+    "sheets": 106,
+    "fixes_in_comune": 8,
+    "nearest_fix_m": {
+     "median": 1415,
+     "max": 3242
+    },
+    "fix_20_m": {
+     "median": 8620,
+     "max": 9467
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 3
+    },
+    "error_m": {
+     "median": 104.3,
+     "max": 104.3
+    }
+   },
+   {
+    "comune": "E227",
+    "name": "Guagnano",
+    "sheets": 40,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 2173,
+     "max": 4073
+    },
+    "fix_20_m": {
+     "median": 9062,
+     "max": 10240
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 6.7,
+     "max": 45.5
+    }
+   },
+   {
+    "comune": "E469",
+    "name": "Laterza",
+    "sheets": 147,
+    "fixes_in_comune": 8,
+    "nearest_fix_m": {
+     "median": 1904,
+     "max": 4369
+    },
+    "fix_20_m": {
+     "median": 13700,
+     "max": 16736
+    },
+    "of_20_in_comune": {
+     "median": 8,
+     "min": 5
+    },
+    "error_m": {
+     "median": 15.9,
+     "max": 93.2
+    }
+   },
+   {
+    "comune": "E471",
+    "name": "Latiano",
+    "sheets": 58,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1162,
+     "max": 2244
+    },
+    "fix_20_m": {
+     "median": 8011,
+     "max": 8649
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 5
+    },
+    "error_m": {
+     "median": 17.4,
+     "max": 82.4
+    }
+   },
+   {
+    "comune": "E506",
+    "name": "Lecce",
+    "sheets": 294,
+    "fixes_in_comune": 19,
+    "nearest_fix_m": {
+     "median": 1503,
+     "max": 4780
+    },
+    "fix_20_m": {
+     "median": 8290,
+     "max": 12476
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 1
+    },
+    "error_m": {
+     "median": 17.5,
+     "max": 39.3
+    }
+   },
+   {
+    "comune": "E537",
+    "name": "Leporano",
+    "sheets": 23,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1538,
+     "max": 2438
+    },
+    "fix_20_m": {
+     "median": 13082,
+     "max": 14807
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    }
+   },
+   {
+    "comune": "E538",
+    "name": "Lequile",
+    "sheets": 39,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1365,
+     "max": 2572
+    },
+    "fix_20_m": {
+     "median": 7687,
+     "max": 8517
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 32.4,
+     "max": 39.3
+    }
+   },
+   {
+    "comune": "E563",
+    "name": "Leverano",
+    "sheets": 45,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1240,
+     "max": 1988
+    },
+    "fix_20_m": {
+     "median": 7444,
+     "max": 8536
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 5
+    },
+    "error_m": {
+     "median": 28.8,
+     "max": 79.5
+    }
+   },
+   {
+    "comune": "E629",
+    "name": "Lizzanello",
+    "sheets": 34,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1134,
+     "max": 2396
+    },
+    "fix_20_m": {
+     "median": 7260,
+     "max": 8094
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 6.2,
+     "max": 18.5
+    }
+   },
+   {
+    "comune": "E630",
+    "name": "Lizzano",
+    "sheets": 55,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1882,
+     "max": 3527
+    },
+    "fix_20_m": {
+     "median": 10680,
+     "max": 13258
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 16.9,
+     "max": 111.4
+    }
+   },
+   {
+    "comune": "E645",
+    "name": "Locorotondo",
+    "sheets": 56,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1493,
+     "max": 2790
+    },
+    "fix_20_m": {
+     "median": 8120,
+     "max": 8636
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 3
+    },
+    "error_m": {
+     "median": 18.2,
+     "max": 72.6
+    }
+   },
+   {
+    "comune": "E815",
+    "name": "Maglie",
+    "sheets": 37,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1374,
+     "max": 2647
+    },
+    "fix_20_m": {
+     "median": 7368,
+     "max": 8043
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 69.5,
+     "max": 69.5
+    }
+   },
+   {
+    "comune": "E882",
+    "name": "Manduria",
+    "sheets": 197,
+    "fixes_in_comune": 14,
+    "nearest_fix_m": {
+     "median": 1339,
+     "max": 3047
+    },
+    "fix_20_m": {
+     "median": 9135,
+     "max": 13123
+    },
+    "of_20_in_comune": {
+     "median": 11,
+     "min": 5
+    },
+    "error_m": {
+     "median": 23.0,
+     "max": 93.1
+    }
+   },
+   {
+    "comune": "E979",
+    "name": "Martano",
+    "sheets": 26,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1108,
+     "max": 2394
+    },
+    "fix_20_m": {
+     "median": 8088,
+     "max": 8686
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 43.8,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "E984",
+    "name": "Martignano",
+    "sheets": 10,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1311,
+     "max": 2092
+    },
+    "fix_20_m": {
+     "median": 8144,
+     "max": 8611
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 20.4,
+     "max": 41.7
+    }
+   },
+   {
+    "comune": "E986",
+    "name": "Martina Franca",
+    "sheets": 260,
+    "fixes_in_comune": 28,
+    "nearest_fix_m": {
+     "median": 1275,
+     "max": 3443
+    },
+    "fix_20_m": {
+     "median": 8131,
+     "max": 10025
+    },
+    "of_20_in_comune": {
+     "median": 14,
+     "min": 4
+    },
+    "error_m": {
+     "median": 39.0,
+     "max": 104.3
+    }
+   },
+   {
+    "comune": "E995",
+    "name": "Maruggio",
+    "sheets": 55,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1362,
+     "max": 3162
+    },
+    "fix_20_m": {
+     "median": 12169,
+     "max": 14224
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 111.4,
+     "max": 111.4
+    }
+   },
+   {
+    "comune": "F027",
+    "name": "Massafra",
+    "sheets": 133,
+    "fixes_in_comune": 7,
+    "nearest_fix_m": {
+     "median": 1609,
+     "max": 4996
+    },
+    "fix_20_m": {
+     "median": 10747,
+     "max": 17142
+    },
+    "of_20_in_comune": {
+     "median": 7,
+     "min": 4
+    },
+    "error_m": {
+     "median": 31.4,
+     "max": 69.1
+    }
+   },
+   {
+    "comune": "F054",
+    "name": "Matino",
+    "sheets": 33,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1243,
+     "max": 2160
+    },
+    "fix_20_m": {
+     "median": 7434,
+     "max": 8165
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "F101",
+    "name": "Melendugno",
+    "sheets": 135,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1414,
+     "max": 3223
+    },
+    "fix_20_m": {
+     "median": 9433,
+     "max": 11708
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 5
+    },
+    "error_m": {
+     "median": 41.6,
+     "max": 49.0
+    }
+   },
+   {
+    "comune": "F109",
+    "name": "Melissano",
+    "sheets": 15,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1138,
+     "max": 1877
+    },
+    "fix_20_m": {
+     "median": 7154,
+     "max": 7743
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "F117",
+    "name": "Melpignano",
+    "sheets": 13,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1697,
+     "max": 2875
+    },
+    "fix_20_m": {
+     "median": 7523,
+     "max": 7718
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 69.5,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "F152",
+    "name": "Mesagne",
+    "sheets": 145,
+    "fixes_in_comune": 13,
+    "nearest_fix_m": {
+     "median": 1334,
+     "max": 2431
+    },
+    "fix_20_m": {
+     "median": 8012,
+     "max": 9055
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 5
+    },
+    "error_m": {
+     "median": 25.4,
+     "max": 142.3
+    }
+   },
+   {
+    "comune": "F194",
+    "name": "Miggiano",
+    "sheets": 10,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 950,
+     "max": 1861
+    },
+    "fix_20_m": {
+     "median": 7034,
+     "max": 7189
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 4.8,
+     "max": 4.8
+    }
+   },
+   {
+    "comune": "F220",
+    "name": "Minervino Murge",
+    "sheets": 202,
+    "fixes_in_comune": 17,
+    "nearest_fix_m": {
+     "median": 1777,
+     "max": 5245
+    },
+    "fix_20_m": {
+     "median": 30329,
+     "max": 37719
+    },
+    "of_20_in_comune": {
+     "median": 17,
+     "min": 17
+    },
+    "error_m": {
+     "median": 6.1,
+     "max": 16.6
+    }
+   },
+   {
+    "comune": "F221",
+    "name": "Minervino di Lecce",
+    "sheets": 23,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1445,
+     "max": 2355
+    },
+    "fix_20_m": {
+     "median": 8033,
+     "max": 9623
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 59.4,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "F262",
+    "name": "Modugno",
+    "sheets": 37,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1373,
+     "max": 2761
+    },
+    "fix_20_m": {
+     "median": 9486,
+     "max": 10453
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 12.5,
+     "max": 12.5
+    }
+   },
+   {
+    "comune": "F280",
+    "name": "Mola di Bari",
+    "sheets": 69,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1218,
+     "max": 2725
+    },
+    "fix_20_m": {
+     "median": 11491,
+     "max": 13269
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 23.2,
+     "max": 46.8
+    }
+   },
+   {
+    "comune": "F376",
+    "name": "Monopoli",
+    "sheets": 217,
+    "fixes_in_comune": 27,
+    "nearest_fix_m": {
+     "median": 1219,
+     "max": 3298
+    },
+    "fix_20_m": {
+     "median": 6928,
+     "max": 10102
+    },
+    "of_20_in_comune": {
+     "median": 16,
+     "min": 7
+    },
+    "error_m": {
+     "median": 19.1,
+     "max": 68.5
+    }
+   },
+   {
+    "comune": "F531",
+    "name": "Monteiasi",
+    "sheets": 15,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1601,
+     "max": 2916
+    },
+    "fix_20_m": {
+     "median": 9549,
+     "max": 10037
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 104.3,
+     "max": 104.3
+    }
+   },
+   {
+    "comune": "F563",
+    "name": "Montemesola",
+    "sheets": 22,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1515,
+     "max": 2402
+    },
+    "fix_20_m": {
+     "median": 9096,
+     "max": 9677
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 104.3,
+     "max": 106.8
+    }
+   },
+   {
+    "comune": "F587",
+    "name": "Monteparano",
+    "sheets": 7,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1751,
+     "max": 2540
+    },
+    "fix_20_m": {
+     "median": 9820,
+     "max": 10072
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    }
+   },
+   {
+    "comune": "F604",
+    "name": "Monteroni di Lecce",
+    "sheets": 22,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1289,
+     "max": 2220
+    },
+    "fix_20_m": {
+     "median": 7171,
+     "max": 7729
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 21.5,
+     "max": 28.8
+    }
+   },
+   {
+    "comune": "F623",
+    "name": "Montesano Salentino",
+    "sheets": 11,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 803,
+     "max": 1685
+    },
+    "fix_20_m": {
+     "median": 7130,
+     "max": 7517
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 3.8,
+     "max": 7.9
+    }
+   },
+   {
+    "comune": "F716",
+    "name": "Morciano di Leuca",
+    "sheets": 23,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 965,
+     "max": 1942
+    },
+    "fix_20_m": {
+     "median": 8795,
+     "max": 10243
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    }
+   },
+   {
+    "comune": "F784",
+    "name": "Mottola",
+    "sheets": 139,
+    "fixes_in_comune": 14,
+    "nearest_fix_m": {
+     "median": 1766,
+     "max": 3924
+    },
+    "fix_20_m": {
+     "median": 10783,
+     "max": 14735
+    },
+    "of_20_in_comune": {
+     "median": 12,
+     "min": 1
+    },
+    "error_m": {
+     "median": 30.4,
+     "max": 69.1
+    }
+   },
+   {
+    "comune": "F816",
+    "name": "Muro Leccese",
+    "sheets": 23,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1245,
+     "max": 2178
+    },
+    "fix_20_m": {
+     "median": 7484,
+     "max": 7957
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 23.9,
+     "max": 69.5
+    }
+   },
+   {
+    "comune": "F842",
+    "name": "Nardò",
+    "sheets": 289,
+    "fixes_in_comune": 18,
+    "nearest_fix_m": {
+     "median": 1300,
+     "max": 3534
+    },
+    "fix_20_m": {
+     "median": 9793,
+     "max": 11841
+    },
+    "of_20_in_comune": {
+     "median": 11,
+     "min": 4
+    },
+    "error_m": {
+     "median": 25.9,
+     "max": 79.5
+    }
+   },
+   {
+    "comune": "F881",
+    "name": "Neviano",
+    "sheets": 20,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1024,
+     "max": 2053
+    },
+    "fix_20_m": {
+     "median": 7816,
+     "max": 8321
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 18.8,
+     "max": 42.5
+    }
+   },
+   {
+    "comune": "F915",
+    "name": "Noci",
+    "sheets": 154,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1618,
+     "max": 3817
+    },
+    "fix_20_m": {
+     "median": 8092,
+     "max": 9999
+    },
+    "of_20_in_comune": {
+     "median": 7,
+     "min": 2
+    },
+    "error_m": {
+     "median": 30.4,
+     "max": 69.1
+    }
+   },
+   {
+    "comune": "F916",
+    "name": "Nociglia",
+    "sheets": 19,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1148,
+     "max": 2111
+    },
+    "fix_20_m": {
+     "median": 7507,
+     "max": 7723
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 7.9,
+     "max": 40.3
+    }
+   },
+   {
+    "comune": "F923",
+    "name": "Noicattaro",
+    "sheets": 41,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1407,
+     "max": 3072
+    },
+    "fix_20_m": {
+     "median": 10890,
+     "max": 12318
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 5
+    },
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
+    }
+   },
+   {
+    "comune": "F970",
+    "name": "Novoli",
+    "sheets": 24,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 899,
+     "max": 1569
+    },
+    "fix_20_m": {
+     "median": 6725,
+     "max": 7042
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 14.7,
+     "max": 37.3
+    }
+   },
+   {
+    "comune": "G098",
+    "name": "Oria",
+    "sheets": 85,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1439,
+     "max": 2870
+    },
+    "fix_20_m": {
+     "median": 8162,
+     "max": 8703
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 3
+    },
+    "error_m": {
+     "median": 17.4,
+     "max": 82.5
+    }
+   },
+   {
+    "comune": "G136",
+    "name": "Ortelle",
+    "sheets": 14,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1158,
+     "max": 2062
+    },
+    "fix_20_m": {
+     "median": 8777,
+     "max": 9785
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 9.9,
+     "max": 9.9
+    }
+   },
+   {
+    "comune": "G187",
+    "name": "Ostuni",
+    "sheets": 244,
+    "fixes_in_comune": 21,
+    "nearest_fix_m": {
+     "median": 1398,
+     "max": 4151
+    },
+    "fix_20_m": {
+     "median": 8069,
+     "max": 11615
+    },
+    "of_20_in_comune": {
+     "median": 12,
+     "min": 1
+    },
+    "error_m": {
+     "median": 13.1,
+     "max": 17.5
+    }
+   },
+   {
+    "comune": "G188",
+    "name": "Otranto",
+    "sheets": 100,
+    "fixes_in_comune": 8,
+    "nearest_fix_m": {
+     "median": 1469,
+     "max": 2908
+    },
+    "fix_20_m": {
+     "median": 10439,
+     "max": 12779
+    },
+    "of_20_in_comune": {
+     "median": 7,
+     "min": 5
+    },
+    "error_m": {
+     "median": 34.3,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "G285",
+    "name": "Palmariggi",
+    "sheets": 11,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 865,
+     "max": 2044
+    },
+    "fix_20_m": {
+     "median": 7693,
+     "max": 8074
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 12.9,
+     "max": 23.9
+    }
+   },
+   {
+    "comune": "G325",
+    "name": "Parabita",
+    "sheets": 22,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1451,
+     "max": 2109
+    },
+    "fix_20_m": {
+     "median": 7689,
+     "max": 8255
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 12.6,
+     "max": 50.5
+    }
+   },
+   {
+    "comune": "G378",
+    "name": "Patù",
+    "sheets": 13,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1164,
+     "max": 2250
+    },
+    "fix_20_m": {
+     "median": 10422,
+     "max": 11522
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    }
+   },
+   {
+    "comune": "G751",
+    "name": "Poggiardo",
+    "sheets": 23,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1295,
+     "max": 2083
+    },
+    "fix_20_m": {
+     "median": 8064,
+     "max": 8861
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 9.9,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "G787",
+    "name": "Polignano a Mare",
+    "sheets": 100,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1184,
+     "max": 2475
+    },
+    "fix_20_m": {
+     "median": 8543,
+     "max": 11017
+    },
+    "of_20_in_comune": {
+     "median": 8,
+     "min": 3
+    },
+    "error_m": {
+     "median": 12.0,
+     "max": 50.0
+    }
+   },
+   {
+    "comune": "H090",
+    "name": "Pulsano",
+    "sheets": 30,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1110,
+     "max": 2083
+    },
+    "fix_20_m": {
+     "median": 12185,
+     "max": 13419
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    }
+   },
+   {
+    "comune": "H096",
+    "name": "Putignano",
+    "sheets": 86,
+    "fixes_in_comune": 15,
+    "nearest_fix_m": {
+     "median": 1138,
+     "max": 2174
+    },
+    "fix_20_m": {
+     "median": 6842,
+     "max": 8185
+    },
+    "of_20_in_comune": {
+     "median": 10,
+     "min": 5
+    },
+    "error_m": {
+     "median": 14.9,
+     "max": 65.0
+    }
+   },
+   {
+    "comune": "H147",
+    "name": "Racale",
+    "sheets": 33,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1397,
+     "max": 2463
+    },
+    "fix_20_m": {
+     "median": 8348,
+     "max": 10306
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "H409",
+    "name": "Roccaforzata",
+    "sheets": 14,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1209,
+     "max": 2909
+    },
+    "fix_20_m": {
+     "median": 9621,
+     "max": 10067
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    }
+   },
+   {
+    "comune": "H632",
+    "name": "Ruffano",
+    "sheets": 45,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1480,
+     "max": 2454
+    },
+    "fix_20_m": {
+     "median": 7486,
+     "max": 8270
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 17.9,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "H708",
+    "name": "Salice Salentino",
+    "sheets": 50,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1911,
+     "max": 4164
+    },
+    "fix_20_m": {
+     "median": 9262,
+     "max": 10526
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 2
+    },
+    "error_m": {
+     "median": 25.6,
+     "max": 80.0
+    }
+   },
+   {
+    "comune": "H729",
+    "name": "Salve",
+    "sheets": 62,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1463,
+     "max": 2393
+    },
+    "fix_20_m": {
+     "median": 10143,
+     "max": 11228
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 2
+    },
+    "error_m": {
+     "median": 17.9,
+     "max": 17.9
+    }
+   },
+   {
+    "comune": "H757",
+    "name": "Sanarica",
+    "sheets": 17,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1443,
+     "max": 2083
+    },
+    "fix_20_m": {
+     "median": 7499,
+     "max": 7751
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 59.4,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "H793",
+    "name": "San Cesario di Lecce",
+    "sheets": 11,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1585,
+     "max": 2304
+    },
+    "fix_20_m": {
+     "median": 6930,
+     "max": 7512
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 18.5,
+     "max": 18.7
+    }
+   },
+   {
+    "comune": "H822",
+    "name": "San Donaci",
+    "sheets": 49,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1422,
+     "max": 2675
+    },
+    "fix_20_m": {
+     "median": 9195,
+     "max": 9601
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 7.2,
+     "max": 29.1
+    }
+   },
+   {
+    "comune": "H826",
+    "name": "San Donato di Lecce",
+    "sheets": 22,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1104,
+     "max": 2605
+    },
+    "fix_20_m": {
+     "median": 7923,
+     "max": 8682
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 18.5,
+     "max": 41.7
+    }
+   },
+   {
+    "comune": "H882",
+    "name": "San Giorgio Ionico",
+    "sheets": 22,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1187,
+     "max": 3109
+    },
+    "fix_20_m": {
+     "median": 9754,
+     "max": 10487
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 84.1,
+     "max": 104.3
+    }
+   },
+   {
+    "comune": "I018",
+    "name": "San Marzano di San Giuseppe",
+    "sheets": 25,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1556,
+     "max": 2355
+    },
+    "fix_20_m": {
+     "median": 9283,
+     "max": 9732
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 5.5,
+     "max": 14.4
+    }
+   },
+   {
+    "comune": "I045",
+    "name": "San Michele Salentino",
+    "sheets": 29,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1182,
+     "max": 1935
+    },
+    "fix_20_m": {
+     "median": 7801,
+     "max": 8541
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 15.8,
+     "max": 17.4
+    }
+   },
+   {
+    "comune": "I059",
+    "name": "Sannicola",
+    "sheets": 38,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1189,
+     "max": 2198
+    },
+    "fix_20_m": {
+     "median": 8063,
+     "max": 9154
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    }
+   },
+   {
+    "comune": "I066",
+    "name": "San Pancrazio Salentino",
+    "sheets": 48,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1424,
+     "max": 3339
+    },
+    "fix_20_m": {
+     "median": 9387,
+     "max": 10259
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 5
+    },
+    "error_m": {
+     "median": 29.1,
+     "max": 45.5
+    }
+   },
+   {
+    "comune": "I115",
+    "name": "San Pietro in Lama",
+    "sheets": 12,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1357,
+     "max": 1925
+    },
+    "fix_20_m": {
+     "median": 7214,
+     "max": 7717
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 21.4,
+     "max": 32.4
+    }
+   },
+   {
+    "comune": "I119",
+    "name": "San Pietro Vernotico",
+    "sheets": 60,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1456,
+     "max": 3050
+    },
+    "fix_20_m": {
+     "median": 8543,
+     "max": 11385
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 32.1,
+     "max": 32.1
+    }
+   },
+   {
+    "comune": "I172",
+    "name": "Santa Cesarea Terme",
+    "sheets": 45,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1193,
+     "max": 2113
+    },
+    "fix_20_m": {
+     "median": 10427,
+     "max": 11892
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 12.6,
+     "max": 12.6
+    }
+   },
+   {
+    "comune": "I330",
+    "name": "Santeramo in Colle",
+    "sheets": 117,
+    "fixes_in_comune": 10,
+    "nearest_fix_m": {
+     "median": 1491,
+     "max": 3365
+    },
+    "fix_20_m": {
+     "median": 8953,
+     "max": 11674
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 4
+    },
+    "error_m": {
+     "median": 41.3,
+     "max": 93.2
+    }
+   },
+   {
+    "comune": "I396",
+    "name": "San Vito dei Normanni",
+    "sheets": 80,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1311,
+     "max": 2707
+    },
+    "fix_20_m": {
+     "median": 8069,
+     "max": 9513
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 2
+    },
+    "error_m": {
+     "median": 13.0,
+     "max": 20.6
+    }
+   },
+   {
+    "comune": "I467",
+    "name": "Sava",
+    "sheets": 52,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1438,
+     "max": 2818
+    },
+    "fix_20_m": {
+     "median": 9039,
+     "max": 10049
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 18.9,
+     "max": 111.4
+    }
+   },
+   {
+    "comune": "I549",
+    "name": "Scorrano",
+    "sheets": 37,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1189,
+     "max": 2907
+    },
+    "fix_20_m": {
+     "median": 7453,
+     "max": 8024
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 23.9,
+     "max": 69.5
+    }
+   },
+   {
+    "comune": "I559",
+    "name": "Seclì",
+    "sheets": 11,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1016,
+     "max": 1582
+    },
+    "fix_20_m": {
+     "median": 7866,
+     "max": 8191
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 19.4,
+     "max": 42.5
+    }
+   },
+   {
+    "comune": "I780",
+    "name": "Sogliano Cavour",
+    "sheets": 10,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1204,
+     "max": 1640
+    },
+    "fix_20_m": {
+     "median": 8277,
+     "max": 8423
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 24.5,
+     "max": 24.5
+    }
+   },
+   {
+    "comune": "I800",
+    "name": "Soleto",
+    "sheets": 32,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1588,
+     "max": 3856
+    },
+    "fix_20_m": {
+     "median": 8588,
+     "max": 9182
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 94.3,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "I887",
+    "name": "Specchia",
+    "sheets": 26,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1008,
+     "max": 1972
+    },
+    "fix_20_m": {
+     "median": 7350,
+     "max": 7648
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 4.8,
+     "max": 17.9
+    }
+   },
+   {
+    "comune": "I923",
+    "name": "Spongano",
+    "sheets": 15,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1251,
+     "max": 1990
+    },
+    "fix_20_m": {
+     "median": 8082,
+     "max": 8889
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 7.1,
+     "max": 7.1
+    }
+   },
+   {
+    "comune": "I930",
+    "name": "Squinzano",
+    "sheets": 50,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1171,
+     "max": 2437
+    },
+    "fix_20_m": {
+     "median": 7213,
+     "max": 10899
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 13.2,
+     "max": 32.1
+    }
+   },
+   {
+    "comune": "I950",
+    "name": "Sternatia",
+    "sheets": 17,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1040,
+     "max": 2806
+    },
+    "fix_20_m": {
+     "median": 8539,
+     "max": 8809
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 41.7,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "L008",
+    "name": "Supersano",
+    "sheets": 38,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1248,
+     "max": 2502
+    },
+    "fix_20_m": {
+     "median": 7838,
+     "max": 8443
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 3
+    },
+    "error_m": {
+     "median": 18.6,
+     "max": 22.6
+    }
+   },
+   {
+    "comune": "L010",
+    "name": "Surano",
+    "sheets": 11,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 810,
+     "max": 1816
+    },
+    "fix_20_m": {
+     "median": 7633,
+     "max": 8172
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 7.1,
+     "max": 8.9
+    }
+   },
+   {
+    "comune": "L011",
+    "name": "Surbo",
+    "sheets": 26,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1175,
+     "max": 2584
+    },
+    "fix_20_m": {
+     "median": 7154,
+     "max": 8502
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 2
+    },
+    "error_m": {
+     "median": 37.3,
+     "max": 37.3
+    }
+   },
+   {
+    "comune": "L049",
+    "name": "Taranto",
+    "sheets": 312,
+    "fixes_in_comune": 15,
+    "nearest_fix_m": {
+     "median": 1634,
+     "max": 5115
+    },
+    "fix_20_m": {
+     "median": 11106,
+     "max": 16083
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 0
+    },
+    "error_m": {
+     "median": 84.3,
+     "max": 106.8
+    }
+   },
+   {
+    "comune": "L064",
+    "name": "Taurisano",
+    "sheets": 26,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1201,
+     "max": 1970
+    },
+    "fix_20_m": {
+     "median": 7836,
+     "max": 8148
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 25.1,
+     "max": 39.6
+    }
+   },
+   {
+    "comune": "L074",
+    "name": "Taviano",
+    "sheets": 37,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1230,
+     "max": 2144
+    },
+    "fix_20_m": {
+     "median": 7503,
+     "max": 10479
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "L166",
+    "name": "Tiggiano",
+    "sheets": 10,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1438,
+     "max": 2098
+    },
+    "fix_20_m": {
+     "median": 8736,
+     "max": 9930
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 10.7,
+     "max": 10.7
+    }
+   },
+   {
+    "comune": "L213",
+    "name": "Torchiarolo",
+    "sheets": 47,
+    "fixes_in_comune": 3,
+    "nearest_fix_m": {
+     "median": 1438,
+     "max": 2804
+    },
+    "fix_20_m": {
+     "median": 10094,
+     "max": 11466
+    },
+    "of_20_in_comune": {
+     "median": 3,
+     "min": 3
+    },
+    "error_m": {
+     "median": 32.1,
+     "max": 32.1
+    }
+   },
+   {
+    "comune": "L280",
+    "name": "Torre Santa Susanna",
+    "sheets": 52,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1296,
+     "max": 2526
+    },
+    "fix_20_m": {
+     "median": 7921,
+     "max": 8728
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 29.1,
+     "max": 142.3
+    }
+   },
+   {
+    "comune": "L294",
+    "name": "Torricella",
+    "sheets": 44,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1417,
+     "max": 3480
+    },
+    "fix_20_m": {
+     "median": 11852,
+     "max": 13783
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 111.4,
+     "max": 111.4
+    }
+   },
+   {
+    "comune": "L328",
+    "name": "Trani",
+    "sheets": 157,
+    "fixes_in_comune": 13,
+    "nearest_fix_m": {
+     "median": 1224,
+     "max": 5150
+    },
+    "fix_20_m": {
+     "median": 22837,
+     "max": 28824
+    },
+    "of_20_in_comune": {
+     "median": 13,
+     "min": 13
+    },
+    "error_m": {
+     "median": 44.2,
+     "max": 90.3
+    }
+   },
+   {
+    "comune": "L383",
+    "name": "Trepuzzi",
+    "sheets": 47,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1022,
+     "max": 2346
+    },
+    "fix_20_m": {
+     "median": 6900,
+     "max": 10272
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 4
+    },
+    "error_m": {
+     "median": 17.2,
+     "max": 37.3
+    }
+   },
+   {
+    "comune": "L419",
+    "name": "Tricase",
+    "sheets": 56,
+    "fixes_in_comune": 6,
+    "nearest_fix_m": {
+     "median": 1182,
+     "max": 2967
+    },
+    "fix_20_m": {
+     "median": 8139,
+     "max": 10209
+    },
+    "of_20_in_comune": {
+     "median": 6,
+     "min": 6
+    },
+    "error_m": {
+     "median": 5.2,
+     "max": 12.8
+    }
+   },
+   {
+    "comune": "L425",
+    "name": "Triggiano",
+    "sheets": 31,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1213,
+     "max": 4076
+    },
+    "fix_20_m": {
+     "median": 10128,
+     "max": 11155
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
+    }
+   },
+   {
+    "comune": "L462",
+    "name": "Tuglie",
+    "sheets": 16,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1334,
+     "max": 2440
+    },
+    "fix_20_m": {
+     "median": 7620,
+     "max": 7981
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    }
+   },
+   {
+    "comune": "L472",
+    "name": "Turi",
+    "sheets": 65,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1070,
+     "max": 2774
+    },
+    "fix_20_m": {
+     "median": 7913,
+     "max": 10423
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 5
+    },
+    "error_m": {
+     "median": 15.7,
+     "max": 21.4
+    }
+   },
+   {
+    "comune": "L484",
+    "name": "Ugento",
+    "sheets": 159,
+    "fixes_in_comune": 11,
+    "nearest_fix_m": {
+     "median": 1249,
+     "max": 2497
+    },
+    "fix_20_m": {
+     "median": 8812,
+     "max": 11044
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 4
+    },
+    "error_m": {
+     "median": 25.1,
+     "max": 44.7
+    }
+   },
+   {
+    "comune": "L485",
+    "name": "Uggiano la Chiesa",
+    "sheets": 22,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1476,
+     "max": 2246
+    },
+    "fix_20_m": {
+     "median": 9175,
+     "max": 10503
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 36.2,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "L571",
+    "name": "Valenzano",
+    "sheets": 36,
+    "fixes_in_comune": 2,
+    "nearest_fix_m": {
+     "median": 1150,
+     "max": 2567
+    },
+    "fix_20_m": {
+     "median": 10654,
+     "max": 11657
+    },
+    "of_20_in_comune": {
+     "median": 2,
+     "min": 2
+    },
+    "error_m": {
+     "median": 16.8,
+     "max": 23.1
+    }
+   },
+   {
+    "comune": "L711",
+    "name": "Veglie",
+    "sheets": 52,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1529,
+     "max": 4041
+    },
+    "fix_20_m": {
+     "median": 8073,
+     "max": 9770
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 3
+    },
+    "error_m": {
+     "median": 79.5,
+     "max": 79.5
+    }
+   },
+   {
+    "comune": "L776",
+    "name": "Vernole",
+    "sheets": 73,
+    "fixes_in_comune": 9,
+    "nearest_fix_m": {
+     "median": 1165,
+     "max": 3557
+    },
+    "fix_20_m": {
+     "median": 8266,
+     "max": 11388
+    },
+    "of_20_in_comune": {
+     "median": 9,
+     "min": 8
+    },
+    "error_m": {
+     "median": 18.2,
+     "max": 49.0
+    }
+   },
+   {
+    "comune": "L920",
+    "name": "Villa Castelli",
+    "sheets": 40,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1137,
+     "max": 2076
+    },
+    "fix_20_m": {
+     "median": 8386,
+     "max": 9195
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 13.9,
+     "max": 104.3
+    }
+   },
+   {
+    "comune": "M187",
+    "name": "Zollino",
+    "sheets": 13,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 1737,
+     "max": 2314
+    },
+    "fix_20_m": {
+     "median": 8515,
+     "max": 8962
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 94.3,
+     "max": 94.3
+    }
+   },
+   {
+    "comune": "M261",
+    "name": "Castro",
+    "sheets": 18,
+    "fixes_in_comune": 0,
+    "nearest_fix_m": {
+     "median": 2627,
+     "max": 3031
+    },
+    "fix_20_m": {
+     "median": 9742,
+     "max": 10408
+    },
+    "of_20_in_comune": {
+     "median": 0,
+     "min": 0
+    },
+    "error_m": {
+     "median": 9.9,
+     "max": 9.9
+    }
+   },
+   {
+    "comune": "M263",
+    "name": "Porto Cesareo",
+    "sheets": 181,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1603,
+     "max": 3444
+    },
+    "fix_20_m": {
+     "median": 10797,
+     "max": 13666
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 3
+    },
+    "error_m": {
+     "median": 42.1,
+     "max": 79.5
+    }
+   },
+   {
+    "comune": "M264",
+    "name": "San Cassiano",
+    "sheets": 13,
+    "fixes_in_comune": 1,
+    "nearest_fix_m": {
+     "median": 1384,
+     "max": 2018
+    },
+    "fix_20_m": {
+     "median": 7552,
+     "max": 7697
+    },
+    "of_20_in_comune": {
+     "median": 1,
+     "min": 1
+    },
+    "error_m": {
+     "median": 23.6,
+     "max": 59.4
+    }
+   },
+   {
+    "comune": "M298",
+    "name": "Statte",
+    "sheets": 57,
+    "fixes_in_comune": 5,
+    "nearest_fix_m": {
+     "median": 1424,
+     "max": 3463
+    },
+    "fix_20_m": {
+     "median": 9233,
+     "max": 11728
+    },
+    "of_20_in_comune": {
+     "median": 5,
+     "min": 3
+    },
+    "error_m": {
+     "median": 40.8,
+     "max": 106.8
+    }
+   },
+   {
+    "comune": "M428",
+    "name": "Presicce-Acquarica",
+    "sheets": 50,
+    "fixes_in_comune": 4,
+    "nearest_fix_m": {
+     "median": 1393,
+     "max": 2159
+    },
+    "fix_20_m": {
+     "median": 7759,
+     "max": 9741
+    },
+    "of_20_in_comune": {
+     "median": 4,
+     "min": 4
+    },
+    "error_m": {
+     "median": 17.9,
+     "max": 17.9
+    }
+   }
+  ]
  }
 ]
