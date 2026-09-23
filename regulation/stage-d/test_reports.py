@@ -199,6 +199,22 @@ class LiteralReport(unittest.TestCase):
         self.assertEqual(literal_date('29/02/15', year_context=((2015, 'issue'),)).cause,
                          'invalid_calendar_date')
 
+    def test_printed_date_shapes_an_abbreviated_month_an_aside_and_a_day_range(self):
+        from datetime import date
+        context = ((2018, 'issue'),)
+        value = literal_date('08-mag-18', year_context=context)
+        self.assertEqual((value.text, value.value.isoformat(), value.year_support), ('08-mag-18', '2018-05-08', ('issue',)))
+        self.assertEqual(literal_date('08-mag-18').cause, 'year_not_established_by_source_context')
+        self.assertEqual(literal_date('8 set. 2017').value.isoformat(), '2017-09-08')
+        self.assertEqual(literal_date('31-feb-18', year_context=context).cause, 'invalid_calendar_date')
+        self.assertEqual(literal_date('08-xyz-18', year_context=context).cause, 'unparsed_date_literal')
+        aside = literal_date('12/2/2018 (prelievo effettuato dal Dr. Boscia)')
+        self.assertEqual((aside.text, aside.value.isoformat()),
+                         ('12/2/2018 (prelievo effettuato dal Dr. Boscia)', '2018-02-12'))
+        days = literal_date('13-16/5/2016')
+        self.assertEqual((days.value, days.cause, days.date_range), (None, None, (date(2016, 5, 13), date(2016, 5, 16))))
+        self.assertEqual(literal_date('16-13/5/2016').cause, 'invalid_date_range')
+
     def test_italian_sampling_dates_preserve_agreement_and_real_conflict(self):
         for text, day in [('12 novembre 2021', '12/11/2021'),
                           ('25 Marzo 2017', '25/03/2017'),

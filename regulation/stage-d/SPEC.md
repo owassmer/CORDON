@@ -221,7 +221,8 @@ codes.
 A two-digit year resolves only against a unique matching full year in a scoped
 source date statement. The literal date and the supporting statement survive. No
 current-year assumption, and no platform century cutoff, supplies the year. A
-date spelled with an Italian month name resolves the same way. A printed date
+date spelled with an Italian month name, or its first three letters, resolves the
+same way. A parenthesized aside after a date is not part of it. A printed date
 range or list constrains a separately stated sampling day and never supplies one.
 A row whose only date statement is a range or list has no exact day, and says so.
 

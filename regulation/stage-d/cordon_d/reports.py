@@ -170,6 +170,29 @@ def literal_date(text, cause=None, *, year_context=()):
                       'non applicabile': 'source_states_not_applicable'}
     if absence := stated_absence.get(' '.join(text.casefold().split())):
         return LiteralDate(text, None, absence)
+    aside = re.fullmatch(r'(.*?\d)\s*\([^()]*\)\s*', text, re.DOTALL)
+    if aside:
+        # A date followed by a parenthesized aside ("12/2/2018 (prelievo effettuato ...)").
+        dated = literal_date(aside[1], year_context=year_context)
+        return replace(dated, text=text)
+    months = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+              'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
+    abbreviated = re.fullmatch(r'(\d{1,2})[-/. ]([a-z]{3})\.?[-/. ](\d{4}|\d{2})', text.strip().casefold())
+    if abbreviated and (month := next((i for i, m in enumerate(months, 1) if m[:3] == abbreviated[2]), None)):
+        # "08-mag-18": a day, the month's first three letters and a year, read as the
+        # numeric shapes are, a two-digit year only against the source's own full year.
+        dated = literal_date(f'{abbreviated[1]}/{month}/{abbreviated[3]}', year_context=year_context)
+        return replace(dated, text=text)
+    days = re.fullmatch(r'(\d{1,2})\s*[-–]\s*(\d{1,2})/(\d{1,2})/(\d{4})', text.strip())
+    if days:
+        # A printed day range constrains a separately stated day and never supplies one.
+        try:
+            first, last = (date(int(days[4]), int(days[3]), int(days[n])) for n in (1, 2))
+        except ValueError:
+            return LiteralDate(text, None, 'invalid_calendar_date')
+        if first > last:
+            return LiteralDate(text, None, 'invalid_date_range')
+        return LiteralDate(text, None, None, date_range=(first, last))
     formats = ((r'\d{1,2}/\d{1,2}/\d{4}', '%d/%m/%Y'),
                (r'\d{1,2}-\d{1,2}-\d{4}', '%d-%m-%Y'),
                (r'\d{1,2}\.\d{1,2}\.\d{4}', '%d.%m.%Y'),
@@ -193,8 +216,6 @@ def literal_date(text, cause=None, *, year_context=()):
             return LiteralDate(text, date(year, int(short[3]), int(short[1])), None, support)
         except ValueError:
             return LiteralDate(text, None, 'invalid_calendar_date', support)
-    months = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
-              'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
     named = re.fullmatch(r'(\d{1,2}(?:\s*[-–]\s*\d{1,2}|(?:\s+e\s+\d{1,2})+)?)'
                          r'\s+(' + '|'.join(months) + r')(?:\s+(\d{4}))?',
                          text.strip().casefold())
