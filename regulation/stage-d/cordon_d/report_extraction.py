@@ -154,7 +154,12 @@ scope of each part's qualifications. For an ambiguous continuation, mark the pag
 partly_read and identify the unresolved parts in issues so the existing source
 reread can resolve them. Do not silently leave a continuation anonymous or invent
 unread cells for fields printed on the next page. This applies equally to native,
-scanned, transposed and differently formatted records. A table whose complete rows
+scanned, transposed and differently formatted records. A transposed table (samples as
+columns, fields as rows) whose sample columns continue on the next page without printing
+their identities again continues them in printed order: the first continued column is the
+first sample column of the part that prints the identities, the second the second, and so
+on, when both parts print the same number of sample columns. Bind each continued column to
+its sample by that order. A table whose complete rows
 simply continue onto later pages under a heading printed once is NOT a record
 continuation: keep each page's rows in that page's table, cite the heading page in
 column support, and emit no record_continuation fact for it.
@@ -1414,6 +1419,121 @@ def extract_relationships(digest, store, *, config, budget, execute=True, source
     return target
 
 
+CONTINUATION_BINDING = '''The tables of this report have already been read. These table parts
+print an analytical result and no sample identity, and no record_continuation fact binds them
+to a record: {parts}
+Read the original source. For each of these parts that continues a record whose identity is
+printed elsewhere in this document, return the record_continuation fact that binds all of that
+record's physical parts, using the continuation contract above, and a field_continuation fact
+for any descriptive field split between them. Each fact's text and value contain only the
+printed identifier; its page and locator point to the identity-bearing part. Return pages:[]
+and tables:[] and no other facts; do not transcribe any table again. The inventory below gives
+the exact selectors of every physical record part; it is not evidence of identity or
+correspondence. Name in issues, with its cause, each listed part the source does not establish
+as the continuation of a record.
+{inventory}'''
+BINDING_CORRECTION = '''The previous answer failed a check of this reader: {defect}.
+Answer again from the same source, satisfying that check. Do not change a printed identifier
+or a selector to pass the check.'''
+
+
+def unbound_result_parts(blocks):
+    """Row selectors of table parts that print a result and no sample identity, bound to no record.
+
+    Such a part is a record continued from a part that prints the identity, or a result the
+    reading has not attached to any sample. Only the source can say which.
+    """
+    bound = {scope for item in blocks for fact in item['reading']['facts']
+             if fact['role'] == 'record_continuation' for scope in fact['applies_to']}
+    parts = []
+    for item in blocks:
+        for table in item['reading']['tables']:
+            roles = {column['role'] for column in table['columns']}
+            if 'result' not in roles or roles & set(IDENTITY_ROLES):
+                continue
+            for row in table['rows']:
+                selector = f"{table['id']}/{row['id']}"
+                anchors = {selector, f"p{table['page']}/{selector}",
+                           *('native:' + cell['native_cell'] for cell in row['cells'] if cell.get('native_cell'))}
+                if not anchors & bound:
+                    parts.append(f"p{table['page']}/{selector}")
+    return parts
+
+
+def bind_continued_parts(digest, store, document, blocks, *, page_count, config, budget, execute):
+    """One bounded, source-only request for the records that unbound result parts continue.
+
+    The request returns only continuation facts, over the whole original document, with the
+    selectors of every physical record part. A malformed answer, or one whose bindings the
+    assembly rejects, gets one correction naming the defect; a second failure leaves the parts
+    unbound with that cause. Returns the binding-only block.
+    """
+    parts = unbound_result_parts(blocks)
+    pages = list(range(1, page_count + 1))
+    rows = materialize(digest, 'binding', page_count, blocks).rows
+    inventory = [{'selector': row.locator, 'page': row.page,
+                  'cells': [{'selector': c['locator'], 'native_cell': c.get('native_cell')} for c in row.cells]}
+                 for row in rows]
+    content, native, _ = _page_content(document, pages, [], config)
+    content.append({'type': 'text', 'text': CONTINUATION_BINDING.format(
+        parts=json.dumps(parts), inventory=json.dumps(inventory, ensure_ascii=False))})
+    prompt = '\n\n'.join(part['text'] for part in content if part['type'] == 'text')
+    item = {'targets': [], 'supplied_pages': pages, 'context_pages': pages, 'native_cells': native,
+            'continuation_binding': parts}
+
+    instruction = content[-1]['text']
+
+    def ask(correction=''):
+        text = instruction + correction
+        request = {'model': config.model, 'max_tokens': config.max_tokens,
+                   'messages': [{'role': 'user', 'content': [*content[:-1], {'type': 'text', 'text': text}]}],
+                   'output_config': {'effort': config.effort,
+                                     'format': {'type': 'json_schema', 'schema': output_schema()}}}
+        identity = request if config.provider == 'api' else {
+            'provider': provider_label(config), 'model': config.model, 'effort': config.effort,
+            'source_sha256': digest, 'request': 'continuation binding', 'prompt': prompt + correction,
+            'schema': output_schema()}
+        request_id = sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
+        raw = store / 'derived/reports/responses' / f'{request_id}.json'
+        reading = _retained_reading(raw, config.model) if raw.exists() else None
+        if reading is None and not execute:
+            raise NoRetainedResponse('No retained response for this continuation binding; '
+                                     'explicit execution is required')
+        if reading is None and config.provider in SUBSCRIPTION_PROVIDERS:
+            reading = _subscription_call(prompt=prompt + correction, schema=output_schema(), digest=digest,
+                                         source=blob_path(store, digest), config=config,
+                                         request_id=request_id, raw_path=raw)
+        elif reading is None:
+            reading = _call(request, config=config, budget=budget, request_id=request_id, raw_path=raw)
+        return reading, request_id
+
+    def accepted(reading, request_id):
+        if reading.get('tables') or reading.get('pages') or any(
+                f.get('role') not in {'record_continuation', 'field_continuation'} for f in reading.get('facts', ())):
+            raise ValueError('A continuation binding returns only record and field continuation facts')
+        validate_block(reading, targets=[], page_count=page_count, native_cells=native, supplied_pages=pages)
+        bound = dict(item, reading=reading, request_sha256=request_id)
+        record_rows(materialize(digest, 'binding', page_count, [*blocks, bound]))
+        return bound
+
+    try:
+        reading, request_id = ask()
+        try:
+            return accepted(reading, request_id)
+        except ValueError as defect:
+            corrected, correction_id = ask('\n\n' + BINDING_CORRECTION.format(defect=defect))
+            try:
+                return dict(accepted(corrected, correction_id), correction_of=request_id, defect=str(defect))
+            except ValueError as second:
+                empty = {'pages': [], 'tables': [], 'facts': [], 'context_pages': [], 'issues': [
+                    {'scope': ' '.join(parts), 'cause': f'continuation binding not established: {defect}; '
+                                                        f'the correction also failed: {second}'}]}
+                return dict(item, reading=empty, request_sha256=correction_id, correction_of=request_id)
+    except (RuntimeError, requests.RequestException) as error:
+        empty = {'pages': [], 'tables': [], 'facts': [], 'issues': [], 'context_pages': []}
+        return dict(item, reading=empty, attachment_repair_pending='continuation binding reread pending: ' + str(error))
+
+
 def _repair_continuations(digest, store, *, extraction_version, config, budget, execute=True):
     """Ask the established reader for omitted bindings, preserving retained cells."""
     import pymupdf
@@ -1485,8 +1605,9 @@ def _repair_continuations(digest, store, *, extraction_version, config, budget, 
 
 
 def extract_report(digest, store, *, config, budget, execute=True, continuation_from=None, resume_from=None):
-    """Read one report. `execute` True permits every source read; "mark notes" permits only
-    the note a printed mark points at; False replays retained responses only."""
+    """Read one report. `execute` True permits every source read; "bounded requests" permits
+    only the bounded source requests (a printed mark's note, its fields, and the binding of a
+    result part that prints no identity); False replays retained responses only."""
     reads = execute is True
     if continuation_from is not None and resume_from is not None:
         raise ValueError('Choose page-reading resume or continuation repair, not both')
@@ -1537,6 +1658,10 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
         if prior is not None:
             covered = set()
             for item in prior['blocks']:
+                if item.get('continuation_binding'):
+                    # Derived from the assembled page readings below, and asked again there:
+                    # its retained answer replays.
+                    continue
                 if not item['targets']:
                     # A continuation-only block from an earlier repair carries reader-declared
                     # bindings and no page dispositions; replay it as declared, so the
@@ -1909,5 +2034,9 @@ def extract_report(digest, store, *, config, budget, execute=True, continuation_
             blocks.sort(key=lambda item: min(item['targets'], default=page_count + 1))
             assembled = materialize(digest, revision, page_count, blocks)
             record_rows(assembled)
+        if unbound_result_parts(blocks):
+            blocks.append(bind_continued_parts(digest, store, document, blocks, page_count=page_count,
+                                               config=config, budget=budget, execute=bool(execute)))
+            assembled = materialize(digest, revision, page_count, blocks)
         save(complete=len(assembled.complete_pages) == page_count)
     return target

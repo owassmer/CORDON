@@ -194,7 +194,13 @@ headings still constrain correspondence.
 
 A record continuation is one explicit fact. It quotes the printed identity and
 names every physical part. Assembly resolves those exact selectors. It does not
-discover continuation from layout or from equal results. A bound fragment-only
+discover continuation from layout or from equal results. A transposed table whose
+sample columns continue on the next page without printing their identities again
+is joined to its first part, its sample columns matched by printed order; the
+source reader declares each such continuation. A table part that prints a result
+and no sample identity, and that no continuation binds, gets one bounded,
+source-only request for the continuations that bind it. The request returns
+continuation facts only, and a part the source does not bind keeps its cause. A bound fragment-only
 table remains a physical record part even without its own identifier or result
 column. When a descriptive field spans pages, a field-continuation fact binds its
 exact cells and quotes the record identity at its physical page. Successive word

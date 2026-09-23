@@ -1450,7 +1450,7 @@ class LiteralReport(unittest.TestCase):
             with patch('cordon_d.report_extraction._subscription_call',
                        side_effect=note_provider(self._note_answer())) as provider:
                 path = extract_report(digest, store, config=config, budget=None,
-                                      resume_from='prior', execute='mark notes')
+                                      resume_from='prior', execute='bounded requests')
             self.assertEqual(len(note_calls(provider)), 1)
             saved = json.loads(path.read_text())
             self.assertTrue(saved['assembly_complete'])
@@ -1961,6 +1961,101 @@ class LiteralReport(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'never written under another extraction version'):
                 write_assembled(target, {'source_sha256': digest, 'extraction_version': 'other',
                                          'page_count': 1, 'blocks': []}, store, digest)
+
+    @staticmethod
+    def _continued_blocks():
+        """Page 1 prints the sample identity; page 2 prints its result and no identity."""
+        head = LiteralReport._retained_block((('00123', '01/06/2024', None, None),))
+        head['reading']['tables'][0]['columns'] = head['reading']['tables'][0]['columns'][:2]
+        for row in head['reading']['tables'][0]['rows']:
+            row['cells'] = row['cells'][:2]
+        tail = LiteralReport._retained_block((('Positivo', '02/06/2024'),))
+        table = tail['reading']['tables'][0]
+        table.update(id='p2-t1', page=2, columns=table['columns'][2:])
+        for column in table['columns']:
+            column['support'] = [dict(s, page=2) for s in column['support']]
+        tail.update(targets=[2], request_sha256='retained-2', context_pages=[2], supplied_pages=[2])
+        tail['reading'].update(pages=[{'page': 2, 'disposition': 'read'}], context_pages=[2])
+        return head, tail
+
+    def test_a_result_part_with_no_identity_gets_one_bounded_binding_request(self):
+        from cordon_d.report_extraction import output_schema
+        from cordon_d.reports import record_rows
+        binding = {'pages': [], 'tables': [], 'context_pages': [], 'issues': [], 'facts': [
+            {'id': 'bound', 'role': 'record_continuation', 'page': 1, 'locator': 'table row', 'section': None,
+             'text': '00123', 'value': '00123', 'applies_to': ['p1-t1/r1', 'p2-t1/r1']}]}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, list(self._continued_blocks()), pages=2)
+            with patch('cordon_d.report_extraction._subscription_call', return_value=binding) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior',
+                                      execute='bounded requests')
+            self.assertEqual(provider.call_count, 1)
+            request = provider.call_args.kwargs
+            self.assertEqual(request['schema'], output_schema())
+            self.assertIn('["p2/p2-t1/r1"]', request['prompt'])
+            saved = json.loads(path.read_text())
+            self.assertTrue(saved['assembly_complete'])
+            self.assertEqual(saved['blocks'][-1]['continuation_binding'], ['p2/p2-t1/r1'])
+            [row] = record_rows(report(digest, store, extraction_version=saved['extraction_version']))
+            self.assertEqual((row.identifiers, [r.kind for r in row.results]), (('00123',), ['positive']))
+
+    def test_a_binding_answer_that_reads_tables_gets_one_correction_then_keeps_its_cause(self):
+        from cordon_d.report_extraction import BINDING_CORRECTION
+        from cordon_d.reports import record_rows
+        head, tail = self._continued_blocks()
+        reread = {'pages': [], 'tables': copy.deepcopy(tail['reading']['tables']), 'context_pages': [],
+                  'issues': [], 'facts': []}
+        config = ExtractionConfig(provider='subscription')
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = self._note_source(store, [head, tail], pages=2)
+            with patch('cordon_d.report_extraction._subscription_call', return_value=reread) as provider:
+                path = extract_report(digest, store, config=config, budget=None, resume_from='prior',
+                                      execute='bounded requests')
+            self.assertEqual(provider.call_count, 2)
+            defect = 'A continuation binding returns only record and field continuation facts'
+            self.assertIn(BINDING_CORRECTION.format(defect=defect), provider.call_args.kwargs['prompt'])
+            saved = json.loads(path.read_text())
+            [issue] = saved['blocks'][-1]['reading']['issues']
+            self.assertEqual(issue['scope'], 'p2/p2-t1/r1')
+            self.assertTrue(issue['cause'].startswith('continuation binding not established: ' + defect))
+            rows = record_rows(report(digest, store, extraction_version=saved['extraction_version']))
+            self.assertEqual(len(rows), 2)
+
+    def test_the_heading_read_is_stored_at_assembly_with_the_pdf_library(self):
+        import pymupdf
+        from cordon_d.store import put_bytes
+        item = self._retained_block((('00123', '01/06/2024', None, None),))
+        item['native_regions'] = [{'id': 'p1-native-t1', 'page': 1, 'bbox': [24, 99, 700, 170]}]
+        item['reading']['pages'] = [{'page': 1, 'disposition': 'read', 'regions': [
+            {'native_table': 'p1-native-t1', 'disposition': 'represented', 'output_tables': ['p1-t1']}]}]
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            with pymupdf.open() as pdf:
+                page = pdf.new_page()
+                page.insert_text((30, 60), 'Esito dei campioni singoli positivi', fontsize=11)
+                page.insert_text((30, 120), '00123  01/06/2024', fontsize=11)
+                digest = put_bytes(store, pdf.tobytes())
+            prior = store / 'derived/reports/prior' / digest / 'report.json'
+            prior.parent.mkdir(parents=True)
+            prior.write_text(json.dumps({'source_sha256': digest, 'extraction_version': 'prior', 'page_count': 1,
+                                         'assembly_complete': True, 'blocks': [item]}))
+            with patch('cordon_d.report_extraction._subscription_call', side_effect=AssertionError('dispatch')):
+                path = extract_report(digest, store, config=ExtractionConfig(provider='subscription'), budget=None,
+                                      resume_from='prior', execute=False)
+            saved = json.loads(path.read_text())
+            self.assertEqual(saved['pdf_library'], f'PyMuPDF {pymupdf.VersionBind}')
+            self.assertEqual(saved['table_headings'], {'p1-t1': [1, 'Esito dei campioni singoli positivi']})
+            version = saved['extraction_version']
+            [row] = report(digest, store, extraction_version=version).rows
+            self.assertEqual([(r.text, r.kind) for r in row.results], [('positivi', 'positive')])
+            # A reading assembled before the heading was stored is reassembled, never read at consumption.
+            path.write_text(json.dumps({k: v for k, v in saved.items() if k != 'table_headings'}))
+            unread = report(digest, store, extraction_version=version)
+            self.assertIsInstance(unread, UnreadReport)
+            self.assertIn('assembled before table headings were derived', unread.cause)
 
 
 class ShownPages(unittest.TestCase):
