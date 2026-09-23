@@ -216,7 +216,9 @@ def _read_pdf(digest, version, path):
                     if r == start and missing and basis['kind'] == 'annex_continuation' and previous['last_row'] is not None:
                         preceding = result.rows[previous['last_row']]
                         populated = {role for role, cell in fields.items() if (cell['text'] or '').strip()}
-                        if (set(missing) == REQUIRED and populated
+                        # The report reference can itself wrap across the page.
+                        # A printed plant ID or date still starts a separate row.
+                        if ({'plant_id', 'report_date'} <= set(missing) and populated
                                 and all((preceding['fields'][role]['text'] or '').strip()
                                         for role in REQUIRED | populated)
                                 and not preceding['issues'] and not unread_columns):

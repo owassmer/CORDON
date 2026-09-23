@@ -9,13 +9,31 @@ import pymupdf
 
 from cordon_d.measure_sources import (source_material, table_fields, material_context,
                                       context_matches, selected_association, CONTEXT_MARKER,
-                                      native_span)
+                                      native_span, field_fragment, span_overlaps)
 from cordon_d.measures import MeasureReading, retained_measure, _validate_reading
 from cordon_d.store import blob_path, put_bytes, store_root
 from test_source_associations import source
 
 
 class NativeTargetFields(unittest.TestCase):
+    def test_recovered_continuation_metadata_preserves_only_identical_source_addresses(self):
+        with TemporaryDirectory() as directory:
+            store = Path(directory)
+            digest = source(store, [{'rows': [['A', 'R 1', '1/2/2025', 'OWNER A'],
+                                              ['B', 'R 2', '2/2/2025', 'OWNER B']]}])
+            material, _ = source_material([digest], store)
+            original = material_context(material)
+            row = material['tables']['S0P1T1']['rows'][2]
+            row['continuation_of'] = 'S0P1T1R2'
+            self.assertTrue(context_matches(original, material))
+            recorded = material_context(material)
+            row['continuation_of'] = 'S0P1T1R1'
+            self.assertFalse(context_matches(recorded, material))
+            row.pop('continuation_of')
+            self.assertFalse(context_matches(recorded, material))
+            material['tables']['S0P1T1']['cells']['1']['text'] = 'changed source cell'
+            self.assertFalse(context_matches(original, material))
+
     def test_printed_native_fields_do_not_need_or_create_a_report_association(self):
         with TemporaryDirectory() as directory:
             store = Path(directory)
@@ -209,6 +227,7 @@ class NativeWordPositions(unittest.TestCase):
         self.assertNotIn('word_boxes', material_context(self.material))
         fragment = native_span(self.material, self.span(self.plants))
         self.assertNotIn('word_boxes', fragment)
+        self.assertNotIn('word_characters', fragment)
         self.assertEqual(fragment['bbox'], self.material['lines'][self.plants]['bbox'])
 
     def test_duplicate_or_overlapping_identifying_spans_are_not_new_positions(self):
@@ -303,6 +322,53 @@ class NativeWordPositions(unittest.TestCase):
             self.validate()
         self.values['prose_positions'] = []
         self.validate()  # The unselected limitation does not block other reading content.
+
+    def test_adjacent_glyph_envelope_is_not_cell_membership_but_partial_owned_word_is(self):
+        digest = source(self.store, [dict(headings=['SAME', 'OWNER'], widths=[240, 240],
+                                         rows=[['SAME', 'NAME']])])
+        with pymupdf.open(blob_path(self.store, digest)) as document:
+            # The first word's font box grazes the next table. The second word
+            # actually contributes characters to its cell despite starting outside.
+            document[0].insert_text((44, 97.5), 'SAME', fontsize=10)
+            document[0].insert_text((25, 130), 'CROSSING', fontsize=10)
+            digest = put_bytes(self.store, document.tobytes())
+        material, _ = source_material([digest], self.store)
+        table, = material['tables'].values()
+        adjacent = next(ref for ref, line in material['lines'].items()
+                        if line['words'] == ['SAME'] and line['bbox'][1] < 100)
+        span = self.span(adjacent)
+        self.assertGreater(material['lines'][adjacent]['word_boxes'][0][3], table['bbox'][1])
+        self.assertFalse(span_overlaps(material, span, [table]))
+        self.assertEqual(field_fragment(material, span)['text'], 'SAME')
+        for ref, line in material['lines'].items():
+            if ref != adjacent and line['words'] in [['SAME'], ['CROSSING']]:
+                self.assertTrue(span_overlaps(material, self.span(ref), [table]))
+                with self.assertRaisesRegex(ValueError, 'Use source cells'):
+                    field_fragment(material, self.span(ref))
+        # Exact membership is necessary, not something to replace with the old
+        # overlap guess when native provenance is unavailable.
+        material['cell_characters'] = {}
+        with self.assertRaisesRegex(ValueError, 'native cell character membership'):
+            field_fragment(material, span)
+
+    def test_retained_adjacent_continuations_and_parcels_keep_their_native_occurrences(self):
+        store = store_root(Path(__file__).resolve())
+        digest = '882c0020ab2ce0e55c06c9d72b36b3bd0204d02a48b6c35120c81bc050d958cd'
+        if not blob_path(store, digest).exists():
+            self.skipTest('Retained source store unavailable')
+        material, _ = source_material([digest], store)
+        for page, expected in [(58, 'CATERINA,IMMOBILIARE SANRO S.R.L.,'),
+                               (62, 'ANGELA,MASTROLONARDO ROSA,MASTROLONARDO FILOMENA')]:
+            fragment = field_fragment(material, self.span(f'S0P{page}L5', 0, 3))
+            self.assertEqual(fragment['text'], expected)
+            self.assertEqual((fragment['source'], fragment['page']), (digest, page))
+        for page, cell, expected in [(43, '11', '786'), (75, '25', '39')]:
+            span = self.span(f'S0P{page}L4')
+            table = material['tables'][f'S0P{page}T1']
+            area = dict(table['cells'][cell], source=digest, page=page)
+            self.assertNotEqual(area['text'], expected)
+            self.assertEqual(native_span(material, span)['text'], expected)
+            self.assertFalse(span_overlaps(material, span, [area]))
 
 
 class RetainedSourceComposition(unittest.TestCase):

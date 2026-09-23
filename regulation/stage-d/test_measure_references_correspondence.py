@@ -51,6 +51,18 @@ def reading(source='predecessor', number='315', adopted='2025-04-17', authority=
 
 
 class MeasureReferenceCorrespondence(unittest.TestCase):
+    def test_other_authority_is_distinct_from_unrecovered_issuing_authority(self):
+        for authority, cause in [('other', 'another authority outside'),
+                                 ('unresolved', 'lacks resolved Osservatorio')]:
+            with self.subTest(authority=authority):
+                declared = act(authority=authority)
+                original = deepcopy(declared)
+                result, = reading('principal', references=[reference(declared)]).referenced_measures([reading()])
+                self.assertIsNone(result['reading'])
+                self.assertFalse(result['candidates'])
+                self.assertIn(cause, result['cause'])
+                self.assertEqual(declared, original)
+
     def test_new_number_resolves_without_case_registration_and_preserves_originals(self):
         for number, year in [('731', '2023'), ('902', '2026')]:
             with self.subTest(number=number):

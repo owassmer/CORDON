@@ -25,12 +25,21 @@ def _cell_field(table, table_ref, cell):
     return field
 
 
+def _character_key(character):
+    return character['c'], tuple(character['origin']), tuple(character['bbox'])
+
+
+def _characters(raw):
+    return (character for block in raw['blocks'] for line in block.get('lines', [])
+            for span in line['spans'] for character in span['chars'])
+
+
 def _word_geometry(page, lines):
     """Locate the existing line words in the same PDF characters, without reflow."""
     extracted = []
     for block in page.get_text('rawdict')['blocks']:
         for line in block.get('lines', []):
-            words, boxes, characters = [], [], []
+            words, boxes, characters, members = [], [], [], []
 
             def finish():
                 if characters:
@@ -39,6 +48,7 @@ def _word_geometry(page, lines):
                                   min(c['bbox'][1] for c in characters),
                                   max(c['bbox'][2] for c in characters),
                                   max(c['bbox'][3] for c in characters)])
+                    members.append(tuple(_character_key(c) for c in characters))
                     characters.clear()
 
             for span in line['spans']:
@@ -49,11 +59,11 @@ def _word_geometry(page, lines):
                         characters.append(character)
             finish()
             if words:
-                extracted.append((words, boxes, list(line['bbox'])))
+                extracted.append((words, boxes, members, list(line['bbox'])))
     if len(extracted) != len(lines):
-        return [None] * len(lines)
-    return [boxes if words == text.split() and box == list(native_box) else None
-            for (words, boxes, box), (text, native_box, _) in zip(extracted, lines)]
+        return [(None, None)] * len(lines)
+    return [(boxes, members) if words == text.split() and box == list(native_box) else (None, None)
+            for (words, boxes, members, box), (text, native_box, _) in zip(extracted, lines)]
 
 
 def source_material(sources, store):
@@ -65,7 +75,7 @@ def source_material(sources, store):
     and source coordinates aligned without another association implementation.
     """
     import pymupdf
-    material = {'tables': {}, 'lines': {}, 'images': {}, 'pages': {}}
+    material = {'tables': {}, 'lines': {}, 'images': {}, 'pages': {}, 'cell_characters': {}}
     associations = []
     for index, digest in enumerate(sources):
         path = blob_path(store, digest)
@@ -77,17 +87,18 @@ def source_material(sources, store):
         for row in reading.rows:
             for fragment in row.get('continuations', []):
                 owned[(fragment['page'], fragment['table'], fragment['row'])] = row
-        with pymupdf.open(path) as document:
+        with pymupdf.open(path) as document, pymupdf.open(path) as native_document:
             for number, page in enumerate(document, 1):
                 prefix = f'S{index}P{number}'
                 material['pages'][prefix] = {
                     'source': digest, 'page': number, 'bbox': list(page.rect)}
                 lines = tuple(_lines(page))
                 geometry = _word_geometry(page, lines)
-                for line_number, ((text, box, _), word_boxes) in enumerate(zip(lines, geometry), 1):
+                for line_number, ((text, box, _), (word_boxes, word_characters)) in enumerate(zip(lines, geometry), 1):
                     material['lines'][f'{prefix}L{line_number}'] = {
                         'source': digest, 'page': number, 'bbox': list(box),
-                        'words': text.split(), 'word_boxes': word_boxes}
+                        'words': text.split(), 'word_boxes': word_boxes,
+                        'word_characters': word_characters}
                 for image_number, entry in enumerate(page.get_image_info(), 1):
                     material['images'][f'{prefix}I{image_number}'] = {
                         'source': digest, 'page': number, 'bbox': list(entry['bbox'])}
@@ -112,9 +123,16 @@ def source_material(sources, store):
                         continue
                     cells = {}
                     for cell_number, box in enumerate(boxes, 1):
+                        native_box = list(pymupdf.Rect(box) * inverse)
                         cells[str(cell_number)] = {
                             'text': cell_text[box],
-                            'bbox': list(pymupdf.Rect(box) * inverse)}
+                            'bbox': native_box}
+                        # Native clipping selects actual glyph occurrences. A
+                        # word's font envelope may graze an adjacent cell without
+                        # assigning any of its characters to that cell.
+                        material['cell_characters'][(digest, number, *native_box)] = frozenset(
+                            _character_key(c) for c in _characters(native_document[number - 1].get_text(
+                                'rawdict', clip=pymupdf.Rect(native_box))) if not c['c'].isspace())
                     rows = []
                     for row in range(table.row_count):
                         cell_ids = []
@@ -209,7 +227,18 @@ def context_matches(prompt, material):
     supplied, _ = json.JSONDecoder().raw_decode(prompt.split(CONTEXT_MARKER, 1)[1])
     # Earlier requests supplied redundant source boxes and empty row attributes.
     values = _address_values(supplied)
-    return values == material_addresses(material) or values == _legacy_addresses(material)
+    for current in (material_addresses(material), _legacy_addresses(material)):
+        # A native-owner repair can establish a previously unresolved continuation
+        # without changing any supplied cell, word or address. Old requests need
+        # not invent that later metadata; a conflicting recorded link still fails.
+        for ref, table in current['tables'].items():
+            prior = values['tables'].get(ref, {})
+            for row, old_row in zip(table['rows'], prior.get('rows', [])):
+                if 'continuation_of' not in old_row:
+                    row.pop('continuation_of', None)
+        if values == current:
+            return True
+    return False
 
 
 def selected_association(material, reference):
@@ -309,13 +338,14 @@ def native_span(material, span):
     start, end = span['first_word'], span['end_word']
     if not 0 <= start < end <= len(line['words']):
         raise ValueError('Word selection outside its source line')
-    return dict({key: value for key, value in line.items() if key != 'word_boxes'},
+    return dict({key: value for key, value in line.items()
+                 if key not in {'word_boxes', 'word_characters'}},
                 text=' '.join(line['words'][start:end]),
                 locator=f"{span['line_ref']}/words:{start}:{end}")
 
 
 def span_overlaps(material, span, areas):
-    """Compare selected native words to source areas, never neighbouring positions."""
+    """Check selected character identity against native cell membership."""
     native_span(material, span)
     line = material['lines'][span['line_ref']]
 
@@ -332,8 +362,20 @@ def span_overlaps(material, span, areas):
     if boxes is None:
         raise ValueError('Native span lacks exact word geometry for source-cell overlap; '
                          'use the source cells or retain this reading limitation')
-    return any(intersects(box, area['bbox'])
-               for box in boxes[span['first_word']:span['end_word']] for area in reached)
+    characters = line.get('word_characters')
+    if characters is None:
+        raise ValueError('Native span lacks exact character identity for source-cell membership')
+    selected = {c for word in characters[span['first_word']:span['end_word']] for c in word}
+    for area in reached:
+        cells = area['cells'].values() if 'cells' in area else (area,)
+        for cell in cells:
+            key = area['source'], area['page'], *cell['bbox']
+            members = material.get('cell_characters', {}).get(key)
+            if members is None:
+                raise ValueError('Source area lacks native cell character membership')
+            if selected & members:
+                return True
+    return False
 
 
 def association_areas(material):

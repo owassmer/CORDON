@@ -189,6 +189,69 @@ class SourceAssociations(unittest.TestCase):
             self.assertFalse(first['issues'])
             self.assertEqual(first['continuations'][0]['basis']['kind'], 'annex_continuation')
 
+    def test_report_field_can_continue_with_species_without_a_new_row_identity(self):
+        for tail in ['', 'var. rubra)']:
+            with self.subTest(tail=tail), TemporaryDirectory() as directory:
+                store = Path(directory)
+                digest = source(store, [
+                    {'annex': 'ALLEGATO 9/B', 'folio': 7, 'headings': HEADERS[:3] + ['SPECIE'],
+                     'rows': [['001X', 'Q-17 / 2032', '09/04/2032', 'Acer (cultivar']]},
+                    {'header': False, 'folio': 8,
+                     'rows': [['', 'Field Laboratory West', '', tail],
+                              ['002Y', 'Q-18 / 2032', '10/04/2032', 'Populus']]},
+                ])
+                reading = read_associations(digest, store)
+                self.assertEqual(len(reading.rows), 2)
+                first, second = reading.rows
+                self.assertEqual(first['fields']['plant_id']['text'], '001X')
+                report = first['fields']['report_reference']
+                self.assertEqual(report['text'].split(), ['Q-17', '/', '2032', 'Field', 'Laboratory', 'West'])
+                self.assertEqual([part['page'] for part in report['parts']], [1, 2])
+                self.assertEqual(first['fields']['host']['text'].split(),
+                                 ('Acer (cultivar ' + tail).split())
+                self.assertFalse(first['issues'])
+                self.assertEqual(second['fields']['plant_id']['text'], '002Y')
+                self.assertEqual(second['fields']['report_reference']['text'], 'Q-18 / 2032')
+                self.assertNotIn('parts', second['fields']['report_reference'])
+                with pymupdf.open(blob_path(store, digest)) as original:
+                    for part in report['parts']:
+                        self.assertEqual(original[part['page'] - 1].get_text(
+                            clip=pymupdf.Rect(part['bbox'])).split(), part['text'].split())
+
+    def test_identity_or_date_on_first_row_prevents_report_fragment_merging(self):
+        for row in [['002Y', 'Another report', '', 'Populus'],
+                    ['', 'Another report', '10/04/2032', 'Populus'],
+                    ['002Y', 'Another report', '10/04/2032', 'Populus']]:
+            with self.subTest(row=row), TemporaryDirectory() as directory:
+                store = Path(directory)
+                digest = source(store, [
+                    {'annex': 'ALLEGATO 9/B', 'folio': 7, 'headings': HEADERS[:3] + ['SPECIE'],
+                     'rows': [['001X', 'Q-17 / 2032', '09/04/2032', 'Acer']]},
+                    {'header': False, 'folio': 8, 'rows': [row]},
+                ])
+                first, second = read_associations(digest, store).rows
+                self.assertEqual(first['fields']['report_reference']['text'], 'Q-17 / 2032')
+                self.assertNotIn('parts', first['fields']['report_reference'])
+                self.assertEqual(second['fields']['report_reference']['text'], 'Another report')
+                self.assertEqual(second['fields']['plant_id']['text'], row[0])
+                self.assertEqual(second['fields']['report_date']['text'], row[2])
+
+    def test_report_fragment_does_not_bridge_changed_annex_folio_or_grid(self):
+        for change in [{'annex': 'ALLEGATO 9/C'}, {'folio': 9},
+                       {'widths': [85, 115, 150, 130]}]:
+            with self.subTest(change=change), TemporaryDirectory() as directory:
+                store = Path(directory)
+                digest = source(store, [
+                    {'annex': 'ALLEGATO 9/B', 'folio': 7, 'headings': HEADERS[:3] + ['SPECIE'],
+                     'rows': [['001X', 'Q-17 / 2032', '09/04/2032', 'Acer']]},
+                    {'header': False, 'folio': 8,
+                     'rows': [['', 'Field Laboratory West', '', 'var. rubra']], **change},
+                ])
+                reading = read_associations(digest, store)
+                self.assertEqual(len(reading.rows), 1)
+                self.assertNotIn('parts', reading.rows[0]['fields']['report_reference'])
+                self.assertTrue(any(issue.get('page') == 2 for issue in reading.issues))
+
     def test_knowledge_cutoff_uses_capture_time_not_report_date(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)

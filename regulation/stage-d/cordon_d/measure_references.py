@@ -12,6 +12,8 @@ def _source(reading):
 
 def _identity(act):
     """Use typed components only; leave the declaration and its unknowns untouched."""
+    if act.get('authority') == 'other':
+        return None, None, 'cited act belongs to another authority outside this removal-measure resolver'
     missing = [] if act.get('number') else ['number']
     if act.get('authority') != 'puglia-osservatorio':
         missing.append('resolved Osservatorio issuing authority')
