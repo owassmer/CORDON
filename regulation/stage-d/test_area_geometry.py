@@ -11,14 +11,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import numpy
 from pyproj import CRS
 import shapely
 from shapely.geometry import Point, box
 
 from cordon_c.core import MissingInput
 from cordon_c.spatial import MetricGeometry, adopted_membership, partial_parcel
-from cordon_d.area_geometry import (AdoptedGeography, Observation, Sources, Unplaced, Zone, adopted_geography,
-                                    boundary_distances, construct,
+from cordon_d import area_error
+from cordon_d.area_geometry import (AdoptedGeography, ErrorPart, Observation, Sources, Unplaced, Zone,
+                                    act_plants, adopted_geography, boundary_distances, construct,
                                     dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
                                     _inspire_zoning)
@@ -110,12 +112,17 @@ class Bands(unittest.TestCase):
         self.assertFalse(band.contains(Point(-100, 0)))
         self.assertFalse(band.intersects(box(10_000.5, -1, 10_001, 1)))
 
-    def test_an_inward_band_runs_along_the_land_border_only(self):
+    def test_an_inward_band_runs_along_the_border_with_the_adjacent_zone_only(self):
         zone = box(-10_000, -10_000, 0, 10_000)          # its west edge is the sea
-        band = inward_band(zone, 2_000, self.land)
+        band = inward_band(zone, 2_000, self.land.difference(zone))
         self.assertTrue(band.contains(Point(-1_500, 0)))
         self.assertFalse(band.contains(Point(-2_500, 0)))
         self.assertFalse(band.contains(Point(-9_000, 0)))
+        # Article 15(2)(a): from the border with the buffer zone, not from every land border.
+        buffer = box(0, 0, 5_000, 10_000)
+        band = inward_band(zone, 2_000, buffer)
+        self.assertTrue(band.contains(Point(-1_500, 5_000)))
+        self.assertFalse(band.contains(Point(-1_500, -5_000)))
 
 
 class PositionalError(unittest.TestCase):
@@ -125,18 +132,53 @@ class PositionalError(unittest.TestCase):
         self.assertAlmostEqual(boundary_distances(other, official).max(), 3)
         self.assertAlmostEqual(float(sorted(boundary_distances(official, other))[len(boundary_distances(official, other)) // 2]), 0)
 
+    def test_a_shared_map_offset_is_found_beyond_the_features_spacing(self):
+        # Each fix's feature is drawn (6, -5) m from its surveyed coordinate, among other corners
+        # closer to it. A nearest-corner match reads those; the neighbourhood's consensus reads 7.8 m.
+        rng = numpy.random.default_rng(7)
+        fixes = []
+        for i in range(30):
+            x, y = 1000.0 * i, 0.0
+            others = rng.uniform(-140, 140, size=(600, 2))
+            others = others[numpy.hypot(*(others - (6.0, -5.0)).T) > 4]
+            fixes.append(((x, y), numpy.vstack([others, [(6.0, -5.0)]]) + (x, y)))
+        self.assertLess(numpy.median([numpy.hypot(*(f - xy).T).min() for xy, f in fixes]), 7.0)
+        results = area_error.consensus(fixes)
+        for offset, error, on in results:
+            self.assertAlmostEqual(offset[0], 6.0, delta=0.5)
+            self.assertAlmostEqual(offset[1], -5.0, delta=0.5)
+            self.assertAlmostEqual(error, 7.81, delta=0.5)
+            self.assertTrue(on)
+
+    def test_a_place_carries_the_error_of_its_own_neighbourhood(self):
+        xy = numpy.array([(float(i), 0.0) for i in range(40)] + [(10_000.0 + i, 0.0) for i in range(40)])
+        errors = numpy.array([2.0] * 40 + [60.0] * 40)
+        found = area_error.ErrorField(xy, errors)
+        self.assertEqual(float(found.at([(5.0, 0.0)])[0]), 2.0)
+        self.assertEqual(float(found.at([(10_005.0, 0.0)])[0]), 60.0)
+
+    def test_the_fix_names_the_feature_the_map_draws(self):
+        self.assertEqual(area_error.feature_kind('TRIPLICE DI CONFINE'), 'triple')
+        self.assertEqual(area_error.feature_kind('SPIGOLO NORD - EST FABBRICATO'), 'building')
+        self.assertEqual(area_error.feature_kind('INCROCIO DI MURI A SECCO'), 'wall')
+        self.assertIsNone(area_error.feature_kind('ASSE PALO ENEL'))
+        self.assertEqual(area_error.corner_direction('SPIGOLO SUD OVEST FABBRICATO'), (-1, -1))
+
 
 class MetricGeometryForC(unittest.TestCase):
-    def geography(self, error=2.0, unplaced=()):
-        zones = (Zone('infected', ('ZONA INFETTA',), box(0, 0, 10, 10), 'annex', ('istat-boundaries',),
-                      None, unplaced),
+    def geography(self, error=2.0, unplaced=(), far=None):
+        parts = (ErrorPart('cadastre', None, error),)
+        if far is not None:     # a second source drawing the outline's east side only
+            parts += (ErrorPart('istat-boundaries', box(29, -1, 31, 31), far),)
+        zones = (Zone('infected', ('ZONA INFETTA',), box(0, 0, 10, 10), 'annex', ('cadastre',),
+                      None, unplaced, errors=parts),
                  Zone('buffer', ('ZONA CUSCINETTO',), box(0, 0, 30, 30).difference(box(0, 0, 10, 10)),
-                      'rule', ('istat-boundaries',)))
-        return AdoptedGeography('REG:v1', 'REG', date(2024, 1, 1), None, zones, error)
+                      'rule', ('cadastre',), errors=parts))
+        return AdoptedGeography('REG:v1', 'REG', date(2024, 1, 1), None, zones)
 
     def test_a_complete_construction_reaches_c_with_its_bound(self):
         area = self.geography().metric()
-        self.assertEqual((area.error_m, area.geometry.area), (2.0, 900))
+        self.assertEqual((area.error_m, area.geometry.area), (3.0, 900))    # 2 m and the 1 m offset polygon
         self.assertTrue(adopted_membership(MetricGeometry(Point(5, 5), UTM, 1), area).truth)
         self.assertIsNone(adopted_membership(MetricGeometry(Point(29, 5), UTM, 1), area).truth)
         self.assertFalse(partial_parcel(MetricGeometry(box(40, 40, 50, 50), UTM, 1), area).truth)
@@ -153,6 +195,16 @@ class MetricGeometryForC(unittest.TestCase):
     def test_no_bound_no_metric_geometry(self):
         with self.assertRaisesRegex(MissingInput, 'positional error'):
             self.geography(error=None).metric()
+
+    def test_the_bound_is_that_of_the_outline_near_the_place(self):
+        # A far-side source with a large error does not widen the bound at the other side.
+        parts = (ErrorPart('cadastre', None, 2.0),
+                 ErrorPart('istat-boundaries', box(29_900, -100, 30_100, 30_100), 400.0))
+        zone = Zone('infected', ('ZONA INFETTA',), box(0, 0, 30_000, 30_000), 'annex', ('cadastre',), errors=parts)
+        geography = AdoptedGeography('REG:v1', 'REG', date(2024, 1, 1), None, (zone,))
+        self.assertEqual(geography.metric(Point(-600, 15_000)).error_m, 3.0)
+        self.assertEqual(geography.metric(Point(5_000, 15_000)).error_m, 3.0)      # the west side is nearest
+        self.assertEqual(geography.metric(Point(30_600, 15_000)).error_m, 401.0)
 
     def test_the_shared_boundary_is_the_buffer_s_inner_edge(self):
         self.assertAlmostEqual(self.geography().shared_boundary.length, 20)
