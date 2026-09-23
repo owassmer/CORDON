@@ -36,49 +36,71 @@ def note_mark(fact):
     return fact.get('mark') or _leading_mark(fact.get('text'))
 
 
-def mark_components(mark):
-    """The separate printed marks in a trailing mark: '*a' is '*' and 'a'."""
-    return re.findall(r'\*+|[a-z]', mark)
+def printed_marks(text):
+    """The printed marks a text consists of, in order, or None if it is not only marks.
+
+    A mark is a run of '*' or one letter. A comma, semicolon or space may separate marks.
+    Two letters with nothing between them are a word, not two marks. At most three marks.
+    """
+    folded = (text or '').casefold()
+    marks, previous = [], None
+    for token in re.findall(r'\*+|[a-z]|[\s,;]+|.', folded, re.DOTALL):
+        if re.fullmatch(r'[\s,;]+', token):
+            previous = None
+            continue
+        if not re.fullmatch(r'\*+|[a-z]', token) or (token.isalpha() and previous and previous.isalpha()):
+            return None
+        marks.append(token)
+        previous = token
+    return tuple(marks) if 0 < len(marks) <= 3 else None
 
 
-def resolve_marks(result, scoped):
-    """A trailing printed mark on a result literal classifies only through the note it points at.
+def result_marks(text, cell=None):
+    """(result, marks) for a result cell that prints marks after its result, else None.
 
-    The source reader may already have separated `result_value` from an annotation; this
-    handles the cell it returned whole. A mark is separated only where a result
-    qualification recovered from the same document, scoped to this row, answers that
-    mark; the base is then classified and the note travels with the row as it already does.
-    What a mark note says about the result (provisional, retest, damaged sample, other)
-    becomes the result's qualification. A mark the document prints without a meaning, found
-    after every page was examined, classifies the result as printed and carries that
-    qualification (mark_without_meaning). A mark with no recovered note leaves the result
+    A cell the source reader split carries its marks in `annotation`. A whole cell ends
+    with them; the split takes the shortest ending that is marks and leaves a result, so
+    in "rilevataa" the mark is the last a and the a ending "rilevata" is the word's own.
+    """
+    if cell is not None and 'result_value' in cell:
+        base, marks = cell['result_value'], printed_marks(cell.get('annotation'))
+        return (base, marks) if marks and base and classify(base) != 'unclassified' else None
+    folded = (text or '').casefold().rstrip()
+    for start in range(len(folded) - 1, max(len(folded) - 12, 0), -1):
+        marks = printed_marks(folded[start:])
+        if marks and classify(folded[:start]) != 'unclassified':
+            return folded[:start].strip(), marks
+    return None
+
+
+def is_mark_note(fact):
+    """A note the note-only reader recovered for a printed mark, with what it says by kind."""
+    return fact.get('role') == 'result_qualification' and isinstance(fact.get('qualifications'), list)
+
+
+def resolve_marks(result, scoped, cell=None):
+    """A result that prints marks is classified only through the notes they point at.
+
+    Whether or not the source reader split the cell, each mark needs a note the note-only
+    reader recovered from the same document and that reaches this row. The note is the one
+    owner of what the mark says about the result; `result_notes` reads it. A mark the
+    document prints without a meaning, found after every page was examined, has such a
+    note too, and the result is as printed. A mark with no such note leaves the result
     unclassified and names that cause. The complete literal survives either way.
     """
-    if result.kind != 'unclassified' or not result.text:
+    split = result_marks(result.text, cell)
+    if split is None:
         return result
-    notes = [fact for fact in scoped if fact.get('role') == 'result_qualification' and note_mark(fact)]
-    marks = {note_mark(fact) for fact in notes}
-    base, used = result.text.strip().casefold(), []
-    # Separation stops at the first base that is a result: in "rilevataa" the mark a is
-    # separated once, and the a that ends "rilevata" is the word's own.
-    while classify(base) == 'unclassified':
-        mark = next((m for m in sorted(marks, key=len, reverse=True)
-                     if base.endswith(m) and len(base) > len(m)), None)
-        if mark is None:
-            break
-        base, used = base[:-len(mark)].rstrip(), used + [mark]
-    if used and classify(base) != 'unclassified':
-        qualification = tuple(dict.fromkeys(fact['qualification'] for fact in notes
-                                            if note_mark(fact) in used and fact.get('qualification')))
-        return replace(result, kind=classify(base), qualification=qualification)
-    text = result.text.strip().casefold()
-    for n in (1, 2, 3):
-        if n >= len(text):
-            break
-        mark, unmarked = text[-n:], text[:-n]
-        if re.fullmatch(r'(\*+|[a-z]|\*+[a-z]|[a-z]\*+)', mark) and classify(unmarked.strip()) != 'unclassified':
-            return replace(result, cause='printed mark; note not recovered by the reading')
-    return result
+    base, marks = split
+    noted = {note_mark(fact) for fact in scoped if is_mark_note(fact)}
+    if all(mark in noted for mark in marks):
+        return replace(result, kind=classify(base), marks=marks)
+    return replace(result, kind='unclassified', cause='printed mark; note not recovered by the reading', marks=marks)
+
+
+def result_notes(row, result):
+    """The mark notes that reach this row and answer a mark this result prints."""
+    return tuple(fact for fact in row.facts if is_mark_note(fact) and note_mark(fact) in result.marks)
 
 
 def link_section_marks(facts):
