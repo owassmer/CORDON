@@ -1,0 +1,28 @@
+{
+  "2022": {
+    "service": "https://geoportale.agea.gov.it/server/rest/services/AgEA/Quadro_Unione_2022/FeatureServer/42",
+    "pages": [
+      {
+        "url": "https://geoportale.agea.gov.it/server/rest/services/AgEA/Quadro_Unione_2022/FeatureServer/42/query?where=objectid%3E0&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=objectid&resultRecordCount=1000&f=json",
+        "sha256": "8e104e3991e4e6b77c5021ada5bc9eb278ffa9ba994ace0af8b0a559bc453e37",
+        "bytes": 407050,
+        "features": 1000,
+        "captured_at": "2026-09-23T17:53:58+00:00"
+      },
+      {
+        "url": "https://geoportale.agea.gov.it/server/rest/services/AgEA/Quadro_Unione_2022/FeatureServer/42/query?where=objectid%3E1000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=objectid&resultRecordCount=1000&f=json",
+        "sha256": "cf2341d6c82c969b44fc153af7dbb490fb648baaf51e300b87266c25efced23e",
+        "bytes": 407410,
+        "features": 1000,
+        "captured_at": "2026-09-23T17:53:58+00:00"
+      },
+      {
+        "url": "https://geoportale.agea.gov.it/server/rest/services/AgEA/Quadro_Unione_2022/FeatureServer/42/query?where=objectid%3E2000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=objectid&resultRecordCount=1000&f=json",
+        "sha256": "e2aad7bf58893f0d71f9ce0f380928059d948e2ae0abcb95e19edf12ed181508",
+        "bytes": 87545,
+        "features": 213,
+        "captured_at": "2026-09-23T17:53:59+00:00"
+      }
+    ]
+  }
+}

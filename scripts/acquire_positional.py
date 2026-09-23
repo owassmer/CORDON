@@ -6,6 +6,7 @@ A chip already recorded is never fetched again. Downloads run at low concurrency
 
     python scripts/acquire_positional.py chips REQUESTS.json
     python scripts/acquire_positional.py control
+    python scripts/acquire_positional.py flights
     python scripts/acquire_positional.py register POSITIVES.csv
 """
 import argparse
@@ -28,6 +29,7 @@ from cordon_d.store import put_bytes, store_root  # noqa: E402
 RECORDS = ROOT / 'corpus/sources/positional-reference'
 CHIPS = RECORDS / 'chips.jsonl'
 CONTROL = RECORDS / 'control.json'
+FLIGHTS = RECORDS / 'flights.json'
 CONTROL_SERVICE = 'https://webapps.sit.puglia.it/arcgis/rest/services/ServicesArcIMS/RetiGeodetiche/MapServer'
 REGISTER = RECORDS / 'register.json'
 REGISTER_SERVICE = 'https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer'
@@ -114,6 +116,32 @@ def control():
     print('control pages', len(pages), 'features', sum(p['features'] for p in pages))
 
 
+def flights():
+    """Every tile of each image year whose publisher states flight days per tile, as published."""
+    from cordon_d.positional import FLIGHT_TILES
+    store = store_root(ROOT)
+    out = {}
+    for year, service in FLIGHT_TILES.items():
+        pages, low = [], 0
+        while True:
+            params = {'where': f'objectid>{low}', 'outFields': '*', 'returnGeometry': 'true', 'outSR': 32633,
+                      'orderByFields': 'objectid', 'resultRecordCount': 1000, 'f': 'json'}
+            response = fetch(f'{service}/query', params)
+            body = response.json()
+            if 'error' in body:
+                raise RuntimeError(body['error'])
+            features = body.get('features', [])
+            if not features:
+                break
+            pages.append({'url': response.url, 'sha256': put_bytes(store, response.content),
+                          'bytes': len(response.content), 'features': len(features),
+                          'captured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')})
+            low = max(f['attributes']['objectid'] for f in features)
+        out[str(year)] = {'service': service, 'pages': pages}
+        print(year, 'pages', len(pages), 'tiles', sum(p['features'] for p in pages))
+    FLIGHTS.write_text(json.dumps(out, indent=2) + '\n')
+
+
 def register(positives: Path, workers: int):
     """Registered monumental olives near every positive its publisher flags as monumental: layer 1
     (the register) within `REGISTER_REACH_M` of the point, and all of layer 0 (the provisional
@@ -164,6 +192,7 @@ if __name__ == '__main__':
     c.add_argument('--workers', type=int, default=3)
     c.add_argument('--records', type=Path, default=CHIPS)
     sub.add_parser('control')
+    sub.add_parser('flights')
     g = sub.add_parser('register')
     g.add_argument('positives', type=Path)
     g.add_argument('--workers', type=int, default=3)
@@ -172,5 +201,7 @@ if __name__ == '__main__':
         chips(args.requests, args.workers, args.records)
     elif args.command == 'register':
         register(args.positives, args.workers)
+    elif args.command == 'flights':
+        flights()
     else:
         control()

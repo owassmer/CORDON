@@ -225,6 +225,39 @@ class Reach(unittest.TestCase):
         self.assertIsNone(P.bracket(date(2023, 5, 1), *lecce))
         self.assertEqual(P.held(date(2020, 10, 27), *lecce), ([2011, 2013, 2015, 2016, 2019], [2022, 2023]))
 
+    def test_a_tile_s_own_flight_days_place_the_image_around_the_finding(self):
+        lecce = (770000.0, 4470000.0)
+        feature = {'attributes': {'date_volo': '20220602, 20220614, 20220603'},
+                   'geometry': {'rings': [[[769000.0, 4469000.0], [769000.0, 4471000.0], [771000.0, 4471000.0],
+                                           [771000.0, 4469000.0], [769000.0, 4469000.0]]]}}
+        tiles = P.flight_tiles([feature])
+        self.assertEqual(tiles, [(769000.0, 4469000.0, 771000.0, 4471000.0, date(2022, 6, 2), date(2022, 6, 14))])
+        saved = dict(P._TILES)
+        P._TILES.clear()
+        try:
+            self.assertIsNone(P.flown(2022, *lecce))                               # no index: the year alone
+            self.assertEqual(P.bracket(date(2022, 8, 1), *lecce), (2019, 2023))
+            P.use_flight_tiles(2022, tiles)
+            self.assertEqual(P.flown(2022, *lecce), (date(2022, 6, 2), date(2022, 6, 14)))
+            self.assertEqual(P.bracket(date(2022, 8, 1), *lecce), (2022, 2023))    # after the tile's flight
+            self.assertEqual(P.bracket(date(2022, 3, 1), *lecce), (2019, 2022))    # before it
+            self.assertEqual(P.bracket(date(2022, 6, 10), *lecce), (2019, 2023))   # during it: neither
+            self.assertEqual(P.held(date(2020, 10, 27), *lecce), ([2011, 2013, 2015, 2016, 2019], [2022, 2023]))
+            # a chip reaching a later tile takes that tile's days too
+            later = dict(feature, attributes={'date_volo': '20220720'},
+                         geometry={'rings': [[[771000.0, 4469000.0], [771000.0, 4471000.0], [773000.0, 4471000.0],
+                                              [773000.0, 4469000.0], [771000.0, 4469000.0]]]})
+            P.use_flight_tiles(2022, P.flight_tiles([feature, later]))
+            self.assertEqual(P.flown(2022, 770950.0, 4470000.0), (date(2022, 6, 2), date(2022, 7, 20)))
+            self.assertEqual(P.bracket(date(2022, 7, 1), 770950.0, 4470000.0), (2019, 2023))
+            # 2023 states no flight days: its award (7 Jan 2023) and its year fix the interval
+            self.assertEqual(P.flown(2023, *lecce), (date(2023, 1, 7), date(2023, 12, 31)))
+            self.assertEqual(P.bracket(date(2023, 1, 3), *lecce), (2022, 2023))
+            self.assertFalse(P.same_season(2015, 2023))                            # an interval is not a window
+        finally:
+            P._TILES.clear()
+            P._TILES.update(saved)
+
     def test_a_same_season_pair_is_preferred_over_the_tightest(self):
         self.assertFalse(P.same_season(2011, 2015))        # January-June against May-November
         self.assertFalse(P.same_season(2019, 2022))        # no stated window

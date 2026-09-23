@@ -47,6 +47,7 @@ def population(args):
     from pyproj import Transformer
     from cordon_d.monitoring import distinct_observations
     to_utm = Transformer.from_crs('EPSG:4326', 'EPSG:32633', always_xy=True)
+    P.load_flight_tiles(ROOT)
     frame, requests, located = [], {}, 0
     with open(args.positives, 'w', newline='') as stream:
         w = csv.writer(stream)
@@ -166,6 +167,7 @@ _STATE = {}
 
 
 def _init(chips, fit):
+    P.load_flight_tiles(ROOT)
     _STATE['records'] = read_records(chips)
     _STATE['store'] = store_root(ROOT)
     fitted = json.loads(Path(fit).read_text())
@@ -218,14 +220,15 @@ def measure(args):
         for i, row in enumerate(pool.imap(measure_one, todo, chunksize=4), 1):
             if row['status'] != 'pending':
                 stream.write(json.dumps(row, separators=(',', ':')) + '\n')
+                stream.flush()          # a stopped pass keeps every reading it finished
             counts[row['status']] = counts.get(row['status'], 0) + 1
             if i % 250 == 0:
-                stream.flush()
                 print(i, counts, flush=True)
     print('finished', counts, flush=True)
 
 
 def table(args):
+    P.load_flight_tiles(ROOT)
     frame = {f['identity']: f for f in json.loads(Path(args.frame).read_text())}
     results = {}
     for line in Path(args.results).read_text().splitlines():
@@ -283,11 +286,18 @@ def table(args):
                         r.get('pre', ''), r.get('post', ''), len(r['vanished']) if r['status'] == 'counted' else '',
                         r.get('imagery_m', ''), error, basis, n, refutes])
     out = [{'source': s, 'release': rel, **entry} for (s, rel), entry in sorted(bounds.items())]
-    Path(args.out_table).write_text(json.dumps(out, indent=1) + '\n')
-    for e in out:
+    # the pooled program bound and the stability test are data for the release-bound ruling;
+    # no positive is qualified by them
+    program = P.program_bound([r for r in rows if r['status'] == 'counted'])
+    steady = P.stability(bounds)
+    Path(args.out_table).write_text(json.dumps({'releases': out, 'program': program, 'stability': steady},
+                                               indent=1) + '\n')
+    for e in out + [{'source': 'program', 'release': 'all releases', 'pending': '', **program}]:
         print(f"{e['source']:18} {e['release']:28} counted {e['counted']:5} unread {e['unread']:5} "
-              f"pending {e['pending']:5} out {e['out_of_reach']:5} radius {e['radius_m']} imagery {e['imagery_m']} "
+              f"pending {e['pending']:5} out {e['out_of_reach']:5} radius {e['radius_m']} "
+              f"containment {e.get('containment_m')} {e.get('containment_band_m')} imagery {e['imagery_m']} "
               f"bound {e['bound_m']} {e.get('cause') or ''}")
+    print('stability', steady)
 
 
 if __name__ == '__main__':

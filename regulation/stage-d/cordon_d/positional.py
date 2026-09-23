@@ -76,8 +76,11 @@ CONTROL = {'harris_sigma_m': 0.4, 'harris_k': 0.05, 'search_m': 5.0, 'neighbours
 SAME_SEASON_DAYS = 45
 NODATA_LIMIT = 0.02             # share of pure-black or pure-white chip pixels tolerated
 
-# Regional orthophotos on the SIT Puglia ImageServers reached without the VPN. The flight
-# window is stated where RNDT states it; otherwise the image year alone places it.
+# Regional orthophotos on the SIT Puglia ImageServers reached without the VPN. An image is
+# placed before or after a finding by the flight days its publisher states for the ground
+# under the chip (per tile, where the tile index states them), else by its stated flight
+# window, else by the interval its acquisition documents fix, else by its year alone.
+# Same-season preference reads the stated window only.
 IMAGE_SERVICE = 'https://webapps.sit.puglia.it/arcgis/rest/services/BaseMaps/Ortofoto{year}/ImageServer'
 IMAGES = {
     2011: {'window': (date(2011, 1, 1), date(2011, 6, 30)), 'extent': (492052.9, 4406925.6, 803373.4, 4678086.6),
@@ -87,9 +90,69 @@ IMAGES = {
            'window_source': 'RNDT r_puglia:1de1e983-7933-4e2e-8865-b6128ac05e08'},
     2016: {'window': None, 'extent': (317373.0, 4380945.5, 969142.2, 4709386.9)},
     2019: {'window': None, 'extent': (407479.6, 4396493.4, 887014.0, 4688466.4)},
+    # SIT metadata: AGEA's 2022 flight, reused by the Region; AGEA's tile index dates each tile
     2022: {'window': None, 'extent': (412252.2, 4394416.6, 882587.8, 4689070.4)},
-    2023: {'window': None, 'extent': (321650.6, 4394376.4, 973189.4, 4689913.6)},
+    # No published flight days (SIT metadata and RNDT state none). InnovaPuglia awarded the
+    # acquisition on 7 Jan 2023 (DIT/005/2023, CIG 9428158A1A) and the image is named 2023.
+    2023: {'window': None, 'extent': (321650.6, 4394376.4, 973189.4, 4689913.6),
+           'dated': (date(2023, 1, 7), date(2023, 12, 31)),
+           'dated_source': 'InnovaPuglia DIT/005/2023 of 7 Jan 2023 (award, CIG 9428158A1A); image named 2023'},
 }
+# Tile indexes that state each tile's flight days (EPSG:32633 on query).
+FLIGHT_TILES = {
+    2022: 'https://geoportale.agea.gov.it/server/rest/services/AgEA/Quadro_Unione_2022/FeatureServer/42',
+}
+_TILE_CELL_M = 10000.0
+_TILES: dict[int, dict] = {}    # year -> {cell: [(x0, y0, x1, y1, first, last)]}
+
+
+def use_flight_tiles(year: int, tiles) -> None:
+    """Install one year's tiles, (x0, y0, x1, y1, first_day, last_day), for `flown`."""
+    index = {}
+    for tile in tiles:
+        x0, y0, x1, y1 = tile[:4]
+        for i in range(int(x0 // _TILE_CELL_M), int(x1 // _TILE_CELL_M) + 1):
+            for j in range(int(y0 // _TILE_CELL_M), int(y1 // _TILE_CELL_M) + 1):
+                index.setdefault((i, j), []).append(tuple(tile))
+    _TILES[year] = index
+
+
+def flight_tiles(features) -> list:
+    """Tiles from a tile index's features: each ring's box and its first and last flight day."""
+    tiles = []
+    for feature in features:
+        days = sorted(date(int(d[:4]), int(d[4:6]), int(d[6:8]))
+                      for d in (feature['attributes'].get('date_volo') or '').replace(' ', '').split(',') if d)
+        points = [p for ring in feature['geometry']['rings'] for p in ring]
+        if days and points:
+            xs, ys = [p[0] for p in points], [p[1] for p in points]
+            tiles.append((min(xs), min(ys), max(xs), max(ys), days[0], days[-1]))
+    return tiles
+
+
+def load_flight_tiles(root) -> None:
+    """Install every retained tile index (corpus/sources/positional-reference/flights.json)."""
+    import json
+    from pathlib import Path
+    from .store import blob_path, store_root
+    path = Path(root) / 'corpus/sources/positional-reference/flights.json'
+    store = store_root(Path(root))
+    for year, entry in json.loads(path.read_text()).items():
+        features = [f for page in entry['pages'] for f in json.loads(blob_path(store, page['sha256']).read_bytes())['features']]
+        use_flight_tiles(int(year), flight_tiles(features))
+
+
+def flown(year: int, east: float, north: float):
+    """(first, last) flight day of an image over the chip at a point, or None where only the
+    year is known. Where tiles are indexed, every tile the chip touches counts."""
+    if year in _TILES:
+        x0, y0, x1, y1 = east - CHIP_HALF_M, north - CHIP_HALF_M, east + CHIP_HALF_M, north + CHIP_HALF_M
+        cell = (int(east // _TILE_CELL_M), int(north // _TILE_CELL_M))
+        near = {t for di in (-1, 0, 1) for dj in (-1, 0, 1) for t in _TILES[year].get((cell[0] + di, cell[1] + dj), ())}
+        touched = [t for t in near if t[0] <= x1 and t[2] >= x0 and t[1] <= y1 and t[3] >= y0]
+        if touched:
+            return min(t[4] for t in touched), max(t[5] for t in touched)
+    return IMAGES[year]['window'] or IMAGES[year].get('dated')
 
 
 def chip_request(year: int, east: float, north: float, half: float) -> dict:
@@ -107,14 +170,14 @@ def chip_key(request: dict) -> str:
 
 # --- which positives the method reaches -----------------------------------------
 
-def _before(year: int, event: date) -> bool:
-    window = IMAGES[year]['window']
-    return window[1] < event if window else year < event.year
+def _before(year: int, event: date, east: float, north: float) -> bool:
+    days = flown(year, east, north)
+    return days[1] < event if days else year < event.year
 
 
-def _after(year: int, event: date) -> bool:
-    window = IMAGES[year]['window']
-    return window[0] > event if window else year > event.year
+def _after(year: int, event: date, east: float, north: float) -> bool:
+    days = flown(year, east, north)
+    return days[0] > event if days else year > event.year
 
 
 def _covers(year: int, east: float, north: float) -> bool:
@@ -125,8 +188,8 @@ def _covers(year: int, east: float, north: float) -> bool:
 def held(event: date, east: float, north: float):
     """(before, after): every image year covering the point flown wholly before / after the event.
     An image whose flight window contains the event is in neither."""
-    before = [y for y in IMAGES if _before(y, event) and _covers(y, east, north)]
-    after = [y for y in IMAGES if _after(y, event) and _covers(y, east, north)]
+    before = [y for y in IMAGES if _covers(y, east, north) and _before(y, event, east, north)]
+    after = [y for y in IMAGES if _covers(y, east, north) and _after(y, event, east, north)]
     return before, after
 
 
@@ -701,6 +764,51 @@ def radial_bound(counts, areas) -> dict:
             'beyond_upper_share': round(left / float(tail[0, 0]), 4), 'cause': None}
 
 
+def containment(counts, areas) -> dict:
+    """The distance containing `coverage` of the excess over background, with its band from the
+    same resampling of positives as `radial_bound`. Unlike the bound, its expected value does not
+    grow with n, so releases of different size can be compared on it."""
+    counts, areas = np.asarray(counts, dtype=float), np.asarray(areas, dtype=float)
+    n = counts.shape[0]
+    ring = RADIAL['ring_m']
+    b0, b1 = (int(round(x / ring)) for x in RADIAL['background_m'])
+    alpha = 1 - RADIAL['confidence']
+    if n == 0:
+        return {'containment_m': None, 'containment_band_m': None}
+    rng = np.random.default_rng(RADIAL['seed'])
+    weights = np.vstack([np.ones(n), rng.multinomial(n, np.full(n, 1 / n), size=RADIAL['resamples'])])
+    C, A = weights @ counts, weights @ areas
+    background = C[:, b0:b1].sum(axis=1) / A[:, b0:b1].sum(axis=1)
+    cumulative = np.cumsum(C[:, :b0] - background[:, None] * A[:, :b0], axis=1)
+    total = cumulative[:, -1]
+    reached = cumulative >= RADIAL['coverage'] * total[:, None]
+    radius = np.where(total > 0, (reached.argmax(axis=1) + 1) * ring, np.nan)
+    valid = radius[1:][np.isfinite(radius[1:])]
+    if not np.isfinite(radius[0]) or valid.size < 0.9 * RADIAL['resamples']:
+        return {'containment_m': None, 'containment_band_m': None}
+    return {'containment_m': float(radius[0]),
+            'containment_band_m': [float(np.quantile(valid, alpha / 2)), float(np.quantile(valid, 1 - alpha / 2))]}
+
+
+def stability(entries) -> dict:
+    """Whether release containment radii are one process: every release band holds a common
+    distance (the largest lower end does not exceed the smallest upper end)."""
+    bands = {key: e['containment_band_m'] for key, e in entries.items() if e.get('containment_band_m')}
+    if len(bands) < 2:
+        return {'releases': len(bands), 'consistent': None, 'common_m': None}
+    low, high = max(b[0] for b in bands.values()), min(b[1] for b in bands.values())
+    outside = sorted('/'.join(k) for k, b in bands.items() if b[1] < low or b[0] > high) if low > high else []
+    return {'releases': len(bands), 'consistent': bool(low <= high), 'common_m': [low, high] if low <= high else None,
+            'widest_lower_m': low, 'narrowest_upper_m': high, 'apart': outside}
+
+
+def program_bound(rows) -> dict:
+    """The pooled bound over every counted positive of every release: data for the stability
+    ruling. It qualifies no positive; `qualify` reads release bounds only."""
+    pooled = [dict(r, source='program', release='all releases') for r in rows]
+    return release_bounds(pooled)[('program', 'all releases')]
+
+
 def release_bounds(rows):
     """Per (source, release): counts by status, the radial bound over its counted positives,
     and the bound = radius + largest imagery residual + grid-to-ground at the radius.
@@ -720,7 +828,9 @@ def release_bounds(rows):
         entry = {**status, 'imagery_m': max((r['imagery_m'] for r in counted), default=None),
                  'grid_m_per_m': max((r['grid_m_per_m'] for r in counted), default=None)}
         if profiles:
-            entry.update(radial_bound(np.vstack([p[0] for p in profiles]), np.vstack([p[1] for p in profiles])))
+            counts, areas = np.vstack([p[0] for p in profiles]), np.vstack([p[1] for p in profiles])
+            entry.update(radial_bound(counts, areas))
+            entry.update(containment(counts, areas))
         else:
             entry.update({'n': 0, 'radius_m': None, 'cause': 'no positive read'})
         entry['bound_m'] = None
