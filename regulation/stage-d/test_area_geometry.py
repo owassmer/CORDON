@@ -246,6 +246,7 @@ class ReachAndPopulation(unittest.TestCase):
             self.assertFalse(consumed[identity])
         self.assertEqual(sum(consumed.values()), 26)
 
+    @unittest.skipUnless(held('istat-codes'), 'the geometry sources are not in this store')
     def test_the_version_names_its_zones_and_the_plants_of_its_foci(self):
         version = version_of('REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1')
         sources = Sources(ROOT, comuni=())
