@@ -5301,6 +5301,84 @@
     "temporal_status": "CURRENT"
   },
   {
+    "source_clause_id": "IT-L241-A21TER::Art.21-ter(1)",
+    "instrument_id": "IT-L241-A21TER",
+    "stable_provision_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
+    "parent_stable_provision_id": "",
+    "article": "21-ter(1):stated-term-coercive-direction",
+    "structural_kind": "paragraph",
+    "effective_from": "2005-03-08",
+    "effective_to_exclusive": "",
+    "application_basis": "Law 241/1990 Article 21-ter(1) and the operative prescription's own stated clause",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Regional Plant Health Service",
+    "modality": "shall",
+    "true_effect": "The Osservatorio must direct coercive removal of the population the prescription names for coercion, through the executor it names, insofar as that removal remains lawfully due. This is the use of existing substitute/coercive execution authority, not proof of completed removal.",
+    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
+    "reserved_decision_owner": "Regional Plant Health Service",
+    "evidence_contract": "Operative prescription and applicable correction, its stated commencement term and anchor, recipient, lawfully due commencement and coercive populations, executor, legally sufficient notification date, and evidence establishing whether concrete removal work began by the stated term.",
+    "external_dependencies": [
+      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
+      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
+      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
+    ],
+    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+    "authority_judgment_required": "YES",
+    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "[INTERPRETATION, NOT LITERAL STATUTORY TEXT] Article 21-ter(1) makes a prior diffida a condition of coercive execution but fixes no form and no further period for it. A prescription legally sufficiently notified to this recipient that itself states the commencement term and the coercive consequence is that prior diffida; no further warning is a condition. Falsifier: a controlling ruling that requires a post-default diffida where the order already warned; the rule then gains, for every order, the condition that a post-term diffida has been legally sufficiently notified. Article 21-ter says the administrations “possono” proceed; the required direction comes from the order's own “disporrà”, read as the order's commitment to direct coercive removal, so a clause that does not commit the Osservatorio does not satisfy the first condition. The coercive population is the clause's own words; a back-reference (“delle suddette piante”, “della piante”) refers to the population the same clause names. The term, its anchor, the commencement work, the coercive population and the executor are the prescription's own; no default term exists, and an order stating no term has no deadline. A case delta of the prescription's instrument, or a correction or supplement row that names it among the instruments it corrects, is reached through the record's governing A references; removal it withholds is not lawfully due, and while it is unresolved lawful dueness is unresolved. Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "the operative prescription governing this recipient states in its operative part a commencement term running from notification and commits the Osservatorio to direct coercive removal on noncommencement"
+              },
+              {
+                "predicate": "the commencement work the prescription states is lawfully due from this recipient"
+              },
+              {
+                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+              },
+              {
+                "predicate": "the source notification-based commencement deadline has elapsed"
+              },
+              {
+                "predicate": "noncommencement of that work by the source deadline is established"
+              },
+              {
+                "predicate": "removal of the population the prescription names for coercion is lawfully due"
+              }
+            ]
+          },
+          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+        }
+      ],
+      "otherwise": {
+        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+      }
+    },
+    "higher_authority_dependencies": [
+      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
+      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
+      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
+    ],
+    "documentary_source_instrument_id": "IT-L241-A21TER",
+    "source_uri": "https://def.giustiziatributaria.gov.it/DocTribFrontend/executePrintArticolo.do?articolo=Articolo+21+ter&codiceOrdinamento=0000000000000219999900003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&id=%7B00CBF74C-1642-41D9-AE4F-6CD18551724F%7D",
+    "source_paths": "regulation/jurisdiction/national/IT-L241-A21TER.pdf",
+    "source_snapshot_hashes": "a554db17b2d49cae23008596f078dda4606743692e00f3f85e9f5f26936657d5",
+    "source_snapshot_dates": "2026-09-22",
+    "source_quote": "Il provvedimento costitutivo di obblighi indica il termine e le modalita' dell'esecuzione da parte del soggetto obbligato. Qualora l'interessato non ottemperi, le pubbliche amministrazioni, previa diffida, possono provvedere all'esecuzione coattiva nelle ipotesi e secondo le modalita' previste dalla legge.",
+    "source_quote_sha256": "25a8b7b778bf400966603587adf25d2c7898f30778f78623b57ee1c214e8fc0a",
+    "lineage_role": "PROCEDURAL_ATOM",
+    "provision_version_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
     "source_clause_id": "IT-DLGS42-A146::Art.146(2)",
     "instrument_id": "IT-DLGS42-A146",
     "stable_provision_id": "IT-DLGS42-A146:Art.146(2)",
@@ -24016,6 +24094,9 @@
     "authority_judgment_kind": "case-specific correction or source-conflict resolution",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2022-00006",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2021-00129"
+    ],
     "source_quote": "Ritenuto di dover provvedere in merito con l’adozione del presente provvedimento\n                                                         DETERMINA DI\nconfermare tutte le premesse esposte in narrativa che qui si intendono riportate per farne parte integrante;\n1. rettificare i dati catastali della pianta infetta contrassegnata con codice ID 4273474 di cui alla determina\n   dirigenziale n° 129 del 04/11/2021;\n\n8146                                 Bollettino Ufficiale della Regione Puglia - n. 17 del 10-2-2022\n\n\n2.   stabilire che tale pianta infetta non ricade nell’appezzamento sito in agro di Fasano - foglio 100 - particella\n     74 di proprietà del Sig. Semeraro Pietro come riportato nella Determina n° 129 del 04/11/2021, bensì\n     nell’appezzamento sito in agro di Fasano - foglio 102 - particella 21 di proprietà del Sig. De Bernardis Vito\n     Antonio, come riportato nella seguente tabella ;\n\n                                                  PIANTE INFETTE MONITORAGGIO 2021\n\n                 ZONA            AGRO     ID CAMPIONE   FOGLIO   PARTICELLA   PROPRIETARIO    SPECIE   LONGITUDINE   LATITUDINE\n\n            Ex contenimento-                                                   De Bernardis\n                                 Fasano     4273474      100        74                        Olivo    17,4643023    40,76768876\n             Piana degli Ulivi                                                 Vito Antonio\n\n3. prescrivere, ai sensi del comma 1 dell’art. 13 del Reg. UE 2020/1201, al Sig. De Bernardis Vito Antonio\n   l’estirpazione di n°1 pianta risultata infetta da Xylella fastidiosa, come innanzi indicata;",
     "source_snapshot_dates": "2022-02-08",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-6-2022-FITO-.txt",
@@ -24091,7 +24172,7 @@
     "external_dependencies": [
       "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition",
       "EU-2020-1201:7(1)",
-      "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement"
+      "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.txt",
     "article": "case operative delta",
@@ -24128,12 +24209,15 @@
     "authority_judgment_kind": "case-specific correction or source-conflict resolution",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2024-00165",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2024-00147"
+    ],
     "source_quote": "RILEVATO CHE\nLa tabella “Area delimitata Xylella fastidiosa – sottospecie multiplex ST26 – Santeramo in colle - PIANTE\nINFETTE MONITORAGGIO 2024” dell’Allegato 1/C di cui alla DDS N. 00147 del 08/11/2024, per mero errore\nmateriale, riporta l’agro di Santeramo in Colle mentre le piante infette sono tutte site in agro di Altamura.\n\nRITENUTO NECESSARIO\ndovere sostituire l’allegato 1/C della DDS N. 00147 del 08/11/2024 con l’allegato 1/C al presente provvedimento\nper formarne parte integrante e sostanzile che contiene, nella prima colonna della tabella “Area delimitata\nXylella fastidiosa – sottospecie multiplex ST26 – Santeramo in colle - PIANTE INFETTE MONITORAGGIO 2024”,\nriportando il dato corretto relativo all’agro di Altamura in cui insistono tutte le piante infette.\nDETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\n\n                           Bollettino Ufficiale della Regione Puglia - n. 96 del 28-11-2024                     81089\n\n\n  1.   Di sostituire l’allegato 1/C della DDS N. 00147 del 08/11/2024 con l’allegato 1/C al presente\n       provvedimento che contiene, nella prima colonna della tabella “Area delimitata Xylella fastidiosa –\n       sottospecie multiplex ST26 – Santeramo in colle - PIANTE INFETTE MONITORAGGIO 2024”, riportando\n       il dato corretto relativo all’agro di Altamura in cui insistono tutte le piante infette.\n  2.   Di confermare quanto disposto con DDS N. 00147 del 08/11/2024.",
     "source_snapshot_dates": "2024-11-25",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. Inherited notification/noncommencement terms remain owned by the predecessor enforcement proposition; apply them to the corrected recipient relation without duplicating the clock or automatically restarting valid notice.",
+    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. Inherited notification/noncommencement terms remain the predecessor order's own stated terms under IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction; apply them to the corrected recipient relation without duplicating the clock or automatically restarting valid notice. DDS147/2024's operative eradication instruction controls over its source Article 13 miscitation.",
     "authority_judgment_required": "YES",
     "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
     "reserved_decision_owner": "Regional Plant Health Service",
@@ -24150,7 +24234,7 @@
     "external_dependencies": [
       "EU-2020-1201:7(1)",
       "PUG-DGR1593-2024:notice-owner-identification",
-      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement"
+      "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.txt",
     "article": "case operative delta",
@@ -24187,12 +24271,15 @@
     "authority_judgment_kind": "case-specific correction or source-conflict resolution",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2025-00011",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2024-00188"
+    ],
     "source_quote": "dal bilancio regionale.\n                                                     DETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\nRettificare l’allegato 1/C della DDS 188/2024, inserendo gli attuali proprietari delle seguenti particelle :\n    • Agro di Triggiano, Fg 21 - P.lle: 713, 715, 717, 719, 721 – Proprietà: Acquedotto Pugliese S.p.A;\n    • Agro di Triggiano, Fg 20 - P.lla: 1168 – Proprietà: Acquedotto Pugliese S.p.A;\n    • Agro di Triggiano, Fg 17 - P.lle: 1143, 1146, 1148, 1150, 1152, 1154, 1156, 1158, 1186, 1189 – Proprietà:\n      Acquedotto Pugliese S.p.A;\n    • Agro di Triggiano, Fg 12 - P.lle: 40, 41 – Proprietà: Sig. Ragone Matteo.\n\nStabilire che in caso di cambio di proprietà di ulteriori particelle inserite nell’allegato 1/C della DDS 188/2024,\nil proprietario riportato nell’allegato deve comunicare la variazione all’Osservatorio indicando il nome\ndell’attuale proprietario, entro massimo 3 giorni dal termine del periodo di pubblicazione, ai seguenti indirizzi\nmail: gestionefitosanitaria@pec.rupar.puglia.it, protocollo@pec.arifpuglia.it, c.zaza@regione.puglia.it;\n\nStabilire che l’Acquedotto Pugliese S.p.A e il Sig. Ragone Matteo, devono applicare le misure di eradicazione\ncome riportato nella DDS 188/2024.",
     "source_snapshot_dates": "2025-02-05",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. [SPAN 2026-09-01] Quote completed to its sentence end from the same source span (it had been cut mid-word by an earlier extraction); meaning unchanged. Inherited notification/noncommencement terms remain owned by the predecessor enforcement proposition; apply them to the corrected recipient relation without duplicating the clock or automatically restarting valid notice.",
+    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. [SPAN 2026-09-01] Quote completed to its sentence end from the same source span (it had been cut mid-word by an earlier extraction); meaning unchanged. Inherited notification/noncommencement terms remain the predecessor order's own stated terms under IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction; apply them to the corrected recipient relation without duplicating the clock or automatically restarting valid notice.",
     "authority_judgment_required": "YES",
     "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
     "reserved_decision_owner": "Regional Plant Health Service",
@@ -24308,6 +24395,10 @@
     "authority_judgment_kind": "case-specific correction or source-conflict resolution",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2025-00117",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2024-00188",
+      "REG-PUGLIA-U181-DIR-2025-00043"
+    ],
     "source_quote": "dal bilancio regionale\n                                                     DETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\nDi rettificare gli allegati 1/C delle determine n° 188 del 12/12/2024 e n°43 del 21/03/2025 di cui al presente\nprovvedimento per formarne parte integrante e sostanziale, con l’esatta indicazione degli attuali proprietari\ndelle seguenti particelle:\n    • agro di Triggiano – fg 4 – p.lle: 158-159-243-296;\n    • agro di Triggiano- fg 22- p.lle 38-39-40-64-65.\nDi prescrivere, ai sensi della lettera a), comma 1 dell’art. 7 del Reg. UE 2020/1201, ai proprietari/conduttori i\ncui terreni rientrano in tutto o in parte nella zona infetta di 50 metri attorno a ciascuna pianta infetta, indicati\nnell’allegato 1/C, parte integrante e sostanziale del presente provvedimento:\n        a. l’estirpazione di tutte le piante che presentino sintomi indicativi della possibile infezione da parte\n           di tale organismo nocivo o che si sospetta siano infette da tale organismo nocivo;\n        b. l’estirpazione di tutte le piante appartenenti alla stessa specie delle piante infette, indipendentemente\n           dal loro stato sanitario;\n        c. l’estirpazione di tutte le piante di specie diverse da quella delle piante infette risultate infette in\n           altre parti dell’area delimitata;\n        d. l’estirpazione di tutte le piante specificate, diverse da quelle di cui alle lettere b) e c), che non\n           siano state immediatamente sottoposte a campionamento e ad analisi molecolare e che non siano\n           risultate indenni dall’organismo nocivo specificato.\nDi applicare nell’area infetta di cui al presente provvedimento, la deroga di cui al comma 3 dell’ art. 7 del Reg.\nUE 2020/1201, qualora siano presenti piante specificate ufficialmente riconosciute come piante di valore\nstorico.",
     "source_snapshot_dates": "2025-06-27",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.txt",
@@ -24388,7 +24479,7 @@
     "external_dependencies": [
       "EU-2020-1201:7(1)",
       "REG-PUGLIA-U181-DIR-2025-00163:area-state-transition",
-      "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement"
+      "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
     "article": "case operative delta",
@@ -24428,12 +24519,15 @@
     "authority_judgment_kind": "case-specific correction or source-conflict resolution",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2026-00063",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2025-00173"
+    ],
     "source_quote": "Di integrare la determina n. 173 del 24/10/2025 con l’allegato 1/B che forma parte integrante e sostanziale\ndel presente provvedimento, che riporta la p.lla 208 del foglio 8 dell’agro di Cagnano Varano, ricadente nella\nzona buffer di 50 attorno alla pianta infetta con ID 1892726 e i relativi proprietari.\n\nDi prescrivere l’applicazione con immediatezza delle misure di eradicazione con le modalità e la tempistica\nindicate nella determina n. 173/2025.",
     "source_snapshot_dates": "2026-04-03",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. The source loosely labels the 50 m infected-zone radius a \"zona buffer di 50\"; the supplemented parcel joins the predecessor order’s exact Article 4 population. Inherited notification/noncommencement terms remain owned by the predecessor enforcement proposition; apply them to the corrected recipient relation without duplicating the clock or automatically restarting valid notice.",
+    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. The source loosely labels the 50 m infected-zone radius a \"zona buffer di 50\"; the supplemented parcel joins the predecessor order’s exact Article 4 population. Inherited notification/noncommencement terms remain the predecessor order's own stated terms under IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction; apply them to the corrected recipient relation without duplicating the clock or automatically restarting valid notice.",
     "authority_judgment_required": "YES",
     "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
     "reserved_decision_owner": "Regional Plant Health Service",
@@ -24721,6 +24815,9 @@
     "authority_judgment_kind": "exact full-replacement, partial-correction or independent-order scope",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2023-00051",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2023-00048"
+    ],
     "source_quote": "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 19 maggio 2023, n. 51\nReg. (UE) 2020/1201 - D.Lgs 19 del 02/02/2021 - D.G.R. 1866 /2022. Prescrizione di misure di eradicazione\nai sensi dell’art. 7 del Reg. (UE) 2020/1201 in agro di Castellana Grotte (BA) - Area Delimitata Valle D’Itria -\nZona Cuscinetto - Rettifica Atto Dirigenziale n. 48 del 15 maggio 2023.\ned è escluso ogni ulteriore onere aggiuntivo rispetto a quelli già autorizzati a valere sullo stanziamento previsto\ndal bilancio regionale.\n                                                    DETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\ndi confermare tutte le premesse esposte in narrativa che qui si intendono riportate per farne parte integrante;\n\n\n     1. dare atto che la pianta infetta e la zona infetta stabilita ai sensi del comma 2 dell’art. 4 del Reg. UE\n        2020/1201 in agro di Castellana Grotte (BA), sono evidenziati nelle ortofoto di cui all’allegato 1/A,\n        parte integrante e sostanziale del presente provvedimento;\n     2. prescrivere, ai sensi della lettera a), comma 1 dell’art. 7 del Reg. UE 2020/1201, ai proprietari/\n        conduttori nel cui appezzamento ricade la pianta infetta e ai proprietari/conduttori, i cui terreni\n        rientrano in tutto o in parte nella zona infetta di 50 m , indicati nell’allegato 1/D, parte integrante e\n        sostanziale del presente provvedimento:\n              • l’estirpazione di n° 1 pianta di olivo risultata infetta da Xylella fastidiosa;\n              • l’estirpazione di tutte le piante che presentino sintomi indicativi della possibile infezione da\n                 parte di tale organismo nocivo o che si sospetta siano infette da tale organismo nocivo;\n              • l’estirpazione di tutte le piante appartenenti alla stessa specie della pianta infetta,\n                 indipendentemente dal loro stato sanitario;\n              • l’estirpazione di tutte le piante di specie diverse da quella delle piante infette risultate infette\n                 in altre parti dell’area delimitata;\n              • l’estirpazione di tutte le piante specificate, diverse da quelle di cui alle lettere b) e c), che non\n                 siano state immediatamente sottoposte a campionamento e ad analisi molecolare e che non\n                 siano risultate indenni dall’organismo nocivo specificato;\n     3. stabilire che nell’applicazione delle misure di eradicazione non si procede all’estirpazione di: agrumi,\n        pesco, albicocco, susino, qualora presenti nei 50 m attorno alla pianta infetta, in quanto specie non\n        suscettibili alla Xylella fastidiosa sottospecie Pauca genotipo ST53;\n     4. stabilire che per gli ulivi con caratteristiche di monumentalità ricadenti nell’area di 50 m attorno alla\n        pianta infetta, risultati non infetti alle analisi di laboratorio, si procederà alla richiesta di riconoscimento\n        ufficiale da parte della Commissione tecnica alberi monumentali;",
     "source_snapshot_dates": "2023-05-19",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-51-2023-FITO-db9ed41fcfb9.txt",
@@ -25350,6 +25447,18 @@
     "authority_judgment_kind": "predecessor/completion scope and the remaining parcel, owner and plant workload",
     "parent_stable_provision_id": "",
     "instrument_id": "REG-PUGLIA-U181-DIR-2024-00188",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2024-00052",
+      "REG-PUGLIA-U181-DIR-2024-00058",
+      "REG-PUGLIA-U181-DIR-2024-00063",
+      "REG-PUGLIA-U181-DIR-2024-00074",
+      "REG-PUGLIA-U181-DIR-2024-00082",
+      "REG-PUGLIA-U181-DIR-2024-00096",
+      "REG-PUGLIA-U181-DIR-2024-00097",
+      "REG-PUGLIA-U181-DIR-2024-00116",
+      "REG-PUGLIA-U181-DIR-2024-00138",
+      "REG-PUGLIA-U181-DIR-2024-00179"
+    ],
     "source_quote": "Xylella fastidiosa sottospecie fastidiosa ST1.”.\nCONSIDERATO CHE\n    • Gli allegati 1/C delle DDS 52/2024, 58/2024, 63/2024, 74/2024, 82/2024, 96/2024, 97/2024, 116/2024,\n      138/2024 e 179/2024 riportano le informazioni catastali dei terreni sulle quali insistono le piante\n      infette, ma, data la presenza di una notevole parcellizzazione del territorio con numerosi proprietari\n      per singola particella, non sono state elencate le particelle che rientrano nel raggio di 50 m attorno alle\n      piante infette ed i relativi proprietari.\n    • Innova Puglia spa, sulla base delle coordinate geografiche delle piante infette, di cui alle DDS 52/2024,\n      58/2024, 63/2024, 74/2024, 82/2024, 96/2024, 97/2024, 116/2024, 138/2024 e 179/2024, ha fornito\n      le informazioni catastali dei terreni che rientrato nel raggio di 50 metri attorno alle piante infette\n      ed i relativi proprietari come riportati nell’allegato 1/C, che forma parte integrante e sostanziale del\n      presente provvedimento.\nRITENUTO DI\nDovere integrare parte dell’allegato 1/C delle DDS 52/2024, 58/2024, 63/2024, 74/2024, 82/2024, 96/2024,\n97/2024, 116/2024, 138/2024 e 179/2024, con l’allegato 1/C al presente provvedimento per formarne parte\nintegrante e sostanziale, che contiene l’elenco delle particelle che rientrano nel raggio di 50 m attorno alle\ndal bilancio regionale.\n                                                    DETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\n   1. Di integrare parte dell’allegato 1/C delle DDS 52/2024, 58/2024, 63/2024, 74/2024, 82/2024, 96/2024,\n      97/2024, 116/2024, 138/2024 e 179/2024 con l’allegato 1/C al presente provvedimento per formarne\n      parte integrante e sostanziale, il quale contiene l’elenco delle particelle che rientrano nel raggio di 50 m\n      attorno alle piante infette individuate nel monitoraggio 2024 ed i relativi proprietari, fornito da Innova\n      Puglia spa.\n\n                        Bollettino Ufficiale della Regione Puglia - n. 102 del 19-12-2024                86399\n\n\n2. Di confermare quanto disposto con le DDS N. 52/2024, 58/2024, 63/2024, 74/2024, 82/2024, 96/2024,\n   97/2024, 116/2024, 138/2024 e 179/2024.\n3. Di prescrivere, ai sensi della lettera a), comma 1 dell’art. 7 del Reg. UE 2020/1201, ai proprietari/\n   conduttori i cui terreni rientrano in tutto o in parte nella zona infetta di 50 m attorno a ciascuna pianta\n   infetta, indicati nell’allegato 1/C, parte integrante e sostanziale del presente provvedimento:\n      a. l’estirpazione di tutte le piante che presentino sintomi indicativi della possibile infezione da parte\n          di tale organismo nocivo o che si sospetta siano infette da tale organismo nocivo;\n      b. l’estirpazione di tutte le piante appartenenti alla stessa specie delle piante infette,\n          indipendentemente dal loro stato sanitario;\n      c. l’estirpazione di tutte le piante di specie diverse da quella delle piante infette risultate infette in\n          altre parti dell’area delimitata;\n      d. l’estirpazione di tutte le piante specificate, diverse da quelle di cui alle lettere b) e c), che non\n          siano state immediatamente sottoposte a campionamento e ad analisi molecolare e che non\n          siano risultate indenni dall’organismo nocivo specificato;\n4. Di applicare nell’area infetta di cui al presente provvedimento, la deroga di cui al comma 3 dell’art. 7 del\n   Reg. UE 2020/1201, qualora siano presenti piante specificate ufficialmente riconosciute come piante\n   di valore storico;",
     "source_snapshot_dates": "2024-12-12",
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-188-2024-FITO-.txt",
@@ -26359,1375 +26468,6 @@
     "lineage_role": "PROCEDURAL_ATOM",
     "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00031:first-level-analysis-registration-return:v1",
     "temporal_status": "SUPERSEDED"
-  },
-  {
-    "source_quote_sha256": "1222294338b04af327781d8ed3298054313c5ee944c44674d244300e062ea1b5",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2024-11-08",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/DDS-147-2024-enforcement-excerpt.txt",
-    "article": "operative point 9",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 147/2024 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00147",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00147",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n      estirpazione delle piante infette e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n      notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle piante infette, per il\n      tramite dell’ARIF",
-    "source_snapshot_dates": "2024-11-08",
-    "source_uri": "file:regulation/jurisdiction/regional/DDS-147-2024-enforcement-excerpt.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. The operative eradication instruction controls over the source Article 13 miscitation. DDS165/2024 corrects the annex municipality to Altamura without restarting valid recipient terms.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "4489e65446aa6af2f177eeda28794d1e37451318f3a4d4d12c1be0e921cd8d9b",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "ea50199241d8a0cb2a50c9ca3f49f95c1eb0db860fb80a4406569e73092423c4",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2025-10-24",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/DDS-173-2025-enforcement-excerpt.txt",
-    "article": "operative point 8",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 173/2025 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00173",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2025-00173",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n      estirpazione delle piante infette e delle piante ricadenti nei 50 m, entro massimo 10 giorni dall’avvenuta\n      notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite\n      dell’ARIF",
-    "source_snapshot_dates": "2025-10-24",
-    "source_uri": "file:regulation/jurisdiction/regional/DDS-173-2025-enforcement-excerpt.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. DDS63/2026 incorporates these terms for the supplemented parcel/current-owner relation; it does not restart valid terms for other recipients.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "d05eb86a1c6769b8d31698631a6a3e35147df71171cea65587c01bbfd0788aa6",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "4856f20d44cf5bfb601d4afc08d90039ed0e166da91ee6e4cb6d7e4515b32962",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2024-04-08",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/DDS-27-2024-standard-art13.txt",
-    "article": "operative point 7",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 27/2024 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00027",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00027",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n     estirpazione della pianta infetta entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio\n     fitosanitario disporrà l’abbattimento coatto delle pianta infetta, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2024-04-08",
-    "source_uri": "file:regulation/jurisdiction/regional/DDS-27-2024-standard-art13.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. The source Article 13 miscitation does not validate premature containment; the existing case authority-conflict owner controls the operative branch.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "1ac3b9142e72c4e55bddd5edbeefdaa277daa0197f133f36e9ec8fdba7fadf64",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "d2b58c64f99ab126c91a166b7d00332e1dd0c91fe88a3a7c5e7cb44846a5c5c3",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2025-06-25",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-115-2025-FITO-ed7ecbb460e2.txt",
-    "article": "operative point 3 (restarted numbering)",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 115/2025 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants in the Bisceglie infected area is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00115",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants in the Bisceglie infected area, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2025-00115",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n     estirpazione delle piante infette e delle piante ricadenti nella zona infetta dell’area delimitata “Xylella\n     fastidiosa sottospecie pauca – Bisceglie (BT)” entro massimo 10 giorni dall’avvenuta notifica, la\n     Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2025-06-25",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-115-2025-FITO-ed7ecbb460e2.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "c5fd34bdb12d11f2a6c80a1d48135de5815b4bb9637e45191f31c3c9df814dff",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "89ca1d14df9acd6c3ce2ae4151b8b0d7061d67308e8469de410d15e735179c0b",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2025-06-27",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:failed-service-represcription",
-      "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.txt",
-    "article": "operative point unnumbered commencement bullet",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 117/2025 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00117",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2025-00117",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione\ndelle piante infette e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta notifica, la\nSezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2025-06-27",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. Re-prescription after failed service requires the legally sufficient notification for the repaired recipient relation, not the failed predecessor service date.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "d8eb06ce7a049d52af7507562c671f756f8d758f413d9094368b73ac679dc25d",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "4ff3fa1af73d2646535c50acef72741a19cb8caed0c66ba89389d8a7c6042338",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2021-11-09",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-135-2021-FITO-.txt",
-    "article": "operative point 7",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 135/2021 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2021-00135",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2021-00135",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione\n    delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario\n    disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2021-11-09",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-135-2021-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "8e339892edabf2a8e277b3198a6b6a6891d874a77d42cd4d78ae2f7f1d1a6429",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "9d83f5c1d6a40d53133155a3fb494ea3089680e19da2037006d745e8f1e41331",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2024-10-28",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-138-2024-FITO-.txt",
-    "article": "operative point 9",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 138/2024 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00138",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00138",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività\n    di estirpazione delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione\n    Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2024-10-28",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-138-2024-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "8ad57764bfa36efa4317bd155d060c1e3a77a7f3ed42166b8ebda74fdc776b4b",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "cebd0563015c63f0c8b10c68672e518490f7b22f15a1477f271e4bbccb08b01f",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2024-11-14",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-151-2024-FITO-.txt",
-    "article": "operative point 9",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 151/2024 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00151",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00151",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n   estirpazione delle piante infette e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n   notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle piante infette, per il\n   tramite dell’ARIF",
-    "source_snapshot_dates": "2024-11-14",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-151-2024-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "68e3c201d76c3f587c5d7892e498fb9f7a9e30c3376b52dd2ec3b84d0f4dfb49",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "8d0f8f6518c10edb0b563277f6febcbfd0554ab69a2c74a5508dbe8ea3e21720",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2024-12-12",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-188-2024-FITO-.txt",
-    "article": "operative point 10",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 188/2024 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00188",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00188",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n       estirpazione delle piante infette e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n       notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle piante infette, per il\n       tramite dell’ARIF",
-    "source_snapshot_dates": "2024-12-12",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-188-2024-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. Read with the completed deferred 50 m prescription and DDS11/2025 ownership correction; already removed infected plants are not ordered removed again.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "0abddab775fd987eabe0eec4ccf59e80806ed4101b4af4c7e1b94f878a348b3c",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "e93a53dad83f733d8ae492dc44a45cd7f3f7af148688a68a2067bd09df3d09b2",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2023-01-25",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.txt",
-    "article": "operative point 10",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 2/2023 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00002",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2023-00002",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione\n   delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario\n   disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2023-01-25",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "022fad4f780cbfbc96648baa49850b4f7e48e30102901dcc0ffd7078394f0933",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "5ac5666d58a297361d623076f4cc35c130e54a975e044a0fbc6a82a24ed43f08",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2025-11-24",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-201-2025-FITO-11d2e495c708.txt",
-    "article": "operative point 13",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 201/2025 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00201",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2025-00201",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n     estirpazione delle piante infette e delle piante ricadenti nei 50 m, entro massimo 10 giorni dall’avvenuta\n     notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite\n     dell’ARIF",
-    "source_snapshot_dates": "2025-11-24",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-201-2025-FITO-11d2e495c708.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "76d26b7f2e39d67d25deed236bbae2504fe9d359fce864c4b2c6944508b101c9",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "8b3a12f679ee718bf883b665e62cf34f26886aec2306639b4a8a3bf7c9d3559a",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2026-03-09",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-35-2026-FITO-76d363b7ece1.txt",
-    "article": "operative point 13",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 35/2026 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2026-00035",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2026-00035",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n    estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n\f15478                       Bollettino Ufficiale della Regione Puglia - n. 24 del 26-3-2026\n\n\n      notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto della piante, per il tramite\n      dell’ARIF",
-    "source_snapshot_dates": "2026-03-09",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-35-2026-FITO-76d363b7ece1.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. Read the population through the existing post-M5 case-conflict owner; copied pre-M5 text does not replace operative Article 7.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "4de7cf8d27d47a0a3db353cac3ef1303eeed301d86727045e8b5d7bbcf5efa0a",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "e93a53dad83f733d8ae492dc44a45cd7f3f7af148688a68a2067bd09df3d09b2",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2022-02-01",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
-    "article": "operative point 7",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 4/2022 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2022-00004",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2022-00004",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione\n   delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario\n   disporrà l’abbattimento coatto delle piante infette, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2022-02-01",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. Apply only to removal lawfully due after resolving the existing Piana alternative-route conflict; a lawful retention route is not noncommencement default.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "81f6cbd5f9c10a0ccb9a88e28f3557e7d63a430da99c6e4c50fbcf956947944e",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "b5f21aced831d4132b7d864c5b2dbe640f2a2986c83e8b0af8f0c22c4f345a2c",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2023-05-09",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
-    "article": "operative point unnumbered commencement bullet",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 45/2023 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00045",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2023-00045",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n  estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n  notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante, per\n  il tramite dell’ARIF",
-    "source_snapshot_dates": "2023-05-09",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. The existing pending monumental-recognition hold remains applicable to its qualified plants.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "5fe91d61afdbf7c2802d307dd79ec2f88d1a4a2a247b013646177cb49f50613a",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "27672e0dbb4e8aab2afd2e76ab9f4abfc45dbb310cdd48ed339e462d9d3d5406",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2023-05-19",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-51-2023-FITO-db9ed41fcfb9.txt",
-    "article": "operative point 10",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 51/2023 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00051",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2023-00051",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n       estirpazione della pianta infetta e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n       notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante,\n       per il tramite dell’ARIF",
-    "source_snapshot_dates": "2023-05-19",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-51-2023-FITO-db9ed41fcfb9.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route. DDS51/2023 versus DDS48/2023 correction scope remains a bounded unknown: hold only a conclusion that depends on that unresolved relation, not unrelated established duties.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "293a8bd8cefe82ccc0cd0f8790dd3121150f1019c28befc4b480313ef7f57813",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "5633cc01a15b5b97736b68cf6ba8a5daaf12771ecd3ca8813c950164cbb5448b",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2024-05-06",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:staged-article7-workload",
-      "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.txt",
-    "article": "operative point 9",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 52/2024 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00052",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00052",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività\n       di estirpazione delle piante infette entro massimo 10 giorni dall’avvenuta notifica, la Sezione\n       Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2024-05-06",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "677db7dd5bd87c01f7b4be0c86617d131b6618dc4c4a30f0c1c9bdbbe31326c1",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "821443e7efcd902db39dab827ac18948c30df3e68dd13091253526bc1243657d",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2022-02-08",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer",
-      "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-6-2022-FITO-.txt",
-    "article": "operative point 10",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 6/2022 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2022-00006",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2022-00006",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione\n    della pianta infetta entro massimo 10 giorni dall’avvenuta notifica, la Sezione Osservatorio fitosanitario\n    disporrà l’abbattimento coatto della pianta infetta, per il tramite dell’ARIF",
-    "source_snapshot_dates": "2022-02-08",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-6-2022-FITO-.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "0569baf8504c76c7a820d80b1f4f7a8e87f46f42fa673644dfbe50fd9db39044",
-    "exact_change_kind": "INITIAL"
-  },
-  {
-    "source_quote_sha256": "f0444c0e4fceb6dbbce0294a707112b6a8d80d8e3d7a710df44fe8107b116945",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2023-08-28",
-    "external_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice",
-      "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-96-2023-FITO-dd5bebb3616b.txt",
-    "article": "operative point 10",
-    "condition_ast": {
-      "route_table": [
-        {
-          "when": {
-            "all_of": [
-              {
-                "predicate": "this operative DDS 96/2023 prescription, including any applicable correction, governs this recipient"
-              },
-              {
-                "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-              },
-              {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-              },
-              {
-                "predicate": "the source notification-based commencement deadline has elapsed"
-              },
-              {
-                "predicate": "noncommencement of that work by the source deadline is established"
-              }
-            ]
-          },
-          "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-        }
-      ],
-      "otherwise": {
-        "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-DLGS-19-2021:Art.32(3):substitute-execution",
-      "IT-DLGS-19-2021:Art.55(13):coercive-removal",
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00096",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2023-00096",
-    "source_quote": "qualora il proprietario/conduttore non proceda al concreto avvio delle attività di\n       estirpazione delle piante infette e delle piante ricadenti nei 50 m entro massimo 10 giorni dall’avvenuta\n       notifica, la Sezione Osservatorio fitosanitario disporrà l’abbattimento coatto delle suddette piante,\n       per il tramite dell’ARIF",
-    "source_snapshot_dates": "2023-08-28",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-96-2023-FITO-dd5bebb3616b.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Operative prescription and applicable correction, recipient and lawfully due plant population, legally sufficient notification date, and evidence establishing whether concrete removal work began by the source deadline.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement",
-    "source_snapshot_hashes": "460c2ac9f155456e68a923085ae26a4e957cff7aa19d89d671932ae1e6bdf714",
-    "exact_change_kind": "INITIAL"
   },
   {
     "source_clause_id": "PUG-DGR1075-2025::4.1.1",

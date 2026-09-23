@@ -103,15 +103,33 @@ def operative_period_rule(identity: str, calendar: WorkingCalendar | None) -> tu
 
 def clock_boundary(snapshot: Snapshot, identity: str, at: date, anchor: date | datetime,
                    *, zone: ZoneInfo, calendar: WorkingCalendar | None = None,
-                   rule: PeriodRule | None = None) -> datetime:
+                   rule: PeriodRule | None = None,
+                   stated_term: tuple[str, str] | None = None) -> datetime:
+    """`stated_term` is the (number, printed unit word) the instrument states.
+
+    It is read only for a magnitude B reserves to that instrument. A missing
+    term is unknown, never a default; a stated term cannot replace a fixed one.
+    """
     row = snapshot.quantity(identity, at)
     kind, unit = row["kind"], row["unit"]
+    reserved = row.get("magnitude") if isinstance(row.get("magnitude"), dict) else None
+    if reserved is None and stated_term is not None:
+        raise ValueError(f"{identity}: B fixes this period; a stated term cannot replace it")
+    if reserved is not None and stated_term is None:
+        raise MissingInput(f"{identity}: the term the {reserved['reserved_to']} states")
     if kind == "same_calendar_day":
         day = utc(anchor).astimezone(zone).date() if isinstance(anchor, datetime) else anchor
         return end_of_day(day, zone)
     if kind in {"promptness_standard", "ordering_constraint", "recurrence"}:
         raise MissingInput(f"{identity}: operative timing/period input ({row['anchor']})")
-    magnitude = scalar(snapshot, identity, at)
+    if reserved is None:
+        magnitude = scalar(snapshot, identity, at)
+    else:
+        number, word = stated_term
+        unit = snapshot.conventions["clock.unit_words"].get(" ".join(word.lower().split()))
+        if unit is None or not number.isdigit():
+            raise MissingInput(f"{identity}: stated term {number} {word} in a unit B maps")
+        magnitude = Decimal(number)
     if magnitude != int(magnitude):
         raise ValueError("Fractional source period needs a specific counting rule")
     magnitude = int(magnitude)

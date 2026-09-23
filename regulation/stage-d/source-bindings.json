@@ -57,7 +57,7 @@
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
       "reader": "cordon_d.reports, cordon_d.report_relations and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "Population reading, unbound qualifications and multi-document identity/scope remain incomplete. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. Source and access limits are owned by INPUTS.md row 2."
+      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings."
     },
     {
       "id": "official-areas",

@@ -3051,21 +3051,7 @@
       ]
     },
     {
-      "predicate": "removal of infected plants and the prescribed plants in the Bisceglie infected area is lawfully due from this recipient under this clause",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "removal of infected plants only is lawfully due from this recipient under this clause",
+      "predicate": "removal of the population the prescription names for coercion is lawfully due",
       "contracts": [
         "operative-act",
         "case-prescription"
@@ -4009,6 +3995,13 @@
       ]
     },
     {
+      "predicate": "the commencement work the prescription states is lawfully due from this recipient",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
+      ]
+    },
+    {
       "predicate": "the communication to that recipient has been effected, including in the forms prescribed for notification to the unreachable in the cases provided by the code of civil procedure",
       "contracts": [
         "recipient-notice"
@@ -4300,6 +4293,13 @@
       "contracts": [
         "plant-population",
         "protected-status"
+      ]
+    },
+    {
+      "predicate": "the operative prescription governing this recipient states in its operative part a commencement term running from notification and commits the Osservatorio to direct coercive removal on noncommencement",
+      "contracts": [
+        "operative-act",
+        "case-prescription"
       ]
     },
     {
@@ -4647,132 +4647,6 @@
       "contracts": [
         "operative-act",
         "adopted-geography"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 115/2025 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 117/2025 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 135/2021 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 138/2024 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 147/2024 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 151/2024 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 173/2025 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 188/2024 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 2/2023 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 201/2025 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 27/2024 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 35/2026 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 4/2022 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 45/2023 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 51/2023 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 52/2024 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 6/2022 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
-      "predicate": "this operative DDS 96/2023 prescription, including any applicable correction, governs this recipient",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
       ]
     },
     {

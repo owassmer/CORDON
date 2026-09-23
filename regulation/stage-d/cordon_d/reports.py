@@ -4,6 +4,7 @@ from collections import Counter
 from datetime import date, datetime
 import json
 import re
+import unicodedata
 from pathlib import Path
 from hashlib import sha256
 
@@ -25,43 +26,132 @@ def classify(text):
     return RESULTS.get(' '.join(text.casefold().split()), 'unclassified') if text else 'unread'
 
 
+_LEAD_SPACE = re.compile('([\u00c2\u00c3]) (?=\\w)|([\u00c2\u00c3]) ')
+
+
+def decoded(text):
+    """One real text gets one representation: UTF-8 text read as Latin-1 reads as that UTF-8 text.
+
+    A text that round-trips Latin-1 -> UTF-8 into valid, different text is replaced by that
+    text ('AttivitÃ\\xa0 di' is 'Attività di'). A PDF text layer prints the Latin-1 no-break
+    space, byte 0xA0 and the second byte of à, as a space, so a space after Ã or Â is first read
+    as that byte; a word space still separates it from a following word. Any other text is
+    returned unchanged.
+    """
+    if not isinstance(text, str) or text.isascii():
+        return text
+    spaced = _LEAD_SPACE.sub(lambda m: m[1] + '\xa0 ' if m[1] else m[2] + '\xa0', text)
+    for candidate in dict.fromkeys((text, spaced)):
+        try:
+            repaired = candidate.encode('latin-1').decode('utf-8')
+        except UnicodeError:
+            continue
+        if repaired != candidate:
+            return repaired
+    return text
+
+
+def decoded_cells(native_cells):
+    """The text layer's cells as they enter a reading, each text read by `decoded`."""
+    return {key: dict(cell, text=decoded(cell.get('text'))) for key, cell in native_cells.items()}
+
+
 def _leading_mark(text):
-    """The printed marker a note begins with ('*', '**', 'a'), or None."""
-    match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(])', text or '')
+    """The printed marker a note begins with ('*', '**', 'a', '**='), or None."""
+    match = re.match(r'\s*(\*+|[a-z])(?=\s|[A-Z(=:)])', text or '')
     return match[1] if match else None
 
 
-def resolve_marks(result, scoped):
-    """A trailing printed mark on a result literal classifies only through the note it points at.
+def note_mark(fact):
+    """The mark a note answers: the one its mark reading names, else its leading marker."""
+    return fact.get('mark') or _leading_mark(fact.get('text'))
 
-    The source reader may already have separated `result_value` from an annotation; this
-    handles the cell it returned whole. A mark is separated only where a result
-    qualification recovered from the same document, scoped to this row, begins with that
-    mark; the base is then classified and the note travels with the row as it already does.
-    A mark with no recovered note leaves the result unclassified and names that cause. The
-    complete literal survives either way.
+
+def _folded(text):
+    """Casefolded text with compatibility forms unified, so a superscript mark is its letter."""
+    return unicodedata.normalize('NFKC', text or '').casefold()
+
+
+def printed_marks(text):
+    """The printed marks a text consists of, in order, or None if it is not only marks.
+
+    A mark is a run of '*' or one letter. A comma, semicolon or space may separate marks.
+    Two letters with nothing between them are a word, not two marks. At most three marks.
     """
-    if result.kind != 'unclassified' or not result.text:
+    marks, previous = [], None
+    for token in re.findall(r'\*+|[a-z]|[\s,;]+|.', _folded(text), re.DOTALL):
+        if re.fullmatch(r'[\s,;]+', token):
+            previous = None
+            continue
+        if not re.fullmatch(r'\*+|[a-z]', token) or (token.isalpha() and previous and previous.isalpha()):
+            return None
+        marks.append(token)
+        previous = token
+    return tuple(marks) if 0 < len(marks) <= 3 else None
+
+
+def result_marks(text, cell=None):
+    """(result, marks) for a result cell that prints marks after its result, else None.
+
+    One parser serves both shapes. A cell the source reader split carries its marks in
+    `annotation`. A whole cell ends with them; the split takes the shortest ending that is
+    marks and leaves a result, so in "rilevataa" the mark is the last a and the a ending
+    "rilevata" is the word's own. A whole cell that is already a result prints no marks.
+    """
+    if cell is not None and 'result_value' in cell:
+        base, marks = cell['result_value'], printed_marks(cell.get('annotation'))
+        return (base, marks) if marks and base and classify(base) != 'unclassified' else None
+    folded = _folded(text).rstrip()
+    if classify(folded) != 'unclassified':
+        return None
+    for start in range(len(folded) - 1, max(len(folded) - 12, 0), -1):
+        marks = printed_marks(folded[start:])
+        if marks and classify(folded[:start]) != 'unclassified':
+            return folded[:start].strip(), marks
+    return None
+
+
+def printed_result(text, cell):
+    """The literal a result is classified from.
+
+    A split whose annotation is printed marks or a parenthesized aside leaves the source
+    reader's `result_value`; the marks go through their notes. Any other annotation is
+    part of the printed result, so a split cell classifies as its whole literal does.
+    """
+    if 'result_value' in cell:
+        annotation = (cell.get('annotation') or '').strip()
+        if printed_marks(annotation) or re.fullmatch(r'\(.*\)', annotation, re.DOTALL):
+            return cell['result_value']
+    return text
+
+
+def is_mark_note(fact):
+    """A note recovered from the document for a printed mark."""
+    return fact.get('role') == 'result_qualification' and note_mark(fact) is not None
+
+
+def resolve_marks(result, scoped, cell=None):
+    """A result that prints marks is classified only through the notes they point at.
+
+    Whether or not the source reader split the cell, each mark needs a note recovered from
+    the same document that reaches this row. A mark the document prints without a meaning,
+    found after every page was examined, has such a note too. With every mark noted, the
+    result is as printed and carries its marks, with the Cq and accreditation their notes
+    state. A mark with no such note leaves the result unclassified and names that
+    cause. The complete literal survives either way.
+    """
+    split = result_marks(result.text, cell)
+    if split is None:
         return result
-    marks = {mark for fact in scoped if fact.get('role') == 'result_qualification'
-             for mark in [_leading_mark(fact.get('text'))] if mark}
-    base, used = result.text.strip().casefold(), []
-    while True:
-        mark = next((m for m in sorted(marks, key=len, reverse=True)
-                     if base.endswith(m) and len(base) > len(m)), None)
-        if mark is None:
-            break
-        base, used = base[:-len(mark)].rstrip(), used + [mark]
-    if used and classify(base) != 'unclassified':
-        return replace(result, kind=classify(base))
-    text = result.text.strip().casefold()
-    for n in (1, 2, 3):
-        if n >= len(text):
-            break
-        mark, unmarked = text[-n:], text[:-n]
-        if re.fullmatch(r'(\*+|[a-z]|\*+[a-z]|[a-z]\*+)', mark) and classify(unmarked.strip()) != 'unclassified':
-            return replace(result, cause='printed mark; note not recovered by the reading')
-    return result
+    base, marks = split
+    notes = [fact for fact in scoped if is_mark_note(fact) and note_mark(fact) in marks]
+    if {note_mark(fact) for fact in notes} != set(marks):
+        return replace(result, kind='unclassified', cause='printed mark; note not recovered by the reading',
+                       marks=marks)
+    stated = {name: tuple(dict(fact['fields'][name], note=fact['id']) for fact in notes
+                          if (fact.get('fields') or {}).get(name))
+              for name in ('cq', 'accreditation')}
+    return replace(result, kind=classify(base), marks=marks, **stated)
 
 
 def link_section_marks(facts):
@@ -110,6 +200,29 @@ def literal_date(text, cause=None, *, year_context=()):
                       'non applicabile': 'source_states_not_applicable'}
     if absence := stated_absence.get(' '.join(text.casefold().split())):
         return LiteralDate(text, None, absence)
+    aside = re.fullmatch(r'(.*?\d)\s*\([^()]*\)\s*', text, re.DOTALL)
+    if aside:
+        # A date followed by a parenthesized aside ("12/2/2018 (prelievo effettuato ...)").
+        dated = literal_date(aside[1], year_context=year_context)
+        return replace(dated, text=text)
+    months = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+              'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
+    abbreviated = re.fullmatch(r'(\d{1,2})[-/. ]([a-z]{3})\.?[-/. ](\d{4}|\d{2})', text.strip().casefold())
+    if abbreviated and (month := next((i for i, m in enumerate(months, 1) if m[:3] == abbreviated[2]), None)):
+        # "08-mag-18": a day, the month's first three letters and a year, read as the
+        # numeric shapes are, a two-digit year only against the source's own full year.
+        dated = literal_date(f'{abbreviated[1]}/{month}/{abbreviated[3]}', year_context=year_context)
+        return replace(dated, text=text)
+    days = re.fullmatch(r'(\d{1,2})\s*[-–]\s*(\d{1,2})/(\d{1,2})/(\d{4})', text.strip())
+    if days:
+        # A printed day range constrains a separately stated day and never supplies one.
+        try:
+            first, last = (date(int(days[4]), int(days[3]), int(days[n])) for n in (1, 2))
+        except ValueError:
+            return LiteralDate(text, None, 'invalid_calendar_date')
+        if first > last:
+            return LiteralDate(text, None, 'invalid_date_range')
+        return LiteralDate(text, None, None, date_range=(first, last))
     formats = ((r'\d{1,2}/\d{1,2}/\d{4}', '%d/%m/%Y'),
                (r'\d{1,2}-\d{1,2}-\d{4}', '%d-%m-%Y'),
                (r'\d{1,2}\.\d{1,2}\.\d{4}', '%d.%m.%Y'),
@@ -133,8 +246,6 @@ def literal_date(text, cause=None, *, year_context=()):
             return LiteralDate(text, date(year, int(short[3]), int(short[1])), None, support)
         except ValueError:
             return LiteralDate(text, None, 'invalid_calendar_date', support)
-    months = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
-              'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
     named = re.fullmatch(r'(\d{1,2}(?:\s*[-–]\s*\d{1,2}|(?:\s+e\s+\d{1,2})+)?)'
                          r'\s+(' + '|'.join(months) + r')(?:\s+(\d{4}))?',
                          text.strip().casefold())
@@ -175,6 +286,13 @@ class Result:
     cause: str | None
     support: tuple[dict, ...]
     assay_cause: str | None = None
+    # The printed marks after the result, and what their notes state for the contracts:
+    # `cq` the exact Cq value the note prints for the result (analytical-result "result/Cq
+    # as exact decimal"); a note that prints any other Cq wording fills nothing; `accreditation`
+    # whether the test is accredited (laboratory-status "accreditation scope"). Each entry names its note.
+    marks: tuple[str, ...] = ()
+    cq: tuple[dict, ...] = ()
+    accreditation: tuple[dict, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -610,6 +728,33 @@ def source_scopes(cell, table, raw, index):
     return scopes
 
 
+def row_source_scopes(table, raw):
+    """Every selector naming this source row directly: the report, its table, its cells."""
+    scopes = {'report', table['id']}
+    for index, cell in enumerate(raw['cells']):
+        scopes |= source_scopes(cell, table, raw, index)
+    return scopes
+
+
+def scoped_facts(scopes, facts):
+    """Facts reaching these scopes, with the scope set expanded through `applies_to`.
+
+    A qualifier of a reached statement travels with that statement, so a reached fact's
+    own ID and printed section become scopes in turn until the set stops growing.
+    Materialization and the mark detector share this helper and `row_source_scopes`.
+    The classifier also sees other blocks and `link_section_marks`; the detector sees
+    one reading's facts.
+    """
+    scopes = set(scopes)
+    while True:
+        scoped = tuple(f for f in facts if scopes.intersection(f.get('applies_to', ())))
+        expanded = scopes | {f['id'] for f in scoped if 'id' in f}
+        expanded.update('section:' + f['section'] for f in scoped if f.get('section'))
+        if expanded == scopes:
+            return scopes, scoped
+        scopes = expanded
+
+
 def materialize(digest, version, page_count, blocks):
     """Copy literal values, then project roles. Never merge rows by sample identifier."""
     facts = []
@@ -632,8 +777,11 @@ def materialize(digest, version, page_count, blocks):
     issues = tuple(i for item in blocks for i in item['reading']['issues'])
     for item in blocks:
         if item.get('attachment_repair_pending'):
+            pending = item['attachment_repair_pending']
+            cause = pending if 'reread pending:' in pending else (
+                'sampling-date attachment reread pending: ' + pending)
             issues += ({'scope': 'pages ' + ','.join(map(str, item['targets'])),
-                        'cause': 'sampling-date attachment reread pending: ' + item['attachment_repair_pending']},)
+                        'cause': cause},)
         known_regions = {r['id'] for r in item.get('native_regions', [])}
         for page in item['reading']['pages']:
             for region in page.get('regions', []):
@@ -644,10 +792,13 @@ def materialize(digest, version, page_count, blocks):
                        for scope in f['applies_to']}
     rows, covered, locators, encountered = [], set(), set(), set()
     for item in blocks:
-        data, native = item['reading'], item['native_cells']
+        data = item['reading']
+        # The block is checked against the text layer as the reader was shown it; the text
+        # enters the reading decoded, so one real text has one representation.
+        native = decoded_cells(item['native_cells'])
         # The pages the model was shown for this block: recorded on the block when it was
         # read (the whole document under the subscription); otherwise targets and context.
-        validate_block(data, targets=item['targets'], page_count=page_count, native_cells=native,
+        validate_block(data, targets=item['targets'], page_count=page_count, native_cells=item['native_cells'],
                        native_regions=item.get('native_regions', []),
                        supplied_pages=set(item.get('supplied_pages')
                                           or set(item['targets']) | set(item.get('context_pages', []))))
@@ -673,7 +824,7 @@ def materialize(digest, version, page_count, blocks):
                     raise ValueError('Repeated source-row locator')
                 locators.add(locator)
                 cells, results = [], []
-                scopes = {'report', table['id']}
+                scopes = row_source_scopes(table, raw)
                 by_role = {}
                 for index, (column, cell) in enumerate(zip(table['columns'], raw['cells'])):
                     text = native[cell['native_cell']]['text'] if 'native_cell' in cell else cell.get('text')
@@ -685,7 +836,6 @@ def materialize(digest, version, page_count, blocks):
                         value['authority_support'] = tuple(dict(s, basis='model_proposed_reading')
                             for s in column.get('authority_support', ()))
                     field_scopes = source_scopes(cell, table, raw, index)
-                    scopes.update(field_scopes)
                     # Bind explicit field locators, never interpret words in the cause.
                     field_issues = tuple(issue for issue in issues if any(re.search(
                         r'(?<![\w/-])' + re.escape(field) + r'(?![\w/-])', issue['scope'])
@@ -699,6 +849,11 @@ def materialize(digest, version, page_count, blocks):
                         if annotation and annotation[1].strip():
                             value.update(identifier=annotation[1].strip(), annotation=annotation[2],
                                          identifier_basis='literal (Pool) suffix; complete cell retained')
+                        else:
+                            labelled = re.fullmatch(r'\s*(ID:?)\s+(\S.*?)\s*', text, re.IGNORECASE)
+                            if labelled and labelled[2].strip():
+                                value.update(identifier=labelled[2].strip(), annotation=labelled[1],
+                                             identifier_basis='literal ID label prefix; complete cell retained')
                     cells.append(value)
                     by_role.setdefault(column['role'], []).append(value)
                     if column['role'] == 'result':
@@ -706,9 +861,10 @@ def materialize(digest, version, page_count, blocks):
                         assay_cause = None
                         if assay and analyte and assay.casefold().strip() == analyte.casefold().strip():
                             assay, assay_cause = None, 'test field repeats analyte; distinct test designation not recovered here'
-                        results.append(Result(value['locator'], tuple(column['heading']),
-                            assay, analyte, text, classify(cell.get('result_value', text)), cell.get('cause'),
-                            tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())), assay_cause))
+                        results.append((Result(value['locator'], tuple(column['heading']),
+                            assay, analyte, text, classify(printed_result(text, cell)), cell.get('cause'),
+                            tuple(dict(s, basis='model_proposed_reading') for s in column.get('support', ())),
+                            assay_cause), cell))
                 def sole(role):
                     fields = by_role.get(role, [])
                     if any(c.get('role_cause') for c in fields):
@@ -718,13 +874,7 @@ def materialize(digest, version, page_count, blocks):
                 direct_scopes = set(scopes)
                 # A qualifier of an included statement travels with that statement.
                 # Keep its exact scope; inclusion in row context does not broaden it.
-                while True:
-                    scoped = tuple(f for f in facts if scopes.intersection(f['applies_to']))
-                    expanded = scopes | {f['id'] for f in scoped if 'id' in f}
-                    expanded.update('section:' + f['section'] for f in scoped if f.get('section'))
-                    if expanded == scopes:
-                        break
-                    scopes = expanded
+                scopes, scoped = scoped_facts(scopes, facts)
                 year_context = tuple((int(year), f['id']) for f in scoped
                     if f['role'] in {'date', 'report_date', 'delivery_date', 'sampling_date', 'test_date', 'acceptance_date'}
                     and not f.get('value_cause')
@@ -736,7 +886,7 @@ def materialize(digest, version, page_count, blocks):
                                      direct_scopes.intersection(f['applies_to']))
                 dates += shared_dates
                 generic = sole('identifier')
-                results = [resolve_marks(result, scoped) for result in results]
+                results = [resolve_marks(result, scoped, cell) for result, cell in results]
                 rows.append(Row(locator, table['page'], sole('publisher_id') or generic, sole('laboratory_id'),
                                 dates, tuple(cells), tuple(results), scoped, table.get('projection')))
     missing = set(range(1, page_count + 1)) - encountered
@@ -799,11 +949,11 @@ def positioned_identifier_records(reading, source):
                 if page not in tables:
                     tables[page] = document[page].find_tables().tables
                 table = tables[page][ti]
-                if table.extract()[ri][ci] != cell['text']:
+                if decoded(table.extract()[ri][ci]) != cell['text']:
                     raise ValueError('Retained native identifier differs from its source cell')
                 bounds = table.rows[ri].cells[ci]
-                positioned = '\n'.join(line.strip() for line in document[page].get_text(
-                    'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines())
+                positioned = decoded('\n'.join(line.strip() for line in document[page].get_text(
+                    'text', clip=pymupdf.Rect(bounds), sort=True).strip().splitlines()))
                 native = cell['text']
                 outcome = _geometry_outcome(positioned, native)
                 record = {
@@ -859,6 +1009,110 @@ def positioned_identifiers(reading, source):
     return apply_positioned_identifiers(reading, positioned_identifier_records(reading, source))
 
 
+# A result adjective of RESULTS in any gender or number. Presente and assente are left out:
+# the same tables print them as symptom states, so in a heading they name no result.
+HEADING_RESULT = re.compile(r'(?<!\w)(non\s+rilevat|positiv|negativ|rilevat|dubbi)([oaie]?)(?!\w)', re.IGNORECASE)
+HEADING_KINDS = {'positiv': 'positive', 'negativ': 'negative', 'rilevat': 'detected',
+                 'non rilevat': 'not-detected', 'dubbi': 'doubtful'}
+
+
+def heading_result(text):
+    """(printed word, kind) when a heading prints one result, else None.
+
+    A heading that prints two different results states none for any one row.
+    """
+    found = {}
+    for match in HEADING_RESULT.finditer(text or ''):
+        stem = ' '.join(match[1].casefold().split())
+        if stem == 'dubbi' or match[2]:
+            found.setdefault(HEADING_KINDS[stem], match[0])
+    return next(iter(found.items()))[::-1] if len(found) == 1 else None
+
+
+def heading_above(blocks, bbox, others):
+    """The printed text block nearest above a table, below any other table above it.
+
+    `blocks` are (y0, y1, text) on the table's page; `others` the other tables' boxes there.
+    """
+    top = bbox[1]
+    floor = max((b[3] for b in others if b[3] <= top + 1), default=float('-inf'))
+    above = [(y1, text) for y0, y1, text in blocks
+             if text.strip() and y1 <= top + 1 and y0 >= floor - 1]
+    return ' '.join(max(above)[1].split()) if above else None
+
+
+def table_heading_blocks(payload):
+    """Each reading table's native region: {table ID: (page, bbox, other boxes on that page)}."""
+    regions, owners = {}, {}
+    for block in payload['blocks']:
+        for region in block.get('native_regions', ()):
+            regions[region['id']] = region
+        for page in block['reading']['pages']:
+            for disposition in page.get('regions', ()):
+                if disposition.get('disposition') == 'represented':
+                    for table in disposition.get('output_tables', ()):
+                        owners.setdefault(table, set()).add(disposition.get('native_table'))
+    result = {}
+    for table, native in owners.items():
+        if len(native) != 1 or (region := regions.get(next(iter(native)))) is None:
+            continue
+        others = [r['bbox'] for r in regions.values() if r['page'] == region['page'] and r['id'] != region['id']]
+        result[table] = (region['page'], region['bbox'], others)
+    return result
+
+
+def apply_table_headings(reading, headings):
+    """A result printed in a table's heading applies to its rows that print no result.
+
+    `headings` maps a table ID to (page, heading text). A row that prints a result, even
+    an unread one, keeps its own; a part of a continued record takes its other parts'.
+    """
+    continued = {scope for f in reading.facts if f['role'] == 'record_continuation' for scope in f['applies_to']}
+    rows = []
+    for row in reading.rows:
+        page, table, row_id = row.locator.split('/', 2)
+        heading = headings.get(table)
+        stated = heading and heading[0] == row.page and heading_result(heading[1])
+        anchors = {row.locator, f'{table}/{row_id}', *('native:' + c['native_cell'] for c in row.cells if c.get('native_cell'))}
+        if not stated or any(r.text and r.text.strip() for r in row.results) or anchors & continued:
+            rows.append(row)
+            continue
+        word, kind = stated
+        result = Result(f'{row.locator}/heading', (heading[1],), None, None, word, kind, None,
+                        ({'page': heading[0], 'locator': 'text printed nearest above the table',
+                          'text': heading[1], 'basis': 'printed table heading'},),
+                        'the table heading prints no test designation')
+        rows.append(replace(row, results=(result,)))
+    return replace(reading, rows=tuple(rows))
+
+
+def heading_tables(reading, payload):
+    """Tables with a native region that have a row printing no result: their headings are read."""
+    return {row.locator.split('/')[1] for row in reading.rows
+            if not any(r.text and r.text.strip() for r in row.results)} & table_heading_blocks(payload).keys()
+
+
+def table_headings(reading, payload, source):
+    """Read the heading of each table that has a row printing no result, from the PDF text.
+
+    The read depends on the PDF library, so it happens once, when the reading is assembled
+    under an extraction version that names the library's version, never at consumption.
+    """
+    boxes = table_heading_blocks(payload)
+    wanted = heading_tables(reading, payload)
+    if not wanted:
+        return {}
+    import pymupdf
+    headings = {}
+    with pymupdf.open(source) as document:
+        for table in sorted(wanted):
+            page, bbox, others = boxes[table]
+            blocks = [(b[1], b[3], decoded(b[4])) for b in document[page - 1].get_text('blocks') if b[6] == 0]
+            if text := heading_above(blocks, bbox, others):
+                headings[table] = (page, text)
+    return headings
+
+
 REPORT_MEMO = None
 
 
@@ -879,6 +1133,11 @@ def report(digest: str, store: Path, *, extraction_version: str):
         return UnreadReport(digest, 'assembled before positioned identifiers were derived; '
                                     'reassemble at this extraction version')
     reading = apply_positioned_identifiers(reading, payload.get('positioned_identifiers') or ())
+    if 'table_headings' not in payload and heading_tables(reading, payload):
+        return UnreadReport(digest, 'assembled before table headings were derived; '
+                                    'reassemble at this extraction version')
+    reading = apply_table_headings(reading, {table: tuple(value) for table, value
+                                             in (payload.get('table_headings') or {}).items()})
     from .report_relations import load
     reading = replace(reading, relations=load(store, digest, exact=True),
                       assembly_complete=payload.get('assembly_complete'))
