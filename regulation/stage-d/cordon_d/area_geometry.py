@@ -755,29 +755,76 @@ def adopted_geography(root: Path, *, decision: date, plants=None, plant_error_m:
 # --- the infected plants an act names -------------------------------------------------
 
 SUBSPECIES = re.compile(r'\b(?:SOTTOSPECIE|SUBSPECIE|SUB\.)\s*(PAUCA|MULTIPLEX|FASTIDIOSA)\b', re.I)
+INTEGRATES = re.compile(r'Integrare la determina\w*\s+n\W{0,3}\s*(\d+)\s+del\s+\d{1,2}/\d{1,2}/(\d{4})', re.I)
+
+
+@dataclass(frozen=True)
+class Observation:
+    """A positive observation from the ordinary monitoring reader (INPUTS row 1)."""
+    day: date
+    subspecies: tuple[str, ...]
+    x: float | None                        # EPSG:32633, where the row locates it
+    y: float | None
+    comune: str | None = None              # the cadastral reference the row prints
+    foglio: str | None = None
+    particella: str | None = None
 
 
 def named_plants(sources: Sources, version, observations) -> dict:
     """The located infected plants the act names, per plant-defined role.
 
-    An act names its infected plants by subspecies, place and date: every plant found
-    infected by that subspecies up to the act, lying in the units its infected-zone or
-    focus table lists. `observations` are (day, subspecies, x, y) of located positive
-    observations in EPSG:32633 from the ordinary monitoring reader (INPUTS row 1).
+    No act in the population prints its plants' coordinates or sample identifiers. Each
+    names them by subspecies, comune and date, and lists in its infected-zone or focus
+    table the sheets and parcels the plants' zone covers. A plant it names is a positive
+    of that subspecies observed up to the act that lies in a listed unit: by its position,
+    or, where row 1 prints the plant's cadastral reference, by that sheet or parcel.
+    `observations` are `Observation`s or (day, subspecies, x, y) tuples. Returns per role
+    the (x, y) positions of the located plants.
     """
     build = _Builder(sources, version)
     build.legend = False                       # every listed unit, whole
-    observations = [o for o in observations if o[0] <= version.effective_from]
+    observations = [o if isinstance(o, Observation) else Observation(*o) for o in observations]
+    observations = [o for o in observations if o.day <= version.effective_from]
+    operative = dispositivo(_act_text(sources.root, version.source_path))
+    # An act that integrates an earlier one and prints no table of its own names the
+    # plants that act names ("Integrare la determina n° 8 del 21/02/2024 ... attorno ai
+    # 6 mandorli infetti").
+    integrated = INTEGRATES.search(operative)
+    earlier = None
+    if integrated:
+        number, year = int(integrated.group(1)), integrated.group(2)
+        earlier = next((v for v in versions(sources.root)
+                        if v.instrument_id == f'REG-PUGLIA-U181-DIR-{year}-{number:05d}' and v.statements), None)
     found = {}
     for role in plant_roles(sources, version):
         wanted = []
-        for s in build.by_role[role]:
-            named = SUBSPECIES.search(s.zone_heading) or SUBSPECIES.search(version.state)
+        statements = build.by_role[role]
+        if not statements and earlier is not None:
+            statements = [s for s in earlier.statements if role_of(s) == role]
+        for s in statements:
+            named = (SUBSPECIES.search(s.zone_heading) or SUBSPECIES.search(version.state)
+                     or SUBSPECIES.search(operative))
             if named is None:
                 raise ValueError(f'{version.provision_version_id}: {s.locator} names no subspecies')
             geometry, _ = build.annex(role, [s])
-            wanted.append((named.group(1).upper(), geometry))
-        found[role] = tuple(sorted({(x, y) for _, subspecies, x, y in observations
-                                    if any(name in subspecies and geometry is not None
-                                           and geometry.covers(Point(x, y)) for name, geometry in wanted)}))
+            references = set()
+            if s.scope == 'sheets' and s.comune:
+                catastale = build.comune(s.comune, s.province).catastale
+                for sheet in s.sheets:
+                    references |= ({(catastale, sheet.number, p) for p in sheet.parcels} if sheet.parcels
+                                   else {(catastale, sheet.number, None)})
+            wanted.append((named.group(1).upper(), geometry, references))
+
+        def listed(o, geometry, references):
+            if o.x is not None and geometry is not None and geometry.covers(Point(o.x, o.y)):
+                return True
+            if o.comune and o.foglio:
+                sheet = str(o.foglio).lstrip('0')
+                return ((o.comune, sheet, None) in references
+                        or (o.comune, sheet, str(o.particella or '').lstrip('0')) in references)
+            return False
+
+        found[role] = tuple(sorted({(o.x, o.y) for o in observations if o.x is not None
+                                    and any(name in o.subspecies and listed(o, geometry, references)
+                                            for name, geometry, references in wanted)}))
     return found

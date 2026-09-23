@@ -17,7 +17,8 @@ from shapely.geometry import Point, box
 
 from cordon_c.core import MissingInput
 from cordon_c.spatial import MetricGeometry, adopted_membership, partial_parcel
-from cordon_d.area_geometry import (AdoptedGeography, Sources, Unplaced, Zone, adopted_geography, boundary_distances,
+from cordon_d.area_geometry import (AdoptedGeography, Observation, Sources, Unplaced, Zone, adopted_geography,
+                                    boundary_distances,
                                     dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
                                     _inspire_zoning)
@@ -235,6 +236,11 @@ class ReachAndPopulation(unittest.TestCase):
             (date(2025, 4, 1), ('MULTIPLEX',), inside.x + 2, inside.y),   # another subspecies
             (date(2025, 4, 1), ('PAUCA',), 0.0, 0.0)])                    # outside the listed units
         self.assertEqual(found, {'infected': ((inside.x, inside.y),)})
+        # Row 1's cadastral reference joins a plant its position alone does not place.
+        by_reference = named_plants(sources, version, [
+            Observation(date(2025, 4, 1), ('PAUCA',), 1.0, 1.0, 'F220', '061', None),
+            Observation(date(2025, 4, 1), ('PAUCA',), 2.0, 2.0, 'F220', '999', None)])
+        self.assertEqual(by_reference, {'infected': ((1.0, 1.0),)})
 
 
 if __name__ == '__main__':
