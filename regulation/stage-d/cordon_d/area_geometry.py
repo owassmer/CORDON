@@ -763,9 +763,108 @@ def outward_band(origin: BaseGeometry, metres: float, land: BaseGeometry) -> Bas
     return _envelope(origin, metres).geometry.intersection(land).difference(origin)
 
 
-def inward_band(zone: BaseGeometry, metres: float, adjacent: BaseGeometry) -> BaseGeometry:
-    """The part of the zone within `metres` of its border with the `adjacent` zone."""
-    border = zone.boundary.intersection(_envelope(adjacent, APPROXIMATION_M).geometry)
+def _border(zone: BaseGeometry, adjacent: BaseGeometry, outside: BaseGeometry | None) -> BaseGeometry:
+    """The zone's outline within APPROXIMATION_M of `adjacent` less `outside`. Only the adjacent
+    land within that reach of the outline counts, so a long outline is read tile by tile."""
+    boundary = zone.boundary
+    if outside is None or shapely.get_num_coordinates(boundary) <= SEAL_TILED_ABOVE:
+        near = adjacent if outside is None else adjacent.difference(outside)
+        return boundary.intersection(_envelope(near, APPROXIMATION_M).geometry)
+    # Each outline segment goes to the tile of its first vertex; runs of segments keep their own
+    # vertices, so no cut point is computed and the runs rejoin exactly.
+    m = SEAL_MARGIN_M
+    xmin, ymin = boundary.bounds[:2]
+    runs = {}
+    for part in shapely.get_parts(boundary):
+        coords = shapely.get_coordinates(part)
+        if len(coords) < 2:
+            continue
+        tile = numpy.floor((coords[:-1] - (xmin, ymin)) / SEAL_TILE_M).astype(int)
+        change = numpy.flatnonzero(numpy.any(tile[1:] != tile[:-1], axis=1)) + 1
+        for start, end in zip(numpy.r_[0, change], numpy.r_[change, len(tile)]):
+            runs.setdefault(tuple(tile[start]), []).append(shapely.LineString(coords[start:end + 1]))
+    lines, rest = [], []
+    for found in runs.values():
+        line = shapely.MultiLineString(found)
+        x0, y0, x1, y1 = line.bounds
+        window = (x0 - m, y0 - m, x1 + m, y1 + m)
+        near = shapely.make_valid(shapely.clip_by_rect(adjacent, *window))
+        near = near.difference(shapely.make_valid(shapely.clip_by_rect(outside, *window)))
+        if near.is_empty:
+            continue
+        for p in shapely.get_parts(line.intersection(_envelope(near, APPROXIMATION_M).geometry)):
+            if not p.is_empty:
+                (lines if p.geom_type == 'LineString' else rest).append(p)
+    if not lines and not rest:
+        return shapely.LineString()
+    # Rejoin the runs, so each vertex keeps its join when the border is banded.
+    merged = list(shapely.get_parts(shapely.line_merge(shapely.MultiLineString(lines)))) if lines else []
+    return shapely.GeometryCollection(merged + rest) if rest else shapely.MultiLineString(merged)
+
+
+BAND_CHUNK = 5_000                     # coordinates per piece of one long line
+BAND_GROUP = 20_000                    # coordinates of line banded at once, for a band of
+BAND_GROUP_AT_M = 2_000.0              # this width or less
+
+
+def _chunks(coords: numpy.ndarray):
+    """A long line as consecutive pieces that meet at the midpoint of a segment: the longest one
+    in the last tenth of each piece. Every vertex stays inside a piece and keeps its join; the
+    line is straight at a midpoint, so the two end caps there fall within the whole line's band
+    wherever the half segment is longer than the band's chord error."""
+    if len(coords) <= BAND_CHUNK:
+        yield coords
+        return
+    start, lead = 0, None
+    while len(coords) - start > BAND_CHUNK:
+        window = numpy.arange(start + BAND_CHUNK - BAND_CHUNK // 10, start + BAND_CHUNK)
+        lengths = numpy.hypot(*(coords[window + 1] - coords[window]).T)
+        s = int(window[lengths.argmax()])
+        mid = (coords[s] + coords[s + 1]) / 2
+        body = numpy.vstack([coords[start:s + 1], mid])
+        yield body if lead is None else numpy.vstack([lead, body])
+        lead, start = mid, s + 1
+    yield numpy.vstack([lead, coords[start:]])
+
+
+def _band_in(line: BaseGeometry, metres: float, rect) -> BaseGeometry:
+    """The envelope of `line` at `metres`, within `rect`: the line banded whole, as HEAD bands it,
+    up to BAND_GROUP coordinates; a longer line in groups of parts of at most that many, a part
+    longer than BAND_CHUNK in pieces."""
+    budget = int(BAND_GROUP * min(1.0, BAND_GROUP_AT_M / metres))    # a wider band costs more per coordinate
+    if shapely.get_num_coordinates(line) <= budget:
+        band = shapely.clip_by_rect(_envelope(line, metres).geometry, *rect)
+        return polygonal(shapely.make_valid(band)) if not band.is_empty else shapely.Polygon()
+    units = []
+    for p in shapely.get_parts(line):
+        if p.is_empty:
+            continue
+        if p.geom_type == 'LineString' and shapely.get_num_coordinates(p) > BAND_CHUNK:
+            units += [shapely.LineString(c) for c in _chunks(shapely.get_coordinates(p))]
+        else:
+            units.append(p)
+    groups, group, size = [], [], 0
+    for u in units:
+        n = shapely.get_num_coordinates(u)
+        if group and size + n > budget:
+            groups.append(shapely.GeometryCollection(group))
+            group, size = [], 0
+        group.append(u)
+        size += n
+    if group:
+        groups.append(shapely.GeometryCollection(group))
+    pieces = []
+    for chunk in groups:
+        piece = shapely.clip_by_rect(_envelope(chunk, metres).geometry, *rect)
+        if not piece.is_empty:
+            pieces.append(shapely.make_valid(piece))
+    return polygonal(shapely.union_all(pieces)) if pieces else shapely.Polygon()
+
+
+def inward_band(zone: BaseGeometry, metres: float, adjacent: BaseGeometry,
+                outside: BaseGeometry | None = None) -> BaseGeometry:
+    """The part of the zone within `metres` of its border with the `adjacent` zone (less `outside`)."""
+    border = _border(zone, adjacent, outside)
     if border.is_empty:
         return shapely.Polygon()
     if shapely.get_num_coordinates(border) <= SEAL_TILED_ABOVE:
@@ -780,7 +879,7 @@ def inward_band(zone: BaseGeometry, metres: float, adjacent: BaseGeometry) -> Ba
             near = shapely.clip_by_rect(border, x - reach, y - reach, x + SEAL_TILE_M + reach, y + SEAL_TILE_M + reach)
             if near.is_empty:
                 continue
-            band = shapely.clip_by_rect(_envelope(near, metres).geometry, x, y, x + SEAL_TILE_M, y + SEAL_TILE_M)
+            band = _band_in(near, metres, (x, y, x + SEAL_TILE_M, y + SEAL_TILE_M))
             if band.is_empty:
                 continue
             local = shapely.make_valid(shapely.clip_by_rect(zone, x - 1, y - 1, x + SEAL_TILE_M + 1, y + SEAL_TILE_M + 1))
@@ -1172,7 +1271,7 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         former = None
         if rules.former:
             zone = build.annex_iii(adopted or version.effective_from)
-            former = inward_band(zone, rules.former[0], sources.land_near(zone, SEAM_M).difference(zone))
+            former = inward_band(zone, rules.former[0], sources.land_near(zone, SEAM_M), outside=zone)
         used = set(build.used)
         zones['containment'] = Zone('containment', build.words('containment'), _union(*named, part, former),
                                     rules.quotes[0], tuple(sorted(used)),
@@ -1185,13 +1284,16 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         # and the band covers no unit the annex does not list.
         metres, width, quote = rules.inward
         buffer = zones.get('buffer')
-        band = inward_band(infected, metres, buffer.geometry if buffer and buffer.geometry is not None
-                           else sources.land_near(infected, SEAM_M).difference(infected))
+        if buffer and buffer.geometry is not None:
+            band = inward_band(infected, metres, buffer.geometry)
+        else:
+            band = inward_band(infected, metres, sources.land_near(infected, SEAM_M), outside=infected)
         listed, partial = None, ()
         if build.by_role['containment']:
             listed, partial = build.annex('containment', build.by_role['containment'])
             reach = _union(listed, *(u.geometry for u in partial if u.geometry is not None))
-            band = _union(band.intersection(reach) if reach is not None else None, listed)
+            # Where the band only touches a listed unit, the intersection keeps a line; a zone is its area.
+            band = polygonal(_union(band.intersection(reach) if reach is not None else None, listed))
             partial = tuple(u for u in partial if u.geometry is None)
         zones['containment'] = Zone('containment', build.words('containment'), band, quote,
                                     zones['infected'].sources, width, partial, listed, zones['infected'].errors)
