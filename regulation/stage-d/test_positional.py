@@ -202,6 +202,41 @@ class RadialBound(unittest.TestCase):
         self.assertIsNone(small['cause'])
         self.assertGreater(small['beyond_upper_share'], large['beyond_upper_share'])
 
+    def test_containment_is_comparable_across_release_sizes_and_stability_compares_closed_bands(self):
+        releases = {('w', str(n)): P.containment(*synthetic_release(n, 3.0, 2e-4, share=0.6, seed=n)) for n in (400, 1600)}
+        for entry in releases.values():
+            self.assertIsNone(entry['containment_cause'])
+            self.assertTrue(4.0 <= entry['containment_m'] <= 14.0)             # 95% of a 3 m-per-axis normal: 7.3 m
+        steady = P.stability(releases)
+        self.assertIs(steady['consistent'], True)
+        releases[('w', 'wide')] = P.containment(*synthetic_release(1600, 9.0, 2e-4, share=0.6, seed=9))
+        self.assertIs(P.stability(releases)['consistent'], False)
+
+    def test_removals_clustered_about_the_points_are_not_a_background(self):
+        # a density falling with distance, as clearances around findings make it, fails the flat band
+        # and leaves the containment censored at the band: neither says anything about stability
+        rng = np.random.default_rng(5)
+        rings = int(P.RADIAL['background_m'][1] / P.RADIAL['ring_m'])
+        edges = np.arange(rings + 1) * P.RADIAL['ring_m']
+        areas = np.pi * (edges[1:] ** 2 - edges[:-1] ** 2)
+        density = 4e-4 - 2.2e-4 * (edges[:-1] / edges[-1])
+        counts = rng.poisson(density * areas, size=(1600, rings)).astype(float)
+        bound = P.radial_bound(counts, np.tile(areas, (1600, 1)))
+        self.assertEqual(bound['cause'], 'the background band is not flat')
+        inside = P.containment(counts, np.tile(areas, (1600, 1)))
+        self.assertIsNone(inside['containment_band_m'][1])                     # open at the band
+        steady = P.stability({('a', '1'): inside, ('b', '2'): inside})
+        self.assertIsNone(steady['consistent'])
+        self.assertEqual(steady['censored'], ['a/1', 'b/2'])
+
+    def test_the_program_bound_is_data_and_qualifies_nothing(self):
+        rows = counted_rows('CAMP_2020.xlsx', *synthetic_release(400, 3.0, 2e-4, share=0.6), 0.9) + \
+            counted_rows('CAMP_2021.xlsx', *synthetic_release(400, 3.0, 2e-4, share=0.6, seed=4), 1.1)
+        program = P.program_bound(rows)
+        self.assertEqual(program['n'], 800)
+        self.assertAlmostEqual(program['imagery_m'], 1.1)
+        self.assertNotIn(('program', 'all releases'), P.release_bounds(rows))
+
     def test_no_excess_gives_no_bound(self):
         bound = P.radial_bound(*synthetic_release(400, 3.0, 2e-4, share=0.0))
         self.assertIsNone(bound['radius_m'])

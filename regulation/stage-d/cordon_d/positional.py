@@ -785,21 +785,31 @@ def containment(counts, areas) -> dict:
     radius = np.where(total > 0, (reached.argmax(axis=1) + 1) * ring, np.nan)
     valid = radius[1:][np.isfinite(radius[1:])]
     if not np.isfinite(radius[0]) or valid.size < 0.9 * RADIAL['resamples']:
-        return {'containment_m': None, 'containment_band_m': None}
-    return {'containment_m': float(radius[0]),
-            'containment_band_m': [float(np.quantile(valid, alpha / 2)), float(np.quantile(valid, 1 - alpha / 2))]}
+        return {'containment_m': None, 'containment_band_m': None, 'containment_cause': 'no excess to contain'}
+    # a radius at the band's inner edge is censored: the excess is not contained before the band
+    edge = b0 * ring
+    band = [float(np.quantile(valid, alpha / 2)), float(np.quantile(valid, 1 - alpha / 2))]
+    band = [band[0] if band[0] < edge else None, band[1] if band[1] < edge else None]
+    if radius[0] >= edge:
+        return {'containment_m': None, 'containment_band_m': band,
+                'containment_cause': 'the excess is not contained before the background band'}
+    return {'containment_m': float(radius[0]), 'containment_band_m': band, 'containment_cause': None}
 
 
 def stability(entries) -> dict:
     """Whether release containment radii are one process: every release band holds a common
-    distance (the largest lower end does not exceed the smallest upper end)."""
-    bands = {key: e['containment_band_m'] for key, e in entries.items() if e.get('containment_band_m')}
+    distance (the largest lower end does not exceed the smallest upper end). Only closed bands
+    are compared; a band open at the background band says nothing about stability."""
+    bands = {key: e['containment_band_m'] for key, e in entries.items()
+             if e.get('containment_band_m') and None not in e['containment_band_m']}
+    censored = sorted('/'.join(k) for k, e in entries.items()
+                      if e.get('containment_band_m') and None in e['containment_band_m'])
     if len(bands) < 2:
-        return {'releases': len(bands), 'consistent': None, 'common_m': None}
+        return {'releases': len(bands), 'consistent': None, 'common_m': None, 'censored': censored}
     low, high = max(b[0] for b in bands.values()), min(b[1] for b in bands.values())
     outside = sorted('/'.join(k) for k, b in bands.items() if b[1] < low or b[0] > high) if low > high else []
     return {'releases': len(bands), 'consistent': bool(low <= high), 'common_m': [low, high] if low <= high else None,
-            'widest_lower_m': low, 'narrowest_upper_m': high, 'apart': outside}
+            'widest_lower_m': low, 'narrowest_upper_m': high, 'apart': outside, 'censored': censored}
 
 
 def program_bound(rows) -> dict:
