@@ -1,60 +1,204 @@
-"""Measure the positional error of the adopted-area geometry sources; write `positional-error` records.
+"""Measure the local positional error of the adopted-area geometry sources.
 
-The two sources are two independent official outlines of the same comuni: ISTAT's
-non-generalised boundaries and the union of each comune's cadastral sheets. Where two
-adjacent comuni both have their sheets held, the ISTAT border is the line their ISTAT
-polygons share, and the cadastral border is the part of one comune's sheet outline that
-abuts the other comune's sheets. Coast and borders with a comune whose sheets are not held
-have no second outline and are not measured.
+Cadastre (`cordon_d.area_error`): the Region's surveyed control fixes against the SIT
+cadastral map.
 
-Directed distances are sampled every 10 m: ISTAT border to cadastral border, and
-cadastral border to ISTAT border. Per comune: the 95th percentile and the maximum of each
-direction.
+    windows --control C.json   capture the cadastral map (SIT Background/Catasto layer 1
+                               buildings, layer 2 parcels) in a 400 m square around every
+                               fix in a comune whose sheets are held
+    measure                    match every fix by consensus; write each fix's error to
+                               corpus/sources/areas/cadastral-control.json and the
+                               `positional-error` record for the cadastre
+    layers                     measure the Region's published zone layer against the
+                               cadastral outline where the act fixes the line by listed
+                               units; write its `positional-error` records
 
-- istat-boundaries: the borders that lie on the outline of a zone built from ISTAT
-  boundaries, for any consumed version in reach; the comuni are those with such a border.
-- cadastre: every measured border of each comune whose sheets a zone uses.
-
-`error_m` is the largest per-comune 95th percentile over the source's comuni, either
-direction. Run with the Stage C/D environment:
-PYTHONPATH=regulation/stage-c:regulation/stage-d .venv/bin/python scripts/measure_positional_error.py
+`C.json` lists the retained Rete Planoaltimetrica pages (ServicesArcIMS/RetiGeodetiche
+layer 0). Run with the Stage C/D environment:
+PYTHONPATH=regulation/stage-c:regulation/stage-d .venv/bin/python scripts/measure_positional_error.py measure
 """
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timezone
 from pathlib import Path
+from urllib.parse import urlencode
+import argparse
 import json
+import time
+import urllib.request
 
 import numpy
 import shapely
-from shapely import STRtree
+from shapely.geometry import Point
 
-from cordon_d.administrative import RECORDS
-from cordon_d.area_geometry import Sources, adopted_geography
-from cordon_d.areas import versions
+from cordon_d import area_error as E
+from cordon_d.administrative import RECORDS, AdministrativeUnits, records
+from cordon_d.store import blob_path, put_bytes, store_root
 
 ROOT = Path(__file__).resolve().parents[1]
-STEP, CLOSE, TOUCH, SNAP, ON = 10.0, 10.0, 5.0, 1.0, 1.0
-METHOD = ('Directed distances sampled every 10 m between the ISTAT border of two adjacent comuni and '
-          'the cadastral border between their sheets (each comune\'s sheets unioned and closed by 10 m '
-          'so seams between sheets are not boundary; the cadastral border is the part of one comune\'s '
-          'sheet outline within 5 m of the other\'s sheets). Coast and borders with a comune whose sheets '
-          'are not held are not measured. Per comune: 95th percentile and maximum of each direction. '
-          'error_m is the largest per-comune 95th percentile over the listed comuni, either direction.')
+CONTROL = ROOT / 'corpus/sources/areas/cadastral-control.json'
+CATASTO = 'https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer'
+HALF_M = 200.0
+METHOD = (
+    "Fixes: the Region's surveyed control points (ServicesArcIMS/RetiGeodetiche layer 0), 'Appoggio Catastali' "
+    "and 'Fotografici Appoggio', in a comune whose cadastral sheets are held, that name a feature the cadastral "
+    "map draws: a boundary triple point, a wall or fence corner, or a building corner. Photo-control building "
+    "corners are left out: they are chosen to be seen from the air, and the map omits many of those buildings. "
+    "Map features: SIT Background/Catasto parcels (layer 2) or buildings (layer 1) in a 400 m square around each "
+    "fix; a triple point is a vertex three or more parcels share, a wall corner a parcel corner, a building corner "
+    "the compass corner the fix names, else any building corner. Match: per fix, its 20 nearest fixes vote on a "
+    "2 m grid for the map offset that places most of them within 3 m of a feature of their kind; the fix's error "
+    "is the distance from its surveyed coordinate to the feature nearest that offset. Every matched fix counts, "
+    "on the consensus or not. A place's error is the 95th percentile of the errors of the 20 fixes nearest it.")
 
 
-def _samples(line):
-    out = [shapely.line_interpolate_point(p, numpy.linspace(0, p.length, max(2, int(p.length // STEP) + 1)))
+def _get(url):
+    last = None
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'CORDON'}),
+                                        timeout=120) as response:
+                return response.read()
+        except Exception as error:  # noqa: BLE001
+            last = error
+            time.sleep(4 * (attempt + 1))
+    raise last
+
+
+def fixes(root, control_pages):
+    """The control fixes in comuni whose sheets are held, with the map feature kind they name."""
+    store = store_root(root)
+    units = AdministrativeUnits(root)
+    held = sorted({r['selection']['comune'] for r in records(root, 'cadastre-fogli')})
+    territory = {c: units.comune_geometry(units.comune(catastale=c)) for c in held}
+    codes = list(territory)
+    tree = shapely.STRtree([territory[c] for c in codes])
+    out = []
+    for page in control_pages:
+        if page['layer'] != 0:
+            continue
+        for f in json.loads(blob_path(store, page['sha256']).read_bytes())['features']:
+            a = f['attributes']
+            kind = E.feature_kind(a['DESCR'])
+            if a['LEGENDA'] not in ('Appoggio Catastali', 'Fotografici Appoggio') or kind is None:
+                continue
+            if a['LEGENDA'] == 'Fotografici Appoggio' and kind == 'building':
+                continue
+            point = Point(f['geometry']['x'], f['geometry']['y'])
+            hit = tree.query(point, predicate='within')
+            if len(hit):
+                out.append({'id': a['OBJECTID'], 'vertice': a['VERTICE'], 'legend': a['LEGENDA'],
+                            'description': a['DESCR'], 'kind': kind, 'comune': codes[hit[0]],
+                            'x': round(point.x, 3), 'y': round(point.y, 3)})
+    return out
+
+
+def window_url(fix, offset=0):
+    layer = 1 if fix['kind'] == 'building' else 2
+    envelope = [fix['x'] - HALF_M, fix['y'] - HALF_M, fix['x'] + HALF_M, fix['y'] + HALF_M]
+    return layer, f'{CATASTO}/{layer}/query?' + urlencode({
+        'f': 'json', 'geometry': ','.join(map(str, envelope)), 'geometryType': 'esriGeometryEnvelope',
+        'inSR': '32633', 'spatialRel': 'esriSpatialRelIntersects',
+        'outFields': 'COMUNE,SEZIONE,FOGLIO,NUMERO,OBJECTID' + (',LIVELLO' if layer == 2 else ''),
+        'returnGeometry': 'true', 'outSR': '32633', 'orderByFields': 'OBJECTID',
+        'resultOffset': offset, 'resultRecordCount': 1000})
+
+
+def windows(args):
+    store = store_root(ROOT)
+    control = json.loads(Path(args.control).read_text())
+    found = fixes(ROOT, control['pages'])
+
+    def one(fix):
+        pages, offset = [], 0
+        while True:
+            layer, url = window_url(fix, offset)
+            body = _get(url)
+            data = json.loads(body)
+            if 'error' in data:
+                raise RuntimeError(f"{url}: {data['error']}")
+            n = len(data.get('features', []))
+            pages.append({'url': url, 'sha256': put_bytes(store, body), 'features': n,
+                          'captured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')})
+            offset += n
+            if not data.get('exceededTransferLimit') and n < 1000:
+                return {'fix': fix['id'], 'layer': layer, 'pages': pages}
+
+    with ThreadPoolExecutor(4) as pool:
+        captured = list(pool.map(one, found))
+    CONTROL.write_text(json.dumps({'control': control, 'windows': captured, 'fixes': found}, indent=0) + '\n')
+    print('fixes', len(found), 'windows', len(captured))
+
+
+def measure(args):
+    store = store_root(ROOT)
+    document = json.loads(CONTROL.read_text())
+    by_fix = {w['fix']: w for w in document['windows']}
+    found = document['fixes']
+    inputs = []
+    for fix in found:
+        features = []
+        for page in by_fix[fix['id']]['pages']:
+            features += json.loads(blob_path(store, page['sha256']).read_bytes())['features']
+        inputs.append(((fix['x'], fix['y']), E.candidates(fix['kind'], fix['description'], features)))
+    results = E.consensus(inputs)
+    for fix, result in zip(found, results):
+        for key in ('offset', 'error_m', 'on_consensus'):
+            fix.pop(key, None)
+        if result is not None:
+            offset, error, on = result
+            fix.update(offset=[round(v, 2) for v in offset], error_m=round(error, 2), on_consensus=on)
+    CONTROL.write_text(json.dumps(document, indent=0) + '\n')
+    measured = [f for f in found if 'error_m' in f]
+    field = E.ErrorField(numpy.array([[f['x'], f['y']] for f in measured]), numpy.array([f['error_m'] for f in measured]))
+    xy = [[f['x'], f['y']] for f in measured]
+    local, radius = field.at(xy), field.radius(xy)
+    units = AdministrativeUnits(ROOT)
+    comuni = []
+    for code in sorted({f['comune'] for f in measured}):
+        at = [i for i, f in enumerate(measured) if f['comune'] == code]
+        comuni.append({'comune': code, 'name': units.comune(catastale=code).name, 'fixes': len(at),
+                       'error_m': {'median': round(float(numpy.median(local[at])), 1),
+                                   'max': round(float(local[at].max()), 1)},
+                       'neighbourhood_radius_m': round(float(numpy.median(radius[at])))})
+    errors = numpy.array([f['error_m'] for f in measured])
+    record = {
+        'kind': 'positional-error', 'source': 'cadastre', 'method': METHOD,
+        'statistic': f'{E.PERCENTILE}th percentile of the errors of the {E.K} fixes nearest a place',
+        'evidence': str(CONTROL.relative_to(ROOT)), 'fixes': len(found), 'measured': len(measured),
+        'on_consensus': sum(1 for f in measured if f['on_consensus']),
+        'consensus_offset_m': {'median': round(float(numpy.median([numpy.hypot(*f['offset']) for f in measured])), 2),
+                               'max': round(float(max(numpy.hypot(*f['offset']) for f in measured)), 2)},
+        'fix_error_m': {'p50': round(float(numpy.percentile(errors, 50)), 1),
+                        'p95': round(float(numpy.percentile(errors, 95)), 1), 'max': round(float(errors.max()), 1)},
+        'local_error_m': {'median': round(float(numpy.median(local)), 1),
+                          'p95': round(float(numpy.percentile(local, 95)), 1), 'max': round(float(local.max()), 1)},
+        'neighbourhood_radius_m': {'median': round(float(numpy.median(radius))), 'max': round(float(radius.max()))},
+        'comuni': comuni, 'script': 'scripts/measure_positional_error.py',
+        'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+    _replace(lambda r: r['kind'] == 'positional-error' and r['source'] == 'cadastre', [record])
+    print(json.dumps({k: v for k, v in record.items() if k not in ('comuni', 'method')}, indent=1))
+
+
+def _replace(drop, new):
+    path = ROOT / RECORDS
+    kept = [r for r in json.loads(path.read_text()) if not drop(r)]
+    path.write_text(json.dumps(kept + new, indent=1, ensure_ascii=False) + '\n')
+
+
+ISTAT_METHOD = (
+    "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held "
+    "sheet covers. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent "
+    "comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; "
+    "the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per "
+    "comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th "
+    "percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only "
+    "to the line no sheet draws.")
+
+
+def _border_samples(line, step=10.0):
+    out = [shapely.line_interpolate_point(p, numpy.linspace(0, p.length, max(2, int(p.length // step) + 1)))
            for p in getattr(line, 'geoms', [line]) if p.length > 0]
     return numpy.concatenate(out) if out else numpy.array([], dtype=object)
-
-
-def _nearest(points, line):
-    pieces = []
-    for part in getattr(line, 'geoms', [line]):
-        c = numpy.asarray(part.coords)
-        if len(c) > 1:
-            pieces.append(shapely.linestrings(numpy.stack([c[:-1], c[1:]], axis=1)))
-    _, d = STRtree(numpy.concatenate(pieces)).query_nearest(points, return_distance=True, all_matches=False)
-    return d
 
 
 def _lines(g):
@@ -62,95 +206,92 @@ def _lines(g):
                                                  if p.geom_type in ('LineString', 'MultiLineString')]))
 
 
-def _stats(arrays):
-    d = numpy.concatenate(arrays) if arrays else numpy.array([])
-    if not d.size:
-        return None
-    return {'p95': round(float(numpy.percentile(d, 95)), 1), 'max': round(float(d.max()), 1), 'n': int(d.size)}
-
-
-def measure(root: Path, decision: date):
-    sources = Sources(root)
+def istat(args):
+    """ISTAT's boundary error per comune, along its borders with neighbours whose sheets are held."""
+    from cordon_d.area_geometry import Sources
+    sources = Sources(ROOT)
     units = sources.administrative
-    istat_outline, cad_used = [], set()
-    supplied = {g.provision_version_id: g for g in adopted_geography(root, decision=decision, sources=sources)}
-    for g in supplied.values():
-        for z in g.zones:
-            if z.geometry is not None and not z.geometry.is_empty and 'istat-boundaries' in z.sources:
-                istat_outline.append(z.geometry.boundary)
-    for v in versions(root):
-        if v.provision_version_id in supplied:
-            for s in v.statements or ():
-                if s.scope == 'sheets':
-                    cad_used.add(units.comune(name=s.comune, province=s.province).catastale)
-    on_outline = shapely.union_all(istat_outline).buffer(ON)
-    shapely.prepare(on_outline)
-    by_comune = {}
-    for (comune, _, _), features in sources.sheets.items():
-        by_comune.setdefault(comune, []).extend(g for _, g in features)
-    istat, cad = {}, {}
-    for code, sheets in sorted(by_comune.items()):
-        comune = units.comune(catastale=code)
-        if comune is None:
-            continue
-        istat[code] = shapely.make_valid(units.comune_geometry(comune))
-        union = shapely.union_all([shapely.make_valid(g) for g in sheets])
-        cad[code] = union.buffer(CLOSE, join_style='mitre').buffer(-CLOSE, join_style='mitre')
-    codes = sorted(istat)
-    tree = STRtree([istat[c] for c in codes])
-    found = {c: {'istat-boundaries': ([], []), 'cadastre': ([], [])} for c in codes}
-    for a in codes:
-        for j in tree.query(istat[a].buffer(SNAP)):
-            b = codes[j]
-            if b <= a:
+    sheets = {}
+    for (code, _, _), found in sources.sheets.items():
+        sheets.setdefault(code, []).extend(shapely.make_valid(g) for _, g in found)
+    wanted = set()
+    for code in args.comuni:
+        territory = units.comune_geometry(units.comune(catastale=code)).buffer(5.0)
+        wanted |= {c for c in sheets if units.comune_geometry(units.comune(catastale=c)).intersects(territory)}
+    closed = {c: shapely.union_all(sheets[c]).buffer(10, join_style='mitre').buffer(-10, join_style='mitre')
+              for c in sorted(wanted)}
+    comuni = []
+    for code in args.comuni:
+        territory = shapely.make_valid(units.comune_geometry(units.comune(catastale=code)))
+        i2c, c2i = [], []
+        for other in sorted(closed):
+            if other == code:
                 continue
-            border = _lines(istat[a].boundary.intersection(istat[b].buffer(SNAP)))
-            if border.is_empty or border.length < 100:
+            neighbour = shapely.make_valid(units.comune_geometry(units.comune(catastale=other)))
+            border = _lines(territory.boundary.intersection(neighbour.buffer(1.0)))
+            if border.is_empty or border.length < 100 or code not in closed:
                 continue
-            for side, other in ((a, b), (b, a)):
-                cadastral = _lines(cad[side].boundary.intersection(cad[other].buffer(TOUCH)))
-                if cadastral.is_empty:
-                    continue
-                ip, cp = _samples(border), _samples(cadastral)
-                i2c, c2i = _nearest(ip, cadastral), _nearest(cp, border)
-                if side in cad_used:
-                    found[side]['cadastre'][0].append(i2c)
-                    found[side]['cadastre'][1].append(c2i)
-                on = shapely.intersects(on_outline, ip)
-                if on.any():
-                    foot = shapely.get_point(shapely.shortest_line(cp, border), 1)
-                    found[side]['istat-boundaries'][0].append(i2c[on])
-                    found[side]['istat-boundaries'][1].append(c2i[shapely.intersects(on_outline, foot)])
+            cadastral = _lines(closed[code].boundary.intersection(closed[other].buffer(5.0)))
+            if cadastral.is_empty:
+                continue
+            i2c.append(shapely.distance(_border_samples(border), cadastral))
+            c2i.append(shapely.distance(_border_samples(cadastral), border))
+
+        def stats(arrays):
+            d = numpy.concatenate(arrays) if arrays else numpy.array([])
+            return None if not d.size else {'p95': round(float(numpy.percentile(d, 95)), 1),
+                                            'max': round(float(d.max()), 1), 'n': int(d.size)}
+        comuni.append({'comune': code, 'name': units.comune(catastale=code).name,
+                       'istat_to_cadastre': stats(i2c), 'cadastre_to_istat': stats(c2i)})
+        print(comuni[-1])
+    record = {'kind': 'positional-error', 'source': 'istat-boundaries', 'method': ISTAT_METHOD,
+              'statistic': 'per comune: the larger 95th percentile of the two directed distance samples',
+              'istat_note': ("La scala non è certificabile uniformemente dall'Istat, poichè le basi di acquisizione "
+                             "utilizzate (principalmente foto aeree ed altra cartografia) provengono da fonti e scale "
+                             "differenti, che variano tra ambito urbano ed extraurbano."),
+              'istat_note_source': 'https://www.istat.it/wp-content/uploads/2024/04/Descrizione-dati-Confini-unita-amministrative-fini-statistici.pdf',
+              'comuni': comuni, 'script': 'scripts/measure_positional_error.py',
+              'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+    _replace(lambda r: r['kind'] == 'positional-error' and r['source'] == 'istat-boundaries', [record])
+
+
+def layers(args):
+    """The Region's layer against the cadastral outline of the units the act places wholly in a zone."""
+    from cordon_d.area_geometry import Sources, adopted_geography, region_layer_samples, REGION_REACH_M
+    sources = Sources(ROOT)
     out = []
-    for source, scope in (('istat-boundaries', 'borders on the outline of a zone built from ISTAT boundaries'),
-                          ('cadastre', 'every measured border of a comune whose sheets a zone uses')):
-        comuni = []
-        for code in codes:
-            i2c, c2i = (_stats(found[code][source][0]), _stats(found[code][source][1]))
-            if i2c or c2i:
-                comuni.append({'comune': code, 'name': units.comune(catastale=code).name,
-                               'istat_to_cadastre': i2c, 'cadastre_to_istat': c2i})
-        p95 = [(d['p95'], c['name']) for c in comuni for d in (c['istat_to_cadastre'], c['cadastre_to_istat']) if d]
-        peak = [(d['max'], c['name']) for c in comuni for d in (c['istat_to_cadastre'], c['cadastre_to_istat']) if d]
-        bound, where = max(p95)
-        out.append({'kind': 'positional-error', 'source': source, 'error_m': bound,
-                    'statistic': '95th percentile of directed boundary distances, largest over the comuni',
-                    'bounding_comune': where, 'largest_maximum_m': max(peak)[0], 'largest_maximum_comune': max(peak)[1],
-                    'scope': scope, 'reach_decision': decision.isoformat(), 'method': METHOD,
-                    'script': 'scripts/measure_positional_error.py',
-                    'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
-                    'comuni': comuni})
-    return out
+    for geography in adopted_geography(ROOT, decision=date.fromisoformat(args.decision), sources=sources):
+        for record, samples in region_layer_samples(sources, geography):
+            distances = numpy.array([d for _, _, d in samples])
+            out.append({'kind': 'positional-error', 'source': 'region-layer', 'layer': record['layer'],
+                        'name': record['name'], 'sha256': record['sha256'], 'role': record['role'],
+                        'provision_version_id': geography.provision_version_id,
+                        'method': ("Directed distances sampled every 10 m from the zone's outer limit where the act "
+                                   "fixes it by units it places wholly in the zone (the cadastral outline of those "
+                                   "units, on land outside the zone) to the layer's outline. A place's error is the "
+                                   f"95th percentile of the samples within {REGION_REACH_M / 1000:g} km of it."),
+                        'samples': [[round(x), round(y), round(float(d), 1)] for x, y, d in samples],
+                        'error_m': {'median': round(float(numpy.median(distances)), 1),
+                                    'p95': round(float(numpy.percentile(distances, 95)), 1),
+                                    'max': round(float(distances.max()), 1), 'n': int(len(distances))},
+                        'script': 'scripts/measure_positional_error.py',
+                        'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')})
+            print(record['layer'], record['name'], out[-1]['error_m'])
+    _replace(lambda r: r['kind'] == 'positional-error' and r['source'] == 'region-layer', out)
 
 
 def main():
-    measured = measure(ROOT, date(2026, 9, 22))
-    path = ROOT / RECORDS
-    kept = [r for r in json.loads(path.read_text()) if r['kind'] != 'positional-error']
-    path.write_text(json.dumps(kept + measured, indent=1, ensure_ascii=False) + '\n')
-    for r in measured:
-        print(r['source'], 'error_m', r['error_m'], r['bounding_comune'], 'comuni', len(r['comuni']),
-              'largest maximum', r['largest_maximum_m'], r['largest_maximum_comune'])
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest='command', required=True)
+    w = sub.add_parser('windows')
+    w.add_argument('--control', required=True)
+    sub.add_parser('measure')
+    ist = sub.add_parser('istat')
+    ist.add_argument('comuni', nargs='+', help='cadastral codes of the comuni whose outline ISTAT draws')
+    lay = sub.add_parser('layers')
+    lay.add_argument('--decision', default='2026-09-22')
+    args = parser.parse_args()
+    {'windows': windows, 'measure': measure, 'istat': istat, 'layers': layers}[args.command](args)
 
 
 if __name__ == '__main__':

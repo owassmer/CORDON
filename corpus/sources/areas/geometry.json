@@ -4473,1039 +4473,113 @@
   "features": 5
  },
  {
-  "kind": "positional-error",
-  "source": "istat-boundaries",
-  "error_m": 846.5,
-  "statistic": "95th percentile of directed boundary distances, largest over the comuni",
-  "bounding_comune": "Ostuni",
-  "largest_maximum_m": 1171.3,
-  "largest_maximum_comune": "Martina Franca",
-  "scope": "borders on the outline of a zone built from ISTAT boundaries",
-  "reach_decision": "2026-09-22",
-  "method": "Directed distances sampled every 10 m between the ISTAT border of two adjacent comuni and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m so seams between sheets are not boundary; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Coast and borders with a comune whose sheets are not held are not measured. Per comune: 95th percentile and maximum of each direction. error_m is the largest per-comune 95th percentile over the listed comuni, either direction.",
-  "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-23T00:15:27+00:00",
-  "comuni": [
-   {
-    "comune": "A149",
-    "name": "Alberobello",
-    "istat_to_cadastre": {
-     "p95": 97.7,
-     "max": 612.0,
-     "n": 3308
-    },
-    "cadastre_to_istat": {
-     "p95": 38.3,
-     "max": 728.5,
-     "n": 3171
-    }
-   },
-   {
-    "comune": "A184",
-    "name": "Alessano",
-    "istat_to_cadastre": {
-     "p95": 42.3,
-     "max": 42.8,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 36.9,
-     "max": 37.5,
-     "n": 4
-    }
-   },
-   {
-    "comune": "A208",
-    "name": "Alliste",
-    "istat_to_cadastre": {
-     "p95": 34.0,
-     "max": 35.2,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 40.1,
-     "max": 40.1,
-     "n": 1
-    }
-   },
-   {
-    "comune": "A281",
-    "name": "Andrano",
-    "istat_to_cadastre": {
-     "p95": 66.1,
-     "max": 68.1,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "B180",
-    "name": "Brindisi",
-    "istat_to_cadastre": {
-     "p95": 35.3,
-     "max": 36.4,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 34.9,
-     "max": 35.5,
-     "n": 6
-    }
-   },
-   {
-    "comune": "B809",
-    "name": "Carovigno",
-    "istat_to_cadastre": {
-     "p95": 43.3,
-     "max": 43.5,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 44.9,
-     "max": 44.9,
-     "n": 1
-    }
-   },
-   {
-    "comune": "C134",
-    "name": "Castellana Grotte",
-    "istat_to_cadastre": {
-     "p95": 51.3,
-     "max": 614.0,
-     "n": 5424
-    },
-    "cadastre_to_istat": {
-     "p95": 110.5,
-     "max": 518.4,
-     "n": 5917
-    }
-   },
-   {
-    "comune": "C336",
-    "name": "Castrignano del Capo",
-    "istat_to_cadastre": {
-     "p95": 28.5,
-     "max": 29.3,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 35.1,
-     "max": 36.1,
-     "n": 4
-    }
-   },
-   {
-    "comune": "C975",
-    "name": "Conversano",
-    "istat_to_cadastre": {
-     "p95": 49.3,
-     "max": 162.1,
-     "n": 3382
-    },
-    "cadastre_to_istat": {
-     "p95": 56.1,
-     "max": 175.9,
-     "n": 3610
-    }
-   },
-   {
-    "comune": "D044",
-    "name": "Corsano",
-    "istat_to_cadastre": {
-     "p95": 41.2,
-     "max": 42.9,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "D171",
-    "name": "Crispiano",
-    "istat_to_cadastre": {
-     "p95": 159.0,
-     "max": 1170.7,
-     "n": 3173
-    },
-    "cadastre_to_istat": {
-     "p95": 222.1,
-     "max": 523.5,
-     "n": 3637
-    }
-   },
-   {
-    "comune": "D305",
-    "name": "Diso",
-    "istat_to_cadastre": {
-     "p95": 26.7,
-     "max": 28.1,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 5.4,
-     "max": 5.4,
-     "n": 1
-    }
-   },
-   {
-    "comune": "D508",
-    "name": "Fasano",
-    "istat_to_cadastre": {
-     "p95": 42.4,
-     "max": 840.9,
-     "n": 1650
-    },
-    "cadastre_to_istat": {
-     "p95": 62.8,
-     "max": 852.8,
-     "n": 1768
-    }
-   },
-   {
-    "comune": "D851",
-    "name": "Gagliano del Capo",
-    "istat_to_cadastre": {
-     "p95": 30.8,
-     "max": 31.8,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 42.3,
-     "max": 44.2,
-     "n": 6
-    }
-   },
-   {
-    "comune": "D863",
-    "name": "Galatone",
-    "istat_to_cadastre": {
-     "p95": 141.0,
-     "max": 148.0,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "D883",
-    "name": "Gallipoli",
-    "istat_to_cadastre": {
-     "p95": 13.6,
-     "max": 14.2,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 22.5,
-     "max": 22.6,
-     "n": 4
-    }
-   },
-   {
-    "comune": "E506",
-    "name": "Lecce",
-    "istat_to_cadastre": {
-     "p95": 17.8,
-     "max": 18.4,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 31.2,
-     "max": 32.0,
-     "n": 3
-    }
-   },
-   {
-    "comune": "E537",
-    "name": "Leporano",
-    "istat_to_cadastre": {
-     "p95": 24.4,
-     "max": 24.6,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 30.6,
-     "max": 31.7,
-     "n": 4
-    }
-   },
-   {
-    "comune": "E630",
-    "name": "Lizzano",
-    "istat_to_cadastre": {
-     "p95": 38.9,
-     "max": 40.7,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "E645",
-    "name": "Locorotondo",
-    "istat_to_cadastre": {
-     "p95": 46.7,
-     "max": 63.3,
-     "n": 130
-    },
-    "cadastre_to_istat": {
-     "p95": 44.9,
-     "max": 68.3,
-     "n": 129
-    }
-   },
-   {
-    "comune": "E882",
-    "name": "Manduria",
-    "istat_to_cadastre": {
-     "p95": 50.7,
-     "max": 51.5,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 124.6,
-     "max": 124.8,
-     "n": 12
-    }
-   },
-   {
-    "comune": "E986",
-    "name": "Martina Franca",
-    "istat_to_cadastre": {
-     "p95": 44.7,
-     "max": 1171.3,
-     "n": 3237
-    },
-    "cadastre_to_istat": {
-     "p95": 34.4,
-     "max": 65.5,
-     "n": 3131
-    }
-   },
-   {
-    "comune": "E995",
-    "name": "Maruggio",
-    "istat_to_cadastre": {
-     "p95": 97.0,
-     "max": 99.6,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 200.4,
-     "max": 200.5,
-     "n": 18
-    }
-   },
-   {
-    "comune": "F027",
-    "name": "Massafra",
-    "istat_to_cadastre": {
-     "p95": 150.3,
-     "max": 737.6,
-     "n": 4818
-    },
-    "cadastre_to_istat": {
-     "p95": 151.4,
-     "max": 523.6,
-     "n": 5160
-    }
-   },
-   {
-    "comune": "F101",
-    "name": "Melendugno",
-    "istat_to_cadastre": {
-     "p95": 38.0,
-     "max": 39.3,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 12.0,
-     "max": 12.0,
-     "n": 1
-    }
-   },
-   {
-    "comune": "F280",
-    "name": "Mola di Bari",
-    "istat_to_cadastre": {
-     "p95": 22.9,
-     "max": 25.2,
-     "n": 158
-    },
-    "cadastre_to_istat": {
-     "p95": 23.4,
-     "max": 29.5,
-     "n": 165
-    }
-   },
-   {
-    "comune": "F376",
-    "name": "Monopoli",
-    "istat_to_cadastre": {
-     "p95": 38.2,
-     "max": 141.9,
-     "n": 3306
-    },
-    "cadastre_to_istat": {
-     "p95": 218.4,
-     "max": 721.2,
-     "n": 3930
-    }
-   },
-   {
-    "comune": "F716",
-    "name": "Morciano di Leuca",
-    "istat_to_cadastre": {
-     "p95": 5.1,
-     "max": 5.1,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 11.1,
-     "max": 11.3,
-     "n": 2
-    }
-   },
-   {
-    "comune": "F784",
-    "name": "Mottola",
-    "istat_to_cadastre": {
-     "p95": 41.6,
-     "max": 112.6,
-     "n": 1167
-    },
-    "cadastre_to_istat": {
-     "p95": 38.0,
-     "max": 64.1,
-     "n": 1093
-    }
-   },
-   {
-    "comune": "F842",
-    "name": "Nardò",
-    "istat_to_cadastre": {
-     "p95": 145.1,
-     "max": 151.8,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 371.4,
-     "max": 393.5,
-     "n": 52
-    }
-   },
-   {
-    "comune": "F915",
-    "name": "Noci",
-    "istat_to_cadastre": {
-     "p95": 26.7,
-     "max": 54.4,
-     "n": 741
-    },
-    "cadastre_to_istat": {
-     "p95": 31.7,
-     "max": 57.0,
-     "n": 761
-    }
-   },
-   {
-    "comune": "G187",
-    "name": "Ostuni",
-    "istat_to_cadastre": {
-     "p95": 800.7,
-     "max": 840.3,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 846.5,
-     "max": 847.3,
-     "n": 14
-    }
-   },
-   {
-    "comune": "G188",
-    "name": "Otranto",
-    "istat_to_cadastre": {
-     "p95": 42.2,
-     "max": 42.7,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 39.8,
-     "max": 39.9,
-     "n": 3
-    }
-   },
-   {
-    "comune": "G378",
-    "name": "Patù",
-    "istat_to_cadastre": {
-     "p95": 24.9,
-     "max": 25.9,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 29.7,
-     "max": 29.9,
-     "n": 2
-    }
-   },
-   {
-    "comune": "G787",
-    "name": "Polignano a Mare",
-    "istat_to_cadastre": {
-     "p95": 48.3,
-     "max": 162.5,
-     "n": 3041
-    },
-    "cadastre_to_istat": {
-     "p95": 75.8,
-     "max": 177.0,
-     "n": 3290
-    }
-   },
-   {
-    "comune": "H090",
-    "name": "Pulsano",
-    "istat_to_cadastre": {
-     "p95": 34.4,
-     "max": 34.9,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 33.4,
-     "max": 33.9,
-     "n": 3
-    }
-   },
-   {
-    "comune": "H096",
-    "name": "Putignano",
-    "istat_to_cadastre": {
-     "p95": 36.0,
-     "max": 67.8,
-     "n": 1083
-    },
-    "cadastre_to_istat": {
-     "p95": 38.9,
-     "max": 90.4,
-     "n": 1146
-    }
-   },
-   {
-    "comune": "H147",
-    "name": "Racale",
-    "istat_to_cadastre": {
-     "p95": 29.5,
-     "max": 30.3,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 23.1,
-     "max": 23.4,
-     "n": 2
-    }
-   },
-   {
-    "comune": "H729",
-    "name": "Salve",
-    "istat_to_cadastre": {
-     "p95": 31.7,
-     "max": 33.2,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 12.6,
-     "max": 13.0,
-     "n": 2
-    }
-   },
-   {
-    "comune": "I119",
-    "name": "San Pietro Vernotico",
-    "istat_to_cadastre": {
-     "p95": 18.4,
-     "max": 18.6,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 38.8,
-     "max": 40.6,
-     "n": 5
-    }
-   },
-   {
-    "comune": "I172",
-    "name": "Santa Cesarea Terme",
-    "istat_to_cadastre": {
-     "p95": 40.8,
-     "max": 41.1,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 37.4,
-     "max": 37.5,
-     "n": 2
-    }
-   },
-   {
-    "comune": "I930",
-    "name": "Squinzano",
-    "istat_to_cadastre": {
-     "p95": 89.0,
-     "max": 91.3,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 244.1,
-     "max": 245.1,
-     "n": 25
-    }
-   },
-   {
-    "comune": "L049",
-    "name": "Taranto",
-    "istat_to_cadastre": {
-     "p95": 41.8,
-     "max": 135.5,
-     "n": 761
-    },
-    "cadastre_to_istat": {
-     "p95": 44.6,
-     "max": 101.9,
-     "n": 787
-    }
-   },
-   {
-    "comune": "L074",
-    "name": "Taviano",
-    "istat_to_cadastre": {
-     "p95": 15.4,
-     "max": 15.4,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 29.5,
-     "max": 31.3,
-     "n": 5
-    }
-   },
-   {
-    "comune": "L166",
-    "name": "Tiggiano",
-    "istat_to_cadastre": {
-     "p95": 128.9,
-     "max": 134.8,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "L213",
-    "name": "Torchiarolo",
-    "istat_to_cadastre": {
-     "p95": 86.0,
-     "max": 89.4,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "L294",
-    "name": "Torricella",
-    "istat_to_cadastre": {
-     "p95": 94.0,
-     "max": 98.9,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 200.8,
-     "max": 201.7,
-     "n": 18
-    }
-   },
-   {
-    "comune": "L383",
-    "name": "Trepuzzi",
-    "istat_to_cadastre": {
-     "p95": 41.5,
-     "max": 43.2,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 234.1,
-     "max": 242.6,
-     "n": 25
-    }
-   },
-   {
-    "comune": "L419",
-    "name": "Tricase",
-    "istat_to_cadastre": {
-     "p95": 136.4,
-     "max": 139.8,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "L472",
-    "name": "Turi",
-    "istat_to_cadastre": {
-     "p95": 13.2,
-     "max": 14.2,
-     "n": 3
-    },
-    "cadastre_to_istat": {
-     "p95": 24.8,
-     "max": 24.8,
-     "n": 1
-    }
-   },
-   {
-    "comune": "L484",
-    "name": "Ugento",
-    "istat_to_cadastre": {
-     "p95": 33.2,
-     "max": 34.5,
-     "n": 2
-    },
-    "cadastre_to_istat": null
-   },
-   {
-    "comune": "L776",
-    "name": "Vernole",
-    "istat_to_cadastre": {
-     "p95": 18.3,
-     "max": 18.4,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 23.7,
-     "max": 23.9,
-     "n": 3
-    }
-   },
-   {
-    "comune": "M261",
-    "name": "Castro",
-    "istat_to_cadastre": {
-     "p95": 43.8,
-     "max": 46.1,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 2.7,
-     "max": 2.7,
-     "n": 1
-    }
-   },
-   {
-    "comune": "M263",
-    "name": "Porto Cesareo",
-    "istat_to_cadastre": {
-     "p95": 39.0,
-     "max": 39.9,
-     "n": 2
-    },
-    "cadastre_to_istat": {
-     "p95": 381.5,
-     "max": 388.5,
-     "n": 52
-    }
-   },
-   {
-    "comune": "M298",
-    "name": "Statte",
-    "istat_to_cadastre": {
-     "p95": 64.8,
-     "max": 192.8,
-     "n": 370
-    },
-    "cadastre_to_istat": {
-     "p95": 59.5,
-     "max": 108.1,
-     "n": 373
-    }
-   }
-  ]
+  "kind": "region-layer",
+  "publisher": "Regione Puglia SIT, Operationals/DatiPubbliciFasceXF",
+  "name": "Zona Infetta - Xylella Fastidiosa sub. pauca ST53 ex Salento (Focolai di Mola di Bari e Noci)",
+  "layer": 12,
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/12/query?f=json&objectIds=6724&outFields=%2A&returnGeometry=true&outSR=32633",
+  "captured_at": "2026-09-23T02:19:53.688867+00:00",
+  "sha256": "d49e70e51d23fc2300123cc2b041ad3a6fba026fb05f678adf566ee20ffb36fe",
+  "bytes": 8015,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "features": 1,
+  "metadata": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/12?f=json",
+   "sha256": "a80824a1a2f8374977590feb52522c7800bd04d09a34aee4b8d8b1f674fb40c8"
+  },
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/12/query?f=json&where=1%3D1&returnIdsOnly=true",
+   "sha256": "2d48b730e2f3301e196eaea3583b0b02611d6eace0dcfef0af5246457c3753da",
+   "count": 1
+  },
+  "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1",
+  "role": "focus",
+  "binding": "the Region's published rendering of the act's Allegato 1 and 1 bis map (INPUTS row 3: 'the Region's published layer where that layer carries the act's geometry')"
+ },
+ {
+  "kind": "region-layer",
+  "publisher": "Regione Puglia SIT, Operationals/DatiPubbliciFasceXF",
+  "name": "Zona Cuscinetto - Xylella Fastidiosa sub. pauca ST53 ex Salento",
+  "layer": 13,
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/13/query?f=json&objectIds=8963&outFields=%2A&returnGeometry=true&outSR=32633",
+  "captured_at": "2026-09-23T02:20:10.681982+00:00",
+  "sha256": "83dd3a08e72e30fb7a80baaa67b06fab51bff5812360245fbb352c353f0c9706",
+  "bytes": 816458,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "features": 1,
+  "metadata": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/13?f=json",
+   "sha256": "aa5b663e32a58da2a4e0b1c35fd6f67398a4ced63fba6b417564ab5e5ad52367"
+  },
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/13/query?f=json&where=1%3D1&returnIdsOnly=true",
+   "sha256": "79fcb6e4b4660dd12b0e601e60e5f4edb035c571e33d971f85166504fb27d445",
+   "count": 1
+  },
+  "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1",
+  "role": "buffer",
+  "binding": "the Region's published rendering of the act's Allegato 1 and 1 bis map (INPUTS row 3: 'the Region's published layer where that layer carries the act's geometry')"
+ },
+ {
+  "kind": "region-layer",
+  "publisher": "Regione Puglia SIT, Operationals/DatiPubbliciFasceXF",
+  "name": "Zona Contenimento - Xylella Fastidiosa sub. pauca ST53 ex Salento",
+  "layer": 14,
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/14/query?f=json&objectIds=3202&outFields=%2A&returnGeometry=true&outSR=32633",
+  "captured_at": "2026-09-23T02:20:14.176110+00:00",
+  "sha256": "11371206f203d123748ddadeab1d35af414663561431cd1091079a680b1df164",
+  "bytes": 596113,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "features": 1,
+  "metadata": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/14?f=json",
+   "sha256": "46f70c4e3e2f01e2c379be86fd06c44dbf5c0f9159a68e5dc7bfe2736d0e3f4e"
+  },
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/14/query?f=json&where=1%3D1&returnIdsOnly=true",
+   "sha256": "a3a227468daafeade3b5c8189d64f852745a26bdf736c459a98dfd9ece7018be",
+   "count": 1
+  },
+  "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1",
+  "role": "containment",
+  "binding": "the Region's published rendering of the act's Allegato 1 and 1 bis map (INPUTS row 3: 'the Region's published layer where that layer carries the act's geometry')"
+ },
+ {
+  "kind": "region-layer",
+  "publisher": "Regione Puglia SIT, Operationals/DatiPubbliciFasceXF",
+  "name": "Zona Infetta - Xylella Fastidiosa sub. pauca ST53 ex Salento",
+  "layer": 15,
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/15/query?f=json&objectIds=6723&outFields=%2A&returnGeometry=true&outSR=32633",
+  "captured_at": "2026-09-23T02:20:41.772511+00:00",
+  "sha256": "53c52c083f1870d9ffb23584b5eba0e9f6b2df6cae8367214b232a87ba8e44b6",
+  "bytes": 8607926,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "features": 1,
+  "metadata": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/15?f=json",
+   "sha256": "1760400283979994fd2191a8a45ce1d37f420bca8f67774605f797ce1e3685ac"
+  },
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer/15/query?f=json&where=1%3D1&returnIdsOnly=true",
+   "sha256": "dce2660fec187225f543fed673bd8d51d3fac7baee547b56a4abd6b92744d24e",
+   "count": 1
+  },
+  "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1",
+  "role": "infected",
+  "binding": "the Region's published rendering of the act's Allegato 1 and 1 bis map (INPUTS row 3: 'the Region's published layer where that layer carries the act's geometry')"
  },
  {
   "kind": "positional-error",
-  "source": "cadastre",
-  "error_m": 407.2,
-  "statistic": "95th percentile of directed boundary distances, largest over the comuni",
-  "bounding_comune": "Fasano",
-  "largest_maximum_m": 7529.9,
-  "largest_maximum_comune": "Martina Franca",
-  "scope": "every measured border of a comune whose sheets a zone uses",
-  "reach_decision": "2026-09-22",
-  "method": "Directed distances sampled every 10 m between the ISTAT border of two adjacent comuni and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m so seams between sheets are not boundary; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Coast and borders with a comune whose sheets are not held are not measured. Per comune: 95th percentile and maximum of each direction. error_m is the largest per-comune 95th percentile over the listed comuni, either direction.",
-  "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-23T00:15:27+00:00",
+  "source": "istat-boundaries",
+  "method": "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held sheet covers. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only to the line no sheet draws.",
+  "statistic": "per comune: the larger 95th percentile of the two directed distance samples",
+  "istat_note": "La scala non è certificabile uniformemente dall'Istat, poichè le basi di acquisizione utilizzate (principalmente foto aeree ed altra cartografia) provengono da fonti e scale differenti, che variano tra ambito urbano ed extraurbano.",
+  "istat_note_source": "https://www.istat.it/wp-content/uploads/2024/04/Descrizione-dati-Confini-unita-amministrative-fini-statistici.pdf",
   "comuni": [
-   {
-    "comune": "A048",
-    "name": "Acquaviva delle Fonti",
-    "istat_to_cadastre": {
-     "p95": 42.6,
-     "max": 178.7,
-     "n": 7453
-    },
-    "cadastre_to_istat": {
-     "p95": 68.6,
-     "max": 312.1,
-     "n": 7842
-    }
-   },
-   {
-    "comune": "A149",
-    "name": "Alberobello",
-    "istat_to_cadastre": {
-     "p95": 74.1,
-     "max": 612.0,
-     "n": 4202
-    },
-    "cadastre_to_istat": {
-     "p95": 33.5,
-     "max": 728.5,
-     "n": 4052
-    }
-   },
-   {
-    "comune": "A225",
-    "name": "Altamura",
-    "istat_to_cadastre": {
-     "p95": 61.7,
-     "max": 111.5,
-     "n": 2796
-    },
-    "cadastre_to_istat": {
-     "p95": 63.5,
-     "max": 116.9,
-     "n": 2855
-    }
-   },
-   {
-    "comune": "A662",
-    "name": "Bari",
-    "istat_to_cadastre": {
-     "p95": 45.5,
-     "max": 149.1,
-     "n": 4931
-    },
-    "cadastre_to_istat": {
-     "p95": 54.6,
-     "max": 282.9,
-     "n": 5231
-    }
-   },
-   {
-    "comune": "A883",
-    "name": "Bisceglie",
-    "istat_to_cadastre": {
-     "p95": 40.2,
-     "max": 124.4,
-     "n": 1537
-    },
-    "cadastre_to_istat": {
-     "p95": 41.5,
-     "max": 121.6,
-     "n": 1591
-    }
-   },
-   {
-    "comune": "A893",
-    "name": "Bitonto",
-    "istat_to_cadastre": {
-     "p95": 59.6,
-     "max": 120.5,
-     "n": 3321
-    },
-    "cadastre_to_istat": {
-     "p95": 60.1,
-     "max": 117.3,
-     "n": 3412
-    }
-   },
-   {
-    "comune": "B716",
-    "name": "Capurso",
-    "istat_to_cadastre": {
-     "p95": 58.9,
-     "max": 277.8,
-     "n": 2300
-    },
-    "cadastre_to_istat": {
-     "p95": 51.1,
-     "max": 95.6,
-     "n": 2278
-    }
-   },
-   {
-    "comune": "B998",
-    "name": "Cassano delle Murge",
-    "istat_to_cadastre": {
-     "p95": 43.3,
-     "max": 177.1,
-     "n": 6384
-    },
-    "cadastre_to_istat": {
-     "p95": 52.9,
-     "max": 249.5,
-     "n": 6681
-    }
-   },
-   {
-    "comune": "C134",
-    "name": "Castellana Grotte",
-    "istat_to_cadastre": {
-     "p95": 44.7,
-     "max": 614.0,
-     "n": 7783
-    },
-    "cadastre_to_istat": {
-     "p95": 90.7,
-     "max": 625.8,
-     "n": 8423
-    }
-   },
-   {
-    "comune": "C436",
-    "name": "Cellamare",
-    "istat_to_cadastre": {
-     "p95": 31.2,
-     "max": 47.4,
-     "n": 1076
-    },
-    "cadastre_to_istat": {
-     "p95": 32.2,
-     "max": 61.8,
-     "n": 1121
-    }
-   },
-   {
-    "comune": "C975",
-    "name": "Conversano",
-    "istat_to_cadastre": {
-     "p95": 55.8,
-     "max": 167.4,
-     "n": 7013
-    },
-    "cadastre_to_istat": {
-     "p95": 65.8,
-     "max": 175.9,
-     "n": 7327
-    }
-   },
-   {
-    "comune": "D171",
-    "name": "Crispiano",
-    "istat_to_cadastre": {
-     "p95": 143.1,
-     "max": 1170.7,
-     "n": 10363
-    },
-    "cadastre_to_istat": {
-     "p95": 95.4,
-     "max": 523.5,
-     "n": 10721
-    }
-   },
-   {
-    "comune": "D508",
-    "name": "Fasano",
-    "istat_to_cadastre": {
-     "p95": 407.2,
-     "max": 844.1,
-     "n": 5059
-    },
-    "cadastre_to_istat": {
-     "p95": 237.0,
-     "max": 852.8,
-     "n": 4879
-    }
-   },
-   {
-    "comune": "E036",
-    "name": "Ginosa",
-    "istat_to_cadastre": {
-     "p95": 78.9,
-     "max": 111.4,
-     "n": 1152
-    },
-    "cadastre_to_istat": {
-     "p95": 83.1,
-     "max": 106.2,
-     "n": 1205
-    }
-   },
-   {
-    "comune": "E038",
-    "name": "Gioia del Colle",
-    "istat_to_cadastre": {
-     "p95": 99.7,
-     "max": 1213.1,
-     "n": 5833
-    },
-    "cadastre_to_istat": {
-     "p95": 49.8,
-     "max": 159.8,
-     "n": 5628
-    }
-   },
-   {
-    "comune": "E047",
-    "name": "Giovinazzo",
-    "istat_to_cadastre": {
-     "p95": 40.9,
-     "max": 120.5,
-     "n": 1618
-    },
-    "cadastre_to_istat": {
-     "p95": 50.0,
-     "max": 119.3,
-     "n": 1662
-    }
-   },
-   {
-    "comune": "E469",
-    "name": "Laterza",
-    "istat_to_cadastre": {
-     "p95": 69.3,
-     "max": 162.9,
-     "n": 2329
-    },
-    "cadastre_to_istat": {
-     "p95": 95.2,
-     "max": 399.1,
-     "n": 2466
-    }
-   },
-   {
-    "comune": "E645",
-    "name": "Locorotondo",
-    "istat_to_cadastre": {
-     "p95": 66.5,
-     "max": 156.1,
-     "n": 4837
-    },
-    "cadastre_to_istat": {
-     "p95": 74.2,
-     "max": 173.5,
-     "n": 5202
-    }
-   },
-   {
-    "comune": "E986",
-    "name": "Martina Franca",
-    "istat_to_cadastre": {
-     "p95": 113.7,
-     "max": 1171.3,
-     "n": 13151
-    },
-    "cadastre_to_istat": {
-     "p95": 72.0,
-     "max": 7529.9,
-     "n": 12992
-    }
-   },
    {
     "comune": "F027",
     "name": "Massafra",
@@ -5519,217 +4593,1733 @@
      "max": 523.6,
      "n": 6702
     }
+   }
+  ],
+  "script": "scripts/measure_positional_error.py",
+  "measured_at": "2026-09-23T02:50:52+00:00"
+ },
+ {
+  "kind": "cadastre-particelle",
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27I330%27+AND+FOGLIO%3D%2757%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%27262%27%2C%27263%27%2C%27272%27%2C%27273%27%2C%27302%27%2C%27310%27%2C%27312%27%29&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&resultOffset=0&resultRecordCount=1000",
+  "captured_at": "2026-09-23T02:57:42.039331+00:00",
+  "sha256": "9a7f90cf016089d47a0a029e534c0c27fe8bfce19aa6af5f0f3f5981f22b1977",
+  "bytes": 8754,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "oid_field": "OBJECTID",
+  "layer": 2,
+  "selection": {
+   "comune": "I330",
+   "sezione": "",
+   "foglio": "57",
+   "particelle": [
+    "262",
+    "263",
+    "272",
+    "273",
+    "302",
+    "310",
+    "312"
+   ]
+  },
+  "features": 7,
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27I330%27+AND+FOGLIO%3D%2757%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%27262%27%2C%27263%27%2C%27272%27%2C%27273%27%2C%27302%27%2C%27310%27%2C%27312%27%29&returnIdsOnly=true",
+   "sha256": "f02da48992a1f79015363cef4a63870790cc54c0159ad1296b577ddd8732964a",
+   "count": 7
+  }
+ },
+ {
+  "kind": "cadastre-particelle",
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27L425%27+AND+FOGLIO%3D%2710%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%2712%27%2C%2715%27%2C%2717%27%2C%2718%27%2C%27197%27%2C%272%27%2C%27201%27%2C%27218%27%2C%2722%27%2C%27221%27%2C%2723%27%2C%2724%27%2C%2725%27%2C%2726%27%2C%2729%27%2C%2730%27%2C%27302%27%2C%27303%27%2C%27305%27%2C%27306%27%2C%2731%27%2C%27477%27%2C%27478%27%2C%275%27%2C%27651%27%2C%27656%27%2C%27658%27%2C%27692%27%2C%27693%27%2C%277%27%2C%278%27%29&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&resultOffset=0&resultRecordCount=1000",
+  "captured_at": "2026-09-23T02:57:42.132253+00:00",
+  "sha256": "4d1badda36ae3cd3326cdccd9cb62addf5e71b02b10e177f3835ebe2c4e59f42",
+  "bytes": 18538,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "oid_field": "OBJECTID",
+  "layer": 2,
+  "selection": {
+   "comune": "L425",
+   "sezione": "",
+   "foglio": "10",
+   "particelle": [
+    "12",
+    "15",
+    "17",
+    "18",
+    "197",
+    "2",
+    "201",
+    "218",
+    "22",
+    "221",
+    "23",
+    "24",
+    "25",
+    "26",
+    "29",
+    "30",
+    "302",
+    "303",
+    "305",
+    "306",
+    "31",
+    "477",
+    "478",
+    "5",
+    "651",
+    "656",
+    "658",
+    "692",
+    "693",
+    "7",
+    "8"
+   ]
+  },
+  "features": 31,
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27L425%27+AND+FOGLIO%3D%2710%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%2712%27%2C%2715%27%2C%2717%27%2C%2718%27%2C%27197%27%2C%272%27%2C%27201%27%2C%27218%27%2C%2722%27%2C%27221%27%2C%2723%27%2C%2724%27%2C%2725%27%2C%2726%27%2C%2729%27%2C%2730%27%2C%27302%27%2C%27303%27%2C%27305%27%2C%27306%27%2C%2731%27%2C%27477%27%2C%27478%27%2C%275%27%2C%27651%27%2C%27656%27%2C%27658%27%2C%27692%27%2C%27693%27%2C%277%27%2C%278%27%29&returnIdsOnly=true",
+   "sha256": "b4837f6962c92e69ccb410b5e6a8a90b1f48a5f5c195e39f2511d595740045d7",
+   "count": 31
+  }
+ },
+ {
+  "kind": "cadastre-particelle",
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27L425%27+AND+FOGLIO%3D%275%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%27260%27%2C%27264%27%2C%27269%27%2C%27273%27%2C%27274%27%2C%27365%27%2C%27704%27%2C%27705%27%2C%27706%27%2C%27707%27%2C%27708%27%2C%27817%27%29&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&resultOffset=0&resultRecordCount=1000",
+  "captured_at": "2026-09-23T02:57:46.107115+00:00",
+  "sha256": "3a84ebcda6012f32c237640bbb830db52e43129e73204b29565b1a1ccf829b17",
+  "bytes": 8549,
+  "content_type": "text/plain;charset=utf-8",
+  "format": "arcgis",
+  "oid_field": "OBJECTID",
+  "layer": 2,
+  "selection": {
+   "comune": "L425",
+   "sezione": "",
+   "foglio": "5",
+   "particelle": [
+    "260",
+    "264",
+    "269",
+    "273",
+    "274",
+    "365",
+    "704",
+    "705",
+    "706",
+    "707",
+    "708",
+    "817"
+   ]
+  },
+  "features": 12,
+  "population_check": {
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27L425%27+AND+FOGLIO%3D%275%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%27260%27%2C%27264%27%2C%27269%27%2C%27273%27%2C%27274%27%2C%27365%27%2C%27704%27%2C%27705%27%2C%27706%27%2C%27707%27%2C%27708%27%2C%27817%27%29&returnIdsOnly=true",
+   "sha256": "d34753f2024ec143b36b50fae5d320b45d92ce27f3e985b07e88ebfcf391717b",
+   "count": 12
+  }
+ },
+ {
+  "kind": "positional-error",
+  "source": "cadastre",
+  "method": "Fixes: the Region's surveyed control points (ServicesArcIMS/RetiGeodetiche layer 0), 'Appoggio Catastali' and 'Fotografici Appoggio', in a comune whose cadastral sheets are held, that name a feature the cadastral map draws: a boundary triple point, a wall or fence corner, or a building corner. Photo-control building corners are left out: they are chosen to be seen from the air, and the map omits many of those buildings. Map features: SIT Background/Catasto parcels (layer 2) or buildings (layer 1) in a 400 m square around each fix; a triple point is a vertex three or more parcels share, a wall corner a parcel corner, a building corner the compass corner the fix names, else any building corner. Match: per fix, its 20 nearest fixes vote on a 2 m grid for the map offset that places most of them within 3 m of a feature of their kind; the fix's error is the distance from its surveyed coordinate to the feature nearest that offset. Every matched fix counts, on the consensus or not. A place's error is the 95th percentile of the errors of the 20 fixes nearest it.",
+  "statistic": "95th percentile of the errors of the 20 fixes nearest a place",
+  "evidence": "corpus/sources/areas/cadastral-control.json",
+  "fixes": 938,
+  "measured": 906,
+  "on_consensus": 529,
+  "consensus_offset_m": {
+   "median": 0.56,
+   "max": 3.91
+  },
+  "fix_error_m": {
+   "p50": 2.4,
+   "p95": 37.3,
+   "max": 149.0
+  },
+  "local_error_m": {
+   "median": 19.6,
+   "p95": 93.1,
+   "max": 142.3
+  },
+  "neighbourhood_radius_m": {
+   "median": 8351,
+   "max": 93957
+  },
+  "comuni": [
+   {
+    "comune": "A048",
+    "name": "Acquaviva delle Fonti",
+    "fixes": 14,
+    "error_m": {
+     "median": 7.4,
+     "max": 39.4
+    },
+    "neighbourhood_radius_m": 8238
+   },
+   {
+    "comune": "A149",
+    "name": "Alberobello",
+    "fixes": 4,
+    "error_m": {
+     "median": 42.0,
+     "max": 81.9
+    },
+    "neighbourhood_radius_m": 7520
+   },
+   {
+    "comune": "A184",
+    "name": "Alessano",
+    "fixes": 2,
+    "error_m": {
+     "median": 7.7,
+     "max": 10.7
+    },
+    "neighbourhood_radius_m": 7389
+   },
+   {
+    "comune": "A185",
+    "name": "Alezio",
+    "fixes": 3,
+    "error_m": {
+     "median": 42.5,
+     "max": 50.5
+    },
+    "neighbourhood_radius_m": 7861
+   },
+   {
+    "comune": "A208",
+    "name": "Alliste",
+    "fixes": 3,
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 9199
+   },
+   {
+    "comune": "A225",
+    "name": "Altamura",
+    "fixes": 35,
+    "error_m": {
+     "median": 41.3,
+     "max": 90.7
+    },
+    "neighbourhood_radius_m": 9218
+   },
+   {
+    "comune": "A281",
+    "name": "Andrano",
+    "fixes": 2,
+    "error_m": {
+     "median": 5.0,
+     "max": 6.5
+    },
+    "neighbourhood_radius_m": 7527
+   },
+   {
+    "comune": "A425",
+    "name": "Arnesano",
+    "fixes": 2,
+    "error_m": {
+     "median": 23.7,
+     "max": 28.8
+    },
+    "neighbourhood_radius_m": 7388
+   },
+   {
+    "comune": "A514",
+    "name": "Avetrana",
+    "fixes": 5,
+    "error_m": {
+     "median": 42.1,
+     "max": 45.5
+    },
+    "neighbourhood_radius_m": 10215
+   },
+   {
+    "comune": "A662",
+    "name": "Bari",
+    "fixes": 11,
+    "error_m": {
+     "median": 8.0,
+     "max": 16.8
+    },
+    "neighbourhood_radius_m": 10075
+   },
+   {
+    "comune": "A883",
+    "name": "Bisceglie",
+    "fixes": 5,
+    "error_m": {
+     "median": 44.2,
+     "max": 44.2
+    },
+    "neighbourhood_radius_m": 14246
+   },
+   {
+    "comune": "A893",
+    "name": "Bitonto",
+    "fixes": 20,
+    "error_m": {
+     "median": 12.5,
+     "max": 90.7
+    },
+    "neighbourhood_radius_m": 9621
+   },
+   {
+    "comune": "B086",
+    "name": "Botrugno",
+    "fixes": 1,
+    "error_m": {
+     "median": 22.6,
+     "max": 22.6
+    },
+    "neighbourhood_radius_m": 7401
+   },
+   {
+    "comune": "B180",
+    "name": "Brindisi",
+    "fixes": 26,
+    "error_m": {
+     "median": 24.5,
+     "max": 32.1
+    },
+    "neighbourhood_radius_m": 8677
+   },
+   {
+    "comune": "B357",
+    "name": "Cagnano Varano",
+    "fixes": 10,
+    "error_m": {
+     "median": 13.3,
+     "max": 13.3
+    },
+    "neighbourhood_radius_m": 83627
+   },
+   {
+    "comune": "B506",
+    "name": "Campi Salentina",
+    "fixes": 7,
+    "error_m": {
+     "median": 6.2,
+     "max": 9.8
+    },
+    "neighbourhood_radius_m": 7085
+   },
+   {
+    "comune": "B616",
+    "name": "Cannole",
+    "fixes": 2,
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    },
+    "neighbourhood_radius_m": 7702
+   },
+   {
+    "comune": "B716",
+    "name": "Capurso",
+    "fixes": 2,
+    "error_m": {
+     "median": 19.9,
+     "max": 23.1
+    },
+    "neighbourhood_radius_m": 10581
+   },
+   {
+    "comune": "B792",
+    "name": "Carmiano",
+    "fixes": 2,
+    "error_m": {
+     "median": 17.6,
+     "max": 17.6
+    },
+    "neighbourhood_radius_m": 7078
+   },
+   {
+    "comune": "B808",
+    "name": "Carosino",
+    "fixes": 1,
+    "error_m": {
+     "median": 84.1,
+     "max": 84.1
+    },
+    "neighbourhood_radius_m": 8952
+   },
+   {
+    "comune": "B809",
+    "name": "Carovigno",
+    "fixes": 12,
+    "error_m": {
+     "median": 13.1,
+     "max": 17.5
+    },
+    "neighbourhood_radius_m": 8811
+   },
+   {
+    "comune": "B822",
+    "name": "Carpignano Salentino",
+    "fixes": 5,
+    "error_m": {
+     "median": 49.0,
+     "max": 66.9
+    },
+    "neighbourhood_radius_m": 7971
+   },
+   {
+    "comune": "B936",
+    "name": "Casarano",
+    "fixes": 3,
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 7713
+   },
+   {
+    "comune": "B998",
+    "name": "Cassano delle Murge",
+    "fixes": 10,
+    "error_m": {
+     "median": 12.9,
+     "max": 22.6
+    },
+    "neighbourhood_radius_m": 8960
+   },
+   {
+    "comune": "C134",
+    "name": "Castellana Grotte",
+    "fixes": 9,
+    "error_m": {
+     "median": 14.9,
+     "max": 19.1
+    },
+    "neighbourhood_radius_m": 6671
+   },
+   {
+    "comune": "C334",
+    "name": "Castri di Lecce",
+    "fixes": 2,
+    "error_m": {
+     "median": 12.9,
+     "max": 20.4
+    },
+    "neighbourhood_radius_m": 7460
+   },
+   {
+    "comune": "C336",
+    "name": "Castrignano del Capo",
+    "fixes": 3,
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    },
+    "neighbourhood_radius_m": 10642
+   },
+   {
+    "comune": "C377",
+    "name": "Cavallino",
+    "fixes": 2,
+    "error_m": {
+     "median": 18.5,
+     "max": 18.5
+    },
+    "neighbourhood_radius_m": 6895
+   },
+   {
+    "comune": "C424",
+    "name": "Ceglie Messapica",
+    "fixes": 15,
+    "error_m": {
+     "median": 13.4,
+     "max": 14.0
+    },
+    "neighbourhood_radius_m": 8002
+   },
+   {
+    "comune": "C436",
+    "name": "Cellamare",
+    "fixes": 1,
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
+    },
+    "neighbourhood_radius_m": 10582
+   },
+   {
+    "comune": "C448",
+    "name": "Cellino San Marco",
+    "fixes": 4,
+    "error_m": {
+     "median": 16.1,
+     "max": 19.7
+    },
+    "neighbourhood_radius_m": 8810
+   },
+   {
+    "comune": "C741",
+    "name": "Cisternino",
+    "fixes": 6,
+    "error_m": {
+     "median": 11.0,
+     "max": 18.2
+    },
+    "neighbourhood_radius_m": 7640
+   },
+   {
+    "comune": "C865",
+    "name": "Collepasso",
+    "fixes": 1,
+    "error_m": {
+     "median": 19.3,
+     "max": 19.3
+    },
+    "neighbourhood_radius_m": 8036
+   },
+   {
+    "comune": "C975",
+    "name": "Conversano",
+    "fixes": 16,
+    "error_m": {
+     "median": 12.3,
+     "max": 15.7
+    },
+    "neighbourhood_radius_m": 7163
+   },
+   {
+    "comune": "C978",
+    "name": "Copertino",
+    "fixes": 5,
+    "error_m": {
+     "median": 37.1,
+     "max": 37.1
+    },
+    "neighbourhood_radius_m": 7795
+   },
+   {
+    "comune": "D006",
+    "name": "Corigliano d'Otranto",
+    "fixes": 3,
+    "error_m": {
+     "median": 27.8,
+     "max": 94.3
+    },
+    "neighbourhood_radius_m": 7721
+   },
+   {
+    "comune": "D044",
+    "name": "Corsano",
+    "fixes": 1,
+    "error_m": {
+     "median": 5.2,
+     "max": 5.2
+    },
+    "neighbourhood_radius_m": 10147
+   },
+   {
+    "comune": "D171",
+    "name": "Crispiano",
+    "fixes": 9,
+    "error_m": {
+     "median": 39.0,
+     "max": 106.8
+    },
+    "neighbourhood_radius_m": 8847
+   },
+   {
+    "comune": "D223",
+    "name": "Cursi",
+    "fixes": 2,
+    "error_m": {
+     "median": 81.9,
+     "max": 94.3
+    },
+    "neighbourhood_radius_m": 7112
+   },
+   {
+    "comune": "D237",
+    "name": "Cutrofiano",
+    "fixes": 6,
+    "error_m": {
+     "median": 24.5,
+     "max": 44.5
+    },
+    "neighbourhood_radius_m": 7811
+   },
+   {
+    "comune": "D305",
+    "name": "Diso",
+    "fixes": 1,
+    "error_m": {
+     "median": 9.9,
+     "max": 9.9
+    },
+    "neighbourhood_radius_m": 8425
+   },
+   {
+    "comune": "D422",
+    "name": "Erchie",
+    "fixes": 4,
+    "error_m": {
+     "median": 24.9,
+     "max": 29.1
+    },
+    "neighbourhood_radius_m": 8308
+   },
+   {
+    "comune": "D463",
+    "name": "Faggiano",
+    "fixes": 1,
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    },
+    "neighbourhood_radius_m": 10461
+   },
+   {
+    "comune": "D508",
+    "name": "Fasano",
+    "fixes": 10,
+    "error_m": {
+     "median": 21.2,
+     "max": 22.6
+    },
+    "neighbourhood_radius_m": 8632
+   },
+   {
+    "comune": "D754",
+    "name": "Fragagnano",
+    "fixes": 2,
+    "error_m": {
+     "median": 11.9,
+     "max": 11.9
+    },
+    "neighbourhood_radius_m": 9460
+   },
+   {
+    "comune": "D761",
+    "name": "Francavilla Fontana",
+    "fixes": 18,
+    "error_m": {
+     "median": 10.7,
+     "max": 17.4
+    },
+    "neighbourhood_radius_m": 8098
+   },
+   {
+    "comune": "D851",
+    "name": "Gagliano del Capo",
+    "fixes": 2,
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    },
+    "neighbourhood_radius_m": 11103
+   },
+   {
+    "comune": "D862",
+    "name": "Galatina",
+    "fixes": 5,
+    "error_m": {
+     "median": 32.4,
+     "max": 32.4
+    },
+    "neighbourhood_radius_m": 8359
+   },
+   {
+    "comune": "D863",
+    "name": "Galatone",
+    "fixes": 5,
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    },
+    "neighbourhood_radius_m": 7831
+   },
+   {
+    "comune": "D883",
+    "name": "Gallipoli",
+    "fixes": 6,
+    "error_m": {
+     "median": 42.5,
+     "max": 50.5
+    },
+    "neighbourhood_radius_m": 9136
+   },
+   {
+    "comune": "E036",
+    "name": "Ginosa",
+    "fixes": 9,
+    "error_m": {
+     "median": 6.8,
+     "max": 15.9
+    },
+    "neighbourhood_radius_m": 21000
+   },
+   {
+    "comune": "E038",
+    "name": "Gioia del Colle",
+    "fixes": 22,
+    "error_m": {
+     "median": 21.8,
+     "max": 93.2
+    },
+    "neighbourhood_radius_m": 7716
+   },
+   {
+    "comune": "E047",
+    "name": "Giovinazzo",
+    "fixes": 6,
+    "error_m": {
+     "median": 12.5,
+     "max": 12.5
+    },
+    "neighbourhood_radius_m": 10841
+   },
+   {
+    "comune": "E061",
+    "name": "Giurdignano",
+    "fixes": 2,
+    "error_m": {
+     "median": 12.9,
+     "max": 12.9
+    },
+    "neighbourhood_radius_m": 8571
+   },
+   {
+    "comune": "E205",
+    "name": "Grottaglie",
+    "fixes": 8,
+    "error_m": {
+     "median": 104.3,
+     "max": 104.3
+    },
+    "neighbourhood_radius_m": 8676
+   },
+   {
+    "comune": "E469",
+    "name": "Laterza",
+    "fixes": 8,
+    "error_m": {
+     "median": 11.5,
+     "max": 93.2
+    },
+    "neighbourhood_radius_m": 13621
+   },
+   {
+    "comune": "E471",
+    "name": "Latiano",
+    "fixes": 6,
+    "error_m": {
+     "median": 17.4,
+     "max": 82.4
+    },
+    "neighbourhood_radius_m": 7824
+   },
+   {
+    "comune": "E506",
+    "name": "Lecce",
+    "fixes": 19,
+    "error_m": {
+     "median": 18.7,
+     "max": 37.3
+    },
+    "neighbourhood_radius_m": 7378
+   },
+   {
+    "comune": "E537",
+    "name": "Leporano",
+    "fixes": 1,
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    },
+    "neighbourhood_radius_m": 13547
+   },
+   {
+    "comune": "E538",
+    "name": "Lequile",
+    "fixes": 5,
+    "error_m": {
+     "median": 32.4,
+     "max": 39.3
+    },
+    "neighbourhood_radius_m": 7592
+   },
+   {
+    "comune": "E563",
+    "name": "Leverano",
+    "fixes": 6,
+    "error_m": {
+     "median": 28.8,
+     "max": 37.1
+    },
+    "neighbourhood_radius_m": 7499
+   },
+   {
+    "comune": "E629",
+    "name": "Lizzanello",
+    "fixes": 3,
+    "error_m": {
+     "median": 6.2,
+     "max": 18.5
+    },
+    "neighbourhood_radius_m": 7175
+   },
+   {
+    "comune": "E630",
+    "name": "Lizzano",
+    "fixes": 2,
+    "error_m": {
+     "median": 16.1,
+     "max": 16.9
+    },
+    "neighbourhood_radius_m": 11021
+   },
+   {
+    "comune": "E645",
+    "name": "Locorotondo",
+    "fixes": 4,
+    "error_m": {
+     "median": 18.2,
+     "max": 19.8
+    },
+    "neighbourhood_radius_m": 8260
+   },
+   {
+    "comune": "E815",
+    "name": "Maglie",
+    "fixes": 3,
+    "error_m": {
+     "median": 69.5,
+     "max": 69.5
+    },
+    "neighbourhood_radius_m": 6982
+   },
+   {
+    "comune": "E882",
+    "name": "Manduria",
+    "fixes": 14,
+    "error_m": {
+     "median": 23.2,
+     "max": 93.1
+    },
+    "neighbourhood_radius_m": 9121
+   },
+   {
+    "comune": "E979",
+    "name": "Martano",
+    "fixes": 3,
+    "error_m": {
+     "median": 49.0,
+     "max": 94.3
+    },
+    "neighbourhood_radius_m": 8188
+   },
+   {
+    "comune": "E984",
+    "name": "Martignano",
+    "fixes": 1,
+    "error_m": {
+     "median": 20.4,
+     "max": 20.4
+    },
+    "neighbourhood_radius_m": 8670
+   },
+   {
+    "comune": "E986",
+    "name": "Martina Franca",
+    "fixes": 28,
+    "error_m": {
+     "median": 39.0,
+     "max": 104.3
+    },
+    "neighbourhood_radius_m": 8119
+   },
+   {
+    "comune": "E995",
+    "name": "Maruggio",
+    "fixes": 4,
+    "error_m": {
+     "median": 111.4,
+     "max": 111.4
+    },
+    "neighbourhood_radius_m": 12330
+   },
+   {
+    "comune": "F027",
+    "name": "Massafra",
+    "fixes": 7,
+    "error_m": {
+     "median": 34.8,
+     "max": 69.1
+    },
+    "neighbourhood_radius_m": 10709
+   },
+   {
+    "comune": "F054",
+    "name": "Matino",
+    "fixes": 3,
+    "error_m": {
+     "median": 39.9,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 7252
+   },
+   {
+    "comune": "F101",
+    "name": "Melendugno",
+    "fixes": 9,
+    "error_m": {
+     "median": 41.6,
+     "max": 41.6
+    },
+    "neighbourhood_radius_m": 8129
+   },
+   {
+    "comune": "F109",
+    "name": "Melissano",
+    "fixes": 3,
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 7178
+   },
+   {
+    "comune": "F117",
+    "name": "Melpignano",
+    "fixes": 1,
+    "error_m": {
+     "median": 27.8,
+     "max": 27.8
+    },
+    "neighbourhood_radius_m": 7717
+   },
+   {
+    "comune": "F152",
+    "name": "Mesagne",
+    "fixes": 13,
+    "error_m": {
+     "median": 25.4,
+     "max": 142.3
+    },
+    "neighbourhood_radius_m": 7969
+   },
+   {
+    "comune": "F194",
+    "name": "Miggiano",
+    "fixes": 1,
+    "error_m": {
+     "median": 4.8,
+     "max": 4.8
+    },
+    "neighbourhood_radius_m": 6868
+   },
+   {
+    "comune": "F220",
+    "name": "Minervino Murge",
+    "fixes": 17,
+    "error_m": {
+     "median": 6.1,
+     "max": 16.6
+    },
+    "neighbourhood_radius_m": 30545
+   },
+   {
+    "comune": "F221",
+    "name": "Minervino di Lecce",
+    "fixes": 1,
+    "error_m": {
+     "median": 59.4,
+     "max": 59.4
+    },
+    "neighbourhood_radius_m": 7985
    },
    {
     "comune": "F262",
     "name": "Modugno",
-    "istat_to_cadastre": {
-     "p95": 42.4,
-     "max": 114.7,
-     "n": 2130
+    "fixes": 3,
+    "error_m": {
+     "median": 12.5,
+     "max": 12.5
     },
-    "cadastre_to_istat": {
-     "p95": 47.9,
-     "max": 288.8,
-     "n": 2239
-    }
+    "neighbourhood_radius_m": 9859
    },
    {
     "comune": "F280",
     "name": "Mola di Bari",
-    "istat_to_cadastre": {
-     "p95": 88.9,
-     "max": 167.8,
-     "n": 2275
+    "fixes": 4,
+    "error_m": {
+     "median": 23.2,
+     "max": 46.8
     },
-    "cadastre_to_istat": {
-     "p95": 115.1,
-     "max": 267.9,
-     "n": 2341
-    }
+    "neighbourhood_radius_m": 11210
    },
    {
     "comune": "F376",
     "name": "Monopoli",
-    "istat_to_cadastre": {
-     "p95": 38.2,
-     "max": 141.9,
-     "n": 6689
+    "fixes": 27,
+    "error_m": {
+     "median": 19.1,
+     "max": 50.0
     },
-    "cadastre_to_istat": {
-     "p95": 168.4,
-     "max": 721.2,
-     "n": 7514
-    }
+    "neighbourhood_radius_m": 6573
+   },
+   {
+    "comune": "F531",
+    "name": "Monteiasi",
+    "fixes": 1,
+    "error_m": {
+     "median": 104.3,
+     "max": 104.3
+    },
+    "neighbourhood_radius_m": 9193
+   },
+   {
+    "comune": "F563",
+    "name": "Montemesola",
+    "fixes": 1,
+    "error_m": {
+     "median": 104.3,
+     "max": 104.3
+    },
+    "neighbourhood_radius_m": 9003
+   },
+   {
+    "comune": "F604",
+    "name": "Monteroni di Lecce",
+    "fixes": 1,
+    "error_m": {
+     "median": 21.6,
+     "max": 21.6
+    },
+    "neighbourhood_radius_m": 6857
+   },
+   {
+    "comune": "F623",
+    "name": "Montesano Salentino",
+    "fixes": 2,
+    "error_m": {
+     "median": 3.7,
+     "max": 3.8
+    },
+    "neighbourhood_radius_m": 7166
+   },
+   {
+    "comune": "F716",
+    "name": "Morciano di Leuca",
+    "fixes": 3,
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    },
+    "neighbourhood_radius_m": 8327
    },
    {
     "comune": "F784",
     "name": "Mottola",
-    "istat_to_cadastre": {
-     "p95": 82.0,
-     "max": 1217.7,
-     "n": 6765
+    "fixes": 14,
+    "error_m": {
+     "median": 30.4,
+     "max": 69.1
     },
-    "cadastre_to_istat": {
-     "p95": 57.4,
-     "max": 113.6,
-     "n": 6441
-    }
+    "neighbourhood_radius_m": 10288
+   },
+   {
+    "comune": "F816",
+    "name": "Muro Leccese",
+    "fixes": 3,
+    "error_m": {
+     "median": 23.9,
+     "max": 23.9
+    },
+    "neighbourhood_radius_m": 7302
+   },
+   {
+    "comune": "F842",
+    "name": "Nardò",
+    "fixes": 18,
+    "error_m": {
+     "median": 39.6,
+     "max": 79.5
+    },
+    "neighbourhood_radius_m": 9006
+   },
+   {
+    "comune": "F881",
+    "name": "Neviano",
+    "fixes": 2,
+    "error_m": {
+     "median": 30.4,
+     "max": 42.5
+    },
+    "neighbourhood_radius_m": 7875
    },
    {
     "comune": "F915",
     "name": "Noci",
-    "istat_to_cadastre": {
-     "p95": 41.8,
-     "max": 148.7,
-     "n": 6985
+    "fixes": 9,
+    "error_m": {
+     "median": 51.5,
+     "max": 65.0
     },
-    "cadastre_to_istat": {
-     "p95": 42.6,
-     "max": 97.6,
-     "n": 7144
-    }
+    "neighbourhood_radius_m": 8181
+   },
+   {
+    "comune": "F916",
+    "name": "Nociglia",
+    "fixes": 1,
+    "error_m": {
+     "median": 22.6,
+     "max": 22.6
+    },
+    "neighbourhood_radius_m": 7229
    },
    {
     "comune": "F923",
     "name": "Noicattaro",
-    "istat_to_cadastre": {
-     "p95": 53.0,
-     "max": 126.6,
-     "n": 2395
+    "fixes": 5,
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
     },
-    "cadastre_to_istat": {
-     "p95": 57.4,
-     "max": 127.0,
-     "n": 2431
-    }
+    "neighbourhood_radius_m": 10883
+   },
+   {
+    "comune": "F970",
+    "name": "Novoli",
+    "fixes": 4,
+    "error_m": {
+     "median": 26.0,
+     "max": 37.3
+    },
+    "neighbourhood_radius_m": 6656
+   },
+   {
+    "comune": "G098",
+    "name": "Oria",
+    "fixes": 5,
+    "error_m": {
+     "median": 17.4,
+     "max": 82.5
+    },
+    "neighbourhood_radius_m": 8137
+   },
+   {
+    "comune": "G136",
+    "name": "Ortelle",
+    "fixes": 1,
+    "error_m": {
+     "median": 9.9,
+     "max": 9.9
+    },
+    "neighbourhood_radius_m": 8837
+   },
+   {
+    "comune": "G187",
+    "name": "Ostuni",
+    "fixes": 21,
+    "error_m": {
+     "median": 13.1,
+     "max": 17.5
+    },
+    "neighbourhood_radius_m": 7707
+   },
+   {
+    "comune": "G188",
+    "name": "Otranto",
+    "fixes": 8,
+    "error_m": {
+     "median": 38.0,
+     "max": 59.4
+    },
+    "neighbourhood_radius_m": 9613
+   },
+   {
+    "comune": "G285",
+    "name": "Palmariggi",
+    "fixes": 1,
+    "error_m": {
+     "median": 11.3,
+     "max": 11.3
+    },
+    "neighbourhood_radius_m": 7459
+   },
+   {
+    "comune": "G325",
+    "name": "Parabita",
+    "fixes": 1,
+    "error_m": {
+     "median": 19.3,
+     "max": 19.3
+    },
+    "neighbourhood_radius_m": 8229
+   },
+   {
+    "comune": "G378",
+    "name": "Patù",
+    "fixes": 2,
+    "error_m": {
+     "median": 15.9,
+     "max": 15.9
+    },
+    "neighbourhood_radius_m": 10266
+   },
+   {
+    "comune": "G751",
+    "name": "Poggiardo",
+    "fixes": 1,
+    "error_m": {
+     "median": 9.9,
+     "max": 9.9
+    },
+    "neighbourhood_radius_m": 7961
    },
    {
     "comune": "G787",
     "name": "Polignano a Mare",
-    "istat_to_cadastre": {
-     "p95": 45.7,
-     "max": 162.5,
-     "n": 4735
+    "fixes": 9,
+    "error_m": {
+     "median": 12.0,
+     "max": 50.0
     },
-    "cadastre_to_istat": {
-     "p95": 53.2,
-     "max": 177.0,
-     "n": 5060
-    }
+    "neighbourhood_radius_m": 8354
+   },
+   {
+    "comune": "H090",
+    "name": "Pulsano",
+    "fixes": 3,
+    "error_m": {
+     "median": 84.5,
+     "max": 84.5
+    },
+    "neighbourhood_radius_m": 12148
    },
    {
     "comune": "H096",
     "name": "Putignano",
-    "istat_to_cadastre": {
-     "p95": 32.9,
-     "max": 89.6,
-     "n": 6837
+    "fixes": 15,
+    "error_m": {
+     "median": 17.9,
+     "max": 65.0
     },
-    "cadastre_to_istat": {
-     "p95": 36.3,
-     "max": 132.8,
-     "n": 7169
-    }
+    "neighbourhood_radius_m": 7008
+   },
+   {
+    "comune": "H147",
+    "name": "Racale",
+    "fixes": 3,
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 8669
+   },
+   {
+    "comune": "H409",
+    "name": "Roccaforzata",
+    "fixes": 1,
+    "error_m": {
+     "median": 61.6,
+     "max": 61.6
+    },
+    "neighbourhood_radius_m": 9362
+   },
+   {
+    "comune": "H632",
+    "name": "Ruffano",
+    "fixes": 2,
+    "error_m": {
+     "median": 12.9,
+     "max": 17.9
+    },
+    "neighbourhood_radius_m": 7462
+   },
+   {
+    "comune": "H708",
+    "name": "Salice Salentino",
+    "fixes": 4,
+    "error_m": {
+     "median": 62.5,
+     "max": 79.5
+    },
+    "neighbourhood_radius_m": 9284
+   },
+   {
+    "comune": "H729",
+    "name": "Salve",
+    "fixes": 3,
+    "error_m": {
+     "median": 17.9,
+     "max": 17.9
+    },
+    "neighbourhood_radius_m": 9257
+   },
+   {
+    "comune": "H757",
+    "name": "Sanarica",
+    "fixes": 1,
+    "error_m": {
+     "median": 59.4,
+     "max": 59.4
+    },
+    "neighbourhood_radius_m": 7571
+   },
+   {
+    "comune": "H822",
+    "name": "San Donaci",
+    "fixes": 2,
+    "error_m": {
+     "median": 12.1,
+     "max": 17.5
+    },
+    "neighbourhood_radius_m": 9325
+   },
+   {
+    "comune": "H826",
+    "name": "San Donato di Lecce",
+    "fixes": 4,
+    "error_m": {
+     "median": 18.5,
+     "max": 41.7
+    },
+    "neighbourhood_radius_m": 7846
+   },
+   {
+    "comune": "H882",
+    "name": "San Giorgio Ionico",
+    "fixes": 2,
+    "error_m": {
+     "median": 84.1,
+     "max": 84.1
+    },
+    "neighbourhood_radius_m": 10090
+   },
+   {
+    "comune": "I018",
+    "name": "San Marzano di San Giuseppe",
+    "fixes": 3,
+    "error_m": {
+     "median": 9.4,
+     "max": 10.3
+    },
+    "neighbourhood_radius_m": 8821
+   },
+   {
+    "comune": "I045",
+    "name": "San Michele Salentino",
+    "fixes": 3,
+    "error_m": {
+     "median": 12.3,
+     "max": 17.4
+    },
+    "neighbourhood_radius_m": 7856
+   },
+   {
+    "comune": "I059",
+    "name": "Sannicola",
+    "fixes": 3,
+    "error_m": {
+     "median": 42.5,
+     "max": 42.5
+    },
+    "neighbourhood_radius_m": 8490
+   },
+   {
+    "comune": "I066",
+    "name": "San Pancrazio Salentino",
+    "fixes": 5,
+    "error_m": {
+     "median": 29.1,
+     "max": 29.1
+    },
+    "neighbourhood_radius_m": 9153
+   },
+   {
+    "comune": "I119",
+    "name": "San Pietro Vernotico",
+    "fixes": 5,
+    "error_m": {
+     "median": 32.1,
+     "max": 32.1
+    },
+    "neighbourhood_radius_m": 8927
+   },
+   {
+    "comune": "I172",
+    "name": "Santa Cesarea Terme",
+    "fixes": 4,
+    "error_m": {
+     "median": 12.6,
+     "max": 12.6
+    },
+    "neighbourhood_radius_m": 10887
    },
    {
     "comune": "I330",
     "name": "Santeramo in Colle",
-    "istat_to_cadastre": {
-     "p95": 41.0,
-     "max": 164.9,
-     "n": 6900
+    "fixes": 10,
+    "error_m": {
+     "median": 67.3,
+     "max": 93.2
     },
-    "cadastre_to_istat": {
-     "p95": 54.3,
-     "max": 402.6,
-     "n": 7370
-    }
+    "neighbourhood_radius_m": 9294
+   },
+   {
+    "comune": "I396",
+    "name": "San Vito dei Normanni",
+    "fixes": 6,
+    "error_m": {
+     "median": 13.0,
+     "max": 14.2
+    },
+    "neighbourhood_radius_m": 7985
+   },
+   {
+    "comune": "I467",
+    "name": "Sava",
+    "fixes": 4,
+    "error_m": {
+     "median": 53.0,
+     "max": 111.4
+    },
+    "neighbourhood_radius_m": 8900
+   },
+   {
+    "comune": "I549",
+    "name": "Scorrano",
+    "fixes": 4,
+    "error_m": {
+     "median": 34.2,
+     "max": 69.5
+    },
+    "neighbourhood_radius_m": 7575
+   },
+   {
+    "comune": "I559",
+    "name": "Seclì",
+    "fixes": 1,
+    "error_m": {
+     "median": 19.4,
+     "max": 19.4
+    },
+    "neighbourhood_radius_m": 7866
+   },
+   {
+    "comune": "I800",
+    "name": "Soleto",
+    "fixes": 2,
+    "error_m": {
+     "median": 94.3,
+     "max": 94.3
+    },
+    "neighbourhood_radius_m": 8666
+   },
+   {
+    "comune": "I887",
+    "name": "Specchia",
+    "fixes": 3,
+    "error_m": {
+     "median": 6.8,
+     "max": 16.8
+    },
+    "neighbourhood_radius_m": 7351
+   },
+   {
+    "comune": "I923",
+    "name": "Spongano",
+    "fixes": 1,
+    "error_m": {
+     "median": 6.5,
+     "max": 6.5
+    },
+    "neighbourhood_radius_m": 7953
+   },
+   {
+    "comune": "I930",
+    "name": "Squinzano",
+    "fixes": 3,
+    "error_m": {
+     "median": 13.2,
+     "max": 13.2
+    },
+    "neighbourhood_radius_m": 7046
+   },
+   {
+    "comune": "I950",
+    "name": "Sternatia",
+    "fixes": 2,
+    "error_m": {
+     "median": 41.7,
+     "max": 41.7
+    },
+    "neighbourhood_radius_m": 8596
+   },
+   {
+    "comune": "L008",
+    "name": "Supersano",
+    "fixes": 4,
+    "error_m": {
+     "median": 21.0,
+     "max": 22.6
+    },
+    "neighbourhood_radius_m": 7855
+   },
+   {
+    "comune": "L010",
+    "name": "Surano",
+    "fixes": 3,
+    "error_m": {
+     "median": 7.1,
+     "max": 8.9
+    },
+    "neighbourhood_radius_m": 7609
+   },
+   {
+    "comune": "L011",
+    "name": "Surbo",
+    "fixes": 4,
+    "error_m": {
+     "median": 37.3,
+     "max": 37.3
+    },
+    "neighbourhood_radius_m": 7369
    },
    {
     "comune": "L049",
     "name": "Taranto",
-    "istat_to_cadastre": {
-     "p95": 94.3,
-     "max": 486.0,
-     "n": 17057
+    "fixes": 15,
+    "error_m": {
+     "median": 84.3,
+     "max": 106.8
     },
-    "cadastre_to_istat": {
-     "p95": 107.7,
-     "max": 1811.4,
-     "n": 17429
-    }
+    "neighbourhood_radius_m": 11002
+   },
+   {
+    "comune": "L064",
+    "name": "Taurisano",
+    "fixes": 2,
+    "error_m": {
+     "median": 17.9,
+     "max": 17.9
+    },
+    "neighbourhood_radius_m": 7623
+   },
+   {
+    "comune": "L074",
+    "name": "Taviano",
+    "fixes": 3,
+    "error_m": {
+     "median": 44.7,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 8099
+   },
+   {
+    "comune": "L166",
+    "name": "Tiggiano",
+    "fixes": 1,
+    "error_m": {
+     "median": 10.7,
+     "max": 10.7
+    },
+    "neighbourhood_radius_m": 8030
+   },
+   {
+    "comune": "L213",
+    "name": "Torchiarolo",
+    "fixes": 3,
+    "error_m": {
+     "median": 32.1,
+     "max": 32.1
+    },
+    "neighbourhood_radius_m": 8662
+   },
+   {
+    "comune": "L280",
+    "name": "Torre Santa Susanna",
+    "fixes": 5,
+    "error_m": {
+     "median": 29.1,
+     "max": 142.3
+    },
+    "neighbourhood_radius_m": 8122
+   },
+   {
+    "comune": "L294",
+    "name": "Torricella",
+    "fixes": 2,
+    "error_m": {
+     "median": 111.4,
+     "max": 111.4
+    },
+    "neighbourhood_radius_m": 11516
    },
    {
     "comune": "L328",
     "name": "Trani",
-    "istat_to_cadastre": {
-     "p95": 40.5,
-     "max": 123.6,
-     "n": 1537
+    "fixes": 13,
+    "error_m": {
+     "median": 44.2,
+     "max": 44.2
     },
-    "cadastre_to_istat": {
-     "p95": 41.4,
-     "max": 121.2,
-     "n": 1590
-    }
+    "neighbourhood_radius_m": 21443
+   },
+   {
+    "comune": "L383",
+    "name": "Trepuzzi",
+    "fixes": 6,
+    "error_m": {
+     "median": 32.9,
+     "max": 37.3
+    },
+    "neighbourhood_radius_m": 6518
+   },
+   {
+    "comune": "L419",
+    "name": "Tricase",
+    "fixes": 6,
+    "error_m": {
+     "median": 4.6,
+     "max": 10.7
+    },
+    "neighbourhood_radius_m": 7801
    },
    {
     "comune": "L425",
     "name": "Triggiano",
-    "istat_to_cadastre": {
-     "p95": 63.4,
-     "max": 275.6,
-     "n": 2725
+    "fixes": 2,
+    "error_m": {
+     "median": 23.1,
+     "max": 23.1
     },
-    "cadastre_to_istat": {
-     "p95": 59.5,
-     "max": 148.1,
-     "n": 2734
-    }
+    "neighbourhood_radius_m": 10359
+   },
+   {
+    "comune": "L462",
+    "name": "Tuglie",
+    "fixes": 2,
+    "error_m": {
+     "median": 27.2,
+     "max": 42.5
+    },
+    "neighbourhood_radius_m": 7551
    },
    {
     "comune": "L472",
     "name": "Turi",
-    "istat_to_cadastre": {
-     "p95": 30.3,
-     "max": 82.2,
-     "n": 2415
+    "fixes": 9,
+    "error_m": {
+     "median": 15.7,
+     "max": 21.4
     },
-    "cadastre_to_istat": {
-     "p95": 33.4,
-     "max": 128.6,
-     "n": 2516
-    }
+    "neighbourhood_radius_m": 8069
+   },
+   {
+    "comune": "L484",
+    "name": "Ugento",
+    "fixes": 11,
+    "error_m": {
+     "median": 25.1,
+     "max": 44.7
+    },
+    "neighbourhood_radius_m": 8017
+   },
+   {
+    "comune": "L485",
+    "name": "Uggiano la Chiesa",
+    "fixes": 1,
+    "error_m": {
+     "median": 12.9,
+     "max": 12.9
+    },
+    "neighbourhood_radius_m": 8290
    },
    {
     "comune": "L571",
     "name": "Valenzano",
-    "istat_to_cadastre": {
-     "p95": 46.7,
-     "max": 70.4,
-     "n": 1519
+    "fixes": 2,
+    "error_m": {
+     "median": 19.9,
+     "max": 23.1
     },
-    "cadastre_to_istat": {
-     "p95": 51.3,
-     "max": 140.2,
-     "n": 1593
-    }
+    "neighbourhood_radius_m": 10982
+   },
+   {
+    "comune": "L711",
+    "name": "Veglie",
+    "fixes": 4,
+    "error_m": {
+     "median": 79.5,
+     "max": 79.5
+    },
+    "neighbourhood_radius_m": 7763
+   },
+   {
+    "comune": "L776",
+    "name": "Vernole",
+    "fixes": 9,
+    "error_m": {
+     "median": 18.2,
+     "max": 49.0
+    },
+    "neighbourhood_radius_m": 8263
+   },
+   {
+    "comune": "L920",
+    "name": "Villa Castelli",
+    "fixes": 4,
+    "error_m": {
+     "median": 13.9,
+     "max": 18.2
+    },
+    "neighbourhood_radius_m": 8355
+   },
+   {
+    "comune": "M263",
+    "name": "Porto Cesareo",
+    "fixes": 4,
+    "error_m": {
+     "median": 60.8,
+     "max": 79.5
+    },
+    "neighbourhood_radius_m": 10218
+   },
+   {
+    "comune": "M264",
+    "name": "San Cassiano",
+    "fixes": 1,
+    "error_m": {
+     "median": 23.6,
+     "max": 23.6
+    },
+    "neighbourhood_radius_m": 7498
    },
    {
     "comune": "M298",
     "name": "Statte",
-    "istat_to_cadastre": {
-     "p95": 126.7,
-     "max": 338.6,
-     "n": 4576
+    "fixes": 5,
+    "error_m": {
+     "median": 40.8,
+     "max": 103.0
     },
-    "cadastre_to_istat": {
-     "p95": 132.1,
-     "max": 347.3,
-     "n": 4617
-    }
+    "neighbourhood_radius_m": 8951
+   },
+   {
+    "comune": "M428",
+    "name": "Presicce-Acquarica",
+    "fixes": 4,
+    "error_m": {
+     "median": 17.9,
+     "max": 17.9
+    },
+    "neighbourhood_radius_m": 7593
    }
-  ]
+  ],
+  "script": "scripts/measure_positional_error.py",
+  "measured_at": "2026-09-23T03:08:03+00:00"
  }
 ]
