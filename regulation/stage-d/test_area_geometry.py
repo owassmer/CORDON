@@ -12,6 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from pyproj import CRS
+import shapely
 from shapely.geometry import Point, box
 
 from cordon_c.core import MissingInput
@@ -192,15 +193,33 @@ class ReachAndPopulation(unittest.TestCase):
         for identity, geography in supplied.items():
             with self.subTest(version=identity):
                 roles = {z.role: z for z in geography.zones}
-                if 'plants' in roles['infected'].sources:
-                    with self.assertRaises(MissingInput):       # no plants supplied here
+                if any('plants' in z.sources for z in geography.zones):
+                    with self.assertRaisesRegex(MissingInput, 'infected plants|plants'):   # none supplied here
                         geography.metric()
                 else:
-                    self.assertIsInstance(geography.metric(), MetricGeometry)
+                    area = geography.metric()
+                    self.assertIsInstance(area, MetricGeometry)
+                    self.assertGreater(area.error_m, 0)
                 self.assertIn('buffer', roles)
         ex_salento = supplied['REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1']
         self.assertEqual({z.role for z in ex_salento.zones}, {'infected', 'containment', 'focus', 'buffer'})
         self.assertIn('FOCOLAI', ' '.join(ex_salento.zone('focus').words))
+
+    @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
+    def test_unpublished_sheets_are_the_territory_no_published_sheet_covers(self):
+        sources = Sources(ROOT)
+        massafra = sources.administrative.comune(catastale='F027')
+        missing, territory = sources.unpublished(massafra)
+        self.assertEqual(missing, ('15', '16', '23'))
+        self.assertAlmostEqual(territory.area / 1e6, 10.5, delta=0.2)
+        published = [g for (c, _, _), found in sources.sheets.items() if c == 'F027' for _, g in found]
+        self.assertLess(territory.intersection(shapely.union_all(published)).area, 1.0)
+        supplied = {g.provision_version_id: g
+                    for g in adopted_geography(ROOT, decision=date(2026, 9, 22), sources=sources)}
+        area = supplied['REG-PUGLIA-U181-DIR-2024-00158:area-state-transition:v1']
+        # Sheet 16 lies partly in the infected zone and wholly in the adopted area.
+        self.assertEqual(area.unplaced, ())
+        self.assertLess(territory.difference(area.metric().geometry).area, 1.0)
 
     @unittest.skipUnless(held('cadastre-fogli'), 'the geometry sources are not in this store')
     def test_the_named_plants_are_the_subspecies_in_the_listed_units_up_to_the_act(self):

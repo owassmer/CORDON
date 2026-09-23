@@ -70,9 +70,9 @@
         "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.xlsx",
         "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer"
       ],
-      "population": "Every A area version whose interval overlaps the reach, and exactly the provinces, comuni, sheets and parcels its annex names; acquisitions in corpus/sources/areas/geometry.json.",
+      "population": "Every consumed A area version whose interval overlaps the reach, and the provinces, comuni, sheets and parcels its construction uses; acquisitions and the measured positional error of each source in corpus/sources/areas/geometry.json.",
       "reader": "cordon_d.area_geometry.adopted_geography, from cordon_d.areas and cordon_d.administrative",
-      "open": "No version yields metric geometry: lines only the acts' maps draw, the infected plants the radius acts name, and a positional error bound for the ISTAT and SIT polygons, which neither publisher states."
+      "open": "A zone the act defines around the infected plants it names is built from those plants' positions and carries their positional error, which row 1 supplies. The ISTAT and cadastral error bounds are measured by comparing the two outlines, because neither publisher states one."
     },
     {
       "id": "cadastre",

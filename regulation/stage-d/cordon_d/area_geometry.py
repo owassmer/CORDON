@@ -59,6 +59,8 @@ APPROXIMATION_M = 1.0
 LAND_REGIONS = ('Puglia', 'Basilicata')
 # A sheet the act's legend marks partial matters to C only outside the rest of the area.
 OUTSIDE_TOLERANCE_M2 = 1.0
+# Gaps narrower than this between drawn cadastral sheets are seams, not territory.
+SEAM_M = 20.0
 
 ROLES = ('infected', 'containment', 'focus', 'buffer')
 
@@ -105,6 +107,7 @@ class AdoptedGeography:
     zones: tuple[Zone, ...]
     error_m: float | None                  # the bound over every source the geometry uses
     crs: str = TARGET_CRS
+    bounds: tuple[str, ...] = ()           # the sources that carry a measured bound
 
     def zone(self, role) -> Zone | None:
         return next((z for z in self.zones if z.role == role), None)
@@ -134,7 +137,7 @@ class AdoptedGeography:
 
     def metric(self) -> MetricGeometry:
         """The adopted area as C's `MetricGeometry`, or MissingInput."""
-        if self.geometry is None:
+        if self.geometry is None or any(z.geometry is None and 'plants' in z.sources for z in self.zones):
             raise MissingInput(f'{self.provision_version_id}: the positions of the infected plants '
                                'the act names are not supplied (INPUTS row 1)')
         if self.unplaced:
@@ -142,8 +145,9 @@ class AdoptedGeography:
             raise MissingInput(f'{self.provision_version_id}: the act places part of {u.place} in its '
                                f'{u.role} zone by its map alone: "{u.quote}"')
         if self.error_m is None:
-            raise MissingInput(f'{self.provision_version_id}: the infected plants\' positions carry no '
-                               'positional error bound (INPUTS row 1)')
+            unbounded = sorted({s for z in self.zones for s in z.sources} - set(self.bounds))
+            raise MissingInput(f'{self.provision_version_id}: no positional error bound is supplied for '
+                               f'the geometry source {", ".join(unbounded)}')
         return MetricGeometry(self.geometry, UTM, self.error_m)
 
 
@@ -267,6 +271,35 @@ class Sources:
     def error_bounds(self) -> dict:
         """Measured positional error bound per geometry source family."""
         return {r['source']: float(r['error_m']) for r in records(self.root, 'positional-error')}
+
+    def unpublished(self, comune) -> tuple[tuple[str, ...], BaseGeometry | None]:
+        """The comune's sheets neither cadastre publishes, and their union.
+
+        A comune's sheets are numbered from 1 and tile its territory, so the sheets missing
+        from the published numbering occupy the territory no published sheet covers: the
+        ISTAT boundary minus every published sheet. Seams narrower than SEAM_M between drawn
+        sheets are not territory; a remaining piece that lies wholly within the ISTAT error
+        bound of the ISTAT outline is the two outlines' disagreement, not a sheet.
+        """
+        return self._unpublished.setdefault(comune.catastale, self._unpublished_of(comune))
+
+    @cached_property
+    def _unpublished(self) -> dict:
+        return {}
+
+    def _unpublished_of(self, comune):
+        held = {n: shapely.union_all([g for _, g in found]) for (c, section, n), found in self.sheets.items()
+                if c == comune.catastale and not section}
+        numbers = [int(n) for n in held if n.isdigit()]
+        missing = tuple(str(n) for n in range(1, max(numbers, default=0) + 1) if str(n) not in held)
+        if not missing:
+            return (), None
+        territory = self.administrative.comune_geometry(comune)
+        gap = territory.difference(shapely.union_all(list(held.values())))
+        gap = gap.buffer(-SEAM_M / 2, join_style='mitre').buffer(SEAM_M / 2, join_style='mitre').intersection(gap)
+        border = territory.boundary.buffer(self.error_bounds['istat-boundaries'])
+        pieces = [p for p in getattr(gap, 'geoms', [gap]) if p.geom_type == 'Polygon' and not border.covers(p)]
+        return missing, (shapely.union_all(pieces) if pieces else None)
 
     @cached_property
     def land(self) -> BaseGeometry:
@@ -458,20 +491,23 @@ class _Builder:
                 parts.append(self.whole_comune(unit[1], unit[2]))
         return shapely.union_all(parts)
 
-    def sheet(self, comune, sheet):
-        """(extent, exact). Where neither cadastre publishes the sheet the act lists (both
-        omit Massafra 15, 16 and 23), its extent is bounded by the comune's territory that
-        no published sheet covers, which contains it; that bound is never built into a zone."""
+    def sheet(self, comune, sheet, listed=()):
+        """(extent, exact, sources). A sheet neither cadastre publishes (Massafra 15, 16 and 23) lies
+        in the comune's unpublished territory (`Sources.unpublished`), built from ISTAT and
+        the cadastre. That territory is the sheet exactly when it is the only unpublished
+        sheet, or when every unpublished sheet is listed in `listed` alike; otherwise it
+        contains the sheet."""
         features = self.sources.sheets.get((comune.catastale, sheet.section or '', sheet.number), [])
         if sheet.qualifier:
             kind, _, value = sheet.qualifier.strip('() ').upper().partition(' ')
             features = [f for f in features if f[0].get(kind) == value]
         if features:
-            self.used.add('cadastre')
-            return shapely.union_all([g for _, g in features]), True
-        held = [g for (c, _, _), found in self.sources.sheets.items() if c == comune.catastale for _, g in found]
-        territory = self.units.comune_geometry(comune)
-        return (territory.difference(shapely.union_all(held)) if held else territory), False
+            return shapely.union_all([g for _, g in features]), True, ('cadastre',)
+        missing, territory = self.sources.unpublished(comune)
+        if sheet.section or sheet.number not in missing or territory is None:
+            raise ValueError(f'{self.version.provision_version_id}: {comune.name} foglio {sheet.number} '
+                             'is neither published nor missing from the published numbering')
+        return territory, set(missing) <= set(listed), ('cadastre', 'istat-boundaries')
 
     def annex(self, role, statements, only_comune=None):
         """The zone the annex's listed units define, and its partly-included units."""
@@ -504,8 +540,11 @@ class _Builder:
                                                      f'{s.qualification}: {s.text}',
                                                      shapely.union_all(geometry) if geometry else None))
                     continue
-                geometry, exact = self.sheet(comune, sheet)
+                alike = [sh.number for sh in s.sheets if not sh.parcels and not sh.section
+                         and (sh.wholly_contained == sheet.wholly_contained or not self.legend)]
+                geometry, exact, used = self.sheet(comune, sheet, alike)
                 if (sheet.wholly_contained or not self.legend) and exact:
+                    self.used.update(used)
                     parts.append(geometry)
                 else:
                     unplaced.append(Unplaced(role, s.locator, label, f'{s.qualification}: {s.text}', geometry))
@@ -707,8 +746,10 @@ def adopted_geography(root: Path, *, decision: date, plants=None, plant_error_m:
             raise FileNotFoundError(f'{version.provision_version_id}: the act document is not in this store')
         zones = construct(sources, version, plants=plants.get(version.provision_version_id),
                           adopted=adopted[version.instrument_id])
+        bounds = tuple(sorted(sources.error_bounds)) + (('plants',) if plant_error_m is not None else ())
         yield AdoptedGeography(version.provision_version_id, version.instrument_id, version.effective_from,
-                               version.effective_to_exclusive, zones, _error(sources, zones, plant_error_m))
+                               version.effective_to_exclusive, zones, _error(sources, zones, plant_error_m),
+                               bounds=bounds)
 
 
 # --- the infected plants an act names -------------------------------------------------
