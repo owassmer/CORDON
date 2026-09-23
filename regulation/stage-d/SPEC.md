@@ -358,6 +358,14 @@ supplemental rotated view keeps the original page and its image provenance.
 without dispatch. A retained request keeps the provider and source presentation
 it actually used. Shell, web and agent tools are disabled.
 
+`read_native_text` supplies the complete native text of each PDF, page by page,
+through the authenticated Claude subscription in print mode, with tools, MCP
+servers, setting sources and session persistence disabled and API-key variables
+removed. A page without a native text layer is supplied as that fact; the
+calling reader names any limitation it causes. The request records the provider,
+the presentation and those pages. Replay, identity and schema checks are those
+above.
+
 The calling reader uses the shared store and retains the request reference beside
 its interpreted output. The transport introduces no second source inventory,
 scheduler, extraction schema or evidence-acceptance model.
@@ -431,6 +439,36 @@ removal.
 Exact retained address contexts stay replayable. Successful replay, structural
 coverage and source-address validation do not certify meaning; qualification
 needs independently read originals and the resulting consumer behaviour.
+
+## Case-prescription reading
+
+`cordon_d.case_prescriptions` supplies the `case-prescription` input from each
+order's own text, under `prescription-reading.txt`, through `read_native_text`.
+`scripts/read_prescriptions.py` replays by default and dispatches with
+`--execute`. The reading lists the removal work the operative part prescribes to
+recipients and every clause stating what follows if they do not begin or perform
+it. Every quotation, and every copied field, must occur on the page its citation
+names; otherwise the reading is refused.
+
+One record is one enforcement clause over the work it enforces: instrument,
+recipients and cohort as printed, the prescribed scope, the commencement work and
+population, the stated term as printed (number and unit word, never classified),
+its anchor, the stated consequence and commitment, the coercive population with
+its back-reference resolved within the same clause, and the executor. Work that
+no clause enforces keeps a record without a term. Work an act applies by
+reference to another order's prescription stays unknown until `apply_references`
+composes it with that order's single clause record: the recipients and scope stay
+the referring act's, and the term, populations, executor and governing
+references are the referenced order's. An act that prescribes no work to
+recipients has no record. Governing A references are every A row of the
+instrument and every row whose `corrects_instrument_ids` names it. Annex
+positions stay with `cordon_d.measures`.
+
+The rule's clause predicate holds only for an operative clause with a stated term
+running from notification, a committed consequence, a coercive population and an
+executor. A clause's own reading limit leaves it unknown. `c_result` passes C
+only the notice, commencement and lawful-dueness evidence the caller holds;
+nothing absent is supplied. Publication is not notification.
 
 ## Administrative publication records
 
