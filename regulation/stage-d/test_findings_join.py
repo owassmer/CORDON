@@ -416,6 +416,12 @@ class JoinIdentity(unittest.TestCase):
         self.assertIn('NUMERO_ORDINE', result['matches'][0]['identity_basis'])
         self.assertEqual(result['matches'][0]['row'].reference, '03158374')
 
+    def test_the_layer_row_number_never_joins_a_report_row(self):
+        result = self.run_join([['11200165', '2024-06-01']],
+            [['299761', '01/06/2024', 'Positivo', '02/06/2024']],
+            monitoring_fields={'OBJECTID': '299761'})[0]
+        self.assertEqual(result['matches'], [])
+
     def test_two_observations_carrying_the_same_publisher_identifier_stay_ambiguous(self):
         result = self.run_join(
             [['11200165', '2024-06-01'], ['11200166', '2024-06-01']],

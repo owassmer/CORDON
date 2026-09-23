@@ -14,16 +14,20 @@ from .monitoring import day as observation_day, PUBLISHER_IDENTIFIERS
 from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, load as load_relations
 
 
-_CARRIED_IDENTIFIER_FIELDS = ('ID', 'ID_CAMPIONE') + PUBLISHER_IDENTIFIERS
+# OBJECTID is the publication layer's row number. No laboratory report prints it, so an
+# equal value could only be a coincidence that attaches a result to the wrong plant.
+_CARRIED_IDENTIFIER_FIELDS = tuple(field for field in ('ID', 'ID_CAMPIONE') + PUBLISHER_IDENTIFIERS
+                                   if field != 'OBJECTID')
 
 
 def _observation_identifier_literals(group):
-    """Reference plus every publisher-carried identifier value, as literals.
+    """Reference plus every publisher-carried identifier value a report can print, as literals.
 
     Values stay under the field that printed them. Nothing is merged into
     `reference`.
     """
-    carried = group.carried_identifiers()
+    carried = tuple((field, value) for field, value in group.carried_identifiers()
+                    if field in _CARRIED_IDENTIFIER_FIELDS)
     literals = {value for _, value in carried}
     if group.reference is not None:
         literals.add(group.reference)
