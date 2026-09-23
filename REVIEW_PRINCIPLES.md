@@ -20,7 +20,7 @@ Where a unit reads a source family, a review that consults only the unit's outpu
 
 Every unit begins as a plan in its pull request body, written from the template. One independent reviewer reads the plan against `AGENTS.md`, `DESIGN_PRINCIPLES.md`, the applicable stage contract, this document, `state/CURRENT.json` and the owners the plan names, using the plan brief below. The brief is the same every time; alignment comes from the constitution, not from per-unit steering.
 
-One cycle: findings are adjudicated, the plan is revised in place, and the revision is recorded under "Changes since plan review". A second dispatch is warranted only if the decision served or the unit boundary changed. A plan that changes no meaning — repository mechanics, a projection, a wording repair — may propose plan review only; the plan reviewer judges that claim and the adjudicator records it on the pull request. A PASS plan carries weight in implementation review. It is not immune: when the work shows the plan wrong, the plan is corrected and the correction disclosed.
+One cycle: findings are adjudicated, the plan is revised in place, and the revision is recorded under "Changes since plan review". A second dispatch is warranted only if the decision served or the unit boundary changed. A plan that changes no regulatory meaning, input or computation — infrastructure, repository or review procedure, a projection, a wording repair — takes plan review only, and its later rounds are plan rounds; the plan reviewer judges that claim and the adjudicator records it on the pull request. A PASS plan carries weight in implementation review. It is not immune: when the work shows the plan wrong, the plan is corrected and the correction disclosed.
 
 ## Implementation review
 
