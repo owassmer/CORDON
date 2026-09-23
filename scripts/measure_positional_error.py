@@ -14,17 +14,6 @@ cadastral map.
                                units; write its `positional-error` records
     localities                 per held comune, how far away the fixes giving its error
                                lie; written into the cadastre's record
-    construction               where a sealed cadastral outline leaves the raw sheet union,
-                               and by how much; written as the `cadastre-construction` record
-    frames                     state each record's reference frame and what it applies to
-
-Every error an area supplies to C is stated in one reference frame, the cadastral map. C adds
-the errors of the two geometries it compares, so errors stated against different frames
-would count their shared error twice. An outline built from cadastral sheets or parcels
-carries no positional error in that frame, only the construction tolerance measured here.
-ISTAT's lines and the Region's layer carry their measured distance from the cadastre. The
-cadastral map's own ground error, against the Region's surveyed fixes, belongs to a position
-measured on the ground (a GNSS point), never to an outline built from the map.
 
 `C.json` lists the retained Rete Planoaltimetrica pages (ServicesArcIMS/RetiGeodetiche
 layer 0). Run with the Stage C/D environment:
@@ -192,37 +181,10 @@ def measure(args):
     print(json.dumps({k: v for k, v in record.items() if k not in ('comuni', 'method')}, indent=1))
 
 
-FRAME = "the cadastral map (the frame the acts' units are defined in)"
-APPLIES_TO = {
-    'cadastre': ("A position measured on the ground (a GNSS point) placed in the cadastral frame: its device error "
-                 "plus this local ground error. It is not added to an outline built from cadastral sheets or "
-                 "parcels, which carries no positional error in the cadastral frame."),
-    'cadastre-construction': ("Every outline built from cadastral sheets or parcels, and every named plant placed "
-                              "by a cadastral unit its act lists: the tolerance, its only error in the cadastral "
-                              "frame."),
-    'istat-boundaries': "An outline drawn by ISTAT's line where no held sheet draws it.",
-    'region-layer': "An outline the Region's layer draws for a unit the act places only partly in the zone.",
-}
-CONSTRUCTION_METHOD = (
-    "A comune's territory is the union of its cadastral sheets with seams narrower than 20 m closed (a buffer and "
-    "an inward buffer of 10 m, mitre joins). Per held comune, the sealed outline is sampled every 1 m and each "
-    "sample is measured to the raw union of the same sheets. The tolerance is the largest distance over every "
-    "held comune.")
-
-
 def _replace(drop, new):
     path = ROOT / RECORDS
     kept = [r for r in json.loads(path.read_text()) if not drop(r)]
-    for r in new:
-        _framed(r)
     path.write_text(json.dumps(kept + new, indent=1, ensure_ascii=False) + '\n')
-
-
-def _framed(record):
-    if record.get('kind') == 'positional-error':
-        record['frame'] = FRAME
-        record['applies_to'] = APPLIES_TO[record['source']]
-    return record
 
 
 ISTAT_METHOD = (
@@ -369,40 +331,6 @@ def localities(args):
         print(r['comune'], r['name'], r['fixes_in_comune'], r['nearest_fix_m'], r[f'fix_{E.K}_m'], r['error_m'])
 
 
-def construction(args):
-    """The seal residue: how far a sealed cadastral outline lies from its raw sheet union."""
-    from cordon_d.area_geometry import Sources, seal
-    sources = Sources(ROOT)
-    by = {}
-    for (code, _, _), found in sources.sheets.items():
-        by.setdefault(code, []).extend(g for _, g in found)
-    per_comune = {}
-    for code in sorted(by):
-        raw = shapely.union_all([shapely.make_valid(g) for g in by[code]])
-        points = shapely.points(shapely.get_coordinates(shapely.segmentize(seal(raw).boundary, 1.0)))
-        shapely.prepare(raw)
-        per_comune[code] = round(float(shapely.distance(points, raw).max()), 2)
-        print(code, per_comune[code], flush=True)
-    values = numpy.array(list(per_comune.values()))
-    record = {'kind': 'positional-error', 'source': 'cadastre-construction', 'method': CONSTRUCTION_METHOD,
-              'statistic': 'the largest seal residue over every held comune',
-              'tolerance_m': round(float(values.max()), 2),
-              'comune_max_m': {'median': round(float(numpy.median(values)), 2), 'max': round(float(values.max()), 2),
-                               'n': int(len(values))},
-              'comuni': [{'comune': c, 'max_m': v} for c, v in sorted(per_comune.items())],
-              'script': 'scripts/measure_positional_error.py',
-              'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
-    _replace(lambda r: r['kind'] == 'positional-error' and r['source'] == 'cadastre-construction', [record])
-    print(json.dumps({k: v for k, v in record.items() if k not in ('comuni', 'method')}, indent=1))
-
-
-def frames(args):
-    """State each positional-error record's frame and what it applies to."""
-    path = ROOT / RECORDS
-    kept = [_framed(r) for r in json.loads(path.read_text())]
-    path.write_text(json.dumps(kept, indent=1, ensure_ascii=False) + '\n')
-
-
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest='command', required=True)
@@ -416,11 +344,9 @@ def main():
     lay.add_argument('version', nargs='+', help='the provision version ids whose layers are measured, one '
                      'version per run to bound memory')
     sub.add_parser('localities')
-    sub.add_parser('construction')
-    sub.add_parser('frames')
     args = parser.parse_args()
     {'windows': windows, 'measure': measure, 'istat': istat, 'layers': layers,
-     'localities': localities, 'construction': construction, 'frames': frames}[args.command](args)
+     'localities': localities}[args.command](args)
 
 
 if __name__ == '__main__':

@@ -26,7 +26,7 @@ from cordon_d import area_error
 from cordon_d.area_geometry import (AdoptedGeography, ErrorPart, Observation, Sources, Unplaced, Zone,
                                     boundary_distances, buffer_extent, construct, dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
-                                    _Builder, _drawn, _inspire_zoning, _source_errors)
+                                    _Builder, _drawn, _inspire_zoning)
 from cordon_d.areas import Sheet, versions
 from cordon_d.administrative import AdministrativeUnits, records
 from cordon_d.store import store_root
@@ -217,22 +217,6 @@ class MetricGeometryForC(unittest.TestCase):
         self.assertAlmostEqual(self.geography().shared_boundary.length, 20)
 
 
-class CommonFrame(unittest.TestCase):
-    """Every error D supplies is stated in the cadastral frame, so C never counts shared error twice."""
-
-    def test_a_cadastre_built_part_carries_the_construction_tolerance_not_the_ground_error(self):
-        sources = Sources(ROOT)
-        tolerance = sources.construction_tolerance
-        self.assertIsNotNone(tolerance)
-        parts = _source_errors(sources, {'cadastre'})
-        self.assertEqual([(p.source, p.error_m, p.field) for p in parts], [('cadastre', tolerance, None)])
-        # A cadastral parcel (0 m in the frame) well inside a cadastre-built zone is inside for C.
-        zone = Zone('infected', ('ZONA INFETTA',), box(0, 0, 30_000, 30_000), 'annex', ('cadastre',), errors=parts)
-        area = AdoptedGeography('REG:v1', 'REG', date(2024, 1, 1), None, (zone,))
-        parcel = box(500, 500, 560, 540)
-        self.assertIs(partial_parcel(MetricGeometry(parcel, UTM, 0.0), area.metric(parcel)).truth, True)
-
-
 class InspireSheets(unittest.TestCase):
     def test_the_reference_carries_sheet_annex_and_development(self):
         body = b'''<?xml version='1.0' encoding="UTF-8" ?>
@@ -326,17 +310,14 @@ class ActPlants(unittest.TestCase):
         self.assertTrue(zones['infected'].geometry.covers(parcels))
         # The zone is the parcels' 50 m reach, not a circle around each sheet.
         self.assertLess(zones['infected'].geometry.area, parcels.buffer(51).area)
-        # In the cadastral frame a listed parcel carries only the construction tolerance, never
-        # the map's ground error against surveyed fixes.
-        tolerance = sources.construction_tolerance
-        self.assertIsNotNone(tolerance)
         for p in plants:
-            self.assertEqual(p.error_m, tolerance)
+            self.assertGreater(p.error_m, 0)
+            self.assertLess(p.error_m, 150)          # the local error, not a sheet's radius
         area = AdoptedGeography(version.provision_version_id, version.instrument_id, version.effective_from,
                                 version.effective_to_exclusive, tuple(zones.values()))
         metric = area.metric(parcels.centroid)
         self.assertIsInstance(metric, MetricGeometry)
-        self.assertEqual(metric.error_m, tolerance + 1.0)      # and the 1 m offset polygon
+        self.assertLess(metric.error_m, 151)
 
     @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
     def test_a_sheet_listed_alone_places_its_plant_and_row_1_does_not_displace_it(self):
