@@ -79,6 +79,8 @@ OUTLINE_STEP_M = 25.0
 # The Region's layer: its error at a place is that of the samples within this distance.
 REGION_REACH_M = 2000.0
 REGION_STEP_M = 10.0
+# Outline sampling for the sheets a band may reach.
+LAND_STEP_M = 1000.0
 
 ROLES = ('infected', 'containment', 'focus', 'buffer')
 
@@ -488,22 +490,30 @@ class Sources:
 
     # --- extents ---------------------------------------------------------------
 
-    def comune_extent(self, comune) -> tuple[BaseGeometry, str]:
-        """(territory, source): the union of the comune's sheets where held, else ISTAT's boundary."""
-        if comune.catastale not in self._extent:
-            sheets = [g for (c, _, _), found in self.sheets.items() if c == comune.catastale for _, g in found]
-            if sheets:
-                extent = (seal(shapely.union_all([shapely.make_valid(g) for g in sheets])), 'cadastre')
-            else:
-                extent = (self.administrative.comune_geometry(comune), 'istat-boundaries')
+    def comune_extent(self, comune, *, keep=True) -> tuple[BaseGeometry, str]:
+        """(territory, source): the union of the comune's sheets where held, else ISTAT's boundary.
+        `keep=False` builds it without keeping it, for a caller that keeps a larger union."""
+        if comune.catastale in self._extent:
+            return self._extent[comune.catastale]
+        sheets = [g for (c, _, _), found in self.sheets.items() if c == comune.catastale for _, g in found]
+        if sheets:
+            extent = (seal(shapely.union_all([shapely.make_valid(g) for g in sheets])), 'cadastre')
+        else:
+            extent = (self.administrative.comune_geometry(comune), 'istat-boundaries')
+        if keep:
             self._extent[comune.catastale] = extent
-        return self._extent[comune.catastale]
+        return extent
 
     def province_extent(self, province) -> tuple[BaseGeometry, tuple[str, ...]]:
         key = ('province', province.code)
         if key not in self._extent:
-            parts = [self.comune_extent(c) for c in self.administrative.comuni.values() if c.province == province]
-            self._extent[key] = (seal(shapely.union_all([g for g, _ in parts])), tuple(sorted({s for _, s in parts})))
+            parts, used = [], set()
+            for c in self.administrative.comuni.values():
+                if c.province == province:
+                    geometry, source = self.comune_extent(c, keep=False)
+                    parts.append(geometry)
+                    used.add(source)
+            self._extent[key] = (seal(shapely.union_all(parts)), tuple(sorted(used)))
         return self._extent[key]
 
     def annex_iii_extent(self, day: date) -> tuple[BaseGeometry, tuple[str, ...]]:
@@ -545,10 +555,30 @@ class Sources:
         reach = metres + 2 * APPROXIMATION_M + SEAM_M
         window = shapely.box(xmin - reach, ymin - reach, xmax + reach, ymax + reach)
         parts = [shapely.clip_by_rect(p, *window.bounds) for p in self._land_provinces]
-        sheets = [shapely.make_valid(g) for g in self.sheets_near(window)]
+        # The band lies outside the origin, within `metres` of its outline: only the sheets
+        # there bound it. Outline samples every LAND_STEP_M reach every such sheet within
+        # reach + LAND_STEP_M.
+        points = _samples(origin.boundary, LAND_STEP_M)
+        if not len(points):
+            points = numpy.array([origin.representative_point()])
+        tree, geometries = self._sheet_index
+        near = numpy.unique(tree.query(points, predicate='dwithin', distance=reach + LAND_STEP_M)[1])
+        # A sheet ISTAT's land already covers adds no land; only sheets reaching past it do,
+        # sealed with every covered sheet within a seal's reach of them, as sealing all
+        # the sheets would.
+        istat = shapely.union_all([p for p in parts if not p.is_empty])
+        shapely.prepare(istat)
+        candidates = numpy.array([shapely.make_valid(geometries[i]) for i in near], dtype=object)
+        covered = numpy.array([istat.covers(g) for g in candidates], dtype=bool)
+        sheets = list(candidates[~covered])
+        if sheets and covered.any():
+            reaching = shapely.STRtree(sheets)
+            beside = numpy.unique(reaching.query(candidates[covered], predicate='dwithin',
+                                                 distance=SEAL_MARGIN_M)[0])
+            sheets += list(candidates[covered][beside])
         if sheets:
-            parts.append(seal(shapely.union_all(sheets)))
-        return polygonal(shapely.union_all([p for p in parts if not p.is_empty]))
+            return polygonal(shapely.union_all([istat, seal(shapely.union_all(sheets))]))
+        return polygonal(istat)
 
     def unpublished(self, comune) -> tuple[tuple[str, ...], BaseGeometry | None]:
         """The comune's sheets neither cadastre publishes, and the territory they occupy.
@@ -1009,8 +1039,24 @@ def buffer_extent(sources: Sources, origins, annexed=None, drawn=None) -> BaseGe
     inner = _union(*(o for o, _ in origins))
     if inner is None:
         return None
-    return _union(*(outward_band(o, m, sources.land_near(o, m)) for o, m in origins if o is not None),
-                  annexed, drawn).difference(inner)
+    parts = []
+    for i, (o, m) in enumerate(origins):
+        if o is None:
+            continue
+        band = outward_band(o, m, sources.land_near(o, m))       # already outside its own origin
+        for j, (other, _) in enumerate(origins):
+            if j != i and other is not None:
+                band = _minus(band, other)
+        parts.append(band)
+    parts += [_minus(annexed, inner), _minus(drawn, inner)]
+    return _union(*parts)
+
+
+def _minus(a: BaseGeometry | None, b: BaseGeometry) -> BaseGeometry | None:
+    """a less b, reading only the part of b within a's bounds."""
+    if a is None or a.is_empty:
+        return a
+    return polygonal(a.difference(shapely.make_valid(shapely.clip_by_rect(b, *a.bounds))))
 
 
 def construct(sources: Sources, version, *, plants=None, adopted: date | None = None) -> tuple[Zone, ...]:
