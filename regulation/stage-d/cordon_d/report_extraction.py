@@ -19,7 +19,7 @@ import requests
 
 from .reports import (ROLES, READER_IMPLEMENTATION, materialize, validate_block, record_rows,
                       note_mark, is_mark_note, result_marks, positioned_identifier_records,
-                      row_source_scopes, scoped_facts)
+                      row_source_scopes, scoped_facts, table_headings)
 
 IMPLEMENTATION = Path(__file__).read_bytes()
 from .store import blob_path
@@ -251,14 +251,21 @@ def write_json(path, value):
 
 
 def write_assembled(path, payload, store, digest):
-    """Write report.json at the payload's extraction version, with positioned identifiers."""
+    """Write report.json at the payload's extraction version, with the reads of the PDF's own
+    text that assembly derives: positioned identifiers and table headings.
+
+    Both depend on the PDF library, whose version the extraction version names (`version`).
+    """
+    import pymupdf
     revision = payload.get('extraction_version')
     if revision is None or Path(path).parent.parent.name != revision:
         raise ValueError('A reading is never written under another extraction version')
     if payload.get('blocks') is not None and payload.get('page_count') is not None:
         reading = materialize(digest, revision, payload['page_count'], payload['blocks'])
-        payload = dict(payload, positioned_identifiers=positioned_identifier_records(
-            reading, blob_path(store, digest)))
+        source = blob_path(store, digest)
+        payload = dict(payload, pdf_library=f'PyMuPDF {pymupdf.VersionBind}',
+                       positioned_identifiers=positioned_identifier_records(reading, source),
+                       table_headings=table_headings(reading, payload, source))
     write_json(path, payload)
 
 

@@ -1053,11 +1053,20 @@ def apply_table_headings(reading, headings):
     return replace(reading, rows=tuple(rows))
 
 
+def heading_tables(reading, payload):
+    """Tables with a native region that have a row printing no result: their headings are read."""
+    return {row.locator.split('/')[1] for row in reading.rows
+            if not any(r.text and r.text.strip() for r in row.results)} & table_heading_blocks(payload).keys()
+
+
 def table_headings(reading, payload, source):
-    """Read the heading of each table that has a row printing no result, from the PDF text."""
+    """Read the heading of each table that has a row printing no result, from the PDF text.
+
+    The read depends on the PDF library, so it happens once, when the reading is assembled
+    under an extraction version that names the library's version, never at consumption.
+    """
     boxes = table_heading_blocks(payload)
-    wanted = {row.locator.split('/')[1] for row in reading.rows
-              if not any(r.text and r.text.strip() for r in row.results)} & boxes.keys()
+    wanted = heading_tables(reading, payload)
     if not wanted:
         return {}
     import pymupdf
@@ -1091,7 +1100,11 @@ def report(digest: str, store: Path, *, extraction_version: str):
         return UnreadReport(digest, 'assembled before positioned identifiers were derived; '
                                     'reassemble at this extraction version')
     reading = apply_positioned_identifiers(reading, payload.get('positioned_identifiers') or ())
-    reading = apply_table_headings(reading, table_headings(reading, payload, blob_path(store, digest)))
+    if 'table_headings' not in payload and heading_tables(reading, payload):
+        return UnreadReport(digest, 'assembled before table headings were derived; '
+                                    'reassemble at this extraction version')
+    reading = apply_table_headings(reading, {table: tuple(value) for table, value
+                                             in (payload.get('table_headings') or {}).items()})
     from .report_relations import load
     reading = replace(reading, relations=load(store, digest, exact=True),
                       assembly_complete=payload.get('assembly_complete'))

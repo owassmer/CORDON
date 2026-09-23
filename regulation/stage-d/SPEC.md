@@ -115,7 +115,9 @@ above the table's native region, below any other table above it. It states a
 result when it prints one result word, positivo, negativo, rilevato, non
 rilevato or dubbio in any gender or number, and no other. The result keeps the
 heading as its literal and its support. A row that prints a result keeps its own,
-and a part of a continued record takes its other parts' result.
+and a part of a continued record takes its other parts' result. The heading is
+read once, when the reading is assembled; the extraction version names the PDF
+library's version, so a library change is a new version.
 
 A resume keeps validated, fully read page blocks from an explicitly selected
 prior version and requests only uncovered pages. It preserves those blocks and
