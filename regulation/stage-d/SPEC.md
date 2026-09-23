@@ -465,7 +465,9 @@ no clause enforces keeps a record without a term. Work an act applies by
 reference to another order's prescription stays unknown until `apply_references`
 composes it with that order's single clause record: the recipients and scope stay
 the referring act's, and the term, populations, executor and governing
-references are the referenced order's. An act that prescribes no work to
+references are the referenced order's. Retained copies of one order that read the
+same clause are one clause; copies that read it differently leave the work
+unknown. An act that prescribes no work to
 recipients has no record. Governing A references are every A row of the
 instrument and every row whose `corrects_instrument_ids` names it. Annex
 positions stay with `cordon_d.measures`.
@@ -475,6 +477,36 @@ running from notification, a committed consequence, a coercive population and an
 executor. A clause's own reading limit leaves it unknown. `c_result` passes C
 only the notice, commencement and lawful-dueness evidence the caller holds;
 nothing absent is supplied. Publication is not notification.
+
+## Act-specific mass-publicity basis
+
+`cordon_d.notice_routes` supplies the `recipient-notice` field "act-specific
+mass-publicity basis" from each order's own text, under
+`notice-route-reading.txt`, through `read_native_text`
+(`scripts/read_notice_routes.py`). The reading copies, with page citations, each
+reason the order gives for reaching its recipients by publicity, marked as a
+statement about this act or a restatement of the general rule, and each form of
+publicity the order establishes: its words, its period as printed and its stated
+effect. Validation and the single stated reread follow the case-prescription
+reader. D decides neither Art. 21-bis predicate. A stated ground about the act
+and a held posting reach C as unresolved inputs naming the A decision they
+await; a restated rule supplies nothing, and without a stated ground C names
+its own missing predicate.
+
+## Court-decision events
+
+`cordon_d.judgments` reads retained TAR decisions (GA XML) as their numbered
+leaf blocks, under `judgment-event-reading.txt`, through `read_native_blocks`
+(`scripts/read_judgments.py`). The reading lists the removal orders the decision
+names by number and date, and each dated event it states about one of them, one
+kind per event: PEC delivery to a named person, first or last day of a municipal
+posting, an owner's request, or the administration's reply. Each event keeps its
+block, quotation and whether the court states it or reports a party's claim.
+Every quotation and copied field must occur in its cited block. An event attaches
+only to an order D holds, as an `AdministrativeEvent` for the person the
+decision names; a posting names no recipient. Other events stay unattached with
+their cause. Whether a delivery or posting is legally sufficient notice stays
+with A.
 
 ## Administrative publication records
 
