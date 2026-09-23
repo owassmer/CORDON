@@ -106,8 +106,8 @@ def resolve_marks(result, scoped, cell=None):
     Whether or not the source reader split the cell, each mark needs a note recovered from
     the same document that reaches this row. A mark the document prints without a meaning,
     found after every page was examined, has such a note too. With every mark noted, the
-    result is as printed and carries its marks, with the Cq bound and accreditation their
-    notes state. A mark with no such note leaves the result unclassified and names that
+    result is as printed and carries its marks, with the Cq and accreditation their notes
+    state. A mark with no such note leaves the result unclassified and names that
     cause. The complete literal survives either way.
     """
     split = result_marks(result.text, cell)
@@ -236,8 +236,8 @@ class Result:
     support: tuple[dict, ...]
     assay_cause: str | None = None
     # The printed marks after the result, and what their notes state for the contracts:
-    # `cq` the result's Cq as the note prints it, a bound or range, never an exact value
-    # (analytical-result "result/Cq"); `accreditation` whether the test is accredited
+    # `cq` the result's Cq as the note prints it, a value, a bound or a range; a bound or
+    # range is never an exact Cq (analytical-result "result/Cq"); `accreditation` whether the test is accredited
     # (laboratory-status "accreditation scope"). Each entry names its note.
     marks: tuple[str, ...] = ()
     cq: tuple[dict, ...] = ()

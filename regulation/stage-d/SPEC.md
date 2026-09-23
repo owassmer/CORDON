@@ -105,8 +105,8 @@ A result followed by printed marks, split or whole, is classified only when each
 mark has a note from the same document that reaches its row; otherwise it stays
 unclassified with that cause, and a mark no page defines leaves the result as
 printed. Any other annotation, except a parenthesized aside, is part of the
-printed result. A note fills only the contract fields its printed text states: a
-Cq bound or range for the result, never an exact Cq, and whether the test is
+printed result. A note fills only the contract fields its printed text states:
+the result's Cq as printed, a value, a bound or a range, and whether the test is
 accredited.
 
 A resume keeps validated, fully read page blocks from an explicitly selected
