@@ -3647,6 +3647,45 @@
       "false_effect": "If either cautionary or urgent character is absent, this route is unavailable. Missing characterization evidence remains UNKNOWN."
     },
     {
+      "stable_provision_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
+      "provision_version_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "the operative prescription governing this recipient states in its operative part a commencement term running from notification and commits the Osservatorio to direct coercive removal on noncommencement"
+                },
+                {
+                  "predicate": "the commencement work the prescription states is lawfully due from this recipient"
+                },
+                {
+                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                },
+                {
+                  "predicate": "the source notification-based commencement deadline has elapsed"
+                },
+                {
+                  "predicate": "noncommencement of that work by the source deadline is established"
+                },
+                {
+                  "predicate": "removal of the population the prescription names for coercion is lawfully due"
+                }
+              ]
+            },
+            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
+          }
+        ],
+        "otherwise": {
+          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The Osservatorio must direct coercive removal of the population the prescription names for coercion, through the executor it names, insofar as that removal remains lawfully due. This is the use of existing substitute/coercive execution authority, not proof of completed removal.",
+      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
+    },
+    {
       "stable_provision_id": "IT-L689-1981:Art.13:violation-evidence-collection",
       "provision_version_id": "IT-L689-1981:Art.13:violation-evidence-collection:v1",
       "operator": "AND",
@@ -6097,42 +6136,6 @@
       "false_effect": "Mandatory infected-plant removal remains controlling."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 135/2021 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment:v1",
       "operator": "AND",
@@ -6209,42 +6212,6 @@
       "false_effect": "Area remains active."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 4/2022 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1",
       "operator": "AND",
@@ -6297,42 +6264,6 @@
       "false_effect": "No duty transfer follows without exact correction, effective re-prescription and a separately valid underlying removal duty."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 6/2022 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1",
       "operator": "AND",
@@ -6377,78 +6308,6 @@
       },
       "true_effect": "Permit this act’s mass-publicity route only through its stated unlocatable-recipient and burdensome-personal-notice predicates.",
       "false_effect": "No other case notice route is validated."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 2/2023 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 45/2023 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
@@ -6497,78 +6356,6 @@
       "false_effect": "The correction title alone proves neither full replacement nor independent duplication."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 51/2023 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 96/2023 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1",
       "operator": "AND",
@@ -6590,42 +6377,6 @@
       },
       "true_effect": "For this pre-M4 event, resolve Monopoli through Valle d’Itria Article 7 eradication; Article 13 containment and the regional Piana alternative are unavailable.",
       "false_effect": "This point-in-time fork does not prove Monopoli remains eradication-only after M4."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 27/2024 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict",
@@ -6652,42 +6403,6 @@
       },
       "true_effect": "Treat infected-plant removal as supported under Article 7(1)(a), reject the premature Article 13 branch before Annex III eligibility, and record that the remaining Article 7 population was not discharged at event time.",
       "false_effect": "No valid containment selection, discharge of the complete Article 7 population, or presently executable owner-order population follows."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 52/2024 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary",
@@ -6797,42 +6512,6 @@
       "false_effect": "Outside the act's interval or adopted geography, or where its area state is superseded, suspended, revoked or annulled, no area state follows from this act."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 138/2024 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants only is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text:v1",
       "operator": "AND",
@@ -6854,78 +6533,6 @@
       },
       "true_effect": "Resolve the case through the Article 7 version effective at decision time, including the M5 alternative evidence routes; the copied pre-M5 letter (e) wording cannot narrow or enlarge the population.",
       "false_effect": "No case population is derived from stale embedded text alone."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 147/2024 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 151/2024 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text",
@@ -6995,42 +6602,6 @@
       },
       "true_effect": "Complete the parcel/owner annexes omitted from ten earlier infected-plant orders and prescribe the deferred Article 7(b)–(e) 50 m population as a distinct linked workload.",
       "false_effect": "The completion act is not a duplicate, and the earlier infected-plant removals do not satisfy the deferred population."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00188:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 188/2024 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction",
@@ -9267,42 +8838,6 @@
       "false_effect": "Outside the act's interval or adopted geography, or where its area state is superseded, suspended, revoked or annulled, no area state follows from this act."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 115/2025 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants in the Bisceglie infected area is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants in the Bisceglie infected area, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1",
       "operator": "AND",
@@ -9350,42 +8885,6 @@
       },
       "true_effect": "Correct the current owners and re-prescribe the complete Article 7 population because the predecessor orders were not effectively notified to them.",
       "false_effect": "Failed service cannot become silence, refusal, breach, or substitute-execution authority."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 117/2025 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants only, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary",
@@ -9507,42 +9006,6 @@
       "false_effect": "Outside the act's interval or adopted geography, or where its area state is superseded, suspended, revoked or annulled, no area state follows from this act."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 173/2025 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1",
       "operator": "AND",
@@ -9561,42 +9024,6 @@
       },
       "true_effect": "Give execution priority to the 106 officially infected plants without changing or discharging the remaining mandatory Article 7 population.",
       "false_effect": "Priority does not remove noninfected, suspected, or other qualifying plants from the workload."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 201/2025 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00236:area-state-transition",
@@ -9639,42 +9066,6 @@
       },
       "true_effect": "Classify the individual almond tree as marginal/abandoned only through a competent holistic assessment of all five source-stated indicators.",
       "false_effect": "Without the competent characterization, qualification remains unresolved; parcel listing or any single indicator does not establish or defeat it."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
-      "operator": "ROUTE_TABLE",
-      "expression": {
-        "route_table": [
-          {
-            "when": {
-              "all_of": [
-                {
-                  "predicate": "this operative DDS 35/2026 prescription, including any applicable correction, governs this recipient"
-                },
-                {
-                  "predicate": "removal of infected plants and the prescribed plants within 50 m is lawfully due from this recipient under this clause"
-                },
-                {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
-                },
-                {
-                  "predicate": "the source notification-based commencement deadline has elapsed"
-                },
-                {
-                  "predicate": "noncommencement of that work by the source deadline is established"
-                }
-              ]
-            },
-            "effect": "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED"
-          }
-        ],
-        "otherwise": {
-          "effect": "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED"
-        }
-      },
-      "true_effect": "The Osservatorio must direct coercive removal through ARIF of infected plants and the prescribed plants within 50 m, insofar as removal remains lawfully due. This is the case-qualified use of existing substitute/coercive execution authority, not proof of completed removal.",
-      "false_effect": "This case noncommencement ground is not established. Missing evidence does not prove noncommencement; this does not discharge removal or prevent enforcement under another applicable ground."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text",

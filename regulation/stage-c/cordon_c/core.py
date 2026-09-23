@@ -77,6 +77,7 @@ class Snapshot:
         self.clocks = {r["clock_id"]: r for r in ledger["clocks"]}
         self.parameters = {r["parameter_id"]: r for r in ledger["parameters"]}
         self.dispositions = ledger["dispositions"]
+        self.conventions = ledger.get("conventions", {})
         self.performance = {(r["consumer"], r["reference"]): r["required_fact"] for r in reference_bindings if "required_fact" in r}
         self.reference_outcomes = {(r["consumer"], r["reference"]): r["outcomes"] for r in reference_bindings if "outcomes" in r}
         self.historical_references = {(r["consumer"], r["reference"]) for r in reference_bindings if r.get("historical_result")}
