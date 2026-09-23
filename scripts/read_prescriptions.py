@@ -119,6 +119,60 @@ def summary(evaluation):
     return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
 
 
+_WORKER = {}
+
+
+def _start_worker():
+    """Each worker loads the store root and the A/B snapshot once."""
+    _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT))
+
+
+def read_one(item, options, today):
+    """One source: replay its retained reading, or make one bounded subscription request.
+
+    A refusal gets one source-only reread; a second refusal stands. The memory
+    gate is checked before each dispatch, in the worker that dispatches.
+    """
+    identity, digest, url = item
+    store, snapshot = _WORKER['store'], _WORKER['snapshot']
+    if options['execute']:
+        _wait_for_memory()
+    entry = dict(printed_identity=identity, source=digest, url=url)
+    started = datetime.now(timezone.utc)
+    try:
+        try:
+            reading = read_prescription(digest, store, **options)
+        except ValueError as refusal:
+            entry['refused_first'] = str(refusal)
+            reading = read_prescription(digest, store, refused=str(refusal), **options)
+        entry['request_sha256'] = reading.response['request_sha256']
+        entry['seconds'] = reading.response.get('seconds')
+        entry['identity'] = reading.values['identity']
+        entry['relationships'] = reading.values['relationships']
+        entry['issues'] = reading.values['issues']
+        try:
+            records = list(reading.records(snapshot))
+        except MissingInput as error:
+            entry['records_cause'] = str(error)
+            records = []
+        entry['records'] = [dict(record, c=summary(c_result(snapshot, record, today))) for record in records]
+    except FileNotFoundError:
+        entry['cause'] = 'no retained reading'
+    except Exception as error:  # a failed read is an execution failure, not source silence
+        entry['cause'] = f'{type(error).__name__}: {error}'[:600]
+        entry['trace'] = traceback.format_exc()[-1200:]
+    entry['elapsed'] = round((datetime.now(timezone.utc) - started).total_seconds(), 1)
+    return entry
+
+
+def _write(path, results):
+    """Replace the output file whole, so a stop between sources leaves a complete file."""
+    if path:
+        temporary = Path(str(path) + '.tmp')
+        temporary.write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))
+        temporary.replace(path)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--execute', action='store_true')
@@ -130,54 +184,40 @@ def main():
     parser.add_argument('--timeout', type=int, default=900)
     parser.add_argument('--model', default='opus')
     parser.add_argument('--effort', default='medium')
+    parser.add_argument('--workers', type=int, default=1,
+                        help='sources read at once; each is still one bounded request')
     arguments = parser.parse_args()
-    store = store_root(ROOT)
-    snapshot = Snapshot.load(ROOT)
+    if arguments.workers < 1:
+        parser.error('--workers must be at least 1')
+    _start_worker()
+    store, snapshot = _WORKER['store'], _WORKER['snapshot']
     today = date.today()
-    results = []
     selected = [item for item in population()
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
     if arguments.first:
         selected.sort(key=lambda item: item[0] not in arguments.first)
-    for identity, digest, url in selected:
-        if arguments.execute:
-            _wait_for_memory()
-        entry = dict(printed_identity=identity, source=digest, url=url)
-        started = datetime.now(timezone.utc)
-        try:
-            options = dict(execute=arguments.execute, model=arguments.model, effort=arguments.effort,
-                           timeout=arguments.timeout)
-            try:
-                reading = read_prescription(digest, store, **options)
-            except ValueError as refusal:
-                # One bounded source-only reread states the refusal; a second refusal stands.
-                entry['refused_first'] = str(refusal)
-                reading = read_prescription(digest, store, refused=str(refusal), **options)
-            entry['request_sha256'] = reading.response['request_sha256']
-            entry['seconds'] = reading.response.get('seconds')
-            entry['identity'] = reading.values['identity']
-            entry['relationships'] = reading.values['relationships']
-            entry['issues'] = reading.values['issues']
-            try:
-                records = list(reading.records(snapshot))
-            except MissingInput as error:
-                entry['records_cause'] = str(error)
-                records = []
-            entry['records'] = []
-            for record in records:
-                record = dict(record, c=summary(c_result(snapshot, record, today)))
-                entry['records'].append(record)
-        except FileNotFoundError:
-            entry['cause'] = 'no retained reading'
-        except Exception as error:  # a failed read is an execution failure, not source silence
-            entry['cause'] = f'{type(error).__name__}: {error}'[:600]
-            entry['trace'] = traceback.format_exc()[-1200:]
-        entry['elapsed'] = round((datetime.now(timezone.utc) - started).total_seconds(), 1)
-        results.append(entry)
-        print(json.dumps(dict(identity=identity, source=digest[:12], cause=entry.get('cause'),
-                              records=len(entry.get('records', ())), elapsed=entry['elapsed'])), flush=True)
-        if arguments.out:
-            Path(arguments.out).write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))
+    options = dict(execute=arguments.execute, model=arguments.model, effort=arguments.effort,
+                   timeout=arguments.timeout)
+    done = {}
+
+    def finished(index, entry):
+        done[index] = entry
+        print(json.dumps(dict(identity=entry['printed_identity'], source=entry['source'][:12],
+                              cause=entry.get('cause'), records=len(entry.get('records', ())),
+                              elapsed=entry['elapsed'])), flush=True)
+        _write(arguments.out, [done[i] for i in sorted(done)])
+
+    if arguments.workers == 1:
+        for index, item in enumerate(selected):
+            finished(index, read_one(item, options, today))
+    else:
+        from concurrent.futures import ProcessPoolExecutor, as_completed
+        with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker) as pool:
+            futures = {pool.submit(read_one, item, options, today): index
+                       for index, item in enumerate(selected)}
+            for future in as_completed(futures):
+                finished(futures[future], future.result())
+    results = [done[i] for i in sorted(done)]
     # Work an act applies by reference takes the referenced order's own clause record.
     composed = {r['occurrence']: r for r in apply_references(
         [{k: v for k, v in r.items() if k != 'c'} for entry in results for r in entry.get('records', ())])}
