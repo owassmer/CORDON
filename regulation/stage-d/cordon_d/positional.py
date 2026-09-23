@@ -529,6 +529,22 @@ def grid_to_ground_m(east: float, north: float, distance_m: float) -> float:
     return abs(factors.meridional_scale - 1) * distance_m if factors.meridional_scale else 0.0
 
 
+# --- the monumental register as a falsifier -------------------------------------
+
+REGISTER_REACH_M = 80.0         # register trees are read this far from a flagged positive
+
+
+def register_refutes(east: float, north: float, error_m: float, trees) -> bool | None:
+    """Whether the monumental register refutes a bound at a positive its publisher flags as a
+    monumental olive. The flag says the plant is a registered tree; the bound says the plant
+    stands within `error_m` of the point. No registered tree within `error_m` refutes the bound.
+    A registered tree within it confirms nothing: proximity is not identity. None where the
+    bound exceeds the register's reach."""
+    if error_m > REGISTER_REACH_M:
+        return None
+    return not any(hypot(x - east, y - north) <= error_m for x, y in trees)
+
+
 # --- per-positive measurement and release bounds --------------------------------
 
 def measure(earlier: np.ndarray, later: np.ndarray, point_px: tuple[float, float],

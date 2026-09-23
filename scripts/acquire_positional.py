@@ -6,6 +6,7 @@ A chip already recorded is never fetched again. Downloads run at low concurrency
 
     python scripts/acquire_positional.py chips REQUESTS.json
     python scripts/acquire_positional.py control
+    python scripts/acquire_positional.py register POSITIVES.csv
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor
@@ -28,6 +29,8 @@ RECORDS = ROOT / 'corpus/sources/positional-reference'
 CHIPS = RECORDS / 'chips.jsonl'
 CONTROL = RECORDS / 'control.json'
 CONTROL_SERVICE = 'https://webapps.sit.puglia.it/arcgis/rest/services/ServicesArcIMS/RetiGeodetiche/MapServer'
+REGISTER = RECORDS / 'register.json'
+REGISTER_SERVICE = 'https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer'
 
 
 def fetch(url, params, attempts=4):
@@ -111,6 +114,48 @@ def control():
     print('control pages', len(pages), 'features', sum(p['features'] for p in pages))
 
 
+def register(positives: Path, workers: int):
+    """Registered monumental olives near every positive its publisher flags as monumental: layer 1
+    (the register) within `REGISTER_REACH_M` of the point, and all of layer 0 (the provisional
+    register). They can only refute a positional bound, never set one."""
+    import csv
+    from cordon_d.positional import REGISTER_REACH_M
+    store = store_root(ROOT)
+    rows = [r for r in csv.DictReader(positives.open(newline='')) if r['MONUMENTALE_ARIF'].strip()]
+    reach = REGISTER_REACH_M
+
+    def one(row):
+        e, n = float(row['e32633']), float(row['n32633'])
+        params = {'geometry': f'{e - reach:.2f},{n - reach:.2f},{e + reach:.2f},{n + reach:.2f}',
+                  'geometryType': 'esriGeometryEnvelope', 'inSR': 32633, 'outSR': 32633,
+                  'spatialRel': 'esriSpatialRelIntersects', 'outFields': 'OBJECTID', 'returnGeometry': 'true',
+                  'f': 'json'}
+        response = fetch(f'{REGISTER_SERVICE}/1/query', params)
+        body = response.json()
+        if 'error' in body or body.get('exceededTransferLimit'):
+            raise RuntimeError(f"{row['identity']}: {str(body.get('error', 'transfer limit'))[:200]}")
+        return {'identity': row['identity'], 'flag': row['MONUMENTALE_ARIF'], 'e': e, 'n': n, 'layer': 1,
+                'url': response.url, 'sha256': put_bytes(store, response.content), 'bytes': len(response.content),
+                'trees': [[round(f['geometry']['x'], 2), round(f['geometry']['y'], 2)] for f in body['features']],
+                'captured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+
+    with ThreadPoolExecutor(workers) as pool:
+        near = list(pool.map(one, rows))
+    params = {'where': '1=1', 'outFields': 'OBJECTID', 'returnGeometry': 'true', 'outSR': 32633, 'f': 'json'}
+    response = fetch(f'{REGISTER_SERVICE}/0/query', params)
+    body = response.json()
+    if 'error' in body or body.get('exceededTransferLimit'):
+        raise RuntimeError(str(body.get('error', 'transfer limit'))[:200])
+    provisional = {'layer': 0, 'url': response.url, 'sha256': put_bytes(store, response.content),
+                   'bytes': len(response.content),
+                   'trees': [[round(f['geometry']['x'], 2), round(f['geometry']['y'], 2)] for f in body['features']],
+                   'captured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')}
+    REGISTER.write_text(json.dumps({'service': REGISTER_SERVICE, 'reach_m': reach, 'provisional': provisional,
+                                    'near': near}, separators=(',', ':')) + '\n')
+    print('flagged', len(near), 'with a register tree in reach', sum(bool(r['trees']) for r in near),
+          'provisional trees', len(provisional['trees']))
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest='command', required=True)
@@ -119,8 +164,13 @@ if __name__ == '__main__':
     c.add_argument('--workers', type=int, default=3)
     c.add_argument('--records', type=Path, default=CHIPS)
     sub.add_parser('control')
+    g = sub.add_parser('register')
+    g.add_argument('positives', type=Path)
+    g.add_argument('--workers', type=int, default=3)
     args = parser.parse_args()
     if args.command == 'chips':
         chips(args.requests, args.workers, args.records)
+    elif args.command == 'register':
+        register(args.positives, args.workers)
     else:
         control()

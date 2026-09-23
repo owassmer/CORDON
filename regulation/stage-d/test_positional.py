@@ -73,6 +73,31 @@ class ImageSteps(unittest.TestCase):
         self.assertEqual(status, 'measured')
         self.assertEqual([round(c['near_m']) for c in detail['candidates']], [3])
 
+    def test_the_register_only_refutes_a_bound(self):
+        trees = [(100.0, 30.0), (140.0, 0.0)]
+        self.assertTrue(P.register_refutes(100.0, 0.0, 20.0, trees))    # nearest registered tree 30 m off
+        self.assertFalse(P.register_refutes(100.0, 0.0, 35.0, trees))   # one within: not refuted, not confirmed
+        self.assertIsNone(P.register_refutes(100.0, 0.0, P.REGISTER_REACH_M + 1, trees))
+
+    def test_absence_needs_a_cleared_footprint_and_a_lost_pattern(self):
+        cleared = (1.0, 1.0, 0.0, 0.1)          # brightness, texture, footprint canopy, persistence
+        self.assertTrue(P._absent(cleared))
+        self.assertFalse(P._absent((1.0, 1.0, 0.3, 0.1)))   # regrowth or a nearby crown on the footprint
+        self.assertFalse(P._absent((1.0, 1.0, 0.0, 0.6)))   # the crown-in-ring pattern persists
+
+    def test_a_crown_the_later_image_places_apart_keeps_its_pattern(self):
+        from scipy import ndimage
+        radiometry = lambda image: ndimage.gaussian_filter(image.mean(axis=2), 1.5)  # noqa: E731
+        before = radiometry(scene(CROWNS))
+        r, c, radius = CROWNS[2]
+        rows, cols = np.mgrid[:SIZE, :SIZE]
+        rr, cc = np.nonzero(np.hypot(rows - r, cols - c) <= (radius + 3.0) / PX)
+        moved = [x if i != 2 else (r + 6, c - 6, radius) for i, x in enumerate(CROWNS)]  # 1.7 m apart
+        standing = P._persistence(before, radiometry(scene(moved, rng_seed=2) * 0.8 + 30), rr, cc)
+        gone = P._persistence(before, radiometry(scene(CROWNS, rng_seed=2, removed={2})), rr, cc)
+        self.assertGreater(standing, P.CHANGE['persist_max'])
+        self.assertLess(gone, P.CHANGE['persist_max'])
+
     def test_no_vanished_crown_is_unmeasured_not_dropped(self):
         before = scene(CROWNS)
         status, detail = P.measure(before, scene(CROWNS, rng_seed=2), CENTRE, (0.0, 0.0))

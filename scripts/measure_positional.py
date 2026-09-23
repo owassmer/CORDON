@@ -150,8 +150,9 @@ def table(args):
     for line in Path(args.results).read_text().splitlines():
         row = json.loads(line)
         results[row['identity']] = row
-    rows = []
+    rows, positives = [], {}
     for p in csv.DictReader(open(args.positives, newline='')):
+        positives[p['identity']] = p
         day = date.fromisoformat(p['day'])
         if p['identity'] in results:
             rows.append(results[p['identity']])
@@ -173,10 +174,17 @@ def table(args):
             if (r['source'], r['release']) == key and r['status'] != 'measured':
                 causes[r['cause']] = causes.get(r['cause'], 0) + 1
         entry['causes'] = causes
+    register = {}
+    if args.register:
+        held = json.loads(Path(args.register).read_text())
+        provisional = held['provisional']['trees']
+        register = {r['identity']: r['trees'] + provisional for r in held['near']}
+    for entry in bounds.values():
+        entry['register'] = {'flagged_with_error': 0, 'refuted': 0, 'beyond_reach': 0}
     with open(args.out_rows, 'w', newline='') as stream:
         w = csv.writer(stream)
         w.writerow(['identity', 'source', 'release', 'day', 'status', 'cause', 'pre', 'post', 'candidates',
-                    'distance_m', 'imagery_m', 'grid_m', 'error_m', 'error_basis', 'n'])
+                    'distance_m', 'imagery_m', 'grid_m', 'error_m', 'error_basis', 'n', 'register_refutes'])
         for r in rows:
             entry = bounds[(r['source'], r['release'])]
             if r['status'] == 'measured':
@@ -185,9 +193,16 @@ def table(args):
                 error, basis, n = entry['bound_m'], 'release bound', entry['measured']
             else:
                 error, basis, n = '', 'none', ''
+            refutes = ''
+            if error != '' and r['identity'] in register:
+                p = positives[r['identity']]
+                verdict = P.register_refutes(float(p['e32633']), float(p['n32633']), error, register[r['identity']])
+                entry['register']['flagged_with_error'] += 1
+                entry['register']['beyond_reach' if verdict is None else 'refuted'] += verdict is not False
+                refutes = '' if verdict is None else verdict
             w.writerow([r['identity'], r['source'], r['release'], r['day'], r['status'], r.get('cause', ''),
                         r.get('pre', ''), r.get('post', ''), len(r.get('candidates', [])) if r['status'] == 'measured' else '',
-                        r.get('distance_m', ''), r.get('imagery_m', ''), r.get('grid_m', ''), error, basis, n])
+                        r.get('distance_m', ''), r.get('imagery_m', ''), r.get('grid_m', ''), error, basis, n, refutes])
     out = [{'source': s, 'release': rel, **entry} for (s, rel), entry in sorted(bounds.items())]
     Path(args.out_table).write_text(json.dumps(out, indent=1) + '\n')
     for e in out:
@@ -214,5 +229,6 @@ if __name__ == '__main__':
     t.add_argument('--results', required=True)
     t.add_argument('--out-table', required=True)
     t.add_argument('--out-rows', required=True)
+    t.add_argument('--register', help="acquire_positional.py register's record, to refute bounds")
     args = parser.parse_args()
     {'control': control, 'measure': measure, 'table': table}[args.command](args)
