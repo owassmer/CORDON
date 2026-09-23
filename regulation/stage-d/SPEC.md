@@ -109,6 +109,14 @@ printed result. A note fills only the contract fields its printed text states:
 the result's Cq as printed, a value, a bound or a range, and whether the test is
 accredited.
 
+A result printed in a table heading applies to the rows beneath it that print no
+result of their own. The heading is the text the page's text layer prints nearest
+above the table's native region, below any other table above it. It states a
+result when it prints one result word, positivo, negativo, rilevato, non
+rilevato or dubbio in any gender or number, and no other. The result keeps the
+heading as its literal and its support. A row that prints a result keeps its own,
+and a part of a continued record takes its other parts' result.
+
 A resume keeps validated, fully read page blocks from an explicitly selected
 prior version and requests only uncovered pages. It preserves those blocks and
 their original request identifiers. A smaller configured page width applies only
@@ -291,12 +299,15 @@ annex continuity: consecutive physical pages or printed folios, and the same
 ruled column boundaries. An unresolved fragment survives, without fill-down.
 Source boxes map back to the immutable original. The join may derive an
 occurrence correspondence from an observation's own report route plus an act's
-explicit report number, date, plant reference, and unique matching coordinates at
-the act's printed decimal precision. It preserves competing associations, distinct
-client codes and source access time. No positive-result filter selects a plant.
-It does not equate different literal identifier strings.
-The monitoring publication can supply that explicit report identity and date. Its
-native geographic coordinates are compared at published precision. A transformed
+explicit report number, date, plant reference, and unique matching coordinates.
+It preserves competing associations, distinct client codes and source access time.
+No positive-result filter selects a plant. It does not equate different literal
+identifier strings.
+The monitoring publication can supply that explicit report identity and date.
+Coordinates are compared at the precision the report prints: the decimals it shows,
+in its own CRS as printed, or the association's where it shows fewer. Extra decimals
+on the other side are not a conflict. A true disagreement at that precision stays a
+conflict. An integer coordinate on either side leaves the comparison unresolved. A transformed
 coordinate never acquires an invented printed precision. Derived correspondence
 requires complete report-page coverage and uniqueness in both directions,
 preserves the source locations, and does not equate distinct field and laboratory

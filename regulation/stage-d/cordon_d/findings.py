@@ -135,10 +135,13 @@ def _repeated_representations(candidates):
 
 
 def _coordinate_relation(row, association):
-    """Compare literal pairs at the referring source's published precision.
+    """Compare the two printed literals at the precision the report prints.
 
-    This is derived occurrence evidence inside an explicitly named report, never
-    a free spatial join or a declaration that two identifier strings are aliases.
+    The report's decimals set the comparison, in its own CRS as printed; where the
+    association prints fewer, its own do, since neither literal says more than it prints.
+    Extra decimals on the other side are not a conflict. This is derived occurrence
+    evidence inside an explicitly named report, never a free spatial join or a
+    declaration that two identifier strings are aliases.
     """
     for role in ('latitude', 'longitude'):
         cells = [c for c in row.cells if c['role'] == role]
@@ -153,14 +156,15 @@ def _coordinate_relation(row, association):
             actual = Decimal(''.join(values[0].split()).replace(',', '.'))
             if not expected.is_finite() or not actual.is_finite():
                 return 'unresolved'
-            # A reported integer coordinate is insufficient precision for this relation.
-            if expected.as_tuple().exponent >= 0:
+            exponent = max(expected.as_tuple().exponent, actual.as_tuple().exponent)
+            # An integer coordinate on either side is insufficient precision for this relation.
+            if exponent >= 0:
                 return 'unresolved'
-            if abs(actual - expected) > Decimal(5).scaleb(expected.as_tuple().exponent - 1):
+            if abs(actual - expected) > Decimal(5).scaleb(exponent - 1):
                 return 'conflicts'
         except InvalidOperation:
             return 'unresolved'
-    return 'agrees at published decimal precision'
+    return 'agrees at printed decimal precision'
 
 
 def _associations(reading, records):
@@ -340,7 +344,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     link['association_comparisons'] = coordinate_links
                     derived = {row.locator for row in records_by_document[digest] if source_links
                         and len(reading.complete_pages) == reading.pages
-                        and all(value == 'agrees at published decimal precision' for value in coordinate_links[row.locator])
+                        and all(value == 'agrees at printed decimal precision' for value in coordinate_links[row.locator])
                         and all(value in {'agrees on printed host', 'not supplied by source association'}
                                 for value in host_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
@@ -367,7 +371,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         exact_identity = any(value in row.identifiers for value in literals)
                         identity_field = _matching_observation_field(carried, row.identifiers)
                         if derived_identity:
-                            identity_basis = ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct')
+                            identity_basis = ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at the report’s printed precision; client identifiers remain distinct')
                         else:
                             identity_basis = 'literal identifier equality within the observation’s explicit report route'
                             if identity_field:

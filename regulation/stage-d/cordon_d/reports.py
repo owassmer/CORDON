@@ -976,6 +976,101 @@ def positioned_identifiers(reading, source):
     return apply_positioned_identifiers(reading, positioned_identifier_records(reading, source))
 
 
+# A result adjective of RESULTS in any gender or number. Presente and assente are left out:
+# the same tables print them as symptom states, so in a heading they name no result.
+HEADING_RESULT = re.compile(r'(?<!\w)(non\s+rilevat|positiv|negativ|rilevat|dubbi)([oaie]?)(?!\w)', re.IGNORECASE)
+HEADING_KINDS = {'positiv': 'positive', 'negativ': 'negative', 'rilevat': 'detected',
+                 'non rilevat': 'not-detected', 'dubbi': 'doubtful'}
+
+
+def heading_result(text):
+    """(printed word, kind) when a heading prints one result, else None.
+
+    A heading that prints two different results states none for any one row.
+    """
+    found = {}
+    for match in HEADING_RESULT.finditer(text or ''):
+        stem = ' '.join(match[1].casefold().split())
+        if stem == 'dubbi' or match[2]:
+            found.setdefault(HEADING_KINDS[stem], match[0])
+    return next(iter(found.items()))[::-1] if len(found) == 1 else None
+
+
+def heading_above(blocks, bbox, others):
+    """The printed text block nearest above a table, below any other table above it.
+
+    `blocks` are (y0, y1, text) on the table's page; `others` the other tables' boxes there.
+    """
+    top = bbox[1]
+    floor = max((b[3] for b in others if b[3] <= top + 1), default=float('-inf'))
+    above = [(y1, text) for y0, y1, text in blocks
+             if text.strip() and y1 <= top + 1 and y0 >= floor - 1]
+    return ' '.join(max(above)[1].split()) if above else None
+
+
+def table_heading_blocks(payload):
+    """Each reading table's native region: {table ID: (page, bbox, other boxes on that page)}."""
+    regions, owners = {}, {}
+    for block in payload['blocks']:
+        for region in block.get('native_regions', ()):
+            regions[region['id']] = region
+        for page in block['reading']['pages']:
+            for disposition in page.get('regions', ()):
+                if disposition.get('disposition') == 'represented':
+                    for table in disposition.get('output_tables', ()):
+                        owners.setdefault(table, set()).add(disposition.get('native_table'))
+    result = {}
+    for table, native in owners.items():
+        if len(native) != 1 or (region := regions.get(next(iter(native)))) is None:
+            continue
+        others = [r['bbox'] for r in regions.values() if r['page'] == region['page'] and r['id'] != region['id']]
+        result[table] = (region['page'], region['bbox'], others)
+    return result
+
+
+def apply_table_headings(reading, headings):
+    """A result printed in a table's heading applies to its rows that print no result.
+
+    `headings` maps a table ID to (page, heading text). A row that prints a result, even
+    an unread one, keeps its own; a part of a continued record takes its other parts'.
+    """
+    continued = {scope for f in reading.facts if f['role'] == 'record_continuation' for scope in f['applies_to']}
+    rows = []
+    for row in reading.rows:
+        page, table, row_id = row.locator.split('/', 2)
+        heading = headings.get(table)
+        stated = heading and heading[0] == row.page and heading_result(heading[1])
+        anchors = {row.locator, f'{table}/{row_id}', *('native:' + c['native_cell'] for c in row.cells if c.get('native_cell'))}
+        if not stated or any(r.text and r.text.strip() for r in row.results) or anchors & continued:
+            rows.append(row)
+            continue
+        word, kind = stated
+        result = Result(f'{row.locator}/heading', (heading[1],), None, None, word, kind, None,
+                        ({'page': heading[0], 'locator': 'text printed nearest above the table',
+                          'text': heading[1], 'basis': 'printed table heading'},),
+                        'the table heading prints no test designation')
+        rows.append(replace(row, results=(result,)))
+    return replace(reading, rows=tuple(rows))
+
+
+def table_headings(reading, payload, source):
+    """Read the heading of each table that has a row printing no result, from the PDF text."""
+    boxes = table_heading_blocks(payload)
+    wanted = {row.locator.split('/')[1] for row in reading.rows
+              if not any(r.text and r.text.strip() for r in row.results)} & boxes.keys()
+    if not wanted:
+        return {}
+    import pymupdf
+    headings = {}
+    with pymupdf.open(source) as document:
+        for table in sorted(wanted):
+            page, bbox, others = boxes[table]
+            blocks = [(b[1], b[3], b[4]) for b in document[page - 1].get_text('blocks') if b[6] == 0]
+            if text := heading_above(blocks, bbox, others):
+                headings[table] = (page, text)
+    return headings
+
+
 REPORT_MEMO = None
 
 
@@ -996,6 +1091,7 @@ def report(digest: str, store: Path, *, extraction_version: str):
         return UnreadReport(digest, 'assembled before positioned identifiers were derived; '
                                     'reassemble at this extraction version')
     reading = apply_positioned_identifiers(reading, payload.get('positioned_identifiers') or ())
+    reading = apply_table_headings(reading, table_headings(reading, payload, blob_path(store, digest)))
     from .report_relations import load
     reading = replace(reading, relations=load(store, digest, exact=True),
                       assembly_complete=payload.get('assembly_complete'))
