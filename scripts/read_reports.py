@@ -155,6 +155,10 @@ def main():
     execution = parser.add_mutually_exclusive_group()
     execution.add_argument('--execute', action='store_true')
     execution.add_argument('--rebuild-cache', action='store_true', help='Reassemble retained responses with no provider access')
+    parser.add_argument('--bounded-requests-only', action='store_true',
+                        help='With --execute, send only the bounded source requests: the note a printed mark '
+                             'points at, the fields that note states, and the binding of a result part that '
+                             'prints no identity; every missing page reading stays unread')
     parser.add_argument('--document', action='append', default=[],
                         help='Optional acquired source hash selection; omission processes the complete population')
     parser.add_argument('--max-cost-usd', type=float)
@@ -176,6 +180,9 @@ def main():
     args = parser.parse_args()
     if (args.retain_interrupted_reservation or args.retry_interrupted_request) and not args.execute:
         parser.error('--retain-interrupted-reservation requires --execute and its ledger')
+    if args.bounded_requests_only and (not args.execute or args.relationships):
+        parser.error('--bounded-requests-only requires --execute on page readings')
+    scope = 'bounded requests' if args.bounded_requests_only else True
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     model = args.model or (CODEX_DEFAULT_MODEL if args.provider == 'codex' else ExtractionConfig.model)
     config = ExtractionConfig(model=model, effort=args.effort, provider=args.provider,
@@ -209,12 +216,14 @@ def main():
                       'execution_provider': config.provider if args.execute else None,
                       'metered_model_execution': bool(args.execute and config.provider == 'api'),
                       'subscription_execution': bool(args.execute and config.provider in SUBSCRIPTION_PROVIDERS),
+                      'execution_scope': ('bounded requests only' if args.bounded_requests_only else 'all source reads')
+                                         if args.execute else None,
                       'resume_from': args.resume_from}), flush=True)
     def process(budget):
         for index, digest in enumerate(pending, 1):
             try:
                 reader = extract_relationships if args.relationships else extract_report
-                reader(digest, store, config=config, budget=budget)
+                reader(digest, store, config=config, budget=budget, execute=scope)
                 partial = args.relationships and not report_relations.load(store, digest, exact=True)['reading_complete']
                 print(json.dumps({'document': digest,
                     'status': 'partial relationship reading' if partial else 'assembled',
@@ -232,7 +241,7 @@ def main():
                 parser.error('Subscription execution does not use API prices or the dollar ledger')
             process_parallel(pending, workers=args.workers, store=store, config=config, ledger=None,
                              options={}, revision=revision, relationships=args.relationships,
-                             resume_versions=args.resume_from)
+                             execute=scope, resume_versions=args.resume_from)
         else:
             args.ledger.parent.mkdir(parents=True, exist_ok=True)
             with args.ledger.with_suffix(args.ledger.suffix + '.lock').open('a') as lock:
@@ -251,7 +260,7 @@ def main():
                 else:
                     process_parallel(pending, workers=args.workers, store=store,
                         config=config, ledger=args.ledger, options=options, revision=revision,
-                        relationships=args.relationships)
+                        relationships=args.relationships, execute=scope)
     elif args.rebuild_cache:
         # Reassemble from retained responses only; a document with none is reported unread.
         process_parallel(pending, workers=args.workers, store=store, config=config, ledger=None,

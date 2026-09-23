@@ -10,8 +10,34 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, report, record_rows
-from .monitoring import day as observation_day
+from .monitoring import day as observation_day, PUBLISHER_IDENTIFIERS
 from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, load as load_relations
+
+
+# OBJECTID is the publication layer's row number. No laboratory report prints it, so an
+# equal value could only be a coincidence that attaches a result to the wrong plant.
+_CARRIED_IDENTIFIER_FIELDS = tuple(field for field in ('ID', 'ID_CAMPIONE') + PUBLISHER_IDENTIFIERS
+                                   if field != 'OBJECTID')
+
+
+def _observation_identifier_literals(group):
+    """Reference plus every publisher-carried identifier value a report can print, as literals.
+
+    Values stay under the field that printed them. Nothing is merged into
+    `reference`.
+    """
+    carried = tuple((field, value) for field, value in group.carried_identifiers()
+                    if field in _CARRIED_IDENTIFIER_FIELDS)
+    literals = {value for _, value in carried}
+    if group.reference is not None:
+        literals.add(group.reference)
+    return literals, carried
+
+
+def _matching_observation_field(carried, identifiers):
+    held = set(identifiers)
+    matched = {field for field, value in carried if value in held}
+    return next((field for field in _CARRIED_IDENTIFIER_FIELDS if field in matched), None)
 
 
 def document_name(route):
@@ -109,10 +135,13 @@ def _repeated_representations(candidates):
 
 
 def _coordinate_relation(row, association):
-    """Compare literal pairs at the referring source's published precision.
+    """Compare the two printed literals at the precision the report prints.
 
-    This is derived occurrence evidence inside an explicitly named report, never
-    a free spatial join or a declaration that two identifier strings are aliases.
+    The report's decimals set the comparison, in its own CRS as printed; where the
+    association prints fewer, its own do, since neither literal says more than it prints.
+    Extra decimals on the other side are not a conflict. This is derived occurrence
+    evidence inside an explicitly named report, never a free spatial join or a
+    declaration that two identifier strings are aliases.
     """
     for role in ('latitude', 'longitude'):
         cells = [c for c in row.cells if c['role'] == role]
@@ -127,14 +156,15 @@ def _coordinate_relation(row, association):
             actual = Decimal(''.join(values[0].split()).replace(',', '.'))
             if not expected.is_finite() or not actual.is_finite():
                 return 'unresolved'
-            # A reported integer coordinate is insufficient precision for this relation.
-            if expected.as_tuple().exponent >= 0:
+            exponent = max(expected.as_tuple().exponent, actual.as_tuple().exponent)
+            # An integer coordinate on either side is insufficient precision for this relation.
+            if exponent >= 0:
                 return 'unresolved'
-            if abs(actual - expected) > Decimal(5).scaleb(expected.as_tuple().exponent - 1):
+            if abs(actual - expected) > Decimal(5).scaleb(exponent - 1):
                 return 'conflicts'
         except InvalidOperation:
             return 'unresolved'
-    return 'agrees at published decimal precision'
+    return 'agrees at printed decimal precision'
 
 
 def _associations(reading, records):
@@ -319,7 +349,7 @@ def _population_correspondences(routed, records, bindings, reverse):
             reached[target['occurrence']].add(observation.identity)
             target_for_identity[observation.identity] = target['occurrence']
             comparisons = candidate['association_comparisons']
-            if (not comparisons or any(c != 'agrees at published decimal precision' for c in comparisons)
+            if (not comparisons or any(c != 'agrees at printed decimal precision' for c in comparisons)
                     or candidate['temporal'] != 'agrees' or not candidate['reading_complete']
                     or not candidate['row'].results or candidate['document_cause']
                     or link['rendition_ambiguity']
@@ -455,14 +485,19 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                     link['association_comparisons'] = coordinate_links
                     coordinate_derived = {row.locator for row in records_by_document[digest] if source_links
                         and len(reading.complete_pages) == reading.pages
-                        and all(value == 'agrees at published decimal precision' for value in coordinate_links[row.locator])
+                        and all(value == 'agrees at printed decimal precision' for value in coordinate_links[row.locator])
                         and not any(a.get('issues') for a in source_links)}
                     derived = {locator for locator in coordinate_derived
                         if all(value in {'agrees on printed host', 'not supplied by source association'}
                                 for value in host_links[locator])}
                     # Every compatible row competes. Result polarity cannot select identity.
-                    rows = [row for row in records_by_document[digest] if row in row_index[digest].get(group.reference, [])
-                            or row.locator in coordinate_derived]
+                    # A coordinate-compatible row stays a pre-host candidate; a host disagreement
+                    # is its association cause, and only host-agreeing rows derive identity.
+                    literals, carried = _observation_identifier_literals(group)
+                    indexed = {row.locator for value in literals
+                               for row in row_index[digest].get(value, [])}
+                    rows = [row for row in records_by_document[digest]
+                            if row.locator in indexed or row.locator in coordinate_derived]
 
                     link['status'] = 'candidates recovered' if rows else 'publisher reference not recovered in reading'
                     for row in rows:
@@ -477,7 +512,14 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                         elif 'unresolved' in host_links.get(row.locator, []):
                             association_cause = 'report-row host needed by the source association remains unresolved'
                         derived_identity = row.locator in derived
-                        exact_identity = group.reference in row.identifiers
+                        exact_identity = any(value in row.identifiers for value in literals)
+                        identity_field = _matching_observation_field(carried, row.identifiers)
+                        if derived_identity:
+                            identity_basis = ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at the report’s printed precision; client identifiers remain distinct')
+                        else:
+                            identity_basis = 'literal identifier equality within the observation’s explicit report route'
+                            if identity_field:
+                                identity_basis += f' (observation field {identity_field})'
                         candidate = {'row': row, 'key': key, 'temporal': temporal,
                                      'result_cause': None if row.results else 'no analytical result recovered for this occurrence',
                                      'date_cause': row.date_cause,
@@ -487,8 +529,7 @@ def findings(groups, reports_root: Path, store: Path, *, extraction_version, kno
                                      'source_associations': source_links,
                                      'association_comparisons': coordinate_links.get(row.locator, []),
                                      'host_comparisons': host_links.get(row.locator, []),
-                                     'identity_basis': ('derived occurrence correspondence: observation route, source report identity/date, host and unique coordinates at published precision; client identifiers remain distinct'
-                                                        if derived_identity else 'literal identifier equality within the observation’s explicit report route'),
+                                     'identity_basis': identity_basis,
                                      'reading_issues': reading.issues,
                                      'document_cause': link['document_cause'],
                                      'assembly_complete': reading.assembly_complete,

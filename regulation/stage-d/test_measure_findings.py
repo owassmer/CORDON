@@ -132,7 +132,7 @@ class MeasureFindings(unittest.TestCase):
         self.assertIs(candidate['match'], joined['matches'][0])
         self.assertIs(candidate['report_binding'], bound['report-one'])
         self.assertIs(candidate['reverse_rows'][0], reverse)
-        self.assertEqual(candidate['coordinate_relation'], 'agrees at published decimal precision')
+        self.assertEqual(candidate['coordinate_relation'], 'agrees at printed decimal precision')
         self.assertEqual(candidate['host_relation'], 'agrees on printed host')
         self.assertTrue(candidate['match']['row'].facts)
         self.assertTrue(candidate['reverse_rows'][0]['reading_issues'])

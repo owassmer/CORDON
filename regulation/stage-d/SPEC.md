@@ -98,6 +98,12 @@ has a cost: an inventory-preserving corruption of the retained native cell is no
 detected on read, because the comparison against the source cell runs at assembly
 under the extraction version.
 
+One real text has one representation. Text from the page's text layer enters
+the reading decoded: a text that round-trips Latin-1 to UTF-8 into valid,
+different text reads as that text. The text layer prints byte 0xA0, the second
+byte of à, as a space, so a space after Ã or Â is read as that byte first. The
+retained native cell and the request that showed it are unchanged.
+
 Exact-request raw model responses are cached separately, so a changed
 deterministic projection can reuse them without another paid call. Model, prompt,
 page and context images, rendering settings and code version are named. No join
@@ -107,9 +113,24 @@ extraction cost. Replaying a retained response does not.
 For an annotated result, the source reader may return `result_value` and
 `annotation` alongside the complete cell. Their concatenation must reproduce the
 cell, whitespace aside, and `result_value` is allowed only in a result column.
-Polarity is projected from that supported component. The original literal and the
-precisely scoped qualifications remain available. The projection never strips a
-presumed footnote suffix on its own.
+The original literal and the precisely scoped qualifications remain available.
+A result followed by printed marks, split or whole, is classified only when each
+mark has a note from the same document that reaches its row; otherwise it stays
+unclassified with that cause, and a mark no page defines leaves the result as
+printed. Any other annotation, except a parenthesized aside, is part of the
+printed result. A note fills only the contract fields its printed text states:
+the result's exact printed Cq, and whether the test is accredited. A bound, a
+range or any other Cq wording fills no Cq.
+
+A result printed in a table heading applies to the rows beneath it that print no
+result of their own. The heading is the text the page's text layer prints nearest
+above the table's native region, below any other table above it. It states a
+result when it prints one result word, positivo, negativo, rilevato, non
+rilevato or dubbio in any gender or number, and no other. The result keeps the
+heading as its literal and its support. A row that prints a result keeps its own,
+and a part of a continued record takes its other parts' result. The heading is
+read once, when the reading is assembled; the extraction version names the PDF
+library's version, so a library change is a new version.
 
 A resume keeps validated, fully read page blocks from an explicitly selected
 prior version and requests only uncovered pages. It preserves those blocks and
@@ -180,7 +201,13 @@ headings still constrain correspondence.
 
 A record continuation is one explicit fact. It quotes the printed identity and
 names every physical part. Assembly resolves those exact selectors. It does not
-discover continuation from layout or from equal results. A bound fragment-only
+discover continuation from layout or from equal results. A transposed table whose
+sample columns continue on the next page without printing their identities again
+is joined to its first part, its sample columns matched by printed order; the
+source reader declares each such continuation. A table part that prints a result
+and no sample identity, and that no continuation binds, gets one bounded,
+source-only request for the continuations that bind it. The request returns
+continuation facts only, and a part the source does not bind keeps its cause. A bound fragment-only
 table remains a physical record part even without its own identifier or result
 column. When a descriptive field spans pages, a field-continuation fact binds its
 exact cells and quotes the record identity at its physical page. Successive word
@@ -223,7 +250,8 @@ codes.
 A two-digit year resolves only against a unique matching full year in a scoped
 source date statement. The literal date and the supporting statement survive. No
 current-year assumption, and no platform century cutoff, supplies the year. A
-date spelled with an Italian month name resolves the same way. A printed date
+date spelled with an Italian month name, or its first three letters, resolves the
+same way. A parenthesized aside after a date is not part of it. A printed date
 range or list constrains a separately stated sampling day and never supplies one.
 A row whose only date statement is a range or list has no exact day, and says so.
 
@@ -292,12 +320,15 @@ annex continuity: consecutive physical pages or printed folios, and the same
 ruled column boundaries. An unresolved fragment survives, without fill-down.
 Source boxes map back to the immutable original. The join may derive an
 occurrence correspondence from an observation's own report route plus an act's
-explicit report number, date, plant reference, and unique matching coordinates at
-the act's printed decimal precision. It preserves competing associations, distinct
-client codes and source access time. No positive-result filter selects a plant.
-It does not equate different literal identifier strings.
-The monitoring publication can supply that explicit report identity and date. Its
-native geographic coordinates are compared at published precision. A transformed
+explicit report number, date, plant reference, and unique matching coordinates.
+It preserves competing associations, distinct client codes and source access time.
+No positive-result filter selects a plant. It does not equate different literal
+identifier strings.
+The monitoring publication can supply that explicit report identity and date.
+Coordinates are compared at the precision the report prints: the decimals it shows,
+in its own CRS as printed, or the association's where it shows fewer. Extra decimals
+on the other side are not a conflict. A true disagreement at that precision stays a
+conflict. An integer coordinate on either side leaves the comparison unresolved. A transformed
 coordinate never acquires an invented printed precision. Derived correspondence
 requires complete report-page coverage and uniqueness in both directions,
 preserves the source locations, and does not equate distinct field and laboratory

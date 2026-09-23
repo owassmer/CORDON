@@ -1423,6 +1423,29 @@
   "sha256": "600ee5923671823aeccd2fd54d000d9fd2bb562cab38dcc8220c13b28ba59d51"
  },
  {
+  "url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77A_2024_CNR.pdf",
+  "captured_at": "2026-09-17T01:22:21.283235+00:00",
+  "status": 404,
+  "final_url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77A_2024_CNR.pdf",
+  "content_type": "text/html; charset=UTF-8",
+  "bytes": 1635,
+  "error": "HTTP 404",
+  "referred_by": [
+   {
+    "source_sha256": "6941281577c193e80453a468b9e1bdd64de9249e6271376342ff55004496a65c",
+    "source_locator": "annex: si comunicano gli esiti delle analisi per la  identificazione della sottospecie\n utilizzando  il protocollo qPCR riporta"
+   },
+   {
+    "source_sha256": "6941281577c193e80453a468b9e1bdd64de9249e6271376342ff55004496a65c",
+    "source_locator": "annex: si comunicano gli esiti delle analisi per la  identificazione della sottospecie\n utilizzando  il protocollo qPCR riporta"
+   },
+   {
+    "source_sha256": "6941281577c193e80453a468b9e1bdd64de9249e6271376342ff55004496a65c",
+    "source_locator": "annex: si comunicano gli esiti delle analisi per la  identificazione della sottospecie\n utilizzando  il protocollo qPCR riporta"
+   }
+  ]
+ },
+ {
   "url": "http://cartografia.sit.puglia.it/doc/xylella/xff_sub_fastidiosa/risultati_xff/RAPPORTO_PROVA_N_77F_2024_CNR.pdf",
   "captured_at": "2026-09-11T03:57:19.107319+00:00",
   "status": 200,
@@ -6551,6 +6574,29 @@
   "sha256": "c64321107e930cef6b40dad6839039e94e8062da94920b5e517ef67af7ba2614"
  },
  {
+  "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_32_2023_UNIBA.pdf",
+  "captured_at": "2026-09-17T01:22:21.283516+00:00",
+  "status": 500,
+  "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_32_2023_UNIBA.pdf",
+  "content_type": "text/html;charset=utf-8",
+  "bytes": 1701,
+  "error": "HTTP 500",
+  "referred_by": [
+   {
+    "source_sha256": "581769b266c165a8d7389b61bb7de19def2c64f1df183d213bb7f7d6672428b1",
+    "source_locator": "annex: NOTE: integrazione rapporto N.32/2023"
+   },
+   {
+    "source_sha256": "581769b266c165a8d7389b61bb7de19def2c64f1df183d213bb7f7d6672428b1",
+    "source_locator": "annex: NOTE: integrazione rapporto N.32/2023"
+   },
+   {
+    "source_sha256": "581769b266c165a8d7389b61bb7de19def2c64f1df183d213bb7f7d6672428b1",
+    "source_locator": "annex: NOTE: integrazione rapporto N.32/2023"
+   }
+  ]
+ },
+ {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_345Ldf2024_CRSFA.pdf",
   "captured_at": "2026-09-11T04:05:15.137868+00:00",
   "status": 200,
@@ -6560,7 +6606,7 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
-  "captured_at": "2026-09-14T00:05:42.447020+00:00",
+  "captured_at": "2026-09-17T01:22:21.283596+00:00",
   "status": 500,
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_34_2022_IAMB.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -6570,6 +6616,18 @@
    {
     "source_sha256": "3b4cea167c1cce4e7103dcc48cfde5d06e1a81e9657c906bcc963fa672bfb324",
     "source_locator": "p1: A rettifica del rapporto di prova n. 34 del 15/09/2022 (Dir 02/1097). URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   },
+   {
+    "source_sha256": "3b4cea167c1cce4e7103dcc48cfde5d06e1a81e9657c906bcc963fa672bfb324",
+    "source_locator": "amends: A rettifica del rapporto di prova n. 34 del 15/09/2022 (Dir 02/1097), si allega alla presente l’elenco dei campioni racc"
+   },
+   {
+    "source_sha256": "3b4cea167c1cce4e7103dcc48cfde5d06e1a81e9657c906bcc963fa672bfb324",
+    "source_locator": "amends: A rettifica del rapporto di prova n. 34 del 15/09/2022 (Dir 02/1097), si allega alla presente l’elenco dei campioni racc"
+   },
+   {
+    "source_sha256": "3b4cea167c1cce4e7103dcc48cfde5d06e1a81e9657c906bcc963fa672bfb324",
+    "source_locator": "amends: A rettifica del rapporto di prova n. 34 del 15/09/2022 (Dir 02/1097), si allega alla presente l’elenco dei campioni racc"
    }
   ]
  },
@@ -6775,7 +6833,7 @@
  },
  {
   "url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
-  "captured_at": "2026-09-14T00:05:42.447111+00:00",
+  "captured_at": "2026-09-17T01:22:21.283659+00:00",
   "status": 500,
   "final_url": "http://webadf.sit.puglia.it/openDoc/apridocumento?nomeFile=DatiCampioniXF/PDF/RAPPORTO_PROVA_N_4_2023_IAMB.pdf",
   "content_type": "text/html;charset=utf-8",
@@ -6785,6 +6843,18 @@
    {
     "source_sha256": "e2c2d54a3e21dfc9ac1c04fe8133da2ac3833ead131ce21e94544c8502296858",
     "source_locator": "p1: Rettifica del rapporto di Prova n.4 (Dir 02/1034) del 14/09/2023. URL is a recovery candidate inferred from publisher naming, not a printed hyperlink."
+   },
+   {
+    "source_sha256": "e2c2d54a3e21dfc9ac1c04fe8133da2ac3833ead131ce21e94544c8502296858",
+    "source_locator": "amends: Rapporto di prova n. 4 rettificato. Rettifica del rapporto di Prova n.4 (Dir 02/1034) del 14/09/2023"
+   },
+   {
+    "source_sha256": "e2c2d54a3e21dfc9ac1c04fe8133da2ac3833ead131ce21e94544c8502296858",
+    "source_locator": "amends: Rapporto di prova n. 4 rettificato. Rettifica del rapporto di Prova n.4 (Dir 02/1034) del 14/09/2023"
+   },
+   {
+    "source_sha256": "e2c2d54a3e21dfc9ac1c04fe8133da2ac3833ead131ce21e94544c8502296858",
+    "source_locator": "amends: Rapporto di prova n. 4 rettificato. Rettifica del rapporto di Prova n.4 (Dir 02/1034) del 14/09/2023"
    }
   ]
  },

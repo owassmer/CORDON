@@ -808,6 +808,23 @@ class DistinctObservation:
         """Each route to the laboratory report, under the column that published it."""
         return tuple(sorted({route for member in self.members for route in member.report_routes}))
 
+    def carried_identifiers(self):
+        """Publisher-carried identifier values by field.
+
+        ID, ID_CAMPIONE and PUBLISHER_IDENTIFIERS only. Each value is the
+        literal string that publication printed. Nothing here is merged into
+        `reference`, and values from different fields are not compared as if
+        they meant the same thing.
+        """
+        allowed = frozenset(('ID', 'ID_CAMPIONE', *PUBLISHER_IDENTIFIERS))
+        pairs, seen = [], set()
+        for member in self.members:
+            for field, value in member.identifiers:
+                if field in allowed and value is not None and (field, value) not in seen:
+                    seen.add((field, value))
+                    pairs.append((field, value))
+        return tuple(pairs)
+
 
 def _member_from_row(row: dict) -> Member:
     coordinates = (row['x'], row['y']) if row['x'] is not None and row['y'] is not None else None

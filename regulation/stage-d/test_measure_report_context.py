@@ -63,7 +63,8 @@ def observation(reference='public-one', digest='report-one'):
     member = SimpleNamespace(report_routes=(('report', route),), coordinates=None,
                              carried=(), result='published-positive', subspecies=None)
     return SimpleNamespace(reference=reference, identity=(reference, '2024-09-29'),
-        day=date(2024, 9, 29), correlatable=True, report_routes=(route,), members=(member,))
+        day=date(2024, 9, 29), correlatable=True, report_routes=(route,), members=(member,),
+        carried_identifiers=lambda: ())
 
 
 def join(groups, reports, bindings=None, *, associations=()):
