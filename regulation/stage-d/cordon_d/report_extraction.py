@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 import subprocess
 from tempfile import TemporaryDirectory
+import unicodedata
 
 import requests
 
@@ -579,7 +580,7 @@ def note_source_steps(document, mark, cells, facts, dpi):
             page = document[number - 1]
             for block in page.get_text('dict')['blocks']:
                 lines = [''.join(span['text'] for span in line['spans']) for line in block.get('lines', ())]
-                if any(begins.match(line) for line in lines):
+                if any(begins.match(unicodedata.normalize('NFKC', line)) for line in lines):
                     rect = page.rect
                     clip = type(rect)(rect.x0, max(block['bbox'][1] - 6, rect.y0),
                                       rect.x1, min(block['bbox'][3] + 6, rect.y1))
@@ -637,8 +638,10 @@ def accepted_notes(answer, *, mark, cells, sources, page_text, unseen=()):
             raise ValueError(f"Mark note cites page {note['page']}, which was not supplied; a note read from the "
                              f"supplied source has its physical page number, {supplied}, whatever page number is "
                              f"printed on the page")
-        if not (re.match(r'\s*' + re.escape(mark) + r'(?!\*)', text)
-                or re.search(r'(?<!\*)' + re.escape(mark) + r'\W*$', text)):
+        # A superscript mark (ᵇ) is its letter, as the result parser reads it.
+        printed = unicodedata.normalize('NFKC', text)
+        if not (re.match(r'\s*' + re.escape(mark) + r'(?!\*)', printed)
+                or re.search(r'(?<!\*)' + re.escape(mark) + r'\W*$', printed)):
             raise ValueError(f'Mark note text does not carry its printed mark {mark}')
         if shown[note['page']] == 'text region' and _squashed(text) not in _squashed(page_text(note['page'])):
             raise ValueError(f"Mark note text is not printed in the text layer of page {note['page']}")

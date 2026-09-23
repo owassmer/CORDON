@@ -1106,6 +1106,14 @@ class LiteralReport(unittest.TestCase):
             self.assertEqual(unread['blocks'][0]['reading'], marked)
             self.assertTrue(unread['blocks'][0]['attachment_repair_pending'].startswith('mark note reread pending: '))
 
+    def test_a_superscript_mark_note_carries_its_letter(self):
+        from cordon_d.report_extraction import accepted_notes
+        cells = [{'cell': 'p1-t1/r1/c3', 'page': 1, 'text': 'DUBBIOᵇ', 'marks': ['b']}]
+        answer = self._note_answer(text='ᵇ Si consiglia di ripetere il prelievo.')
+        facts = accepted_notes(answer, mark='b', cells=cells, sources=[{'page': 1, 'kind': 'page image'}],
+                               page_text=lambda n: '')
+        self.assertEqual((facts[0]['mark'], facts[0]['text']), ('b', 'ᵇ Si consiglia di ripetere il prelievo.'))
+
     def test_note_fields_must_be_printed_in_the_note(self):
         from cordon_d.report_extraction import accepted_note_fields
         note = '** Valori di ciclo soglia >32.00; si consiglia di prelevare un ulteriore campione.'
