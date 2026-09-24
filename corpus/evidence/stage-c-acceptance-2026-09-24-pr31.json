@@ -3,7 +3,7 @@
   "accepted_by": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#31 accepts this exact content.",
   "date": "2026-09-24",
-  "promoted_package_sha256": "30ccb9643129823fb8a607a6f9814fb9d79788d207efaa6cde131e8ba2a23d5c",
+  "promoted_package_sha256": "edb1fdf906d15387dc845c463ad480ca09ea631d1e6aaae9b6ff8839732ed602",
   "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
   "preceding_acceptance": {
     "path": "corpus/evidence/stage-c-acceptance-2026-09-23-pr29.json",

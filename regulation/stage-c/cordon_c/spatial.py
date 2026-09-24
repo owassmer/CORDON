@@ -56,7 +56,7 @@ def projection_distance_error(max_grid_distance_m: float, scale_bounds: tuple[fl
 QUAD_SEGMENTS = 16
 
 
-def circumscribed(radius_m: float) -> float:
+def _circumscribed(radius_m: float) -> float:
     """Buffer radius whose drawn arcs keep the whole true offset.
 
     A buffer draws each arc as chords between points at the given radius, so
@@ -113,7 +113,7 @@ def minimum_enclosure(origin: MetricGeometry, enclosure: MetricGeometry, radius_
     if enclosure.geometry.covers(origin.geometry):
         return clearance
     error = origin.error_m + enclosure.error_m
-    if error and enclosure.geometry.buffer(circumscribed(error), quad_segs=QUAD_SEGMENTS).covers(origin.geometry):
+    if error and enclosure.geometry.buffer(_circumscribed(error), quad_segs=QUAD_SEGMENTS).covers(origin.geometry):
         return conjunction([clearance, Evaluation(None, needs=frozenset({"enclosure boundary precision"}))])
     return Evaluation(False)
 
@@ -204,8 +204,8 @@ def partial_parcel(parcel: MetricGeometry, adopted_area: MetricGeometry) -> Eval
     if (adopted_area.geometry.covers(parcel.geometry)
             and parcel.geometry.distance(adopted_area.geometry.boundary) > error):
         return Evaluation(True)
-    parcel_core = parcel.geometry.buffer(-circumscribed(parcel.error_m), quad_segs=QUAD_SEGMENTS)
-    area_core = adopted_area.geometry.buffer(-circumscribed(adopted_area.error_m), quad_segs=QUAD_SEGMENTS)
+    parcel_core = parcel.geometry.buffer(-_circumscribed(parcel.error_m), quad_segs=QUAD_SEGMENTS)
+    area_core = adopted_area.geometry.buffer(-_circumscribed(adopted_area.error_m), quad_segs=QUAD_SEGMENTS)
     if parcel_core.intersection(area_core).area > 0:
         return Evaluation(True)
     return Evaluation(None, needs=frozenset({"parcel overlap precision"}))

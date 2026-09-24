@@ -68,11 +68,11 @@
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
         "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr31.json",
-        "sha256": "bbc3a5b63ce95e9de2615b010ec146e2c1feda19d6a770fda5fb64e606091b8c"
+        "sha256": "debf0ab8edc3b81afdf8294a06d20cc00edfd99ed7cd2b5a05bd77ae66e4be1e"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "30ccb9643129823fb8a607a6f9814fb9d79788d207efaa6cde131e8ba2a23d5c",
+        "sha256": "edb1fdf906d15387dc845c463ad480ca09ea631d1e6aaae9b6ff8839732ed602",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },
