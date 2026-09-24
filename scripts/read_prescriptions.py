@@ -145,6 +145,48 @@ def stated_changes(results):
     return changes
 
 
+def held_orders(results):
+    """Instrument to adoption date for every read order whose own reading states its identity."""
+    orders = {}
+    for entry in results:
+        identity = entry.get('identity') or {}
+        digits = re.sub(r'\D', '', identity.get('number') or '')
+        if identity.get('authority') == 'puglia-osservatorio' and digits and identity.get('adopted'):
+            orders[act_id(digits, identity['adopted'][:4])] = identity['adopted']
+    return orders
+
+
+def held_act_changes(results, snapshot, store, options):
+    """Changes the other held acts state to these orders (`cordon_d.held_acts`), by the order they name.
+
+    Every A-admitted source outside the order population whose text prints a held
+    order's identity is read whole, one bounded request each (replayed unless
+    `--execute`). Returns (changes by order, report).
+    """
+    from cordon_d import held_acts
+    chosen, scanned = held_acts.selected(snapshot, ROOT, held_orders(results))
+    changes, report = {}, dict(scanned=scanned, selected=[], failures=[])
+    for item in chosen:
+        if options['execute']:
+            _wait_for_memory()
+        try:
+            response = held_acts.read_act(item['path'], ROOT, store, **options)
+        except FileNotFoundError:
+            report['failures'].append(dict(item, cause='no retained reading'))
+            continue
+        except Exception as error:  # a failed read is an execution failure, not source silence
+            report['failures'].append(dict(item, cause=f'{type(error).__name__}: {error}'[:600]))
+            continue
+        stated = list(held_acts.stated_changes(response, item['instruments'], item['path']))
+        report['selected'].append(dict(item, request_sha256=response['request_sha256'],
+                                       identity=response['reading']['identity'],
+                                       relationships=response['reading']['relationships'],
+                                       issues=response['reading']['issues'], changes=stated))
+        for change in stated:
+            changes.setdefault(change['target'], []).append(change)
+    return changes, report
+
+
 def summary(evaluation):
     return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
 
@@ -265,6 +307,12 @@ def main():
         [{k: v for k, v in r.items() if k != 'c'} for entry in results for r in entry.get('records', ())])}
     closures = load_closures(arguments.closures)
     changes = stated_changes(results)
+    held_changes, held_report = held_act_changes(results, snapshot, store, options)
+    for target, items in held_changes.items():
+        changes.setdefault(target, []).extend(items)
+    print(json.dumps(dict(held_acts_scanned=held_report['scanned'], held_acts_read=len(held_report['selected']),
+                          held_act_failures=len(held_report['failures']),
+                          orders_named=sorted(held_changes))), flush=True)
     for entry in results:
         entry['records'] = [dict(composed[r['occurrence']],
                                  liveness_closures=closures.get(composed[r['occurrence']]['instrument'], []),
@@ -274,6 +322,7 @@ def main():
                                      closures=closures.get(composed[r['occurrence']]['instrument'], ()),
                                      stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()))))
                             for r in entry.get('records', ())]
+    results.append(dict(held_acts=held_report))
     if arguments.out:
         Path(arguments.out).write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))
     if arguments.events:

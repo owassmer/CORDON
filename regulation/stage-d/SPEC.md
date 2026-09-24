@@ -504,7 +504,7 @@ same clause are one clause; copies that read it differently leave the work
 unknown. An act that prescribes no work to
 recipients has no record. Governing A references are every A row of the
 instrument and every row whose `corrects_instrument_ids` names it. Annex
-positions stay with `cordon_d.measures`.
+positions are not read.
 
 Retained copies compare what they say: case, whitespace, punctuation and articles
 aside. A list label the page prints inside a clause (a lettered point, a bullet or
@@ -520,10 +520,23 @@ publication: an annulment closes the order only for the scope the decision state
 (for the applicants, false for a recipient within it, live outside it, and
 unknown naming the scope while the recipient is not identified); an interim
 suspension with no later disposition of its ricorso, a challenge ended with the
-court's stated reason, or a stated correction, replacement, revocation or
-suspension that no A row records, leaves it unknown and named. `c_result` passes
-C only the notice and commencement evidence the caller holds; nothing absent is
-supplied. Publication is not notification.
+court's stated reason, or a stated correction, replacement, revocation,
+suspension or withdrawal, whole or in part, that no A row records, leaves it
+unknown and names the act and the words stating what changes. Nothing is patched.
+`c_result` passes C only the notice and commencement evidence the caller holds;
+nothing absent is supplied. Publication fills notification only through A's
+mass-publicity route.
+
+Stated changes come from every held act that names the order, not only from the
+order population. `cordon_d.held_acts` scans every source text A admits. A text
+that prints a held order's identity (its number closely followed by its adoption
+date, or an act designator with its number and year) is read whole under
+`act-relationship-reading.txt`, through `read_native_blocks`, one block per
+page of the admitted text. The reading lists each act it states it corrects,
+supplements, completes, replaces, revokes, suspends or withdraws, whole or in
+part, with the words stating what changes; every quotation and copied field must
+occur in its cited block. Only an operative statement is a change; a recital
+restates.
 
 ## Act-specific mass-publicity basis
 

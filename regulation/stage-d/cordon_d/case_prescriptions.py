@@ -3,8 +3,8 @@
 One record is one removal prescription an order's operative part addresses to its
 recipients: the instrument, recipients or cohort, the stated commencement term as
 printed, the commencement and coercive populations, the executor, the stated
-consequence and the governing A references. Positions listed in annexes stay with
-`cordon_d.measures`; this reader does not recreate them.
+consequence and the governing A references. Positions listed in annexes are not
+read here.
 """
 from dataclasses import dataclass
 from datetime import date
@@ -367,7 +367,7 @@ def clause(record):
     return True
 
 
-WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends')
+WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends', 'withdraws')
 
 
 def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_scope=None):
@@ -387,8 +387,9 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     - a challenge the court ended with a stated reason (a later act superseding the
       order) leaves the reading unknown, naming the court's words.
 
-    A held act that states it corrects, replaces, revokes or suspends the order, and
-    that no A row records, leaves the reading unknown and names that act. Returns
+    A held act that states it corrects, replaces, revokes, suspends or withdraws the
+    order, as a whole or in part, and that no A row records, leaves the reading unknown
+    and names that act and the words stating what changes. Returns
     (work, coercion), each a bool or an unknown Evaluation.
     """
     if record['part'] != 'operative' or not record['prescribed_scope']:
@@ -417,8 +418,9 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
     for change in stated_changes:
         if change['relationship'] in WITHHOLDING and change['from'] not in recorded:
-            needs.add(f"an A row for {change['from']}'s stated {change['relationship']} of {record['instrument']}: "
-                      f"{change['affected_payload']}")
+            extent = ' (in part)' if change.get('extent') == 'part' else ''
+            needs.add(f"an A row for {change['from']}'s stated {change['relationship']}{extent} of "
+                      f"{record['instrument']}: {change['affected_payload']}")
     if needs:
         unknown = Evaluation(None, needs=frozenset(needs))
         return unknown, (unknown if record['coercive_population'] else None)
