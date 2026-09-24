@@ -7,7 +7,6 @@ from pathlib import Path
 import re
 from zoneinfo import ZoneInfo
 
-from cordon_c.quantities import clock_boundary
 from cordon_c.core import MissingInput
 from .evidence import Support, file_digest
 from .events import AdministrativeEvent
@@ -58,8 +57,6 @@ PUBLICATION_ATTESTATION_SCHEMA = _object(
         cause=dict(_CAUSE, type='string', enum=_CAUSE['enum'][1:]), detail=_TEXT)},
     support=_CITATIONS,
 )
-PUBLICATION_ATTESTATION_PROMPT = (
-    Path(__file__).resolve().parents[1] / 'publication-attestation-reading.txt').read_text()
 
 
 def _attestation(response, store):
@@ -168,14 +165,6 @@ def _attestation_events(publication):
                 publication.document, None, date.fromisoformat(value['value']), support))
     return replace(publication, events=tuple(events),
                    source_fields=dict(publication.source_fields, period_conflicts=conflicts))
-
-
-def read_publication_attestation(source, store, *, execute=False, **options):
-    """Read one complete certificate; unresolved act identity does not erase its interval."""
-    from .document_subscription import read_documents
-    response = read_documents((source,), Path(store), prompt=PUBLICATION_ATTESTATION_PROMPT,
-        schema=PUBLICATION_ATTESTATION_SCHEMA, execute=execute, **options)
-    return _attestation(response, store)
 
 
 def retained_publication_attestation(request_id, store):
@@ -422,56 +411,3 @@ def _attached_publications(rows, *, measures, acquisitions):
                                   date.fromisoformat(declared), support))
         yield Publication(row.sha256 + ':' + row.locator, values['publisher'], document,
                           adopted, values, tuple(events), support)
-
-
-CLOCK_ANCHORS = {
-    'posting of the prescription in the competent municipal albo pretorio': 'municipal-publication-start',
-    'end of the publication period of the prescription in the competent municipal albo pretorio': 'municipal-publication-end',
-    'legally sufficient notification of the operative prescription to this recipient': 'recipient-notification',
-    "the owner's communication electing voluntary removal or execution by ARIF": 'owner-election',
-}
-
-
-def event_deadline(snapshot, clock_id, at, event, *, document, recipient, zone, calendar=None,
-                   prescribed_term=None):
-    """Supply B's exact anchor to C, preserving what the calculation establishes.
-
-    This computes the boundary. B's applies_when / A's recipient effect and a
-    complete history remain independent inputs to any breach/silence conclusion.
-    """
-    term_input = {}
-    if prescribed_term is not None:
-        if (document, recipient) != (prescribed_term.document, prescribed_term.recipient):
-            raise ValueError('Prescribed term belongs to another document or recipient context')
-        term_input['prescribed_term'] = prescribed_term
-    quantity = snapshot.quantity(clock_id, at, **term_input)
-    meaning = quantity['anchor'].get('event')
-    if meaning not in CLOCK_ANCHORS:
-        raise ValueError('This clock requires another source event meaning')
-    kind = CLOCK_ANCHORS[meaning]
-    if kind.startswith('municipal-publication') and recipient is not None:
-        raise ValueError('A municipal posting is not a recipient-specific event')
-    anchor = event.anchor(kind=kind, document=document, recipient=recipient,
-                          precision='instant' if quantity['unit'] == 'hours' else 'date')
-    return clock_boundary(snapshot, clock_id, at, anchor, zone=zone, calendar=calendar,
-                          **term_input)
-
-
-def publication_deadline(snapshot, clock_id, at, publication, *, document,
-                         competent_publisher, zone, calendar):
-    """Calculate from this municipality's declared posting for this exact act.
-
-    Recipient effectiveness and local-calendar completeness remain separate
-    factual inputs. The returned boundary is not a finding of owner default.
-    """
-    if publication.publisher != competent_publisher or publication.document != document:
-        raise ValueError('Publication belongs to another municipality or document')
-    meaning = snapshot.quantity(clock_id, at)['anchor'].get('event')
-    kind = CLOCK_ANCHORS.get(meaning)
-    if kind not in {'municipal-publication-start', 'municipal-publication-end'}:
-        raise ValueError('Publication cannot supply a recipient response or notice')
-    events = [event for event in publication.events if event.kind == kind]
-    if len(events) != 1:
-        raise ValueError('No unique actual publication declaration for this anchor')
-    return event_deadline(snapshot, clock_id, at, events[0], document=document,
-                          recipient=None, zone=zone, calendar=calendar)

@@ -545,13 +545,8 @@ explicit act identifiers or acquired document attachments. Incoming protocol,
 adoption, publication and recipient effect stay distinct. Identical attached
 bytes do not merge publication occurrences and do not prove amendment. An
 attachment adapter needs the acquisition record. A future date stays an
-unoccurred declaration.
-
-`publication_deadline` and `event_deadline` check the document, the event kind
-and the recipient or competent publisher before they call the accepted B and C
-calculations. The caller supplies the calendar. A prescribed term stays subject
-to its accepted A–C type and clock. A declared posting interval does not prove
-uninterrupted posting. A complete publication certificate supplies its own
-attested interval. An unresolved act identity can be connected through the
+unoccurred declaration. A declared posting interval does not prove
+uninterrupted posting. A retained complete publication certificate supplies its
+own attested interval. An unresolved act identity can be connected through the
 acquired certificate and principal routes. Neither record supplies recipient
 notification, response, default or performance.
