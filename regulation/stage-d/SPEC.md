@@ -460,6 +460,20 @@ predicate, or the mass-publicity row) and each branch's instant, from which C's
 nothing absent is supplied. Publication fills notification only through A's
 mass-publicity route.
 
+Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
+through `recipient_results` (`read_prescriptions.py --records`), beside the
+clause's cohort result, which no supplied record moves. There is one result per
+recipient a delivery record names, keyed as that record names them; nothing joins
+it to an annex position. A delivery enters the communication predicate for its
+recipient only. A posting enters A's mass-publicity row with the order's own basis
+as read, and the court fact on its stated ground stays unknown unless held.
+Commencement and removal count for the work the record prints (comune, foglio and
+particella, or a plant identifier) and for every recipient a supplied record
+obliges to that work. A recipient's commencement history is complete only when
+every work it is obliged to has a stated history running from the order's adoption
+through the evaluation. The caller supplies no instant, order-text predicate or
+completeness of its own; what it cannot join is reported.
+
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text
 that prints a held order's identity (`printed_identities`: its number closely

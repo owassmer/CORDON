@@ -7,7 +7,7 @@ consequence and the governing A references. Positions listed in annexes are not
 read here.
 """
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, time
 from pathlib import Path
 import re
 
@@ -449,7 +449,21 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
     the governing A rows by `lawfully_due`. Nothing absent is supplied: no notice
     or commencement evidence means C's own unknown and its needs.
     """
+    facts, _ = _c_facts(snapshot, record, at, notice=notice, notice_instants=notice_instants,
+                        evaluated_at=evaluated_at, commencements=commencements,
+                        commencement_records_complete=commencement_records_complete,
+                        governing_results=governing_results, work_due=work_due, coercion_due=coercion_due,
+                        closures=closures, stated_changes=stated_changes,
+                        within_closed_scope=within_closed_scope, zone=zone, calendar=calendar)
+    return evaluate(snapshot, RULE, at, facts)
+
+
+def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, commencements,
+             commencement_records_complete, governing_results, work_due, coercion_due, closures, stated_changes,
+             within_closed_scope, zone, calendar):
+    """The facts `c_result` evaluates, and the instant C's `notice_instant` returned (None when none)."""
     from cordon_c.bindings import merge_facts, noncommencement_facts, notice_instant
+    notification = None
     row = snapshot.version(RULE, at)
     vid = row['provision_version_id']
     facts = {(vid, CLAUSE): clause(record)}
@@ -475,4 +489,216 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
                 snapshot, CLOCK, at, notification=notification, evaluated_at=evaluated_at,
                 stated_term=record['stated_term'], qualifying_commencements=commencements or {},
                 commencement_records_complete=commencement_records_complete, zone=zone, calendar=calendar))
-    return evaluate(snapshot, RULE, at, facts)
+    return facts, notification
+
+
+# Supplied Osservatorio records (`osservatorio-records`): the operator's delivery, commencement,
+# removal and history records, and posting records, as a list of JSON objects.
+MASS = 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'
+_MASS_GROUND = 'the act states its own ground for reaching its recipients by public posting'
+_MASS_ANNULLED = 'a court has annulled the act on its stated ground for public posting'
+_COMMON = {'record', 'kind', 'order', 'source', 'selector', 'reading'}
+_KINDS = {
+    # A delivery to the recipient the record names, with the works (parcels or plants) it names for them.
+    'personal-delivery': {'recipient', 'occurred', 'works'},
+    # A posting of the order: it names no recipient; `complete` says the record states the whole interval.
+    'posting': {'publisher', 'start', 'end', 'complete'},
+    # Performance on the work the record names, by whoever performed it.
+    'commencement': {'work', 'occurred'},
+    'removal': {'work', 'occurred'},
+    # A stated bounded complete history of performance on one work.
+    'history': {'work', 'complete_from', 'complete_through'},
+}
+
+
+def _moment(text, *, day_end=None):
+    """A printed ISO date stays a date; an ISO instant must carry its offset. `day_end` closes a date."""
+    if text is None:
+        return None
+    if len(text) == 10:
+        day = date.fromisoformat(text)
+        return day if day_end is None else datetime.combine(day, datetime.max.time(), day_end)
+    moment = datetime.fromisoformat(text)
+    if moment.tzinfo is None:
+        raise ValueError(f'A supplied instant needs its offset: {text}')
+    return moment
+
+
+def _work(value):
+    """A work as the record prints it: comune, foglio and particella, or a plant identifier. Never normalized."""
+    if not isinstance(value, dict) or set(value) not in ({'comune', 'foglio', 'particella'}, {'plant'}):
+        raise ValueError(f'A work is a printed comune, foglio and particella, or a plant identifier: {value}')
+    if not all(isinstance(v, str) and v.strip() for v in value.values()):
+        raise ValueError(f'A work prints every part: {value}')
+    return tuple(sorted(value.items()))
+
+
+def supplied_records(entries):
+    """Validate supplied records as the existing typed inputs; refuse anything else.
+
+    Each record becomes an `AdministrativeEvent` whose `Support` cites its controlled
+    source. A record carries only its kind's fields and an optional `fixture` mark
+    (test records): no order-text predicate, notification instant or completeness
+    flag can ride along. A posting names no recipient, so it never reaches the
+    personal-communication input.
+    """
+    from .events import AdministrativeEvent
+    from .evidence import Support
+    records = []
+    for entry in entries:
+        kind = entry.get('kind')
+        if kind not in _KINDS:
+            raise ValueError(f'Unsupported supplied record kind: {kind}')
+        fields = set(entry) - {'fixture'}
+        expected = _COMMON | _KINDS[kind]
+        if fields != expected:
+            raise ValueError(f"Record {entry.get('record')} ({kind}) differs in {sorted(fields ^ expected)}")
+        support = Support(entry['source'], entry['selector'], entry['reading'])
+        recipient = entry.get('recipient')
+        if kind == 'personal-delivery':
+            occurred = _moment(entry['occurred'])
+            works = tuple(dict.fromkeys(_work(w) for w in entry['works']))
+        elif kind == 'posting':
+            occurred, works = _moment(entry['start']), ()
+            if not isinstance(entry['complete'], bool):
+                raise ValueError('A posting record states whether its interval is whole')
+        elif kind == 'history':
+            occurred, works = _moment(entry['complete_from']), (_work(entry['work']),)
+        else:
+            occurred, works = _moment(entry['occurred']), (_work(entry['work']),)
+        event = AdministrativeEvent(entry['record'], kind, entry['order'], recipient or None, occurred, support)
+        records.append(dict(entry, event=event, works=works, fixture=bool(entry.get('fixture'))))
+    return records
+
+
+def _periods(snapshot, basis):
+    """The period the order's publicity forms print, when they all print one (PR #15's reading, unchanged)."""
+    words = snapshot.conventions['clock.unit_words']
+    stated = [f['duration'] for f in basis['forms'] if f['duration']]
+    meant = {(re.sub(r'\D', '', d['number'].split('(')[0]), words.get(' '.join(d['unit_word'].lower().split())))
+             for d in stated}
+    if len(meant) != 1 or None in next(iter(meant)):
+        return None
+    return stated[0]['number'], stated[0]['unit_word']
+
+
+def supplied_publicity(snapshot, at, basis, posting, *, annulled, evaluated_at, zone):
+    """The mass-publicity branch's facts and notice day from the order's own basis and one supplied posting."""
+    from cordon_c.bindings import mass_publicity_facts
+    from cordon_c.core import Evaluation as _E
+    vid = snapshot.version(MASS, at)['provision_version_id']
+
+    def unsupplied(text):
+        return _E(None, needs=frozenset({f'predicate: {vid} :: {text}'}))
+    return mass_publicity_facts(
+        snapshot, at, ground_stated=True if basis['stated_ground'] else unsupplied(_MASS_GROUND),
+        annulled_on_ground=unsupplied(_MASS_ANNULLED) if annulled is None else annulled,
+        posting_start=posting['event'].occurred,
+        postings={posting['publisher']: (posting['event'].occurred, _moment(posting['end']))},
+        postings_complete=posting['complete'], stated_period=_periods(snapshot, basis),
+        evaluated_at=evaluated_at, zone=zone)
+
+
+def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, basis=None,
+                      publicity_annulment=None, **dueness):
+    """C's result per (clause, recipient named by a supplied record), beside the clause's cohort result.
+
+    The cohort result is `c_result` on cohort evidence only; no supplied record
+    reaches it. For each recipient a delivery record names, the caller supplies
+    events only: the delivery on the communication predicate, and a supplied
+    posting through the mass-publicity row with the order's own basis (PR #15's
+    notice-route reading, unchanged). C's `notice_instant` picks the instant.
+    Commencement and removal count by the work the record prints, for every
+    recipient a supplied record obliges to that work; completeness holds for a
+    recipient only when every such work has a stated history covering the order's
+    adoption through the evaluation. Nothing absent is filled: what cannot be joined
+    or supplied is reported. `publicity_annulment` is the held court fact on the
+    act's stated ground, when one is held; otherwise it stays unknown.
+    """
+    act = record.get('applied_by') or record['instrument']
+    records = supplied_records(supplied)
+    if any(r['order'] != act for r in records):
+        raise ValueError(f'A supplied record names another order than {act}')
+    reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
+    for r in records:
+        if r['kind'] == 'personal-delivery':
+            if not r['recipient'] or not r['recipient'].strip():
+                reported.append(dict(record=r['record'], cause='names no recipient'))
+                continue
+            deliveries.setdefault(r['recipient'], {}).setdefault(r['event'].occurred, []).append(r['record'])
+            obliged.setdefault(r['recipient'], set()).update(r['works'])
+        elif r['kind'] in ('commencement', 'removal') and not isinstance(r['event'].occurred, datetime):
+            # C compares performance instants with the deadline; a day alone is not upgraded.
+            undated.setdefault(r['works'][0], []).append(r['record'])
+            reported.append(dict(record=r['record'], work=dict(r['works'][0]),
+                                 cause='performance dated by day only; its work stays without a complete history'))
+        elif r['kind'] in ('commencement', 'removal'):
+            performed.setdefault(r['works'][0], {})[r['record']] = r['event'].occurred
+        elif r['kind'] == 'history':
+            histories.setdefault(r['works'][0], []).append(r)
+    postings = [r for r in records if r['kind'] == 'posting']
+    posting = postings[0] if len(postings) == 1 else None
+    if len(postings) > 1:
+        reported.append(dict(records=[p['record'] for p in postings],
+                             cause='more than one posting record; the mass-publicity branch is not supplied'))
+    if posting and basis is None:
+        reported.append(dict(record=posting['record'], cause='no notice-route reading of the order; the '
+                                                                  'mass-publicity branch is not supplied'))
+        posting = None
+    everyone = set().union(*obliged.values()) if obliged else set()
+    for work in sorted(set(performed) | set(histories) | set(undated)):
+        if work not in everyone:
+            names = (sorted(performed.get(work, {})) + sorted(undated.get(work, ()))
+                     + sorted(h['record'] for h in histories.get(work, ())))
+            reported.append(dict(records=names, work=dict(work),
+                                 cause='no supplied record obliges a recipient to this work as printed'))
+    adopted = datetime.combine(date.fromisoformat(record['adopted']), time(), zone)
+
+    def covers(history):
+        """The history is stated from the order's adoption (or earlier) through the evaluation time."""
+        start = history['event'].occurred
+        start = start if isinstance(start, datetime) else datetime.combine(start, time(), zone)
+        end = _moment(history['complete_through'], day_end=zone)
+        return start <= adopted and end >= evaluated_at
+
+    vid = snapshot.version(RULE, at)['provision_version_id']
+    common = dict(dueness, evaluated_at=evaluated_at, zone=zone, calendar=calendar)
+    results = {}
+    for recipient in sorted(deliveries):
+        instants = deliveries[recipient]
+        notice, notice_instants = {}, {}
+        if len(instants) == 1:
+            notice[(vid, COMMUNICATED)] = True
+            notice_instants[COMMUNICATED] = next(iter(instants))
+        else:
+            reported.append(dict(recipient=recipient, records=sorted(n for v in instants.values() for n in v),
+                                 cause='deliveries at different instants; the personal branch is not supplied'))
+        if posting:
+            facts, day = supplied_publicity(snapshot, at, basis, posting, annulled=publicity_annulment,
+                                    evaluated_at=evaluated_at, zone=zone)
+            notice.update(facts)
+            notice_instants[MASS] = day
+        works = sorted(obliged.get(recipient, ()))
+        commencements = {name: moment for work in works for name, moment in performed.get(work, {}).items()}
+        complete = bool(works) and all(any(covers(h) for h in histories.get(w, ())) and w not in undated
+                                       for w in works)
+        facts, notification = _c_facts(snapshot, record, at, notice=notice or None, notice_instants=notice_instants,
+                                       commencements=commencements, commencement_records_complete=complete,
+                                       **_dueness_defaults(common))
+        results[recipient] = dict(result=evaluate(snapshot, RULE, at, facts), notification=notification,
+                                  works=[dict(w) for w in works], commencements=commencements,
+                                  commencement_records_complete=complete,
+                                  records=sorted(n for v in instants.values() for n in v),
+                                  fixture=any(r['fixture'] for r in records))
+    return dict(cohort=c_result(snapshot, record, at, **dueness), recipients=results, reported=reported)
+
+
+def _dueness_defaults(common):
+    keys = ('evaluated_at', 'governing_results', 'work_due', 'coercion_due', 'closures', 'stated_changes',
+            'within_closed_scope', 'zone', 'calendar')
+    defaults = dict(governing_results=None, work_due=None, coercion_due=None, closures=(), stated_changes=(),
+                    within_closed_scope=None)
+    unknown = set(common) - set(keys)
+    if unknown:
+        raise TypeError(f'recipient_results takes no {sorted(unknown)}')
+    return {**defaults, **common}
