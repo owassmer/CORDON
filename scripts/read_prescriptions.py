@@ -18,7 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d')]
 
 from cordon_c.core import MissingInput, Snapshot  # noqa: E402
-from cordon_d.case_prescriptions import apply_references, c_result, read_prescription  # noqa: E402
+from cordon_d.case_prescriptions import (apply_references, c_result, read_prescription,  # noqa: E402
+                                         stated_limits)
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -159,8 +160,10 @@ def _start_worker():
 def read_one(item, options, today):
     """One source: replay its retained reading, or make one bounded subscription request.
 
-    A refusal gets one source-only reread; a second refusal stands. The memory
-    gate is checked before each dispatch, in the worker that dispatches.
+    A refusal gets one source-only reread; a second refusal stands. A validated
+    first reading that states clause limits gets one source-only reread stating
+    them; a limit the reread still states stands. The memory gate is checked before
+    each dispatch, in the worker that dispatches.
     """
     identity, digest, url = item
     store, snapshot = _WORKER['store'], _WORKER['snapshot']
@@ -174,6 +177,15 @@ def read_one(item, options, today):
         except ValueError as refusal:
             entry['refused_first'] = str(refusal)
             reading = read_prescription(digest, store, refused=str(refusal), **options)
+        limits = stated_limits(reading)
+        if limits and 'refused_first' not in entry:
+            entry['limited_first'] = limits
+            if options['execute']:
+                _wait_for_memory()
+            try:
+                reading = read_prescription(digest, store, limited=limits, **options)
+            except ValueError as refusal:
+                entry['limit_reread_refused'] = str(refusal)
         entry['request_sha256'] = reading.response['request_sha256']
         entry['seconds'] = reading.response.get('seconds')
         entry['identity'] = reading.values['identity']

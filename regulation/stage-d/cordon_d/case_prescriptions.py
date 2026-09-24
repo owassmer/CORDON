@@ -309,14 +309,33 @@ REREAD = ('A previous reading of this act was refused: {cause}. Read the act aga
           'from the pages its own citations name.')
 
 
+LIMIT_REREAD = ('A previous reading of this act stated limits on its enforcement clauses: {limits}. A clause limit '
+                'is only text in the clause itself that prevents reading one of the fields the clause supplies: the '
+                'term, its anchor, the commitment, the coercive population or the executor. A misprint or an '
+                'incomplete passage that leaves those fields readable from the clause\'s own words is not a limit; '
+                'name it under issues. Read the act again from its supplied text.')
+
+
+def stated_limits(reading):
+    """The clause limits a reading states, by clause, as one cause for a limit reread; None when none."""
+    limits = [f'clause {index}: ' + ' | '.join(item['limits'])
+              for index, item in enumerate(reading.values['enforcement_clauses']) if item['limits']]
+    return '; '.join(limits) or None
+
+
 def read_prescription(source, store, *, execute=False, model='opus', effort='medium', timeout=900,
-                      refused=None):
+                      refused=None, limited=None):
     """Read one order's complete native text; replay unless `execute`.
 
     `refused` names the validation cause of a refused reading. It makes one bounded,
     source-only reread whose request states that cause; the refused answer is not supplied.
+    `limited` names the clause limits a validated reading stated (`stated_limits`). It
+    makes one bounded, source-only reread whose request states them and what a clause
+    limit is; a limit the reread still states stands.
     """
     prompt = PROMPT if refused is None else PROMPT + '\n' + REREAD.format(cause=refused) + '\n'
+    if limited is not None:
+        prompt += '\n' + LIMIT_REREAD.format(limits=limited) + '\n'
     response = read_native_text([source], store, prompt=prompt, schema=SCHEMA, model=model,
                                 effort=effort, timeout=timeout, execute=execute)
     validate(response['reading'], page_texts(source, store))

@@ -64,6 +64,42 @@ def blocks(data: bytes):
     return texts
 
 
+_MONTHS = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre',
+           'ottobre', 'novembre', 'dicembre')
+_NUMERIC_DATE = re.compile(r'(?<!\d)(\d{1,2})[./-](\d{1,2})[./-](\d{4})(?!\d)')
+_WORDED_DATE = re.compile(r'(?<!\d)(\d{1,2})°?\s+(' + '|'.join(_MONTHS) + r')\s+(\d{4})(?!\d)', re.I)
+
+
+def _printed_dates(text):
+    """Every complete date the text prints, numeric (31.1.2022, 02/02/2023) or worded (12 novembre 2021)."""
+    found = set()
+    for day, month, year in _NUMERIC_DATE.findall(text):
+        try:
+            found.add(date(int(year), int(month), int(day)))
+        except ValueError:
+            pass
+    for day, month, year in _WORDED_DATE.findall(text):
+        try:
+            found.add(date(int(year), _MONTHS.index(month.lower()) + 1, int(day)))
+        except ValueError:
+            pass
+    return found
+
+
+def _states_day(words, quote, day):
+    """The printed date states the day it is read as.
+
+    Its own numbers include the day, compared as numbers (\"02/02/2023\" states 2).
+    A date printed by reference to another (\"di pari data\") prints no number of
+    its own; the cited quotation must then print that full date. A date printed
+    without its day states no day and is not supplied as one.
+    """
+    numbers = [int(n) for n in re.findall(r'\d+', words or '')]
+    if numbers:
+        return day.day in numbers
+    return bool((words or '').strip()) and day in _printed_dates(quote)
+
+
 def validate(reading, texts):
     """Bind every quotation and copied field to its cited block; this does not certify meaning."""
     def cited(citation, what):
@@ -87,8 +123,7 @@ def validate(reading, texts):
         for words in (event['recipient'], event['municipality'], event['date_words']):
             if words.strip() and not on_page(words, text):
                 raise ValueError(f'{what}: a copied field is not in its cited block')
-        day = date.fromisoformat(event['date'])
-        if not event['date_words'].strip() or str(day.day) not in re.findall(r'\d+', event['date_words']):
+        if not _states_day(event['date_words'], event['support']['quote'], date.fromisoformat(event['date'])):
             raise ValueError(f'{what}: the printed date does not state its day')
         municipal = event['kind'].startswith('municipal-publication')
         if municipal == bool(event['recipient'].strip()):

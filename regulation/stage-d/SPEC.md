@@ -485,7 +485,10 @@ it. Every quotation, and every copied field, must occur on the page its citation
 names; a field printed across a page break must close one cited page and open the
 next. Otherwise the reading is refused. A refused reading gets one source-only
 reread whose request states the refusal; a second refusal stands as a named
-reading failure.
+reading failure. A clause limit is only text in the clause that prevents reading
+its term, anchor, commitment, coercive population or executor. A validated first
+reading that states a clause limit gets one source-only reread whose request
+states the limit and that definition; a limit the reread still states stands.
 
 One record is one enforcement clause over the work it enforces: instrument,
 recipients and cohort as printed, the prescribed scope, the commencement work and
@@ -546,7 +549,10 @@ names by number and date, and each dated event it states about one of them, one
 kind per event: PEC delivery to a named person, first or last day of a municipal
 posting, an owner's request, or the administration's reply. Each event keeps its
 block, quotation and whether the court states it or reports a party's claim.
-Every quotation and copied field must occur in its cited block. An event attaches
+Every quotation and copied field must occur in its cited block. An event's day
+must be printed: among the numbers of its printed date (compared as numbers), or,
+for a date printed by reference to another ("di pari data"), as a full date in its
+cited quotation. A date printed without its day supplies no day. An event attaches
 only to an order D holds, as an `AdministrativeEvent` for the person the
 decision names; a posting names no recipient. Other events stay unattached with
 their cause. Whether a delivery or posting is legally sufficient notice stays

@@ -12,8 +12,12 @@ import unittest
 
 from cordon_c.core import Snapshot
 from cordon_d.calendar import national_calendar
+from unittest import mock
+
+from cordon_d import case_prescriptions
 from cordon_d.case_prescriptions import (NOTICE, PrescriptionReading, apply_references, c_result, clause,
-                                         governing_references, on_cited, validate)
+                                         governing_references, on_cited, read_prescription, stated_limits,
+                                         validate)
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
@@ -253,6 +257,26 @@ class CasePrescriptionRecords(unittest.TestCase):
         record = dict(next(reading().records(self.s)), limits=('term words cut at the page edge',))
         self.assertIsNone(clause(record).truth)
         self.assertIsNone(c_result(self.s, record, date(2024, 9, 2)).truth)
+
+    def test_a_stated_clause_limit_gets_one_reread_that_states_it(self):
+        limited = copy.deepcopy(READING)
+        limited['enforcement_clauses'][0]['limits'] = ['"della piante": article and noun do not agree']
+        self.assertIsNone(stated_limits(reading()))
+        cause = stated_limits(reading(limited))
+        self.assertEqual(cause, 'clause 0: "della piante": article and noun do not agree')
+        prompts = []
+
+        def transport(sources, store, *, prompt, schema, **options):
+            prompts.append(prompt)
+            return dict(request_sha256='1' * 64, request=dict(sources=sources), reading=READING)
+
+        with mock.patch.object(case_prescriptions, 'read_native_text', transport), \
+                mock.patch.object(case_prescriptions, 'page_texts', lambda source, store: PAGES):
+            reread = read_prescription(SOURCE, None, limited=cause)
+        self.assertIn(cause, prompts[0])
+        self.assertIn('A misprint or an incomplete passage that leaves those fields readable', prompts[0])
+        self.assertTrue(prompts[0].startswith(case_prescriptions.PROMPT))
+        self.assertIs(clause(next(reread.records(self.s))), True)
 
 
 if __name__ == '__main__':

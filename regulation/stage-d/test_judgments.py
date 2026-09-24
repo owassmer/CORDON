@@ -7,8 +7,8 @@ from datetime import date
 import copy
 import unittest
 
-from cordon_d.judgments import (annulment_basis, blocks, decision_identity, judgment_events, liveness_closures,
-                                validate, validate_disposition)
+from cordon_d.judgments import (_states_day, annulment_basis, blocks, decision_identity, judgment_events,
+                                liveness_closures, validate, validate_disposition)
 
 XML = ('<?xml version="1.0" encoding="UTF-8"?><GA xmlns:h="http://www.w3.org/HTML/1998/html4"><Provvedimento>'
        '<h:div>SENTENZA</h:div><h:div><h:div>-dell’atto dirigenziale n. 137 dell’11.11.2021 del Resp. Sezione '
@@ -53,6 +53,20 @@ class JudgmentEvents(unittest.TestCase):
             target[path[-1]] = value
             with self.subTest(path=path), self.assertRaises(ValueError):
                 validate(broken, TEXTS)
+
+    def test_a_printed_day_is_compared_as_a_number_and_a_date_by_reference_needs_its_full_date(self):
+        # TAR Bari decreto 59/2023: "in data 02/02/2023"; sentenza 547/2023: "nota prot. n. 966 del 31.1.2022 …
+        # trasmessa ai ricorrenti a mezzo pec di pari data".
+        self.assertTrue(_states_day('02/02/2023', 'in data 02/02/2023', date(2023, 2, 2)))
+        self.assertFalse(_states_day('02/02/2023', 'in data 02/02/2023', date(2023, 2, 20)))
+        by_reference = 'la nota prot. n. 966 del 31.1.2022, trasmessa ai ricorrenti a mezzo pec di pari data'
+        self.assertTrue(_states_day('di pari data', by_reference, date(2022, 1, 31)))
+        self.assertFalse(_states_day('di pari data', by_reference, date(2022, 1, 30)))
+        self.assertFalse(_states_day('di pari data', 'trasmessa a mezzo pec di pari data', date(2022, 1, 31)))
+        # A date printed without its day supplies no day.
+        self.assertFalse(_states_day('nel mese di novembre 2021', 'pubblicato nel mese di novembre 2021',
+                                     date(2021, 11, 1)))
+        self.assertTrue(_states_day('dal 12 al 19 novembre 2021', 'dal 12 al 19 novembre 2021', date(2021, 11, 12)))
 
     def test_events_attach_one_kind_each_to_the_held_order_and_named_person(self):
         attached, unattached = judgment_events(response(), held_instruments={HELD})
