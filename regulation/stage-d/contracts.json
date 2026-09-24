@@ -465,7 +465,7 @@
       ],
       "positional_qualification": {
         "field": "location",
-        "stated": "cordon_d.spatial.positional_qualification: the horizontal error of a located monitoring observation's recorded position, the plant's location, against its true position on the ground, stated in EPSG:32633. The error is the stated device term plus the grid distortion over the longest distance C measures around a point, bounded from the Transverse Mercator definition over Puglia's official extent; no map error and no locality enter it. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
+        "stated": "cordon_d.spatial.positional_qualification: the horizontal error of a located monitoring observation's recorded position, the plant's location, against its true position on the ground, stated in EPSG:32633. The error is the stated device term plus the grid distortion over the longest distance a C consumer bound to plant-population measures from the location, found by enumerating those consumers and the B widths they read, with the scale bounded from the Transverse Mercator definition over Puglia's official extent widened by that distance; no map error and no locality enter it. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
         "replacing_input": {
           "applies_to": "one fix, or one device class and capture mode, stated per record",
           "one_of": [

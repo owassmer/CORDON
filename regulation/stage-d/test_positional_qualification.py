@@ -7,8 +7,13 @@ always runs.
 from dataclasses import replace
 from datetime import date
 from decimal import ROUND_CEILING, Decimal
+import inspect
 import json
+from pathlib import Path
+import re
+import tempfile
 import unittest
+from unittest import mock
 
 import numpy
 from pyproj import CRS, Geod, Proj, Transformer
@@ -17,10 +22,11 @@ from shapely.geometry import Point, box
 from cordon_c.core import MissingInput
 from cordon_c.spatial import (MetricGeometry, adopted_membership, distance_test, ground_distance,
                               projection_distance_error)
-from cordon_d.evidence import Source, require_admissible
+import cordon_d.evidence
+from cordon_d.evidence import Source, file_digest, require_admissible
 from cordon_d.store import blob_path, store_root
-from cordon_d.spatial import (DEVICE_RECORDS, GROUND_FRAME, LONGEST_AROUND_A_POINT, REPOSITORY,
-                              longest_point_distance, metric_point, positional_qualification, positional_terms,
+from cordon_d.spatial import (DEVICE_RECORDS, GROUND_FRAME, REPOSITORY, longest_point_distance, metric_point,
+                              point_consumer_widths, positional_qualification, positional_terms,
                               transverse_mercator_scale_bounds)
 
 STORE = store_root(REPOSITORY)
@@ -77,27 +83,64 @@ class Contract(unittest.TestCase):
         self.assertEqual(len(replacing['one_of']), 3)
         self.assertTrue(replacing['default'].startswith('none'))
 
-    def test_the_longest_distance_around_a_point_comes_from_b(self):
+    def test_the_distortion_length_is_the_longest_width_a_plant_population_consumer_measures(self):
+        contracts = json.loads((REPOSITORY / 'regulation/stage-d/additional-input-contracts.json').read_text())
+        rows = [r for key in ('callables', 'reference_bindings') for r in contracts[key]]
+        bound = {r['consumer'] for r in rows if 'plant-population' in r['contracts']}
         ledger = json.loads((REPOSITORY / 'regulation/stage-b/clocks-and-parameters.json').read_text())
-        widths = {p['parameter_id']: p for p in ledger['parameters']}
-        self.assertEqual(longest_point_distance(), sum(float(widths[i]['value']) for i in LONGEST_AROUND_A_POINT))
-        # The widths are the ones C's containment_outer reads for its band around a plant.
-        import inspect
-        from cordon_c.populations import containment_outer
-        consumer = inspect.getsource(containment_outer)
-        for identity in LONGEST_AROUND_A_POINT:
-            self.assertIn(f'"{identity}"', consumer)
+        parameters = {p['parameter_id']: p for p in ledger['parameters']}
+        metres = {i: float(p['value']) * (1000 if p['unit'] == 'km' else 1)
+                  for i, p in parameters.items() if p['unit'] in {'m', 'km'}}
+        widths = point_consumer_widths()
+        self.assertLessEqual(set(widths), bound)
+        # Every bound C consumer that reads a B distance in its own source is enumerated, and no
+        # distance it names is longer than the length.
+        import importlib
+        longest, consumer, identities = longest_point_distance()
+        for name in bound:
+            module, _, function = name.rpartition('.')
+            source = inspect.getsource(getattr(importlib.import_module('cordon_c.' + module), function))
+            named = [metres[i] for i in re.findall(r'"(B-PAR-[^"]+)"', source) if i in metres]
+            if 'metres(' in source:
+                self.assertIn(name, widths)
+            self.assertTrue(all(value <= longest for value in named))
+        # Today that is the PNI 2026 1 km band, measured from the plant's point.
+        self.assertEqual((consumer, identities), ('bindings.pni_geography_facts', ('B-PAR-PNI2026-pest-free-band-1km',)))
+        self.assertEqual(longest, 1000.0)
+        self.assertEqual(widths['populations.containment_outer'][0], 450.0)  # the band ends at inner + width
+        # A longer consumer bound to plant-population lengthens it: the enumeration can fail.
+        island = {'consumer': 'bindings.island_distance_facts', 'contracts': ['plant-population']}
+        self.assertEqual(max(w for w, _ in point_consumer_widths(consumers=[*rows, island]).values()), 5000.0)
+        # A width read through an expression D cannot enumerate refuses rather than being missed.
+        survey = {'consumer': 'bindings.reduced_buffer_first_year_facts', 'contracts': ['plant-population']}
+        with self.assertRaisesRegex(ValueError, 'cannot enumerate'):
+            point_consumer_widths(consumers=[survey])
+
+    def test_a_source_is_hashed_once_per_file_state(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / 'source').write_bytes(b'first')
+            source = Source('s', 'source', file_digest(root / 'source'), 'official-dataset', 'public')
+            with mock.patch.object(cordon_d.evidence, 'file_digest', wraps=file_digest) as digest:
+                source.verify(root)
+                source.verify(root)
+                self.assertEqual(digest.call_count, 1)
+                # Changed bytes change the file's size or modification time, so they are read again and refused.
+                (root / 'source').write_bytes(b'changed')
+                with self.assertRaisesRegex(ValueError, 'Source changed'):
+                    source.verify(root)
+                self.assertEqual(digest.call_count, 2)
 
     def test_the_scale_bound_encloses_proj_over_the_widened_extent(self):
         # PROJ's own point scale on a grid is a check here, never the bound.
         frame = CRS.from_user_input(GROUND_FRAME)
         extent = (14.9, 18.6, 39.7, 42.3)
-        low, high = transverse_mercator_scale_bounds(frame, extent, 450)
+        low, high = transverse_mercator_scale_bounds(frame, extent, 1000)
         self.assertEqual(low, 0.9996)
-        # The widened box: 450 m beyond each edge, as the bound widens it.
+        # The widened box: 1 km beyond each edge, as the bound widens it.
         geod = Geod(ellps='WGS84')
-        west, east = geod.fwd(14.9, 42.3, 270, 450)[0], geod.fwd(18.6, 42.3, 90, 450)[0]
-        south, north = geod.fwd(14.9, 39.7, 180, 450)[1], geod.fwd(14.9, 42.3, 0, 450)[1]
+        west, east = geod.fwd(14.9, 42.3, 270, 1000)[0], geod.fwd(18.6, 42.3, 90, 1000)[0]
+        south, north = geod.fwd(14.9, 39.7, 180, 1000)[1], geod.fwd(14.9, 42.3, 0, 1000)[1]
         lons, lats = numpy.meshgrid(numpy.linspace(west, east, 40), numpy.linspace(south, north, 40))
         scale = Proj(frame).get_factors(lons.ravel(), lats.ravel()).meridional_scale
         self.assertGreaterEqual(scale.min(), low)
@@ -107,7 +150,7 @@ class Contract(unittest.TestCase):
         # Beyond the widened box the bound no longer holds.
         self.assertGreater(Proj(frame).get_factors(east + 0.05, south).meridional_scale, high)
         with self.assertRaises(ValueError):
-            transverse_mercator_scale_bounds(CRS.from_user_input('EPSG:3035'), extent, 450)
+            transverse_mercator_scale_bounds(CRS.from_user_input('EPSG:3035'), extent, 1000)
 
 
 @unittest.skipUnless(device_bytes_held() and monitoring_held(),
@@ -155,7 +198,8 @@ class RealObservations(unittest.TestCase):
                 for words in ('NSSDA 95%', self.terms.device['selector'], 'not measured on these fixes',
                               'capture mode', 'Galaxy Tab Active5', 'Aggiudicazione definitiva', '16/09/2024',
                               'no award date', 'no delivery date', 'true ground position', GROUND_FRAME,
-                              'Grid distortion', 'projection_distance_error', *LONGEST_AROUND_A_POINT,
+                              'Grid distortion', 'projection_distance_error', 'pni_geography_facts',
+                              *self.terms.longest_widths,
                               "D's reading", "the plant's recorded position"):
                     self.assertIn(words, basis)
                 self.assertNotIn('adastral', basis)
@@ -169,7 +213,8 @@ class RealObservations(unittest.TestCase):
                                  qualification=changed)
 
     def test_error_m_is_the_device_term_plus_the_grid_distortion_over_the_longest_distance(self):
-        distortion = projection_distance_error(longest_point_distance(), self.terms.scale)
+        self.assertEqual(self.terms.longest_m, longest_point_distance()[0])
+        distortion = projection_distance_error(self.terms.longest_m, self.terms.scale)
         self.assertEqual(self.terms.distortion_m, distortion)
         self.assertEqual(self.terms.error_m, float((Decimal(str(self.terms.device['value_m'])) + Decimal(distortion))
                                                    .quantize(Decimal('0.01'), ROUND_CEILING)))

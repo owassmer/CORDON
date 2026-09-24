@@ -20,6 +20,20 @@ def file_digest(path: Path) -> str:
     return digest.hexdigest()
 
 
+# One digest per file state within a process: a file whose size or modification time
+# changes is hashed again, so changed bytes are still refused.
+_DIGESTS: dict[tuple[str, int, int], str] = {}
+
+
+def verified_digest(path: Path) -> str:
+    """The file's digest, computed once per (path, size, mtime) within this process."""
+    status = path.stat()
+    key = (str(path), status.st_size, status.st_mtime_ns)
+    if key not in _DIGESTS:
+        _DIGESTS[key] = file_digest(path)
+    return _DIGESTS[key]
+
+
 def instant(value: datetime) -> datetime:
     if not isinstance(value, datetime) or value.tzinfo is None or value.utcoffset() is None:
         raise ValueError('Evidence knowledge time requires a timezone-aware instant')
@@ -38,7 +52,7 @@ class Source:
         path = (root / self.path).resolve()
         if not path.is_relative_to(root.resolve()):
             raise ValueError('Source must be inside the supplied source root')
-        if file_digest(path) != self.sha256:
+        if verified_digest(path) != self.sha256:
             raise ValueError(f'Source changed: {self.identity}')
         if self.role not in {'official-record', 'official-dataset', 'qualified-observation',
                              'official-format'}:

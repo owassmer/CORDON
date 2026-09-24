@@ -102,11 +102,9 @@ def metric_point(observation: CoordinateObservation, *, context: str, event_date
 
 # --- positional qualification of located monitoring observations ------------------
 
-# C's longest distance around a point: `containment_outer` tests a location with
-# `band_membership` out to inner + width from an infected plant, DDS 45's containment
-# sampling band starting at the 50 m perimeter. No width B sets around a point is longer.
-LONGEST_AROUND_A_POINT = ('B-PAR-DDS45-post-finding-containment-inner-50m',
-                          'B-PAR-DDS45-post-finding-containment-outer-band-400m')
+# The contract whose members' locations this qualification serves. C's consumers bound to
+# it measure B widths from a plant's location; the grid distortion covers the longest.
+POPULATION = 'plant-population'
 
 
 def _stored(store: Path, record: dict) -> Source:
@@ -118,14 +116,85 @@ def _stored(store: Path, record: dict) -> Source:
     return source
 
 
-def longest_point_distance(repository: Path = REPOSITORY) -> float:
-    """The longest distance C measures around a point, summed from B's canonical widths."""
+def _parameter_identities(node, function) -> set[str]:
+    """Every B parameter identity an expression can name.
+
+    A literal, a concatenation, a conditional, or a local name assigned one of those in the
+    same function. Anything else refuses, so a width read another way is never missed.
+    """
+    import ast
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return {node.value}
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
+        return {a + b for a in _parameter_identities(node.left, function)
+                for b in _parameter_identities(node.right, function)}
+    if isinstance(node, ast.IfExp):
+        return _parameter_identities(node.body, function) | _parameter_identities(node.orelse, function)
+    if isinstance(node, ast.Name):
+        values = [n.value for n in ast.walk(function) if isinstance(n, ast.Assign)
+                  and any(isinstance(t, ast.Name) and t.id == node.id for t in n.targets)]
+        if values:
+            return set().union(*(_parameter_identities(v, function) for v in values))
+    raise ValueError(f'A B width is read through an expression D cannot enumerate: {ast.unparse(node)}')
+
+
+def point_consumer_widths(repository: Path = REPOSITORY, *, consumers: list | None = None) -> dict:
+    """The longest distance each C consumer bound to plant-population measures, from B's widths.
+
+    The consumers are the rows of `additional-input-contracts.json` that bind a C callable to
+    plant-population. Each is read from C's source with every C function it calls, however
+    deep: each `metres(snapshot, identity, at)` call is one B width it measures. A consumer's
+    longest distance is at most the sum of its call sites' widths, each the largest the site
+    can name, since a band ends at inner + width (`containment_outer`, 50 + 400 m). A consumer
+    that measures from a surface, not a point, is counted too; it can only lengthen the bound.
+    A width read through an expression D cannot enumerate refuses.
+    """
+    import ast
+    if consumers is None:
+        contracts = json.loads((repository / 'regulation/stage-d/additional-input-contracts.json').read_text())
+        consumers = [row for key in ('callables', 'reference_bindings') for row in contracts[key]]
     ledger = json.loads((repository / 'regulation/stage-b/clocks-and-parameters.json').read_text())
-    widths = {p['parameter_id']: p for p in ledger['parameters']}
-    widths = [widths[identity] for identity in LONGEST_AROUND_A_POINT]
-    if any(p['unit'] != 'm' for p in widths):
-        raise ValueError('The widths around a point are stated in metres')
-    return float(sum(Decimal(p['value']) for p in widths))
+    parameters = {p['parameter_id']: p for p in ledger['parameters']}
+    functions, qualified = {}, {}
+    for path in sorted((repository / 'regulation/stage-c/cordon_c').glob('*.py')):
+        for node in ast.parse(path.read_text()).body:
+            if isinstance(node, ast.FunctionDef):
+                functions.setdefault(node.name, []).append(node)
+                qualified[f'{path.stem}.{node.name}'] = node
+
+    def metres(identity: str) -> Decimal:
+        row = parameters[identity]
+        if row['unit'] not in {'m', 'km'}:
+            raise ValueError(f'{identity} is not a distance')
+        return Decimal(row['value']) * (1000 if row['unit'] == 'km' else 1)
+
+    widths = {}
+    for row in consumers:
+        if POPULATION not in row['contracts']:
+            continue
+        seen, sites, pending = set(), [], [qualified[row['consumer']]]
+        while pending:
+            function = pending.pop()
+            if id(function) in seen:
+                continue
+            seen.add(id(function))
+            for call in (n for n in ast.walk(function) if isinstance(n, ast.Call)):
+                name = getattr(call.func, 'id', None) or getattr(call.func, 'attr', None)
+                if name == 'metres':
+                    sites.append(sorted(_parameter_identities(call.args[1], function)))
+                elif name in functions:
+                    pending.extend(functions[name])
+        if sites:
+            widths[row['consumer']] = (float(sum(max(metres(i) for i in site) for site in sites)),
+                                       tuple(i for site in sites for i in site))
+    return widths
+
+
+def longest_point_distance(repository: Path = REPOSITORY) -> tuple[float, str, tuple[str, ...]]:
+    """The longest distance any C consumer bound to plant-population measures, its consumer and B widths."""
+    widths = point_consumer_widths(repository)
+    consumer = max(widths, key=lambda name: widths[name][0])
+    return widths[consumer][0], consumer, widths[consumer][1]
 
 
 def region_extent(store: Path, record: dict) -> tuple[float, float, float, float]:
@@ -191,9 +260,10 @@ class PositionalTerms:
     award_source: Source
     region: dict
     region_source: Source
-    contract: dict
     extent: tuple[float, float, float, float]
     longest_m: float
+    longest_consumer: str
+    longest_widths: tuple[str, ...]
     scale: tuple[float, float]
     distortion_m: float
     error_m: float
@@ -208,12 +278,12 @@ def positional_terms(store: Path, repository: Path = REPOSITORY) -> PositionalTe
     sources = [_stored(store, record) for record in (device, award, region)]
     require_admissible(contract, sources)
     extent = region_extent(store, region)
-    longest = longest_point_distance(repository)
+    longest, consumer, widths = longest_point_distance(repository)
     scale = transverse_mercator_scale_bounds(CRS.from_user_input(GROUND_FRAME), extent, longest)
     distortion = projection_distance_error(longest, scale)
     error = float((Decimal(str(device['value_m'])) + Decimal(distortion)).quantize(Decimal('0.01'), ROUND_CEILING))
-    return PositionalTerms(device, sources[0], award, sources[1], region, sources[2], contract,
-                           extent, longest, scale, distortion, error)
+    return PositionalTerms(device, sources[0], award, sources[1], region, sources[2],
+                           extent, longest, consumer, widths, scale, distortion, error)
 
 
 @lru_cache
@@ -225,13 +295,14 @@ def positional_qualification(observation: CoordinateObservation, *, context: str
                              terms: PositionalTerms) -> SpatialQualification:
     """The horizontal error of one located observation's recorded position against its true ground position.
 
-    error_m is the stated device term plus the grid distortion over the longest distance C
-    measures around a point, rounded up to the centimetre. A recorded fix is a position on
+    error_m is the stated device term plus the grid distortion over the longest distance a C
+    consumer bound to plant-population measures from the location, rounded up to the centimetre. A recorded fix is a position on
     the ground, so no map enters it, and the observation's locality is not read. The frame
     is EPSG:32633, the metric frame SIT publishes monitoring geometry in. A geometry built
     from a map carries that map's own ground error, and C adds the two. The surveyor samples
     and records the fix at the plant, so the recorded position is the plant's location. Every
-    located observation takes the same producer, whatever its published result.
+    located observation takes the same producer, whatever its published result. The cited
+    sources' roles and bytes were checked once, by `positional_terms`.
     """
     if (observation.coordinates is None or observation.crs is None
             or not all(isfinite(v) for v in observation.coordinates)):
@@ -251,8 +322,8 @@ def positional_qualification(observation: CoordinateObservation, *, context: str
                 f"test does not describe."),
         Support(terms.region_source.identity, terms.region['selector'],
                 f"Grid distortion {terms.distortion_m:.3f} m: C's projection_distance_error for "
-                f"{terms.longest_m:g} m, the longest distance C measures around a point (containment_outer, "
-                f"{' + '.join(LONGEST_AROUND_A_POINT)}), with {GROUND_FRAME} point scale from {low} to "
+                f"{terms.longest_m:g} m, the longest distance a C consumer bound to plant-population measures from "
+                f"the location ({terms.longest_consumer.rpartition('.')[2]}, {' + '.join(terms.longest_widths)}), with {GROUND_FRAME} point scale from {low} to "
                 f"{high:.7f}. The scale bounds follow from the Transverse Mercator definition of {GROUND_FRAME} "
                 f"over {terms.region['reading']} {west:.4f} to {east:.4f} E, {south:.4f} to {north:.4f} N, widened "
                 f"by {terms.longest_m:g} m; they are not sampled. A longer distance from the point needs a larger "
@@ -262,6 +333,5 @@ def positional_qualification(observation: CoordinateObservation, *, context: str
                 f"{GROUND_FRAME}. The published pair is read on the WGS84 datum, so the transformation is PROJ's projection."),
     )
     sources = (terms.device_source, terms.award_source, terms.region_source)
-    require_admissible(terms.contract, sources)
     return SpatialQualification(observation.occurrence, context, event_date, observation.crs, GROUND_FRAME,
                                 terms.error_m, sources, support)
