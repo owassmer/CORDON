@@ -74,10 +74,17 @@ Neither runs in CI, which has no store.
 
 Beside the blobs, `derived/` holds regenerable readings, not owners. Monitoring
 occurrences and typed readings are Parquet keyed by source hash and reader
-version. The grouped distinct-observation stream is Parquet keyed by the ordered
+version. `Member.publisher_annotation` keeps a campaign source's literal
+annotation and its citation on its own occurrence. It changes no identity or
+grouping. An older cache without that reading stays distinguishable from an
+absent column or a null value. The grouped distinct-observation stream is Parquet
+keyed by the ordered
 `(url, view, sha256)` sequence of retained releases, the reader version and the
 DuckDB version. Reports are compact JSON blocks and an assembled reading under
-source hash and extraction version.
+source hash and extraction version. A document reading, including a
+case-prescription reading, is JSON under the hash of its request, which binds the
+source hashes, prompt, schema and model; its reader replays it. The tree holds
+neither the reading nor the records derived from it.
 
 Each native identifier cell of that assembled reading carries one regenerable
 record holding the positioned reading of the cell, the source cell bounds and
@@ -378,6 +385,175 @@ instruction changes the request. Replay never secretly spends another call.
 API-key fallback and model tools are disabled. A bounded subprocess timeout
 applies.
 
+A caller may also supply complete native HTML or plain text. Linked assets are not
+fetched, so meaning that depends on layout still needs the source views. A
+supplemental rotated view keeps the original page and its image provenance.
+`read_retained(request_id, store)` validates and replays a named request offline,
+without dispatch. A retained request keeps the provider and source presentation
+it actually used. Shell, web and agent tools are disabled.
+
+`read_native_text` supplies the complete native text of each PDF, page by page,
+through the authenticated Claude subscription in print mode, with tools, MCP
+servers, setting sources and session persistence disabled and API-key variables
+removed. A page without a native text layer is supplied as that fact; the
+calling reader names any limitation it causes. The request records the provider,
+the presentation and those pages. Replay, identity and schema checks are those
+above.
+
 The calling reader uses the shared store and retains the request reference beside
 its interpreted output. The transport introduces no second source inventory,
 scheduler, extraction schema or evidence-acceptance model.
+
+## Case-prescription reading
+
+`cordon_d.case_prescriptions` supplies the `case-prescription` input from each
+order's own text, under `prescription-reading.txt`, through `read_native_text`.
+`scripts/read_prescriptions.py` replays by default and dispatches with
+`--execute`. The reading lists the removal work the operative part prescribes to
+recipients and every clause stating what follows if they do not begin or perform
+it. Every quotation, and every copied field, must occur on the page its citation
+names; a field printed across a page break must close one cited page and open the
+next. Otherwise the reading is refused. A refused reading gets one source-only
+reread whose request states the refusal; a second refusal stands as a named
+reading failure. A clause limit is only text in the clause that prevents reading
+its term, anchor, commitment, coercive population or executor. A validated first
+reading that states a clause limit gets one source-only reread whose request
+states the limit and that definition; a limit the reread still states stands.
+
+One record is one enforcement clause over the work it enforces: instrument,
+recipients and cohort as printed, the prescribed scope, the commencement work and
+population, the stated term as printed (number and unit word, never classified),
+its anchor, the stated consequence and commitment, the coercive population with
+its back-reference resolved within the same clause, and the executor. Work that
+no clause enforces keeps a record without a term. Work an act applies by
+reference to another order's prescription stays unknown until `apply_references`
+composes it with that order's single clause record: the recipients and scope stay
+the referring act's, and the term, populations, executor and governing
+references are the referenced order's. Retained copies of one order that read the
+same clause are one clause; copies that read it differently leave the work
+unknown. An act that prescribes no work to
+recipients has no record. Governing A references are every A row of the
+instrument and every row whose `corrects_instrument_ids` names it. Annex
+positions are not read.
+
+Retained copies compare what they say: case, whitespace, punctuation and articles
+aside. A list label the page prints inside a clause (a lettered point, a bullet or
+a dash standing alone) does not refuse a copied field that omits it.
+
+The rule's clause predicate holds only for an operative clause with a stated term
+running from notification, a committed consequence, a coercive population and an
+executor. A clause's own reading limit leaves it unknown. Lawful dueness is the
+order's own reading: its operative part prescribes the work to its recipients and
+names the population for coercion (`order_dueness`). `lawfully_due` holds that
+reading to every governing A row. A held court disposition reaches it from its
+publication: an annulment closes the order only for the scope the decision states
+(for the applicants, false for a recipient within it, live outside it, and
+unknown naming the scope while the recipient is not identified); an interim
+suspension with no later disposition of its ricorso, a challenge ended with the
+court's stated reason, or a stated correction, replacement, revocation,
+suspension or withdrawal, whole or in part, that no A row records, leaves it
+unknown and names the act and the words stating what changes. Nothing is patched.
+`c_result` passes C only the notice and commencement evidence the caller holds:
+the facts of the Art. 21-ter notice branches (the Art. 21-bis communication
+predicate, or the mass-publicity row) and each branch's instant, from which C's
+`notice_instant` takes the earliest instant among the branches A finds true;
+nothing absent is supplied. Publication fills notification only through A's
+mass-publicity route.
+
+Stated changes come from every held act that names the order, not only from the
+order population. `cordon_d.held_acts` scans every source text A admits. A text
+that prints a held order's identity (`printed_identities`: its number closely
+followed by its adoption date, at most 12 characters and two words apart with no
+number between, or an act designator with its number and year) is read whole under
+`act-relationship-reading.txt`, through `read_native_blocks`, one block per
+page of the admitted text. The reading lists each act it states it corrects,
+supplements, completes, replaces, revokes, suspends or withdraws, whole or in
+part, with the words stating what changes; every quotation and copied field must
+occur in its cited block. Only an operative statement is a change; a recital
+restates.
+
+## Act-specific mass-publicity basis
+
+`cordon_d.notice_routes` supplies the `recipient-notice` field "act-specific
+mass-publicity basis" from each order's own text, under
+`notice-route-reading.txt`, through `read_native_text`
+(`scripts/read_notice_routes.py`). The reading copies, with page citations, each
+reason the order gives for reaching its recipients by publicity, marked as a
+statement about this act or a restatement of the general rule, and each form of
+publicity the order establishes: its words, its period as printed and its stated
+effect. Validation and the single stated reread follow the case-prescription
+reader. Under Owen's 2026-09-24 ruling the act's own stated ground meets
+Art. 21-bis and is not re-judged, so a ground the reading holds about the act
+is supplied as stated. A held posting reaches C unresolved, naming what its
+completion needs (the stated period and the posting's dates); a restated rule
+supplies nothing, and without a stated ground C names its own missing predicate.
+
+## Court-decision events
+
+`cordon_d.judgments` reads retained TAR decisions (GA XML) as their numbered
+leaf blocks, under `judgment-event-reading.txt`, through `read_native_blocks`
+(`scripts/read_judgments.py`). The reading lists the removal orders the decision
+names by number and date, and each dated event it states about one of them, one
+kind per event: PEC delivery to a named person, first or last day of a municipal
+posting, an owner's request, or the administration's reply. Each event keeps its
+block, quotation and whether the court states it or reports a party's claim.
+Every quotation and copied field must occur in its cited block. An event's day
+must be printed: among the numbers of its printed date (compared as numbers), or,
+for a date printed by reference to another ("di pari data"), as a full date in its
+cited quotation. A date printed without its day supplies no day. An event attaches
+only to an order D holds, as an `AdministrativeEvent` for the person the
+decision names; a posting names no recipient. Other events stay unattached with
+their cause. Whether a delivery or posting is legally sufficient notice stays
+with A.
+
+The same decisions supply `operative-act`'s annulment basis under
+`judgment-disposition-reading.txt` (`read_judgments.py --dispositions`). The
+reading copies the court's own disposition from its dispositive part and kind,
+and, for each order the disposition bears on, its effect (annulled, not annulled,
+suspended, suspension refused), its scope as the decision states it (dispositive
+words and the reasons' passages), the applicants, the grounds and, for a challenge
+ended without a ruling, the court's stated reason. The decision's kind, number,
+section, register number and decided and published dates are its own GA
+descriptors. A party's claim never fills a disposition. Held appeal indexes are
+searched and named with the span they cover; an empty search is not finality.
+`liveness_closures` takes, per ricorso, the latest disposition stating an effect.
+
+## Albo postings by printed identity
+
+`cordon_d.albo_postings` (`scripts/read_postings.py`) attaches albo records to an
+order only by the identity the record itself prints: number and year, the date
+where it prints one (equal to the order's adoption date), and the Osservatorio
+fitosanitario as issuer. Bytes, subjects and filenames attach nothing. An OpenWeb
+albo register export is read row by row: on a comune's albo a row printing the
+order is its posting, with the declared start and end; on the executor's albo a
+row is the executor's own act naming the order, dated by the act and kept for what
+it states. A row that liquidates aid to owners who "hanno eseguito estirpazione …
+adempiendo a prescrizione" is a lead to removal the named recipients performed
+(row 11), not an act of removal by the executor; it supplies no C input. An issuer
+the export cuts where the field ends ("Osservatorio Fitosanita") is printed. A
+row that prints the issuer is read for identities by the same matcher as held acts
+(`held_acts.printed_identities`): a number closely followed by a date ("n. 114
+del 16/10/2023", "DDS 99 05/08/2024", "60 del 19 luglio 2022") or a designator
+with number and year ("DDS 122/2021"). Every identity a row
+with the issuer prints is attached or listed unattached with its cause: an order D
+does not hold, a date other than the order's adoption date, or a date that is not
+a readable date. A JCityGov
+detail supplies the declared start; its period end is a retention horizon, so the
+interval stays open. An image-only posted document's identity is read from its
+page images through the subscription (`posted_identity`). Whether a posting is
+notice, or an executor act is execution, stays with A.
+
+## Administrative publication records
+
+`cordon_d.notices` keeps native register declarations, their separate
+publication occurrences, dates, offices and original-document routes.
+`cordon_d.removal_events` connects them to measure identity and adoption through
+explicit act identifiers or acquired document attachments. Incoming protocol,
+adoption, publication and recipient effect stay distinct. Identical attached
+bytes do not merge publication occurrences and do not prove amendment. An
+attachment adapter needs the acquisition record. A future date stays an
+unoccurred declaration. A declared posting interval does not prove
+uninterrupted posting. A retained complete publication certificate supplies its
+own attested interval. An unresolved act identity can be connected through the
+acquired certificate and principal routes. Neither record supplies recipient
+notification, response, default or performance.

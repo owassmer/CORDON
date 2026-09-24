@@ -12,7 +12,7 @@ from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 from fractions import Fraction
 from itertools import product
-from math import comb
+from math import comb, cos, hypot, pi
 import unittest
 from zoneinfo import ZoneInfo
 
@@ -38,6 +38,19 @@ CRS_M = CRS.from_epsg(32633)
 
 def shape(geometry, error=0):
     return MetricGeometry(geometry, CRS_M, error)
+
+
+def personal_communication(snapshot, at, *, effected):
+    """Art. 21-bis personal-communication facts for a restrictive act with no immediate-effect clause."""
+    row = snapshot.version("IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect", at)
+    facts = {}
+    for p in leaves(row["condition_ast"]):
+        if p.startswith("the communication to that recipient has been effected"):
+            if effected is not None:
+                facts[row["provision_version_id"], p] = effected
+        else:
+            facts[row["provision_version_id"], p] = p != "a valid immediate-effect exception applies"
+    return facts
 
 
 def simple_snapshot(ast, extra=()):
@@ -429,6 +442,59 @@ class CalendarBoundaries(unittest.TestCase):
         self.assertEqual(included, [1, 2, 3, 11, 12])
 
 
+def edge_distance(point, polygon):
+    """Exact distance from a point to a polygon's rings, by projection on each edge."""
+    px, py = point
+    best = float("inf")
+    for ring in (polygon.exterior, *polygon.interiors):
+        for (ax, ay), (bx, by) in zip(ring.coords, ring.coords[1:]):
+            dx, dy = bx - ax, by - ay
+            t = max(0, min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)))
+            best = min(best, hypot(ax + t * dx - px, ay + t * dy - py))
+    return best
+
+
+def depth_in_box(parcel, area):
+    """Exact least distance from a polygon inside an axis-aligned box to the box's edges."""
+    x0, y0, x1, y1 = area.bounds
+    coords = parcel.exterior.coords
+    if not all(x0 <= x <= x1 and y0 <= y <= y1 for x, y in coords):
+        return None
+    return min(min(x - x0, x1 - x, y - y0, y1 - y) for x, y in coords)
+
+
+def least_half_width(polygon):
+    """Half the least width of a polygon's convex hull, from exact vertex-to-edge-line distances."""
+    hull = polygon.convex_hull.exterior.coords[:-1]
+    widths = []
+    for (ax, ay), (bx, by) in zip(hull, hull[1:] + hull[:1]):
+        length = hypot(bx - ax, by - ay)
+        widths.append(max(abs((bx - ax) * (y - ay) - (by - ay) * (x - ax)) / length for x, y in hull))
+    return min(widths) / 2
+
+
+# Catasto layer 2 (SIT Puglia Background/Catasto), EPSG:32633, as PR #8's parcel check read them.
+PARCEL_A662_C_2_379 = Polygon([(655811.3492, 4548156.9409), (655811.2358999997, 4548177.2468),
+                               (655811.8328999998, 4548177.2608), (655812.8442000002, 4548157.070900001)])
+PARCEL_A893_43_230 = Polygon([
+    (645920.4016000004, 4553093.856899999), (645924.8816, 4553098.748), (645926.0646000002, 4553098.723999999),
+    (645926.8836000003, 4553098.353), (645927.5976, 4553097.821), (645928.2037000004, 4553097.1570999995),
+    (645928.6507000001, 4553096.4111), (645928.9216999998, 4553095.563100001), (645929.0027000001, 4553094.622099999),
+    (645928.9627, 4553093.8101), (645928.7326999996, 4553092.9541), (645928.2807999998, 4553092.187100001),
+    (645927.5778000001, 4553091.497099999), (645928.1597999996, 4553090.5721), (645928.4287999999, 4553089.743100001),
+    (645928.5438000001, 4553088.703199999), (645928.4607999995, 4553087.9802), (645928.2397999996, 4553087.156199999),
+    (645927.7778000003, 4553086.3882), (645927.1827999996, 4553085.7281), (645926.4548000004, 4553085.2081),
+    (645925.6327999998, 4553084.8561), (645924.7778000003, 4553084.665100001), (645923.8767999997, 4553084.6731),
+    (645922.9918, 4553084.872099999), (645922.1727999998, 4553085.243000001), (645921.4606999997, 4553085.755000001),
+    (645920.8646999998, 4553086.408), (645920.4256999996, 4553087.205), (645920.1557, 4553088.051999999),
+    (645920.0537, 4553088.923900001), (645920.1436999999, 4553089.7959), (645920.4145999998, 4553090.6219),
+    (645920.8465999998, 4553091.388900001), (645921.4616, 4553092.017899999), (645921.3476, 4553092.187899999),
+    (645920.9095999999, 4553092.9629)])
+PARCEL_A883_9_2148 = Polygon([
+    (625901.4153000005, 4566312.5911), (625891.7806000002, 4566291.328299999), (625878.8737000003, 4566297.605900001),
+    (625882.3476, 4566305.5748), (625875.6815999998, 4566308.8506000005), (625881.4654000001, 4566321.4485)])
+
+
 class SpatialPopulations(unittest.TestCase):
     def test_hectare_outside_sliver_must_survive_declared_spatial_error(self):
         s = Snapshot.load()
@@ -561,6 +627,110 @@ class SpatialPopulations(unittest.TestCase):
         self.assertTrue(partial_parcel(parcel, area).truth)
         self.assertFalse(adopted_membership(shape(Point(19, 19)), area).truth)
         self.assertFalse(partial_parcel(shape(box(10, 0, 20, 10)), area).truth)
+
+    # A geometry with error bound e stands for any true shape between itself shrunk by e and
+    # itself grown by e. The expectations below come from exact distances and exact rectangle
+    # erosions, not from partial_parcel or its buffers.
+
+    def test_partial_parcel_wholly_inside_needs_the_combined_error_from_the_boundary(self):
+        area = box(0, 0, 1000, 1000)
+        # A 5 m strip 100 m inside, with PR #8's held bounds 12.46 m and 13.46 m rounded up
+        # to 12.5 m and 13.5 m: every true position of the strip lies in the area shrunk by
+        # 13.5 m, which lies in every true area.
+        strip = box(100, 100, 400, 105)
+        self.assertEqual(depth_in_box(strip, area), 100)
+        self.assertTrue(partial_parcel(shape(strip, 12.5), shape(area, 13.5)).truth)
+        # Real narrow parcels at the depth PR #8 measured inside their areas.
+        for parcel, depth, e_p, e_z in [(PARCEL_A662_C_2_379, 174.8, 8.0, 9.0),
+                                        (PARCEL_A893_43_230, 131.0, 12.5, 13.5)]:
+            x0, y0, x1, y1 = parcel.bounds
+            around = box(x0 - depth, y0 - depth, x1 + depth, y1 + depth)
+            self.assertAlmostEqual(depth_in_box(parcel, around), depth, places=6)
+            self.assertGreater(depth, e_p + e_z)
+            self.assertTrue(partial_parcel(shape(parcel, e_p), shape(around, e_z)).truth)
+        # 20 m inside with a combined error of 26 m, and too narrow for a core: a small true
+        # parcel moved 12.5 m toward the line lies within 13.5 m of it, outside the area
+        # shrunk by 13.5 m (6 m to spare).
+        near = box(20, 100, 25, 400)
+        self.assertEqual(depth_in_box(near, area), 20)
+        self.assertIsNone(partial_parcel(shape(near, 12.5), shape(area, 13.5)).truth)
+        # One narrow component deep inside and one wide component 100 m outside: the parcel
+        # shrunk by 12.5 m is box(1112.5, 112.5, 1187.5, 187.5), a possible true parcel wholly
+        # outside even the grown area.
+        multipart = MultiPolygon([box(100, 100, 400, 105), box(1100, 100, 1200, 200)])
+        self.assertIsNone(partial_parcel(shape(multipart, 12.5), shape(area, 13.5)).truth)
+
+    def test_partial_parcel_cores_shrink_by_each_geometrys_own_error(self):
+        area = box(-1000, -1000, 0, 1000)
+        # A 100 m square crossing the line by 50 m: (-25.5, 50) lies 24.5 m inside the parcel
+        # and 25.5 m inside the area, so every true parcel and area share its neighbourhood.
+        square = box(-50, 0, 50, 100)
+        self.assertGreater(edge_distance((-25.5, 50), square), 12.5)
+        self.assertGreater(edge_distance((-25.5, 50), area), 13.5)
+        self.assertTrue(partial_parcel(shape(square, 12.5), shape(area, 13.5)).truth)
+        # Crossing by 10 m: the shrunk parcel box(2.5, 12.5, 77.5, 87.5) and the shrunk area,
+        # x <= -13.5, are possible true shapes with no common area; the unshrunk ones overlap.
+        self.assertIsNone(partial_parcel(shape(box(-10, 0, 90, 100), 12.5), shape(area, 13.5)).truth)
+        # A 20 m strip crossing by 50 m: (-40, 50) lies 10 m inside the strip and 40 m inside
+        # the area, beyond e_p = 5 and e_z = 30.
+        strip = box(-50, 40, 100, 60)
+        self.assertGreater(edge_distance((-40, 50), strip), 5)
+        self.assertGreater(edge_distance((-40, 50), area), 30)
+        self.assertTrue(partial_parcel(shape(strip, 5), shape(area, 30)).truth)
+        # With the bounds swapped the strip shrunk by 30 m is empty, and a small true parcel
+        # 35 m out of the area is possible.
+        self.assertIsNone(partial_parcel(shape(strip, 30), shape(area, 5)).truth)
+        # Sharing only an edge: the shrunk shapes are 26 m apart; the grown ones overlap.
+        self.assertIsNone(partial_parcel(shape(box(0, 0, 100, 100), 12.5), shape(area, 13.5)).truth)
+        # Beyond the combined error: 30 m > 26 m.
+        self.assertFalse(partial_parcel(shape(box(30, 0, 130, 100), 12.5), shape(area, 13.5)).truth)
+
+    def test_partial_parcel_chord_at_a_reflex_corner_stays_unknown(self):
+        from math import radians, tan
+        from cordon_c.spatial import QUAD_SEGMENTS
+        # The area's top edge dips to a reflex corner at the origin, turning by 8.16 degrees.
+        # A buffer draws that corner's 8.16-degree arc as one chord, 1.45 times the
+        # nominal 90 / QUAD_SEGMENTS degrees.
+        rise = 2000 * tan(radians(4.08))
+        area = Polygon([(-2000, -3000), (2000, -3000), (2000, rise), (0, 0), (-2000, rise)])
+        e_p, e_z = .001, 187.4
+        parcel = box(-.05, -(e_z - .05), .05, -(e_z - .15))
+        # Every parcel vertex lies closer than e_z to the corner, so no point of the parcel
+        # lies in the area shrunk by e_z: that shrunk area and the parcel shrunk by e_p are
+        # possible true shapes with no common area.
+        self.assertLess(max(hypot(x, y) for x, y in parcel.exterior.coords), e_z)
+        self.assertTrue(area.covers(parcel))
+        # A chord buffer drawn at e_z, or at e_z / cos(pi / (4q)), still keeps part of the parcel,
+        # so partial_parcel's drawn cores overlap and only the exact confirmation keeps unknown.
+        core = parcel.buffer(-e_p)
+        for radius in (e_z, e_z / cos(pi / (4 * QUAD_SEGMENTS))):
+            self.assertGreater(core.intersection(area.buffer(-radius, quad_segs=QUAD_SEGMENTS)).area, 0)
+        self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
+
+    def test_partial_parcel_drawn_core_past_the_inscribed_radius_stays_unknown(self):
+        from cordon_c.spatial import QUAD_SEGMENTS
+        # Just past a polygon's inscribed radius, GEOS leaves a drawn core although no point
+        # of the parcel lies farther than e_p from its boundary. A regular octagon, and the
+        # real Catasto parcel A883/ /9/2148 at PR #8's held parcel bound of 12.46 m (area
+        # bound 13.46 m there) and at a constructed bound of 12.506 m, each placed a few
+        # metres inside an area line.
+        octagon = Point(0, 0).buffer(11.85, quad_segs=2)
+        x0, y0, x1, y1 = PARCEL_A883_9_2148.bounds
+        cases = [(octagon, 11.368, box(-1000, -1000, 1000, octagon.bounds[3] + 8), 5.0, 8),
+                 (PARCEL_A883_9_2148, 12.46, box(x0 - 3000, y0 - 3000, x1 + 3000, y1 + 5), 9.0, 5),
+                 (PARCEL_A883_9_2148, 12.506, box(x0 - 3000, y0 - 3000, x1 + 3000, y1 + 5), 9.0, 5)]
+        for parcel, e_p, area, e_z, depth in cases:
+            # An inscribed disk lies between two parallel support lines of the convex hull, so
+            # half the hull's least width bounds the inscribed radius: the parcel shrunk by e_p
+            # is empty. (a) fails, so a small true parcel moved toward the line lies outside
+            # the area shrunk by e_z: unknown.
+            self.assertLess(least_half_width(parcel), e_p)
+            self.assertAlmostEqual(depth_in_box(parcel, area), depth, places=6)
+            self.assertLess(depth, e_p + e_z)
+            drawn = (parcel.buffer(-e_p, quad_segs=QUAD_SEGMENTS)
+                     .intersection(area.buffer(-e_z, quad_segs=QUAD_SEGMENTS)))
+            self.assertGreater(drawn.area, 0)
+            self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
 
     def test_shared_performance_and_incomplete_population(self):
         req = {"plant-1": Evaluation(True), "plant-2": Evaluation(None, needs=frozenset({"species"}))}
@@ -921,6 +1091,58 @@ class ComposedTemporalCases(unittest.TestCase):
         scope = reduced_buffer_first_year_facts(s, AT, **args)
         self.assertFalse(evaluate(s, "EU-2020-1201:5(1)(c)", AT, merge_facts(adequate, scope)).truth)
 
+    def test_survey_extent_counts_the_whole_grown_enclosure_at_a_convex_corner(self):
+        from math import radians, sin, tan
+        from cordon_c.bindings import reduced_buffer_first_year_facts
+        from cordon_c.spatial import QUAD_SEGMENTS
+        s = Snapshot.load()
+        calendar = WorkingCalendar(date(2024, 1, 1), date(2028, 1, 1), frozenset(), frozenset({5, 6}))
+        enclosure = box(-2600, -2600, 2600, 2600)
+        fact = "a survey at least once in the first year, in a zone at least 2,5 km around the infected zone, showing the pest absent"
+
+        def extent(out_m, error_m, enclosure=enclosure, corner=(2600, 2600), degrees=42.1875):
+            # A small infected zone beyond the corner, between two of the buffer's chord
+            # points (by default 42.1875 degrees), out_m from the corner.
+            a = radians(degrees)
+            cx, cy = corner[0] + out_m * cos(a), corner[1] + out_m * sin(a)
+            zone = box(cx - .2, cy - .2, cx + .2, cy + .2)
+            near = min(hypot(x - corner[0], y - corner[1]) for x, y in zone.exterior.coords)
+            far = max(hypot(x - corner[0], y - corner[1]) for x, y in zone.exterior.coords)
+            scope = reduced_buffer_first_year_facts(
+                s, AT, identification=datetime(2025, 6, 4, 12, tzinfo=ROME), evaluated_at=datetime(2026, 9, 8, tzinfo=ROME),
+                infected_zone=shape(zone), surveyed_enclosure=shape(enclosure, error_m),
+                survey_completed=datetime(2026, 5, 4, tzinfo=ROME), negative_survey_basis=Evaluation(True),
+                host_sampling_and_testing=Evaluation(True), zone=ROME, calendar=calendar)
+            return next(v for (_, text), v in scope.items() if text == fact), zone, near, far
+
+        # 1299 m out with a 1300 m error: the whole zone lies in the true grown enclosure,
+        # and its clearance of the 2.5 km radius is open (1298.7 - 1300 < 2500 <= 1298.7 + 1300).
+        # A chord buffer drawn at 1300 m misses it.
+        value, zone, near, far = extent(1299, 1300)
+        self.assertLess(far, 1300)
+        self.assertLess(near - 1300, 2500)
+        self.assertGreaterEqual(near + 1300, 2500)
+        self.assertFalse(enclosure.buffer(1300, quad_segs=QUAD_SEGMENTS).covers(zone))
+        self.assertIsNone(value.truth)
+        # A convex corner turning by 8.16 degrees, which a buffer draws as one chord of
+        # 1.45 times the nominal 90 / QUAD_SEGMENTS degrees. The zone on the bisector,
+        # 1299 m out, lies in the true grown enclosure; a buffer drawn at 1300 m, or at
+        # 1300 / cos(pi / (4q)), misses it.
+        drop = 5000 * tan(radians(4.08))
+        apex = Polygon([(-5000, -5000), (5000, -5000), (5000, -drop), (0, 0), (-5000, -drop)])
+        value, zone, near, far = extent(1299, 1300, enclosure=apex, corner=(0, 0), degrees=90)
+        self.assertLess(far, 1300)
+        self.assertLess(near - 1300, 2500)
+        self.assertGreaterEqual(near + 1300, 2500)
+        for radius in (1300, 1300 / cos(pi / (4 * QUAD_SEGMENTS))):
+            self.assertFalse(apex.buffer(radius, quad_segs=QUAD_SEGMENTS).covers(zone))
+        self.assertIsNone(value.truth)
+        # At a bound of D's size the clearance cannot reach 2.5 km, so the answer is False.
+        value, zone, near, far = extent(25, 26)
+        self.assertLess(far, 26)
+        self.assertLess(near + 26, 2500)
+        self.assertFalse(value.truth)
+
     def test_case_commencement_is_not_completion_and_requires_evidence(self):
         from cordon_c.bindings import noncommencement_facts
         s = Snapshot.load()
@@ -931,6 +1153,7 @@ class ComposedTemporalCases(unittest.TestCase):
         facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])
                  if p not in {"the source notification-based commencement deadline has elapsed",
                               "noncommencement of that work by the source deadline is established"}}
+        facts |= personal_communication(s, AT, effected=True)
         args = dict(notification=datetime(2026, 8, 3, 10, tzinfo=ROME),
                     evaluated_at=datetime(2026, 8, 14, tzinfo=ROME), stated_term=("10", "giorni"),
                     zone=ROME, calendar=WorkingCalendar(date(2026,1,1),date(2027,1,1),frozenset(),frozenset({5,6})))
@@ -958,6 +1181,12 @@ class ComposedTemporalCases(unittest.TestCase):
                 noncommencement_facts(s, clock, AT, **dict(args, stated_term=term),
                                       qualifying_commencements={}, commencement_records_complete=True)
         self.assertIsNone(s.clocks[clock]["unit"])
+        # Without a notification day there is no deadline: both temporal leaves stay unknown and name it.
+        silent = noncommencement_facts(s, clock, AT, **dict(args, notification=None),
+                                       qualifying_commencements={}, commencement_records_complete=True)
+        result = evaluate(s, identity, AT, merge_facts(facts, silent))
+        self.assertIsNone(result.effect)
+        self.assertIn("legally sufficient notification of the prescription to this recipient", result.needs)
         # A stated term never replaces a period B fixes.
         fixed = next(c for c in json.loads((Path(__file__).parent / "calendar-rules.json").read_text())["italian_deadline"]
                      if c != clock)
@@ -1119,6 +1348,272 @@ class OperativeMethods(unittest.TestCase):
         self.assertTrue(survey_design_adequacy(candidate,'B-PAR-EU-15(4)-C90-p1',AT,strata,**kw).truth)
         self.assertFalse(survey_design_adequacy(candidate,'B-PAR-DGR1075-T4-olive-design',AT,strata,**kw).truth)
         self.assertEqual(planned_sample_difference(candidate,'B-PAR-DGR1075-T4-olive-high-samples',AT,5000),116)
+
+
+class OwnerRulings20260924(unittest.TestCase):
+    """Owen's rulings of 2026-09-24. Dates are supplied, not read from held records."""
+    MASS = "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
+    LISTED = "PUG-LR14-2007:Art.5(3):definitive-listing"
+    PENDING = "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.s = Snapshot.load()
+
+    def publicity(self, **overrides):
+        from cordon_c.bindings import mass_publicity_facts
+        start = datetime(2026, 4, 7, 9, tzinfo=ROME)
+        args = dict(ground_stated=True, annulled_on_ground=False, posting_start=start,
+                    postings={"albo": (start, datetime(2026, 4, 15, tzinfo=ROME))}, postings_complete=True,
+                    stated_period=("7", "giorni"), evaluated_at=datetime(2026, 5, 1, tzinfo=ROME), zone=ROME)
+        facts, day = mass_publicity_facts(self.s, AT, **(args | overrides))
+        return evaluate(self.s, self.MASS, AT, facts), day
+
+    def test_mass_publicity_needs_the_acts_own_ground_period_and_completed_posting(self):
+        # Independent expectation: seven days of posting from 7 April, excluding the posting day, run through 14 April.
+        result, day = self.publicity()
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 4, 14)))
+        # No ground of the act's own (including a recital that only restates Art. 21-bis): not this route, no day.
+        result, day = self.publicity(ground_stated=False)
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        # A court annulment on the stated ground ends the route.
+        result, day = self.publicity(annulled_on_ground=True)
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        # A missing stated period is unknown and names the period; it is never seven days.
+        result, day = self.publicity(stated_period=None)
+        self.assertIsNone(result.effect)
+        self.assertIsNone(day)
+        self.assertTrue(any("the term the operative prescription states" in need for need in result.needs))
+        # A stated 15 days needs a longer posting; the seven-day posting falls short.
+        result, day = self.publicity(stated_period=("15", "giorni"))
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        start = datetime(2026, 4, 7, 9, tzinfo=ROME)
+        result, day = self.publicity(stated_period=("15", "giorni"),
+                                     postings={"albo": (start, datetime(2026, 4, 23, tzinfo=ROME))})
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 4, 22)))
+        # A posting removed early fails; a gap with incomplete records stays unknown.
+        result, _ = self.publicity(postings={"albo": (start, datetime(2026, 4, 12, tzinfo=ROME))})
+        self.assertEqual(result.effect, "RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED")
+        gap = {"first": (start, datetime(2026, 4, 10, tzinfo=ROME)),
+               "second": (datetime(2026, 4, 11, tzinfo=ROME), datetime(2026, 4, 15, tzinfo=ROME))}
+        result, day = self.publicity(postings=gap, postings_complete=False)
+        self.assertIsNone(result.effect)
+        self.assertIsNone(day)
+
+    def listing(self, at, **entry):
+        from cordon_c.bindings import listing_facts
+        args = dict(own_entry=True, first_publication=date(2022, 1, 10),
+                    definitive_decision=(date(2022, 11, 28), True), deletion=None, entry_history_complete=True)
+        facts = listing_facts(self.s, at, **(args | entry))
+        return (evaluate(self.s, self.LISTED, at, facts).effect, evaluate(self.s, self.PENDING, at, facts).effect)
+
+    def test_listing_follows_definitive_republication(self):
+        not_listed, listed = "TREE_NOT_LISTED", "TREE_LISTED"
+        pending, none = "RECOGNITION_DECISION_PENDING", "NO_PENDING_DECISION_FROM_THE_LIST"
+        self.assertEqual(self.listing(date(2021, 12, 1)), (not_listed, none))
+        self.assertEqual(self.listing(date(2022, 1, 10)), (not_listed, pending))
+        # The thirty-day opposition window lapsed on 9 February 2022; that neither lists nor ends pending.
+        self.assertEqual(self.listing(date(2022, 6, 1)), (not_listed, pending))
+        self.assertEqual(self.listing(date(2022, 11, 28)), (listed, none))
+        self.assertEqual(self.listing(date(2025, 3, 1)), (listed, none))
+        self.assertEqual(self.listing(date(2025, 3, 1), deletion=date(2024, 5, 2)), (not_listed, none))
+        # A definitive decision that excludes the entry ends pending without listing.
+        self.assertEqual(self.listing(date(2023, 1, 1), definitive_decision=(date(2022, 11, 28), False)),
+                         (not_listed, none))
+        # An unknown definitive date with an incomplete history stays unknown for both.
+        self.assertEqual(self.listing(date(2023, 1, 1), definitive_decision=None, entry_history_complete=False),
+                         (None, None))
+
+    def test_grove_tree_without_own_entry_is_not_listed_and_does_not_reach_retention(self):
+        from cordon_c.bindings import listing_facts
+        at = date(2025, 3, 1)
+        facts = listing_facts(self.s, at, own_entry=False, first_publication=None, definitive_decision=None,
+                              deletion=None, entry_history_complete=False)
+        self.assertEqual(evaluate(self.s, self.LISTED, at, facts).effect, "TREE_NOT_LISTED")
+        identity = "PUG-LR4-2017:Art.8(5):protected-uninfected-retention"
+        row = self.s.version(identity, at)
+        facts |= {(row["provision_version_id"], p): p == "the operative regional retention policy covers this individually qualifying plant"
+                  for p in leaves(row["condition_ast"])}
+        result = evaluate(self.s, identity, at, facts)
+        self.assertEqual(result.effect, "ARTICLE_7_3_DOMAIN_SAFEGUARD_OR_EXERCISE_EVIDENCE_REQUIRED")
+        self.assertFalse(any("landscape" in need or "grove" in need for need in result.needs))
+
+    def test_provisional_tree_is_held_and_the_request_route_survives(self):
+        from cordon_c.bindings import listing_facts
+        hold = "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"
+        at = date(2025, 9, 1)
+        row = self.s.version(hold, at)
+        request = "the Osservatorio's recognition request for this tree awaits decision"
+        base = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"]) if p != request}
+        provisional = listing_facts(self.s, at, own_entry=True, first_publication=date(2025, 7, 1),
+                                    definitive_decision=None, deletion=None, entry_history_complete=True)
+        self.assertIs(evaluate(self.s, hold, at, base | provisional).truth, True)
+        unlisted = listing_facts(self.s, at, own_entry=False, first_publication=None, definitive_decision=None,
+                                 deletion=None, entry_history_complete=True)
+        result = evaluate(self.s, hold, at, base | unlisted)
+        self.assertIsNone(result.truth)
+        self.assertTrue(any(request in need for need in result.needs))
+        self.assertIs(evaluate(self.s, hold, at, base | unlisted | {(row["provision_version_id"], request): True}).truth, True)
+        decided = listing_facts(self.s, at, own_entry=True, first_publication=date(2025, 7, 1),
+                                definitive_decision=(date(2025, 8, 20), True), deletion=None, entry_history_complete=True)
+        self.assertIs(evaluate(self.s, hold, at, base | decided | {(row["provision_version_id"], request): False}).truth, False)
+
+    def test_infected_characteristics_not_listing_reach_the_piana_alternative(self):
+        identity = "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary"
+        at = date(2025, 9, 1)
+        row = self.s.version(identity, at)
+        self.assertNotIn(self.LISTED, json.dumps(row["condition_ast"]))
+        facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        self.assertIs(evaluate(self.s, identity, at, facts).truth, True)
+        from cordon_c.bindings import trunk_diameter_facts
+        facts[row["provision_version_id"], self.FINDING] = False
+        facts |= trunk_diameter_facts(self.s, at, diameter_cm=Decimal(96), measured_height_cm=None)
+        self.assertIs(evaluate(self.s, identity, at, facts).truth, False)
+
+    # PR #32 round 2: the official monitoring finding, or A's own Art. 2(1)(a) row.
+    FINDING = ("the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: "
+               "its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics")
+
+    def test_a_composes_the_measurement_route_into_the_characteristics_conjunct(self):
+        from cordon_c.bindings import trunk_diameter_facts
+        at = date(2025, 9, 1)
+        conjunct = {"any_of": [{"predicate": self.FINDING},
+                               {"provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"}]}
+        for identity in ("PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+                         "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
+                         "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"):
+            row = self.s.version(identity, at)
+            self.assertIn(conjunct, row["condition_ast"]["all_of"])
+            vid = row["provision_version_id"]
+            # Every other conjunct holds, so the row's truth is the characteristics conjunct's.
+            others = {(vid, p): True for p in leaves(row["condition_ast"]) if p != self.FINDING}
+            for finding in (False, None):
+                given = others if finding is None else others | {(vid, self.FINDING): finding}
+                with self.subTest(identity=identity, finding=finding):
+                    # A diameter-only record at 120 cm, no height stated, no finding: the conjunct is true.
+                    met = given | trunk_diameter_facts(self.s, at, diameter_cm=Decimal(120), measured_height_cm=None)
+                    self.assertIs(evaluate(self.s, identity, at, met).truth, True)
+                    # At 96 cm it is not: false against a record with no finding, unknown where the finding is unread.
+                    short = given | trunk_diameter_facts(self.s, at, diameter_cm=Decimal(96), measured_height_cm=None)
+                    self.assertIs(evaluate(self.s, identity, at, short).truth, None if finding is None else False)
+            # The surveyor's finding alone is enough without a measurement.
+            self.assertIs(evaluate(self.s, identity, at, others | {(vid, self.FINDING): True}).truth, True)
+
+    # PR #32 round 1.
+    TER = "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
+    COMMUNICATED = ("the communication to that recipient has been effected, including in the forms prescribed for "
+                    "notification to the unreachable in the cases provided by the code of civil procedure")
+
+    def test_personal_notice_reads_communication_not_the_individual_rows_effect(self):
+        from cordon_c.bindings import mass_publicity_facts
+        at = AT
+        row = self.s.version(self.TER, at)
+        self.assertNotIn("IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect", json.dumps(row))
+        facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        individual = self.s.version("IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect", at)
+        # A reasoned immediate-effect clause on the order (DDS 188/2024 l.191-193) neither gives nor defeats notice.
+        facts |= {(individual["provision_version_id"], p): True for p in leaves(individual["condition_ast"])}
+        start = date(2026, 4, 7)
+        facts |= mass_publicity_facts(self.s, at, ground_stated=False, annulled_on_ground=False, posting_start=start,
+            postings={"albo": (start, date(2026, 4, 13))}, postings_complete=True, stated_period=("7", "gg"),
+            evaluated_at=datetime(2026, 5, 1, tzinfo=ROME), zone=ROME)[0]
+        self.assertEqual(evaluate(self.s, self.TER, at, facts).effect, "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED")
+        facts[row["provision_version_id"], self.COMMUNICATED] = False
+        self.assertEqual(evaluate(self.s, self.TER, at, facts).effect, "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED")
+
+    def notice(self, *, personal, pec, ground, **posting):
+        from cordon_c.bindings import mass_publicity_facts, notice_instant
+        start = date(2026, 4, 7)
+        facts, day = mass_publicity_facts(self.s, AT, ground_stated=ground, annulled_on_ground=False,
+            posting_start=start, postings={"albo": (start, date(2026, 4, 13))}, postings_complete=True,
+            stated_period=("7", "gg consecutivi"), evaluated_at=datetime(2026, 5, 1, tzinfo=ROME), zone=ROME,
+            **posting)
+        vid = self.s.version(self.TER, AT)["provision_version_id"]
+        if personal is not None:
+            facts = facts | {(vid, self.COMMUNICATED): personal}
+        return notice_instant(self.s, self.TER, AT, facts, zone=ROME,
+                              instants={self.COMMUNICATED: pec, self.MASS: day})
+
+    def test_notice_runs_from_the_earliest_branch_a_finds_true(self):
+        pec = datetime(2026, 4, 7, 10, 30, tzinfo=ROME)
+        # Stated ground; day-0 PEC and a posting displayed 7-13 April whose notice day is 14 April: the PEC governs.
+        self.assertEqual(self.notice(personal=True, pec=pec, ground=True), pec)
+        # A PEC A rejects gives no instant; the posting's notice day governs.
+        self.assertEqual(self.notice(personal=False, pec=pec, ground=True), date(2026, 4, 14))
+        # An unknown personal branch never supplies its instant.
+        self.assertEqual(self.notice(personal=None, pec=pec, ground=True), date(2026, 4, 14))
+        # A rejected PEC on a no-ground order: no instant, so no deadline runs.
+        self.assertIsNone(self.notice(personal=False, pec=pec, ground=False))
+        from cordon_c.bindings import noncommencement_facts
+        temporal = noncommencement_facts(self.s, "B-CLK-IT-L241-21TER-stated-commencement-term", AT,
+            notification=None, evaluated_at=datetime(2026, 6, 1, tzinfo=ROME), qualifying_commencements={},
+            commencement_records_complete=True, zone=ROME, stated_term=("10", "giorni"))
+        self.assertTrue(all(v.truth is None for v in temporal.values()))
+        # A branch A finds true must carry its instant.
+        with self.assertRaises(ValueError):
+            self.notice(personal=True, pec=None, ground=False)
+
+    def test_printed_posting_units_and_counts(self):
+        from cordon_c.quantities import clock_boundary
+        clock = "B-CLK-IT-L241-21BIS-stated-publicity-period"
+        expected = datetime(2026, 4, 15, tzinfo=ROME)
+        for term in [("7", "giorni"), ("7", "gg"), ("7", "gg consecutivi"), ("7", "giorni consecutivi"),
+                     ("7 (sette)", "giorni naturali e consecutivi"), ("7 (Sette)", "Giorni  naturali e consecutivi"),
+                     ("7(sette)", "gg")]:
+            with self.subTest(term=term):
+                self.assertEqual(clock_boundary(self.s, clock, AT, date(2026, 4, 7), zone=ROME, stated_term=term), expected)
+        for term in [("sette", "giorni"), ("(7)", "giorni"), ("7", "giorni lavorativi")]:
+            with self.subTest(term=term), self.assertRaises(MissingInput):
+                clock_boundary(self.s, clock, AT, date(2026, 4, 7), zone=ROME, stated_term=term)
+
+    def test_posting_completes_on_the_stated_display_days_counted_inclusively(self):
+        # DDS 58/2024 op. 11: "per la durata di 7 (sette) giorni naturali e consecutivi. Tale affissione ... decorso il
+        # settimo giorno dalla data di pubblicazione assume valore di notifica". Capurso's albo: 20/05/2024-26/05/2024.
+        term = ("7 (sette)", "giorni naturali e consecutivi")
+        result, day = self.publicity(posting_start=date(2024, 5, 20), postings={"albo": (date(2024, 5, 20), date(2024, 5, 26))},
+                                     stated_period=term, evaluated_at=datetime(2024, 7, 1, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2024, 5, 27)))
+        # The same posting taken down at the start of 26 May was displayed six days only.
+        start = datetime(2024, 5, 20, tzinfo=ROME)
+        result, day = self.publicity(posting_start=start, postings={"albo": (start, datetime(2024, 5, 26, tzinfo=ROME))},
+                                     stated_period=term, evaluated_at=datetime(2024, 7, 1, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        # A certificate's inclusive "al 17/03/2026" runs through the end of 17 March: 11-17 March is seven days.
+        result, day = self.publicity(posting_start=date(2026, 3, 11), postings={"albo": (date(2026, 3, 11), date(2026, 3, 17))},
+                                     stated_period=("7", "gg consecutivi"), evaluated_at=datetime(2026, 9, 20, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 3, 18)))
+        # DDS 38/2026, Bari's certificate "dal 10/03/2026 al 17/03/2026": complete, notice day 17 March.
+        result, day = self.publicity(posting_start=date(2026, 3, 10), postings={"albo": (date(2026, 3, 10), date(2026, 3, 17))},
+                                     stated_period=("7", "gg consecutivi"), evaluated_at=datetime(2026, 9, 20, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 3, 17)))
+
+    def test_recorded_trunk_diameter_meets_article_2_1_a(self):
+        from cordon_c.bindings import trunk_diameter_facts
+        identity = "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+        at = date(2025, 9, 1)
+        # Art. 2(1)(a): "diametro uguale o superiore a centimetri 100, misurato all'altezza di centimetri 130 dal suolo".
+        cases = [((Decimal(100), None), "ARTICLE_2_1_A_CRITERION_MET"),
+                 ((Decimal(130), Decimal(130)), "ARTICLE_2_1_A_CRITERION_MET"),
+                 ((Decimal("99.9"), None), "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED"),
+                 ((Decimal(120), Decimal(150)), None),
+                 ((None, None), None)]
+        for (diameter, height), effect in cases:
+            with self.subTest(diameter=diameter, height=height):
+                facts = trunk_diameter_facts(self.s, at, diameter_cm=diameter, measured_height_cm=height)
+                self.assertEqual(evaluate(self.s, identity, at, facts).effect, effect)
+
+    def test_dgr343_policy_reads_article_5_3_listing(self):
+        from cordon_c.bindings import listing_facts
+        identity = "PUG-DGR343-2022:Art7(3)-policy"
+        at = date(2022, 10, 3)
+        row = self.s.version(identity, at)
+        base = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        listed = listing_facts(self.s, at, own_entry=True, first_publication=date(2021, 6, 1),
+                               definitive_decision=(date(2022, 3, 1), True), deletion=None, entry_history_complete=True)
+        pending = listing_facts(self.s, at, own_entry=True, first_publication=date(2022, 6, 1),
+                                definitive_decision=None, deletion=None, entry_history_complete=True)
+        self.assertIs(evaluate(self.s, identity, at, base | listed).truth, True)
+        self.assertIs(evaluate(self.s, identity, at, base | pending).truth, False)
 
 
 if __name__ == "__main__":

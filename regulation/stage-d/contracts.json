@@ -112,7 +112,7 @@
         "publication date",
         "effective interval",
         "operative clause and annex selectors",
-        "supersession/correction/annulment basis",
+        "supersession/correction/annulment basis, including whether a court disposition annuls the act on its stated ground for public posting",
         "actual exercised choice where relevant"
       ],
       "acquisition_routes": [
@@ -170,7 +170,7 @@
         "communication content",
         "delivery/completion date or instant",
         "publication interval and continuity",
-        "act-specific mass-publicity basis",
+        "the act's own stated ground for public posting, verbatim with its page, kept apart from a recital restating Article 21-bis and from a plan instruction; and the publicity form the act states: place, and the period as printed (number and unit word)",
         "reasoned immediate-effect qualification"
       ],
       "acquisition_routes": [
@@ -453,7 +453,8 @@
         "official field inventory and geolocated plant records",
         "finding/removal annexes",
         "qualified survey records",
-        "validated observation-derived inventories with stated limitations"
+        "validated observation-derived inventories with stated limitations",
+        "published device accuracy tests, the monitoring device procurement and ISTAT's regional boundary, for the positional qualification of a location"
       ],
       "sufficiency": "Required populations follow A and C, not the available dataset. A sample ID, tree-crown candidate and legally identified plant are different evidential identities. A complete monitoring download or parcel list is not a complete required-plant census. Source-qualified estimates remain estimates.",
       "absence": "Unknown members or inventory incompleteness affect universal/all-member conclusions, not a separately identified positive plant.",
@@ -461,7 +462,29 @@
         "official-record",
         "official-dataset",
         "qualified-observation"
-      ]
+      ],
+      "positional_qualification": {
+        "field": "location",
+        "stated": "cordon_d.spatial.positional_qualification: the horizontal error of a located monitoring observation's recorded position, the plant's location, against its true position on the ground, stated in EPSG:32633. The error is the stated device term plus the grid distortion over the longest distance a C consumer bound to plant-population measures from the location, found by enumerating those consumers and the B widths they read, with the scale bounded from the Transverse Mercator definition over Puglia's official extent widened by that distance; no map error and no locality enter it. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
+        "replacing_input": {
+          "applies_to": "one fix, or one device class and capture mode, stated per record",
+          "one_of": [
+            "ARIF's per-fix horizontal accuracy, or the device and capture mode (GNSS fix or map placement), per record",
+            "a bound measured from independent re-samples of the same plant: another team, day or tablet, linked by ID_CAMPIONE",
+            "a calibration of the documented device and app on surveyed control points"
+          ],
+          "fields": [
+            "fix or device class and capture mode it applies to",
+            "method",
+            "horizontal error in metres",
+            "statistic: per-fix estimate, 95% value or maximum",
+            "reference position and the reference's own error, where the method has one",
+            "date",
+            "sources"
+          ],
+          "default": "none: until one is held, the stated device term stands and its basis says so"
+        }
+      }
     },
     {
       "id": "protected-status",
@@ -474,19 +497,21 @@
         "interval"
       ],
       "fields": [
-        "official/provisional recognition",
+        "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
+        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics, in any wording that asserts it (held examples: \"caratteristiche di monumentalità\", \"caratteristiche monumentali\", \"requisiti di monumentalità\", \"carattere monumentale\"), or a measurement the note records (the trunk diameter, and its height where stated)",
         "applicable protection rule",
         "value assessment if that ground applies",
-        "pending status",
+        "the Osservatorio's recognition-request record for the tree",
         "landscape application/opinion/decision where required"
       ],
       "acquisition_routes": [
         "official monumental-tree lists and acts",
+        "the official monitoring record of the plant (MONUMENTALE_ARIF, NOTE_RILEVATORE)",
         "provisional recognition records",
         "specific protection instruments",
         "the competent permission or decision reached by the affected protected plant and intervention"
       ],
-      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion.",
+      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion. Article 2 characteristics (Owen's ruling of 2026-09-24) are established by the plant's official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts (held examples: \"caratteristiche di monumentalità\", \"caratteristiche monumentali\", \"requisiti di monumentalità\", \"carattere monumentale\"); a recorded measurement establishes them when it meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). A register listing is not required for them.",
       "absence": "No registry match alone does not prove lack of every protection/value ground.",
       "admissible_instance_roles": [
         "official-record",

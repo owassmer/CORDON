@@ -664,15 +664,6 @@
       ]
     },
     {
-      "evidence": "Effective plan interval; official recognition and negative test of the monumental olive in the 50 m infected zone.",
-      "contracts": [
-        "evaluation-context",
-        "plant-population",
-        "protected-status",
-        "official-finding"
-      ]
-    },
-    {
       "evidence": "Effective priority-pest status or committee designation; exact pest; source-native plan contents; central draft and update record; national-reference-institute support.",
       "contracts": [
         "administrative-event",
@@ -757,13 +748,6 @@
       "contracts": [
         "analytical-result",
         "laboratory-status"
-      ]
-    },
-    {
-      "evidence": "Exact act and recipient population; evidence of personal-communication impossibility or particular burden caused by recipient number; administration’s act-specific publicity decision; suitable publication content, channel and completion time.",
-      "contracts": [
-        "operative-assessment",
-        "recipient-notice"
       ]
     },
     {
@@ -1248,19 +1232,6 @@
       "evidence": "Official finding; first useful meeting identity and time; available data and information; effective emergency plan; committee-defined and approved measures.",
       "contracts": [
         "administrative-event"
-      ]
-    },
-    {
-      "evidence": "Official infection result, listed monumental-olive status and qualifying Piana location; exact higher-law derogation and its branch/site conditions; Osservatorio authorization of the precise alternative; evidence of the alternative's applicable measures, including its vector controls and any branch-specific testing.",
-      "contracts": [
-        "adopted-geography",
-        "operative-act",
-        "operative-assessment",
-        "plant-population",
-        "protected-status",
-        "official-finding",
-        "treatment-performance",
-        "survey-performance"
       ]
     },
     {
@@ -1804,34 +1775,6 @@
       "contracts": [
         "administrative-event",
         "operative-act"
-      ]
-    },
-    {
-      "evidence": "The case act's recipient population, ascertainment of untraceable recipients or individual-communication burden, and specified publicity.",
-      "contracts": [
-        "case-prescription",
-        "operative-act",
-        "operative-assessment",
-        "recipient-notice"
-      ]
-    },
-    {
-      "evidence": "The case plant's infection and monumental status, the elected alternative, and applicable higher-law permission and regional authorization.",
-      "contracts": [
-        "official-finding",
-        "operative-act",
-        "owner-response",
-        "plant-population",
-        "protected-status"
-      ]
-    },
-    {
-      "evidence": "The case plant's negative test, monumental characteristics, and pending recognition and authorization status.",
-      "contracts": [
-        "official-finding",
-        "operative-assessment",
-        "plant-population",
-        "protected-status"
       ]
     },
     {
@@ -2610,6 +2553,100 @@
         "operative-assessment",
         "removal-performance"
       ]
+    },
+    {
+      "evidence": "Effective plan interval; the olive's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication; its position in the 50 m infected zone and its negative test.",
+      "contracts": [
+        "evaluation-context",
+        "plant-population",
+        "protected-status",
+        "official-finding"
+      ]
+    },
+    {
+      "evidence": "Official infection result, L.R. 14/2007 Article 2 monumental characteristics (listing is not required) and qualifying Piana location; exact higher-law derogation and its branch/site conditions; Osservatorio authorization of the precise alternative; evidence of the alternative's applicable measures, including its vector controls and any branch-specific testing.",
+      "contracts": [
+        "adopted-geography",
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "official-finding",
+        "treatment-performance",
+        "survey-performance"
+      ]
+    },
+    {
+      "evidence": "The act's own stated ground for public posting, verbatim with its place in the act; the publicity form the act states (place, and period as printed); the first-party posting records for that form; any court disposition annulling the act on that ground.",
+      "contracts": [
+        "operative-act",
+        "recipient-notice"
+      ]
+    },
+    {
+      "evidence": "The case plant's infection and its L.R. 14/2007 Article 2 monumental characteristics, the elected alternative, and applicable higher-law permission and regional authorization.",
+      "contracts": [
+        "official-finding",
+        "operative-act",
+        "owner-response",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The case plant's negative test and monumental characteristics; either its provisional L.R. 14/2007 list entry awaiting the Giunta's definitive decision or the Osservatorio's pending recognition request; and the authorization status.",
+      "contracts": [
+        "official-finding",
+        "operative-assessment",
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The plant's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication, official negative result, applicable regional retention policy covering the plant, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence; no additional discretionary authorization where the policy supplies the choice.",
+      "contracts": [
+        "operative-act",
+        "operative-assessment",
+        "plant-population",
+        "protected-status",
+        "official-finding",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "The tree's own entry; the Giunta act approving it provisionally and the BURP issue and date of its first publication; any definitive decision on the entry and the BURP date of its publication.",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The tree's own list entry and identity; the Giunta act approving that entry definitively and the BURP issue and date of the list's republication; any act deleting the entry and its date.",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The olive's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication, official negative result, coverage by this effective retention policy, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence.",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "operative-act",
+        "protected-status",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "The trunk diameter the plant's official monitoring record states, and the height at which it was taken where the record states one.",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "plant-population",
+        "protected-status"
+      ]
     }
   ],
   "callables": [
@@ -2787,6 +2824,40 @@
         "recipient-notice",
         "removal-performance",
         "calendar"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.mass_publicity_facts",
+      "contracts": [
+        "evaluation-context",
+        "operative-act",
+        "recipient-notice"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.notice_instant",
+      "contracts": [
+        "evaluation-context",
+        "recipient-notice"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.trunk_diameter_facts",
+      "contracts": [
+        "evaluation-context",
+        "plant-population",
+        "protected-status"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.listing_facts",
+      "contracts": [
+        "evaluation-context",
+        "protected-status"
       ],
       "kind": "evidence-or-derived-input"
     },
@@ -3766,6 +3837,54 @@
         "removal-performance"
       ],
       "kind": "actual-performance"
+    },
+    {
+      "consumer": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
+      "reference": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+      "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+      "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-DGR343-2022:Art7(3)-policy",
+      "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-DGR1866-2022:Art7(3)-policy",
+      "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
+      "reference": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
+      "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
+      "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
     }
   ],
   "structures": {

@@ -14,11 +14,14 @@
       ],
       "routes": [
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
-        "https://webapps.sit.puglia.it/arcgis/rest/services"
+        "https://webapps.sit.puglia.it/arcgis/rest/services",
+        "https://www.fs.usda.gov/database/gps/mtdcrept/accuracy/index.htm (device term, corpus/sources/positional-qualification/records.json)",
+        "https://arifpuglia.tuttogare.it/gare/dettaglio.php?codice=42 (device procurement, same record)",
+        "https://www.istat.it/storage/cartografia/confini_amministrativi/non_generalizzati/2026/Limiti01012026.zip (Puglia's extent for the grid distortion, same record)"
       ],
       "population": "Every record of the twelve campaign workbooks, the CKAN release and the 101 observation point layers of the eight SIT services that publish them: 4,318,100 observations, 2,320,354 distinct, all hosts and all result states.",
-      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_positives",
-      "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. Plant identity, the official finding and metric location belong to the population, report and area rows."
+      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_observations, located_positives; cordon_d.spatial.positional_qualification",
+      "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. The positional qualification is a stated device term plus grid distortion, against the ground. Not held: the device and capture mode per record (GNSS fix or map placement), per-fix accuracy, re-sample links, and the device before late 2024. Plant identity and the official finding belong to the population and report rows."
     },
     {
       "id": "adopted-plans-and-listings",
@@ -100,11 +103,13 @@
       "routes": [
         "https://burp.regione.puglia.it/bollettini",
         "https://www.regione.puglia.it/documents/736605/",
-        "https://cartografia.sit.puglia.it/doc/xylella/ (determinations reached from admitted report identities)"
+        "https://cartografia.sit.puglia.it/doc/xylella/ (determinations reached from admitted report identities)",
+        "https://mdp.giustizia-amministrativa.it/visualizza/ (TAR Puglia and Consiglio di Stato decisions on an order, GA XML: the annulment basis)",
+        "https://openga.giustizia-amministrativa.it (Consiglio di Stato decision indexes searched for appeals)"
       ],
-      "population": "Every Osservatorio determination required by an admitted finding or by a correction relationship reached from it.",
-      "reader": "cordon_d.source_associations for native plant/report annex associations; whole-act operative reading remains unimplemented",
-      "open": "Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
+      "population": "Every Osservatorio removal order, admitted by liveness: an order is in the population until execution or withdrawal closes it. Each order brings every held act that states a change to it and every court decision on it.",
+      "reader": "cordon_d.case_prescriptions (each order's whole operative text); cordon_d.held_acts (the changes held acts state to an order); cordon_d.judgments (the annulment basis: the court's own disposition); cordon_d.source_associations (native plant/report annex associations). Annex positions remain unread.",
+      "open": "Annex positions remain unread, so the plants and parcels an order lists by position do not reach C from the order. Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. A change a held act states that no A row records leaves the order's dueness unknown. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
     },
     {
       "id": "notice-and-response-records",
@@ -121,10 +126,13 @@
         "https://burp.regione.puglia.it/bollettini and the regional sites the plans name",
         "The Osservatorio's communication record and municipal notification attempts (recipient effect)",
         "PEC transmission to ARIF and the Prefettura (administrative event)",
-        "ARIF's authenticated election record or the owner's PEC (response)"
+        "ARIF's authenticated election record or the owner's PEC (response)",
+        "OpenWeb albo register exports (openweb/albo/csv.php): ARIF's own albo (arif.soluzionipa.it) and the competent municipality's (Fasano, Modugno, Montemesola)",
+        "JCityGov albo detail pages and their posted documents (<comune>.trasparenza-valutazione-merito.it, papca/display)",
+        "TAR decisions stating an order's delivery, posting, request or reply (the removal-orders court route)"
       ],
       "population": "The act text, publication record, communication and response events attached to an admitted removal matter; not every notice published by every municipality.",
-      "reader": "cordon_d.notices and cordon_d.events",
+      "reader": "cordon_d.notices and cordon_d.events; cordon_d.notice_routes (each order's own mass-publicity basis); cordon_d.removal_events (publication records connected to an order's identity and adoption); cordon_d.albo_postings (albo register rows and posted documents attached by the identity they print); cordon_d.judgments (dated events a court decision states about an order)",
       "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
     },
     {
