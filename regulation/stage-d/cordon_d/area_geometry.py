@@ -621,7 +621,8 @@ class Sources:
 
         A comune's sheets are numbered from 1 and tile its territory, so the sheets missing
         from the published numbering occupy the territory no published sheet covers: the
-        comune's ISTAT boundary less every held sheet, its own and its neighbours'. Seams
+        comune's ISTAT boundary less every held sheet, its own and its neighbours'. That
+        territory is the comune's also where no number is missing. Seams
         narrower than SEAM_M are not territory, nor is a piece narrower than 100 m (the two
         sources' disagreement along a border).
         """
@@ -633,9 +634,11 @@ class Sources:
         own = {n: None for (c, section, n) in self.sheets if c == comune.catastale and not section}
         numbers = [int(n) for n in own if n.isdigit()]
         missing = tuple(str(n) for n in range(1, max(numbers, default=0) + 1) if str(n) not in own)
-        if not missing:
-            return (), None
+        # Land no held sheet covers is the comune's too where its numbering has no gap (a
+        # sheet published in sections, or a territory no sheet draws).
         territory = self.administrative.comune_geometry(comune)
+        if territory is None:
+            return missing, None
         near = self.sheets_near(territory)
         gap = territory.difference(seal(shapely.union_all([shapely.make_valid(g) for g in near])))
         gap = gap.buffer(-50, join_style='mitre').buffer(50, join_style='mitre').intersection(gap)
