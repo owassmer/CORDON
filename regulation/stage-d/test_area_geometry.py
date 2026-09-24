@@ -132,6 +132,60 @@ class Bands(unittest.TestCase):
         self.assertFalse(band.contains(Point(-1_500, -5_000)))
 
 
+class WholeUnitInterior(unittest.TestCase):
+    """A unit named whole is its whole territory: a seam between its held sheets is in it."""
+
+    class Units:
+        def __init__(self, outlines):
+            self.outlines = outlines
+
+        def comune_geometry(self, comune):
+            return self.outlines[comune.catastale]
+
+    class Stub:
+        def __init__(self, outlines, sheets, errors):
+            self.administrative = WholeUnitInterior.Units(outlines)
+            self._sheet_index = (shapely.STRtree(sheets), sheets)
+            self.istat_errors = errors
+            self.outline = shapely.union_all(sheets).boundary.buffer(5.0)
+
+        def cadastral_outline(self, code):
+            return self.outline
+
+    class Comune:
+        def __init__(self, catastale):
+            self.catastale = catastale
+
+    def test_a_seam_the_zone_encloses_joins_the_unit_named_whole_and_nothing_else_does(self):
+        from cordon_d.area_geometry import _whole_interior
+        # Comune A (named whole) and comune B (not named) side by side; a 30 m seam no held
+        # sheet covers runs across their border inside the zone, and an inlet opens on A's coast.
+        a, b = box(0, 0, 1_000, 1_000), box(1_000, 0, 2_000, 1_000)
+        seam, inlet = box(400, 485, 1_600, 515), box(300, 950, 330, 1_000)
+        zone = box(0, 0, 2_000, 1_000).difference(seam).difference(inlet)
+        sheets = [box(0, 0, 2_000, 485), box(0, 515, 300, 1_000), box(330, 515, 2_000, 1_000),
+                  box(0, 485, 400, 515), box(1_600, 485, 2_000, 515)]
+        sources = self.Stub({'A': a, 'B': b}, sheets, {'A': 12.0})
+        geometry, errors = _whole_interior(sources, zone, [self.Comune('A')])
+        self.assertTrue(geometry.covers(Point(700, 500)))              # the seam inside A joins
+        self.assertFalse(geometry.contains(Point(1_300, 500)))         # B is not named whole
+        self.assertFalse(geometry.contains(Point(315, 990)))           # the outer line keeps its source
+        self.assertAlmostEqual(geometry.area, zone.area + 600 * 30, delta=1)
+        # ISTAT's line now draws the zone's outline across the seam, with its measured error.
+        self.assertEqual([(e.source, e.error_m) for e in errors], [('istat-boundaries', 12.0)])
+        self.assertTrue(errors[0].region.covers(Point(1_000, 500)))
+        # An island of the zone inside a seam stays the zone's; the seam around it joins.
+        ring = box(0, 0, 1_000, 1_000).difference(box(300, 300, 700, 700))
+        island = box(450, 450, 550, 550)
+        filled, _ = _whole_interior(self.Stub({'A': a}, [box(0, 0, 1_000, 300)], {'A': 12.0}),
+                                    shapely.union_all([ring, island]), [self.Comune('A')])
+        self.assertTrue(filled.covers(Point(350, 500)) and filled.covers(Point(500, 500)))
+        self.assertAlmostEqual(filled.area, 1_000_000, delta=1)
+        # A zone with no hole is unchanged.
+        plain = box(0, 0, 10, 10)
+        self.assertEqual(_whole_interior(sources, plain, [self.Comune('A')]), (plain, ()))
+
+
 class PositionalError(unittest.TestCase):
     def test_directed_distances_see_a_shifted_edge_one_way(self):
         official, other = box(0, 0, 100, 100), box(0, 0, 103, 100)

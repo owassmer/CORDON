@@ -10042,7 +10042,7 @@
  {
   "kind": "positional-error",
   "source": "istat-boundaries",
-  "method": "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held sheet covers. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only to the line no sheet draws.",
+  "method": "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held sheet covers, or a seam between held sheets inside a unit named whole that ISTAT's line cuts. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only to the line no sheet draws.",
   "statistic": "per comune: the larger 95th percentile of the two directed distance samples",
   "istat_note": "La scala non è certificabile uniformemente dall'Istat, poichè le basi di acquisizione utilizzate (principalmente foto aeree ed altra cartografia) provengono da fonti e scale differenti, che variano tra ambito urbano ed extraurbano.",
   "istat_note_source": "https://www.istat.it/wp-content/uploads/2024/04/Descrizione-dati-Confini-unita-amministrative-fini-statistici.pdf",
@@ -10298,10 +10298,122 @@
      "max": 163.4,
      "n": 4961
     }
+   },
+   {
+    "comune": "F101",
+    "name": "Melendugno",
+    "istat_to_cadastre": {
+     "p95": 41.6,
+     "max": 202.1,
+     "n": 4169
+    },
+    "cadastre_to_istat": {
+     "p95": 40.0,
+     "max": 116.8,
+     "n": 4177
+    }
+   },
+   {
+    "comune": "F376",
+    "name": "Monopoli",
+    "istat_to_cadastre": {
+     "p95": 38.2,
+     "max": 141.9,
+     "n": 6689
+    },
+    "cadastre_to_istat": {
+     "p95": 168.4,
+     "max": 721.8,
+     "n": 7514
+    }
+   },
+   {
+    "comune": "G187",
+    "name": "Ostuni",
+    "istat_to_cadastre": {
+     "p95": 124.8,
+     "max": 842.3,
+     "n": 8926
+    },
+    "cadastre_to_istat": {
+     "p95": 127.8,
+     "max": 848.2,
+     "n": 9336
+    }
+   },
+   {
+    "comune": "G787",
+    "name": "Polignano a Mare",
+    "istat_to_cadastre": {
+     "p95": 45.8,
+     "max": 162.5,
+     "n": 4735
+    },
+    "cadastre_to_istat": {
+     "p95": 53.2,
+     "max": 177.0,
+     "n": 5060
+    }
+   },
+   {
+    "comune": "H090",
+    "name": "Pulsano",
+    "istat_to_cadastre": {
+     "p95": 157.7,
+     "max": 413.6,
+     "n": 2135
+    },
+    "cadastre_to_istat": {
+     "p95": 79.8,
+     "max": 291.6,
+     "n": 2120
+    }
+   },
+   {
+    "comune": "M263",
+    "name": "Porto Cesareo",
+    "istat_to_cadastre": {
+     "p95": 127.9,
+     "max": 284.1,
+     "n": 2675
+    },
+    "cadastre_to_istat": {
+     "p95": 134.3,
+     "max": 388.7,
+     "n": 2538
+    }
+   },
+   {
+    "comune": "A149",
+    "name": "Alberobello",
+    "istat_to_cadastre": {
+     "p95": 74.1,
+     "max": 612.0,
+     "n": 4202
+    },
+    "cadastre_to_istat": {
+     "p95": 33.5,
+     "max": 728.5,
+     "n": 4052
+    }
+   },
+   {
+    "comune": "C134",
+    "name": "Castellana Grotte",
+    "istat_to_cadastre": {
+     "p95": 44.6,
+     "max": 615.2,
+     "n": 7783
+    },
+    "cadastre_to_istat": {
+     "p95": 90.7,
+     "max": 625.8,
+     "n": 8423
+    }
    }
   ],
   "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-24T18:33:34+00:00"
+  "measured_at": "2026-09-24T22:13:39+00:00"
  },
  {
   "kind": "positional-error",
@@ -64006,7 +64118,7 @@
    "n": 10737
   },
   "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-24T18:51:58+00:00"
+  "measured_at": "2026-09-24T22:21:32+00:00"
  },
  {
   "kind": "positional-error",
@@ -102599,6 +102711,41 @@
     263.9
    ],
    [
+    682856,
+    4489592,
+    0.4
+   ],
+   [
+    682864,
+    4489584,
+    6.1
+   ],
+   [
+    682872,
+    4489576,
+    12.6
+   ],
+   [
+    682880,
+    4489569,
+    19.1
+   ],
+   [
+    682882,
+    4489564,
+    21.0
+   ],
+   [
+    682872,
+    4489567,
+    11.1
+   ],
+   [
+    682861,
+    4489571,
+    1.2
+   ],
+   [
     682867,
     4493637,
     286.6
@@ -102607,16 +102754,6 @@
     682862,
     4493634,
     283.5
-   ],
-   [
-    682872,
-    4489576,
-    13.1
-   ],
-   [
-    682885,
-    4489563,
-    23.3
    ],
    [
     683242,
@@ -122763,10 +122900,10 @@
    "median": 0.6,
    "p95": 595.4,
    "max": 1023.5,
-   "n": 11748
+   "n": 11753
   },
   "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-24T18:51:58+00:00"
+  "measured_at": "2026-09-24T22:21:32+00:00"
  },
  {
   "kind": "positional-error",
@@ -158471,6 +158608,6 @@
    "n": 7137
   },
   "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-24T18:51:58+00:00"
+  "measured_at": "2026-09-24T22:21:32+00:00"
  }
 ]

@@ -189,9 +189,10 @@ def _replace(drop, new):
 
 ISTAT_METHOD = (
     "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held "
-    "sheet covers. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent "
-    "comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; "
-    "the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per "
+    "sheet covers, or a seam between held sheets inside a unit named whole that ISTAT's line cuts. Directed "
+    "distances sampled every 10 m between the comune's ISTAT border with each adjacent comune and the "
+    "cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; the cadastral "
+    "border is the part of one comune's sheet outline within 5 m of the other's sheets). Per "
     "comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th "
     "percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only "
     "to the line no sheet draws.")

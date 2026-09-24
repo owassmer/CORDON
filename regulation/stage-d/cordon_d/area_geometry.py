@@ -945,6 +945,7 @@ class _Builder:
         self.units = sources.administrative
         self.used: set[str] = set()
         self.istat_drawn: list = []            # (comune code, geometry) drawn from ISTAT's boundary
+        self.whole: list = []                  # the comuni placed whole, in the order they are built
         statements = version.statements or ()
         self.legend = any('*' in s.text or 'INTERAMENTE' in (s.qualification or '').upper() for s in statements)
         self.by_role = {role: [s for s in statements if role_of(s) == role] for role in ROLES}
@@ -964,6 +965,7 @@ class _Builder:
         geometry, used = self.sources.comune_extent(comune)
         self.used.update(used)
         self._istat(comune)
+        self.whole.append(comune)
         return geometry
 
     def province(self, label):
@@ -973,6 +975,7 @@ class _Builder:
         for c in self.units.comuni.values():
             if c.province == province:
                 self._istat(c)
+                self.whole.append(c)
         return geometry
 
     def whole_comune(self, name, province=None):
@@ -990,6 +993,7 @@ class _Builder:
         self.used.update(used)
         for c in self.sources.annex_iii_comuni(day):
             self._istat(c)
+            self.whole.append(c)
         return geometry
 
     def sheet(self, comune, sheet, listed=()):
@@ -1280,6 +1284,55 @@ def _relisted(listed, replaced):
                                         *[n for _, n in parts]]))
 
 
+def _whole_interior(sources: Sources, geometry, comuni):
+    """A unit the act names whole is its whole territory: land inside the unit's ISTAT outline
+    that no held sheet covers is in it, a seam between held sheets as much as a missing sheet.
+    The unit's outer line keeps the source it has (held sheets, the Region's layer, ISTAT), so
+    only land the zone encloses joins, and only inside the outline of a unit named whole.
+
+    Returns (geometry, error parts): ISTAT's measured error along the part of the zone's
+    outline its line now draws, where an enclosed piece leaves the outline of a unit named whole."""
+    if geometry is None or geometry.is_empty or not comuni:
+        return geometry, ()
+    polygons = [p for p in getattr(geometry, 'geoms', [geometry]) if p.geom_type == 'Polygon']
+    holes = [Polygon(r) for p in polygons for r in p.interiors]
+    if not holes:
+        return geometry, ()
+    # The zone's own islands inside a hole are its polygons lying within it. (Clipping the zone to
+    # the hole's own bounds, as `_minus` does, lost whole seams: Leverano's in DDS 82/2026.)
+    islands = shapely.STRtree(polygons)
+    outlines = {}
+    for c in comuni:
+        if c.catastale not in outlines:
+            g = sources.administrative.comune_geometry(c)
+            if g is not None:
+                outlines[c.catastale] = g
+    codes = list(outlines)
+    units = shapely.STRtree([outlines[k] for k in codes])
+    sheet_tree, sheets = sources._sheet_index
+    parts = {}
+    for hole in holes:
+        near = [shapely.make_valid(sheets[i]) for i in sheet_tree.query(hole, predicate='intersects')]
+        inside = [polygons[i] for i in islands.query(hole, predicate='covers')]
+        free = polygonal(hole.difference(shapely.union_all(near + inside))) if near or inside else hole
+        if free is None or free.is_empty:
+            continue
+        for i in units.query(free, predicate='intersects'):
+            piece = polygonal(free.intersection(outlines[codes[i]]))
+            if piece is not None and piece.area > 0:
+                parts.setdefault(codes[i], []).append(piece)
+    if not parts:
+        return geometry, ()
+    joined = {code: shapely.union_all(found) for code, found in parts.items()}
+    new = polygonal(shapely.union_all([geometry, *joined.values()]))
+    outline, errors = new.boundary, []
+    for code, piece in joined.items():
+        line = piece.boundary.intersection(outline).difference(sources.cadastral_outline(code))
+        if line.length > 0:
+            errors.append(ErrorPart('istat-boundaries', line.buffer(REGION_STEP_M), sources.istat_errors.get(code)))
+    return new, tuple(errors)
+
+
 def buffer_extent(sources: Sources, origins, annexed=None, drawn=None) -> BaseGeometry | None:
     """The buffer zone: land within each origin's width, the units the annex places wholly in
     it and the parts the Region's layer supplies, outside the origins. `origins` is
@@ -1297,7 +1350,8 @@ def buffer_extent(sources: Sources, origins, annexed=None, drawn=None) -> BaseGe
                 band = _minus(band, other)
         parts.append(band)
     parts += [_minus(annexed, inner), _minus(drawn, inner)]
-    return _union(*parts)
+    # Where the band only touches land or another origin, the intersection keeps a line; a zone is its area.
+    return polygonal(_union(*parts))
 
 
 def _minus(a: BaseGeometry | None, b: BaseGeometry) -> BaseGeometry | None:
@@ -1334,7 +1388,7 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         zones['infected'] = Zone('infected', build.words('infected'), _circles(found, metres), quote, ('plants',),
                                  width, errors=_plant_errors(found, metres + buffer_width), plants=found)
     else:
-        start = len(build.istat_drawn)
+        start, whole = len(build.istat_drawn), len(build.whole)
         geometry, unplaced = build.annex('infected', build.by_role['infected'])
         listed = geometry
         rule = 'annex'
@@ -1348,10 +1402,13 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         drawn, unplaced, drawn_errors = _drawn(sources, version, 'infected', unplaced)
         used = set(build.used) | ({'region-layer'} if drawn is not None or gaps is not None else set())
         geometry = _union(geometry, drawn)
-        zones['infected'] = Zone('infected', build.words('infected'), geometry and seal(geometry), rule,
+        # Sealed first: a seam the seal closes off from the outside is enclosed land too.
+        geometry, interior_errors = _whole_interior(sources, geometry and seal(geometry), build.whole[whole:])
+        used |= {'istat-boundaries'} if interior_errors else set()
+        zones['infected'] = Zone('infected', build.words('infected'), geometry, rule,
                                  tuple(sorted(used)), None, unplaced, listed,
-                                 _source_errors(sources, build.used, build) + drawn_errors + gap_errors,
-                                 drawn=_union(drawn, gaps))
+                                 _source_errors(sources, build.used, build) + drawn_errors + gap_errors
+                                 + interior_errors, drawn=_union(drawn, gaps))
     infected = zones['infected'].geometry
 
     # Foci under eradication: a radius around the infected plants the act names for them.
@@ -1396,28 +1453,34 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
     # The part under containment measures.
     build.used = set()
     if rules.annex_iii == 'containment':
-        start = len(build.istat_drawn)
+        start, whole = len(build.istat_drawn), len(build.whole)
         geometry = build.annex_iii(version.effective_from)
         geometry, gaps, gap_errors, _ = _layer_gaps(sources, version, 'containment', geometry, build, start)
-        used = tuple(sorted(build.used | ({'region-layer'} if gaps is not None else set())))
+        geometry, interior_errors = _whole_interior(sources, geometry, build.whole[whole:])
+        used = tuple(sorted(build.used | ({'region-layer'} if gaps is not None else set())
+                            | ({'istat-boundaries'} if interior_errors else set())))
         zones['containment'] = Zone('containment', build.words('containment'), geometry, rules.quotes[-1],
-                                    used, errors=_source_errors(sources, build.used, build) + gap_errors,
-                                    drawn=gaps)
+                                    used, errors=_source_errors(sources, build.used, build) + gap_errors
+                                    + interior_errors, drawn=gaps)
     elif rules.whole and rules.whole_role == 'containment':
-        start = len(build.istat_drawn)
+        start, whole = len(build.istat_drawn), len(build.whole)
         named = [build.named_comune(n) for n in rules.whole]
         part, unplaced = build.annex('containment', build.by_role['containment'], only_comune=rules.part)
         geometry, gaps, gap_errors, _ = _layer_gaps(sources, version, 'containment', _union(*named, part),
                                                     build, start)
+        units = build.whole[whole:]                        # the former band is not a unit named whole
         former = None
         if rules.former:
             zone = build.annex_iii(adopted or version.effective_from)
             former = inward_band(zone, rules.former[0], sources.land_near(zone, SEAM_M), outside=zone)
-        used = set(build.used) | ({'region-layer'} if gaps is not None else set())
-        zones['containment'] = Zone('containment', build.words('containment'), _union(geometry, former),
+        geometry, interior_errors = _whole_interior(sources, _union(geometry, former), units)
+        used = set(build.used) | ({'region-layer'} if gaps is not None else set()) \
+            | ({'istat-boundaries'} if interior_errors else set())
+        zones['containment'] = Zone('containment', build.words('containment'), geometry,
                                     rules.quotes[0], tuple(sorted(used)),
                                     rules.former[1] if rules.former else None, unplaced, part,
-                                    _source_errors(sources, build.used, build) + gap_errors, drawn=gaps)
+                                    _source_errors(sources, build.used, build) + gap_errors + interior_errors,
+                                    drawn=gaps)
     elif rules.inward and infected is not None:
         # Article 15(2)(a): "within an area measuring at least 2 km from the border of the
         # infected zone with the buffer zone". The annex lists the units the band covers:
