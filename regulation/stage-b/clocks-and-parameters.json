@@ -45,7 +45,11 @@
     "dispositions.ref": "one minted id, or an ordered list of successive versions of one target proposition when the source expression spans their intervals. A list is temporal resolution, not multiple dispositions or simultaneous duties. Its intervals must be contiguous, non-overlapping and cover the source interval",
     "clock.magnitude": "normalized numeric string | {open_term, reserved_to}: an open term is stated by the named instrument; unit and bound stay null in B, and there is no default",
     "clock.unit_words": {
-      "giorni": "calendar_days"
+      "giorni": "calendar_days",
+      "gg": "calendar_days",
+      "gg consecutivi": "calendar_days",
+      "giorni consecutivi": "calendar_days",
+      "giorni naturali e consecutivi": "calendar_days"
     }
   },
   "clocks": [
@@ -4114,6 +4118,39 @@
       "note": null
     },
     {
+      "clock_id": "B-CLK-IT-L241-21BIS-stated-publicity-period",
+      "producer_provision_version_id": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route:v1",
+      "source_phrase": "di volta in volta stabilite dall'amministrazione medesima",
+      "kind": "minimum_duration",
+      "anchor": {
+        "kind": "event",
+        "event": "start of the posting the act states",
+        "record": "OPERATOR_RECORD"
+      },
+      "magnitude": {
+        "open_term": "the posting period the act states, with its printed unit word",
+        "reserved_to": "operative prescription"
+      },
+      "bound": null,
+      "unit": null,
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "An act that states its own ground for reaching its recipients by public posting and states the publicity form, including its period.",
+      "legal_duty_owner": "REGIONAL_PLANT_HEALTH_SERVICE",
+      "executor": null,
+      "consumer_decision": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "the act stayed posted where it states, for the period it states"
+      },
+      "note": null
+    },
+    {
       "clock_id": "B-CLK-IT-L241-21TER-stated-commencement-term",
       "producer_provision_version_id": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction:v1",
       "source_phrase": "indica il termine",
@@ -8069,6 +8106,46 @@
       },
       "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
       "note": null
+    },
+    {
+      "parameter_id": "B-PAR-LR14-2(1)(a)-trunk-diameter-100cm",
+      "producer_provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "source_phrase": "con diametro uguale o superiore a centimetri 100",
+      "kind": "floor",
+      "value": "100",
+      "unit": "cm",
+      "comparator": ">=",
+      "legal_effect": "OPERATIVE",
+      "applies_when": null,
+      "dependencies": [],
+      "scope": {
+        "zone_type": null,
+        "purpose": "L.R. 14/2007 Article 2(1)(a) monumental character of an olive",
+        "branch": null,
+        "subspecies": null
+      },
+      "consumer_decision": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "note": "The trunk diameter the plant's official record states; for a fragmented trunk, that of the reconstructed whole trunk."
+    },
+    {
+      "parameter_id": "B-PAR-LR14-2(1)(a)-measurement-height-130cm",
+      "producer_provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "source_phrase": "misurato all’altezza di centimetri 130 dal suolo",
+      "kind": "exact",
+      "value": "130",
+      "unit": "cm",
+      "comparator": null,
+      "legal_effect": "OPERATIVE",
+      "applies_when": null,
+      "dependencies": [],
+      "scope": {
+        "zone_type": null,
+        "purpose": "L.R. 14/2007 Article 2(1)(a) monumental character of an olive",
+        "branch": null,
+        "subspecies": null
+      },
+      "consumer_decision": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "note": "The height above the ground at which the Article 2(1)(a) diameter is taken."
     }
   ],
   "dispositions": [
@@ -8914,6 +8991,36 @@
       "disposition": "not_a_clock",
       "ref": null,
       "why": "Member State duty toward the Commission (class-E ruling); national actor",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "disposition": "parameter",
+      "ref": "B-PAR-LR14-2(1)(a)-trunk-diameter-100cm",
+      "why": null,
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "disposition": "parameter",
+      "ref": "B-PAR-LR14-2(1)(a)-measurement-height-130cm",
+      "why": null,
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "PUG-LR14-2007:Art.5(3):definitive-listing:v1",
+      "expression": null,
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "States which event lists a tree: the Giunta's definitive approval and the list's republication on BURP. It states no period; the dates are events of the tree's own entry.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition:v1",
+      "expression": "entro trenta giorni dalla data di pubblicazione sul Bollettino ufficiale della Regione Puglia",
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "The owners' opposition window neither lists the tree nor ends its pending recognition decision; only the Giunta's definitive decision does. No accepted consumer reads the window's lapse.",
       "aperture": "IN_APERTURE"
     },
     {
@@ -12278,38 +12385,6 @@
       "aperture": "IN_APERTURE"
     },
     {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-      "expression": "pubblicazione, per 7 giorni, nell’albo pretorio del Comune di competenza.",
-      "disposition": "not_a_clock",
-      "ref": null,
-      "why": "Case delta; the seven-day albo publication is carried by the plan-version clocks of seam 4.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-      "expression": "DATO ATTO CHE La Corte di Giustizia dell’Unione Europea, con la sentenza del 05/09/2019, ha statuito che l’Autorità competente deve procedere con immediatezza all’attuazione delle misure fitosanitarie nell’ambito della",
-      "disposition": "not_a_clock",
-      "ref": null,
-      "why": "The cited judgment supplies this act's reasoning for urgency. This recital adds no temporal requirement beyond the controlling immediate-removal duty and does not validate another act's notice route.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-      "expression": "RITENUTO DI - Dovere applicare con immediatezza, ai sensi del comma 1 dell’art.",
-      "disposition": "not_a_clock",
-      "ref": null,
-      "why": "The expression applies the existing Article 7(1) immediate-removal duty and supplies this act's urgency reasoning. It adds no separate temporal requirement; the act-specific mass-publicity conditions remain in A.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-      "expression": "- dovere adempiere agli obblighi di pubblicità del presente provvedimento mediante affissione per 7 giorni nell’albo pretorio del Comune in cui ricadono le piante da estirpare tenuto conto dell’irreperibilità",
-      "disposition": "not_a_clock",
-      "ref": null,
-      "why": "Case delta; the seven-day albo publication is carried by the plan-version clocks of seam 4.",
-      "aperture": "IN_APERTURE"
-    },
-    {
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved:v1",
       "expression": "rientrano in tutto o in parte nella zona infetta di 50 m , indicati nell’allegato 1/D, parte integrante e",
       "disposition": "restates_parameter",
@@ -12387,14 +12462,6 @@
       "disposition": "not_a_clock",
       "ref": null,
       "why": "The expression repeats Article 7(1)(e) immediate sampling, whose applicable version owns the clock. The case's distinct effect is correction and re-prescription after failed service; it creates no additional sampling clock and cannot turn failed service into silence or refusal.",
-      "aperture": "IN_APERTURE"
-    },
-    {
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1",
-      "expression": "Di adempiere agli obblighi di pubblicità del presente provvedimento mediante affissione per 7 giorni nell’albo",
-      "disposition": "not_a_clock",
-      "ref": null,
-      "why": "Case delta; the seven-day albo publication is carried by the plan-version clocks of seam 4.",
       "aperture": "IN_APERTURE"
     },
     {
@@ -13198,10 +13265,9 @@
     },
     {
       "provision_version_id": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route:v1",
-      "expression": null,
-      "disposition": "not_a_clock",
-      "ref": null,
-      "why": "States which route makes a restrictive act effective against a recipient — individual communication, act-specific mass publicity, a reasoned immediate-effect clause, or urgency by operation of law. None states a period; the routes condition the anchors of the seam-4 notice clocks.",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-L241-21BIS-stated-publicity-period",
+      "why": null,
       "aperture": "IN_APERTURE"
     },
     {
@@ -15016,13 +15082,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-1.json",
-        "record_sha256": "b40c7fcbc36319b129af9e0db1a7b86c60c3d868446147bc6bc92ad66c221f93"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-1.json",
+        "record_sha256": "eb25aa11f95d1d7aba4d3b67a5b4d358fabd9121846dc0b79be08ec2aef46ecc"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "a789702b234277bbafab31fa30e57e5a27a8152846261ed97e156bb0a4dda98d"
+      "accepted_content_sha256": "21b7ac449591090dbb85f6bf599634356137ab3ac6465e5024445dbb74c70f85"
     },
     {
       "seam": 2,
@@ -15030,13 +15096,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-2.json",
-        "record_sha256": "3414ef8e114c72c7398f6e3fd8519da3f15b082c75a1f924502a5e6cab9e03cc"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-2.json",
+        "record_sha256": "dff3a08a2a89c431d2cc24d4a00445300bb10f2fe4e59af1eb60928e4e165f10"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "5be83e86d0dc44433d94fc1b9e4bc46967cd2994dd4412176a11c0add66f5189"
+      "accepted_content_sha256": "de8f9c95469879f2c0264c41f986e8691b3607bc134915e814c08903d7e66133"
     },
     {
       "seam": 3,
@@ -15044,13 +15110,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-3.json",
-        "record_sha256": "73a181c9cef9cb41cee2f45986ce7a05c77b76b7fb7e35e58412160f8ffc573a"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-3.json",
+        "record_sha256": "d736381b5ff57a9846d4a339e08aee48f0fac878c319f91922dd9aa27926ef02"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "ccd2b207c787246fcb531718be0411947c9aaf233e51cf5adfde2307208d40b8"
+      "accepted_content_sha256": "62976befd8b80d60d7912213b4c1d5997677005b21e32d615a4bb9a44ec94c32"
     },
     {
       "seam": 4,
@@ -15058,13 +15124,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#29 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-4.json",
-        "record_sha256": "ea6a4aa907422db79588d9951064aefb894b36193b673fdb23a79480c32e8eb8"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-4.json",
+        "record_sha256": "71c93f534b04f6ee82118a353135bba0a04b5baa00ce72c74f2fefef435fbc12"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "7b4ab9c8165d93530ff619e6d1e278e6322e6b20df94ac7e19d7496d24c5590c"
+      "accepted_content_sha256": "16e478bb99cacd4b951e31f360cc6901b7e417f0397b634279cae8e27a5b21ae"
     }
   ]
 }

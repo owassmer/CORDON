@@ -40,6 +40,19 @@ def shape(geometry, error=0):
     return MetricGeometry(geometry, CRS_M, error)
 
 
+def personal_communication(snapshot, at, *, effected):
+    """Art. 21-bis personal-communication facts for a restrictive act with no immediate-effect clause."""
+    row = snapshot.version("IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect", at)
+    facts = {}
+    for p in leaves(row["condition_ast"]):
+        if p.startswith("the communication to that recipient has been effected"):
+            if effected is not None:
+                facts[row["provision_version_id"], p] = effected
+        else:
+            facts[row["provision_version_id"], p] = p != "a valid immediate-effect exception applies"
+    return facts
+
+
 def simple_snapshot(ast, extra=()):
     row = dict(provision_version_id="test:v1", stable_provision_id="test", effective_from="2020-01-01",
                effective_to_exclusive="", semantic_change="YES", condition_ast=ast,
@@ -1140,6 +1153,7 @@ class ComposedTemporalCases(unittest.TestCase):
         facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])
                  if p not in {"the source notification-based commencement deadline has elapsed",
                               "noncommencement of that work by the source deadline is established"}}
+        facts |= personal_communication(s, AT, effected=True)
         args = dict(notification=datetime(2026, 8, 3, 10, tzinfo=ROME),
                     evaluated_at=datetime(2026, 8, 14, tzinfo=ROME), stated_term=("10", "giorni"),
                     zone=ROME, calendar=WorkingCalendar(date(2026,1,1),date(2027,1,1),frozenset(),frozenset({5,6})))
@@ -1167,6 +1181,12 @@ class ComposedTemporalCases(unittest.TestCase):
                 noncommencement_facts(s, clock, AT, **dict(args, stated_term=term),
                                       qualifying_commencements={}, commencement_records_complete=True)
         self.assertIsNone(s.clocks[clock]["unit"])
+        # Without a notification day there is no deadline: both temporal leaves stay unknown and name it.
+        silent = noncommencement_facts(s, clock, AT, **dict(args, notification=None),
+                                       qualifying_commencements={}, commencement_records_complete=True)
+        result = evaluate(s, identity, AT, merge_facts(facts, silent))
+        self.assertIsNone(result.effect)
+        self.assertIn("legally sufficient notification of the prescription to this recipient", result.needs)
         # A stated term never replaces a period B fixes.
         fixed = next(c for c in json.loads((Path(__file__).parent / "calendar-rules.json").read_text())["italian_deadline"]
                      if c != clock)
@@ -1328,6 +1348,272 @@ class OperativeMethods(unittest.TestCase):
         self.assertTrue(survey_design_adequacy(candidate,'B-PAR-EU-15(4)-C90-p1',AT,strata,**kw).truth)
         self.assertFalse(survey_design_adequacy(candidate,'B-PAR-DGR1075-T4-olive-design',AT,strata,**kw).truth)
         self.assertEqual(planned_sample_difference(candidate,'B-PAR-DGR1075-T4-olive-high-samples',AT,5000),116)
+
+
+class OwnerRulings20260924(unittest.TestCase):
+    """Owen's rulings of 2026-09-24. Dates are supplied, not read from held records."""
+    MASS = "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
+    LISTED = "PUG-LR14-2007:Art.5(3):definitive-listing"
+    PENDING = "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.s = Snapshot.load()
+
+    def publicity(self, **overrides):
+        from cordon_c.bindings import mass_publicity_facts
+        start = datetime(2026, 4, 7, 9, tzinfo=ROME)
+        args = dict(ground_stated=True, annulled_on_ground=False, posting_start=start,
+                    postings={"albo": (start, datetime(2026, 4, 15, tzinfo=ROME))}, postings_complete=True,
+                    stated_period=("7", "giorni"), evaluated_at=datetime(2026, 5, 1, tzinfo=ROME), zone=ROME)
+        facts, day = mass_publicity_facts(self.s, AT, **(args | overrides))
+        return evaluate(self.s, self.MASS, AT, facts), day
+
+    def test_mass_publicity_needs_the_acts_own_ground_period_and_completed_posting(self):
+        # Independent expectation: seven days of posting from 7 April, excluding the posting day, run through 14 April.
+        result, day = self.publicity()
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 4, 14)))
+        # No ground of the act's own (including a recital that only restates Art. 21-bis): not this route, no day.
+        result, day = self.publicity(ground_stated=False)
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        # A court annulment on the stated ground ends the route.
+        result, day = self.publicity(annulled_on_ground=True)
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        # A missing stated period is unknown and names the period; it is never seven days.
+        result, day = self.publicity(stated_period=None)
+        self.assertIsNone(result.effect)
+        self.assertIsNone(day)
+        self.assertTrue(any("the term the operative prescription states" in need for need in result.needs))
+        # A stated 15 days needs a longer posting; the seven-day posting falls short.
+        result, day = self.publicity(stated_period=("15", "giorni"))
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        start = datetime(2026, 4, 7, 9, tzinfo=ROME)
+        result, day = self.publicity(stated_period=("15", "giorni"),
+                                     postings={"albo": (start, datetime(2026, 4, 23, tzinfo=ROME))})
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 4, 22)))
+        # A posting removed early fails; a gap with incomplete records stays unknown.
+        result, _ = self.publicity(postings={"albo": (start, datetime(2026, 4, 12, tzinfo=ROME))})
+        self.assertEqual(result.effect, "RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED")
+        gap = {"first": (start, datetime(2026, 4, 10, tzinfo=ROME)),
+               "second": (datetime(2026, 4, 11, tzinfo=ROME), datetime(2026, 4, 15, tzinfo=ROME))}
+        result, day = self.publicity(postings=gap, postings_complete=False)
+        self.assertIsNone(result.effect)
+        self.assertIsNone(day)
+
+    def listing(self, at, **entry):
+        from cordon_c.bindings import listing_facts
+        args = dict(own_entry=True, first_publication=date(2022, 1, 10),
+                    definitive_decision=(date(2022, 11, 28), True), deletion=None, entry_history_complete=True)
+        facts = listing_facts(self.s, at, **(args | entry))
+        return (evaluate(self.s, self.LISTED, at, facts).effect, evaluate(self.s, self.PENDING, at, facts).effect)
+
+    def test_listing_follows_definitive_republication(self):
+        not_listed, listed = "TREE_NOT_LISTED", "TREE_LISTED"
+        pending, none = "RECOGNITION_DECISION_PENDING", "NO_PENDING_DECISION_FROM_THE_LIST"
+        self.assertEqual(self.listing(date(2021, 12, 1)), (not_listed, none))
+        self.assertEqual(self.listing(date(2022, 1, 10)), (not_listed, pending))
+        # The thirty-day opposition window lapsed on 9 February 2022; that neither lists nor ends pending.
+        self.assertEqual(self.listing(date(2022, 6, 1)), (not_listed, pending))
+        self.assertEqual(self.listing(date(2022, 11, 28)), (listed, none))
+        self.assertEqual(self.listing(date(2025, 3, 1)), (listed, none))
+        self.assertEqual(self.listing(date(2025, 3, 1), deletion=date(2024, 5, 2)), (not_listed, none))
+        # A definitive decision that excludes the entry ends pending without listing.
+        self.assertEqual(self.listing(date(2023, 1, 1), definitive_decision=(date(2022, 11, 28), False)),
+                         (not_listed, none))
+        # An unknown definitive date with an incomplete history stays unknown for both.
+        self.assertEqual(self.listing(date(2023, 1, 1), definitive_decision=None, entry_history_complete=False),
+                         (None, None))
+
+    def test_grove_tree_without_own_entry_is_not_listed_and_does_not_reach_retention(self):
+        from cordon_c.bindings import listing_facts
+        at = date(2025, 3, 1)
+        facts = listing_facts(self.s, at, own_entry=False, first_publication=None, definitive_decision=None,
+                              deletion=None, entry_history_complete=False)
+        self.assertEqual(evaluate(self.s, self.LISTED, at, facts).effect, "TREE_NOT_LISTED")
+        identity = "PUG-LR4-2017:Art.8(5):protected-uninfected-retention"
+        row = self.s.version(identity, at)
+        facts |= {(row["provision_version_id"], p): p == "the operative regional retention policy covers this individually qualifying plant"
+                  for p in leaves(row["condition_ast"])}
+        result = evaluate(self.s, identity, at, facts)
+        self.assertEqual(result.effect, "ARTICLE_7_3_DOMAIN_SAFEGUARD_OR_EXERCISE_EVIDENCE_REQUIRED")
+        self.assertFalse(any("landscape" in need or "grove" in need for need in result.needs))
+
+    def test_provisional_tree_is_held_and_the_request_route_survives(self):
+        from cordon_c.bindings import listing_facts
+        hold = "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"
+        at = date(2025, 9, 1)
+        row = self.s.version(hold, at)
+        request = "the Osservatorio's recognition request for this tree awaits decision"
+        base = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"]) if p != request}
+        provisional = listing_facts(self.s, at, own_entry=True, first_publication=date(2025, 7, 1),
+                                    definitive_decision=None, deletion=None, entry_history_complete=True)
+        self.assertIs(evaluate(self.s, hold, at, base | provisional).truth, True)
+        unlisted = listing_facts(self.s, at, own_entry=False, first_publication=None, definitive_decision=None,
+                                 deletion=None, entry_history_complete=True)
+        result = evaluate(self.s, hold, at, base | unlisted)
+        self.assertIsNone(result.truth)
+        self.assertTrue(any(request in need for need in result.needs))
+        self.assertIs(evaluate(self.s, hold, at, base | unlisted | {(row["provision_version_id"], request): True}).truth, True)
+        decided = listing_facts(self.s, at, own_entry=True, first_publication=date(2025, 7, 1),
+                                definitive_decision=(date(2025, 8, 20), True), deletion=None, entry_history_complete=True)
+        self.assertIs(evaluate(self.s, hold, at, base | decided | {(row["provision_version_id"], request): False}).truth, False)
+
+    def test_infected_characteristics_not_listing_reach_the_piana_alternative(self):
+        identity = "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary"
+        at = date(2025, 9, 1)
+        row = self.s.version(identity, at)
+        self.assertNotIn(self.LISTED, json.dumps(row["condition_ast"]))
+        facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        self.assertIs(evaluate(self.s, identity, at, facts).truth, True)
+        from cordon_c.bindings import trunk_diameter_facts
+        facts[row["provision_version_id"], self.FINDING] = False
+        facts |= trunk_diameter_facts(self.s, at, diameter_cm=Decimal(96), measured_height_cm=None)
+        self.assertIs(evaluate(self.s, identity, at, facts).truth, False)
+
+    # PR #32 round 2: the official monitoring finding, or A's own Art. 2(1)(a) row.
+    FINDING = ("the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: "
+               "its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics")
+
+    def test_a_composes_the_measurement_route_into_the_characteristics_conjunct(self):
+        from cordon_c.bindings import trunk_diameter_facts
+        at = date(2025, 9, 1)
+        conjunct = {"any_of": [{"predicate": self.FINDING},
+                               {"provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"}]}
+        for identity in ("PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+                         "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
+                         "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"):
+            row = self.s.version(identity, at)
+            self.assertIn(conjunct, row["condition_ast"]["all_of"])
+            vid = row["provision_version_id"]
+            # Every other conjunct holds, so the row's truth is the characteristics conjunct's.
+            others = {(vid, p): True for p in leaves(row["condition_ast"]) if p != self.FINDING}
+            for finding in (False, None):
+                given = others if finding is None else others | {(vid, self.FINDING): finding}
+                with self.subTest(identity=identity, finding=finding):
+                    # A diameter-only record at 120 cm, no height stated, no finding: the conjunct is true.
+                    met = given | trunk_diameter_facts(self.s, at, diameter_cm=Decimal(120), measured_height_cm=None)
+                    self.assertIs(evaluate(self.s, identity, at, met).truth, True)
+                    # At 96 cm it is not: false against a record with no finding, unknown where the finding is unread.
+                    short = given | trunk_diameter_facts(self.s, at, diameter_cm=Decimal(96), measured_height_cm=None)
+                    self.assertIs(evaluate(self.s, identity, at, short).truth, None if finding is None else False)
+            # The surveyor's finding alone is enough without a measurement.
+            self.assertIs(evaluate(self.s, identity, at, others | {(vid, self.FINDING): True}).truth, True)
+
+    # PR #32 round 1.
+    TER = "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
+    COMMUNICATED = ("the communication to that recipient has been effected, including in the forms prescribed for "
+                    "notification to the unreachable in the cases provided by the code of civil procedure")
+
+    def test_personal_notice_reads_communication_not_the_individual_rows_effect(self):
+        from cordon_c.bindings import mass_publicity_facts
+        at = AT
+        row = self.s.version(self.TER, at)
+        self.assertNotIn("IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect", json.dumps(row))
+        facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        individual = self.s.version("IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect", at)
+        # A reasoned immediate-effect clause on the order (DDS 188/2024 l.191-193) neither gives nor defeats notice.
+        facts |= {(individual["provision_version_id"], p): True for p in leaves(individual["condition_ast"])}
+        start = date(2026, 4, 7)
+        facts |= mass_publicity_facts(self.s, at, ground_stated=False, annulled_on_ground=False, posting_start=start,
+            postings={"albo": (start, date(2026, 4, 13))}, postings_complete=True, stated_period=("7", "gg"),
+            evaluated_at=datetime(2026, 5, 1, tzinfo=ROME), zone=ROME)[0]
+        self.assertEqual(evaluate(self.s, self.TER, at, facts).effect, "CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED")
+        facts[row["provision_version_id"], self.COMMUNICATED] = False
+        self.assertEqual(evaluate(self.s, self.TER, at, facts).effect, "CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED")
+
+    def notice(self, *, personal, pec, ground, **posting):
+        from cordon_c.bindings import mass_publicity_facts, notice_instant
+        start = date(2026, 4, 7)
+        facts, day = mass_publicity_facts(self.s, AT, ground_stated=ground, annulled_on_ground=False,
+            posting_start=start, postings={"albo": (start, date(2026, 4, 13))}, postings_complete=True,
+            stated_period=("7", "gg consecutivi"), evaluated_at=datetime(2026, 5, 1, tzinfo=ROME), zone=ROME,
+            **posting)
+        vid = self.s.version(self.TER, AT)["provision_version_id"]
+        if personal is not None:
+            facts = facts | {(vid, self.COMMUNICATED): personal}
+        return notice_instant(self.s, self.TER, AT, facts, zone=ROME,
+                              instants={self.COMMUNICATED: pec, self.MASS: day})
+
+    def test_notice_runs_from_the_earliest_branch_a_finds_true(self):
+        pec = datetime(2026, 4, 7, 10, 30, tzinfo=ROME)
+        # Stated ground; day-0 PEC and a posting displayed 7-13 April whose notice day is 14 April: the PEC governs.
+        self.assertEqual(self.notice(personal=True, pec=pec, ground=True), pec)
+        # A PEC A rejects gives no instant; the posting's notice day governs.
+        self.assertEqual(self.notice(personal=False, pec=pec, ground=True), date(2026, 4, 14))
+        # An unknown personal branch never supplies its instant.
+        self.assertEqual(self.notice(personal=None, pec=pec, ground=True), date(2026, 4, 14))
+        # A rejected PEC on a no-ground order: no instant, so no deadline runs.
+        self.assertIsNone(self.notice(personal=False, pec=pec, ground=False))
+        from cordon_c.bindings import noncommencement_facts
+        temporal = noncommencement_facts(self.s, "B-CLK-IT-L241-21TER-stated-commencement-term", AT,
+            notification=None, evaluated_at=datetime(2026, 6, 1, tzinfo=ROME), qualifying_commencements={},
+            commencement_records_complete=True, zone=ROME, stated_term=("10", "giorni"))
+        self.assertTrue(all(v.truth is None for v in temporal.values()))
+        # A branch A finds true must carry its instant.
+        with self.assertRaises(ValueError):
+            self.notice(personal=True, pec=None, ground=False)
+
+    def test_printed_posting_units_and_counts(self):
+        from cordon_c.quantities import clock_boundary
+        clock = "B-CLK-IT-L241-21BIS-stated-publicity-period"
+        expected = datetime(2026, 4, 15, tzinfo=ROME)
+        for term in [("7", "giorni"), ("7", "gg"), ("7", "gg consecutivi"), ("7", "giorni consecutivi"),
+                     ("7 (sette)", "giorni naturali e consecutivi"), ("7 (Sette)", "Giorni  naturali e consecutivi"),
+                     ("7(sette)", "gg")]:
+            with self.subTest(term=term):
+                self.assertEqual(clock_boundary(self.s, clock, AT, date(2026, 4, 7), zone=ROME, stated_term=term), expected)
+        for term in [("sette", "giorni"), ("(7)", "giorni"), ("7", "giorni lavorativi")]:
+            with self.subTest(term=term), self.assertRaises(MissingInput):
+                clock_boundary(self.s, clock, AT, date(2026, 4, 7), zone=ROME, stated_term=term)
+
+    def test_posting_completes_on_the_stated_display_days_counted_inclusively(self):
+        # DDS 58/2024 op. 11: "per la durata di 7 (sette) giorni naturali e consecutivi. Tale affissione ... decorso il
+        # settimo giorno dalla data di pubblicazione assume valore di notifica". Capurso's albo: 20/05/2024-26/05/2024.
+        term = ("7 (sette)", "giorni naturali e consecutivi")
+        result, day = self.publicity(posting_start=date(2024, 5, 20), postings={"albo": (date(2024, 5, 20), date(2024, 5, 26))},
+                                     stated_period=term, evaluated_at=datetime(2024, 7, 1, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2024, 5, 27)))
+        # The same posting taken down at the start of 26 May was displayed six days only.
+        start = datetime(2024, 5, 20, tzinfo=ROME)
+        result, day = self.publicity(posting_start=start, postings={"albo": (start, datetime(2024, 5, 26, tzinfo=ROME))},
+                                     stated_period=term, evaluated_at=datetime(2024, 7, 1, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED", None))
+        # A certificate's inclusive "al 17/03/2026" runs through the end of 17 March: 11-17 March is seven days.
+        result, day = self.publicity(posting_start=date(2026, 3, 11), postings={"albo": (date(2026, 3, 11), date(2026, 3, 17))},
+                                     stated_period=("7", "gg consecutivi"), evaluated_at=datetime(2026, 9, 20, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 3, 18)))
+        # DDS 38/2026, Bari's certificate "dal 10/03/2026 al 17/03/2026": complete, notice day 17 March.
+        result, day = self.publicity(posting_start=date(2026, 3, 10), postings={"albo": (date(2026, 3, 10), date(2026, 3, 17))},
+                                     stated_period=("7", "gg consecutivi"), evaluated_at=datetime(2026, 9, 20, tzinfo=ROME))
+        self.assertEqual((result.effect, day), ("ACT_EFFECTIVE_AGAINST_RECIPIENT", date(2026, 3, 17)))
+
+    def test_recorded_trunk_diameter_meets_article_2_1_a(self):
+        from cordon_c.bindings import trunk_diameter_facts
+        identity = "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+        at = date(2025, 9, 1)
+        # Art. 2(1)(a): "diametro uguale o superiore a centimetri 100, misurato all'altezza di centimetri 130 dal suolo".
+        cases = [((Decimal(100), None), "ARTICLE_2_1_A_CRITERION_MET"),
+                 ((Decimal(130), Decimal(130)), "ARTICLE_2_1_A_CRITERION_MET"),
+                 ((Decimal("99.9"), None), "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED"),
+                 ((Decimal(120), Decimal(150)), None),
+                 ((None, None), None)]
+        for (diameter, height), effect in cases:
+            with self.subTest(diameter=diameter, height=height):
+                facts = trunk_diameter_facts(self.s, at, diameter_cm=diameter, measured_height_cm=height)
+                self.assertEqual(evaluate(self.s, identity, at, facts).effect, effect)
+
+    def test_dgr343_policy_reads_article_5_3_listing(self):
+        from cordon_c.bindings import listing_facts
+        identity = "PUG-DGR343-2022:Art7(3)-policy"
+        at = date(2022, 10, 3)
+        row = self.s.version(identity, at)
+        base = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        listed = listing_facts(self.s, at, own_entry=True, first_publication=date(2021, 6, 1),
+                               definitive_decision=(date(2022, 3, 1), True), deletion=None, entry_history_complete=True)
+        pending = listing_facts(self.s, at, own_entry=True, first_publication=date(2022, 6, 1),
+                                definitive_decision=None, deletion=None, entry_history_complete=True)
+        self.assertIs(evaluate(self.s, identity, at, base | listed).truth, True)
+        self.assertIs(evaluate(self.s, identity, at, base | pending).truth, False)
 
 
 if __name__ == "__main__":

@@ -5137,33 +5137,31 @@
     "semantic_change": "INITIAL",
     "actor_role": "Issuing administration",
     "modality": "shall",
-    "true_effect": "Establish and complete suitable act-specific publicity in place of personal communication.",
-    "false_effect": "If personal communication is possible and not particularly burdensome, this mass-publicity route is unavailable. Missing recipient-count or burden evidence remains UNKNOWN.",
+    "true_effect": "The act becomes effective against its recipients through completion of the publicity form it states, in place of personal communication.",
+    "false_effect": "This mass-publicity route is not established. An act that states no ground of its own for public posting does not reach it, and personal communication to each recipient stays required. An incomplete or unrecorded posting remains unknown, not completed.",
     "reserved_decision_owner": "Issuing administration",
-    "evidence_contract": "Exact act and recipient population; evidence of personal-communication impossibility or particular burden caused by recipient number; administration’s act-specific publicity decision; suitable publication content, channel and completion time.",
+    "evidence_contract": "The act's own stated ground for public posting, verbatim with its place in the act; the publicity form the act states (place, and period as printed); the first-party posting records for that form; any court disposition annulling the act on that ground.",
     "external_dependencies": [],
     "rule_determinacy": "DETERMINISTIC_RULE",
     "authority_judgment_required": "YES",
-    "authority_judgment_kind": "ACT_SPECIFIC_MASS_PUBLICITY_SELECTION",
+    "authority_judgment_kind": "ACT_STATED_MASS_PUBLICITY_GROUND",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "A general statement that publication has notice value does not prove the act-specific impossibility or particular-burden predicate. [PRESERVED_PRE_MIGRATION_DETAIL: scope=PROCEDURAL_SUPPORT]",
+    "semantic_note": "[OWNER RULING 2026-09-24, 1] [INTERPRETATION, NOT LITERAL STATUTORY TEXT] An act that states its own ground for reaching its recipients by public posting meets the Article 21-bis condition. The law gives the administration the choice (“forme di pubblicità idonee di volta in volta stabilite dall'amministrazione medesima”), and the act is where it makes and states that choice; C does not re-judge the ground. Each act is judged by its own text. That the act stands on its ground unless a court annuls it on that ground is general administrative law, not Article 21-bis text. Orders print the ground as “tenuto conto dell’irreperibilità di alcuni destinatari e della gravosità per l’amministrazione di notificare i provvedimenti ai singoli beneficiari”. The text names the number of recipients, and unreachability belongs to the first sentence's route (“nelle forme stabilite per la notifica agli irreperibili”); the reading takes the stated ground as the administration's own finding. Falsifier: a controlling decision requiring the act to rest the choice on the number of recipients. D.lgs. 19/2021 Art. 33(2) supports the administration setting the form and period of that publicity “qualora ricorrano i presupposti” of Article 21-bis: communication of plant-health measures is then “effettuata secondo le modalità e i termini stabiliti dal Servizio fitosanitario centrale ovvero dal Servizio fitosanitario regionale competente per territorio”. It does not support the stated ground itself. A plan instruction to notify by posting (DGR 538/2021, 343/2022, 1866/2022, 1593/2024, 1075/2025) is not the act's own ground, and neither is a recital that only restates Article 21-bis. The posting period is the one the act states; there is no default period. [INTERPRETATION, NOT LITERAL STATUTORY TEXT] A period the act states as consecutive days (“per 7 gg consecutivi”, “per la durata di 7 (sette) giorni naturali e consecutivi”) is a display duration: the publicity form is completed when the act was displayed on each of that number of consecutive days, the first day of display included, as an albo keeps its “dal … al …”; a certificate's “al” day counts through its end. The notice day follows the act's own words (“decorso il settimo giorno dalla data di pubblicazione assume valore di notifica”): the stated number of days counted from the day of publication, that day excluded as in the civil computation of terms. Falsifier: a controlling decision requiring display to continue through the notice day.",
     "condition_ast": {
       "route_table": [
         {
           "when": {
             "all_of": [
               {
-                "any_of": [
-                  {
-                    "predicate": "recipient number makes personal communication impossible for the exact act"
-                  },
-                  {
-                    "predicate": "recipient number makes personal communication particularly burdensome for the exact act"
-                  }
-                ]
+                "predicate": "the act states its own ground for reaching its recipients by public posting"
               },
               {
-                "predicate": "the suitable publicity established by the administration for that act has been completed"
+                "predicate": "the publicity form the act states has been completed"
+              },
+              {
+                "not": {
+                  "predicate": "a court has annulled the act on its stated ground for public posting"
+                }
               }
             ]
           },
@@ -5328,7 +5326,7 @@
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "establish the operative recipient relation, notification and actual noncommencement",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "[INTERPRETATION, NOT LITERAL STATUTORY TEXT] Article 21-ter(1) makes a prior diffida a condition of coercive execution but fixes no form and no further period for it. A prescription legally sufficiently notified to this recipient that itself states the commencement term and the coercive consequence is that prior diffida; no further warning is a condition. Falsifier: a controlling ruling that requires a post-default diffida where the order already warned; the rule then gains, for every order, the condition that a post-term diffida has been legally sufficiently notified. Article 21-ter says the administrations “possono” proceed; the required direction comes from the order's own “disporrà”, read as the order's commitment to direct coercive removal, so a clause that does not commit the Osservatorio does not satisfy the first condition. The coercive population is the clause's own words; a back-reference (“delle suddette piante”, “della piante”) refers to the population the same clause names. The term, its anchor, the commencement work, the coercive population and the executor are the prescription's own; no default term exists, and an order stating no term has no deadline. A case delta of the prescription's instrument, or a correction or supplement row that names it among the instruments it corrects, is reached through the record's governing A references; removal it withholds is not lawfully due, and while it is unresolved lawful dueness is unresolved. Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Immediate effectiveness is not itself notification; publication counts only through a legally sufficient notice route.",
+    "semantic_note": "[INTERPRETATION, NOT LITERAL STATUTORY TEXT] Article 21-ter(1) makes a prior diffida a condition of coercive execution but fixes no form and no further period for it. A prescription legally sufficiently notified to this recipient that itself states the commencement term and the coercive consequence is that prior diffida; no further warning is a condition. Falsifier: a controlling ruling that requires a post-default diffida where the order already warned; the rule then gains, for every order, the condition that a post-term diffida has been legally sufficiently notified. Article 21-ter says the administrations “possono” proceed; the required direction comes from the order's own “disporrà”, read as the order's commitment to direct coercive removal, so a clause that does not commit the Osservatorio does not satisfy the first condition. The coercive population is the clause's own words; a back-reference (“delle suddette piante”, “della piante”) refers to the population the same clause names. The term, its anchor, the commencement work, the coercive population and the executor are the prescription's own; no default term exists, and an order stating no term has no deadline. A case delta of the prescription's instrument, or a correction or supplement row that names it among the instruments it corrects, is reached through the record's governing A references; removal it withholds is not lawfully due, and while it is unresolved lawful dueness is unresolved. Commencement is distinct from completion and owner election. This is not a grace period or a bar to earlier lawful intervention. Legally sufficient notification to this recipient is either the communication to that recipient having been effected (the communication predicate of the Article 21-bis personal-communication row, not that row's effect) or the Article 21-bis mass-publicity route making the prescription effective against the recipient. A reasoned immediate-effect clause neither gives nor defeats notice; immediate effectiveness is not itself notification, and publication counts only through the mass-publicity route. Where more than one branch holds for the recipient, the term runs from the earliest instant among the branches A finds true; a branch A leaves unknown supplies no instant.",
     "condition_ast": {
       "route_table": [
         {
@@ -5341,7 +5339,14 @@
                 "predicate": "the commencement work the prescription states is lawfully due from this recipient"
               },
               {
-                "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                "any_of": [
+                  {
+                    "predicate": "the communication to that recipient has been effected, including in the forms prescribed for notification to the unreachable in the cases provided by the code of civil procedure"
+                  },
+                  {
+                    "provision_ref": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
+                  }
+                ]
               },
               {
                 "predicate": "the source notification-based commencement deadline has elapsed"
@@ -11515,6 +11520,174 @@
     "temporal_status": "CURRENT"
   },
   {
+    "source_clause_id": "PUG-LR14-2007::Art.2(1)(a)",
+    "instrument_id": "PUG-LR14-2007",
+    "stable_provision_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+    "parent_stable_provision_id": "",
+    "article": "2(1)(a):trunk-diameter-criterion",
+    "structural_kind": "paragraph",
+    "effective_from": "2007-06-07",
+    "effective_to_exclusive": "",
+    "application_basis": "L.R. Puglia 14/2007 Article 2, in force 2007-06-07 (BURP n. 83 of 7-6-2007); Article 2 is unamended in the consolidated text in force from 20/06/2023",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "-",
+    "modality": "-",
+    "true_effect": "The olive has the monumental character of Article 2(1)(a): a plurisecular age shown by a trunk diameter of at least 100 cm measured 130 cm above the ground.",
+    "false_effect": "Article 2(1)(a) is not shown by this measurement. Article 2(1)(b) and 2(2) remain other grounds of the characteristics; a missing measurement, or one taken at another height, remains unknown.",
+    "reserved_decision_owner": "-",
+    "evidence_contract": "The trunk diameter the plant's official monitoring record states, and the height at which it was taken where the record states one.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "[OWNER RULING 2026-09-24, CHARACTERISTICS] For an infected olive, L.R. 4/2017 Art. 8(7bis) turns on the Article 2 characteristics, and the official monitoring record of the plant establishes them: its MONUMENTALE_ARIF flag (“Si” or “1”) or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it. A note that records only a trunk diameter establishes them when the diameter meets this criterion. [INTERPRETATION, NOT LITERAL STATUTORY TEXT] A diameter the surveyor records without a height is read as taken at the criterion's 130 cm; a diameter recorded at another height is not this measure and leaves the criterion unknown. Ground: the forestry convention that the “diametro” of a standing tree is its diameter at breast height, which is the 130 cm height Article 2(1)(a) itself names. Falsifier: a record or protocol showing the surveyors measured at another height. Article 2(1)(b) and 2(2) are other grounds and are not this row. The Art. 8(7bis), DDS 4/2022 and DDS 45/2023 characteristics conjuncts reach this row beside the official monitoring finding.",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "predicate": "the trunk diameter the plant's official record states, measured 130 cm above the ground (for a fragmented trunk, of the reconstructed whole trunk), is at least 100 cm"
+          },
+          "effect": "ARTICLE_2_1_A_CRITERION_MET"
+        }
+      ],
+      "otherwise": {
+        "effect": "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED"
+      }
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "PUG-LR14-2007",
+    "source_uri": "https://burp.regione.puglia.it/documents/20135/310417/LEGGE+REGIONALE++4+giugno+2007%2C+n.+14+%28id+5****43%29.pdf/44dacfab-c29a-90b9-827c-fa82fd36fd98?t=1622718601066&version=1.0",
+    "source_paths": "regulation/jurisdiction/regional/PUG-LR14-2007.txt",
+    "source_snapshot_hashes": "11fed4d839add2f87e2c13403d06e53f84c3d2934ebd46b562cf1166b7c3f3e7",
+    "source_snapshot_dates": "2007-06-07",
+    "source_quote": "1. Il carattere di monumentalità viene attribuito quando la pianta di ulivo possiede età plurisecolare\ndeducibile da:\na) dimensioni del tronco della pianta, con diametro uguale o superiore a centimetri 100, misurato\nall’altezza di centimetri 130 dal suolo; nel caso di alberi con tronco frammentato il diametro è quello\ncomplessivo ottenuto ricostruendo la forma teorica del tronco intero;",
+    "source_quote_sha256": "e726352b0f8034483f23896f4578cd5233106b1c056f85834f27380e7abbc3c5",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
+    "source_clause_id": "PUG-LR14-2007::Art.5(3)",
+    "instrument_id": "PUG-LR14-2007",
+    "stable_provision_id": "PUG-LR14-2007:Art.5(3):definitive-listing",
+    "parent_stable_provision_id": "",
+    "article": "5(3):definitive-listing",
+    "structural_kind": "paragraph",
+    "effective_from": "2007-06-07",
+    "effective_to_exclusive": "",
+    "application_basis": "L.R. Puglia 14/2007 Article 5, in force 2007-06-07 (BURP n. 83 of 7-6-2007); Article 5 is unamended in the consolidated text in force from 20/06/2023",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Regional Government (Giunta regionale)",
+    "modality": "-",
+    "true_effect": "The tree is inserted in the Article 5 list of monumental olives (“inserito nell'elenco”) from the BURP republication of the Giunta's definitive approval of its own entry, until that entry is deleted.",
+    "false_effect": "The tree is not inserted in the Article 5 list at the event date. A provisional entry, lapse of the thirty-day opposition window, or a listed grove without an entry of the tree's own does not list it. Missing entry or act dates remain unknown.",
+    "reserved_decision_owner": "Regional Government (Giunta regionale)",
+    "evidence_contract": "The tree's own list entry and identity; the Giunta act approving that entry definitively and the BURP issue and date of the list's republication; any act deleting the entry and its date.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "[OWNER RULING 2026-09-24, 2(a)] A tree is “inserito nell'elenco” (Article 10(1); L.R. 4/2017 Article 8(5)) from the Giunta's definitive approval of its own entry and the list's republication on BURP under Article 5(3); the first publication under Article 5(2) does not list it. Article 10(1) and Article 17(1) do not say “definitiva”; the reading rests on Article 6(1) (“Con la pubblicazione definitiva dell’elenco”) and Article 15, which tie legal effects to the definitive publication. Falsifier: a controlling reading that the Article 5(2) publication lists a tree. [OWNER RULING 2026-09-24, 2(c)] Article 6(2) gives every monumental olive its own identification code, even inside a monumental grove, so a grove does not list a tree that has no entry of its own; the grove's Article 6(1) landscape constraint is a landscape-permission question, not listed status. [OWNER RULING 2026-09-24, ARTICLE 15] Article 15 in force bans harm to plurisecular olives with Article 2 characteristics “Nel periodo intercorrente tra la data di entrata in vigore della presente legge e la data di pubblicazione definitiva dell'elenco degli ulivi monumentali di cui all'articolo 5”; L.R. 36/2011 Art. 3 deleted its three-year cap and Art. 4 repealed L.R. 5/2010 Art. 18. That date is one event, the first definitive publication of the one Article 5 list, which Article 5(1) updates annually; it is not a per-tree deadline. DGR 1491/2020 (BURP n. 133 of 22-9-2020) approves the list definitively and is a held definitive republication, so the transitional regime had ended before the reach. Falsifier: a controlling reading of Article 15 as a per-tree deadline running for each unlisted tree with Article 2 characteristics until its own entry is definitive.",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "the tree has its own entry in an Article 5 list"
+              },
+              {
+                "predicate": "the Giunta approved that entry definitively and the list containing it was republished on BURP on or before the event date"
+              },
+              {
+                "not": {
+                  "predicate": "the entry was deleted from the list on or before the event date"
+                }
+              }
+            ]
+          },
+          "effect": "TREE_LISTED"
+        }
+      ],
+      "otherwise": {
+        "effect": "TREE_NOT_LISTED"
+      }
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "PUG-LR14-2007",
+    "source_uri": "https://burp.regione.puglia.it/documents/20135/310417/LEGGE+REGIONALE++4+giugno+2007%2C+n.+14+%28id+5****43%29.pdf/44dacfab-c29a-90b9-827c-fa82fd36fd98?t=1622718601066&version=1.0",
+    "source_paths": "regulation/jurisdiction/regional/PUG-LR14-2007.txt",
+    "source_snapshot_hashes": "11fed4d839add2f87e2c13403d06e53f84c3d2934ebd46b562cf1166b7c3f3e7",
+    "source_snapshot_dates": "2007-06-07",
+    "source_quote": "3. La Giunta regionale, sentito il parere della Commissione tecnica di cui all’articolo 3, decide sulle\nopposizioni ricevute e approva in via definitiva l’elenco degli ulivi monumentali. Tale elenco è sottoposto\na nuova pubblicazione sul Bollettino ufficiale della Regione Puglia.",
+    "source_quote_sha256": "f09696f9495ae64d11d2fa247f452a54a913e0e63e5794ecbd804acce649c67b",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "PUG-LR14-2007:Art.5(3):definitive-listing:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
+    "source_clause_id": "PUG-LR14-2007::Art.5(2)",
+    "instrument_id": "PUG-LR14-2007",
+    "stable_provision_id": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+    "parent_stable_provision_id": "",
+    "article": "5(2):provisional-listing-pending-recognition",
+    "structural_kind": "paragraph",
+    "effective_from": "2007-06-07",
+    "effective_to_exclusive": "",
+    "application_basis": "L.R. Puglia 14/2007 Article 5, in force 2007-06-07 (BURP n. 83 of 7-6-2007); Article 5 is unamended in the consolidated text in force from 20/06/2023",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Regional Government (Giunta regionale)",
+    "modality": "-",
+    "true_effect": "A recognition decision on the tree's own entry is pending: the entry was approved provisionally and published on BURP, and the Giunta's definitive decision on it has not been published. The tree is not listed.",
+    "false_effect": "The list gives no pending recognition decision for this tree at the event date. Missing entry or act dates remain unknown.",
+    "reserved_decision_owner": "Regional Government (Giunta regionale)",
+    "evidence_contract": "The tree's own entry; the Giunta act approving it provisionally and the BURP issue and date of its first publication; any definitive decision on the entry and the BURP date of its publication.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "[OWNER RULING 2026-09-24, 2(b)] A tree approved provisionally and published under Article 5(2), and not yet decided definitively under Article 5(3), has a pending recognition decision. Lapse of the thirty-day opposition window neither lists the tree nor ends the pending decision; only the Giunta's definitive decision does. An Osservatorio recognition request is a separate route to a pending decision and is not this row.",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "the tree has its own entry in a list approved provisionally and published on BURP under Article 5(2) on or before the event date"
+              },
+              {
+                "not": {
+                  "predicate": "the Giunta's definitive decision on that entry was published on BURP on or before the event date"
+                }
+              }
+            ]
+          },
+          "effect": "RECOGNITION_DECISION_PENDING"
+        }
+      ],
+      "otherwise": {
+        "effect": "NO_PENDING_DECISION_FROM_THE_LIST"
+      }
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "PUG-LR14-2007",
+    "source_uri": "https://burp.regione.puglia.it/documents/20135/310417/LEGGE+REGIONALE++4+giugno+2007%2C+n.+14+%28id+5****43%29.pdf/44dacfab-c29a-90b9-827c-fa82fd36fd98?t=1622718601066&version=1.0",
+    "source_paths": "regulation/jurisdiction/regional/PUG-LR14-2007.txt",
+    "source_snapshot_hashes": "11fed4d839add2f87e2c13403d06e53f84c3d2934ebd46b562cf1166b7c3f3e7",
+    "source_snapshot_dates": "2007-06-07",
+    "source_quote": "2. L’elenco di cui al comma 1 è pubblicato sul Bollettino ufficiale della Regione Puglia e comunicato agli\nenti interessati. Tale elenco contiene anche le indicazioni catastali utili per l’individuazione delle singole\nproprietà. I proprietari dei suoli possono, entro trenta giorni dalla data di pubblicazione sul Bollettino\nufficiale della Regione Puglia, proporre motivata opposizione alla Giunta regionale avverso il\nprovvedimento di cui al presente comma.",
+    "source_quote_sha256": "73a35498bd5f42c8520457357544f0d429edfb7ecf719717deb991163fa3f825",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
     "source_clause_id": "PUG-LR4-2017:Art.2(1)::source",
     "instrument_id": "PUG-LR4-2017",
     "stable_provision_id": "PUG-LR4-2017:Art.2(1)",
@@ -16667,7 +16840,7 @@
     "true_effect": "Do not remove an individual b/c/d plant satisfying both Article 7(3) safeguards and covered by the operative regional retention policy.",
     "false_effect": "Independent Article 7(1)(a) or (e) grounds remain controlling. Failure of a safeguard or a competent non-exercise leaves the applicable removal duty in place; missing evidence remains unresolved.",
     "reserved_decision_owner": "Regional Plant Health Service",
-    "evidence_contract": "Individual listed/protected status, official negative result, applicable regional retention policy covering the plant, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence; no additional discretionary authorization where the policy supplies the choice.",
+    "evidence_contract": "The plant's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication, official negative result, applicable regional retention policy covering the plant, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence; no additional discretionary authorization where the policy supplies the choice.",
     "external_dependencies": [
       "EU-2020-1201:7(3)",
       "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
@@ -16677,13 +16850,14 @@
       "EU-2020-1201:7(1)(a)",
       "EU-2020-1201:7(1)(e)",
       "EU-2020-1201:7(3)(a)",
-      "EU-2020-1201:7(3)(b)"
+      "EU-2020-1201:7(3)(b)",
+      "PUG-LR14-2007:Art.5(3):definitive-listing"
     ],
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "individual qualification and event-time regional retention policy application",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "EU b/c/d eligibility and both safeguards remain individual requirements; independent a/e removal grounds control. An operative regional policy covering the qualifying plant supplies the exercised choice without another discretionary act. Apply the policy for the event-time interval; a policy declining retention supplies no permission, and unavailable applicable authority remains unresolved.",
+    "semantic_note": "EU b/c/d eligibility and both safeguards remain individual requirements; independent a/e removal grounds control. An operative regional policy covering the qualifying plant supplies the exercised choice without another discretionary act. Apply the policy for the event-time interval; a policy declining retention supplies no permission, and unavailable applicable authority remains unresolved. [OWNER RULING 2026-09-24, 2(a)] “inserite nell’elenco di cui all’articolo 2” reads as the L.R. 14/2007 Article 5 list: “inserite nell'elenco” and the same paragraph's “l’elenco degli ulivi e degli uliveti monumentali di cui all’articolo 5 della l.r. 14/2007” make that list the referent, and Article 2 defines characteristics and creates no list. Falsifier: a controlling reading of “di cui all’articolo 2” as characteristics.",
     "condition_ast": {
       "route_table": [
         {
@@ -16715,7 +16889,7 @@
                 }
               },
               {
-                "predicate": "official protected/value designation"
+                "provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"
               },
               {
                 "provision_ref": "EU-2020-1201:7(3)(a)"
@@ -16756,7 +16930,8 @@
       "EU-2020-1201:7(1)(a)",
       "EU-2020-1201:7(1)(e)",
       "EU-2020-1201:7(3)(a)",
-      "EU-2020-1201:7(3)(b)"
+      "EU-2020-1201:7(3)(b)",
+      "PUG-LR14-2007:Art.5(3):definitive-listing"
     ],
     "documentary_source_instrument_id": "PUG-LR4-2017",
     "source_uri": "file:regulation/jurisdiction/regional/PUG-LR4-CURRENT.txt",
@@ -18814,23 +18989,24 @@
     "true_effect": "Do not remove the individually qualifying plant covered by the adopted retention policy; no additional discretionary authorization is required.",
     "false_effect": "No retention permission is established.",
     "reserved_decision_owner": "Regional Plant Health Service",
-    "evidence_contract": "Individual official historic-value recognition, official negative result, coverage by this effective retention policy, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence.",
+    "evidence_contract": "The olive's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication, official negative result, coverage by this effective retention policy, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence.",
     "external_dependencies": [
       "EU-2020-1201:7(3)",
-      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal"
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+      "PUG-LR14-2007:Art.5(3):definitive-listing"
     ],
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "individual qualification and event-time retention policy application",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "[REL-07] The 2022 plan exercises Article 7(3) for qualifying protected uninfected plants subject to annual testing and vector treatment.",
+    "semantic_note": "[REL-07] The 2022 plan exercises Article 7(3) for qualifying protected uninfected plants subject to annual testing and vector treatment. [OWNER RULING 2026-09-24, 2(a)] The policy's interval reaches into the reach from 2022-09-22; official protected status of an olive reads as listed under L.R. 14/2007 Article 5(3): definitively approved and republished on BURP.",
     "condition_ast": {
       "all_of": [
         {
           "predicate": "effective plan interval"
         },
         {
-          "predicate": "official protected status"
+          "provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"
         },
         {
           "predicate": "official negative result"
@@ -18845,7 +19021,8 @@
     },
     "higher_authority_dependencies": [
       "EU-2020-1201:7(3)",
-      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal"
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+      "PUG-LR14-2007:Art.5(3):definitive-listing"
     ],
     "documentary_source_instrument_id": "PUG-DGR343-2022",
     "source_uri": "file:regulation/jurisdiction/regional/DGR-343-2022-plan.txt",
@@ -18875,16 +19052,17 @@
     "true_effect": "Do not exercise the Article 7(3) retention derogation for officially recognized, negative-tested monumental olives in the 50 m infected zone during this plan interval; the Article 7 removal route applies to them.",
     "false_effect": "No inference that the plant lacks protected status; only the optional policy is not exercised.",
     "reserved_decision_owner": "Regional Plant Health Service",
-    "evidence_contract": "Effective plan interval; official recognition and negative test of the monumental olive in the 50 m infected zone.",
+    "evidence_contract": "Effective plan interval; the olive's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication; its position in the 50 m infected zone and its negative test.",
     "external_dependencies": [
       "EU-2020-1201:7(3)",
-      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal"
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+      "PUG-LR14-2007:Art.5(3):definitive-listing"
     ],
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "individual qualification and event-time application of the adopted nonexercise policy",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "[REL-07] The 2023–2024 plan declines to exercise Article 7(3); protected eligibility does not create retention during this interval. [DDS 31 ACQUISITION NOTE 2026-09-01] The DDS 31/2022 procedure manual, in force through this interval, continued to instruct non-removal of officially recognized uninfected monumental olives in the 50 m radius — an unrevised restatement of the DGR 343-era Article 7(3) exercise. The plan's non-exercise controls; the stale manual instruction is held as an operational conflict for this interval, not as a second Article 7(3) owner. [SPAN 2026-09-02] Quote re-extracted from §4.3.1 (eradication), which states the non-exercise expressly: 'Per quanto attiene gli olivi secolari ufficialmente riconosciuti e risultati indenni non si applica la deroga prevista dal comma 3 dell'art. 7'; the prior span was the containment section.",
+    "semantic_note": "[REL-07] The 2023–2024 plan declines to exercise Article 7(3); protected eligibility does not create retention during this interval. [DDS 31 ACQUISITION NOTE 2026-09-01] The DDS 31/2022 procedure manual, in force through this interval, continued to instruct non-removal of officially recognized uninfected monumental olives in the 50 m radius — an unrevised restatement of the DGR 343-era Article 7(3) exercise. The plan's non-exercise controls; the stale manual instruction is held as an operational conflict for this interval, not as a second Article 7(3) owner. [SPAN 2026-09-02] Quote re-extracted from §4.3.1 (eradication), which states the non-exercise expressly: 'Per quanto attiene gli olivi secolari ufficialmente riconosciuti e risultati indenni non si applica la deroga prevista dal comma 3 dell'art. 7'; the prior span was the containment section. [OWNER RULING 2026-09-24, 2(a)] “ufficialmente riconosciuti” reads as listed under L.R. 14/2007 Article 5(3): definitively approved and republished on BURP.",
     "condition_ast": {
       "route_table": [
         {
@@ -18894,7 +19072,10 @@
                 "predicate": "effective plan interval"
               },
               {
-                "predicate": "officially recognized monumental olive in the 50 m infected zone that tested negative"
+                "provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"
+              },
+              {
+                "predicate": "the olive stands in the 50 m infected zone and tested negative"
               }
             ]
           },
@@ -18907,7 +19088,8 @@
     },
     "higher_authority_dependencies": [
       "EU-2020-1201:7(3)",
-      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal"
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+      "PUG-LR14-2007:Art.5(3):definitive-listing"
     ],
     "documentary_source_instrument_id": "PUG-DGR1866-2022",
     "source_uri": "file:regulation/jurisdiction/regional/DGR-1866-2022-plan.txt",
@@ -22478,19 +22660,30 @@
     "true_effect": "Allow an alternative only where an exact higher-law derogation independently permits retention and the competent authority authorizes that precise route; no general owner-choice substitute exists.",
     "false_effect": "Mandatory infected-plant removal remains controlling.",
     "reserved_decision_owner": "Regional Plant Health Service",
-    "evidence_contract": "Official infection result, listed monumental-olive status and qualifying Piana location; exact higher-law derogation and its branch/site conditions; Osservatorio authorization of the precise alternative; evidence of the alternative's applicable measures, including its vector controls and any branch-specific testing.",
+    "evidence_contract": "Official infection result, L.R. 14/2007 Article 2 monumental characteristics (listing is not required) and qualifying Piana location; exact higher-law derogation and its branch/site conditions; Osservatorio authorization of the precise alternative; evidence of the alternative's applicable measures, including its vector controls and any branch-specific testing.",
     "external_dependencies": [
       "EU-2020-1201:7(1)(a)",
       "EU-2020-1201:13(1)",
-      "EU-2020-1201:13(2)"
+      "EU-2020-1201:13(2)",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "exact higher-law infected-plant retention derogation",
     "legal_linguistic_conflict": "L.R. 4/Piana alternative language cannot independently override Article 7(1)(a) or Article 13(1); Article 13(2) is limited to scientific purposes at qualifying sites.",
-    "semantic_note": "[REL-07/13] Conflict boundary only; this row never mints a generally lawful alternative-measure branch.",
+    "semantic_note": "[REL-07/13] Conflict boundary only; this row never mints a generally lawful alternative-measure branch. [OWNER RULING 2026-09-24, 2(e)] The owner's route reaches “olivi monumentali di cui all’articolo 2 della l.r. 14/2007, risultati infetti”: the Article 2 characteristics, not listing (TAR Bari 546/2023). [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts; the held notes print it as “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result), so A, not D, composes the measurement route.",
     "condition_ast": {
       "all_of": [
+        {
+          "any_of": [
+            {
+              "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+            },
+            {
+              "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+            }
+          ]
+        },
         {
           "predicate": "exact higher-law derogation"
         },
@@ -24538,67 +24731,6 @@
     "exact_change_kind": "INITIAL"
   },
   {
-    "source_quote_sha256": "3fc655862249c536a3e9a135e63a44a7de3300dd079b158fdb219762df9d8aee",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2026-04-03",
-    "external_dependencies": [
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
-    "article": "case operative delta",
-    "condition_ast": {
-      "all_of": [
-        {
-          "predicate": "effective supplement"
-        },
-        {
-          "predicate": "source finding of unlocatable recipients"
-        },
-        {
-          "predicate": "source finding of particularly burdensome personal communication"
-        },
-        {
-          "predicate": "selected suitable publicity route"
-        }
-      ],
-      "otherwise": {
-        "effect": "This case-specific predicate does not validate publication routes in any other order."
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
-      "PUG-DPGR22-2021:Art.20(3):publication-not-notice"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2026-00063",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "Permit the act-specific seven-day mass-publicity route because the act expressly finds unlocatable recipients and particularly burdensome personal notification.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "case-specific correction or source-conflict resolution",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2026-00063",
-    "source_quote": "Di adempiere agli obblighi di pubblicità del presente provvedimento mediante affissione per 7 giorni nell’albo\npretorio del Comune in cui ricadono le piante da estirpare tenuto conto dell’irreperibilità di alcuni destinatari\ne della gravosità per l’amministrazione di notificare i provvedimenti ai singoli beneficiari;",
-    "source_snapshot_dates": "2026-04-03",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "This case-specific predicate does not validate publication routes in any other order.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis",
-    "source_snapshot_hashes": "c88d31c97d7f81e6c891fcbeeb727ca54308c63e11ccda56f67bf15cf1637b48",
-    "exact_change_kind": "INITIAL"
-  },
-  {
     "source_clause_id": "PUG-DGR1866-2022:st53-crop-exclusion-conflict::source",
     "instrument_id": "PUG-DGR1866-2022",
     "stable_provision_id": "PUG-DGR1866-2022:st53-crop-exclusion-conflict",
@@ -24654,65 +24786,6 @@
     "temporal_status": "SUPERSEDED"
   },
   {
-    "source_quote_sha256": "ebdf0a035ba1f8c313ec68409284b5c5d3e4481b61e6f760595d545a6f9eba48",
-    "application_basis": "Genuine case-specific operative delta",
-    "effective_from": "2023-01-25",
-    "external_dependencies": [
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
-    ],
-    "source_paths": "regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.txt",
-    "article": "case operative delta",
-    "condition_ast": {
-      "all_of": [
-        {
-          "predicate": "effective order"
-        },
-        {
-          "predicate": "unlocatable recipients"
-        },
-        {
-          "predicate": "particularly burdensome personal communication"
-        },
-        {
-          "predicate": "selected suitable publicity"
-        }
-      ],
-      "otherwise": {
-        "effect": "No other case notice route is validated."
-      }
-    },
-    "higher_authority_dependencies": [
-      "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
-    ],
-    "effective_to_exclusive": "",
-    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
-    "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00002",
-    "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis::source",
-    "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
-    "actor_role": "Regional Plant Health Service",
-    "true_effect": "Permit this act’s mass-publicity route only through its stated unlocatable-recipient and burdensome-personal-notice predicates.",
-    "lineage_role": "RETAINED_ATOM",
-    "authority_judgment_kind": "case-specific grounds and suitability of substituted publicity",
-    "parent_stable_provision_id": "",
-    "instrument_id": "REG-PUGLIA-U181-DIR-2023-00002",
-    "source_quote": "misure fitosanitarie. A tale scopo, qualora i proprietari si oppongano all’intervento, i Servizi fitosanitari\n    competenti per territorio possono chiedere al Prefetto l’ausilio della forza pubblica;\n−   L’art. 21 bis della legge 7 agosto 1990, n. 241 secondo cui il provvedimento limitativo della sfera\n    giuridica dei privati acquista efficacia nei confronti di ciascun destinatario con la comunicazione allo\n    stesso effettuata anche nelle forme stabilite per la notifica agli irreperibili nei casi previsti dal codice di\n    procedura civile. Qualora per il numero dei destinatari la comunicazione personale non sia possibile o\n    risulti particolarmente gravosa, l’amministrazione provvede mediante forme di pubblicità idonee di volta\n    in volta stabilite dall’amministrazione medesima;\n−   Il comma 2 dell’art. 33 del D.lgs. 19/2021 il quale dispone che, qualora ricorrano i presupposti di cui\n    all’articolo 21 -bis della legge 7 agosto 1990, n. 241, la comunicazione dei provvedimenti o delle ordinanze\n    fitosanitarie che dispongono le misure fitosanitarie, è effettuata secondo le modalità e i termini stabiliti\n    dal Servizio fitosanitario centrale ovvero dal Servizio fitosanitario regionale competente per territorio;\n−   La DGR 1866/2022 la quale prevede che i provvedimenti siano notificati al proprietario attraverso la\n    pubblicazione, per 7 giorni, nell’albo pretorio del Comune di competenza.\nDATO ATTO CHE\nLa Corte di Giustizia dell’Unione Europea, con la sentenza del 05/09/2019, ha statuito che l’Autorità\ncompetente deve procedere con immediatezza all’attuazione delle misure fitosanitarie nell’ambito della\ngestione dell’emergenza fitosanitaria;\nATTESO CHE\nLa mancata estirpazione può̀ essere motivo di diffusione di malattia delle piante, pericolosa per l’economia\nrurale, perseguita dall’art. 500 e 650 del codice di procedura penale.\nRITENUTO DI\n-   Dovere applicare con immediatezza, ai sensi del comma 1 dell’art. 7 del Reg. (UE) 2020/1201, le misure\n\f5924                           Bollettino Ufficiale della Regione Puglia - n. 12 del 2-2-2023\n\n\n       di eradicazione di cui al presente provvedimento, in quanto non sostituibili con altra misura fitosanitaria\n       meno drastica, che assumono iniziativa di profilassi internazionale, al fine di contenere la diffusione della\n       malattia sul territorio;\n-      dovere adempiere agli obblighi di pubblicità del presente provvedimento mediante affissione per 7\n       giorni nell’albo pretorio del Comune in cui ricadono le piante da estirpare tenuto conto dell’irreperibilità\n       di alcuni destinatari e della gravosità per l’amministrazione di notificare i provvedimenti ai singoli\n       beneficiari;",
-    "source_snapshot_dates": "2023-01-25",
-    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.txt",
-    "semantic_change": "INITIAL",
-    "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-01] Quote completed to its sentence end from the same source span (it had been cut mid-word by an earlier extraction); meaning unchanged.",
-    "authority_judgment_required": "YES",
-    "evidence_contract": "The case act's recipient population, ascertainment of untraceable recipients or individual-communication burden, and specified publicity.",
-    "reserved_decision_owner": "Regional Plant Health Service",
-    "modality": "shall",
-    "false_effect": "No other case notice route is validated.",
-    "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis",
-    "source_snapshot_hashes": "022fad4f780cbfbc96648baa49850b4f7e48e30102901dcc0ffd7078394f0933",
-    "exact_change_kind": "INITIAL"
-  },
-  {
     "source_quote_sha256": "56379ab366bc92be0ff8407b245c25521ada31d382cdb96b1ce274e3d203a8a3",
     "application_basis": "Genuine case-specific operative delta",
     "effective_from": "2023-05-09",
@@ -24720,7 +24793,9 @@
       "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
       "IT-DLGS42-A146:Art.146(2)",
       "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
-      "IT-DLGS42-A146:Art.146(8):superintendent-opinion"
+      "IT-DLGS42-A146:Art.146(8):superintendent-opinion",
+      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
     "article": "case operative delta",
@@ -24730,10 +24805,24 @@
           "predicate": "negative result"
         },
         {
-          "predicate": "apparent monumental characteristics"
+          "any_of": [
+            {
+              "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+            },
+            {
+              "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+            }
+          ]
         },
         {
-          "predicate": "pending recognition decision"
+          "any_of": [
+            {
+              "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+            },
+            {
+              "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+            }
+          ]
         }
       ],
       "otherwise": {
@@ -24744,7 +24833,9 @@
       "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
       "IT-DLGS42-A146:Art.146(2)",
       "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
-      "IT-DLGS42-A146:Art.146(8):superintendent-opinion"
+      "IT-DLGS42-A146:Art.146(8):superintendent-opinion",
+      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "effective_to_exclusive": "",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
@@ -24764,9 +24855,9 @@
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged.",
+    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(b)] A tree approved provisionally and published under L.R. 14/2007 Article 5(2), and not yet decided definitively, has a pending recognition decision. The order's own “si procederà alla richiesta di riconoscimento” remains the other route; the ruling adds the provisional case and narrows nothing. [OWNER RULING 2026-09-24, CHARACTERISTICS] The order's “ulivi con caratteristiche di monumentalità” are established the same way: by the official monitoring record of the plant (its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it, as the held notes' “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”, or a recorded measurement meeting Article 2(1)(a), PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion), alongside the register survey and its provisional layers. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result).",
     "authority_judgment_required": "YES",
-    "evidence_contract": "The case plant's negative test, monumental characteristics, and pending recognition and authorization status.",
+    "evidence_contract": "The case plant's negative test and monumental characteristics; either its provisional L.R. 14/2007 list entry awaiting the Giunta's definitive decision or the Osservatorio's pending recognition request; and the authorization status.",
     "reserved_decision_owner": "Regional Plant Health Service",
     "modality": "shall",
     "false_effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route.",
@@ -25352,14 +25443,25 @@
     "effective_from": "2022-02-01",
     "external_dependencies": [
       "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
-      "EU-2020-1201:13(1)"
+      "EU-2020-1201:13(1)",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
     "article": "case operative delta",
     "condition_ast": {
       "all_of": [
         {
-          "predicate": "infected monumental or visually qualifying olive"
+          "predicate": "infected olive"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+            },
+            {
+              "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+            }
+          ]
         },
         {
           "predicate": "owner election"
@@ -25374,7 +25476,8 @@
     },
     "higher_authority_dependencies": [
       "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
-      "EU-2020-1201:13(1)"
+      "EU-2020-1201:13(1)",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "effective_to_exclusive": "",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
@@ -25394,9 +25497,9 @@
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Exact event-time effect; reusable law remains unchanged. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged.",
+    "semantic_note": "[CASE DELTA ONLY] Exact event-time effect; reusable law remains unchanged. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(e)] The order grounds the alternative on L.R. 4/2017 Art. 8(7bis), which turns on Article 2 characteristics; officially recognized trees also have them, so “ufficialmente riconosciute o con caratteristiche di monumentalità” reduces to the characteristics. [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts; the held notes print it as “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result), so A, not D, composes the measurement route.",
     "authority_judgment_required": "YES",
-    "evidence_contract": "The case plant's infection and monumental status, the elected alternative, and applicable higher-law permission and regional authorization.",
+    "evidence_contract": "The case plant's infection and its L.R. 14/2007 Article 2 monumental characteristics, the elected alternative, and applicable higher-law permission and regional authorization.",
     "reserved_decision_owner": "Regional Plant Health Service",
     "modality": "shall",
     "false_effect": "Without an exact higher-law derogation, mandatory infected-plant removal controls despite the recorded election.",
