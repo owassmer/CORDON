@@ -101,14 +101,16 @@ def retained_notice_route(request_id, store):
 def mass_publicity_basis(response, *, instrument):
     """The `recipient-notice` field for one act, as its own text states it.
 
-    `stated_ground` holds only reasons the act states about its own recipients;
-    a restatement of the general rule is kept apart. Nothing is classified as
-    satisfying A's predicates.
+    `stated_ground` holds only reasons the act states about its own recipients,
+    verbatim; `ground_stated` says whether the act states any. A restatement of
+    the general rule is kept apart. Nothing is classified as satisfying A's
+    predicates.
     """
     reading = response['reading']
+    stated = tuple(g for g in reading['grounds'] if g['about'] == 'this-act')
     return dict(
-        instrument=instrument, source=response['request']['sources'][0],
-        stated_ground=tuple(g for g in reading['grounds'] if g['about'] == 'this-act'),
+        instrument=instrument, source=response['request']['sources'][0], ground_stated=bool(stated),
+        stated_ground=stated,
         restated_rule=tuple(g for g in reading['grounds'] if g['about'] == 'general-law'),
         forms=tuple(reading['forms']), issues=tuple(reading['issues']),
         request_sha256=response['request_sha256'], provenance='model_proposed_reading')

@@ -395,8 +395,9 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
         elif within_closed_scope is None:
             reach = '; '.join(filter(None, (closure['dispositive_scope'], *closure['stated_scope'])))
             needs.add(f"whether this recipient is within the scope {name} annuls: {reach}{applicants}")
+    recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
     for change in stated_changes:
-        if change['relationship'] in WITHHOLDING:
+        if change['relationship'] in WITHHOLDING and change['from'] not in recorded:
             needs.add(f"an A row for {change['from']}'s stated {change['relationship']} of {record['instrument']}: "
                       f"{change['affected_payload']}")
     if needs:

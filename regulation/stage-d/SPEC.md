@@ -564,6 +564,20 @@ descriptors. A party's claim never fills a disposition. Held appeal indexes are
 searched and named with the span they cover; an empty search is not finality.
 `liveness_closures` takes, per ricorso, the latest disposition stating an effect.
 
+## Albo postings by printed identity
+
+`cordon_d.albo_postings` (`scripts/read_postings.py`) attaches albo records to an
+order only by the identity the record itself prints: number and year, the date
+where it prints one (equal to the order's adoption date), and the Osservatorio
+fitosanitario as issuer. Bytes, subjects and filenames attach nothing. An OpenWeb
+albo register export is read row by row: on a comune's albo a row printing the
+order is its posting, with the declared start and end; on the executor's albo a
+row is the executor's own act naming the order, dated by the act. A JCityGov
+detail supplies the declared start; its period end is a retention horizon, so the
+interval stays open. An image-only posted document's identity is read from its
+page images through the subscription (`posted_identity`). Whether a posting is
+notice, or an executor act is execution, stays with A.
+
 ## Administrative publication records
 
 `cordon_d.notices` keeps native register declarations, their separate

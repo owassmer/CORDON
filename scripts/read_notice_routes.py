@@ -33,8 +33,55 @@ def instrument_of(digest, store):
 _WORKER = {}
 
 
-def _start_worker():
-    _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT))
+def _start_worker(postings=None):
+    _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT), postings=postings or {})
+
+
+POSTING_KINDS = {'municipal-publication-start': 'start', 'municipal-publication-end': 'end',
+                 'regional-publication-start': 'start', 'regional-publication-end': 'end'}
+
+
+def load_postings(paths):
+    """Held posting intervals by instrument, from the outputs of the event readers.
+
+    Accepts `read_prescriptions.py --events` (existing albo readers), `read_judgments.py`
+    (postings a court decision states) and `read_postings.py` (albo registers and posted
+    documents). A start and an end pair when they come from the same source record.
+    An interval whose end is not held stays open.
+    """
+    intervals = {}
+
+    def add(instrument, publisher, key, part, day, source):
+        slot = intervals.setdefault(instrument, {}).setdefault((publisher, key), dict(
+            publisher=publisher, start=None, end=None, sources=set()))
+        slot[part] = day
+        slot['sources'].add(source)
+
+    for path in paths:
+        data = json.loads(Path(path).read_text())
+        if isinstance(data, dict) and 'events' in data:  # read_postings.py
+            for instrument, events in data['events'].items():
+                for event in events:
+                    if event['kind'] in POSTING_KINDS:
+                        add(instrument, event['publisher'], event['source'], POSTING_KINDS[event['kind']],
+                            event['occurred'], event['source'])
+            continue
+        for entry in data:
+            if not isinstance(entry, dict):
+                continue
+            for event in entry.get('held_events', ()):  # read_prescriptions.py --events
+                if event['kind'] in POSTING_KINDS:
+                    instrument = next((r['instrument'] for r in entry.get('records', ())), None)
+                    if instrument:
+                        add(instrument, event['publisher'], event['source'], POSTING_KINDS[event['kind']],
+                            event['occurred'], event['source'])
+            for event in entry.get('events', ()):  # read_judgments.py
+                if event['kind'] in POSTING_KINDS:
+                    add(event['document'], f"as TAR decision {entry['source'][:12]} states",
+                        (entry['source'], event['selector']),
+                        POSTING_KINDS[event['kind']], event['occurred'], entry['source'])
+    return {instrument: [dict(v, sources=sorted(v['sources'])) for v in slots.values() if v['start']]
+            for instrument, slots in intervals.items()}
 
 
 def read_one(item, options, today):
@@ -51,7 +98,8 @@ def read_one(item, options, today):
             entry['refused_first'] = str(refusal)
             response = read_notice_route(digest, store, refused=str(refusal), **options)
         basis = mass_publicity_basis(response, instrument=instrument_of(digest, store) or identity)
-        entry.update(basis=basis, c=summary(c_result(snapshot, basis, today)))
+        postings = _WORKER['postings'].get(basis['instrument'], [])
+        entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, today, postings=postings)))
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -69,10 +117,13 @@ def main():
     parser.add_argument('--effort', default='medium')
     parser.add_argument('--workers', type=int, default=1,
                         help='sources read at once; each is still one bounded request')
+    parser.add_argument('--postings', nargs='*', default=(),
+                        help='event-reader outputs whose posting intervals reach C as held postings')
     arguments = parser.parse_args()
     if arguments.workers < 1:
         parser.error('--workers must be at least 1')
-    _start_worker()
+    postings = load_postings(arguments.postings)
+    _start_worker(postings)
     today = date.today()
     selected = [item for item in population()
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
@@ -93,7 +144,8 @@ def main():
             finished(index, read_one(item, options, today))
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
-        with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker) as pool:
+        with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker,
+                                 initargs=(postings,)) as pool:
             futures = {pool.submit(read_one, item, options, today): index
                        for index, item in enumerate(selected)}
             for future in as_completed(futures):
