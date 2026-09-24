@@ -10,6 +10,7 @@ from datetime import date, datetime
 from decimal import Decimal
 import json
 from pathlib import Path
+import re
 from zoneinfo import ZoneInfo
 
 from .core import Evaluation, MissingInput, Snapshot
@@ -101,6 +102,15 @@ def operative_period_rule(identity: str, calendar: WorkingCalendar | None) -> tu
     return PeriodRule(True, name == "eu_period"), selected
 
 
+def _stated_count(number: str) -> int | None:
+    """A printed count: its digits, with an optional bracketed word after them ignored.
+
+    "7" and "7 (sette)" are 7; any other form is not read.
+    """
+    match = re.fullmatch(r"\s*(\d+)\s*(?:\([^()]*\))?\s*", number)
+    return int(match[1]) if match else None
+
+
 def clock_boundary(snapshot: Snapshot, identity: str, at: date, anchor: date | datetime,
                    *, zone: ZoneInfo, calendar: WorkingCalendar | None = None,
                    rule: PeriodRule | None = None,
@@ -127,9 +137,10 @@ def clock_boundary(snapshot: Snapshot, identity: str, at: date, anchor: date | d
     else:
         number, word = stated_term
         unit = snapshot.conventions["clock.unit_words"].get(" ".join(word.lower().split()))
-        if unit is None or not number.isdigit():
+        count = _stated_count(number)
+        if unit is None or count is None:
             raise MissingInput(f"{identity}: stated term {number} {word} in a unit B maps")
-        magnitude = Decimal(number)
+        magnitude = Decimal(count)
     if magnitude != int(magnitude):
         raise ValueError("Fractional source period needs a specific counting rule")
     magnitude = int(magnitude)
@@ -206,19 +217,21 @@ def continuous_duration_support(snapshot: Snapshot, identity: str, at: date, *,
                                  anchor: date | datetime, required_start: datetime,
                                  intervals, evaluated_at: datetime, records_complete: bool,
                                  zone: ZoneInfo, calendar: WorkingCalendar | None = None,
-                                 rule: PeriodRule | None = None) -> Evaluation:
+                                 rule: PeriodRule | None = None,
+                                 stated_term: tuple[str, str] | None = None) -> Evaluation:
     """Continuous performance where the operative duty actually requires it.
 
     This does not turn a survey follow-up duration into continuous observation.
     Its consumer must require continuity (for example consecutive publication).
     required_start preserves the separately established counting convention.
+    stated_term reaches clock_boundary unchanged; a missing one is unknown.
     """
     row = snapshot.quantity(identity, at)
     if row["kind"] != "minimum_duration":
         raise ValueError("Minimum-duration clock required")
     try:
         end = clock_boundary(snapshot, identity, at, anchor, zone=zone,
-                             calendar=calendar, rule=rule)
+                             calendar=calendar, rule=rule, stated_term=stated_term)
     except MissingInput as error:
         return Evaluation(None, needs=frozenset({str(error)}))
     return interval_coverage(required_start, end, intervals,

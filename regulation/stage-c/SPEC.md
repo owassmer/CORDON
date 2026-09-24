@@ -56,7 +56,28 @@ exact required work, including a commencement before notice. Neither elapsed
 time nor an incomplete execution record proves noncommencement. Its period is
 the term the prescription states, as a number and printed unit word that B's
 conventions map; a missing term is unknown, and a stated term passed to a clock
-B fixes is refused.
+B fixes is refused. A printed count reads as its digits; a bracketed word after
+them is ignored, so "7 (sette)" is 7. Without a notification day
+there is no deadline. Whether notification is legally sufficient is A's: the
+Art. 21-ter notice conjunct is an any_of of the Art. 21-bis communication
+predicate and the mass-publicity route. `notice_instant` chooses the instant for
+one recipient: A evaluates each branch, and the term runs from the earliest
+instant among the branches A finds true. A false or unknown branch never
+supplies its instant; with no true branch there is no instant, so no deadline.
+The caller supplies each branch's events and never picks the instant.
+`mass_publicity_facts` computes whether the act was displayed on each of the
+consecutive days the act states, the first day of display included (no default
+period); a posting record's dates are whole days, so an inclusive "al" day runs
+through its end. It returns the notice day only when the Art. 21-bis row gives
+effectiveness: the stated number of days counted from the day of publication,
+that day excluded. `listing_facts` reads L.R. 14/2007 Art. 5 status at the
+event date from the tree's own entry dates: first publication gives a pending
+decision, the definitive decision's publication ends it, and only a definitive
+approval republished on BURP lists the tree. `trunk_diameter_facts` compares a
+recorded trunk diameter with B's Art. 2(1)(a) floor; a diameter taken at a
+stated height other than B's measurement height is unknown. A composes that
+result into the Art. 8(7bis), DDS 4/2022 and DDS 45/2023 characteristics conjuncts beside
+the official monitoring finding; C binds its two outcomes.
 `timely_completion` compares this clock's own qualifying performance with its
 boundary. Equality satisfies an elapsed-hour deadline; the following midnight
 is outside a whole-day deadline. Missing performance evidence and a still-open
