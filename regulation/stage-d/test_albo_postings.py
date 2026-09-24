@@ -7,8 +7,8 @@ detail and the posted-document heading are Taranto's 14/12/2021 posting of DDS
 from datetime import date
 import unittest
 
-from cordon_d.albo_postings import (jcitygov_posting, openweb_rows, posted_document_events, printed_orders,
-                                    register_events)
+from cordon_d.albo_postings import jcitygov_posting, openweb_rows, posted_document_events, register_events
+from cordon_d.held_acts import printed_identities
 
 HELD = {'REG-PUGLIA-U181-DIR-2021-00122': date(2021, 10, 28), 'REG-PUGLIA-U181-DIR-2021-00128': date(2021, 11, 4),
         'REG-PUGLIA-U181-DIR-2021-00141': date(2021, 11, 18), 'REG-PUGLIA-U181-DIR-2021-00168': date(2021, 12, 14),
@@ -37,9 +37,14 @@ def identity(**act):
 
 class AlboPostings(unittest.TestCase):
     def test_printed_identities_keep_their_printed_dates(self):
-        self.assertEqual([(n, y, d) for n, y, d, _ in printed_orders('DDS 115/2021 e DDS135/2021; n. 00005 DEL '
-                                                                         '31.01.2023')],
-                         [(115, 2021, None), (135, 2021, None), (5, 2023, date(2023, 1, 31))])
+        found = printed_identities('DDS 115/2021 e DDS135/2021; n. 00005 DEL 31.01.2023; DDS 99 05/08/2024')
+        self.assertEqual(sorted(((n, y, d) for n, y, d, _ in found), key=str),
+                         sorted([(115, 2021, None), (135, 2021, None), (5, 2023, date(2023, 1, 31)),
+                                 (99, 2024, date(2024, 8, 5))], key=str))
+        # A number with another number before the date is not an identity; "N.101" is.
+        self.assertEqual([(n, y) for n, y, _, _ in printed_identities('luglio 2022 - 45 del 04/07/2022; N.101 del '
+                                                                          '26/09/2023; art. 17 del DM del 19.06.2016')],
+                         [(45, 2022), (101, 2023)])
 
     def test_an_executor_act_attaches_by_number_year_date_and_issuer(self):
         events, unattached = register_events(openweb_rows(CSV), source='a' * 64, publisher='ARIF', role='executor',
@@ -83,6 +88,28 @@ class AlboPostings(unittest.TestCase):
                          [(2, 'N. 89 del 24/082022', 'the printed date is not a readable date')])
         # An issuer cut before "fitosanitario" is not printed: the third row is not considered.
         self.assertFalse(any(u['row'] == 4 for u in unattached))
+
+    def test_an_issuer_row_attaches_by_the_general_order_identity(self):
+        # ARIF DDG 204 del 15/03/2026 (register row 8049), shortened: the second order is printed as
+        # "DDS 99 05/08/2024", with no "del".
+        held = dict(HELD, **{'REG-PUGLIA-U181-DIR-2024-00188': date(2024, 12, 12),
+                             'REG-PUGLIA-U181-DIR-2024-00099': date(2024, 8, 5)})
+        data = ('Tipo,numero atto,Data atto,Oggetto,Inizio pubblicazione,Fine pubblicazione,Ente,Ufficio\n'
+                'Delibere Del Direttore Generale,204,15/03/2026,"Prescrizioni misure di eradicazione: DDS n. 188 '
+                'del 12/12/2024 e DDS 99 05/08/2024– Regime di aiuto per i proprietari/conduttori a qualunque '
+                'titolo che hanno eseguito estirpazione di piante infette da Xylella fastidiosa, adempiendo a '
+                'prescrizione di abbattimento della Regione Puglia Sezione Osservatorio Fitosanitario.",'
+                '16/03/2026,31/03/2026,,\n').encode()
+        events, unattached = register_events(openweb_rows(data), source='a' * 64, publisher='ARIF',
+                                             role='executor', held=held)
+        self.assertEqual(sorted(e.document[-10:] for e in events), ['2024-00099', '2024-00188'])
+        self.assertEqual(unattached, [])
+        # The same printed date on another order number attaches nothing and is listed.
+        events, unattached = register_events(openweb_rows(data.replace(b'DDS 99 05', b'DDS 98 05')),
+                                             source='a' * 64, publisher='ARIF', role='executor', held=held)
+        self.assertEqual([e.document[-10:] for e in events], ['2024-00188'])
+        self.assertEqual([(u['instrument'], u['cause']) for u in unattached],
+                         [('REG-PUGLIA-U181-DIR-2024-00098', 'names an order D does not hold')])
 
     def test_a_municipal_register_row_is_a_posting_with_its_declared_interval(self):
         events, _ = register_events(openweb_rows(CSV), source='a' * 64, publisher='Comune', role='municipal',

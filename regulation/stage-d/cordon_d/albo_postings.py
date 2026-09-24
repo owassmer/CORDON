@@ -16,19 +16,15 @@ import re
 
 from .events import AdministrativeEvent
 from .evidence import Support
+from .held_acts import printed_identities
 from .removal_events import act_id
 
 ISSUER = re.compile(r'osservatorio\s+fitosanitario', re.I)
 # A register export cuts a long subject: the issuer printed in part where the field ends
 # ("... Sezione Osservatorio Fitosanita").
 _CUT_ISSUER = re.compile(r'osservatorio\s+(f[a-z]{2,})\s*$', re.I)
-# "DDS 122/2021", "D.D.S. n. 85/2021", "DDS135/2021"
-NUMBERED = re.compile(r'\bD\.?\s?D\.?\s?S\.?\s*(?:n[.°]?\s*)?0*(\d{1,4})\s*/\s*(\d{4})\b', re.I)
-# "n. 128 del 04/11/2021", "N. 00005 DEL 31.01.2023", "DDS 138 DEL 01/12/2023", and a bare
-# "00114 del 16/10/2023" standing alone in the record's words.
-_PREFIX = r'(?:\bD\.?\s?D\.?\s?S\.?\s*(?:n(?:[.°]|r\.?)?\s*)?|\bn(?:[.°]|r\.?)?\s*|(?<![\w/.,-]))'
-DATED = re.compile(_PREFIX + r'0*(\d{1,4})\s+del(?:l[’\'])?\s*(\d{1,2})[./-](\d{1,2})[./-](\d{4})\b', re.I)
 # An identity whose date is not a readable date ("N. 89 del 24/082022").
+_PREFIX = r'(?:\bD\.?\s?D\.?\s?S\.?\s*(?:n(?:[.°]|r\.?)?\s*)?|\bn(?:[.°]|r\.?)?\s*|(?<![\w/.,-]))'
 _UNREAD_DATE = re.compile(_PREFIX + r'0*(\d{1,4})\s+del(?:l[’\'])?\s*([\d./-]{4,12})', re.I)
 OPENWEB = ('Tipo', 'numero atto', 'Data atto', 'Oggetto', 'Inizio pubblicazione', 'Fine pubblicazione')
 # What an executor's albo row states about removal it did not carry out itself: aid to owners
@@ -44,33 +40,18 @@ def _day(words):
         return None
 
 
-def printed_orders(text):
-    """(number, year, printed date or None, words) for every order identity a text prints."""
-    found = []
-    for match in NUMBERED.finditer(text):
-        found.append((int(match.group(1)), int(match.group(2)), None, match.group(0)))
-    for match in DATED.finditer(text):
-        day, month, year = (int(g) for g in match.groups()[1:])
-        try:
-            printed = date(year, month, day)
-        except ValueError:
-            continue
-        found.append((int(match.group(1)), year, printed, match.group(0)))
-    return found
-
-
 def unread_identities(text):
-    """(words, cause) for every order identity a text prints without a readable date or year."""
-    dated = set()
-    for match in DATED.finditer(text):
-        day, month, year = (int(g) for g in match.groups()[1:])
-        try:
-            date(year, month, day)
-            dated.add(match.start())
-        except ValueError:
-            pass
-    return [(match.group(0), 'the printed date is not a readable date')
-            for match in _UNREAD_DATE.finditer(text) if match.start() not in dated]
+    """(words, cause) for every order identity a text prints without a readable date."""
+    return [(match.group(0), 'the printed date is not a readable date') for match in _UNREAD_DATE.finditer(text)
+            if not _readable(match.group(2))]
+
+
+def _readable(words):
+    match = re.match(r'(\d{1,2})[./-](\d{1,2})[./-](\d{4})(?!\d)', words)
+    try:
+        return bool(match) and bool(date(int(match.group(3)), int(match.group(2)), int(match.group(1))))
+    except ValueError:
+        return False
 
 
 def prints_issuer(text):
@@ -134,7 +115,7 @@ def register_events(rows, *, source, publisher, role, held):
     events, unattached = [], []
     for row in rows:
         text = ' '.join(row.get(k) or '' for k in ('Oggetto', 'Ente', 'Ufficio'))
-        identities, unread = printed_orders(text), unread_identities(row.get('Oggetto') or '')
+        identities, unread = printed_identities(text), unread_identities(row.get('Oggetto') or '')
         if not (identities or unread) or not prints_issuer(text):
             continue
         instruments, causes = attach(identities, held, issuer_text=text)

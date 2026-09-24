@@ -2,10 +2,11 @@
 
 The removal-order population states its own relationships through
 `case_prescriptions`. Every other act A holds is read here when its admitted text
-prints a held order's identity: the order's number followed closely by its year.
-The act is read whole, from its admitted text, for every act it states it
-corrects, supplements, completes, replaces, revokes, suspends or withdraws, as a
-whole or in part, with the words stating what changes. An operative statement
+prints a held order's identity (`printed_orders`). `albo_postings` reads register
+rows with the same matcher (`printed_identities`). The act is read whole, from its
+admitted text, for every act it states it corrects, supplements, completes,
+replaces, revokes, suspends or withdraws, as a whole or in part, with the words
+stating what changes. An operative statement
 reaches the named order's lawful dueness as a stated change (`order_dueness`);
 nothing is patched and no A row is written.
 """
@@ -63,27 +64,36 @@ def _printed_date(match):
         return None
 
 
+def printed_identities(text):
+    """(number, year, printed date or None, words) for every act identity the text prints: a
+    number followed closely by a readable date ("n. 96 del 28/08/2023", "DDS 99 05/08/2024",
+    "n. 129 del 14 luglio 2025"), or an act designator with number and year ("DDS 96/2023").
+    Closely: at most 12 characters and two words between them, none a number."""
+    found = []
+    for match in re.finditer(r'(?:(?<![\d/.,])|(?<=\b[Nn]\.))0*(\d{1,4})(?![\d/])', text):
+        printed = _DATE.search(text[match.end():match.end() + 40])
+        gap = text[match.end():match.end() + printed.start()] if printed else ''
+        close = printed and printed.start() <= 12 and not re.search(r'\d', gap) and len(gap.split()) <= 2
+        day = _printed_date(printed) if close else None
+        if day:
+            found.append((int(match.group(1)), day.year, day, text[match.start():match.end() + printed.end()]))
+    for match in _DESIGNATED.finditer(text):
+        found.append((int(match.group(1)), int(match.group(2)), None, match.group(0)))
+    return found
+
+
 def printed_orders(text, orders):
-    """Held orders whose identity the text prints: the order's number followed closely by its
-    adoption date ("n. 96 del 28/08/2023", "n. 129 del 14 luglio 2025"), or an act
-    designator with number and year ("DDS 96/2023"). `orders` maps instrument to its
-    adoption date. A printed identity selects the act for reading; it establishes no
-    relationship."""
-    by_number = defaultdict(list)
+    """Held orders whose identity the text prints (`printed_identities`): the order's number
+    with its adoption date, or a designator with its number and year. `orders` maps
+    instrument to its adoption date. A printed identity selects the act for reading; it
+    establishes no relationship."""
+    held = defaultdict(list)
     for instrument, adopted in orders.items():
         match = _INSTRUMENT.search(instrument)
         if match:
-            by_number[int(match.group(2))].append((instrument, int(match.group(1)), date.fromisoformat(str(adopted))))
-    found = set()
-    for match in re.finditer(r'(?<![\d/.,])0*(\d{1,4})(?![\d/])', text):
-        held = by_number.get(int(match.group(1)))
-        printed = _DATE.search(text[match.end():match.end() + 40]) if held else None
-        if printed and printed.start() <= 12:
-            found.update(instrument for instrument, _, adopted in held if _printed_date(printed) == adopted)
-    for match in _DESIGNATED.finditer(text):
-        found.update(instrument for instrument, year, _ in by_number.get(int(match.group(1)), ())
-                     if year == int(match.group(2)))
-    return found
+            held[int(match.group(2)), int(match.group(1))].append((instrument, date.fromisoformat(str(adopted))))
+    return {instrument for number, year, printed, _ in printed_identities(text)
+            for instrument, adopted in held.get((number, year), ()) if printed in (None, adopted)}
 
 
 def selected(snapshot, root, orders):

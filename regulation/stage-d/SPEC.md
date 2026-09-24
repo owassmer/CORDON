@@ -459,8 +459,9 @@ mass-publicity route.
 
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text
-that prints a held order's identity (its number closely followed by its adoption
-date, or an act designator with its number and year) is read whole under
+that prints a held order's identity (`printed_identities`: its number closely
+followed by its adoption date, at most 12 characters and two words apart with no
+number between, or an act designator with its number and year) is read whole under
 `act-relationship-reading.txt`, through `read_native_blocks`, one block per
 page of the admitted text. The reading lists each act it states it corrects,
 supplements, completes, replaces, revokes, suspends or withdraws, whole or in
@@ -525,9 +526,11 @@ row is the executor's own act naming the order, dated by the act and kept for wh
 it states. A row that liquidates aid to owners who "hanno eseguito estirpazione …
 adempiendo a prescrizione" is a lead to removal the named recipients performed
 (row 11), not an act of removal by the executor; it supplies no C input. An issuer
-the export cuts where the field ends ("Osservatorio Fitosanita") is printed. An
-identity is the number with its year, or with its date ("n. 114 del", "DDS 138
-DEL", or a bare "00114 del" in a row that prints the issuer). Every identity a row
+the export cuts where the field ends ("Osservatorio Fitosanita") is printed. A
+row that prints the issuer is read for identities by the same matcher as held acts
+(`held_acts.printed_identities`): a number closely followed by a date ("n. 114
+del 16/10/2023", "DDS 99 05/08/2024", "60 del 19 luglio 2022") or a designator
+with number and year ("DDS 122/2021"). Every identity a row
 with the issuer prints is attached or listed unattached with its cause: an order D
 does not hold, a date other than the order's adoption date, or a date that is not
 a readable date. A JCityGov
