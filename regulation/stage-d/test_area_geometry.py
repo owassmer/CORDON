@@ -26,7 +26,7 @@ from cordon_d import area_error
 from cordon_d.area_geometry import (AdoptedGeography, ErrorPart, Observation, Sources, Unplaced, Zone,
                                     boundary_distances, buffer_extent, construct, dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
-                                    _Builder, _drawn, _inspire_zoning)
+                                    _Builder, _drawn, _inspire_zoning, _layer_gaps)
 from cordon_d.areas import Sheet, versions
 from cordon_d.administrative import AdministrativeUnits, records
 from cordon_d.store import store_root
@@ -273,6 +273,43 @@ class ReachAndPopulation(unittest.TestCase):
         build = _Builder(sources, version_of('REG-PUGLIA-U181-DIR-2024-00158:area-state-transition:v1'))
         self.assertTrue(build.sheet(massafra, Sheet(None, '16', False), ('15', '16', '23'))[1])
         self.assertFalse(build.sheet(massafra, Sheet(None, '16', False), ('16',))[1])
+
+    @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries') and held('region-layer'),
+                         'the geometry sources are not in this store')
+    def test_a_named_comune_is_whole_where_the_cadastre_publishes_none_of_its_sheets(self):
+        units = AdministrativeUnits(ROOT)
+        brindisi = units.comune(catastale='B180')
+        reach = units.comune_geometry(brindisi).envelope
+        near = {c.catastale for c in units.comuni_of('Puglia')
+                if units.comune_geometry(c) is not None and units.comune_geometry(c).intersects(reach)}
+        sources = Sources(ROOT, comuni=near)
+        missing, territory = sources.unpublished(brindisi)
+        self.assertIn('33', missing)
+        extent, used = sources.comune_extent(brindisi)
+        self.assertEqual(used, ('cadastre', 'istat-boundaries'))
+        # DDS 82/2026 names the province of Brindisi whole. No cadastre publishes a sheet at
+        # these two places: one inside Brindisi's held sheets, one on its coast. Both are in it.
+        inland, coast = Point(741441, 4503503), Point(747885, 4505510)
+        published = [g for (c, _, _), found in sources.sheets.items() if c == 'B180' for _, g in found]
+        self.assertFalse(shapely.union_all(published).intersects(inland))
+        self.assertTrue(extent.covers(inland) and extent.covers(coast))
+        # Where the part reaches the comune's border the act's map, the Region's layer, draws it.
+        version = version_of('REG-PUGLIA-U181-DIR-2026-00082:area-state-transition:v1')
+        build = _Builder(sources, version)
+        geometry = build.extent(brindisi)
+        self.assertTrue(build.istat_drawn)
+        drawn, gaps, errors, replaced = _layer_gaps(sources, version, 'infected', geometry, build)
+        self.assertTrue(drawn.covers(inland) and gaps.covers(coast))
+        self.assertEqual(errors[0].source, 'region-layer')
+        # Where ISTAT still draws a line (against another comune), its measured error goes with it.
+        self.assertTrue(all(e.source == 'istat-boundaries' and e.error_m for e in errors[1:]))
+        self.assertEqual(build.istat_drawn, [])
+        _, layer = sources.region_layer(version.provision_version_id, 'infected')
+        coastline = shapely.union_all([n for _, n in replaced]).boundary.difference(
+            sources.cadastral_outline('B180'))
+        # The rest of the line is ISTAT's, between Brindisi and its neighbours inside the zone.
+        distances = shapely.distance(shapely.points(shapely.get_coordinates(coastline)), layer.boundary)
+        self.assertLess(numpy.percentile(distances, 95), 1.0)
 
     @unittest.skipUnless(held('cadastre-fogli'), 'the geometry sources are not in this store')
     def test_the_named_plants_are_the_subspecies_in_the_listed_units_up_to_the_act(self):

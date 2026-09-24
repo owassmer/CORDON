@@ -4573,32 +4573,6 @@
   "binding": "the Region's published rendering of the act's Allegato 1 and 1 bis map (INPUTS row 3: 'the Region's published layer where that layer carries the act's geometry')"
  },
  {
-  "kind": "positional-error",
-  "source": "istat-boundaries",
-  "method": "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held sheet covers. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only to the line no sheet draws.",
-  "statistic": "per comune: the larger 95th percentile of the two directed distance samples",
-  "istat_note": "La scala non è certificabile uniformemente dall'Istat, poichè le basi di acquisizione utilizzate (principalmente foto aeree ed altra cartografia) provengono da fonti e scale differenti, che variano tra ambito urbano ed extraurbano.",
-  "istat_note_source": "https://www.istat.it/wp-content/uploads/2024/04/Descrizione-dati-Confini-unita-amministrative-fini-statistici.pdf",
-  "comuni": [
-   {
-    "comune": "F027",
-    "name": "Massafra",
-    "istat_to_cadastre": {
-     "p95": 113.6,
-     "max": 737.6,
-     "n": 6381
-    },
-    "cadastre_to_istat": {
-     "p95": 105.3,
-     "max": 523.6,
-     "n": 6702
-    }
-   }
-  ],
-  "script": "scripts/measure_positional_error.py",
-  "measured_at": "2026-09-23T02:50:52+00:00"
- },
- {
   "kind": "cadastre-particelle",
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2/query?f=json&where=COMUNE%3D%27I330%27+AND+FOGLIO%3D%2757%27+AND+LIVELLO%3D%27PARTICELLE%27+AND+NUMERO+IN+%28%27262%27%2C%27263%27%2C%27272%27%2C%27273%27%2C%27302%27%2C%27310%27%2C%27312%27%29&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&resultOffset=0&resultRecordCount=1000",
   "captured_at": "2026-09-23T02:57:42.039331+00:00",
@@ -158254,5 +158228,185 @@
   },
   "script": "scripts/measure_positional_error.py",
   "measured_at": "2026-09-23T22:21:04+00:00"
+ },
+ {
+  "kind": "positional-error",
+  "source": "istat-boundaries",
+  "method": "Only where a zone's outline is ISTAT's own line: a comune whose missing sheets are the territory no held sheet covers. Directed distances sampled every 10 m between the comune's ISTAT border with each adjacent comune and the cadastral border between their sheets (each comune's sheets unioned and closed by 10 m; the cadastral border is the part of one comune's sheet outline within 5 m of the other's sheets). Per comune: the 95th percentile and maximum of each direction; the comune's bound is the larger 95th percentile. Where ISTAT and the cadastre disagree, the cadastre settles the line; this bound applies only to the line no sheet draws.",
+  "statistic": "per comune: the larger 95th percentile of the two directed distance samples",
+  "istat_note": "La scala non è certificabile uniformemente dall'Istat, poichè le basi di acquisizione utilizzate (principalmente foto aeree ed altra cartografia) provengono da fonti e scale differenti, che variano tra ambito urbano ed extraurbano.",
+  "istat_note_source": "https://www.istat.it/wp-content/uploads/2024/04/Descrizione-dati-Confini-unita-amministrative-fini-statistici.pdf",
+  "comuni": [
+   {
+    "comune": "F027",
+    "name": "Massafra",
+    "istat_to_cadastre": {
+     "p95": 113.6,
+     "max": 737.6,
+     "n": 6381
+    },
+    "cadastre_to_istat": {
+     "p95": 105.3,
+     "max": 523.6,
+     "n": 6702
+    }
+   },
+   {
+    "comune": "B180",
+    "name": "Brindisi",
+    "istat_to_cadastre": {
+     "p95": 41.2,
+     "max": 226.1,
+     "n": 7023
+    },
+    "cadastre_to_istat": {
+     "p95": 41.8,
+     "max": 80.5,
+     "n": 7116
+    }
+   },
+   {
+    "comune": "D171",
+    "name": "Crispiano",
+    "istat_to_cadastre": {
+     "p95": 143.1,
+     "max": 1170.7,
+     "n": 10363
+    },
+    "cadastre_to_istat": {
+     "p95": 95.4,
+     "max": 523.5,
+     "n": 10721
+    }
+   },
+   {
+    "comune": "D508",
+    "name": "Fasano",
+    "istat_to_cadastre": {
+     "p95": 407.1,
+     "max": 844.1,
+     "n": 5059
+    },
+    "cadastre_to_istat": {
+     "p95": 237.0,
+     "max": 852.8,
+     "n": 4879
+    }
+   },
+   {
+    "comune": "D761",
+    "name": "Francavilla Fontana",
+    "istat_to_cadastre": {
+     "p95": 144.2,
+     "max": 806.9,
+     "n": 8253
+    },
+    "cadastre_to_istat": {
+     "p95": 48.9,
+     "max": 301.1,
+     "n": 7638
+    }
+   },
+   {
+    "comune": "E506",
+    "name": "Lecce",
+    "istat_to_cadastre": {
+     "p95": 59.5,
+     "max": 765.1,
+     "n": 12874
+    },
+    "cadastre_to_istat": {
+     "p95": 39.2,
+     "max": 698.8,
+     "n": 12623
+    }
+   },
+   {
+    "comune": "E986",
+    "name": "Martina Franca",
+    "istat_to_cadastre": {
+     "p95": 113.8,
+     "max": 1170.8,
+     "n": 13151
+    },
+    "cadastre_to_istat": {
+     "p95": 72.0,
+     "max": 7530.7,
+     "n": 12992
+    }
+   },
+   {
+    "comune": "F842",
+    "name": "Nardò",
+    "istat_to_cadastre": {
+     "p95": 260.2,
+     "max": 779.8,
+     "n": 7783
+    },
+    "cadastre_to_istat": {
+     "p95": 248.0,
+     "max": 1036.9,
+     "n": 7026
+    }
+   },
+   {
+    "comune": "G098",
+    "name": "Oria",
+    "istat_to_cadastre": {
+     "p95": 157.2,
+     "max": 575.8,
+     "n": 6859
+    },
+    "cadastre_to_istat": {
+     "p95": 276.2,
+     "max": 1022.5,
+     "n": 6937
+    }
+   },
+   {
+    "comune": "G188",
+    "name": "Otranto",
+    "istat_to_cadastre": {
+     "p95": 52.2,
+     "max": 180.2,
+     "n": 4675
+    },
+    "cadastre_to_istat": {
+     "p95": 67.6,
+     "max": 648.0,
+     "n": 4889
+    }
+   },
+   {
+    "comune": "I066",
+    "name": "San Pancrazio Salentino",
+    "istat_to_cadastre": {
+     "p95": 49.3,
+     "max": 489.5,
+     "n": 3982
+    },
+    "cadastre_to_istat": {
+     "p95": 38.6,
+     "max": 108.4,
+     "n": 3861
+    }
+   },
+   {
+    "comune": "I930",
+    "name": "Squinzano",
+    "istat_to_cadastre": {
+     "p95": 106.7,
+     "max": 492.9,
+     "n": 4162
+    },
+    "cadastre_to_istat": {
+     "p95": 704.8,
+     "max": 1673.9,
+     "n": 4925
+    }
+   }
+  ],
+  "script": "scripts/measure_positional_error.py",
+  "measured_at": "2026-09-24T17:06:59+00:00"
  }
 ]

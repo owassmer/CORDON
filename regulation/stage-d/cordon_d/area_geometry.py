@@ -9,10 +9,14 @@ Each zone is built from the act's operative text first. The annex tables are tha
 result rendered per unit, not drawn lines:
 
 - a named whole comune, province or Annex III Part A unit (the annex version A holds for
-  the day): the union of the comune's cadastral sheets, where they are held. The cadastre
-  assigns every sheet to its comune; ISTAT states that the scale of its own boundaries
-  "non è certificabile uniformemente". ISTAT's boundary is used only for a comune whose
-  sheets are not held;
+  the day): the unit's whole territory, roads, water and unparcelled land included, never
+  only the land the cadastre happens to publish. The comune's cadastral sheets draw it: the
+  cadastre assigns every sheet to its comune, and ISTAT states that the scale of its own
+  boundaries "non è certificabile uniformemente". Where no cadastre publishes some of its
+  sheets, their territory is in the unit too: inside the held sheets their outline draws
+  it; where it reaches the unit's border, the Region's layer for the zone (the act's map)
+  draws it, or ISTAT's boundary where the act's map is not published as a layer. ISTAT's
+  boundary draws a comune whose sheets are not held;
 - a band the act states in kilometres from a zone: that zone offset at the width, clipped
   to land; outward for a buffer zone, inward for a zone under containment measures from the
   zone's border with the buffer zone (Article 15(2)(a): "from the border of the infected
@@ -77,6 +81,8 @@ SEAM_M = 20.0
 # The outline near a tested place: within its distance to the outline plus this.
 OUTLINE_REACH_M = 500.0
 OUTLINE_STEP_M = 25.0
+# The Region's layer draws a named unit's unpublished part up to this far past ISTAT's line.
+GAP_REACH_M = 500.0
 # The Region's layer: its error at a place is that of the samples within this distance.
 REGION_REACH_M = 2000.0
 REGION_STEP_M = 10.0
@@ -491,19 +497,35 @@ class Sources:
 
     # --- extents ---------------------------------------------------------------
 
-    def comune_extent(self, comune, *, keep=True) -> tuple[BaseGeometry, str]:
-        """(territory, source): the union of the comune's sheets where held, else ISTAT's boundary.
-        `keep=False` builds it without keeping it, for a caller that keeps a larger union."""
+    def comune_extent(self, comune, *, keep=True) -> tuple[BaseGeometry, tuple[str, ...]]:
+        """(territory, sources): the comune's whole territory, roads, water and unparcelled land
+        included. Its held sheets draw it. The territory of the sheets no cadastre publishes
+        (`unpublished`) is in it too: inside the held sheets their outline is the sheets', and
+        where it reaches the comune's border ISTAT's line draws it (`istat_part`). A comune
+        without held sheets is ISTAT's boundary. `keep=False` builds it without keeping it, for
+        a caller that keeps a larger union."""
         if comune.catastale in self._extent:
             return self._extent[comune.catastale]
         sheets = [g for (c, _, _), found in self.sheets.items() if c == comune.catastale for _, g in found]
         if sheets:
-            extent = (seal(shapely.union_all([shapely.make_valid(g) for g in sheets])), 'cadastre')
+            geometry, used = seal(shapely.union_all([shapely.make_valid(g) for g in sheets])), ('cadastre',)
+            _, gap = self.unpublished(comune)
+            if gap is not None:
+                geometry = seal(shapely.union_all([geometry, gap]))
+                used = ('cadastre', 'istat-boundaries')
+            extent = (geometry, used)
         else:
-            extent = (self.administrative.comune_geometry(comune), 'istat-boundaries')
+            extent = (self.administrative.comune_geometry(comune), ('istat-boundaries',))
         if keep:
             self._extent[comune.catastale] = extent
         return extent
+
+    def istat_part(self, comune) -> BaseGeometry | None:
+        """The part of a comune's territory no held sheet draws: its unpublished territory, or
+        the whole ISTAT boundary where none of its sheets is held."""
+        if comune.catastale not in self.held:
+            return self.administrative.comune_geometry(comune)
+        return self.unpublished(comune)[1]
 
     def province_extent(self, province) -> tuple[BaseGeometry, tuple[str, ...]]:
         key = ('province', province.code)
@@ -511,9 +533,9 @@ class Sources:
             parts, used = [], set()
             for c in self.administrative.comuni.values():
                 if c.province == province:
-                    geometry, source = self.comune_extent(c, keep=False)
+                    geometry, sources = self.comune_extent(c, keep=False)
                     parts.append(geometry)
-                    used.add(source)
+                    used.update(sources)
             self._extent[key] = (seal(shapely.union_all(parts)), tuple(sorted(used)))
         return self._extent[key]
 
@@ -527,15 +549,28 @@ class Sources:
                 if unit[0] == 'province':
                     geometry, sources = self.province_extent(self.administrative.province(unit[1]))
                 else:
-                    comune = self.administrative.comune(name=unit[1], province=unit[2])
-                    if comune is None:
-                        raise ValueError(f'Annex III Part A: {unit[1]} is not one ISTAT comune')
-                    geometry, source = self.comune_extent(comune)
-                    sources = (source,)
+                    geometry, sources = self.comune_extent(self.annex_iii_comune(unit))
                 parts.append(geometry)
                 used.update(sources)
             self._extent[key] = (seal(shapely.union_all(parts)), tuple(sorted(used)))
         return self._extent[key]
+
+    def annex_iii_comune(self, unit):
+        comune = self.administrative.comune(name=unit[1], province=unit[2])
+        if comune is None:
+            raise ValueError(f'Annex III Part A: {unit[1]} is not one ISTAT comune')
+        return comune
+
+    def annex_iii_comuni(self, day: date) -> list:
+        """The comuni Annex III Part A's units for `day` cover."""
+        out = []
+        for unit in self.annex_iii(day):
+            if unit[0] == 'province':
+                province = self.administrative.province(unit[1])
+                out += [c for c in self.administrative.comuni.values() if c.province == province]
+            else:
+                out.append(self.annex_iii_comune(unit))
+        return out
 
     def cadastral_near(self, geometry: BaseGeometry) -> BaseGeometry:
         """The held sheets' territory near `geometry`, its seams closed."""
@@ -917,16 +952,24 @@ class _Builder:
             raise ValueError(f'{self.version.provision_version_id}: {name} is not one ISTAT comune')
         return comune
 
+    def _istat(self, comune):
+        part = self.sources.istat_part(comune)
+        if part is not None and not part.is_empty:
+            self.istat_drawn.append((comune.catastale, part))
+
     def extent(self, comune):
-        geometry, source = self.sources.comune_extent(comune)
-        self.used.add(source)
-        if source == 'istat-boundaries':
-            self.istat_drawn.append((comune.catastale, geometry))
+        geometry, used = self.sources.comune_extent(comune)
+        self.used.update(used)
+        self._istat(comune)
         return geometry
 
     def province(self, label):
-        geometry, used = self.sources.province_extent(self.units.province(label))
+        province = self.units.province(label)
+        geometry, used = self.sources.province_extent(province)
         self.used.update(used)
+        for c in self.units.comuni.values():
+            if c.province == province:
+                self._istat(c)
         return geometry
 
     def whole_comune(self, name, province=None):
@@ -942,6 +985,8 @@ class _Builder:
     def annex_iii(self, day):
         geometry, used = self.sources.annex_iii_extent(day)
         self.used.update(used)
+        for c in self.sources.annex_iii_comuni(day):
+            self._istat(c)
         return geometry
 
     def sheet(self, comune, sheet, listed=()):
@@ -1164,6 +1209,74 @@ def _drawn(sources: Sources, version, role, unplaced):
     return drawn, tuple(u for u in unplaced if u.geometry is None), (part,)
 
 
+def _layer_gaps(sources: Sources, version, role, geometry, build, start=0):
+    """A unit the act names whole is in the zone whole, also where the cadastre publishes none of
+    its sheets. There the Region's layer for the zone, which renders the act's map, draws the
+    unit's line where it reaches the unit's border; inside the held sheets their outline draws
+    it. Without that layer the line is ISTAT's (`Sources.istat_part`), with ISTAT's measured error.
+
+    Returns (geometry, the parts the layer draws, their error parts, [(ISTAT part, layer part)]).
+    Only the ISTAT parts registered from `start` on (this zone's) are considered."""
+    layer = sources.region_layer(version.provision_version_id, role)
+    entries = build.istat_drawn[start:]
+    if layer is None or geometry is None or not entries:
+        return geometry, None, (), []
+    _, drawn = layer
+    comuni = [c for c in sources.administrative.comuni_of('Puglia')]
+    kept, replaced, istat = [], [], []
+    for code, part in entries:
+        line = part.boundary.difference(sources.cadastral_outline(code))
+        if line.is_empty:
+            kept.append((code, part))              # inside the held sheets: their outline draws it
+            continue
+        window = part.buffer(GAP_REACH_M)
+        near = shapely.make_valid(shapely.clip_by_rect(drawn, *window.bounds))
+        # What the layer leaves out where the part reaches the unit's border is the act's line; a
+        # piece it leaves out between itself and held sheets is the layer's error, not the line.
+        outside = part.difference(near)
+        enclosed = [p for p in getattr(outside, 'geoms', [outside])
+                    if p.geom_type == 'Polygon' and not p.intersects(line.buffer(APPROXIMATION_M))]
+        # Where the layer carries the unit past ISTAT's line: land beside that line that no held
+        # sheet covers and no other comune's boundary claims.
+        others = [g for c in comuni if c.catastale != code
+                  for g in [sources.administrative.comune_geometry(c)] if g is not None and g.intersects(window)]
+        beyond = near.intersection(line.buffer(GAP_REACH_M)).difference(sources.cadastral_near(window)) \
+            .difference(part)
+        if others:
+            beyond = beyond.difference(shapely.union_all(others))
+        beyond = [p for p in getattr(beyond, 'geoms', [beyond])
+                  if p.geom_type == 'Polygon' and p.intersects(line.buffer(APPROXIMATION_M))]
+        new = polygonal(shapely.union_all([part.intersection(near), *enclosed, *beyond]))
+        replaced.append((part, new))
+        # ISTAT still draws the line between this comune and another where the layer runs on past it.
+        rest = new.boundary.difference(sources.cadastral_outline(code)).difference(
+            near.boundary.buffer(APPROXIMATION_M))
+        if not rest.is_empty:
+            istat.append(ErrorPart('istat-boundaries', rest.buffer(REGION_STEP_M), sources.istat_errors.get(code)))
+    build.istat_drawn[start:] = kept
+    if not replaced:
+        return geometry, None, (), []
+    old = shapely.union_all([o for o, _ in replaced])
+    new = polygonal(shapely.union_all([n for _, n in replaced]))
+    geometry = polygonal(shapely.union_all([geometry.difference(old), new]))
+    layer_error = sources.region_errors.get((version.provision_version_id, role))
+    field = (_GroundField(layer_error, sources.cadastral_error)
+             if layer_error is not None and sources.cadastral_error is not None else None)
+    return (geometry, new, (ErrorPart('region-layer', new.buffer(REGION_STEP_M), None, field), *istat),
+            replaced)
+
+
+def _relisted(listed, replaced):
+    """The units the annex places wholly in the zone, with the layer's part for their ISTAT part."""
+    if listed is None or not replaced:
+        return listed
+    parts = [(o, n) for o, n in replaced if o.intersection(listed).area > OUTSIDE_TOLERANCE_M2]
+    if not parts:
+        return listed
+    return polygonal(shapely.union_all([listed.difference(shapely.union_all([o for o, _ in parts])),
+                                        *[n for _, n in parts]]))
+
+
 def buffer_extent(sources: Sources, origins, annexed=None, drawn=None) -> BaseGeometry | None:
     """The buffer zone: land within each origin's width, the units the annex places wholly in
     it and the parts the Region's layer supplies, outside the origins. `origins` is
@@ -1218,6 +1331,7 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
         zones['infected'] = Zone('infected', build.words('infected'), _circles(found, metres), quote, ('plants',),
                                  width, errors=_plant_errors(found, metres + buffer_width), plants=found)
     else:
+        start = len(build.istat_drawn)
         geometry, unplaced = build.annex('infected', build.by_role['infected'])
         listed = geometry
         rule = 'annex'
@@ -1226,12 +1340,15 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
             part, _ = build.annex('infected', build.by_role['infected'], only_comune=rules.part)
             geometry = _union(geometry, *named, part)
             rule = rules.quotes[0]
+        geometry, gaps, gap_errors, replaced = _layer_gaps(sources, version, 'infected', geometry, build, start)
+        listed = _relisted(listed, replaced)
         drawn, unplaced, drawn_errors = _drawn(sources, version, 'infected', unplaced)
-        used = set(build.used) | ({'region-layer'} if drawn is not None else set())
+        used = set(build.used) | ({'region-layer'} if drawn is not None or gaps is not None else set())
         geometry = _union(geometry, drawn)
         zones['infected'] = Zone('infected', build.words('infected'), geometry and seal(geometry), rule,
                                  tuple(sorted(used)), None, unplaced, listed,
-                                 _source_errors(sources, build.used, build) + drawn_errors, drawn=drawn)
+                                 _source_errors(sources, build.used, build) + drawn_errors + gap_errors,
+                                 drawn=_union(drawn, gaps))
     infected = zones['infected'].geometry
 
     # Foci under eradication: a radius around the infected plants the act names for them.
@@ -1276,21 +1393,28 @@ def construct(sources: Sources, version, *, plants=None, adopted: date | None = 
     # The part under containment measures.
     build.used = set()
     if rules.annex_iii == 'containment':
-        geometry, used = sources.annex_iii_extent(version.effective_from)
+        start = len(build.istat_drawn)
+        geometry = build.annex_iii(version.effective_from)
+        geometry, gaps, gap_errors, _ = _layer_gaps(sources, version, 'containment', geometry, build, start)
+        used = tuple(sorted(build.used | ({'region-layer'} if gaps is not None else set())))
         zones['containment'] = Zone('containment', build.words('containment'), geometry, rules.quotes[-1],
-                                    used, errors=_source_errors(sources, used, build))
+                                    used, errors=_source_errors(sources, build.used, build) + gap_errors,
+                                    drawn=gaps)
     elif rules.whole and rules.whole_role == 'containment':
+        start = len(build.istat_drawn)
         named = [build.named_comune(n) for n in rules.whole]
         part, unplaced = build.annex('containment', build.by_role['containment'], only_comune=rules.part)
+        geometry, gaps, gap_errors, _ = _layer_gaps(sources, version, 'containment', _union(*named, part),
+                                                    build, start)
         former = None
         if rules.former:
             zone = build.annex_iii(adopted or version.effective_from)
             former = inward_band(zone, rules.former[0], sources.land_near(zone, SEAM_M), outside=zone)
-        used = set(build.used)
-        zones['containment'] = Zone('containment', build.words('containment'), _union(*named, part, former),
+        used = set(build.used) | ({'region-layer'} if gaps is not None else set())
+        zones['containment'] = Zone('containment', build.words('containment'), _union(geometry, former),
                                     rules.quotes[0], tuple(sorted(used)),
                                     rules.former[1] if rules.former else None, unplaced, part,
-                                    _source_errors(sources, used, build))
+                                    _source_errors(sources, build.used, build) + gap_errors, drawn=gaps)
     elif rules.inward and infected is not None:
         # Article 15(2)(a): "within an area measuring at least 2 km from the border of the
         # infected zone with the buffer zone". The annex lists the units the band covers:
