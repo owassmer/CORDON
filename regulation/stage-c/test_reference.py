@@ -450,6 +450,16 @@ def depth_in_box(parcel, area):
     return min(min(x - x0, x1 - x, y - y0, y1 - y) for x, y in coords)
 
 
+def least_half_width(polygon):
+    """Half the least width of a polygon's convex hull, from exact vertex-to-edge-line distances."""
+    hull = polygon.convex_hull.exterior.coords[:-1]
+    widths = []
+    for (ax, ay), (bx, by) in zip(hull, hull[1:] + hull[:1]):
+        length = hypot(bx - ax, by - ay)
+        widths.append(max(abs((bx - ax) * (y - ay) - (by - ay) * (x - ax)) / length for x, y in hull))
+    return min(widths) / 2
+
+
 # Catasto layer 2 (SIT Puglia Background/Catasto), EPSG:32633, as PR #8's parcel check read them.
 PARCEL_A662_C_2_379 = Polygon([(655811.3492, 4548156.9409), (655811.2358999997, 4548177.2468),
                                (655811.8328999998, 4548177.2608), (655812.8442000002, 4548157.070900001)])
@@ -467,6 +477,9 @@ PARCEL_A893_43_230 = Polygon([
     (645920.0537, 4553088.923900001), (645920.1436999999, 4553089.7959), (645920.4145999998, 4553090.6219),
     (645920.8465999998, 4553091.388900001), (645921.4616, 4553092.017899999), (645921.3476, 4553092.187899999),
     (645920.9095999999, 4553092.9629)])
+PARCEL_A883_9_2148 = Polygon([
+    (625901.4153000005, 4566312.5911), (625891.7806000002, 4566291.328299999), (625878.8737000003, 4566297.605900001),
+    (625882.3476, 4566305.5748), (625875.6815999998, 4566308.8506000005), (625881.4654000001, 4566321.4485)])
 
 
 class SpatialPopulations(unittest.TestCase):
@@ -678,6 +691,30 @@ class SpatialPopulations(unittest.TestCase):
         for radius in (e_z, e_z / cos(pi / (4 * QUAD_SEGMENTS))):
             self.assertGreater(core.intersection(area.buffer(-radius, quad_segs=QUAD_SEGMENTS)).area, 0)
         self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
+
+    def test_partial_parcel_drawn_core_past_the_inscribed_radius_stays_unknown(self):
+        from cordon_c.spatial import QUAD_SEGMENTS, _circumscribed
+        # Just past a polygon's inscribed radius, GEOS leaves a drawn core although no point
+        # of the parcel lies farther than e_p from its boundary. A regular octagon, and the
+        # real Catasto parcel A883/ /9/2148 at two PR #8 parcel bounds, each placed a few
+        # metres inside an area line.
+        octagon = Point(0, 0).buffer(11.85, quad_segs=2)
+        x0, y0, x1, y1 = PARCEL_A883_9_2148.bounds
+        cases = [(octagon, 11.368, box(-1000, -1000, 1000, octagon.bounds[3] + 8), 5.0, 8),
+                 (PARCEL_A883_9_2148, 12.46, box(x0 - 3000, y0 - 3000, x1 + 3000, y1 + 5), 9.0, 5),
+                 (PARCEL_A883_9_2148, 12.506, box(x0 - 3000, y0 - 3000, x1 + 3000, y1 + 5), 9.0, 5)]
+        for parcel, e_p, area, e_z, depth in cases:
+            # An inscribed disk lies between two parallel support lines of the convex hull, so
+            # half the hull's least width bounds the inscribed radius: the parcel shrunk by e_p
+            # is empty. (a) fails, so a small true parcel moved toward the line lies outside
+            # the area shrunk by e_z: unknown.
+            self.assertLess(least_half_width(parcel), e_p)
+            self.assertAlmostEqual(depth_in_box(parcel, area), depth, places=6)
+            self.assertLess(depth, e_p + e_z)
+            drawn = (parcel.buffer(-_circumscribed(e_p), quad_segs=QUAD_SEGMENTS)
+                     .intersection(area.buffer(-_circumscribed(e_z), quad_segs=QUAD_SEGMENTS)))
+            self.assertGreater(drawn.area, 0)
+            self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
 
     def test_shared_performance_and_incomplete_population(self):
         req = {"plant-1": Evaluation(True), "plant-2": Evaluation(None, needs=frozenset({"species"}))}
@@ -1039,7 +1076,7 @@ class ComposedTemporalCases(unittest.TestCase):
         self.assertFalse(evaluate(s, "EU-2020-1201:5(1)(c)", AT, merge_facts(adequate, scope)).truth)
 
     def test_survey_extent_counts_the_whole_grown_enclosure_at_a_convex_corner(self):
-        from math import radians, sin
+        from math import radians, sin, tan
         from cordon_c.bindings import reduced_buffer_first_year_facts
         from cordon_c.spatial import QUAD_SEGMENTS
         s = Snapshot.load()
@@ -1047,14 +1084,14 @@ class ComposedTemporalCases(unittest.TestCase):
         enclosure = box(-2600, -2600, 2600, 2600)
         fact = "a survey at least once in the first year, in a zone at least 2,5 km around the infected zone, showing the pest absent"
 
-        def extent(out_m, error_m):
-            # A small infected zone beyond the corner (2600, 2600), between two of the
-            # buffer's chord points (42.1875 degrees), out_m from the corner.
-            a = radians(42.1875)
-            cx, cy = 2600 + out_m * cos(a), 2600 + out_m * sin(a)
+        def extent(out_m, error_m, enclosure=enclosure, corner=(2600, 2600), degrees=42.1875):
+            # A small infected zone beyond the corner, between two of the buffer's chord
+            # points (by default 42.1875 degrees), out_m from the corner.
+            a = radians(degrees)
+            cx, cy = corner[0] + out_m * cos(a), corner[1] + out_m * sin(a)
             zone = box(cx - .2, cy - .2, cx + .2, cy + .2)
-            near = min(hypot(x - 2600, y - 2600) for x, y in zone.exterior.coords)
-            far = max(hypot(x - 2600, y - 2600) for x, y in zone.exterior.coords)
+            near = min(hypot(x - corner[0], y - corner[1]) for x, y in zone.exterior.coords)
+            far = max(hypot(x - corner[0], y - corner[1]) for x, y in zone.exterior.coords)
             scope = reduced_buffer_first_year_facts(
                 s, AT, identification=datetime(2025, 6, 4, 12, tzinfo=ROME), evaluated_at=datetime(2026, 9, 8, tzinfo=ROME),
                 infected_zone=shape(zone), surveyed_enclosure=shape(enclosure, error_m),
@@ -1070,6 +1107,19 @@ class ComposedTemporalCases(unittest.TestCase):
         self.assertLess(near - 1300, 2500)
         self.assertGreaterEqual(near + 1300, 2500)
         self.assertFalse(enclosure.buffer(1300, quad_segs=QUAD_SEGMENTS).covers(zone))
+        self.assertIsNone(value.truth)
+        # A convex corner turning by 8.16 degrees, which a buffer draws as one chord of
+        # 1.45 times the nominal 90 / QUAD_SEGMENTS degrees. The zone on the bisector,
+        # 1299 m out, lies in the true grown enclosure; a buffer drawn at 1300 m, or at
+        # 1300 / cos(pi / (4q)), misses it.
+        drop = 5000 * tan(radians(4.08))
+        apex = Polygon([(-5000, -5000), (5000, -5000), (5000, -drop), (0, 0), (-5000, -drop)])
+        value, zone, near, far = extent(1299, 1300, enclosure=apex, corner=(0, 0), degrees=90)
+        self.assertLess(far, 1300)
+        self.assertLess(near - 1300, 2500)
+        self.assertGreaterEqual(near + 1300, 2500)
+        for radius in (1300, 1300 / cos(pi / (4 * QUAD_SEGMENTS))):
+            self.assertFalse(apex.buffer(radius, quad_segs=QUAD_SEGMENTS).covers(zone))
         self.assertIsNone(value.truth)
         # At a bound of D's size the clearance cannot reach 2.5 km, so the answer is False.
         value, zone, near, far = extent(25, 26)

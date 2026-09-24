@@ -3,12 +3,12 @@
   "accepted_by": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#31 accepts this exact content.",
   "date": "2026-09-24",
-  "promoted_package_sha256": "edb1fdf906d15387dc845c463ad480ca09ea631d1e6aaae9b6ff8839732ed602",
+  "promoted_package_sha256": "813ae5025b1cee90d2d9e5b1e07a7d6874231f0aea495088178d4a52c2b16b37",
   "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
   "preceding_acceptance": {
     "path": "corpus/evidence/stage-c-acceptance-2026-09-23-pr29.json",
     "sha256": "10a8fa1cb924afdc755609795fdc59e240f447126e4d4be9743f32fd86c12a81"
   },
   "preceding_package_sha256": "31217394f07f558a4dc69234d7c3f21a40a922d172022b74134472158c2b6d01",
-  "scope": "partial_parcel is true when the parcel lies inside the adopted area by more than the combined error, or when the parcel and the area, each shrunk by its own error, overlap; minimum_enclosure grows the enclosure by the circumscribed radius; both draw buffers at a circumscribed radius so polygonal approximation errs toward unknown. Binding takes effect only on merge."
+  "scope": "partial_parcel is true when the parcel lies inside the adopted area by more than the combined error, or when a point lies inside both, farther than each geometry's own error from its boundary by exact distance, drawn shrunk shapes only proposing that point; minimum_enclosure grows the enclosure by the circumscribed radius, so polygonal approximation errs toward unknown. Binding takes effect only on merge."
 }

@@ -64,13 +64,13 @@ MUTATIONS = (
      'parcel_core = parcel.geometry.buffer(-_circumscribed(adopted_area.error_m), quad_segs=QUAD_SEGMENTS)\n'
      '    area_core = adopted_area.geometry.buffer(-_circumscribed(parcel.error_m), quad_segs=QUAD_SEGMENTS)',
      "SpatialPopulations.test_partial_parcel_cores_shrink_by_each_geometrys_own_error"),
-    ("cordon_c.spatial", 'parcel_core = parcel.geometry.buffer(-_circumscribed(parcel.error_m), quad_segs=QUAD_SEGMENTS)\n'
-     '    area_core = adopted_area.geometry.buffer(-_circumscribed(adopted_area.error_m), quad_segs=QUAD_SEGMENTS)',
-     'parcel_core = parcel.geometry.buffer(-parcel.error_m, quad_segs=QUAD_SEGMENTS)\n'
-     '    area_core = adopted_area.geometry.buffer(-adopted_area.error_m, quad_segs=QUAD_SEGMENTS)',
-     "SpatialPopulations.test_partial_parcel_chord_at_a_reflex_corner_stays_unknown"),
     ("cordon_c.spatial", 'cos(3 * pi / (8 * QUAD_SEGMENTS))', 'cos(pi / (4 * QUAD_SEGMENTS))',
-     "SpatialPopulations.test_partial_parcel_chord_at_a_reflex_corner_stays_unknown"),
+     "ComposedTemporalCases.test_survey_extent_counts_the_whole_grown_enclosure_at_a_convex_corner"),
+    ("cordon_c.spatial", 'if (parcel.geometry.contains(x) and adopted_area.geometry.contains(x)\n'
+     '                and x.distance(parcel.geometry.boundary) > parcel.error_m\n'
+     '                and x.distance(adopted_area.geometry.boundary) > adopted_area.error_m):',
+     'if True:',
+     "SpatialPopulations.test_partial_parcel_drawn_core_past_the_inscribed_radius_stays_unknown"),
     ("cordon_c.spatial", '\n            and parcel.geometry.distance(adopted_area.geometry.boundary) > error)', ')',
      "SpatialPopulations.test_partial_parcel_wholly_inside_needs_the_combined_error_from_the_boundary"),
     ("cordon_c.spatial", 'enclosure.geometry.buffer(_circumscribed(error), quad_segs=QUAD_SEGMENTS)',

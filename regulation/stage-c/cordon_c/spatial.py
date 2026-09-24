@@ -12,7 +12,7 @@ from collections.abc import Mapping
 from pyproj import CRS, Geod, Transformer
 from shapely.geometry.base import BaseGeometry
 from shapely.ops import transform
-from shapely import get_coordinates
+from shapely import get_coordinates, get_point, maximum_inscribed_circle
 
 from .core import Evaluation, conjunction, disjunction
 
@@ -62,9 +62,11 @@ def _circumscribed(radius_m: float) -> float:
     A buffer draws each arc as chords between points at the given radius, so
     the chords fall inside the true arc. GEOS rounds each arc's chord count,
     so one chord can span 1.5 times the nominal pi / (2 * QUAD_SEGMENTS). At
-    this radius every chord lies outside the true arc: a grown shape contains
-    the true grown shape, and a shrunk shape keeps no point closer to the
-    boundary than the true radius.
+    this radius every chord lies outside the true arc, so a grown shape
+    contains the true grown shape. A drawn shrunk shape is not sound in
+    general: just past a polygon's inscribed radius, GEOS can leave a core
+    whose points lie closer to the boundary than the radius. A shrunk shape
+    therefore only proposes points that exact distance must confirm.
     """
     return radius_m / cos(3 * pi / (8 * QUAD_SEGMENTS))
 
@@ -186,11 +188,14 @@ def surface_in_band(surface: MetricGeometry, origin: MetricGeometry,
 def partial_parcel(parcel: MetricGeometry, adopted_area: MetricGeometry) -> Evaluation:
     """Does some area of the true parcel lie in the true adopted area?
 
-    A geometry with error bound e stands for any true geometry between itself
-    shrunk by e and itself grown by e. The parcel is in the area when it lies
-    inside by more than the combined error, or when the two geometries, each
-    shrunk by its own error, still overlap. Beyond the combined error it is
-    outside. Otherwise the error bounds leave the relation open.
+    Here a geometry with error bound e stands for any true geometry between
+    itself shrunk by e and itself grown by e. The parcel is in the area when it
+    lies inside by more than the combined error, or when some point lies inside
+    both geometries, farther than the parcel's error from the parcel's boundary
+    and farther than the area's error from the area's boundary, by exact
+    distance. The drawn shrunk shapes only propose that point. Beyond the
+    combined error the parcel is outside. Otherwise the error bounds leave the
+    relation open.
     """
     compatible(parcel, adopted_area)
     if any(x.geometry.geom_type not in {"Polygon", "MultiPolygon"} for x in (parcel, adopted_area)):
@@ -206,8 +211,15 @@ def partial_parcel(parcel: MetricGeometry, adopted_area: MetricGeometry) -> Eval
         return Evaluation(True)
     parcel_core = parcel.geometry.buffer(-_circumscribed(parcel.error_m), quad_segs=QUAD_SEGMENTS)
     area_core = adopted_area.geometry.buffer(-_circumscribed(adopted_area.error_m), quad_segs=QUAD_SEGMENTS)
-    if parcel_core.intersection(area_core).area > 0:
-        return Evaluation(True)
+    cores = parcel_core.intersection(area_core)
+    for part in getattr(cores, "geoms", (cores,)):
+        if part.geom_type != "Polygon" or part.area == 0:
+            continue
+        x = get_point(maximum_inscribed_circle(part), 0)
+        if (parcel.geometry.contains(x) and adopted_area.geometry.contains(x)
+                and x.distance(parcel.geometry.boundary) > parcel.error_m
+                and x.distance(adopted_area.geometry.boundary) > adopted_area.error_m):
+            return Evaluation(True)
     return Evaluation(None, needs=frozenset({"parcel overlap precision"}))
 
 
