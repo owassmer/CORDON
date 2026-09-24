@@ -50,6 +50,16 @@ def main():
     population = [p for p in vectors.population(ROOT, store)
                   if not args.only or any(o in p.url for o in args.only)]
     limits, lock = [], __import__('threading').Lock()
+    if args.execute:
+        print(f'cleared {vectors.clear_stale_locks(store)} stale request locks', flush=True)
+
+    def stop(pool, futures, error):
+        """A transport failure ends the pass; it is never a reading limit of the source."""
+        for future in futures:
+            future.cancel()
+        pool.shutdown(wait=True, cancel_futures=True)
+        print(f'STOPPED {type(error).__name__}: {error}', flush=True)
+        sys.exit(3)
 
     def limit(digest, where, error):
         with lock:
@@ -73,6 +83,8 @@ def main():
             p = futures[future]
             try:
                 (statements if p.kind == 'pdf' else layouts)[p.sha256] = future.result()
+            except vectors.TransportFailure as error:
+                stop(pool, futures, error)
             except Exception as error:  # noqa: BLE001
                 limit(p.sha256, dict(step='statements' if p.kind == 'pdf' else 'layout'), error)
     print(f'phase 1: {len(statements)} statement readings, {len(layouts)} layouts, {len(limits)} limits', flush=True)
@@ -100,6 +112,8 @@ def main():
             p, box = futures[future]
             try:
                 corners[(p.sha256, box)] = future.result()
+            except vectors.TransportFailure as error:
+                stop(pool, futures, error)
             except Exception as error:  # noqa: BLE001
                 limit(p.sha256, dict(step='corner', table=list(box)), error)
     print(f'phase 1b: {len(corners)} corners, {len(limits)} limits', flush=True)
@@ -130,13 +144,6 @@ def main():
                                   name.with_suffix('.context.png') if context is not None else None))
             del raster
     print(f'phase 2: {len(tasks)} table requests', flush=True)
-    if args.plan:
-        counts = {}
-        for p, geometry, _, _ in tasks:
-            counts[p.url.rsplit('/', 1)[-1]] = counts.get(p.url.rsplit('/', 1)[-1], 0) + 1
-        print(json.dumps(counts, indent=0))
-        shutil.rmtree(spool, ignore_errors=True)
-        return
 
     def read(task):
         p, geometry, png, context = task
@@ -149,6 +156,20 @@ def main():
         return gated(vectors.retained, store, 'table', [p.sha256], vectors.TABLE_PROMPT.format(geometry=where),
                      vectors.TABLE_SCHEMA, files, execute=args.execute, geometry=geometry)
 
+    if args.plan:
+        counts, missing = {}, {}
+        for task in tasks:
+            name = task[0].url.rsplit('/', 1)[-1]
+            counts[name] = counts.get(name, 0) + 1
+            try:
+                read(task) if not args.execute else None
+            except FileNotFoundError:
+                missing[name] = missing.get(name, 0) + 1
+        print(json.dumps(dict(requests=counts, missing=missing), indent=0))
+        print(f'plan: {len(tasks)} table requests, {sum(missing.values())} without a retained reading', flush=True)
+        shutil.rmtree(spool, ignore_errors=True)
+        return
+
     readings, done = {}, 0
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
         futures = {pool.submit(read, task): task for task in tasks}
@@ -156,6 +177,10 @@ def main():
             p, geometry = futures[future][:2]
             try:
                 readings.setdefault(p.sha256, []).append((geometry, future.result()))
+            except vectors.TransportFailure as error:
+                shutil.rmtree(spool, ignore_errors=True)
+                print(f'{done}/{len(tasks)} read before the stop', flush=True)
+                stop(pool, futures, error)
             except Exception as error:  # noqa: BLE001
                 limit(p.sha256, geometry, error)
             done += 1

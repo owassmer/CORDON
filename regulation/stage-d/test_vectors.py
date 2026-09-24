@@ -314,5 +314,59 @@ class AnnexIIIZone(unittest.TestCase):
                     del sys.modules[name]
 
 
+class Transport(unittest.TestCase):
+    """A subscription or transport failure stops the pass; it is never a reading limit of the source."""
+
+    SESSION = json.dumps({'type': 'result', 'subtype': 'success', 'is_error': True,
+                          'result': "You've hit your session limit · resets 4:50pm (America/New_York)"})
+
+    def test_a_session_limit_is_a_usage_limit_not_a_reading_limit(self):
+        reading, error = vectors.failure_of(1, self.SESSION, '')
+        self.assertIsNone(reading)
+        self.assertIsInstance(error, vectors.UsageLimit)
+        self.assertIsInstance(error, vectors.TransportFailure)
+
+    def test_no_envelope_or_an_api_error_is_a_transport_failure(self):
+        self.assertIsInstance(vectors.failure_of(1, '', 'connection reset')[1], vectors.TransportFailure)
+        api = json.dumps({'subtype': 'success', 'is_error': True, 'result': 'API Error: 500 Internal server error'})
+        self.assertIsInstance(vectors.failure_of(1, api, '')[1], vectors.TransportFailure)
+
+    def test_a_reading_the_model_could_not_conform_stays_a_reading_limit(self):
+        retries = json.dumps({'subtype': 'error_max_structured_output_retries', 'is_error': True, 'result': ''})
+        error = vectors.failure_of(1, retries, '')[1]
+        self.assertNotIsInstance(error, vectors.TransportFailure)
+        ok = json.dumps({'subtype': 'success', 'is_error': False, 'structured_output': {'rows': []}})
+        self.assertEqual(vectors.failure_of(0, ok, ''), ({'rows': []}, None))
+
+    def test_a_usage_limit_retains_nothing_and_later_replays_nothing(self):
+        import tempfile
+        from unittest import mock
+        schema = {'type': 'object'}
+        with tempfile.TemporaryDirectory() as directory:
+            store = Path(directory)
+            with mock.patch.object(vectors, '_dispatch', side_effect=vectors.UsageLimit('session limit')):
+                with self.assertRaises(vectors.UsageLimit):
+                    vectors.retained(store, 'table', ['a' * 64], 'p', schema, execute=True)
+            self.assertEqual(list((store / 'derived/vector-readings').glob('*.json')), [])
+            with mock.patch.object(vectors, '_dispatch', return_value={'rows': []}):
+                first = vectors.retained(store, 'table', ['a' * 64], 'p', schema, execute=True)
+            self.assertEqual(vectors.retained(store, 'table', ['a' * 64], 'p', schema), first)
+
+    def test_stale_locks_are_cleared_and_a_held_one_is_kept(self):
+        import fcntl
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            store = Path(directory)
+            folder = store / 'derived/vector-readings'
+            folder.mkdir(parents=True)
+            (folder / 'stale.lock').touch()
+            (folder / 'partial.tmp').touch()
+            (folder / 'kept.json').write_text('{}')
+            with (folder / 'held.lock').open('a') as held:
+                fcntl.flock(held, fcntl.LOCK_EX)
+                self.assertEqual(vectors.clear_stale_locks(store), 1)
+            self.assertEqual(sorted(p.name for p in folder.iterdir()), ['held.lock', 'kept.json'])
+
+
 if __name__ == '__main__':
     unittest.main()
