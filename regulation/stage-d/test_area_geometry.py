@@ -374,6 +374,13 @@ class AnnexBeyondTheRule(unittest.TestCase):
         self.assertEqual(still, ())
         self.assertTrue(drawn.intersects(noci('33')))
         self.assertEqual([e.source for e in errors], ['region-layer'])
+        # Its ground error: the layer's measured distance from the cadastre plus the cadastre's own.
+        layer = sources.region_errors.get((version.provision_version_id, 'buffer'))
+        if layer is not None:
+            place = numpy.array([[noci('33').centroid.x, noci('33').centroid.y]])
+            self.assertAlmostEqual(float(errors[0].field.at(place)[0]),
+                                   float(layer.at(place)[0] + sources.cadastral_error.at(place)[0]))
+            self.assertGreater(float(errors[0].field.at(place)[0]), float(layer.at(place)[0]))
 
     @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
     def test_a_unit_placed_wholly_in_the_buffer_is_in_it_beyond_the_stated_band(self):

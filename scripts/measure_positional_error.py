@@ -272,7 +272,9 @@ def layers(args):
                         'method': ("Directed distances sampled every 10 m from the zone's outer limit where the act "
                                    "fixes it by units it places wholly in the zone (the cadastral outline of those "
                                    "units, on land outside the zone) to the layer's outline. A place's error is the "
-                                   f"95th percentile of the samples within {REGION_REACH_M / 1000:g} km of it."),
+                                   f"95th percentile of the samples within {REGION_REACH_M / 1000:g} km of it. "
+                                   "The layer's ground error there is that value plus the cadastre's own ground "
+                                   "error there (triangle inequality)."),
                         'samples': [[round(x), round(y), round(float(d), 1)] for x, y, d in samples],
                         'error_m': {'median': round(float(numpy.median(distances)), 1),
                                     'p95': round(float(numpy.percentile(distances, 95)), 1),

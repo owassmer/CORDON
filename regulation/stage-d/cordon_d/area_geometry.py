@@ -35,8 +35,9 @@ no rule is defined by the annex, by the units it lists.
 Positional error is local and measured (`corpus/sources/areas/geometry.json`,
 `positional-error`): the cadastre's against the Region's surveyed control fixes
 (`cordon_d.area_error`), the Region's layer against the cadastral outline of the units the
-act places wholly, a plant's from its unit. An area supplied to C carries the error of the
-outline near the place C tests.
+act places wholly, a plant's from its unit. The Region's layer's ground error at a place is
+its measured distance from the cadastral outline there plus the cadastre's ground error
+there. An area supplied to C carries the error of the outline near the place C tests.
 """
 from __future__ import annotations
 
@@ -657,6 +658,17 @@ class _ReachField:
         return numpy.array(out)
 
 
+class _GroundField:
+    """The Region's layer's ground error at a place: its measured distance from the cadastral
+    outline there plus the cadastre's own ground error there (the triangle inequality)."""
+
+    def __init__(self, layer, cadastre):
+        self.layer, self.cadastre = layer, cadastre
+
+    def at(self, xy):
+        return self.layer.at(xy) + self.cadastre.at(xy)
+
+
 # --- the operative text ----------------------------------------------------------
 
 _HEADER = re.compile(r'\f?[^\n]*Bollettino Ufficiale della Regione Puglia[^\n]*\n')
@@ -1144,7 +1156,9 @@ def _drawn(sources: Sources, version, role, unplaced):
     if not held:
         return None, unplaced, ()
     drawn = shapely.make_valid(shapely.union_all([u.geometry for u in held]).intersection(geometry))
-    field = sources.region_errors.get((version.provision_version_id, role))
+    layer_error = sources.region_errors.get((version.provision_version_id, role))
+    field = (_GroundField(layer_error, sources.cadastral_error)
+             if layer_error is not None and sources.cadastral_error is not None else None)
     part = ErrorPart('region-layer', shapely.union_all([u.geometry for u in held]).buffer(REGION_STEP_M),
                      None, field)
     return drawn, tuple(u for u in unplaced if u.geometry is None), (part,)
