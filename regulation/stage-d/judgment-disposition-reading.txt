@@ -1,0 +1,72 @@
+Read the supplied complete administrative-court decision from its own text. Return
+only what the decision itself decides, in the JSON schema supplied. Use no outside
+knowledge and no other document. Copy source words exactly; never translate,
+normalize or classify them unless a field asks for a choice.
+
+Every citation names the block number and quotes contiguous words copied exactly
+from that block, at most about 300 characters. Join separate passages of the same
+block with " … " only. A quote that is not in its block makes the whole reading
+unusable. Every other field that copies source words copies them from the block
+its own citation names.
+
+Outcome. The court's own disposition, from the dispositive part (after "P.Q.M."
+or its equivalent in an interim order or decree). literal copies the dispositive
+words that state the outcome (for example "lo accoglie e, per l'effetto, annulla
+gli atti impugnati nei limiti dell'interesse dei ricorrenti e per quanto in
+motivazione", "lo respinge", "dichiara improcedibile il ricorso"); support cites
+the block where they are printed. kind is one choice:
+
+- accoglie: the application on the merits is upheld.
+- accoglie-in-parte: upheld only in part.
+- respinge: rejected on the merits.
+- improcedibile: declared improcedibile (for example "per sopravvenuta carenza di
+  interesse").
+- inammissibile: declared inadmissible.
+- cessata-materia: "cessata materia del contendere".
+- cautelare-accoglie: an interim application is granted, in whole or under a
+  condition the order states.
+- cautelare-respinge: an interim application is refused.
+- interlocutoria: the decision only fixes a hearing, orders an inquiry, postpones
+  or otherwise disposes of nothing on the application.
+- other: anything else; say what in issues.
+
+Acts. List every removal order of the Regione Puglia Osservatorio (or Servizio)
+Fitosanitario that this disposition bears on, whether or not it annuls it: the
+acts challenged in the application and its motivi aggiunti, named by number and
+date. number and adopted_words are copied as printed; year is the four-digit year
+of that adoption date; support cites one block where number and date are printed.
+Acts of other bodies, notes, laboratory reports and the court's own orders are not
+listed.
+
+For each act:
+
+- effect, one choice, as this decision states it for this act: annulled (the
+  decision annuls it, in whole or in part); not-annulled (the decision rejects the
+  challenge to it, or declares the challenge inadmissible, improcedibile or ended);
+  suspended (an interim measure suspends it or its execution, in whole or in part,
+  or conditions it); suspension-refused (an interim measure is refused);
+  no-effect-stated (the decision disposes of nothing about it).
+- scope.kind: whole-act when the effect reaches the whole act; applicants when the
+  decision limits it to the applicants, their interest, their plants or their
+  parcels; other when it states another limit (say what in scope.stated).
+  scope.dispositive copies the limiting words printed in the outcome block ("nei
+  limiti dell'interesse dei ricorrenti"), or is empty. scope.stated lists the
+  passages of the reasons that say what of the act the effect reaches (which
+  plants, trees, parcels or persons), each with its block.
+- applicants: literal copies the applicants' names as one block of the decision
+  prints them (usually the heading, "proposto da ..."), and support cites that
+  block. A printed "-OMISSIS-" is copied as printed. When the decision prints no
+  applicant, literal is empty and support is null.
+- grounds: the passages where the court states why it annuls or suspends the act
+  (for example the proportionality ground for monumental olives), each with its
+  block. Empty when the effect is not annulled or suspended.
+- stated_reason: for improcedibile, cessata-materia or inadmissible outcomes, the
+  passages where the court states why (for example that the plants were removed or
+  the act was withdrawn or replaced), each with its block. Otherwise empty.
+
+A party's claim is not the court's disposition: never fill effect, scope or
+grounds from what a party asks or argues.
+
+Issues. Name every limitation of this reading as a whole: an unreadable or
+conflicting passage, or a disposition whose reach the decision leaves unclear. A
+missing statement is not an issue when the decision simply does not state it.

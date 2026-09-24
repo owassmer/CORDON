@@ -42,5 +42,2279 @@
     "source_locator": "Report page 1 identifies CNR 23/2024 dated 18/03/2024. Publisher search for that cited report reached this determination; the report does not print this URL. Annex 1/C supplies the plant-to-report association needed by the finding identity consumer."
    }
   ]
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2439662/DET_13_27_2_2024.pdf/fe31ba94-c959-b92e-6adc-201aae6b8bc9",
+  "captured_at": "2026-09-14T19:46:33.379651+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-13-2024-FITO-.pdf",
+  "bytes": 2529651,
+  "sha256": "4915eb7cbe0454dfba981ba164efec52a103d6172da6731586cb5c5c8538fcbc"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2473290/DET_52_6_5_2024.pdf/58d5f8bb-804f-0c2b-a4f4-5fa9496cd834",
+  "captured_at": "2026-09-14T19:46:33.384801+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.pdf",
+  "bytes": 21183410,
+  "sha256": "0b3031e28ab1c196401644ac742ba72ccd47022e4ec09c80c7324fff86d4bb0d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2481340/DET_58_16_5_2024.pdf/306180ab-2191-5d02-3d9f-e58d10a43582",
+  "captured_at": "2026-09-14T19:46:33.423942+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-58-2024-FITO-.pdf",
+  "bytes": 1275414,
+  "sha256": "936eb652ee9425e627e00d62b81429ecbafa89e36e3a53515331cb2c8cf5a632"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_63_24_5_2024.pdf/44c73b91-3a4d-e059-8765-0ce31b8a9cb6",
+  "captured_at": "2026-09-14T19:46:33.441393+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-63-2024-FITO-.pdf",
+  "bytes": 7039800,
+  "sha256": "3b5813789b43ef0861c283175ab607fa32cfba7c1d2057a55b291aa8f8097a48"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_74_20_6_2024.pdf/f2e47f81-3c3f-a130-9783-23befeac956a",
+  "captured_at": "2026-09-14T19:46:33.481461+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-74-2024-FITO-.pdf",
+  "bytes": 5833927,
+  "sha256": "44f299b0d9183377a846fd2c6e9125cbbd7d69e2edac29718b3e5112d1b1c321"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2503904/DET_82_9_7_2024.pdf/c3ad3bfe-8a91-27f3-6d57-af159c520e72",
+  "captured_at": "2026-09-14T19:46:33.498620+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-82-2024-FITO-.pdf",
+  "bytes": 3898948,
+  "sha256": "1562cd87658f61de9ffd103ba2eb33cc44fae1d59511f60c3bd03119d02088e9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2509064/DET_96_25_7_2024.pdf/69488d6d-3ef3-7b89-7cca-1cf1c212e5e1",
+  "captured_at": "2026-09-14T19:46:33.528922+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-96-2024-FITO-.pdf",
+  "bytes": 2201223,
+  "sha256": "0124b03173155a8c36a3e0da3bbcbf07285ee3da907869e2235894e23f651e5c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2509064/DET_97_25_7_2024.pdf/845fea47-04f0-e0ca-a6c5-c56ae631f152",
+  "captured_at": "2026-09-14T19:46:33.544070+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-97-2024-FITO-.pdf",
+  "bytes": 4143324,
+  "sha256": "02290c6fa219b23b69bf91396029f4f3b66b4519636ef8fe3cad3714eefac72d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2524651/DET_116_16_9_2024.pdf/ef50662c-2f31-02ad-e8e4-ea1a70ae8028",
+  "captured_at": "2026-09-14T19:46:33.563220+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-116-2024-FITO-.pdf",
+  "bytes": 11095952,
+  "sha256": "c1634b3e15707cf8fbe27f08f33e343de62fd7b7e8c5146fd9a10c11b7e7475c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2545751/DET_138_28_10_2024.pdf/812e064e-ccf7-60dc-a664-806ec0d8011a",
+  "captured_at": "2026-09-14T19:46:33.592883+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-138-2024-FITO-.pdf",
+  "bytes": 7152730,
+  "sha256": "138add2778567999e2852335f6a79469f2677df68891e88ca1af9bbac089b0e5"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2555218/DET_179_3_12_2024.pdf/e17811cd-3b07-258a-c2ee-bf4a38c5904d",
+  "captured_at": "2026-09-14T19:46:33.610632+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-179-2024-FITO-.pdf",
+  "bytes": 3082702,
+  "sha256": "266f46b253898678e209cf66b2afaa8e44d5b10e8b8498c698df77c999306df8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2565745/DET_188_12_12_2024.pdf/efa90488-5fca-c924-645f-deb3f392d404",
+  "captured_at": "2026-09-14T19:46:33.620884+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-188-2024-FITO-.pdf",
+  "bytes": 5898971,
+  "sha256": "882c0020ab2ce0e55c06c9d72b36b3bd0204d02a48b6c35120c81bc050d958cd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2601720/DET_11_5_2_2025.pdf/2cb1e292-fdda-929c-72bc-8697fc99bdcc",
+  "captured_at": "2026-09-14T19:46:33.638741+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-11-2025-FITO-.pdf",
+  "bytes": 639044,
+  "sha256": "c05d3c4d118686a184a804d0048aebc1c1a79f45d8b0464048488cab69d2bff8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2603465/DET_22_15_2_2025.pdf/16df0dec-959b-15a4-c3eb-2d841cd29081",
+  "captured_at": "2026-09-14T19:46:33.644249+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-22-2025-FITO-.pdf",
+  "bytes": 702739,
+  "sha256": "f45ce9bce8a17707e9c5e21c89536a5e3051b7f5b9c69a12efd7ed4fbf358d94"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2619098/DET_43_21_3_2025.pdf/38cfbc36-e103-7cd3-c8e3-06c43323848c",
+  "captured_at": "2026-09-14T19:46:33.647922+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 incorporated cohort; DDS11/2025 and DDS117/2025 corrections; regional register",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-43-2025-FITO-.pdf",
+  "bytes": 3315507,
+  "sha256": "8e90240666712b38ba635d04e195e23df9dd7fcbbf501928090a0ee96041d955"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2664200/DET_117_27_6_2025.pdf/92130dd6-9946-3612-5a65-91b821d1ae87",
+  "captured_at": "2026-09-14T19:46:57.120201+00:00",
+  "kind": "act",
+  "referred_by": "DDS188/2024 and DDS43/2025 annex corrections",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.pdf",
+  "bytes": 1071400,
+  "sha256": "1d2e9b6111cdb33de96f1b1abeb49c1d3ad35019994404a74e59320d7850c2aa"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/426bc4c8-e203-41c7-9b5f-b2731774113f",
+  "captured_at": "2026-09-14T20:01:04.094231+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/b2958e59-d9ad-4fb4-91a1-577d116f6305",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/426bc4c8-e203-41c7-9b5f-b2731774113f",
+  "content_type": "application/octet-stream",
+  "bytes": 22739726,
+  "sha256": "f8a0ac9cfcec014cf53ec6e22954e2475a77d334bb83667fe3e047f2af9e5bf2"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/d0d66a61-b9c8-4de0-93d2-d02794a8ed8e",
+  "captured_at": "2026-09-14T20:01:29.193500+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/623ef680-8fe3-4803-a007-e803654e1dc1",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/d0d66a61-b9c8-4de0-93d2-d02794a8ed8e",
+  "content_type": "application/octet-stream",
+  "bytes": 1639638,
+  "sha256": "dfe5e6335223215e4042a39b9333a03dde415f20bf28ab2f570ec94f9ef2ba7c"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/fb1baa75-101b-454c-ac50-5b5b024eb3d6",
+  "captured_at": "2026-09-14T20:01:32.177491+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/0f5cd32c-d597-4b26-8e7d-720fc00ca145",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/fb1baa75-101b-454c-ac50-5b5b024eb3d6",
+  "content_type": "application/octet-stream",
+  "bytes": 4234178,
+  "sha256": "bedc6cb454aec22945e82ef16ee35fe48f55630559203aa8a08b974d6ec6a71d"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/3451f5ce-7f5f-4c34-90ba-c92fd9263126",
+  "captured_at": "2026-09-14T20:01:38.722655+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/96084a0c-fa06-4d64-81e4-9a78bc2dce1b",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/3451f5ce-7f5f-4c34-90ba-c92fd9263126",
+  "content_type": "application/octet-stream",
+  "bytes": 297333,
+  "sha256": "8ce9f82f3838a8042085f9c87078c15ae9adb4340a6553841ed387a6dd70cf3c"
+ },
+ {
+  "url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/e4836b1c-4538-4e0d-91e0-c05b19f7b686",
+  "captured_at": "2026-09-14T20:01:40.296428+00:00",
+  "kind": "act",
+  "referred_by": "8e959daf9cfe95385fa4e376024918e3353c67575e915e9fae7e2975e9dfac89/9137212d-7bf8-4660-aa30-4734861ede2c",
+  "status": 200,
+  "final_url": "https://albopretorio.akropolis.cloud/albopretorio/api/downloads/e4836b1c-4538-4e0d-91e0-c05b19f7b686",
+  "content_type": "application/octet-stream",
+  "bytes": 3500151,
+  "sha256": "54925eb02e29cb0274354f86fcd0ff79022de3bd98429c19f442895b430116ab"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_11_12_2_2026.pdf/e968fa10-d844-cd1a-0a36-e5dc2127d108",
+  "captured_at": "2026-09-14T20:05:21.815378+00:00",
+  "kind": "act",
+  "referred_by": "DDS22/2025 successor measure; current assignment for the admitted ST1 zones (including later expanded geography)",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-11-2026-FITO-46921ff54da6.pdf",
+  "bytes": 25360861,
+  "sha256": "46921ff54da6868fb14f79243810264a5c67d04c723d4a339050a6939c87c361"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_12_12_2_2026.pdf/aae9a2f5-6563-e0c1-a364-3af8ec7b882e?t=1772722061266&download=true",
+  "captured_at": "2026-09-14T20:05:21.855621+00:00",
+  "kind": "act",
+  "referred_by": "DDS22/2025 successor measure; current assignment for the admitted ST1 zones (including later expanded geography)",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-12-2026-FITO-a5b57a900dcc.pdf",
+  "bytes": 27267469,
+  "sha256": "a5b57a900dcca4f32d8cd634ae5d6984e17dea652835a2391286f8d488a7a360"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_14_12_2_2026.pdf/80533c14-1997-b031-9959-fa2e4ad500fa?t=1772722062332&download=true",
+  "captured_at": "2026-09-14T20:05:21.903640+00:00",
+  "kind": "act",
+  "referred_by": "DDS22/2025 successor measure; current assignment for the admitted ST1 zones (including later expanded geography)",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-14-2026-FITO-e4b09a4fad5c.pdf",
+  "bytes": 8419192,
+  "sha256": "e4b09a4fad5c5d38bd7c7c98b3dda85acd76cf8efd00061095cc685f5252982a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_13_12_2_2026.pdf/15035eea-0970-4957-b4e2-396750640b36",
+  "captured_at": "2026-09-14T20:06:12.881686+00:00",
+  "kind": "act",
+  "referred_by": "BURP18/2026 sibling execution assignments for the ST1 cohort; DDS22/2025 successor",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2746216/DET_13_12_2_2026.pdf/15035eea-0970-4957-b4e2-396750640b36",
+  "content_type": "application/pdf",
+  "bytes": 26841261,
+  "sha256": "7ac5228c2f9b1091aef21c58b71f22261eefac3c8d08fe7247b654425be46001"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1814748/DET_6_8_2_2022.pdf/8d154951-4c81-9436-c3e7-8d59932c2488",
+  "captured_at": "2026-09-14T20:42:17.928204+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2022-00006:case-delta:identity-duty-transfer:v1; REG-PUGLIA-U181-DIR-2022-00006:case-delta:seasonal-no-treatment-judgment:v1; REG-PUGLIA-U181-DIR-2022-00006:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-6-2022-FITO-.pdf",
+  "bytes": 1790561,
+  "sha256": "8810254890c14e1a0b2cdfa54bc82fe5e7c41a0844bcc5e5cdf490193185055a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2551508/DET_165_25_11_2024.pdf/77c34321-bfb7-c5dd-1fc8-50211b09a3bb",
+  "captured_at": "2026-09-14T20:42:17.943355+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-165-2024-FITO-.pdf",
+  "bytes": 2256599,
+  "sha256": "2500ea7aabe86ed07f3be6d9830eb91ebc54b0ffb633b9c021d53bd292c58194"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2787381/DET_63_3_4_2026.pdf/00e2c6c5-ac0d-999f-41a1-33aa6ec28702",
+  "captured_at": "2026-09-14T20:42:17.961501+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement:v1; REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-63-2026-FITO-bd7f7bd2162a.pdf",
+  "bytes": 779652,
+  "sha256": "bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2009961/DET_2_25_1_2023.pdf/1edc4a4a-ab7c-73a5-03f7-7db26346f7e2",
+  "captured_at": "2026-09-14T20:42:17.992459+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1; REG-PUGLIA-U181-DIR-2023-00002:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-2-2023-FITO-78fd95864623.pdf",
+  "bytes": 2937673,
+  "sha256": "78fd9586462370550657a129c069c4acb3cfbf88e3e1392ffbfb4c11cf9556d1",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=78fd9586462370550657a129c069c4acb3cfbf88e3e1392ffbfb4c11cf9556d1"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2159322/DET_45_9_5_2023.pdf/130e8312-7440-ee51-f541-21f0f9de9858",
+  "captured_at": "2026-09-14T20:42:18.037615+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1; REG-PUGLIA-U181-DIR-2023-00045:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.pdf",
+  "bytes": 1316233,
+  "sha256": "8277847ffa75478a80d20e4b9b0d4c9024ffe8b0f7a3206d5565cd398bc17108",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=8277847ffa75478a80d20e4b9b0d4c9024ffe8b0f7a3206d5565cd398bc17108"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2161755/DET_51_19_5_2023.pdf/464d12ec-d0e0-810c-29fe-676eb2bb3194",
+  "captured_at": "2026-09-14T20:42:18.060238+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00051:case-delta:correction-scope-unresolved:v1; REG-PUGLIA-U181-DIR-2023-00051:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-51-2023-FITO-db9ed41fcfb9.pdf",
+  "bytes": 1084403,
+  "sha256": "db9ed41fcfb9f01dcede65d0a101296b22d8de3f1f3cc48c623476eb187ff0cb",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=db9ed41fcfb9f01dcede65d0a101296b22d8de3f1f3cc48c623476eb187ff0cb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2198200/DET_96_28_8_2023.pdf/f5cd4d54-2cd6-c56f-5e11-8b5ea2e35c75",
+  "captured_at": "2026-09-14T20:42:18.074541+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork:v1; REG-PUGLIA-U181-DIR-2023-00096:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-96-2023-FITO-dd5bebb3616b.pdf",
+  "bytes": 1298144,
+  "sha256": "dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2453368/DET_27_8_4_2024.pdf/b1310042-08ce-b608-1377-716943bdedb7?t=1712848659124&version=1.0",
+  "captured_at": "2026-09-14T20:42:18.135073+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1; REG-PUGLIA-U181-DIR-2024-00027:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/DDS-27-2024-standard-art13.pdf",
+  "bytes": 1293108,
+  "sha256": "4fdc0e65e31c39b98008acfcbec06cd0180127af6ee7b3d68b976e9865e83d0c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2547230/DET_151_14_11_2024.pdf/16962fd7-32d6-794c-e108-9d94139c2540",
+  "captured_at": "2026-09-14T20:42:18.177459+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00151:case-delta:post-m5-stale-article7-text:v1; REG-PUGLIA-U181-DIR-2024-00151:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-151-2024-FITO-.pdf",
+  "bytes": 2359945,
+  "sha256": "d1087498afc5e6e7f6f59aa93a1cc5f36f68c32145ff06646ab4e36609105de8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2662768/DET_115_25_6_2025.pdf/2013e7e0-c2b0-46c2-90e9-e92506f2545a",
+  "captured_at": "2026-09-14T20:42:18.203600+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2025-00115:case-delta:post-m5-stale-article7-text:v1; REG-PUGLIA-U181-DIR-2025-00115:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-115-2025-FITO-ed7ecbb460e2.pdf",
+  "bytes": 1138714,
+  "sha256": "ed7ecbb460e2d09c136b76c87319931aeee729dc91d82a6ed55323891a91f9e5",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=ed7ecbb460e2d09c136b76c87319931aeee729dc91d82a6ed55323891a91f9e5"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2753944/DET_35_9_3_2026.pdf/288791bb-8459-97e5-8c49-4c37c19eedc5",
+  "captured_at": "2026-09-14T20:42:18.223259+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2026-00035:case-delta:post-m5-stale-article7-text:v1; REG-PUGLIA-U181-DIR-2026-00035:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-35-2026-FITO-76d363b7ece1.pdf",
+  "bytes": 2376320,
+  "sha256": "76d363b7ece15145f9892f12bcad90d9dd1e7632c2516597db78185bb8b655f2",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=76d363b7ece15145f9892f12bcad90d9dd1e7632c2516597db78185bb8b655f2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1763690/DET_135_9_11_2021.pdf/47297e08-e7e7-4652-c1fe-a72cadb04b02",
+  "captured_at": "2026-09-14T20:42:18.258970+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2021-00135:case-delta:seasonal-no-treatment-judgment:v1; REG-PUGLIA-U181-DIR-2021-00135:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-135-2021-FITO-.pdf",
+  "bytes": 3840269,
+  "sha256": "cba7890acf17bfe84beacb7449e51149f67e77f6a0efb58da6fb57aab7987ab2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1814748/DET_4_8_2_2022.pdf/48194c9f-5f4f-b47a-ff6f-3b7389c45b62",
+  "captured_at": "2026-09-14T20:42:18.320843+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict:v1; REG-PUGLIA-U181-DIR-2022-00004:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.pdf",
+  "bytes": 2589745,
+  "sha256": "469f59fbd0a4848825e79bb0b316cc6d9872d24b19d0319eecfdabb7499f805f"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2716376/DET_201_24_11_2025.pdf/2baae0d7-98f1-b793-553a-22e91831b116",
+  "captured_at": "2026-09-14T20:42:18.371458+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority:v1; REG-PUGLIA-U181-DIR-2025-00201:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-201-2025-FITO-11d2e495c708.pdf",
+  "bytes": 2732390,
+  "sha256": "11d2e495c7086656af827c7910eb7f7232e708c69886869a883f6346e5c6b5aa",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=11d2e495c7086656af827c7910eb7f7232e708c69886869a883f6346e5c6b5aa"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2547763/DET_147_8_11_2024.pdf/d0ffb356-bb3c-9140-c3be-5e7d5157c08f",
+  "captured_at": "2026-09-14T20:42:18.420683+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2024-00147:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-147-2024-FITO-.pdf",
+  "bytes": 9206296,
+  "sha256": "4f71105dde5944ffa76f5967e155f69665af8a16c576e7d2e1dc713d87672173"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2703581/DET_173_24_10_2025.pdf/37d75313-0cd4-e40c-3606-a48e1dc4524f?t=1763038672509&version=1.0",
+  "captured_at": "2026-09-14T20:42:18.521607+00:00",
+  "kind": "act",
+  "referred_by": "REG-PUGLIA-U181-DIR-2025-00173:case-delta:noncommencement-enforcement:v1",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/DDS-173-2025-standard-art7.pdf",
+  "bytes": 3711033,
+  "sha256": "e727cde2ec8639655cd35ce77a62619b947d033f09ae363f675f15f42618126b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2514548/DET_108_16_8_2024.pdf/8551bd21-105b-c34a-f588-c9915e9eb2a8",
+  "captured_at": "2026-09-14T20:42:18.653092+00:00",
+  "kind": "act",
+  "referred_by": "Capurso native register 306336cb7351e151a29fa8738f81a8694e35b54d6eeb50b5273aaacc5bbfee63: content DDS108/2024; operative-act and administrative-event consumers",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-108-2024-FITO-.pdf",
+  "bytes": 1006182,
+  "sha256": "47b107a6525606934c79125d5b4f565d7193ab92aef801b80b21d25bc3a51a3d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1755327/DET_129_4_11_2021.pdf/b5c10864-c709-2e99-1946-170d67d890ea",
+  "captured_at": "2026-09-14T20:42:18.702236+00:00",
+  "kind": "act",
+  "referred_by": "DDS6/2022 original heading explicitly names corrected DDS129/2021; operative-act correction scope",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-129-2021-FITO-.pdf",
+  "bytes": 13312360,
+  "sha256": "aa4a6a625b06bba23f277c057a428e240f600edf3767d5ddcb194f3de7d9e5ac"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_94_26_5_2026.pdf/18bb7e3d-99b0-b19c-8a36-fb13b9441346",
+  "captured_at": "2026-09-14T21:04:03.347246+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-94-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-94-2026-FITO-9ffa2fce8222.pdf",
+  "bytes": 1364202,
+  "sha256": "9ffa2fce8222d7208d1b6354ba810296a286630cfed04593df6e89450fd8f2e8",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=9ffa2fce8222d7208d1b6354ba810296a286630cfed04593df6e89450fd8f2e8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2809915/DET_103_9_6_2026.pdf/3b39a450-92a8-1034-c61a-db59e10b9c7b",
+  "captured_at": "2026-09-14T21:04:03.354539+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-103-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-103-2026-FITO-36f48ba0eae7.pdf",
+  "bytes": 1095010,
+  "sha256": "36f48ba0eae749a4487eebe5ac00fbbc4e60549f8fa01b3585fdd54f4f8a3bb3",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=36f48ba0eae749a4487eebe5ac00fbbc4e60549f8fa01b3585fdd54f4f8a3bb3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2815387/DET_114_14_7_2026.pdf/65be6d9e-9546-224b-a15d-f445723f9937",
+  "captured_at": "2026-09-14T21:04:03.359964+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-114-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-114-2026-FITO-eaa9f80d6d01.pdf",
+  "bytes": 1204632,
+  "sha256": "eaa9f80d6d016c351e1c614011d60f3aea3ae6a83cae49faf6f894ef6da482bb",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=eaa9f80d6d016c351e1c614011d60f3aea3ae6a83cae49faf6f894ef6da482bb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2758021/DET_55_30_3_2026.pdf/621093e3-1781-87a2-a2b5-2a8162116963",
+  "captured_at": "2026-09-14T21:04:03.363988+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-55-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-55-2026-FITO-c04c38b150c9.pdf",
+  "bytes": 1160073,
+  "sha256": "c04c38b150c9f10481594ad859cb0b399476d21d9b54fa115fb542eb52c7949d",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=c04c38b150c9f10481594ad859cb0b399476d21d9b54fa115fb542eb52c7949d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2809915/DET_102_9_6_2026.pdf/e0166510-3f99-b289-56e1-0a22ecf7315d",
+  "captured_at": "2026-09-14T21:04:03.367849+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-102-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-102-2026-FITO-0b61c4166b22.pdf",
+  "bytes": 1639241,
+  "sha256": "0b61c4166b2227556fb6f499eb42b856c435a27e310d3337d69b3a2e6cd64f78",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=0b61c4166b2227556fb6f499eb42b856c435a27e310d3337d69b3a2e6cd64f78"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2809915/DET_104_9_6_2026.pdf/bf85ce5d-350c-3633-9d18-6225fd49ed73",
+  "captured_at": "2026-09-14T21:04:03.373836+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-104-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-104-2026-FITO-c9a00d310b51.pdf",
+  "bytes": 1053819,
+  "sha256": "c9a00d310b516711de8cbe789ffc8a72e3b57d00bc40510dff19251900b8dfa9",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=c9a00d310b516711de8cbe789ffc8a72e3b57d00bc40510dff19251900b8dfa9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_93_26_5_2026.pdf/02b94ece-b0a8-7c2c-610b-d1c00bfef3af",
+  "captured_at": "2026-09-14T21:04:03.379514+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo capture 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3; explicit adoption identity and removal subject DET-93-2026-FITO; operative-act/case-prescription discovery, meaning held",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-93-2026-FITO-1aff76013b66.pdf",
+  "bytes": 1332369,
+  "sha256": "1aff76013b663e4fe47b1319d500b0701667ac45f989d34f3a54593a92151e40",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=1aff76013b663e4fe47b1319d500b0701667ac45f989d34f3a54593a92151e40"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_95_26_5_2026.pdf/d9976a2f-2974-507e-300e-834c3f48718b",
+  "captured_at": "2026-09-14T21:04:33.351149+00:00",
+  "kind": "act",
+  "referred_by": "Regional Albo 19eb87d31ce2f7cdaebfb736de43a60010d8856cc8d37d374414c0215243f8f3 register 5906/2026; archive hash-matched original not located in regional PDF directory; operative-act discovery, meaning held",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2799989/DET_95_26_5_2026.pdf/d9976a2f-2974-507e-300e-834c3f48718b",
+  "content_type": "application/pdf",
+  "bytes": 3515327,
+  "sha256": "0bafd5f8bf9291fd7c94db1f0cc914eb837d234bc1566ef716e8e1da021469d0",
+  "retained_acquisition_record": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/foundry-instrument-media-items.csv#sha256=0bafd5f8bf9291fd7c94db1f0cc914eb837d234bc1566ef716e8e1da021469d0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2187483/DET_82_26_7_2023.pdf/447c18b7-97ad-98ce-aca0-95cf9a2395ff",
+  "captured_at": "2026-09-14T21:21:14.946404+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-82-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-82-2023-FITO-832045ecbd08.pdf",
+  "bytes": 1192834,
+  "sha256": "832045ecbd08ddd50eaa3e8155050efbab32c4912275066655f8d29e6a87df1d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2695065/DET_162_3_10_2025.pdf/3824527e-ff46-abf4-eb5a-003efbbde832",
+  "captured_at": "2026-09-14T21:21:14.954775+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-162-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-162-2025-FITO-15f2fecdc908.pdf",
+  "bytes": 1118190,
+  "sha256": "15f2fecdc9081180db660bb8bfce2b86ed049451b09b27344f39dea26ebb5de0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1976099/DET_119_14_10_2022.pdf/a553c110-9fb2-477f-c766-9455bf66856a",
+  "captured_at": "2026-09-14T21:21:14.961261+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-119-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-119-2022-FITO-42e52f0d0a1d.pdf",
+  "bytes": 2719894,
+  "sha256": "42e52f0d0a1de5167c909487cfe711d551261121ce4225a89be4e022535670f0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2180371/DET_71_6_7_2023.pdf/4145bcaf-44c3-aab4-9af9-566ca097f268",
+  "captured_at": "2026-09-14T21:21:14.973906+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-71-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-71-2023-FITO-5ffd886a8cdc.pdf",
+  "bytes": 1866379,
+  "sha256": "5ffd886a8cdcc55d679494aaa1caa551c075de0733e74deede39bba10978c2c4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2174824/DET_66_22_6_2023.pdf/010a3562-b6b7-ee6e-0dd1-ab2400c4d415",
+  "captured_at": "2026-09-14T21:21:14.981926+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-66-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-66-2023-FITO-aaf9fbc95a28.pdf",
+  "bytes": 1526783,
+  "sha256": "aaf9fbc95a284ad0ae017c478eb49de74f3970982dddf0a2566f7b4e9c9b1dcb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2721215/DET_218_10_12_2025.pdf/db00d390-37bc-64ab-2881-c850079efc50",
+  "captured_at": "2026-09-14T21:21:14.987827+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-218-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-218-2025-FITO-7564320ec7ca.pdf",
+  "bytes": 3003271,
+  "sha256": "7564320ec7cae5323e7057da6a9e0f9703c2671559d8056161136e673422ccfa"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1974289/DET_114_5_10_2022.pdf/d6085304-e301-e2aa-e9c9-45b35c74c40c",
+  "captured_at": "2026-09-14T21:21:14.997974+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-114-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-114-2022-FITO-6513b9657467.pdf",
+  "bytes": 5236392,
+  "sha256": "6513b965746777657f5a847bb5e9c5cce0ca8a2d8d6c3933419904aafce791fb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2670468/DET_135_24_7_2025.pdf/5b9712d5-d31b-a8fb-305a-0910d94056ae",
+  "captured_at": "2026-09-14T21:21:15.021290+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-135-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-135-2025-FITO-608bde187e46.pdf",
+  "bytes": 3945356,
+  "sha256": "608bde187e4601b2cd0ff3f604009bef28e033df34056fe70999909738168fae"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2208654/DET_106_26_9_2023.pdf/c59f4600-6716-97a4-312d-de2545190d8d",
+  "captured_at": "2026-09-14T21:21:15.035231+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-106-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-106-2023-FITO-cdeeec689511.pdf",
+  "bytes": 2431423,
+  "sha256": "cdeeec689511bcebf1eee30a484400cf55dfea578c87b23f0e728c2ac4b6c210"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1983908/DET_126_3_11_2022.pdf/c54426e1-9c0d-3e68-3a4c-e0169175fab5",
+  "captured_at": "2026-09-14T21:21:15.046106+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-126-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-126-2022-FITO-b37c5c1e2dad.pdf",
+  "bytes": 3439030,
+  "sha256": "b37c5c1e2dad92a07c02a6b3dd471f7c868015ef2c3019d9627e854938b0a621"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2232826/DET_138_1_12_2023.pdf/ea2dcf06-580a-8901-9ffc-96a9381ef2c6",
+  "captured_at": "2026-09-14T21:21:15.059029+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-138-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-138-2023-FITO-cdbf4ebc2467.pdf",
+  "bytes": 2318640,
+  "sha256": "cdbf4ebc2467e7b38bfcfb807371402789f26f0e9ff8c9a2c2dd32cb319733ac"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2664200/DET_123_2_7_2025.pdf/4cccf136-8a96-84ea-0859-9b02680b83c2",
+  "captured_at": "2026-09-14T21:21:15.066418+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-123-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-123-2025-FITO-2a1e5b6e97b2.pdf",
+  "bytes": 1436189,
+  "sha256": "2a1e5b6e97b24899785565872d1a8be3d45df07c2bd9588e402fc715c077aed3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2753944/DET_37_9_3_2026.pdf/ed4e67ca-d6ef-01fa-709e-770152c40a10",
+  "captured_at": "2026-09-14T21:21:15.073363+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-37-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-37-2026-FITO-090b9f12b662.pdf",
+  "bytes": 2141019,
+  "sha256": "090b9f12b662a2eafde112256bba6fb385bd354bcb77297aab8b2c1eac4b18cd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1979370/DET_122_21_10_2022.pdf/ba1faee3-8c30-2316-6a22-2be529282f25",
+  "captured_at": "2026-09-14T21:21:15.079482+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-122-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-122-2022-FITO-797b0f7dc106.pdf",
+  "bytes": 1681914,
+  "sha256": "797b0f7dc106c699111bb4d672489a45e12ee1af2572e06a0373e7f1102b83bf"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2218624/DET_114_16_10_2023.pdf/3dfc5756-2eb5-06c0-e5a5-0579a35624cf",
+  "captured_at": "2026-09-14T21:21:15.083274+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-114-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-114-2023-FITO-150c676a7bd7.pdf",
+  "bytes": 4298075,
+  "sha256": "150c676a7bd70eb97eff250fbad3e7449ce80baa29120dbaf58a1dbc09211fde"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2218624/DET_115_17_10_2023.pdf/fb73d949-169a-d3a5-8d21-cf93248e00e9",
+  "captured_at": "2026-09-14T21:21:15.094682+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-115-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-115-2023-FITO-3605a828fee1.pdf",
+  "bytes": 4071958,
+  "sha256": "3605a828fee12f4fc719ad3f0a7e7a2ba1a39226486b5c9b5dfa813fe18c5c3d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2150059/DET_40_14_4_2023.pdf/2b2d3166-ac38-8ef5-108b-eadf8a5a1d6a",
+  "captured_at": "2026-09-14T21:21:15.107092+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-40-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-40-2023-FITO-c04ee5a951ee.pdf",
+  "bytes": 5712473,
+  "sha256": "c04ee5a951ee6b0ef7a90cf2745fa1d689a54fa1b29b8187739864bf70b9b98c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1972429/DET_109_29_9_2022.pdf/07c5f3ea-9b66-7e79-bf5a-35472a28564a",
+  "captured_at": "2026-09-14T21:21:15.304791+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-109-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-109-2022-FITO-7f77bcf82edd.pdf",
+  "bytes": 5673439,
+  "sha256": "7f77bcf82edd155c4d1fba6e2bbbc01309f2895c13e4dcb587f7e2d68d0fdd25"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2741168/DET_8_2_2_2026.pdf/39ee1915-3276-3737-f04e-a1b98bfad2ba",
+  "captured_at": "2026-09-14T21:21:15.335917+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-8-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-8-2026-FITO-9ad642da3bb4.pdf",
+  "bytes": 1672194,
+  "sha256": "9ad642da3bb489f350fccab6f3fddda94765d5b2736b49a36201b3d77aa638c9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2723115/DET_233_16_12_2025.pdf/38d10e71-c0df-7901-b420-93b233f6ea42",
+  "captured_at": "2026-09-14T21:21:15.342867+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-233-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-233-2025-FITO-32f9edfd9e78.pdf",
+  "bytes": 1598620,
+  "sha256": "32f9edfd9e7886c78a7ceba5a6e7d19cc59db8f819c6a19ea7d745eefd7689ab"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1972429/DET_108_29_9_2022.pdf/ec8030ba-b16a-ed63-e720-24f319cb1e05",
+  "captured_at": "2026-09-14T21:21:15.353706+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-108-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-108-2022-FITO-cb0c7fc8829b.pdf",
+  "bytes": 2874183,
+  "sha256": "cb0c7fc8829b3747fa96c7d037013b8322ec58d13110ddacf39cc3f2cb72ed5e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2180371/DET_72_6_7_2023.pdf/c1213630-6de2-df77-4d1b-dd0f89d42301",
+  "captured_at": "2026-09-14T21:21:15.371947+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-72-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-72-2023-FITO-2e9f5da11200.pdf",
+  "bytes": 1824643,
+  "sha256": "2e9f5da112001a3344a9b9c46317326a2b37104aa3313d5cf5df827bf405f230"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2669152/DET_129_14_7_2025.pdf/3ddc14a6-171b-0ff3-54da-6214f0c67306",
+  "captured_at": "2026-09-14T21:21:15.381542+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-129-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-129-2025-FITO-81c3c9c76803.pdf",
+  "bytes": 1262442,
+  "sha256": "81c3c9c76803ca16c76e34543bb8b7c86608b1f527195ec369ccf29df34cd3ae"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2172546/DET_62_13_6_2023.pdf/a55def56-d5c1-c6b3-6898-c6a58072f34c",
+  "captured_at": "2026-09-14T21:21:15.388960+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-62-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-62-2023-FITO-b8ec8ad1e685.pdf",
+  "bytes": 1059133,
+  "sha256": "b8ec8ad1e685dbdab84e620599d9d15dc0922b890d5ad2a9c46ee6f9d869787e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2723115/DET_232_16_12_2025.pdf/5a271d9f-2f0b-146c-b72b-fa6954b9a3d0",
+  "captured_at": "2026-09-14T21:21:15.396085+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-232-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-232-2025-FITO-5d08dcc00883.pdf",
+  "bytes": 1462111,
+  "sha256": "5d08dcc00883b27f666d6690878321ea2f869e3f1c8e1734ab261b6719f4ce0e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1967425/DET_101_14_9_2022.pdf/05b55010-288f-cb2c-1477-ec32ea7467df",
+  "captured_at": "2026-09-14T21:21:15.403673+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-101-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-101-2022-FITO-a9216671420d.pdf",
+  "bytes": 2754189,
+  "sha256": "a9216671420d322c52b5a7133af7bd3776591338ed2d66fa6da32284de3cb0f5"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2225745/DET_119_8_11_2023.pdf/f22247cf-4bd5-695f-0bfd-e8d055717c4d",
+  "captured_at": "2026-09-14T21:21:15.418226+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-119-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-119-2023-FITO-1edbf64f6616.pdf",
+  "bytes": 6131619,
+  "sha256": "1edbf64f6616a93bb97ef4947f769fe7d44c911c324d8fbbc40ad969e16ed80c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1972429/DET_105_27_9_2022.pdf/ce0bc130-7150-3b9d-db92-8f37e4d01847",
+  "captured_at": "2026-09-14T21:21:15.444620+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-105-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-105-2022-FITO-974a4ec6033e.pdf",
+  "bytes": 6348899,
+  "sha256": "974a4ec6033ec44e35374aa3030f78372032dd1f2ec3746ecd4a40a844c62ed6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2753944/DET_36_9_3_2026.pdf/75adbe02-02a3-73fb-544a-477ae0585a04",
+  "captured_at": "2026-09-14T21:21:15.476638+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-36-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-36-2026-FITO-309919dadd68.pdf",
+  "bytes": 3060571,
+  "sha256": "309919dadd6852e4e22b5ea4c063ab262ac57b671fcbe1ecf4481b0a0e04aed5"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2180371/DET_73_6_7_2023.pdf/8da0c64e-1585-2cb0-9cdd-0123c5919927",
+  "captured_at": "2026-09-14T21:21:15.490239+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-73-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-73-2023-FITO-718c9ee7e5d2.pdf",
+  "bytes": 1409640,
+  "sha256": "718c9ee7e5d2470985f13f407543e649795d823ae15b07f2b197559271804be9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2177352/DET_70_30_6_2023.pdf/70cbec3b-1c5e-5413-b987-c64c250183bf",
+  "captured_at": "2026-09-14T21:21:15.499048+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-70-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-70-2023-FITO-cc81bb317a23.pdf",
+  "bytes": 1476402,
+  "sha256": "cc81bb317a2310c058b11252de0e2f95bdc0f60522a44d1ccec5934fea43e251"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2163110/DET_55_29_5_2023.pdf/7be63e0a-02ba-08cf-d245-1bb4977ae9e0",
+  "captured_at": "2026-09-14T21:21:15.506443+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-55-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-55-2023-FITO-c444535ea6bb.pdf",
+  "bytes": 1090757,
+  "sha256": "c444535ea6bbe2ef226de77b2661acd64ec6ff49fbc36b4953644744f132daf8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2001006/DET_143_22_12_2022.pdf/f587e5c0-ed7b-1813-15a3-8330557ad98e",
+  "captured_at": "2026-09-14T21:21:15.514140+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-143-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-143-2022-FITO-8f86b471f000.pdf",
+  "bytes": 1732930,
+  "sha256": "8f86b471f0002cd4ed78c93b795e442a6beee910bc7253d3a385f05ce92c8186"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2232826/DET_129_16_11_2023.pdf/e57d39a2-c0ad-647c-e77d-d8cbdce7abd0",
+  "captured_at": "2026-09-14T21:21:15.522850+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-129-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-129-2023-FITO-070a8639e975.pdf",
+  "bytes": 1799977,
+  "sha256": "070a8639e9753368ae1e487fe3b0a8232cfa9697ac19cb0967a56240c18a5c8a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2180371/DET_74_6_7_2023.pdf/17bbd680-4489-4811-c612-79fd6f060a1c",
+  "captured_at": "2026-09-14T21:21:15.535682+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-74-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-74-2023-FITO-2c23f86b8aab.pdf",
+  "bytes": 1008081,
+  "sha256": "2c23f86b8aab19e9a78b5abfbf99ab6a6bf2c625e5697f019bc3f8830250f238"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2664200/DET_122_2_7_2025.pdf/d60bb255-af39-afc6-b23d-ad1b6730154f",
+  "captured_at": "2026-09-14T21:21:15.544157+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-122-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-122-2025-FITO-5a50b9d7a6a9.pdf",
+  "bytes": 1107353,
+  "sha256": "5a50b9d7a6a98b899454d947a923cefc6b8f4f8e904844d1c4d6a42836bc5b02"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2218624/DET_113_16_10_2023.pdf/dd7a8010-9369-290e-9280-77bf0b1c2f63",
+  "captured_at": "2026-09-14T21:21:15.550771+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-113-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-113-2023-FITO-dd2887bee294.pdf",
+  "bytes": 2299383,
+  "sha256": "dd2887bee294634c1a8a21730fd910abcdae0ff41f90c29c5af45c9eaae8d338"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2142680/DET_20_13_3_2023.pdf/81dba076-0a1e-5a7b-ca7e-7f6adfe5d4ba",
+  "captured_at": "2026-09-14T21:21:15.566953+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-20-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-20-2023-FITO-beddd92ce454.pdf",
+  "bytes": 2132537,
+  "sha256": "beddd92ce4545f5c16f89fd11bb44e5a3d8d14825c761a33490a12d7a0d42fd6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2678252/DET_151_20_8_2025.pdf/1d4e13fd-df1f-c940-a603-a17372914d6e",
+  "captured_at": "2026-09-14T21:21:15.579778+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-151-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-151-2025-FITO-1a103b110695.pdf",
+  "bytes": 8375461,
+  "sha256": "1a103b11069516e43fed9515f627edd0ee0e3bf895d32466c47261aac7b6da2e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2228006/DET_124_15_11_2023.pdf/919705f6-1bbc-c9d7-2446-224aa0dc6b68",
+  "captured_at": "2026-09-14T21:21:15.617364+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-124-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-124-2023-FITO-d79ed2678b0c.pdf",
+  "bytes": 3253463,
+  "sha256": "d79ed2678b0c7c04f94f15e0575821339981bfbff741d93d1d3903614719a9d3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2662768/DET_114_25_6_2025.pdf/b4ef9c01-39ce-6700-d866-cd655a77c1c7",
+  "captured_at": "2026-09-14T21:21:15.637323+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-114-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-114-2025-FITO-f1de3913c7a0.pdf",
+  "bytes": 1446399,
+  "sha256": "f1de3913c7a04cc2c1592427d68f595068dbc7e7f3bf1c64f7a1637095730a2d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1976099/DET_120_14_10_2022.pdf/b0924148-a8ef-f7a6-63c6-f2fc897f23b0",
+  "captured_at": "2026-09-14T21:21:15.646135+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-120-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-120-2022-FITO-f7bebb75bef5.pdf",
+  "bytes": 1711108,
+  "sha256": "f7bebb75bef55cc652475146ea08071338132b8c8fffc228c8360b874f4b78f0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2150059/DET_39_14_4_2023.pdf/2b86be86-6f68-1dcf-ec30-a8f65e51e82a",
+  "captured_at": "2026-09-14T21:21:15.652602+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-39-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-39-2023-FITO-f086cc4c4162.pdf",
+  "bytes": 6927126,
+  "sha256": "f086cc4c416261e45baeb419a8c44596554d8b6200d187084355946451b1a59b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1974289/DET_113_5_10_2022.pdf/9ae32e7c-8036-d5e9-531f-7ba2c5768d70",
+  "captured_at": "2026-09-14T21:21:15.673468+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-113-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-113-2022-FITO-218090cd0e47.pdf",
+  "bytes": 2641684,
+  "sha256": "218090cd0e4744be2a3bd4e3205ee234162e6a5d6cc170270c1081f0c3e65b27"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2165761/DET_59_1_6_2023.pdf/16144243-4744-dac3-b734-1646c834f9e4",
+  "captured_at": "2026-09-14T21:21:15.682914+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-59-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-59-2023-FITO-e35b5d223c61.pdf",
+  "bytes": 2333969,
+  "sha256": "e35b5d223c61e68e7c9d9e29f8bb8345bbd93e9e59fc0a33c9ff6b55c999a6a0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1972429/DET_106_27_9_2022.pdf/7b72522d-6e6b-9050-ce67-00fbad25b9fb",
+  "captured_at": "2026-09-14T21:21:15.690064+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-106-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-106-2022-FITO-6c89145bb005.pdf",
+  "bytes": 2776923,
+  "sha256": "6c89145bb0058d19d3c0c8be7d2674b239e17e3eba52585ddcd4dd9269452c27"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2174824/DET_68_23_6_2023.pdf/320c8add-e6f9-b922-5866-6768543bb5af",
+  "captured_at": "2026-09-14T21:21:15.699101+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-68-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-68-2023-FITO-11a6cd3543dc.pdf",
+  "bytes": 3826054,
+  "sha256": "11a6cd3543dcf975c2dee86d5cd342511d12db245b47f54a1789ba5488ff8164"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2732145/DET_6_19_1_2026.pdf/daa8bf9e-ee11-342e-1d87-4945d7233a97",
+  "captured_at": "2026-09-14T21:21:15.716473+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-6-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-6-2026-FITO-1e196f5cb10c.pdf",
+  "bytes": 2507097,
+  "sha256": "1e196f5cb10c2415d6a5f3ae95c83e67c38852cd9ecb1a24c9c1cb6457eb943b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1967425/DET_99_14_9_2022.pdf/1bdf89a8-0ae6-dc39-fadf-a18948900102",
+  "captured_at": "2026-09-14T21:21:15.744258+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-99-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-99-2022-FITO-46b041b7cc5f.pdf",
+  "bytes": 3706995,
+  "sha256": "46b041b7cc5fa10dfc21f86023ed429763bb40a7b4f5b1d2b65d7386d5821403"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2678252/DET_152_20_8_2025.pdf/ca28a84f-fe67-ba70-5f16-411b54914186",
+  "captured_at": "2026-09-14T21:21:15.761022+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-152-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-152-2025-FITO-a378f1230c69.pdf",
+  "bytes": 2436219,
+  "sha256": "a378f1230c696ee41a259f75beafeda96ec1aa4c994fa95fced99023200a15a6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2184713/DET_76_18_7_2023.pdf/fa2700e5-3680-20f1-9b97-3c52d4ade5f3",
+  "captured_at": "2026-09-14T21:21:15.773844+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-76-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-76-2023-FITO-c052cd5b7e6d.pdf",
+  "bytes": 1870562,
+  "sha256": "c052cd5b7e6d961ac9ec2fb325dd232e0b364fc5afc101a0dcf6828a39cb9ae7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2678252/DET_150_19_8_2025.pdf/8d24a364-2164-bd6e-5780-ca0e9334b79f",
+  "captured_at": "2026-09-14T21:21:15.783875+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-150-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-150-2025-FITO-569c477c0daa.pdf",
+  "bytes": 1207158,
+  "sha256": "569c477c0daab159bcaf1e66ee391042e97d2762330bd733ffab37474c38a6a1"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2737254/DET_7_22_1_2026.pdf/a05f4158-e956-176e-ebf0-339c76d56730",
+  "captured_at": "2026-09-14T21:21:15.790458+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-7-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-7-2026-FITO-7195e96a1170.pdf",
+  "bytes": 1578698,
+  "sha256": "7195e96a11700fb0244c18cb2c63dd3b96738bdb7b5e5c08981c61980d66a08c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1972429/DET_107_28_9_2022.pdf/fce0f7ff-c338-e984-0a6c-d9177c776b64",
+  "captured_at": "2026-09-14T21:21:15.829305+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-107-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-107-2022-FITO-0fc2baa84628.pdf",
+  "bytes": 3023837,
+  "sha256": "0fc2baa84628d2005cb60c701cf0c1e91c3802c35069702df4eeb01eff68b5c7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1976099/DET_117_10_10_2022.pdf/df51ec9e-5841-4158-859c-7fe0dfe21d02",
+  "captured_at": "2026-09-14T21:21:15.842194+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-117-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-117-2022-FITO-1c452d06928d.pdf",
+  "bytes": 1390097,
+  "sha256": "1c452d06928dda7ba84b773a58d14e782b999cf7bfe61a98d20e0fc05205d2c3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2012365/DET_5_31_1_2023.pdf/7f48bec9-85d0-8b99-a4fd-137ced70a95b",
+  "captured_at": "2026-09-14T21:21:15.848412+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-5-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-5-2023-FITO-35d6a01b6e4b.pdf",
+  "bytes": 2974478,
+  "sha256": "35d6a01b6e4b773c48ef31f9335d7ab290b4a228bfe9990cdc1e526d729e0c93"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2678252/DET_148_13_8_2025.pdf/9877b26b-fa95-ff26-568e-0fd0d2ef3dfd",
+  "captured_at": "2026-09-14T21:21:15.859576+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-148-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-148-2025-FITO-01d1f001b731.pdf",
+  "bytes": 2805649,
+  "sha256": "01d1f001b7313bc84dc16e2b9bffcc65cc8e8e04305cc52ddc7da035f342f9b6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1967425/DET_100_14_9_2022.pdf/9b7fbf03-c5ff-707f-adeb-b9115b5b1c67",
+  "captured_at": "2026-09-14T21:21:15.871625+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-100-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-100-2022-FITO-a3d3bec4486b.pdf",
+  "bytes": 1701746,
+  "sha256": "a3d3bec4486b42904bd6df919dedf472e38bb46e9b9cb37a8cd16a6ab31f603a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2662768/DET_116_26_6_2025.pdf/08477943-7c93-5d21-8089-8efad0ebc9e4",
+  "captured_at": "2026-09-14T21:21:15.879804+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-116-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-116-2025-FITO-4d8c2b4eda35.pdf",
+  "bytes": 1599040,
+  "sha256": "4d8c2b4eda35b6533ba728a85b7b9a8db200884ee16c88199d3d8470d255e3cd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2725188/DET_238_22_12_2025.pdf/8d1d1072-5048-b77b-0de3-ed78b0b074dc",
+  "captured_at": "2026-09-14T21:21:15.887175+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-238-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-238-2025-FITO-babbf64a8a58.pdf",
+  "bytes": 1262843,
+  "sha256": "babbf64a8a58218883f305e0cff8152b1dab1fefe57bf71615306a4c204ac082"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2735532/DET_3_12_1_2026_FITO.pdf/e5f3a8ea-c365-1b97-514a-929997c769aa",
+  "captured_at": "2026-09-14T21:21:15.893913+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-3-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/DDS-3-2026-standard-art7.pdf",
+  "bytes": 1261323,
+  "sha256": "aa98c288b761055f4da4be515ea2c77883bb590185f0fe10149f59e4800af057"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2758021/DET_51_24_3_2026.pdf/82d3ce9e-e279-589f-a636-fcde5d7c4b63",
+  "captured_at": "2026-09-14T21:21:15.902675+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-51-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-51-2026-FITO-01735d4ef68c.pdf",
+  "bytes": 4089903,
+  "sha256": "01735d4ef68c53c9fa3b35b29a702987f6c43264dcd3f1f22cd2084340d88e7b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2753944/DET_38_9_3_2026.pdf/0551bee2-e0fe-86f9-44ad-fefde5773653",
+  "captured_at": "2026-09-14T21:21:15.920685+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-38-2026-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-38-2026-FITO-26fb5f684cca.pdf",
+  "bytes": 1957817,
+  "sha256": "26fb5f684cca4eee78c625fd3b89fa8386681f1e00ea15d3a81fa930342d0a22"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2208654/DET_107_26_9_2023.pdf/b5985924-e96a-d97a-f98c-e6bfb67a5c20",
+  "captured_at": "2026-09-14T21:21:15.928251+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-107-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-107-2023-FITO-524981f1f10b.pdf",
+  "bytes": 2116361,
+  "sha256": "524981f1f10bc6cb4ec15f4b35ad1cd0d37eccf6a727621809862a8c934ef286"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1970007/DET_104_15_9_2022.pdf/5ae4acf4-bce0-ba49-ea8f-f104f2e68cfc",
+  "captured_at": "2026-09-14T21:21:15.935737+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-104-2022-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-104-2022-FITO-5961d6beb401.pdf",
+  "bytes": 1581790,
+  "sha256": "5961d6beb4011e125769512a98fee052fcc1e1bf57afe7bffea4f1da1cd266b7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2225745/DET_120_8_11_2023.pdf/192969c9-1ea3-a9a9-605e-fae49864f003",
+  "captured_at": "2026-09-14T21:21:15.943361+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-120-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-120-2023-FITO-4e3af97ad350.pdf",
+  "bytes": 1385832,
+  "sha256": "4e3af97ad350ce121fa660614ae98594209516d309a5bd940ce03cf67721eb1b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2172546/DET_61_13_6_2023.pdf/b4e0d7c4-a46a-7c79-5de4-677e8e1f4caf",
+  "captured_at": "2026-09-14T21:21:15.953038+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-61-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-61-2023-FITO-29be5f20cf8f.pdf",
+  "bytes": 1005806,
+  "sha256": "29be5f20cf8fbf59fa65aa029d1235f4df6a023a8ab34951ff2a935d2f786f65"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2013900/DET_11_9_2_2023.pdf/6d5292af-a6e0-cb91-1f26-7b24dfd319fa",
+  "captured_at": "2026-09-14T21:21:15.959588+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-11-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-11-2023-FITO-dec441586146.pdf",
+  "bytes": 3025113,
+  "sha256": "dec441586146f23515be3c49813d6481525530c97fe831e469cf3b6268fbbf98"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2680234/DET_153_25_8_2025.pdf/96951671-92ca-bb77-d4c0-d9a0f0be24d8",
+  "captured_at": "2026-09-14T21:21:15.972642+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-153-2025-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-153-2025-FITO-0d0d382812a8.pdf",
+  "bytes": 3528395,
+  "sha256": "0d0d382812a8b08c1677492518e90155295d04a7b32c93da4caa434feed7b2b4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2161755/DET_47_15_5_2023.pdf/d54aa35d-99f6-cce2-ae70-51421003e417",
+  "captured_at": "2026-09-14T21:21:15.988847+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-47-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-47-2023-FITO-736803a0f0bb.pdf",
+  "bytes": 1140792,
+  "sha256": "736803a0f0bbce10772fe0bf2f1efcab9b1d20b5c0fdf649747266957e893ff8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2246852/DET_2_15_1_2024.pdf/5cef85e9-3e16-c618-f323-dcf9e00e4abf",
+  "captured_at": "2026-09-14T21:21:15.994694+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-2-2024-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-2-2024-FITO-b998bd88a30c.pdf",
+  "bytes": 2510200,
+  "sha256": "b998bd88a30cb84eb8998d9df3516d57840f3f80e07b0373ad6999334aa63467"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2232826/DET_134_1_12_2023.pdf/01beeb1f-9962-bc45-3f76-7cd2f998e52d",
+  "captured_at": "2026-09-14T21:21:16.004716+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-134-2023-FITO; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-134-2023-FITO-4877eaa52475.pdf",
+  "bytes": 2927405,
+  "sha256": "4877eaa52475300ba3706c4abd9c80a85bb5afdd27ef7f6b39cf338cda34473a"
+ },
+ {
+  "url": "https://noicattaro-api.municipiumapp.it/s3/4644/allegati/181_dir_2026_00013_determina.pdf",
+  "captured_at": "2026-09-14T21:21:16.019662+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DDS-13-2026-almond-route; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/DDS-13-2026-almond-route.pdf",
+  "bytes": 25894287,
+  "sha256": "6facf3af20bb9acc899be64e36e1a44b57f5a7ca1be7dfca56d30c5ee1998624"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1739597/DET_114_21_10_2021.pdf/5bfa3980-3cf8-4f4b-ab11-4ef40b8fdecf?t=1635525205580&version=1.0",
+  "captured_at": "2026-09-14T21:21:16.118746+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate HIST-DDS-114-2021; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/HIST-DDS-114-2021.pdf",
+  "bytes": 1839492,
+  "sha256": "e69fafd0dadb61fb19dce633ddf28e38c6eab26971aa6586196263fdd6cd3292"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1728085/DET_102_1_10_2021.pdf/3384ae55-58b0-76aa-2a68-0fdd4ffcd8aa",
+  "captured_at": "2026-09-14T21:21:16.126419+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-102-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-102-2021-FITO-.pdf",
+  "bytes": 1536929,
+  "sha256": "7a2ea61470c00d85f1eeb39d1d5541ead3171a9d5843f670ce639f6a84becc02"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1739597/DET_117_26_10_2021.pdf/94601837-b777-9c8f-a8a3-edc0d7f0c257",
+  "captured_at": "2026-09-14T21:21:16.134805+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-117-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-117-2021-FITO-.pdf",
+  "bytes": 2198371,
+  "sha256": "b8a60e79c38c5472fba691fbeabda9202865345775b907a9475d700b9a7d4d13"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1930041/DET_81_8_8_2022.pdf/8156bb77-7c89-925e-d42a-c78dd2f11e4f",
+  "captured_at": "2026-09-14T21:21:16.143888+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-81-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-81-2022-FITO-.pdf",
+  "bytes": 3802980,
+  "sha256": "edba08d69502fd23dafa23e426bbacd374ad2ebb02b2635086b72483b58aaadb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1960733/DET_89_24_8_2022.pdf/1b6c47e0-6cf2-d558-3030-9134688f6d6f",
+  "captured_at": "2026-09-14T21:21:16.283313+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-89-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-89-2022-FITO-.pdf",
+  "bytes": 1684079,
+  "sha256": "8577704c8e6279d43d9741796cf4eaedb02637d3693769739a86412d21c1dbb4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1930041/DET_76_2_8_2022.pdf/15d467f7-9af3-7b7b-08d2-53bbd1123593",
+  "captured_at": "2026-09-14T21:21:16.294662+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-76-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-76-2022-FITO-.pdf",
+  "bytes": 1670200,
+  "sha256": "bcd159dd014133263bd68f44d9a4f3b43b7a99eb994dfd778bb33f0a4dd2593d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2601720/DET_10_5_2_2025.pdf/29675513-b92d-f795-973c-3a1aaf01593c",
+  "captured_at": "2026-09-14T21:21:16.307857+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-10-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-10-2025-FITO-.pdf",
+  "bytes": 4525059,
+  "sha256": "9a38c616771ae7d147147edbb7bce1c5a227b4be792296d009f12dc700b12934"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1733207/DET_105_6_10_2021.pdf/7a0f5690-3b98-90a7-bf53-ab9284bd14a8",
+  "captured_at": "2026-09-14T21:21:16.333429+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-105-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-105-2021-FITO-.pdf",
+  "bytes": 10007144,
+  "sha256": "35b880b7b05fd0ed7eb367aff52e22c78132c14a03e9564380cbf219106320b1"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2503867/DET_88_18_7_2024.pdf/d66b1cb5-3aa5-94f7-8b77-89019f36463b",
+  "captured_at": "2026-09-14T21:21:16.387981+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-88-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-88-2024-FITO-.pdf",
+  "bytes": 860390,
+  "sha256": "768444a8795a4cda81de6ac65dd047cea188dc67c9830074ebd6276d939b0700"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1919016/DET_71_26_7_2022.pdf/86425a70-d372-6828-cd03-1e5f08477385",
+  "captured_at": "2026-09-14T21:21:16.398715+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-71-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-71-2022-FITO-.pdf",
+  "bytes": 6073966,
+  "sha256": "68fc612b1c9b2ccd957249f17eb3533412683baf7e4c9475c9853e5506f9c13d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2603465/DET_18_12_2_2025.pdf/44669547-74ba-6ce4-2fcd-39300305b943",
+  "captured_at": "2026-09-14T21:21:16.442211+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-18-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-18-2025-FITO-.pdf",
+  "bytes": 3501930,
+  "sha256": "0be5442dbfb8aa12cf265439d7b1832824ee276e9228fe0689618365ebc877a3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_169_14_12_2021.pdf/3c5f6cf4-d32a-1e48-6d85-a93661a3fb24",
+  "captured_at": "2026-09-14T21:21:16.460986+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-169-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-169-2021-FITO-.pdf",
+  "bytes": 3467509,
+  "sha256": "952b4fd582f92e78d248de6a179ad4aeef3f6491f57589222c0f61a5bbf52e48"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_168_14_12_2021.pdf/a8bd0eff-2e89-3541-6cd0-0bbdc0c32a42",
+  "captured_at": "2026-09-14T21:21:16.475915+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-168-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-168-2021-FITO-.pdf",
+  "bytes": 11463525,
+  "sha256": "4941b21976d45e633b689149e7a3d8e910cc13b584f6a8471f37a667f6f32bbf"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1919016/DET_70_26_7_2022.pdf/ee4ad062-d4d7-6262-21bb-d17424ec0d52",
+  "captured_at": "2026-09-14T21:21:16.994039+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-70-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-70-2022-FITO-.pdf",
+  "bytes": 5204402,
+  "sha256": "c9b8bcde420d74334762f9fda9f5e573b593285d72311cdd5abbe5a3e54b79f2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1930041/DET_78_2_8_2022.pdf/5da733e6-0d94-0e3c-f8f4-19a44052ff62",
+  "captured_at": "2026-09-14T21:21:17.020387+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-78-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-78-2022-FITO-.pdf",
+  "bytes": 4584787,
+  "sha256": "ecec0a2f76885b2bc33cdeb9009a8caa76f6d18cb08860c47df9ee6be05d717e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2503904/DET_81_9_7_2024.pdf/5f806f05-9e99-9082-d48e-8c343e4aa7eb",
+  "captured_at": "2026-09-14T21:21:17.042140+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-81-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-81-2024-FITO-.pdf",
+  "bytes": 3449184,
+  "sha256": "4aff7d60032366edbb60ab598755623a28c9eda67413c214ee4588394f3fe52e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1733207/DET_104_6_10_2021.pdf/50be2a64-22c1-33e8-011e-08f1cd26ad2a",
+  "captured_at": "2026-09-14T21:21:17.057322+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-104-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-104-2021-FITO-.pdf",
+  "bytes": 20556417,
+  "sha256": "57ee4ab12ea0d57179ac8d8dde5270bda8c862e76d76d316105f54c2bff9246a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1960733/DET_87_24_8_2022.pdf/25825d81-bac1-f2f2-9390-effb0af2f244",
+  "captured_at": "2026-09-14T21:21:17.126896+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-87-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-87-2022-FITO-.pdf",
+  "bytes": 1524025,
+  "sha256": "d229c61d45784ef064d258000d64b3f29397ff5fcddc2d649f2c4c8c98f7d584"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2549427/DET_149_12_11_2024.pdf/f9872807-f1ca-f068-c05b-e0b563e23db7",
+  "captured_at": "2026-09-14T21:21:17.134483+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-149-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-149-2024-FITO-.pdf",
+  "bytes": 6248559,
+  "sha256": "2e123cc3dfa7c4c486ffc80ddace976127e7b2ce2dd9b9af2917c8c1596291f0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1960733/DET_88_24_8_2022.pdf/02409dea-e824-fc8b-1029-706b191e8231",
+  "captured_at": "2026-09-14T21:21:17.162803+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-88-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-88-2022-FITO-.pdf",
+  "bytes": 2889695,
+  "sha256": "3f7397eabed16f808f6582459574a6e29d112dfb8e458d48624c39ac7fc83c7b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1930041/DET_77_2_8_2022.pdf/821a5658-f578-7e7b-ef6d-2404265d66c3",
+  "captured_at": "2026-09-14T21:21:17.174877+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-77-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-77-2022-FITO-.pdf",
+  "bytes": 4053580,
+  "sha256": "b4b95b9f19343824818b2771f05140594d7594419333dae0599440359edf2439"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_172_14_12_2021.pdf/77996e99-72cd-9c6c-e834-6649f242cd55",
+  "captured_at": "2026-09-14T21:21:17.190878+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-172-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-172-2021-FITO-.pdf",
+  "bytes": 1158424,
+  "sha256": "11e9e303272e2c3af2a9b8998714005b1ebd619b7c8306286fe41b7e31f455b4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_167_14_12_2021.pdf/5b77ae63-61b4-2d52-262b-fab47d993d05",
+  "captured_at": "2026-09-14T21:21:17.202018+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-167-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-167-2021-FITO-.pdf",
+  "bytes": 12674272,
+  "sha256": "3bebef2e68ae0ce234a1f44154ede568b3cad390ea15cc1e37fc1717efceff1e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2532617/DET_125_3_10_2024.pdf/cf9d0652-a4ec-88ff-cd7f-eca26c632cd4",
+  "captured_at": "2026-09-14T21:21:17.241633+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-125-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-125-2024-FITO-.pdf",
+  "bytes": 1715159,
+  "sha256": "e44b9e4485fb4cf0bd87d40017d3f5a017ca54f62c5037db0129823ca258fd5f"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1930041/DET_80_5_8_2022.pdf/6e2144e0-abdd-0db4-13fe-c33203765304",
+  "captured_at": "2026-09-14T21:21:17.249721+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-80-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-80-2022-FITO-.pdf",
+  "bytes": 1798168,
+  "sha256": "68d6d3b6289dfc5855449bb5f8a6d9badb10291a9f486648146bfd1a9a6615a8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1964689/DET_95_6_9_2022.pdf/4b2b81c1-9e87-12c1-bb15-058bc8a60163",
+  "captured_at": "2026-09-14T21:21:17.256280+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-95-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-95-2022-FITO-.pdf",
+  "bytes": 2427117,
+  "sha256": "d132e9fe6300147abe81798bf5653910470c0a92f2a17245b9681695e202cb45"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1728085/DET_103_1_10_2021.pdf/c627359b-e689-bb15-9609-ee422a562b22",
+  "captured_at": "2026-09-14T21:21:17.266700+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-103-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-103-2021-FITO-.pdf",
+  "bytes": 29254073,
+  "sha256": "186c0e3a473bfcacae5025824f61ca81b0d48dd8503af6c1b0605a19a3277d95"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2636271/DET_72_28_4_2025.pdf/cbc278e0-5763-ae36-ba8b-61539ea1d43a",
+  "captured_at": "2026-09-14T21:21:17.434020+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-72-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-72-2025-FITO-.pdf",
+  "bytes": 2609498,
+  "sha256": "18701ae7a17dad893110f1863e9d7854d1e50afd8eafbfee6697deba98a6d469"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1930041/DET_75_2_8_2022.pdf/1774f872-770f-9162-5cf5-34b233d51618",
+  "captured_at": "2026-09-14T21:21:17.592324+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-75-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-75-2022-FITO-.pdf",
+  "bytes": 1891038,
+  "sha256": "c8f957e03332f2367fd32d0ecff241eb5e44e915c413428df420aaf311f1c1c0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1916705/DET_60_19_7_2022.pdf/e4859285-0d81-2d0c-b1f1-1daed8373c0a",
+  "captured_at": "2026-09-14T21:21:17.600884+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-60-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-60-2022-FITO-.pdf",
+  "bytes": 4194916,
+  "sha256": "52b8c955ab55263fd616cac9c3fade2938a5f0eb5dd5ff41e44b9489993e52c3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2511457/DET_99_5_8_2024.pdf/85759392-5db6-c6bf-1092-9bb1e5053f87",
+  "captured_at": "2026-09-14T21:21:17.613505+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-99-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-99-2024-FITO-.pdf",
+  "bytes": 2652917,
+  "sha256": "584035b532bea969a8b573750fdf24c9da3305c5fff5b26f736f238480c0bbdd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2632884/DET_65_18_4_2025.pdf/1df62839-82fc-89f3-9e36-2581dbcbd727",
+  "captured_at": "2026-09-14T21:21:17.623682+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-65-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-65-2025-FITO-.pdf",
+  "bytes": 1212081,
+  "sha256": "f1b9c46173957f9c885df4565195d18beaf352ebd1c584315555602f8d827f93"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1726657/DET_101_23_9_2021.pdf/ccd0fbf3-62b8-41f0-9ca8-f4cb5c76c61a",
+  "captured_at": "2026-09-14T21:21:17.631193+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-101-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-101-2021-FITO-.pdf",
+  "bytes": 9938922,
+  "sha256": "67346ff15bdbcd4c9706e35581cde54c4bbc66d36842ac1d8cae5e8311bf4729"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1956853/DET_82_9_8_2022.pdf/fae08d40-93ba-ff38-68e7-681c1aa7ac3c",
+  "captured_at": "2026-09-14T21:21:17.662780+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-82-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-82-2022-FITO-.pdf",
+  "bytes": 1643471,
+  "sha256": "3522d7374b2cfd16fb1727ca6f615a4b4d6e2a3c402be997b537f78afec2d0be"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1964689/DET_97_6_9_2022.pdf/bd1e70bd-acb5-8f5d-5750-5e307b51903b",
+  "captured_at": "2026-09-14T21:21:17.672088+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-97-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-97-2022-FITO-.pdf",
+  "bytes": 4051698,
+  "sha256": "b77b7801aa498c24cb73d02c5e289eabdc9ce71438f242b65ade3608a44a2b7a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1919016/DET_68_26_7_2022.pdf/4aeedd86-127c-8b3f-fd84-d98326940a8f",
+  "captured_at": "2026-09-14T21:21:17.691612+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-68-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-68-2022-FITO-.pdf",
+  "bytes": 6088814,
+  "sha256": "639c3a35cb86225ac5f2b253759d7e27b2a0de520160577e65a809c8f6728ed3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_170_14_12_2021.pdf/984c7487-245a-8126-fdd7-72818332267a",
+  "captured_at": "2026-09-14T21:21:17.727990+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-170-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-170-2021-FITO-.pdf",
+  "bytes": 7850144,
+  "sha256": "b3f0a239788909d331b207f1e4e420383dfbc5dc1e2410714932f58869e69a34"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1784491/DET_165_13_12_2021.pdf/468dd261-d25b-b054-1a9e-593881812838",
+  "captured_at": "2026-09-14T21:21:17.749295+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-165-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-165-2021-FITO-.pdf",
+  "bytes": 4024327,
+  "sha256": "76169d6f2e0ea7fc2e7588d33600b6d3d9fb1c1a775e675b257bcd9d7a9c8a7b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2641919/DET_80_7_5_2025.pdf/d11e3175-d843-03de-3bbd-c4dd7a7fbadc",
+  "captured_at": "2026-09-14T21:21:17.768496+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-80-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-80-2025-FITO-.pdf",
+  "bytes": 3413241,
+  "sha256": "fc48ea84751601c017e8f7e4bca77b825bf72ac5d1f91165d02aa6a06c7263f9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1964689/DET_98_6_9_2022.pdf/56d538ee-b7b2-b5ad-8298-bfbb11631dcb",
+  "captured_at": "2026-09-14T21:21:17.786986+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-98-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-98-2022-FITO-.pdf",
+  "bytes": 1793083,
+  "sha256": "a0f79f3da8baafc5fd81788b54c1a4c80acefcb6e24608138ad4da710a91708d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1960733/DET_90_25_8_2022.pdf/858509c6-8139-a7c1-facd-32e6b17727c4",
+  "captured_at": "2026-09-14T21:21:17.794332+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-90-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-90-2022-FITO-.pdf",
+  "bytes": 1814524,
+  "sha256": "16f4d9dc1cc3412766f2551b37ee80984661acbcc8898a1a69960d316fa2c1ab"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1958798/DET_85_17_8_2022.pdf/a745249e-a077-1c0a-0bcc-adc4e4e8393d",
+  "captured_at": "2026-09-14T21:21:17.807422+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-85-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-85-2022-FITO-.pdf",
+  "bytes": 1543444,
+  "sha256": "13076e44c6b228c5077c158712d7539b6a9ad0abf71c1c56752cd09eeef6f757"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1733207/DET_106_6_10_2021.pdf/d548d43e-4b14-6fbe-176d-875d34ae2210",
+  "captured_at": "2026-09-14T21:21:17.816137+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-106-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-106-2021-FITO-.pdf",
+  "bytes": 10600035,
+  "sha256": "77dc0c6a5fe214f0010f09ee5469ea8df4924de4d8f1b4e31a8fbf58c17a48bd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1739597/DET_113_21_10_2021.pdf/58b0f62c-bda0-aff9-e773-695455f62e55",
+  "captured_at": "2026-09-14T21:21:17.860664+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-113-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-113-2021-FITO-.pdf",
+  "bytes": 1435645,
+  "sha256": "7fda881103b656fd00709d31f794f11fee6a780a6d02c5de03738b90cfa1f67e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2638181/DET_77_6_5_2025.pdf/7150499b-578e-e1e2-c65f-9fc241498656",
+  "captured_at": "2026-09-14T21:21:17.868182+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-77-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-77-2025-FITO-.pdf",
+  "bytes": 1530606,
+  "sha256": "47f273c94bf9e50b2a5209add67d61ae69fad9b9ebb9430170a3a0aa4cff6227"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2539360/DET_135_23_10_2024.pdf/59a6d328-6cfa-e91f-6588-caf46672e11e",
+  "captured_at": "2026-09-14T21:21:17.875579+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-135-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-135-2024-FITO-.pdf",
+  "bytes": 44274111,
+  "sha256": "26d1acca46fd1ad6ff0f26386568f5936f0de743736d16b8ac894db64ec502bc"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1733207/DET_107_6_10_2021.pdf/a9b0d14b-6cb1-3e58-c648-a96eca32ea0c",
+  "captured_at": "2026-09-14T21:21:18.004155+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-107-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-107-2021-FITO-.pdf",
+  "bytes": 30671556,
+  "sha256": "f66540f54db5e1b3f1243e6b9df6e347bced16cc2339a9438a255ab90e103964"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1956853/DET_84_9_8_2022.pdf/c0eba34f-9fd2-960b-fd1a-2336327a5f13",
+  "captured_at": "2026-09-14T21:21:18.097629+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-84-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-84-2022-FITO-.pdf",
+  "bytes": 2979324,
+  "sha256": "ccaa79b87e58de0f6c8f1a99d1283551f31038f2334aedc01928c47b0dd59381"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_176_16_12_2021.pdf/a9ea9d1e-e9c3-7e22-860d-2f1eece7517e",
+  "captured_at": "2026-09-14T21:21:18.109150+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-176-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-176-2021-FITO-.pdf",
+  "bytes": 2180061,
+  "sha256": "a0219f80a9087e7d9877b8d49c2f360dbd8a806eb4cb69a41aad23d0372fc6f6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2491695/DET_75_20_6_2024.pdf/9e2f9d99-a693-d21d-9264-322f2e43c0cf",
+  "captured_at": "2026-09-14T21:21:18.118840+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-75-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-75-2024-FITO-.pdf",
+  "bytes": 1591458,
+  "sha256": "9cfa682f55e16762ba48fe8d2aad3c4c10182f2417d366af7ca429508ea3a2a9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2537124/DET_129_9_10_2024.pdf/329d89fb-eacb-2fdd-ff55-e091ccb5d1c1",
+  "captured_at": "2026-09-14T21:21:18.125423+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-129-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-129-2024-FITO-.pdf",
+  "bytes": 643312,
+  "sha256": "4ea6a8d13d25dce473e53e29b7a16f8a2d0eb457ad1db539da29be9d8a777a0e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1964689/DET_96_6_9_2022.pdf/8df4ef4e-f255-b2a1-c2e1-e1902fee6535",
+  "captured_at": "2026-09-14T21:21:18.129167+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-96-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-96-2022-FITO-.pdf",
+  "bytes": 1667387,
+  "sha256": "863a8fa5ad4413b3ce035fb4cf32a05bb6d3e8f70dd9fb53f5deb66318d80790"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1956853/DET_83_9_8_2022.pdf/2b7f24fd-e78f-a6d6-3365-7227738f1563",
+  "captured_at": "2026-09-14T21:21:18.137420+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-83-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-83-2022-FITO-.pdf",
+  "bytes": 1770043,
+  "sha256": "d168c85ee5f34df6862ed69809fafe60e6a526a2b55107523281bb349151b282"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1726657/DET_100_23_9_2021.pdf/e9b3cfa2-1029-5815-a749-2831feea948f",
+  "captured_at": "2026-09-14T21:21:18.145132+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-100-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-100-2021-FITO-.pdf",
+  "bytes": 10652678,
+  "sha256": "1cb02951f44ca649033c9d14a35a23d64b0a78f2410bb6c44a5a3992e895db0c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2547230/DET_157_15_11_2024.pdf/cb26f678-7434-427f-b9b0-e593287440e7",
+  "captured_at": "2026-09-14T21:21:18.176090+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-157-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-157-2024-FITO-.pdf",
+  "bytes": 1597959,
+  "sha256": "3f6723e55a1a6a28f610b062f179ef5d42d3a32ae1759eb904c0cfd69915b3f3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1784491/DET_164_13_12_2021.pdf/1545d2e1-8202-e92d-195b-e46490024ba5",
+  "captured_at": "2026-09-14T21:21:18.181279+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-164-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-164-2021-FITO-.pdf",
+  "bytes": 1270223,
+  "sha256": "1336255d1c70c811d969accda0088a670537221f016158d2b48a29d88a6ee616"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1788594/DET_171_14_12_2021.pdf/74ae27bd-aa66-670b-f3fe-25a0fe245ae6",
+  "captured_at": "2026-09-14T21:21:18.187113+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-171-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-171-2021-FITO-.pdf",
+  "bytes": 16907352,
+  "sha256": "68a148b1b6a6463f4b0112ba4f303c75d855aa9e3afeb0727b6045483aff37f8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2532617/DET_126_3_10_2024.pdf/1e93ec9a-22bf-d1ea-9dd7-4dd4064eaceb",
+  "captured_at": "2026-09-14T21:21:18.233626+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-126-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-126-2024-FITO-.pdf",
+  "bytes": 756796,
+  "sha256": "2938f8a2e8b2db90dbb24ee097b5e45e36a7f01683d6ce16f54e732894f2a694"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1919016/DET_69_26_7_2022.pdf/01e3f6f6-5214-545e-b7cc-f82680317bd8",
+  "captured_at": "2026-09-14T21:21:18.238953+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-69-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-69-2022-FITO-.pdf",
+  "bytes": 6471972,
+  "sha256": "c28b51aa381f42b55e563c37074cf7cc27972a1e2c48328f9f0a8e60276e08cb"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2645951/DET_86_14_5_2025.pdf/a7707ba1-5d88-0589-c755-9b34740f503c",
+  "captured_at": "2026-09-14T21:21:18.261517+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-86-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-86-2025-FITO-.pdf",
+  "bytes": 1875215,
+  "sha256": "f14d1f799e5443f4ca1f3e2a43954d266b51240b5b4213dd9000988de66b670c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2641919/DET_79_7_5_2025.pdf/f85c591f-eba8-e6a2-d412-69f1df79c3ff",
+  "captured_at": "2026-09-14T21:21:18.272425+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-79-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-79-2025-FITO-.pdf",
+  "bytes": 2519842,
+  "sha256": "22c69abd0dbc4b7a9ead2ebc2bfef823526426c9a96c01b9aeea3abf5da75f70"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2551508/DET_163_21_11_2024.pdf/9bf04c39-3cbc-6af9-259e-4084c789fd92",
+  "captured_at": "2026-09-14T21:21:18.293829+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-163-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-163-2024-FITO-.pdf",
+  "bytes": 1660277,
+  "sha256": "4c75b93a4d298357662b51ffa76660e1f74bb6b138cb9a5293d894f828b405e4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1763690/DET_134_9_11_2021.pdf/e3c795ca-fef2-9bb2-992c-a3dfe0852f27",
+  "captured_at": "2026-09-14T21:21:18.302495+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-134-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-134-2021-FITO-.pdf",
+  "bytes": 2408364,
+  "sha256": "e0012e372e8bb059bd485a0ff133c5be5c1098ff52f541c1c91652662d7753f4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1745423/DET_121_28_10_2021.pdf/9c870d7c-52dc-34a7-f5d4-6655f569cba8",
+  "captured_at": "2026-09-14T21:21:18.315028+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-121-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-121-2021-FITO-.pdf",
+  "bytes": 13207196,
+  "sha256": "a9976f5f7efe6857d55dfa02dde748c188858c6a59ea4731c87e26a4bb28b700"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2514548/DET_107_16_8_2024.pdf/4223a584-d6c7-cf8f-be50-04de829c746a",
+  "captured_at": "2026-09-14T21:21:18.365030+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-107-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-107-2024-FITO-.pdf",
+  "bytes": 3980052,
+  "sha256": "6fe528497490c6150994473c97b803def66f90c19b339ce96e8692292ea8bbc0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1774991/DET_150_26_11_2021.pdf/66df7e3b-8717-41e5-b616-403cbfb31eb3",
+  "captured_at": "2026-09-14T21:21:18.434666+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-150-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-150-2021-FITO-.pdf",
+  "bytes": 10613485,
+  "sha256": "44da86df541bc6d5d73e9e766442ebb02de07d2ca541cabd0238d0c476aa39b3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1913973/DET_55_13_7_2022.pdf/aa5dd78e-5f16-438f-d155-d6cea011e168",
+  "captured_at": "2026-09-14T21:21:18.507119+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-55-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-55-2022-FITO-.pdf",
+  "bytes": 6842806,
+  "sha256": "10716d6f4f4d02868062bed5e356b31a15170ac03a8a5c94c19a92318dd198bf"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1755327/DET_126_4_11_2021.pdf/893fa4b6-35ec-40ea-04b7-2382ec63986f",
+  "captured_at": "2026-09-14T21:21:18.568522+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-126-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-126-2021-FITO-.pdf",
+  "bytes": 2132651,
+  "sha256": "0ba84028071e0b8d66fd8aca84032e7349ff1408e108c842fcd7bedec845b5d2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1768782/DET_142_18_11_2021.pdf/f9b272a6-a492-8547-2122-b24c34e424ab",
+  "captured_at": "2026-09-14T21:21:18.589195+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-142-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-142-2021-FITO-.pdf",
+  "bytes": 30194137,
+  "sha256": "e811f9ebbdcc99438616644e7e86f08147ca1a7c75ad27f63f293a4ad32f0d03"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2595433/DET_4_23_1_2025.pdf/eb8cbb30-b8c0-4d85-7b87-83ca92c49d59",
+  "captured_at": "2026-09-14T21:21:18.743749+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-4-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-4-2025-FITO-.pdf",
+  "bytes": 1289708,
+  "sha256": "74d712d57c01fb5f4cf81016e67497a494da612edec0528e58f0ff9c94dca6ca"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2455614/DET_30_10_4_2024.pdf/a05d6f9b-e3ba-f0d2-e3af-47ee45516ab3",
+  "captured_at": "2026-09-14T21:21:18.755171+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-30-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-30-2024-FITO-.pdf",
+  "bytes": 6471500,
+  "sha256": "e7d9cd6bb6fb4128ae86d0784208347820159fae69ca2a5f9ebfc7cdc0e2cde6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2473290/DET_55_7_5_2024.pdf/5afb174e-4374-ffe6-4c8c-220a279c4c0f",
+  "captured_at": "2026-09-14T21:21:18.858069+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-55-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-55-2024-FITO-.pdf",
+  "bytes": 5986198,
+  "sha256": "3f25e3686c8a83539084a153007e52b66ac14f440cafdc34081e4126faa49a4e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1908413/DET_46_5_7_2022.pdf/6d5d6f71-af42-7739-1dcc-8dc6221d2d73",
+  "captured_at": "2026-09-14T21:21:18.918777+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-46-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-46-2022-FITO-.pdf",
+  "bytes": 12198277,
+  "sha256": "c43449404c18265db05f43536b0bfde98d2e7469ab79e5269906a9990baf3c43"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1755327/DET_127_4_11_2021.pdf/4ff2a516-7f30-a065-62da-9332fdaef7dc",
+  "captured_at": "2026-09-14T21:21:18.974317+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-127-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-127-2021-FITO-.pdf",
+  "bytes": 5453315,
+  "sha256": "1f0d54e0bc2a77d022189995e68dab561fd1776ffd020e315b38205e27e19c52"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1768782/DET_143_18_11_2021.pdf/5b224265-16f9-cca5-8d54-67a1999af921",
+  "captured_at": "2026-09-14T21:21:19.024923+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-143-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-143-2021-FITO-.pdf",
+  "bytes": 43246952,
+  "sha256": "ffb5d221c5f14f4250dfe342c8b8c3dd5d49ab118b6af4e69822a3441063223a"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1913973/DET_54_12_7_2022.pdf/e9fabaa7-dda6-4cdb-01e6-20033dc9e9ca",
+  "captured_at": "2026-09-14T21:21:19.342903+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-54-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-54-2022-FITO-.pdf",
+  "bytes": 2824046,
+  "sha256": "5dc5a28789e7da64b8a8d91fa132229b233a8d8dd77332bcc53fbaa19eb8b28e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1755327/DET_128_4_11_2021.pdf/fe3f8664-9f92-7fcd-17bb-a2f17cd0560c",
+  "captured_at": "2026-09-14T21:21:19.353547+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-128-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-128-2021-FITO-.pdf",
+  "bytes": 14731823,
+  "sha256": "ec7a6ec449db66b97e83682d01fadbc9a802d8800ffc1966e912c0245b8c10d2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1745423/DET_120_28_10_2021.pdf/9c1b0419-b96d-224c-5e5f-3c15f4d8f21e",
+  "captured_at": "2026-09-14T21:21:19.432722+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-120-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-120-2021-FITO-.pdf",
+  "bytes": 10645720,
+  "sha256": "a589979955853392db87fe19b7e35f0968ae444ccec874ae19f076ccf85e8109"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2551508/DET_162_21_11_2024.pdf/6ec9bac5-6756-c914-1a1f-506acc26b29f",
+  "captured_at": "2026-09-14T21:21:19.524533+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-162-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-162-2024-FITO-.pdf",
+  "bytes": 1732297,
+  "sha256": "06de88127e0d5ac624ca6a69d9a915258e8c963d5a7c7e29553f09e4f63b0e5f"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2560952/DET_177_3_12_2024.pdf/ce1aec8d-a32c-015c-68b7-d1119ef2091a",
+  "captured_at": "2026-09-14T21:21:19.541532+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-177-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-177-2024-FITO-.pdf",
+  "bytes": 1979284,
+  "sha256": "22a967ab67c28985b04064302abc49eff8f2e74b24ebf060d5b58411f72b14e9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2623010/DET_51_31_3_2025.pdf/3789a954-3739-74a7-5fe5-a6861f101369",
+  "captured_at": "2026-09-14T21:21:19.552934+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-51-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-51-2025-FITO-.pdf",
+  "bytes": 1765878,
+  "sha256": "3383d0d7d83da72ecc32c7d653a786d9074dfe03ce71b24523fb98ae1d5d48bf"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2619098/DET_44_21_3_2025.pdf/8af062b4-31e9-0573-2ccb-ee809991b34c",
+  "captured_at": "2026-09-14T21:21:19.562796+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-44-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-44-2025-FITO-.pdf",
+  "bytes": 1335338,
+  "sha256": "cef259c607efa9964b19e86f4541a73fb76ddf8a83ef12d4752a0b25bbf8768b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1774991/DET_151_26_11_2021.pdf/42bd32f3-adcc-8e26-7fed-014ee02fff41",
+  "captured_at": "2026-09-14T21:21:19.572285+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-151-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-151-2021-FITO-.pdf",
+  "bytes": 20348624,
+  "sha256": "5b13464eefbb13c67d56551e6049c514e6e77107ce5bdfd546ac77eb1e9073f9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1905179/DET_43_27_6_2022.pdf/c7be39a3-921e-e11e-bfff-31cf0d9643d7",
+  "captured_at": "2026-09-14T21:21:19.673099+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-43-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-43-2022-FITO-.pdf",
+  "bytes": 2554693,
+  "sha256": "0e92c74d44856211ab4847d3af87c7ec8e2e11f0032b1a1215a00f75cb180ed4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1913973/DET_56_14_7_2022.pdf/2f53f978-823d-c873-2f4c-c258248a9d61",
+  "captured_at": "2026-09-14T21:21:19.698699+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-56-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-56-2022-FITO-.pdf",
+  "bytes": 1712138,
+  "sha256": "36588f053d0dc4fc439093a4e134fcacadeaaaf44e1c59a95fb4111dc1a20900"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1725295/DET_94_15_9_2021.pdf/40d4ec20-6047-c743-d86a-c401c590fe37",
+  "captured_at": "2026-09-14T21:21:19.719229+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-94-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-94-2021-FITO-.pdf",
+  "bytes": 19072863,
+  "sha256": "bac8a4f5ed2635a77672dd6f19e9d2d2f2e27c5db659f8bd80e58411edf99ed1"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2599609/DET_8_28_1_2025.pdf/3e172e9e-52c7-8f4f-a3fb-7e2d93d567d9",
+  "captured_at": "2026-09-14T21:21:19.810853+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-8-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-8-2025-FITO-.pdf",
+  "bytes": 1281404,
+  "sha256": "bbc45eaba01bee543060e0cd89a48638277d54544ce5a2a9f8e26abe24df9eff"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1967425/DET_102_15_9_2022.pdf/8cfdc879-b4f7-dff6-943a-3b374490f120",
+  "captured_at": "2026-09-14T21:21:19.829421+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-102-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-102-2022-FITO-.pdf",
+  "bytes": 1887408,
+  "sha256": "a236497e8e91550367ea18582f84f15a9cee6ac2f29e4a2570421cb46e8f65a4"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1768782/DET_146_22_11_2021.pdf/7cad2194-26d8-db39-431d-88b94dbaea74",
+  "captured_at": "2026-09-14T21:21:19.855736+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-146-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-146-2021-FITO-.pdf",
+  "bytes": 2126734,
+  "sha256": "1d073cae6680eb5dffd68c1cb78c24f9543238559024c17f7567a603108ad297"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1774991/DET_153_26_11_2021.pdf/b53e90a0-a1ef-c7a9-064a-88f68deac121",
+  "captured_at": "2026-09-14T21:21:19.879932+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-153-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-153-2021-FITO-.pdf",
+  "bytes": 27218335,
+  "sha256": "5fdfeff70706a5b7be8a8e0a66bb3975b8a251ff445d52bccdadb5f06ca72913"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1814748/DET_5_8_2_2022.pdf/a3707bd2-435e-52e1-8b82-cf47d0d21df5",
+  "captured_at": "2026-09-14T21:21:20.044892+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-5-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-5-2022-FITO-.pdf",
+  "bytes": 1313312,
+  "sha256": "9191b70e67a7e54e3940cae1248339e64764a1a065babf114b55fb4c64976774"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1745423/DET_122_28_10_2021.pdf/46606d49-e914-166b-1107-3a5f58f069a9",
+  "captured_at": "2026-09-14T21:21:20.068720+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-122-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-122-2021-FITO-.pdf",
+  "bytes": 13757126,
+  "sha256": "aa46606f6c3502b294b0cda943ac6cef6fca2748b5697fdd44478034b05036e6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1763690/DET_137_11_11_2021.pdf/6eda1968-7a47-b562-6be8-80ff5ec4c939",
+  "captured_at": "2026-09-14T21:21:20.217850+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-137-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-137-2021-FITO-.pdf",
+  "bytes": 12242139,
+  "sha256": "bb8994ac86a01bea46b2315532767b3f917b29770f568bc9c59b17f5ec1db473"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1908413/DET_44_4_7_2022.pdf/ee4139b2-e346-1630-255c-3a1545366977",
+  "captured_at": "2026-09-14T21:21:20.350850+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-44-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-44-2022-FITO-.pdf",
+  "bytes": 3893670,
+  "sha256": "d478d204e04ca47ae665248e1b92f431dd2fee630059c95c400b00e456d1d81b"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1768782/DET_141_18_11_2021.pdf/bfac670a-41e0-46eb-f7e4-2aed035cd0a6",
+  "captured_at": "2026-09-14T21:21:20.405870+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-141-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-141-2021-FITO-.pdf",
+  "bytes": 41163794,
+  "sha256": "c7b98b88334ffbf55ec4643641abd8ae99ec88f67d81736d15ad2fdec1646f7e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1725295/DET_93_15_9_2021.pdf/a059e9c8-7ca6-9626-64fb-907b5fa64bab",
+  "captured_at": "2026-09-14T21:21:20.787451+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-93-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-93-2021-FITO-.pdf",
+  "bytes": 29428218,
+  "sha256": "e88036e13f10e74635ff022f4fa9046eae7de166bae088cbf380da1d0482a72f"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1755327/DET_125_4_11_2021.pdf/8423a113-1d37-194d-ccad-86cc50929e19",
+  "captured_at": "2026-09-14T21:21:21.112838+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-125-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-125-2021-FITO-.pdf",
+  "bytes": 1284594,
+  "sha256": "9ab181ef6a957fddb0a95b7fbf212fe9a9b7a4f73270436eb6878d706b5c82d6"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2555218/DET_167_25_11_2024.pdf/1443cbf9-e365-3c97-67a9-39d655d5168e",
+  "captured_at": "2026-09-14T21:21:21.183053+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-167-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-167-2024-FITO-.pdf",
+  "bytes": 1441423,
+  "sha256": "9c885194698576b9402f84bf16f92855dd241f96e249cd5778f6a3604687a4fd"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2613706/DET_31_5_3_2025.pdf/3992f1ee-e43e-f52d-1c61-d6a05b78e740",
+  "captured_at": "2026-09-14T21:21:21.230806+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-31-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-31-2025-FITO-.pdf",
+  "bytes": 1253362,
+  "sha256": "e4e787f7b0b664f4395b2c54fadbdb528b084bd766cdbaf3e5f4dbab92e32590"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2605848/DET_24_20_2_2025.pdf/575a1cb2-0755-5733-985d-77d8911f93bf",
+  "captured_at": "2026-09-14T21:21:21.277902+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-24-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-24-2025-FITO-.pdf",
+  "bytes": 1261104,
+  "sha256": "e097aac0f52a638fadba097a1b26559f307b1bc4a2aa68af7eca3f7faa650cef"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1552603/DET_92_6_9_2021.pdf/c4c38238-ed10-8ab7-6771-6dc081c33ca1",
+  "captured_at": "2026-09-14T21:21:21.294218+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-92-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-92-2021-FITO-.pdf",
+  "bytes": 1371237,
+  "sha256": "f1b757e764cc66ef7ecd7bfe7fb974f1671a4af0095a2b30b1e46d1866a035c8"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1768782/DET_140_18_11_2021.pdf/b54cefea-1384-c6eb-6aed-7d126756a1b6",
+  "captured_at": "2026-09-14T21:21:21.305974+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-140-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-140-2021-FITO-.pdf",
+  "bytes": 16173149,
+  "sha256": "64fad136ed6cf5557ada5e8253208758969eb00bda846640f3a60dbc946582d7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2551508/DET_166_25_11_2024.pdf/b9396e77-13d4-7af5-400a-1d515776c71f",
+  "captured_at": "2026-09-14T21:21:21.383030+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-166-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-166-2024-FITO-.pdf",
+  "bytes": 2232192,
+  "sha256": "421adb0ad6dc6b6f02b72f6ddc3405e48c2c1a2887082061a5a0332a39dfc4ec"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1768782/DET_139_17_11_2021.pdf/0a5debd1-8d0a-ec81-6a07-24dde490354a",
+  "captured_at": "2026-09-14T21:21:21.445808+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-139-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-139-2021-FITO-.pdf",
+  "bytes": 6958102,
+  "sha256": "b019ee36602b54363ed59068bb74223d97056b906b29c1e66620593ffb3226e7"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2457493/DET_43_22_4_2024.pdf/75dad251-4519-10e5-3dbb-3d47d7b5d343",
+  "captured_at": "2026-09-14T21:21:21.507932+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-43-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-43-2024-FITO-.pdf",
+  "bytes": 2289451,
+  "sha256": "350a238616511d247b3030686a00114c0b957654bd7e07d6f0ad4fcdbe76c82e"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2595433/DET_6_23_1_2025.pdf/1473a62c-8fa0-e092-5b4d-2870fe4821f1",
+  "captured_at": "2026-09-14T21:21:21.541935+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-6-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-6-2025-FITO-.pdf",
+  "bytes": 10351350,
+  "sha256": "a79638f84a96da7933eada8ea5859acd36c674831036a69488d6927bdf568376"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1908413/DET_45_4_7_2022.pdf/e12962e0-38cc-32f2-69c1-70f730502b37",
+  "captured_at": "2026-09-14T21:21:21.601536+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-45-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-45-2022-FITO-.pdf",
+  "bytes": 2932655,
+  "sha256": "fa984195e647b765fae51f1b3cc79c75d4403fe36efd91a7ad0deaa29317200d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1774991/DET_152_26_11_2021.pdf/ca71b793-fdd2-15f6-5e5d-ba895b4ee4f5",
+  "captured_at": "2026-09-14T21:21:21.654340+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-152-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-152-2021-FITO-.pdf",
+  "bytes": 22561115,
+  "sha256": "9a64c114f57a00cb87fdad9f1a45c8ee8564dce1cf87df63c1cf1aec50d86ed9"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1967425/DET_103_15_9_2022.pdf/0f2ed59f-72a8-4c60-f3d5-a66645f47c12",
+  "captured_at": "2026-09-14T21:21:21.866076+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-103-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-103-2022-FITO-.pdf",
+  "bytes": 2850173,
+  "sha256": "0720f08f2235c9b9a755e8e1a24d244636909f446c5d228f481b4ac4fdd4203d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2481340/DET_59_16_5_2024.pdf/c282ae38-cf29-2e86-86ae-61f2aff6adb3",
+  "captured_at": "2026-09-14T21:21:21.969824+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-59-2024-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-59-2024-FITO-.pdf",
+  "bytes": 1220195,
+  "sha256": "e1fc5e4aeec3f6e6681a7cddee64f3a4471807a6bb0f24625b4e4f2b52e53368"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2599609/DET_9_28_1_2025.pdf/cd9ca138-2896-1bbe-5097-6b8a672358e0",
+  "captured_at": "2026-09-14T21:21:22.006293+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-9-2025-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-9-2025-FITO-.pdf",
+  "bytes": 1779995,
+  "sha256": "927c5342af6aa1cfc4e06f2348b38b917c475153f05e2c59c072bfb61e678618"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1725295/DET_95_15_9_2021.pdf/598a4895-92ae-dfff-2678-d38cf8b65f59",
+  "captured_at": "2026-09-14T21:21:22.028254+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-95-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-95-2021-FITO-.pdf",
+  "bytes": 10013638,
+  "sha256": "d3412c91226ef94b7b7047e25ab40a395852bcdfbdebcd24c9922efe1a911416"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1763690/DET_136_11_11_2021.pdf/e4f637e2-c32b-6d3b-c4e1-9bae2ef9fb26",
+  "captured_at": "2026-09-14T21:21:22.080700+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-136-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-136-2021-FITO-.pdf",
+  "bytes": 17471946,
+  "sha256": "f1741ed730ebc1a9edcd761c594635b17bcf592901be296fbf3abe3223d50f46"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1745423/DET_123_28_10_2021.pdf/9292bc37-5406-2e68-06cb-0b736e458ae8",
+  "captured_at": "2026-09-14T21:21:22.208449+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-123-2021-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-123-2021-FITO-.pdf",
+  "bytes": 9949656,
+  "sha256": "f6b109837b2bafa979a80503259e1cca764584da4fbd39657e8843320ccb05f3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1913973/DET_57_14_7_2022.pdf/41d49dbd-d5c5-8c10-dd2f-acb93f2b4946",
+  "captured_at": "2026-09-14T21:21:22.366578+00:00",
+  "kind": "act",
+  "referred_by": "Retained regional acquisition catalogue reconciliation; original page 1 identifies a removal prescription or its incorporated/correcting rendition. operative-act/case-prescription source candidate DET-57-2022-FITO-; whole-measure meaning and finding/target attachment remain held.",
+  "retained_original": "/Users/owenwassmer/Desktop/Connor/wedge1-aip/regulation/jurisdiction/regional/bulk/DET-57-2022-FITO-.pdf",
+  "bytes": 6219959,
+  "sha256": "f9ce34da9dddbcbf603a93bd7f5dd3bdf806ce2570b266f49fc435085cdfcb4e"
+ },
+ {
+  "url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/4001406_ATT_000136565_32615.pdf",
+  "captured_at": "2026-09-14T21:37:26.282675+00:00",
+  "kind": "act",
+  "referred_by": "Cagnano historical register 1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854 A3756:form:elencoPubblicazioni_row_3; incorporated municipal original Allegato n. 1 - Prot. N° 0004913/A del 03/04/2026; full measure/correction meaning held",
+  "status": 200,
+  "final_url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/4001406_ATT_000136565_32615.pdf",
+  "content_type": "application/pdf",
+  "bytes": 340534,
+  "sha256": "92cf97a3346c10626894979321e114dd57d2c1f5edd6f473a1faa880df31dd28"
+ },
+ {
+  "url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/3814497_ATT_000135887_31693.pdf",
+  "captured_at": "2026-09-14T21:37:27.301644+00:00",
+  "kind": "act",
+  "referred_by": "Cagnano historical register 1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854 A3756:form:elencoPubblicazioni_row_4; incorporated municipal original Allegato n. 1 - Prot. N° 0013536/A del 26/11/2025; full measure/correction meaning held",
+  "status": 200,
+  "final_url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/3814497_ATT_000135887_31693.pdf",
+  "content_type": "application/pdf",
+  "bytes": 1859548,
+  "sha256": "ed2da089d5285f2ec4c8b58202095bc0852cc8fb934c978c82779d3cd06d14f4"
+ },
+ {
+  "url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/3814484_ATT_000135886_31692.pdf",
+  "captured_at": "2026-09-14T21:37:28.790161+00:00",
+  "kind": "act",
+  "referred_by": "Cagnano historical register 1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854 A3756:form:elencoPubblicazioni_row_5; incorporated municipal original Allegato n. 1 - Prot. N° 0013535/A del 26/11/2025; full measure/correction meaning held",
+  "status": 200,
+  "final_url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/3814484_ATT_000135886_31692.pdf",
+  "content_type": "application/pdf",
+  "bytes": 1859548,
+  "sha256": "ed2da089d5285f2ec4c8b58202095bc0852cc8fb934c978c82779d3cd06d14f4"
+ },
+ {
+  "url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/3776322_ATT_000135723_31446.pdf",
+  "captured_at": "2026-09-14T21:37:30.474624+00:00",
+  "kind": "act",
+  "referred_by": "Cagnano historical register 1c2ba8015a26fcd2770b1283c8521c8bc534d69eeb46efd990ca9d60d9479854 A3756:form:elencoPubblicazioni_row_6; incorporated municipal original Allegato n. 1 - Prot. N° 0012116/A del 27/10/2025; full measure/correction meaning held",
+  "status": 200,
+  "final_url": "https://trasparenza.parsec326.it/repo/docs/B357/2000/3776322_ATT_000135723_31446.pdf",
+  "content_type": "application/pdf",
+  "bytes": 3387948,
+  "sha256": "e6c72295784086bb0a559bec7fcc7f564a1d47e3f496732a7b59ca7c6118436a"
+ },
+ {
+  "url": "https://www.halleyweb.com/c110006/po/attachment_news.php?id=1589",
+  "captured_at": "2026-09-22T14:05:50.705972+00:00",
+  "kind": "act",
+  "referred_by": "Official municipal Minervino published DDS65/2025 attachment route, recovered through primary-source web search after native municipal news connection reset",
+  "error": "('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))"
+ },
+ {
+  "url": "https://cartografia.sit.puglia.it/DOC/xylella/xf_sub_multiplex/dir_estirpazione_xfmultiplex/181_DIR_2024_00043.pdf",
+  "captured_at": "2026-09-22T16:50:04.256979+00:00",
+  "bytes": 5056371,
+  "sha256": "772b58c02e56255971ff7b39d2d9f6a83e8a4d658f23cefb1af4d013dd064e2d",
+  "kind": "act",
+  "referred_by": "Source-named CNR36/2024 correction reached through the DDS43/2024 publisher original; corrected report remains incorporated on physical pages17–21, separately from typing note22. Standalone route still supplies the predecessor."
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/9A9400389FD466BFC1258E3E00321C82/$FILE/Provvedimento - 20260724110724.pdf",
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/9A9400389FD466BFC1258E3E00321C82/$FILE/Provvedimento%20-%2020260724110724.pdf",
+  "referred_by": "32aa6b3e737b0d4acf5458df161acf3e6b5634062df3290e2c0149da22823077",
+  "source_label": "Provvedimento - 20260724110724.pdf (1196 KB)",
+  "captured_at": "2026-09-22T17:03:14.375421+00:00",
+  "status": 200,
+  "bytes": 1224622,
+  "sha256": "952297f83c1dfc28f52bb1a19f3e7366b8e6101d9d81108f3f20883d8d716ba1",
+  "content_type": "application/pdf",
+  "kind": "removal-order"
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/87511831C8AADC28C1258CDE00407388/$FILE/Provvedimento - 20250806134401.pdf",
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/87511831C8AADC28C1258CDE00407388/$FILE/Provvedimento%20-%2020250806134401.pdf",
+  "referred_by": "0edebc29208345320ec4c28487ae8d6889899e9f307cea78e59230b6b80a918d",
+  "source_label": "Provvedimento - 20250806134401.pdf (3394 KB)",
+  "captured_at": "2026-09-22T17:25:38.461703+00:00",
+  "status": 200,
+  "bytes": 3475917,
+  "sha256": "ed5367fa28fb32d8cbde914b3b5807be4366d42588cb341dd214fab70416e4db",
+  "content_type": "application/pdf"
+ },
+ {
+  "url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/79FAA2C16CF3D294C1258CFC004A8BDE/$FILE/Provvedimento - 20250905153416.pdf",
+  "final_url": "https://albo.comune.bari.it/AlboPretorio/BA_PubblicIntranet.nsf/0/79FAA2C16CF3D294C1258CFC004A8BDE/$FILE/Provvedimento%20-%2020250905153416.pdf",
+  "referred_by": "7c817f3ff329d068e72411c77b6e4e82c82e0eb1ff2ee0af830bbf8b1a106c7a",
+  "source_label": "Provvedimento - 20250905153416.pdf (3100 KB)",
+  "captured_at": "2026-09-22T17:25:40.181529+00:00",
+  "status": 200,
+  "bytes": 3174389,
+  "sha256": "372a9d85ff33fc454a09262e3408d7be707ce7dbca32824e4a44d3c2aeac6858",
+  "content_type": "application/pdf"
  }
 ]

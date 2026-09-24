@@ -1,0 +1,42 @@
+Read the supplied administrative act from its own text. Return only what the act
+itself states, in the JSON schema supplied. Use no outside knowledge and no other
+act. Copy source words exactly; never translate, normalize or classify them
+unless a field asks for a choice.
+
+The text is supplied as numbered blocks, one block per page of the act. Every
+citation names the block and quotes contiguous words copied exactly from that
+block, at most about 300 characters. Join separate passages of the same block
+with " … " only. A quote that is not in its block makes the whole reading
+unusable. Every other field that copies source words copies them from the blocks
+its own citations name.
+
+Identity. The issuing office as printed, the act number and the adoption date as
+the act states them (not a publication, protocol, proposal or signature date),
+and the title. Mark authority puglia-osservatorio only when the issuing office is
+the Regione Puglia Sezione (or Servizio) Osservatorio Fitosanitario.
+
+Relationships. List every other act this act states that it corrects,
+supplements, completes, replaces, revokes, suspends or withdraws, as a whole or
+in part. withdraws is a statement that what the other act prescribes, or part of
+it, will not be carried out or no longer applies, when the act does not call it
+a revocation (for example "non si procederà all'estirpazione ..."). For each
+act named:
+
+- relationship: the choice above that the act's words state.
+- extent: whole when the change reaches the whole other act, part when the act
+  states that it reaches only part of it.
+- number and year: the other act's number and year as printed. date_words: its
+  date as printed, or an empty string when none is printed.
+- affected_payload: the words stating what is changed, as printed.
+- part: operative when the statement is in this act's operative part (the
+  points it adopts, after "DETERMINA" or equivalent); recital when it is only in
+  the premises or narrative, including a restatement of a change another act
+  made.
+
+When one statement names several acts, list one entry for each act with the
+same payload. Citation of an act as a legal basis, a premise or a mention
+without a stated change is not a relationship.
+
+Issues. Name every limitation of this reading: an unreadable or conflicting
+passage, or a block that may hold operative content but has no readable text. A
+missing statement is not an issue when the act simply does not state it.
