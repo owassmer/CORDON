@@ -20,6 +20,7 @@ sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d
 from cordon_c.core import MissingInput, Snapshot  # noqa: E402
 from cordon_d.case_prescriptions import (apply_references, c_result, read_prescription,  # noqa: E402
                                          stated_limits)
+from cordon_d.document_subscription import TransportFailure  # noqa: E402
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -174,6 +175,8 @@ def held_act_changes(results, snapshot, store, options):
         except FileNotFoundError:
             report['failures'].append(dict(item, cause='no retained reading'))
             continue
+        except TransportFailure:  # the subscription, not the source: the pass stops
+            raise
         except Exception as error:  # a failed read is an execution failure, not source silence
             report['failures'].append(dict(item, cause=f'{type(error).__name__}: {error}'[:600]))
             continue
@@ -241,11 +244,20 @@ def read_one(item, options, today):
         entry['records'] = [dict(record, c=summary(c_result(snapshot, record, today))) for record in records]
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
+    except TransportFailure:  # the subscription, not the source: the pass stops
+        raise
     except Exception as error:  # a failed read is an execution failure, not source silence
         entry['cause'] = f'{type(error).__name__}: {error}'[:600]
         entry['trace'] = traceback.format_exc()[-1200:]
     entry['elapsed'] = round((datetime.now(timezone.utc) - started).total_seconds(), 1)
     return entry
+
+
+def stopped(error):
+    """A subscription usage limit or transport failure stops the pass (exit 3); it is never a
+    reading limit or an entry's cause."""
+    print(f'STOPPED {type(error).__name__}: {error}'[:800], flush=True)
+    sys.exit(3)
 
 
 def _write(path, results):
@@ -292,22 +304,32 @@ def main():
         _write(arguments.out, [done[i] for i in sorted(done)])
 
     if arguments.workers == 1:
-        for index, item in enumerate(selected):
-            finished(index, read_one(item, options, today))
+        try:
+            for index, item in enumerate(selected):
+                finished(index, read_one(item, options, today))
+        except TransportFailure as error:
+            stopped(error)
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker) as pool:
             futures = {pool.submit(read_one, item, options, today): index
                        for index, item in enumerate(selected)}
-            for future in as_completed(futures):
-                finished(futures[future], future.result())
+            try:
+                for future in as_completed(futures):
+                    finished(futures[future], future.result())
+            except TransportFailure as error:
+                pool.shutdown(wait=True, cancel_futures=True)
+                stopped(error)
     results = [done[i] for i in sorted(done)]
     # Work an act applies by reference takes the referenced order's own clause record.
     composed = {r['occurrence']: r for r in apply_references(
         [{k: v for k, v in r.items() if k != 'c'} for entry in results for r in entry.get('records', ())])}
     closures = load_closures(arguments.closures)
     changes = stated_changes(results)
-    held_changes, held_report = held_act_changes(results, snapshot, store, options)
+    try:
+        held_changes, held_report = held_act_changes(results, snapshot, store, options)
+    except TransportFailure as error:
+        stopped(error)
     for target, items in held_changes.items():
         changes.setdefault(target, []).extend(items)
     print(json.dumps(dict(held_acts_scanned=held_report['scanned'], held_acts_read=len(held_report['selected']),

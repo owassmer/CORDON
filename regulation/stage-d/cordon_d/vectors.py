@@ -40,6 +40,8 @@ import unicodedata
 from cordon_c.core import Evaluation
 from cordon_c.spatial import MetricGeometry, adopted_membership, partial_parcel
 
+from .document_subscription import (TransportFailure, UsageLimit, call_claude_images,  # noqa: F401
+                                    claude_failure)
 from .store import blob_path
 
 TRANSPORT_VERSION = 1
@@ -113,41 +115,10 @@ SYSTEM = ('You read official plant-health monitoring sources and return only sch
           'not print; state an unreadable or cut cell as an issue instead.')
 
 
-class TransportFailure(RuntimeError):
-    """The subscription, not the source, returned no reading: a usage or session limit, an
-    error envelope, no envelope, or a request past its timeout. A pass stops on it; it is
-    never recorded as a reading limit of the source."""
-
-
-class UsageLimit(TransportFailure):
-    """The Claude subscription's session or usage limit."""
-
-
-USAGE_LIMIT = re.compile(r"session limit|usage limit|rate limit|hit your .*limit|limit .*resets|"
-                         r"quota|overloaded|credit balance", re.I)
-# Error subtypes that concern the source packet: the model could not produce a conforming
-# reading of it. Any other error envelope is the transport's.
-READING_SUBTYPES = ('error_max_structured_output_retries', 'error_max_turns')
-
-
-def failure_of(returncode: int, stdout: str, stderr: str):
-    """(structured reading, None) or (None, the exception) for one `claude -p` result."""
-    try:
-        envelope = json.loads(stdout)
-    except json.JSONDecodeError:
-        text = (stderr or stdout)[-800:]
-        kind = UsageLimit if USAGE_LIMIT.search(stderr + stdout) else TransportFailure
-        return None, kind('Claude subscription returned no envelope: ' + text)
-    detail = str(envelope.get('subtype')) + ' ' + str(envelope.get('result'))[-800:]
-    if USAGE_LIMIT.search(str(envelope.get('result'))) and (returncode or envelope.get('is_error')):
-        return None, UsageLimit('Claude subscription usage limit: ' + detail)
-    if envelope.get('is_error') or returncode:
-        if envelope.get('subtype') in READING_SUBTYPES:
-            return None, RuntimeError('Claude subscription returned no reading: ' + detail)
-        return None, TransportFailure('Claude subscription transport error: ' + detail)
-    if not isinstance(envelope.get('structured_output'), dict):
-        return None, RuntimeError('Claude subscription returned no reading: ' + detail)
-    return envelope['structured_output'], None
+# The subscription's failure classes and the image-capable call are the shared transport's
+# (`document_subscription`): a usage limit or transport failure stops a pass and is never a
+# reading limit of the source.
+failure_of = claude_failure
 
 
 def clear_stale_locks(store: Path) -> int:
@@ -167,30 +138,7 @@ def clear_stale_locks(store: Path) -> int:
 
 
 def _dispatch(prompt, schema, files, model, effort, timeout):
-    command = ['claude', '-p', '--model', model, '--effort', effort, '--system-prompt', SYSTEM,
-               '--disable-slash-commands', '--strict-mcp-config', '--tools', 'Read',
-               '--allowedTools', 'Read', '--permission-mode', 'dontAsk', '--no-session-persistence',
-               '--output-format', 'json', '--json-schema', json.dumps(schema, sort_keys=True)]
-    env = dict(os.environ)
-    for key in ('ANTHROPIC_API_KEY', 'ANTHROPIC_AUTH_TOKEN', 'CLAUDE_CODE_USE_BEDROCK', 'CLAUDE_CODE_USE_VERTEX'):
-        env.pop(key, None)  # the subscription only, never a metered key
-    with TemporaryDirectory(prefix='cordon-vectors-') as directory:
-        instruction = prompt
-        if files:
-            instruction += '\nThe source images follow; read each with Read:\n'
-            for name, data, label in files:
-                path = Path(directory) / name
-                path.write_bytes(data)
-                instruction += f'{label}: {path}\n'
-        try:
-            result = subprocess.run(command + ['--add-dir', directory], input=instruction, capture_output=True,
-                                    text=True, env=env, timeout=timeout, cwd=directory)
-        except (subprocess.TimeoutExpired, OSError) as error:
-            raise TransportFailure(f'Claude subscription request failed: {type(error).__name__}: {error}'[:500]) from error
-    reading, error = failure_of(result.returncode, result.stdout, result.stderr)
-    if error is not None:
-        raise error
-    return reading
+    return call_claude_images(prompt, schema, files, model=model, effort=effort, timeout=timeout, system=SYSTEM)
 
 
 def retained(store: Path, task: str, sources, prompt: str, schema: dict, files=(), *, execute=False,

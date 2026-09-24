@@ -22,7 +22,8 @@ sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d
 from cordon_d.judgments import (CONTRACT, annulment_basis, decision_identity, judgment_events,  # noqa: E402
                                 liveness_closures, read_disposition, read_judgment)
 from cordon_d.store import blob_path, store_root  # noqa: E402
-from read_prescriptions import _wait_for_memory, _write  # noqa: E402
+from cordon_d.document_subscription import TransportFailure  # noqa: E402
+from read_prescriptions import _wait_for_memory, _write, stopped  # noqa: E402
 
 
 def decisions():
@@ -73,14 +74,21 @@ def main():
         _write(arguments.out, [done[i] for i in sorted(done)])
 
     if arguments.workers == 1:
-        for index, item in enumerate(selected):
-            finished(index, work(item, options, *extra))
+        try:
+            for index, item in enumerate(selected):
+                finished(index, work(item, options, *extra))
+        except TransportFailure as error:
+            stopped(error)
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers) as pool:
             futures = {pool.submit(work, item, options, *extra): index for index, item in enumerate(selected)}
-            for future in as_completed(futures):
-                finished(futures[future], future.result())
+            try:
+                for future in as_completed(futures):
+                    finished(futures[future], future.result())
+            except TransportFailure as error:
+                pool.shutdown(wait=True, cancel_futures=True)
+                stopped(error)
     if arguments.dispositions:
         results = [done[i] for i in sorted(done)]
         closures = liveness_closures([b for e in results for b in e.get('basis', ())])
@@ -131,6 +139,8 @@ def read_disposition_one(item, options, held, appeals):
                      issues=response['reading']['issues'], basis=attached, unattached=unattached)
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
+    except TransportFailure:  # the subscription, not the source: the pass stops
+        raise
     except Exception as error:  # a failed read is an execution failure, not source silence
         entry['cause'] = f'{type(error).__name__}: {error}'[:600]
     return entry
@@ -158,6 +168,8 @@ def read_one(item, options, held):
                                   support=e.support.reading) for e in attached])
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
+    except TransportFailure:  # the subscription, not the source: the pass stops
+        raise
     except Exception as error:  # a failed read is an execution failure, not source silence
         entry['cause'] = f'{type(error).__name__}: {error}'[:600]
     return entry
