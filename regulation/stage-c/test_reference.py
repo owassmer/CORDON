@@ -621,8 +621,9 @@ class SpatialPopulations(unittest.TestCase):
 
     def test_partial_parcel_wholly_inside_needs_the_combined_error_from_the_boundary(self):
         area = box(0, 0, 1000, 1000)
-        # A 5 m strip 100 m inside, with a real PR #8 pair of bounds: every true position of
-        # the strip lies in the area shrunk by 13.5 m, which lies in every true area.
+        # A 5 m strip 100 m inside, with PR #8's held bounds 12.46 m and 13.46 m rounded up
+        # to 12.5 m and 13.5 m: every true position of the strip lies in the area shrunk by
+        # 13.5 m, which lies in every true area.
         strip = box(100, 100, 400, 105)
         self.assertEqual(depth_in_box(strip, area), 100)
         self.assertTrue(partial_parcel(shape(strip, 12.5), shape(area, 13.5)).truth)
@@ -686,17 +687,19 @@ class SpatialPopulations(unittest.TestCase):
         # possible true shapes with no common area.
         self.assertLess(max(hypot(x, y) for x, y in parcel.exterior.coords), e_z)
         self.assertTrue(area.covers(parcel))
-        # A chord buffer drawn at e_z, or at e_z / cos(pi / (4q)), still keeps part of the parcel.
+        # A chord buffer drawn at e_z, or at e_z / cos(pi / (4q)), still keeps part of the parcel,
+        # so partial_parcel's drawn cores overlap and only the exact confirmation keeps unknown.
         core = parcel.buffer(-e_p)
         for radius in (e_z, e_z / cos(pi / (4 * QUAD_SEGMENTS))):
             self.assertGreater(core.intersection(area.buffer(-radius, quad_segs=QUAD_SEGMENTS)).area, 0)
         self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
 
     def test_partial_parcel_drawn_core_past_the_inscribed_radius_stays_unknown(self):
-        from cordon_c.spatial import QUAD_SEGMENTS, _circumscribed
+        from cordon_c.spatial import QUAD_SEGMENTS
         # Just past a polygon's inscribed radius, GEOS leaves a drawn core although no point
         # of the parcel lies farther than e_p from its boundary. A regular octagon, and the
-        # real Catasto parcel A883/ /9/2148 at two PR #8 parcel bounds, each placed a few
+        # real Catasto parcel A883/ /9/2148 at PR #8's held parcel bound of 12.46 m (area
+        # bound 13.46 m there) and at a constructed bound of 12.506 m, each placed a few
         # metres inside an area line.
         octagon = Point(0, 0).buffer(11.85, quad_segs=2)
         x0, y0, x1, y1 = PARCEL_A883_9_2148.bounds
@@ -711,8 +714,8 @@ class SpatialPopulations(unittest.TestCase):
             self.assertLess(least_half_width(parcel), e_p)
             self.assertAlmostEqual(depth_in_box(parcel, area), depth, places=6)
             self.assertLess(depth, e_p + e_z)
-            drawn = (parcel.buffer(-_circumscribed(e_p), quad_segs=QUAD_SEGMENTS)
-                     .intersection(area.buffer(-_circumscribed(e_z), quad_segs=QUAD_SEGMENTS)))
+            drawn = (parcel.buffer(-e_p, quad_segs=QUAD_SEGMENTS)
+                     .intersection(area.buffer(-e_z, quad_segs=QUAD_SEGMENTS)))
             self.assertGreater(drawn.area, 0)
             self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
 
