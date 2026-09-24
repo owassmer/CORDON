@@ -8,8 +8,8 @@ in force in that season holds a located adult record, or the rounds run out; lat
 acquired and catalogued and are listed, not transcribed. Within a round a table of the sites
 where adults were found is read in place of the round's area tables; juvenile-stage tables are
 never read. A raster publication is read header band first, and no further where neither its
-label nor any header, title or banner prints a stage, or where no date or period column, count
-header or title prints a window. A PDF table page is read from its text
+label nor any header, title or banner prints a stage, or where neither the table nor the
+publication (its folder's survey year and the day its name or server dates it to) dates its counts. A PDF table page is read from its text
 layer where that reads cleanly, else by a model page read.
 
 Replays retained readings by default; `--execute` dispatches the missing requests on the Claude
@@ -216,7 +216,7 @@ def main():
                 cause = None
                 if not vectors.prints_stage(p, got, statements.get(p.sha256)):
                     cause = 'no stage printed in its label, headers, title or banners'
-                elif not vectors.prints_window(got):
+                elif not vectors.prints_window(got) and vectors.publication_window(p) is None:
                     cause = 'no window printed for its counts (no date or period column, no window in a header or title)'
                 if cause:
                     not_transcribed.append(dict(url=p.url, units=len(rest),
@@ -257,9 +257,13 @@ def main():
                 for sha in done:
                     p = by_sha[sha]
                     records_by[sha] = vectors.records_of(p, readings.get(sha, []), statements.get(sha))
+                # A publication of one season gives it all its records; one carrying several crop
+                # series (a CNR transmission) gives each season the records of its series.
                 season_records = [x for sha in done for x in records_by[sha]
                                   if x.window and x.window[0].year == season[2]
-                                  and (not season[1] or crop(x.series or '') == crop(season[1]))]
+                                  and season in {r.season for r in rounds[sha]}
+                                  and (len({r.season for r in rounds[sha]}) == 1
+                                       or crop(x.series or '') == crop(season[1]))]
                 lacking = vectors.zones_without_adult(season_records, in_force, zones.comune_of)
                 print(f'{season} round ending {end}: {len(season_records)} records, zones without an adult: '
                       f'{len(lacking)} of {len(in_force)}', flush=True)

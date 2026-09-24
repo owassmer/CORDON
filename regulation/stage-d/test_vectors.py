@@ -477,6 +477,35 @@ class ScopedReading(unittest.TestCase):
         self.assertFalse(vectors.prints_window([({}, {'reading': turno})]))
         dated = dict(turno, columns=turno['columns'] + [dict(column='c3', header_literal='DATA', role='date', **none)])
         self.assertTrue(vectors.prints_window([({}, {'reading': dated})]))
+        cut = dict(turno, columns=[dict(c, window_literal='SETTIM') for c in turno['columns']])
+        self.assertFalse(vectors.prints_window([({}, {'reading': cut})]))
+
+    def test_a_count_without_a_printed_window_is_dated_by_its_publication_not_dropped(self):
+        composite = replace(self.publication('dati_del_monitoraggio_vettori_aggiornati_al_14_giugno_2023.jpg',
+                                             modified='Mon, 26 Jun 2023 08:00:00 GMT'),
+                            url='https://cartografia.sit.puglia.it/doc/xylella/vettori/dati2023/'
+                                'dati_del_monitoraggio_vettori_aggiornati_al_14_giugno_2023.jpg')
+        none = TransmissionText.NONE
+        reading = {'title_literal': None, 'context_literals': [], 'row_count': 1, 'notes': [], 'issues': [],
+                   'columns': [dict(column='c1', header_literal='SITO', role='site_code', **none),
+                               dict(column='c2', header_literal='Agro', role='agro', **none),
+                               dict(column='c3', header_literal='Presenza adulti SESTO TURNO', role='count',
+                                    **dict(none, stage_literal='adulti'))],
+                   'rows': [{'row_number': 1, 'key_literal': '2', 'cells': [
+                       {'column': 'c1', 'literal': '2'}, {'column': 'c2', 'literal': 'Crispiano'},
+                       {'column': 'c3', 'literal': '1'}]}]}
+        found, = vectors.records_of(composite, [(dict(table=[0, 0, 9, 9], band=0, chunk=0),
+                                                 {'request_sha256': 'e' * 64, 'reading': reading})])
+        self.assertEqual((found.stage, found.window), ('adult', (date(2023, 1, 1), date(2023, 6, 14))))
+        self.assertIn('no window printed', found.window_literal)
+        bound = onset_bound([replace(found, coordinates=None)], [], ZONE, date(2022, 12, 15), comune_of)
+        self.assertEqual(bound.upper, date(2023, 6, 14))
+        self.assertIsNone(onset_bound([replace(found, coordinates=None)], [], ZONE, date(2023, 2, 1), comune_of).upper)
+
+    def test_a_tile_that_prefixes_the_area_to_the_site_key_gives_the_same_key(self):
+        self.assertTrue(vectors._same_key(['2', 'contenimento 2']))
+        self.assertFalse(vectors._same_key(['2', 'contenimento 12']))
+        self.assertFalse(vectors._same_key(['O31', 'O33']))
 
 
 STORE_BLOB = STORE / 'blobs/sha256/b7/b7d9f757e0ca6f300d6a574bd0bd86f6b66390e45607adcc44cda8782bbc2ff0'

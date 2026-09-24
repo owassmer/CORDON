@@ -719,14 +719,15 @@ def prints_stage(publication: Publication, readings, statements=None) -> bool:
 
 def prints_window(readings) -> bool:
     """Whether a read table prints a window its counts can take: a date or period column, a count
-    column's window, or a title that prints one. Where none does, none of its counts is ever an
+    column's window that reads as one, or a title that prints one. Where none does, none of its counts is ever an
     adult window, since an adult window is a window."""
     for _, response in readings:
         reading = response['reading']
         if printed_window(reading['title_literal'] or ''):
             return True
         for column in reading['columns']:
-            if column['role'] in ('date', 'period') or (column['role'] == 'count' and column['window_literal']):
+            if column['role'] in ('date', 'period') or (
+                    column['role'] == 'count' and column['window_literal'] and printed_window(column['window_literal'])):
                 return True
     return False
 
@@ -1128,6 +1129,15 @@ def _folded_key(text):
     return re.sub(r'\W+', '', _fold(text))
 
 
+def _same_key(literals) -> bool:
+    """Whether the key literals tiles give for one row number print one key: the words of each are
+    the words of the fullest (a tile that gives the area and the site as the key agrees with one
+    that gives the site)."""
+    words = [set(re.findall(r'\w+', _fold(k))) for k in literals]
+    fullest = max(words, key=len)
+    return all(w and w <= fullest for w in words)
+
+
 def merged_rows(readings):
     """Each table's printed rows, the tiles of one row band joined by row number.
 
@@ -1146,8 +1156,7 @@ def merged_rows(readings):
         numbered = [reading_rows(part[1]['reading']) for part in parts]
         rows = [dict(r) for _, r in numbered]
         joined = len({count for count, _ in numbered}) == 1 and all(
-            len({_folded_key(r[n]['key_literal']) for r in rows if n in r}) == 1
-            for n in set().union(*rows))
+            _same_key([r[n]['key_literal'] for r in rows if n in r]) for n in set().union(*rows))
         tiles = [parts] if joined else [[part] for part in parts]
         for group in tiles:
             tile_rows = [dict(reading_rows(response['reading'])[1]) for _, response in group]
@@ -1217,10 +1226,28 @@ def window_issue(window, publication: Publication) -> str | None:
     return None
 
 
+def publication_window(publication: Publication) -> tuple[date, date, str] | None:
+    """(earliest start, latest end, basis) of a count its table prints no window for, from the
+    publication itself: no earlier than the first day of the survey year of the publisher's folder,
+    and no later than the day its name dates the data to, else the day it was published. A
+    composite prints several rounds, so its name's window dates only its last round; every round
+    it prints ended by that window's end."""
+    year = survey_year(publication)
+    if year is None:
+        return None
+    named = held_end(publication.label) or (held_window(publication.label, year) or (None, None))[1]
+    end, basis = (named, 'the day its name dates the data to') if named else (published_on(publication), 'its publication date')
+    if end is None or end.year != year:
+        return None
+    return date(year, 1, 1), end, (f'no window printed; within survey year {year} of its folder and ended by '
+                                   f'{end.isoformat()}, {basis}')
+
+
 def records_of(publication: Publication, readings, statements=None) -> list[Record]:
     """Project a publication's table readings into records, one per count, test or share cell."""
     publisher, published, protocol = _identity_of(publication, statements)
     stated_stage, stated_quote = transmission_stage(statements)
+    fallback = publication_window(publication)
     context_years = _years(publication.label)
     series_quotes = statements['reading']['series'] if statements else []
     out = []
@@ -1258,6 +1285,8 @@ def records_of(publication: Publication, readings, statements=None) -> list[Reco
                 stage, stage_literal = stated_stage, f'{stated_quote} (transmission text)'
             window = printed_window(window_literal, years) if window_literal else None
             issue = window_issue(window, publication) if window else None
+            if window is None and window_literal is None and fallback is not None:
+                window, window_literal = fallback[:2], fallback[2]
             if round_literal is None or printed_round(round_literal) is None:
                 for quote in series_quotes:
                     if series and quote['series_literal'] and _fold(quote['series_literal'])[:5] == _fold(series)[:5]:
