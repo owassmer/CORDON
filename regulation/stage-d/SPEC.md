@@ -521,7 +521,16 @@ where it prints one (equal to the order's adoption date), and the Osservatorio
 fitosanitario as issuer. Bytes, subjects and filenames attach nothing. An OpenWeb
 albo register export is read row by row: on a comune's albo a row printing the
 order is its posting, with the declared start and end; on the executor's albo a
-row is the executor's own act naming the order, dated by the act. A JCityGov
+row is the executor's own act naming the order, dated by the act and kept for what
+it states. A row that liquidates aid to owners who "hanno eseguito estirpazione …
+adempiendo a prescrizione" is a lead to removal the named recipients performed
+(row 11), not an act of removal by the executor; it supplies no C input. An issuer
+the export cuts where the field ends ("Osservatorio Fitosanita") is printed. An
+identity is the number with its year, or with its date ("n. 114 del", "DDS 138
+DEL", or a bare "00114 del" in a row that prints the issuer). Every identity a row
+with the issuer prints is attached or listed unattached with its cause: an order D
+does not hold, a date other than the order's adoption date, or a date that is not
+a readable date. A JCityGov
 detail supplies the declared start; its period end is a retention horizon, so the
 interval stays open. An image-only posted document's identity is read from its
 page images through the subscription (`posted_identity`). Whether a posting is

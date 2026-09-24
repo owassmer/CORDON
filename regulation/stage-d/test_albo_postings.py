@@ -44,14 +44,44 @@ class AlboPostings(unittest.TestCase):
     def test_an_executor_act_attaches_by_number_year_date_and_issuer(self):
         events, unattached = register_events(openweb_rows(CSV), source='a' * 64, publisher='ARIF', role='executor',
                                              held=HELD)
+        # Aid to owners who removed the plants is a lead to their removal, not the executor's act of removal.
         self.assertEqual(sorted((e.document, e.kind, e.occurred) for e in events), [
-            ('REG-PUGLIA-U181-DIR-2021-00122', 'executor-act', date(2022, 2, 22)),
-            ('REG-PUGLIA-U181-DIR-2021-00128', 'executor-act', date(2023, 3, 28))])
+            ('REG-PUGLIA-U181-DIR-2021-00122', 'aid-liquidation-for-performed-removal', date(2022, 2, 22)),
+            ('REG-PUGLIA-U181-DIR-2021-00128', 'executor-act-naming-order', date(2023, 3, 28))])
         causes = {(u['instrument'], u['cause']) for u in unattached}
         self.assertIn(('REG-PUGLIA-U181-DIR-2021-00141', "the printed date is not the held order's adoption date"),
                       causes)
         self.assertIn(('REG-PUGLIA-U181-DIR-2020-01773', 'names an order D does not hold'), causes)
         # The third row prints no issuing office: its number is not an order's identity.
+        self.assertFalse(any(u['row'] == 4 for u in unattached))
+
+    def test_every_identity_an_issuer_row_prints_is_attached_or_unattached_with_its_cause(self):
+        # ARIF DDG 360 del 09/04/2024 and DDG 1038 del 26/09/2024, shortened: the export cuts the first
+        # subject inside the issuer; the second prints "DDS 138 DEL" and a bare "00114 del".
+        held = dict(HELD, **{'REG-PUGLIA-U181-DIR-2022-00102': date(2022, 9, 15),
+                             'REG-PUGLIA-U181-DIR-2022-00089': date(2022, 8, 24),
+                             'REG-PUGLIA-U181-DIR-2023-00138': date(2023, 12, 1),
+                             'REG-PUGLIA-U181-DIR-2023-00114': date(2023, 10, 16)})
+        data = ('Tipo,numero atto,Data atto,Oggetto,Inizio pubblicazione,Fine pubblicazione,Ente,Ufficio\n'
+                'Delibere Del Direttore Generale,360,09/04/2024,"Note prescrizione abbattimenti N. 102 del '
+                '15/09/2022 – N. 89 del 24/082022 - Regime di aiuto per i proprietari che hanno eseguito '
+                'estirpazione di piante di olivo, adempiendo a prescrizione di abbattimento della Regione Puglia '
+                'Sezione Osservatorio Fitosanita",10/04/2024,25/04/2024,,\n'
+                'Delibere Del Direttore Generale,1038,26/09/2024,"Note di prescrizione abbattimento DDS 138 DEL '
+                '01/12/2023 - 00114 del 16/10/2023 - Regime di aiuto per i proprietari/conduttori che hanno '
+                'eseguito estirpazione di piante, adempiendo a prescrizione di abbattimento della Regione Puglia '
+                'Sezione Osservatorio Fitosanitario. Impegno e liquidazione.",02/10/2024,17/10/2024,,\n'
+                'Delibere Del Direttore Generale,361,09/04/2024,"Note prescrizione N. 102 del 15/09/2022 della '
+                'Regione Puglia Sezione Osserv",10/04/2024,25/04/2024,,\n').encode()
+        events, unattached = register_events(openweb_rows(data), source='a' * 64, publisher='ARIF',
+                                             role='executor', held=held)
+        self.assertEqual(sorted((e.document[-10:], e.kind) for e in events), [
+            ('2022-00102', 'aid-liquidation-for-performed-removal'),
+            ('2023-00114', 'aid-liquidation-for-performed-removal'),
+            ('2023-00138', 'aid-liquidation-for-performed-removal')])
+        self.assertEqual([(u['row'], u['words'], u['cause']) for u in unattached],
+                         [(2, 'N. 89 del 24/082022', 'the printed date is not a readable date')])
+        # An issuer cut before "fitosanitario" is not printed: the third row is not considered.
         self.assertFalse(any(u['row'] == 4 for u in unattached))
 
     def test_a_municipal_register_row_is_a_posting_with_its_declared_interval(self):

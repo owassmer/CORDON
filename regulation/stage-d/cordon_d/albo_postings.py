@@ -19,11 +19,22 @@ from .evidence import Support
 from .removal_events import act_id
 
 ISSUER = re.compile(r'osservatorio\s+fitosanitario', re.I)
+# A register export cuts a long subject: the issuer printed in part where the field ends
+# ("... Sezione Osservatorio Fitosanita").
+_CUT_ISSUER = re.compile(r'osservatorio\s+(f[a-z]{2,})\s*$', re.I)
 # "DDS 122/2021", "D.D.S. n. 85/2021", "DDS135/2021"
 NUMBERED = re.compile(r'\bD\.?\s?D\.?\s?S\.?\s*(?:n[.°]?\s*)?0*(\d{1,4})\s*/\s*(\d{4})\b', re.I)
-# "n. 128 del 04/11/2021", "N. 00005 DEL 31.01.2023", "n. 11 del 09.02.2023"
-DATED = re.compile(r'\bn(?:[.°]|r\.?)?\s*0*(\d{1,4})\s+del(?:l[’\'])?\s*(\d{1,2})[./-](\d{1,2})[./-](\d{4})\b', re.I)
+# "n. 128 del 04/11/2021", "N. 00005 DEL 31.01.2023", "DDS 138 DEL 01/12/2023", and a bare
+# "00114 del 16/10/2023" standing alone in the record's words.
+_PREFIX = r'(?:\bD\.?\s?D\.?\s?S\.?\s*(?:n(?:[.°]|r\.?)?\s*)?|\bn(?:[.°]|r\.?)?\s*|(?<![\w/.,-]))'
+DATED = re.compile(_PREFIX + r'0*(\d{1,4})\s+del(?:l[’\'])?\s*(\d{1,2})[./-](\d{1,2})[./-](\d{4})\b', re.I)
+# An identity whose date is not a readable date ("N. 89 del 24/082022").
+_UNREAD_DATE = re.compile(_PREFIX + r'0*(\d{1,4})\s+del(?:l[’\'])?\s*([\d./-]{4,12})', re.I)
 OPENWEB = ('Tipo', 'numero atto', 'Data atto', 'Oggetto', 'Inizio pubblicazione', 'Fine pubblicazione')
+# What an executor's albo row states about removal it did not carry out itself: aid to owners
+# who removed the plants in compliance with the prescription.
+_PERFORMED = re.compile(r'hanno\s+eseguito\s+(?:l[’\']\s*)?(?:estirpazion|abbattiment|eradicazion)\w*.*?'
+                        r'adempiendo\s+a\s+prescrizion', re.I | re.S)
 
 
 def _day(words):
@@ -48,6 +59,33 @@ def printed_orders(text):
     return found
 
 
+def unread_identities(text):
+    """(words, cause) for every order identity a text prints without a readable date or year."""
+    dated = set()
+    for match in DATED.finditer(text):
+        day, month, year = (int(g) for g in match.groups()[1:])
+        try:
+            date(year, month, day)
+            dated.add(match.start())
+        except ValueError:
+            pass
+    return [(match.group(0), 'the printed date is not a readable date')
+            for match in _UNREAD_DATE.finditer(text) if match.start() not in dated]
+
+
+def prints_issuer(text):
+    """The record prints the Osservatorio fitosanitario as issuer, in full or cut where its words end."""
+    cut = _CUT_ISSUER.search(text)
+    return bool(ISSUER.search(text) or (cut and 'fitosanitario'.startswith(cut.group(1).lower())))
+
+
+def row_kind(text):
+    """What an executor's albo row naming an order states: an aid liquidation to owners who removed
+    the plants in compliance with the prescription (a lead to their removal, not the executor's
+    act of removal), or another act of the executor naming the order."""
+    return 'aid-liquidation-for-performed-removal' if _PERFORMED.search(text) else 'executor-act-naming-order'
+
+
 def openweb_rows(data: bytes):
     """An OpenWeb albo register export (csv.php): one dict per posting, entities decoded, with its row number."""
     text = data.decode('utf-8', errors='replace')
@@ -67,7 +105,7 @@ def attach(identities, held, *, issuer_text):
     unattached causes).
     """
     attached, unattached = [], []
-    if not ISSUER.search(issuer_text):
+    if not prints_issuer(issuer_text):
         return attached, [dict(cause='the record does not print the Osservatorio fitosanitario as issuer')]
     for number, year, printed, words in identities:
         instrument = act_id(number, year)
@@ -86,17 +124,21 @@ def register_events(rows, *, source, publisher, role, held):
 
     `role` is 'municipal' for a comune's albo, where a row printing the order is its
     posting (declared start and end), or 'executor' for the executor's own albo,
-    where a row is the executor's act naming the order (its act date). Only rows
-    that print an order identity with the Osservatorio as issuer are considered;
-    an identity without an issuer is not an order's identity.
+    where a row is the executor's own act naming the order, dated by the act and
+    kept for what it states (`row_kind`); neither kind is execution or notice.
+    Only rows that print the Osservatorio as issuer, in full or cut where the
+    field ends, are considered; an identity without an issuer is not an order's
+    identity. Every identity such a row prints is attached or listed unattached
+    with its cause.
     """
     events, unattached = [], []
     for row in rows:
         text = ' '.join(row.get(k) or '' for k in ('Oggetto', 'Ente', 'Ufficio'))
-        identities = printed_orders(text)
-        if not identities or not ISSUER.search(text):
+        identities, unread = printed_orders(text), unread_identities(row.get('Oggetto') or '')
+        if not (identities or unread) or not prints_issuer(text):
             continue
         instruments, causes = attach(identities, held, issuer_text=text)
+        causes += [dict(words=words, instrument=None, cause=cause) for words, cause in unread]
         unattached += [dict(c, row=row['row'], subject=row['Oggetto'][:300]) for c in causes]
         words = f"{row['Tipo']} n. {row['numero atto']} del {row['Data atto']}: {row['Oggetto']}".strip()
         for instrument in instruments:
@@ -108,7 +150,8 @@ def register_events(rows, *, source, publisher, role, held):
                         events.append(AdministrativeEvent(f"{source}:row:{row['row']}:{kind}", kind, instrument,
                                                           None, _day(words_), support))
             elif _day(row['Data atto']):
-                events.append(AdministrativeEvent(f"{source}:row:{row['row']}:executor-act", 'executor-act',
+                kind = row_kind(row['Oggetto'])
+                events.append(AdministrativeEvent(f"{source}:row:{row['row']}:{kind}", kind,
                                                   instrument, None, _day(row['Data atto']), support))
     return events, unattached
 
