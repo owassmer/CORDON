@@ -4105,13 +4105,6 @@
       ]
     },
     {
-      "predicate": "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2",
-      "contracts": [
-        "plant-population",
-        "protected-status"
-      ]
-    },
-    {
       "predicate": "the infected plants are in a site of plants with particular cultural and social value designated under Article 15(2)(b)",
       "contracts": [
         "adopted-geography",

@@ -1480,6 +1480,7 @@ class OwnerRulings20260924(unittest.TestCase):
         conjunct = {"any_of": [{"predicate": self.FINDING},
                                {"provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"}]}
         for identity in ("PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+                         "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
                          "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"):
             row = self.s.version(identity, at)
             self.assertIn(conjunct, row["condition_ast"]["all_of"])

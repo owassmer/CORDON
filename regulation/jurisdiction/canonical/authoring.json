@@ -11542,7 +11542,7 @@
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "[OWNER RULING 2026-09-24, CHARACTERISTICS] For an infected olive, L.R. 4/2017 Art. 8(7bis) turns on the Article 2 characteristics, and the official monitoring record of the plant establishes them: its MONUMENTALE_ARIF flag (“Si” or “1”) or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it. A note that records only a trunk diameter establishes them when the diameter meets this criterion. [INTERPRETATION, NOT LITERAL STATUTORY TEXT] A diameter the surveyor records without a height is read as taken at the criterion's 130 cm; a diameter recorded at another height is not this measure and leaves the criterion unknown. Ground: the forestry convention that the “diametro” of a standing tree is its diameter at breast height, which is the 130 cm height Article 2(1)(a) itself names. Falsifier: a record or protocol showing the surveyors measured at another height. Article 2(1)(b) and 2(2) are other grounds and are not this row. The Art. 8(7bis) and DDS 45/2023 characteristics conjuncts reach this row beside the official monitoring finding.",
+    "semantic_note": "[OWNER RULING 2026-09-24, CHARACTERISTICS] For an infected olive, L.R. 4/2017 Art. 8(7bis) turns on the Article 2 characteristics, and the official monitoring record of the plant establishes them: its MONUMENTALE_ARIF flag (“Si” or “1”) or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it. A note that records only a trunk diameter establishes them when the diameter meets this criterion. [INTERPRETATION, NOT LITERAL STATUTORY TEXT] A diameter the surveyor records without a height is read as taken at the criterion's 130 cm; a diameter recorded at another height is not this measure and leaves the criterion unknown. Ground: the forestry convention that the “diametro” of a standing tree is its diameter at breast height, which is the 130 cm height Article 2(1)(a) itself names. Falsifier: a record or protocol showing the surveyors measured at another height. Article 2(1)(b) and 2(2) are other grounds and are not this row. The Art. 8(7bis), DDS 4/2022 and DDS 45/2023 characteristics conjuncts reach this row beside the official monitoring finding.",
     "condition_ast": {
       "route_table": [
         {
@@ -25443,7 +25443,8 @@
     "effective_from": "2022-02-01",
     "external_dependencies": [
       "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
-      "EU-2020-1201:13(1)"
+      "EU-2020-1201:13(1)",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
     "article": "case operative delta",
@@ -25453,7 +25454,14 @@
           "predicate": "infected olive"
         },
         {
-          "predicate": "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2"
+          "any_of": [
+            {
+              "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+            },
+            {
+              "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+            }
+          ]
         },
         {
           "predicate": "owner election"
@@ -25468,7 +25476,8 @@
     },
     "higher_authority_dependencies": [
       "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
-      "EU-2020-1201:13(1)"
+      "EU-2020-1201:13(1)",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "effective_to_exclusive": "",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
@@ -25488,7 +25497,7 @@
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Exact event-time effect; reusable law remains unchanged. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(e)] The order grounds the alternative on L.R. 4/2017 Art. 8(7bis), which turns on Article 2 characteristics; officially recognized trees also have them, so “ufficialmente riconosciute o con caratteristiche di monumentalità” reduces to the characteristics. [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts; the held notes print it as “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act.",
+    "semantic_note": "[CASE DELTA ONLY] Exact event-time effect; reusable law remains unchanged. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(e)] The order grounds the alternative on L.R. 4/2017 Art. 8(7bis), which turns on Article 2 characteristics; officially recognized trees also have them, so “ufficialmente riconosciute o con caratteristiche di monumentalità” reduces to the characteristics. [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts; the held notes print it as “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result), so A, not D, composes the measurement route.",
     "authority_judgment_required": "YES",
     "evidence_contract": "The case plant's infection and its L.R. 14/2007 Article 2 monumental characteristics, the elected alternative, and applicable higher-law permission and regional authorization.",
     "reserved_decision_owner": "Regional Plant Health Service",

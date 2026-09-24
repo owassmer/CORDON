@@ -15085,10 +15085,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-1.json",
-        "record_sha256": "0a2ad4e7d7b4ca8677c53da3a066c613d314c21c2b5bf6b6c2feb00cff3af226"
+        "record_sha256": "eb25aa11f95d1d7aba4d3b67a5b4d358fabd9121846dc0b79be08ec2aef46ecc"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "2b8c94b3fdb9e7b3f524a7f7e6323342f209914fa471e1e61c324dd69beab3b1"
+      "accepted_content_sha256": "21b7ac449591090dbb85f6bf599634356137ab3ac6465e5024445dbb74c70f85"
     },
     {
       "seam": 2,
@@ -15099,10 +15099,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-2.json",
-        "record_sha256": "35ad72b4d888b250ecf35704ff8e09aaa472af30f53c8a46a78d3b6c9c887b8b"
+        "record_sha256": "dff3a08a2a89c431d2cc24d4a00445300bb10f2fe4e59af1eb60928e4e165f10"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "f878a7649027db52a295dfc6bdd9f69f55be41dc277595998e1b6252e0f8742a"
+      "accepted_content_sha256": "de8f9c95469879f2c0264c41f986e8691b3607bc134915e814c08903d7e66133"
     },
     {
       "seam": 3,
@@ -15113,10 +15113,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-3.json",
-        "record_sha256": "0e95971adf82b6327c05daf9370c1c5b1956c66680a366e7609320df18ff0add"
+        "record_sha256": "d736381b5ff57a9846d4a339e08aee48f0fac878c319f91922dd9aa27926ef02"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "bce4900ee866ed117c364d1187dc72c0e3e5651ff779011d554edf542139f4d9"
+      "accepted_content_sha256": "62976befd8b80d60d7912213b4c1d5997677005b21e32d615a4bb9a44ec94c32"
     },
     {
       "seam": 4,
@@ -15127,10 +15127,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-4.json",
-        "record_sha256": "08e22d0e234f1f76d88f57839f1f5b2470e5275f9500c5d258ea6f5829088d0a"
+        "record_sha256": "71c93f534b04f6ee82118a353135bba0a04b5baa00ce72c74f2fefef435fbc12"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "db6b6019ec166eed4598e70f9500e74093cca5d3180e19afc0f6eb46843d6dd5"
+      "accepted_content_sha256": "16e478bb99cacd4b951e31f360cc6901b7e417f0397b634279cae8e27a5b21ae"
     }
   ]
 }

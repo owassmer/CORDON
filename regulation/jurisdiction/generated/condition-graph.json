@@ -6317,7 +6317,14 @@
             "predicate": "infected olive"
           },
           {
-            "predicate": "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2"
+            "any_of": [
+              {
+                "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+              },
+              {
+                "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+              }
+            ]
           },
           {
             "predicate": "owner election"

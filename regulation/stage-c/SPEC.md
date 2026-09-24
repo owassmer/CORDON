@@ -76,7 +76,7 @@ decision, the definitive decision's publication ends it, and only a definitive
 approval republished on BURP lists the tree. `trunk_diameter_facts` compares a
 recorded trunk diameter with B's Art. 2(1)(a) floor; a diameter taken at a
 stated height other than B's measurement height is unknown. A composes that
-result into the Art. 8(7bis) and DDS 45/2023 characteristics conjuncts beside
+result into the Art. 8(7bis), DDS 4/2022 and DDS 45/2023 characteristics conjuncts beside
 the official monitoring finding; C binds its two outcomes.
 `timely_completion` compares this clock's own qualifying performance with its
 boundary. Equality satisfies an elapsed-hour deadline; the following midnight

@@ -17,7 +17,7 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "9b6bf55f3756f0156d675340395b484fa86bc2f2aa6954caedec1bbadda82a49",
+          "sha256": "c2c9ee807fdb5e0336193ec1559b0ab4a64397c0daf6706dc9669b905990ca07",
           "provision_versions": 426,
           "national_prefix_rows": 220,
           "national_prefix_sha256": "7fc93c6fbc9c9b15245482d7ea4ad458ab404867a395bcaf1f2084086b99dd37"
@@ -35,7 +35,7 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "a8dae956ea08c59ac2b97e7682dd1e5b8a0ae91006185a097804f96ff18893ee",
+        "sha256": "4c8499c4431177ca17785274d9179c7548d349e2cfc699d21d81938e4c3c7f61",
         "schema": "stage-b-essence-v6",
         "counts": {
           "clocks": 126,
@@ -68,11 +68,11 @@
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
         "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr32.json",
-        "sha256": "140160ab2290e72d643ad40c61d3b775dc2c5c4f63f3000858808ca157e50ffc"
+        "sha256": "9ca7c10d09f401a28fa9d6063c5362ae0b89f1f6f673b4b3473ef9b5b9404347"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "4b184c46154e7e108ed822f03e939ced7323e63a0806e486cb517bdcca7833fc",
+        "sha256": "b1772983f66ad825a883732d8b728fe6ae932908864aaa05682714969281c331",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },
@@ -91,7 +91,6 @@
       "next": [
         "Rebuild row 3 adopted geography as each adopting act defines the zone (PR #8).",
         "Encode DDS 18/2024's withdrawal of 50 m host removal from five 2023 orders in Stage A, so 113/2023 and 124/2023 become definite (PR #35).",
-        "Encode recipient notice through Art. 21-bis mass publicity in Stage A (PR #32).",
         "Supply the Osservatorio-held records for live removal orders: recipient delivery, standing and execution (rows 7, 8 and 11; PR #33).",
         "Replace the stated device term with a held input named in plant-population's positional_qualification: ARIF's per-fix accuracy or device and capture mode per record, a bound from re-samples linked by ID_CAMPIONE, or a calibration of the documented device and app.",
         "Replan subject populations (rows 4-5) on the rebuilt PR #8; continue protected plants; then run whole-D convergent review for Owen acceptance before Stage E."
