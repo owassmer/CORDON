@@ -420,7 +420,8 @@ its term, anchor, commitment, coercive population or executor. A validated first
 reading that states a clause limit gets one source-only reread whose request
 states the limit and that definition; a limit the reread still states stands.
 
-One record is one enforcement clause over the work it enforces: instrument,
+One record is one enforcement clause over the work it enforces (for an order whose
+annex positions are read, one record per clause and annex position): instrument,
 recipients and cohort as printed, the prescribed scope, the commencement work and
 population, the stated term as printed (number and unit word, never classified),
 its anchor, the stated consequence and commitment, the coercive population with
@@ -434,7 +435,20 @@ same clause are one clause; copies that read it differently leave the work
 unknown. An act that prescribes no work to
 recipients has no record. Governing A references are every A row of the
 instrument and every row whose `corrects_instrument_ids` names it. Annex
-positions are not read.
+positions are read only for the orders named in `corrects_instrument_ids` by an
+in-force row whose condition asks a predicate `predicate-contracts.json` binds to
+a position field (`cordon_d.annex_positions`); for those orders the writer emits
+one record per clause and annex position. The annex the cohort names is read from
+the retained original's text layer, each rotated line placed in the band between
+the page's drawn row rules: the infected-plant rows (sample, foglio, particella)
+and the 50 m rows (foglio, particelle, owners). A position is one printed owner
+with every parcel printed against it and the listed infected plants on those
+parcels; a 50 m listing that places no recipient is a position with no recipient,
+unknown and naming its printed words. The infected-plant rows must equal the
+operative "n° N piante" and every infected plant's parcel must have a 50 m row
+naming its owners; otherwise every position of the order is unknown, naming the
+failed check. The position goes in the record's recipient positions field; the
+cohort stays as printed and the occurrence names the clause and position.
 
 Retained copies compare what they say: case, whitespace, punctuation and articles
 aside. A list label the page prints inside a clause (a lettered point, a bullet or
@@ -445,7 +459,15 @@ running from notification, a committed consequence, a coercive population and an
 executor. A clause's own reading limit leaves it unknown. Lawful dueness is the
 order's own reading: its operative part prescribes the work to its recipients and
 names the population for coercion (`order_dueness`). `lawfully_due` holds that
-reading to every governing A row. A held court disposition reaches it from its
+reading to every governing A row that is both required (in force, and the order's
+own or naming it) and reached, separately for the commencement-work and the
+coercive predicate, from each row's result for that predicate. A reached row that
+is unresolved passes its own needs through. A row whose result is
+`POPULATION_NOT_LAWFULLY_DUE` makes it false; one whose result is
+`LAWFULLY_DUE_IN_PART` keeps the reading and names the row, except that the work
+of a record carrying no annex position stays unknown, naming the recipient's
+position in the order's annex. No other effect is read. A stated change counts
+only from its stating act's adoption. A held court disposition reaches it from its
 publication: an annulment closes the order only for the scope the decision states
 (for the applicants, false for a recipient within it, live outside it, and
 unknown naming the scope while the recipient is not identified); an interim

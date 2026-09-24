@@ -18,8 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d')]
 
 from cordon_c.core import MissingInput, Snapshot  # noqa: E402
-from cordon_d.case_prescriptions import (apply_references, c_result, read_prescription,  # noqa: E402
-                                         stated_limits)
+from cordon_d import annex_positions  # noqa: E402
+from cordon_d.case_prescriptions import (annex_position, apply_references, c_result,  # noqa: E402
+                                         read_prescription, stated_limits)
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -140,7 +141,7 @@ def stated_changes(results):
             target = act_id(re.sub(r'\D', '', item['number']), item['year'])
             if target != origin:
                 changes.setdefault(target, []).append(dict(
-                    {'from': origin}, relationship=item['relationship'],
+                    {'from': origin}, adopted=source.get('adopted'), relationship=item['relationship'],
                     affected_payload=item['affected_payload'], source=entry['source']))
     return changes
 
@@ -188,7 +189,15 @@ def held_act_changes(results, snapshot, store, options):
 
 
 def summary(evaluation):
-    return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
+    """C's result as written: truth, effect, needs, and the provisions it rests on (the row that limits
+    a direction to part of its population is among them)."""
+    return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs),
+                provisions=sorted(evaluation.provisions))
+
+
+def position_results(snapshot, record, today):
+    """The governing rows' results for a record at an annex position, per (row, predicate)."""
+    return annex_positions.governing_results(snapshot, record, today, annex_position(record))
 
 
 _WORKER = {}
@@ -238,7 +247,11 @@ def read_one(item, options, today):
         except MissingInput as error:
             entry['records_cause'] = str(error)
             records = []
-        entry['records'] = [dict(record, c=summary(c_result(snapshot, record, today))) for record in records]
+        # An order an in-force row names with a whole-or-part effect: one record per clause and annex position.
+        records = [r for record in records for r in annex_positions.expand(record, snapshot, today, store)]
+        entry['records'] = [dict(record, c=summary(c_result(
+            snapshot, record, today, governing_results=position_results(snapshot, record, today))))
+            for record in records]
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -320,7 +333,9 @@ def main():
                                  c=summary(c_result(
                                      snapshot, composed[r['occurrence']], today,
                                      closures=closures.get(composed[r['occurrence']]['instrument'], ()),
-                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()))))
+                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()),
+                                     governing_results=position_results(snapshot, composed[r['occurrence']],
+                                                                        today))))
                             for r in entry.get('records', ())]
     results.append(dict(held_acts=held_report))
     if arguments.out:
