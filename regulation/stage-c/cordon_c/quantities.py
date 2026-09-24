@@ -206,19 +206,21 @@ def continuous_duration_support(snapshot: Snapshot, identity: str, at: date, *,
                                  anchor: date | datetime, required_start: datetime,
                                  intervals, evaluated_at: datetime, records_complete: bool,
                                  zone: ZoneInfo, calendar: WorkingCalendar | None = None,
-                                 rule: PeriodRule | None = None) -> Evaluation:
+                                 rule: PeriodRule | None = None,
+                                 stated_term: tuple[str, str] | None = None) -> Evaluation:
     """Continuous performance where the operative duty actually requires it.
 
     This does not turn a survey follow-up duration into continuous observation.
     Its consumer must require continuity (for example consecutive publication).
     required_start preserves the separately established counting convention.
+    stated_term reaches clock_boundary unchanged; a missing one is unknown.
     """
     row = snapshot.quantity(identity, at)
     if row["kind"] != "minimum_duration":
         raise ValueError("Minimum-duration clock required")
     try:
         end = clock_boundary(snapshot, identity, at, anchor, zone=zone,
-                             calendar=calendar, rule=rule)
+                             calendar=calendar, rule=rule, stated_term=stated_term)
     except MissingInput as error:
         return Evaluation(None, needs=frozenset({str(error)}))
     return interval_coverage(required_start, end, intervals,

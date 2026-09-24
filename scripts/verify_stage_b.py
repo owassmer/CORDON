@@ -272,10 +272,11 @@ def main(ledger_path=B, stage_a_paths=None, population_path=POPULATION):
                 m = r['magnitude']
                 if isinstance(m, dict):
                     # A term the named instrument states: B holds no number, unit or bound, and no default.
-                    if set(m) != PVALUE[3] or not all(isinstance(x, str) and x for x in m.values()) or r['kind'] != 'deadline' \
+                    if set(m) != PVALUE[3] or not all(isinstance(x, str) and x for x in m.values()) \
+                            or r['kind'] not in ('deadline', 'minimum_duration') \
                             or r['unit'] is not None or r['bound'] is not None \
                             or re.search(rf'\b(?:{NUMBER}|{"|".join(NUMBER_WORDS)})\b', norm(r['source_phrase'])):
-                        fail(f'{rid}: a reserved term is a deadline whose phrase, unit and bound carry no quantity')
+                        fail(f'{rid}: a reserved term is a deadline or minimum duration whose phrase, unit and bound carry no quantity')
                     m = None
                 elif m is not None and not re.fullmatch(r'\d+(\.\d+)?', m): fail(f'{rid}: magnitude not numeric')
                 if r['bound'] not in (None, 'exact', 'floor'): fail(f'{rid}: bound vocabulary')

@@ -5,12 +5,12 @@ from B at the legal event date. Qualitative facts retain their A identity; D wil
 bind those facts and the typed mathematical inputs to evidence.
 """
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from collections.abc import Mapping
 
 from .core import Evaluation, MissingInput, Snapshot, evaluate, negation, disjunction, predicate_value
 from .diagnostic import AssayResult, analytical_predicates
-from .quantities import scalar, clock_boundary, PeriodRule, timely_completion, clock_ordering
+from .quantities import scalar, clock_boundary, PeriodRule, timely_completion, clock_ordering, continuous_duration_support
 from .temporal import elapsed_hours, utc, WorkingCalendar, occurrence_in_window
 from .core import conjunction
 from zoneinfo import ZoneInfo
@@ -324,7 +324,7 @@ def four_year_lifting_facts(snapshot: Snapshot, at: date, established: date,
 
 
 def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
-                          notification: datetime, evaluated_at: datetime,
+                          notification: date | datetime | None, evaluated_at: datetime,
                           qualifying_commencements: Mapping[str, datetime],
                           commencement_records_complete: bool,
                           zone: ZoneInfo, rule: PeriodRule | None = None,
@@ -333,10 +333,12 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
     """Only the temporal components of the case-qualified enforcement condition.
 
     The period is the prescription's own stated term (number, printed unit
-    word); without it the deadline is unknown.
-    Notification, work identity and lawful prescription remain A's conditions.
-    The performances must concern this exact work. Commencement before notice
-    also defeats noncommencement; no second commencement is demanded.
+    word); without it the deadline is unknown. Without a notification day or
+    instant there is no deadline: both components stay unknown.
+    Whether notification is legally sufficient, work identity and lawful
+    prescription remain A's conditions. The performances must concern this
+    exact work. Commencement before notice also defeats noncommencement; no
+    second commencement is demanded.
     """
     clock = snapshot.quantity(clock_id, at)
     row = snapshot.version(clock["consumer_decision"], at)
@@ -344,6 +346,9 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
                 "noncommencement of that work by the source deadline is established"}
     if not required <= set(leaves(row["condition_ast"])):
         raise ValueError("Clock does not feed the case noncommencement condition")
+    if notification is None:
+        unknown = Evaluation(None, needs=frozenset({"legally sufficient notification of the prescription to this recipient"}))
+        return bind(row, dict.fromkeys(required, unknown))
     end = clock_boundary(snapshot, clock_id, at, notification, zone=zone, rule=rule, calendar=calendar,
                          stated_term=stated_term)
     through = utc(evaluated_at)
@@ -355,6 +360,87 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
               else Evaluation(None, needs=frozenset({"commencement evidence through the source deadline"})))
     return bind(row, {"the source notification-based commencement deadline has elapsed": elapsed,
                       "noncommencement of that work by the source deadline is established": absent})
+
+
+def mass_publicity_facts(snapshot: Snapshot, at: date, *,
+                         ground_stated: bool | Evaluation, annulled_on_ground: bool | Evaluation,
+                         posting_start: datetime | None,
+                         postings: Mapping[str, tuple[datetime, datetime | None]],
+                         postings_complete: bool, stated_period: tuple[str, str] | None,
+                         evaluated_at: datetime, zone: ZoneInfo) -> tuple[dict, date | None]:
+    """Law 241/1990 Art. 21-bis mass publicity for one act, from its own text and posting records.
+
+    ground_stated is whether the act states its own ground for public posting;
+    stated_period is the posting period the act prints (number, unit word),
+    never a plan's default. The posting must run continuously from its start
+    through the stated period. Returns the bound facts and the last day of the
+    stated period, only when A's row gives effectiveness on those facts;
+    otherwise no notification day, so no Art. 21-ter deadline can run from it.
+    """
+    identity = "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
+    row = snapshot.version(identity, at)
+    clocks = [c for c in snapshot.clocks.values()
+              if c["consumer_decision"] == row["stable_provision_id"] and c["kind"] == "minimum_duration"]
+    if len(clocks) != 1:
+        raise ValueError("Mass-publicity route has no unique stated-period clock")
+    period = stated_period
+    if posting_start is None:
+        completed = Evaluation(None, needs=frozenset({"start of the posting the act states"}))
+    else:
+        completed = continuous_duration_support(snapshot, clocks[0]["clock_id"], at, anchor=posting_start,
+            required_start=posting_start, intervals=postings, evaluated_at=evaluated_at,
+            records_complete=postings_complete, zone=zone, stated_term=period)
+    facts = bind(row, {
+        "the act states its own ground for reaching its recipients by public posting": ground_stated,
+        "the publicity form the act states has been completed": completed,
+        "a court has annulled the act on its stated ground for public posting": annulled_on_ground,
+    })
+    if evaluate(snapshot, identity, at, facts).effect != "ACT_EFFECTIVE_AGAINST_RECIPIENT":
+        return facts, None
+    end = clock_boundary(snapshot, clocks[0]["clock_id"], at, posting_start, zone=zone, stated_term=period)
+    return facts, end.astimezone(zone).date() - timedelta(days=1)
+
+
+def listing_facts(snapshot: Snapshot, at: date, *, own_entry: bool | None,
+                  first_publication: date | None, definitive_decision: tuple[date, bool] | None,
+                  deletion: date | None, entry_history_complete: bool) -> dict:
+    """L.R. Puglia 14/2007 Art. 5 status of one tree at the event date `at`.
+
+    own_entry is whether the tree has an entry of its own (a listed grove is
+    not one). first_publication is the BURP date of the provisional list
+    carrying the entry; definitive_decision is the BURP date of the Giunta's
+    definitive decision on it and whether that decision approved the entry;
+    deletion is the date of an act deleting it. An absent date is no such act
+    only when the entry's act history is complete; otherwise it is unknown.
+    """
+    if first_publication and definitive_decision and definitive_decision[0] < first_publication:
+        raise ValueError("A definitive decision cannot precede the entry's first publication")
+
+    def dated(day: date | None, need: str) -> Evaluation:
+        if day is not None:
+            return Evaluation(day <= at)
+        return Evaluation(False) if entry_history_complete else Evaluation(None, needs=frozenset({need}))
+
+    own = Evaluation(None, needs=frozenset({"whether the tree has its own list entry"})) if own_entry is None \
+        else Evaluation(own_entry)
+    published = conjunction([own, dated(first_publication, "the entry's first BURP publication date")])
+    if definitive_decision is None:
+        decided = approved = dated(None, "the Giunta's definitive decision on the entry and its BURP publication date")
+    else:
+        day, approves = definitive_decision
+        decided = Evaluation(day <= at)
+        approved = Evaluation(day <= at and approves)
+    return merge_facts(
+        bind(snapshot.version("PUG-LR14-2007:Art.5(3):definitive-listing", at), {
+            "the tree has its own entry in an Article 5 list": own,
+            "the Giunta approved that entry definitively and the list containing it was republished on BURP on or before the event date": approved,
+            "the entry was deleted from the list on or before the event date": dated(deletion, "the entry's deletion act and date"),
+        }),
+        bind(snapshot.version("PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition", at), {
+            "the tree has its own entry in a list approved provisionally and published on BURP under Article 5(2) on or before the event date": published,
+            "the Giunta's definitive decision on that entry was published on BURP on or before the event date": decided,
+        }),
+    )
 
 
 def election_window_facts(snapshot: Snapshot, clock_id: str, consumer: str, at: date, *,

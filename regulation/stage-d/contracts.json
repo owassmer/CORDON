@@ -112,7 +112,7 @@
         "publication date",
         "effective interval",
         "operative clause and annex selectors",
-        "supersession/correction/annulment basis",
+        "supersession/correction/annulment basis, including whether a court disposition annuls the act on its stated ground for public posting",
         "actual exercised choice where relevant"
       ],
       "acquisition_routes": [
@@ -170,7 +170,7 @@
         "communication content",
         "delivery/completion date or instant",
         "publication interval and continuity",
-        "act-specific mass-publicity basis",
+        "the act's own stated ground for public posting, verbatim with its page, kept apart from a recital restating Article 21-bis and from a plan instruction; and the publicity form the act states: place, and the period as printed (number and unit word)",
         "reasoned immediate-effect qualification"
       ],
       "acquisition_routes": [
@@ -474,10 +474,10 @@
         "interval"
       ],
       "fields": [
-        "official/provisional recognition",
+        "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
         "applicable protection rule",
         "value assessment if that ground applies",
-        "pending status",
+        "the Osservatorio's recognition-request record for the tree",
         "landscape application/opinion/decision where required"
       ],
       "acquisition_routes": [

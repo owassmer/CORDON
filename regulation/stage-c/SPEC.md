@@ -56,7 +56,15 @@ exact required work, including a commencement before notice. Neither elapsed
 time nor an incomplete execution record proves noncommencement. Its period is
 the term the prescription states, as a number and printed unit word that B's
 conventions map; a missing term is unknown, and a stated term passed to a clock
-B fixes is refused.
+B fixes is refused. Without a notification day there is no deadline. Whether
+notification is legally sufficient is A's Art. 21-bis result, reached through
+bound references. `mass_publicity_facts` computes whether the posting ran
+continuously through the period the act states (no default period) and returns
+the period's last day as the notification day only when the Art. 21-bis row
+gives effectiveness. `listing_facts` reads L.R. 14/2007 Art. 5 status at the
+event date from the tree's own entry dates: first publication gives a pending
+decision, the definitive decision's publication ends it, and only a definitive
+approval republished on BURP lists the tree.
 `timely_completion` compares this clock's own qualifying performance with its
 boundary. Equality satisfies an elapsed-hour deadline; the following midnight
 is outside a whole-day deadline. Missing performance evidence and a still-open

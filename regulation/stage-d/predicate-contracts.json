@@ -247,6 +247,12 @@
       ]
     },
     {
+      "predicate": "a court has annulled the act on its stated ground for public posting",
+      "contracts": [
+        "operative-act"
+      ]
+    },
+    {
       "predicate": "a demarcated area is established",
       "contracts": [
         "operative-act",
@@ -1356,13 +1362,6 @@
       ]
     },
     {
-      "predicate": "effective order",
-      "contracts": [
-        "operative-act",
-        "case-prescription"
-      ]
-    },
-    {
       "predicate": "effective plan interval",
       "contracts": [
         "evaluation-context"
@@ -1993,11 +1992,10 @@
       ]
     },
     {
-      "predicate": "infected monumental or visually qualifying olive",
+      "predicate": "infected olive",
       "contracts": [
         "official-finding",
-        "plant-population",
-        "protected-status"
+        "plant-population"
       ]
     },
     {
@@ -2123,12 +2121,6 @@
         "operative-act",
         "adopted-geography",
         "operative-assessment"
-      ]
-    },
-    {
-      "predicate": "legally sufficient notification of that prescription to this recipient has occurred",
-      "contracts": [
-        "recipient-notice"
       ]
     },
     {
@@ -2398,12 +2390,6 @@
       ]
     },
     {
-      "predicate": "official protected/value designation",
-      "contracts": [
-        "protected-status"
-      ]
-    },
-    {
       "predicate": "official sample analysed and result returned through the Regional Plant Health Service's official-laboratory route",
       "contracts": [
         "official-finding",
@@ -2435,13 +2421,6 @@
       "predicate": "official-measure prescription",
       "contracts": [
         "personnel-assignment"
-      ]
-    },
-    {
-      "predicate": "officially recognized monumental olive in the 50 m infected zone that tested negative",
-      "contracts": [
-        "plant-population",
-        "protected-status"
       ]
     },
     {
@@ -2566,20 +2545,6 @@
       "predicate": "partial parcel intersection",
       "contracts": [
         "adopted-geography"
-      ]
-    },
-    {
-      "predicate": "particularly burdensome personal communication",
-      "contracts": [
-        "recipient-notice",
-        "operative-assessment"
-      ]
-    },
-    {
-      "predicate": "pending recognition decision",
-      "contracts": [
-        "protected-status",
-        "operative-assessment"
       ]
     },
     {
@@ -2980,20 +2945,6 @@
       ]
     },
     {
-      "predicate": "recipient number makes personal communication impossible for the exact act",
-      "contracts": [
-        "recipient-notice",
-        "operative-assessment"
-      ]
-    },
-    {
-      "predicate": "recipient number makes personal communication particularly burdensome for the exact act",
-      "contracts": [
-        "recipient-notice",
-        "operative-assessment"
-      ]
-    },
-    {
       "predicate": "record identifies plants, species and/or surface",
       "contracts": [
         "removal-performance"
@@ -3280,18 +3231,6 @@
       ]
     },
     {
-      "predicate": "selected suitable publicity",
-      "contracts": [
-        "recipient-notice"
-      ]
-    },
-    {
-      "predicate": "selected suitable publicity route",
-      "contracts": [
-        "recipient-notice"
-      ]
-    },
-    {
       "predicate": "similar accredited method",
       "contracts": [
         "laboratory-status"
@@ -3329,18 +3268,6 @@
       "contracts": [
         "operative-act",
         "adopted-geography"
-      ]
-    },
-    {
-      "predicate": "source finding of particularly burdensome personal communication",
-      "contracts": [
-        "recipient-notice"
-      ]
-    },
-    {
-      "predicate": "source finding of unlocatable recipients",
-      "contracts": [
-        "recipient-notice"
       ]
     },
     {
@@ -3715,6 +3642,18 @@
       ]
     },
     {
+      "predicate": "the Giunta approved that entry definitively and the list containing it was republished on BURP on or before the event date",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the Giunta's definitive decision on that entry was published on BURP on or before the event date",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
       "predicate": "the Law 689 Article 24 exception applies",
       "contracts": []
     },
@@ -3851,6 +3790,12 @@
       ]
     },
     {
+      "predicate": "the Osservatorio's recognition request for this tree awaits decision",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
       "predicate": "the Regional Plant Health Service decides the official confirmation of the finding on the diagnosis of a validly designated official laboratory (Article 14)",
       "contracts": [
         "official-finding"
@@ -3904,6 +3849,12 @@
       "predicate": "the act restricts the recipient’s legal sphere",
       "contracts": [
         "operative-act",
+        "recipient-notice"
+      ]
+    },
+    {
+      "predicate": "the act states its own ground for reaching its recipients by public posting",
+      "contracts": [
         "recipient-notice"
       ]
     },
@@ -4107,6 +4058,12 @@
       ]
     },
     {
+      "predicate": "the entry was deleted from the list on or before the event date",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
       "predicate": "the exact official task falls under the Article 37 designation route",
       "contracts": [
         "laboratory-status"
@@ -4153,6 +4110,13 @@
       "predicate": "the first useful National Plant Health Committee meeting occurs",
       "contracts": [
         "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2",
+      "contracts": [
+        "plant-population",
+        "protected-status"
       ]
     },
     {
@@ -4296,6 +4260,14 @@
       ]
     },
     {
+      "predicate": "the olive stands in the 50 m infected zone and tested negative",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "adopted-geography"
+      ]
+    },
+    {
       "predicate": "the operative prescription governing this recipient states in its operative part a commencement term running from notification and commits the Osservatorio to direct coercive removal on noncommencement",
       "contracts": [
         "operative-act",
@@ -4430,6 +4402,12 @@
       "contracts": [
         "protected-status",
         "operative-assessment"
+      ]
+    },
+    {
+      "predicate": "the publicity form the act states has been completed",
+      "contracts": [
+        "recipient-notice"
       ]
     },
     {
@@ -4612,12 +4590,6 @@
       ]
     },
     {
-      "predicate": "the suitable publicity established by the administration for that act has been completed",
-      "contracts": [
-        "recipient-notice"
-      ]
-    },
-    {
       "predicate": "the superintendent receives the complete acts for the landscape-authorization application",
       "contracts": [
         "administrative-event",
@@ -4640,6 +4612,20 @@
       "predicate": "the territorial unit’s plant-health emergency is in progress",
       "contracts": [
         "administrative-event"
+      ]
+    },
+    {
+      "predicate": "the tree has its own entry in a list approved provisionally and published on BURP under Article 5(2) on or before the event date",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the tree has its own entry in an Article 5 list",
+      "contracts": [
+        "plant-population",
+        "protected-status"
       ]
     },
     {
@@ -4720,12 +4706,6 @@
       "contracts": [
         "operative-act",
         "operative-assessment"
-      ]
-    },
-    {
-      "predicate": "unlocatable recipients",
-      "contracts": [
-        "recipient-notice"
       ]
     },
     {

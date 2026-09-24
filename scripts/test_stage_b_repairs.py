@@ -1718,8 +1718,9 @@ class Round9Repairs(unittest.TestCase):
                 'a valid immediate-effect exception applies': False,
                 'the communication to that recipient has been effected, including in the forms prescribed for notification to the unreachable in the cases provided by the code of civil procedure': True}, True),
             ('mass-publicity-route:v1', {
-                'recipient number makes personal communication particularly burdensome for the exact act': True,
-                'the suitable publicity established by the administration for that act has been completed': True}, True),
+                'the act states its own ground for reaching its recipients by public posting': True,
+                'the publicity form the act states has been completed': True,
+                'a court has annulled the act on its stated ground for public posting': False}, True),
             ('motivated-immediate-effect:v1', {
                 'the restrictive measure is sanctioning': False,
                 'the measure contains a reasoned immediate-effect clause': True}, False),
@@ -1973,6 +1974,7 @@ class Round10Repairs(unittest.TestCase):
     scenario = Round9Repairs.scenario
     set_predicates = Round9Repairs.set_predicates
     LR = 'PUG-LR4-2017:Art.8(5):protected-uninfected-retention'
+    LISTED = 'PUG-LR14-2007:Art.5(3):definitive-listing'
     POLICY = 'the operative regional retention policy covers this individually qualifying plant'
     DDS45 = Round9Repairs.DDS45
     DDS31 = Round9Repairs.DDS31
@@ -1988,9 +1990,8 @@ class Round10Repairs(unittest.TestCase):
     def qualifying_tree(self, ground='c'):
         # DGR538/343/1593/1075 apply a policy; the individual still meets EU 7(3).
         facts = self.scenario([
-            'official protected/value designation',
             'the olive is listed as monumental under L.R. 14/2007 Article 2', self.POLICY],
-            provisions=['EU-2020-1201:7(3)(a)', 'EU-2020-1201:7(3)(b)'])
+            provisions=['EU-2020-1201:7(3)(a)', 'EU-2020-1201:7(3)(b)', self.LISTED])
         for point in 'abcde':
             facts[self.key({'provision_ref': f'EU-2020-1201:7(1)({point})'})] = point == ground
         self.set_predicates(facts, **{
@@ -2012,9 +2013,9 @@ class Round10Repairs(unittest.TestCase):
                 for ground in 'bcd':
                     facts = self.qualifying_tree(ground)
                     self.assertIn('ARTICLE_7_3_RETENTION_VALIDLY_EXERCISED', self.result(tree, facts))
-                    designation = ('the olive is listed as monumental under L.R. 14/2007 Article 2'
-                                   if version.startswith('pre') else 'official protected/value designation')
-                    requirements = [{'predicate': designation}, {'predicate': self.POLICY},
+                    designation = ({'predicate': 'the olive is listed as monumental under L.R. 14/2007 Article 2'}
+                                   if version.startswith('pre') else {'provision_ref': self.LISTED})
+                    requirements = [designation, {'predicate': self.POLICY},
                                     {'provision_ref': 'EU-2020-1201:7(3)(a)'},
                                     {'provision_ref': 'EU-2020-1201:7(3)(b)'}]
                     for requirement in requirements:
@@ -2082,7 +2083,7 @@ class Round10Repairs(unittest.TestCase):
         row = self.a['PUG-DGR1866-2022:Art7(3)-policy:v1']
         self.assertIn('non si applica la deroga', ' '.join(row['source_quote'].split()))
         facts = self.scenario(['effective plan interval',
-            'officially recognized monumental olive in the 50 m infected zone that tested negative'])
+            'the olive stands in the 50 m infected zone and tested negative'], provisions=[self.LISTED])
         for ast in self.surfaces(row):
             self.assertEqual(self.result(ast, facts),
                 {'ARTICLE_7_3_RETENTION_NOT_EXERCISED; ARTICLE_7_REMOVAL_APPLIES'})
@@ -2106,7 +2107,8 @@ class Round10Repairs(unittest.TestCase):
             check_contract(surface['evidence_contract'])
             with self.assertRaises(AssertionError):
                 check_contract('Final listed status, official negative result, competent decision, annual testing and vector-treatment evidence.')
-        conditions = ('exact higher-law derogation', 'qualifying branch and site', 'competent Osservatorio authorization')
+        conditions = ('the infected olive has the monumental characteristics of L.R. 14/2007 Article 2',
+                      'exact higher-law derogation', 'qualifying branch and site', 'competent Osservatorio authorization')
         for ast in self.surfaces(row):
             facts = self.scenario(conditions)
             self.assertIs(self.result(ast, facts), True)
@@ -2455,9 +2457,12 @@ class Round13Repairs(unittest.TestCase):
         for ast in self.surfaces(row):
             facts = StageARepairs.facts(ast)
             self.assertEqual(self.result(ast, facts), {'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED'})
+            notice = {'any_of': [{'provision_ref': 'IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect'},
+                                 {'provision_ref': 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'}]}
+            self.assertIn(notice, ast['route_table'][0]['when']['all_of'])
             for atom in ast['route_table'][0]['when']['all_of']:
                 for value in (False, None):
-                    mutant = dict(facts, **{self.key(atom): value})
+                    mutant = dict(facts, **{self.key(leaf): value for leaf in atom.get('any_of', [atom])})
                     self.assertNotIn('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED', self.result(ast, mutant))
                     missing_guard = copy.deepcopy(ast)
                     missing_guard['route_table'][0]['when']['all_of'].remove(atom)

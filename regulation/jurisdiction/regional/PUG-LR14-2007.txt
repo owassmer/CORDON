@@ -1,0 +1,451 @@
+SOURCE_ID: PUG-LR14-2007
+SOURCE_URL: https://burp.regione.puglia.it/documents/20135/310417/LEGGE+REGIONALE++4+giugno+2007%2C+n.+14+%28id+5****43%29.pdf/44dacfab-c29a-90b9-827c-fa82fd36fd98?t=1622718601066&version=1.0
+ORIGINAL_SHA256: 121dcc13e00eebd8eacf8a76fb476d90760ae2f168313010052b2c16ae6a97d7 (BURP n. 83 of 7-6-2007, PDF in the content store; text below is its pdftotext -layout text layer)
+CONSOLIDATED_CHECK: 0fe4abda06a4593a57a2b0d1afe7365618ee9e713403eeb836d3dbe615473b6b (Consiglio regionale, Bussola Normativa, in force from 20/06/2023): Articles 2, 5 and 6 are unamended; Article 15 lost "e comunque per non più di tre anni" under L.R. 36/2011 art. 3.
+
+                Bollettino ufficiale della Regione Puglia n. 83 del 07/06/2007
+
+
+LEGGE REGIONALE 4 giugno 2007, n. 14
+
+“Tutela e valorizzazione del paesaggio degli ulivi monumentali della Puglia“
+
+
+
+
+“Tutela e valorizzazione del paesaggio degli ulivi monumentali della Puglia”.
+
+IL CONSIGLIO REGIONALE
+HA APPROVATO
+
+IL PRESIDENTE
+DELLA GIUNTA REGIONALE
+
+PROMULGA
+
+La seguente legge:
+
+TITOLO I
+FINALITÀ E DEFINIZIONI
+
+Art. 1
+(Finalità)
+
+1. La Regione Puglia tutela e valorizza gli alberi di ulivo monumentali, anche isolati, in virtù della loro
+funzione produttiva, di difesa ecologica e idrogeologica nonchè quali elementi peculiari e caratterizzanti
+della storia, della cultura e del paesaggio regionale.
+
+2. La tutela degli ulivi non aventi carattere di monumentalità resta disciplinata dalla legge 14 febbraio
+1951, n. 144 (Modificazione degli articoli 1 e 2 del decreto legislativo luogotenenziale 27 luglio 1945, n.
+475, concernente il divieto di abbattimento di alberi di ulivo), e dalle norme applicative regionali.
+
+Art. 2
+(Definizioni)
+
+1. Il carattere di monumentalità viene attribuito quando la pianta di ulivo possiede età plurisecolare
+deducibile da:
+a) dimensioni del tronco della pianta, con diametro uguale o superiore a centimetri 100, misurato
+all’altezza di centimetri 130 dal suolo; nel caso di alberi con tronco frammentato il diametro è quello
+
+
+                                                    1
+complessivo ottenuto ricostruendo la forma teorica del tronco intero;
+b) oppure accertato valore storico-antropologico per citazione o rappresentazione in documenti o
+rappresentazioni iconiche-storiche.
+
+2. Può prescindersi dai caratteri definiti al comma 1 nel caso di alberi con diametro compreso tra i
+centimetri 70 e 100 misurato ricostruendo, nel caso di tronco frammentato, la forma teorica del tronco
+intero nei seguenti casi:
+a) forma scultorea del tronco (forma spiralata, alveolare, cavata, portamento a bandiera, presenza di
+formazioni mammellonari);
+b) riconosciuto valore simbolico attribuito da una comunità;
+c) localizzazioni in adiacenza a beni di interesse storico-artistico, architettonico, archeologico
+riconosciuti ai sensi del decreto legislativo 22 gennaio 2004, n. 42 (Codice dei beni culturali, ai sensi
+dell’articolo 10 della legge 6 luglio 2002, n. 137).
+
+3. Il carattere di monumentalità può attribuirsi agli uliveti che presentano una percentuale minima del 60
+per cento di piante monumentali all’interno dell’unità colturale, individuata nella relativa particella
+catastale.
+
+TITOLO II
+RILEVAZIONE SISTEMATICA E TUTELA
+
+Art. 3
+(Commissione tecnica per la tutela degli alberi monumentali)
+
+1. È istituita la Commissione tecnica per la tutela degli alberi monumentali, che ha sede presso
+l’Assessorato regionale all’ecologia ed è composta da:
+a) un dirigente o funzionario nominato dall’Assessore regionale all’ecologia, con funzioni di Presidente;
+b) un dirigente o funzionario nominato dall’Assessore regionale all’assetto del territorio o suo delegato;
+c) un dirigente o funzionario nominato dall’Assessore regionale alle risorse agroalimentari o suo
+delegato;
+d) un rappresentante indicato dalla Soprintendenza per i beni architettonici e per il paesaggio per la
+Puglia;
+e) un rappresentante indicato dal Comando regionale del Corpo forestale dello Stato;
+f) due rappresentanti indicati dalle associazioni ambientaliste regionali riconosciute ai sensi dell'articolo
+13 della legge 8 luglio 1986, n. 349 (Istituzione del Ministero dell’ambiente e norme in materia di danno
+ambientale) e successive modificazioni, con specifica competenza nella tutela del paesaggio;
+g) tre rappresentanti nominati dalle organizzazioni professionali agricole maggiormente rappresentative
+a livello regionale, con specifica competenza nel settore olivicolo e/o forestale;
+h) un rappresentante delle associazioni agrituristiche riconosciute ai sensi dell’articolo 13 della l.
+349/1986 e successive modificazioni;
+i) un rappresentante del Dipartimento di scienze delle produzioni vegetali dell’Università degli studi di
+Bari;
+j) un rappresentante del Dipartimento di scienze agroambientali, chimica e difesa vegetale
+dell’Università di Foggia.
+
+2. Svolge le funzioni di segretario della Commissione un funzionario designato dall’Assessore regionale
+all’ecologia.
+
+3. Le proposte di nomina devono pervenire, a seguito di richiesta dell’Assessore all’ecologia, entro
+
+                                                     2
+sessanta giorni dalla data di entrata in vigore della presente legge. La Commissione è validamente
+costituita, con apposita deliberazione della Giunta regionale da adottarsi entro novanta giorni dalla data
+di entrata in vigore della presente legge, quando sia stata nominata la maggioranza dei suoi membri.
+
+4. La Commissione svolge relativamente agli alberi monumentali i seguenti compiti:
+a) formulare pareri sulla metodologia di rilevazione, sui parametri e sulla scheda di identificazione degli
+alberi monumentali;
+b) validare le segnalazioni pervenute e le rilevazioni sistematiche effettuate per incarico della Giunta
+regionale;
+c) formulare pareri in merito all’inclusione degli alberi monumentali segnalati nell’elenco degli ulivi
+monumentali di cui all’articolo 5 o nell’albo regionale di cui all’ articolo 18;
+d) suggerire forme integrate di tutela e valorizzazione del patrimonio ambientale in oggetto, comprese le
+misure di politica agricola e forestale idonee a tal fine e la promozione di attività di ricerca;
+e) esprimere parere obbligatorio e vincolante sull'eventuale abbattimento e/o spostamento degli alberi
+monumentali inseriti nell’albo regionale di cui all’articolo 18 e nell’elenco di cui all’articolo 5.
+
+5. La Commissione si riunisce su convocazione del Presidente, su richiesta dell'Assessore all’ecologia o
+dell’Assessore all’assetto del territorio o dell'Assessore alle risorse agroalimentari o su richiesta di
+almeno un terzo dei suoi componenti. Le riunioni della Commissione sono valide con la partecipazione
+della maggioranza assoluta dei componenti.
+
+6. La Commissione dura in carica cinque anni e scade con lo scioglimento del Consiglio regionale. Essa
+svolge la sua attività fino all’insediamento dei nuovi componenti.
+
+7. Ai membri della Commissione esterni al personale della Regione Puglia spettano il gettone di
+presenza e le altre eventuali indennità previste dalle leggi regionali vigenti in materia.
+
+Art. 4
+(Rilevazione sistematica degli ulivi
+monumentali)
+
+1. La Giunta regionale, entro centottanta giorni dalla data di entrata in vigore della presente legge,
+approva, con proprio provvedimento, su proposta della Commissione tecnica per la tutela degli alberi
+monumentali, la scheda di rilevazione degli ulivi e degli uliveti monumentali della Puglia allo scopo di
+predisporne il rilevamento sistematico e la relativa identificazione.
+
+2. La scheda deve essere predisposta per la raccolta di dati e informazioni dettagliate relative a:
+a) univoca localizzazione;
+b) proprietà;
+c) dimensione e numero delle piante;
+d) caratteristiche monumentali, paesaggistico – ambientali, storico-culturali, tipologie colturali.
+
+3. Con il provvedimento di cui al comma 1, la Giunta regionale dichiara avviato il rilevamento sistematico
+degli ulivi e uliveti monumentali, che può effettuarsi anche attraverso la stipula di convenzioni e protocolli
+di intesa con altri enti o organizzazioni. Singoli cittadini, associazioni, organizzazioni, enti pubblici e loro
+articolazioni possono segnalare l'esistenza di ulivi e/o uliveti monumentali da sottoporre a tutela e
+valorizzazione.
+
+Art. 5
+
+                                                      3
+(Elenco degli ulivi e uliveti monumentali)
+
+1. A seguito della rilevazione sistematica e delle segnalazioni degli ulivi monumentali la Giunta
+regionale, su proposta dell’Assessorato all’ecologia, sentito il parere della Commissione tecnica di cui
+all'articolo 3, predispone e aggiorna annualmente l’elenco degli ulivi monumentali della regione Puglia e
+determina le risorse finanziarie destinate alla loro tutela e valorizzazione.
+
+2. L’elenco di cui al comma 1 è pubblicato sul Bollettino ufficiale della Regione Puglia e comunicato agli
+enti interessati. Tale elenco contiene anche le indicazioni catastali utili per l’individuazione delle singole
+proprietà. I proprietari dei suoli possono, entro trenta giorni dalla data di pubblicazione sul Bollettino
+ufficiale della Regione Puglia, proporre motivata opposizione alla Giunta regionale avverso il
+provvedimento di cui al presente comma.
+
+3. La Giunta regionale, sentito il parere della Commissione tecnica di cui all’articolo 3, decide sulle
+opposizioni ricevute e approva in via definitiva l’elenco degli ulivi monumentali. Tale elenco è sottoposto
+a nuova pubblicazione sul Bollettino ufficiale della Regione Puglia.
+
+Art. 6
+(Tutela degli ulivi monumentali)
+
+1. Con la pubblicazione definitiva dell’elenco, gli uliveti monumentali sono automaticamente sottoposti a
+vincolo paesaggistico in quanto assimilati a beni diffusi del paesaggio e come tali devono essere
+individuati negli strumenti urbanistici comunali. Per essi saranno previste adeguate forme di
+valorizzazione.
+
+2. Ad ogni ulivo monumentale é attribuito un codice di identificazione univoco, anche nel caso in cui
+quest’ultimo ricada in uliveto monumentale.
+
+3. Gli uliveti monumentali sono sottoposti alle prescrizioni di cui al punto 4 dell’articolo 3.14 delle norme
+tecniche di attuazione (NTA) del Piano urbanistico territoriale tematico per il paesaggio (PUTT/P).
+
+4. Per la tutela e la manutenzione degli ulivi monumentali e delle aree sulle quali essi insistono, la
+Regione Puglia e gli enti locali, nell’ambito delle rispettive competenze, possono ricorrere a convenzioni
+con gli imprenditori agricoli, stipulate ai sensi dell’articolo 15 del decreto legislativo 18 maggio 2001, n.
+228 (Orientamento e modernizzazione del settore agricolo, a norma dell’articolo 7 della legge 5 marzo
+2001, n. 57). Tali convenzioni sono stipulate prioritariamente con i coltivatori diretti e con gli imprenditori
+agricoli professionali.
+
+TITOLO III
+AZIONI DI PROMOZIONE
+
+Art. 7
+(Menzione speciale “Olio extravergine degli ulivi secolari di Puglia”)
+
+1. E’ istituita la menzione speciale “Olio extravergine degli ulivi secolari di Puglia”, che può essere
+utilizzata da tutti i produttori di olio extravergine ottenuto da drupe provenienti da ulivi e uliveti
+monumentali inseriti nell’elenco di cui all’ articolo 5.
+
+2. La menzione speciale può essere associata a quella prevista da marchi di denominazione di origine
+
+                                                      4
+protetta (DOP) o di indicazione geografica protetta (IGP), da marchi collettivi.
+
+3. Alla promozione dei prodotti che godono della menzione speciale provvede la Regione Puglia, a
+proprie spese, nei limiti degli appositi stanziamenti di bilancio e utilizzando i finanziamenti europei
+previsti dal programma di sviluppo rurale, anche su istanza dei proprietari o di associazioni di proprietari
+e degli aventi diritto, mediante avvio di appositi accordi commerciali, promozione di consorzi di
+produttori, partecipazione a fiere e manifestazioni, promozione mediante canali pubblicitari.
+
+Art. 8
+(Promozione del paesaggio ulivetato)
+
+1. La Regione Puglia promuove l’immagine del paesaggio ulivetato della Puglia, in particolare degli ulivi
+e uliveti monumentali e delle loro produzioni, anche a fini turistici.
+
+2. In considerazione dei peculiari aspetti storici, rurali, sociali, ambientali e paesaggistici che
+caratterizzano il patrimonio regionale degli ulivi secolari, l’Assessorato al turismo e industria alberghiera,
+di concerto con l’Assessorato all’ecologia, sentita la Commissione tecnica per la tutela degli alberi
+monumentali di cui all’articolo 3, promuove uno specifico progetto di valorizzazione turistica, da
+realizzarsi entro un anno dalla data di entrata in vigore della presente legge.
+
+3. Nell’ambito dell’applicazione della politica agricola comunitaria e in particolare del regolamento (CE)
+n. 1638/98 del Consiglio, del 20 luglio 1998, che modifica il regolamento n. 136/66/CEE relativo
+all’attuazione di un’organizzazione comune dei mercati nel settore dei grassi, e successive modifiche e
+integrazioni, la Regione Puglia promuove azioni nei confronti del Ministero delle politiche agricole e
+forestali e della stessa Unione europea volte a intraprendere operazioni collettive di mantenimento in
+produzione degli ulivi monumentali ad alto valore storico-culturale-ambientale e/o a rischio di
+abbandono.
+
+4. La Regione Puglia promuove, indirizza e sostiene le attività delle organizzazioni agricole e degli
+operatori del settore olivicolo volte a perseguire gli obiettivi sopra definiti.
+
+Art. 9
+(Premialità a favore degli uliveti monumentali)
+
+1. Gli imprenditori agricoli proprietari di suoli interessati da ulivi monumentali hanno priorità nei
+finanziamenti regionali, nazionali e comunitari per la realizzazione di progetti con finalità di
+mantenimento in coltura degli ulivi monumentali, miglioramento qualitativo del prodotto, recupero e
+manutenzione del paesaggio rurale.
+
+TITOLO IV
+DIVIETI E DEROGHE - FUNZIONI DI CONTROLLO E SORVEGLIANZA -SANZIONI
+
+Art. 10
+(Divieti)
+
+1. E’ vietato il danneggiamento, l’abbattimento, l’espianto e il commercio degli ulivi monumentali inseriti
+nell’elenco regionale di cui all’articolo 5.
+
+Art. 11
+
+                                                     5
+(Deroghe)
+
+1. Per gli ulivi e gli uliveti monumentali di cui all’articolo 5 possono essere concesse deroghe ai divieti di
+cui all’articolo 10 esclusivamente per motivi di pubblica utilità o per opere i cui procedimenti autorizzativi
+siano stati completati alla data di entrata in vigore della presente legge.
+
+2. E’ in ogni caso vietato destinare e trasportare le piante di cui al comma 1 per scopi vivaistici e/o
+ornamentali.
+3. Le deroghe possono essere concesse, con le vigenti procedure relative all’applicazione della l.
+144/1951 e delle norme applicative regionali, soltanto previa acquisizione del parere vincolante della
+Commissione tecnica di cui all’articolo 3, che deve valutare la sussistenza delle condizioni che possono
+consentire l’espianto, le sue finalità, la documentata inesistenza di soluzioni alternative, l’esistenza di un
+apposito progetto di reimpianto.
+
+4. E’ fatta salva la procedura di valutazione di incidenza di cui al decreto del Presidente della Repubblica
+8 settembre 1997, n. 357 (Regolamento recante attuazione della direttiva 92/43/CEE relativa alla
+conservazione degli habitat naturali e seminaturali, nonché della flora e della fauna selvatiche) e
+successive modifiche e integrazioni, nel caso siano interessati siti di “Rete Natura 2000” (proposti siti di
+importanza comunitaria - pSIC, zone di protezione speciale -ZPS, zone speciali di conservazione -ZSC)
+e il nulla-osta dell’Ente di gestione nel caso di aree protette nazionali e regionali (legge 6 dicembre
+1991, n. 394 - Legge quadro sulle aree protette - e legge regionale 24 luglio 1997, n. 19 - Norme per
+l’istituzione e la gestione delle aree naturali protette nella regione Puglia).
+
+5. Le autorizzazioni rilasciate ai sensi del presente articolo hanno validità improrogabile di due anni.
+
+Art. 12
+(Reimpianto di ulivi plurisecolari)
+
+1. L’operazione di reimpianto di ulivi monumentali di cui all’articolo 11 è a totale carico del realizzatore
+dell’opera.
+
+2. L’operazione di cui al comma 1 deve avvenire in aree libere degli stessi lotti di intervento o,
+subordinatamente, in altre aree di proprietà privata o pubblica del territorio comunale o di comuni
+viciniori.
+
+3. Le comunità montane, le amministrazioni comunali e provinciali e gli enti di gestione delle aree
+naturali protette possono individuare aree di loro proprietà o di cui acquisiscono la disponibilità per il
+reimpianto di ulivi monumentali e attivare convenzioni per la loro manutenzione, ai sensi del decreto
+legislativo 18 maggio 2001, n. 228 (Orientamento e modernizzazione del settore agricolo, a norma
+dell’articolo 7 della legge 5 marzo 2001, n. 57). Le aree destinate al reimpianto non possono essere
+scelte tra quelle coperte da vegetazione arborea o arbustiva spontanea o che facciano parte di habitat
+naturali di interesse comunitario (dir. 92/43/CEE).
+
+4. Gli enti di cui al comma 3 comunicano la presenza di aree destinate al reimpianto di ulivi monumentali
+e le loro caratteristiche all’Assessorato regionale alle risorse agroalimentari, che redige un elenco delle
+aree disponibili per il reimpianto degli ulivi monumentali, consultabile presso gli uffici provinciali per
+l’agricoltura (UPA).
+
+5. Gli alberi da reimpiantare possono essere spostati soltanto se accompagnati da apposita
+
+                                                     6
+autorizzazione rilasciata dall’UPA competente, indicante l’area di espianto e quella del successivo
+reimpianto. Il mancato reimpianto è soggetto alle sanzioni di cui all’articolo 17.
+
+6. Gli enti che individuano aree per il reimpianto di ulivi monumentali e che riservano quote dei bilanci
+comunali alla tutela e valorizzazione degli stessi, o che prevedono agevolazioni fiscali per gli
+imprenditori agricoli proprietari di suoli interessati da uliveti monumentali, hanno priorità nell’accesso a
+finanziamenti regionali per la realizzazione di progetti con finalità di tutela del patrimonio naturale e del
+paesaggio.
+
+Art. 13
+(Opere di miglioramento fondiario)
+
+1. Le opere di miglioramento fondiario consentite nei terreni con notevole presenza di ulivi monumentali
+inseriti nell’elenco di cui all’articolo 5 sono unicamente quelle di rinfittimento dell’uliveto stesso, o che
+prevedano la realizzazione di colture consociate, da eseguirsi senza arrecare danno alle piante già
+esistenti.
+2. Il rinfittimento deve essere effettuato con piante di ulivo di varietà locale e/o di varietà previste dai
+relativi disciplinari di produzione delle DOP.
+
+3. Negli uliveti monumentali può altresì essere consentita, se richiede limitati spostamenti di ulivi
+monumentali all’interno della stessa particella catastale, la realizzazione di piccole opere a servizio
+dell’attività agricola.
+
+4. Le opere di cui al comma 3 sono sottoposte al parere della Commissione di cui all’articolo 3.
+
+5. Le autorizzazioni sono rilasciate con le medesime modalità previste per i piani di miglioramento
+aziendale.
+
+Art. 14
+(Monitoraggio del paesaggio ulivetato pugliese)
+
+1. Alla fine di ogni anno, gli ispettorati provinciali dell’agricoltura, sulla base di quanto disposto dalla
+deliberazione della Giunta regionale 14 dicembre 1989, n. 7310 (Direttive per l’esercizio della delega ai
+capi dell’ispettorati provinciali dell’agricoltura concernente l’autorizzazione all’abbattimento di alberi
+d’ulivo) e delle domande di espianto degli ulivi e delle deroghe e autorizzazioni concesse ai sensi degli
+articoli 11 e 13, inviano alla Commissione di cui all’articolo 3 una dettagliata relazione sulle modifiche
+intervenute nel paesaggio ulivetato del territorio di propria competenza.
+
+Art. 15
+(Regime transitorio)
+
+1. Nel periodo intercorrente tra la data di entrata in vigore della presente legge e la data di pubblicazione
+definitiva dell’elenco degli ulivi monumentali di cui all’articolo 5, e comunque per non più di tre anni, è
+vietato su tutto il territorio regionale il danneggiamento, l’abbattimento, l’espianto e il commercio degli
+ulivi plurisecolari rispondenti a una delle caratteristiche indicate nell’articolo 2.
+
+
+
+Art. 16
+(Funzioni di controllo e sorveglianza)
+
+                                                     7
+1. Le funzioni di controllo e sorveglianza sulle violazioni alla presente legge sono demandate al Corpo
+forestale dello Stato. Attività di controllo può altresì essere svolta dalle polizie provinciali e municipali,
+dalle guardie di caccia e pesca e dalle guardie ecologiche volontarie di cui alla legge regionale 28 luglio
+2003, n. 10 (Istituzione del servizio volontario di vigilanza ecologica). Verifiche e controlli sul rispetto
+delle deroghe e autorizzazioni concesse possono essere effettuati anche dal personale appositamente
+delegato dagli uffici provinciali per l’agricoltura e dagli ispettorati ripartimentali delle foreste.
+
+Art. 17
+(Sanzioni)
+
+1. Dalla data di pubblicazione dell’elenco degli ulivi monumentali di cui all’articolo 5 e fatto salvo il
+concorso con altre e più gravi violazioni, chiunque violi le norme contenute negli articoli 10, 11, 12, 13 e
+15 viene punito con una sanzione amministrativa da un minimo di euro 3 mila a un massimo di euro 30
+mila per ogni pianta interessata, sino a un massimo di euro 250 mila. Gli importi provenienti da dette
+sanzioni affluiscono sul capitolo di entrata 3061120 "Proventi derivanti dalle indennità pecuniarie per
+violazione delle disposizioni legislative in materia dei beni culturali e ambientali" dell’unità previsionale di
+base 3.4.2 del bilancio regionale e devono essere utilizzate per gli scopi di tutela e valorizzazione
+previste dalla presente legge.
+
+TITOLO V
+TUTELA PAESAGGISTICA DEGLI ALBERI
+
+Art. 18
+(Modifica dell’articolo 30 della legge regionale 31 maggio 2001, n. 14)
+
+1. L’articolo 30 (Tutela paesaggistica alberi) della legge regionale 31 maggio 2001, n. 14 (Bilancio di
+previsione per l’esercizio finanziario 2001 e bilancio pluriennale 2001-2003 ), è sostituito dal seguente:
+“ Art. 30
+(Tutela paesaggistica degli alberi)
+
+1. E’ istituito presso l’Assessorato regionale all’ecologia l'albo degli “Alberi monumentali”, nel quale sono
+iscritti gli alberi di qualsiasi essenza spontanea o coltivata, anche in esemplari isolati, che, per le loro
+caratteristiche di monumentalità, costituiscono elemento caratteristico del paesaggio. Nell’albo possono
+anche essere iscritti esemplari arborei che rivestano importanza storica e culturale.
+
+2. Nell’ambito del patrimonio arboreo della regione particolare rilevanza assume la presenza di alberi
+secolari di carrubo. A tal fine sono sottoposti alle norme di tutela di cui all’articolo 6, comma 1, tutti gli
+alberi di carrubo che presentano diametro uguale o superiore a centimetri 80 misurato all’altezza di
+centimetri 130 dal suolo.
+
+3. Alla formazione e aggiornamento dell'albo provvede l'Assessorato regionale all'ecologia su
+segnalazione degli ispettorati ripartimentali delle foreste, degli uffici provinciali dell’agricoltura, nonché di
+altri enti pubblici, delle associazioni ambientaliste, delle organizzazioni professionali agricole e di singoli
+cittadini.
+
+4. L’Assessorato regionale all’ecologia può provvedere all’individuazione degli alberi monumentali anche
+attraverso rilevamenti sistematici realizzati anche in collaborazione con altri enti. L’inserimento di
+esemplari nell’albo degli “Alberi monumentali” viene notificato ai proprietari dei medesimi.
+
+                                                       8
+5. Gli alberi monumentali iscritti all’albo regionale vengono individuati da apposite tabelle alla cui
+realizzazione e posa in opera provvede la Regione Puglia, anche attraverso appositi accordi con le
+amministrazioni provinciali.
+
+6. E' fatto divieto di danneggiare in qualsiasi maniera, tagliare e spiantare gli alberi monumentali iscritti
+all’albo di cui al presente articolo.
+7. Deroghe all’espianto e al taglio sono ammesse per motivi eccezionali, quali la morte delle piante,
+gravi fitopatie o gravi danni da eventi naturali.
+
+8. Il taglio e l'espianto sono subordinati all'autorizzazione degli ispettorati ripartimentali delle foreste, che
+provvedono a effettuare i controlli per accertare che ne ricorrano le condizioni.
+
+9. La violazione delle norme di cui al presente articolo comporta una sanzione amministrativa da euro 3
+mila a euro 30 mila per albero, che affluiscono sul capitolo di entrata 3061120 "Proventi derivanti dalle
+indennità pecuniarie per violazione delle disposizioni legislative in materia dei beni culturali e ambientali"
+dell’unità previsionale di base 3.4.2 del bilancio regionale.
+
+TITOLO VI
+NORMA FINANZIARIA
+
+Art. 19
+(Norma finanziaria)
+
+1. Agli oneri necessari per il conseguimento dei fini della presente legge si provvede mediante
+l’istituzione di un nuovo capitolo nello stato di previsione dell’esercizio finanziario 2007 “Spese per la
+tutela e la valorizzazione degli alberi di interesse monumentale” con una dotazione di euro 200 mila e la
+riduzione di pari importo del capitolo 581011 “Spese per la costituzione delle aree protette regionali (l.r.
+19/1997)” dell’unità previsionale di base 14.1.1 del medesimo bilancio.
+
+ La presente legge è dichiarata urgente e sarà pubblicata sul Bollettino Ufficiale della Regione ai sensi e
+per gli effetti dell’art. 53, comma 1 della L.R. 12/05/2004, n° 7 “Statuto della Regione Puglia” ed entrerà
+in vigore il giorno stesso della sua pubblicazione.
+E’ fatto obbligo a chiunque spetti di osservarla e farla osservare come legge della Regione Puglia.
+
+Data a Bari, addì 4 giugno 2007
+
+VENDOLA
+
+
+
+
+                                                       9
+

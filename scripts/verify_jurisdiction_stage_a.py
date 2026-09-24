@@ -309,6 +309,25 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
     for sid in ("IT-DM-0677268-2021:Art.1(1):CREA-DC-Firenze-designation", "IT-DM-0677268-2021:Art.1(1):CREA-DC-Roma-designation"):
         if "LATER_EVENT_DESIGNATION_STATUS_ESTABLISHED_WITHOUT_RETROACTIVE_START_CONCLUSION" not in effect_set(get(by, sid)):
             fail(f"{sid}: later operative status cannot coexist with unknown original start")
+
+    # Owen's 2026-09-24 rulings: the act's own ground and a surviving annulment test decide mass publicity; the Art. 21-ter
+    # notice is A's Art. 21-bis result; a tree is listed only through its own definitively republished, undeleted entry.
+    mass = get(by, "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route")
+    if [route["when"] for route in mass["condition_ast"]["route_table"]] != [{"all_of": [
+            {"predicate": "the act states its own ground for reaching its recipients by public posting"},
+            {"predicate": "the publicity form the act states has been completed"},
+            {"not": {"predicate": "a court has annulled the act on its stated ground for public posting"}}]}]:
+        fail("Art. 21-bis mass publicity must rest on the act's own ground, completed publicity and no annulment on that ground")
+    notice = {"any_of": [{"provision_ref": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect"},
+                         {"provision_ref": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"}]}
+    if notice not in list(ast_nodes(get(by, "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction")["condition_ast"])):
+        fail("Art. 21-ter notice is not the Art. 21-bis personal-communication or mass-publicity result")
+    listing = get(by, "PUG-LR14-2007:Art.5(3):definitive-listing")
+    if [route["when"] for route in listing["condition_ast"]["route_table"]] != [{"all_of": [
+            {"predicate": "the tree has its own entry in an Article 5 list"},
+            {"predicate": "the Giunta approved that entry definitively and the list containing it was republished on BURP on or before the event date"},
+            {"not": {"predicate": "the entry was deleted from the list on or before the event date"}}]}]:
+        fail("L.R. 14/2007 listing must rest only on the tree's own definitively republished, undeleted entry")
     if check_projection:
         with (GENERATED / "dependency-manifest.csv").open(newline="", encoding="utf-8-sig") as handle:
             dependencies = list(csv.DictReader(handle))
@@ -358,6 +377,18 @@ def run_mutations(authoring: Path) -> None:
     mutations.append(("allow retained wood as full destruction", allow_retained_wood))
     mutations.append(("remove Article 13 provenance", lambda rows: setattr_proxy(next(row for row in rows if row["stable_provision_id"] == "PUG-LR4-2017:Art.6(2)" and row.get("temporal_status") != "SUPERSEDED"), "condition_ast", {"predicate": "official infected-plant finding"})))
     mutations.append(("correction names an instrument its quote does not cite", lambda rows: setattr_proxy(next(row for row in rows if row["stable_provision_id"] == "REG-PUGLIA-U181-DIR-2024-00165:case-delta:annex-only-municipality-correction"), "corrects_instrument_ids", ["REG-PUGLIA-U181-DIR-2024-00146"])))
+    def latest(rows, sid):
+        return next(row for row in rows if row["stable_provision_id"] == sid and row.get("temporal_status") != "SUPERSEDED")
+
+    def listing_when(rows):
+        return latest(rows, "PUG-LR14-2007:Art.5(3):definitive-listing")["condition_ast"]["route_table"][0]["when"]["all_of"]
+
+    mutations.append(("list a tree from its first publication", lambda rows: listing_when(rows).__setitem__(1, {
+        "predicate": "the tree has its own entry in a list approved provisionally and published on BURP under Article 5(2) on or before the event date"})))
+    mutations.append(("a listed grove lists a tree without its own entry", lambda rows: listing_when(rows).__setitem__(0, {"any_of": [
+        {"predicate": "the tree has its own entry in an Article 5 list"}, {"predicate": "the tree stands in a listed monumental grove"}]})))
+    mutations.append(("drop the annulment negation", lambda rows: latest(rows, "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route")[
+        "condition_ast"]["route_table"][0]["when"]["all_of"].pop()))
     mutations.append(("restore unsupported DGR343 policy", lambda rows: rows.append({**rows[-1], "stable_provision_id": "PUG-DGR343-2022:Art13(2)-scientific-retention-policy", "provision_version_id": "mutant:dgr343"})))
 
     for label, mutate in mutations:
