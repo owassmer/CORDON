@@ -404,76 +404,6 @@ The calling reader uses the shared store and retains the request reference besid
 its interpreted output. The transport introduces no second source inventory,
 scheduler, extraction schema or evidence-acceptance model.
 
-## Removal-measure reading
-
-`cordon_d.measures` reads one complete act with the annex and context documents
-it needs, under `measure-reading.txt`. `scripts/read_measures.py` replays by
-default and dispatches only with `--execute`. `retained_measure(request_id,
-store)` keeps an explicit reading's original request, source addresses and
-limitations.
-
-`MeasureReading.targets()` keeps source-defined positions and their direction
-links. `prescribed_targets()` selects identified plant and parcel positions in
-operative parts under a present removal direction. Maps, deferred work and
-superseded addressee positions stay distinguishable. A published addressee does
-not establish title. A blank form may state a response or capacity requirement;
-it supplies no response and no standing. Adoption, declared effect, intended
-procedure and actual dated events keep separate meanings. Only a supported event
-about the resolved measure becomes an `AdministrativeEvent`.
-
-`cordon_d.measure_sources` composes selected native cells and word spans. It
-reuses the association owner's fields and occurrences. A word belongs to a cell
-only through the glyphs native clipping assigns to that cell; a font envelope
-that grazes a neighbouring cell does not. A shared cell or cross-page field needs
-source-supported applicability and keeps its fragments. An owner-only
-continuation creates no target. A native span may select positions a detected
-table combined, but cannot duplicate a selected position or an association-owned
-field. Image recovery keeps its source region and extraction limitation and does
-not overwrite a usable native value or a printed blank. A surrounding parcel's
-`reference_plant_id` stays distinct from an ordered plant's `plant_id` and
-supplies no report association. Source-authored groups and row relationships
-survive composition. Equal field values establish neither.
-
-`referenced_measures(readings)` resolves source-declared act identities, or a
-selected principal document, against separately read measures. It keeps
-candidates, conflicts and missing correspondence. A citation of another
-authority stays distinct from an unresolved Osservatorio identity. The resolver
-does not apply a correction, choose an operative version or import predecessor
-targets. Incorporated work and a correction need their own source support,
-including the affected position and addressee.
-
-`read_measure_components` and `commencement_components(direction_id)` expose the
-source-stated actor, work, trigger, term and commitment through the same
-whole-source reader. A selected supplement keeps its provenance and conflicts. A
-missing structured reading stays a reading limitation. These components establish
-neither actual noncommencement nor the applicability of an A rule.
-
-`report_population()` binds existing per-row report associations, or explicitly
-selected documents, through the report owner's identity and replacement
-relations. A collective reference cannot override a row's own report reference
-and date. `findings(..., report_bindings=...)` consumes those bindings within each
-observation's acquired report route. `finding_links(joined, report_readings)`
-connects prescribed positions to those findings and to reverse `report_rows()`.
-It keeps host and coordinate comparisons, uniqueness, provisional readings and
-disagreements. The caller supplies every reached observation identity and
-consequential report rendition. Filtering to expected targets cannot establish
-uniqueness or population completeness.
-
-An explicit source clause may connect an exact report rendition's whole specimen
-population to stated host words. That correspondence needs complete, unique
-coverage of the report records and the bound targets, negatives included, with
-compatible dates, coordinates and qualifications. An unsupported subset, or an
-extra or competing occurrence, stays unresolved. Literal host labels and
-unresolved equivalence stay intact. Unequal labels alone establish no biological
-disagreement. Neither equal counts nor a replacement relation establishes
-equivalence. A finding link establishes occurrence correspondence. It does not
-establish official confirmation, standing, administrative amendment or completed
-removal.
-
-Exact retained address contexts stay replayable. Successful replay, structural
-coverage and source-address validation do not certify meaning; qualification
-needs independently read originals and the resulting consumer behaviour.
-
 ## Case-prescription reading
 
 `cordon_d.case_prescriptions` supplies the `case-prescription` input from each
@@ -616,14 +546,3 @@ uninterrupted posting. A complete publication certificate supplies its own
 attested interval. An unresolved act identity can be connected through the
 acquired certificate and principal routes. Neither record supplies recipient
 notification, response, default or performance.
-
-## Official performance reports
-
-`cordon_d.performance` reads complete retained native HTML and replays explicit
-requests offline. Source selectors support the stated operation, actor, timing,
-work scope and limitations. `removal_occurrences()` exposes a direct or officially
-reported removal with its source document and reading limitations. An intention
-stays separate. A publication date does not become an operation date. An
-outbreak-level report can supply evidence without an exact day or target list.
-Per-target completion needs supported prescription-to-target correspondence and
-sufficient work coverage.

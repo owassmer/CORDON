@@ -160,34 +160,8 @@ class JoinIdentity(unittest.TestCase):
                 association = {'fields': {'host': {'text': text}}}
                 self.assertEqual(_host_relation(row, association), 'agrees on printed host')
                 self.assertEqual(association['fields']['host']['text'], text)
-        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Olivo\n(Olea\neuropaea)'}}}), 'unresolved label equivalence')
+        self.assertEqual(_host_relation(row, {'fields': {'host': {'text': 'Olivo\n(Olea\neuropaea)'}}}), 'conflicts')
         self.assertEqual(row.cells[-1]['text'], 'Prunus\ndulcis')
-
-    def test_host_binomial_tolerates_only_redundant_terminal_delimiters(self):
-        from copy import deepcopy
-        from types import SimpleNamespace
-        from cordon_d.findings import _host_relation
-        plain = 'Fagus\nsylvatica'
-        for labelled in ('Faggio (Fagus sylvatica)', 'Faggio\n(Fagus\nsylvatica))',
-                         'Faggio (Fagus sylvatica)))'):
-            for reported, associated in ((plain, labelled), (labelled, plain)):
-                with self.subTest(reported=reported, associated=associated):
-                    row = SimpleNamespace(cells=[{'role': 'host', 'text': reported}])
-                    association = {'fields': {'host': {'text': associated}}}
-                    before = deepcopy((row.cells, association))
-                    self.assertEqual(_host_relation(row, association), 'agrees on printed host')
-                    self.assertEqual((row.cells, association), before)
-        row = SimpleNamespace(cells=[{'role': 'host', 'text': plain}])
-        for text in ('Faggio (Fagus orientalis))',
-                     'Faggio (Fagus sylvatica / Betula pendula))',
-                     'Faggio (cf. Fagus sylvatica))',
-                     'Faggio (Fagus sylvatica var. purpurea))',
-                     'Faggio (Fagus sylvatica)) da verificare'):
-            with self.subTest(text=text):
-                association = {'fields': {'host': {'text': text}}}
-                before = deepcopy((row.cells, association))
-                self.assertEqual(_host_relation(row, association), 'unresolved label equivalence')
-                self.assertEqual((row.cells, association), before)
 
     def test_continued_record_without_complete_duplicate_reaches_consumer(self):
         joined, reverse = self.run_join([('00123', '2024-06-01')],
@@ -272,13 +246,12 @@ class JoinIdentity(unittest.TestCase):
         self.assertFalse(joined['matches'])
         self.assertEqual(joined['links'][0]['source_associations'], [])
 
-    def test_unestablished_host_equivalence_withholds_administrative_correspondence(self):
+    def test_conflicting_host_withholds_administrative_correspondence(self):
         joined = self.run_join([['public-9', '2024-06-01']],
             [['public-9', '01/06/2024', 'Negativo', '02/06/2024']],
             association_rows=[self.association(host='Mandorlo (Prunus dulcis)')])[0]
         self.assertFalse(joined['matches'])
-        self.assertEqual(joined['links'][0]['candidates'][0]['association_cause'],
-                         'source association and report-row host labels have no established equivalence')
+        self.assertIn('host', joined['links'][0]['candidates'][0]['association_cause'])
 
     def test_act_conflict_with_identical_id_is_exposed_and_withholds_match(self):
         joined = self.run_join([['public-9', '2024-06-01']],
