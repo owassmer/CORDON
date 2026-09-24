@@ -1,0 +1,71 @@
+Read the supplied complete administrative act from its own text. Return only what
+the act itself states, in the JSON schema supplied. Use no outside knowledge and
+no other act. Copy source words exactly; never translate, normalize or classify
+them unless a field asks for a choice.
+
+Every citation names the physical page and quotes contiguous words copied exactly
+from that page's supplied text, at most about 300 characters. Join separate
+passages of the same page with " … " only. A quote that is not on its page makes
+the whole reading unusable. Every other field that copies source words copies
+them from the pages its own citations name.
+
+Identity. The issuing office as printed, the act number and the adoption date as
+the act states them (not a publication, protocol, proposal or signature date),
+and the title. Mark authority puglia-osservatorio only when the issuing office is
+the Regione Puglia Sezione (or Servizio) Osservatorio Fitosanitario.
+
+Prescribed work. List each removal work (estirpazione, abbattimento, eradicazione
+or equivalent) that the act's operative part (the points the act adopts, after
+"DETERMINA" or equivalent) prescribes to recipients, one entry per distinct
+population of plants or land: the recipients as printed (for example "il
+proprietario/conduttore"), where the act lists them or their positions as printed
+(cohort, for example "Allegato 1/C", or an empty string), the work and the
+population as printed. by_reference is the other act whose prescription this
+work applies, with its number and year as printed, when the act prescribes the
+work by reference to it (for example "come riportato nella DDS 188/2024"); null
+when this act states the work itself. An act that prescribes no removal to recipients (for
+example one that only delimits areas, only corrects another act's annex without
+prescribing work, or only directs an agency) has no entries.
+
+Enforcement clauses. List every clause that states what follows if the
+recipients do not begin or do not perform the prescribed removal. A recital, a
+premise or a quoted rule of another act is not an operative clause; if the only
+statement is outside the operative part, return it with part "recital". A
+voluntary-removal schedule with no consequence is not an enforcement clause. For
+each clause:
+
+- work_indices: the indices (from 0) of the prescribed work entries it enforces.
+- commencement_work and commencement_population: what the recipient must begin
+  or perform by the term and the plants it concerns, as this clause prints them.
+- term: the period this clause gives the recipient, as printed. number is the
+  number exactly as printed (digits or words). unit_word is the unit word exactly
+  as printed after it (for example "giorni"), including any qualifier printed
+  with it (for example "giorni lavorativi"). literal is the complete term phrase
+  as printed. null when the clause states no period.
+- anchor: the words stating from when the term runs, as printed, and its kind:
+  notification when it runs from notification or notice to the recipient; other
+  when it runs from anything else (publication, adoption, a date, the
+  recipient's own communication); none when the clause states no starting point.
+- consequence: what the clause states follows, as printed. commitment is commits
+  when the Osservatorio states that it will direct it (for example "disporrà"),
+  permits when it states only that it may, other otherwise.
+- coercive_population: literal is the words naming what is to be removed
+  coercively, as printed. resolved is the population that the same clause names
+  and those words refer to: a back-reference such as "delle suddette piante"
+  refers to the population the same clause names before it. Copy that
+  population's words from the clause. Use an empty string when the clause states
+  no coercive removal, or when the words refer to nothing in the same clause.
+- executor: who carries out the coercive removal, as printed; null when not
+  stated.
+- limits: only what prevents reading this clause's own words: unreadable,
+  incomplete or conflicting text in the clause itself. An empty list otherwise.
+  A reading choice you made is not a limit.
+
+Relationships. List every other act this act states it corrects, supplements,
+completes, replaces, revokes or suspends, with its number and year as printed and
+the payload it affects. Citation of an act as legal basis is not a relationship.
+
+Issues. Name every limitation of this reading as a whole: a page without a native
+text layer that may hold operative content, an unreadable or conflicting passage
+outside the enforcement clauses. A missing statement is not an issue when the act
+simply does not state it.

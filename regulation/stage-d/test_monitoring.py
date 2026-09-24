@@ -1,9 +1,14 @@
 """Source-format distinctions that change the observation supplied downstream."""
 from datetime import date, datetime
 from dataclasses import replace
+from pathlib import Path
 import unittest
 
-from cordon_d.monitoring import observation
+import pyarrow
+import pyarrow.parquet as parquet
+
+from cordon_d.monitoring import (observation, _member_from_row, _observations_from_rows,
+                                 _reading_row, _readings_schema)
 from cordon_d.releases import Occurrence
 
 
@@ -129,6 +134,72 @@ class MonitoringTests(unittest.TestCase):
         self.assertEqual(reading.coordinates, (17.5, 40.7))
         self.assertEqual(reading.crs, 'EPSG:4326')
         self.assertNotIn('coordinates', dict(reading.causes))
+
+
+class AnnotationTransportTests(unittest.TestCase):
+    def row(self, values):
+        reading = observation(Occurrence('source', 'digest', 'another-sheet:physical-row:17', values),
+                              release='publisher/another-release')
+        return reading, _reading_row(reading, Path.cwd(), 0)
+
+    def roundtrip(self, row, schema=None):
+        sink = pyarrow.BufferOutputStream()
+        table = pyarrow.Table.from_pylist([row], schema=schema if schema is not None else _readings_schema())
+        parquet.write_table(table, sink)
+        restored = parquet.read_table(pyarrow.BufferReader(sink.getvalue())).to_pylist()[0]
+        return _member_from_row(restored)
+
+    def test_unseen_annotation_keeps_literal_whitespace_and_source_occurrence(self):
+        literal = '*Pianta non abbattuta: altra nota\u00a0del pubblicatore.\n\t '
+        reading, row = self.row({'ID': literal, 'RISULTATO': None})
+        member = self.roundtrip(row)
+        self.assertEqual(reading.publication.publisher_annotation, literal)
+        self.assertEqual(member.publisher_annotation, literal)
+        self.assertEqual(member.occurrence, ('digest', 'another-sheet:physical-row:17'))
+        self.assertEqual(member.identifiers, reading.identifiers)
+        self.assertEqual(dict(member.identifiers)['ID'], literal.strip())
+        self.assertIsNone(member.cause('publisher_annotation'))
+
+    def test_marked_observation_does_not_inherit_an_annotation_or_change_reference(self):
+        reading, row = self.row({'ID': '00987*', 'RISULTATO': 'Positivo',
+                                 'DATA_RILEVAMENTO': date(2026, 3, 2)})
+        member = self.roundtrip(row)
+        self.assertEqual(row['reference'], '00987*')
+        self.assertEqual(member.identifiers, reading.identifiers)
+        self.assertEqual(member.result, 'published-positive')
+        self.assertIsNone(member.publisher_annotation)
+        self.assertIsNone(member.cause('publisher_annotation'))
+
+    def test_old_cache_missing_column_is_distinct_from_present_null(self):
+        _, row = self.row({'ID': '*Pianta non abbattuta: altra nota', 'RISULTATO': None})
+        old = dict(row)
+        del old['publisher_annotation']
+        schema = _readings_schema()
+        old_schema = schema.remove(schema.get_field_index('publisher_annotation'))
+        member = self.roundtrip(old, old_schema)
+        self.assertIsNone(member.publisher_annotation)
+        self.assertEqual(member.cause('publisher_annotation'),
+                         'the selected derived reading predates publisher-annotation transport')
+        self.assertEqual(member.identifiers, self.roundtrip(row).identifiers)
+        self.assertEqual(member.result, 'publisher-annotation')
+        row['publisher_annotation'] = None
+        current = self.roundtrip(row)
+        self.assertIsNone(current.publisher_annotation)
+        self.assertIsNone(current.cause('publisher_annotation'))
+
+    def test_old_positive_keeps_its_group_and_identifier_without_annotation_cause(self):
+        _, row = self.row({'ID': '00987*', 'RISULTATO': 'Positivo',
+                           'DATA_RILEVAMENTO': date(2026, 3, 2)})
+        row.update(ref=row['reference'], reused=False)
+        current = next(_observations_from_rows([row]))
+        del row['publisher_annotation']
+        old = next(_observations_from_rows([row]))
+        self.assertEqual(old, current)
+        self.assertEqual(old.reference, '00987*')
+        self.assertEqual(old.day, date(2026, 3, 2))
+        self.assertEqual(dict(old.members[0].identifiers)['ID'], '00987*')
+        self.assertTrue(old.positive)
+        self.assertIsNone(old.members[0].cause('publisher_annotation'))
 
 
 if __name__ == '__main__':
