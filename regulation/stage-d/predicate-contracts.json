@@ -4629,6 +4629,13 @@
       ]
     },
     {
+      "predicate": "the trunk diameter the plant's official record states, measured 130 cm above the ground (for a fragmented trunk, of the reconstructed whole trunk), is at least 100 cm",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
       "predicate": "this act's area state is superseded, suspended, revoked or annulled",
       "contracts": [
         "operative-act",

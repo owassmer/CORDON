@@ -25,7 +25,7 @@ RETROSPECTIVE = re.compile(r'(?i)no (?:held )?(?:decision|case) consults|only he
 PK = {'floor', 'exact', 'ceiling', 'threshold', 'design_target', 'open_term'}
 PVALUE = ({'confidence', 'confidence_bound', 'design_prevalence', 'design_prevalence_bound'}, {'samples', 'tests'},
           {'from_month', 'to_month', 'wraps_year'}, {'open_term', 'reserved_to'})
-PUNITS = {'m', 'km', 'percent', 'Cq', 'month', 'count', None}
+PUNITS = {'m', 'km', 'cm', 'percent', 'Cq', 'month', 'count', None}
 DISP = {'clock', 'parameter', 'qualifies_clock', 'open_term', 'not_a_clock', 'implements_clock', 'restates_parameter', 'not_a_parameter'}
 CF = ['clock_id', 'producer_provision_version_id', 'source_phrase', 'kind', 'anchor', 'magnitude', 'bound', 'unit', 'recurrence', 'relation', 'window', 'applies_when',
       'legal_duty_owner', 'executor', 'consumer_decision', 'consequence_on_expiry', 'completion', 'effective_from', 'effective_to_exclusive', 'note']
@@ -71,6 +71,13 @@ def scalar_value_matches(parameter):
         else:
             kind, comparator = 'exact', None
         if (parameter['unit'], parameter['kind'], parameter['comparator']) == (unit, kind, comparator):
+            return True
+    # L.R. 14/2007 prints the unit before the number: "uguale o superiore a centimetri 100".
+    for match in re.finditer(rf'\bcentimetri\s+({NUMBER})\b', text):
+        if value != decimal(match.group(1)): continue
+        floor = re.search(r'(?:uguale o superiore a|almeno)\s*$', text[:match.start()])
+        kind, comparator = ('floor', '>=') if floor else ('exact', None)
+        if (parameter['unit'], parameter['kind'], parameter['comparator']) == ('cm', kind, comparator):
             return True
     return False
 

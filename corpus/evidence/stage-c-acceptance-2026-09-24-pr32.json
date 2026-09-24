@@ -3,12 +3,12 @@
   "accepted_by": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
   "date": "2026-09-24",
-  "promoted_package_sha256": "138ea415d9a67a7d1f1925c95fcf0262dd1e0a72e5c1436f41733bf19a530691",
+  "promoted_package_sha256": "1e973faea096b0bd57432bd5c4b8dc133a14591edaaf747151b19a5b847d56c1",
   "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
   "preceding_acceptance": {
-    "path": "corpus/evidence/stage-c-acceptance-2026-09-23-pr29.json",
-    "sha256": "10a8fa1cb924afdc755609795fdc59e240f447126e4d4be9743f32fd86c12a81"
+    "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr31.json",
+    "sha256": "aa9875ae88d626f40f5ea47d1861a3f9e459e7eaebea810bdffebc6f63b5d7b8"
   },
-  "preceding_package_sha256": "31217394f07f558a4dc69234d7c3f21a40a922d172022b74134472158c2b6d01",
-  "scope": "mass_publicity_facts binds the Art. 21-bis mass-publicity predicates from the act's stated ground, stated period and posting records and returns a notification day only when A gives effectiveness; noncommencement_facts computes no deadline without one; listing_facts binds L.R. 14/2007 Art. 5 status from a tree's own entry dates; five reference-outcome pairs; the stated-period clock is a calendar duration. Binding takes effect only on merge."
+  "preceding_package_sha256": "d6f4b5f95d287945879f9cc16dca7a95284cc4e5233d034bb1cd0a7af74c64d7",
+  "scope": "mass_publicity_facts binds the Art. 21-bis mass-publicity predicates from the act's stated ground, stated period and posting records, counts the stated display days with the first day included and a record's inclusive end date through its end, and returns the notice day (the stated days counted from publication, that day excluded) only when A gives effectiveness; notice_instant returns the earliest instant among the notice branches A finds true, never an unknown branch's; noncommencement_facts computes no deadline without one; a stated count reads \"7 (sette)\" as 7; listing_facts binds L.R. 14/2007 Art. 5 status from a tree's own entry dates; trunk_diameter_facts compares a recorded diameter with B's Art. 2(1)(a) floor; five reference-outcome pairs; the stated-period clock is a calendar duration. Binding takes effect only on merge."
 }

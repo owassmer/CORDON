@@ -269,14 +269,6 @@
   },
   {
     "consumer": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
-    "reference": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect",
-    "outcomes": {
-      "ACT_EFFECTIVE_AGAINST_RECIPIENT": true,
-      "RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED": false
-    }
-  },
-  {
-    "consumer": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
     "reference": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
     "outcomes": {
       "ACT_EFFECTIVE_AGAINST_RECIPIENT": true,
@@ -285,6 +277,14 @@
   },
   {
     "consumer": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+    "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+    "outcomes": {
+      "TREE_LISTED": true,
+      "TREE_NOT_LISTED": false
+    }
+  },
+  {
+    "consumer": "PUG-DGR343-2022:Art7(3)-policy",
     "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
     "outcomes": {
       "TREE_LISTED": true,

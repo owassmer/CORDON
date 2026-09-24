@@ -2627,6 +2627,26 @@
         "plant-population",
         "protected-status"
       ]
+    },
+    {
+      "evidence": "The olive's own L.R. 14/2007 Article 5 list entry and the BURP date of its definitive republication, official negative result, coverage by this effective retention policy, and Article 7(3) annual inspection, sampling/testing and vector-treatment evidence.",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "operative-act",
+        "protected-status",
+        "survey-performance",
+        "treatment-performance"
+      ]
+    },
+    {
+      "evidence": "The trunk diameter the plant's official monitoring record states, and the height at which it was taken where the record states one.",
+      "contracts": [
+        "evaluation-context",
+        "official-finding",
+        "plant-population",
+        "protected-status"
+      ]
     }
   ],
   "callables": [
@@ -2813,6 +2833,23 @@
         "evaluation-context",
         "operative-act",
         "recipient-notice"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.notice_instant",
+      "contracts": [
+        "evaluation-context",
+        "recipient-notice"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.trunk_diameter_facts",
+      "contracts": [
+        "evaluation-context",
+        "plant-population",
+        "protected-status"
       ],
       "kind": "evidence-or-derived-input"
     },
@@ -3803,18 +3840,18 @@
     },
     {
       "consumer": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
-      "reference": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect",
-      "contracts": [],
-      "kind": "C-owned-outcome-comparison"
-    },
-    {
-      "consumer": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
       "reference": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
       "contracts": [],
       "kind": "C-owned-outcome-comparison"
     },
     {
       "consumer": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+      "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "PUG-DGR343-2022:Art7(3)-policy",
       "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
       "contracts": [],
       "kind": "C-owned-outcome-comparison"

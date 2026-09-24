@@ -17,10 +17,10 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "c9aa268e8246dd9b3e7c4d181270d5b0e3e5014f1dd4b4cb8b6477c926a769fc",
-          "provision_versions": 425,
+          "sha256": "096544fa2f4c5c67f2d6b20814157d5f3d1ce49d8f952ebc52ecb7728b22c20c",
+          "provision_versions": 426,
           "national_prefix_rows": 220,
-          "national_prefix_sha256": "2022ba4158bb2b92c2c7e242a16ffb485258ea0f6482c1fe673b5c3adf5fbbfd"
+          "national_prefix_sha256": "a8ab42d3c50388346b8d1409b1e2b472c48a071fb755d2311b4de1432086e352"
         }
       },
       "bounded_unknowns": [
@@ -35,21 +35,21 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "59d56073383f8de6666464f697b6b75d7e34e2d8879eb8f73b499442ac7a3e64",
+        "sha256": "081e912f673e9115fbbdd806622870753023c81904c246880a57f7622918a1ac",
         "schema": "stage-b-essence-v6",
         "counts": {
           "clocks": 126,
-          "parameters": 169,
-          "dispositions": 900
+          "parameters": 171,
+          "dispositions": 902
         }
       },
       "population": {
         "path": "regulation/stage-b/population.json",
-        "sha256": "562fceca6e4bad3ff68de3725da8aeb850c72956a367598db94b8448a79f2405",
+        "sha256": "a7de82ff8c5bf273cbf2870ae6b7160d2670e1e8b412d52f4717843e3de29d13",
         "seams": {
           "1": 160,
           "2": 100,
-          "3": 126,
+          "3": 127,
           "4": 162
         }
       },
@@ -68,11 +68,11 @@
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
         "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr32.json",
-        "sha256": "d122e91f0350be83c7ba99855c966456294588b57c3f31d3e036fa0a74f62f43"
+        "sha256": "4b41a18f970d7d6d67dbf9622775d378f1ad828348e26d3372d9738d000d53c0"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "138ea415d9a67a7d1f1925c95fcf0262dd1e0a72e5c1436f41733bf19a530691",
+        "sha256": "1e973faea096b0bd57432bd5c4b8dc133a14591edaaf747151b19a5b847d56c1",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },

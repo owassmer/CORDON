@@ -5,13 +5,15 @@ from B at the legal event date. Qualitative facts retain their A identity; D wil
 bind those facts and the typed mathematical inputs to evidence.
 """
 
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta
 from collections.abc import Mapping
+from decimal import Decimal
 
 from .core import Evaluation, MissingInput, Snapshot, evaluate, negation, disjunction, predicate_value
 from .diagnostic import AssayResult, analytical_predicates
 from .quantities import scalar, clock_boundary, PeriodRule, timely_completion, clock_ordering, continuous_duration_support
-from .temporal import elapsed_hours, utc, WorkingCalendar, occurrence_in_window
+from .quantities import compare_scalar
+from .temporal import elapsed_hours, end_of_day, utc, WorkingCalendar, occurrence_in_window
 from .core import conjunction
 from zoneinfo import ZoneInfo
 from .spatial import MetricGeometry, adopted_membership, partial_parcel, distance_test, population_coverage
@@ -364,18 +366,24 @@ def noncommencement_facts(snapshot: Snapshot, clock_id: str, at: date, *,
 
 def mass_publicity_facts(snapshot: Snapshot, at: date, *,
                          ground_stated: bool | Evaluation, annulled_on_ground: bool | Evaluation,
-                         posting_start: datetime | None,
-                         postings: Mapping[str, tuple[datetime, datetime | None]],
+                         posting_start: date | datetime | None,
+                         postings: Mapping[str, tuple[date | datetime, date | datetime | None]],
                          postings_complete: bool, stated_period: tuple[str, str] | None,
                          evaluated_at: datetime, zone: ZoneInfo) -> tuple[dict, date | None]:
     """Law 241/1990 Art. 21-bis mass publicity for one act, from its own text and posting records.
 
     ground_stated is whether the act states its own ground for public posting;
     stated_period is the posting period the act prints (number, unit word),
-    never a plan's default. The posting must run continuously from its start
-    through the stated period. Returns the bound facts and the last day of the
-    stated period, only when A's row gives effectiveness on those facts;
-    otherwise no notification day, so no Art. 21-ter deadline can run from it.
+    never a plan's default. The period is a display duration: the posting must
+    run continuously from its start through the end of the last of that many
+    consecutive days, the first day of display included. A posting record given
+    as dates is kept whole days: a start date is that day's start, and an end
+    date (a certificate's inclusive "al 17/03") runs through that day's end.
+    Returns the bound facts and the notice day, only when A's row gives
+    effectiveness on those facts: the stated number of days counted from the
+    day of publication, that day excluded ("decorso il settimo giorno dalla data
+    di pubblicazione"). Otherwise no notification day, so no Art. 21-ter
+    deadline can run from it.
     """
     identity = "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
     row = snapshot.version(identity, at)
@@ -383,13 +391,24 @@ def mass_publicity_facts(snapshot: Snapshot, at: date, *,
               if c["consumer_decision"] == row["stable_provision_id"] and c["kind"] == "minimum_duration"]
     if len(clocks) != 1:
         raise ValueError("Mass-publicity route has no unique stated-period clock")
+
+    def instant(value: date | datetime | None, *, end: bool) -> datetime | None:
+        if value is None or isinstance(value, datetime):
+            return value
+        return end_of_day(value, zone) if end else datetime.combine(value, time(), zone)
+
     period = stated_period
-    if posting_start is None:
+    start = instant(posting_start, end=False)
+    intervals = {name: (instant(first, end=False), instant(last, end=True)) for name, (first, last) in postings.items()}
+    if start is None:
         completed = Evaluation(None, needs=frozenset({"start of the posting the act states"}))
+        publication = None
     else:
-        completed = continuous_duration_support(snapshot, clocks[0]["clock_id"], at, anchor=posting_start,
-            required_start=posting_start, intervals=postings, evaluated_at=evaluated_at,
-            records_complete=postings_complete, zone=zone, stated_term=period)
+        publication = utc(start).astimezone(zone).date()
+        # Counting from the day before the first day includes the first day of display.
+        completed = continuous_duration_support(snapshot, clocks[0]["clock_id"], at,
+            anchor=publication - timedelta(days=1), required_start=start, intervals=intervals,
+            evaluated_at=evaluated_at, records_complete=postings_complete, zone=zone, stated_term=period)
     facts = bind(row, {
         "the act states its own ground for reaching its recipients by public posting": ground_stated,
         "the publicity form the act states has been completed": completed,
@@ -397,8 +416,90 @@ def mass_publicity_facts(snapshot: Snapshot, at: date, *,
     })
     if evaluate(snapshot, identity, at, facts).effect != "ACT_EFFECTIVE_AGAINST_RECIPIENT":
         return facts, None
-    end = clock_boundary(snapshot, clocks[0]["clock_id"], at, posting_start, zone=zone, stated_term=period)
+    end = clock_boundary(snapshot, clocks[0]["clock_id"], at, publication, zone=zone, stated_term=period)
     return facts, end.astimezone(zone).date() - timedelta(days=1)
+
+
+def notice_instant(snapshot: Snapshot, identity: str, at: date, facts: Mapping, *,
+                   instants: Mapping[str, date | datetime | None], zone: ZoneInfo) -> date | datetime | None:
+    """The instant from which a consumer's notice-based term runs for one recipient.
+
+    The consumer row holds one any_of of notice branches. A evaluates each
+    branch on `facts`: a predicate branch by its own leaf, a provision_ref
+    branch through the bound reference outcome. `instants` maps a branch (its
+    predicate text or referenced stable id) to the instant its own events give
+    this recipient. Returns the earliest instant among the branches A finds
+    true, or none when no branch is true. A branch that is false or unknown
+    never supplies its instant; a true branch must have one.
+    """
+    row = snapshot.version(identity, at)
+    groups = []
+
+    def walk(node):
+        if isinstance(node, dict):
+            if "any_of" in node:
+                groups.append(node["any_of"])
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(row["condition_ast"])
+    if len(groups) != 1:
+        raise ValueError(f"{identity}: no single notice any_of")
+    truths = {}
+    for branch in groups[0]:
+        if set(branch) == {"predicate"}:
+            truths[branch["predicate"]] = predicate_value(row, branch["predicate"], facts).truth
+        elif set(branch) == {"provision_ref"}:
+            reference = branch["provision_ref"]
+            outcomes = snapshot.reference_outcomes.get((row["stable_provision_id"], reference))
+            if outcomes is None:
+                raise ValueError(f"{identity}: notice branch {reference} has no bound outcomes")
+            effect = evaluate(snapshot, reference, at, facts).effect
+            truths[reference] = None if effect is None else outcomes[effect]
+        else:
+            raise ValueError(f"{identity}: unsupported notice branch {sorted(branch)}")
+    if set(instants) - set(truths):
+        raise ValueError(f"{identity}: an instant names no notice branch of this row")
+    held = []
+    for branch, truth in truths.items():
+        if truth is True:
+            if instants.get(branch) is None:
+                raise ValueError(f"{identity}: branch A finds true has no instant: {branch}")
+            held.append(instants[branch])
+    if not held:
+        return None
+    return min(held, key=lambda value: utc(value) if isinstance(value, datetime)
+               else utc(datetime.combine(value, time(), zone)))
+
+
+def trunk_diameter_facts(snapshot: Snapshot, at: date, *, diameter_cm: Decimal | None,
+                         measured_height_cm: Decimal | None) -> dict:
+    """L.R. Puglia 14/2007 Art. 2(1)(a) from the trunk diameter a plant's official record states.
+
+    diameter_cm is the recorded diameter (for a fragmented trunk, of the
+    reconstructed whole trunk). measured_height_cm is the height the record
+    states for it, or None when it states none, which A reads as the
+    criterion's own height. A diameter taken at another height is not this
+    measure and leaves the criterion unknown.
+    """
+    identity = "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+    row = snapshot.version(identity, at)
+    parameters = {p["kind"]: p["parameter_id"] for p in snapshot.parameters.values()
+                  if p["consumer_decision"] == row["stable_provision_id"] and p["unit"] == "cm"}
+    if set(parameters) != {"floor", "exact"}:
+        raise ValueError("Article 2(1)(a) has no unique diameter floor and measurement height")
+    height = scalar(snapshot, parameters["exact"], at)
+    if diameter_cm is None:
+        value = Evaluation(None, needs=frozenset({"the trunk diameter the plant's official record states"}))
+    elif measured_height_cm is not None and measured_height_cm != height:
+        value = Evaluation(None, needs=frozenset({f"the trunk diameter measured {height} cm above the ground"}))
+    else:
+        value = Evaluation(compare_scalar(snapshot, parameters["floor"], at, diameter_cm))
+    return bind(row, {"the trunk diameter the plant's official record states, measured 130 cm above the ground "
+                      "(for a fragmented trunk, of the reconstructed whole trunk), is at least 100 cm": value})
 
 
 def listing_facts(snapshot: Snapshot, at: date, *, own_entry: bool | None,

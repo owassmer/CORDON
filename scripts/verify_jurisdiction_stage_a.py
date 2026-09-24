@@ -318,10 +318,17 @@ def verify(authoring: Path, check_projection: bool, check_authority: bool) -> di
             {"predicate": "the publicity form the act states has been completed"},
             {"not": {"predicate": "a court has annulled the act on its stated ground for public posting"}}]}]:
         fail("Art. 21-bis mass publicity must rest on the act's own ground, completed publicity and no annulment on that ground")
-    notice = {"any_of": [{"provision_ref": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect"},
+    # The personal branch reads whether communication was effected, not the individual row's effect, so a reasoned
+    # immediate-effect clause cannot defeat notice.
+    notice = {"any_of": [{"predicate": "the communication to that recipient has been effected, including in the forms "
+                                       "prescribed for notification to the unreachable in the cases provided by the code of civil procedure"},
                          {"provision_ref": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"}]}
     if notice not in list(ast_nodes(get(by, "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction")["condition_ast"])):
-        fail("Art. 21-ter notice is not the Art. 21-bis personal-communication or mass-publicity result")
+        fail("Art. 21-ter notice is not the Art. 21-bis communication predicate or mass-publicity result")
+    for sid in ("PUG-DGR343-2022:Art7(3)-policy", "PUG-DGR1866-2022:Art7(3)-policy"):
+        if not by.get(sid) or any({"provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"} not in list(ast_nodes(row["condition_ast"]))
+                                  for row in by[sid]):
+            fail(f"{sid}: official recognition within the reach is L.R. 14/2007 Art. 5(3) listing")
     listing = get(by, "PUG-LR14-2007:Art.5(3):definitive-listing")
     if [route["when"] for route in listing["condition_ast"]["route_table"]] != [{"all_of": [
             {"predicate": "the tree has its own entry in an Article 5 list"},
@@ -389,6 +396,15 @@ def run_mutations(authoring: Path) -> None:
         {"predicate": "the tree has its own entry in an Article 5 list"}, {"predicate": "the tree stands in a listed monumental grove"}]})))
     mutations.append(("drop the annulment negation", lambda rows: latest(rows, "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route")[
         "condition_ast"]["route_table"][0]["when"]["all_of"].pop()))
+    def personal_notice_reads_effect(rows):
+        row = latest(rows, "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction")
+        for node in ast_nodes(row["condition_ast"]):
+            if "any_of" in node:
+                node["any_of"][0] = {"provision_ref": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect"}
+                return
+        fail("personal-notice mutation has no target")
+
+    mutations.append(("personal notice reads the individual row's effect", personal_notice_reads_effect))
     mutations.append(("restore unsupported DGR343 policy", lambda rows: rows.append({**rows[-1], "stable_provision_id": "PUG-DGR343-2022:Art13(2)-scientific-retention-policy", "provision_version_id": "mutant:dgr343"})))
 
     for label, mutate in mutations:

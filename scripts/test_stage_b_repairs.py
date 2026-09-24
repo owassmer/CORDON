@@ -2074,8 +2074,12 @@ class Round10Repairs(unittest.TestCase):
                                    ('authority_judgment_kind', 'protected-value retention decision')):
                     mutant = dict(surface); mutant[field] = old
                     with self.assertRaises(AssertionError): check_policy(mutant)
-            facts = self.scenario(['effective plan interval', 'official protected status',
-                                   'official negative result', 'continuing Article 7(3) conditions'])
+            # DGR 343/2022's interval reaches into the reach, so its protected status is L.R. 14/2007 Art. 5(3) listing.
+            facts = (self.scenario(['effective plan interval', 'official protected status',
+                                    'official negative result', 'continuing Article 7(3) conditions'])
+                     if plan == '538-2021' else
+                     self.scenario(['effective plan interval', 'official negative result',
+                                    'continuing Article 7(3) conditions'], provisions=[self.LISTED]))
             for ast in self.surfaces(row):
                 self.assertIs(self.result(ast, facts), True)
                 facts[self.key({'predicate': 'continuing Article 7(3) conditions'})] = False
@@ -2457,7 +2461,9 @@ class Round13Repairs(unittest.TestCase):
         for ast in self.surfaces(row):
             facts = StageARepairs.facts(ast)
             self.assertEqual(self.result(ast, facts), {'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED'})
-            notice = {'any_of': [{'provision_ref': 'IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect'},
+            notice = {'any_of': [{'predicate': 'the communication to that recipient has been effected, including in the '
+                                               'forms prescribed for notification to the unreachable in the cases '
+                                               'provided by the code of civil procedure'},
                                  {'provision_ref': 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'}]}
             self.assertIn(notice, ast['route_table'][0]['when']['all_of'])
             for atom in ast['route_table'][0]['when']['all_of']:
@@ -2509,8 +2515,10 @@ class StatedTermClock(unittest.TestCase):
         self.reject(mutant, 'not evidenced by source_phrase')
 
     def test_unit_words_have_one_owner(self):
-        # The convention holds the word held orders print; the verifier reads it rather than its own copy.
-        self.assertEqual(self.base['conventions']['clock.unit_words'], {'giorni': 'calendar_days'})
+        # The convention holds the words held orders print; the verifier reads it rather than its own copy.
+        self.assertEqual(self.base['conventions']['clock.unit_words'], {
+            'giorni': 'calendar_days', 'gg': 'calendar_days', 'gg consecutivi': 'calendar_days',
+            'giorni consecutivi': 'calendar_days', 'giorni naturali e consecutivi': 'calendar_days'})
         mutant = copy.deepcopy(self.base)
         mutant['conventions']['clock.unit_words'] = {}
         self.reject(mutant, 'not evidenced by source_phrase')

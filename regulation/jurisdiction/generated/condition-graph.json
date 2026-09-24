@@ -3662,7 +3662,7 @@
                 {
                   "any_of": [
                     {
-                      "provision_ref": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect"
+                      "predicate": "the communication to that recipient has been effected, including in the forms prescribed for notification to the unreachable in the cases provided by the code of civil procedure"
                     },
                     {
                       "provision_ref": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
@@ -5070,6 +5070,26 @@
       },
       "true_effect": "Preserve publication and recipient notification as separate legal events.",
       "false_effect": "Publication alone does not establish effectiveness against the recipient."
+    },
+    {
+      "stable_provision_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "predicate": "the trunk diameter the plant's official record states, measured 130 cm above the ground (for a fragmented trunk, of the reconstructed whole trunk), is at least 100 cm"
+            },
+            "effect": "ARTICLE_2_1_A_CRITERION_MET"
+          }
+        ],
+        "otherwise": {
+          "effect": "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The olive has the monumental character of Article 2(1)(a): a plurisecular age shown by a trunk diameter of at least 100 cm measured 130 cm above the ground.",
+      "false_effect": "Article 2(1)(a) is not shown by this measurement. Article 2(1)(b) and 2(2) remain other grounds of the characteristics; a missing measurement, or one taken at another height, remains unknown."
     },
     {
       "stable_provision_id": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",

@@ -45,7 +45,11 @@
     "dispositions.ref": "one minted id, or an ordered list of successive versions of one target proposition when the source expression spans their intervals. A list is temporal resolution, not multiple dispositions or simultaneous duties. Its intervals must be contiguous, non-overlapping and cover the source interval",
     "clock.magnitude": "normalized numeric string | {open_term, reserved_to}: an open term is stated by the named instrument; unit and bound stay null in B, and there is no default",
     "clock.unit_words": {
-      "giorni": "calendar_days"
+      "giorni": "calendar_days",
+      "gg": "calendar_days",
+      "gg consecutivi": "calendar_days",
+      "giorni consecutivi": "calendar_days",
+      "giorni naturali e consecutivi": "calendar_days"
     }
   },
   "clocks": [
@@ -8102,6 +8106,46 @@
       },
       "consumer_decision": "PUG-DGR1075-2025:§4.1.10:survey-design",
       "note": null
+    },
+    {
+      "parameter_id": "B-PAR-LR14-2(1)(a)-trunk-diameter-100cm",
+      "producer_provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "source_phrase": "con diametro uguale o superiore a centimetri 100",
+      "kind": "floor",
+      "value": "100",
+      "unit": "cm",
+      "comparator": ">=",
+      "legal_effect": "OPERATIVE",
+      "applies_when": null,
+      "dependencies": [],
+      "scope": {
+        "zone_type": null,
+        "purpose": "L.R. 14/2007 Article 2(1)(a) monumental character of an olive",
+        "branch": null,
+        "subspecies": null
+      },
+      "consumer_decision": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "note": "The trunk diameter the plant's official record states; for a fragmented trunk, that of the reconstructed whole trunk."
+    },
+    {
+      "parameter_id": "B-PAR-LR14-2(1)(a)-measurement-height-130cm",
+      "producer_provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "source_phrase": "misurato all’altezza di centimetri 130 dal suolo",
+      "kind": "exact",
+      "value": "130",
+      "unit": "cm",
+      "comparator": null,
+      "legal_effect": "OPERATIVE",
+      "applies_when": null,
+      "dependencies": [],
+      "scope": {
+        "zone_type": null,
+        "purpose": "L.R. 14/2007 Article 2(1)(a) monumental character of an olive",
+        "branch": null,
+        "subspecies": null
+      },
+      "consumer_decision": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "note": "The height above the ground at which the Article 2(1)(a) diameter is taken."
     }
   ],
   "dispositions": [
@@ -8947,6 +8991,20 @@
       "disposition": "not_a_clock",
       "ref": null,
       "why": "Member State duty toward the Commission (class-E ruling); national actor",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "disposition": "parameter",
+      "ref": "B-PAR-LR14-2(1)(a)-trunk-diameter-100cm",
+      "why": null,
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "disposition": "parameter",
+      "ref": "B-PAR-LR14-2(1)(a)-measurement-height-130cm",
+      "why": null,
       "aperture": "IN_APERTURE"
     },
     {
@@ -15027,10 +15085,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-1.json",
-        "record_sha256": "ffe1986a06ec33bb7026fed86713c4ff1b67058b1f2633ba2b3c6998a78b5116"
+        "record_sha256": "079bc63bf2b6e5752626f4b389392732417f24aeedd37119f2af3039555b5051"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "b96dcdfaaaadb9b7bfbf9c0cbc21570f53a3dfd45fd4cb235dd9491f4a2368f5"
+      "accepted_content_sha256": "0e10383902c1a545f3adf6d8e4c675b4e35e09216bc7cf3104f832313da293d8"
     },
     {
       "seam": 2,
@@ -15041,10 +15099,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-2.json",
-        "record_sha256": "fdfd4447a0608349ef314d97ea98e879137641cb789d10d88346c118b12d6c2e"
+        "record_sha256": "bf5d6a6f6a38d9dab18a79b6af51c16a3a1881c3fd0bf7356922867b73d75673"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "e50404bb8e03915478995ebc670cfa18bca5eb46ba23141b2e28f10ffa26a210"
+      "accepted_content_sha256": "5b335f9cf9cf4ac46179ce28fa117715841f4159254321ee91a50c498519f971"
     },
     {
       "seam": 3,
@@ -15055,10 +15113,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-3.json",
-        "record_sha256": "e51e13f798288472786487052bd28522b2de843988410d2a7c624bd384a002ea"
+        "record_sha256": "4b0ec068429d38d8552972ae3090636d5f285c7121c6be9794db732c04e54659"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "9e5af09d0abb95d6edaf5c1bb0dc54ed0550ea394a03e3372b422829f8c7ed70"
+      "accepted_content_sha256": "409ee70ee608f436d23f72e4be2b6865cd10c95b351e2327904b8da7cfe8381e"
     },
     {
       "seam": 4,
@@ -15069,10 +15127,10 @@
       "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
       "acceptance_evidence": {
         "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-4.json",
-        "record_sha256": "385d6a6276fb18c6e33a2a4b02c72b5ded8487f6e660f14a736eeb40c197605f"
+        "record_sha256": "7b139e8057b9bd3baf81ad6ca4438c9cacdf7069165f56e7208cab53094f8cec"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "1802d56471361ef056fcb62eefc32035b11451cc09e89ff1f9a0b776745e063b"
+      "accepted_content_sha256": "a1acf6a53704147ce15d1a126b56eea7d95aa63541ccf053b68357977fba059c"
     }
   ]
 }

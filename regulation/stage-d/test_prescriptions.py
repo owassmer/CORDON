@@ -25,6 +25,9 @@ CLAUSE, WORK, COERCE = (
     'the commencement work the prescription states is lawfully due from this recipient',
     'removal of the population the prescription names for coercion is lawfully due')
 INDIVIDUAL = 'IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect'
+MASS = 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'
+COMMUNICATED = ('the communication to that recipient has been effected, including in the forms prescribed for '
+                'notification to the unreachable in the cases provided by the code of civil procedure')
 
 # DDS 108/2024 (BURP n. 68 of 22-8-2024; store 47b107a6…3a51a3d), operative point 11: "qualora il
 # proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione della pianta infetta e
@@ -44,12 +47,10 @@ class StatedTermRule(unittest.TestCase):
         cls.calendar = national_calendar()
 
     def personal(self, at, effected):
-        """Art. 21-bis personal-communication events for a restrictive act with no immediate-effect clause."""
-        row = self.s.version(INDIVIDUAL, at)
-        return {(row['provision_version_id'], p): effected if p.startswith('the communication to that recipient')
-                else p != 'a valid immediate-effect exception applies'
-                for p in leaves(row['condition_ast'])
-                if effected is not None or not p.startswith('the communication to that recipient')}
+        """The Art. 21-ter notice conjunct's personal branch: whether communication to this recipient was effected."""
+        if effected is None:
+            return {}
+        return {(self.s.version(RULE, at)['provision_version_id'], COMMUNICATED): effected}
 
     def effect(self, record, at, *, notified, evaluated, work=True, coerce=True, refs=(), results=None,
                commencements=None, notice=None):
@@ -171,6 +172,8 @@ class MassPublicityNotice(unittest.TestCase):
     alcuni destinatari e della gravosità per l'amministrazione di notificare i provvedimenti ai singoli beneficiari".
     """
     personal = StatedTermRule.personal
+    effect = StatedTermRule.effect
+    settled = StatedTermRule.settled
 
     @classmethod
     def setUpClass(cls):
@@ -220,6 +223,40 @@ class MassPublicityNotice(unittest.TestCase):
         day, _, result = self.direction(at, False, personal=None)
         self.assertIsNone(result.effect)
         self.assertTrue(any('the communication to that recipient has been effected' in need for need in result.needs))
+
+    def test_immediate_effect_order_with_pec_delivery_gets_a_required_direction(self):
+        # DDS 188/2024 (store 882c0020…): no ground of its own for posting (l.196-198); "all'albo pretorio per 7 gg
+        # consecutivi e alla loro PEC qualora presente" (l.128-129); "Di dichiarare il presente provvedimento
+        # immediatamente esecutivo" with its reasons (l.191-193); ten days from notice, then "disporrà" (l.179-181).
+        # The PEC instant is synthetic. The reasoned clause neither gives nor defeats the PEC notice.
+        from cordon_c.bindings import notice_instant
+        at = date(2024, 12, 12)
+        record = dict(DDS108, instrument='REG-PUGLIA-U181-DIR-2024-00188')
+        individual = self.s.version(INDIVIDUAL, at)
+        clause = {(individual['provision_version_id'], p): True for p in leaves(individual['condition_ast'])}
+        self.assertIs(evaluate(self.s, INDIVIDUAL, at, clause).truth, False)  # the clause defeats that row's effect
+        start = date(2024, 12, 13)
+        facts, day = mass_publicity_facts(self.s, at, ground_stated=False, annulled_on_ground=False, posting_start=start,
+                                          postings={'albo': (start, date(2024, 12, 20))}, postings_complete=True,
+                                          stated_period=('7', 'gg consecutivi'),
+                                          evaluated_at=datetime(2025, 3, 1, tzinfo=ROME), zone=ROME)
+        self.assertIsNone(day)
+        pec = datetime(2024, 12, 13, 16, tzinfo=ROME)
+        facts = clause | facts | self.personal(at, True)
+        notified = notice_instant(self.s, RULE, at, facts, zone=ROME, instants={COMMUNICATED: pec, MASS: day})
+        self.assertEqual(notified, pec)
+        # Independent expectation: ten calendar days after a Friday notice end on Monday 23 December.
+        expected = end_of_day(date(2024, 12, 23), ROME)
+        self.assertEqual(clock_boundary(self.s, CLOCK, at, notified, zone=ROME, calendar=self.calendar,
+                                        stated_term=record['term']), expected)
+        # The order's own case delta is reached through its governing reference (lawful dueness, not notice).
+        delta = 'REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion'
+        governed = dict(refs=(delta,), results={delta: self.settled(delta, at)}, notice=facts)
+        self.assertEqual(self.effect(record, at, notified=notified, evaluated=expected + timedelta(hours=1), **governed),
+                         'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        # Before the term lapses no direction is required.
+        self.assertEqual(self.effect(record, at, notified=notified, evaluated=expected - timedelta(hours=1), **governed),
+                         'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
 
 
 if __name__ == '__main__':

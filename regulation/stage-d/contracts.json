@@ -498,6 +498,7 @@
       ],
       "fields": [
         "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
+        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding in NOTE_RILEVATORE stating \"caratteristiche di monumentalità\" or recording a measurement (the trunk diameter, and its height where stated)",
         "applicable protection rule",
         "value assessment if that ground applies",
         "the Osservatorio's recognition-request record for the tree",
@@ -505,11 +506,12 @@
       ],
       "acquisition_routes": [
         "official monumental-tree lists and acts",
+        "the official monitoring record of the plant (MONUMENTALE_ARIF, NOTE_RILEVATORE)",
         "provisional recognition records",
         "specific protection instruments",
         "the competent permission or decision reached by the affected protected plant and intervention"
       ],
-      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion.",
+      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion. Article 2 characteristics (Owen's ruling of 2026-09-24) are established by the plant's official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding of \"caratteristiche di monumentalità\"; a recorded measurement establishes them when it meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). A register listing is not required for them.",
       "absence": "No registry match alone does not prove lack of every protection/value ground.",
       "admissible_instance_roles": [
         "official-record",
