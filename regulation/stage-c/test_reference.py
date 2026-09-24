@@ -1463,11 +1463,40 @@ class OwnerRulings20260924(unittest.TestCase):
         at = date(2025, 9, 1)
         row = self.s.version(identity, at)
         self.assertNotIn(self.LISTED, json.dumps(row["condition_ast"]))
-        characteristics = "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2"
         facts = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
         self.assertIs(evaluate(self.s, identity, at, facts).truth, True)
-        facts[row["provision_version_id"], characteristics] = False
+        from cordon_c.bindings import trunk_diameter_facts
+        facts[row["provision_version_id"], self.FINDING] = False
+        facts |= trunk_diameter_facts(self.s, at, diameter_cm=Decimal(96), measured_height_cm=None)
         self.assertIs(evaluate(self.s, identity, at, facts).truth, False)
+
+    # PR #32 round 2: the official monitoring finding, or A's own Art. 2(1)(a) row.
+    FINDING = ("the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: "
+               "its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics")
+
+    def test_a_composes_the_measurement_route_into_the_characteristics_conjunct(self):
+        from cordon_c.bindings import trunk_diameter_facts
+        at = date(2025, 9, 1)
+        conjunct = {"any_of": [{"predicate": self.FINDING},
+                               {"provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"}]}
+        for identity in ("PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+                         "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"):
+            row = self.s.version(identity, at)
+            self.assertIn(conjunct, row["condition_ast"]["all_of"])
+            vid = row["provision_version_id"]
+            # Every other conjunct holds, so the row's truth is the characteristics conjunct's.
+            others = {(vid, p): True for p in leaves(row["condition_ast"]) if p != self.FINDING}
+            for finding in (False, None):
+                given = others if finding is None else others | {(vid, self.FINDING): finding}
+                with self.subTest(identity=identity, finding=finding):
+                    # A diameter-only record at 120 cm, no height stated, no finding: the conjunct is true.
+                    met = given | trunk_diameter_facts(self.s, at, diameter_cm=Decimal(120), measured_height_cm=None)
+                    self.assertIs(evaluate(self.s, identity, at, met).truth, True)
+                    # At 96 cm it is not: false against a record with no finding, unknown where the finding is unread.
+                    short = given | trunk_diameter_facts(self.s, at, diameter_cm=Decimal(96), measured_height_cm=None)
+                    self.assertIs(evaluate(self.s, identity, at, short).truth, None if finding is None else False)
+            # The surveyor's finding alone is enough without a measurement.
+            self.assertIs(evaluate(self.s, identity, at, others | {(vid, self.FINDING): True}).truth, True)
 
     # PR #32 round 1.
     TER = "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction"
@@ -1528,10 +1557,11 @@ class OwnerRulings20260924(unittest.TestCase):
         clock = "B-CLK-IT-L241-21BIS-stated-publicity-period"
         expected = datetime(2026, 4, 15, tzinfo=ROME)
         for term in [("7", "giorni"), ("7", "gg"), ("7", "gg consecutivi"), ("7", "giorni consecutivi"),
-                     ("7 (sette)", "giorni naturali e consecutivi"), ("7 (Sette)", "Giorni  naturali e consecutivi")]:
+                     ("7 (sette)", "giorni naturali e consecutivi"), ("7 (Sette)", "Giorni  naturali e consecutivi"),
+                     ("7(sette)", "gg")]:
             with self.subTest(term=term):
                 self.assertEqual(clock_boundary(self.s, clock, AT, date(2026, 4, 7), zone=ROME, stated_term=term), expected)
-        for term in [("7 (otto)", "giorni"), ("sette", "giorni"), ("7", "giorni lavorativi")]:
+        for term in [("sette", "giorni"), ("(7)", "giorni"), ("7", "giorni lavorativi")]:
             with self.subTest(term=term), self.assertRaises(MissingInput):
                 clock_boundary(self.s, clock, AT, date(2026, 4, 7), zone=ROME, stated_term=term)
 

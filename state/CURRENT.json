@@ -8,7 +8,7 @@
     "A": {
       "status": "CLOSED",
       "accepted_by": "Owen Wassmer",
-      "reopened_proposition": "Owen's merge of PR #32 accepts the reopening that carries his 2026-09-24 rulings: Law 241/1990 Art. 21-bis mass publicity rests on the act's own stated ground and stated period, the Art. 21-ter notice conjunct is A's Art. 21-bis result, and L.R. Puglia 14/2007 listed and pending status follow a tree's own dated list acts. Acceptance remains revisable.",
+      "reopened_proposition": "Owen's merge of PR #32 accepts the reopening that carries his 2026-09-24 rulings: Law 241/1990 Art. 21-bis mass publicity rests on the act's own stated ground and stated period; the Art. 21-ter notice conjunct's personal branch reads the Art. 21-bis communication predicate and its other branch A's Art. 21-bis mass-publicity result; L.R. Puglia 14/2007 listed and pending status follow a tree's own dated list acts; and L.R. 14/2007 Art. 2 characteristics come from the official monitoring finding or the Art. 2(1)(a) diameter row. Acceptance remains revisable.",
       "canonical_artifacts": {
         "eu": {
           "path": "regulation/stage-a/authoring-eu.json",
@@ -17,10 +17,10 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "096544fa2f4c5c67f2d6b20814157d5f3d1ce49d8f952ebc52ecb7728b22c20c",
+          "sha256": "9b6bf55f3756f0156d675340395b484fa86bc2f2aa6954caedec1bbadda82a49",
           "provision_versions": 426,
           "national_prefix_rows": 220,
-          "national_prefix_sha256": "a8ab42d3c50388346b8d1409b1e2b472c48a071fb755d2311b4de1432086e352"
+          "national_prefix_sha256": "7fc93c6fbc9c9b15245482d7ea4ad458ab404867a395bcaf1f2084086b99dd37"
         }
       },
       "bounded_unknowns": [
@@ -35,7 +35,7 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "081e912f673e9115fbbdd806622870753023c81904c246880a57f7622918a1ac",
+        "sha256": "a8dae956ea08c59ac2b97e7682dd1e5b8a0ae91006185a097804f96ff18893ee",
         "schema": "stage-b-essence-v6",
         "counts": {
           "clocks": 126,
@@ -68,11 +68,11 @@
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
         "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr32.json",
-        "sha256": "4b41a18f970d7d6d67dbf9622775d378f1ad828348e26d3372d9738d000d53c0"
+        "sha256": "140160ab2290e72d643ad40c61d3b775dc2c5c4f63f3000858808ca157e50ffc"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "1e973faea096b0bd57432bd5c4b8dc133a14591edaaf747151b19a5b847d56c1",
+        "sha256": "4b184c46154e7e108ed822f03e939ced7323e63a0806e486cb517bdcca7833fc",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },

@@ -2111,16 +2111,23 @@ class Round10Repairs(unittest.TestCase):
             check_contract(surface['evidence_contract'])
             with self.assertRaises(AssertionError):
                 check_contract('Final listed status, official negative result, competent decision, annual testing and vector-treatment evidence.')
-        conditions = ('the infected olive has the monumental characteristics of L.R. 14/2007 Article 2',
-                      'exact higher-law derogation', 'qualifying branch and site', 'competent Osservatorio authorization')
+        # The characteristics conjunct is the official monitoring finding or A's Art. 2(1)(a) row (PR #32 round 2).
+        finding = {'predicate': "the plant's official monitoring record finds the monumental characteristics of L.R. "
+                                "14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that "
+                                "the plant has monumental characteristics"}
+        diameter = {'provision_ref': 'PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion'}
+        conditions = ({'any_of': [finding, diameter]}, {'predicate': 'exact higher-law derogation'},
+                      {'predicate': 'qualifying branch and site'}, {'predicate': 'competent Osservatorio authorization'})
         for ast in self.surfaces(row):
-            facts = self.scenario(conditions)
+            facts = {self.key(n): True for n in (finding, *conditions[1:])}
             self.assertIs(self.result(ast, facts), True)
+            self.assertIs(self.result(ast, facts | {self.key(finding): False, self.key(diameter): True}), True)
             for condition in conditions:
                 for value in (False, None):
-                    probe = dict(facts); probe[self.key({'predicate': condition})] = value
+                    probe = dict(facts)
+                    probe.update({self.key(n): value for n in condition.get('any_of', [condition])})
                     self.assertIsNot(self.result(ast, probe), True)
-                    mutant = copy.deepcopy(ast); mutant['all_of'].remove({'predicate': condition})
+                    mutant = copy.deepcopy(ast); mutant['all_of'].remove(condition)
                     self.assertIs(self.result(mutant, probe), True)
 
     def test_new_species_analysis_is_performance_not_an_activation_gate(self):

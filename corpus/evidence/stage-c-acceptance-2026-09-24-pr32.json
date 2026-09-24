@@ -3,12 +3,12 @@
   "accepted_by": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
   "date": "2026-09-24",
-  "promoted_package_sha256": "1e973faea096b0bd57432bd5c4b8dc133a14591edaaf747151b19a5b847d56c1",
+  "promoted_package_sha256": "4b184c46154e7e108ed822f03e939ced7323e63a0806e486cb517bdcca7833fc",
   "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
   "preceding_acceptance": {
     "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr31.json",
     "sha256": "aa9875ae88d626f40f5ea47d1861a3f9e459e7eaebea810bdffebc6f63b5d7b8"
   },
   "preceding_package_sha256": "d6f4b5f95d287945879f9cc16dca7a95284cc4e5233d034bb1cd0a7af74c64d7",
-  "scope": "mass_publicity_facts binds the Art. 21-bis mass-publicity predicates from the act's stated ground, stated period and posting records, counts the stated display days with the first day included and a record's inclusive end date through its end, and returns the notice day (the stated days counted from publication, that day excluded) only when A gives effectiveness; notice_instant returns the earliest instant among the notice branches A finds true, never an unknown branch's; noncommencement_facts computes no deadline without one; a stated count reads \"7 (sette)\" as 7; listing_facts binds L.R. 14/2007 Art. 5 status from a tree's own entry dates; trunk_diameter_facts compares a recorded diameter with B's Art. 2(1)(a) floor; five reference-outcome pairs; the stated-period clock is a calendar duration. Binding takes effect only on merge."
+  "scope": "mass_publicity_facts binds the Art. 21-bis mass-publicity predicates from the act's stated ground, stated period and posting records, counts the stated display days with the first day included and a record's inclusive end date through its end, and returns the notice day (the stated days counted from publication, that day excluded) only when A gives effectiveness; notice_instant returns the earliest instant among the notice branches A finds true, never an unknown branch's; noncommencement_facts computes no deadline without one; a stated count reads its digits, a bracketed word after them ignored; listing_facts binds L.R. 14/2007 Art. 5 status from a tree's own entry dates; trunk_diameter_facts compares a recorded diameter with B's Art. 2(1)(a) floor, whose outcomes the Art. 8(7bis) and DDS 45/2023 characteristics conjuncts bind; seven reference-outcome pairs; the stated-period clock is a calendar duration. Binding takes effect only on merge."
 }

@@ -5138,7 +5138,7 @@
     "actor_role": "Issuing administration",
     "modality": "shall",
     "true_effect": "The act becomes effective against its recipients through completion of the publicity form it states, in place of personal communication.",
-    "false_effect": "This mass-publicity route is not established. An act that states no ground of its own for public posting does not reach it, and personal communication to each recipient (individual-communication-effect) stays required. An incomplete or unrecorded posting remains unknown, not completed.",
+    "false_effect": "This mass-publicity route is not established. An act that states no ground of its own for public posting does not reach it, and personal communication to each recipient stays required. An incomplete or unrecorded posting remains unknown, not completed.",
     "reserved_decision_owner": "Issuing administration",
     "evidence_contract": "The act's own stated ground for public posting, verbatim with its place in the act; the publicity form the act states (place, and period as printed); the first-party posting records for that form; any court disposition annulling the act on that ground.",
     "external_dependencies": [],
@@ -11531,7 +11531,7 @@
     "application_basis": "L.R. Puglia 14/2007 Article 2, in force 2007-06-07 (BURP n. 83 of 7-6-2007); Article 2 is unamended in the consolidated text in force from 20/06/2023",
     "exact_change_kind": "INITIAL",
     "semantic_change": "INITIAL",
-    "actor_role": "Regional Plant Health Service (official monitoring)",
+    "actor_role": "-",
     "modality": "-",
     "true_effect": "The olive has the monumental character of Article 2(1)(a): a plurisecular age shown by a trunk diameter of at least 100 cm measured 130 cm above the ground.",
     "false_effect": "Article 2(1)(a) is not shown by this measurement. Article 2(1)(b) and 2(2) remain other grounds of the characteristics; a missing measurement, or one taken at another height, remains unknown.",
@@ -11542,7 +11542,7 @@
     "authority_judgment_required": "NO",
     "authority_judgment_kind": "-",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "[OWNER RULING 2026-09-24, CHARACTERISTICS] For an infected olive, L.R. 4/2017 Art. 8(7bis) turns on the Article 2 characteristics, and the official monitoring record of the plant establishes them: its MONUMENTALE_ARIF flag (“Si” or “1”) or the surveyor's written finding of “caratteristiche di monumentalità”. A note that records only a trunk diameter establishes them when the diameter meets this criterion. [INTERPRETATION, NOT LITERAL STATUTORY TEXT] A diameter the surveyor records without a height is read as taken at the criterion's 130 cm; a diameter recorded at another height is not this measure and leaves the criterion unknown. Falsifier: a controlling reading requiring the record to state the height. Article 2(1)(b) and 2(2) are other grounds and are not this row.",
+    "semantic_note": "[OWNER RULING 2026-09-24, CHARACTERISTICS] For an infected olive, L.R. 4/2017 Art. 8(7bis) turns on the Article 2 characteristics, and the official monitoring record of the plant establishes them: its MONUMENTALE_ARIF flag (“Si” or “1”) or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it. A note that records only a trunk diameter establishes them when the diameter meets this criterion. [INTERPRETATION, NOT LITERAL STATUTORY TEXT] A diameter the surveyor records without a height is read as taken at the criterion's 130 cm; a diameter recorded at another height is not this measure and leaves the criterion unknown. Ground: the forestry convention that the “diametro” of a standing tree is its diameter at breast height, which is the 130 cm height Article 2(1)(a) itself names. Falsifier: a record or protocol showing the surveyors measured at another height. Article 2(1)(b) and 2(2) are other grounds and are not this row. The Art. 8(7bis) and DDS 45/2023 characteristics conjuncts reach this row beside the official monitoring finding.",
     "condition_ast": {
       "route_table": [
         {
@@ -22664,17 +22664,25 @@
     "external_dependencies": [
       "EU-2020-1201:7(1)(a)",
       "EU-2020-1201:13(1)",
-      "EU-2020-1201:13(2)"
+      "EU-2020-1201:13(2)",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "exact higher-law infected-plant retention derogation",
     "legal_linguistic_conflict": "L.R. 4/Piana alternative language cannot independently override Article 7(1)(a) or Article 13(1); Article 13(2) is limited to scientific purposes at qualifying sites.",
-    "semantic_note": "[REL-07/13] Conflict boundary only; this row never mints a generally lawful alternative-measure branch. [OWNER RULING 2026-09-24, 2(e)] The owner's route reaches “olivi monumentali di cui all’articolo 2 della l.r. 14/2007, risultati infetti”: the Article 2 characteristics, not listing (TAR Bari 546/2023). [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE stating “caratteristiche di monumentalità”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act.",
+    "semantic_note": "[REL-07/13] Conflict boundary only; this row never mints a generally lawful alternative-measure branch. [OWNER RULING 2026-09-24, 2(e)] The owner's route reaches “olivi monumentali di cui all’articolo 2 della l.r. 14/2007, risultati infetti”: the Article 2 characteristics, not listing (TAR Bari 546/2023). [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts; the held notes print it as “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result), so A, not D, composes the measurement route.",
     "condition_ast": {
       "all_of": [
         {
-          "predicate": "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2"
+          "any_of": [
+            {
+              "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+            },
+            {
+              "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+            }
+          ]
         },
         {
           "predicate": "exact higher-law derogation"
@@ -24786,7 +24794,8 @@
       "IT-DLGS42-A146:Art.146(2)",
       "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
       "IT-DLGS42-A146:Art.146(8):superintendent-opinion",
-      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "source_paths": "regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
     "article": "case operative delta",
@@ -24796,7 +24805,14 @@
           "predicate": "negative result"
         },
         {
-          "predicate": "apparent monumental characteristics"
+          "any_of": [
+            {
+              "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+            },
+            {
+              "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+            }
+          ]
         },
         {
           "any_of": [
@@ -24818,7 +24834,8 @@
       "IT-DLGS42-A146:Art.146(2)",
       "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
       "IT-DLGS42-A146:Art.146(8):superintendent-opinion",
-      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
     "effective_to_exclusive": "",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
@@ -24838,7 +24855,7 @@
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(b)] A tree approved provisionally and published under L.R. 14/2007 Article 5(2), and not yet decided definitively, has a pending recognition decision. The order's own “si procederà alla richiesta di riconoscimento” remains the other route; the ruling adds the provisional case and narrows nothing. [OWNER RULING 2026-09-24, CHARACTERISTICS] The order's “ulivi con caratteristiche di monumentalità” are established the same way: by the official monitoring record of the plant (its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding of “caratteristiche di monumentalità”, or a recorded measurement meeting Article 2(1)(a), PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion), alongside the register survey and its provisional layers.",
+    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(b)] A tree approved provisionally and published under L.R. 14/2007 Article 5(2), and not yet decided definitively, has a pending recognition decision. The order's own “si procederà alla richiesta di riconoscimento” remains the other route; the ruling adds the provisional case and narrows nothing. [OWNER RULING 2026-09-24, CHARACTERISTICS] The order's “ulivi con caratteristiche di monumentalità” are established the same way: by the official monitoring record of the plant (its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it, as the held notes' “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”, or a recorded measurement meeting Article 2(1)(a), PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion), alongside the register survey and its provisional layers. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result).",
     "authority_judgment_required": "YES",
     "evidence_contract": "The case plant's negative test and monumental characteristics; either its provisional L.R. 14/2007 list entry awaiting the Giunta's definitive decision or the Osservatorio's pending recognition request; and the authorization status.",
     "reserved_decision_owner": "Regional Plant Health Service",
@@ -25471,7 +25488,7 @@
     "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-4-2022-FITO-.txt",
     "semantic_change": "INITIAL",
     "structural_kind": "paragraph",
-    "semantic_note": "[CASE DELTA ONLY] Exact event-time effect; reusable law remains unchanged. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(e)] The order grounds the alternative on L.R. 4/2017 Art. 8(7bis), which turns on Article 2 characteristics; officially recognized trees also have them, so “ufficialmente riconosciute o con caratteristiche di monumentalità” reduces to the characteristics. [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE stating “caratteristiche di monumentalità”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act.",
+    "semantic_note": "[CASE DELTA ONLY] Exact event-time effect; reusable law remains unchanged. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(e)] The order grounds the alternative on L.R. 4/2017 Art. 8(7bis), which turns on Article 2 characteristics; officially recognized trees also have them, so “ufficialmente riconosciute o con caratteristiche di monumentalità” reduces to the characteristics. [OWNER RULING 2026-09-24, CHARACTERISTICS] The official monitoring record of the plant establishes the Article 2 characteristics: its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts; the held notes print it as “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”. A note that records only a measurement establishes them when the measurement meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). Listing is a separate, later act.",
     "authority_judgment_required": "YES",
     "evidence_contract": "The case plant's infection and its L.R. 14/2007 Article 2 monumental characteristics, the elected alternative, and applicable higher-law permission and regional authorization.",
     "reserved_decision_owner": "Regional Plant Health Service",

@@ -3586,7 +3586,7 @@
         }
       },
       "true_effect": "The act becomes effective against its recipients through completion of the publicity form it states, in place of personal communication.",
-      "false_effect": "This mass-publicity route is not established. An act that states no ground of its own for public posting does not reach it, and personal communication to each recipient (individual-communication-effect) stays required. An incomplete or unrecorded posting remains unknown, not completed."
+      "false_effect": "This mass-publicity route is not established. An act that states no ground of its own for public posting does not reach it, and personal communication to each recipient stays required. An incomplete or unrecorded posting remains unknown, not completed."
     },
     {
       "stable_provision_id": "IT-L241-A21BIS:Art.21-bis(1):motivated-immediate-effect",
@@ -6205,7 +6205,14 @@
       "expression": {
         "all_of": [
           {
-            "predicate": "the infected olive has the monumental characteristics of L.R. 14/2007 Article 2"
+            "any_of": [
+              {
+                "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+              },
+              {
+                "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+              }
+            ]
           },
           {
             "predicate": "exact higher-law derogation"
@@ -6385,7 +6392,14 @@
             "predicate": "negative result"
           },
           {
-            "predicate": "apparent monumental characteristics"
+            "any_of": [
+              {
+                "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+              },
+              {
+                "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+              }
+            ]
           },
           {
             "any_of": [

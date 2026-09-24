@@ -786,14 +786,6 @@
       ]
     },
     {
-      "predicate": "apparent monumental characteristics",
-      "contracts": [
-        "plant-population",
-        "protected-status",
-        "operative-assessment"
-      ]
-    },
-    {
       "predicate": "applicable 2022 plan interval",
       "contracts": [
         "operative-act"
@@ -4340,6 +4332,14 @@
       "predicate": "the plant or parts concerned have been removed",
       "contracts": [
         "removal-performance"
+      ]
+    },
+    {
+      "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics",
+      "contracts": [
+        "official-finding",
+        "plant-population",
+        "protected-status"
       ]
     },
     {

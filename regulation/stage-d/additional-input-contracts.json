@@ -3851,6 +3851,12 @@
       "kind": "C-owned-outcome-comparison"
     },
     {
+      "consumer": "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+      "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
       "consumer": "PUG-DGR343-2022:Art7(3)-policy",
       "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
       "contracts": [],
@@ -3865,6 +3871,12 @@
     {
       "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
       "reference": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
+      "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
       "contracts": [],
       "kind": "C-owned-outcome-comparison"
     }

@@ -68,8 +68,6 @@ MUTATIONS = (
      "OwnerRulings20260924.test_posting_completes_on_the_stated_display_days_counted_inclusively"),
     ("cordon_c.quantities", 'count = _stated_count(number)', 'count = int(number) if number.isdigit() else None',
      "OwnerRulings20260924.test_printed_posting_units_and_counts"),
-    ("cordon_c.quantities", 'if match[2] is not None and not (', 'if False and not (',
-     "OwnerRulings20260924.test_printed_posting_units_and_counts"),
     ("cordon_c.bindings", 'elif measured_height_cm is not None and measured_height_cm != height:', 'elif False:',
      "OwnerRulings20260924.test_recorded_trunk_diameter_meets_article_2_1_a"),
     ("cordon_c.bindings", '    if notification is None:\n', '    if False:\n',

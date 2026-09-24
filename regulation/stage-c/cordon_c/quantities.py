@@ -102,39 +102,13 @@ def operative_period_rule(identity: str, calendar: WorkingCalendar | None) -> tu
     return PeriodRule(True, name == "eu_period"), selected
 
 
-_UNITS = ("", "uno", "due", "tre", "quattro", "cinque", "sei", "sette", "otto", "nove")
-_TEENS = ("dieci", "undici", "dodici", "tredici", "quattordici", "quindici", "sedici", "diciassette", "diciotto",
-          "diciannove")
-_TENS = ("", "", "venti", "trenta", "quaranta", "cinquanta", "sessanta", "settanta", "ottanta", "novanta")
-
-
-def _italian_number(n: int) -> str:
-    """The Italian cardinal word for 1-99, as acts print it beside a digit ("7 (sette)")."""
-    if n < 10:
-        return _UNITS[n]
-    if n < 20:
-        return _TEENS[n - 10]
-    tens, unit = divmod(n, 10)
-    word = _TENS[tens]
-    if unit in (1, 8):
-        word = word[:-1]
-    return word + ("tré" if unit == 3 else _UNITS[unit])
-
-
 def _stated_count(number: str) -> int | None:
-    """A printed count: digits, optionally followed by the same count in words in brackets.
+    """A printed count: its digits, with an optional bracketed word after them ignored.
 
-    "7" and "7 (sette)" are 7; a bracketed word naming another number, or any
-    other form, is not read.
+    "7" and "7 (sette)" are 7; any other form is not read.
     """
-    match = re.fullmatch(r"\s*(\d+)\s*(?:\(\s*([^()]+?)\s*\))?\s*", number)
-    if not match:
-        return None
-    count = int(match[1])
-    if match[2] is not None and not (
-            0 < count < 100 and match[2].lower().replace("é", "e") == _italian_number(count).replace("é", "e")):
-        return None
-    return count
+    match = re.fullmatch(r"\s*(\d+)\s*(?:\([^()]*\))?\s*", number)
+    return int(match[1]) if match else None
 
 
 def clock_boundary(snapshot: Snapshot, identity: str, at: date, anchor: date | datetime,
