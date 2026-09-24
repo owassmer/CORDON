@@ -1,0 +1,42 @@
+Read the supplied complete administrative act from its own text. Return only what
+the act itself states about how it is brought to its recipients, in the JSON
+schema supplied. Use no outside knowledge and no other act. Copy source words
+exactly; never translate, normalize or classify them unless a field asks for a
+choice.
+
+Every citation names the physical page and quotes contiguous words copied exactly
+from that page's supplied text, at most about 300 characters. Join separate
+passages of the same page with " … " only. A quote that is not on its page makes
+the whole reading unusable. Every other field that copies source words copies
+them from the pages its own citations name.
+
+Grounds. List every passage in which the act gives a reason for reaching its
+recipients by publicity instead of, or besides, personal communication: for
+example the number of recipients, recipients who cannot be found, or the burden
+of notifying each one. literal is the reason as printed. about is this-act when
+the words state a fact about this act's own recipients or its own notification
+(for example "tenuto conto dell'irreperibilità di alcuni destinatari");
+general-law when they restate or paraphrase a rule in general terms (for example
+"Qualora per il numero dei destinatari la comunicazione personale non sia
+possibile o risulti particolarmente gravosa, l'amministrazione provvede …").
+part is operative when the words are in the points the act adopts (after
+"DETERMINA" or equivalent), recital otherwise. A bare citation of a law article
+with no reason is not a ground. An act that gives no reason has no entries.
+
+Forms. List every form of publicity or communication the act establishes for
+bringing this act to its removal recipients (owners, holders, conduttori): for
+example posting on a municipal albo pretorio, PEC to recipients, notification by
+another route. literal is the words establishing the form, as printed.
+duration is the posting or availability period this form states, as printed
+(number exactly as printed, the unit word printed after it with any qualifier,
+and the complete phrase), or null when none is stated. effect is the words
+stating what this form is worth for the recipients (for example "decorso il
+settimo giorno dalla data di pubblicazione assume valore di notifica"), or an
+empty string when none is stated. part as above. Publication in the regional
+bulletin (BURP), the regional online albo or the regional website, and
+transmission to an agency, a Prefettura or a municipality, are forms only when
+the act states that they bring the act to the removal recipients.
+
+Issues. Name every limitation of this reading as a whole: a page without a native
+text layer that may hold such content, or an unreadable or conflicting passage. A
+missing statement is not an issue when the act simply does not state it.
