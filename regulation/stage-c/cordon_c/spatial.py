@@ -12,7 +12,7 @@ from collections.abc import Mapping
 from pyproj import CRS, Geod, Transformer
 from shapely.geometry.base import BaseGeometry
 from shapely.ops import transform
-from shapely import get_coordinates
+from shapely import get_coordinates, get_point, maximum_inscribed_circle
 
 from .core import Evaluation, conjunction, disjunction
 
@@ -51,6 +51,21 @@ def projection_distance_error(max_grid_distance_m: float, scale_bounds: tuple[fl
             or max_grid_distance_m < 0 or not 0 < low <= high):
         raise ValueError("Finite distance and positive ordered scale bounds required")
     return max_grid_distance_m * max(abs(1 / low - 1), abs(1 / high - 1))
+
+
+QUAD_SEGMENTS = 16
+
+
+def _circumscribed(radius_m: float) -> float:
+    """Buffer radius whose drawn arcs keep the whole true offset.
+
+    A buffer draws each arc as chords between points at the given radius, so
+    the chords fall inside the true arc. GEOS rounds each arc's chord count,
+    so one chord can span 1.5 times the nominal pi / (2 * QUAD_SEGMENTS). At
+    this radius every chord lies outside the true arc, so a grown shape
+    contains the true grown shape.
+    """
+    return radius_m / cos(3 * pi / (8 * QUAD_SEGMENTS))
 
 
 def compatible(a: MetricGeometry, b: MetricGeometry):
@@ -97,7 +112,7 @@ def minimum_enclosure(origin: MetricGeometry, enclosure: MetricGeometry, radius_
     if enclosure.geometry.covers(origin.geometry):
         return clearance
     error = origin.error_m + enclosure.error_m
-    if error and enclosure.geometry.buffer(error).covers(origin.geometry):
+    if error and enclosure.geometry.buffer(_circumscribed(error), quad_segs=QUAD_SEGMENTS).covers(origin.geometry):
         return conjunction([clearance, Evaluation(None, needs=frozenset({"enclosure boundary precision"}))])
     return Evaluation(False)
 
@@ -168,18 +183,44 @@ def surface_in_band(surface: MetricGeometry, origin: MetricGeometry,
 
 
 def partial_parcel(parcel: MetricGeometry, adopted_area: MetricGeometry) -> Evaluation:
+    """Does some area of the true parcel lie in the true adopted area?
+
+    Here a geometry with error bound e stands for any true geometry between
+    itself shrunk by e and itself grown by e. The parcel is in the area when it
+    lies inside by more than the combined error, or when a candidate point lies
+    inside both geometries, farther than the parcel's error from the parcel's
+    boundary and farther than the area's error from the area's boundary, by
+    exact distance. Each candidate is the centre of the largest circle in one
+    component where the two shapes, each shrunk by its own error, overlap. A
+    drawn shrunk shape is not sound in general (just past a polygon's inscribed
+    radius GEOS can leave a core whose points lie closer to the boundary than
+    the error), so it only proposes the point. Beyond the combined error the
+    parcel is outside. Otherwise the answer is unknown.
+    """
     compatible(parcel, adopted_area)
     if any(x.geometry.geom_type not in {"Polygon", "MultiPolygon"} for x in (parcel, adopted_area)):
         raise ValueError("Parcel relation requires polygons")
     error = parcel.error_m + adopted_area.error_m
-    overlap = parcel.geometry.intersection(adopted_area.geometry)
-    if error:
-        if parcel.geometry.distance(adopted_area.geometry) > error:
-            return Evaluation(False)
-        if parcel.geometry.buffer(-error).intersection(adopted_area.geometry.buffer(-error)).area == 0:
-            return Evaluation(None, needs=frozenset({"parcel overlap precision"}))
-    # Sharing only a cadastral edge does not place any parcel area inside.
-    return Evaluation(overlap.area > 0)
+    if not error:
+        # Sharing only a cadastral edge does not place any parcel area inside.
+        return Evaluation(parcel.geometry.intersection(adopted_area.geometry).area > 0)
+    if parcel.geometry.distance(adopted_area.geometry) > error:
+        return Evaluation(False)
+    if (adopted_area.geometry.covers(parcel.geometry)
+            and parcel.geometry.distance(adopted_area.geometry.boundary) > error):
+        return Evaluation(True)
+    parcel_core = parcel.geometry.buffer(-parcel.error_m, quad_segs=QUAD_SEGMENTS)
+    area_core = adopted_area.geometry.buffer(-adopted_area.error_m, quad_segs=QUAD_SEGMENTS)
+    cores = parcel_core.intersection(area_core)
+    for part in getattr(cores, "geoms", (cores,)):
+        if part.geom_type != "Polygon" or part.area == 0:
+            continue
+        x = get_point(maximum_inscribed_circle(part), 0)
+        if (parcel.geometry.contains(x) and adopted_area.geometry.contains(x)
+                and x.distance(parcel.geometry.boundary) > parcel.error_m
+                and x.distance(adopted_area.geometry.boundary) > adopted_area.error_m):
+            return Evaluation(True)
+    return Evaluation(None, needs=frozenset({"parcel overlap precision"}))
 
 
 def population_coverage(required: Mapping[str, Evaluation], completed: frozenset[str], *,
