@@ -1,0 +1,12 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 3,
+  "reviewer": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
+  "accepted_content_sha256": "8529fc79bd700f4149c5dcc57583b7042521ff6c03b823866216dff316a681eb",
+  "preceding_acceptance": {
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-3.json",
+    "record_sha256": "73a181c9cef9cb41cee2f45986ce7a05c77b76b7fb7e35e58412160f8ffc573a"
+  },
+  "scope": "DDS 18/2024's withdrawal of the named orders' 50 m host removal is a new A version carrying the 50 m restatement its area-state rows carry; the DDS 45/2023 hold and the two ST1 olive rows gain v2 versions that keep their v1 quotes and carry v1's dispositions over unchanged. No clock or parameter changes. Binding takes effect only on merge."
+}

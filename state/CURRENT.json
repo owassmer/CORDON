@@ -8,7 +8,7 @@
     "A": {
       "status": "CLOSED",
       "accepted_by": "Owen Wassmer",
-      "reopened_proposition": "Owen accepted the exact regional survey amendment with Stage C on 2026-09-08 after convergent five-facet review. The ten reviewed provisions are promoted; the prior accepted rows and national prefix are unchanged. Acceptance remains revisable.",
+      "reopened_proposition": "PR #35 reopens A (plan converged 2026-09-24): DDS 18/2024 withdraws, from 14 March 2024, removal of the host plants within 50 m of the infected plants DDS 96, 113, 119, 124 and 138/2023 prescribed, and not removal of the infected plants they list (a new stable provision naming the five orders in corrects_instrument_ids, with no end). A governing row that withholds removal says so with one of two generic names, POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART; the DDS 45/2023 hold and the two ST1 olive rows gain v2 versions with that whole-or-part route table, each v1 kept as SUPERSEDED lineage. 425 -> 429 provision versions; the national prefix is unchanged. Binding takes effect only on Owen's merge. Acceptance remains revisable.",
       "canonical_artifacts": {
         "eu": {
           "path": "regulation/stage-a/authoring-eu.json",
@@ -17,8 +17,8 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "3e0ee815de5957e43bdf446100266c0b28cf9406660967c5b22464cd193cb361",
-          "provision_versions": 425,
+          "sha256": "0dcc0cee397db81544b8d4fc727d3af70dec42dcb7fa5ddb2174a3361907268c",
+          "provision_versions": 429,
           "national_prefix_rows": 220,
           "national_prefix_sha256": "a8351f7eb868b735a7cc53fa1f96db90747059ab913cf5e8f5bdad0b8471de63"
         }
@@ -35,22 +35,22 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "8636ec128ab6965d9cedeb9eb3712140d49e66018ba81818828129a0ba26d9a6",
+        "sha256": "1452bac6e95fb5b256e82d7ebcc03638c1f0283c5804591800367f2e3fdf4e11",
         "schema": "stage-b-essence-v6",
         "counts": {
           "clocks": 125,
           "parameters": 169,
-          "dispositions": 903
+          "dispositions": 912
         }
       },
       "population": {
         "path": "regulation/stage-b/population.json",
-        "sha256": "0fe7caf1e34394ac7ba3c6491b3928119979fa58afd16ba571b0948432105a1f",
+        "sha256": "4c744dc74f776079e9ac91c4c6d1ce16f5b71562e4c1f67ddd2977366490c6be",
         "seams": {
           "1": 160,
           "2": 100,
-          "3": 126,
-          "4": 162
+          "3": 129,
+          "4": 163
         }
       },
       "accepted_by": "Owen Wassmer",
