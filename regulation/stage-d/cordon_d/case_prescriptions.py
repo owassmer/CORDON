@@ -80,6 +80,16 @@ def _plain(text):
     return re.sub(r'\s+', '', (text or '').translate(_QUOTES)).lower()
 
 
+# A list label standing alone between spaces: a lettered or numbered point ("h)", "ii)", "4)") or a
+# bullet or dash glyph. Page layout can print the next point's label inside a clause's words.
+_LABELS = re.compile(r'(?<!\S)(?:[A-Za-z]{1,3}\)|\d{1,3}\)|[−•–—-])(?!\S)')
+
+
+def _forms(text):
+    """The words as printed, and the same words with standalone list labels set aside."""
+    return (_plain(text), _plain(_LABELS.sub(' ', text or '')))
+
+
 def page_texts(source, store):
     """The page text the transport supplied, by physical page number."""
     import pymupdf
@@ -87,28 +97,38 @@ def page_texts(source, store):
         return {n: re.sub(r'[ \t]+', ' ', page.get_text(sort=True)) for n, page in enumerate(document, 1)}
 
 
+def _parts(words):
+    return [p for p in re.split(r'\s*(?:…|\.\.\.|\[…\])\s*', words or '') if p.strip()]
+
+
 def on_page(quote, text):
-    """Every ' … '-joined part of the quote occurs in the page text, whitespace aside."""
-    parts = [p for p in re.split(r'\s*(?:…|\.\.\.|\[…\])\s*', quote or '') if p.strip()]
-    plain = _plain(text)
-    return bool(parts) and all(_plain(p) in plain for p in parts)
+    """Every ' … '-joined part of the quote occurs in the page text, whitespace aside.
+
+    A part matches as printed, or with standalone list labels set aside in both
+    the part and the page.
+    """
+    parts, page = _parts(quote), _forms(text)
+    return bool(parts) and all(any(form in printed for form, printed in zip(_forms(p), page)) for p in parts)
 
 
 def on_cited(words, pages, numbers):
     """Words occur on one cited page, or run from one cited page onto the next cited page.
 
     A clause printed across a page break has the running header and footer
-    between its halves; each half must still occur on its own page.
+    between its halves; each half must still occur on its own page. As on one
+    page, standalone list labels may be set aside in both.
     """
-    parts = [p for p in re.split(r'\s*(?:…|\.\.\.|\[…\])\s*', words or '') if p.strip()]
-    texts = {n: _plain(pages[n]) for n in numbers}
+    parts = _parts(words)
+    texts = {n: _forms(pages[n]) for n in numbers}
 
     def found(part):
-        part = _plain(part)
-        if any(part in text for text in texts.values()):
-            return True
-        return any(_straddles(texts[n], texts[n + 1], part[:k], part[k:])
-                   for n in texts if n + 1 in texts for k in range(1, len(part)))
+        for variant, piece in enumerate(_forms(part)):
+            if any(piece in text[variant] for text in texts.values()):
+                return True
+            if any(_straddles(texts[n][variant], texts[n + 1][variant], piece[:k], piece[k:])
+                   for n in texts if n + 1 in texts for k in range(1, len(piece))):
+                return True
+        return False
     return bool(parts) and all(found(p) for p in parts)
 
 
@@ -234,11 +254,21 @@ class PrescriptionReading:
                 coercive_words=None, executor=None, limits=(), support=tuple(item['support']))
 
 
+_ARTICLES = frozenset({'il', 'lo', 'la', 'i', 'gli', 'le', 'l', 'un', 'uno', 'una'})
+
+
+def _meaning(text):
+    """The words of a copied field compared for what they say: case, quotes, whitespace,
+    punctuation and Italian articles (elided or not) aside."""
+    words = re.findall(r'\w+', (text or '').translate(_QUOTES).lower())
+    return tuple(w for w in words if w not in _ARTICLES)
+
+
 def _clause_terms(record):
-    """What a composed record takes from the referenced clause, whitespace and quotes aside."""
-    return (tuple(_plain(part) for part in record['stated_term']), record['anchor']['kind'],
-            record['commitment'], _plain(record['commencement_population']),
-            _plain(record['coercive_population']), _plain(record['executor']))
+    """What a composed record takes from the referenced clause, compared by meaning, not by string."""
+    return (tuple(_meaning(part) for part in record['stated_term']), record['anchor']['kind'],
+            record['commitment'], _meaning(record['commencement_population']),
+            _meaning(record['coercive_population']), _meaning(record['executor']))
 
 
 def apply_references(records):
@@ -318,22 +348,90 @@ def clause(record):
     return True
 
 
+WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends')
+
+
+def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_scope=None):
+    """Lawful dueness of the record's work and coercion as the order itself and held acts state it.
+
+    The order's operative part prescribes the work to its recipients and names the
+    population for coercion; that is the reading. `closures` are the held court
+    dispositions (`judgments.liveness_closures`), each from its publication:
+
+    - an annulment closes the order for a recipient within the applicants' scope
+      (`within_closed_scope`); outside it the order stays live; while the recipient
+      is not identified the reading is unknown and names the scope. An annulment
+      stated without a limit closes it for the applicants; whether it reaches other
+      recipients of the order is A's question and stays named.
+    - an interim suspension leaves the reading unknown, naming the end it states,
+      because no later disposition of the ricorso is held.
+    - a challenge the court ended with a stated reason (a later act superseding the
+      order) leaves the reading unknown, naming the court's words.
+
+    A held act that states it corrects, replaces, revokes or suspends the order, and
+    that no A row records, leaves the reading unknown and names that act. Returns
+    (work, coercion), each a bool or an unknown Evaluation.
+    """
+    if record['part'] != 'operative' or not record['prescribed_scope']:
+        return None, None
+    needs = set()
+    for closure in closures:
+        if closure['since'] is None or at < closure['since']:
+            continue
+        decision = closure['decision']
+        name = f"TAR {decision['kind']} {decision['number']}"
+        applicants = f" (applicants: {closure['applicants']})" if closure['applicants'] else ''
+        if closure['effect'] == 'suspended':
+            needs.add(f"whether the interim suspension by {name} still holds and for whom: "
+                      f"{closure['outcome']}; no later disposition of ricorso {decision['register']} is held"
+                      + applicants)
+        elif closure['effect'] == 'ended-with-stated-reason':
+            needs.add(f"the effect on this order of what {name} states: " + ' … '.join(closure['stated_reason']))
+        elif within_closed_scope:
+            return False, False
+        elif closure['scope'] == 'whole-act':
+            needs.add(f"whether {name}'s annulment of the act, stated without limit, reaches recipients "
+                      f"other than the applicants{applicants}")
+        elif within_closed_scope is None:
+            reach = '; '.join(filter(None, (closure['dispositive_scope'], *closure['stated_scope'])))
+            needs.add(f"whether this recipient is within the scope {name} annuls: {reach}{applicants}")
+    for change in stated_changes:
+        if change['relationship'] in WITHHOLDING:
+            needs.add(f"an A row for {change['from']}'s stated {change['relationship']} of {record['instrument']}: "
+                      f"{change['affected_payload']}")
+    if needs:
+        unknown = Evaluation(None, needs=frozenset(needs))
+        return unknown, (unknown if record['coercive_population'] else None)
+    return True, (True if record['coercive_population'] else None)
+
+
 def c_result(snapshot, record, at, *, notification=None, evaluated_at=None, commencements=None,
              commencement_records_complete=False, governing_results=None, work_due=None,
-             coercion_due=None, zone=None, calendar=None):
+             coercion_due=None, closures=(), stated_changes=(), within_closed_scope=None,
+             zone=None, calendar=None):
     """C's result for this record with whatever notice and commencement evidence is held.
 
-    Nothing absent is supplied: no notification, commencement or lawful-dueness
-    evidence means C's own unknown and its needs.
+    Lawful dueness is the order's own reading (`order_dueness`) unless the caller
+    supplies one, held to the governing A rows by `lawfully_due`. Nothing absent is
+    supplied: no notification or commencement evidence means C's own unknown and
+    its needs.
     """
     from cordon_c.bindings import merge_facts, noncommencement_facts
     row = snapshot.version(RULE, at)
     vid = row['provision_version_id']
     facts = {(vid, CLAUSE): clause(record)}
-    for predicate, reading in ((WORK, work_due), (COERCE, coercion_due)):
+    own_work, own_coercion = order_dueness(record, at, closures=closures, stated_changes=stated_changes,
+                                           within_closed_scope=within_closed_scope)
+    for predicate, reading in ((WORK, own_work if work_due is None else work_due),
+                               (COERCE, own_coercion if coercion_due is None else coercion_due)):
+        stated = reading if isinstance(reading, Evaluation) else None
         due = lawfully_due(snapshot, at, instrument=record['instrument'],
                            governing_references=record['governing_A_references'],
-                           results=governing_results or {}, reading=reading)
+                           results=governing_results or {}, reading=True if stated is not None else reading)
+        if stated is not None and due.truth is not None:
+            due = stated
+        elif stated is not None:
+            due = Evaluation(None, needs=due.needs | stated.needs)
         if due.truth is not None or due.needs:
             facts[(vid, predicate)] = due
     if notification is not None:

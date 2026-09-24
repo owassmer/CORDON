@@ -19,6 +19,7 @@ sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d
 
 from cordon_c.core import MissingInput, Snapshot  # noqa: E402
 from cordon_d.case_prescriptions import apply_references, c_result, read_prescription  # noqa: E402
+from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
 
@@ -115,6 +116,34 @@ def held_events(measures, store):
     return by_instrument, failures
 
 
+def load_closures(path):
+    """Liveness closures by instrument from a `read_judgments.py --dispositions` output file."""
+    if not path:
+        return {}
+    closures = next((e['liveness_closures'] for e in json.loads(Path(path).read_text())
+                     if 'liveness_closures' in e), {})
+    return {instrument: [dict(c, since=date.fromisoformat(c['since']) if c['since'] else None) for c in items]
+            for instrument, items in closures.items()}
+
+
+def stated_changes(results):
+    """Every relationship a read order states toward another order, by the order it names."""
+    changes = {}
+    for entry in results:
+        source = entry.get('identity') or {}
+        try:
+            origin = act_id(re.sub(r'\D', '', source.get('number') or ''), (source.get('adopted') or '')[:4])
+        except Exception:
+            origin = entry.get('printed_identity')
+        for item in entry.get('relationships', ()):
+            target = act_id(re.sub(r'\D', '', item['number']), item['year'])
+            if target != origin:
+                changes.setdefault(target, []).append(dict(
+                    {'from': origin}, relationship=item['relationship'],
+                    affected_payload=item['affected_payload'], source=entry['source']))
+    return changes
+
+
 def summary(evaluation):
     return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
 
@@ -181,6 +210,7 @@ def main():
     parser.add_argument('--out')
     parser.add_argument('--events', action='store_true',
                         help='attach publication events the existing readers connect to each order')
+    parser.add_argument('--closures', help='a read_judgments.py --dispositions output: liveness closures by order')
     parser.add_argument('--timeout', type=int, default=900)
     parser.add_argument('--model', default='opus')
     parser.add_argument('--effort', default='medium')
@@ -221,9 +251,16 @@ def main():
     # Work an act applies by reference takes the referenced order's own clause record.
     composed = {r['occurrence']: r for r in apply_references(
         [{k: v for k, v in r.items() if k != 'c'} for entry in results for r in entry.get('records', ())])}
+    closures = load_closures(arguments.closures)
+    changes = stated_changes(results)
     for entry in results:
         entry['records'] = [dict(composed[r['occurrence']],
-                                 c=summary(c_result(snapshot, composed[r['occurrence']], today)))
+                                 liveness_closures=closures.get(composed[r['occurrence']]['instrument'], []),
+                                 stated_changes=changes.get(composed[r['occurrence']]['instrument'], []),
+                                 c=summary(c_result(
+                                     snapshot, composed[r['occurrence']], today,
+                                     closures=closures.get(composed[r['occurrence']]['instrument'], ()),
+                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()))))
                             for r in entry.get('records', ())]
     if arguments.out:
         Path(arguments.out).write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))

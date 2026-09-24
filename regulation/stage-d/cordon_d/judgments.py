@@ -120,6 +120,161 @@ def retained_judgment(request_id, store):
     return response
 
 
+DISPOSITION_PRESENTATION = 'ga-xml-leaf-div-blocks-v1'
+OUTCOMES = ('accoglie', 'accoglie-in-parte', 'respinge', 'improcedibile', 'inammissibile', 'cessata-materia',
+            'cautelare-accoglie', 'cautelare-respinge', 'interlocutoria', 'other')
+EFFECTS = ('annulled', 'not-annulled', 'suspended', 'suspension-refused', 'no-effect-stated')
+SCOPES = ('whole-act', 'applicants', 'other')
+PASSAGES = {'type': 'array', 'items': _object(literal=TEXT, support=CITATION)}
+DISPOSITION_SCHEMA = _object(
+    outcome=_object(literal=TEXT, kind={'type': 'string', 'enum': list(OUTCOMES)}, support=CITATION),
+    acts={'type': 'array', 'items': _object(
+        number=TEXT, adopted_words=TEXT, year={'type': 'string', 'pattern': '^[0-9]{4}$'},
+        effect={'type': 'string', 'enum': list(EFFECTS)},
+        scope=_object(kind={'type': 'string', 'enum': list(SCOPES)}, dispositive=TEXT, stated=PASSAGES),
+        applicants=_object(literal=TEXT, support={'anyOf': [{'type': 'null'}, CITATION]}),
+        grounds=PASSAGES, stated_reason=PASSAGES, support=CITATION)},
+    issues={'type': 'array', 'items': _object(block={'type': ['integer', 'null'], 'minimum': 1}, detail=TEXT)},
+)
+DISPOSITION_PROMPT = (Path(__file__).resolve().parents[1] / 'judgment-disposition-reading.txt').read_text()
+
+
+def decision_identity(data: bytes):
+    """The decision's own GA descriptors: kind, number, section, register (NRG), decided and published dates."""
+    from datetime import datetime
+    from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore', XMLParsedAsHTMLWarning)
+        soup = BeautifulSoup(data, 'html.parser')
+
+    def day(words):
+        return datetime.strptime(words, '%d/%m/%Y').date() if words else None
+
+    fascicolo, registro, urn = soup.find('fascicolo'), soup.find('registro'), soup.find('urn')
+    section = re.search(r'sezione\.(\w+)', urn.get_text()) if urn else None
+    decided = [d['norm'] for d in soup.find_all('dataeluogo') if d.get('norm')]
+    published = soup.find('datapubblicazione')
+    return dict(
+        kind=soup.find('tipologia').get_text(strip=True) if soup.find('tipologia') else None,
+        number=f"{int(fascicolo['n'])}/{fascicolo['anno']}" if fascicolo else None,
+        section=section.group(1) if section else None,
+        register=f"{registro['anno']}{registro['n']}" if registro else None,
+        decided=day(decided[0]) if decided else None,
+        published=day(published.get_text(strip=True)) if published else None)
+
+
+def validate_disposition(reading, texts):
+    """Bind the outcome, every act and every passage to its cited block; this does not certify meaning."""
+    def cited(citation, what):
+        number = citation['block']
+        if not 1 <= number <= len(texts) or not on_page(citation['quote'], texts[number - 1]):
+            raise ValueError(f'{what}: quotation is not in block {number}')
+        return texts[number - 1]
+
+    text = cited(reading['outcome']['support'], 'outcome')
+    if not reading['outcome']['literal'].strip() or not on_page(reading['outcome']['literal'], text):
+        raise ValueError('outcome: the dispositive words are not in their cited block')
+    for index, act in enumerate(reading['acts']):
+        what = f'act {index}'
+        text = cited(act['support'], what)
+        for words in (act['number'], act['adopted_words']):
+            if not words.strip() or not on_page(words, text):
+                raise ValueError(f'{what}: number or date is not in its cited block')
+        if act['year'] not in act['adopted_words'] and act['year'][2:] not in act['adopted_words']:
+            raise ValueError(f'{what}: year is not in its printed date')
+        if act['scope']['dispositive'].strip() and not on_page(act['scope']['dispositive'],
+                                                                texts[reading['outcome']['support']['block'] - 1]):
+            raise ValueError(f'{what}: the dispositive scope is not in the outcome block')
+        for field in ('grounds', 'stated_reason'):
+            for passage in act[field]:
+                if not on_page(passage['literal'], cited(passage['support'], f'{what} {field}')):
+                    raise ValueError(f'{what}: a {field} passage is not in its cited block')
+        for passage in act['scope']['stated']:
+            if not on_page(passage['literal'], cited(passage['support'], f'{what} scope')):
+                raise ValueError(f'{what}: a scope passage is not in its cited block')
+        applicants = act['applicants']
+        if applicants['literal'].strip():
+            if applicants['support'] is None or not on_page(
+                    applicants['literal'], cited(applicants['support'], f'{what} applicants')):
+                raise ValueError(f'{what}: the applicants are not in their cited block')
+    for issue in reading['issues']:
+        if issue['block'] is not None and not 1 <= issue['block'] <= len(texts):
+            raise ValueError('An issue names an unsupplied block')
+
+
+def read_disposition(source, store, *, execute=False, model='opus', effort='medium', timeout=900, refused=None):
+    """Read one retained decision's own disposition; replay unless `execute`. `refused` makes one reread."""
+    from .case_prescriptions import REREAD
+    texts = blocks(blob_path(store, source).read_bytes())
+    prompt = DISPOSITION_PROMPT if refused is None else DISPOSITION_PROMPT + '\n' + REREAD.format(
+        cause=refused).replace('physical page', 'block').replace('pages', 'blocks') + '\n'
+    response = read_native_blocks(source, texts, store, prompt=prompt, schema=DISPOSITION_SCHEMA,
+                                  presentation=DISPOSITION_PRESENTATION, model=model, effort=effort,
+                                  timeout=timeout, execute=execute)
+    validate_disposition(response['reading'], texts)
+    return response
+
+
+def annulment_basis(response, identity, *, held_instruments, appeals=None):
+    """`operative-act` supersession/correction/annulment basis entries, one per held act the decision bears on.
+
+    Each entry is the court's own disposition: outcome, effect on the act, scope as
+    the decision states it, applicants, grounds or stated reason, and the decision's
+    own decided and published dates. `appeals` is what the caller found in held
+    appeal indexes; an empty search is stated as such, never as finality.
+    """
+    reading = response['reading']
+    source = response['request']['sources'][0]
+    entries, unattached = [], []
+    for index, act in enumerate(reading['acts']):
+        number = re.sub(r'\D', '', act['number'])
+        instrument = act_id(number, act['year']) if number else None
+        entry = dict(instrument=instrument, decision=dict(identity, source=source),
+                     outcome=reading['outcome']['literal'], outcome_kind=reading['outcome']['kind'],
+                     effect=act['effect'], scope=act['scope'], applicants=act['applicants'],
+                     grounds=act['grounds'], stated_reason=act['stated_reason'],
+                     support=[reading['outcome']['support'], act['support']],
+                     appeal=appeals, request_sha256=response['request_sha256'],
+                     provenance='model_proposed_reading')
+        (entries if instrument in held_instruments else unattached).append(entry)
+    return entries, unattached
+
+
+def liveness_closures(entries):
+    """What each ricorso's latest disposition states about an order's liveness, per order.
+
+    Decisions of one ricorso (one register number) are taken in publication order;
+    the latest that states an effect on the act governs. An annulment reaches the
+    order for the scope the decision states, from its publication. A granted interim
+    suspension is the latest held disposition of its ricorso; the end it states is
+    carried. A challenge declared improcedibile or ended carries the court's own
+    stated reason (for example a later act that superseded the order). A rejection
+    or a refused interim measure states nothing about liveness.
+    """
+    latest = {}
+    for entry in entries:
+        if entry['effect'] == 'no-effect-stated':
+            continue
+        key = (entry['instrument'], entry['decision']['register'])
+        if key not in latest or entry['decision']['published'] > latest[key]['decision']['published']:
+            latest[key] = entry
+    closures = {}
+    for (instrument, _), entry in sorted(latest.items(), key=lambda item: str(item[0])):
+        reason = tuple(p['literal'] for p in entry['stated_reason'])
+        if entry['effect'] in ('annulled', 'suspended'):
+            effect = entry['effect']
+        elif entry['effect'] == 'not-annulled' and reason:
+            effect = 'ended-with-stated-reason'
+        else:
+            continue
+        closures.setdefault(instrument, []).append(dict(
+            effect=effect, scope=entry['scope']['kind'], applicants=entry['applicants']['literal'],
+            outcome=entry['outcome'], dispositive_scope=entry['scope']['dispositive'],
+            stated_scope=tuple(p['literal'] for p in entry['scope']['stated']), stated_reason=reason,
+            decision=entry['decision'], since=entry['decision']['published']))
+    return closures
+
+
 def judgment_events(response, *, held_instruments):
     """AdministrativeEvents for orders the caller holds; every other event stays unattached with its cause.
 

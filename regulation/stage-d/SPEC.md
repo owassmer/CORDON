@@ -503,11 +503,24 @@ recipients has no record. Governing A references are every A row of the
 instrument and every row whose `corrects_instrument_ids` names it. Annex
 positions stay with `cordon_d.measures`.
 
+Retained copies compare what they say: case, whitespace, punctuation and articles
+aside. A list label the page prints inside a clause (a lettered point, a bullet or
+a dash standing alone) does not refuse a copied field that omits it.
+
 The rule's clause predicate holds only for an operative clause with a stated term
 running from notification, a committed consequence, a coercive population and an
-executor. A clause's own reading limit leaves it unknown. `c_result` passes C
-only the notice, commencement and lawful-dueness evidence the caller holds;
-nothing absent is supplied. Publication is not notification.
+executor. A clause's own reading limit leaves it unknown. Lawful dueness is the
+order's own reading: its operative part prescribes the work to its recipients and
+names the population for coercion (`order_dueness`). `lawfully_due` holds that
+reading to every governing A row. A held court disposition reaches it from its
+publication: an annulment closes the order only for the scope the decision states
+(for the applicants, false for a recipient within it, live outside it, and
+unknown naming the scope while the recipient is not identified); an interim
+suspension with no later disposition of its ricorso, a challenge ended with the
+court's stated reason, or a stated correction, replacement, revocation or
+suspension that no A row records, leaves it unknown and named. `c_result` passes
+C only the notice and commencement evidence the caller holds; nothing absent is
+supplied. Publication is not notification.
 
 ## Act-specific mass-publicity basis
 
@@ -538,6 +551,18 @@ only to an order D holds, as an `AdministrativeEvent` for the person the
 decision names; a posting names no recipient. Other events stay unattached with
 their cause. Whether a delivery or posting is legally sufficient notice stays
 with A.
+
+The same decisions supply `operative-act`'s annulment basis under
+`judgment-disposition-reading.txt` (`read_judgments.py --dispositions`). The
+reading copies the court's own disposition from its dispositive part and kind,
+and, for each order the disposition bears on, its effect (annulled, not annulled,
+suspended, suspension refused), its scope as the decision states it (dispositive
+words and the reasons' passages), the applicants, the grounds and, for a challenge
+ended without a ruling, the court's stated reason. The decision's kind, number,
+section, register number and decided and published dates are its own GA
+descriptors. A party's claim never fills a disposition. Held appeal indexes are
+searched and named with the span they cover; an empty search is not finality.
+`liveness_closures` takes, per ricorso, the latest disposition stating an effect.
 
 ## Administrative publication records
 

@@ -7,7 +7,8 @@ from datetime import date
 import copy
 import unittest
 
-from cordon_d.judgments import blocks, judgment_events, validate
+from cordon_d.judgments import (annulment_basis, blocks, decision_identity, judgment_events, liveness_closures,
+                                validate, validate_disposition)
 
 XML = ('<?xml version="1.0" encoding="UTF-8"?><GA xmlns:h="http://www.w3.org/HTML/1998/html4"><Provvedimento>'
        '<h:div>SENTENZA</h:div><h:div><h:div>-dell’atto dirigenziale n. 137 dell’11.11.2021 del Resp. Sezione '
@@ -67,6 +68,70 @@ class JudgmentEvents(unittest.TestCase):
         attached, unattached = judgment_events(response(), held_instruments=set())
         self.assertEqual(attached, ())
         self.assertEqual({u['cause'] for u in unattached}, {'the decision names an order D does not hold'})
+
+
+DISPOSITION_XML = (
+    '<?xml version="1.0" encoding="UTF-8"?><GA xmlns:h="http://www.w3.org/HTML/1998/html4"><Provvedimento>'
+    '<meta><descrittori><registro anno="2022" n="00281"/><fascicolo anno="2023" n="00546"/>'
+    '<urn>urn:nir:tar.puglia;sezione.3:sentenza:00000-0000</urn></descrittori><tipologia>Sentenza</tipologia>'
+    '<dataPubblicazione>24/03/2023</dataPubblicazione></meta>'
+    '<h:div>Anna Antonia Crescenza, rappresentata e difesa</h:div>'
+    '<h:div>-dell’atto dirigenziale n. 137 dell’11.11.2021 del Resp. Sezione Osservatorio Fitosanitario</h:div>'
+    '<h:div>La misura decisa dalla Regione Puglia risulta affetta dalla denunciata violazione del principio di '
+    'proporzionalità</h:div>'
+    '<h:div>lo accoglie e, per l’effetto, annulla gli atti impugnati nei limiti dell’interesse dei ricorrenti e per '
+    'quanto in motivazione</h:div><dataeluogo norm="15/12/2022"/></Provvedimento></GA>').encode()
+DTEXTS = blocks(DISPOSITION_XML)
+ANNULLED = dict(
+    number='137', adopted_words='11.11.2021', year='2021', effect='annulled',
+    scope=dict(kind='applicants', dispositive='nei limiti dell’interesse dei ricorrenti', stated=[]),
+    applicants=dict(literal='Anna Antonia Crescenza', support=dict(block=1, quote='Anna Antonia Crescenza')),
+    grounds=[dict(literal='violazione del principio di proporzionalità',
+                  support=dict(block=3, quote='violazione del principio di proporzionalità'))],
+    stated_reason=[], support=dict(block=2, quote='atto dirigenziale n. 137 dell’11.11.2021'))
+DISPOSITION = dict(outcome=dict(literal='lo accoglie e, per l’effetto, annulla gli atti impugnati', kind='accoglie',
+                                support=dict(block=4, quote='annulla gli atti impugnati')),
+                   acts=[ANNULLED], issues=[])
+
+
+class CourtDispositions(unittest.TestCase):
+    def test_the_decision_identity_is_its_own_GA_descriptors(self):
+        self.assertEqual(decision_identity(DISPOSITION_XML), dict(
+            kind='Sentenza', number='546/2023', section='3', register='202200281', decided=date(2022, 12, 15),
+            published=date(2023, 3, 24)))
+
+    def test_outcome_act_scope_and_applicants_bind_to_their_blocks(self):
+        validate_disposition(DISPOSITION, DTEXTS)
+        for path, value in ((('outcome', 'literal'), 'lo respinge'),
+                            (('acts', 0, 'scope', 'dispositive'), 'nei limiti delle particelle indicate'),
+                            (('acts', 0, 'applicants', 'literal'), 'Mario Rossi'),
+                            (('acts', 0, 'grounds', 0, 'literal'), 'difetto di istruttoria'),
+                            (('acts', 0, 'number'), '173')):
+            broken = copy.deepcopy(DISPOSITION)
+            target = broken
+            for key in path[:-1]:
+                target = target[key]
+            target[path[-1]] = value
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                validate_disposition(broken, DTEXTS)
+
+    def test_the_latest_disposition_of_each_ricorso_states_what_closes(self):
+        response = dict(request_sha256='0' * 64, request=dict(sources=['f' * 64]), reading=DISPOSITION)
+        identity = decision_identity(DISPOSITION_XML)
+        entries, unattached = annulment_basis(response, identity, held_instruments={HELD})
+        self.assertEqual((len(entries), unattached), (1, []))
+        interim = dict(entries[0], effect='suspended',
+                       decision=dict(identity, kind='Ordinanza cautelare', published=date(2022, 5, 6)))
+        closures = liveness_closures([interim, entries[0]])
+        self.assertEqual([(c['effect'], c['scope'], c['applicants'], c['since']) for c in closures[HELD]],
+                         [('annulled', 'applicants', 'Anna Antonia Crescenza', date(2023, 3, 24))])
+        ended = dict(entries[0], effect='not-annulled', decision=dict(identity, published=date(2026, 3, 25)),
+                     stated_reason=[dict(literal='superamento della DDS da parte della successiva', support=None)])
+        self.assertEqual([c['effect'] for c in liveness_closures([interim, ended])[HELD]],
+                         ['ended-with-stated-reason'])
+        refused = dict(entries[0], effect='suspension-refused')
+        self.assertEqual(liveness_closures([refused]), {})
+        self.assertEqual(annulment_basis(response, identity, held_instruments=set())[0], [])
 
 
 if __name__ == '__main__':

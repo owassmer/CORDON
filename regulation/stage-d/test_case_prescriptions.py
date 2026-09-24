@@ -190,6 +190,65 @@ class CasePrescriptionRecords(unittest.TestCase):
         self.assertIsNone(split['stated_term'])
         self.assertIsNone(clause(split).truth)
 
+    def test_a_list_label_printed_inside_a_clause_does_not_refuse_it(self):
+        # DDS 4/2022 page 6 prints the next point's letter inside point h); DDS 122/2021 page 7
+        # prints a dash before the first addressee. The copied words omit the label.
+        page = {6: 'l’ARIF provvede\n alla rimozione forzosa delle piante, informando il Prefetto e addebitando gli i) '
+                   'oneri di estirpazione al proprietario;\nIl presente atto si trasmette con unica PEC:\n\n − al Comune '
+                   'di Ostuni affinché provveda'}
+        self.assertTrue(on_cited('addebitando gli oneri di estirpazione al proprietario', page, [6]))
+        self.assertTrue(on_cited('con unica PEC: al Comune di Ostuni', page, [6]))
+        self.assertTrue(on_cited('addebitando gli i) oneri di estirpazione', page, [6]))
+        self.assertFalse(on_cited('addebitando tutti gli oneri di estirpazione', page, [6]))
+        self.assertFalse(on_cited('addebitando gli oneri di trasporto', page, [6]))
+
+    def test_copies_of_one_order_agree_by_what_they_say(self):
+        # The two retained copies of DDS 188/2024 copy the executor as "l'ARIF" and "ARIF".
+        own = dict(next(reading().records(self.s)), occurrence='b' * 64 + ':work:0', instrument='X-11',
+                   stated_term=None, applies_prescription_of='REG-PUGLIA-U181-DIR-2024-00108')
+        order = next(reading().records(self.s))
+        for executor, agrees in (("l’ARIF", True), ("L'Arif ", True), ('Consorzio di bonifica', False)):
+            other = dict(order, occurrence='c' * 64 + ':clause:0', source='c' * 64, executor=executor,
+                         coercive_population='Della  Pianta infetta')
+            composed = [r for r in apply_references([order, other, own]) if r['occurrence'] == own['occurrence']][0]
+            with self.subTest(executor=executor):
+                self.assertEqual(composed['stated_term'] is not None, agrees)
+
+    def test_lawful_dueness_is_the_orders_own_reading_where_no_A_row_governs(self):
+        record = next(reading().records(self.s))
+        self.assertEqual(record['governing_A_references'], ())
+        at, notified = date(2024, 9, 2), datetime(2024, 9, 2, 9, tzinfo=ROME)
+        held = dict(notification=notified, evaluated_at=notified + timedelta(days=11), zone=ROME,
+                    calendar=national_calendar(), commencement_records_complete=True)
+        self.assertEqual(c_result(self.s, record, at, **held).effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        needs = c_result(self.s, record, at).needs
+        self.assertFalse(any('lawfully due' in need for need in needs))
+
+    def test_a_court_disposition_closes_liveness_only_for_its_stated_scope(self):
+        record = next(reading().records(self.s))
+        at, notified = date(2024, 9, 2), datetime(2024, 9, 2, 9, tzinfo=ROME)
+        held = dict(notification=notified, evaluated_at=notified + timedelta(days=11), zone=ROME,
+                    calendar=national_calendar(), commencement_records_complete=True)
+        decision = dict(kind='Sentenza', number='546/2023', register='202200281')
+        annulled = dict(effect='annulled', scope='applicants', applicants='A. B.', outcome='annulla gli atti impugnati',
+                        dispositive_scope='nei limiti dell’interesse dei ricorrenti', stated_scope=(),
+                        stated_reason=(), decision=decision, since=date(2024, 8, 1))
+        self.assertEqual(c_result(self.s, record, at, closures=[annulled], within_closed_scope=True, **held).effect,
+                         'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
+        self.assertEqual(c_result(self.s, record, at, closures=[annulled], within_closed_scope=False, **held).effect,
+                         'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        unknown = c_result(self.s, record, at, closures=[annulled], **held)
+        self.assertIsNone(unknown.truth)
+        self.assertTrue(any('nei limiti dell’interesse dei ricorrenti' in need for need in unknown.needs))
+        later = dict(annulled, since=date(2024, 9, 3))
+        self.assertEqual(c_result(self.s, record, at, closures=[later], **held).effect,
+                         'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        for effect in ('suspended', 'ended-with-stated-reason'):
+            other = dict(annulled, effect=effect, stated_reason=('superamento della DDS da parte della successiva',))
+            with self.subTest(effect=effect):
+                self.assertIsNone(c_result(self.s, record, at, closures=[other], within_closed_scope=False,
+                                           **held).truth)
+
     def test_a_clause_reading_limit_leaves_the_clause_unknown(self):
         record = dict(next(reading().records(self.s)), limits=('term words cut at the page edge',))
         self.assertIsNone(clause(record).truth)
