@@ -28,8 +28,8 @@ period is four years: `B-CLK-EU-6(1)-four-negative-years`, beside the two-year
 `B-CLK-EU-7(1)(e)-sub2-two-year-lookback`; the five-year
 `B-CLK-LR4-3(4)-pre-LR45-five-year-no-detection` applies only to a decision in the
 pre-L.R. 45 interval and cannot be reached. Three kinds of fact take the rule
-differently. Observation-dated facts (`INPUTS.md` rows 1, 2 and the vector and
-treatment row) are complete over that reach, negatives as much as positives; outside
+differently. Observation-dated facts (`INPUTS.md` rows 1, 2 and the vector
+row) are complete over that reach, negatives as much as positives; outside
 it a record keeps three uses — continuity evidence for an identity, a rendition an
 in-reach fact's correction or replacement chain requires, and read-verification
 material for a reader — and is not otherwise completed. Act-dated facts with live

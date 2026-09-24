@@ -188,20 +188,22 @@
       "open": "No public procedure manual can supply an unseen operational fact. A coercive-direction or execution-priority act is not proof of completed removal; a published removal label or removed-plant layer is a lead to a first-party record, not a removal occurrence, and the retained SIT capture holds no removed-plant layer after 2017. At deployment these are first-party operator inputs, with unavailable fields left unknown."
     },
     {
-      "id": "vector-and-treatment-observations",
-      "name": "Official vector and treatment observations",
-      "purpose": "Supply observed vector state or treatment performance when an accepted computation requires it.",
+      "id": "vector-monitoring",
+      "name": "Official vector-monitoring observations",
+      "purpose": "Supply when the vector flies in an adopted zone and which vectors tested positive: the next-season onset bound the Article 13(1) ordering clock takes, and the vector-positive days of the Article 6(1) detection history.",
       "contracts": [
         "vector-biology",
-        "treatment-performance",
         "survey-performance"
       ],
       "routes": [
-        "Official Osservatorio, ARIF and incorporated scientific monitoring publications"
+        "https://cartografia.sit.puglia.it/doc/xylella/vettori/ (folders dati2022 to dati2026 and circolari2023; each capture in corpus/sources/vectors/records.json)",
+        "http://www.emergenzaxylella.it/portal/portale_gestione_agricoltura and its Web Archive captures, which name each transmission, table and circolare",
+        "The Osservatorio's vector-measure acts and circolari, from BURP and the municipal copies each capture record names",
+        "Held removal orders whose text recites a vector finding (removal-orders route)"
       ],
-      "population": "The observations for the place, period and intervention evaluated by the accepted consumer.",
-      "reader": "Generic table and document readers; source-specific reader not yet selected",
-      "open": "Identify the exact C consumers before acquiring a publication series. General Xylella research is not an operational input by default."
+      "population": "Every official vector-monitoring publication with an event date in reach: each Osservatorio table, composite, find-site table and circolare (2022-2024), each CNR-IPSP transmission (2025 onward) with its crop series, rounds and windows, each vector-measure act that prints monitoring results, and each held act that recites a vector finding.",
+      "reader": "cordon_d.vectors.population, records_of, statements_of, onset_bound, vector_detections, with_vector_days; scripts/acquire_vectors.py and scripts/read_vectors.py (raster tables read in tiles and PDF pages with their native text on the Claude subscription, each response retained under its exact request)",
+      "open": "Rounds named by no listing stay unnamed: the Osservatorio's 2022 rounds after IX's weeks, circolare 4/2023 and 1/2024, every 2025 CNR round except the 18/07/2025 update (which prints no window), the 2026 olive and vine rounds between the held ones, and the announced tests of the August 2026 captures. No source states the positional error of a printed site coordinate, so a site joins a zone through the agro its publisher prints. Area aggregates and the recited Triggiano positives print no place and stay unjoined. No official statement says adults were absent, so no onset has a lower bound. The live zone test takes row 3's adopted geography (PR #8)."
     },
     {
       "id": "calendar",
