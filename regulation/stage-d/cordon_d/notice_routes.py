@@ -2,9 +2,10 @@
 
 A reading supplies, as printed, the reasons the order gives for reaching its
 recipients by publicity and the publicity forms it establishes (venue, period,
-stated effect). D decides nothing here: whether a stated reason makes personal
-communication impossible or particularly burdensome, and whether a held posting
-completes the established publicity, are A's decisions on A's own predicates.
+stated effect). Under Owen's 2026-09-24 ruling an act's own stated ground for
+public posting meets Art. 21-bis and is not re-judged; whether a held posting
+completes the stated form is C's computation from the stated period and the
+posting's dates.
 """
 from pathlib import Path
 
@@ -13,9 +14,8 @@ from .case_prescriptions import REREAD, _plain, on_cited, on_page, page_texts
 from .document_subscription import read_native_text, read_retained
 
 RULE = 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'
-IMPOSSIBLE = 'recipient number makes personal communication impossible for the exact act'
-BURDENSOME = 'recipient number makes personal communication particularly burdensome for the exact act'
-COMPLETED = 'the suitable publicity established by the administration for that act has been completed'
+STATED_GROUND = 'the act states its own ground for reaching its recipients by public posting'
+COMPLETED = 'the publicity form the act states has been completed'
 
 
 def _object(**properties):
@@ -119,21 +119,22 @@ def mass_publicity_basis(response, *, instrument):
 def c_result(snapshot, basis, at, *, postings=()):
     """C's Art. 21-bis mass-publicity result with only what D holds for the exact act.
 
-    A stated ground and a held posting are supplied to C as unresolved inputs
-    naming the A decision they await; where the act states no ground, or no
-    posting is held, nothing is supplied and C names its own missing predicate.
+    A ground the reading holds about this act is the act's own stated ground
+    (Owen's 2026-09-24 ruling: C does not re-judge it). A held posting reaches C
+    unresolved, naming what completion needs: the period the act states and the
+    posting's dates, from which `mass_publicity_facts` computes it. Where the act
+    states no ground, or no posting is held, nothing is supplied and C names its
+    own missing predicate.
     """
     vid = snapshot.version(RULE, at)['provision_version_id']
     facts = {}
     if basis['stated_ground']:
-        words = '; '.join(dict.fromkeys(g['literal'] for g in basis['stated_ground']))
-        need = f"A decision on {basis['instrument']}'s stated mass-publicity ground: {words}"
-        for predicate in (IMPOSSIBLE, BURDENSOME):
-            facts[(vid, predicate)] = Evaluation(None, needs=frozenset({need}))
+        facts[(vid, STATED_GROUND)] = True
     if postings:
         held = '; '.join(f"{p['publisher']} from {p['start']}, " + (f"to {p['end']}" if p.get('end')
                                                                     else 'end not established')
                          for p in postings)
         facts[(vid, COMPLETED)] = Evaluation(None, needs=frozenset(
-            {f"A decision whether the held posting ({held}) completes the publicity {basis['instrument']} establishes"}))
+            {f"completion of the publicity form {basis['instrument']} states, from its stated period and the held "
+             f"posting ({held})"}))
     return evaluate(snapshot, RULE, at, facts)
