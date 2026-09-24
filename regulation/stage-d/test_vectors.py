@@ -182,7 +182,7 @@ class OnsetBound(unittest.TestCase):
         olive_late = record(coordinates=at(705000, 4505000), round=8, window=(date(2026, 8, 17), date(2026, 8, 21)))
         found = self.bound([olive, olive_late])
         self.assertEqual(found.upper, date(2026, 5, 29))
-        self.assertEqual(found.unnamed_rounds, ('cnr-ipsp oliveti 2026 round 1',))
+        self.assertEqual(found.unnamed_rounds, ('cnr ipsp oliveti 2026 round 1',))
 
 
 class VectorPositives(unittest.TestCase):
@@ -312,6 +312,194 @@ class AnnexIIIZone(unittest.TestCase):
                 sys.path.remove(str(package))
                 for name in [m for m in sys.modules if m.startswith('pr8_cordon_d')]:
                     del sys.modules[name]
+
+
+class TransmissionText(unittest.TestCase):
+    """What a CNR letter prints in its body reaches the records of its tables."""
+
+    TEXT = ('\nPHYSICAL PAGE 1\ncon la presente si trasmettono i dati del monitoraggio degli insetti vettori '
+            'adulti effettuato: a) negli oliveti')
+
+    def statements(self, *items, text=''):
+        return {'request_sha256': 'q' * 64, 'request': {'prompt': 'PROMPT' + self.TEXT + text},
+                'reading': {'identity': {'publisher': 'CNR-IPSP (Sede di Bari)', 'kind': 'letter', 'number': None,
+                                         'date': '1/6/26', 'protocol': None, 'signers': []},
+                            'series': [{'series_literal': 'oliveti', 'round_literal': 'II rilievo',
+                                        'window_literal': '25-29 maggio 2026', 'quote': 'II rilievo oliveti'}],
+                            'statements': list(items), 'table_pages': [3], 'issues': []}}
+
+    ADULTS = {'kind': 'other', 'quote': 'con la presente si trasmettono i dati del monitoraggio degli insetti vettori adulti',
+              'place_literal': None, 'date_literal': None, 'species_literal': None, 'stage_literal': 'adulti'}
+
+    def page(self, number, keys):
+        reading = {'title_literal': 'Rilievo settimana del 25-29 maggio 2026 OLIVETI', 'context_literals': [],
+                   'columns': [dict(column='c1', header_literal='SITO', role='site_code', **self.NONE),
+                               dict(column='c2', header_literal='N. individui / P. spumarius', role='count',
+                                    **dict(self.NONE, species_literal='P. spumarius', round_literal='Rilievo',
+                                           series_literal='OLIVETI'))],
+                   'rows': [{'key_literal': k, 'cells': [{'column': 'c1', 'literal': k}, {'column': 'c2', 'literal': '2,00'}]}
+                            for k in keys], 'notes': [], 'issues': []}
+        return {'page': number}, {'request_sha256': str(number) * 64, 'reading': reading}
+
+    NONE = dict(species=None, species_literal=None, stage_literal=None, method_literal=None, units_literal=None,
+                window_literal=None, round_literal=None, series_literal=None)
+
+    def publication(self):
+        return vectors.Publication('https://x/Trasmissione.pdf', 'b' * 64, 'pdf', 'front page', None, 'records.json')
+
+    def test_the_stage_the_letter_states_for_its_data_reaches_its_records(self):
+        found = vectors.records_of(self.publication(), [self.page(3, ['O31'])], self.statements(self.ADULTS))
+        self.assertEqual({(r.stage, r.round) for r in found}, {('adult', 2)})
+        self.assertIn('(transmission text)', found[0].stage_literal)
+
+    def test_a_stage_the_text_does_not_print_or_two_stages_give_none(self):
+        unprinted = dict(self.ADULTS, quote='i dati degli insetti vettori adulti raccolti altrove')
+        self.assertEqual(vectors.transmission_stage(self.statements(unprinted)), (None, None))
+        juvenile = dict(self.ADULTS, quote='i dati degli stadi giovanili', stage_literal='stadi giovanili')
+        both = self.statements(self.ADULTS, juvenile, text=' e i dati degli stadi giovanili')
+        self.assertEqual(vectors.transmission_stage(both), (None, None))
+
+    def test_each_pdf_page_is_its_own_table(self):
+        found = vectors.records_of(self.publication(), [self.page(3, ['O31', 'O33']), self.page(4, ['O40'])],
+                                   self.statements(self.ADULTS))
+        self.assertEqual(sorted(r.site for r in found), ['O31', 'O33', 'O40'])
+        self.assertFalse(any('row order differs' in r.cell for r in found))
+        self.assertEqual({r.site: r.request[0] for r in found}, {'O31': '3', 'O33': '3', 'O40': '4'})
+
+    def test_one_publisher_printed_with_different_punctuation_is_one_series(self):
+        first = record(publisher='CNR-IPSP (Sede di Bari)', round=2)
+        second = record(publisher='CNR-IPSP – Sede di Bari', round=8)
+        self.assertEqual(vectors._series(first), vectors._series(second))
+
+
+class ScopedReading(unittest.TestCase):
+    """What is read is what the consumers read: rounds dated from held words, read in order and no further."""
+
+    def publication(self, name, modified='Wed, 24 Apr 2024 10:00:00 GMT', link=None, kind='image'):
+        named = 'front page' + (f' (link text: {link})' if link else '')
+        return vectors.Publication(f'https://cartografia.sit.puglia.it/doc/xylella/vettori/dati2024/{name}',
+                                   'c' * 64, kind, named, modified, 'records.json')
+
+    def test_rounds_are_dated_from_file_names_titles_and_server_dates(self):
+        r, = vectors.rounds_of(self.publication('Monitoraggio_adulti_04_06_12_06_2024.jpg'))
+        self.assertEqual((r.start, r.end, r.stage), (date(2024, 6, 4), date(2024, 6, 12), 'adult'))
+        r, = vectors.rounds_of(self.publication('Area_BAT_al_20240422.jpg', link='BAT'))
+        self.assertEqual((r.start, r.end, r.stage), (None, date(2024, 4, 22), None))
+        r, = vectors.rounds_of(self.publication('Siti_ritrovamento_stadi_giovanili_11_22_04_2024.jpg'))
+        self.assertEqual((r.start, r.end, r.stage, r.find_sites), (date(2024, 4, 11), date(2024, 4, 22), 'juvenile', True))
+        r, = vectors.rounds_of(self.publication('Monitoraggio_adulti_11_22_04_2024.jpg'),
+                               layout={'tables': [{'title_literal': 'DATI PRIMO TURNO 11-22_04_2024'}]})
+        self.assertEqual((r.number, r.season), (1, ('dati2024', '', 2024)))
+
+    def test_a_round_only_numbered_ends_at_the_latest_on_its_server_date(self):
+        publication = replace(self.publication('BARI_II_2023.jpg', modified='Mon, 26 Jun 2023 08:00:00 GMT'),
+                              url='https://cartografia.sit.puglia.it/doc/xylella/vettori/dati2023/BARI_II_2023.jpg')
+        r, = vectors.rounds_of(publication)
+        self.assertEqual((r.number, r.start, r.end), (2, None, date(2023, 6, 26)))
+
+    def test_a_document_outside_the_monitoring_folders_carries_no_round(self):
+        act = vectors.Publication('https://burp.regione.puglia.it/x.pdf', 'd' * 64, 'pdf', 'held removal order', None, 'o')
+        self.assertEqual(vectors.rounds_of(act), ())
+
+    def test_a_window_its_publication_rules_out_is_a_reading_limit_not_a_date(self):
+        publication = replace(self.publication('Bari_est_IX_comunicato.jpg', modified='Wed, 09 Nov 2022 10:00:00 GMT'),
+                              url='https://cartografia.sit.puglia.it/doc/xylella/vettori/dati2022/Bari_est_IX_comunicato.jpg')
+        self.assertIn('survey year 2022', vectors.window_issue((date(2002, 9, 26), date(2002, 9, 26)), publication))
+        self.assertIn('ends after', vectors.window_issue((date(2022, 11, 14), date(2022, 11, 14)), publication))
+        self.assertIsNone(vectors.window_issue((date(2022, 9, 26), date(2022, 9, 26)), publication))
+
+    def test_a_scoped_tile_joins_the_place_tile_of_its_band_by_row_number(self):
+        none = TransmissionText.NONE
+        place = {'title_literal': None, 'context_literals': [], 'row_count': 3, 'notes': [], 'issues': [],
+                 'columns': [dict(column='c1', header_literal='SITO', role='site_code', **none),
+                             dict(column='c2', header_literal='AGRO', role='agro', **none)],
+                 'rows': [{'row_number': n, 'key_literal': 'I TURNO', 'cells': [
+                     {'column': 'c1', 'literal': site}, {'column': 'c2', 'literal': agro}]}
+                     for n, site, agro in ((1, '3', 'Fasano'), (2, '51', 'Triggiano'), (3, '22', 'Monopoli'))]}
+        counts = {'title_literal': None, 'context_literals': [], 'row_count': 3, 'notes': [], 'issues': [],
+                  'columns': [dict(column='c1', header_literal='PS COTICO', role='count', **none)],
+                  'rows': [{'row_number': 2, 'key_literal': 'I TURNO', 'cells': [{'column': 'c1', 'literal': '4'}]}]}
+        geometry = dict(table=[0, 0, 5000, 900], header=[0, 50], key=[0, 500], band=0)
+        rows = list(vectors.merged_rows([(dict(geometry, chunk=0), {'request_sha256': 'a' * 64, 'reading': place}),
+                                         (dict(geometry, chunk=1), {'request_sha256': 'b' * 64, 'reading': counts})]))
+        joined = [r for r in rows if any(v == '4' for v in r['cells'].values())]
+        self.assertEqual(len(joined), 1)
+        self.assertEqual(sorted(joined[0]['cells'].values()), ['4', '51', 'Triggiano'])
+        self.assertIsNone(joined[0]['association'])
+        short = dict(counts, row_count=2)
+        rows = list(vectors.merged_rows([(dict(geometry, chunk=0), {'request_sha256': 'a' * 64, 'reading': place}),
+                                         (dict(geometry, chunk=1), {'request_sha256': 'b' * 64, 'reading': short})]))
+        self.assertTrue(all(r['association'] for r in rows))
+
+    def test_the_printed_row_count_counts_ruled_and_shaded_rows(self):
+        import numpy
+
+        class Pixels:
+            pixels = numpy.full((200, 100, 3), 255, dtype=numpy.uint8)
+        for y in range(0, 200, 20):
+            Pixels.pixels[y, :] = 0                       # a rule above every row
+        Pixels.pixels[101:139, :] = (255, 200, 150)       # two shaded rows
+        for y in range(5, 200, 20):
+            Pixels.pixels[y:y + 8, 10:30] = 0              # one key per row
+        self.assertEqual(vectors.printed_row_count(Pixels, dict(key=[0, 100], body=[0, 0, 100, 200], header=[0, 0])), 10)
+
+    def test_a_zone_without_a_located_adult_keeps_the_season_open(self):
+        adult = record(stage='adult', count=Decimal('2'), coordinates=None)
+        zero = record(stage='adult', count=Decimal('0'), agro='Triggiano', coordinates=None)
+        other = Zone('other zone', MetricGeometry(OUTSIDE, UTM, 10.0), frozenset({'072045'}))
+        self.assertEqual(vectors.zones_without_adult([adult, zero], [ZONE, other], comune_of), ('other zone',))
+        self.assertEqual(vectors.zones_without_adult([adult], [ZONE], comune_of), ())
+
+    def test_an_untranscribed_round_that_could_precede_the_bound_is_listed_beside_it(self):
+        adult = record(stage='adult', count=Decimal('2'), coordinates=None, window=(date(2026, 5, 25), date(2026, 5, 29)))
+        season = ('dati2026', 'oliveti', 2026)
+        before = vectors.Round('s' * 64, 'u', season, 'I rilievo oliveti', 1, None, date(2026, 5, 20), 'adult', False)
+        after = vectors.Round('s' * 64, 'u', season, 'VIII rilievo oliveti', 8, date(2026, 8, 17), date(2026, 8, 21),
+                              'adult', False)
+        found = onset_bound([adult], [], ZONE, date(2026, 2, 12), comune_of, untranscribed=[before, after])
+        self.assertEqual(found.upper, date(2026, 5, 29))
+        self.assertEqual(found.untranscribed_rounds, (before.name,))
+
+    def test_a_publication_that_prints_no_stage_yields_no_adult_window(self):
+        publication = self.publication('Bari_est_IX_comunicato.jpg')
+        reading = {'title_literal': None, 'context_literals': [], 'columns': [
+            dict(column='c1', header_literal='olivo', role='count', **TransmissionText.NONE)]}
+        self.assertFalse(vectors.prints_stage(publication, [({}, {'reading': reading})]))
+        adults = self.publication('Siti_ritrovamento_adulti_11_22_04_2024.jpg')
+        self.assertTrue(vectors.prints_stage(adults, [({}, {'reading': reading})]))
+
+    def test_a_table_that_prints_no_window_for_its_counts_yields_no_adult_window(self):
+        none = TransmissionText.NONE
+        turno = {'title_literal': None, 'context_literals': [], 'columns': [
+            dict(column='c1', header_literal='SITO', role='site_code', **none),
+            dict(column='c2', header_literal='Presenza adulti SESTO TURNO', role='count',
+                 **dict(none, stage_literal='adulti'))]}
+        self.assertFalse(vectors.prints_window([({}, {'reading': turno})]))
+        dated = dict(turno, columns=turno['columns'] + [dict(column='c3', header_literal='DATA', role='date', **none)])
+        self.assertTrue(vectors.prints_window([({}, {'reading': dated})]))
+
+
+STORE_BLOB = STORE / 'blobs/sha256/b7/b7d9f757e0ca6f300d6a574bd0bd86f6b66390e45607adcc44cda8782bbc2ff0'
+
+
+@unittest.skipUnless(STORE_BLOB.exists() and (STORE / 'derived/vector-readings').is_dir(),
+                     'the held letter and its retained readings need the local store')
+class PdfTextLayer(unittest.TestCase):
+    """The CNR letter of 1/6/26 read from its text layer agrees with its retained page reading, cell by cell."""
+
+    DIGEST = 'b7d9f757e0ca6f300d6a574bd0bd86f6b66390e45607adcc44cda8782bbc2ff0'
+
+    def test_every_cell_of_the_olive_pages_matches_the_page_reading(self):
+        for number in (3, 4):
+            mine = vectors.pdf_text_table(STORE, self.DIGEST, number)
+            model = vectors.read_pdf_page(STORE, self.DIGEST, number)['reading']
+            self.assertEqual([c['role'] for c in mine['columns']], [c['role'] for c in model['columns']])
+            self.assertEqual({r['key_literal']: [c['literal'] for c in r['cells']] for r in mine['rows']},
+                             {r['key_literal']: [c['literal'] for c in r['cells']] for r in model['rows']})
+
+    def test_a_page_whose_annotations_wrap_goes_to_a_model_page_read(self):
+        self.assertIsNone(vectors.pdf_text_table(STORE, self.DIGEST, 5))
+        self.assertEqual(vectors.read_pdf_table(STORE, self.DIGEST, 5)['request']['task'], 'table')
 
 
 class Transport(unittest.TestCase):

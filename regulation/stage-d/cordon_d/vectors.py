@@ -44,6 +44,7 @@ from .store import blob_path
 
 TRANSPORT_VERSION = 1
 MODEL, EFFORT, TIMEOUT = 'opus', 'high', 1500
+TABLE_EFFORT = 'medium'                       # transcription of the consumed cells
 TILE_WIDTH, TILE_HEIGHT = 2400, 1600          # original pixels per tile, strips included
 COLUMN_OVERLAP, ROW_OVERLAP = 360, 120        # repeated so every column and row is whole in some tile
 OVERVIEW = 1500                               # long side of the layout overview
@@ -320,6 +321,45 @@ TABLE_PROMPT = (
     'notes: footnotes and legends printed in the image. issues: any cell you cannot read, as '
     '"row <key>, column <header>: <cause>".')
 
+SCOPED_TABLE_SCHEMA = {
+    'type': 'object', 'additionalProperties': False,
+    'required': ['title_literal', 'context_literals', 'columns', 'row_count', 'rows', 'notes', 'issues'],
+    'properties': {
+        'title_literal': TABLE_SCHEMA['properties']['title_literal'],
+        'context_literals': TABLE_SCHEMA['properties']['context_literals'],
+        'columns': TABLE_SCHEMA['properties']['columns'],
+        'row_count': {'type': 'integer', 'minimum': 0},
+        'rows': {'type': 'array', 'items': {
+            'type': 'object', 'additionalProperties': False, 'required': ['row_number', 'key_literal', 'cells'],
+            'properties': {'row_number': {'type': 'integer', 'minimum': 1}, 'key_literal': {'type': 'string'},
+                           'cells': {'type': 'array', 'items': CELL}}}},
+        'notes': TABLE_SCHEMA['properties']['notes'],
+        'issues': TABLE_SCHEMA['properties']['issues']}}
+
+CONSUMED_ROLES = ('site_code', 'agro', 'area', 'province', 'coordinates', 'latitude', 'longitude', 'date',
+                  'period', 'round', 'count', 'test_result')
+
+SCOPED_TABLE_PROMPT = (
+    'Read the vector-monitoring observation table shown, exactly as printed. {geometry}\n'
+    'Columns: give every column whose header and values are whole in the image an id (c1, c2, ...) '
+    'in left-to-right order, its complete printed header path joined with " / " (banner, group and '
+    'column titles), and its role. A count column prints numbers of insects; for it give, each only '
+    'where the header, a banner, the title or a note in the image prints it: species (binomial, only '
+    'where printed or where a printed legend or title in the image names the abbreviation) and the '
+    'literal it is printed as; the stage literal (adults, a numbered juvenile stage, etc.); the method '
+    'literal; the units literal; the survey window literal; the round literal (rilievo, turno, '
+    'comunicato); and the crop series literal (oliveti, vigneti, ...). Otherwise null. Do not infer a '
+    'species, stage, window or round the image does not print.\n'
+    'row_count: the number of data rows whose key cell is whole in the image, counted top to bottom '
+    '(header and banner rows are not data rows).\n'
+    'Rows: only the data rows that print a number other than zero in a count or test-result column '
+    'of the image; where the image has no count column, every data row. For each give row_number (its '
+    'position among the data rows of the image, 1 for the top one), key_literal (the printed row key) '
+    'and cells only for the columns of role ' + ', '.join(CONSUMED_ROLES) + ', each exactly as printed '
+    '(decimal commas and annotations included; a blank as "").\n'
+    'notes: footnotes and legends printed in the image. issues: any cell you cannot read, as '
+    '"row <key>, column <header>: <cause>".')
+
 STATEMENT_SCHEMA = {
     'type': 'object', 'additionalProperties': False,
     'required': ['identity', 'series', 'statements', 'table_pages', 'issues'],
@@ -475,6 +515,55 @@ def _gap_cut(text, rules, target, low, high, run=20):
     return int(min(((a + b) // 2 for a, b in runs), key=lambda c: (abs(c - target), c)))
 
 
+def printed_row_count(raster, geometry) -> int | None:
+    """The data rows printed in one tile's body, counted from its pixels, or None.
+
+    Counted in the row-key strip over the body's height: the ink runs between ruled lines
+    where the strip is ruled, otherwise the ink runs separated by a text-free gap; runs
+    closer than half the median run pitch are one wrapped row. A rule is a line at most
+    four pixels high; a shaded row is not a rule.
+    """
+    import numpy
+    if geometry.get('header') is None and geometry.get('key') is None:
+        x0, y0, x1, y1 = geometry['body']
+    else:
+        x0, x1 = geometry['key']
+        y0, y1 = geometry['body'][1], geometry['body'][3]
+    if x1 <= x0 or y1 <= y0:
+        return None
+    shade = raster.pixels[y0:y1, x0:x1, :3].min(axis=2)
+    drawn = (shade < 235).mean(axis=1) > 0.8
+    edges = numpy.flatnonzero(numpy.diff(numpy.concatenate([[0], drawn.astype(numpy.int8), [0]])))
+    row_rules = numpy.zeros(len(drawn), dtype=bool)
+    for a, b in zip(edges[::2], edges[1::2]):
+        if b - a <= 4:
+            row_rules[a:b] = True
+    column_rules = (shade < 235).mean(axis=0) > 0.8
+    ink = (shade < 110) & ~column_rules[None, :]
+    rows_text = (ink & ~row_rules[:, None]).any(axis=1)
+    edges = numpy.flatnonzero(numpy.diff(numpy.concatenate([[0], rows_text.astype(numpy.int8), [0]])))
+    runs = list(zip(edges[::2], edges[1::2]))
+    if not runs:
+        return 0
+    ruled = numpy.flatnonzero(row_rules)
+    if len(ruled) >= 2:
+        # Cells between rules; a span whose inner rules a shading hides counts at the row pitch.
+        cuts = numpy.concatenate([[-1], ruled, [y1 - y0]])
+        cells = sorted({int(numpy.searchsorted(cuts, (a + b) / 2)) for a, b in runs})
+        heights = [int(cuts[c] - cuts[c - 1]) for c in cells]
+        pitch = numpy.median(heights)
+        return int(sum(max(1, round(h / pitch)) for h in heights))
+    if len(runs) == 1:
+        return 1
+    pitch = numpy.median(numpy.diff([a for a, _ in runs]))
+    count, last = 1, runs[0][0]
+    for a, _ in runs[1:]:
+        if a - last >= pitch / 2:
+            count += 1
+        last = a
+    return count
+
+
 def needs_tiles(box) -> bool:
     x0, y0, x1, y1 = box
     return x1 - x0 > TILE_WIDTH or y1 - y0 > TILE_HEIGHT
@@ -559,6 +648,97 @@ TILED = ('The image is one tile of a larger table: the top band repeats the tabl
          'tile, top to bottom, with its key; give columns for the key strip and the body columns.')
 
 
+def table_tile(store, digest, geometry, png, context=None, *, execute=False) -> dict:
+    """One table tile's reading: the retained full transcription of this exact tile where one is
+    held, else the scoped reading of the cells the consumers read (dispatched once when `execute`)."""
+    where = WHOLE if geometry.get('header') is None else TILED
+    files = [('tile.png', png, 'Table tile')]
+    if context is not None:
+        files.append(('left-header.png', context, CONTEXT_LABEL))
+    try:
+        return retained(store, 'table', [digest], TABLE_PROMPT.format(geometry=where), TABLE_SCHEMA, files,
+                        geometry=geometry)
+    except FileNotFoundError:
+        pass
+    return retained(store, 'table', [digest], SCOPED_TABLE_PROMPT.format(geometry=where), SCOPED_TABLE_SCHEMA,
+                    files, execute=execute, effort=TABLE_EFFORT, geometry=geometry)
+
+
+_LEGACY = {}
+
+
+def retained_tiling(store, digest, box) -> list | None:
+    """[(geometry, response)] of one table already transcribed in full under an earlier tile cut,
+    where those tiles cover its body exactly (every band from the header to the bottom, every
+    chunk from the key strip to the right edge), or None."""
+    key = str(store)
+    if key not in _LEGACY:
+        index = _LEGACY[key] = {}
+        for path in (Path(store) / 'derived/vector-readings').glob('*.json'):
+            response = json.loads(path.read_text())
+            request = response['request']
+            geometry = request.get('geometry') or {}
+            if request.get('task') == 'table' and 'body' in geometry and 'band' in geometry \
+                    and request['schema'] == json.loads(json.dumps(TABLE_SCHEMA)):
+                index.setdefault((request['sources'][0], tuple(geometry['table'])), []).append((geometry, response))
+    cuts = {}
+    for geometry, response in _LEGACY[key].get((digest, tuple(box)), []):
+        cuts.setdefault((tuple(geometry.get('header') or ()), tuple(geometry.get('key') or ())), []).append(
+            (geometry, response))
+    x0, y0, x1, y1 = box
+    for (header, strip), parts in sorted(cuts.items()):
+        bands = {}
+        for geometry, response in parts:
+            bands.setdefault((geometry['body'][1], geometry['body'][3]), []).append((geometry, response))
+        spans = sorted(bands)
+        top = header[1] if header else y0
+        if not spans or spans[0][0] != top or spans[-1][1] != y1 or any(a[1] != b[0] for a, b in zip(spans, spans[1:])):
+            continue
+        whole = True
+        for span in spans:
+            row = sorted(bands[span], key=lambda part: part[0]['body'][0])
+            edges = [(g['body'][0], g['body'][2]) for g, _ in row]
+            left = strip[1] if strip else x0
+            if edges[0][0] != left or edges[-1][1] != x1 or any(a[1] != b[0] for a, b in zip(edges, edges[1:])):
+                whole = False
+        if whole:
+            return sorted(parts, key=lambda part: (part[0]['band'], part[0]['chunk']))
+    return None
+
+
+def prints_stage(publication: Publication, readings, statements=None) -> bool:
+    """Whether the publication's label, a read title, banner or column header, or its transmission
+    text prints a stage. Where none does, none of its counts is ever an adult window."""
+    texts = [publication.label]
+    for _, response in readings:
+        reading = response['reading']
+        texts += [reading['title_literal'] or '', *reading['context_literals']]
+        texts += [c['stage_literal'] or '' for c in reading['columns']] + [c['header_literal'] for c in reading['columns']]
+    return any(stage_of(t) for t in texts) or transmission_stage(statements)[0] is not None
+
+
+def prints_window(readings) -> bool:
+    """Whether a read table prints a window its counts can take: a date or period column, a count
+    column's window, or a title that prints one. Where none does, none of its counts is ever an
+    adult window, since an adult window is a window."""
+    for _, response in readings:
+        reading = response['reading']
+        if printed_window(reading['title_literal'] or ''):
+            return True
+        for column in reading['columns']:
+            if column['role'] in ('date', 'period') or (column['role'] == 'count' and column['window_literal']):
+                return True
+    return False
+
+
+def reading_rows(reading) -> tuple[int, list]:
+    """(data rows the tile prints, [(row number, row)]) of a table reading. A full transcription
+    lists every row, numbered in order; a scoped one numbers the rows it gives."""
+    if 'row_count' in reading:
+        return reading['row_count'], [(row['row_number'], row) for row in reading['rows']]
+    return len(reading['rows']), list(enumerate(reading['rows'], 1))
+
+
 def read_raster(store, digest, *, execute=False, on_error=None):
     """Every table of one raster, read tile by tile: (layout, [(tile geometry, response)])."""
     raster = _Raster(store, digest)
@@ -601,6 +781,152 @@ def read_statements(store, digest, *, execute=False) -> dict:
     text = ''.join(f'\nPHYSICAL PAGE {n}\n{t}' for n, t in enumerate(pages, 1))
     return retained(store, 'statements', [digest], STATEMENT_PROMPT + text, STATEMENT_SCHEMA,
                     execute=execute)
+
+
+PDF_TEXT_READER = 'vectors-pdf-text-v1'
+_HEADER_ROLES = ((r'^sito\b', 'site_code'), (r'^agro\b', 'agro'), (r'^latitudine\b', 'latitude'),
+                 (r'^longitudine\b', 'longitude'), (r'^(?:classificazione|classe) altitudine', 'altitude_class'),
+                 (r'^altitud\w*\s*\(m\)', 'altitude'), (r'^coltura\b', 'crop'), (r'^provincia\b', 'province'),
+                 (r'^area\b', 'area'), (r'^comune\b', 'agro'),
+                 (r'spumarius|campestris|italosignus|^totale\b', 'count'))
+
+
+_HEADER_STARTS = {'sito', 'agro', 'latitudine', 'longitudine', 'coltura', 'classe', 'classificazione', 'totale',
+                  'p', 'n', 'provincia', 'comune', 'area', 'altitude', 'altitudine'}
+
+
+def _phrases(words, gap=8.0, header=False):
+    """Words of one visual line joined into phrases: (x0, x1, text). In a header line a word that
+    begins a column title (SITO, AGRO, P., Totale ...) begins a new phrase however close it is."""
+    out = []
+    for x0, _, x1, _, text in sorted(words):
+        token = re.sub(r'\W+', '', _fold(text))
+        starts = header and token in _HEADER_STARTS and not (
+            token in ('altitudine', 'altitude') and out and _fold(out[-1][2]).split()[-1] in ('classe', 'classificazione'))
+        if out and x0 - out[-1][1] <= gap and not starts:
+            out[-1] = (out[-1][0], x1, out[-1][2] + ' ' + text)
+        else:
+            out.append((x0, x1, text))
+    return out
+
+
+def _number(literal) -> bool:
+    """A printed count: a number, optionally followed by the publisher's annotation of it."""
+    return bool(re.match(r'\d+(?:[.,]\d+)?(?:\s|$)', literal.strip()))
+
+
+def pdf_text_table(store, digest, number) -> dict | None:
+    """One PDF page's observation table read from its text layer alone, or None.
+
+    The header row is the line printing SITO and AGRO; header words within one and a half
+    line pitches of it join the cell they overlap. Above it, phrases stack into blocks by
+    overlap: the block beginning \"Rilievo\" is the title, the others are banners over the
+    columns whose centre they span; a count column's window is the one its title or banner
+    prints. Every word below is placed in the column whose span holds its centre, and a blank
+    cell is a column with no word. The table ends at the first line after its rows whose count
+    cells are not numbers or whose key is not a site code; a site row after that line means a
+    row was cut, and the page is refused. Where a word falls outside every column, a header is not recognised,
+    no window is printed for a count column, or the first line is not a row, the page is not
+    read here (None) and goes to a model page read.
+    """
+    import pymupdf
+    with pymupdf.open(blob_path(store, digest)) as document:
+        words = [(w[0], (w[1] + w[3]) / 2, w[2], w[3] - w[1], w[4]) for w in document[number - 1].get_text('words')]
+    lines = []
+    for word in sorted(words, key=lambda w: w[1]):
+        if lines and abs(word[1] - lines[-1][0]) <= 2.5:
+            lines[-1][1].append(word)
+        else:
+            lines.append([word[1], [word]])
+    header = next((i for i, (_, ws) in enumerate(lines)
+                   if {re.sub(r'\W+', '', _fold(w[4])) for w in ws} >= {'sito', 'agro'}), None)
+    if header is None:
+        return None
+    pitch = max(w[3] for w in lines[header][1])
+    zone = [i for i, (y, _) in enumerate(lines) if abs(y - lines[header][0]) <= 1.6 * pitch]
+    cells = []
+    for i in sorted(zone, key=lambda i: (i != header, lines[i][0])):
+        for x0, x1, text in _phrases(lines[i][1], header=True):
+            for cell in cells:
+                if i != header and x0 < cell[1] and x1 > cell[0]:
+                    cell[0], cell[1] = min(cell[0], x0), max(cell[1], x1)
+                    cell[2] = f'{cell[2]} {text}' if lines[i][0] > cell[4] else f'{text} {cell[2]}'
+                    cell[4] = max(cell[4], lines[i][0])
+                    break
+            else:
+                cells.append([x0, x1, text, i, lines[i][0]])
+    cells.sort()
+    blocks = []
+    for y, ws in lines[:zone[0]]:
+        for x0, x1, text in _phrases(ws, header=True):  # a banner begins where \"N. individui\" does
+            block = next((b for b in blocks if x0 < b[1] and x1 > b[0] and y - b[3] <= 1.6 * pitch), None)
+            if block:
+                block[0], block[1], block[2], block[3] = min(block[0], x0), max(block[1], x1), f'{block[2]} {text}', y
+            else:
+                blocks.append([x0, x1, text, y])
+    title = next((b for b in blocks if _fold(b[2]).startswith('rilievo')), None)
+    if title is None:
+        return None
+    banners = [b for b in blocks if b is not title]
+    series = re.search(r'\b([A-Z]{5,})\s*$', title[2])
+    columns = []
+    for n, (x0, x1, text, _, _) in enumerate(cells, 1):
+        role = next((r for pattern, r in _HEADER_ROLES if re.search(pattern, _fold(text))), None)
+        if role is None:
+            return None
+        centre, banner, window = (x0 + x1) / 2, None, None
+        if role == 'count':
+            # The banner of the column group: the nearest one (none nearer than one inside it).
+            banner = min(banners, key=lambda b: max(b[0] - centre, centre - b[1], 0))[2] if banners else None
+            window = next((t for t in (title[2], banner) if t and printed_window(t)), None)
+            if window is None:
+                return None
+        columns.append(dict(column=f'c{n}', header_literal=' / '.join(x for x in (title[2], banner, text) if x),
+                            role=role, species=None,
+                            species_literal=text if role == 'count' and not _fold(text).startswith('totale') else None,
+                            stage_literal=None, method_literal=banner, units_literal=None, window_literal=window,
+                            round_literal=title[2].split()[0] if role == 'count' else None,
+                            series_literal=series.group(1) if series and role == 'count' else None))
+    bounds = [(cells[0][0] - 20, (cells[0][1] + cells[1][0]) / 2)]
+    for k in range(1, len(cells)):
+        right = (cells[k][1] + cells[k + 1][0]) / 2 if k + 1 < len(cells) else cells[k][1] + 20
+        bounds.append((bounds[-1][1], right))
+    counts = [k for k, c in enumerate(columns) if c['role'] == 'count']
+    rows, ended = [], False
+    for y, ws in lines[zone[-1] + 1:]:
+        placed_words, outside = {}, False
+        for x0, _, x1, _, text in sorted(ws):
+            centre = (x0 + x1) / 2
+            k = next((k for k, (a, b) in enumerate(bounds) if a <= centre < b), None)
+            if k is None:
+                outside = True
+                break
+            placed_words.setdefault(k, []).append(text)
+        literals = [' '.join(placed_words.get(k, [])) for k in range(len(cells))]
+        key = literals[0]  # a site code: one or two words, one of them with a digit
+        row = (not outside and re.search(r'\d', key) and len(key.split()) <= 2
+               and all(_number(literals[k]) for k in counts if literals[k]))
+        if not row:
+            if not rows:
+                return None
+            ended = True  # the table ends here; a site row after this line means one was cut
+            continue
+        if ended:
+            return None
+        rows.append(dict(key_literal=literals[0], cells=[dict(column=c['column'], literal=v)
+                                                         for c, v in zip(columns, literals)]))
+    return dict(title_literal=title[2], context_literals=[title[2]] + [b[2] for b in banners], columns=columns,
+                rows=rows, notes=[], issues=[])
+
+
+def read_pdf_table(store, digest, number, *, execute=False) -> dict:
+    """One PDF page's table: from its text layer where that reads cleanly, else a model page read."""
+    reading = pdf_text_table(store, digest, number)
+    if reading is None:
+        return read_pdf_page(store, digest, number, execute=execute)
+    request = {'reader': PDF_TEXT_READER, 'source': digest, 'page': number}
+    return {'request_sha256': sha256(json.dumps(request, sort_keys=True).encode()).hexdigest(),
+            'request': request, 'reading': reading}
 
 
 def read_pdf_page(store, digest, number, *, execute=False) -> dict:
@@ -770,6 +1096,7 @@ class Record:
     count: Decimal | None
     test_result: str | None
     fields: tuple = ()               # every other printed field of the row: (header, literal)
+    issues: tuple = ()               # reading limits of this cell (a window its publication rules out)
 
 
 @dataclass(frozen=True)
@@ -802,43 +1129,98 @@ def _folded_key(text):
 
 
 def merged_rows(readings):
-    """Each table's printed rows, the tiles of one row band joined row by row.
+    """Each table's printed rows, the tiles of one row band joined by row number.
 
-    Tiles of one band show the same printed rows, since the body is cut only between rows,
-    so the n-th row of every tile is one printed row; the repeated key strip must agree.
-    Where the tiles of a band disagree in row count or keys, each tile's rows stay apart
-    with that cause.
+    Tiles of one band show the same printed rows, since the body is cut only between rows, so
+    row n of every tile is one printed row; the tiles must agree on how many rows they print,
+    and the repeated key strip must agree on every row they share. Where they do not, each
+    tile's rows stay apart with that cause.
     """
     groups = {}
     for geometry, response in readings:
-        groups.setdefault((json.dumps(geometry.get('table')), geometry.get('band', 0)), []).append((geometry, response))
-    for (_, band), parts in sorted(groups.items()):
+        # A PDF page is its own table; the tiles of one raster table share its box and band.
+        key = (json.dumps(geometry.get('table')), geometry.get('page') or 0, geometry.get('band', 0))
+        groups.setdefault(key, []).append((geometry, response))
+    for (_, _, band), parts in sorted(groups.items()):
         parts.sort(key=lambda part: part[0].get('chunk', 0))
-        rows = [part[1]['reading']['rows'] for part in parts]
-        joined = len({len(r) for r in rows}) == 1 and all(
-            len({_folded_key(r[i]['key_literal']) for r in rows}) == 1 for i in range(len(rows[0])))
+        numbered = [reading_rows(part[1]['reading']) for part in parts]
+        rows = [dict(r) for _, r in numbered]
+        joined = len({count for count, _ in numbered}) == 1 and all(
+            len({_folded_key(r[n]['key_literal']) for r in rows if n in r}) == 1
+            for n in set().union(*rows))
         tiles = [parts] if joined else [[part] for part in parts]
         for group in tiles:
-            for ordinal in range(len(group[0][1]['reading']['rows'])):
+            tile_rows = [dict(reading_rows(response['reading'])[1]) for _, response in group]
+            for number in sorted(set().union(*tile_rows)):
                 columns, cells, literals = {}, {}, []
-                for geometry, response in group:
+                for (geometry, response), found in zip(group, tile_rows):
                     reading = response['reading']
                     literals += [reading['title_literal'] or '', *reading['context_literals']]
                     for column in reading['columns']:
                         columns[(geometry.get('chunk', 0), column['column'])] = column
-                    for cell in reading['rows'][ordinal]['cells']:
+                    for cell in found.get(number, {'cells': ()})['cells']:
                         cells[(geometry.get('chunk', 0), cell['column'])] = cell['literal']
-                yield dict(key=group[0][1]['reading']['rows'][ordinal]['key_literal'], ordinal=ordinal,
-                           band=band, where=group[0][0], requests=[r['request_sha256'] for _, r in group],
+                key = next(found[number]['key_literal'] for found in tile_rows if number in found)
+                yield dict(key=key, ordinal=number - 1, band=band, where=group[0][0],
+                           requests=[r['request_sha256'] for _, r in group],
                            columns=columns, cells={k: v for k, v in cells.items() if k in columns},
                            literals=literals, title=group[0][1]['reading']['title_literal'],
                            association=None if joined or len(parts) == 1 else
                            'row order differs between the tiles of one band')
 
 
+def transmission_stage(statements) -> tuple[str | None, str | None]:
+    """(stage, quote) where the publication's own text states the one stage of the data it carries.
+
+    A statement counts only where its quote is in the text, names the data ("dati") and prints
+    the stage literal it was read with. Statements that state different stages give none.
+    """
+    if not statements:
+        return None, None
+    text = _fold(' '.join(statements['request']['prompt'].split('PHYSICAL PAGE')[1:]))
+    found = {}
+    for item in statements['reading']['statements']:
+        quote, literal = _fold(item['quote']), _fold(item['stage_literal'])
+        if not literal or quote not in text or literal not in quote or not re.search(r'\bdati\b', quote):
+            continue
+        stage = stage_of(item['stage_literal'])
+        if stage is not None:
+            found.setdefault(stage, item['quote'])
+    if len(found) != 1:
+        return None, None
+    return next(iter(found.items()))
+
+
+def published_on(publication: Publication) -> date | None:
+    """The day the server states the publication was last modified, where it states one."""
+    from email.utils import parsedate_to_datetime
+    try:
+        return parsedate_to_datetime(publication.last_modified).date() if publication.last_modified else None
+    except (TypeError, ValueError):
+        return None
+
+
+def survey_year(publication: Publication) -> int | None:
+    """The survey year of the publisher's folder the publication is posted in (dati2024/ ...)."""
+    match = re.search(r'/vettori/(?:dati|circolari)(20\d\d)/', publication.url)
+    return int(match.group(1)) if match else None
+
+
+def window_issue(window, publication: Publication) -> str | None:
+    """Why a read window cannot be one its publication prints: outside the survey year of the
+    publisher's folder, or ending after the publication itself. None where it can be."""
+    year, published = survey_year(publication), published_on(publication)
+    if year is not None and not window[0].year == window[1].year == year:
+        return f'window {window[0]}..{window[1]} outside its publication\'s survey year {year}'
+    if published is not None and window[1] > published:
+        return f'window {window[0]}..{window[1]} ends after its publication ({published})'
+    return None
+
+
 def records_of(publication: Publication, readings, statements=None) -> list[Record]:
     """Project a publication's table readings into records, one per count, test or share cell."""
     publisher, published, protocol = _identity_of(publication, statements)
+    stated_stage, stated_quote = transmission_stage(statements)
     context_years = _years(publication.label)
     series_quotes = statements['reading']['series'] if statements else []
     out = []
@@ -872,7 +1254,11 @@ def records_of(publication: Publication, readings, statements=None) -> list[Reco
                 if text and stage_of(text):
                     stage, stage_literal = stage_of(text), text if basis is None else f'{text} ({basis})'
                     break
-            if round_literal is None:
+            if stage is None and stated_stage is not None:
+                stage, stage_literal = stated_stage, f'{stated_quote} (transmission text)'
+            window = printed_window(window_literal, years) if window_literal else None
+            issue = window_issue(window, publication) if window else None
+            if round_literal is None or printed_round(round_literal) is None:
                 for quote in series_quotes:
                     if series and quote['series_literal'] and _fold(quote['series_literal'])[:5] == _fold(series)[:5]:
                         round_literal = quote['round_literal']
@@ -886,12 +1272,13 @@ def records_of(publication: Publication, readings, statements=None) -> list[Reco
                 round=printed_round(round_literal) if round_literal else None, round_literal=round_literal,
                 site=printed('site_code') or row['key'], agro=printed('agro'), area=printed('area'),
                 coordinates=coordinates, coordinates_literal=coordinates_literal,
-                window=printed_window(window_literal, years) if window_literal else None,
+                window=None if issue else window,
                 window_literal=window_literal, method=column['method_literal'],
                 species=column['species'], species_literal=column['species_literal'],
                 stage=stage, stage_literal=stage_literal, result=literal,
                 count=printed_count(literal) if column['role'] == 'count' else None,
-                test_result=literal if column['role'] == 'test_result' else None, fields=other))
+                test_result=literal if column['role'] == 'test_result' else None, fields=other,
+                issues=(issue,) if issue else ()))
     return out
 
 
@@ -972,6 +1359,121 @@ def placed(record: Record, zone: Zone, comune_of) -> Evaluation:
     return Evaluation(None, needs=frozenset({'place not located'}))
 
 
+# --- rounds ---------------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class Round:
+    """One survey round of one publication, dated from what is held without reading its tables:
+    the file name and link text, the layout's table titles, the transmission's own series text
+    and the server date."""
+    source: str
+    url: str
+    season: tuple                   # (publisher's folder, crop series as printed or '', survey year)
+    label: str
+    number: int | None
+    start: date | None
+    end: date | None                # the latest day its window can end: the printed end, else the publication date
+    stage: str | None               # as the held words print it
+    find_sites: bool                # a table of the sites where the stage was found
+
+    @property
+    def name(self) -> str:
+        return ' '.join(x for x in (self.season[0], self.season[1], f'round {self.number or "?"}', self.label) if x)
+
+
+def held_window(text, year=None) -> tuple[date, date] | None:
+    """A window a held file name or title prints, including the publisher's underscored forms."""
+    folded = _fold(text).replace('_', ' ')
+    found = printed_window(folded, [year] if year else ())
+    if found:
+        return found
+    for pattern, order in ((r'\b(\d{1,2}) (\d{1,2}) (\d{1,2}) (\d{1,2}) (20\d\d)\b', 'dmdm'),
+                           (r'\b(\d{1,2})[ -](\d{1,2})[ /](\d{1,2})[ /](20\d\d)\b', 'ddm'),
+                           (r'\b(\d{1,2}) ([a-z]+) (\d{1,2}) ([a-z]+) (20\d\d)\b', 'dMdM')):
+        match = re.search(pattern, folded)
+        if not match:
+            continue
+        g = match.groups()
+        try:
+            if order == 'dmdm':
+                ends = date(int(g[4]), int(g[1]), int(g[0])), date(int(g[4]), int(g[3]), int(g[2]))
+            elif order == 'ddm':
+                ends = date(int(g[3]), int(g[2]), int(g[0])), date(int(g[3]), int(g[2]), int(g[1]))
+            else:
+                if _month(g[1]) is None or _month(g[3]) is None:
+                    continue
+                ends = date(int(g[4]), _month(g[1]), int(g[0])), date(int(g[4]), _month(g[3]), int(g[2]))
+        except ValueError:
+            continue
+        if ends[0] <= ends[1]:
+            return ends
+    return None
+
+
+def held_end(text) -> date | None:
+    """The day a held name dates its data to (\"al 20240422\", \"AGG 20250718\", \"al 14 giugno 2023\")."""
+    folded = _fold(text).replace('_', ' ')
+    match = re.search(r'\b(20\d\d)(\d\d)(\d\d)\b', folded)
+    try:
+        if match:
+            return date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+        match = re.search(r'\bal (\d{1,2}) ([a-z]+) (20\d\d)\b', folded)
+        if match and _month(match.group(2)):
+            return date(int(match.group(3)), _month(match.group(2)), int(match.group(1)))
+    except ValueError:
+        return None
+    return None
+
+
+CROPS = r'\b(olivo|oliveti|mandorlo|mandorleti|vite|vigneti)\b'
+
+
+def rounds_of(publication: Publication, statements=None, layout=None) -> tuple[Round, ...]:
+    """The survey rounds a monitoring publication carries, dated from held words only.
+
+    A transmission whose text names its series gives one round per series, with that series'
+    printed round and window. Otherwise the publication is one round: its window as its name or
+    a table title prints it, else the day its name dates the data to, else its server date as
+    the latest the window can end. A publication outside the publisher's monitoring folders, or
+    a document with no table pages, carries no round of this population.
+    """
+    year = survey_year(publication)
+    if year is None or (publication.kind == 'pdf' and not (statements and statements['reading']['table_pages'])):
+        return ()
+    published = published_on(publication)
+    titles = [t['title_literal'] for t in (layout or {}).get('tables', []) if t.get('title_literal')]
+    texts = [publication.label, *titles]
+    stage = next((stage_of(t) for t in texts if stage_of(t)), None)
+    finds = any('ritrovament' in _fold(t) for t in texts)
+    folder = re.search(r'/vettori/([^/]+)/', publication.url).group(1)
+    if statements and statements['reading']['series']:
+        stated = transmission_stage(statements)[0]
+        out = []
+        for item in statements['reading']['series']:
+            window = printed_window(item['window_literal'], [year]) if item['window_literal'] else None
+            label = ' '.join(x for x in (item['round_literal'], item['series_literal'], item['window_literal']) if x)
+            out.append(Round(publication.sha256, publication.url, (folder, _fold(item['series_literal']), year),
+                             label, printed_round(item['round_literal']) if item['round_literal'] else None,
+                             window[0] if window else None, window[1] if window else published,
+                             stage or stated, finds))
+        return tuple(out)
+    window = next((w for w in (held_window(t, year) for t in texts) if w), None)
+    end = next((e for e in (held_end(t) for t in texts) if e), None)
+    number = next((printed_round(t) for t in texts if printed_round(t)), None)
+    crop = re.search(CROPS, _fold(publication.label))
+    return (Round(publication.sha256, publication.url, (folder, crop.group(1) if crop else '', year),
+                  publication.label, number, window[0] if window else None,
+                  window[1] if window else (end or published), stage, finds),)
+
+
+def zones_without_adult(records, zones, comune_of) -> tuple[str, ...]:
+    """The identities of the zones in which no record places adults counted present."""
+    adults = [r for r in records if _adult_presence(r)]
+    return tuple(zone.identity for zone in zones
+                 if not any(placed(r, zone, comune_of).truth is True for r in adults))
+
+
 # --- consumers ------------------------------------------------------------------------------
 
 
@@ -988,6 +1490,7 @@ class OnsetBound:
     lower_cause: str | None
     unnamed_rounds: tuple[str, ...]
     unplaced: tuple[tuple[Record, str], ...] = field(default=(), repr=False)
+    untranscribed_rounds: tuple[str, ...] = ()
 
 
 def _adult_presence(record: Record) -> bool:
@@ -996,7 +1499,8 @@ def _adult_presence(record: Record) -> bool:
 
 def _series(record: Record) -> tuple[str, str]:
     """A round series: its publisher and crop series as printed (a round number means nothing alone)."""
-    return (_fold(record.publisher) or 'publisher not printed', _fold(record.series))
+    publisher = re.sub(r'[^\w]+', ' ', _fold(record.publisher)).strip()  # punctuation varies between letters
+    return (publisher or 'publisher not printed', _fold(record.series))
 
 
 def held_rounds(records) -> dict:
@@ -1021,13 +1525,16 @@ def unnamed_rounds(records) -> tuple[tuple, ...]:
                         for n in range(1, last) if (series, year, n) not in held))
 
 
-def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rounds=()) -> OnsetBound:
+def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rounds=(),
+                untranscribed=()) -> OnsetBound:
     """The end of the earliest adult window beginning after `detection` on a record placed in `zone`.
 
     Only adults counted present make a window an adult window; a zero, a blank or a juvenile
     table never does. Only an official statement that adults were absent from the zone bounds
     onset from below. `rounds` are the unnamed rounds (`unnamed_rounds`); those that could fall
-    between the detection and the bound are listed beside it, never filled.
+    between the detection and the bound are listed beside it, never filled. `untranscribed`
+    are the `Round`s acquired and not transcribed; each that could end after the detection and
+    begin before the bound is listed beside it too, since it can only make the true bound earlier.
     """
     records = list(records)
     candidates = sorted((r for r in records if _adult_presence(r) and r.window[0] > detection),
@@ -1069,11 +1576,14 @@ def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rou
         earlier = [end for (s, y, n), (_, end) in held.items() if (s, y) == (series, year) and n < number]
         if not earlier or max(earlier) < upper.window[1]:
             before.append((series, year, number))
+    waiting = tuple(sorted({r.name for r in untranscribed
+                            if (r.end is None or r.end > detection)
+                            and (upper is None or r.start is None or r.start < upper.window[1])}))
     return OnsetBound(zone.identity, detection, upper.window[1] if upper else None, upper, cause, lower,
                       lower_statement, None if lower else 'no lower bound: no official statement that adults '
                       'were absent from the whole zone',
                       tuple(f'{s[0]} {s[1] or "series not printed"} {y} round {n}' for s, y, n in before),
-                      tuple(unplaced))
+                      tuple(unplaced), waiting)
 
 
 def _positive(text) -> bool:
