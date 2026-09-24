@@ -273,7 +273,7 @@
         ]
       },
       "positional_qualification": {
-        "stated": "cordon_d.spatial.positional_qualification: the total horizontal error of a located observation against the cadastral map frame (EPSG:32633). It is the device term plus the cadastral map's measured local ground error at the observation's locality. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
+        "stated": "cordon_d.spatial.positional_qualification: the horizontal error of a located observation against its true position on the ground, stated in EPSG:32633. It is the device term; no map error and no locality enter it. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
         "replacing_input": {
           "applies_to": "one fix, or one device class and capture mode, stated per record",
           "one_of": [
