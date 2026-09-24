@@ -1,0 +1,12 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 1,
+  "reviewer": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
+  "accepted_content_sha256": "21b7ac449591090dbb85f6bf599634356137ab3ac6465e5024445dbb74c70f85",
+  "preceding_acceptance": {
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-1.json",
+    "record_sha256": "b40c7fcbc36319b129af9e0db1a7b86c60c3d868446147bc6bc92ad66c221f93"
+  },
+  "scope": "Owen's 2026-09-24 rulings: Art. 21-bis mass publicity rests on the act's own stated ground with an open-term stated-period clock whose printed units \"giorni\", \"gg\", \"gg consecutivi\", \"giorni consecutivi\" and \"giorni naturali e consecutivi\" are calendar days; the Art. 21-ter notice is the Art. 21-bis communication predicate or mass-publicity result; L.R. 14/2007 listing and pending status follow a tree's own dated list acts; L.R. 14/2007 Art. 2(1)(a)'s 100 cm diameter floor and 130 cm measuring height are parameters. Binding takes effect only on merge."
+}

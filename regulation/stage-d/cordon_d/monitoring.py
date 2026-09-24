@@ -507,6 +507,7 @@ def _reading_row(reading: MonitoringObservation, store: Path, ordinal: int) -> d
             'release': reading.release, 'view': reading.view_name,
             'path': os.path.relpath(occurrence.path, store), 'sha256': occurrence.sha256,
             'locator': occurrence.locator, 'result': reading.publication.result,
+            'publisher_annotation': reading.publication.publisher_annotation,
             'restates': reading.publication.result == DUPLICATE_RESULT, 'kind': reading.kind,
             'species': reading.species, 'cultivar': reading.cultivar, 'subspecies': reading.subspecies,
             'symptom_presence': reading.symptom_presence, 'x': x, 'y': y, 'crs': reading.crs,
@@ -534,6 +535,7 @@ def _readings_schema():
             ('ordinal', pyarrow.int64()), ('reference', pyarrow.string()), ('day', pyarrow.date32()),
             ('release', pyarrow.string()), ('view', pyarrow.string()), ('path', pyarrow.string()),
             ('sha256', pyarrow.string()), ('locator', pyarrow.string()), ('result', pyarrow.string()),
+            ('publisher_annotation', pyarrow.string()),
             ('restates', pyarrow.bool_()), ('kind', pyarrow.string()), ('species', pyarrow.string()),
             ('cultivar', pyarrow.string()), ('subspecies', pyarrow.string()),
             ('symptom_presence', pyarrow.bool_()), ('x', pyarrow.float64()), ('y', pyarrow.float64()),
@@ -655,6 +657,8 @@ class Member:
     attributes: tuple[tuple[str, str], ...] = ()
     carried: tuple[tuple[str, str], ...] = ()
     causes: tuple[tuple[str, str], ...] = ()
+    # The annotation on this occurrence, without attaching it to other rows.
+    publisher_annotation: str | None = None
 
     @property
     def occurrence(self):
@@ -824,11 +828,15 @@ class DistinctObservation:
 
 def _member_from_row(row: dict) -> Member:
     coordinates = (row['x'], row['y']) if row['x'] is not None and row['y'] is not None else None
+    causes = _pairs(row.get('causes'), 'cause')
+    if 'publisher_annotation' not in row and row['result'] == 'publisher-annotation':
+        causes += (('publisher_annotation',
+                    'the selected derived reading predates publisher-annotation transport'),)
     return Member(row['release'], row['view'], row['path'], row['sha256'], row['locator'], row['result'],
                   row['kind'], row['species'], row['cultivar'], row['subspecies'], row['symptom_presence'],
                   coordinates, row['crs'], _pairs(row.get('report_routes')), tuple(row['issues'] or ()),
                   _pairs(row.get('identifiers')), _pairs(row.get('attributes')),
-                  _pairs(row.get('carried')), _pairs(row.get('causes'), 'cause'))
+                  _pairs(row.get('carried')), causes, row.get('publisher_annotation'))
 
 
 def _grouping_key(root: Path) -> str:
@@ -1004,16 +1012,25 @@ def occasion_sets(groups, occasion_of):
 def located_positives(groups):
     """The agreed location of each positive observation, one per observation.
 
+    The finding status remains row 2's.
+    """
+    return located_observations(groups, select=lambda group: group.positive is True)
+
+
+def located_observations(groups, *, select=lambda group: True):
+    """The agreed location of each observation, of every result state, one per observation.
+
     Publications in different published frames are reconciled rather than emitted
-    separately, so one positive finding no longer reaches a consumer as two candidate
-    places. Each carries its releases as official-dataset sources and no spatial support:
+    separately, so one observation never reaches a consumer as two candidate places.
+    Each carries its releases as official-dataset sources and no spatial support:
     `spatial.metric_point` refuses a distance calculation until a source-grounded
-    qualification exists, and the finding status remains row 2's.
+    qualification exists (`spatial.positional_qualification`).
     """
     from .evidence import Source
     from .spatial import CoordinateObservation
+    shared = {}  # one Source object per publication, however many observations cite it
     for group in groups:
-        if group.positive is not True:
+        if not select(group):
             continue
         for crs, coordinates in group.locations:
             # The pair and its frame come from one publication, because a coordinate pair
@@ -1023,6 +1040,8 @@ def located_positives(groups):
             # the operator reads to see what supports a finding's location.
             emitting = next(m for m in group.members if m.crs == crs and m.coordinates is not None)
             placed = tuple(m for m in group.members if m.coordinates is not None)
-            sources = tuple(Source(f'{m.release}|{m.view}', m.path, m.sha256, 'official-dataset', 'public')
+            sources = tuple(shared.setdefault((m.release, m.view, m.path, m.sha256),
+                                              Source(f'{m.release}|{m.view}', m.path, m.sha256,
+                                                     'official-dataset', 'public'))
                             for m in {m.sha256: m for m in placed}.values())
             yield CoordinateObservation(group.identity, emitting.coordinates, coordinates, crs, sources, ())

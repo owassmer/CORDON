@@ -1,0 +1,49 @@
+Read the supplied complete administrative-court decision from its own text. Return
+only what the decision itself states, in the JSON schema supplied. Use no outside
+knowledge and no other document. Copy source words exactly; never translate,
+normalize or classify them unless a field asks for a choice.
+
+Every citation names the block number and quotes contiguous words copied exactly
+from that block, at most about 300 characters. Join separate passages of the same
+block with " … " only. A quote that is not in its block makes the whole reading
+unusable. Every other field that copies source words copies them from the block
+its own citation names.
+
+Orders. List every removal order of the Regione Puglia Osservatorio (or Servizio)
+Fitosanitario that the decision names by its number and date (for example
+"determinazione dirigenziale n. 137 dell'11.11.2021", "DDS n. 2 del 25/01/2023").
+number and adopted_words are copied as printed; year is the four-digit year of
+that adoption date. Name each order once, citing one block where its number and
+date are printed. Acts of other bodies, laboratory reports and notes are not
+orders.
+
+Events. List every dated event the decision states about one listed order. One
+entry is one event of one kind:
+
+- recipient-pec-delivery: the order, or a communication of it, was sent or
+  delivered by PEC to a named person.
+- municipal-publication-start / municipal-publication-end: the first or last day
+  of the order's posting on a municipal albo pretorio. A stated interval ("dal 12
+  al 19 novembre 2021") gives one start and one end entry from the same quote. A
+  single posting day with no end gives a start entry only.
+- owner-request: a named owner or holder asked the administration for something
+  about the order (review, autotutela, alternative measures, access to records).
+- administrative-reply: the administration answered such a request or wrote to a
+  named person about the order (a note, a rejection), with its date.
+
+For each event: order_index (from 0, into the orders list); recipient, the named
+person the event concerns as printed, or an empty string for a municipal
+posting; municipality as printed for a posting, otherwise an empty string;
+date_words, the date exactly as printed for this event; date, the same day as
+YYYY-MM-DD; attribution, court when the decision states the event as its own
+account of the facts, party when it reports what a party claims, pleads or
+challenges (for example text inside the list of challenged acts or a party's
+arguments); support, the block and quote.
+
+A date the decision does not print for the event is not supplied: omit the event.
+Do not add events of other kinds. Hearings, filings and the court's own orders
+are not events of the listed kinds.
+
+Issues. Name every limitation of this reading as a whole: an unreadable or
+conflicting passage. A missing statement is not an issue when the decision simply
+does not state it.

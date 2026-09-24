@@ -20,6 +20,20 @@ def file_digest(path: Path) -> str:
     return digest.hexdigest()
 
 
+# One digest per file state within a process: a file whose size or modification time
+# changes is hashed again, so changed bytes are still refused.
+_DIGESTS: dict[tuple[str, int, int], str] = {}
+
+
+def verified_digest(path: Path) -> str:
+    """The file's digest, computed once per (path, size, mtime) within this process."""
+    status = path.stat()
+    key = (str(path), status.st_size, status.st_mtime_ns)
+    if key not in _DIGESTS:
+        _DIGESTS[key] = file_digest(path)
+    return _DIGESTS[key]
+
+
 def instant(value: datetime) -> datetime:
     if not isinstance(value, datetime) or value.tzinfo is None or value.utcoffset() is None:
         raise ValueError('Evidence knowledge time requires a timezone-aware instant')
@@ -38,7 +52,7 @@ class Source:
         path = (root / self.path).resolve()
         if not path.is_relative_to(root.resolve()):
             raise ValueError('Source must be inside the supplied source root')
-        if file_digest(path) != self.sha256:
+        if verified_digest(path) != self.sha256:
             raise ValueError(f'Source changed: {self.identity}')
         if self.role not in {'official-record', 'official-dataset', 'qualified-observation',
                              'official-format'}:
@@ -83,6 +97,14 @@ class Assertion:
         return self.context, self.event_date, self.consumer_version, self.predicate
 
 
+def require_admissible(contract: dict, sources):
+    """Every source's role is one the contract admits for an instance fact."""
+    permitted = set(contract['admissible_instance_roles'])
+    for source in sources:
+        if source.role not in permitted:
+            raise ValueError(f'{source.role} does not establish an instance fact under {contract["id"]}')
+
+
 class Evidence:
     def __init__(self, snapshot: Snapshot, sources: tuple[Source, ...], assertions: tuple[Assertion, ...],
                  contracts: Mapping[str, dict], bindings: Mapping[str, frozenset[str]], root: Path):
@@ -107,11 +129,7 @@ class Evidence:
             from cordon_c.bindings import leaves
             if row.predicate not in set(leaves(owner['condition_ast'])):
                 raise ValueError('Assertion predicate is not owned by its event-time A version')
-            permitted = set(contracts[row.contract]['admissible_instance_roles'])
-            for support in row.support:
-                source = self.sources[support.source]
-                if source.role not in permitted:
-                    raise ValueError(f'{source.role} does not establish an instance fact under {row.contract}')
+            require_admissible(contracts[row.contract], [self.sources[s.source] for s in row.support])
             for predecessor in row.supersedes:
                 previous = self.assertions[predecessor]
                 if previous.key != row.key or previous.known_at >= row.known_at:

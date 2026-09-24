@@ -38,7 +38,7 @@ implicit current-time lookup.
 | Source quantities | `quantities`: explicit legal event date and B identity; Decimal conversion; metres/kilometres; exact comparator; month-window membership; planned sample/test differences. B's conditional/conflict classification remains in force regardless of the numerical answer. |
 | Clocks | `temporal`, `quantities` and `calendar-rules.json`: qualified event date/instant, selected clock class, local zone and a bounded holiday calendar. Calendar months/years use anniversary dates with month-end clamping; elapsed hours use UTC duration. Whole-day periods expose the following midnight as an exclusive end. Fixed dates, recurrence counts, ordering, reset and lookback calculations stay distinct. |
 | Open temporal terms | A biological interval, practicability determination or promptness standard receives its operative semantic input. C does not manufacture days from “immediately,” “periodic,” or vector biology. Before/during treatment uses actual phase performance, not a continuous-spraying interval. |
-| Spatial predicates | `spatial`: valid 2D geometry, explicit compatible metric CRS, and spatial error bounds. Adopted-area membership includes its boundary; ambiguous precision affects only that classification. Radius/band membership uses distance directly. `minimum_enclosure` tests containment and clearance from every boundary, including holes; it does not establish legal geography. |
+| Spatial predicates | `spatial`: valid 2D geometry, explicit compatible metric CRS, and spatial error bounds. Adopted-area membership includes its boundary; ambiguous precision affects only that classification. Radius/band membership uses distance directly. `partial_parcel` decides only what holds for every true shape between the supplied shape shrunk and grown by its error bound. It is true when the parcel lies inside the area by more than the combined error. It is also true when a candidate point, proposed by the two shapes each shrunk by its own error, lies inside both, farther than the parcel's error from the parcel's boundary and farther than the area's error from the area's boundary, by exact distance. It is false beyond the combined error and unknown otherwise. `minimum_enclosure` tests containment and clearance from every boundary, including holes; it does not establish legal geography. It draws the grown enclosure at a circumscribed radius, so polygonal approximation errs toward unknown. |
 | Post-finding populations | `populations`: DDS45's two inner 50 m populations remain differently qualified; the containment outer band extends from 50 to 450 m; the pest-free/buffer outer width runs from the infected zone and covers the operative hectares containing specified species. No invented hectare grid or plant census. |
 | Other spatial scope | The inward band uses the actual infected/buffer interface. PNI's outdoor populations use the exterior of the complete operative demarcation union; host/land-use qualifications remain distinct. Island separation uses the whole island and other Union land, including completeness of that land population. A partial-parcel relation does not expand infected-plant membership. Shared performance is counted by semantic identity; incomplete population or completion evidence is scoped to the unsatisfied claim. |
 | Analytical classification | `diagnostic`, bound through `bindings.assay_facts`: selected assay, validity, Decimal Cq or explicit no-Cq. DDS31 and DDS45 retain different ranges; exact 32 and 35 follow their accepted unresolved boundaries. A numeric analytical class never creates official finding status. |
@@ -56,7 +56,28 @@ exact required work, including a commencement before notice. Neither elapsed
 time nor an incomplete execution record proves noncommencement. Its period is
 the term the prescription states, as a number and printed unit word that B's
 conventions map; a missing term is unknown, and a stated term passed to a clock
-B fixes is refused.
+B fixes is refused. A printed count reads as its digits; a bracketed word after
+them is ignored, so "7 (sette)" is 7. Without a notification day
+there is no deadline. Whether notification is legally sufficient is A's: the
+Art. 21-ter notice conjunct is an any_of of the Art. 21-bis communication
+predicate and the mass-publicity route. `notice_instant` chooses the instant for
+one recipient: A evaluates each branch, and the term runs from the earliest
+instant among the branches A finds true. A false or unknown branch never
+supplies its instant; with no true branch there is no instant, so no deadline.
+The caller supplies each branch's events and never picks the instant.
+`mass_publicity_facts` computes whether the act was displayed on each of the
+consecutive days the act states, the first day of display included (no default
+period); a posting record's dates are whole days, so an inclusive "al" day runs
+through its end. It returns the notice day only when the Art. 21-bis row gives
+effectiveness: the stated number of days counted from the day of publication,
+that day excluded. `listing_facts` reads L.R. 14/2007 Art. 5 status at the
+event date from the tree's own entry dates: first publication gives a pending
+decision, the definitive decision's publication ends it, and only a definitive
+approval republished on BURP lists the tree. `trunk_diameter_facts` compares a
+recorded trunk diameter with B's Art. 2(1)(a) floor; a diameter taken at a
+stated height other than B's measurement height is unknown. A composes that
+result into the Art. 8(7bis), DDS 4/2022 and DDS 45/2023 characteristics conjuncts beside
+the official monitoring finding; C binds its two outcomes.
 `timely_completion` compares this clock's own qualifying performance with its
 boundary. Equality satisfies an elapsed-hour deadline; the following midnight
 is outside a whole-day deadline. Missing performance evidence and a still-open
