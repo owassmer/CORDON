@@ -12,7 +12,7 @@ from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 from fractions import Fraction
 from itertools import product
-from math import comb
+from math import comb, cos, hypot, pi
 import unittest
 from zoneinfo import ZoneInfo
 
@@ -442,6 +442,59 @@ class CalendarBoundaries(unittest.TestCase):
         self.assertEqual(included, [1, 2, 3, 11, 12])
 
 
+def edge_distance(point, polygon):
+    """Exact distance from a point to a polygon's rings, by projection on each edge."""
+    px, py = point
+    best = float("inf")
+    for ring in (polygon.exterior, *polygon.interiors):
+        for (ax, ay), (bx, by) in zip(ring.coords, ring.coords[1:]):
+            dx, dy = bx - ax, by - ay
+            t = max(0, min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy)))
+            best = min(best, hypot(ax + t * dx - px, ay + t * dy - py))
+    return best
+
+
+def depth_in_box(parcel, area):
+    """Exact least distance from a polygon inside an axis-aligned box to the box's edges."""
+    x0, y0, x1, y1 = area.bounds
+    coords = parcel.exterior.coords
+    if not all(x0 <= x <= x1 and y0 <= y <= y1 for x, y in coords):
+        return None
+    return min(min(x - x0, x1 - x, y - y0, y1 - y) for x, y in coords)
+
+
+def least_half_width(polygon):
+    """Half the least width of a polygon's convex hull, from exact vertex-to-edge-line distances."""
+    hull = polygon.convex_hull.exterior.coords[:-1]
+    widths = []
+    for (ax, ay), (bx, by) in zip(hull, hull[1:] + hull[:1]):
+        length = hypot(bx - ax, by - ay)
+        widths.append(max(abs((bx - ax) * (y - ay) - (by - ay) * (x - ax)) / length for x, y in hull))
+    return min(widths) / 2
+
+
+# Catasto layer 2 (SIT Puglia Background/Catasto), EPSG:32633, as PR #8's parcel check read them.
+PARCEL_A662_C_2_379 = Polygon([(655811.3492, 4548156.9409), (655811.2358999997, 4548177.2468),
+                               (655811.8328999998, 4548177.2608), (655812.8442000002, 4548157.070900001)])
+PARCEL_A893_43_230 = Polygon([
+    (645920.4016000004, 4553093.856899999), (645924.8816, 4553098.748), (645926.0646000002, 4553098.723999999),
+    (645926.8836000003, 4553098.353), (645927.5976, 4553097.821), (645928.2037000004, 4553097.1570999995),
+    (645928.6507000001, 4553096.4111), (645928.9216999998, 4553095.563100001), (645929.0027000001, 4553094.622099999),
+    (645928.9627, 4553093.8101), (645928.7326999996, 4553092.9541), (645928.2807999998, 4553092.187100001),
+    (645927.5778000001, 4553091.497099999), (645928.1597999996, 4553090.5721), (645928.4287999999, 4553089.743100001),
+    (645928.5438000001, 4553088.703199999), (645928.4607999995, 4553087.9802), (645928.2397999996, 4553087.156199999),
+    (645927.7778000003, 4553086.3882), (645927.1827999996, 4553085.7281), (645926.4548000004, 4553085.2081),
+    (645925.6327999998, 4553084.8561), (645924.7778000003, 4553084.665100001), (645923.8767999997, 4553084.6731),
+    (645922.9918, 4553084.872099999), (645922.1727999998, 4553085.243000001), (645921.4606999997, 4553085.755000001),
+    (645920.8646999998, 4553086.408), (645920.4256999996, 4553087.205), (645920.1557, 4553088.051999999),
+    (645920.0537, 4553088.923900001), (645920.1436999999, 4553089.7959), (645920.4145999998, 4553090.6219),
+    (645920.8465999998, 4553091.388900001), (645921.4616, 4553092.017899999), (645921.3476, 4553092.187899999),
+    (645920.9095999999, 4553092.9629)])
+PARCEL_A883_9_2148 = Polygon([
+    (625901.4153000005, 4566312.5911), (625891.7806000002, 4566291.328299999), (625878.8737000003, 4566297.605900001),
+    (625882.3476, 4566305.5748), (625875.6815999998, 4566308.8506000005), (625881.4654000001, 4566321.4485)])
+
+
 class SpatialPopulations(unittest.TestCase):
     def test_hectare_outside_sliver_must_survive_declared_spatial_error(self):
         s = Snapshot.load()
@@ -574,6 +627,110 @@ class SpatialPopulations(unittest.TestCase):
         self.assertTrue(partial_parcel(parcel, area).truth)
         self.assertFalse(adopted_membership(shape(Point(19, 19)), area).truth)
         self.assertFalse(partial_parcel(shape(box(10, 0, 20, 10)), area).truth)
+
+    # A geometry with error bound e stands for any true shape between itself shrunk by e and
+    # itself grown by e. The expectations below come from exact distances and exact rectangle
+    # erosions, not from partial_parcel or its buffers.
+
+    def test_partial_parcel_wholly_inside_needs_the_combined_error_from_the_boundary(self):
+        area = box(0, 0, 1000, 1000)
+        # A 5 m strip 100 m inside, with PR #8's held bounds 12.46 m and 13.46 m rounded up
+        # to 12.5 m and 13.5 m: every true position of the strip lies in the area shrunk by
+        # 13.5 m, which lies in every true area.
+        strip = box(100, 100, 400, 105)
+        self.assertEqual(depth_in_box(strip, area), 100)
+        self.assertTrue(partial_parcel(shape(strip, 12.5), shape(area, 13.5)).truth)
+        # Real narrow parcels at the depth PR #8 measured inside their areas.
+        for parcel, depth, e_p, e_z in [(PARCEL_A662_C_2_379, 174.8, 8.0, 9.0),
+                                        (PARCEL_A893_43_230, 131.0, 12.5, 13.5)]:
+            x0, y0, x1, y1 = parcel.bounds
+            around = box(x0 - depth, y0 - depth, x1 + depth, y1 + depth)
+            self.assertAlmostEqual(depth_in_box(parcel, around), depth, places=6)
+            self.assertGreater(depth, e_p + e_z)
+            self.assertTrue(partial_parcel(shape(parcel, e_p), shape(around, e_z)).truth)
+        # 20 m inside with a combined error of 26 m, and too narrow for a core: a small true
+        # parcel moved 12.5 m toward the line lies within 13.5 m of it, outside the area
+        # shrunk by 13.5 m (6 m to spare).
+        near = box(20, 100, 25, 400)
+        self.assertEqual(depth_in_box(near, area), 20)
+        self.assertIsNone(partial_parcel(shape(near, 12.5), shape(area, 13.5)).truth)
+        # One narrow component deep inside and one wide component 100 m outside: the parcel
+        # shrunk by 12.5 m is box(1112.5, 112.5, 1187.5, 187.5), a possible true parcel wholly
+        # outside even the grown area.
+        multipart = MultiPolygon([box(100, 100, 400, 105), box(1100, 100, 1200, 200)])
+        self.assertIsNone(partial_parcel(shape(multipart, 12.5), shape(area, 13.5)).truth)
+
+    def test_partial_parcel_cores_shrink_by_each_geometrys_own_error(self):
+        area = box(-1000, -1000, 0, 1000)
+        # A 100 m square crossing the line by 50 m: (-25.5, 50) lies 24.5 m inside the parcel
+        # and 25.5 m inside the area, so every true parcel and area share its neighbourhood.
+        square = box(-50, 0, 50, 100)
+        self.assertGreater(edge_distance((-25.5, 50), square), 12.5)
+        self.assertGreater(edge_distance((-25.5, 50), area), 13.5)
+        self.assertTrue(partial_parcel(shape(square, 12.5), shape(area, 13.5)).truth)
+        # Crossing by 10 m: the shrunk parcel box(2.5, 12.5, 77.5, 87.5) and the shrunk area,
+        # x <= -13.5, are possible true shapes with no common area; the unshrunk ones overlap.
+        self.assertIsNone(partial_parcel(shape(box(-10, 0, 90, 100), 12.5), shape(area, 13.5)).truth)
+        # A 20 m strip crossing by 50 m: (-40, 50) lies 10 m inside the strip and 40 m inside
+        # the area, beyond e_p = 5 and e_z = 30.
+        strip = box(-50, 40, 100, 60)
+        self.assertGreater(edge_distance((-40, 50), strip), 5)
+        self.assertGreater(edge_distance((-40, 50), area), 30)
+        self.assertTrue(partial_parcel(shape(strip, 5), shape(area, 30)).truth)
+        # With the bounds swapped the strip shrunk by 30 m is empty, and a small true parcel
+        # 35 m out of the area is possible.
+        self.assertIsNone(partial_parcel(shape(strip, 30), shape(area, 5)).truth)
+        # Sharing only an edge: the shrunk shapes are 26 m apart; the grown ones overlap.
+        self.assertIsNone(partial_parcel(shape(box(0, 0, 100, 100), 12.5), shape(area, 13.5)).truth)
+        # Beyond the combined error: 30 m > 26 m.
+        self.assertFalse(partial_parcel(shape(box(30, 0, 130, 100), 12.5), shape(area, 13.5)).truth)
+
+    def test_partial_parcel_chord_at_a_reflex_corner_stays_unknown(self):
+        from math import radians, tan
+        from cordon_c.spatial import QUAD_SEGMENTS
+        # The area's top edge dips to a reflex corner at the origin, turning by 8.16 degrees.
+        # A buffer draws that corner's 8.16-degree arc as one chord, 1.45 times the
+        # nominal 90 / QUAD_SEGMENTS degrees.
+        rise = 2000 * tan(radians(4.08))
+        area = Polygon([(-2000, -3000), (2000, -3000), (2000, rise), (0, 0), (-2000, rise)])
+        e_p, e_z = .001, 187.4
+        parcel = box(-.05, -(e_z - .05), .05, -(e_z - .15))
+        # Every parcel vertex lies closer than e_z to the corner, so no point of the parcel
+        # lies in the area shrunk by e_z: that shrunk area and the parcel shrunk by e_p are
+        # possible true shapes with no common area.
+        self.assertLess(max(hypot(x, y) for x, y in parcel.exterior.coords), e_z)
+        self.assertTrue(area.covers(parcel))
+        # A chord buffer drawn at e_z, or at e_z / cos(pi / (4q)), still keeps part of the parcel,
+        # so partial_parcel's drawn cores overlap and only the exact confirmation keeps unknown.
+        core = parcel.buffer(-e_p)
+        for radius in (e_z, e_z / cos(pi / (4 * QUAD_SEGMENTS))):
+            self.assertGreater(core.intersection(area.buffer(-radius, quad_segs=QUAD_SEGMENTS)).area, 0)
+        self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
+
+    def test_partial_parcel_drawn_core_past_the_inscribed_radius_stays_unknown(self):
+        from cordon_c.spatial import QUAD_SEGMENTS
+        # Just past a polygon's inscribed radius, GEOS leaves a drawn core although no point
+        # of the parcel lies farther than e_p from its boundary. A regular octagon, and the
+        # real Catasto parcel A883/ /9/2148 at PR #8's held parcel bound of 12.46 m (area
+        # bound 13.46 m there) and at a constructed bound of 12.506 m, each placed a few
+        # metres inside an area line.
+        octagon = Point(0, 0).buffer(11.85, quad_segs=2)
+        x0, y0, x1, y1 = PARCEL_A883_9_2148.bounds
+        cases = [(octagon, 11.368, box(-1000, -1000, 1000, octagon.bounds[3] + 8), 5.0, 8),
+                 (PARCEL_A883_9_2148, 12.46, box(x0 - 3000, y0 - 3000, x1 + 3000, y1 + 5), 9.0, 5),
+                 (PARCEL_A883_9_2148, 12.506, box(x0 - 3000, y0 - 3000, x1 + 3000, y1 + 5), 9.0, 5)]
+        for parcel, e_p, area, e_z, depth in cases:
+            # An inscribed disk lies between two parallel support lines of the convex hull, so
+            # half the hull's least width bounds the inscribed radius: the parcel shrunk by e_p
+            # is empty. (a) fails, so a small true parcel moved toward the line lies outside
+            # the area shrunk by e_z: unknown.
+            self.assertLess(least_half_width(parcel), e_p)
+            self.assertAlmostEqual(depth_in_box(parcel, area), depth, places=6)
+            self.assertLess(depth, e_p + e_z)
+            drawn = (parcel.buffer(-e_p, quad_segs=QUAD_SEGMENTS)
+                     .intersection(area.buffer(-e_z, quad_segs=QUAD_SEGMENTS)))
+            self.assertGreater(drawn.area, 0)
+            self.assertIsNone(partial_parcel(shape(parcel, e_p), shape(area, e_z)).truth)
 
     def test_shared_performance_and_incomplete_population(self):
         req = {"plant-1": Evaluation(True), "plant-2": Evaluation(None, needs=frozenset({"species"}))}
@@ -933,6 +1090,58 @@ class ComposedTemporalCases(unittest.TestCase):
         args["survey_completed"] = datetime(2026, 6, 5, tzinfo=ROME)
         scope = reduced_buffer_first_year_facts(s, AT, **args)
         self.assertFalse(evaluate(s, "EU-2020-1201:5(1)(c)", AT, merge_facts(adequate, scope)).truth)
+
+    def test_survey_extent_counts_the_whole_grown_enclosure_at_a_convex_corner(self):
+        from math import radians, sin, tan
+        from cordon_c.bindings import reduced_buffer_first_year_facts
+        from cordon_c.spatial import QUAD_SEGMENTS
+        s = Snapshot.load()
+        calendar = WorkingCalendar(date(2024, 1, 1), date(2028, 1, 1), frozenset(), frozenset({5, 6}))
+        enclosure = box(-2600, -2600, 2600, 2600)
+        fact = "a survey at least once in the first year, in a zone at least 2,5 km around the infected zone, showing the pest absent"
+
+        def extent(out_m, error_m, enclosure=enclosure, corner=(2600, 2600), degrees=42.1875):
+            # A small infected zone beyond the corner, between two of the buffer's chord
+            # points (by default 42.1875 degrees), out_m from the corner.
+            a = radians(degrees)
+            cx, cy = corner[0] + out_m * cos(a), corner[1] + out_m * sin(a)
+            zone = box(cx - .2, cy - .2, cx + .2, cy + .2)
+            near = min(hypot(x - corner[0], y - corner[1]) for x, y in zone.exterior.coords)
+            far = max(hypot(x - corner[0], y - corner[1]) for x, y in zone.exterior.coords)
+            scope = reduced_buffer_first_year_facts(
+                s, AT, identification=datetime(2025, 6, 4, 12, tzinfo=ROME), evaluated_at=datetime(2026, 9, 8, tzinfo=ROME),
+                infected_zone=shape(zone), surveyed_enclosure=shape(enclosure, error_m),
+                survey_completed=datetime(2026, 5, 4, tzinfo=ROME), negative_survey_basis=Evaluation(True),
+                host_sampling_and_testing=Evaluation(True), zone=ROME, calendar=calendar)
+            return next(v for (_, text), v in scope.items() if text == fact), zone, near, far
+
+        # 1299 m out with a 1300 m error: the whole zone lies in the true grown enclosure,
+        # and its clearance of the 2.5 km radius is open (1298.7 - 1300 < 2500 <= 1298.7 + 1300).
+        # A chord buffer drawn at 1300 m misses it.
+        value, zone, near, far = extent(1299, 1300)
+        self.assertLess(far, 1300)
+        self.assertLess(near - 1300, 2500)
+        self.assertGreaterEqual(near + 1300, 2500)
+        self.assertFalse(enclosure.buffer(1300, quad_segs=QUAD_SEGMENTS).covers(zone))
+        self.assertIsNone(value.truth)
+        # A convex corner turning by 8.16 degrees, which a buffer draws as one chord of
+        # 1.45 times the nominal 90 / QUAD_SEGMENTS degrees. The zone on the bisector,
+        # 1299 m out, lies in the true grown enclosure; a buffer drawn at 1300 m, or at
+        # 1300 / cos(pi / (4q)), misses it.
+        drop = 5000 * tan(radians(4.08))
+        apex = Polygon([(-5000, -5000), (5000, -5000), (5000, -drop), (0, 0), (-5000, -drop)])
+        value, zone, near, far = extent(1299, 1300, enclosure=apex, corner=(0, 0), degrees=90)
+        self.assertLess(far, 1300)
+        self.assertLess(near - 1300, 2500)
+        self.assertGreaterEqual(near + 1300, 2500)
+        for radius in (1300, 1300 / cos(pi / (4 * QUAD_SEGMENTS))):
+            self.assertFalse(apex.buffer(radius, quad_segs=QUAD_SEGMENTS).covers(zone))
+        self.assertIsNone(value.truth)
+        # At a bound of D's size the clearance cannot reach 2.5 km, so the answer is False.
+        value, zone, near, far = extent(25, 26)
+        self.assertLess(far, 26)
+        self.assertLess(near + 26, 2500)
+        self.assertFalse(value.truth)
 
     def test_case_commencement_is_not_completion_and_requires_evidence(self):
         from cordon_c.bindings import noncommencement_facts
