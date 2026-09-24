@@ -5,20 +5,23 @@ They skip where its releases or the device sources are not held; the contract ch
 always runs.
 """
 from dataclasses import replace
-from datetime import date, timedelta
+from datetime import date
+from decimal import ROUND_CEILING, Decimal
 import json
 import unittest
 
 import numpy
-from pyproj import CRS, Transformer
+from pyproj import CRS, Geod, Proj, Transformer
 from shapely.geometry import Point, box
 
 from cordon_c.core import MissingInput
-from cordon_c.spatial import MetricGeometry, adopted_membership, distance_test, ground_distance
+from cordon_c.spatial import (MetricGeometry, adopted_membership, distance_test, ground_distance,
+                              projection_distance_error)
 from cordon_d.evidence import Source, require_admissible
 from cordon_d.store import blob_path, store_root
-from cordon_d.spatial import (DEVICE_RECORDS, GROUND_FRAME, REPOSITORY, metric_point, positional_qualification,
-                              positional_terms)
+from cordon_d.spatial import (DEVICE_RECORDS, GROUND_FRAME, LONGEST_AROUND_A_POINT, REPOSITORY,
+                              longest_point_distance, metric_point, positional_qualification, positional_terms,
+                              transverse_mercator_scale_bounds)
 
 STORE = store_root(REPOSITORY)
 MONITORING = REPOSITORY / 'corpus/sources/monitoring'
@@ -27,7 +30,6 @@ MONITORING = REPOSITORY / 'corpus/sources/monitoring'
 DECISION = date(2026, 9, 22)
 REACH = DECISION.replace(year=DECISION.year - 4)
 LIMIT_M = 50  # B's 50 m radius around an infected plant
-DEVICE_M = 6.67  # USFS NTDP, NSSDA 95%, Galaxy Tab Active3, single position, light-medium canopy
 # The cadastral map's measured local ground error at Giovinazzo (E047): PR #8's record
 # corpus/sources/areas/geometry.json at b258378, kind positional-error, source cadastre,
 # comuni[comune=E047].error_m, median 12.5 m and maximum 12.5 m over its 6 fixes, each the
@@ -54,21 +56,58 @@ def lonlat(observation):
 
 
 class Contract(unittest.TestCase):
-    def test_the_positional_qualification_field_admits_a_qualified_observation(self):
-        contracts = json.loads((REPOSITORY / 'regulation/stage-d/contracts.json').read_text())['contracts']
-        finding = next(c for c in contracts if c['id'] == 'official-finding')
-        test = Source('test', 'x', '0' * 64, 'qualified-observation', 'public')
-        require_admissible(finding, [test], field='positional qualification')
-        # The finding itself still admits only official records and datasets.
-        with self.assertRaisesRegex(ValueError, 'does not establish an instance fact under official-finding'):
-            require_admissible(finding, [test])
+    def test_the_location_of_a_plant_population_member_carries_the_positional_qualification(self):
+        contracts = {c['id']: c for c in json.loads(
+            (REPOSITORY / 'regulation/stage-d/contracts.json').read_text())['contracts']}
+        population, finding = contracts['plant-population'], contracts['official-finding']
+        qualification = population['positional_qualification']
+        self.assertIn(qualification['field'], population['fields'])
+        self.assertIn("the plant's location", qualification['stated'])
+        records = json.loads((REPOSITORY / DEVICE_RECORDS).read_text())
+        for record in records:
+            source = Source(record['id'], 'x', record['sha256'], record['role'], record['access'])
+            require_admissible(population, [source])
         with self.assertRaisesRegex(ValueError, 'official-format does not establish'):
-            require_admissible(finding, [replace(test, role='official-format')], field='positional qualification')
-        with self.assertRaises(ValueError):
-            require_admissible(finding, [test], field='no such field')
-        replacing = finding['positional_qualification']['replacing_input']
+            require_admissible(population, [replace(source, role='official-format')])
+        # The finding admits no device test, and carries no positional field.
+        with self.assertRaisesRegex(ValueError, 'does not establish an instance fact under official-finding'):
+            require_admissible(finding, [replace(source, role='qualified-observation')])
+        self.assertNotIn('positional_qualification', finding)
+        replacing = qualification['replacing_input']
         self.assertEqual(len(replacing['one_of']), 3)
         self.assertTrue(replacing['default'].startswith('none'))
+
+    def test_the_longest_distance_around_a_point_comes_from_b(self):
+        ledger = json.loads((REPOSITORY / 'regulation/stage-b/clocks-and-parameters.json').read_text())
+        widths = {p['parameter_id']: p for p in ledger['parameters']}
+        self.assertEqual(longest_point_distance(), sum(float(widths[i]['value']) for i in LONGEST_AROUND_A_POINT))
+        # The widths are the ones C's containment_outer reads for its band around a plant.
+        import inspect
+        from cordon_c.populations import containment_outer
+        consumer = inspect.getsource(containment_outer)
+        for identity in LONGEST_AROUND_A_POINT:
+            self.assertIn(f'"{identity}"', consumer)
+
+    def test_the_scale_bound_encloses_proj_over_the_widened_extent(self):
+        # PROJ's own point scale on a grid is a check here, never the bound.
+        frame = CRS.from_user_input(GROUND_FRAME)
+        extent = (14.9, 18.6, 39.7, 42.3)
+        low, high = transverse_mercator_scale_bounds(frame, extent, 450)
+        self.assertEqual(low, 0.9996)
+        # The widened box: 450 m beyond each edge, as the bound widens it.
+        geod = Geod(ellps='WGS84')
+        west, east = geod.fwd(14.9, 42.3, 270, 450)[0], geod.fwd(18.6, 42.3, 90, 450)[0]
+        south, north = geod.fwd(14.9, 39.7, 180, 450)[1], geod.fwd(14.9, 42.3, 0, 450)[1]
+        lons, lats = numpy.meshgrid(numpy.linspace(west, east, 40), numpy.linspace(south, north, 40))
+        scale = Proj(frame).get_factors(lons.ravel(), lats.ravel()).meridional_scale
+        self.assertGreaterEqual(scale.min(), low)
+        self.assertLessEqual(scale.max(), high + 1e-9)
+        corner = Proj(frame).get_factors(east, south).meridional_scale
+        self.assertLess(abs(corner - high), 1e-6)
+        # Beyond the widened box the bound no longer holds.
+        self.assertGreater(Proj(frame).get_factors(east + 0.05, south).meridional_scale, high)
+        with self.assertRaises(ValueError):
+            transverse_mercator_scale_bounds(CRS.from_user_input('EPSG:3035'), extent, 450)
 
 
 @unittest.skipUnless(device_bytes_held() and monitoring_held(),
@@ -83,17 +122,18 @@ class RealObservations(unittest.TestCase):
         # Every in-reach located observation with its published result, in stream order.
         # Nothing is chosen by a C result.
         cls.located = []
+        cls.localities = []  # every COMUNE the observation's publications print, for picking cases
         for group in distinct_observations(MONITORING):
             if group.day is None or group.day < REACH:
                 continue
             observation = next(located_observations([group]), None)
             if observation is not None:
                 cls.located.append((observation, group.positive is True))
+                cls.localities.append({n.strip().upper() for n in group.values('COMUNE')})
         cls.grid = numpy.array([TO_METRIC.transform(*lonlat(o)) for o, _ in cls.located])
 
     def qualify(self, observation, context='test'):
-        return positional_qualification(observation, context=context, event_date=DECISION, reach_from=REACH,
-                                        terms=self.terms)
+        return positional_qualification(observation, context=context, event_date=DECISION, terms=self.terms)
 
     def point(self, observation, context='test'):
         return metric_point(observation, context=context, event_date=DECISION, root=STORE,
@@ -110,25 +150,37 @@ class RealObservations(unittest.TestCase):
                 point = self.point(observation)
                 self.assertEqual(point.crs.to_epsg(), 32633)
                 self.assertEqual(qualification.target_crs, GROUND_FRAME)
-                self.assertEqual(point.error_m, DEVICE_M)
-                self.assertEqual(self.terms.device['value_m'], DEVICE_M)
+                self.assertEqual(point.error_m, self.terms.error_m)
                 basis = ' '.join(s.reading for s in qualification.support)
-                for words in ('NSSDA 95%', 'Galaxy Tab Active3', 'light-medium canopy', 'single position',
-                              'not measured on these fixes', 'capture mode', 'Galaxy Tab Active5',
-                              'Aggiudicazione definitiva', '16/09/2024', 'no award date', 'no delivery date',
-                              'true ground position', GROUND_FRAME):
+                for words in ('NSSDA 95%', self.terms.device['selector'], 'not measured on these fixes',
+                              'capture mode', 'Galaxy Tab Active5', 'Aggiudicazione definitiva', '16/09/2024',
+                              'no award date', 'no delivery date', 'true ground position', GROUND_FRAME,
+                              'Grid distortion', 'projection_distance_error', *LONGEST_AROUND_A_POINT,
+                              "D's reading", "the plant's recorded position"):
                     self.assertIn(words, basis)
                 self.assertNotIn('adastral', basis)
+                self.assertNotIn('total', {s.selector for s in qualification.support})
                 self.assertEqual({s.role for s in qualification.sources},
-                                 {'qualified-observation', 'official-record'})
+                                 {'qualified-observation', 'official-record', 'official-dataset'})
                 changed = replace(qualification, sources=(replace(qualification.sources[0], sha256='0' * 64),
                                                           *qualification.sources[1:]))
                 with self.assertRaisesRegex(ValueError, 'Source changed'):
                     metric_point(observation, context='test', event_date=DECISION, root=STORE,
                                  qualification=changed)
 
+    def test_error_m_is_the_device_term_plus_the_grid_distortion_over_the_longest_distance(self):
+        distortion = projection_distance_error(longest_point_distance(), self.terms.scale)
+        self.assertEqual(self.terms.distortion_m, distortion)
+        self.assertEqual(self.terms.error_m, float((Decimal(str(self.terms.device['value_m'])) + Decimal(distortion))
+                                                   .quantize(Decimal('0.01'), ROUND_CEILING)))
+        self.assertGreater(self.terms.error_m, self.terms.device['value_m'])
+        # Every in-reach located observation lies inside the extent the scale bound covers.
+        west, east, south, north = self.terms.extent
+        lon, lat = TO_DEGREES.transform(*self.grid.T)
+        self.assertTrue(((west <= lon) & (lon <= east) & (south <= lat) & (lat <= north)).all())
+
     def test_distance_from_a_positive_is_definite_only_clear_of_the_combined_margin(self):
-        margin = 2 * DEVICE_M  # 13.34 m: C adds the two fixes' device terms
+        margin = 2 * self.terms.error_m  # C adds the two fixes' errors
         for index, (origin, positive) in enumerate(self.located):
             if not positive:
                 continue
@@ -163,12 +215,11 @@ class RealObservations(unittest.TestCase):
         # A square 1 km across, drawn around the first in-reach Giovinazzo observation the
         # stream yields, stands for a zone outline drawn from the cadastral map there. It
         # carries that map's local ground error; the point carries the device term.
-        index = next(i for i, (o, _) in enumerate(self.located)
-                     if any(n.strip().upper() == ZONE_LOCALITY for n in o.localities))
+        index = next(i for i, names in enumerate(self.localities) if ZONE_LOCALITY in names)
         x, y = self.grid[index]
         zone = MetricGeometry(box(x - 500, y - 500, x + 500, y + 500), CRS.from_user_input(GROUND_FRAME),
                               ZONE_ERROR_M)
-        margin = DEVICE_M + ZONE_ERROR_M
+        margin = self.terms.error_m + ZONE_ERROR_M
         cases = {}
         for j in self.near(index, 800):
             other, _ = self.located[j]
@@ -189,17 +240,17 @@ class RealObservations(unittest.TestCase):
                     self.assertEqual(result.needs, frozenset({'point/area precision at the adopted boundary'}))
 
     def test_only_an_observation_without_a_usable_location_is_refused(self):
-        # No printed locality, or two, does not matter: the fix carries the device term.
-        unprinted = next(o for o, _ in self.located if not o.localities)
-        for observation in (unprinted, replace(unprinted, localities=('BARI', 'MODUGNO'))):
-            self.assertEqual(self.point(observation).error_m, DEVICE_M)
+        # No printed locality, or two, does not matter: the producer never reads it.
+        unprinted = next(o for (o, _), names in zip(self.located, self.localities) if not names)
+        several = next(o for (o, _), names in zip(self.located, self.localities) if len(names) > 1)
+        for observation in (unprinted, several):
+            self.assertEqual(self.point(observation).error_m, self.terms.error_m)
         with self.assertRaisesRegex(MissingInput, 'finite published coordinates'):
             self.qualify(replace(unprinted, coordinates=None))
         with self.assertRaisesRegex(MissingInput, 'finite published coordinates'):
             self.qualify(replace(unprinted, coordinates=(float('nan'), unprinted.coordinates[1])))
         with self.assertRaisesRegex(MissingInput, 'finite published coordinates'):
             self.qualify(replace(unprinted, crs=None))
-        with self.assertRaisesRegex(ValueError, 'outside the reach'):
-            self.qualify(replace(unprinted, observed_on=REACH - timedelta(days=1)))
-        with self.assertRaisesRegex(ValueError, 'outside the reach'):
-            self.qualify(replace(unprinted, observed_on=None))
+        # The pair CAMP_2024 prints for observation 10201346 lies outside Puglia's extent.
+        with self.assertRaisesRegex(MissingInput, 'scale bound covering this location'):
+            self.qualify(replace(unprinted, crs='EPSG:4326', coordinates=(-64.64284225, 69.26039604)))

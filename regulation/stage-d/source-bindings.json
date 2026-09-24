@@ -16,11 +16,12 @@
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
         "https://webapps.sit.puglia.it/arcgis/rest/services",
         "https://www.fs.usda.gov/database/gps/mtdcrept/accuracy/index.htm (device term, corpus/sources/positional-qualification/records.json)",
-        "https://arifpuglia.tuttogare.it/gare/dettaglio.php?codice=42 (device procurement, same record)"
+        "https://arifpuglia.tuttogare.it/gare/dettaglio.php?codice=42 (device procurement, same record)",
+        "https://www.istat.it/storage/cartografia/confini_amministrativi/non_generalizzati/2026/Limiti01012026.zip (Puglia's extent for the grid distortion, same record)"
       ],
       "population": "Every record of the twelve campaign workbooks, the CKAN release and the 101 observation point layers of the eight SIT services that publish them: 4,318,100 observations, 2,320,354 distinct, all hosts and all result states.",
       "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_observations, located_positives; cordon_d.spatial.positional_qualification",
-      "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. The positional qualification is a stated device term against the ground. Not held: the device and capture mode per record (GNSS fix or map placement), per-fix accuracy, re-sample links, and the device before late 2024. Plant identity and the official finding belong to the population and report rows."
+      "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. The positional qualification is a stated device term plus grid distortion, against the ground. Not held: the device and capture mode per record (GNSS fix or map placement), per-fix accuracy, re-sample links, and the device before late 2024. Plant identity and the official finding belong to the population and report rows."
     },
     {
       "id": "adopted-plans-and-listings",

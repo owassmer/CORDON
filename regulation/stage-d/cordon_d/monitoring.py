@@ -1014,8 +1014,7 @@ def located_observations(groups, *, select=lambda group: True):
 
     Publications in different published frames are reconciled rather than emitted
     separately, so one observation never reaches a consumer as two candidate places.
-    Each carries its releases as official-dataset sources, its observation day, every
-    locality (`COMUNE`) its publications print, and no spatial support:
+    Each carries its releases as official-dataset sources and no spatial support:
     `spatial.metric_point` refuses a distance calculation until a source-grounded
     qualification exists (`spatial.positional_qualification`).
     """
@@ -1037,6 +1036,4 @@ def located_observations(groups, *, select=lambda group: True):
                                               Source(f'{m.release}|{m.view}', m.path, m.sha256,
                                                      'official-dataset', 'public'))
                             for m in {m.sha256: m for m in placed}.values())
-            yield CoordinateObservation(group.identity, emitting.coordinates, coordinates, crs, sources, (),
-                                        observed_on=group.day,
-                                        localities=tuple(sorted(group.values('COMUNE'))))
+            yield CoordinateObservation(group.identity, emitting.coordinates, coordinates, crs, sources, ())

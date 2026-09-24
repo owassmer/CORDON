@@ -18,7 +18,7 @@
   "selector": "page 24, table 'Tested Accuracies By Canopy Type' (NSSDA = horiz RMS x 1.7308), dated Tuesday, February 20, 2024; row Samsung | Galaxy Tab Active3 | WAAS | Glonass Yes | Ext. Antanna No | Position 1 | Post Process No; column Light - Medium NSSDA",
   "value_m": 6.67,
   "statistic": "NSSDA 95% horizontal accuracy (horizontal RMS x 1.7308), from a published test",
-  "reading": "The row reads 1.58 m open, 6.67 m light-medium and 10.67 m heavy-closed canopy. The recorded host is olive in groves, sampled at the crown's edge: partial obstruction, the light-medium canopy class. The app's averaging is not documented, so the single-position row applies; it is also the largest light-medium figure of the three Tab Active3 rows (6.67, 5.12, 6.12 m). The table has no Tab Active5 row; the Tab Active3 is the newest tested member of the line."
+  "reading": "The row reads 1.58 m open, 6.67 m light-medium and 10.67 m heavy-closed canopy. The recorded host is olive in groves; the surveyor records the fix at the plant, under partial obstruction: the light-medium canopy class. The app's averaging is not documented, so the single-position row applies; it is also the largest light-medium figure of the three Tab Active3 rows (6.67, 5.12, 6.12 m). The table has no Tab Active5 row; the Tab Active3 is the newest tested member of the line."
  },
  {
   "id": "arif-tuttogare-gara-42",
@@ -36,5 +36,27 @@
   "content_type": "text/html; charset=UTF-8",
   "selector": "Informazioni appalto: Pubblicazione 11/09/2024; Procedura Affidamento diretto / RDO; CIG B30D7ACCE3; status 'Aggiudicazione definitiva'; Descrizione 'n. 120 GALAXY TAB ACTIVE 5 5G + accessori'; Scadenze: Apertura offerte 16/09/2024 10:00",
   "reading": "ARIF procured 120 Galaxy Tab Active5 5G tablets for, among other uses, Xylella monitoring. The page states the status 'Aggiudicazione definitiva' and opened offers on 16/09/2024. It states no award date, no delivery date and no GNSS requirement. No monitoring record states its device."
+ },
+ {
+  "id": "istat-confini-unita-amministrative-2026-non-generalizzati",
+  "use": "region extent",
+  "publisher": "ISTAT",
+  "title": "Confini delle unità amministrative a fini statistici al 1 gennaio 2026, non generalizzati",
+  "documentation": "https://www.istat.it/wp-content/uploads/2024/04/Descrizione-dati-Confini-unita-amministrative-fini-statistici.pdf",
+  "role": "official-dataset",
+  "access": "public",
+  "url": "https://www.istat.it/storage/cartografia/confini_amministrativi/non_generalizzati/2026/Limiti01012026.zip",
+  "bytes": 98536297,
+  "sha256": "a9075f8d839dcb2b409099703da7bdd37cc214f8967fa7372b32305875ad046f",
+  "captured_at": "2026-09-22T21:57:18+00:00",
+  "content_type": "application/zip",
+  "last_modified": "2026-03-06T09:47:36+00:00",
+  "member": "Reg01012026/Reg01012026_WGS84",
+  "feature": {
+   "field": "COD_REG",
+   "value": 16
+  },
+  "selector": "member Reg01012026/Reg01012026_WGS84 (.shp, .shx, .dbf, .prj), feature COD_REG 16, DEN_REG 'Puglia': every vertex of the region's boundary, in the member's frame, WGS 84 / UTM zone 32N",
+  "reading": "Puglia's official extent, ISTAT's statistical boundary of the region at 1 January 2026, not generalized, taken at its extreme vertices:"
  }
 ]

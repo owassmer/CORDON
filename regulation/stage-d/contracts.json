@@ -262,42 +262,12 @@
         "sampling date",
         "report date",
         "official confirmation basis",
-        "location as published",
-        "positional qualification"
+        "location as published"
       ],
-      "field_roles": {
-        "positional qualification": [
-          "official-record",
-          "official-dataset",
-          "qualified-observation"
-        ]
-      },
-      "positional_qualification": {
-        "stated": "cordon_d.spatial.positional_qualification: the horizontal error of a located observation against its true position on the ground, stated in EPSG:32633. It is the device term; no map error and no locality enter it. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
-        "replacing_input": {
-          "applies_to": "one fix, or one device class and capture mode, stated per record",
-          "one_of": [
-            "ARIF's per-fix horizontal accuracy, or the device and capture mode (GNSS fix or map placement), per record",
-            "a bound measured from independent re-samples of the same plant: another team, day or tablet, linked by ID_CAMPIONE",
-            "a calibration of the documented device and app on surveyed control points"
-          ],
-          "fields": [
-            "fix or device class and capture mode it applies to",
-            "method",
-            "horizontal error in metres",
-            "statistic: per-fix estimate, 95% value or maximum",
-            "reference position and the reference's own error, where the method has one",
-            "date",
-            "sources"
-          ],
-          "default": "none: until one is held, the stated device term stands and its basis says so"
-        }
-      },
       "acquisition_routes": [
         "official finding/prescription acts and annexes",
         "CNR/other official test reports",
-        "CAMP workbooks and SIT observation records",
-        "published device accuracy tests and the monitoring device procurement, for the positional qualification"
+        "CAMP workbooks and SIT observation records"
       ],
       "sufficiency": "An official act explicitly establishing an infected plant can supply that fact directly. A CAMP result supplies its published result label; it does not independently prove each assay, pool decomposition or official-confirmation condition. Asymptomatic is not uninfected. A new report can qualify the same finding more deeply.",
       "absence": "Unobserved, unreported and negative are different. Preserve useful established findings despite missing deeper analytical fields.",
@@ -483,7 +453,8 @@
         "official field inventory and geolocated plant records",
         "finding/removal annexes",
         "qualified survey records",
-        "validated observation-derived inventories with stated limitations"
+        "validated observation-derived inventories with stated limitations",
+        "published device accuracy tests, the monitoring device procurement and ISTAT's regional boundary, for the positional qualification of a location"
       ],
       "sufficiency": "Required populations follow A and C, not the available dataset. A sample ID, tree-crown candidate and legally identified plant are different evidential identities. A complete monitoring download or parcel list is not a complete required-plant census. Source-qualified estimates remain estimates.",
       "absence": "Unknown members or inventory incompleteness affect universal/all-member conclusions, not a separately identified positive plant.",
@@ -491,7 +462,29 @@
         "official-record",
         "official-dataset",
         "qualified-observation"
-      ]
+      ],
+      "positional_qualification": {
+        "field": "location",
+        "stated": "cordon_d.spatial.positional_qualification: the horizontal error of a located monitoring observation's recorded position, the plant's location, against its true position on the ground, stated in EPSG:32633. The error is the stated device term plus the grid distortion over the longest distance C measures around a point, bounded from the Transverse Mercator definition over Puglia's official extent; no map error and no locality enter it. The device term is a stated device-class accuracy and was not measured on these fixes. No record states its device or capture mode.",
+        "replacing_input": {
+          "applies_to": "one fix, or one device class and capture mode, stated per record",
+          "one_of": [
+            "ARIF's per-fix horizontal accuracy, or the device and capture mode (GNSS fix or map placement), per record",
+            "a bound measured from independent re-samples of the same plant: another team, day or tablet, linked by ID_CAMPIONE",
+            "a calibration of the documented device and app on surveyed control points"
+          ],
+          "fields": [
+            "fix or device class and capture mode it applies to",
+            "method",
+            "horizontal error in metres",
+            "statistic: per-fix estimate, 95% value or maximum",
+            "reference position and the reference's own error, where the method has one",
+            "date",
+            "sources"
+          ],
+          "default": "none: until one is held, the stated device term stands and its basis says so"
+        }
+      }
     },
     {
       "id": "protected-status",

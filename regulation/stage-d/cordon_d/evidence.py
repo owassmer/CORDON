@@ -83,15 +83,9 @@ class Assertion:
         return self.context, self.event_date, self.consumer_version, self.predicate
 
 
-def require_admissible(contract: dict, sources, *, field: str | None = None):
-    """Every source's role is one the contract admits, for the whole instance or for one field.
-
-    A field admits the roles its contract lists for it under `field_roles`; a field the
-    contract does not list there admits the contract's instance roles.
-    """
-    if field is not None and field not in contract['fields']:
-        raise ValueError(f'{contract["id"]} has no field {field}')
-    permitted = set(contract.get('field_roles', {}).get(field, contract['admissible_instance_roles']))
+def require_admissible(contract: dict, sources):
+    """Every source's role is one the contract admits for an instance fact."""
+    permitted = set(contract['admissible_instance_roles'])
     for source in sources:
         if source.role not in permitted:
             raise ValueError(f'{source.role} does not establish an instance fact under {contract["id"]}')
