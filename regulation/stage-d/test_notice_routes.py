@@ -10,7 +10,7 @@ import copy
 import unittest
 
 from cordon_c.core import Snapshot
-from cordon_d.notice_routes import COMPLETED, IMPOSSIBLE, RULE, c_result, mass_publicity_basis, validate
+from cordon_d.notice_routes import COMPLETED, RULE, STATED_GROUND, c_result, mass_publicity_basis, validate
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = 'bd7f7bd2162ad5a14eaf9e3e8114733f2170f20f8f0486261d05f72dadcf8375'
@@ -63,14 +63,14 @@ class MassPublicityBasis(unittest.TestCase):
             with self.subTest(path=path), self.assertRaises(ValueError):
                 validate(broken, PAGES)
 
-    def test_a_stated_ground_awaits_A_and_is_not_a_finding(self):
+    def test_a_stated_ground_is_the_acts_own_and_completion_stays_open(self):
+        # Owen's 2026-09-24 ruling: the act's own stated ground meets Art. 21-bis; C does not re-judge it.
         basis = mass_publicity_basis(response(), instrument='REG-PUGLIA-U181-DIR-2026-00063')
         self.assertEqual([g['literal'] for g in basis['stated_ground']], [GROUND])
         self.assertEqual([g['literal'] for g in basis['restated_rule']], [GENERAL])
         result = c_result(self.s, basis, self.at)
         self.assertIsNone(result.truth)
-        self.assertIn("A decision on REG-PUGLIA-U181-DIR-2026-00063's stated mass-publicity ground: " + GROUND,
-                      result.needs)
+        self.assertNotIn(f'predicate: {self.vid} :: {STATED_GROUND}', result.needs)
         self.assertIn(f'predicate: {self.vid} :: {COMPLETED}', result.needs)
 
     def test_a_restated_rule_alone_supplies_nothing(self):
@@ -78,7 +78,7 @@ class MassPublicityBasis(unittest.TestCase):
         values['grounds'] = values['grounds'][:1]
         result = c_result(self.s, mass_publicity_basis(response(values), instrument='X'), self.at)
         self.assertIsNone(result.truth)
-        self.assertIn(f'predicate: {self.vid} :: {IMPOSSIBLE}', result.needs)
+        self.assertIn(f'predicate: {self.vid} :: {STATED_GROUND}', result.needs)
 
     def test_a_held_posting_is_named_for_A_and_does_not_complete_publicity(self):
         basis = mass_publicity_basis(response(), instrument='I')

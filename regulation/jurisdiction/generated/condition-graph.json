@@ -3569,17 +3569,15 @@
             "when": {
               "all_of": [
                 {
-                  "any_of": [
-                    {
-                      "predicate": "recipient number makes personal communication impossible for the exact act"
-                    },
-                    {
-                      "predicate": "recipient number makes personal communication particularly burdensome for the exact act"
-                    }
-                  ]
+                  "predicate": "the act states its own ground for reaching its recipients by public posting"
                 },
                 {
-                  "predicate": "the suitable publicity established by the administration for that act has been completed"
+                  "predicate": "the publicity form the act states has been completed"
+                },
+                {
+                  "not": {
+                    "predicate": "a court has annulled the act on its stated ground for public posting"
+                  }
                 }
               ]
             },
@@ -3590,8 +3588,8 @@
           "effect": "RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED"
         }
       },
-      "true_effect": "Establish and complete suitable act-specific publicity in place of personal communication.",
-      "false_effect": "If personal communication is possible and not particularly burdensome, this mass-publicity route is unavailable. Missing recipient-count or burden evidence remains UNKNOWN."
+      "true_effect": "The act becomes effective against its recipients through completion of the publicity form it states, in place of personal communication.",
+      "false_effect": "This mass-publicity route is not established. An act that states no ground of its own for public posting does not reach it, and personal communication to each recipient stays required. An incomplete or unrecorded posting remains unknown, not completed."
     },
     {
       "stable_provision_id": "IT-L241-A21BIS:Art.21-bis(1):motivated-immediate-effect",
@@ -3665,7 +3663,14 @@
                   "predicate": "the commencement work the prescription states is lawfully due from this recipient"
                 },
                 {
-                  "predicate": "legally sufficient notification of that prescription to this recipient has occurred"
+                  "any_of": [
+                    {
+                      "predicate": "the communication to that recipient has been effected, including in the forms prescribed for notification to the unreachable in the cases provided by the code of civil procedure"
+                    },
+                    {
+                      "provision_ref": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route"
+                    }
+                  ]
                 },
                 {
                   "predicate": "the source notification-based commencement deadline has elapsed"
@@ -5070,6 +5075,87 @@
       "false_effect": "Publication alone does not establish effectiveness against the recipient."
     },
     {
+      "stable_provision_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+      "provision_version_id": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "predicate": "the trunk diameter the plant's official record states, measured 130 cm above the ground (for a fragmented trunk, of the reconstructed whole trunk), is at least 100 cm"
+            },
+            "effect": "ARTICLE_2_1_A_CRITERION_MET"
+          }
+        ],
+        "otherwise": {
+          "effect": "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED"
+        }
+      },
+      "true_effect": "The olive has the monumental character of Article 2(1)(a): a plurisecular age shown by a trunk diameter of at least 100 cm measured 130 cm above the ground.",
+      "false_effect": "Article 2(1)(a) is not shown by this measurement. Article 2(1)(b) and 2(2) remain other grounds of the characteristics; a missing measurement, or one taken at another height, remains unknown."
+    },
+    {
+      "stable_provision_id": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "provision_version_id": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "the tree has its own entry in a list approved provisionally and published on BURP under Article 5(2) on or before the event date"
+                },
+                {
+                  "not": {
+                    "predicate": "the Giunta's definitive decision on that entry was published on BURP on or before the event date"
+                  }
+                }
+              ]
+            },
+            "effect": "RECOGNITION_DECISION_PENDING"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_PENDING_DECISION_FROM_THE_LIST"
+        }
+      },
+      "true_effect": "A recognition decision on the tree's own entry is pending: the entry was approved provisionally and published on BURP, and the Giunta's definitive decision on it has not been published. The tree is not listed.",
+      "false_effect": "The list gives no pending recognition decision for this tree at the event date. Missing entry or act dates remain unknown."
+    },
+    {
+      "stable_provision_id": "PUG-LR14-2007:Art.5(3):definitive-listing",
+      "provision_version_id": "PUG-LR14-2007:Art.5(3):definitive-listing:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "the tree has its own entry in an Article 5 list"
+                },
+                {
+                  "predicate": "the Giunta approved that entry definitively and the list containing it was republished on BURP on or before the event date"
+                },
+                {
+                  "not": {
+                    "predicate": "the entry was deleted from the list on or before the event date"
+                  }
+                }
+              ]
+            },
+            "effect": "TREE_LISTED"
+          }
+        ],
+        "otherwise": {
+          "effect": "TREE_NOT_LISTED"
+        }
+      },
+      "true_effect": "The tree is inserted in the Article 5 list of monumental olives (“inserito nell'elenco”) from the BURP republication of the Giunta's definitive approval of its own entry, until that entry is deleted.",
+      "false_effect": "The tree is not inserted in the Article 5 list at the event date. A provisional entry, lapse of the thirty-day opposition window, or a listed grove without an entry of the tree's own does not list it. Missing entry or act dates remain unknown."
+    },
+    {
       "stable_provision_id": "PUG-LR3-2010:Art.3-bis(1)(a)",
       "provision_version_id": "PUG-LR3-2010:Art.3-bis(1)(a):v1",
       "operator": "AND",
@@ -6080,7 +6166,7 @@
                   }
                 },
                 {
-                  "predicate": "official protected/value designation"
+                  "provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"
                 },
                 {
                   "provision_ref": "EU-2020-1201:7(3)(a)"
@@ -6121,6 +6207,16 @@
       "operator": "AND",
       "expression": {
         "all_of": [
+          {
+            "any_of": [
+              {
+                "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+              },
+              {
+                "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+              }
+            ]
+          },
           {
             "predicate": "exact higher-law derogation"
           },
@@ -6221,7 +6317,17 @@
       "expression": {
         "all_of": [
           {
-            "predicate": "infected monumental or visually qualifying olive"
+            "predicate": "infected olive"
+          },
+          {
+            "any_of": [
+              {
+                "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+              },
+              {
+                "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+              }
+            ]
           },
           {
             "predicate": "owner election"
@@ -6287,32 +6393,6 @@
       "false_effect": "No no-treatment conclusion follows when the exact case direction is not established."
     },
     {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00002:case-delta:act-specific-mass-publicity-basis:v1",
-      "operator": "AND",
-      "expression": {
-        "all_of": [
-          {
-            "predicate": "effective order"
-          },
-          {
-            "predicate": "unlocatable recipients"
-          },
-          {
-            "predicate": "particularly burdensome personal communication"
-          },
-          {
-            "predicate": "selected suitable publicity"
-          }
-        ],
-        "otherwise": {
-          "effect": "No other case notice route is validated."
-        }
-      },
-      "true_effect": "Permit this act’s mass-publicity route only through its stated unlocatable-recipient and burdensome-personal-notice predicates.",
-      "false_effect": "No other case notice route is validated."
-    },
-    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
       "operator": "ROUTE_TABLE",
@@ -6325,10 +6405,24 @@
                   "predicate": "negative result"
                 },
                 {
-                  "predicate": "apparent monumental characteristics"
+                  "any_of": [
+                    {
+                      "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+                    },
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "pending recognition decision"
+                  "any_of": [
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+                    },
+                    {
+                      "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+                    }
+                  ]
                 },
                 {
                   "predicate": "the population in question holds held olives"
@@ -6349,10 +6443,24 @@
                   "predicate": "negative result"
                 },
                 {
-                  "predicate": "apparent monumental characteristics"
+                  "any_of": [
+                    {
+                      "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+                    },
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+                    }
+                  ]
                 },
                 {
-                  "predicate": "pending recognition decision"
+                  "any_of": [
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+                    },
+                    {
+                      "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+                    }
+                  ]
                 },
                 {
                   "predicate": "the population in question holds held olives"
@@ -6369,7 +6477,7 @@
           "effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route."
         }
       },
-      "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately). Wholly held olives, a held olive being a visually qualifying, negative olive whose recognition and any required landscape authorization are pending (the three leaves), is not lawfully due while that resolves (POPULATION_NOT_LAWFULLY_DUE). Held olives with other plants, for example \"la pianta infetta\", stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). This is not Article 7(3) retention.",
+      "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately). Wholly held olives, a held olive being a negative olive with the Article 2 characteristics whose recognition, or the definitive decision on its provisional list entry, and any required landscape authorization are pending (v1's three conjuncts), is not lawfully due while that resolves (POPULATION_NOT_LAWFULLY_DUE). Held olives with other plants, for example \"la pianta infetta\", stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). This is not Article 7(3) retention.",
       "false_effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route."
     },
     {
@@ -9251,32 +9359,6 @@
       },
       "true_effect": "Resolve the case through the Article 7 version effective at decision time, including the M5 alternative evidence routes; the copied pre-M5 letter (e) wording cannot narrow or enlarge the population.",
       "false_effect": "No case population is derived from stale embedded text alone."
-    },
-    {
-      "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:act-specific-mass-publicity-basis:v1",
-      "operator": "AND",
-      "expression": {
-        "all_of": [
-          {
-            "predicate": "effective supplement"
-          },
-          {
-            "predicate": "source finding of unlocatable recipients"
-          },
-          {
-            "predicate": "source finding of particularly burdensome personal communication"
-          },
-          {
-            "predicate": "selected suitable publicity route"
-          }
-        ],
-        "otherwise": {
-          "effect": "This case-specific predicate does not validate publication routes in any other order."
-        }
-      },
-      "true_effect": "Permit the act-specific seven-day mass-publicity route because the act expressly finds unlocatable recipients and particularly burdensome personal notification.",
-      "false_effect": "This case-specific predicate does not validate publication routes in any other order."
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2026-00063:case-delta:omitted-parcel-supplement",

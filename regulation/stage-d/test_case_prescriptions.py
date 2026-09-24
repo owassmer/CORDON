@@ -15,9 +15,9 @@ from cordon_d.calendar import national_calendar
 from unittest import mock
 
 from cordon_d import case_prescriptions
-from cordon_d.case_prescriptions import (NOTICE, PrescriptionReading, apply_references, c_result, clause,
-                                         governing_references, on_cited, read_prescription, stated_limits,
-                                         validate)
+from cordon_d.case_prescriptions import (COMMUNICATED, PrescriptionReading, apply_references, c_result, clause,
+                                         governing_references, on_cited, personal_notice, read_prescription,
+                                         stated_limits, validate)
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
@@ -137,13 +137,13 @@ class CasePrescriptionRecords(unittest.TestCase):
         record = next(reading().records(self.s))
         result = c_result(self.s, record, date(2024, 9, 2))
         self.assertIsNone(result.truth)
-        self.assertTrue(any(NOTICE in need for need in result.needs))
+        self.assertTrue(any(COMMUNICATED in need for need in result.needs))
 
     def test_c_computes_from_the_stated_term_once_notice_and_history_are_held(self):
         record = next(reading().records(self.s))
         notified = datetime(2024, 9, 2, 9, tzinfo=ROME)
         evaluated = notified + timedelta(days=11)
-        common = dict(notification=notified, evaluated_at=evaluated, zone=ROME, calendar=national_calendar(),
+        common = dict(**personal_notice(self.s, date(2024, 9, 2), notified), evaluated_at=evaluated, zone=ROME, calendar=national_calendar(),
                       commencement_records_complete=True, work_due=True, coercion_due=True)
         self.assertEqual(c_result(self.s, record, date(2024, 9, 2), **common).effect,
                          'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
@@ -222,7 +222,7 @@ class CasePrescriptionRecords(unittest.TestCase):
         record = next(reading().records(self.s))
         self.assertEqual(record['governing_A_references'], ())
         at, notified = date(2024, 9, 2), datetime(2024, 9, 2, 9, tzinfo=ROME)
-        held = dict(notification=notified, evaluated_at=notified + timedelta(days=11), zone=ROME,
+        held = dict(**personal_notice(self.s, at, notified), evaluated_at=notified + timedelta(days=11), zone=ROME,
                     calendar=national_calendar(), commencement_records_complete=True)
         self.assertEqual(c_result(self.s, record, at, **held).effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
         needs = c_result(self.s, record, at).needs
@@ -231,7 +231,7 @@ class CasePrescriptionRecords(unittest.TestCase):
     def test_a_court_disposition_closes_liveness_only_for_its_stated_scope(self):
         record = next(reading().records(self.s))
         at, notified = date(2024, 9, 2), datetime(2024, 9, 2, 9, tzinfo=ROME)
-        held = dict(notification=notified, evaluated_at=notified + timedelta(days=11), zone=ROME,
+        held = dict(**personal_notice(self.s, at, notified), evaluated_at=notified + timedelta(days=11), zone=ROME,
                     calendar=national_calendar(), commencement_records_complete=True)
         decision = dict(kind='Sentenza', number='546/2023', register='202200281')
         annulled = dict(effect='annulled', scope='applicants', applicants='A. B.', outcome='annulla gli atti impugnati',
@@ -273,7 +273,7 @@ class CasePrescriptionRecords(unittest.TestCase):
         withdrawal = 'REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn'
         self.assertEqual(record['governing_A_references'], (withdrawal,))
         at, notified = date(2024, 3, 13), datetime(2024, 3, 1, 9, tzinfo=ROME)
-        held = dict(notification=notified, evaluated_at=datetime(2024, 3, 13, 12, tzinfo=ROME), zone=ROME,
+        held = dict(**personal_notice(self.s, at, notified), evaluated_at=datetime(2024, 3, 13, 12, tzinfo=ROME), zone=ROME,
                     calendar=national_calendar(), commencement_records_complete=True)
         change = {'from': 'REG-PUGLIA-U181-DIR-2024-00018', 'adopted': '2024-03-14', 'relationship': 'withdraws',
                   'extent': 'part', 'affected_payload': 'non si procederà all’estirpazione delle piante ospiti'}

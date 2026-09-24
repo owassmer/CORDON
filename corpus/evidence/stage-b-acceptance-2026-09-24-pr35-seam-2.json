@@ -3,10 +3,10 @@
   "seam": 2,
   "reviewer": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
-  "accepted_content_sha256": "aed79ca2a2963ae698ea3998e0da62c1df2fdefd8909052b9fd74e567f6c2755",
+  "accepted_content_sha256": "cbe0eaedf57762729b4f60e5cd3ac91a52ce5f11f1d0b567390a5ada88729a9e",
   "preceding_acceptance": {
-    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-23-pr29-seam-2.json",
-    "record_sha256": "3414ef8e114c72c7398f6e3fd8519da3f15b082c75a1f924502a5e6cab9e03cc"
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-2.json",
+    "record_sha256": "dff3a08a2a89c431d2cc24d4a00445300bb10f2fe4e59af1eb60928e4e165f10"
   },
-  "scope": "DDS 18/2024's withdrawal of the named orders' 50 m host removal is a new A version carrying the 50 m restatement its area-state rows carry; the DDS 45/2023 hold and the two ST1 olive rows gain v2 versions that keep their v1 quotes and carry v1's dispositions over unchanged. No clock or parameter changes. Binding takes effect only on merge."
+  "scope": "DDS 18/2024's withdrawal of the named orders' 50 m host removal is a new A version carrying the 50 m restatement its area-state rows carry; the DDS 45/2023 hold and the two ST1 olive rows gain v2 versions that keep their v1 quotes and carry v1's dispositions over unchanged; the hold's v2 carries PR #32's characteristics and pending-recognition conjuncts. No clock or parameter changes. Binding takes effect only on merge."
 }

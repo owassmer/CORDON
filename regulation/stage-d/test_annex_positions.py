@@ -18,7 +18,7 @@ from cordon_c.core import Snapshot
 from cordon_d import annex_positions
 from cordon_d.annex_positions import governing_results, parse, positions, supplying_rows
 from cordon_d.calendar import national_calendar
-from cordon_d.case_prescriptions import annex_position, c_result
+from cordon_d.case_prescriptions import annex_position, c_result, personal_notice
 from cordon_d.prescriptions import COERCE, WORK
 from cordon_d.store import blob_path, store_root
 
@@ -144,7 +144,7 @@ class AnnexPositions(unittest.TestCase):
 
     def test_at_a_position_the_withdrawal_reaches_c(self):
         at, notified = date(2024, 3, 14), datetime(2024, 3, 1, 9, tzinfo=ROME)
-        held = dict(notification=notified, evaluated_at=datetime(2024, 3, 14, 12, tzinfo=ROME), zone=ROME,
+        held = dict(**personal_notice(self.s, at, notified), evaluated_at=datetime(2024, 3, 14, 12, tzinfo=ROME), zone=ROME,
                     calendar=national_calendar(), commencement_records_complete=True)
         found = by_owner(positions(parse(BANDS, 3), '1/D'))
         vid = self.s.version(WITHDRAWAL, at)['provision_version_id']

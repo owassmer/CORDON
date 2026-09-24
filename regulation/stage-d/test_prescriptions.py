@@ -8,7 +8,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 import unittest
 
-from cordon_c.bindings import leaves, merge_facts, noncommencement_facts
+from cordon_c.bindings import leaves, listing_facts, mass_publicity_facts, merge_facts, noncommencement_facts
 from cordon_c.core import Evaluation, MissingInput, Snapshot, evaluate
 from cordon_c.quantities import clock_boundary
 from cordon_c.temporal import end_of_day
@@ -24,9 +24,12 @@ CLAUSE, WORK, COERCE = (
     'running from notification and commits the Osservatorio to direct coercive removal on noncommencement',
     'the commencement work the prescription states is lawfully due from this recipient',
     'removal of the population the prescription names for coercion is lawfully due')
-NOTICE = 'legally sufficient notification of that prescription to this recipient has occurred'
 REQUIRED, NOT_ESTABLISHED = ('CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED',
                              'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
+INDIVIDUAL = 'IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect'
+MASS = 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'
+COMMUNICATED = ('the communication to that recipient has been effected, including in the forms prescribed for '
+                'notification to the unreachable in the cases provided by the code of civil procedure')
 
 # DDS 108/2024 (BURP n. 68 of 22-8-2024; store 47b107a6…3a51a3d), operative point 11: "qualora il
 # proprietario/conduttore non proceda al concreto avvio delle attività di estirpazione della pianta infetta e
@@ -69,14 +72,20 @@ class StatedTermRule(unittest.TestCase):
                             results=results or {}, reading=reading, predicate=predicate, positioned=positioned,
                             cohort=record.get('cohort', ()))
 
+    def personal(self, at, effected):
+        """The Art. 21-ter notice conjunct's personal branch: whether communication to this recipient was effected."""
+        if effected is None:
+            return {}
+        return {(self.s.version(RULE, at)['provision_version_id'], COMMUNICATED): effected}
+
     def result(self, record, at, *, notified, evaluated, work=True, coerce=True, refs=(), results=None,
-               commencements=None, positioned=False):
+               commencements=None, positioned=False, notice=None):
         row = self.s.version(RULE, at)
         held = dict(refs=refs, results=results, positioned=positioned)
         facts = {(row['provision_version_id'], CLAUSE): record['clause'],
-                 (row['provision_version_id'], NOTICE): True,
                  (row['provision_version_id'], WORK): self.due(record, at, WORK, reading=work, **held),
                  (row['provision_version_id'], COERCE): self.due(record, at, COERCE, reading=coerce, **held)}
+        facts |= self.personal(at, True) if notice is None else notice
         if record['term'] is not None:
             facts = merge_facts(facts, noncommencement_facts(
                 self.s, CLOCK, at, notification=notified, evaluated_at=evaluated, stated_term=record['term'],
@@ -178,8 +187,11 @@ class StatedTermRule(unittest.TestCase):
             self.assertIsNone(self.effect(record, at, notified=notified, evaluated=evaluated,
                                           refs=refs, results=results))
         vid = self.vid(HOLD, at)
-        resolved = evaluate(self.s, HOLD, at, {(vid, p): p != 'pending recognition decision'
-                                               for p in leaves(self.s.version(HOLD, at)['condition_ast'])})
+        request = "the Osservatorio's recognition request for this tree awaits decision"
+        no_entry = listing_facts(self.s, at, own_entry=False, first_publication=None, definitive_decision=None,
+                                 deletion=None, entry_history_complete=True)
+        resolved = evaluate(self.s, HOLD, at, no_entry | {(vid, p): p != request
+                                                          for p in leaves(self.s.version(HOLD, at)['condition_ast'])})
         self.assertIs(resolved.truth, False)
         self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated,
                                      refs=(HOLD,), results=self.per(HOLD, resolved)), REQUIRED)
@@ -341,6 +353,105 @@ class StatedTermRule(unittest.TestCase):
         for predicate in (WORK, COERCE):
             self.assertIs(self.due(DDS113, at, predicate, refs=(WITHDRAWAL,), results=self.per(WITHDRAWAL, other),
                                    positioned=True).truth, True)
+
+
+class MassPublicityNotice(unittest.TestCase):
+    """Owen's ruling 1 through the Art. 21-ter notice conjunct (adjudication F1, route (a)).
+
+    Two otherwise identical records share one complete first-party 7-day albo posting; only whether the order
+    states its own ground for posting differs. The ground is the variable under test, not a reading of DDS 108.
+    A stated ground reads as DDS 63/2026 (store c88d31c9…7b48) and DDS 2/2023 print it: "mediante affissione per 7
+    giorni nell'albo pretorio del Comune in cui ricadono le piante da estirpare tenuto conto dell'irreperibilità di
+    alcuni destinatari e della gravosità per l'amministrazione di notificare i provvedimenti ai singoli beneficiari".
+    """
+    personal = StatedTermRule.personal
+    due = StatedTermRule.due
+    result = StatedTermRule.result
+    effect = StatedTermRule.effect
+    settled = StatedTermRule.settled
+    per = staticmethod(StatedTermRule.per)
+
+    @classmethod
+    def setUpClass(cls):
+        cls.s = Snapshot.load(ROOT)
+        cls.calendar = national_calendar()
+
+    def posting(self, at, ground):
+        start = datetime(2024, 9, 2, 9, tzinfo=ROME)
+        return mass_publicity_facts(self.s, at, ground_stated=ground, annulled_on_ground=False, posting_start=start,
+                                    postings={'albo': (start, datetime(2024, 9, 10, tzinfo=ROME))},
+                                    postings_complete=True, stated_period=('7', 'giorni'),
+                                    evaluated_at=datetime(2024, 10, 1, tzinfo=ROME), zone=ROME)
+
+    def direction(self, at, ground, *, personal):
+        facts, day = self.posting(at, ground)
+        evaluated = datetime(2024, 9, 21, 12, tzinfo=ROME)
+        row = self.s.version(RULE, at)
+        temporal = noncommencement_facts(self.s, CLOCK, at, notification=day, evaluated_at=evaluated,
+                                         stated_term=DDS108['term'], qualifying_commencements={},
+                                         commencement_records_complete=True, zone=ROME, calendar=self.calendar)
+        record = dict(DDS108, term=None)
+        base = {(row['provision_version_id'], CLAUSE): True,
+                (row['provision_version_id'], WORK): self.due(record, at, WORK),
+                (row['provision_version_id'], COERCE): self.due(record, at, COERCE)}
+        result = evaluate(self.s, RULE, at, merge_facts(base, temporal, facts, self.personal(at, personal)))
+        return day, temporal, result
+
+    def test_stated_ground_gives_notice_day_deadline_and_direction(self):
+        at = date(2024, 9, 2)
+        day, temporal, result = self.direction(at, True, personal=False)
+        # Independent expectation: 7 days of posting from 2 September run through 9 September; the 10-day term
+        # from that notice runs through 19 September, so it has lapsed on 21 September with no commencement.
+        self.assertEqual(day, date(2024, 9, 9))
+        self.assertEqual(clock_boundary(self.s, CLOCK, at, day, zone=ROME, calendar=self.calendar,
+                                        stated_term=DDS108['term']), end_of_day(date(2024, 9, 19), ROME))
+        self.assertTrue(all(v is True for v in temporal.values()))
+        self.assertEqual(result.effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+
+    def test_no_ground_order_gets_no_deadline_and_no_required_direction(self):
+        at = date(2024, 9, 2)
+        day, temporal, result = self.direction(at, False, personal=False)
+        self.assertIsNone(day)
+        self.assertTrue(all(isinstance(v, Evaluation) and v.truth is None for v in temporal.values()))
+        self.assertEqual(result.effect, 'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
+        # With no personal-communication record either, the direction stays unresolved and C names that record.
+        day, _, result = self.direction(at, False, personal=None)
+        self.assertIsNone(result.effect)
+        self.assertTrue(any('the communication to that recipient has been effected' in need for need in result.needs))
+
+    def test_immediate_effect_order_with_pec_delivery_gets_a_required_direction(self):
+        # DDS 188/2024 (store 882c0020…): no ground of its own for posting (l.196-198); "all'albo pretorio per 7 gg
+        # consecutivi e alla loro PEC qualora presente" (l.128-129); "Di dichiarare il presente provvedimento
+        # immediatamente esecutivo" with its reasons (l.191-193); ten days from notice, then "disporrà" (l.179-181).
+        # The PEC instant is synthetic. The reasoned clause neither gives nor defeats the PEC notice.
+        from cordon_c.bindings import notice_instant
+        at = date(2024, 12, 12)
+        record = dict(DDS108, instrument='REG-PUGLIA-U181-DIR-2024-00188')
+        individual = self.s.version(INDIVIDUAL, at)
+        clause = {(individual['provision_version_id'], p): True for p in leaves(individual['condition_ast'])}
+        self.assertIs(evaluate(self.s, INDIVIDUAL, at, clause).truth, False)  # the clause defeats that row's effect
+        start = date(2024, 12, 13)
+        facts, day = mass_publicity_facts(self.s, at, ground_stated=False, annulled_on_ground=False, posting_start=start,
+                                          postings={'albo': (start, date(2024, 12, 20))}, postings_complete=True,
+                                          stated_period=('7', 'gg consecutivi'),
+                                          evaluated_at=datetime(2025, 3, 1, tzinfo=ROME), zone=ROME)
+        self.assertIsNone(day)
+        pec = datetime(2024, 12, 13, 16, tzinfo=ROME)
+        facts = clause | facts | self.personal(at, True)
+        notified = notice_instant(self.s, RULE, at, facts, zone=ROME, instants={COMMUNICATED: pec, MASS: day})
+        self.assertEqual(notified, pec)
+        # Independent expectation: ten calendar days after a Friday notice end on Monday 23 December.
+        expected = end_of_day(date(2024, 12, 23), ROME)
+        self.assertEqual(clock_boundary(self.s, CLOCK, at, notified, zone=ROME, calendar=self.calendar,
+                                        stated_term=record['term']), expected)
+        # The order's own case delta is reached through its governing reference (lawful dueness, not notice).
+        delta = 'REG-PUGLIA-U181-DIR-2024-00188:case-delta:deferred-50m-workload-completion'
+        governed = dict(refs=(delta,), results=self.per(delta, self.settled(delta, at)), notice=facts)
+        self.assertEqual(self.effect(record, at, notified=notified, evaluated=expected + timedelta(hours=1), **governed),
+                         'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        # Before the term lapses no direction is required.
+        self.assertEqual(self.effect(record, at, notified=notified, evaluated=expected - timedelta(hours=1), **governed),
+                         'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
 
 
 if __name__ == '__main__':

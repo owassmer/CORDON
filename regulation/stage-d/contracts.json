@@ -112,7 +112,7 @@
         "publication date",
         "effective interval",
         "operative clause and annex selectors",
-        "supersession/correction/annulment basis",
+        "supersession/correction/annulment basis, including whether a court disposition annuls the act on its stated ground for public posting",
         "actual exercised choice where relevant"
       ],
       "acquisition_routes": [
@@ -170,7 +170,7 @@
         "communication content",
         "delivery/completion date or instant",
         "publication interval and continuity",
-        "act-specific mass-publicity basis",
+        "the act's own stated ground for public posting, verbatim with its page, kept apart from a recital restating Article 21-bis and from a plan instruction; and the publicity form the act states: place, and the period as printed (number and unit word)",
         "reasoned immediate-effect qualification"
       ],
       "acquisition_routes": [
@@ -497,19 +497,21 @@
         "interval"
       ],
       "fields": [
-        "official/provisional recognition",
+        "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
+        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics, in any wording that asserts it (held examples: \"caratteristiche di monumentalità\", \"caratteristiche monumentali\", \"requisiti di monumentalità\", \"carattere monumentale\"), or a measurement the note records (the trunk diameter, and its height where stated)",
         "applicable protection rule",
         "value assessment if that ground applies",
-        "pending status",
+        "the Osservatorio's recognition-request record for the tree",
         "landscape application/opinion/decision where required"
       ],
       "acquisition_routes": [
         "official monumental-tree lists and acts",
+        "the official monitoring record of the plant (MONUMENTALE_ARIF, NOTE_RILEVATORE)",
         "provisional recognition records",
         "specific protection instruments",
         "the competent permission or decision reached by the affected protected plant and intervention"
       ],
-      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion.",
+      "sufficiency": "Provisional candidates do not become formally recognized trees. Apply the exact event-time Article 7 ground; recognition is not the only current ground. An applicable regional retention policy can supply the exercised choice for a qualifying individual. Qualify identity through the actual adopted cohort/list, survey/date and place/parcel context; published UM/COD or OID alone is insufficient where repeated. Definitive approval requires its source-established basis, not elapsed opposition time alone; registry deletion does not prove physical removal. Where landscape permission is required, establish the actual applicable procedure, authorized plant/site/intervention, issued decision and incorporated conditions. A referral, pending application, opinion, replant-only consent or a grant for another project cannot substitute for the required conclusion. Article 2 characteristics (Owen's ruling of 2026-09-24) are established by the plant's official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding that the plant has monumental characteristics. The finding is named by its meaning: whether a note states it is D's reading of the record, and any wording that asserts it counts (held examples: \"caratteristiche di monumentalità\", \"caratteristiche monumentali\", \"requisiti di monumentalità\", \"carattere monumentale\"); a recorded measurement establishes them when it meets Article 2(1)(a) as A states it (PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion). A register listing is not required for them.",
       "absence": "No registry match alone does not prove lack of every protection/value ground.",
       "admissible_instance_roles": [
         "official-record",

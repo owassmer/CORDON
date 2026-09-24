@@ -475,7 +475,10 @@ suspension with no later disposition of its ricorso, a challenge ended with the
 court's stated reason, or a stated correction, replacement, revocation,
 suspension or withdrawal, whole or in part, that no A row records, leaves it
 unknown and names the act and the words stating what changes. Nothing is patched.
-`c_result` passes C only the notice and commencement evidence the caller holds;
+`c_result` passes C only the notice and commencement evidence the caller holds:
+the facts of the Art. 21-ter notice branches (the Art. 21-bis communication
+predicate, or the mass-publicity row) and each branch's instant, from which C's
+`notice_instant` takes the earliest instant among the branches A finds true;
 nothing absent is supplied. Publication fills notification only through A's
 mass-publicity route.
 
@@ -501,10 +504,11 @@ reason the order gives for reaching its recipients by publicity, marked as a
 statement about this act or a restatement of the general rule, and each form of
 publicity the order establishes: its words, its period as printed and its stated
 effect. Validation and the single stated reread follow the case-prescription
-reader. D decides neither Art. 21-bis predicate. A stated ground about the act
-and a held posting reach C as unresolved inputs naming the A decision they
-await; a restated rule supplies nothing, and without a stated ground C names
-its own missing predicate.
+reader. Under Owen's 2026-09-24 ruling the act's own stated ground meets
+Art. 21-bis and is not re-judged, so a ground the reading holds about the act
+is supplied as stated. A held posting reaches C unresolved, naming what its
+completion needs (the stated period and the posting's dates); a restated rule
+supplies nothing, and without a stated ground C names its own missing predicate.
 
 ## Court-decision events
 
