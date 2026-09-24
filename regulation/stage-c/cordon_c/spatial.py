@@ -53,6 +53,22 @@ def projection_distance_error(max_grid_distance_m: float, scale_bounds: tuple[fl
     return max_grid_distance_m * max(abs(1 / low - 1), abs(1 / high - 1))
 
 
+QUAD_SEGMENTS = 16
+
+
+def circumscribed(radius_m: float) -> float:
+    """Buffer radius whose drawn arcs keep the whole true offset.
+
+    A buffer draws each arc as chords between points at the given radius, so
+    the chords fall inside the true arc. GEOS rounds each arc's chord count,
+    so one chord can span 1.5 times the nominal pi / (2 * QUAD_SEGMENTS). At
+    this radius every chord lies outside the true arc: a grown shape contains
+    the true grown shape, and a shrunk shape keeps no point closer to the
+    boundary than the true radius.
+    """
+    return radius_m / cos(3 * pi / (8 * QUAD_SEGMENTS))
+
+
 def compatible(a: MetricGeometry, b: MetricGeometry):
     if a.crs != b.crs:
         raise ValueError("Geometries require the same explicit metric frame")
@@ -97,7 +113,7 @@ def minimum_enclosure(origin: MetricGeometry, enclosure: MetricGeometry, radius_
     if enclosure.geometry.covers(origin.geometry):
         return clearance
     error = origin.error_m + enclosure.error_m
-    if error and enclosure.geometry.buffer(error).covers(origin.geometry):
+    if error and enclosure.geometry.buffer(circumscribed(error), quad_segs=QUAD_SEGMENTS).covers(origin.geometry):
         return conjunction([clearance, Evaluation(None, needs=frozenset({"enclosure boundary precision"}))])
     return Evaluation(False)
 
@@ -168,18 +184,31 @@ def surface_in_band(surface: MetricGeometry, origin: MetricGeometry,
 
 
 def partial_parcel(parcel: MetricGeometry, adopted_area: MetricGeometry) -> Evaluation:
+    """Does some area of the true parcel lie in the true adopted area?
+
+    A geometry with error bound e stands for any true geometry between itself
+    shrunk by e and itself grown by e. The parcel is in the area when it lies
+    inside by more than the combined error, or when the two geometries, each
+    shrunk by its own error, still overlap. Beyond the combined error it is
+    outside. Otherwise the error bounds leave the relation open.
+    """
     compatible(parcel, adopted_area)
     if any(x.geometry.geom_type not in {"Polygon", "MultiPolygon"} for x in (parcel, adopted_area)):
         raise ValueError("Parcel relation requires polygons")
     error = parcel.error_m + adopted_area.error_m
-    overlap = parcel.geometry.intersection(adopted_area.geometry)
-    if error:
-        if parcel.geometry.distance(adopted_area.geometry) > error:
-            return Evaluation(False)
-        if parcel.geometry.buffer(-error).intersection(adopted_area.geometry.buffer(-error)).area == 0:
-            return Evaluation(None, needs=frozenset({"parcel overlap precision"}))
-    # Sharing only a cadastral edge does not place any parcel area inside.
-    return Evaluation(overlap.area > 0)
+    if not error:
+        # Sharing only a cadastral edge does not place any parcel area inside.
+        return Evaluation(parcel.geometry.intersection(adopted_area.geometry).area > 0)
+    if parcel.geometry.distance(adopted_area.geometry) > error:
+        return Evaluation(False)
+    if (adopted_area.geometry.covers(parcel.geometry)
+            and parcel.geometry.distance(adopted_area.geometry.boundary) > error):
+        return Evaluation(True)
+    parcel_core = parcel.geometry.buffer(-circumscribed(parcel.error_m), quad_segs=QUAD_SEGMENTS)
+    area_core = adopted_area.geometry.buffer(-circumscribed(adopted_area.error_m), quad_segs=QUAD_SEGMENTS)
+    if parcel_core.intersection(area_core).area > 0:
+        return Evaluation(True)
+    return Evaluation(None, needs=frozenset({"parcel overlap precision"}))
 
 
 def population_coverage(required: Mapping[str, Evaluation], completed: frozenset[str], *,
