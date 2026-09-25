@@ -587,7 +587,13 @@ the plant's `error_m` as `metric_point` returns it plus the entry's survey batch
 bound. The flag decides no identity. A code in the plant's note names an entry only
 when it equals, as a number, exactly one survey card in the plant's comune, that
 entry lies within d, and no other plant's note prints it; otherwise the identity
-stays unknown between the entries within d and "not a register tree". A batch bound
+stays unknown between the entries within d and "not a register tree". An entry's
+survey batch is the survey the recitals of the act that first listed it name for
+its group (its label's entries, split by survey date): the survey whose recital
+count is within 5% of the group's, or, where none fits, the one survey those
+recitals name for a group whose entries print survey dates. One survey is one batch
+across every label that carries it. Where the recitals name no survey, the batch is
+the label and the entry's survey dates. A batch bound
 is the 95th percentile of monitoring residuals: a flagged olive observation and the
 listed entry that are each other's nearest, in the same comune, within 50 m, their
 distance plus the observation's `error_m`. A pair is dropped only when a code in its
@@ -596,14 +602,15 @@ when the entry's batch uses the census tag as its card and the printed tag diffe
 from the card. A batch with fewer than 20 fixes takes the register-wide bound. Each
 note is read, cite-or-abstain, as stating that the plant has monumental
 characteristics (any wording that asserts it), not doing so, or unclear (negated,
-hedged, or naming the term without stating it of the plant); a negation of the tag
-or the census does not negate the characteristics. A measurement is supplied as
-printed, with `diameter_cm` and `measured_height_cm` read from its words; D compares
-none. An entry's acts come from the acts' decisions and history table, never from
-its label alone; where an act's recitals name the surveys that together make up
-exactly its provisional list, each survey is a batch of that act. The printed
-parcel is a gross-error screen only: every layer 1 and layer 0 entry's distance
-outside its printed parcel (SIT Catasto layer 2) is listed, a printed parcel that
-resolves to no Catasto parcel is counted with its cause, no parcel is guessed, and
-no screen distance enters a bound. The 2011 census check reads its tolerance from
-the held capitolato d'oneri.
+hedged, a monumental term followed by an identifier, which refers to a tree by its
+number and so may name another tree, or naming the term without stating it of the
+plant); a negation of the tag or the census does not negate the characteristics. A
+measurement is supplied as printed, with `diameter_cm` and `measured_height_cm` read
+from its words; a note that names the diameter and yields no value records
+"measurement not read"; D compares none. An entry's acts come from the acts'
+decisions and history table, never from its label alone; where an act's recitals
+name the surveys that together make up exactly its provisional list, each survey is
+a batch of that act. The 2011 census check reads its tolerance from the held
+capitolato d'oneri and checks the census's own bound; with fewer than 20 census
+fixes it is not checked, and the census residuals' own 95th percentile is printed
+as information.

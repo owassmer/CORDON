@@ -74,10 +74,23 @@ class TheRecordAsPrinted(unittest.TestCase):
                 self.assertEqual(reading.note, note)  # verbatim
         for note, cause in (('nella frazione dei 50 metri compresi nelle sottomaglia non sono presenti monumentali',
                              'negated'),
-                            ('codice monumentale n.  0158021', 'names the term without stating it of the plant')):
+                            ('codice monumentale n.  0158021', protection.REFERENCE),
+                            ('zona con alberi monumentali', 'names the term without stating it of the plant')):
             self.assertEqual((read_note(note).reading, read_note(note).cause), ('unclear', cause))
         for note in ('diametro 90 cm ad un metro e mezzo di altezza', 'codice regione puglia 0158595'):
             self.assertEqual(read_note(note).reading, 'does not')
+
+    def test_a_monumental_term_followed_by_an_identifier_refers_to_another_tree(self):
+        # Held on an order plant: the surveyor names a monumental tree outside the buffer by its number.
+        for note in ('fuori buffer monumentale n.0086552. zona contenimento',  # held, verbatim
+                     'vicino pianta monumentale n. 0158021'):  # a variant: a neighbour named in the note
+            with self.subTest(note=note):
+                reading = read_note(note)
+                self.assertEqual((reading.reading, reading.cause), ('unclear', protection.REFERENCE))
+                self.assertIsNone(characteristics_finding(record(note)).truth)
+        # The plant's own statement, with its tag printed later in the note, still states.
+        self.assertEqual(read_note('sintomi sospetti. pianta monumentale censita targhetta n. 0107007').reading,
+                         'states')
 
     def test_measurements_as_printed_with_numbers_read_from_the_words(self):
         m, = measurements('diametro 90 cm ad un metro e mezzo di altezza')  # 1901545
@@ -92,6 +105,18 @@ class TheRecordAsPrinted(unittest.TestCase):
                          ('diametro', 'superiore a', '130', 'cm', 'no height printed', Decimal(130), None))
         m, = measurements('caratteristiche monumentali diametro  cm 96 circa')  # order plant 0e92c74d4485, #2550
         self.assertEqual((m.qualifier, m.value, m.unit, m.height, m.diameter_cm), ('circa', '96', 'cm', 'no height printed', Decimal(96)))
+        # Order plant b4b95b9f1934: the value as printed, its leading comma kept.
+        m, = measurements("pianta non cartellinata con caratteristiche di monumentalita'' dim. ,9")
+        self.assertEqual((m.quantity, m.value, m.unit, m.diameter_cm), ('dim.', ',9', 'no unit printed', None))
+
+    def test_a_diameter_named_without_a_value_is_not_read_not_unprinted(self):
+        # No held note names the diameter without a value the reader reads; this is a variant.
+        m, = measurements('diametro fusto cm 110')
+        self.assertEqual((m.quantity, m.value, m.diameter_cm), ('diametro', protection.NOT_READ, None))
+        self.assertTrue(m.cause.startswith(protection.NOT_READ))
+        self.assertEqual(protection.diameter_inputs(record('diametro fusto cm 110')),
+                         ({'diameter_cm': None, 'measured_height_cm': None},))
+        self.assertEqual(measurements('codice regione puglia 0158595'), ())
 
     def test_a_stated_height_is_never_dropped(self):
         # A height whose number cannot be read withholds the diameter rather than letting C read 130 cm.
@@ -233,39 +258,49 @@ class HeldSources(unittest.TestCase):
         small = [b for b in bounds.values() if b.applies.startswith('register-wide')]
         self.assertTrue(small and all(b.error_m == round(float(numpy.percentile(wide, 95)), 2) for b in small))
         self.assertTrue(all('monitoring residuals' in b.method and 'parcel' not in b.method for b in bounds.values()))
-        census = [b for b in bounds.values() if b.check]
-        self.assertTrue(census and all('exceeded by' in b.check or 'within' in b.check for b in census))
+        # Every bound names the reference fixes it is computed from.
+        self.assertEqual(bounds[batch].observations, tuple(f.observation for f in fixes if not f.dropped and f.batch == batch))
+        self.assertTrue(all(len(b.observations) == len(wide) for b in small))
+
+    def test_the_2011_census_is_one_batch_across_its_labels_and_its_check_is_not_run_under_20_fixes(self):
+        # The recitals of DGR 1358/2012, DGR 357/2013 and DGR 2227/2013 name the SIT srl systematic survey.
+        acts = self.result['acts']
+        self.assertIn((protection.SIT, 127719), acts['DGR 1358/2012'].surveys)
+        self.assertIn((protection.SIT, 172340), acts['DGR 357/2013'].surveys)
+        self.assertIn((protection.SIT, 1783), acts['DGR 2227/2013'].surveys)
+        labels = {protection._canonical(self.result['entries'][o].label)
+                  for o, b in self.result['batches'].items() if b == protection.SIT}
+        self.assertEqual(labels, {'DGR 1358/2012', 'DGR 357/2012', 'DGR 2227/2013'})
+        own = [f.residual_m for f in self.result['fixes'] if not f.dropped and f.batch == protection.SIT]
+        self.assertLess(len(own), protection.MIN_FIXES)
+        bound = self.result['bounds'][protection.SIT]
+        self.assertTrue(bound.applies.startswith('register-wide'))
         # The tolerance is read from the held capitolato d'oneri, Art. 3 point 4, not written as a figure.
         metres, quotation, _ = protection.contract_terms(STORE)
         self.assertEqual(metres, 1.0)
         self.assertIn('ricevitore satellitare GPS differenziale', quotation)
-        self.assertTrue(all(quotation in b.check and '1.00 m plus' in b.check for b in census))
+        self.assertIn(quotation, bound.check)
+        self.assertIn(f'Not checked: the census has {len(own)} fixes, under 20, and takes the register-wide bound',
+                      bound.check)
+        self.assertIn(f"own 95th percentile, {float(numpy.percentile(own, 95)):.2f} m", bound.check)
+        self.assertEqual([b for b in self.result['bounds'].values() if b.check], [bound])
 
-    def test_the_printed_parcel_screen_lists_every_entry_outside_it(self):
-        import shapely
-        screens = self.result['parcel_screen']
+    def test_both_layers_are_kept_and_no_parcel_screen_or_survey_finding_is_emitted(self):
         held = [e for e in self.result['entries'].values() if e.layer in ('listed', 'provisional')]
         self.assertEqual(len(held), 341428 + 569)  # layer 0's ids overlap layer 1's; both layers are kept
-        self.assertEqual(sorted(s.entry for s in screens), sorted(e.oid for e in held))
-        self.assertTrue(all(s.distance_m is not None or s.cause for s in screens))
-        counts = protection.screen_counts(screens)
-        self.assertEqual(counts['inside'] + counts['outside'] + sum(counts['not_screened'].values()), len(held))
-        listed = protection.rows(self.result)['gross_error_screen']
-        self.assertEqual(len(listed['outside']), counts['outside'])
-        self.assertEqual({r['entry'] for r in listed['outside']}, {s.entry for s in screens if s.distance_m})
-        # By hand, from the captured Catasto page: entry 255604 (an AppOLEA report printed on OSTUNI 29/8).
-        entry = self.result['entries']['255604']
-        record = json.loads((ROOT / protection.SOURCES / protection.PARCELS).read_text())
-        rings = [ring for page in record['pages'] if "'G187'" in page['where']
-                 for f in json.loads(blob_path(STORE, page['sha256']).read_bytes())['features']
-                 if (f['attributes']['FOGLIO'], f['attributes']['NUMERO']) == ('29', '8')
-                 for ring in f['geometry']['rings']]
-        by_hand = min(shapely.Point(entry.x, entry.y).distance(shapely.Polygon(r)) for r in rings)
-        screen = next(s for s in screens if s.entry == '255604')
-        self.assertAlmostEqual(screen.distance_m, by_hand, places=1)
-        self.assertGreater(screen.distance_m, 1000)
-        # The screen enters no bound.
-        self.assertTrue(all('parcel' not in b.method for b in self.result['bounds'].values()))
+        out = protection.rows(self.result)
+        self.assertNotIn('gross_error_screen', out)
+        entry = out['zone_entries'][0]
+        self.assertFalse({'parcel_screen', 'survey_finding'} & set(entry))
+        # The printed cadastral reference stays, as printed.
+        e = self.result['entries'][entry['entry']]
+        self.assertEqual((entry['comune'], entry['foglio'], entry['particella']), (e.comune, e.foglio, e.particella))
+        # The qualification carries its date and its sources.
+        q = entry['qualification']
+        self.assertEqual(q['date'], DECISION.isoformat())
+        self.assertEqual(q['sources']['entry_point'], entry['source'])
+        self.assertIn(entry['batch'], q['sources']['reference_fixes'])
+        self.assertEqual(len(q['sources']['reference_fix_error']), 3)
 
     def test_survey_date_not_recorded_takes_the_register_wide_bound(self):
         entry = self.entry_labelled('DGR 1491/2020', lambda e: e.survey == 'survey date not recorded')
@@ -317,7 +352,10 @@ class HeldSources(unittest.TestCase):
         states = [p for p in group if any(n.reading == 'states' for n in p.record.notes)]
         unclear = [p for p in group if any(n.reading == 'unclear' for n in p.record.notes) and p not in states]
         measured = [p for p in group if p.record.measurements]
-        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (317, 2, 13, 318))
+        # Plan stage: 317, 2, 13, 318. Round 1 reads a monumental term followed by an identifier as a reference to
+        # another tree, so the notes of nine plants ("caratteristiche monumentali id 1604906", "... 1603982",
+        # "... 1545127") move from "states" to "unclear".
+        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (308, 11, 13, 309))
 
     def test_no_article_15_input_and_no_owner_names(self):
         out = json.dumps(protection.rows(self.result), ensure_ascii=False)

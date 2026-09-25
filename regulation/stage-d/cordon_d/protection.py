@@ -46,6 +46,10 @@ _NEGATED = re.compile(r"\b(non|senza|nessun\w*|priv\w*\s+di|ne)\s+(ha\s+|present
 _HEDGED = re.compile(r"(possibil\w*|presunt\w*|probabil\w*|apparent\w*|forse|sembr\w*|potenzial\w*|eventual\w*|"
                      r"presumibil\w*|dubbi\w*\s+(caratteristic|monument))\s+(\w+\s+){0,2}(caratteristic|monument)|"
                      r"monument\w*('+)?\s*(\?|da\s+verificar\w*|presunt\w*|dubbi\w*)", re.I)
+# A monumental term followed by an identifier ("fuori buffer monumentale n.0086552", "pianta monumentale n. 0158021"):
+# the note refers to a tree by its number, which need not be the plant.
+_REFERENCE = re.compile(r"monument\w*'*\s*(?:(?:n|nr|num|numero|cod\w*|id)\s*[.°:]?\s*\d+|\d{4,})", re.I)
+REFERENCE = 'a reference to another tree: the monumental term is followed by an identifier'
 
 
 @dataclass(frozen=True)
@@ -54,13 +58,13 @@ class NoteReading:
     note: str             # verbatim
     reading: str          # 'states' | 'does not' | 'unclear'
     cite: str | None      # the words the reading rests on
-    cause: str | None     # for 'unclear': negated, hedged, or the term without a statement of the plant
+    cause: str | None     # for 'unclear': negated, hedged, a reference to another tree, or the term alone
 
 
 def read_note(note: str) -> NoteReading:
     if not re.search(r"monum", note, re.I):
         return NoteReading(note, 'does not', None, None)
-    for pattern, cause in ((_NEGATED, 'negated'), (_HEDGED, 'hedged')):
+    for pattern, cause in ((_NEGATED, 'negated'), (_HEDGED, 'hedged'), (_REFERENCE, REFERENCE)):
         found = pattern.search(note)
         if found:
             return NoteReading(note, 'unclear', found.group(), cause)
@@ -73,13 +77,15 @@ def read_note(note: str) -> NoteReading:
 
 # --- measurements the note records ------------------------------------------------------------
 
-_QUANTITY = re.compile(r"(diametr\w*|circonferenz\w*|circ\.|dim\.|dimension\w*|dm\.?)\W{0,3}"
+# The value is kept as printed, a leading separator included ("dim. ,9").
+_QUANTITY = re.compile(r"(diametr\w*|circonferenz\w*|circ\.|dim\.|dimension\w*|dm\.?)(?:(?![.,]\d)\W){0,3}"
                        r"((?:tronco\s+)?(?:di\s+)?(?:circa\s+)?(?:superiore\s+a\s+)?(?:oltre\s+)?)"
-                       r"(cm|mt|m|metri|centimetri)?\s*(\d+(?:[.,]\d+)?)(?:\s*(cm|mt|m\b|metri|centimetri))?"
+                       r"(cm|mt|m|metri|centimetri)?\s*(\d+(?:[.,]\d+)?|[.,]\d+)(?:\s*(cm|mt|m\b|metri|centimetri))?"
                        r"(\s+circa)?", re.I)
 _HEIGHT = re.compile(r"(ad?\s+(?:un|uno|\d+(?:[.,]\d+)?)\s+(?:metr\w*|mt|m|cm)(?:\s+e\s+mezzo)?\s+"
                      r"(?:di\s+altezza|da\s+terra)|altezza\W+(?:\w+\W+){0,3}\d+(?:[.,]\d+)?\s*(?:cm|mt|m|metri)?)", re.I)
 _TO_CM = {'cm': 1, 'centimetri': 1, 'm': 100, 'mt': 100, 'metri': 100}
+NOT_READ = 'measurement not read'
 _WORDS = {'un': Decimal(1), 'uno': Decimal(1), 'due': Decimal(2), 'tre': Decimal(3)}
 
 
@@ -134,6 +140,12 @@ def measurements(note: str) -> tuple[Measurement, ...]:
         diameter = None if cause else Decimal(value.replace(',', '.')) * _TO_CM[unit.lower()]
         found.append(Measurement(quantity, qualifier, value, unit, height_words, diameter,
                                  height_cm, match.group().strip(), cause))
+    mention = re.search(r"diametr\w*", note, re.I)
+    if mention and not any(m.quantity.lower().startswith('diametr') for m in found):
+        # The note names the diameter and no value is read from it: the measurement is unread, not unprinted.
+        found.append(Measurement(mention.group(), '', NOT_READ, 'no unit printed', height_words, None, height_cm,
+                                 mention.group(), f'{NOT_READ}: the note mentions "{mention.group()}" and no value '
+                                                  'is read after it'))
     return tuple(found)
 
 
@@ -322,9 +334,28 @@ class ListAct:
     table: tuple[tuple[str, int, int, int], ...] = ()  # history table rows (act, provisional, deleted, definitive)
     cause: str | None = None            # why a date is missing
     batches: tuple[int, ...] = ()       # the survey batches its recitals name as making up its provisional list
+    surveys: tuple[tuple[str, int], ...] = ()  # (survey, trees) each survey its own recitals name, as they count it
 
 
 _DECISION = re.compile(r"\bDELIBERA\b")
+# The surveys the list acts' recitals name, with the trees each recital counts for this act's list.
+SIT = 'SIT srl systematic survey (the 2011 census)'
+_SURVEYS = (
+    # DGR 1358/2012: "la SIT srl ha restituito, nelle more ..., un elenco parziale di 127.719 esemplari"
+    (SIT, re.compile(r"SIT\s+srl\s+ha\s+restituito.{0,160}?elenco\s+par-?\s?ziale\s+di\s+([\d.]+)\s+esemplari")),
+    # DGR 357/2013: "la SIT srl ha restituito un elenco definitivo di 300.059 esemplari così costituito: • 127.719
+    # esemplari già oggetto di ... DGR n. 1358 ... • 172.340 esemplari validati ..."
+    (SIT, re.compile(r"SIT\s+srl\s+ha\s+restituito\s+un\s+elenco\s+definitivo.{0,400}?•\s*[\d.]+\s+esemplari\s+già"
+                     r".{0,300}?•\s*([\d.]+)\s+esemplari\s+validati")),
+    # DGR 2227/2013: "le ulteriori 1783 piante censite attraverso le rilevazioni della S.I.T."
+    (SIT, re.compile(r"([\d.]+)\s+piante\s+censite\s+attraverso\s+le\s+rilevazioni\s+della\s+S\.I\.T\.")),
+    # DGR 1358/2012: "LIFE+ Cent.Oli.Med ... sono stati censiti ulteriori 467 ulivi monumentali"
+    ('LIFE+ Cent.Oli.Med survey', re.compile(r"Cent\.Oli\.Med.{0,300}?censiti\s+ulteriori\s+([\d.]+)\s+ulivi")),
+    # DGR 345/2011: "il Corpo Forestale dello Stato ha rilevato 13049 alberi monumentali"
+    ('Corpo Forestale dello Stato survey', re.compile(
+        r"Corpo\s+Forestale\s+dello\s+Stato\s+ha\s+(?:rilevato|restituito\s+un\s+elenco\s+di\s+ulivi\s+monumentali\s+"
+        r"comprensivo\s+di)\s+([\d.]+)", re.I)),
+)
 
 
 def _text_pages(path: Path, number: int, year: int):
@@ -427,10 +458,15 @@ def read_act(path: Path, number: int, year: int, sha256: str) -> ListAct:
     # 127.719 esemplari" from SIT srl, and "censiti ulteriori 467 ulivi monumentali" under LIFE+ Cent.Oli.Med).
     batches = tuple(_count(next(g for g in m.groups() if g)) for m in re.finditer(
         r"elenco\s+par-?\s?ziale\s+di\s+([\d.]+)\s+esemplari|censiti\s+ulteriori\s+([\d.]+)\s+ulivi", recitals))
+    # The surveys are read from the act's own recitals, from its title on (a page may open on another act's end).
+    own = flat[title.start():] if title else flat
+    own = own[:_DECISION.search(own).start()] if _DECISION.search(own) else own
+    surveys = tuple(dict.fromkeys((survey, _count(m.group(1))) for survey, pattern in _SURVEYS
+                                  for m in pattern.finditer(own)))
     return ListAct(name, adopted, printed, published, sha256, pages,
                    _count(next(g for g in provisional.groups() if g)) if provisional else None,
                    tuple(definitive), _count(deleted.group(1)) if deleted else None, table,
-                   None if published else 'the capture prints no BURP date for the act', batches)
+                   None if published else 'the capture prints no BURP date for the act', batches, surveys)
 
 
 def list_acts(store: Path, root: Path = REPOSITORY) -> dict[str, ListAct]:
@@ -673,13 +709,7 @@ class BatchBound:
     fixes: int
     method: str
     check: str | None = None  # the 2011 contract's 1.00 m check, where it applies
-
-
-def survey_batch(entry: Entry) -> str:
-    label = _canonical(entry.label)
-    if entry.survey == 'survey date not recorded':
-        return f'{label}, survey date not recorded'
-    return f'{label}, surveyed {entry.survey_date.year}'
+    observations: tuple[str, ...] = ()  # the reference fixes the bound is computed from (their observations)
 
 
 def reference_fixes(flagged: list[tuple[str, str, float, float, float, tuple[str, ...]]], entries: list[Entry],
@@ -743,46 +773,89 @@ def batch_bounds(fixes: list[Fix], batches: set[str], tag_batches: set[str], *,
     register_wide = float(numpy.percentile(wide, 95)) if wide else None
     bounds = {}
     for batch in batches:
-        own = [f.residual_m for f in kept if f.batch == batch]
+        mine = [f for f in kept if f.batch == batch]
+        own = [f.residual_m for f in mine]
         form = 'census tag' if batch in tag_batches else 'survey-card number'
         if len(own) >= MIN_FIXES:
             bound = BatchBound(batch, form, batch, round(float(numpy.percentile(own, 95)), 2), '95th percentile',
-                               len(own), method)
+                               len(own), method, observations=tuple(f.observation for f in mine))
         else:
             bound = BatchBound(batch, form, f'register-wide ({len(own)} fixes in this batch, fewer than {MIN_FIXES})',
-                               round(register_wide, 2), '95th percentile', len(wide), method)
-        if batch in contract_batch and kept and contract:
+                               round(register_wide, 2), '95th percentile', len(wide), method,
+                               observations=tuple(f.observation for f in kept))
+        if batch in contract_batch and contract:
             metres, quotation, sha256 = contract
-            tolerance = metres + max(f.observation_error_m for f in kept)
-            excess = bound.error_m - tolerance
-            bound = BatchBound(**{**bound.__dict__, 'check': (
-                f"2011 census contract rep. 013042 (CIG 1154723B8D), capitolato d'oneri Art. 3 point 4 (sha256 "
-                f"{sha256[:12]}): \"{quotation}\". {metres:.2f} m plus the reference fix's own "
-                f"{tolerance - metres:.2f} m = {tolerance:.2f} m; the batch carries "
-                f"{bound.error_m:.2f} m: " + ('within' if excess <= 0 else f'exceeded by {excess:.2f} m') +
-                '. The measured bound stands either way.')})
+            check = (f"2011 census contract rep. 013042 (CIG 1154723B8D), capitolato d'oneri Art. 3 point 4 (sha256 "
+                     f"{sha256[:12]}): \"{quotation}\". ")
+            if len(own) >= MIN_FIXES:
+                # The contract's tolerance checks the census's own measured bound, never replaces it.
+                tolerance = metres + max(f.observation_error_m for f in mine)
+                excess = bound.error_m - tolerance
+                check += (f"{metres:.2f} m plus the reference fix's own {tolerance - metres:.2f} m = "
+                          f"{tolerance:.2f} m; the census's own bound is {bound.error_m:.2f} m: " +
+                          ('within' if excess <= 0 else f'exceeded by {excess:.2f} m') +
+                          '. The measured bound stands either way.')
+            else:
+                check += (f"Not checked: the census has {len(own)} fixes, under {MIN_FIXES}, and takes the "
+                          "register-wide bound." + (
+                              f" The census residuals' own 95th percentile, {float(numpy.percentile(own, 95)):.2f} "
+                              f"m over its {len(own)} fixes, is information only." if own else ''))
+            bound = BatchBound(**{**bound.__dict__, 'check': check})
         bounds[batch] = bound
     return bounds
 
 
 # --- survey batches and deleted entries ----------------------------------------------------------
 
-def survey_batches(entries: list[Entry]) -> dict[str, str]:
-    """Each entry's survey batch: its act label and its own survey date, split where the dates of one label leave a
-    gap of more than a year; an entry dated 1999-12-31 is 'survey date not recorded'."""
+def named_survey(group: list[Entry], act: ListAct | None) -> tuple[str | None, str]:
+    """The survey the recitals of the act that first listed the group name for it, and the rule that decides it.
+
+    A survey whose recital count is within 5% of the group's is the group's. Where none fits, a group whose entries
+    print survey dates belongs to the one survey the act's recitals name, if they name exactly one, and the two
+    counts are printed. Otherwise the recitals name no survey for the group."""
+    named = act.surveys if act else ()
+    head = f'{len(group)} entries first listed by {act.act if act else "no held act"}'
+    fitting = {s for s, c in named if abs(c - len(group)) <= TOLERANCE * c}
+    if len(fitting) == 1:
+        survey, = fitting
+        counts = ' and '.join(str(c) for s, c in named if s == survey)
+        return survey, f'{head}; its recitals count {counts} for {survey}, within {TOLERANCE:.0%}'
+    surveys = {s for s, _ in named}
+    if not fitting and len(surveys) == 1 and group[0].survey != 'survey date not recorded':
+        survey, = surveys
+        counts = ' and '.join(str(c) for _, c in named)
+        return survey, (f'{head}, with survey dates; its recitals name one survey, {survey}, and count {counts}: '
+                        'the counts do not fit, and the group is taken as that survey')
+    return None, (f'{head}; its recitals name ' + ('; '.join(f'{s} ({c})' for s, c in named) or 'no survey') +
+                  ('' if not named else ', and none fits the group alone'))
+
+
+def survey_batches(entries: list[Entry], chains: dict[str, Chain]) -> tuple[dict[str, str], list[str]]:
+    """Each entry's survey batch: the survey the list acts' recitals name (`named_survey`), one batch across every
+    label that carries it. Where they name none, the act label and the entry's own survey date, split where the
+    dates of one label leave a gap of more than a year; an undated entry is 'survey date not recorded'. Returns the
+    batches and the printed rule of each group."""
     by_label = defaultdict(list)
     for e in entries:
         by_label[(e.layer == 'deleted', _canonical(e.label))].append(e)
-    batches = {}
-    for (deleted, label), members in by_label.items():
+    batches, rules = {}, []
+    for (deleted, label), members in sorted(by_label.items()):
         for group in _survey_groups(members):
             first, last = group[0].survey, group[-1].survey
             span = first if first == last or first == 'survey date not recorded' else f'{first[:4]}..{last[:4]}'
             name = f'{label}, {"survey date not recorded" if span == "survey date not recorded" else "surveyed " + span}'
+            if deleted:
+                for e in group:
+                    batches[e.oid] = f'deleted by {e.oid.split("#")[0]}: its annex prints no survey'
+                continue
+            acts = {chains[e.oid].provisional for e in group if e.oid in chains}
+            survey, rule = named_survey(group, next(iter(acts))) if len(acts) == 1 else (
+                None, f'{len(group)} entries first listed by several acts')
+            rules.append(f'label {label}, survey group {span}: {rule}; batch: {survey or name}')
+            name = survey or name
             for e in group:
-                batches[e.oid] = (f'deleted by {e.oid.split("#")[0]}: its annex prints no survey' if deleted
-                                  else name)
-    return batches
+                batches[e.oid] = name
+    return batches, rules
 
 
 _GLYPH_DIGITS = {chr(0x3EC + i): str(i) for i in range(10)} | {'ͺ': '_', '͘': '.'}
@@ -1054,7 +1127,7 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
         chains[e.oid] = Chain(None, None, act, f'listed until {act.act} deleted it (its annex prints the key and point)',
                               False, 'the deleting act prints no approving act for the entry')
     everything = entries + deleted
-    batches = survey_batches(everything)
+    batches, batch_rules = survey_batches(everything, chains)
     causes = key_causes(entries)
     plants, negatives, terms, printing = population or affected_plants(store, decision, reach_start, root)
     infected = plants
@@ -1068,11 +1141,8 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
     flagged = [(p.plant, p.comune, p.x, p.y, p.error_m, tuple(n.note for n in p.record.notes)) for p in infected
                if p.kind == 'in-reach positive' and any(v in FLAGS for _, v in p.record.flags)]
     fixes = reference_fixes(flagged, everything, lambda e: oid_batch[e.oid], tag_batches)
-    # The 2011 census contract's batches: the entries its survey returned (DGR 357/2013's recital: the SIT srl
-    # survey, approved provisionally by DGR 1358/2012 and DGR 357/2013), surveyed 2011-2012.
-    census = {b for b in set(oid_batch.values())
-              if b.startswith(('DGR 1358/2012, surveyed 2011', 'DGR 357/2012, surveyed 2011'))}
-    bounds = batch_bounds(fixes, set(oid_batch.values()), tag_batches, contract_batch=census,
+    # The 2011 census contract's batch: the SIT srl systematic survey the list acts' recitals name.
+    bounds = batch_bounds(fixes, set(oid_batch.values()), tag_batches, contract_batch={SIT},
                           contract=contract_terms(store, root))
     located = [e for e in everything if e.x is not None]
     etree = cKDTree(numpy.array([[e.x, e.y] for e in located]))
@@ -1098,162 +1168,10 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
                     zone_entries.add(e.oid)
         zone_entries.update(oid for oid, _, _ in cand.entries)
     by_oid = {e.oid: e for e in everything}
-    # The printed-parcel screen runs after the bounds and feeds nothing back into them.
-    screens = gross_error_screen(entries, store, root)
     return {'acts': acts, 'checks': checks, 'unread_deletions': unread, 'entries': by_oid, 'chains': chains,
-            'batches': oid_batch, 'bounds': bounds, 'fixes': fixes, 'key_causes': causes, 'plants': out_plants,
-            'codes': codes, 'zone_entries': zone_entries, 'tag_batches': tag_batches, 'terms': terms,
-            'parcel_screen': screens}
-
-
-# --- gross-error screen: the printed parcel --------------------------------------------------------
-
-PARCELS = 'parcels.json'  # the capture of SIT Background/Catasto layer 2 (Particelle) for the printed parcels
-CATASTO = 'https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer'
-# Register spellings of comuni the Catasto layer (September 2021 cartography) names otherwise. Presicce merged into
-# Presicce-Acquarica in 2019. Accents, apostrophes and spaces are compared away (`_name_key`), not aliased.
-COMUNE_ALIASES = {'PRESICCE': 'PRESICCE-ACQUARICA', 'POLIGNANO': 'POLIGNANO A MARE',
-                  'S.MARZANO DI S.G.': 'SAN MARZANO DI SAN GIUSEPPE', 'S.G.ROTONDO': 'SAN GIOVANNI ROTONDO'}
-
-
-def _name_key(name: str) -> str:
-    return re.sub(r'[^A-Z]', '', (name or '').upper())
-
-
-def _catasto_number(text: str) -> str:
-    return str(int(text)) if text.isdigit() else text
-
-
-def printed_parcels(entry: Entry, codes: dict[str, str]) -> tuple[str | None, tuple[tuple[str, str], ...], str | None]:
-    """The entry's printed cadastral reference as Catasto keys: its comune code and every (foglio, particella) it
-    prints, or the cause it names none. A foglio or particella printed over several lines, or a particella list
-    ("27,256,659", "646-922"), names each printed number; nothing is guessed."""
-    name = (entry.comune or '').strip().upper()
-    code = codes.get(_name_key(COMUNE_ALIASES.get(name, name)))
-    fogli = sorted({_catasto_number(f) for f in re.split(r'\s+', entry.foglio or '') if f})
-    numeri = sorted({_catasto_number(n.rstrip('.').upper()) for n in re.split(r'[\s,;\-]+', entry.particella or '')
-                     if n.rstrip('.')})
-    if code is None:
-        return None, (), f'the comune {entry.comune!r} names no Catasto comune'
-    if not fogli:
-        return code, (), 'no foglio printed'
-    if not numeri:
-        return code, (), 'no particella printed'
-    return code, tuple((f, n) for f in fogli for n in numeri), None
-
-
-def _esri_polygon(rings):
-    """An ArcGIS polygon's rings as one shapely geometry: clockwise rings are exteriors, the others their holes."""
-    import shapely
-    rings = [r for r in rings if len(r) >= 4]
-    outers = [shapely.Polygon(r) for r in rings if not shapely.is_ccw(shapely.LinearRing(r))]
-    holes = [shapely.Polygon(r) for r in rings if shapely.is_ccw(shapely.LinearRing(r))]
-    polygons = []
-    for outer in outers:
-        inside = [h for h in holes if outer.contains(h.representative_point())]
-        polygons.append(shapely.Polygon(outer.exterior, [h.exterior for h in inside]))
-    return shapely.union_all(polygons) if len(polygons) > 1 else (polygons[0] if polygons else None)
-
-
-def catasto_codes(store: Path, root: Path = REPOSITORY) -> dict[str, str]:
-    """Comune name key → Catasto comune code, from the captured distinct names of layer 0 (Fogli)."""
-    record = json.loads((root / SOURCES / PARCELS).read_text())
-    names = json.loads(_blob(store, record['comuni']['sha256']).read_bytes())['features']
-    return {_name_key(f['attributes']['NOME_COMUNE']): f['attributes']['COMUNE'] for f in names}
-
-
-def parcel_geometries(store: Path, root: Path = REPOSITORY) -> dict[tuple[str, str, str], object]:
-    """(comune code, foglio, particella) → the parcel's geometry in EPSG:32633. Where Catasto holds several parcels
-    under one printed reference (allegato, sviluppo or sezione, which the register does not print), their union."""
-    import shapely
-    record = json.loads((root / SOURCES / PARCELS).read_text())
-    parts = defaultdict(list)
-    for page in record['pages']:
-        for feature in json.loads(_blob(store, page['sha256']).read_bytes()).get('features', []):
-            a = feature['attributes']
-            geometry = _esri_polygon((feature.get('geometry') or {}).get('rings', []))
-            if geometry is not None:
-                parts[(a['COMUNE'], _catasto_number(a['FOGLIO'].strip()), _catasto_number(a['NUMERO'].strip().upper()))
-                      ].append(geometry)
-    return {k: v[0] if len(v) == 1 else shapely.union_all(v) for k, v in parts.items()}
-
-
-@dataclass(frozen=True)
-class ParcelScreen:
-    """One entry's point against its printed parcel. A screen only: it never enters a bound."""
-    entry: str
-    layer: str
-    key: str | None
-    comune: str | None
-    foglio: str | None
-    particella: str | None
-    distance_m: float | None       # outside the printed parcel(s); 0 inside; None when not screened
-    unresolved: tuple[str, ...]    # printed parcels Catasto does not hold
-    lies_in: tuple[str, ...]       # for a point outside: the other printed parcels it lies in, if any
-    cause: str | None              # why the entry is not screened, or screened against part of its print
-
-
-def gross_error_screen(entries: list[Entry], store: Path, root: Path = REPOSITORY) -> list[ParcelScreen]:
-    """Every layer 1 and layer 0 entry's distance outside its printed parcel, in one vectorized pass: a shapely 2
-    distance over aligned arrays of points and printed-parcel geometries, then an STRtree query of the points that
-    lie outside against every printed parcel held, naming the printed parcel each lies in instead."""
-    import numpy
-    import shapely
-    codes = catasto_codes(store, root)
-    geometries = parcel_geometries(store, root)
-    screens, targets, target_of, points, rows = [], [], {}, [], []
-    for e in entries:
-        if e.layer not in ('listed', 'provisional'):
-            continue
-        code, printed, cause = printed_parcels(e, codes)
-        held = tuple(p for p in printed if (code, *p) in geometries)
-        missing = tuple(f'{code}:{f}:{n}' for f, n in printed if (code, f, n) not in geometries)
-        if cause is None and not held:
-            cause = 'the printed parcel resolves to no Catasto parcel'
-        elif cause is None and missing:
-            cause = 'screened against the printed parcels Catasto holds; the others resolve to none'
-        if cause is None and e.x is None:
-            cause = 'the entry has no point'
-        base = ParcelScreen(e.oid, e.layer, e.key, e.comune, e.foglio, e.particella, None, missing, (), cause)
-        if held and e.x is not None:
-            if (code, held) not in target_of:
-                target_of[(code, held)] = len(targets)
-                parts = [geometries[(code, *p)] for p in held]
-                targets.append((code, parts[0] if len(parts) == 1 else shapely.union_all(parts)))
-            points.append((e.x, e.y))
-            rows.append((len(screens), target_of[(code, held)]))
-        screens.append(base)
-    if not rows:
-        return screens
-    index = numpy.array([t for _, t in rows])
-    point_array = shapely.points(numpy.array(points))
-    distance = shapely.distance(point_array, numpy.array([g for _, g in targets], dtype=object)[index])
-    outside = numpy.flatnonzero(distance > 0)
-    keys = list(geometries)
-    tree = shapely.STRtree([geometries[k] for k in keys])
-    lies = defaultdict(list)
-    for point, parcel in zip(*tree.query(point_array[outside], predicate='within')):
-        lies[int(outside[point])].append(':'.join(keys[parcel]))
-    for i, (slot, _) in enumerate(rows):
-        screens[slot] = ParcelScreen(**{**screens[slot].__dict__, 'distance_m': round(float(distance[i]), 2),
-                                        'lies_in': tuple(sorted(lies.get(i, ())))})
-    return screens
-
-
-def screen_counts(screens: list[ParcelScreen]) -> dict:
-    """The screen's totals: entries inside, outside (with the distance's spread), and not screened, by cause."""
-    import numpy
-    out = [s.distance_m for s in screens if s.distance_m]
-    return {'entries': len(screens),
-            'screened': sum(1 for s in screens if s.distance_m is not None),
-            'inside': sum(1 for s in screens if s.distance_m == 0),
-            'outside': len(out),
-            'outside_m': {q: round(float(numpy.percentile(out, int(q[1:]))), 2) for q in ('p50', 'p95')} | {
-                'max': max(out)} if out else {},
-            'outside_over': {m: sum(1 for d in out if d > m) for m in (1, 5, 10, 25, 50, 100, 500)},
-            'outside_lying_in_another_printed_parcel': sum(1 for s in screens if s.distance_m and s.lies_in),
-            'not_screened': dict(Counter(s.cause for s in screens if s.distance_m is None)),
-            'screened_against_part': sum(1 for s in screens if s.distance_m is not None and s.cause)}
+            'batches': oid_batch, 'batch_rules': batch_rules, 'bounds': bounds, 'fixes': fixes, 'key_causes': causes,
+            'plants': out_plants, 'codes': codes, 'zone_entries': zone_entries, 'tag_batches': tag_batches,
+            'terms': terms, 'decision': decision}
 
 
 # --- the emitted rows -------------------------------------------------------------------------------
@@ -1291,47 +1209,37 @@ def rows(result: dict) -> dict:
                            'entries': [{'entry': e, 'distance_m': dist, 'd_m': d} for e, dist, d in c.entries],
                            'd': f"the plant's error_m {p.error_m} m + the entry's batch bound",
                            'identity': c.identity, 'rule': c.rule}})
-    screen = {s.entry: s for s in result['parcel_screen']}
-
-    def screened(s: ParcelScreen | None) -> dict | None:
-        return None if s is None else {'distance_outside_m': s.distance_m, 'lies_in': list(s.lies_in),
-                                       'unresolved': list(s.unresolved), 'cause': s.cause}
+    terms = result['terms']
+    reference_fix_sources = [s.identity for s in (terms.device_source, terms.award_source, terms.region_source)]
     zone = []
     for oid in sorted(result['zone_entries'], key=lambda o: (entries[o].layer, o)):
         e, chain, bound = entries[oid], chains.get(oid), bounds[batches[oid]]
         zone.append({
-            'parcel_screen': screened(screen.get(oid)),
             'entry': oid, 'layer': e.layer, 'key': e.key, 'card': e.card, 'key_causes': list(result['key_causes'].get(oid, ())),
             'label': e.label, 'bulletin_printed': e.bulletin, 'comune': e.comune, 'foglio': e.foglio,
             'particella': e.particella, 'point': {'x': e.x, 'y': e.y, 'crs': 'EPSG:32633'}, 'survey': e.survey,
             'source': e.source, 'batch': batches[oid],
             'qualification': {'applies_to': bound.applies, 'card_form': bound.card_form, 'error_m': bound.error_m,
                               'statistic': bound.statistic, 'fixes': bound.fixes, 'method': bound.method,
-                              'reference_fix_error_m': result['terms'].error_m, 'check': bound.check},
+                              'reference_fix_error_m': terms.error_m, 'check': bound.check,
+                              'date': result['decision'].isoformat(),
+                              'sources': {'entry_point': e.source,
+                                          'reference_fixes': f'bounds[{batches[oid]!r}].reference_fixes',
+                                          'reference_fix_error': reference_fix_sources}},
             'acts': None if chain is None else {
                 'provisional': _act(chain.provisional), 'definitive': _act(chain.definitive),
                 'deletion': _act(chain.deletion), 'rule': chain.rule, 'history_complete': chain.complete,
-                'cause': chain.cause},
-            'survey_finding': 'validated by the Technical Commission under Art. 2 (the approving act)'
-            if e.layer in ('listed', 'provisional') else None})
+                'cause': chain.cause}})
     return {'plants': plants, 'zone_entries': zone,
             'acts': [_act(a) | {'provisional': a.provisional, 'definitive_of': [list(d) for d in a.definitive],
-                                'deleted': a.deleted} for a in result['acts'].values()],
-            'chain_checks': result['checks'], 'unread_deletions': result['unread_deletions'],
+                                'deleted': a.deleted, 'surveys': [list(s) for s in a.surveys]}
+                     for a in result['acts'].values()],
+            'chain_checks': result['checks'], 'survey_batches': result['batch_rules'],
+            'unread_deletions': result['unread_deletions'],
             'reference_fixes': [{'observation': f.observation, 'entry': f.entry, 'batch': f.batch,
                                  'distance_m': round(f.distance_m, 2), 'observation_error_m': f.observation_error_m,
                                  'codes': [list(c) for c in f.codes], 'dropped': f.dropped} for f in result['fixes']],
             'bounds': {b: {'applies_to': v.applies, 'error_m': v.error_m, 'fixes': v.fixes, 'card_form': v.card_form,
-                           'check': v.check} for b, v in sorted(bounds.items())},
-            'tag_batches': sorted(result['tag_batches']),
-            'gross_error_screen': {
-                'rule': "each layer 1 and layer 0 entry's distance outside its printed parcel (SIT Catasto layer 2, "
-                        "September 2021 cartography); a screen only, never a term of any bound",
-                'comune_aliases': COMUNE_ALIASES, 'counts': screen_counts(result['parcel_screen']),
-                'outside': [{'entry': s.entry, 'layer': s.layer, 'key': s.key, 'comune': s.comune, 'foglio': s.foglio,
-                             'particella': s.particella} | screened(s)
-                            for s in sorted(result['parcel_screen'], key=lambda s: -(s.distance_m or 0))
-                            if s.distance_m],
-                'not_screened': [{'entry': s.entry, 'layer': s.layer, 'comune': s.comune, 'foglio': s.foglio,
-                                  'particella': s.particella, 'unresolved': list(s.unresolved), 'cause': s.cause}
-                                 for s in result['parcel_screen'] if s.distance_m is None]}}
+                           'check': v.check, 'reference_fixes': list(v.observations)}
+                       for b, v in sorted(bounds.items())},
+            'tag_batches': sorted(result['tag_batches'])}
