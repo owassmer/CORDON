@@ -70,6 +70,35 @@ RECORD = dict(instrument=DDS113, adopted='2023-10-16', source='dd2887bee294634c1
               coercive_words='delle piante infette e delle piante ricadenti nei 50 m', executor='ARIF', limits=())
 
 
+DDS96 = 'REG-PUGLIA-U181-DIR-2023-00096'
+FORK = 'REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork'
+# DDS 96/2023 (store dd5bebb3…cbf7), annex 1/D p. 19 rows 11-12, as `read_annex` places them: BOGGIANO ANNA holds
+# 50 m hosts only; APULEO LUCIA holds two listed infected plants.
+BOGGIANO = dict(annex='allegato 1/D', owner='BOGGIANO ANNA', printed='BOGGIANO ANNA',
+                parcels=[dict(foglio='17', particella='39')], fifty_metre_parcels=[dict(foglio='17', particella='39')],
+                listed_infected_plants=[], rows=['p. 19 row 11'])
+APULEO = dict(annex='allegato 1/D', owner='APULEO LUCIA', printed='APULEO LUCIA',
+              parcels=[dict(foglio='17', particella=p) for p in ('46', '66', '159', '245', '246')],
+              fifty_metre_parcels=[dict(foglio='17', particella=p) for p in ('46', '66', '159', '245', '246')],
+              listed_infected_plants=['1455708', '1584865'], rows=['p. 19 row 12'])
+# TAR Bari Sentenza 387/2026 (store f751acc2…2b02): its closure of DDS 96/2023 as `liveness_closures` returns it
+# from the retained disposition reading.
+TAR_387 = dict(
+    effect='ended-with-stated-reason', scope='whole-act', applicants='Lucia Apuleo',
+    outcome='dichiara improcedibili per sopravvenuta carenza di interesse il ricorso principale e quello per primi '
+            'motivi aggiunti',
+    dispositive_scope='', stated_scope=(),
+    stated_reason=('il ricorso principale è divenuto improcedibile in ragione del superamento della DDS n.96/2023 da '
+                   'parte della successiva DDS n.18/2024',
+                   'non si procederà all’estirpazione delle piante ospiti ricadenti nell’area di 50 m attorno alle '
+                   'piante infette”, con ciò concentrando le misure dell’eradicazione solo sulle piante infette.',
+                   'Analoghe considerazioni conducono a ritenere improcedibile il primo ricorso per motivi aggiunti'),
+    decision=dict(kind='Sentenza', number='387/2026', section='3', register='202301238', decided=date(2026, 2, 18),
+                  published=date(2026, 3, 25),
+                  source='f751acc2e9819e168b57d0dd2a453fee7aa127c9e8c96b3dc5bfbc86b02c8b02'),
+    since=date(2026, 3, 25))
+
+
 def by_owner(found):
     return {p['owner'] or p['printed']: p for p in found}
 
@@ -203,6 +232,29 @@ class AnnexPositions(unittest.TestCase):
         self.assertIsNone(cohort.truth)
         self.assertTrue(any("this recipient's position in" in need for need in cohort.needs))
 
+    def test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due(self):
+        # The court's stated reason is DDS 18/2024's withdrawal of the 50 m hosts, and every closure only withholds:
+        # the order's own unknown replaces only a due the rows leave true, so a not due keeps its row (round 2).
+        at = date(2026, 9, 24)
+        vid = self.s.version(WITHDRAWAL, at)['provision_version_id']
+
+        def at_position(position):
+            record = dict(RECORD, instrument=DDS96, adopted='2023-08-28', governing_A_references=(FORK, WITHDRAWAL),
+                          recipients=(position,))
+            return c_result(self.s, record, at, closures=[TAR_387],
+                            governing_results=governing_results(self.s, record, at, position))
+
+        hosts_only = at_position(BOGGIANO)
+        self.assertIs(hosts_only.truth, False)
+        self.assertEqual(hosts_only.effect, NOT_ESTABLISHED)
+        self.assertIn(vid, hosts_only.provisions)
+        self.assertFalse(any('TAR Sentenza 387/2026' in need for need in hosts_only.needs))
+        # A letter-a holder is due in part by the rows, so the court's words still decide it: unknown, naming them.
+        holder = at_position(APULEO)
+        self.assertIsNone(holder.truth)
+        self.assertTrue(any(need.startswith('the effect on this order of what TAR Sentenza 387/2026 states')
+                            for need in holder.needs))
+
     def test_position_records_drop_the_readings_note_that_the_annex_could_not_be_read(self):
         stale = dict(page=33, aspect='coverage', detail='Allegato 1/D (pages 33-34), which lists recipients and '
                      'parcels, has a scrambled text layer; which owner goes with which parcel cannot be read reliably.')
@@ -309,6 +361,22 @@ class RetainedAnnexes(unittest.TestCase):
             self.assertFalse(any(n.startswith('result of') for n in record['c']['needs']))
             self.assertTrue(any(n.startswith(f'predicate: {hold}:v2 :: the population in question holds')
                                 for n in record['c']['needs']))
+
+
+HELD_387 = TAR_387['decision']['source']
+
+
+@unittest.skipUnless(blob_path(STORE, HELD_387).exists() and blob_path(STORE, FIVE['96/2023']).exists(),
+                     'retained originals not in the store')
+class HeldTar387(unittest.TestCase):
+    def test_the_96_positions_and_the_tar_387_2026_closure_are_the_held_ones(self):
+        from cordon_d.judgments import annulment_basis, decision_identity, liveness_closures, read_disposition
+        identity = decision_identity(blob_path(STORE, HELD_387).read_bytes())
+        basis, _ = annulment_basis(read_disposition(HELD_387, STORE), identity, held_instruments={DDS96})
+        self.assertEqual(liveness_closures(basis)[DDS96], [TAR_387])
+        found = by_owner(annex_positions.read_annex(str(blob_path(STORE, FIVE['96/2023'])), '1/D')[1])
+        self.assertEqual(found['BOGGIANO ANNA'], BOGGIANO)
+        self.assertEqual(found['APULEO LUCIA'], APULEO)
 
 
 HELD_115 = '3605a828fee12f4fc719ad3f0a7e7a2ba1a39226486b5c9b5dfa813fe18c5c3d'

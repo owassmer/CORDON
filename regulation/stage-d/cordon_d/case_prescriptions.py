@@ -458,8 +458,10 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
     order's own reading (`order_dueness`) unless the caller supplies one, held to
     the governing A rows by `lawfully_due` per predicate: `governing_results` is
     keyed by (row, predicate), and whether the record carries an annex position
-    (`annex_position`) is passed. Nothing absent is supplied: no notice or
-    commencement evidence means C's own unknown and its needs.
+    (`annex_position`) is passed. The order's own stated reading (a court closure or a
+    stated change) replaces only a True from `lawfully_due`: every such outcome only
+    withholds, so a False keeps its row provisions (SPEC). Nothing absent is supplied:
+    no notice or commencement evidence means C's own unknown and its needs.
     """
     from cordon_c.bindings import merge_facts, noncommencement_facts, notice_instant
     row = snapshot.version(RULE, at)
@@ -475,9 +477,9 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
                            results=governing_results or {}, reading=True if stated is not None else reading,
                            predicate=predicate, positioned=annex_position(record) is not None,
                            cohort=record.get('cohort') or ())
-        if stated is not None and due.truth is not None:
+        if stated is not None and due.truth is True:
             due = stated
-        elif stated is not None:
+        elif stated is not None and due.truth is None:
             due = Evaluation(None, needs=due.needs | stated.needs)
         if due.truth is not None or due.needs:
             facts[(vid, predicate)] = due

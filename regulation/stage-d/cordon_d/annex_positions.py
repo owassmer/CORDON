@@ -25,17 +25,14 @@ once across several rows). Owners are printed names: joint owners are each a pos
 printed variants are not merged.
 
 A 50 m listing that places no recipient is one position with no recipient (`owner` None),
-naming its printed words in `no_recipient`. The test is lexical: a listing with no parcel
-number (a strip printed as "STRADE" or "ACQUE"), or whose owner is printed as not
-identified or not found (`NON INDIVIDUAT…`, `NON TROVAT…`). It is verified on the held
-annexes it has been run on (the five orders DDS 18/2024 names, and DDS 115/2023's
-"PROPRIETARI NON TROVATI"); a governing row that names another order re-verifies it on
-that order's annex. The position is what the listing is: 50 m hosts (a strip with no parcel
-number is its own entry in `fifty_metre_parcels`, with no particella) and the listed
-infected plants on its parcels. The annex's check places every infected plant's parcel on
-an owned row, so such a position holds none; if one ever did, the position is unknown,
-naming the listing and the plants, and is never defaulted. No recipient is a notice-side
-fact (whom to notify), not a dueness need.
+naming its printed words in `no_recipient`. Which listings place no recipient is a lexical
+test that SPEC states, with where it is verified (`_UNPLACED` and `parse`). The position is
+what the listing is: 50 m hosts (a strip with no parcel number is its own entry in
+`fifty_metre_parcels`, with no particella) and the listed infected plants on its parcels.
+The annex's check places every infected plant's parcel on an owned row, so such a position
+holds none; if one ever did, the position is unknown, naming the listing and the plants,
+and is never defaulted. No recipient is a notice-side fact (whom to notify), not a dueness
+need.
 
 Answering the row: each bound predicate takes its position field (non-empty is true); a
 position of an order whose checks failed, or with a cause, leaves both unknown with its
@@ -66,7 +63,7 @@ _PLACED = re.compile(r'(?<![\d,])\d{1,2},\d{3,}\s*\|\s*\d{1,2},\d{3,}\s*\|\s*(\d
 _ZONE = re.compile(r'ZON[AE]\s+INFETT[AE]\s+DI\s+50\s*M', re.I)
 _NUMBER = re.compile(r'(?<![\w,.])(\d{1,5})(?![\d,.])')
 _SEPARATOR = r'[\s|\-–—]*'
-# An owner printed as not identified or not found: lexical, verified on the held annexes (module docstring).
+# An owner printed as not identified or not found: part of SPEC's lexical no-recipient test.
 _UNPLACED = re.compile(r'\bNON\s+(?:INDIVIDUAT|TROVAT)', re.I)
 # A company's legal form printed after a dash continues its name ("… LIMITATA - SOCIETA' AGRICOLA").
 _FORM = re.compile(r"^(?:SOCIET[AÀ]|S\.?\s?R\.?\s?L|S\.?\s?P\.?\s?A|S\.?\s?A\.?\s?S|S\.?\s?N\.?\s?C)", re.I)

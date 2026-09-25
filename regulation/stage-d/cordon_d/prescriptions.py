@@ -53,9 +53,10 @@ def lawfully_due(snapshot: Snapshot, at: date, *, instrument: str, governing_ref
     share, so a position's result answers WORK and COERCE alike (`annex_positions`).
     Effects and needs come only from rows that are both required (in force, and the
     record's instrument or named in `corrects_instrument_ids`) and reached. A required row
-    the record does not reach names itself. A reached row gates dueness only if one of its
-    possible outcomes is POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART
-    (`bears_on_dueness`); any other reached row is not read. A reached row that bears on
+    gates dueness only if one of its possible outcomes is POPULATION_NOT_LAWFULLY_DUE or
+    LAWFULLY_DUE_IN_PART (`bears_on_dueness`); any other row is not read, reached or not.
+    A required row that bears on dueness and that the record does not reach names itself.
+    A reached row that bears on
     dueness without a resolved result for this predicate passes its own needs through (the
     supplied result's, else those of the row evaluated with no facts), so the need names
     the row's predicate. Then:
@@ -74,7 +75,8 @@ def lawfully_due(snapshot: Snapshot, at: date, *, instrument: str, governing_ref
     """
     required = required_rows(snapshot, at, instrument)
     reached = set(governing_references)
-    needs = {f"governing A reference: {sid}" for sid in required - reached}
+    needs = {f"governing A reference: {sid}" for sid in required - reached
+             if bears_on_dueness(snapshot.version(sid, at))}
     effects = {}
     for sid in sorted(required & reached):
         if not bears_on_dueness(snapshot.version(sid, at)):

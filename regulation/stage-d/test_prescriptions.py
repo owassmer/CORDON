@@ -7,12 +7,14 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 import unittest
+from unittest import mock
 
 from cordon_c.bindings import leaves, listing_facts, mass_publicity_facts, merge_facts, noncommencement_facts
 from cordon_c.core import Evaluation, MissingInput, Snapshot, evaluate
 from cordon_c.quantities import clock_boundary
 from cordon_c.temporal import end_of_day
 from cordon_d.calendar import national_calendar
+from cordon_d import prescriptions
 from cordon_d.prescriptions import bears_on_dueness, lawfully_due, required_rows
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -155,9 +157,11 @@ class StatedTermRule(unittest.TestCase):
         self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, coerce=False, **reached),
                          NOT_ESTABLISHED)
 
-    def test_correction_holds_the_order_it_corrects(self):
+    def test_a_correction_bearing_on_no_dueness_outcome_is_not_read_reached_or_not(self):
         # DDS 165/2024 replaces DDS 147/2024's annex 1/C; DDS 11/2025 replaces owners listed in DDS 188/2024.
-        # A record that omits the correction leaves lawful dueness unknown, so no direction follows.
+        # Each is required for the order it corrects, and `governing_references` names it on the order's records;
+        # but neither row has POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART among its outcomes, so, like a
+        # reached one, an unreached correction names no dueness need (PR #35 round 2).
         for instrument, correction, at in (('REG-PUGLIA-U181-DIR-2024-00147', CORRECTION_165, date(2024, 12, 2)),
                                            ('REG-PUGLIA-U181-DIR-2024-00188', CORRECTION_11, date(2025, 3, 3))):
             with self.subTest(instrument=instrument):
@@ -165,17 +169,15 @@ class StatedTermRule(unittest.TestCase):
                 notified = datetime.combine(at, datetime.min.time(), ROME).replace(hour=9)
                 evaluated = notified + timedelta(days=12)
                 self.assertIn(instrument, self.s.version(correction, at)['corrects_instrument_ids'])
-                own = tuple(need.removeprefix('governing A reference: ') for need in self.due(record, at, WORK).needs
-                            if need != f'governing A reference: {correction}')
-                results = {key: value for sid in own + (correction,)
-                           for key, value in self.per(sid, self.settled(sid, at)).items()}
-                due = self.due(record, at, WORK, refs=own, results=results)
-                self.assertIsNone(due.truth)
-                self.assertEqual(due.needs, {f'governing A reference: {correction}'})
-                self.assertIsNone(self.effect(record, at, notified=notified, evaluated=evaluated, refs=own,
-                                              results=results))
-                self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated,
-                                             refs=own + (correction,), results=results), REQUIRED)
+                self.assertIn(correction, required_rows(self.s, at, instrument))
+                self.assertFalse(bears_on_dueness(self.s.version(correction, at)))
+                results = self.per(correction, self.settled(correction, at))
+                for refs in ((), (correction,)):
+                    due = self.due(record, at, WORK, refs=refs, results=results)
+                    self.assertIs(due.truth, True)
+                    self.assertEqual(due.needs, frozenset())
+                    self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, refs=refs,
+                                                 results=results), REQUIRED)
 
     def test_case_delta_of_the_instrument_holds_lawful_dueness(self):
         record = dict(DDS108, instrument='REG-PUGLIA-U181-DIR-2023-00045')
@@ -391,19 +393,31 @@ class StatedTermRule(unittest.TestCase):
             self.assertFalse(any(FORK in need for need in due.needs))
 
     def test_a_resolved_not_due_decides_whatever_other_rows_still_need(self):
-        # Guard for the finality rule: the fork is required but not reached, so it still names itself.
         record, at, required = self.dds96()
         unreached = tuple(sid for sid in required if sid != FORK)
-        self.assertIn(f'governing A reference: {FORK}', self.due(record, at, WORK, refs=unreached).needs)
         results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, HOSTS_ONLY))
+        mixed = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
+        # The fork is required but not reached, and bears on no dueness outcome: it does not name itself
+        # (PR #35 round 2), so a letter-a holder reads due in part and a hosts-only position not due.
+        self.assertFalse(any(FORK in need for need in self.due(record, at, WORK, refs=unreached).needs))
         for predicate in (WORK, COERCE):
             self.assertIs(self.due(record, at, predicate, refs=unreached, results=results, positioned=True).truth,
                           False)
-        # A letter-a holder under the same missing reference stays unknown on it: in part does not decide.
-        mixed = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
-        due = self.due(record, at, WORK, refs=unreached, results=mixed, positioned=True)
-        self.assertIsNone(due.truth)
-        self.assertEqual(due.needs, {f'governing A reference: {FORK}'})
+            due = self.due(record, at, predicate, refs=unreached, results=mixed, positioned=True)
+            self.assertIs(due.truth, True)
+            self.assertEqual(due.needs, frozenset())
+        # Guard for the finality rule: were the fork a row bearing on dueness, unreached it names itself, and a
+        # resolved not due still decides; in part does not, so a letter-a holder stays unknown on it.
+        real = prescriptions.bears_on_dueness
+        with mock.patch.object(prescriptions, 'bears_on_dueness',
+                               lambda row: row['stable_provision_id'] == FORK or real(row)):
+            self.assertIn(f'governing A reference: {FORK}', self.due(record, at, WORK, refs=unreached).needs)
+            for predicate in (WORK, COERCE):
+                self.assertIs(self.due(record, at, predicate, refs=unreached, results=results,
+                                       positioned=True).truth, False)
+            due = self.due(record, at, WORK, refs=unreached, results=mixed, positioned=True)
+            self.assertIsNone(due.truth)
+            self.assertEqual(due.needs, {f'governing A reference: {FORK}'})
 
     def test_an_unresolved_row_bearing_on_dueness_still_gates(self):
         record, at, required = self.dds96()

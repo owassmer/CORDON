@@ -449,11 +449,13 @@ no parcel number, such as "STRADE" or "ACQUE", included) and the listed infected
 plants on its parcels, so a governing row answers it like any other position; no
 recipient is a notice-side fact, not a dueness need. Where such a listing held a
 listed infected plant, its position would be unknown, naming the listing and the
-plants. Whether a listing places no recipient is a lexical test: no parcel number,
-or an owner printed as not identified or not found (`NON INDIVIDUAT…`,
-`NON TROVAT…`). It is verified on the held annexes it has been run on (the five
-orders DDS 18/2024 names, and DDS 115/2023's "PROPRIETARI NON TROVATI"); a
-governing row that names another order re-verifies it on that order's annex. The
+plants. Whether a listing places no recipient is a lexical test: no parcel number;
+a parcel number with an empty owner cell; or an owner printed as not identified or
+not found (`NON INDIVIDUAT…`, `NON TROVAT…`). It is verified on the held annexes
+it has been run on (the five orders DDS 18/2024 names, and DDS 115/2023's
+"PROPRIETARI NON TROVATI"); a governing row that names another order re-verifies
+it on that order's annex, blank owner cells included, since a blank cell at a page
+boundary may be a merged cell continued from the row above. The
 infected-plant rows must equal the
 operative "n° N piante" and every infected plant's parcel must have a 50 m row
 naming its owners; otherwise every position of the order is unknown, naming the
@@ -474,10 +476,11 @@ own or naming it) and reached, separately for the commencement-work and the
 coercive predicate, from each row's result for that predicate. At an annex
 position the work and the coercive population in question are that recipient's
 share, so COERCE, like WORK, is answered from the recipient's share; at order
-grain COERCE asks about the order's coercive population. A reached row gates
+grain COERCE asks about the order's coercive population. A required row gates
 dueness only if one of its possible outcomes (any route or branch) is
 `POPULATION_NOT_LAWFULLY_DUE` or `LAWFULLY_DUE_IN_PART`; a row none of whose
-outcomes bears on dueness is not read. A reached row that bears on dueness and is
+outcomes bears on dueness is not read, reached or not. A required row that bears on
+dueness and is not reached names itself as a need; one that is reached and
 unresolved passes its own needs through. A reached row whose result is
 `POPULATION_NOT_LAWFULLY_DUE` makes it false, whatever other rows still need, since
 the two names only withhold; one whose result is `LAWFULLY_DUE_IN_PART` keeps the
@@ -492,12 +495,15 @@ suspension with no later disposition of its ricorso, a challenge ended with the
 court's stated reason, or a stated correction, replacement, revocation,
 suspension or withdrawal, whole or in part, that no A row records, leaves it
 unknown and names the act and the words stating what changes. Nothing is patched.
-`c_result` passes C only the notice and commencement evidence the caller holds:
-the facts of the Art. 21-ter notice branches (the Art. 21-bis communication
-predicate, or the mass-publicity row) and each branch's instant, from which C's
-`notice_instant` takes the earliest instant among the branches A finds true;
-nothing absent is supplied. Publication fills notification only through A's
-mass-publicity route.
+Every such outcome only withholds, so the order's own reading under a disposition
+or stated change replaces only a dueness the governing rows leave true: a not due
+from a governing row stands, with its row in `provisions`, and an unknown from the
+rows keeps its needs and adds the order's own. `c_result` passes C only the notice
+and commencement evidence the caller holds: the facts of the Art. 21-ter notice
+branches (the Art. 21-bis communication predicate, or the mass-publicity row) and
+each branch's instant, from which C's `notice_instant` takes the earliest instant
+among the branches A finds true; nothing absent is supplied. Publication fills
+notification only through A's mass-publicity route.
 
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text

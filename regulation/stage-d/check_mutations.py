@@ -46,6 +46,10 @@ CODE = (
     ('let other rows\' needs outrank a resolved not due', 'cordon_d.prescriptions',
      '    if withheld and reading is not None:\n', '    if withheld and reading is not None and not needs:\n',
      'test_prescriptions.StatedTermRule.test_a_resolved_not_due_decides_whatever_other_rows_still_need'),
+    ("let the order's stated unknown replace a not due", 'cordon_d.case_prescriptions',
+     '        if stated is not None and due.truth is True:\n',
+     '        if stated is not None and due.truth is not None:\n',
+     'test_annex_positions.AnnexPositions.test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due'),
 )
 
 
