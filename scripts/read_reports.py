@@ -19,6 +19,7 @@ from cordon_d.report_extraction import (Budget, BudgetStopped, CODEX_DEFAULT_MOD
                                         NoRetainedResponse, SUBSCRIPTION_PROVIDERS,
                                         extract_report, extract_relationships, version)
 from cordon_d import report_relations
+from cordon_d.evidence import run_instant
 from cordon_d.reports import Report, reports
 from cordon_d.findings import findings, report_rows, confirmation_inputs
 from cordon_d.monitoring import distinct_observations
@@ -175,8 +176,8 @@ def main():
     parser.add_argument('--join-summary', type=Path, help='Full-population consumer census without copying all publication rows')
     parser.add_argument('--confirmation-request', type=Path,
                         help='Explicit observation identity, result_pair and event_date; qualifications remain unresolved')
-    parser.add_argument('--known-through', type=datetime.fromisoformat,
-                        default=datetime.now(timezone.utc))
+    parser.add_argument('--known-through', type=run_instant, required=True,
+                        help='the knowledge cutoff, a timezone-aware ISO instant; never the machine clock')
     args = parser.parse_args()
     if (args.retain_interrupted_reservation or args.retry_interrupted_request) and not args.execute:
         parser.error('--retain-interrupted-reservation requires --execute and its ledger')
@@ -345,6 +346,7 @@ def main():
                     facts = confirmation_facts(Snapshot.load(REPOSITORY), date.fromisoformat(request['event_date']), **inputs)
                     destination.write_text(json.dumps({'observation': request['observation'],
                         'result_pair': request['result_pair'], 'event_date': request['event_date'],
+                        'known_through': args.known_through.isoformat(),
                         'extraction_version': revision, 'inputs': inputs,
                         'evaluations': [{'consumer': key, 'evaluation': value} for key, value in facts.items()]},
                         default=encoded, indent=2) + '\n')

@@ -20,6 +20,7 @@ sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d
 from cordon_c.core import MissingInput, Snapshot  # noqa: E402
 from cordon_d.case_prescriptions import (apply_references, c_result, read_prescription,  # noqa: E402
                                          stated_limits)
+from cordon_d.evidence import run_instant  # noqa: E402
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -187,8 +188,18 @@ def held_act_changes(results, snapshot, store, options):
     return changes, report
 
 
-def summary(evaluation):
-    return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
+def summary(evaluation, run):
+    """C's result with the run's stated evaluation date and knowledge cutoff."""
+    return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs),
+                at=run['at'].isoformat(), known_through=run['known_through'].isoformat())
+
+
+def run_inputs(parser):
+    """The evaluation context a C-reaching run states; neither is taken from the machine clock."""
+    parser.add_argument('--at', type=date.fromisoformat, required=True,
+                        help='the evaluation date (ISO) that selects the A/B version')
+    parser.add_argument('--known-through', type=run_instant, required=True,
+                        help="the knowledge cutoff, a timezone-aware ISO instant; C's evaluated_at")
 
 
 _WORKER = {}
@@ -199,7 +210,7 @@ def _start_worker():
     _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT))
 
 
-def read_one(item, options, today):
+def read_one(item, options, run):
     """One source: replay its retained reading, or make one bounded subscription request.
 
     A refusal gets one source-only reread; a second refusal stands. A validated
@@ -238,7 +249,9 @@ def read_one(item, options, today):
         except MissingInput as error:
             entry['records_cause'] = str(error)
             records = []
-        entry['records'] = [dict(record, c=summary(c_result(snapshot, record, today))) for record in records]
+        entry['records'] = [dict(record, c=summary(c_result(snapshot, record, run['at'],
+                                                            evaluated_at=run['known_through']), run))
+                            for record in records]
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -270,12 +283,13 @@ def main():
     parser.add_argument('--effort', default='medium')
     parser.add_argument('--workers', type=int, default=1,
                         help='sources read at once; each is still one bounded request')
+    run_inputs(parser)
     arguments = parser.parse_args()
     if arguments.workers < 1:
         parser.error('--workers must be at least 1')
     _start_worker()
     store, snapshot = _WORKER['store'], _WORKER['snapshot']
-    today = date.today()
+    run = dict(at=arguments.at, known_through=arguments.known_through)
     selected = [item for item in population()
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
     if arguments.first:
@@ -293,11 +307,11 @@ def main():
 
     if arguments.workers == 1:
         for index, item in enumerate(selected):
-            finished(index, read_one(item, options, today))
+            finished(index, read_one(item, options, run))
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker) as pool:
-            futures = {pool.submit(read_one, item, options, today): index
+            futures = {pool.submit(read_one, item, options, run): index
                        for index, item in enumerate(selected)}
             for future in as_completed(futures):
                 finished(futures[future], future.result())
@@ -318,9 +332,11 @@ def main():
                                  liveness_closures=closures.get(composed[r['occurrence']]['instrument'], []),
                                  stated_changes=changes.get(composed[r['occurrence']]['instrument'], []),
                                  c=summary(c_result(
-                                     snapshot, composed[r['occurrence']], today,
+                                     snapshot, composed[r['occurrence']], run['at'],
+                                     evaluated_at=run['known_through'],
                                      closures=closures.get(composed[r['occurrence']]['instrument'], ()),
-                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()))))
+                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ())),
+                                     run))
                             for r in entry.get('records', ())]
     results.append(dict(held_acts=held_report))
     if arguments.out:

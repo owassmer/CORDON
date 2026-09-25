@@ -9,8 +9,7 @@
       "contracts": [
         "official-finding",
         "survey-performance",
-        "plant-population",
-        "evaluation-context"
+        "plant-population"
       ],
       "routes": [
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
@@ -33,10 +32,11 @@
       ],
       "routes": [
         "Regional plans and national programmes retained as Stage A sources under regulation/",
-        "EU quarantine-pest and host listings retained under regulation/closure/eu/"
+        "EU quarantine-pest and host listings retained under regulation/closure/eu/",
+        "Priority-pest status: Stage A's resolved EU 2019/1702 dependency (regulation/stage-a/dependency-manifest.csv row EU2019-1702; regulation/jurisdiction/generated/dependency-manifest.csv RESOLVED_ACCEPTED_EU_DEPENDENCY for IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1)"
       ],
       "population": "The plan and listing versions reached by accepted A provisions; their stated values are already Stage B parameters.",
-      "reader": "Stage B parameters supply the stated values; the finite population and strata per campaign are established with the plant and surface population row",
+      "reader": "Stage B parameters supply the stated survey values; pest-classification's two priority-pest predicates are owned by Stage A's EU2019-1702 dependency; D adds no reader and keeps no copy of the list; the finite population and strata per campaign are established with the plant and surface population row",
       "open": "Establish the per-campaign target population and strata when the plant and surface population row exists."
     },
     {
@@ -46,8 +46,7 @@
       "contracts": [
         "official-finding",
         "analytical-result",
-        "laboratory-status",
-        "sample-custody"
+        "laboratory-status"
       ],
       "routes": [
         "DOCUMENTO_CONFERMA and LNK_DOCUMENTO_SELGE links published in regional monitoring records",
@@ -56,16 +55,14 @@
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
       "reader": "cordon_d.reports, cordon_d.report_relations and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings."
+      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. The printed delivery and acceptance dates are the report's own date roles; they supply no custody input C accepts, since custody_facts takes instants and a printed date is never turned into one."
     },
     {
       "id": "official-areas",
       "name": "Adopted demarcated-area geometry",
       "purpose": "Supply the infected, containment, buffer and other legally consequential area containing a location on the event date.",
       "contracts": [
-        "adopted-geography",
-        "boundary-context",
-        "evaluation-context"
+        "adopted-geography"
       ],
       "routes": [
         "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
@@ -97,8 +94,7 @@
       "contracts": [
         "operative-act",
         "case-prescription",
-        "administrative-event",
-        "evaluation-context"
+        "administrative-event"
       ],
       "routes": [
         "https://burp.regione.puglia.it/bollettini",
@@ -141,7 +137,6 @@
       "purpose": "Supply an individual plant's protected status and, only where that status changes removal, the applicable permission or decision.",
       "contracts": [
         "protected-status",
-        "boundary-context",
         "operative-act"
       ],
       "routes": [
@@ -157,8 +152,7 @@
       "name": "Current owner, occupier and public-land standing records",
       "purpose": "Supply the person or public body with the legally consequential relationship to the affected parcel or plant.",
       "contracts": [
-        "party-land-standing",
-        "boundary-context"
+        "party-land-standing"
       ],
       "routes": [
         "The removal determination's incorporated annex (addressees by comune, foglio, particella)",
@@ -173,9 +167,10 @@
     {
       "id": "field-and-execution-records",
       "name": "Osservatorio and executing-body operational records",
-      "purpose": "Supply assignment, field assessment, treatment, removal, completion and lawful cost facts required by the accepted chain.",
+      "purpose": "Supply assignment, sample handover, field assessment, treatment, removal, completion and lawful cost facts required by the accepted chain.",
       "contracts": [
         "personnel-assignment",
+        "sample-custody",
         "operative-assessment",
         "treatment-performance",
         "removal-performance",
@@ -185,12 +180,13 @@
       ],
       "routes": [
         "The Osservatorio's casefile and field systems (presided execution record, countersignature, photograph, assignment, verification, cost determination)",
+        "The App or paper sample handover and receipt record under DDS 31/2022 and DDS 45/2025: refrigerated transport, the assistants' and driver's signatures, the authorized transporter's countersignature and whether the delivery history is complete",
         "ARIF or other executing-body records incorporated into the matter",
         "Removal orders for the lawful work basis (removal-orders route)"
       ],
       "population": "The operational records for the admitted finding and resulting work, including corrections and completion evidence.",
       "reader": "cordon_d.evidence, cordon_d.events and source-specific readers still to be implemented",
-      "open": "No public procedure manual can supply an unseen operational fact. A coercive-direction or execution-priority act is not proof of completed removal; a published removal label or removed-plant layer is a lead to a first-party record, not a removal occurrence, and the retained SIT capture holds no removed-plant layer after 2017. At deployment these are first-party operator inputs, with unavailable fields left unknown."
+      "open": "No public procedure manual can supply an unseen operational fact. A coercive-direction or execution-priority act is not proof of completed removal; a published removal label or removed-plant layer is a lead to a first-party record, not a removal occurrence, and the retained SIT capture holds no removed-plant layer after 2017. At deployment these are first-party operator inputs, with unavailable fields left unknown. Without the handover record, the transport and signature predicates stay unknown, never false."
     },
     {
       "id": "vector-and-treatment-observations",

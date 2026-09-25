@@ -435,7 +435,7 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     return True, (True if record['coercive_population'] else None)
 
 
-def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluated_at=None, commencements=None,
+def c_result(snapshot, record, at, *, evaluated_at, notice=None, notice_instants=None, commencements=None,
              commencement_records_complete=False, governing_results=None, work_due=None,
              coercion_due=None, closures=(), stated_changes=(), within_closed_scope=None,
              zone=None, calendar=None):
@@ -450,6 +450,10 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
     or commencement evidence means C's own unknown and its needs.
     """
     from cordon_c.bindings import merge_facts, noncommencement_facts, notice_instant
+    from .evidence import instant
+    if type(at) is not date:
+        raise TypeError('The run states its evaluation date')
+    instant(evaluated_at)  # the run's knowledge cutoff; never the machine clock or None
     row = snapshot.version(RULE, at)
     vid = row['provision_version_id']
     facts = {(vid, CLAUSE): clause(record)}

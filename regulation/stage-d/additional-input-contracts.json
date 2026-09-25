@@ -1145,10 +1145,11 @@
     {
       "evidence": "Lawful coercive-removal decision; as-run removal work and cost record; evidence identifying the person who omitted the original duty and is legally chargeable as the offender.",
       "contracts": [
-        "boundary-context",
         "execution-cost",
         "party-land-standing",
-        "removal-performance"
+        "removal-performance",
+        "administrative-event",
+        "operative-act"
       ]
     },
     {
@@ -1588,8 +1589,7 @@
         "owner-response",
         "removal-performance",
         "execution-cost",
-        "administrative-event",
-        "boundary-context"
+        "administrative-event"
       ]
     },
     {
@@ -1919,8 +1919,13 @@
     {
       "evidence": "Valid removal prescription; official evidence that the plants carry the quarantine pest; exact obligated owner, occupier or holder; effective notice; proof of omitted execution; competent coercive-removal decision.",
       "contracts": [
-        "boundary-context",
-        "removal-performance"
+        "removal-performance",
+        "case-prescription",
+        "official-finding",
+        "party-land-standing",
+        "recipient-notice",
+        "administrative-event",
+        "operative-act"
       ]
     },
     {

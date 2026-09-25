@@ -7,7 +7,6 @@ one at a time, through the Claude subscription. `--only` selects act identities
 results as JSON outside the tree; nothing here is an owner.
 """
 import argparse
-from datetime import date
 import json
 from pathlib import Path
 import sys
@@ -19,7 +18,7 @@ from cordon_c.core import Snapshot  # noqa: E402
 from cordon_d.case_prescriptions import read_prescription  # noqa: E402
 from cordon_d.notice_routes import c_result, mass_publicity_basis, read_notice_route  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
-from read_prescriptions import _wait_for_memory, _write, population, summary  # noqa: E402
+from read_prescriptions import _wait_for_memory, _write, population, run_inputs, summary  # noqa: E402
 
 
 def instrument_of(digest, store):
@@ -84,7 +83,7 @@ def load_postings(paths):
             for instrument, slots in intervals.items()}
 
 
-def read_one(item, options, today):
+def read_one(item, options, run):
     """One source: replay or one bounded request; a refusal gets one stated reread."""
     identity, digest, url = item
     store, snapshot = _WORKER['store'], _WORKER['snapshot']
@@ -99,7 +98,7 @@ def read_one(item, options, today):
             response = read_notice_route(digest, store, refused=str(refusal), **options)
         basis = mass_publicity_basis(response, instrument=instrument_of(digest, store) or identity)
         postings = _WORKER['postings'].get(basis['instrument'], [])
-        entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, today, postings=postings)))
+        entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, run['at'], postings=postings), run))
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -119,12 +118,13 @@ def main():
                         help='sources read at once; each is still one bounded request')
     parser.add_argument('--postings', nargs='*', default=(),
                         help='event-reader outputs whose posting intervals reach C as held postings')
+    run_inputs(parser)
     arguments = parser.parse_args()
     if arguments.workers < 1:
         parser.error('--workers must be at least 1')
     postings = load_postings(arguments.postings)
     _start_worker(postings)
-    today = date.today()
+    run = dict(at=arguments.at, known_through=arguments.known_through)
     selected = [item for item in population()
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
     options = dict(execute=arguments.execute, model=arguments.model, effort=arguments.effort,
@@ -141,12 +141,12 @@ def main():
 
     if arguments.workers == 1:
         for index, item in enumerate(selected):
-            finished(index, read_one(item, options, today))
+            finished(index, read_one(item, options, run))
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker,
                                  initargs=(postings,)) as pool:
-            futures = {pool.submit(read_one, item, options, today): index
+            futures = {pool.submit(read_one, item, options, run): index
                        for index, item in enumerate(selected)}
             for future in as_completed(futures):
                 finished(futures[future], future.result())

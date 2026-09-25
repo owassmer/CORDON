@@ -113,7 +113,8 @@ class EvidenceTests(unittest.TestCase):
                           predicate='cadastral and owner data received')
         evidence = self.evidence(receipt)
         view = evidence.view(context=receipt.context, event_date=receipt.event_date,
-                             known_through=datetime(2026, 9, 8, tzinfo=timezone.utc))
+                             known_through=datetime(2026, 9, 8, tzinfo=timezone.utc),
+                             permitted_controlled_sources=frozenset())
         result = view.reader(self.snapshot.version(receipt.consumer_version, receipt.event_date), receipt.predicate)
         self.assertTrue(result.truth)
         for held_tuple in ['party-land-standing', 'case-prescription']:
@@ -131,7 +132,8 @@ class EvidenceTests(unittest.TestCase):
         def result(assertions):
             evidence = self.evidence(*assertions)
             return evidence.view(context=self.row.context, event_date=at,
-                                 known_through=datetime(2026, 9, 8, tzinfo=timezone.utc)).evaluate(version)
+                                 known_through=datetime(2026, 9, 8, tzinfo=timezone.utc),
+                                 permitted_controlled_sources=frozenset()).evaluate(version)
         self.assertIsNone(result(rows).truth)
         # A synthetic complete determination includes every continuing condition;
         # one isolated treatment or observation would not support this reading.

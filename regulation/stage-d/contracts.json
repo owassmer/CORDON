@@ -95,7 +95,51 @@
       "admissible_instance_roles": [
         "official-record",
         "official-dataset"
-      ]
+      ],
+      "run_input": {
+        "rule": "The run request states the evaluation context; no parameter has a default. The event date selects the A/B version; the knowledge cutoff bounds what is read and is C's evaluated_at. Each event's own date stays with that event's contract.",
+        "entry_points": [
+          {
+            "callable": "cordon_d.evidence.Evidence.view",
+            "parameters": [
+              "context",
+              "event_date",
+              "known_through"
+            ]
+          },
+          {
+            "callable": "cordon_d.case_prescriptions.c_result",
+            "parameters": [
+              "at",
+              "evaluated_at"
+            ]
+          },
+          {
+            "callable": "cordon_d.notice_routes.c_result",
+            "parameters": [
+              "at"
+            ]
+          },
+          {
+            "callable": "cordon_d.reports.reports",
+            "parameters": [
+              "known_through"
+            ]
+          },
+          {
+            "callable": "cordon_d.source_associations.associations",
+            "parameters": [
+              "known_through"
+            ]
+          },
+          {
+            "callable": "cordon_d.findings.findings",
+            "parameters": [
+              "known_through"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "operative-act",
@@ -781,32 +825,18 @@
       "admissible_instance_roles": [
         "official-record",
         "official-dataset"
-      ]
-    },
-    {
-      "id": "boundary-context",
-      "claim": "An external procedural fact affects only the retained boundary/dependency in the accepted chain.",
-      "grain": "one source-established external event or status relevant to the retained proposition",
-      "keys": [
-        "external proceeding/event",
-        "exact affected person/work",
-        "event date"
       ],
-      "fields": [
-        "source-established status",
-        "scope",
-        "competent issuing body",
-        "notice/defence/payment occurrence only when the retained boundary consumes it"
-      ],
-      "acquisition_routes": [
-        "competent external record or determination"
-      ],
-      "sufficiency": "Accepted A retains some surrounding legal boundaries. This evidence interface does not admit operation of the Law689 penalty chain, grants or funding workflows. Do not acquire irrelevant full external populations merely because the provision mentions them.",
-      "absence": "An unavailable external fact remains scoped; no synthetic proceeding state is supplied.",
-      "admissible_instance_roles": [
-        "official-record",
-        "official-dataset"
-      ]
+      "run_input": {
+        "rule": "The run states the controlled source identities its principal is granted; an empty grant is stated, never defaulted. The grant record itself (access method and legal basis) is a first-party record, not a run input.",
+        "entry_points": [
+          {
+            "callable": "cordon_d.evidence.Evidence.view",
+            "parameters": [
+              "permitted_controlled_sources"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "pest-classification",
