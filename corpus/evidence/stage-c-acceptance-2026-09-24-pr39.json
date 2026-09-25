@@ -3,12 +3,12 @@
   "accepted_by": "Owen Wassmer",
   "act": "Owen Wassmer's merge of owassmer/CORDON#39 accepts this exact content.",
   "date": "2026-09-24",
-  "promoted_package_sha256": "2e69798cf51ee102b84a915775ff214eb4409372082016bd44ca952c823ed894",
+  "promoted_package_sha256": "1bf786abadcaf8c011c5d018f1c6a851c69bab039f7af517fc430ac07ddf985e",
   "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
   "preceding_acceptance": {
     "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr32.json",
     "sha256": "9ca7c10d09f401a28fa9d6063c5362ae0b89f1f6f673b4b3473ef9b5b9404347"
   },
   "preceding_package_sha256": "b1772983f66ad825a883732d8b728fe6ae932908864aaa05682714969281c331",
-  "scope": "evaluate decides seven A wordings that place the event date in an interval A states (core.DATE_INTERVALS) from its event date alone, start included and end excluded: the carrying version's own interval, or the start of EU-2020-1201:7(1)(e):v2 (post-M5), or the end of REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1 (pre-M4); a supplied fact or a reader's true or false answer for them is refused, and Snapshot.load checks their carriers and named versions against A; adopted_area_facts no longer binds the effective-interval constant; custody_facts takes a printed collection or delivery date, decides same-day delivery from local days, compares order by day when either side is a date and never gives a date a time of day; timely_completion takes a date only as a same-calendar-day completion, refuses one after the evaluation's local day and leaves one on that day unknown. Binding takes effect only on merge."
+  "scope": "evaluate decides seven A wordings that place the event date in an interval A states (core.DATE_INTERVALS) from its event date alone, start included and end excluded: the carrying version's own interval, or the start of EU-2020-1201:7(1)(e):v2 (post-M5), or the end of REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1 (pre-M4), and the result cites the version whose date decided it; a supplied fact or a reader's true or false answer for them is refused, and Snapshot.load checks their carriers and named versions against A; adopted_area_facts no longer binds the effective-interval constant; custody_facts takes a printed collection or delivery date, decides same-day delivery from local days, compares order by day when either side is a date and never gives a date a time of day; timely_completion takes a date only as a same-calendar-day completion, refuses one after the evaluation's local day, and decides one on that day only where reading it as not yet performed gives the same answer. Binding takes effect only on merge."
 }

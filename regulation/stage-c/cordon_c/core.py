@@ -109,13 +109,15 @@ def _date_interval(snapshot: Snapshot, row: dict, text: str, at: date, facts: Ma
         raise ValueError(f"C evaluates this interval from the event date; it cannot be supplied: {key}")
     kind, named, _ = DATE_INTERVALS[text]
     source, day = row if named is None else snapshot.versions[named], at.isoformat()
+    # The result cites the version whose date decided it.
+    cited = frozenset({source["provision_version_id"]})
     if kind == "before_end_of":
-        return Evaluation(day < source["effective_to_exclusive"])
+        return Evaluation(day < source["effective_to_exclusive"], provisions=cited)
     if kind == "from_start_of":
-        return Evaluation(source["effective_from"] <= day)
+        return Evaluation(source["effective_from"] <= day, provisions=cited)
     inside = source["effective_from"] <= day and (
         not source["effective_to_exclusive"] or day < source["effective_to_exclusive"])
-    return Evaluation(inside if kind == "within" else not inside)
+    return Evaluation(inside if kind == "within" else not inside, provisions=cited)
 
 
 class Snapshot:

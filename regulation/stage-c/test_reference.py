@@ -1664,6 +1664,15 @@ class RunDateIntervals(unittest.TestCase):
             facts[self.s.version(adoption, day)["provision_version_id"],
                   "evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory"] = False
             self.assertEqual(evaluate(self.s, adoption, day, facts).effect, "PNI_2026_ADOPTED_AND_PUBLISHED")
+        # Known A defect, named as a residual: IT-PNI-2026:adoption-and-publication-status:v1's
+        # route table is not exclusive. Its second branch is true on every day the row applies,
+        # so proven non-adoption raises instead of returning A's defeat. A's repair makes that
+        # branch all_of[interval, not(non-adoption)].
+        day = date(2026, 5, 1)
+        proven = {(self.s.version(adoption, day)["provision_version_id"],
+                   "evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory"): True}
+        with self.assertRaisesRegex(ValueError, "Nonexclusive legal routes: IT-PNI-2026:adoption-and-publication-status:v1"):
+            evaluate(self.s, adoption, day, proven)
         for day in (date(2025, 12, 31), date(2027, 1, 1)):
             for identity, text in ((adoption, "decision time within programme year 2026"),
                                    (design, "evidence proves event outside PNI binding interval")):
@@ -1686,6 +1695,17 @@ class RunDateIntervals(unittest.TestCase):
             identity = f"REG-PUGLIA-U181-DIR-{number}:case-delta:post-m5-stale-article7-text"
             self.assertIs(self.interval(identity, "post-M5 case date", first).truth, True)
         self.assertEqual(self.s.versions["EU-2020-1201:7(1)(e):v2"]["effective_from"], "2024-10-17")
+
+    def test_interval_results_cite_the_version_whose_date_decided_them(self):
+        monopoli = "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork"
+        fork = evaluate(self.s, monopoli, date(2024, 6, 5))
+        self.assertIs(fork.truth, False)
+        self.assertIn("REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1", fork.provisions)
+        post = "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text"
+        at = date(2024, 10, 28)
+        self.assertIn("EU-2020-1201:7(1)(e):v2", evaluate(self.s, post, at, self.others_true(post, at)).provisions)
+        self.assertEqual(self.interval(post, "post-M5 case date", at).provisions,
+                         {"EU-2020-1201:7(1)(e):v2", self.s.version(post, at)["provision_version_id"]})
 
     def test_interval_wordings_refuse_supplied_facts_and_reader_answers(self):
         cases = [("REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork", "pre-M4 event time", date(2024, 6, 5)),
@@ -1789,7 +1809,17 @@ class RunDateIntervals(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "later than evaluation"):
             timely_completion(self.s, clock, at, completed_at=date(2026, 9, 3), **args)
         self.assertIs(timely_completion(self.s, clock, at, completed_at=date(2026, 9, 1), **args).truth, True)
-        same = timely_completion(self.s, clock, at, completed_at=date(2026, 9, 2), **args)
+        # Printed on the evaluation's day but not the collection day: delivered
+        # by known_through or not yet, either reading gives false once the
+        # history is complete.
+        self.assertIs(timely_completion(self.s, clock, at, completed_at=date(2026, 9, 2), **args).truth, False)
+        partial = timely_completion(self.s, clock, at, completed_at=date(2026, 9, 2),
+                                    **(args | {"completion_history_complete": False}))
+        self.assertIsNone(partial.truth)
+        self.assertEqual(partial.needs, {f"{clock}: completion dated 2026-09-02, the day of evaluation"})
+        # Printed on the collection day, which is the evaluation's day: one reading gives true.
+        same = timely_completion(self.s, clock, date(2026, 9, 2), completed_at=date(2026, 9, 2),
+                                 **(args | {"anchor": date(2026, 9, 2)}))
         self.assertIsNone(same.truth)
         self.assertEqual(same.needs, {f"{clock}: completion dated 2026-09-02, the day of evaluation"})
         with self.assertRaises(TypeError):

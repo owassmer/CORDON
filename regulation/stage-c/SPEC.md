@@ -24,8 +24,8 @@ versions preserve a B quantity's applicability; a semantic change ends it.
 `evaluate` decides the A wordings that ask whether the event date lies in an
 interval A states (`core.DATE_INTERVALS`) from its event date alone, start
 included and end excluded: the carrying version's own interval, or the start or
-end of a named A version. A supplied fact or a reader's true or false answer for
-them is refused. `Snapshot.load` checks each wording's carriers and named version
+end of a named A version. The result cites the version whose date decided it. A
+supplied fact or a reader's true or false answer for them is refused. `Snapshot.load` checks each wording's carriers and named version
 against A.
 
 The consumer is Stage D: typed mathematical inputs and A's remaining semantic
@@ -126,8 +126,9 @@ each take an instant or a calendar date as printed, in the rule's zone; a date
 is never given a time of day. Their local days decide same-day delivery, and
 their order is compared by day when either is a date. Without a delivery, the
 end of the collection day is compared only with the evaluation instant. A
-delivery date after the evaluation's local day is refused, and one on that day
-is unknown. Only a same-calendar-day clock takes a completion date. `confirmation_facts`
+delivery date after the evaluation's local day is refused. One on that day may
+fall after evaluation, so it decides only where reading it as not yet performed
+gives the same answer. Only a same-calendar-day clock takes a completion date. `confirmation_facts`
 compares distinct result identities, sample/extract identity, genome-target identity
 and operative geography under Article 2(6). It consumes qualified results rather
 than prescribing an analytical protocol. Species membership for Article 7(1)(c),

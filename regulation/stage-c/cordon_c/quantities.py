@@ -191,7 +191,8 @@ def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
     is established only from a complete performance history. Early performance
     is not rejected by a generic lower bound absent a source requirement.
     A printed completion date is a day, never an instant: only a same-calendar-
-    day clock takes one, and against evaluation's own local day it is unknown.
+    day clock takes one. On evaluation's own local day it may fall after
+    evaluation, so it decides only where that reading gives the same answer.
     """
     row = snapshot.quantity(identity, at)
     if row["kind"] not in {"deadline", "same_calendar_day"}:
@@ -205,6 +206,14 @@ def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
         if _local_day(completed_at, zone) > _local_day(through, zone):
             raise ValueError("Performance cannot be later than evaluation")
         if completed_at == _local_day(through, zone):
+            # Performed by evaluation that day, or after it and so not yet
+            # performed: the days decide only where both readings agree.
+            if completed_at != _local_day(anchor, zone):
+                absent = timely_completion(snapshot, identity, at, anchor=anchor, completed_at=None,
+                                           evaluated_at=evaluated_at, zone=zone, calendar=calendar, rule=rule,
+                                           completion_history_complete=completion_history_complete)
+                if absent.truth is False:
+                    return absent
             return Evaluation(None, needs=frozenset({f"{identity}: completion dated {completed_at}, the day of evaluation"}))
         return Evaluation(completed_at == _local_day(anchor, zone))
     if completed_at is not None:
