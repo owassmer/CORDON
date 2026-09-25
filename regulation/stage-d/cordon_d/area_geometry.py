@@ -231,11 +231,13 @@ class AdoptedGeography:
         shapely.prepare(outline)
         return outline
 
-    def error_near(self, place: BaseGeometry | None = None) -> float | None:
+    def error_near(self, place: BaseGeometry | None = None, place_error_m: float | None = None) -> float | None:
         """The error of the outline near `place`: the largest measured error of the sources
         drawing the outline within the place's distance to it plus OUTLINE_REACH_M, and of
-        the place's own locality; and a disputed land's reach where any part of the place lies
-        in it (`_reaches`), since C asks of a parcel whether any part of it is in the area.
+        the place's own locality; and a disputed land's reach where the place reaches it
+        (`_reaches`): where part of the place may lie in it within the place's own error
+        (`place_error_m`, else `_place_error`) plus the error of the line drawing the edge
+        between them, since C asks of a parcel whether any part of it is in the area.
         Without a place, the largest over the whole outline and every disputed land."""
         if self.geometry is None:
             return None
@@ -248,13 +250,36 @@ class AdoptedGeography:
         points = _samples(near, OUTLINE_STEP_M)
         if place is not None:
             points = numpy.concatenate([points, [place.representative_point()]])
+        found = self._drawn_error(points, disputed=place is None)
+        if found is None:
+            return None
+        if place is not None:
+            own = None
+            for zone in self.zones:
+                for part in zone.errors:
+                    if not part.place_only:
+                        continue
+                    edges = self._disputed_edges.get(id(part))
+                    within = 0.0
+                    if edges is not None:
+                        if own is None:
+                            own = self._place_error(place, place_error_m)
+                        line = self._edge_error(place, edges)
+                        if line is None:
+                            return None
+                        within = own + line
+                    if _reaches(place, part.region, edges, within):
+                        found.append(part.error_m)
+        return max(found) + APPROXIMATION_M if found else None
+
+    def _drawn_error(self, points, disputed=False) -> list | None:
+        """The errors of the sources drawing a line at `points` (None: a source without a bound
+        draws there); with `disputed`, also each disputed land's reach where the points lie in it."""
         xy = shapely.get_coordinates(points)
         found = []
         for zone in self.zones:
             for part in zone.errors:
-                if part.place_only and place is not None:
-                    if _reaches(place, part.region):
-                        found.append(part.error_m)
+                if part.place_only and not disputed:
                     continue
                 at = xy if part.region is None else xy[shapely.intersects(part.region, points)]
                 if part.region is not None and not len(at):
@@ -262,17 +287,79 @@ class AdoptedGeography:
                 if part.error_m is None and part.field is None:
                     return None
                 found.append(part.error_m if part.field is None else float(numpy.max(part.field.at(at))))
-        return max(found) + APPROXIMATION_M if found else None
+        return found
 
-    def metric(self, near: BaseGeometry | None = None) -> MetricGeometry:
-        """The adopted area as C's `MetricGeometry` with the error of its outline near `near`."""
+    @cached_property
+    def _disputed_edges(self) -> dict:
+        """Per disputed piece (`id` of its error part), the edges of its outline that the plants'
+        band, a sheet or the land's line draws: all but those it shares with the rest of the
+        adopted area, which the listed units draw there (the sources' seam, within
+        APPROXIMATION_M). None where it has no such edge."""
+        out = {}
+        for zone in self.zones:
+            for part in zone.errors:
+                if not part.place_only or part.region is None:
+                    continue
+                piece = part.region
+                x0, y0, x1, y1 = piece.bounds
+                pad = 2 * APPROXIMATION_M
+                rest = shapely.clip_by_rect(self.geometry, x0 - pad, y0 - pad, x1 + pad, y1 + pad)
+                rest = polygonal(shapely.make_valid(rest).difference(piece)) if not rest.is_empty else None
+                edges = piece.boundary
+                if rest is not None and not rest.is_empty:
+                    edges = edges.difference(rest.buffer(APPROXIMATION_M, quad_segs=2))
+                if edges.is_empty or edges.length == 0:
+                    out[id(part)] = None
+                    continue
+                shapely.prepare(edges)
+                out[id(part)] = edges
+        return out
+
+    def _edge_error(self, place, edges) -> float | None:
+        """The error of the lines drawing a disputed piece's edges near `place`: the largest
+        error of the sources drawing them within the place's distance to them plus
+        OUTLINE_REACH_M, as the outline's own error is read (None: a source without a bound)."""
+        reach = place.distance(edges) + OUTLINE_REACH_M
+        x0, y0, x1, y1 = place.bounds
+        near = shapely.clip_by_rect(edges, x0 - reach, y0 - reach, x1 + reach, y1 + reach)
+        points = _samples(near, OUTLINE_STEP_M)
+        nearest = shapely.get_point(shapely.shortest_line(edges, place), 0)
+        points = numpy.concatenate([points, [nearest]]) if len(points) else numpy.array([nearest], dtype=object)
+        found = self._drawn_error(points)
+        if found is None:
+            return None
+        return max(found, default=0.0)
+
+    def _place_error(self, place, place_error_m=None) -> float:
+        """The place's own error, where the caller does not state it: for a point, row 1's
+        measured error (the error of every row 1 position, a named plant's included); for a
+        surface, the cadastre's measured error field over its outline, the local error of a
+        parcel the cadastre draws. Where the version holds only one of the two, that one."""
+        if place_error_m is not None:
+            return float(place_error_m)
+        row1 = [p.error_m for z in self.zones for p in z.plants if p.by == 'row 1' and p.error_m is not None]
+        fields = [part.field for z in self.zones for part in z.errors
+                  if part.source == 'cadastre' and part.field is not None and not part.place_only]
+        cadastral = None
+        if fields:
+            xy = shapely.get_coordinates(shapely.convex_hull(place))
+            cadastral = max(float(numpy.max(f.at(xy))) for f in fields)
+        if place.geom_type == 'Point' and row1:
+            return max(row1)
+        if cadastral is not None:
+            return cadastral
+        return max(row1, default=0.0)
+
+    def metric(self, near: BaseGeometry | None = None, near_error_m: float | None = None) -> MetricGeometry:
+        """The adopted area as C's `MetricGeometry` with the error of its outline near `near`,
+        a place with its own error `near_error_m` (else `_place_error`)."""
         if self.geometry is None:
             raise MissingInput(f'{self.provision_version_id}: no zone of this version is constructed')
         if self.unplaced:
             u = self.unplaced[0]
             raise MissingInput(f'{self.provision_version_id}: the act places part of {u.place} in its '
                                f'{u.role} zone by {u.by}: "{u.quote}"')
-        error = self.error_near(near)
+        error = self.error_near(near, near_error_m)
         if error is None:
             unbounded = sorted({p.source for z in self.zones for p in z.errors
                                 if p.error_m is None and p.field is None})
@@ -281,11 +368,17 @@ class AdoptedGeography:
         return MetricGeometry(self.geometry, UTM, error)
 
 
-def _reaches(place: BaseGeometry, region: BaseGeometry) -> bool:
-    """Whether some of `place` lies in `region`: for a polygon, an overlap of positive area,
-    more than OUTSIDE_TOLERANCE_M2 (a parcel that only touches the region has no part in it;
-    along a shared edge the overlap computed is arithmetic or the sources' seam, under 1 m² on
-    the real parcels probed); otherwise any common point."""
+def _reaches(place: BaseGeometry, region: BaseGeometry, edges: BaseGeometry | None = None,
+             within: float = 0.0) -> bool:
+    """Whether some of `place` may lie in `region`, a disputed piece. No line drawing the piece
+    is exact: the place reaches it where it lies within `within` (its own error plus the error
+    of the line drawing that edge) of `edges`, the piece's edges the plants' band, a sheet or
+    the land's line draws. Along the edges it shares with the rest of the adopted area (the
+    listed units), the sources' seam, it reaches the piece only by an overlap of more than
+    OUTSIDE_TOLERANCE_M2 for a polygon (the overlap computed there is arithmetic or the seam,
+    under 1 m² on the real parcels probed), or by any common point otherwise."""
+    if edges is not None and place.distance(edges) <= within:
+        return True
     if not region.intersects(place):
         return False
     if place.geom_type in ('Polygon', 'MultiPolygon'):

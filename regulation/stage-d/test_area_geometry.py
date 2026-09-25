@@ -23,7 +23,7 @@ from shapely.geometry import Point, box
 from cordon_c.core import MissingInput
 from cordon_c.spatial import MetricGeometry, adopted_membership, partial_parcel
 from cordon_d import area_error
-from cordon_d.area_geometry import (AdoptedGeography, ErrorPart, Observation, Sources, Unplaced, Zone,
+from cordon_d.area_geometry import (AdoptedGeography, ErrorPart, Observation, Plant, Sources, Unplaced, Zone,
                                     boundary_distances, buffer_extent, construct, dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
                                     _Builder, _disagreements, _drawn, _inspire_zoning, _layer_circles, _layer_gaps)
@@ -292,7 +292,9 @@ class BandAndAnnex(unittest.TestCase):
         def sheet_labels(self, geometry, minimum_m2=100.0):
             return []
 
-    def test_the_band_beyond_the_listed_units_and_a_listed_unit_it_misses_are_neither_in_nor_out(self):
+    def disputed(self):
+        """A 2.5 km band around one row 1 plant, held to the units the annex lists west of
+        x = 1,000, and a unit listed partly in the buffer that the band misses."""
         plant = Point(0, 0)
         infected = plant.buffer(50)
         band = plant.buffer(2_550).difference(infected)
@@ -301,17 +303,22 @@ class BandAndAnnex(unittest.TestCase):
         held = listed.union(missed)
         beyond = [band.difference(held)]
         buffer = band.intersection(held)
-        zones = {'infected': Zone('infected', ('ZONA INFETTA',), infected, 'rule', ('plants',))}
+        zones = {'infected': Zone('infected', ('ZONA INFETTA',), infected, 'rule', ('plants',),
+                                  plants=(Plant(plant, 7.4, 'row 1'),))}
         found = _disagreements(self.Stub(), zones, ('infected',), buffer, held, beyond,
                                (Unplaced('buffer', 'p2', 'foglio 9', 'legend', missed),))
-        self.assertEqual([(d.role, d.kind) for d in found], [('buffer', 'beyond'), ('buffer', 'short')])
-        self.assertAlmostEqual(found[0].geometry.area, band.difference(listed).area, delta=1)
-        self.assertGreater(found[0].reach_m, 1_550)          # the disputed land reaches 1,550 m past the line
         parts = (ErrorPart('plants', None, 7.4),) + tuple(
             ErrorPart('annex-disagreement', d.geometry, d.reach_m, place_only=True) for d in found)
         area = AdoptedGeography('REG:v1', 'REG', date(2025, 1, 1), None,
                                 (zones['infected'], Zone('buffer', ('ZONA CUSCINETTO',), buffer, 'rule', ('plants',),
                                                          errors=parts, disagreements=found)))
+        return band, listed, found, area
+
+    def test_the_band_beyond_the_listed_units_and_a_listed_unit_it_misses_are_neither_in_nor_out(self):
+        band, listed, found, area = self.disputed()
+        self.assertEqual([(d.role, d.kind) for d in found], [('buffer', 'beyond'), ('buffer', 'short')])
+        self.assertAlmostEqual(found[0].geometry.area, band.difference(listed).area, delta=1)
+        self.assertGreater(found[0].reach_m, 1_550)          # the disputed land reaches 1,550 m past the line
         truth = lambda p: adopted_membership(MetricGeometry(p, UTM, 7.4), area.metric(p)).truth
         self.assertIsNone(truth(Point(2_000, 0)))             # the band says in, the annex out
         self.assertIsNone(truth(Point(1_020, 0)))
@@ -337,6 +344,26 @@ class BandAndAnnex(unittest.TestCase):
         self.assertEqual(area.metric(touching).error_m, 8.4)
         self.assertTrue(parcel(touching))
         self.assertFalse(parcel(box(5_600, -100, 5_800, 100)))
+
+    def test_a_place_within_its_error_and_the_arc_s_of_the_disputed_land_is_neither_in_nor_out(self):
+        _, _, found, area = self.disputed()
+        truth = lambda p: adopted_membership(MetricGeometry(p, UTM, 7.4), area.metric(p)).truth
+        # No line drawing the disputed land is exact. Beyond the listed units its outer edge is
+        # the band's arc, drawn from the plants with row 1's 7.4 m error: a place within its own
+        # error plus that of the arc may have part in the land, so C answers neither way.
+        beyond = box(2_555, -50, 2_655, 50)                   # 5 m beyond the arc, 23 m error
+        self.assertAlmostEqual(beyond.distance(found[0].geometry), 5, delta=0.01)
+        self.assertIsNone(partial_parcel(MetricGeometry(beyond, UTM, 23.0), area.metric(beyond, 23.0)).truth)
+        near = Point(2_553, 0)                                # 3 m beyond the arc, row 1's 7.4 m error
+        self.assertAlmostEqual(near.distance(found[0].geometry), 3, delta=0.01)
+        self.assertIsNone(adopted_membership(MetricGeometry(near, UTM, 7.4), area.metric(near, 7.4)).truth)
+        self.assertIsNone(truth(near))                        # a point's own error unstated: row 1's
+        self.assertFalse(truth(Point(2_600, 0)))              # beyond both errors
+        # Along the edge the land shares with the listed units, the sources' seam, a parcel in
+        # the agreed area keeps its bound and its True, also with 23 m error, 5 m from the seam.
+        seam = box(900, -50, 995, 50)
+        self.assertEqual(area.metric(seam, 23.0).error_m, 8.4)
+        self.assertTrue(partial_parcel(MetricGeometry(seam, UTM, 23.0), area.metric(seam, 23.0)).truth)
 
     def test_the_region_s_circles_give_back_their_plants(self):
         layer = shapely.union_all([Point(0, 0).buffer(50), Point(60, 0).buffer(50), Point(500, 0).buffer(50)])
