@@ -120,7 +120,7 @@
     {
       "id": "notice-and-response-records",
       "name": "Notice, publication and owner-response records",
-      "purpose": "Supply the notice route the act declares, the publication duty's record, the recipient-effect event and the owner's response when an accepted A or B rule depends on them.",
+      "purpose": "Supply the notice route the act declares, the publication duty's record and the dated events public records state about an order when an accepted A or B rule depends on them.",
       "contracts": [
         "recipient-notice",
         "owner-response",
@@ -130,14 +130,11 @@
         "The determination's own text (declared route: reasoned immediate-effect clause, act-specific recipient-number finding)",
         "The competent municipality's albo pretorio record of the seven-day publication",
         "https://burp.regione.puglia.it/bollettini and the regional sites the plans name",
-        "The Osservatorio's communication record and municipal notification attempts (recipient effect)",
-        "PEC transmission to ARIF and the Prefettura (administrative event)",
-        "ARIF's authenticated election record or the owner's PEC (response)",
         "OpenWeb albo register exports (openweb/albo/csv.php): ARIF's own albo (arif.soluzionipa.it) and the competent municipality's (Fasano, Modugno, Montemesola)",
         "JCityGov albo detail pages and their posted documents (<comune>.trasparenza-valutazione-merito.it, papca/display)",
         "TAR decisions stating an order's delivery, posting, request or reply (the removal-orders court route)"
       ],
-      "population": "The act text, publication record, communication and response events attached to an admitted removal matter; not every notice published by every municipality.",
+      "population": "The act text, publication records and the events public records state about an admitted removal matter; not every notice published by every municipality.",
       "reader": "cordon_d.notices and cordon_d.events; cordon_d.notice_routes (each order's own mass-publicity basis); cordon_d.removal_events (publication records connected to an order's identity and adoption); cordon_d.albo_postings (albo register rows and posted documents attached by the identity they print); cordon_d.judgments (dated events a court decision states about an order)",
       "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
     },
@@ -169,34 +166,41 @@
       "routes": [
         "The removal determination's incorporated annex (addressees by comune, foglio, particella)",
         "Later acts that correct listed owners",
-        "The Osservatorio's case record and transmitted cadastral/owner data",
         "A competent public asset register when the affected parcel is public land"
       ],
       "population": "The addressee positions of an admitted removal measure and its corrections, and the people and parcels reached by an admitted finding.",
       "reader": "Generic record and document readers; no current source-specific consumer",
-      "open": "The annex establishes the position the act published for each parcel, not that the named person held the land; an effective correction act replaces the listed position for the parcels it names, with its effect against the corrected recipient following the notice route. Current standing beyond the latest act needs the operator's matter or a competent register; cadastral geometry and public-land catalogues are candidates until they do."
+      "open": "The annex establishes the position the act published for each parcel, not that the named person held the land; an effective correction act replaces the listed position for the parcels it names, with its effect against the corrected recipient following the notice route. Current standing beyond the latest act comes from the Osservatorio's records (osservatorio-records) or a competent register; cadastral geometry and public-land catalogues are candidates until they do."
     },
     {
-      "id": "field-and-execution-records",
-      "name": "Osservatorio and executing-body operational records",
-      "purpose": "Supply assignment, field assessment, treatment, removal, completion and lawful cost facts required by the accepted chain.",
+      "id": "osservatorio-records",
+      "name": "Osservatorio and ARIF first-party records",
+      "purpose": "Supply the facts only the Osservatorio's and its executor's own records hold: personal delivery of an order to a named recipient, the owner's election or refusal, standing after the latest act, commencement and removal performed, treatment before removal, the assignment of the presiding officer and of ARIF, field assessment, the cost of forced removal and its target, and the hosts within 50 m of an infected plant that no public survey observed.",
       "contracts": [
+        "recipient-notice",
+        "owner-response",
+        "party-land-standing",
         "personnel-assignment",
         "operative-assessment",
         "treatment-performance",
         "removal-performance",
         "execution-cost",
+        "plant-population",
         "controlled-access",
         "administrative-event"
       ],
       "routes": [
-        "The Osservatorio's casefile and field systems (presided execution record, countersignature, photograph, assignment, verification, cost determination)",
-        "ARIF or other executing-body records incorporated into the matter",
-        "Removal orders for the lawful work basis (removal-orders route)"
+        "The Osservatorio's PEC acceptance and delivery receipts for the order sent to a recipient (\"notificato ai proprietari/conduttori … alla loro PEC qualora presente\"), and any other individual notice record in its protocol, including notification attempts made through the municipality",
+        "ARIF's election record on the SPID portal the orders name (https://xylella.arifpuglia.it/), and the owner's PEC to the Osservatorio",
+        "The owner-change communication the orders require be sent to the Osservatorio (\"deve comunicare la variazione all'Osservatorio indicando il nome dell'attuale proprietario, entro massimo 3 giorni\"), and the cadastral and owner data the Osservatorio holds for the matter",
+        "The verbale the presiding Ispettore/Agente fitosanitario writes for each removal and destruction, with the presiding officer, the owner's or holder's countersignature, photographs and the treatment it records",
+        "ARIF's records incorporated into the matter: its notes to the Osservatorio by protocol on the measures it executed or could not complete, its assistants' supervision record and its charge of removal costs to the owner",
+        "The order's PEC to ARIF \"per gli adempimenti conseguenti\" and to the Prefettura",
+        "The field check of the 50 m area around each infected plant the order prescribes, attributed to the actor the order names"
       ],
-      "population": "The operational records for the admitted finding and resulting work, including corrections and completion evidence.",
-      "reader": "cordon_d.evidence, cordon_d.events and source-specific readers still to be implemented",
-      "open": "No public procedure manual can supply an unseen operational fact. A coercive-direction or execution-priority act is not proof of completed removal; a published removal label or removed-plant layer is a lead to a first-party record, not a removal occurrence, and the retained SIT capture holds no removed-plant layer after 2017. At deployment these are first-party operator inputs, with unavailable fields left unknown."
+      "population": "The records for each live order's recipients, plants and work: deliveries, responses, standing changes, assignments, field and execution records, costs and the 50 m field check.",
+      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes supplied delivery, commencement, removal and history records to C per recipient (scripts/read_prescriptions.py --records).",
+      "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check."
     },
     {
       "id": "vector-and-treatment-observations",
