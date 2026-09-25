@@ -37,6 +37,23 @@ def encoded(value):
     raise TypeError(type(value).__name__)
 
 
+def monitoring_captured_after(root, known_through):
+    """(capture, url) of every retained monitoring release captured after the cutoff.
+
+    Read from the acquisition records `cordon_d.monitoring.releases` reads: a campaign
+    release's `captured_at`, an ArcGIS layer release's `captured_through`.
+    """
+    late = []
+    for record in json.loads((root / 'campaign/releases.json').read_text()):
+        if datetime.fromisoformat(record['captured_at']) > known_through:
+            late.append((record['captured_at'], record['url']))
+    for metadata_path in sorted((root / 'sit').glob('*/*/*/layer.json')):
+        record = json.loads((metadata_path.parent / 'release.json').read_text())
+        if datetime.fromisoformat(record['captured_through']) > known_through:
+            late.append((record['captured_through'], record['url']))
+    return late
+
+
 def prior_reading_version(store, digest, resume_versions):
     """The retained reading version to replay for this document, or None for a fresh reading.
 
@@ -182,6 +199,14 @@ def main():
     args = parser.parse_args()
     if (args.join_output or args.join_summary or args.confirmation_request) and args.known_through is None:
         parser.error('--join-output, --join-summary and --confirmation-request require --known-through')
+    if args.join_output or args.join_summary or args.confirmation_request:
+        late = monitoring_captured_after(args.monitoring_root, args.known_through)
+        if late:
+            captured, url = max(late, key=lambda item: datetime.fromisoformat(item[0]))
+            parser.error(f'{len(late)} retained monitoring releases were captured after --known-through '
+                         f'{args.known_through.isoformat()} (latest {captured}, {url}); the '
+                         'monitoring stream is not filtered by the cutoff, so a join or confirmation request '
+                         'at this cutoff would stand on observations the corpus did not then hold')
     if (args.retain_interrupted_reservation or args.retry_interrupted_request) and not args.execute:
         parser.error('--retain-interrupted-reservation requires --execute and its ledger')
     if args.bounded_requests_only and (not args.execute or args.relationships):

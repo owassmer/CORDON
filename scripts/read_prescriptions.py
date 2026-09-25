@@ -63,17 +63,15 @@ def admitted_at(paths):
     """When the repository came to hold each A-admitted text: the latest commit that added it.
 
     An admitted text has no acquisition record of its own; the commit that added it is
-    the latest moment the corpus can have come to hold it. A path git cannot date is absent.
+    the latest moment the corpus can have come to hold it. A path no commit added is absent;
+    a git failure raises, since "could not date" is not "not held".
     """
     import subprocess
     paths = sorted(paths)
     if not paths:
         return {}
-    try:
-        log = subprocess.run(['git', 'log', '--diff-filter=A', '--format=%x01%cI', '--name-only', '--', *paths],
-                             cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    except (OSError, subprocess.CalledProcessError):
-        return {}
+    log = subprocess.run(['git', 'log', '--diff-filter=A', '--format=%x01%cI', '--name-only', '--', *paths],
+                         cwd=ROOT, capture_output=True, text=True, check=True).stdout
     added = {}
     for block in log.split('\x01')[1:]:
         lines = [line for line in block.splitlines() if line.strip()]

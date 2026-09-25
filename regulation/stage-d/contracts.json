@@ -97,7 +97,7 @@
         "official-dataset"
       ],
       "run_input": {
-        "rule": "The run request states the evaluation context; no parameter has a default. The event date selects the A/B version. The knowledge cutoff has one meaning: what the corpus held. Every reader admits only sources captured at or before it (captured_at <= known_through in the source map's acquisition records; an A-admitted text, which has no acquisition record, from the latest commit that added it), and the same instant is C's evaluated_at. Each event's own date stays with that event's contract.",
+        "rule": "The run request states the evaluation context; no parameter has a default. The event date selects the A/B version. The knowledge cutoff has one meaning: what the corpus held, and the same instant is C's evaluated_at. The readers that apply it admit only sources captured at or before it: laboratory reports, their associations and the report routes in findings, removal-order originals, postings, held events and liveness closures by captured_at <= known_through in the source map's acquisition records; the held-act texts D reads as evidence of stated changes, which have no acquisition record, by the latest commit that added them. Supplied records carry no capture time, so their own dates bound them: one whose occurred, complete_from or complete_through is later than the cutoff is refused. The monitoring observation stream is not filtered by the cutoff: a join or confirmation request is refused while any retained monitoring release was captured after it. Each event's own date stays with that event's contract.",
         "entry_points": [
           {
             "callable": "cordon_d.evidence.Evidence.view",

@@ -19,6 +19,7 @@ HERE = Path(__file__).parent
 sys.path.insert(0, str(ROOT / 'scripts'))
 import read_notice_routes  # noqa: E402
 import read_prescriptions  # noqa: E402
+import read_reports  # noqa: E402
 
 
 class RunInputTests(unittest.TestCase):
@@ -97,6 +98,74 @@ class RunInputTests(unittest.TestCase):
             self.assertEqual([c['effect'] for c in closures['X-2025-117']], ['annulled'])
             self.assertEqual([i['sources'] for i in intervals['X-2025-117']], [['a' * 64]])
             self.assertEqual([e['source'] for e in left_out], ['d' * 64])
+
+    def test_held_acts_and_certificates_after_the_cutoff_are_left_out(self):
+        cutoff = datetime(2025, 7, 14, 10, tzinfo=timezone.utc)
+        early, late = 'corpus/early.txt', 'corpus/late.txt'
+        chosen = [dict(path=early, instruments=['X-2025-117']), dict(path=late, instruments=['X-2025-117'])]
+        dates = {early: datetime(2025, 7, 1, tzinfo=timezone.utc), late: datetime(2026, 9, 4, tzinfo=timezone.utc)}
+        read = []
+
+        def read_act(path, root, store, **options):
+            read.append(path)
+            return dict(request_sha256='0' * 64, reading=dict(identity={}, relationships=[], issues=[]))
+        from cordon_d import held_acts, removal_events
+        with mock.patch.object(held_acts, 'selected', return_value=(chosen, 2)), \
+                mock.patch.object(held_acts, 'read_act', read_act), \
+                mock.patch.object(held_acts, 'stated_changes', return_value=[]), \
+                mock.patch.object(read_prescriptions, 'admitted_at', return_value=dates):
+            _, report = read_prescriptions.held_act_changes([], None, None, dict(execute=False), cutoff)
+        self.assertEqual(read, [early])
+        self.assertEqual([item['path'] for item in report['not_held_by_cutoff']], [late])
+        # A git failure raises: "could not date" is not "not held".
+        with mock.patch('subprocess.run', side_effect=subprocess.CalledProcessError(128, 'git')), \
+                self.assertRaises(subprocess.CalledProcessError):
+            read_prescriptions.admitted_at([early])
+        # A publication certificate whose source was captured after the cutoff is not read.
+        before, after = '2025-07-01T09:00:00+00:00', '2026-09-14T01:17:59+00:00'
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name, records in (('removal-orders', [dict(sha256='a' * 64, captured_at=before, url='https://x.invalid/a')]),
+                                  ('removal-events', [dict(sha256='b' * 64, captured_at=after, kind='event',
+                                                           url='https://x.invalid/b')])):
+                (root / 'corpus/sources' / name).mkdir(parents=True)
+                (root / 'corpus/sources' / name / 'records.json').write_text(json.dumps(records))
+            readings = root / 'store/derived/document-readings'
+            readings.mkdir(parents=True)
+            for stem, source in (('held-certificate', 'a' * 64), ('later-certificate', 'b' * 64)):
+                (readings / f'{stem}.json').write_text(json.dumps(dict(request=dict(
+                    prompt='Read this publication certificate.', sources=[source]))))
+            attested = []
+            with mock.patch.object(read_prescriptions, 'ROOT', root), \
+                    mock.patch.object(removal_events, 'retained_publication_attestation',
+                                      lambda stem, store: attested.append(stem)), \
+                    mock.patch.object(removal_events, 'connect_publication_attestation',
+                                      lambda attestation, declarations, acquisitions: None), \
+                    mock.patch.object(removal_events, 'connected_publications', lambda publications, measures: []):
+                _, failures = read_prescriptions.held_events([], root / 'store', cutoff)
+            self.assertEqual((attested, failures), (['held-certificate'], []))
+
+    def test_a_join_is_refused_while_a_monitoring_release_postdates_the_cutoff(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory) / 'monitoring'
+            (root / 'campaign').mkdir(parents=True)
+            (root / 'campaign/releases.json').write_text(json.dumps([dict(
+                url='https://x.invalid/CAMP.xlsx', path='CAMP.xlsx', captured_at='2025-07-01T09:00:00+00:00')]))
+            layer = root / 'sit/Operationals2/Service/1'
+            layer.mkdir(parents=True)
+            (layer / 'layer.json').write_text('{}')
+            (layer / 'release.json').write_text(json.dumps(dict(
+                url='https://x.invalid/MapServer/1', captured_through='2026-09-10T21:31:39+00:00')))
+            for flag in ('--join-summary', '--join-output'):
+                with self.subTest(flag=flag):
+                    run = subprocess.run([sys.executable, str(ROOT / 'scripts/read_reports.py'),
+                                          '--monitoring-root', str(root), flag, str(Path(directory) / 'out.json'),
+                                          '--known-through', '2025-07-14T12:00:00+02:00'],
+                                         capture_output=True, text=True, timeout=300)
+                    self.assertEqual(run.returncode, 2, run.stderr[-600:])
+                    self.assertIn('1 retained monitoring releases were captured after --known-through', run.stderr)
+                    self.assertIn('https://x.invalid/MapServer/1', run.stderr)
+            self.assertEqual(read_reports.monitoring_captured_after(root, datetime(2026, 9, 11, tzinfo=timezone.utc)), [])
 
     def test_every_c_reaching_path_refuses_a_missing_date_or_cutoff(self):
         cutoff = datetime(2026, 9, 24, tzinfo=timezone.utc)
