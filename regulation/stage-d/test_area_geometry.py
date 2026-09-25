@@ -321,6 +321,22 @@ class BandAndAnnex(unittest.TestCase):
         self.assertTrue(truth(Point(-1_500, 0)))
         self.assertFalse(truth(Point(-6_000, 0)))             # both say out
         self.assertFalse(truth(Point(5_600, 0)))
+        # C asks of a parcel whether any part of it lies in the area. A parcel straddling the
+        # band's outer edge beyond the listed units, its representative point beyond the band,
+        # has part of itself in the disputed land: neither way, not False 1,100 m from the area.
+        parcel = lambda g: partial_parcel(MetricGeometry(g, UTM, 7.4), area.metric(g)).truth
+        straddling = box(2_450, -100, 2_900, 100)
+        self.assertFalse(found[0].geometry.intersects(straddling.representative_point()))
+        self.assertGreater(found[0].geometry.intersection(straddling).area, 15_000)
+        self.assertIsNone(parcel(straddling))
+        # A parcel that only touches the disputed land has no part in it and keeps its bound,
+        # also where arithmetic along the shared edge leaves a sliver (0.0002 m² here).
+        touching = box(500, -100, 1_000.000_001, 100)
+        self.assertLess(0, found[0].geometry.intersection(touching).area)
+        self.assertLess(found[0].geometry.intersection(touching).area, 0.001)
+        self.assertEqual(area.metric(touching).error_m, 8.4)
+        self.assertTrue(parcel(touching))
+        self.assertFalse(parcel(box(5_600, -100, 5_800, 100)))
 
     def test_the_region_s_circles_give_back_their_plants(self):
         layer = shapely.union_all([Point(0, 0).buffer(50), Point(60, 0).buffer(50), Point(500, 0).buffer(50)])
@@ -500,6 +516,15 @@ class ActPlants(unittest.TestCase):
         truths = [adopted_membership(MetricGeometry(p, UTM, 7.4), area.metric(p)).truth
                   for p in (Point(583_448.4, 4_553_301.9), Point(588_179.7, 4_549_411.2))]
         self.assertNotEqual(truths, [True, True])
+
+    @unittest.skipUnless(row1_held(), 'row 1 is not in this store')
+    def test_row_1_s_error_is_read_from_row_1_and_only_the_positives_are_cached(self):
+        from cordon_d.area_geometry import row1_positives
+        from cordon_d.spatial import positional_terms
+        document = row1_positives(ROOT)
+        self.assertEqual(document['error_m'], positional_terms(store_root(ROOT)).error_m)
+        cached = [json.loads(p.read_text()) for p in (store_root(ROOT) / 'derived/areas/row1-positives').glob('*.json')]
+        self.assertIn(document['positives'], cached)         # the positives alone, no error beside them
 
     @unittest.skipUnless(held('cadastre-fogli') and held('cadastre-particelle') and held('istat-boundaries'),
                          'the geometry sources are not in this store')

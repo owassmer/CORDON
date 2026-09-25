@@ -158,8 +158,9 @@ class Disagreement:
 class ErrorPart:
     """The error of the outline a source draws: fixed, or a measured field, within a region.
 
-    `place_only`: the error of a place lying in the region, not of the outline running
-    there: land whose membership the act's rule and its annex dispute (`Disagreement`)."""
+    `place_only`: the error of a place any part of which lies in the region, not of the
+    outline running there: land whose membership the act's rule and its annex dispute
+    (`Disagreement`)."""
     source: str
     region: BaseGeometry | None            # None: wherever the zone's outline runs
     error_m: float | None = None
@@ -233,7 +234,8 @@ class AdoptedGeography:
     def error_near(self, place: BaseGeometry | None = None) -> float | None:
         """The error of the outline near `place`: the largest measured error of the sources
         drawing the outline within the place's distance to it plus OUTLINE_REACH_M, and of
-        the place's own locality; and a disputed land's reach where the place lies in it.
+        the place's own locality; and a disputed land's reach where any part of the place lies
+        in it (`_reaches`), since C asks of a parcel whether any part of it is in the area.
         Without a place, the largest over the whole outline and every disputed land."""
         if self.geometry is None:
             return None
@@ -251,7 +253,7 @@ class AdoptedGeography:
         for zone in self.zones:
             for part in zone.errors:
                 if part.place_only and place is not None:
-                    if part.region.intersects(place.representative_point()):
+                    if _reaches(place, part.region):
                         found.append(part.error_m)
                     continue
                 at = xy if part.region is None else xy[shapely.intersects(part.region, points)]
@@ -277,6 +279,18 @@ class AdoptedGeography:
             raise MissingInput(f'{self.provision_version_id}: no positional error bound is supplied for '
                                f'the geometry source {", ".join(unbounded)}')
         return MetricGeometry(self.geometry, UTM, error)
+
+
+def _reaches(place: BaseGeometry, region: BaseGeometry) -> bool:
+    """Whether some of `place` lies in `region`: for a polygon, an overlap of positive area,
+    more than OUTSIDE_TOLERANCE_M2 (a parcel that only touches the region has no part in it;
+    along a shared edge the overlap computed is arithmetic, up to 0.0001 m² on real parcels);
+    otherwise any common point."""
+    if not region.intersects(place):
+        return False
+    if place.geom_type in ('Polygon', 'MultiPolygon'):
+        return region.intersection(place).area > OUTSIDE_TOLERANCE_M2
+    return True
 
 
 def _samples(line, step):
@@ -2003,23 +2017,25 @@ def _row1_rows(source: Path) -> list:
 def row1_positives(root: Path) -> dict | None:
     """{'error_m', 'positives'}: row 1's located positives (`_row1_rows`) and its measured
     positional error (`spatial.positional_terms`), or None where the store does not hold row
-    1's grouped observations. This never derives them. Cached in the derived store under the
-    grouped observations' key and the digest of `_row1_rows`."""
+    1's grouped observations. This never derives them. The error is read from row 1 on each
+    call, since it depends on inputs the positives' key does not cover; only the positives
+    are cached in the derived store, under the grouped observations' key and the digest of
+    `_row1_rows`."""
     import hashlib
     import inspect
     key = row1_key(root)
     if key is None:
         return None
-    digest = hashlib.sha256(f'{key}\0{inspect.getsource(_row1_rows)}'.encode()).hexdigest()
-    target = _derived(root, 'row1-positives', digest)
-    if target.exists():
-        return json.loads(target.read_text())
     from .spatial import positional_terms
-    store = _derived_root(root)
     try:
-        error = positional_terms(store).error_m
+        error = positional_terms(_derived_root(root)).error_m
     except (OSError, KeyError, ValueError, MissingInput):
         return None
-    document = {'error_m': error, 'positives': _row1_rows(Path(root) / ROW1_SOURCE)}
-    _write_derived(target, document)
-    return document
+    digest = hashlib.sha256(f'{key}\0positives\0{inspect.getsource(_row1_rows)}'.encode()).hexdigest()
+    target = _derived(root, 'row1-positives', digest)
+    if target.exists():
+        positives = json.loads(target.read_text())
+    else:
+        positives = _row1_rows(Path(root) / ROW1_SOURCE)
+        _write_derived(target, positives)
+    return {'error_m': error, 'positives': positives}
