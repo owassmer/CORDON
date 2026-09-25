@@ -20,6 +20,7 @@ sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d
 
 from cordon_d.albo_postings import (jcitygov_posting, openweb_rows, posted_document_events,  # noqa: E402
                                     posted_identity, register_events)
+from cordon_d.document_subscription import TransportFailure  # noqa: E402
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import blob_path, store_root  # noqa: E402
 
@@ -99,6 +100,8 @@ def main():
                                       posted=attachment['sha256'], identity=response['reading']))
         except FileNotFoundError:
             failures.append(dict(source=digest, url=url, cause='no retained identity reading'))
+        except TransportFailure:  # the subscription, not the source: the pass stops
+            raise
         except Exception as error:  # a failed read is an execution failure, not source silence
             failures.append(dict(source=digest, url=url, cause=f'{type(error).__name__}: {error}'[:400]))
     result = dict(events=events, unattached=unattached, spans=spans, failures=failures)
@@ -109,4 +112,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except TransportFailure as error:  # a usage limit or transport failure stops the pass; never a failure entry
+        print(f'STOPPED {type(error).__name__}: {error}'[:800], flush=True)
+        sys.exit(3)

@@ -19,7 +19,8 @@ from cordon_c.core import Snapshot  # noqa: E402
 from cordon_d.case_prescriptions import read_prescription  # noqa: E402
 from cordon_d.notice_routes import c_result, mass_publicity_basis, read_notice_route  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
-from read_prescriptions import _wait_for_memory, _write, population, summary  # noqa: E402
+from cordon_d.document_subscription import TransportFailure  # noqa: E402
+from read_prescriptions import _wait_for_memory, _write, population, stopped, summary  # noqa: E402
 
 
 def instrument_of(digest, store):
@@ -102,6 +103,8 @@ def read_one(item, options, today):
         entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, today, postings=postings)))
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
+    except TransportFailure:  # the subscription, not the source: the pass stops
+        raise
     except Exception as error:  # a failed read is an execution failure, not source silence
         entry['cause'] = f'{type(error).__name__}: {error}'[:600]
     return entry
@@ -140,16 +143,23 @@ def main():
         _write(arguments.out, [done[i] for i in sorted(done)])
 
     if arguments.workers == 1:
-        for index, item in enumerate(selected):
-            finished(index, read_one(item, options, today))
+        try:
+            for index, item in enumerate(selected):
+                finished(index, read_one(item, options, today))
+        except TransportFailure as error:
+            stopped(error)
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker,
                                  initargs=(postings,)) as pool:
             futures = {pool.submit(read_one, item, options, today): index
                        for index, item in enumerate(selected)}
-            for future in as_completed(futures):
-                finished(futures[future], future.result())
+            try:
+                for future in as_completed(futures):
+                    finished(futures[future], future.result())
+            except TransportFailure as error:
+                pool.shutdown(wait=True, cancel_futures=True)
+                stopped(error)
 
 
 if __name__ == '__main__':

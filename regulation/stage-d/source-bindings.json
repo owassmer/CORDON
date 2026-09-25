@@ -203,20 +203,22 @@
       "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check."
     },
     {
-      "id": "vector-and-treatment-observations",
-      "name": "Official vector and treatment observations",
-      "purpose": "Supply observed vector state or treatment performance when an accepted computation requires it.",
+      "id": "vector-monitoring",
+      "name": "Official vector-monitoring observations",
+      "purpose": "Supply when the vector flies in an adopted zone and which vectors tested positive: for the Article 13(1) next-flight-season limb, the next-season onset bound, a retrospective lateness bound (a removal after it was certainly late) that exists only once that onset has passed and been published; C's ordering clock takes an exact onset, and no accepted C function reads a bound until the deferred 13(1)-sub1 evaluator exists. And the vector-positive days of the Article 6(1) detection history.",
       "contracts": [
         "vector-biology",
-        "treatment-performance",
         "survey-performance"
       ],
       "routes": [
-        "Official Osservatorio, ARIF and incorporated scientific monitoring publications"
+        "https://cartografia.sit.puglia.it/doc/xylella/vettori/ (folders dati2022 to dati2026 and circolari2023; each capture in corpus/sources/vectors/records.json)",
+        "http://www.emergenzaxylella.it/portal/portale_gestione_agricoltura and its Web Archive captures, which name each transmission, table and circolare",
+        "The Osservatorio's vector-measure acts and circolari, from BURP and the municipal copies each capture record names",
+        "Held removal orders whose text recites a vector finding (removal-orders route)"
       ],
-      "population": "The observations for the place, period and intervention evaluated by the accepted consumer.",
-      "reader": "Generic table and document readers; source-specific reader not yet selected",
-      "open": "Identify the exact C consumers before acquiring a publication series. General Xylella research is not an operational input by default."
+      "population": "Every official vector-monitoring publication with an event date in reach: each Osservatorio table, composite, find-site table and circolare (2022-2024), each CNR-IPSP transmission (2025 onward) with its crop series, rounds and windows, each vector-measure act that prints monitoring results, and each held act that recites a vector finding.",
+      "reader": "cordon_d.vectors.population, rounds_of, records_of, statements_of, onset_bound, vector_detections, with_vector_days, and AnnexIIIZones and agro_in for the zone test on row 3's geography (cordon_d.area_geometry) through C's partial_parcel; scripts/acquire_vectors.py, scripts/read_vectors.py and scripts/vector_bounds.py (rounds dated from held words; raster tables read in tiles for the consumed cells on the Claude subscription at medium effort, each response retained under its exact request; PDF tables read from their text layer, with a model page read where that does not read cleanly)",
+      "open": "Rounds named by no listing stay unnamed: the Osservatorio's 2022 rounds after IX's weeks, circolare 4/2023 and 1/2024, every 2025 CNR round except the 18/07/2025 update (which prints no window), the 2026 olive and vine rounds between the held ones, and the announced tests of the August 2026 captures. Rounds acquired after each season's stop stay untranscribed and are listed beside the bound as such; their tables' header bands are read, and none prints a test-result column. The 2025 season places no adult in Annex III, so a detection before it has no bound. No source states the positional error of a printed site coordinate, so a site joins a zone through the agro its publisher prints, drawn as row 3 draws a comune and carrying the error row 3 sources for that outline (the cadastre's measured field, ISTAT's measured bound where ISTAT draws); an agro with none sourced (Andria, Bitonto, Corato, Mottola and others outside Annex III, whose sheets are not held) leaves its sites unplaced, and coordinates outside the agro beyond its error leave the record unplaced. Along the border of Annex III, C cannot say that no part of a neighbouring agro lies in it, so those sites stay unknown rather than outside. Area aggregates print no place; the recited Triggiano positives print no window, and only circolare 5/2023 prints an agro. No official statement says adults were absent, so no onset has a lower bound."
     },
     {
       "id": "calendar",

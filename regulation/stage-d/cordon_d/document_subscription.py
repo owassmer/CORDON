@@ -41,6 +41,90 @@ def read_retained(request_id, store):
     return dict(response, reading=reading)
 
 
+class TransportFailure(RuntimeError):
+    """The subscription, not the source, returned no reading: a usage or session limit, an
+    error envelope, no envelope, a failed CLI, or a request past its timeout. A reading pass
+    stops on it; it is never recorded as a reading limit of the source."""
+
+
+class UsageLimit(TransportFailure):
+    """The subscription's session or usage limit."""
+
+
+USAGE_LIMIT = re.compile(r"session limit|usage limit|rate limit|hit your .*limit|limit .*resets|"
+                         r"quota|overloaded|credit balance", re.I)
+# Claude error subtypes that concern the source packet: the model could not produce a
+# conforming reading of it. Any other error envelope is the transport's.
+READING_SUBTYPES = ('error_max_structured_output_retries', 'error_max_turns')
+
+
+def claude_failure(returncode: int, stdout: str, stderr: str):
+    """(structured reading, None) or (None, the exception) for one `claude -p` JSON result."""
+    try:
+        envelope = json.loads(stdout)
+    except json.JSONDecodeError:
+        text = (stderr or stdout)[-800:]
+        kind = UsageLimit if USAGE_LIMIT.search(stderr + stdout) else TransportFailure
+        return None, kind('Claude subscription returned no envelope: ' + text)
+    if not isinstance(envelope, dict):
+        return None, TransportFailure('Claude subscription returned no envelope: ' + stdout[-800:])
+    detail = str(envelope.get('subtype')) + ' ' + str(envelope.get('result'))[-800:]
+    if USAGE_LIMIT.search(str(envelope.get('result'))) and (returncode or envelope.get('is_error')):
+        return None, UsageLimit('Claude subscription usage limit: ' + detail)
+    if envelope.get('is_error') or returncode:
+        if envelope.get('subtype') in READING_SUBTYPES:
+            return None, RuntimeError('Claude subscription returned no reading: ' + detail)
+        return None, TransportFailure('Claude subscription transport error: ' + detail)
+    if not isinstance(envelope.get('structured_output'), dict):
+        return None, RuntimeError('Claude subscription returned no reading: ' + detail)
+    return envelope['structured_output'], None
+
+
+def codex_failure(stderr: str) -> TransportFailure:
+    """The exception for a failed `codex exec`: a usage limit where it says so, else the transport's."""
+    kind = UsageLimit if USAGE_LIMIT.search(stderr or '') else TransportFailure
+    return kind('Codex subscription failed: ' + (stderr or '')[-1500:])
+
+
+def _run(command, **options):
+    """subprocess.run, with a timeout or a missing CLI raised as the transport's failure."""
+    try:
+        return subprocess.run(command, **options)
+    except (subprocess.TimeoutExpired, OSError) as error:
+        raise TransportFailure(f'Subscription request failed: {type(error).__name__}: {error}'[:500]) from error
+
+
+def call_claude_images(prompt, schema, files, *, model, effort, timeout, system):
+    """One Claude subscription request whose only tool is Read on the supplied image files.
+
+    `files` are (name, bytes, label); each is written to a private directory and named in
+    the prompt. Returns the structured reading; raises `UsageLimit` / `TransportFailure`
+    for the subscription's failures and RuntimeError for a reading the model could not
+    conform. Never a metered key.
+    """
+    command = ['claude', '-p', '--model', model, '--effort', effort, '--system-prompt', system,
+               '--disable-slash-commands', '--strict-mcp-config', '--tools', 'Read',
+               '--allowedTools', 'Read', '--permission-mode', 'dontAsk', '--no-session-persistence',
+               '--output-format', 'json', '--json-schema', json.dumps(schema, sort_keys=True)]
+    env = dict(os.environ)
+    for key in ('ANTHROPIC_API_KEY', 'ANTHROPIC_AUTH_TOKEN', 'CLAUDE_CODE_USE_BEDROCK', 'CLAUDE_CODE_USE_VERTEX'):
+        env.pop(key, None)  # the subscription only, never a metered key
+    with TemporaryDirectory(prefix='cordon-images-') as directory:
+        instruction = prompt
+        if files:
+            instruction += '\nThe source images follow; read each with Read:\n'
+            for name, data, label in files:
+                path = Path(directory) / name
+                path.write_bytes(data)
+                instruction += f'{label}: {path}\n'
+        result = _run(command + ['--add-dir', directory], input=instruction, capture_output=True,
+                      text=True, env=env, timeout=timeout, cwd=directory)
+    reading, error = claude_failure(result.returncode, result.stdout, result.stderr)
+    if error is not None:
+        raise error
+    return reading
+
+
 def _call(prompt, schema, images, directory, model, effort, timeout):
     schema_path = directory / 'schema.json'
     schema_path.write_text(json.dumps(schema))
@@ -56,10 +140,10 @@ def _call(prompt, schema, images, directory, model, effort, timeout):
     env = dict(os.environ)
     for key in ('OPENAI_API_KEY', 'CODEX_API_KEY'):
         env.pop(key, None)
-    result = subprocess.run(command + ['-'], input=prompt, text=True,
-                            capture_output=True, env=env, timeout=timeout)
+    result = _run(command + ['-'], input=prompt, text=True,
+                  capture_output=True, env=env, timeout=timeout)
     if result.returncode:
-        raise RuntimeError('Codex subscription failed: ' + result.stderr[-1500:])
+        raise codex_failure(result.stderr)
     return output.read_text()
 
 
@@ -72,15 +156,12 @@ def _call_claude(prompt, schema, directory, model, effort, timeout):
     for key in ('ANTHROPIC_API_KEY', 'ANTHROPIC_AUTH_TOKEN', 'CLAUDE_CODE_USE_BEDROCK',
                 'CLAUDE_CODE_USE_VERTEX'):
         env.pop(key, None)
-    result = subprocess.run(command, input=prompt, text=True, capture_output=True,
-                            env=env, timeout=timeout, cwd=directory)
-    if result.returncode:
-        raise RuntimeError('Claude subscription failed: ' + (result.stderr or result.stdout)[-1500:])
-    envelope = json.loads(result.stdout)
-    if envelope.get('is_error') or envelope.get('structured_output') is None:
-        raise RuntimeError('Claude subscription returned no structured reading: '
-                           + str(envelope.get('subtype')) + ' ' + str(envelope.get('result'))[-800:])
-    return json.dumps(envelope['structured_output'], ensure_ascii=False)
+    result = _run(command, input=prompt, text=True, capture_output=True,
+                  env=env, timeout=timeout, cwd=directory)
+    reading, error = claude_failure(result.returncode, result.stdout, result.stderr)
+    if error is not None:
+        raise error
+    return json.dumps(reading, ensure_ascii=False)
 
 
 def read_native_text(digests, store, *, prompt, schema, model='opus', effort='medium',
