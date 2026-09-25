@@ -1,0 +1,35 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00126",
+ "act_sha256": "943e4d6102aef81d8a3911bd52a94423c217b2226c6a5a15eb6aebae11af89dc",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "db31541b11096d6e0cce86b5a281499239a0274d71d683ab1f9d5cb22e4a577f",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:32:34.282519+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "di dovere dichiarare il presente provvedimento immediatamente esecutivo in quanto è necessario applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia.",
+   "Di istituire l'area delimitata per \"Xylella fastidiosa sottospecie pauca – Modugno (BA)\", ai sensi della lettera a), comma 2 - art. 4 del Reg (UE) 2020/1201, costituita da: zona infetta di almeno 50 m attorno alla pianta infetta a Xylella fastidiosa sottospecie pauca; una zona cuscinetto di 2,5 km attorno alla zona infetta.",
+   "Di dovere adottare, nella suddetta area delimitata, le misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i.",
+   "Di approvare l'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata \"Xylella fastidiosa sottospecie pauca - Modugno (BA)\".",
+   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia.",
+   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata \"Xylella fastidiosa sottospecie pauca - Modugno (BA)\".",
+   "Di stabilire che detta delimitazione è consultabile sui portali istituzionali della Regione Puglia www.regione.puglia.it e sul sito istituzionale www.emergenzaxylella.it.",
+   "Di dare atto altresì che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

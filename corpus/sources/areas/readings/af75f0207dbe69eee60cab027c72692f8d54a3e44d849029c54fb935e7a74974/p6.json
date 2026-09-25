@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+ "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "cdc3875eb82e2224b3ca47a34aef0ed253c5f8b6909078d0441e1d406265a739",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:19:56.294081+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 BIS (map title)",
+   "Legenda: Campionamento 2024 - Positivi; Zona Infetta X.f. sub. fastidiosa; Zona Cuscinetto X.f. sub fastidiosa; Confini comunali",
+   "Map shows municipalities BARI, TRIGGIANO, NOICATTARO, CAPURSO with buffer zone circle and sample points"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+ "act_sha256": "c114e6005fa9e93e0491b11bb1f292e29c3aed9738b6e911acce9e71850db9b2",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "565f3102f2a07e24292123d61fb6a558f9885cafb58dbf54a6f4cc6e30a5b46e",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:21:08.671543+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "Legenda: Zona Cuscinetto X.f. sub. pauca; Zona Contenimento X.f. sub. pauca; Zona Infetta X.f. sub. pauca; Zona Cuscinetto X.f. sub. fastidiosa; Zona Infetta X.f. sub. fastidiosa; Confini Comunali; Confini Provinciali",
+   "Map depicts province boundaries Prov. BR, Prov. TA, Prov. BA and municipalities including Carovigno, Ostuni, Cisternino, Locorotondo, Fasano, Monopoli, Polignano a Mare, Castellana Grotte, Alberobello, Martina Franca, Crispiano, Statte, Massafra, Taranto, Grottaglie, Francavilla Fontana, Latiano, Oria, Sava, Mottola, Palagiano, Castellaneta, Laterza, Ginosa, Noci, Gioia del Colle, Putignano, Conversano, Mola di Bari, Triggiano (highlighted with pink dot), Noicattaro, Rutigliano, Capurso, Casamassima, Adelfia, Turi, Santeramo in Colle, Cassano delle Murge, Altamura, Bari, Modugno, Bitetto, Palo del Colle, Grumo Appula, Toritto, Bitonto, Terlizzi"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
