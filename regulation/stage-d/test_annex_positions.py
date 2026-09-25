@@ -15,7 +15,7 @@ import unittest
 from unittest import mock
 from zoneinfo import ZoneInfo
 
-from cordon_c.core import Snapshot
+from cordon_c.core import Evaluation, Snapshot
 from cordon_d import annex_positions
 from cordon_d.annex_positions import governing_results, parse, positions, supplying_rows
 from cordon_d.calendar import national_calendar
@@ -278,36 +278,379 @@ class AnnexPositions(unittest.TestCase):
         self.assertTrue(all(stale in r['issues'] for r in expanded))
 
 
-# A supplied Osservatorio record at DDS 113/2023's positions (PR #33's caller). The record is a FIXTURE
-# (`fixture: true`): its instant, source and parcel are invented in the shape of the annex; it is not a fact about
-# the order.
-PEC = datetime(2024, 3, 20, 9, tzinfo=ROME)
+# Supplied Osservatorio records joined to annex positions of DDS 113/2023 and 124/2023 (SPEC, "Supplied records at
+# an annex position"). Every supplied record below is a FIXTURE (`fixture: true`): its instants, sources and the
+# works it names are invented in the shape of the annexes. None is a fact about either order. The positions are
+# the annexes' own (113/2023 from BANDS; 124/2023 as `read_annex` places them, checked against the retained
+# original in `RetainedAnnexes`).
+DDS124 = 'REG-PUGLIA-U181-DIR-2023-00124'
+SOURCE_124 = 'd79ed2678b0c7c04f94f15e0575821339981bfbff741d93d1d3903614719a9d3'
+RECORD_124 = dict(RECORD, instrument=DDS124, adopted='2023-11-15', source=SOURCE_124,
+                  occurrence=f'{SOURCE_124}:clause:0',
+                  prescribed_scope=(dict(work='l’estirpazione', population='n° 17 piante di olivo risultate infette'),))
+
+
+def _position(owner, parcels, plants, rows):
+    return dict(annex='allegato 1/D', owner=owner, printed=owner,
+                parcels=[dict(foglio=f, particella=p) for f, p in parcels],
+                fifty_metre_parcels=[dict(foglio=f, particella=p) for f, p in parcels],
+                listed_infected_plants=[p for p, _ in plants],
+                listed_infected_plant_parcels=[dict(plant=p, foglio=f, particella=q) for p, (f, q) in plants],
+                rows=rows)
+
+
+CIAMPI_PLANTS = [(p, ('32', '293')) for p in ('1605000', '1616845', '1616849')]
+POSITIONS_124 = {
+    'COMES VITO': _position('COMES VITO', [('32', '319'), ('33', '328'), ('33', '394'), ('33', '397')],
+                            [('1603982', ('33', '394')), ('1616565', ('33', '394'))], ['p. 31 row 14', 'p. 31 row 27']),
+    'COMES VITTORIO': _position('COMES VITTORIO', [('32', '319')], [], ['p. 31 row 14']),
+    'CIAMPI COSIMO': _position('CIAMPI COSIMO', [('32', '52'), ('32', '293')], CIAMPI_PLANTS, ['p. 31 row 8']),
+    'CIAMPI VITO PASQUALE': _position('CIAMPI VITO PASQUALE', [('32', '52'), ('32', '293')], CIAMPI_PLANTS,
+                                      ['p. 31 row 8']),
+    'NAUTICA CIAMPI S.R.L': _position('NAUTICA CIAMPI S.R.L', [('32', '52'), ('32', '293')], CIAMPI_PLANTS,
+                                      ['p. 31 row 8']),
+}
+AT = date(2024, 6, 15)
+EVALUATED = datetime(2024, 6, 15, 12, tzinfo=ROME)
+# Delivery instants and the boundary C's clock_boundary returns for each (10 giorni, national calendar). Independent
+# expectation: 20 Nov 2023 + 10 days ends Thursday 30 Nov; 20 Mar 2024 ends Saturday 30 Mar; 5 Apr 2024 ends
+# Monday 15 Apr; 1 Jun 2024 ends Tuesday 11 Jun. Each boundary is the exclusive end of that last day.
+PEC_B, BOUNDARY_B = datetime(2023, 11, 20, 9, tzinfo=ROME), datetime(2023, 12, 1, tzinfo=ROME)
+PEC_C, BOUNDARY_C = datetime(2024, 3, 20, 9, tzinfo=ROME), datetime(2024, 3, 31, tzinfo=ROME)
+PEC_V, BOUNDARY_V = datetime(2024, 4, 5, 9, tzinfo=ROME), datetime(2024, 4, 16, tzinfo=ROME)
+PEC_U, BOUNDARY_U = datetime(2024, 6, 1, 9, tzinfo=ROME), datetime(2024, 6, 12, tzinfo=ROME)
+COMMENCEMENT_EVIDENCE = 'commencement evidence through the source deadline'
+
+
+def fixture(record, kind, order=DDS113, **fields):
+    return dict(record=record, kind=kind, order=order, source='f' * 64, selector=f'fixture:{record}',
+                reading=f'FIXTURE {kind}: not a fact about {order}', fixture=True, **fields)
+
+
+def parcel(foglio, particella):
+    # The positions print no comune and the join does not compare it.
+    return dict(comune='CASTELLANA GROTTE', foglio=foglio, particella=particella)
+
+
+def plant(identifier):
+    return dict(plant=identifier)
+
+
+def delivery(record, recipient, *works, occurred=PEC_B, order=DDS113):
+    return fixture(record, 'personal-delivery', order=order, recipient=recipient, occurred=occurred.isoformat(),
+                   works=list(works))
+
+
+def history(record, work, through, order=DDS113, start=None):
+    return fixture(record, 'history', order=order, work=work,
+                   complete_from=start or ('2023-10-16' if order == DDS113 else '2023-11-15'), complete_through=through)
+
+
+def performed(record, work, occurred, kind='commencement', order=DDS113):
+    return fixture(record, kind, order=order, work=work, occurred=occurred.isoformat())
 
 
 class SuppliedRecordsAtPositions(unittest.TestCase):
-    """The join from a supplied record to an annex position is not built here; it is planned in PR #40."""
+    """One test per row of the rule table, on real positions, through the caller's path (join, then C per position)."""
 
-    def test_a_supplied_delivery_at_a_113_position_is_reported_unattached(self):
-        import importlib.util
-        spec = importlib.util.spec_from_file_location('read_prescriptions', ROOT / 'scripts/read_prescriptions.py')
-        caller = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(caller)
-        records = [dict(RECORD, occurrence=f"{RECORD['occurrence']}:annex 1/D:position {k}", recipients=(p,))
-                   for k, p in enumerate(positions(parse(BANDS, 3), '1/D'))]
-        rotolo = next(r for r in records if annex_position(r)['owner'] == 'ROTOLO IRENE')
-        self.assertEqual(annex_position(rotolo)['listed_infected_plants'], ['1614393'])
-        delivery = dict(record='fx-pec-rotolo', kind='personal-delivery', order=DDS113, source='f' * 64,
-                        selector='fixture:fx-pec-rotolo', fixture=True,
-                        reading='FIXTURE personal-delivery: not a fact about DDS 113/2023', recipient='ROTOLO IRENE',
-                        occurred=PEC.isoformat(), works=[dict(comune='CASTELLANA GROTTE', foglio='57', particella='89')])
-        report = caller.per_recipient([dict(records=records)], [delivery], Snapshot.load(ROOT), date(2024, 4, 5), {}, {})
-        cause = 'the join from a supplied record to an annex position is planned in PR #40'
-        self.assertEqual(report['unattached'],
-                         [dict(record='fx-pec-rotolo', order=DDS113, clause=RECORD['occurrence'], cause=cause)])
-        self.assertEqual(report['unreached'], [])
-        # The recipient gets no per-recipient result, and no position record is touched.
-        self.assertFalse([r['occurrence'] for r in records
-                          if {'per_recipient', 'per_recipient_reported', 'per_recipient_cause'} & set(r)])
+    @classmethod
+    def setUpClass(cls):
+        cls.s = Snapshot.load(ROOT)
+        cls.orders = {
+            DDS113: [dict(RECORD, occurrence=f"{RECORD['occurrence']}:annex 1/D:position {k}", recipients=(p,))
+                     for k, p in enumerate(positions(parse(BANDS, 3), '1/D'))],
+            DDS124: [dict(RECORD_124, occurrence=f"{RECORD_124['occurrence']}:annex 1/D:position {k}", recipients=(p,))
+                     for k, p in enumerate(POSITIONS_124.values())]}
+
+    def run_records(self, supplied, order=DDS113, at=AT, evaluated_at=EVALUATED, governing=None):
+        """`read_prescriptions.per_recipient` on a position clause: join, then C per position. Every supplied record
+        ends counted, held, reported or unattached."""
+        from cordon_d.case_prescriptions import position_attachments, recipient_results
+        records = self.orders[order]
+        attached, unattached = position_attachments(records, supplied)
+        out = {}
+        for record in records:
+            if record['occurrence'] in attached:
+                position = annex_position(record)
+                out[position['owner']] = recipient_results(
+                    self.s, record, at, attached[record['occurrence']], evaluated_at=evaluated_at, zone=ROME,
+                    calendar=national_calendar(), position=position,
+                    governing_results=governing or governing_results(self.s, record, at, position))
+        seen = {u['record'] for u in unattached}
+        for run in out.values():
+            for item in run['recipients'].values():
+                seen |= set(item['records']) | set(item['commencements']) | set(item['histories'])
+            for item in run['reported']:
+                seen |= {item['record']} if 'record' in item else set(item.get('records', ()))
+        self.assertEqual(seen, {s['record'] for s in supplied}, 'a supplied record was silently lost')
+        return out, unattached
+
+    def result(self, out, owner):
+        self.assertIn(owner, out)
+        self.assertIn(owner, out[owner]['recipients'])
+        return out[owner]['recipients'][owner]
+
+    def reported(self, out, owner, record):
+        return [r for r in out[owner]['reported'] if r.get('record') == record]
+
+    def borghese(self, *extra, delivered=(parcel('57', '270'),), through='2023-11-30', **options):
+        out, unattached = self.run_records([delivery('fx-pec-b', 'BORGHESE ANTONIO', *delivered),
+                                            history('fx-h-270', parcel('57', '270'), through), *extra], **options)
+        self.assertEqual(unattached, [])
+        return out
+
+    def comes(self, *extra, delivered=(parcel('33', '394'),), histories=(parcel('33', '394'),)):
+        out, unattached = self.run_records(
+            [delivery('fx-pec-comes', 'COMES VITO', *delivered, occurred=PEC_C, order=DDS124),
+             *[history(f"fx-h-{w.get('plant') or w['particella']}", w, '2024-03-30', order=DDS124) for w in histories],
+             *extra], order=DDS124)
+        return out, unattached
+
+    def test_row_1_a_delivery_naming_the_plant_or_its_parcel_is_the_recipients_notice(self):
+        for label, delivered in (('parcel', parcel('57', '270')), ('plant', plant('1602200'))):
+            with self.subTest(label):
+                result = self.result(self.borghese(delivered=(delivered,)), 'BORGHESE ANTONIO')
+                self.assertEqual((result['notification'], result['deadline']), (PEC_B, BOUNDARY_B))
+                self.assertEqual(result['works'], [plant('1602200')])
+                self.assertTrue(result['fixture'] and result['commencement_records_complete'])
+                self.assertEqual(result['result'].effect, REQUIRED)
+                self.assertIn(WITHDRAWAL + ':v1', result['result'].provisions)
+        # COMES VITO: a delivery naming 1603982 alone. Both his plants stand on 33/394, whose history covers each;
+        # 1616565, which the delivery does not name, is reported beside the result and never held.
+        out, unattached = self.comes(delivered=(plant('1603982'),))
+        self.assertEqual(unattached, [])
+        result = self.result(out, 'COMES VITO')
+        self.assertEqual(result['deadline'], BOUNDARY_C)
+        self.assertEqual(result['result'].effect, REQUIRED)
+        self.assertEqual([r['plants'] for r in out['COMES VITO']['reported']], [[plant('1616565')]])
+        self.assertIn('not named by the delivery', out['COMES VITO']['reported'][0]['cause'])
+
+    def test_row_2_a_delivery_naming_only_a_host_only_parcel_is_notice_and_the_parcel_is_withdrawn(self):
+        out = self.borghese(delivered=(parcel('57', '78'),))
+        result = self.result(out, 'BORGHESE ANTONIO')
+        self.assertEqual(result['notification'], PEC_B)
+        self.assertEqual(result['result'].effect, REQUIRED)
+        [withdrawn] = self.reported(out, 'BORGHESE ANTONIO', 'fx-pec-b')
+        self.assertEqual(withdrawn['works'], [dict(foglio='57', particella='78', comune='CASTELLANA GROTTE')])
+        self.assertIn(f'withdrawn at this position: {WITHDRAWAL} (effective 2024-03-14)', withdrawn['cause'])
+        out, unattached = self.run_records(
+            [delivery('fx-pec-vp', 'CIAMPI VITO PASQUALE', parcel('32', '52'), occurred=PEC_V, order=DDS124),
+             history('fx-h-293', parcel('32', '293'), '2024-04-15', order=DDS124)], order=DDS124)
+        self.assertEqual(unattached, [])
+        self.assertEqual(self.result(out, 'CIAMPI VITO PASQUALE')['result'].effect, REQUIRED)
+
+    def test_row_3_a_history_of_the_plant_or_its_parcel_covers_it_through_Cs_deadline(self):
+        short = self.result(self.borghese(through='2023-11-29'), 'BORGHESE ANTONIO')
+        self.assertFalse(short['commencement_records_complete'])
+        self.assertIsNone(short['result'].truth)
+        self.assertIn(COMMENCEMENT_EVIDENCE, short['result'].needs)
+        self.assertEqual(short['incomplete'], [plant('1602200')])
+        out, _ = self.run_records([delivery('fx-pec-b', 'BORGHESE ANTONIO', parcel('57', '270')),
+                                   history('fx-h-plant', plant('1602200'), '2023-11-30')])
+        self.assertEqual(self.result(out, 'BORGHESE ANTONIO')['result'].effect, REQUIRED)
+        out, _ = self.run_records([delivery('fx-pec-r', 'ROTOLO IRENE', parcel('57', '89')),
+                                   history('fx-h-89', parcel('57', '89'), '2023-11-30')])
+        self.assertEqual(self.result(out, 'ROTOLO IRENE')['result'].effect, REQUIRED)
+        out, _ = self.comes(histories=(plant('1603982'),))
+        comes = self.result(out, 'COMES VITO')
+        self.assertIsNone(comes['result'].truth)
+        self.assertEqual(comes['incomplete'], [plant('1616565')])
+
+    def test_row_4_a_history_of_a_host_only_parcel_is_reported(self):
+        out, unattached = self.run_records([delivery('fx-pec-b', 'BORGHESE ANTONIO', parcel('57', '270'))]
+                                           + [history(f'fx-h-{p}', parcel('57', p), '2023-11-30')
+                                              for p in ('78', '271', '273')])
+        self.assertEqual(unattached, [])
+        result = self.result(out, 'BORGHESE ANTONIO')
+        self.assertIsNone(result['result'].truth)
+        self.assertEqual(result['histories'], [])
+        for p in ('78', '271', '273'):
+            [report] = self.reported(out, 'BORGHESE ANTONIO', f'fx-h-{p}')
+            self.assertIn('withdrawn at this position', report['cause'])
+
+    def test_row_5_a_performance_naming_the_plant_counts_by_where_it_falls_against_the_deadline(self):
+        for occurred, effect, outcome in ((datetime(2023, 11, 24, 9, tzinfo=ROME), NOT_ESTABLISHED, 'counts'),
+                                          (datetime(2024, 3, 1, 9, tzinfo=ROME), REQUIRED, 'counts'),
+                                          (date(2023, 11, 30), NOT_ESTABLISHED, 'counts'),
+                                          (date(2023, 12, 1), REQUIRED, 'reported')):
+            with self.subTest(occurred=occurred):
+                out = self.borghese(fixture('fx-c-plant', 'commencement', work=plant('1602200'),
+                                            occurred=occurred.isoformat()))
+                result = self.result(out, 'BORGHESE ANTONIO')
+                self.assertEqual(result['result'].effect, effect)
+                self.assertEqual('fx-c-plant' in result['commencements'], outcome == 'counts')
+                self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-plant')],
+                                 [] if outcome == 'counts' else ['reported'])
+        # A day-only record inside the term enters C at its day's start.
+        counted = self.result(self.borghese(fixture('fx-c-plant', 'commencement', work=plant('1602200'),
+                                                    occurred='2023-11-30')), 'BORGHESE ANTONIO')
+        self.assertEqual(counted['commencements'], {'fx-c-plant': datetime(2023, 11, 30, tzinfo=ROME)})
+        # COMES VITO: a removal naming 1616565 before his deadline.
+        out, _ = self.comes(performed('fx-r-1616565', plant('1616565'), datetime(2024, 3, 25, 9, tzinfo=ROME),
+                                      kind='removal', order=DDS124))
+        self.assertEqual(self.result(out, 'COMES VITO')['result'].effect, NOT_ESTABLISHED)
+        # The CIAMPI co-holders, noticed apart: a commencement naming 1605000 between their two deadlines follows
+        # CIAMPI COSIMO's and precedes CIAMPI VITO PASQUALE's. NAUTICA CIAMPI S.R.L, with no delivery, has no result.
+        out, unattached = self.run_records(
+            [delivery('fx-pec-cc', 'CIAMPI COSIMO', parcel('32', '293'), occurred=PEC_C, order=DDS124),
+             delivery('fx-pec-vp', 'CIAMPI VITO PASQUALE', parcel('32', '293'), occurred=PEC_V, order=DDS124),
+             history('fx-h-293', parcel('32', '293'), '2024-04-15', order=DDS124),
+             performed('fx-c-1605000', plant('1605000'), datetime(2024, 4, 10, 9, tzinfo=ROME), order=DDS124)],
+            order=DDS124)
+        self.assertEqual(unattached, [])
+        cosimo, vito = self.result(out, 'CIAMPI COSIMO'), self.result(out, 'CIAMPI VITO PASQUALE')
+        self.assertEqual((cosimo['deadline'], vito['deadline']), (BOUNDARY_C, BOUNDARY_V))
+        self.assertEqual((cosimo['result'].effect, vito['result'].effect), (REQUIRED, NOT_ESTABLISHED))
+        self.assertNotIn('NAUTICA CIAMPI S.R.L', out)
+
+    def test_row_6_a_performance_printed_only_by_the_plants_parcel_holds_only_inside_the_term(self):
+        inside = performed('fx-c-270', parcel('57', '270'), datetime(2023, 11, 24, 9, tzinfo=ROME))
+        out = self.borghese(inside)
+        held = self.result(out, 'BORGHESE ANTONIO')
+        self.assertIsNone(held['result'].truth)
+        self.assertEqual(held['commencements'], {})
+        self.assertFalse(held['commencement_records_complete'])
+        self.assertTrue(any(n.startswith('a record naming the plant 1602200: fx-c-270') for n in held['result'].needs))
+        self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-270')], ['held'])
+        moved = self.result(self.borghese(inside, performed('fx-c-plant', plant('1602200'),
+                                                            datetime(2023, 11, 25, 9, tzinfo=ROME))),
+                            'BORGHESE ANTONIO')
+        self.assertEqual(moved['result'].effect, NOT_ESTABLISHED)
+        for occurred in (datetime(2024, 3, 1, 9, tzinfo=ROME), date(2024, 3, 1)):
+            with self.subTest(occurred=occurred):
+                out = self.borghese(fixture('fx-c-270', 'commencement', work=parcel('57', '270'),
+                                            occurred=occurred.isoformat()))
+                self.assertEqual(self.result(out, 'BORGHESE ANTONIO')['result'].effect, REQUIRED)
+                self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-270')],
+                                 ['reported'])
+        out, _ = self.comes(performed('fx-r-394', parcel('33', '394'), datetime(2024, 6, 3, 9, tzinfo=ROME),
+                                      kind='removal', order=DDS124))
+        self.assertEqual(self.result(out, 'COMES VITO')['result'].effect, REQUIRED)
+        out, _ = self.run_records([delivery('fx-pec-r', 'ROTOLO IRENE', parcel('57', '89')),
+                                   history('fx-h-89', parcel('57', '89'), '2023-11-30'),
+                                   performed('fx-c-89', parcel('57', '89'), datetime(2023, 11, 24, 9, tzinfo=ROME))])
+        rotolo = self.result(out, 'ROTOLO IRENE')
+        self.assertIsNone(rotolo['result'].truth)
+        self.assertTrue(any(n.startswith('a record naming the plant 1614393: fx-c-89') for n in rotolo['result'].needs))
+
+    def test_row_7_a_performance_on_a_host_only_parcel_is_reported_on_any_date(self):
+        for occurred in (datetime(2023, 11, 24, 9, tzinfo=ROME), datetime(2024, 3, 10, 9, tzinfo=ROME)):
+            with self.subTest(occurred=occurred):
+                out = self.borghese(performed('fx-c-78', parcel('57', '78'), occurred))
+                result = self.result(out, 'BORGHESE ANTONIO')
+                self.assertEqual(result['commencements'], {})
+                self.assertEqual(result['result'].effect, REQUIRED)
+                [report] = self.reported(out, 'BORGHESE ANTONIO', 'fx-c-78')
+                self.assertIn(f'{WITHDRAWAL} (effective 2024-03-14)', report['cause'])
+        out, _ = self.comes(fixture('fx-r-328', 'removal', order=DDS124, work=parcel('33', '328'),
+                                    occurred='2024-03-25'))
+        self.assertEqual(self.result(out, 'COMES VITO')['result'].effect, REQUIRED)
+        self.assertEqual([r['outcome'] for r in self.reported(out, 'COMES VITO', 'fx-r-328')], ['reported'])
+
+    def test_rows_8_to_10_a_position_not_due_in_part(self):
+        # COMES VITTORIO holds hosts only, on 32/319, which COMES VITO's position also prints.
+        on_319 = performed('fx-c-319', parcel('32', '319'), datetime(2024, 3, 25, 9, tzinfo=ROME), order=DDS124)
+        out, unattached = self.run_records(
+            [delivery('fx-pec-cv', 'COMES VITTORIO', parcel('32', '319'), occurred=PEC_C, order=DDS124), on_319,
+             delivery('fx-pec-comes', 'COMES VITO', parcel('33', '394'), occurred=PEC_C, order=DDS124),
+             history('fx-h-394', parcel('33', '394'), '2024-03-30', order=DDS124),
+             history('fx-h-319', parcel('32', '319'), '2024-03-30', order=DDS124)], order=DDS124)
+        self.assertEqual(unattached, [])
+        vittorio = self.result(out, 'COMES VITTORIO')
+        self.assertEqual(vittorio['notification'], PEC_C)
+        self.assertIs(vittorio['result'].truth, False)
+        self.assertEqual(vittorio['result'].effect, NOT_ESTABLISHED)
+        self.assertEqual({r['record'] for r in out['COMES VITTORIO']['reported']}, {'fx-c-319', 'fx-h-319'})
+        # At COMES VITO the same commencement is on a host-only parcel of a position due in part (row 7).
+        self.assertEqual(self.result(out, 'COMES VITO')['result'].effect, REQUIRED)
+        [report] = self.reported(out, 'COMES VITO', 'fx-c-319')
+        self.assertIn('withdrawn at this position', report['cause'])
+        # Unresolved: BORGHESE's position with its governing work result marked unknown (a FIXTURE result).
+        cause = 'FIXTURE: the annex check for this position failed'
+        unknown = Evaluation(None, needs=frozenset({cause}))
+        governing = {(WITHDRAWAL, WORK): unknown, (WITHDRAWAL, COERCE): unknown}
+        pec = delivery('fx-pec-b', 'BORGHESE ANTONIO', parcel('57', '270'), occurred=PEC_U)
+        began = performed('fx-c-plant', plant('1602200'), datetime(2024, 6, 5, 9, tzinfo=ROME))
+        out, _ = self.run_records([pec, began], governing=governing)
+        held = self.result(out, 'BORGHESE ANTONIO')
+        self.assertEqual(held['deadline'], BOUNDARY_U)
+        self.assertIsNone(held['result'].truth)
+        self.assertTrue(any(n.startswith('whether fx-c-plant performs work still due') and cause in n
+                            for n in held['result'].needs))
+        late = performed('fx-c-plant', plant('1602200'), datetime(2024, 6, 13, 9, tzinfo=ROME))
+        out, _ = self.run_records([pec, late], governing=governing)
+        self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-plant')], ['reported'])
+        out, _ = self.run_records([pec], governing=governing, at=date(2024, 6, 5),
+                                  evaluated_at=datetime(2024, 6, 5, 12, tzinfo=ROME))
+        self.assertEqual(self.result(out, 'BORGHESE ANTONIO')['result'].effect, NOT_ESTABLISHED)
+
+    def test_the_join(self):
+        out, unattached = self.run_records([delivery('fx-pec-b', 'BORGHESE  ANTONIO', parcel('57', '270')),
+                                            history('fx-h-270', parcel('57', '270'), '2023-11-30')])
+        # The result stays keyed as the delivery prints the name.
+        self.assertEqual(unattached, [])
+        self.assertEqual(out['BORGHESE ANTONIO']['recipients']['BORGHESE  ANTONIO']['result'].effect, REQUIRED)
+        supplied = [delivery('fx-pec-a', 'BORGHESE A.', parcel('57', '270')),
+                    delivery('fx-pec-89', 'BORGHESE ANTONIO', parcel('57', '89')),
+                    delivery('fx-pec-blank', ' ', parcel('57', '89')),
+                    performed('fx-c-unlisted', plant('1600000'), datetime(2023, 11, 24, 9, tzinfo=ROME)),
+                    history('fx-h-146', parcel('57', '146'), '2023-11-30')]
+        out, unattached = self.run_records(supplied)
+        self.assertEqual(out, {})
+        self.assertEqual({u['record']: u['cause'] for u in unattached}, {
+            'fx-pec-a': "no annex position of this order prints owner 'BORGHESE A.'",
+            'fx-pec-89': "the annex position printing owner 'BORGHESE ANTONIO' prints no such work",
+            'fx-pec-blank': 'names no recipient',
+            'fx-c-unlisted': 'no annex position of this order prints this work',
+            'fx-h-146': 'no supplied delivery joins an annex position printing this work'})
+        self.assertEqual(next(u for u in unattached if u['record'] == 'fx-pec-89')['works'],
+                         [dict(comune='CASTELLANA GROTTE', foglio='57', particella='89')])
+        from cordon_d.case_prescriptions import position_attachments
+        twin = dict(annex_position(self.orders[DDS113][0]))
+        records = self.orders[DDS113] + [dict(self.orders[DDS113][0], recipients=(twin,),
+                                              occurrence=self.orders[DDS113][0]['occurrence'] + ' bis')]
+        attached, unattached = position_attachments(records, [delivery('fx-pec-twin', twin['owner'], *[
+            parcel(p['foglio'], p['particella']) for p in twin['parcels']])])
+        self.assertEqual(attached, {})
+        self.assertEqual(unattached[0]['cause'], f"matches 2 annex positions printing owner '{twin['owner']}'")
+
+    def test_the_date_column_places_a_day_by_its_start_and_end_in_Cs_zone(self):
+        from cordon_d.case_prescriptions import date_column
+        # A term in days ends at a midnight: no day contains it.
+        self.assertEqual([date_column(d, BOUNDARY_B, ROME) for d in (date(2023, 11, 30), date(2023, 12, 1))],
+                         ['D<', 'D>'])
+        # A boundary inside a day (a term in hours; no held order states one, so on a real order this is UNTESTED).
+        inside = datetime(2023, 12, 1, 9, tzinfo=ROME)
+        self.assertEqual([date_column(d, inside, ROME) for d in (date(2023, 11, 30), date(2023, 12, 1),
+                                                                 date(2023, 12, 2))], ['D<', 'D∋', 'D>'])
+        self.assertEqual([date_column(t, inside, ROME) for t in (inside - timedelta(seconds=1), inside)], ['T<', 'T≥'])
+        self.assertEqual(date_column(date(2023, 12, 1), None, ROME), '?')
+        # In another zone the same day straddles a Rome midnight boundary.
+        self.assertEqual(date_column(date(2023, 11, 30), BOUNDARY_B, ZoneInfo('America/New_York')), 'D∋')
+
+    def test_a_day_containing_the_deadline_or_with_no_deadline_is_held(self):
+        from cordon_d import case_prescriptions
+        # The D∋ cell through recipient_results: C's boundary placed inside a day stands in for a term in hours.
+        inside = datetime(2023, 11, 30, 15, tzinfo=ROME)
+        day = fixture('fx-c-plant', 'commencement', work=plant('1602200'), occurred='2023-11-30')
+        with mock.patch('cordon_c.quantities.clock_boundary', return_value=inside):
+            out = self.borghese(day)
+        result = self.result(out, 'BORGHESE ANTONIO')
+        self.assertEqual(result['deadline'], inside)
+        [report] = self.reported(out, 'BORGHESE ANTONIO', 'fx-c-plant')
+        self.assertEqual(report['outcome'], 'held')
+        self.assertFalse(result['commencement_records_complete'])
+        self.assertTrue(any(n.startswith('the instant of fx-c-plant') for n in report['needs']))
+        # No deadline (two deliveries at different instants): a timed record counts, a day-only one is held.
+        out, _ = self.run_records([delivery('fx-pec-b', 'BORGHESE ANTONIO', parcel('57', '270')),
+                                   delivery('fx-pec-b2', 'BORGHESE ANTONIO', parcel('57', '270'),
+                                            occurred=PEC_B + timedelta(days=1)),
+                                   day, performed('fx-c-timed', plant('1602200'), datetime(2023, 11, 24, 9, tzinfo=ROME))])
+        result = self.result(out, 'BORGHESE ANTONIO')
+        self.assertIsNone(result['deadline'])
+        self.assertEqual(list(result['commencements']), ['fx-c-timed'])
+        self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-plant')], ['held'])
+        self.assertTrue(case_prescriptions.PERFORMANCE['work'] is case_prescriptions.PERFORMANCE['plant'])
 
 
 STORE = store_root(ROOT)
@@ -359,12 +702,57 @@ class RetainedAnnexes(unittest.TestCase):
         self.assertIn(dict(foglio='33', particella='394'), found['COMES VITO']['parcels'])
         self.assertTrue(found['COMES VITO']['listed_infected_plants'])
 
-    def writer(self, *only):
+    def writer(self, *only, records=None):
         with tempfile.TemporaryDirectory() as tmp:
-            out = Path(tmp) / 'out.json'
+            out, supplied = Path(tmp) / 'out.json', Path(tmp) / 'records.json'
+            extra = []
+            if records is not None:
+                supplied.write_text(json.dumps(records))
+                extra = ['--records', str(supplied)]
             subprocess.run([sys.executable, str(ROOT / 'scripts/read_prescriptions.py'), '--only', *only,
-                            '--out', str(out)], check=True, capture_output=True, cwd=ROOT)
-            return [r for e in json.loads(out.read_text()) for r in e.get('records', ())]
+                            '--out', str(out), *extra], check=True, capture_output=True, cwd=ROOT)
+            written = json.loads(out.read_text())
+            found = [r for e in written for r in e.get('records', ())]
+            if records is not None:
+                return found, next(e['supplied_records'] for e in written if 'supplied_records' in e)
+            return found
+
+    def test_the_join_tests_positions_and_124_record_are_the_retained_originals(self):
+        found = by_owner(self.read('124/2023')[1])
+        for owner, position in POSITIONS_124.items():
+            self.assertEqual(found[owner], position)
+        found, banded = by_owner(self.read('113/2023')[1]), by_owner(positions(parse(BANDS, 3), '1/D'))
+        for owner in ('BORGHESE ANTONIO', 'ROTOLO IRENE'):
+            self.assertEqual({k: v for k, v in found[owner].items() if k != 'rows'},
+                             {k: v for k, v in banded[owner].items() if k != 'rows'})
+        record = next(r for r in self.writer('124/2023') if ':clause:0:' in r['occurrence'])
+        for key in ('instrument', 'adopted', 'source', 'part', 'term_literal', 'commitment', 'executor'):
+            self.assertEqual(record[key], RECORD_124[key], key)
+        self.assertEqual(tuple(record['stated_term']), RECORD_124['stated_term'])
+        self.assertEqual(tuple(record['governing_A_references']), RECORD_124['governing_A_references'])
+
+    def test_the_writer_joins_supplied_fixture_records_to_positions(self):
+        # FIXTURE records (see `fixture`), through the ordinary caller on the retained 113/2023 original.
+        supplied = [delivery('fx-pec-cisternino', 'CISTERNINO PAOLA', parcel('57', '146')),
+                    history('fx-h-146', parcel('57', '146'), '2023-11-30'),
+                    delivery('fx-pec-rotolo', 'ROTOLO IRENE', parcel('57', '89')),
+                    history('fx-h-89', parcel('57', '89'), '2023-11-30'),
+                    delivery('fx-pec-rossi', 'ROSSI FIXTURE', parcel('57', '89'))]
+        records, report = self.writer('113/2023', records=supplied)
+        clause0 = {annex_position(r)['owner']: r for r in records if ':clause:0:' in r['occurrence']}
+        hosts_only = clause0['CISTERNINO PAOLA']['per_recipient']['CISTERNINO PAOLA']
+        self.assertTrue(hosts_only['fixture'])
+        self.assertIs(hosts_only['c']['truth'], False)
+        holder = clause0['ROTOLO IRENE']['per_recipient']['ROTOLO IRENE']
+        self.assertTrue(holder['fixture'] and holder['commencement_records_complete'])
+        self.assertEqual(holder['c']['effect'], REQUIRED)
+        self.assertIn(WITHDRAWAL + ':v1', holder['c']['provisions'])
+        # Only the joined positions carry a per-recipient result; the cohort `c` of each is unchanged.
+        self.assertEqual({o for o, r in clause0.items() if 'per_recipient' in r}, {'CISTERNINO PAOLA', 'ROTOLO IRENE'})
+        self.assertEqual({r['occurrence']: r['c'] for r in records},
+                         {r['occurrence']: r['c'] for r in self.writer('113/2023')})
+        self.assertEqual([(u['record'], u['cause']) for u in report['unattached']],
+                         [('fx-pec-rossi', "no annex position of this order prints owner 'ROSSI FIXTURE'")])
 
     def test_the_writer_emits_one_record_per_clause_and_position(self):
         records = self.writer('113/2023')
