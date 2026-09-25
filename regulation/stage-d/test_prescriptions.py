@@ -15,7 +15,7 @@ from cordon_c.quantities import clock_boundary
 from cordon_c.temporal import end_of_day
 from cordon_d.calendar import national_calendar
 from cordon_d import prescriptions
-from cordon_d.prescriptions import bears_on_dueness, lawfully_due, required_rows
+from cordon_d.prescriptions import bears_on_dueness, gates_dueness, lawfully_due, required_rows
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
@@ -157,27 +157,58 @@ class StatedTermRule(unittest.TestCase):
         self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, coerce=False, **reached),
                          NOT_ESTABLISHED)
 
-    def test_a_correction_bearing_on_no_dueness_outcome_is_not_read_reached_or_not(self):
+    CORRECTIONS = (('REG-PUGLIA-U181-DIR-2024-00147', CORRECTION_165, date(2024, 12, 2)),
+                   ('REG-PUGLIA-U181-DIR-2024-00188', CORRECTION_11, date(2025, 3, 3)))
+
+    def corrected(self, instrument, correction, at):
+        """The order's record, its notice and evaluation times, and every other gating row it requires, settled."""
+        record = dict(DDS108, instrument=instrument)
+        notified = datetime.combine(at, datetime.min.time(), ROME).replace(hour=9)
+        row = self.s.version(correction, at)
+        self.assertIn(instrument, row['corrects_instrument_ids'])
+        self.assertIn(correction, required_rows(self.s, at, instrument))
+        # The correction bears on no dueness outcome; it gates as a correction (PR #35 amendment).
+        self.assertFalse(bears_on_dueness(row))
+        self.assertTrue(gates_dueness(row))
+        own = tuple(need.removeprefix('governing A reference: ') for need in self.due(record, at, WORK).needs
+                    if need != f'governing A reference: {correction}')
+        results = {key: value for sid in own for key, value in self.per(sid, self.settled(sid, at)).items()}
+        return record, notified, notified + timedelta(days=12), own, results
+
+    def test_correction_holds_the_order_it_corrects(self):
         # DDS 165/2024 replaces DDS 147/2024's annex 1/C; DDS 11/2025 replaces owners listed in DDS 188/2024.
-        # Each is required for the order it corrects, and `governing_references` names it on the order's records;
-        # but neither row has POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART among its outcomes, so, like a
-        # reached one, an unreached correction names no dueness need (PR #35 round 2).
-        for instrument, correction, at in (('REG-PUGLIA-U181-DIR-2024-00147', CORRECTION_165, date(2024, 12, 2)),
-                                           ('REG-PUGLIA-U181-DIR-2024-00188', CORRECTION_11, date(2025, 3, 3))):
+        # A record that omits the correction leaves lawful dueness unknown, so no direction follows (PR #29, decd42c).
+        for instrument, correction, at in self.CORRECTIONS:
             with self.subTest(instrument=instrument):
-                record = dict(DDS108, instrument=instrument)
-                notified = datetime.combine(at, datetime.min.time(), ROME).replace(hour=9)
-                evaluated = notified + timedelta(days=12)
-                self.assertIn(instrument, self.s.version(correction, at)['corrects_instrument_ids'])
-                self.assertIn(correction, required_rows(self.s, at, instrument))
-                self.assertFalse(bears_on_dueness(self.s.version(correction, at)))
-                results = self.per(correction, self.settled(correction, at))
-                for refs in ((), (correction,)):
-                    due = self.due(record, at, WORK, refs=refs, results=results)
-                    self.assertIs(due.truth, True)
-                    self.assertEqual(due.needs, frozenset())
-                    self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated, refs=refs,
-                                                 results=results), REQUIRED)
+                record, notified, evaluated, own, results = self.corrected(instrument, correction, at)
+                results |= self.per(correction, self.settled(correction, at))
+                due = self.due(record, at, WORK, refs=own, results=results)
+                self.assertIsNone(due.truth)
+                self.assertEqual(due.needs, {f'governing A reference: {correction}'})
+                self.assertIsNone(self.effect(record, at, notified=notified, evaluated=evaluated, refs=own,
+                                              results=results))
+                self.assertEqual(self.effect(record, at, notified=notified, evaluated=evaluated,
+                                             refs=own + (correction,), results=results), REQUIRED)
+
+    def test_a_reached_but_unresolved_correction_still_gates(self):
+        # The record reaches the correction, but its result is not resolved: dueness waits on the correction's own
+        # predicates, and no direction follows until it resolves (PR #35 amendment).
+        for instrument, correction, at in self.CORRECTIONS:
+            with self.subTest(instrument=instrument):
+                record, notified, evaluated, own, results = self.corrected(instrument, correction, at)
+                unresolved = evaluate(self.s, correction, at, {})
+                self.assertIsNone(unresolved.truth)
+                self.assertIsNone(unresolved.effect)
+                self.assertTrue(unresolved.needs)
+                refs = own + (correction,)
+                for predicate in (WORK, COERCE):
+                    for supplied in (results, results | self.per(correction, unresolved)):
+                        due = self.due(record, at, predicate, refs=refs, results=supplied)
+                        self.assertIsNone(due.truth)
+                        self.assertEqual(due.needs, unresolved.needs)
+                        self.assertTrue(all(self.vid(correction, at) in need for need in due.needs))
+                self.assertIsNone(self.effect(record, at, notified=notified, evaluated=evaluated, refs=refs,
+                                              results=results))
 
     def test_case_delta_of_the_instrument_holds_lawful_dueness(self):
         record = dict(DDS108, instrument='REG-PUGLIA-U181-DIR-2023-00045')
@@ -360,7 +391,8 @@ class StatedTermRule(unittest.TestCase):
             self.assertIs(self.due(DDS113, at, predicate, refs=(WITHDRAWAL,), results=self.per(WITHDRAWAL, other),
                                    positioned=True).truth, True)
 
-    # --- A row that cannot change dueness does not gate it; a resolved "not due" is final (PR #35 round 1) ---
+    # --- A row that neither bears on dueness nor corrects an order does not gate it; a resolved "not due" is
+    # final (PR #35 round 1, as amended) ---
 
     def dds96(self):
         """DDS 96/2023 at 2026-09-24, no court closure: its required rows, the Monopoli fork among them."""
@@ -374,6 +406,8 @@ class StatedTermRule(unittest.TestCase):
     def test_a_96_hosts_only_position_with_the_fork_unresolved_reads_not_due(self):
         record, at, required = self.dds96()
         self.assertFalse(bears_on_dueness(self.s.version(FORK, at)))
+        self.assertFalse(self.s.version(FORK, at).get('corrects_instrument_ids'))
+        self.assertFalse(gates_dueness(self.s.version(FORK, at)))
         self.assertTrue(bears_on_dueness(self.s.version(WITHDRAWAL, at)))
         self.assertIsNone(evaluate(self.s, FORK, at, {}).truth)
         results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, HOSTS_ONLY))
@@ -383,7 +417,8 @@ class StatedTermRule(unittest.TestCase):
             self.assertIn(self.vid(WITHDRAWAL, at), due.provisions)
 
     def test_a_96_letter_a_holder_reads_due_in_part(self):
-        # Guard for the rule that only a row bearing on dueness gates it: the unresolved fork does not.
+        # Guard for the rule that a row neither bearing on dueness nor correcting an order does not gate it: the
+        # unresolved fork does not.
         record, at, required = self.dds96()
         results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
         for predicate in (WORK, COERCE):
@@ -397,8 +432,9 @@ class StatedTermRule(unittest.TestCase):
         unreached = tuple(sid for sid in required if sid != FORK)
         results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, HOSTS_ONLY))
         mixed = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
-        # The fork is required but not reached, and bears on no dueness outcome: it does not name itself
-        # (PR #35 round 2), so a letter-a holder reads due in part and a hosts-only position not due.
+        # The fork is required but not reached; it bears on no dueness outcome and corrects no order, so it does not
+        # name itself (PR #35 round 2, as amended), and a letter-a holder reads due in part, a hosts-only position
+        # not due.
         self.assertFalse(any(FORK in need for need in self.due(record, at, WORK, refs=unreached).needs))
         for predicate in (WORK, COERCE):
             self.assertIs(self.due(record, at, predicate, refs=unreached, results=results, positioned=True).truth,
@@ -406,10 +442,10 @@ class StatedTermRule(unittest.TestCase):
             due = self.due(record, at, predicate, refs=unreached, results=mixed, positioned=True)
             self.assertIs(due.truth, True)
             self.assertEqual(due.needs, frozenset())
-        # Guard for the finality rule: were the fork a row bearing on dueness, unreached it names itself, and a
-        # resolved not due still decides; in part does not, so a letter-a holder stays unknown on it.
-        real = prescriptions.bears_on_dueness
-        with mock.patch.object(prescriptions, 'bears_on_dueness',
+        # Guard for the finality rule: were the fork a gating row, unreached it names itself, and a resolved not
+        # due still decides; in part does not, so a letter-a holder stays unknown on it.
+        real = prescriptions.gates_dueness
+        with mock.patch.object(prescriptions, 'gates_dueness',
                                lambda row: row['stable_provision_id'] == FORK or real(row)):
             self.assertIn(f'governing A reference: {FORK}', self.due(record, at, WORK, refs=unreached).needs)
             for predicate in (WORK, COERCE):

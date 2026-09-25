@@ -42,6 +42,14 @@ def bears_on_dueness(row: Mapping) -> bool:
                 & {NOT_DUE, IN_PART})
 
 
+def gates_dueness(row: Mapping) -> bool:
+    """Whether a required row gates lawful dueness, reached or not: it bears on dueness, or it
+    names the instruments it corrects or supplements (`corrects_instrument_ids`). A correction
+    or supplement changes whom the order obliges and what it covers, so dueness waits for it
+    even when none of its outcomes is a dueness name."""
+    return bears_on_dueness(row) or bool(row.get("corrects_instrument_ids"))
+
+
 def lawfully_due(snapshot: Snapshot, at: date, *, instrument: str, governing_references: Iterable[str],
                  results: Mapping[tuple[str, str], Evaluation], reading: bool | None, predicate: str,
                  positioned: bool = False, cohort: Iterable[str] = ()) -> Evaluation:
@@ -53,17 +61,17 @@ def lawfully_due(snapshot: Snapshot, at: date, *, instrument: str, governing_ref
     share, so a position's result answers WORK and COERCE alike (`annex_positions`).
     Effects and needs come only from rows that are both required (in force, and the
     record's instrument or named in `corrects_instrument_ids`) and reached. A required row
-    gates dueness only if one of its possible outcomes is POPULATION_NOT_LAWFULLY_DUE or
-    LAWFULLY_DUE_IN_PART (`bears_on_dueness`); any other row is not read, reached or not.
-    A required row that bears on dueness and that the record does not reach names itself.
-    A reached row that bears on
-    dueness without a resolved result for this predicate passes its own needs through (the
-    supplied result's, else those of the row evaluated with no facts), so the need names
-    the row's predicate. Then:
+    gates dueness if one of its possible outcomes is POPULATION_NOT_LAWFULLY_DUE or
+    LAWFULLY_DUE_IN_PART (`bears_on_dueness`), or if it names the instruments it corrects
+    or supplements (`corrects_instrument_ids`): a correction or supplement changes whom the
+    order obliges and what it covers (`gates_dueness`). A row that is neither is not read,
+    reached or not. A required row that gates dueness and that the record does not reach
+    names itself. A reached row that gates dueness without a resolved result for this
+    predicate passes its own needs through (the supplied result's, else those of the row
+    evaluated with no facts), so the need names the row's predicate. Then:
 
     - a reached row whose result is POPULATION_NOT_LAWFULLY_DUE makes it False, naming the
-      row, whatever other rows still need (the two names only withhold, so no other row
-      can make the population due);
+      row, whatever other rows still need: a resolved not due is final;
     - else, with every required row reached and resolved, a row whose result is
       LAWFULLY_DUE_IN_PART keeps the reading and names the row in `provisions`; for WORK
       on a record that carries no annex position (`positioned`) it is unknown instead,
@@ -76,10 +84,10 @@ def lawfully_due(snapshot: Snapshot, at: date, *, instrument: str, governing_ref
     required = required_rows(snapshot, at, instrument)
     reached = set(governing_references)
     needs = {f"governing A reference: {sid}" for sid in required - reached
-             if bears_on_dueness(snapshot.version(sid, at))}
+             if gates_dueness(snapshot.version(sid, at))}
     effects = {}
     for sid in sorted(required & reached):
-        if not bears_on_dueness(snapshot.version(sid, at)):
+        if not gates_dueness(snapshot.version(sid, at)):
             continue
         result = results.get((sid, predicate))
         if result is None:

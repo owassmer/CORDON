@@ -477,13 +477,15 @@ coercive predicate, from each row's result for that predicate. At an annex
 position the work and the coercive population in question are that recipient's
 share, so COERCE, like WORK, is answered from the recipient's share; at order
 grain COERCE asks about the order's coercive population. A required row gates
-dueness only if one of its possible outcomes (any route or branch) is
-`POPULATION_NOT_LAWFULLY_DUE` or `LAWFULLY_DUE_IN_PART`; a row none of whose
-outcomes bears on dueness is not read, reached or not. A required row that bears on
+dueness if one of its possible outcomes (any route or branch) is
+`POPULATION_NOT_LAWFULLY_DUE` or `LAWFULLY_DUE_IN_PART`, or if it names the
+instruments it corrects or supplements (`corrects_instrument_ids`): a correction or
+supplement changes whom the order obliges and what it covers, so dueness waits for
+it. A row that is neither is not read, reached or not. A required row that gates
 dueness and is not reached names itself as a need; one that is reached and
 unresolved passes its own needs through. A reached row whose result is
-`POPULATION_NOT_LAWFULLY_DUE` makes it false, whatever other rows still need, since
-the two names only withhold; one whose result is `LAWFULLY_DUE_IN_PART` keeps the
+`POPULATION_NOT_LAWFULLY_DUE` makes it false, whatever other rows still need: a
+resolved not due is final. One whose result is `LAWFULLY_DUE_IN_PART` keeps the
 reading and names the row, except that the work of a record carrying no annex
 position stays unknown, naming the recipient's position in the order's annex. No
 other effect is read. A stated change counts
