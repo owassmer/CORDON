@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+ "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "031a903faddc8c71d2bcae3a64f3ff93306939a9ea0a2a0946d653693eaccf3e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:34:02.717743+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate.",
+   "Documento - Impronta (SHA256) table: ALLEGATO1.pdf - c9b0ad8f250613851d039da9090790f796cc6fe18ae5206b3940661a0d2d7351; ALLEGATO1BIS.pdf - f4b8d6883a819ee0ee75155a39af4398d9ad013c18f04beca10cb0a7573ada0f; ALLEGATO2.pdf - ccb6866b516e007cdfb787f979a20b551b9b37bd59287d23dc42ac5ec7b7e1f0 (not a cadastral annex table)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

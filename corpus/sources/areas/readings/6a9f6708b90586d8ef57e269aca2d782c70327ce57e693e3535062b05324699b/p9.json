@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 9,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "aa211c23c5f0b2e9487f40908b6cecb7b90078ba81e10b2cfb05e4b968a5c5f4",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:06.326529+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Firmato digitalmente da:",
+   "Il Dirigente della Sezione Osservatorio Fitosanitario",
+   "Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

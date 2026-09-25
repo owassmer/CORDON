@@ -1,0 +1,28 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+ "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "fdef651c39c003cd1a5eda0778701a622385dca8fab89804cfa0d3dacaca902e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:53.443693+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 6 agosto 2025, n. 141 — Reg. (UE) 2020/1201 – Aggiornamento dell'area delimitata per \"Xylella fastidiosa sottospecie pauca - Bisceglie (BT)\", ai sensi dell'art. 4 del Reg. UE 2020/1201 s.m.i."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

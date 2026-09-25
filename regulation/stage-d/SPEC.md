@@ -453,9 +453,33 @@ suspension with no later disposition of its ricorso, a challenge ended with the
 court's stated reason, or a stated correction, replacement, revocation,
 suspension or withdrawal, whole or in part, that no A row records, leaves it
 unknown and names the act and the words stating what changes. Nothing is patched.
-`c_result` passes C only the notice and commencement evidence the caller holds;
+`c_result` passes C only the notice and commencement evidence the caller holds:
+the facts of the Art. 21-ter notice branches (the Art. 21-bis communication
+predicate, or the mass-publicity row) and each branch's instant, from which C's
+`notice_instant` takes the earliest instant among the branches A finds true;
 nothing absent is supplied. Publication fills notification only through A's
 mass-publicity route.
+
+Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
+through `recipient_results` (`read_prescriptions.py --records`), beside the
+clause's cohort result, which no supplied record moves. There is one result per
+recipient a delivery record names, keyed as that record names them; nothing joins
+it to an annex position. A personal-delivery record is the delivery receipt only,
+never the acceptance receipt; it enters the communication predicate for its
+recipient only. The works a delivery record names are the operator's standing
+assertion of what that recipient is obliged to. Commencement and removal count for
+the work the record prints (comune, foglio and particella, or a plant identifier)
+and for every recipient a supplied record obliges to that work. A recipient's
+commencement history is complete only when every work it is obliged to has a
+stated history running from the order's adoption, or earlier, through C's
+deadline: `clock_boundary` on the notification C's `notice_instant` returns for
+that recipient, with the order's stated term, zone and calendar. A history stated
+as complete through a moment later than the evaluation is refused. The caller
+supplies no instant, order-text predicate or completeness of its own; what it
+cannot join is reported. Postings are public records read on PR #15's route, not
+supplied records: a recipient reached only by posting has no per-recipient result,
+because that needs recipient-to-parcel standing (PR #35's positions or
+`party-land-standing`), which is not held.
 
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text
@@ -479,10 +503,11 @@ reason the order gives for reaching its recipients by publicity, marked as a
 statement about this act or a restatement of the general rule, and each form of
 publicity the order establishes: its words, its period as printed and its stated
 effect. Validation and the single stated reread follow the case-prescription
-reader. D decides neither Art. 21-bis predicate. A stated ground about the act
-and a held posting reach C as unresolved inputs naming the A decision they
-await; a restated rule supplies nothing, and without a stated ground C names
-its own missing predicate.
+reader. Under Owen's 2026-09-24 ruling the act's own stated ground meets
+Art. 21-bis and is not re-judged, so a ground the reading holds about the act
+is supplied as stated. A held posting reaches C unresolved, naming what its
+completion needs (the stated period and the posting's dates); a restated rule
+supplies nothing, and without a stated ground C names its own missing predicate.
 
 ## Court-decision events
 

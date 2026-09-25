@@ -14,7 +14,7 @@ import unittest
 from cordon_c.core import Snapshot
 from cordon_d import held_acts
 from cordon_d.calendar import national_calendar
-from cordon_d.case_prescriptions import c_result
+from cordon_d.case_prescriptions import c_result, personal_notice
 from test_case_prescriptions import reading as prescription
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -83,7 +83,7 @@ class HeldActs(unittest.TestCase):
     def test_a_stated_partial_withdrawal_leaves_dueness_unknown_naming_act_and_scope(self):
         record = next(prescription().records(self.s))
         at, notified = date(2024, 9, 2), datetime(2024, 9, 2, 9, tzinfo=ROME)
-        held = dict(notification=notified, evaluated_at=notified + timedelta(days=11), zone=ROME,
+        held = dict(**personal_notice(self.s, at, notified), evaluated_at=notified + timedelta(days=11), zone=ROME,
                     calendar=national_calendar(), commencement_records_complete=True)
         change = {'from': 'REG-PUGLIA-U181-DIR-2024-00018', 'relationship': 'withdraws', 'extent': 'part',
                   'affected_payload': PAYLOAD}

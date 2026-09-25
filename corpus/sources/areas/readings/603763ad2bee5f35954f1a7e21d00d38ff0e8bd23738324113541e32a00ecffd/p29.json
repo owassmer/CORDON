@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 29,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "6ad3c426644a7cdac2fdea65b6fe95ad2a68248b603099ad0d540dbc711a2e44",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:28:08.252847+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Page shows a screenshot of a mobile app sampling form ('Nuovo Campionamento') with fields such as Codice busta pool, ID Giornaliero, Data 22/04/2021, Contesto: Piano di Monitoraggio, Specie: Olivo (Olea europaea) — not an annex table.",
+   "Page number printed twice: '22'"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

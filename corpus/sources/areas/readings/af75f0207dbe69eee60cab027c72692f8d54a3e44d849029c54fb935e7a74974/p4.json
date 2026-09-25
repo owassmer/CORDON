@@ -1,0 +1,38 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00008",
+ "act_sha256": "af75f0207dbe69eee60cab027c72692f8d54a3e44d849029c54fb935e7a74974",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "c1a1c31725434bc48757b08e76ff113f35ad58c43dace76b869d74f9a3c0dbbb",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:19:47.723374+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di rappresentare con l'Allegato 1, parte integrante e sostanziale del presente provvedimento, i limiti geografici territoriali a livello regionale della zona \"infetta\" e \"cuscinetto\" dell'area delimitata a Xylella fastidiosa sottospecie fastidiosa;",
+   "Di rappresentare con l'Allegato 1 bis, parte integrante del presente atto, il dettaglio dei 3 focolai puntiformi siti in agro di Triggiano (BA).",
+   "Riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" dei 3 focolai puntiformi in agro di Triggiano (BA).",
+   "Di adottare misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 nella nuova area delimitata in agro di Triggiano (BA) a Xylella fastidiosa sottospecie fastidiosa.",
+   "Di applicare le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario in tutte le particelle catastali che rientrano anche parzialmente nell' area delimitata.",
+   "Di definire con uno specifico provvedimento il piano di azione per Xylella fastidiosa sottospecie fastidiosa.",
+   "Di dichiarare il presente provvedimento immediatamente esecutivo in quanto necessario per applicare le misure di eradicazione per contrastare l'ulteriore diffusione della malattia.",
+   "Di stabilire che detta delimitazione è consultabile sui portali istituzionali della Regione Puglia www.regione.puglia.it e sul sito istituzionale www.emergenzaxylella.it",
+   "Di trasmettere copia del presente atto: alla Prefettura di BA; al Comando Regionale Carabinieri Forestali – Puglia; alla Provincia di Bari; all'ANCI Puglia;",
+   "Di pubblicare il presente provvedimento sul BUR Puglia.",
+   "è composto da n 7 (sette) facciate e dagli allegati 1 - 1 bis – 2 ,costituiti rispettivamente da n° 1 facciata, sarà conservato e custodito, ai sensi delle Linee Guida del Segretario generale della Giunta Regionale e del Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020, nei sistemi di archiviazione digitale dell'Amministrazione Regionale;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

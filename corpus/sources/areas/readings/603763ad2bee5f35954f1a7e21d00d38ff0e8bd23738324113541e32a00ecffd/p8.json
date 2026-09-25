@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "0b5bff4b557776d6691a3c27104a805a9ce70678a8d569e38b362d5dececafab",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:34.902831+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO A",
+   "REGIONE PUGLIA / OSSERVATORIO FITOSANITARIO",
+   "Procedure operative per la sorveglianza, il campionamento, le analisi diagnostiche e l'applicazione delle misure di estirpazione delle piante infette nell'ambito del piano per il contrasto ed il controllo di Xylella fastidiosa."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "87c22edd6810fe70b1e22281e18355777538c8f737f8c3ed5d19e1772c363e9c",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:22.025996+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Basato sulla proposta n. 181/DIR/2025/00104 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

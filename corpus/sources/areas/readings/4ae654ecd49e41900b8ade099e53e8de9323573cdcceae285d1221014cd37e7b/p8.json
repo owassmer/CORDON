@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+ "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "fcfbf68f0f225648c4b882a06c5a0775825a99d0d2f28fba27356c3dad6de3a9",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:32:55.018317+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 BIS",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE - DOTT. SALVATORE INFANTINO",
+   "Legenda: map legend listing zone types (Zona Infetta, Zona Cuscinetto, Zona di Contenimento) with associated comuni/areas: Valenzano, Cagnano Varano, Giovinazzo, Bisceglie, Modugno, Minervino Murge, Bari, ex Salento (Zona Contenimento), Mola di Bari e Noci (Focolai), Santeramo in Colle/Ginosa (Zona Cuscinetto in Basilicata) - this is a map legend, not a tabular annex listing provincia/comune/scope"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
