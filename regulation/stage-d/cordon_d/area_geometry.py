@@ -158,8 +158,8 @@ class Disagreement:
 class ErrorPart:
     """The error of the outline a source draws: fixed, or a measured field, within a region.
 
-    `place_only`: the error of a place any part of which lies in the region, not of the
-    outline running there: land whose membership the act's rule and its annex dispute
+    `place_only`: the error of a place that may have part in the region (`_reaches`), not of
+    the outline running there: land whose membership the act's rule and its annex dispute
     (`Disagreement`)."""
     source: str
     region: BaseGeometry | None            # None: wherever the zone's outline runs
