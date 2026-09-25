@@ -10,7 +10,6 @@ from decimal import Decimal
 import json
 import os
 from pathlib import Path
-import subprocess
 import unittest
 
 from pyproj import CRS
@@ -104,14 +103,48 @@ class Placement(unittest.TestCase):
     def test_an_agro_disjoint_from_the_zone_is_outside(self):
         self.assertIs(placed(record(agro='Triggiano', coordinates=at(745000, 4505000)), ZONE, comune_of).truth, False)
 
-    def test_a_comune_touching_a_whole_comune_zone_but_not_listed_is_outside(self):
+    def test_a_comune_touching_the_zone_within_the_errors_is_c_s_unknown(self):
+        # C answers for the agro: along the shared border the two outlines' errors overlap, so
+        # C cannot say that no part of the agro lies in the zone (Monopoli beside Fasano, v1).
         touching = Comune('072030', 'Monopoli', MetricGeometry(box(720000, 4490000, 730000, 4520000), UTM, 100.0))
-        answer = placed(record(agro='Monopoli', coordinates=at(725000, 4505000)), ZONE,
-                        lambda name: touching if name == 'Monopoli' else None)
-        self.assertIs(answer.truth, False)
-        by_geometry = placed(record(agro='Monopoli', coordinates=at(725000, 4505000)), replace(ZONE, units=None),
-                             lambda name: touching if name == 'Monopoli' else None)
-        self.assertIsNone(by_geometry.truth)
+        for zone in (ZONE, replace(ZONE, units=None)):
+            answer = placed(record(agro='Monopoli', coordinates=at(725000, 4505000)), zone,
+                            lambda name: touching if name == 'Monopoli' else None)
+            self.assertIsNone(answer.truth)
+            self.assertIn('parcel overlap precision', answer.needs)
+
+    def test_c_s_true_places_the_site_only_in_a_comune_the_zone_takes_whole(self):
+        # Part of an agro inside the zone places a site there only where the act takes the comune
+        # whole; otherwise the site may stand in the part outside.
+        straddling = Comune('073017', 'Massafra', MetricGeometry(box(700000, 4490000, 730000, 4520000), UTM, 10.0))
+        answer = placed(record(agro='Massafra', coordinates=at(725000, 4505000)), ZONE, lambda name: straddling)
+        self.assertIsNone(answer.truth)
+        self.assertIn("the site's place within its agro", answer.needs)
+        listed = replace(ZONE, units=frozenset({'073017'}))
+        self.assertIs(placed(record(agro='Massafra', coordinates=at(725000, 4505000)), listed,
+                             lambda name: straddling).truth, True)
+
+    def test_the_agro_s_own_error_reaches_the_zone_outline_and_c_once(self):
+        # Row 3's metric() takes the agro and the agro's own error (not a point's or a surface's
+        # default), and C takes the agro with that same error.
+        seen = []
+
+        class Geography:
+            def metric(self, near, near_error_m):
+                seen.append((near, near_error_m))
+                return MetricGeometry(INSIDE, UTM, 3.0)
+
+        zone = Zone('row 3 zone', None, frozenset({'073004'}), Geography())
+        comune = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, 143.1))
+        self.assertIs(placed(record(coordinates=at(705000, 4505000)), zone, lambda name: comune).truth, True)
+        self.assertEqual(seen, [(comune.territory.geometry, 143.1)])
+        placed(record(coordinates=at(706000, 4506000)), zone, lambda name: comune)
+        self.assertEqual(len(seen), 1)                     # one answer per agro and zone
+        unsourced = replace(comune, territory=MetricGeometry(INSIDE, UTM, 0.0), sourced=False)
+        answer = placed(record(coordinates=at(705000, 4505000)), zone, lambda name: unsourced)
+        self.assertIsNone(answer.truth)
+        self.assertEqual(answer.needs, frozenset({'a sourced boundary error for the agro Crispiano'}))
+        self.assertEqual(len(seen), 1)                     # an unsourced agro never reaches the zone
 
     def test_coordinates_that_contradict_the_agro_place_nothing(self):
         answer = placed(record(coordinates=at(745000, 4505000)), ZONE, comune_of)
@@ -126,8 +159,10 @@ class Placement(unittest.TestCase):
             comune = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, error))
             answer = placed(point, ZONE, lambda name: comune)
             self.assertIs(answer.truth, placed_in, error)
-        unsourced = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, 0.0))
-        self.assertIs(placed(record(coordinates=at(705000, 4505000)), ZONE, lambda name: unsourced).truth, True)
+        # Unsourced: the coordinates contradict it with no tolerance, and the site is unplaced.
+        unsourced = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, 0.0), sourced=False)
+        self.assertEqual(placed(record(coordinates=at(705000, 4505000)), ZONE, lambda name: unsourced).needs,
+                         frozenset({'a sourced boundary error for the agro Crispiano'}))
         self.assertIn('printed coordinates agree with the printed agro',
                       placed(record(coordinates=at(720050, 4505000)), ZONE, lambda name: unsourced).needs)
 
@@ -347,43 +382,32 @@ class RetainedReadings(unittest.TestCase):
         self.assertEqual(crispiano[0].window, (date(2026, 5, 25), date(2026, 5, 29)))
 
 
-def _pr8_available():
+def _row3_available():
+    """Row 3's inputs for the Annex III zone: the held cadastral sheets and ISTAT's boundaries."""
+    from cordon_d.administrative import records as area_records
     try:
-        return subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--verify', 'origin/d/area-versions'],
-                              capture_output=True).returncode == 0 and STORE.is_dir()
-    except FileNotFoundError:
+        found = area_records(ROOT, 'cadastre-fogli')[:3] + area_records(ROOT, 'istat-boundaries')
+    except (FileNotFoundError, KeyError):
         return False
+    return len(found) > 3 and all((STORE / 'blobs/sha256' / r['sha256'][:2] / r['sha256']).exists() for r in found)
 
 
-@unittest.skipUnless(_pr8_available(), 'the Annex III zone is read with PR #8 branch code and the local store')
+@unittest.skipUnless(_row3_available(), 'the Annex III zone is built from row 3 inputs in the local store')
 class AnnexIIIZone(unittest.TestCase):
-    """Z for DET 2/2024: the Annex III infected zone A holds on 15/12/2023, read with PR #8's code."""
+    """Z for DET 2/2024: Annex III Part A in the version A holds on 15/12/2023, as row 3 builds it
+    in tree (PR #8), each agro through C with the error row 3 sources for it."""
 
-    def test_fasano_is_in_z_and_triggiano_and_monopoli_are_not(self):
-        import tempfile
-        import sys
-        with tempfile.TemporaryDirectory() as directory:
-            archive = subprocess.run(['git', '-C', str(ROOT), 'archive', 'origin/d/area-versions',
-                                      'regulation/stage-d/cordon_d', 'corpus/sources/areas/geometry.json',
-                                      'regulation/stage-a/annex-versions.csv', 'regulation/source/consolidations',
-                                      'regulation/stage-b'], capture_output=True, check=True).stdout
-            subprocess.run(['tar', '-x', '-C', directory], input=archive, check=True)
-            package = Path(directory) / 'regulation/stage-d'
-            (package / 'cordon_d').rename(package / 'pr8_cordon_d')
-            sys.path.insert(0, str(package))
-            try:
-                from pr8_cordon_d.administrative import AdministrativeUnits
-                from pr8_cordon_d.area_geometry import Sources
-                os.environ.setdefault('CORDON_STORE', str(STORE))
-                units, sources = AdministrativeUnits(Path(directory)), Sources(Path(directory))
-                listed = {c.istat for c in sources.annex_iii_comuni(date(2023, 12, 15))}
-                self.assertIn(units.comune(name='Fasano', region='Puglia').istat, listed)
-                self.assertNotIn(units.comune(name='Triggiano', region='Puglia').istat, listed)
-                self.assertNotIn(units.comune(name='Monopoli', region='Puglia').istat, listed)
-            finally:
-                sys.path.remove(str(package))
-                for name in [m for m in sys.modules if m.startswith('pr8_cordon_d')]:
-                    del sys.modules[name]
+    def test_fasano_is_in_z_triggiano_is_not_and_monopoli_beside_it_is_c_s_unknown(self):
+        os.environ.setdefault('CORDON_STORE', str(STORE))
+        zones = vectors.AnnexIIIZones(ROOT)
+        zone = zones.zone(date(2023, 12, 15))
+        self.assertTrue(zone.identity.startswith('EU-2020-1201:ANNEX-III:v1'))
+        fasano, triggiano, monopoli = (zones.comune_of(n) for n in ('Fasano', 'Triggiano', 'Monopoli'))
+        self.assertTrue(fasano.sourced and fasano.istat in zone.units)
+        self.assertIs(vectors.agro_in(fasano, zone).truth, True)
+        self.assertIs(vectors.agro_in(triggiano, zone).truth, False)
+        self.assertNotIn(monopoli.istat, zone.units)
+        self.assertIsNone(vectors.agro_in(monopoli, zone).truth)
 
 
 class TransmissionText(unittest.TestCase):

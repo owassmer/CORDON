@@ -3,9 +3,9 @@
 
 What is read is what the consumers read. Every monitoring publication is first dated to its
 season and round from held words only (`vectors.rounds_of`). For each season the rounds are
-read in date order from the first, and reading stops once every zone version `--zones` names
-in force in that season holds a located adult record, or the rounds run out; later rounds stay
-acquired and catalogued and are listed, not transcribed. Within a round a table of the sites
+read in date order from the first, and reading stops once every zone version in force in that
+season (`vectors.AnnexIIIZones`: Annex III Part A as row 3 builds it) holds a located adult
+record, or the rounds run out; later rounds stay acquired and catalogued and are listed, not transcribed. Within a round a table of the sites
 where adults were found is read in place of the round's area tables; juvenile-stage tables are
 never read. A raster publication is read header band first, and no further where neither its
 label nor any header, title or banner prints a stage, or where neither the table nor the
@@ -24,7 +24,6 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, replace
 from datetime import date
-import importlib.util
 import json
 from pathlib import Path
 import re
@@ -73,14 +72,10 @@ def main():
     parser.add_argument('--only', action='append', default=[])
     parser.add_argument('--out', type=Path)
     parser.add_argument('--plan', action='store_true', help='state the requests and make none')
-    parser.add_argument('--zones', type=Path, required=True,
-                        help='module with zones_in_force(year) -> [vectors.Zone] and comune_of(name)')
     args = parser.parse_args()
     workers = max(1, min(args.workers, MAX_WORKERS))
     execute = args.execute and not args.plan
-    spec = importlib.util.spec_from_file_location('cordon_zones', args.zones)
-    zones = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(zones)
+    zones = vectors.AnnexIIIZones(ROOT)   # row 3's Annex III geography; each version built when first named
     store = store_root(ROOT)
     population = [p for p in vectors.population(ROOT, store)
                   if not args.only or any(o in p.url for o in args.only)]

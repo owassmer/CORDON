@@ -37,7 +37,7 @@ from tempfile import TemporaryDirectory
 from time import monotonic
 import unicodedata
 
-from cordon_c.core import Evaluation
+from cordon_c.core import Evaluation, MissingInput
 from cordon_c.spatial import MetricGeometry, adopted_membership, partial_parcel
 
 from .document_subscription import (TransportFailure, UsageLimit, call_claude_images,  # noqa: F401
@@ -1443,29 +1443,43 @@ def statements_of(publication: Publication, statements) -> list[Statement]:
 
 @dataclass(frozen=True)
 class Zone:
-    """A zone version as its consumer names it: its geometry and, where the act defines it by
-    whole comuni, their ISTAT codes."""
+    """A zone version as its consumer names it: row 3's adopted geography for it (`geography`,
+    an `area_geometry.AdoptedGeography`, whose outline's error is read near each place) or a
+    fixed outline (`geometry`), and, where the act defines it by whole comuni, their ISTAT codes."""
     identity: str
-    geometry: MetricGeometry
+    geometry: MetricGeometry | None = None
     units: frozenset[str] | None = None
+    geography: object | None = None
+    answers: dict = field(default_factory=dict, init=False, compare=False, repr=False)  # C's answer, by agro
+
+    def area(self, near, near_error_m: float) -> MetricGeometry:
+        """The zone as C takes it, with the error of its outline near `near`, a place whose own
+        error is `near_error_m`."""
+        if self.geography is not None:
+            return self.geography.metric(near, near_error_m)
+        if self.geometry is None:
+            raise ValueError(f'{self.identity}: no geometry is supplied for the zone')
+        return self.geometry
 
 
 @dataclass(frozen=True)
 class Comune:
+    """A comune's territory (EPSG:32633) with its own boundary error, as row 3 sources it
+    (`AnnexIIIZones.comune_of`); 0 m and `sourced` False where row 3 sources none."""
     istat: str
     name: str
     territory: MetricGeometry
+    sourced: bool = True
 
 
 def placed(record: Record, zone: Zone, comune_of) -> Evaluation:
     """Whether the record's place lies in the zone, from what its publisher prints.
 
-    A site whose publisher prints its agro is placed in that comune: where the zone is
-    defined by whole comuni the comune decides, otherwise the comune's territory against the
-    zone. Printed coordinates that lie outside the agro beyond the territory's error
-    contradict it, and the record stays unplaced. A site printed only as coordinates
-    needs a positional error no source states. A record printed only for an area is not
-    located: an area name is never a zone.
+    A site whose publisher prints its agro is placed through that comune (`agro_in`). Printed
+    coordinates that lie outside the agro beyond the comune's sourced boundary error (none
+    where none is sourced) contradict it, and the record stays unplaced. A site printed only
+    as coordinates needs a positional error no source states. A record printed only for an
+    area is not located: an area name is never a zone.
     """
     comune = comune_of(record.agro) if record.agro else None
     if comune is not None:
@@ -1477,23 +1491,141 @@ def placed(record: Record, zone: Zone, comune_of) -> Evaluation:
             if adopted_membership(point, comune.territory).truth is False:
                 # Two printed statements of the site's place disagree; neither is preferred.
                 return Evaluation(None, needs=frozenset({'printed coordinates agree with the printed agro'}))
-        if zone.units is not None:
-            # The zone is the union of the comuni the act lists: the site's comune decides.
-            return Evaluation(comune.istat in zone.units)
-        inside = zone.geometry.geometry.covers(comune.territory.geometry) and \
-            comune.territory.geometry.distance(zone.geometry.geometry.boundary) > \
-            comune.territory.error_m + zone.geometry.error_m
-        if inside:
-            return Evaluation(True)
-        overlap = partial_parcel(comune.territory, zone.geometry)
-        if overlap.truth is False:
-            return Evaluation(False)
-        return Evaluation(None, needs=frozenset({'the site\'s place within its agro'}))
+        return agro_in(comune, zone)
     if record.coordinates is not None:
         if record.agro:
             return Evaluation(None, needs=frozenset({f'the printed agro "{record.agro}" as one comune'}))
         return Evaluation(None, needs=frozenset({'positional error of the printed site coordinates'}))
     return Evaluation(None, needs=frozenset({'place not located'}))
+
+
+def agro_in(comune: Comune, zone: Zone) -> Evaluation:
+    """Whether a site the publisher places in `comune` lies in the zone: C's answer.
+
+    The site's place is its agro, with its own error: the comune's sourced boundary error,
+    stated once, for the territory given to C and for the zone's outline near it
+    (`Zone.area`, row 3's `metric(near, near_error_m)`). Where row 3 sources no error for the
+    comune, the site is unplaced. C answers for a surface whether any part of it lies in the
+    area (`partial_parcel`). Its False places the site outside. Its True places the site
+    inside only where the act takes the comune whole (`zone.units`), so the site lies in it
+    wherever in the agro it stands; otherwise part of the agro may lie outside, and the site
+    stays unplaced. C's unknown stays unknown.
+    """
+    key = (comune.istat, comune.territory.error_m, comune.sourced, comune.territory.geometry.bounds)
+    if key in zone.answers:
+        return zone.answers[key]
+    if not comune.sourced:
+        answer = Evaluation(None, needs=frozenset({f'a sourced boundary error for the agro {comune.name}'}))
+    else:
+        try:
+            area = zone.area(comune.territory.geometry, comune.territory.error_m)
+        except MissingInput as missing:
+            area, answer = None, Evaluation(None, needs=frozenset({str(missing)}))
+        if area is not None:
+            answer = partial_parcel(comune.territory, area)
+            if answer.truth is True and (zone.units is None or comune.istat not in zone.units):
+                answer = Evaluation(None, needs=frozenset({'the site\'s place within its agro'}))
+            elif answer.truth is False and zone.units is not None and comune.istat in zone.units:
+                answer = Evaluation(None, needs=frozenset({f'row 3\'s outline of {zone.identity} and the '
+                                                           f'territory of {comune.name}, a unit it takes whole'}))
+    zone.answers[key] = answer
+    return answer
+
+
+class AnnexIIIZones:
+    """Z, the zone the 13(1) onset bound and the stop rule name: EU 2020/1201 Annex III Part A's
+    infected zone in Italy, in each version A holds (`regulation/stage-a/annex-versions.csv`), as
+    row 3 builds it (`area_geometry`, PR #8): every unit it lists, whole, drawn by its held
+    cadastral sheets and, where no held sheet draws it, ISTAT's line, with land the units enclose;
+    its outline carries the cadastre's measured error field and ISTAT's measured per-comune bound
+    where ISTAT draws. `comune_of` gives a printed agro's territory drawn as row 3 draws a unit
+    of Z, with the error row 3 sources for it. Each version is built once, when first named."""
+
+    def __init__(self, root: Path, sources=None):
+        from .area_geometry import Sources
+        self.root = Path(root)
+        self.sources = sources or Sources(self.root)
+        self._zones, self._comuni = {}, {}
+
+    def versions(self) -> list[dict]:
+        import csv
+        with (self.root / 'regulation/stage-a/annex-versions.csv').open() as handle:
+            return [r for r in csv.DictReader(handle) if r['annex'] == 'III']
+
+    def version(self, day: date) -> dict:
+        row, = [r for r in self.versions() if date.fromisoformat(r['effective_from']) <= day
+                and (not r['effective_to_exclusive'] or day < date.fromisoformat(r['effective_to_exclusive']))]
+        return row
+
+    def zone(self, day: date) -> Zone:
+        """Z for a detection on `day`: the Annex III version in force on it."""
+        row = self.version(day)
+        key = row['annex_version_id']
+        if key not in self._zones:
+            self._zones[key] = self._build(row)
+        return self._zones[key]
+
+    def _build(self, row) -> Zone:
+        from types import SimpleNamespace
+        from . import area_geometry as ag
+        start = date.fromisoformat(row['effective_from'])
+        end = date.fromisoformat(row['effective_to_exclusive']) if row['effective_to_exclusive'] else None
+        sources = self.sources
+        geometry, used = sources.annex_iii_extent(start)
+        comuni = sources.annex_iii_comuni(start)
+        drawn = [(c.catastale, part) for c in comuni
+                 if (part := sources.istat_part(c)) is not None and not part.is_empty]
+        geometry, interior = ag._whole_interior(sources, geometry, comuni)
+        errors = ag._source_errors(sources, set(used), SimpleNamespace(istat_drawn=drawn)) + interior
+        used = tuple(sorted(set(used) | ({'istat-boundaries'} if interior else set())))
+        identity = (f'{row["annex_version_id"]}: EU 2020/1201 Annex III Part A, infected zone in Italy '
+                    f'({start} to {end or "open"})')
+        part = ag.Zone('infected', ('Infected zone in Italy',), geometry,
+                       'EU 2020/1201 Annex III Part A: the units it lists, whole', used, errors=errors)
+        geography = ag.AdoptedGeography(row['annex_version_id'], 'EU-2020-1201', start, end, (part,))
+        return Zone(identity, None, frozenset(c.istat for c in comuni), geography)
+
+    def zones_in_force(self, year: int) -> list[Zone]:
+        """Every version whose interval meets the survey year, from the reach start."""
+        first, last = max(date(year, 1, 1), REACH_START), date(year, 12, 31)
+        days = set()
+        for row in self.versions():
+            start = date.fromisoformat(row['effective_from'])
+            end = (date.fromisoformat(row['effective_to_exclusive']) if row['effective_to_exclusive']
+                   else date.max)
+            if start <= last and end > first:
+                days.add(max(start, first))
+        return [self.zone(day) for day in sorted(days)]
+
+    def comune_of(self, name) -> Comune | None:
+        if name not in self._comuni:
+            self._comuni[name] = self._comune(name)
+        return self._comuni[name]
+
+    def _comune(self, name) -> Comune | None:
+        """The agro as row 3 draws a comune named whole (`Sources.comune_extent`: its held sheets,
+        ISTAT's line where no held sheet draws), with the error row 3 sources for that outline:
+        the largest of the cadastre's measured field along it and ISTAT's measured bound for the
+        comune where ISTAT draws (`AdoptedGeography.error_near`). Unsourced (`sourced` False,
+        0 m) where a source drawing it has no bound."""
+        from types import SimpleNamespace
+        from . import area_geometry as ag
+        sources = self.sources
+        found = sources.administrative.comune(name=name, region='Puglia')
+        if found is None:
+            return None
+        geometry, used = sources.comune_extent(found, keep=False)
+        if geometry is None or geometry.is_empty:
+            return None
+        geometry = ag.polygonal(geometry)
+        part = sources.istat_part(found)
+        drawn = [(found.catastale, part)] if part is not None and not part.is_empty else []
+        errors = ag._source_errors(sources, set(used), SimpleNamespace(istat_drawn=drawn))
+        outline = ag.AdoptedGeography(found.istat, 'ISTAT', date.min, None, (ag.Zone(
+            'infected', (found.name,), geometry, 'the comune, as row 3 draws a unit named whole', tuple(used),
+            errors=errors),))
+        error = outline.error_near()
+        return Comune(found.istat, found.name, MetricGeometry(geometry, ag.UTM, error or 0.0), error is not None)
 
 
 # --- rounds ---------------------------------------------------------------------------------
