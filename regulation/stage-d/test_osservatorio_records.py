@@ -134,10 +134,23 @@ class OsservatorioRecords(unittest.TestCase):
                                                          for p in leaves(row['condition_ast'])})
             assert cls.settled[sid].truth is not None
 
-    def run_records(self, supplied, *, evaluated_at=AFTER, settled=False, **options):
+    def run_records(self, supplied, *, evaluated_at=AFTER, settled=False, grant=frozenset({'f' * 64}), **options):
         extra = dict(governing_results=self.settled) if settled else {}
-        return recipient_results(self.s, self.record, AT, supplied, evaluated_at=evaluated_at, zone=ROME,
+        return recipient_results(self.s, self.record, AT, supplied, evaluated_at=evaluated_at,
+                                 permitted_controlled_sources=grant, zone=ROME,
                                  calendar=national_calendar(), **extra, **options)
+
+    def test_an_empty_grant_yields_the_authorized_evidence_need(self):
+        supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158')]
+        self.assertIn('Nitti Vincenzo', self.run_records(supplied)['recipients'])
+        run = self.run_records(supplied, grant=frozenset())
+        self.assertEqual(run['recipients'], {})
+        self.assertEqual(run['reported'], [dict(
+            record='pec-nitti', kind='personal-delivery',
+            need=f'authorized evidence for personal-delivery record pec-nitti on {ORDER}')])
+        with self.assertRaises(TypeError):
+            recipient_results(self.s, self.record, AT, supplied, evaluated_at=AFTER, zone=ROME,
+                              calendar=national_calendar())
 
     def test_the_registered_clause_is_read_as_PR15_reads_it(self):
         self.assertEqual(self.record['instrument'], ORDER)

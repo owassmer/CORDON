@@ -176,9 +176,12 @@ def main():
     parser.add_argument('--join-summary', type=Path, help='Full-population consumer census without copying all publication rows')
     parser.add_argument('--confirmation-request', type=Path,
                         help='Explicit observation identity, result_pair and event_date; qualifications remain unresolved')
-    parser.add_argument('--known-through', type=run_instant, required=True,
-                        help='the knowledge cutoff, a timezone-aware ISO instant; never the machine clock')
+    parser.add_argument('--known-through', type=run_instant,
+                        help='with --join-output, --join-summary or --confirmation-request: the knowledge cutoff, '
+                             'a timezone-aware ISO instant; never the machine clock')
     args = parser.parse_args()
+    if (args.join_output or args.join_summary or args.confirmation_request) and args.known_through is None:
+        parser.error('--join-output, --join-summary and --confirmation-request require --known-through')
     if (args.retain_interrupted_reservation or args.retry_interrupted_request) and not args.execute:
         parser.error('--retain-interrupted-reservation requires --execute and its ledger')
     if args.bounded_requests_only and (not args.execute or args.relationships):

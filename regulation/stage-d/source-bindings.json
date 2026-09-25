@@ -33,11 +33,11 @@
       "routes": [
         "Regional plans and national programmes retained as Stage A sources under regulation/",
         "EU quarantine-pest and host listings retained under regulation/closure/eu/",
-        "Priority-pest status: Stage A's resolved EU 2019/1702 dependency (regulation/stage-a/dependency-manifest.csv row EU2019-1702; regulation/jurisdiction/generated/dependency-manifest.csv RESOLVED_ACCEPTED_EU_DEPENDENCY for IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1)"
+        "Priority-pest status: Stage A's EU 2019/1702 dependency (regulation/stage-a/dependency-manifest.csv row EU2019-1702). The jurisdiction manifest resolves it (RESOLVED_ACCEPTED_EU_DEPENDENCY) for IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1 only; IT-DLGS-19-2021:Art.30(2):v1 has no EU 2019/1702 edge there, its declared dependency being Art.28(3)"
       ],
       "population": "The plan and listing versions reached by accepted A provisions; their stated values are already Stage B parameters.",
       "reader": "Stage B parameters supply the stated survey values; pest-classification's two priority-pest predicates are owned by Stage A's EU2019-1702 dependency; D adds no reader and keeps no copy of the list; the finite population and strata per campaign are established with the plant and surface population row",
-      "open": "Establish the per-campaign target population and strata when the plant and surface population row exists."
+      "open": "Establish the per-campaign target population and strata when the plant and surface population row exists. pest-classification stays open: its two consumers, Art.26(1) (the central service's emergency plan) and Art.30(2) (the National Plant Health Committee's information methods), lie outside the Osservatorio's positive-finding-to-removal chain, no C function reads either, C answers unknown there, and no supply is built."
     },
     {
       "id": "result-documents",
@@ -46,7 +46,8 @@
       "contracts": [
         "official-finding",
         "analytical-result",
-        "laboratory-status"
+        "laboratory-status",
+        "sample-custody"
       ],
       "routes": [
         "DOCUMENTO_CONFERMA and LNK_DOCUMENTO_SELGE links published in regional monitoring records",
@@ -55,7 +56,7 @@
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
       "reader": "cordon_d.reports, cordon_d.report_relations and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. The printed delivery and acceptance dates are the report's own date roles; they supply no custody input C accepts, since custody_facts takes instants and a printed date is never turned into one."
+      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. For sample-custody, the printed delivery and acceptance dates supply the delivery and the laboratory's receipt at date precision only: never an instant (custody_facts takes instants, and a printed date is never turned into one), never refrigerated transport and never the signatures, which stay with the handover record in osservatorio-records."
     },
     {
       "id": "official-areas",
@@ -189,7 +190,7 @@
         "The App or paper sample handover and receipt record under DDS 31/2022 and DDS 45/2025: refrigerated transport, the assistants' and driver's signatures, the authorized transporter's countersignature and whether the delivery history is complete"
       ],
       "population": "The records for each live order's recipients, plants and work: deliveries, responses, standing changes, assignments, sample handovers, field and execution records, costs and the 50 m field check.",
-      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes supplied delivery, commencement, removal and history records to C per recipient (scripts/read_prescriptions.py --records).",
+      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes the supplied delivery, commencement, removal and history records the run's stated grant permits to C per recipient (scripts/read_prescriptions.py --records with --permitted-controlled-sources).",
       "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check. Without the handover record, the transport and signature predicates stay unknown, never false."
     },
     {

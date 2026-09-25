@@ -567,8 +567,14 @@ def supplied_records(entries):
     return records
 
 
-def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, **dueness):
+def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted_controlled_sources, zone, calendar,
+                      **dueness):
     """C's result per (clause, recipient named by a supplied delivery record).
+
+    Supplied records are controlled sources (`osservatorio-records`). The run states
+    the grant: a record whose source is outside `permitted_controlled_sources`
+    reaches no C result and is reported with the need 'authorized evidence for …',
+    as `EvidenceView.reader` does; an empty grant is stated, never defaulted.
 
     The clause's cohort result stays `c_result` on cohort evidence only; no
     supplied record reaches it. For each recipient a delivery record names, the
@@ -584,10 +590,16 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
     """
     from cordon_c.quantities import clock_boundary
     from cordon_c.temporal import end_of_day, utc
+    if not isinstance(permitted_controlled_sources, frozenset):
+        raise TypeError('Evaluation requires the run to state its controlled-source grant')
     act = record.get('applied_by') or record['instrument']
     records = supplied_records(supplied)
     if any(r['order'] != act for r in records):
         raise ValueError(f'A supplied record names another order than {act}')
+    reported = [dict(record=r['record'], kind=r['kind'],
+                     need=f"authorized evidence for {r['kind']} record {r['record']} on {act}")
+                for r in records if r['source'] not in permitted_controlled_sources]
+    records = [r for r in records if r['source'] in permitted_controlled_sources]
     today = evaluated_at.astimezone(zone).date()
     for r in records:
         if r['kind'] != 'history':
@@ -596,7 +608,7 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
         if through > (evaluated_at if isinstance(through, datetime) else today):
             raise ValueError(f"Record {r['record']} states a history complete through {r['complete_through']}, "
                              f'later than the evaluation at {evaluated_at.isoformat()}')
-    reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
+    deliveries, obliged, performed, histories, undated = {}, {}, {}, {}, {}
     for r in records:
         if r['kind'] == 'personal-delivery':
             if not r['recipient'] or not r['recipient'].strip():

@@ -14,9 +14,12 @@ def require_run_parameters(dotted: str, parameters, contract: str):
     """Each named run parameter exists on its callable and has no default: the run must state it."""
     parts = dotted.split('.')
     for split in range(len(parts) - 1, 0, -1):
+        module = '.'.join(parts[:split])
         try:
-            target = importlib.import_module('.'.join(parts[:split]))
-        except ModuleNotFoundError:
+            target = importlib.import_module(module)
+        except ModuleNotFoundError as error:
+            if error.name != module:
+                raise  # a missing dependency surfaces as itself
             continue
         for name in parts[split:]:
             target = getattr(target, name)
