@@ -654,6 +654,139 @@ def retained_tiling(store, digest, box) -> list | None:
     return None
 
 
+HEADER_COLUMN = {
+    'type': 'object', 'additionalProperties': False,
+    'required': ['header_literal', 'role', 'stage_literal', 'window_literal', 'round_literal', 'units_literal'],
+    'properties': {'header_literal': {'type': 'string'},
+                   'role': TABLE_SCHEMA['properties']['columns']['items']['properties']['role'],
+                   'stage_literal': {'type': ['string', 'null']}, 'window_literal': {'type': ['string', 'null']},
+                   'round_literal': {'type': ['string', 'null']}, 'units_literal': {'type': ['string', 'null']}}}
+HEADER_SCHEMA = {
+    'type': 'object', 'additionalProperties': False, 'required': ['tables', 'issues'],
+    'properties': {
+        'tables': {'type': 'array', 'items': {
+            'type': 'object', 'additionalProperties': False,
+            'required': ['table', 'title_literal', 'columns', 'period_row_keys', 'notes'],
+            'properties': {'table': {'type': 'integer', 'minimum': 1},
+                           'title_literal': {'type': ['string', 'null']},
+                           'columns': {'type': 'array', 'items': HEADER_COLUMN},
+                           'period_row_keys': {'type': 'array', 'items': {'type': 'string'}},
+                           'notes': {'type': 'array', 'items': {'type': 'string'}}}}},
+        'issues': {'type': 'array', 'items': {'type': 'string'}}}}
+HEADER_PROMPT = (
+    'The images are the tables of one published raster from the Puglia Xylella vector-monitoring '
+    'publications, each labelled with its table number: a whole table, or only its header band (the rows '
+    'above its first data row), cut into parts left to right where it is wide. Read the headers only; do '
+    'not transcribe data rows.\n'
+    'For each table: its printed title, if one is printed; every column in left-to-right order with its '
+    'complete printed header path joined with " / " (banner, group and column titles), and its role. '
+    'test_result is only a column whose header, a banner or a printed legend states that it gives the '
+    'result of a laboratory test of captured insects for Xylella fastidiosa (positive or negative, or the '
+    'number or share of insects tested, positive or infected). share is any other percentage or proportion. '
+    'count is a number of insects. For each column give, only where the header, a banner, the title or a '
+    'legend prints it, the stage literal, the survey window literal, the round literal (turno, rilievo, '
+    'comunicato) and the units literal; otherwise null. Do not infer what is not printed.\n'
+    'period_row_keys: where a whole table is shown and its rows are keyed by periods or rounds (not by '
+    'sites), each row key exactly as printed, top to bottom; otherwise an empty list. notes: legends and '
+    'footnotes printed in the images. issues: anything you cannot read.')
+
+
+HEADER_PART = 1200  # original pixels per header-band part: a thin band is never downscaled to illegibility
+
+
+def header_packets(store, digest, *, raster=None) -> tuple[list, list]:
+    """(files, geometry) of one raster's header-band request: each table whole where it fits one
+    tile, else its header band (from the held corner reading) in parts of at most HEADER_PART pixels."""
+    raster = raster or _Raster(store, digest)
+    found = layout(store, digest, raster=raster)
+    files, geometry = [], []
+    for number, table in enumerate(found['tables'], 1):
+        box = tuple(table['box'])
+        if not needs_tiles(box):
+            files.append((f'table-{number}.png', raster.crop(*box), f'Table {number}, the whole table'))
+            geometry.append(dict(table=number, box=list(box), whole=True))
+            continue
+        shape = corner(store, digest, box, raster=raster)['reading']
+        x0, y0, x1, y1 = box
+        bottom = min(y1, y0 + shape['header_bottom'] + 4)
+        parts = list(range(x0, x1, HEADER_PART))
+        for index, left in enumerate(parts, 1):
+            right = min(x1, left + HEADER_PART)
+            files.append((f'table-{number}-header-{index}.png', raster.crop(left, y0, right, bottom),
+                          f'Table {number}, header band, part {index} of {len(parts)}'))
+        geometry.append(dict(table=number, box=list(box), whole=False, header_bottom=bottom, parts=len(parts)))
+    return files, geometry
+
+
+def header_band(store, digest, *, execute=False) -> dict:
+    """The header reading of one raster's tables: one request for all its tables, at medium effort."""
+    files, geometry = header_packets(store, digest)
+    return retained(store, 'header', [digest], HEADER_PROMPT, HEADER_SCHEMA, files, execute=execute,
+                    effort=TABLE_EFFORT, geometry={'tables': geometry})
+
+
+ROUND_HEADER_PROMPT = HEADER_PROMPT.replace(
+    'The images are the tables of one published raster from', 'The images are the tables of several published '
+    'rasters of one survey round from').replace('each labelled with its table number', 'each labelled with its '
+                                               'raster and its table number (numbered across the rasters)')
+
+
+def round_header_bands(store, digests, *, execute=False) -> dict:
+    """The header reading of the untranscribed rasters of one round read elsewhere (from its table of
+    the sites where adults were found): one request for all their tables, at medium effort. Tables are
+    numbered across the rasters in the order given; `geometry['tables']` maps each number to its raster."""
+    files, geometry, offset = [], [], 0
+    for digest in digests:
+        found, placed_geometry = header_packets(store, digest)
+        for name, png, label in found:
+            number = int(re.match(r'table-(\d+)', name).group(1)) + offset
+            files.append((f'raster-{digest[:8]}-{name}', png,
+                          f'Raster {digest[:8]}, ' + re.sub(r'^Table \d+', f'Table {number}', label)))
+        for item in placed_geometry:
+            geometry.append(dict(item, table=item['table'] + offset, source=digest))
+        offset += len(placed_geometry)
+    return retained(store, 'header', list(digests), ROUND_HEADER_PROMPT, HEADER_SCHEMA, files, execute=execute,
+                    effort=TABLE_EFFORT, geometry={'tables': geometry})
+
+
+def printed_periods(reading) -> tuple[int, tuple]:
+    """(survey periods, round numbers) a header reading shows its tables print: the most period-keyed
+    rows of one table, and every round number a title, header or round literal prints. A cumulative
+    table of one series prints the season's rounds to date, one per period."""
+    periods, numbers = 0, set()
+    for table in reading['tables']:
+        periods = max(periods, len(table['period_row_keys']))
+        for text in [table['title_literal'] or ''] + [c['round_literal'] or c['header_literal'] for c in table['columns']]:
+            number = printed_round(text) if text and re.search(r'turn|rilev|comunic', _fold(text)) else None
+            if number:
+                numbers.add(number)
+    return periods, tuple(sorted(numbers))
+
+
+TEST_WORDS = re.compile(r'positiv|infett|esito|saggi|analisi|pcr|test\b|campioni analizzati', re.I)
+
+
+def test_columns(reading) -> list[dict]:
+    """The columns of a header reading that print a test result (by role, or by a header that names one)."""
+    return [dict(table=t['table'], **c) for t in reading['tables'] for c in t['columns']
+            if c['role'] == 'test_result' or TEST_WORDS.search(c['header_literal'] or '')]
+
+
+def pdf_header_columns(store, digest, pages) -> list[dict]:
+    """A PDF transmission's table headers from its text layer (no request): every phrase of each table
+    page's header lines, with any that names a test result."""
+    out = []
+    for number in pages:
+        found = pdf_text_table(store, digest, number)
+        if found is None:
+            out.append(dict(page=number, header_literal=None, role=None,
+                            issue='the page\'s text layer does not read as one table'))
+            continue
+        for column in found['columns']:
+            out.append(dict(page=number, header_literal=column['header_literal'], role=column['role']))
+    return out
+
+
 def prints_stage(publication: Publication, readings, statements=None) -> bool:
     """Whether the publication's label, a read title, banner or column header, or its transmission
     text prints a stage. Where none does, none of its counts is ever an adult window."""
@@ -1148,6 +1281,27 @@ def transmission_stage(statements) -> tuple[str | None, str | None]:
     return next(iter(found.items()))
 
 
+TRAPS_INSTALLED = re.compile(r'trappole installate (?:nei giorni|nel giorno|il|dal) (\d{1,2})'
+                             r'(?:\s*(?:-|e|al)\s*\d{1,2})? ([a-z]+)')
+
+
+def trap_installation(statements, year) -> tuple[date, str] | None:
+    """(first day, words) of the one trap installation a transmission's text prints (\"trappole
+    installate nei giorni 20-24 luglio\"), in its survey year; None where it prints none or several."""
+    if not statements or year is None:
+        return None
+    text = _fold(' '.join(statements['request']['prompt'].split('PHYSICAL PAGE')[1:]))
+    found = {m for m in TRAPS_INSTALLED.finditer(text)}
+    days = {(int(m.group(1)), _month(m.group(2)), m.group(0)) for m in found if _month(m.group(2))}
+    if len({d[:2] for d in days}) != 1:
+        return None
+    day, month, words = next(iter(days))
+    try:
+        return date(year, month, day), words
+    except ValueError:
+        return None
+
+
 def published_on(publication: Publication) -> date | None:
     """The day the server states the publication was last modified, where it states one."""
     from email.utils import parsedate_to_datetime
@@ -1195,6 +1349,7 @@ def records_of(publication: Publication, readings, statements=None) -> list[Reco
     """Project a publication's table readings into records, one per count, test or share cell."""
     publisher, published, protocol = _identity_of(publication, statements)
     stated_stage, stated_quote = transmission_stage(statements)
+    installed = trap_installation(statements, survey_year(publication))
     fallback = publication_window(publication)
     context_years = _years(publication.label)
     series_quotes = statements['reading']['series'] if statements else []
@@ -1233,6 +1388,11 @@ def records_of(publication: Publication, readings, statements=None) -> list[Reco
                 stage, stage_literal = stated_stage, f'{stated_quote} (transmission text)'
             window = printed_window(window_literal, years) if window_literal else None
             issue = window_issue(window, publication) if window else None
+            if window and not issue and installed and column['method_literal'] \
+                    and 'trappol' in _fold(column['method_literal']) and installed[0] < window[0]:
+                # A trap catches over its exposure, from installation to collection, not the inspection week.
+                window = (installed[0], window[1])
+                window_literal = f'{window_literal}; traps installed per the transmission text: {installed[1]}'
             if window is None and window_literal is None and fallback is not None:
                 window, window_literal = fallback[:2], fallback[2]
             if round_literal is None or printed_round(round_literal) is None:
@@ -1353,6 +1513,8 @@ class Round:
     end: date | None                # the latest day its window can end: the printed end, else the publication date
     stage: str | None               # as the held words print it
     find_sites: bool                # a table of the sites where the stage was found
+    periods: int | None = None      # survey periods its header reading shows it prints (`printed_periods`)
+    printed_rounds: tuple = ()      # round numbers its header reading prints
 
     @property
     def name(self) -> str:
@@ -1456,7 +1618,8 @@ def zones_without_adult(records, zones, comune_of) -> tuple[str, ...]:
 
 @dataclass(frozen=True)
 class OnsetBound:
-    """The next-season onset bound for one zone version and detection date (`vector-biology`)."""
+    """The next-season onset bound for one zone version and detection date (`vector-biology`):
+    a retrospective lateness bound, not a forward deadline (see `onset_bound`)."""
     zone: str
     detection: date
     upper: date | None
@@ -1468,6 +1631,7 @@ class OnsetBound:
     unnamed_rounds: tuple[str, ...]
     unplaced: tuple[tuple[Record, str], ...] = field(default=(), repr=False)
     untranscribed_rounds: tuple[str, ...] = ()
+    season: int | None = None        # the survey year of the next season (`next_season`)
 
 
 def _adult_presence(record: Record) -> bool:
@@ -1502,19 +1666,40 @@ def unnamed_rounds(records) -> tuple[tuple, ...]:
                         for n in range(1, last) if (series, year, n) not in held))
 
 
+def next_season(records, untranscribed, detection: date) -> int | None:
+    """The survey year of the first season whose rounds follow `detection`: the year of the
+    earliest-ending round, held or acquired and not transcribed, that ends after it. None where
+    no round after the detection is held. A record's window lies in one survey year
+    (`window_issue`), so its year is its season's."""
+    ends = [r.window[1] for r in records if r.window is not None and r.window[1] > detection]
+    ends += [r.end for r in untranscribed if r.end is not None and r.end > detection]
+    return min(ends).year if ends else None
+
+
 def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rounds=(),
                 untranscribed=()) -> OnsetBound:
-    """The end of the earliest adult window beginning after `detection` on a record placed in `zone`.
+    """The end of the earliest adult window of the next season beginning after `detection` on a
+    record placed in `zone`.
+
+    This is a retrospective lateness bound: a removal after it was certainly late, and it exists
+    only once the season's first adult window in the zone has passed and been published. The
+    next season is the first whose rounds follow the detection (`next_season`); its candidates
+    come from that season only. Where none of its records places an adult in the zone there is no
+    bound, and the cause names that season: a later season is never substituted.
 
     Only adults counted present make a window an adult window; a zero, a blank or a juvenile
     table never does. Only an official statement that adults were absent from the zone bounds
-    onset from below. `rounds` are the unnamed rounds (`unnamed_rounds`); those that could fall
-    between the detection and the bound are listed beside it, never filled. `untranscribed`
-    are the `Round`s acquired and not transcribed; each that could end after the detection and
-    begin before the bound is listed beside it too, since it can only make the true bound earlier.
+    onset from below. `rounds` are the unnamed rounds (`unnamed_rounds`); those of the season
+    that could fall between the detection and the bound are listed beside it, never filled.
+    `untranscribed` are the `Round`s acquired and not transcribed; each of the season that could
+    end after the detection and begin before the bound is listed beside it too, since it can only
+    make the true bound earlier (or give one where there is none).
     """
     records = list(records)
-    candidates = sorted((r for r in records if _adult_presence(r) and r.window[0] > detection),
+    untranscribed = list(untranscribed)
+    season = next_season(records, untranscribed, detection)
+    candidates = sorted((r for r in records if _adult_presence(r) and r.window[0] > detection
+                         and r.window[0].year == season),
                         key=lambda r: (r.window[1], r.window[0], r.cell))
     unplaced, upper = [], None
     for record in candidates:
@@ -1528,7 +1713,8 @@ def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rou
             unplaced.append((record, ', '.join(sorted(answer.needs))))
     lower, lower_statement = None, None
     for statement in statements:
-        if statement.kind != 'adults_absent' or statement.day is None or statement.day[0] <= detection:
+        if statement.kind != 'adults_absent' or statement.day is None or statement.day[0] <= detection \
+                or statement.day[0].year != season:
             continue
         if upper is not None and statement.day[1] >= upper.window[1]:
             continue
@@ -1537,14 +1723,19 @@ def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rou
         if zone.units and zone.units <= named and (lower is None or statement.day[1] > lower):
             lower, lower_statement = statement.day[1], statement
     cause = None
-    if upper is None:
-        cause = ('no adult record placed in the zone' if not unplaced else
-                 'no adult record placed in the zone; not placed: '
-                 + '; '.join(sorted({c for _, c in unplaced})))
+    if season is None:
+        cause = 'no round held after the detection: the next season is not yet published or not acquired'
+    elif upper is None:
+        cause = (f'no adult record placed in the zone in the {season} season, the first whose rounds '
+                 f'follow the detection' + ('' if not unplaced else '; not placed: '
+                                            + '; '.join(sorted({c for _, c in unplaced}))))
     held = held_rounds(records)
     before = []
     for series, year, number in rounds:
-        if upper is None or year != upper.window[1].year:
+        if year != season:
+            continue
+        if upper is None:
+            before.append((series, year, number))
             continue
         if series == _series(upper):
             if upper.round is not None and number < upper.round:
@@ -1553,14 +1744,63 @@ def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rou
         earlier = [end for (s, y, n), (_, end) in held.items() if (s, y) == (series, year) and n < number]
         if not earlier or max(earlier) < upper.window[1]:
             before.append((series, year, number))
-    waiting = tuple(sorted({r.name for r in untranscribed
-                            if (r.end is None or r.end > detection)
-                            and (upper is None or r.start is None or r.start < upper.window[1])}))
+    waiting = {r.name for r in untranscribed
+               if r.season[2] == season and (r.end is None or r.end > detection)
+               and (upper is None or r.start is None or r.start < upper.window[1])}
+    # A missing round that an acquired, untranscribed table of its season prints (by its round number,
+    # or among the survey periods a cumulative table prints) is untranscribed, not unnamed.
+    unnamed = []
+    for s, y, n in before:
+        label = f'{s[0]} {s[1] or "series not printed"} {y} round {n}'
+        holder = next((r for r in untranscribed if r.season[2] == y and _crop(r.season[1]) == _crop(s[1])
+                       and (n in r.printed_rounds or (r.periods or 0) >= n)), None)
+        if holder is None:
+            unnamed.append(label)
+        else:
+            waiting.add(f'{label}: acquired, not transcribed (printed in {holder.label}, '
+                        + (f'round {n}' if n in holder.printed_rounds else f'{holder.periods} survey periods') + ')')
     return OnsetBound(zone.identity, detection, upper.window[1] if upper else None, upper, cause, lower,
                       lower_statement, None if lower else 'no lower bound: no official statement that adults '
                       'were absent from the whole zone',
-                      tuple(f'{s[0]} {s[1] or "series not printed"} {y} round {n}' for s, y, n in before),
-                      tuple(unplaced), waiting)
+                      tuple(unnamed), tuple(unplaced), tuple(sorted(waiting)), season)
+
+
+def _crop(text) -> str:
+    """A crop series as one word (oliveti / olivo / olive -> olive), or '' where none is printed."""
+    folded = _fold(text)
+    for stem, name in (('oliv', 'olive'), ('mandorl', 'almond'), ('vit', 'vine'), ('vign', 'vine')):
+        if folded.startswith(stem):
+            return name
+    return folded
+
+
+PRINTED_AGRO = re.compile(r"\bagro\s+(?:di\s+|del\s+|della\s+)?([A-Z][\w'’]*(?:\s+(?:(?:delle|della|del|dei|di|de)\s+)?"
+                          r"[A-Z][\w'’]*)*)")
+
+
+def statement_agro(statement: Statement) -> str | None:
+    """The agro a statement prints (\"agro di Triggiano\"): from its quote, which is checked against the
+    text, or from its place literal where that literal is in the quote. Surroundings (\"l'area
+    circostante il sito di Triggiano\") are not an agro."""
+    for text in (statement.quote, statement.place):
+        if not text or (text is statement.place and _fold(text) not in _fold(statement.quote)):
+            continue
+        match = PRINTED_AGRO.search(text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def statement_record(statement: Statement) -> Record:
+    """A recited finding as a record of its printed place and window, for the place test."""
+    return Record(source=statement.source, url=statement.url, cell=f'statement: {statement.quote[:200]}',
+                  request=statement.request, publisher=statement.publisher,
+                  publication_date=statement.publication_date, protocol=None, series=None, round=None,
+                  round_literal=None, site=None, agro=statement_agro(statement), area=statement.place,
+                  coordinates=None, coordinates_literal=None, window=statement.day,
+                  window_literal=statement.date_literal, method=None, species=None, species_literal=None,
+                  stage=None, stage_literal=None, result=statement.quote, count=None,
+                  test_result=statement.quote)
 
 
 def _positive(text) -> bool:
@@ -1598,8 +1838,20 @@ def vector_detections(records, statements, area: Zone, comune_of) -> VectorDetec
         elif answer.truth is None:
             unjoined.append((record, ', '.join(sorted(answer.needs))))
     for statement in statements:
-        if statement.kind == 'vector_positive':
-            unjoined.append((statement, 'place not located'))
+        if statement.kind != 'vector_positive':
+            continue
+        # The statement's printed agro goes through the same place test as a table record's.
+        proxy = statement_record(statement)
+        answer = placed(proxy, area, comune_of)
+        if answer.truth is False:
+            continue
+        needs = set(answer.needs) if answer.truth is None else set()
+        if proxy.window is None:
+            needs.add('window not printed')
+        if needs:
+            unjoined.append((statement, ', '.join(sorted(needs))))
+        else:
+            joined.append(proxy)
     return VectorDetections(area.identity, tuple(sorted(r.window[0] for r in joined)),
                             tuple(sorted(r.window[1] for r in joined)), tuple(joined), tuple(unjoined))
 

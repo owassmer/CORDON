@@ -118,6 +118,19 @@ class Placement(unittest.TestCase):
         self.assertIsNone(answer.truth)
         self.assertIn('printed coordinates agree with the printed agro', answer.needs)
 
+    def test_the_contradiction_takes_the_comune_s_sourced_error_and_none_where_none_is_sourced(self):
+        # A point 6 km outside its printed agro (O31 "Martina Franca", whose point lies in Noci) is a
+        # contradiction unless the comune's own sourced boundary error reaches it.
+        point = record(coordinates=at(726000, 4505000))
+        for error, placed_in in ((0.0, None), (100.0, None), (7000.0, True)):
+            comune = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, error))
+            answer = placed(point, ZONE, lambda name: comune)
+            self.assertIs(answer.truth, placed_in, error)
+        unsourced = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, 0.0))
+        self.assertIs(placed(record(coordinates=at(705000, 4505000)), ZONE, lambda name: unsourced).truth, True)
+        self.assertIn('printed coordinates agree with the printed agro',
+                      placed(record(coordinates=at(720050, 4505000)), ZONE, lambda name: unsourced).needs)
+
     def test_coordinates_alone_need_a_positional_error(self):
         answer = placed(record(agro=None), ZONE, comune_of)
         self.assertEqual(answer.needs, frozenset({'positional error of the printed site coordinates'}))
@@ -148,7 +161,7 @@ class OnsetBound(unittest.TestCase):
     def test_a_zero_count_is_never_an_adult_window(self):
         found = self.bound([record(result='0,00', count=Decimal('0'), coordinates=at(705000, 4505000))])
         self.assertIsNone(found.upper)
-        self.assertEqual(found.upper_cause, 'no adult record placed in the zone')
+        self.assertEqual(found.upper_cause, 'no adult record placed in the zone in the 2026 season, the first whose rounds follow the detection')
 
     def test_a_juvenile_record_is_never_an_adult_window(self):
         found = self.bound([record(stage='juvenile III', coordinates=at(705000, 4505000))])
@@ -163,7 +176,7 @@ class OnsetBound(unittest.TestCase):
         unplaced = record(agro=None, coordinates=None, area='Contenimento', window=(date(2026, 4, 1), date(2026, 4, 2)))
         found = self.bound([outside, unplaced])
         self.assertIsNone(found.upper)
-        self.assertEqual(found.upper_cause, 'no adult record placed in the zone; not placed: place not located')
+        self.assertEqual(found.upper_cause, 'no adult record placed in the zone in the 2026 season, the first whose rounds follow the detection; not placed: place not located')
 
     def test_no_lower_bound_without_a_statement_of_adult_absence_from_the_whole_zone(self):
         juvenile = Statement('s' * 64, 'u', 'r' * 64, 'juvenile_stage', 'prossimo al 4° stadio giovanile', 'Crispiano',
@@ -176,6 +189,47 @@ class OnsetBound(unittest.TestCase):
         self.assertIsNone(found.lower_cause)
         partial = replace(absent, place='Triggiano')
         self.assertIsNone(self.bound([adult], [partial]).lower)
+
+    def test_a_detection_before_a_season_with_no_placed_adult_takes_no_bound_from_the_season_after(self):
+        # DET 9/2025: detection 27/11/2024; the 2025 season places no adult in Z; 2026 does.
+        det = date(2024, 11, 27)
+        summer = record(coordinates=at(705000, 4505000), round=10, window=(date(2024, 7, 16), date(2024, 7, 25)))
+        gap = record(agro='Triggiano', coordinates=at(745000, 4505000), publisher=None, series='mandorlo', round=10,
+                     window=(date(2025, 1, 1), date(2025, 7, 18)))
+        after = record(coordinates=at(705000, 4505000), window=(date(2026, 5, 25), date(2026, 5, 29)))
+        later = vectors.Round('s' * 64, 'u', ('dati2026', 'oliveti', 2026), 'VIII rilievo oliveti', 8,
+                              date(2026, 8, 17), date(2026, 8, 21), 'adult', False)
+        records = [summer, gap, after]
+        found = onset_bound(records, [], ZONE, det, comune_of, rounds=unnamed_rounds(records), untranscribed=[later])
+        self.assertIsNone(found.upper)
+        self.assertEqual(found.season, 2025)
+        self.assertIn('in the 2025 season, the first whose rounds follow the detection', found.upper_cause)
+        self.assertEqual(found.unnamed_rounds, tuple(f'publisher not printed mandorlo 2025 round {n}' for n in range(1, 10)))
+        self.assertEqual(found.untranscribed_rounds, ())
+        self.assertEqual(vectors.next_season(records, [later], date(2025, 12, 1)), 2026)
+        self.assertEqual(onset_bound(records, [], ZONE, date(2025, 12, 1), comune_of).upper, date(2026, 5, 29))
+
+    def test_a_detection_before_its_own_season_s_rounds_takes_that_season_and_lists_what_is_untranscribed(self):
+        # DET 20/2023: detection 14/02/2023; the 2023 composite dates its counts 01/01-14/06 (no window
+        # beginning after the detection) and the 2023 round II is acquired, not transcribed.
+        det = date(2023, 2, 14)
+        composite = record(coordinates=None, publisher=None, series=None, round=6,
+                           window=(date(2023, 1, 1), date(2023, 6, 14)))
+        next_year = record(coordinates=None, publisher=None, series=None, round=1,
+                           window=(date(2024, 4, 11), date(2024, 4, 22)))
+        second = vectors.Round('s' * 64, 'u', ('dati2023', '', 2023), 'BARI II 2023', 2, None, date(2023, 6, 26),
+                               None, False)
+        found = onset_bound([composite, next_year], [], ZONE, det, comune_of, untranscribed=[second])
+        self.assertIsNone(found.upper)
+        self.assertEqual(found.season, 2023)
+        self.assertIn('in the 2023 season', found.upper_cause)
+        self.assertEqual(found.untranscribed_rounds, (second.name,))
+        self.assertEqual(onset_bound([next_year], [], ZONE, date(2023, 12, 15), comune_of).upper, date(2024, 4, 22))
+
+    def test_no_round_after_the_detection_is_its_own_cause(self):
+        found = self.bound([record(coordinates=at(705000, 4505000), window=(date(2025, 5, 25), date(2025, 5, 29)))])
+        self.assertIsNone(found.season)
+        self.assertIn('no round held after the detection', found.upper_cause)
 
     def test_unnamed_rounds_before_the_bound_are_listed_not_filled(self):
         olive = record(coordinates=at(705000, 4505000), round=2)
@@ -203,7 +257,25 @@ class VectorPositives(unittest.TestCase):
                             'nel monitoraggio 2022, sono stati individuati insetti vettori infetti da Xylella fastidiosa',
                             'Triggiano', None, None, 'Osservatorio', None)
         found = vector_detections([], [recited], ZONE, comune_of)
-        self.assertEqual(found.unjoined, ((recited, 'place not located'),))
+        self.assertEqual(found.unjoined, ((recited, 'place not located, window not printed'),))
+
+    def test_a_recited_positive_s_printed_agro_goes_through_the_place_test(self):
+        quote = 'nel monitoraggio 2022, sono stati individuati insetti vettori infetti nell\u2019agro di Crispiano (TA)'
+        recited = Statement('s' * 64, 'u', 'r' * 64, 'vector_positive', quote, 'agro di Crispiano',
+                            (date(2022, 10, 3), date(2022, 10, 7)), '3-7 ottobre 2022', 'Osservatorio', None)
+        self.assertEqual(vectors.statement_agro(recited), 'Crispiano')
+        found = vector_detections([], [recited], ZONE, comune_of)
+        self.assertEqual((found.at_start, found.at_end, found.unjoined), ((date(2022, 10, 3),), (date(2022, 10, 7),), ()))
+        undated = replace(recited, day=None, date_literal='2022')
+        self.assertEqual(vector_detections([], [undated], ZONE, comune_of).unjoined, ((undated, 'window not printed'),))
+        elsewhere = replace(recited, quote=quote.replace('Crispiano', 'Triggiano'), place='agro di Triggiano')
+        self.assertEqual(vector_detections([], [elsewhere], ZONE, comune_of).unjoined, ())
+        around = replace(recited, quote='n. 12 Philaenus spumarius catturati nell\u2019area circostante il sito di Crispiano',
+                         place='nell\u2019area circostante il sito di Crispiano')
+        self.assertIsNone(vectors.statement_agro(around))
+        self.assertEqual(vector_detections([], [around], ZONE, comune_of).unjoined, ((around, 'place not located'),))
+        unread = replace(recited, quote='insetti vettori positivi \u015d\u0176 \u0102\u0150\u0192\u017d')
+        self.assertIsNone(vectors.statement_agro(unread))  # a place literal the quote does not print is not read
 
     def test_only_an_answer_both_ends_give_is_kept(self):
         self.assertIs(agreed(Evaluation(True), Evaluation(True)).truth, True)
@@ -366,6 +438,26 @@ class TransmissionText(unittest.TestCase):
         self.assertFalse(any('row order differs' in r.cell for r in found))
         self.assertEqual({r.site: r.request[0] for r in found}, {'O31': '3', 'O33': '3', 'O40': '4'})
 
+    def test_trap_records_take_the_exposure_from_installation_to_collection(self):
+        text = (' b) nei vigneti, in questo caso i dati riguardano l\u2019ispezione delle trappole installate nei '
+                'giorni 20-24 luglio, ed i dati riguardanti gli sfalci')
+        statements = self.statements(self.ADULTS, text=text)
+        self.assertEqual(vectors.trap_installation(statements, 2026)[0], date(2026, 7, 20))
+        publication = vectors.Publication('https://cartografia.sit.puglia.it/doc/xylella/vettori/dati2026/T.pdf',
+                                          'b' * 64, 'pdf', 'front page', None, 'records.json')
+        number, response = self.page(3, ['V1'])
+        reading = response['reading']
+        reading['title_literal'] = 'Rilievo settimana dal 17 al 21 Agosto 2026 - VIGNETI'
+        reading['columns'][1] = dict(reading['columns'][1], method_literal='N. individui totali x 32 trappole/ha')
+        traps, = vectors.records_of(publication, [(number, response)], statements)
+        self.assertEqual(traps.window, (date(2026, 7, 20), date(2026, 8, 21)))
+        self.assertIn('trappole installate nei giorni 20-24 luglio', traps.window_literal)
+        reading['columns'][1] = dict(reading['columns'][1], method_literal='N. individui x 30 unita campionarie COTICO')
+        sweeps, = vectors.records_of(publication, [(number, response)], statements)
+        self.assertEqual(sweeps.window, (date(2026, 8, 17), date(2026, 8, 21)))
+        may = self.statements(self.ADULTS, text=' trappole installate nei giorni 11 e 12 maggio')
+        self.assertEqual(vectors.trap_installation(may, 2026)[0], date(2026, 5, 11))
+
     def test_one_publisher_printed_with_different_punctuation_is_one_series(self):
         first = record(publisher='CNR-IPSP (Sede di Bari)', round=2)
         second = record(publisher='CNR-IPSP – Sede di Bari', round=8)
@@ -459,6 +551,32 @@ class ScopedReading(unittest.TestCase):
         found = onset_bound([adult], [], ZONE, date(2026, 2, 12), comune_of, untranscribed=[before, after])
         self.assertEqual(found.upper, date(2026, 5, 29))
         self.assertEqual(found.untranscribed_rounds, (before.name,))
+
+    def test_a_missing_round_an_untranscribed_table_prints_is_untranscribed_not_unnamed(self):
+        # 2024: round 1 and round 5 are held; the area table of 25/07/2024 prints ten survey periods.
+        first = record(agro='Triggiano', coordinates=None, publisher=None, series=None, round=1,
+                       window=(date(2024, 4, 11), date(2024, 4, 22)))
+        fifth = replace(first, round=5, window=(date(2024, 5, 15), date(2024, 5, 22)))
+        area = vectors.Round('s' * 64, 'u', ('dati2024', '', 2024), 'Bari | Area Bari al 20240725', None, None,
+                             date(2024, 7, 25), None, False, periods=10)
+        found = onset_bound([first, fifth], [], ZONE, date(2024, 1, 10), comune_of,
+                            rounds=unnamed_rounds([first, fifth]), untranscribed=[area])
+        self.assertEqual(found.unnamed_rounds, ())
+        self.assertIn('publisher not printed series not printed 2024 round 3: acquired, not transcribed '
+                      '(printed in Bari | Area Bari al 20240725, 10 survey periods)', found.untranscribed_rounds)
+        alone = onset_bound([first, fifth], [], ZONE, date(2024, 1, 10), comune_of, rounds=unnamed_rounds([first, fifth]))
+        self.assertEqual(len(alone.unnamed_rounds), 3)
+
+    def test_a_header_reading_names_its_periods_rounds_and_any_test_column(self):
+        column = dict(stage_literal=None, window_literal=None, round_literal=None, units_literal=None)
+        reading = {'issues': [], 'tables': [
+            {'table': 1, 'title_literal': None, 'notes': [], 'period_row_keys': ['11apr-19apr', '20apr-8mag'],
+             'columns': [dict(column, header_literal='% cotico erboso', role='share')]},
+            {'table': 2, 'title_literal': None, 'notes': [], 'period_row_keys': [],
+             'columns': [dict(column, header_literal='Presenza adulti QUINTO TURNO', role='other'),
+                         dict(column, header_literal='N. positivi a X. fastidiosa', role='count')]}]}
+        self.assertEqual(vectors.printed_periods(reading), (2, (5,)))
+        self.assertEqual([c['header_literal'] for c in vectors.test_columns(reading)], ['N. positivi a X. fastidiosa'])
 
     def test_a_publication_that_prints_no_stage_yields_no_adult_window(self):
         publication = self.publication('Bari_est_IX_comunicato.jpg')

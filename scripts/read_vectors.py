@@ -10,7 +10,9 @@ where adults were found is read in place of the round's area tables; juvenile-st
 never read. A raster publication is read header band first, and no further where neither its
 label nor any header, title or banner prints a stage, or where neither the table nor the
 publication (its folder's survey year and the day its name or server dates it to) dates its counts. A PDF table page is read from its text
-layer where that reads cleanly, else by a model page read.
+layer where that reads cleanly, else by a model page read. Every table left untranscribed has its
+header band read for a test-result column (one request per raster, all its tables, at medium effort;
+a PDF from its text layer): a table not transcribed is never taken as printing no test result.
 
 Replays retained readings by default; `--execute` dispatches the missing requests on the Claude
 subscription, at most two at a time, each only while at least 20% of memory is free. A
@@ -20,7 +22,7 @@ rounds and reading limits as JSON outside the tree; nothing here is an owner.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import date
 import importlib.util
 import json
@@ -232,6 +234,7 @@ def main():
 
     records_by = {}
     untranscribed_rounds = []
+    set_aside = {}  # (season, end) -> the rounds of a transcribed round group that were not transcribed
     try:
         for season in sorted(seasons, key=lambda s: (s[2], s[0], s[1])):
             groups = sorted(seasons[season].items(), key=lambda kv: kv[0] or date.max)
@@ -243,6 +246,7 @@ def main():
                 chosen = finds or chosen
                 for r in group:
                     if r not in chosen:
+                        set_aside.setdefault((season, end), []).append(r)
                         not_transcribed.append(dict(url=r.url, round=r.name, cause=(
                             'a juvenile-stage table: never an adult window' if r.stage == 'juvenile' else
                             'the round is read from its table of the sites where adults were found')))
@@ -278,10 +282,84 @@ def main():
     except Stopped as stop:
         print(f'STOPPED {stop}; {requests["made"]} requests made before the stop', flush=True)
         sys.exit(3)
+    # 6(1): an acquired table not transcribed may still print a test result. The header band of every
+    # such table is read (one request per raster, all its tables; a PDF from its text layer), and a
+    # table whose header prints a test-result column is named, never taken as silent.
+    header_sources = sorted({r.source for r in untranscribed_rounds}, key=lambda s: by_sha[s].url)
+    headers = []
+    rasters_needing = [s for s in header_sources if by_sha[s].kind == 'image']
     if args.plan:
         print(f'plan: {requests["planned_first"]} model requests for the first round of every season; at most '
-              f'{requests["planned_all"]} if no season stops early', flush=True)
+              f'{requests["planned_all"]} if no season stops early; plus one header-band request per raster '
+              f'left untranscribed', flush=True)
         return
+    try:
+        for sha in header_sources:
+            if by_sha[sha].kind == 'pdf':
+                columns = vectors.pdf_header_columns(store, sha, statements[sha]['reading']['table_pages'])
+                headers.append(dict(url=by_sha[sha].url, read='text layer', request=None, columns=columns,
+                                    tables=None, test_columns=[c for c in columns if c['header_literal']
+                                                               and vectors.TEST_WORDS.search(c['header_literal'])]))
+        missing_headers = []
+        for sha in rasters_needing:
+            try:
+                vectors.header_band(store, sha)
+            except FileNotFoundError:
+                missing_headers.append(sha)
+        requests['made'] += len(missing_headers) if execute else 0
+        jobs = [(lambda s: gated(vectors.header_band, store, s, execute=execute), sha) for sha in rasters_needing]
+        for (_, sha), result in run(jobs):
+            if isinstance(result, Exception):
+                limit(by_sha[sha], dict(step='header'), f'{type(result).__name__}: {result}')
+                headers.append(dict(url=by_sha[sha].url, read=None, cause=f'{type(result).__name__}: {result}'[:300]))
+                continue
+            reading = result['reading']
+            periods, numbers = vectors.printed_periods(reading)
+            headers.append(dict(url=by_sha[sha].url, read='header band', request=result['request_sha256'],
+                                tables=reading['tables'], issues=reading['issues'], periods=periods,
+                                printed_rounds=list(numbers), test_columns=vectors.test_columns(reading)))
+            untranscribed_rounds[:] = [replace(r, periods=periods, printed_rounds=numbers) if r.source == sha else r
+                                       for r in untranscribed_rounds]
+        # The rasters of a transcribed round that were set aside (the round was read from its find-site
+        # table; juvenile-stage tables): one header request per round for all of them.
+        groups = []
+        for key, found in sorted(set_aside.items(), key=lambda kv: (kv[0][0][2], kv[0][1] or date.max)):
+            shas = sorted({r.source for r in found if by_sha[r.source].kind == 'image'
+                           and not readings.get(r.source)}, key=lambda s: by_sha[s].url)
+            if shas:
+                groups.append(shas)
+                header_sources += shas
+        missing = 0
+        for shas in groups:
+            try:
+                vectors.round_header_bands(store, shas)
+            except FileNotFoundError:
+                missing += 1
+        requests['made'] += missing if execute else 0
+        jobs = [(lambda g: gated(vectors.round_header_bands, store, list(g), execute=execute), tuple(g)) for g in groups]
+        for (_, shas), result in run(jobs):
+            urls = [by_sha[s].url for s in shas]
+            if isinstance(result, Exception):
+                limit(by_sha[shas[0]], dict(step='round header'), f'{type(result).__name__}: {result}')
+                headers.append(dict(url=urls, read=None, cause=f'{type(result).__name__}: {result}'[:300]))
+                continue
+            reading = result['reading']
+            headers.append(dict(url=urls, read='round header band', request=result['request_sha256'],
+                                tables=reading['tables'], issues=reading['issues'],
+                                test_columns=vectors.test_columns(reading)))
+    except Stopped as stop:
+        print(f'STOPPED {stop}; {requests["made"]} requests made before the stop', flush=True)
+        sys.exit(3)
+    read_headers = [h for h in headers if h.get('read')]
+    headers_summary = dict(
+        publications=len(header_sources), read=sum(len(h['url']) if isinstance(h['url'], list) else 1
+                                                    for h in read_headers),
+        tables=sum(len(h['tables']) for h in read_headers if h['tables'] is not None),
+        with_test_column=[h['url'] for h in read_headers if h['test_columns']],
+        not_read=[h['url'] for h in headers if not h.get('read')])
+    print(f'headers: {headers_summary["read"]} of {len(header_sources)} untranscribed publications read '
+          f'({headers_summary["tables"]} raster tables); test-result columns in '
+          f'{len(headers_summary["with_test_column"])}', flush=True)
 
     records, found_statements = [], []
     for p in population:
@@ -301,7 +379,8 @@ def main():
             publications=[asdict(p) for p in population],
             records=[asdict(r) for r in records], statements=[asdict(s) for s in found_statements],
             transcribed=[asdict(r) for r in transcribed], untranscribed=[asdict(r) for r in untranscribed_rounds],
-            not_transcribed=not_transcribed, limits=limits), default=plain, ensure_ascii=False, indent=0))
+            not_transcribed=not_transcribed, limits=limits, headers=headers, headers_summary=headers_summary),
+            default=plain, ensure_ascii=False, indent=0))
 
 
 if __name__ == '__main__':
