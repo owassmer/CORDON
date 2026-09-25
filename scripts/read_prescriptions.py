@@ -161,14 +161,21 @@ def held_events(measures, store, known_through):
     return by_instrument, failures
 
 
-def load_closures(path):
-    """Liveness closures by instrument from a `read_judgments.py --dispositions` output file."""
+def load_closures(path, known_through):
+    """Liveness closures by instrument from a `read_judgments.py --dispositions` output file.
+
+    A closure whose decision the removal-event source map had not captured by the run's
+    knowledge cutoff is left out.
+    """
     if not path:
         return {}
+    held = held_sources(known_through)
     closures = next((e['liveness_closures'] for e in json.loads(Path(path).read_text())
                      if 'liveness_closures' in e), {})
-    return {instrument: [dict(c, since=date.fromisoformat(c['since']) if c['since'] else None) for c in items]
+    kept = {instrument: [dict(c, since=date.fromisoformat(c['since']) if c['since'] else None)
+                         for c in items if c['decision'].get('source') in held]
             for instrument, items in closures.items()}
+    return {instrument: items for instrument, items in kept.items() if items}
 
 
 def stated_changes(results):
@@ -419,7 +426,7 @@ def main():
     # Work an act applies by reference takes the referenced order's own clause record.
     composed = {r['occurrence']: r for r in apply_references(
         [{k: v for k, v in r.items() if k != 'c'} for entry in results for r in entry.get('records', ())])}
-    closures = load_closures(arguments.closures)
+    closures = load_closures(arguments.closures, arguments.known_through)
     changes = stated_changes(results)
     held_changes, held_report = held_act_changes(results, snapshot, store, options, arguments.known_through)
     for target, items in held_changes.items():

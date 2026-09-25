@@ -71,7 +71,8 @@ class RunInputTests(unittest.TestCase):
                   dict(sha256='b' * 64, captured_at=after, url='https://example.invalid/DDS_22_2026.pdf'),
                   dict(sha256='c' * 64, captured_at=after, url='https://example.invalid/DDS_5_2025.pdf'),
                   dict(sha256='c' * 64, captured_at=before, url='https://example.invalid/DDS_5_2025.pdf')]
-        events = [dict(sha256='d' * 64, captured_at=after, kind='publication', url='https://example.invalid/albo')]
+        events = [dict(sha256='d' * 64, captured_at=after, kind='publication', url='https://example.invalid/albo'),
+                  dict(sha256='e' * 64, captured_at=before, kind='event', url='https://example.invalid/tar')]
         with TemporaryDirectory() as directory:
             root = Path(directory)
             for name, records in (('removal-orders', orders), ('removal-events', events)):
@@ -88,6 +89,12 @@ class RunInputTests(unittest.TestCase):
                 self.assertEqual(len(list(read_prescriptions.population(datetime(2026, 9, 24, tzinfo=timezone.utc)))),
                                  3)
                 intervals, left_out = read_notice_routes.load_postings([postings], cutoff)
+                judgments = root / 'judgments.json'
+                judgments.write_text(json.dumps([dict(liveness_closures={'X-2025-117': [
+                    dict(effect='annulled', since='2025-07-10', decision=dict(source='e' * 64)),
+                    dict(effect='suspended', since='2025-07-11', decision=dict(source='d' * 64))]})]))
+                closures = read_prescriptions.load_closures(judgments, cutoff)
+            self.assertEqual([c['effect'] for c in closures['X-2025-117']], ['annulled'])
             self.assertEqual([i['sources'] for i in intervals['X-2025-117']], [['a' * 64]])
             self.assertEqual([e['source'] for e in left_out], ['d' * 64])
 
