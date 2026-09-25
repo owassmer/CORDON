@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+ "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "c3d98bb701c7512c79b05054fc512ac42a93e70dc09a4b406243722be12e1494",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:23:31.023298+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Reg. (UE) 2020/1201 -Aggiornamento dell'area delimitata a \"Xylella fastidiosa sottospecie -multiplex ST26- Santeramo in Colle\", ai sensi del dell'art. 4 del Reg. UE 2020/1201.",
+   "La Determinazione del Dirigente Sezione Osservatorio Fitosanitario n° 29 del 08/04/2024 \"Individuazione di focolaio di Xylella fastidiosa sottospecie multiplex ST26 in agro di Santeramo in Colle (BA) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\"."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

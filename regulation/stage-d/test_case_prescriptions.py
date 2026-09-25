@@ -254,6 +254,55 @@ class CasePrescriptionRecords(unittest.TestCase):
                 self.assertIsNone(c_result(self.s, record, at, closures=[other], within_closed_scope=False,
                                            **held).truth)
 
+    def dds113(self):
+        """DDS 113/2023's clause-0 record (BURP n. 96 of 26-10-2023, point 10): commencement and coercion "delle
+        piante infette e delle piante ricadenti nei 50 m", term "10 giorni" from notification, ARIF, cohort
+        "allegato 1/D". Its governing references name the DDS 18/2024 withdrawal row."""
+        values = copy.deepcopy(READING)
+        values['identity'].update(number='113', adopted='2023-10-16')
+        for item in values['prescribed_work']:
+            item['cohort'] = 'allegato 1/D'
+        values['enforcement_clauses'][0].update(
+            commencement_population='delle piante infette e delle piante ricadenti nei 50 m',
+            coercive_population=dict(literal='delle piante infette e delle piante ricadenti nei 50 m',
+                                     resolved='delle piante infette e delle piante ricadenti nei 50 m'))
+        return next(reading(values).records(self.s))
+
+    def test_before_14_march_2024_dueness_is_the_orders_own_reading(self):
+        # Notified 1 March 2024, evaluated 13 March 2024: the term has lapsed and the records are complete.
+        record = self.dds113()
+        withdrawal = 'REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn'
+        self.assertEqual(record['governing_A_references'], (withdrawal,))
+        at, notified = date(2024, 3, 13), datetime(2024, 3, 1, 9, tzinfo=ROME)
+        held = dict(**personal_notice(self.s, at, notified), evaluated_at=datetime(2024, 3, 13, 12, tzinfo=ROME), zone=ROME,
+                    calendar=national_calendar(), commencement_records_complete=True)
+        change = {'from': 'REG-PUGLIA-U181-DIR-2024-00018', 'adopted': '2024-03-14', 'relationship': 'withdraws',
+                  'extent': 'part', 'affected_payload': 'non si procederà all’estirpazione delle piante ospiti'}
+        # The row is referenced but not yet in force: it is not required and contributes nothing.
+        self.assertEqual(c_result(self.s, record, at, stated_changes=[change], **held).effect,
+                         'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        # With no row, the stated change does not reach a date before its act's adoption.
+        bare = dict(record, governing_A_references=())
+        result = c_result(self.s, bare, at, stated_changes=[change], **held)
+        self.assertEqual(result.effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        self.assertFalse(any('stated withdraws' in need for need in result.needs))
+        # From its adoption the same stated change, unrecorded, holds dueness unknown.
+        later = c_result(self.s, bare, date(2024, 3, 14), stated_changes=[change],
+                         **dict(held, evaluated_at=datetime(2024, 3, 14, 12, tzinfo=ROME)))
+        self.assertIsNone(later.truth)
+        self.assertTrue(any('stated withdraws (in part)' in need for need in later.needs))
+
+    def test_a_governed_orders_need_passes_the_rows_own_predicates_through(self):
+        # DDS 45/2023's clause record with no row result supplied, as the writer calls it.
+        values = copy.deepcopy(READING)
+        values['identity'].update(number='45', adopted='2023-05-09')
+        record = next(reading(values).records(self.s))
+        hold = 'REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold'
+        self.assertIn(hold, record['governing_A_references'])
+        needs = c_result(self.s, record, date(2026, 9, 24), evaluated_at=CUTOFF).needs
+        self.assertFalse(any(need.startswith('result of') for need in needs))
+        self.assertIn(f'predicate: {hold}:v2 :: the population in question holds held olives', needs)
+
     def test_a_clause_reading_limit_leaves_the_clause_unknown(self):
         record = dict(next(reading().records(self.s)), limits=('term words cut at the page edge',))
         self.assertIsNone(clause(record).truth)

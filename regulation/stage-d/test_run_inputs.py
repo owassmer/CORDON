@@ -99,6 +99,37 @@ class RunInputTests(unittest.TestCase):
             self.assertEqual([i['sources'] for i in intervals['X-2025-117']], [['a' * 64]])
             self.assertEqual([e['source'] for e in left_out], ['d' * 64])
 
+    def test_annex_positions_are_read_only_from_the_admitted_original(self):
+        # PR #35's positions are read from the record's own original: the digest `population` admitted by the
+        # cutoff. A reading stating records of another source is refused before any annex is read.
+        from types import SimpleNamespace
+        from cordon_c.core import Evaluation
+        digest = 'a' * 64
+        run = dict(at=date(2025, 7, 1), known_through=datetime(2025, 7, 14, 10, tzinfo=timezone.utc),
+                   permitted_controlled_sources=frozenset())
+        read = []
+
+        def expand(record, snapshot, at, store):
+            read.append((record['source'], at))
+            return [record]
+
+        for source, cause in ((digest, None), ('b' * 64, f'ValueError: A reading of {digest} states records of '
+                                                             'another source')):
+            read.clear()
+            reading = SimpleNamespace(response=dict(request_sha256='0' * 64), records=lambda snapshot, s=source: [
+                dict(source=s, instrument='X', recipients=())],
+                values=dict(identity={}, relationships=[], issues=[]))
+            with mock.patch.dict(read_prescriptions._WORKER, store=Path('/nonexistent'), snapshot=None), \
+                    mock.patch.object(read_prescriptions, 'read_prescription', return_value=reading), \
+                    mock.patch.object(read_prescriptions, 'stated_limits', return_value=[]), \
+                    mock.patch.object(read_prescriptions.annex_positions, 'expand', expand), \
+                    mock.patch.object(read_prescriptions, 'position_results', return_value={}), \
+                    mock.patch.object(read_prescriptions, 'c_result', return_value=Evaluation(None)):
+                entry = read_prescriptions.read_one(('117/2025', digest, 'https://example.invalid'),
+                                                    dict(execute=False), run)
+            self.assertEqual(entry.get('cause'), cause)
+            self.assertEqual(read, [(digest, run['at'])] if cause is None else [])
+
     def test_held_acts_and_certificates_after_the_cutoff_are_left_out(self):
         cutoff = datetime(2025, 7, 14, 10, tzinfo=timezone.utc)
         early, late = 'corpus/early.txt', 'corpus/late.txt'

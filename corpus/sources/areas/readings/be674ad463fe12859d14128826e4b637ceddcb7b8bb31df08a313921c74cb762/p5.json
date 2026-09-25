@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+ "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "42dfd263b765fbf1dc9c43d5c0d6b55bfe4cf3eb3b273f0456d1419bb262b14c",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:13.863908+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Documento - Impronta (SHA256) table: Allegato_merged.pdf - 88d30d1797067f1b361c07a264a4042d3d85fe5aaf1eff2f2984da9cec7f3f9e (document hash table, not an annex cadastral table)",
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Basato sulla proposta n. 181/DIR/2024/00104 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

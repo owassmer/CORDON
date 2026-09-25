@@ -79,6 +79,30 @@ class HeldActs(unittest.TestCase):
         changes = list(held_acts.stated_changes(response, ('REG-PUGLIA-U181-DIR-2024-00018',), DDS18))
         self.assertEqual([(c['from'], c['target'], c['relationship'], c['extent']) for c in changes],
                          [('REG-PUGLIA-U181-DIR-2024-00018', 'REG-PUGLIA-U181-DIR-2023-00113', 'withdraws', 'part')])
+        self.assertEqual([c['adopted'] for c in changes], ['2024-03-14'])
+
+    def test_a_stated_change_counts_only_from_its_acts_adoption(self):
+        # Every held act, with no per-act date: the change is read from the act's own identity.
+        record = next(prescription().records(self.s))
+        for adopted in ('2024-09-02', '2025-01-10'):
+            response = dict(request_sha256='1' * 64, request=dict(sources=['2' * 64]),
+                            reading=dict(dds18(relationship('108', year='2024')), identity=dict(
+                                dds18()['identity'], adopted=adopted)))
+            change = next(held_acts.stated_changes(response, ('REG-PUGLIA-U181-DIR-2024-00018',), DDS18))
+            self.assertEqual(change['adopted'], adopted)
+            day = date.fromisoformat(adopted)
+            for at, unknown in ((day - timedelta(days=1), False), (day, True)):
+                notified = datetime.combine(at, datetime.min.time(), ROME).replace(hour=9) - timedelta(days=12)
+                held = dict(**personal_notice(self.s, at, notified), evaluated_at=notified + timedelta(days=12), zone=ROME,
+                            calendar=national_calendar(), commencement_records_complete=True)
+                with self.subTest(adopted=adopted, at=at):
+                    result = c_result(self.s, record, at, stated_changes=[change], **held)
+                    self.assertEqual(result.truth is None, unknown)
+                    self.assertEqual(any('stated withdraws' in need for need in result.needs), unknown)
+        # A change whose act prints no readable adoption date counts on every date, as before.
+        undated = dict(change, adopted=None)
+        self.assertIsNone(c_result(self.s, record, date(2024, 8, 20), stated_changes=[undated],
+                                   evaluated_at=datetime(2024, 8, 20, 12, tzinfo=ROME)).truth)
 
     def test_a_stated_partial_withdrawal_leaves_dueness_unknown_naming_act_and_scope(self):
         record = next(prescription().records(self.s))

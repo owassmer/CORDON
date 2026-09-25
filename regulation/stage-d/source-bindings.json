@@ -61,17 +61,23 @@
     {
       "id": "official-areas",
       "name": "Adopted demarcated-area geometry",
-      "purpose": "Supply the infected, containment, buffer and other legally consequential area containing a location on the event date.",
+      "purpose": "Supply, for each A area version, the adopted area as the act defines it: polygon, frame, error bound and shared boundary, bound to the provision version.",
       "contracts": [
         "adopted-geography"
       ],
       "routes": [
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/DatiPubbliciFasceXFBandoPSR/MapServer"
+        "Adopting regional acts and their annex tables; acquisitions in corpus/sources/areas/acts.json",
+        "https://www.istat.it/storage/cartografia/confini_amministrativi/non_generalizzati/2026/Limiti01012026.zip",
+        "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.xlsx",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer (layer 0 sheets, layer 2 parcels; layers 1 and 2 around each control fix)",
+        "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php (AdE INSPIRE CadastralZoning sheets, 72 acquisitions)",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer (the Region's published layers 12-15 for DDS 82/2026, region-layer records)",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/ServicesArcIMS/RetiGeodetiche/MapServer (the Region's surveyed control fixes, corpus/sources/areas/cadastral-control.json)",
+        "Row 1's located positives and positional qualification (monitoring-records), for the infected plants an act names"
       ],
-      "population": "Every geometry version required by an accepted A provision interval, together with the act that adopted it.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the current and consequential historical versions and bind each version to its adopting act."
+      "population": "Every consumed A area version whose interval overlaps the reach, and the provinces, comuni, sheets and parcels its construction uses; acquisitions and the method of each source's positional error in corpus/sources/areas/geometry.json.",
+      "reader": "cordon_d.area_geometry.adopted_geography, from cordon_d.areas, cordon_d.administrative, cordon_d.area_error and row 1 (cordon_d.monitoring.distinct_observations, cordon_d.spatial.positional_terms)",
+      "open": "A zone the act defines around the infected plants it names is built around the row 1 positives the act names, each with row 1's measured error; for a listed unit no such plant's circle reaches, around the Region's layer where it carries the act's circles, else around the unit with the unit's extent in its error, so C answers neither way there (DDS 106/2025, Santeramo in Colle foglio 25). A band drawn from plants is held to the units the annex lists; where band and annex still disagree, the disputed land carries its reach in the error of any place that may have part in it: a place within its own error plus the error of the sources drawing the land's edge there (read as the area's own outline error is), or, along the edge the land shares with the listed units, a place overlapping it by more than 1 m². The cadastral error is measured against the Region's surveyed control fixes matched to the features the map draws; ISTAT's against the cadastral border where its line draws part of a zone; the Region's layer's against the cadastral outline of the units the act places wholly. The measurements are computed on read and cached in the derived store. DDS 148/2024 (2024-11-12 to 2024-12-18) is not held, so row 3 is not established for that interval."
     },
     {
       "id": "cadastre",
@@ -84,9 +90,9 @@
         "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php",
         "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2"
       ],
-      "population": "The parcels spatially reached by an admitted finding or removal population; national AdE geometry is the current reference where available.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the required parcel population and preserve source cadastral identifiers. Geometry alone does not establish ownership or authority to enter."
+      "population": "The sheets and parcels the consumed A area versions list, and the map around each control fix (held); the parcels spatially reached by an admitted finding or removal population (rows 4-5, not yet read). National AdE geometry is the current reference where available.",
+      "reader": "cordon_d.area_geometry (Sources.sheets, Sources.parcels) and cordon_d.area_error",
+      "open": "The parcel population rows 4-5 reach is read when those rows are replanned; source cadastral identifiers are preserved. Geometry alone does not establish ownership or authority to enter."
     },
     {
       "id": "removal-orders",
@@ -105,8 +111,8 @@
         "https://openga.giustizia-amministrativa.it (Consiglio di Stato decision indexes searched for appeals)"
       ],
       "population": "Every Osservatorio removal order, admitted by liveness: an order is in the population until execution or withdrawal closes it. Each order brings every held act that states a change to it and every court decision on it.",
-      "reader": "cordon_d.case_prescriptions (each order's whole operative text); cordon_d.held_acts (the changes held acts state to an order); cordon_d.judgments (the annulment basis: the court's own disposition); cordon_d.source_associations (native plant/report annex associations). Annex positions remain unread.",
-      "open": "Annex positions remain unread, so the plants and parcels an order lists by position do not reach C from the order. Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. A change a held act states that no A row records leaves the order's dueness unknown. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
+      "reader": "cordon_d.case_prescriptions (each order's whole operative text); cordon_d.held_acts (the changes held acts state to an order); cordon_d.judgments (the annulment basis: the court's own disposition); cordon_d.source_associations (native plant/report annex associations); cordon_d.annex_positions (annex positions, read only for the orders an in-force governing row names with a predicate bound to a position field). Other orders' annex positions remain unread. Whether a 50 m listing places no recipient is a lexical test (no parcel number; a parcel number with an empty owner cell; or an owner printed NON INDIVIDUAT… or NON TROVAT…), verified on the held annexes of the five orders DDS 18/2024 names and of DDS 115/2023; a governing row that names another order re-verifies it on that order's annex, blank owner cells included, since a blank cell at a page boundary may be a merged cell continued from the row above.",
+      "open": "Annex positions are read only for the orders an in-force governing row names with a predicate bound to a position field; for every other order they remain unread, so the plants and parcels it lists by position do not reach C from the order. Annex association reading does not establish administrative effect, withdrawal or whole-document coverage. A change a held act states that no A row records leaves the order's dueness unknown. Resolve page-boundary fragments and the conflicting earlier administrative target reached by a laboratory identifier correction; INPUTS.md row 6 owns the dependency."
     },
     {
       "id": "notice-and-response-records",
@@ -119,15 +125,15 @@
       ],
       "routes": [
         "The determination's own text (declared route: reasoned immediate-effect clause, act-specific recipient-number finding)",
-        "The competent municipality's albo pretorio record of the seven-day publication",
+        "The competent municipality's albo pretorio record of the seven-day publication; a retained publication certificate (Comune di Bari) is read only from its stored reading (replay-only), and a certificate with no stored reading is not read",
         "https://burp.regione.puglia.it/bollettini and the regional sites the plans name",
-        "OpenWeb albo register exports (openweb/albo/csv.php): ARIF's own albo (arif.soluzionipa.it) and the competent municipality's (Fasano, Modugno, Montemesola)",
-        "JCityGov albo detail pages and their posted documents (<comune>.trasparenza-valutazione-merito.it, papca/display)",
+        "OpenWeb albo register exports (openweb/albo/csv.php): the competent municipality's (Fasano, Modugno, Montemesola); ARIF's own albo (arif.soluzionipa.it) is read as a lead to removal the named recipients performed (row 11) and supplies no notice",
+        "JCityGov albo detail pages and their posted documents (papca/display): only Taranto (taranto.trasparenza-valutazione-merito.it), the one comune read_postings.py reads; other towns' JCityGov pages are not read",
         "TAR decisions stating an order's delivery, posting, request or reply (the removal-orders court route)"
       ],
       "population": "The act text, publication records and the events public records state about an admitted removal matter; not every notice published by every municipality.",
       "reader": "cordon_d.notices and cordon_d.events; cordon_d.notice_routes (each order's own mass-publicity basis); cordon_d.removal_events (publication records connected to an order's identity and adoption); cordon_d.albo_postings (albo register rows and posted documents attached by the identity they print); cordon_d.judgments (dated events a court decision states about an order)",
-      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
+      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
     },
     {
       "id": "plant-protection-records",
@@ -138,12 +144,15 @@
         "operative-act"
       ],
       "routes": [
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1 (listed trees) and /0 (provisional trees, DGR 720/2025), captured whole by scripts/acquire_protection.py (corpus/sources/protected-status/register.json)",
+        "The L.R. 14/2007 list acts as published on BURP (https://burp.regione.puglia.it/documents/20135/<folder>/DEL_<n>_<year>.pdf, or the ordinary bulletin that carries an older act), each act's decision, history table and deletion annex (corpus/sources/protected-status/acts.json)",
+        "The official monitoring observations of the affected plants and of the negative olives within 50 m (rows 1 and 2), with MONUMENTALE_ARIF and NOTE_RILEVATORE from every view that prints them",
+        "The plant points the held removal orders print in their annexes (corpus/sources/removal-orders/records.json)",
         "The competent authority's actual permission record for the affected plant or parcel"
       ],
-      "population": "Protected plants reached by the removal population and the permission records required for those plants. It is not the publisher-wide landscape-proceeding catalogue.",
-      "reader": "Generic ArcGIS and document readers; source-specific interpretation remains to be implemented",
-      "open": "Reacquire the register and establish event-time status. Investigate PPTR, municipal planning or a landscape authorization only when the affected plant's accepted branch requires it."
+      "population": "The affected plants (the in-reach positives and the plants the held removal orders print, each order plant taking the record of the positive it coincides with within 1 m), the negative olives C may place in their 50 m zones, and the register entries within 50 m plus both errors of an affected plant; each entry's own list acts. It is not the register, and not only the positives. Permission records only where a protected plant's branch requires them.",
+      "reader": "cordon_d.protection (scripts/read_protection.py): register entries and key causes, each entry's act chain from the acts' decisions, recitals and history table, trees a deleting act lists, survey batches by the survey the acts' recitals name and their measured bounds with the 2011 check read from the held capitolato, the monitoring record and D's reading of each note, measurements, the note-code rule and candidates",
+      "open": "Some rows of DGR 720/2025's deletion annex are unread, and the deleting act prints no approving act for the trees it deletes, so C reads a deleted tree's listing before deletion unknown (counts: CURRENT). DGR 1193/2021's and DGR 1491/2020's deletions are unread; both acts precede every held order. The census tag as card is read from the held tags: the capitolato states the key N_Fg_P_cod_ISTAT and no tag. Investigate PPTR, municipal planning or a landscape authorization only when the affected plant's accepted branch requires it."
     },
     {
       "id": "land-standing-records",

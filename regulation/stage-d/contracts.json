@@ -97,7 +97,7 @@
         "official-dataset"
       ],
       "run_input": {
-        "rule": "The run request states the evaluation context; no parameter has a default. The event date selects the A/B version. The knowledge cutoff has one meaning: what the corpus held, and the same instant is C's evaluated_at. The readers that apply it admit only sources captured at or before it: laboratory reports, their associations and the report routes in findings, removal-order originals, postings, held events and liveness closures by captured_at <= known_through in the source map's acquisition records; the held-act texts D reads as evidence of stated changes, which have no acquisition record, by the latest commit that added them. Supplied records carry no capture time, so their own dates bound them: one whose occurred, complete_from or complete_through is later than the cutoff is refused. The monitoring observation stream is not filtered by the cutoff: a join or confirmation request is refused while any retained monitoring release was captured after it. Each event's own date stays with that event's contract.",
+        "rule": "The run request states the evaluation context; no parameter has a default. The event date selects the A/B version. The knowledge cutoff has one meaning: what the corpus held, and the same instant is C's evaluated_at. The readers that apply it admit only sources captured at or before it: laboratory reports, their associations and the report routes in findings, removal-order originals (and the annex positions read from them), postings, held events and liveness closures by captured_at <= known_through in the source map's acquisition records; the held-act texts D reads as evidence of stated changes, which have no acquisition record, by the latest commit that added them. Supplied records carry no capture time, so their own dates bound them: one whose occurred, complete_from or complete_through is later than the cutoff is refused. The monitoring observation stream is not filtered by the cutoff: a join or confirmation request is refused while any retained monitoring release was captured after it. Each event's own date stays with that event's contract.",
         "entry_points": [
           {
             "callable": "cordon_d.evidence.Evidence.view",
@@ -119,6 +119,24 @@
             "parameters": [
               "at",
               "evaluated_at"
+            ]
+          },
+          {
+            "callable": "cordon_d.case_prescriptions.admitted_records",
+            "parameters": [
+              "evaluated_at"
+            ]
+          },
+          {
+            "callable": "cordon_d.annex_positions.expand",
+            "parameters": [
+              "at"
+            ]
+          },
+          {
+            "callable": "cordon_d.annex_positions.governing_results",
+            "parameters": [
+              "at"
             ]
           },
           {
@@ -549,7 +567,9 @@
       ],
       "fields": [
         "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
-        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics, in any wording that asserts it (held examples: \"caratteristiche di monumentalità\", \"caratteristiche monumentali\", \"requisiti di monumentalità\", \"carattere monumentale\"), or a measurement the note records (the trunk diameter, and its height where stated)",
+        "the positional qualification of the entry's point: its survey batch, that batch's horizontal error against the ground in EPSG:32633 with its statistic, fix count, card form and method, or the register-wide bound labelled as such, the reference fixes' own error, the date and the sources (the rule: SPEC.md, Protected status)",
+        "the candidate entries of an affected plant or zone negative: \"not a register tree\" always and every entry within d, with d printed, the identity or the cause it stays unknown, and each code the plant's note prints with the entry it names or the cause it names none (the rule: SPEC.md, Protected status)",
+        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record, supplied whatever the plant's identity: the MONUMENTALE_ARIF flag as printed (\"Si\" and \"1\" kept apart; otherwise blank or not printed, with the views read); each NOTE_RILEVATORE note verbatim with D's reading (states / does not / unclear) and the words it rests on; and each measurement the note records, as printed, with diameter_cm and measured_height_cm read from its words, the inputs of trunk_diameter_facts (the rule: SPEC.md, Protected status)",
         "applicable protection rule",
         "value assessment if that ground applies",
         "the Osservatorio's recognition-request record for the tree",
@@ -844,6 +864,12 @@
           },
           {
             "callable": "cordon_d.case_prescriptions.recipient_results",
+            "parameters": [
+              "permitted_controlled_sources"
+            ]
+          },
+          {
+            "callable": "cordon_d.case_prescriptions.admitted_records",
             "parameters": [
               "permitted_controlled_sources"
             ]

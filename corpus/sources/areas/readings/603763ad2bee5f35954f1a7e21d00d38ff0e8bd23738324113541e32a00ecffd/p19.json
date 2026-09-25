@@ -1,0 +1,791 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 19,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "d580944e2d42beaaa4c5e7155ea7e07fe0061f29a12ef39ec03a0b6b1bec5cad",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:31.157214+00:00",
+ "native_tables": [
+  {
+   "id": "p19-t1",
+   "bbox": [
+    74.5,
+    261.3,
+    503.3,
+    768.3
+   ]
+  }
+ ],
+ "native_cells": {
+  "p19-t1-r1-c2": {
+   "text": "Specie",
+   "table": "p19-t1",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    106.0,
+    261.3,
+    219.9,
+    284.9
+   ]
+  },
+  "p19-t1-r1-c3": {
+   "text": "Sintomi",
+   "table": "p19-t1",
+   "row": 1,
+   "column": 3,
+   "bbox": [
+    219.9,
+    261.3,
+    503.3,
+    284.9
+   ]
+  },
+  "p19-t1-r2-c1": {
+   "text": "1",
+   "table": "p19-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    74.5,
+    284.9,
+    106.0,
+    310.5
+   ]
+  },
+  "p19-t1-r2-c2": {
+   "text": "Acacia saligna",
+   "table": "p19-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    106.0,
+    284.9,
+    219.9,
+    310.5
+   ]
+  },
+  "p19-t1-r2-c3": {
+   "text": "Gravi disseccamenti",
+   "table": "p19-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    219.9,
+    284.9,
+    503.3,
+    310.5
+   ]
+  },
+  "p19-t1-r3-c1": {
+   "text": "2",
+   "table": "p19-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    74.5,
+    310.5,
+    106.0,
+    332.1
+   ]
+  },
+  "p19-t1-r3-c2": {
+   "text": "Amaranthus retroflexus",
+   "table": "p19-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    106.0,
+    310.5,
+    219.9,
+    332.1
+   ]
+  },
+  "p19-t1-r3-c3": {
+   "text": "Nessuno",
+   "table": "p19-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    219.9,
+    310.5,
+    503.3,
+    332.1
+   ]
+  },
+  "p19-t1-r4-c1": {
+   "text": "3",
+   "table": "p19-t1",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    74.5,
+    332.1,
+    106.0,
+    353.4
+   ]
+  },
+  "p19-t1-r4-c2": {
+   "text": "Asparagus acutifolius",
+   "table": "p19-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    106.0,
+    332.1,
+    219.9,
+    353.4
+   ]
+  },
+  "p19-t1-r4-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    219.9,
+    332.1,
+    503.3,
+    353.4
+   ]
+  },
+  "p19-t1-r5-c1": {
+   "text": "4",
+   "table": "p19-t1",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    74.5,
+    353.4,
+    106.0,
+    374.4
+   ]
+  },
+  "p19-t1-r5-c2": {
+   "text": "Catharanthus sp.",
+   "table": "p19-t1",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    106.0,
+    353.4,
+    219.9,
+    374.4
+   ]
+  },
+  "p19-t1-r5-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    219.9,
+    353.4,
+    503.3,
+    374.4
+   ]
+  },
+  "p19-t1-r6-c1": {
+   "text": "5",
+   "table": "p19-t1",
+   "row": 6,
+   "column": 1,
+   "bbox": [
+    74.5,
+    374.4,
+    106.0,
+    403.0
+   ]
+  },
+  "p19-t1-r6-c2": {
+   "text": "Chenopodium album",
+   "table": "p19-t1",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    106.0,
+    374.4,
+    219.9,
+    403.0
+   ]
+  },
+  "p19-t1-r6-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 6,
+   "column": 3,
+   "bbox": [
+    219.9,
+    374.4,
+    503.3,
+    403.0
+   ]
+  },
+  "p19-t1-r7-c1": {
+   "text": "6",
+   "table": "p19-t1",
+   "row": 7,
+   "column": 1,
+   "bbox": [
+    74.5,
+    403.0,
+    106.0,
+    423.5
+   ]
+  },
+  "p19-t1-r7-c2": {
+   "text": "Cistus creticus",
+   "table": "p19-t1",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    106.0,
+    403.0,
+    219.9,
+    423.5
+   ]
+  },
+  "p19-t1-r7-c3": {
+   "text": "Bruscature fogliari e disseccamenti",
+   "table": "p19-t1",
+   "row": 7,
+   "column": 3,
+   "bbox": [
+    219.9,
+    403.0,
+    503.3,
+    423.5
+   ]
+  },
+  "p19-t1-r8-c1": {
+   "text": "7",
+   "table": "p19-t1",
+   "row": 8,
+   "column": 1,
+   "bbox": [
+    74.5,
+    423.5,
+    106.0,
+    444.9
+   ]
+  },
+  "p19-t1-r8-c2": {
+   "text": "Dimorphoteca fruticosa",
+   "table": "p19-t1",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    106.0,
+    423.5,
+    219.9,
+    444.9
+   ]
+  },
+  "p19-t1-r8-c3": {
+   "text": "Nessuno",
+   "table": "p19-t1",
+   "row": 8,
+   "column": 3,
+   "bbox": [
+    219.9,
+    423.5,
+    503.3,
+    444.9
+   ]
+  },
+  "p19-t1-r9-c1": {
+   "text": "8",
+   "table": "p19-t1",
+   "row": 9,
+   "column": 1,
+   "bbox": [
+    74.5,
+    444.9,
+    106.0,
+    471.3
+   ]
+  },
+  "p19-t1-r9-c2": {
+   "text": "Dodonaea viscosa",
+   "table": "p19-t1",
+   "row": 9,
+   "column": 2,
+   "bbox": [
+    106.0,
+    444.9,
+    219.9,
+    471.3
+   ]
+  },
+  "p19-t1-r9-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 9,
+   "column": 3,
+   "bbox": [
+    219.9,
+    444.9,
+    503.3,
+    471.3
+   ]
+  },
+  "p19-t1-r10-c1": {
+   "text": "9",
+   "table": "p19-t1",
+   "row": 10,
+   "column": 1,
+   "bbox": [
+    74.5,
+    471.3,
+    106.0,
+    493.0
+   ]
+  },
+  "p19-t1-r10-c2": {
+   "text": "Eremophila maculata",
+   "table": "p19-t1",
+   "row": 10,
+   "column": 2,
+   "bbox": [
+    106.0,
+    471.3,
+    219.9,
+    493.0
+   ]
+  },
+  "p19-t1-r10-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 10,
+   "column": 3,
+   "bbox": [
+    219.9,
+    471.3,
+    503.3,
+    493.0
+   ]
+  },
+  "p19-t1-r11-c1": {
+   "text": "10",
+   "table": "p19-t1",
+   "row": 11,
+   "column": 1,
+   "bbox": [
+    74.5,
+    493.0,
+    106.0,
+    514.4
+   ]
+  },
+  "p19-t1-r11-c2": {
+   "text": "Erigeron sumatrensis",
+   "table": "p19-t1",
+   "row": 11,
+   "column": 2,
+   "bbox": [
+    106.0,
+    493.0,
+    219.9,
+    514.4
+   ]
+  },
+  "p19-t1-r11-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 11,
+   "column": 3,
+   "bbox": [
+    219.9,
+    493.0,
+    503.3,
+    514.4
+   ]
+  },
+  "p19-t1-r12-c1": {
+   "text": "11",
+   "table": "p19-t1",
+   "row": 12,
+   "column": 1,
+   "bbox": [
+    74.5,
+    514.4,
+    106.0,
+    539.3
+   ]
+  },
+  "p19-t1-r12-c2": {
+   "text": "Erigeron bonariensis",
+   "table": "p19-t1",
+   "row": 12,
+   "column": 2,
+   "bbox": [
+    106.0,
+    514.4,
+    219.9,
+    539.3
+   ]
+  },
+  "p19-t1-r12-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 12,
+   "column": 3,
+   "bbox": [
+    219.9,
+    514.4,
+    503.3,
+    539.3
+   ]
+  },
+  "p19-t1-r13-c1": {
+   "text": "12",
+   "table": "p19-t1",
+   "row": 13,
+   "column": 1,
+   "bbox": [
+    74.5,
+    539.3,
+    106.0,
+    561.4
+   ]
+  },
+  "p19-t1-r13-c2": {
+   "text": "Euphorbia chamaesyce",
+   "table": "p19-t1",
+   "row": 13,
+   "column": 2,
+   "bbox": [
+    106.0,
+    539.3,
+    219.9,
+    561.4
+   ]
+  },
+  "p19-t1-r13-c3": {
+   "text": "Nessuno",
+   "table": "p19-t1",
+   "row": 13,
+   "column": 3,
+   "bbox": [
+    219.9,
+    539.3,
+    503.3,
+    561.4
+   ]
+  },
+  "p19-t1-r14-c1": {
+   "text": "13",
+   "table": "p19-t1",
+   "row": 14,
+   "column": 1,
+   "bbox": [
+    74.5,
+    561.4,
+    106.0,
+    586.4
+   ]
+  },
+  "p19-t1-r14-c2": {
+   "text": "Euphorbia terracina",
+   "table": "p19-t1",
+   "row": 14,
+   "column": 2,
+   "bbox": [
+    106.0,
+    561.4,
+    219.9,
+    586.4
+   ]
+  },
+  "p19-t1-r14-c3": {
+   "text": "Asintomatico",
+   "table": "p19-t1",
+   "row": 14,
+   "column": 3,
+   "bbox": [
+    219.9,
+    561.4,
+    503.3,
+    586.4
+   ]
+  },
+  "p19-t1-r15-c1": {
+   "text": "14",
+   "table": "p19-t1",
+   "row": 15,
+   "column": 1,
+   "bbox": [
+    74.5,
+    586.4,
+    106.0,
+    608.7
+   ]
+  },
+  "p19-t1-r15-c2": {
+   "text": "Grevillea juniperina",
+   "table": "p19-t1",
+   "row": 15,
+   "column": 2,
+   "bbox": [
+    106.0,
+    586.4,
+    219.9,
+    608.7
+   ]
+  },
+  "p19-t1-r15-c3": {
+   "text": "Bruscature fogliari",
+   "table": "p19-t1",
+   "row": 15,
+   "column": 3,
+   "bbox": [
+    219.9,
+    586.4,
+    503.3,
+    608.7
+   ]
+  },
+  "p19-t1-r16-c1": {
+   "text": "15",
+   "table": "p19-t1",
+   "row": 16,
+   "column": 1,
+   "bbox": [
+    74.5,
+    608.7,
+    106.0,
+    630.7
+   ]
+  },
+  "p19-t1-r16-c2": {
+   "text": "Hebe sp.",
+   "table": "p19-t1",
+   "row": 16,
+   "column": 2,
+   "bbox": [
+    106.0,
+    608.7,
+    219.9,
+    630.7
+   ]
+  },
+  "p19-t1-r16-c3": {
+   "text": "Bruscature fogliari",
+   "table": "p19-t1",
+   "row": 16,
+   "column": 3,
+   "bbox": [
+    219.9,
+    608.7,
+    503.3,
+    630.7
+   ]
+  },
+  "p19-t1-r17-c1": {
+   "text": "16",
+   "table": "p19-t1",
+   "row": 17,
+   "column": 1,
+   "bbox": [
+    74.5,
+    630.7,
+    106.0,
+    652.3
+   ]
+  },
+  "p19-t1-r17-c2": {
+   "text": "Heliotropium europaeum",
+   "table": "p19-t1",
+   "row": 17,
+   "column": 2,
+   "bbox": [
+    106.0,
+    630.7,
+    219.9,
+    652.3
+   ]
+  },
+  "p19-t1-r17-c3": {
+   "text": "Non rilevato",
+   "table": "p19-t1",
+   "row": 17,
+   "column": 3,
+   "bbox": [
+    219.9,
+    630.7,
+    503.3,
+    652.3
+   ]
+  },
+  "p19-t1-r18-c1": {
+   "text": "17",
+   "table": "p19-t1",
+   "row": 18,
+   "column": 1,
+   "bbox": [
+    74.5,
+    652.3,
+    106.0,
+    679.3
+   ]
+  },
+  "p19-t1-r18-c2": {
+   "text": "Laurus nobilis",
+   "table": "p19-t1",
+   "row": 18,
+   "column": 2,
+   "bbox": [
+    106.0,
+    652.3,
+    219.9,
+    679.3
+   ]
+  },
+  "p19-t1-r18-c3": {
+   "text": "Bruscature fogliari",
+   "table": "p19-t1",
+   "row": 18,
+   "column": 3,
+   "bbox": [
+    219.9,
+    652.3,
+    503.3,
+    679.3
+   ]
+  },
+  "p19-t1-r19-c1": {
+   "text": "18",
+   "table": "p19-t1",
+   "row": 19,
+   "column": 1,
+   "bbox": [
+    74.5,
+    679.3,
+    106.0,
+    708.2
+   ]
+  },
+  "p19-t1-r19-c2": {
+   "text": "Lavandula angustifolia",
+   "table": "p19-t1",
+   "row": 19,
+   "column": 2,
+   "bbox": [
+    106.0,
+    679.3,
+    219.9,
+    708.2
+   ]
+  },
+  "p19-t1-r19-c3": {
+   "text": "Bruscature fogliari, seguite da disseccamento di rami e di porzioni\ndell’arbusto",
+   "table": "p19-t1",
+   "row": 19,
+   "column": 3,
+   "bbox": [
+    219.9,
+    679.3,
+    503.3,
+    708.2
+   ]
+  },
+  "p19-t1-r20-c1": {
+   "text": "19",
+   "table": "p19-t1",
+   "row": 20,
+   "column": 1,
+   "bbox": [
+    74.5,
+    708.2,
+    106.0,
+    743.4
+   ]
+  },
+  "p19-t1-r20-c2": {
+   "text": "Lavandula stoechas",
+   "table": "p19-t1",
+   "row": 20,
+   "column": 2,
+   "bbox": [
+    106.0,
+    708.2,
+    219.9,
+    743.4
+   ]
+  },
+  "p19-t1-r20-c3": {
+   "text": "Bruscature fogliari, seguite da disseccamento di rami e di porzioni\ndell’arbusto",
+   "table": "p19-t1",
+   "row": 20,
+   "column": 3,
+   "bbox": [
+    219.9,
+    708.2,
+    503.3,
+    743.4
+   ]
+  },
+  "p19-t1-r21-c1": {
+   "text": "20",
+   "table": "p19-t1",
+   "row": 21,
+   "column": 1,
+   "bbox": [
+    74.5,
+    743.4,
+    106.0,
+    768.3
+   ]
+  },
+  "p19-t1-r21-c2": {
+   "text": "Myrtus communis",
+   "table": "p19-t1",
+   "row": 21,
+   "column": 2,
+   "bbox": [
+    106.0,
+    743.4,
+    219.9,
+    768.3
+   ]
+  },
+  "p19-t1-r21-c3": {
+   "text": "Ingiallimento generalizzato",
+   "table": "p19-t1",
+   "row": 21,
+   "column": 3,
+   "bbox": [
+    219.9,
+    743.4,
+    503.3,
+    768.3
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p19-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "This is 'Tabella 1' listing host plant species (Specie) and their symptoms (Sintomi) susceptible to Xylella fastidiosa subsp. pauca ST53, not a cadastral annex table with PROVINCIA/COMUNE/scope columns for demarcated zones."
+   }
+  ],
+  "unattached": [
+   "Tabella 1. Lista delle specie specificate suscettibili a Xylella fastidiosa subsp. pauca ST53 riscontrate in Puglia",
+   "Per le altre sottospecie individuate in Puglia: Xylella fastidiosa subsp. fastidiosa ST1 e Xylella fastidiosa subsp. multiplex ST26, la lista sarà resa disponibile non appena le attività di ricerca e sperimentazione saranno concluse."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
