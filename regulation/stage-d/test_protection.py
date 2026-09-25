@@ -188,6 +188,34 @@ class HeldSources(unittest.TestCase):
         chain = self.result['chains'][self.entry_labelled('DGR 1358/2012', lambda e: e.survey_date and e.survey_date.year == 2012)]
         self.assertEqual((chain.provisional.act, chain.definitive.act), ('DGR 1358/2012', 'DGR 357/2013'))
 
+    def test_the_2013_2015_acts_carry_the_burp_dates_their_own_pages_print(self):
+        # Each act's own BURP pages, reached through BURP's act lookup, print its bulletin.
+        printed = {'DGR 1008/2013': ('n. 86 del 25-06-2013', 1204), 'DGR 1417/2013': ('n. 117 del 03-09-2013', 1321),
+                   'DGR 1577/2013': ('n. 128 del 30-09-2013', 163), 'DGR 2227/2013': ('n. 165 del 16-12-2013', 1990),
+                   'DGR 978/2014': ('n. 80 del 23-06-2014', 200), 'DGR 143/2015': ('n. 29 del 25-02-2015', 1175),
+                   'DGR 609/2015': ('n. 56 del 22-04-2015', 126)}
+        acts = self.result['acts']
+        self.assertEqual({name: (acts[name].bulletin, acts[name].provisional) for name in printed}, printed)
+        entry = self.entry_labelled('DGR 1008/2013')
+        chain = self.result['chains'][entry]
+        self.assertEqual((chain.provisional.published, chain.definitive.act, chain.definitive.published, chain.complete),
+                         (date(2013, 6, 25), 'DGR 501/2016', date(2016, 5, 6), True))
+        self.assertEqual(self.status(entry, date(2016, 5, 5)), ('TREE_NOT_LISTED', 'RECOGNITION_DECISION_PENDING'))
+        self.assertEqual(self.status(entry, date(2016, 5, 6)), ('TREE_LISTED', 'NO_PENDING_DECISION_FROM_THE_LIST'))
+        held = [c for o, c in self.result['chains'].items() if self.result['entries'][o].layer != 'deleted']
+        self.assertEqual(sum(1 for c in held if not c.complete), 0)
+
+    def test_the_cent_oli_med_trees_take_dgr_1358_2012_then_dgr_357_2013(self):
+        # DGR 1358/2012's recitals: SIT srl's partial list of 127,719 and "ulteriori 467 ulivi monumentali" of LIFE+
+        # Cent.Oli.Med make up its provisional list; DGR 357/2013 approves that list definitively.
+        undated = [o for o, e in self.result['entries'].items()
+                   if e.layer == 'listed' and e.label == 'DGR 1358/2012' and e.survey == 'survey date not recorded']
+        self.assertEqual(len(undated), 467)
+        self.assertEqual(self.result['acts']['DGR 1358/2012'].batches, (127719, 467))
+        chains = {(c.provisional.act, c.provisional.published, c.definitive.act, c.definitive.published, c.complete)
+                  for c in (self.result['chains'][o] for o in undated)}
+        self.assertEqual(chains, {('DGR 1358/2012', date(2012, 7, 31), 'DGR 357/2013', date(2013, 3, 27), True)})
+
     def test_batch_bounds_come_from_monitoring_residuals_and_recompute_by_hand(self):
         fixes, bounds = self.result['fixes'], self.result['bounds']
         dropped = [(f.observation, f.entry) for f in fixes if f.dropped]
@@ -207,6 +235,37 @@ class HeldSources(unittest.TestCase):
         self.assertTrue(all('monitoring residuals' in b.method and 'parcel' not in b.method for b in bounds.values()))
         census = [b for b in bounds.values() if b.check]
         self.assertTrue(census and all('exceeded by' in b.check or 'within' in b.check for b in census))
+        # The tolerance is read from the held capitolato d'oneri, Art. 3 point 4, not written as a figure.
+        metres, quotation, _ = protection.contract_terms(STORE)
+        self.assertEqual(metres, 1.0)
+        self.assertIn('ricevitore satellitare GPS differenziale', quotation)
+        self.assertTrue(all(quotation in b.check and '1.00 m plus' in b.check for b in census))
+
+    def test_the_printed_parcel_screen_lists_every_entry_outside_it(self):
+        import shapely
+        screens = self.result['parcel_screen']
+        held = [e for e in self.result['entries'].values() if e.layer in ('listed', 'provisional')]
+        self.assertEqual(len(held), 341428 + 569)  # layer 0's ids overlap layer 1's; both layers are kept
+        self.assertEqual(sorted(s.entry for s in screens), sorted(e.oid for e in held))
+        self.assertTrue(all(s.distance_m is not None or s.cause for s in screens))
+        counts = protection.screen_counts(screens)
+        self.assertEqual(counts['inside'] + counts['outside'] + sum(counts['not_screened'].values()), len(held))
+        listed = protection.rows(self.result)['gross_error_screen']
+        self.assertEqual(len(listed['outside']), counts['outside'])
+        self.assertEqual({r['entry'] for r in listed['outside']}, {s.entry for s in screens if s.distance_m})
+        # By hand, from the captured Catasto page: entry 255604 (an AppOLEA report printed on OSTUNI 29/8).
+        entry = self.result['entries']['255604']
+        record = json.loads((ROOT / protection.SOURCES / protection.PARCELS).read_text())
+        rings = [ring for page in record['pages'] if "'G187'" in page['where']
+                 for f in json.loads(blob_path(STORE, page['sha256']).read_bytes())['features']
+                 if (f['attributes']['FOGLIO'], f['attributes']['NUMERO']) == ('29', '8')
+                 for ring in f['geometry']['rings']]
+        by_hand = min(shapely.Point(entry.x, entry.y).distance(shapely.Polygon(r)) for r in rings)
+        screen = next(s for s in screens if s.entry == '255604')
+        self.assertAlmostEqual(screen.distance_m, by_hand, places=1)
+        self.assertGreater(screen.distance_m, 1000)
+        # The screen enters no bound.
+        self.assertTrue(all('parcel' not in b.method for b in self.result['bounds'].values()))
 
     def test_survey_date_not_recorded_takes_the_register_wide_bound(self):
         entry = self.entry_labelled('DGR 1491/2020', lambda e: e.survey == 'survey date not recorded')

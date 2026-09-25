@@ -191,7 +191,7 @@ def diameter_inputs(record: MonitoringRecord) -> tuple[dict, ...]:
 @dataclass(frozen=True)
 class Entry:
     layer: str              # 'listed' (layer 1), 'provisional' (layer 0), or 'deleted' (admitted from a deleting act)
-    oid: str                # the layer's OBJECTID, or the deleting act and its row
+    oid: str                # layer 1's OBJECTID, 'L0/' + layer 0's (the layers' ids overlap), or the deleting act and row
     key: str | None         # COD (layer 1) or COD_UNIVOCO (layer 0), as printed
     card: str | None        # SCHEDAN or N__SCHEDA_RILEVAMENTO, as printed
     label: str | None       # CARSEGNMOT or DGR, as printed
@@ -250,7 +250,7 @@ def register_entries(store: Path, root: Path = REPOSITORY) -> list[Entry]:
                                          a.get('PROPRPTC'), _coordinate(g, 'x'), _coordinate(g, 'y'), _epoch_day(a.get('RILDATA')),
                                          page['sha256']))
                 else:
-                    entries.append(Entry('provisional', str(a['OBJECTID']), a.get('COD_UNIVOCO'),
+                    entries.append(Entry('provisional', f"L0/{a['OBJECTID']}", a.get('COD_UNIVOCO'),
                                          a.get('N__SCHEDA_RILEVAMENTO'), a.get('DGR'), a.get('BURP'),
                                          a.get('COMUNE'), None if a.get('FOG_') is None else str(a['FOG_']),
                                          a.get('PART_'), _coordinate(g, 'x'), _coordinate(g, 'y'), _epoch_day(a.get('DATA_RILIEVO')),
@@ -287,8 +287,10 @@ def key_causes(entries: list[Entry]) -> dict[str, tuple[str, ...]]:
 
 _MONTHS = {m: i + 1 for i, m in enumerate(('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio',
                                             'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'))}
-_BULLETIN = re.compile(r"Bollettino Ufficiale della Regione Puglia\s*-\s*n\.\s*(\d+)(?:\s*suppl\.)?\s*del\s*"
-                       r"(\d{1,2})-(\d{1,2})-(\d{4})")
+# The bulletin line as the act's pages print it: "... Puglia - n. 18 del 21-2-2023" and, on the 2013-2015 acts'
+# own BURP pages, "Bollettino ufficiale della Regione Puglia n. 86 del 25/06/2013".
+_BULLETIN = re.compile(r"Bollettino Ufficiale della Regione Puglia\s*-?\s*n\.\s*(\d+)(?:\s*suppl\.)?\s*del\s*"
+                       r"(\d{1,2})[-/](\d{1,2})[-/](\d{4})", re.I)
 _ACT = re.compile(r"(\d+|NUMBER)/(\d{4})")
 
 
@@ -319,6 +321,7 @@ class ListAct:
     deleted: int | None                 # entries it deletes
     table: tuple[tuple[str, int, int, int], ...] = ()  # history table rows (act, provisional, deleted, definitive)
     cause: str | None = None            # why a date is missing
+    batches: tuple[int, ...] = ()       # the survey batches its recitals name as making up its provisional list
 
 
 _DECISION = re.compile(r"\bDELIBERA\b")
@@ -403,7 +406,11 @@ def read_act(path: Path, number: int, year: int, sha256: str) -> ListAct:
     printed = f'n. {bulletin.group(1)} del {bulletin.group(2)}-{bulletin.group(3)}-{bulletin.group(4)}' if bulletin else None
     decision = flat[_DECISION.search(flat).start():] if _DECISION.search(flat) else flat
     provisional = re.search(r"approvare\s+(?:il\s+nuovo\s+l.)?\s*(?:in\s+via\s+provvisoria\s+n\.\s*([\d.]+)|"
-                            r"elenco\s+provvisorio.{0,160}?costituito\s+da\s+([\d.]+))", decision)
+                            r"elenco\s+provvisorio.{0,160}?costituito\s+da\s+([\d.]+))|"
+                            # 2013-2015: "di aggiornare [esclusivamente] l'elenco provvisorio / non definitivo ...
+                            # costituito da 1204 esemplari"
+                            r"aggiornare\s+(?:esclusivamente\s+)?l.elenco\s+(?:provvisorio|non\s+definitivo).{0,200}?"
+                            r"costituito\s+da\s+([\d.]+)", decision)
     definitive = []
     for found in re.finditer(r"approvare\s+in\s+via\s+definitiva\s+(?:ai\s+sensi\s+dell.articolo\s+6\s+della\s+L\.R\.\s+"
                              r"n\.\s*14/2007\s+e\s+s\.m\.i\.\s+)?(n\.\s*[\d.]+(?:\s+e\s+n\.\s*[\d.]+)?)\s+ulivi\s+"
@@ -415,10 +422,15 @@ def read_act(path: Path, number: int, year: int, sha256: str) -> ListAct:
     deleted = re.search(r"eliminare\s+dall.elenco\s+regionale\s+(?:approvato\s+)?(?:ex\s+art\.\s*5\s+della\s+L\.r\.\s*"
                         r"14/07\s+e\s+s\.m\.i\.,\s*)?n\.\s*([\d.]+)", decision)
     table = _history_rows(path, pages)
+    recitals = flat[:_DECISION.search(flat).start()] if _DECISION.search(flat) else flat
+    # The surveys the recitals name as making up the act's provisional list (DGR 1358/2012: "un elenco parziale di
+    # 127.719 esemplari" from SIT srl, and "censiti ulteriori 467 ulivi monumentali" under LIFE+ Cent.Oli.Med).
+    batches = tuple(_count(next(g for g in m.groups() if g)) for m in re.finditer(
+        r"elenco\s+par-?\s?ziale\s+di\s+([\d.]+)\s+esemplari|censiti\s+ulteriori\s+([\d.]+)\s+ulivi", recitals))
     return ListAct(name, adopted, printed, published, sha256, pages,
-                   _count(provisional.group(1) or provisional.group(2)) if provisional else None,
+                   _count(next(g for g in provisional.groups() if g)) if provisional else None,
                    tuple(definitive), _count(deleted.group(1)) if deleted else None, table,
-                   None if published else 'the capture prints no BURP date for the act')
+                   None if published else 'the capture prints no BURP date for the act', batches)
 
 
 def list_acts(store: Path, root: Path = REPOSITORY) -> dict[str, ListAct]:
@@ -527,7 +539,13 @@ def act_chains(entries: list[Entry], acts: dict[str, ListAct]) -> tuple[dict[str
         options = []  # (count, provisional act, definitive act)
         if provisional_count:
             finals = covered.get(label, [])
-            options.append((provisional_count, label, finals[0][0] if len(finals) == 1 else None))
+            final = finals[0][0] if len(finals) == 1 else None
+            options.append((provisional_count, label, final))
+            # The surveys the act's recitals name, when together they make up exactly its provisional list, are
+            # batches of the same provisional and definitive acts.
+            parts = own.batches if own else ()
+            if len(parts) > 1 and sum(parts) == provisional_count:
+                options += [(part, label, final) for part in parts]
         if layer == 'listed':  # layer 0 holds provisional entries only
             for p, c in [(p, c) for p, pairs in covered.items() for d, c in pairs if d == label]:
                 options.append((c, p, label))
@@ -539,9 +557,10 @@ def act_chains(entries: list[Entry], acts: dict[str, ListAct]) -> tuple[dict[str
             if len(options) == 1:
                 (count, prov, final), = options
                 rule = f'{head}; the one batch the acts state for {label}: {count}'
-            elif len(fitting) == 1:
-                (count, prov, final), = fitting
-                rule = (f'{head}; the one stated batch within {TOLERANCE:.0%} of the group: {count}, from '
+            elif len({(p, f) for _, p, f in fitting}) == 1:
+                count, prov, final = fitting[0]
+                within = ' and '.join(str(c) for c, _, _ in fitting)
+                rule = (f'{head}; the one stated batch within {TOLERANCE:.0%} of the group: {within}, from '
                         + '; '.join(f'{c} provisional by {p}' for c, p, _ in options))
             else:
                 prov = final = None
@@ -700,8 +719,22 @@ def reference_fixes(flagged: list[tuple[str, str, float, float, float, tuple[str
     return fixes
 
 
+def contract_terms(store: Path, root: Path = REPOSITORY) -> tuple[float, str, str] | None:
+    """The 2011 census tender's stated position tolerance, read from its held capitolato d'oneri (CIG 1154723B8D):
+    (metres, Art. 3 point 4 as printed, sha256), or None where the bytes are not held."""
+    import pymupdf
+    for record in json.loads((root / SOURCES / 'acts.json').read_text()):
+        if record.get('sha256') and 'CIG 1154723B8D' in record['purpose']:
+            text = re.sub(r"\s+", ' ', '\n'.join(p.get_text() for p in pymupdf.open(_blob(store, record['sha256']))))
+            point = re.search(r"4\. (la posizione delle singole piante.{0,400}?superiore ad (\d+) \((\w+)\) metro)", text)
+            if point:
+                return float(point.group(2)), point.group(1), record['sha256']
+    return None
+
+
 def batch_bounds(fixes: list[Fix], batches: set[str], tag_batches: set[str], *,
-                 contract_batch: set[str] = frozenset()) -> dict[str, BatchBound]:
+                 contract_batch: set[str] = frozenset(), contract: tuple[float, str, str] | None = None
+                 ) -> dict[str, BatchBound]:
     import numpy
     kept = [f for f in fixes if f.dropped is None]
     method = ('95th percentile of monitoring residuals: distance from a flagged olive observation to the listed '
@@ -718,13 +751,14 @@ def batch_bounds(fixes: list[Fix], batches: set[str], tag_batches: set[str], *,
         else:
             bound = BatchBound(batch, form, f'register-wide ({len(own)} fixes in this batch, fewer than {MIN_FIXES})',
                                round(register_wide, 2), '95th percentile', len(wide), method)
-        if batch in contract_batch and kept:
-            tolerance = 1.00 + max(f.observation_error_m for f in kept)
+        if batch in contract_batch and kept and contract:
+            metres, quotation, sha256 = contract
+            tolerance = metres + max(f.observation_error_m for f in kept)
             excess = bound.error_m - tolerance
             bound = BatchBound(**{**bound.__dict__, 'check': (
-                f"2011 census contract rep. 013042 (CIG 1154723B8D), capitolato Art. 3 point 4: at most 1 m; "
-                f"its bytes are not held (empulia.it does not answer this host), the figure is the plan's quotation. "
-                f"1.00 m plus the reference fix's own {tolerance - 1:.2f} m = {tolerance:.2f} m; the batch carries "
+                f"2011 census contract rep. 013042 (CIG 1154723B8D), capitolato d'oneri Art. 3 point 4 (sha256 "
+                f"{sha256[:12]}): \"{quotation}\". {metres:.2f} m plus the reference fix's own "
+                f"{tolerance - metres:.2f} m = {tolerance:.2f} m; the batch carries "
                 f"{bound.error_m:.2f} m: " + ('within' if excess <= 0 else f'exceeded by {excess:.2f} m') +
                 '. The measured bound stands either way.')})
         bounds[batch] = bound
@@ -1038,7 +1072,8 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
     # survey, approved provisionally by DGR 1358/2012 and DGR 357/2013), surveyed 2011-2012.
     census = {b for b in set(oid_batch.values())
               if b.startswith(('DGR 1358/2012, surveyed 2011', 'DGR 357/2012, surveyed 2011'))}
-    bounds = batch_bounds(fixes, set(oid_batch.values()), tag_batches, contract_batch=census)
+    bounds = batch_bounds(fixes, set(oid_batch.values()), tag_batches, contract_batch=census,
+                          contract=contract_terms(store, root))
     located = [e for e in everything if e.x is not None]
     etree = cKDTree(numpy.array([[e.x, e.y] for e in located]))
     widest = max(b.error_m for b in bounds.values())
@@ -1063,9 +1098,162 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
                     zone_entries.add(e.oid)
         zone_entries.update(oid for oid, _, _ in cand.entries)
     by_oid = {e.oid: e for e in everything}
+    # The printed-parcel screen runs after the bounds and feeds nothing back into them.
+    screens = gross_error_screen(entries, store, root)
     return {'acts': acts, 'checks': checks, 'unread_deletions': unread, 'entries': by_oid, 'chains': chains,
             'batches': oid_batch, 'bounds': bounds, 'fixes': fixes, 'key_causes': causes, 'plants': out_plants,
-            'codes': codes, 'zone_entries': zone_entries, 'tag_batches': tag_batches, 'terms': terms}
+            'codes': codes, 'zone_entries': zone_entries, 'tag_batches': tag_batches, 'terms': terms,
+            'parcel_screen': screens}
+
+
+# --- gross-error screen: the printed parcel --------------------------------------------------------
+
+PARCELS = 'parcels.json'  # the capture of SIT Background/Catasto layer 2 (Particelle) for the printed parcels
+CATASTO = 'https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer'
+# Register spellings of comuni the Catasto layer (September 2021 cartography) names otherwise. Presicce merged into
+# Presicce-Acquarica in 2019. Accents, apostrophes and spaces are compared away (`_name_key`), not aliased.
+COMUNE_ALIASES = {'PRESICCE': 'PRESICCE-ACQUARICA', 'POLIGNANO': 'POLIGNANO A MARE',
+                  'S.MARZANO DI S.G.': 'SAN MARZANO DI SAN GIUSEPPE', 'S.G.ROTONDO': 'SAN GIOVANNI ROTONDO'}
+
+
+def _name_key(name: str) -> str:
+    return re.sub(r'[^A-Z]', '', (name or '').upper())
+
+
+def _catasto_number(text: str) -> str:
+    return str(int(text)) if text.isdigit() else text
+
+
+def printed_parcels(entry: Entry, codes: dict[str, str]) -> tuple[str | None, tuple[tuple[str, str], ...], str | None]:
+    """The entry's printed cadastral reference as Catasto keys: its comune code and every (foglio, particella) it
+    prints, or the cause it names none. A foglio or particella printed over several lines, or a particella list
+    ("27,256,659", "646-922"), names each printed number; nothing is guessed."""
+    name = (entry.comune or '').strip().upper()
+    code = codes.get(_name_key(COMUNE_ALIASES.get(name, name)))
+    fogli = sorted({_catasto_number(f) for f in re.split(r'\s+', entry.foglio or '') if f})
+    numeri = sorted({_catasto_number(n.rstrip('.').upper()) for n in re.split(r'[\s,;\-]+', entry.particella or '')
+                     if n.rstrip('.')})
+    if code is None:
+        return None, (), f'the comune {entry.comune!r} names no Catasto comune'
+    if not fogli:
+        return code, (), 'no foglio printed'
+    if not numeri:
+        return code, (), 'no particella printed'
+    return code, tuple((f, n) for f in fogli for n in numeri), None
+
+
+def _esri_polygon(rings):
+    """An ArcGIS polygon's rings as one shapely geometry: clockwise rings are exteriors, the others their holes."""
+    import shapely
+    rings = [r for r in rings if len(r) >= 4]
+    outers = [shapely.Polygon(r) for r in rings if not shapely.is_ccw(shapely.LinearRing(r))]
+    holes = [shapely.Polygon(r) for r in rings if shapely.is_ccw(shapely.LinearRing(r))]
+    polygons = []
+    for outer in outers:
+        inside = [h for h in holes if outer.contains(h.representative_point())]
+        polygons.append(shapely.Polygon(outer.exterior, [h.exterior for h in inside]))
+    return shapely.union_all(polygons) if len(polygons) > 1 else (polygons[0] if polygons else None)
+
+
+def catasto_codes(store: Path, root: Path = REPOSITORY) -> dict[str, str]:
+    """Comune name key → Catasto comune code, from the captured distinct names of layer 0 (Fogli)."""
+    record = json.loads((root / SOURCES / PARCELS).read_text())
+    names = json.loads(_blob(store, record['comuni']['sha256']).read_bytes())['features']
+    return {_name_key(f['attributes']['NOME_COMUNE']): f['attributes']['COMUNE'] for f in names}
+
+
+def parcel_geometries(store: Path, root: Path = REPOSITORY) -> dict[tuple[str, str, str], object]:
+    """(comune code, foglio, particella) → the parcel's geometry in EPSG:32633. Where Catasto holds several parcels
+    under one printed reference (allegato, sviluppo or sezione, which the register does not print), their union."""
+    import shapely
+    record = json.loads((root / SOURCES / PARCELS).read_text())
+    parts = defaultdict(list)
+    for page in record['pages']:
+        for feature in json.loads(_blob(store, page['sha256']).read_bytes()).get('features', []):
+            a = feature['attributes']
+            geometry = _esri_polygon((feature.get('geometry') or {}).get('rings', []))
+            if geometry is not None:
+                parts[(a['COMUNE'], _catasto_number(a['FOGLIO'].strip()), _catasto_number(a['NUMERO'].strip().upper()))
+                      ].append(geometry)
+    return {k: v[0] if len(v) == 1 else shapely.union_all(v) for k, v in parts.items()}
+
+
+@dataclass(frozen=True)
+class ParcelScreen:
+    """One entry's point against its printed parcel. A screen only: it never enters a bound."""
+    entry: str
+    layer: str
+    key: str | None
+    comune: str | None
+    foglio: str | None
+    particella: str | None
+    distance_m: float | None       # outside the printed parcel(s); 0 inside; None when not screened
+    unresolved: tuple[str, ...]    # printed parcels Catasto does not hold
+    lies_in: tuple[str, ...]       # for a point outside: the other printed parcels it lies in, if any
+    cause: str | None              # why the entry is not screened, or screened against part of its print
+
+
+def gross_error_screen(entries: list[Entry], store: Path, root: Path = REPOSITORY) -> list[ParcelScreen]:
+    """Every layer 1 and layer 0 entry's distance outside its printed parcel, in one vectorized pass: a shapely 2
+    distance over aligned arrays of points and printed-parcel geometries, then an STRtree query of the points that
+    lie outside against every printed parcel held, naming the printed parcel each lies in instead."""
+    import numpy
+    import shapely
+    codes = catasto_codes(store, root)
+    geometries = parcel_geometries(store, root)
+    screens, targets, target_of, points, rows = [], [], {}, [], []
+    for e in entries:
+        if e.layer not in ('listed', 'provisional'):
+            continue
+        code, printed, cause = printed_parcels(e, codes)
+        held = tuple(p for p in printed if (code, *p) in geometries)
+        missing = tuple(f'{code}:{f}:{n}' for f, n in printed if (code, f, n) not in geometries)
+        if cause is None and not held:
+            cause = 'the printed parcel resolves to no Catasto parcel'
+        elif cause is None and missing:
+            cause = 'screened against the printed parcels Catasto holds; the others resolve to none'
+        if cause is None and e.x is None:
+            cause = 'the entry has no point'
+        base = ParcelScreen(e.oid, e.layer, e.key, e.comune, e.foglio, e.particella, None, missing, (), cause)
+        if held and e.x is not None:
+            if (code, held) not in target_of:
+                target_of[(code, held)] = len(targets)
+                parts = [geometries[(code, *p)] for p in held]
+                targets.append((code, parts[0] if len(parts) == 1 else shapely.union_all(parts)))
+            points.append((e.x, e.y))
+            rows.append((len(screens), target_of[(code, held)]))
+        screens.append(base)
+    if not rows:
+        return screens
+    index = numpy.array([t for _, t in rows])
+    point_array = shapely.points(numpy.array(points))
+    distance = shapely.distance(point_array, numpy.array([g for _, g in targets], dtype=object)[index])
+    outside = numpy.flatnonzero(distance > 0)
+    keys = list(geometries)
+    tree = shapely.STRtree([geometries[k] for k in keys])
+    lies = defaultdict(list)
+    for point, parcel in zip(*tree.query(point_array[outside], predicate='within')):
+        lies[int(outside[point])].append(':'.join(keys[parcel]))
+    for i, (slot, _) in enumerate(rows):
+        screens[slot] = ParcelScreen(**{**screens[slot].__dict__, 'distance_m': round(float(distance[i]), 2),
+                                        'lies_in': tuple(sorted(lies.get(i, ())))})
+    return screens
+
+
+def screen_counts(screens: list[ParcelScreen]) -> dict:
+    """The screen's totals: entries inside, outside (with the distance's spread), and not screened, by cause."""
+    import numpy
+    out = [s.distance_m for s in screens if s.distance_m]
+    return {'entries': len(screens),
+            'screened': sum(1 for s in screens if s.distance_m is not None),
+            'inside': sum(1 for s in screens if s.distance_m == 0),
+            'outside': len(out),
+            'outside_m': {q: round(float(numpy.percentile(out, int(q[1:]))), 2) for q in ('p50', 'p95')} | {
+                'max': max(out)} if out else {},
+            'outside_over': {m: sum(1 for d in out if d > m) for m in (1, 5, 10, 25, 50, 100, 500)},
+            'outside_lying_in_another_printed_parcel': sum(1 for s in screens if s.distance_m and s.lies_in),
+            'not_screened': dict(Counter(s.cause for s in screens if s.distance_m is None)),
+            'screened_against_part': sum(1 for s in screens if s.distance_m is not None and s.cause)}
 
 
 # --- the emitted rows -------------------------------------------------------------------------------
@@ -1103,10 +1291,16 @@ def rows(result: dict) -> dict:
                            'entries': [{'entry': e, 'distance_m': dist, 'd_m': d} for e, dist, d in c.entries],
                            'd': f"the plant's error_m {p.error_m} m + the entry's batch bound",
                            'identity': c.identity, 'rule': c.rule}})
+    screen = {s.entry: s for s in result['parcel_screen']}
+
+    def screened(s: ParcelScreen | None) -> dict | None:
+        return None if s is None else {'distance_outside_m': s.distance_m, 'lies_in': list(s.lies_in),
+                                       'unresolved': list(s.unresolved), 'cause': s.cause}
     zone = []
     for oid in sorted(result['zone_entries'], key=lambda o: (entries[o].layer, o)):
         e, chain, bound = entries[oid], chains.get(oid), bounds[batches[oid]]
         zone.append({
+            'parcel_screen': screened(screen.get(oid)),
             'entry': oid, 'layer': e.layer, 'key': e.key, 'card': e.card, 'key_causes': list(result['key_causes'].get(oid, ())),
             'label': e.label, 'bulletin_printed': e.bulletin, 'comune': e.comune, 'foglio': e.foglio,
             'particella': e.particella, 'point': {'x': e.x, 'y': e.y, 'crs': 'EPSG:32633'}, 'survey': e.survey,
@@ -1129,4 +1323,15 @@ def rows(result: dict) -> dict:
                                  'codes': [list(c) for c in f.codes], 'dropped': f.dropped} for f in result['fixes']],
             'bounds': {b: {'applies_to': v.applies, 'error_m': v.error_m, 'fixes': v.fixes, 'card_form': v.card_form,
                            'check': v.check} for b, v in sorted(bounds.items())},
-            'tag_batches': sorted(result['tag_batches'])}
+            'tag_batches': sorted(result['tag_batches']),
+            'gross_error_screen': {
+                'rule': "each layer 1 and layer 0 entry's distance outside its printed parcel (SIT Catasto layer 2, "
+                        "September 2021 cartography); a screen only, never a term of any bound",
+                'comune_aliases': COMUNE_ALIASES, 'counts': screen_counts(result['parcel_screen']),
+                'outside': [{'entry': s.entry, 'layer': s.layer, 'key': s.key, 'comune': s.comune, 'foglio': s.foglio,
+                             'particella': s.particella} | screened(s)
+                            for s in sorted(result['parcel_screen'], key=lambda s: -(s.distance_m or 0))
+                            if s.distance_m],
+                'not_screened': [{'entry': s.entry, 'layer': s.layer, 'comune': s.comune, 'foglio': s.foglio,
+                                  'particella': s.particella, 'unresolved': list(s.unresolved), 'cause': s.cause}
+                                 for s in result['parcel_screen'] if s.distance_m is None]}}

@@ -21,7 +21,8 @@ from cordon_d.store import store_root  # noqa: E402
 def version() -> str:
     digest = sha256()
     for path in (Path(protection.__file__), ROOT / protection.SOURCES / 'register.json',
-                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS):
+                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.SOURCES / protection.PARCELS,
+                 ROOT / protection.ORDERS):
         digest.update(path.read_bytes())
     return digest.hexdigest()[:12]
 
@@ -47,3 +48,4 @@ if __name__ == '__main__':
     print('bounds:', sorted({(b['applies_to'], b['error_m'], b['fixes']) for b in out['bounds'].values()}))
     print('unread deletions:', out['unread_deletions'])
     print('note codes:', dict(Counter(c['cause'] for p in out['plants'] for c in p['codes'])))
+    print('gross-error screen:', json.dumps(out['gross_error_screen']['counts']))

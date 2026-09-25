@@ -579,4 +579,10 @@ hedged, or naming the term without stating it of the plant); a negation of the t
 or the census does not negate the characteristics. A measurement is supplied as
 printed, with `diameter_cm` and `measured_height_cm` read from its words; D compares
 none. An entry's acts come from the acts' decisions and history table, never from
-its label alone.
+its label alone; where an act's recitals name the surveys that together make up
+exactly its provisional list, each survey is a batch of that act. The printed
+parcel is a gross-error screen only: every layer 1 and layer 0 entry's distance
+outside its printed parcel (SIT Catasto layer 2) is listed, a printed parcel that
+resolves to no Catasto parcel is counted with its cause, no parcel is guessed, and
+no screen distance enters a bound. The 2011 census check reads its tolerance from
+the held capitolato d'oneri.
