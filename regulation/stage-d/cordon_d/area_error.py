@@ -16,7 +16,10 @@ outline and a parcel carry the error of their own locality, never a maximum take
 from __future__ import annotations
 
 from dataclasses import dataclass
+from hashlib import sha256
+import json
 import math
+from pathlib import Path
 import re
 
 import numpy
@@ -145,6 +148,52 @@ def consensus(fixes):
         results[i] = (tuple(float(v) for v in offset), float(numpy.hypot(*chosen)),
                       bool(residual.min() <= TOLERANCE_M))
     return results
+
+
+def derived(root, name: str, digest: str) -> Path:
+    """Where a measurement computed from held inputs is cached: the derived store, by input digest."""
+    from .store import store_root
+    return store_root(Path(root)) / 'derived' / 'areas' / name / f'{digest}.json'
+
+
+def write_derived(target: Path, document) -> None:
+    from .store import _place
+    _place(target, lambda temporary: temporary.write_text(json.dumps(document, separators=(',', ':'))))
+
+
+def fix_errors(root, control: Path) -> list | None:
+    """Each matched control fix: {'id', 'x', 'y', 'offset', 'error_m', 'on_consensus'}.
+
+    Computed on read from the fixes and their held map windows (`control`, the acquisition
+    record) by `candidates` and `consensus`, and cached in the derived store under the digest
+    of the fixes, their windows and this module. None where a window is not in the store.
+    """
+    from .store import blob_path, store_root
+    document = json.loads(Path(control).read_text())
+    digest = sha256(json.dumps([document['fixes'], document['windows']], sort_keys=True).encode()
+                    + Path(__file__).read_bytes()).hexdigest()
+    target = derived(root, 'cadastral-fix-errors', digest)
+    if target.exists():
+        return json.loads(target.read_text())
+    store = store_root(Path(root))
+    by_fix = {w['fix']: w for w in document['windows']}
+    inputs = []
+    for fix in document['fixes']:
+        features = []
+        for page in by_fix[fix['id']]['pages']:
+            path = blob_path(store, page['sha256'])
+            if not path.exists():
+                return None
+            features += json.loads(path.read_bytes())['features']
+        inputs.append(((fix['x'], fix['y']), candidates(fix['kind'], fix['description'], features)))
+    out = []
+    for fix, result in zip(document['fixes'], consensus(inputs)):
+        if result is not None:
+            offset, error, on = result
+            out.append({'id': fix['id'], 'comune': fix['comune'], 'x': fix['x'], 'y': fix['y'],
+                        'offset': [round(v, 2) for v in offset], 'error_m': round(error, 2), 'on_consensus': on})
+    write_derived(target, out)
+    return out
 
 
 @dataclass(frozen=True)

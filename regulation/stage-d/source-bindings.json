@@ -71,11 +71,15 @@
         "Adopting regional acts and their annex tables; acquisitions in corpus/sources/areas/acts.json",
         "https://www.istat.it/storage/cartografia/confini_amministrativi/non_generalizzati/2026/Limiti01012026.zip",
         "https://www.istat.it/storage/codici-unita-amministrative/Elenco-comuni-italiani.xlsx",
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer"
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer (layer 0 sheets, layer 2 parcels; layers 1 and 2 around each control fix)",
+        "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php (AdE INSPIRE CadastralZoning sheets, 72 acquisitions)",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/DatiPubbliciFasceXF/MapServer (the Region's published layers 12-15 for DDS 82/2026, region-layer records)",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/ServicesArcIMS/RetiGeodetiche/MapServer (the Region's surveyed control fixes, corpus/sources/areas/cadastral-control.json)",
+        "Row 1's located positives and positional qualification (monitoring-records), for the infected plants an act names"
       ],
-      "population": "Every consumed A area version whose interval overlaps the reach, and the provinces, comuni, sheets and parcels its construction uses; acquisitions and the measured positional error of each source in corpus/sources/areas/geometry.json.",
-      "reader": "cordon_d.area_geometry.adopted_geography, from cordon_d.areas and cordon_d.administrative",
-      "open": "A zone the act defines around the infected plants it names is built from those plants' positions and carries their positional error, which row 1 supplies. The ISTAT and cadastral error bounds are measured by comparing the two outlines, because neither publisher states one."
+      "population": "Every consumed A area version whose interval overlaps the reach, and the provinces, comuni, sheets and parcels its construction uses; acquisitions and the method of each source's positional error in corpus/sources/areas/geometry.json.",
+      "reader": "cordon_d.area_geometry.adopted_geography, from cordon_d.areas, cordon_d.administrative, cordon_d.area_error and row 1 (cordon_d.monitoring.distinct_observations, cordon_d.spatial.positional_terms)",
+      "open": "A zone the act defines around the infected plants it names is built around the row 1 positives the act names, each with row 1's measured error (7.40 m); for a listed unit no such plant's circle reaches, around the Region's layer where it carries the act's circles, else around the unit with the unit's extent in its error, so C answers neither way there (DDS 106/2025, Santeramo in Colle foglio 25). A band drawn from plants is held to the units the annex lists; where band and annex still disagree, the disputed land carries its reach in the error. The cadastral error is measured against the Region's surveyed control fixes matched to the features the map draws; ISTAT's against the cadastral border where its line draws part of a zone; the Region's layer's against the cadastral outline of the units the act places wholly. The measurements are computed on read and cached in the derived store. DDS 148/2024 (2024-11-12 to 2024-12-18) is not held, so row 3 is not established for that interval."
     },
     {
       "id": "cadastre",
@@ -88,9 +92,9 @@
         "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php",
         "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2"
       ],
-      "population": "The parcels spatially reached by an admitted finding or removal population; national AdE geometry is the current reference where available.",
-      "reader": "cordon_d.releases and cordon_d.spatial",
-      "open": "Reacquire the required parcel population and preserve source cadastral identifiers. Geometry alone does not establish ownership or authority to enter."
+      "population": "The sheets and parcels the consumed A area versions list, and the map around each control fix (held); the parcels spatially reached by an admitted finding or removal population (rows 4-5, not yet read). National AdE geometry is the current reference where available.",
+      "reader": "cordon_d.area_geometry (Sources.sheets, Sources.parcels) and cordon_d.area_error",
+      "open": "The parcel population rows 4-5 reach is read when those rows are replanned; source cadastral identifiers are preserved. Geometry alone does not establish ownership or authority to enter."
     },
     {
       "id": "removal-orders",

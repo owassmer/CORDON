@@ -132,25 +132,10 @@ def windows(args):
 
 
 def measure(args):
-    store = store_root(ROOT)
-    document = json.loads(CONTROL.read_text())
-    by_fix = {w['fix']: w for w in document['windows']}
-    found = document['fixes']
-    inputs = []
-    for fix in found:
-        features = []
-        for page in by_fix[fix['id']]['pages']:
-            features += json.loads(blob_path(store, page['sha256']).read_bytes())['features']
-        inputs.append(((fix['x'], fix['y']), E.candidates(fix['kind'], fix['description'], features)))
-    results = E.consensus(inputs)
-    for fix, result in zip(found, results):
-        for key in ('offset', 'error_m', 'on_consensus'):
-            fix.pop(key, None)
-        if result is not None:
-            offset, error, on = result
-            fix.update(offset=[round(v, 2) for v in offset], error_m=round(error, 2), on_consensus=on)
-    CONTROL.write_text(json.dumps(document, indent=0) + '\n')
-    measured = [f for f in found if 'error_m' in f]
+    found = json.loads(CONTROL.read_text())['fixes']
+    # Each fix's match is computed on read from its held window and cached in the derived
+    # store (`area_error.fix_errors`); only the method and its summary are recorded.
+    measured = E.fix_errors(ROOT, CONTROL)
     field = E.ErrorField(numpy.array([[f['x'], f['y']] for f in measured]), numpy.array([f['error_m'] for f in measured]))
     xy = [[f['x'], f['y']] for f in measured]
     local, radius = field.at(xy), field.radius(xy)
@@ -259,7 +244,11 @@ def istat(args):
 
 
 def layers(args):
-    """The Region's layer against the cadastral outline of the units the act places wholly in a zone."""
+    """The Region's layer against the cadastral outline of the units the act places wholly in a zone.
+
+    Records the method per layer. The samples are computed on read from the version as
+    constructed (`Sources.region_error`) and cached in the derived store; this prints their
+    summary and stores none of them."""
     from cordon_d.area_geometry import Sources, adopted_geography, region_layer_samples, REGION_REACH_M
     sources = Sources(ROOT)
     out = []
@@ -267,6 +256,9 @@ def layers(args):
                                        only=set(args.version)):
         for record, samples in region_layer_samples(sources, geography):
             distances = numpy.array([d for _, _, d in samples])
+            print(record['layer'], record['name'], {'median': round(float(numpy.median(distances)), 1),
+                                                    'p95': round(float(numpy.percentile(distances, 95)), 1),
+                                                    'max': round(float(distances.max()), 1), 'n': int(len(distances))})
             out.append({'kind': 'positional-error', 'source': 'region-layer', 'layer': record['layer'],
                         'name': record['name'], 'sha256': record['sha256'], 'role': record['role'],
                         'provision_version_id': geography.provision_version_id,
@@ -275,14 +267,11 @@ def layers(args):
                                    "units, on land outside the zone) to the layer's outline. A place's error is the "
                                    f"95th percentile of the samples within {REGION_REACH_M / 1000:g} km of it. "
                                    "The layer's ground error there is that value plus the cadastre's own ground "
-                                   "error there (triangle inequality)."),
-                        'samples': [[round(x), round(y), round(float(d), 1)] for x, y, d in samples],
-                        'error_m': {'median': round(float(numpy.median(distances)), 1),
-                                    'p95': round(float(numpy.percentile(distances, 95)), 1),
-                                    'max': round(float(distances.max()), 1), 'n': int(len(distances))},
+                                   "error there (triangle inequality). The samples are computed on read from the "
+                                   "version as constructed and cached in the derived store under the digest of "
+                                   "its inputs."),
                         'script': 'scripts/measure_positional_error.py',
                         'measured_at': datetime.now(timezone.utc).isoformat(timespec='seconds')})
-            print(record['layer'], record['name'], out[-1]['error_m'])
     _replace(lambda r: (r['kind'] == 'positional-error' and r['source'] == 'region-layer'
                         and r['provision_version_id'] in args.version), out)
 
@@ -299,8 +288,7 @@ def localities(args):
     from scipy.spatial import cKDTree
     from cordon_d.area_geometry import Sources
     sources = Sources(ROOT)
-    document = json.loads(CONTROL.read_text())
-    measured = [f for f in document['fixes'] if 'error_m' in f]
+    measured = E.fix_errors(ROOT, CONTROL)
     xy = numpy.array([[f['x'], f['y']] for f in measured])
     comune_of = numpy.array([f['comune'] for f in measured])
     field = E.ErrorField(xy, numpy.array([f['error_m'] for f in measured]))

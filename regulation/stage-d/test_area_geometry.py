@@ -26,7 +26,7 @@ from cordon_d import area_error
 from cordon_d.area_geometry import (AdoptedGeography, ErrorPart, Observation, Sources, Unplaced, Zone,
                                     boundary_distances, buffer_extent, construct, dispositivo,
                                     inward_band, named_plants, outward_band, plant_roles, reach_start, read_rules,
-                                    _Builder, _drawn, _inspire_zoning, _layer_gaps)
+                                    _Builder, _disagreements, _drawn, _inspire_zoning, _layer_circles, _layer_gaps)
 from cordon_d.areas import Sheet, versions
 from cordon_d.administrative import AdministrativeUnits, records
 from cordon_d.store import store_root
@@ -218,6 +218,20 @@ class PositionalError(unittest.TestCase):
         self.assertEqual(float(found.at([(5.0, 0.0)])[0]), 2.0)
         self.assertEqual(float(found.at([(10_005.0, 0.0)])[0]), 60.0)
 
+    @unittest.skipUnless(held('cadastre-fogli'), 'the control windows are not in this store')
+    def test_the_recorded_summary_is_what_the_fixes_measure_on_read(self):
+        record, = [r for r in records(ROOT, 'positional-error') if r['source'] == 'cadastre']
+        control = ROOT / record['evidence']
+        self.assertFalse(any('error_m' in f for f in json.loads(control.read_text())['fixes']))
+        found = area_error.fix_errors(ROOT, control)
+        if found is None:
+            self.skipTest('the control windows are not in this store')
+        errors = numpy.array([f['error_m'] for f in found])
+        self.assertEqual((len(found), sum(f['on_consensus'] for f in found)),
+                         (record['measured'], record['on_consensus']))
+        self.assertEqual({k: round(float(numpy.percentile(errors, q)), 1) for k, q in (('p50', 50), ('p95', 95))}
+                         | {'max': round(float(errors.max()), 1)}, record['fix_error_m'])
+
     def test_the_fix_names_the_feature_the_map_draws(self):
         self.assertEqual(area_error.feature_kind('TRIPLICE DI CONFINE'), 'triple')
         self.assertEqual(area_error.feature_kind('SPIGOLO NORD - EST FABBRICATO'), 'building')
@@ -269,6 +283,52 @@ class MetricGeometryForC(unittest.TestCase):
 
     def test_the_shared_boundary_is_the_buffer_s_inner_edge(self):
         self.assertAlmostEqual(self.geography().shared_boundary.length, 20)
+
+
+class BandAndAnnex(unittest.TestCase):
+    """A band drawn from plants is held to the listed units; where the two disagree C answers neither way."""
+
+    class Stub:
+        def sheet_labels(self, geometry, minimum_m2=100.0):
+            return []
+
+    def test_the_band_beyond_the_listed_units_and_a_listed_unit_it_misses_are_neither_in_nor_out(self):
+        plant = Point(0, 0)
+        infected = plant.buffer(50)
+        band = plant.buffer(2_550).difference(infected)
+        listed = box(-3_000, -3_000, 1_000, 3_000)           # the annex lists the land west of x = 1,000
+        missed = box(4_000, -500, 4_800, 500)                # listed partly in the buffer, beyond 2.5 km
+        held = listed.union(missed)
+        beyond = [band.difference(held)]
+        buffer = band.intersection(held)
+        zones = {'infected': Zone('infected', ('ZONA INFETTA',), infected, 'rule', ('plants',))}
+        found = _disagreements(self.Stub(), zones, ('infected',), buffer, held, beyond,
+                               (Unplaced('buffer', 'p2', 'foglio 9', 'legend', missed),))
+        self.assertEqual([(d.role, d.kind) for d in found], [('buffer', 'beyond'), ('buffer', 'short')])
+        self.assertAlmostEqual(found[0].geometry.area, band.difference(listed).area, delta=1)
+        self.assertGreater(found[0].reach_m, 1_550)          # the disputed land reaches 1,550 m past the line
+        parts = (ErrorPart('plants', None, 7.4),) + tuple(
+            ErrorPart('annex-disagreement', d.geometry, d.reach_m, place_only=True) for d in found)
+        area = AdoptedGeography('REG:v1', 'REG', date(2025, 1, 1), None,
+                                (zones['infected'], Zone('buffer', ('ZONA CUSCINETTO',), buffer, 'rule', ('plants',),
+                                                         errors=parts, disagreements=found)))
+        truth = lambda p: adopted_membership(MetricGeometry(p, UTM, 7.4), area.metric(p)).truth
+        self.assertIsNone(truth(Point(2_000, 0)))             # the band says in, the annex out
+        self.assertIsNone(truth(Point(1_020, 0)))
+        self.assertIsNone(truth(Point(4_400, 0)))             # the annex says partly in, the band out
+        self.assertTrue(truth(Point(600, 0)))                 # both say in, beside the disputed land
+        self.assertEqual(area.metric(Point(600, 0)).error_m, 8.4)
+        self.assertTrue(truth(Point(-1_500, 0)))
+        self.assertFalse(truth(Point(-6_000, 0)))             # both say out
+        self.assertFalse(truth(Point(5_600, 0)))
+
+    def test_the_region_s_circles_give_back_their_plants(self):
+        layer = shapely.union_all([Point(0, 0).buffer(50), Point(60, 0).buffer(50), Point(500, 0).buffer(50)])
+        centres = _layer_circles(layer, box(-10, -10, 10, 10), 50)
+        expected = shapely.union_all([Point(0, 0).buffer(50), Point(60, 0).buffer(50)])
+        self.assertTrue(centres.buffer(50).covers(expected.buffer(-0.5)))
+        self.assertTrue(expected.buffer(1.5).covers(centres.buffer(50)))
+        self.assertIsNone(_layer_circles(layer, box(1_000, 0, 1_100, 10), 50))
 
 
 class InspireSheets(unittest.TestCase):
@@ -385,64 +445,90 @@ class ReachAndPopulation(unittest.TestCase):
         self.assertEqual(by_reference, {'infected': ((1.0, 1.0),)})
 
 
-class ActPlants(unittest.TestCase):
-    """A named plant is placed by the unit its act lists, with the cadastre's local error there."""
+def row1_held() -> bool:
+    return held('cadastre-fogli') and Sources(ROOT, comuni=()).row1 is not None
 
-    @unittest.skipUnless(held('cadastre-fogli') and held('cadastre-particelle') and held('istat-boundaries'),
-                         'the geometry sources are not in this store')
-    def test_a_plant_takes_the_parcels_the_act_lists(self):
-        version = version_of('REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1')
-        sources = Sources(ROOT, comuni={'L425', 'A662', 'B716', 'F923'})
-        zones = {z.role: z for z in construct(sources, version)}
-        plants = zones['infected'].plants
-        self.assertEqual(len(plants), 53)
-        self.assertTrue(all('particella' in p.by for p in plants))
-        parcels = shapely.union_all([p.geometry for p in plants])
-        self.assertTrue(zones['infected'].geometry.covers(parcels))
-        # The zone is the parcels' 50 m reach, not a circle around each sheet.
-        self.assertLess(zones['infected'].geometry.area, parcels.buffer(51).area)
-        for p in plants:
-            self.assertGreater(p.error_m, 0)
-            self.assertLess(p.error_m, 150)          # the local error, not a sheet's radius
-        area = AdoptedGeography(version.provision_version_id, version.instrument_id, version.effective_from,
-                                version.effective_to_exclusive, tuple(zones.values()))
-        metric = area.metric(parcels.centroid)
-        self.assertIsInstance(metric, MetricGeometry)
-        self.assertLess(metric.error_m, 151)
+
+class ActPlants(unittest.TestCase):
+    """A named plant stands at its located position; the unit the act lists is where its circle reaches."""
+
+    DDS59 = 'REG-PUGLIA-U181-DIR-2025-00059:area-state-transition:v1'
+
+    def area(self, version, zones):
+        return AdoptedGeography(version.provision_version_id, version.instrument_id, version.effective_from,
+                                None, tuple(zones.values()))
 
     @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
-    def test_a_sheet_listed_alone_places_its_plant_and_row_1_does_not_displace_it(self):
-        version = version_of('REG-PUGLIA-U181-DIR-2025-00059:area-state-transition:v1')
+    def test_a_unit_no_located_plant_reaches_carries_its_extent_and_c_cannot_say_true(self):
+        # DDS 59/2025 lists foglio 61 "PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE".
+        version = version_of(self.DDS59)
         sources = Sources(ROOT, comuni={'F220'})
         sheet = shapely.union_all([g for _, g in sources.sheets[('F220', '', '61')]])
-        elsewhere = sheet.representative_point().x + 10_000, sheet.representative_point().y, 5.0
-        zones = {z.role: z for z in construct(sources, version, plants={'infected': (elsewhere,)})}
+        zones = {z.role: z for z in construct(sources, version, plants={})}
         plant, = zones['infected'].plants
-        self.assertEqual(plant.by, 'Minervino Murge foglio 61')
-        self.assertTrue(zones['infected'].geometry.covers(sheet))
-        self.assertFalse(zones['infected'].geometry.covers(Point(elsewhere[:2])))
-        area = AdoptedGeography(version.provision_version_id, version.instrument_id, version.effective_from,
-                                None, tuple(zones.values()))
-        self.assertIsInstance(area.metric(sheet.centroid), MetricGeometry)
+        self.assertEqual(plant.by, 'Minervino Murge foglio 61: not located, the unit with its extent')
+        self.assertGreater(plant.error_m, 2 * shapely.minimum_bounding_radius(sheet) + 100)
+        area = self.area(version, zones)
+        truth = lambda p: adopted_membership(MetricGeometry(p, UTM, 7.4), area.metric(p)).truth
+        # The plant may stand anywhere within 50 m of the sheet. The two places 2,251 m from it
+        # that the sheet-placed plant put in the area may lie beyond the act's 2,550 m: neither way.
+        for place in (Point(583_448.4, 4_553_301.9), Point(588_179.7, 4_549_411.2)):
+            self.assertIsNone(truth(place))
+        # Inside the sheet every place the plant can stand is within 2,550 m: in.
+        self.assertTrue(truth(sheet.representative_point()))
+
+    @unittest.skipUnless(row1_held(), 'row 1 is not in this store')
+    def test_the_act_s_plant_is_the_row_1_positive_it_names_on_a_real_version(self):
+        version = version_of(self.DDS59)
+        sources = Sources(ROOT, comuni={'F220'})
+        sheet = shapely.union_all([g for _, g in sources.sheets[('F220', '', '61')]])
+        zones = {z.role: z for z in construct(sources, version)}
+        plant, = zones['infected'].plants
+        self.assertEqual((plant.by, plant.error_m), ('row 1', sources.row1[1]))
+        self.assertTrue(sheet.buffer(50).covers(plant.geometry))
+        # The infected zone is the act's one 50 m circle, not the sheet plus 50 m.
+        self.assertTrue(numpy.pi * 50 ** 2 < zones['infected'].geometry.area < numpy.pi * 51 ** 2)
+        self.assertFalse(zones['infected'].geometry.covers(sheet))
+        # The buffer lies within the act's 2.5 km of the plant (with the offset polygons' 1 m
+        # each), save the sheets its annex marks wholly in it ("*").
+        far = zones['buffer'].geometry.difference(plant.geometry.buffer(2_554, quad_segs=512))
+        self.assertLess(far.difference(zones['buffer'].listed).area, 1.0)
+        area = self.area(version, zones)
+        self.assertAlmostEqual(area.geometry.area / 1e6, numpy.pi * 2.55 ** 2, delta=0.1)
+        # Two places 6,125.6 m apart, each 2,251 m from the sheet, that the sheet-placed plant
+        # put in the area: a 2,550 m disc cannot hold both.
+        truths = [adopted_membership(MetricGeometry(p, UTM, 7.4), area.metric(p)).truth
+                  for p in (Point(583_448.4, 4_553_301.9), Point(588_179.7, 4_549_411.2))]
+        self.assertNotEqual(truths, [True, True])
 
     @unittest.skipUnless(held('cadastre-fogli') and held('cadastre-particelle') and held('istat-boundaries'),
                          'the geometry sources are not in this store')
-    def test_a_listed_unit_not_held_is_placed_by_row_1_or_not_at_all(self):
+    def test_a_listed_unit_not_held_leaves_the_version_without_a_bound(self):
         version = version_of('REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1')
         sources = Sources(ROOT, comuni={'L425', 'A662', 'B716', 'F923'})
         parcel = shapely.union_all(sources.parcels.pop(('L425', '', '5', '818')))
         inside = parcel.representative_point()
-        zones = {z.role: z for z in construct(sources, version)}
-        self.assertIn(None, [p.geometry for p in zones['infected'].plants])
-        area = AdoptedGeography(version.provision_version_id, version.instrument_id, version.effective_from,
-                                None, tuple(zones.values()))
-        with self.assertRaisesRegex(MissingInput, 'plants'):
-            area.metric(inside)
-        # A row 1 positive with its measured error places the plant the act's unit cannot.
-        zones = {z.role: z for z in construct(sources, version, plants={'infected': ((inside.x, inside.y, 4.0),)})}
-        self.assertEqual([p.by for p in zones['infected'].plants if p.by == 'row 1'], ['row 1'])
-        self.assertNotIn(None, [p.geometry for p in zones['infected'].plants])
-        self.assertTrue(zones['infected'].geometry.covers(inside.buffer(49)))
+        for plants in ({}, {'infected': ((inside.x + 5_000, inside.y, 7.4),)}):
+            zones = {z.role: z for z in construct(sources, version, plants=plants)}
+            self.assertIn(None, [p.geometry for p in zones['infected'].plants])
+            with self.assertRaisesRegex(MissingInput, 'plants'):
+                self.area(version, zones).metric(inside)
+
+    @unittest.skipUnless(held('cadastre-fogli') and held('cadastre-particelle') and held('istat-boundaries'),
+                         'the geometry sources are not in this store')
+    def test_a_located_plant_whose_circle_reaches_the_listed_parcels_places_them_all(self):
+        # DDS 8/2024 lists "particelle catastali ricadenti nel buffer di 50 metri dalle piante".
+        version = version_of('REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1')
+        sources = Sources(ROOT, comuni={'L425', 'A662', 'B716', 'F923'})
+        parcel = shapely.union_all(sources.parcels[('L425', '', '5', '818')])
+        at = parcel.representative_point()
+        zones = {z.role: z for z in construct(sources, version, plants={'infected': ((at.x, at.y, 7.4),)})}
+        plants = zones['infected'].plants
+        self.assertEqual(plants[0].by, 'row 1')
+        reached = [p for p in plants[1:] if p.geometry is not None]
+        self.assertTrue(all(p.by.endswith('not located, the unit with its extent') for p in reached))
+        self.assertFalse(any('foglio 5 particella 818' in p.by for p in plants))
+        self.assertTrue(zones['infected'].geometry.covers(at.buffer(49)))
 
 
 class AnnexBeyondTheRule(unittest.TestCase):
@@ -466,12 +552,13 @@ class AnnexBeyondTheRule(unittest.TestCase):
         self.assertTrue(drawn.intersects(noci('33')))
         self.assertEqual([e.source for e in errors], ['region-layer'])
         # Its ground error: the layer's measured distance from the cadastre plus the cadastre's own.
-        layer = sources.region_errors.get((version.provision_version_id, 'buffer'))
-        if layer is not None:
-            place = numpy.array([[noci('33').centroid.x, noci('33').centroid.y]])
-            self.assertAlmostEqual(float(errors[0].field.at(place)[0]),
-                                   float(layer.at(place)[0] + sources.cadastral_error.at(place)[0]))
-            self.assertGreater(float(errors[0].field.at(place)[0]), float(layer.at(place)[0]))
+        # The layer's is measured against the version as constructed, on read; a stand-in here.
+        place = numpy.array([[noci('33').centroid.x, noci('33').centroid.y]])
+        layer = area_error.ErrorField(place + [[0, 0], [10, 0]], numpy.array([40.0, 40.0]))
+        sources._region_fields[(version.provision_version_id, 'buffer')] = layer
+        self.assertAlmostEqual(float(errors[0].field.at(place)[0]),
+                               float(layer.at(place)[0] + sources.cadastral_error.at(place)[0]))
+        self.assertGreater(float(errors[0].field.at(place)[0]), float(layer.at(place)[0]))
 
     @unittest.skipUnless(held('cadastre-fogli') and held('istat-boundaries'), 'the geometry sources are not in this store')
     def test_a_unit_placed_wholly_in_the_buffer_is_in_it_beyond_the_stated_band(self):
