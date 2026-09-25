@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+ "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "5eff5719a08e1fdb8b310a88e05947fe40b893f0caa4a93d344f242aec2336ea",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:30:06.633686+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table lists: ALLEGATO1_20251212.pdf (SHA256: 6b3ab4a100b1b156de99854b2aadc684976ec621082ebb2635afb3bd1e7e52f3), ALLEGATO1BIS_20251212.pdf (SHA256: 3823e85d58fd6756faa928b7e4bc1999575092eea42bcf85ad5492ba41e6fc38), ALLEGATO2.pdf (SHA256: 23bb91ff71a05f342465663cf485656c3c14b18972f9d74aff0270f0cb3bf1b2) — this is a document/hash index, not a cadastral scope annex table.",
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Come Proposta: Codice Cifra 181/DIR/2025/00239",
+   "Sottoscrittori Proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa fastidiosa\" - Claudio Zaza; E.Q.\"Programmazione e gestione fitosanitaria\" - Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 23,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "b4c1b403a03dd31a4a81786f1e8f2ce8f5093b99f7ba73356a63e2fa6f8ea4eb",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:56.653149+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "2. SORVEGLIANZA SUL TERRITORIO REGIONALE IN AREE DELIMITATE E IN AREE INDENNI",
+   "Premesso che per zona infetta si intende: zona di almeno 50 metri attorno alla pianta infetta, le attuali aree delimitate istituite ai sensi dell'art. 4 del Reg. (UE) 2020/1201e s.m.i. sono:",
+   "\"Xylella fastidiosa sottospecie pauca ST53\" costituita da: 1. Zona infetta che comprende l'intera provincia di Lecce, Brindisi, parte della provincia di Taranto e Bari, con relativa zona infetta di cui all'Allegato III del Reg. 2020/1201, come modificata dal Reg. UE 2024/2507, della larghezza di 2 km, in cui si attuano misure di contenimento di cui agli articoli da 12 a 17 del Reg. UE 2020/1201 e zona cuscinetto adiacente alla succitata zona infetta della larghezza di 5 km; 2. Zona infetta in agro di Bari in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201 e s.m.i. e relativa zona cuscinetto adiacente alla succitata zona infetta della larghezza di 2,5 km.",
+   "\"Xylella fastidiosa sottospecie fastidiosa ST1\" costituita da: 1. Zona infetta in agro di Bari, Capurso, Triggiano e Noicattaro (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta.",
+   "\"Xylella fastidiosa sottospecie multiplex ST26\" costituita da: 1. Zona infetta in agro di Santeramo in Colle (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta; 2. Zona infetta in agro di Ginosa (TA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta; 3. Zona infetta in agro di Capurso (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta; 4. Zona infetta in agro di Noicattaro – Triggiano (BA), in cui si attuano misure di eradicazione di cui agli articoli da 7 a 11 del Reg. (UE) 2020/1201 s.m.i. e relativa zona cuscinetto della larghezza di almeno 2,5 km adiacente alla zona infetta."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

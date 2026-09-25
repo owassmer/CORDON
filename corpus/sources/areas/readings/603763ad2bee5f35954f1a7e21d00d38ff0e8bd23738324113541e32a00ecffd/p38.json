@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 38,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "56d662154e6a73759047dc1cbf6cbc5947566b0d25e4b93b311aa382baf58f80",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:28:37.196745+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "1. LABORATORI UFFICIALI - Le analisi ufficiali di laboratorio devono essere svolte da laboratori che rispondono ai requisiti previsti dall'art. 37 del Reg. UE 2017/625 ovvero in deroga ai requisiti di cui all'art. 42 del Reg. (UE) 2017/625",
+   "In Puglia, i laboratori ufficiali designati dall'Osservatorio che operano in nome e per conto dell'autorità competente regionale, sono: Screening e individuazione della presenza della Xylella fastidiosa - Istituto per la Protezione Sostenibile delle Piante del CNR, Sede Secondaria di Bari; Università degli studi di Foggia - Dipartimento di Scienze Agrarie, Alimenti, Risorse Naturali e Ingegneria – Laboratorio di Patologia Vegetale e Diagnostica; Centro di Ricerca, Formazione e Sperimentazione in Agricoltura \"Basile Caramia\"; Istituto Agronomico Mediterraneo di Valenzano; Università degli Studi di Bari- Dipartimento di Scienze del Suolo, della Pianta e degli Alimenti (Di.S.S.P.A.)",
+   "Analisi molecolari di conferma in aree indenni/cuscinetto e identificazione delle sottospecie di Xylella fastidiosa nelle specie vegetali e negli insetti vettori - Istituto per la Protezione Sostenibile delle Piante del CNR, Sede Secondaria di Bari",
+   "2. ANALISI DI LABORATORIO - Il laboratorio al momento dell'accettazione dei campioni, verifica che: ci sia corrispondenza con quanto indicato nel verbale elettronico su App mobile di accompagnamento dei campioni; ci sia corrispondenza tra i lotti indicati nel verbale elettronico su App mobile ed il contenuto in termini di singoli campioni che costituiscono il campione pool; il campione non presenti fenomeni di alterazione (marcescenza, sviluppo di muffe, disidratazione, etc.) alla consegna; il campione sia stato opportunamente confezionato (la busta deve essere sigillata) e identificato; il campione sia in quantità sufficiente a garantire l'esecuzione del saggio diagnostico",
+   "Dalla ricezione sino alla fase di analisi, i campioni sono conservati a una temperatura di 4-10°C."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

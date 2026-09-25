@@ -1,0 +1,586 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 20,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "ed49b1bdf494bba15f28356038e3c9ae683337af798162908e98a263ed3b0f11",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:39.902916+00:00",
+ "native_tables": [
+  {
+   "id": "p20-t1",
+   "bbox": [
+    74.5,
+    63.8,
+    503.3,
+    530.6
+   ]
+  }
+ ],
+ "native_cells": {
+  "p20-t1-r1-c1": {
+   "text": "21",
+   "table": "p20-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    74.5,
+    63.8,
+    106.0,
+    90.8
+   ]
+  },
+  "p20-t1-r1-c2": {
+   "text": "Myoporum insulare",
+   "table": "p20-t1",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    106.0,
+    63.8,
+    219.9,
+    90.8
+   ]
+  },
+  "p20-t1-r1-c3": {
+   "text": "Asintomatico",
+   "table": "p20-t1",
+   "row": 1,
+   "column": 3,
+   "bbox": [
+    219.9,
+    63.8,
+    503.3,
+    90.8
+   ]
+  },
+  "p20-t1-r2-c1": {
+   "text": "22",
+   "table": "p20-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    74.5,
+    90.8,
+    106.0,
+    128.2
+   ]
+  },
+  "p20-t1-r2-c2": {
+   "text": "Nerium oleander",
+   "table": "p20-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    106.0,
+    90.8,
+    219.9,
+    128.2
+   ]
+  },
+  "p20-t1-r2-c3": {
+   "text": "Bruscature fogliari, seguita da disseccamento di rami e di intere\nporzioni dell’arbusto",
+   "table": "p20-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    219.9,
+    90.8,
+    503.3,
+    128.2
+   ]
+  },
+  "p20-t1-r3-c1": {
+   "text": "23",
+   "table": "p20-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    74.5,
+    128.2,
+    106.0,
+    192.4
+   ]
+  },
+  "p20-t1-r3-c2": {
+   "text": "Olea europaea",
+   "table": "p20-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    106.0,
+    128.2,
+    219.9,
+    192.4
+   ]
+  },
+  "p20-t1-r3-c3": {
+   "text": "Clorosi e avvizzimento fogliare su alcune branche, seguiti da dissec-\ncamento di rami e di intere porzioni della chioma. In alcuni casi so-\nprattutto sui nuovi getti (succhioni) possono essere visibili sintomi\ndi bruscatura fogliare",
+   "table": "p20-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    219.9,
+    128.2,
+    503.3,
+    192.4
+   ]
+  },
+  "p20-t1-r4-c1": {
+   "text": "24",
+   "table": "p20-t1",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    74.5,
+    192.4,
+    106.0,
+    218.4
+   ]
+  },
+  "p20-t1-r4-c2": {
+   "text": "Pelargonium x fragrans",
+   "table": "p20-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    106.0,
+    192.4,
+    219.9,
+    218.4
+   ]
+  },
+  "p20-t1-r4-c3": {
+   "text": "Disseccamento dei germogli",
+   "table": "p20-t1",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    219.9,
+    192.4,
+    503.3,
+    218.4
+   ]
+  },
+  "p20-t1-r5-c1": {
+   "text": "25",
+   "table": "p20-t1",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    74.5,
+    218.4,
+    106.0,
+    246.0
+   ]
+  },
+  "p20-t1-r5-c2": {
+   "text": "Phillyrea latifolia",
+   "table": "p20-t1",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    106.0,
+    218.4,
+    219.9,
+    246.0
+   ]
+  },
+  "p20-t1-r5-c3": {
+   "text": "Bruscature fogliari",
+   "table": "p20-t1",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    219.9,
+    218.4,
+    503.3,
+    246.0
+   ]
+  },
+  "p20-t1-r6-c1": {
+   "text": "26",
+   "table": "p20-t1",
+   "row": 6,
+   "column": 1,
+   "bbox": [
+    74.5,
+    246.0,
+    106.0,
+    282.6
+   ]
+  },
+  "p20-t1-r6-c2": {
+   "text": "Polygala myrtifolia",
+   "table": "p20-t1",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    106.0,
+    246.0,
+    219.9,
+    282.6
+   ]
+  },
+  "p20-t1-r6-c3": {
+   "text": "Bruscature fogliari, seguita da disseccamento di rami e di intere\nporzioni dell’arbusto",
+   "table": "p20-t1",
+   "row": 6,
+   "column": 3,
+   "bbox": [
+    219.9,
+    246.0,
+    503.3,
+    282.6
+   ]
+  },
+  "p20-t1-r7-c1": {
+   "text": "27",
+   "table": "p20-t1",
+   "row": 7,
+   "column": 1,
+   "bbox": [
+    74.5,
+    282.6,
+    106.0,
+    303.5
+   ]
+  },
+  "p20-t1-r7-c2": {
+   "text": "Prunus avium",
+   "table": "p20-t1",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    106.0,
+    282.6,
+    219.9,
+    303.5
+   ]
+  },
+  "p20-t1-r7-c3": {
+   "text": "Bruscature fogliari",
+   "table": "p20-t1",
+   "row": 7,
+   "column": 3,
+   "bbox": [
+    219.9,
+    282.6,
+    503.3,
+    303.5
+   ]
+  },
+  "p20-t1-r8-c1": {
+   "text": "28",
+   "table": "p20-t1",
+   "row": 8,
+   "column": 1,
+   "bbox": [
+    74.5,
+    303.5,
+    106.0,
+    325.5
+   ]
+  },
+  "p20-t1-r8-c2": {
+   "text": "Prunus dulcis",
+   "table": "p20-t1",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    106.0,
+    303.5,
+    219.9,
+    325.5
+   ]
+  },
+  "p20-t1-r8-c3": {
+   "text": "Bruscature fogliari",
+   "table": "p20-t1",
+   "row": 8,
+   "column": 3,
+   "bbox": [
+    219.9,
+    303.5,
+    503.3,
+    325.5
+   ]
+  },
+  "p20-t1-r9-c1": {
+   "text": "29",
+   "table": "p20-t1",
+   "row": 9,
+   "column": 1,
+   "bbox": [
+    74.5,
+    325.5,
+    106.0,
+    346.4
+   ]
+  },
+  "p20-t1-r9-c2": {
+   "text": "Rhamnus alaternus",
+   "table": "p20-t1",
+   "row": 9,
+   "column": 2,
+   "bbox": [
+    106.0,
+    325.5,
+    219.9,
+    346.4
+   ]
+  },
+  "p20-t1-r9-c3": {
+   "text": "Asintomatico",
+   "table": "p20-t1",
+   "row": 9,
+   "column": 3,
+   "bbox": [
+    219.9,
+    325.5,
+    503.3,
+    346.4
+   ]
+  },
+  "p20-t1-r10-c1": {
+   "text": "30",
+   "table": "p20-t1",
+   "row": 10,
+   "column": 1,
+   "bbox": [
+    74.5,
+    346.4,
+    106.0,
+    394.1
+   ]
+  },
+  "p20-t1-r10-c2": {
+   "text": "Rosmarinus officinalis",
+   "table": "p20-t1",
+   "row": 10,
+   "column": 2,
+   "bbox": [
+    106.0,
+    346.4,
+    219.9,
+    394.1
+   ]
+  },
+  "p20-t1-r10-c3": {
+   "text": "Bruscature fogliari, ingiallimenti, seguiti da disseccamento di rami e\ndi intere porzioni dell’arbusto",
+   "table": "p20-t1",
+   "row": 10,
+   "column": 3,
+   "bbox": [
+    219.9,
+    346.4,
+    503.3,
+    394.1
+   ]
+  },
+  "p20-t1-r11-c1": {
+   "text": "31",
+   "table": "p20-t1",
+   "row": 11,
+   "column": 1,
+   "bbox": [
+    74.5,
+    394.1,
+    106.0,
+    423.9
+   ]
+  },
+  "p20-t1-r11-c2": {
+   "text": "Spartium junceum",
+   "table": "p20-t1",
+   "row": 11,
+   "column": 2,
+   "bbox": [
+    106.0,
+    394.1,
+    219.9,
+    423.9
+   ]
+  },
+  "p20-t1-r11-c3": {
+   "text": "Disseccamento dei rami e dell’intera pianta",
+   "table": "p20-t1",
+   "row": 11,
+   "column": 3,
+   "bbox": [
+    219.9,
+    394.1,
+    503.3,
+    423.9
+   ]
+  },
+  "p20-t1-r12-c1": {
+   "text": "32",
+   "table": "p20-t1",
+   "row": 12,
+   "column": 1,
+   "bbox": [
+    74.5,
+    423.9,
+    106.0,
+    445.2
+   ]
+  },
+  "p20-t1-r12-c2": {
+   "text": "Vinca sp.",
+   "table": "p20-t1",
+   "row": 12,
+   "column": 2,
+   "bbox": [
+    106.0,
+    423.9,
+    219.9,
+    445.2
+   ]
+  },
+  "p20-t1-r12-c3": {
+   "text": "Asintomatico",
+   "table": "p20-t1",
+   "row": 12,
+   "column": 3,
+   "bbox": [
+    219.9,
+    423.9,
+    503.3,
+    445.2
+   ]
+  },
+  "p20-t1-r13-c1": {
+   "text": "33",
+   "table": "p20-t1",
+   "row": 13,
+   "column": 1,
+   "bbox": [
+    74.5,
+    445.2,
+    106.0,
+    482.6
+   ]
+  },
+  "p20-t1-r13-c2": {
+   "text": "Westringia fruticosa",
+   "table": "p20-t1",
+   "row": 13,
+   "column": 2,
+   "bbox": [
+    106.0,
+    445.2,
+    219.9,
+    482.6
+   ]
+  },
+  "p20-t1-r13-c3": {
+   "text": "Bruscature fogliari, seguita da disseccamento di rami e di intere\nporzioni dell’arbusto",
+   "table": "p20-t1",
+   "row": 13,
+   "column": 3,
+   "bbox": [
+    219.9,
+    445.2,
+    503.3,
+    482.6
+   ]
+  },
+  "p20-t1-r14-c1": {
+   "text": "34",
+   "table": "p20-t1",
+   "row": 14,
+   "column": 1,
+   "bbox": [
+    74.5,
+    482.6,
+    106.0,
+    502.3
+   ]
+  },
+  "p20-t1-r14-c2": {
+   "text": "Westringia glabra",
+   "table": "p20-t1",
+   "row": 14,
+   "column": 2,
+   "bbox": [
+    106.0,
+    482.6,
+    219.9,
+    502.3
+   ]
+  },
+  "p20-t1-r14-c3": {
+   "text": "Asintomatico",
+   "table": "p20-t1",
+   "row": 14,
+   "column": 3,
+   "bbox": [
+    219.9,
+    482.6,
+    503.3,
+    502.3
+   ]
+  },
+  "p20-t1-r15-c1": {
+   "text": "35",
+   "table": "p20-t1",
+   "row": 15,
+   "column": 1,
+   "bbox": [
+    74.5,
+    502.3,
+    106.0,
+    530.6
+   ]
+  },
+  "p20-t1-r15-c2": {
+   "text": "Pistacia vera L.",
+   "table": "p20-t1",
+   "row": 15,
+   "column": 2,
+   "bbox": [
+    106.0,
+    502.3,
+    219.9,
+    530.6
+   ]
+  },
+  "p20-t1-r15-c3": {
+   "text": "Sintomi di disseccamento",
+   "table": "p20-t1",
+   "row": 15,
+   "column": 3,
+   "bbox": [
+    219.9,
+    502.3,
+    503.3,
+    530.6
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p20-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Table lists host plant species (numbered 21-35) with botanical names and symptom descriptions; it has no provincia/comune/cadastral scope columns and does not name a demarcated zone."
+   }
+  ],
+  "unattached": [
+   "Sul sito ufficiale della Regione Puglia www.emergenzaxylella.it e sul sito dei progetti europei H2020 XF-ACTORS e POnTE: https://www.xfactorsproject.eu/communication/photo-gallery/ sono pubblicate le immagini delle specie ospiti sia sintomatiche che asintomatiche a Xylella fastidiosa subsp. pauca ST53."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

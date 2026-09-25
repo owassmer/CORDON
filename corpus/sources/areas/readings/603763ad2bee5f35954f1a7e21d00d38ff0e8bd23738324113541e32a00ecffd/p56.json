@@ -1,0 +1,28 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 56,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "d766fb47f9e4fa88f86c5825b0f96aaf2afdf2b3ef4efe8ba11271c58fc24b9c",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:29:31.510973+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Screenshot of app form 'Nuovo Abbattimento' with fields: Codice buffer*, Specie, Abilita calcolo superficie, Traccia area di abbattimento, Area di abbattimento selezionata (ha), Coordinate dei vertici del poligono, Coltura, Data abbattimento (25/02/2025) — this is a UI screenshot illustrating a data collection app, not an annex table."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

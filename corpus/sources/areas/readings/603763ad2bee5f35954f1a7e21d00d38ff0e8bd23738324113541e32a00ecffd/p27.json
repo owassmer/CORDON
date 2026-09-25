@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 27,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "d9c38cc5b20e96ef0dae3c677da5449341cb3157e63a0eb05c99e5bdd1aa1381",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:56.946741+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ZONA CUSCINETTO E AREA INDENNE: Nelle maglie indicate come frutteti, in caso di consociazione si devono prelevare campioni dalla specie fruttifera prevalente.",
+   "ZONA INFETTA IN CUI SI APPLICANO MISURE DI CONTENIMENTO: nelle maglie indicate come frutteti non si devono prelevare campioni da: agrumi, pesco, albicocco, susino ma solo mandorlo o ciliegio se presenti.",
+   "Nelle zone infette oggetto di misure di eradicazione, eventuali olivi monumentali ufficialmente censiti o con caratteristiche di monumentalità, che non sono stati rimossi a norma dell'articolo 7, paragrafo 3 del Reg. UE 2020/1201, devono essere campionati annualmente e singolarmente al fine di verificare se non sono infetti da Xylella fastidiosa."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
