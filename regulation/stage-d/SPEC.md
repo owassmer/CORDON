@@ -510,59 +510,28 @@ notification only through A's mass-publicity route.
 Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
 through `recipient_results` (`read_prescriptions.py --records`), beside the
 clause's cohort result, which no supplied record moves. There is one result per
-recipient a delivery record names, keyed as that record names them. For a clause
-the writer emits per annex position, supplied records are joined to positions
-(`position_attachments`): a delivery joins the one position whose printed owner is
-the recipient it names (runs of whitespace aside) and which prints every work it
-names (foglio and particella, or a listed plant; the position prints no comune).
-That position's result then carries the position's governing rows per (row,
-predicate) and the recipient's notice and commencement together. Commencement,
-removal and history records attach to every position printing their work to which
-a delivery joined, and what counts there depends on the position's governing
-result for the work. Where it is `LAWFULLY_DUE_IN_PART`, the obliged works are the
-position's listed infected plants (`still_due_share`), and each supplied record is
-read once, on entry, for the still-due works it names: a delivery or history
-naming a parcel names every listed infected plant on it (notice of the parcel
-reaches the plant, and a complete history of the parcel covers it), and a record
-naming a plant names that plant. A commencement or removal that names only a
-parcel is not counted: positions attach listed plants only from their 50 m
-parcels, so the parcel also carries the withdrawn host work, and the record may
-be host felling or the plant's removal. It is reported with its cause and, as a
-record dated by day only does, holds completeness for each listed plant on that
-parcel, so C stays unknown and its result names the need for a record naming the
-plant. A reported record read as a plant shows the work it printed beside the
-plant. A record, or the part of a delivery, that
-names only withdrawn works (any other work of that position) is reported with its
-cause, naming the row and its effective date, and never counted, whatever its
-date: C's condition concerns this exact work, and felling a host never begins the
-removal of the plant still due. A delivery naming only withdrawn works gives no
-result. The rest runs as at any position, over the obliged plants: the history is
-complete only when the deliveries name every listed infected plant and each has a
-covering history, and a commencement or removal naming a plant counts on the
-plants the deliveries name; a record on a plant no delivery names is reported. At any other position
-the recipient's history is complete only when the supplied deliveries also name
-every parcel the position prints, and
-commencement and removal count on every work the deliveries name. A record that names
-no recipient, matches no position or several, or whose work is on no joined
-position, is reported unattached with its cause; nothing is defaulted. Other
-clauses keep the record's naming alone. A personal-delivery record is the delivery receipt only,
-never the acceptance receipt; it enters the communication predicate for its
-recipient only. The works a delivery record names are the operator's standing
-assertion of what that recipient is obliged to. Commencement and removal count for
-the work the record prints (comune, foglio and particella, or a plant identifier)
-and for every recipient a supplied record obliges to that work. A recipient's
-commencement history is complete only when every work it is obliged to has a
-stated history running from the order's adoption, or earlier, through C's
-deadline: `clock_boundary` on the notification C's `notice_instant` returns for
-that recipient, with the order's stated term, zone and calendar. A history stated
-as complete through a moment later than the evaluation is refused. The caller
-supplies no instant, order-text predicate or completeness of its own; what it
-cannot join is reported. Postings are public records read on PR #15's route, not
-supplied records: a recipient reached only by posting has no per-recipient result.
-Positions place printed owners on parcels only for the orders read per position,
-and a posting's notice there still waits on the mass-publicity row's court fact,
-which no D reader supplies; elsewhere it needs `party-land-standing`, which is not
-held.
+recipient a delivery record names, keyed as that record names them. The join from
+a supplied record to an annex position is not built here (planned in PR #40): for a clause
+the writer emits per annex position, each supplied record of the order is
+reported unattached with that cause, and no recipient there gets a per-recipient
+result. Other clauses keep the record's naming alone. A personal-delivery record
+is the delivery receipt only, never the acceptance receipt; it enters the
+communication predicate for its recipient only. The works a delivery record names
+are the operator's standing assertion of what that recipient is obliged to.
+Commencement and removal count for the work the record prints (comune, foglio and
+particella, or a plant identifier) and for every recipient a supplied record
+obliges to that work. A recipient's commencement history is complete only when
+every work it is obliged to has a stated history running from the order's
+adoption, or earlier, through C's deadline: `clock_boundary` on the notification
+C's `notice_instant` returns for that recipient, with the order's stated term,
+zone and calendar. A history stated as complete through a moment later than the
+evaluation is refused. The caller supplies no instant, order-text predicate or
+completeness of its own; what it cannot join is reported. Postings are public
+records read on PR #15's route, not supplied records: a recipient reached only by
+posting has no per-recipient result. Positions place printed owners on parcels
+only for the orders read per position, and a posting's notice there still waits
+on the mass-publicity row's court fact, which no D reader supplies; elsewhere it
+needs `party-land-standing`, which is not held.
 
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text
