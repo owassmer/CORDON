@@ -357,8 +357,18 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         # Without the history, C waits on commencement evidence and gives no direction.
         waiting, _ = self.run_records(supplied[:1])
         self.assertIsNone(waiting['ROTOLO IRENE']['recipients']['ROTOLO IRENE']['result'].truth)
-        # A commencement on the position's parcel before the deadline moves the holder to false.
+        # Due in part, a commencement before the deadline printed only on 57/89, which also carries withdrawn host
+        # work, does not decide: C stays unknown and names the need for a record naming the plant. One naming the
+        # listed infected plant moves the holder to false.
         began = fixture('fx-verbale-89', 'commencement', work=parcel('57', '89'),
+                        occurred=(PEC + timedelta(days=2)).isoformat())
+        held, _ = self.run_records(supplied + [began])
+        held = held['ROTOLO IRENE']['recipients']['ROTOLO IRENE']['result']
+        self.assertIsNone(held.truth)
+        self.assertTrue(any(n.startswith('a record naming the plant') for n in held.needs))
+        plants = [p for r in self.records for p in annex_position(r)['listed_infected_plants']
+                  if annex_position(r)['owner'] == 'ROTOLO IRENE']
+        began = fixture('fx-verbale-plant', 'commencement', work=dict(plant=plants[0]),
                         occurred=(PEC + timedelta(days=2)).isoformat())
         moved, _ = self.run_records(supplied + [began])
         self.assertIs(moved['ROTOLO IRENE']['recipients']['ROTOLO IRENE']['result'].truth, False)
@@ -442,11 +452,25 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertEqual(result['result'].effect, REQUIRED)
         self.assertEqual([(r['record'], r['work']['particella']) for r in run['reported']], [('fx-c-78', '78')])
         self.assertIn('not counted', run['reported'][0]['cause'])
-        # A commencement on the infected plant's parcel counts.
-        began = fixture('fx-c-270', 'commencement', work=parcel('57', '270'),
+        # A commencement printed only on the infected plant's parcel 57/270, which also carries withdrawn host work,
+        # may be host felling: it is reported and not counted, and it holds the plant's history, so C stays unknown
+        # and names the need for a record naming the plant.
+        on_parcel = fixture('fx-c-270', 'commencement', work=parcel('57', '270'),
+                            occurred=(PEC + timedelta(days=2)).isoformat())
+        run = self.borghese(supplied + [on_parcel])
+        held = run['recipients']['BORGHESE ANTONIO']
+        self.assertEqual(held['commencements'], {})
+        self.assertFalse(held['commencement_records_complete'])
+        self.assertIsNone(held['result'].truth)
+        self.assertTrue(any(n.startswith('a record naming the plant 1602200: fx-c-270') for n in held['result'].needs))
+        report = next(r for r in run['reported'] if r.get('record') == 'fx-c-270')
+        self.assertEqual((report['work']['particella'], report['plants']), ('270', [dict(plant='1602200')]))
+        self.assertIn('not counted', report['cause'])
+        # One naming plant 1602200 counts.
+        began = fixture('fx-c-plant', 'commencement', work=dict(plant='1602200'),
                         occurred=(PEC + timedelta(days=2)).isoformat())
         moved = self.borghese(supplied + [began])['recipients']['BORGHESE ANTONIO']
-        self.assertEqual(moved['commencements'], {'fx-c-270': PEC + timedelta(days=2)})
+        self.assertEqual(moved['commencements'], {'fx-c-plant': PEC + timedelta(days=2)})
         self.assertIs(moved['result'].truth, False)
 
     def test_a_delivery_naming_only_a_withdrawn_parcel_does_not_decide(self):
@@ -515,7 +539,10 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertEqual(run['recipients'], {})
         unused = [r for r in run['reported'] if 'fx-h-270' in r.get('records', ())]
         self.assertEqual(len(unused), 1)
-        self.assertEqual(unused[0]['cause'], 'no supplied record obliges a recipient to this work as printed')
+        # Read as the plant, it shows the work it printed beside it.
+        self.assertEqual(unused[0]['work'], dict(plant='1602200'))
+        self.assertEqual(unused[0]['printed'], {'fx-h-270': parcel('57', '270')})
+        self.assertNotIn('as printed', unused[0]['cause'])
 
 STORE = store_root(ROOT)
 FIVE = {'96/2023': 'dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7',

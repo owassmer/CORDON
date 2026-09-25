@@ -521,17 +521,25 @@ removal and history records attach to every position printing their work to whic
 a delivery joined, and what counts there depends on the position's governing
 result for the work. Where it is `LAWFULLY_DUE_IN_PART`, the obliged works are the
 position's listed infected plants (`still_due_share`), and each supplied record is
-read once, on entry, for the still-due works it names: a delivery, commencement,
-removal or history naming a parcel names every listed infected plant on it, and
-one naming a plant names that plant. A record, or the part of a delivery, that
+read once, on entry, for the still-due works it names: a delivery or history
+naming a parcel names every listed infected plant on it (notice of the parcel
+reaches the plant, and a complete history of the parcel covers it), and a record
+naming a plant names that plant. A commencement or removal that names only a
+parcel is not counted: positions attach listed plants only from their 50 m
+parcels, so the parcel also carries the withdrawn host work, and the record may
+be host felling or the plant's removal. It is reported with its cause and, as a
+record dated by day only does, holds completeness for each listed plant on that
+parcel, so C stays unknown and its result names the need for a record naming the
+plant. A reported record read as a plant shows the work it printed beside the
+plant. A record, or the part of a delivery, that
 names only withdrawn works (any other work of that position) is reported with its
 cause, naming the row and its effective date, and never counted, whatever its
 date: C's condition concerns this exact work, and felling a host never begins the
 removal of the plant still due. A delivery naming only withdrawn works gives no
 result. The rest runs as at any position, over the obliged plants: the history is
 complete only when the deliveries name every listed infected plant and each has a
-covering history, and commencement and removal count on the plants the deliveries
-name; a record on a plant no delivery names is reported. At any other position
+covering history, and a commencement or removal naming a plant counts on the
+plants the deliveries name; a record on a plant no delivery names is reported. At any other position
 the recipient's history is complete only when the supplied deliveries also name
 every parcel the position prints, and
 commencement and removal count on every work the deliveries name. A record that names

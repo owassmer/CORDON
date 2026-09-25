@@ -7,7 +7,7 @@ consequence and the governing A references. Positions listed in annexes are read
 by `annex_positions`, only for the orders an in-force governing row names with a
 whole-or-part effect; a record placed there carries its position in `recipients`.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, datetime, time
 from pathlib import Path
 import re
@@ -685,14 +685,19 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
     and the position's `governing_results` among `dueness`) whose governing result for the
     work is LAWFULLY_DUE_IN_PART (`still_due_share`), the obliged works are the position's
     listed infected plants, and every supplied record is read once, on entry, for the
-    still-due works it names: a delivery, commencement, removal or history naming a parcel
-    names every listed infected plant on it, and one naming a plant names that plant. A
-    record, or the part of a delivery, that names only withdrawn works (any other work on
-    the position) is reported with its cause and never counted; a delivery naming only
-    withdrawn works gives no result. The rest runs as at any position, over the obliged
-    plants: the history is complete only when the deliveries name every listed infected
-    plant. At any other annex position it is complete only when the supplied deliveries
-    also name every parcel the position prints.
+    still-due works it names: a delivery or history naming a parcel names every listed
+    infected plant on it, and a record naming a plant names that plant. A commencement or
+    removal that names only a parcel is not counted: the parcel also carries the withdrawn
+    50 m host work (positions attach listed plants only from their 50 m parcels), so it may
+    be host felling. It is reported with its cause and, as a day-only record does, holds
+    completeness for each listed plant on that parcel; an unknown result then names the need
+    for a record naming the plant. A record, or the part of a delivery, that names only
+    withdrawn works (any other work on the position) is reported with its cause and never
+    counted; a delivery naming only withdrawn works gives no result. A reported record read
+    as a plant shows the work it printed beside it. The rest runs as at any position, over
+    the obliged plants: the history is complete only when the deliveries name every listed
+    infected plant. At any other annex position it is complete only when the supplied
+    deliveries also name every parcel the position prints.
 
     The clause's cohort result stays `c_result` on cohort evidence only; no
     supplied record reaches it. For each recipient a delivery record names, the
@@ -721,6 +726,7 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
             raise ValueError(f"Record {r['record']} states a history complete through {r['complete_through']}, "
                              f'later than the evaluation at {evaluated_at.isoformat()}')
     reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
+    parcel_only, printed = {}, {}
     fixture = any(r['fixture'] for r in records)
     required = list((position or {}).get('parcels') or ())
     missing = dict(key='parcels', cause='the annex position prints parcel(s) no supplied delivery names; '
@@ -743,8 +749,26 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
                 reported.append(dict(record=r['record'], **(dict(works=off) if delivery else dict(work=off[0])),
                                      cause=withdrawn + ('; the delivery names no still-due work and gives no '
                                                         'result' if delivery and not due else '')))
+            if due and r['kind'] in ('commencement', 'removal') and 'plant' not in dict(r['works'][0]):
+                # The parcel also carries the withdrawn 50 m host work: performance printed only by parcel may be
+                # host felling. Not counted; it holds completeness for each plant, as a day-only record does.
+                for p in due:
+                    parcel_only.setdefault(p, []).append(r['record'])
+                reported.append(dict(record=r['record'], work=dict(r['works'][0]), plants=[dict(p) for p in due],
+                                     cause='performance printed only by a parcel that also carries withdrawn 50 m '
+                                           'host work; not counted, and the listed infected plant(s) on it stay '
+                                           'without a complete history until a record naming the plant'))
+                continue
+            if not delivery and due:
+                printed[r['record']] = r['works'][0]
             read += [dict(r, works=due)] if delivery and due else [dict(r, works=(p,)) for p in due if not delivery]
         records = read
+
+    def as_printed(names, work):
+        """Beside a work a record was read as naming, the work each record printed, where they differ."""
+        shown = {n: dict(printed[n]) for n in names if n in printed and printed[n] != work}
+        return dict(printed=shown) if shown else {}
+
     for r in records:
         if r['kind'] == 'personal-delivery':
             if not r['recipient'] or not r['recipient'].strip():
@@ -756,6 +780,7 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
             # C compares performance instants with the deadline; a day alone is not upgraded.
             undated.setdefault(r['works'][0], []).append(r['record'])
             reported.append(dict(record=r['record'], work=dict(r['works'][0]),
+                                 **as_printed([r['record']], r['works'][0]),
                                  cause='performance dated by day only; its work stays without a complete history'))
         elif r['kind'] in ('commencement', 'removal'):
             performed.setdefault(r['works'][0], {})[r['record']] = r['event'].occurred
@@ -766,8 +791,11 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
         if work not in everyone:
             names = (sorted(performed.get(work, {})) + sorted(undated.get(work, ()))
                      + sorted(h['record'] for h in histories.get(work, ())))
-            reported.append(dict(records=names, work=dict(work),
-                                 cause='no supplied record obliges a recipient to this work as printed'))
+            shown = as_printed(names, work)
+            reported.append(dict(records=names, work=dict(work), **shown,
+                                 cause=('no supplied record obliges a recipient to the listed infected plant these '
+                                        'records were read as naming' if shown else
+                                        'no supplied record obliges a recipient to this work as printed')))
     adopted = datetime.combine(date.fromisoformat(record['adopted']), time(), zone)
 
     def covers(history, deadline):
@@ -808,9 +836,20 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
             deadline = clock_boundary(snapshot, CLOCK, at, notification, zone=zone, calendar=calendar,
                                       stated_term=record['stated_term'])
             complete = bool(works) and not unnamed and all(any(covers(h, deadline) for h in histories.get(w, ()))
-                                                           and w not in undated for w in works)
+                                                           and w not in undated and w not in parcel_only
+                                                           for w in works)
         facts, notification = _c_facts(snapshot, record, at, commencement_records_complete=complete, **options)
-        results[recipient] = dict(result=evaluate(snapshot, RULE, at, facts), notification=notification,
+        result = evaluate(snapshot, RULE, at, facts)
+        wanted = set()
+        for w in works:
+            if w in parcel_only:
+                plant = dict(w)['plant']
+                foglio, particella = share['plants'][plant]
+                wanted.add(f"a record naming the plant {plant}: {', '.join(parcel_only[w])} print(s) only its parcel "
+                           f'(foglio {foglio}, particella {particella}), which also carries withdrawn 50 m host work')
+        if result.truth is None and wanted:
+            result = replace(result, needs=result.needs | wanted)
+        results[recipient] = dict(result=result, notification=notification,
                                   deadline=deadline, works=[dict(w) for w in works], commencements=commencements,
                                   commencement_records_complete=complete,
                                   records=sorted(n for v in instants.values() for n in v),
