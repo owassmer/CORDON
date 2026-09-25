@@ -13,7 +13,7 @@ from cordon_c.core import Evaluation, MissingInput, Snapshot, evaluate
 from cordon_c.quantities import clock_boundary
 from cordon_c.temporal import end_of_day
 from cordon_d.calendar import national_calendar
-from cordon_d.prescriptions import lawfully_due
+from cordon_d.prescriptions import bears_on_dueness, lawfully_due, required_rows
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
@@ -50,6 +50,9 @@ CORRECTION_11 = 'REG-PUGLIA-U181-DIR-2025-00011:case-delta:ownership-correction'
 WITHDRAWAL = 'REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn'
 HOLD = 'REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold'
 ST1 = 'REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary'
+# DDS 96/2023's Monopoli fork: every outcome is prose (Article 7 eradication for a pre-M4 event), none a dueness name.
+DDS96 = 'REG-PUGLIA-U181-DIR-2023-00096'
+FORK = 'REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork'
 HOSTS = "the population in question holds the named order's host plants within 50 m of its infected plants"
 LISTED = 'the population in question holds a plant the named order lists as infected'
 HELD = 'the population in question holds held olives'
@@ -271,7 +274,8 @@ class StatedTermRule(unittest.TestCase):
         self.assertEqual(work.needs, {f"this recipient's position in {DDS113['instrument']}'s annex (allegato 1/D), "
                                       f'which {WITHDRAWAL} limits in part'})
         self.assertIsNone(self.result(DDS113, at, refs=(WITHDRAWAL,), results=mixed, **held).truth)
-        # At a position the reading holds, naming the row; COERCE asks about the order's population.
+        # At a position the reading holds, naming the row. At order grain COERCE asks about the order's
+        # coercive population; at a position it is answered from the recipient's share, like WORK.
         self.assertIs(self.due(DDS113, at, WORK, refs=(WITHDRAWAL,), results=mixed, positioned=True).truth, True)
         self.assertIs(self.due(DDS113, at, COERCE, refs=(WITHDRAWAL,), results=mixed).truth, True)
         # The same class rule for the DDS 45/2023 hold on a 45/2023 cohort record.
@@ -353,6 +357,62 @@ class StatedTermRule(unittest.TestCase):
         for predicate in (WORK, COERCE):
             self.assertIs(self.due(DDS113, at, predicate, refs=(WITHDRAWAL,), results=self.per(WITHDRAWAL, other),
                                    positioned=True).truth, True)
+
+    # --- A row that cannot change dueness does not gate it; a resolved "not due" is final (PR #35 round 1) ---
+
+    def dds96(self):
+        """DDS 96/2023 at 2026-09-24, no court closure: its required rows, the Monopoli fork among them."""
+        at = date(2026, 9, 24)
+        record = dict(DDS113, instrument=DDS96)
+        required = tuple(sorted(required_rows(self.s, at, DDS96)))
+        self.assertIn(FORK, required)
+        self.assertIn(WITHDRAWAL, required)
+        return record, at, required
+
+    def test_a_96_hosts_only_position_with_the_fork_unresolved_reads_not_due(self):
+        record, at, required = self.dds96()
+        self.assertFalse(bears_on_dueness(self.s.version(FORK, at)))
+        self.assertTrue(bears_on_dueness(self.s.version(WITHDRAWAL, at)))
+        self.assertIsNone(evaluate(self.s, FORK, at, {}).truth)
+        results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, HOSTS_ONLY))
+        for predicate in (WORK, COERCE):
+            due = self.due(record, at, predicate, refs=required, results=results, positioned=True)
+            self.assertIs(due.truth, False)
+            self.assertIn(self.vid(WITHDRAWAL, at), due.provisions)
+
+    def test_a_96_letter_a_holder_reads_due_in_part(self):
+        # Guard for the rule that only a row bearing on dueness gates it: the unresolved fork does not.
+        record, at, required = self.dds96()
+        results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
+        for predicate in (WORK, COERCE):
+            due = self.due(record, at, predicate, refs=required, results=results, positioned=True)
+            self.assertIs(due.truth, True)
+            self.assertIn(self.vid(WITHDRAWAL, at), due.provisions)
+            self.assertFalse(any(FORK in need for need in due.needs))
+
+    def test_a_resolved_not_due_decides_whatever_other_rows_still_need(self):
+        # Guard for the finality rule: the fork is required but not reached, so it still names itself.
+        record, at, required = self.dds96()
+        unreached = tuple(sid for sid in required if sid != FORK)
+        self.assertIn(f'governing A reference: {FORK}', self.due(record, at, WORK, refs=unreached).needs)
+        results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, HOSTS_ONLY))
+        for predicate in (WORK, COERCE):
+            self.assertIs(self.due(record, at, predicate, refs=unreached, results=results, positioned=True).truth,
+                          False)
+        # A letter-a holder under the same missing reference stays unknown on it: in part does not decide.
+        mixed = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
+        due = self.due(record, at, WORK, refs=unreached, results=mixed, positioned=True)
+        self.assertIsNone(due.truth)
+        self.assertEqual(due.needs, {f'governing A reference: {FORK}'})
+
+    def test_an_unresolved_row_bearing_on_dueness_still_gates(self):
+        record, at, required = self.dds96()
+        vid = self.vid(WITHDRAWAL, at)
+        for predicate in (WORK, COERCE):
+            due = self.due(record, at, predicate, refs=required, positioned=True)
+            self.assertIsNone(due.truth)
+            self.assertTrue({f'predicate: {vid} :: {HOSTS}', f'predicate: {vid} :: {LISTED}'} <= due.needs)
+            self.assertFalse(any(self.vid(FORK, at) in need for need in due.needs))
 
 
 class MassPublicityNotice(unittest.TestCase):

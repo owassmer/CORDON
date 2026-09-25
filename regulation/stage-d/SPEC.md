@@ -443,8 +443,18 @@ the retained original's text layer, each rotated line placed in the band between
 the page's drawn row rules: the infected-plant rows (sample, foglio, particella)
 and the 50 m rows (foglio, particelle, owners). A position is one printed owner
 with every parcel printed against it and the listed infected plants on those
-parcels; a 50 m listing that places no recipient is a position with no recipient,
-unknown and naming its printed words. The infected-plant rows must equal the
+parcels. A 50 m listing that places no recipient is a position with no recipient,
+naming its printed words: it holds that listing's 50 m hosts (a strip printed with
+no parcel number, such as "STRADE" or "ACQUE", included) and the listed infected
+plants on its parcels, so a governing row answers it like any other position; no
+recipient is a notice-side fact, not a dueness need. Where such a listing held a
+listed infected plant, its position would be unknown, naming the listing and the
+plants. Whether a listing places no recipient is a lexical test: no parcel number,
+or an owner printed as not identified or not found (`NON INDIVIDUAT…`,
+`NON TROVAT…`). It is verified on the held annexes it has been run on (the five
+orders DDS 18/2024 names, and DDS 115/2023's "PROPRIETARI NON TROVATI"); a
+governing row that names another order re-verifies it on that order's annex. The
+infected-plant rows must equal the
 operative "n° N piante" and every infected plant's parcel must have a 50 m row
 naming its owners; otherwise every position of the order is unknown, naming the
 failed check. The position goes in the record's recipient positions field; the
@@ -461,12 +471,19 @@ order's own reading: its operative part prescribes the work to its recipients an
 names the population for coercion (`order_dueness`). `lawfully_due` holds that
 reading to every governing A row that is both required (in force, and the order's
 own or naming it) and reached, separately for the commencement-work and the
-coercive predicate, from each row's result for that predicate. A reached row that
-is unresolved passes its own needs through. A row whose result is
-`POPULATION_NOT_LAWFULLY_DUE` makes it false; one whose result is
-`LAWFULLY_DUE_IN_PART` keeps the reading and names the row, except that the work
-of a record carrying no annex position stays unknown, naming the recipient's
-position in the order's annex. No other effect is read. A stated change counts
+coercive predicate, from each row's result for that predicate. At an annex
+position the work and the coercive population in question are that recipient's
+share, so COERCE, like WORK, is answered from the recipient's share; at order
+grain COERCE asks about the order's coercive population. A reached row gates
+dueness only if one of its possible outcomes (any route or branch) is
+`POPULATION_NOT_LAWFULLY_DUE` or `LAWFULLY_DUE_IN_PART`; a row none of whose
+outcomes bears on dueness is not read. A reached row that bears on dueness and is
+unresolved passes its own needs through. A reached row whose result is
+`POPULATION_NOT_LAWFULLY_DUE` makes it false, whatever other rows still need, since
+the two names only withhold; one whose result is `LAWFULLY_DUE_IN_PART` keeps the
+reading and names the row, except that the work of a record carrying no annex
+position stays unknown, naming the recipient's position in the order's annex. No
+other effect is read. A stated change counts
 only from its stating act's adoption. A held court disposition reaches it from its
 publication: an annulment closes the order only for the scope the decision states
 (for the applicants, false for a recipient within it, live outside it, and

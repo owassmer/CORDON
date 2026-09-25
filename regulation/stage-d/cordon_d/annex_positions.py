@@ -21,16 +21,29 @@ position of the order is unknown, naming the failed check.
 Positions: one per owner printed in the 50 m tables, with every parcel printed against
 that owner and the listed infected plants standing on those parcels (a plant's owners
 are read from the 50 m row of its parcel, since the infected-plant table prints an owner
-once across several rows). A 50 m listing that places no recipient (no parcel number, or
-an owner printed as not identified) is one position with no recipient, whose cause names
-its printed words. Owners are printed names: joint owners are each a position, and
+once across several rows). Owners are printed names: joint owners are each a position, and
 printed variants are not merged.
 
+A 50 m listing that places no recipient is one position with no recipient (`owner` None),
+naming its printed words in `no_recipient`. The test is lexical: a listing with no parcel
+number (a strip printed as "STRADE" or "ACQUE"), or whose owner is printed as not
+identified or not found (`NON INDIVIDUAT…`, `NON TROVAT…`). It is verified on the held
+annexes it has been run on (the five orders DDS 18/2024 names, and DDS 115/2023's
+"PROPRIETARI NON TROVATI"); a governing row that names another order re-verifies it on
+that order's annex. The position is what the listing is: 50 m hosts (a strip with no parcel
+number is its own entry in `fifty_metre_parcels`, with no particella) and the listed
+infected plants on its parcels. The annex's check places every infected plant's parcel on
+an owned row, so such a position holds none; if one ever did, the position is unknown,
+naming the listing and the plants, and is never defaulted. No recipient is a notice-side
+fact (whom to notify), not a dueness need.
+
 Answering the row: each bound predicate takes its position field (non-empty is true); a
-position with no recipient, or of an order whose checks failed, leaves both unknown with
-its cause. The row is evaluated through `evaluate` per (record at a position, predicate).
-The position is the recipient's share of both the work and the coercive population, so
-the same facts answer WORK and COERCE.
+position of an order whose checks failed, or with a cause, leaves both unknown with its
+cause. The row is evaluated through `evaluate` per (record at a position, predicate). At a
+position the work and the coercive population in question are that recipient's share, so
+COERCE, like WORK, is answered from the recipient's share, and the same facts answer both.
+Position records do not carry the reading's coverage issue that the annex they are read
+from could not be read, once that annex is read with no failed check.
 """
 import bisect
 import copy
@@ -53,7 +66,8 @@ _PLACED = re.compile(r'(?<![\d,])\d{1,2},\d{3,}\s*\|\s*\d{1,2},\d{3,}\s*\|\s*(\d
 _ZONE = re.compile(r'ZON[AE]\s+INFETT[AE]\s+DI\s+50\s*M', re.I)
 _NUMBER = re.compile(r'(?<![\w,.])(\d{1,5})(?![\d,.])')
 _SEPARATOR = r'[\s|\-–—]*'
-_UNPLACED = re.compile(r'\bNON\s+INDIVIDUAT', re.I)
+# An owner printed as not identified or not found: lexical, verified on the held annexes (module docstring).
+_UNPLACED = re.compile(r'\bNON\s+(?:INDIVIDUAT|TROVAT)', re.I)
 # A company's legal form printed after a dash continues its name ("… LIMITATA - SOCIETA' AGRICOLA").
 _FORM = re.compile(r"^(?:SOCIET[AÀ]|S\.?\s?R\.?\s?L|S\.?\s?P\.?\s?A|S\.?\s?A\.?\s?S|S\.?\s?N\.?\s?C)", re.I)
 
@@ -232,10 +246,18 @@ def positions(annex, label):
         if not item['owners']:
             place = f"foglio {item['foglio']}" + (', particella ' + ', '.join(item['particelle'])
                                                   if item['particelle'] else '')
-            unplaced.append(dict(annex=f'allegato {label}', owner=None, printed=item['words'], parcels=parcels,
-                                 fifty_metre_parcels=parcels, listed_infected_plants=[], rows=[item['row']],
-                                 cause=f"annex {label} places this 50 m listing on no recipient: "
-                                       f"'{item['words']}' ({place})"))
+            # What the listing is: its 50 m hosts (a strip with no parcel number is its own entry)
+            # and the listed infected plants on its parcels.
+            hosts = parcels or [dict(foglio=item['foglio'], particella=None)]
+            held = [s for p in item['particelle'] for s in plants.get((item['foglio'], p), [])]
+            position = dict(annex=f'allegato {label}', owner=None, printed=item['words'], parcels=hosts,
+                            fifty_metre_parcels=hosts, listed_infected_plants=held, rows=[item['row']],
+                            no_recipient=f"annex {label} places this 50 m listing on no recipient: "
+                                         f"'{item['words']}' ({place})")
+            if held:
+                position['cause'] = (f"{position['no_recipient']}, and it holds listed infected plant(s) "
+                                     + ', '.join(held))
+            unplaced.append(position)
             continue
         for name in item['owners']:
             position = owners.setdefault(name, dict(annex=f'allegato {label}', owner=name, printed=name,
@@ -270,15 +292,28 @@ def expand(record, snapshot, at, store):
     label = annex_label(record)
     if label is None or not supplying_rows(snapshot, at, record['instrument']):
         return [record]
-    _, found = read_annex(str(blob_path(store, record['source'])), label)
+    annex, found = read_annex(str(blob_path(store, record['source'])), label)
     if not found:
         return [record]
+    issues = list(record.get('issues') or ())
+    if not annex['failures']:
+        # The reading's note that this annex could not be read no longer holds at a position read from it.
+        issues = [i for i in issues if not (isinstance(i, dict) and i.get('aspect') == 'coverage'
+                                            and label in _labels(i.get('detail') or ''))]
     return [dict(record, occurrence=f"{record['occurrence']}:annex {label}:position {k}",
-                 recipients=(copy.deepcopy(position),)) for k, position in enumerate(found)]
+                 recipients=(copy.deepcopy(position),), issues=copy.deepcopy(issues))
+            for k, position in enumerate(found)]
+
+
+def _labels(text):
+    """The annex labels a text names ('Allegato 1/D' -> {'1/D'})."""
+    return {re.sub(r'\s+', '', m.group(1)).upper() for m in _LABEL.finditer(text)}
 
 
 def governing_results(snapshot, record, at, position):
-    """Each supplying row's result for the record at its position, per (row, predicate)."""
+    """Each supplying row's result for the record at its position, per (row, predicate). The
+    position is the recipient's share of the work and of the coercive population, so one result
+    answers both WORK and COERCE."""
     if position is None:
         return {}
     bound, results = position_bindings(), {}

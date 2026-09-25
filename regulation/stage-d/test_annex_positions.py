@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from zoneinfo import ZoneInfo
 
 from cordon_c.core import Snapshot
@@ -92,11 +93,41 @@ class AnnexPositions(unittest.TestCase):
         self.assertEqual(terrapulia['listed_infected_plants'], ['1598862'])
         self.assertEqual(found['BORGHESE ANTONIO']['listed_infected_plants'], ['1602200'])
         self.assertEqual(len(found['BORGHESE ANTONIO']['parcels']), 4)
-        # A listing that places no recipient is unknown, naming its printed words.
-        self.assertEqual(found['STRADE']['cause'],
+        # A listing that places no recipient names its printed words and is what it is: 50 m hosts (the
+        # strip with no parcel number included) with no listed infected plant. No recipient is not a cause.
+        self.assertEqual(found['STRADE']['no_recipient'],
                          "annex 1/D places this 50 m listing on no recipient: 'STRADE' (foglio 15)")
         self.assertIn("'PROPRIETARI NON INDIVIDUATI' (foglio 15, particella 345)",
-                      found['PROPRIETARI NON INDIVIDUATI']['cause'])
+                      found['PROPRIETARI NON INDIVIDUATI']['no_recipient'])
+        self.assertEqual(found['STRADE']['fifty_metre_parcels'], [dict(foglio='15', particella=None)])
+        self.assertEqual(found['PROPRIETARI NON INDIVIDUATI']['fifty_metre_parcels'],
+                         [dict(foglio='15', particella='345')])
+        for name in ('STRADE', 'PROPRIETARI NON INDIVIDUATI'):
+            self.assertIsNone(found[name]['owner'])
+            self.assertEqual(found[name]['listed_infected_plants'], [])
+            self.assertNotIn('cause', found[name])
+
+    def test_an_owner_printed_as_not_found_places_no_recipient(self):
+        # DDS 115/2023 prints "PROPRIETARI NON TROVATI" (annex 1/D p. 24); the retained original is read below.
+        bands = BANDS[:11] + [(33, 19, 'CASTELLANA GROTTE | 15 | 336 | PROPRIETARI NON TROVATI')] + BANDS[11:]
+        found = by_owner(positions(parse(bands, 3), '1/D'))
+        self.assertNotIn('PROPRIETARI NON TROVATI', {p['owner'] for p in found.values()})
+        self.assertIsNone(found['PROPRIETARI NON TROVATI']['owner'])
+        self.assertIn("(foglio 15, particella 336)", found['PROPRIETARI NON TROVATI']['no_recipient'])
+
+    def test_a_no_recipient_listing_on_an_infected_plants_parcel_is_never_defaulted(self):
+        # Not printed in any held annex: the annex's check places every infected plant's parcel on an owned row,
+        # so a no-recipient listing holds none. If one did, the position is unknown, naming the listing and plant.
+        bands = BANDS[:11] + [(33, 19, 'CASTELLANA GROTTE | 15 | 80 | PROPRIETARI NON TROVATI')] + BANDS[11:]
+        annex = parse(bands, 3)
+        self.assertEqual(annex['failures'], [])
+        unplaced = [p for p in positions(annex, '1/D') if p['owner'] is None and p['listed_infected_plants']]
+        self.assertEqual(len(unplaced), 1)
+        self.assertIn('holds listed infected plant(s) 1598862', unplaced[0]['cause'])
+        results = governing_results(self.s, RECORD, date(2024, 3, 14), unplaced[0])
+        for predicate in (WORK, COERCE):
+            self.assertIsNone(results[(WITHDRAWAL, predicate)].truth)
+            self.assertIn(unplaced[0]['cause'], results[(WITHDRAWAL, predicate)].needs)
 
     def test_a_failed_check_leaves_every_position_unknown_naming_it(self):
         for printed, bands, words in ((4, BANDS, 'the infected-plant table has 3 rows; the order prints n° 4 piante'),
@@ -136,7 +167,9 @@ class AnnexPositions(unittest.TestCase):
         at = date(2024, 3, 14)
         found = by_owner(positions(parse(BANDS, 3), '1/D'))
         for name, effect in (('CISTERNINO PAOLA', 'POPULATION_NOT_LAWFULLY_DUE'),
-                             ('ROTOLO IRENE', 'LAWFULLY_DUE_IN_PART')):
+                             ('ROTOLO IRENE', 'LAWFULLY_DUE_IN_PART'),
+                             ('STRADE', 'POPULATION_NOT_LAWFULLY_DUE'),
+                             ('PROPRIETARI NON INDIVIDUATI', 'POPULATION_NOT_LAWFULLY_DUE')):
             results = governing_results(self.s, RECORD, at, found[name])
             for predicate in (WORK, COERCE):
                 self.assertEqual(results[(WITHDRAWAL, predicate)].effect, effect)
@@ -159,14 +192,33 @@ class AnnexPositions(unittest.TestCase):
         holder = at_position('ROTOLO IRENE')
         self.assertEqual(holder.effect, REQUIRED)
         self.assertIn(vid, holder.provisions)
-        unplaced = at_position('STRADE')
-        self.assertIsNone(unplaced.truth)
-        self.assertIn(found['STRADE']['cause'], unplaced.needs)
+        # A listing on no recipient is not due: its 50 m hosts are withdrawn whoever owns them.
+        for name in ('STRADE', 'PROPRIETARI NON INDIVIDUATI'):
+            unplaced = at_position(name)
+            self.assertEqual(unplaced.effect, NOT_ESTABLISHED)
+            self.assertIn(vid, unplaced.provisions)
         # The order-grain record under the same in-part result never reads due.
         mixed = governing_results(self.s, RECORD, at, found['ROTOLO IRENE'])
         cohort = c_result(self.s, RECORD, at, governing_results=mixed, **held)
         self.assertIsNone(cohort.truth)
         self.assertTrue(any("this recipient's position in" in need for need in cohort.needs))
+
+    def test_position_records_drop_the_readings_note_that_the_annex_could_not_be_read(self):
+        stale = dict(page=33, aspect='coverage', detail='Allegato 1/D (pages 33-34), which lists recipients and '
+                     'parcels, has a scrambled text layer; which owner goes with which parcel cannot be read reliably.')
+        kept = [dict(page=13, aspect='coverage', detail='Pages 13-15 (Allegato 1/A orthophotos) carry no native text.'),
+                dict(page=8, aspect='work', detail='Point 7 cites point 2 and point 3 for the 50 m plants.')]
+        record = dict(RECORD, issues=[kept[0], stale, kept[1]])
+        annex = parse(BANDS, 3)
+        with mock.patch.object(annex_positions, 'read_annex', return_value=(annex, positions(annex, '1/D'))):
+            expanded = annex_positions.expand(record, self.s, date(2024, 3, 14), Path('/nonexistent'))
+        self.assertEqual(len(expanded), 8)
+        self.assertTrue(all(r['issues'] == kept for r in expanded))
+        # Where the annex's checks fail, the note stands.
+        failed = parse(BANDS, 4)
+        with mock.patch.object(annex_positions, 'read_annex', return_value=(failed, positions(failed, '1/D'))):
+            expanded = annex_positions.expand(record, self.s, date(2024, 3, 14), Path('/nonexistent'))
+        self.assertTrue(all(stale in r['issues'] for r in expanded))
 
 
 STORE = store_root(ROOT)
@@ -207,9 +259,11 @@ class RetainedAnnexes(unittest.TestCase):
             self.assertEqual(found[name]['listed_infected_plants'], [])
         holder = [p for p in found.values() if dict(foglio='15', particella='80') in p['parcels']]
         self.assertEqual([p['listed_infected_plants'] for p in holder], [['1598862']])
-        self.assertIn("'STRADE' (foglio 15)", found['STRADE']['cause'])
+        self.assertIn("'STRADE' (foglio 15)", found['STRADE']['no_recipient'])
         self.assertIn("'PROPRIETARI NON INDIVIDUATI' (foglio 15, particella 345)",
-                      found['PROPRIETARI NON INDIVIDUATI']['cause'])
+                      found['PROPRIETARI NON INDIVIDUATI']['no_recipient'])
+        found = by_owner(self.read('138/2023')[1])
+        self.assertEqual(found['ACQUE']['fifty_metre_parcels'], [dict(foglio='2', particella=None)])
         found = by_owner(self.read('124/2023')[1])
         self.assertEqual(found['COMES VITTORIO']['parcels'], [dict(foglio='32', particella='319')])
         self.assertEqual(found['COMES VITTORIO']['listed_infected_plants'], [])
@@ -233,8 +287,14 @@ class RetainedAnnexes(unittest.TestCase):
         not_due = [r for r in clause0 if r['c']['truth'] is False]
         in_part = [r for r in clause0 if r['c']['truth'] is None and vid in r['c']['provisions']
                    and not any('lawfully due' in n or 'annex' in n for n in r['c']['needs'])]
-        unplaced = [r for r in clause0 if any('places this 50 m listing on no recipient' in n for n in r['c']['needs'])]
-        self.assertEqual((len(not_due), len(in_part), len(unplaced)), (3, 3, 2))
+        # The two listings on no recipient (STRADE, 15/345) are among the not due.
+        self.assertEqual((len(not_due), len(in_part)), (5, 3))
+        self.assertEqual(sum(1 for r in not_due if annex_position(r)['owner'] is None), 2)
+        self.assertFalse(any('no recipient' in n for r in records for n in r['c']['needs']))
+        # PR #15's note that annex 1/D cannot be read no longer rides on the positions read from it.
+        self.assertFalse(any(i.get('aspect') == 'coverage' and 'Allegato 1/D' in i.get('detail', '')
+                             for r in records for i in r['issues']))
+        self.assertTrue(all(any('Allegato 1/A' in i.get('detail', '') for i in r['issues']) for r in records))
         self.assertFalse(any('stated withdraws' in n for r in records for n in r['c']['needs']))
         # Clause 1 states no term: it never yields a direction, whatever the dueness.
         self.assertTrue(all(r['c']['truth'] is False for r in records if ':clause:1:' in r['occurrence']))
@@ -249,6 +309,22 @@ class RetainedAnnexes(unittest.TestCase):
             self.assertFalse(any(n.startswith('result of') for n in record['c']['needs']))
             self.assertTrue(any(n.startswith(f'predicate: {hold}:v2 :: the population in question holds')
                                 for n in record['c']['needs']))
+
+
+HELD_115 = '3605a828fee12f4fc719ad3f0a7e7a2ba1a39226486b5c9b5dfa813fe18c5c3d'
+
+
+@unittest.skipUnless(blob_path(STORE, HELD_115).exists(), 'retained original not in the store')
+class NotFoundOwner(unittest.TestCase):
+    def test_115_2023_places_15_336_on_no_recipient(self):
+        # DDS 115/2023 (store 3605a828…5c3d), annex 1/D p. 24: "ALBEROBELLO 15 336 PROPRIETARI NON TROVATI".
+        annex, found = annex_positions.read_annex(str(blob_path(STORE, HELD_115)), '1/D')
+        self.assertEqual(annex['failures'], [])
+        self.assertNotIn('PROPRIETARI NON TROVATI', {p['owner'] for p in found})
+        listing = [p for p in found if dict(foglio='15', particella='336') in p['parcels']]
+        self.assertEqual([(p['owner'], p['printed']) for p in listing], [(None, 'PROPRIETARI NON TROVATI')])
+        self.assertIn("(foglio 15, particella 336)", listing[0]['no_recipient'])
+        self.assertEqual(listing[0]['listed_infected_plants'], [])
 
 
 if __name__ == '__main__':

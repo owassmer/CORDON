@@ -40,6 +40,12 @@ CODE = (
     ('remove the no-position rule', 'cordon_d.prescriptions',
      'if partial and predicate == WORK and not positioned:', 'if False:',
      'test_prescriptions.StatedTermRule.test_in_part_never_makes_a_record_without_a_position_due'),
+    ('let a row that cannot change dueness gate it', 'cordon_d.prescriptions',
+     '        if not bears_on_dueness(snapshot.version(sid, at)):\n            continue\n', '',
+     'test_prescriptions.StatedTermRule.test_a_96_letter_a_holder_reads_due_in_part'),
+    ('let other rows\' needs outrank a resolved not due', 'cordon_d.prescriptions',
+     '    if withheld and reading is not None:\n', '    if withheld and reading is not None and not needs:\n',
+     'test_prescriptions.StatedTermRule.test_a_resolved_not_due_decides_whatever_other_rows_still_need'),
 )
 
 
