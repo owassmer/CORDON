@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+ "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "017753f316745516f42466b4adf7a95d5e5141da58f3e523bcb077d5a85ee0bb",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:21:33.090263+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "n. 1 focolaio puntiforme sito in agro di Santeramo in Colle (BA) costituito da una zona infetta di 50 m attorno a 2 mandorli infetti; zona cuscinetto di 2,5 km di raggio attorno alla zona infetta.",
+   "Di rappresentare con l'Allegato 1, parte integrante e sostanziale del presente provvedimento, i limiti geografici territoriali a livello regionale della zona \"infetta\" e \"cuscinetto\" dell'area delimitata a Xylella fastidiosa sottospecie multiplex ST26;",
+   "Di rappresentare con l'Allegato 1 bis, parte integrante del presente atto, il dettaglio del focolaio puntiforme sito in agro di Santeramo in Colle (BA).",
+   "Di riportare nell'Allegato 2 parte integrante del presente atto, i riferimenti catastali che consentono di individuare territorialmente la zona \"infetta\" e \"cuscinetto\" del focolaio puntiforme in agro di Santeramo in Colle (BA)."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

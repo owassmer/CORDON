@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 53,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f442d5fdd3dcca97f240447bbc90147d51315859339f4c80cbfa1b5bb4bf4d25",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:29:23.584106+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "PARTE VII",
+   "ESTIRPAZIONE PIANTE INFETTE"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

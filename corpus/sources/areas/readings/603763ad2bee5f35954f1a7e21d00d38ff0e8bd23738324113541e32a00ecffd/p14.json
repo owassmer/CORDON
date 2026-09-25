@@ -1,0 +1,28 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 14,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f899e13432a9a38d6e30dea17048582c1747597ffbe7241dd5c1dc4d41b02934",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:27:15.190121+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di seguito si riporta la mappa in cui sono evidenziate le attuali aree delimitate, presenti in Puglia,"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+ "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "1001403730617131ebfd621babd96cd48cd83c30c07131232dfa5e30e7d54ebd",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:02.947744+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "LEGENDA: Area delimitata Xylella fastidiosa sub. pauca; Area delimitata Xylella fastidiosa sub. fastidiosa; Area delimitata Xylella fastidiosa sub. multiplex; Confini provinciali"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

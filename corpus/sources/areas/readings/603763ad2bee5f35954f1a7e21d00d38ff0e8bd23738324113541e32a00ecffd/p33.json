@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 33,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8e2d7d6516a7914a1577e8f50940663a9294eb2ec3a66603983f225ae789b794",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:18.957224+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Scheda illustrativa - Campionamento pianta di olivo con presenza di sintomatologia sospetta - Le porzioni da cui prelevare rametti ben lignificati sono cerchiate in verde.",
+   "Rametti lignificati idonei per il campionamento di mandorlo o ciliegio"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

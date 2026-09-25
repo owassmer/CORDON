@@ -27,12 +27,14 @@ from cordon_c.core import Evaluation, Snapshot, evaluate
 from cordon_d import case_prescriptions
 from cordon_d.calendar import national_calendar
 from cordon_d.case_prescriptions import COMMUNICATED, PrescriptionReading, c_result, recipient_results, supplied_records, validate
+from cordon_d.prescriptions import COERCE, WORK
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
 SOURCE = '1d2e9b6111cdb33de96f1b1abeb49c1d3ad35019994404a74e59320d7850c2aa'
 ORDER = 'REG-PUGLIA-U181-DIR-2025-00117'
 DELTAS = (f'{ORDER}:case-delta:failed-service-represcription', f'{ORDER}:case-delta:st1-olive-nonmembership-boundary')
+OLIVES = 'the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected'
 PRESCRIBE = 'Di prescrivere, ai sensi della lettera a), comma 1 dell’art. 7 del Reg. UE 2020/1201, ai proprietari/conduttori i'
 PAGES = {
     1: ('DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 27 giugno 2025, n. 117\n'
@@ -95,7 +97,7 @@ BOUNDARY = datetime(2025, 7, 12, tzinfo=ROME)
 AFTER = datetime(2025, 7, 14, 12, 0, tzinfo=ROME)
 # The reviewers' evaluation time, long after the deadline.
 LATER = datetime(2026, 9, 25, 2, 0, tzinfo=ROME)
-REDUCED = {'commencement evidence through the source deadline', *(f'result of {d}' for d in DELTAS)}
+COMMENCEMENT_EVIDENCE = 'commencement evidence through the source deadline'
 
 
 def parcel(particella):
@@ -127,12 +129,24 @@ class OsservatorioRecords(unittest.TestCase):
         validate(READING, PAGES)
         reading = PrescriptionReading(dict(request_sha256='0' * 64, request=dict(sources=[SOURCE]), reading=READING))
         cls.record = next(reading.records(cls.s))
-        cls.settled = {}
+        # Governing results are keyed per (row, predicate) (PR #35); a settled row answers both. The ST1 boundary
+        # is settled for a population holding no uninfected, asymptomatic olive, so it limits nothing: under PR #35 a
+        # row limiting the order in part leaves a record with no annex position unknown on its work
+        # (`in_part` below keeps that settlement for the test that shows it).
+        cls.settled, cls.in_part = {}, {}
+        # Unsettled, each case delta passes its own predicate needs (PR #35), never 'result of' the row.
+        cls.row_needs = frozenset().union(*(evaluate(cls.s, sid, AT, {}).needs for sid in DELTAS))
+        assert cls.row_needs and not any(n.startswith('result of') for n in cls.row_needs)
         for sid in DELTAS:
             row = cls.s.version(sid, AT)
-            cls.settled[sid] = evaluate(cls.s, sid, AT, {(row['provision_version_id'], p): True
-                                                         for p in leaves(row['condition_ast'])})
-            assert cls.settled[sid].truth is not None
+            facts = {(row['provision_version_id'], p): True for p in leaves(row['condition_ast'])}
+            cls.in_part[(sid, WORK)] = cls.in_part[(sid, COERCE)] = evaluate(cls.s, sid, AT, facts)
+            facts[(row['provision_version_id'], OLIVES)] = False if sid == DELTAS[1] else True
+            result = evaluate(cls.s, sid, AT, facts)
+            assert result.truth is not None
+            assert result.effect not in ('POPULATION_NOT_LAWFULLY_DUE', 'LAWFULLY_DUE_IN_PART')
+            cls.settled[(sid, WORK)] = cls.settled[(sid, COERCE)] = result
+        assert cls.in_part[(DELTAS[1], WORK)].effect == 'LAWFULLY_DUE_IN_PART'
 
     def run_records(self, supplied, *, evaluated_at=AFTER, settled=False, **options):
         extra = dict(governing_results=self.settled) if settled else {}
@@ -151,7 +165,8 @@ class OsservatorioRecords(unittest.TestCase):
         for need in (COMMUNICATED, 'the source notification-based commencement deadline has elapsed',
                      'noncommencement of that work by the source deadline is established'):
             self.assertIn(f'predicate: {vid} :: {need}', cohort.needs)
-        self.assertTrue({f'result of {d}' for d in DELTAS} <= cohort.needs)
+        # The two case deltas are A decisions; since PR #35 a reached row names its own predicates.
+        self.assertTrue(self.row_needs <= cohort.needs)
         empty = self.run_records([])
         self.assertEqual(empty, dict(recipients={}, reported=[]))
 
@@ -161,7 +176,7 @@ class OsservatorioRecords(unittest.TestCase):
         self.assertEqual(nitti['notification'], PEC)
         self.assertTrue(nitti['fixture'])
         self.assertIsNone(nitti['result'].truth)
-        self.assertEqual(nitti['result'].needs, REDUCED)
+        self.assertEqual(nitti['result'].needs, {COMMENCEMENT_EVIDENCE} | self.row_needs)
         self.assertEqual(nitti['deadline'], BOUNDARY)
         self.assertNotIn('cohort', run)
         vid = self.s.version(case_prescriptions.RULE, AT)['provision_version_id']
@@ -318,6 +333,18 @@ class OsservatorioRecords(unittest.TestCase):
         # A mutated caller that passes a raw instant as notification is not what C returns without a true branch.
         self.assertIsNone(notice_instant(self.s, case_prescriptions.RULE, AT, {}, zone=ROME,
                                          instants={COMMUNICATED: PEC}))
+
+    def test_a_row_limiting_the_order_in_part_leaves_a_recipient_with_no_position_undecided(self):
+        # PR #35: with a row limiting the order in part, a recipient keyed only by a record's naming (no annex
+        # position) is never due on its work, whatever its notice and history; the need names its position.
+        supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158'), history('storia-158', '158')]
+        nitti = recipient_results(self.s, self.record, AT, supplied, evaluated_at=AFTER, zone=ROME,
+                                  calendar=national_calendar(), governing_results=self.in_part)['recipients'][
+            'Nitti Vincenzo']
+        self.assertTrue(nitti['commencement_records_complete'])
+        self.assertIsNone(nitti['result'].truth)
+        self.assertEqual(nitti['result'].needs, {
+            f"this recipient's position in {ORDER}'s annex (allegato 1/C), which {DELTAS[1]} limits in part"})
 
 
 if __name__ == '__main__':

@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+ "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "36fe59a08e27aff732f7eb4dce0f14781d7013b752fc8810eb2cbf9000695d1b",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:23:23.415760+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 27 luglio 2021, n. 69 - Reg. (UE) 2020/1201 – DGR 538/2021 – Aggiornamento delle aree delimitate alla Xylella fastidiosa sottospecie Pauca ST53 ai sensi del comma 1 dell'art. 5 del Reg. UE 2020/1201.",
+   "la Determina dirigenziale n° 179 del 14/12/2020 \"Reg. UE 2020/1201 – DGR 548/2020 Aggiornamento delle aree delimitate alla Xylella fastidiosa sottospecie Pauca ST53\" che ha aggiornato le aree delimitate"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
