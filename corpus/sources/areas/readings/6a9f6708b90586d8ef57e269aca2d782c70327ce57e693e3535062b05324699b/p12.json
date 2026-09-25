@@ -1,0 +1,344 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 12,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "324c3a34d52ead81c2d45d9f162a16b24b5a927379c305fe806940915f0e1754",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:24.882337+00:00",
+ "native_tables": [
+  {
+   "id": "p12-t1",
+   "bbox": [
+    54.3,
+    83.6,
+    534.8,
+    131.4
+   ]
+  },
+  {
+   "id": "p12-t2",
+   "bbox": [
+    54.3,
+    140.7,
+    534.8,
+    231.8
+   ]
+  }
+ ],
+ "native_cells": {
+  "p12-t1-r1-c1": {
+   "text": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Minervino Murge- ZONA INFETTA",
+   "table": "p12-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    54.3,
+    83.6,
+    534.8,
+    95.9
+   ]
+  },
+  "p12-t1-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p12-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    54.3,
+    95.9,
+    134.3,
+    113.5
+   ]
+  },
+  "p12-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p12-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    134.3,
+    95.9,
+    262.0,
+    113.5
+   ]
+  },
+  "p12-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE\nPIANTE RISULTATE INFETTE.",
+   "table": "p12-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    262.0,
+    95.9,
+    534.8,
+    113.5
+   ]
+  },
+  "p12-t1-r3-c1": {
+   "text": "BAT",
+   "table": "p12-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    54.3,
+    113.5,
+    134.3,
+    131.4
+   ]
+  },
+  "p12-t1-r3-c2": {
+   "text": "MINERVINO MURGE",
+   "table": "p12-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    134.3,
+    113.5,
+    262.0,
+    131.4
+   ]
+  },
+  "p12-t1-r3-c3": {
+   "text": "FOGLIO 61",
+   "table": "p12-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    262.0,
+    113.5,
+    534.8,
+    131.4
+   ]
+  },
+  "p12-t2-r1-c1": {
+   "text": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Minervino Murge - ZONA CUSCINETTO",
+   "table": "p12-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    54.3,
+    140.7,
+    534.8,
+    153.1
+   ]
+  },
+  "p12-t2-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p12-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    54.3,
+    153.1,
+    134.3,
+    179.4
+   ]
+  },
+  "p12-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p12-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    134.3,
+    153.1,
+    262.0,
+    179.4
+   ]
+  },
+  "p12-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p12-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    262.0,
+    153.1,
+    534.8,
+    179.4
+   ]
+  },
+  "p12-t2-r3-c1": {
+   "text": "BAT",
+   "table": "p12-t2",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    54.3,
+    179.4,
+    134.3,
+    231.8
+   ]
+  },
+  "p12-t2-r3-c2": {
+   "text": "MINERVINO MURGE",
+   "table": "p12-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    134.3,
+    179.4,
+    262.0,
+    231.8
+   ]
+  },
+  "p12-t2-r3-c3": {
+   "text": "FOGLI 25, 26, 27, 28, 29, 39, 40, 44, 45, 46, 47*, 48*, 49*, 50, 51, 59*, 60*, 61, 62*,\n63, 71, 72, 73*, 74*, 75, 76, 77, 101*, 104, 105, 106, 107, 111",
+   "table": "p12-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    262.0,
+    179.4,
+    534.8,
+    231.8
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Minervino Murge- ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t1-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Minervino Murge - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p12-t2-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p12-t2-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p12-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p12-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "3"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Minervino Murge- ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BAT",
+       "copied_from": "p12-t1-r3-c1"
+      },
+      "comune": {
+       "text": "MINERVINO MURGE",
+       "copied_from": "p12-t1-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 61",
+       "copied_from": "p12-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Minervino Murge - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BAT",
+       "copied_from": "p12-t2-r3-c1"
+      },
+      "comune": {
+       "text": "MINERVINO MURGE",
+       "copied_from": "p12-t2-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLI 25, 26, 27, 28, 29, 39, 40, 44, 45, 46, 47*, 48*, 49*, 50, 51, 59*, 60*, 61, 62*,\n63, 71, 72, 73*, 74*, 75, 76, 77, 101*, 104, 105, 106, 107, 111",
+       "copied_from": "p12-t2-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ]
+ },
+ "resolution_problems": []
+}

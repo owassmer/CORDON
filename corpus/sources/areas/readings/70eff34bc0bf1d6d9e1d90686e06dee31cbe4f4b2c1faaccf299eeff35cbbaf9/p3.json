@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+ "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "2fdeddce42e306e7177d051ee32408af4762d8563401c31ceea9e15e771d9af9",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:18:54.272692+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Istituire una nuova area delimitata denominata \"Valle D'Itria\" la cui zona infetta comprenda l'intero agro comunale di Polignano, Monopoli, Alberobello e parte dell'agro di Castellana Grotte nelle quali adottare misure di eradicazione di cui agli articoli da 7 a 11 del Reg. UE 2020/1201.",
+   "Stabilire che la zona cuscinetto della nuova area delimitata \"Valle D'Itria\" comprenda un territorio di larghezza di 5 chilometri dalla zona infetta.",
+   "Confermare la zona in cui si attuano misure di contenimento dell'area infetta di cui all'allegato III – parte A del Reg. UE 2020/1201 (indicata come area infetta Salento), definita ai sensi della lettera b) - comma 2 dell'art. 4 dello stesso Regolamento.",
+   "Di applicare le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario in tutte le particelle catastali che rientrano anche parzialmente nelle aree delimitate.",
+   "Di rappresentare i limiti territoriali delle aree delimitate con l'Allegato 1 e 1bis al presente provvedimento che ne formano parte integrante e sostanziale;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

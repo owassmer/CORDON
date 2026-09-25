@@ -1,0 +1,43 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+ "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "015cb21e67c9322e29bd69fff0fec14cf5a22f70fb1a49a692e522cb424b7321",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:26:28.640527+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 BIS (title of map annex)",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Infetta",
+   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Cuscinetto",
+   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle/Ginosa) - Zona Cuscinetto in Basilicata",
+   "Legenda: Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Infetta",
+   "Legenda: Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Cuscinetto",
+   "Legenda: Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Infetta",
+   "Legenda: Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto",
+   "Legenda: Area delimitata Xylella fastidiosa sub. pauca - Zona Cuscinetto",
+   "Legenda: Area delimitata Xylella fastidiosa sub. pauca - Zona Contenimento",
+   "Legenda: Area delimitata Xylella fastidiosa sub. pauca - Zona Infetta",
+   "Legenda: Regione Basilicata",
+   "Legenda: Confini Provinciali",
+   "www.emergenzaxylella.it"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

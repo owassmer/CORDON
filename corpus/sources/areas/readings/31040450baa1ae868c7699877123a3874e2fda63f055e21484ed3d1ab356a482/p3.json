@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00012",
+ "act_sha256": "31040450baa1ae868c7699877123a3874e2fda63f055e21484ed3d1ab356a482",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "5cebe683f61f467150e3e38d64eddbd88aa09704eb88704240461eff0a07d064",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:20:30.655431+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "n. 3 focolai puntiformi siti in agro di Triggiano (BA) costituiti, ciascuno, da una zona infetta di 50 m attorno ai 6 mandorli infetti;",
+   "zona cuscinetto di 2,5 km di raggio attorno alle predette zone infette."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
