@@ -27,7 +27,8 @@
         "Pre-13-March-2021 authority for the affected regional version class if a pre-2021 event enters scope",
         "DDS 148/2024 exact Santeramo ST26 intermediate geometry",
         "DDS 39/2021 predecessor procedure meaning for its bounded interval",
-        "DDS 51/2023 correction scope relative to DDS 48/2023"
+        "DDS 51/2023 correction scope relative to DDS 48/2023",
+        "IT-PNI-2026:adoption-and-publication-status:v1's route table is not exclusive: its branch 2 reads 'decision time within programme year 2026' alone, which C makes true wherever the row applies, so a run holding proof of non-adoption or non-coverage raises 'Nonexclusive legal routes' instead of returning the false_effect's defeat. Branch 2 should read all_of[decision time within programme year 2026, not(evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory)]; reopen A for it if a record ever proves non-adoption (PR #39)"
       ],
       "reopening_rule": "Name the affected proposition and show source evidence that falsifies or materially completes the accepted meaning."
     },
@@ -67,12 +68,12 @@
       },
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
-        "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr32.json",
-        "sha256": "9ca7c10d09f401a28fa9d6063c5362ae0b89f1f6f673b4b3473ef9b5b9404347"
+        "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr39.json",
+        "sha256": "7e5f1993d241b5ff7d66cf0c04806f0a8e4ac936d097a2d6c58d6d963783c85c"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "b1772983f66ad825a883732d8b728fe6ae932908864aaa05682714969281c331",
+        "sha256": "1bf786abadcaf8c011c5d018f1c6a851c69bab039f7af517fc430ac07ddf985e",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },
@@ -92,6 +93,7 @@
         "Rebuild row 3 adopted geography as each adopting act defines the zone (PR #8).",
         "Encode DDS 18/2024's withdrawal of 50 m host removal from five 2023 orders in Stage A, so 113/2023 and 124/2023 become definite (PR #35).",
         "Supply the Osservatorio-held records for live removal orders: recipient delivery, standing and execution (rows 7, 8 and 11; PR #33).",
+        "Supply printed delivery dates from result-documents to sample-custody, after settling which printed label is delivery: the reading takes 'Data ricevimento campione' as delivery in report 621959b9… and as acceptance in 73426d42…, and labels report 103227e1…'s 'Data prelievo campione' with the generic role date rather than sampling_date (follows PR #39).",
         "Replace the stated device term with a held input named in plant-population's positional_qualification: ARIF's per-fix accuracy or device and capture mode per record, a bound from re-samples linked by ID_CAMPIONE, or a calibration of the documented device and app.",
         "Replan subject populations (rows 4-5) on the rebuilt PR #8; continue protected plants; then run whole-D convergent review for Owen acceptance before Stage E."
       ]

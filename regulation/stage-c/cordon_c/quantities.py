@@ -161,6 +161,15 @@ def clock_boundary(snapshot: Snapshot, identity: str, at: date, anchor: date | d
     return end_of_day(last, zone)
 
 
+def _local_day(value: date | datetime, zone: ZoneInfo) -> date:
+    """An instant's local calendar day, or a printed date as the day it states."""
+    if isinstance(value, datetime):
+        return utc(value).astimezone(zone).date()
+    if type(value) is not date:
+        raise TypeError("A calendar date or an instant is required")
+    return value
+
+
 def before_boundary(event: datetime, exclusive_end: datetime) -> bool:
     return utc(event) < utc(exclusive_end)
 
@@ -170,7 +179,7 @@ def threshold_reached(event: datetime, inclusive_start: datetime) -> bool:
 
 
 def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
-                        anchor: date | datetime, completed_at: datetime | None,
+                        anchor: date | datetime, completed_at: date | datetime | None,
                         evaluated_at: datetime, completion_history_complete: bool,
                         zone: ZoneInfo, calendar: WorkingCalendar | None = None,
                         rule: PeriodRule | None = None) -> Evaluation:
@@ -181,6 +190,9 @@ def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
     Before expiry, an unperformed deadline is still open; after expiry, absence
     is established only from a complete performance history. Early performance
     is not rejected by a generic lower bound absent a source requirement.
+    A printed completion date is a day, never an instant: only a same-calendar-
+    day clock takes one. On evaluation's own local day it may fall after
+    evaluation, so it decides only where that reading gives the same answer.
     """
     row = snapshot.quantity(identity, at)
     if row["kind"] not in {"deadline", "same_calendar_day"}:
@@ -188,13 +200,28 @@ def timely_completion(snapshot: Snapshot, identity: str, at: date, *,
     boundary = clock_boundary(snapshot, identity, at, anchor, zone=zone,
                                calendar=calendar, rule=rule)
     through = utc(evaluated_at)
+    if completed_at is not None and not isinstance(completed_at, datetime):
+        if row["kind"] != "same_calendar_day":
+            raise MissingInput(f"{identity}: completion time, not just its date")
+        if _local_day(completed_at, zone) > _local_day(through, zone):
+            raise ValueError("Performance cannot be later than evaluation")
+        if completed_at == _local_day(through, zone):
+            # Performed by evaluation that day, or after it and so not yet
+            # performed: the days decide only where both readings agree.
+            if completed_at != _local_day(anchor, zone):
+                absent = timely_completion(snapshot, identity, at, anchor=anchor, completed_at=None,
+                                           evaluated_at=evaluated_at, zone=zone, calendar=calendar, rule=rule,
+                                           completion_history_complete=completion_history_complete)
+                if absent.truth is False:
+                    return absent
+            return Evaluation(None, needs=frozenset({f"{identity}: completion dated {completed_at}, the day of evaluation"}))
+        return Evaluation(completed_at == _local_day(anchor, zone))
     if completed_at is not None:
         completed = utc(completed_at)
         if completed > through:
             raise ValueError("Performance cannot be later than evaluation")
         if row["kind"] == "same_calendar_day":
-            day = utc(anchor).astimezone(zone).date() if isinstance(anchor, datetime) else anchor
-            return Evaluation(completed.astimezone(zone).date() == day)
+            return Evaluation(_local_day(completed, zone) == _local_day(anchor, zone))
         # Elapsed-hour boundaries are instants; exact equality meets 'within'.
         # Whole-day boundaries are following midnight, hence exclusive.
         return Evaluation(completed <= utc(boundary) if row["unit"] == "hours" else completed < utc(boundary))

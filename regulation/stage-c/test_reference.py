@@ -21,7 +21,7 @@ from pyproj import CRS
 from shapely.geometry import Point, Polygon, MultiPolygon, box, LineString
 
 from cordon_c import Evaluation, MissingInput, Snapshot, evaluate
-from cordon_c.core import conjunction, disjunction
+from cordon_c.core import DATE_INTERVALS, conjunction, disjunction
 from cordon_c.bindings import assay_facts, leaves, merge_facts, wait_facts
 from cordon_c.diagnostic import AssayResult
 from cordon_c.quantities import metres, clock_boundary, PeriodRule, planned_workload_difference
@@ -1607,13 +1607,243 @@ class OwnerRulings20260924(unittest.TestCase):
         identity = "PUG-DGR343-2022:Art7(3)-policy"
         at = date(2022, 10, 3)
         row = self.s.version(identity, at)
-        base = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])}
+        base = {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"]) if p not in DATE_INTERVALS}
         listed = listing_facts(self.s, at, own_entry=True, first_publication=date(2021, 6, 1),
                                definitive_decision=(date(2022, 3, 1), True), deletion=None, entry_history_complete=True)
         pending = listing_facts(self.s, at, own_entry=True, first_publication=date(2022, 6, 1),
                                 definitive_decision=None, deletion=None, entry_history_complete=True)
         self.assertIs(evaluate(self.s, identity, at, base | listed).truth, True)
         self.assertIs(evaluate(self.s, identity, at, base | pending).truth, False)
+
+
+class RunDateIntervals(unittest.TestCase):
+    """Interval wordings from the run's event date; same-day custody from printed dates.
+
+    Custody fixtures are marked: they carry the dates held laboratory reports
+    print (report hash prefixes named), not the reports themselves.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.s = Snapshot.load()
+
+    def interval(self, identity, text, at):
+        """The wording alone, evaluated on the accepted row's own dates and named versions."""
+        rows = [dict(r, condition_ast={"predicate": text}) if r["stable_provision_id"] == identity else r
+                for r in self.s.versions.values()]
+        s = Snapshot(rows, dict(clocks=[], parameters=[], dispositions=[]))
+        return evaluate(s, identity, at)
+
+    def others_true(self, identity, at, *exclude):
+        row = self.s.version(identity, at)
+        return {(row["provision_version_id"], p): True for p in leaves(row["condition_ast"])
+                if p not in DATE_INTERVALS and p not in exclude}
+
+    def test_pre_m4_ends_at_m4_and_turns_the_monopoli_fork(self):
+        monopoli = "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork"
+        self.assertIs(self.interval(monopoli, "pre-M4 event time", date(2024, 6, 4)).truth, True)
+        self.assertIs(self.interval(monopoli, "pre-M4 event time", date(2024, 6, 5)).truth, False)
+        before = evaluate(self.s, monopoli, date(2024, 6, 4), self.others_true(monopoli, date(2024, 6, 4)))
+        self.assertIs(before.truth, True)
+        after = evaluate(self.s, monopoli, date(2024, 6, 5), self.others_true(monopoli, date(2024, 6, 5)))
+        self.assertEqual((after.truth, after.effect),
+                         (False, self.s.version(monopoli, date(2024, 6, 5))["condition_ast"]["otherwise"]["effect"]))
+        # A false interval decides the conjunction without the other conjuncts.
+        self.assertIs(evaluate(self.s, monopoli, date(2024, 6, 5)).truth, False)
+        conflict = "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict"
+        self.assertIs(self.interval(conflict, "pre-M4 event time", date(2024, 4, 8)).truth, True)
+        self.assertIn("applicable legal version", next(iter(
+            self.interval(conflict, "pre-M4 event time", date(2024, 4, 7)).needs)))
+
+    def test_programme_year_2026_and_its_outside_wording(self):
+        adoption, design = "IT-PNI-2026:adoption-and-publication-status", "IT-PNI-2026:Xylella:Puglia-plant-survey-design"
+        for day in (date(2026, 1, 1), date(2026, 12, 31)):
+            self.assertIs(self.interval(adoption, "decision time within programme year 2026", day).truth, True)
+            self.assertIs(self.interval(design, "evidence proves event outside PNI binding interval", day).truth, False)
+            facts = self.others_true(adoption, day)
+            facts[self.s.version(adoption, day)["provision_version_id"],
+                  "evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory"] = False
+            self.assertEqual(evaluate(self.s, adoption, day, facts).effect, "PNI_2026_ADOPTED_AND_PUBLISHED")
+        # Known A defect, named as a residual: IT-PNI-2026:adoption-and-publication-status:v1's
+        # route table is not exclusive. Its second branch is true on every day the row applies,
+        # so proven non-adoption raises instead of returning A's defeat. A's repair makes that
+        # branch all_of[interval, not(non-adoption)].
+        day = date(2026, 5, 1)
+        proven = {(self.s.version(adoption, day)["provision_version_id"],
+                   "evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory"): True}
+        with self.assertRaisesRegex(ValueError, "Nonexclusive legal routes: IT-PNI-2026:adoption-and-publication-status:v1"):
+            evaluate(self.s, adoption, day, proven)
+        for day in (date(2025, 12, 31), date(2027, 1, 1)):
+            for identity, text in ((adoption, "decision time within programme year 2026"),
+                                   (design, "evidence proves event outside PNI binding interval")):
+                result = self.interval(identity, text, day)
+                self.assertIsNone(result.truth)
+                self.assertEqual(result.needs, {f"applicable legal version: {identity} at {day}"})
+
+    def test_regional_plan_and_2022_national_plan_intervals(self):
+        dgr343, dgr1866 = "PUG-DGR343-2022:Art7(3)-policy", "PUG-DGR1866-2022:Art7(3)-policy"
+        self.assertIs(self.interval(dgr343, "effective plan interval", date(2022, 12, 11)).truth, True)
+        self.assertIsNone(self.interval(dgr343, "effective plan interval", date(2022, 12, 12)).truth)
+        self.assertIs(self.interval(dgr1866, "effective plan interval", date(2022, 12, 12)).truth, True)
+        plan = "IT-DM-2022-XYLELLA-PLAN:§6.5:containment-buffer-5km"
+        self.assertIs(self.interval(plan, "effective 2022 national plan interval", date(2026, 8, 5)).truth, True)
+        self.assertIsNone(self.interval(plan, "effective 2022 national plan interval", date(2026, 8, 6)).truth)
+
+    def test_post_m5_holds_from_each_case_deltas_own_date(self):
+        for number, first in (("2024-00138", date(2024, 10, 28)), ("2024-00151", date(2024, 11, 14)),
+                              ("2025-00115", date(2025, 6, 25)), ("2026-00035", date(2026, 3, 9))):
+            identity = f"REG-PUGLIA-U181-DIR-{number}:case-delta:post-m5-stale-article7-text"
+            self.assertIs(self.interval(identity, "post-M5 case date", first).truth, True)
+        self.assertEqual(self.s.versions["EU-2020-1201:7(1)(e):v2"]["effective_from"], "2024-10-17")
+
+    def test_interval_results_cite_the_version_whose_date_decided_them(self):
+        monopoli = "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork"
+        fork = evaluate(self.s, monopoli, date(2024, 6, 5))
+        self.assertIs(fork.truth, False)
+        self.assertIn("REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1", fork.provisions)
+        post = "REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text"
+        at = date(2024, 10, 28)
+        self.assertIn("EU-2020-1201:7(1)(e):v2", evaluate(self.s, post, at, self.others_true(post, at)).provisions)
+        self.assertEqual(self.interval(post, "post-M5 case date", at).provisions,
+                         {"EU-2020-1201:7(1)(e):v2", self.s.version(post, at)["provision_version_id"]})
+
+    def test_interval_wordings_refuse_supplied_facts_and_reader_answers(self):
+        cases = [("REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork", "pre-M4 event time", date(2024, 6, 5)),
+                 ("REG-PUGLIA-U181-DIR-2024-00138:case-delta:post-m5-stale-article7-text", "post-M5 case date", date(2024, 10, 28)),
+                 ("PUG-DGR538-2021:Art7(3)-policy", "effective plan interval", date(2021, 5, 1)),
+                 ("IT-PNI-2026:adoption-and-publication-status", "decision time within programme year 2026", date(2026, 3, 1)),
+                 ("IT-PNI-2026:Xylella:Puglia-plant-survey-design", "evidence proves event outside PNI binding interval", date(2026, 3, 1)),
+                 ("IT-DM-2022-XYLELLA-PLAN:§6.5:containment-buffer-5km", "effective 2022 national plan interval", date(2023, 1, 1)),
+                 ("REG-PUGLIA-U181-DIR-2024-00018:area-state-transition", "decision time within this version's effective interval", date(2024, 4, 1))]
+        self.assertEqual({text for _, text, _ in cases}, set(DATE_INTERVALS))
+        for identity, text, at in cases:
+            vid = self.s.version(identity, at)["provision_version_id"]
+            for value in (True, False, Evaluation(None)):
+                with self.subTest(text=text, value=value), self.assertRaises(ValueError):
+                    evaluate(self.s, identity, at, {(vid, text): value})
+            for value in (True, Evaluation(False)):
+                with self.subTest(text=text, reader=value), self.assertRaises(ValueError):
+                    evaluate(self.s, identity, at, reader=lambda row, p: value if p == text else Evaluation(None))
+            # A reader that holds nothing for the wording is not an answer.
+            evaluate(self.s, identity, at, reader=lambda row, p: Evaluation(None))
+
+    def test_load_checks_interval_wordings_against_a(self):
+        self.assertEqual(self.s.versions["REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1"]["effective_to_exclusive"],
+                         "2024-06-05")
+        drifted = dict(DATE_INTERVALS)
+        drifted["pre-M4 event time"] = ("before_end_of", "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1",
+                                        DATE_INTERVALS["pre-M4 event time"][2][:1])
+        for table in (drifted, dict(DATE_INTERVALS, **{"pre M4 event time": DATE_INTERVALS["pre-M4 event time"]}),
+                      dict(DATE_INTERVALS, **{"post-M5 case date": ("from_start_of", "EU-2020-1201:7(1)(e):v9",
+                                                                    DATE_INTERVALS["post-M5 case date"][2])})):
+            with self.subTest(table=sorted(set(table.items()) ^ set(DATE_INTERVALS.items()))):
+                original = dict(DATE_INTERVALS)
+                DATE_INTERVALS.clear(); DATE_INTERVALS.update(table)
+                try:
+                    with self.assertRaises(ValueError):
+                        Snapshot.load()
+                finally:
+                    DATE_INTERVALS.clear(); DATE_INTERVALS.update(original)
+
+    def test_left_out_interval_wordings_stay_semantic_inputs(self):
+        for wording in ("event occurs on/after exact commencement",
+                        "event lies near unresolved original commencement and no independent later confirmation governs"):
+            self.assertNotIn(wording, DATE_INTERVALS)
+        self.assertFalse([w for w in DATE_INTERVALS if "pre-L.R.45" in w or "commencement" in w])
+        crea = next(r for r in self.s.versions.values() if "event occurs on/after exact commencement" in set(leaves(r["condition_ast"])))
+        need = f"predicate: {crea['provision_version_id']} :: event occurs on/after exact commencement"
+        self.assertIn(need, evaluate(self.s, crea["provision_version_id"], AT).needs)
+
+    def custody(self, identity, at, **kwargs):
+        from cordon_c.bindings import custody_facts
+        args = dict(evaluated_at=datetime(2026, 9, 8, 12, tzinfo=ROME), delivery_records_complete=False,
+                    refrigerated_transport=Evaluation(None, needs=frozenset({"refrigerated transport"})),
+                    other_mandatory_failure=Evaluation(False), zone=ROME) | kwargs
+        return {text: value for (_, text), value in custody_facts(self.s, identity, at, **args).items()}
+
+    def test_printed_custody_days_decide_same_day_delivery(self):
+        dds31, dds45 = "REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer", "REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer"
+        # Report 621959b9…3549 (DDS 31): prelievo 02/08/2022, ricevimento 02/08/2022 read as delivery here.
+        same = self.custody(dds31, date(2022, 8, 2), collected_at=date(2022, 8, 2), delivered_at=date(2022, 8, 2))
+        self.assertIsNone(same["same-day delivery in refrigerated transport"].truth)
+        self.assertEqual(same["same-day delivery in refrigerated transport"].needs, {"refrigerated transport"})
+        self.assertIs(self.custody(dds31, date(2022, 8, 2), collected_at=date(2022, 8, 2), delivered_at=date(2022, 8, 2),
+                                   refrigerated_transport=Evaluation(True))["same-day delivery in refrigerated transport"].truth, True)
+        # Report 1aae28ef…f8a0 (DDS 45): campionamento 18/02/2026 and 20/02/2026, consegnati 26/02/2026.
+        for collected in (date(2026, 2, 18), date(2026, 2, 20)):
+            late = self.custody(dds45, collected, collected_at=collected, delivered_at=date(2026, 2, 26))
+            self.assertIs(late["same-day delivery and refrigerated transport"].truth, False)
+            self.assertIs(late["evidence proves a mandatory source custody condition failed"].truth, True)
+        # Reports 88bffe89…7593 and 103227e1…a00c (DDS 31): prelievo and accettazione the same day; no delivery date.
+        for collected in (date(2024, 1, 30), date(2024, 2, 20)):
+            for through in (datetime(2024, 1, 30, 12, tzinfo=ROME), datetime(2024, 2, 21, tzinfo=ROME), datetime(2026, 9, 8, tzinfo=ROME)):
+                if through.date() < collected:
+                    continue
+                pending = self.custody(dds31, collected, collected_at=collected, delivered_at=None, evaluated_at=through,
+                                       refrigerated_transport=Evaluation(True))["same-day delivery in refrigerated transport"]
+                self.assertIsNone(pending.truth)
+                self.assertTrue(any("B-CLK-DDS31-custody-same-day" in need for need in pending.needs))
+
+    def test_mixed_precision_custody_never_chooses_a_time_of_day(self):
+        dds45, at = "REG-PUGLIA-U181-DIR-2025-00045:sample-custody-transfer", date(2026, 9, 1)
+        timing = "same-day delivery and refrigerated transport"
+        transport = dict(refrigerated_transport=Evaluation(True))
+        self.assertIs(self.custody(dds45, at, collected_at=datetime(2026, 9, 1, 10, 30, tzinfo=ROME),
+                                   delivered_at=date(2026, 9, 1), **transport)[timing].truth, True)
+        self.assertIs(self.custody(dds45, at, collected_at=datetime(2026, 9, 1, 23, 30, tzinfo=ROME),
+                                   delivered_at=date(2026, 9, 2), **transport)[timing].truth, False)
+        self.assertIs(self.custody(dds45, at, collected_at=date(2026, 9, 1),
+                                   delivered_at=datetime(2026, 9, 1, 0, 5, tzinfo=ROME), **transport)[timing].truth, True)
+        with self.assertRaises(ValueError):
+            self.custody(dds45, at, collected_at=datetime(2026, 9, 1, 10, 30, tzinfo=ROME), delivered_at=date(2026, 8, 31))
+        with self.assertRaises(TypeError):
+            self.custody(dds45, at, delivered_at=date(2026, 9, 1))
+        with self.assertRaises(TypeError):
+            evaluate(self.s, dds45)
+
+    def test_printed_delivery_against_known_through_by_day(self):
+        from cordon_c.quantities import timely_completion
+        clock, at = "B-CLK-DDS45-custody-same-day", date(2026, 9, 1)
+        args = dict(anchor=date(2026, 9, 1), evaluated_at=datetime(2026, 9, 2, 9, tzinfo=ROME),
+                    completion_history_complete=True, zone=ROME)
+        with self.assertRaisesRegex(ValueError, "later than evaluation"):
+            timely_completion(self.s, clock, at, completed_at=date(2026, 9, 3), **args)
+        self.assertIs(timely_completion(self.s, clock, at, completed_at=date(2026, 9, 1), **args).truth, True)
+        # Printed on the evaluation's day but not the collection day: delivered
+        # by known_through or not yet, either reading gives false once the
+        # history is complete.
+        self.assertIs(timely_completion(self.s, clock, at, completed_at=date(2026, 9, 2), **args).truth, False)
+        partial = timely_completion(self.s, clock, at, completed_at=date(2026, 9, 2),
+                                    **(args | {"completion_history_complete": False}))
+        self.assertIsNone(partial.truth)
+        self.assertEqual(partial.needs, {f"{clock}: completion dated 2026-09-02, the day of evaluation"})
+        # Printed on the collection day, which is the evaluation's day: one reading gives true.
+        same = timely_completion(self.s, clock, date(2026, 9, 2), completed_at=date(2026, 9, 2),
+                                 **(args | {"anchor": date(2026, 9, 2)}))
+        self.assertIsNone(same.truth)
+        self.assertEqual(same.needs, {f"{clock}: completion dated 2026-09-02, the day of evaluation"})
+        with self.assertRaises(TypeError):
+            timely_completion(self.s, clock, at, completed_at=date(2026, 9, 1), anchor=date(2026, 9, 1),
+                              completion_history_complete=True, zone=ROME)
+        # Without a delivery, after the collection day, only a complete history gives false.
+        missing = dict(args, completion_history_complete=False)
+        self.assertIsNone(timely_completion(self.s, clock, at, completed_at=None, **missing).truth)
+        self.assertIs(timely_completion(self.s, clock, at, completed_at=None, **args).truth, False)
+        self.assertIsNone(timely_completion(self.s, clock, at, completed_at=None,
+                                            **(args | {"evaluated_at": datetime(2026, 9, 1, 23, tzinfo=ROME)})).truth)
+
+    def test_only_same_day_clocks_take_printed_dates(self):
+        from cordon_c.quantities import timely_completion
+        start = datetime(2026, 9, 1, 10, 30, tzinfo=ROME)
+        args = dict(evaluated_at=datetime(2026, 9, 10, tzinfo=ROME), completion_history_complete=True, zone=ROME)
+        hours = "B-CLK-DM169819-14(3)-research-lab-24h"
+        with self.assertRaisesRegex(MissingInput, "anchor time, not just its date"):
+            timely_completion(self.s, hours, AT, anchor=date(2026, 9, 1), completed_at=start, **args)
+        with self.assertRaises(MissingInput):
+            timely_completion(self.s, hours, AT, anchor=start, completed_at=date(2026, 9, 2), **args)
+        with self.assertRaises(MissingInput):
+            timely_completion(self.s, "B-CLK-DGR1075-owner-election", AT, anchor=start, completed_at=date(2026, 9, 2),
+                              rule=PeriodRule(False), **args)
 
 
 if __name__ == "__main__":
