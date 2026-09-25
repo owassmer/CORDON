@@ -278,10 +278,6 @@ class OsservatorioRecords(unittest.TestCase):
                              'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
             self.assertEqual([r['cause'] for r in run['reported']],
                              ['no supplied record obliges a recipient to this work as printed'])
-        # A performance dated by day alone is reported and keeps its work's history incomplete.
-        day_only = fixture('verbale-d', 'commencement', work=parcel('158'), occurred='2025-07-03')
-        run = self.run_records([base, day_only, history('storia-158', '158')], settled=True)
-        self.assertIsNone(run['recipients']['Nitti Vincenzo']['result'].truth)
         # Deliveries at two instants to one recipient: the caller picks neither.
         twice = self.run_records([base, delivery('pec-nitti-2', 'Nitti Vincenzo', '158',
                                                  occurred=PEC + timedelta(days=1))])
@@ -319,6 +315,39 @@ class OsservatorioRecords(unittest.TestCase):
                                evaluated_at=LATER, settled=True)
         self.assertEqual(run['recipients']['Nitti Vincenzo']['result'].effect,
                          'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+
+    def test_a_performance_dated_by_day_is_placed_by_its_day_against_Cs_boundary(self):
+        # Off positions a day-only performance of the work it prints takes the rule table's plant row (SPEC): a day
+        # wholly before C's boundary counts at its start, a day wholly after it is reported, and with no deadline
+        # it is held. The last day is 11/07; the boundary its end.
+        supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158'), history('storia-158', '158')]
+        without = self.run_records(supplied, settled=True)['recipients']['Nitti Vincenzo']
+        self.assertEqual(without['result'].effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        for day, effect in (('2025-07-03', 'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED'),
+                            ('2025-07-11', 'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED'),
+                            ('2025-07-12', without['result'].effect)):
+            with self.subTest(day=day):
+                run = self.run_records(supplied + [fixture('verbale-d', 'commencement', work=parcel('158'),
+                                                           occurred=day)], settled=True)
+                nitti = run['recipients']['Nitti Vincenzo']
+                self.assertEqual(nitti['result'].effect, effect)
+                counted = day != '2025-07-12'
+                self.assertEqual(nitti['commencements'],
+                                 {'verbale-d': datetime.combine(date.fromisoformat(day), datetime.min.time(), ROME)}
+                                 if counted else {})
+                self.assertEqual([(r['record'], r['outcome']) for r in run['reported']],
+                                 [] if counted else [('verbale-d', 'reported')])
+                self.assertTrue(nitti['commencement_records_complete'] or counted)
+        # Deliveries at two instants leave no deadline: the day-only record is held and names its need.
+        run = self.run_records(supplied + [delivery('pec-nitti-2', 'Nitti Vincenzo', '158',
+                                                    occurred=PEC + timedelta(days=1)),
+                                           fixture('verbale-d', 'commencement', work=parcel('158'),
+                                                   occurred='2025-07-03')], settled=True)
+        held = next(r for r in run['reported'] if r.get('record') == 'verbale-d')
+        self.assertEqual(held['outcome'], 'held')
+        self.assertIsNone(run['recipients']['Nitti Vincenzo']['result'].truth)
+        self.assertTrue(any(n.startswith('the instant of verbale-d') for n in
+                            run['recipients']['Nitti Vincenzo']['result'].needs))
 
     def test_the_notification_is_the_one_C_returns_for_that_recipient(self):
         from cordon_c.bindings import notice_instant

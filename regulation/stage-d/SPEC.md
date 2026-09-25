@@ -510,22 +510,22 @@ notification only through A's mass-publicity route.
 Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
 through `recipient_results` (`read_prescriptions.py --records`), beside the
 clause's cohort result, which no supplied record moves. There is one result per
-recipient a delivery record names, keyed as that record names them. The join from
-a supplied record to an annex position is not built here (planned in PR #40): for a clause
-the writer emits per annex position, each supplied record of the order is
-reported unattached with that cause, and no recipient there gets a per-recipient
-result. Other clauses keep the record's naming alone. A personal-delivery record
-is the delivery receipt only, never the acceptance receipt; it enters the
-communication predicate for its recipient only. The works a delivery record names
-are the operator's standing assertion of what that recipient is obliged to.
-Commencement and removal count for the work the record prints (comune, foglio and
-particella, or a plant identifier) and for every recipient a supplied record
-obliges to that work. A recipient's commencement history is complete only when
-every work it is obliged to has a stated history running from the order's
-adoption, or earlier, through C's deadline: `clock_boundary` on the notification
-C's `notice_instant` returns for that recipient, with the order's stated term,
-zone and calendar. A history stated as complete through a moment later than the
-evaluation is refused. The caller supplies no instant, order-text predicate or
+recipient a delivery record names, keyed as that record names them. For a clause
+the writer emits per annex position, each record is joined to a position and read
+by the rule table below. Other clauses keep the record's naming alone. A
+personal-delivery record is the delivery receipt only, never the acceptance
+receipt; it enters the communication predicate for its recipient only. Off
+positions, the works a delivery record names are the operator's standing
+assertion of what that recipient is obliged to. Commencement and removal count
+for the work the record prints (comune, foglio and particella, or a plant
+identifier) and for every recipient a supplied record obliges to that work, placed
+against that recipient's deadline as the table's plant row places them. A
+recipient's commencement history is complete only when every work it is obliged
+to has a stated history running from the order's adoption, or earlier, through
+C's deadline: `clock_boundary` on the notification C's `notice_instant` returns
+for that recipient, with the order's stated term, zone and calendar; a history
+through a printed day covers that whole day. A history stated as complete through
+a moment later than the evaluation is refused. The caller supplies no instant, order-text predicate or
 completeness of its own; what it cannot join is reported. Postings are public
 records read on PR #15's route, not supplied records: a recipient reached only by
 posting has no per-recipient result. Positions place printed owners on parcels
@@ -544,6 +544,93 @@ supplements, completes, replaces, revokes, suspends or withdraws, whole or in
 part, with the words stating what changes; every quotation and copied field must
 occur in its cited block. Only an operative statement is a change; a recital
 restates.
+
+### Supplied records at an annex position
+
+The decision is the Art. 21-ter coercive direction for one recipient at one annex
+position. `position_attachments` joins the records; `recipient_results` reads them.
+
+**Join.** A delivery attaches to the one position of its order whose printed owner
+is the recipient the delivery names (runs of whitespace are one space; printed
+variants are not merged) and which prints every work the delivery names: a plant
+among its listed infected plants, or a foglio and particella among its parcels
+(the position prints no comune, so none is compared). A history, commencement or
+removal attaches, by the work it prints, to every position of its order that
+prints that work and has an attached delivery: C tracks performance per work, not
+per performer. Each other record is unattached, with its cause: a delivery naming
+no recipient, an owner no position prints, a work the owner's position does not
+print (the works are named), an owner several positions print (never resolved by
+picking one); a record whose work no position prints, including a plant that is
+not listed; a record whose work only positions without an attached delivery print.
+A record naming another order is refused.
+
+**Position class**, from the position's governing results for the work
+(`position_class`): *not due* when a row resolves POPULATION_NOT_LAWFULLY_DUE;
+*due in part* when a row resolves LAWFULLY_DUE_IN_PART and none is unresolved,
+the still-due work then being the position's listed infected plants
+(`still_due_share`); otherwise *unresolved*, naming the rows' needs. At a position
+the delivery is the notice and the join key; the obliged works are the position's,
+never the delivery's. A still-due plant the delivery does not name is reported
+beside the result, never held.
+
+**Naming.** *Plant*: a listed infected plant of the position. *Plant parcel*: a
+foglio and particella holding one; it also carries 50 m hosts, since positions
+attach plants only from their 50 m parcels. *Host-only parcel*: a parcel of the
+position holding none. A plant-parcel delivery or history names every listed plant
+on it.
+
+**Date column** (`date_column`), against C's exclusive boundary for the recipient:
+**T<** / **T≥** an instant before / at or after it (including before notice);
+**D<** a day wholly before it (it ends at or before it: for a term in days, every
+day through the last day); **D∋** a day containing it (only a term in hours);
+**D>** a day wholly after it (it starts at or after it); **?** no deadline (no
+stated term, or deliveries to the recipient at different instants). A day's
+bounds are taken in C's zone. A commencement or removal is dated by `occurred`; a
+history by `complete_through` (from `complete_from`, on or before adoption); a
+delivery by none.
+
+**Outcomes.** *Counts*: the record enters C as the fact it supplies; a day-only
+record that counts enters at its day's start. *Held*: it is not counted, the work
+it may concern stays without a complete history, it is reported with its cause,
+and the need is named in the result. *Reported*: neither counted nor held, listed
+with its cause; it cannot change C's answer.
+
+Due in part:
+
+| # | Record, naming | T< | T≥ | D< | D∋ | D> | ? |
+|---|---|---|---|---|---|---|---|
+| 1 | Delivery, plant or plant parcel | counts (notice) | counts | counts | counts | counts | counts |
+| 2 | Delivery, host-only parcel | counts (notice); its host-only work reported withdrawn | same | same | same | same | same |
+| 3 | History, plant or plant parcel | counts; covers only through its end | counts, covers | covers if the day ends at the deadline | counts, covers | counts, covers | counts; completeness not judged |
+| 4 | History, host-only parcel | reported | reported | reported | reported | reported | reported |
+| 5 | Commencement or removal, plant | counts | counts | counts | held: its instant | reported | counts if timed; held if day-only |
+| 6 | Commencement or removal, plant parcel | held: a record naming the plant | reported | held: same | held: same and its instant | reported | held: same |
+| 7 | Commencement or removal, host-only parcel | reported (withdrawn, not that work) | reported | reported | reported | reported | reported |
+
+Not due, or unresolved (every naming shares the row):
+
+| # | Record | T< | T≥ | D< | D∋ | D> | ? |
+|---|---|---|---|---|---|---|---|
+| 8 | Delivery | counts (notice) | counts | counts | counts | counts | counts |
+| 9 | History | reported | reported | reported | reported | reported | reported |
+| 10 | Commencement or removal | not due: reported; unresolved: held, naming the position's needs | reported | as T< | as T<, and its instant | reported | as T< |
+
+Why each cell. The notice conjunct is communication of the prescription to the
+recipient, per recipient, not per work (rows 1, 2, 8). C counts work as begun when
+a commencement instant is earlier than its boundary, and absence only from a
+complete record (rows 3, 5). A day wholly before the boundary gives begun at every
+instant of it, and one wholly after gives none, so neither is held; a day containing
+it is. Felling a 50 m host is a different work from removing the listed plant, on
+any date (rows 4, 7). A performance printed only by the plant's parcel reads as host
+felling (not counted) or as the plant's removal (not established) inside the term,
+so it is held; after the deadline both readings leave the plant uncommenced (row
+6). At a position not due the work predicate resolves the answer; unresolved,
+whether a record concerns the due work is unknown, and after the deadline no
+reading defeats noncommencement (rows 9, 10). A has no completion condition: a
+late removal leaves REQUIRED standing and is listed in `commencements`. Off
+positions, a commencement or removal of the work it prints takes row 5's cells.
+The still-due share is DDS 18/2024's; a row splitting a position otherwise would
+need its share read from A.
 
 ## Act-specific mass-publicity basis
 
