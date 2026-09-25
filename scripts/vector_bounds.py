@@ -2,9 +2,11 @@
 """Row 12's done means: the next-season onset bound for held detections, and the 6(1) join.
 
 Z for each detection is Annex III Part A's infected zone in the version in force on the detection
-day, as row 3 builds it (`vectors.AnnexIIIZones`); every site reaches it through its printed agro,
-with the error row 3 sources for that agro, and C's answer (`vectors.agro_in`). The records,
-statements and untranscribed rounds are the `--out` JSON of `scripts/read_vectors.py`.
+day, its units as row 3 reads them (`vectors.AnnexIIIZones`); a site is in Z exactly when its
+printed agro, uncontradicted by its printed coordinates, is one of them (`vectors.agro_in`). Each
+vector positive is joined against every area version row 3 builds (`vectors.row3_areas`, one at
+a time), and reported per version that reaches its printed agro (`vectors.vector_joins`). The
+records, statements and untranscribed rounds are the `--out` JSON of `scripts/read_vectors.py`.
 
 The detections are the held containment orders the plan names (DET 2/2024, DET 51/2026) and the
 two gap-year orders of implementation round 1 (DET 9/2025, DET 20/2023), each by its cited test
@@ -92,15 +94,29 @@ def main():
         print(name, '->', result[name]['upper'] or result[name]['upper_cause'], flush=True)
     positives = [r for r in records if r.test_result and vectors._positive(r.test_result)]
     recited = [s for s in statements if s.kind == 'vector_positive']
-    area = zones.zone(date(2026, 2, 12))
-    joins = vectors.vector_detections(records, statements, area, zones.comune_of)
+    built = []
+
+    def areas():
+        for area in vectors.row3_areas(ROOT, zones.sources):
+            built.append(area.identity)
+            print('area version', len(built), area.identity, flush=True)
+            yield area
+
+    joins = vectors.vector_joins(records, statements, areas(), zones.comune_of)
     result['6(1)'] = dict(printed_test_positives=len(positives), recited_positives=len(recited),
-                          recited=[dict(url=s.url.rsplit('/', 2)[-2:], quote=s.quote[:200], place=s.place,
-                                        printed_agro=vectors.statement_agro(s)) for s in recited],
-                          joins_against=area.identity, joined=len(joins.joined),
-                          unjoined=[dict(quote=(x.quote if hasattr(x, 'quote') else x.cell)[:120], cause=c)
-                                    for x, c in joins.unjoined],
+                          area_versions=built,
+                          positives=[dict(url=x.url.rsplit('/', 2)[-2:],
+                                          quote=(x.quote if hasattr(x, 'quote') else x.cell)[:200],
+                                          printed_agro=(vectors.statement_agro(x) if hasattr(x, 'quote') else x.agro),
+                                          joined=list(j.joined),
+                                          unjoined=[dict(area=a, cause=c) for a, c in j.unjoined],
+                                          reaches_no_area=j.cause)
+                                     for j in joins for x in (j.positive,)],
                           headers=data.get('headers_summary'))
+    for j in joins:
+        x = j.positive
+        print('positive', (x.quote if hasattr(x, 'quote') else x.cell)[:90], '| joined', len(j.joined),
+              '| unjoined', len(j.unjoined), '|', j.cause or sorted({c for _, c in j.unjoined}), flush=True)
     text = json.dumps(result, indent=1, ensure_ascii=False, default=str)
     if args.out:
         args.out.write_text(text)

@@ -1475,11 +1475,12 @@ class Comune:
 def placed(record: Record, zone: Zone, comune_of) -> Evaluation:
     """Whether the record's place lies in the zone, from what its publisher prints.
 
-    A site whose publisher prints its agro is placed through that comune (`agro_in`). Printed
-    coordinates that lie outside the agro beyond the comune's sourced boundary error (none
-    where none is sourced) contradict it, and the record stays unplaced. A site printed only
-    as coordinates needs a positional error no source states. A record printed only for an
-    area is not located: an area name is never a zone.
+    A site whose publisher prints its agro is placed through that comune (`agro_in`): where
+    the zone is defined by whole comuni, the comune decides. Printed coordinates that lie
+    outside the agro, drawn as row 3 draws a comune, beyond the error row 3 sources for it
+    (none where none is sourced) contradict it, and the record stays unplaced. A site printed
+    only as coordinates needs a positional error no source states. A record printed only for
+    an area is not located: an area name is never a zone.
     """
     comune = comune_of(record.agro) if record.agro else None
     if comune is not None:
@@ -1500,46 +1501,54 @@ def placed(record: Record, zone: Zone, comune_of) -> Evaluation:
 
 
 def agro_in(comune: Comune, zone: Zone) -> Evaluation:
-    """Whether a site the publisher places in `comune` lies in the zone: C's answer.
+    """Whether a site the publisher places in `comune`, and nowhere more precisely, lies in the zone.
 
-    The site's place is its agro, with its own error: the comune's sourced boundary error,
-    stated once, for the territory given to C and for the zone's outline near it
-    (`Zone.area`, row 3's `metric(near, near_error_m)`). Where row 3 sources no error for the
-    comune, the site is unplaced. C answers for a surface whether any part of it lies in the
-    area (`partial_parcel`). Its False places the site outside. Its True places the site
-    inside only where the act takes the comune whole (`zone.units`), so the site lies in it
-    wherever in the agro it stands; otherwise part of the agro may lie outside, and the site
-    stays unplaced. C's unknown stays unknown.
+    Where the act defines the zone by whole units (`zone.units`, as Annex III lists whole
+    provinces and comuni and no part of any), the comune decides: the site is in the zone
+    exactly when its agro is one of the units. No drawing of either takes part.
+
+    Otherwise the site may stand anywhere in its agro, so it is in the area only where the
+    whole agro lies inside it beyond the combined error: the agro's own error (row 3's,
+    sourced for the comune's outline) plus the error of the area's outline near it
+    (`Zone.area`, row 3's `metric(near, near_error_m)`). C's `partial_parcel` False (the agro
+    beyond the combined error from the area) places it outside. Anything else is unknown,
+    with that cause; an agro with no sourced error is never shown wholly inside.
     """
+    if zone.units is not None:
+        return Evaluation(comune.istat in zone.units)
     key = (comune.istat, comune.territory.error_m, comune.sourced, comune.territory.geometry.bounds)
     if key in zone.answers:
         return zone.answers[key]
-    if not comune.sourced:
-        answer = Evaluation(None, needs=frozenset({f'a sourced boundary error for the agro {comune.name}'}))
+    territory = comune.territory
+    try:
+        area = zone.area(territory.geometry, territory.error_m)
+    except MissingInput as missing:
+        answer = Evaluation(None, needs=frozenset({str(missing)}))
     else:
-        try:
-            area = zone.area(comune.territory.geometry, comune.territory.error_m)
-        except MissingInput as missing:
-            area, answer = None, Evaluation(None, needs=frozenset({str(missing)}))
-        if area is not None:
-            answer = partial_parcel(comune.territory, area)
-            if answer.truth is True and (zone.units is None or comune.istat not in zone.units):
-                answer = Evaluation(None, needs=frozenset({'the site\'s place within its agro'}))
-            elif answer.truth is False and zone.units is not None and comune.istat in zone.units:
-                answer = Evaluation(None, needs=frozenset({f'row 3\'s outline of {zone.identity} and the '
-                                                           f'territory of {comune.name}, a unit it takes whole'}))
+        error = territory.error_m + area.error_m
+        if partial_parcel(territory, area).truth is False:
+            answer = Evaluation(False)
+        elif not comune.sourced:
+            answer = Evaluation(None, needs=frozenset({f'a sourced boundary error for the agro {comune.name}'}))
+        elif area.geometry.covers(territory.geometry) and \
+                territory.geometry.distance(area.geometry.boundary) > error:
+            answer = Evaluation(True)
+        else:
+            answer = Evaluation(None, needs=frozenset({
+                f'the site\'s place within the agro {comune.name}: the whole agro does not lie inside '
+                f'{zone.identity} beyond the combined error ({error:.1f} m)'}))
     zone.answers[key] = answer
     return answer
 
 
 class AnnexIIIZones:
     """Z, the zone the 13(1) onset bound and the stop rule name: EU 2020/1201 Annex III Part A's
-    infected zone in Italy, in each version A holds (`regulation/stage-a/annex-versions.csv`), as
-    row 3 builds it (`area_geometry`, PR #8): every unit it lists, whole, drawn by its held
-    cadastral sheets and, where no held sheet draws it, ISTAT's line, with land the units enclose;
-    its outline carries the cadastre's measured error field and ISTAT's measured per-comune bound
-    where ISTAT draws. `comune_of` gives a printed agro's territory drawn as row 3 draws a unit
-    of Z, with the error row 3 sources for it. Each version is built once, when first named."""
+    infected zone in Italy, in each version A holds (`regulation/stage-a/annex-versions.csv`).
+    Annex III lists whole provinces and whole comuni, and no part of any, so Z is its units:
+    row 3's in-tree reading of them (`Sources.annex_iii_comuni`), and a printed agro is in Z
+    exactly when it is one of them (`agro_in`). `comune_of` gives a printed agro's territory
+    drawn as row 3 draws a comune named whole, with the error row 3 sources for it; it serves
+    only the check that printed coordinates agree with the printed agro."""
 
     def __init__(self, root: Path, sources=None):
         from .area_geometry import Sources
@@ -1566,24 +1575,12 @@ class AnnexIIIZones:
         return self._zones[key]
 
     def _build(self, row) -> Zone:
-        from types import SimpleNamespace
-        from . import area_geometry as ag
         start = date.fromisoformat(row['effective_from'])
         end = date.fromisoformat(row['effective_to_exclusive']) if row['effective_to_exclusive'] else None
-        sources = self.sources
-        geometry, used = sources.annex_iii_extent(start)
-        comuni = sources.annex_iii_comuni(start)
-        drawn = [(c.catastale, part) for c in comuni
-                 if (part := sources.istat_part(c)) is not None and not part.is_empty]
-        geometry, interior = ag._whole_interior(sources, geometry, comuni)
-        errors = ag._source_errors(sources, set(used), SimpleNamespace(istat_drawn=drawn)) + interior
-        used = tuple(sorted(set(used) | ({'istat-boundaries'} if interior else set())))
+        comuni = self.sources.annex_iii_comuni(start)
         identity = (f'{row["annex_version_id"]}: EU 2020/1201 Annex III Part A, infected zone in Italy '
                     f'({start} to {end or "open"})')
-        part = ag.Zone('infected', ('Infected zone in Italy',), geometry,
-                       'EU 2020/1201 Annex III Part A: the units it lists, whole', used, errors=errors)
-        geography = ag.AdoptedGeography(row['annex_version_id'], 'EU-2020-1201', start, end, (part,))
-        return Zone(identity, None, frozenset(c.istat for c in comuni), geography)
+        return Zone(identity, None, frozenset(c.istat for c in comuni))
 
     def zones_in_force(self, year: int) -> list[Zone]:
         """Every version whose interval meets the survey year, from the reach start."""
@@ -1858,9 +1855,21 @@ def onset_bound(records, statements, zone: Zone, detection: date, comune_of, rou
     if season is None:
         cause = 'no round held after the detection: the next season is not yet published or not acquired'
     elif upper is None:
-        cause = (f'no adult record placed in the zone in the {season} season, the first whose rounds '
-                 f'follow the detection' + ('' if not unplaced else '; not placed: '
-                                            + '; '.join(sorted({c for _, c in unplaced}))))
+        # Adults placed in the zone in that season whose window is not shown to start after the
+        # detection: they may have flown before it, so they bound nothing, but they are not absence.
+        early = sorted({(r.window[1], r.window[0], r.url.rsplit('/', 1)[-1])
+                        for r in records if _adult_presence(r) and r.window[0] <= detection < r.window[1]
+                        and r.window[0].year == season and placed(r, zone, comune_of).truth is True})
+        if early:
+            cause = (f'adults placed in the zone in the {season} season, the first whose rounds follow the '
+                     f'detection, but no window shown to start after it: '
+                     + '; '.join(f'{name}, dated {end:%d/%m/%Y}, dates its counts from {start:%d/%m/%Y}'
+                                 for end, start, name in early))
+        else:
+            cause = (f'no adult record placed in the zone in the {season} season, the first whose rounds '
+                     f'follow the detection')
+        if unplaced:
+            cause += '; not placed: ' + '; '.join(sorted({c for _, c in unplaced}))
     held = held_rounds(records)
     before = []
     for series, year, number in rounds:
@@ -1942,50 +1951,106 @@ def _positive(text) -> bool:
 
 @dataclass(frozen=True)
 class VectorDetections:
-    """Vector-positive days for one area version, at both ends of each printed window."""
+    """Vector-positive days for one area version, at both ends of each printed window; every
+    other positive is unjoined with its cause or placed outside the area with its cause, so
+    none is dropped."""
     area: str
     at_start: tuple[date, ...]
     at_end: tuple[date, ...]
     joined: tuple[Record, ...]
     unjoined: tuple[tuple[object, str], ...]
+    outside: tuple[tuple[object, str], ...] = ()
+
+
+def vector_positives(records, statements) -> list:
+    """Every vector positive: a printed test result, or an official statement that vectors were
+    found infected, in the order held."""
+    return ([r for r in records if r.test_result is not None and _positive(r.test_result)]
+            + [s for s in statements if s.kind == 'vector_positive'])
+
+
+def _join(positive, area: Zone, comune_of) -> tuple[str, Record | None, str | None]:
+    """('joined' | 'unjoined' | 'outside', the record C receives, the cause) for one positive."""
+    # A statement's printed agro goes through the same place test as a table record's.
+    record = positive if isinstance(positive, Record) else statement_record(positive)
+    answer = placed(record, area, comune_of)
+    if answer.truth is False:
+        return 'outside', None, f'the agro {record.agro} lies outside {area.identity}'
+    needs = set(answer.needs) if answer.truth is None else set()
+    if record.window is None:
+        needs.add('window not printed')
+    if needs:
+        return 'unjoined', None, ', '.join(sorted(needs))
+    return 'joined', record, None
 
 
 def vector_detections(records, statements, area: Zone, comune_of) -> VectorDetections:
     """The vector positives placed in the area, and every other positive with its cause.
 
-    A positive is a printed test result, or an official statement that vectors were found
-    infected. A positive with only a window is passed at both ends: the caller evaluates C
-    once with `at_start` and once with `at_end` and keeps only an answer both give.
+    A positive with only a window is passed at both ends: the caller evaluates C once with
+    `at_start` and once with `at_end` and keeps only an answer both give. A positive placed
+    outside the area is listed as such, never dropped.
     """
-    joined, unjoined = [], []
-    for record in records:
-        if record.test_result is None or not _positive(record.test_result):
-            continue
-        if record.window is None:
-            unjoined.append((record, 'window not printed'))
-            continue
-        answer = placed(record, area, comune_of)
-        if answer.truth is True:
+    joined, unjoined, outside = [], [], []
+    for positive in vector_positives(records, statements):
+        kind, record, cause = _join(positive, area, comune_of)
+        if kind == 'joined':
             joined.append(record)
-        elif answer.truth is None:
-            unjoined.append((record, ', '.join(sorted(answer.needs))))
-    for statement in statements:
-        if statement.kind != 'vector_positive':
-            continue
-        # The statement's printed agro goes through the same place test as a table record's.
-        proxy = statement_record(statement)
-        answer = placed(proxy, area, comune_of)
-        if answer.truth is False:
-            continue
-        needs = set(answer.needs) if answer.truth is None else set()
-        if proxy.window is None:
-            needs.add('window not printed')
-        if needs:
-            unjoined.append((statement, ', '.join(sorted(needs))))
         else:
-            joined.append(proxy)
+            (unjoined if kind == 'unjoined' else outside).append((positive, cause))
     return VectorDetections(area.identity, tuple(sorted(r.window[0] for r in joined)),
-                            tuple(sorted(r.window[1] for r in joined)), tuple(joined), tuple(unjoined))
+                            tuple(sorted(r.window[1] for r in joined)), tuple(joined), tuple(unjoined),
+                            tuple(outside))
+
+
+@dataclass(frozen=True)
+class PositiveJoin:
+    """One vector positive against every area version that reaches its printed agro: joined, or
+    unjoined with its cause, per version. `cause` says why it reaches none, where it reaches none."""
+    positive: object
+    joined: tuple[str, ...]
+    unjoined: tuple[tuple[str, str], ...]
+    cause: str | None = None
+
+
+def vector_joins(records, statements, areas, comune_of) -> tuple[PositiveJoin, ...]:
+    """Each vector positive joined against row 3's area versions (`areas`, taken one at a time,
+    so a caller may build each when it is reached): per version that reaches its printed agro,
+    joined or unjoined with the cause. A version that places the agro outside is not reached.
+    A positive that reaches no version is kept, with the cause."""
+    positives = vector_positives(records, statements)
+    joined = [[] for _ in positives]
+    unjoined = [[] for _ in positives]
+    for area in areas:
+        for i, positive in enumerate(positives):
+            kind, _, cause = _join(positive, area, comune_of)
+            if kind == 'joined':
+                joined[i].append(area.identity)
+            elif kind == 'unjoined':
+                unjoined[i].append((area.identity, cause))
+    out = []
+    for positive, j, u in zip(positives, joined, unjoined):
+        cause = None
+        if not j and not u:
+            record = positive if isinstance(positive, Record) else statement_record(positive)
+            cause = f'the agro {record.agro} reaches no area version of row 3'
+        out.append(PositiveJoin(positive, tuple(j), tuple(u), cause))
+    return tuple(out)
+
+
+def row3_areas(root: Path, sources=None):
+    """Every area version row 3 builds (each consumed A area version it holds), in A's order,
+    one at a time, as a zone whose outline error is read near each place (`Zone.area`)."""
+    from .area_geometry import Sources, adopted_geography
+    from .areas import versions
+    sources = sources or Sources(Path(root))
+    for version in versions(root):
+        if not version.consumed or version.statements is None:
+            continue
+        geography, = adopted_geography(root, decision=version.effective_from, sources=sources,
+                                       only={version.provision_version_id})
+        yield Zone(f'{version.provision_version_id} ({version.effective_from} to '
+                   f'{version.effective_to_exclusive or "open"})', None, None, geography)
 
 
 def with_vector_days(host_days, detections: VectorDetections, end: str) -> tuple[date, ...]:

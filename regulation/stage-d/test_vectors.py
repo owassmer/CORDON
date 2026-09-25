@@ -103,48 +103,54 @@ class Placement(unittest.TestCase):
     def test_an_agro_disjoint_from_the_zone_is_outside(self):
         self.assertIs(placed(record(agro='Triggiano', coordinates=at(745000, 4505000)), ZONE, comune_of).truth, False)
 
-    def test_a_comune_touching_the_zone_within_the_errors_is_c_s_unknown(self):
-        # C answers for the agro: along the shared border the two outlines' errors overlap, so
-        # C cannot say that no part of the agro lies in the zone (Monopoli beside Fasano, v1).
+    def test_a_zone_the_act_defines_by_whole_units_is_decided_by_the_list(self):
+        # Annex III lists whole comuni: a neighbour touching the zone (Monopoli beside Fasano, v1)
+        # is outside, and a listed comune is inside wherever its drawing lies, with no drawing read.
         touching = Comune('072030', 'Monopoli', MetricGeometry(box(720000, 4490000, 730000, 4520000), UTM, 100.0))
-        for zone in (ZONE, replace(ZONE, units=None)):
-            answer = placed(record(agro='Monopoli', coordinates=at(725000, 4505000)), zone,
-                            lambda name: touching if name == 'Monopoli' else None)
-            self.assertIsNone(answer.truth)
-            self.assertIn('parcel overlap precision', answer.needs)
+        answer = placed(record(agro='Monopoli', coordinates=at(725000, 4505000)), ZONE, lambda name: touching)
+        self.assertIs(answer.truth, False)
+        far = Comune('073004', 'Crispiano', MetricGeometry(OUTSIDE, UTM, 0.0), sourced=False)
+        self.assertIs(placed(record(coordinates=at(745000, 4505000)), ZONE, lambda name: far).truth, True)
 
-    def test_c_s_true_places_the_site_only_in_a_comune_the_zone_takes_whole(self):
-        # Part of an agro inside the zone places a site there only where the act takes the comune
-        # whole; otherwise the site may stand in the part outside.
+        class Unread:
+            def metric(self, near, near_error_m):
+                raise AssertionError('a zone defined by whole units reads no outline')
+
+        self.assertIs(placed(record(coordinates=None), replace(ZONE, geography=Unread()), comune_of).truth, True)
+
+    def test_an_area_not_defined_by_whole_units_takes_the_agro_only_where_it_lies_wholly_inside(self):
+        # A sheet- or band-defined area (row 3): the site may stand anywhere in its agro.
+        area = Zone('row 3 area', MetricGeometry(box(690000, 4490000, 720000, 4520000), UTM, 10.0))
+        inside = Comune('073004', 'Crispiano', MetricGeometry(box(700000, 4500000, 710000, 4510000), UTM, 100.0))
+        self.assertIs(placed(record(coordinates=None), area, lambda name: inside).truth, True)
         straddling = Comune('073017', 'Massafra', MetricGeometry(box(700000, 4490000, 730000, 4520000), UTM, 10.0))
-        answer = placed(record(agro='Massafra', coordinates=at(725000, 4505000)), ZONE, lambda name: straddling)
+        answer = placed(record(agro='Massafra', coordinates=None), area, lambda name: straddling)
         self.assertIsNone(answer.truth)
-        self.assertIn("the site's place within its agro", answer.needs)
-        listed = replace(ZONE, units=frozenset({'073017'}))
-        self.assertIs(placed(record(agro='Massafra', coordinates=at(725000, 4505000)), listed,
-                             lambda name: straddling).truth, True)
+        self.assertEqual(answer.needs, frozenset({"the site's place within the agro Massafra: the whole agro does "
+                                                  "not lie inside row 3 area beyond the combined error (20.0 m)"}))
+        near_edge = Comune('073004', 'Crispiano', MetricGeometry(box(700000, 4500000, 719950, 4510000), UTM, 100.0))
+        self.assertIsNone(placed(record(coordinates=None), area, lambda name: near_edge).truth)  # within 110 m
+        beyond = Comune('072045', 'Triggiano', MetricGeometry(OUTSIDE, UTM, 100.0))
+        self.assertIs(placed(record(agro='Triggiano', coordinates=None), area, lambda name: beyond).truth, False)
+        unsourced = replace(inside, territory=MetricGeometry(inside.territory.geometry, UTM, 0.0), sourced=False)
+        self.assertEqual(placed(record(coordinates=None), area, lambda name: unsourced).needs,
+                         frozenset({'a sourced boundary error for the agro Crispiano'}))
 
-    def test_the_agro_s_own_error_reaches_the_zone_outline_and_c_once(self):
-        # Row 3's metric() takes the agro and the agro's own error (not a point's or a surface's
-        # default), and C takes the agro with that same error.
+    def test_the_agro_s_own_error_reaches_the_area_outline_and_c_once(self):
+        # Row 3's metric() takes the agro and the agro's own error, once per agro and area.
         seen = []
 
         class Geography:
             def metric(self, near, near_error_m):
                 seen.append((near, near_error_m))
-                return MetricGeometry(INSIDE, UTM, 3.0)
+                return MetricGeometry(box(680000, 4480000, 730000, 4530000), UTM, 3.0)
 
-        zone = Zone('row 3 zone', None, frozenset({'073004'}), Geography())
+        zone = Zone('row 3 area', None, None, Geography())
         comune = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, 143.1))
         self.assertIs(placed(record(coordinates=at(705000, 4505000)), zone, lambda name: comune).truth, True)
         self.assertEqual(seen, [(comune.territory.geometry, 143.1)])
         placed(record(coordinates=at(706000, 4506000)), zone, lambda name: comune)
-        self.assertEqual(len(seen), 1)                     # one answer per agro and zone
-        unsourced = replace(comune, territory=MetricGeometry(INSIDE, UTM, 0.0), sourced=False)
-        answer = placed(record(coordinates=at(705000, 4505000)), zone, lambda name: unsourced)
-        self.assertIsNone(answer.truth)
-        self.assertEqual(answer.needs, frozenset({'a sourced boundary error for the agro Crispiano'}))
-        self.assertEqual(len(seen), 1)                     # an unsourced agro never reaches the zone
+        self.assertEqual(len(seen), 1)                     # one answer per agro and area
 
     def test_coordinates_that_contradict_the_agro_place_nothing(self):
         answer = placed(record(coordinates=at(745000, 4505000)), ZONE, comune_of)
@@ -159,10 +165,9 @@ class Placement(unittest.TestCase):
             comune = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, error))
             answer = placed(point, ZONE, lambda name: comune)
             self.assertIs(answer.truth, placed_in, error)
-        # Unsourced: the coordinates contradict it with no tolerance, and the site is unplaced.
+        # Unsourced: the coordinates contradict it with no tolerance; uncontradicted, the list decides.
         unsourced = Comune('073004', 'Crispiano', MetricGeometry(INSIDE, UTM, 0.0), sourced=False)
-        self.assertEqual(placed(record(coordinates=at(705000, 4505000)), ZONE, lambda name: unsourced).needs,
-                         frozenset({'a sourced boundary error for the agro Crispiano'}))
+        self.assertIs(placed(record(coordinates=at(705000, 4505000)), ZONE, lambda name: unsourced).truth, True)
         self.assertIn('printed coordinates agree with the printed agro',
                       placed(record(coordinates=at(720050, 4505000)), ZONE, lambda name: unsourced).needs)
 
@@ -249,6 +254,8 @@ class OnsetBound(unittest.TestCase):
         # beginning after the detection) and the 2023 round II is acquired, not transcribed.
         det = date(2023, 2, 14)
         composite = record(coordinates=None, publisher=None, series=None, round=6,
+                           url='https://cartografia.sit.puglia.it/doc/xylella/vettori/dati2023/'
+                               'dati_del_monitoraggio_vettori_aggiornati_al_14_giugno_2023.jpg',
                            window=(date(2023, 1, 1), date(2023, 6, 14)))
         next_year = record(coordinates=None, publisher=None, series=None, round=1,
                            window=(date(2024, 4, 11), date(2024, 4, 22)))
@@ -257,7 +264,14 @@ class OnsetBound(unittest.TestCase):
         found = onset_bound([composite, next_year], [], ZONE, det, comune_of, untranscribed=[second])
         self.assertIsNone(found.upper)
         self.assertEqual(found.season, 2023)
-        self.assertIn('in the 2023 season', found.upper_cause)
+        # Adults are placed in the zone that season; none is shown to fly after the detection.
+        self.assertEqual(found.upper_cause, 'adults placed in the zone in the 2023 season, the first whose rounds '
+                         'follow the detection, but no window shown to start after it: '
+                         'dati_del_monitoraggio_vettori_aggiornati_al_14_giugno_2023.jpg, dated 14/06/2023, '
+                         'dates its counts from 01/01/2023')
+        outside = replace(composite, agro='Triggiano')
+        self.assertTrue(onset_bound([outside], [], ZONE, det, comune_of).upper_cause.startswith(
+            'no adult record placed in the zone in the 2023 season'))
         self.assertEqual(found.untranscribed_rounds, (second.name,))
         self.assertEqual(onset_bound([next_year], [], ZONE, date(2023, 12, 15), comune_of).upper, date(2024, 4, 22))
 
@@ -304,13 +318,39 @@ class VectorPositives(unittest.TestCase):
         undated = replace(recited, day=None, date_literal='2022')
         self.assertEqual(vector_detections([], [undated], ZONE, comune_of).unjoined, ((undated, 'window not printed'),))
         elsewhere = replace(recited, quote=quote.replace('Crispiano', 'Triggiano'), place='agro di Triggiano')
-        self.assertEqual(vector_detections([], [elsewhere], ZONE, comune_of).unjoined, ())
+        found = vector_detections([], [elsewhere], ZONE, comune_of)
+        self.assertEqual((found.joined, found.unjoined), ((), ()))
+        self.assertEqual(found.outside, ((elsewhere, 'the agro Triggiano lies outside zone for the test'),))
         around = replace(recited, quote='n. 12 Philaenus spumarius catturati nell\u2019area circostante il sito di Crispiano',
                          place='nell\u2019area circostante il sito di Crispiano')
         self.assertIsNone(vectors.statement_agro(around))
         self.assertEqual(vector_detections([], [around], ZONE, comune_of).unjoined, ((around, 'place not located'),))
         unread = replace(recited, quote='insetti vettori positivi \u015d\u0176 \u0102\u0150\u0192\u017d')
         self.assertIsNone(vectors.statement_agro(unread))  # a place literal the quote does not print is not read
+
+    def test_each_positive_is_reported_per_area_version_that_reaches_its_agro_and_none_is_dropped(self):
+        # Circolare 5/2023's shape: the agro is printed, the window is not. Row 3's areas are not
+        # defined by whole units, so an agro-only positive joins only an area that holds the whole agro.
+        quote = 'nel monitoraggio 2022, sono stati individuati insetti vettori infetti nell’agro di Triggiano'
+        agro_only = Statement('s' * 64, 'u', 'r' * 64, 'vector_positive', quote, 'agro di Triggiano',
+                              (date(2022, 10, 3), date(2022, 10, 7)), '3-7 ottobre 2022', 'Osservatorio', None)
+        unlocated = replace(agro_only, quote='n. 12 Philaenus spumarius catturati nell’area circostante il sito',
+                            place='nell’area circostante il sito', day=None)
+        small = Zone('eradication area in Triggiano', MetricGeometry(box(740000, 4500000, 745000, 4505000), UTM, 5.0))
+        whole = Zone('area holding Triggiano', MetricGeometry(box(725000, 4480000, 770000, 4530000), UTM, 5.0))
+        away = Zone('area elsewhere', MetricGeometry(box(600000, 4400000, 610000, 4410000), UTM, 5.0))
+        joins = vectors.vector_joins([], [agro_only, unlocated], [small, whole, away], comune_of)
+        self.assertEqual([j.positive for j in joins], [agro_only, unlocated])
+        first, second = joins
+        self.assertEqual(first.joined, ('area holding Triggiano',))
+        self.assertEqual(first.unjoined, (('eradication area in Triggiano',
+                                           "the site's place within the agro Triggiano: the whole agro does not lie "
+                                           'inside eradication area in Triggiano beyond the combined error (105.0 m)'),))
+        self.assertEqual(second.joined, ())
+        self.assertEqual([c for _, c in second.unjoined], ['place not located, window not printed'] * 3)
+        nowhere = vectors.vector_joins([], [agro_only], [away], comune_of)[0]
+        self.assertEqual((nowhere.joined, nowhere.unjoined, nowhere.cause),
+                         ((), (), 'the agro Triggiano reaches no area version of row 3'))
 
     def test_only_an_answer_both_ends_give_is_kept(self):
         self.assertIs(agreed(Evaluation(True), Evaluation(True)).truth, True)
@@ -394,20 +434,22 @@ def _row3_available():
 
 @unittest.skipUnless(_row3_available(), 'the Annex III zone is built from row 3 inputs in the local store')
 class AnnexIIIZone(unittest.TestCase):
-    """Z for DET 2/2024: Annex III Part A in the version A holds on 15/12/2023, as row 3 builds it
-    in tree (PR #8), each agro through C with the error row 3 sources for it."""
+    """Z for DET 2/2024: Annex III Part A in the version A holds on 15/12/2023, its units as row 3
+    reads them in tree (PR #8); each agro drawn as row 3 draws a comune, with the error row 3
+    sources for it, for the coordinates check."""
 
-    def test_fasano_is_in_z_triggiano_is_not_and_monopoli_beside_it_is_c_s_unknown(self):
+    def test_fasano_is_in_z_and_triggiano_and_monopoli_beside_it_are_not(self):
         os.environ.setdefault('CORDON_STORE', str(STORE))
         zones = vectors.AnnexIIIZones(ROOT)
         zone = zones.zone(date(2023, 12, 15))
         self.assertTrue(zone.identity.startswith('EU-2020-1201:ANNEX-III:v1'))
+        self.assertIsNone(zone.geography)
         fasano, triggiano, monopoli = (zones.comune_of(n) for n in ('Fasano', 'Triggiano', 'Monopoli'))
         self.assertTrue(fasano.sourced and fasano.istat in zone.units)
         self.assertIs(vectors.agro_in(fasano, zone).truth, True)
         self.assertIs(vectors.agro_in(triggiano, zone).truth, False)
         self.assertNotIn(monopoli.istat, zone.units)
-        self.assertIsNone(vectors.agro_in(monopoli, zone).truth)
+        self.assertIs(vectors.agro_in(monopoli, zone).truth, False)
 
 
 class TransmissionText(unittest.TestCase):
