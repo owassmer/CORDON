@@ -148,12 +148,15 @@
         "operative-act"
       ],
       "routes": [
-        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1",
+        "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1 (listed trees) and /0 (provisional trees, DGR 720/2025), captured whole by scripts/acquire_protection.py (corpus/sources/protected-status/register.json)",
+        "The L.R. 14/2007 list acts as published on BURP (https://burp.regione.puglia.it/documents/20135/<folder>/DEL_<n>_<year>.pdf, or the ordinary bulletin that carries an older act), each act's decision, history table and deletion annex (corpus/sources/protected-status/acts.json)",
+        "The official monitoring observations of the affected plants and of the negative olives within 50 m (rows 1 and 2), with MONUMENTALE_ARIF and NOTE_RILEVATORE from every view that prints them",
+        "The plant points the held removal orders print in their annexes (corpus/sources/removal-orders/records.json)",
         "The competent authority's actual permission record for the affected plant or parcel"
       ],
-      "population": "Protected plants reached by the removal population and the permission records required for those plants. It is not the publisher-wide landscape-proceeding catalogue.",
-      "reader": "Generic ArcGIS and document readers; source-specific interpretation remains to be implemented",
-      "open": "Reacquire the register and establish event-time status. Investigate PPTR, municipal planning or a landscape authorization only when the affected plant's accepted branch requires it."
+      "population": "The affected plants (the in-reach positives and the plants the held removal orders print, each order plant taking the record of the positive it coincides with within 1 m), the negative olives C may place in their 50 m zones, and the register entries within 50 m plus both errors of an affected plant; each entry's own list acts. It is not the register, and not only the positives. Permission records only where a protected plant's branch requires them.",
+      "reader": "cordon_d.protection (scripts/read_protection.py): register entries and key causes, each entry's act chain from the acts' decisions, recitals and history table, trees a deleting act lists, survey batches by the survey the acts' recitals name and their measured bounds with the 2011 check read from the held capitolato, the monitoring record and D's reading of each note, measurements, the note-code rule and candidates",
+      "open": "Some rows of DGR 720/2025's deletion annex are unread, and the deleting act prints no approving act for the trees it deletes, so C reads a deleted tree's listing before deletion unknown (counts: CURRENT). DGR 1193/2021's and DGR 1491/2020's deletions are unread; both acts precede every held order. The census tag as card is read from the held tags: the capitolato states the key N_Fg_P_cod_ISTAT and no tag. Investigate PPTR, municipal planning or a landscape authorization only when the affected plant's accepted branch requires it."
     },
     {
       "id": "land-standing-records",

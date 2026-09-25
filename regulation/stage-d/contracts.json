@@ -498,7 +498,9 @@
       ],
       "fields": [
         "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
-        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record: the MONUMENTALE_ARIF flag printed as \"Si\" or \"1\", or the surveyor's written finding in NOTE_RILEVATORE that the plant has monumental characteristics, in any wording that asserts it (held examples: \"caratteristiche di monumentalità\", \"caratteristiche monumentali\", \"requisiti di monumentalità\", \"carattere monumentale\"), or a measurement the note records (the trunk diameter, and its height where stated)",
+        "the positional qualification of the entry's point: its survey batch, that batch's horizontal error against the ground in EPSG:32633 with its statistic, fix count, card form and method, or the register-wide bound labelled as such, the reference fixes' own error, the date and the sources (the rule: SPEC.md, Protected status)",
+        "the candidate entries of an affected plant or zone negative: \"not a register tree\" always and every entry within d, with d printed, the identity or the cause it stays unknown, and each code the plant's note prints with the entry it names or the cause it names none (the rule: SPEC.md, Protected status)",
+        "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record, supplied whatever the plant's identity: the MONUMENTALE_ARIF flag as printed (\"Si\" and \"1\" kept apart; otherwise blank or not printed, with the views read); each NOTE_RILEVATORE note verbatim with D's reading (states / does not / unclear) and the words it rests on; and each measurement the note records, as printed, with diameter_cm and measured_height_cm read from its words, the inputs of trunk_diameter_facts (the rule: SPEC.md, Protected status)",
         "applicable protection rule",
         "value assessment if that ground applies",
         "the Osservatorio's recognition-request record for the tree",

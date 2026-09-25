@@ -1,0 +1,2783 @@
+{
+ "service": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer",
+ "captured_at": "2026-09-24T23:49:41.319230+00:00",
+ "layers": [
+  {
+   "layer": 1,
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1",
+   "name": "Ulivi Monumentali",
+   "description": {
+    "bytes": 12088,
+    "sha256": "a29b2d085edcca046b9b6b0e1167dbc57eb775d4b3e09868aca9dd692103ea6b"
+   },
+   "object_ids": {
+    "bytes": 2280155,
+    "sha256": "b9a26db6680a6182df91791d8e5fce56ac80452a14167dbe2c290cb57a7a5a9a"
+   },
+   "rows": 341428,
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D1000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 1,
+     "last_oid": 1000,
+     "rows": 1000,
+     "bytes": 299192,
+     "sha256": "59256b3b88a683bad4fa809651b3780c6580ba682b678e1263fd1e650c408f69"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D1001+AND+OBJECTID%3C%3D2000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 1001,
+     "last_oid": 2000,
+     "rows": 1000,
+     "bytes": 300924,
+     "sha256": "9a170c5d80aa1b47a6e390a77c9508431c21f2fb04e6b5cd8fc3311efa3eb117"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D2001+AND+OBJECTID%3C%3D3000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 2001,
+     "last_oid": 3000,
+     "rows": 1000,
+     "bytes": 301761,
+     "sha256": "e229eba7e500099f5cceb928c132c1489ad83f9542c6aa4a59d3027274badee1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D3001+AND+OBJECTID%3C%3D4000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 3001,
+     "last_oid": 4000,
+     "rows": 1000,
+     "bytes": 304861,
+     "sha256": "17f786d301a29251fe59c15db3ab09e54a99b807fb4ac397bb1b61de3b5cad8b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D4001+AND+OBJECTID%3C%3D5000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 4001,
+     "last_oid": 5000,
+     "rows": 1000,
+     "bytes": 301414,
+     "sha256": "60f6f6798170d0a2fdc002b1a6a66ce24948f3cf860ef93785345c2dd1c98903"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D5001+AND+OBJECTID%3C%3D6000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 5001,
+     "last_oid": 6000,
+     "rows": 1000,
+     "bytes": 303673,
+     "sha256": "ac37a7fa09dbd2e91bac2a86e6f8410f2d5593ff29932952eff5b580a4cc904f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D6001+AND+OBJECTID%3C%3D7000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 6001,
+     "last_oid": 7000,
+     "rows": 1000,
+     "bytes": 299552,
+     "sha256": "056085d9ca9500230869c3b6402bc076c1315c2a0b014e12da236db7941cd465"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D7001+AND+OBJECTID%3C%3D8000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 7001,
+     "last_oid": 8000,
+     "rows": 1000,
+     "bytes": 300543,
+     "sha256": "6d1d6bd2545e40eb1a65333a0dcf4a73e2feaf8053e0ad943ce7b1a6cfd4837d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D8001+AND+OBJECTID%3C%3D9000&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 8001,
+     "last_oid": 9000,
+     "rows": 1000,
+     "bytes": 302883,
+     "sha256": "18f4f9666b8bc9a97834edd0d6a992946618187967cf3aac4012e1952e1c5594"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D9001+AND+OBJECTID%3C%3D10032&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 9001,
+     "last_oid": 10032,
+     "rows": 1000,
+     "bytes": 313479,
+     "sha256": "8b428d8e18d6307f7da4fa9b761f52b8acee0ed3ce60f356955415a79f9fa662"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D10033+AND+OBJECTID%3C%3D11114&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 10033,
+     "last_oid": 11114,
+     "rows": 1000,
+     "bytes": 313214,
+     "sha256": "f07cb18d1e13d092359066db238f7e8be2cd3c6f53eec0567bf9f29195767e3f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D11115+AND+OBJECTID%3C%3D12177&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 11115,
+     "last_oid": 12177,
+     "rows": 1000,
+     "bytes": 315303,
+     "sha256": "a7ad6f05bcc57a56e8a12e6af892e913f6fca9a60428476093e1dae61bad5c4d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D12178+AND+OBJECTID%3C%3D13192&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 12178,
+     "last_oid": 13192,
+     "rows": 1000,
+     "bytes": 381154,
+     "sha256": "8b7d3dd781723b8f74566547152559c658c790f408bcd987a8bcaa829fbd9ad3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D13193+AND+OBJECTID%3C%3D14217&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 13193,
+     "last_oid": 14217,
+     "rows": 1000,
+     "bytes": 480321,
+     "sha256": "653c96eaa811fb2ce9c8fa975dbaf602566fa149e4138c49a7dd996f33646554"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D14218+AND+OBJECTID%3C%3D15217&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 14218,
+     "last_oid": 15217,
+     "rows": 1000,
+     "bytes": 479549,
+     "sha256": "1868758516876d92876b4785b6a2e166cf2833af007afa766b0be6d144f4a8b4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D15218+AND+OBJECTID%3C%3D16278&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 15218,
+     "last_oid": 16278,
+     "rows": 1000,
+     "bytes": 478589,
+     "sha256": "d10008f2f0237b486523b731d2213c544b6a829568a6512d14b0496f4426ca3f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D16279+AND+OBJECTID%3C%3D17278&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 16279,
+     "last_oid": 17278,
+     "rows": 1000,
+     "bytes": 478783,
+     "sha256": "c9040145ffcc650f1332ad7f446d33a1e428fc85c1d0bddb86a8906e242f7a33"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D17279+AND+OBJECTID%3C%3D18278&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 17279,
+     "last_oid": 18278,
+     "rows": 1000,
+     "bytes": 478841,
+     "sha256": "3f320634b00a3f3c261d6bd615408b48c8ae20c06e537805396123d8d9e15179"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D18279+AND+OBJECTID%3C%3D19339&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 18279,
+     "last_oid": 19339,
+     "rows": 1000,
+     "bytes": 479773,
+     "sha256": "ea8a5fd09dbf06701c5d1255d771bc021b06340f721cb7f8eeb906f754935c34"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D19340+AND+OBJECTID%3C%3D20339&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 19340,
+     "last_oid": 20339,
+     "rows": 1000,
+     "bytes": 479253,
+     "sha256": "92f41e808130a57d5f8016d1632f8ea5231464793cfe7c067b50e83093bb35b8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D20340+AND+OBJECTID%3C%3D21339&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 20340,
+     "last_oid": 21339,
+     "rows": 1000,
+     "bytes": 479748,
+     "sha256": "00511538f238e82592a128578b67f97c8a782429aeea32489367e73b428d6e90"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D21340+AND+OBJECTID%3C%3D22390&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 21340,
+     "last_oid": 22390,
+     "rows": 1000,
+     "bytes": 478942,
+     "sha256": "9d29cf9f12529b62b319851fb4018d4176a30d76a671ddaee0998b2b5b6918e3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D22391+AND+OBJECTID%3C%3D23409&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 22391,
+     "last_oid": 23409,
+     "rows": 1000,
+     "bytes": 477414,
+     "sha256": "af0023ad71e29a3f5170a4a2ab1e61a99a53c529cd224db439901db3f6219062"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D23410+AND+OBJECTID%3C%3D24470&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 23410,
+     "last_oid": 24470,
+     "rows": 1000,
+     "bytes": 478301,
+     "sha256": "d966f844b5f05f4bcfd8bac054b5447bc2cef66147b1a9752c059be4ea35a3b9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D24471+AND+OBJECTID%3C%3D25485&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 24471,
+     "last_oid": 25485,
+     "rows": 1000,
+     "bytes": 479687,
+     "sha256": "cf01596f1d950afb36646565e083aa270afd7b3868d64f254dcc7ee783e2914b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D25486+AND+OBJECTID%3C%3D26485&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 25486,
+     "last_oid": 26485,
+     "rows": 1000,
+     "bytes": 480472,
+     "sha256": "a527e2d59f2257c4f5886da6b04c2abdf5d8fd74a07dceaa2a005e7d0292823b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D26486+AND+OBJECTID%3C%3D27485&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 26486,
+     "last_oid": 27485,
+     "rows": 1000,
+     "bytes": 479763,
+     "sha256": "684eb35f9f7bb6adc748f1e47f161a17c68faf8ac586324ef5d26b025f58244b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D27486+AND+OBJECTID%3C%3D28485&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 27486,
+     "last_oid": 28485,
+     "rows": 1000,
+     "bytes": 479564,
+     "sha256": "34eb0cb5273e0ddea1a023a1b3980d743be76372bd6b6290da2801f6a23fccbf"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D28486+AND+OBJECTID%3C%3D29493&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 28486,
+     "last_oid": 29493,
+     "rows": 1000,
+     "bytes": 480030,
+     "sha256": "acb078701af7f201e2a7730cde46742809364160e82778c034ebeb2f118d73d2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D29494+AND+OBJECTID%3C%3D30548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 29494,
+     "last_oid": 30548,
+     "rows": 1000,
+     "bytes": 481223,
+     "sha256": "da9d18bbd4b99d9668352b17f4b928ce45680e04d0492a77d6fd3943f2abf2a9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D30549+AND+OBJECTID%3C%3D31548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 30549,
+     "last_oid": 31548,
+     "rows": 1000,
+     "bytes": 478990,
+     "sha256": "4770d3f9207967c8d579756c1ba67b00ded8feeeb138c976c9ecda7863c2f326"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D31549+AND+OBJECTID%3C%3D32548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 31549,
+     "last_oid": 32548,
+     "rows": 1000,
+     "bytes": 476099,
+     "sha256": "42d5f4b4f2a96b47a82668b1287a46b70705cc0b0f8d6a712f4cd6b4485ff3bd"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D32549+AND+OBJECTID%3C%3D33548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 32549,
+     "last_oid": 33548,
+     "rows": 1000,
+     "bytes": 479797,
+     "sha256": "c2cbc91fafd6653019d208d3264ac7ebe0f9f3cbb8d28ecd90e462c03484a63e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D33549+AND+OBJECTID%3C%3D34548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 33549,
+     "last_oid": 34548,
+     "rows": 1000,
+     "bytes": 477647,
+     "sha256": "ca639d79c7bc425eb7cad4a2d9c19f2e91abba0e1b7422c3f4ef3bdc1f34af6a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D34549+AND+OBJECTID%3C%3D35548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 34549,
+     "last_oid": 35548,
+     "rows": 1000,
+     "bytes": 477929,
+     "sha256": "a2ee4a370292aaa985f0a229a9b695ffd7b3a43ec6f0ca8d6fa940311296f2dc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D35549+AND+OBJECTID%3C%3D36548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 35549,
+     "last_oid": 36548,
+     "rows": 1000,
+     "bytes": 478530,
+     "sha256": "1536a90dd65d283ea7b7b993dec4782dad00a60a30eabee3dccbc3a0137013a9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D36549+AND+OBJECTID%3C%3D37548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 36549,
+     "last_oid": 37548,
+     "rows": 1000,
+     "bytes": 478438,
+     "sha256": "ffac2c6536cbdae121e9dee310d646a7d856c0cda919795a21a090a9e3fc27d3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D37549+AND+OBJECTID%3C%3D38548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 37549,
+     "last_oid": 38548,
+     "rows": 1000,
+     "bytes": 478435,
+     "sha256": "56ce72030057873e9f36e25ba7d8fa13889791d4205f844b531dd3a796847b3a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D38549+AND+OBJECTID%3C%3D39548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 38549,
+     "last_oid": 39548,
+     "rows": 1000,
+     "bytes": 479372,
+     "sha256": "91e6a22999ed1f20825b0ca9b4aec7a479cd1657c8e93b0ca15ceda35c5055a7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D39549+AND+OBJECTID%3C%3D40548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 39549,
+     "last_oid": 40548,
+     "rows": 1000,
+     "bytes": 479327,
+     "sha256": "35c57d3291bdd015b2d97b00625b1a4f7c1164b02c36f11204d8768252c7ef94"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D40549+AND+OBJECTID%3C%3D41548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 40549,
+     "last_oid": 41548,
+     "rows": 1000,
+     "bytes": 480843,
+     "sha256": "04e4401b8eb6504e652585c1c02bad23c454e4c68d0b6df51262703deb04ce12"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D41549+AND+OBJECTID%3C%3D42548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 41549,
+     "last_oid": 42548,
+     "rows": 1000,
+     "bytes": 480492,
+     "sha256": "74ce977971ab836f0bed21a3fc5ce1494f5aa347143c17e9c6f9f8c1be23295b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D42549+AND+OBJECTID%3C%3D43548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 42549,
+     "last_oid": 43548,
+     "rows": 1000,
+     "bytes": 480494,
+     "sha256": "e12904eecf96a4409c499b9dadbba5c41dae9cf0978d60925c2aa14d8629077a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D43549+AND+OBJECTID%3C%3D44548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 43549,
+     "last_oid": 44548,
+     "rows": 1000,
+     "bytes": 479066,
+     "sha256": "597b007665490042bf8714203e8966577050d6a67f7f21f8ffff190c61a9cb1e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D44549+AND+OBJECTID%3C%3D45548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 44549,
+     "last_oid": 45548,
+     "rows": 1000,
+     "bytes": 480134,
+     "sha256": "ff31b2ecae722b4f832c46cd23bde98ab6ade67207bfe9df2559282771b17cba"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D45549+AND+OBJECTID%3C%3D46548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 45549,
+     "last_oid": 46548,
+     "rows": 1000,
+     "bytes": 481052,
+     "sha256": "ca6daa1eee9d3b5c43805c0e7a9dcda39f04928ea6adbb6c94e6a429a31ebdd5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D46549+AND+OBJECTID%3C%3D47548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 46549,
+     "last_oid": 47548,
+     "rows": 1000,
+     "bytes": 481120,
+     "sha256": "62e06aca473deeae4e4aeb59379392d8d86e7e0f6f626eb7f3ea17eb2a1128f1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D47549+AND+OBJECTID%3C%3D48548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 47549,
+     "last_oid": 48548,
+     "rows": 1000,
+     "bytes": 480998,
+     "sha256": "47650b4f93775089558e74bf29d4f4fb9b109fd1802c3beedc17b9007f0d30d5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D48549+AND+OBJECTID%3C%3D49548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 48549,
+     "last_oid": 49548,
+     "rows": 1000,
+     "bytes": 479784,
+     "sha256": "0c607027090432ec04251dd1f948058d1f30dec0dbcfeac3722c69a295cc77a4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D49549+AND+OBJECTID%3C%3D50548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 49549,
+     "last_oid": 50548,
+     "rows": 1000,
+     "bytes": 481000,
+     "sha256": "3aa310d7a050cfd0742d7dd311fefe357474564867f771a84c0380fb2214252d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D50549+AND+OBJECTID%3C%3D51548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 50549,
+     "last_oid": 51548,
+     "rows": 1000,
+     "bytes": 481207,
+     "sha256": "fcc6a5dfda1d879f1eea632cbe1af8e1f27a5ea239a03c20651b231a62e26a94"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D51549+AND+OBJECTID%3C%3D52548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 51549,
+     "last_oid": 52548,
+     "rows": 1000,
+     "bytes": 480611,
+     "sha256": "6c464db80656fd0e8f9940aaab054d7d8754a61307282c286feafc533be77d28"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D52549+AND+OBJECTID%3C%3D53548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 52549,
+     "last_oid": 53548,
+     "rows": 1000,
+     "bytes": 480510,
+     "sha256": "ea7d71662bb60f6e7bb46ff2a67cfc06388faa319425413715ce5186854ddcd7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D53549+AND+OBJECTID%3C%3D54548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 53549,
+     "last_oid": 54548,
+     "rows": 1000,
+     "bytes": 480163,
+     "sha256": "7ccc9cf845e44092a6e2996d1d3ec3fe18fc3edbecfa95238c18b80f94710a64"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D54549+AND+OBJECTID%3C%3D55548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 54549,
+     "last_oid": 55548,
+     "rows": 1000,
+     "bytes": 480672,
+     "sha256": "3f78b34348e0326e8fd158c8d316f610192388115a3ffe7f44ae35c859faae67"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D55549+AND+OBJECTID%3C%3D56548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 55549,
+     "last_oid": 56548,
+     "rows": 1000,
+     "bytes": 479842,
+     "sha256": "44ffb4e60666a2b9fdc996f5dc8a18c641fd2e7f5b81d6edc4c4ab649f35853d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D56549+AND+OBJECTID%3C%3D57548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 56549,
+     "last_oid": 57548,
+     "rows": 1000,
+     "bytes": 479538,
+     "sha256": "a98832b0450fa49155d8c89b719ec6dcedf710ec575ca08b6087240db114ccd2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D57549+AND+OBJECTID%3C%3D58548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 57549,
+     "last_oid": 58548,
+     "rows": 1000,
+     "bytes": 479547,
+     "sha256": "a8d889ce6d8db024f755c6809e7ab5d824ba6856856d31a99b3172d54b769ccb"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D58549+AND+OBJECTID%3C%3D59548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 58549,
+     "last_oid": 59548,
+     "rows": 1000,
+     "bytes": 479189,
+     "sha256": "ec6fa41b0fa4a3debf2f3ec3cb16f19df55926514175484dfc9b286cbb73bd9c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D59549+AND+OBJECTID%3C%3D60548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 59549,
+     "last_oid": 60548,
+     "rows": 1000,
+     "bytes": 479754,
+     "sha256": "41841f427e75508e0251db68b0ba2dc4cb19cea4fefc06e9a363dd4a70338778"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D60549+AND+OBJECTID%3C%3D61548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 60549,
+     "last_oid": 61548,
+     "rows": 1000,
+     "bytes": 479655,
+     "sha256": "a0ce4267a7af7ba4a2b1292eca729cc092afb48e7078bc5d7db4d17cd2a4ff1f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D61549+AND+OBJECTID%3C%3D62548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 61549,
+     "last_oid": 62548,
+     "rows": 1000,
+     "bytes": 478031,
+     "sha256": "74d86edc6597c04065a53629e6841a44aa935bfae476d44da5abb631bfc025b0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D62549+AND+OBJECTID%3C%3D63548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 62549,
+     "last_oid": 63548,
+     "rows": 1000,
+     "bytes": 479495,
+     "sha256": "41e3ec02e889917b5ee51b3cd018e2de0cae02c2bf3ea857f57387ec55607858"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D63549+AND+OBJECTID%3C%3D64548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 63549,
+     "last_oid": 64548,
+     "rows": 1000,
+     "bytes": 478775,
+     "sha256": "b4355a1087e80c9cc033d6ea2dcc28d1f921bc828a7a65eb1e33aef48be39ed7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D64549+AND+OBJECTID%3C%3D65548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 64549,
+     "last_oid": 65548,
+     "rows": 1000,
+     "bytes": 479406,
+     "sha256": "25b470ad21a93bf10790f9971b5383640396db052e56b57c02fff66069439d20"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D65549+AND+OBJECTID%3C%3D66548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 65549,
+     "last_oid": 66548,
+     "rows": 1000,
+     "bytes": 480369,
+     "sha256": "2b7c1bf9ee120defdc182c92c065a4799f3828c9c4c798b9d3e12fc461a6c1c0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D66549+AND+OBJECTID%3C%3D67548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 66549,
+     "last_oid": 67548,
+     "rows": 1000,
+     "bytes": 480394,
+     "sha256": "b2145cd31d32f9feeb8a7ede52a8e25ff6147f203412225cfe3571c138554499"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D67549+AND+OBJECTID%3C%3D68548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 67549,
+     "last_oid": 68548,
+     "rows": 1000,
+     "bytes": 479692,
+     "sha256": "356d8d5f0c01a2f30c4155c70233cec41ebc7a717474a00144a53d21b45c608f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D68549+AND+OBJECTID%3C%3D69548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 68549,
+     "last_oid": 69548,
+     "rows": 1000,
+     "bytes": 480547,
+     "sha256": "7d4767bb330a980a8dbf5ab3295becc679eeb075024e5526590960f06b09c32c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D69549+AND+OBJECTID%3C%3D70548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 69549,
+     "last_oid": 70548,
+     "rows": 1000,
+     "bytes": 479919,
+     "sha256": "82b8d1cc851e1dca8cebec85b27745ab8b926b0414894b6c2aad612fa252c853"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D70549+AND+OBJECTID%3C%3D71548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 70549,
+     "last_oid": 71548,
+     "rows": 1000,
+     "bytes": 480013,
+     "sha256": "162155880652174361d115a02870c767e26bd119dbe6d6f4c260b1a4cffd3a87"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D71549+AND+OBJECTID%3C%3D72548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 71549,
+     "last_oid": 72548,
+     "rows": 1000,
+     "bytes": 479541,
+     "sha256": "cf1ffc14ed84d0d8984fce117191969edd7fcdac66a6b1648ff186a005c7cbd5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D72549+AND+OBJECTID%3C%3D73548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 72549,
+     "last_oid": 73548,
+     "rows": 1000,
+     "bytes": 479133,
+     "sha256": "83eeb9fb59445231824f1c63b63eefdd7df9e3ebed66147b749e41e7938134ba"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D73549+AND+OBJECTID%3C%3D74548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 73549,
+     "last_oid": 74548,
+     "rows": 1000,
+     "bytes": 478515,
+     "sha256": "6b38105251a18d8d33cfec926bc018e1a056dbe5cea86d70f73de67f5f91715a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D74549+AND+OBJECTID%3C%3D75548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 74549,
+     "last_oid": 75548,
+     "rows": 1000,
+     "bytes": 478552,
+     "sha256": "9b25ce2e1f66f546b0a390d1bcb97f92a62859f1f14f4b059dc74a2601223ad0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D75549+AND+OBJECTID%3C%3D76548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 75549,
+     "last_oid": 76548,
+     "rows": 1000,
+     "bytes": 479001,
+     "sha256": "632df397041983e9ba73105752e437aed43188f18ef6faddd6037d6e35efbeba"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D76549+AND+OBJECTID%3C%3D77548&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 76549,
+     "last_oid": 77548,
+     "rows": 1000,
+     "bytes": 479213,
+     "sha256": "338cd8bf3b99e31a8213f2492942229bd04c4ef8195ff5e36c7281351fab0e6a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D77549+AND+OBJECTID%3C%3D78621&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 77549,
+     "last_oid": 78621,
+     "rows": 1000,
+     "bytes": 478742,
+     "sha256": "cfa6c9ed16808a6f23901bf0265a5b92cdba51d1c5e3566a088ff98d794ad048"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D78622+AND+OBJECTID%3C%3D79940&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 78622,
+     "last_oid": 79940,
+     "rows": 1000,
+     "bytes": 478038,
+     "sha256": "ab9f06c7db3c610f219364bd8de2633a0e6f8b1488fdd55ea89bb39d937c5099"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D79942+AND+OBJECTID%3C%3D81056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 79942,
+     "last_oid": 81056,
+     "rows": 1000,
+     "bytes": 478970,
+     "sha256": "dc693bf7deaafb3bfd289dd6966a556a2738aef146d9d79cc1c125d672577709"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D81057+AND+OBJECTID%3C%3D82056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 81057,
+     "last_oid": 82056,
+     "rows": 1000,
+     "bytes": 478973,
+     "sha256": "6a6e9c68ab73cbb88f5ff93546786639e8c8214a5ee721f57431278ab35f9293"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D82057+AND+OBJECTID%3C%3D83056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 82057,
+     "last_oid": 83056,
+     "rows": 1000,
+     "bytes": 480327,
+     "sha256": "8d4c66f8f300604d0fa162176b25f791b3e3f748cf73ec2781f6887ccb5a1dbe"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D83057+AND+OBJECTID%3C%3D84056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 83057,
+     "last_oid": 84056,
+     "rows": 1000,
+     "bytes": 481049,
+     "sha256": "a15185dbc885bab6081a15324c4e7f896e7e9671df582416bea77db6cf125abc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D84057+AND+OBJECTID%3C%3D85056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 84057,
+     "last_oid": 85056,
+     "rows": 1000,
+     "bytes": 480280,
+     "sha256": "3c66cb8983a5102f932f5c646ba5a77d8f74a405a351fc0e54964f63b7291bab"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D85057+AND+OBJECTID%3C%3D86056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 85057,
+     "last_oid": 86056,
+     "rows": 1000,
+     "bytes": 479409,
+     "sha256": "7ac9b16db9889a64771b5dd35c690bd2b0e1ec4bed61b304320c279e6dc793e5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D86057+AND+OBJECTID%3C%3D87056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 86057,
+     "last_oid": 87056,
+     "rows": 1000,
+     "bytes": 479312,
+     "sha256": "9cf5a688a3b3e193391d4c53c5db842257f47763a9b3c836968e0de890b7cd25"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D87057+AND+OBJECTID%3C%3D88056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 87057,
+     "last_oid": 88056,
+     "rows": 1000,
+     "bytes": 478980,
+     "sha256": "b2a62b38b92be5c0697d59c5185ba6d7e6d0fcbcfe2ddc3666df3c861896c036"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D88057+AND+OBJECTID%3C%3D89056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 88057,
+     "last_oid": 89056,
+     "rows": 1000,
+     "bytes": 478798,
+     "sha256": "a8888381c004d483da4dec1bc83f13eb7619c2a372624790fdb4d29e5cdbf166"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D89057+AND+OBJECTID%3C%3D90056&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 89057,
+     "last_oid": 90056,
+     "rows": 1000,
+     "bytes": 478553,
+     "sha256": "3137a16d7facc389abe52164b7252a3d80ebce1a2eb33d977bc3592203ee5bb3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D90057+AND+OBJECTID%3C%3D91078&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 90057,
+     "last_oid": 91078,
+     "rows": 1000,
+     "bytes": 479055,
+     "sha256": "f27b2f712f7e341f78e1d1dd62da99fbd88b61a134b803f2f89ec9d2d1ec5228"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D91079+AND+OBJECTID%3C%3D92109&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 91079,
+     "last_oid": 92109,
+     "rows": 1000,
+     "bytes": 482460,
+     "sha256": "98022815350768205d872475c06bba427545c77607c570041727dfbd1680e998"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D92110+AND+OBJECTID%3C%3D93186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 92110,
+     "last_oid": 93186,
+     "rows": 1000,
+     "bytes": 482645,
+     "sha256": "d60ec70f3cf54b14805a30c469dc8c999eca0e84d2662d6e2bd76613e9968f18"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D93187+AND+OBJECTID%3C%3D94186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 93187,
+     "last_oid": 94186,
+     "rows": 1000,
+     "bytes": 479405,
+     "sha256": "76162ae390b3b3720f740227aa322e8b8d957c4de220e9d7d448511ea8d7e833"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D94187+AND+OBJECTID%3C%3D95186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 94187,
+     "last_oid": 95186,
+     "rows": 1000,
+     "bytes": 479430,
+     "sha256": "8d20d60df24a5f768279bf016a618abd2b06ecbfe0f7c9856ce780dc8d82dadb"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D95187+AND+OBJECTID%3C%3D96186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 95187,
+     "last_oid": 96186,
+     "rows": 1000,
+     "bytes": 478851,
+     "sha256": "7f1a5892e7457d8f6c9a5652fdb5b34a42b617bf887ce60cf523282976cbee84"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D96187+AND+OBJECTID%3C%3D97186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 96187,
+     "last_oid": 97186,
+     "rows": 1000,
+     "bytes": 479201,
+     "sha256": "bc890f8cba35addb8356ee1cf3c65676692e0632e6ef69541d2f6f8ce588dedd"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D97187+AND+OBJECTID%3C%3D98186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 97187,
+     "last_oid": 98186,
+     "rows": 1000,
+     "bytes": 481209,
+     "sha256": "1a5522e158e1822b0e53861165a374d7bae726b36a1e27af267fa2012e2e0597"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D98187+AND+OBJECTID%3C%3D99186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 98187,
+     "last_oid": 99186,
+     "rows": 1000,
+     "bytes": 481610,
+     "sha256": "fd878c4ac46270c3fe2c68a137bbd6264ec57f62e8e7b8196712e2e2468336f8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D99187+AND+OBJECTID%3C%3D100186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 99187,
+     "last_oid": 100186,
+     "rows": 1000,
+     "bytes": 481016,
+     "sha256": "e125965a2fc6c7e1d9e35a2d8b7c5ddeedbaa7fff5af264e4102dc1612b1f833"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D100187+AND+OBJECTID%3C%3D101186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 100187,
+     "last_oid": 101186,
+     "rows": 1000,
+     "bytes": 481609,
+     "sha256": "ba7c3781eb666269b74d8f0bb14ed30c868a189c9f840e48c0df9789f4a03fcc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D101187+AND+OBJECTID%3C%3D102186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 101187,
+     "last_oid": 102186,
+     "rows": 1000,
+     "bytes": 480913,
+     "sha256": "f0c6012e895abbd5ee4f849376e9ac4e27c44c54ecffb732141061a87ce1fce8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D102187+AND+OBJECTID%3C%3D103186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 102187,
+     "last_oid": 103186,
+     "rows": 1000,
+     "bytes": 480743,
+     "sha256": "e73baacc9a7cc153d1cf5044562d0776734c779597cb68afd7d6a191d3d7de72"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D103187+AND+OBJECTID%3C%3D104186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 103187,
+     "last_oid": 104186,
+     "rows": 1000,
+     "bytes": 481988,
+     "sha256": "baec927ebc930294e6576b003c1406cda4bd15162c95af925a3e84328354ab7b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D104187+AND+OBJECTID%3C%3D105186&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 104187,
+     "last_oid": 105186,
+     "rows": 1000,
+     "bytes": 482154,
+     "sha256": "a6f2dfb669761ceb3fa87f2f639737ff75c03c8df78195d8a36fb9734990ce11"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D105187+AND+OBJECTID%3C%3D106232&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 105187,
+     "last_oid": 106232,
+     "rows": 1000,
+     "bytes": 479886,
+     "sha256": "771d956ef86a9f46522a97f6bdfd8c876682a9ad2e73392b6b2035888b749830"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D106233+AND+OBJECTID%3C%3D107296&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 106233,
+     "last_oid": 107296,
+     "rows": 1000,
+     "bytes": 478782,
+     "sha256": "158a86472195de23c24864ceedfd40a95dae069d444ed9b3445e9c053adee08e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D107297+AND+OBJECTID%3C%3D108351&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 107297,
+     "last_oid": 108351,
+     "rows": 1000,
+     "bytes": 479193,
+     "sha256": "542152884b98ad977d48040fe72bb5b10b28710a021854f3a311412bfe9ad576"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D108352+AND+OBJECTID%3C%3D109388&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 108352,
+     "last_oid": 109388,
+     "rows": 1000,
+     "bytes": 479322,
+     "sha256": "3790daf2cf98ca5ce9af69bf22ae647f64ec66f3c0d21a9feca38553ae4d239a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D109389+AND+OBJECTID%3C%3D110395&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 109389,
+     "last_oid": 110395,
+     "rows": 1000,
+     "bytes": 479211,
+     "sha256": "fd861639500994aa5d4cc8a366eae8552471938f385134ef7b983dc101d77088"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D110396+AND+OBJECTID%3C%3D111395&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 110396,
+     "last_oid": 111395,
+     "rows": 1000,
+     "bytes": 479755,
+     "sha256": "0770b5a8780dc633c7fe20fca4388121844d80464facb0a79f7cbf55e98572b4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D111396+AND+OBJECTID%3C%3D112395&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 111396,
+     "last_oid": 112395,
+     "rows": 1000,
+     "bytes": 481532,
+     "sha256": "aa8afb729790db93306470ddb90d526204fa297c95fb582c12a095a3bcb08930"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D112396+AND+OBJECTID%3C%3D113395&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 112396,
+     "last_oid": 113395,
+     "rows": 1000,
+     "bytes": 483452,
+     "sha256": "0d8245a51a333a7604af4b98168d22f15eb2148b0d905b38799908836b6afd9a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D113396+AND+OBJECTID%3C%3D114470&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 113396,
+     "last_oid": 114470,
+     "rows": 1000,
+     "bytes": 481249,
+     "sha256": "d0c40fddcc24892f44a496c95018d3c0f4de378d4d0137526b32a473c63a8475"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D114471+AND+OBJECTID%3C%3D115630&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 114471,
+     "last_oid": 115630,
+     "rows": 1000,
+     "bytes": 478235,
+     "sha256": "4998ec23c24d0da57da39eb1d4cb786ff63c9fe70282477bebc1ca4b2d499532"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D115631+AND+OBJECTID%3C%3D116688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 115631,
+     "last_oid": 116688,
+     "rows": 1000,
+     "bytes": 478949,
+     "sha256": "e36f288ca1aea2d603501d87748da4a8bb105066754ec48b771f7aa865552eeb"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D116689+AND+OBJECTID%3C%3D117688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 116689,
+     "last_oid": 117688,
+     "rows": 1000,
+     "bytes": 478814,
+     "sha256": "ab8be19e71db252aef16f03cdc5d3270bb2a1ee1fe92b316d682d0b2350f803d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D117689+AND+OBJECTID%3C%3D118688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 117689,
+     "last_oid": 118688,
+     "rows": 1000,
+     "bytes": 478791,
+     "sha256": "208001b6e79d8a56a501fb761d603b1b33a9de4be39f3889634041a2b762dd02"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D118689+AND+OBJECTID%3C%3D119688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 118689,
+     "last_oid": 119688,
+     "rows": 1000,
+     "bytes": 478522,
+     "sha256": "52837becb71458fb59fd459455855c55d272046c16ee80a13071c7d815935126"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D119689+AND+OBJECTID%3C%3D120688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 119689,
+     "last_oid": 120688,
+     "rows": 1000,
+     "bytes": 479336,
+     "sha256": "e093eadfdaf1f563ff2c777949ddc47a995e6025e2cd3beba88478ee87f4dfb8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D120689+AND+OBJECTID%3C%3D121688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 120689,
+     "last_oid": 121688,
+     "rows": 1000,
+     "bytes": 480445,
+     "sha256": "d7659ff9b55745f0bb64b89cda6619556c6e17c6246230e203d0fe9752700544"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D121689+AND+OBJECTID%3C%3D122688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 121689,
+     "last_oid": 122688,
+     "rows": 1000,
+     "bytes": 480064,
+     "sha256": "65d4540a8a62c047bc4ddde2ba9e5ea85cbe90053352354cb779835a8e369157"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D122689+AND+OBJECTID%3C%3D123688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 122689,
+     "last_oid": 123688,
+     "rows": 1000,
+     "bytes": 479217,
+     "sha256": "fcf6b08ab900ff339451d266f9a55907b35d72584c2295c0a669a514beafd878"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D123689+AND+OBJECTID%3C%3D124688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 123689,
+     "last_oid": 124688,
+     "rows": 1000,
+     "bytes": 481431,
+     "sha256": "1832917b422877997e9bf13dfad5197fca6c80a2d02ee7d4af6379fe9f8e8bbd"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D124689+AND+OBJECTID%3C%3D125688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 124689,
+     "last_oid": 125688,
+     "rows": 1000,
+     "bytes": 481558,
+     "sha256": "450bd2fbe43436da83833f7c296f0423be20921c03bc61b18853b9568527ff94"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D125689+AND+OBJECTID%3C%3D126688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 125689,
+     "last_oid": 126688,
+     "rows": 1000,
+     "bytes": 480604,
+     "sha256": "736be11ab8ad9d1ad70fa0d1e2d135f360554ab8b1f002b563c51f86f2a4f47a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D126689+AND+OBJECTID%3C%3D127688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 126689,
+     "last_oid": 127688,
+     "rows": 1000,
+     "bytes": 481743,
+     "sha256": "a3279f02bcc36366bd880278d099f2651538d59a69ed8f3077c5baed9466194f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D127689+AND+OBJECTID%3C%3D128688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 127689,
+     "last_oid": 128688,
+     "rows": 1000,
+     "bytes": 481801,
+     "sha256": "d40916e2f880b556e27383f26e5cef5871417dd59a5d345a11587a0f4f11823d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D128689+AND+OBJECTID%3C%3D129688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 128689,
+     "last_oid": 129688,
+     "rows": 1000,
+     "bytes": 480933,
+     "sha256": "b5b83f9875e04f316ff83ba7381097ee86169e30ba511d266a4f056267d5612a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D129689+AND+OBJECTID%3C%3D130688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 129689,
+     "last_oid": 130688,
+     "rows": 1000,
+     "bytes": 482319,
+     "sha256": "a05e0c6248d5eb349fed5c3047fc70b512b9ab83f56b21be3050c3458ee7dece"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D130689+AND+OBJECTID%3C%3D131688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 130689,
+     "last_oid": 131688,
+     "rows": 1000,
+     "bytes": 482071,
+     "sha256": "2bcd7a45a5c486f35fcc2f2354b5463ba0d3613bc50cafcd048b11ff5d137a36"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D131689+AND+OBJECTID%3C%3D132688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 131689,
+     "last_oid": 132688,
+     "rows": 1000,
+     "bytes": 480193,
+     "sha256": "0db1f2c29d89fd9c64a3644d832c8093aa826121b1c6feed3670db11f6f85fd2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D132689+AND+OBJECTID%3C%3D133688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 132689,
+     "last_oid": 133688,
+     "rows": 1000,
+     "bytes": 480026,
+     "sha256": "47134a38f1e1b0fd226b2b5731a1ff6e1784026c97a993aa3c23282ae3d7eb69"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D133689+AND+OBJECTID%3C%3D134848&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 133689,
+     "last_oid": 134848,
+     "rows": 1000,
+     "bytes": 478849,
+     "sha256": "a628f27becc65fd84920d83f62e2740c19ce4cf53d0cf6db6d06aedd5f55b230"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D134849+AND+OBJECTID%3C%3D136098&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 134849,
+     "last_oid": 136098,
+     "rows": 1000,
+     "bytes": 478488,
+     "sha256": "465197f70597aaebac9cb2e803c95cf7f9f428ba13cf8aa9f3c178577aa2feba"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D136099+AND+OBJECTID%3C%3D137100&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 136099,
+     "last_oid": 137100,
+     "rows": 1000,
+     "bytes": 478675,
+     "sha256": "2ada023d5fcdc084d576811e3233fa2d3b0639e46681deef6d54b15e0874f787"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D137101+AND+OBJECTID%3C%3D138109&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 137101,
+     "last_oid": 138109,
+     "rows": 1000,
+     "bytes": 477802,
+     "sha256": "fa1729940d33529eff7e28b36ce023e8c402baa1d496679e0a3caa2769eac79d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D138110+AND+OBJECTID%3C%3D139111&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 138110,
+     "last_oid": 139111,
+     "rows": 1000,
+     "bytes": 476380,
+     "sha256": "d4ab06564894a2829d3dbf4e196724b0b5b76d68dfc05305674a8e450eb58514"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D139112+AND+OBJECTID%3C%3D140116&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 139112,
+     "last_oid": 140116,
+     "rows": 1000,
+     "bytes": 478354,
+     "sha256": "d48015661987c7455c3a818ae99c63009d07f7f2e6df02d43ae21a3f362c0323"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D140117+AND+OBJECTID%3C%3D141118&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 140117,
+     "last_oid": 141118,
+     "rows": 1000,
+     "bytes": 477563,
+     "sha256": "01e65ef12df2a7ccb26e36dc8569584b54e5399a1bcb7319dcd8fda6a65b8d38"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D141119+AND+OBJECTID%3C%3D142184&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 141119,
+     "last_oid": 142184,
+     "rows": 1000,
+     "bytes": 476674,
+     "sha256": "7ffebb6f951d328635ba150bd43e1454b025fee968d7895306d7913d762f9bc3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D142185+AND+OBJECTID%3C%3D143349&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 142185,
+     "last_oid": 143349,
+     "rows": 1000,
+     "bytes": 479207,
+     "sha256": "c3c82e6af548ec60a04d4bd6f447fb0d6dcff92840b2f16f4cb0107d62db9255"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D143351+AND+OBJECTID%3C%3D144368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 143351,
+     "last_oid": 144368,
+     "rows": 1000,
+     "bytes": 479625,
+     "sha256": "f652d59fe2d2707f637cc6c19abeda047032447d518384168744adc90a58bec3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D144369+AND+OBJECTID%3C%3D145368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 144369,
+     "last_oid": 145368,
+     "rows": 1000,
+     "bytes": 477891,
+     "sha256": "7abce243f28b9b0b38bd353a1d0f9e14f1cc303994341b64a042a48e4eb75dbc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D145369+AND+OBJECTID%3C%3D146368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 145369,
+     "last_oid": 146368,
+     "rows": 1000,
+     "bytes": 477111,
+     "sha256": "f0cbf04458c757be570085056f166bca3701327f2d3ca06ed4db8537159b6395"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D146369+AND+OBJECTID%3C%3D147368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 146369,
+     "last_oid": 147368,
+     "rows": 1000,
+     "bytes": 480343,
+     "sha256": "cd507f981c25f235b39dd995e4ed527f4ed142cabc4a2a5bcae058c7a0da157b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D147369+AND+OBJECTID%3C%3D148368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 147369,
+     "last_oid": 148368,
+     "rows": 1000,
+     "bytes": 482055,
+     "sha256": "5ea401f28e64ceca31421c8777f87d107c1fbfe7d3121310a4ba0c95f725be96"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D148369+AND+OBJECTID%3C%3D149368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 148369,
+     "last_oid": 149368,
+     "rows": 1000,
+     "bytes": 482417,
+     "sha256": "091d93ead37db9f520f7cc5c6ec9e703ed96c0308110cb652ae32855427a84f3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D149369+AND+OBJECTID%3C%3D150368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 149369,
+     "last_oid": 150368,
+     "rows": 1000,
+     "bytes": 481513,
+     "sha256": "6ebbdea512a952c26954177c8be0a9dce5169ce7f79b57c7d1ad0f62b2ecd44e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D150369+AND+OBJECTID%3C%3D151368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 150369,
+     "last_oid": 151368,
+     "rows": 1000,
+     "bytes": 481163,
+     "sha256": "ee43d700833e5bfc776e66a118f8b7a2b117eb30b3f5fadb3a34aaab91931bdb"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D151369+AND+OBJECTID%3C%3D152368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 151369,
+     "last_oid": 152368,
+     "rows": 1000,
+     "bytes": 480795,
+     "sha256": "3f3a8c44b8e3cb3fecde8b0f0b673e473e1375c70481aa885907d66a09ee858a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D152369+AND+OBJECTID%3C%3D153368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 152369,
+     "last_oid": 153368,
+     "rows": 1000,
+     "bytes": 480624,
+     "sha256": "f962b2cc2bb8744384712c9e150c2672aa1c88160381cf636bd139bf3455b9dc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D153369+AND+OBJECTID%3C%3D154368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 153369,
+     "last_oid": 154368,
+     "rows": 1000,
+     "bytes": 480592,
+     "sha256": "59a5d02bad815956dff50203d9663d1736dc7371422de50cddd10dc5c37706ff"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D154369+AND+OBJECTID%3C%3D155368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 154369,
+     "last_oid": 155368,
+     "rows": 1000,
+     "bytes": 480755,
+     "sha256": "0ff67e4db1e23c7764eee811ed7042b42dd7fee729320f4c47e302aa054ccc34"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D155369+AND+OBJECTID%3C%3D156368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 155369,
+     "last_oid": 156368,
+     "rows": 1000,
+     "bytes": 480146,
+     "sha256": "5a58980932718ce503cb1e53e4666a4f25c3a9475f12558257e47e9f610f8b6f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D156369+AND+OBJECTID%3C%3D157368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 156369,
+     "last_oid": 157368,
+     "rows": 1000,
+     "bytes": 479492,
+     "sha256": "6327eafff1076b3677a08675bac4c3f782e2041337fa295071126ec43b028f48"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D157369+AND+OBJECTID%3C%3D158368&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 157369,
+     "last_oid": 158368,
+     "rows": 1000,
+     "bytes": 479533,
+     "sha256": "3ae506af87f40ee8e64de88428af6482df4e698354bdd3fb8e5d4139bc5be2ed"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D158369+AND+OBJECTID%3C%3D159369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 158369,
+     "last_oid": 159369,
+     "rows": 1000,
+     "bytes": 479384,
+     "sha256": "6432f8bb2467e19e85ba5fde2187e10f3f6acbda42d8ab3cc046abd6ba94bec0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D159370+AND+OBJECTID%3C%3D160369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 159370,
+     "last_oid": 160369,
+     "rows": 1000,
+     "bytes": 479559,
+     "sha256": "3896964bf938cd8e9f6f76fec80e83cba79716019c000c4fd1a2da46dab166f9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D160370+AND+OBJECTID%3C%3D161369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 160370,
+     "last_oid": 161369,
+     "rows": 1000,
+     "bytes": 481235,
+     "sha256": "6d055c38edb050afc45967377cf74f14f5c981194056b1a0566b60e6d3458f11"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D161370+AND+OBJECTID%3C%3D162369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 161370,
+     "last_oid": 162369,
+     "rows": 1000,
+     "bytes": 480853,
+     "sha256": "7e44b0ea0d83a33c2fa926464a0002fc12ec0507c37f25eba90f58dc723a5ec2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D162370+AND+OBJECTID%3C%3D163369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 162370,
+     "last_oid": 163369,
+     "rows": 1000,
+     "bytes": 479119,
+     "sha256": "a49507a62075697183524eeea1ed9c664e610aab7521d391e82acf350e4bdd68"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D163370+AND+OBJECTID%3C%3D164369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 163370,
+     "last_oid": 164369,
+     "rows": 1000,
+     "bytes": 478808,
+     "sha256": "947c40872fc3d8424205b1d6056c0c8e30eca716cc49a970c36b5fc6447f30b7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D164370+AND+OBJECTID%3C%3D165369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 164370,
+     "last_oid": 165369,
+     "rows": 1000,
+     "bytes": 481396,
+     "sha256": "5e971186bc69e588cdaed15da28202c41b92b606db0b81f3e3680171a07d3de0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D165370+AND+OBJECTID%3C%3D166369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 165370,
+     "last_oid": 166369,
+     "rows": 1000,
+     "bytes": 481626,
+     "sha256": "b1a176712ca40c89e9e9c26e48466e61619b0f3320a30a2c047f864cdf13278c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D166370+AND+OBJECTID%3C%3D167369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 166370,
+     "last_oid": 167369,
+     "rows": 1000,
+     "bytes": 482479,
+     "sha256": "5c7acd94a373c829a4cd014de010866c4376050fc1a491477123be54527974b4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D167370+AND+OBJECTID%3C%3D168369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 167370,
+     "last_oid": 168369,
+     "rows": 1000,
+     "bytes": 482435,
+     "sha256": "c8d163bb5093a84d2430cdb95d44ff10931cb324a90038056ea58bc792cd6aeb"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D168370+AND+OBJECTID%3C%3D169369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 168370,
+     "last_oid": 169369,
+     "rows": 1000,
+     "bytes": 482495,
+     "sha256": "3cd9db5e73919bc1d2de240fb48b2d656e5a4a016508aa10f0201a3ddc49c874"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D169370+AND+OBJECTID%3C%3D170369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 169370,
+     "last_oid": 170369,
+     "rows": 1000,
+     "bytes": 482778,
+     "sha256": "9ae69104d03e4321e16eacdd508974ce1f508fc1985fe85469ea7cf2fc370bfc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D170370+AND+OBJECTID%3C%3D171369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 170370,
+     "last_oid": 171369,
+     "rows": 1000,
+     "bytes": 481498,
+     "sha256": "43215f387345c4ec0bf9d6a6ee855450b5c8e625bb9c7844ee7010338d1360ac"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D171370+AND+OBJECTID%3C%3D172369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 171370,
+     "last_oid": 172369,
+     "rows": 1000,
+     "bytes": 480831,
+     "sha256": "e0020c36adc2fe2992179c1f70a7ed0184537220dc25c167cd58a79b744bdf9f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D172370+AND+OBJECTID%3C%3D173369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 172370,
+     "last_oid": 173369,
+     "rows": 1000,
+     "bytes": 479537,
+     "sha256": "982b171119f099d66aabc2a3e422423de071b5aac12bba86a4327383d5e36c54"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D173370+AND+OBJECTID%3C%3D174369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 173370,
+     "last_oid": 174369,
+     "rows": 1000,
+     "bytes": 478700,
+     "sha256": "8178f246ad49422d171b18f4c636ca58517aee1e9c34e796ab64f4f3c993ae99"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D174370+AND+OBJECTID%3C%3D175369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 174370,
+     "last_oid": 175369,
+     "rows": 1000,
+     "bytes": 478973,
+     "sha256": "f7629643b17c538c1d6f9146e0423b1c544f2e492013e0c7e33877777935c9da"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D175370+AND+OBJECTID%3C%3D176369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 175370,
+     "last_oid": 176369,
+     "rows": 1000,
+     "bytes": 478724,
+     "sha256": "d5e347bd87f405f0855b83edb7bc92686b1c27bb40226dea72a817d842394f0a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D176370+AND+OBJECTID%3C%3D177369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 176370,
+     "last_oid": 177369,
+     "rows": 1000,
+     "bytes": 479067,
+     "sha256": "895fa03fd0051ec94bd8f05f32dcf7a3ba8eb3d7b9b9c7bd3f89ddba1afcbe03"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D177370+AND+OBJECTID%3C%3D178369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 177370,
+     "last_oid": 178369,
+     "rows": 1000,
+     "bytes": 478862,
+     "sha256": "80f7b7e37c3380e5bf77dfd27dcb2a7f2a8de3d1d438ae24fce92f9d2ee3c930"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D178370+AND+OBJECTID%3C%3D179369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 178370,
+     "last_oid": 179369,
+     "rows": 1000,
+     "bytes": 479402,
+     "sha256": "06b454d80e852be50254a41494b419a8dbaa364ee04bc7b314fd235d32e4ee12"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D179370+AND+OBJECTID%3C%3D180369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 179370,
+     "last_oid": 180369,
+     "rows": 1000,
+     "bytes": 481705,
+     "sha256": "139300658028a0c8237ee086b8e5212095d2f50cbe7c7f330b0c802e11a4b1ed"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D180370+AND+OBJECTID%3C%3D181369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 180370,
+     "last_oid": 181369,
+     "rows": 1000,
+     "bytes": 481913,
+     "sha256": "3e0943515c98e551d21b68bc6bcea99b1a1a1226544b2b51901bd903c48be09c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D181370+AND+OBJECTID%3C%3D182369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 181370,
+     "last_oid": 182369,
+     "rows": 1000,
+     "bytes": 483516,
+     "sha256": "a9a63aa64c04f7c7e2b9d830c78e7c333b9d29771538eaffc37b2954e44710ed"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D182370+AND+OBJECTID%3C%3D183369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 182370,
+     "last_oid": 183369,
+     "rows": 1000,
+     "bytes": 483325,
+     "sha256": "fda401d3a3b431a47a4515bbe710dda07654100f01e7d5797ba36436ea2d4a99"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D183370+AND+OBJECTID%3C%3D184369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 183370,
+     "last_oid": 184369,
+     "rows": 1000,
+     "bytes": 483020,
+     "sha256": "2315f6e1ab97a446ece3ce7337acde83e0f68d5b48bddf08d200ab4caefb45e8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D184370+AND+OBJECTID%3C%3D185369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 184370,
+     "last_oid": 185369,
+     "rows": 1000,
+     "bytes": 483318,
+     "sha256": "9e2489221e6f364e16f3aa7f9609f9cac7c383da4157cd1fd0405e1752033a91"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D185370+AND+OBJECTID%3C%3D186369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 185370,
+     "last_oid": 186369,
+     "rows": 1000,
+     "bytes": 481138,
+     "sha256": "08b09f1e2f6f51e80a8fbf7c6d1fde372c873dbc660ecf7d769aa08aef082f95"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D186370+AND+OBJECTID%3C%3D187369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 186370,
+     "last_oid": 187369,
+     "rows": 1000,
+     "bytes": 481107,
+     "sha256": "a03eb940e933deeb00ce5d3a202f220bcb5452367ad9d2bf4854b4eca198cf73"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D187370+AND+OBJECTID%3C%3D188369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 187370,
+     "last_oid": 188369,
+     "rows": 1000,
+     "bytes": 479589,
+     "sha256": "9eac6b937383ea30e482aec490ef8ce312c68e33a717f4eedf2143ed8fac65b4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D188370+AND+OBJECTID%3C%3D189369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 188370,
+     "last_oid": 189369,
+     "rows": 1000,
+     "bytes": 479230,
+     "sha256": "a398d58d0a2976c5e9800529087fda11d5d62c881f9bbf94e5989a6b0a43d540"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D189370+AND+OBJECTID%3C%3D190369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 189370,
+     "last_oid": 190369,
+     "rows": 1000,
+     "bytes": 479535,
+     "sha256": "7be0aeac458b56c266c7dc68df77be58786fdd91b2c4a55382423699edfa6c31"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D190370+AND+OBJECTID%3C%3D191369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 190370,
+     "last_oid": 191369,
+     "rows": 1000,
+     "bytes": 479575,
+     "sha256": "1f44616f1815cfb61947bab91bbccb32fdd736f9bf5bbc19971c44f34e773861"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D191370+AND+OBJECTID%3C%3D192369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 191370,
+     "last_oid": 192369,
+     "rows": 1000,
+     "bytes": 479144,
+     "sha256": "e976efa56a57669f524a6868b5d05cb05698ed4e74ff475b45fd3ad521f2e300"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D192370+AND+OBJECTID%3C%3D193369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 192370,
+     "last_oid": 193369,
+     "rows": 1000,
+     "bytes": 478921,
+     "sha256": "356b5eaa77642427fd410dcff55e5765b9320ac4353a5ecc0781bb5973e128dc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D193370+AND+OBJECTID%3C%3D194369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 193370,
+     "last_oid": 194369,
+     "rows": 1000,
+     "bytes": 479285,
+     "sha256": "a0c19b4cf3c28883286295cf497771b06ba2a0b8e43dcad2bff3c60918cba03e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D194370+AND+OBJECTID%3C%3D195369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 194370,
+     "last_oid": 195369,
+     "rows": 1000,
+     "bytes": 480024,
+     "sha256": "d3cce54023d48a480393f27a65ab2847d9d741b56ed1133bf8dc647cb9531b84"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D195370+AND+OBJECTID%3C%3D196369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 195370,
+     "last_oid": 196369,
+     "rows": 1000,
+     "bytes": 480073,
+     "sha256": "922f1a81482b5a5c307a15468bcdc028393882992c4517390c8d03121dca1187"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D196370+AND+OBJECTID%3C%3D197369&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 196370,
+     "last_oid": 197369,
+     "rows": 1000,
+     "bytes": 480614,
+     "sha256": "6a2f160f3d9e0bdefc9111a7cd913837c8d13fc1cab70164c058a72bce5c4a25"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D197370+AND+OBJECTID%3C%3D198379&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 197370,
+     "last_oid": 198379,
+     "rows": 1000,
+     "bytes": 479982,
+     "sha256": "ac97f0c163ab3f122ed16eb4d034ee5039f3c64e9344532b19f62da4f738671b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D198380+AND+OBJECTID%3C%3D199429&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 198380,
+     "last_oid": 199429,
+     "rows": 1000,
+     "bytes": 480017,
+     "sha256": "f23d7520ce4c27d950985ec38b0c0822bd257cca6c8dbce9c06dc46e39d57e73"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D199430+AND+OBJECTID%3C%3D200470&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 199430,
+     "last_oid": 200470,
+     "rows": 1000,
+     "bytes": 480042,
+     "sha256": "046fc1a545467143e1eb93a89df9d52c9d7aadf3a1ddcd481953585039a2fb01"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D200471+AND+OBJECTID%3C%3D201509&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 200471,
+     "last_oid": 201509,
+     "rows": 1000,
+     "bytes": 481020,
+     "sha256": "37027936eb65d7b884bf825a574942c2c7f51f7931cd2a477ba36f5975320c79"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D201510+AND+OBJECTID%3C%3D202533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 201510,
+     "last_oid": 202533,
+     "rows": 1000,
+     "bytes": 480266,
+     "sha256": "3e06748d55acb3a192a08bd403370a84ef7d270374215780b5c3eb96f342e246"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D202534+AND+OBJECTID%3C%3D203533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 202534,
+     "last_oid": 203533,
+     "rows": 1000,
+     "bytes": 478739,
+     "sha256": "94bd4d242ce31805976afad1f552d11c9bda75daa0e8e52ed81adf0a9738bf74"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D203534+AND+OBJECTID%3C%3D204533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 203534,
+     "last_oid": 204533,
+     "rows": 1000,
+     "bytes": 479233,
+     "sha256": "08fffafdb883b884816074e218b175732b642023b5fe05d8f23e7c823e4c5767"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D204534+AND+OBJECTID%3C%3D205533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 204534,
+     "last_oid": 205533,
+     "rows": 1000,
+     "bytes": 481254,
+     "sha256": "e7a9768aeaa818bc1e6400bb3f56eae2973d7b1112cc37323a6fab7673839bf3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D205534+AND+OBJECTID%3C%3D206533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 205534,
+     "last_oid": 206533,
+     "rows": 1000,
+     "bytes": 481143,
+     "sha256": "c20b8313f896cbbdd24c7cf3cdff12ed2e49470cdc067a2600737f53d965d75f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D206534+AND+OBJECTID%3C%3D207533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 206534,
+     "last_oid": 207533,
+     "rows": 1000,
+     "bytes": 481368,
+     "sha256": "a0826754bd65d59ac68e63aebc6f2b4226d82ab80f931986600a74f8f73d46b2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D207534+AND+OBJECTID%3C%3D208533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 207534,
+     "last_oid": 208533,
+     "rows": 1000,
+     "bytes": 481017,
+     "sha256": "b6d1d9939d5ae34fabcce47b480b83414778b191c9224f5418f9a6fe54e0b8d1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D208534+AND+OBJECTID%3C%3D209533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 208534,
+     "last_oid": 209533,
+     "rows": 1000,
+     "bytes": 481589,
+     "sha256": "680a981cc0d256e16037408111226117a8874c8d59b6d7955c32c02a40fc4209"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D209534+AND+OBJECTID%3C%3D210533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 209534,
+     "last_oid": 210533,
+     "rows": 1000,
+     "bytes": 481639,
+     "sha256": "6f04302c77359f2a046b6febcb8dafbd7fd2ff51fdeed28bd90fec345204e8f0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D210534+AND+OBJECTID%3C%3D211533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 210534,
+     "last_oid": 211533,
+     "rows": 1000,
+     "bytes": 478963,
+     "sha256": "32fed6a5ea7a62b485f439c3bc70dc43821ef4b13566d3f4f6faf8eb8b32a0e6"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D211534+AND+OBJECTID%3C%3D212533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 211534,
+     "last_oid": 212533,
+     "rows": 1000,
+     "bytes": 478142,
+     "sha256": "9c58c539261e778a343dd5171a750af3ec513be6ea14d520c45cadfe55799399"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D212534+AND+OBJECTID%3C%3D213533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 212534,
+     "last_oid": 213533,
+     "rows": 1000,
+     "bytes": 479793,
+     "sha256": "a2140f70c1510a326d13b770dc7879a7627989e4a506f48ef4dd8f9ab1b2b66d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D213534+AND+OBJECTID%3C%3D214533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 213534,
+     "last_oid": 214533,
+     "rows": 1000,
+     "bytes": 480230,
+     "sha256": "4ad68418ce56f30db25d4ee01151b7e368fda10c7f2d979901d646ab9118fcf2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D214534+AND+OBJECTID%3C%3D215533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 214534,
+     "last_oid": 215533,
+     "rows": 1000,
+     "bytes": 479658,
+     "sha256": "79da9645cfa178b280a559de8616277626c975a140f136395e792eb431c00c01"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D215534+AND+OBJECTID%3C%3D216533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 215534,
+     "last_oid": 216533,
+     "rows": 1000,
+     "bytes": 478967,
+     "sha256": "0e7935e963d7e948a12802ce4ab75b2a3f52630442fea8a4ce4b101c0ddd05ed"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D216534+AND+OBJECTID%3C%3D217533&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 216534,
+     "last_oid": 217533,
+     "rows": 1000,
+     "bytes": 478737,
+     "sha256": "47b69376b636461551395a28b1721079b954cbd70b89fd8e4a03c1c8f3ee8d99"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D217534+AND+OBJECTID%3C%3D218534&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 217534,
+     "last_oid": 218534,
+     "rows": 1000,
+     "bytes": 478063,
+     "sha256": "627f368afb355e4be8095de13ee526439db9c6296214be5144497061ac4f4208"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D218535+AND+OBJECTID%3C%3D219534&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 218535,
+     "last_oid": 219534,
+     "rows": 1000,
+     "bytes": 478374,
+     "sha256": "dd9c590e381941adcd72eb575b6aa68bdfebe8e061f15c9afda192355e0e2ace"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D219535+AND+OBJECTID%3C%3D220567&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 219535,
+     "last_oid": 220567,
+     "rows": 1000,
+     "bytes": 478602,
+     "sha256": "5ae47a0de65bc677a5a43efd13c63e0a06844d4cefb2c81ef200c2a03987e90d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D220568+AND+OBJECTID%3C%3D221598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 220568,
+     "last_oid": 221598,
+     "rows": 1000,
+     "bytes": 479200,
+     "sha256": "11b20a8c1260b632ee949255b18d3b2153ca70d0b4493db6d494ddc463faaad7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D221599+AND+OBJECTID%3C%3D222598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 221599,
+     "last_oid": 222598,
+     "rows": 1000,
+     "bytes": 481211,
+     "sha256": "e5854cd74da8109efd67dee3a6259c128e8d0bfef08816e30f5bbd312c72d6c1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D222599+AND+OBJECTID%3C%3D223598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 222599,
+     "last_oid": 223598,
+     "rows": 1000,
+     "bytes": 481313,
+     "sha256": "62c018b914dde1127937a0691c125dcbf39586419aaee587a7c3504d674e50b8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D223599+AND+OBJECTID%3C%3D224598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 223599,
+     "last_oid": 224598,
+     "rows": 1000,
+     "bytes": 480772,
+     "sha256": "bf79c5687eef3b242b3d64ec44a209d2035827b2a665422b2b03a760fb50e7a9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D224599+AND+OBJECTID%3C%3D225598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 224599,
+     "last_oid": 225598,
+     "rows": 1000,
+     "bytes": 480655,
+     "sha256": "eb6fd1965931be0600153b091f35bd41e94cabc2c7740ef9830c260fe1b103e0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D225599+AND+OBJECTID%3C%3D226598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 225599,
+     "last_oid": 226598,
+     "rows": 1000,
+     "bytes": 479677,
+     "sha256": "6d68daba975efc0df9659d03d0aab4e2c51f84dc478bc71941ae49f28546dcfd"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D226599+AND+OBJECTID%3C%3D227598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 226599,
+     "last_oid": 227598,
+     "rows": 1000,
+     "bytes": 479711,
+     "sha256": "59d70b31d49e1013c35a67710f86962622aa60be6a048b0e3b951bf076148960"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D227599+AND+OBJECTID%3C%3D228598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 227599,
+     "last_oid": 228598,
+     "rows": 1000,
+     "bytes": 482269,
+     "sha256": "d594196db43778f9ea9e3063b6f86a3e9fc16bb6140e1fcd2a12f5e094d6dce3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D228599+AND+OBJECTID%3C%3D229598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 228599,
+     "last_oid": 229598,
+     "rows": 1000,
+     "bytes": 482551,
+     "sha256": "1f42d9f95560729b8e95b34505ab87d39faa4c20256d75bae7f5c5cd16158684"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D229599+AND+OBJECTID%3C%3D230598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 229599,
+     "last_oid": 230598,
+     "rows": 1000,
+     "bytes": 448831,
+     "sha256": "a036574ff2b92e8081c5d1ca23b088176d78d2873022996a13acde710dee2f66"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D230599+AND+OBJECTID%3C%3D231598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 230599,
+     "last_oid": 231598,
+     "rows": 1000,
+     "bytes": 448542,
+     "sha256": "394d45db4440f3e8d66347d7834d28a70bbfa6082a8967a90dc764182a79166d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D231599+AND+OBJECTID%3C%3D232598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 231599,
+     "last_oid": 232598,
+     "rows": 1000,
+     "bytes": 464205,
+     "sha256": "38d6616916ddaff231edf5efbdb576a8a0d4ba5dc5b6d6b38c0787b0368e9757"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D232599+AND+OBJECTID%3C%3D233598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 232599,
+     "last_oid": 233598,
+     "rows": 1000,
+     "bytes": 481722,
+     "sha256": "7cd6489e8bfa85a0cf4d5857faadca41a4f716f6279efa59c3a3dd2af98990bd"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D233599+AND+OBJECTID%3C%3D234598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 233599,
+     "last_oid": 234598,
+     "rows": 1000,
+     "bytes": 481061,
+     "sha256": "3e12525483465673ddcfc2d258690f33574d792ee197c3c3bcd7dd35641ed483"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D234599+AND+OBJECTID%3C%3D235598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 234599,
+     "last_oid": 235598,
+     "rows": 1000,
+     "bytes": 479023,
+     "sha256": "66c855c43d304e7d359304602b0c5575e6fabf89ea39225895ac97d354dc7f59"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D235599+AND+OBJECTID%3C%3D236598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 235599,
+     "last_oid": 236598,
+     "rows": 1000,
+     "bytes": 479755,
+     "sha256": "258680bd2afe36a7adcef71d0dafc86169aa7f70aa426b78d2d1be54009fd5cf"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D236599+AND+OBJECTID%3C%3D237598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 236599,
+     "last_oid": 237598,
+     "rows": 1000,
+     "bytes": 479763,
+     "sha256": "278a2372a8c3be129f2adaedd35025be7b2311a76b1211149eab9d2545fded70"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D237599+AND+OBJECTID%3C%3D238598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 237599,
+     "last_oid": 238598,
+     "rows": 1000,
+     "bytes": 466813,
+     "sha256": "19be7bc97447bd38e6f9d9bbb421425e9a12d986ca8ad2b7c9188711cfa88d25"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D238599+AND+OBJECTID%3C%3D239598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 238599,
+     "last_oid": 239598,
+     "rows": 1000,
+     "bytes": 381593,
+     "sha256": "377cdad13ad9ca405c0523019e331b2e59106eb82f3c1b2ca15b7e227ca94174"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D239599+AND+OBJECTID%3C%3D240598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 239599,
+     "last_oid": 240598,
+     "rows": 1000,
+     "bytes": 382810,
+     "sha256": "6ffaa6c846d32434ea5a73e5c1238e0f59d7b5cbdc15b8c753952b0786fe1be1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D240599+AND+OBJECTID%3C%3D241598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 240599,
+     "last_oid": 241598,
+     "rows": 1000,
+     "bytes": 382585,
+     "sha256": "6ff7f795cf4d79e4585fb203f8d86ea03db26d3b305b0086f98af0940eaca2e3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D241599+AND+OBJECTID%3C%3D242598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 241599,
+     "last_oid": 242598,
+     "rows": 1000,
+     "bytes": 383256,
+     "sha256": "cabdab977fb3bee62008afdd9077bd95ddafa3efaa15d32d8efea5ca8e5a3258"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D242599+AND+OBJECTID%3C%3D243598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 242599,
+     "last_oid": 243598,
+     "rows": 1000,
+     "bytes": 382313,
+     "sha256": "5191dae552749a18faf77f84202231f3237127f0d27cd7d3e8b3c489c990d107"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D243599+AND+OBJECTID%3C%3D244598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 243599,
+     "last_oid": 244598,
+     "rows": 1000,
+     "bytes": 382944,
+     "sha256": "20cdb5b725b19898d957b1f1f78b0bce3c764eedfcef66f44dd43d8ec7e3a6e0"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D244599+AND+OBJECTID%3C%3D245598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 244599,
+     "last_oid": 245598,
+     "rows": 1000,
+     "bytes": 384701,
+     "sha256": "357c1bd0dd6aceff0637c5527939983d9f03f262c2d38baf4c1ed0a9b33f5852"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D245599+AND+OBJECTID%3C%3D246598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 245599,
+     "last_oid": 246598,
+     "rows": 1000,
+     "bytes": 384522,
+     "sha256": "ebc26eba717124f4a6ad18d32078a0445168a367905edccbae47fabc2091933c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D246599+AND+OBJECTID%3C%3D247598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 246599,
+     "last_oid": 247598,
+     "rows": 1000,
+     "bytes": 384562,
+     "sha256": "9b0b245d6f55850e10b2c00efccba950c65d156c8dbc56b86c323d309d91486c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D247599+AND+OBJECTID%3C%3D248598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 247599,
+     "last_oid": 248598,
+     "rows": 1000,
+     "bytes": 382081,
+     "sha256": "f65d698c061b3f53bc498414729591bab1ba3d2922bd400104becfe4f76b352c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D248599+AND+OBJECTID%3C%3D249598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 248599,
+     "last_oid": 249598,
+     "rows": 1000,
+     "bytes": 381494,
+     "sha256": "cb051383c658fa53ef0ec961793ec73234283b264cf4c8f5131ea36ed172d264"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D249599+AND+OBJECTID%3C%3D250598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 249599,
+     "last_oid": 250598,
+     "rows": 1000,
+     "bytes": 381002,
+     "sha256": "4952a93e9c27517bb4b70d6b8f0022ce0bb9bc7e6e1abca9f626252aef47452d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D250599+AND+OBJECTID%3C%3D251598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 250599,
+     "last_oid": 251598,
+     "rows": 1000,
+     "bytes": 370963,
+     "sha256": "7a0c8b959fc4ba26ad5d7dada7fa1eb9d3efce2ddec7e699aef46b059e2b013c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D251599+AND+OBJECTID%3C%3D252598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 251599,
+     "last_oid": 252598,
+     "rows": 1000,
+     "bytes": 375491,
+     "sha256": "e5ac3639f8af288ec2cc850a9435693aa05875f050ed4fb8849baca7140b33ef"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D252599+AND+OBJECTID%3C%3D253598&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 252599,
+     "last_oid": 253598,
+     "rows": 1000,
+     "bytes": 380664,
+     "sha256": "d1f0df3e0ca5676f5d36d2c4817043708f73f749c3e008798058e1dfdcaf823d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D253599+AND+OBJECTID%3C%3D254603&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 253599,
+     "last_oid": 254603,
+     "rows": 1000,
+     "bytes": 365892,
+     "sha256": "d7353b57f1d1ac5a9df7f4f0acae99cd7db8690ced5be7a6bc21e1375c4c4c8c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D254604+AND+OBJECTID%3C%3D255603&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 254604,
+     "last_oid": 255603,
+     "rows": 1000,
+     "bytes": 365490,
+     "sha256": "725e6ebe185e6fffc56a2e80a31c2c0ffb17b2ef79e37674a3f46c0f440203e7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D255604+AND+OBJECTID%3C%3D256605&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 255604,
+     "last_oid": 256605,
+     "rows": 1000,
+     "bytes": 368301,
+     "sha256": "0b6fd93951909ea5f6f2522ad363cb111bd4db5b9c4b749bfa5b1022f3ba2e12"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D256606+AND+OBJECTID%3C%3D257605&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 256606,
+     "last_oid": 257605,
+     "rows": 1000,
+     "bytes": 355351,
+     "sha256": "881e5c27fec079690b215c223561646593ed9fd00c3ba41be896ad358fb12a24"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D257606+AND+OBJECTID%3C%3D258637&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 257606,
+     "last_oid": 258637,
+     "rows": 1000,
+     "bytes": 327238,
+     "sha256": "2c9e6f791a91abc5bce2ef1f8326773aed39228cdd67f26ec526bcdacdba47d5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D258638+AND+OBJECTID%3C%3D259660&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 258638,
+     "last_oid": 259660,
+     "rows": 1000,
+     "bytes": 480271,
+     "sha256": "0d69ae659aad1864459632e0437db316e4e82c9ea70affa1b5f341ac68fbc1bc"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D259661+AND+OBJECTID%3C%3D260669&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 259661,
+     "last_oid": 260669,
+     "rows": 1000,
+     "bytes": 479823,
+     "sha256": "f9d67b4048a93b0f4dc47710050a9b02308f70929694088575232ad8ed042874"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D260670+AND+OBJECTID%3C%3D261669&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 260670,
+     "last_oid": 261669,
+     "rows": 1000,
+     "bytes": 481511,
+     "sha256": "af18a595ce405824b34b8d103792386a0006ad7b3be3274b5bc55d2b8693fee1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D261670+AND+OBJECTID%3C%3D262669&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 261670,
+     "last_oid": 262669,
+     "rows": 1000,
+     "bytes": 480848,
+     "sha256": "f06fec2c126c02132cbe9175645dc305355b3a137d7cbc08d7a0c1e0b312cfd3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D262670+AND+OBJECTID%3C%3D263669&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 262670,
+     "last_oid": 263669,
+     "rows": 1000,
+     "bytes": 481030,
+     "sha256": "225d833aeab8cd0a450d6c91ece377ad03970f7e6a0e12104604286ca53b149b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D263670+AND+OBJECTID%3C%3D264715&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 263670,
+     "last_oid": 264715,
+     "rows": 1000,
+     "bytes": 479904,
+     "sha256": "913dd6d5df368edf96c60ae12274e92826b71c4e47885ff6212f25acac3d4dd4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D264716+AND+OBJECTID%3C%3D265731&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 264716,
+     "last_oid": 265731,
+     "rows": 1000,
+     "bytes": 481241,
+     "sha256": "3599ef867245745e20860be69e6e7ca684e36f243fcb2aeafd4df9f6fd1fe659"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D265732+AND+OBJECTID%3C%3D266748&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 265732,
+     "last_oid": 266748,
+     "rows": 1000,
+     "bytes": 480659,
+     "sha256": "e01edf24b6808550ad087a5ea2b6eacc719768bdd55924c45375d5ed1645fb07"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D266749+AND+OBJECTID%3C%3D267772&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 266749,
+     "last_oid": 267772,
+     "rows": 1000,
+     "bytes": 479815,
+     "sha256": "4a15b54f05f7572679d269e4decf6f4a48a25f5820df1360d4d1d63c6751321c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D267773+AND+OBJECTID%3C%3D268802&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 267773,
+     "last_oid": 268802,
+     "rows": 1000,
+     "bytes": 480775,
+     "sha256": "673832092c0deb625590e68390146914018deee4531dc18781ca72e1c540508c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D268803+AND+OBJECTID%3C%3D269825&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 268803,
+     "last_oid": 269825,
+     "rows": 1000,
+     "bytes": 478686,
+     "sha256": "dbccb696417cb9675d27064c700e757b97d405db7aef0a1a5d59ae93a664e006"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D269826+AND+OBJECTID%3C%3D270825&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 269826,
+     "last_oid": 270825,
+     "rows": 1000,
+     "bytes": 480402,
+     "sha256": "cbeef9dc336c25155d4bdfb5e6b76975719fe573693af8af8503c9b52661866f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D270826+AND+OBJECTID%3C%3D271825&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 270826,
+     "last_oid": 271825,
+     "rows": 1000,
+     "bytes": 481385,
+     "sha256": "f8a57664920b8a748f4a8bcffdf91a500499454e8496dbddaf9b63cca1db20a5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D271826+AND+OBJECTID%3C%3D272825&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 271826,
+     "last_oid": 272825,
+     "rows": 1000,
+     "bytes": 480440,
+     "sha256": "804ca8e6e5e219f16f23ddc7cc98d846b89f722136af74e47beeed7ee2b82071"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D272826+AND+OBJECTID%3C%3D273825&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 272826,
+     "last_oid": 273825,
+     "rows": 1000,
+     "bytes": 480256,
+     "sha256": "fc0a101beab0b92d568bfbffa2582ed6696e46d3a281547d13f9d779df2fde91"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D273826+AND+OBJECTID%3C%3D274838&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 273826,
+     "last_oid": 274838,
+     "rows": 1000,
+     "bytes": 480427,
+     "sha256": "8a00aebeb53207375d02e23b6b15c96084b9d5c2b6234206a0e81f0d74110b1b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D274839+AND+OBJECTID%3C%3D275838&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 274839,
+     "last_oid": 275838,
+     "rows": 1000,
+     "bytes": 479741,
+     "sha256": "02192ee71538ad66200105fa5038a5375ba78cd15146e1caa834a22452965a5b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D275839+AND+OBJECTID%3C%3D276847&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 275839,
+     "last_oid": 276847,
+     "rows": 1000,
+     "bytes": 473509,
+     "sha256": "b317a1095a037f94211a8bb1a5b45767ff67349329d256c482f19fe36deb9da3"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D276848+AND+OBJECTID%3C%3D277847&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 276848,
+     "last_oid": 277847,
+     "rows": 1000,
+     "bytes": 429940,
+     "sha256": "b5c5d38483051c0aeb2ef29126a4860b9c63db62d115049cf15847cad4dcbc73"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D277848+AND+OBJECTID%3C%3D278848&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 277848,
+     "last_oid": 278848,
+     "rows": 1000,
+     "bytes": 376431,
+     "sha256": "d9426dc6cc1bfb12ef918534a29c541b3dcbef36650195bae4ec6e1e5ed5345b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D278849+AND+OBJECTID%3C%3D279876&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 278849,
+     "last_oid": 279876,
+     "rows": 1000,
+     "bytes": 310073,
+     "sha256": "16e2521b0484ba42c8e9e5c9771c9a1da00aaa62256c4aed97555b92711dc6a5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D279877+AND+OBJECTID%3C%3D280898&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 279877,
+     "last_oid": 280898,
+     "rows": 1000,
+     "bytes": 476221,
+     "sha256": "d49ac95d3971a171c2417d36df16492d643ebe68ca4e3a9f3aacd8e99f491e7b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D280899+AND+OBJECTID%3C%3D281902&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 280899,
+     "last_oid": 281902,
+     "rows": 1000,
+     "bytes": 479997,
+     "sha256": "79a23f4b5a736d44108dc28c67c99e30ddbd2c7c308fa9f226a35c81b1a56ebb"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D281903+AND+OBJECTID%3C%3D282902&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 281903,
+     "last_oid": 282902,
+     "rows": 1000,
+     "bytes": 481070,
+     "sha256": "2d9b39986c8f2b0a873d261afab2e9356223b761985c59b70d32ec10f887152f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D282903+AND+OBJECTID%3C%3D283902&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 282903,
+     "last_oid": 283902,
+     "rows": 1000,
+     "bytes": 481092,
+     "sha256": "0727a2a69d33f32c92fed8a760e2be85d08de0dd4cddafeaa246c617ed2d7545"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D283903+AND+OBJECTID%3C%3D284902&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 283903,
+     "last_oid": 284902,
+     "rows": 1000,
+     "bytes": 480584,
+     "sha256": "c9d3dc7a3fdb7e131029e593a0c3f17a06dee2e58218298ddfb4f4dcdc3d66e4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D284903+AND+OBJECTID%3C%3D285952&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 284903,
+     "last_oid": 285952,
+     "rows": 1000,
+     "bytes": 480332,
+     "sha256": "1709e25d573d4d172b23d6d342faa3f5af132476726d6c9b2b204f5545d66aaa"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D285953+AND+OBJECTID%3C%3D286965&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 285953,
+     "last_oid": 286965,
+     "rows": 1000,
+     "bytes": 480817,
+     "sha256": "5e4a0e7f3fd1fccd74fb542f71503b8c4b60839ea61369f304e7e68da07a6688"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D286966+AND+OBJECTID%3C%3D287986&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 286966,
+     "last_oid": 287986,
+     "rows": 1000,
+     "bytes": 481043,
+     "sha256": "583bc38087d1c56f2a609b26ef02d9f8cfbdd7b8f4592659ba8f512728138f32"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D287987+AND+OBJECTID%3C%3D289005&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 287987,
+     "last_oid": 289005,
+     "rows": 1000,
+     "bytes": 479983,
+     "sha256": "89c1bbad39393fa3bec1612261787c8202ca89e1c5f7908ed08948cc73317476"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D289006+AND+OBJECTID%3C%3D290010&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 289006,
+     "last_oid": 290010,
+     "rows": 1000,
+     "bytes": 480994,
+     "sha256": "851d8798de52e6ff75fbf9fc4d962af37d8beb8a175743bcac64d35051bbe368"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D290013+AND+OBJECTID%3C%3D291052&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 290013,
+     "last_oid": 291052,
+     "rows": 1000,
+     "bytes": 477941,
+     "sha256": "7410d0de77f654271b72f8cf11837f376d83872a522521bb7b15e9dc6635b9ba"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D291053+AND+OBJECTID%3C%3D292052&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 291053,
+     "last_oid": 292052,
+     "rows": 1000,
+     "bytes": 480463,
+     "sha256": "68b65e4a9705545842817792a1b5c32ec58def497cfbe2e9921fac95823fcdf7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D292053+AND+OBJECTID%3C%3D293052&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 292053,
+     "last_oid": 293052,
+     "rows": 1000,
+     "bytes": 481535,
+     "sha256": "576b4d038ddd763f530989618ad793f4f3f4e58ab4024b369ff88e11e5ba76ac"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D293053+AND+OBJECTID%3C%3D294052&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 293053,
+     "last_oid": 294052,
+     "rows": 1000,
+     "bytes": 480289,
+     "sha256": "f88ac125ee39c8d9b4f39965fb0c298c91a3c666151ac8224fdf29c2f8158e04"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D294053+AND+OBJECTID%3C%3D295052&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 294053,
+     "last_oid": 295052,
+     "rows": 1000,
+     "bytes": 480349,
+     "sha256": "fd4182ce7c7284bffde100010938b499126d3335e622913a4bc6c19ce75c8464"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D295053+AND+OBJECTID%3C%3D296059&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 295053,
+     "last_oid": 296059,
+     "rows": 1000,
+     "bytes": 480221,
+     "sha256": "d6291e6f3a9d883b0137ba2de3985935841948d149eaa335b25cc0d21a72c129"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D296060+AND+OBJECTID%3C%3D297067&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 296060,
+     "last_oid": 297067,
+     "rows": 1000,
+     "bytes": 479324,
+     "sha256": "5822b4297a4ce322df3ad2f3025e674e4a7b9dd2e94c56452c2fc36bf3bebc8a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D297068+AND+OBJECTID%3C%3D298067&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 297068,
+     "last_oid": 298067,
+     "rows": 1000,
+     "bytes": 475893,
+     "sha256": "c88948a15bcdb816477a513df22d0b5bed0ea438785cdbfce2e5ebaa74a2a21d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D298068+AND+OBJECTID%3C%3D299067&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 298068,
+     "last_oid": 299067,
+     "rows": 1000,
+     "bytes": 423740,
+     "sha256": "c89076f099556e439bc3d4aca99b5af4587f09cf26f3de049fa7043a04acbc11"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D299068+AND+OBJECTID%3C%3D300069&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 299068,
+     "last_oid": 300069,
+     "rows": 1000,
+     "bytes": 375947,
+     "sha256": "eecc3d8e32da22b52ecb2b195d8a1788dec106b612b2d478322289665726c5f8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D300070+AND+OBJECTID%3C%3D301087&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 300070,
+     "last_oid": 301087,
+     "rows": 1000,
+     "bytes": 307654,
+     "sha256": "2f412a124f1f664c9fc19e5977424a069e2e45a9603739bcad970e9e47b00bc1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D301088+AND+OBJECTID%3C%3D302108&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 301088,
+     "last_oid": 302108,
+     "rows": 1000,
+     "bytes": 467867,
+     "sha256": "26f6dddf058a57b31c98b48e0de48699ebeb9bbef8326ec065bf947a9847d3ba"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D302109+AND+OBJECTID%3C%3D303117&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 302109,
+     "last_oid": 303117,
+     "rows": 1000,
+     "bytes": 480121,
+     "sha256": "f4626f297213e50e716d7921092e176b41ad44aad96a74fdb7547ec0b4e32fc5"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D303118+AND+OBJECTID%3C%3D304117&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 303118,
+     "last_oid": 304117,
+     "rows": 1000,
+     "bytes": 480848,
+     "sha256": "b8d019de3d21c4fa2a4627b046de68b42c5695964f509f242ea696eca5651b63"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D304118+AND+OBJECTID%3C%3D305117&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 304118,
+     "last_oid": 305117,
+     "rows": 1000,
+     "bytes": 481384,
+     "sha256": "56558e9a5b0aed75453c09685e770906395aacaee7ae63bb4d6af653494b1202"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D305118+AND+OBJECTID%3C%3D306117&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 305118,
+     "last_oid": 306117,
+     "rows": 1000,
+     "bytes": 480611,
+     "sha256": "2e063cc0133b821db9214787f81d6616da32b276ec50545e987624fceff2caa1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D306118+AND+OBJECTID%3C%3D307163&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 306118,
+     "last_oid": 307163,
+     "rows": 1000,
+     "bytes": 480274,
+     "sha256": "238e0f75fc2dee2b77af195a326f744b1aba9c38b82fbe1dfcfd2ca68a1883b4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D307164+AND+OBJECTID%3C%3D308171&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 307164,
+     "last_oid": 308171,
+     "rows": 1000,
+     "bytes": 480952,
+     "sha256": "c26f791819e2fcaf06fec1d9ef3dd773a1263a3348e51c9c61f1c3298be5bd8f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D308172+AND+OBJECTID%3C%3D309188&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 308172,
+     "last_oid": 309188,
+     "rows": 1000,
+     "bytes": 480843,
+     "sha256": "60d9de4f7dd23cfde14a562a2d9815a98cb78653dcb150e1101ab843822abe4e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D309189+AND+OBJECTID%3C%3D310215&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 309189,
+     "last_oid": 310215,
+     "rows": 1000,
+     "bytes": 479665,
+     "sha256": "bc857c5926eda1cc55412bce57dc22c0f120ed760cadc1b69091beff099bed99"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D310216+AND+OBJECTID%3C%3D311215&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 310216,
+     "last_oid": 311215,
+     "rows": 1000,
+     "bytes": 481264,
+     "sha256": "2183a520f963cb18a432de4457a6beec272f030247e388ea794cc4e2a677087f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D311216+AND+OBJECTID%3C%3D312282&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 311216,
+     "last_oid": 312282,
+     "rows": 1000,
+     "bytes": 478436,
+     "sha256": "ac3bac28b416e704ea04b816f349ca1f2dc419abcd616a3f99ddba8099978982"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D312283+AND+OBJECTID%3C%3D313282&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 312283,
+     "last_oid": 313282,
+     "rows": 1000,
+     "bytes": 480778,
+     "sha256": "10911ecf453a30ef94b6948cb02b1d57b289a8c27cee49636ef3206e02195e7e"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D313283+AND+OBJECTID%3C%3D314282&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 313283,
+     "last_oid": 314282,
+     "rows": 1000,
+     "bytes": 480632,
+     "sha256": "4bc9bdc2a71447603cc25c5231f2605c3004727f2af61929ad0d52c851ff7ba2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D314283+AND+OBJECTID%3C%3D315282&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 314283,
+     "last_oid": 315282,
+     "rows": 1000,
+     "bytes": 480127,
+     "sha256": "bf52b24ab2a271d7b8a1bdc74b41cfaa1c2cba58cb951eb42d900f6a151a2421"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D315283+AND+OBJECTID%3C%3D316282&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 315283,
+     "last_oid": 316282,
+     "rows": 1000,
+     "bytes": 480757,
+     "sha256": "cda9a6f07fe9b00de5ccd7fc91ad4f9f29a43c6fc25222a357db2d4369e63e40"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D316283+AND+OBJECTID%3C%3D317295&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 316283,
+     "last_oid": 317295,
+     "rows": 1000,
+     "bytes": 479944,
+     "sha256": "7fe09139b5fb8be259a550c5f2cb56b50ca561625a582fd70de641fc40a05e11"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D317296+AND+OBJECTID%3C%3D318295&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 317296,
+     "last_oid": 318295,
+     "rows": 1000,
+     "bytes": 480060,
+     "sha256": "4808f49a66d59e10951bf1e5a820e825eb9f45231aff497e04900dd223a5de5b"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D318296+AND+OBJECTID%3C%3D319297&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 318296,
+     "last_oid": 319297,
+     "rows": 1000,
+     "bytes": 480164,
+     "sha256": "fbdfca89ff7a6619d1efe494fc349a6cb84ee0af1566b877157cc55d38b22064"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D319298+AND+OBJECTID%3C%3D320297&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 319298,
+     "last_oid": 320297,
+     "rows": 1000,
+     "bytes": 447395,
+     "sha256": "3000fa7ea73f9ceef5f94f00c7905cbbcf1093e018340548031af57cb226fa12"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D320298+AND+OBJECTID%3C%3D321297&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 320298,
+     "last_oid": 321297,
+     "rows": 1000,
+     "bytes": 381038,
+     "sha256": "733d6ab76648088db1a2a3a766c2258a40dd77c60599583cc368218fd24163f8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D321298+AND+OBJECTID%3C%3D322298&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 321298,
+     "last_oid": 322298,
+     "rows": 1000,
+     "bytes": 327584,
+     "sha256": "dfc5eafa6f828d756854c5576e043b3b10fa3b18b45bb9f7e1ff99ed4892e240"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D322299+AND+OBJECTID%3C%3D323327&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 322299,
+     "last_oid": 323327,
+     "rows": 1000,
+     "bytes": 409607,
+     "sha256": "e729b2e7b3914ac65e421f53c8f3725bfb8ba03967f51d7f9f03f183fc98071f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D323328+AND+OBJECTID%3C%3D324344&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 323328,
+     "last_oid": 324344,
+     "rows": 1000,
+     "bytes": 480406,
+     "sha256": "b025d3951dd9e4e85b0599b413468235fcceb871933a95f8b240fd53d72f3878"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D324345+AND+OBJECTID%3C%3D325344&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 324345,
+     "last_oid": 325344,
+     "rows": 1000,
+     "bytes": 480178,
+     "sha256": "5d8e4201bed0c54fa86e3cd1129372210371f96a4878e66d5051d4613fbcc728"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D325345+AND+OBJECTID%3C%3D326344&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 325345,
+     "last_oid": 326344,
+     "rows": 1000,
+     "bytes": 481619,
+     "sha256": "3b869ec9a9783017271ba5524544b4173c8c2cb647e82b01ea0720a2379d246d"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D326345+AND+OBJECTID%3C%3D327344&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 326345,
+     "last_oid": 327344,
+     "rows": 1000,
+     "bytes": 480676,
+     "sha256": "55a7315ae9a8ad4dca8feac4fceaf2931da8da037822c59a3451763f74f896bf"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D327345+AND+OBJECTID%3C%3D328373&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 327345,
+     "last_oid": 328373,
+     "rows": 1000,
+     "bytes": 480370,
+     "sha256": "569e65fa2996346ca283edaa9174ddb768811fa1af31ab9fccd8f7c84defef50"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D328374+AND+OBJECTID%3C%3D329381&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 328374,
+     "last_oid": 329381,
+     "rows": 1000,
+     "bytes": 480885,
+     "sha256": "57c706bf510546577866fefe8c927c92459b4652b7fbe07b0e22ec3387f6ee4f"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D329382+AND+OBJECTID%3C%3D330393&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 329382,
+     "last_oid": 330393,
+     "rows": 1000,
+     "bytes": 481342,
+     "sha256": "c7330999cff90fcaf25281ab16065f93d4b2299f2b5d0257593d8a71eb3d30c8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D330394+AND+OBJECTID%3C%3D331432&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 330394,
+     "last_oid": 331432,
+     "rows": 1000,
+     "bytes": 480384,
+     "sha256": "9c6265b6770bda1c76a244a281574e3c1c8f4dc841d15847c19d41fe4206a6ed"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D331433+AND+OBJECTID%3C%3D332434&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 331433,
+     "last_oid": 332434,
+     "rows": 1000,
+     "bytes": 479854,
+     "sha256": "b5d2af702bec78567328dc2b0f997ad70fd3a170329b6b201a4930e10c12e339"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D332435+AND+OBJECTID%3C%3D333472&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 332435,
+     "last_oid": 333472,
+     "rows": 1000,
+     "bytes": 479490,
+     "sha256": "5e2541c81256ee194a36b673191810b68760bf09ffbe5056ec02c0465bd4d9c4"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D333473+AND+OBJECTID%3C%3D334496&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 333473,
+     "last_oid": 334496,
+     "rows": 1000,
+     "bytes": 479882,
+     "sha256": "c74f2aff726c1033a4d0dc30ec4b6884a780fc31b4855f49dc591a82711650c9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D334497+AND+OBJECTID%3C%3D335496&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 334497,
+     "last_oid": 335496,
+     "rows": 1000,
+     "bytes": 479719,
+     "sha256": "39113fb026f0dd8fb60aeed6dee11f3edf847eb90c6f3e2a461bca006d44fba2"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D335497+AND+OBJECTID%3C%3D336496&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 335497,
+     "last_oid": 336496,
+     "rows": 1000,
+     "bytes": 480980,
+     "sha256": "e6cacc19a7befa160f8766c87adce47dddac39e487e3b94276ffc72e37abebd8"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D336497+AND+OBJECTID%3C%3D337496&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 336497,
+     "last_oid": 337496,
+     "rows": 1000,
+     "bytes": 481064,
+     "sha256": "b2bd62941c3437be7e03ca198d9f90180cc20ecbbb9d0204638e37d044aa50e9"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D337497+AND+OBJECTID%3C%3D338501&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 337497,
+     "last_oid": 338501,
+     "rows": 1000,
+     "bytes": 479646,
+     "sha256": "ed7ce0d8159c7b8836290ae66cf81c6847c9ab7604ebe662206269672f35cad1"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D338502+AND+OBJECTID%3C%3D339507&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 338502,
+     "last_oid": 339507,
+     "rows": 1000,
+     "bytes": 480322,
+     "sha256": "52c79c89b935d7fe9e4d3b022f351112346d893a81d350bbac31ced7dffae853"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D339508+AND+OBJECTID%3C%3D340516&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 339508,
+     "last_oid": 340516,
+     "rows": 1000,
+     "bytes": 479699,
+     "sha256": "afb261c42d6b60e0460cec680104c6300fae1a2b4b48a85b41ceef447a0768db"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D340517+AND+OBJECTID%3C%3D341516&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 340517,
+     "last_oid": 341516,
+     "rows": 1000,
+     "bytes": 475348,
+     "sha256": "475900dd927e87a23e7fe41cacb9f2bd822cdd86702ead5503bc7f52049df48c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D341517+AND+OBJECTID%3C%3D342516&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 341517,
+     "last_oid": 342516,
+     "rows": 1000,
+     "bytes": 399494,
+     "sha256": "89b642f8451f7c2ce8a69cc6bf6f722e6865d199fd3970d35a7af18fd5a8b589"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D342517+AND+OBJECTID%3C%3D343688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 342517,
+     "last_oid": 343688,
+     "rows": 1000,
+     "bytes": 358742,
+     "sha256": "aea8caeaa347909554b375b2db1ba636b4a7d16bd94184a523a84ea514c3c437"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D343689+AND+OBJECTID%3C%3D344688&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 343689,
+     "last_oid": 344688,
+     "rows": 1000,
+     "bytes": 333035,
+     "sha256": "85b1a4e4b02a520f11b9431d96692eb1f3ad254061aaa100a7dfb33f9803032c"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1/query?where=OBJECTID%3E%3D344689+AND+OBJECTID%3C%3D345497&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 344689,
+     "last_oid": 345497,
+     "rows": 428,
+     "bytes": 137645,
+     "sha256": "cd1e896139a2351c312c8c1a989b79a7c35ea5168361c682700fed5a71ea85f2"
+    }
+   ]
+  },
+  {
+   "layer": 0,
+   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/0",
+   "name": "Ulivi Monumentali provvisori DGR 720/2025",
+   "description": {
+    "bytes": 2670,
+    "sha256": "d135f09a7bfdca980e255810e117d36b42d5c43f42ef33088f31f92ba13e5913"
+   },
+   "object_ids": {
+    "bytes": 2891,
+    "sha256": "1d64f7e5afefdfbab9246839de49ba259626cb72b854e52d2ab3beb471ce4f1f"
+   },
+   "rows": 569,
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/0/query?where=OBJECTID%3E%3D2241+AND+OBJECTID%3C%3D2809&outFields=%2A&returnGeometry=true&orderByFields=OBJECTID&f=json",
+     "first_oid": 2241,
+     "last_oid": 2809,
+     "rows": 569,
+     "bytes": 192792,
+     "sha256": "1b7a7b411583179b47e69e0e39ba6f0fbdcc9d0e37f7557ca303dc46fb23af81"
+    }
+   ]
+  }
+ ],
+ "finished_at": "2026-09-24T23:51:24.132156+00:00"
+}
