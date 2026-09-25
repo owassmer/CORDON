@@ -101,7 +101,8 @@ class HeldActs(unittest.TestCase):
                     self.assertEqual(any('stated withdraws' in need for need in result.needs), unknown)
         # A change whose act prints no readable adoption date counts on every date, as before.
         undated = dict(change, adopted=None)
-        self.assertIsNone(c_result(self.s, record, date(2024, 8, 20), stated_changes=[undated]).truth)
+        self.assertIsNone(c_result(self.s, record, date(2024, 8, 20), stated_changes=[undated],
+                                   evaluated_at=datetime(2024, 8, 20, 12, tzinfo=ROME)).truth)
 
     def test_a_stated_partial_withdrawal_leaves_dueness_unknown_naming_act_and_scope(self):
         record = next(prescription().records(self.s))

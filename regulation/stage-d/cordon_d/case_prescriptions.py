@@ -445,7 +445,7 @@ def annex_position(record):
     return positions[0] if len(positions) == 1 else None
 
 
-def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluated_at=None, commencements=None,
+def c_result(snapshot, record, at, *, evaluated_at, notice=None, notice_instants=None, commencements=None,
              commencement_records_complete=False, governing_results=None, work_due=None,
              coercion_due=None, closures=(), stated_changes=(), within_closed_scope=None,
              zone=None, calendar=None):
@@ -477,6 +477,10 @@ def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, com
              within_closed_scope, zone, calendar):
     """The facts `c_result` evaluates, and the instant C's `notice_instant` returned (None when none)."""
     from cordon_c.bindings import merge_facts, noncommencement_facts, notice_instant
+    from .evidence import instant
+    if type(at) is not date:
+        raise TypeError('The run states its evaluation date')
+    instant(evaluated_at)  # the run's knowledge cutoff; never the machine clock or None
     notification = None
     row = snapshot.version(RULE, at)
     vid = row['provision_version_id']
@@ -579,8 +583,51 @@ def supplied_records(entries):
     return records
 
 
-def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, **dueness):
+def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_sources, zone):
+    """The supplied records of `act` the run admits, split by the stated grant: (granted, ungranted).
+
+    Supplied records are controlled sources (`osservatorio-records`); the grant is a
+    stated frozenset, never defaulted. They carry no capture time, so their own dates
+    bound them: a record whose `occurred`, `complete_from` or `complete_through` is
+    later than `evaluated_at` (the run's knowledge cutoff) was not held at the cutoff,
+    and the set is refused, granted or not, naming the record and field. Each
+    ungranted item is (record, need) with the need 'authorized evidence for …'.
+    `recipient_results` and the position path of `read_prescriptions.per_recipient`
+    both apply this.
+    """
+    if not isinstance(permitted_controlled_sources, frozenset):
+        raise TypeError('Evaluation requires the run to state its controlled-source grant')
+    records = supplied_records(supplied)
+    if any(r['order'] != act for r in records):
+        raise ValueError(f'A supplied record names another order than {act}')
+    today = evaluated_at.astimezone(zone).date()
+    for r in records:
+        for field in ('complete_from', 'complete_through') if r['kind'] == 'history' else ('occurred',):
+            moment = _moment(r[field])
+            if moment > (evaluated_at if isinstance(moment, datetime) else today):
+                raise ValueError(f"Record {r['record']} ({r['kind']}) states {field} {r[field]}, "
+                                 f'later than the evaluation at {evaluated_at.isoformat()}')
+    granted = [r for r in records if r['source'] in permitted_controlled_sources]
+    ungranted = [(r, _unauthorized(r, act)) for r in records if r['source'] not in permitted_controlled_sources]
+    return granted, ungranted
+
+
+def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted_controlled_sources, zone, calendar,
+                      **dueness):
     """C's result per (clause, recipient named by a supplied delivery record).
+
+    Supplied records are controlled sources (`osservatorio-records`). The run states
+    the grant: a record whose source is outside `permitted_controlled_sources`
+    reaches no C result and is reported with the need 'authorized evidence for …';
+    an empty grant is stated, never defaulted. A recipient that such a record
+    names, or that is obliged to a work such a record names, gets no definite
+    result: it is withheld with that need, as `EvidenceView.reader` withholds a
+    value an unreadable assertion could contradict. A narrower grant limits what
+    is known; it never changes it.
+
+    Supplied records carry no capture time, so their own dates bound them: a
+    record whose `occurred`, `complete_from` or `complete_through` is later than
+    `evaluated_at` (the run's knowledge cutoff) is refused, naming the record.
 
     The clause's cohort result stays `c_result` on cohort evidence only; no
     supplied record reaches it. For each recipient a delivery record names, the
@@ -596,23 +643,19 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
 
     The join from a supplied record to an annex position is not built here (planned in PR #40):
     the caller passes no record of an order it emits per position, and reports each
-    unattached (`read_prescriptions.per_recipient`).
+    unattached (`read_prescriptions.per_recipient`), after the same date refusal and
+    grant (`admitted_records`).
     """
     from cordon_c.quantities import clock_boundary
     from cordon_c.temporal import end_of_day, utc
     act = record.get('applied_by') or record['instrument']
-    records = supplied_records(supplied)
-    if any(r['order'] != act for r in records):
-        raise ValueError(f'A supplied record names another order than {act}')
-    today = evaluated_at.astimezone(zone).date()
-    for r in records:
-        if r['kind'] != 'history':
-            continue
-        through = _moment(r['complete_through'])
-        if through > (evaluated_at if isinstance(through, datetime) else today):
-            raise ValueError(f"Record {r['record']} states a history complete through {r['complete_through']}, "
-                             f'later than the evaluation at {evaluated_at.isoformat()}')
-    reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
+    # A supplied record carries no capture time: its own dates bound it. A record dated later
+    # than the evaluation was not held at the cutoff, and is refused, granted or not.
+    records, withheld_records = admitted_records(supplied, act, evaluated_at=evaluated_at, zone=zone,
+                                                 permitted_controlled_sources=permitted_controlled_sources)
+    ungranted = [r for r, _ in withheld_records]
+    reported = [dict(record=r['record'], kind=r['kind'], need=need) for r, need in withheld_records]
+    deliveries, obliged, performed, histories, undated = {}, {}, {}, {}, {}
     for r in records:
         if r['kind'] == 'personal-delivery':
             if not r['recipient'] or not r['recipient'].strip():
@@ -653,6 +696,18 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
     results = {}
     for recipient in sorted(deliveries):
         instants = deliveries[recipient]
+        works = sorted(obliged.get(recipient, ()))
+        # A record outside the grant that names this recipient, or a work it is obliged to, could
+        # change its result: the result is withheld, never made more definite (`EvidenceView.reader`).
+        withheld = {_unauthorized(r, act) for r in ungranted
+                    if r.get('recipient') == recipient or set(r['works']) & set(works)}
+        if withheld:
+            results[recipient] = dict(result=Evaluation(None, needs=frozenset(withheld)), notification=None,
+                                      deadline=None, works=[dict(w) for w in works], commencements={},
+                                      commencement_records_complete=False,
+                                      records=sorted(n for v in instants.values() for n in v),
+                                      fixture=any(r['fixture'] for r in records))
+            continue
         notice, notice_instants = {}, {}
         if len(instants) == 1:
             notice[(vid, COMMUNICATED)] = True
@@ -660,7 +715,6 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
         else:
             reported.append(dict(recipient=recipient, records=sorted(n for v in instants.values() for n in v),
                                  cause='deliveries at different instants; the personal branch is not supplied'))
-        works = sorted(obliged.get(recipient, ()))
         commencements = {name: moment for work in works for name, moment in performed.get(work, {}).items()}
         options = dict(notice=notice or None, notice_instants=notice_instants, commencements=commencements,
                        **_dueness_defaults(common))
@@ -679,6 +733,10 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
                                   records=sorted(n for v in instants.values() for n in v),
                                   fixture=any(r['fixture'] for r in records))
     return dict(recipients=results, reported=reported)
+
+
+def _unauthorized(record, act):
+    return f"authorized evidence for {record['kind']} record {record['record']} on {act}"
 
 
 def _dueness_defaults(common):

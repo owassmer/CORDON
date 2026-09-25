@@ -7,7 +7,6 @@ one at a time, through the Claude subscription. `--only` selects act identities
 results as JSON outside the tree; nothing here is an owner.
 """
 import argparse
-from datetime import date
 import json
 from pathlib import Path
 import sys
@@ -19,7 +18,7 @@ from cordon_c.core import Snapshot  # noqa: E402
 from cordon_d.case_prescriptions import read_prescription  # noqa: E402
 from cordon_d.notice_routes import c_result, mass_publicity_basis, read_notice_route  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
-from read_prescriptions import _wait_for_memory, _write, population, summary  # noqa: E402
+from read_prescriptions import _wait_for_memory, _write, held_sources, population, run_inputs, summary  # noqa: E402
 
 
 def instrument_of(digest, store):
@@ -41,17 +40,22 @@ POSTING_KINDS = {'municipal-publication-start': 'start', 'municipal-publication-
                  'regional-publication-start': 'start', 'regional-publication-end': 'end'}
 
 
-def load_postings(paths):
+def load_postings(paths, known_through):
     """Held posting intervals by instrument, from the outputs of the event readers.
 
     Accepts `read_prescriptions.py --events` (existing albo readers), `read_judgments.py`
     (postings a court decision states) and `read_postings.py` (albo registers and posted
     documents). A start and an end pair when they come from the same source record.
-    An interval whose end is not held stays open.
+    An interval whose end is not held stays open. An event whose source the removal-order
+    and removal-event source maps had not captured by the run's knowledge cutoff is left
+    out. Returns (intervals by instrument, events left out).
     """
-    intervals = {}
+    intervals, held, left_out = {}, held_sources(known_through), []
 
     def add(instrument, publisher, key, part, day, source):
+        if source not in held:
+            left_out.append(dict(instrument=instrument, source=source, part=part))
+            return
         slot = intervals.setdefault(instrument, {}).setdefault((publisher, key), dict(
             publisher=publisher, start=None, end=None, sources=set()))
         slot[part] = day
@@ -81,10 +85,10 @@ def load_postings(paths):
                         (entry['source'], event['selector']),
                         POSTING_KINDS[event['kind']], event['occurred'], entry['source'])
     return {instrument: [dict(v, sources=sorted(v['sources'])) for v in slots.values() if v['start']]
-            for instrument, slots in intervals.items()}
+            for instrument, slots in intervals.items()}, left_out
 
 
-def read_one(item, options, today):
+def read_one(item, options, run):
     """One source: replay or one bounded request; a refusal gets one stated reread."""
     identity, digest, url = item
     store, snapshot = _WORKER['store'], _WORKER['snapshot']
@@ -99,7 +103,7 @@ def read_one(item, options, today):
             response = read_notice_route(digest, store, refused=str(refusal), **options)
         basis = mass_publicity_basis(response, instrument=instrument_of(digest, store) or identity)
         postings = _WORKER['postings'].get(basis['instrument'], [])
-        entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, today, postings=postings)))
+        entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, run['at'], postings=postings), run))
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -119,13 +123,16 @@ def main():
                         help='sources read at once; each is still one bounded request')
     parser.add_argument('--postings', nargs='*', default=(),
                         help='event-reader outputs whose posting intervals reach C as held postings')
+    run_inputs(parser)
     arguments = parser.parse_args()
     if arguments.workers < 1:
         parser.error('--workers must be at least 1')
-    postings = load_postings(arguments.postings)
+    postings, left_out = load_postings(arguments.postings, arguments.known_through)
+    if arguments.postings:
+        print(json.dumps(dict(posting_events_not_captured_by_cutoff=len(left_out))), flush=True)
     _start_worker(postings)
-    today = date.today()
-    selected = [item for item in population()
+    run = dict(at=arguments.at, known_through=arguments.known_through)
+    selected = [item for item in population(arguments.known_through)
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
     options = dict(execute=arguments.execute, model=arguments.model, effort=arguments.effort,
                    timeout=arguments.timeout)
@@ -141,12 +148,12 @@ def main():
 
     if arguments.workers == 1:
         for index, item in enumerate(selected):
-            finished(index, read_one(item, options, today))
+            finished(index, read_one(item, options, run))
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker,
                                  initargs=(postings,)) as pool:
-            futures = {pool.submit(read_one, item, options, today): index
+            futures = {pool.submit(read_one, item, options, run): index
                        for index, item in enumerate(selected)}
             for future in as_completed(futures):
                 finished(futures[future], future.result())

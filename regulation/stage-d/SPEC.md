@@ -514,7 +514,11 @@ recipient a delivery record names, keyed as that record names them. The join fro
 a supplied record to an annex position is not built here (planned in PR #40): for a clause
 the writer emits per annex position, each supplied record of the order is
 reported unattached with that cause, and no recipient there gets a per-recipient
-result. Other clauses keep the record's naming alone. A personal-delivery record
+result. On both paths the run's stated inputs bound the records first
+(`admitted_records`): a record set with a record dated after the knowledge cutoff
+is refused whole, naming the record and field, and a record outside the stated
+grant is withheld with the need "authorized evidence for …"; at a position that
+need is its unattached cause. Other clauses keep the record's naming alone. A personal-delivery record
 is the delivery receipt only, never the acceptance receipt; it enters the
 communication predicate for its recipient only. The works a delivery record names
 are the operator's standing assertion of what that recipient is obliged to.
