@@ -284,8 +284,8 @@ class AdoptedGeography:
 def _reaches(place: BaseGeometry, region: BaseGeometry) -> bool:
     """Whether some of `place` lies in `region`: for a polygon, an overlap of positive area,
     more than OUTSIDE_TOLERANCE_M2 (a parcel that only touches the region has no part in it;
-    along a shared edge the overlap computed is arithmetic, up to 0.0001 m² on real parcels);
-    otherwise any common point."""
+    along a shared edge the overlap computed is arithmetic or the sources' seam, under 1 m² on
+    the real parcels probed); otherwise any common point."""
     if not region.intersects(place):
         return False
     if place.geom_type in ('Polygon', 'MultiPolygon'):
