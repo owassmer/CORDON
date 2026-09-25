@@ -8,7 +8,7 @@
     "A": {
       "status": "CLOSED",
       "accepted_by": "Owen Wassmer",
-      "reopened_proposition": "Owen's merge of PR #32 accepts the reopening that carries his 2026-09-24 rulings: Law 241/1990 Art. 21-bis mass publicity rests on the act's own stated ground and stated period; the Art. 21-ter notice conjunct's personal branch reads the Art. 21-bis communication predicate and its other branch A's Art. 21-bis mass-publicity result; L.R. Puglia 14/2007 listed and pending status follow a tree's own dated list acts; and L.R. 14/2007 Art. 2 characteristics come from the official monitoring finding or the Art. 2(1)(a) diameter row. Acceptance remains revisable.",
+      "reopened_proposition": "PR #35 reopens A (plan converged 2026-09-24): DDS 18/2024 withdraws, from 14 March 2024, removal of the host plants within 50 m of the infected plants DDS 96, 113, 119, 124 and 138/2023 prescribed, and not removal of the infected plants they list (a new stable provision naming the five orders in corrects_instrument_ids, with no end). A governing row that withholds removal says so with one of two generic names, POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART; the DDS 45/2023 hold and the two ST1 olive rows gain v2 versions with that whole-or-part route table, each v1 kept as SUPERSEDED lineage; the hold's v2 carries PR #32's characteristics and pending-recognition conjuncts. 426 -> 430 provision versions; the national prefix is unchanged. Binding takes effect only on Owen's merge. Acceptance remains revisable.",
       "canonical_artifacts": {
         "eu": {
           "path": "regulation/stage-a/authoring-eu.json",
@@ -17,8 +17,8 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "c2c9ee807fdb5e0336193ec1559b0ab4a64397c0daf6706dc9669b905990ca07",
-          "provision_versions": 426,
+          "sha256": "343c8c34875f31476a68e3230e148402c535554c45d1581dc35f6c0e524a81c1",
+          "provision_versions": 430,
           "national_prefix_rows": 220,
           "national_prefix_sha256": "7fc93c6fbc9c9b15245482d7ea4ad458ab404867a395bcaf1f2084086b99dd37"
         }
@@ -35,22 +35,22 @@
       "status": "CLOSED",
       "canonical": {
         "path": "regulation/stage-b/clocks-and-parameters.json",
-        "sha256": "4c8499c4431177ca17785274d9179c7548d349e2cfc699d21d81938e4c3c7f61",
+        "sha256": "840f66bdba73f84e660288d88182491748532cbccfb44d0639a9c3256f6af63c",
         "schema": "stage-b-essence-v6",
         "counts": {
           "clocks": 126,
           "parameters": 171,
-          "dispositions": 902
+          "dispositions": 911
         }
       },
       "population": {
         "path": "regulation/stage-b/population.json",
-        "sha256": "a7de82ff8c5bf273cbf2870ae6b7160d2670e1e8b412d52f4717843e3de29d13",
+        "sha256": "a4aacbea705b478fec0c5e36f261dc04e9c8a8c4cc2abd3c8d44c757109a062d",
         "seams": {
           "1": 160,
           "2": 100,
-          "3": 127,
-          "4": 162
+          "3": 130,
+          "4": 163
         }
       },
       "accepted_by": "Owen Wassmer",
@@ -67,12 +67,12 @@
       },
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
-        "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr32.json",
-        "sha256": "9ca7c10d09f401a28fa9d6063c5362ae0b89f1f6f673b4b3473ef9b5b9404347"
+        "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr35.json",
+        "sha256": "302f67d34dc0f6d06e8b77df371be4df3cd89c2d53fe280d1134b94e3b722c1a"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "b1772983f66ad825a883732d8b728fe6ae932908864aaa05682714969281c331",
+        "sha256": "6a36cd5ccbffe33344f22e25746b52b119e9e9699ad07cbc331bf9bd648c1ac6",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },
@@ -86,11 +86,12 @@
         "source_bindings": "regulation/stage-d/source-bindings.json"
       },
       "reset_state": "Earlier D acquisitions, case integrations, reviews, ledgers, manifests and workbench state were purged. They confer no current coverage or completion.",
-      "current_capability": "Row 1, monitoring observations, and the bounded national calendar are established. PRs #20, #21 and #22 are merged. Row 2 (PR #18) supplies laboratory rows read from all 1,180 held reports and joined to monitoring observations in both directions inside the four-year reach; each row or observation left unjoined carries the cause its reading establishes. Open in reach: the CNR 68F/2024 coordinate disagreement, the UNIBA XF 35/2023 row that prints no sample identity, and the two CRSFA 849/2024 rows whose identity is printed above the table. Row 1 also holds a positional qualification for every located in-reach monitoring observation: 450,646 of 450,646 (2,200 positive), each with error_m 7.40 m against the ground in EPSG:32633. At B's 50 m, C decides 12,803 non-positive neighbours of in-reach positives inside and 56,419 outside; 27,706 stay unknown. Open: the device and capture mode per record, per-fix accuracy, re-sample links and the device before late 2024. Row 6 removal orders (PR #15): every held removal-order original is read from its own text for its case-prescription records (the stated term as printed, its anchor, the commitment, the commencement and coercive populations and the executor). Lawful dueness is the order's own reading, held to its governing A rows, to held court dispositions and to the changes held acts state about it; DDS 18/2024's withdrawal of 50 m host removal from five 2023 orders leaves theirs unknown until A records it (PR #35). Held municipal, regional and court-stated postings attach by the identity they print; the executor's albo rows naming an order, mostly aid liquidations to owners who performed the removal, are kept as leads for row 11. Each order's own mass-publicity basis is read. Every order's Art. 21-ter result is unknown: no recipient notification or commencement record is held. The Osservatorio-held facts of rows 4, 7, 8 and 11 have one binding, osservatorio-records; the removal-order caller passes supplied delivery, commencement, removal and history records to C for each recipient a record names (PR #33), and where none is supplied C's answer stays unknown and names it. Row 3 adopted geography (PR #8) is established: every consumed A area version in reach (26 of A's 29) reaches C as MetricGeometry with a local ground-error bound, and C's adopted_area_facts decides membership. A zone the act defines around the infected plants it names is built around the row 1 positives the act names, with row 1's measured error; a listed unit no named positive reaches carries its extent in the error, and a band drawn from plants is held to the units the annex lists, land the band and the annex dispute answering neither way for any place or parcel that may have part in it: within its own error plus the error of the sources drawing that land's edge, or, along the edge the land shares with the listed units, by an overlap above 1 m². Open: DDS 148/2024 is not held, so row 3 is not established for 2024-11-12 to 2024-12-18 (A's bounded unknown; search closed); the DDS 82/2026 buffer outline lies a median 20.4 km from SIT's (19.5 km before its foci were located), unexplained; where ISTAT draws part of a unit named whole (DDS 127/2022, 18/2024, 158/2024, 82/2026) the outline carries ISTAT's measured error, up to 705 m (Squinzano). Subject populations (rows 4-5) are planned on it (PR #36). PRs #14, #29 and #31 are merged; PRs #13, #16, #19, #23 and #24 are closed. No Stage D closure or source-population acceptance is implied.",
+      "current_capability": "Row 1, monitoring observations, and the bounded national calendar are established. PRs #20, #21 and #22 are merged. Row 2 (PR #18) supplies laboratory rows read from all 1,180 held reports and joined to monitoring observations in both directions inside the four-year reach; each row or observation left unjoined carries the cause its reading establishes. Open in reach: the CNR 68F/2024 coordinate disagreement, the UNIBA XF 35/2023 row that prints no sample identity, and the two CRSFA 849/2024 rows whose identity is printed above the table. Row 1 also holds a positional qualification for every located in-reach monitoring observation: 450,646 of 450,646 (2,200 positive), each with error_m 7.40 m against the ground in EPSG:32633. At B's 50 m, C decides 12,803 non-positive neighbours of in-reach positives inside and 56,419 outside; 27,706 stay unknown. Open: the device and capture mode per record, per-fix accuracy, re-sample links and the device before late 2024. Row 6 removal orders (PR #15): every held removal-order original is read from its own text for its case-prescription records (the stated term as printed, its anchor, the commitment, the commencement and coercive populations and the executor). Lawful dueness is the order's own reading, held to its governing A rows, to held court dispositions and to the changes held acts state about it; A records DDS 18/2024's withdrawal, from 14 March 2024, of the 50 m host removal DDS 96, 113, 119, 124 and 138/2023 prescribed (PR #35); a governing row withholds removal only through POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART, read per (row, predicate); a row gates dueness, reached or not, only if one of its outcomes is one of those names or it names the instruments it corrects or supplements, and a resolved POPULATION_NOT_LAWFULLY_DUE is final, also over the unknown a court closure or a stated change leaves in the order's own reading; a held act's stated change counts from its adoption. Those five orders' annex 1/D is read from the text layer (66 listed infected plants on 29 parcels, 101 printed owners, 4 listings placing no recipient, each read as 50 m hosts with no listed infected plant), and read_prescriptions emits their records per clause and position (210). Evaluated on 2026-09-24 over the 105 clause-0 records: 113 and 124/2023 give 49 definite positions (13 due in part, naming the row and waiting on notice or term; 36 not due, the 3 listings on no recipient among them); 96, 119 and 138/2023 give 36 not due (35 owners with 50 m hosts only and the 'ACQUE' listing) and 20 owners holding a listed infected plant (2, 14 and 4) that stay unknown on their TAR closures. Held municipal, regional and court-stated postings attach by the identity they print; the executor's albo rows naming an order, mostly aid liquidations to owners who performed the removal, are kept as leads for row 11. Each order's own mass-publicity basis is read. Every order's Art. 21-ter result is unknown: no recipient notification or commencement record is held. The Osservatorio-held facts of rows 4, 7, 8 and 11 have one binding, osservatorio-records; the removal-order caller passes supplied delivery, commencement, removal and history records to C for each recipient a record names (PR #33), and where none is supplied C's answer stays unknown and names it. For the orders read per annex position, the join from a supplied record to an annex position is not built (planned in PR #40): each supplied record of such an order is reported unattached with that cause, and no recipient there gets a per-recipient result. Row 3 adopted geography (PR #8) is established: every consumed A area version in reach (26 of A's 29) reaches C as MetricGeometry with a local ground-error bound, and C's adopted_area_facts decides membership. A zone the act defines around the infected plants it names is built around the row 1 positives the act names, with row 1's measured error; a listed unit no named positive reaches carries its extent in the error, and a band drawn from plants is held to the units the annex lists, land the band and the annex dispute answering neither way for any place or parcel that may have part in it: within its own error plus the error of the sources drawing that land's edge, or, along the edge the land shares with the listed units, by an overlap above 1 m². Open: DDS 148/2024 is not held, so row 3 is not established for 2024-11-12 to 2024-12-18 (A's bounded unknown; search closed); the DDS 82/2026 buffer outline lies a median 20.4 km from SIT's (19.5 km before its foci were located), unexplained; where ISTAT draws part of a unit named whole (DDS 127/2022, 18/2024, 158/2024, 82/2026) the outline carries ISTAT's measured error, up to 705 m (Squinzano). Subject populations (rows 4-5) are planned on it (PR #36). PRs #14, #29, #31, #32 and #33 are merged; PRs #13, #16, #19, #23 and #24 are closed. No Stage D closure or source-population acceptance is implied.",
       "completion_bar": "For each input in INPUTS.md: acquire the complete within-aperture source population, establish record meaning and identity over time, consume unseen records without authored case logic, and verify the resulting A-C consumer behavior. Complete D then requires convergent review under REVIEW_PRINCIPLES.md and Owen acceptance.",
       "next": [
         "Build subject populations (rows 4-5) on row 3's adopted geography: plants, surfaces and parcels in C's distance and survey calculations (PR #36); continue protected plants; then run whole-D convergent review for Owen acceptance before Stage E.",
-        "Encode DDS 18/2024's withdrawal of 50 m host removal from five 2023 orders in Stage A, so 113/2023 and 124/2023 become definite (PR #35).",
+        "Decide whether TAR Bari 387, 383 and 384/2026 still leave unknown the dueness of the 20 positions of DDS 96, 119 and 138/2023 that hold a listed infected plant (2, 14 and 4) now that A records DDS 18/2024 (D row 6).",
+        "Plan the join from supplied Osservatorio records to annex positions (rule set per record kind, naming, date against the deadline and due share; PR #40), starting from PR #35 at 84a9908 as evidence",
         "Replace the stated device term with a held input named in plant-population's positional_qualification: ARIF's per-fix accuracy or device and capture mode per record, a bound from re-samples linked by ID_CAMPIONE, or a calibration of the documented device and app."
       ]
     },

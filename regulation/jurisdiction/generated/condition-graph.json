@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "graph_scope": "CURRENT_LATEST_VERSIONS_ONLY",
-  "historical_versions_excluded": 94,
+  "historical_versions_excluded": 97,
   "historical_provision_version_ids": [
     "EU-2016-2031:Art.22(3):annual-survey-results-report:v1",
     "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1",
@@ -80,12 +80,14 @@
     "REG-PUGLIA-U181-DIR-2022-00031:sample-custody-transfer:v1",
     "REG-PUGLIA-U181-DIR-2022-00031:st53-crop-exclusion-conflict:v1",
     "REG-PUGLIA-U181-DIR-2022-00127:area-state-transition:v1",
+    "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
     "REG-PUGLIA-U181-DIR-2024-00008:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2024-00012:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v2",
     "REG-PUGLIA-U181-DIR-2024-00029:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2024-00045:area-state-transition:v1",
+    "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1",
     "REG-PUGLIA-U181-DIR-2024-00091:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2024-00094:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2024-00148:area-state-transition:unresolved-v1",
@@ -93,6 +95,7 @@
     "REG-PUGLIA-U181-DIR-2024-00158:containment-selection:v1",
     "REG-PUGLIA-U181-DIR-2024-00198:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2025-00113:area-state-transition:v1",
+    "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v1",
     "REG-PUGLIA-U181-DIR-2025-00126:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2025-00132:area-state-transition:v1",
     "REG-PUGLIA-U181-DIR-2026-00002:area-state-transition:v1",
@@ -6391,39 +6394,90 @@
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
-      "operator": "AND",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
+      "operator": "ROUTE_TABLE",
       "expression": {
-        "all_of": [
+        "route_table": [
           {
-            "predicate": "negative result"
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "negative result"
+                },
+                {
+                  "any_of": [
+                    {
+                      "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+                    },
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+                    }
+                  ]
+                },
+                {
+                  "any_of": [
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+                    },
+                    {
+                      "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+                    }
+                  ]
+                },
+                {
+                  "predicate": "the population in question holds held olives"
+                },
+                {
+                  "not": {
+                    "predicate": "the population in question holds plants other than held olives"
+                  }
+                }
+              ]
+            },
+            "effect": "POPULATION_NOT_LAWFULLY_DUE"
           },
           {
-            "any_of": [
-              {
-                "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
-              },
-              {
-                "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
-              }
-            ]
-          },
-          {
-            "any_of": [
-              {
-                "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
-              },
-              {
-                "predicate": "the Osservatorio's recognition request for this tree awaits decision"
-              }
-            ]
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "negative result"
+                },
+                {
+                  "any_of": [
+                    {
+                      "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+                    },
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+                    }
+                  ]
+                },
+                {
+                  "any_of": [
+                    {
+                      "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+                    },
+                    {
+                      "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+                    }
+                  ]
+                },
+                {
+                  "predicate": "the population in question holds held olives"
+                },
+                {
+                  "predicate": "the population in question holds plants other than held olives"
+                }
+              ]
+            },
+            "effect": "LAWFULLY_DUE_IN_PART"
           }
         ],
         "otherwise": {
           "effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route."
         }
       },
-      "true_effect": "Hold visually qualifying, negative olives from removal only while official recognition and any required landscape authorization resolve; this is not Article 7(3) retention.",
+      "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately). Wholly held olives, a held olive being a negative olive with the Article 2 characteristics whose recognition, or the definitive decision on its provisional list entry, and any required landscape authorization are pending (v1's three conjuncts), is not lawfully due while that resolves (POPULATION_NOT_LAWFULLY_DUE). Held olives with other plants, for example \"la pianta infetta\", stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). This is not Article 7(3) retention.",
       "false_effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route."
     },
     {
@@ -6473,6 +6527,54 @@
       "false_effect": "This point-in-time fork does not prove Monopoli remains eradication-only after M4."
     },
     {
+      "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn:v1",
+      "operator": "ROUTE_TABLE",
+      "expression": {
+        "route_table": [
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "decision time within this version's effective interval"
+                },
+                {
+                  "predicate": "the population in question holds the named order's host plants within 50 m of its infected plants"
+                },
+                {
+                  "not": {
+                    "predicate": "the population in question holds a plant the named order lists as infected"
+                  }
+                }
+              ]
+            },
+            "effect": "POPULATION_NOT_LAWFULLY_DUE"
+          },
+          {
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "decision time within this version's effective interval"
+                },
+                {
+                  "predicate": "the population in question holds the named order's host plants within 50 m of its infected plants"
+                },
+                {
+                  "predicate": "the population in question holds a plant the named order lists as infected"
+                }
+              ]
+            },
+            "effect": "LAWFULLY_DUE_IN_PART"
+          }
+        ],
+        "otherwise": {
+          "effect": "NO_WITHDRAWAL_FOR_THIS_POPULATION"
+        }
+      },
+      "true_effect": "From 14 March 2024 removal of the host plants within 50 m of the infected plants that DDS 96, 113, 119, 124 and 138/2023 prescribed is withdrawn; removal of the infected plants each order lists is not. A population in question wholly of those 50 m host plants is not lawfully due (POPULATION_NOT_LAWFULLY_DUE). A population that also holds plants the order lists as infected stays lawfully due for those plants only, and this row limits it (LAWFULLY_DUE_IN_PART).",
+      "false_effect": "A population made only of the plants the named order lists as infected is not withdrawn; the order's removal of them, its commencement term, coercive direction and executor stand."
+    },
+    {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict",
       "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict:v1",
       "operator": "AND",
@@ -6500,25 +6602,62 @@
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1",
-      "operator": "AND",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v2",
+      "operator": "ROUTE_TABLE",
       "expression": {
-        "all_of": [
+        "route_table": [
           {
-            "predicate": "fastidiosa ST1 branch"
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "fastidiosa ST1 branch"
+                },
+                {
+                  "predicate": "effective Annex II population"
+                },
+                {
+                  "predicate": "plant not otherwise infected symptomatic or suspected"
+                },
+                {
+                  "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+                },
+                {
+                  "not": {
+                    "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+                  }
+                }
+              ]
+            },
+            "effect": "POPULATION_NOT_LAWFULLY_DUE"
           },
           {
-            "predicate": "effective Annex II population"
-          },
-          {
-            "predicate": "plant not otherwise infected symptomatic or suspected"
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "fastidiosa ST1 branch"
+                },
+                {
+                  "predicate": "effective Annex II population"
+                },
+                {
+                  "predicate": "plant not otherwise infected symptomatic or suspected"
+                },
+                {
+                  "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+                },
+                {
+                  "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+                }
+              ]
+            },
+            "effect": "LAWFULLY_DUE_IN_PART"
           }
         ],
         "otherwise": {
           "effect": "No general olive immunity is established."
         }
       },
-      "true_effect": "Treat uninfected, asymptomatic olive as outside the ST1 specified-plant limbs only; independently infected, symptomatic, or suspected olive remains in Article 7.",
+      "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately), in the ST1 branch and the effective Annex II population. Wholly uninfected, asymptomatic olives, none of them symptomatic or suspected, is not lawfully due (POPULATION_NOT_LAWFULLY_DUE). Such olives with other plants, for example an infected almond, stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). Independently infected, symptomatic or suspected olive remains in Article 7.",
       "false_effect": "No general olive immunity is established."
     },
     {
@@ -8982,25 +9121,62 @@
     },
     {
       "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary",
-      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v1",
-      "operator": "AND",
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v2",
+      "operator": "ROUTE_TABLE",
       "expression": {
-        "all_of": [
+        "route_table": [
           {
-            "predicate": "fastidiosa ST1 branch"
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "fastidiosa ST1 branch"
+                },
+                {
+                  "predicate": "effective Annex II population"
+                },
+                {
+                  "predicate": "plant not independently infected symptomatic or suspected"
+                },
+                {
+                  "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+                },
+                {
+                  "not": {
+                    "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+                  }
+                }
+              ]
+            },
+            "effect": "POPULATION_NOT_LAWFULLY_DUE"
           },
           {
-            "predicate": "effective Annex II population"
-          },
-          {
-            "predicate": "plant not independently infected symptomatic or suspected"
+            "when": {
+              "all_of": [
+                {
+                  "predicate": "fastidiosa ST1 branch"
+                },
+                {
+                  "predicate": "effective Annex II population"
+                },
+                {
+                  "predicate": "plant not independently infected symptomatic or suspected"
+                },
+                {
+                  "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+                },
+                {
+                  "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+                }
+              ]
+            },
+            "effect": "LAWFULLY_DUE_IN_PART"
           }
         ],
         "otherwise": {
           "effect": "No crop-wide immunity or exemption from independently satisfied Article 7 predicates is established."
         }
       },
-      "true_effect": "Treat uninfected, asymptomatic olive as outside the fastidiosa ST1 specified-plant limbs only; infected, symptomatic, suspected, or otherwise independently reached olive remains inside the controlling Article 7 population.",
+      "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately), in the ST1 branch and the effective Annex II population. Wholly uninfected, asymptomatic olives, none of them symptomatic or suspected, is not lawfully due (POPULATION_NOT_LAWFULLY_DUE). Such olives with other plants, for example an infected almond, stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). Infected, symptomatic, suspected or otherwise independently reached olive remains inside the controlling Article 7 population.",
       "false_effect": "No crop-wide immunity or exemption from independently satisfied Article 7 predicates is established."
     },
     {

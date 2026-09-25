@@ -420,7 +420,8 @@ its term, anchor, commitment, coercive population or executor. A validated first
 reading that states a clause limit gets one source-only reread whose request
 states the limit and that definition; a limit the reread still states stands.
 
-One record is one enforcement clause over the work it enforces: instrument,
+One record is one enforcement clause over the work it enforces (for an order whose
+annex positions are read, one record per clause and annex position): instrument,
 recipients and cohort as printed, the prescribed scope, the commencement work and
 population, the stated term as printed (number and unit word, never classified),
 its anchor, the stated consequence and commitment, the coercive population with
@@ -434,7 +435,32 @@ same clause are one clause; copies that read it differently leave the work
 unknown. An act that prescribes no work to
 recipients has no record. Governing A references are every A row of the
 instrument and every row whose `corrects_instrument_ids` names it. Annex
-positions are not read.
+positions are read only for the orders named in `corrects_instrument_ids` by an
+in-force row whose condition asks a predicate `predicate-contracts.json` binds to
+a position field (`cordon_d.annex_positions`); for those orders the writer emits
+one record per clause and annex position. The annex the cohort names is read from
+the retained original's text layer, each rotated line placed in the band between
+the page's drawn row rules: the infected-plant rows (sample, foglio, particella)
+and the 50 m rows (foglio, particelle, owners). A position is one printed owner
+with every parcel printed against it and the listed infected plants on those
+parcels, each with the parcel it stands on (`listed_infected_plant_parcels`). A 50 m listing that places no recipient is a position with no recipient,
+naming its printed words: it holds that listing's 50 m hosts (a strip printed with
+no parcel number, such as "STRADE" or "ACQUE", included) and the listed infected
+plants on its parcels, so a governing row answers it like any other position; no
+recipient is a notice-side fact, not a dueness need. Where such a listing held a
+listed infected plant, its position would be unknown, naming the listing and the
+plants. Whether a listing places no recipient is a lexical test: no parcel number;
+a parcel number with an empty owner cell; or an owner printed as not identified or
+not found (`NON INDIVIDUAT…`, `NON TROVAT…`). It is verified on the held annexes
+it has been run on (the five orders DDS 18/2024 names, and DDS 115/2023's
+"PROPRIETARI NON TROVATI"); a governing row that names another order re-verifies
+it on that order's annex, blank owner cells included, since a blank cell at a page
+boundary may be a merged cell continued from the row above. The
+infected-plant rows must equal the
+operative "n° N piante" and every infected plant's parcel must have a 50 m row
+naming its owners; otherwise every position of the order is unknown, naming the
+failed check. The position goes in the record's recipient positions field; the
+cohort stays as printed and the occurrence names the clause and position.
 
 Retained copies compare what they say: case, whitespace, punctuation and articles
 aside. A list label the page prints inside a clause (a lettered point, a bullet or
@@ -445,7 +471,25 @@ running from notification, a committed consequence, a coercive population and an
 executor. A clause's own reading limit leaves it unknown. Lawful dueness is the
 order's own reading: its operative part prescribes the work to its recipients and
 names the population for coercion (`order_dueness`). `lawfully_due` holds that
-reading to every governing A row. A held court disposition reaches it from its
+reading to every governing A row that is both required (in force, and the order's
+own or naming it) and reached, separately for the commencement-work and the
+coercive predicate, from each row's result for that predicate. At an annex
+position the work and the coercive population in question are that recipient's
+share, so COERCE, like WORK, is answered from the recipient's share; at order
+grain COERCE asks about the order's coercive population. A required row gates
+dueness if one of its possible outcomes (any route or branch) is
+`POPULATION_NOT_LAWFULLY_DUE` or `LAWFULLY_DUE_IN_PART`, or if it names the
+instruments it corrects or supplements (`corrects_instrument_ids`): a correction or
+supplement changes whom the order obliges and what it covers, so dueness waits for
+it. A row that is neither is not read, reached or not. A required row that gates
+dueness and is not reached names itself as a need; one that is reached and
+unresolved passes its own needs through. A reached row whose result is
+`POPULATION_NOT_LAWFULLY_DUE` makes it false, whatever other rows still need: a
+resolved not due is final. One whose result is `LAWFULLY_DUE_IN_PART` keeps the
+reading and names the row, except that the work of a record carrying no annex
+position stays unknown, naming the recipient's position in the order's annex. No
+other effect is read. A stated change counts
+only from its stating act's adoption. A held court disposition reaches it from its
 publication: an annulment closes the order only for the scope the decision states
 (for the applicants, false for a recipient within it, live outside it, and
 unknown naming the scope while the recipient is not identified); an interim
@@ -453,33 +497,41 @@ suspension with no later disposition of its ricorso, a challenge ended with the
 court's stated reason, or a stated correction, replacement, revocation,
 suspension or withdrawal, whole or in part, that no A row records, leaves it
 unknown and names the act and the words stating what changes. Nothing is patched.
-`c_result` passes C only the notice and commencement evidence the caller holds:
-the facts of the Art. 21-ter notice branches (the Art. 21-bis communication
-predicate, or the mass-publicity row) and each branch's instant, from which C's
-`notice_instant` takes the earliest instant among the branches A finds true;
-nothing absent is supplied. Publication fills notification only through A's
-mass-publicity route.
+Every such outcome only withholds, so the order's own reading under a disposition
+or stated change replaces only a dueness the governing rows leave true: a not due
+from a governing row stands, with its row in `provisions`, and an unknown from the
+rows keeps its needs and adds the order's own. `c_result` passes C only the notice
+and commencement evidence the caller holds: the facts of the Art. 21-ter notice
+branches (the Art. 21-bis communication predicate, or the mass-publicity row) and
+each branch's instant, from which C's `notice_instant` takes the earliest instant
+among the branches A finds true; nothing absent is supplied. Publication fills
+notification only through A's mass-publicity route.
 
 Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
 through `recipient_results` (`read_prescriptions.py --records`), beside the
 clause's cohort result, which no supplied record moves. There is one result per
-recipient a delivery record names, keyed as that record names them; nothing joins
-it to an annex position. A personal-delivery record is the delivery receipt only,
-never the acceptance receipt; it enters the communication predicate for its
-recipient only. The works a delivery record names are the operator's standing
-assertion of what that recipient is obliged to. Commencement and removal count for
-the work the record prints (comune, foglio and particella, or a plant identifier)
-and for every recipient a supplied record obliges to that work. A recipient's
-commencement history is complete only when every work it is obliged to has a
-stated history running from the order's adoption, or earlier, through C's
-deadline: `clock_boundary` on the notification C's `notice_instant` returns for
-that recipient, with the order's stated term, zone and calendar. A history stated
-as complete through a moment later than the evaluation is refused. The caller
-supplies no instant, order-text predicate or completeness of its own; what it
-cannot join is reported. Postings are public records read on PR #15's route, not
-supplied records: a recipient reached only by posting has no per-recipient result,
-because that needs recipient-to-parcel standing (PR #35's positions or
-`party-land-standing`), which is not held.
+recipient a delivery record names, keyed as that record names them. The join from
+a supplied record to an annex position is not built here (planned in PR #40): for a clause
+the writer emits per annex position, each supplied record of the order is
+reported unattached with that cause, and no recipient there gets a per-recipient
+result. Other clauses keep the record's naming alone. A personal-delivery record
+is the delivery receipt only, never the acceptance receipt; it enters the
+communication predicate for its recipient only. The works a delivery record names
+are the operator's standing assertion of what that recipient is obliged to.
+Commencement and removal count for the work the record prints (comune, foglio and
+particella, or a plant identifier) and for every recipient a supplied record
+obliges to that work. A recipient's commencement history is complete only when
+every work it is obliged to has a stated history running from the order's
+adoption, or earlier, through C's deadline: `clock_boundary` on the notification
+C's `notice_instant` returns for that recipient, with the order's stated term,
+zone and calendar. A history stated as complete through a moment later than the
+evaluation is refused. The caller supplies no instant, order-text predicate or
+completeness of its own; what it cannot join is reported. Postings are public
+records read on PR #15's route, not supplied records: a recipient reached only by
+posting has no per-recipient result. Positions place printed owners on parcels
+only for the orders read per position, and a posting's notice there still waits
+on the mass-publicity row's court fact, which no D reader supplies; elsewhere it
+needs `party-land-standing`, which is not held.
 
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text
@@ -555,11 +607,15 @@ the export cuts where the field ends ("Osservatorio Fitosanita") is printed. A
 row that prints the issuer is read for identities by the same matcher as held acts
 (`held_acts.printed_identities`): a number closely followed by a date ("n. 114
 del 16/10/2023", "DDS 99 05/08/2024", "60 del 19 luglio 2022") or a designator
-with number and year ("DDS 122/2021"). Every identity a row
-with the issuer prints is attached or listed unattached with its cause: an order D
-does not hold, a date other than the order's adoption date, or a date that is not
-a readable date. A JCityGov
-detail supplies the declared start; its period end is a retention horizon, so the
+with number and year ("DDS 122/2021"). An identity the matcher reads, in a row
+with the issuer, is attached or listed unattached with its cause: an order D does
+not hold, a date other than the order's adoption date, or a date that is not a
+readable date. That is the matcher's reading limit: an identity printed in a form
+it does not read (an unreadable date printed without "del", "nr.188 del …",
+"D.D.S.188 del …") is neither attached nor listed, and a broad designator or a
+duration can read as an identity; no held row shows either. A JCityGov detail is
+read only for the comune `read_postings.py` names (Taranto); other towns' JCityGov
+pages are not read. It supplies the declared start; its period end is a retention horizon, so the
 interval stays open. An image-only posted document's identity is read from its
 page images through the subscription (`posted_identity`). Whether a posting is
 notice, or an executor act is execution, stays with A.
@@ -575,6 +631,8 @@ bytes do not merge publication occurrences and do not prove amendment. An
 attachment adapter needs the acquisition record. A future date stays an
 unoccurred declaration. A declared posting interval does not prove
 uninterrupted posting. A retained complete publication certificate supplies its
-own attested interval. An unresolved act identity can be connected through the
+own attested interval. Certificate reading is replay-only: `read_prescriptions.py`
+reads a certificate only from its stored reading, so a certificate with no stored
+reading is not read. An unresolved act identity can be connected through the
 acquired certificate and principal routes. Neither record supplies recipient
 notification, response, default or performance.

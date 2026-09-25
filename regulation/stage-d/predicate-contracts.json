@@ -4342,6 +4342,50 @@
       ]
     },
     {
+      "predicate": "the population in question holds a plant the named order lists as infected",
+      "contracts": [
+        "case-prescription"
+      ],
+      "position_field": "listed_infected_plants"
+    },
+    {
+      "predicate": "the population in question holds held olives",
+      "contracts": [
+        "plant-population",
+        "protected-status",
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the population in question holds plants other than held olives",
+      "contracts": [
+        "plant-population",
+        "protected-status",
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the population in question holds plants other than uninfected, asymptomatic olives",
+      "contracts": [
+        "plant-population",
+        "official-finding"
+      ]
+    },
+    {
+      "predicate": "the population in question holds the named order's host plants within 50 m of its infected plants",
+      "contracts": [
+        "case-prescription"
+      ],
+      "position_field": "fifty_metre_parcels"
+    },
+    {
+      "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected",
+      "contracts": [
+        "plant-population",
+        "official-finding"
+      ]
+    },
+    {
       "predicate": "the presence of the specified pest is officially confirmed in the buffer zone",
       "contracts": [
         "official-finding",
