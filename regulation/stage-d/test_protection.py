@@ -5,6 +5,7 @@ views, read by D and carried through PR #32's rows. `HeldSources` runs the ordin
 store (register capture, list acts, removal orders, monitoring stream) and skips where those bytes are not held.
 Expected answers come from reading the layer, the acts and the notes, not from the reader.
 """
+import dataclasses
 from datetime import date
 from decimal import Decimal
 import json
@@ -106,9 +107,18 @@ class TheRecordAsPrinted(unittest.TestCase):
                          ('diametro', 'superiore a', '130', 'cm', 'no height printed', Decimal(130), None))
         m, = measurements('caratteristiche monumentali diametro  cm 96 circa')  # order plant 0e92c74d4485, #2550
         self.assertEqual((m.qualifier, m.value, m.unit, m.height, m.diameter_cm), ('circa', '96', 'cm', 'no height printed', Decimal(96)))
-        # Order plant b4b95b9f1934: the value as printed, its leading comma kept.
+
+    def test_a_leading_separator_is_read_only_directly_after_the_quantity(self):
+        # Order plant b4b95b9f1934's held "dim. ,9": no unit before the value, which is kept as printed.
         m, = measurements("pianta non cartellinata con caratteristiche di monumentalita'' dim. ,9")
         self.assertEqual((m.quantity, m.value, m.unit, m.diameter_cm), ('dim.', ',9', 'no unit printed', None))
+        # After a unit, a leading separator is an abbreviation's point, not the value's: 'cm.120' is never 1.20 cm
+        # and 'cm.80' never 0.80 cm. No held note has this form; the diameter is not read, so C reads unknown.
+        for note in ('diametro cm.120', 'diametro cm.80 a 1,30 m da terra', 'diametro mt.1,20 a 1,30 m da terra'):
+            with self.subTest(note=note):
+                m, = measurements(note)
+                self.assertEqual((m.value, m.diameter_cm), (protection.NOT_READ, None))
+                self.assertEqual(protection.diameter_inputs(record(note))[0]['diameter_cm'], None)
 
     def test_a_diameter_named_without_a_value_is_not_read_not_unprinted(self):
         # No held note names the diameter without a value the reader reads; this is a variant.
@@ -263,15 +273,31 @@ class HeldSources(unittest.TestCase):
         self.assertEqual(bounds[batch].observations, tuple(f.observation for f in fixes if not f.dropped and f.batch == batch))
         self.assertTrue(all(len(b.observations) == len(wide) for b in small))
 
-    def test_the_2011_census_is_one_batch_across_its_labels_and_its_check_is_not_run_under_20_fixes(self):
-        # The recitals of DGR 1358/2012, DGR 357/2013 and DGR 2227/2013 name the SIT srl systematic survey.
+    def test_the_2011_census_batch_and_its_check_is_not_run_under_20_fixes(self):
+        # The recitals of DGR 1358/2012, DGR 357/2013, DGR 2227/2013 and DGR 1417/2013 name the SIT srl systematic
+        # survey. DGR 2227/2013's also name the Comune di Casarano's request for 226 trees, and DGR 1417/2013's the
+        # Comune di Maruggio's for 83 (read from the acts' own pages).
         acts = self.result['acts']
         self.assertIn((protection.SIT, 127719), acts['DGR 1358/2012'].surveys)
         self.assertIn((protection.SIT, 172340), acts['DGR 357/2013'].surveys)
         self.assertIn((protection.SIT, 1783), acts['DGR 2227/2013'].surveys)
+        self.assertIn((protection.SIT, 1238), acts['DGR 1417/2013'].surveys)
+        self.assertEqual((acts['DGR 2227/2013'].requests, acts['DGR 1417/2013'].requests),
+                         ((('Casarano', 226),), (('Maruggio', 83),)))
+        # The census batch holds the dated SIT groups of three labels. DGR 1417/2013's SIT trees print no survey date,
+        # cannot be told from Maruggio's 83 by date, and stay under their label; its rule says so.
         labels = {protection._canonical(self.result['entries'][o].label)
                   for o, b in self.result['batches'].items() if b == protection.SIT}
         self.assertEqual(labels, {'DGR 1358/2012', 'DGR 357/2012', 'DGR 2227/2013'})
+        rules = {r.split(':')[0]: r for r in self.result['batch_rules']}
+        rule = rules['label DGR 1417/2013, survey group survey date not recorded']
+        self.assertIn('a municipal request, Comune di Maruggio (83), which this reader does not separate', rule)
+        self.assertIn("cannot tell the survey's entries from the request's by date", rule)
+        self.assertTrue(rule.endswith('batch: DGR 1417/2013, survey date not recorded'))
+        rule = rules['label DGR 2227/2013, survey group 2012..2012']
+        self.assertIn('a municipal request, Comune di Casarano (226), which this reader does not separate', rule)
+        self.assertIn(f'{protection.SIT} is the one source they name whose entries print survey dates', rule)
+        self.assertTrue(rule.endswith(f'batch: {protection.SIT}'))
         own = [f.residual_m for f in self.result['fixes'] if not f.dropped and f.batch == protection.SIT]
         self.assertLess(len(own), protection.MIN_FIXES)
         bound = self.result['bounds'][protection.SIT]
@@ -285,6 +311,29 @@ class HeldSources(unittest.TestCase):
                       bound.check)
         self.assertIn(f"own 95th percentile, {float(numpy.percentile(own, 95)):.2f} m", bound.check)
         self.assertEqual([b for b in self.result['bounds'].values() if b.check], [bound])
+
+    def test_the_2011_check_compares_the_tolerance_from_20_census_fixes(self):
+        # The census has 19 held fixes, so this branch has not run on the held batch. Twenty held fixes, taken as
+        # the census's, reach it: the census's own bound, compared with 1.00 m plus the fixes' own error.
+        kept = [f for f in self.result['fixes'] if not f.dropped]
+        census = [dataclasses.replace(f, batch=protection.SIT) for f in kept[:protection.MIN_FIXES]]
+        contract = protection.contract_terms(STORE)
+        bound = protection.batch_bounds(census, {protection.SIT}, set(), contract_batch={protection.SIT},
+                                        contract=contract)[protection.SIT]
+        own = [f.distance_m + f.observation_error_m for f in census]
+        self.assertEqual((bound.applies, bound.fixes), (protection.SIT, 20))
+        self.assertEqual(bound.error_m, round(float(numpy.percentile(own, 95)), 2))
+        tolerance = contract[0] + max(f.observation_error_m for f in census)
+        excess = bound.error_m - tolerance
+        self.assertIn(f"{tolerance:.2f} m; the census's own bound is {bound.error_m:.2f} m: " +
+                      ('within' if excess <= 0 else f'exceeded by {excess:.2f} m') +
+                      '. The measured bound stands either way.', bound.check)
+        self.assertIn(contract[1], bound.check)
+        self.assertNotIn('Not checked', bound.check)
+        # One fix fewer is not checked.
+        bound = protection.batch_bounds(census[:-1], {protection.SIT}, set(), contract_batch={protection.SIT},
+                                        contract=contract)[protection.SIT]
+        self.assertIn('Not checked: the census has 19 fixes, under 20', bound.check)
 
     def test_both_layers_are_kept_and_no_parcel_screen_or_survey_finding_is_emitted(self):
         held = [e for e in self.result['entries'].values() if e.layer in ('listed', 'provisional')]
@@ -302,6 +351,13 @@ class HeldSources(unittest.TestCase):
         self.assertEqual(q['sources']['entry_point'], entry['source'])
         self.assertIn(entry['batch'], q['sources']['reference_fixes'])
         self.assertEqual(len(q['sources']['reference_fix_error']), 3)
+        # The method and the 2011 check are emitted once, under bounds; each entry points to them.
+        for entry in out['zone_entries']:
+            q, at = entry['qualification'], f"bounds[{entry['batch']!r}]"
+            self.assertEqual((q['method'], q['check']),
+                             (f'{at}.method', f'{at}.check' if out['bounds'][entry['batch']]['check'] else None))
+        self.assertTrue(all('monitoring residuals' in b['method'] for b in out['bounds'].values()))
+        self.assertIn('Not checked', out['bounds'][protection.SIT]['check'])
 
     def test_survey_date_not_recorded_takes_the_register_wide_bound(self):
         entry = self.entry_labelled('DGR 1491/2020', lambda e: e.survey == 'survey date not recorded')

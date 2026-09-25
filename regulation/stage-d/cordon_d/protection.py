@@ -73,11 +73,12 @@ def read_note(note: str) -> NoteReading:
 
 # --- measurements the note records ------------------------------------------------------------
 
-# The value is kept as printed, a leading separator included ("dim. ,9").
+# The value is kept as printed. A value printed with a leading separator ("dim. ,9") is read only directly after
+# the quantity, with no unit or other word before it: after a unit, "cm.80" and "mt.1,20" give no value.
 _QUANTITY = re.compile(r"(diametr\w*|circonferenz\w*|circ\.|dim\.|dimension\w*|dm\.?)(?:(?![.,]\d)\W){0,3}"
-                       r"((?:tronco\s+)?(?:di\s+)?(?:circa\s+)?(?:superiore\s+a\s+)?(?:oltre\s+)?)"
-                       r"(cm|mt|m|metri|centimetri)?\s*(\d+(?:[.,]\d+)?|[.,]\d+)(?:\s*(cm|mt|m\b|metri|centimetri))?"
-                       r"(\s+circa)?", re.I)
+                       r"(?:((?:tronco\s+)?(?:di\s+)?(?:circa\s+)?(?:superiore\s+a\s+)?(?:oltre\s+)?)"
+                       r"(cm|mt|m|metri|centimetri)?\s*(\d+(?:[.,]\d+)?)|([.,]\d+))"
+                       r"(?:\s*(cm|mt|m\b|metri|centimetri))?(\s+circa)?", re.I)
 _HEIGHT = re.compile(r"(ad?\s+(?:un|uno|\d+(?:[.,]\d+)?)\s+(?:metr\w*|mt|m|cm)(?:\s+e\s+mezzo)?\s+"
                      r"(?:di\s+altezza|da\s+terra)|altezza\W+(?:\w+\W+){0,3}\d+(?:[.,]\d+)?\s*(?:cm|mt|m|metri)?)", re.I)
 _TO_CM = {'cm': 1, 'centimetri': 1, 'm': 100, 'mt': 100, 'metri': 100}
@@ -120,13 +121,15 @@ def measurements(note: str) -> tuple[Measurement, ...]:
     height_cm = _height_cm(height.group()) if height else None
     for match in _QUANTITY.finditer(note):
         quantity = match.group(1)
-        words = f'{match.group(2)} {match.group(6) or ""}'.lower()
+        words = f'{match.group(2) or ""} {match.group(7) or ""}'.lower()
         qualifier = ' '.join(q for q in ('circa', 'superiore a', 'oltre') if q in words)
-        unit = match.group(3) or match.group(5) or 'no unit printed'
-        value = match.group(4)
+        unit = match.group(3) or match.group(6) or 'no unit printed'
+        value = match.group(4) or match.group(5)
         causes = []
         if unit == 'no unit printed':
             causes.append('no unit printed')
+        elif match.group(5):
+            causes.append(f'the value is printed with a leading separator ("{value}")')
         if not quantity.lower().startswith('diametr'):
             causes.append(f'the quantity printed is "{quantity}", not "diametro"')
         if height and height_cm is None:
@@ -329,8 +332,9 @@ class ListAct:
     deleted: int | None                 # entries it deletes
     table: tuple[tuple[str, int, int, int], ...] = ()  # history table rows (act, provisional, deleted, definitive)
     cause: str | None = None            # why a date is missing
-    batches: tuple[int, ...] = ()       # the survey batches its recitals name as making up its provisional list
+    batches: tuple[int, ...] = ()       # the stated parts of its list its recitals name (the act-chain count rule)
     surveys: tuple[tuple[str, int], ...] = ()  # (survey, trees) each survey its own recitals name, as they count it
+    requests: tuple[tuple[str, int], ...] = ()  # (comune, trees) each municipal request its recitals name, as printed
 
 
 _DECISION = re.compile(r"\bDELIBERA\b")
@@ -352,6 +356,11 @@ _SURVEYS = (
         r"Corpo\s+Forestale\s+dello\s+Stato\s+ha\s+(?:rilevato|restituito\s+un\s+elenco\s+di\s+ulivi\s+monumentali\s+"
         r"comprensivo\s+di)\s+([\d.]+)", re.I)),
 )
+# The municipal requests the recitals name (DGR 2227/2013: "la nota ... del Comune di Casarano che richiede
+# l'inserimento di n. 226 ulivi monumentali"). Printed beside the surveys; the reader does not separate their entries.
+_REQUEST = re.compile(r"Comune\s+di\s+(\S+(?:\s+\S+){0,3}?)\s+(?:acquisit\w+\s.{0,100}?)?che\s+richied\w+,?\s+"
+                      r"(?:tra\s+l.altro,?\s+)?l.inserimento\s+(?:rispettivamente\s+)?di\s+"
+                      r"(n\.\s*[\d.]+(?:\s+e\s+n\.\s*[\d.]+)*)\s+ulivi")
 
 
 def _text_pages(path: Path, number: int, year: int):
@@ -459,10 +468,12 @@ def read_act(path: Path, number: int, year: int, sha256: str) -> ListAct:
     own = own[:_DECISION.search(own).start()] if _DECISION.search(own) else own
     surveys = tuple(dict.fromkeys((survey, _count(m.group(1))) for survey, pattern in _SURVEYS
                                   for m in pattern.finditer(own)))
+    requests = tuple((m.group(1), _count(n)) for m in _REQUEST.finditer(own)
+                     for n in re.findall(r"n\.\s*([\d.]+)", m.group(2)))
     return ListAct(name, adopted, printed, published, sha256, pages,
                    _count(next(g for g in provisional.groups() if g)) if provisional else None,
                    tuple(definitive), _count(deleted.group(1)) if deleted else None, table,
-                   None if published else 'the capture prints no BURP date for the act', batches, surveys)
+                   None if published else 'the capture prints no BURP date for the act', batches, surveys, requests)
 
 
 def list_acts(store: Path, root: Path = REPOSITORY) -> dict[str, ListAct]:
@@ -574,7 +585,7 @@ def act_chains(entries: list[Entry], acts: dict[str, ListAct]) -> tuple[dict[str
             final = finals[0][0] if len(finals) == 1 else None
             options.append((provisional_count, label, final))
             # The surveys the act's recitals name, when together they make up exactly its provisional list, are
-            # batches of the same provisional and definitive acts.
+            # stated parts of that act's list (not survey batches), with the same provisional and definitive acts.
             parts = own.batches if own else ()
             if len(parts) > 1 and sum(parts) == provisional_count:
                 options += [(part, label, final) for part in parts]
@@ -808,22 +819,33 @@ def named_survey(group: list[Entry], act: ListAct | None) -> tuple[str | None, s
 
     A survey whose recital count is within 5% of the group's is the group's. Where none fits, a group whose entries
     print survey dates belongs to the one survey the act's recitals name, if they name exactly one, and the two
-    counts are printed. Otherwise the recitals name no survey for the group."""
+    counts are printed. Otherwise the recitals name no survey for the group. Where recitals that name a survey also
+    name a municipal request, the request and its count are printed: this reader does not separate its entries from
+    the survey's, and an undated group keeps its label, since the two cannot be told apart by date."""
     named = act.surveys if act else ()
     head = f'{len(group)} entries first listed by {act.act if act else "no held act"}'
+    requests = act.requests if act and named else ()
+    request = '' if not requests else (
+        ' and ' + ('a municipal request, ' if len(requests) == 1 else 'municipal requests, ') +
+        '; '.join(f'Comune di {c} ({n})' for c, n in requests) + ', which this reader does not separate')
     fitting = {s for s, c in named if abs(c - len(group)) <= TOLERANCE * c}
     if len(fitting) == 1:
         survey, = fitting
         counts = ' and '.join(str(c) for s, c in named if s == survey)
-        return survey, f'{head}; its recitals count {counts} for {survey}, within {TOLERANCE:.0%}'
+        return survey, (f'{head}; its recitals count {counts} for {survey}, within {TOLERANCE:.0%}' +
+                        (f'; they also name{request[4:]}' if request else ''))
     surveys = {s for s, _ in named}
     if not fitting and len(surveys) == 1 and group[0].survey != 'survey date not recorded':
         survey, = surveys
         counts = ' and '.join(str(c) for _, c in named)
-        return survey, (f'{head}, with survey dates; its recitals name one survey, {survey}, and count {counts}: '
-                        'the counts do not fit, and the group is taken as that survey')
+        return survey, (f'{head}, with survey dates; its recitals name {survey} ({counts}){request}; {survey} is '
+                        'the one source they name whose entries print survey dates: the counts do not fit, and '
+                        'the group is taken as that survey')
     return None, (f'{head}; its recitals name ' + ('; '.join(f'{s} ({c})' for s, c in named) or 'no survey') +
-                  ('' if not named else ', and none fits the group alone'))
+                  request + ('' if not named else ', and no survey count fits the group alone') +
+                  ('; the group prints no survey dates, so this reader cannot tell the survey\'s entries from the '
+                   'request\'s by date, and the group keeps its label'
+                   if request and group[0].survey == 'survey date not recorded' else ''))
 
 
 def survey_batches(entries: list[Entry], chains: dict[str, Chain]) -> tuple[dict[str, str], list[str]]:
@@ -1210,17 +1232,18 @@ def rows(result: dict) -> dict:
     zone = []
     for oid in sorted(result['zone_entries'], key=lambda o: (entries[o].layer, o)):
         e, chain, bound = entries[oid], chains.get(oid), bounds[batches[oid]]
+        at = f'bounds[{batches[oid]!r}]'  # the method, the 2011 check and the reference fixes are emitted there once
         zone.append({
             'entry': oid, 'layer': e.layer, 'key': e.key, 'card': e.card, 'key_causes': list(result['key_causes'].get(oid, ())),
             'label': e.label, 'bulletin_printed': e.bulletin, 'comune': e.comune, 'foglio': e.foglio,
             'particella': e.particella, 'point': {'x': e.x, 'y': e.y, 'crs': 'EPSG:32633'}, 'survey': e.survey,
             'source': e.source, 'batch': batches[oid],
             'qualification': {'applies_to': bound.applies, 'card_form': bound.card_form, 'error_m': bound.error_m,
-                              'statistic': bound.statistic, 'fixes': bound.fixes, 'method': bound.method,
-                              'reference_fix_error_m': terms.error_m, 'check': bound.check,
+                              'statistic': bound.statistic, 'fixes': bound.fixes, 'method': f'{at}.method',
+                              'reference_fix_error_m': terms.error_m, 'check': bound.check and f'{at}.check',
                               'date': result['decision'].isoformat(),
                               'sources': {'entry_point': e.source,
-                                          'reference_fixes': f'bounds[{batches[oid]!r}].reference_fixes',
+                                          'reference_fixes': f'{at}.reference_fixes',
                                           'reference_fix_error': reference_fix_sources}},
             'acts': None if chain is None else {
                 'provisional': _act(chain.provisional), 'definitive': _act(chain.definitive),
@@ -1236,6 +1259,6 @@ def rows(result: dict) -> dict:
                                  'distance_m': round(f.distance_m, 2), 'observation_error_m': f.observation_error_m,
                                  'codes': [list(c) for c in f.codes], 'dropped': f.dropped} for f in result['fixes']],
             'bounds': {b: {'applies_to': v.applies, 'error_m': v.error_m, 'fixes': v.fixes, 'card_form': v.card_form,
-                           'check': v.check, 'reference_fixes': list(v.observations)}
+                           'method': v.method, 'check': v.check, 'reference_fixes': list(v.observations)}
                        for b, v in sorted(bounds.items())},
             'tag_batches': sorted(result['tag_batches'])}

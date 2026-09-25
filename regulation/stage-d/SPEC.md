@@ -593,7 +593,10 @@ its group (its label's entries, split by survey date): the survey whose recital
 count is within 5% of the group's, or, where none fits, the one survey those
 recitals name for a group whose entries print survey dates. One survey is one batch
 across every label that carries it. Where the recitals name no survey, the batch is
-the label and the entry's survey dates. A batch bound
+the label and the entry's survey dates. Where recitals that name a survey also name a
+municipal request, the group's rule prints the request with its count; the reader
+does not separate the request's entries from the survey's, and an undated group
+keeps its label. A batch bound
 is the 95th percentile of monitoring residuals: a flagged olive observation and the
 listed entry that are each other's nearest, in the same comune, within 50 m, their
 distance plus the observation's `error_m`. A pair is dropped only when a code in its
@@ -604,12 +607,14 @@ note is read, cite-or-abstain, as stating that the plant has monumental
 characteristics (any wording that asserts it), not doing so, or unclear (negated,
 hedged, or naming the term without stating it of the plant); a negation of the tag
 or the census does not negate the characteristics. A measurement is supplied as
-printed, with `diameter_cm` and `measured_height_cm` read from its words; a note
-that names the diameter and yields no value records "measurement not read"; D
-compares none. An entry's acts come from the acts'
+printed, with `diameter_cm` and `measured_height_cm` read from its words; a value
+printed with a leading separator is read only directly after the quantity with no
+unit before it; a note that names the diameter and yields no value records
+"measurement not read"; D compares none. An entry's acts come from the acts'
 decisions and history table, never from its label alone; where an act's recitals
-name the surveys that together make up exactly its provisional list, each survey is
-a batch of that act. The 2011 census check reads its tolerance from the held
+name the surveys that together make up exactly its provisional list, each is a
+stated part of that act's list, the unit of this count rule, distinct from a survey
+batch. The 2011 census check reads its tolerance from the held
 capitolato d'oneri and checks the census's own bound; with fewer than 20 census
 fixes it is not checked, and the census residuals' own 95th percentile is printed
 as information.
