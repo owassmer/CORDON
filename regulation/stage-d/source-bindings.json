@@ -20,7 +20,7 @@
         "https://www.istat.it/storage/cartografia/confini_amministrativi/non_generalizzati/2026/Limiti01012026.zip (Puglia's extent for the grid distortion, same record)"
       ],
       "population": "Every record of the twelve campaign workbooks, the CKAN release and the 101 observation point layers of the eight SIT services that publish them: 4,318,100 observations, 2,320,354 distinct, all hosts and all result states.",
-      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_observations, located_positives; cordon_d.spatial.positional_qualification",
+      "reader": "cordon_d.monitoring.observations, distinct_observations, detection_days, occasion_sets, located_observations, located_positives; cordon_d.spatial.positional_qualification; cordon_d.plants",
       "open": "Cross-release identity is unreliable for 2013–2017: the workbooks carry no reference and the SIT views use daily counters. A counter value one view reuses on a day stays uncorrelated; one used once in each of two views still correlates them, and such groups are exposed as disagreements or cannot be told from coincidence. The positional qualification is a stated device term plus grid distortion, against the ground. Not held: the device and capture mode per record (GNSS fix or map placement), per-fix accuracy, re-sample links, and the device before late 2024. Plant identity and the official finding belong to the population and report rows."
     },
     {
@@ -36,8 +36,8 @@
         "EU quarantine-pest and host listings retained under regulation/closure/eu/"
       ],
       "population": "The plan and listing versions reached by accepted A provisions; their stated values are already Stage B parameters.",
-      "reader": "Stage B parameters supply the stated values; the finite population and strata per campaign are established with the plant and surface population row",
-      "open": "Establish the per-campaign target population and strata when the plant and surface population row exists."
+      "reader": "Stage B parameters supply the stated values; cordon_d.strata supplies each campaign's strata (DGR 1075/2025 §4.1.2-§4.1.10, and the PNI 2026 §4.1.2 rows), with §4.1.2's population and method sensitivity from the retained PNI 2026 RiPEST workbook",
+      "open": "§4.1.3-§4.1.10 state no method sensitivity, so their design adequacy is unknown. DGR 1075/2025 has no text layer; its Tables 3-10 cells are not read until each is checked against the page image. The design pools plants (7 per olive test, 4 for other species) and states no dependence model, so C's §4.1.2 adequacy stays unknown. The §4.1.3-§4.1.10 rings around the previous campaign's infected plants have no C function."
     },
     {
       "id": "result-documents",
@@ -92,9 +92,9 @@
         "https://wfs.cartografia.agenziaentrate.gov.it/inspire/wfs/owfs01.php",
         "https://webapps.sit.puglia.it/arcgis/rest/services/Background/Catasto/MapServer/2"
       ],
-      "population": "The sheets and parcels the consumed A area versions list, and the map around each control fix (held); the parcels spatially reached by an admitted finding or removal population (rows 4-5, not yet read). National AdE geometry is the current reference where available.",
-      "reader": "cordon_d.area_geometry (Sources.sheets, Sources.parcels) and cordon_d.area_error",
-      "open": "The parcel population rows 4-5 reach is read when those rows are replanned; source cadastral identifiers are preserved. Geometry alone does not establish ownership or authority to enter."
+      "population": "The sheets and parcels the consumed A area versions list, and the map around each control fix (held). The parcels a consumer tests: those an adopted area's construction reads and, once row 6 reads annex positions, those an order lists. National AdE geometry is the current reference where available.",
+      "reader": "cordon_d.area_geometry (Sources.sheets, Sources.parcels) and cordon_d.area_error; cordon_d.plants.parcel gives a tested parcel the cadastre's local ground error",
+      "open": "Parcels an order lists by annex position reach C when row 6 reads them. A reference that no held release draws is a named absence, not a negative. A current release does not establish a parcel's geometry at an earlier event date. Geometry establishes neither ownership nor authority to enter."
     },
     {
       "id": "removal-orders",
