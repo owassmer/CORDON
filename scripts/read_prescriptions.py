@@ -191,6 +191,45 @@ def summary(evaluation):
     return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
 
 
+def per_recipient(results, supplied, snapshot, today, closures, changes):
+    """C per (clause, recipient a supplied record names), attached to each clause record beside its cohort `c`.
+
+    Supplied records are grouped by the order they name; each clause record of that
+    order gets `per_recipient` and `per_recipient_reported`. Returns what reached no
+    held order.
+    """
+    from zoneinfo import ZoneInfo
+    from cordon_d.calendar import national_calendar
+    from cordon_d.case_prescriptions import recipient_results
+    zone, calendar = ZoneInfo('Europe/Rome'), national_calendar()
+    evaluated_at = datetime.now(zone)
+    by_order = {}
+    for item in supplied:
+        by_order.setdefault(item.get('order'), []).append(item)
+    reached = set()
+    for entry in results:
+        for record in entry.get('records', ()):
+            act = record.get('applied_by') or record['instrument']
+            if act not in by_order or record['stated_term'] is None:
+                continue
+            reached.add(act)
+            try:
+                run = recipient_results(snapshot, record, today, by_order[act], evaluated_at=evaluated_at, zone=zone,
+                                        calendar=calendar, closures=closures.get(record['instrument'], ()),
+                                        stated_changes=changes.get(record['instrument'], ()))
+            except Exception as error:  # a refused record set is reported whole, never partly applied
+                record['per_recipient_cause'] = f'{type(error).__name__}: {error}'[:600]
+                continue
+            # Kept apart from the record's own `recipients` (the cohort words the order prints).
+            record['per_recipient'] = {name: {**{k: v for k, v in item.items() if k != 'result'},
+                                              'c': summary(item['result'])}
+                                       for name, item in run['recipients'].items()}
+            record['per_recipient_reported'] = run['reported']
+    return dict(evaluated_at=evaluated_at.isoformat(),
+                unreached=[dict(record=i.get('record'), order=order, cause='names no held order with a stated term')
+                           for order, items in by_order.items() if order not in reached for i in items])
+
+
 _WORKER = {}
 
 
@@ -265,6 +304,7 @@ def main():
     parser.add_argument('--events', action='store_true',
                         help='attach publication events the existing readers connect to each order')
     parser.add_argument('--closures', help='a read_judgments.py --dispositions output: liveness closures by order')
+    parser.add_argument('--records', help='supplied Osservatorio records (a JSON list): C per recipient they name')
     parser.add_argument('--timeout', type=int, default=900)
     parser.add_argument('--model', default='opus')
     parser.add_argument('--effort', default='medium')
@@ -323,6 +363,9 @@ def main():
                                      stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()))))
                             for r in entry.get('records', ())]
     results.append(dict(held_acts=held_report))
+    if arguments.records:
+        results.append(dict(supplied_records=per_recipient(results, json.loads(Path(arguments.records).read_text()),
+                                                           snapshot, today, closures, changes)))
     if arguments.out:
         Path(arguments.out).write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))
     if arguments.events:
