@@ -102,6 +102,17 @@ MUTATIONS = (
     ("cordon_c.populations", 'surviving = hectare.geometry.difference(possible_zone)',
      'surviving = hectare.geometry.difference(infected_zone.geometry)',
      "SpatialPopulations.test_hectare_outside_sliver_must_survive_declared_spatial_error"),
+    ("cordon_c.core", 'return Evaluation(day < source["effective_to_exclusive"])',
+     'return Evaluation(day <= source["effective_to_exclusive"])',
+     "RunDateIntervals.test_pre_m4_ends_at_m4_and_turns_the_monopoli_fork"),
+    ("cordon_c.core", '    supplied = key in facts\n', '    supplied = False\n',
+     "RunDateIntervals.test_interval_wordings_refuse_supplied_facts_and_reader_answers"),
+    ("cordon_c.bindings", 'return _local_day(first, zone) < _local_day(second, zone)',
+     'return utc(first if isinstance(first, datetime) else datetime.combine(first, time(), zone))'
+     ' < utc(second if isinstance(second, datetime) else datetime.combine(second, time(), zone))',
+     "RunDateIntervals.test_mixed_precision_custody_never_chooses_a_time_of_day"),
+    ("cordon_c.quantities", 'if expired and completion_history_complete:', 'if expired:',
+     "RunDateIntervals.test_printed_delivery_against_known_through_by_day"),
 )
 
 

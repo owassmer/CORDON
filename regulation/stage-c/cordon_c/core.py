@@ -62,6 +62,62 @@ def negation(value: Evaluation) -> Evaluation:
                       needs=value.needs, provisions=value.provisions)
 
 
+def _leaves(ast: dict):
+    if "predicate" in ast:
+        yield ast["predicate"]
+    for value in ast.values():
+        if isinstance(value, dict):
+            yield from _leaves(value)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    yield from _leaves(item)
+
+
+# A wordings that ask whether the event date lies in an interval A states. Each
+# names the interval's source: the carrying row's own version ("within" or
+# "outside" it), or the start or end of a named A version; then the stable
+# provisions carrying it (None: the wording itself names "this version").
+# evaluate decides them from `at` alone, start included and end excluded.
+DATE_INTERVALS = {
+    "decision time within this version's effective interval": ("within", None, None),
+    "decision time within programme year 2026": ("within", None, ("IT-PNI-2026:adoption-and-publication-status",)),
+    "effective 2022 national plan interval": ("within", None, ("IT-DM-2022-XYLELLA-PLAN:§6.5:containment-buffer-5km",)),
+    "effective plan interval": ("within", None, tuple(f"PUG-DGR{n}:Art7(3)-policy" for n in (
+        "538-2021", "343-2022", "1866-2022", "1593-2024", "1075-2025"))),
+    "evidence proves event outside PNI binding interval": ("outside", None, ("IT-PNI-2026:Xylella:Puglia-plant-survey-design",)),
+    "post-M5 case date": ("from_start_of", "EU-2020-1201:7(1)(e):v2", tuple(
+        f"REG-PUGLIA-U181-DIR-{n}:case-delta:post-m5-stale-article7-text" for n in (
+            "2024-00138", "2024-00151", "2025-00115", "2026-00035"))),
+    "pre-M4 event time": ("before_end_of", "REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1", (
+        "REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork",
+        "REG-PUGLIA-U181-DIR-2024-00027:case-delta:pre-m4-containment-authority-conflict")),
+}
+
+
+def _date_interval(snapshot: Snapshot, row: dict, text: str, at: date, facts: Mapping,
+                  reader: PredicateReader | None) -> Evaluation:
+    key = row["provision_version_id"], text
+    supplied = key in facts
+    if not supplied and reader is not None:
+        try:
+            answer = reader(row, text)
+        except (KeyError, MissingInput):
+            answer = None
+        supplied = (answer.truth if isinstance(answer, Evaluation) else answer) is not None
+    if supplied:
+        raise ValueError(f"C evaluates this interval from the event date; it cannot be supplied: {key}")
+    kind, named, _ = DATE_INTERVALS[text]
+    source, day = row if named is None else snapshot.versions[named], at.isoformat()
+    if kind == "before_end_of":
+        return Evaluation(day < source["effective_to_exclusive"])
+    if kind == "from_start_of":
+        return Evaluation(source["effective_from"] <= day)
+    inside = source["effective_from"] <= day and (
+        not source["effective_to_exclusive"] or day < source["effective_to_exclusive"])
+    return Evaluation(inside if kind == "within" else not inside)
+
+
 class Snapshot:
     """A/B owners loaded once. Instances have no mutable evaluation cache."""
 
@@ -97,7 +153,15 @@ class Snapshot:
         if stages["A"]["status"] != "CLOSED" or stages["B"]["status"] != "CLOSED":
             raise ValueError("C requires accepted upstream meaning")
         references = json.loads((root / "regulation/stage-c/reference-bindings.json").read_text())
-        return cls(documents[0] + documents[1], documents[2], references)
+        snapshot = cls(documents[0] + documents[1], documents[2], references)
+        for text, (kind, named, carriers) in DATE_INTERVALS.items():
+            carrying = {r["stable_provision_id"] for r in snapshot.versions.values() if text in set(_leaves(r["condition_ast"]))}
+            if not carrying or carriers is not None and carrying != set(carriers):
+                raise ValueError(f"A's carriers of an interval wording changed: {text}")
+            if named is not None and (named not in snapshot.versions or kind == "before_end_of"
+                                      and not snapshot.versions[named]["effective_to_exclusive"]):
+                raise ValueError(f"A version naming an interval changed: {named}")
+        return snapshot
 
     def version(self, identity: str, at: date) -> dict:
         if type(at) is not date:
@@ -215,6 +279,8 @@ def evaluate(snapshot: Snapshot, identity: str, at: date,
         return value
 
     def node(ast: dict[str, Any], row: dict) -> Evaluation:
+        if ast.get("predicate") in DATE_INTERVALS:
+            return _date_interval(snapshot, row, ast["predicate"], at, facts, reader)
         if "predicate" in ast:
             return predicate_value(row, ast["predicate"], facts, reader)
         if "result_ref" in ast:
