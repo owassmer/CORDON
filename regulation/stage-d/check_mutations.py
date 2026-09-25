@@ -54,9 +54,9 @@ CODE = (
      '        if stated is not None and due.truth is True:\n',
      '        if stated is not None and due.truth is not None:\n',
      'test_annex_positions.AnnexPositions.test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due'),
-    ('count every commencement on a position due in part', 'cordon_d.case_prescriptions',
-     '        counted = sorted(w for w in performed if _still_due(w, share)) if share else works\n',
-     '        counted = sorted(performed) if share else works\n',
+    ('read a record on any parcel of a position due in part as naming its listed plants', 'cordon_d.case_prescriptions',
+     "            if held == (work['foglio'], work['particella'])]\n",
+     '            if True]\n',
      'test_annex_positions.SuppliedRecordsAtPositions.'
      'test_a_commencement_on_a_withdrawn_parcel_still_gives_the_direction'),
 )

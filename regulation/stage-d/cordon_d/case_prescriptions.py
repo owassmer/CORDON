@@ -649,7 +649,7 @@ def position_attachments(records, supplied):
 def still_due_share(snapshot, at, position, governing_results):
     """At an annex position whose governing result for the work is LAWFULLY_DUE_IN_PART: the rows so
     resolving, the latest effective date among them, and the obliged works (the position's listed
-    infected plants and the parcels holding them). None elsewhere."""
+    infected plants, each with the parcel holding it). None elsewhere."""
     rows = sorted({sid for (sid, predicate), result in (governing_results or {}).items()
                    if predicate == WORK and result.effect == IN_PART}) if position else []
     if not rows:
@@ -659,17 +659,23 @@ def still_due_share(snapshot, at, position, governing_results):
         raise ValueError('An annex position lists infected plants without the parcel holding each')
     return dict(rows=rows, since=max(date.fromisoformat(snapshot.version(sid, at)['effective_from'])
                                      for sid in rows),
-                plants={s['plant']: (s['foglio'], s['particella']) for s in standing},
-                parcels={(s['foglio'], s['particella']) for s in standing})
+                plants={s['plant']: (s['foglio'], s['particella']) for s in standing})
 
 
 def _still_due(work, share):
-    """Whether a work, as a record prints it, is in the still-due share: a listed infected plant of the
-    position, or a parcel holding one."""
+    """The still-due works a work, as a record prints it, names: the listed infected plant it names, or
+    every listed infected plant on the parcel it names. Empty where it names only a withdrawn work."""
     work = dict(work)
     if 'plant' in work:
-        return work['plant'] in share['plants']
-    return (work['foglio'], work['particella']) in share['parcels']
+        return [_work(work)] if work['plant'] in share['plants'] else []
+    return [_work(dict(plant=p)) for p, held in sorted(share['plants'].items())
+            if held == (work['foglio'], work['particella'])]
+
+
+def _printed_work(work):
+    """A work's plant, or its foglio and particella (a position prints no comune)."""
+    work = dict(work)
+    return work.get('plant'), work.get('foglio'), work.get('particella')
 
 
 def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, position=None, **dueness):
@@ -678,16 +684,15 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
     At an annex position (`position`, with the records `position_attachments` joined to it
     and the position's `governing_results` among `dueness`) whose governing result for the
     work is LAWFULLY_DUE_IN_PART (`still_due_share`), the obliged works are the position's
-    listed infected plants and the parcels holding them. The recipient's history is complete
-    only when the deliveries name each listed infected plant, by plant or by its parcel, and
-    every such work they name has a covering history; only commencements and removals on
-    those works count. A delivery, commencement, removal or history on a withdrawn work (any
-    other work on the position) is reported with its cause and never counted; a delivery
-    naming only withdrawn works gives no result. A commencement or removal on a withdrawn
-    work dated before the row's effective date is a legal question D does not decide: where
-    counting it would move a fact C evaluates, that fact is unknown, naming the cause. At any
-    other annex position the history is complete only when the supplied deliveries also name
-    every parcel the position prints.
+    listed infected plants, and every supplied record is read once, on entry, for the
+    still-due works it names: a delivery, commencement, removal or history naming a parcel
+    names every listed infected plant on it, and one naming a plant names that plant. A
+    record, or the part of a delivery, that names only withdrawn works (any other work on
+    the position) is reported with its cause and never counted; a delivery naming only
+    withdrawn works gives no result. The rest runs as at any position, over the obliged
+    plants: the history is complete only when the deliveries name every listed infected
+    plant. At any other annex position it is complete only when the supplied deliveries
+    also name every parcel the position prints.
 
     The clause's cohort result stays `c_result` on cohort evidence only; no
     supplied record reaches it. For each recipient a delivery record names, the
@@ -715,47 +720,38 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
         if through > (evaluated_at if isinstance(through, datetime) else today):
             raise ValueError(f"Record {r['record']} states a history complete through {r['complete_through']}, "
                              f'later than the evaluation at {evaluated_at.isoformat()}')
+    reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
+    fixture = any(r['fixture'] for r in records)
+    required = list((position or {}).get('parcels') or ())
+    missing = dict(key='parcels', cause='the annex position prints parcel(s) no supplied delivery names; '
+                                        'the history stays incomplete')
     share = still_due_share(snapshot, at, position, dueness.get('governing_results'))
     if share:
-        rows = ', '.join(share['rows'])
-        withdrawn_cause = (f"withdrawn at this position: {rows} (effective {share['since']}) leaves due only its "
-                           'listed infected plant(s) and the parcel(s) holding them; not counted')
-        early_cause = (f"performance on a work {rows} withdrew at this position, dated before its effective date "
-                       f"{share['since']}: whether it counts as commencing this order's work is a legal question "
-                       'D does not decide')
-    reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
-    early, early_undated = {}, False
+        # Due in part: read every record once for the still-due works it names; the rest runs over those.
+        withdrawn = (f"withdrawn at this position: {', '.join(share['rows'])} (effective {share['since']}) leaves "
+                     'due only its listed infected plant(s); not counted')
+        required = [dict(plant=p) for p in sorted(share['plants'])]
+        missing = dict(key='plants', cause="the position's still-due listed infected plant(s) no supplied delivery "
+                                           'names, by plant or by the parcel holding it; the history stays incomplete')
+        read = []
+        for r in records:
+            named = {w: _still_due(w, share) for w in r['works']}
+            due = tuple(dict.fromkeys(p for plants in named.values() for p in plants))
+            off = [dict(w) for w, plants in named.items() if not plants]
+            delivery = r['kind'] == 'personal-delivery'
+            if off:
+                reported.append(dict(record=r['record'], **(dict(works=off) if delivery else dict(work=off[0])),
+                                     cause=withdrawn + ('; the delivery names no still-due work and gives no '
+                                                        'result' if delivery and not due else '')))
+            read += [dict(r, works=due)] if delivery and due else [dict(r, works=(p,)) for p in due if not delivery]
+        records = read
     for r in records:
-        if share and r['kind'] != 'personal-delivery' and not _still_due(r['works'][0], share):
-            # A withdrawn work: reported and never counted (a timed performance goes on to `performed` only for the
-            # counting line to exclude it); performance dated before the row took effect is a named question.
-            before = (r['kind'] in ('commencement', 'removal')
-                      and (r['event'].occurred.astimezone(zone).date() if isinstance(r['event'].occurred, datetime)
-                           else r['event'].occurred) < share['since'])
-            reported.append(dict(record=r['record'], work=dict(r['works'][0]),
-                                 cause=early_cause if before else withdrawn_cause))
-            if before and isinstance(r['event'].occurred, datetime):
-                early[r['record']] = r['event'].occurred
-            elif before:
-                early_undated = True
-            if r['kind'] == 'history' or not isinstance(r['event'].occurred, datetime):
-                continue
         if r['kind'] == 'personal-delivery':
             if not r['recipient'] or not r['recipient'].strip():
                 reported.append(dict(record=r['record'], cause='names no recipient'))
                 continue
-            works = r['works']
-            if share:
-                off = [dict(w) for w in works if not _still_due(w, share)]
-                works = [w for w in works if _still_due(w, share)]
-                if off:
-                    reported.append(dict(record=r['record'], works=off,
-                                         cause=withdrawn_cause + ('' if works else '; the delivery names no '
-                                                                  'still-due work and gives no result')))
-                if not works:
-                    continue
             deliveries.setdefault(r['recipient'], {}).setdefault(r['event'].occurred, []).append(r['record'])
-            obliged.setdefault(r['recipient'], set()).update(works)
+            obliged.setdefault(r['recipient'], set()).update(r['works'])
         elif r['kind'] in ('commencement', 'removal') and not isinstance(r['event'].occurred, datetime):
             # C compares performance instants with the deadline; a day alone is not upgraded.
             undated.setdefault(r['works'][0], []).append(r['record'])
@@ -767,8 +763,6 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
             histories.setdefault(r['works'][0], []).append(r)
     everyone = set().union(*obliged.values()) if obliged else set()
     for work in sorted(set(performed) | set(histories) | set(undated)):
-        if share and (deliveries or not _still_due(work, share)):
-            continue  # the position obliges its still-due works; a withdrawn work is reported above
         if work not in everyone:
             names = (sorted(performed.get(work, {})) + sorted(undated.get(work, ()))
                      + sorted(h['record'] for h in histories.get(work, ())))
@@ -799,50 +793,28 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
             reported.append(dict(recipient=recipient, records=sorted(n for v in instants.values() for n in v),
                                  cause='deliveries at different instants; the personal branch is not supplied'))
         works = sorted(obliged.get(recipient, ()))
-        # Due in part: only performance on the still-due works counts, named or not; elsewhere, on the named works.
-        counted = sorted(w for w in performed if _still_due(w, share)) if share else works
-        commencements = {name: moment for work in counted for name, moment in performed.get(work, {}).items()}
+        commencements = {name: moment for work in works for name, moment in performed.get(work, {}).items()}
         options = dict(notice=notice or None, notice_instants=notice_instants, commencements=commencements,
                        **_dueness_defaults(common))
         # C's notification for this recipient first; the history bound is C's deadline from it.
         _, notification = _c_facts(snapshot, record, at, commencement_records_complete=False, **options)
         deadline, complete = None, False
-        named = {(dict(w).get('foglio'), dict(w).get('particella')) for w in works}
-        if share:
-            # Due in part: the deliveries name each listed infected plant, by plant or by the parcel holding it.
-            plants = {dict(w)['plant'] for w in works if 'plant' in dict(w)}
-            unnamed = sorted(p for p, parcel in share['plants'].items() if p not in plants and parcel not in named)
-            missing = dict(plants=unnamed, cause="the position's still-due listed infected plant(s) no supplied "
-                                                 'delivery names, by plant or by the parcel holding it; the '
-                                                 'history stays incomplete')
-        else:
-            # At any other annex position the recipient is obliged to every parcel the position prints for it.
-            unnamed = [p for p in (position or {}).get('parcels') or ()
-                       if (p['foglio'], p['particella']) not in named]
-            missing = dict(parcels=unnamed, cause='the annex position prints parcel(s) no supplied delivery names; '
-                                                  'the history stays incomplete')
+        # At an annex position the recipient is also obliged to every work the position requires of it.
+        named = {_printed_work(w) for w in works}
+        unnamed = [w for w in required if _printed_work(w) not in named]
         if unnamed:
-            reported.append(dict(recipient=recipient, **missing))
+            reported.append({'recipient': recipient, missing['key']: unnamed, 'cause': missing['cause']})
         if notification is not None and record['stated_term'] is not None:
             deadline = clock_boundary(snapshot, CLOCK, at, notification, zone=zone, calendar=calendar,
                                       stated_term=record['stated_term'])
-            blocked = [w for w in undated if _still_due(w, share)] if share else [w for w in works if w in undated]
-            complete = bool(works) and not unnamed and not blocked and all(
-                any(covers(h, deadline) for h in histories.get(w, ())) for w in works)
+            complete = bool(works) and not unnamed and all(any(covers(h, deadline) for h in histories.get(w, ()))
+                                                           and w not in undated for w in works)
         facts, notification = _c_facts(snapshot, record, at, commencement_records_complete=complete, **options)
-        if early or early_undated:
-            # Counted, the pre-effective performance on a withdrawn work could move C's facts; where it would,
-            # the fact is unknown, naming the question.
-            alternative, _ = _c_facts(snapshot, record, at,
-                                      commencement_records_complete=complete and not early_undated,
-                                      **dict(options, commencements={**commencements, **early}))
-            question = Evaluation(None, needs=frozenset({early_cause}))
-            facts = {key: (question if alternative.get(key) != value else value) for key, value in facts.items()}
         results[recipient] = dict(result=evaluate(snapshot, RULE, at, facts), notification=notification,
                                   deadline=deadline, works=[dict(w) for w in works], commencements=commencements,
                                   commencement_records_complete=complete,
                                   records=sorted(n for v in instants.values() for n in v),
-                                  fixture=any(r['fixture'] for r in records))
+                                  fixture=fixture)
     return dict(recipients=results, reported=reported)
 
 

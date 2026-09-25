@@ -390,8 +390,9 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertEqual(unattached[0]['cause'], f"matches 2 annex positions printing owner '{name}'")
 
     # BORGHESE ANTONIO's position prints 57/78, 270, 271 and 273. Listed infected plant 1602200 stands on 57/270;
-    # the other three carry only 50 m hosts, which DDS 18/2024 withdrew. Due in part, only the plant and 57/270 are
-    # obliged: they are measured and counted, and the withdrawn parcels are reported and never counted.
+    # the other three carry only 50 m hosts, which DDS 18/2024 withdrew. Due in part, the plant is the obliged work:
+    # a record naming it or 57/270 names it and is measured and counted; one naming only a withdrawn parcel is
+    # reported and never counted.
     def borghese(self, supplied, at=AFTER):
         out, unattached = self.run_records(supplied, at)
         self.assertEqual(unattached, [])
@@ -408,7 +409,7 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
                 run = self.borghese(supplied)
                 result = run['recipients']['BORGHESE ANTONIO']
                 self.assertTrue(result['commencement_records_complete'])
-                self.assertEqual(result['works'], [parcel('57', '270')])
+                self.assertEqual(result['works'], [dict(plant='1602200')])
                 self.assertEqual(result['result'].effect, REQUIRED)
                 self.assertIn(WITHDRAWAL + ':v1', result['result'].provisions)
         # The three withdrawn parcels the second delivery names are reported, with the row and its date.
@@ -461,26 +462,60 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertFalse(result['commencement_records_complete'])
         self.assertIsNone(result['result'].truth)
 
-    def test_a_commencement_on_a_withdrawn_parcel_before_the_withdrawal_leaves_the_recipient_unknown(self):
-        # Dated before the row's effective date (14 March 2024, read from the row): whether it commenced the
-        # order's work is a legal question the unit does not decide, and the recipient stays unknown, naming it.
+    def test_a_commencement_on_a_withdrawn_parcel_before_the_withdrawal_is_reported_and_not_counted(self):
+        # Dated 10 March 2024, before the row took effect: felling a host is not the work still due (the listed
+        # infected plant), so on any date it never begins that work. Reported, not counted; the direction stands.
         early = fixture('fx-c-78', 'commencement', work=parcel('57', '78'),
                         occurred=datetime(2024, 3, 10, 9, tzinfo=ROME).isoformat())
-        supplied = [delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')), history('fx-h-270', '57', '270'), early]
-        run = self.borghese(supplied)
-        result = run['recipients']['BORGHESE ANTONIO']['result']
-        self.assertIsNone(result.truth)
-        question = [n for n in result.needs if 'dated before its effective date 2024-03-14' in n]
-        self.assertEqual(len(question), 1)
-        self.assertIn('legal question D does not decide', question[0])
-        self.assertEqual([r['record'] for r in run['reported']], ['fx-c-78'])
-        self.assertEqual(run['reported'][0]['cause'], question[0])
-        # A commencement on the still-due work decides whichever way the question is answered.
-        began = fixture('fx-c-270', 'commencement', work=parcel('57', '270'),
-                        occurred=(PEC + timedelta(days=2)).isoformat())
-        decided = self.borghese(supplied + [began])['recipients']['BORGHESE ANTONIO']['result']
-        self.assertIs(decided.truth, False)
+        run = self.borghese([delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')), history('fx-h-270', '57', '270'),
+                             early])
+        result = run['recipients']['BORGHESE ANTONIO']
+        self.assertEqual(result['commencements'], {})
+        self.assertEqual(result['result'].effect, REQUIRED)
+        self.assertEqual([(r['record'], r['work']['particella']) for r in run['reported']], [('fx-c-78', '78')])
+        self.assertIn('not counted', run['reported'][0]['cause'])
 
+    def test_a_delivery_and_a_history_naming_the_plant_differently_give_the_direction(self):
+        plant = dict(plant='1602200')
+        by_plant = fixture('fx-pec-b', 'personal-delivery', recipient='BORGHESE ANTONIO', occurred=PEC.isoformat(),
+                           works=[plant])
+        plant_history = fixture('fx-h-plant', 'history', work=plant, complete_from='2023-10-16',
+                                complete_through='2024-04-04')
+        for label, supplied in (
+                ('E: delivery by plant, history by parcel', [by_plant, history('fx-h-270', '57', '270')]),
+                ('F: delivery by parcel, history by plant',
+                 [delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')), plant_history])):
+            with self.subTest(label):
+                run = self.borghese(supplied)
+                result = run['recipients']['BORGHESE ANTONIO']
+                self.assertTrue(result['commencement_records_complete'])
+                self.assertEqual(result['result'].effect, REQUIRED)
+                self.assertEqual(run['reported'], [])
+
+    def test_a_term_before_the_withdrawal_gives_the_direction_without_host_records(self):
+        # Delivered 20 November 2023: the whole 10-day term runs while host felling was still ordered. The work
+        # still due is the listed infected plant, so a commencement on 57/78 inside the term is reported and not
+        # counted, and no history of the withdrawn parcels is asked for.
+        pec = fixture('fx-pec-b', 'personal-delivery', recipient='BORGHESE ANTONIO',
+                      occurred=datetime(2023, 11, 20, 9, tzinfo=ROME).isoformat(), works=[parcel('57', '270')])
+        felled = fixture('fx-c-78', 'commencement', work=parcel('57', '78'),
+                         occurred=datetime(2023, 11, 24, 9, tzinfo=ROME).isoformat())
+        for supplied in ([pec, history('fx-h-270', '57', '270')], [pec, history('fx-h-270', '57', '270'), felled]):
+            with self.subTest(len(supplied)):
+                run = self.borghese(supplied)
+                result = run['recipients']['BORGHESE ANTONIO']
+                self.assertTrue(result['commencement_records_complete'])
+                self.assertEqual(result['commencements'], {})
+                self.assertEqual(result['result'].effect, REQUIRED)
+                self.assertEqual([r['record'] for r in run['reported']], [r['record'] for r in supplied[2:]])
+
+    def test_an_unused_history_is_reported(self):
+        # The delivery names only withdrawn 57/78 and gives no result; the history on 57/270 then obliges no one.
+        run = self.borghese([delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '78')), history('fx-h-270', '57', '270')])
+        self.assertEqual(run['recipients'], {})
+        unused = [r for r in run['reported'] if 'fx-h-270' in r.get('records', ())]
+        self.assertEqual(len(unused), 1)
+        self.assertEqual(unused[0]['cause'], 'no supplied record obliges a recipient to this work as printed')
 
 STORE = store_root(ROOT)
 FIVE = {'96/2023': 'dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7',

@@ -520,18 +520,20 @@ predicate) and the recipient's notice and commencement together. Commencement,
 removal and history records attach to every position printing their work to which
 a delivery joined, and what counts there depends on the position's governing
 result for the work. Where it is `LAWFULLY_DUE_IN_PART`, the obliged works are the
-position's listed infected plants and the parcels holding them (the still-due
-share, `still_due_share`): the recipient's history is complete only when the
-deliveries name each listed infected plant, by plant or by its parcel, and every
-such work they name has a covering history, and only commencements and removals
-on those works count. A delivery, commencement, removal or history on any other
-work of that position (a withdrawn work) is reported with its cause, naming the
-row and its effective date, and never counted; a delivery naming only withdrawn
-works gives no result. A commencement or removal on a withdrawn work dated before
-the row's effective date (read from the row) is a legal question D does not
-decide: where counting it would move a fact C evaluates, that fact is unknown,
-naming the question. At any other position the recipient's history is complete
-only when the supplied deliveries also name every parcel the position prints, and
+position's listed infected plants (`still_due_share`), and each supplied record is
+read once, on entry, for the still-due works it names: a delivery, commencement,
+removal or history naming a parcel names every listed infected plant on it, and
+one naming a plant names that plant. A record, or the part of a delivery, that
+names only withdrawn works (any other work of that position) is reported with its
+cause, naming the row and its effective date, and never counted, whatever its
+date: C's condition concerns this exact work, and felling a host never begins the
+removal of the plant still due. A delivery naming only withdrawn works gives no
+result. The rest runs as at any position, over the obliged plants: the history is
+complete only when the deliveries name every listed infected plant and each has a
+covering history, and commencement and removal count on the plants the deliveries
+name; a record on a plant no delivery names is reported. At any other position
+the recipient's history is complete only when the supplied deliveries also name
+every parcel the position prints, and
 commencement and removal count on every work the deliveries name. A record that names
 no recipient, matches no position or several, or whose work is on no joined
 position, is reported unattached with its cause; nothing is defaulted. Other
