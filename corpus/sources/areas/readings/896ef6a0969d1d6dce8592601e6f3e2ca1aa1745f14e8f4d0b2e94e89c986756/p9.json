@@ -1,0 +1,496 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00093",
+ "act_sha256": "896ef6a0969d1d6dce8592601e6f3e2ca1aa1745f14e8f4d0b2e94e89c986756",
+ "page": 9,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "a2fe5d6bcd1ebfe390c0feec9fbd71791817be6d6803ac3047e0562233f16c41",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:24:50.889427+00:00",
+ "native_tables": [
+  {
+   "id": "p9-t1",
+   "bbox": [
+    100.8,
+    155.4,
+    489.9,
+    224.6
+   ]
+  },
+  {
+   "id": "p9-t2",
+   "bbox": [
+    100.8,
+    242.2,
+    489.9,
+    392.0
+   ]
+  }
+ ],
+ "native_cells": {
+  "p9-t1-r1-c1": {
+   "text": "Xylella fastidiosa – sottospecie multiplex ST26 Capurso - ZONA INFETTA",
+   "table": "p9-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    155.4,
+    489.9,
+    178.5
+   ]
+  },
+  "p9-t1-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p9-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    178.5,
+    165.5,
+    201.6
+   ]
+  },
+  "p9-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p9-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    165.5,
+    178.5,
+    268.9,
+    201.6
+   ]
+  },
+  "p9-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE\nPIANTE RISULTATE INFETTE.",
+   "table": "p9-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    268.9,
+    178.5,
+    489.9,
+    201.6
+   ]
+  },
+  "p9-t1-r3-c1": {
+   "text": "BARI",
+   "table": "p9-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    201.6,
+    165.5,
+    224.6
+   ]
+  },
+  "p9-t1-r3-c2": {
+   "text": "CAPURSO",
+   "table": "p9-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    165.5,
+    201.6,
+    268.9,
+    224.6
+   ]
+  },
+  "p9-t1-r3-c3": {
+   "text": "FOGLIO 2",
+   "table": "p9-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    268.9,
+    201.6,
+    489.9,
+    224.6
+   ]
+  },
+  "p9-t2-r1-c1": {
+   "text": "Xylella fastidiosa – sottospecie multiplex ST26 Capurso - ZONA CUSCINETTO",
+   "table": "p9-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    242.2,
+    489.9,
+    265.3
+   ]
+  },
+  "p9-t2-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p9-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    265.3,
+    165.5,
+    288.5
+   ]
+  },
+  "p9-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p9-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    165.5,
+    265.3,
+    268.9,
+    288.5
+   ]
+  },
+  "p9-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+   "table": "p9-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    268.9,
+    265.3,
+    489.9,
+    288.5
+   ]
+  },
+  "p9-t2-r3-c1": {
+   "text": "BARI",
+   "table": "p9-t2",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    288.5,
+    165.5,
+    392.0
+   ]
+  },
+  "p9-t2-r3-c2": {
+   "text": "BARI",
+   "table": "p9-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    165.5,
+    288.5,
+    268.9,
+    318.8
+   ]
+  },
+  "p9-t2-r3-c3": {
+   "text": "SEZIONE A: FOGLIO 69, 70, 76*\nSEZIONE B: FOGLIO 15, 16, 18, 19, 20*, 21*, 22*\nSEZIONE C: FOGLIO 12, 13, 14*, 15*, 17, 20, 22, 25, 26",
+   "table": "p9-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    268.9,
+    288.5,
+    489.9,
+    318.8
+   ]
+  },
+  "p9-t2-r4-c2": {
+   "text": "CAPURSO",
+   "table": "p9-t2",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    165.5,
+    318.8,
+    268.9,
+    341.9
+   ]
+  },
+  "p9-t2-r4-c3": {
+   "text": "FOGLIO 1*, 2, 3*, 4, 5, 6, 8, 9, 10*, 11*, 12, 13, 14",
+   "table": "p9-t2",
+   "row": 4,
+   "column": 3,
+   "bbox": [
+    268.9,
+    318.8,
+    489.9,
+    341.9
+   ]
+  },
+  "p9-t2-r5-c2": {
+   "text": "TRIGGIANO",
+   "table": "p9-t2",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    165.5,
+    341.9,
+    268.9,
+    365.0
+   ]
+  },
+  "p9-t2-r5-c3": {
+   "text": "FOGLI 9, 11, 15*, 16, 19, 23*",
+   "table": "p9-t2",
+   "row": 5,
+   "column": 3,
+   "bbox": [
+    268.9,
+    341.9,
+    489.9,
+    365.0
+   ]
+  },
+  "p9-t2-r6-c2": {
+   "text": "VALENZANO",
+   "table": "p9-t2",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    165.5,
+    365.0,
+    268.9,
+    392.0
+   ]
+  },
+  "p9-t2-r6-c3": {
+   "text": "FOGLIO 1*, 2*, 3*, 4*, 5*, 6*, 7*, 8*, 9*, 10*, 11*, 12*, 13*, 14*, 15*, 16, 21, 22, 26,\n27*, 28, 30, 31, 32*, 33",
+   "table": "p9-t2",
+   "row": 6,
+   "column": 3,
+   "bbox": [
+    268.9,
+    365.0,
+    489.9,
+    392.0
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26 Capurso - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t1-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26 Capurso - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r4-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r5-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "native_cell": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p9-t2-r6-c2"
+      },
+      "scope": {
+       "native_cell": "p9-t2-r6-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p9-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p9-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "ALLEGATO 2 - X. fastidiosa multiplex Capurso",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26 Capurso - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NEI BUFFER DI 50 METRI DALLE PIANTE RISULTATE INFETTE."
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p9-t1-r3-c1"
+      },
+      "comune": {
+       "text": "CAPURSO",
+       "copied_from": "p9-t1-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 2",
+       "copied_from": "p9-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "Xylella fastidiosa – sottospecie multiplex ST26 Capurso - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "text": "BARI",
+       "copied_from": "p9-t2-r3-c2"
+      },
+      "scope": {
+       "text": "SEZIONE A: FOGLIO 69, 70, 76*\nSEZIONE B: FOGLIO 15, 16, 18, 19, 20*, 21*, 22*\nSEZIONE C: FOGLIO 12, 13, 14*, 15*, 17, 20, 22, 25, 26",
+       "copied_from": "p9-t2-r3-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "text": "CAPURSO",
+       "copied_from": "p9-t2-r4-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 1*, 2, 3*, 4, 5, 6, 8, 9, 10*, 11*, 12, 13, 14",
+       "copied_from": "p9-t2-r4-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "text": "TRIGGIANO",
+       "copied_from": "p9-t2-r5-c2"
+      },
+      "scope": {
+       "text": "FOGLI 9, 11, 15*, 16, 19, 23*",
+       "copied_from": "p9-t2-r5-c3"
+      },
+      "note": null
+     },
+     {
+      "provincia": {
+       "text": "BARI",
+       "copied_from": "p9-t2-r3-c1"
+      },
+      "comune": {
+       "text": "VALENZANO",
+       "copied_from": "p9-t2-r6-c2"
+      },
+      "scope": {
+       "text": "FOGLIO 1*, 2*, 3*, 4*, 5*, 6*, 7*, 8*, 9*, 10*, 11*, 12*, 13*, 14*, 15*, 16, 21, 22, 26,\n27*, 28, 30, 31, 32*, 33",
+       "copied_from": "p9-t2-r6-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ]
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,39 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "04e66841de9146ea820cf7802ef8975d5d422dba31c41c186896f565e556c534",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:48.550562+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "nel corso dell'attività di monitoraggio nell'area delimitata per Xylella fastidiosa, sottospecie multiplex ST26 - Santeramo in Colle di cui alla determina dirigenziale n° 198 del 18/12/2024, alla data del 23/05/2025 sono state campionate n° 39.368 piante;",
+   "nel corso dell'attività di monitoraggio nell'area delimitata per Xylella fastidiosa, sottospecie multiplex ST26 - Ginosa di cui alla determina dirigenziale n° 198 del 18/12/2024, alla data del 23/05/2025 sono state campionate n° 5.811 piante;",
+   "n° 566 piante distribuite negli agri di Santeramo in Colle, Altamura, Cassano delle Murge, Acquaviva delle Fonti e n. 3 piante nell'agro di Ginosa (TA) sono risultate infette da Xylella fastidiosa sottospecie multiplex ST26;",
+   "le richiamate 569 piante infette sono distribuite sia all'interno delle aree già delimitate con determina dirigenziale n° 198 del 18/12/2024 che sul perimetro esterno delle zone cuscinetto;",
+   "quattro piante infette sono state rinvenute in area indenne di cui n. 2 in agro di Altamura, n. 1 in agro di Acquaviva delle Fonti e n. 1 in agro di Santeramo in Colle;",
+   "l'aggiornamento della area delimitata Xylella fastidiosa, sottospecie multiplex ST26 - Santeramo in Colle coinvolge una parte ulteriore del territorio della Basilicata (zona cuscinetto);",
+   "l'area delimitata è costituita da una zona infetta e da una zona cuscinetto e che la zona infetta ha un raggio di almeno 50 m attorno alla pianta risultata infetta dall'organismo nocivo specificato;",
+   "nelle aree delimitate in cui si applicano misure di eradicazione la zona cuscinetto è larga almeno 2,5 km;",
+   "gli Allegati 1 (Santeramo in Colle e Ginosa) e 1 bis, parti integranti e sostanziali del presente provvedimento, che riportano le aree delimitate \"Xylella fastidiosa sottospecie multiplex ST26- Santeramo in Colle\" e \"Xylella fastidiosa sottospecie multiplex ST26- Ginosa\";",
+   "l'Allegato2- Santeramo e l'Allegato2- Ginosa, parti integranti e sostanziali del presente provvedimento, che riportano i riferimenti catastali delle aree delimitate nelle due regioni;",
+   "di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 –Santeramo in Colle\", di cui all'atto dirigenziale n° 198 del 18/12/2024, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201;",
+   "di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 – Ginosa\", di cui all'atto dirigenziale n° 198 del 18/12/2024, ai [continues on next page]"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

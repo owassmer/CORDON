@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 10,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "49261ea9873d81198286703ce77d3d1b6265de5d3b77dce575fb5f077c4a3a33",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:59.412812+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 GINOSA",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "Legenda: Confini Comunali della Puglia; Confini Provinciali della Puglia; Area delimitata Xylella fastidiosa sub. multiplex (Ginosa) - Zona Infetta; Area delimitata Xylella fastidiosa sub. multiplex (Ginosa) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. multiplex (Ginosa) - Zona Cuscinetto in Basilicata; Regione Basilicata; Confini Comunali della Basilicata",
+   "Map labels: Pomarico, Montescaglioso, Basilicata, Ginosa, Prov. TA, Puglia, Laterza, Castellaneta (x2)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

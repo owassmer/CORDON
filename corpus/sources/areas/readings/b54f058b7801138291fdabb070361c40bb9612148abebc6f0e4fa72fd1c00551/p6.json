@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+ "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8431aca75bab4c678c31cd46560ca63b68afe7efc7c210c435f74fa2fccbd207",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:21:51.778317+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 BIS",
+   "Legenda: Piante positive; Zona infetta X.f. sub. multiplex; Zona cuscinetto X.f. sub. multiplex",
+   "Map depicts area around Santerramo in Colle with scale bar 0,5/1/1,5 km"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
