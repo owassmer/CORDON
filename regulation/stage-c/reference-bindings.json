@@ -266,5 +266,69 @@
     "consumer": "IT-DLGS-19-2021:Art.55(13):coercive-removal-costs",
     "reference": "IT-DLGS-19-2021:Art.55(13):coercive-removal",
     "required_fact": "lawful coercive-removal execution and its work and cost record established"
+  },
+  {
+    "consumer": "IT-L241-A21TER:Art.21-ter(1):stated-term-coercive-direction",
+    "reference": "IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route",
+    "outcomes": {
+      "ACT_EFFECTIVE_AGAINST_RECIPIENT": true,
+      "RECIPIENT_EFFECTIVENESS_NOT_ESTABLISHED": false
+    }
+  },
+  {
+    "consumer": "PUG-LR4-2017:Art.8(5):protected-uninfected-retention",
+    "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+    "outcomes": {
+      "TREE_LISTED": true,
+      "TREE_NOT_LISTED": false
+    }
+  },
+  {
+    "consumer": "PUG-LR4-2017:Art.8(7bis):infected-piana-alternative-boundary",
+    "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+    "outcomes": {
+      "ARTICLE_2_1_A_CRITERION_MET": true,
+      "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED": false
+    }
+  },
+  {
+    "consumer": "PUG-DGR343-2022:Art7(3)-policy",
+    "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+    "outcomes": {
+      "TREE_LISTED": true,
+      "TREE_NOT_LISTED": false
+    }
+  },
+  {
+    "consumer": "PUG-DGR1866-2022:Art7(3)-policy",
+    "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+    "outcomes": {
+      "TREE_LISTED": true,
+      "TREE_NOT_LISTED": false
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
+    "reference": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+    "outcomes": {
+      "RECOGNITION_DECISION_PENDING": true,
+      "NO_PENDING_DECISION_FROM_THE_LIST": false
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
+    "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+    "outcomes": {
+      "ARTICLE_2_1_A_CRITERION_MET": true,
+      "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED": false
+    }
+  },
+  {
+    "consumer": "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
+    "reference": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion",
+    "outcomes": {
+      "ARTICLE_2_1_A_CRITERION_MET": true,
+      "ARTICLE_2_1_A_CRITERION_NOT_ESTABLISHED": false
+    }
   }
 ]

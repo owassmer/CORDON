@@ -24,7 +24,15 @@ CLAUSE = ('the operative prescription governing this recipient states in its ope
           'noncommencement')
 WORK = 'the commencement work the prescription states is lawfully due from this recipient'
 COERCE = 'removal of the population the prescription names for coercion is lawfully due'
-NOTICE = 'legally sufficient notification of that prescription to this recipient has occurred'
+# The Art. 21-ter notice conjunct is any_of(this Art. 21-bis communication predicate, the mass-publicity row).
+COMMUNICATED = ('the communication to that recipient has been effected, including in the forms prescribed for '
+                'notification to the unreachable in the cases provided by the code of civil procedure')
+
+
+def personal_notice(snapshot, at, delivered):
+    """The notice branch a held personal delivery (a PEC receipt, a served copy) gives one recipient."""
+    vid = snapshot.version(RULE, at)['provision_version_id']
+    return dict(notice={(vid, COMMUNICATED): True}, notice_instants={COMMUNICATED: delivered})
 
 
 def _object(**properties):
@@ -427,18 +435,21 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     return True, (True if record['coercive_population'] else None)
 
 
-def c_result(snapshot, record, at, *, notification=None, evaluated_at=None, commencements=None,
+def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluated_at=None, commencements=None,
              commencement_records_complete=False, governing_results=None, work_due=None,
              coercion_due=None, closures=(), stated_changes=(), within_closed_scope=None,
              zone=None, calendar=None):
     """C's result for this record with whatever notice and commencement evidence is held.
 
-    Lawful dueness is the order's own reading (`order_dueness`) unless the caller
-    supplies one, held to the governing A rows by `lawfully_due`. Nothing absent is
-    supplied: no notification or commencement evidence means C's own unknown and
-    its needs.
+    `notice` holds the facts of the notice branches (the communication predicate,
+    or the mass-publicity row's facts from `mass_publicity_facts`), and
+    `notice_instants` each branch's instant; C's `notice_instant` picks the
+    earliest instant among the branches A finds true. Lawful dueness is the
+    order's own reading (`order_dueness`) unless the caller supplies one, held to
+    the governing A rows by `lawfully_due`. Nothing absent is supplied: no notice
+    or commencement evidence means C's own unknown and its needs.
     """
-    from cordon_c.bindings import merge_facts, noncommencement_facts
+    from cordon_c.bindings import merge_facts, noncommencement_facts, notice_instant
     row = snapshot.version(RULE, at)
     vid = row['provision_version_id']
     facts = {(vid, CLAUSE): clause(record)}
@@ -456,9 +467,10 @@ def c_result(snapshot, record, at, *, notification=None, evaluated_at=None, comm
             due = Evaluation(None, needs=due.needs | stated.needs)
         if due.truth is not None or due.needs:
             facts[(vid, predicate)] = due
-    if notification is not None:
-        facts[(vid, NOTICE)] = True
-        if record['stated_term'] is not None:
+    if notice:
+        facts = merge_facts(facts, notice)
+        notification = notice_instant(snapshot, RULE, at, facts, zone=zone, instants=notice_instants or {})
+        if notification is not None and record['stated_term'] is not None:
             facts = merge_facts(facts, noncommencement_facts(
                 snapshot, CLOCK, at, notification=notification, evaluated_at=evaluated_at,
                 stated_term=record['stated_term'], qualifying_commencements=commencements or {},
