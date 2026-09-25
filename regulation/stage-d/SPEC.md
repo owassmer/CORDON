@@ -507,6 +507,40 @@ each branch's instant, from which C's `notice_instant` takes the earliest instan
 among the branches A finds true; nothing absent is supplied. Publication fills
 notification only through A's mass-publicity route.
 
+Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
+through `recipient_results` (`read_prescriptions.py --records`), beside the
+clause's cohort result, which no supplied record moves. There is one result per
+recipient a delivery record names, keyed as that record names them. For a clause
+the writer emits per annex position, supplied records are joined to positions
+(`position_attachments`): a delivery joins the one position whose printed owner is
+the recipient it names (runs of whitespace aside) and which prints every work it
+names (foglio and particella, or a listed plant; the position prints no comune).
+That position's result then carries the position's governing rows per (row,
+predicate) and the recipient's notice and commencement together, and the
+recipient's history is complete only when the supplied deliveries also name every
+parcel the position prints. Commencement, removal and history records count for
+every position printing their work to which a delivery joined. A record that names
+no recipient, matches no position or several, or whose work is on no joined
+position, is reported unattached with its cause; nothing is defaulted. Other
+clauses keep the record's naming alone. A personal-delivery record is the delivery receipt only,
+never the acceptance receipt; it enters the communication predicate for its
+recipient only. The works a delivery record names are the operator's standing
+assertion of what that recipient is obliged to. Commencement and removal count for
+the work the record prints (comune, foglio and particella, or a plant identifier)
+and for every recipient a supplied record obliges to that work. A recipient's
+commencement history is complete only when every work it is obliged to has a
+stated history running from the order's adoption, or earlier, through C's
+deadline: `clock_boundary` on the notification C's `notice_instant` returns for
+that recipient, with the order's stated term, zone and calendar. A history stated
+as complete through a moment later than the evaluation is refused. The caller
+supplies no instant, order-text predicate or completeness of its own; what it
+cannot join is reported. Postings are public records read on PR #15's route, not
+supplied records: a recipient reached only by posting has no per-recipient result.
+Positions place printed owners on parcels only for the orders read per position,
+and a posting's notice there still waits on the mass-publicity row's court fact,
+which no D reader supplies; elsewhere it needs `party-land-standing`, which is not
+held.
+
 Stated changes come from every held act that names the order, not only from the
 order population. `cordon_d.held_acts` scans every source text A admits. A text
 that prints a held order's identity (`printed_identities`: its number closely

@@ -8,7 +8,7 @@ by `annex_positions`, only for the orders an in-force governing row names with a
 whole-or-part effect; a record placed there carries its position in `recipients`.
 """
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, time
 from pathlib import Path
 import re
 
@@ -463,7 +463,21 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
     withholds, so a False keeps its row provisions (SPEC). Nothing absent is supplied:
     no notice or commencement evidence means C's own unknown and its needs.
     """
+    facts, _ = _c_facts(snapshot, record, at, notice=notice, notice_instants=notice_instants,
+                        evaluated_at=evaluated_at, commencements=commencements,
+                        commencement_records_complete=commencement_records_complete,
+                        governing_results=governing_results, work_due=work_due, coercion_due=coercion_due,
+                        closures=closures, stated_changes=stated_changes,
+                        within_closed_scope=within_closed_scope, zone=zone, calendar=calendar)
+    return evaluate(snapshot, RULE, at, facts)
+
+
+def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, commencements,
+             commencement_records_complete, governing_results, work_due, coercion_due, closures, stated_changes,
+             within_closed_scope, zone, calendar):
+    """The facts `c_result` evaluates, and the instant C's `notice_instant` returned (None when none)."""
     from cordon_c.bindings import merge_facts, noncommencement_facts, notice_instant
+    notification = None
     row = snapshot.version(RULE, at)
     vid = row['provision_version_id']
     facts = {(vid, CLAUSE): clause(record)}
@@ -491,4 +505,263 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
                 snapshot, CLOCK, at, notification=notification, evaluated_at=evaluated_at,
                 stated_term=record['stated_term'], qualifying_commencements=commencements or {},
                 commencement_records_complete=commencement_records_complete, zone=zone, calendar=calendar))
-    return evaluate(snapshot, RULE, at, facts)
+    return facts, notification
+
+
+# Supplied Osservatorio records (`osservatorio-records`): the operator's delivery, commencement,
+# removal and history records, as a list of JSON objects. Postings are public records (PR #15's route).
+_COMMON = {'record', 'kind', 'order', 'source', 'selector', 'reading'}
+_KINDS = {
+    # The delivery receipt of the order to the recipient the record names; `occurred` is the delivery
+    # instant, never the acceptance receipt's. `works` (parcels or plants) is the operator's standing
+    # assertion of what that recipient is obliged to.
+    'personal-delivery': {'recipient', 'occurred', 'works'},
+    # Performance on the work the record names, by whoever performed it.
+    'commencement': {'work', 'occurred'},
+    'removal': {'work', 'occurred'},
+    # A stated bounded complete history of performance on one work.
+    'history': {'work', 'complete_from', 'complete_through'},
+}
+
+
+def _moment(text):
+    """A printed ISO date stays a date; an ISO instant must carry its offset."""
+    if text is None:
+        return None
+    if len(text) == 10:
+        return date.fromisoformat(text)
+    moment = datetime.fromisoformat(text)
+    if moment.tzinfo is None:
+        raise ValueError(f'A supplied instant needs its offset: {text}')
+    return moment
+
+
+def _work(value):
+    """A work as the record prints it: comune, foglio and particella, or a plant identifier. Never normalized."""
+    if not isinstance(value, dict) or set(value) not in ({'comune', 'foglio', 'particella'}, {'plant'}):
+        raise ValueError(f'A work is a printed comune, foglio and particella, or a plant identifier: {value}')
+    if not all(isinstance(v, str) and v.strip() for v in value.values()):
+        raise ValueError(f'A work prints every part: {value}')
+    return tuple(sorted(value.items()))
+
+
+def supplied_records(entries):
+    """Validate supplied records as the existing typed inputs; refuse anything else.
+
+    Each record becomes an `AdministrativeEvent` whose `Support` cites its controlled
+    source. A record carries only its kind's fields and an optional `fixture` mark
+    (test records): no order-text predicate, notification instant or completeness
+    flag can ride along. A personal delivery is the delivery receipt only; an
+    acceptance receipt is not supplied as one.
+    """
+    from .events import AdministrativeEvent
+    from .evidence import Support
+    records = []
+    for entry in entries:
+        kind = entry.get('kind')
+        if kind not in _KINDS:
+            raise ValueError(f'Unsupported supplied record kind: {kind}')
+        fields = set(entry) - {'fixture'}
+        expected = _COMMON | _KINDS[kind]
+        if fields != expected:
+            raise ValueError(f"Record {entry.get('record')} ({kind}) differs in {sorted(fields ^ expected)}")
+        support = Support(entry['source'], entry['selector'], entry['reading'])
+        recipient = entry.get('recipient')
+        if kind == 'personal-delivery':
+            occurred = _moment(entry['occurred'])
+            works = tuple(dict.fromkeys(_work(w) for w in entry['works']))
+        elif kind == 'history':
+            occurred, works = _moment(entry['complete_from']), (_work(entry['work']),)
+        else:
+            occurred, works = _moment(entry['occurred']), (_work(entry['work']),)
+        event = AdministrativeEvent(entry['record'], kind, entry['order'], recipient or None, occurred, support)
+        records.append(dict(entry, event=event, works=works, fixture=bool(entry.get('fixture'))))
+    return records
+
+
+def _printed(name):
+    """A printed owner or recipient name as a line prints it: runs of whitespace are one space."""
+    return re.sub(r'\s+', ' ', name or '').strip()
+
+
+def _on_position(work, position):
+    """Whether a work, as a record prints it, is on an annex position: its foglio and particella among the
+    parcels the position prints, or its plant among the listed infected plants. The position prints no
+    comune, so the comune is not compared."""
+    work = dict(work)
+    if 'plant' in work:
+        return work['plant'] in (position.get('listed_infected_plants') or ())
+    return any(p['foglio'] == work['foglio'] and p['particella'] == work['particella']
+               for p in position.get('parcels') or ())
+
+
+def position_attachments(records, supplied):
+    """Join supplied records to the position records of one order's clause (`annex_position`).
+
+    A personal delivery joins the one position whose printed owner is the recipient the
+    delivery names (whitespace aside) and which prints every work the delivery names.
+    A delivery that names no recipient, matches no position, or matches several is
+    unattached with its cause; nothing is defaulted. Commencement, removal and history
+    records count by the work they print, so each attaches to every position printing
+    that work to which a delivery joined (the co-holder rule); one whose work is on no
+    position, or on none a delivery joined, is unattached with its cause.
+    Returns ({occurrence: [supplied entries]}, [unattached]).
+    """
+    checked = supplied_records(supplied)
+    placed = [(r['occurrence'], annex_position(r)) for r in records]
+    attached, unattached, joined = {}, [], set()
+    for entry, r in zip(supplied, checked):
+        if r['kind'] != 'personal-delivery':
+            continue
+        name = _printed(r['recipient'])
+        if not name:
+            unattached.append(dict(record=r['record'], cause='names no recipient'))
+            continue
+        named = [(o, p) for o, p in placed if p.get('owner') and _printed(p['owner']) == name]
+        found = [o for o, p in named if all(_on_position(w, p) for w in r['works'])]
+        if len(found) == 1:
+            attached.setdefault(found[0], []).append(entry)
+            joined.add(found[0])
+        elif found:
+            unattached.append(dict(record=r['record'], positions=found,
+                                   cause=f"matches {len(found)} annex positions printing owner '{name}'"))
+        elif named:
+            off = [dict(w) for w in r['works'] if not all(_on_position(w, p) for _, p in named)]
+            unattached.append(dict(record=r['record'], works=off,
+                                   cause=f"the annex position printing owner '{name}' prints no such work"))
+        else:
+            unattached.append(dict(record=r['record'],
+                                   cause=f"no annex position of this order prints owner '{name}'"))
+    for entry, r in zip(supplied, checked):
+        if r['kind'] == 'personal-delivery':
+            continue
+        on = [o for o, p in placed if _on_position(r['works'][0], p)]
+        reached = [o for o in on if o in joined]
+        for occurrence in reached:
+            attached.setdefault(occurrence, []).append(entry)
+        if not reached:
+            unattached.append(dict(record=r['record'], work=dict(r['works'][0]),
+                                   cause=('no supplied delivery joins an annex position printing this work' if on
+                                          else 'no annex position of this order prints this work')))
+    return attached, unattached
+
+
+def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, position=None, **dueness):
+    """C's result per (clause, recipient named by a supplied delivery record).
+
+    At an annex position (`position`, with the records `position_attachments` joined to it
+    and the position's `governing_results` among `dueness`), the recipient's history is
+    complete only when the supplied deliveries also name every parcel the position prints.
+
+    The clause's cohort result stays `c_result` on cohort evidence only; no
+    supplied record reaches it. For each recipient a delivery record names, the
+    caller supplies events only: the delivery on the communication predicate. C's
+    `notice_instant` picks the instant. Commencement and removal count by the work
+    the record prints, for every recipient a supplied record obliges to that work.
+    Completeness holds for a recipient only when every such work has a stated
+    history running from the order's adoption, or earlier, through C's deadline:
+    `clock_boundary` on the notification C returned, with the order's stated term,
+    zone and calendar. A history stated as complete through a moment later than the
+    evaluation is refused. Nothing absent is filled: what cannot be joined or
+    supplied is reported. A recipient reached only by posting has no result here.
+    """
+    from cordon_c.quantities import clock_boundary
+    from cordon_c.temporal import end_of_day, utc
+    act = record.get('applied_by') or record['instrument']
+    records = supplied_records(supplied)
+    if any(r['order'] != act for r in records):
+        raise ValueError(f'A supplied record names another order than {act}')
+    today = evaluated_at.astimezone(zone).date()
+    for r in records:
+        if r['kind'] != 'history':
+            continue
+        through = _moment(r['complete_through'])
+        if through > (evaluated_at if isinstance(through, datetime) else today):
+            raise ValueError(f"Record {r['record']} states a history complete through {r['complete_through']}, "
+                             f'later than the evaluation at {evaluated_at.isoformat()}')
+    reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
+    for r in records:
+        if r['kind'] == 'personal-delivery':
+            if not r['recipient'] or not r['recipient'].strip():
+                reported.append(dict(record=r['record'], cause='names no recipient'))
+                continue
+            deliveries.setdefault(r['recipient'], {}).setdefault(r['event'].occurred, []).append(r['record'])
+            obliged.setdefault(r['recipient'], set()).update(r['works'])
+        elif r['kind'] in ('commencement', 'removal') and not isinstance(r['event'].occurred, datetime):
+            # C compares performance instants with the deadline; a day alone is not upgraded.
+            undated.setdefault(r['works'][0], []).append(r['record'])
+            reported.append(dict(record=r['record'], work=dict(r['works'][0]),
+                                 cause='performance dated by day only; its work stays without a complete history'))
+        elif r['kind'] in ('commencement', 'removal'):
+            performed.setdefault(r['works'][0], {})[r['record']] = r['event'].occurred
+        elif r['kind'] == 'history':
+            histories.setdefault(r['works'][0], []).append(r)
+    everyone = set().union(*obliged.values()) if obliged else set()
+    for work in sorted(set(performed) | set(histories) | set(undated)):
+        if work not in everyone:
+            names = (sorted(performed.get(work, {})) + sorted(undated.get(work, ()))
+                     + sorted(h['record'] for h in histories.get(work, ())))
+            reported.append(dict(records=names, work=dict(work),
+                                 cause='no supplied record obliges a recipient to this work as printed'))
+    adopted = datetime.combine(date.fromisoformat(record['adopted']), time(), zone)
+
+    def covers(history, deadline):
+        """The history is stated from the order's adoption (or earlier) through C's (exclusive) deadline.
+
+        A history through a printed day covers that whole day (C's `end_of_day`)."""
+        start = history['event'].occurred
+        start = start if isinstance(start, datetime) else datetime.combine(start, time(), zone)
+        through = _moment(history['complete_through'])
+        through = through if isinstance(through, datetime) else end_of_day(through, zone)
+        return utc(start) <= utc(adopted) and utc(through) >= utc(deadline)
+
+    vid = snapshot.version(RULE, at)['provision_version_id']
+    common = dict(dueness, evaluated_at=evaluated_at, zone=zone, calendar=calendar)
+    results = {}
+    for recipient in sorted(deliveries):
+        instants = deliveries[recipient]
+        notice, notice_instants = {}, {}
+        if len(instants) == 1:
+            notice[(vid, COMMUNICATED)] = True
+            notice_instants[COMMUNICATED] = next(iter(instants))
+        else:
+            reported.append(dict(recipient=recipient, records=sorted(n for v in instants.values() for n in v),
+                                 cause='deliveries at different instants; the personal branch is not supplied'))
+        works = sorted(obliged.get(recipient, ()))
+        commencements = {name: moment for work in works for name, moment in performed.get(work, {}).items()}
+        options = dict(notice=notice or None, notice_instants=notice_instants, commencements=commencements,
+                       **_dueness_defaults(common))
+        # C's notification for this recipient first; the history bound is C's deadline from it.
+        _, notification = _c_facts(snapshot, record, at, commencement_records_complete=False, **options)
+        deadline, complete = None, False
+        # At an annex position the recipient is also obliged to every parcel the position prints for it.
+        named = {(dict(w).get('foglio'), dict(w).get('particella')) for w in works}
+        unnamed = [p for p in (position or {}).get('parcels') or ()
+                   if (p['foglio'], p['particella']) not in named]
+        if unnamed:
+            reported.append(dict(recipient=recipient, parcels=unnamed,
+                                 cause='the annex position prints parcel(s) no supplied delivery names; '
+                                       'the history stays incomplete'))
+        if notification is not None and record['stated_term'] is not None:
+            deadline = clock_boundary(snapshot, CLOCK, at, notification, zone=zone, calendar=calendar,
+                                      stated_term=record['stated_term'])
+            complete = bool(works) and not unnamed and all(any(covers(h, deadline) for h in histories.get(w, ()))
+                                                           and w not in undated for w in works)
+        facts, notification = _c_facts(snapshot, record, at, commencement_records_complete=complete, **options)
+        results[recipient] = dict(result=evaluate(snapshot, RULE, at, facts), notification=notification,
+                                  deadline=deadline, works=[dict(w) for w in works], commencements=commencements,
+                                  commencement_records_complete=complete,
+                                  records=sorted(n for v in instants.values() for n in v),
+                                  fixture=any(r['fixture'] for r in records))
+    return dict(recipients=results, reported=reported)
+
+
+def _dueness_defaults(common):
+    keys = ('evaluated_at', 'governing_results', 'work_due', 'coercion_due', 'closures', 'stated_changes',
+            'within_closed_scope', 'zone', 'calendar')
+    defaults = dict(governing_results=None, work_due=None, coercion_due=None, closures=(), stated_changes=(),
+                    within_closed_scope=None)
+    unknown = set(common) - set(keys)
+    if unknown:
+        raise TypeError(f'recipient_results takes no {sorted(unknown)}')
+    return {**defaults, **common}

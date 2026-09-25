@@ -273,6 +273,127 @@ class AnnexPositions(unittest.TestCase):
         self.assertTrue(all(stale in r['issues'] for r in expanded))
 
 
+# Supplied Osservatorio records joined to DDS 113/2023's positions (PR #33's caller). Every record below is a
+# FIXTURE (`fixture: true`): its instants, sources and parcels are invented in the shape of the annex. None is a
+# fact about the order.
+PEC = datetime(2024, 3, 20, 9, tzinfo=ROME)
+BEFORE, AFTER = date(2024, 3, 25), date(2024, 4, 5)
+
+
+def fixture(record, kind, **fields):
+    return dict(record=record, kind=kind, order=DDS113, source='f' * 64, selector=f'fixture:{record}',
+                reading=f'FIXTURE {kind}: not a fact about DDS 113/2023', fixture=True, **fields)
+
+
+def parcel(foglio, particella):
+    return dict(comune='CASTELLANA GROTTE', foglio=foglio, particella=particella)
+
+
+def delivery(record, recipient, *parcels):
+    return fixture(record, 'personal-delivery', recipient=recipient, occurred=PEC.isoformat(),
+                   works=[parcel(f, p) for f, p in parcels])
+
+
+def history(record, foglio, particella, through='2024-04-04'):
+    return fixture(record, 'history', work=parcel(foglio, particella), complete_from='2023-10-16',
+                   complete_through=through)
+
+
+class SuppliedRecordsAtPositions(unittest.TestCase):
+    """A supplied record joins the 113/2023 position that prints its owner and parcel; the position's
+    governing rows and the recipient's notice and commencement reach C together."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.s = Snapshot.load(ROOT)
+        found = positions(parse(BANDS, 3), '1/D')
+        cls.records = [dict(RECORD, occurrence=f"{RECORD['occurrence']}:annex 1/D:position {k}", recipients=(p,))
+                       for k, p in enumerate(found)]
+
+    def run_records(self, supplied, at=AFTER):
+        """The caller's path (`read_prescriptions.per_recipient` on a position clause): join, then C per position."""
+        from cordon_d.case_prescriptions import position_attachments, recipient_results
+        attached, unattached = position_attachments(self.records, supplied)
+        out = {}
+        for record in self.records:
+            if record['occurrence'] in attached:
+                position = annex_position(record)
+                run = recipient_results(self.s, record, at, attached[record['occurrence']],
+                                        evaluated_at=datetime.combine(at, datetime.min.time(), ROME).replace(hour=12),
+                                        zone=ROME, calendar=national_calendar(), position=position,
+                                        governing_results=governing_results(self.s, record, at, position))
+                out[position['owner']] = run
+        return out, unattached
+
+    def test_a_delivery_to_a_hosts_only_owner_gives_no_direction(self):
+        supplied = [delivery('fx-pec-cisternino', 'CISTERNINO PAOLA', ('57', '146')), history('fx-h-146', '57', '146')]
+        out, unattached = self.run_records(supplied)
+        self.assertEqual(unattached, [])
+        result = out['CISTERNINO PAOLA']['recipients']['CISTERNINO PAOLA']
+        self.assertTrue(result['fixture'])
+        self.assertIsNotNone(result['notification'])
+        self.assertTrue(result['commencement_records_complete'])
+        self.assertIs(result['result'].truth, False)
+        self.assertEqual(result['result'].effect, NOT_ESTABLISHED)
+        self.assertIn(WITHDRAWAL + ':v1', result['result'].provisions)
+        # The joint owner of 57/146 is not reached by her delivery.
+        self.assertNotIn('IPPOLITO MARIA', out)
+
+    def test_a_delivery_to_a_letter_a_holder_gives_a_direction_once_the_term_passes(self):
+        supplied = [delivery('fx-pec-rotolo', 'ROTOLO IRENE', ('57', '89')), history('fx-h-89', '57', '89')]
+        before, _ = self.run_records(supplied[:1] + [history('fx-h-89', '57', '89', through='2024-03-25')], BEFORE)
+        self.assertNotEqual(before['ROTOLO IRENE']['recipients']['ROTOLO IRENE']['result'].effect, REQUIRED)
+        out, unattached = self.run_records(supplied)
+        self.assertEqual(unattached, [])
+        result = out['ROTOLO IRENE']['recipients']['ROTOLO IRENE']
+        self.assertTrue(result['commencement_records_complete'])
+        self.assertEqual(result['result'].effect, REQUIRED)
+        self.assertIn(WITHDRAWAL + ':v1', result['result'].provisions)
+        # Without the history, C waits on commencement evidence and gives no direction.
+        waiting, _ = self.run_records(supplied[:1])
+        self.assertIsNone(waiting['ROTOLO IRENE']['recipients']['ROTOLO IRENE']['result'].truth)
+        # A commencement on the position's parcel before the deadline moves the holder to false.
+        began = fixture('fx-verbale-89', 'commencement', work=parcel('57', '89'),
+                        occurred=(PEC + timedelta(days=2)).isoformat())
+        moved, _ = self.run_records(supplied + [began])
+        self.assertIs(moved['ROTOLO IRENE']['recipients']['ROTOLO IRENE']['result'].truth, False)
+
+    def test_a_delivery_whose_owner_matches_no_position_is_unattached(self):
+        supplied = [delivery('fx-pec-rossi', 'ROSSI FIXTURE', ('57', '89')),
+                    delivery('fx-pec-rotolo-off', 'ROTOLO IRENE', ('57', '146')),
+                    delivery('fx-pec-blank', ' ', ('57', '89')), history('fx-h-345', '15', '345'),
+                    history('fx-h-999', '57', '999')]
+        out, unattached = self.run_records(supplied)
+        self.assertEqual(out, {})
+        causes = {u['record']: u['cause'] for u in unattached}
+        self.assertEqual(causes, {
+            'fx-pec-rossi': "no annex position of this order prints owner 'ROSSI FIXTURE'",
+            'fx-pec-rotolo-off': "the annex position printing owner 'ROTOLO IRENE' prints no such work",
+            'fx-pec-blank': 'names no recipient',
+            'fx-h-345': 'no supplied delivery joins an annex position printing this work',
+            'fx-h-999': 'no annex position of this order prints this work'})
+
+    def test_a_delivery_matching_several_positions_is_unattached(self):
+        twin = dict(annex_position(self.records[0]))
+        records = self.records + [dict(self.records[0], occurrence=self.records[0]['occurrence'] + ' bis',
+                                       recipients=(twin,))]
+        from cordon_d.case_prescriptions import position_attachments
+        name = twin['owner']
+        works = [(p['foglio'], p['particella']) for p in twin['parcels']]
+        attached, unattached = position_attachments(records, [delivery('fx-pec-twin', name, *works)])
+        self.assertEqual(attached, {})
+        self.assertEqual(unattached[0]['cause'], f"matches 2 annex positions printing owner '{name}'")
+
+    def test_a_position_parcel_no_delivery_names_leaves_the_history_incomplete(self):
+        # BORGHESE ANTONIO's position prints 57/78, 270, 271 and 273; a delivery naming 57/270 alone never decides.
+        supplied = [delivery('fx-pec-borghese', 'BORGHESE ANTONIO', ('57', '270')), history('fx-h-270', '57', '270')]
+        out, _ = self.run_records(supplied)
+        run = out['BORGHESE ANTONIO']
+        self.assertFalse(run['recipients']['BORGHESE ANTONIO']['commencement_records_complete'])
+        self.assertNotEqual(run['recipients']['BORGHESE ANTONIO']['result'].effect, REQUIRED)
+        self.assertTrue(any(r.get('parcels') and 'no supplied delivery names' in r['cause'] for r in run['reported']))
+
+
 STORE = store_root(ROOT)
 FIVE = {'96/2023': 'dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7',
         '113/2023': 'dd2887bee294634c1a8a21730fd910abcdae0ff41f90c29c5af45c9eaae8d338',
@@ -322,12 +443,41 @@ class RetainedAnnexes(unittest.TestCase):
         self.assertIn(dict(foglio='33', particella='394'), found['COMES VITO']['parcels'])
         self.assertTrue(found['COMES VITO']['listed_infected_plants'])
 
-    def writer(self, *only):
+    def writer(self, *only, records=None):
         with tempfile.TemporaryDirectory() as tmp:
-            out = Path(tmp) / 'out.json'
+            out, supplied = Path(tmp) / 'out.json', Path(tmp) / 'records.json'
+            extra = []
+            if records is not None:
+                supplied.write_text(json.dumps(records))
+                extra = ['--records', str(supplied)]
             subprocess.run([sys.executable, str(ROOT / 'scripts/read_prescriptions.py'), '--only', *only,
-                            '--out', str(out)], check=True, capture_output=True, cwd=ROOT)
-            return [r for e in json.loads(out.read_text()) for r in e.get('records', ())]
+                            '--out', str(out), *extra], check=True, capture_output=True, cwd=ROOT)
+            written = json.loads(out.read_text())
+            found = [r for e in written for r in e.get('records', ())]
+            if records is not None:
+                return found, next(e['supplied_records'] for e in written if 'supplied_records' in e)
+            return found
+
+    def test_the_writer_joins_supplied_fixture_records_to_positions(self):
+        # FIXTURE records (see `fixture`), through the ordinary caller on the retained 113/2023 original.
+        supplied = [delivery('fx-pec-cisternino', 'CISTERNINO PAOLA', ('57', '146')), history('fx-h-146', '57', '146'),
+                    delivery('fx-pec-rotolo', 'ROTOLO IRENE', ('57', '89')), history('fx-h-89', '57', '89'),
+                    delivery('fx-pec-rossi', 'ROSSI FIXTURE', ('57', '89'))]
+        records, report = self.writer('113/2023', records=supplied)
+        clause0 = {annex_position(r)['owner']: r for r in records if ':clause:0:' in r['occurrence']}
+        hosts_only = clause0['CISTERNINO PAOLA']['per_recipient']['CISTERNINO PAOLA']
+        self.assertTrue(hosts_only['fixture'] and hosts_only['commencement_records_complete'])
+        self.assertIs(hosts_only['c']['truth'], False)
+        holder = clause0['ROTOLO IRENE']['per_recipient']['ROTOLO IRENE']
+        self.assertTrue(holder['fixture'] and holder['commencement_records_complete'])
+        self.assertEqual(holder['c']['effect'], REQUIRED)
+        self.assertIn(WITHDRAWAL + ':v1', holder['c']['provisions'])
+        # Only the joined positions carry a per-recipient result; the cohort `c` of each is unchanged.
+        self.assertEqual({o for o, r in clause0.items() if 'per_recipient' in r}, {'CISTERNINO PAOLA', 'ROTOLO IRENE'})
+        self.assertEqual({r['occurrence']: r['c'] for r in records},
+                         {r['occurrence']: r['c'] for r in self.writer('113/2023')})
+        self.assertEqual([(u['record'], u['cause']) for u in report['unattached']],
+                         [('fx-pec-rossi', "no annex position of this order prints owner 'ROSSI FIXTURE'")])
 
     def test_the_writer_emits_one_record_per_clause_and_position(self):
         records = self.writer('113/2023')
