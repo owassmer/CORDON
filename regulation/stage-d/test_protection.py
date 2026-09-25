@@ -74,23 +74,24 @@ class TheRecordAsPrinted(unittest.TestCase):
                 self.assertEqual(reading.note, note)  # verbatim
         for note, cause in (('nella frazione dei 50 metri compresi nelle sottomaglia non sono presenti monumentali',
                              'negated'),
-                            ('codice monumentale n.  0158021', protection.REFERENCE),
-                            ('zona con alberi monumentali', 'names the term without stating it of the plant')):
+                            ('codice monumentale n.  0158021', 'names the term without stating it of the plant')):
             self.assertEqual((read_note(note).reading, read_note(note).cause), ('unclear', cause))
         for note in ('diametro 90 cm ad un metro e mezzo di altezza', 'codice regione puglia 0158595'):
             self.assertEqual(read_note(note).reading, 'does not')
 
-    def test_a_monumental_term_followed_by_an_identifier_refers_to_another_tree(self):
-        # Held on an order plant: the surveyor names a monumental tree outside the buffer by its number.
-        for note in ('fuori buffer monumentale n.0086552. zona contenimento',  # held, verbatim
-                     'vicino pianta monumentale n. 0158021'):  # a variant: a neighbour named in the note
+    def test_a_monumental_term_followed_by_a_number_is_read_as_the_note_prints_it(self):
+        # Held on order plant d132e9fe6300: the one held reference to another tree does not read "states".
+        note = 'fuori buffer monumentale n.0086552. zona contenimento'  # verbatim
+        reading = read_note(note)
+        self.assertEqual((reading.reading, reading.cause), ('unclear', 'names the term without stating it of the plant'))
+        self.assertIsNone(characteristics_finding(record(note)).truth)
+        # Held own-tag forms: the plant's own tag after "pianta monumentale" (order plant a9976f5f7efe; positive
+        # 1608670, whose number the note-code rule reads as its paired entry 213340) states.
+        for note in ('Pianta monumentale n. 0010852', 'pianta monumentale n 0044620'):  # verbatim
             with self.subTest(note=note):
                 reading = read_note(note)
-                self.assertEqual((reading.reading, reading.cause), ('unclear', protection.REFERENCE))
-                self.assertIsNone(characteristics_finding(record(note)).truth)
-        # The plant's own statement, with its tag printed later in the note, still states.
-        self.assertEqual(read_note('sintomi sospetti. pianta monumentale censita targhetta n. 0107007').reading,
-                         'states')
+                self.assertEqual((reading.reading, reading.cite.lower()), ('states', 'pianta monumentale'))
+                self.assertIs(characteristics_finding(record(note)).truth, True)
 
     def test_measurements_as_printed_with_numbers_read_from_the_words(self):
         m, = measurements('diametro 90 cm ad un metro e mezzo di altezza')  # 1901545
@@ -352,10 +353,7 @@ class HeldSources(unittest.TestCase):
         states = [p for p in group if any(n.reading == 'states' for n in p.record.notes)]
         unclear = [p for p in group if any(n.reading == 'unclear' for n in p.record.notes) and p not in states]
         measured = [p for p in group if p.record.measurements]
-        # Plan stage: 317, 2, 13, 318. Round 1 reads a monumental term followed by an identifier as a reference to
-        # another tree, so the notes of nine plants ("caratteristiche monumentali id 1604906", "... 1603982",
-        # "... 1545127") move from "states" to "unclear".
-        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (308, 11, 13, 309))
+        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (317, 2, 13, 318))
 
     def test_no_article_15_input_and_no_owner_names(self):
         out = json.dumps(protection.rows(self.result), ensure_ascii=False)

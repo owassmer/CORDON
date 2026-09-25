@@ -602,12 +602,11 @@ when the entry's batch uses the census tag as its card and the printed tag diffe
 from the card. A batch with fewer than 20 fixes takes the register-wide bound. Each
 note is read, cite-or-abstain, as stating that the plant has monumental
 characteristics (any wording that asserts it), not doing so, or unclear (negated,
-hedged, a monumental term followed by an identifier, which refers to a tree by its
-number and so may name another tree, or naming the term without stating it of the
-plant); a negation of the tag or the census does not negate the characteristics. A
-measurement is supplied as printed, with `diameter_cm` and `measured_height_cm` read
-from its words; a note that names the diameter and yields no value records
-"measurement not read"; D compares none. An entry's acts come from the acts'
+hedged, or naming the term without stating it of the plant); a negation of the tag
+or the census does not negate the characteristics. A measurement is supplied as
+printed, with `diameter_cm` and `measured_height_cm` read from its words; a note
+that names the diameter and yields no value records "measurement not read"; D
+compares none. An entry's acts come from the acts'
 decisions and history table, never from its label alone; where an act's recitals
 name the surveys that together make up exactly its provisional list, each survey is
 a batch of that act. The 2011 census check reads its tolerance from the held

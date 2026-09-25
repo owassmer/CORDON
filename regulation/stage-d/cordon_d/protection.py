@@ -46,10 +46,6 @@ _NEGATED = re.compile(r"\b(non|senza|nessun\w*|priv\w*\s+di|ne)\s+(ha\s+|present
 _HEDGED = re.compile(r"(possibil\w*|presunt\w*|probabil\w*|apparent\w*|forse|sembr\w*|potenzial\w*|eventual\w*|"
                      r"presumibil\w*|dubbi\w*\s+(caratteristic|monument))\s+(\w+\s+){0,2}(caratteristic|monument)|"
                      r"monument\w*('+)?\s*(\?|da\s+verificar\w*|presunt\w*|dubbi\w*)", re.I)
-# A monumental term followed by an identifier ("fuori buffer monumentale n.0086552", "pianta monumentale n. 0158021"):
-# the note refers to a tree by its number, which need not be the plant.
-_REFERENCE = re.compile(r"monument\w*'*\s*(?:(?:n|nr|num|numero|cod\w*|id)\s*[.°:]?\s*\d+|\d{4,})", re.I)
-REFERENCE = 'a reference to another tree: the monumental term is followed by an identifier'
 
 
 @dataclass(frozen=True)
@@ -58,13 +54,13 @@ class NoteReading:
     note: str             # verbatim
     reading: str          # 'states' | 'does not' | 'unclear'
     cite: str | None      # the words the reading rests on
-    cause: str | None     # for 'unclear': negated, hedged, a reference to another tree, or the term alone
+    cause: str | None     # for 'unclear': negated, hedged, or the term without a statement of the plant
 
 
 def read_note(note: str) -> NoteReading:
     if not re.search(r"monum", note, re.I):
         return NoteReading(note, 'does not', None, None)
-    for pattern, cause in ((_NEGATED, 'negated'), (_HEDGED, 'hedged'), (_REFERENCE, REFERENCE)):
+    for pattern, cause in ((_NEGATED, 'negated'), (_HEDGED, 'hedged')):
         found = pattern.search(note)
         if found:
             return NoteReading(note, 'unclear', found.group(), cause)
