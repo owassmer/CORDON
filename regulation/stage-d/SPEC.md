@@ -557,3 +557,26 @@ uninterrupted posting. A retained complete publication certificate supplies its
 own attested interval. An unresolved act identity can be connected through the
 acquired certificate and principal routes. Neither record supplies recipient
 notification, response, default or performance.
+
+## Protected status
+
+`cordon_d.protection` (`scripts/read_protection.py`) supplies row 9. An affected
+plant's candidates are "not a register tree", always, and every entry within d:
+the plant's `error_m` as `metric_point` returns it plus the entry's survey batch
+bound. The flag decides no identity. A code in the plant's note names an entry only
+when it equals, as a number, exactly one survey card in the plant's comune, that
+entry lies within d, and no other plant's note prints it; otherwise the identity
+stays unknown between the entries within d and "not a register tree". A batch bound
+is the 95th percentile of monitoring residuals: a flagged olive observation and the
+listed entry that are each other's nearest, in the same comune, within 50 m, their
+distance plus the observation's `error_m`. A pair is dropped only when a code in its
+note names another entry (the note-code rule with d the 50 m pairing radius), or
+when the entry's batch uses the census tag as its card and the printed tag differs
+from the card. A batch with fewer than 20 fixes takes the register-wide bound. Each
+note is read, cite-or-abstain, as stating that the plant has monumental
+characteristics (any wording that asserts it), not doing so, or unclear (negated,
+hedged, or naming the term without stating it of the plant); a negation of the tag
+or the census does not negate the characteristics. A measurement is supplied as
+printed, with `diameter_cm` and `measured_height_cm` read from its words; D compares
+none. An entry's acts come from the acts' decisions and history table, never from
+its label alone.

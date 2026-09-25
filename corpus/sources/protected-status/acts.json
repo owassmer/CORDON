@@ -1,0 +1,122 @@
+[
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1546670/DEL_1193_2021.pdf",
+  "purpose": "DGR 1193/2021 as published on BURP n. 104 of 10-8-2021",
+  "captured_at": "2026-09-24T23:49:53.366590+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/1546670/DEL_1193_2021.pdf",
+  "content_type": "application/pdf",
+  "bytes": 1715563,
+  "sha256": "47bad69204c164cee914dc67fc094456e21831bc6757d6290714a45799fbabcf"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2015701/DEL_1993_2022.pdf",
+  "purpose": "DGR 1993/2022 as published on BURP n. 18 of 21-2-2023",
+  "captured_at": "2026-09-24T23:49:55.473875+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2015701/DEL_1993_2022.pdf",
+  "content_type": "application/pdf",
+  "bytes": 398285,
+  "sha256": "27385b3bbd8b452dc1c000d4f47d5dca6124e3e274898ddc81e33c3281c2d801"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2250287/DEL_1801_2023.pdf",
+  "purpose": "DGR 1801/2023 as published on BURP n. 9 of 29-1-2024",
+  "captured_at": "2026-09-24T23:49:56.777424+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2250287/DEL_1801_2023.pdf",
+  "content_type": "application/pdf",
+  "bytes": 322463,
+  "sha256": "a10735c46e8bd233de4ff3bd6d724cd7a94e2bed07e911289e0bc579a6878ded"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2515720/DEL_995_2024.pdf",
+  "purpose": "DGR 995/2024 as published on BURP n. 67 of 19-8-2024",
+  "captured_at": "2026-09-24T23:49:57.571221+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2515720/DEL_995_2024.pdf",
+  "content_type": "application/pdf",
+  "bytes": 347637,
+  "sha256": "69f83140c33d41ae0ccabea2aaeeea8fb67c5cfc1efbce1ef321de1d14c1d2d2"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/2655610/DEL_720_2025.pdf",
+  "purpose": "DGR 720/2025 as published on BURP n. 48 of 16-6-2025",
+  "captured_at": "2026-09-24T23:49:59.965190+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/2655610/DEL_720_2025.pdf",
+  "content_type": "application/pdf",
+  "bytes": 3933524,
+  "sha256": "affe4a0ef18d7f7a1aab32307ad6509dddd0c97e3e43c3aa9656d43902db0b5d"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/538152/Bollettino+numero+41+-+Ordinario+-+anno+2011.pdf",
+  "purpose": "BURP n. 41 of 22-3-2011, carrying DGR 345/2011",
+  "captured_at": "2026-09-24T23:50:12.063720+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/538152/Bollettino+numero+41+-+Ordinario+-+anno+2011.pdf",
+  "content_type": "application/pdf",
+  "bytes": 21932093,
+  "sha256": "682ff67958412e93093ec0699ebdc193137b3807f4b08ffe7cd219b1cfff8819"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/726239/Bollettino+numero+46+-+Ordinario+-+anno+2013.pdf",
+  "purpose": "BURP n. 46 of 27-3-2013, carrying DGR 357/2013",
+  "captured_at": "2026-09-24T23:51:35.168832+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/726239/Bollettino+numero+46+-+Ordinario+-+anno+2013.pdf",
+  "content_type": "application/pdf",
+  "bytes": 11533681,
+  "sha256": "e7e6866d00f976542ecc2536c74cc0a5429891053810c1d843ba785d44ef67e3"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/971390/Bollettino+numero+51+-+Ordinario+-+anno+2016.pdf",
+  "purpose": "BURP n. 51 of 6-5-2016, carrying DGR 501/2016",
+  "captured_at": "2026-09-24T23:52:16.759511+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/971390/Bollettino+numero+51+-+Ordinario+-+anno+2016.pdf",
+  "content_type": "application/pdf",
+  "bytes": 166656627,
+  "sha256": "d0104285ff6cd2201a055dc5798a06c7d57c26fc62d5ccefca0d347367b7e085"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1049418/Bollettino+numero+107+-+Ordinario+-+anno+2017.pdf",
+  "purpose": "BURP n. 107 of 15-9-2017, carrying DGR 1413/2017",
+  "captured_at": "2026-09-25T00:03:21.455434+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/1049418/Bollettino+numero+107+-+Ordinario+-+anno+2017.pdf",
+  "content_type": "application/pdf",
+  "bytes": 154395690,
+  "sha256": "989d7d8c2ce244679f7f304e5ba29936b9798b9e0307592aa3526bac8e90d7c0"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/1128105/Bollettino+numero+11+-+Ordinario+-+anno+2018.pdf",
+  "purpose": "BURP n. 11 of 22-1-2018, carrying DGR 2225/2017",
+  "captured_at": "2026-09-25T00:10:03.460608+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/1128105/Bollettino+numero+11+-+Ordinario+-+anno+2018.pdf",
+  "content_type": "application/pdf",
+  "bytes": 18530483,
+  "sha256": "1018d05b662c2d8d290a103a209ea3840bf4713719b0a22dcceb03664f23ed7c"
+ },
+ {
+  "url": "https://burp.regione.puglia.it/documents/20135/639902/Bollettino+numero+113+-+Ordinario+-+anno+2012.pdf",
+  "purpose": "BURP n. 113 of 2012, carrying DGR 1358/2012",
+  "captured_at": "2026-09-25T00:11:14.962768+00:00",
+  "status": 200,
+  "final_url": "https://burp.regione.puglia.it/documents/20135/639902/Bollettino+numero+113+-+Ordinario+-+anno+2012.pdf",
+  "content_type": "application/pdf",
+  "bytes": 12527303,
+  "sha256": "2f6355f8d859ed039413ea1049d37a1d0bed8851eaa7be223f58f1d962f76bf1"
+ },
+ {
+  "url": "https://pugliacon.regione.puglia.it/documents/89280/1075201/DEL_1491_2020.pdf/0a9f06b4-78f6-11ee-ab08-644d40882d8b",
+  "purpose": "DGR 1491/2020 as published on BURP n. 133 of 22-9-2020 (the Region's copy of the BURP pages)",
+  "captured_at": "2026-09-23T21:16:28.486739+00:00",
+  "status": 200,
+  "final_url": "https://pugliacon.regione.puglia.it/documents/89280/1075201/DEL_1491_2020.pdf/0a9f06b4-78f6-11ee-ab08-644d40882d8b",
+  "content_type": "application/pdf",
+  "bytes": 16212629,
+  "sha256": "7c95558420dc155545c5ac1ceaba9d9729b0b571938718b07bcca9fe4214eed0"
+ }
+]
