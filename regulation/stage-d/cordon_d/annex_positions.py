@@ -19,9 +19,10 @@ infected plant's parcel has a 50 m row naming its owners. Where either fails, ev
 position of the order is unknown, naming the failed check.
 
 Positions: one per owner printed in the 50 m tables, with every parcel printed against
-that owner and the listed infected plants standing on those parcels (a plant's owners
-are read from the 50 m row of its parcel, since the infected-plant table prints an owner
-once across several rows). Owners are printed names: joint owners are each a position, and
+that owner and the listed infected plants standing on those parcels, each also with the
+parcel it stands on (`listed_infected_plant_parcels`); a plant's owners are read from the
+50 m row of its parcel, since the infected-plant table prints an owner once across
+several rows. Owners are printed names: joint owners are each a position, and
 printed variants are not merged.
 
 A 50 m listing that places no recipient is one position with no recipient (`owner` None),
@@ -246,9 +247,12 @@ def positions(annex, label):
             # What the listing is: its 50 m hosts (a strip with no parcel number is its own entry)
             # and the listed infected plants on its parcels.
             hosts = parcels or [dict(foglio=item['foglio'], particella=None)]
-            held = [s for p in item['particelle'] for s in plants.get((item['foglio'], p), [])]
+            standing = [dict(plant=s, foglio=item['foglio'], particella=p)
+                        for p in item['particelle'] for s in plants.get((item['foglio'], p), [])]
+            held = [s['plant'] for s in standing]
             position = dict(annex=f'allegato {label}', owner=None, printed=item['words'], parcels=hosts,
-                            fifty_metre_parcels=hosts, listed_infected_plants=held, rows=[item['row']],
+                            fifty_metre_parcels=hosts, listed_infected_plants=held,
+                            listed_infected_plant_parcels=standing, rows=[item['row']],
                             no_recipient=f"annex {label} places this 50 m listing on no recipient: "
                                          f"'{item['words']}' ({place})")
             if held:
@@ -259,12 +263,15 @@ def positions(annex, label):
         for name in item['owners']:
             position = owners.setdefault(name, dict(annex=f'allegato {label}', owner=name, printed=name,
                                                     parcels=[], fifty_metre_parcels=[],
-                                                    listed_infected_plants=[], rows=[]))
+                                                    listed_infected_plants=[], listed_infected_plant_parcels=[],
+                                                    rows=[]))
             for parcel in parcels:
                 if parcel not in position['parcels']:
                     position['parcels'].append(parcel)
                     position['fifty_metre_parcels'].append(parcel)
-                    position['listed_infected_plants'] += plants.get((parcel['foglio'], parcel['particella']), [])
+                    held = plants.get((parcel['foglio'], parcel['particella']), [])
+                    position['listed_infected_plants'] += held
+                    position['listed_infected_plant_parcels'] += [dict(plant=s, **parcel) for s in held]
             position['rows'].append(item['row'])
     out = list(owners.values()) + unplaced
     if annex['failures']:

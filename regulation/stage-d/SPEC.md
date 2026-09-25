@@ -443,7 +443,7 @@ the retained original's text layer, each rotated line placed in the band between
 the page's drawn row rules: the infected-plant rows (sample, foglio, particella)
 and the 50 m rows (foglio, particelle, owners). A position is one printed owner
 with every parcel printed against it and the listed infected plants on those
-parcels. A 50 m listing that places no recipient is a position with no recipient,
+parcels, each with the parcel it stands on (`listed_infected_plant_parcels`). A 50 m listing that places no recipient is a position with no recipient,
 naming its printed words: it holds that listing's 50 m hosts (a strip printed with
 no parcel number, such as "STRADE" or "ACQUE", included) and the listed infected
 plants on its parcels, so a governing row answers it like any other position; no
@@ -516,10 +516,23 @@ the writer emits per annex position, supplied records are joined to positions
 the recipient it names (runs of whitespace aside) and which prints every work it
 names (foglio and particella, or a listed plant; the position prints no comune).
 That position's result then carries the position's governing rows per (row,
-predicate) and the recipient's notice and commencement together, and the
-recipient's history is complete only when the supplied deliveries also name every
-parcel the position prints. Commencement, removal and history records count for
-every position printing their work to which a delivery joined. A record that names
+predicate) and the recipient's notice and commencement together. Commencement,
+removal and history records attach to every position printing their work to which
+a delivery joined, and what counts there depends on the position's governing
+result for the work. Where it is `LAWFULLY_DUE_IN_PART`, the obliged works are the
+position's listed infected plants and the parcels holding them (the still-due
+share, `still_due_share`): the recipient's history is complete only when the
+deliveries name each listed infected plant, by plant or by its parcel, and every
+such work they name has a covering history, and only commencements and removals
+on those works count. A delivery, commencement, removal or history on any other
+work of that position (a withdrawn work) is reported with its cause, naming the
+row and its effective date, and never counted; a delivery naming only withdrawn
+works gives no result. A commencement or removal on a withdrawn work dated before
+the row's effective date (read from the row) is a legal question D does not
+decide: where counting it would move a fact C evaluates, that fact is unknown,
+naming the question. At any other position the recipient's history is complete
+only when the supplied deliveries also name every parcel the position prints, and
+commencement and removal count on every work the deliveries name. A record that names
 no recipient, matches no position or several, or whose work is on no joined
 position, is reported unattached with its cause; nothing is defaulted. Other
 clauses keep the record's naming alone. A personal-delivery record is the delivery receipt only,
@@ -615,11 +628,15 @@ the export cuts where the field ends ("Osservatorio Fitosanita") is printed. A
 row that prints the issuer is read for identities by the same matcher as held acts
 (`held_acts.printed_identities`): a number closely followed by a date ("n. 114
 del 16/10/2023", "DDS 99 05/08/2024", "60 del 19 luglio 2022") or a designator
-with number and year ("DDS 122/2021"). Every identity a row
-with the issuer prints is attached or listed unattached with its cause: an order D
-does not hold, a date other than the order's adoption date, or a date that is not
-a readable date. A JCityGov
-detail supplies the declared start; its period end is a retention horizon, so the
+with number and year ("DDS 122/2021"). An identity the matcher reads, in a row
+with the issuer, is attached or listed unattached with its cause: an order D does
+not hold, a date other than the order's adoption date, or a date that is not a
+readable date. That is the matcher's reading limit: an identity printed in a form
+it does not read (an unreadable date printed without "del", "nr.188 del …",
+"D.D.S.188 del …") is neither attached nor listed, and a broad designator or a
+duration can read as an identity; no held row shows either. A JCityGov detail is
+read only for the comune `read_postings.py` names (Taranto); other towns' JCityGov
+pages are not read. It supplies the declared start; its period end is a retention horizon, so the
 interval stays open. An image-only posted document's identity is read from its
 page images through the subscription (`posted_identity`). Whether a posting is
 notice, or an executor act is execution, stays with A.
@@ -635,6 +652,8 @@ bytes do not merge publication occurrences and do not prove amendment. An
 attachment adapter needs the acquisition record. A future date stays an
 unoccurred declaration. A declared posting interval does not prove
 uninterrupted posting. A retained complete publication certificate supplies its
-own attested interval. An unresolved act identity can be connected through the
+own attested interval. Certificate reading is replay-only: `read_prescriptions.py`
+reads a certificate only from its stored reading, so a certificate with no stored
+reading is not read. An unresolved act identity can be connected through the
 acquired certificate and principal routes. Neither record supplies recipient
 notification, response, default or performance.

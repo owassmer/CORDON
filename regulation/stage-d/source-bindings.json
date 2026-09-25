@@ -122,15 +122,15 @@
       ],
       "routes": [
         "The determination's own text (declared route: reasoned immediate-effect clause, act-specific recipient-number finding)",
-        "The competent municipality's albo pretorio record of the seven-day publication",
+        "The competent municipality's albo pretorio record of the seven-day publication; a retained publication certificate (Comune di Bari) is read only from its stored reading (replay-only), and a certificate with no stored reading is not read",
         "https://burp.regione.puglia.it/bollettini and the regional sites the plans name",
-        "OpenWeb albo register exports (openweb/albo/csv.php): ARIF's own albo (arif.soluzionipa.it) and the competent municipality's (Fasano, Modugno, Montemesola)",
-        "JCityGov albo detail pages and their posted documents (<comune>.trasparenza-valutazione-merito.it, papca/display)",
+        "OpenWeb albo register exports (openweb/albo/csv.php): the competent municipality's (Fasano, Modugno, Montemesola); ARIF's own albo (arif.soluzionipa.it) is read as a lead to removal the named recipients performed (row 11) and supplies no notice",
+        "JCityGov albo detail pages and their posted documents (papca/display): only Taranto (taranto.trasparenza-valutazione-merito.it), the one comune read_postings.py reads; other towns' JCityGov pages are not read",
         "TAR decisions stating an order's delivery, posting, request or reply (the removal-orders court route)"
       ],
       "population": "The act text, publication records and the events public records state about an admitted removal matter; not every notice published by every municipality.",
       "reader": "cordon_d.notices and cordon_d.events; cordon_d.notice_routes (each order's own mass-publicity basis); cordon_d.removal_events (publication records connected to an order's identity and adoption); cordon_d.albo_postings (albo register rows and posted documents attached by the identity they print); cordon_d.judgments (dated events a court decision states about an order)",
-      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty and anchors the election window; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
+      "open": "Select the source by the Law 241 Article 21-bis route A selects for the act and recipient; an immediate-effect or cautionary clause makes the measure operative but is not notification. A publication record proves the publication duty; by itself it establishes neither recipient effect nor silence, refusal, breach or cost liability. Sending, delivery, publication, recipient effectiveness and response stay distinct."
     },
     {
       "id": "plant-protection-records",

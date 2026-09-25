@@ -76,11 +76,14 @@ FORK = 'REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fo
 # 50 m hosts only; APULEO LUCIA holds two listed infected plants.
 BOGGIANO = dict(annex='allegato 1/D', owner='BOGGIANO ANNA', printed='BOGGIANO ANNA',
                 parcels=[dict(foglio='17', particella='39')], fifty_metre_parcels=[dict(foglio='17', particella='39')],
-                listed_infected_plants=[], rows=['p. 19 row 11'])
+                listed_infected_plants=[], listed_infected_plant_parcels=[], rows=['p. 19 row 11'])
 APULEO = dict(annex='allegato 1/D', owner='APULEO LUCIA', printed='APULEO LUCIA',
               parcels=[dict(foglio='17', particella=p) for p in ('46', '66', '159', '245', '246')],
               fifty_metre_parcels=[dict(foglio='17', particella=p) for p in ('46', '66', '159', '245', '246')],
-              listed_infected_plants=['1455708', '1584865'], rows=['p. 19 row 12'])
+              listed_infected_plants=['1455708', '1584865'],
+              listed_infected_plant_parcels=[dict(plant=p, foglio='17', particella='66')
+                                             for p in ('1455708', '1584865')],
+              rows=['p. 19 row 12'])
 # TAR Bari Sentenza 387/2026 (store f751acc2…2b02): its closure of DDS 96/2023 as `liveness_closures` returns it
 # from the retained disposition reading.
 TAR_387 = dict(
@@ -121,6 +124,8 @@ class AnnexPositions(unittest.TestCase):
         terrapulia = found['TERRAPULIA SOCIETA` A RESPONSABILITA` LIMITATA - SOCIETA` AGRICOLA']
         self.assertEqual(terrapulia['listed_infected_plants'], ['1598862'])
         self.assertEqual(found['BORGHESE ANTONIO']['listed_infected_plants'], ['1602200'])
+        self.assertEqual(found['BORGHESE ANTONIO']['listed_infected_plant_parcels'],
+                         [dict(plant='1602200', foglio='57', particella='270')])
         self.assertEqual(len(found['BORGHESE ANTONIO']['parcels']), 4)
         # A listing that places no recipient names its printed words and is what it is: 50 m hosts (the
         # strip with no parcel number included) with no listed infected plant. No recipient is not a cause.
@@ -384,14 +389,97 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertEqual(attached, {})
         self.assertEqual(unattached[0]['cause'], f"matches 2 annex positions printing owner '{name}'")
 
-    def test_a_position_parcel_no_delivery_names_leaves_the_history_incomplete(self):
-        # BORGHESE ANTONIO's position prints 57/78, 270, 271 and 273; a delivery naming 57/270 alone never decides.
-        supplied = [delivery('fx-pec-borghese', 'BORGHESE ANTONIO', ('57', '270')), history('fx-h-270', '57', '270')]
-        out, _ = self.run_records(supplied)
-        run = out['BORGHESE ANTONIO']
-        self.assertFalse(run['recipients']['BORGHESE ANTONIO']['commencement_records_complete'])
-        self.assertNotEqual(run['recipients']['BORGHESE ANTONIO']['result'].effect, REQUIRED)
-        self.assertTrue(any(r.get('parcels') and 'no supplied delivery names' in r['cause'] for r in run['reported']))
+    # BORGHESE ANTONIO's position prints 57/78, 270, 271 and 273. Listed infected plant 1602200 stands on 57/270;
+    # the other three carry only 50 m hosts, which DDS 18/2024 withdrew. Due in part, only the plant and 57/270 are
+    # obliged: they are measured and counted, and the withdrawn parcels are reported and never counted.
+    def borghese(self, supplied, at=AFTER):
+        out, unattached = self.run_records(supplied, at)
+        self.assertEqual(unattached, [])
+        return out['BORGHESE ANTONIO']
+
+    def test_a_delivery_and_history_on_the_infected_plants_parcel_give_the_direction(self):
+        for label, supplied in (
+                ('57/270 alone', [delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')),
+                                  history('fx-h-270', '57', '270')]),
+                ('all four parcels, history on 57/270 only',
+                 [delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '78'), ('57', '270'), ('57', '271'), ('57', '273')),
+                  history('fx-h-270', '57', '270')])):
+            with self.subTest(label):
+                run = self.borghese(supplied)
+                result = run['recipients']['BORGHESE ANTONIO']
+                self.assertTrue(result['commencement_records_complete'])
+                self.assertEqual(result['works'], [parcel('57', '270')])
+                self.assertEqual(result['result'].effect, REQUIRED)
+                self.assertIn(WITHDRAWAL + ':v1', result['result'].provisions)
+        # The three withdrawn parcels the second delivery names are reported, with the row and its date.
+        withdrawn = [r for r in run['reported'] if r.get('record') == 'fx-pec-b']
+        self.assertEqual([w['particella'] for w in withdrawn[0]['works']], ['78', '271', '273'])
+        self.assertIn(f'withdrawn at this position: {WITHDRAWAL} (effective 2024-03-14)', withdrawn[0]['cause'])
+        # Before the term passes, no direction.
+        before = self.borghese([delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')),
+                                history('fx-h-270', '57', '270', through='2024-03-25')], BEFORE)
+        self.assertNotEqual(before['recipients']['BORGHESE ANTONIO']['result'].effect, REQUIRED)
+
+    def test_a_delivery_and_history_on_the_listed_plant_give_the_direction(self):
+        plant = dict(plant='1602200')
+        run = self.borghese([fixture('fx-pec-b', 'personal-delivery', recipient='BORGHESE ANTONIO',
+                                     occurred=PEC.isoformat(), works=[plant]),
+                             fixture('fx-h-plant', 'history', work=plant, complete_from='2023-10-16',
+                                     complete_through='2024-04-04')])
+        result = run['recipients']['BORGHESE ANTONIO']
+        self.assertTrue(result['commencement_records_complete'])
+        self.assertEqual(result['result'].effect, REQUIRED)
+        self.assertEqual(run['reported'], [])
+
+    def test_a_commencement_on_a_withdrawn_parcel_still_gives_the_direction(self):
+        supplied = [delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')), history('fx-h-270', '57', '270'),
+                    fixture('fx-c-78', 'commencement', work=parcel('57', '78'),
+                            occurred=(PEC + timedelta(days=2)).isoformat())]
+        run = self.borghese(supplied)
+        result = run['recipients']['BORGHESE ANTONIO']
+        self.assertEqual(result['commencements'], {})
+        self.assertEqual(result['result'].effect, REQUIRED)
+        self.assertEqual([(r['record'], r['work']['particella']) for r in run['reported']], [('fx-c-78', '78')])
+        self.assertIn('not counted', run['reported'][0]['cause'])
+        # A commencement on the infected plant's parcel counts.
+        began = fixture('fx-c-270', 'commencement', work=parcel('57', '270'),
+                        occurred=(PEC + timedelta(days=2)).isoformat())
+        moved = self.borghese(supplied + [began])['recipients']['BORGHESE ANTONIO']
+        self.assertEqual(moved['commencements'], {'fx-c-270': PEC + timedelta(days=2)})
+        self.assertIs(moved['result'].truth, False)
+
+    def test_a_delivery_naming_only_a_withdrawn_parcel_does_not_decide(self):
+        run = self.borghese([delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '78')), history('fx-h-78', '57', '78')])
+        self.assertEqual(run['recipients'], {})
+        causes = {r['record']: r['cause'] for r in run['reported']}
+        self.assertTrue(causes['fx-pec-b'].endswith('the delivery names no still-due work and gives no result'))
+        self.assertIn('not counted', causes['fx-h-78'])
+        # Naming the plant's parcel alongside, without its history, leaves the history incomplete.
+        run = self.borghese([delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '78'), ('57', '270')),
+                             history('fx-h-78', '57', '78')])
+        result = run['recipients']['BORGHESE ANTONIO']
+        self.assertFalse(result['commencement_records_complete'])
+        self.assertIsNone(result['result'].truth)
+
+    def test_a_commencement_on_a_withdrawn_parcel_before_the_withdrawal_leaves_the_recipient_unknown(self):
+        # Dated before the row's effective date (14 March 2024, read from the row): whether it commenced the
+        # order's work is a legal question the unit does not decide, and the recipient stays unknown, naming it.
+        early = fixture('fx-c-78', 'commencement', work=parcel('57', '78'),
+                        occurred=datetime(2024, 3, 10, 9, tzinfo=ROME).isoformat())
+        supplied = [delivery('fx-pec-b', 'BORGHESE ANTONIO', ('57', '270')), history('fx-h-270', '57', '270'), early]
+        run = self.borghese(supplied)
+        result = run['recipients']['BORGHESE ANTONIO']['result']
+        self.assertIsNone(result.truth)
+        question = [n for n in result.needs if 'dated before its effective date 2024-03-14' in n]
+        self.assertEqual(len(question), 1)
+        self.assertIn('legal question D does not decide', question[0])
+        self.assertEqual([r['record'] for r in run['reported']], ['fx-c-78'])
+        self.assertEqual(run['reported'][0]['cause'], question[0])
+        # A commencement on the still-due work decides whichever way the question is answered.
+        began = fixture('fx-c-270', 'commencement', work=parcel('57', '270'),
+                        occurred=(PEC + timedelta(days=2)).isoformat())
+        decided = self.borghese(supplied + [began])['recipients']['BORGHESE ANTONIO']['result']
+        self.assertIs(decided.truth, False)
 
 
 STORE = store_root(ROOT)

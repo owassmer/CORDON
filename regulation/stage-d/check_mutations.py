@@ -40,7 +40,7 @@ CODE = (
     ('remove the no-position rule', 'cordon_d.prescriptions',
      'if partial and predicate == WORK and not positioned:', 'if False:',
      'test_prescriptions.StatedTermRule.test_in_part_never_makes_a_record_without_a_position_due'),
-    ('let a row that cannot change dueness gate it', 'cordon_d.prescriptions',
+    ('let a row that neither bears on dueness nor corrects gate it', 'cordon_d.prescriptions',
      '        if not gates_dueness(snapshot.version(sid, at)):\n            continue\n', '',
      'test_prescriptions.StatedTermRule.test_a_96_letter_a_holder_reads_due_in_part'),
     ('let a correction or supplement that bears on no dueness outcome not gate it', 'cordon_d.prescriptions',
@@ -54,6 +54,11 @@ CODE = (
      '        if stated is not None and due.truth is True:\n',
      '        if stated is not None and due.truth is not None:\n',
      'test_annex_positions.AnnexPositions.test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due'),
+    ('count every commencement on a position due in part', 'cordon_d.case_prescriptions',
+     '        counted = sorted(w for w in performed if _still_due(w, share)) if share else works\n',
+     '        counted = sorted(performed) if share else works\n',
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_a_commencement_on_a_withdrawn_parcel_still_gives_the_direction'),
 )
 
 
