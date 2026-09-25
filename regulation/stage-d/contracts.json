@@ -115,6 +115,13 @@
             ]
           },
           {
+            "callable": "cordon_d.case_prescriptions.recipient_results",
+            "parameters": [
+              "at",
+              "evaluated_at"
+            ]
+          },
+          {
             "callable": "cordon_d.notice_routes.c_result",
             "parameters": [
               "at"
