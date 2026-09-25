@@ -493,16 +493,13 @@ def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, com
 
 
 # Supplied Osservatorio records (`osservatorio-records`): the operator's delivery, commencement,
-# removal and history records, and posting records, as a list of JSON objects.
-MASS = 'IT-L241-A21BIS:Art.21-bis(1):mass-publicity-route'
-_MASS_GROUND = 'the act states its own ground for reaching its recipients by public posting'
-_MASS_ANNULLED = 'a court has annulled the act on its stated ground for public posting'
+# removal and history records, as a list of JSON objects. Postings are public records (PR #15's route).
 _COMMON = {'record', 'kind', 'order', 'source', 'selector', 'reading'}
 _KINDS = {
-    # A delivery to the recipient the record names, with the works (parcels or plants) it names for them.
+    # The delivery receipt of the order to the recipient the record names; `occurred` is the delivery
+    # instant, never the acceptance receipt's. `works` (parcels or plants) is the operator's standing
+    # assertion of what that recipient is obliged to.
     'personal-delivery': {'recipient', 'occurred', 'works'},
-    # A posting of the order: it names no recipient; `complete` says the record states the whole interval.
-    'posting': {'publisher', 'start', 'end', 'complete'},
     # Performance on the work the record names, by whoever performed it.
     'commencement': {'work', 'occurred'},
     'removal': {'work', 'occurred'},
@@ -511,13 +508,12 @@ _KINDS = {
 }
 
 
-def _moment(text, *, day_end=None):
-    """A printed ISO date stays a date; an ISO instant must carry its offset. `day_end` closes a date."""
+def _moment(text):
+    """A printed ISO date stays a date; an ISO instant must carry its offset."""
     if text is None:
         return None
     if len(text) == 10:
-        day = date.fromisoformat(text)
-        return day if day_end is None else datetime.combine(day, datetime.max.time(), day_end)
+        return date.fromisoformat(text)
     moment = datetime.fromisoformat(text)
     if moment.tzinfo is None:
         raise ValueError(f'A supplied instant needs its offset: {text}')
@@ -539,8 +535,8 @@ def supplied_records(entries):
     Each record becomes an `AdministrativeEvent` whose `Support` cites its controlled
     source. A record carries only its kind's fields and an optional `fixture` mark
     (test records): no order-text predicate, notification instant or completeness
-    flag can ride along. A posting names no recipient, so it never reaches the
-    personal-communication input.
+    flag can ride along. A personal delivery is the delivery receipt only; an
+    acceptance receipt is not supplied as one.
     """
     from .events import AdministrativeEvent
     from .evidence import Support
@@ -558,10 +554,6 @@ def supplied_records(entries):
         if kind == 'personal-delivery':
             occurred = _moment(entry['occurred'])
             works = tuple(dict.fromkeys(_work(w) for w in entry['works']))
-        elif kind == 'posting':
-            occurred, works = _moment(entry['start']), ()
-            if not isinstance(entry['complete'], bool):
-                raise ValueError('A posting record states whether its interval is whole')
         elif kind == 'history':
             occurred, works = _moment(entry['complete_from']), (_work(entry['work']),)
         else:
@@ -571,54 +563,35 @@ def supplied_records(entries):
     return records
 
 
-def _periods(snapshot, basis):
-    """The period the order's publicity forms print, when they all print one (PR #15's reading, unchanged)."""
-    words = snapshot.conventions['clock.unit_words']
-    stated = [f['duration'] for f in basis['forms'] if f['duration']]
-    meant = {(re.sub(r'\D', '', d['number'].split('(')[0]), words.get(' '.join(d['unit_word'].lower().split())))
-             for d in stated}
-    if len(meant) != 1 or None in next(iter(meant)):
-        return None
-    return stated[0]['number'], stated[0]['unit_word']
+def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, **dueness):
+    """C's result per (clause, recipient named by a supplied delivery record).
 
-
-def supplied_publicity(snapshot, at, basis, posting, *, annulled, evaluated_at, zone):
-    """The mass-publicity branch's facts and notice day from the order's own basis and one supplied posting."""
-    from cordon_c.bindings import mass_publicity_facts
-    from cordon_c.core import Evaluation as _E
-    vid = snapshot.version(MASS, at)['provision_version_id']
-
-    def unsupplied(text):
-        return _E(None, needs=frozenset({f'predicate: {vid} :: {text}'}))
-    return mass_publicity_facts(
-        snapshot, at, ground_stated=True if basis['stated_ground'] else unsupplied(_MASS_GROUND),
-        annulled_on_ground=unsupplied(_MASS_ANNULLED) if annulled is None else annulled,
-        posting_start=posting['event'].occurred,
-        postings={posting['publisher']: (posting['event'].occurred, _moment(posting['end']))},
-        postings_complete=posting['complete'], stated_period=_periods(snapshot, basis),
-        evaluated_at=evaluated_at, zone=zone)
-
-
-def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, calendar, basis=None,
-                      publicity_annulment=None, **dueness):
-    """C's result per (clause, recipient named by a supplied record), beside the clause's cohort result.
-
-    The cohort result is `c_result` on cohort evidence only; no supplied record
-    reaches it. For each recipient a delivery record names, the caller supplies
-    events only: the delivery on the communication predicate, and a supplied
-    posting through the mass-publicity row with the order's own basis (PR #15's
-    notice-route reading, unchanged). C's `notice_instant` picks the instant.
-    Commencement and removal count by the work the record prints, for every
-    recipient a supplied record obliges to that work; completeness holds for a
-    recipient only when every such work has a stated history covering the order's
-    adoption through the evaluation. Nothing absent is filled: what cannot be joined
-    or supplied is reported. `publicity_annulment` is the held court fact on the
-    act's stated ground, when one is held; otherwise it stays unknown.
+    The clause's cohort result stays `c_result` on cohort evidence only; no
+    supplied record reaches it. For each recipient a delivery record names, the
+    caller supplies events only: the delivery on the communication predicate. C's
+    `notice_instant` picks the instant. Commencement and removal count by the work
+    the record prints, for every recipient a supplied record obliges to that work.
+    Completeness holds for a recipient only when every such work has a stated
+    history running from the order's adoption, or earlier, through C's deadline:
+    `clock_boundary` on the notification C returned, with the order's stated term,
+    zone and calendar. A history stated as complete through a moment later than the
+    evaluation is refused. Nothing absent is filled: what cannot be joined or
+    supplied is reported. A recipient reached only by posting has no result here.
     """
+    from cordon_c.quantities import clock_boundary
+    from cordon_c.temporal import end_of_day, utc
     act = record.get('applied_by') or record['instrument']
     records = supplied_records(supplied)
     if any(r['order'] != act for r in records):
         raise ValueError(f'A supplied record names another order than {act}')
+    today = evaluated_at.astimezone(zone).date()
+    for r in records:
+        if r['kind'] != 'history':
+            continue
+        through = _moment(r['complete_through'])
+        if through > (evaluated_at if isinstance(through, datetime) else today):
+            raise ValueError(f"Record {r['record']} states a history complete through {r['complete_through']}, "
+                             f'later than the evaluation at {evaluated_at.isoformat()}')
     reported, deliveries, obliged, performed, histories, undated = [], {}, {}, {}, {}, {}
     for r in records:
         if r['kind'] == 'personal-delivery':
@@ -636,15 +609,6 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
             performed.setdefault(r['works'][0], {})[r['record']] = r['event'].occurred
         elif r['kind'] == 'history':
             histories.setdefault(r['works'][0], []).append(r)
-    postings = [r for r in records if r['kind'] == 'posting']
-    posting = postings[0] if len(postings) == 1 else None
-    if len(postings) > 1:
-        reported.append(dict(records=[p['record'] for p in postings],
-                             cause='more than one posting record; the mass-publicity branch is not supplied'))
-    if posting and basis is None:
-        reported.append(dict(record=posting['record'], cause='no notice-route reading of the order; the '
-                                                                  'mass-publicity branch is not supplied'))
-        posting = None
     everyone = set().union(*obliged.values()) if obliged else set()
     for work in sorted(set(performed) | set(histories) | set(undated)):
         if work not in everyone:
@@ -654,12 +618,15 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
                                  cause='no supplied record obliges a recipient to this work as printed'))
     adopted = datetime.combine(date.fromisoformat(record['adopted']), time(), zone)
 
-    def covers(history):
-        """The history is stated from the order's adoption (or earlier) through the evaluation time."""
+    def covers(history, deadline):
+        """The history is stated from the order's adoption (or earlier) through C's (exclusive) deadline.
+
+        A history through a printed day covers that whole day (C's `end_of_day`)."""
         start = history['event'].occurred
         start = start if isinstance(start, datetime) else datetime.combine(start, time(), zone)
-        end = _moment(history['complete_through'], day_end=zone)
-        return start <= adopted and end >= evaluated_at
+        through = _moment(history['complete_through'])
+        through = through if isinstance(through, datetime) else end_of_day(through, zone)
+        return utc(start) <= utc(adopted) and utc(through) >= utc(deadline)
 
     vid = snapshot.version(RULE, at)['provision_version_id']
     common = dict(dueness, evaluated_at=evaluated_at, zone=zone, calendar=calendar)
@@ -673,24 +640,25 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
         else:
             reported.append(dict(recipient=recipient, records=sorted(n for v in instants.values() for n in v),
                                  cause='deliveries at different instants; the personal branch is not supplied'))
-        if posting:
-            facts, day = supplied_publicity(snapshot, at, basis, posting, annulled=publicity_annulment,
-                                    evaluated_at=evaluated_at, zone=zone)
-            notice.update(facts)
-            notice_instants[MASS] = day
         works = sorted(obliged.get(recipient, ()))
         commencements = {name: moment for work in works for name, moment in performed.get(work, {}).items()}
-        complete = bool(works) and all(any(covers(h) for h in histories.get(w, ())) and w not in undated
-                                       for w in works)
-        facts, notification = _c_facts(snapshot, record, at, notice=notice or None, notice_instants=notice_instants,
-                                       commencements=commencements, commencement_records_complete=complete,
-                                       **_dueness_defaults(common))
+        options = dict(notice=notice or None, notice_instants=notice_instants, commencements=commencements,
+                       **_dueness_defaults(common))
+        # C's notification for this recipient first; the history bound is C's deadline from it.
+        _, notification = _c_facts(snapshot, record, at, commencement_records_complete=False, **options)
+        deadline, complete = None, False
+        if notification is not None and record['stated_term'] is not None:
+            deadline = clock_boundary(snapshot, CLOCK, at, notification, zone=zone, calendar=calendar,
+                                      stated_term=record['stated_term'])
+            complete = bool(works) and all(any(covers(h, deadline) for h in histories.get(w, ()))
+                                           and w not in undated for w in works)
+        facts, notification = _c_facts(snapshot, record, at, commencement_records_complete=complete, **options)
         results[recipient] = dict(result=evaluate(snapshot, RULE, at, facts), notification=notification,
-                                  works=[dict(w) for w in works], commencements=commencements,
+                                  deadline=deadline, works=[dict(w) for w in works], commencements=commencements,
                                   commencement_records_complete=complete,
                                   records=sorted(n for v in instants.values() for n in v),
                                   fixture=any(r['fixture'] for r in records))
-    return dict(cohort=c_result(snapshot, record, at, **dueness), recipients=results, reported=reported)
+    return dict(recipients=results, reported=reported)
 
 
 def _dueness_defaults(common):

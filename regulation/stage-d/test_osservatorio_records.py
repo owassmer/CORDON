@@ -9,6 +9,8 @@ and \"immediatamente esecutivo\" (p. 4). The page text is the transport's,
 shortened to the cited lines. Its recitals (p. 1) name the owner Nitti Vincenzo
 and the tenant Laserra of Triggiano fg 4 p.lle 158-159-296-243.
 
+Postings are public records (PR #15's route); no posting record is supplied here.
+
 Every supplied record here is a FIXTURE (`fixture: true`): its instants, sources and
 the parcels each recipient is obliged to are invented in the shape of those
 recitals. None is a fact about the order. Settled A results for the order's two
@@ -24,9 +26,7 @@ from cordon_c.bindings import leaves
 from cordon_c.core import Evaluation, Snapshot, evaluate
 from cordon_d import case_prescriptions
 from cordon_d.calendar import national_calendar
-from cordon_d.case_prescriptions import (COMMUNICATED, MASS, PrescriptionReading, c_result, recipient_results,
-                                         supplied_publicity, supplied_records, validate)
-from cordon_d.notice_routes import mass_publicity_basis, validate as validate_route
+from cordon_d.case_prescriptions import COMMUNICATED, PrescriptionReading, c_result, recipient_results, supplied_records, validate
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
@@ -86,34 +86,15 @@ READING = dict(
         commitment='commits', coercive_population=dict(literal='delle piante infette', resolved='delle piante infette'),
         executor='ARIF', limits=[], support=CLAUSE_SUPPORT)],
     relationships=[], issues=[])
-POSTED = ('Al comune di Triggiano (BA), affinché provveda con urgenza dalla data di invio del presente atto\n '
-          'all’affissione all’Albo Pretorio della presente determinazione per la durata di 7 (sette) giorni '
-          'naturali e\n consecutivi')
-ROUTE = dict(grounds=[], forms=[
-    dict(literal='il presente provvedimento è notificato ai proprietari/conduttori attraverso la pubblicazione '
-                 'all’albo\n pretorio per 7 gg consecutivi',
-         duration=dict(number='7', unit_word='gg consecutivi', literal='per 7 gg consecutivi'),
-         effect='è notificato ai proprietari/conduttori', part='operative',
-         support=[dict(page=3, quote='il presente provvedimento è notificato ai proprietari/conduttori attraverso '
-                                     'la pubblicazione all’albo\n pretorio per 7 gg consecutivi e alla loro PEC '
-                                     'qualora presente')]),
-    dict(literal='alla loro PEC qualora presente', duration=None, effect='è notificato ai proprietari/conduttori',
-         part='operative', support=[dict(page=3, quote='alla loro PEC qualora presente')]),
-    dict(literal=POSTED, duration=dict(number='7', unit_word='giorni naturali e\n consecutivi',
-                                       literal='per la durata di 7 (sette) giorni naturali e\n consecutivi'),
-         effect='decorso il settimo giorno dalla\n data di pubblicazione assume valore di notifica ai '
-                'proprietari/conduttori interessato all’ estirpazioni',
-         part='operative', support=[dict(page=4, quote=POSTED + '. Tale affissione')])],
-    issues=[])
-# DDS 63/2026's own stated ground (test_notice_routes), used only to make a counterfactual stated-ground basis.
-GROUND = ('tenuto conto dell’irreperibilità di alcuni destinatari e della gravosità per l’amministrazione di '
-          'notificare i provvedimenti ai singoli beneficiari')
-
 AT = date(2025, 7, 1)
 PEC = datetime(2025, 7, 1, 10, 0, tzinfo=ROME)
 # Independent expectation: ten calendar days from a Tuesday 1 July notice end on Friday 11 July.
 DEADLINE = datetime(2025, 7, 11, 23, 59, 59, 999999, tzinfo=ROME)
+# C's clock_boundary returns the exclusive end of that last day.
+BOUNDARY = datetime(2025, 7, 12, tzinfo=ROME)
 AFTER = datetime(2025, 7, 14, 12, 0, tzinfo=ROME)
+# The reviewers' evaluation time, long after the deadline.
+LATER = datetime(2026, 9, 25, 2, 0, tzinfo=ROME)
 REDUCED = {'commencement evidence through the source deadline', *(f'result of {d}' for d in DELTAS)}
 
 
@@ -139,20 +120,13 @@ def history(record, particella, start='2025-06-27', through='2025-07-14'):
     return fixture(record, 'history', work=parcel(particella), complete_from=start, complete_through=through)
 
 
-def posting(record='posting', start='2025-07-02', end='2025-07-09'):
-    return fixture(record, 'posting', publisher='Comune di Triggiano', start=start, end=end, complete=True)
-
-
 class OsservatorioRecords(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.s = Snapshot.load(ROOT)
         validate(READING, PAGES)
-        validate_route(ROUTE, PAGES)
         reading = PrescriptionReading(dict(request_sha256='0' * 64, request=dict(sources=[SOURCE]), reading=READING))
         cls.record = next(reading.records(cls.s))
-        cls.basis = mass_publicity_basis(dict(request_sha256='0' * 64, request=dict(sources=[SOURCE]),
-                                              reading=ROUTE), instrument=ORDER)
         cls.settled = {}
         for sid in DELTAS:
             row = cls.s.version(sid, AT)
@@ -163,16 +137,14 @@ class OsservatorioRecords(unittest.TestCase):
     def run_records(self, supplied, *, evaluated_at=AFTER, settled=False, **options):
         extra = dict(governing_results=self.settled) if settled else {}
         return recipient_results(self.s, self.record, AT, supplied, evaluated_at=evaluated_at, zone=ROME,
-                                 calendar=national_calendar(), basis=options.pop('basis', self.basis),
-                                 **extra, **options)
+                                 calendar=national_calendar(), **extra, **options)
 
-    def test_the_registered_clause_and_route_are_read_as_PR15_reads_them(self):
+    def test_the_registered_clause_is_read_as_PR15_reads_it(self):
         self.assertEqual(self.record['instrument'], ORDER)
         self.assertEqual(set(self.record['governing_A_references']), set(DELTAS))
         self.assertEqual(self.record['stated_term'], ('10', 'giorni'))
-        self.assertFalse(self.basis['ground_stated'])
 
-    def test_with_no_record_C_names_personal_communication_and_a_complete_posting_gives_no_notice(self):
+    def test_with_no_record_C_names_personal_communication(self):
         cohort = c_result(self.s, self.record, AT)
         self.assertIsNone(cohort.truth)
         vid = self.s.version(case_prescriptions.RULE, AT)['provision_version_id']
@@ -181,17 +153,7 @@ class OsservatorioRecords(unittest.TestCase):
             self.assertIn(f'predicate: {vid} :: {need}', cohort.needs)
         self.assertTrue({f'result of {d}' for d in DELTAS} <= cohort.needs)
         empty = self.run_records([])
-        self.assertEqual((empty['recipients'], empty['reported']), ({}, []))
-        self.assertEqual(empty['cohort'], cohort)
-        # A complete posting: A's mass-publicity branch has no ground of the act's own, so no notice day.
-        record = supplied_records([posting()])[0]
-        facts, day = supplied_publicity(self.s, AT, self.basis, record, annulled=False, evaluated_at=AFTER,
-                                       zone=ROME)
-        self.assertIsNone(day)
-        result = c_result(self.s, self.record, AT, notice=facts, notice_instants={MASS: day}, evaluated_at=AFTER,
-                          zone=ROME, calendar=national_calendar())
-        self.assertIsNone(result.truth)
-        self.assertIn(f'predicate: {vid} :: {COMMUNICATED}', result.needs)
+        self.assertEqual(empty, dict(recipients={}, reported=[]))
 
     def test_a_pec_delivery_gives_its_recipient_notice_despite_the_immediate_effect_clause(self):
         run = self.run_records([delivery('pec-nitti', 'Nitti Vincenzo', '158')])
@@ -200,7 +162,10 @@ class OsservatorioRecords(unittest.TestCase):
         self.assertTrue(nitti['fixture'])
         self.assertIsNone(nitti['result'].truth)
         self.assertEqual(nitti['result'].needs, REDUCED)
-        self.assertEqual(run['cohort'], c_result(self.s, self.record, AT))
+        self.assertEqual(nitti['deadline'], BOUNDARY)
+        self.assertNotIn('cohort', run)
+        vid = self.s.version(case_prescriptions.RULE, AT)['provision_version_id']
+        self.assertIn(f'predicate: {vid} :: {COMMUNICATED}', c_result(self.s, self.record, AT).needs)
         # A commencement on the recipient's work before the deadline defeats the direction.
         begun = self.run_records([delivery('pec-nitti', 'Nitti Vincenzo', '158'),
                                   performed('verbale-1', '158', PEC + timedelta(days=3))], settled=True)
@@ -216,36 +181,6 @@ class OsservatorioRecords(unittest.TestCase):
                                  evaluated_at=DEADLINE - timedelta(days=1), settled=True)
         self.assertEqual(early['recipients']['Nitti Vincenzo']['result'].effect,
                          'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
-
-    def test_a_posting_reaches_notice_only_through_the_mass_publicity_branch(self):
-        stated = mass_publicity_basis(dict(request_sha256='0' * 64, request=dict(sources=[SOURCE]), reading=dict(
-            ROUTE, grounds=[dict(literal=GROUND, about='this-act', part='operative',
-                                 support=[dict(page=3, quote='alla loro PEC qualora presente')])])),
-            instrument=ORDER)
-        # The two stated forms print 7 days in B's calendar-day unit; posting 2-8 July completes it, notice on 9 July.
-        later = datetime(2025, 7, 10, 9, 0, tzinfo=ROME)
-        supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158', occurred=later), posting()]
-        run = self.run_records(supplied, basis=stated, publicity_annulment=False)
-        self.assertEqual(run['recipients']['Nitti Vincenzo']['notification'], date(2025, 7, 9))
-        flipped = self.run_records(list(reversed(supplied)), basis=stated, publicity_annulment=False)
-        self.assertEqual(flipped['recipients']['Nitti Vincenzo']['notification'], date(2025, 7, 9))
-        # Without a held court fact on the stated ground the posting branch stays unknown: the PEC instant stands.
-        open_court = self.run_records(supplied, basis=stated)
-        self.assertEqual(open_court['recipients']['Nitti Vincenzo']['notification'], later)
-        # With no ground of the order's own, the same posting gives no notice.
-        plain = self.run_records(supplied, publicity_annulment=False)
-        self.assertEqual(plain['recipients']['Nitti Vincenzo']['notification'], later)
-        # A posting names no recipient: it cannot reach the personal-communication input. With the personal
-        # branch unsupplied (two delivery instants), a complete posting of a no-ground order gives no notice.
-        unsupplied = self.run_records([delivery('pec-a', 'Nitti Vincenzo', '158'), posting(),
-                                       delivery('pec-b', 'Nitti Vincenzo', '158', occurred=later)],
-                                      publicity_annulment=False)
-        self.assertIsNone(unsupplied['recipients']['Nitti Vincenzo']['notification'])
-        self.assertIn(COMMUNICATED, ' '.join(unsupplied['recipients']['Nitti Vincenzo']['result'].needs))
-        with self.assertRaises(ValueError):
-            supplied_records([dict(posting(), recipient='Nitti Vincenzo')])
-        with self.assertRaises(ValueError):
-            supplied_records([dict(delivery('pec-nitti', 'Nitti Vincenzo', '158'), kind='posting')])
 
     def test_co_holders_are_noticed_apart_and_share_the_works_commencement(self):
         supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158'),
@@ -283,8 +218,10 @@ class OsservatorioRecords(unittest.TestCase):
                                  delivery('pec-nitti', 'Nitti Vincenzo', '158', occurred=PEC - timedelta(days=1)),
                                  performed('verbale-158', '158', PEC)], settled=True)
         self.assertEqual(more['recipients']['Laserra'], alone['recipients']['Laserra'])
-        self.assertEqual(more['cohort'], alone['cohort'])
-        self.assertEqual(more['cohort'], c_result(self.s, self.record, AT, governing_results=self.settled))
+        # The cohort result is c_result on cohort evidence; it takes no supplied record and names personal notice.
+        cohort = c_result(self.s, self.record, AT, governing_results=self.settled)
+        self.assertIsNone(cohort.truth)
+        self.assertIn(COMMUNICATED, ' '.join(cohort.needs))
         self.assertIs(more['recipients']['Nitti Vincenzo']['result'].truth, False)
 
     def test_refusals(self):
@@ -300,11 +237,22 @@ class OsservatorioRecords(unittest.TestCase):
                 supplied_records([dict(base, **extra)])
         with self.assertRaises(ValueError):
             supplied_records([dict(base, occurred='2025-07-01T10:00:00')])  # an instant without its offset
-        # Completeness is never defaulted: a history that starts after adoption or stops before evaluation fails.
-        for late in (history('storia-158', '158', start='2025-06-30'),
-                     history('storia-158', '158', through='2025-07-12')):
-            result = self.run_records([base, late], settled=True)['recipients']['Nitti Vincenzo']
+        # Completeness is never defaulted: a history that starts after adoption or stops before C's deadline
+        # (11/07, from the 1/07 delivery) fails.
+        for short in (history('storia-158', '158', start='2025-06-30'),
+                      history('storia-158', '158', through='2025-07-10')):
+            result = self.run_records([base, short], settled=True)['recipients']['Nitti Vincenzo']
             self.assertFalse(result['commencement_records_complete'])
+            self.assertEqual(result['result'].needs, {'commencement evidence through the source deadline'})
+        # A history stated through a moment later than the evaluation is refused.
+        for future in (history('storia-158', '158', through='2025-07-15'),
+                       history('storia-158', '158', through=(AFTER + timedelta(hours=1)).isoformat())):
+            with self.subTest(future=future['complete_through']), self.assertRaises(ValueError):
+                self.run_records([base, future], settled=True)
+        # A posting is not a supplied record kind: postings are PR #15's public route.
+        with self.assertRaises(ValueError):
+            supplied_records([fixture('posting', 'posting', publisher='Comune di Triggiano', start='2025-07-02',
+                                      end='2025-07-09', complete=True)])
         # A commencement joins a work only by the same printed comune, foglio and particella.
         for other in (dict(comune='TRIGGIANO', foglio='4', particella='158'),
                       dict(comune='Triggiano', foglio='04', particella='158'),
@@ -328,6 +276,34 @@ class OsservatorioRecords(unittest.TestCase):
         self.assertEqual((nameless['recipients'], nameless['reported'][0]['cause']), ({}, 'names no recipient'))
         with self.assertRaises(ValueError):
             self.run_records([dict(base, order='REG-PUGLIA-U181-DIR-2024-00188')])
+
+    def test_a_history_through_Cs_deadline_decides_at_any_later_evaluation(self):
+        # The deadline is C's, from the notification C returns: 1/07 + 10 days ends 11/07.
+        for through in ('2025-07-11', '2025-07-12', '2025-07-15'):
+            for evaluated_at in (AFTER + timedelta(days=1), LATER, LATER + timedelta(days=1)):
+                with self.subTest(through=through, evaluated_at=evaluated_at):
+                    run = self.run_records([delivery('pec-nitti', 'Nitti Vincenzo', '158'),
+                                            history('storia-158', '158', through=through)],
+                                           evaluated_at=evaluated_at, settled=True)
+                    nitti = run['recipients']['Nitti Vincenzo']
+                    self.assertEqual(nitti['deadline'], BOUNDARY)
+                    self.assertTrue(nitti['commencement_records_complete'])
+                    self.assertEqual(nitti['result'].effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        # A later notification moves the deadline and the bound with it: a PEC on 10/07 runs to 21/07 (Monday).
+        later = datetime(2025, 7, 10, 10, 0, tzinfo=ROME)
+        short = self.run_records([delivery('pec-nitti', 'Nitti Vincenzo', '158', occurred=later),
+                                  history('storia-158', '158', through='2025-07-15')], evaluated_at=LATER,
+                                 settled=True)['recipients']['Nitti Vincenzo']
+        self.assertEqual(short['deadline'], datetime(2025, 7, 22, tzinfo=ROME))
+        self.assertFalse(short['commencement_records_complete'])
+        self.assertEqual(short['result'].needs, {'commencement evidence through the source deadline'})
+        # A commencement after the deadline does not defeat a history complete through it.
+        run = self.run_records([delivery('pec-nitti', 'Nitti Vincenzo', '158'),
+                                history('storia-158', '158', through='2025-07-15'),
+                                performed('verbale-late', '158', DEADLINE + timedelta(days=2))],
+                               evaluated_at=LATER, settled=True)
+        self.assertEqual(run['recipients']['Nitti Vincenzo']['result'].effect,
+                         'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
 
     def test_the_notification_is_the_one_C_returns_for_that_recipient(self):
         from cordon_c.bindings import notice_instant

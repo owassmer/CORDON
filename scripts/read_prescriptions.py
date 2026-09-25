@@ -191,18 +191,16 @@ def summary(evaluation):
     return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
 
 
-def per_recipient(results, supplied, snapshot, store, today, closures, changes):
+def per_recipient(results, supplied, snapshot, today, closures, changes):
     """C per (clause, recipient a supplied record names), attached to each clause record beside its cohort `c`.
 
     Supplied records are grouped by the order they name; each clause record of that
-    order gets `per_recipient` and `per_recipient_reported`. The order's notice-route reading (replayed)
-    supplies its own mass-publicity basis for a supplied posting. Returns what reached
-    no held order.
+    order gets `per_recipient` and `per_recipient_reported`. Returns what reached no
+    held order.
     """
     from zoneinfo import ZoneInfo
     from cordon_d.calendar import national_calendar
     from cordon_d.case_prescriptions import recipient_results
-    from cordon_d.notice_routes import mass_publicity_basis, read_notice_route
     zone, calendar = ZoneInfo('Europe/Rome'), national_calendar()
     evaluated_at = datetime.now(zone)
     by_order = {}
@@ -216,12 +214,8 @@ def per_recipient(results, supplied, snapshot, store, today, closures, changes):
                 continue
             reached.add(act)
             try:
-                basis = mass_publicity_basis(read_notice_route(record['source'], store), instrument=act)
-            except Exception:  # no validated notice-route reading: a supplied posting is reported, not used
-                basis = None
-            try:
                 run = recipient_results(snapshot, record, today, by_order[act], evaluated_at=evaluated_at, zone=zone,
-                                        calendar=calendar, basis=basis, closures=closures.get(record['instrument'], ()),
+                                        calendar=calendar, closures=closures.get(record['instrument'], ()),
                                         stated_changes=changes.get(record['instrument'], ()))
             except Exception as error:  # a refused record set is reported whole, never partly applied
                 record['per_recipient_cause'] = f'{type(error).__name__}: {error}'[:600]
@@ -371,7 +365,7 @@ def main():
     results.append(dict(held_acts=held_report))
     if arguments.records:
         results.append(dict(supplied_records=per_recipient(results, json.loads(Path(arguments.records).read_text()),
-                                                           snapshot, store, today, closures, changes)))
+                                                           snapshot, today, closures, changes)))
     if arguments.out:
         Path(arguments.out).write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))
     if arguments.events:

@@ -33,31 +33,8 @@ def instrument_of(digest, store):
 _WORKER = {}
 
 
-def _start_worker(postings=None, records=None):
-    _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT), postings=postings or {},
-                   records=records or {})
-
-
-def supplied_posting_results(snapshot, basis, at, supplied):
-    """A's Art. 21-bis row for each supplied posting record of this order, with the order's own basis.
-
-    Only posting records are read here; deliveries and performance reach C per
-    recipient through `read_prescriptions.py --records`. The court fact on the stated
-    ground is not held, so it stays unknown and is named.
-    """
-    from datetime import datetime
-    from zoneinfo import ZoneInfo
-    from cordon_c.core import evaluate
-    from cordon_d.case_prescriptions import MASS, supplied_publicity, supplied_records
-    zone = ZoneInfo('Europe/Rome')
-    evaluated_at = datetime.now(zone)
-    out = []
-    for record in supplied_records([r for r in supplied if r.get('kind') == 'posting']):
-        facts, day = supplied_publicity(snapshot, at, basis, record, annulled=None, evaluated_at=evaluated_at,
-                                        zone=zone)
-        out.append(dict(record=record['record'], fixture=record['fixture'], notice_day=day,
-                        c=summary(evaluate(snapshot, MASS, at, facts))))
-    return out
+def _start_worker(postings=None):
+    _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT), postings=postings or {})
 
 
 POSTING_KINDS = {'municipal-publication-start': 'start', 'municipal-publication-end': 'end',
@@ -123,9 +100,6 @@ def read_one(item, options, today):
         basis = mass_publicity_basis(response, instrument=instrument_of(digest, store) or identity)
         postings = _WORKER['postings'].get(basis['instrument'], [])
         entry.update(basis=basis, postings=postings, c=summary(c_result(snapshot, basis, today, postings=postings)))
-        supplied = _WORKER['records'].get(basis['instrument'], ())
-        if supplied:
-            entry['supplied_postings'] = supplied_posting_results(snapshot, basis, today, supplied)
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -145,16 +119,11 @@ def main():
                         help='sources read at once; each is still one bounded request')
     parser.add_argument('--postings', nargs='*', default=(),
                         help='event-reader outputs whose posting intervals reach C as held postings')
-    parser.add_argument('--records', help='supplied Osservatorio records (a JSON list); their postings reach '
-                                          "A's mass-publicity row with the order's own basis")
     arguments = parser.parse_args()
     if arguments.workers < 1:
         parser.error('--workers must be at least 1')
     postings = load_postings(arguments.postings)
-    records = {}
-    for item in json.loads(Path(arguments.records).read_text()) if arguments.records else ():
-        records.setdefault(item.get('order'), []).append(item)
-    _start_worker(postings, records)
+    _start_worker(postings)
     today = date.today()
     selected = [item for item in population()
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
@@ -176,7 +145,7 @@ def main():
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker,
-                                 initargs=(postings, records)) as pool:
+                                 initargs=(postings,)) as pool:
             futures = {pool.submit(read_one, item, options, today): index
                        for index, item in enumerate(selected)}
             for future in as_completed(futures):
