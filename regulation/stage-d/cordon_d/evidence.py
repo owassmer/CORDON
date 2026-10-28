@@ -40,6 +40,11 @@ def instant(value: datetime) -> datetime:
     return value
 
 
+def run_instant(value: str) -> datetime:
+    """A run's stated knowledge cutoff, read from its ISO text; a naive time is refused."""
+    return instant(datetime.fromisoformat(value))
+
+
 @dataclass(frozen=True)
 class Source:
     identity: str
@@ -141,7 +146,10 @@ class Evidence:
                              f'{self.deferred_consumers[consumer_version]}')
 
     def view(self, *, context: str, event_date: date, known_through: datetime,
-             permitted_controlled_sources: frozenset[str] = frozenset()):
+             permitted_controlled_sources: frozenset[str]):
+        # The run states who is asking: an empty grant is a statement, never a default.
+        if not isinstance(permitted_controlled_sources, frozenset):
+            raise TypeError('Evaluation requires the run to state its controlled-source grant')
         return EvidenceView(self, context, event_date, instant(known_through), permitted_controlled_sources)
 
 

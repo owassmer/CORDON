@@ -9,8 +9,7 @@
       "contracts": [
         "official-finding",
         "survey-performance",
-        "plant-population",
-        "evaluation-context"
+        "plant-population"
       ],
       "routes": [
         "https://dati.puglia.it/ckan/dataset/dati-monitoraggio-xylella-fastidiosa",
@@ -33,11 +32,12 @@
       ],
       "routes": [
         "Regional plans and national programmes retained as Stage A sources under regulation/",
-        "EU quarantine-pest and host listings retained under regulation/closure/eu/"
+        "EU quarantine-pest and host listings retained under regulation/closure/eu/",
+        "Priority-pest status: Stage A's EU 2019/1702 dependency (regulation/stage-a/dependency-manifest.csv row EU2019-1702). The jurisdiction manifest resolves it (RESOLVED_ACCEPTED_EU_DEPENDENCY) for IT-DLGS-19-2021:Art.26(1):prepare-emergency-plan:v1 only; IT-DLGS-19-2021:Art.30(2):v1 has no EU 2019/1702 edge there, its declared dependency being Art.28(3)"
       ],
       "population": "The plan and listing versions reached by accepted A provisions; their stated values are already Stage B parameters.",
-      "reader": "Stage B parameters supply the stated values; the finite population and strata per campaign are established with the plant and surface population row",
-      "open": "Establish the per-campaign target population and strata when the plant and surface population row exists."
+      "reader": "Stage B parameters supply the stated survey values; pest-classification's two priority-pest predicates are owned by Stage A's EU2019-1702 dependency; D adds no reader and keeps no copy of the list; the finite population and strata per campaign are established with the plant and surface population row",
+      "open": "Establish the per-campaign target population and strata when the plant and surface population row exists. pest-classification stays open: its two consumers, Art.26(1) (the central service's emergency plan) and Art.30(2) (the National Plant Health Committee's information methods), lie outside the Osservatorio's positive-finding-to-removal chain, no C function reads either, C answers unknown there, and no supply is built."
     },
     {
       "id": "result-documents",
@@ -56,16 +56,14 @@
       ],
       "population": "Every report referenced by an admitted monitoring release, followed through consequential report, annex and correction relationships.",
       "reader": "cordon_d.reports, cordon_d.report_relations and cordon_d.findings; explicit extraction through scripts/read_reports.py",
-      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings."
+      "open": "SPEC.md owns which laboratory rows are completed. Inside the reach, a row or observation stays open with the cause its reading establishes: a publisher reference the reading does not recover, a printed reference no routed observation claims, a source association that conflicts with the row's host or printed coordinates or needs a host the row leaves unresolved, a conflicting or unstated sampling date, a report the source declares superseded, or a result part the source does not bind to a sample. Predecessor candidates retain unverified identity components; issue dates and referenced predecessor dates remain distinct. Administrative annexes can establish a derived occurrence correspondence without equating identifier strings. For sample-custody, the printed delivery and acceptance dates supply the delivery and the laboratory's receipt at date precision only: never an instant (custody_facts takes instants, and a printed date is never turned into one), never refrigerated transport and never the signatures, which stay with the handover record in osservatorio-records."
     },
     {
       "id": "official-areas",
       "name": "Adopted demarcated-area geometry",
       "purpose": "Supply, for each A area version, the adopted area as the act defines it: polygon, frame, error bound and shared boundary, bound to the provision version.",
       "contracts": [
-        "adopted-geography",
-        "boundary-context",
-        "evaluation-context"
+        "adopted-geography"
       ],
       "routes": [
         "Adopting regional acts and their annex tables; acquisitions in corpus/sources/areas/acts.json",
@@ -103,8 +101,7 @@
       "contracts": [
         "operative-act",
         "case-prescription",
-        "administrative-event",
-        "evaluation-context"
+        "administrative-event"
       ],
       "routes": [
         "https://burp.regione.puglia.it/bollettini",
@@ -144,7 +141,6 @@
       "purpose": "Supply an individual plant's protected status and, only where that status changes removal, the applicable permission or decision.",
       "contracts": [
         "protected-status",
-        "boundary-context",
         "operative-act"
       ],
       "routes": [
@@ -163,8 +159,7 @@
       "name": "Current owner, occupier and public-land standing records",
       "purpose": "Supply the person or public body with the legally consequential relationship to the affected parcel or plant.",
       "contracts": [
-        "party-land-standing",
-        "boundary-context"
+        "party-land-standing"
       ],
       "routes": [
         "The removal determination's incorporated annex (addressees by comune, foglio, particella)",
@@ -178,12 +173,13 @@
     {
       "id": "osservatorio-records",
       "name": "Osservatorio and ARIF first-party records",
-      "purpose": "Supply the facts only the Osservatorio's and its executor's own records hold: personal delivery of an order to a named recipient, the owner's election or refusal, standing after the latest act, commencement and removal performed, treatment before removal, the assignment of the presiding officer and of ARIF, field assessment, the cost of forced removal and its target, and the hosts within 50 m of an infected plant that no public survey observed.",
+      "purpose": "Supply the facts only the Osservatorio's and its executor's own records hold: personal delivery of an order to a named recipient, the owner's election or refusal, standing after the latest act, commencement and removal performed, treatment before removal, the assignment of the presiding officer and of ARIF, the sample handover record, field assessment, the cost of forced removal and its target, and the hosts within 50 m of an infected plant that no public survey observed.",
       "contracts": [
         "recipient-notice",
         "owner-response",
         "party-land-standing",
         "personnel-assignment",
+        "sample-custody",
         "operative-assessment",
         "treatment-performance",
         "removal-performance",
@@ -199,11 +195,12 @@
         "The verbale the presiding Ispettore/Agente fitosanitario writes for each removal and destruction, with the presiding officer, the owner's or holder's countersignature, photographs and the treatment it records",
         "ARIF's records incorporated into the matter: its notes to the Osservatorio by protocol on the measures it executed or could not complete, its assistants' supervision record and its charge of removal costs to the owner",
         "The order's PEC to ARIF \"per gli adempimenti conseguenti\" and to the Prefettura",
-        "The field check of the 50 m area around each infected plant the order prescribes, attributed to the actor the order names"
+        "The field check of the 50 m area around each infected plant the order prescribes, attributed to the actor the order names",
+        "The App or paper sample handover and receipt record under DDS 31/2022 and DDS 45/2025: refrigerated transport, the assistants' and driver's signatures, the authorized transporter's countersignature and whether the delivery history is complete"
       ],
-      "population": "The records for each live order's recipients, plants and work: deliveries, responses, standing changes, assignments, field and execution records, costs and the 50 m field check.",
-      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes supplied delivery, commencement, removal and history records to C per recipient (scripts/read_prescriptions.py --records).",
-      "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check."
+      "population": "The records for each live order's recipients, plants and work: deliveries, responses, standing changes, assignments, sample handovers, field and execution records, costs and the 50 m field check.",
+      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes the supplied delivery, commencement, removal and history records the run's stated grant permits to C per recipient (scripts/read_prescriptions.py --records with --permitted-controlled-sources).",
+      "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check. Without the handover record, the transport and signature predicates stay unknown, never false."
     },
     {
       "id": "vector-and-treatment-observations",
