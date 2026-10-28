@@ -17,6 +17,8 @@
 # .runs/<run>.md; the coordinator's session is told when it is there.
 # A check its subject can change is no check: this script runs only as it stands on origin/main, and refuses when the
 # local copy differs. CORDON_REVIEW_UNMERGED=1 runs it unmerged, and says so in its log and in any comment it posts.
+# Each run has its own scratch folder (.runs/scratch/<run>/): reviewers of one round run at once, and a folder shared
+# across them let one reviewer's cleanup remove another's work.
 # The whole script is one block, so bash reads all of it before running any.
 {
 set -euo pipefail
@@ -45,13 +47,22 @@ brief() { # brief plan|implementation|round: the brief's quoted paragraph, verba
 }
 facet_row() { git show origin/main:REVIEW_PRINCIPLES.md | grep -E "^\| $1\. " ; }
 main_checkout="$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)"
-checkout() { # checkout <pr> <sha>: a disposable detached checkout of that commit, beside the main checkout
+checkout() { # checkout <pr> <sha>: a disposable detached checkout of exactly that commit, beside the main checkout
+  # A round's reviewers start together and each makes the PR's checkout; concurrent `git worktree add` calls for one
+  # path collide (reproduced: two of three trials left every run without a checkout). So the checkout is made under
+  # a kernel lock (lockf(1): released when its holder exits or dies, never broken while held, bounded by a timeout),
+  # and it is handed out only if it is exactly the commit, unmodified; otherwise the run logs why and stops.
   local co="$(dirname "$main_checkout")/CORDON-review/pr$1-${2:0:7}"
-  if [ ! -d "$co" ]; then
-    mkdir -p "$(dirname "$co")"
-    git fetch -q origin "pull/$1/head"
-    git worktree add -q --detach "$co" "$2"
-    ln -s "$main_checkout/.venv" "$co/.venv"
+  mkdir -p "$(dirname "$co")"
+  if ! /usr/bin/lockf -k -t 300 "$co.lock" /bin/sh -c '
+      [ -e "$1/.git" ] && exit 0
+      git fetch -q origin "pull/$2/head" || true
+      git worktree add -q --detach "$1" "$3" && ln -s "$4/.venv" "$1/.venv"' _ "$co" "$1" "$2" "$main_checkout" >&2; then
+    echo "the checkout of $2 was not made within 300 s, or could not be made" >&2; return 1
+  fi
+  if [ "$(git -C "$co" rev-parse HEAD 2>/dev/null)" != "$(git rev-parse "$2^{commit}")" ] \
+     || [ -n "$(git -C "$co" status --porcelain -uno 2>/dev/null)" ]; then
+    echo "$co is not exactly commit $2, unmodified" >&2; return 1
   fi
   echo "$co"
 }
@@ -61,7 +72,7 @@ facts() { # facts <pr> <sha> <checkout> <kind>
 - Pull request: #$1 in $REPO. Read its plan with: gh pr view $1 --json body --jq .body
 - Head commit: $2. Read-only checkout of it: $3"
   [ "$4" = plan ] || printf '%s\n' "- The change: git -C $3 diff origin/main...$2"
-  printf '%s\n' "- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/pr$1/.
+  printf '%s\n' "- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/$run/, which is this run's alone.
 - Do not edit, commit, push, check out, or change the pull request; do not read other reviewers' comments on it."
 }
 report_of() { # report_of <jsonl>: the final assistant text
@@ -127,13 +138,17 @@ on_err() { echo "=== finished exit $1 (${0##*/} stopped at line $2)" >> "$log"; 
 trap 'on_err $? $LINENO' ERR
 
 # Lanes: implementation facets of one unit at a time; plan reviews one at a time. A lane is busy while another PR's
-# run of the same kind is going (tools/feed/runs.mjs decides going).
+# run of the same kind is running, or is waiting and was dispatched first (tools/feed/runs.mjs decides the state).
+# Waiters take the lane in dispatch order: when every waiter counted every other, two PRs queued behind a third
+# waited on each other for ever (PRs #40 and #37, 2026-10-28).
 busy() {
-  local l
+  local l s
   for l in .runs/review-*.log; do
     [ "$l" = "$log" ] && continue
     grep -qx "=== kind $kind" "$l" 2>/dev/null || continue
-    node -e 'import(process.argv[2]).then(m => process.exit(m.runStateOf(process.argv[1]).state === "finished" ? 1 : 0))' "$l" "$root/tools/feed/runs.mjs" || continue
+    s=0; node -e 'import(process.argv[2]).then(m => { const s = m.runStateOf(process.argv[1]).state; process.exit(s === "finished" ? 1 : s === "waiting" ? 2 : 0); })' "$l" "$root/tools/feed/runs.mjs" || s=$?
+    [ "$s" = 1 ] && continue
+    if [ "$s" = 2 ] && [[ ! "${l##*-}|$l" < "${log##*-}|$log" ]]; then continue; fi
     if [ "$kind" = plan ] || ! grep -qx "=== pr $pr" "$l"; then return 0; fi
   done
   return 1
@@ -141,7 +156,8 @@ busy() {
 while busy; do [ -n "${waited:-}" ] || echo "=== waiting for a slot (the $kind review lane is in use)" >> "$log"; waited=1; sleep 15; done
 [ -z "${waited:-}" ] || echo "=== got a slot" >> "$log"
 
-co="$(checkout "$pr" "$sha")"
+co="$(checkout "$pr" "$sha" 2>> "$log")" || true
+[ -n "$co" ] && [ -d "$co" ] || { echo "=== the checkout of $sha could not be made (see above)" >> "$log"; echo "=== finished exit 2" >> "$log"; exit 2; }
 used="$([ -z "$session" ] && echo "$kind" || echo round)"
 [ -n "$(brief "$used")" ] || { echo "=== the $used brief was not found in REVIEW_PRINCIPLES.md on origin/main" >> "$log"; echo "=== finished exit 2" >> "$log"; exit 2; }
 if [ -z "$session" ]; then
