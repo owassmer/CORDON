@@ -1,0 +1,14 @@
+{
+  "schema": "cordon-stage-c-acceptance-v1",
+  "accepted_by": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#39 accepts this exact content.",
+  "date": "2026-10-28",
+  "promoted_package_sha256": "467616930d75b868a47aacf6c79c252b5395bac17e1cdcb1e8c7e2413bfec161",
+  "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
+  "preceding_acceptance": {
+    "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr35.json",
+    "sha256": "302f67d34dc0f6d06e8b77df371be4df3cd89c2d53fe280d1134b94e3b722c1a"
+  },
+  "preceding_package_sha256": "6a36cd5ccbffe33344f22e25746b52b119e9e9699ad07cbc331bf9bd648c1ac6",
+  "scope": "evaluate decides seven A wordings that place the event date in an interval A states (core.DATE_INTERVALS) from its event date alone, start included and end excluded: the carrying version's own interval, or the start of EU-2020-1201:7(1)(e):v2 (post-M5), or the end of REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1 (pre-M4), and the result cites the version whose date decided it; a supplied fact or a reader's true or false answer for them is refused, and Snapshot.load checks their carriers and named versions against A; adopted_area_facts no longer binds the effective-interval constant; custody_facts takes a printed collection or delivery date, decides same-day delivery from local days, compares order by day when either side is a date and never gives a date a time of day; timely_completion takes a date only as a same-calendar-day completion, refuses one after the evaluation's local day, and decides one on that day only where reading it as not yet performed gives the same answer. Binding takes effect only on merge."
+}

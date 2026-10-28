@@ -9,8 +9,8 @@ from zoneinfo import ZoneInfo
 import unittest
 from unittest import mock
 
-from cordon_c.bindings import leaves, listing_facts, mass_publicity_facts, merge_facts, noncommencement_facts
-from cordon_c.core import Evaluation, MissingInput, Snapshot, evaluate
+from cordon_c.bindings import leaves as _leaves, listing_facts, mass_publicity_facts, merge_facts, noncommencement_facts
+from cordon_c.core import DATE_INTERVALS, Evaluation, MissingInput, Snapshot, evaluate
 from cordon_c.quantities import clock_boundary
 from cordon_c.temporal import end_of_day
 from cordon_d.calendar import national_calendar
@@ -65,6 +65,11 @@ NOT_OLIVES = 'the population in question holds plants other than uninfected, asy
 HOSTS_ONLY, MIXED, INFECTED_ONLY = ({HOSTS: True, LISTED: False}, {HOSTS: True, LISTED: True},
                                     {HOSTS: False, LISTED: True})
 
+
+
+def leaves(ast):
+    """A row's leaves a test may supply: every predicate but the interval wordings C decides from the event date."""
+    return [p for p in _leaves(ast) if p not in DATE_INTERVALS]
 
 class StatedTermRule(unittest.TestCase):
     @classmethod
@@ -394,9 +399,8 @@ class StatedTermRule(unittest.TestCase):
     # --- A row that neither bears on dueness nor corrects an order does not gate it; a resolved "not due" is
     # final (PR #35 round 1, as amended) ---
 
-    def dds96(self):
-        """DDS 96/2023 at 2026-09-24, no court closure: its required rows, the Monopoli fork among them."""
-        at = date(2026, 9, 24)
+    def dds96(self, at=date(2026, 9, 24)):
+        """DDS 96/2023 at 2026-09-24 (or `at`), no court closure: its required rows, the Monopoli fork among them."""
         record = dict(DDS113, instrument=DDS96)
         required = tuple(sorted(required_rows(self.s, at, DDS96)))
         self.assertIn(FORK, required)
@@ -404,7 +408,13 @@ class StatedTermRule(unittest.TestCase):
         return record, at, required
 
     def test_a_96_hosts_only_position_with_the_fork_unresolved_reads_not_due(self):
-        record, at, required = self.dds96()
+        # After M4 C decides the fork false from the event date, citing the version whose end is M4's date; the fork
+        # is unresolved only before M4, after DDS 18/2024's withdrawal took effect on 14 March 2024.
+        later = date(2026, 9, 24)
+        decided = evaluate(self.s, FORK, later, {})
+        self.assertIs(decided.truth, False)
+        self.assertIn('REG-PUGLIA-U181-DIR-2024-00018:area-state-transition:v1', decided.provisions)
+        record, at, required = self.dds96(date(2024, 4, 1))
         self.assertFalse(bears_on_dueness(self.s.version(FORK, at)))
         self.assertFalse(self.s.version(FORK, at).get('corrects_instrument_ids'))
         self.assertFalse(gates_dueness(self.s.version(FORK, at)))
@@ -418,8 +428,10 @@ class StatedTermRule(unittest.TestCase):
 
     def test_a_96_letter_a_holder_reads_due_in_part(self):
         # Guard for the rule that a row neither bearing on dueness nor correcting an order does not gate it: the
-        # unresolved fork does not.
-        record, at, required = self.dds96()
+        # unresolved fork does not. The fork is unresolved only before M4 (after M4 C decides it false from the date),
+        # so the guard runs on 1 April 2024, after DDS 18/2024's withdrawal took effect.
+        record, at, required = self.dds96(date(2024, 4, 1))
+        self.assertIsNone(evaluate(self.s, FORK, at, {}).truth)
         results = self.per(WITHDRAWAL, self.population(WITHDRAWAL, at, MIXED))
         for predicate in (WORK, COERCE):
             due = self.due(record, at, predicate, refs=required, results=results, positioned=True)
