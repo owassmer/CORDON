@@ -94,7 +94,8 @@
         "Read the laboratory reports again so row 2 is held: Owen clears the in-reach population, its selection rule and request count before the pass; every reading is kept from its first write (PR #42).",
         "Decide whether TAR Bari 387, 383 and 384/2026 still leave unknown the dueness of the 20 positions of DDS 96, 119 and 138/2023 that hold a listed infected plant (2, 14 and 4) now that A records DDS 18/2024 (D row 6).",
         "Replace the stated device term with a held input named in plant-population's positional_qualification: ARIF's per-fix accuracy or device and capture mode per record, a bound from re-samples linked by ID_CAMPIONE, or a calibration of the documented device and app.",
-        "Supply printed delivery dates from result-documents to sample-custody, after settling which printed label is delivery: the reading takes 'Data ricevimento campione' as delivery in report 621959b9… and as acceptance in 73426d42…, and labels report 103227e1…'s 'Data prelievo campione' with the generic role date rather than sampling_date (follows PR #39)."
+        "Supply printed delivery dates from result-documents to sample-custody, after settling which printed label is delivery: the reading takes 'Data ricevimento campione' as delivery in report 621959b9… and as acceptance in 73426d42…, and labels report 103227e1…'s 'Data prelievo campione' with the generic role date rather than sampling_date (follows PR #39).",
+        "Obtain the Osservatorio's own delivery (PEC), commencement, removal and history records for the orders in reach, in the fields `osservatorio-records` names. They are controlled sources the operator holds, not published ones, so the route and permission are Owen's. Until they are held, the per-recipient join (PR #40) runs on marked fixtures only and C's per-recipient results decide no real owner."
       ]
     },
     "E": {
