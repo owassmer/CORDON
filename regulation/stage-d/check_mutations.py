@@ -54,6 +54,12 @@ CODE = (
      '        if stated is not None and due.truth is True:\n',
      '        if stated is not None and due.truth is not None:\n',
      'test_annex_positions.AnnexPositions.test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due'),
+    ("let a court's reason drop its need without an A row recording the act it names", 'cordon_d.case_prescriptions',
+     '    return bool(later) and later <= recorded\n', '    return bool(later)\n',
+     'test_annex_positions.AnnexPositions.test_a_court_reason_decides_nothing_a_does_not_record'),
+    ("keep every court reason's need, A row or not", 'cordon_d.case_prescriptions',
+     '            if not _decided_in_a(closure[\'stated_reason\'], record):\n', '            if True:\n',
+     'test_annex_positions.AnnexPositions.test_a_court_reason_decides_nothing_a_does_not_record'),
 )
 
 

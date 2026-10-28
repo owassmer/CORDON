@@ -503,7 +503,11 @@ unknown naming the scope while the recipient is not identified); an interim
 suspension with no later disposition of its ricorso, a challenge ended with the
 court's stated reason, or a stated correction, replacement, revocation,
 suspension or withdrawal, whole or in part, that no A row records, leaves it
-unknown and names the act and the words stating what changes. Nothing is patched.
+unknown and names the act and the words stating what changes. A challenge ended
+with a stated reason adds nothing where the governing rows already decide it: the
+reason names at least one act other than the order, every number and year it
+prints is an Osservatorio act read by its type, and the record's governing A rows
+record each such act (a moot ruling annuls nothing). Nothing is patched.
 Every such outcome only withholds, so the order's own reading under a disposition
 or stated change replaces only a dueness the governing rows leave true: a not due
 from a governing row stands, with its row in `provisions`, and an unknown from the
