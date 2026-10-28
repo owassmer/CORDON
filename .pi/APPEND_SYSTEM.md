@@ -99,7 +99,7 @@ or computation pass. Read every builder's diff in full before you push it.
     How the Osservatorio actually works outranks a conjectured failure.
 - **Runs.** You are told when a run you dispatched finishes. Read its log, and judge its report against the plan.
   Between runs, do your own work or stop; never wait on a watch. `scripts/steer <run> "<message>"` reaches a running
-  builder or reviewer, and `scripts/steer <run> --stop` ends it with nothing committed.
+  builder, never a reviewer. `scripts/steer <run> --stop` ends either, with nothing committed.
 - **Compute and spend.** `tools/roles/compute.md` binds you as it binds builders.
 
 ## Reports
