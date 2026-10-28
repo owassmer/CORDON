@@ -303,9 +303,15 @@ class AnnexPositions(unittest.TestCase):
         # Without the A row that records DDS 18/2024, the court's words decide nothing and stay a need.
         self.assertTrue(names_court(at_holder(references=())))
         # A reason naming an act no A row records, or printing a number and year no act type reads, keeps its need.
+        # It fails closed: every act the reason mentions, in any printed form, must be one A records.
         for words in (reason[0] + ' e della DDS n. 127/2022', reason[0] + ' e della nota n. 10745/2025',
                       'superamento della DDS n.119/2023 da parte della D.G.R. n. 18/2024',
-                      'superamento della DDS n.119/2023 da parte della determina diciotto del 2024'):
+                      'superamento della DDS n.119/2023 da parte della determina diciotto del 2024',
+                      reason[0] + ' e della DDS n. 127 del 21/06/2022', reason[0] + ' e della DDS n. 127/22',
+                      reason[0] + ' e della nota prot. n. 10745 del 15.12.2023',
+                      reason[0] + ', poi sostituita dalla DDS n. 45 del 3 maggio 2025',
+                      reason[0] + ' e della determina diciotto del 2024',
+                      reason[0] + ' e della legge regionale n. 4/2017'):
             with self.subTest(words=words):
                 self.assertTrue(names_court(at_holder(stated_reason=(words,))))
 

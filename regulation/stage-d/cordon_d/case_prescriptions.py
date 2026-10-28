@@ -377,23 +377,32 @@ def clause(record):
 WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends', 'withdraws')
 
 
-# A number with its year, as an act reference prints it ("n.10745/2025", "1007/2023").
+# A number with its year, as an act reference prints it ("n.10745/2025", "1007/2023"), and any numbered reference
+# ("n. 127 del 21/06/2022", "prot. n. 10745").
 _NUMBER_YEAR = re.compile(r'(?<![\d/])\d{1,6}\s*/\s*(?:19|20)\d{2}(?![\d/])')
+_NUMBERED = re.compile(r'\bn\.?\s*°?\s*\d', re.I)
+# A word that names an act, whatever follows it: each must sit inside an act the act-type route reads.
+_ACT_WORD = re.compile(r"\b(?:D\.?\s?D\.?\s?S|D\.?\s?D|DET|det\.|determin\w*|delib\w*|D\.?\s?G\.?\s?R|decret\w*|"
+                       r"not[ae]|atto|atti|provvediment\w*|ordinanz\w*|legge|L\.\s?R)\b", re.I)
 
 
 def _decided_in_a(reason, record):
     """Whether an A row governing the record already decides what a court's stated reason states.
 
-    True only where the reason names at least one act other than the order, every number and year it
-    prints is an Osservatorio act read by its act type (`held_acts._DESIGNATED`, the owner of a printed
-    act identity), and each such act is recorded by an A row the record names. A reason naming no act,
-    or printing an act reference in any other form, leaves the closure's need.
+    True only where the reason names at least one act other than the order, every act it mentions is an
+    Osservatorio act read by its act type (`held_acts._DESIGNATED`, the owner of a printed act identity), and
+    each such act is recorded by an A row the record names. It fails closed: a reason naming no act, or
+    mentioning an act in any other form (a number with its date, a protocol number, a law, an act written
+    in words), leaves the closure's need.
     """
     from .held_acts import _DESIGNATED
     text = ' '.join(reason)
     designated = list(_DESIGNATED.finditer(text))
     covered = [m.span() for m in designated]
-    if any(not any(start <= m.start() < end for start, end in covered) for m in _NUMBER_YEAR.finditer(text)):
+
+    def inside(m):
+        return any(start <= m.start() < end for start, end in covered)
+    if any(not inside(m) for pattern in (_NUMBER_YEAR, _NUMBERED, _ACT_WORD) for m in pattern.finditer(text)):
         return False
     later = {act_id(int(m.group(1)), int(m.group(2))) for m in designated} - {record['instrument']}
     recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
