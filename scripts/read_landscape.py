@@ -65,7 +65,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--records', required=True, help='the Osservatorio\'s landscape records (a JSON list)')
     parser.add_argument('--plants', nargs='+', required=True, help="the plants asked about, as PR #30's rows name them")
-    parser.add_argument('--at', type=date.fromisoformat, default=date.today(), help='the evaluation date')
+    parser.add_argument('--at', type=date.fromisoformat, required=True, help='the evaluation date; no machine-clock default')
     parser.add_argument('--rows', help="PR #30's rows; default: this checkout's version in the store")
     parser.add_argument('--out')
     arguments = parser.parse_args()

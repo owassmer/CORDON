@@ -140,8 +140,8 @@
     },
     {
       "id": "plant-protection-records",
-      "name": "Protected-plant status and required permission records",
-      "purpose": "Supply an individual plant's protected status and, only where that status changes removal, the applicable permission or decision.",
+      "name": "Protected-plant status records",
+      "purpose": "Supply an individual plant's protected status.",
       "contracts": [
         "protected-status",
         "boundary-context",
@@ -151,10 +151,9 @@
         "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1 (listed trees) and /0 (provisional trees, DGR 720/2025), captured whole by scripts/acquire_protection.py (corpus/sources/protected-status/register.json)",
         "The L.R. 14/2007 list acts as published on BURP (https://burp.regione.puglia.it/documents/20135/<folder>/DEL_<n>_<year>.pdf, or the ordinary bulletin that carries an older act), each act's decision, history table and deletion annex (corpus/sources/protected-status/acts.json)",
         "The official monitoring observations of the affected plants and of the negative olives within 50 m (rows 1 and 2), with MONUMENTALE_ARIF and NOTE_RILEVATORE from every view that prints them",
-        "The plant points the held removal orders print in their annexes (corpus/sources/removal-orders/records.json)",
-        "The competent authority's actual permission record for the affected plant or parcel"
+        "The plant points the held removal orders print in their annexes (corpus/sources/removal-orders/records.json)"
       ],
-      "population": "The affected plants (the in-reach positives and the plants the held removal orders print, each order plant taking the record of the positive it coincides with within 1 m), the negative olives C may place in their 50 m zones, and the register entries within 50 m plus both errors of an affected plant; each entry's own list acts. It is not the register, and not only the positives. Permission records only where a protected plant's branch requires them.",
+      "population": "The affected plants (the in-reach positives and the plants the held removal orders print, each order plant taking the record of the positive it coincides with within 1 m), the negative olives C may place in their 50 m zones, and the register entries within 50 m plus both errors of an affected plant; each entry's own list acts. It is not the register, and not only the positives.",
       "reader": "cordon_d.protection (scripts/read_protection.py): register entries and key causes, each entry's act chain from the acts' decisions, recitals and history table, trees a deleting act lists, survey batches by the survey the acts' recitals name and their measured bounds with the 2011 check read from the held capitolato, the monitoring record and D's reading of each note, measurements, the note-code rule and candidates",
       "open": "Some rows of DGR 720/2025's deletion annex are unread, and the deleting act prints no approving act for the trees it deletes, so C reads a deleted tree's listing before deletion unknown (counts: CURRENT). DGR 1193/2021's and DGR 1491/2020's deletions are unread; both acts precede every held order. The census tag as card is read from the held tags: the capitolato states the key N_Fg_P_cod_ISTAT and no tag. Row 10 reads no landscape designation: D.lgs. 19/2021 Art. 33(1)'s second paragraph fixes the one class that needs landscape authorization (monumental or historic-interest plants not found infected), and its first derogates every other constraint, \"comprese quelle di natura vincolistica\"; so the PPTR designations, the Art. 142(2) exclusions, layer 0 and the L.R. 14/2007 Art. 6(1) grove constraint are needed for no Osservatorio decision. The landscape proceeding's record for such a plant is the Osservatorio's own (osservatorio-records)."
     },
