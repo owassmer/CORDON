@@ -44,23 +44,24 @@ brief() { # brief plan|implementation|round: the brief's quoted paragraph, verba
   git show origin/main:REVIEW_PRINCIPLES.md | awk -v n="$name" '$0==n{f=1;next} f&&/^> /{sub(/^> /,"");print;k++;next} f&&k{exit}'
 }
 facet_row() { git show origin/main:REVIEW_PRINCIPLES.md | grep -E "^\| $1\. " ; }
-checkout() { # checkout <pr> <sha>: a disposable detached checkout of that commit
-  local co="$(dirname "$root")/CORDON-review/pr$1-${2:0:7}"
+main_checkout="$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)"
+checkout() { # checkout <pr> <sha>: a disposable detached checkout of that commit, beside the main checkout
+  local co="$(dirname "$main_checkout")/CORDON-review/pr$1-${2:0:7}"
   if [ ! -d "$co" ]; then
     mkdir -p "$(dirname "$co")"
     git fetch -q origin "pull/$1/head"
     git worktree add -q --detach "$co" "$2"
-    ln -s "$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)/.venv" "$co/.venv"
+    ln -s "$main_checkout/.venv" "$co/.venv"
   fi
   echo "$co"
 }
-store="${CORDON_STORE:-$(dirname "$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)")/CORDON-store}"
-facts() { # facts <pr> <sha> <checkout>
+store="${CORDON_STORE:-$main_checkout-store}"
+facts() { # facts <pr> <sha> <checkout> <kind>
   printf '%s\n' "Delivery facts:
 - Pull request: #$1 in $REPO. Read its plan with: gh pr view $1 --json body --jq .body
-- Head commit: $2. Read-only checkout of it: $3
-- The change, for implementation review: git -C $3 diff origin/main...$2
-- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/pr$1/.
+- Head commit: $2. Read-only checkout of it: $3"
+  [ "$4" = plan ] || printf '%s\n' "- The change: git -C $3 diff origin/main...$2"
+  printf '%s\n' "- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/pr$1/.
 - Do not edit, commit, push, check out, or change the pull request; do not read other reviewers' comments on it."
 }
 report_of() { # report_of <jsonl>: the final assistant text
@@ -148,12 +149,12 @@ if [ -z "$session" ]; then
   case "$kind" in
     plan) prompt="Independent plan review of CORDON PR #$pr, at commit $sha. Read-only. Your final message is your report.
 
-$(facts "$pr" "$sha" "$co")
+$(facts "$pr" "$sha" "$co" plan)
 
 $(brief plan)";;
     implementation) prompt="Independent implementation review of CORDON PR #$pr, $role, at commit $sha. Read-only. Your final message is your report.
 
-$(facts "$pr" "$sha" "$co")
+$(facts "$pr" "$sha" "$co" implementation)
 - Your facet, from REVIEW_PRINCIPLES.md:
 $(git show origin/main:REVIEW_PRINCIPLES.md | grep -E '^\| Facet \| ')
 $(facet_row "${role#Facet }")
@@ -164,7 +165,7 @@ else
   cp "$session" ".runs/$run.session.jsonl"; session=".runs/$run.session.jsonl"
   prompt="Round $n of your review of CORDON PR #$pr, now at commit $sha.
 
-$(facts "$pr" "$sha" "$co")
+$(facts "$pr" "$sha" "$co" "$kind")
 
 $(brief round)
 

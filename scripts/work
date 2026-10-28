@@ -95,7 +95,9 @@ if [ -n "$(git -C "$wt" status --porcelain)" ]; then
 The worktree holds uncommitted changes an earlier run left when it was stopped or ended (git status and git diff show them). Judge them against the task: keep what is right and carry on from where it was."
   echo "=== the worktree has uncommitted changes from an earlier run: $(git -C "$wt" status --porcelain | wc -l | tr -d ' ') paths" >> "$log"
 fi
-prompt="You are a builder on a CORDON unit. Your worktree is $wt, on branch $branch$([ -n "$pr" ] && echo ", for pull request #$pr; read its plan with: gh pr view $pr --json body --jq .body"). Make your task true at the consumer surface, commit once on the branch when it is, then call report. Do not push: the coordinator reads your diff and pushes it. Set CORDON_STORE=${CORDON_STORE:-$(dirname "$root")/CORDON-store} inline on each command that reads the store.
+# The shared store, where cordon_d.store finds it: $CORDON_STORE, else <main checkout>-store beside the main checkout.
+store="${CORDON_STORE:-$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)-store}"
+prompt="You are a builder on a CORDON unit. Your worktree is $wt, on branch $branch${pr:+, for pull request #$pr; read its plan with: gh pr view $pr --json body --jq .body}. Make your task true at the consumer surface, commit once on the branch when it is, then call report. Do not push: the coordinator reads your diff and pushes it. Set CORDON_STORE=$store inline on each command that reads the store.
 
 $task_text$left"
 
