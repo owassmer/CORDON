@@ -319,14 +319,21 @@ class LandscapeRecords(unittest.TestCase):
         self.assertEqual(run['unattached'][0]['detail'], [f'card 0990101 (Monopoli) names plant {A}',
                                                           f'monitoring reference {C} names plant {C}'])
         run = self.run_caller([decision('d-x', on(sample(A), tag('0990101', 'Fasano'), sample('9199999')))])
-        self.assertEqual(run['unattached'][0]['detail'], [f"monitoring reference 9199999 names no plant, not plant {A}"])
-        # A card naming no register entry names no other plant either: the deciding reference attaches, and the card
-        # is reported beside the result.
+        self.assertEqual(run['unattached'][0]['detail'], [
+            'card 0990101 (Fasano) names no register entry',
+            f"monitoring reference 9199999 names no plant, not plant {A}"])
+        # For a plant whose identity is an entry, a card naming no entry is a mismatch with that identity: it blocks.
         run = self.run_caller([decision('d-x', on(sample(A), tag('0990101', 'Fasano')))])
-        self.assertEqual(run['plants'][A]['records'], ['d-x'])
-        self.assertIn("attached by its deciding identifier; it disagrees with row 9's reading, which it does not "
-                      'change: card 0990101 (Fasano) names no register entry',
-                      [r['cause'] for r in run['plants'][A]['reported']])
+        self.assertEqual(self.causes(run), [('d-x', 1, 'identifiers in conflict')])
+        # For a plant whose identity is not an entry, a card naming no register entry names no tree that could
+        # compete: the deciding reference attaches, and the card is reported beside the result.
+        for plant in (C, D):
+            with self.subTest(plant=plant):
+                run = self.run_caller([decision('d-x', on(sample(plant), tag('0990101', 'Fasano')))])
+                self.assertEqual(run['plants'][plant]['records'], ['d-x'])
+                self.assertIn("attached by its deciding identifier; it disagrees with row 9's reading, which it does "
+                              'not change: card 0990101 (Fasano) names no register entry',
+                              [r['cause'] for r in run['plants'][plant]['reported']])
 
     def test_a_negative_olive_whose_identity_is_unknown(self):
         """The 11200168 shape: a card, COD or parcel beside the plant's own monitoring reference attaches; the card
@@ -357,17 +364,16 @@ class LandscapeRecords(unittest.TestCase):
                 self.assertEqual(run['unattached'][0]['detail'], [
                     f'entry 990005 is no plant\'s row 9 identity; it is a candidate of the "unknown" plants {[D]}'])
                 self.assertEqual(result.needs, {NEED['grant'], NEED['union']})
-        # An entry that is not among its candidates, and is no plant's identity, disagrees with row 9 but names no
-        # other plant: the deciding reference attaches, and the disagreement is reported with its distance.
+        # A register entry that is not among its candidates names another monumental tree, held as a plant or not:
+        # a conflict, named with its distance.
         run = self.run_caller([decision('d-1', on(sample(D), tag('0990404')))])
-        self.assertEqual(run['unattached'], [])
-        self.assertEqual(run['plants'][D]['records'], ['d-1'])
-        self.assertIn("attached by its deciding identifier; it disagrees with row 9's reading, which it does not "
-                      f"change: card 0990404 (Monopoli) names entry 990004, 985.0 m from plant {D}, not within d; row "
-                      "9's candidates are ['990005']", [r['cause'] for r in run['plants'][D]['reported']])
+        self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict')])
+        self.assertEqual(run['unattached'][0]['detail'], [
+            f"card 0990404 (Monopoli) names entry 990004, 985.0 m from plant {D}, not within d; row 9's candidates "
+            "are ['990005']"])
         self.assertEqual(run['plants'][D]['identity']['identity'], 'unknown')
-        # An entry that is another plant's identity names that plant: a conflict.
-        run = self.run_caller([decision('d-1', on(sample(D), tag('0990101')))])
+        # A repeated COD naming another plant's identity entry among others conflicts too.
+        run = self.run_caller([decision('d-1', on(sample(D), dict(cod=REPEATED)))])
         self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict')])
         self.assertEqual(self.rows, rows)
 
@@ -377,14 +383,12 @@ class LandscapeRecords(unittest.TestCase):
         self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict')])
         self.assertEqual(run['unattached'][0]['detail'], [
             f"card 0990404 (Monopoli) names entry 990004; plant {A}'s row 9 identity is entry 990001"])
-        # C has no entry within d: an entry that is no plant's identity disagrees with row 9 and is reported beside
-        # the result; the reference decides the plant. An entry that is another plant's identity is a conflict.
+        # C has no entry within d: any register entry disagrees with row 9, named with its distance.
         run = self.run_caller([decision('d-1', on(sample(C), tag('990505')))])
-        self.assertEqual(run['plants'][C]['records'], ['d-1'])
-        detail = next(r['cause'] for r in run['plants'][C]['reported'] if 'names entry 990005' in r['cause'])
-        self.assertTrue(detail.endswith(f' m from plant {C}; row 9 found no entry within d of it'), detail)
-        run = self.run_caller([decision('d-1', on(sample(C), tag('0990101')))])
         self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict')])
+        detail = run['unattached'][0]['detail'][0]
+        self.assertTrue(detail.startswith('card 990505 (Monopoli) names entry 990005, ') and
+                        detail.endswith(f' m from plant {C}; row 9 found no entry within d of it'), detail)
         # A parcel is checked through a decided plant's entry; for any other plant it neither blocks nor decides.
         self.assertEqual(self.run_caller([decision('d-1', on(sample(A), parcel('21', '300')))])['plants'][A]['records'],
                          ['d-1'])

@@ -720,13 +720,13 @@ identity) where every other identifier it prints agrees with that plant: a key
 or card names the plant's identity entry or, for an "unknown" plant, one of its
 candidates; a parcel is checked only against an entry identity's own parcel, and
 otherwise is reported unchecked, neither blocking nor deciding. For a plant whose
-identity is not an entry, a key or card naming no entry, or only entries that are
-no plant's identity, disagrees with row 9's reading but names no other plant: the
-group attaches by its deciding identifier and the disagreement is reported beside
-the result, the entry and its distance named; row 9's identity is unchanged.
-Otherwise the group is unattached and fills nothing: identifiers in conflict where
-they name different plants or one disagrees with a decided identity (the
-plant's identity named); identity undecided where its keys and cards name only
+identity is not an entry, a key or card naming no register entry at all names no
+tree that could compete: the group attaches by its deciding identifier and the
+key or card is reported beside the result. Otherwise the group is unattached and
+fills nothing: identifiers in conflict where they name different plants or one
+disagrees with row 9 (a register entry outside the plant's candidates, named with
+its distance, is another monumental tree whether or not row 9 holds it as a
+plant; or the plant's decided identity, named); identity undecided where its keys and cards name only
 entries that are no plant's identity, among them candidates of "unknown" plants,
 named with those plants; several matches; or no match. Two groups of a record
 that are one plant attach once and are reported. For each plant asked about, at

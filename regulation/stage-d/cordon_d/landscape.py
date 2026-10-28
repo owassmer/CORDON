@@ -149,12 +149,13 @@ class Identities:
 
     def check(self, named, plant):
         """None where the identifier agrees with the plant's row 9 identity; 'unchecked' where it cannot be computed
-        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); ('noted', why) where it
-        disagrees with row 9's reading but names no other plant (a key or card naming no entry, or only entries that
-        are no plant's identity, for a plant whose identity is not an entry); else why it does not agree.
+        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); ('noted', why) for a key
+        or card that names no register entry at all, for a plant whose identity is not an entry: it names no tree
+        that could compete, so it does not block and is reported beside the result; else why it does not agree.
 
-        A noted disagreement does not block: the deciding identifier names the plant, no other plant competes for the
-        record, and attaching changes no row 9 identity. It is reported beside the result."""
+        A key or card naming a register entry outside the plant's candidates names a monumental tree, whether or not
+        PR #30's rows hold it as a plant, so it blocks: a grant for that tree must not reach this plant. Whether an
+        Osservatorio record may decide that a plant is an entry row 9 left outside it is row 9's question."""
         form, held = named['identifier'], self.plants[plant]
         identity = held['identity']
         if named['kind'] == 'sample':
@@ -168,12 +169,11 @@ class Identities:
                 f"{_printed(form)} is not the parcel of entry {identity}, plant {plant}'s row 9 identity"
         entries = named['entries']
         if not entries:
-            return ('noted', f'{_printed(form)} names no register entry')
+            why = f'{_printed(form)} names no register entry'
+            return ('noted', why) if identity in NOT_A_REGISTER_IDENTITY else why
         if identity in entries or set(entries) & set(held['candidates']):
             return None
-        others = sorted({p for e in entries for p in self.by_entry.get(e, ()) if p != plant})
-        noted = identity in NOT_A_REGISTER_IDENTITY and not others
-        reasons = [] if not others else [f'{_printed(form)} names plants {others} by their row 9 identity']
+        reasons = []
         for entry in entries:
             if identity not in NOT_A_REGISTER_IDENTITY:
                 reasons.append(f"{_printed(form)} names entry {entry}; plant {plant}'s row 9 identity is entry "
@@ -186,7 +186,7 @@ class Identities:
                            if identity == 'not a register tree' else
                            f"{_printed(form)} names entry {entry}, {where}, not within d; row 9's candidates are "
                            f"{held['candidates']}")
-        return ('noted', '; '.join(reasons)) if noted else '; '.join(reasons)
+        return '; '.join(reasons)
 
     def attach(self, group):
         """One plant's group of printed identifiers: dict(plant, unchecked) where it attaches, else dict(cause,
