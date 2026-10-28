@@ -148,10 +148,60 @@ class OsservatorioRecords(unittest.TestCase):
             cls.settled[(sid, WORK)] = cls.settled[(sid, COERCE)] = result
         assert cls.in_part[(DELTAS[1], WORK)].effect == 'LAWFULLY_DUE_IN_PART'
 
-    def run_records(self, supplied, *, evaluated_at=AFTER, settled=False, **options):
+    def run_records(self, supplied, *, evaluated_at=AFTER, settled=False, grant=frozenset({'f' * 64}), **options):
         extra = dict(governing_results=self.settled) if settled else {}
-        return recipient_results(self.s, self.record, AT, supplied, evaluated_at=evaluated_at, zone=ROME,
+        return recipient_results(self.s, self.record, AT, supplied, evaluated_at=evaluated_at,
+                                 permitted_controlled_sources=grant, zone=ROME,
                                  calendar=national_calendar(), **extra, **options)
+
+    def test_an_empty_grant_yields_the_authorized_evidence_need(self):
+        supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158')]
+        self.assertIn('Nitti Vincenzo', self.run_records(supplied)['recipients'])
+        run = self.run_records(supplied, grant=frozenset())
+        self.assertEqual(run['recipients'], {})
+        self.assertEqual(run['reported'], [dict(
+            record='pec-nitti', kind='personal-delivery',
+            need=f'authorized evidence for personal-delivery record pec-nitti on {ORDER}')])
+        with self.assertRaises(TypeError):
+            recipient_results(self.s, self.record, AT, supplied, evaluated_at=AFTER, zone=ROME,
+                              calendar=national_calendar())
+
+    def test_a_partial_grant_withholds_what_the_full_evidence_leaves_unresolved(self):
+        granted, other = 'f' * 64, 'e' * 64
+        second = dict(delivery('pec-other', 'Nitti Vincenzo', '158', occurred=PEC + timedelta(days=2)), source=other)
+        records = [delivery('pec-nitti', 'Nitti Vincenzo', '158'), second, history('storia-158', '158', through='2025-07-15')]
+        at = AFTER + timedelta(days=1)
+        # With both sources granted, the deliveries at two instants leave the result unknown.
+        full = self.run_records(records, evaluated_at=at, settled=True, grant=frozenset({granted, other}))
+        self.assertIsNone(full['recipients']['Nitti Vincenzo']['result'].truth)
+        # The granted delivery alone would give a definite direction; the ungranted one withholds it.
+        alone = self.run_records([records[0], records[2]], evaluated_at=at, settled=True)
+        self.assertIs(alone['recipients']['Nitti Vincenzo']['result'].truth, True)
+        need = f'authorized evidence for personal-delivery record pec-other on {ORDER}'
+        for label, supplied in (('ungranted delivery', records),
+                                ('ungranted performance on an obliged work',
+                                 [records[0], records[2], dict(performed('verbale-x', '158', PEC + timedelta(days=1)),
+                                                               source=other)])):
+            with self.subTest(label):
+                partial = self.run_records(supplied, evaluated_at=at, settled=True)['recipients']['Nitti Vincenzo']
+                self.assertIsNone(partial['result'].truth)
+                self.assertEqual(partial['result'].needs,
+                                 {need if label == 'ungranted delivery'
+                                  else f'authorized evidence for commencement record verbale-x on {ORDER}'})
+
+    def test_a_supplied_record_dated_after_the_cutoff_is_refused(self):
+        future = datetime(2026, 1, 10, 10, 0, tzinfo=ROME)
+        held = [delivery('pec-nitti', 'Nitti Vincenzo', '158'), history('storia-158', '158', through='2025-07-15')]
+        at = AFTER + timedelta(days=1)
+        self.assertEqual(self.run_records(held, evaluated_at=at, settled=True)['recipients']['Nitti Vincenzo']
+                         ['result'].effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
+        for late in (delivery('pec-2026', 'Nitti Vincenzo', '158', occurred=future),
+                     dict(delivery('pec-2026', 'Nitti Vincenzo', '158', occurred=future), source='e' * 64),
+                     fixture('verbale-d', 'commencement', work=parcel('158'), occurred='2026-01-10'),
+                     history('storia-2026', '158', start='2026-01-10', through='2025-07-15')):
+            with self.subTest(record=late['record'], source=late['source'][:1]), \
+                    self.assertRaisesRegex(ValueError, f"{late['record']} .* later than the evaluation"):
+                self.run_records(held + [late], evaluated_at=at, settled=True)
 
     def test_the_registered_clause_is_read_as_PR15_reads_it(self):
         self.assertEqual(self.record['instrument'], ORDER)
@@ -159,7 +209,7 @@ class OsservatorioRecords(unittest.TestCase):
         self.assertEqual(self.record['stated_term'], ('10', 'giorni'))
 
     def test_with_no_record_C_names_personal_communication(self):
-        cohort = c_result(self.s, self.record, AT)
+        cohort = c_result(self.s, self.record, AT, evaluated_at=AFTER)
         self.assertIsNone(cohort.truth)
         vid = self.s.version(case_prescriptions.RULE, AT)['provision_version_id']
         for need in (COMMUNICATED, 'the source notification-based commencement deadline has elapsed',
@@ -180,7 +230,7 @@ class OsservatorioRecords(unittest.TestCase):
         self.assertEqual(nitti['deadline'], BOUNDARY)
         self.assertNotIn('cohort', run)
         vid = self.s.version(case_prescriptions.RULE, AT)['provision_version_id']
-        self.assertIn(f'predicate: {vid} :: {COMMUNICATED}', c_result(self.s, self.record, AT).needs)
+        self.assertIn(f'predicate: {vid} :: {COMMUNICATED}', c_result(self.s, self.record, AT, evaluated_at=AFTER).needs)
         # A commencement on the recipient's work before the deadline defeats the direction.
         begun = self.run_records([delivery('pec-nitti', 'Nitti Vincenzo', '158'),
                                   performed('verbale-1', '158', PEC + timedelta(days=3))], settled=True)
@@ -234,7 +284,7 @@ class OsservatorioRecords(unittest.TestCase):
                                  performed('verbale-158', '158', PEC)], settled=True)
         self.assertEqual(more['recipients']['Laserra'], alone['recipients']['Laserra'])
         # The cohort result is c_result on cohort evidence; it takes no supplied record and names personal notice.
-        cohort = c_result(self.s, self.record, AT, governing_results=self.settled)
+        cohort = c_result(self.s, self.record, AT, evaluated_at=AFTER, governing_results=self.settled)
         self.assertIsNone(cohort.truth)
         self.assertIn(COMMUNICATED, ' '.join(cohort.needs))
         self.assertIs(more['recipients']['Nitti Vincenzo']['result'].truth, False)
@@ -339,6 +389,7 @@ class OsservatorioRecords(unittest.TestCase):
         # position) is never due on its work, whatever its notice and history; the need names its position.
         supplied = [delivery('pec-nitti', 'Nitti Vincenzo', '158'), history('storia-158', '158')]
         nitti = recipient_results(self.s, self.record, AT, supplied, evaluated_at=AFTER, zone=ROME,
+                                  permitted_controlled_sources=frozenset({'f' * 64}),
                                   calendar=national_calendar(), governing_results=self.in_part)['recipients'][
             'Nitti Vincenzo']
         self.assertTrue(nitti['commencement_records_complete'])

@@ -246,7 +246,7 @@ class AnnexPositions(unittest.TestCase):
         def at_position(position):
             record = dict(RECORD, instrument=DDS96, adopted='2023-08-28', governing_A_references=(FORK, WITHDRAWAL),
                           recipients=(position,))
-            return c_result(self.s, record, at, closures=[TAR_387],
+            return c_result(self.s, record, at, closures=[TAR_387], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
                             governing_results=governing_results(self.s, record, at, position))
 
         hosts_only = at_position(BOGGIANO)
@@ -300,7 +300,10 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
                         selector='fixture:fx-pec-rotolo', fixture=True,
                         reading='FIXTURE personal-delivery: not a fact about DDS 113/2023', recipient='ROTOLO IRENE',
                         occurred=PEC.isoformat(), works=[dict(comune='CASTELLANA GROTTE', foglio='57', particella='89')])
-        report = caller.per_recipient([dict(records=records)], [delivery], Snapshot.load(ROOT), date(2024, 4, 5), {}, {})
+        snapshot = Snapshot.load(ROOT)
+        run = dict(at=date(2024, 4, 5), known_through=datetime(2024, 4, 5, 12, tzinfo=ROME),
+                   permitted_controlled_sources=frozenset({'f' * 64}))
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot, run, {}, {})
         cause = 'the join from a supplied record to an annex position is planned in PR #40'
         self.assertEqual(report['unattached'],
                          [dict(record='fx-pec-rotolo', order=DDS113, clause=RECORD['occurrence'], cause=cause)])
@@ -308,6 +311,28 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         # The recipient gets no per-recipient result, and no position record is touched.
         self.assertFalse([r['occurrence'] for r in records
                           if {'per_recipient', 'per_recipient_reported', 'per_recipient_cause'} & set(r)])
+        # PR #38's grant holds at a position too: a record outside it is unattached with the need as its cause.
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot,
+                                      dict(run, permitted_controlled_sources=frozenset()), {}, {})
+        self.assertEqual(report['unattached'], [dict(
+            record='fx-pec-rotolo', order=DDS113, clause=RECORD['occurrence'],
+            cause=f'authorized evidence for personal-delivery record fx-pec-rotolo on {DDS113}')])
+        self.assertFalse([r for r in records if 'per_recipient_cause' in r])
+        # PR #38's cutoff holds at a position too: a record dated after it is refused, naming the record and field,
+        # on every position record of the clause, and nothing is reported unattached.
+        early = dict(run, known_through=PEC - timedelta(hours=1))
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot, early, {}, {})
+        self.assertEqual(report['unattached'], [])
+        self.assertEqual({r['per_recipient_cause'] for r in records},
+                         {f'ValueError: Record fx-pec-rotolo (personal-delivery) states occurred {PEC.isoformat()}, '
+                          f'later than the evaluation at {early["known_through"].isoformat()}'})
+        # And the grant is stated, never defaulted.
+        for record in records:
+            record.pop('per_recipient_cause')
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot,
+                                      dict(run, permitted_controlled_sources=set()), {}, {})
+        self.assertEqual({r['per_recipient_cause'] for r in records},
+                         {'TypeError: Evaluation requires the run to state its controlled-source grant'})
 
 
 STORE = store_root(ROOT)

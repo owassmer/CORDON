@@ -7,6 +7,7 @@ public posting meets Art. 21-bis and is not re-judged; whether a held posting
 completes the stated form is C's computation from the stated period and the
 posting's dates.
 """
+from datetime import date
 from pathlib import Path
 
 from cordon_c.core import Evaluation, evaluate
@@ -126,6 +127,8 @@ def c_result(snapshot, basis, at, *, postings=()):
     states no ground, or no posting is held, nothing is supplied and C names its
     own missing predicate.
     """
+    if type(at) is not date:
+        raise TypeError('The run states its evaluation date')
     vid = snapshot.version(RULE, at)['provision_version_id']
     facts = {}
     if basis['stated_ground']:

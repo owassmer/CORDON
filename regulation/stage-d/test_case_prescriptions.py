@@ -21,6 +21,7 @@ from cordon_d.case_prescriptions import (COMMUNICATED, PrescriptionReading, appl
 
 ROOT = Path(__file__).resolve().parents[2]
 ROME = ZoneInfo('Europe/Rome')
+CUTOFF = datetime(2026, 9, 24, tzinfo=ROME)  # the run's stated knowledge cutoff
 SOURCE = '47b107a6525606934c79125d5b4f565d7193ab92aef801b80b21d25bc3a51a3d'
 PAGES = {
     1: 'DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 16 agosto 2024, n. 108\n',
@@ -120,7 +121,7 @@ class CasePrescriptionRecords(unittest.TestCase):
         self.assertEqual([r['occurrence'].rsplit(':', 2)[1] for r in records], ['clause', 'work'])
         self.assertIsNone(records[1]['stated_term'])
         self.assertIs(clause(records[1]), False)
-        self.assertEqual(c_result(self.s, records[1], date(2024, 9, 2)).effect,
+        self.assertEqual(c_result(self.s, records[1], date(2024, 9, 2), evaluated_at=CUTOFF).effect,
                          'CASE_NONCOMMENCEMENT_DIRECTION_NOT_ESTABLISHED')
 
     def test_governing_references_reach_corrections_naming_the_order(self):
@@ -135,7 +136,7 @@ class CasePrescriptionRecords(unittest.TestCase):
 
     def test_c_stays_unknown_without_held_notice(self):
         record = next(reading().records(self.s))
-        result = c_result(self.s, record, date(2024, 9, 2))
+        result = c_result(self.s, record, date(2024, 9, 2), evaluated_at=CUTOFF)
         self.assertIsNone(result.truth)
         self.assertTrue(any(COMMUNICATED in need for need in result.needs))
 
@@ -173,7 +174,7 @@ class CasePrescriptionRecords(unittest.TestCase):
         own = next(PrescriptionReading(dict(request_sha256='1' * 64, request=dict(sources=['b' * 64]),
                                             reading=correction)).records(self.s))
         self.assertIsNone(clause(own).truth)
-        self.assertIsNone(c_result(self.s, own, date(2025, 2, 5)).truth)
+        self.assertIsNone(c_result(self.s, own, date(2025, 2, 5), evaluated_at=CUTOFF).truth)
         alone = list(apply_references([own]))
         self.assertIsNone(clause(alone[0]).truth)
         order = next(reading().records(self.s))
@@ -225,7 +226,7 @@ class CasePrescriptionRecords(unittest.TestCase):
         held = dict(**personal_notice(self.s, at, notified), evaluated_at=notified + timedelta(days=11), zone=ROME,
                     calendar=national_calendar(), commencement_records_complete=True)
         self.assertEqual(c_result(self.s, record, at, **held).effect, 'CASE_NONCOMMENCEMENT_COERCIVE_DIRECTION_REQUIRED')
-        needs = c_result(self.s, record, at).needs
+        needs = c_result(self.s, record, at, evaluated_at=CUTOFF).needs
         self.assertFalse(any('lawfully due' in need for need in needs))
 
     def test_a_court_disposition_closes_liveness_only_for_its_stated_scope(self):
@@ -298,14 +299,14 @@ class CasePrescriptionRecords(unittest.TestCase):
         record = next(reading(values).records(self.s))
         hold = 'REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold'
         self.assertIn(hold, record['governing_A_references'])
-        needs = c_result(self.s, record, date(2026, 9, 24)).needs
+        needs = c_result(self.s, record, date(2026, 9, 24), evaluated_at=CUTOFF).needs
         self.assertFalse(any(need.startswith('result of') for need in needs))
         self.assertIn(f'predicate: {hold}:v2 :: the population in question holds held olives', needs)
 
     def test_a_clause_reading_limit_leaves_the_clause_unknown(self):
         record = dict(next(reading().records(self.s)), limits=('term words cut at the page edge',))
         self.assertIsNone(clause(record).truth)
-        self.assertIsNone(c_result(self.s, record, date(2024, 9, 2)).truth)
+        self.assertIsNone(c_result(self.s, record, date(2024, 9, 2), evaluated_at=CUTOFF).truth)
 
     def test_a_stated_clause_limit_gets_one_reread_that_states_it(self):
         limited = copy.deepcopy(READING)

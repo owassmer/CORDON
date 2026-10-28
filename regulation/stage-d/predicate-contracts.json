@@ -1544,7 +1544,10 @@
       "predicate": "evidence establishes that the owner, occupier or holder omitted a valid prescription to remove plants with a quarantine pest present",
       "contracts": [
         "removal-performance",
-        "boundary-context"
+        "case-prescription",
+        "operative-act",
+        "official-finding",
+        "party-land-standing"
       ]
     },
     {
@@ -3990,8 +3993,7 @@
       "predicate": "the cost target is the proven offender",
       "contracts": [
         "party-land-standing",
-        "execution-cost",
-        "boundary-context"
+        "execution-cost"
       ]
     },
     {
