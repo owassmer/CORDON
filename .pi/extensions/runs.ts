@@ -113,7 +113,7 @@ function piRoot(): string | undefined {
 export default function (pi: ExtensionAPI) {
   const watchers: FSWatcher[] = [];
   let timer: NodeJS.Timeout | null = null;
-  let redeliver: (aborted: boolean) => void = () => {};
+  let redeliver: () => void = () => {};
   let live: ExtensionContext | null = null; // the current session's context, replaced on every session_start
   // This Pi's Ghostty pane belongs to the process, not to this runtime: kept across reloads, so a reload finds it
   // without probing (a fresh runtime's title writes reach the terminal only when Pi next redraws).
@@ -464,25 +464,34 @@ export default function (pi: ExtensionAPI) {
       }, Math.max(0, key - Date.now()) + 2 * 60_000);
       resumes.set(key, { runs, timer });
     };
-    // A notice sent while the session is working waits in Pi's queue, and an interrupt drops what is queued (Owen saw a
-    // finished run go unreported this way). So a notice counts as delivered only once it is in the session; until then
-    // it is sent again whenever the session settles.
-    // A notice is a follow-up in Pi's queue until it lands in the session. Pi drops queued follow-ups only when a run
-    // is aborted (Escape clears the queue before the settle), so a notice missing from the session is sent again only
-    // at an aborted settle; a notice that is merely waiting is never sent twice (re-sending at every settle announced
-    // one run nine times). A notice sent at a settle starts its own run, so the session does not sit idle without it.
-    const send = (content: string) => {
+    // What happens to a notice depends on how it was sent (Pi 1.4.0's agent-session):
+    // - sent while the session is working, it is a follow-up in Pi's queue, which Escape and Alt+Up ("restore queued
+    //   messages") empty, and a failed post-compaction restore clears: it can be dropped, and an abort is not needed
+    //   for that;
+    // - sent while idle, it starts a run at once and lands;
+    // - sent from inside a settle, it is deferred to Pi's settle actions, which neither Escape nor an abort touches:
+    //   it always lands, later.
+    // At a settle no queued follow-up is left to run, so a notice last sent as a queued follow-up and still missing
+    // from the session was dropped, and is sent again (from the settle, so deferred). A deferred notice is never sent
+    // again: re-sending those at every aborted settle while they waited is what announced one run nine times.
+    const how = new Map<string, "queued" | "now" | "deferred">();
+    const send = (file: string, content: string, settling: boolean) => {
+      how.set(file, settling ? "deferred" : ctx.isIdle() ? "now" : "queued");
       pi.sendMessage({ customType: "factory-run", content, display: true }, { triggerTurn: true, deliverAs: "followUp" });
     };
     const deliver = (file: string, content: string) => {
       pending.set(file, content);
-      send(content);
+      send(file, content, false);
     };
-    redeliver = (aborted: boolean) => {
+    redeliver = () => {
       if (live !== ctx || pending.size === 0) return;
       const said = JSON.stringify(ctx.sessionManager.getBranch().filter((e: any) => e.type === "custom_message" && e.customType === "factory-run").map((e: any) => e.content));
-      for (const file of [...pending.keys()]) if (said.includes(`Run ${runName(file)} in `)) pending.delete(file);
-      if (aborted) for (const content of pending.values()) send(content);
+      for (const [file, content] of [...pending]) {
+        if (said.includes(`Run ${runName(file)} in `)) {
+          pending.delete(file);
+          how.delete(file);
+        } else if (how.get(file) !== "deferred") send(file, content, true);
+      }
     };
 
     // Runs that had already finished when this session started were reported to the session that started them; runs
@@ -506,9 +515,9 @@ export default function (pi: ExtensionAPI) {
 
   });
 
-  pi.on("agent_settled", (event, ctx) => {
+  pi.on("agent_settled", () => {
     try {
-      redeliver(event.aborted);
+      redeliver();
     } catch {}
   });
 
