@@ -149,7 +149,12 @@ class Identities:
 
     def check(self, named, plant):
         """None where the identifier agrees with the plant's row 9 identity; 'unchecked' where it cannot be computed
-        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); else why it does not."""
+        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); ('noted', why) where it
+        disagrees with row 9's reading but names no other plant (a key or card naming no entry, or only entries that
+        are no plant's identity, for a plant whose identity is not an entry); else why it does not agree.
+
+        A noted disagreement does not block: the deciding identifier names the plant, no other plant competes for the
+        record, and attaching changes no row 9 identity. It is reported beside the result."""
         form, held = named['identifier'], self.plants[plant]
         identity = held['identity']
         if named['kind'] == 'sample':
@@ -163,10 +168,12 @@ class Identities:
                 f"{_printed(form)} is not the parcel of entry {identity}, plant {plant}'s row 9 identity"
         entries = named['entries']
         if not entries:
-            return f'{_printed(form)} names no register entry'
+            return ('noted', f'{_printed(form)} names no register entry')
         if identity in entries or set(entries) & set(held['candidates']):
             return None
-        reasons = []
+        others = sorted({p for e in entries for p in self.by_entry.get(e, ()) if p != plant})
+        noted = identity in NOT_A_REGISTER_IDENTITY and not others
+        reasons = [] if not others else [f'{_printed(form)} names plants {others} by their row 9 identity']
         for entry in entries:
             if identity not in NOT_A_REGISTER_IDENTITY:
                 reasons.append(f"{_printed(form)} names entry {entry}; plant {plant}'s row 9 identity is entry "
@@ -179,7 +186,7 @@ class Identities:
                            if identity == 'not a register tree' else
                            f"{_printed(form)} names entry {entry}, {where}, not within d; row 9's candidates are "
                            f"{held['candidates']}")
-        return '; '.join(reasons)
+        return ('noted', '; '.join(reasons)) if noted else '; '.join(reasons)
 
     def attach(self, group):
         """One plant's group of printed identifiers: dict(plant, unchecked) where it attaches, else dict(cause,
@@ -200,9 +207,10 @@ class Identities:
         if len(deciding) == 1:
             plant = next(iter(deciding))
             checks = [(n, self.check(n, plant)) for n in named]
-            detail = [reason for _, reason in checks if reason not in (None, 'unchecked')]
+            detail = [reason for _, reason in checks if reason not in (None, 'unchecked') and not isinstance(reason, tuple)]
             if not detail:
-                return dict(plant=plant, unchecked=[n['identifier'] for n, reason in checks if reason == 'unchecked'])
+                return dict(plant=plant, unchecked=[n['identifier'] for n, reason in checks if reason == 'unchecked'],
+                            noted=[reason[1] for _, reason in checks if isinstance(reason, tuple)])
             cause = 'identifiers in conflict'
         elif deciding:
             cause = 'identifiers in conflict'
@@ -250,6 +258,9 @@ def attach(records, identities):
             notes[plant] += [dict(record=record['record'], cause=f'{_printed(form)} not checked: row 9 holds no '
                                                                  'parcel for a plant whose identity is not an entry')
                              for form in outcome['unchecked']]
+            notes[plant] += [dict(record=record['record'], cause=f'attached by its deciding identifier; it disagrees '
+                                                                 f"with row 9's reading, which it does not change: {why}")
+                             for why in outcome['noted']]
     return attached, unattached, notes
 
 
