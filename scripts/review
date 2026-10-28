@@ -138,13 +138,17 @@ on_err() { echo "=== finished exit $1 (${0##*/} stopped at line $2)" >> "$log"; 
 trap 'on_err $? $LINENO' ERR
 
 # Lanes: implementation facets of one unit at a time; plan reviews one at a time. A lane is busy while another PR's
-# run of the same kind is going (tools/feed/runs.mjs decides going).
+# run of the same kind is running, or is waiting and was dispatched first (tools/feed/runs.mjs decides the state).
+# Waiters take the lane in dispatch order: when every waiter counted every other, two PRs queued behind a third
+# waited on each other for ever (PRs #40 and #37, 2026-10-28).
 busy() {
-  local l
+  local l s
   for l in .runs/review-*.log; do
     [ "$l" = "$log" ] && continue
     grep -qx "=== kind $kind" "$l" 2>/dev/null || continue
-    node -e 'import(process.argv[2]).then(m => process.exit(m.runStateOf(process.argv[1]).state === "finished" ? 1 : 0))' "$l" "$root/tools/feed/runs.mjs" || continue
+    s=0; node -e 'import(process.argv[2]).then(m => { const s = m.runStateOf(process.argv[1]).state; process.exit(s === "finished" ? 1 : s === "waiting" ? 2 : 0); })' "$l" "$root/tools/feed/runs.mjs" || s=$?
+    [ "$s" = 1 ] && continue
+    if [ "$s" = 2 ] && [[ ! "${l##*-}|$l" < "${log##*-}|$log" ]]; then continue; fi
     if [ "$kind" = plan ] || ! grep -qx "=== pr $pr" "$l"; then return 0; fi
   done
   return 1
