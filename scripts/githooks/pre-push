@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # Refuse direct pushes to main; main changes only through a merged pull request.
+# Before any branch push, replicate the store's kept data to R2 (scripts/replicate_store.py). A push carries records that
+# name blobs and results built on model readings, so it is the moment those must be safe; a push whose replication
+# fails is refused, with the cause.
 # Install once per clone: git config core.hooksPath scripts/githooks
 while read -r _local_ref _local_sha remote_ref _remote_sha; do
   if [[ "$remote_ref" == "refs/heads/main" ]]; then
@@ -7,4 +10,10 @@ while read -r _local_ref _local_sha remote_ref _remote_sha; do
     exit 1
   fi
 done
+root="$(git rev-parse --show-toplevel)"
+python="$root/.venv/bin/python"; [[ -x "$python" ]] || python=python3
+if ! "$python" "$root/scripts/replicate_store.py"; then
+  echo "pre-push: the store's kept data was not replicated to R2 (see above), so the push was refused." >&2
+  exit 1
+fi
 exit 0
