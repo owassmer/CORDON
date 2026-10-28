@@ -510,7 +510,8 @@ def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, com
 
 # Supplied Osservatorio records (`osservatorio-records`): the operator's delivery, commencement,
 # removal and history records, as a list of JSON objects. Postings are public records (PR #15's route).
-_COMMON = {'record', 'kind', 'order', 'source', 'selector', 'reading'}
+_SUPPORT = {'record', 'kind', 'source', 'selector', 'reading'}
+_COMMON = _SUPPORT | {'order'}
 _KINDS = {
     # The delivery receipt of the order to the recipient the record names; `occurred` is the delivery
     # instant, never the acceptance receipt's. `works` (parcels or plants) is the operator's standing
@@ -522,6 +523,25 @@ _KINDS = {
     # A stated bounded complete history of performance on one work.
     'history': {'work', 'complete_from', 'complete_through'},
 }
+# The landscape proceeding for one plant (D.lgs. 19/2021 Art. 33(1), D.lgs. 42/2004 Art. 146), as the
+# Osservatorio's file holds it (`cordon_d.landscape`). `document` is the proceeding's own document as printed (the
+# request and its protocol, the transmission, the opinion, the decision); `plants` is every plant identifier the
+# record prints. There is no requirement kind: Art. 33(1) itself names the plants that need authorization.
+_LANDSCAPE = _SUPPORT | {'document', 'plants', 'occurred'}
+LANDSCAPE_KINDS = {
+    # `complete`: true where the record states the application complete, false where it states it incomplete,
+    # null where it states neither.
+    'landscape-lodging': {'complete'},
+    'landscape-acts-received': set(),
+    # `route` as printed; `resolved` as the record states it.
+    'landscape-opinion-route': {'route', 'resolved'},
+    # `intervention` as printed and its kind; `procedure` as printed; `conditions` verbatim.
+    'landscape-decision': {'intervention', 'intervention_kind', 'procedure', 'outcome', 'conditions'},
+}
+_FAMILIES = {'order': (_COMMON, _KINDS), 'landscape': (_LANDSCAPE, LANDSCAPE_KINDS)}
+# A plant identifier as a record prints it: the monitoring reference (ID / ID_CAMPIONE), the register key (COD),
+# the census card or tag with its comune, or a parcel. Never normalized here.
+IDENTIFIER_FORMS = ({'sample'}, {'cod'}, {'card', 'comune'}, {'comune', 'foglio', 'particella'})
 
 
 def _moment(text):
@@ -545,27 +565,74 @@ def _work(value):
     return tuple(sorted(value.items()))
 
 
-def supplied_records(entries):
+def _identifier(value):
+    """A plant identifier as the record prints it (`IDENTIFIER_FORMS`)."""
+    if not isinstance(value, dict) or set(value) not in IDENTIFIER_FORMS:
+        raise ValueError(f'A plant identifier is a printed sample, COD, card and comune, or parcel: {value}')
+    if not all(isinstance(v, str) and v.strip() for v in value.values()):
+        raise ValueError(f'A plant identifier prints every part: {value}')
+    return tuple(sorted(value.items()))
+
+
+def _landscape(entry):
+    """The values of a landscape record; returns the plant identifiers it prints."""
+    name, kind = entry['record'], entry['kind']
+    if not isinstance(entry['plants'], list) or not entry['plants']:
+        raise ValueError(f'Record {name} ({kind}) prints no plant identifier')
+    if not isinstance(entry['document'], str) or not entry['document'].strip():
+        raise ValueError(f'Record {name} ({kind}) names no document')
+    if kind == 'landscape-lodging' and entry['complete'] is not None and type(entry['complete']) is not bool:
+        raise ValueError(f'Record {name}: complete is what the record states, true, false or null')
+    if kind == 'landscape-opinion-route' and (type(entry['resolved']) is not bool
+                                             or not isinstance(entry['route'], str) or not entry['route'].strip()):
+        raise ValueError(f'Record {name}: an opinion route prints its route and states whether it is resolved')
+    if kind == 'landscape-decision':
+        if entry['outcome'] not in ('granted', 'granted-with-conditions', 'denied'):
+            raise ValueError(f"Record {name}: outcome {entry['outcome']!r} is not granted, granted-with-conditions "
+                             'or denied')
+        if entry['intervention_kind'] not in ('removal', 'replanting-only', 'other'):
+            raise ValueError(f"Record {name}: intervention_kind {entry['intervention_kind']!r} is not removal, "
+                             'replanting-only or other')
+        if not all(isinstance(entry[k], str) and entry[k].strip() for k in ('intervention', 'procedure')):
+            raise ValueError(f'Record {name}: a decision prints its intervention and procedure')
+        conditions = entry['conditions']
+        if not isinstance(conditions, list) or not all(isinstance(c, str) and c.strip() for c in conditions):
+            raise ValueError(f'Record {name}: conditions are the decision\'s words, verbatim')
+        if bool(conditions) != (entry['outcome'] == 'granted-with-conditions'):
+            raise ValueError(f"Record {name}: a {entry['outcome']} decision with {len(conditions)} conditions")
+    return tuple(dict.fromkeys(_identifier(p) for p in entry['plants']))
+
+
+def supplied_records(entries, family='order'):
     """Validate supplied records as the existing typed inputs; refuse anything else.
 
     Each record becomes an `AdministrativeEvent` whose `Support` cites its controlled
     source. A record carries only its kind's fields and an optional `fixture` mark
     (test records): no order-text predicate, notification instant or completeness
     flag can ride along. A personal delivery is the delivery receipt only; an
-    acceptance receipt is not supplied as one.
+    acceptance receipt is not supplied as one. `family` is the kinds the caller
+    takes: 'order' (a removal order's records) or 'landscape' (a plant's landscape
+    proceeding, `cordon_d.landscape`); a record of another kind is refused.
     """
     from .events import AdministrativeEvent
     from .evidence import Support
+    common, kinds = _FAMILIES[family]
     records = []
     for entry in entries:
         kind = entry.get('kind')
-        if kind not in _KINDS:
-            raise ValueError(f'Unsupported supplied record kind: {kind}')
+        if kind not in kinds:
+            raise ValueError(f'Unsupported supplied record kind for {family} records: {kind}')
         fields = set(entry) - {'fixture'}
-        expected = _COMMON | _KINDS[kind]
+        expected = common | kinds[kind]
         if fields != expected:
             raise ValueError(f"Record {entry.get('record')} ({kind}) differs in {sorted(fields ^ expected)}")
         support = Support(entry['source'], entry['selector'], entry['reading'])
+        if family == 'landscape':
+            identifiers = _landscape(entry)
+            event = AdministrativeEvent(entry['record'], kind, entry['document'], None, _moment(entry['occurred']),
+                                        support)
+            records.append(dict(entry, event=event, identifiers=identifiers, fixture=bool(entry.get('fixture'))))
+            continue
         recipient = entry.get('recipient')
         if kind == 'personal-delivery':
             occurred = _moment(entry['occurred'])

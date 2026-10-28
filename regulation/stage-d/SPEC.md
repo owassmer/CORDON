@@ -683,3 +683,34 @@ batch. The 2011 census check reads its tolerance from the held
 capitolato d'oneri and checks the census's own bound; with fewer than 20 census
 fixes it is not checked, and the census residuals' own 95th percentile is printed
 as information.
+
+## Landscape proceeding
+
+`cordon_d.landscape` (`scripts/read_landscape.py --records`) supplies row 10 from
+the Osservatorio's own file, through the supplied-record path
+(`case_prescriptions.supplied_records`, family `landscape`): a
+`landscape-lodging` (complete as the record states it), a
+`landscape-acts-received`, a `landscape-opinion-route` (the route as printed,
+resolved or not) and a `landscape-decision` (the intervention as printed and
+its kind, the procedure as printed, granted, granted with conditions or
+denied, and its conditions verbatim), each an `AdministrativeEvent` printing
+every plant identifier it carries. There is no requirement kind: D.lgs.
+19/2021 Art. 33(1) itself names the plants that need authorization, and A
+encodes them. A record attaches to one plant through row 9's identity: a
+monitoring reference names the plants that carry it; a COD or a census card
+with its comune names a plant only through the one register entry it names
+and the plant whose row 9 identity is that entry; a parcel only qualifies.
+It attaches where its deciding identifiers name one plant and every
+identifier it prints names that plant; otherwise it is reported unattached,
+with no match, several matches or identifiers in conflict, and fills
+nothing. For each plant asked about, at the evaluation date, only the records
+dated on or before it reach C: the acts received fill Art. 146(8); the latest
+opinion route fills 146(5)'s route predicate, false only where it is stated
+unresolved; a lodging stated complete fills 146(5)'s performance edge; the
+latest decision for that plant's removal fills Art. 33(1)'s grant, false
+only for a denial, with its date, procedure and conditions beside the
+result; records of one day that state different values supply nothing. A
+lodging anchors B's 45-day clock, and its end is reported; elapsed time
+fills nothing. The caller sets neither Art. 146(2) predicate, nor Union
+obligations, and passes Art. 33(1)'s measure, status and infection
+conjuncts only as their owning units supply them.
