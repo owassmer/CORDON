@@ -31,7 +31,6 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 import { runState } from "../../tools/feed/runs.mjs";
 
 const FEED_KEY = "ctrl+shift+r";
-const REDELIVER_AFTER_MS = 120_000;
 const FEED_TITLE = "⧉ ";
 
 const git = (cwd: string, ...a: string[]) => {
@@ -465,21 +464,24 @@ export default function (pi: ExtensionAPI) {
       }, Math.max(0, key - Date.now()) + 2 * 60_000);
       resumes.set(key, { runs, timer });
     };
-    // A notice sent while the session is working waits in Pi's queue, and an interrupt drops what is queued (Owen saw a
-    // finished run go unreported this way). So a notice counts as delivered only once it is in the session; until then
-    // it is sent again whenever the session settles.
-    // A notice still waiting in Pi's queue is not yet in the session either, and a session that settles several times
-    // while notices wait (each interrupt settles it) would send each waiting notice again every time: one finished run
-    // was announced nine times. So a notice is sent again only once it has been missing for REDELIVER_AFTER_MS since
-    // it was last sent, long enough for a queued one to have landed.
-    const sentAt = new Map<string, number>();
-    const send = (file: string, content: string) => {
-      sentAt.set(file, Date.now());
+    // What happens to a notice depends on how it was sent (Pi 1.4.0's agent-session):
+    // - sent while the session is working, it is a follow-up in Pi's queue, which Escape and Alt+Up ("restore queued
+    //   messages") empty, and a failed post-compaction restore clears: it can be dropped, and an abort is not needed
+    //   for that;
+    // - sent while idle, it starts a run at once and lands;
+    // - sent from inside a settle, it is deferred to Pi's settle actions, which neither Escape nor an abort touches:
+    //   it always lands, later.
+    // At a settle no queued follow-up is left to run, so a notice last sent as a queued follow-up and still missing
+    // from the session was dropped, and is sent again (from the settle, so deferred). A deferred notice is never sent
+    // again: re-sending those at every aborted settle while they waited is what announced one run nine times.
+    const how = new Map<string, "queued" | "now" | "deferred">();
+    const send = (file: string, content: string, settling: boolean) => {
+      how.set(file, settling ? "deferred" : ctx.isIdle() ? "now" : "queued");
       pi.sendMessage({ customType: "factory-run", content, display: true }, { triggerTurn: true, deliverAs: "followUp" });
     };
     const deliver = (file: string, content: string) => {
       pending.set(file, content);
-      send(file, content);
+      send(file, content, false);
     };
     redeliver = () => {
       if (live !== ctx || pending.size === 0) return;
@@ -487,8 +489,8 @@ export default function (pi: ExtensionAPI) {
       for (const [file, content] of [...pending]) {
         if (said.includes(`Run ${runName(file)} in `)) {
           pending.delete(file);
-          sentAt.delete(file);
-        } else if (Date.now() - (sentAt.get(file) ?? 0) >= REDELIVER_AFTER_MS) send(file, content);
+          how.delete(file);
+        } else if (how.get(file) !== "deferred") send(file, content, true);
       }
     };
 
@@ -513,7 +515,7 @@ export default function (pi: ExtensionAPI) {
 
   });
 
-  pi.on("agent_settled", (_event, ctx) => {
+  pi.on("agent_settled", () => {
     try {
       redeliver();
     } catch {}
