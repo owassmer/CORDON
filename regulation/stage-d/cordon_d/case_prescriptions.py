@@ -380,17 +380,20 @@ WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends', 'withdraws')
 def _decided_in_a(reason, record):
     """Whether an A row governing the record already decides what a court's stated reason states.
 
-    True where the reason cites at least one Osservatorio act other than the order, read by its act
-    type (`held_acts._DESIGNATED`, the owner of a printed act identity), and every act so cited is the
-    instrument of an A row governing the record (`governing_A_references`): A records that act's effect
-    on this order, so a moot ruling adds nothing (owner ruling, 2026-10-28). Otherwise the court's words
-    stay a need: whether an act A does not record ended the order is a question of legal meaning, not
-    D's (TAR Bari 1007/2023 on DDS 119/2022). Only what the act-type route reads is consulted; an act a
-    reason cites in another form (a D.G.R., a law, words alone) is not, and reaches C only as a held
-    act's own stated change (`stated_changes`).
+    True where the reason cites at least one act other than the order, read as `held_acts.printed_identities`
+    reads a printed act identity (a designator with number and year, "DDS n. 18/2024", or a number with
+    its date, "n. 127 del 17.11.2022"), and every act so cited is the instrument of an A row governing the
+    record (`governing_A_references`): A records that act's effect on this order, so a moot ruling adds
+    nothing (owner ruling, 2026-10-28). Otherwise the court's words stay a need: whether an act A does
+    not record ended the order is a question of legal meaning, not D's (TAR Bari 1007/2023 on DDS
+    119/2022). A number read with a date that is no act (a ricorso, a bulletin) keeps the need. The
+    residual is an act that reader does not read: a later number in a list under one designator ("DDS
+    n. 18/2024 e n. 127/2022"), an act with no number (a D.G.R., a law, words alone), or another office's
+    act printed as "D.D. n/year", which `act_id` reads as the Osservatorio's. Such an act reaches C only
+    as a held act's own stated change (`stated_changes`).
     """
-    from .held_acts import _DESIGNATED
-    cited = {act_id(int(m.group(1)), int(m.group(2))) for m in _DESIGNATED.finditer(' '.join(reason))}
+    from .held_acts import printed_identities
+    cited = {act_id(number, year) for number, year, _, _ in printed_identities(' '.join(reason))}
     later = cited - {record['instrument']}
     recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
     return bool(later) and later <= recorded

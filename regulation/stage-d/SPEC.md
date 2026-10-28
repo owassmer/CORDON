@@ -505,13 +505,15 @@ court's stated reason, or a stated correction, replacement, revocation,
 suspension or withdrawal, whole or in part, that no A row records, leaves it
 unknown and names the act and the words stating what changes. A challenge ended
 with a stated reason adds nothing where the governing rows already decide it: the
-reason cites, by act type, at least one Osservatorio act other than the order, and
+reason cites at least one act other than the order, read as a held act's printed
+identity is read (a designator with number and year, or a number with its date), and
 each act it so cites is the instrument of an A row governing the record (a moot
 ruling annuls nothing). Otherwise the need stays, because whether an act A does not
 record ended the order is a question of legal meaning (TAR Bari 1007/2023 on DDS
-119/2022). Only what the act-type route reads is consulted: an act a reason cites
-in another form reaches C only as a held act's own stated change, and that is the
-residual. Nothing is patched.
+119/2022). The residual is an act that reading does not recover: a later number
+listed under one designator, an act with no number, or another office's act printed
+as "D.D. n/year". Such an act reaches C only as a held act's own stated change.
+Nothing is patched.
 Every such outcome only withholds, so the order's own reading under a disposition
 or stated change replaces only a dueness the governing rows leave true: a not due
 from a governing row stands, with its row in `provisions`, and an unknown from the

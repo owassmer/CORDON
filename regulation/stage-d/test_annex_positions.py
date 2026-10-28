@@ -285,7 +285,7 @@ class AnnexPositions(unittest.TestCase):
         tar_383 = dict(TAR_387, stated_reason=reason, decision=dict(TAR_387['decision'], number='383/2026'))
 
         def at_holder(stated_reason=reason, references=(WITHDRAWAL,)):
-            record = dict(RECORD, instrument=DDS119, adopted='2023-11-03', governing_A_references=references,
+            record = dict(RECORD, instrument=DDS119, adopted='2023-11-08', governing_A_references=references,
                           recipients=(APULEO,))
             return c_result(self.s, record, at, closures=[dict(tar_383, stated_reason=stated_reason)],
                             evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
@@ -305,6 +305,9 @@ class AnnexPositions(unittest.TestCase):
         # Every act the reason cites must be one A records for the order: adding TAR 1007/2023's citation of
         # DDS 127/2022, which no A row records for DDS 119/2023, keeps the need.
         self.assertTrue(names_court(at_holder(stated_reason=(reason[0] + ' e della DDS n. 127/2022', reason[1]))))
+        # The same act cited as TAR 383/2026's own text cites it, by number and date, keeps the need too.
+        self.assertTrue(names_court(at_holder(stated_reason=(
+            reason[0] + ", e della det. reg. n. 127 del 17.11.2022 dell'Osservatorio", reason[1]))))
 
     def test_tar_1007_2023_keeps_its_need_on_dds_119_2022(self):
         # TAR Bari Sentenza 1007/2023 (store 700b7350…2e0d) ended the challenge to DDS 119/2022 on DDS 127/2022,
@@ -313,7 +316,7 @@ class AnnexPositions(unittest.TestCase):
             'Il gravame va dichiarato improcedibile sulla scorta dell’eccezione formulata dalla difesa della Regione '
             'resistente che –come già riportato sub 1- ha opposto la sopravvenienza della DDS n. 127/2022, rimasta '
             'inoppugnata',), decision=dict(TAR_387['decision'], number='1007/2023'), since=date(2023, 7, 15))
-        record = dict(RECORD, instrument='REG-PUGLIA-U181-DIR-2022-00119', adopted='2022-06-21',
+        record = dict(RECORD, instrument='REG-PUGLIA-U181-DIR-2022-00119', adopted='2022-10-14',
                       governing_A_references=(), recipients=('ai proprietari',))
         result = c_result(self.s, record, date(2026, 9, 24), closures=[closure], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME))
         self.assertIsNone(result.truth)

@@ -61,6 +61,11 @@ CODE = (
     ("let one recorded act among those a court's reason cites drop its need", 'cordon_d.case_prescriptions',
      '    return bool(later) and later <= recorded\n', '    return bool(later & recorded)\n',
      'test_annex_positions.AnnexPositions.test_a_court_reason_decides_nothing_a_does_not_record'),
+    ("read a court's citations by act type alone, not by number and date", 'cordon_d.case_prescriptions',
+     "    cited = {act_id(number, year) for number, year, _, _ in printed_identities(' '.join(reason))}\n",
+     "    cited = {act_id(number, year) for number, year, printed, _ in printed_identities(' '.join(reason))"
+     " if printed is None}\n",
+     'test_annex_positions.AnnexPositions.test_a_court_reason_decides_nothing_a_does_not_record'),
     ("keep every court reason's need, A row or not", 'cordon_d.case_prescriptions',
      '            if not _decided_in_a(closure[\'stated_reason\'], record):\n', '            if True:\n',
      'test_annex_positions.AnnexPositions.test_a_court_reason_decides_nothing_a_does_not_record'),
