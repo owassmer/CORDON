@@ -542,7 +542,8 @@ def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, com
 
 # Supplied Osservatorio records (`osservatorio-records`): the operator's delivery, commencement,
 # removal and history records, as a list of JSON objects. Postings are public records (PR #15's route).
-_COMMON = {'record', 'kind', 'order', 'source', 'selector', 'reading'}
+_SUPPORT = {'record', 'kind', 'source', 'selector', 'reading'}
+_COMMON = _SUPPORT | {'order'}
 _KINDS = {
     # The delivery receipt of the order to the recipient the record names; `occurred` is the delivery
     # instant, never the acceptance receipt's. `works` (parcels or plants) is the operator's standing
@@ -554,6 +555,29 @@ _KINDS = {
     # A stated bounded complete history of performance on one work.
     'history': {'work', 'complete_from', 'complete_through'},
 }
+# The landscape proceeding (D.lgs. 19/2021 Art. 33(1), D.lgs. 42/2004 Art. 146), as the Osservatorio's file
+# holds it (`cordon_d.landscape`). `document` is the proceeding's own document as printed (the request and its
+# protocol, the transmission, the opinion, the decision). `plants` is the plants the record names, one group of
+# printed identifiers per plant: one request or decision can cover several trees. There is no requirement kind:
+# Art. 33(1) itself names the plants that need authorization.
+_LANDSCAPE = _SUPPORT | {'document', 'plants', 'occurred'}
+LANDSCAPE_KINDS = {
+    # `complete`: true where the record states the application complete, false where it states it incomplete,
+    # null where it states neither. `recipient`: the authority it was lodged with, as printed (null: not printed).
+    'landscape-lodging': {'complete', 'recipient'},
+    # The superintendent's receipt of the acts (Art. 146(8)), not a notice that they were sent (146(7)).
+    # `complete` and `recipient` (the superintendent who received them) as for the lodging.
+    'landscape-acts-received': {'complete', 'recipient'},
+    # `route` as printed; `resolved` as the record states it.
+    'landscape-opinion-route': {'route', 'resolved'},
+    # `intervention` as printed and its kind; `procedure` as printed; `conditions` verbatim; `issuer`, the
+    # authority that decided, as printed (null: not printed). D judges no competence.
+    'landscape-decision': {'intervention', 'intervention_kind', 'procedure', 'outcome', 'conditions', 'issuer'},
+}
+_FAMILIES = {'order': (_COMMON, _KINDS), 'landscape': (_LANDSCAPE, LANDSCAPE_KINDS)}
+# A plant identifier as a record prints it: the monitoring reference (ID / ID_CAMPIONE), the register key (COD),
+# the census card or tag with its comune, or a parcel. Never normalized here.
+IDENTIFIER_FORMS = ({'sample'}, {'cod'}, {'card', 'comune'}, {'comune', 'foglio', 'particella'})
 
 
 def _moment(text):
@@ -577,27 +601,85 @@ def _work(value):
     return tuple(sorted(value.items()))
 
 
-def supplied_records(entries):
+def _identifier(value):
+    """A plant identifier as the record prints it (`IDENTIFIER_FORMS`)."""
+    if not isinstance(value, dict) or set(value) not in IDENTIFIER_FORMS:
+        raise ValueError(f'A plant identifier is a printed sample, COD, card and comune, or parcel: {value}')
+    if not all(isinstance(v, str) and v.strip() for v in value.values()):
+        raise ValueError(f'A plant identifier prints every part: {value}')
+    return tuple(sorted(value.items()))
+
+
+def _printed_or_null(value):
+    return value is None or (isinstance(value, str) and bool(value.strip()))
+
+
+def _landscape(entry):
+    """The values of a landscape record; returns the plants it names, each a tuple of its printed identifiers."""
+    name, kind = entry['record'], entry['kind']
+    groups = entry['plants']
+    if not isinstance(groups, list) or not groups or not all(isinstance(g, list) and g for g in groups):
+        raise ValueError(f'Record {name} ({kind}) names its plants as a list of groups, each the identifiers it '
+                         'prints for one plant')
+    if not isinstance(entry['document'], str) or not entry['document'].strip():
+        raise ValueError(f'Record {name} ({kind}) names no document')
+    if kind in ('landscape-lodging', 'landscape-acts-received'):
+        if entry['complete'] is not None and type(entry['complete']) is not bool:
+            raise ValueError(f'Record {name}: complete is what the record states, true, false or null')
+        if not _printed_or_null(entry['recipient']):
+            raise ValueError(f'Record {name}: the recipient as printed, or null where none is printed')
+    if kind == 'landscape-opinion-route' and (type(entry['resolved']) is not bool
+                                             or not isinstance(entry['route'], str) or not entry['route'].strip()):
+        raise ValueError(f'Record {name}: an opinion route prints its route and states whether it is resolved')
+    if kind == 'landscape-decision':
+        if entry['outcome'] not in ('granted', 'granted-with-conditions', 'denied'):
+            raise ValueError(f"Record {name}: outcome {entry['outcome']!r} is not granted, granted-with-conditions "
+                             'or denied')
+        if entry['intervention_kind'] not in ('removal', 'replanting-only', 'other'):
+            raise ValueError(f"Record {name}: intervention_kind {entry['intervention_kind']!r} is not removal, "
+                             'replanting-only or other')
+        if not all(isinstance(entry[k], str) and entry[k].strip() for k in ('intervention', 'procedure')):
+            raise ValueError(f'Record {name}: a decision prints its intervention and procedure')
+        conditions = entry['conditions']
+        if not isinstance(conditions, list) or not all(isinstance(c, str) and c.strip() for c in conditions):
+            raise ValueError(f'Record {name}: conditions are the decision\'s words, verbatim')
+        if bool(conditions) != (entry['outcome'] == 'granted-with-conditions'):
+            raise ValueError(f"Record {name}: a {entry['outcome']} decision with {len(conditions)} conditions")
+        if not _printed_or_null(entry['issuer']):
+            raise ValueError(f'Record {name}: the issuer as printed, or null where none is printed')
+    return tuple(tuple(dict.fromkeys(_identifier(p) for p in group)) for group in groups)
+
+
+def supplied_records(entries, family='order'):
     """Validate supplied records as the existing typed inputs; refuse anything else.
 
     Each record becomes an `AdministrativeEvent` whose `Support` cites its controlled
     source. A record carries only its kind's fields and an optional `fixture` mark
     (test records): no order-text predicate, notification instant or completeness
     flag can ride along. A personal delivery is the delivery receipt only; an
-    acceptance receipt is not supplied as one.
+    acceptance receipt is not supplied as one. `family` is the kinds the caller
+    takes: 'order' (a removal order's records) or 'landscape' (a plant's landscape
+    proceeding, `cordon_d.landscape`); a record of another kind is refused.
     """
     from .events import AdministrativeEvent
     from .evidence import Support
+    common, kinds = _FAMILIES[family]
     records = []
     for entry in entries:
         kind = entry.get('kind')
-        if kind not in _KINDS:
-            raise ValueError(f'Unsupported supplied record kind: {kind}')
+        if kind not in kinds:
+            raise ValueError(f'Unsupported supplied record kind for {family} records: {kind}')
         fields = set(entry) - {'fixture'}
-        expected = _COMMON | _KINDS[kind]
+        expected = common | kinds[kind]
         if fields != expected:
             raise ValueError(f"Record {entry.get('record')} ({kind}) differs in {sorted(fields ^ expected)}")
         support = Support(entry['source'], entry['selector'], entry['reading'])
+        if family == 'landscape':
+            identifiers = _landscape(entry)
+            event = AdministrativeEvent(entry['record'], kind, entry['document'], entry.get('recipient'),
+                                        _moment(entry['occurred']), support)
+            records.append(dict(entry, event=event, identifiers=identifiers, fixture=bool(entry.get('fixture'))))
+            continue
         recipient = entry.get('recipient')
         if kind == 'personal-delivery':
             occurred = _moment(entry['occurred'])
@@ -611,7 +693,7 @@ def supplied_records(entries):
     return records
 
 
-def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_sources, zone):
+def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_sources, zone, family='order'):
     """The supplied records of `act` the run admits, split by the stated grant: (granted, ungranted).
 
     Supplied records are controlled sources (`osservatorio-records`); the grant is a
@@ -621,12 +703,15 @@ def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_source
     and the set is refused, granted or not, naming the record and field. Each
     ungranted item is (record, need) with the need 'authorized evidence for …'.
     `recipient_results` and the position path of `read_prescriptions.per_recipient`
-    both apply this.
+    both apply this to an order's records; `landscape.landscape_results` applies it to
+    the landscape proceeding's (`family` 'landscape', `act` None: they name no order).
     """
     if not isinstance(permitted_controlled_sources, frozenset):
         raise TypeError('Evaluation requires the run to state its controlled-source grant')
-    records = supplied_records(supplied)
-    if any(r['order'] != act for r in records):
+    records = supplied_records(supplied, family)
+    if family == 'landscape' and act is not None:
+        raise ValueError(f'Landscape records name no order: {act}')
+    if family == 'order' and any(r['order'] != act for r in records):
         raise ValueError(f'A supplied record names another order than {act}')
     today = evaluated_at.astimezone(zone).date()
     for r in records:
@@ -1005,7 +1090,8 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
 
 
 def _unauthorized(record, act):
-    return f"authorized evidence for {record['kind']} record {record['record']} on {act}"
+    on = '' if act is None else f' on {act}'
+    return f"authorized evidence for {record['kind']} record {record['record']}{on}"
 
 
 def _dueness_defaults(common):

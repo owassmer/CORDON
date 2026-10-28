@@ -791,3 +791,63 @@ batch. The 2011 census check reads its tolerance from the held
 capitolato d'oneri and checks the census's own bound; with fewer than 20 census
 fixes it is not checked, and the census residuals' own 95th percentile is printed
 as information.
+
+## Landscape proceeding
+
+`cordon_d.landscape` (`scripts/read_landscape.py --records`) supplies row 10
+from the Osservatorio's own file, through the supplied-record path
+(`case_prescriptions.supplied_records`, family `landscape`): a
+`landscape-lodging` and a `landscape-acts-received` (the superintendent's
+receipt of the acts, not a notice that they were sent), each with its recipient
+as printed and complete as the record states it (true, false or null); a
+`landscape-opinion-route` (the route as printed, resolved or not); and a
+`landscape-decision` (the intervention as printed and its kind, the procedure
+and issuer as printed, granted, granted with conditions or denied, and its
+conditions verbatim). Each is an `AdministrativeEvent` naming one or more
+plants, each by the group of identifiers it prints for that plant. There is no
+requirement kind: D.lgs. 19/2021 Art. 33(1) itself names the plants that need
+authorization, and A encodes them. The run admits the records as
+`admitted_records` admits an order's: one dated after the knowledge cutoff
+refuses the set, naming the record and field; one outside the stated grant
+reaches no result and is listed only by name, kind and need, and for a plant it
+names, dated on or before the evaluation date, the results it could change (Art.
+33(1) for a decision, 146(5) and the clock for a lodging, 146(5) for an opinion
+route, 146(8) for a receipt) are withheld with the need "authorized evidence for
+…". Each group attaches, or is reported unattached, on its own, through row 9's
+identity, which it never changes: an entry; "unknown" between the candidate
+entries within the plant's d; or "not a register tree". A monitoring reference
+names the plants that carry it; a COD, or a census card with its comune, names
+register entries, and a plant whose row 9 identity is one of them. A group
+attaches to the one plant its deciding identifiers name (a monitoring reference
+naming one plant, or a key or card naming one entry that is one plant's
+identity) where every other identifier it prints agrees with that plant: a key
+or card names the plant's identity entry or, for an "unknown" plant, one of its
+candidates; a parcel is checked only against an entry identity's own parcel, and
+otherwise is reported unchecked, neither blocking nor deciding. A card is read as
+the register prints it (its number, or its text where it is not all digits, such
+as APP_618213) in its comune, the comune's printed variants folded (NARDO',
+NARDO` and Nardò are one). A key or card that names no register entry held here
+blocks for every plant: the index finding none is not evidence that no tree
+carries it. Otherwise the group is unattached and
+fills nothing: identifiers in conflict where they name different plants or one
+disagrees with row 9 (a register entry outside the plant's candidates, named with
+its distance, is another monumental tree whether or not row 9 holds it as a
+plant; or the plant's decided identity, named); identity undecided where its keys and cards name only
+entries that are no plant's identity, among them candidates of "unknown" plants,
+named with those plants; several matches; or no match. Two groups of a record
+that are one plant attach once and are reported. For each plant asked about, at
+the evaluation date, a granted record dated after it is reported, not passed,
+and among several records of a kind the latest day's decide, while one day's
+that state different values supply nothing and are reported: acts received
+stated complete fill Art. 146(8); the opinion route fills 146(5)'s route
+predicate, false only where it is stated unresolved; a lodging stated complete
+fills 146(5)'s performance edge; the decision for that plant's removal fills
+Art. 33(1)'s grant, false only for a denial, with its date, procedure, issuer
+and conditions beside the result, and a decision covering several trees fills it
+for each tree it attaches to. Passed lodgings at one moment anchor B's 45-day
+clock, and its end is reported (at different moments, none anchors it, and that
+is reported); elapsed time fills nothing. A record attached to a plant not asked
+about is listed with that plant, and a value asked about that is a monitoring
+reference, not a plant, is reported with the plants it names. The caller sets
+neither Art. 146(2) predicate, nor Union obligations, and passes Art. 33(1)'s
+measure, status and infection conjuncts only as their owning units supply them.
