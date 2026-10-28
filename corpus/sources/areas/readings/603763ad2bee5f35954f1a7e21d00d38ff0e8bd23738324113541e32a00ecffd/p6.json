@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8dedef3261b938419977676bf98ae6ef453116a943b4c7acc2eb8b21e7972716",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:26.666185+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI: table \"Documento - Impronta (SHA256)\" listing \"ALLEGATO A - Procedure operative .pdf - 3e86466aad414f96e000c25c434948e16b882a0dae9a5c3b0073f8d2b8cfaa7d\" (a document hash-attachment list, not a cadastral annex table)",
+   "Basato sulla proposta n. 181/DIR/2025/00048 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

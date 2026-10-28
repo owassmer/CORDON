@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00158",
+ "act_sha256": "3f8c274672be3b4a643f3bed4fa2928d362306d96231cd65c093b538c750918a",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "071fde7d1a6bbf2d5b428fcddcab29c2002adbe5b58b4565db5aed75b5db1086",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:15:28.027682+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "82772 Bollettino Ufficiale della Regione Puglia - n. 97 del 2-12-2024",
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 18 novembre 2024, n. 158 - Applicazione Reg. UE 2024/2507 di modifica del Reg. UE 2020/1201 - Aggiornamento dell'area delimitata a Xylella fastidiosa sottospecie Pauca ST53 - ai sensi dell'art. 4 del Reg. UE 2020/1201."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

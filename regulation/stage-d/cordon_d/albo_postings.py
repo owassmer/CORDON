@@ -109,8 +109,9 @@ def register_events(rows, *, source, publisher, role, held):
     kept for what it states (`row_kind`); neither kind is execution or notice.
     Only rows that print the Osservatorio as issuer, in full or cut where the
     field ends, are considered; an identity without an issuer is not an order's
-    identity. Every identity such a row prints is attached or listed unattached
-    with its cause.
+    identity. An identity the matcher reads in such a row is attached or listed
+    unattached with its cause; identity forms it does not read are neither (SPEC,
+    the albo matcher's reading limit).
     """
     events, unattached = [], []
     for row in rows:

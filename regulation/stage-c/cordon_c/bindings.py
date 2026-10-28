@@ -9,9 +9,9 @@ from datetime import date, datetime, time, timedelta
 from collections.abc import Mapping
 from decimal import Decimal
 
-from .core import Evaluation, MissingInput, Snapshot, evaluate, negation, disjunction, predicate_value
+from .core import Evaluation, MissingInput, Snapshot, evaluate, _leaves, negation, disjunction, predicate_value
 from .diagnostic import AssayResult, analytical_predicates
-from .quantities import scalar, clock_boundary, PeriodRule, timely_completion, clock_ordering, continuous_duration_support
+from .quantities import scalar, clock_boundary, PeriodRule, timely_completion, clock_ordering, continuous_duration_support, _local_day
 from .quantities import compare_scalar
 from .temporal import elapsed_hours, end_of_day, utc, WorkingCalendar, occurrence_in_window
 from .core import conjunction
@@ -24,15 +24,7 @@ from .quantities import metres
 
 
 def leaves(ast: dict):
-    if "predicate" in ast:
-        yield ast["predicate"]
-    for value in ast.values():
-        if isinstance(value, dict):
-            yield from leaves(value)
-        elif isinstance(value, list):
-            for item in value:
-                if isinstance(item, dict):
-                    yield from leaves(item)
+    return _leaves(ast)
 
 
 def bind(row: dict, values: Mapping[str, bool | Evaluation]) -> dict[tuple[str, str], bool | Evaluation]:
@@ -78,8 +70,7 @@ def adopted_area_facts(snapshot: Snapshot, identity: str, at: date,
     row = snapshot.version(identity, at)
     membership = (adopted_membership(point, area) if point.geometry.geom_type == "Point"
                   else partial_parcel(point, area))
-    return bind(row, {"the point or parcel lies within the geography adopted by this act and its annexes": membership,
-                      "decision time within this version's effective interval": True})
+    return bind(row, {"the point or parcel lies within the geography adopted by this act and its annexes": membership})
 
 
 def merge_facts(*mappings: Mapping) -> dict:
@@ -93,8 +84,15 @@ def merge_facts(*mappings: Mapping) -> dict:
     return merged
 
 
+def _precedes(first: date | datetime, second: date | datetime, zone: ZoneInfo) -> bool:
+    """Earlier instant, or earlier local day when either side is a printed date."""
+    if isinstance(first, datetime) and isinstance(second, datetime):
+        return utc(first) < utc(second)
+    return _local_day(first, zone) < _local_day(second, zone)
+
+
 def custody_facts(snapshot: Snapshot, identity: str, at: date, *,
-                  collected_at: datetime, delivered_at: datetime | None,
+                  collected_at: date | datetime, delivered_at: date | datetime | None,
                   evaluated_at: datetime, delivery_records_complete: bool,
                   refrigerated_transport: Evaluation, other_mandatory_failure: Evaluation,
                   zone: ZoneInfo) -> dict:
@@ -104,7 +102,7 @@ def custody_facts(snapshot: Snapshot, identity: str, at: date, *,
               and c["kind"] == "same_calendar_day"]
     if len(clocks) != 1:
         raise ValueError("Custody route has no unique same-day clock")
-    if delivered_at is not None and utc(delivered_at) < utc(collected_at):
+    if delivered_at is not None and _precedes(delivered_at, collected_at, zone):
         raise ValueError("Delivery cannot precede collection of this sample")
     timing = timely_completion(snapshot, clocks[0]["clock_id"], at,
         anchor=collected_at, completed_at=delivered_at, evaluated_at=evaluated_at,

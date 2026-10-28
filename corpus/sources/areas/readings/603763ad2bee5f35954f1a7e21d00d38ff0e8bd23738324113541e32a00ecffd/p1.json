@@ -1,0 +1,291 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "63af0a2ca9f1f64289b56f5dc4c25cb4b6c0cee3ba238e5089e0817992bea596",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:26:44.469224+00:00",
+ "native_tables": [
+  {
+   "id": "p1-t1",
+   "bbox": [
+    297.9,
+    215.5,
+    506.9,
+    366.5
+   ]
+  },
+  {
+   "id": "p1-t2",
+   "bbox": [
+    297.9,
+    371.7,
+    506.9,
+    396.5
+   ]
+  }
+ ],
+ "native_cells": {
+  "p1-t1-r1-c1": {
+   "text": "Codifica adempimenti L.R. 15/08 (trasparenza)",
+   "table": "p1-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    297.9,
+    215.5,
+    506.9,
+    231.0
+   ]
+  },
+  "p1-t1-r2-c1": {
+   "text": "Ufficio istruttore",
+   "table": "p1-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    297.9,
+    231.0,
+    402.4,
+    256.4
+   ]
+  },
+  "p1-t1-r2-c2": {
+   "text": "Sezione Osservatorio\nFitosanitario",
+   "table": "p1-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    402.4,
+    231.0,
+    506.9,
+    256.4
+   ]
+  },
+  "p1-t1-r3-c1": {
+   "text": "Tipo materia",
+   "table": "p1-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    297.9,
+    256.4,
+    402.4,
+    272.2
+   ]
+  },
+  "p1-t1-r3-c2": {
+   "text": "ALTRO",
+   "table": "p1-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    402.4,
+    256.4,
+    506.9,
+    272.2
+   ]
+  },
+  "p1-t1-r4-c1": {
+   "text": "Materia",
+   "table": "p1-t1",
+   "row": 4,
+   "column": 1,
+   "bbox": [
+    297.9,
+    272.2,
+    402.4,
+    288.0
+   ]
+  },
+  "p1-t1-r4-c2": {
+   "text": "ALTRO",
+   "table": "p1-t1",
+   "row": 4,
+   "column": 2,
+   "bbox": [
+    402.4,
+    272.2,
+    506.9,
+    288.0
+   ]
+  },
+  "p1-t1-r5-c1": {
+   "text": "Sotto Materia",
+   "table": "p1-t1",
+   "row": 5,
+   "column": 1,
+   "bbox": [
+    297.9,
+    288.0,
+    402.4,
+    303.8
+   ]
+  },
+  "p1-t1-r5-c2": {
+   "text": "ALTRO",
+   "table": "p1-t1",
+   "row": 5,
+   "column": 2,
+   "bbox": [
+    402.4,
+    288.0,
+    506.9,
+    303.8
+   ]
+  },
+  "p1-t1-r6-c1": {
+   "text": "Riservato",
+   "table": "p1-t1",
+   "row": 6,
+   "column": 1,
+   "bbox": [
+    297.9,
+    303.8,
+    402.4,
+    319.5
+   ]
+  },
+  "p1-t1-r6-c2": {
+   "text": "NO",
+   "table": "p1-t1",
+   "row": 6,
+   "column": 2,
+   "bbox": [
+    402.4,
+    303.8,
+    506.9,
+    319.5
+   ]
+  },
+  "p1-t1-r7-c1": {
+   "text": "Pubblicazione integrale",
+   "table": "p1-t1",
+   "row": 7,
+   "column": 1,
+   "bbox": [
+    297.9,
+    319.5,
+    402.4,
+    335.3
+   ]
+  },
+  "p1-t1-r7-c2": {
+   "text": "SI",
+   "table": "p1-t1",
+   "row": 7,
+   "column": 2,
+   "bbox": [
+    402.4,
+    319.5,
+    506.9,
+    335.3
+   ]
+  },
+  "p1-t1-r8-c1": {
+   "text": "Obblighi D.Lgs 33/2013",
+   "table": "p1-t1",
+   "row": 8,
+   "column": 1,
+   "bbox": [
+    297.9,
+    335.3,
+    402.4,
+    351.1
+   ]
+  },
+  "p1-t1-r8-c2": {
+   "text": "NO",
+   "table": "p1-t1",
+   "row": 8,
+   "column": 2,
+   "bbox": [
+    402.4,
+    335.3,
+    506.9,
+    351.1
+   ]
+  },
+  "p1-t1-r9-c1": {
+   "text": "Tipologia",
+   "table": "p1-t1",
+   "row": 9,
+   "column": 1,
+   "bbox": [
+    297.9,
+    351.1,
+    402.4,
+    366.5
+   ]
+  },
+  "p1-t1-r9-c2": {
+   "text": "Nessuno",
+   "table": "p1-t1",
+   "row": 9,
+   "column": 2,
+   "bbox": [
+    402.4,
+    351.1,
+    506.9,
+    366.5
+   ]
+  },
+  "p1-t2-r1-c1": {
+   "text": "Adempimenti di\ninventariazione",
+   "table": "p1-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    297.9,
+    371.7,
+    402.4,
+    396.5
+   ]
+  },
+  "p1-t2-r1-c2": {
+   "text": "NO",
+   "table": "p1-t2",
+   "row": 1,
+   "column": 2,
+   "bbox": [
+    402.4,
+    371.7,
+    506.9,
+    396.5
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p1-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Administrative metadata table (Codifica adempimenti L.R. 15/08) listing office, materia, and transparency flags, not a cadastral scope annex table."
+   },
+   {
+    "native_table": "p1-t2",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "Continuation of the same administrative metadata table (Adempimenti di inventariazione row), not a cadastral scope annex table."
+   }
+  ],
+  "unattached": [
+   "N. 00045  del 26/03/2025 del Registro delle Determinazioni della UOR 181",
+   "Codice CIFRA (Identificativo Proposta): 181/DIR/2025/00048",
+   "OGGETTO: Reg. UE 2020/1201 e s.m.i.- Approvazione delle \"Procedure operative per la sorveglianza, il campionamento, le analisi diagnostiche e l’applicazione delle misure di estirpazione delle piante infette nell’ambito del piano per il contrasto ed il controllo di Xylella fastidiosa.\""
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

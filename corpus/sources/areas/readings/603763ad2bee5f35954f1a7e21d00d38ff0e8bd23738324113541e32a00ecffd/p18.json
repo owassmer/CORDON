@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 18,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "87b255d8711f98b54a48a1329c45c9f6c62baffc14d28bb4cdf75e904edccbd3",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:54.212954+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Malattia di Pierce su vite",
+   "Il sintomo principale su vite è la bruscatura fogliare. Un segno precoce di infezione è la necrosi settoriale delle foglie, con porzioni che diventano di colore marrone, mentre i tessuti adiacenti diventano gialli o rossi. I germogli e i tralci possono presentare un grado di lignificazione irregolare, mostrando parti non lignificate (verdi) su tralci lignificati (livello internodi). Tuttavia, questo tipo di alterazione non sembra essere costantemente associato alle infezioni, come dimostrato nei rilievi effettuati nei vigneti colpiti dalle infezioni in Puglia.",
+   "Oltre al disseccamento dei germogli e dei tralci che nel corso degli anni possono portare a morte l'intera pianta, è possibile osservare anche il disseccamento dei grappoli che rimangono attaccati al tralcio, mentre il tronco non presenta alterazioni a livello del legno."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

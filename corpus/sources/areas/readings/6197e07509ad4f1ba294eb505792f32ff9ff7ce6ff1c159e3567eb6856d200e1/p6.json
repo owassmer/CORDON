@@ -1,0 +1,33 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00147",
+ "act_sha256": "6197e07509ad4f1ba294eb505792f32ff9ff7ce6ff1c159e3567eb6856d200e1",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "76fe8de127051e0b1fc04690b57b923a52ceb724bc4a55730057775df3b529cf",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:28:11.432665+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Confini comunali; Confini provinciali; Area delimitata Xylella Fastidiosa sub. pauca (Giovinazzo) - Zona Infetta; Area delimitata Xylella Fastidiosa sub. pauca (Giovinazzo) - Zona Cuscinetto",
+   "GIOVINAZZO",
+   "Prov. BA"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

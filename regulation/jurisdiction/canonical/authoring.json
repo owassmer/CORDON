@@ -24637,13 +24637,13 @@
       "EU-2020-1201:7(1)",
       "EU-2020-1201:1(c)"
     ],
-    "effective_to_exclusive": "",
+    "effective_to_exclusive": "2025-06-27",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v1",
     "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00117",
     "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary::source",
     "legal_linguistic_conflict": "DDS 117 states olive is not susceptible to ST1; that statement cannot override independently satisfied infected/suspected Article 7 predicates.",
-    "temporal_status": "CURRENT",
+    "temporal_status": "SUPERSEDED",
     "actor_role": "Regional Plant Health Service",
     "true_effect": "Treat uninfected, asymptomatic olive as outside the fastidiosa ST1 specified-plant limbs only; infected, symptomatic, suspected, or otherwise independently reached olive remains inside the controlling Article 7 population.",
     "lineage_role": "RETAINED_ATOM",
@@ -24664,6 +24664,101 @@
     "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary",
     "source_snapshot_hashes": "d8eb06ce7a049d52af7507562c671f756f8d758f413d9094368b73ac679dc25d",
     "exact_change_kind": "INITIAL"
+  },
+  {
+    "source_quote_sha256": "dfdf387229790caba13c576bd20453c0de29401375bd2938c615a77e1183d27f",
+    "application_basis": "Genuine case-specific operative delta",
+    "effective_from": "2025-06-27",
+    "external_dependencies": [
+      "EU-2020-1201:7(1)",
+      "EU-2020-1201:1(c)"
+    ],
+    "source_paths": "regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.txt",
+    "article": "case operative delta",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "fastidiosa ST1 branch"
+              },
+              {
+                "predicate": "effective Annex II population"
+              },
+              {
+                "predicate": "plant not independently infected symptomatic or suspected"
+              },
+              {
+                "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+              },
+              {
+                "not": {
+                  "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+                }
+              }
+            ]
+          },
+          "effect": "POPULATION_NOT_LAWFULLY_DUE"
+        },
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "fastidiosa ST1 branch"
+              },
+              {
+                "predicate": "effective Annex II population"
+              },
+              {
+                "predicate": "plant not independently infected symptomatic or suspected"
+              },
+              {
+                "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+              },
+              {
+                "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+              }
+            ]
+          },
+          "effect": "LAWFULLY_DUE_IN_PART"
+        }
+      ],
+      "otherwise": {
+        "effect": "No crop-wide immunity or exemption from independently satisfied Article 7 predicates is established."
+      }
+    },
+    "higher_authority_dependencies": [
+      "EU-2020-1201:7(1)",
+      "EU-2020-1201:1(c)"
+    ],
+    "effective_to_exclusive": "",
+    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+    "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v2",
+    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2025-00117",
+    "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary::source",
+    "legal_linguistic_conflict": "DDS 117 states olive is not susceptible to ST1; that statement cannot override independently satisfied infected/suspected Article 7 predicates.",
+    "temporal_status": "CURRENT",
+    "actor_role": "Regional Plant Health Service",
+    "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately), in the ST1 branch and the effective Annex II population. Wholly uninfected, asymptomatic olives, none of them symptomatic or suspected, is not lawfully due (POPULATION_NOT_LAWFULLY_DUE). Such olives with other plants, for example an infected almond, stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). Infected, symptomatic, suspected or otherwise independently reached olive remains inside the controlling Article 7 population.",
+    "lineage_role": "RETAINED_ATOM",
+    "authority_judgment_kind": "case-specific correction or source-conflict resolution",
+    "parent_stable_provision_id": "",
+    "instrument_id": "REG-PUGLIA-U181-DIR-2025-00117",
+    "source_quote": "Di stabilire che nell’applicazione delle misure di eradicazione non si procede all’estirpazione di olivo, in quanto\ntale specie non è suscettibile a Xylella fastidiosa sottospecie fastidiosa ST1.",
+    "source_snapshot_dates": "2025-06-27",
+    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-117-2025-FITO-1d2e9b6111cd.txt",
+    "semantic_change": "YES",
+    "structural_kind": "paragraph",
+    "semantic_note": "[CASE DELTA ONLY] Payload remains payload; only the changed legal effect is retained. [SPAN 2026-09-01] Quote re-extracted from the operative lines of the source; the prior span was split at a page break or began one sentence late; meaning unchanged. [EFFECT NAME 2026-09-24] v1 true effect, kept verbatim: \"Treat uninfected, asymptomatic olive as outside the fastidiosa ST1 specified-plant limbs only; infected, symptomatic, suspected, or otherwise independently reached olive remains inside the controlling Article 7 population.\" The plant-level meaning is unchanged. v2 states it at population level with the two generic dueness names, so a consumer of lawful dueness reads the consequence and not the cause: POPULATION_NOT_LAWFULLY_DUE for a population wholly of uninfected, asymptomatic olives, LAWFULLY_DUE_IN_PART for uninfected, asymptomatic olives with other plants. The v1 leaves stay in both routes; the false outcome is v1's, unchanged and not mapped (PR #35).",
+    "authority_judgment_required": "YES",
+    "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
+    "reserved_decision_owner": "Regional Plant Health Service",
+    "modality": "shall",
+    "false_effect": "No crop-wide immunity or exemption from independently satisfied Article 7 predicates is established.",
+    "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary",
+    "source_snapshot_hashes": "d8eb06ce7a049d52af7507562c671f756f8d758f413d9094368b73ac679dc25d",
+    "exact_change_kind": "APPLICATION_CHANGED"
   },
   {
     "source_quote_sha256": "e55cfa8c483983f0274b498f926ebb9bfe5a4c474effd397044d52584408c0e3",
@@ -24837,13 +24932,13 @@
       "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
       "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
     ],
-    "effective_to_exclusive": "",
+    "effective_to_exclusive": "2023-05-09",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
     "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00045",
     "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold::source",
     "legal_linguistic_conflict": "-",
-    "temporal_status": "CURRENT",
+    "temporal_status": "SUPERSEDED",
     "actor_role": "Regional Plant Health Service",
     "true_effect": "Hold visually qualifying, negative olives from removal only while official recognition and any required landscape authorization resolve; this is not Article 7(3) retention.",
     "lineage_role": "RETAINED_ATOM",
@@ -24864,6 +24959,137 @@
     "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
     "source_snapshot_hashes": "5fe91d61afdbf7c2802d307dd79ec2f88d1a4a2a247b013646177cb49f50613a",
     "exact_change_kind": "INITIAL"
+  },
+  {
+    "source_quote_sha256": "56379ab366bc92be0ff8407b245c25521ada31d382cdb96b1ce274e3d203a8a3",
+    "application_basis": "Genuine case-specific operative delta",
+    "effective_from": "2023-05-09",
+    "external_dependencies": [
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+      "IT-DLGS42-A146:Art.146(2)",
+      "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
+      "IT-DLGS42-A146:Art.146(8):superintendent-opinion",
+      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+    ],
+    "source_paths": "regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
+    "article": "case operative delta",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "negative result"
+              },
+              {
+                "any_of": [
+                  {
+                    "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+                  },
+                  {
+                    "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+                  }
+                ]
+              },
+              {
+                "any_of": [
+                  {
+                    "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+                  },
+                  {
+                    "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+                  }
+                ]
+              },
+              {
+                "predicate": "the population in question holds held olives"
+              },
+              {
+                "not": {
+                  "predicate": "the population in question holds plants other than held olives"
+                }
+              }
+            ]
+          },
+          "effect": "POPULATION_NOT_LAWFULLY_DUE"
+        },
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "negative result"
+              },
+              {
+                "any_of": [
+                  {
+                    "predicate": "the plant's official monitoring record finds the monumental characteristics of L.R. 14/2007 Article 2: its MONUMENTALE_ARIF flag, or the surveyor's written finding that the plant has monumental characteristics"
+                  },
+                  {
+                    "provision_ref": "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+                  }
+                ]
+              },
+              {
+                "any_of": [
+                  {
+                    "provision_ref": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition"
+                  },
+                  {
+                    "predicate": "the Osservatorio's recognition request for this tree awaits decision"
+                  }
+                ]
+              },
+              {
+                "predicate": "the population in question holds held olives"
+              },
+              {
+                "predicate": "the population in question holds plants other than held olives"
+              }
+            ]
+          },
+          "effect": "LAWFULLY_DUE_IN_PART"
+        }
+      ],
+      "otherwise": {
+        "effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route."
+      }
+    },
+    "higher_authority_dependencies": [
+      "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+      "IT-DLGS42-A146:Art.146(2)",
+      "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
+      "IT-DLGS42-A146:Art.146(8):superintendent-opinion",
+      "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
+      "PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion"
+    ],
+    "effective_to_exclusive": "",
+    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+    "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
+    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2023-00045",
+    "source_clause_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold::source",
+    "legal_linguistic_conflict": "-",
+    "temporal_status": "CURRENT",
+    "actor_role": "Regional Plant Health Service",
+    "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately). Wholly held olives, a held olive being a negative olive with the Article 2 characteristics whose recognition, or the definitive decision on its provisional list entry, and any required landscape authorization are pending (v1's three conjuncts), is not lawfully due while that resolves (POPULATION_NOT_LAWFULLY_DUE). Held olives with other plants, for example \"la pianta infetta\", stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). This is not Article 7(3) retention.",
+    "lineage_role": "RETAINED_ATOM",
+    "authority_judgment_kind": "individual recognition status and the resulting case-specific removal or authorization route",
+    "parent_stable_provision_id": "",
+    "instrument_id": "REG-PUGLIA-U181-DIR-2023-00045",
+    "source_quote": "○  l’estirpazione di tutte le piante specificate, diverse da quelle di cui alle lettere b) e c), che non\n               siano state immediatamente sottoposte a campionamento e ad analisi molecolare e che non\n               siano risultate indenni dall’organismo nocivo specificato;\n   • stabilire che nell’applicazione delle misure di eradicazione non si procede all’estirpazione di: agrumi,\n     pesco, albicocco, susino, qualora presenti nei 50 m attorno alla pianta infetta, in quanto specie non\n     suscettibili alla Xylella fastidiosa sottospecie Pauca genotipo ST53;\n   • stabilire che per gli ulivi con caratteristiche di monumentalità ricadenti nell’area di 50 m attorno alla\n     pianta infetta, risultati non infetti alle analisi di laboratorio, si procederà alla richiesta di riconoscimento\nL’Osservatorio provvede alla contestazione della violazione amministrativa per mancata\n            esecuzione delle prescrizioni fitosanitarie ai sensi del D.lgs 19/2021;\n         ○  le operazioni di estirpazione volontaria da parte del proprietario sono controllate da Ispettori/\n            agenti dell’Osservatorio. Le operazioni di estirpazione eseguite da ARIF sono controllate da 2\n            assistenti fitosanitari ARIF.\n• stabilire che i proprietari/conduttori o ARIF, devono procedere all’estirpazione della pianta infetta e\n  delle piante ricadenti nei 50 m di cui al punto 3, con la seguente modalità:\n         ○  estirpare la pianta infetta e le piante ricadenti nei 50 m di cui al punto 3, con mezzi meccanici, ad\n            eccezione degli olivi monumentali risultati non infetti, nelle more del rilascio dell’autorizzazione\n            paesaggistica;",
+    "source_snapshot_dates": "2023-05-09",
+    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-45-2023-FITO-8277847ffa75.txt",
+    "semantic_change": "YES",
+    "structural_kind": "paragraph",
+    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-01] The quote is a stitched excerpt whose final segment had been cut mid-sentence; that segment is completed from the source through its sentence end. Meaning unchanged. [OWNER RULING 2026-09-24, 2(b)] A tree approved provisionally and published under L.R. 14/2007 Article 5(2), and not yet decided definitively, has a pending recognition decision. The order's own “si procederà alla richiesta di riconoscimento” remains the other route; the ruling adds the provisional case and narrows nothing. [OWNER RULING 2026-09-24, CHARACTERISTICS] The order's “ulivi con caratteristiche di monumentalità” are established the same way: by the official monitoring record of the plant (its MONUMENTALE_ARIF flag printed as “Si” or “1”, or the surveyor's written finding that the plant has monumental characteristics, in any wording that asserts it, as the held notes' “caratteristiche di monumentalità”, “caratteristiche monumentali”, “requisiti di monumentalità” or “carattere monumentale”, or a recorded measurement meeting Article 2(1)(a), PUG-LR14-2007:Art.2(1)(a):trunk-diameter-criterion), alongside the register survey and its provisional layers. The characteristics conjunct is any_of(that official monitoring finding, the Article 2(1)(a) row's result). [EFFECT NAME 2026-09-24] v1 true effect, kept verbatim: \"Hold visually qualifying, negative olives from removal only while official recognition and any required landscape authorization resolve; this is not Article 7(3) retention.\" The plant-level meaning is unchanged. v2 states it at population level with the two generic dueness names, so a consumer of lawful dueness reads the consequence and not the cause: POPULATION_NOT_LAWFULLY_DUE for a population wholly of held olives, LAWFULLY_DUE_IN_PART for held olives with other plants. The v1 conjuncts, as PR #32 states them (the characteristics and pending-recognition any_of), stay in both routes; the false outcome is v1's, unchanged and not mapped (PR #35).",
+    "authority_judgment_required": "YES",
+    "evidence_contract": "The case plant's negative test and monumental characteristics; either its provisional L.R. 14/2007 list entry awaiting the Giunta's definitive decision or the Osservatorio's pending recognition request; and the authorization status.",
+    "reserved_decision_owner": "Regional Plant Health Service",
+    "modality": "shall",
+    "false_effect": "Unrecognized trees return to the controlling removal route; recognized trees require the separate case-specific authorization route.",
+    "stable_provision_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
+    "source_snapshot_hashes": "5fe91d61afdbf7c2802d307dd79ec2f88d1a4a2a247b013646177cb49f50613a",
+    "exact_change_kind": "APPLICATION_CHANGED"
   },
   {
     "source_quote_sha256": "23dc84a5d18a8197cc42a336ae720ade705d8ebad8edf55d6c479f2c3f517b5b",
@@ -25067,13 +25293,13 @@
       "EU-2020-1201:7(1)",
       "EU-2020-1201:1(c)"
     ],
-    "effective_to_exclusive": "",
+    "effective_to_exclusive": "2024-05-06",
     "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
     "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1",
     "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00052",
     "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary::source",
     "legal_linguistic_conflict": "DDS 52 states olive is not susceptible to ST1; this cannot override independently satisfied Article 7 predicates.",
-    "temporal_status": "CURRENT",
+    "temporal_status": "SUPERSEDED",
     "actor_role": "Regional Plant Health Service",
     "true_effect": "Treat uninfected, asymptomatic olive as outside the ST1 specified-plant limbs only; independently infected, symptomatic, or suspected olive remains in Article 7.",
     "lineage_role": "RETAINED_ATOM",
@@ -25094,6 +25320,101 @@
     "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary",
     "source_snapshot_hashes": "677db7dd5bd87c01f7b4be0c86617d131b6618dc4c4a30f0c1c9bdbbe31326c1",
     "exact_change_kind": "INITIAL"
+  },
+  {
+    "source_quote_sha256": "8c37f22e432344d398df4cc9c226d77082fca7393afb6dbef46dc07dec94b227",
+    "application_basis": "Genuine case-specific operative delta",
+    "effective_from": "2024-05-06",
+    "external_dependencies": [
+      "EU-2020-1201:7(1)",
+      "EU-2020-1201:1(c)"
+    ],
+    "source_paths": "regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.txt",
+    "article": "case operative delta",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "fastidiosa ST1 branch"
+              },
+              {
+                "predicate": "effective Annex II population"
+              },
+              {
+                "predicate": "plant not otherwise infected symptomatic or suspected"
+              },
+              {
+                "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+              },
+              {
+                "not": {
+                  "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+                }
+              }
+            ]
+          },
+          "effect": "POPULATION_NOT_LAWFULLY_DUE"
+        },
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "fastidiosa ST1 branch"
+              },
+              {
+                "predicate": "effective Annex II population"
+              },
+              {
+                "predicate": "plant not otherwise infected symptomatic or suspected"
+              },
+              {
+                "predicate": "the population in question holds uninfected, asymptomatic olives, none of them symptomatic or suspected"
+              },
+              {
+                "predicate": "the population in question holds plants other than uninfected, asymptomatic olives"
+              }
+            ]
+          },
+          "effect": "LAWFULLY_DUE_IN_PART"
+        }
+      ],
+      "otherwise": {
+        "effect": "No general olive immunity is established."
+      }
+    },
+    "higher_authority_dependencies": [
+      "EU-2020-1201:7(1)",
+      "EU-2020-1201:1(c)"
+    ],
+    "effective_to_exclusive": "",
+    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v2",
+    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00052",
+    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary::source",
+    "legal_linguistic_conflict": "DDS 52 states olive is not susceptible to ST1; this cannot override independently satisfied Article 7 predicates.",
+    "temporal_status": "CURRENT",
+    "actor_role": "Regional Plant Health Service",
+    "true_effect": "Route table on the population in question (the commencement-work or the coercive population, each evaluated separately), in the ST1 branch and the effective Annex II population. Wholly uninfected, asymptomatic olives, none of them symptomatic or suspected, is not lawfully due (POPULATION_NOT_LAWFULLY_DUE). Such olives with other plants, for example an infected almond, stays lawfully due for the other plants only, and this row limits it (LAWFULLY_DUE_IN_PART). Independently infected, symptomatic or suspected olive remains in Article 7.",
+    "lineage_role": "RETAINED_ATOM",
+    "authority_judgment_kind": "case branch resolution against source miscitation",
+    "parent_stable_provision_id": "",
+    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00052",
+    "source_quote": "                                                    DETERMINA\nDi prendere atto di quanto espresso in narrativa, che costituisce parte integrante e sostanziale del presente\natto e che qui si intende integralmente riportato.\n\n   1. Di prescrivere ai proprietari/conduttori di cui all’allegato 1/C, parte integrante e sostanziale del\n      presente provvedimento, l’estirpazione di n° 76 piante risultate infette da Xylella fastidiosa sottospecie\n      fastidiosa ST1, individuate negli agri di Triggiano (BA), Capurso (BA) e Bari;\n   2. Di dare atto che le piante infette sono evidenziate nell’ortofoto di cui all’allegato 1/A, parte integrante\n      e sostanziale del presente provvedimento;\n   3. Di prescrivere successivamente l’estirpazione delle piante ricadenti nei 50 m, in quanto essendo il\n      numero di zone infette elevato ed essendo presente una notevole parcellizzazione del territorio con\n      numerosi proprietari, non è tecnicamente possibile procedere alla loro estirpazione con immediatezza;\n   4. Di stabilire che nell’applicazione delle misure di eradicazione non si procede all’estirpazione di olivo, in\n      quanto tale specie non è suscettibile a Xylella fastidiosa sottospecie fastidiosa ST1;",
+    "source_snapshot_dates": "2024-05-06",
+    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-52-2024-FITO-.txt",
+    "semantic_change": "YES",
+    "structural_kind": "paragraph",
+    "semantic_note": "[CASE DELTA ONLY] This effect remains attached to the exact case and does not redefine reusable law. [SPAN 2026-09-02] Quote re-extracted to the dispositivo point 4 that states the olive rule. [EFFECT NAME 2026-09-24] v1 true effect, kept verbatim: \"Treat uninfected, asymptomatic olive as outside the ST1 specified-plant limbs only; independently infected, symptomatic, or suspected olive remains in Article 7.\" The plant-level meaning is unchanged. v2 states it at population level with the two generic dueness names, so a consumer of lawful dueness reads the consequence and not the cause: POPULATION_NOT_LAWFULLY_DUE for a population wholly of uninfected, asymptomatic olives, LAWFULLY_DUE_IN_PART for uninfected, asymptomatic olives with other plants. The v1 leaves stay in both routes; the false outcome is v1's, unchanged and not mapped (PR #35).",
+    "authority_judgment_required": "YES",
+    "evidence_contract": "Event-time Annex II ST1 population and the individual olive's infection, symptom and suspicion facts.",
+    "reserved_decision_owner": "Regional Plant Health Service",
+    "modality": "shall",
+    "false_effect": "No general olive immunity is established.",
+    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary",
+    "source_snapshot_hashes": "677db7dd5bd87c01f7b4be0c86617d131b6618dc4c4a30f0c1c9bdbbe31326c1",
+    "exact_change_kind": "APPLICATION_CHANGED"
   },
   {
     "source_quote_sha256": "35c7a0149b94c11c63dc2fdeb6f9d144ca599adcd20f619768440da8cb213ab8",
@@ -25631,6 +25952,94 @@
     "stable_provision_id": "REG-PUGLIA-U181-DIR-2025-00201:case-delta:infected-plant-execution-priority",
     "source_snapshot_hashes": "76d26b7f2e39d67d25deed236bbae2504fe9d359fce864c4b2c6944508b101c9",
     "exact_change_kind": "INITIAL"
+  },
+  {
+    "source_quote_sha256": "3ae73b13d90eebbd0057286734c931c04a60c2b7cd2402f3d49b7ac3b12b4bf9",
+    "application_basis": "Genuine case-specific operative delta",
+    "effective_from": "2024-03-14",
+    "external_dependencies": [
+      "EU-2020-1201:7(1)"
+    ],
+    "source_paths": "regulation/jurisdiction/regional/bulk/DET-18-2024-FITO-.txt",
+    "article": "case operative delta",
+    "condition_ast": {
+      "route_table": [
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "decision time within this version's effective interval"
+              },
+              {
+                "predicate": "the population in question holds the named order's host plants within 50 m of its infected plants"
+              },
+              {
+                "not": {
+                  "predicate": "the population in question holds a plant the named order lists as infected"
+                }
+              }
+            ]
+          },
+          "effect": "POPULATION_NOT_LAWFULLY_DUE"
+        },
+        {
+          "when": {
+            "all_of": [
+              {
+                "predicate": "decision time within this version's effective interval"
+              },
+              {
+                "predicate": "the population in question holds the named order's host plants within 50 m of its infected plants"
+              },
+              {
+                "predicate": "the population in question holds a plant the named order lists as infected"
+              }
+            ]
+          },
+          "effect": "LAWFULLY_DUE_IN_PART"
+        }
+      ],
+      "otherwise": {
+        "effect": "NO_WITHDRAWAL_FOR_THIS_POPULATION"
+      }
+    },
+    "higher_authority_dependencies": [
+      "EU-2020-1201:7(1)"
+    ],
+    "effective_to_exclusive": "",
+    "rule_determinacy": "AUTHORITY_JUDGMENT_REQUIRED",
+    "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn:v1",
+    "documentary_source_instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+    "source_clause_id": "REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn::source",
+    "legal_linguistic_conflict": "14 March–4 June 2024: the withdrawal comes with a containment selection A holds premature (REG-PUGLIA-U181-DIR-2024-00018:area-state-transition v1). The withdrawal still binds the recipients, because it is the Osservatorio's own operative withdrawal of its own prescription. Whether Article 7(1) of Regulation (EU) 2020/1201 required the Osservatorio to prescribe these plants again before M4 is not this row's meaning. Interpretation; falsifier: a controlling ruling or act that treats the withdrawal as ineffective before 5 June 2024. TAR Bari 383, 384 and 387/2026 ended challenges to DDS 119, 138 and 96/2023 as superseded by DDS 18/2024; that is the removal-order reading of Stage D (PR #15), not re-read for this row.",
+    "temporal_status": "CURRENT",
+    "actor_role": "Regional Plant Health Service",
+    "true_effect": "From 14 March 2024 removal of the host plants within 50 m of the infected plants that DDS 96, 113, 119, 124 and 138/2023 prescribed is withdrawn; removal of the infected plants each order lists is not. A population in question wholly of those 50 m host plants is not lawfully due (POPULATION_NOT_LAWFULLY_DUE). A population that also holds plants the order lists as infected stays lawfully due for those plants only, and this row limits it (LAWFULLY_DUE_IN_PART).",
+    "lineage_role": "RETAINED_ATOM",
+    "authority_judgment_kind": "case-specific correction or source-conflict resolution",
+    "parent_stable_provision_id": "",
+    "instrument_id": "REG-PUGLIA-U181-DIR-2024-00018",
+    "source_quote": "• Stabilire che per i seguenti provvedimenti di prescrizione di rimozione già emanati dall’Osservatorio e\n  non ancora attuati:\n         ○ Determina dirigenziale n. 96 del 28/08/2023;\n         ○ Determina dirigenziale n. 113 del 16/10/2023;\n         ○ Determina dirigenziale n. 119 del 08/11/2023;\n         ○ Determina dirigenziale n. 124 del 15/11/2023;\n         ○ Determina dirigenziale n. 138 del 01/12/2023\n\n  non si procederà all’estirpazione delle piante ospiti ricadenti nell’area di 50 m attorno alle piante infette.",
+    "source_snapshot_dates": "2024-03-14",
+    "source_uri": "file:regulation/jurisdiction/regional/bulk/DET-18-2024-FITO-.txt",
+    "semantic_change": "INITIAL",
+    "structural_kind": "paragraph",
+    "semantic_note": "[CASE DELTA ONLY] The operative part withdraws, for the five named orders, removal of \"le piante ospiti ricadenti nell'area di 50 m attorno alle piante infette\": the letter b–e populations of each order's point 3 (symptomatic or suspected plants, same-species plants, other-species plants infected elsewhere, and unsampled specified plants within 50 m), with no exception. It does not mention removal of \"le piante infette\" each order lists under letter a, which stays due. \"non ancora attuati\" describes the five orders; it is not a condition. \"The population in question\" is the one a consumer asks about, the commencement-work population or the coercive population, and the row is evaluated on each separately; a population holding listed infected plants with 50 m hosts is due in part and names this row. The act is immediately executive and was adopted on 14 March 2024. [NO END] The recital that sets up the operative part opens \"Nelle more delle decisioni che assumerà la Commissione europea, in conseguenza della quale l'Osservatorio assumerà tutte le conseguenti opportune determinazioni, anche correttive e modificative - ove necessario - degli atti e provvedimenti già assunti\". It does not end this row: the Commission's decision came (M4, dated in A from 5 June 2024), and the recital only announces later corrective acts, sets no term, and A holds no act that corrects or modifies the withdrawal. This is an interpretation. Falsifier: a later Osservatorio act that prescribes again the 50 m hosts of any of the five orders; the row would then end, for that order, on that act's effective date. The Monopoli fork of DDS 96/2023 (pre-m4-monopoli-eradication-fork) chooses Article 7 eradication for a pre-M4 event and prescribes nothing; it does not bring the withdrawn prescription back, and it carries no dueness effect. The area-state rows of this act carry its geography and stop on 18 November 2024; this separate provision carries the withdrawal, which did not stop. [PR #35 2026-09-24]",
+    "authority_judgment_required": "YES",
+    "evidence_contract": "Case act, predecessor relation, exact payload correction, notice/evidence and applicable reusable proposition versions.",
+    "reserved_decision_owner": "Regional Plant Health Service",
+    "modality": "shall",
+    "false_effect": "A population made only of the plants the named order lists as infected is not withdrawn; the order's removal of them, its commencement term, coercive direction and executor stand.",
+    "stable_provision_id": "REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn",
+    "source_snapshot_hashes": "728f572dc18fbf52a467160a977b83548fe418ffb86350b45e815738a49fc792",
+    "exact_change_kind": "INITIAL",
+    "corrects_instrument_ids": [
+      "REG-PUGLIA-U181-DIR-2023-00096",
+      "REG-PUGLIA-U181-DIR-2023-00113",
+      "REG-PUGLIA-U181-DIR-2023-00119",
+      "REG-PUGLIA-U181-DIR-2023-00124",
+      "REG-PUGLIA-U181-DIR-2023-00138"
+    ]
   },
   {
     "source_clause_id": "REG-PUGLIA-U181-DIR-2025-00045:st53-citrus-prunus-exclusion-conflict::source",

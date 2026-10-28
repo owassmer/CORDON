@@ -1,0 +1,34 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+ "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+ "page": 3,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "d84852adbc274dcb50a355932d1813b48e09b372e840e1119599a267289ca08d",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:26:02.201859+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Il Servizio Fitosanitario della Basilicata, con nota prot. 0266963 del 06/12/2024, ha comunicato al Ministero e al Servizio fitosanitario della Regione Puglia che, prendendo atto della determina dirigenziale di istituzione delle aree delimitate per Xylella fastidiosa multiplex della Regione Puglia, svolgerà le attività di monitoraggio nella zona cuscinetto ricadente nell'area di propria competenza;",
+   "nelle aree delimitate in cui si applicano misure di eradicazione la zona cuscinetto è larga almeno 2,5 km;",
+   "di dovere istituire l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 – Ginosa\", ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da: una zona infette di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie multiplex ST26; una zona cuscinetto di 2,5 km attorno ad ogni zona infetta;.",
+   "di dovere aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 –Santeramo in Colle\", di cui all' atto dirigenziale n° 148 del 12/11/2024, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201;",
+   "gli Allegati 1 e 1 bis, parti integranti e sostanziali del presente provvedimento, che riportano le aree delimitate \"Xylella fastidiosa sottospecie multiplex ST26- Santeramo in Colle\" e \"Xylella fastidiosa sottospecie multiplex ST26- Ginosa\";",
+   "l'Allegato2- Santeramo e l'Allegato2- Ginosa, parti integranti e sostanziali del presente provvedimento, che riportano i riferimenti catastali delle aree delimitate nelle due regioni;",
+   "di dovere stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, in particolare le misure di lotta al vettore, si applichino in tutte le particelle catastali che rientrano anche parzialmente nelle aree delimitate che ricadono nel territorio regionale."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

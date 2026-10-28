@@ -1,0 +1,61 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 49,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "3b2030047dbd76dac193320411acb74b8a7e04b074c333b4a923006eea6226b6",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:29:13.082344+00:00",
+ "native_tables": [
+  {
+   "id": "p49-t1",
+   "bbox": [
+    237.7,
+    291.5,
+    302.2,
+    345.5
+   ]
+  }
+ ],
+ "native_cells": {
+  "p49-t1-r1-c1": {
+   "text": "Campioni\ndubbi",
+   "table": "p49-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    237.7,
+    291.5,
+    302.2,
+    328.3
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p49-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "The box is part of a flowchart diagram ('Workflow per vettore') showing molecular screening steps for vector samples, not a cadastral annex table with PROVINCIA/COMUNE/scope columns."
+   }
+  ],
+  "unattached": [
+   "Workflow per vettore",
+   "Campione: vettore (singolo o in pool di massimo 5 esemplari)",
+   "1° Screening molecolare: analisi su campioni vettore (singolo o in pool) (Harper et al., 2010)",
+   "2° Screening molecolare: qPCR Ouyang et al., 2013 o in alternativa nested-MLST (Craud, 2018)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

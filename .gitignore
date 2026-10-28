@@ -16,3 +16,6 @@ corpus/sources/monitoring/sit/**/*.json.gz
 
 .playwright-cli/
 output/playwright/
+
+# Builder and reviewer runs, and their task files: coordination, not program state
+.runs/

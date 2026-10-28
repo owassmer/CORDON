@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 32,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f146426bd4ddee7ae76e926bdecf958ef63d342c565751a83cc8bbf8ed58bde4",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:22.075597+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "\"È necessario adoperare svettatoi telescopici per poter prelevare il campione in maniera adeguata.\"",
+   "\"Pertanto, è necessario scuotere energicamente le parti vegetali che possono ospitare insetti, assicurandosi di non movimentare insetti in qualsiasi stadio vitale.\"",
+   "\"Il laboratorio non procede ad analizzare i campioni in buste aperte e non sigillate e comunica all'Osservatorio e ad ARIF la presenza di tali campioni non sigillati indicandone gli ID.\"",
+   "Data label fields shown in boxed template: 'Cod. SQUADRA:.....', 'DATA:.../.../...', 'CODICE POOL:.....'"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

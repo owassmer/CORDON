@@ -1,0 +1,33 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+ "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "e03b24728a86d80fda9f518d09908496bff9a0a3bbc7e8ef5b7d3adb3562528e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:27:24.438364+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table: Documento - Impronta (SHA256) | ALLEGATO1_BISCEGLIE.pdf - 3c715f0f1c7e288d8569f11324594b4c9cb156ec1cc1f6474bf33d79592a3c17 | ALLEGATO1BIS_BISCEGLIE.pdf - 1dd05c5c411e558fd475329a605d1562fd7947da4e705764d2378ea800aecd17 | ALLEGATO2_BISCEGLIE.pdf - 9a4cb0c9050faa510913950bc3abed967f171e776d7ad4cc69a3f243165849d3 (a document hash table, not an annex cadastral scope table)",
+   "Di approvare l'Allegato 1, parte integrante e sostanziale del presente provvedimento, che riporta l'area delimitata 'Xylella fastidiosa sottospecie pauca - Bisceglie (BT)'.",
+   "Di approvare l'Allegato 1 bis, parte integrante e sostanziale del presente provvedimento, che riporta tutte le aree delimitate per Xylella fastidiosa in Puglia.",
+   "Di approvare l'Allegato 2, parte integrante e sostanziale del presente provvedimento, che riporta i riferimenti catastali dell'area delimitata 'Xylella fastidiosa sottospecie pauca - Bisceglie (BT)'.",
+   "Di dare atto che nel richiamato sito www.emergenzaxylella.it è possibile individuare il punto esatto in cui ricade una particella ossia se trattasi di zona infetta oppure zona cuscinetto;",
+   "Ai Comuni di Bisceglie (BT) e Trani (BT); alla Prefettura di BT; al Comando Regionale Carabinieri Forestali – Puglia; alla Provincia Barletta-Andria-Trani; all'ANCI Puglia; all'ARIF"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

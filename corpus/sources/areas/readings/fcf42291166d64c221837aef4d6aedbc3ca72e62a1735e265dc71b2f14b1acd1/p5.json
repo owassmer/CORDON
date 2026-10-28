@@ -1,0 +1,33 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+ "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "1e7c593ee2e3510181c373b3e1e4e50d9ffceea4cce7f0625d3377a996e60eb9",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:31.435208+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table: 'Documento - Impronta (SHA256)' listing ALLEGATO1.pdf, ALLEGATO1BIS.pdf, ALLEGATO2.pdf with SHA256 hashes — not an annex cadastral zone table.",
+   "alla Provincia di Barletta- Trani – Andria (BT); all'ANCI Puglia; all'ARIF; Di pubblicare il presente provvedimento sul BUR Puglia.",
+   "Il presente atto, redatto attraverso la piattaforma CIFRA2, firmato digitalmente e adottato in unico originale: è composto da pagine tutte progressivamente numerate e da n° 3 allegati composti rispettivamente da 1 facciata e sarà conservato e custodito, ai sensi delle Linee Guida del Segretario generale della Giunta Regionale e del Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020, nei sistemi di archiviazione digitale dell'Amministrazione Regionale; sarà trasmesso, tramite piattaforma CIFRA2, al Segretariato della Giunta Regionale e sarà pubblicato nella sezione \"Amministrazione Trasparente\" sul sito istituzionale della Regione Puglia, per le finalità di cui al D.Lgs. n. 33/2013 e ss.mm.ii.; sarà pubblicato per 10 giorni lavorativi a decorrere dalla data della sua adozione, ai sensi dell'art. 20 comma 3 del D.P.G.R. n. 22/2021, all'Albo regionale on line e conservato nei sistemi informatici regionali CIFRA” e Sistema Puglia.",
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Basato sulla proposta n. 181/DIR/2025/00116 dei sottoscrittori della proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano; E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

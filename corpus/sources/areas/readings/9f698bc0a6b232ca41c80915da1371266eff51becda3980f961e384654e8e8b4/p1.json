@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00045",
+ "act_sha256": "9f698bc0a6b232ca41c80915da1371266eff51becda3980f961e384654e8e8b4",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "232a5953ec2577e6ad29e4c6897166005f037a333e06435273ddda35c8144418",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:22:21.164938+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "DETERMINAZIONE DEL DIRIGENTE SEZIONE OSSERVATORIO FITOSANITARIO 24 aprile 2024, n. 45 - Reg. (UE) 2020/1201 - Aggiornamento dell'area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1 ai sensi del dell'art. 4 del Reg. UE 2020/1201.",
+   "L'intera area delimitata per Xylella fastidiosa sottospecie fastidiosa di cui alle determine n° 8/2024 e n° 12/2024, è stata oggetto di sorveglianza rafforzata; tutte le superfici con presenza di specie specificate alla sub specie fastidiosa sono state ispezionate e campionate.",
+   "Alla data del 19/04/2024 sono state campionate n° 19.226 piante di cui n° 157 sono risultate infette."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

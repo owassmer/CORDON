@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "4410a0b886cd969780d4f5fff4e2033b46055e34a8a8c82b24604b2bd32ba29a",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:26:03.118662+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Di pubblicare il presente provvedimento sul BUR Puglia;",
+   "ALLEGATI INTEGRANTI: Documento - Impronta (SHA256) table listing ALLEGATO1.pdf, ALLEGATO1BIS.pdf, ALLEGATO2.pdf with SHA256 hashes (not an annex cadastral table)",
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Basato sulla proposta n. 181/DIR/2025/00064 dei sottoscrittori della proposta: E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano; E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00106",
+ "act_sha256": "98e356011e5935a72c66e9350d028dd10e1d34de415d678ec51d213f803346db",
+ "page": 9,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "a3b3c8c941c3555017489d943a7eb91e479bac6a3fd3292988d0195a7956f6b3",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:30:57.770470+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 SANTERAMO",
+   "Legenda: Confini Comunali della Puglia; Confini Comunali della Basilicata; Regione Basilicata; Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle) - Zona Cuscinetto in Basilicata; Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle) - Zona Infetta; Confini Provinciali della Puglia",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO Il Dirigente di Sezione Dott. Salvatore Infantino",
+   "C_I330 - 0 - 1 - 2025-06-17 - 0017059",
+   "Prov. BA (label on map)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

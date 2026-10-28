@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 42,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "882b6325cd6cbe955769be89062b5cf4a5e9ff0a5953d0bac3ea212cd94d57b5",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:28:49.242821+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Le tecniche molecolari utilizzabili ai fini del rilevamento di X. fastidiosa sono quelle previste nella sezione A, dell'all. IV del Reg. UE 2020/1201 s.m.i.",
+   "In Puglia, per uniformare i risultati dei diversi laboratori e tenendo conto del risultato del ring test effettuato a ottobre 2024, i laboratori effettuano le analisi molecolari applicando: PCR in tempo reale sulla base di Harper et al., 2010 (e erratum 2013).",
+   "Cq< 32: \"Positivo\"; Cq>32 e < 35: \"Dubbio\" da sottoporre ad ulteriori verifiche; Cq> 35: nessun valore, \"Negativo\"",
+   "ZONA CONTENIMENTO e CUSCINETTO - il laboratorio procede ad analizzare singolarmente i campioni delle 7/4 buste per individuare la pianta o le piante infette. Tutti i campioni singoli positivi sono consegnati al CNR-IPSP per l'identificazione della sottospecie, utilizzando il protocollo qPCR descritto da Dupas et al. (2019) come previsto nel Reg. (UE) 2024/2507 che modifica l'Allegato IV del Reg. (UE) 1201/2020.",
+   "ZONA INDENNE - il laboratorio procede ad analizzare singolarmente i campioni delle 7/4 buste per individuare la pianta o le piante infette. Tutti i campioni singoli positivi sono consegnati al –CNR-IPSP che procede all'identificazione della sottospecie dapprima con il protocollo qPCR descritto da Dupas et al. (2019) e successivamente mediante analisi MLST (Multi Locus Sequence Typing) sulla base di Yuan et al. (2010) come previsto dall'Allegato IV del Reg. (UE) 2020/1201."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

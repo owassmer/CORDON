@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00082",
+ "act_sha256": "4ae654ecd49e41900b8ade099e53e8de9323573cdcceae285d1221014cd37e7b",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "11d2bbd6f7dc477a1d9b8d634aaecba00e4afc7c0e794d6227e4e6d0d3f5a4d3",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:32:45.795427+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table (Documento - Impronta (SHA256)) listing ALLEGATO 1.pdf, ALLEGATO 1 BIS.pdf, ALLEGATO 2.pdf with SHA256 hashes is a document-integrity table, not an annex cadastral scope table.",
+   "Riportare nell'Allegato 2, parte integrante e sostanziale del presente atto, i riferimenti catastali che consentono di individuare territorialmente le zone 'infetta', 'contenimento', 'cuscinetto' ed i 'focolai di Mola di Bari e Noci' della nuova area delimitata 'Xylella fastidiosa sottospecie pauca ST53 ex Salento'.",
+   "Stabilire che in tutta la zona infetta in cui si applicano misure di contenimento definita con il presente provvedimento, si applicano le misure di cui agli articoli da 13 a 17 del Reg.(UE) 2020/1201 e smi.",
+   "Stabilire che nei focolai di Mola di Bari e Noci si applicano misure di eradicazione di cui agli articoli da 7 a 9 del Reg.(UE) 2020/1201 e smi."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

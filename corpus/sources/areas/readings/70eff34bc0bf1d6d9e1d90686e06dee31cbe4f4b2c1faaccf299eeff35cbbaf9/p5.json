@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+ "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "a9b379f0960af38ad26bd8837dfd6ee2afa9e1ec417fea485df672b5d5647ee8",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:18:59.251182+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO DI SEZIONE - IL DIRIGENTE DOTT. SALVATORE INFANTINO",
+   "Legenda: Zona Indenne; Area Delimitata Valle D'Itria - Zona Infetta; Area Delimitata Valle D'Itria - Zona Cuscinetto; Area Delimitata Salento - Zona Infetta; Area Delimitata Salento - Zona Contenimento; Area Delimitata Salento - Zona Cuscinetto; Confini comunali; Confini provinciali"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

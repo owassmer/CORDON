@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00198",
+ "act_sha256": "8ac4a92c74dbe66ae03e69924fe0bff8c78d0beef4131b5182d9f8e5a45d86b6",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "ecbbe32fb74dae7561dafd19a30bed9c19e8c0586b1054be15950edf484330b8",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:26:10.709551+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "di stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, in particolare le misure di lotta al vettore, si applichino in tutte le particelle catastali che rientrano anche parzialmente nelle zone delimitate che ricadono nel territorio regionale;",
+   "di istituire l'area delimitata a \"Xylella fastidiosa sottospecie multiplex ST6 – Ginosa\" ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da una zona infetta con un raggio di 50 m attorno ad ogni pianta infetta da Xylella fastidiosa sottospecie multiplex ST26 e una zona cuscinetto di 2,5 km attorno ad ogni zona infetta.",
+   "di aggiornare l'area delimitata per \"Xylella fastidiosa sottospecie multiplex ST26 –Santeramo in Colle\", di cui all' atto dirigenziale n° 148 del 12/11/2024, ai sensi dei commi 1 e 2 dell'art. 4 del Reg (UE) 2020/1201, costituita da una zona infetta del raggio di 50 m attorno ad ogni pianta infetta di Xylella fastidiosa sottospecie multiplex ST26 e una zona cuscinetto di 2,5 km attorno ad ogni zona infetta.",
+   "di approvare l'Allegato2- Santeramo e l'Allegato2- Ginosa, parti integranti e sostanziali del presente provvedimento, che riportano i riferimenti catastali delle aree delimitate nelle due regioni;",
+   "di stabilire che il presente atto sarà comunicato al Servizio fitosanitario della regione Basilicata per gli adempimenti di competenza;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
