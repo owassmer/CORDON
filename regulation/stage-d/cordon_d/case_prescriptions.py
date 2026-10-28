@@ -805,8 +805,8 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
         work = r['works'][0] if r['works'] else None
         naming = 'work' if position is None or work is None else _naming(work, position)
         if r['kind'] == 'personal-delivery':
-            recipient = r['recipient']
-            if not recipient or not recipient.strip():
+            recipient = _printed(r['recipient'])  # the key the join uses: runs of whitespace are one space
+            if not recipient:
                 reported.append(dict(record=r['record'], cause='names no recipient'))
                 continue
             deliveries.setdefault(recipient, {}).setdefault(r['event'].occurred, []).append(r['record'])
@@ -856,7 +856,7 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
         if row == 'plant parcel':
             work = dict(r['works'][0])
             return [f"a record naming the plant {dict(p)['plant']}: {r['record']} prints only its parcel (foglio "
-                    f"{work['foglio']}, particella {work['particella']}), which also carries work "
+                    f"{work['foglio']}, particella {work['particella']}), which also carries work that "
                     f"{', '.join(share['rows'])} withdraws" + (' and its instant' if column == 'D∋' else '')
                     for p in due]
         if row == 'unresolved':
@@ -870,14 +870,31 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
     for recipient in sorted(deliveries):
         instants = deliveries[recipient]
         works = sorted(obliged.get(recipient, ()))
-        # A record outside the grant that names this recipient, or a work it is obliged to, could
-        # change its result: the result is withheld, never made more definite (`EvidenceView.reader`).
+        # A record outside the grant that names this recipient, or performs or records a work it is
+        # obliged to, could change its result: the result is withheld, never made more definite
+        # (`EvidenceView.reader`). Another recipient's delivery gives neither this recipient's notice
+        # nor its works, so it withholds nothing here.
         withheld = {_unauthorized(r, act) for r in ungranted
-                    if r.get('recipient') == recipient or set(r['works']) & set(works)}
+                    if _printed(r.get('recipient')) == recipient
+                    or r['kind'] != 'personal-delivery'
+                    and (set(r['works']) | {w for printed in r['works'] for w in targets(printed)}) & set(works)}
         if withheld:
+            why = f"not applied: {recipient}'s result is withheld for " + '; '.join(sorted(withheld))
+            for r, row, due in performances:  # the records the result would have read, as below
+                if due and not set(due) & set(works) or not due and position is None:
+                    continue
+                used.add(r['record'])
+                reported.append(dict(record=r['record'], recipient=recipient, work=dict(r['works'][0]),
+                                     cause=withdrawn if row == 'host-only parcel' else not_due if row == 'not due'
+                                     else why))
+            for h in sorted({h['record']: h for w in works for h in histories.get(w, ())}.values(),
+                            key=lambda h: h['record']):
+                used.add(h['record'])
+                reported.append(dict(record=h['record'], recipient=recipient, work=dict(h['works'][0]), cause=why))
             results[recipient] = dict(result=Evaluation(None, needs=frozenset(withheld)), notification=None,
                                       deadline=None, works=[dict(w) for w in works], commencements={},
-                                      commencement_records_complete=False,
+                                      histories=[], commencement_records_complete=False,
+                                      incomplete=[dict(w) for w in works],
                                       records=sorted(n for v in instants.values() for n in v),
                                       fixture=any(r['fixture'] for r in records))
             continue
@@ -888,20 +905,6 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
         else:
             reported.append(dict(recipient=recipient, records=sorted(n for v in instants.values() for n in v),
                                  cause='deliveries at different instants; the personal branch is not supplied'))
-        works = sorted(obliged.get(recipient, ()))
-        # A record outside the grant that names this recipient, or a work it is obliged to, could
-        # change its result: the result is withheld, never made more definite (`EvidenceView.reader`).
-        withheld = {_unauthorized(r, act) for r in ungranted
-                    if r.get('recipient') == recipient
-                    or (set(r['works']) | {w for printed in r['works'] for w in targets(printed)}) & set(works)}
-        if withheld:
-            results[recipient] = dict(result=Evaluation(None, needs=frozenset(withheld)), notification=None,
-                                      deadline=None, works=[dict(w) for w in works], commencements={},
-                                      histories=[], commencement_records_complete=False,
-                                      incomplete=[dict(w) for w in works],
-                                      records=sorted(n for v in instants.values() for n in v),
-                                      fixture=any(r['fixture'] for r in records))
-            continue
         if position is not None and share:
             unnamed = [dict(w) for w in works if w not in named.get(recipient, ())]
             if unnamed:
@@ -964,8 +967,12 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
         if r['kind'] != 'personal-delivery' and r['record'] not in used | shown:
             unused.setdefault(r['works'][0], []).append(r['record'])
     for work in sorted(unused):
+        outside = sorted(need for r, need in withheld_records if r['kind'] == 'personal-delivery'
+                         and (position is not None or work in r['works']))
         reported.append(dict(records=sorted(unused[work]), work=dict(work),
-                             cause='no supplied record obliges a recipient to this work as printed'))
+                             cause=('only a delivery outside the grant obliges a recipient to this work: '
+                                    + '; '.join(outside)) if outside else
+                             'no supplied record obliges a recipient to this work as printed'))
     return dict(recipients=results, reported=reported)
 
 

@@ -590,7 +590,8 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
                                             history('fx-h-270', parcel('57', '270'), '2023-11-30')])
         # The result stays keyed as the delivery prints the name.
         self.assertEqual(unattached, [])
-        self.assertEqual(out['BORGHESE ANTONIO']['recipients']['BORGHESE  ANTONIO']['result'].effect, REQUIRED)
+        # The recipient is keyed as the join reads it, so a variant spelling is the same recipient.
+        self.assertEqual(out['BORGHESE ANTONIO']['recipients']['BORGHESE ANTONIO']['result'].effect, REQUIRED)
         supplied = [delivery('fx-pec-a', 'BORGHESE A.', parcel('57', '270')),
                     delivery('fx-pec-89', 'BORGHESE ANTONIO', parcel('57', '89')),
                     delivery('fx-pec-blank', ' ', parcel('57', '89')),
@@ -630,7 +631,6 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertEqual(date_column(date(2023, 11, 30), BOUNDARY_B, ZoneInfo('America/New_York')), 'D∋')
 
     def test_a_day_containing_the_deadline_or_with_no_deadline_is_held(self):
-        from cordon_d import case_prescriptions
         # The D∋ cell through recipient_results: C's boundary placed inside a day stands in for a term in hours.
         inside = datetime(2023, 11, 30, 15, tzinfo=ROME)
         day = fixture('fx-c-plant', 'commencement', work=plant('1602200'), occurred='2023-11-30')
@@ -651,7 +651,6 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertIsNone(result['deadline'])
         self.assertEqual(list(result['commencements']), ['fx-c-timed'])
         self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-plant')], ['held'])
-        self.assertTrue(case_prescriptions.PERFORMANCE['work'] is case_prescriptions.PERFORMANCE['plant'])
 
     def test_the_runs_cutoff_and_grant_bound_the_join_at_a_position(self):
         import importlib.util
@@ -678,13 +677,18 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         for record in records:
             for key in ('per_recipient', 'per_recipient_reported'):
                 record.pop(key, None)
-        # PR #38's grant holds at a position too: a record outside it is unattached with the need as its cause.
+        # PR #38's grant holds at a position too: a delivery outside it joins its position and gives no result
+        # there; it is reported at that position with the need.
         report = caller.per_recipient([dict(records=records)], [delivery], snapshot,
                                       dict(run, permitted_controlled_sources=frozenset()), {}, {})
-        self.assertEqual(report['unattached'], [dict(
-            record='fx-pec-rotolo', order=DDS113, clause=RECORD['occurrence'],
-            cause=f'authorized evidence for personal-delivery record fx-pec-rotolo on {DDS113}')])
-        self.assertFalse([r for r in records if {'per_recipient', 'per_recipient_cause'} & set(r)])
+        self.assertEqual(report['unattached'], [])
+        self.assertEqual(rotolo['per_recipient'], {})
+        self.assertEqual(rotolo['per_recipient_reported'], [dict(
+            record='fx-pec-rotolo', kind='personal-delivery',
+            need=f'authorized evidence for personal-delivery record fx-pec-rotolo on {DDS113}')])
+        for record in records:
+            for key in ('per_recipient', 'per_recipient_reported'):
+                record.pop(key, None)
         # PR #38's cutoff holds at a position too: a record dated after it is refused, naming the record and field,
         # on every position record of the clause, and nothing is reported unattached.
         early = dict(run, known_through=PEC_C - timedelta(hours=1))
@@ -700,6 +704,66 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
                                       dict(run, permitted_controlled_sources=set()), {}, {})
         self.assertEqual({r['per_recipient_cause'] for r in records},
                          {'TypeError: Evaluation requires the run to state its controlled-source grant'})
+
+
+    def test_through_the_writer_a_narrower_grant_withholds_a_result_at_a_position_and_never_changes_it(self):
+        """`read_prescriptions.per_recipient` itself, on BORGHESE ANTONIO (113/2023) and the CIAMPI co-holders
+        (124/2023): a record outside the grant that could change a recipient's result withholds it; one that
+        could not leaves it as the granted records give it."""
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('read_prescriptions', ROOT / 'scripts/read_prescriptions.py')
+        caller = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(caller)
+        snapshot = Snapshot.load(ROOT)
+        run = dict(at=AT, known_through=EVALUATED, permitted_controlled_sources=frozenset({'f' * 64}))
+
+        def outside(item):
+            return dict(item, source='e' * 64)
+
+        def write(order, owner, supplied):
+            records = [dict(r) for r in self.orders[order]]
+            report = caller.per_recipient([dict(records=records)], supplied, snapshot, run, {}, {})
+            [record] = [r for r in records if annex_position(r)['owner'] == owner]
+            return record, report
+
+        base = [delivery('fx-pec-b', 'BORGHESE ANTONIO', parcel('57', '270')),
+                history('fx-h-270', parcel('57', '270'), '2023-11-30')]
+        inside = datetime(2023, 11, 24, 9, tzinfo=ROME)
+        record, _ = write(DDS113, 'BORGHESE ANTONIO', base)
+        self.assertEqual(record['per_recipient']['BORGHESE ANTONIO']['c']['effect'], REQUIRED)
+        granted, _ = write(DDS113, 'BORGHESE ANTONIO', base + [performed('fx-c', plant('1602200'), inside)])
+        self.assertEqual(granted['per_recipient']['BORGHESE ANTONIO']['c']['effect'], NOT_ESTABLISHED)
+        for label, extra in (('plant', performed('fx-c', plant('1602200'), inside)),
+                             ('its parcel', performed('fx-c', parcel('57', '270'), inside)),
+                             ('a history of its parcel', history('fx-c', parcel('57', '270'), '2023-11-30')),
+                             ('a second delivery, printed with a doubled space',
+                              delivery('fx-c', 'BORGHESE  ANTONIO', parcel('57', '270'), occurred=PEC_B + timedelta(days=1)))):
+            with self.subTest(label):
+                record, report = write(DDS113, 'BORGHESE ANTONIO', base + [outside(extra)])
+                c = record['per_recipient']['BORGHESE ANTONIO']['c']
+                self.assertIsNone(c['truth'])
+                self.assertEqual(c['needs'], [f"authorized evidence for {extra['kind']} record fx-c on {DDS113}"])
+                self.assertEqual(report['unattached'], [])
+                # The granted history the result would have read is reported with the withholding as its cause.
+                [aside] = [r for r in record['per_recipient_reported'] if r.get('record') == 'fx-h-270']
+                self.assertTrue(aside['cause'].startswith("not applied: BORGHESE ANTONIO's result is withheld"))
+        # A record outside the grant on a host-only parcel could not change the result: it stays definite.
+        record, _ = write(DDS113, 'BORGHESE ANTONIO', base + [outside(performed('fx-c', parcel('57', '78'), inside))])
+        self.assertEqual(record['per_recipient']['BORGHESE ANTONIO']['c']['effect'], REQUIRED)
+        # Two granted deliveries to one owner, one printed with a doubled space, are one recipient at two instants.
+        record, _ = write(DDS113, 'BORGHESE ANTONIO', base + [
+            delivery('fx-pec-b2', 'BORGHESE  ANTONIO', parcel('57', '270'), occurred=PEC_B + timedelta(days=1))])
+        self.assertEqual(list(record['per_recipient']), ['BORGHESE ANTONIO'])
+        self.assertIsNone(record['per_recipient']['BORGHESE ANTONIO']['c']['truth'])
+        # A co-holder's delivery outside the grant gives neither this recipient's notice nor its works.
+        co = [delivery('fx-pec-vp', 'CIAMPI VITO PASQUALE', parcel('32', '52'), occurred=PEC_V, order=DDS124),
+              history('fx-h-293', parcel('32', '293'), '2024-04-15', order=DDS124)]
+        alone, _ = write(DDS124, 'CIAMPI VITO PASQUALE', co)
+        record, _ = write(DDS124, 'CIAMPI VITO PASQUALE', co + [outside(
+            delivery('fx-pec-n', 'NAUTICA CIAMPI S.R.L', parcel('32', '293'), occurred=PEC_V, order=DDS124))])
+        self.assertEqual(record['per_recipient']['CIAMPI VITO PASQUALE']['c'],
+                         alone['per_recipient']['CIAMPI VITO PASQUALE']['c'])
+        self.assertEqual(alone['per_recipient']['CIAMPI VITO PASQUALE']['c']['effect'], REQUIRED)
 
 
 STORE = store_root(ROOT)

@@ -82,6 +82,16 @@ CODE = (
      "    'plant': {'T<': COUNT, 'T≥': COUNT, 'D<': HOLD, 'D∋': HOLD, 'D>': REPORT, '?': COUNT},\n",
      'test_annex_positions.SuppliedRecordsAtPositions.'
      'test_row_5_a_performance_naming_the_plant_counts_by_where_it_falls_against_the_deadline'),
+    # The grant at a position (PR #40 round 1).
+    ("let a co-holder's delivery outside the grant withhold", 'cordon_d.case_prescriptions',
+     "                    or r['kind'] != 'personal-delivery'\n                    and (set(r['works'])",
+     "                    or (set(r['works'])",
+     'test_osservatorio_records.OsservatorioRecords.'
+     'test_a_partial_grant_withholds_what_the_full_evidence_leaves_unresolved'),
+    ('key a recipient by its raw printed string', 'cordon_d.case_prescriptions',
+     "            recipient = _printed(r['recipient'])", "            recipient = (r['recipient'] or '').strip()",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_through_the_writer_a_narrower_grant_withholds_a_result_at_a_position_and_never_changes_it'),
 )
 
 

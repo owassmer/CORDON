@@ -274,12 +274,14 @@ def per_recipient(results, supplied, snapshot, run, closures, changes):
     every record is admitted under them first (`admitted_records`): a record set with a
     record dated after the cutoff is refused whole, as `per_recipient_cause`, and a
     record outside the grant reaches no result. For a clause emitted per annex position
-    (PR #35), each granted record is joined to the position whose printed owner and
-    parcel it names (`position_attachments`), and each position record gets C with its
-    own governing rows' results; a record outside the grant is unattached with the
-    need 'authorized evidence for …' as its cause, and a record joined to no position,
-    or to several, is unattached with its cause. Returns what reached no held order,
-    and what attached to no position.
+    (PR #35), each admitted record, granted or not, is joined to the position whose
+    printed owner and parcel it names (`position_attachments`), and each position record
+    gets C with its own governing rows' results. The grant is applied once, by
+    `recipient_results`, as off positions: a record outside it withholds any result it
+    could change and never makes one more definite. A record joined to no position, or
+    to several, is unattached with its cause, and one outside the grant also names the
+    need 'authorized evidence for …'. Returns what reached no held order, and what
+    attached to no position.
     """
     from zoneinfo import ZoneInfo
     from cordon_d.calendar import national_calendar
@@ -319,16 +321,16 @@ def per_recipient(results, supplied, snapshot, run, closures, changes):
             evaluate_recipients(record, by_order[act])
     for (act, clause), records in positioned.items():
         try:
-            granted, ungranted = admitted_records(by_order[act], act, evaluated_at=evaluated_at, zone=zone,
-                                                  permitted_controlled_sources=run['permitted_controlled_sources'])
-            names = {r['record'] for r in granted}
-            attached, left = position_attachments(records, [i for i in by_order[act] if i.get('record') in names])
+            _, ungranted = admitted_records(by_order[act], act, evaluated_at=evaluated_at, zone=zone,
+                                            permitted_controlled_sources=run['permitted_controlled_sources'])
+            attached, left = position_attachments(records, by_order[act])
         except Exception as error:  # a refused record set is reported whole, never partly applied
             for record in records:
                 record['per_recipient_cause'] = f'{type(error).__name__}: {error}'[:600]
             continue
-        unattached += [dict(record=r['record'], order=act, clause=clause, cause=need) for r, need in ungranted]
-        unattached += [dict(item, order=act, clause=clause) for item in left]
+        needs = {r['record']: need for r, need in ungranted}
+        unattached += [dict(item, order=act, clause=clause, **({'need': needs[item['record']]}
+                                                               if item['record'] in needs else {})) for item in left]
         for record in records:
             if record['occurrence'] in attached:
                 evaluate_recipients(record, attached[record['occurrence']], position=annex_position(record),

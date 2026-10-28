@@ -517,14 +517,20 @@ notification only through A's mass-publicity route.
 Supplied Osservatorio records (`osservatorio-records`) reach C per recipient
 through `recipient_results` (`read_prescriptions.py --records`), beside the
 clause's cohort result, which no supplied record moves. There is one result per
-recipient a delivery record names, keyed as that record names them. For a clause
-the writer emits per annex position, each record is joined to a position and read
+recipient a delivery record names, keyed as that record names them (runs of
+whitespace are one space, as the join reads a name). For a clause the writer emits
+per annex position, each record, granted or not, is joined to a position and read
 by the rule table below. On both paths the run's stated inputs bound the records
 first (`admitted_records`): a record set with a record dated after the knowledge
 cutoff is refused whole, naming the record and field, and a record outside the
-stated grant is withheld with the need "authorized evidence for …"; at a position
-that need is its unattached cause, and a recipient it names, or obliges to a work
-it names, gets no definite result. Other clauses keep the record's naming alone. A
+stated grant reaches no result. A recipient such a record names, or whose obliged
+work it performs or records, gets no definite result: it is withheld with the need
+"authorized evidence for …", and the records it would have read are reported with
+that cause. Another recipient's delivery outside the grant withholds nothing, since
+it gives neither this recipient's notice nor its works. So a narrower grant limits
+what is known and never changes it. A record outside the grant that joins no
+position is unattached with its cause and the need. Other clauses keep the
+record's naming alone. A
 personal-delivery record is the delivery receipt only, never the acceptance
 receipt; it enters the communication predicate for its recipient only. Off
 positions, the works a delivery record names are the operator's standing

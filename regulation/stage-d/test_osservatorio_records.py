@@ -188,6 +188,11 @@ class OsservatorioRecords(unittest.TestCase):
                 self.assertEqual(partial['result'].needs,
                                  {need if label == 'ungranted delivery'
                                   else f'authorized evidence for commencement record verbale-x on {ORDER}'})
+        # Another recipient's delivery outside the grant gives neither Nitti's notice nor his works: it withholds
+        # nothing, and his result is the one the granted records give.
+        co = dict(delivery('pec-laserra', 'Laserra', '158', occurred=PEC + timedelta(days=1)), source=other)
+        shared = self.run_records([records[0], records[2], co], evaluated_at=at, settled=True)
+        self.assertEqual(shared['recipients']['Nitti Vincenzo']['result'], alone['recipients']['Nitti Vincenzo']['result'])
 
     def test_a_supplied_record_dated_after_the_cutoff_is_refused(self):
         future = datetime(2026, 1, 10, 10, 0, tzinfo=ROME)
