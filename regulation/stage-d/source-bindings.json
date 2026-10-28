@@ -137,8 +137,8 @@
     },
     {
       "id": "plant-protection-records",
-      "name": "Protected-plant status and required permission records",
-      "purpose": "Supply an individual plant's protected status and, only where that status changes removal, the applicable permission or decision.",
+      "name": "Protected-plant status records",
+      "purpose": "Supply an individual plant's protected status.",
       "contracts": [
         "protected-status",
         "operative-act"
@@ -147,12 +147,11 @@
         "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/UliviMonumentali/MapServer/1 (listed trees) and /0 (provisional trees, DGR 720/2025), captured whole by scripts/acquire_protection.py (corpus/sources/protected-status/register.json)",
         "The L.R. 14/2007 list acts as published on BURP (https://burp.regione.puglia.it/documents/20135/<folder>/DEL_<n>_<year>.pdf, or the ordinary bulletin that carries an older act), each act's decision, history table and deletion annex (corpus/sources/protected-status/acts.json)",
         "The official monitoring observations of the affected plants and of the negative olives within 50 m (rows 1 and 2), with MONUMENTALE_ARIF and NOTE_RILEVATORE from every view that prints them",
-        "The plant points the held removal orders print in their annexes (corpus/sources/removal-orders/records.json)",
-        "The competent authority's actual permission record for the affected plant or parcel"
+        "The plant points the held removal orders print in their annexes (corpus/sources/removal-orders/records.json)"
       ],
-      "population": "The affected plants (the in-reach positives and the plants the held removal orders print, each order plant taking the record of the positive it coincides with within 1 m), the negative olives C may place in their 50 m zones, and the register entries within 50 m plus both errors of an affected plant; each entry's own list acts. It is not the register, and not only the positives. Permission records only where a protected plant's branch requires them.",
+      "population": "The affected plants (the in-reach positives and the plants the held removal orders print, each order plant taking the record of the positive it coincides with within 1 m), the negative olives C may place in their 50 m zones, and the register entries within 50 m plus both errors of an affected plant; each entry's own list acts. It is not the register, and not only the positives.",
       "reader": "cordon_d.protection (scripts/read_protection.py): register entries and key causes, each entry's act chain from the acts' decisions, recitals and history table, trees a deleting act lists, survey batches by the survey the acts' recitals name and their measured bounds with the 2011 check read from the held capitolato, the monitoring record and D's reading of each note, measurements, the note-code rule and candidates",
-      "open": "Some rows of DGR 720/2025's deletion annex are unread, and the deleting act prints no approving act for the trees it deletes, so C reads a deleted tree's listing before deletion unknown (counts: CURRENT). DGR 1193/2021's and DGR 1491/2020's deletions are unread; both acts precede every held order. The census tag as card is read from the held tags: the capitolato states the key N_Fg_P_cod_ISTAT and no tag. Investigate PPTR, municipal planning or a landscape authorization only when the affected plant's accepted branch requires it."
+      "open": "Some rows of DGR 720/2025's deletion annex are unread, and the deleting act prints no approving act for the trees it deletes, so C reads a deleted tree's listing before deletion unknown (counts: CURRENT). DGR 1193/2021's and DGR 1491/2020's deletions are unread; both acts precede every held order. The census tag as card is read from the held tags: the capitolato states the key N_Fg_P_cod_ISTAT and no tag. Row 10, the landscape proceeding, is osservatorio-records'; INPUTS row 10 states why no landscape designation is read."
     },
     {
       "id": "land-standing-records",
@@ -173,7 +172,7 @@
     {
       "id": "osservatorio-records",
       "name": "Osservatorio and ARIF first-party records",
-      "purpose": "Supply the facts only the Osservatorio's and its executor's own records hold: personal delivery of an order to a named recipient, the owner's election or refusal, standing after the latest act, commencement and removal performed, treatment before removal, the assignment of the presiding officer and of ARIF, the sample handover record, field assessment, the cost of forced removal and its target, and the hosts within 50 m of an infected plant that no public survey observed.",
+      "purpose": "Supply the facts only the Osservatorio's and its executor's own records hold: personal delivery of an order to a named recipient, the owner's election or refusal, standing after the latest act, commencement and removal performed, treatment before removal, the assignment of the presiding officer and of ARIF, the sample handover record, field assessment, the cost of forced removal and its target, and the hosts within 50 m of an infected plant that no public survey observed, and the landscape proceeding the Osservatorio requests for each monumental or historic-interest plant not found infected (D.lgs. 19/2021 Art. 33(1)).",
       "contracts": [
         "recipient-notice",
         "owner-response",
@@ -186,7 +185,9 @@
         "execution-cost",
         "plant-population",
         "controlled-access",
-        "administrative-event"
+        "administrative-event",
+        "protected-status",
+        "operative-act"
       ],
       "routes": [
         "The Osservatorio's PEC acceptance and delivery receipts for the order sent to a recipient (\"notificato ai proprietari/conduttori … alla loro PEC qualora presente\"), and any other individual notice record in its protocol, including notification attempts made through the municipality",
@@ -196,11 +197,12 @@
         "ARIF's records incorporated into the matter: its notes to the Osservatorio by protocol on the measures it executed or could not complete, its assistants' supervision record and its charge of removal costs to the owner",
         "The order's PEC to ARIF \"per gli adempimenti conseguenti\" and to the Prefettura",
         "The field check of the 50 m area around each infected plant the order prescribes, attributed to the actor the order names",
-        "The App or paper sample handover and receipt record under DDS 31/2022 and DDS 45/2025: refrigerated transport, the assistants' and driver's signatures, the authorized transporter's countersignature and whether the delivery history is complete"
+        "The App or paper sample handover and receipt record under DDS 31/2022 and DDS 45/2025: refrigerated transport, the assistants' and driver's signatures, the authorized transporter's countersignature and whether the delivery history is complete",
+        "The landscape proceeding for each plant, as the Osservatorio's file holds it: its request for the D.lgs. 42/2004 Art. 146 authorization, with its protocol and the authority it was lodged with; the superintendent's receipt of the acts, as the file records it (the delivery receipt of the transmission) or the decision recites it, a notice that the acts were sent not being receipt; the superintendent's opinion or the route taken to resolve it; and the landscape authority's decision on the request, with its issuer"
       ],
-      "population": "The records for each live order's recipients, plants and work: deliveries, responses, standing changes, assignments, sample handovers, field and execution records, costs and the 50 m field check.",
-      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes the supplied delivery, commencement, removal and history records the run's stated grant permits to C per recipient (scripts/read_prescriptions.py --records with --permitted-controlled-sources).",
-      "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check. Without the handover record, the transport and signature predicates stay unknown, never false."
+      "population": "The records for each live order's recipients, plants and work: deliveries, responses, standing changes, assignments, sample handovers, field and execution records, costs and the 50 m field check; and the landscape proceeding records for the plants they concern.",
+      "reader": "The operator supplies the record bytes to the store as a controlled source (cordon_d.evidence: role official-record, access controlled, read through EvidenceView by permitted principals); the fact enters as the existing typed input (AdministrativeEvent, Assertion or RequiredPopulation). cordon_d.case_prescriptions.recipient_results passes the supplied delivery, commencement, removal and history records the run's stated grant permits to C per recipient (scripts/read_prescriptions.py --records with --permitted-controlled-sources). cordon_d.landscape.landscape_results admits the supplied landscape-lodging, landscape-acts-received, landscape-opinion-route and landscape-decision records under the run's cutoff and grant, attaches each to the plants it names through row 9's identity and passes them to C's Art. 33(1), 146(5) and 146(8) rows per plant (scripts/read_landscape.py --records with --known-through and --permitted-controlled-sources).",
+      "open": "These facts exist only in the Osservatorio's and ARIF's records. Where one is not supplied, C's answer is unknown and names the predicate. Publication records, court decisions and ARIF's published acts name orders and owners, but they supply no personal delivery, election, dated or complete execution history, cost, current standing or 50 m field check. Without the handover record, the transport and signature predicates stay unknown, never false. Landscape authorization is required by Art. 33(1) itself, not by a record: the file supplies the lodging, the superintendent's receipt of the acts, the opinion route and the decision, and only the decision for that plant and its removal is a grant. The orders' clause \"Di attivare la richiesta dell'autorizzazione paesaggistica … esclusivamente per gli ulivi riconosciuti ufficialmente monumentali e risultati non infetti\" states an intent across the order, not a lodging or a decision for any plant."
     },
     {
       "id": "vector-and-treatment-observations",
