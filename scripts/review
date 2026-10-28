@@ -1,0 +1,191 @@
+#!/usr/bin/env bash
+# scripts/review <pr> plan|1|2|3                    One independent reviewer of a pull request at its head commit.
+# scripts/review --round <earlier run> <adjudication file>
+#                                                   That reviewer's next round: its own session resumed at the PR's
+#                                                   new head, with the round brief and the adjudication.
+# scripts/review --post <pr>                        Post every report of the PR's finished round, byte for byte, one
+#                                                   comment per reviewer, once all of that round's runs have finished.
+#
+# REVIEW_PRINCIPLES.md owns the procedure and the briefs. This script takes the plan, implementation or round brief and
+# the facet's table row verbatim from REVIEW_PRINCIPLES.md as it stands on origin/main, and adds only fixed delivery
+# facts: the pull request, its head commit, a disposable read-only checkout of that commit, the facet, and for a round
+# the adjudication; plus the store's path and the read-only rules. The coordinator has no way to add a question or a
+# steer: scripts/steer refuses a message to a review run. Reviewers run in their own lanes: implementation facets of one
+# unit at a time (its three together), and plan reviews one at a time; a run waits for its lane.
+# Each reviewer's Pi session is kept (.runs/<run>.session.jsonl), so a round resumes the reviewer that wrote the
+# findings it judges, as REVIEW_PRINCIPLES.md asks. The report is the reviewer's final message, written to
+# .runs/<run>.md; the coordinator's session is told when it is there.
+# A check its subject can change is no check: this script runs only as it stands on origin/main, and refuses when the
+# local copy differs. CORDON_REVIEW_UNMERGED=1 runs it unmerged, and says so in its log and in any comment it posts.
+# The whole script is one block, so bash reads all of it before running any.
+{
+set -euo pipefail
+REVIEWER="claude-cli/claude-opus-5-5:high"   # Owen, 2026-09-24: reviews on Opus 5.5; change it here and nowhere else
+REPO=owassmer/CORDON
+root="$(git rev-parse --show-toplevel)"; cd "$root"
+mkdir -p .runs
+usage() { sed -n '2,8p' "$0" >&2; exit 2; }
+[ $# -ge 1 ] || usage
+
+if [ -z "${FACTORY_RUN:-}" ]; then
+  git fetch -q origin main || { echo "could not fetch origin/main; a review is not run on a stale procedure" >&2; exit 2; }
+  unmerged=""
+  for f in scripts/review tools/roles/run.mjs; do
+    if ! git show "origin/main:$f" 2>/dev/null | cmp -s - "$f"; then unmerged="$unmerged $f"; fi
+  done
+  if [ -n "$unmerged" ] && [ "${CORDON_REVIEW_UNMERGED:-}" != 1 ]; then
+    echo "this checkout's$unmerged differ from origin/main; a review runs only as merged (CORDON_REVIEW_UNMERGED=1 runs it unmerged, and says so)" >&2; exit 2
+  fi
+fi
+unmerged_note() { [ "${CORDON_REVIEW_UNMERGED:-}" = 1 ] && echo " (scripts/review run unmerged)" || true; }
+
+brief() { # brief plan|implementation|round: the brief's quoted paragraph, verbatim, from origin/main
+  local name; case "$1" in plan) name="Plan brief:";; implementation) name="Implementation brief:";; round) name="Round brief:";; esac
+  git show origin/main:REVIEW_PRINCIPLES.md | awk -v n="$name" '$0==n{f=1;next} f&&/^> /{sub(/^> /,"");print;k++;next} f&&k{exit}'
+}
+facet_row() { git show origin/main:REVIEW_PRINCIPLES.md | grep -E "^\| $1\. " ; }
+checkout() { # checkout <pr> <sha>: a disposable detached checkout of that commit
+  local co="$(dirname "$root")/CORDON-review/pr$1-${2:0:7}"
+  if [ ! -d "$co" ]; then
+    mkdir -p "$(dirname "$co")"
+    git fetch -q origin "pull/$1/head"
+    git worktree add -q --detach "$co" "$2"
+    ln -s "$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)/.venv" "$co/.venv"
+  fi
+  echo "$co"
+}
+store="${CORDON_STORE:-$(dirname "$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)")/CORDON-store}"
+facts() { # facts <pr> <sha> <checkout>
+  printf '%s\n' "Delivery facts:
+- Pull request: #$1 in $REPO. Read its plan with: gh pr view $1 --json body --jq .body
+- Head commit: $2. Read-only checkout of it: $3
+- The change, for implementation review: git -C $3 diff origin/main...$2
+- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/pr$1/.
+- Do not edit, commit, push, check out, or change the pull request; do not read other reviewers' comments on it."
+}
+report_of() { # report_of <jsonl>: the final assistant text
+  node -e '
+    const lines = require("fs").readFileSync(process.argv[1], "utf8").split("\n"); let last = "";
+    for (const l of lines) { let o; try { o = JSON.parse(l); } catch { continue; }
+      if (o.type === "message_end" && o.message?.role === "assistant") {
+        const c = o.message.content; const t = Array.isArray(c) ? c.filter((x) => x.type === "text").map((x) => x.text).join("") : String(c ?? "");
+        if (t.trim()) last = t; } }
+    process.stdout.write(last);' "$1"
+}
+
+# ---- posting a finished round ---------------------------------------------------------------------------------------
+if [ "$1" = --post ]; then
+  pr="${2:?usage: scripts/review --post <pr>}"
+  shopt -s nullglob; logs=(.runs/review-pr$pr-*.log); shopt -u nullglob
+  [ ${#logs[@]} -gt 0 ] || { echo "no review runs for #$pr" >&2; exit 2; }
+  latest="$(for l in "${logs[@]}"; do sed -n 's/^=== round \([0-9]*\)$/\1/p' "$l"; done | sort -n | tail -1)"
+  round=(); for l in "${logs[@]}"; do grep -qx "=== round $latest" "$l" && round+=("$l"); done
+  for l in "${round[@]}"; do grep -q '^=== finished' "$l" || { echo "$(basename "$l" .log) has not finished; a round is posted whole" >&2; exit 2; }; done
+  for l in "${round[@]}"; do
+    r="$(basename "$l" .log)"
+    [ -f ".runs/$r.posted" ] && { echo "$r already posted: $(cat ".runs/$r.posted")"; continue; }
+    [ -s ".runs/$r.md" ] || { echo "$r has no report" >&2; exit 2; }
+    role="$(sed -n 's/^=== role //p' "$l")"; sha="$(sed -n 's/^=== commit //p' "$l")"; model="$(sed -n 's/^=== reviewer on [^ ]* (\([^)]*\)).*/\1/p' "$l")"
+    note="$(grep -q '^=== unmerged' "$l" && echo ' (scripts/review run unmerged)' || true)"
+    { echo "**$role, round $latest, at \`${sha:0:7}\`** ($model, scripts/review$note)"; echo; cat ".runs/$r.md"; } > ".runs/$r.comment.md"
+    url="$(gh pr comment "$pr" -R "$REPO" --body-file ".runs/$r.comment.md")"
+    echo "$url" > ".runs/$r.posted"; echo "$r: $url"
+  done
+  exit 0
+fi
+
+# ---- a new reviewer, or a reviewer's next round ---------------------------------------------------------------------
+if [ "$1" = --round ]; then
+  prev="${2:?usage: scripts/review --round <earlier run> <adjudication file>}"; adj="${3:?usage: scripts/review --round <earlier run> <adjudication file>}"
+  prev="${prev%.log}"; prev="${prev#.runs/}"
+  [ -f ".runs/$prev.log" ] || { echo "no run $prev" >&2; exit 2; }
+  [ -s ".runs/$prev.session.jsonl" ] || { echo "$prev kept no session; a round resumes the reviewer's own session (REVIEW_PRINCIPLES.md)" >&2; exit 2; }
+  [ -s "$adj" ] || { echo "no adjudication file $adj" >&2; exit 2; }
+  pr="$(sed -n 's/^=== pr //p' ".runs/$prev.log")"; kind="$(sed -n 's/^=== kind //p' ".runs/$prev.log")"; role="$(sed -n 's/^=== role //p' ".runs/$prev.log")"
+  n=$(( $(sed -n 's/^=== round //p' ".runs/$prev.log") + 1 ))
+  session=".runs/$prev.session.jsonl"
+else
+  pr="${1:?}"; which="${2:?usage: scripts/review <pr> plan|1|2|3}"
+  case "$which" in plan) kind=plan; role="Plan reviewer";; 1|2|3) kind=implementation; role="Facet $which";; *) usage;; esac
+  n=1; session=""
+fi
+[[ "$pr" =~ ^[0-9]+$ ]] || usage
+slug="pr$pr-$(echo "$role" | tr 'A-Z ' 'a-z-')-r$n"
+run="${FACTORY_RUN:-review-$slug-$(date +%Y%m%dT%H%M%S)}"
+if [ -z "${FACTORY_RUN:-}" ]; then
+  FACTORY_RUN="$run" nohup "$root/scripts/review" "$@" </dev/null >/dev/null 2>&1 &
+  echo "run: .runs/$run.log"; exit 0
+fi
+log=".runs/$run.log"
+sha="$(gh pr view "$pr" -R "$REPO" --json headRefOid --jq .headRefOid)"
+echo "=== reviewer on $slug ($REVIEWER)" > "$log"
+{ echo "=== pr $pr"; echo "=== kind $kind"; echo "=== role $role"; echo "=== round $n"; echo "=== commit $sha"
+  echo "=== dispatched by session ${PI_SESSION_ID:-none}"; [ "${CORDON_REVIEW_UNMERGED:-}" = 1 ] && echo "=== unmerged: this run used scripts/review as it stands in $root, not as merged"
+  echo "=== steerable (pid $$): scripts/steer $run --stop (a reviewer takes no message)"; } >> "$log"
+on_err() { echo "=== finished exit $1 (${0##*/} stopped at line $2)" >> "$log"; }
+trap 'on_err $? $LINENO' ERR
+
+# Lanes: implementation facets of one unit at a time; plan reviews one at a time. A lane is busy while another PR's
+# run of the same kind is going (tools/feed/runs.mjs decides going).
+busy() {
+  local l
+  for l in .runs/review-*.log; do
+    [ "$l" = "$log" ] && continue
+    grep -qx "=== kind $kind" "$l" 2>/dev/null || continue
+    node -e 'import(process.argv[2]).then(m => process.exit(m.runStateOf(process.argv[1]).state === "finished" ? 1 : 0))' "$l" "$root/tools/feed/runs.mjs" || continue
+    if [ "$kind" = plan ] || ! grep -qx "=== pr $pr" "$l"; then return 0; fi
+  done
+  return 1
+}
+while busy; do [ -n "${waited:-}" ] || echo "=== waiting for a slot (the $kind review lane is in use)" >> "$log"; waited=1; sleep 15; done
+[ -z "${waited:-}" ] || echo "=== got a slot" >> "$log"
+
+co="$(checkout "$pr" "$sha")"
+used="$([ -z "$session" ] && echo "$kind" || echo round)"
+[ -n "$(brief "$used")" ] || { echo "=== the $used brief was not found in REVIEW_PRINCIPLES.md on origin/main" >> "$log"; echo "=== finished exit 2" >> "$log"; exit 2; }
+if [ -z "$session" ]; then
+  session=".runs/$run.session.jsonl"
+  case "$kind" in
+    plan) prompt="Independent plan review of CORDON PR #$pr, at commit $sha. Read-only. Your final message is your report.
+
+$(facts "$pr" "$sha" "$co")
+
+$(brief plan)";;
+    implementation) prompt="Independent implementation review of CORDON PR #$pr, $role, at commit $sha. Read-only. Your final message is your report.
+
+$(facts "$pr" "$sha" "$co")
+- Your facet, from REVIEW_PRINCIPLES.md:
+$(git show origin/main:REVIEW_PRINCIPLES.md | grep -E '^\| Facet \| ')
+$(facet_row "${role#Facet }")
+
+$(brief implementation)";;
+  esac
+else
+  cp "$session" ".runs/$run.session.jsonl"; session=".runs/$run.session.jsonl"
+  prompt="Round $n of your review of CORDON PR #$pr, now at commit $sha.
+
+$(facts "$pr" "$sha" "$co")
+
+$(brief round)
+
+The adjudication of your previous round:
+
+$(cat "$adj")"
+fi
+printf '%s\n' "$prompt" > ".runs/$run.prompt.md"
+echo "=== prompt: .runs/$run.prompt.md" >> "$log"
+
+trap - ERR; set +e
+(cd "$co" && node "$root/tools/roles/run.mjs" --inbox "$root/.runs/$run.steer" --prompt "$prompt" -- \
+  pi --mode rpc --session "$root/$session" --no-extensions --no-skills --no-context-files --no-prompt-templates \
+    -e "$HOME/.pi/agent/extensions/claude-cli" --tools read,bash,grep,find,ls --model "$REVIEWER" \
+    --append-system-prompt "$root/tools/roles/compute.md" 2>> "$root/$log") | tee "$root/.runs/$run.jsonl" | "$root/scripts/watch" --render >> "$log"
+status=${PIPESTATUS[0]}; set -e; trap 'on_err $? $LINENO' ERR
+if [ "$status" -eq 7 ]; then echo "=== stopped by the coordinator; no report" >> "$log"; echo "=== finished exit 7" >> "$log"; exit 7; fi
+if [ "$status" -eq 0 ] && tail -n 20 ".runs/$run.jsonl" | grep -q '"stopReason":"error"'; then status=5; echo "=== the model failed; see the error above" >> "$log"; fi
+report_of ".runs/$run.jsonl" > ".runs/$run.md"
+if [ -s ".runs/$run.md" ]; then echo "=== report: .runs/$run.md ($(wc -c < ".runs/$run.md" | tr -d ' ') bytes)" >> "$log"
+else echo "=== no report" >> "$log"; [ "$status" -eq 0 ] && status=8; fi
+echo "=== finished exit $status" >> "$log"
+exit "$status"
+}

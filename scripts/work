@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# scripts/work <task file> <worktree>    A builder makes one task true in a unit's worktree. Called by the coordinator.
+#
+# The builder works directly in the unit's worktree (CORDON-worktrees/<branch>), unsandboxed, since CORDON units read
+# and acquire into the shared store and reach publishers over the network. It is grounded in origin/main's
+# constitution (fetched first, so a checkout behind origin does not ground it), tools/roles/compute.md and its task,
+# all in its system prompt, which survives compaction. It reads the unit's plan from the pull request itself. It commits
+# once, at the end, on the branch, and reports (tools/roles/worker.ts); it cannot push or write to GitHub: the
+# coordinator reads its diff and pushes.
+# At most four builders run at once on this machine, and one per worktree. A run waits for disk and memory headroom.
+# The run streams to .runs/<run>.log and Pi's events to .runs/<run>.jsonl in this checkout; the coordinator's session
+# is told when it finishes (.pi/extensions/runs.ts) and can follow it (tools/feed/feed, scripts/watch). While it runs,
+# scripts/steer <run> "<message>" reaches it and scripts/steer <run> --stop ends it: a stopped run commits nothing,
+# leaves its edits in the worktree and logs its git status, and the next run on that worktree is told they are there.
+# Task files live under the git-ignored .runs/tasks/: they are coordination, not program state.
+# The whole script is one block, so bash reads all of it before running any.
+{
+set -euo pipefail
+BUILDER="claude-cli/claude-opus-5-5:xhigh"   # the Claude subscription; change it here and nowhere else
+root="$(git rev-parse --show-toplevel)"; cd "$root"
+task="${1:?usage: scripts/work .runs/tasks/<pr>-<n>.md <worktree>}"
+wt="${2:?usage: scripts/work .runs/tasks/<pr>-<n>.md <worktree>}"
+[ -f "$task" ] || { echo "no task file $task; write it first" >&2; exit 2; }
+wt="$(cd "$wt" 2>/dev/null && git rev-parse --show-toplevel)" || { echo "$2 is not a checkout" >&2; exit 2; }
+[ "$(git -C "$wt" rev-parse --path-format=absolute --git-common-dir)" = "$(git rev-parse --path-format=absolute --git-common-dir)" ] \
+  || { echo "$wt is not a worktree of this repository" >&2; exit 2; }
+branch="$(git -C "$wt" branch --show-current)"
+[ -n "$branch" ] && [ "$branch" != main ] || { echo "$wt is not on a unit branch" >&2; exit 2; }
+task_text="$(cat "$task")"
+# Nothing is delegated unread: the coordinator's delegation gate leaves word of each text its fresh reader read
+# (.pi/extensions/delegation.ts). FACTORY_UNREAD=1 is for runs outside the coordinator's session.
+read_mark=".runs/read/$(printf '%s' "$task_text" | shasum -a 256 | cut -d' ' -f1)"
+if [ -z "${FACTORY_RUN:-}" ] && [ -z "${FACTORY_UNREAD:-}" ] && [ ! -f "$read_mark" ]; then
+  echo "$task has not been read by the fresh reader in this text: dispatch it on its own (scripts/work $task $2) so it is read first" >&2; exit 9
+fi
+
+run="${FACTORY_RUN:-work-$(basename "${task%.md}")-$(date +%Y%m%dT%H%M%S)}"; mkdir -p .runs
+# A dispatch never holds the caller: after the checks above, the run carries on in the background under the same name,
+# and this prints where its log is (the coordinator is told when it finishes).
+if [ -z "${FACTORY_RUN:-}" ]; then
+  FACTORY_RUN="$run" nohup "$root/scripts/work" "$@" </dev/null >/dev/null 2>&1 &
+  echo "run: .runs/$run.log"; exit 0
+fi
+log="$root/.runs/$run.log"; rundir="$root/.runs/$run"; mkdir -p "$rundir"
+echo "=== builder on $(basename "$task") ($BUILDER) in $wt" > "$log"
+echo "=== dispatched by session ${PI_SESSION_ID:-none}" >> "$log"
+echo "=== steerable (pid $$): scripts/steer $run \"<message>\" (or --stop)" >> "$log"
+on_err() { echo "=== finished exit $1 (${0##*/} stopped at line $2)" >> "$log"; }
+trap 'on_err $? $LINENO' ERR
+
+# One builder per worktree, and at most four at once. A lock names its holder's pid and the machine's boot: after a
+# restart a pid can belong to another process, so a lock from an earlier boot is free.
+locks=/private/tmp/cordon-locks; mkdir -p "$locks"
+boot="$(sysctl -n kern.boottime 2>/dev/null | grep -o '{ sec = [0-9]*' | grep -o '[0-9]*' || true)"
+alive() { [ -n "$1" ] && [ "$(sed -n 2p "$2" 2>/dev/null)" = "$boot" ] && kill -0 "$1" 2>/dev/null; }
+take() { # take <lock dir>: 0 when taken
+  if mkdir "$1" 2>/dev/null; then printf '%s\n%s\n' $$ "$boot" > "$1/pid"; return 0; fi
+  alive "$(sed -n 1p "$1/pid" 2>/dev/null)" "$1/pid" || rm -rf "$1"; return 1
+}
+wtlock="$locks/worktree-$(printf '%s' "$wt" | shasum | cut -c1-12)"
+slot=""
+until [ -n "$slot" ]; do
+  if take "$wtlock"; then
+    for n in 1 2 3 4; do take "$locks/builder-$n" && { slot="$locks/builder-$n"; break; }; done
+    [ -n "$slot" ] || rm -rf "$wtlock"
+  fi
+  [ -n "$slot" ] || { [ -n "${waited:-}" ] || echo "=== waiting for a slot (four builders at once, one per worktree)" >> "$log"; waited=1; sleep 10; }
+done
+[ -z "${waited:-}" ] || echo "=== got a slot" >> "$log"
+trap 'rm -rf "$slot" "$wtlock"' EXIT
+free_gb() { df -g "$wt" | awk 'NR==2 {print $4}'; }
+# memory_pressure's last line is "System-wide memory free percentage: N%"; where it cannot be read, memory does not hold the run.
+free_mem() { local p; p="$(memory_pressure -Q 2>/dev/null | tail -1 | grep -o '[0-9][0-9]*' | head -1 || true)"; echo "${p:-100}"; }
+until [ "$(free_gb)" -ge 3 ] && [ "$(free_mem)" -ge 20 ]; do
+  [ -n "${noroom:-}" ] || echo "=== waiting for headroom: $(free_gb) GB disk free (3 needed), $(free_mem)% memory free (20 needed)" >> "$log"; noroom=1; sleep 30
+done
+[ -z "${noroom:-}" ] || echo "=== headroom: $(free_gb) GB disk, $(free_mem)% memory free" >> "$log"
+
+# Grounding: origin/main's constitution, fetched first; the factory's compute rules; the task.
+git fetch -q origin main 2>> "$log" || echo "=== could not fetch origin; grounding from origin/main as last fetched ($(git log -1 --format='%h %cr' origin/main))" >> "$log"
+grounding=()
+for f in AGENTS.md DESIGN_PRINCIPLES.md STAGE_BOUNDARIES.md; do
+  git show "origin/main:$f" > "$rundir/$f"; grounding+=(--append-system-prompt "$rundir/$f")
+done
+grounding+=(--append-system-prompt "$root/tools/roles/compute.md")
+{ echo "# Your task, as dispatched"; echo; printf '%s\n' "$task_text"; } > "$rundir/task.md"
+grounding+=(--append-system-prompt "$rundir/task.md")
+echo "=== grounding: origin/main $(git rev-parse --short origin/main) constitution, tools/roles/compute.md, $(basename "$task")" >> "$log"
+pr="$(gh pr list --head "$branch" --state open --json number --jq '.[0].number' 2>/dev/null || true)"
+head_before="$(git -C "$wt" rev-parse HEAD)"
+left=""
+if [ -n "$(git -C "$wt" status --porcelain)" ]; then
+  left="
+
+The worktree holds uncommitted changes an earlier run left when it was stopped or ended (git status and git diff show them). Judge them against the task: keep what is right and carry on from where it was."
+  echo "=== the worktree has uncommitted changes from an earlier run: $(git -C "$wt" status --porcelain | wc -l | tr -d ' ') paths" >> "$log"
+fi
+prompt="You are a builder on a CORDON unit. Your worktree is $wt, on branch $branch$([ -n "$pr" ] && echo ", for pull request #$pr; read its plan with: gh pr view $pr --json body --jq .body"). Make your task true at the consumer surface, commit once on the branch when it is, then call report. Do not push: the coordinator reads your diff and pushes it. Set CORDON_STORE=${CORDON_STORE:-$(dirname "$root")/CORDON-store} inline on each command that reads the store.
+
+$task_text$left"
+
+# The role's own exit status is handled below; the error trap would announce "finished" before the run had.
+trap - ERR; set +e
+(cd "$wt" && ROLE_RUN_DIR="$rundir" \
+  node "$root/tools/roles/run.mjs" --inbox "$root/.runs/$run.steer" --prompt "$prompt" -- \
+  pi --mode rpc --no-session --no-extensions --no-skills --no-context-files --no-prompt-templates \
+    -e "$HOME/.pi/agent/extensions/claude-cli" -e "$root/tools/roles/worker.ts" --tools read,bash,edit,write,report \
+    --model "$BUILDER" "${grounding[@]}" 2>> "$log") | tee "$root/.runs/$run.jsonl" | "$root/scripts/watch" --render >> "$log"
+status=${PIPESTATUS[0]}; set -e; trap 'on_err $? $LINENO' ERR
+
+if [ "$status" -eq 7 ]; then
+  echo "=== stopped by the coordinator; nothing committed by this script. The worktree as left:" >> "$log"
+  git -C "$wt" status --short >> "$log"
+  echo "=== finished exit 7" >> "$log"; exit 7
+fi
+# Pi exits 0 even when the model failed; a run whose last answer is a model error did not do its work.
+if [ "$status" -eq 0 ] && tail -n 20 "$root/.runs/$run.jsonl" | grep -q '"stopReason":"error"'; then status=5; echo "=== the model failed; see the error above" >> "$log"; fi
+if [ -f "$rundir/.tmp/report.json" ]; then
+  { echo "=== report"; node -e 'const r=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); for (const k of ["changed","departures","notTrue","beyond"]) if (r[k] !== undefined) console.log(k + ":\n" + String(r[k] ?? "").trim() + "\n")' "$rundir/.tmp/report.json"; echo "=== end of report"; } >> "$log"
+else
+  echo "=== no report filed" >> "$log"; [ "$status" -eq 0 ] && status=8
+fi
+commits="$(git -C "$wt" rev-list --count "$head_before..HEAD")"
+echo "=== $commits new commit(s) on $branch: $(git -C "$wt" log --format='%h %s' "$head_before..HEAD" | head -5 | tr '\n' ';')" >> "$log"
+if [ -n "$(git -C "$wt" status --porcelain)" ]; then
+  echo "=== uncommitted changes left in the worktree:" >> "$log"; git -C "$wt" status --short >> "$log"
+fi
+echo "=== finished exit $status" >> "$log"
+exit "$status"
+}
