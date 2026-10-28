@@ -138,7 +138,9 @@ def kept(store: Path):
         if not root.is_dir():
             continue
         for path in sorted(root.rglob('*')):
-            if not path.is_file() or _transient(path.name):
+            # A symlink holds no data of its own: the Claude CLI's `latest` points at whichever debug log it is
+            # writing now, and the file it points at is kept under its own name.
+            if path.is_symlink() or not path.is_file() or _transient(path.name):
                 continue
             relative = path.relative_to(store)
             inside = relative.relative_to('derived').as_posix() if top == 'derived' else None
