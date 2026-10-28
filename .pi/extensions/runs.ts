@@ -31,6 +31,7 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 import { runState } from "../../tools/feed/runs.mjs";
 
 const FEED_KEY = "ctrl+shift+r";
+const REDELIVER_AFTER_MS = 120_000;
 const FEED_TITLE = "⧉ ";
 
 const git = (cwd: string, ...a: string[]) => {
@@ -467,16 +468,27 @@ export default function (pi: ExtensionAPI) {
     // A notice sent while the session is working waits in Pi's queue, and an interrupt drops what is queued (Owen saw a
     // finished run go unreported this way). So a notice counts as delivered only once it is in the session; until then
     // it is sent again whenever the session settles.
+    // A notice still waiting in Pi's queue is not yet in the session either, and a session that settles several times
+    // while notices wait (each interrupt settles it) would send each waiting notice again every time: one finished run
+    // was announced nine times. So a notice is sent again only once it has been missing for REDELIVER_AFTER_MS since
+    // it was last sent, long enough for a queued one to have landed.
+    const sentAt = new Map<string, number>();
+    const send = (file: string, content: string) => {
+      sentAt.set(file, Date.now());
+      pi.sendMessage({ customType: "factory-run", content, display: true }, { triggerTurn: true, deliverAs: "followUp" });
+    };
     const deliver = (file: string, content: string) => {
       pending.set(file, content);
-      pi.sendMessage({ customType: "factory-run", content, display: true }, { triggerTurn: true, deliverAs: "followUp" });
+      send(file, content);
     };
     redeliver = () => {
       if (live !== ctx || pending.size === 0) return;
       const said = JSON.stringify(ctx.sessionManager.getBranch().filter((e: any) => e.type === "custom_message" && e.customType === "factory-run").map((e: any) => e.content));
       for (const [file, content] of [...pending]) {
-        if (said.includes(`Run ${runName(file)} in `)) pending.delete(file);
-        else pi.sendMessage({ customType: "factory-run", content, display: true }, { triggerTurn: true, deliverAs: "followUp" });
+        if (said.includes(`Run ${runName(file)} in `)) {
+          pending.delete(file);
+          sentAt.delete(file);
+        } else if (Date.now() - (sentAt.get(file) ?? 0) >= REDELIVER_AFTER_MS) send(file, content);
       }
     };
 
