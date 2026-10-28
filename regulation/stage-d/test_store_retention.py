@@ -44,6 +44,15 @@ class Retention(unittest.TestCase):
         for folder in REGENERABLE:
             self.assertNotIn(f'derived/{folder}/cache.json', held)
 
+    def test_a_symlink_is_not_kept_but_its_target_is(self):
+        # The Claude CLI keeps `latest` pointing at the debug log it is writing now; it moves to each new reading.
+        log = self.store / 'derived/reports/responses' / f'{self.request_id}.debug.log'
+        write(log, 'debug')
+        (log.parent / 'latest').symlink_to(log)
+        held = {p.as_posix() for p in kept(self.store)}
+        self.assertIn(f'derived/reports/responses/{self.request_id}.debug.log', held)
+        self.assertNotIn('derived/reports/responses/latest', held)
+
     def test_whole_readings_pass(self):
         self.assertEqual(list(kept_problems(self.store)), [])
 

@@ -76,7 +76,7 @@ def sync(source: str, target: str, names) -> None:
     here; the caller confirms what the target holds.
     """
     for root, excludes in roots(names):
-        aws('s3', 'sync', f'{source}/{root}', f'{target}/{root}', '--size-only', '--no-progress',
+        aws('s3', 'sync', f'{source}/{root}', f'{target}/{root}', '--size-only', '--no-progress', '--no-follow-symlinks',
             '--only-show-errors', *excludes, tolerate=(2,))
 
 
@@ -162,15 +162,25 @@ def main() -> None:
     if problems:
         fail(f'{len(problems)} kept readings fail their check; nothing was replicated: '
              + '; '.join(f'{p} ({why})' for p, why in problems[:5]))
+    later = []
     if send:
+        listed = {r: (store / r).stat().st_mtime_ns for r in send}
         sync(str(store), f's3://{bucket}', {r.parts[1] for r in send if r.parts[0] == 'derived'})
         # What R2 holds decides, not the CLI's exit status: every file this push had to send is there at its size.
+        # A file a running reader rewrote or extended during the sync (an assembly, a debug log being written) is
+        # not one the pushed commits can name, since they were made before the push began; the next replication
+        # sends it. Every file unchanged since it was listed must be in R2 at its size.
         objects = remote(bucket)
-        absent = [r.as_posix() for r in send if (store / r).exists()
-                  and objects.get(r.as_posix(), (None,))[0] != (store / r).stat().st_size]
+        absent = []
+        for r in send:
+            path = store / r
+            if not path.exists() or objects.get(r.as_posix(), (None,))[0] == path.stat().st_size:
+                continue
+            (later if path.stat().st_mtime_ns != listed[r] else absent).append(r.as_posix())
         if absent:
             fail(f'{len(absent)} kept files are not in R2 at their local size after the sync: {absent[:5]}')
-    print(f'replicated: {len(send)} kept files sent; {len(files)} kept files in s3://{bucket}')
+    print(f'replicated: {len(send)} kept files sent; {len(files)} kept files in s3://{bucket}'
+          + (f'; {len(later)} written during the sync, sent by the next replication: {later[:3]}' if later else ''))
 
 
 if __name__ == '__main__':
