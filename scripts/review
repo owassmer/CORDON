@@ -17,6 +17,8 @@
 # .runs/<run>.md; the coordinator's session is told when it is there.
 # A check its subject can change is no check: this script runs only as it stands on origin/main, and refuses when the
 # local copy differs. CORDON_REVIEW_UNMERGED=1 runs it unmerged, and says so in its log and in any comment it posts.
+# Each run has its own scratch folder (.runs/scratch/<run>/): reviewers of one round run at once, and a folder shared
+# across them let one reviewer's cleanup remove another's work.
 # The whole script is one block, so bash reads all of it before running any.
 {
 set -euo pipefail
@@ -61,7 +63,7 @@ facts() { # facts <pr> <sha> <checkout> <kind>
 - Pull request: #$1 in $REPO. Read its plan with: gh pr view $1 --json body --jq .body
 - Head commit: $2. Read-only checkout of it: $3"
   [ "$4" = plan ] || printf '%s\n' "- The change: git -C $3 diff origin/main...$2"
-  printf '%s\n' "- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/pr$1/.
+  printf '%s\n' "- Shared store: CORDON_STORE=$store, read only. Never write or delete there; put scratch work under $root/.runs/scratch/$run/, which is this run's alone.
 - Do not edit, commit, push, check out, or change the pull request; do not read other reviewers' comments on it."
 }
 report_of() { # report_of <jsonl>: the final assistant text
