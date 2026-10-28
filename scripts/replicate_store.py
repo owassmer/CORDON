@@ -34,17 +34,18 @@ def fail(message: str) -> None:
     sys.exit(1)
 
 
-def aws(*args: str, capture: bool = False) -> str:
+def aws(*args: str, capture: bool = False, tolerate: tuple[int, ...] = ()) -> str:
+    """Run the AWS CLI against R2; an exit status in `tolerate` is returned to the caller to judge, not failed."""
     account = os.environ.get('CORDON_R2_ACCOUNT')
     if not account:
         fail('CORDON_R2_ACCOUNT is not set, so R2 cannot be reached; nothing was replicated')
     command = ['aws', *args, '--endpoint-url', f'https://{account}.r2.cloudflarestorage.com', '--profile', 'r2']
     try:
-        done = subprocess.run(command, check=True, text=True, capture_output=capture)
+        done = subprocess.run(command, text=True, capture_output=True)
     except FileNotFoundError:
         fail('the AWS CLI is not installed')
-    except subprocess.CalledProcessError as error:
-        fail(f'{" ".join(args[:2])} failed ({error.returncode}): {(error.stderr or "").strip()[:400]}')
+    if done.returncode and done.returncode not in tolerate:
+        fail(f'{" ".join(args[:2])} failed ({done.returncode}): {(done.stderr or "").strip()[:400]}')
     return done.stdout if capture else ''
 
 
@@ -59,7 +60,7 @@ def roots(names) -> list[tuple[str, list[str]]]:
     transient = [x for pattern in TRANSIENT for x in ('--exclude', pattern, '--exclude', f'*/{pattern}')]
     out = [('blobs', transient)]
     for name in sorted(names):
-        if name in REGENERABLE:
+        if name in REGENERABLE or '.' in name:   # a loose file directly under derived/ is no root
             continue
         inner = [x for folder in REGENERABLE if folder.startswith(name + '/')
                  for x in ('--exclude', folder[len(name) + 1:] + '/*')]
@@ -68,10 +69,15 @@ def roots(names) -> list[tuple[str, list[str]]]:
 
 
 def sync(source: str, target: str, names) -> None:
-    """Sync every kept root from `source` to `target` (one is a local store, the other the bucket)."""
+    """Sync every kept root from `source` to `target` (one is a local store, the other the bucket).
+
+    The CLI exits 2 when a file it walked vanished before it was read: a writer renaming a temporary file into place,
+    or a reader rebuilding a regenerable folder inside a kept root. That status is not taken as success or failure
+    here; the caller confirms what the target holds.
+    """
     for root, excludes in roots(names):
         aws('s3', 'sync', f'{source}/{root}', f'{target}/{root}', '--size-only', '--no-progress',
-            '--only-show-errors', *excludes)
+            '--only-show-errors', *excludes, tolerate=(2,))
 
 
 def remote(bucket: str) -> dict[str, tuple[int, str]]:
@@ -158,6 +164,12 @@ def main() -> None:
              + '; '.join(f'{p} ({why})' for p, why in problems[:5]))
     if send:
         sync(str(store), f's3://{bucket}', {r.parts[1] for r in send if r.parts[0] == 'derived'})
+        # What R2 holds decides, not the CLI's exit status: every file this push had to send is there at its size.
+        objects = remote(bucket)
+        absent = [r.as_posix() for r in send if (store / r).exists()
+                  and objects.get(r.as_posix(), (None,))[0] != (store / r).stat().st_size]
+        if absent:
+            fail(f'{len(absent)} kept files are not in R2 at their local size after the sync: {absent[:5]}')
     print(f'replicated: {len(send)} kept files sent; {len(files)} kept files in s3://{bucket}')
 
 
