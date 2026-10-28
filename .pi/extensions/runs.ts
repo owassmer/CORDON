@@ -31,7 +31,6 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 import { runState } from "../../tools/feed/runs.mjs";
 
 const FEED_KEY = "ctrl+shift+r";
-const REDELIVER_AFTER_MS = 120_000;
 const FEED_TITLE = "⧉ ";
 
 const git = (cwd: string, ...a: string[]) => {
@@ -114,7 +113,7 @@ function piRoot(): string | undefined {
 export default function (pi: ExtensionAPI) {
   const watchers: FSWatcher[] = [];
   let timer: NodeJS.Timeout | null = null;
-  let redeliver: () => void = () => {};
+  let redeliver: (aborted: boolean) => void = () => {};
   let live: ExtensionContext | null = null; // the current session's context, replaced on every session_start
   // This Pi's Ghostty pane belongs to the process, not to this runtime: kept across reloads, so a reload finds it
   // without probing (a fresh runtime's title writes reach the terminal only when Pi next redraws).
@@ -468,28 +467,22 @@ export default function (pi: ExtensionAPI) {
     // A notice sent while the session is working waits in Pi's queue, and an interrupt drops what is queued (Owen saw a
     // finished run go unreported this way). So a notice counts as delivered only once it is in the session; until then
     // it is sent again whenever the session settles.
-    // A notice still waiting in Pi's queue is not yet in the session either, and a session that settles several times
-    // while notices wait (each interrupt settles it) would send each waiting notice again every time: one finished run
-    // was announced nine times. So a notice is sent again only once it has been missing for REDELIVER_AFTER_MS since
-    // it was last sent, long enough for a queued one to have landed.
-    const sentAt = new Map<string, number>();
-    const send = (file: string, content: string) => {
-      sentAt.set(file, Date.now());
+    // A notice is a follow-up in Pi's queue until it lands in the session. Pi drops queued follow-ups only when a run
+    // is aborted (Escape clears the queue before the settle), so a notice missing from the session is sent again only
+    // at an aborted settle; a notice that is merely waiting is never sent twice (re-sending at every settle announced
+    // one run nine times). A notice sent at a settle starts its own run, so the session does not sit idle without it.
+    const send = (content: string) => {
       pi.sendMessage({ customType: "factory-run", content, display: true }, { triggerTurn: true, deliverAs: "followUp" });
     };
     const deliver = (file: string, content: string) => {
       pending.set(file, content);
-      send(file, content);
+      send(content);
     };
-    redeliver = () => {
+    redeliver = (aborted: boolean) => {
       if (live !== ctx || pending.size === 0) return;
       const said = JSON.stringify(ctx.sessionManager.getBranch().filter((e: any) => e.type === "custom_message" && e.customType === "factory-run").map((e: any) => e.content));
-      for (const [file, content] of [...pending]) {
-        if (said.includes(`Run ${runName(file)} in `)) {
-          pending.delete(file);
-          sentAt.delete(file);
-        } else if (Date.now() - (sentAt.get(file) ?? 0) >= REDELIVER_AFTER_MS) send(file, content);
-      }
+      for (const file of [...pending.keys()]) if (said.includes(`Run ${runName(file)} in `)) pending.delete(file);
+      if (aborted) for (const content of pending.values()) send(content);
     };
 
     // Runs that had already finished when this session started were reported to the session that started them; runs
@@ -513,9 +506,9 @@ export default function (pi: ExtensionAPI) {
 
   });
 
-  pi.on("agent_settled", (_event, ctx) => {
+  pi.on("agent_settled", (event, ctx) => {
     try {
-      redeliver();
+      redeliver(event.aborted);
     } catch {}
   });
 
