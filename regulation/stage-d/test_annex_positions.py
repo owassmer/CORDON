@@ -260,7 +260,7 @@ class AnnexPositions(unittest.TestCase):
         unresolved = dict(TAR_387, stated_reason=(TAR_387['stated_reason'][0] + ' e della DDS n. 127/2022',))
         record = dict(RECORD, instrument=DDS96, adopted='2023-08-28', governing_A_references=(FORK, WITHDRAWAL),
                       recipients=(BOGGIANO,))
-        kept = c_result(self.s, record, at, closures=[unresolved],
+        kept = c_result(self.s, record, at, closures=[unresolved], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
                         governing_results=governing_results(self.s, record, at, BOGGIANO))
         self.assertIs(kept.truth, False)
         self.assertEqual(kept.effect, NOT_ESTABLISHED)
@@ -288,6 +288,7 @@ class AnnexPositions(unittest.TestCase):
             record = dict(RECORD, instrument=DDS119, adopted='2023-11-03', governing_A_references=references,
                           recipients=(APULEO,))
             return c_result(self.s, record, at, closures=[dict(tar_383, stated_reason=stated_reason)],
+                            evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
                             governing_results=governing_results(self.s, record, at, APULEO))
 
         def names_court(result):
@@ -317,7 +318,7 @@ class AnnexPositions(unittest.TestCase):
             'inoppugnata',), decision=dict(TAR_387['decision'], number='1007/2023'), since=date(2023, 7, 15))
         record = dict(RECORD, instrument='REG-PUGLIA-U181-DIR-2022-00119', adopted='2022-06-21',
                       governing_A_references=(), recipients=('ai proprietari',))
-        result = c_result(self.s, record, date(2026, 9, 24), closures=[closure])
+        result = c_result(self.s, record, date(2026, 9, 24), closures=[closure], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME))
         self.assertIsNone(result.truth)
         self.assertTrue(any(need.startswith('the effect on this order of what TAR Sentenza 1007/2023 states')
                             for need in result.needs))
@@ -449,7 +450,9 @@ class RetainedAnnexes(unittest.TestCase):
     def writer(self, *only):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / 'out.json'
+            # The run states its date and knowledge cutoff (PR #38); the five originals were captured by 2026-09-22.
             subprocess.run([sys.executable, str(ROOT / 'scripts/read_prescriptions.py'), '--only', *only,
+                            '--at', '2026-09-24', '--known-through', '2026-09-24T12:00:00+02:00',
                             '--out', str(out)], check=True, capture_output=True, cwd=ROOT)
             return [r for e in json.loads(out.read_text()) for r in e.get('records', ())]
 
