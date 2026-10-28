@@ -527,20 +527,24 @@ _KINDS = {
     # A stated bounded complete history of performance on one work.
     'history': {'work', 'complete_from', 'complete_through'},
 }
-# The landscape proceeding for one plant (D.lgs. 19/2021 Art. 33(1), D.lgs. 42/2004 Art. 146), as the
-# Osservatorio's file holds it (`cordon_d.landscape`). `document` is the proceeding's own document as printed (the
-# request and its protocol, the transmission, the opinion, the decision); `plants` is every plant identifier the
-# record prints. There is no requirement kind: Art. 33(1) itself names the plants that need authorization.
+# The landscape proceeding (D.lgs. 19/2021 Art. 33(1), D.lgs. 42/2004 Art. 146), as the Osservatorio's file
+# holds it (`cordon_d.landscape`). `document` is the proceeding's own document as printed (the request and its
+# protocol, the transmission, the opinion, the decision). `plants` is the plants the record names, one group of
+# printed identifiers per plant: one request or decision can cover several trees. There is no requirement kind:
+# Art. 33(1) itself names the plants that need authorization.
 _LANDSCAPE = _SUPPORT | {'document', 'plants', 'occurred'}
 LANDSCAPE_KINDS = {
     # `complete`: true where the record states the application complete, false where it states it incomplete,
-    # null where it states neither.
-    'landscape-lodging': {'complete'},
-    'landscape-acts-received': set(),
+    # null where it states neither. `recipient`: the authority it was lodged with, as printed (null: not printed).
+    'landscape-lodging': {'complete', 'recipient'},
+    # The superintendent's receipt of the acts (Art. 146(8)), not a notice that they were sent (146(7)).
+    # `complete` and `recipient` (the superintendent who received them) as for the lodging.
+    'landscape-acts-received': {'complete', 'recipient'},
     # `route` as printed; `resolved` as the record states it.
     'landscape-opinion-route': {'route', 'resolved'},
-    # `intervention` as printed and its kind; `procedure` as printed; `conditions` verbatim.
-    'landscape-decision': {'intervention', 'intervention_kind', 'procedure', 'outcome', 'conditions'},
+    # `intervention` as printed and its kind; `procedure` as printed; `conditions` verbatim; `issuer`, the
+    # authority that decided, as printed (null: not printed). D judges no competence.
+    'landscape-decision': {'intervention', 'intervention_kind', 'procedure', 'outcome', 'conditions', 'issuer'},
 }
 _FAMILIES = {'order': (_COMMON, _KINDS), 'landscape': (_LANDSCAPE, LANDSCAPE_KINDS)}
 # A plant identifier as a record prints it: the monitoring reference (ID / ID_CAMPIONE), the register key (COD),
@@ -578,15 +582,24 @@ def _identifier(value):
     return tuple(sorted(value.items()))
 
 
+def _printed_or_null(value):
+    return value is None or (isinstance(value, str) and bool(value.strip()))
+
+
 def _landscape(entry):
-    """The values of a landscape record; returns the plant identifiers it prints."""
+    """The values of a landscape record; returns the plants it names, each a tuple of its printed identifiers."""
     name, kind = entry['record'], entry['kind']
-    if not isinstance(entry['plants'], list) or not entry['plants']:
-        raise ValueError(f'Record {name} ({kind}) prints no plant identifier')
+    groups = entry['plants']
+    if not isinstance(groups, list) or not groups or not all(isinstance(g, list) and g for g in groups):
+        raise ValueError(f'Record {name} ({kind}) names its plants as a list of groups, each the identifiers it '
+                         'prints for one plant')
     if not isinstance(entry['document'], str) or not entry['document'].strip():
         raise ValueError(f'Record {name} ({kind}) names no document')
-    if kind == 'landscape-lodging' and entry['complete'] is not None and type(entry['complete']) is not bool:
-        raise ValueError(f'Record {name}: complete is what the record states, true, false or null')
+    if kind in ('landscape-lodging', 'landscape-acts-received'):
+        if entry['complete'] is not None and type(entry['complete']) is not bool:
+            raise ValueError(f'Record {name}: complete is what the record states, true, false or null')
+        if not _printed_or_null(entry['recipient']):
+            raise ValueError(f'Record {name}: the recipient as printed, or null where none is printed')
     if kind == 'landscape-opinion-route' and (type(entry['resolved']) is not bool
                                              or not isinstance(entry['route'], str) or not entry['route'].strip()):
         raise ValueError(f'Record {name}: an opinion route prints its route and states whether it is resolved')
@@ -604,7 +617,9 @@ def _landscape(entry):
             raise ValueError(f'Record {name}: conditions are the decision\'s words, verbatim')
         if bool(conditions) != (entry['outcome'] == 'granted-with-conditions'):
             raise ValueError(f"Record {name}: a {entry['outcome']} decision with {len(conditions)} conditions")
-    return tuple(dict.fromkeys(_identifier(p) for p in entry['plants']))
+        if not _printed_or_null(entry['issuer']):
+            raise ValueError(f'Record {name}: the issuer as printed, or null where none is printed')
+    return tuple(tuple(dict.fromkeys(_identifier(p) for p in group)) for group in groups)
 
 
 def supplied_records(entries, family='order'):
@@ -633,8 +648,8 @@ def supplied_records(entries, family='order'):
         support = Support(entry['source'], entry['selector'], entry['reading'])
         if family == 'landscape':
             identifiers = _landscape(entry)
-            event = AdministrativeEvent(entry['record'], kind, entry['document'], None, _moment(entry['occurred']),
-                                        support)
+            event = AdministrativeEvent(entry['record'], kind, entry['document'], entry.get('recipient'),
+                                        _moment(entry['occurred']), support)
             records.append(dict(entry, event=event, identifiers=identifiers, fixture=bool(entry.get('fixture'))))
             continue
         recipient = entry.get('recipient')
@@ -650,7 +665,7 @@ def supplied_records(entries, family='order'):
     return records
 
 
-def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_sources, zone):
+def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_sources, zone, family='order'):
     """The supplied records of `act` the run admits, split by the stated grant: (granted, ungranted).
 
     Supplied records are controlled sources (`osservatorio-records`); the grant is a
@@ -660,12 +675,15 @@ def admitted_records(supplied, act, *, evaluated_at, permitted_controlled_source
     and the set is refused, granted or not, naming the record and field. Each
     ungranted item is (record, need) with the need 'authorized evidence for …'.
     `recipient_results` and the position path of `read_prescriptions.per_recipient`
-    both apply this.
+    both apply this to an order's records; `landscape.landscape_results` applies it to
+    the landscape proceeding's (`family` 'landscape', `act` None: they name no order).
     """
     if not isinstance(permitted_controlled_sources, frozenset):
         raise TypeError('Evaluation requires the run to state its controlled-source grant')
-    records = supplied_records(supplied)
-    if any(r['order'] != act for r in records):
+    records = supplied_records(supplied, family)
+    if family == 'landscape' and act is not None:
+        raise ValueError(f'Landscape records name no order: {act}')
+    if family == 'order' and any(r['order'] != act for r in records):
         raise ValueError(f'A supplied record names another order than {act}')
     today = evaluated_at.astimezone(zone).date()
     for r in records:
@@ -803,7 +821,8 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, permitted
 
 
 def _unauthorized(record, act):
-    return f"authorized evidence for {record['kind']} record {record['record']} on {act}"
+    on = '' if act is None else f' on {act}'
+    return f"authorized evidence for {record['kind']} record {record['record']}{on}"
 
 
 def _dueness_defaults(common):

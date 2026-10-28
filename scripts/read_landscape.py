@@ -2,11 +2,14 @@
 """C's Art. 33(1), 146(5) and 146(8) results for the plants the Osservatorio asks about (row 10).
 
 `--records` is the Osservatorio's landscape proceeding records, a JSON list of the kinds
-`case_prescriptions.LANDSCAPE_KINDS` names. Each attaches to one plant through PR #30's identity (its rows,
-`derived/protected-status/rows-<version>.json` as `read_protection.py` writes them, and the register capture), or is
-listed unattached with its cause. `--plants` names the plants as PR #30's rows name them. No owning unit yet
-supplies Art. 33(1)'s measure, status or infection conjunct to this caller, so C names them. `--out` writes the
-results outside the tree.
+`case_prescriptions.LANDSCAPE_KINDS` names, each naming its plants by the identifiers it prints for each. They are
+controlled sources: the run states its knowledge cutoff (`--known-through`) and its grant
+(`--permitted-controlled-sources`, stated even when empty), and `landscape_results` admits them under both. Each
+plant a record names attaches through PR #30's identity (its rows, `derived/protected-status/rows-<version>.json` as
+`read_protection.py` writes them, and the register capture), or is listed unattached with its cause; a record
+attached to a plant not asked about is listed under `elsewhere`. `--plants` names the plants as PR #30's rows name
+them. No owning unit yet supplies Art. 33(1)'s measure, status or infection conjunct to this caller, so C names
+them. `--out` writes the results outside the tree.
 """
 import argparse
 from datetime import date, datetime
@@ -21,6 +24,7 @@ sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d
 from cordon_c.core import Snapshot  # noqa: E402
 from cordon_d import protection  # noqa: E402
 from cordon_d.calendar import national_calendar  # noqa: E402
+from cordon_d.evidence import run_instant  # noqa: E402
 from cordon_d.landscape import landscape_results  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -32,7 +36,8 @@ def register(store, rows):
     entries = protection.register_entries(store, ROOT)
     held = {e.oid for e in entries}
     return entries + [protection.Entry(e['layer'], e['entry'], e['key'], e['card'], e['label'], e['bulletin_printed'],
-                                       e['comune'], e['foglio'], e['particella'], None, None, None, e['source'])
+                                       e['comune'], e['foglio'], e['particella'], (e.get('point') or {}).get('x'),
+                                       (e.get('point') or {}).get('y'), None, e['source'])
                       for e in rows['zone_entries'] if e['entry'] not in held]
 
 
@@ -41,31 +46,38 @@ def summary(evaluation):
                 provisions=sorted(evaluation.provisions))
 
 
-def results(snapshot, at, plants, supplied, rows, entries):
-    """The caller's output as JSON values: C's result per (plant, row), as C returns it."""
-    run = landscape_results(snapshot, at, plants, supplied, rows=rows, register=entries, zone=ZONE,
-                            calendar=national_calendar())
+def plain(value):
+    if hasattr(value, 'truth'):
+        return summary(value)
+    if isinstance(value, (date, datetime)):
+        return value.isoformat()
+    if isinstance(value, dict):
+        return {k: plain(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [plain(v) for v in value]
+    return value
 
-    def plain(value):
-        return value.isoformat() if isinstance(value, (date, datetime)) else value
 
-    out = dict(at=at.isoformat(), unattached=run['unattached'], not_supplied=run['not_supplied'], plants={})
-    for plant, item in run['plants'].items():
-        out['plants'][plant] = dict(
-            item, results={row: summary(result) for row, result in item['results'].items()}, due=plain(item['due']),
-            decision=item['decision'] and {k: plain(v) for k, v in item['decision'].items()},
-            opinion_route=item['opinion_route'] and {k: plain(v) for k, v in item['opinion_route'].items()},
-            lodgings=[{k: plain(v) for k, v in lodging.items()} for lodging in item['lodgings']],
-            facts={row: {p: summary(v) if hasattr(v, 'truth') else v for p, v in values.items()}
-                   for row, values in item['facts'].items()})
-    return out
+def results(snapshot, run, plants, supplied, rows, entries):
+    """The caller's output as JSON values: C's result per (plant, row), as C returns it. `run` is the run's stated
+    inputs: `at`, `known_through` (C's evaluated_at) and `permitted_controlled_sources`."""
+    out = landscape_results(snapshot, run['at'], plants, supplied, evaluated_at=run['known_through'],
+                            permitted_controlled_sources=run['permitted_controlled_sources'], rows=rows,
+                            register=entries, zone=ZONE, calendar=national_calendar())
+    return plain(out)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--records', required=True, help='the Osservatorio\'s landscape records (a JSON list)')
     parser.add_argument('--plants', nargs='+', required=True, help="the plants asked about, as PR #30's rows name them")
-    parser.add_argument('--at', type=date.fromisoformat, required=True, help='the evaluation date; no machine-clock default')
+    parser.add_argument('--at', type=date.fromisoformat, required=True,
+                        help='the evaluation date; no machine-clock date')
+    parser.add_argument('--known-through', type=run_instant, required=True,
+                        help="the knowledge cutoff, a timezone-aware ISO instant; C's evaluated_at")
+    parser.add_argument('--permitted-controlled-sources', nargs='*', required=True, metavar='SOURCE',
+                        help='the controlled source identities the running principal is granted (state it even when '
+                             'empty)')
     parser.add_argument('--rows', help="PR #30's rows; default: this checkout's version in the store")
     parser.add_argument('--out')
     arguments = parser.parse_args()
@@ -78,8 +90,10 @@ def main():
     if not path.exists():
         parser.error(f"PR #30's rows are not at {path}: run scripts/read_protection.py first")
     rows = json.loads(path.read_text())
-    out = results(Snapshot.load(ROOT), arguments.at, arguments.plants, json.loads(Path(arguments.records).read_text()),
-                  rows, register(store, rows))
+    run = dict(at=arguments.at, known_through=arguments.known_through,
+               permitted_controlled_sources=frozenset(arguments.permitted_controlled_sources))
+    out = results(Snapshot.load(ROOT), run, arguments.plants, json.loads(Path(arguments.records).read_text()), rows,
+                  register(store, rows))
     text = json.dumps(out, ensure_ascii=False, indent=1)
     if arguments.out:
         Path(arguments.out).write_text(text)
