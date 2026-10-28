@@ -1924,7 +1924,9 @@ class LiteralReport(unittest.TestCase):
                  'sha256': digest},
                 {'url': 'https://publisher.example/b.pdf', 'captured_at': '2026-01-02T00:00:00+00:00',
                  'sha256': 'f' * 64}]))
-            self.assertEqual([read.cause for read in reports(root, store, extraction_version='v')],
+            from datetime import datetime, timezone
+            self.assertEqual([read.cause for read in reports(root, store, extraction_version='v',
+                                                             known_through=datetime(2026, 1, 3, tzinfo=timezone.utc))],
                              [unread.cause, 'declared source bytes unavailable'])
 
     def test_retained_cell_that_disagrees_with_source_is_refused_on_assembly(self):

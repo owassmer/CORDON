@@ -21,6 +21,7 @@ from cordon_c.core import MissingInput, Snapshot  # noqa: E402
 from cordon_d import annex_positions  # noqa: E402
 from cordon_d.case_prescriptions import (annex_position, apply_references, c_result,  # noqa: E402
                                          read_prescription, stated_limits)
+from cordon_d.evidence import run_instant  # noqa: E402
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -36,15 +37,48 @@ def printed_identity(record):
     return None
 
 
-def population():
-    """Every retained original the removal-order source map holds, in its own order."""
+def population(known_through):
+    """Every retained original the removal-order source map had captured by the run's knowledge
+    cutoff (`captured_at <= known_through`, as `cordon_d.reports.reports` admits reports), in its
+    own order."""
     records = json.loads((ROOT / 'corpus/sources/removal-orders/records.json').read_text())
     seen = set()
     for record in records:
         digest = record.get('sha256')
-        if digest and digest not in seen:
+        if digest and digest not in seen and datetime.fromisoformat(record['captured_at']) <= known_through:
             seen.add(digest)
             yield printed_identity(record), digest, record['url']
+
+
+def held_sources(known_through):
+    """Source digests the removal-order and removal-event source maps had captured by the cutoff."""
+    held = set()
+    for name in ('removal-orders', 'removal-events'):
+        for record in json.loads((ROOT / f'corpus/sources/{name}/records.json').read_text()):
+            if record.get('sha256') and datetime.fromisoformat(record['captured_at']) <= known_through:
+                held.add(record['sha256'])
+    return frozenset(held)
+
+
+def admitted_at(paths):
+    """When the repository came to hold each A-admitted text: the latest commit that added it.
+
+    An admitted text has no acquisition record of its own; the commit that added it is
+    the latest moment the corpus can have come to hold it. A path no commit added is absent;
+    a git failure raises, since "could not date" is not "not held".
+    """
+    import subprocess
+    paths = sorted(paths)
+    if not paths:
+        return {}
+    log = subprocess.run(['git', 'log', '--diff-filter=A', '--format=%x01%cI', '--name-only', '--', *paths],
+                         cwd=ROOT, capture_output=True, text=True, check=True).stdout
+    added = {}
+    for block in log.split('\x01')[1:]:
+        lines = [line for line in block.splitlines() if line.strip()]
+        for path in lines[1:]:
+            added.setdefault(path, datetime.fromisoformat(lines[0]))  # newest first: the latest add
+    return added
 
 
 def _wait_for_memory(floor=20):
@@ -62,19 +96,24 @@ def _wait_for_memory(floor=20):
         time.sleep(60)
 
 
-def held_events(measures, store):
+def held_events(measures, store, known_through):
     """Events the existing publication readers connect to these orders, by instrument.
 
     Each publisher's retained register is read by its own existing reader. None of
-    these events is recipient notification, commencement or removal.
+    these events is recipient notification, commencement or removal. Only captures
+    made by the run's knowledge cutoff are read.
     """
     from types import SimpleNamespace
     from cordon_d.removal_events import (connect_publication_attestation, connected_publications,
                                          domino_publication, parsec_publications, publication_records,
                                          regional_publication, retained_publication_attestation)
     from cordon_d.store import blob_path
-    captures = json.loads((ROOT / 'corpus/sources/removal-events/records.json').read_text())
-    acquisitions = json.loads((ROOT / 'corpus/sources/removal-orders/records.json').read_text()) + captures
+
+    def held(records):
+        return [r for r in records if datetime.fromisoformat(r['captured_at']) <= known_through]
+    captures = held(json.loads((ROOT / 'corpus/sources/removal-events/records.json').read_text()))
+    acquisitions = held(json.loads((ROOT / 'corpus/sources/removal-orders/records.json').read_text())) + captures
+    captured = {r['sha256'] for r in acquisitions if r.get('sha256')}
     measures = [SimpleNamespace(identity=m['instrument'], adopted=date.fromisoformat(m['adopted']),
                                 response={'request': {'sources': [m['source']]}}) for m in measures]
     publications, failures = [], []
@@ -103,6 +142,9 @@ def held_events(measures, store):
         response = json.loads(path.read_text())
         if 'publication certificate' not in response['request'].get('prompt', '')[:200]:
             continue
+        sources = set(response['request'].get('sources') or ())
+        if not sources or not sources <= captured:
+            continue  # a certificate not captured by the cutoff was not yet held
         try:
             attestation = retained_publication_attestation(path.stem, store)
             publications.append(connect_publication_attestation(attestation, declarations,
@@ -118,14 +160,21 @@ def held_events(measures, store):
     return by_instrument, failures
 
 
-def load_closures(path):
-    """Liveness closures by instrument from a `read_judgments.py --dispositions` output file."""
+def load_closures(path, known_through):
+    """Liveness closures by instrument from a `read_judgments.py --dispositions` output file.
+
+    A closure whose decision the removal-event source map had not captured by the run's
+    knowledge cutoff is left out.
+    """
     if not path:
         return {}
+    held = held_sources(known_through)
     closures = next((e['liveness_closures'] for e in json.loads(Path(path).read_text())
                      if 'liveness_closures' in e), {})
-    return {instrument: [dict(c, since=date.fromisoformat(c['since']) if c['since'] else None) for c in items]
+    kept = {instrument: [dict(c, since=date.fromisoformat(c['since']) if c['since'] else None)
+                         for c in items if c['decision'].get('source') in held]
             for instrument, items in closures.items()}
+    return {instrument: items for instrument, items in kept.items() if items}
 
 
 def stated_changes(results):
@@ -157,16 +206,21 @@ def held_orders(results):
     return orders
 
 
-def held_act_changes(results, snapshot, store, options):
+def held_act_changes(results, snapshot, store, options, known_through):
     """Changes the other held acts state to these orders (`cordon_d.held_acts`), by the order they name.
 
     Every A-admitted source outside the order population whose text prints a held
     order's identity is read whole, one bounded request each (replayed unless
-    `--execute`). Returns (changes by order, report).
+    `--execute`), when the repository held it by the run's knowledge cutoff
+    (`admitted_at`). Returns (changes by order, report).
     """
     from cordon_d import held_acts
     chosen, scanned = held_acts.selected(snapshot, ROOT, held_orders(results))
-    changes, report = {}, dict(scanned=scanned, selected=[], failures=[])
+    added = admitted_at(item['path'] for item in chosen)
+    after = [dict(item, admitted_at=added[item['path']].isoformat() if item['path'] in added else None)
+             for item in chosen if item['path'] not in added or added[item['path']] > known_through]
+    chosen = [item for item in chosen if item['path'] in added and added[item['path']] <= known_through]
+    changes, report = {}, dict(scanned=scanned, selected=[], failures=[], not_held_by_cutoff=after)
     for item in chosen:
         if options['execute']:
             _wait_for_memory()
@@ -188,42 +242,59 @@ def held_act_changes(results, snapshot, store, options):
     return changes, report
 
 
-def summary(evaluation):
+def summary(evaluation, run):
     """C's result as written: truth, effect, needs, and the provisions it rests on (the row that limits
-    a direction to part of its population is among them)."""
+    a direction to part of its population is among them), with the run's stated evaluation date and
+    knowledge cutoff."""
     return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs),
-                provisions=sorted(evaluation.provisions))
+                provisions=sorted(evaluation.provisions),
+                at=run['at'].isoformat(), known_through=run['known_through'].isoformat())
 
 
-def position_results(snapshot, record, today):
-    """The governing rows' results for a record at an annex position, per (row, predicate)."""
-    return annex_positions.governing_results(snapshot, record, today, annex_position(record))
+def position_results(snapshot, record, at):
+    """The governing rows' results for a record at an annex position, per (row, predicate), on the
+    run's evaluation date."""
+    return annex_positions.governing_results(snapshot, record, at, annex_position(record))
 
 
-def per_recipient(results, supplied, snapshot, today, closures, changes):
+def run_inputs(parser):
+    """The evaluation context a C-reaching run states; neither is taken from the machine clock."""
+    parser.add_argument('--at', type=date.fromisoformat, required=True,
+                        help='the evaluation date (ISO) that selects the A/B version')
+    parser.add_argument('--known-through', type=run_instant, required=True,
+                        help="the knowledge cutoff, a timezone-aware ISO instant; C's evaluated_at")
+
+
+def per_recipient(results, supplied, snapshot, run, closures, changes):
     """C per (clause, recipient a supplied record names), attached to each clause record beside its cohort `c`.
 
     Supplied records are grouped by the order they name; each clause record of that
-    order gets `per_recipient` and `per_recipient_reported`. For a clause emitted per
-    annex position (PR #35), each record is joined to the position whose printed owner
-    and parcel it names (`position_attachments`), and each position record gets C with
-    its own governing rows' results; a record joined to no position, or to several, is
-    `unattached` with its cause. Returns what reached no held order, and what attached
-    to no position.
+    order gets `per_recipient` and `per_recipient_reported`. The evaluation date, C's
+    `evaluated_at` and the controlled-source grant are the run's stated inputs, and
+    every record is admitted under them first (`admitted_records`): a record set with a
+    record dated after the cutoff is refused whole, as `per_recipient_cause`, and a
+    record outside the grant reaches no result. For a clause emitted per annex position
+    (PR #35), each granted record is joined to the position whose printed owner and
+    parcel it names (`position_attachments`), and each position record gets C with its
+    own governing rows' results; a record outside the grant is unattached with the
+    need 'authorized evidence for …' as its cause, and a record joined to no position,
+    or to several, is unattached with its cause. Returns what reached no held order,
+    and what attached to no position.
     """
     from zoneinfo import ZoneInfo
     from cordon_d.calendar import national_calendar
-    from cordon_d.case_prescriptions import position_attachments, recipient_results
+    from cordon_d.case_prescriptions import admitted_records, position_attachments, recipient_results
     zone, calendar = ZoneInfo('Europe/Rome'), national_calendar()
-    evaluated_at = datetime.now(zone)
+    evaluated_at = run['known_through']
     by_order = {}
     for item in supplied:
         by_order.setdefault(item.get('order'), []).append(item)
     reached, positioned, unattached = set(), {}, []
 
-    def run(record, items, **position):
+    def evaluate_recipients(record, items, **position):
         try:
-            found = recipient_results(snapshot, record, today, items, evaluated_at=evaluated_at, zone=zone,
+            found = recipient_results(snapshot, record, run['at'], items, evaluated_at=evaluated_at,
+                                      permitted_controlled_sources=run['permitted_controlled_sources'], zone=zone,
                                       calendar=calendar, closures=closures.get(record['instrument'], ()),
                                       stated_changes=changes.get(record['instrument'], ()), **position)
         except Exception as error:  # a refused record set is reported whole, never partly applied
@@ -231,7 +302,7 @@ def per_recipient(results, supplied, snapshot, today, closures, changes):
             return
         # Kept apart from the record's own `recipients` (the cohort words the order prints).
         record['per_recipient'] = {name: {**{k: v for k, v in item.items() if k != 'result'},
-                                          'c': summary(item['result'])}
+                                          'c': summary(item['result'], run)}
                                    for name, item in found['recipients'].items()}
         record['per_recipient_reported'] = found['reported']
 
@@ -245,20 +316,25 @@ def per_recipient(results, supplied, snapshot, today, closures, changes):
                 clause = record['occurrence'].split(':annex ')[0]
                 positioned.setdefault((act, clause), []).append(record)
                 continue
-            run(record, by_order[act])
+            evaluate_recipients(record, by_order[act])
     for (act, clause), records in positioned.items():
         try:
-            attached, left = position_attachments(records, by_order[act])
+            granted, ungranted = admitted_records(by_order[act], act, evaluated_at=evaluated_at, zone=zone,
+                                                  permitted_controlled_sources=run['permitted_controlled_sources'])
+            names = {r['record'] for r in granted}
+            attached, left = position_attachments(records, [i for i in by_order[act] if i.get('record') in names])
         except Exception as error:  # a refused record set is reported whole, never partly applied
             for record in records:
                 record['per_recipient_cause'] = f'{type(error).__name__}: {error}'[:600]
             continue
+        unattached += [dict(record=r['record'], order=act, clause=clause, cause=need) for r, need in ungranted]
         unattached += [dict(item, order=act, clause=clause) for item in left]
         for record in records:
             if record['occurrence'] in attached:
-                run(record, attached[record['occurrence']], position=annex_position(record),
-                    governing_results=position_results(snapshot, record, today))
-    return dict(evaluated_at=evaluated_at.isoformat(), unattached=unattached,
+                evaluate_recipients(record, attached[record['occurrence']], position=annex_position(record),
+                                    governing_results=position_results(snapshot, record, run['at']))
+    return dict(evaluated_at=evaluated_at.isoformat(),
+                permitted_controlled_sources=sorted(run['permitted_controlled_sources']), unattached=unattached,
                 unreached=[dict(record=i.get('record'), order=order, cause='names no held order with a stated term')
                            for order, items in by_order.items() if order not in reached for i in items])
 
@@ -271,7 +347,7 @@ def _start_worker():
     _WORKER.update(store=store_root(ROOT), snapshot=Snapshot.load(ROOT))
 
 
-def read_one(item, options, today):
+def read_one(item, options, run):
     """One source: replay its retained reading, or make one bounded subscription request.
 
     A refusal gets one source-only reread; a second refusal stands. A validated
@@ -311,9 +387,14 @@ def read_one(item, options, today):
             entry['records_cause'] = str(error)
             records = []
         # An order an in-force row names with a whole-or-part effect: one record per clause and annex position.
-        records = [r for record in records for r in annex_positions.expand(record, snapshot, today, store)]
+        # Positions are read from this record's own original (`record['source']`, the digest `population`
+        # admitted by the cutoff), so they are held by the cutoff exactly when the original is.
+        if any(record['source'] != digest for record in records):
+            raise ValueError(f'A reading of {digest} states records of another source')
+        records = [r for record in records for r in annex_positions.expand(record, snapshot, run['at'], store)]
         entry['records'] = [dict(record, c=summary(c_result(
-            snapshot, record, today, governing_results=position_results(snapshot, record, today))))
+            snapshot, record, run['at'], evaluated_at=run['known_through'],
+            governing_results=position_results(snapshot, record, run['at'])), run))
             for record in records]
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
@@ -342,18 +423,27 @@ def main():
                         help='attach publication events the existing readers connect to each order')
     parser.add_argument('--closures', help='a read_judgments.py --dispositions output: liveness closures by order')
     parser.add_argument('--records', help='supplied Osservatorio records (a JSON list): C per recipient they name')
+    parser.add_argument('--permitted-controlled-sources', nargs='*', metavar='SOURCE',
+                        help='with --records: the controlled source identities the running principal is granted '
+                             '(state it even when empty)')
     parser.add_argument('--timeout', type=int, default=900)
     parser.add_argument('--model', default='opus')
     parser.add_argument('--effort', default='medium')
     parser.add_argument('--workers', type=int, default=1,
                         help='sources read at once; each is still one bounded request')
+    run_inputs(parser)
     arguments = parser.parse_args()
     if arguments.workers < 1:
         parser.error('--workers must be at least 1')
+    if arguments.records and arguments.permitted_controlled_sources is None:
+        parser.error('--records requires --permitted-controlled-sources (state it even when empty)')
+    if arguments.permitted_controlled_sources is not None and not arguments.records:
+        parser.error('--permitted-controlled-sources applies to --records')
     _start_worker()
     store, snapshot = _WORKER['store'], _WORKER['snapshot']
-    today = date.today()
-    selected = [item for item in population()
+    run = dict(at=arguments.at, known_through=arguments.known_through,
+               permitted_controlled_sources=frozenset(arguments.permitted_controlled_sources or ()))
+    selected = [item for item in population(arguments.known_through)
                 if not arguments.only or item[0] in arguments.only or item[1] in arguments.only]
     if arguments.first:
         selected.sort(key=lambda item: item[0] not in arguments.first)
@@ -370,11 +460,11 @@ def main():
 
     if arguments.workers == 1:
         for index, item in enumerate(selected):
-            finished(index, read_one(item, options, today))
+            finished(index, read_one(item, options, run))
     else:
         from concurrent.futures import ProcessPoolExecutor, as_completed
         with ProcessPoolExecutor(max_workers=arguments.workers, initializer=_start_worker) as pool:
-            futures = {pool.submit(read_one, item, options, today): index
+            futures = {pool.submit(read_one, item, options, run): index
                        for index, item in enumerate(selected)}
             for future in as_completed(futures):
                 finished(futures[future], future.result())
@@ -382,12 +472,13 @@ def main():
     # Work an act applies by reference takes the referenced order's own clause record.
     composed = {r['occurrence']: r for r in apply_references(
         [{k: v for k, v in r.items() if k != 'c'} for entry in results for r in entry.get('records', ())])}
-    closures = load_closures(arguments.closures)
+    closures = load_closures(arguments.closures, arguments.known_through)
     changes = stated_changes(results)
-    held_changes, held_report = held_act_changes(results, snapshot, store, options)
+    held_changes, held_report = held_act_changes(results, snapshot, store, options, arguments.known_through)
     for target, items in held_changes.items():
         changes.setdefault(target, []).extend(items)
     print(json.dumps(dict(held_acts_scanned=held_report['scanned'], held_acts_read=len(held_report['selected']),
+                          held_acts_not_held_by_cutoff=len(held_report['not_held_by_cutoff']),
                           held_act_failures=len(held_report['failures']),
                           orders_named=sorted(held_changes))), flush=True)
     for entry in results:
@@ -395,23 +486,25 @@ def main():
                                  liveness_closures=closures.get(composed[r['occurrence']]['instrument'], []),
                                  stated_changes=changes.get(composed[r['occurrence']]['instrument'], []),
                                  c=summary(c_result(
-                                     snapshot, composed[r['occurrence']], today,
+                                     snapshot, composed[r['occurrence']], run['at'],
+                                     evaluated_at=run['known_through'],
                                      closures=closures.get(composed[r['occurrence']]['instrument'], ()),
                                      stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()),
                                      governing_results=position_results(snapshot, composed[r['occurrence']],
-                                                                        today))))
+                                                                        run['at'])),
+                                     run))
                             for r in entry.get('records', ())]
     results.append(dict(held_acts=held_report))
     if arguments.records:
         results.append(dict(supplied_records=per_recipient(results, json.loads(Path(arguments.records).read_text()),
-                                                           snapshot, today, closures, changes)))
+                                                           snapshot, run, closures, changes)))
     if arguments.out:
         Path(arguments.out).write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str))
     if arguments.events:
         measures = {(r['instrument'], r['adopted'], r['source']): dict(instrument=r['instrument'],
                                                                       adopted=r['adopted'], source=r['source'])
                     for entry in results for r in entry.get('records', ())}
-        by_instrument, failures = held_events(measures.values(), store)
+        by_instrument, failures = held_events(measures.values(), store, arguments.known_through)
         for entry in results:
             instruments = {r['instrument'] for r in entry.get('records', ())}
             entry['held_events'] = [e for i in sorted(instruments) for e in by_instrument.get(i, ())]

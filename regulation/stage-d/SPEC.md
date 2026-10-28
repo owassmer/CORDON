@@ -56,8 +56,13 @@ prescription or a separate product workflow.
 
 ## Where bytes live
 
-Source bytes are the only irreplaceable data. They live in a content-addressed
-store outside the repository — `$CORDON_STORE`, or `<repository>-store` beside
+Two kinds of data are irreplaceable: source bytes, and every reading that cannot
+be rebuilt without a model call, since a repeat call costs subscription time and
+can read differently. Both are kept in R2 as well as locally, and every branch
+push replicates them first (`scripts/replicate_store.py`, run by the pre-push
+hook); `--restore` brings back what is missing locally without rewriting a file.
+`cordon_d.store` names the regenerable folders; anything else is kept. Source bytes
+live in a content-addressed store outside the repository — `$CORDON_STORE`, or `<repository>-store` beside
 the main checkout, which every worktree resolves to the same path — as blobs
 named by their SHA-256, written once and never rewritten (`cordon_d.store`).
 Acquisition records in the tree name each release by URL, capture time and hash;
@@ -72,7 +77,8 @@ degree columns that check is `scripts/check_frames.py`, and
 `scripts/acquire_monitoring.py --campaign` derives the readings and runs it.
 Neither runs in CI, which has no store.
 
-Beside the blobs, `derived/` holds regenerable readings, not owners. Monitoring
+Beside the blobs, `derived/` holds readings, not owners: model readings, which are
+kept, and caches a reader rebuilds from blobs and the tree, which are not. Monitoring
 occurrences and typed readings are Parquet keyed by source hash and reader
 version. `Member.publisher_annotation` keeps a campaign source's literal
 annotation and its citation on its own occurrence. It changes no identity or
@@ -107,8 +113,9 @@ retained native cell and the request that showed it are unchanged.
 Exact-request raw model responses are cached separately, so a changed
 deterministic projection can reuse them without another paid call. Model, prompt,
 page and context images, rendering settings and code version are named. No join
-change invalidates extraction. Deleting report responses can incur a new
-extraction cost. Replaying a retained response does not.
+change invalidates extraction. Report responses and the assemblies built from them
+are kept readings: losing them means a new extraction cost and a reading that can
+differ. Replaying a retained response costs nothing.
 
 For an annotated result, the source reader may return `result_value` and
 `annotation` alongside the complete cell. Their concatenation must reproduce the
@@ -375,7 +382,7 @@ replayed. Request identity includes the source hashes, the actual prompt and
 schema, the rendered image hashes, the model, the effort and the transport
 version. A lock prevents duplicate dispatch of an identical request. It does not
 coordinate different providers, or different tasks, on one document. Raw output,
-elapsed call time and provenance stay in the regenerable store. Invalid JSON, or
+elapsed call time and provenance stay with the kept reading in the store. Invalid JSON, or
 output that violates the caller's schema, stays retained and cannot become a
 returned reading, on execution or on replay. A non-JSON numeric constant, and a
 number that overflows to a non-finite floating-point value, are rejected before
@@ -512,7 +519,12 @@ through `recipient_results` (`read_prescriptions.py --records`), beside the
 clause's cohort result, which no supplied record moves. There is one result per
 recipient a delivery record names, keyed as that record names them. For a clause
 the writer emits per annex position, each record is joined to a position and read
-by the rule table below. Other clauses keep the record's naming alone. A
+by the rule table below. On both paths the run's stated inputs bound the records
+first (`admitted_records`): a record set with a record dated after the knowledge
+cutoff is refused whole, naming the record and field, and a record outside the
+stated grant is withheld with the need "authorized evidence for …"; at a position
+that need is its unattached cause, and a recipient it names, or obliges to a work
+it names, gets no definite result. Other clauses keep the record's naming alone. A
 personal-delivery record is the delivery receipt only, never the acceptance
 receipt; it enters the communication predicate for its recipient only. Off
 positions, the works a delivery record names are the operator's standing

@@ -246,7 +246,7 @@ class AnnexPositions(unittest.TestCase):
         def at_position(position):
             record = dict(RECORD, instrument=DDS96, adopted='2023-08-28', governing_A_references=(FORK, WITHDRAWAL),
                           recipients=(position,))
-            return c_result(self.s, record, at, closures=[TAR_387],
+            return c_result(self.s, record, at, closures=[TAR_387], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
                             governing_results=governing_results(self.s, record, at, position))
 
         hosts_only = at_position(BOGGIANO)
@@ -373,7 +373,8 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
             if record['occurrence'] in attached:
                 position = annex_position(record)
                 out[position['owner']] = recipient_results(
-                    self.s, record, at, attached[record['occurrence']], evaluated_at=evaluated_at, zone=ROME,
+                    self.s, record, at, attached[record['occurrence']], evaluated_at=evaluated_at,
+                    permitted_controlled_sources=frozenset({'f' * 64}), zone=ROME,
                     calendar=national_calendar(), position=position,
                     governing_results=governing or governing_results(self.s, record, at, position))
         seen = {u['record'] for u in unattached}
@@ -652,6 +653,54 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
         self.assertEqual([r['outcome'] for r in self.reported(out, 'BORGHESE ANTONIO', 'fx-c-plant')], ['held'])
         self.assertTrue(case_prescriptions.PERFORMANCE['work'] is case_prescriptions.PERFORMANCE['plant'])
 
+    def test_the_runs_cutoff_and_grant_bound_the_join_at_a_position(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location('read_prescriptions', ROOT / 'scripts/read_prescriptions.py')
+        caller = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(caller)
+        records = [dict(RECORD, occurrence=f"{RECORD['occurrence']}:annex 1/D:position {k}", recipients=(p,))
+                   for k, p in enumerate(positions(parse(BANDS, 3), '1/D'))]
+        rotolo = next(r for r in records if annex_position(r)['owner'] == 'ROTOLO IRENE')
+        self.assertEqual(annex_position(rotolo)['listed_infected_plants'], ['1614393'])
+        delivery = dict(record='fx-pec-rotolo', kind='personal-delivery', order=DDS113, source='f' * 64,
+                        selector='fixture:fx-pec-rotolo', fixture=True,
+                        reading='FIXTURE personal-delivery: not a fact about DDS 113/2023', recipient='ROTOLO IRENE',
+                        occurred=PEC_C.isoformat(), works=[dict(comune='CASTELLANA GROTTE', foglio='57', particella='89')])
+        snapshot = Snapshot.load(ROOT)
+        run = dict(at=date(2024, 4, 5), known_through=datetime(2024, 4, 5, 12, tzinfo=ROME),
+                   permitted_controlled_sources=frozenset({'f' * 64}))
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot, run, {}, {})
+        # Granted and held at the cutoff, the delivery joins ROTOLO IRENE's position, and only that position
+        # record gets a per-recipient result.
+        self.assertEqual((report['unattached'], report['unreached']), ([], []))
+        self.assertEqual([r['occurrence'] for r in records if 'per_recipient' in r], [rotolo['occurrence']])
+        self.assertEqual(list(rotolo['per_recipient']), ['ROTOLO IRENE'])
+        for record in records:
+            for key in ('per_recipient', 'per_recipient_reported'):
+                record.pop(key, None)
+        # PR #38's grant holds at a position too: a record outside it is unattached with the need as its cause.
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot,
+                                      dict(run, permitted_controlled_sources=frozenset()), {}, {})
+        self.assertEqual(report['unattached'], [dict(
+            record='fx-pec-rotolo', order=DDS113, clause=RECORD['occurrence'],
+            cause=f'authorized evidence for personal-delivery record fx-pec-rotolo on {DDS113}')])
+        self.assertFalse([r for r in records if {'per_recipient', 'per_recipient_cause'} & set(r)])
+        # PR #38's cutoff holds at a position too: a record dated after it is refused, naming the record and field,
+        # on every position record of the clause, and nothing is reported unattached.
+        early = dict(run, known_through=PEC_C - timedelta(hours=1))
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot, early, {}, {})
+        self.assertEqual(report['unattached'], [])
+        self.assertEqual({r['per_recipient_cause'] for r in records},
+                         {f'ValueError: Record fx-pec-rotolo (personal-delivery) states occurred {PEC_C.isoformat()}, '
+                          f'later than the evaluation at {early["known_through"].isoformat()}'})
+        # And the grant is stated, never defaulted.
+        for record in records:
+            record.pop('per_recipient_cause')
+        report = caller.per_recipient([dict(records=records)], [delivery], snapshot,
+                                      dict(run, permitted_controlled_sources=set()), {}, {})
+        self.assertEqual({r['per_recipient_cause'] for r in records},
+                         {'TypeError: Evaluation requires the run to state its controlled-source grant'})
+
 
 STORE = store_root(ROOT)
 FIVE = {'96/2023': 'dd5bebb3616b9752c6b2dfc76c03b31a2378574800491c49866d99399295cbf7',
@@ -705,10 +754,12 @@ class RetainedAnnexes(unittest.TestCase):
     def writer(self, *only, records=None):
         with tempfile.TemporaryDirectory() as tmp:
             out, supplied = Path(tmp) / 'out.json', Path(tmp) / 'records.json'
-            extra = []
+            # The run states its date and knowledge cutoff (PR #38); the five originals were captured by 2026-09-22.
+            extra = ['--at', '2026-09-24', '--known-through', '2026-09-24T12:00:00+02:00']
             if records is not None:
                 supplied.write_text(json.dumps(records))
-                extra = ['--records', str(supplied)]
+                # The FIXTURE records' source is granted (`fixture`).
+                extra += ['--records', str(supplied), '--permitted-controlled-sources', 'f' * 64]
             subprocess.run([sys.executable, str(ROOT / 'scripts/read_prescriptions.py'), '--only', *only,
                             '--out', str(out), *extra], check=True, capture_output=True, cwd=ROOT)
             written = json.loads(out.read_text())

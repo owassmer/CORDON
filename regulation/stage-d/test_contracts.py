@@ -113,7 +113,8 @@ class EvidenceTests(unittest.TestCase):
                           predicate='cadastral and owner data received')
         evidence = self.evidence(receipt)
         view = evidence.view(context=receipt.context, event_date=receipt.event_date,
-                             known_through=datetime(2026, 9, 8, tzinfo=timezone.utc))
+                             known_through=datetime(2026, 9, 8, tzinfo=timezone.utc),
+                             permitted_controlled_sources=frozenset())
         result = view.reader(self.snapshot.version(receipt.consumer_version, receipt.event_date), receipt.predicate)
         self.assertTrue(result.truth)
         for held_tuple in ['party-land-standing', 'case-prescription']:
@@ -123,15 +124,16 @@ class EvidenceTests(unittest.TestCase):
     def test_retention_policy_does_not_fill_continuing_performance(self):
         version = 'PUG-DGR538-2021:Art7(3)-policy:v1'
         at = date(2021, 5, 1)
+        # C decides 'effective plan interval' from the event date; D supplies only the date.
         rows = tuple(replace(self.row, identity=predicate, predicate=predicate, contract=contract,
                              consumer_version=version, event_date=at) for predicate, contract in [
-            ('effective plan interval', 'evaluation-context'),
             ('official protected status', 'protected-status'),
             ('official negative result', 'official-finding')])
         def result(assertions):
             evidence = self.evidence(*assertions)
             return evidence.view(context=self.row.context, event_date=at,
-                                 known_through=datetime(2026, 9, 8, tzinfo=timezone.utc)).evaluate(version)
+                                 known_through=datetime(2026, 9, 8, tzinfo=timezone.utc),
+                                 permitted_controlled_sources=frozenset()).evaluate(version)
         self.assertIsNone(result(rows).truth)
         # A synthetic complete determination includes every continuing condition;
         # one isolated treatment or observation would not support this reading.
@@ -141,6 +143,10 @@ class EvidenceTests(unittest.TestCase):
                                               'Hypothetical complete current safeguards determination'),))
         self.assertTrue(result((*rows, continuing)).truth)
         self.assertFalse(result((*rows, replace(continuing, value=False))).truth)
+        interval = replace(rows[0], identity='interval', predicate='effective plan interval',
+                           contract='evaluation-context')
+        with self.assertRaisesRegex(ValueError, 'cannot be supplied'):
+            result((*rows, continuing, interval))
 
 
 

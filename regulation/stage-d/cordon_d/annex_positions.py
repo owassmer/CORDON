@@ -56,7 +56,6 @@ from .prescriptions import COERCE, WORK
 from .store import blob_path
 
 CONTRACTS = Path(__file__).resolve().parents[1] / 'predicate-contracts.json'
-TIME = "decision time within this version's effective interval"
 _LABEL = re.compile(r'allegato\s*(\d+\s*/\s*[A-Za-z]+)', re.I)
 _PRINTED = re.compile(r'estirpazione\s+di\s+n\s*[°º.]?\s*(\d+)\s+piant\w*\b[^;]{0,120}?infett', re.I)
 _SAMPLE = re.compile(r'(?<![\d,./])(\d{7})(?![\d,/])')
@@ -323,7 +322,8 @@ def governing_results(snapshot, record, at, position):
     bound, results = position_bindings(), {}
     for sid in supplying_rows(snapshot, at, record['instrument'], bound):
         vid = snapshot.version(sid, at)['provision_version_id']
-        facts = {(vid, TIME): True}
+        # Whether `at` lies in the row's own interval is C's to decide from `at` (cordon_c.core.DATE_INTERVALS).
+        facts = {}
         for predicate, field in bound.items():
             facts[(vid, predicate)] = (Evaluation(None, needs=frozenset({position['cause']}))
                                        if position.get('cause') else bool(position[field]))

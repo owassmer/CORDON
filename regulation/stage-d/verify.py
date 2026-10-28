@@ -1,11 +1,37 @@
 """Verify the compact D owner graph, never semantic sufficiency."""
 from pathlib import Path
+import importlib
+import inspect
 import json
 
 from inventory import inventory
 
 ROOT = Path(__file__).resolve().parents[2]
 D = ROOT / 'regulation/stage-d'
+
+
+def require_run_parameters(dotted: str, parameters, contract: str):
+    """Each named run parameter exists on its callable and has no default: the run must state it."""
+    parts = dotted.split('.')
+    for split in range(len(parts) - 1, 0, -1):
+        module = '.'.join(parts[:split])
+        try:
+            target = importlib.import_module(module)
+        except ModuleNotFoundError as error:
+            if error.name != module:
+                raise  # a missing dependency surfaces as itself
+            continue
+        for name in parts[split:]:
+            target = getattr(target, name)
+        break
+    else:
+        raise ValueError(f'Run input names no importable callable: {dotted}')
+    signature = inspect.signature(target)
+    for name in parameters:
+        if name not in signature.parameters:
+            raise ValueError(f'{contract} run input {name} is not a parameter of {dotted}')
+        if signature.parameters[name].default is not inspect.Parameter.empty:
+            raise ValueError(f'{contract} run input {name} has a default on {dotted}')
 
 
 def verify():
@@ -35,8 +61,15 @@ def verify():
             if set(row.get('contracts', [])) - ids:
                 raise ValueError('Binding points outside the contract owner')
     sources = read('source-bindings.json')['sources']
-    if {c for s in sources for c in s['contracts']} != ids:
-        raise ValueError('Contract source-route coverage differs')
+    routed = {c for s in sources for c in s['contracts']}
+    if routed - ids:
+        raise ValueError('A source binding names a contract outside the owner')
+    run_inputs = {c['id']: c['run_input'] for c in contracts if 'run_input' in c}
+    if ids - routed - set(run_inputs):
+        raise ValueError(f'Contract has neither a source binding nor a run input: {sorted(ids - routed - set(run_inputs))}')
+    for contract, run_input in run_inputs.items():
+        for entry in run_input['entry_points']:
+            require_run_parameters(entry['callable'], entry['parameters'], contract)
     allowed = {'id', 'name', 'purpose', 'contracts', 'routes', 'population', 'reader', 'open'}
     for source in sources:
         if set(source) != allowed:

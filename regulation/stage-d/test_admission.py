@@ -41,7 +41,8 @@ class AdmissionTests(unittest.TestCase):
 
     def view(self, evidence):
         return evidence.view(context='counterexample', event_date=self.row.event_date,
-                             known_through=datetime(2026, 9, 9, tzinfo=timezone.utc))
+                             known_through=datetime(2026, 9, 9, tzinfo=timezone.utc),
+                             permitted_controlled_sources=frozenset())
 
     def test_same_omission_supports_removal_but_cannot_activate_fine(self):
         view = self.view(self.evidence(self.row))

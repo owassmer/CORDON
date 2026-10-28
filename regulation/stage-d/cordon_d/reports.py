@@ -1146,12 +1146,13 @@ def report(digest: str, store: Path, *, extraction_version: str):
     return reading
 
 
-def reports(root: Path, store: Path, *, extraction_version: str, known_through=None):
+def reports(root: Path, store: Path, *, extraction_version: str, known_through: datetime):
+    """The reports captured by the run's stated knowledge cutoff; there is no read-everything default."""
     seen = set()
-    if known_through is not None and (known_through.tzinfo is None or known_through.utcoffset() is None):
-        raise ValueError('A knowledge cutoff must be timezone-aware')
+    if not isinstance(known_through, datetime) or known_through.tzinfo is None or known_through.utcoffset() is None:
+        raise ValueError('A knowledge cutoff must be a timezone-aware instant')
     for capture in json.loads((root / 'records.json').read_text()):
-        if known_through is not None and datetime.fromisoformat(capture['captured_at']) > known_through:
+        if datetime.fromisoformat(capture['captured_at']) > known_through:
             continue
         digest = capture.get('sha256')
         if digest and digest not in seen:
