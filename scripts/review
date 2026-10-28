@@ -47,25 +47,24 @@ brief() { # brief plan|implementation|round: the brief's quoted paragraph, verba
 }
 facet_row() { git show origin/main:REVIEW_PRINCIPLES.md | grep -E "^\| $1\. " ; }
 main_checkout="$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)"
-checkout() { # checkout <pr> <sha>: a disposable detached checkout of that commit, beside the main checkout
-  # The reviewers of one round start together when their lane frees, and concurrent `git worktree add` calls for the
-  # same path collide; a failure inside a command substitution does not stop the script, which then ran in no
-  # checkout and exited silently. So one run makes the checkout at a time (a lock directory), and it is verified.
-  # A lock names its holder's pid; a lock whose holder has died is taken over, a live holder's never.
-  local co="$(dirname "$main_checkout")/CORDON-review/pr$1-${2:0:7}" lock holder
+checkout() { # checkout <pr> <sha>: a disposable detached checkout of exactly that commit, beside the main checkout
+  # A round's reviewers start together and each makes the PR's checkout; concurrent `git worktree add` calls for one
+  # path collide (reproduced: two of three trials left every run without a checkout). So the checkout is made under
+  # a kernel lock (lockf(1): released when its holder exits or dies, never broken while held, bounded by a timeout),
+  # and it is handed out only if it is exactly the commit, unmodified; otherwise the run logs why and stops.
+  local co="$(dirname "$main_checkout")/CORDON-review/pr$1-${2:0:7}"
   mkdir -p "$(dirname "$co")"
-  lock="$co.lock"
-  until mkdir "$lock" 2>/dev/null; do
-    holder="$(cat "$lock/pid" 2>/dev/null || true)"
-    if [ -n "$holder" ] && ! kill -0 "$holder" 2>/dev/null; then rm -rf "$lock"; else sleep 1; fi
-  done
-  echo $$ > "$lock/pid"
-  if [ ! -e "$co/.git" ]; then
-    git fetch -q origin "pull/$1/head" >&2 || true
-    git worktree add -q --detach "$co" "$2" >&2 && ln -s "$main_checkout/.venv" "$co/.venv"
+  if ! /usr/bin/lockf -k -t 300 "$co.lock" /bin/sh -c '
+      [ -e "$1/.git" ] && exit 0
+      git fetch -q origin "pull/$2/head" || true
+      git worktree add -q --detach "$1" "$3" && ln -s "$4/.venv" "$1/.venv"' _ "$co" "$1" "$2" "$main_checkout" >&2; then
+    echo "the checkout of $2 was not made within 300 s, or could not be made" >&2; return 1
   fi
-  rm -rf "$lock"
-  [ -e "$co/.git" ] && echo "$co"
+  if [ "$(git -C "$co" rev-parse HEAD 2>/dev/null)" != "$(git rev-parse "$2^{commit}")" ] \
+     || [ -n "$(git -C "$co" status --porcelain -uno 2>/dev/null)" ]; then
+    echo "$co is not exactly commit $2, unmodified" >&2; return 1
+  fi
+  echo "$co"
 }
 store="${CORDON_STORE:-$main_checkout-store}"
 facts() { # facts <pr> <sha> <checkout> <kind>
