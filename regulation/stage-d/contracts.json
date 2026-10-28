@@ -128,6 +128,13 @@
             ]
           },
           {
+            "callable": "cordon_d.landscape.landscape_results",
+            "parameters": [
+              "at",
+              "evaluated_at"
+            ]
+          },
+          {
             "callable": "cordon_d.annex_positions.expand",
             "parameters": [
               "at"
@@ -870,6 +877,12 @@
           },
           {
             "callable": "cordon_d.case_prescriptions.admitted_records",
+            "parameters": [
+              "permitted_controlled_sources"
+            ]
+          },
+          {
+            "callable": "cordon_d.landscape.landscape_results",
             "parameters": [
               "permitted_controlled_sources"
             ]

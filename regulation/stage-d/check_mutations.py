@@ -1,4 +1,5 @@
-"""Bounded discriminating mutations of the lawful-dueness class (PR #35), in memory.
+"""Bounded discriminating mutations of the lawful-dueness class (PR #35) and of the join's rule
+table (PR #40), in memory.
 
 No canonical file is edited. Each named regression must pass as built and fail on its
 associated wrong A meaning or wrong implementation; this is evidence about these
@@ -54,6 +55,43 @@ CODE = (
      '        if stated is not None and due.truth is True:\n',
      '        if stated is not None and due.truth is not None:\n',
      'test_annex_positions.AnnexPositions.test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due'),
+    # The join's rule table (PR #40): one mutation per row family.
+    ('count a host-only performance', 'cordon_d.case_prescriptions',
+     "    'host-only parcel': {'T<': REPORT, 'T≥': REPORT, 'D<': REPORT, 'D∋': REPORT, 'D>': REPORT, '?': REPORT},\n",
+     "    'host-only parcel': {'T<': COUNT, 'T≥': REPORT, 'D<': REPORT, 'D∋': REPORT, 'D>': REPORT, '?': REPORT},\n",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_row_7_a_performance_on_a_host_only_parcel_is_reported_on_any_date'),
+    ('hold a parcel-only performance after the deadline', 'cordon_d.case_prescriptions',
+     "    'plant parcel': {'T<': HOLD, 'T≥': REPORT, 'D<': HOLD, 'D∋': HOLD, 'D>': REPORT, '?': HOLD},\n",
+     "    'plant parcel': {'T<': HOLD, 'T≥': HOLD, 'D<': HOLD, 'D∋': HOLD, 'D>': REPORT, '?': HOLD},\n",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_row_6_a_performance_printed_only_by_the_plants_parcel_holds_only_inside_the_term'),
+    ('count a parcel-only performance inside the term', 'cordon_d.case_prescriptions',
+     "    'plant parcel': {'T<': HOLD, 'T≥': REPORT, 'D<': HOLD, 'D∋': HOLD, 'D>': REPORT, '?': HOLD},\n",
+     "    'plant parcel': {'T<': COUNT, 'T≥': REPORT, 'D<': HOLD, 'D∋': HOLD, 'D>': REPORT, '?': HOLD},\n",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_row_6_a_performance_printed_only_by_the_plants_parcel_holds_only_inside_the_term'),
+    ('require the delivery to name the plant', 'cordon_d.case_prescriptions',
+     "            deliveries.setdefault(recipient, {}).setdefault(r['event'].occurred, []).append(r['record'])\n",
+     "            if position is None or [p for w in r['works'] for p in targets(w)]: "
+     "deliveries.setdefault(recipient, {}).setdefault(r['event'].occurred, []).append(r['record'])\n",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_row_2_a_delivery_naming_only_a_host_only_parcel_is_notice_and_the_parcel_is_withdrawn'),
+    ('hold a day-only plant record whose day ends before the boundary', 'cordon_d.case_prescriptions',
+     "    'plant': {'T<': COUNT, 'T≥': COUNT, 'D<': COUNT, 'D∋': HOLD, 'D>': REPORT, '?': COUNT},\n",
+     "    'plant': {'T<': COUNT, 'T≥': COUNT, 'D<': HOLD, 'D∋': HOLD, 'D>': REPORT, '?': COUNT},\n",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_row_5_a_performance_naming_the_plant_counts_by_where_it_falls_against_the_deadline'),
+    # The grant at a position (PR #40 round 1).
+    ("let a co-holder's delivery outside the grant withhold", 'cordon_d.case_prescriptions',
+     "                    or r['kind'] != 'personal-delivery'\n                    and (set(r['works'])",
+     "                    or (set(r['works'])",
+     'test_osservatorio_records.OsservatorioRecords.'
+     'test_a_partial_grant_withholds_what_the_full_evidence_leaves_unresolved'),
+    ('key a recipient by its raw printed string', 'cordon_d.case_prescriptions',
+     "            recipient = _printed(r['recipient'])", "            recipient = (r['recipient'] or '').strip()",
+     'test_annex_positions.SuppliedRecordsAtPositions.'
+     'test_through_the_writer_a_narrower_grant_withholds_a_result_at_a_position_and_never_changes_it'),
 )
 
 
@@ -100,7 +138,7 @@ def main():
             raise AssertionError(f'Mutation location changed: {name}: {before}')
         namespace = dict(module.__dict__)
         exec(compile(source.replace(before, after), str(path), 'exec'), namespace)
-        originals = []
+        originals, tables = [], {}
         try:
             for key, value in namespace.items():
                 original = module.__dict__.get(key)
@@ -108,6 +146,10 @@ def main():
                         and hasattr(original, '__code__'):
                     originals.append((original, original.__code__))
                     original.__code__ = value.__code__
+                elif isinstance(value, dict) and isinstance(original, dict) and value != original:
+                    # A mutated module-level table (the join's rule table) replaces the module's for the run.
+                    tables[key] = original
+                    module.__dict__[key] = value
             result = run(case)
             if result.testsRun != 1 or result.errors or not result.failures:
                 raise AssertionError(f'Regression did not discriminate mutation: {label}: {case}')
@@ -115,6 +157,7 @@ def main():
         finally:
             for function, code in originals:
                 function.__code__ = code
+            module.__dict__.update(tables)
 
 
 if __name__ == '__main__':
