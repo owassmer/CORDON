@@ -21,6 +21,12 @@ it neither copies legal thresholds into configuration nor derives meaning from
 identifier spelling at runtime. `Snapshot.load()` checks the accepted input
 hashes. Dates select half-open legal-version intervals. Unchanged adjacent legal
 versions preserve a B quantity's applicability; a semantic change ends it.
+`evaluate` decides the A wordings that ask whether the event date lies in an
+interval A states (`core.DATE_INTERVALS`) from its event date alone, start
+included and end excluded: the carrying version's own interval, or the start or
+end of a named A version. The result cites the version whose date decided it. A
+supplied fact or a reader's true or false answer for them is refused. `Snapshot.load` checks each wording's carriers and named version
+against A.
 
 The consumer is Stage D: typed mathematical inputs and A's remaining semantic
 facts need evidence contracts. Inputs here describe the fact required, not its
@@ -115,7 +121,14 @@ follow-up duration does not require continuous observation. An ongoing performan
 is established only through evaluation, never into the future.
 
 `custody_facts` combines the source's same-calendar-day delivery with refrigerated
-transport and any other established mandatory failure. `confirmation_facts`
+transport and any other established mandatory failure. Collection and delivery
+each take an instant or a calendar date as printed, in the rule's zone; a date
+is never given a time of day. Their local days decide same-day delivery, and
+their order is compared by day when either is a date. Without a delivery, the
+end of the collection day is compared only with the evaluation instant. A
+delivery date after the evaluation's local day is refused. One on that day may
+fall after evaluation, so it decides only where reading it as not yet performed
+gives the same answer. Only a same-calendar-day clock takes a completion date. `confirmation_facts`
 compares distinct result identities, sample/extract identity, genome-target identity
 and operative geography under Article 2(6). It consumes qualified results rather
 than prescribing an analytical protocol. Species membership for Article 7(1)(c),

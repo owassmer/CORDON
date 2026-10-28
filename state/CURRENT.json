@@ -27,7 +27,8 @@
         "Pre-13-March-2021 authority for the affected regional version class if a pre-2021 event enters scope",
         "DDS 148/2024 exact Santeramo ST26 intermediate geometry",
         "DDS 39/2021 predecessor procedure meaning for its bounded interval",
-        "DDS 51/2023 correction scope relative to DDS 48/2023"
+        "DDS 51/2023 correction scope relative to DDS 48/2023",
+        "IT-PNI-2026:adoption-and-publication-status:v1's route table is not exclusive: its branch 2 reads 'decision time within programme year 2026' alone, which C makes true wherever the row applies, so a run holding proof of non-adoption or non-coverage raises 'Nonexclusive legal routes' instead of returning the false_effect's defeat. Branch 2 should read all_of[decision time within programme year 2026, not(evidence proves the 2026 programme was not adopted or does not cover the specified pest and the Puglia territory)]; reopen A for it if a record ever proves non-adoption (PR #39)"
       ],
       "reopening_rule": "Name the affected proposition and show source evidence that falsifies or materially completes the accepted meaning."
     },
@@ -67,12 +68,12 @@
       },
       "accepted_by": "Owen Wassmer",
       "acceptance_record": {
-        "path": "corpus/evidence/stage-c-acceptance-2026-09-24-pr35.json",
-        "sha256": "302f67d34dc0f6d06e8b77df371be4df3cd89c2d53fe280d1134b94e3b722c1a"
+        "path": "corpus/evidence/stage-c-acceptance-2026-10-28-pr39.json",
+        "sha256": "57395644e7135057ddcf3da1505d087ceb29536e76d0ad5e999ee64403529ae4"
       },
       "canonical": {
         "path": "regulation/stage-c",
-        "sha256": "6a36cd5ccbffe33344f22e25746b52b119e9e9699ad07cbc331bf9bd648c1ac6",
+        "sha256": "467616930d75b868a47aacf6c79c252b5395bac17e1cdcb1e8c7e2413bfec161",
         "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__"
       }
     },
@@ -93,7 +94,8 @@
         "Read the laboratory reports again so row 2 is held: Owen clears the in-reach population, its selection rule and request count before the pass; every reading is kept from its first write (PR #42).",
         "Decide whether TAR Bari 387, 383 and 384/2026 still leave unknown the dueness of the 20 positions of DDS 96, 119 and 138/2023 that hold a listed infected plant (2, 14 and 4) now that A records DDS 18/2024 (D row 6).",
         "Plan the join from supplied Osservatorio records to annex positions (rule set per record kind, naming, date against the deadline and due share; PR #40), starting from PR #35 at 84a9908 as evidence",
-        "Replace the stated device term with a held input named in plant-population's positional_qualification: ARIF's per-fix accuracy or device and capture mode per record, a bound from re-samples linked by ID_CAMPIONE, or a calibration of the documented device and app."
+        "Replace the stated device term with a held input named in plant-population's positional_qualification: ARIF's per-fix accuracy or device and capture mode per record, a bound from re-samples linked by ID_CAMPIONE, or a calibration of the documented device and app.",
+        "Supply printed delivery dates from result-documents to sample-custody, after settling which printed label is delivery: the reading takes 'Data ricevimento campione' as delivery in report 621959b9… and as acceptance in 73426d42…, and labels report 103227e1…'s 'Data prelievo campione' with the generic role date rather than sampling_date (follows PR #39)."
       ]
     },
     "E": {

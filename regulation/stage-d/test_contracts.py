@@ -123,9 +123,9 @@ class EvidenceTests(unittest.TestCase):
     def test_retention_policy_does_not_fill_continuing_performance(self):
         version = 'PUG-DGR538-2021:Art7(3)-policy:v1'
         at = date(2021, 5, 1)
+        # C decides 'effective plan interval' from the event date; D supplies only the date.
         rows = tuple(replace(self.row, identity=predicate, predicate=predicate, contract=contract,
                              consumer_version=version, event_date=at) for predicate, contract in [
-            ('effective plan interval', 'evaluation-context'),
             ('official protected status', 'protected-status'),
             ('official negative result', 'official-finding')])
         def result(assertions):
@@ -141,6 +141,10 @@ class EvidenceTests(unittest.TestCase):
                                               'Hypothetical complete current safeguards determination'),))
         self.assertTrue(result((*rows, continuing)).truth)
         self.assertFalse(result((*rows, replace(continuing, value=False))).truth)
+        interval = replace(rows[0], identity='interval', predicate='effective plan interval',
+                           contract='evaluation-context')
+        with self.assertRaisesRegex(ValueError, 'cannot be supplied'):
+            result((*rows, continuing, interval))
 
 
 
