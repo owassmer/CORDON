@@ -161,6 +161,10 @@ def main():
                              'prints no identity; every missing page reading stays unread')
     parser.add_argument('--document', action='append', default=[],
                         help='Optional acquired source hash selection; omission processes the complete population')
+    parser.add_argument('--reach', type=date.fromisoformat, metavar='DECISION_DATE',
+                        help='Select the held reports a decision on this date can reach (SPEC.md, "Admission"), with '
+                             'the predecessors they declare; relationship readings also take the reports nominated '
+                             'as possible predecessors')
     parser.add_argument('--max-cost-usd', type=float)
     parser.add_argument('--input-usd-per-million', type=float)
     parser.add_argument('--output-usd-per-million', type=float)
@@ -198,7 +202,19 @@ def main():
     digests = sorted({r['sha256'] for r in captures if 'sha256' in r})
     if not set(args.document) <= set(digests):
         parser.error('--document must name an acquired source hash')
+    if args.reach and args.document:
+        parser.error('--reach and --document are two selections; give one')
     selected = sorted(set(args.document)) if args.document else digests
+    if args.reach:
+        from cordon_d.area_geometry import reach_start
+        from cordon_d.findings import reach_selection
+        start = reach_start(REPOSITORY, args.reach)
+        pages, relationship_set, reach_counts = reach_selection(
+            distinct_observations(args.monitoring_root), args.reports_root, store, start=start,
+            known_through=args.known_through)
+        selected = sorted((relationship_set if args.relationships else pages) & set(digests))
+        print(json.dumps({'reach': {'decision_date': args.reach.isoformat(), 'start': start.isoformat(),
+                                    **reach_counts, 'selected': len(selected)}}), flush=True)
     def complete(digest):
         if args.relationships:
             reading = report_relations.load(store, digest, exact=True)

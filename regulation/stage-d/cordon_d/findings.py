@@ -11,7 +11,7 @@ from urllib.parse import parse_qs, urlsplit
 
 from .reports import Report, report, record_rows
 from .monitoring import day as observation_day, PUBLISHER_IDENTIFIERS
-from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, load as load_relations
+from .report_relations import correspondences, related, replacements, current_limitation, norm, dated, number, load as load_relations
 
 
 # OBJECTID is the publication layer's row number. No laboratory report prints it, so an
@@ -251,6 +251,59 @@ def _host_relation(row, association):
             result.add(norm(match[1]))
         return result
     return 'agrees on printed host' if labels(values[0]) & labels(printed) else 'conflicts'
+
+
+_ROUTE_NUMBER = re.compile(r'_N_0*([0-9]+)_([0-9]{4})_', re.I)
+
+
+def reach_selection(groups, reports_root: Path, store: Path, *, start, known_through):
+    """The held laboratory reports a decision whose reach begins on `start` needs read (SPEC.md, "Admission").
+
+    By the route join `findings` uses: each report an observation dated on or after `start` routes to; and, as
+    undated, each report whose routing observations all lack a day and each held report no observation routes to. A
+    report that replaces a selected one is routed by observations of the same samples, or by none, so the route rule
+    selects it. A predecessor a selected report declares is found by the reader's own identity match once both hold
+    relationship readings; until then the held reports whose route names print the declared number and year are
+    nominated for a relationship reading only, and a resolved predecessor joins the selection.
+
+    Returns (pages, relationships, counts): the reports whose pages are read, the reports whose relationships are
+    read (a superset), and the counts behind them.
+    """
+    captures = _captures(reports_root, known_through)
+    route_digests = {route: {v['sha256'] for v in versions if v.get('sha256')} for route, versions in captures.items()}
+    held = set().union(*route_digests.values()) if route_digests else set()
+    latest, undated_routes = {}, set()
+    for group in groups:
+        for member in group.members:
+            for _field, route in member.report_routes:
+                for digest in route_digests.get(route, ()):
+                    if group.day is None:
+                        undated_routes.add(digest)
+                    elif digest not in latest or group.day > latest[digest]:
+                        latest[digest] = group.day
+    in_reach = {d for d, day in latest.items() if day >= start}
+    undated = (undated_routes - set(latest)) | (held - set(latest) - undated_routes)
+    pages = in_reach | undated
+    names = {d: document_name(route) for route, ds in route_digests.items() for d in ds}
+    nominated = set()
+    while True:
+        relations = {d: load_relations(store, d, exact=True) for d in held}
+        edges = correspondences({d: SimpleNamespace(relations=r) for d, r in relations.items() if r})
+        added = {e['predecessor'] for e in edges if e['successor'] in pages and e['predecessor']} - pages
+        for edge in edges:
+            if edge['successor'] not in pages or edge['predecessor']:
+                continue
+            match = re.fullmatch(r'0*([0-9]+)/([0-9]{4})', number(edge['declared_predecessor'].get('number') or '',
+                                                                   edge['successor_identity']))
+            if match:
+                nominated |= {d for d, name in names.items()
+                              if (m := _ROUTE_NUMBER.search(name)) and m.groups() == match.groups()} - pages
+        if not added:
+            break
+        pages |= added
+    counts = {'held': len(held), 'in_reach': len(in_reach), 'undated': len(undated),
+              'predecessors': len(pages - in_reach - undated), 'nominated_for_relationships': len(nominated - pages)}
+    return pages, pages | nominated, counts
 
 
 def findings(groups, reports_root: Path, store: Path, *, extraction_version, known_through, association_readings=()):

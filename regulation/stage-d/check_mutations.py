@@ -1,4 +1,4 @@
-"""Bounded discriminating mutations of the lawful-dueness class (PR #35), in memory.
+"""Bounded discriminating mutations of Stage D consumer rules (lawful dueness, PR #35; reach selection, PR #43), in memory.
 
 No canonical file is edited. Each named regression must pass as built and fail on its
 associated wrong A meaning or wrong implementation; this is evidence about these
@@ -54,6 +54,17 @@ CODE = (
      '        if stated is not None and due.truth is True:\n',
      '        if stated is not None and due.truth is not None:\n',
      'test_annex_positions.AnnexPositions.test_a_96_hosts_only_position_with_its_tar_387_2026_closure_reads_not_due'),
+    ("leave the reach's first day out of it", 'cordon_d.findings',
+     '    in_reach = {d for d, day in latest.items() if day >= start}\n',
+     '    in_reach = {d for d, day in latest.items() if day > start}\n',
+     'test_reach_selection.ReachSelection.test_the_route_rule_selects_by_the_latest_routing_day_and_keeps_undated_reports'),
+    ('drop reports whose routing observations all lack a day', 'cordon_d.findings',
+     '    undated = (undated_routes - set(latest)) | (held - set(latest) - undated_routes)\n',
+     '    undated = held - set(latest) - undated_routes\n',
+     'test_reach_selection.ReachSelection.test_the_route_rule_selects_by_the_latest_routing_day_and_keeps_undated_reports'),
+    ("nominate a predecessor by its number alone, in any year", 'cordon_d.findings',
+     'm.groups() == match.groups()', 'm.group(1) == match.group(1)',
+     'test_reach_selection.ReachSelection.test_a_declared_predecessor_is_nominated_by_its_route_number_then_selected_once_identified'),
 )
 
 
