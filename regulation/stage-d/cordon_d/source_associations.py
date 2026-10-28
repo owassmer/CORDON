@@ -278,10 +278,10 @@ def read_associations(source_sha256: str, store: Path) -> AssociationReading:
     return result
 
 
-def associations(source_root: Path, store: Path | None = None, *, known_through=None):
+def associations(source_root: Path, store: Path | None = None, *, known_through: datetime):
     """Distinct successful captures available by the explicit knowledge cutoff."""
-    if known_through is not None and (known_through.tzinfo is None or known_through.utcoffset() is None):
-        raise ValueError('A knowledge cutoff must be timezone-aware')
+    if not isinstance(known_through, datetime) or known_through.tzinfo is None or known_through.utcoffset() is None:
+        raise ValueError('A knowledge cutoff must be a timezone-aware instant')
     root = Path(source_root)
     store = Path(store) if store is not None else store_root(root)
     records = json.loads((root / 'records.json').read_text())
