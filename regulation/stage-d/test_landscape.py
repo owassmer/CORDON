@@ -320,20 +320,32 @@ class LandscapeRecords(unittest.TestCase):
                                                           f'monitoring reference {C} names plant {C}'])
         run = self.run_caller([decision('d-x', on(sample(A), tag('0990101', 'Fasano'), sample('9199999')))])
         self.assertEqual(run['unattached'][0]['detail'], [
-            'card 0990101 (Fasano) names no register entry',
+            'card 0990101 (Fasano) names no register entry held here',
             f"monitoring reference 9199999 names no plant, not plant {A}"])
-        # For a plant whose identity is an entry, a card naming no entry is a mismatch with that identity: it blocks.
-        run = self.run_caller([decision('d-x', on(sample(A), tag('0990101', 'Fasano')))])
-        self.assertEqual(self.causes(run), [('d-x', 1, 'identifiers in conflict')])
-        # For a plant whose identity is not an entry, a card naming no register entry names no tree that could
-        # compete: the deciding reference attaches, and the card is reported beside the result.
-        for plant in (C, D):
+        # A card naming no register entry blocks for every plant: the index finding none is not evidence that no
+        # tree carries it.
+        for plant in (A, C, D):
             with self.subTest(plant=plant):
                 run = self.run_caller([decision('d-x', on(sample(plant), tag('0990101', 'Fasano')))])
-                self.assertEqual(run['plants'][plant]['records'], ['d-x'])
-                self.assertIn("attached by its deciding identifier; it disagrees with row 9's reading, which it does "
-                              'not change: card 0990101 (Fasano) names no register entry',
-                              [r['cause'] for r in run['plants'][plant]['reported']])
+                self.assertEqual(self.causes(run), [('d-x', 1, 'identifiers in conflict')])
+
+    def test_a_card_is_read_as_the_register_prints_it(self):
+        """A non-numeric census card (the register prints APP_618213 as SCHEDAN and COD alike) names its entry, and a
+        comune's printed variants (NARDO', NARDO`, Nardò) are one comune."""
+        register = REGISTER + [protection.Entry('listed', '990006', 'APP_990606', 'APP_990606', 'DGR 1193/2021', None,
+                                                "NARDO'", '13', '370', 760000.0, 4460000.0, date(2021, 7, 19),
+                                                'e' * 64)]
+        run = landscape_results(self.s, AT, [C, D], [decision('d-1', on(sample(C), tag('APP_990606', 'Nardò'))),
+                                                    decision('d-2', on(sample(D), dict(cod='APP_990606')))],
+                                evaluated_at=CUTOFF, permitted_controlled_sources=GRANT, rows=self.rows,
+                                register=register, zone=ROME, calendar=national_calendar())
+        self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict'), ('d-2', 1, 'identifiers in conflict')])
+        for item in run['unattached']:
+            self.assertTrue(item['detail'][0].split(' names entry ')[1].startswith('990006, '), item['detail'])
+        identities = landscape.Identities(self.rows, register)
+        for card, comune in (('APP_990606', "NARDO`"), ('app_990606', 'Nardò'), ('APP_990606', "NARDO'")):
+            with self.subTest(card=card, comune=comune):
+                self.assertEqual(identities.read((('card', card), ('comune', comune)))['entries'], ['990006'])
 
     def test_a_negative_olive_whose_identity_is_unknown(self):
         """The 11200168 shape: a card, COD or parcel beside the plant's own monitoring reference attaches; the card

@@ -58,7 +58,20 @@ def _number(text):
 
 
 def _place(text):
-    return ' '.join((text or '').split()).upper()
+    """A comune as printed, folded to one form: the register prints NARDO' and NARDO`, MONTE SANT'ANGELO and
+    MONTE SANT` ANGELO, where a file prints Nardò and Monte Sant'Angelo."""
+    import unicodedata
+    text = ''.join(c for c in unicodedata.normalize('NFD', text or '') if not unicodedata.combining(c))
+    text = text.replace('`', "'").replace('’', "'")
+    text = ' '.join(text.split()).upper().replace("' ", "'").rstrip("'")
+    return text
+
+
+def _card(text):
+    """A census card or tag as printed: its number where it is all digits (leading zeros aside), else the printed
+    text (case and spacing aside), as the register prints APP_618213."""
+    text = ' '.join((text or '').split())
+    return _number(text) if text.isdigit() else (text.upper() or None)
 
 
 def _parcel(comune, foglio, particella):
@@ -102,8 +115,8 @@ class Identities:
         for e in register:
             if e.key and e.key.strip():
                 self.by_key[e.key.strip()].append(e.oid)
-            if _number(e.card) is not None and _place(e.comune):
-                self.by_card[(_place(e.comune), _number(e.card))].append(e.oid)
+            if _card(e.card) is not None and _place(e.comune):
+                self.by_card[(_place(e.comune), _card(e.card))].append(e.oid)
 
     def output(self, plant):
         held = self.plants.get(plant)
@@ -129,8 +142,8 @@ class Identities:
         if set(form) == {'cod'}:
             entries = list(self.by_key.get(form['cod'].strip(), ()))
         else:
-            number = _number(form['card'])
-            entries = list(self.by_card.get((_place(form['comune']), number), ())) if number is not None else []
+            card = _card(form['card'])
+            entries = list(self.by_card.get((_place(form['comune']), card), ())) if card is not None else []
         return dict(identifier=form, kind='register', entries=entries,
                     plants=set().union(*(self.by_entry.get(e, set()) for e in entries)))
 
@@ -149,9 +162,9 @@ class Identities:
 
     def check(self, named, plant):
         """None where the identifier agrees with the plant's row 9 identity; 'unchecked' where it cannot be computed
-        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); ('noted', why) for a key
-        or card that names no register entry at all, for a plant whose identity is not an entry: it names no tree
-        that could compete, so it does not block and is reported beside the result; else why it does not agree.
+        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); else why it does not
+        agree. A key or card that names no register entry blocks for every plant: the index finding none is not
+        evidence that no tree carries it, so the record stays unattached and named, never attached.
 
         A key or card naming a register entry outside the plant's candidates names a monumental tree, whether or not
         PR #30's rows hold it as a plant, so it blocks: a grant for that tree must not reach this plant. Whether an
@@ -169,8 +182,7 @@ class Identities:
                 f"{_printed(form)} is not the parcel of entry {identity}, plant {plant}'s row 9 identity"
         entries = named['entries']
         if not entries:
-            why = f'{_printed(form)} names no register entry'
-            return ('noted', why) if identity in NOT_A_REGISTER_IDENTITY else why
+            return f'{_printed(form)} names no register entry held here'
         if identity in entries or set(entries) & set(held['candidates']):
             return None
         reasons = []
@@ -207,10 +219,9 @@ class Identities:
         if len(deciding) == 1:
             plant = next(iter(deciding))
             checks = [(n, self.check(n, plant)) for n in named]
-            detail = [reason for _, reason in checks if reason not in (None, 'unchecked') and not isinstance(reason, tuple)]
+            detail = [reason for _, reason in checks if reason not in (None, 'unchecked')]
             if not detail:
-                return dict(plant=plant, unchecked=[n['identifier'] for n, reason in checks if reason == 'unchecked'],
-                            noted=[reason[1] for _, reason in checks if isinstance(reason, tuple)])
+                return dict(plant=plant, unchecked=[n['identifier'] for n, reason in checks if reason == 'unchecked'])
             cause = 'identifiers in conflict'
         elif deciding:
             cause = 'identifiers in conflict'
@@ -258,9 +269,6 @@ def attach(records, identities):
             notes[plant] += [dict(record=record['record'], cause=f'{_printed(form)} not checked: row 9 holds no '
                                                                  'parcel for a plant whose identity is not an entry')
                              for form in outcome['unchecked']]
-            notes[plant] += [dict(record=record['record'], cause=f'attached by its deciding identifier; it disagrees '
-                                                                 f"with row 9's reading, which it does not change: {why}")
-                             for why in outcome['noted']]
     return attached, unattached, notes
 
 

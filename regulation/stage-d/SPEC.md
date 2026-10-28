@@ -719,10 +719,12 @@ naming one plant, or a key or card naming one entry that is one plant's
 identity) where every other identifier it prints agrees with that plant: a key
 or card names the plant's identity entry or, for an "unknown" plant, one of its
 candidates; a parcel is checked only against an entry identity's own parcel, and
-otherwise is reported unchecked, neither blocking nor deciding. For a plant whose
-identity is not an entry, a key or card naming no register entry at all names no
-tree that could compete: the group attaches by its deciding identifier and the
-key or card is reported beside the result. Otherwise the group is unattached and
+otherwise is reported unchecked, neither blocking nor deciding. A card is read as
+the register prints it (its number, or its text where it is not all digits, such
+as APP_618213) in its comune, the comune's printed variants folded (NARDO',
+NARDO` and Nardò are one). A key or card that names no register entry held here
+blocks for every plant: the index finding none is not evidence that no tree
+carries it. Otherwise the group is unattached and
 fills nothing: identifiers in conflict where they name different plants or one
 disagrees with row 9 (a register entry outside the plant's candidates, named with
 its distance, is another monumental tree whether or not row 9 holds it as a
