@@ -377,38 +377,21 @@ def clause(record):
 WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends', 'withdraws')
 
 
-# What a court's stated reason may print outside the acts the act-type route reads: a measured quantity. Any other
-# digit is an act reference in a form not read (a number with its date, a year-first EU number, a protocol number,
-# a law), and a word below names an act without one; either leaves the closure's need.
-_DIGIT = re.compile(r'\d')
-# "ha" is not a unit here: it is also the verb ("la n. 45 ha revocato"). Both patterns end at (?!\w), not \b, so a
-# dotted abbreviation ("ord. caut.", "reg. UE") and "50%" are matched as printed.
-_MEASURE = re.compile(r'\b\d+(?:[.,]\d+)?\s*(?:m|km|metri|chilometri|%|ettari)(?!\w)', re.I)
-_ACT_WORD = re.compile(r"\b(?:D\.?\s?D\.?\s?S|D\.?\s?D|DET|det\.|determin\w*|delib\w*|del\.|D\.?\s?G\.?\s?R|"
-                       r"D\.?\s?Lgs|D\.?\s?M|D\.?\s?P\.?\s?R|decret\w*|decision\w*|regolament\w*|reg\.|circolar\w*|"
-                       r"sentenz\w*|ordinanz\w*|ord\.|not[ae]|prot\.|atto|atti|provvediment\w*|legge|L\.\s?R)(?!\w)", re.I)
-
-
 def _decided_in_a(reason, record):
     """Whether an A row governing the record already decides what a court's stated reason states.
 
-    True only where the reason names at least one act other than the order, every act it names is an
-    Osservatorio act read by its act type (`held_acts._DESIGNATED`, the owner of a printed act identity), and
-    each such act is recorded by an A row the record names. It fails closed: outside those acts the reason may
-    print no digit but a measured quantity, and no word that names an act. So an act printed with its date, a
-    year-first EU number, a protocol number, a law or a decree leaves the closure's need, as does a reason
-    naming no act. The residual is an act named only in words with no act word and no number.
+    True where the reason cites at least one Osservatorio act other than the order, read by its act
+    type (`held_acts._DESIGNATED`, the owner of a printed act identity), and every act so cited is the
+    instrument of an A row governing the record (`governing_A_references`): A records that act's effect
+    on this order, so a moot ruling adds nothing (owner ruling, 2026-10-28). Otherwise the court's words
+    stay a need: whether an act A does not record ended the order is a question of legal meaning, not
+    D's (TAR Bari 1007/2023 on DDS 119/2022). Only what the act-type route reads is consulted; an act a
+    reason cites in another form (a D.G.R., a law, words alone) is not, and reaches C only as a held
+    act's own stated change (`stated_changes`).
     """
     from .held_acts import _DESIGNATED
-    text = ' '.join(reason)
-    designated = list(_DESIGNATED.finditer(text))
-    covered = [m.span() for m in designated] + [m.span() for m in _MEASURE.finditer(text)]
-
-    def inside(m):
-        return any(start <= m.start() < end for start, end in covered)
-    if any(not inside(m) for pattern in (_DIGIT, _ACT_WORD) for m in pattern.finditer(text)):
-        return False
-    later = {act_id(int(m.group(1)), int(m.group(2))) for m in designated} - {record['instrument']}
+    cited = {act_id(int(m.group(1)), int(m.group(2))) for m in _DESIGNATED.finditer(' '.join(reason))}
+    later = cited - {record['instrument']}
     recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
     return bool(later) and later <= recorded
 
@@ -430,8 +413,8 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     - a challenge the court ended with a stated reason (a later act superseding the
       order) leaves the reading unknown, naming the court's words, unless an A row
       governing the record already decides what the reason states (`_decided_in_a`):
-      the reason names at least one act other than the order, every act it names is
-      read, and each is an act the record's governing A rows record. A moot ruling
+      the reason cites, by act type, at least one act other than the order, and each
+      act it so cites is the instrument of an A row governing the record. A moot ruling
       annuls nothing, so the A row decides (owner ruling, 2026-10-28, TAR Bari 387,
       383 and 384/2026 on DDS 18/2024).
 

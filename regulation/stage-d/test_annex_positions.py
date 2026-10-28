@@ -302,28 +302,9 @@ class AnnexPositions(unittest.TestCase):
         self.assertTrue(held.needs and all(need.startswith('predicate: IT-L241-A21') for need in held.needs))
         # Without the A row that records DDS 18/2024, the court's words decide nothing and stay a need.
         self.assertTrue(names_court(at_holder(references=())))
-        # A measured quantity is no act: the held reason's "50 m" leaves it decided.
-        self.assertFalse(names_court(at_holder(stated_reason=(reason[0] + ' per le piante entro 50 m',))))
-        # A reason naming an act no A row records, or printing a number and year no act type reads, keeps its need.
-        # It fails closed: every act the reason mentions, in any printed form, must be one A records.
-        for words in (reason[0] + ' e della DDS n. 127/2022', reason[0] + ' e della nota n. 10745/2025',
-                      'superamento della DDS n.119/2023 da parte della D.G.R. n. 18/2024',
-                      'superamento della DDS n.119/2023 da parte della determina diciotto del 2024',
-                      reason[0] + ' e della DDS n. 127 del 21/06/2022', reason[0] + ' e della DDS n. 127/22',
-                      reason[0] + ' e della nota prot. n. 10745 del 15.12.2023',
-                      reason[0] + ', poi sostituita dalla DDS n. 45 del 3 maggio 2025',
-                      reason[0] + ' e della determina diciotto del 2024',
-                      reason[0] + ' e della legge regionale n. 4/2017',
-                      # Forms the held decisions print beside their reasons (TAR 383/2026 and 384/2026).
-                      reason[0] + ' modifica regolamentare UE (2024/1320 che ha inciso sull’all.III del reg. UE '
-                                  '2020/1201)',
-                      reason[0] + ' ai sensi del D.Lgs 19 del 02/02/2021',
-                      reason[0] + ' e del D.M. 28 febbraio 2025', reason[0] + ' e della sentenza 1007 del 2023',
-                      reason[0] + ' e del parere del 3 maggio 2024', reason[0] + ' e della circolare regionale',
-                      # "ha" is the verb, not hectares; a dotted abbreviation with no number still names an act.
-                      reason[0] + ', mentre la successiva n. 45 ha revocato la stessa', reason[0] + ', ord. caut. di appello'):
-            with self.subTest(words=words):
-                self.assertTrue(names_court(at_holder(stated_reason=(words,))))
+        # Every act the reason cites must be one A records for the order: adding TAR 1007/2023's citation of
+        # DDS 127/2022, which no A row records for DDS 119/2023, keeps the need.
+        self.assertTrue(names_court(at_holder(stated_reason=(reason[0] + ' e della DDS n. 127/2022', reason[1]))))
 
     def test_tar_1007_2023_keeps_its_need_on_dds_119_2022(self):
         # TAR Bari Sentenza 1007/2023 (store 700b7350…2e0d) ended the challenge to DDS 119/2022 on DDS 127/2022,
