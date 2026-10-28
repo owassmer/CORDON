@@ -48,14 +48,24 @@ brief() { # brief plan|implementation|round: the brief's quoted paragraph, verba
 facet_row() { git show origin/main:REVIEW_PRINCIPLES.md | grep -E "^\| $1\. " ; }
 main_checkout="$(cd "$(git rev-parse --path-format=absolute --git-common-dir)/.." && pwd -P)"
 checkout() { # checkout <pr> <sha>: a disposable detached checkout of that commit, beside the main checkout
-  local co="$(dirname "$main_checkout")/CORDON-review/pr$1-${2:0:7}"
-  if [ ! -d "$co" ]; then
-    mkdir -p "$(dirname "$co")"
-    git fetch -q origin "pull/$1/head"
-    git worktree add -q --detach "$co" "$2"
-    ln -s "$main_checkout/.venv" "$co/.venv"
+  # The reviewers of one round start together when their lane frees, and concurrent `git worktree add` calls for the
+  # same path collide; a failure inside a command substitution does not stop the script, which then ran in no
+  # checkout and exited silently. So one run makes the checkout at a time (a lock directory), and it is verified.
+  # A lock names its holder's pid; a lock whose holder has died is taken over, a live holder's never.
+  local co="$(dirname "$main_checkout")/CORDON-review/pr$1-${2:0:7}" lock holder
+  mkdir -p "$(dirname "$co")"
+  lock="$co.lock"
+  until mkdir "$lock" 2>/dev/null; do
+    holder="$(cat "$lock/pid" 2>/dev/null || true)"
+    if [ -n "$holder" ] && ! kill -0 "$holder" 2>/dev/null; then rm -rf "$lock"; else sleep 1; fi
+  done
+  echo $$ > "$lock/pid"
+  if [ ! -e "$co/.git" ]; then
+    git fetch -q origin "pull/$1/head" >&2 || true
+    git worktree add -q --detach "$co" "$2" >&2 && ln -s "$main_checkout/.venv" "$co/.venv"
   fi
-  echo "$co"
+  rm -rf "$lock"
+  [ -e "$co/.git" ] && echo "$co"
 }
 store="${CORDON_STORE:-$main_checkout-store}"
 facts() { # facts <pr> <sha> <checkout> <kind>
@@ -143,7 +153,8 @@ busy() {
 while busy; do [ -n "${waited:-}" ] || echo "=== waiting for a slot (the $kind review lane is in use)" >> "$log"; waited=1; sleep 15; done
 [ -z "${waited:-}" ] || echo "=== got a slot" >> "$log"
 
-co="$(checkout "$pr" "$sha")"
+co="$(checkout "$pr" "$sha" 2>> "$log")" || true
+[ -n "$co" ] && [ -d "$co" ] || { echo "=== the checkout of $sha could not be made (see above)" >> "$log"; echo "=== finished exit 2" >> "$log"; exit 2; }
 used="$([ -z "$session" ] && echo "$kind" || echo round)"
 [ -n "$(brief "$used")" ] || { echo "=== the $used brief was not found in REVIEW_PRINCIPLES.md on origin/main" >> "$log"; echo "=== finished exit 2" >> "$log"; exit 2; }
 if [ -z "$session" ]; then
