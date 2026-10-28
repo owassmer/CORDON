@@ -381,10 +381,12 @@ WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends', 'withdraws')
 # digit is an act reference in a form not read (a number with its date, a year-first EU number, a protocol number,
 # a law), and a word below names an act without one; either leaves the closure's need.
 _DIGIT = re.compile(r'\d')
-_MEASURE = re.compile(r'\b\d+(?:[.,]\d+)?\s*(?:m|km|metri|chilometri|%|ha|ettari)\b', re.I)
+# "ha" is not a unit here: it is also the verb ("la n. 45 ha revocato"). Both patterns end at (?!\w), not \b, so a
+# dotted abbreviation ("ord. caut.", "reg. UE") and "50%" are matched as printed.
+_MEASURE = re.compile(r'\b\d+(?:[.,]\d+)?\s*(?:m|km|metri|chilometri|%|ettari)(?!\w)', re.I)
 _ACT_WORD = re.compile(r"\b(?:D\.?\s?D\.?\s?S|D\.?\s?D|DET|det\.|determin\w*|delib\w*|del\.|D\.?\s?G\.?\s?R|"
                        r"D\.?\s?Lgs|D\.?\s?M|D\.?\s?P\.?\s?R|decret\w*|decision\w*|regolament\w*|reg\.|circolar\w*|"
-                       r"sentenz\w*|ordinanz\w*|ord\.|not[ae]|prot\.|atto|atti|provvediment\w*|legge|L\.\s?R)\b", re.I)
+                       r"sentenz\w*|ordinanz\w*|ord\.|not[ae]|prot\.|atto|atti|provvediment\w*|legge|L\.\s?R)(?!\w)", re.I)
 
 
 def _decided_in_a(reason, record):

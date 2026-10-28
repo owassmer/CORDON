@@ -319,7 +319,9 @@ class AnnexPositions(unittest.TestCase):
                                   '2020/1201)',
                       reason[0] + ' ai sensi del D.Lgs 19 del 02/02/2021',
                       reason[0] + ' e del D.M. 28 febbraio 2025', reason[0] + ' e della sentenza 1007 del 2023',
-                      reason[0] + ' e del parere del 3 maggio 2024', reason[0] + ' e della circolare regionale'):
+                      reason[0] + ' e del parere del 3 maggio 2024', reason[0] + ' e della circolare regionale',
+                      # "ha" is the verb, not hectares; a dotted abbreviation with no number still names an act.
+                      reason[0] + ', mentre la successiva n. 45 ha revocato la stessa', reason[0] + ', ord. caut. di appello'):
             with self.subTest(words=words):
                 self.assertTrue(names_court(at_holder(stated_reason=(words,))))
 
