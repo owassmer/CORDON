@@ -588,7 +588,6 @@ class SuppliedRecordsAtPositions(unittest.TestCase):
     def test_the_join(self):
         out, unattached = self.run_records([delivery('fx-pec-b', 'BORGHESE  ANTONIO', parcel('57', '270')),
                                             history('fx-h-270', parcel('57', '270'), '2023-11-30')])
-        # The result stays keyed as the delivery prints the name.
         self.assertEqual(unattached, [])
         # The recipient is keyed as the join reads it, so a variant spelling is the same recipient.
         self.assertEqual(out['BORGHESE ANTONIO']['recipients']['BORGHESE ANTONIO']['result'].effect, REQUIRED)
