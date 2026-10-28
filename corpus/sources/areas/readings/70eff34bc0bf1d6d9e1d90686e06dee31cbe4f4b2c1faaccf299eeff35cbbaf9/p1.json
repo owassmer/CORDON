@@ -1,0 +1,28 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2022-00127",
+ "act_sha256": "70eff34bc0bf1d6d9e1d90686e06dee31cbe4f4b2c1faaccf299eeff35cbbaf9",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "a4972ff20e0eb4b62a50b12ab1f3f4f5e0cc732a38a4c33782b3be9cd14087e0",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:23:28.841395+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "la Determinazione del Dirigente Sezione Osservatorio Fitosanitario n° 177 del 30/12/2021 di revoca dell’area delimitata di Canosa di Puglia."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

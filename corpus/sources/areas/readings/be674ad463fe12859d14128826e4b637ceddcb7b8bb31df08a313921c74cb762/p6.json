@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00094",
+ "act_sha256": "be674ad463fe12859d14128826e4b637ceddcb7b8bb31df08a313921c74cb762",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "e32fa04511ba5b62b6f17f55b635bf626a79f4d1063ce7ddf94a1c35f2bac640",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:25:31.360115+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Confini Comunali; Confini Provinciali; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Infetta; Area delimitata Xylella fastidiosa sub. fastidiosa - Zona Cuscinetto"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00141",
+ "act_sha256": "b83446e8f814efb5fbfda7c4a806268ab85da461ad653d1e404acf7d25f2b8aa",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "738273137df022d528a854d5598683c4a0b86ca57ec3059300dd872a1ccfd33f",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:27:22.692336+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano",
+   "E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

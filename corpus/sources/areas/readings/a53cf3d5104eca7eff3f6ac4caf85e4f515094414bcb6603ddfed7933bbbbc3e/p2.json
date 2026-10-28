@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+ "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+ "page": 2,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "53da627342e5347f44ec43bf6a0718d8ac6e20f21311fcb8028db715ceda6876",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:28:40.828896+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Area delimitata per Xylella fastidiosa sottospecie fastidiosa ST1, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n° 8 del 21/02/2024 e aggiornata con le determine dirigenziali n. 12 del 27/02/2024, n. 45 del 24/04/2024 e n. 94 del 24/07/2024;",
+   "Area delimitata per \"Xylella fastidiosa sottospecie – pauca ST53 – Bari, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 92 del 22/07/2024;",
+   "Area delimitata per Xylella fastidiosa sottospecie multiplex ST26 - Santeramo in Colle, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. 29 dell'8/04/2024, successivamente aggiornata con le determine n. 91 del 22/07/2024, n. 148 del 12/11/2024, n. 198 del 18/12/2024 e n. 106 del 16/06/2025;",
+   "Area delimitata per Xylella fastidiosa sottospecie multiplex ST26 – Ginosa, istituita con determinazione del Dirigente della Sezione Osservatorio Fitosanitario n. n. 198 del 18/12/2024, successivamente aggiornata con la determina n. 106 del 16/06/2025;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

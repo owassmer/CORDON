@@ -38,6 +38,8 @@ def classify(rel: str) -> tuple[str, str, str, str]:
         return "working_corpus", "admitted_source", "VERBATIM", "source referenced by current legal authoring"
     if rel.startswith("corpus/evidence/"):
         return "working_corpus", "dated_evidence", "VERBATIM", "research, source, analysis, or review record"
+    if rel.startswith("corpus/sources/areas/readings/"):
+        return "working_corpus", "source_reading", "REAUTHORED", "ordinary area reader's directly consumed page population; interpretation is not source bytes"
     if rel.startswith("corpus/inventory/"):
         return "working_corpus", "retained_evidence", "VERBATIM", "user-supplied source copy; native provenance and consumer meaning require source reading"
     if rel.startswith("corpus/workbench/stage-c-research/"):

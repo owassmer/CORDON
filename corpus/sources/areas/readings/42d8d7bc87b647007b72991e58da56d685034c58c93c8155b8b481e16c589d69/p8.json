@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+ "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "b899bfc5673009b74c0f74ec57ff9625b94513a2aed6ea9039591795c5b14aab",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:30:16.342907+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 BIS",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Area delimitata Xylella fastidiosa sub. multiplex - Zona Infetta; Area delimitata Xylella fastidiosa sub. multiplex - Zona Cuscinetto; Area delimitata Xylella fastidiosa - Zona Infetta; Area delimitata Xylella fastidiosa - Zona Cuscinetto; Area Delimitata XF sub. pauca (Cagnano Varano) - Zona Infetta; Area Delimitata XF sub. pauca (Cagnano Varano) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Giovinazzo) - Zona Infetta; Area Delimitata XF sub. pauca (Giovinazzo) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Bisceglie) - Zona Infetta; Area Delimitata XF sub. pauca (Bisceglie) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Modugno) - Zona Infetta; Area Delimitata XF sub. pauca (Modugno) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca (Minervino Murge) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Minervino Murge) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca (Bari) - Zona Cuscinetto; Area delimitata Xylella fastidiosa sub. pauca - Zona Contenimento; Area Delimitata Xylella fastidiosa sub. pauca - Zona Infetta; Area delimitata Xylella fastidiosa sub. pauca - Zona Cuscinetto; Confini Provinciali; Area delimitata Xylella fastidiosa sub. multiplex (Santeramo in Colle/Ginosa) - Zona Cuscinetto in Basilicata; Regione Basilicata",
+   "www.emergenzaxylella.it"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

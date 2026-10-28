@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00029",
+ "act_sha256": "b54f058b7801138291fdabb070361c40bb9612148abebc6f0e4fa72fd1c00551",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "5f389ea419d55292a390a177718610f8425c3627fea47d32322133f9699bc40c",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:21:22.934642+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Individuazione di focolaio di Xylella fastidiosa sottospecie multiplex ST26 in agro di Santeramo in Colle (BA) - Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201.",
+   "La determina n° 8 del 21/02/2024 e la Determina n° 12 del 27/02/2024. \"Individuazione di focolai di Xylella fastidiosa sottospecie fastidiosa ST1 in agro di Triggiano (BA) – Delimitazione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201\",",
+   "La determina n° 18 del 14/03/2024 \"Aggiornamento dell'area delimitata a Xylella fastidiosa sottospecie Pauca ST53 - ai sensi dell'art. 4 del Reg. UE 2020/1201\"."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

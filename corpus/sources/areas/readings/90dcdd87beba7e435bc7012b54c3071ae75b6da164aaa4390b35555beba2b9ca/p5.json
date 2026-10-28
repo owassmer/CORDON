@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+ "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "21060cc84b178f52153ddab465765f1bd33334691c13696501a03abb108f9e72",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:23:20.254197+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "del 31.07.2015, mediante affissione per 10 giorni lavorativi a decorrere dalla data della sua adozione, all’Albo delle Determinazioni Dirigenziali tramite la piattaforma regionale CIFRA, ai sensi delle Linee Guida del Segretario generale della Giunta Regionale e del Segretario Generale del Presidente, prot. n. AOO_022/652 del 31.3.2020;",
+   "sarà pubblicizzato nella sezione “Amministrazione trasparente”, sotto sezione “Provvedimenti dirigenti amministrativi” del sito www.regione.puglia.it.",
+   "IL DIRIGENTE DELLA SEZIONE (Dr. Salvatore Infantino)"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+ "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "136fed8269d33a9edc61c419fb30a5c8d7c4250d5e5a1d47f61ed34970b11fa2",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:34:11.951404+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da:",
+   "Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 36,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "006fff77958e65faa54f5d41e0d759dbf4dc0154ef70503def4c2b4e7afb7431",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:28:33.829369+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "RINVENIMENTO PIANTA INFETTA / ZONA INFETTA IN CUI SI APPLICANO MISURE DI CONTENIMENTO: In caso di rinvenimento di una pianta infetta, si deve procedere immediatamente a campionare: 1. tutte le piante specificate presenti nel raggio di 50 metri attorno alle piante infette, e tutte le altre piante non specificate che presentino sintomi indicativi della possibile infezione da parte della Xylella o che si sospetta siano infette da tale organismo nocivo; 2. tutte le superfici investite ad olivo, fruttiferi, vite e altre specie specificate ricadenti nell'area larga 400 m attorno alla pianta risultata infetta, partendo dal perimetro dell'area di raggio 50 m, con prelievo di campione pool/ singoli come descritto nel paragrafo 5.",
+   "ZONA INDENNE E CUSCINETTO: Se la pianta infetta è rinvenuta in zona indenne o cuscinetto, si deve procedere immediatamente a campionare: 1. nel raggio di 50 m attorno alle piante infette, tutti gli ulivi monumentali, ufficialmente censiti oppure con caratteristiche di monumentalità; 2. in una area di larghezza pari a 400 m attorno alla zona infetta, tutti gli ettari con presenza di specie specificate, con prelievo di campione pool/ singoli come innanzi descritto .",
+   "SEGNALAZIONI: Le piante sintomatiche segnalate come sospette sono oggetto di ispezione, campionamento e georeferenziazione da parte di Ispettori/Agenti fitosanitari dell'Osservatorio. Ogni ispezione e campionamento di una pianta ospite/specificata deve essere registrato mediante la compilazione di una specifica scheda tecnica campione attraverso l'applicativo App Xylella. Se la segnalazione giunge ad ARIF, questa deve essere a sua volta inoltrata all'Osservatorio che la invierà all'Ispettore fitosanitario responsabile E.Q. del territorio di competenza. Non si procede all' ispezione e campionamento di piante segnalate nella zona infetta Salento non ricadente nella zona infetta in cui si applicano misure di contenimento."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

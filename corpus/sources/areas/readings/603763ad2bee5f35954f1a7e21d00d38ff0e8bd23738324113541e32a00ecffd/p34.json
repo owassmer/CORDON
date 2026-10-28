@@ -1,0 +1,88 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 34,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "b1ace11c3db67928504750934d73145d9278d1a4abd785947292b804792525ea",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:28:16.547091+00:00",
+ "native_tables": [
+  {
+   "id": "p34-t1",
+   "bbox": [
+    78.0,
+    510.5,
+    517.5,
+    554.9
+   ]
+  }
+ ],
+ "native_cells": {
+  "p34-t1-r1-c1": {
+   "text": "L’Osservatorio sulla base delle risultanze dell’attività di monitoraggio e dei risultati delle analisi di",
+   "table": "p34-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    78.0,
+    510.5,
+    517.5,
+    525.1
+   ]
+  },
+  "p34-t1-r2-c1": {
+   "text": "laboratorio, con atto dirigenziale istituisce o aggiorna l’area delimitata ai sensi dell’art. 4 del Reg.",
+   "table": "p34-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    78.0,
+    525.1,
+    517.5,
+    540.5
+   ]
+  },
+  "p34-t1-r3-c1": {
+   "text": "UE 2020/1201 e s.m.i. avvalendosi di Innovapuglia per gli elaborati cartografici.",
+   "table": "p34-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    78.0,
+    540.5,
+    433.3,
+    554.9
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [
+   {
+    "native_table": "p34-t1",
+    "disposition": "not_annex_table",
+    "output_tables": [],
+    "cause": "This is a paragraph of prose text under heading 'ISTITUZIONE/AGGIORNAMENTO AREA DELIMITATA', not a table with provincia/comune/scope columns."
+   }
+  ],
+  "unattached": [
+   "Tralci lignificati idonei per il campionamento di vite",
+   "CONSEGNA CAMPIONI: I campioni devono essere consegnati ai laboratori nella stessa giornata del prelievo e devono essere trasportati in borse frigo con siberine.",
+   "La squadra di Assistenti fitosanitari consegna i campioni al personale ARIF appositamente incaricato del trasporto ai laboratori ufficiali.",
+   "I due Assistenti fitosanitari componenti la squadra e l’autista firmano il verbale di consegna digitalmente attraverso la App mobile.",
+   "Il personale autorizzato al trasporto attesta la consegna al laboratorio controfirmando il verbale digitalmente attraverso la App mobile.",
+   "ISTITUZIONE/AGGIORNAMENTO AREA DELIMITATA: L’Osservatorio sulla base delle risultanze dell’attività di monitoraggio e dei risultati delle analisi di laboratorio, con atto dirigenziale istituisce o aggiorna l’area delimitata ai sensi dell’art. 4 del Reg. UE 2020/1201 e s.m.i. avvalendosi di Innovapuglia per gli elaborati cartografici.",
+   "Successivamente all’emissione dell’atto, InnovaPuglia, trasmette gli elaborati cartografici in formato shapefile all’Osservatorio e ad ARIF, che provvede ad inserirli nell’App Xylella, in modo che le schede di rilevazione dell’App Xylella contengano sempre informazioni aggiornate."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

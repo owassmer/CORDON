@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 26,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "8a08c36b41ec973ca31c873eabc5accf9f54b7a0dda0974efe96a145b28dc5b4",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:03.005723+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Nelle aree delimitate e indenni, l'individuazione delle maglie da sottoporre a sorveglianza è effettuata da InnovaPuglia su indicazione dell'Osservatorio Fitosanitario.",
+   "Alle maglie in fase di caricamento su App Xylella, è assegnata l'area delimitata alla quale appartiene ed il livello di rischio. La maglia che ricade a cavallo di due aree delimitate viene assegnata all'area delimitata in cui ricade la superficie maggiore. Nel caso di una maglia che ricade a cavallo tra area indenne e area delimitata, la maglia viene assegnata all'area delimitata."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

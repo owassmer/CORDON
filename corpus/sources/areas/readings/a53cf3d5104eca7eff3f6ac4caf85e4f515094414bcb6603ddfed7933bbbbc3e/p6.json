@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+ "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+ "page": 6,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "b24efeb227a93c9ac68681f8da17e5554188361a27243a2509be7b975c8d4e32",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:29:02.184583+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Il presente Provvedimento è direttamente esecutivo.",
+   "Basato sulla proposta n. 181/DIR/2025/00167 dei sottoscrittori della proposta:",
+   "E.Q. \"Gestione dell'emergenza fitosanitaria Xylella fastidiosa pauca\" Francesco Palmisano",
+   "E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco",
+   "Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

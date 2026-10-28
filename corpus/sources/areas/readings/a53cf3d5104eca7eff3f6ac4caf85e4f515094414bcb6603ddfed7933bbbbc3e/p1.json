@@ -1,0 +1,28 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00163",
+ "act_sha256": "a53cf3d5104eca7eff3f6ac4caf85e4f515094414bcb6603ddfed7933bbbbc3e",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "948f619da11ebeca9e085938565f8d42fe46c98a9367128d2a99da7ab22b76e8",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:28:35.190104+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "Title: Individuazione di focolaio di Xylella fastidiosa sottospecie pauca in agro di Cagnano Varano (FG) – Istituzione dell'area delimitata ai sensi dell'art. 4 del Reg. UE 2020/1201 e s.m.i."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

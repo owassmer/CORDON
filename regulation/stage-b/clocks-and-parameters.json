@@ -11858,7 +11858,23 @@
       "aperture": "IN_APERTURE"
     },
     {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
+      "expression": "siano state immediatamente sottoposte a campionamento e ad analisi molecolare e che non",
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "case delta; its immediacy restates B-CLK-EU-7(1) and its 7-day publication belongs to seam 4.",
+      "aperture": "IN_APERTURE"
+    },
+    {
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
+      "expression": "pesco, albicocco, susino, qualora presenti nei 50 m attorno alla pianta infetta, in quanto specie non",
+      "disposition": "restates_parameter",
+      "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
+      "why": "restates the Article 4(2) floor this act adopts; the Union parameter is the single owner of the figure",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
       "expression": "pesco, albicocco, susino, qualora presenti nei 50 m attorno alla pianta infetta, in quanto specie non",
       "disposition": "restates_parameter",
       "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
@@ -11874,6 +11890,14 @@
       "aperture": "IN_APERTURE"
     },
     {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
+      "expression": "• stabilire che per gli ulivi con caratteristiche di monumentalità ricadenti nell’area di 50 m attorno alla",
+      "disposition": "restates_parameter",
+      "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
+      "why": "restates the Article 4(2) floor this act adopts; the Union parameter is the single owner of the figure",
+      "aperture": "IN_APERTURE"
+    },
+    {
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
       "expression": "delle piante ricadenti nei 50 m di cui al punto 3, con la seguente modalità:",
       "disposition": "restates_parameter",
@@ -11882,7 +11906,23 @@
       "aperture": "IN_APERTURE"
     },
     {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
+      "expression": "delle piante ricadenti nei 50 m di cui al punto 3, con la seguente modalità:",
+      "disposition": "restates_parameter",
+      "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
+      "why": "restates the Article 4(2) floor this act adopts; the Union parameter is the single owner of the figure",
+      "aperture": "IN_APERTURE"
+    },
+    {
       "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v1",
+      "expression": "○ estirpare la pianta infetta e le piante ricadenti nei 50 m di cui al punto 3, con mezzi meccanici, ad",
+      "disposition": "restates_parameter",
+      "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
+      "why": "restates the Article 4(2) floor this act adopts; the Union parameter is the single owner of the figure",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold:v2",
       "expression": "○ estirpare la pianta infetta e le piante ricadenti nei 50 m di cui al punto 3, con mezzi meccanici, ad",
       "disposition": "restates_parameter",
       "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
@@ -12425,7 +12465,23 @@
       "aperture": "IN_APERTURE"
     },
     {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v2",
+      "expression": "Di prescrivere successivamente l’estirpazione delle piante ricadenti nei 50 m, in quanto essendo il",
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "The later-prescription instruction belongs to the separately retained staged-article7-workload proposition, not this olive-nonmembership atom. It states no additional duration and does not discharge the outstanding Article 7 population.",
+      "aperture": "IN_APERTURE"
+    },
+    {
       "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v1",
+      "expression": "numerosi proprietari, non è tecnicamente possibile procedere alla loro estirpazione con immediatezza;",
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "The stated technical difficulty explains the staged prescription retained in the staged-article7-workload proposition. It supplies no new deadline or general permission to delay removal; this atom owns only the bounded olive-nonmembership rule.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00052:case-delta:st1-olive-nonmembership-boundary:v2",
       "expression": "numerosi proprietari, non è tecnicamente possibile procedere alla loro estirpazione con immediatezza;",
       "disposition": "not_a_clock",
       "ref": null,
@@ -13848,6 +13904,14 @@
       "aperture": "IN_APERTURE"
     },
     {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2025-00117:case-delta:st1-olive-nonmembership-boundary:v2",
+      "expression": null,
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "This atom bounds the ST1 specified-plant population: uninfected, asymptomatic olive is outside those limbs, while independently infected, symptomatic or suspected olive remains reachable under Article 7. It states no temporal or quantitative requirement.",
+      "aperture": "IN_APERTURE"
+    },
+    {
       "provision_version_id": "EU-2020-1201:6(2):v1",
       "expression": "no less than 1 km",
       "disposition": "restates_parameter",
@@ -15073,6 +15137,14 @@
       "ref": "B-PAR-DGR1075-T10-other-base-samples",
       "why": "Source-stated regional design quantity; C evaluates, D supplies the operative evidence.",
       "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "REG-PUGLIA-U181-DIR-2024-00018:case-delta:named-orders-50m-host-removal-withdrawn:v1",
+      "expression": "non si procederà all’estirpazione delle piante ospiti ricadenti nell’area di 50 m attorno alle piante",
+      "disposition": "restates_parameter",
+      "ref": "B-PAR-EU-4(2)-sub1-infected-zone-50m",
+      "why": "restates the Article 4(2) floor this act adopts; the Union parameter is the single owner of the figure",
+      "aperture": "IN_APERTURE"
     }
   ],
   "closure_manifest": [
@@ -15082,13 +15154,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-1.json",
-        "record_sha256": "eb25aa11f95d1d7aba4d3b67a5b4d358fabd9121846dc0b79be08ec2aef46ecc"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-1.json",
+        "record_sha256": "94a2e918609256e8aab17dc817bd675e419c7ef8606bd3a95f37f7bfa182f53e"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "21b7ac449591090dbb85f6bf599634356137ab3ac6465e5024445dbb74c70f85"
+      "accepted_content_sha256": "4ae90a18a87861ea7c66591c70551bd0a8033ffe4d061a81d4fe417f0ae3de85"
     },
     {
       "seam": 2,
@@ -15096,13 +15168,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-2.json",
-        "record_sha256": "dff3a08a2a89c431d2cc24d4a00445300bb10f2fe4e59af1eb60928e4e165f10"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-2.json",
+        "record_sha256": "3101913da5e7c48aa30a322f9ffc37ac1cd7b3a69958490094d9627e73b705fc"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "de8f9c95469879f2c0264c41f986e8691b3607bc134915e814c08903d7e66133"
+      "accepted_content_sha256": "cbe0eaedf57762729b4f60e5cd3ac91a52ce5f11f1d0b567390a5ada88729a9e"
     },
     {
       "seam": 3,
@@ -15110,13 +15182,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-3.json",
-        "record_sha256": "d736381b5ff57a9846d4a339e08aee48f0fac878c319f91922dd9aa27926ef02"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-3.json",
+        "record_sha256": "6286a1cfd649a1462320bb5fbf4fb195a57eb5af7ff8d89a990498c147a74dc6"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "62976befd8b80d60d7912213b4c1d5997677005b21e32d615a4bb9a44ec94c32"
+      "accepted_content_sha256": "5d437827ad66f2e08b0018814c89fadc4d0faf045297aa0b5a9884fd28a7a3da"
     },
     {
       "seam": 4,
@@ -15124,13 +15196,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#32 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr32-seam-4.json",
-        "record_sha256": "71c93f534b04f6ee82118a353135bba0a04b5baa00ce72c74f2fefef435fbc12"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-4.json",
+        "record_sha256": "2d16631696cf1d02a94781f5493764064e81bfd08e2c88ffbb571986f4895d06"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "16e478bb99cacd4b951e31f360cc6901b7e417f0397b634279cae8e27a5b21ae"
+      "accepted_content_sha256": "74b37798c5beb05ca5b4371d87dbab76d45cc97fb455c3d123246b8e57644696"
     }
   ]
 }

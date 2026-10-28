@@ -1483,7 +1483,11 @@ class OwnerRulings20260924(unittest.TestCase):
                          "REG-PUGLIA-U181-DIR-2022-00004:case-delta:piana-alternative-election-conflict",
                          "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold"):
             row = self.s.version(identity, at)
-            self.assertIn(conjunct, row["condition_ast"]["all_of"])
+            # PR #35: the DDS 45/2023 hold's v2 carries the conjunct in each whole-or-part route.
+            ast = row["condition_ast"]
+            for conjuncts in ([r["when"]["all_of"] for r in ast["route_table"]] if "route_table" in ast
+                              else [ast["all_of"]]):
+                self.assertIn(conjunct, conjuncts)
             vid = row["provision_version_id"]
             # Every other conjunct holds, so the row's truth is the characteristics conjunct's.
             others = {(vid, p): True for p in leaves(row["condition_ast"]) if p != self.FINDING}

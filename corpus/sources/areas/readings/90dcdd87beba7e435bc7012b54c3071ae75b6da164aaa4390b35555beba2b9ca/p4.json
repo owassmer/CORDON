@@ -1,0 +1,32 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+ "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "351bcf9f324e4bbdbdc3320e610fa30ab1d77e561d566f3593c35e3e78f1283d",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:18:26.218998+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "applicare all'area delimitata di Canosa la deroga di cui al comma 1 dell'art. 5 del Reg. UE 2020/1201 riducendo la zona cuscinetto a una larghezza non inferiore a 1 km;",
+   "rappresentare con l'Allegato 1, parte integrante del presente atto, i limiti geografici territoriali delle zone \"infette\" e \"cuscinetto\" dell'area delimitata di Canosa;",
+   "confermare le aree delimitate di Monopoli, Polignano e Salento di cui alla DDS 35 del 29/04/2021;",
+   "aggiornare con il presente atto la delimitazione delle aree alla Xylella fastidiosa subspecie pauca ST53, come definita dal comma 2 dell'art. 4 del Reg (UE) 2020/1201, come rappresentate nell'allegato 1 bis parte integrante del presente atto;",
+   "stabilire che le misure fitosanitarie obbligatorie prescritte dall'Osservatorio Fitosanitario, si applicano a tutte le particelle catastali che rientrano anche parzialmente nell'area delimitata di Canosa;"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

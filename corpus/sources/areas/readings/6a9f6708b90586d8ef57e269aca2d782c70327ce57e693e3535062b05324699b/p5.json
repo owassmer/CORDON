@@ -1,0 +1,28 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00059",
+ "act_sha256": "6a9f6708b90586d8ef57e269aca2d782c70327ce57e693e3535062b05324699b",
+ "page": 5,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "985e4ce7e4e8657ea72ecf9ea584097b1d4de2b8fdd95f81e15d3fb551b57c14",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:58.437321+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "sottospecie pauca deve istituire un'area delimitata, ai sensi dell'articolo  del Reg. (UE) 2020/1201."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

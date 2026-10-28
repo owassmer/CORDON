@@ -173,12 +173,18 @@ def origin(response, instruments):
 
 
 def stated_changes(response, instruments, path):
-    """The operative changes the act states, one per named act; a recital restates, it changes nothing."""
+    """The operative changes the act states, one per named act; a recital restates, it changes nothing.
+
+    Each change carries `adopted`, the stating act's adoption date as its reading's identity
+    prints it (None when unreadable); a change counts only from that date (`order_dueness`).
+    """
     source = origin(response, instruments)
+    adopted = response['reading']['identity'].get('adopted')
     for item in response['reading']['relationships']:
         if item['part'] != 'operative':
             continue
-        yield dict({'from': source}, target=act_id(re.sub(r'\D', '', item['number']), item['year']),
+        yield dict({'from': source}, adopted=adopted,
+                   target=act_id(re.sub(r'\D', '', item['number']), item['year']),
                    relationship=item['relationship'], extent=item['extent'],
                    affected_payload=item['affected_payload'], date_words=item['date_words'],
                    source=response['request']['sources'][0], path=path, request_sha256=response['request_sha256'],

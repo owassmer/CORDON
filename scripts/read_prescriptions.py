@@ -18,8 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'regulation/stage-c'), str(ROOT / 'regulation/stage-d')]
 
 from cordon_c.core import MissingInput, Snapshot  # noqa: E402
-from cordon_d.case_prescriptions import (apply_references, c_result, read_prescription,  # noqa: E402
-                                         stated_limits)
+from cordon_d import annex_positions  # noqa: E402
+from cordon_d.case_prescriptions import (annex_position, apply_references, c_result,  # noqa: E402
+                                         read_prescription, stated_limits)
 from cordon_d.removal_events import act_id  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
@@ -140,7 +141,7 @@ def stated_changes(results):
             target = act_id(re.sub(r'\D', '', item['number']), item['year'])
             if target != origin:
                 changes.setdefault(target, []).append(dict(
-                    {'from': origin}, relationship=item['relationship'],
+                    {'from': origin}, adopted=source.get('adopted'), relationship=item['relationship'],
                     affected_payload=item['affected_payload'], source=entry['source']))
     return changes
 
@@ -188,31 +189,49 @@ def held_act_changes(results, snapshot, store, options):
 
 
 def summary(evaluation):
-    return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs))
+    """C's result as written: truth, effect, needs, and the provisions it rests on (the row that limits
+    a direction to part of its population is among them)."""
+    return dict(truth=evaluation.truth, effect=evaluation.effect, needs=sorted(evaluation.needs),
+                provisions=sorted(evaluation.provisions))
+
+
+def position_results(snapshot, record, today):
+    """The governing rows' results for a record at an annex position, per (row, predicate)."""
+    return annex_positions.governing_results(snapshot, record, today, annex_position(record))
+
+
+# The join from a supplied record to an annex position is re-planned as its own unit, PR #40.
+UNJOINED = 'the join from a supplied record to an annex position is planned in PR #40'
 
 
 def per_recipient(results, supplied, snapshot, today, closures, changes):
     """C per (clause, recipient a supplied record names), attached to each clause record beside its cohort `c`.
 
     Supplied records are grouped by the order they name; each clause record of that
-    order gets `per_recipient` and `per_recipient_reported`. Returns what reached no
-    held order.
+    order gets `per_recipient` and `per_recipient_reported`. The join from a supplied
+    record to an annex position is not built here (planned in PR #40): at a clause emitted per
+    annex position (PR #35) each supplied record of the order is `unattached` with
+    that cause, and no position record gets a per-recipient result. Returns what
+    reached no held order, and what attached to no position.
     """
     from zoneinfo import ZoneInfo
     from cordon_d.calendar import national_calendar
-    from cordon_d.case_prescriptions import recipient_results
+    from cordon_d.case_prescriptions import recipient_results, supplied_records
     zone, calendar = ZoneInfo('Europe/Rome'), national_calendar()
     evaluated_at = datetime.now(zone)
     by_order = {}
     for item in supplied:
         by_order.setdefault(item.get('order'), []).append(item)
-    reached = set()
+    reached, positioned, unattached = set(), {}, []
     for entry in results:
         for record in entry.get('records', ()):
             act = record.get('applied_by') or record['instrument']
             if act not in by_order or record['stated_term'] is None:
                 continue
             reached.add(act)
+            if annex_position(record) is not None:
+                positioned.setdefault((act, record['occurrence'].split(':annex ')[0]), []).append(record)
+                continue
             try:
                 run = recipient_results(snapshot, record, today, by_order[act], evaluated_at=evaluated_at, zone=zone,
                                         calendar=calendar, closures=closures.get(record['instrument'], ()),
@@ -225,7 +244,15 @@ def per_recipient(results, supplied, snapshot, today, closures, changes):
                                               'c': summary(item['result'])}
                                        for name, item in run['recipients'].items()}
             record['per_recipient_reported'] = run['reported']
-    return dict(evaluated_at=evaluated_at.isoformat(),
+    for (act, clause), records in positioned.items():
+        try:
+            supplied_records(by_order[act])
+        except Exception as error:  # a refused record set is reported whole, never partly applied
+            for record in records:
+                record['per_recipient_cause'] = f'{type(error).__name__}: {error}'[:600]
+            continue
+        unattached += [dict(record=i.get('record'), order=act, clause=clause, cause=UNJOINED) for i in by_order[act]]
+    return dict(evaluated_at=evaluated_at.isoformat(), unattached=unattached,
                 unreached=[dict(record=i.get('record'), order=order, cause='names no held order with a stated term')
                            for order, items in by_order.items() if order not in reached for i in items])
 
@@ -277,7 +304,11 @@ def read_one(item, options, today):
         except MissingInput as error:
             entry['records_cause'] = str(error)
             records = []
-        entry['records'] = [dict(record, c=summary(c_result(snapshot, record, today))) for record in records]
+        # An order an in-force row names with a whole-or-part effect: one record per clause and annex position.
+        records = [r for record in records for r in annex_positions.expand(record, snapshot, today, store)]
+        entry['records'] = [dict(record, c=summary(c_result(
+            snapshot, record, today, governing_results=position_results(snapshot, record, today))))
+            for record in records]
     except FileNotFoundError:
         entry['cause'] = 'no retained reading'
     except Exception as error:  # a failed read is an execution failure, not source silence
@@ -360,7 +391,9 @@ def main():
                                  c=summary(c_result(
                                      snapshot, composed[r['occurrence']], today,
                                      closures=closures.get(composed[r['occurrence']]['instrument'], ()),
-                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()))))
+                                     stated_changes=changes.get(composed[r['occurrence']]['instrument'], ()),
+                                     governing_results=position_results(snapshot, composed[r['occurrence']],
+                                                                        today))))
                             for r in entry.get('records', ())]
     results.append(dict(held_acts=held_report))
     if arguments.records:

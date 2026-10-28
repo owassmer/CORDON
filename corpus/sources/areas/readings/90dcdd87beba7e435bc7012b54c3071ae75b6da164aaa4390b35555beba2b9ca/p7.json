@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2021-00069",
+ "act_sha256": "90dcdd87beba7e435bc7012b54c3071ae75b6da164aaa4390b35555beba2b9ca",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "50dde1245a6bbf69230569b1e5d73fe7173fe8050cc51e99285b333fe8cbf9d6",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:18:40.094091+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1bis",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO",
+   "Legenda: Confini comunali, Confini provinciali, Zona Infetta, Zona Cuscinetto, Zona Contenimento",
+   "Il DIRIGENTE DELLA SEZIONE DOTT. SALVATORE INFANTINO"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

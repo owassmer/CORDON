@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2024-00091",
+ "act_sha256": "238f8de145952499764f3dd0faafc221b3857d7952fda9e1fde812c157d7cfc6",
+ "page": 4,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "fd8706fcd219a9e847551eed8b6cce9e5fe8cd70d44713c5db3f4f9e6dd4109e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:24:05.686354+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATI INTEGRANTI table (Documento - Impronta (SHA256)) listing ALLEGATO1_merged.pdf hash - not a cadastral annex table.",
+   "Il presente atto ... è composto da n 6.(sei) facciate e dagli allegati: 1 - 1bis - 2, composti rispettivamente da 1 facciata",
+   "Basato sulla proposta n. 181/DIR/2024/00100 dei sottoscrittori della proposta: E.Q.\"Programmazione e gestione fitosanitaria\" Anna Percoco; Firmato digitalmente da: Il Dirigente della Sezione Osservatorio Fitosanitario Salvatore Infantino"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

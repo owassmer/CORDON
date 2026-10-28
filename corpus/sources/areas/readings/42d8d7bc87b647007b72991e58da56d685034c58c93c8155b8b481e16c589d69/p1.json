@@ -1,0 +1,26 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+ "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+ "page": 1,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "b96e88d002e2fa0b0b885718b780d89b1b9120d7f601aab6e36195b051068107",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:29:21.827723+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

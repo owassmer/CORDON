@@ -1,0 +1,30 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2026-00112",
+ "act_sha256": "a27ac6985f72c0c4920cfdf4c3a3b57a2848244c22e2619898bd8a94875c11df",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "0b02c32e45c64f625e4c2aa67ca20d324302e8502d0d414ecba827ddd60f924e",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:34:22.103989+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Area Delimitata XF sub. pauca (Modugno) - Zona Cuscinetto; Area Delimitata XF sub. pauca (Modugno) - Zona Infetta; Confini Comunali; Confini Provinciali"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

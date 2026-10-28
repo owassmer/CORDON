@@ -3,8 +3,9 @@
 One record is one removal prescription an order's operative part addresses to its
 recipients: the instrument, recipients or cohort, the stated commencement term as
 printed, the commencement and coercive populations, the executor, the stated
-consequence and the governing A references. Positions listed in annexes are not
-read here.
+consequence and the governing A references. Positions listed in annexes are read
+by `annex_positions`, only for the orders an in-force governing row names with a
+whole-or-part effect; a record placed there carries its position in `recipients`.
 """
 from dataclasses import dataclass
 from datetime import date, datetime, time
@@ -13,7 +14,7 @@ import re
 
 from cordon_c.core import Evaluation, MissingInput, evaluate
 from .document_subscription import read_native_text, read_retained
-from .prescriptions import lawfully_due
+from .prescriptions import COERCE, WORK, lawfully_due
 from .removal_events import act_id
 from .store import blob_path
 
@@ -22,8 +23,6 @@ CLOCK = 'B-CLK-IT-L241-21TER-stated-commencement-term'
 CLAUSE = ('the operative prescription governing this recipient states in its operative part a commencement '
           'term running from notification and commits the Osservatorio to direct coercive removal on '
           'noncommencement')
-WORK = 'the commencement work the prescription states is lawfully due from this recipient'
-COERCE = 'removal of the population the prescription names for coercion is lawfully due'
 # The Art. 21-ter notice conjunct is any_of(this Art. 21-bis communication predicate, the mass-publicity row).
 COMMUNICATED = ('the communication to that recipient has been effected, including in the forms prescribed for '
                 'notification to the unreachable in the cases provided by the code of civil procedure')
@@ -397,7 +396,9 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
 
     A held act that states it corrects, replaces, revokes, suspends or withdraws the
     order, as a whole or in part, and that no A row records, leaves the reading unknown
-    and names that act and the words stating what changes. Returns
+    and names that act and the words stating what changes. A stated change counts only
+    from its stating act's adoption (`adopted`, as the act's reading prints it); one
+    whose act has no readable adoption date counts on every date. Returns
     (work, coercion), each a bool or an unknown Evaluation.
     """
     if record['part'] != 'operative' or not record['prescribed_scope']:
@@ -425,6 +426,8 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
             needs.add(f"whether this recipient is within the scope {name} annuls: {reach}{applicants}")
     recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
     for change in stated_changes:
+        if change.get('adopted') and at < date.fromisoformat(change['adopted']):
+            continue
         if change['relationship'] in WITHHOLDING and change['from'] not in recorded:
             extent = ' (in part)' if change.get('extent') == 'part' else ''
             needs.add(f"an A row for {change['from']}'s stated {change['relationship']}{extent} of "
@@ -433,6 +436,13 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
         unknown = Evaluation(None, needs=frozenset(needs))
         return unknown, (unknown if record['coercive_population'] else None)
     return True, (True if record['coercive_population'] else None)
+
+
+def annex_position(record):
+    """The annex position a record carries in its recipient positions field (`annex_positions`), or None
+    when its recipients are only the order's printed recipient class."""
+    positions = [r for r in record.get('recipients') or () if isinstance(r, dict) and r.get('annex')]
+    return positions[0] if len(positions) == 1 else None
 
 
 def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluated_at=None, commencements=None,
@@ -446,8 +456,12 @@ def c_result(snapshot, record, at, *, notice=None, notice_instants=None, evaluat
     `notice_instants` each branch's instant; C's `notice_instant` picks the
     earliest instant among the branches A finds true. Lawful dueness is the
     order's own reading (`order_dueness`) unless the caller supplies one, held to
-    the governing A rows by `lawfully_due`. Nothing absent is supplied: no notice
-    or commencement evidence means C's own unknown and its needs.
+    the governing A rows by `lawfully_due` per predicate: `governing_results` is
+    keyed by (row, predicate), and whether the record carries an annex position
+    (`annex_position`) is passed. The order's own stated reading (a court closure or a
+    stated change) replaces only a True from `lawfully_due`: every such outcome only
+    withholds, so a False keeps its row provisions (SPEC). Nothing absent is supplied:
+    no notice or commencement evidence means C's own unknown and its needs.
     """
     facts, _ = _c_facts(snapshot, record, at, notice=notice, notice_instants=notice_instants,
                         evaluated_at=evaluated_at, commencements=commencements,
@@ -474,10 +488,12 @@ def _c_facts(snapshot, record, at, *, notice, notice_instants, evaluated_at, com
         stated = reading if isinstance(reading, Evaluation) else None
         due = lawfully_due(snapshot, at, instrument=record['instrument'],
                            governing_references=record['governing_A_references'],
-                           results=governing_results or {}, reading=True if stated is not None else reading)
-        if stated is not None and due.truth is not None:
+                           results=governing_results or {}, reading=True if stated is not None else reading,
+                           predicate=predicate, positioned=annex_position(record) is not None,
+                           cohort=record.get('cohort') or ())
+        if stated is not None and due.truth is True:
             due = stated
-        elif stated is not None:
+        elif stated is not None and due.truth is None:
             due = Evaluation(None, needs=due.needs | stated.needs)
         if due.truth is not None or due.needs:
             facts[(vid, predicate)] = due
@@ -577,6 +593,10 @@ def recipient_results(snapshot, record, at, supplied, *, evaluated_at, zone, cal
     zone and calendar. A history stated as complete through a moment later than the
     evaluation is refused. Nothing absent is filled: what cannot be joined or
     supplied is reported. A recipient reached only by posting has no result here.
+
+    The join from a supplied record to an annex position is not built here (planned in PR #40):
+    the caller passes no record of an order it emits per position, and reports each
+    unattached (`read_prescriptions.per_recipient`).
     """
     from cordon_c.quantities import clock_boundary
     from cordon_c.temporal import end_of_day, utc

@@ -1,0 +1,346 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00113",
+ "act_sha256": "fcf42291166d64c221837aef4d6aedbc3ca72e62a1735e265dc71b2f14b1acd1",
+ "page": 8,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "2fbdc446130bfc61f2a166e9dbb3b50f6022433226f053a87fb1e010ea7278b6",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:32:05.878805+00:00",
+ "native_tables": [
+  {
+   "id": "p8-t1",
+   "bbox": [
+    100.8,
+    151.5,
+    494.5,
+    184.4
+   ]
+  },
+  {
+   "id": "p8-t2",
+   "bbox": [
+    100.8,
+    192.2,
+    494.5,
+    268.9
+   ]
+  }
+ ],
+ "native_cells": {
+  "p8-t1-r1-c1": {
+   "text": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Bisceglie - ZONA INFETTA",
+   "table": "p8-t1",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    151.5,
+    494.5,
+    161.9
+   ]
+  },
+  "p8-t1-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p8-t1",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    161.9,
+    166.4,
+    169.3
+   ]
+  },
+  "p8-t1-r2-c2": {
+   "text": "COMUNE",
+   "table": "p8-t1",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    166.4,
+    161.9,
+    270.9,
+    169.3
+   ]
+  },
+  "p8-t1-r2-c3": {
+   "text": "FOGLI DI MAPPA PARZIALMENTE RICADENTI NELLA ZONA INFETTA",
+   "table": "p8-t1",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    270.9,
+    161.9,
+    494.5,
+    169.3
+   ]
+  },
+  "p8-t1-r3-c1": {
+   "text": "BT",
+   "table": "p8-t1",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    169.3,
+    166.4,
+    184.4
+   ]
+  },
+  "p8-t1-r3-c2": {
+   "text": "BISCEGLIE",
+   "table": "p8-t1",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    166.4,
+    169.3,
+    270.9,
+    184.4
+   ]
+  },
+  "p8-t1-r3-c3": {
+   "text": "FOGLI 41, 46",
+   "table": "p8-t1",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    270.9,
+    169.3,
+    494.5,
+    184.4
+   ]
+  },
+  "p8-t2-r1-c1": {
+   "text": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Bisceglie - ZONA CUSCINETTO",
+   "table": "p8-t2",
+   "row": 1,
+   "column": 1,
+   "bbox": [
+    100.8,
+    192.2,
+    494.5,
+    202.6
+   ]
+  },
+  "p8-t2-r2-c1": {
+   "text": "PROVINCIA",
+   "table": "p8-t2",
+   "row": 2,
+   "column": 1,
+   "bbox": [
+    100.8,
+    202.6,
+    166.4,
+    224.7
+   ]
+  },
+  "p8-t2-r2-c2": {
+   "text": "COMUNE",
+   "table": "p8-t2",
+   "row": 2,
+   "column": 2,
+   "bbox": [
+    166.4,
+    202.6,
+    270.9,
+    224.7
+   ]
+  },
+  "p8-t2-r2-c3": {
+   "text": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA\nINFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE\nCONTENUTO",
+   "table": "p8-t2",
+   "row": 2,
+   "column": 3,
+   "bbox": [
+    270.9,
+    202.6,
+    494.5,
+    224.7
+   ]
+  },
+  "p8-t2-r3-c1": {
+   "text": "BT",
+   "table": "p8-t2",
+   "row": 3,
+   "column": 1,
+   "bbox": [
+    100.8,
+    224.7,
+    166.4,
+    268.9
+   ]
+  },
+  "p8-t2-r3-c2": {
+   "text": "BISCEGLIE",
+   "table": "p8-t2",
+   "row": 3,
+   "column": 2,
+   "bbox": [
+    166.4,
+    224.7,
+    270.9,
+    268.9
+   ]
+  },
+  "p8-t2-r3-c3": {
+   "text": "FOGLI 26, 27, 32, 33*, 34, 35, 38, 39*, 40*, 41, 42, 43, 44, 45*, 46, 47*, 48, 49, 51,\n52, 53*, 54*, 55, 56, 57, 58, 59, 60",
+   "table": "p8-t2",
+   "row": 3,
+   "column": 3,
+   "bbox": [
+    270.9,
+    224.7,
+    494.5,
+    268.9
+   ]
+  }
+ },
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 2,
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Bisceglie - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NELLA ZONA INFETTA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p8-t1-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p8-t1-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p8-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Bisceglie - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "native_cell": "p8-t2-r3-c1"
+      },
+      "comune": {
+       "native_cell": "p8-t2-r3-c2"
+      },
+      "scope": {
+       "native_cell": "p8-t2-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ],
+  "native_tables_accounted": [
+   {
+    "native_table": "p8-t1",
+    "disposition": "represented",
+    "output_tables": [
+     1
+    ],
+    "cause": null
+   },
+   {
+    "native_table": "p8-t2",
+    "disposition": "represented",
+    "output_tables": [
+     2
+    ],
+    "cause": null
+   }
+  ],
+  "unattached": [
+   "53874",
+   "Bollettino Ufficiale della Regione Puglia - n. 53 del 3-7-2025",
+   "ALLEGATO 2",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N.1 FOGLIO",
+   "IL DIRIGENTE DELLA SEZIONE",
+   "3"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": [
+   {
+    "index": 1,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Bisceglie - ZONA INFETTA",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": null,
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA PARZIALMENTE RICADENTI NELLA ZONA INFETTA"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BT",
+       "copied_from": "p8-t1-r3-c1"
+      },
+      "comune": {
+       "text": "BISCEGLIE",
+       "copied_from": "p8-t1-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLI 41, 46",
+       "copied_from": "p8-t1-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   },
+   {
+    "index": 2,
+    "caption_verbatim": "XYLELLA FASTIDIOSA SOTTOSPECIE PAUCA - Bisceglie - ZONA CUSCINETTO",
+    "caption_position": "inside the table first row",
+    "qualification_verbatim": "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO",
+    "column_headings_verbatim": [
+     "PROVINCIA",
+     "COMUNE",
+     "FOGLI DI MAPPA RICADENTI NEL BUFFER DI 2.500 METRI DALLA ZONA INFETTA. IL SIMBOLO * INDICA CHE IL FOGLIO E' INTERAMENTE CONTENUTO"
+    ],
+    "rows": [
+     {
+      "provincia": {
+       "text": "BT",
+       "copied_from": "p8-t2-r3-c1"
+      },
+      "comune": {
+       "text": "BISCEGLIE",
+       "copied_from": "p8-t2-r3-c2"
+      },
+      "scope": {
+       "text": "FOGLI 26, 27, 32, 33*, 34, 35, 38, 39*, 40*, 41, 42, 43, 44, 45*, 46, 47*, 48, 49, 51,\n52, 53*, 54*, 55, 56, 57, 58, 59, 60",
+       "copied_from": "p8-t2-r3-c3"
+      },
+      "note": null
+     }
+    ]
+   }
+  ]
+ },
+ "resolution_problems": []
+}

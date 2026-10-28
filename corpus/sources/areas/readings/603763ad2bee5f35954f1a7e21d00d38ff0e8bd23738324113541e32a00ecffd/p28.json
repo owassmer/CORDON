@@ -1,0 +1,33 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 28,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f30f724b97551323f23c892078201fbcdf898894549e92d50e4e5228265c7572",
+ "prompt_sha256": "0b292643005cc2f1",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T15:28:05.973070+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ne della pianta in campo mediante coordinate geografiche, la tracciabilità tra il campione prelevato, il risultato delle relative analisi di laboratorio e l'estirpazione della pianta se risultata infetta.",
+   "La \"scheda tecnica campione\" deve essere compilata in maniera puntuale e non approssimativa in tutti i campi, ponendo particolare attenzione a: georeferenziare le piante con estrema precisione, ponendosi sull'estremità della chioma dell'albero al fine di consentire un buon ricevimento del segnale satellitare",
+   "indicare nella colonna \"SINTOMO\" la presenza o assenza di sintomi",
+   "specificare nella colonna \" TIPO DI SINTOMO\": ascrivibile a Xylella e specificare se sono disseccamenti o bruscature; altro e specificare di cosa si tratta, es. rogna, oppure da altri patogeni",
+   "se si tratta di olivo monumentale indicare nella colonna \"MONUMENTALE\" e inserire il numero di targa se presente.",
+   "VITE - nel caso specifico del campionamento in un vigneto, la scheda deve contenere anche i seguenti dati, che devono essere accuratamente compilati dall'assistente fitosanitario: vigneto da tavola; vigneto da vino; varietà; sesto di impianto; stato colturale; forma di allevamento."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

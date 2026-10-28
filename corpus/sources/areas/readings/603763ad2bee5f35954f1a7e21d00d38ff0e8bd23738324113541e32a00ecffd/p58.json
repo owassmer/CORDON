@@ -1,0 +1,29 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00045",
+ "act_sha256": "603763ad2bee5f35954f1a7e21d00d38ff0e8bd23738324113541e32a00ecffd",
+ "page": 58,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "f3e2ac81491f84c594c3a9f72df0f8743d197df73bb468e002dc2ef3937221c9",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:25:50.894173+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "In caso di accesso negato ai luoghi di estirpazione o di impedimento all’estirpazione (documentati e verbalizzati), ARIF informa il Prefetto e richiede l'ausilio della forza pubblica per l’esecuzione delle operazioni di rimozione forzosa delle piante, addebita gli oneri di estirpazione al proprietario.",
+   "L’Osservatorio provvede alla contestazione al proprietario della violazione amministrativa per mancata esecuzione delle prescrizioni fitosanitarie ai sensi del D.lgs 19/2021."
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}

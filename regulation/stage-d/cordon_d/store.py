@@ -1,9 +1,16 @@
-"""Content-addressed store for source bytes, and the regenerable layer beside them.
+"""Content-addressed store for source bytes, the model readings of them, and caches.
 
-Source bytes are the only irreplaceable data. A blob is named by its SHA-256,
-written once through a temporary name, and never rewritten. Everything under
-`derived/` is a cache keyed by the blob and the reader version; it owns nothing
-and can be deleted and rebuilt at any time.
+Two kinds of data here are irreplaceable, and both are replicated to R2 on every
+branch push (`scripts/replicate_store.py`):
+
+- source bytes: a blob is named by its SHA-256, written once through a temporary
+  name, and never rewritten;
+- every reading that cannot be rebuilt without a model call: a model's answer
+  costs subscription time to repeat, and a repeat can read differently.
+
+The rest of `derived/` is a cache a reader rebuilds from blobs and the tree
+alone; those folders are named in `REGENERABLE`. A folder not named there is
+kept, so a new reader's readings are kept until shown to be regenerable.
 """
 from hashlib import sha256
 import json
@@ -102,6 +109,77 @@ def derived_path(store: Path, dataset: str, digest: str, version: str) -> Path:
 def write_derived(target: Path, table) -> None:
     import pyarrow.parquet as parquet
     _place(target, lambda temporary: parquet.write_table(table, temporary, compression='zstd'))
+
+
+# Folders under `derived/` that a reader rebuilds from blobs and the tree with no
+# model call. Everything else under `derived/` is kept and replicated.
+REGENERABLE = (
+    'monitoring',                   # monitoring occurrences, readings and groups (Parquet)
+    'source_associations',          # native-table caches of retained sources
+    'protected-status',             # row 9 rows, read from the register and list acts
+    'areas/cadastral-fix-errors',   # measurements from held fixes
+    'areas/region-layer-samples',
+    'areas/row1-positives',
+)
+# Files a writer is still writing or locking; never replicated or restored.
+TRANSIENT = ('*.tmp', '*.lock', '.tmp-*', '.DS_Store')
+
+
+def _transient(name: str) -> bool:
+    from fnmatch import fnmatch
+    return any(fnmatch(name, pattern) for pattern in TRANSIENT)
+
+
+def kept(store: Path):
+    """Every kept file, relative to the store: blobs, and derived files outside `REGENERABLE`."""
+    store = Path(store)
+    for top in ('blobs', 'derived'):
+        root = store / top
+        if not root.is_dir():
+            continue
+        for path in sorted(root.rglob('*')):
+            if not path.is_file() or _transient(path.name):
+                continue
+            relative = path.relative_to(store)
+            inside = relative.relative_to('derived').as_posix() if top == 'derived' else None
+            if inside is not None and any(inside == r or inside.startswith(r + '/') for r in REGENERABLE):
+                continue
+            yield relative
+
+
+def kept_problems(store: Path, only=None):
+    """Kept readings that are not whole or do not match their own name; blobs are audited by `audit`.
+
+    `only`, when given, limits the check to those relative paths (the files about to be sent).
+
+    A document reading names its request, an assembled report its source and extraction
+    version, and a relationship reading its source and reading version; each is checked
+    against where it sits. Any other kept reading must at least be complete JSON.
+    """
+    import json
+    from hashlib import sha256
+    store = Path(store)
+    for relative in (sorted(Path(r) for r in only) if only is not None else kept(store)):
+        parts = relative.parts
+        if parts[0] != 'derived' or relative.suffix != '.json':
+            continue
+        path = store / relative
+        try:
+            value = json.loads(path.read_text())
+        except (OSError, ValueError) as error:
+            yield relative, f'not whole JSON: {error}'
+            continue
+        if parts[1] == 'document-readings':
+            request = value.get('request') if isinstance(value, dict) else None
+            if (value.get('request_sha256') != path.stem or request is None
+                    or sha256(json.dumps(request, sort_keys=True).encode()).hexdigest() != path.stem):
+                yield relative, 'its request does not hash to its name'
+        elif parts[1] == 'reports' and len(parts) == 5 and parts[4] == 'report.json':
+            if value.get('source_sha256') != parts[3] or value.get('extraction_version') != parts[2]:
+                yield relative, 'its source or extraction version is not where it sits'
+        elif parts[1] == 'reports' and len(parts) == 5 and parts[2] == 'relationships':
+            if value.get('source_sha256') != Path(parts[4]).stem or value.get('reading_version') != parts[3]:
+                yield relative, 'its source or reading version is not where it sits'
 
 
 def audit(store: Path):

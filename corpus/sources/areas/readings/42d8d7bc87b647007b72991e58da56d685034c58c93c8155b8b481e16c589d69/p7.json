@@ -1,0 +1,31 @@
+{
+ "instrument_id": "REG-PUGLIA-U181-DIR-2025-00236",
+ "act_sha256": "42d8d7bc87b647007b72991e58da56d685034c58c93c8155b8b481e16c589d69",
+ "page": 7,
+ "model": "claude-sonnet-5",
+ "effort": "medium",
+ "dpi": 200,
+ "request_sha256": "0875d2c8ee7bbf937c76b5bbc0ee643aa8e91b9f761bfc93fba82a66f485fdbf",
+ "prompt_sha256": "96c1cbca3616a807",
+ "schema_sha256": "990fa3e2958327e6",
+ "captured_at": "2026-09-14T19:30:05.127930+00:00",
+ "native_tables": [],
+ "native_cells": {},
+ "stop_reason": "tool_use",
+ "reading": {
+  "tables_visible": 0,
+  "tables": [],
+  "native_tables_accounted": [],
+  "unattached": [
+   "ALLEGATO 1 (map title)",
+   "IL PRESENTE ALLEGATO E' COMPOSTO DA N. 1 FOGLIO - IL DIRIGENTE DI SEZIONE DOTT. SALVATORE INFANTINO",
+   "Legenda: Area Delimitata X.F. sub. fastidiosa - Zona Cuscinetto; Area Delimitata X.F. sub. fastidiosa - Zona Infetta; Confini Comunali; Confini Provinciali",
+   "Map labels: Prov. BA, Mola di Bari, Rutigliano, Noicattaro, Triggiano, Capurso, Cellamare, Casamassima, Valenzano, Adelfia, Bari, Bitritto"
+  ],
+  "uncertain": []
+ },
+ "resolved": {
+  "tables": []
+ },
+ "resolution_problems": []
+}
