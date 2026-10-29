@@ -135,6 +135,12 @@
             ]
           },
           {
+            "callable": "cordon_d.protection.named_rows",
+            "parameters": [
+              "evaluated_at"
+            ]
+          },
+          {
             "callable": "cordon_d.annex_positions.expand",
             "parameters": [
               "at"
@@ -575,7 +581,7 @@
       "fields": [
         "the tree's own list entry: its provisional approval act and first BURP publication date, its definitive approval act and BURP republication date, and its deletion act and date",
         "the positional qualification of the entry's point: its survey batch, that batch's horizontal error against the ground in EPSG:32633 with its statistic, fix count, card form and method, or the register-wide bound labelled as such, the reference fixes' own error, the date and the sources (the rule: SPEC.md, Protected status)",
-        "the candidate entries of an affected plant or zone negative: \"not a register tree\" always and every entry within d, with d printed, the identity or the cause it stays unknown, and each code the plant's note prints with the entry it names or the cause it names none (the rule: SPEC.md, Protected status)",
+        "the candidate entries of an affected plant or zone negative: \"not a register tree\" always and every entry within d, with d printed, the identity or the cause it stays unknown, each code the plant's note prints with the entry it names or the cause it names none, and, in a run with the Osservatorio's landscape records, each naming record (a group printing the plant's monitoring reference beside a tag or COD) under `named`, with the entry it names, its outcome or cause and any disagreement of the rest of its group, and each candidate another plant's record names, marked; an entry a record names beyond d is not a candidate and appears only under `named`, not under `entries`, so a consumer of the identity reads both (the rule: SPEC.md, Protected status)",
         "the plant's L.R. 14/2007 Article 2 monumental characteristics from its official monitoring record, supplied whatever the plant's identity: the MONUMENTALE_ARIF flag as printed (\"Si\" and \"1\" kept apart; otherwise blank or not printed, with the views read); each NOTE_RILEVATORE note verbatim with D's reading (states / does not / unclear) and the words it rests on; and each measurement the note records, as printed, with diameter_cm and measured_height_cm read from its words, the inputs of trunk_diameter_facts (the rule: SPEC.md, Protected status)",
         "applicable protection rule",
         "value assessment if that ground applies",
@@ -585,6 +591,7 @@
       "acquisition_routes": [
         "official monumental-tree lists and acts",
         "the official monitoring record of the plant (MONUMENTALE_ARIF, NOTE_RILEVATORE)",
+        "the Osservatorio's own landscape-proceeding record printing the plant's monitoring reference beside its register tag or COD",
         "provisional recognition records",
         "specific protection instruments",
         "the competent permission or decision reached by the affected protected plant and intervention"
@@ -883,6 +890,12 @@
           },
           {
             "callable": "cordon_d.landscape.landscape_results",
+            "parameters": [
+              "permitted_controlled_sources"
+            ]
+          },
+          {
+            "callable": "cordon_d.protection.named_rows",
             "parameters": [
               "permitted_controlled_sources"
             ]

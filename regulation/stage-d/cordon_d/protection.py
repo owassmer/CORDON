@@ -8,7 +8,8 @@ D supplies what PR #32's rows read, and nothing it decides itself:
 - for an affected plant, and for a negative olive within 50 m of one, its official monitoring record: the
   `MONUMENTALE_ARIF` flag as printed, each `NOTE_RILEVATORE` note verbatim with D's reading (states / does not /
   unclear), each measurement as printed with the numbers read from its words, the codes the note prints, and
-  its candidate entries at d.
+  its candidate entries at d; in a run with the Osservatorio's landscape records, the entry each record that prints
+  the plant's monitoring reference beside a tag or COD names for it (`named_rows`).
 
 A decides listed, pending and the Art. 2(1)(a) comparison (`cordon_c.bindings.listing_facts`,
 `trunk_diameter_facts`); D compares no measurement.
@@ -31,7 +32,8 @@ FLAGS = ('Si', '1')  # the printed values of MONUMENTALE_ARIF that record the ch
 NOT_RECORDED = date(2000, 1, 1)  # RILDATA 946684800000 ms (2000-01-01 00:00 UTC), a placeholder, not a survey date
 TOLERANCE = 0.05  # how near a survey group's count must be to one stated batch to be assigned to it
 MIN_FIXES = 20  # the NSSDA minimum of check points for a batch's own bound
-PAIRING_M = 50.0  # the reference-fix pairing radius, and the d of the note-code rule inside it
+PAIRING_M = 50.0  # the reference-fix pairing radius, the d of the note-code rule inside it, and how far beyond d a
+#                   naming record's entry makes the identity unknown rather than a conflict
 
 
 # --- the surveyor's note --------------------------------------------------------------------
@@ -267,6 +269,85 @@ def register_entries(store: Path, root: Path = REPOSITORY) -> list[Entry]:
                                          a.get('PART_'), _coordinate(g, 'x'), _coordinate(g, 'y'), _epoch_day(a.get('DATA_RILIEVO')),
                                          page['sha256']))
     return entries
+
+
+# --- what a printed key or card names: the one reader of a printed register identifier ----------
+
+def place(text) -> str:
+    """A comune as printed, folded to one form: the register prints NARDO' and NARDO`, MONTE SANT'ANGELO and
+    MONTE SANT` ANGELO, where a monitoring record or a file prints Nardò and Monte Sant'Angelo."""
+    import unicodedata
+    text = ''.join(c for c in unicodedata.normalize('NFD', str(text or '')) if not unicodedata.combining(c))
+    text = text.replace('`', "'").replace('’', "'")
+    return ' '.join(text.split()).upper().replace("' ", "'").rstrip("'")
+
+
+def card(text):
+    """A census card or tag as printed: its number where it is all digits (leading zeros aside), else the printed
+    text (case and spacing aside), as the register prints APP_618213."""
+    text = ' '.join(str(text if text is not None else '').split())
+    return int(text) if text.isdigit() else (text.upper() or None)
+
+
+class Register:
+    """The register entries a printed COD, or a census card or tag with its comune, names. A name that several
+    entries carry names all of them; the caller decides what that means."""
+
+    def __init__(self, entries):
+        self.entries = {e.oid: e for e in entries}
+        self._keys, self._cards = defaultdict(list), defaultdict(list)
+        for e in self.entries.values():
+            if e.key and str(e.key).strip():
+                self._keys[str(e.key).strip()].append(e)
+            if card(e.card) is not None and place(e.comune):
+                self._cards[(place(e.comune), card(e.card))].append(e)
+
+    def cod(self, key) -> list[Entry]:
+        return list(self._keys.get(str(key or '').strip(), ()))
+
+    def card(self, printed, comune) -> list[Entry]:
+        number = card(printed)
+        return [] if number is None else list(self._cards.get((place(comune), number), ()))
+
+    def names(self, form: dict) -> list[Entry]:
+        """The entries a printed {'cod'} or {'card', 'comune'} names."""
+        return self.cod(form['cod']) if set(form) == {'cod'} else self.card(form['card'], form['comune'])
+
+
+def parcel(comune, foglio, particella):
+    """A parcel as printed, read one way: its comune folded as `place` folds it, its foglio and particella as
+    numbers; None where a part is blank or not all digits (the register prints blank particelle, and XX501)."""
+    parts = (place(comune), _number(foglio), _number(particella))
+    return parts if parts[0] and None not in parts[1:] else None
+
+
+def parcel_agrees(form: dict, entry: Entry) -> bool | None:
+    """Whether a printed parcel ({'comune', 'foglio', 'particella'}) is the entry's own: None where `parcel` does not
+    read the entry's (blank, or several particelle such as '27,256,659'), so it cannot confirm one; False where it does
+    not read the record's either. The one reader for row 9's naming records and row 10 (`parcel_unread` names why)."""
+    own = parcel(entry.comune, entry.foglio, entry.particella)
+    return None if own is None else own == parcel(form['comune'], form['foglio'], form['particella'])
+
+
+def parcel_unread(form: dict, entry: Entry) -> str | None:
+    """Why `parcel_agrees` cannot hold a printed parcel to an entry, naming what is printed: a limit of this reader,
+    never the source's silence. None where it reads both."""
+    if parcel(entry.comune, entry.foglio, entry.particella) is None:
+        return (f"entry {entry.oid}'s parcel is not read: it prints foglio {entry.foglio!r}, particella "
+                f"{entry.particella!r}")
+    if parcel(form['comune'], form['foglio'], form['particella']) is None:
+        return (f"the record's parcel is not read: it prints foglio {form['foglio']!r}, particella "
+                f"{form['particella']!r}")
+    return None
+
+
+def printed(form: dict) -> str:
+    """A plant identifier as a record prints it, in words."""
+    if set(form) == {'sample'}:
+        return f"monitoring reference {form['sample']}"
+    if set(form) == {'comune', 'foglio', 'particella'}:
+        return f"parcel {form['comune']} fg {form['foglio']} p.lla {form['particella']}"
+    return f"COD {form['cod']}" if set(form) == {'cod'} else f"card {form['card']} ({form['comune']})"
 
 
 def key_causes(entries: list[Entry]) -> dict[str, tuple[str, ...]]:
@@ -650,13 +731,9 @@ class NoteCode:
 def note_codes(plants: dict[str, tuple[str, float, float, tuple[str, ...]]], entries: list[Entry],
                d_of) -> list[NoteCode]:
     """The note-code rule. A run of four or more digits names an entry only when it equals, as a number, exactly one
-    card in the plant's comune, that entry lies within d of the plant (`d_of(plant, entry)`), and no other plant's
-    note prints that code. `plants` maps a plant to (comune, x, y, notes)."""
-    cards = defaultdict(list)
-    for e in entries:
-        number = _number(e.card)
-        if number is not None and e.comune:
-            cards[(e.comune.strip().upper(), number)].append(e)
+    card in the plant's comune (`Register.card`), that entry lies within d of the plant (`d_of(plant, entry)`), and
+    no other plant's note prints that code. `plants` maps a plant to (comune, x, y, notes)."""
+    register = entries if isinstance(entries, Register) else Register(entries)
     # A printer is the observations whose notes a plant carries, so an order plant carrying its positive's note
     # and that positive count once. A plant given as (comune, x, y, notes) is its own printer.
     printers = defaultdict(set)
@@ -672,7 +749,7 @@ def note_codes(plants: dict[str, tuple[str, float, float, tuple[str, ...]]], ent
                 if (int(code)) in seen:
                     continue
                 seen.add(int(code))
-                hits = cards.get(((comune or '').strip().upper(), int(code)), [])
+                hits = register.card(code, comune)
                 if len(printers[int(code)]) > 1:
                     cause = f'printed by {len(printers[int(code)])} plants'
                 elif not hits:
@@ -748,7 +825,7 @@ def reference_fixes(flagged: list[tuple[str, str, float, float, float, tuple[str
         other = [c for c in printed if c.cause == 'names entry' and c.entry != entry.oid]
         batch = batch_of(entry)
         tags = [c for c in printed if not re.search(r"\bid\b\W*$", ' '.join(notes).lower().split(c.code)[0][-12:])]
-        differs = batch in tag_batches and any(int(c.code) != _number(entry.card) for c in tags)
+        differs = batch in tag_batches and any(card(c.code) != card(entry.card) for c in tags)
         dropped = (f'its note names entry {other[0].entry}' if other else
                    f'the note prints tag {tags[0].code}, the card is {entry.card}' if differs else None)
         fixes.append(Fix(observation, entry.oid, batch, float(distance), error_m,
@@ -925,21 +1002,319 @@ class Candidates:
 
 def candidates(plant: str, x: float, y: float, error_m: float, entries_near, bound_of, named: list[NoteCode]) -> Candidates:
     """"Not a register tree" is always a candidate; so is every entry within d = the plant's error_m plus the
-    entry's batch bound. A note code that names an entry decides; otherwise the identity stays unknown."""
+    entry's batch bound. The identity follows `identity`."""
     within = []
     for entry in entries_near:
         d = round(error_m + bound_of(entry).error_m, 2)
         distance = ((entry.x - x) ** 2 + (entry.y - y) ** 2) ** 0.5
         if distance <= d:
             within.append((entry.oid, round(distance, 2), d))
-    naming = [c for c in named if c.cause == 'names entry']
-    if naming and any(c.entry == oid for c in naming for oid, _, _ in within):
-        entry = next(c.entry for c in naming)
-        return Candidates(plant, tuple(within), entry, f'its note prints code {naming[0].code}, which names entry {entry}')
-    if not within:
-        return Candidates(plant, (), 'not a register tree', 'no entry within d')
+    return identity(plant, tuple(within), named)
+
+
+# How a naming record's entry lies from the plant it names (`naming_records`).
+WITHIN = 'entry within d'           # a candidate: the record decides, with the note code's standing
+BEYOND = 'entry beyond d'           # within 50 m: the identity is unknown across it; the record does not decide
+UNPLACED = 'entry prints no point'  # its distance is not known: as beyond d
+FAR = 'entry not a candidate'       # beyond 50 m: a conflict, reported; the plant it names is unchanged
+PLACED = (WITHIN, BEYOND, UNPLACED, FAR)
+# Why a group names nothing for the plants its references name.
+SEVERAL = 'names several entries'
+NO_ENTRY = 'names no register entry'
+SEPARATE = 'reference names separate plants'
+NO_PLANT = 'reference names no plant'
+# Why the rest of a group keeps its tag or COD from naming the entry for the plant (a veto: it never narrows).
+KEYS_DISAGREE = "record's identifiers disagree"         # another tag or COD it prints does not name the entry
+PARCEL_DISAGREES = "record's parcel disagrees"           # a parcel it prints is not the entry's own (`parcel_agrees`)
+# A parcel this reader does not read, the entry's or the record's, vetoes too, naming what is printed (`parcel_unread`).
+
+
+@dataclass(frozen=True)
+class Naming:
+    """One plant group of an admitted Osservatorio landscape record that prints a monitoring reference beside a tag
+    (card with comune) or COD, as row 9 reads it."""
+    record: str
+    group: int                    # numbered from 1 as the record lists its groups
+    printed: str                  # the group's identifiers, as printed
+    plants: tuple[str, ...]       # the row 9 plants its monitoring references name
+    entries: tuple[str, ...]      # the entry its tag or COD names, the several it names, or none
+    cause: str                    # a PLACED outcome, why it names nothing, or, outside the grant, the need
+    distance_m: float | None = None
+    d_m: float | None = None
+    granted: bool = True
+    fixture: bool = False
+    conflict: str | None = None   # why the rest of the group disagrees with the entry, or None where it agrees
+
+    def said(self) -> str:
+        where = (', which prints no point' if self.cause == UNPLACED else
+                 f' at {self.distance_m} m, ' + ('within' if self.cause == WITHIN else 'beyond') +
+                 (' d' if self.d_m is None else f' d {self.d_m} m'))
+        return f'record {self.record} (group {self.group}) prints {self.printed}, which names entry {self.entries[0]}{where}'
+
+    def output(self) -> dict:
+        return {'record': self.record, 'group': self.group, 'printed': self.printed, 'plants': list(self.plants),
+                'entries': list(self.entries), 'cause': self.cause, 'conflict': self.conflict,
+                'distance_m': self.distance_m, 'd_m': self.d_m, 'fixture': self.fixture}
+
+
+@dataclass(frozen=True)
+class Placed:
+    """What the naming rule reads of a row 9 plant."""
+    x: float
+    y: float
+    error_m: float
+    references: frozenset[str]     # the monitoring references its observations and coincides_with carry
+    printer: tuple                 # its observations: plants that carry the same ones are one printer
+    within: tuple[tuple[str, float, float], ...]   # its candidates: (entry, distance m, d m)
+
+
+def naming_records(groups, plants: dict[str, Placed], register: Register, d_of) -> list[Naming]:
+    """Each plant group of the admitted landscape records that prints a monitoring reference beside a tag or COD.
+
+    `groups` holds (record, group, identifiers, need, fixture): need is None for a granted record. `d_of(plant,
+    entry)` is d, or None where it is not held.
+
+    A reference names every plant whose observations or coincides_with carry it; plants that carry the same
+    observations are one printer. A group whose references name separate printers, or whose reference names no
+    plant, decides nothing for any plant (SEPARATE, NO_PLANT). Each tag or COD is read on its own: one naming several
+    entries, or none, names nothing (SEVERAL, NO_ENTRY), and no other identifier narrows it. Each entry a tag or COD
+    names is placed for each plant: within d where it is one of the plant's candidates, beyond d where it lies within
+    50 m, not a candidate beyond 50 m, or unplaced where it prints no point. The rest of the group only vetoes it
+    (`conflict`): another tag or COD that does not name it, alone or among several, or a parcel that is not its own
+    or that it cannot confirm (`parcel_agrees`).
+
+    A record outside the grant names nothing; its group is returned only with its need, for each plant a granted
+    version of it could change: a plant its references name, where a tag or COD names one entry that would be placed
+    within d, beyond d or unplaced, and every plant holding such an entry among its candidates, for which it would
+    name the entry for another plant.
+    """
+    by_reference = defaultdict(set)
+    for plant, placed in plants.items():
+        for reference in placed.references:
+            by_reference[reference].add(plant)
+
+    def placement(plant, entry):
+        within = {oid: (distance, d) for oid, distance, d in plants[plant].within}
+        if entry.oid in within:
+            return (WITHIN, *within[entry.oid])
+        if entry.x is None or entry.y is None:
+            return UNPLACED, None, d_of(plant, entry)
+        exact = ((entry.x - plants[plant].x) ** 2 + (entry.y - plants[plant].y) ** 2) ** 0.5
+        return BEYOND if exact <= PAIRING_M else FAR, round(exact, 2), d_of(plant, entry)
+    found = []
+    for record, number, identifiers, need, fixture in groups:
+        forms = [dict(i) for i in identifiers]
+        references = [f['sample'].strip() for f in forms if set(f) == {'sample'}]
+        keys = [f for f in forms if set(f) in ({'cod'}, {'card', 'comune'})]
+        parcels = [f for f in forms if set(f) == {'comune', 'foglio', 'particella'}]
+        if not references or not keys:
+            continue
+        words = ', '.join(printed(f) for f in forms)
+        named = [by_reference.get(r, set()) for r in references]
+        mine = tuple(sorted(set().union(*named)))
+        cause = SEPARATE if len({plants[p].printer for p in mine}) > 1 else NO_PLANT if not all(named) else None
+        hits = [register.names(form) for form in keys]
+        entries = {}
+        for one in hits:
+            if len(one) == 1:
+                entries.setdefault(one[0].oid, one[0])
+        if need is not None:
+            reached = {plant for plant in mine for entry in entries.values()
+                       if not cause and placement(plant, entry)[0] != FAR}
+            reached |= {plant for plant, placed in plants.items() if set(entries) & {oid for oid, _, _ in placed.within}}
+            if reached:
+                found.append(Naming(record, number, words, tuple(sorted(reached)), tuple(sorted(entries)), need,
+                                    granted=False, fixture=fixture))
+            continue
+        for one in hits:
+            if len(one) != 1:
+                found.append(Naming(record, number, words, mine, tuple(e.oid for e in one),
+                                    SEVERAL if one else NO_ENTRY, fixture=fixture))
+        for entry in entries.values():
+            unread = [parcel_unread(f, entry) for f in parcels]
+            agree = [parcel_agrees(f, entry) for f, why in zip(parcels, unread) if why is None]
+            conflict = ', '.join(c for c, present in (
+                (KEYS_DISAGREE, any(entry.oid not in {e.oid for e in one} for one in hits)),
+                (PARCEL_DISAGREES, False in agree), *((why, True) for why in dict.fromkeys(w for w in unread if w)))
+                if present) or None
+            if cause:
+                found.append(Naming(record, number, words, mine, (entry.oid,), cause, fixture=fixture,
+                                    conflict=conflict))
+                continue
+            for plant in mine:
+                placed, distance, d = placement(plant, entry)
+                found.append(Naming(record, number, words, (plant,), (entry.oid,), placed, distance, d,
+                                    fixture=fixture, conflict=conflict))
+    return found
+
+
+def identity(plant: str, within, named: list[NoteCode], naming=(), elsewhere=None) -> Candidates:
+    """Row 9's identity rule, over the entries within d (`within`), the plant's note codes (`named`) and the naming
+    records placed for it (`naming`, from `naming_records`). `elsewhere` maps an entry to how another plant's note or
+    record names it.
+
+    A record naming an entry beyond d within 50 m, or one that prints no point, or one whose group disagrees with the
+    entry it names (`Naming.conflict`), makes the identity unknown across that entry, the entries within d and "not
+    a register tree", naming the record; it never decides. Otherwise a record naming an entry within d decides it,
+    with the standing of a note code, unless records name different entries ("records disagree"), the plant's note
+    names another ("record and note disagree"), or another plant's note or record names that entry ("named for
+    several plants"); then the identity is unknown, and every record and note is named. Otherwise a note code that
+    names an entry decides, unless another plant's record names that entry ("named for several plants", as two notes
+    printing one code already name nothing); with none, the identity is unknown between the entries within d and
+    "not a register tree", or "not a register tree" where none is within d. A record naming an entry beyond 50 m is
+    reported beside the plant and changes nothing here, whatever the rest of its group prints; for any other plant
+    holding that entry it counts as naming it (`elsewhere`).
+    """
+    codes = [c for c in named if c.cause == 'names entry']
+    doubt = [n for n in naming if n.cause in (BEYOND, UNPLACED) or n.cause == WITHIN and n.conflict]
+    deciding = [n for n in naming if n.cause == WITHIN and not n.conflict]
+    noted = next(c.entry for c in codes) if codes and any(c.entry == oid for c in codes for oid, _, _ in within) \
+        else None
+
+    def others(entries):
+        return [s for e in sorted(entries) for s in (elsewhere or {}).get(e, ())]
+    if not doubt and not deciding:
+        if noted and not others({noted}):
+            return Candidates(plant, tuple(within), noted, f'its note prints code {codes[0].code}, which names entry {noted}')
+        if not noted and not within:
+            return Candidates(plant, (), 'not a register tree', 'no entry within d')
+        if not noted:
+            return Candidates(plant, tuple(within), 'unknown',
+                              'unknown between the entries within d and "not a register tree": no record names the entry')
+    said = [n.said() for n in deciding + doubt]
+    said += [f'its note prints code {c.code}, which names entry {c.entry}' for c in codes]
+    entries = {n.entries[0] for n in deciding}
+    named_elsewhere = others(entries or {noted} - {None})
+    if doubt:
+        cause = ', '.join(dict.fromkeys([n.cause for n in doubt if n.cause != WITHIN] +
+                                        [n.conflict for n in doubt if n.conflict]))
+    elif len(entries) > 1:
+        cause = 'records disagree'
+    elif entries and codes and {c.entry for c in codes} != entries:
+        cause = 'record and note disagree'
+    elif named_elsewhere:
+        cause = 'named for several plants'
+    else:
+        return Candidates(plant, tuple(within), next(iter(entries), noted), '; '.join(said))
+    across = [f'entry {e}' for e in dict.fromkeys(n.entries[0] for n in doubt if n.cause != WITHIN)]
+    across += ['the entries within d'] if within else []
     return Candidates(plant, tuple(within), 'unknown',
-                      'unknown between the entries within d and "not a register tree": no record names the entry')
+                      f'unknown between {", ".join(across) or "the entries within d"} and "not a register tree": '
+                      f'{cause}: ' + '; '.join(said + named_elsewhere))
+
+
+# The shape `rows` writes: its top-level keys, each plant's, its candidates' and each candidate entry's. A run's
+# rows carry more (`named_rows`: the identities its records decided), and are never read back as PR #30's rows.
+SHAPE = {'rows': frozenset({'plants', 'zone_entries', 'acts', 'chain_checks', 'survey_batches', 'unread_deletions',
+                            'reference_fixes', 'bounds', 'tag_batches'}),
+         'plant': frozenset({'plant', 'kind', 'order', 'coincides_with', 'point', 'comune', 'observations', 'flag',
+                             'notes', 'measurements', 'codes', 'candidates'}),
+         'candidates': frozenset({'not a register tree', 'entries', 'd', 'identity', 'rule'}),
+         'entry': frozenset({'entry', 'distance_m', 'd_m'})}
+
+
+def as_written(rows: dict) -> dict:
+    """`rows` where it is in the shape `rows` writes, with no record; otherwise refused, naming the key that shape
+    does not have (a run's `run`, `naming_records`, `ungranted`, `named`, `named_for`, `needs`, or any other)."""
+    def refuse(where, keys, shape):
+        other = sorted(set(keys) - SHAPE[shape])
+        if other:
+            raise ValueError(f"PR #30's rows are taken only as read_protection.py writes them without records: "
+                             f'{where} carries {other[0]!r}, which that shape does not have (a run\'s rows are its '
+                             'own, decided by records outside this run)')
+    refuse('the rows', rows, 'rows')
+    for p in rows['plants']:
+        refuse(f"plant {p.get('plant')}", p, 'plant')
+        refuse(f"plant {p.get('plant')}'s candidates", p['candidates'], 'candidates')
+        for e in p['candidates']['entries']:
+            refuse(f"plant {p.get('plant')}'s candidate {e.get('entry')}", e, 'entry')
+    return rows
+
+
+def named_rows(rows: dict, register, supplied, *, evaluated_at, permitted_controlled_sources, zone,
+               bound_of=None) -> dict:
+    """Row 9's rows with the identities the Osservatorio's own landscape records decide: a run's output, never the
+    shared rows file.
+
+    `rows` is `rows()`'s output with no record (`as_written`: a run's rows are refused). The records are admitted as
+    the run states (`case_prescriptions.admitted_records`, family 'landscape'): one dated after `evaluated_at` (the
+    knowledge cutoff) refuses the set; one outside `permitted_controlled_sources` names nothing, and each plant whose
+    identity a granted version of it could change (`naming_records`) keeps its identity, with the need "authorized
+    evidence for …" under `needs`. Each granted group is placed by `naming_records`, and each plant a group places
+    an entry for, or whose note's entry a record names for another plant, is decided by `identity`. Each plant's
+    groups are listed under `named`; a candidate entry a record names for another plant is marked `named_for`, and
+    stays the candidate it is. `register` is the register entries (deleted ones the rows carry included);
+    `bound_of(entry)` an entry's batch bound, by default the zone entries' qualification (another entry's is not held
+    in the rows). With no record, `rows` is returned as it is.
+    """
+    from .case_prescriptions import admitted_records
+    as_written(rows)
+    granted, ungranted = admitted_records(supplied, None, evaluated_at=evaluated_at, zone=zone, family='landscape',
+                                          permitted_controlled_sources=permitted_controlled_sources)
+    if not granted and not ungranted:
+        return rows
+    if bound_of is None:
+        held = {e['entry']: e['qualification']['error_m'] for e in rows['zone_entries']}
+        bound_of = held.get
+    placed, codes = {}, defaultdict(list)
+    for p in rows['plants']:
+        references = {o[0] for o in p['observations'] if o[0]} | set(p.get('coincides_with') or ())
+        placed[p['plant']] = Placed(p['point']['x'], p['point']['y'], p['point']['error_m'], frozenset(references),
+                                    tuple(tuple(o) for o in p['observations']) or (p['plant'],),
+                                    tuple((e['entry'], e['distance_m'], e['d_m']) for e in p['candidates']['entries']))
+        codes[p['plant']] = [NoteCode(p['plant'], c['code'], c['entry'], c['cause']) for c in p['codes']]
+
+    def d_of(plant, entry):
+        bound = bound_of(entry.oid)
+        return None if bound is None else round(placed[plant].error_m + bound, 2)
+    groups = [(r['record'], n, g, need, r['fixture']) for r, need in [(r, None) for r in granted] + ungranted
+              for n, g in enumerate(r['identifiers'], 1)]
+    namings = naming_records(groups, placed, register if isinstance(register, Register) else Register(register), d_of)
+    of_plant, of_entry, noted = defaultdict(list), defaultdict(list), defaultdict(list)
+    for n in namings:
+        for plant in n.plants:
+            of_plant[plant].append(n)
+        if n.granted and len(n.entries) == 1:
+            of_entry[n.entries[0]].append(n)
+    for plant, found in codes.items():
+        for c in found:
+            if c.cause == 'names entry':
+                noted[c.entry].append(c)
+    plants = []
+    for p in rows['plants']:
+        printer = placed[p['plant']].printer
+
+        def ours(n):
+            return n.granted and n.cause in PLACED and {placed[q].printer for q in n.plants} == {printer}
+
+        def elsewhere(entry):
+            return [f'record {n.record} (group {n.group}) names it for plant{"s" if len(n.plants) != 1 else ""} '
+                    f'{", ".join(n.plants) or "none held here"} ({n.cause})' for n in of_entry[entry] if not ours(n)] + \
+                [f"plant {c.plant}'s note prints code {c.code}, which names it" for c in noted[entry]
+                 if placed[c.plant].printer != printer]
+        mine = of_plant.get(p['plant'], [])
+        marks = {e['entry']: [n for n in of_entry[e['entry']] if not ours(n)] for e in p['candidates']['entries']}
+        if not mine and not any(marks.values()):
+            plants.append(p)
+            continue
+        candidate = dict(p['candidates'])
+        naming = [n for n in mine if ours(n)]
+        # A record that places an entry for the plant, or names the entry its note decides for another plant.
+        if any(n.cause != FAR for n in naming) or marks.get(candidate['identity']):
+            decided = identity(p['plant'], placed[p['plant']].within, codes[p['plant']], naming,
+                               {oid: elsewhere(oid) for oid, _, _ in placed[p['plant']].within})
+            candidate.update(identity=decided.identity, rule=decided.rule)
+        if any(marks.values()):
+            candidate['entries'] = [dict(e, named_for=[dict(plants=list(n.plants), record=n.record, group=n.group,
+                                                            cause=n.cause) for n in marks[e['entry']]])
+                                    if marks[e['entry']] else e for e in p['candidates']['entries']]
+        if any(n.granted for n in mine):
+            candidate['named'] = [n.output() for n in mine if n.granted]
+        if any(not n.granted for n in mine):
+            candidate['needs'] = sorted({n.cause for n in mine if not n.granted})
+        plants.append(dict(p, candidates=candidate))
+    return dict(rows, plants=plants, naming_records=[n.output() for n in namings if n.granted],
+                ungranted=[dict(record=r['record'], kind=r['kind'], need=need) for r, need in ungranted])
 
 
 # --- the population: affected plants, their zone entries and zone negatives ------------------------------
@@ -1153,7 +1528,8 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
     # The census tag names cards only in batches whose cards the held notes' tags name (the note-code rule).
     note_map = {p.plant: (p.comune, p.x, p.y, tuple(n.note for n in p.record.notes), p.record.observations)
                 for p in infected}
-    tag_names = note_codes(note_map, everything, lambda plant, entry: PAIRING_M)
+    register = Register(everything)
+    tag_names = note_codes(note_map, register, lambda plant, entry: PAIRING_M)
     oid_batch = batches
     tag_batches = {oid_batch[c.entry] for c in tag_names if c.cause == 'names entry'}
     flagged = [(p.plant, p.comune, p.x, p.y, p.error_m, tuple(n.note for n in p.record.notes)) for p in infected
@@ -1170,7 +1546,7 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
     all_plants = infected + zone_neg
     codes = note_codes({p.plant: (p.comune, p.x, p.y, tuple(n.note for n in p.record.notes), p.record.observations)
                         for p in all_plants},
-                       everything, lambda plant, entry: d_of_plant[plant] + bound_of(entry).error_m)
+                       register, lambda plant, entry: d_of_plant[plant] + bound_of(entry).error_m)
     codes_of = defaultdict(list)
     for c in codes:
         codes_of[c.plant].append(c)
@@ -1201,7 +1577,8 @@ def _act(act: ListAct | None) -> dict | None:
 
 
 def rows(result: dict) -> dict:
-    """The emitted inputs, as JSON: every affected plant and zone negative, and every zone entry."""
+    """The emitted inputs, as JSON: every affected plant and zone negative, and every zone entry, in the shape
+    `as_written` holds a consumer's rows to (`SHAPE`)."""
     entries, chains, batches, bounds = result['entries'], result['chains'], result['batches'], result['bounds']
     codes = defaultdict(list)
     for c in result['codes']:
@@ -1249,7 +1626,7 @@ def rows(result: dict) -> dict:
                 'provisional': _act(chain.provisional), 'definitive': _act(chain.definitive),
                 'deletion': _act(chain.deletion), 'rule': chain.rule, 'history_complete': chain.complete,
                 'cause': chain.cause}})
-    return {'plants': plants, 'zone_entries': zone,
+    return as_written({'plants': plants, 'zone_entries': zone,
             'acts': [_act(a) | {'provisional': a.provisional, 'definitive_of': [list(d) for d in a.definitive],
                                 'deleted': a.deleted, 'surveys': [list(s) for s in a.surveys]}
                      for a in result['acts'].values()],
@@ -1261,4 +1638,4 @@ def rows(result: dict) -> dict:
             'bounds': {b: {'applies_to': v.applies, 'error_m': v.error_m, 'fixes': v.fixes, 'card_form': v.card_form,
                            'method': v.method, 'check': v.check, 'reference_fixes': list(v.observations)}
                        for b, v in sorted(bounds.items())},
-            'tag_batches': sorted(result['tag_batches'])}
+            'tag_batches': sorted(result['tag_batches'])})
