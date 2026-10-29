@@ -810,7 +810,11 @@ not, false when both lie after it (or both of the deletion before), and otherwis
 unknown, naming the decree: A decides when a decree takes effect. An entry no held
 annex lists is unknown, never false. Its kind is the species cell's prefix
 ("Insieme omogeneo di", "Filare di", ...); a member count or extent is carried
-only as printed. Its point is the scheda's WGS 84 coordinates (the census
+only as printed. The sheet's column "PROPOSTA DICHIARAZIONE NOTEVOLE INTERESSE
+PUBBLICO" (33 listed schede print "si`") is carried as printed and is no
+proposal of declaration: the census instructions (Allegato 4) define it as
+whether the tree "sia proponibile come oggetto di tutela", the surveyor's
+suggestion. Its point is the scheda's WGS 84 coordinates (the census
 instructions), and its bound is the residuals of scheda points against
 independent positions of the same trees (a declared tree in the same comune and
 genus): their 95th percentile from 20 fixes, below that the larger of the
@@ -910,6 +914,56 @@ declared tree of its genus lies within d (its error plus the entry's), naming th
 populations held; unknown where one may be the plant, where a declaration
 containing it is not read whole, or where a decree's dates straddle the event
 date. The register's fact is row 9's identity with its own cause.
+
+From 20 September 2025 (L. 131/2025) the Region recognises a tree as monumental
+before a decree lists it (L. 10/2013 Art. 7(2)). Each act by which it approves a
+list of monumental trees that the BURP publishes from that day on (the forestry
+section's determination, "elenco regionale n. N", and the Giunta's deliberation,
+"Elenco L") is held whole in `corpus/sources/protected-status/recognitions.json`
+(`scripts/acquire_protection.py recognitions`). `cordon_d.instruments.recognitions`
+reads its own date, its BURP issue's date, the trees its Allegato A lists (checked
+against the count the act states), and the trees it deletes or rectifies. Where a
+Calibri run's font maps its glyphs to no letters, each glyph is read as the letter
+the same act's correctly mapped Calibri runs give it; a glyph none gives is `?` and
+counted. A recognised tree joins the national-list entry with its number,
+cadastral code and province; that entry's fact carries the acts and dates, and A
+decides which act and date bring a tree into the instrument. A recognised tree no
+held decree lists is named in the list fact's populations held: no held act prints
+its position.
+
+A published proposal of declaration (D.lgs. 42/2004 Arts 138-141; one made
+before 1 May 2004 under Art. 157(2)) is one record of
+`corpus/sources/protected-status/proposals.json`: its proposer (the Region, on
+its Art. 137 commission's proposal, or a Soprintendente, Art. 138(3)) and comuni;
+its object, motivation, plan, publication periods (one per albo) and owner's
+communication, each as a held source prints it, with that source's hash, or the
+cause no held source supplies it; and its outcome (a declaration with its PPTR
+code or G.U. issue, a refusal with its date, or none). The population is every
+proposal concerning Puglia whose effect could run from four years before the
+decision on: a Region's not concluded before then, however old (the code states no
+lapse for it); a Ministry's first published from 2021 on. It is found from the
+publishers Art. 139(2) names: the BURP's document search (a phrase in an act's
+title and abstract; its index begins with the bulletins of 2001), the Region's
+landscape portal and the PPTR's report on its protections, the three
+Soprintendenze's and the Directorate-General's own sites, the Internet Archive's
+copies of their pages where a site does not answer, and the G.U.'s issues from
+2021 to the day before row 9's own search, whose declarations recite the proposals
+they conclude (`scripts/acquire_protection.py proposals`, `proposal-search`).
+`cordon_d.instruments.proposals` reads a field only where the source it cites
+prints it (whitespace, hyphens, quotes and apostrophes aside), and otherwise
+names that. It reads the object and motivation with the
+declarations' rule: a held motivation is whole, so naming no tree it is an area;
+with none held, an object naming a zone, valley or area is one. Each date is read
+from its printed phrase; the first day of publication (Art. 139(2)) is the
+earliest any albo prints. A proposal naming a tree is a plant record through the
+declared-tree path: the polygon its plan draws, with 1 mm at the plan's own stated
+scale. One naming a tree that no held plan places, or not read whole, leaves every
+plant's proposal fact unknown, naming it. The proposal fact is true where the plant
+is the proposed tree, carrying its proposer, first day of publication, periods,
+owner's receipt of the communication and outcome, from which C's row decides
+whether its effect runs at the event date (D computes no lapse); false where no
+held proposal names a tree within d, naming the population held and each route not
+reached; unknown where a proposed tree within d may be the plant.
 
 ## Landscape proceeding
 

@@ -22,7 +22,8 @@ def version() -> str:
     digest = sha256()
     for path in (Path(protection.__file__), Path(instruments.__file__), ROOT / protection.SOURCES / 'register.json',
                  ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS,
-                 ROOT / instruments.SOURCES / 'national-list.json', ROOT / instruments.SOURCES / 'declarations.json'):
+                 ROOT / instruments.SOURCES / 'national-list.json', ROOT / instruments.SOURCES / 'declarations.json',
+                 ROOT / instruments.SOURCES / 'proposals.json', ROOT / instruments.SOURCES / 'recognitions.json'):
         digest.update(path.read_bytes())
     return digest.hexdigest()[:12]
 
@@ -66,9 +67,12 @@ if __name__ == '__main__':
     print('transcription population:', len(population), 'rows,', len({(r['sha256'], r['page']) for r in population}),
           'pages; decrees not found:', sorted(d['code'] for d in declared if 'no decree' in (d['decree'] or {}).get('read', '')),
           '; OCR engine (locator):', held['declarations']['ocr']['engine'])
+    print('proposals:', [(p['proposal'], p['proposer'], p['reading'], p['first_publication'], p['outcome'].get('kind'))
+                         for p in held['proposals']['proposals']])
+    print('proposal routes not reached:', held['proposals']['not_reached'])
     print('instrument problems:', held['problems'])
     print('in a zone:', [(r['plant'], r['instrument']) for r in held['in_zone']])
     print('groups:', [(g['scheda'], g['nearest_positive_m']) for g in held['groups']])
     print('distances:', json.dumps(held['distances'], ensure_ascii=False))
     print('status:', {kind: dict(Counter(str(p['status'][kind]['value']) for p in out['plants'] if p['status']))
-                      for kind in (instruments.NATIONAL, instruments.DECLARATION)})
+                      for kind in (instruments.NATIONAL, instruments.DECLARATION, instruments.PROPOSAL)})
