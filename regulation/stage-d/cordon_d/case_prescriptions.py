@@ -377,6 +377,31 @@ def clause(record):
 WITHHOLDING = ('corrects', 'replaces', 'revokes', 'suspends', 'withdraws')
 
 
+def _decided_in_a(reason, record):
+    """Whether an A row governing the record already decides what a court's stated reason states.
+
+    True where the reason cites at least one act other than the order, read as `held_acts.printed_identities`
+    reads a printed act identity (a designator with number and year, "DDS n. 18/2024", or a number with
+    its date, "n. 127 del 17.11.2022"), and every act so cited is the instrument of an A row governing the
+    record (`governing_A_references`): A records that act's effect on this order, so a moot ruling adds
+    nothing (owner ruling, 2026-10-28). Otherwise the court's words stay a need: whether an act A does
+    not record ended the order is a question of legal meaning, not D's (TAR Bari 1007/2023 on DDS
+    119/2022). A number read with a date that is no act (a ricorso, a bulletin) keeps the need, unless its
+    number and year are a recorded act's. The residual, where an unrecorded act goes unseen and the need
+    drops: an act cited in a form that reader does not read (a later number listed under one designator,
+    "DDS n. 18/2024 e n. 127/2022"; "det. reg. n. 127/2022"; "n. 127 del 2022"; a protocol number of five
+    or more digits; an act with no number, such as a D.G.R., a law or words alone); another document
+    whose number and date coincide with a recorded act's ("nota prot. n. 18 del 14.03.2024"); and another
+    office's act printed "D.D. n/year", which `act_id` reads as the Osservatorio's. Such an act reaches C
+    only as a held act's own stated change (`stated_changes`).
+    """
+    from .held_acts import printed_identities
+    cited = {act_id(number, year) for number, year, _, _ in printed_identities(' '.join(reason))}
+    later = cited - {record['instrument']}
+    recorded = {reference.split(':')[0] for reference in record['governing_A_references']}
+    return bool(later) and later <= recorded
+
+
 def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_scope=None):
     """Lawful dueness of the record's work and coercion as the order itself and held acts state it.
 
@@ -392,7 +417,12 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     - an interim suspension leaves the reading unknown, naming the end it states,
       because no later disposition of the ricorso is held.
     - a challenge the court ended with a stated reason (a later act superseding the
-      order) leaves the reading unknown, naming the court's words.
+      order) leaves the reading unknown, naming the court's words, unless an A row
+      governing the record already decides what the reason states (`_decided_in_a`):
+      the reason cites at least one act other than the order, and each act it cites is
+      the instrument of an A row governing the record (`_decided_in_a`). A moot ruling
+      annuls nothing, so the A row decides (owner ruling, 2026-10-28, TAR Bari 387,
+      383 and 384/2026 on DDS 18/2024).
 
     A held act that states it corrects, replaces, revokes, suspends or withdraws the
     order, as a whole or in part, and that no A row records, leaves the reading unknown
@@ -415,7 +445,8 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
                       f"{closure['outcome']}; no later disposition of ricorso {decision['register']} is held"
                       + applicants)
         elif closure['effect'] == 'ended-with-stated-reason':
-            needs.add(f"the effect on this order of what {name} states: " + ' … '.join(closure['stated_reason']))
+            if not _decided_in_a(closure['stated_reason'], record):
+                needs.add(f"the effect on this order of what {name} states: " + ' … '.join(closure['stated_reason']))
         elif within_closed_scope:
             return False, False
         elif closure['scope'] == 'whole-act':
