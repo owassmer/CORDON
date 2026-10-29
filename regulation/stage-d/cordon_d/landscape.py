@@ -3,8 +3,9 @@
 The Osservatorio supplies the lodging of its landscape-authorization request, the superintendent's receipt of the
 acts, the superintendent-opinion route and the landscape authority's decision (`case_prescriptions.supplied_records`,
 family 'landscape'), each naming one or more plants by the identifiers it prints for each. The run admits them under
-its cutoff and grant (`case_prescriptions.admitted_records`). Each plant a record names attaches through the plant
-identity PR #30's reader establishes (`protection`), or stays unattached with its cause. C then evaluates
+its cutoff and grant (`case_prescriptions.admitted_records`). Each plant a record names attaches through row 9's
+identity, or stays unattached with its cause: PR #30's rows with the identities the same records, under the same
+cutoff and grant, decide (`protection.named_rows`). Row 10 decides no identity. C then evaluates
 Art. 33(1), Art. 146(5) and Art. 146(8) for each plant asked about, with what the records state and nothing else.
 
 D supplies no "required / not required" fact: Art. 33(1)'s second paragraph names the one class that needs
@@ -19,6 +20,7 @@ from datetime import date, datetime
 from cordon_c.bindings import leaves
 from cordon_c.core import Evaluation, MissingInput, evaluate
 from .case_prescriptions import admitted_records
+from .protection import WITHIN, Register, named_rows, place, printed as _printed
 
 RULE = 'IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal'
 DECISION = 'IT-DLGS42-A146:Art.146(5):regional-decision-owner'
@@ -57,45 +59,35 @@ def _number(text):
     return int(text) if text.isdigit() else None
 
 
-def _place(text):
-    """A comune as printed, folded to one form: the register prints NARDO' and NARDO`, MONTE SANT'ANGELO and
-    MONTE SANT` ANGELO, where a file prints Nardò and Monte Sant'Angelo."""
-    import unicodedata
-    text = ''.join(c for c in unicodedata.normalize('NFD', text or '') if not unicodedata.combining(c))
-    text = text.replace('`', "'").replace('’', "'")
-    text = ' '.join(text.split()).upper().replace("' ", "'").rstrip("'")
-    return text
-
-
-def _card(text):
-    """A census card or tag as printed: its number where it is all digits (leading zeros aside), else the printed
-    text (case and spacing aside), as the register prints APP_618213."""
-    text = ' '.join((text or '').split())
-    return _number(text) if text.isdigit() else (text.upper() or None)
-
-
 def _parcel(comune, foglio, particella):
-    parts = (_place(comune), _number(foglio), _number(particella))
+    parts = (place(comune), _number(foglio), _number(particella))
     return parts if parts[0] and None not in parts[1:] else None
 
 
-def _printed(form):
-    if set(form) == {'sample'}:
-        return f"monitoring reference {form['sample']}"
-    if set(form) == PARCEL:
-        return f"parcel {form['comune']} fg {form['foglio']} p.lla {form['particella']}"
-    return f"COD {form['cod']}" if set(form) == {'cod'} else f"card {form['card']} ({form['comune']})"
+def undecided(rows):
+    """(record, group) -> [(plant, entry, row 9's rule)]: each group row 9 reads as naming a candidate entry for a
+    plant whose identity it does not decide to be that entry."""
+    found = defaultdict(list)
+    for p in rows['plants']:
+        for n in p['candidates'].get('named', ()):
+            if n['cause'] == WITHIN and n['entries'] != [p['candidates']['identity']]:
+                found[(n['record'], n['group'])].append((p['plant'], n['entries'][0], p['candidates']['rule']))
+    return found
 
 
 class Identities:
-    """PR #30's identity of each plant in its rows (`protection.rows`): an entry, 'unknown' between the candidate
-    entries within its d, or 'not a register tree' (no entry within d); and the register entries a printed key or
-    card names (`protection.register_entries`, with any deleted entry the rows carry). Nothing here changes it."""
+    """Row 9's identity of each plant in its rows (`protection.rows`, with the identities the run's records decide,
+    `protection.named_rows`): an entry, 'unknown' between the candidate entries within its d, or 'not a register
+    tree' (no entry within d); and the register entries a printed key or card names (`protection.Register`, over
+    `protection.register_entries` with any deleted entry the rows carry). Nothing here changes it. A candidate marked
+    `named_for` another plant stays this plant's candidate. A record's group that row 9 reads as naming a candidate
+    entry for a plant, and does not decide, is held against that plant (`undecided`)."""
 
     def __init__(self, rows, register):
         self.plants, self.by_reference = {}, defaultdict(set)
         self.by_entry = defaultdict(set)       # an entry -> the plants whose row 9 identity it is
         self.candidate_of = defaultdict(set)   # an entry -> the 'unknown' plants it is a candidate of
+        self.undecided = undecided(rows)
         for p in rows['plants']:
             if p['plant'] in self.plants:
                 raise ValueError(f"PR #30's rows name plant {p['plant']} twice")
@@ -110,13 +102,8 @@ class Identities:
                 self.by_entry[identity].add(p['plant'])
             for entry in candidates:
                 self.candidate_of[entry].add(p['plant'])
-        self.entries = {e.oid: e for e in register}
-        self.by_key, self.by_card = defaultdict(list), defaultdict(list)
-        for e in register:
-            if e.key and e.key.strip():
-                self.by_key[e.key.strip()].append(e.oid)
-            if _card(e.card) is not None and _place(e.comune):
-                self.by_card[(_place(e.comune), _card(e.card))].append(e.oid)
+        self.register = register if isinstance(register, Register) else Register(register)
+        self.entries = self.register.entries
 
     def output(self, plant):
         held = self.plants.get(plant)
@@ -139,11 +126,7 @@ class Identities:
             return dict(identifier=form, kind='parcel', entries=None,
                         plants={p for e, plants in self.by_entry.items() if parcel and self._entry_parcel(e) == parcel
                                 for p in plants})
-        if set(form) == {'cod'}:
-            entries = list(self.by_key.get(form['cod'].strip(), ()))
-        else:
-            card = _card(form['card'])
-            entries = list(self.by_card.get((_place(form['comune']), card), ())) if card is not None else []
+        entries = [e.oid for e in self.register.names(form)]
         return dict(identifier=form, kind='register', entries=entries,
                     plants=set().union(*(self.by_entry.get(e, set()) for e in entries)))
 
@@ -167,8 +150,9 @@ class Identities:
         evidence that no tree carries it, so the record stays unattached and named, never attached.
 
         A key or card naming a register entry outside the plant's candidates names a monumental tree, whether or not
-        PR #30's rows hold it as a plant, so it blocks: a grant for that tree must not reach this plant. Whether an
-        Osservatorio record may decide that a plant is an entry row 9 left outside it is row 9's question."""
+        PR #30's rows hold it as a plant, so it blocks: a grant for that tree must not reach this plant. Row 9 never
+        decides an entry outside the candidates: a record naming one within 50 m makes the identity unknown, and
+        one beyond 50 m leaves it unchanged (`protection.identity`)."""
         form, held = named['identifier'], self.plants[plant]
         identity = held['identity']
         if named['kind'] == 'sample':
@@ -200,14 +184,16 @@ class Identities:
                            f"{held['candidates']}")
         return '; '.join(reasons)
 
-    def attach(self, group):
-        """One plant's group of printed identifiers: dict(plant, unchecked) where it attaches, else dict(cause,
-        detail).
+    def attach(self, group, at=None):
+        """One plant's group of printed identifiers, group `at` = (record, number): dict(plant, unchecked) where it
+        attaches, else dict(cause, detail).
 
         It attaches to the one plant its deciding identifiers name where every other identifier it prints agrees
         with that plant's row 9 identity: a key or card naming the plant's identity entry, or one of the candidate
         entries of an 'unknown' plant; a parcel, only through the identity entry's own parcel, and otherwise left
-        unchecked. Otherwise it is unattached: 'identifiers in conflict' where they name different plants or one
+        unchecked. A group row 9 reads as naming a candidate entry for the plant and does not decide (records or a
+        note disagree, or the entry is named for several plants) never agrees: a grant it carries could be another
+        tree's. Otherwise it is unattached: 'identifiers in conflict' where they name different plants or one
         disagrees with row 9 (each disagreement named); 'identity undecided' where its keys and cards name only
         entries that are no plant's identity, among them candidates of 'unknown' plants, and nothing else decides;
         'several matches' where an identifier names several plants or entries, or a parcel names plants; 'no
@@ -220,6 +206,8 @@ class Identities:
             plant = next(iter(deciding))
             checks = [(n, self.check(n, plant)) for n in named]
             detail = [reason for _, reason in checks if reason not in (None, 'unchecked')]
+            detail += [f'row 9 reads this group as naming entry {entry} for plant {plant} and does not decide it: '
+                       f'{rule}' for named_plant, entry, rule in self.undecided.get(at, ()) if named_plant == plant]
             if not detail:
                 return dict(plant=plant, unchecked=[n['identifier'] for n, reason in checks if reason == 'unchecked'])
             cause = 'identifiers in conflict'
@@ -253,7 +241,7 @@ def attach(records, identities):
     for record in records:
         seen = {}
         for number, group in enumerate(record['identifiers'], 1):
-            outcome = identities.attach(group)
+            outcome = identities.attach(group, (record['record'], number))
             plant = outcome.get('plant')
             if plant is None:
                 unattached.append(dict(record=record['record'], kind=record['kind'], group=number,
@@ -315,7 +303,8 @@ def landscape_results(snapshot, at: date, plants, supplied, *, evaluated_at, per
     dated after `evaluated_at` (the knowledge cutoff) refuses the set; a record outside
     `permitted_controlled_sources` reaches no result, and the results it could change for a plant it names, dated
     on or before `at`, are withheld with the need 'authorized evidence for …' (`WITHHOLDS`). `rows` and `register`
-    are PR #30's identity; `upstream` maps a plant to the values its owning units supply for Art. 33(1)'s measure,
+    are PR #30's rows and the register, with which row 9 decides each identity from the same admitted records
+    (`protection.named_rows`); `upstream` maps a plant to the values its owning units supply for Art. 33(1)'s measure,
     status and infection conjuncts.
 
     A granted record dated after `at` is reported, not passed. A predicate is true or false only where an attached
@@ -331,6 +320,10 @@ def landscape_results(snapshot, at: date, plants, supplied, *, evaluated_at, per
     _upstream(snapshot, at, upstream, plants)
     granted, ungranted = admitted_records(supplied, None, evaluated_at=evaluated_at, zone=zone, family='landscape',
                                           permitted_controlled_sources=permitted_controlled_sources)
+    register = register if isinstance(register, Register) else Register(register)
+    # Row 9 decides each plant's identity from the same records, under the same cutoff and grant; row 10 attaches.
+    rows = named_rows(rows, register, supplied, evaluated_at=evaluated_at, zone=zone,
+                      permitted_controlled_sources=permitted_controlled_sources)
     identities = Identities(rows, register)
     attached, unattached, notes = attach(granted, identities)
     needs = {r['record']: need for r, need in ungranted}

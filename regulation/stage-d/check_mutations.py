@@ -1,5 +1,5 @@
-"""Bounded discriminating mutations of the lawful-dueness class (PR #35) and of the join's rule
-table (PR #40), in memory.
+"""Bounded discriminating mutations of the lawful-dueness class (PR #35), of the join's rule
+table (PR #40) and of row 9's naming-record rule (PR #48), in memory.
 
 No canonical file is edited. Each named regression must pass as built and fail on its
 associated wrong A meaning or wrong implementation; this is evidence about these
@@ -92,6 +92,54 @@ CODE = (
      "            recipient = _printed(r['recipient'])", "            recipient = (r['recipient'] or '').strip()",
      'test_annex_positions.SuppliedRecordsAtPositions.'
      'test_through_the_writer_a_narrower_grant_withholds_a_result_at_a_position_and_never_changes_it'),
+    # Row 9's naming records (PR #48): one mutation per rule.
+    ('let a record naming a candidate not decide it', 'cordon_d.protection',
+     "        return Candidates(plant, tuple(within), next(iter(entries)), '; '.join(said))\n",
+     "        return Candidates(plant, tuple(within), 'unknown', '; '.join(said))\n",
+     'test_protection.NamingRecords.'
+     'test_a_record_naming_the_one_candidate_decides_it_and_the_other_plants_keep_it_marked'),
+    ('drop a candidate a record names for another plant', 'cordon_d.protection',
+     "                                    if marks[e['entry']] else e for e in p['candidates']['entries']]\n",
+     "                                    if False else e for e in p['candidates']['entries'] if not marks[e['entry']]]\n",
+     'test_protection.NamingRecords.'
+     'test_a_record_naming_the_one_candidate_decides_it_and_the_other_plants_keep_it_marked'),
+    ('let an entry beyond d within 50 m decide', 'cordon_d.protection',
+     '                    placed = BEYOND if exact <= PAIRING_M else FAR\n',
+     '                    placed = WITHIN if exact <= PAIRING_M else FAR\n',
+     'test_protection.NamingRecords.test_an_entry_beyond_d_within_50_m_makes_the_identity_unknown_and_never_decides'),
+    ('take an entry that prints no point for another tree', 'cordon_d.protection',
+     '                    distance, d, placed = None, d_of(plant, entry), UNPLACED\n',
+     '                    distance, d, placed = None, d_of(plant, entry), FAR\n',
+     'test_protection.NamingRecords.test_an_entry_beyond_d_within_50_m_makes_the_identity_unknown_and_never_decides'),
+    ('let a record naming an entry beyond 50 m change the identity', 'cordon_d.protection',
+     '                    placed = BEYOND if exact <= PAIRING_M else FAR\n', '                    placed = BEYOND\n',
+     'test_protection.NamingRecords.test_an_entry_beyond_50_m_is_a_conflict_and_the_identity_is_unchanged'),
+    ('let a tag or COD naming several entries name the first', 'cordon_d.protection',
+     '            if len(hits) == 1:\n', '            if hits:\n',
+     'test_protection.NamingRecords.test_a_repeated_cod_or_a_card_repeated_in_its_comune_names_nothing'),
+    ('decide an entry named for several plants', 'cordon_d.protection', '    elif others:\n', '    elif False:\n',
+     'test_protection.NamingRecords.test_an_entry_named_for_several_plants_decides_for_none'),
+    ('decide where records disagree', 'cordon_d.protection', '    elif len(entries) > 1:\n', '    elif False:\n',
+     'test_protection.NamingRecords.test_records_that_disagree_decide_nothing'),
+    ('let a record overrule the note', 'cordon_d.protection',
+     '    elif codes and {c.entry for c in codes} != entries:\n', '    elif False:\n',
+     'test_protection.NamingRecords.test_a_record_and_the_note_that_disagree_decide_nothing'),
+    ('let a reference naming separate plants decide', 'cordon_d.protection',
+     '        cause = SEPARATE if len({plants[p].printer for p in mine}) > 1 else NO_PLANT if not all(named) else None\n',
+     '        cause = NO_PLANT if not all(named) else None\n',
+     'test_protection.NamingRecords.test_a_reference_naming_separate_plants_decides_nothing_and_is_reported'),
+    ('let a record outside the grant name an entry', 'cordon_d.protection', '        if need is not None:\n',
+     '        if False:\n', 'test_protection.NamingRecords.test_a_record_outside_the_grant_names_nothing'),
+    ('read a printed comune upper-cased only, as the note-code rule did', 'cordon_d.protection',
+     "    return ' '.join(text.split()).upper().replace(\"' \", \"'\").rstrip(\"'\")\n",
+     "    return str(text or '').strip().upper()\n", 'test_protection.NamingRecords.test_one_reader_of_a_printed_card'),
+    ('attach a group row 9 reads and does not decide', 'cordon_d.landscape',
+     "            if n['cause'] == WITHIN and n['entries'] != [p['candidates']['identity']]:\n", '            if False:\n',
+     'test_landscape.LandscapeRecords.test_a_register_entry_against_a_decided_plant_or_one_that_is_not_a_register_tree'),
+    ("attach through PR #30's identity without the run's records", 'cordon_d.landscape',
+     '    rows = named_rows(rows, register, supplied, evaluated_at=evaluated_at, zone=zone,\n',
+     '    rows = named_rows(rows, register, [], evaluated_at=evaluated_at, zone=zone,\n',
+     'test_landscape.LandscapeRecords.test_a_negative_olive_whose_identity_is_unknown'),
 )
 
 

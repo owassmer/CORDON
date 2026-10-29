@@ -169,6 +169,327 @@ class TheRecordAsPrinted(unittest.TestCase):
         self.assertIsNone(characteristics_finding(unprinted).truth)
 
 
+# --- naming records (PR #48) -------------------------------------------------------------------------------------
+# Every plant, entry and record here is a FIXTURE (identifiers 92xxxxx and 99xxxx, `fixture: true`) in the shape of a
+# real row of PR #30's rows: P1 is negative olive 11200168's (comune None, one candidate entry, d 17.48 m); P2 is
+# 11200171's (four candidates, among them P1's); P3 and P4 are the order plants that also hold P1's entry; P5 is
+# 10201162's ("not a register tree", an entry 33.98 m away, d 30.55 m); P6 is 10201158's (an entry 38.7 km away);
+# P7 and P8 carry one reference at two dates (10600377's); P9 is 1606667's (its note's tag decides its entry). The
+# rows are built by PR #30's own functions over the fixture register; the expected identities and rules below are
+# written out by hand from the fixture points, not taken from the code under test.
+
+ROME = __import__('zoneinfo').ZoneInfo('Europe/Rome')
+CUTOFF = __import__('datetime').datetime(2025, 9, 30, 18, tzinfo=ROME)
+GRANT = frozenset({'f' * 64})
+P1, P2, P5, P6, P9, Q9 = '9200168', '9200171', '9201162', '9201158', '9206667', '9206668'
+P3, P4 = 'feedfeed0003@17.27520121,40.80000000', 'feedfeed0004@17.27503727,40.80000000'
+P7, P8, P11, P12 = '9200377@2023-03-07', '9200377@2024-03-07', '9200300', '9200400'
+REPEATED = '990202_22_310_072030'
+
+
+def entry(oid, key, card, comune, x, y, label='DGR 995/2024'):
+    return protection.Entry('listed', oid, key, card, label, None, comune, '17', '175', x, y, date(2022, 5, 3), 'e' * 64)
+
+
+REGISTER = [
+    entry('993516', 'UM993771', '993858', 'MONOPOLI', 100000.0, 200015.47, 'DGR 1993/2022'),  # batch bound 10.08 m
+    entry('993538', 'UM993538', '993538', 'MONOPOLI', 100000.0, 200034.49),                   # 1.73 m from P2
+    entry('993540', 'UM993540', '993540', 'MONOPOLI', 100014.79, 200032.76),                  # 14.79 m from P2
+    entry('993818', 'UM993818', '993818', 'MONOPOLI', 99986.18, 200032.76),                   # 13.82 m from P2
+    entry('995494', 'UM995994', '13', 'Castellana Grotte ', 110033.98, 200000.0),             # 33.98 m from P5
+    entry('992012', '990994_28_68_074012', '0990994', 'OSTUNI', 156049.57, 185899.45),      # 38,709.13 m from P6
+    entry('997001', 'UM997001', '997001', 'MONOPOLI', 130005.0, 200000.0),                    # P7 and P8's candidate
+    entry('999001', '990101_21_300_072030', '0990101', 'MONOPOLI', 140002.0, 200000.0),     # P9's tag
+    entry('999004', '990404_21_301_072030', '0990404', 'MONOPOLI', 140015.0, 200000.0),     # 15 m from P9
+    entry('991102', REPEATED, '0990202', 'MONOPOLI', 150005.0, 200000.0),
+    entry('991103', REPEATED, '0990303', 'MONOPOLI', 190000.0, 210000.0),
+    entry('991201', 'UM991201', '996213', "NARDO'", 170005.0, 200000.0),
+    entry('991202', 'UM991202', '996213', 'NARDO`', 180000.0, 210000.0),
+    entry('991301', 'UM991301', '991301', 'MONOPOLI', None, None),                             # prints no point
+]
+# (kind, comune, x, y, notes, observations, coincides_with)
+PLANTS = {
+    P1: ('negative olive', None, 100000.0, 200000.0, (), [[P1, '2024-02-13']], []),
+    P2: ('in-reach positive', 'MONOPOLI', 100000.0, 200032.76, (), [[P2, '2024-02-13']], []),
+    P3: ('order plant', 'MONOPOLI', 100010.0, 200015.47, (), [['9100003', '2022-06-17']], ['9100003']),
+    P4: ('order plant', 'MONOPOLI', 99990.0, 200015.47, (), [['9100004', '2022-06-17']], ['9100004']),
+    P5: ('negative olive', None, 110000.0, 200000.0, (), [[P5, '2023-01-18']], []),
+    P6: ('negative olive', None, 120000.0, 200000.0, (), [[P6, '2023-01-18']], []),
+    P7: ('in-reach positive', 'MONOPOLI', 130000.0, 200000.0, (), [['9200377', '2023-03-07']], []),
+    P8: ('in-reach positive', 'MONOPOLI', 130000.5, 200000.0, (), [['9200377', '2024-03-07']], []),
+    P9: ('in-reach positive', 'MONOPOLI', 140000.0, 200000.0,
+         ('sintomi assenti. pianta monumentale censita targhetta n. 0990101',), [[P9, '2023-05-02']], []),
+    Q9: ('negative olive', None, 140004.0, 200000.0, (), [[Q9, '2023-05-02']], []),
+    P11: ('negative olive', None, 150000.0, 200000.0, (), [[P11, '2023-05-02']], []),
+    P12: ('negative olive', None, 170000.0, 200000.0, (), [[P12, '2023-05-02']], []),
+}
+ERROR_M = 7.4
+
+
+def bound(e):
+    from types import SimpleNamespace
+    return SimpleNamespace(error_m=10.08 if e.label == 'DGR 1993/2022' else 23.15)
+
+
+def fixture_rows():
+    """PR #30's rows for the fixture plants, from its own note-code rule and candidates."""
+    notes = {p: (comune, x, y, n, tuple(map(tuple, obs))) for p, (_, comune, x, y, n, obs, _) in PLANTS.items()}
+    codes = protection.note_codes(notes, REGISTER, lambda plant, e: ERROR_M + bound(e).error_m)
+    plants = []
+    for plant, (kind, comune, x, y, _, observations, coincides) in PLANTS.items():
+        named = [c for c in codes if c.plant == plant]
+        located = [e for e in REGISTER if e.x is not None]
+        cand = protection.candidates(plant, x, y, ERROR_M, located, bound, named)
+        plants.append(dict(plant=plant, kind=kind, order=None, coincides_with=coincides, comune=comune,
+                           point=dict(x=x, y=y, crs='EPSG:32633', error_m=ERROR_M), observations=observations,
+                           codes=[dict(code=c.code, entry=c.entry, cause=c.cause) for c in named],
+                           candidates={'not a register tree': True, 'identity': cand.identity, 'rule': cand.rule,
+                                       'entries': [dict(entry=e, distance_m=dm, d_m=d) for e, dm, d in cand.entries],
+                                       'd': f"the plant's error_m {ERROR_M} m + the entry's batch bound"}))
+    return dict(plants=plants, zone_entries=[dict(entry=e.oid, qualification=dict(error_m=bound(e).error_m))
+                                             for e in REGISTER])
+
+
+def naming(name, *groups, source='f' * 64, occurred=date(2025, 8, 20)):
+    """A landscape record (a lodging) whose groups print a plant's identifiers."""
+    return dict(record=name, kind='landscape-lodging', document=f'FIXTURE protocol {name}', source=source,
+                selector=f'fixture:{name}', reading='FIXTURE landscape-lodging: not a fact about any plant',
+                plants=[list(g) for g in groups], occurred=occurred.isoformat(), complete=True,
+                recipient='Regione Puglia, Sezione Tutela e valorizzazione del paesaggio (FIXTURE)', fixture=True)
+
+
+def ref(value):
+    return dict(sample=value)
+
+
+def tag(value, comune='Monopoli'):
+    return dict(card=value, comune=comune)
+
+
+class NamingRecords(unittest.TestCase):
+    """Row 9 decides an identity from an Osservatorio record that names it (`protection.named_rows`)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.rows = fixture_rows()
+        identities = {p['plant']: p['candidates']['identity'] for p in cls.rows['plants']}
+        candidates = {p['plant']: [e['entry'] for e in p['candidates']['entries']] for p in cls.rows['plants']}
+        # PR #30's rule on the fixture, read from the points: P1 has one candidate, P2 four, P3 and P4 hold P1's;
+        # P5 and P6 have none within 30.55 m; P9's note names entry 999001.
+        assert candidates[P1] == ['993516'] and sorted(candidates[P2]) == ['993516', '993538', '993540', '993818']
+        assert '993516' in candidates[P3] and '993516' in candidates[P4], candidates
+        assert identities == {P1: 'unknown', P2: 'unknown', P3: 'unknown', P4: 'unknown', P5: 'not a register tree',
+                              P6: 'not a register tree', P7: 'unknown', P8: 'unknown', P9: '999001', Q9: 'unknown',
+                              P11: 'unknown', P12: 'unknown'}, identities
+
+    def run_rows(self, *records, grant=GRANT):
+        return protection.named_rows(self.rows, REGISTER, list(records), evaluated_at=CUTOFF,
+                                     permitted_controlled_sources=grant, zone=ROME)
+
+    def plant(self, out, name):
+        return next(p for p in out['plants'] if p['plant'] == name)
+
+    def candidate(self, out, plant, entry):
+        return next(e for e in self.plant(out, plant)['candidates']['entries'] if e['entry'] == entry)
+
+    def test_a_record_naming_the_one_candidate_decides_it_and_the_other_plants_keep_it_marked(self):
+        out = self.run_rows(naming('n-1', [ref(P1), tag('993858')]))
+        p1 = self.plant(out, P1)['candidates']
+        self.assertEqual((p1['identity'], p1['rule']), ('993516', 'record n-1 (group 1) prints monitoring reference '
+                         f'{P1}, card 993858 (Monopoli), which names entry 993516 at 15.47 m, within d 17.48 m'))
+        self.assertEqual(p1['named'], [dict(record='n-1', group=1, printed=f'monitoring reference {P1}, card 993858 '
+                                            '(Monopoli)', plants=[P1], entries=['993516'], cause='entry within d',
+                                            distance_m=15.47, d_m=17.48, fixture=True)])
+        # The entry stays a candidate of every other plant that holds it, marked; their identities do not move.
+        for other in (P2, P3, P4):
+            with self.subTest(plant=other):
+                self.assertEqual(self.plant(out, other)['candidates']['identity'], 'unknown')
+                self.assertIn('993516', [e['entry'] for e in self.plant(out, other)['candidates']['entries']])
+                self.assertEqual(self.candidate(out, other, '993516')['named_for'], [
+                    dict(plants=[P1], record='n-1', group=1, cause='entry within d')])
+        self.assertNotIn('named_for', self.candidate(out, P2, '993538'))
+        # Nothing else moves.
+        for before, after in zip(self.rows['plants'], out['plants']):
+            if before['plant'] not in (P1, P2, P3, P4):
+                self.assertIs(after, before)
+        self.assertEqual([n['record'] for n in out['naming_records']], ['n-1'])
+
+    def test_a_record_naming_one_of_several_candidates_decides_it(self):
+        out = self.run_rows(naming('n-1', [tag('993540'), ref(P2)]))
+        self.assertEqual(self.plant(out, P2)['candidates']['identity'], '993540')
+        self.assertIn('which names entry 993540 at 14.79 m, within d 30.55 m',
+                      self.plant(out, P2)['candidates']['rule'])
+        # A COD names its entry as a card does.
+        out = self.run_rows(naming('n-1', [ref(P2), dict(cod='UM993538')]))
+        self.assertEqual(self.plant(out, P2)['candidates']['identity'], '993538')
+
+    def test_an_entry_beyond_d_within_50_m_makes_the_identity_unknown_and_never_decides(self):
+        out = self.run_rows(naming('n-1', [ref(P5), tag('13', 'Castellana Grotte')]))
+        p5 = self.plant(out, P5)['candidates']
+        self.assertEqual((p5['identity'], p5['rule'], p5['entries']), (
+            'unknown', 'unknown between entry 995494 and "not a register tree": entry beyond d: record n-1 (group 1) '
+            f'prints monitoring reference {P5}, card 13 (Castellana Grotte), which names entry 995494 at 33.98 m, '
+            'beyond d 30.55 m', []))
+        # An entry that prints no point: its distance is not known, so it is not taken to be another tree.
+        out = self.run_rows(naming('n-1', [ref(P1), tag('991301')]))
+        self.assertEqual(self.plant(out, P1)['candidates']['rule'],
+                         'unknown between entry 991301, the entries within d and "not a register tree": entry prints '
+                         f'no point: record n-1 (group 1) prints monitoring reference {P1}, card 991301 (Monopoli), '
+                         'which names entry 991301, which prints no point')
+
+    def test_an_entry_beyond_50_m_is_a_conflict_and_the_identity_is_unchanged(self):
+        out = self.run_rows(naming('n-1', [ref(P6), tag('0990994', 'Ostuni')]))
+        p6 = self.plant(out, P6)['candidates']
+        self.assertEqual((p6['identity'], p6['rule']), ('not a register tree', 'no entry within d'))
+        self.assertEqual([(n['entries'], n['cause'], n['distance_m'], n['d_m']) for n in p6['named']],
+                         [(['992012'], 'entry not a candidate', 38709.13, 30.55)])
+
+    def test_a_repeated_cod_or_a_card_repeated_in_its_comune_names_nothing(self):
+        for group, entries in (([ref(P11), dict(cod=REPEATED)], ['991102', '991103']),
+                               ([ref(P12), tag('996213', 'Nardò')], ['991201', '991202'])):
+            with self.subTest(group=group):
+                out = self.run_rows(naming('n-1', group))
+                plant = self.plant(out, group[0]['sample'])['candidates']
+                self.assertEqual(plant['identity'], 'unknown')
+                self.assertEqual([(n['entries'], n['cause']) for n in plant['named']],
+                                 [(entries, 'names several entries')])
+
+    def test_an_entry_named_for_several_plants_decides_for_none(self):
+        out = self.run_rows(naming('n-1', [ref(P1), tag('993858')]), naming('n-2', [ref('9100003'), tag('993858')]))
+        for plant, own, other in ((P1, 'n-1', P3), (P3, 'n-2', P1)):
+            with self.subTest(plant=plant):
+                rule = self.plant(out, plant)['candidates']['rule']
+                self.assertTrue(rule.startswith('unknown between the entries within d and "not a register tree": '
+                                                'named for several plants: record ' + own), rule)
+                self.assertIn(f'record {"n-2" if own == "n-1" else "n-1"} (group 1) names it for plant {other} '
+                              '(entry within d)', rule)
+        # Another plant's note naming the entry blocks it too: P9's note names 999001, 2 m from Q9.
+        out = self.run_rows(naming('n-1', [ref(Q9), tag('0990101')]))
+        self.assertEqual(self.plant(out, Q9)['candidates']['rule'],
+                         'unknown between the entries within d and "not a register tree": named for several plants: '
+                         f'record n-1 (group 1) prints monitoring reference {Q9}, card 0990101 (Monopoli), which names '
+                         f"entry 999001 at 2.0 m, within d 30.55 m; plant {P9}'s note prints code 0990101, which "
+                         'names it')
+        self.assertEqual(self.plant(out, P9)['candidates']['identity'], '999001')
+
+    def test_records_that_disagree_decide_nothing(self):
+        out = self.run_rows(naming('n-1', [ref(P2), tag('993540')]), naming('n-2', [ref(P2), tag('993818')]))
+        rule = self.plant(out, P2)['candidates']['rule']
+        self.assertTrue(rule.startswith('unknown between the entries within d and "not a register tree": records '
+                                        'disagree: record n-1'), rule)
+        self.assertIn('names entry 993818 at 13.82 m, within d 30.55 m', rule)
+
+    def test_a_record_and_the_note_that_disagree_decide_nothing(self):
+        out = self.run_rows(naming('n-1', [ref(P9), tag('0990404')]))
+        self.assertEqual(self.plant(out, P9)['candidates']['rule'],
+                         'unknown between the entries within d and "not a register tree": record and note disagree: '
+                         f'record n-1 (group 1) prints monitoring reference {P9}, card 0990404 (Monopoli), which names '
+                         'entry 999004 at 15.0 m, within d 30.55 m; its note prints code 0990101, which names entry '
+                         '999001')
+        # A record that agrees with the note keeps the entry, and both are named.
+        out = self.run_rows(naming('n-1', [ref(P9), tag('0990101')]))
+        self.assertEqual(self.plant(out, P9)['candidates']['identity'], '999001')
+        self.assertTrue(self.plant(out, P9)['candidates']['rule'].endswith(
+            'its note prints code 0990101, which names entry 999001'))
+
+    def test_a_reference_naming_separate_plants_decides_nothing_and_is_reported(self):
+        out = self.run_rows(naming('n-1', [ref('9200377'), tag('997001')]))
+        for plant in (P7, P8):
+            with self.subTest(plant=plant):
+                candidates = self.plant(out, plant)['candidates']
+                self.assertEqual(candidates['identity'], 'unknown')
+                self.assertEqual([(n['plants'], n['entries'], n['cause']) for n in candidates['named']],
+                                 [([P7, P8], ['997001'], 'reference names separate plants')])
+        # A reference that names no plant decides nothing either, and blocks the entry for another plant.
+        out = self.run_rows(naming('n-1', [ref('9299999'), tag('993858')]), naming('n-2', [ref(P1), tag('993858')]))
+        self.assertIn('named for several plants', self.plant(out, P1)['candidates']['rule'])
+        self.assertIn('record n-1 (group 1) names it for plants none held here (reference names no plant)',
+                      self.plant(out, P1)['candidates']['rule'])
+
+    def test_a_record_outside_the_grant_names_nothing(self):
+        out = self.run_rows(naming('n-1', [ref(P1), tag('993858')], source='e' * 64))
+        p1 = self.plant(out, P1)['candidates']
+        self.assertEqual((p1['identity'], p1.get('needs')), ('unknown', ['authorized evidence for landscape-lodging '
+                                                                         'record n-1']))
+        self.assertNotIn('named', p1)
+        self.assertNotIn('named_for', self.candidate(out, P2, '993516'))
+        self.assertEqual((out['naming_records'], out['ungranted']), ([], [dict(
+            record='n-1', kind='landscape-lodging', need='authorized evidence for landscape-lodging record n-1')]))
+
+    def test_a_record_after_the_cutoff_refuses_the_set_and_no_record_changes_nothing(self):
+        with self.assertRaisesRegex(ValueError, 'Record n-2 .* states occurred 2025-10-01, later than the evaluation'):
+            self.run_rows(naming('n-1', [ref(P1), tag('993858')]),
+                          naming('n-2', [ref(P2), tag('993540')], source='e' * 64, occurred=date(2025, 10, 1)))
+        self.assertIs(self.run_rows(), self.rows)
+        with self.assertRaises(TypeError):
+            self.run_rows(naming('n-1', [ref(P1), tag('993858')]), grant={'f' * 64})
+
+    def test_one_reader_of_a_printed_card(self):
+        """The register's comune variants are one comune, and a text card is read as printed (`Register`)."""
+        register = protection.Register(REGISTER + [entry('991302', 'APP_996213', 'APP_996213', "NARDO'", 175000.0,
+                                                         200000.0)])
+        for printed, comune in (('996213', 'Nardò'), ('0996213', " nardo' "), ('996213', 'NARDO`')):
+            self.assertEqual([e.oid for e in register.card(printed, comune)], ['991201', '991202'])
+        self.assertEqual([e.oid for e in register.card('app_996213', 'Nardò')], ['991302'])
+        self.assertEqual([e.oid for e in register.cod(f' {REPEATED} ')], ['991102', '991103'])
+        # The note-code rule reads the same way: a monitoring record's NARDÒ is the register's NARDO'.
+        code, = protection.note_codes({'9200500': ('NARDÒ', 175002.0, 200000.0, ('targhetta n. 0991399',))},
+                                      REGISTER + [entry('991399', 'UM991399', '991399', "NARDO'", 175000.0, 200000.0)],
+                                      lambda plant, e: 30.55)
+        self.assertEqual((code.entry, code.cause), ('991399', 'names entry'))
+
+
+class ReadProtectionRun(unittest.TestCase):
+    """`read_protection.py --records`: the run states its decision, cutoff and grant, and its rows are its own."""
+
+    def test_the_run_is_stated_and_its_rows_never_go_to_the_shared_file(self):
+        import sys
+        import tempfile
+        from unittest import mock
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import read_protection
+        stated = ['--records', '/nonexistent.json', '--decision', '2025-09-01', '--known-through', CUTOFF.isoformat(),
+                  '--permitted-controlled-sources']
+        for argv in (stated[:4] + stated[6:], stated[:2] + stated[4:], stated[:6], stated[2:] + ['--out', '/tmp/x'],
+                     stated[:5] + ['2025-09-30T18:00:00'] + stated[6:]):
+            with self.subTest(argv=argv), mock.patch('sys.stderr'), self.assertRaises(SystemExit):
+                read_protection.arguments(argv)
+        self.assertEqual(read_protection.arguments(stated)[1].permitted_controlled_sources, [])
+        self.assertIsNone(read_protection.arguments([])[1].decision)
+        with tempfile.TemporaryDirectory() as store:
+            records = Path(store) / 'records.json'
+            records.write_text(json.dumps([naming('n-1', [ref(P1), tag('993858')], occurred=date(2025, 10, 1))]))
+            run = ['--records', str(records)] + stated[2:]
+            with mock.patch.object(read_protection, 'store_root', return_value=Path(store)), \
+                    mock.patch.object(protection, 'read', side_effect=AssertionError('the store is not read')):
+                # A run's rows never go to the shared rows folder.
+                with mock.patch('sys.stderr'), self.assertRaises(SystemExit):
+                    read_protection.main(run + ['--out', f'{store}/derived/protected-status/run.json'])
+                # A record after the cutoff refuses the set before the store is read.
+                with self.assertRaisesRegex(ValueError, 'later than the evaluation'):
+                    read_protection.main(run + ['--out', f'{store}/run.json'])
+            self.assertFalse((Path(store) / 'derived').exists())
+
+    def test_verify_holds_named_rows_to_the_run_inputs(self):
+        """`contracts.json` names `protection.named_rows` as a run-input entry point: neither its cutoff nor its grant
+        may have a default."""
+        from unittest import mock
+        import verify
+        verify.verify()
+
+        def cutoff_defaulted(rows, register, supplied, *, permitted_controlled_sources, zone, bound_of=None,
+                             evaluated_at=CUTOFF):
+            raise AssertionError('not called')
+
+        def grant_defaulted(rows, register, supplied, *, evaluated_at, zone, bound_of=None,
+                            permitted_controlled_sources=frozenset()):
+            raise AssertionError('not called')
+        for name, fake in (('evaluated_at', cutoff_defaulted), ('permitted_controlled_sources', grant_defaulted)):
+            with self.subTest(name=name), mock.patch.object(protection, 'named_rows', fake), \
+                    self.assertRaisesRegex(ValueError, f'{name} has a default on cordon_d.protection.named_rows'):
+                verify.verify()
+
+
 def held():
     try:
         register = json.loads((ROOT / protection.SOURCES / 'register.json').read_text())

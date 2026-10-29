@@ -5,9 +5,10 @@
 `case_prescriptions.LANDSCAPE_KINDS` names, each naming its plants by the identifiers it prints for each. They are
 controlled sources: the run states its knowledge cutoff (`--known-through`) and its grant
 (`--permitted-controlled-sources`, stated even when empty), and `landscape_results` admits them under both. Each
-plant a record names attaches through PR #30's identity (its rows, `derived/protected-status/rows-<version>.json` as
-`read_protection.py` writes them, and the register capture), or is listed unattached with its cause; a record
-attached to a plant not asked about is listed under `elsewhere`. `--plants` names the plants as PR #30's rows name
+plant a record names attaches through row 9's identity, or is listed unattached with its cause: PR #30's rows
+(`derived/protected-status/rows-<version>.json` as `read_protection.py` writes them without records, and the
+register capture), with the identities row 9 decides from the same records under the same cutoff and grant
+(`protection.named_rows`). A record attached to a plant not asked about is listed under `elsewhere`. `--plants` names the plants as PR #30's rows name
 them. No owning unit yet supplies Art. 33(1)'s measure, status or infection conjunct to this caller, so C names
 them. `--out` writes the results outside the tree.
 """
