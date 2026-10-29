@@ -760,10 +760,57 @@ notification, response, default or performance.
 `cordon_d.protection` (`scripts/read_protection.py`) supplies row 9. An affected
 plant's candidates are "not a register tree", always, and every entry within d:
 the plant's `error_m` as `metric_point` returns it plus the entry's survey batch
-bound. The flag decides no identity. A code in the plant's note names an entry only
+bound. The flag decides no identity. A printed card or tag is read as the register
+prints it (its number, or its text where it is not all digits, such as APP_618213)
+in its comune, the comune's printed variants folded (NARDO', NARDO` and Nardò are
+one), and a COD as printed: one reader (`protection.Register`) for the note codes,
+the naming records and row 10. A code in the plant's note names an entry only
 when it equals, as a number, exactly one survey card in the plant's comune, that
 entry lies within d, and no other plant's note prints it; otherwise the identity
-stays unknown between the entries within d and "not a register tree". An entry's
+stays unknown between the entries within d and "not a register tree". The
+Osservatorio's own landscape record names an entry too, with the standing of the
+note (Owen, 2026-10-28; `protection.named_rows`, `scripts/read_protection.py
+--records`): each plant group that prints a monitoring reference beside a tag or
+COD. A reference names every plant whose observations or `coincides_with` carry
+it, and plants carrying the same observations are one printer; a reference that
+names separate printers, or a group whose reference names no plant, decides nothing
+and is reported. Each tag or COD is read on its own: one naming several entries,
+or none, names nothing, and no other identifier narrows it. The rest of the group
+only vetoes the entry a tag or COD names: another tag or COD that does not name
+it, alone or among several ("record's identifiers disagree"), or a parcel that is
+not the entry's own ("record's parcel disagrees"), its comune folded as a card's
+is, or a parcel this reader cannot hold to the entry because it does not read the
+entry's or the record's as comune, foglio and particella numbers (a blank
+particella, several particelle such as "27,256,659", or "188/a"): the cause names
+the reader's limit and what is printed, never the source's silence; one reader
+(`protection.parcel_agrees`) holds a parcel to an entry for row 9 and row 10. An
+entry the record names within the plant's d (one of its candidates), and nothing
+in its group vetoes, decides the identity, unless records name different entries
+for it ("records disagree"), its note names another ("record and note disagree"),
+or another plant's note or record names that entry ("named for several plants");
+then the identity is unknown and every record and note is named. A note that names
+an entry decides nothing where another plant's record names that entry ("named for
+several plants"), as two notes printing one code name nothing: both plants are
+unknown. An entry the record names within d that its group vetoes, an entry beyond
+d but within 50 m (the window in which the batch residuals are measured), or one
+that prints no point, makes the identity unknown across that entry, the candidates
+and "not a register tree", naming the record, the distance and the cause; the
+record does not decide. An entry beyond 50 m is another tree, and either the
+reference or the tag mistyped: the conflict ("entry not a candidate", with its
+distance) is reported beside the plant it names, which it leaves unchanged whatever
+else its group prints, and the record counts as naming its entry for any other plant holding it, as a record whose
+reference names no plant does. A named entry stays a candidate of every other plant,
+marked `named_for` that plant. The records are admitted as the run states: one dated
+after the knowledge cutoff refuses the set; one outside the grant names nothing, and
+each plant whose identity a granted version of it could change keeps its identity,
+with the need "authorized evidence for …": a plant its reference names, where a tag
+or COD names one entry that lies within the plant's d, beyond d within 50 m, or
+prints no point, and every plant holding such an entry among its candidates. Row 10
+then withholds every result for that plant, since each record attaches through the
+identity. The rows of a run with records belong to it (stdout or a path it names),
+never the shared rows file, and are never taken back: `named_rows`, and so row 10,
+takes only rows in the shape `read_protection.py` writes without records, and
+refuses one carrying any other key, naming it (`protection.as_written`). An entry's
 survey batch is the survey the recitals of the act that first listed it name for
 its group (its label's entries, split by survey date): the survey whose recital
 count is within 5% of the group's, or, where none fits, the one survey those
@@ -933,7 +980,8 @@ names, dated on or before the evaluation date, the results it could change (Art.
 33(1) for a decision, 146(5) and the clock for a lodging, 146(5) for an opinion
 route, 146(8) for a receipt) are withheld with the need "authorized evidence for
 …". Each group attaches, or is reported unattached, on its own, through row 9's
-identity, which it never changes: an entry; "unknown" between the candidate
+identity, which row 9 decides from the same admitted records (Protected status)
+and row 10 never changes: an entry; "unknown" between the candidate
 entries within the plant's d; or "not a register tree". A monitoring reference
 names the plants that carry it; a COD, or a census card with its comune, names
 register entries, and a plant whose row 9 identity is one of them. A group
@@ -941,11 +989,12 @@ attaches to the one plant its deciding identifiers name (a monitoring reference
 naming one plant, or a key or card naming one entry that is one plant's
 identity) where every other identifier it prints agrees with that plant: a key
 or card names the plant's identity entry or, for an "unknown" plant, one of its
-candidates; a parcel is checked only against an entry identity's own parcel, and
-otherwise is reported unchecked, neither blocking nor deciding. A card is read as
-the register prints it (its number, or its text where it is not all digits, such
-as APP_618213) in its comune, the comune's printed variants folded (NARDO',
-NARDO` and Nardò are one). A key or card that names no register entry held here
+candidates; a parcel is checked only against an entry identity's own parcel, by
+row 9's reader (`protection.parcel_agrees`), and otherwise, or where that entry
+prints none it reads, is reported unchecked, neither blocking nor deciding. A group that row
+9 reads as naming a candidate entry for the plant and does not decide never
+agrees: a grant it carries could be another tree's. A card or COD is read by row
+9's reader. A key or card that names no register entry held here
 blocks for every plant: the index finding none is not evidence that no tree
 carries it. Otherwise the group is unattached and
 fills nothing: identifiers in conflict where they name different plants or one
