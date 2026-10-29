@@ -8,7 +8,7 @@
     "A": {
       "status": "CLOSED",
       "accepted_by": "Owen Wassmer",
-      "reopened_proposition": "PR #35 reopens A (plan converged 2026-09-24): DDS 18/2024 withdraws, from 14 March 2024, removal of the host plants within 50 m of the infected plants DDS 96, 113, 119, 124 and 138/2023 prescribed, and not removal of the infected plants they list (a new stable provision naming the five orders in corrects_instrument_ids, with no end). A governing row that withholds removal says so with one of two generic names, POPULATION_NOT_LAWFULLY_DUE or LAWFULLY_DUE_IN_PART; the DDS 45/2023 hold and the two ST1 olive rows gain v2 versions with that whole-or-part route table, each v1 kept as SUPERSEDED lineage; the hold's v2 carries PR #32's characteristics and pending-recognition conjuncts. 426 -> 430 provision versions; the national prefix is unchanged. Binding takes effect only on Owen's merge. Acceptance remains revisable.",
+      "reopened_proposition": "PR #47 reopens A (plan converged 2026-10-28; Owen's rulings of 2026-10-29): D.lgs. 19/2021 Article 33(1)'s second paragraph read a bare predicate for the plant's monumental or historic-interest legal status and counted any granted landscape authorization. Its legal status is now any one instrument's: L.R. 14/2007 definitive listing; L. 10/2013 Article 7 (the national list, and from 20 September 2025 the Region's recognition; the first paragraph's derogation lifts Article 7's municipal authorization, so the row is a source of status only); a declaration of notable public interest naming the tree (D.lgs. 42/2004 Article 136, with Article 157; trees named as a feature of a declared area give none); or a published proposal in effect naming it (Articles 139(2), 139(4), 141(5)). A granted authorization counts while in effect under Article 146(4). Four new stable provisions, five versions (430 -> 435), all in the national prefix; the Article 33(1) row is recomposed in place. Binding takes effect only on Owen's merge. Acceptance remains revisable.",
       "canonical_artifacts": {
         "eu": {
           "path": "regulation/stage-a/authoring-eu.json",
@@ -17,10 +17,10 @@
         },
         "italy_and_puglia": {
           "path": "regulation/jurisdiction/canonical/authoring.json",
-          "sha256": "343c8c34875f31476a68e3230e148402c535554c45d1581dc35f6c0e524a81c1",
-          "provision_versions": 430,
-          "national_prefix_rows": 220,
-          "national_prefix_sha256": "7fc93c6fbc9c9b15245482d7ea4ad458ab404867a395bcaf1f2084086b99dd37"
+          "sha256": "a20259fcf65dd5b4838c6d2f30a95abb51f7047637c45d8d2b4e0f6e6b1c0ddc",
+          "provision_versions": 435,
+          "national_prefix_rows": 225,
+          "national_prefix_sha256": "25b4a6dcd6f8154dbdfbdfeb13c962c4d54d9e7a423f4b152d551f39d45f26fa"
         }
       },
       "bounded_unknowns": [

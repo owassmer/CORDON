@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "graph_scope": "CURRENT_LATEST_VERSIONS_ONLY",
-  "historical_versions_excluded": 97,
+  "historical_versions_excluded": 98,
   "historical_provision_version_ids": [
     "EU-2016-2031:Art.22(3):annual-survey-results-report:v1",
     "EU-2017-625:Art.37(1,3-5):official-laboratory-designation-tuple:v1",
@@ -15,6 +15,7 @@
     "IT-DM-2022-XYLELLA-PLAN:§6.6.2:containment-vector-treatment-band-5km:pre-m5-v1",
     "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:post-m5-v2",
     "IT-DM-2022-XYLELLA-PLAN:§6.7:containment-surveillance-band-5km:pre-m5-v1",
+    "IT-L10-2013:Art.7(2):monumental-tree-status:v1",
     "PUG-DGR1593-2024:Art7(3)-policy:v1",
     "PUG-DGR1593-2024:notice-elected-execution:v1",
     "PUG-DGR1593-2024:notice-owner-election:v1",
@@ -1859,7 +1860,20 @@
             "predicate": "a valid measure requires plant removal in the exact demarcated area"
           },
           {
-            "predicate": "the plant has monumental or historic-interest legal status"
+            "any_of": [
+              {
+                "provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"
+              },
+              {
+                "provision_ref": "IT-L10-2013:Art.7(2):monumental-tree-status"
+              },
+              {
+                "provision_ref": "IT-DLGS42-A136:Art.136(1):declared-tree"
+              },
+              {
+                "provision_ref": "IT-DLGS42-A139:Art.139-141:proposal-effect"
+              }
+            ]
           },
           {
             "not": {
@@ -1868,6 +1882,9 @@
           },
           {
             "predicate": "the required landscape authorization has been granted"
+          },
+          {
+            "provision_ref": "IT-DLGS42-A146:Art.146(4):authorization-efficacy"
           },
           {
             "predicate": "removal complies with applicable Union obligations"
@@ -2279,6 +2296,43 @@
       "false_effect": "Without an emergency in progress, this periodic emergency-reporting duty does not activate. Missing emergency-state evidence remains UNKNOWN."
     },
     {
+      "stable_provision_id": "IT-DLGS42-A136:Art.136(1):declared-tree",
+      "provision_version_id": "IT-DLGS42-A136:Art.136(1):declared-tree:v1",
+      "operator": "ATOM",
+      "expression": {
+        "predicate": "a declaration of notable public interest adopted on or before the event date names the tree in its object or motivation, alone or in a row or group, and not only as a feature of the area it declares"
+      },
+      "true_effect": "The tree is declared of notable public interest at the event date.",
+      "false_effect": "No declaration in force names the tree. A declaration whose object and motivation name the area the tree stands in, its trees as one feature of that area, gives the tree no status of its own. A declaration whose text is not held leaves the result UNKNOWN."
+    },
+    {
+      "stable_provision_id": "IT-DLGS42-A139:Art.139-141:proposal-effect",
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "predicate": "a proposal of declaration of notable public interest names the tree in its object or motivation, alone or in a row or group, and not only as a feature of the area it proposes"
+          },
+          {
+            "predicate": "the proposal's publication on the albo pretorio of an interested comune began, or the tree's owner, possessor or holder received its communication, on or before the event date"
+          },
+          {
+            "not": {
+              "predicate": "before the event date the proposal was concluded by a declaration of notable public interest or by the competent authority's decision not to declare"
+            }
+          },
+          {
+            "not": {
+              "predicate": "the proposal is a Soprintendente's and the Article 140(1) term for the Ministry's declaration ended before the event date without a declaration adopted"
+            }
+          }
+        ]
+      },
+      "true_effect": "The tree is under a published proposal of declaration of notable public interest at the event date, and Article 146(1) applies to it as to a declared tree.",
+      "false_effect": "No proposal in effect names the tree. A proposal's effect ends with the declaration that concludes it (the Article 136 row then reads the tree), with the decision not to declare, or, for a Soprintendente's proposal, when the Article 140(1) term passes with no declaration (Article 141(5)). Missing publication, communication or outcome dates remain UNKNOWN."
+    },
+    {
       "stable_provision_id": "IT-DLGS42-A146:Art.146(2)",
       "provision_version_id": "IT-DLGS42-A146:Art.146(2):v1",
       "operator": "AND",
@@ -2294,6 +2348,30 @@
       },
       "true_effect": "Submit the intervention project with required documentation to the competent administration and do not begin work before authorization is obtained.",
       "false_effect": "If landscape authorization is not required for the exact intervention, this route does not activate. Missing protected-status or authorization-requirement evidence remains UNKNOWN."
+    },
+    {
+      "stable_provision_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy",
+      "provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
+      "operator": "OR",
+      "expression": {
+        "any_of": [
+          {
+            "predicate": "the event date falls within the five years of efficacy that run from the day the landscape authorization for the removal took effect"
+          },
+          {
+            "all_of": [
+              {
+                "predicate": "the removal works began within those five years"
+              },
+              {
+                "predicate": "the event date falls within the year following the end of those five years"
+              }
+            ]
+          }
+        ]
+      },
+      "true_effect": "The landscape authorization is in effect for the removal at the event date.",
+      "false_effect": "The authorization's efficacy has ended: removal works begun after the five years, or not finished within the year after them, need a new authorization. Missing decision, efficacy or commencement dates remain UNKNOWN."
     },
     {
       "stable_provision_id": "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
@@ -3526,6 +3604,32 @@
       },
       "true_effect": "Treat the laboratory as available for the exact official task where its effective designation and applicable route qualifications are established and no applicable task/class suspension or revocation is active. The laboratory must participate in requested PT/TPS, apply agreed corrective actions after unsatisfactory performance, and give timely reasoned notice of an impediment. On unjustified nonparticipation notified by the NRL, or NRL determination that corrective actions fail to resolve the deficiencies, the SFR, after hearing the CFN, must suspend the affected test and, for Articles 40–42, where appropriate the organism class. Suspension lasts until the deficiencies are resolved or, for unjustified nonparticipation, successful completion of the specific PT.",
       "false_effect": "An effective applicable suspension or revocation, or a proven mandatory route-qualification failure, makes the laboratory unavailable for that official task. Missing qualification/status evidence remains unresolved; a participation breach alone is not an effective suspension."
+    },
+    {
+      "stable_provision_id": "IT-L10-2013:Art.7(2):monumental-tree-status",
+      "provision_version_id": "IT-L10-2013:Art.7(2):monumental-tree-status:v2",
+      "operator": "AND",
+      "expression": {
+        "all_of": [
+          {
+            "any_of": [
+              {
+                "predicate": "a decree approving the elenco degli alberi monumentali d'Italia lists the tree, alone or in its row, alberata or homogeneous group, and was adopted on or before the event date"
+              },
+              {
+                "predicate": "the Region recognised the tree, alone or in its row or homogeneous group, as monumental on or before the event date"
+              }
+            ]
+          },
+          {
+            "not": {
+              "predicate": "a decree deleting the tree's entry from the elenco was published in the Gazzetta Ufficiale on or before the event date"
+            }
+          }
+        ]
+      },
+      "true_effect": "The tree is a monumental tree under L. 10/2013 Article 7 at the event date: the Region has recognised it, or the elenco lists it, and no published decree has deleted it.",
+      "false_effect": "The tree is not a monumental tree under L. 10/2013 Article 7 at the event date. A tree no held decree lists, or one a published decree has deleted, is not; a held instrument whose population or dates are not held leaves the result UNKNOWN."
     },
     {
       "stable_provision_id": "IT-L241-A21BIS:Art.21-bis(1):individual-communication-effect",

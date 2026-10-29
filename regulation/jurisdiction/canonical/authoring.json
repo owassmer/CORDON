@@ -4061,12 +4061,13 @@
     "true_effect": "Decide case by case whether to remove the uninfected monumental or historic-interest plant after landscape authorization and consistently with Union obligations.",
     "false_effect": "If any required condition is affirmatively false, this case-specific route is unavailable. Missing infection, protected status, landscape authorization or Union-law evidence remains UNKNOWN.",
     "reserved_decision_owner": "Competent plant-health authority",
-    "evidence_contract": "Valid removal measure and exact demarcated-area state; plant identity and monumental or historic legal status; evidence that infection is not currently established; landscape-authorization application, opinion and decision; applicable Union obligations; case-specific removal decision.",
+    "evidence_contract": "Valid removal measure and exact demarcated-area state; plant identity and its legal status from each instrument that gives it (L.R. 14/2007 definitive listing; the national list of L. 10/2013 Article 7 and, from 20 September 2025, the Region's recognition; declarations and published proposals of notable public interest); evidence that infection is not currently established; landscape-authorization application, opinion and decision, the day the authorization took effect and the day the works began; applicable Union obligations; case-specific removal decision.",
     "external_dependencies": [
-      "EU-2020-1201:7(3)",
       "EU-2020-1201:12",
       "EU-2020-1201:13(2)",
+      "EU-2020-1201:7(3)",
       "IT-DLGS42-A146:Art.146(2)",
+      "IT-DLGS42-A146:Art.146(4):authorization-efficacy",
       "IT-DLGS42-A146:Art.146(5):regional-decision-owner",
       "IT-DLGS42-A146:Art.146(8):superintendent-opinion"
     ],
@@ -4074,14 +4075,27 @@
     "authority_judgment_required": "YES",
     "authority_judgment_kind": "CASE_SPECIFIC_PROTECTED_PLANT_REMOVAL",
     "legal_linguistic_conflict": "-",
-    "semantic_note": "This route is distinct from removal of a confirmed infected plant, EU Article 7(3) retention and general emergency derogation. Apparent monumentality does not establish protected legal status.",
+    "semantic_note": "This route is distinct from removal of a confirmed infected plant, EU Article 7(3) retention and general emergency derogation. Apparent monumentality does not establish protected legal status. [OWNER RULINGS 2026-10-29] Legal status is any one instrument's: L.R. 14/2007 definitive listing, L. 10/2013 Article 7, a declaration of notable public interest naming the tree, or a published proposal in effect naming it. The landscape authorization is the only authorization this paragraph requires: the first paragraph's derogation lifts L. 10/2013 Article 7's municipal authorization. A granted authorization counts while in effect under D.lgs. 42/2004 Article 146(4).",
     "condition_ast": {
       "all_of": [
         {
           "predicate": "a valid measure requires plant removal in the exact demarcated area"
         },
         {
-          "predicate": "the plant has monumental or historic-interest legal status"
+          "any_of": [
+            {
+              "provision_ref": "PUG-LR14-2007:Art.5(3):definitive-listing"
+            },
+            {
+              "provision_ref": "IT-L10-2013:Art.7(2):monumental-tree-status"
+            },
+            {
+              "provision_ref": "IT-DLGS42-A136:Art.136(1):declared-tree"
+            },
+            {
+              "provision_ref": "IT-DLGS42-A139:Art.139-141:proposal-effect"
+            }
+          ]
         },
         {
           "not": {
@@ -4090,6 +4104,9 @@
         },
         {
           "predicate": "the required landscape authorization has been granted"
+        },
+        {
+          "provision_ref": "IT-DLGS42-A146:Art.146(4):authorization-efficacy"
         },
         {
           "predicate": "removal complies with applicable Union obligations"
@@ -5512,6 +5529,257 @@
     "source_quote_sha256": "1dc97c4e3c51945fed4da09ba1057c6ed245e1fb73b161e85ba6ffd48112863a",
     "lineage_role": "PROCEDURAL_ATOM",
     "provision_version_id": "IT-DLGS42-A146:Art.146(8):superintendent-opinion:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
+    "source_clause_id": "IT-L10-2013::Art.7(2)",
+    "instrument_id": "IT-L10-2013",
+    "stable_provision_id": "IT-L10-2013:Art.7(2):monumental-tree-status",
+    "parent_stable_provision_id": "",
+    "article": "7(2):monumental-tree-status",
+    "structural_kind": "paragraph",
+    "effective_from": "2021-03-13",
+    "effective_to_exclusive": "2025-09-20",
+    "application_basis": "L. 10/2013 Article 7 as amended to 5 May 2018, read from the Article 33(1) consumer’s start on 13 March 2021 to 19 September 2025",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Ministry of Agriculture (MASAF), on the Regions’ lists; from 20 September 2025 the Region",
+    "modality": "-",
+    "true_effect": "The tree is a monumental tree on the elenco degli alberi monumentali d'Italia at the event date.",
+    "false_effect": "The tree is not a monumental tree under L. 10/2013 Article 7 at the event date. A tree no held decree lists, or one a published decree has deleted, is not; a held instrument whose population or dates are not held leaves the result UNKNOWN.",
+    "reserved_decision_owner": "Ministry of Agriculture (MASAF); from 20 September 2025 the Region",
+    "evidence_contract": "The national list's entries per approving or updating decree, each with its adoption date and Gazzetta Ufficiale publication date, and any decree deleting the entry; the tree's identity against the listed entry, alone or in its row or group.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "The decrees approving and updating the elenco (D.D. 5450/2017 and its updates) state no date of effect: each is published in the Gazzetta Ufficiale and on the Ministry's site, and each comune posts its trees on the albo pretorio so that anyone may challenge the listing. A counts a listing from the decree's adoption and a deletion only from its publication in the Gazzetta Ufficiale: this reading cannot clear the removal of a listed tree, and the other costs at most a landscape application for a tree in the weeks between adoption and publication. Falsifier: a controlling reading that a listing or deletion takes effect on another date. [OWNER RULING 2026-10-29, 1] Article 33(1)'s first-paragraph derogation lifts Article 7's municipal authorization on the binding opinion (comma 4, from 20 September 2025 comma 5-quater), and with it the transitional protection Article 7(4) gives a tree from the proposal of its recognition: this row is a source of status only. A listed row, alberata or homogeneous group gives each of its trees status.",
+    "condition_ast": {
+      "all_of": [
+        {
+          "predicate": "a decree approving the elenco degli alberi monumentali d'Italia lists the tree, alone or in its row, alberata or homogeneous group, and was adopted on or before the event date"
+        },
+        {
+          "not": {
+            "predicate": "a decree deleting the tree's entry from the elenco was published in the Gazzetta Ufficiale on or before the event date"
+          }
+        }
+      ]
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "IT-L10-2013",
+    "source_uri": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2013-01-14;10~art7!vig=2021-03-13",
+    "source_paths": "regulation/jurisdiction/national/IT-L10-2013-A7-20180505.html",
+    "source_snapshot_hashes": "a605bb67231ce463243bfc7a783f173aced584f895262b91e78d1c5f41c8a3f6",
+    "source_snapshot_dates": "2018-05-05",
+    "source_quote": "è istituito l'elenco degli alberi monumentali e dei boschi vetusti d'Italia alla cui gestione provvede il Ministero delle politiche agricole alimentari e forestali. Dell'avvenuto inserimento di un albero nell'elenco è data pubblicità mediante l'albo pretorio, con la specificazione della località nella quale esso sorge, affinchè chiunque vi abbia interesse possa ricorrere avverso l'inserimento.",
+    "source_quote_sha256": "9e0805248050671b7644b50fc80b72942ec1baf5cab19d2f4952c3103dcda08a",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "IT-L10-2013:Art.7(2):monumental-tree-status:v1",
+    "temporal_status": "SUPERSEDED"
+  },
+  {
+    "source_clause_id": "IT-L10-2013::Art.7(2)",
+    "instrument_id": "IT-L10-2013",
+    "stable_provision_id": "IT-L10-2013:Art.7(2):monumental-tree-status",
+    "parent_stable_provision_id": "",
+    "article": "7(2):monumental-tree-status",
+    "structural_kind": "paragraph",
+    "effective_from": "2025-09-20",
+    "effective_to_exclusive": "",
+    "application_basis": "L. 10/2013 Article 7 as amended by L. 131/2025 Article 18, in force 20 September 2025",
+    "exact_change_kind": "TEXT_CHANGED",
+    "semantic_change": "YES",
+    "actor_role": "Ministry of Agriculture (MASAF), on the Regions’ lists; from 20 September 2025 the Region",
+    "modality": "-",
+    "true_effect": "The tree is a monumental tree under L. 10/2013 Article 7 at the event date: the Region has recognised it, or the elenco lists it, and no published decree has deleted it.",
+    "false_effect": "The tree is not a monumental tree under L. 10/2013 Article 7 at the event date. A tree no held decree lists, or one a published decree has deleted, is not; a held instrument whose population or dates are not held leaves the result UNKNOWN.",
+    "reserved_decision_owner": "Ministry of Agriculture (MASAF); from 20 September 2025 the Region",
+    "evidence_contract": "The Region's recognitions of monumentality with their dates and the trees they recognise; the national list's entries per decree with adoption and Gazzetta Ufficiale dates, and deletions; the tree's identity against each.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "From 20 September 2025 Article 7(2) reads “La regione riconosce la monumentalità dell'albero. L'albero riconosciuto come monumentale è inserito nell'elenco”: the Region's recognition makes the tree monumental, and the elenco records it. The decrees approving and updating the elenco (D.D. 5450/2017 and its updates) state no date of effect: each is published in the Gazzetta Ufficiale and on the Ministry's site, and each comune posts its trees on the albo pretorio so that anyone may challenge the listing. A counts a listing from the decree's adoption and a deletion only from its publication in the Gazzetta Ufficiale: this reading cannot clear the removal of a listed tree, and the other costs at most a landscape application for a tree in the weeks between adoption and publication. Falsifier: a controlling reading that a listing or deletion takes effect on another date. [OWNER RULING 2026-10-29, 1] Article 33(1)'s first-paragraph derogation lifts Article 7's municipal authorization on the binding opinion (comma 4, from 20 September 2025 comma 5-quater), and with it the transitional protection Article 7(4) gives a tree from the proposal of its recognition: this row is a source of status only. A listed row, alberata or homogeneous group gives each of its trees status.",
+    "condition_ast": {
+      "all_of": [
+        {
+          "any_of": [
+            {
+              "predicate": "a decree approving the elenco degli alberi monumentali d'Italia lists the tree, alone or in its row, alberata or homogeneous group, and was adopted on or before the event date"
+            },
+            {
+              "predicate": "the Region recognised the tree, alone or in its row or homogeneous group, as monumental on or before the event date"
+            }
+          ]
+        },
+        {
+          "not": {
+            "predicate": "a decree deleting the tree's entry from the elenco was published in the Gazzetta Ufficiale on or before the event date"
+          }
+        }
+      ]
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "IT-L10-2013",
+    "source_uri": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2013-01-14;10~art7!vig=2025-09-20",
+    "source_paths": "regulation/jurisdiction/national/IT-L10-2013-A7-20250920.html",
+    "source_snapshot_hashes": "e5312dabc87d510558a3809df5c4fb51108bafbd18cc886daa01dcdc037d0908",
+    "source_snapshot_dates": "2025-09-20",
+    "source_quote": "I comuni effettuano il censimento degli alberi monumentali sul proprio territorio e trasmettono alla regione, e per conoscenza al Ministero dell'agricoltura, della sovranità alimentare e delle foreste, la proposta di riconoscimento della monumentalità. La regione riconosce la monumentalità dell'albero. L'albero riconosciuto come monumentale è inserito nell'elenco degli alberi monumentali di cui al presente comma",
+    "source_quote_sha256": "dc33d6617edd0bc265d309ac0c8c343879d9adec7e54d081a091da22030a0636",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "IT-L10-2013:Art.7(2):monumental-tree-status:v2",
+    "temporal_status": "CURRENT"
+  },
+  {
+    "source_clause_id": "IT-DLGS42-A136::Art.136(1)",
+    "instrument_id": "IT-DLGS42-A136",
+    "stable_provision_id": "IT-DLGS42-A136:Art.136(1):declared-tree",
+    "parent_stable_provision_id": "",
+    "article": "136(1):declared-tree",
+    "structural_kind": "paragraph",
+    "effective_from": "2021-03-13",
+    "effective_to_exclusive": "",
+    "application_basis": "D.lgs. 42/2004 Article 136 as amended by D.lgs. 63/2008 (in force 24 April 2008), and Article 157, which keeps declarations notified under L. 1497/1939 and D.lgs. 490/1999 in force; read from the Article 33(1) consumer’s start on 13 March 2021",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Region, or the Ministry on the Soprintendente’s proposal",
+    "modality": "-",
+    "true_effect": "The tree is declared of notable public interest at the event date.",
+    "false_effect": "No declaration in force names the tree. A declaration whose object and motivation name the area the tree stands in, its trees as one feature of that area, gives the tree no status of its own. A declaration whose text is not held leaves the result UNKNOWN.",
+    "reserved_decision_owner": "Region, or the Ministry under Article 141",
+    "evidence_contract": "Every declaration of notable public interest concerning Puglia, per PPTR version, with its decree's adoption and publication and its object and motivation as printed; the tree's identity against what the declaration names.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "Article 136(1)(a) names “gli alberi monumentali” among the things a declaration protects. A declaration gives a tree status where its object or motivation names that tree, alone or in a row or group. [OWNER RULING 2026-10-29, FASANO] Trees a decree names as part of the area it declares give no status: D.M. 23 January 1976 (Fasano) and D.M. 1 August 1985 declare the coast, “il tutto con una spalliera di verde formata da alberi secolari di ulivo”; the coast is the thing declared and the olive hedge one of its features. A counts a declaration from its adoption: Articles 140(3) and 141(2)-(3) make its notification and publication measures of knowledge, and the proposal's own effect has run since Article 139(2); this reading cannot clear a declared tree's removal. Falsifier: a controlling reading that a declaration takes effect only from its notification or publication.",
+    "condition_ast": {
+      "predicate": "a declaration of notable public interest adopted on or before the event date names the tree in its object or motivation, alone or in a row or group, and not only as a feature of the area it declares"
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "IT-DLGS42-A136",
+    "source_uri": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2004-01-22;42~art136!vig=2021-03-13",
+    "source_paths": "regulation/jurisdiction/national/IT-DLGS42-A136-20080424.html;regulation/jurisdiction/national/IT-DLGS42-A157-20080424.html",
+    "source_snapshot_hashes": "21a3aa5343aae1a093fff71c50fecf6d090295d7073573fee285d0a174f494a2;7650b1ec13c03ec64a393ed187be7b41358aa2492cad74b8b9debf8edb8e66d6",
+    "source_snapshot_dates": "2008-04-24;2008-04-24",
+    "source_quote": "a) le cose immobili che hanno cospicui caratteri di bellezza naturale (( , singolarità geologica o memoria storica, ivi compresi gli alberi monumentali ))",
+    "source_quote_sha256": "d1ce8043cd0597a80e9b982a1d7e1f1fc6cf11a34d74d5b266ee8d054c6f2bfd",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "IT-DLGS42-A136:Art.136(1):declared-tree:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
+    "source_clause_id": "IT-DLGS42-A139::Art.139(1),(2),(4),(5);140(1);141(5)",
+    "instrument_id": "IT-DLGS42-A139",
+    "stable_provision_id": "IT-DLGS42-A139:Art.139-141:proposal-effect",
+    "parent_stable_provision_id": "",
+    "article": "139(2),(4);141(5):proposal-effect",
+    "structural_kind": "paragraph",
+    "effective_from": "2021-03-13",
+    "effective_to_exclusive": "",
+    "application_basis": "D.lgs. 42/2004 Articles 139 and 141 as amended by D.lgs. 63/2008 (in force 24 April 2008); Article 157(2) brings proposals made before 1 May 2004 under them; read from the Article 33(1) consumer’s start on 13 March 2021",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Region’s landscape commission, or the Soprintendente under Article 138(3)",
+    "modality": "-",
+    "true_effect": "The tree is under a published proposal of declaration of notable public interest at the event date, and Article 146(1) applies to it as to a declared tree.",
+    "false_effect": "No proposal in effect names the tree. A proposal's effect ends with the declaration that concludes it (the Article 136 row then reads the tree), with the decision not to declare, or, for a Soprintendente's proposal, when the Article 140(1) term passes with no declaration (Article 141(5)). Missing publication, communication or outcome dates remain UNKNOWN.",
+    "reserved_decision_owner": "Region, or the Ministry under Article 141",
+    "evidence_contract": "Every proposal concerning Puglia whose effect could run in the reach: its proposer, object and motivation as printed, the first day of its publication on each comune's albo pretorio, the owner's receipt of its communication where held, and its outcome with its date; the tree's identity against what the proposal names.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "[OWNER RULING 2026-10-29, 2] A tree under a published proposal counts as protected while the proposal's effect runs: from the first day of its publication (Article 139(2)), or from the owner's receipt of the communication where earlier (Article 139(4), for things under Article 136(1)(a)-(b)), until the declaration, the decision not to declare, or the Article 141(5) lapse. Article 139(2)'s “determinazione negativa della commissione” is the commission declining to propose; it ends no published proposal. The code states no lapse for a Region's proposal, so one the Region has not decided runs on. A Soprintendente's proposal lapses sixty days (Article 140(1)) after the Article 139(5) observation terms end: thirty days after the ninety days of publication, and thirty days after the owner's communication. Falsifier: a controlling reading that the proposal's Article 146(1) effects do not make a tree a monumental or historic-interest plant under D.lgs. 19/2021 Article 33(1).",
+    "condition_ast": {
+      "all_of": [
+        {
+          "predicate": "a proposal of declaration of notable public interest names the tree in its object or motivation, alone or in a row or group, and not only as a feature of the area it proposes"
+        },
+        {
+          "predicate": "the proposal's publication on the albo pretorio of an interested comune began, or the tree's owner, possessor or holder received its communication, on or before the event date"
+        },
+        {
+          "not": {
+            "predicate": "before the event date the proposal was concluded by a declaration of notable public interest or by the competent authority's decision not to declare"
+          }
+        },
+        {
+          "not": {
+            "predicate": "the proposal is a Soprintendente's and the Article 140(1) term for the Ministry's declaration ended before the event date without a declaration adopted"
+          }
+        }
+      ]
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "IT-DLGS42-A139",
+    "source_uri": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2004-01-22;42~art139!vig=2021-03-13",
+    "source_paths": "regulation/jurisdiction/national/IT-DLGS42-A139-20080424.html;regulation/jurisdiction/national/IT-DLGS42-A140-20080424.html;regulation/jurisdiction/national/IT-DLGS42-A141-20080424.html",
+    "source_snapshot_hashes": "50545102949067da834b6ccc34d8b919ccf956a8ec8fa905a1846e693f535924;7df01b8edfe797bc3a488d69d8d97a20083327cf961a4243957a26c9881a031e;abb7918297b7889fd8ef3acc2ea7997030509940d83b806c95b0df285174371d",
+    "source_snapshot_dates": "2008-04-24;2008-04-24;2008-04-24",
+    "source_quote": "è pubblicata per novanta giorni all'albo pretorio e depositata a disposizione del pubblico presso gli uffici dei comuni interessati. [...] Dal primo giorno di pubblicazione decorrono gli effetti di cui all'articolo 146, comma 1. [...] Dalla data di ricevimento della comunicazione decorrono gli effetti di cui all'articolo 146, comma 1. [...] 5. Entro i trenta giorni successivi al periodo di pubblicazione di cui al comma 1, i comuni, le città metropolitane, le province, le associazioni portatrici di interessi diffusi individuate (( ai sensi delle vigenti disposizioni di legge in materia di ambiente e danno ambientale, )) e gli altri soggetti interessati possono presentare osservazioni e documenti alla regione, che ha altresì facoltà di indire un'inchiesta pubblica. I proprietari, possessori o detentori del bene possono presentare osservazioni e documenti entro i trenta giorni successivi alla comunicazione individuale di cui al comma 3. [...] entro ((. . . )) sessanta giorni dalla data di scadenza dei termini di cui all'articolo 139, comma 5, emana il provvedimento relativo alla dichiarazione di notevole interesse pubblico [...] 5. Se il provvedimento ministeriale di dichiarazione non è adottato nei termini di cui all'articolo 140, comma 1, allo scadere dei detti termini, per le aree e gli immobili oggetto della proposta di dichiarazione, cessano gli effetti di cui all'articolo 146, comma 1.",
+    "source_quote_sha256": "69390b732f3a9342ee53521b7ec1640a6a3fb75267bb540406a22f6faff41929",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+    "temporal_status": "CURRENT"
+  },
+  {
+    "source_clause_id": "IT-DLGS42-A146::Art.146(4)",
+    "instrument_id": "IT-DLGS42-A146",
+    "stable_provision_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy",
+    "parent_stable_provision_id": "",
+    "article": "146(4):authorization-efficacy",
+    "structural_kind": "paragraph",
+    "effective_from": "2021-03-13",
+    "effective_to_exclusive": "",
+    "application_basis": "D.lgs. 42/2004 Article 146 in the text in force on 13 March 2021 (unchanged since 12 November 2014)",
+    "exact_change_kind": "INITIAL",
+    "semantic_change": "INITIAL",
+    "actor_role": "Competent landscape authority",
+    "modality": "-",
+    "true_effect": "The landscape authorization is in effect for the removal at the event date.",
+    "false_effect": "The authorization's efficacy has ended: removal works begun after the five years, or not finished within the year after them, need a new authorization. Missing decision, efficacy or commencement dates remain UNKNOWN.",
+    "reserved_decision_owner": "Competent landscape authority",
+    "evidence_contract": "The landscape authorization for the plant's removal with the day it took effect; the record of the day the removal works began.",
+    "external_dependencies": [],
+    "rule_determinacy": "DETERMINISTIC_RULE",
+    "authority_judgment_required": "NO",
+    "authority_judgment_kind": "-",
+    "legal_linguistic_conflict": "-",
+    "semantic_note": "The five years run from the day the authorization took effect. The term runs from a building title only where one is needed for the intervention; a plant removal ordered as a phytosanitary measure needs none. Works begun within the five years may be finished within the year after them. Falsifier: a controlling reading that a phytosanitary plant removal needs a building title, or that its authorization takes effect on another day than its issue.",
+    "condition_ast": {
+      "any_of": [
+        {
+          "predicate": "the event date falls within the five years of efficacy that run from the day the landscape authorization for the removal took effect"
+        },
+        {
+          "all_of": [
+            {
+              "predicate": "the removal works began within those five years"
+            },
+            {
+              "predicate": "the event date falls within the year following the end of those five years"
+            }
+          ]
+        }
+      ]
+    },
+    "higher_authority_dependencies": [],
+    "documentary_source_instrument_id": "IT-DLGS42-A146",
+    "source_uri": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2004-01-22;42~art146!vig=2021-03-13",
+    "source_paths": "regulation/jurisdiction/national/IT-DLGS42-A146-20210313.html",
+    "source_snapshot_hashes": "0704d55f6862529f9bf647951ab2f7447846fe6f9bdad5d65f7197d4e75830ed",
+    "source_snapshot_dates": "2021-03-13",
+    "source_quote": "L'autorizzazione è efficace per un periodo di cinque anni, scaduto il quale l'esecuzione dei progettati lavori deve essere sottoposta a nuova autorizzazione. I lavori iniziati nel corso del quinquennio di efficacia dell'autorizzazione possono essere conclusi entro e non oltre l'anno successivo la scadenza del quinquennio medesimo. Il termine di efficacia dell'autorizzazione decorre dal giorno in cui acquista efficacia il titolo edilizio eventualmente necessario per la realizzazione dell'intervento,",
+    "source_quote_sha256": "42c05333c3d57e499fea12ed303f77bb8064f6fa333300f6b596501ea744a43e",
+    "lineage_role": "RETAINED_ATOM",
+    "provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
     "temporal_status": "CURRENT"
   },
   {
