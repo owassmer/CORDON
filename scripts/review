@@ -90,9 +90,13 @@ if [ "$1" = --post ]; then
   pr="${2:?usage: scripts/review --post <pr>}"
   shopt -s nullglob; logs=(.runs/review-pr$pr-*.log); shopt -u nullglob
   [ ${#logs[@]} -gt 0 ] || { echo "no review runs for #$pr" >&2; exit 2; }
-  latest="$(for l in "${logs[@]}"; do sed -n 's/^=== round \([0-9]*\)$/\1/p' "$l"; done | sort -n | tail -1)"
-  round=(); for l in "${logs[@]}"; do grep -qx "=== round $latest" "$l" && round+=("$l"); done
-  for l in "${round[@]}"; do grep -q '^=== finished' "$l" || { echo "$(basename "$l" .log) has not finished; a round is posted whole" >&2; exit 2; }; done
+  # The round posted is the newest dispatch's: its kind (plan or implementation) and round number. A re-planned unit
+  # starts again at round 1 with fresh reviewers, so the highest round number across all runs is not the latest round.
+  newest="$(for l in "${logs[@]}"; do echo "${l##*-} $l"; done | sort | tail -1 | cut -d' ' -f2)"
+  kind="$(sed -n 's/^=== kind //p' "$newest")"; latest="$(sed -n 's/^=== round //p' "$newest")"
+  round=(); for l in "${logs[@]}"; do grep -qx "=== kind $kind" "$l" && grep -qx "=== round $latest" "$l" && round+=("$l"); done
+  for l in "${round[@]}"; do [ -f ".runs/$(basename "$l" .log).posted" ] || grep -q '^=== finished' "$l" \
+    || { echo "$(basename "$l" .log) has not finished; a round is posted whole" >&2; exit 2; }; done
   for l in "${round[@]}"; do
     r="$(basename "$l" .log)"
     [ -f ".runs/$r.posted" ] && { echo "$r already posted: $(cat ".runs/$r.posted")"; continue; }
