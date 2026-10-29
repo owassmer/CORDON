@@ -38,7 +38,7 @@ from cordon_d.store import blob_path, store_root  # noqa: E402
 POPULATION = ROOT / I.SOURCES / 'transcription-pages.csv'
 FIELDS = ('declaration', 'sha256', 'page', 'why')
 READING_LOGIN = '.claude-cordon-reader'
-MAX_WORKERS = 2   # at most two model readings at once: every builder shares the subscription
+MAX_WORKERS = 6   # the reading login is its own account (Owen, 2026-10-28: six at once on it)
 
 
 def population(store: Path) -> str:
