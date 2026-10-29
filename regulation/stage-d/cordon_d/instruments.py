@@ -1279,13 +1279,286 @@ def _decree_state(issue: dict | None, publication: str | None) -> dict:
             'not held': 'the decree is not published in the G.U.; the Ministry holds it (SITAP), unreachable here'}
 
 
+# --- the Region's recognitions of monumentality (L. 10/2013 Art. 7(2) as in force from 20 September 2025) --------
+
+# L. 131/2025: from this day the Region recognises a tree as monumental, and a decree then lists it. A decides from
+# which act and date a recognised tree is in the instrument; D supplies each act's own date and its BURP date.
+RECOGNISED_FROM = date(2025, 9, 20)
+_PRINTABLE = frozenset(range(32, 127)) | {0xe0, 0xe8, 0xe9, 0xec, 0xf2, 0xf9, 0xc8, 0xb0, 0x2019, 0x201c, 0x201d}
+_ACT_HEADING_DATE = re.compile(r'(DELIBERAZIONE DELLA GIUNTA REGIONALE|DETERMINAZIONE DEL DIRIGENTE[A-Z\s\']*?)\s+'
+                               r'(\d{1,2})\s+(\w+)\s+(\d{4}),\s*n\.\s*(\d+)')
+_BURP_ISSUE = re.compile(r'Bollettino Ufficiale della Regione Puglia\s*-\s*n\.\s*(\d+)\s+del\s+(\d{1,2})-(\d{1,2})-(\d{4})')
+_ID = rf'\d{{2,3}}\s*/\s*[A-Z]\d{{3}}\s*/\s*[A-Z]{{2}}\s*/\s*{REGION_CODE}'
+
+
+def glyph_text(raw: bytes) -> tuple[list[str], int]:
+    """A PDF's text, one string per page, read where a Calibri run's font maps its glyphs to no letters (the subset's
+    ToUnicode names glyph numbers, as the Region's documento istruttorio and annexes print): each such glyph is the
+    letter the same document's correctly mapped Calibri runs give that glyph. Returns the pages and the count of
+    glyphs no correctly mapped run names, each written '?'."""
+    import collections
+    import pymupdf
+    document = pymupdf.open(stream=raw, filetype='pdf')
+    votes = collections.defaultdict(collections.Counter)
+    traces = [page.get_texttrace() for page in document]
+    for spans in traces:
+        for span in spans:
+            if 'Calibri' in span['font']:
+                for c, g, *_ in span['chars']:
+                    if g > 0 and c in _PRINTABLE:
+                        votes[g][chr(c)] += 1
+    table = {g: v.most_common(1)[0][0] for g, v in votes.items()}
+    pages, unread = [], 0
+    for spans in traces:
+        lines = []
+        for span in spans:
+            out = []
+            for c, g, *_ in span['chars']:
+                if c in _PRINTABLE or 'Calibri' not in span['font']:
+                    out.append(chr(c) if c != 0xfffd else ' ')
+                elif g in table:
+                    out.append(table[g])
+                else:
+                    out.append('?' if g > 3 else ' ')
+                    unread += g > 3
+            lines.append(''.join(out))
+        pages.append('\n'.join(lines))
+    return pages, unread
+
+
+@dataclass(frozen=True)
+class Recognition:
+    """One act by which the Region approves a list of monumental trees, as its held text prints it."""
+    act: str                     # its heading as printed
+    adopted: date | None         # its own date
+    published: date | None       # its BURP issue's date
+    sha256: str
+    trees: dict                  # scheda ID -> its Allegato A row, as printed
+    deleted: tuple[str, ...]     # scheda IDs it deletes from an earlier list
+    corrected: tuple[str, ...]   # scheda IDs whose data it rectifies
+    unread: int                  # glyphs of its text no correctly mapped run names
+
+    def as_json(self) -> dict:
+        return {'act': self.act, 'adopted': self.adopted and self.adopted.isoformat(),
+                'published': self.published and self.published.isoformat(), 'sha256': self.sha256,
+                'deleted': list(self.deleted), 'corrected': list(self.corrected), 'unread_glyphs': self.unread}
+
+
+def _id_key(scheda: str) -> tuple:
+    number, code, province, _ = re.sub(r'\s+', '', scheda).split('/')
+    return int(number), code, province
+
+
+def recognitions(store: Path, root: Path = REPOSITORY) -> tuple[list[Recognition], dict, list[str]]:
+    """Every held act approving a list of monumental trees that the BURP publishes from RECOGNISED_FROM on: its dates
+    and the trees its Allegato A lists, the trees it deletes and those whose data it rectifies. Returns the acts, the
+    record and the problems (an act whose heading, BURP issue or annex the reading does not find)."""
+    path = root / SOURCES / 'recognitions.json'
+    record = json.loads(path.read_text()) if path.exists() else {}
+    out, problems = [], []
+    for held in (record.get('burp') or {}).get('acts') or ():
+        if not held.get('sha256'):
+            problems.append(f"{held.get('title')}: not held ({held.get('error')})")
+            continue
+        pages, unread = glyph_text(_blob(store, held['sha256']).read_bytes())
+        text = '\n'.join(pages)
+        heading, issue = _ACT_HEADING_DATE.search(text), _BURP_ISSUE.search(text)
+        adopted = heading and _MONTHS.get(heading.group(3).lower()) and _day(
+            int(heading.group(4)), _MONTHS[heading.group(3).lower()], int(heading.group(2)))
+        published = issue and _day(int(issue.group(4)), int(issue.group(3)), int(issue.group(2)))
+        # The annex begins at its own heading, the last "ALLEGATO A" the act prints (its dispositive names "l'allegato
+        # A" in lower case); the deletions and rectifications are the act's own clauses before it.
+        headings = list(re.finditer(r'ALLEGATO\s+A\b', text))
+        trees = _schede(text[headings[-1].end():]) if headings else {}
+        flat = re.sub(r'\s+', ' ', text[:headings[-1].start()] if headings else text)
+        stated = re.search(r'composto\s+da\s+n\.\s*(\d+)\s+nuovi\s+alberi', flat, re.I) or re.search(
+            r'inserimento\s+di\s+n\.\s*(\d+)\s+alberi', flat, re.I)
+        deleted = sorted({re.sub(r'\s+', '', m) for clause in re.findall(r'cancellare[^;]*', flat)
+                          for m in re.findall(_ID, clause)})
+        corrected = sorted({re.sub(r'\s+', '', m) for clause in re.findall(r'rettificare[^;]*', flat)
+                            for m in re.findall(_ID, clause)})
+        name = heading.group(0) if heading else held.get('title')
+        for what, value in (('its heading', heading), ('its BURP issue', issue), ('an Allegato A listing a tree', trees)):
+            if not value:
+                problems.append(f'{name}: the held text prints no {what}')
+        if stated and int(stated.group(1)) != len(trees):
+            problems.append(f'{name}: it states {stated.group(1)} new trees and its Allegato A reads {len(trees)}')
+        out.append(Recognition(re.sub(r'\s+', ' ', name), adopted or None, published or None, held['sha256'], trees,
+                               tuple(deleted), tuple(corrected), unread))
+    return out, record, problems
+
+
+def recognised(acts: list[Recognition], entries: list[ListEntry]) -> dict[str, list[dict]]:
+    """Each tree the held acts recognise, by its scheda ID as the act prints it: the acts with their dates, and the
+    national-list entry with the same number, cadastral code and province, or none."""
+    by = {_id_key(e.scheda): e for e in entries}
+    out = {}
+    for act in sorted(acts, key=lambda a: (a.adopted or date.max)):
+        for scheda, row in act.trees.items():
+            entry = by.get(_id_key(scheda))
+            out.setdefault(scheda, []).append({
+                'act': act.act, 'adopted': act.adopted and act.adopted.isoformat(),
+                'published': act.published and act.published.isoformat(), 'row': re.sub(r'\s+', ' ', row).strip(),
+                'national_entry': entry and entry.scheda,
+                'listed_by': entry and entry.listed_by and _decree(entry.listed_by)})
+    return out
+
+
+# --- proposals of declaration (D.lgs. 42/2004 Arts 138-141; Art. 157(2) for those made before 1 May 2004) --------
+
+PROPOSAL = 'D.lgs. 42/2004 Arts 139, 141: published proposal of declaration naming the tree'
+PROPOSERS = {'region': 'the Region, on its commission\'s proposal (Arts 137, 138(1); before 2004 the provincial '
+                       'commission, Art. 157(2))', 'ministry': 'a Soprintendente (Arts 138(3), 141(1))'}
+_PRINTED_DATE = re.compile(r"(\d{1,2})\s*[/.-]\s*(\d{1,2})\s*[/.-]\s*(\d{4})|(\d{1,2})\s*[°º]?\s+(" + '|'.join(_MONTHS) + r")\s+(\d{4})",
+                           re.I)
+
+
+def printed_dates(text: str) -> list[date]:
+    """Every date a printed phrase states, in order ("dall'11 dicembre 2023 al 10 marzo 2024", "dal 21/12/2023")."""
+    out = []
+    for m in _PRINTED_DATE.finditer(text or ''):
+        d, mo, y, d2, word, y2 = m.groups()
+        found = _day(int(y), int(mo), int(d)) if d else _day(int(y2), _MONTHS[word.lower()], int(d2))
+        if found:
+            out.append(found)
+    return out
+
+
+def _as_printed(text: str) -> str:
+    """A text compared as printed: every letter, digit and other mark in order, whitespace, hyphens (a word broken at
+    a line's end, or a compound so broken), quotes and apostrophes aside."""
+    import unicodedata
+    return re.sub(r'[\s\-\u2010\u2011\xad\'"\u2018\u2019\u201c\u201d\xab\xbb`]+', '',
+                  unicodedata.normalize('NFKC', text or ''))
+
+
+@dataclass(frozen=True)
+class Proposal:
+    """One published proposal of declaration as its held sources print it, and D's reading of it."""
+    code: str                     # the record's label for it
+    proposer: str                 # 'region' | 'ministry' (A's Art. 141(5) lapse applies to a Ministry proposal)
+    comune: str
+    obj: str                      # its object, as printed
+    motivation: str               # its motivation, as printed ('' where no held source prints it)
+    reading: str                  # read_motivation's: 'names a tree' | 'names a row or group' | 'area' | 'not read whole'
+    cite: str | None
+    genus: str | None
+    periods: tuple                # ((first day, last day or None, as printed), ...): its publication, per albo
+    owner_communication: date | None
+    outcome: dict                 # {'kind': 'declaration' | 'refusal' | 'none', ...} as the record names it
+    sources: tuple[str, ...]
+    causes: tuple[str, ...]       # why a field is not supplied: not printed by a held source, or not held
+    geometry: object = None       # the tree as its plan draws it, EPSG:32633; None where no plan is held
+    scale_term_m: float | None = None   # 1 mm at the plan's stated scale
+
+    def first_publication(self) -> date | None:
+        """Its first day of publication (Art. 139(2)): the earliest first day any albo prints."""
+        days = [start for start, _, _ in self.periods if start]
+        return min(days) if days else None
+
+    def dates(self) -> dict:
+        """What C's row needs: the proposer, the first day of publication, each publication period, the owner's
+        receipt of the communication and the outcome, each as printed; a date no held source prints names why."""
+        first = self.first_publication()
+        return {'proposal': self.code, 'proposer': self.proposer, 'first_publication': first and first.isoformat(),
+                'periods': [{'from': s and s.isoformat(), 'to': e and e.isoformat(), 'printed': p}
+                            for s, e, p in self.periods],
+                'owner_communication': self.owner_communication and self.owner_communication.isoformat(),
+                'outcome': self.outcome, 'causes': list(self.causes)}
+
+
+def _held_text(store: Path, digest: str) -> str | None:
+    """A held source's text as printed: a PDF's text layer, a page's text; None where it holds no text layer."""
+    raw = _blob(store, digest).read_bytes()
+    if raw[:4] == b'%PDF':
+        text = '\n'.join(_document_text(raw))
+        return text if len(text.strip()) >= MIN_TEXT_PER_PAGE else None
+    return _page_text(raw)
+
+
+def proposals(store: Path, root: Path = REPOSITORY, declared: list['Declaration'] | None = None
+              ) -> tuple[list[Proposal], dict, list[str]]:
+    """Every proposal the record names, each printed field checked against the held source it cites, its object and
+    motivation read as a declaration's are. Returns the proposals, the record's routes and the problems: a field its
+    source does not print, or an outcome naming a declaration the held layer does not print."""
+    path = root / SOURCES / 'proposals.json'
+    record = json.loads(path.read_text()) if path.exists() else {}
+    texts, problems, out = {}, [], []
+    codes = {d.code for d in declared or ()}
+
+    def printed(item: dict | None, field: str, label: str) -> str:
+        """The field's text where its cited source prints it; '' (and a problem) where it does not."""
+        if not item or not item.get('text'):
+            return ''
+        digest = item.get('source')
+        if digest not in texts:
+            texts[digest] = digest and _held_text(store, digest)
+        if texts[digest] is None:
+            problems.append(f'{label}: its {field} cites a source with no text layer ({digest})')
+            return ''
+        if _as_printed(item['text']) not in _as_printed(texts[digest]):
+            problems.append(f'{label}: its {field} is not printed by the source it cites ({digest[:12]})')
+            return ''
+        return item['text']
+    for p in record.get('proposals') or ():
+        label = p['proposal']
+        printed(p.get('proposer_printed'), 'proposer', label)
+        printed(p.get('plan'), 'plan', label)
+        obj = printed(p.get('object'), 'object', label)
+        motivation = printed(p.get('motivation'), 'motivation', label)
+        reading, cite, genus = read_motivation(obj, motivation)
+        if motivation and reading in ('not read whole', 'area'):
+            # A held proposal's motivation is its whole text, not a cut field: naming no tree, it protects an area.
+            reading, cite = 'area', f'its object and motivation as printed name no tree, row or group'
+        periods = []
+        for item in p.get('publication') or ():
+            text = printed(item, 'publication period', label)
+            days = printed_dates(text)
+            if text:
+                periods.append((days[0] if days else None, days[1] if len(days) > 1 else None, text))
+        communication = printed(p.get('owner_communication'), 'owner communication', label)
+        outcome = dict(p.get('outcome') or {'kind': 'none'})
+        if outcome.get('text') and not printed(outcome, 'outcome', label):
+            outcome['kind'] = 'not verified'
+        if outcome.get('declaration') and outcome['declaration'] not in codes:
+            problems.append(f'{label}: its outcome names {outcome["declaration"]}, which no held PPTR version prints')
+        causes = [f"{k}: {p[k]['cause']}" for k in ('motivation', 'owner_communication', 'plan')
+                  if isinstance(p.get(k), dict) and p[k].get('cause')] + list(p.get('causes') or ())
+        if not any(start for start, _, _ in periods):
+            causes.append('publication: no held source prints its days')
+        days = printed_dates(communication)
+        out.append(Proposal(label, p['proposer'], ', '.join(p.get('comuni') or ()), obj, motivation, reading, cite, genus,
+                            tuple(periods), days[0] if days else None, outcome,
+                            tuple(sorted({i['source'] for k in ('object', 'motivation', 'owner_communication')
+                                          for i in [p.get(k)] if isinstance(i, dict) and i.get('source')}
+                                         | {i['source'] for i in p.get('publication') or () if i.get('source')})),
+                            tuple(causes)))
+    return out, record.get('routes') or {}, problems
+
+
+def routes_unreached(routes: dict) -> list[str]:
+    """Each route of the record that did not answer or does not reach back, with its cause."""
+    out = []
+    for entry in routes.get('ministry') or ():
+        if entry.get('home', {}).get('error'):
+            out.append(f"{entry['publisher']} ({entry['host']}): did not answer from this network "
+                       f"({entry['home']['captured_at'][:10]}: {entry['home']['error'][:80]})")
+    if routes.get('burp'):
+        out.append(f"the BURP's document index: {routes['burp']['index']}")
+    gazette = routes.get('gazette') or {}
+    failed = [i for i in gazette.get('issues') or () if i.get('error')]
+    if failed:
+        out.append(f'the G.U. {gazette["from"]} to {gazette["to"]}: {len(failed)} issues did not answer')
+    return out
+
+
 # --- plant records and their placement ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class InstrumentPlant:
-    """A listed or declared tree as a plant record."""
-    plant: str                  # the scheda ID or the declaration's code
-    instrument: str             # NATIONAL or DECLARATION
+    """A listed, declared or proposed tree as a plant record."""
+    plant: str                  # the scheda ID, or the declaration's or proposal's code
+    instrument: str             # NATIONAL, DECLARATION or PROPOSAL
     x: float                    # its point, EPSG:32633 (a declared tree: the polygon's representative point)
     y: float
     error_m: float              # its positional error (a declared tree: the polygon's reach from the point + scale term)
@@ -1295,7 +1568,8 @@ class InstrumentPlant:
     comune: str
     geometry: object = None     # a declared tree: its polygon
     entry: ListEntry | None = None
-    declaration: Declaration | None = None
+    declaration: Declaration | Proposal | None = None
+    scale_term_m: float = SCALE_TERM_M   # 1 mm at the stated scale of the plan that draws its polygon
 
     def distance_to(self, x: float, y: float) -> float:
         if self.geometry is not None:
@@ -1306,7 +1580,7 @@ class InstrumentPlant:
     @property
     def term_m(self) -> float:
         """The error added to a distance measured to this record's point, or to its polygon."""
-        return SCALE_TERM_M if self.geometry is not None else self.error_m
+        return self.scale_term_m if self.geometry is not None else self.error_m
 
 
 def list_plants(entries: list[ListEntry], bound: ListBound) -> list[InstrumentPlant]:
@@ -1314,20 +1588,21 @@ def list_plants(entries: list[ListEntry], bound: ListBound) -> list[InstrumentPl
             for e in entries if e.x is not None]
 
 
-def declared_plants(held: list[Declaration]) -> list[InstrumentPlant]:
-    """A declaration that names a tree, a row or a group, as one plant record: the polygon its decree delimits, at the
-    PPTR's stated scale. Its point is the polygon's representative point; its error the polygon's reach from that
-    point plus the scale term."""
+def declared_plants(held: list[Declaration] | list[Proposal], instrument: str = DECLARATION) -> list[InstrumentPlant]:
+    """A declaration (or a proposal) that names a tree, a row or a group, as one plant record: the polygon its decree
+    (or its plan) delimits, at the stated scale (the PPTR's; a proposal's plan's own). Its point is the polygon's
+    representative point; its error the polygon's reach from that point plus the scale term."""
     import shapely
     out = []
     for d in held:
-        if d.reading not in ('names a tree', 'names a row or group') or d.geometry.is_empty:
+        if d.reading not in ('names a tree', 'names a row or group') or d.geometry is None or d.geometry.is_empty:
             continue
+        term = getattr(d, 'scale_term_m', None) or SCALE_TERM_M
         point = d.geometry.representative_point()
         reach = float(shapely.distance(point, shapely.points(shapely.get_coordinates(d.geometry))).max())
-        out.append(InstrumentPlant(d.code, DECLARATION, point.x, point.y, round(reach + SCALE_TERM_M, 2), None, d.genus,
+        out.append(InstrumentPlant(d.code, instrument, point.x, point.y, round(reach + term, 2), None, d.genus,
                                    'single tree' if d.reading == 'names a tree' else 'row or group', d.comune,
-                                   geometry=d.geometry, declaration=d))
+                                   geometry=d.geometry, declaration=d, scale_term_m=term))
     return out
 
 
@@ -1367,10 +1642,11 @@ def nearest(plants: list[InstrumentPlant], infected) -> dict[str, tuple[str, flo
 # --- the status hook ---------------------------------------------------------------------------------------------
 
 class Instruments:
-    """The held populations of both instruments, indexed for `facts`, the hook A's rows read."""
+    """The held populations of the instruments, indexed for `facts`, the hook A's rows read."""
 
     def __init__(self, entries: list[ListEntry], held_decrees: list[Decree], bound: ListBound,
-                 declared: list[Declaration], pptr_versions: list[dict]):
+                 declared: list[Declaration], pptr_versions: list[dict], proposed: list[Proposal] = (),
+                 proposal_routes: dict | None = None, recognised_trees: dict | None = None):
         import numpy
         from scipy.spatial import cKDTree
         from shapely import STRtree
@@ -1381,9 +1657,26 @@ class Instruments:
         latest = held_decrees[-1] if held_decrees else None
         self.list_held = (f"the region's list in {len(held_decrees)} decree versions, {held_decrees[0].name} to "
                           f'{latest.name} (instruments.national_list.decrees)' if latest else 'no decree version held')
+        # The Region's recognitions from 20 September 2025 (L. 10/2013 Art. 7(2)): each listed entry's acts, and the
+        # recognised trees no held decree lists, which no held source places.
+        recognised_trees = recognised_trees or {}
+        self.recognised = {acts[0]['national_entry']: acts for acts in recognised_trees.values()
+                           if acts[0]['national_entry']}
+        unlisted = [f"{scheda} ({acts[-1]['row'].split(' (')[0].strip()})" for scheda, acts in recognised_trees.items()
+                    if not acts[0]['national_entry']]
+        if unlisted:
+            self.list_held += ('; recognised by the Region and on no held decree, placed by no held source: '
+                               + ', '.join(unlisted))
         self.declarations_held = (f'{len(declared)} declarations printed by {len(pptr_versions)} PPTR versions, '
                                   f"the latest {pptr_versions[0]['version']} (instruments.declarations)"
                                   if pptr_versions else 'no PPTR version held')
+        self.proposed = list(proposed)
+        self.proposed_trees = declared_plants(self.proposed, PROPOSAL)
+        unreached = routes_unreached(proposal_routes or {})
+        self.proposals_held = (f'{len(self.proposed)} published proposals of declaration held ('
+                               + '; '.join(f'{p.code}: {p.reading}' for p in self.proposed) + ') from the routes of '
+                               f'{SOURCES}/proposals.json (instruments.proposals)'
+                               + ('; not reached: ' + ' | '.join(unreached) if unreached else ''))
 
     def facts(self, x: float, y: float, error_m: float, genus: str | None, at: date, *,
               own: InstrumentPlant | None = None, register: dict | None = None) -> dict[str, dict]:
@@ -1399,12 +1692,16 @@ def instrument_facts(held: Instruments, x: float, y: float, error_m: float, genu
     declared tree of the plant's genus lies within d, or each that does is not in force at `at`; the populations
     held are named. None: a listed or declared tree within d may be the plant (identity, its own cause), a
     declaration containing the plant is not read whole, or `at` falls between a decree and its publication
-    (A's). The L.R. 14/2007 register keeps row 9's identity and act chain, passed in `register`."""
+    (A's). The proposal fact is true where a held proposal names the plant's tree, with the dates C's row reads (D
+    does not decide whether its effect runs at `at`); false where no held proposal names a tree within d; unknown
+    where a proposed tree within d may be the plant, or a proposal naming a tree, or not read whole, has no plan held
+    that places it. The L.R. 14/2007 register keeps row 9's identity and act chain, passed in `register`."""
     from shapely.geometry import Point
     facts = {}
     if own is not None and own.instrument == NATIONAL:
         value, why = in_force(own.entry, at)
-        facts[NATIONAL] = {'value': value, 'entries': [own.plant], 'cause': why}
+        facts[NATIONAL] = {'value': value, 'entries': [own.plant], 'cause': why,
+                           'recognised_by': held.recognised.get(own.plant, [])}
     else:
         d = round(error_m + held.bound.error_m, 2)
         near = [] if held.tree is None else [held.located[i] for i in held.tree.query_ball_point([x, y], d)]
@@ -1458,6 +1755,32 @@ def instrument_facts(held: Instruments, x: float, y: float, error_m: float, genu
                     '; the plant lies in declarations that protect an area and name no tree: '
                     + ', '.join(decl.code for decl in areas) if areas else ''))}
     facts[DECLARATION]['held'] = held.declarations_held
+    # A published proposal naming the tree: D supplies its dates; whether its effect runs at the event date is C's.
+    naming_kinds = ('names a tree', 'names a row or group')
+    if own is not None and own.instrument == PROPOSAL:
+        facts[PROPOSAL] = {'value': True, 'proposals': [own.declaration.dates()],
+                           'cause': f'the proposal names the tree ("{own.declaration.cite}"); C decides from its dates '
+                                    f'whether its effect runs at the event date'}
+    else:
+        near = [(r, round(r.distance_to(x, y), 2)) for r in held.proposed_trees
+                if r.distance_to(x, y) <= error_m + r.scale_term_m and (genus is None or r.genus is None or
+                                                                        r.genus == genus)]
+        unplaced = [p for p in held.proposed if p.reading == 'not read whole' or (
+            p.reading in naming_kinds and (p.geometry is None or p.geometry.is_empty))]
+        if near:
+            facts[PROPOSAL] = {'value': None, 'proposals': [r.declaration.dates() | {'distance_m': dist}
+                                                            for r, dist in near],
+                               'cause': 'identity: the plant may be the tree a proposal names; no record names it'}
+        elif unplaced:
+            facts[PROPOSAL] = {'value': None, 'proposals': [p.dates() for p in unplaced], 'cause': (
+                'a held proposal names a tree, or is not read whole, and no plan that places it is held: '
+                + ' | '.join(f'{p.code}: {p.reading}' for p in unplaced))}
+        else:
+            areas = [p.code for p in held.proposed if p.reading == 'area']
+            facts[PROPOSAL] = {'value': False, 'proposals': [], 'cause': (
+                'no held proposal names a tree within d' + (
+                    '; the held proposals protect areas and name no tree: ' + ', '.join(areas) if areas else ''))}
+    facts[PROPOSAL]['held'] = held.proposals_held
     if register is not None:
         facts[REGISTER] = register
     return facts
@@ -1474,16 +1797,19 @@ def _register_of(record: InstrumentPlant) -> dict:
 
 
 def read(store: Path, at: date, plants, root: Path = REPOSITORY) -> dict:
-    """Both instruments over the held sources, placed against the zones of row 9's infected plants, with each plant's
+    """The instruments over the held sources, placed against the zones of row 9's infected plants, with each plant's
     status. `plants` is row 9's [(Plant, Candidates)]: the register fact keeps row 9's identity and its cause."""
     entries, held_decrees, list_problems = list_entries(store, root)
     declared, versions, declaration_problems = declarations(store, root)
+    proposed, routes, proposal_problems = proposals(store, root, declared)
+    acts, recognition_record, recognition_problems = recognitions(store, root)
+    trees = recognised(acts, entries)
     naming = [d for d in declared if d.reading in ('names a tree', 'names a row or group')]
     bound = list_bound(declared_residuals(entries, naming))
-    held = Instruments(entries, held_decrees, bound, declared, versions)
+    held = Instruments(entries, held_decrees, bound, declared, versions, proposed, routes, trees)
     infected = [p for p, _ in plants if p.kind in ('in-reach positive', 'order plant')]
     positives = [p for p, _ in plants if p.kind == 'in-reach positive']
-    records = list_plants(entries, bound) + declared_plants(declared)
+    records = list_plants(entries, bound) + declared_plants(declared) + held.proposed_trees
     admitted = {}
     for record, plant, distance, d in placed(records, infected):
         admitted.setdefault(record.plant, (record, []))[1].append((plant, distance, d))
@@ -1497,7 +1823,10 @@ def read(store: Path, at: date, plants, root: Path = REPOSITORY) -> dict:
         duplicates[name] = [p.plant for p, _ in plants if record.distance_to(p.x, p.y) <= p.error_m + record.term_m
                             and (record.genus is None or _genus(p.species) in (None, record.genus))]
     return {'at': at, 'entries': entries, 'decrees': held_decrees, 'bound': bound, 'declarations': declared,
-            'versions': versions, 'problems': list_problems + declaration_problems, 'records': records,
+            'versions': versions, 'proposals': proposed, 'proposal_routes': routes, 'recognitions': acts,
+            'recognised': trees, 'recognition_record': recognition_record,
+            'problems': list_problems + declaration_problems + proposal_problems + recognition_problems,
+            'records': records,
             'admitted': admitted, 'duplicates': duplicates, 'status': status,
             'nearest': nearest(records, positives) if positives else {}, 'positives': len(positives)}
 
@@ -1520,6 +1849,8 @@ def rows(result: dict) -> dict:
         'listed_by': _decree(e.listed_by), 'deleted_by': _decree(e.deleted_by),
         'stated_deletion': e.stated_deletion, 'corrected_by': [d.name for d in e.corrected_by],
         'printed_as': [list(p) for p in e.printed_as], 'causes': list(e.causes),
+        'recognised_by': next((acts for acts in result['recognised'].values()
+                               if acts[0]['national_entry'] == e.scheda), []),
         'nearest_positive': nearest_of.get(e.scheda) and {'plant': nearest_of[e.scheda][0],
                                                           'distance_m': nearest_of[e.scheda][1]},
         'source': e.source} for e in result['entries']]
@@ -1567,6 +1898,17 @@ def rows(result: dict) -> dict:
                                            'kept': f'derived/{TRANSCRIPTION_FOLDER} (kept and replicated: a model\'s '
                                                    f'answer)',
                                            'population': transcription_population(result['declarations'])}},
+        'recognitions': {
+            'from': RECOGNISED_FROM.isoformat(), 'acts': [a.as_json() | {'trees': len(a.trees)}
+                                                          for a in result['recognitions']],
+            'trees': [{'scheda': scheda, 'acts': acts} for scheda, acts in result['recognised'].items()],
+            'not_reached': [f"{r['url']}: {r.get('error', '')[:120]}" for r in
+                            (result['recognition_record'].get('routes') or ()) if r.get('error')]},
+        'proposals': {'proposals': [{
+            'proposal': p.code, 'proposer': p.proposer, 'proposer_means': PROPOSERS.get(p.proposer), 'comune': p.comune,
+            'object': p.obj, 'motivation': p.motivation, 'reading': p.reading, 'cite': p.cite, 'genus': p.genus,
+            'placed': p.geometry is not None, 'sources': list(p.sources)} | p.dates() for p in result['proposals']],
+            'not_reached': routes_unreached(result['proposal_routes'])},
         'problems': result['problems'], 'in_zone': in_zone, 'groups': groups,
         'distances': {'positives': result['positives'],
                       'nearest_listed_entry': listed[0] if listed else None,

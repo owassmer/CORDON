@@ -43,9 +43,9 @@ def declaration(code='PAE9999', reading='area', geometry=None, genus=None, decre
                          geometry if geometry is not None else Point(0, 0).buffer(15), ('fixture',), reading, cite, genus)
 
 
-def held(entries=(), declared=()):
+def held(entries=(), declared=(), proposed=()):
     bound = I.list_bound([])
-    return I.Instruments(list(entries), [LISTING, DELETING], bound, list(declared), [{'version': 'v'}])
+    return I.Instruments(list(entries), [LISTING, DELETING], bound, list(declared), [{'version': 'v'}], list(proposed))
 
 
 # The held layer's object and motivation of PAE0156 (Corigliano d'Otranto) and of PAE0061 (Miggiano), verbatim.
@@ -177,6 +177,99 @@ class Rules(unittest.TestCase):
         self.assertEqual(I._genus('Insieme omogeneo di Quercus suber L.'), 'Quercus')
         self.assertEqual(next(k for k, p in I._KINDS if p.search('Insieme omogeneo di Quercus suber L.')),
                          'insieme omogeneo')
+
+
+# An unseen Ministry proposal naming one tree, as a Soprintendenza's notice prints one (Art. 136(1)(a)): its albo
+# periods, the owner's receipt of the communication (Art. 139(3)-(4)) and its plan at 1:2,000 are fixture values.
+TREE_OBJECT = 'PROPOSTA DI DICHIARAZIONE DI NOTEVOLE INTERESSE PUBBLICO DELLA QUERCIA DI MASSERIA FIXTURA'
+TREE_MOTIVATION = ("L'albero, un esemplare di quercia vallonea di circa 400 anni, con circonferenza del tronco di m 4,80, "
+                   'costituisce una singolarita\' naturale di non comune bellezza')
+# Herdonia's notice (SABAP-FG, 4 March 2024), its object as printed: a context, an area.
+AREA_OBJECT = ('PROPOSTA DI DICHIARAZIONE DI NOTEVOLE INTERESSE PUBBLICO DEL CONTESTO “HERDONIA, AUSCULUM E ALTA VALLE DEL '
+               'CARAPELLE” ai sensi dell’art. 136, co. 1, lett. c) e d)')
+
+
+def proposal(obj=TREE_OBJECT, motivation=TREE_MOTIVATION, geometry=None, scale_term_m=2.0, code='PROP-FIXTURE'):
+    from datetime import date as day
+    reading, cite, genus = I.read_motivation(obj, motivation)
+    return I.Proposal(code, 'ministry', 'Fixturia', obj, motivation, reading, cite, genus,
+                      ((day(2024, 3, 11), day(2024, 6, 9), "dall'11 marzo 2024 al 9 giugno 2024"),
+                       (day(2024, 3, 14), day(2024, 6, 12), 'dal 14/03/2024 al 12/06/2024')),
+                      day(2024, 2, 20), {'kind': 'none'}, ('fixture',), (), geometry, scale_term_m)
+
+
+class Proposals(unittest.TestCase):
+    """A published proposal of declaration through the declared-tree path, with the dates C's row reads."""
+
+    def test_a_proposal_naming_a_tree_gives_its_fact_with_its_dates(self):
+        from shapely.geometry import Point
+        tree = proposal(geometry=Point(55.0, 0.0).buffer(1.0))
+        self.assertEqual((tree.reading, tree.genus), ('names a tree', 'Quercus'))
+        # 54 m from a positive: outside 50 m, inside 50 m + the positive's 7.4 m + 1 mm at the plan's 1:2,000.
+        record = I.declared_plants([tree], I.PROPOSAL)[0]
+        # Its error: the drawn tree's reach from its point (about 1 m) plus 1 mm at its plan's 1:2,000, not the PPTR's.
+        self.assertLess(record.error_m, 4.0)
+        self.assertEqual([(r.plant, p) for r, p, _, _ in I.placed([record], [Plant('P1', 0.0, 0.0)])],
+                         [('PROP-FIXTURE', 'P1')])
+        instruments = held(proposed=[tree])
+        own = instruments.facts(record.x, record.y, record.error_m, record.genus, date(2026, 10, 28), own=record)
+        fact = own.get(I.PROPOSAL, {})
+        self.assertIs(fact.get('value'), True)
+        self.assertEqual({k: fact['proposals'][0][k] for k in ('proposer', 'first_publication', 'owner_communication')},
+                         {'proposer': 'ministry', 'first_publication': '2024-03-11', 'owner_communication': '2024-02-20'})
+        self.assertEqual([p['to'] for p in fact['proposals'][0]['periods']], ['2024-06-09', '2024-06-12'])
+        # A monitored oak on the drawn tree may be it: unknown, with the same dates; one 1 km off reads false.
+        near = instruments.facts(55.0, 0.0, 7.4, 'Quercus', date(2026, 10, 28)).get(I.PROPOSAL, {})
+        self.assertIsNone(near.get('value', False))
+        self.assertEqual(near['proposals'][0]['first_publication'], '2024-03-11')
+        self.assertIs(instruments.facts(1000.0, 0.0, 7.4, 'Quercus', date(2026, 10, 28)).get(I.PROPOSAL, {}).get('value'),
+                      False)
+
+    def test_an_area_proposal_gives_no_status(self):
+        area = proposal(obj=AREA_OBJECT, motivation='')
+        self.assertEqual(area.reading, 'area')
+        fact = held(proposed=[area]).facts(0.0, 0.0, 7.4, 'Olea', date(2026, 10, 28)).get(I.PROPOSAL, {})
+        self.assertIs(fact.get('value'), False)
+        self.assertIn('PROP-FIXTURE', fact['cause'])
+        self.assertEqual(I.declared_plants([area], I.PROPOSAL), [])
+
+    def test_a_proposal_naming_a_tree_no_held_plan_places_is_unknown_not_false(self):
+        fact = held(proposed=[proposal()]).facts(0.0, 0.0, 7.4, 'Olea', date(2026, 10, 28)).get(I.PROPOSAL, {})
+        self.assertIsNone(fact.get('value', False))
+        self.assertIn('no plan that places it', fact['cause'])
+
+    def test_a_plant_in_no_proposal_reads_false_naming_the_population_held(self):
+        fact = held().facts(0.0, 0.0, 7.4, 'Olea', date(2026, 10, 28)).get(I.PROPOSAL, {})
+        self.assertIs(fact.get('value'), False)
+        self.assertIn('0 published proposals of declaration held', fact['held'])
+
+    def test_a_field_is_read_only_where_its_source_prints_it(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as folder:
+            root, store = Path(folder) / 'root', Path(folder) / 'store'
+            notice = (f'<html><body><p>Oggetto: {AREA_OBJECT}</p><p>Pubblicata all’albo pretorio del Comune di Fixturia '
+                      'dall’11 marzo 2024 al 9 giugno 2024.</p><p>Comunicazione al proprietario ricevuta il '
+                      '20/02/2024.</p></body></html>').encode()
+            source = put_bytes(store, notice)
+            record = {'proposals': [
+                {'proposal': 'Herdonia-like', 'proposer': 'ministry', 'comuni': ['Fixturia'],
+                 'object': {'text': AREA_OBJECT, 'source': source},
+                 'motivation': {'text': None, 'cause': 'its relazione is not held'},
+                 'publication': [{'text': 'dall’11 marzo 2024 al 9 giugno 2024', 'source': source}],
+                 'owner_communication': {'text': 'ricevuta il 20/02/2024', 'source': source}},
+                {'proposal': 'misquoted', 'proposer': 'region', 'comuni': ['Fixturia'],
+                 'object': {'text': TREE_OBJECT, 'source': source}}]}
+            (root / I.SOURCES).mkdir(parents=True)
+            (root / I.SOURCES / 'proposals.json').write_text(json.dumps(record))
+            found, _, problems = I.proposals(store, root)
+        by = {p.code: p for p in found}
+        self.assertEqual(by['Herdonia-like'].reading, 'area')
+        self.assertEqual(by['Herdonia-like'].first_publication(), date(2024, 3, 11))
+        self.assertEqual(by['Herdonia-like'].owner_communication, date(2024, 2, 20))
+        self.assertIn('motivation: its relazione is not held', by['Herdonia-like'].causes)
+        # An object its source does not print is not read, and the reading says so rather than naming an area.
+        self.assertEqual((by['misquoted'].obj, by['misquoted'].reading), ('', 'not read whole'))
+        self.assertEqual(problems, [f'misquoted: its object is not printed by the source it cites ({source[:12]})'])
 
 
 def page_image_pdf(text: str) -> bytes:
@@ -476,9 +569,9 @@ class HeldInstruments(unittest.TestCase):
         if I.ocr_engine() is None:   # their schede's identification pages and their decrees are page images
             self.assertEqual(unread, ['PAE0016', 'PAE0017', 'PAE0033', 'PAE0049'])
             return
-        # Each scheda's identification page (its third page) is located by OCR. PAE0016's is read from its vision
-        # transcription (the slice); the others, until theirs are held, from the OCR'd words, naming that. The words
-        # below, read by eye from the rendered page, are in each motivation, and none names a tree, a row or a group.
+        # Each scheda's identification page (its third page) is located by OCR and read from its vision transcription.
+        # The words below, read by eye from the rendered page, are in each motivation, and none names a tree, a row or
+        # a group.
         for code, words in (('PAE0016', 'variamente coltivato ad olivi, mandorli e frutteti e con'),
                             ('PAE0017', 'come quelle di Lamaforca, Santa Lucia, Pilone, Rosa Marina, che'),
                             ('PAE0033', 'scarsa vegetazione di lecci, proni, melograni, querce spinose,'),
@@ -487,8 +580,7 @@ class HeldInstruments(unittest.TestCase):
                 held = self.codes[code]
                 self.assertEqual(held.decree['scheda_located']['page'], 3)
                 self.assertTrue(held.decree['scheda_read'].startswith(
-                    'read from the vision transcription of page 3 (vision transcription by ' if code == 'PAE0016' else
-                    'read by OCR, page 3 (OCR: Tesseract'))
+                    'read from the vision transcription of page 3 (vision transcription by '))
                 self.assertIn(words, held.decree['scheda_motivation'])
                 self.assertEqual((held.decree['scheda_reading'], held.reading), ('area', 'area'))
         self.assertEqual(unread, [])
@@ -510,10 +602,10 @@ class HeldInstruments(unittest.TestCase):
                       ostuni.decree['decree_text'][0])
         self.assertEqual(ostuni.decree['reading'], 'area')
         self.assertTrue(ostuni.cite.startswith('the transcribed text names no tree, row or group (vision transcription'))
-        # A decree whose pages are not transcribed keeps the OCR'd words' reading, naming that (G.U. n. 30/1986, S.O. 5).
-        bari = self.codes['PAE0115'].decree
-        self.assertTrue(bari['read'].startswith('read by OCR, page '))
-        self.assertTrue(bari['read'].endswith("is not yet held: the words read are Tesseract's"))
+        # Every page-image decree located is read from its transcription (G.U. n. 30/1986, S.O. 5, among them).
+        self.assertEqual(sorted(d.code for d in self.declared if (d.decree or {}).get('read', '').startswith('read by OCR')),
+                         [])
+        self.assertTrue(self.codes['PAE0115'].decree['read'].startswith('read from the vision transcription of page '))
         # The issue held for PAE0064 (Nardo', G.U. n. 240 of 15-10-1952) prints no decree naming the comune.
         self.assertIn("its OCR'd pages hold no decree of notable public interest titled as the layer's object",
                       self.codes['PAE0064'].decree['read'])
@@ -523,13 +615,15 @@ class HeldInstruments(unittest.TestCase):
             self.skipTest('Tesseract with its Italian model is not installed here')
         # PAE0042's layer prints the comune RACALE and the object "... TERRITORIO COMUNALE DI ALLISTE"; G.U. n. 132 of
         # 29-5-1970 prints two decrees of 26 March 1970, Ugento's and Alliste's: the object's is read.
-        self.assertIn('territorio comumale di Alliste', self.codes['PAE0042'].decree['decree_act'][0])
+        # The page prints "comunale" (read from the image; Tesseract read "comumale").
+        self.assertIn('territorio comunale di Alliste', self.codes['PAE0042'].decree['decree_act'][0])
         # The 57 decrees of 1 August 1985 are printed in S.O. n. 5 to G.U. n. 30 of 6-2-1986, whose index the issue's
         # own G.U. page lists; the issue itself prints only their titles.
         bari = self.codes['PAE0115'].decree
         self.assertEqual(bari['read_in'], 'https://www.gazzettaufficiale.it/eli/gu/1986/02/06/30/so/5/sg/pdf')
         self.assertIn('territorio delle Lame ad ovest e a sud-est di Bari', bari['decree_act'][0])
-        # Its dispositive is OCR'd "Dccreta:"; its preamble ends there, before the delimitation it decrees.
+        # OCR reads its dispositive "Dccreta:" and locates it; its preamble, read from the transcription, ends there,
+        # before the delimitation it decrees.
         self.assertIn('così delimitato', bari['decree_text'][0])
         self.assertNotIn('1) Il territorio delle Lame', bari['decree_text'][0])
 
@@ -544,6 +638,53 @@ class HeldInstruments(unittest.TestCase):
             self.assertEqual(ceglie['read_in'], 'https://www.gazzettaufficiale.it/eli/gu/1999/09/15/217/so/173/sg/pdf')
             self.assertTrue(ceglie['decree_act'][0].startswith('DECRETO 18 maggio 1999. Dichiarazione di notevole '
                                                                'interesse pubblico del centro storico di Ceglie Messapica'))
+
+
+def proposals_held():
+    try:
+        record = json.loads((ROOT / I.SOURCES / 'proposals.json').read_text())
+    except OSError:
+        return False
+    digests = {item['source'] for p in record.get('proposals') or ()
+               for item in [p.get(k) for k in ('object', 'motivation', 'proposer_printed', 'plan', 'outcome')]
+               + list(p.get('publication') or ()) if isinstance(item, dict) and item.get('source')}
+    return instruments_held() and all(blob_path(STORE, d).exists() for d in digests)
+
+
+@unittest.skipUnless(proposals_held(), 'the proposals or the sources they cite are not in this store')
+class HeldProposals(unittest.TestCase):
+    """The held proposals, read by the ordinary reader; each expected value is read from the source it cites."""
+
+    @classmethod
+    def setUpClass(cls):
+        declared, _, _ = I.declarations(STORE)
+        cls.proposed, cls.routes, cls.problems = I.proposals(STORE, declared=declared)
+        cls.by = {p.code.split(':')[0].split(' (')[0]: p for p in cls.proposed}
+
+    def test_every_printed_field_is_printed_by_the_source_it_cites(self):
+        self.assertEqual(self.problems, [])
+        self.assertEqual(sorted(self.by), ['Bari', 'Herdonia, Ausculum e Alta Valle del Carapelle', 'Ostuni',
+                                           'Tiati - Teanum Apulum - Civitate e Bassa Valle del Fortore'])
+
+    def test_each_held_proposal_protects_an_area(self):
+        # Ostuni (DGR 1997/2000): the strip below the town, for its secular olives as the zone's character; Bari
+        # (DD 425/2012): the central area, its object alone held; Tiati and Herdonia: contexts under Art. 136(1)(c)-(d).
+        self.assertEqual({k: p.reading for k, p in self.by.items()}, dict.fromkeys(self.by, 'area'))
+        fact = I.Instruments([], [], I.list_bound([]), [], [], self.proposed, self.routes).facts(
+            0.0, 0.0, 7.4, 'Olea', date(2026, 10, 28))[I.PROPOSAL]
+        self.assertIs(fact['value'], False)
+
+    def test_dates_are_read_as_the_sources_print_them(self):
+        # G.U. n. 26 of 1-2-2025: the albi of Casalvecchio di Puglia and San Paolo di Civitate from 11 December 2023,
+        # the last to close Casalnuovo Monterotaro's on 26 March 2024; declared as PAE0158.
+        tiati = self.by['Tiati - Teanum Apulum - Civitate e Bassa Valle del Fortore']
+        self.assertEqual((tiati.proposer, tiati.first_publication()), ('ministry', date(2023, 12, 11)))
+        self.assertEqual(max(e for _, e, _ in tiati.periods), date(2024, 3, 26))
+        self.assertEqual(tiati.outcome['declaration'], 'PAE0158')
+        # The other three print an ordered publication and no day of it.
+        for name in ('Ostuni', 'Bari', 'Herdonia, Ausculum e Alta Valle del Carapelle'):
+            self.assertIsNone(self.by[name].first_publication())
+            self.assertIn('publication: no held source prints its days', self.by[name].causes)
 
 
 if __name__ == '__main__':

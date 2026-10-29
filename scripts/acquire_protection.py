@@ -440,6 +440,330 @@ def declaration_search():
     print(json.dumps({'issues': len(issues), 'matches': [m.get('title') for m in matches]}, ensure_ascii=False))
 
 
+# --- proposals of declaration of notable public interest (D.lgs. 42/2004 Arts 138-141, 157(2)) ------------------
+
+PROPOSALS = 'proposals.json'
+FLOOR = 3.05e9   # free bytes below which nothing more is captured (the 3 GB floor)
+BURP = 'https://burp.regione.puglia.it'
+BURP_PORTLET = 'it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6'
+# The BURP's document search matches a quoted phrase in an act's title and abstract (not its text); its index begins
+# with the bulletins of 2001. The phrases a proposal, its publication, its outcome or the Art. 137 commission print.
+BURP_QUERIES = ('"notevole interesse"', '"dichiarazione di notevole"', '"proposta di dichiarazione"',
+                '"proposta di vincolo"', '"vincolo paesaggistico"', '"bellezze naturali"', '"interesse pubblico"',
+                '"dichiarazione d’interesse"', "\"dichiarazione d'interesse\"", '"interesse paesaggistico"',
+                '"tutela paesaggistica"', '"determinazione negativa"', '"commissioni regionali"', '"art. 137"',
+                '"art. 138"', '"art. 139"', '"art. 140"', '"art. 141"', '"490/99"', '"1497"', '"ulivi secolari"',
+                '"albero monumentale"', '"alberi monumentali"', '"albero"')
+# A result whose abstract proposes, opens, rectifies, declares or refuses a declaration, or names the Art. 137
+# commission: its act is captured.
+_BURP_ACT = re.compile(r"(?:propost\w*|avvio\s+del\s+procedimento|rettifica|dichiarazione|provvedimento|determinazione\s+"
+                       r"negativa)\W+(?:\w+\W+){0,6}?(?:notevole\s+interesse|d.\s*interesse\s+pubblico|vincolo\s+paesaggistico)|"
+                       r"commission\w*\s+regional\w*\s+(?:di\s+cui\s+)?(?:all.\s*)?art\.?\s*137|art\.?\s*137\s+del\s+D", re.I)
+PORTAL = 'https://pugliacon.regione.puglia.it'
+# The Region's landscape portal (paesaggio.regione.puglia.it redirects here) and the PPTR's own report on its system of
+# protections, which would list a proposal in progress when the plan was made.
+PORTAL_PAGES = ('/web/sit-puglia-paesaggio/home', '/web/sit-puglia-paesaggio/il-sistema-delle-tutele',
+                '/web/sit-puglia-paesaggio/il-sistema-delle-tutele1', '/web/sit-puglia-paesaggio/news-paesaggio',
+                '/web/sit-puglia-paesaggio/normativa')
+PPTR_REPORTS = ('/documents/96721/759101/6._Sistema+delle+tutele+relazione.pdf/807e8df7-4014-b01f-0923-0bd0d421c27c',
+                '/documents/96721/759101/PPTR_Sistema_tutele_quadro_sinottico.pdf/812763bb-2698-e2f5-1ca4-c90972372ec5')
+# The Ministry's proposers in Puglia (the DG's list of Soprintendenze) and the DG that adopts their declarations. A
+# WordPress site's own lists are its archive; Bari's site left WordPress in June 2026 and is read by its sections.
+MINISTRY = (
+    ('Soprintendenza ABAP per le province di Barletta-Andria-Trani e Foggia', 'https://sabapfoggia.cultura.gov.it',
+     'wordpress', ()),
+    ('Soprintendenza ABAP per le province di Brindisi, Lecce e Taranto', 'https://sabap-le.cultura.gov.it', 'wordpress',
+     ()),
+    ('Soprintendenza ABAP per la città metropolitana di Bari', 'https://sabapba.cultura.gov.it', 'sections',
+     ('/bandi-e-avvisi', '/bandi-e-avvisi/archivio', '/eventi-e-news', '/eventi-e-news/archivio',
+      '/amministrazione-trasparente', '/modulistica-e-documenti', '/aree-di-intervento')),
+    ('Direzione generale Archeologia, belle arti e paesaggio', 'https://dgabap.cultura.gov.it', 'wordpress', ()),
+)
+ARCHIVE = 'https://web.archive.org'
+# The Internet Archive's index of each Ministry host (and the hosts before 2022), filtered to the words a proposal's
+# page or document prints in its address.
+ARCHIVE_HOSTS = ('sabapfoggia.cultura.gov.it', 'sabap-le.cultura.gov.it', 'sabapba.cultura.gov.it',
+                 'dgabap.cultura.gov.it', 'www.sabap-le.beniculturali.it', 'www.sabap-ba.beniculturali.it',
+                 'www.sabap-fg.beniculturali.it')
+ARCHIVE_FILTER = 'original:.*(notevole|propost|dichiarazion|vincol|paesagg).*'
+_PROPOSAL_ADDRESS = re.compile(r'propost\w*-di-dichiarazione|proposta.*notevole', re.I)
+
+
+def _room(store) -> bool:
+    import shutil
+    return shutil.disk_usage(store).free >= FLOOR
+
+
+def _burp_url(query: str, delta: int = 500) -> str:
+    p = f'_{BURP_PORTLET}_'
+    return f'{BURP}/documenti?' + urllib.parse.urlencode({
+        'p_p_id': BURP_PORTLET, 'p_p_lifecycle': '0', 'p_p_state': 'normal', 'p_p_mode': 'view', p + 'numeroDoc': '',
+        p + 'searchContent': query, p + 'toggler': 'false', p + 'datefilter': '', p + 'docanno': '', p + 'bolnumero': '',
+        p + 'bolnumeroSupplemento': '', p + 'Argomenti': '', p + 'Sezioni': '', p + 'resetCur': 'false',
+        p + 'delta': str(delta), p + 'cur': '1'})
+
+
+def burp_items(content: bytes) -> list[dict]:
+    """Each result of a BURP document-search page: its title, abstract, section and the act's own document. The page
+    is split on each result's markup (no pattern spans results)."""
+    import html
+
+    def clean(s):
+        return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', s))).strip()
+    out, bulletin = [], None
+    parts = content.decode('utf-8', errors='replace').split('titolo-body">')
+    for before, part in zip(parts, parts[1:]):
+        header = before.rsplit('<h2 class="titolo">', 1)   # the bulletin a run of results is in heads it
+        bulletin = clean(header[1].split('</h2>', 1)[0]) if len(header) > 1 else bulletin
+        part = part[:8000]
+        link = next((a.split('"', 1)[0] for a in part.split('href="')[1:]
+                     if a.startswith(f'{BURP}/documents/')), None)
+        abstract = part.split('class="blocco">', 1)
+        section = part.split('Sezione: </span>', 1)
+        out.append({'title': clean(part.split('</div>', 1)[0]),
+                    'abstract': clean(abstract[1].split('</div>', 1)[0]) if len(abstract) > 1 else '',
+                    'section': clean(section[1].split('</span>', 1)[0]) if len(section) > 1 else '', 'url': link,
+                    'bulletin': bulletin})
+    return out
+
+
+def proposals():
+    """The routes that publish a proposal of declaration in Puglia (Art. 139(2): the Region's site and the proposer's),
+    each captured with what it holds. The record's `proposals` (each proposal found, with its printed fields and their
+    sources) are kept as they are."""
+    import requests
+    store = store_root(OUT)
+    path = OUT / PROPOSALS
+    record = json.loads(path.read_text()) if path.exists() else {}
+    routes = {}
+    # The BURP: each query's result page, and each act a result's abstract names as a proposal, its outcome or the
+    # commission's.
+    pages, acts, seen = [], [], {}
+    for query in BURP_QUERIES:
+        if not _room(store):
+            pages.append({'query': query, 'captured_at': _now(), 'error': 'not attempted: free disk below the floor'})
+            continue
+        captured, content = _capture(store, _burp_url(query), 'the BURP document search for a phrase', query=query)
+        items = [] if content is None else burp_items(content)
+        captured['results'] = len(items)
+        pages.append(captured)
+        print(json.dumps({'query': query, 'results': len(items), 'error': captured.get('error')}, ensure_ascii=False),
+              flush=True)
+        for item in items:
+            if item['url'] and _BURP_ACT.search(item['abstract']):
+                seen.setdefault(item['url'].split('?', 1)[0], item)   # one act under its document path
+    for item in seen.values():
+        url = item['url']
+        if not _room(store):
+            acts.append({**item, 'captured_at': _now(), 'error': 'not attempted: free disk below the floor'})
+            continue
+        captured, _ = _capture(store, url, 'an act a BURP result names as a proposal, its outcome or the commission\'s',
+                               expect=b'%PDF', timeout=(30, 1800), title=item['title'], abstract=item['abstract'],
+                               section=item['section'])
+        acts.append(captured)
+        print(json.dumps({k: captured.get(k) for k in ('title', 'bytes', 'error')}, ensure_ascii=False), flush=True)
+    routes['burp'] = {'publisher': 'Regione Puglia: Bollettino Ufficiale (BURP), document search',
+                      'search': f'{BURP}/documenti', 'index': 'a quoted phrase matches in an act\'s title and abstract; '
+                      'the index begins with the bulletins of 2001 (two acts of 1999)', 'queries': pages, 'acts': acts}
+    # The Region's landscape portal and the PPTR's report on its protections.
+    portal = []
+    for page in PORTAL_PAGES:
+        captured, _ = _capture(store, PORTAL + page, 'a page of the Region\'s landscape portal')
+        portal.append(captured)
+    for report in PPTR_REPORTS:
+        captured, _ = (_capture(store, PORTAL + report, 'the PPTR\'s report on its system of protections', expect=b'%PDF',
+                                timeout=(30, 1800)) if _room(store) else
+                       ({'url': PORTAL + report, 'captured_at': _now(), 'error': 'not attempted: free disk below the floor'},
+                        None))
+        portal.append(captured)
+    routes['region_portal'] = {'publisher': 'Regione Puglia: landscape portal (http://paesaggio.regione.puglia.it '
+                               'redirects here) and the PPTR', 'pages': portal}
+    # The Ministry's proposers and its DG: each site's own lists or sections; a site that does not answer keeps its
+    # cause and is not read further.
+    ministry = []
+    session = requests.Session()
+    for name, host, kind, sections in MINISTRY:
+        home, content = _capture(store, host + '/', 'the site\'s home page', session=session, attempts=2,
+                                 timeout=(30, 120))
+        entry = {'publisher': name, 'host': host, 'kind': kind, 'home': home, 'lists': []}
+        if content is not None and kind == 'wordpress':
+            for listing in ('posts', 'pages', 'media'):
+                for number in range(1, 100):
+                    captured, content = _capture(store, f'{host}/wp-json/wp/v2/{listing}?per_page=100&page={number}',
+                                                 f'the site\'s own list of {listing}', session=session)
+                    entry['lists'].append(captured)
+                    if content is None or not json.loads(content):
+                        break
+        elif content is not None:
+            for section in sections:
+                captured, _ = _capture(store, host + section, 'a section of the site', session=session)
+                entry['lists'].append(captured)
+        ministry.append(entry)
+        print(json.dumps({'host': host, 'home': home.get('status') or home.get('error'), 'lists': len(entry['lists'])}),
+              flush=True)
+    routes['ministry'] = ministry
+    # The Internet Archive's index of each Ministry host, and its copy of each page whose address names a proposal
+    # of declaration, with the documents that page links on the host.
+    archive, documents = [], []
+    for host in ARCHIVE_HOSTS:
+        url = f'{ARCHIVE}/cdx/search/cdx?' + urllib.parse.urlencode({
+            'url': f'{host}/*', 'output': 'json', 'collapse': 'urlkey', 'filter': ARCHIVE_FILTER,
+            'fl': 'timestamp,original,mimetype,statuscode'})
+        captured, content = _capture(store, url, 'the Internet Archive\'s index of the host, filtered', host=host,
+                                     expect=b'[', timeout=(30, 300))
+        rows = [] if content is None or not content.strip() else json.loads(content)[1:]
+        captured['rows'] = len(rows)
+        archive.append(captured)
+        print(json.dumps({'host': host, 'rows': len(rows), 'error': captured.get('error')}), flush=True)
+        time.sleep(10)   # the archive refuses quick successive queries
+        for timestamp, original, _, status in rows:
+            if status != '200' or not _PROPOSAL_ADDRESS.search(original) or 'wp-json' in original:
+                continue
+            page, content = _capture(store, f'{ARCHIVE}/web/{timestamp}id_/{original}', 'the Internet Archive\'s copy '
+                                     'of a page whose address names a proposal of declaration', original=original,
+                                     archived=timestamp)
+            documents.append(page)
+            for href, _ in ([] if content is None else _anchors(content)):
+                if href.startswith(f'https://{host}/') and href.lower().endswith('.pdf'):
+                    copy, _ = _capture(store, f'{ARCHIVE}/web/{timestamp}id_/{href}', 'the Internet Archive\'s copy of '
+                                       'a document that page links', original=href, linked_from=original, expect=b'%PDF')
+                    documents.append(copy)
+    routes['archive'] = {'publisher': 'Internet Archive (Wayback Machine): copies of the Ministry\'s pages, a lead '
+                         'route where the publisher does not answer', 'indexes': archive, 'documents': documents}
+    record['routes'] = {**record.get('routes', {}), **routes, 'captured_at': _now()}
+    _write(PROPOSALS, record)
+
+
+# --- the Region's recognitions of monumentality (L. 10/2013 Art. 7(2) as in force from 20 September 2025) ----------
+
+RECOGNITIONS = 'recognitions.json'
+RECOGNISED_FROM = '2025-09-20'   # L. 131/2025: the Region recognises a tree as monumental, before a decree lists it
+# The Region publishes its list acts in the BURP: the forestry section's determinations ("elenco regionale n. N") and
+# the Giunta's deliberations ("elenco ... (Elenco L)"). The phrases their abstracts print.
+RECOGNITION_QUERIES = ('"alberi monumentali"', '"Alberi Monumentali della Regione Puglia"',
+                       '"alberi monumentali di Puglia"', '"elenco regionale"', '"monumentalità"')
+_ELENCO = re.compile(r'Approvazione\s+(?:\w+\s+)?elenco\b.{0,60}?Alberi\s+Monumentali', re.I | re.S)
+_BULLETIN_DATE = re.compile(r'del\s+(\d{2})/(\d{2})/(\d{4})')
+# The Region's other routes the acts name (the forestry section's site, the transparency section) and MASAF's list
+# page, which names the Web GIS the regions enter their trees in only as an application, with no public address.
+RECOGNITION_ROUTES = ('https://foreste.regione.puglia.it/', 'https://www.regione.puglia.it/web/amministrazione-trasparente')
+
+
+def recognitions():
+    """Each act by which the Region approves a list of monumental trees and that its bulletin publishes from
+    RECOGNISED_FROM on, held whole, with the routes tried."""
+    store = store_root(OUT)
+    pages, acts, seen = [], [], {}
+    for query in RECOGNITION_QUERIES:
+        captured, content = _capture(store, _burp_url(query), 'the BURP document search for a phrase', query=query)
+        items = [] if content is None else burp_items(content)
+        captured['results'] = len(items)
+        pages.append(captured)
+        for item in items:
+            found = _BULLETIN_DATE.search(item.get('bulletin') or '')
+            day = found and f'{found.group(3)}-{found.group(2)}-{found.group(1)}'
+            if item['url'] and _ELENCO.search(item['abstract']) and day and day >= RECOGNISED_FROM:
+                seen.setdefault(item['url'].split('?', 1)[0], item)
+    for item in seen.values():
+        if not _room(store):
+            acts.append({**item, 'captured_at': _now(), 'error': 'not attempted: free disk below the floor'})
+            continue
+        captured, _ = _capture(store, item['url'], 'an act approving a list of monumental trees', expect=b'%PDF',
+                               timeout=(30, 900), title=item['title'], abstract=item['abstract'],
+                               bulletin=item['bulletin'])
+        acts.append(captured)
+        print(json.dumps({k: captured.get(k) for k in ('title', 'bulletin', 'bytes', 'error')}, ensure_ascii=False),
+              flush=True)
+    routes = [_capture(store, url, 'a route of the Region the acts name', attempts=2, timeout=(30, 60))[0]
+              for url in RECOGNITION_ROUTES]
+    _write(RECOGNITIONS, {'from': RECOGNISED_FROM, 'captured_at': _now(), 'burp': {
+        'publisher': 'Regione Puglia: Bollettino Ufficiale (BURP), document search', 'search': f'{BURP}/documenti',
+        'index': 'a quoted phrase matches in an act\'s title and abstract', 'queries': pages, 'acts': acts},
+        'routes': routes})
+
+
+# The G.U.'s issues from the selection margin's start to the day before row 9's own search: every declaration the
+# Ministry or the Region publishes there recites the proposal it concludes.
+PROPOSAL_SEARCH = ('2021-01-01', '2026-03-30')
+
+
+def proposal_search(workers: int):
+    from cordon_d.administrative import AdministrativeUnits
+    store = store_root(OUT)
+    path = OUT / PROPOSALS
+    record = json.loads(path.read_text()) if path.exists() else {}
+    start, end = PROPOSAL_SEARCH
+    # A Puglia act is one whose title names a Puglia comune as ISTAT prints it (accents and case folded).
+    import unicodedata
+
+    def fold(text):
+        return re.sub(r"[^a-z]+", ' ', unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode().lower())
+    comuni = sorted({fold(c.name).strip() for c in AdministrativeUnits(ROOT).comuni_of('Puglia')}, key=len,
+                    reverse=True)
+    archives, wanted = [], []
+    for year in range(int(start[:4]), int(end[:4]) + 1):
+        archive, page = _capture(store, f'{GU}/ricercaArchivioCompleto/serie_generale/{year}',
+                                 'the G.U. serie generale issues of the year')
+        archives.append(archive)
+        for href, _ in ([] if page is None else _anchors(page)):
+            found = re.search(r'dataPubblicazioneGazzetta=(\d{4}-\d{2}-\d{2})&numeroGazzetta=(\d+)', href)
+            if found and start <= found.group(1) <= end:
+                wanted.append(found.groups())
+    wanted = sorted(set(wanted))
+    # An issue an earlier run holds is read again from the store; only the others are fetched.
+    from cordon_d.store import blob_path
+    held = {i['url']: i for i in (record.get('routes', {}).get('gazette') or {}).get('issues') or ()
+            if i.get('sha256')}
+    print(f'{len(wanted)} issues, {len(held)} held', flush=True)
+
+    def issue(item):
+        day, number = item
+        y, m, d = day.split('-')
+        url = f'{GU}/eli/gu/{y}/{m}/{d}/{number}/sg/html'
+        if url in held:
+            summary, content = held[url], blob_path(store, held[url]['sha256']).read_bytes()
+        elif not _room(store):
+            return {'url': url, 'captured_at': _now(), 'error': 'not attempted: free disk below the floor'}, []
+        else:
+            summary, content = _capture(store, url, 'an issue of the search window: its table of contents')
+        hits = []
+        for act, title in ([] if content is None else _anchors(content)):
+            if 'caricaDettaglioAtto' in act and _DECLARATION_TITLE.search(title):
+                hit, _ = _capture(store, urllib.parse.urljoin(GU, act), 'an act the issue titles a declaration of '
+                                  'notable public interest', title=title)
+                # The whole act (a Ministry title may name only its context): Puglia's where it names a Puglia
+                # comune or Puglia (since 2019 the Ministry declares through each region's commission).
+                query = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(act).query))
+                whole, text = _capture(store, f'{GU}/atto/vediMenuHTML?' + urllib.parse.urlencode({
+                    'atto.dataPubblicazioneGazzetta': query.get('atto.dataPubblicazioneGazzetta'),
+                    'atto.codiceRedazionale': query.get('atto.codiceRedazionale'), 'tipoSerie': 'serie_generale',
+                    'tipoVigenza': 'originario'}), 'the act whole')
+                padded = f' {fold(_page_text(text))} ' if text else f' {fold(title)} '
+                hit.update(act_text=whole, puglia_comuni=[c for c in comuni if f' {c} ' in padded],
+                           names_puglia=' puglia ' in padded)
+                hits.append(hit)
+        return summary, hits
+    issues, matches = [], []
+    with ThreadPoolExecutor(workers) as pool:
+        for n, (summary, hits) in enumerate(pool.map(issue, wanted), 1):
+            issues.append({k: summary[k] for k in ('url', 'captured_at', 'status', 'bytes', 'sha256', 'error')
+                           if k in summary})   # each an issue's table of contents
+            matches.extend(hits)
+            if n % 50 == 0 or hits:
+                print(json.dumps({'done': n, 'issue': summary.get('url'), 'matches': [h.get('title', '')[:90]
+                                                                                      for h in hits]},
+                                 ensure_ascii=False), flush=True)
+    routes = record.setdefault('routes', {})
+    routes['gazette'] = {'publisher': 'Gazzetta Ufficiale, serie generale: each issue\'s table of contents',
+                         'from': start, 'to': end, 'captured_at': _now(), 'years': archives, 'issues': issues,
+                         'matches': matches}
+    _write(PROPOSALS, record)
+    print(json.dumps({'issues': len(issues), 'failed': sum(1 for i in issues if i.get('error')),
+                      'matches': len(matches), 'puglia': [m.get('title') for m in matches
+                                                          if m.get('puglia_comuni') or m.get('names_puglia')]},
+                     ensure_ascii=False), flush=True)
+
+
 # --- the statutes A reads the instruments from (Normattiva) -----------------------------------------------------
 
 NORMATTIVA = 'https://www.normattiva.it'
@@ -571,6 +895,10 @@ if __name__ == '__main__':
     ds = sub.add_parser('declaration-schede')
     ds.add_argument('--workers', type=int, default=3)
     sub.add_parser('statutes')
+    sub.add_parser('proposals')
+    sub.add_parser('recognitions')
+    ps = sub.add_parser('proposal-search')
+    ps.add_argument('--workers', type=int, default=4)
     args = parser.parse_args()
     if args.command == 'register':
         register(args.workers)
@@ -588,5 +916,11 @@ if __name__ == '__main__':
         declaration_schede(args.workers)
     elif args.command == 'statutes':
         statutes()
+    elif args.command == 'proposals':
+        proposals()
+    elif args.command == 'recognitions':
+        recognitions()
+    elif args.command == 'proposal-search':
+        proposal_search(args.workers)
     else:
         acts([tuple(item.split('|', 1)) if '|' in item else (item, 'list act') for item in args.route])
