@@ -510,10 +510,13 @@ identity is read (a designator with number and year, or a number with its date),
 each act it so cites is the instrument of an A row governing the record (a moot
 ruling annuls nothing). Otherwise the need stays, because whether an act A does not
 record ended the order is a question of legal meaning (TAR Bari 1007/2023 on DDS
-119/2022). The residual is an act that reading does not recover: a later number
-listed under one designator, an act with no number, or another office's act printed
-as "D.D. n/year". Such an act reaches C only as a held act's own stated change.
-Nothing is patched.
+119/2022). The residual, where an unrecorded act goes unseen and the need drops, is
+an act cited in a form that reading does not recover (a later number listed under
+one designator, "det. reg. n/year", a number with its year alone, a protocol number
+of five or more digits, an act with no number), another document whose number and
+date coincide with a recorded act's, and another office's act printed "D.D.
+n/year". Such an act reaches C only as a held act's own stated change. Nothing is
+patched.
 Every such outcome only withholds, so the order's own reading under a disposition
 or stated change replaces only a dueness the governing rows leave true: a not due
 from a governing row stands, with its row in `provisions`, and an unknown from the

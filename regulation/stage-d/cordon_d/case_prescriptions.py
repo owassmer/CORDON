@@ -386,11 +386,14 @@ def _decided_in_a(reason, record):
     record (`governing_A_references`): A records that act's effect on this order, so a moot ruling adds
     nothing (owner ruling, 2026-10-28). Otherwise the court's words stay a need: whether an act A does
     not record ended the order is a question of legal meaning, not D's (TAR Bari 1007/2023 on DDS
-    119/2022). A number read with a date that is no act (a ricorso, a bulletin) keeps the need. The
-    residual is an act that reader does not read: a later number in a list under one designator ("DDS
-    n. 18/2024 e n. 127/2022"), an act with no number (a D.G.R., a law, words alone), or another office's
-    act printed as "D.D. n/year", which `act_id` reads as the Osservatorio's. Such an act reaches C only
-    as a held act's own stated change (`stated_changes`).
+    119/2022). A number read with a date that is no act (a ricorso, a bulletin) keeps the need, unless its
+    number and year are a recorded act's. The residual, where an unrecorded act goes unseen and the need
+    drops: an act cited in a form that reader does not read (a later number listed under one designator,
+    "DDS n. 18/2024 e n. 127/2022"; "det. reg. n. 127/2022"; "n. 127 del 2022"; a protocol number of five
+    or more digits; an act with no number, such as a D.G.R., a law or words alone); another document
+    whose number and date coincide with a recorded act's ("nota prot. n. 18 del 14.03.2024"); and another
+    office's act printed "D.D. n/year", which `act_id` reads as the Osservatorio's. Such an act reaches C
+    only as a held act's own stated change (`stated_changes`).
     """
     from .held_acts import printed_identities
     cited = {act_id(number, year) for number, year, _, _ in printed_identities(' '.join(reason))}
@@ -416,8 +419,8 @@ def order_dueness(record, at, *, closures=(), stated_changes=(), within_closed_s
     - a challenge the court ended with a stated reason (a later act superseding the
       order) leaves the reading unknown, naming the court's words, unless an A row
       governing the record already decides what the reason states (`_decided_in_a`):
-      the reason cites, by act type, at least one act other than the order, and each
-      act it so cites is the instrument of an A row governing the record. A moot ruling
+      the reason cites at least one act other than the order, and each act it cites is
+      the instrument of an A row governing the record (`_decided_in_a`). A moot ruling
       annuls nothing, so the A row decides (owner ruling, 2026-10-28, TAR Bari 387,
       383 and 384/2026 on DDS 18/2024).
 
