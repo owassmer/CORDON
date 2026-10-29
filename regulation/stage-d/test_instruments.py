@@ -9,9 +9,10 @@ from datetime import date
 import json
 from pathlib import Path
 import unittest
+from unittest import mock
 
 from cordon_d import instruments as I
-from cordon_d.store import blob_path, store_root
+from cordon_d.store import blob_path, put_bytes, store_root
 
 ROOT = Path(__file__).resolve().parents[2]
 STORE = store_root(ROOT)
@@ -220,9 +221,138 @@ def fixture_declaration(store: Path, root: Path, decree: bytes, motivation: str 
     return declared[0], held(declared=declared)
 
 
+# The locator's engine in `VisionRoute`: its OCR'd text is supplied by the test, held as Tesseract's would be, so the
+# route runs where Tesseract is not installed. No fixture page is ever OCR'd with it.
+FIXTURE_ENGINE = {'tesseract': 'fixture', 'leptonica': 'fixture', 'model': 'ita.traineddata', 'model_sha256': '0' * 64,
+                  'pymupdf': 'fixture', 'dpi': I.OCR_DPI, 'render': I.OCR_RENDER, 'args': list(I.OCR_ARGS),
+                  'reader': I.OCR_READER, 'executable': None}
+# How Tesseract garbles NAMING: no tree word survives, so the OCR'd words name none.
+GARBLED = 'nella zona predetta insiste una qucrcia vallonca secolare, con circonfcrenza dcl tronco di mctri 4,10'
+# PAE0013's decree (D.M. 23 January 1976, Fasano) and PAE0123's (D.M. 1 August 1985), as OCR reads them.
+FASANO = ("si passa quindi alla zona di Torre Canne formata da una suggestiva fascia tutta a sabbia dorata che arriva "
+          "fino al confine con Ostuni e nella quale è compresa la «zona termale », unica nel lungo tratto da Margherita "
+          "di Savoia (Foggia) a Santa Cesarea Terme (Lecce), il tutto con una spalliera di verde formata da alberi "
+          "secolari di ulivo che completano felicemente l'ambiente")
+
+
+def held_ocr(store: Path, digest: str, index: int, text: str):
+    """The locator's text of a page, held as an OCR reading is (Tesseract's TSV, a word to a row, no ruled lines)."""
+    rows = ['level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext']
+    for n, line in enumerate(text.splitlines(), 1):
+        rows += [f'5\t1\t1\t1\t{n}\t{k}\t{10 * k}\t{20 * n}\t9\t15\t95\t{w}' for k, w in enumerate(line.split(), 1)]
+    path = I._ocr_path(store, digest, index, FIXTURE_ENGINE)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({'source': digest, 'page': index, 'rules': {'vertical': [], 'horizontal': []},
+                                'tsv': '\n'.join(rows)}))
+
+
+def held_transcription(store: Path, digest: str, index: int, text: str) -> str:
+    """A transcription answer supplied by the test, kept where and as `_subscription_call` keeps one; no request."""
+    import pymupdf
+    request_id = I.transcription_request(pymupdf.open(blob_path(store, digest)), digest, index)[0]
+    path = I.transcription_path(store, request_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({'provider': 'claude-code-subscription', 'request_sha256': request_id,
+                                'model': I.TRANSCRIPTION_MODEL, 'effort': I.TRANSCRIPTION_EFFORT,
+                                'response': {'structured_output': {'text': text}}}))
+    return request_id
+
+
+class VisionRoute(unittest.TestCase):
+    """OCR locates a page-image decree; D's rule reads the words of its vision transcription. Both texts are supplied
+    here, so the expected answers are the fixture's own words."""
+
+    def setUp(self):
+        import tempfile
+        self.directory = tempfile.TemporaryDirectory()
+        self.store, self.root = Path(self.directory.name) / 'store', Path(self.directory.name) / 'root'
+        engine = mock.patch.object(I, 'ocr_engine', return_value=FIXTURE_ENGINE)
+        engine.start()
+        self.addCleanup(engine.stop)
+
+    def tearDown(self):
+        self.directory.cleanup()
+
+    def read(self, located: str, transcribed: str | None):
+        pdf = page_image_pdf(transcribed or located)
+        digest = put_bytes(self.store, pdf)
+        held_ocr(self.store, digest, 0, located)
+        request = transcribed is not None and held_transcription(self.store, digest, 0, transcribed)
+        return (*fixture_declaration(self.store, self.root, pdf), request)
+
+    def test_a_transcription_naming_a_tree_gives_status_and_one_naming_none_reads_area(self):
+        # Tesseract's words name no tree; the transcription's do, and they are what is read.
+        declaration, state, request = self.read(DECREE.format(GARBLED), DECREE.format(NAMING))
+        self.assertEqual((declaration.reading, declaration.genus), ('names a tree', 'Quercus'))
+        route = f'vision transcription by {I.TRANSCRIPTION_MODEL}: page 1, request {request}'
+        self.assertTrue(declaration.decree['read'].startswith(f'read from the vision transcription of page 1 ({route}); '
+                                                              'located by OCR (OCR: Tesseract fixture'))
+        self.assertEqual(declaration.decree['transcriptions'],
+                         [{'page': 1, 'model': I.TRANSCRIPTION_MODEL, 'request_sha256': request}])
+        record = I.declared_plants([declaration])[0]
+        facts = state.facts(record.x, record.y, record.error_m, record.genus, date(2026, 10, 28), own=record)
+        self.assertIs(facts[I.DECLARATION]['value'], True)
+        # Tesseract's words name a tree; the transcription's name none: an area, citing the transcription.
+        declaration, state, request = self.read(DECREE.format(NAMING), DECREE.format(NAMING_NONE))
+        self.assertEqual(declaration.reading, 'area')
+        self.assertEqual(declaration.cite, f'the transcribed text names no tree, row or group (vision transcription by '
+                                           f'{I.TRANSCRIPTION_MODEL}: page 1, request {request})')
+        facts = state.facts(50.0, 50.0, 7.4, 'Olea', date(2026, 10, 28))
+        self.assertEqual((facts[I.DECLARATION]['value'], 'PAE9001' in facts[I.DECLARATION]['cause']), (False, True))
+
+    def test_a_reading_names_what_the_transcription_does_not_let_it_read(self):
+        # A held answer writes "venticinque" with a Cyrillic "с" (G.U. n. 265/1975, page 12): a tree word so written
+        # is not seen, and a word marked illegible is not read; the area reading names both.
+        text = DECREE.format(NAMING_NONE.replace('macchia', I.ILLEGIBLE).replace('ricco', 'riсco'))
+        declaration, _, _ = self.read(DECREE.format(NAMING_NONE), text)
+        self.assertEqual(declaration.reading, 'area')
+        self.assertTrue(declaration.cite.endswith(
+            '); 1 word marked illegible; letters outside the Latin script: с (CYRILLIC SMALL LETTER ES)'))
+
+    def test_trees_named_as_part_of_the_area_declared_give_no_status(self):
+        # Owen, 2026-10-29: the coast is the thing declared; its olive hedge is one feature of it.
+        declaration, state, _ = self.read(DECREE.format(FASANO), DECREE.format(FASANO))
+        self.assertEqual((declaration.reading, declaration.decree['reading']), ('area', 'area'))
+        self.assertIn('alberi secolari di ulivo', declaration.decree['decree_text'][0])
+        self.assertIs(state.facts(50.0, 50.0, 7.4, 'Olea', date(2026, 10, 28))[I.DECLARATION]['value'], False)
+
+    def test_an_untranscribed_page_keeps_the_ocr_reading_naming_that(self):
+        declaration, _, _ = self.read(DECREE.format(GARBLED), None)
+        self.assertEqual(declaration.reading, 'area')
+        untranscribed = "the vision transcription of page 1 is not yet held: the words read are Tesseract's"
+        self.assertTrue(declaration.cite.startswith("the OCR'd text names no tree, row or group (OCR: Tesseract fixture"))
+        self.assertTrue(declaration.cite.endswith(untranscribed))
+        self.assertTrue(declaration.decree['read'].startswith('read by OCR, page 1 ('))
+        self.assertTrue(declaration.decree['read'].endswith(untranscribed))
+        self.assertEqual([(p['page'], p['page_image']) for p in declaration.decree['located']], [(1, True)])
+
+    def test_a_transcription_with_no_decreta_is_not_cut(self):
+        # The transcription stops before the dispositive OCR located: nothing is read from it, and the cause says so.
+        declaration, _, _ = self.read(DECREE.format(NAMING_NONE), DECREE.format(NAMING_NONE).split('Decreta:')[0])
+        self.assertTrue(declaration.decree['read'].startswith(
+            'not read: the transcription of page 1 holds the act titled as the layer\'s object but no "Decreta"'))
+        self.assertNotIn('reading', declaration.decree)
+        self.assertEqual(declaration.reading, 'not read whole')   # the layer's motivation, cut at its field length
+
+    def test_a_scheda_page_image_is_read_from_its_transcription(self):
+        page = ('A) ELEMENTI IDENTIFICATIVI\n"riconoscimento"\n(del valore dell\'area)\n{} (tratto dal D.M. 12-03-1971)\n'
+                'art. 134, c.1 lett. c)\nNO')
+        # Tesseract's words name a tree; the transcription's name none, and they are what is read.
+        pdf = page_image_pdf(page.format(NAMING_NONE.capitalize()))
+        digest = put_bytes(self.store, pdf)
+        held_ocr(self.store, digest, 0, page.format(NAMING.capitalize()))
+        request = held_transcription(self.store, digest, 0, page.format(NAMING_NONE.capitalize()))
+        read = I._scheda_reading(self.store, {'sha256': digest}, 'ZONA IN COMUNE DI FIXTURIA')
+        self.assertEqual(read['scheda_reading'], 'area')
+        self.assertIn('ricco di uliveti e macchia', read['scheda_motivation'])
+        self.assertEqual(read['scheda_transcriptions'][0]['request_sha256'], request)
+        self.assertTrue(read['scheda_read'].startswith('read from the vision transcription of page 1 (vision '))
+
+
 @unittest.skipUnless(I.ocr_engine(), 'Tesseract with its Italian model is not installed here (CI does not install it)')
 class OcrRoute(unittest.TestCase):
-    """A page image is read by OCR; the expected answers are the fixture's own printed words."""
+    """A page image is located by OCR and, until its transcription is held, read from the OCR'd words, naming that; the
+    expected answers are the fixture's own printed words."""
 
     def setUp(self):
         import tempfile
@@ -239,6 +369,8 @@ class OcrRoute(unittest.TestCase):
         declaration, state = fixture_declaration(self.store, self.root, naming)
         self.assertEqual((declaration.reading, declaration.genus), ('names a tree', 'Quercus'))
         self.assertTrue(declaration.decree['read'].startswith('read by OCR, page 1 (OCR: Tesseract'))
+        self.assertTrue(declaration.decree['read'].endswith('the vision transcription of page 1 is not yet held: the '
+                                                            "words read are Tesseract's"))
         record = I.declared_plants([declaration])[0]
         facts = state.facts(record.x, record.y, record.error_m, record.genus, date(2026, 10, 28), own=record)
         self.assertIs(facts[I.DECLARATION]['value'], True)
@@ -336,33 +468,44 @@ class HeldInstruments(unittest.TestCase):
         if I.ocr_engine() is None:   # their schede's identification pages and their decrees are page images
             self.assertEqual(unread, ['PAE0016', 'PAE0017', 'PAE0033', 'PAE0049'])
             return
-        # Read by OCR from each scheda's identification page (its third page); the words below, read by eye from the
-        # rendered page, are in each motivation, and none names a tree, a row or a group.
+        # Each scheda's identification page (its third page) is located by OCR. PAE0016's is read from its vision
+        # transcription (the slice); the others, until theirs are held, from the OCR'd words, naming that. The words
+        # below, read by eye from the rendered page, are in each motivation, and none names a tree, a row or a group.
         for code, words in (('PAE0016', 'variamente coltivato ad olivi, mandorli e frutteti e con'),
                             ('PAE0017', 'come quelle di Lamaforca, Santa Lucia, Pilone, Rosa Marina, che'),
                             ('PAE0033', 'scarsa vegetazione di lecci, proni, melograni, querce spinose,'),
                             ('PAE0049', 'lungo il tratto che da Castro Marina va fino alla Grotta Romanelli')):
             with self.subTest(code=code):
                 held = self.codes[code]
-                self.assertTrue(held.decree['scheda_read'].startswith('read by OCR, page 3 (OCR: Tesseract'))
+                self.assertEqual(held.decree['scheda_located']['page'], 3)
+                self.assertTrue(held.decree['scheda_read'].startswith(
+                    'read from the vision transcription of page 3 (vision transcription by ' if code == 'PAE0016' else
+                    'read by OCR, page 3 (OCR: Tesseract'))
                 self.assertIn(words, held.decree['scheda_motivation'])
                 self.assertEqual((held.decree['scheda_reading'], held.reading), ('area', 'area'))
         self.assertEqual(unread, [])
 
-    def test_a_page_image_decree_is_read_by_ocr(self):
+    def test_a_page_image_decree_is_located_by_ocr_and_read_from_its_transcription(self):
         if I.ocr_engine() is None:
             self.skipTest('Tesseract with its Italian model is not installed here')
         # G.U. n. 265 of 6 October 1975 prints PAE0017's D.M. of 4 March 1975 on its 12th and 13th pages (pp.
         # 7020-7021), page images; its motivation, read by eye from them, names the coast and its beaches.
         ostuni = self.codes['PAE0017']
-        self.assertTrue(ostuni.decree['read'].startswith('read by OCR, page 12, 13 (OCR: Tesseract'))
+        self.assertEqual([(p['page'], p['page_image']) for p in ostuni.decree['located']], [(12, True), (13, True)])
+        self.assertEqual([t['page'] for t in ostuni.decree['transcriptions']], [12, 13])
+        self.assertTrue(ostuni.decree['read'].startswith(f'read from the vision transcription of page 12, 13 (vision '
+                                                         f'transcription by {I.TRANSCRIPTION_MODEL}: page 12, request '))
         self.assertTrue(ostuni.decree['decree_act'][0].startswith('DECRETO MINISTERIALE 4 marzo 1975. Dichiarazione di '
                                                                    'notevole interesse pubblico di alcune zone in comune '
                                                                    'di Ostuni.'))
         self.assertIn('per le sue zone litorali, come quelle di Lamaforca, Santa Lucia, Pilone, Rosa Marina',
                       ostuni.decree['decree_text'][0])
         self.assertEqual(ostuni.decree['reading'], 'area')
-        self.assertTrue(ostuni.cite.startswith("the OCR'd text names no tree, row or group (OCR: Tesseract"))
+        self.assertTrue(ostuni.cite.startswith('the transcribed text names no tree, row or group (vision transcription'))
+        # A decree whose pages are not transcribed keeps the OCR'd words' reading, naming that (G.U. n. 30/1986, S.O. 5).
+        bari = self.codes['PAE0115'].decree
+        self.assertTrue(bari['read'].startswith('read by OCR, page '))
+        self.assertTrue(bari['read'].endswith("is not yet held: the words read are Tesseract's"))
         # The issue held for PAE0064 (Nardo', G.U. n. 240 of 15-10-1952) prints no decree naming the comune.
         self.assertIn("its OCR'd pages hold no decree of notable public interest titled as the layer's object",
                       self.codes['PAE0064'].decree['read'])

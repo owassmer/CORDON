@@ -821,7 +821,12 @@ geometry its rows draw. D reads each object and motivation as naming a tree (a
 trunk or crown measurement, "l'albero", a single "esemplare", not a quantified
 "qualche esemplare"), a row or group ("filare", "alberata", "viale alberato",
 "gruppo di" trees), or an area; a road's "tronco" (a stretch) and a circle's
-"circonferenza di raggio", as a delimitation prints them, name no tree. The tree's
+"circonferenza di raggio", as a delimitation prints them, name no tree. Trees a
+decree names as part of the area it declares give no status: PAE0013's decree (D.M.
+23 January 1976, Fasano) and PAE0123's (D.M. 1 August 1985) declare the coast, "il
+tutto con una spalliera di verde formata da alberi secolari di ulivo"; the coast is
+the thing declared and the olive hedge one feature of it, so each is an area (Owen,
+2026-10-29; A's Art. 136 row, the legal owner, carries the ruling). The tree's
 genus is the one its words name, none where they name several. The motivation is
 read from the decree's own text where the G.U. issue that published it, or an
 ordinary supplement of that issue that the issue's own index places an act of
@@ -850,17 +855,45 @@ motivation, an object naming a zone, wood, villa or park is an area.
 A page is read from its text layer where the layer supplies it. A page image (an
 image covering at least half the page) whose layer holds fewer than 500
 characters, or a layer fewer than 90% of whose words of four letters or more hold
-a vowel, is read by OCR: rendered by PyMuPDF at 300 dpi in grey and read by
-Tesseract with its Italian model (`-l ita --psm 3 --oem 1`), a ruled table read
-cell by cell as a text layer orders it. The OCR'd text is regenerable, kept under
+a vowel, is OCR'd: rendered by PyMuPDF at 300 dpi in grey and read by Tesseract
+with its Italian model (`-l ita --psm 3 --oem 1`), a ruled table read cell by cell
+as a text layer orders it. The OCR'd text is regenerable, kept under
 `derived/protected-status/ocr` keyed by the page's bytes and number, the Tesseract
 and Leptonica versions, the model's hash, the PyMuPDF version, the render settings
 and DPI, Tesseract's arguments and the route's own version, all of which the rows
-record. A reading resting on an OCR'd page says so: a whole OCR'd text naming none
-reads "the OCR'd text names no tree, row or group" with its route, never that the
-decree or scheda names none. Where Tesseract is not installed the page images stay
-unread, and a declaration resting on them stays as its other texts read it, naming
-that cause.
+record.
+
+Tesseract locates and does not read (Owen, 2026-10-29: OCR text alone invented
+rows in laboratory-report tables, PR #13). Its text finds the act a declaration's
+decree is, as above, and the pages that act lies on, from its first page through
+the page holding its first "Decreta" ("Delibera:"), and a scheda's identification
+page. The words D's rule reads from such a page image are its vision
+transcription: the page rendered in grey at 200 dpi, one page image per request
+through the Claude subscription under the reading login
+(`report_extraction._subscription_call`, one PNG attached), asking for the page's
+text as printed, in reading order, with each word the image does not show legibly
+written `[illegible]`, and nothing else; the model is not asked whether a tree is
+named. The answer is a model's: it is kept from its first write under
+`derived/page-transcriptions`, named by the hash of its exact request (model,
+effort, source, page, prompt, renderer, the attached PNG's hash, schema), and
+replicated with the store's kept data. The preamble is cut from the transcribed text
+of the located pages exactly as from the located text: the act titled as the
+layer's object, from its heading to its first "Decreta"; a scheda's motivation
+between "riconoscimento" and "art. 134". Where the transcription holds no such act,
+begins it on another page than OCR did, or holds no "Decreta" in those pages, that
+is the cause and no cut is forced. A reading resting on a transcription cites its
+model, each page and its request's hash, and names the words it marks illegible and
+any letter outside the Latin script, which an Italian text does not print: a tree
+word so written is not seen. `scripts/transcribe_pages.py list` writes the
+population, one row per declaration and page with why the page is in
+(`corpus/sources/protected-status/transcription-pages.csv`); `run` transcribes
+only that list, refusing where the locator no longer gives it, so a pass runs the
+population approved. Until a page's transcription is held, a declaration resting on
+it keeps the reading of Tesseract's words, which says so ("the OCR'd text names no
+tree, row or group", with its route, never that the decree or scheda names none) and
+names the pages whose transcription is not yet held. Where Tesseract is not
+installed the page images are not located, and a declaration resting on them stays
+as its other texts read it, naming that cause.
 
 An area declaration gives no status. A declaration naming a tree is
 one plant record: its polygon, at the stated scale of the PPTR's tavole 6.3.1

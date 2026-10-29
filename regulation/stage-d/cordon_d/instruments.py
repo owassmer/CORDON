@@ -679,6 +679,96 @@ def _joined(text: str) -> str:
     return re.sub(r'(?<=[^\W\d_])[-‐¬\xad][ \t|]*\n\s*(?=[^\W\d_])', '', text)
 
 
+# --- the vision transcription: the words D's rule reads from a page image -----------------------------------------
+
+# OCR locates (which act, which pages of an issue, which page of a scheda); it does not read. The words D's rule reads
+# from a page image are a vision transcription of that page: one page image per request through the Claude
+# subscription, under the reading login (scripts/transcribe_pages.py makes the requests). The answer is a model's, so
+# it is kept from its first write under derived/TRANSCRIPTION_FOLDER, which store.REGENERABLE does not name: it is
+# replicated to R2 on every push. The request asks for the page's text as printed and nothing else; the model is not
+# asked whether a tree is named.
+TRANSCRIPTION_FOLDER = 'page-transcriptions'
+TRANSCRIPTION_PROVIDER = 'claude-code-subscription'   # report_extraction.PROVIDER_LABELS['subscription']
+TRANSCRIPTION_MODEL = 'claude-sonnet-5'               # report_extraction.ExtractionConfig's, as the report readings
+TRANSCRIPTION_EFFORT = 'medium'
+TRANSCRIPTION_DPI = 200                               # the page rendered in grey; the held scans are about 290 dpi
+ILLEGIBLE = '[illegible]'
+TRANSCRIPTION_PROMPT = (
+    'Transcribe the attached page image: every word printed on the page, exactly as printed, in reading order. Where '
+    'the page is set in columns, read each column from top to bottom, the left column first; a heading or a line '
+    'spanning the columns stands where it is printed. Read a table row by row, each row\'s cells from left to right. '
+    'Keep each printed line on its own line. Keep spelling, accents, capitals, punctuation, numbers and hyphens as '
+    'printed, a word broken at a line\'s end included: do not correct, complete, join, translate, summarise or '
+    f'explain. Where the image does not show a word legibly, write {ILLEGIBLE} in its place; do not guess it. Return '
+    'only the transcription, in the field text.')
+TRANSCRIPTION_SCHEMA = {'type': 'object', 'properties': {'text': {'type': 'string'}}, 'required': ['text'],
+                        'additionalProperties': False}
+
+
+def transcription_request(document, digest: str, index: int) -> tuple[str, dict, bytes, str]:
+    """The exact request transcribing page `index` (0-based) of the held PDF `digest`, opened as `document`: its hash,
+    which names the kept answer, the identity it hashes, the one PNG it attaches and that attachment's label."""
+    from hashlib import sha256
+    import pymupdf
+    png = document[index].get_pixmap(dpi=TRANSCRIPTION_DPI, colorspace=pymupdf.csGRAY, alpha=False).tobytes('png')
+    label = f'PHYSICAL PAGE {index + 1}: page image'
+    identity = {'provider': TRANSCRIPTION_PROVIDER, 'model': TRANSCRIPTION_MODEL, 'effort': TRANSCRIPTION_EFFORT,
+                'source_sha256': digest, 'page': index + 1, 'request': 'page transcription',
+                'prompt': TRANSCRIPTION_PROMPT, 'render': f'PyMuPDF {pymupdf.VersionBind}, {TRANSCRIPTION_DPI} dpi, grey',
+                'attachments': [{'label': label, 'sha256': sha256(png).hexdigest()}], 'schema': TRANSCRIPTION_SCHEMA}
+    return sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest(), identity, png, label
+
+
+def transcription_path(store: Path, request_id: str) -> Path:
+    return Path(store) / 'derived' / TRANSCRIPTION_FOLDER / f'{request_id}.json'
+
+
+def transcriptions(store: Path, digest: str, indices) -> dict[int, dict]:
+    """The held transcription of each named page (0-based) of a held PDF: its text, the model and the request that
+    read it. A page whose answer is not held (or is not a reading by this route's model) is absent."""
+    import pymupdf
+    indices = list(indices)
+    if not indices:
+        return {}
+    document = pymupdf.open(_blob(store, digest))
+    found = {}
+    for index in indices:
+        request_id = transcription_request(document, digest, index)[0]
+        path = transcription_path(store, request_id)
+        if not path.exists():
+            continue
+        kept = json.loads(path.read_text())
+        answer = (kept.get('response') or {}).get('structured_output')
+        if (kept.get('provider') != TRANSCRIPTION_PROVIDER or kept.get('model') != TRANSCRIPTION_MODEL
+                or not isinstance(answer, dict) or not isinstance(answer.get('text'), str)):
+            continue
+        found[index] = {'page': index + 1, 'text': answer['text'], 'model': kept['model'], 'request_sha256': request_id}
+    return found
+
+
+def vision_route(held: list[dict]) -> str:
+    return (f"vision transcription by {held[0]['model']}: "
+            + '; '.join(f"page {t['page']}, request {t['request_sha256']}" for t in held))
+
+
+def _unreadable(text: str) -> str:
+    """What a transcribed text the rule reads holds that the rule cannot read: the words it marks illegible, and any
+    letter outside the Latin script, which an Italian text does not print (a model may write a Cyrillic look-alike,
+    as one held answer does): a tree word holding one is not seen."""
+    import unicodedata
+    count = text.count(ILLEGIBLE)
+    foreign = sorted({c for c in text if c.isalpha() and c not in 'ªº'
+                      and not unicodedata.name(c, '').startswith('LATIN')})
+    return ((f'; {count} word{"s" if count != 1 else ""} marked illegible' if count else '')
+            + ('; letters outside the Latin script: ' + ', '.join(f'{c} ({unicodedata.name(c, "?")})' for c in foreign)
+               if foreign else ''))
+
+
+def _untranscribed(pages) -> str:
+    return (f"; the vision transcription of page {', '.join(str(p + 1) for p in pages)} is not yet held: the words "
+            f"read are Tesseract's")
+
+
 # --- the Art. 136 declarations ----------------------------------------------------------------------------------
 
 # The delimitation's scale as the PPTR states it (NTA: the Art. 136 areas "come delimitate nelle tavole della sezione
@@ -927,6 +1017,11 @@ def _area_cite(ocr: dict | None, text: str) -> str:
     return f"the OCR'd text names no tree, row or group ({ocr_route(ocr)})" if ocr else f'{text} names no tree, row or group'
 
 
+def _vision_cite(held: list[dict], text: str) -> str:
+    """Why a whole transcribed text naming no tree reads as an area: its route, and what in it the rule cannot read."""
+    return f'the transcribed text names no tree, row or group ({vision_route(held)}){_unreadable(text)}'
+
+
 def _heading_date(heading: str) -> date | None:
     found = re.search(r'(\d{1,2})\s*[°º]?[\s.-]+([a-z]+)\s+(\d{4})', heading)
     month = found and _MONTHS.get(found.group(2))
@@ -936,19 +1031,20 @@ def _heading_date(heading: str) -> date | None:
 def _decree_reading(store: Path, issues: list[dict], obj: str, comune: str, decree_date: date | None,
                     distinctive: set[str]) -> dict | None:
     """The declaration's decree read from the G.U. issue that published it, or a supplement of that issue held: each
-    page from its text layer, or by OCR where the layer does not supply it (`page_texts`). The decree is the act of
+    page located in its text layer, or in its OCR'd text where the layer does not supply it (`page_texts`), and read
+    from its text layer or that page's vision transcription. The decree is the act of
     notable public interest whose title holds the distinctive words of the layer's object (the decree's title as the
     PPTR transcribes it) and whose heading prints the layer's decree date: the act holding the most of them, where it
     holds two, or one and the date, or all there are, or whose title names the layer's first comune whole. Its
     preamble, up to its first "decreta" (a Region's "delibera:"), its object and motivation, is read as a motivation
-    is; a reading resting on an OCR'd page says so."""
+    is; a reading resting on a transcribed page cites it, and one still resting on an OCR'd page says so."""
     held = [i for i in issues if i.get('sha256')]
     if not held:
         return None
     causes = []
     for issue in held:
         read = _read_issue(store, issue, obj, comune, decree_date, distinctive)
-        if read.get('reading'):
+        if read.get('reading') or read.get('located'):   # the act is this issue's: no other is read for it
             return read | ({'read_in': issue['url']} if issue is not held[0] else {})
         causes.append(read['read'] if len(held) == 1 else f"{issue['url']}: {read['read']}")
     return {'read': '; '.join(causes)}
@@ -957,17 +1053,20 @@ def _decree_reading(store: Path, issues: list[dict], obj: str, comune: str, decr
 TITLE_CHARS = 400   # an act's title follows its heading; the decree's own text begins within this
 
 
-def _read_issue(store: Path, issue: dict, obj: str, comune: str, decree_date: date | None,
-                distinctive: set[str]) -> dict:
-    import bisect
-    texts, route = page_texts(store, issue['sha256'])
-    state = {'pages': route['pages'], 'ocr_pages': [i + 1 for i in route['ocr_pages']]}
-    if route.get('not read') and all(t is None for t in texts):
-        return state | {'read': f"page images: no text layer to read, and they are not read by OCR: {route['not read']}"}
+def _concatenated(texts) -> tuple[str, list[int]]:
+    """Pages' texts as one text, each page's words broken by a hyphen joined, with where each page starts."""
     starts, text = [], ''
     for page in texts:
         starts.append(len(text))
         text += _joined(page or '') + '\n'
+    return text, starts
+
+
+def _acts(text: str, obj: str, comune: str, decree_date: date | None, distinctive: set[str]):
+    """The acts of notable public interest `text` prints titled as the layer's object. Returns whether any is titled
+    so (a contents entry included), the best title's score, and the preambles of the acts holding it, each (where the
+    act begins, where its first dispositive begins)."""
+    import bisect
     heads = sorted({m.start() for m in _ACT_HEADING.finditer(text)} | {m.start() for m in _REGION_HEADING.finditer(text)})
     # An act begins at its heading, or after the job number closing the act before it (its heading may be misread);
     # it runs to the next heading, so a job number OCR reads out of order does not cut it.
@@ -999,6 +1098,43 @@ def _read_issue(store: Path, issue: dict, obj: str, comune: str, decree_date: da
     best = max((score for acts in scored.values() for score, _ in acts), default=None)
     preambles = sorted((max(a for score, a in acts if score == best), end) for end, acts in scored.items()
                        if end is not None and any(score == best for score, _ in acts))
+    return named, best, preambles
+
+
+def _preamble(text: str, preambles) -> dict:
+    """The rows' copy of the act read: its heading and title, and its preamble."""
+    return {'decree_act': [re.sub(r'\s+', ' ', text[x:x + 200]).strip() for x, _ in preambles],
+            'decree_text': [re.sub(r'\s+', ' ', text[x:y]).strip() for x, y in preambles]}
+
+
+def _span(text: str, starts: list[int], preambles) -> dict[int, str]:
+    """The pages (0-based) the acts read lie on, from each act's first page through the page holding its first
+    dispositive, each with why it is in."""
+    import bisect
+    page = lambda i: bisect.bisect_right(starts, i) - 1   # noqa: E731
+    why = defaultdict(list)
+    for x, y in preambles:
+        dispositive = re.sub(r'\s+', ' ', _DECRETA.match(text, y).group(0)).strip()
+        for p in range(page(x), page(y) + 1):
+            why[p].append("holds the act's heading and its first dispositive" if page(x) == p == page(y) else
+                          "holds the act's heading" if p == page(x) else 'holds its first dispositive' if p == page(y)
+                          else "lies between the act's heading and its first dispositive")
+            if p == page(y):
+                why[p][-1] += f' ("{dispositive}" as OCR reads it)'
+    return {p: '; '.join(reasons) for p, reasons in sorted(why.items())}
+
+
+def _read_issue(store: Path, issue: dict, obj: str, comune: str, decree_date: date | None,
+                distinctive: set[str]) -> dict:
+    """The declaration's decree in one held issue: located in the text its text layer and OCR give, and read from its
+    text layer or, where a page of it is a page image, from that page's vision transcription."""
+    import bisect
+    texts, route = page_texts(store, issue['sha256'])
+    state = {'pages': route['pages'], 'ocr_pages': [i + 1 for i in route['ocr_pages']]}
+    if route.get('not read') and all(t is None for t in texts):
+        return state | {'read': f"page images: no text layer to read, and they are not read by OCR: {route['not read']}"}
+    text, starts = _concatenated(texts)
+    named, best, preambles = _acts(text, obj, comune, decree_date, distinctive)
     if best is not None and not preambles:
         return state | {'read': 'the act titled as the layer\'s object prints no "decreta" in the text read'}
     unread = f"; {len(route['ocr_pages'])} page images are not read: {route['not read']}" if route.get('not read') else ''
@@ -1007,17 +1143,57 @@ def _read_issue(store: Path, issue: dict, obj: str, comune: str, decree_date: da
             route['ocr_pages']) == route['pages'] else "its text layer and OCR'd pages hold"
         return state | {'read': f'{where} no decree of notable public interest titled as the layer\'s object {obj!r}' + (
             ', only its title (its contents): the decree is printed elsewhere' if named else '') + unread}
+    span = _span(text, starts, preambles)
     page = lambda i: bisect.bisect_right(starts, i) - 1   # noqa: E731
-    pages = {p for x, y in preambles for p in range(page(x), page(y - 1) + 1)}
-    ocr = route if pages & set(route['ocr_pages']) else None
-    reading, cite, genus = read_motivation(obj, ' '.join(text[x:y] for x, y in preambles)[:200000] + '.')
+    images = [p for p in span if p in route['ocr_pages']]
+    state |= {'located': [{'sha256': issue['sha256'], 'page': p + 1, 'page_image': p in images, 'why': why}
+                          for p, why in span.items()]}
+    # The pages the preamble lies on (its first dispositive may begin the next page, which is located, not read).
+    pages = ', '.join(str(p + 1) for p in sorted({p for x, y in preambles for p in range(page(x), page(y - 1) + 1)}))
+    if not images:
+        reading, cite, genus = read_motivation(obj, ' '.join(text[x:y] for x, y in preambles)[:200000] + '.')
+        if reading in ('not read whole', 'area'):   # the decree's own text is whole: naming no tree, it protects an area
+            reading, cite = 'area', _area_cite(None, "the decree's text")
+        return state | {'read': 'read from the text layer' + unread, 'reading': reading, 'cite': cite,
+                        'genus': genus} | _preamble(text, preambles)
+    held = transcriptions(store, issue['sha256'], images)
+    missing = [p for p in images if p not in held]
+    if missing:
+        # Until its pages are transcribed, the decree keeps the reading of the words Tesseract gives, naming that.
+        reading, cite, genus = read_motivation(obj, ' '.join(text[x:y] for x, y in preambles)[:200000] + '.')
+        if reading in ('not read whole', 'area'):
+            reading, cite = 'area', _area_cite(route, "the decree's text") + _untranscribed(missing)
+        return state | {'read': f'read by OCR, page {pages} ({ocr_route(route)})' + unread + _untranscribed(missing),
+                        'reading': reading, 'cite': cite, 'genus': genus} | _preamble(text, preambles)
+    # Every page of the act read is transcribed: the act is cut from the transcribed text as from the located text,
+    # and only there; where the transcription does not bear the location out, that is the cause and nothing is read.
+    pages_read = list(span)
+    transcribed, at = _concatenated([held[p]['text'] if p in held else texts[p] for p in pages_read])
+    _, found, cut = _acts(transcribed, obj, comune, decree_date, distinctive)
+    used = [{k: held[p][k] for k in ('page', 'model', 'request_sha256')} for p in images]
+    located = f"located by OCR ({ocr_route(route)})"
+    page_of = lambda i: pages_read[bisect.bisect_right(at, i) - 1]   # noqa: E731
+    first = sorted({page(x) for x, _ in preambles})   # where OCR located each act read to begin
+    if not cut:
+        span_pages = ', '.join(str(p + 1) for p in pages_read)
+        cause = (f'the transcription of page {span_pages} holds the act titled as the layer\'s object but no "Decreta"'
+                 if found is not None else
+                 f"the transcription of page {span_pages} holds no act titled as the layer's object")
+        return state | {'transcriptions': used, 'read': f'not read: {cause} ({vision_route(used)}); {located}' + unread}
+    starts_read = sorted({page_of(x) for x, _ in cut})
+    if starts_read != first:
+        return state | {'transcriptions': used,
+                        'read': f"not read: the act's start page is wrong: the transcription begins the act titled as "
+                                f"the layer's object on page {', '.join(str(p + 1) for p in starts_read)}, OCR on page "
+                                f"{', '.join(str(p + 1) for p in first)} ({vision_route(used)}); {located}" + unread}
+    preamble = ' '.join(transcribed[x:y] for x, y in cut)
+    reading, cite, genus = read_motivation(obj, preamble[:200000] + '.')
     if reading in ('not read whole', 'area'):   # the decree's own text is whole: naming no tree, it protects an area
-        reading, cite = 'area', _area_cite(ocr, "the decree's text")
-    return state | {'read': (f'read by OCR, page {", ".join(str(p + 1) for p in sorted(pages))} ({ocr_route(ocr)})'
-                             if ocr else 'read from the text layer') + unread,
-                    'reading': reading, 'cite': cite, 'genus': genus,
-                    'decree_act': [re.sub(r'\s+', ' ', text[x:x + 200]).strip() for x, _ in preambles],
-                    'decree_text': [re.sub(r'\s+', ' ', text[x:y]).strip() for x, y in preambles]}
+        reading, cite = 'area', _vision_cite(used, preamble)
+    read_pages = sorted({p for x, y in cut for p in range(page_of(x), page_of(y - 1) + 1)})
+    return state | {'read': (f"read from the vision transcription of page {', '.join(str(p + 1) for p in read_pages)} "
+                             f"({vision_route(used)}){_unreadable(preamble)}; {located}" + unread),
+                    'reading': reading, 'cite': cite, 'genus': genus, 'transcriptions': used} | _preamble(transcribed, cut)
 
 
 # The scheda's identification page prints the motivation after its heading and before the art. 134 classification.
@@ -1026,7 +1202,7 @@ _RECOGNITION = re.compile(r"riconoscimento.{0,3}\s*\(del valore dell.area\)\s*(.
 
 def _scheda_reading(store: Path, scheda: dict | None, obj: str) -> dict | None:
     """The declaration's motivation as its PPTR scheda (elaborato 6.4) prints it, read whole: from its text layer,
-    or by OCR where its identification page is a page image."""
+    or, where its identification page (located by OCR) is a page image, from that page's vision transcription."""
     if not scheda or not scheda.get('sha256'):
         return None
     texts, route = page_texts(store, scheda['sha256'], upto=lambda t: bool(_RECOGNITION.search(t)))
@@ -1036,14 +1212,55 @@ def _scheda_reading(store: Path, scheda: dict | None, obj: str) -> dict | None:
         unread = f"; {len(route['ocr_pages'])} page images are not read: {route['not read']}" if route.get('not read') else ''
         return state | {'scheda_read': 'the scheda prints no motivation in its text layer' + (
             " or its OCR'd pages" if route['ocr_pages'] and not unread else '') + unread}
-    ocr = route if len(texts) - 1 in route['ocr_pages'] else None
+    index = len(texts) - 1
+    if index not in route['ocr_pages']:
+        motivation = re.sub(r'\s+', ' ', _joined(found.group(1))).strip()
+        reading, cite, genus = read_motivation(obj, motivation + '.')
+        if reading in ('not read whole', 'area'):   # the scheda prints it whole: naming no tree, it protects an area
+            reading, cite = 'area', _area_cite(None, "the scheda's motivation")
+        return state | {'scheda_read': 'read from the text layer', 'scheda_motivation': motivation,
+                        'scheda_reading': reading, 'scheda_cite': cite, 'scheda_genus': genus}
+    state |= {'scheda_located': {'page': index + 1, 'why': "the scheda's identification page: its motivation between "
+                                                           "'riconoscimento' and 'art. 134'"}}
+    held = transcriptions(store, scheda['sha256'], [index])
+    if not held:   # until the page is transcribed, the words Tesseract gives, naming that
+        motivation = re.sub(r'\s+', ' ', _joined(found.group(1))).strip()
+        reading, cite, genus = read_motivation(obj, motivation + '.')
+        if reading in ('not read whole', 'area'):
+            reading, cite = 'area', _area_cite(route, "the scheda's motivation") + _untranscribed([index])
+        return state | {'scheda_read': f'read by OCR, page {index + 1} ({ocr_route(route)})' + _untranscribed([index]),
+                        'scheda_motivation': motivation, 'scheda_reading': reading, 'scheda_cite': cite,
+                        'scheda_genus': genus}
+    used = [{k: held[index][k] for k in ('page', 'model', 'request_sha256')}]
+    located = f'located by OCR ({ocr_route(route)})'
+    found = _RECOGNITION.search(held[index]['text'])
+    if not found:
+        return state | {'scheda_transcriptions': used, 'scheda_read': (
+            f"not read: the transcription of page {index + 1} prints no motivation between 'riconoscimento' and "
+            f"'art. 134' ({vision_route(used)}); {located}")}
     motivation = re.sub(r'\s+', ' ', _joined(found.group(1))).strip()
     reading, cite, genus = read_motivation(obj, motivation + '.')
     if reading in ('not read whole', 'area'):   # the scheda prints it whole: naming no tree, it protects an area
-        reading, cite = 'area', _area_cite(ocr, "the scheda's motivation")
-    return state | {'scheda_read': f'read by OCR, page {len(texts)} ({ocr_route(ocr)})' if ocr else 'read from the text layer',
+        reading, cite = 'area', _vision_cite(used, motivation)
+    return state | {'scheda_read': f'read from the vision transcription of page {index + 1} ({vision_route(used)})'
+                                   f'{_unreadable(motivation)}; {located}',
                     'scheda_motivation': motivation, 'scheda_reading': reading, 'scheda_cite': cite,
-                    'scheda_genus': genus}
+                    'scheda_genus': genus, 'scheda_transcriptions': used}
+
+
+def transcription_population(declared: list[Declaration]) -> list[dict]:
+    """The pages the vision pass transcribes: for each declaration whose decree OCR locates on page images, each page
+    image of its act from the act's first page through the page holding its first dispositive; and the identification
+    page of each scheda OCR locates on a page image. One row per declaration and page, with why the page is in."""
+    out = []
+    for d in declared:
+        held = d.decree or {}
+        out += [{'code': d.code, 'sha256': p['sha256'], 'page': p['page'], 'why': 'its decree: ' + p['why']}
+                for p in held.get('located') or () if p['page_image']]
+        if held.get('scheda_located'):
+            out.append({'code': d.code, 'sha256': held['scheda'], 'page': held['scheda_located']['page'],
+                        'why': 'its scheda: ' + held['scheda_located']['why']})
+    return out
 
 
 def _decree_state(issue: dict | None, publication: str | None) -> dict:
@@ -1336,7 +1553,15 @@ def rows(result: dict) -> dict:
                                               f'covers at least {PAGE_IMAGE_SHARE:.0%} of the page and its layer holds '
                                               f'fewer than {MIN_TEXT_PER_PAGE} characters, or fewer than '
                                               f'{MIN_VOWEL_SHARE:.0%} of its words of four letters or more hold a vowel',
-                                 'kept': f'derived/{OCR_FOLDER} (regenerable)'}},
+                                 'kept': f'derived/{OCR_FOLDER} (regenerable)',
+                                 'role': 'locates the act and its pages, and a scheda\'s identification page; it reads '
+                                         'a page only until that page\'s vision transcription is held'},
+                         'transcription': {'provider': TRANSCRIPTION_PROVIDER, 'model': TRANSCRIPTION_MODEL,
+                                           'effort': TRANSCRIPTION_EFFORT, 'dpi': TRANSCRIPTION_DPI,
+                                           'prompt': TRANSCRIPTION_PROMPT, 'illegible': ILLEGIBLE,
+                                           'kept': f'derived/{TRANSCRIPTION_FOLDER} (kept and replicated: a model\'s '
+                                                   f'answer)',
+                                           'population': transcription_population(result['declarations'])}},
         'problems': result['problems'], 'in_zone': in_zone, 'groups': groups,
         'distances': {'positives': result['positives'],
                       'nearest_listed_entry': listed[0] if listed else None,

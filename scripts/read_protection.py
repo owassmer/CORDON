@@ -58,10 +58,14 @@ if __name__ == '__main__':
     print('declarations:', len(held['declarations']['declarations']), 'in', len(held['declarations']['versions']),
           'PPTR versions; readings:', dict(Counter(d['reading'] for d in held['declarations']['declarations'])))
     declared = held['declarations']['declarations']
-    print('read by OCR:', sum((d['decree'] or {}).get('read', '').startswith('read by OCR') for d in declared),
-          'decrees,', sum((d['decree'] or {}).get('scheda_read', '').startswith('read by OCR') for d in declared),
-          'schede; decrees not found:', sorted(d['code'] for d in declared if 'no decree' in (d['decree'] or {}).get('read', '')),
-          '; engine:', held['declarations']['ocr']['engine'])
+    for route, prefix in (('read from a vision transcription', 'read from the vision transcription'),
+                          ('read by OCR until transcribed', 'read by OCR'), ('not read from a transcription', 'not read')):
+        print(f'{route}:', sum((d['decree'] or {}).get('read', '').startswith(prefix) for d in declared), 'decrees,',
+              sum((d['decree'] or {}).get('scheda_read', '').startswith(prefix) for d in declared), 'schede')
+    population = held['declarations']['transcription']['population']
+    print('transcription population:', len(population), 'rows,', len({(r['sha256'], r['page']) for r in population}),
+          'pages; decrees not found:', sorted(d['code'] for d in declared if 'no decree' in (d['decree'] or {}).get('read', '')),
+          '; OCR engine (locator):', held['declarations']['ocr']['engine'])
     print('instrument problems:', held['problems'])
     print('in a zone:', [(r['plant'], r['instrument']) for r in held['in_zone']])
     print('groups:', [(g['scheda'], g['nearest_positive_m']) for g in held['groups']])

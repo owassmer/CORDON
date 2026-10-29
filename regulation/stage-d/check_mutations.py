@@ -143,6 +143,15 @@ CODE = (
      "        return ListBound(round(max(measured or 0.0, LIST_FLOOR_M), 2)",
      "        return ListBound(round(measured or 0.0, 2)",
      'test_instruments.Rules.test_the_list_bound_takes_the_floor_under_twenty_fixes'),
+    # The words D's rule reads from a page image are its vision transcription's; Tesseract's only locate the act. The
+    # tests supply both texts, so these run everywhere.
+    ("read the Tesseract text instead of the decree's transcription", 'cordon_d.instruments',
+     "_concatenated([held[p]['text'] if p in held else texts[p] for p in pages_read])",
+     "_concatenated([texts[p] for p in pages_read])",
+     'test_instruments.VisionRoute.test_a_transcription_naming_a_tree_gives_status_and_one_naming_none_reads_area'),
+    ("read the Tesseract text instead of the scheda's transcription", 'cordon_d.instruments',
+     "    found = _RECOGNITION.search(held[index]['text'])\n", "    found = _RECOGNITION.search(texts[-1])\n",
+     'test_instruments.VisionRoute.test_a_scheda_page_image_is_read_from_its_transcription'),
     # The OCR route needs Tesseract with its Italian model, which CI does not install: there its test skips and this
     # mutation is reported as not run; it is caught only where Tesseract is installed.
     ('skip the OCR route', 'cordon_d.instruments', "    engine = ocr_engine()\n    gaps = ",
