@@ -20,7 +20,7 @@ from datetime import date, datetime
 from cordon_c.bindings import leaves
 from cordon_c.core import Evaluation, MissingInput, evaluate
 from .case_prescriptions import admitted_records
-from .protection import WITHIN, Register, named_rows, place, printed as _printed
+from .protection import WITHIN, Register, named_rows, parcel_agrees, printed as _printed
 
 RULE = 'IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal'
 DECISION = 'IT-DLGS42-A146:Art.146(5):regional-decision-owner'
@@ -52,16 +52,6 @@ PARCEL = {'comune', 'foglio', 'particella'}
 # The results a record of each kind could change; an ungranted one withholds them for the plant it names.
 WITHHOLDS = {'landscape-lodging': (DECISION, 'due'), 'landscape-acts-received': (OPINION,),
              'landscape-opinion-route': (DECISION,), 'landscape-decision': (RULE,)}
-
-
-def _number(text):
-    text = (text or '').strip()
-    return int(text) if text.isdigit() else None
-
-
-def _parcel(comune, foglio, particella):
-    parts = (place(comune), _number(foglio), _number(particella))
-    return parts if parts[0] and None not in parts[1:] else None
 
 
 def undecided(rows):
@@ -113,9 +103,10 @@ class Identities:
         return dict(identity="not in PR #30's rows", references=[], candidates=[]) if held is None else \
             {k: v for k, v in held.items() if k != 'point'}
 
-    def _entry_parcel(self, entry):
+    def _parcel_agrees(self, form, entry):
+        """`protection.parcel_agrees` for an entry held here; None where it is not held or prints no parcel."""
         e = self.entries.get(entry)
-        return e and _parcel(e.comune, e.foglio, e.particella)
+        return None if e is None else parcel_agrees(form, e)
 
     def read(self, identifier):
         """What one printed identifier names: the plants, through row 9's identity, and for a key or card the
@@ -125,10 +116,8 @@ class Identities:
             return dict(identifier=form, kind='sample', plants=set(self.by_reference.get(form['sample'].strip(), ())),
                         entries=None)
         if set(form) == PARCEL:
-            parcel = _parcel(form['comune'], form['foglio'], form['particella'])
             return dict(identifier=form, kind='parcel', entries=None,
-                        plants={p for e, plants in self.by_entry.items() if parcel and self._entry_parcel(e) == parcel
-                                for p in plants})
+                        plants={p for e, plants in self.by_entry.items() if self._parcel_agrees(form, e) for p in plants})
         entries = [e.oid for e in self.register.names(form)]
         return dict(identifier=form, kind='register', entries=entries,
                     plants=set().union(*(self.by_entry.get(e, set()) for e in entries)))
@@ -148,7 +137,8 @@ class Identities:
 
     def check(self, named, plant):
         """None where the identifier agrees with the plant's row 9 identity; 'unchecked' where it cannot be computed
-        (a parcel, for a plant whose identity is not an entry: its own parcel is not held); else why it does not
+        (a parcel, for a plant whose identity is not an entry, or is one that prints no parcel
+        `protection.parcel_agrees` reads: its own parcel is not held); else why it does not
         agree. A key or card that names no register entry blocks for every plant: the index finding none is not
         evidence that no tree carries it, so the record stays unattached and named, never attached.
 
@@ -162,10 +152,10 @@ class Identities:
             return None if plant in named['plants'] else \
                 f"{_printed(form)} names {sorted(named['plants']) or 'no plant'}, not plant {plant}"
         if named['kind'] == 'parcel':
-            parcel = None if identity in NOT_A_REGISTER_IDENTITY else self._entry_parcel(identity)
-            if parcel is None:
+            agrees = None if identity in NOT_A_REGISTER_IDENTITY else self._parcel_agrees(form, identity)
+            if agrees is None:
                 return 'unchecked'
-            return None if parcel == _parcel(form['comune'], form['foglio'], form['particella']) else \
+            return None if agrees else \
                 f"{_printed(form)} is not the parcel of entry {identity}, plant {plant}'s row 9 identity"
         entries = named['entries']
         if not entries:
@@ -257,8 +247,10 @@ def attach(records, identities):
                 continue
             seen[plant] = number
             attached[plant].append(record)
-            notes[plant] += [dict(record=record['record'], cause=f'{_printed(form)} not checked: row 9 holds no '
-                                                                 'parcel for a plant whose identity is not an entry')
+            identity = identities.plants[plant]['identity']
+            why = 'row 9 holds no parcel for a plant whose identity is not an entry' \
+                if identity in NOT_A_REGISTER_IDENTITY else f'entry {identity} prints no parcel it can be held to'
+            notes[plant] += [dict(record=record['record'], cause=f'{_printed(form)} not checked: {why}')
                              for form in outcome['unchecked']]
     return attached, unattached, notes
 

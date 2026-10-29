@@ -79,7 +79,8 @@ def main():
     parser.add_argument('--permitted-controlled-sources', nargs='*', required=True, metavar='SOURCE',
                         help='the controlled source identities the running principal is granted (state it even when '
                              'empty)')
-    parser.add_argument('--rows', help="PR #30's rows; default: this checkout's version in the store")
+    parser.add_argument('--rows', help="PR #30's rows as read_protection.py writes them without records (a run's rows "
+                                       "are refused); default: this checkout's version in the store")
     parser.add_argument('--out')
     arguments = parser.parse_args()
     store = store_root(ROOT)

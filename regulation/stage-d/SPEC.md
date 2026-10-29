@@ -761,27 +761,41 @@ note (Owen, 2026-10-28; `protection.named_rows`, `scripts/read_protection.py
 COD. A reference names every plant whose observations or `coincides_with` carry
 it, and plants carrying the same observations are one printer; a reference that
 names separate printers, or a group whose reference names no plant, decides nothing
-and is reported. A tag or COD naming several entries, or none, names nothing. An
-entry the record names within the plant's d (one of its candidates) decides the
-identity, unless records name different entries for it ("records disagree"), its
-note names another ("record and note disagree"), or another plant's note or record
-names that entry ("named for several plants"); then the identity is unknown and
-every record and note is named. An entry beyond d but within 50 m, the window in
-which the batch residuals are measured, or one that prints no point, makes the
-identity unknown across that entry, the candidates and "not a register tree",
-naming the record and the distance; the record does not decide. An entry beyond
-50 m is another tree, and the record a mistyped reference or tag: the conflict
-("entry not a candidate", with its distance) is reported beside the plant, and the
-identity is unchanged. A named entry stays a candidate of every other plant,
-marked `named_for` that plant, as information only. The records are admitted as
-the run states: one dated after the knowledge cutoff refuses the set; one outside
-the grant names nothing, and each plant whose identity it could change (one whose
-reference it prints beside a tag or COD, and one holding an entry it prints among
-its candidates) keeps its identity, with the need "authorized evidence for …"; row
-10 then withholds every result for that plant, since each record attaches through
-the identity. The rows of a run
-with records belong to it (stdout or a path it names), never the shared rows file.
-An entry's
+and is reported. Each tag or COD is read on its own: one naming several entries,
+or none, names nothing, and no other identifier narrows it. The rest of the group
+only vetoes the entry a tag or COD names: another tag or COD that does not name
+it, alone or among several ("record's identifiers disagree"), or a parcel that is
+not the entry's own ("record's parcel disagrees"), its comune folded as a card's
+is, or that the entry, printing no parcel read as comune, foglio and particella
+numbers, cannot confirm ("entry's parcel cannot confirm the record's"); one reader
+(`protection.parcel_agrees`) holds a parcel to an entry for row 9 and row 10. An
+entry the record names within the plant's d (one of its candidates), and nothing
+in its group vetoes, decides the identity, unless records name different entries
+for it ("records disagree"), its note names another ("record and note disagree"),
+or another plant's note or record names that entry ("named for several plants");
+then the identity is unknown and every record and note is named. A note that names
+an entry decides nothing where another plant's record names that entry ("named for
+several plants"), as two notes printing one code name nothing: both plants are
+unknown. An entry the record names within d that its group vetoes, an entry beyond
+d but within 50 m (the window in which the batch residuals are measured), or one
+that prints no point, makes the identity unknown across that entry, the candidates
+and "not a register tree", naming the record, the distance and the cause; the
+record does not decide. An entry beyond 50 m is another tree, and either the
+reference or the tag mistyped: the conflict ("entry not a candidate", with its
+distance) is reported beside the plant it names, which it leaves unchanged whatever
+else its group prints, and the record counts as naming its entry for any other plant holding it, as a record whose
+reference names no plant does. A named entry stays a candidate of every other plant,
+marked `named_for` that plant. The records are admitted as the run states: one dated
+after the knowledge cutoff refuses the set; one outside the grant names nothing, and
+each plant whose identity a granted version of it could change keeps its identity,
+with the need "authorized evidence for …": a plant its reference names, where a tag
+or COD names one entry that lies within the plant's d, beyond d within 50 m, or
+prints no point, and every plant holding such an entry among its candidates. Row 10
+then withholds every result for that plant, since each record attaches through the
+identity. The rows of a run with records belong to it (stdout or a path it names),
+never the shared rows file, and are never taken back: `named_rows`, and so row 10,
+takes only rows in the shape `read_protection.py` writes without records, and
+refuses one carrying any other key, naming it (`protection.as_written`). An entry's
 survey batch is the survey the recitals of the act that first listed it name for
 its group (its label's entries, split by survey date): the survey whose recital
 count is within 5% of the group's, or, where none fits, the one survey those
@@ -844,8 +858,9 @@ attaches to the one plant its deciding identifiers name (a monitoring reference
 naming one plant, or a key or card naming one entry that is one plant's
 identity) where every other identifier it prints agrees with that plant: a key
 or card names the plant's identity entry or, for an "unknown" plant, one of its
-candidates; a parcel is checked only against an entry identity's own parcel, and
-otherwise is reported unchecked, neither blocking nor deciding. A group that row
+candidates; a parcel is checked only against an entry identity's own parcel, by
+row 9's reader (`protection.parcel_agrees`), and otherwise, or where that entry
+prints none it reads, is reported unchecked, neither blocking nor deciding. A group that row
 9 reads as naming a candidate entry for the plant and does not decide never
 agrees: a grant it carries could be another tree's. A card or COD is read by row
 9's reader. A key or card that names no register entry held here

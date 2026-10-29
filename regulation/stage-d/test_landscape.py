@@ -16,6 +16,7 @@ code under test. The clock's end is counted by hand: 45 calendar days from Tuesd
 points (D at x 701000, entry 990004 at x 700015, the same y: 985 m).
 """
 import copy
+import dataclasses
 from datetime import date, datetime
 import json
 from pathlib import Path
@@ -305,19 +306,27 @@ class LandscapeRecords(unittest.TestCase):
 
     def test_unattached_causes(self):
         for printed, cause in (([sample('9199999')], 'no match'),
+                               ([sample(A), sample(C)], 'identifiers in conflict'),
                                ([tag('0990101'), sample(C)], 'identifiers in conflict'),
                                ([tag('0990101'), parcel('22', '310')], 'identifiers in conflict'),
                                ([parcel('21', '300')], 'several matches'),
                                ([sample('9100005')], 'several matches'),
                                ([tag('0990101', 'Fasano')], 'no match'),
-                               ([tag('0990101'), sample('9199999')], 'identifiers in conflict')):
+                               ([tag('0990101'), sample('9199999')], 'identity undecided')):
             with self.subTest(printed=printed):
                 run = self.run_caller([decision('d-x', [printed])])
                 self.assertEqual([u['cause'] for u in run['unattached']], [cause])
                 self.assertTrue(all(run['plants'][p]['records'] == [] for p in (A, B, C, D)))
-        run = self.run_caller([decision('d-x', on(tag('0990101'), sample(C)))])
-        self.assertEqual(run['unattached'][0]['detail'], [f'card 0990101 (Monopoli) names plant {A}',
+        run = self.run_caller([decision('d-x', on(sample(A), sample(C)))])
+        self.assertEqual(run['unattached'][0]['detail'], [f'monitoring reference {A} names plant {A}',
                                                           f'monitoring reference {C} names plant {C}'])
+        # A reference beside a card is a naming record for row 9: it names A's note entry 990001 for C, 28 km away,
+        # or for no plant, so A is unknown (`protection.identity`) and the card names only a candidate of it.
+        run = self.run_caller([decision('d-x', on(tag('0990101'), sample(C)))])
+        self.assertEqual(run['unattached'][0]['detail'], [
+            f'card 0990101 (Monopoli) names entry 990001, 28284.27 m from plant {C}; row 9 found no entry within d of '
+            'it'])
+        self.assertEqual(run['plants'][A]['identity']['identity'], 'unknown')
         run = self.run_caller([decision('d-x', on(sample(A), tag('0990101', 'Fasano'), sample('9199999')))])
         self.assertEqual(run['unattached'][0]['detail'], [
             'card 0990101 (Fasano) names no register entry held here',
@@ -366,12 +375,22 @@ class LandscapeRecords(unittest.TestCase):
                 self.assertEqual(run['plants'][D]['reported'], [] if identity != 'unknown' else [dict(
                     record='d-1', cause='parcel Monopoli fg 23 p.lla 400 not checked: row 9 holds no parcel for a '
                                         'plant whose identity is not an entry')])
-        # Row 9 decides entry 990005 from the reference and card; the parcel the group also prints is not that
-        # entry's (fg 23 p.lla 400), so the group does not attach.
-        run = self.run_caller([decision('d-1', on(tag('990505'), sample(D), parcel('17', '175')))])
-        self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict')])
+        # The parcel the group also prints is not entry 990005's (fg 23 p.lla 400): row 9 does not decide from it
+        # (`protection.parcel_agrees`, the reader row 10 holds a parcel to), so the group does not attach, and a
+        # record printing only the card stays identity undecided.
+        run = self.run_caller([decision('d-1', on(tag('990505'), sample(D), parcel('17', '175'))),
+                               lodging('l-1', on(tag('990505')))])
+        self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict'), ('l-1', 1, 'identity undecided')])
         self.assertEqual(run['unattached'][0]['detail'], [
-            f"parcel Monopoli fg 17 p.lla 175 is not the parcel of entry 990005, plant {D}'s row 9 identity"])
+            f'row 9 reads this group as naming entry 990005 for plant {D} and does not decide it: unknown between the '
+            'entries within d and "not a register tree": record\'s parcel disagrees: record d-1 (group 1) prints card '
+            f'990505 (Monopoli), monitoring reference {D}, parcel Monopoli fg 17 p.lla 175, which names entry 990005 '
+            'at 15.0 m, within d 30.55 m'])
+        self.assertEqual((run['plants'][D]['identity']['identity'], run['plants'][D]['records']), ('unknown', []))
+        # Its own parcel, its comune as the register's folds, agrees.
+        run = self.run_caller([decision('d-1', on(tag('990505'), sample(D), parcel('23', '0400', ' MONOPOLI'))),
+                               lodging('l-1', on(tag('990505')))])
+        self.assertEqual((run['unattached'], run['plants'][D]['records']), ([], ['d-1', 'l-1']))
         # A record printing only the card attaches once a record of the same run names the plant (the plan's
         # "done means" for 11200168 and card 903858), and is identity undecided without one.
         run = self.run_caller([decision('d-1', on(sample(D), tag('990505')), occurred=date(2025, 8, 1)),
@@ -425,6 +444,13 @@ class LandscapeRecords(unittest.TestCase):
             f'row 9 reads this group as naming entry 990004 for plant {A} and does not decide it: {rule}'])
         self.assertEqual(run['plants'][A]['identity']['identity'], 'unknown')
         self.assertEqual(run['plants'][A]['records'], [])
+        # A record naming A's note entry for another plant (C's reference beside entry 990001's COD; C lies 28 km
+        # away) leaves A unknown, as two notes printing one code do: a decision printing only that COD names an
+        # entry of an unknown plant, and attaches to no plant.
+        run = self.run_caller([lodging('l-1', on(sample(C), dict(cod='990101_21_300_072030'))),
+                               decision('d-2', on(dict(cod='990101_21_300_072030')))])
+        self.assertEqual(self.causes(run), [('l-1', 1, 'identifiers in conflict'), ('d-2', 1, 'identity undecided')])
+        self.assertEqual((run['plants'][A]['identity']['identity'], run['plants'][A]['records']), ('unknown', []))
         # C has no entry within d: any register entry disagrees with row 9, named with its distance.
         run = self.run_caller([decision('d-1', on(sample(C), tag('990505')))])
         self.assertEqual(self.causes(run), [('d-1', 1, 'identifiers in conflict')])
@@ -439,6 +465,14 @@ class LandscapeRecords(unittest.TestCase):
             f"parcel Monopoli fg 21 p.lla 301 is not the parcel of entry 990001, plant {A}'s row 9 identity"])
         self.assertEqual(self.run_caller([decision('d-1', on(sample(C), parcel('9', '9')))])['plants'][C]['records'],
                          ['d-1'])
+        # An identity entry that prints no parcel cannot be held to one: the parcel is reported unchecked, naming why.
+        register = [dataclasses.replace(e, particella=' ') if e.oid == '990001' else e for e in REGISTER]
+        run = landscape_results(self.s, AT, [A], [decision('d-1', on(sample(A), parcel('21', '301')))],
+                                evaluated_at=CUTOFF, permitted_controlled_sources=GRANT, rows=self.rows,
+                                register=register, zone=ROME, calendar=national_calendar())
+        self.assertEqual((run['plants'][A]['records'], run['plants'][A]['reported']), (['d-1'], [dict(
+            record='d-1', cause='parcel Monopoli fg 21 p.lla 301 not checked: entry 990001 prints no parcel it can be '
+                                'held to')]))
 
     def test_a_record_naming_several_plants_attaches_each_group_on_its_own(self):
         run = self.run_caller([decision('d-3', [[sample(A)], [tag('0990202')], [sample(C)]])])

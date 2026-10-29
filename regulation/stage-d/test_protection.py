@@ -299,7 +299,7 @@ class NamingRecords(unittest.TestCase):
                          f'{P1}, card 993858 (Monopoli), which names entry 993516 at 15.47 m, within d 17.48 m'))
         self.assertEqual(p1['named'], [dict(record='n-1', group=1, printed=f'monitoring reference {P1}, card 993858 '
                                             '(Monopoli)', plants=[P1], entries=['993516'], cause='entry within d',
-                                            distance_m=15.47, d_m=17.48, fixture=True)])
+                                            conflict=None, distance_m=15.47, d_m=17.48, fixture=True)])
         # The entry stays a candidate of every other plant that holds it, marked; their identities do not move.
         for other in (P2, P3, P4):
             with self.subTest(plant=other):
@@ -370,7 +370,87 @@ class NamingRecords(unittest.TestCase):
                          f'record n-1 (group 1) prints monitoring reference {Q9}, card 0990101 (Monopoli), which names '
                          f"entry 999001 at 2.0 m, within d 30.55 m; plant {P9}'s note prints code 0990101, which "
                          'names it')
+
+    def test_a_note_and_a_record_naming_one_entry_for_two_plants_leave_both_unknown(self):
+        """The order plant 0e92c74d4485's shape: its note names entry 33450, and a record pairs another plant's
+        reference with 33450's COD. As two notes printing one code name nothing, both plants are unknown."""
+        out = self.run_rows(naming('n-1', [ref(Q9), dict(cod='990101_21_300_072030')]))
+        self.assertEqual(self.plant(out, P9)['candidates']['rule'],
+                         'unknown between the entries within d and "not a register tree": named for several plants: '
+                         'its note prints code 0990101, which names entry 999001; record n-1 (group 1) names it for '
+                         f'plant {Q9} (entry within d)')
+        self.assertEqual(self.plant(out, Q9)['candidates']['identity'], 'unknown')
+        self.assertNotIn('named', self.plant(out, P9)['candidates'])
+        self.assertEqual(self.candidate(out, P9, '999001')['named_for'],
+                         [dict(plants=[Q9], record='n-1', group=1, cause='entry within d')])
+        # So does a record naming it for a plant beyond 50 m, or for a reference that names no plant: either part
+        # of such a record may be the mistyped one.
+        for group, cause in (([ref(P6), tag('0990101')], 'entry not a candidate'),
+                             ([ref('9299999'), tag('0990101')], 'reference names no plant')):
+            with self.subTest(cause=cause):
+                rule = self.plant(self.run_rows(naming('n-1', group)), P9)['candidates']['rule']
+                self.assertTrue(rule.startswith('unknown between the entries within d and "not a register tree": named '
+                                                'for several plants: its note prints code 0990101'), rule)
+                self.assertTrue(rule.endswith(f'({cause})'), rule)
+        # A record that names the note's entry for the plant itself agrees with it, and decides it with the note.
+        out = self.run_rows(naming('n-1', [ref(P9), tag('0990101')]))
         self.assertEqual(self.plant(out, P9)['candidates']['identity'], '999001')
+        # Outside the grant, the record withholds the plant's results, as it could leave it unknown.
+        out = self.run_rows(naming('n-1', [ref(Q9), tag('0990101')], source='e' * 64))
+        self.assertEqual((self.plant(out, P9)['candidates']['identity'], self.plant(out, P9)['candidates']['needs']),
+                         ('999001', ['authorized evidence for landscape-lodging record n-1']))
+
+    def test_a_group_whose_parcel_or_other_identifier_disagrees_decides_nothing(self):
+        """The rest of a group only vetoes the entry its tag or COD names (`protection.parcel_agrees`)."""
+        group = [ref(P1), tag('993858')]
+        for printed, cause in (([dict(comune='Monopoli', foglio='99', particella='999')], "record's parcel disagrees"),
+                               ([dict(comune='Fasano', foglio='17', particella='175')], "record's parcel disagrees"),
+                               ([dict(cod='990994_28_68_074012')], "record's identifiers disagree"),
+                               ([dict(cod=REPEATED)], "record's identifiers disagree"),
+                               ([tag('999999')], "record's identifiers disagree")):
+            with self.subTest(printed=printed):
+                p1 = self.plant(self.run_rows(naming('n-1', group + printed)), P1)['candidates']
+                self.assertEqual(p1['identity'], 'unknown')
+                self.assertTrue(p1['rule'].startswith('unknown between the entries within d and "not a register '
+                                                      f'tree": {cause}: record n-1 (group 1) prints monitoring '
+                                                      f'reference {P1}, card 993858 (Monopoli), '), p1['rule'])
+                self.assertEqual([n['conflict'] for n in p1['named'] if n['entries'] == ['993516']], [cause])
+        # A parcel that is the entry's own, its comune folded as `place` folds it, or no parcel, changes nothing.
+        for printed in ([dict(comune=" monopoli ", foglio='17', particella='0175')], [dict(cod='UM993771')], []):
+            with self.subTest(printed=printed):
+                p1 = self.plant(self.run_rows(naming('n-1', group + printed)), P1)['candidates']
+                self.assertEqual(p1['identity'], '993516')
+        # An entry that prints no parcel cannot confirm one.
+        register = [dataclasses.replace(e, particella=' ') if e.oid == '993516' else e for e in REGISTER]
+        out = protection.named_rows(self.rows, register, [naming('n-1', group + [dict(comune='Monopoli', foglio='17',
+                                                                                      particella='175')])],
+                                    evaluated_at=CUTOFF, permitted_controlled_sources=GRANT, zone=ROME)
+        self.assertIn(""""not a register tree": entry's parcel cannot confirm the record's: record n-1""",
+                      self.plant(out, P1)['candidates']['rule'])
+        # Beyond d, it stays unknown across the entry, with both causes.
+        out = self.run_rows(naming('n-1', [ref(P5), tag('13', 'Castellana Grotte'),
+                                           dict(comune='Castellana Grotte', foglio='1', particella='1')]))
+        self.assertTrue(self.plant(out, P5)['candidates']['rule'].startswith(
+            'unknown between entry 995494 and "not a register tree": entry beyond d, record\'s parcel disagrees: '))
+
+    def test_rows_a_run_wrote_are_refused(self):
+        """Only rows in the shape `rows` writes without records are taken (`protection.as_written`): a run's rows
+        carry identities its records decided, which no later run may take as PR #30's."""
+        run = self.run_rows(naming('n-1', [ref(P1), tag('993858')]))
+        ungranted = self.run_rows(naming('n-1', [ref(P1), tag('993858')], source='e' * 64))
+        plant = dict(named=self.plant(run, P1), named_for=self.plant(run, P2), needs=self.plant(ungranted, P1))
+        for key, rows, where in (('naming_records', run, 'the rows'),
+                                 ('run', dict(self.rows, run={}), 'the rows'),
+                                 ('unread', dict(self.rows, unread=[]), 'the rows'),
+                                 ('source', dict(self.rows, plants=[dict(self.rows['plants'][0], source='x')]),
+                                  f'plant {P1}'),
+                                 ('named', dict(self.rows, plants=[plant['named']]), f"plant {P1}'s candidates"),
+                                 ('needs', dict(self.rows, plants=[plant['needs']]), f"plant {P1}'s candidates"),
+                                 ('named_for', dict(self.rows, plants=[plant['named_for']]),
+                                  f"plant {P2}'s candidate 993516")):
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, f"{where} carries '{key}', which that shape"):
+                protection.named_rows(rows, REGISTER, [], evaluated_at=CUTOFF, permitted_controlled_sources=GRANT,
+                                      zone=ROME)
 
     def test_records_that_disagree_decide_nothing(self):
         out = self.run_rows(naming('n-1', [ref(P2), tag('993540')]), naming('n-2', [ref(P2), tag('993818')]))
@@ -422,6 +502,21 @@ class NamingRecords(unittest.TestCase):
                 self.assertEqual(self.plant(out, other)['candidates']['identity'], 'unknown')
         self.assertEqual((out['naming_records'], out['ungranted']), ([], [dict(
             record='n-1', kind='landscape-lodging', need='authorized evidence for landscape-lodging record n-1')]))
+        # It reaches only a plant a granted version could change: not one whose card repeats in its comune (P12
+        # holds 991201, one of the two entries card 996213 names in Nardò, and a granted version names nothing), nor
+        # one whose entry lies beyond 50 m (P6); one beyond d within 50 m (P5) or printing no point (P1) is reached.
+        for group, reached in (([ref(P12), tag('996213', 'Nardò')], []), ([ref(P6), tag('0990994', 'Ostuni')], []),
+                               ([ref(P11), dict(cod=REPEATED)], []),
+                               ([ref(P5), tag('13', 'Castellana Grotte')], [P5]), ([ref(P1), tag('991301')], [P1])):
+            with self.subTest(group=group):
+                out = self.run_rows(naming('n-1', group, source='e' * 64))
+                self.assertEqual([p['plant'] for p in out['plants'] if p['candidates'].get('needs')], reached)
+                self.assertEqual(out['ungranted'][0]['record'], 'n-1')
+                granted = self.run_rows(naming('n-1', group))
+                changed = [p['plant'] for p, q in zip(self.rows['plants'], granted['plants'])
+                           if (p['candidates']['identity'], p['candidates']['rule']) !=
+                           (q['candidates']['identity'], q['candidates']['rule'])]
+                self.assertEqual(changed, reached)
 
     def test_a_record_after_the_cutoff_refuses_the_set_and_no_record_changes_nothing(self):
         with self.assertRaisesRegex(ValueError, 'Record n-2 .* states occurred 2025-10-01, later than the evaluation'):
@@ -476,6 +571,38 @@ class ReadProtectionRun(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'later than the evaluation'):
                     read_protection.main(run + ['--out', f'{store}/run.json'])
             self.assertFalse((Path(store) / 'derived').exists())
+
+    def test_a_runs_rows_fed_back_through_read_landscape_are_refused(self):
+        """`read_protection.py --records --out X` writes a run's rows, whose identities rest on that run's records;
+        `read_landscape.py --rows X` refuses them, so a grant cannot attach through a record outside its own run."""
+        import sys
+        import tempfile
+        from unittest import mock
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import read_landscape
+        import read_protection
+        rows = fixture_rows()
+        rows.update(zone_entries=[dict(e, layer='listed') for e in rows['zone_entries']], reference_fixes=[], bounds={},
+                    survey_batches=[], unread_deletions=[])
+        result = dict(bounds={}, batches={}, entries={e.oid: e for e in REGISTER})
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            (folder / 'naming.json').write_text(json.dumps([naming('n-1', [ref(P1), tag('993858')])]))
+            (folder / 'grant.json').write_text(json.dumps([naming('d-1', [tag('993858')])]))
+            stated = ['--known-through', CUTOFF.isoformat(), '--permitted-controlled-sources', 'f' * 64]
+            with mock.patch.object(read_protection, 'store_root', return_value=folder), \
+                    mock.patch.object(protection, 'read', return_value=result), \
+                    mock.patch.object(protection, 'rows', return_value=rows), mock.patch('sys.stdout'):
+                read_protection.main(['--records', str(folder / 'naming.json'), '--decision', '2025-09-01',
+                                      '--out', str(folder / 'run.json')] + stated)
+            written = json.loads((folder / 'run.json').read_text())
+            self.assertEqual(next(p for p in written['plants'] if p['plant'] == P1)['candidates']['identity'], '993516')
+            argv = ['read_landscape.py', '--records', str(folder / 'grant.json'), '--plants', P1, '--at', '2025-09-01',
+                    '--rows', str(folder / 'run.json')] + stated
+            with mock.patch.object(sys, 'argv', argv), mock.patch.object(read_landscape, 'store_root', return_value=folder), \
+                    mock.patch.object(read_landscape, 'register', return_value=REGISTER), mock.patch('sys.stdout'), \
+                    self.assertRaisesRegex(ValueError, "the rows carries 'naming_records', which that shape does not"):
+                read_landscape.main()
 
     def test_verify_holds_named_rows_to_the_run_inputs(self):
         """`contracts.json` names `protection.named_rows` as a run-input entry point: neither its cutoff nor its grant
