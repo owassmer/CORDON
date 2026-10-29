@@ -642,6 +642,15 @@ class LandscapeRecords(unittest.TestCase):
                                                                                    occurred=AFTER))],
                                upstream={A: SETTLED})['plants'][A]
         self.assertEqual((item['results'][RULE].needs, item['withheld']), ({NEED['union']}, {}))
+        # An ungranted record that could change A's row 9 identity (its reference beside entry 990004's card, which
+        # would make A's note-decided identity unknown) withholds every result for A: each record attaches through it.
+        # A granted grant printing A's identity card still attaches, and decides nothing.
+        doubt = ungranted(lodging('l-z', on(sample(A), tag('0990404'))))
+        item = self.run_caller([decision('d-1', on(tag('0990101'))), doubt], upstream={A: SETTLED})['plants'][A]
+        self.assertEqual(item['records'], ['d-1'])
+        self.assertEqual({row: item['results'][row].needs for row in (RULE, DECISION, OPINION)},
+                         {row: {need(doubt)} for row in (RULE, DECISION, OPINION)})
+        self.assertIsNone(item['due'])
         # Nothing of an ungranted record is shown beyond its name, kind and need: not where it attaches, nor why
         # it does not.
         run = self.run_caller([ungranted(decision('d-g', on(sample('9100006')))),

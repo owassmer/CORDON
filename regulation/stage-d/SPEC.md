@@ -775,8 +775,11 @@ naming the record and the distance; the record does not decide. An entry beyond
 identity is unchanged. A named entry stays a candidate of every other plant,
 marked `named_for` that plant, as information only. The records are admitted as
 the run states: one dated after the knowledge cutoff refuses the set; one outside
-the grant names nothing, and a plant whose reference it prints beside a tag or COD
-keeps its identity, with the need "authorized evidence for …". The rows of a run
+the grant names nothing, and each plant whose identity it could change (one whose
+reference it prints beside a tag or COD, and one holding an entry it prints among
+its candidates) keeps its identity, with the need "authorized evidence for …"; row
+10 then withholds every result for that plant, since each record attaches through
+the identity. The rows of a run
 with records belong to it (stdout or a path it names), never the shared rows file.
 An entry's
 survey batch is the survey the recitals of the act that first listed it name for

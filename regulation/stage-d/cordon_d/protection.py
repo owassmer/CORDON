@@ -1040,7 +1040,8 @@ def naming_records(groups, plants: dict[str, Placed], register: Register, d_of) 
     """Each plant group of the admitted landscape records that prints a monitoring reference beside a tag or COD.
 
     `groups` holds (record, group, identifiers, need, fixture): need is None for a granted record; a record outside
-    the grant names nothing, and its group is returned only with its need, for the plants its references name.
+    the grant names nothing, and its group is returned only with its need, for the plants its references name and
+    every plant holding an entry it prints among its candidates.
     `d_of(plant, entry)` is d, or None where it is not held.
 
     A reference names every plant whose observations or coincides_with carry it; plants that carry the same
@@ -1065,8 +1066,15 @@ def naming_records(groups, plants: dict[str, Placed], register: Register, d_of) 
         named = [by_reference.get(r, set()) for r in references]
         mine = tuple(sorted(set().union(*named)))
         if need is not None:
-            if mine:
-                found.append(Naming(record, number, words, mine, (), need, granted=False, fixture=fixture))
+            # Outside the grant the record names nothing, but its result is withheld wherever it could change an
+            # identity: for the plants its references name, and for every plant holding an entry it prints among its
+            # candidates, which it would leave named for several plants (a narrower grant never decides more).
+            named_entries = {e.oid for form in keys for e in register.names(form)}
+            holders = {plant for plant, placed in plants.items() if named_entries & {oid for oid, _, _ in placed.within}}
+            reached = tuple(sorted(set(mine) | holders))
+            if reached:
+                found.append(Naming(record, number, words, reached, tuple(sorted(named_entries)), need, granted=False,
+                                    fixture=fixture))
             continue
         cause = SEPARATE if len({plants[p].printer for p in mine}) > 1 else NO_PLANT if not all(named) else None
         entries = {}

@@ -413,6 +413,13 @@ class NamingRecords(unittest.TestCase):
                                                                          'record n-1']))
         self.assertNotIn('named', p1)
         self.assertNotIn('named_for', self.candidate(out, P2, '993516'))
+        # It could leave entry 993516 named for several plants, so each plant holding it among its candidates gets
+        # the need too, and no identity moves.
+        for other in (P2, P3, P4):
+            with self.subTest(plant=other):
+                self.assertEqual(self.plant(out, other)['candidates'].get('needs'),
+                                 ['authorized evidence for landscape-lodging record n-1'])
+                self.assertEqual(self.plant(out, other)['candidates']['identity'], 'unknown')
         self.assertEqual((out['naming_records'], out['ungranted']), ([], [dict(
             record='n-1', kind='landscape-lodging', need='authorized evidence for landscape-lodging record n-1')]))
 

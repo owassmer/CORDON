@@ -140,6 +140,12 @@ CODE = (
      '    rows = named_rows(rows, register, supplied, evaluated_at=evaluated_at, zone=zone,\n',
      '    rows = named_rows(rows, register, [], evaluated_at=evaluated_at, zone=zone,\n',
      'test_landscape.LandscapeRecords.test_a_negative_olive_whose_identity_is_unknown'),
+    ('let a record outside the grant that could change an identity withhold nothing in row 10', 'cordon_d.landscape',
+     "        for need in identities.needs.get(plant, ()):\n", "        for need in ():\n",
+     'test_landscape.LandscapeRecords.test_an_ungranted_record_withholds_what_it_could_change_and_shows_nothing_else'),
+    ('withhold an ungranted record only for the plants its references name', 'cordon_d.protection',
+     "            reached = tuple(sorted(set(mine) | holders))\n", "            reached = tuple(sorted(set(mine)))\n",
+     'test_protection.NamingRecords.test_a_record_outside_the_grant_names_nothing'),
 )
 
 

@@ -85,6 +85,7 @@ class Identities:
 
     def __init__(self, rows, register):
         self.plants, self.by_reference = {}, defaultdict(set)
+        self.needs = {}  # a plant -> the needs of records outside the grant that could change its row 9 identity
         self.by_entry = defaultdict(set)       # an entry -> the plants whose row 9 identity it is
         self.candidate_of = defaultdict(set)   # an entry -> the 'unknown' plants it is a candidate of
         self.undecided = undecided(rows)
@@ -96,6 +97,8 @@ class Identities:
             references = {o[0] for o in p['observations'] if o[0]} | set(p.get('coincides_with') or ())
             self.plants[p['plant']] = dict(identity=identity, references=sorted(references), candidates=candidates,
                                            point=p.get('point'))
+            if p['candidates'].get('needs'):
+                self.needs[p['plant']] = list(p['candidates']['needs'])
             for reference in references:
                 self.by_reference[reference].add(p['plant'])
             if identity not in NOT_A_REGISTER_IDENTITY:
@@ -389,6 +392,11 @@ def landscape_results(snapshot, at: date, plants, supplied, *, evaluated_at, per
             if _day(r['event'].occurred, zone) <= at:
                 for row in WITHHOLDS[r['kind']]:
                     withheld[row].add(needs[r['record']])
+        # A record outside the grant that could change this plant's row 9 identity (`protection.named_rows`, `needs`)
+        # withholds every result: each record attaches through that identity.
+        for need in identities.needs.get(plant, ()):
+            for row in (RULE, DECISION, OPINION, 'due'):
+                withheld[row].add(need)
         for row, row_needs in withheld.items():
             if row == 'due':
                 due = None
