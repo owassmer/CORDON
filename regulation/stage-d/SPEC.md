@@ -766,8 +766,10 @@ or none, names nothing, and no other identifier narrows it. The rest of the grou
 only vetoes the entry a tag or COD names: another tag or COD that does not name
 it, alone or among several ("record's identifiers disagree"), or a parcel that is
 not the entry's own ("record's parcel disagrees"), its comune folded as a card's
-is, or that the entry, printing no parcel read as comune, foglio and particella
-numbers, cannot confirm ("entry's parcel cannot confirm the record's"); one reader
+is, or a parcel this reader cannot hold to the entry because it does not read the
+entry's or the record's as comune, foglio and particella numbers (a blank
+particella, several particelle such as "27,256,659", or "188/a"): the cause names
+the reader's limit and what is printed, never the source's silence; one reader
 (`protection.parcel_agrees`) holds a parcel to an entry for row 9 and row 10. An
 entry the record names within the plant's d (one of its candidates), and nothing
 in its group vetoes, decides the identity, unless records name different entries

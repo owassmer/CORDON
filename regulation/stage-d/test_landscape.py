@@ -471,8 +471,8 @@ class LandscapeRecords(unittest.TestCase):
                                 evaluated_at=CUTOFF, permitted_controlled_sources=GRANT, rows=self.rows,
                                 register=register, zone=ROME, calendar=national_calendar())
         self.assertEqual((run['plants'][A]['records'], run['plants'][A]['reported']), (['d-1'], [dict(
-            record='d-1', cause='parcel Monopoli fg 21 p.lla 301 not checked: entry 990001 prints no parcel it can be '
-                                'held to')]))
+            record='d-1', cause="parcel Monopoli fg 21 p.lla 301 not checked: entry 990001's parcel is not read: it "
+                                "prints foglio '21', particella ' '")]))
 
     def test_a_record_naming_several_plants_attaches_each_group_on_its_own(self):
         run = self.run_caller([decision('d-3', [[sample(A)], [tag('0990202')], [sample(C)]])])

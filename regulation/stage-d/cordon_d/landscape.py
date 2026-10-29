@@ -20,7 +20,7 @@ from datetime import date, datetime
 from cordon_c.bindings import leaves
 from cordon_c.core import Evaluation, MissingInput, evaluate
 from .case_prescriptions import admitted_records
-from .protection import WITHIN, Register, named_rows, parcel_agrees, printed as _printed
+from .protection import WITHIN, Register, named_rows, parcel_agrees, parcel_unread, printed as _printed
 
 RULE = 'IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal'
 DECISION = 'IT-DLGS42-A146:Art.146(5):regional-decision-owner'
@@ -155,7 +155,9 @@ class Identities:
             agrees = None if identity in NOT_A_REGISTER_IDENTITY else self._parcel_agrees(form, identity)
             if agrees is None:
                 return 'unchecked'
-            return None if agrees else \
+            unread = parcel_unread(form, self.entries[identity])
+            return None if agrees else f"{_printed(form)} cannot be held to entry {identity}, plant {plant}'s row 9 " \
+                f"identity: {unread}" if unread else \
                 f"{_printed(form)} is not the parcel of entry {identity}, plant {plant}'s row 9 identity"
         entries = named['entries']
         if not entries:
@@ -248,10 +250,9 @@ def attach(records, identities):
             seen[plant] = number
             attached[plant].append(record)
             identity = identities.plants[plant]['identity']
-            why = 'row 9 holds no parcel for a plant whose identity is not an entry' \
-                if identity in NOT_A_REGISTER_IDENTITY else f'entry {identity} prints no parcel it can be held to'
-            notes[plant] += [dict(record=record['record'], cause=f'{_printed(form)} not checked: {why}')
-                             for form in outcome['unchecked']]
+            notes[plant] += [dict(record=record['record'], cause=f'{_printed(form)} not checked: ' + (
+                'row 9 holds no parcel for a plant whose identity is not an entry' if identity in NOT_A_REGISTER_IDENTITY
+                else parcel_unread(form, identities.entries[identity]))) for form in outcome['unchecked']]
     return attached, unattached, notes
 
 

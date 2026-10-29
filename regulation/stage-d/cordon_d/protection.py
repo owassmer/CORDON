@@ -322,10 +322,23 @@ def parcel(comune, foglio, particella):
 
 
 def parcel_agrees(form: dict, entry: Entry) -> bool | None:
-    """Whether a printed parcel ({'comune', 'foglio', 'particella'}) is the entry's own: None where the entry prints
-    none `parcel` reads, so it cannot confirm one. The one reader for row 9's naming records and row 10."""
+    """Whether a printed parcel ({'comune', 'foglio', 'particella'}) is the entry's own: None where `parcel` does not
+    read the entry's (blank, or several particelle such as '27,256,659'), so it cannot confirm one; False where it does
+    not read the record's either. The one reader for row 9's naming records and row 10 (`parcel_unread` names why)."""
     own = parcel(entry.comune, entry.foglio, entry.particella)
     return None if own is None else own == parcel(form['comune'], form['foglio'], form['particella'])
+
+
+def parcel_unread(form: dict, entry: Entry) -> str | None:
+    """Why `parcel_agrees` cannot hold a printed parcel to an entry, naming what is printed: a limit of this reader,
+    never the source's silence. None where it reads both."""
+    if parcel(entry.comune, entry.foglio, entry.particella) is None:
+        return (f"entry {entry.oid}'s parcel is not read: it prints foglio {entry.foglio!r}, particella "
+                f"{entry.particella!r}")
+    if parcel(form['comune'], form['foglio'], form['particella']) is None:
+        return (f"the record's parcel is not read: it prints foglio {form['foglio']!r}, particella "
+                f"{form['particella']!r}")
+    return None
 
 
 def printed(form: dict) -> str:
@@ -1013,7 +1026,7 @@ NO_PLANT = 'reference names no plant'
 # Why the rest of a group keeps its tag or COD from naming the entry for the plant (a veto: it never narrows).
 KEYS_DISAGREE = "record's identifiers disagree"         # another tag or COD it prints does not name the entry
 PARCEL_DISAGREES = "record's parcel disagrees"           # a parcel it prints is not the entry's own (`parcel_agrees`)
-PARCEL_UNCONFIRMED = "entry's parcel cannot confirm the record's"  # the entry prints none `parcel` reads
+# A parcel this reader does not read, the entry's or the record's, vetoes too, naming what is printed (`parcel_unread`).
 
 
 @dataclass(frozen=True)
@@ -1118,10 +1131,11 @@ def naming_records(groups, plants: dict[str, Placed], register: Register, d_of) 
                 found.append(Naming(record, number, words, mine, tuple(e.oid for e in one),
                                     SEVERAL if one else NO_ENTRY, fixture=fixture))
         for entry in entries.values():
-            agree = [parcel_agrees(f, entry) for f in parcels]
+            unread = [parcel_unread(f, entry) for f in parcels]
+            agree = [parcel_agrees(f, entry) for f, why in zip(parcels, unread) if why is None]
             conflict = ', '.join(c for c, present in (
                 (KEYS_DISAGREE, any(entry.oid not in {e.oid for e in one} for one in hits)),
-                (PARCEL_DISAGREES, False in agree), (PARCEL_UNCONFIRMED, False not in agree and None in agree))
+                (PARCEL_DISAGREES, False in agree), *((why, True) for why in dict.fromkeys(w for w in unread if w)))
                 if present) or None
             if cause:
                 found.append(Naming(record, number, words, mine, (entry.oid,), cause, fixture=fixture,

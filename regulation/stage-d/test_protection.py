@@ -420,13 +420,18 @@ class NamingRecords(unittest.TestCase):
             with self.subTest(printed=printed):
                 p1 = self.plant(self.run_rows(naming('n-1', group + printed)), P1)['candidates']
                 self.assertEqual(p1['identity'], '993516')
-        # An entry that prints no parcel cannot confirm one.
+        # An entry whose parcel this reader does not read cannot confirm one, and the cause names the limit.
         register = [dataclasses.replace(e, particella=' ') if e.oid == '993516' else e for e in REGISTER]
         out = protection.named_rows(self.rows, register, [naming('n-1', group + [dict(comune='Monopoli', foglio='17',
                                                                                       particella='175')])],
                                     evaluated_at=CUTOFF, permitted_controlled_sources=GRANT, zone=ROME)
-        self.assertIn(""""not a register tree": entry's parcel cannot confirm the record's: record n-1""",
-                      self.plant(out, P1)['candidates']['rule'])
+        self.assertIn("\"not a register tree\": entry 993516's parcel is not read: it prints foglio '17', "
+                      "particella ' ': record n-1", self.plant(out, P1)['candidates']['rule'])
+        # A record's parcel this reader does not read ('175/a') vetoes too, and says so: never "disagrees".
+        p1 = self.plant(self.run_rows(naming('n-1', group + [dict(comune='Monopoli', foglio='17', particella='175/a')])),
+                        P1)['candidates']
+        self.assertIn("the record's parcel is not read: it prints foglio '17', particella '175/a'", p1['rule'])
+        self.assertNotIn("record's parcel disagrees", p1['rule'])
         # Beyond d, it stays unknown across the entry, with both causes.
         out = self.run_rows(naming('n-1', [ref(P5), tag('13', 'Castellana Grotte'),
                                            dict(comune='Castellana Grotte', foglio='1', particella='1')]))
