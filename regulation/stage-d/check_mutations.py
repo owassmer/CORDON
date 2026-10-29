@@ -1,5 +1,5 @@
-"""Bounded discriminating mutations of the lawful-dueness class (PR #35) and of the join's rule
-table (PR #40), in memory.
+"""Bounded discriminating mutations of the lawful-dueness class (PR #35), of the join's rule
+table (PR #40) and of row 9's instrument rules (PR #47), in memory.
 
 No canonical file is edited. Each named regression must pass as built and fail on its
 associated wrong A meaning or wrong implementation; this is evidence about these
@@ -92,6 +92,43 @@ CODE = (
      "            recipient = _printed(r['recipient'])", "            recipient = (r['recipient'] or '').strip()",
      'test_annex_positions.SuppliedRecordsAtPositions.'
      'test_through_the_writer_a_narrower_grant_withholds_a_result_at_a_position_and_never_changes_it'),
+    # Row 9's instruments besides the register (PR #47): one mutation per rule.
+    ('let an area declaration name the plant', 'cordon_d.instruments',
+     "            if decl.reading in ('names a tree', 'names a row or group'):\n",
+     "            if decl.reading in ('names a tree', 'names a row or group', 'area'):\n",
+     'test_instruments.Rules.test_an_area_declaration_gives_no_status'),
+    ('read no tree a motivation names', 'cordon_d.instruments',
+     "    for reading, pattern in (('names a tree', _NAMES_TREE), ('names a row or group', _NAMES_GROUP)):\n",
+     "    for reading, pattern in (('names a row or group', _NAMES_GROUP),):\n",
+     'test_instruments.Rules.test_a_tree_the_motivation_names_gets_status'),
+    ("let a whole text naming no tree overrule one that names it", 'cordon_d.instruments',
+     "    return naming[0] if naming else readings[0]\n", "    return readings[0]\n",
+     'test_instruments.Rules.test_a_tree_any_text_names_is_not_overruled_by_a_whole_text_naming_none'),
+    ('read a cut motivation as an area', 'cordon_d.instruments',
+     "    if len(motivation or '') >= FIELD_LENGTH - 4:\n", "    if False:\n",
+     'test_instruments.Rules.test_a_motivation_cut_at_the_field_length_is_not_read_whole'),
+    ('ignore the deleting decree', 'cordon_d.instruments', "    if off is True:\n", "    if False:\n",
+     'test_instruments.Rules.test_an_entry_deleted_by_a_later_decree_reads_false_after_the_deletion'),
+    ("take a decree to have effect on its own date, choosing for A", 'cordon_d.instruments',
+     "        if decree.published <= at and decree.adopted <= at:\n", "        if decree.adopted <= at:\n",
+     'test_instruments.Rules.test_an_entry_deleted_by_a_later_decree_reads_false_after_the_deletion'),
+    ("take a declaration to have effect on its decree's date, choosing for A", 'cordon_d.instruments',
+     "        dates = (own.declaration.adopted(), own.declaration.published())\n",
+     "        dates = (own.declaration.adopted(),)\n",
+     'test_instruments.Rules.test_a_tree_the_motivation_names_gets_status'),
+    ('read an entry no held annex lists as not listed', 'cordon_d.instruments',
+     "    if entry.listed_by is None:\n        return None, ", "    if entry.listed_by is None:\n        return False, ",
+     'test_instruments.Rules.test_an_entry_no_held_annex_lists_is_unknown_not_false'),
+    ('place against the zone radius alone', 'cordon_d.instruments',
+     "            d = ZONE_M + p.error_m + record.term_m\n", "            d = ZONE_M\n",
+     'test_instruments.Rules.test_an_unseen_entry_inside_a_zone_is_admitted_with_its_instrument'),
+    ('match an entry of another genus', 'cordon_d.instruments',
+     "        near = [e for e in near if genus is None or e.genus is None or e.genus == genus]\n", "",
+     'test_instruments.Rules.test_a_plant_near_an_entry_of_another_genus_reads_false_and_of_its_genus_unknown'),
+    ("drop the list bound's floor", 'cordon_d.instruments',
+     "        return ListBound(round(max(measured or 0.0, LIST_FLOOR_M), 2)",
+     "        return ListBound(round(measured or 0.0, 2)",
+     'test_instruments.Rules.test_the_list_bound_takes_the_floor_under_twenty_fixes'),
 )
 
 

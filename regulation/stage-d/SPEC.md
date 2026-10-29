@@ -782,6 +782,54 @@ capitolato d'oneri and checks the census's own bound; with fewer than 20 census
 fixes it is not checked, and the census residuals' own 95th percentile is printed
 as information.
 
+Two other instruments give a tree monumental or historic-interest status, and
+`cordon_d.instruments` reads both whole, per version. The national list (L.
+10/2013 Art. 7) is MASAF's Puglia sheet with each approving or updating decree's
+annexes: a decree lists the schede its annex A (or DD 5450/2017's Sezione 1)
+prints, deletes those its annex B prints and corrects those its annex C prints;
+where the decree page links no annex, its own pages headed "ALLEGATO A/B/C" are
+read. An annex ID absent from the sheet is the sheet entry with the same number
+and province whose coordinates, or comune and place, the annex row prints. Each
+decree carries its own date as the G.U. titles it, the protocol date MASAF names it
+by, and its G.U. publication date; an entry is in the list at the event date when
+its listing decree's dates are both on or before it and its deleting decree's are
+not, false when both lie after it (or both of the deletion before), and otherwise
+unknown, naming the decree: A decides when a decree takes effect. An entry no held
+annex lists is unknown, never false. Its kind is the species cell's prefix
+("Insieme omogeneo di", "Filare di", ...); a member count or extent is carried
+only as printed. Its point is the scheda's WGS 84 coordinates (the census
+instructions), and its bound is the residuals of scheda points against
+independent positions of the same trees (a declared tree in the same comune and
+genus): their 95th percentile from 20 fixes, below that the larger of the
+measured maximum and 50 m. The Art. 136 declarations are every declaration any
+held version of the PPTR layer "Immobili e aree di notevole interesse pubblico"
+prints, one per code, read from the latest version that prints it, with the
+geometry its rows draw. D reads each object and motivation as naming a tree (a
+trunk or crown measurement, "l'albero", a single "esemplare", not a quantified
+"qualche esemplare"), a row or group ("filare", "alberata", "viale alberato",
+"gruppo di" trees), or an area. The motivation is read from the decree's own text
+where its G.U. issue prints the decree (not only its title) in a text layer, then
+from the PPTR's scheda (elaborato 6.4), held for each declaration whose layer
+motivation reaches the layer's 254-character field, then from the layer; a text
+that names a tree, a row or a group decides whichever prints it, and a layer
+motivation at the field's length that no whole text supplements is not read whole.
+Where the layer prints no motivation, an object naming a zone, wood, villa or park
+is an area. An area declaration gives no status. A declaration naming a tree is
+one plant record: its polygon, at the stated scale of the PPTR's tavole 6.3.1
+(1:50,000), with a scale term of 1 mm at that scale, which no source states and D
+chooses because a smaller one could leave out of a zone a declared tree it
+reaches. It is in force at the event date when its decree's date and its
+publication or notification date are both on or before it; otherwise A decides. A listed or declared tree inside a zone (50 m plus the
+infected plant's `error_m` plus its own error of an in-reach positive or order
+plant) is a plant C considers; a monitored plant of its genus within both errors
+is listed beside it as possibly the same tree and admits nothing. For every plant,
+`instrument_facts` gives one fact per instrument: true where the plant is the
+listed or declared tree in force at the event date; false where no entry or
+declared tree of its genus lies within d (its error plus the entry's), naming the
+populations held; unknown where one may be the plant, where a declaration
+containing it is not read whole, or where a decree's dates straddle the event
+date. The register's fact is row 9's identity with its own cause.
+
 ## Landscape proceeding
 
 `cordon_d.landscape` (`scripts/read_landscape.py --records`) supplies row 10

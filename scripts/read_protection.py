@@ -14,14 +14,15 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'regulation/stage-d'), str(ROOT / 'regulation/stage-c')]
-from cordon_d import protection  # noqa: E402
+from cordon_d import instruments, protection  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
 
 
 def version() -> str:
     digest = sha256()
-    for path in (Path(protection.__file__), ROOT / protection.SOURCES / 'register.json',
-                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS):
+    for path in (Path(protection.__file__), Path(instruments.__file__), ROOT / protection.SOURCES / 'register.json',
+                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS,
+                 ROOT / instruments.SOURCES / 'national-list.json', ROOT / instruments.SOURCES / 'declarations.json'):
         digest.update(path.read_bytes())
     return digest.hexdigest()[:12]
 
@@ -49,3 +50,16 @@ if __name__ == '__main__':
     print('survey batches:', *out['survey_batches'], sep='\n  ')
     print('unread deletions:', out['unread_deletions'])
     print('note codes:', dict(Counter(c['cause'] for p in out['plants'] for c in p['codes'])))
+    held = out['instruments']
+    print('national list:', len(held['national_list']['entries']), 'entries,',
+          dict(Counter(e['sheet'] for e in held['national_list']['entries'])), 'decrees:',
+          len(held['national_list']['decrees']), 'bound:', held['national_list']['bound']['error_m'],
+          held['national_list']['bound']['statistic'])
+    print('declarations:', len(held['declarations']['declarations']), 'in', len(held['declarations']['versions']),
+          'PPTR versions; readings:', dict(Counter(d['reading'] for d in held['declarations']['declarations'])))
+    print('instrument problems:', held['problems'])
+    print('in a zone:', [(r['plant'], r['instrument']) for r in held['in_zone']])
+    print('groups:', [(g['scheda'], g['nearest_positive_m']) for g in held['groups']])
+    print('distances:', json.dumps(held['distances'], ensure_ascii=False))
+    print('status:', {kind: dict(Counter(str(p['status'][kind]['value']) for p in out['plants'] if p['status']))
+                      for kind in (instruments.NATIONAL, instruments.DECLARATION)})
