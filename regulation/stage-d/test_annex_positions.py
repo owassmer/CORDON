@@ -71,6 +71,7 @@ RECORD = dict(instrument=DDS113, adopted='2023-10-16', source='dd2887bee294634c1
 
 
 DDS96 = 'REG-PUGLIA-U181-DIR-2023-00096'
+DDS119 = 'REG-PUGLIA-U181-DIR-2023-00119'
 FORK = 'REG-PUGLIA-U181-DIR-2023-00096:case-delta:pre-m4-monopoli-eradication-fork'
 # DDS 96/2023 (store dd5bebb3…cbf7), annex 1/D p. 19 rows 11-12, as `read_annex` places them: BOGGIANO ANNA holds
 # 50 m hosts only; APULEO LUCIA holds two listed infected plants.
@@ -254,11 +255,73 @@ class AnnexPositions(unittest.TestCase):
         self.assertEqual(hosts_only.effect, NOT_ESTABLISHED)
         self.assertIn(vid, hosts_only.provisions)
         self.assertFalse(any('TAR Sentenza 387/2026' in need for need in hosts_only.needs))
-        # A letter-a holder is due in part by the rows, so the court's words still decide it: unknown, naming them.
+        # A closure that still leaves the order's own reading unknown (its reason here also names DDS 127/2022, which
+        # no A row records for this order) withholds only a due: the hosts-only owner keeps its not due and its row.
+        unresolved = dict(TAR_387, stated_reason=(TAR_387['stated_reason'][0] + ' e della DDS n. 127/2022',))
+        record = dict(RECORD, instrument=DDS96, adopted='2023-08-28', governing_A_references=(FORK, WITHDRAWAL),
+                      recipients=(BOGGIANO,))
+        kept = c_result(self.s, record, at, closures=[unresolved], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
+                        governing_results=governing_results(self.s, record, at, BOGGIANO))
+        self.assertIs(kept.truth, False)
+        self.assertEqual(kept.effect, NOT_ESTABLISHED)
+        self.assertIn(vid, kept.provisions)
+        # A letter-a holder is due in part by the DDS 18/2024 row. The court's stated reason is that act, which A
+        # records, so it adds no need (owner ruling, 2026-10-28): the holder waits on notice and term only.
         holder = at_position(APULEO)
         self.assertIsNone(holder.truth)
-        self.assertTrue(any(need.startswith('the effect on this order of what TAR Sentenza 387/2026 states')
-                            for need in holder.needs))
+        self.assertIn(vid, holder.provisions)
+        self.assertFalse(any('TAR Sentenza 387/2026' in need for need in holder.needs))
+        self.assertTrue(holder.needs and all(need.startswith('predicate: IT-L241-A21') for need in holder.needs))
+
+    def test_a_court_reason_decides_nothing_a_does_not_record(self):
+        # TAR Bari Sentenza 383/2026 on DDS 119/2023, its stated reason as the retained disposition reading gives it
+        # (store 3b767fd7…15c1). The position is a letter-a holder; the record's rows include DDS 18/2024's.
+        at = date(2026, 9, 24)
+        vid = self.s.version(WITHDRAWAL, at)['provision_version_id']
+        reason = ('il ricorso principale è divenuto improcedibile in ragione del superamento della DDS n.119/2023 da '
+                  'parte della successiva DDS n.18/2024',
+                  'non si procederà all’estirpazione delle piante ospiti ricadenti nell’area di 50 m attorno alle '
+                  'piante infette”, con ciò concentrando le misure dell’eradicazione solo sulle piante infette.')
+        tar_383 = dict(TAR_387, stated_reason=reason, decision=dict(TAR_387['decision'], number='383/2026'))
+
+        def at_holder(stated_reason=reason, references=(WITHDRAWAL,)):
+            record = dict(RECORD, instrument=DDS119, adopted='2023-11-08', governing_A_references=references,
+                          recipients=(APULEO,))
+            return c_result(self.s, record, at, closures=[dict(tar_383, stated_reason=stated_reason)],
+                            evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME),
+                            governing_results=governing_results(self.s, record, at, APULEO))
+
+        def names_court(result):
+            return any(need.startswith('the effect on this order of what TAR Sentenza 383/2026 states')
+                       for need in result.needs)
+
+        held = at_holder()
+        self.assertIsNone(held.truth)
+        self.assertIn(vid, held.provisions)
+        self.assertFalse(names_court(held))
+        self.assertTrue(held.needs and all(need.startswith('predicate: IT-L241-A21') for need in held.needs))
+        # Without the A row that records DDS 18/2024, the court's words decide nothing and stay a need.
+        self.assertTrue(names_court(at_holder(references=())))
+        # Every act the reason cites must be one A records for the order: adding TAR 1007/2023's citation of
+        # DDS 127/2022, which no A row records for DDS 119/2023, keeps the need.
+        self.assertTrue(names_court(at_holder(stated_reason=(reason[0] + ' e della DDS n. 127/2022', reason[1]))))
+        # The same act cited as TAR 383/2026's own text cites it, by number and date, keeps the need too.
+        self.assertTrue(names_court(at_holder(stated_reason=(
+            reason[0] + ", e della det. reg. n. 127 del 17.11.2022 dell'Osservatorio", reason[1]))))
+
+    def test_tar_1007_2023_keeps_its_need_on_dds_119_2022(self):
+        # TAR Bari Sentenza 1007/2023 (store 700b7350…2e0d) ended the challenge to DDS 119/2022 on DDS 127/2022,
+        # which no A row records for that order: the court's words stay a need.
+        closure = dict(TAR_387, stated_reason=(
+            'Il gravame va dichiarato improcedibile sulla scorta dell’eccezione formulata dalla difesa della Regione '
+            'resistente che –come già riportato sub 1- ha opposto la sopravvenienza della DDS n. 127/2022, rimasta '
+            'inoppugnata',), decision=dict(TAR_387['decision'], number='1007/2023'), since=date(2023, 7, 15))
+        record = dict(RECORD, instrument='REG-PUGLIA-U181-DIR-2022-00119', adopted='2022-10-14',
+                      governing_A_references=(), recipients=('ai proprietari',))
+        result = c_result(self.s, record, date(2026, 9, 24), closures=[closure], evaluated_at=datetime(2026, 9, 24, 12, tzinfo=ROME))
+        self.assertIsNone(result.truth)
+        self.assertTrue(any(need.startswith('the effect on this order of what TAR Sentenza 1007/2023 states')
+                            for need in result.needs))
 
     def test_position_records_drop_the_readings_note_that_the_annex_could_not_be_read(self):
         stale = dict(page=33, aspect='coverage', detail='Allegato 1/D (pages 33-34), which lists recipients and '
