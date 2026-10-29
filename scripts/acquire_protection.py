@@ -10,10 +10,11 @@ decrees page, each decree's page with every annex it links, the current Puglia s
 in the Gazzetta Ufficiale. `declarations` captures the PPTR layer "Immobili e aree di notevole interesse
 pubblico" (D.lgs. 42/2004 Art. 136) in every PPTR version the SIT service publishes, then runs
 `declaration-decrees`: the Gazzetta Ufficiale issue that published each declaration's decree, placed through the
-G.U.'s yearly archive where the layer's number or date names none. `declaration-schede` adds the PPTR scheda of each
-declaration whose layer motivation reaches the field's length; `declaration-search` the G.U. issues since the PPTR
-version before the latest, for declarations the layer does not yet print. Run them in that order: `declarations`
-rewrites the record. `statutes` captures from Normattiva each version, in force since
+G.U.'s yearly archive where the layer's number or date names none. `declaration-supplements` adds each ordinary
+supplement whose issue's own index places an act of notable public interest in it; `declaration-schede` the PPTR
+scheda of each declaration whose layer motivation reaches the field's length; `declaration-search` the G.U. issues
+since the PPTR version before the latest, for declarations the layer does not yet print. Run them in that order:
+`declarations` rewrites the record. `statutes` captures from Normattiva each version, in force since
 2020, of L. 10/2013 Art. 7 and D.lgs. 42/2004 Arts 136, 139-141, 141-bis, 146 and 157, with its vigency.
 Records go to `corpus/sources/protected-status/`; the bytes go to the store. A failed attempt keeps its cause.
 """
@@ -315,6 +316,50 @@ def declaration_decrees(workers: int):
     _write('declarations.json', record)
 
 
+# An issue's own index on the G.U.'s site lists each act it publishes, an act printed in an ordinary supplement marked
+# "(Suppl. Ordinario n. N)": the issue's pages then print only the act's title. Where the index of an issue that
+# published a declaration places an act of notable public interest in a supplement, the supplement is captured for the
+# issue's declarations; the reader finds each declaration's act in it by its title and date.
+def declaration_supplements(workers: int):
+    import shutil
+    store = store_root(OUT)
+    record = json.loads((OUT / 'declarations.json').read_text())
+    held = {d['url'] for d in record['decrees'] if d.get('sha256')}
+    issues = [d for d in record['decrees'] if d.get('sha256') and re.search(r'/eli/gu/\d{4}/\d{2}/\d{2}/\d+/sg/pdf$', d['url'])]
+
+    def placed(issue):
+        y, m, d, n = re.search(r'/eli/gu/(\d{4})/(\d{2})/(\d{2})/(\d+)/sg/pdf$', issue['url']).groups()
+        url = f'{GU}/gazzetta/serie_generale/caricaDettaglio?dataPubblicazioneGazzetta={y}-{m}-{d}&numeroGazzetta={n}'
+        try:
+            content = _get(url).content
+        except Exception as error:
+            return [{'index': url, 'declarations': issue['declarations'], 'captured_at': _now(),
+                     'error': f"the issue's index is not read: {str(error)[:300]}"}]
+        numbers = sorted({m.group(1) for block in content.decode('utf-8', errors='replace').split('class="risultato"')[1:]
+                          if re.search(r'notevole\s+interesse\s+pubblico', _page_text(block.encode()), re.I)
+                          for m in [re.search(r'Suppl\.\s*Ordinario\s*n\.\s*(\d+)', _page_text(block.encode()))] if m})
+        out = []
+        for number in numbers:
+            target = f'{GU}/eli/gu/{y}/{m}/{d}/{n}/so/{number}/sg/pdf'
+            if target in held:
+                continue
+            if shutil.disk_usage(store).free < 3.05e9:  # the working floor of free disk (3 GB)
+                out.append({'url': target, 'declarations': issue['declarations'], 'captured_at': _now(),
+                            'error': 'not attempted: free disk below the 3 GB floor'})
+                continue
+            supplement, _ = _capture(store, target, "the ordinary supplement the issue's index places an act of notable "
+                                     'public interest in', expect=b'%PDF', timeout=(30, 1800),
+                                     declarations=issue['declarations'], index=put_bytes(store, content))
+            out.append(supplement)
+        return out
+    with ThreadPoolExecutor(workers) as pool:
+        found = [r for records in pool.map(placed, issues) for r in records]
+    for r in found:
+        print(json.dumps({k: r.get(k) for k in ('url', 'index', 'bytes', 'error')}), flush=True)
+    record['decrees'] += [r for r in found if r.get('url')]
+    _write('declarations.json', record)
+
+
 # The PPTR's elaborato 6.4: one scheda per declaration, whose text layer prints the declaration's motivation
 # ("riconoscimento") whole. Held for each declaration whose layer motivation reaches the field's length, where the
 # layer may cut it (a scheda is about 26 MB; all of them would not fit the store's disk floor).
@@ -521,6 +566,8 @@ if __name__ == '__main__':
     dd = sub.add_parser('declaration-decrees')
     dd.add_argument('--workers', type=int, default=4)
     sub.add_parser('declaration-search')
+    dp = sub.add_parser('declaration-supplements')
+    dp.add_argument('--workers', type=int, default=4)
     ds = sub.add_parser('declaration-schede')
     ds.add_argument('--workers', type=int, default=3)
     sub.add_parser('statutes')
@@ -535,6 +582,8 @@ if __name__ == '__main__':
         declaration_decrees(args.workers)
     elif args.command == 'declaration-search':
         declaration_search()
+    elif args.command == 'declaration-supplements':
+        declaration_supplements(args.workers)
     elif args.command == 'declaration-schede':
         declaration_schede(args.workers)
     elif args.command == 'statutes':

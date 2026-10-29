@@ -5,6 +5,7 @@ views, read by D and carried through PR #32's rows. `HeldSources` runs the ordin
 store (register capture, list acts, removal orders, monitoring stream) and skips where those bytes are not held.
 Expected answers come from reading the layer, the acts and the notes, not from the reader.
 """
+import copy
 import dataclasses
 from datetime import date
 from decimal import Decimal
@@ -412,9 +413,15 @@ class HeldSources(unittest.TestCase):
         self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (317, 2, 13, 318))
 
     def test_no_article_15_input_and_no_owner_names(self):
-        # The plants' and register entries' rows; the instruments carry the PPTR's declaration objects as printed.
+        # Every row, the instruments' included, except the published texts the declarations print, which name owners:
+        # their object and motivation as the PPTR layer prints them, and the text of their decree and of its scheda.
         rows = protection.rows(self.result)
-        out = json.dumps({k: v for k, v in rows.items() if k != 'instruments'}, ensure_ascii=False)
+        held = copy.deepcopy(rows['instruments'])
+        for declaration in held['declarations']['declarations']:
+            del declaration['object'], declaration['motivation']
+            for text in ('decree_act', 'decree_text', 'scheda_motivation'):
+                (declaration['decree'] or {}).pop(text, None)
+        out = json.dumps(rows | {'instruments': held}, ensure_ascii=False)
         self.assertNotIn('Art. 15', out)
         self.assertNotRegex(out, r'PROPRIETARIO|DIFONZO|LATILLA')
 

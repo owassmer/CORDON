@@ -820,14 +820,49 @@ prints, one per code, read from the latest version that prints it, with the
 geometry its rows draw. D reads each object and motivation as naming a tree (a
 trunk or crown measurement, "l'albero", a single "esemplare", not a quantified
 "qualche esemplare"), a row or group ("filare", "alberata", "viale alberato",
-"gruppo di" trees), or an area. The motivation is read from the decree's own text
-where its G.U. issue prints the decree (not only its title) in a text layer, then
-from the PPTR's scheda (elaborato 6.4), held for each declaration whose layer
-motivation reaches the layer's 254-character field, then from the layer; a text
-that names a tree, a row or a group decides whichever prints it, and a layer
-motivation at the field's length that no whole text supplements is not read whole.
-Where the layer prints no motivation, an object naming a zone, wood, villa or park
-is an area. An area declaration gives no status. A declaration naming a tree is
+"gruppo di" trees), or an area; a road's "tronco" (a stretch) and a circle's
+"circonferenza di raggio", as a delimitation prints them, name no tree. The tree's
+genus is the one its words name, none where they name several. The motivation is
+read from the decree's own text where the G.U. issue that published it, or an
+ordinary supplement of that issue that the issue's own index places an act of
+notable public interest in, prints the decree. An act begins at its heading (a
+Region's act, at the Region's name heading it), or after the job number closing the
+act before it, and runs to the next heading. The decree is the act of notable public
+interest whose title holds the distinctive words of the layer's object (the decree's
+title as the PPTR transcribes it; a word of three letters or more, not an article or
+preposition, that at most one object in ten prints) and whose heading prints the
+layer's decree date: the act holding the most of them, then printing the date, then
+printing the fewest words the object does not, where it holds two, or one and the
+date, or all there are, or whose title names the layer's first comune whole; only
+that act is read. "Provincia di X" in a title names no place declared, and a
+contents entry ("... Pag. N", "... » N") is a title only. Its preamble, from its
+start to its first "Decreta" (a Region's "Delibera:"; OCR's "Dccreta:" counts where
+its colon follows), its object and recitals, is read; the commission's minutes
+printed after it are not. The rows carry the act read (its heading and title) and
+its preamble. Then the motivation is read from the PPTR's scheda (elaborato 6.4),
+held for each declaration whose layer motivation reaches the layer's 254-character
+field, between its "riconoscimento" heading and "art. 134"; then from the layer. A text that names a tree, a row or a
+group decides whichever prints it, so no text naming none, OCR'd or not, turns a
+declaration that names one into an area; a layer motivation at the field's length
+that no whole text supplements is not read whole. Where the layer prints no
+motivation, an object naming a zone, wood, villa or park is an area.
+
+A page is read from its text layer where the layer supplies it. A page image (an
+image covering at least half the page) whose layer holds fewer than 500
+characters, or a layer fewer than 90% of whose words of four letters or more hold
+a vowel, is read by OCR: rendered by PyMuPDF at 300 dpi in grey and read by
+Tesseract with its Italian model (`-l ita --psm 3 --oem 1`), a ruled table read
+cell by cell as a text layer orders it. The OCR'd text is regenerable, kept under
+`derived/protected-status/ocr` keyed by the page's bytes and number, the Tesseract
+and Leptonica versions, the model's hash, the PyMuPDF version, the render settings
+and DPI, Tesseract's arguments and the route's own version, all of which the rows
+record. A reading resting on an OCR'd page says so: a whole OCR'd text naming none
+reads "the OCR'd text names no tree, row or group" with its route, never that the
+decree or scheda names none. Where Tesseract is not installed the page images stay
+unread, and a declaration resting on them stays as its other texts read it, naming
+that cause.
+
+An area declaration gives no status. A declaration naming a tree is
 one plant record: its polygon, at the stated scale of the PPTR's tavole 6.3.1
 (1:50,000), with a scale term of 1 mm at that scale, which no source states and D
 chooses because a smaller one could leave out of a zone a declared tree it

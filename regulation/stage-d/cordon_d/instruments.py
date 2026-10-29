@@ -422,6 +422,263 @@ def _fold(name: str | None) -> str:
     return re.sub(r'[^A-Z]', '', text)
 
 
+# --- the OCR route: a page its text layer does not supply ---------------------------------------------------------
+
+# A page is read from its text layer where that layer supplies it. It does not where the page is a page image (an
+# image covers at least PAGE_IMAGE_SHARE of it) whose layer holds fewer than MIN_TEXT_PER_PAGE characters, or where
+# the layer is garbled: fewer than MIN_VOWEL_SHARE of its words of four letters or more hold a vowel, as every Italian
+# word does. In the held decree issues and schede, page images carry 0 to 168 characters (a running header at most)
+# and the thinnest page of text 606; the lowest vowel share of a held text layer is 0.937.
+MIN_TEXT_PER_PAGE = 500
+PAGE_IMAGE_SHARE = 0.5
+MIN_VOWEL_SHARE = 0.9
+_VOWEL = re.compile(r'[aeiouyàáâèéêìíîòóôùúûAEIOUYÀÈÉÌÒÙ]')
+# Such a page is rendered with PyMuPDF and read by Tesseract with its Italian model. The text is fixed by the page's
+# bytes and by what `ocr_engine` records; it is kept, regenerable, under derived/OCR_FOLDER, keyed by all of them.
+OCR_DPI = 300                      # the held G.U. page images are scanned at about 290 dpi, the schede at 144
+OCR_RENDER = 'PyMuPDF get_pixmap, DeviceGray, no alpha, the page box, passed as PGM'
+OCR_ARGS = ('-l', 'ita', '--psm', '3', '--oem', '1', '--dpi', str(OCR_DPI))   # automatic segmentation, LSTM engine
+OCR_READER = 'ocr-1'               # this route's own version: what it renders, how it calls Tesseract, what it keeps
+OCR_FOLDER = 'protected-status/ocr'
+OCR_WORKERS = 6                    # Tesseract processes at once (one thread each), under the machine's 8 cores
+# A ruled table is read cell by cell, as a text layer orders it: a dark run of RULE_PX or more (about 0.2 in at OCR_DPI;
+# odd, for a centred window) no thicker than RULE_THICK_PX is a rule; a word whose centre four rules enclose lies in
+# that cell.
+RULE_PX = 61
+RULE_THICK_PX = 8
+RULE_DARK = 160
+
+
+def ocr_engine() -> dict | None:
+    """What fixes an OCR'd page's text besides its bytes: the Tesseract and Leptonica versions, the Italian model and
+    its hash, the PyMuPDF version, the render settings and DPI, Tesseract's arguments and this route's version. None
+    where Tesseract or its Italian model is not installed here."""
+    global _ENGINE
+    try:
+        return _ENGINE
+    except NameError:
+        pass
+    import shutil
+    import subprocess
+    import pymupdf
+    from .store import file_digest
+    _ENGINE = None
+    executable = shutil.which('tesseract')
+    if executable is None:
+        return None
+    try:
+        version = subprocess.run([executable, '--version'], capture_output=True, text=True, timeout=60)
+        listed = subprocess.run([executable, '--list-langs'], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    printed, langs = version.stdout + version.stderr, listed.stdout + listed.stderr
+    tesseract, leptonica = re.search(r'tesseract\s+v?(\S+)', printed), re.search(r'leptonica-(\S+)', printed)
+    folder = re.search(r'"([^"]+)"', langs)
+    model = folder and Path(folder.group(1)) / 'ita.traineddata'
+    if not (tesseract and leptonica and model and model.exists() and 'ita' in langs.split()):
+        return None
+    _ENGINE = {'tesseract': tesseract.group(1), 'leptonica': leptonica.group(1), 'model': 'ita.traineddata',
+               'model_sha256': file_digest(model.resolve()), 'pymupdf': pymupdf.VersionBind, 'dpi': OCR_DPI,
+               'render': OCR_RENDER, 'args': list(OCR_ARGS), 'reader': OCR_READER, 'executable': executable}
+    return _ENGINE
+
+
+def _engine_recorded() -> dict | None:
+    engine = ocr_engine()
+    return engine and {k: v for k, v in engine.items() if k != 'executable'}
+
+
+def _ocr_key(digest: str, index: int, engine: dict) -> str:
+    from hashlib import sha256
+    inputs = {k: v for k, v in engine.items() if k != 'executable'} | {'source': digest, 'page': index}
+    return sha256(json.dumps(inputs, sort_keys=True).encode()).hexdigest()
+
+
+def _ocr_path(store: Path, digest: str, index: int, engine: dict) -> Path:
+    return Path(store) / 'derived' / OCR_FOLDER / f'{_ocr_key(digest, index, engine)}.json'
+
+
+def layer_gap(page) -> str | None:
+    """Why a page's text layer does not supply its text, or None where it does."""
+    import pymupdf
+    text = page.get_text().strip()
+    words = re.findall(r'[^\W\d_]{4,}', text)
+    if len(words) >= 20 and sum(1 for w in words if _VOWEL.search(w)) < MIN_VOWEL_SHARE * len(words):
+        return 'its text layer is garbled'
+    if len(text) < MIN_TEXT_PER_PAGE:
+        area = abs(page.rect) or 1.0
+        covered = max((abs(pymupdf.Rect(i['bbox']) & page.rect) / area for i in page.get_image_info()), default=0.0)
+        if covered >= PAGE_IMAGE_SHARE:
+            return 'a page image with no text layer' if not text else f'a page image whose text layer holds {len(text)} characters'
+    return None
+
+
+def _runs(mask, axis: int):
+    """The pixels of `mask` lying in a run of at least RULE_PX along `axis`: an opening by a line of RULE_PX."""
+    import numpy
+    from scipy import ndimage
+    eroded = ndimage.minimum_filter1d(mask.view(numpy.uint8), RULE_PX, axis=axis)
+    return ndimage.maximum_filter1d(eroded, RULE_PX, axis=axis).astype(bool)
+
+
+def _rules(pixmap) -> dict:
+    """The ruled lines of a rendered page: vertical and horizontal segments as [x0, y0, x1, y1] in pixels."""
+    import numpy
+    from scipy import ndimage
+    gray = numpy.frombuffer(pixmap.samples, numpy.uint8).reshape(pixmap.height, pixmap.width)
+    dark = gray < RULE_DARK
+    out = {}
+    for name, axis in (('vertical', 0), ('horizontal', 1)):
+        labels, _ = ndimage.label(_runs(dark, axis))
+        # A rule is thin along its length (where rules meet, or a jagged rule steps, its box is wider); a filled
+        # area is not.
+        out[name] = [[s[1].start, s[0].start, s[1].stop, s[0].stop]
+                     for k, s in enumerate(ndimage.find_objects(labels), 1)
+                     if float(numpy.median((labels[s] == k).sum(axis=1 - axis))) <= RULE_THICK_PX]
+    return out
+
+
+def _ocr_page(engine: dict, image: bytes) -> str:
+    """Tesseract's TSV (each word with its box and its block, paragraph and line) for a rendered page."""
+    import os
+    import subprocess
+    done = subprocess.run([engine['executable'], 'stdin', 'stdout', *OCR_ARGS, 'tsv'], input=image, capture_output=True,
+                          env=os.environ | {'OMP_THREAD_LIMIT': '1'}, timeout=600)
+    if done.returncode != 0:
+        raise RuntimeError(f'tesseract failed: {done.stderr.decode(errors="replace")[-400:]}')
+    return done.stdout.decode('utf-8')
+
+
+def ocr_pages(store: Path, digest: str, indices) -> dict[int, dict]:
+    """The OCR'd reading of each named page of a held PDF: Tesseract's words with their boxes, and the page's rules.
+    Kept under derived/OCR_FOLDER and read from there when held; pages not held are read OCR_WORKERS at a time."""
+    from concurrent.futures import ThreadPoolExecutor
+    import pymupdf
+    from .store import _place
+    engine = ocr_engine()
+    if engine is None:
+        return {}
+    found, missing = {}, []
+    for index in indices:
+        path = _ocr_path(store, digest, index, engine)
+        if path.exists():
+            found[index] = json.loads(path.read_text())
+        else:
+            missing.append(index)
+    if not missing:
+        return found
+    document = pymupdf.open(_blob(store, digest))
+    recorded = _engine_recorded()
+
+    def keep(index, rules, future):
+        value = {'source': digest, 'page': index, 'engine': recorded, 'rules': rules, 'tsv': future.result()}
+        _place(_ocr_path(store, digest, index, engine), lambda t: t.write_text(json.dumps(value, ensure_ascii=False)))
+        found[index] = value
+
+    with ThreadPoolExecutor(OCR_WORKERS) as pool:
+        pending = []
+        for index in missing:   # PyMuPDF renders in this thread only; Tesseract runs in its own processes
+            pixmap = document[index].get_pixmap(dpi=OCR_DPI, colorspace=pymupdf.csGRAY, alpha=False)
+            pending.append((index, _rules(pixmap), pool.submit(_ocr_page, engine, pixmap.tobytes('pnm'))))
+            while len(pending) > 2 * OCR_WORKERS:
+                keep(*pending.pop(0))
+        for item in pending:
+            keep(*item)
+    return found
+
+
+def ocr_text(reading: dict) -> str:
+    """An OCR'd page's text: Tesseract's lines in its order, except that the cells of a ruled table are read cell by
+    cell (each row's cells left to right, where the row's first word falls), as a text layer orders them."""
+    rows = [r.split('\t') for r in reading['tsv'].splitlines()[1:]]
+    words = [{'line': (int(r[2]), int(r[3]), int(r[4])), 'x': int(r[6]), 'y': int(r[7]), 'w': int(r[8]),
+              'h': int(r[9]), 'text': r[11]} for r in rows if len(r) >= 12 and r[0] == '5' and r[11].strip()]
+    vertical, horizontal = reading['rules']['vertical'], reading['rules']['horizontal']
+    for w in words:
+        cx, cy = w['x'] + w['w'] / 2, w['y'] + w['h'] / 2
+        left = max((v[2] for v in vertical if v[2] <= cx and v[1] <= cy <= v[3]), default=None)
+        right = min((v[0] for v in vertical if v[0] >= cx and v[1] <= cy <= v[3]), default=None)
+        top = max((h[3] for h in horizontal if h[3] <= cy and h[0] <= cx <= h[2]), default=None)
+        bottom = min((h[1] for h in horizontal if h[1] >= cy and h[0] <= cx <= h[2]), default=None)
+        w['cell'] = None if None in (left, right, top, bottom) else (top, left, bottom, right)
+    cells = defaultdict(list)
+    for w in words:
+        if w['cell']:
+            cells[w['cell']].append(w)
+    tops = sorted({c[0] for c in cells})
+    row_of = {}
+    for top in tops:   # cells whose top rules lie within a rule's thickness share a row
+        row_of[top] = next((row_of[t] for t in tops if t < top and top - t <= RULE_THICK_PX), top)
+
+    def lines_of(group):
+        lines = defaultdict(list)
+        for w in group:
+            lines[w['line']].append(w)
+        ordered = sorted(lines.values(), key=lambda ws: min(w['y'] for w in ws))
+        return [' '.join(w['text'] for w in sorted(ws, key=lambda w: w['x'])) for ws in ordered]
+
+    out, emitted, current, line = [], set(), [], None
+    for w in words:
+        if w['line'] != line and current:
+            out.append(' '.join(current))
+            current = []
+        line = w['line']
+        if w['cell'] is None:
+            current.append(w['text'])
+            continue
+        row = row_of[w['cell'][0]]
+        if row in emitted:
+            continue
+        if current:
+            out.append(' '.join(current))
+            current = []
+        emitted.add(row)
+        for cell in sorted((c for c in cells if row_of[c[0]] == row), key=lambda c: c[1]):
+            out.extend(lines_of(cells[cell]))
+    if current:
+        out.append(' '.join(current))
+    return '\n'.join(out)
+
+
+def page_texts(store: Path, digest: str, upto=None) -> tuple[list[str | None], dict]:
+    """Each page's text: its text layer where that supplies it, else its OCR'd text, else None (OCR is not available
+    here). With `upto`, pages are read in order up to the first whose text it accepts, and no further. Returns the
+    texts and the route: the pages read by OCR and the engine."""
+    import pymupdf
+    document = pymupdf.open(_blob(store, digest))
+    engine = ocr_engine()
+    gaps = {page.number: gap for page in document if (gap := layer_gap(page))}
+    batch = ocr_pages(store, digest, sorted(gaps)) if upto is None and gaps and engine else {}
+    texts = []
+    for page in document:
+        if page.number not in gaps:
+            text = page.get_text()
+        elif engine is None:
+            text = None
+        else:
+            text = ocr_text((batch or ocr_pages(store, digest, [page.number]))[page.number])
+        texts.append(text)
+        if upto is not None and text is not None and upto(text):
+            break
+    read = [i for i in sorted(gaps) if i < len(texts)]
+    route = {'pages': len(document), 'ocr_pages': read, 'engine': _engine_recorded()}
+    if read and engine is None:
+        route['not read'] = 'Tesseract with its Italian model is not installed here'
+    return texts, route
+
+
+def ocr_route(route: dict) -> str:
+    engine = route['engine']
+    return (f"OCR: Tesseract {engine['tesseract']} (Leptonica {engine['leptonica']}), {engine['model']} "
+            f"{engine['model_sha256'][:12]}, {' '.join(engine['args'])}, rendered by PyMuPDF {engine['pymupdf']} at "
+            f"{engine['dpi']} dpi")
+
+
+def _joined(text: str) -> str:
+    """A text with its words broken across lines by a hyphen joined again (an OCR'd cell border after it ignored)."""
+    return re.sub(r'(?<=[^\W\d_])[-‐¬\xad][ \t|]*\n\s*(?=[^\W\d_])', '', text)
+
+
 # --- the Art. 136 declarations ----------------------------------------------------------------------------------
 
 # The delimitation's scale as the PPTR states it (NTA: the Art. 136 areas "come delimitate nelle tavole della sezione
@@ -434,7 +691,11 @@ FIELD_LENGTH = 254     # MOTIVAZI_1's field length in the layer description: a m
 # Words that name one tree, as D reads a motivation: a measurement of a trunk or crown, the tree itself, or a single
 # specimen. "Alto fusto", the plural "esemplari", a quantified "qualche esemplare" (a few specimens of a wood) and a
 # species named for a crop or a wood name no tree.
-_NAMES_TREE = re.compile(r"\b(circonferenza|tronco|chioma)\b|\bl'albero\b|\bdell'albero\b|\bun albero\b|"
+# A road's "tronco" (a stretch: "secondo tronco", "tronco stradale") and a circle's "circonferenza di raggio", as a
+# delimitation prints them, name none.
+_NAMES_TREE = re.compile(r"\bcirconferenza\b(?!\s+(?:di|con|avente)\s+raggio)|\bchioma\b|\btronco\s+(?:di\s+)?(?:m\.|metri|cm)|"
+                         r"\b(?:del|il|suo)\s+tronco\b(?!\s+(?:stradale|di\s+strada|ferroviario))|"
+                         r"\bl'albero\b|\bdell'albero\b|\bun albero\b|"
                          r"(?<!qualche )(?<!ogni )(?<!ciascun )(?<!alcun )(?<!nessun )\besemplare\b|"
                          r"\balbero monumentale\b|\bpianta monumentale\b", re.I)
 _NAMES_GROUP = re.compile(r"\bfilar[ei]\b|\balberata\b|\bviale alberato\b|\bgrupp\w* di (alberi|piante|querce|pini|"
@@ -480,8 +741,16 @@ class Declaration:
         return date(int(found.group(3)), int(found.group(2)), int(found.group(1))) if found else None
 
     def adopted(self) -> date | None:
-        found = _DECREE_DATE.search(self.decree_date or '')
-        return date(int(found.group(3)), int(found.group(2)), int(found.group(1))) if found else None
+        return _decree_day(self.decree_date)
+
+    def unread(self) -> str:
+        """Why a declaration not read whole is not: the layer's motivation, and each other text's route state."""
+        held = self.decree or {}
+        return '; '.join([
+            'the layer prints no motivation' if _NO_MOTIVATION.search(self.motivation or '') else
+            'the layer cuts its motivation at its field length',
+            'its decree: ' + (held.get('read') or held.get('not held') or held.get('kind') or 'none named')]
+            + (['its scheda: ' + held['scheda_read']] if held.get('scheda_read') else ['no scheda is held']))
 
 
 # The layer prints a note about publication where it holds no motivation.
@@ -501,9 +770,11 @@ def read_motivation(obj: str, motivation: str) -> tuple[str, str | None, str | N
     for reading, pattern in (('names a tree', _NAMES_TREE), ('names a row or group', _NAMES_GROUP)):
         found = pattern.search(text)
         if found:
+            # The genus its tree words name; none where they name several (a list of villas' gardens): any genus may
+            # then be the tree.
             words = re.findall(r"[A-Za-zÀ-ÿ']+", text.lower())
-            genus = next((_TREE_WORDS[w.split("'")[-1]] for w in words if w.split("'")[-1] in _TREE_WORDS), None)
-            return reading, found.group(0), genus
+            genera = {_TREE_WORDS[w.split("'")[-1]] for w in words if w.split("'")[-1] in _TREE_WORDS}
+            return reading, found.group(0), next(iter(genera)) if len(genera) == 1 else None
     if absent:
         found = _AREA_OBJECT.search(obj or '')
         return ('area', f'the object: {found.group(0)}', None) if found else ('not read whole', 'no motivation printed', None)
@@ -517,6 +788,19 @@ def combined(*readings: tuple[str, str | None, str | None]) -> tuple[str, str | 
     that names a tree, a row or a group decides, whichever prints it; otherwise the first reading stands."""
     naming = [r for r in readings if r[0] in ('names a tree', 'names a row or group')]
     return naming[0] if naming else readings[0]
+
+
+def _day(year: int, month: int, day: int) -> date | None:
+    """The date, or None where the printed (or OCR'd) numbers name none."""
+    try:
+        return date(year, month, day)
+    except ValueError:
+        return None
+
+
+def _decree_day(printed: str | None) -> date | None:
+    found = _DECREE_DATE.search(printed or '')
+    return _day(int(found.group(3)), int(found.group(2)), int(found.group(1))) if found else None
 
 
 def _esri_polygon(rings):
@@ -542,10 +826,16 @@ def declarations(store: Path, root: Path = REPOSITORY) -> tuple[list[Declaration
     from shapely import union_all
     record = json.loads((root / SOURCES / 'declarations.json').read_text())
     schede = {s['code']: s for s in (record.get('schede') or {}).get('schede', []) if s.get('code')}
-    issues = defaultdict(dict)
+    issues = {}
     for d in record.get('decrees') or ():
         for code in d.get('declarations') or ():
-            issues[code] = d
+            issues.setdefault(code, d)   # the issue that published it; a supplement of it is read beside it
+    # An issue's ordinary supplements print acts its own pages only list: each held one is read with the issue.
+    supplements = defaultdict(list)
+    for d in record.get('decrees') or ():
+        found = d.get('sha256') and re.search(r'(/eli/gu/\d{4}/\d{2}/\d{2}/\d+/)so/', d.get('url') or '')
+        if found:
+            supplements[found.group(1)].append(d)
     versions, rows_by_code, problems = [], defaultdict(list), []
     for version in record['versions']:
         codes = set()
@@ -561,6 +851,18 @@ def declarations(store: Path, root: Path = REPOSITORY) -> tuple[list[Declaration
         versions.append({'version': version['version'], 'layer': version['layer'], 'rows': version['rows'],
                          'declarations': len(codes)})
     order = [v['version'] for v in versions]   # the service lists the latest version first
+    # A word of the layer's objects (each decree's title as the PPTR transcribes it) or comuni distinguishes a decree
+    # where it has three letters or more and at most one object in ten prints it.
+    objects = [next(r[1] for r in rows if r[0] == next(v for v in order if any(x[0] == v for x in rows)))
+               for rows in rows_by_code.values()]
+    frequency = defaultdict(int)
+    for a in objects:
+        for w in set(_words(a.get('OGGETTO__1')).split()):
+            frequency[w] += 1
+
+    def distinctive(a: dict) -> set[str]:
+        return {w for w in _words(f"{a.get('OGGETTO__1')} {a.get('COMUNE')}").split()
+                if len(w) >= 3 and w not in _PARTICLES and frequency[w] <= len(objects) / 10}
     out = []
     for code, rows in sorted(rows_by_code.items()):
         printed = tuple(v for v in order if any(r[0] == v for r in rows))
@@ -569,10 +871,15 @@ def declarations(store: Path, root: Path = REPOSITORY) -> tuple[list[Declaration
         geometry = union_all([_esri_polygon(g['rings']) for _, _, g, _ in latest if g and g.get('rings')])
         reading, cite, genus = read_motivation(a.get('OGGETTO__1'), a.get('MOTIVAZI_1'))
         decree = issues.get(code)
-        read = _decree_reading(store, decree, a.get('OGGETTO__1'), a.get('COMUNE'))
+        issue = decree and re.search(r'/eli/gu/\d{4}/\d{2}/\d{2}/\d+/', decree.get('url') or '')
+        read = decree and _decree_reading(store, [decree] + [s for s in supplements[issue.group(0) if issue else '']
+                                                             if s is not decree], a.get('OGGETTO__1'),
+                                          a.get('COMUNE'), _decree_day(a.get('NUMERO_DEC')), distinctive(a))
         transcribed = _scheda_reading(store, schede.get(code), a.get('OGGETTO__1'))
-        reading, cite, genus = combined(*[(r['reading'], r['cite'], r['genus']) for r in (read, transcribed)
-                                          if r and r.get('reading')], (reading, cite, genus))
+        texts = [(read['reading'], read['cite'], read['genus'])] if read and read.get('reading') else []
+        if transcribed and transcribed.get('scheda_reading'):
+            texts.append((transcribed['scheda_reading'], transcribed['scheda_cite'], transcribed['scheda_genus']))
+        reading, cite, genus = combined(*texts, (reading, cite, genus))
         out.append(Declaration(code, a.get('COD_SITAP'), (a.get('COMUNE') or '').strip(), (a.get('OGGETTO__1') or '').strip(),
                                (a.get('MOTIVAZI_1') or '').strip(), (a.get('NUMERO_DEC') or '').strip(),
                                (a.get('PUBBLICATO') or '').strip(), (a.get('ID_VINCOLI') or '').strip(),
@@ -587,32 +894,130 @@ def declarations(store: Path, root: Path = REPOSITORY) -> tuple[list[Declaration
     return out, versions, problems
 
 
-_ACT_HEADING = re.compile(r'(?=\bDECRETO(?:\s+MINISTERIALE|\s+DEL\s+\w+)?\s+\d{1,2}\s+[a-z]+\s+\d{4}\b)')
-MIN_TEXT_PER_PAGE = 500   # below this a page carries only the issue's running header: a page image
+# An act begins at its heading ("DECRETO MINISTERIALE 4 marzo 1975", "DECRETO DEL PRESIDENTE DELLA REPUBBLICA 27 aprile
+# 1960", "LEGGE ...") and ends at the job number the issue prints after it ("(8196)", "(99A7656)").
+_ACT_HEADING = re.compile(r"\b(?:DECRETO|LEGGE|ORDINANZA|DELIBERAZIONE|DETERMINAZIONE|PROVVEDIMENTO|CIRCOLARE)"
+                          r"(?:[\s-]+[A-Z][A-Z'’]*){0,5}\s+\d{1,2}\s*[°º]?[\s.-]+[a-z]+\s+\d{4}\b")
+_ACT_END = re.compile(r'^[^\w(]*\((?:\d{2}A)?\d{3,5}\)\W*$', re.M)
+# A Region's act in the G.U. is headed by the Region's name on its own line ("REGIONE PUGLIA").
+_REGION_HEADING = re.compile(r"^[ \t]*REGIONE[ \t]+[A-Z][A-Z'’ \t-]+$", re.M)
+# A decree's preamble (its title and recitals: what it declares and why) ends at its "Decreta" (a Region's deliberation
+# declaring under L. 1497/1939, at its "Delibera:").
+# OCR may misread its "e" as "c" or its "t" as "l" ("Dccreta:"): such a form counts where its colon follows.
+_DECRETA = re.compile(r'\bD\s?e\s?c\s?r\s?e\s?t\s?a\b\s*:?|\bD[ec]{2}r[ec][tl]a\s*:|\bD\s?e\s?l\s?i\s?b\s?e\s?r\s?a\s*:',
+                      re.I)
+# A contents entry: an act's title followed by its page ("... comune di Monopoli . . . Pag. 18", or the ditto "» 42").
+_CONTENTS = re.compile(r'(?:\bPag\.?|»)\s*\d+')
+# An act's title ends where its issuing authority ("IL MINISTRO ...", "LA GIUNTA ...") or its first recital begins.
+_TITLE_END = re.compile(r'\n\s*(?:(?:IL|LA)\s+[A-Z]{4,}|Vist[oaie]\b|Considerat|Udit[oa]\b)')
+# Articles and prepositions name no place: never distinctive.
+_PARTICLES = frozenset('DEL DELLA DELLE DELLO DEGLI DEI DELL NEL NELLA NELLE NELLO NEGLI NEI NELL AL ALLA ALLE ALLO '
+                       'AGLI AI ALL DAL DALLA DALLE DAGLI DAI DALL SUL SULLA SULLE SUI SULL CON PER TRA FRA UNA UNO'.split())
 
 
-def _decree_reading(store: Path, issue: dict | None, obj: str, comune: str) -> dict | None:
-    """The declaration's decree read from its G.U. issue's text layer, where the issue has one: the act blocks that
-    name the declaration's first comune and a declaration of notable public interest, read as a motivation is."""
-    if not issue or not issue.get('sha256'):
+def _words(text: str) -> str:
+    """A text as its letters' words, unaccented and upper-case, each between single spaces."""
+    import unicodedata
+    folded = unicodedata.normalize('NFKD', text or '').encode('ascii', 'ignore').decode().upper()
+    return ' ' + ' '.join(re.findall(r'[A-Z]+', folded)) + ' '
+
+
+def _area_cite(ocr: dict | None, text: str) -> str:
+    """Why a whole text naming no tree reads as an area: a reading resting on OCR keeps its route."""
+    return f"the OCR'd text names no tree, row or group ({ocr_route(ocr)})" if ocr else f'{text} names no tree, row or group'
+
+
+def _heading_date(heading: str) -> date | None:
+    found = re.search(r'(\d{1,2})\s*[°º]?[\s.-]+([a-z]+)\s+(\d{4})', heading)
+    month = found and _MONTHS.get(found.group(2))
+    return _day(int(found.group(3)), month, int(found.group(1))) if month else None
+
+
+def _decree_reading(store: Path, issues: list[dict], obj: str, comune: str, decree_date: date | None,
+                    distinctive: set[str]) -> dict | None:
+    """The declaration's decree read from the G.U. issue that published it, or a supplement of that issue held: each
+    page from its text layer, or by OCR where the layer does not supply it (`page_texts`). The decree is the act of
+    notable public interest whose title holds the distinctive words of the layer's object (the decree's title as the
+    PPTR transcribes it) and whose heading prints the layer's decree date: the act holding the most of them, where it
+    holds two, or one and the date, or all there are, or whose title names the layer's first comune whole. Its
+    preamble, up to its first "decreta" (a Region's "delibera:"), its object and motivation, is read as a motivation
+    is; a reading resting on an OCR'd page says so."""
+    held = [i for i in issues if i.get('sha256')]
+    if not held:
         return None
-    import pymupdf
-    document = pymupdf.open(_blob(store, issue['sha256']))
-    pages = [p.get_text() for p in document]
-    state = {'pages': len(pages), 'text_layer_chars': sum(len(t.strip()) for t in pages)}
-    if state['text_layer_chars'] < MIN_TEXT_PER_PAGE * len(pages) / 4:
-        return state | {'read': 'page images: no text layer to read'}
-    first = _fold(re.split(r'[-–(,]|â€“', comune or '')[0])
-    named = [b for b in _ACT_HEADING.split('\n'.join(pages)) if first and first in _fold(b)
-             and 'NOTEVOLEINTERESSEPUBBLICO' in _fold(b)]
-    blocks = [b for b in named if 'DECRETA' in _fold(b)]   # the decree itself, not its title in the contents
-    if not blocks:
-        return state | {'read': f'the text layer holds no decree of notable public interest naming {comune!r}' + (
-            ', only its title: the decree is printed elsewhere' if named else '')}
-    reading, cite, genus = read_motivation(obj, ' '.join(blocks)[:200000] + '.')
-    if reading == 'not read whole':   # the decree's own text is whole: naming no tree, it protects an area
-        reading, cite = 'area', "the decree's text names no tree, row or group"
-    return state | {'read': 'read from the text layer', 'reading': reading, 'cite': cite, 'genus': genus}
+    causes = []
+    for issue in held:
+        read = _read_issue(store, issue, obj, comune, decree_date, distinctive)
+        if read.get('reading'):
+            return read | ({'read_in': issue['url']} if issue is not held[0] else {})
+        causes.append(read['read'] if len(held) == 1 else f"{issue['url']}: {read['read']}")
+    return {'read': '; '.join(causes)}
+
+
+TITLE_CHARS = 400   # an act's title follows its heading; the decree's own text begins within this
+
+
+def _read_issue(store: Path, issue: dict, obj: str, comune: str, decree_date: date | None,
+                distinctive: set[str]) -> dict:
+    import bisect
+    texts, route = page_texts(store, issue['sha256'])
+    state = {'pages': route['pages'], 'ocr_pages': [i + 1 for i in route['ocr_pages']]}
+    if route.get('not read') and all(t is None for t in texts):
+        return state | {'read': f"page images: no text layer to read, and they are not read by OCR: {route['not read']}"}
+    starts, text = [], ''
+    for page in texts:
+        starts.append(len(text))
+        text += _joined(page or '') + '\n'
+    heads = sorted({m.start() for m in _ACT_HEADING.finditer(text)} | {m.start() for m in _REGION_HEADING.finditer(text)})
+    # An act begins at its heading, or after the job number closing the act before it (its heading may be misread);
+    # it runs to the next heading, so a job number OCR reads out of order does not cut it.
+    name = _words(re.split(r'[-–(,]|â€“', comune or '')[0])
+    printed_object = set(_words(f'{obj} {comune}').split())
+    named, scored = False, {}
+    for a in sorted(set(heads) | {m.end() for m in _ACT_END.finditer(text)}):
+        b = heads[bisect.bisect_right(heads, a)] if bisect.bisect_right(heads, a) < len(heads) else len(text)
+        heading = _ACT_HEADING.match(text, a) or _REGION_HEADING.match(text, a)
+        start = heading.end() if heading else a
+        printed = text[start:min(b, start + TITLE_CHARS)]
+        printed = printed[:m.start()] if (m := _TITLE_END.search(printed)) else printed
+        # A title's "(in) provincia di X" names the province, not the place declared.
+        title = _words(re.sub(r'\bprovincia\s+di\s+\S+', ' ', printed, flags=re.I))
+        held = distinctive & set(title.split())
+        dated = bool(heading and decree_date and _heading_date(heading.group(0)) == decree_date)
+        if ' NOTEVOLE INTERESSE PUBBLICO ' not in _words(text[a:b]) or not (
+                len(held) >= 2 or held and (dated or held == distinctive) or name.strip() and name in title):
+            continue
+        # Between titles holding as much, the one printing fewest words the object does not is the declaration's.
+        extra = len({w for w in title.split() if len(w) >= 3 and w not in _PARTICLES} - printed_object)
+        named = True
+        if _CONTENTS.search(printed):
+            continue   # the issue's contents: its title only
+        end = next((m.start() for m in _DECRETA.finditer(text, a, b)), None)   # the act's first dispositive
+        scored.setdefault(end, []).append(((len(held), dated, -extra), a))
+    # The act whose title holds the most distinctive words (then prints the date, then the fewest words the object
+    # does not) is read, and only it: where its dispositive is not read, no other act is taken for it.
+    best = max((score for acts in scored.values() for score, _ in acts), default=None)
+    preambles = sorted((max(a for score, a in acts if score == best), end) for end, acts in scored.items()
+                       if end is not None and any(score == best for score, _ in acts))
+    if best is not None and not preambles:
+        return state | {'read': 'the act titled as the layer\'s object prints no "decreta" in the text read'}
+    unread = f"; {len(route['ocr_pages'])} page images are not read: {route['not read']}" if route.get('not read') else ''
+    if not preambles:
+        where = 'the text layer holds' if not route['ocr_pages'] or unread else "its OCR'd pages hold" if len(
+            route['ocr_pages']) == route['pages'] else "its text layer and OCR'd pages hold"
+        return state | {'read': f'{where} no decree of notable public interest titled as the layer\'s object {obj!r}' + (
+            ', only its title (its contents): the decree is printed elsewhere' if named else '') + unread}
+    page = lambda i: bisect.bisect_right(starts, i) - 1   # noqa: E731
+    pages = {p for x, y in preambles for p in range(page(x), page(y - 1) + 1)}
+    ocr = route if pages & set(route['ocr_pages']) else None
+    reading, cite, genus = read_motivation(obj, ' '.join(text[x:y] for x, y in preambles)[:200000] + '.')
+    if reading in ('not read whole', 'area'):   # the decree's own text is whole: naming no tree, it protects an area
+        reading, cite = 'area', _area_cite(ocr, "the decree's text")
+    return state | {'read': (f'read by OCR, page {", ".join(str(p + 1) for p in sorted(pages))} ({ocr_route(ocr)})'
+                             if ocr else 'read from the text layer') + unread,
+                    'reading': reading, 'cite': cite, 'genus': genus,
+                    'decree_act': [re.sub(r'\s+', ' ', text[x:x + 200]).strip() for x, _ in preambles],
+                    'decree_text': [re.sub(r'\s+', ' ', text[x:y]).strip() for x, y in preambles]}
 
 
 # The scheda's identification page prints the motivation after its heading and before the art. 134 classification.
@@ -620,21 +1025,25 @@ _RECOGNITION = re.compile(r"riconoscimento.{0,3}\s*\(del valore dell.area\)\s*(.
 
 
 def _scheda_reading(store: Path, scheda: dict | None, obj: str) -> dict | None:
-    """The declaration's motivation as its PPTR scheda (elaborato 6.4) prints it in a text layer, read whole."""
+    """The declaration's motivation as its PPTR scheda (elaborato 6.4) prints it, read whole: from its text layer,
+    or by OCR where its identification page is a page image."""
     if not scheda or not scheda.get('sha256'):
         return None
-    import pymupdf
-    document = pymupdf.open(_blob(store, scheda['sha256']))
-    found = next((m for m in (_RECOGNITION.search(page.get_text()) for page in document) if m), None)
-    state = {'scheda': scheda['sha256'], 'scheda_pages': document.page_count}
+    texts, route = page_texts(store, scheda['sha256'], upto=lambda t: bool(_RECOGNITION.search(t)))
+    found = _RECOGNITION.search(texts[-1] or '') if texts else None
+    state = {'scheda': scheda['sha256'], 'scheda_pages': route['pages']}
     if not found:
-        return state | {'scheda_read': 'the scheda prints no motivation in its text layer'}
-    motivation = re.sub(r'\s+', ' ', found.group(1)).strip()
+        unread = f"; {len(route['ocr_pages'])} page images are not read: {route['not read']}" if route.get('not read') else ''
+        return state | {'scheda_read': 'the scheda prints no motivation in its text layer' + (
+            " or its OCR'd pages" if route['ocr_pages'] and not unread else '') + unread}
+    ocr = route if len(texts) - 1 in route['ocr_pages'] else None
+    motivation = re.sub(r'\s+', ' ', _joined(found.group(1))).strip()
     reading, cite, genus = read_motivation(obj, motivation + '.')
-    if reading == 'not read whole':   # the scheda prints it whole: naming no tree, it protects an area
-        reading, cite = 'area', "the scheda's motivation names no tree, row or group"
-    return state | {'scheda_read': 'read from the text layer', 'scheda_motivation': motivation, 'reading': reading,
-                    'cite': cite, 'genus': genus}
+    if reading in ('not read whole', 'area'):   # the scheda prints it whole: naming no tree, it protects an area
+        reading, cite = 'area', _area_cite(ocr, "the scheda's motivation")
+    return state | {'scheda_read': f'read by OCR, page {len(texts)} ({ocr_route(ocr)})' if ocr else 'read from the text layer',
+                    'scheda_motivation': motivation, 'scheda_reading': reading, 'scheda_cite': cite,
+                    'scheda_genus': genus}
 
 
 def _decree_state(issue: dict | None, publication: str | None) -> dict:
@@ -820,7 +1229,7 @@ def instrument_facts(held: Instruments, x: float, y: float, error_m: float, genu
         elif unread:
             facts[DECLARATION] = {'value': None, 'declarations': [decl.code for decl in unread],
                                   'cause': 'the motivation of a declaration containing the plant is not read whole: '
-                                           'the layer cuts it at its field length and its decree is not read'}
+                                           + ' | '.join(f'{decl.code}: {decl.unread()}' for decl in unread)}
         else:
             facts[DECLARATION] = {'value': False, 'declarations': [], 'cause': (
                 'no held declaration names a tree within d' + (
@@ -921,7 +1330,13 @@ def rows(result: dict) -> dict:
         'declarations': {'versions': result['versions'], 'declarations': declarations,
                          'scale': {'stated': f'1:{STATED_SCALE:,}', 'term_m': SCALE_TERM_M,
                                    'rule': '1 mm at the stated scale: no source states a ground tolerance; a smaller '
-                                           'term could leave out of a zone a declared tree it reaches'}},
+                                           'term could leave out of a zone a declared tree it reaches'},
+                         'ocr': {'engine': _engine_recorded(),
+                                 'page_rule': f'a page is read by OCR where its text layer does not supply it: an image '
+                                              f'covers at least {PAGE_IMAGE_SHARE:.0%} of the page and its layer holds '
+                                              f'fewer than {MIN_TEXT_PER_PAGE} characters, or fewer than '
+                                              f'{MIN_VOWEL_SHARE:.0%} of its words of four letters or more hold a vowel',
+                                 'kept': f'derived/{OCR_FOLDER} (regenerable)'}},
         'problems': result['problems'], 'in_zone': in_zone, 'groups': groups,
         'distances': {'positives': result['positives'],
                       'nearest_listed_entry': listed[0] if listed else None,

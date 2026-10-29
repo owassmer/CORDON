@@ -143,6 +143,12 @@ CODE = (
      "        return ListBound(round(max(measured or 0.0, LIST_FLOOR_M), 2)",
      "        return ListBound(round(measured or 0.0, 2)",
      'test_instruments.Rules.test_the_list_bound_takes_the_floor_under_twenty_fixes'),
+    # The OCR route needs Tesseract with its Italian model, which CI does not install: there its test skips and this
+    # mutation is reported as not run; it is caught only where Tesseract is installed.
+    ('skip the OCR route', 'cordon_d.instruments', "    engine = ocr_engine()\n    gaps = ",
+     "    engine = None\n    gaps = ",
+     'test_instruments.OcrRoute.test_a_page_image_decree_naming_a_tree_gives_status_and_one_naming_none_reads_area',
+     'Tesseract with its Italian model'),
 )
 
 
@@ -179,12 +185,18 @@ def main():
         if result.testsRun != 1 or result.errors or not result.failures:
             raise AssertionError(f'Regression did not discriminate mutation: {label}: {case}')
         print(f'Discriminated: {label}: {case}')
-    for label, name, before, after, case in CODE:
+    for label, name, before, after, case, *needs in CODE:
         module = importlib.import_module(name)
         path = Path(module.__file__)
         source = path.read_text()
-        if not run(case).wasSuccessful():
+        baseline = run(case)
+        if not baseline.wasSuccessful():
             raise AssertionError(f'Baseline already fails: {case}')
+        if baseline.skipped:
+            if not needs:
+                raise AssertionError(f'Baseline skips: {case}: {baseline.skipped[0][1]}')
+            print(f'Not run here ({baseline.skipped[0][1]}): {label}: {case}')
+            continue
         if source.count(before) != 1:
             raise AssertionError(f'Mutation location changed: {name}: {before}')
         namespace = dict(module.__dict__)

@@ -106,6 +106,22 @@ class Rules(unittest.TestCase):
         self.assertEqual(I.read_motivation('ZONA', 'Nella zona insiste un esemplare di cedro del Libano')[0],
                          'names a tree')
 
+    def test_a_delimitation_s_road_stretch_or_circle_names_no_tree(self):
+        # PAE0113's decree (D.M. 1-8-1985) delimits its woods along "la strada vicinale Piano d'Annaia (secondo
+        # tronco)": a road's stretch. A trunk's measurement still names the tree.
+        road = 'fino all\'incrocio con la strada vicinale Piano d\'Annaia (secondo tronco) punto F. LATO SUD: tratto F-G'
+        self.assertEqual(I.read_motivation('ZONE BOSCHIVE', road + '.' * 300)[0], 'not read whole')
+        self.assertEqual(I.read_motivation('ZONA', 'La zona compresa in una circonferenza di raggio m. 500.')[0], 'area')
+        self.assertEqual(I.read_motivation('ZONA', 'Un leccio secolare con il tronco di m. 4,10 di giro.')[0], 'names a tree')
+
+    def test_a_text_naming_trees_of_several_genera_gives_none(self):
+        # PAE0093's decree (D.M. 9-7-1990) names in its villas' gardens "pini, cedri, eucalipti, querce, corbezzoli ed
+        # un grande esemplare di fitolacca": the tree it names may be of any genus.
+        gardens = ('con numerose essenze arboree quali pini, cedri, eucalipti, querce, corbezzoli ed un grande esemplare '
+                   'di fitolacca')
+        self.assertEqual(I.read_motivation('AREE E VILLE', gardens)[::2], ('names a tree', None))
+        self.assertEqual(I.read_motivation(*VALONIA)[2], 'Quercus')
+
     def test_a_motivation_cut_at_the_field_length_is_not_read_whole(self):
         cut = 'La zona ha notevole interesse pubblico perche ' + 'x' * 220
         self.assertEqual(I.read_motivation('ZONA COSTIERA', cut)[0], 'not read whole')
@@ -152,6 +168,101 @@ class Rules(unittest.TestCase):
         self.assertEqual(I._genus('Insieme omogeneo di Quercus suber L.'), 'Quercus')
         self.assertEqual(next(k for k, p in I._KINDS if p.search('Insieme omogeneo di Quercus suber L.')),
                          'insieme omogeneo')
+
+
+def page_image_pdf(text: str) -> bytes:
+    """A one-page PDF holding only an image of `text`: it has no text layer."""
+    import pymupdf
+    source = pymupdf.open()
+    page = source.new_page(width=595, height=842)
+    page.insert_textbox(pymupdf.Rect(60, 60, 535, 800), text, fontsize=11, fontname='helv')
+    pixmap = page.get_pixmap(dpi=200, colorspace=pymupdf.csGRAY)
+    out = pymupdf.open()
+    image = out.new_page(width=595, height=842)
+    image.insert_image(image.rect, stream=pixmap.tobytes('png'))
+    return out.tobytes()
+
+
+# An unseen decree in the form of the L. 1497/1939 decrees the G.U. prints, and its declaration as the PPTR layer prints
+# one: the layer's motivation stops at its field length, so the layer alone does not read it whole.
+DECREE = """DECRETO MINISTERIALE 12 marzo 1971.
+Dichiarazione di notevole interesse pubblico di una zona sita nel comune di Fixturia.
+IL MINISTRO PER LA PUBBLICA ISTRUZIONE
+Vista la legge 29 giugno 1939, n. 1497, sulla protezione delle bellezze naturali;
+Riconosciuto che {};
+Decreta:
+La zona sita nel territorio del comune di Fixturia ha notevole interesse pubblico ai sensi della legge 29 giugno
+1939, n. 1497, ed e' quindi sottoposta a tutte le disposizioni contenute nella legge stessa.
+Roma, addi' 12 marzo 1971
+(4321)"""
+NAMING = 'nella zona predetta insiste una quercia vallonea secolare, con circonferenza del tronco di metri 4,10'
+NAMING_NONE = 'la zona predetta forma un quadro naturale di non comune bellezza panoramica, ricco di uliveti e macchia'
+CUT = ('La zona ha notevole interesse pubblico perche forma un quadro naturale di non comune bellezza panoramica, con '
+       'punti di vista accessibili al pubblico dai quali si gode lo spettacolo della costa e delle colline che la '
+       'circondano, con le sue masserie e i suoi muretti a secco, e la vista ')
+
+
+def fixture_declaration(store: Path, root: Path, decree: bytes, motivation: str = CUT):
+    """The declaration PAE9001 read through `declarations` from a fixture layer page and its decree issue."""
+    from cordon_d.store import put_bytes
+    attributes = {'CODICE': 'PAE9001', 'COD_SITAP': None, 'COMUNE': 'FIXTURIA',
+                  'OGGETTO__1': 'DICHIARAZIONE DI NOTEVOLE INTERESSE PUBBLICO DI UNA ZONA IN COMUNE DI FIXTURIA',
+                  'MOTIVAZI_1': motivation, 'NUMERO_DEC': '12-03-1971', 'PUBBLICATO': 'G.U. n. 99 del 20-04-1971',
+                  'ID_VINCOLI': 'Istituito ai sensi della L. 1497', 'ART_136_C': 'art.136, co. 1, lettera c)'}
+    ring = [[0.0, 0.0], [0.0, 100.0], [100.0, 100.0], [100.0, 0.0], [0.0, 0.0]]
+    layer = put_bytes(store, json.dumps({'features': [{'attributes': attributes, 'geometry': {'rings': [ring]}}]}).encode())
+    record = {'versions': [{'version': 'fixture', 'layer': 0, 'rows': 1, 'pages': [{'sha256': layer}]}],
+              'decrees': [{'url': 'fixture', 'declarations': ['PAE9001'], 'sha256': put_bytes(store, decree)}],
+              'schede': {'schede': []}}
+    (root / I.SOURCES).mkdir(parents=True, exist_ok=True)
+    (root / I.SOURCES / 'declarations.json').write_text(json.dumps(record))
+    declared, versions, _ = I.declarations(store, root)
+    return declared[0], held(declared=declared)
+
+
+@unittest.skipUnless(I.ocr_engine(), 'Tesseract with its Italian model is not installed here (CI does not install it)')
+class OcrRoute(unittest.TestCase):
+    """A page image is read by OCR; the expected answers are the fixture's own printed words."""
+
+    def setUp(self):
+        import tempfile
+        self.directory = tempfile.TemporaryDirectory()
+        self.store, self.root = Path(self.directory.name) / 'store', Path(self.directory.name) / 'root'
+
+    def tearDown(self):
+        self.directory.cleanup()
+
+    def test_a_page_image_decree_naming_a_tree_gives_status_and_one_naming_none_reads_area(self):
+        import pymupdf
+        naming = page_image_pdf(DECREE.format(NAMING))
+        self.assertEqual(pymupdf.open(stream=naming)[0].get_text(), '')   # no text layer
+        declaration, state = fixture_declaration(self.store, self.root, naming)
+        self.assertEqual((declaration.reading, declaration.genus), ('names a tree', 'Quercus'))
+        self.assertTrue(declaration.decree['read'].startswith('read by OCR, page 1 (OCR: Tesseract'))
+        record = I.declared_plants([declaration])[0]
+        facts = state.facts(record.x, record.y, record.error_m, record.genus, date(2026, 10, 28), own=record)
+        self.assertIs(facts[I.DECLARATION]['value'], True)
+        # Naming none, the whole decree read by OCR gives an area, citing the OCR'd text and its route, never the decree.
+        declaration, state = fixture_declaration(self.store, self.root, page_image_pdf(DECREE.format(NAMING_NONE)))
+        self.assertEqual(declaration.reading, 'area')
+        self.assertTrue(declaration.cite.startswith("the OCR'd text names no tree, row or group (OCR: Tesseract "))
+        self.assertNotIn("decree's text", declaration.cite)
+        facts = state.facts(50.0, 50.0, 7.4, 'Olea', date(2026, 10, 28))
+        self.assertEqual((facts[I.DECLARATION]['value'], 'PAE9001' in facts[I.DECLARATION]['cause']), (False, True))
+
+    def test_an_ocr_reading_naming_none_never_overrules_a_text_naming_a_tree(self):
+        layer = 'Nella zona insiste un esemplare di quercia vallonea, con circonferenza del tronco di m. 2,50.'
+        declaration, _ = fixture_declaration(self.store, self.root, page_image_pdf(DECREE.format(NAMING_NONE)), layer)
+        self.assertEqual((declaration.reading, declaration.decree['reading']), ('names a tree', 'area'))
+
+    def test_a_scheda_page_image_is_read_by_ocr_between_its_heading_and_art_134(self):
+        from cordon_d.store import put_bytes
+        scheda = page_image_pdf('A) ELEMENTI IDENTIFICATIVI\n"riconoscimento"\n(del valore dell\'area)\n'
+                                f'{NAMING.capitalize()} (tratto dal D.M. 12-03-1971)\nart. 134, c.1 lett. c)\nNO')
+        read = I._scheda_reading(self.store, {'sha256': put_bytes(self.store, scheda)}, 'ZONA IN COMUNE DI FIXTURIA')
+        self.assertTrue(read['scheda_read'].startswith('read by OCR, page 1'))
+        self.assertEqual((read['scheda_reading'], read['scheda_genus']), ('names a tree', 'Quercus'))
+        self.assertIn('circonferenza del tronco di metri 4,10', read['scheda_motivation'])
 
 
 def instruments_held():
@@ -215,22 +326,73 @@ class HeldInstruments(unittest.TestCase):
             self.assertEqual(self.codes[code].reading, 'area', code)
         self.assertEqual(round(self.codes['PAE0156'].area_m2), 744)
 
-    def test_a_cut_motivation_is_read_whole_from_the_scheda_or_stays_unread(self):
+    def test_a_cut_motivation_is_read_whole_from_the_scheda_or_its_decree(self):
         # PAE0081's layer motivation stops at the field; its scheda prints the D.M. of 26-03-1970 whole, ending
         # "un insieme di cose immobili avente valore estetico e tradizionale."
         ugento = self.codes['PAE0081']
         self.assertEqual((ugento.reading, ugento.decree['scheda_read']), ('area', 'read from the text layer'))
         self.assertTrue(ugento.decree['scheda_motivation'].endswith('valore estetico e tradizionale.'))
-        # The four schede whose identification page is an image, and whose decrees are page images.
-        self.assertEqual(sorted(d.code for d in self.declared if d.reading == 'not read whole'),
-                         ['PAE0016', 'PAE0017', 'PAE0033', 'PAE0049'])
+        unread = sorted(d.code for d in self.declared if d.reading == 'not read whole')
+        if I.ocr_engine() is None:   # their schede's identification pages and their decrees are page images
+            self.assertEqual(unread, ['PAE0016', 'PAE0017', 'PAE0033', 'PAE0049'])
+            return
+        # Read by OCR from each scheda's identification page (its third page); the words below, read by eye from the
+        # rendered page, are in each motivation, and none names a tree, a row or a group.
+        for code, words in (('PAE0016', 'variamente coltivato ad olivi, mandorli e frutteti e con'),
+                            ('PAE0017', 'come quelle di Lamaforca, Santa Lucia, Pilone, Rosa Marina, che'),
+                            ('PAE0033', 'scarsa vegetazione di lecci, proni, melograni, querce spinose,'),
+                            ('PAE0049', 'lungo il tratto che da Castro Marina va fino alla Grotta Romanelli')):
+            with self.subTest(code=code):
+                held = self.codes[code]
+                self.assertTrue(held.decree['scheda_read'].startswith('read by OCR, page 3 (OCR: Tesseract'))
+                self.assertIn(words, held.decree['scheda_motivation'])
+                self.assertEqual((held.decree['scheda_reading'], held.reading), ('area', 'area'))
+        self.assertEqual(unread, [])
+
+    def test_a_page_image_decree_is_read_by_ocr(self):
+        if I.ocr_engine() is None:
+            self.skipTest('Tesseract with its Italian model is not installed here')
+        # G.U. n. 265 of 6 October 1975 prints PAE0017's D.M. of 4 March 1975 on its 12th and 13th pages (pp.
+        # 7020-7021), page images; its motivation, read by eye from them, names the coast and its beaches.
+        ostuni = self.codes['PAE0017']
+        self.assertTrue(ostuni.decree['read'].startswith('read by OCR, page 12, 13 (OCR: Tesseract'))
+        self.assertTrue(ostuni.decree['decree_act'][0].startswith('DECRETO MINISTERIALE 4 marzo 1975. Dichiarazione di '
+                                                                   'notevole interesse pubblico di alcune zone in comune '
+                                                                   'di Ostuni.'))
+        self.assertIn('per le sue zone litorali, come quelle di Lamaforca, Santa Lucia, Pilone, Rosa Marina',
+                      ostuni.decree['decree_text'][0])
+        self.assertEqual(ostuni.decree['reading'], 'area')
+        self.assertTrue(ostuni.cite.startswith("the OCR'd text names no tree, row or group (OCR: Tesseract"))
+        # The issue held for PAE0064 (Nardo', G.U. n. 240 of 15-10-1952) prints no decree naming the comune.
+        self.assertIn("its OCR'd pages hold no decree of notable public interest titled as the layer's object",
+                      self.codes['PAE0064'].decree['read'])
+
+    def test_a_decree_is_the_act_its_object_and_date_title_in_its_issue_or_a_supplement(self):
+        if I.ocr_engine() is None:
+            self.skipTest('Tesseract with its Italian model is not installed here')
+        # PAE0042's layer prints the comune RACALE and the object "... TERRITORIO COMUNALE DI ALLISTE"; G.U. n. 132 of
+        # 29-5-1970 prints two decrees of 26 March 1970, Ugento's and Alliste's: the object's is read.
+        self.assertIn('territorio comumale di Alliste', self.codes['PAE0042'].decree['decree_act'][0])
+        # The 57 decrees of 1 August 1985 are printed in S.O. n. 5 to G.U. n. 30 of 6-2-1986, whose index the issue's
+        # own G.U. page lists; the issue itself prints only their titles.
+        bari = self.codes['PAE0115'].decree
+        self.assertEqual(bari['read_in'], 'https://www.gazzettaufficiale.it/eli/gu/1986/02/06/30/so/5/sg/pdf')
+        self.assertIn('territorio delle Lame ad ovest e a sud-est di Bari', bari['decree_act'][0])
+        # Its dispositive is OCR'd "Dccreta:"; its preamble ends there, before the delimitation it decrees.
+        self.assertIn('così delimitato', bari['decree_text'][0])
+        self.assertNotIn('1) Il territorio delle Lame', bari['decree_text'][0])
 
     def test_a_decree_with_a_text_layer_is_read_from_it(self):
         # PAE0158, the 2024 declaration of the Tiati - Teanum Apulum - Civitate context (G.U. n. 26, 1-2-2025).
         self.assertEqual(self.codes['PAE0158'].decree['read'], 'read from the text layer')
         self.assertEqual(self.codes['PAE0158'].reading, 'area')
-        # G.U. n. 217 of 15-9-1999 prints in its text layer only the title of PAE0037's decree (Ceglie Messapica).
-        self.assertIn('only its title', self.codes['PAE0037'].decree['read'])
+        # G.U. n. 217 of 15-9-1999 prints in its text layer only the title of PAE0037's decree (Ceglie Messapica): the
+        # decree is printed in the issue's S.O. n. 173, held (for PAE0096), page images.
+        ceglie = self.codes['PAE0037'].decree
+        if I.ocr_engine() is not None:
+            self.assertEqual(ceglie['read_in'], 'https://www.gazzettaufficiale.it/eli/gu/1999/09/15/217/so/173/sg/pdf')
+            self.assertTrue(ceglie['decree_act'][0].startswith('DECRETO 18 maggio 1999. Dichiarazione di notevole '
+                                                               'interesse pubblico del centro storico di Ceglie Messapica'))
 
 
 if __name__ == '__main__':
