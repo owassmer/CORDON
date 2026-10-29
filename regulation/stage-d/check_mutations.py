@@ -143,6 +143,12 @@ CODE = (
      "        return ListBound(round(max(measured or 0.0, LIST_FLOOR_M), 2)",
      "        return ListBound(round(measured or 0.0, 2)",
      'test_instruments.Rules.test_the_list_bound_takes_the_floor_under_twenty_fixes'),
+    ("read a curly apostrophe as another letter", 'cordon_d.instruments',
+     "    text = text.replace('\\u2019', \"'\").replace('\\u2018', \"'\")\n", '',
+     'test_instruments.Rules.test_a_curly_apostrophe_or_a_word_broken_by_its_hyphen_mid_line_still_names_a_tree'),
+    ("leave a word broken by its hyphen mid-line unread", 'cordon_d.instruments',
+     "    text += ' ' + re.sub(", "    text += ' ' or re.sub(",
+     'test_instruments.Rules.test_a_curly_apostrophe_or_a_word_broken_by_its_hyphen_mid_line_still_names_a_tree'),
     # The words D's rule reads from a page image are its vision transcription's; Tesseract's only locate the act. The
     # tests supply both texts, so these run everywhere.
     ("read the Tesseract text instead of the decree's transcription", 'cordon_d.instruments',

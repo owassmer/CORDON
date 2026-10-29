@@ -857,6 +857,11 @@ def read_motivation(obj: str, motivation: str) -> tuple[str, str | None, str | N
     naming an area is read as one, and any other is not read."""
     absent = bool(_NO_MOTIVATION.search(motivation or ''))
     text = f'{obj or ""} {"" if absent else motivation or ""}'
+    # A curly apostrophe is the straight one (Tesseract and some answers print ’), and a word a transcription keeps
+    # broken by its hyphen mid-line ("esteti-co", a table cell's lines run together) is read joined as well: both can
+    # only add a tree word, never hide one.
+    text = text.replace('\u2019', "'").replace('\u2018', "'")
+    text += ' ' + re.sub(r'(?<=[^\W\d_])[-\u2010\xad](?=[a-zà-ù])', '', text)
     for reading, pattern in (('names a tree', _NAMES_TREE), ('names a row or group', _NAMES_GROUP)):
         found = pattern.search(text)
         if found:

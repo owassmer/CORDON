@@ -115,6 +115,14 @@ class Rules(unittest.TestCase):
         self.assertEqual(I.read_motivation('ZONA', 'La zona compresa in una circonferenza di raggio m. 500.')[0], 'area')
         self.assertEqual(I.read_motivation('ZONA', 'Un leccio secolare con il tronco di m. 4,10 di giro.')[0], 'names a tree')
 
+    def test_a_curly_apostrophe_or_a_word_broken_by_its_hyphen_mid_line_still_names_a_tree(self):
+        # Tesseract prints ’; a transcription of a table cell ran its lines together, keeping "esteti-co".
+        self.assertEqual(I.read_motivation('ZONA', 'Nella zona sorge l\u2019albero detto della Madonna.')[0], 'names a tree')
+        self.assertEqual(I.read_motivation('ZONA', 'Nella zona insiste un esem-plare di quercia vallonea.')[:3:2],
+                         ('names a tree', 'Quercus'))
+        self.assertEqual(I.read_motivation('ZONA', 'La zona, con le sue masserie e i suoi muretti, ha valore esteti-co.')[0],
+                         'area')
+
     def test_a_text_naming_trees_of_several_genera_gives_none(self):
         # PAE0093's decree (D.M. 9-7-1990) names in its villas' gardens "pini, cedri, eucalipti, querce, corbezzoli ed
         # un grande esemplare di fitolacca": the tree it names may be of any genus.
