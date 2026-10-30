@@ -1,0 +1,14 @@
+{
+  "schema": "cordon-stage-c-acceptance-v1",
+  "accepted_by": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
+  "date": "2026-10-29",
+  "promoted_package_sha256": "5c485ed96b2484973ce829ccc139e2756ee3929e5800a3b1ed97c0401347a556",
+  "digest_recipe": "SHA-256 of sorted repository-relative path + NUL + file SHA-256 + newline, for stage-c .py/.md/.json/.txt excluding __pycache__",
+  "preceding_acceptance": {
+    "path": "corpus/evidence/stage-c-acceptance-2026-10-28-pr39.json",
+    "sha256": "57395644e7135057ddcf3da1505d087ceb29536e76d0ad5e999ee64403529ae4"
+  },
+  "preceding_package_sha256": "467616930d75b868a47aacf6c79c252b5395bac17e1cdcb1e8c7e2413bfec161",
+  "scope": "The six clocks PR #47 adds take their calendar classes: D.lgs. 42/2004 Art. 146(4)'s five years and following year and Art. 139(1)'s ninety days count calendar time with no roll-forward; Art. 139(5)'s two thirty-day observation terms count as a procedural submission, and Art. 140(1)'s sixty days as an Italian deadline. D.lgs. 19/2021 Art. 33(1)'s reference to L.R. 14/2007 Art. 5(3) binds TREE_LISTED true and TREE_NOT_LISTED false, as its other consumers do. Binding takes effect only on merge."
+}

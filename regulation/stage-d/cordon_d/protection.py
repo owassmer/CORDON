@@ -26,6 +26,8 @@ import re
 
 from cordon_c.core import Evaluation
 
+from . import instruments
+
 REPOSITORY = Path(__file__).resolve().parents[3]
 SOURCES = 'corpus/sources/protected-status'
 FLAGS = ('Si', '1')  # the printed values of MONUMENTALE_ARIF that record the characteristics
@@ -1205,10 +1207,10 @@ def identity(plant: str, within, named: list[NoteCode], naming=(), elsewhere=Non
 
 # The shape `rows` writes: its top-level keys, each plant's, its candidates' and each candidate entry's. A run's
 # rows carry more (`named_rows`: the identities its records decided), and are never read back as PR #30's rows.
-SHAPE = {'rows': frozenset({'plants', 'zone_entries', 'acts', 'chain_checks', 'survey_batches', 'unread_deletions',
-                            'reference_fixes', 'bounds', 'tag_batches'}),
+SHAPE = {'rows': frozenset({'plants', 'zone_entries', 'instruments', 'acts', 'chain_checks', 'survey_batches',
+                            'unread_deletions', 'reference_fixes', 'bounds', 'tag_batches'}),
          'plant': frozenset({'plant', 'kind', 'order', 'coincides_with', 'point', 'comune', 'observations', 'flag',
-                             'notes', 'measurements', 'codes', 'candidates'}),
+                             'notes', 'measurements', 'codes', 'candidates', 'species', 'status'}),
          'candidates': frozenset({'not a register tree', 'entries', 'd', 'identity', 'rule'}),
          'entry': frozenset({'entry', 'distance_m', 'd_m'})}
 
@@ -1380,6 +1382,19 @@ def order_points(store: Path, root: Path = REPOSITORY) -> list[tuple[str, float,
     return points
 
 
+def one_species(printed) -> str | None:
+    """The one species a plant's views print: the views agree where each prints the same common name, case aside,
+    before any parenthesised Latin name ("OLIVO" and "Olivo (Olea europaea)"); the form printing a Latin name is
+    kept. Views naming different species, or different Latin names, give None."""
+    names = {n.strip() for n in printed if n and n.strip()}
+    if len({n.split('(')[0].strip().casefold() for n in names}) != 1:
+        return None
+    latin = {n for n in names if '(' in n}
+    if len({n.split('(', 1)[1].strip(' )').casefold() for n in latin}) > 1:
+        return None
+    return max(latin or names, key=len)
+
+
 @dataclass(frozen=True)
 class Plant:
     plant: str
@@ -1391,6 +1406,7 @@ class Plant:
     record: MonitoringRecord
     order: str | None = None   # the order whose annex prints the plant
     coincides: tuple[str, ...] = ()  # the positives an order plant coincides with (within 1 m)
+    species: str | None = None  # the host its observations record, where they record one
 
 
 def affected_plants(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY):
@@ -1428,6 +1444,9 @@ def affected_plants(store: Path, decision: date, reach_start: date, root: Path =
         names = {n.strip().upper() for n in group.values('COMUNE') if n and n.strip()}
         return next(iter(names)) if len(names) == 1 else None
 
+    def species(*groups):
+        return one_species(n for g in groups for n in g.values('species'))
+
     plants = []
     in_reach = [(g, p) for g, p in positives if g.day and g.day >= reach_start]
     repeated = Counter(g.reference for g, _ in in_reach)
@@ -1435,7 +1454,8 @@ def affected_plants(store: Path, decision: date, reach_start: date, root: Path =
         # A plant is named by its observation's reference; a reference two observations share keeps its day.
         name = group.reference if group.reference and repeated[group.reference] == 1 else '@'.join(
             str(v) for v in group.identity[1:])
-        plants.append(Plant(name, 'in-reach positive', x, y, error, comune(group), monitoring_record([group], printing)))
+        plants.append(Plant(name, 'in-reach positive', x, y, error, comune(group), monitoring_record([group], printing),
+                            species=species(group)))
     grid = numpy.array([[p[0], p[1]] for _, p in positives])
     tree = cKDTree(grid)
     reach_tree = cKDTree(numpy.array([[p.x, p.y] for p in plants]))
@@ -1471,7 +1491,7 @@ def affected_plants(store: Path, decision: date, reach_start: date, root: Path =
         gx, gy, error = first[1]
         plants.append(Plant(printed[0], 'order plant', gx, gy, error, comune(first[0]),
                             monitoring_record([h[0] for h in hits], printing), ' '.join(sorted(set(printed))),
-                            tuple(sorted(h[0].reference or '' for h in hits))))
+                            tuple(sorted(h[0].reference or '' for h in hits)), species(*(h[0] for h in hits))))
     return plants, negatives, terms, printing
 
 
@@ -1501,7 +1521,8 @@ def zone_negatives(negatives, infected: list[Plant], decision: date, terms, prin
         near = tree.query_ball_point([point.geometry.x, point.geometry.y], 50.0 + point.error_m + max(p.error_m for p in infected))
         if near:
             found.append(Plant(group.reference or '|'.join(group.identity[1:]), 'negative olive', point.geometry.x,
-                               point.geometry.y, point.error_m, None, monitoring_record([group], printing)))
+                               point.geometry.y, point.error_m, None, monitoring_record([group], printing),
+                               species=one_species(group.values('species'))))
     return found
 
 
@@ -1562,7 +1583,8 @@ def read(store: Path, decision: date, reach_start: date, root: Path = REPOSITORY
                     zone_entries.add(e.oid)
         zone_entries.update(oid for oid, _, _ in cand.entries)
     by_oid = {e.oid: e for e in everything}
-    return {'acts': acts, 'checks': checks, 'unread_deletions': unread, 'entries': by_oid, 'chains': chains,
+    held = instruments.read(store, decision, out_plants, root)
+    return {'instruments': held, 'acts': acts, 'checks': checks, 'unread_deletions': unread, 'entries': by_oid, 'chains': chains,
             'batches': oid_batch, 'batch_rules': batch_rules, 'bounds': bounds, 'fixes': fixes, 'key_causes': causes,
             'plants': out_plants, 'codes': codes, 'zone_entries': zone_entries, 'tag_batches': tag_batches,
             'terms': terms, 'decision': decision}
@@ -1603,7 +1625,9 @@ def rows(result: dict) -> dict:
             'candidates': {'not a register tree': True,
                            'entries': [{'entry': e, 'distance_m': dist, 'd_m': d} for e, dist, d in c.entries],
                            'd': f"the plant's error_m {p.error_m} m + the entry's batch bound",
-                           'identity': c.identity, 'rule': c.rule}})
+                           'identity': c.identity, 'rule': c.rule},
+            'species': p.species,
+            'status': result['instruments']['status'].get(p.plant)})
     terms = result['terms']
     reference_fix_sources = [s.identity for s in (terms.device_source, terms.award_source, terms.region_source)]
     zone = []
@@ -1626,7 +1650,7 @@ def rows(result: dict) -> dict:
                 'provisional': _act(chain.provisional), 'definitive': _act(chain.definitive),
                 'deletion': _act(chain.deletion), 'rule': chain.rule, 'history_complete': chain.complete,
                 'cause': chain.cause}})
-    return as_written({'plants': plants, 'zone_entries': zone,
+    return as_written({'plants': plants, 'zone_entries': zone, 'instruments': instruments.rows(result['instruments']),
             'acts': [_act(a) | {'provisional': a.provisional, 'definitive_of': [list(d) for d in a.definitive],
                                 'deleted': a.deleted, 'surveys': [list(s) for s in a.surveys]}
                      for a in result['acts'].values()],

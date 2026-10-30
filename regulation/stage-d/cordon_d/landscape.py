@@ -6,7 +6,8 @@ family 'landscape'), each naming one or more plants by the identifiers it prints
 its cutoff and grant (`case_prescriptions.admitted_records`). Each plant a record names attaches through row 9's
 identity, or stays unattached with its cause: PR #30's rows with the identities the same records, under the same
 cutoff and grant, decide (`protection.named_rows`). Row 10 decides no identity. C then evaluates
-Art. 33(1), Art. 146(5) and Art. 146(8) for each plant asked about, with what the records state and nothing else.
+Art. 33(1), Art. 146(5) and Art. 146(8) for each plant asked about, with what the records state, the plant's legal
+status as row 9's rows carry it, and nothing else.
 
 D supplies no "required / not required" fact: Art. 33(1)'s second paragraph names the one class that needs
 authorization, its first derogates every other constraint, and A's row encodes the class. Neither Art. 146(2)
@@ -17,9 +18,10 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import date, datetime
 
-from cordon_c.bindings import leaves
+from cordon_c.bindings import authorization_efficacy_facts, bind, leaves, listing_facts
 from cordon_c.core import Evaluation, MissingInput, evaluate
 from .case_prescriptions import admitted_records
+from .instruments import DECLARATION, NATIONAL, PROPOSAL
 from .protection import WITHIN, Register, named_rows, parcel_agrees, parcel_unread, printed as _printed
 
 RULE = 'IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal'
@@ -30,11 +32,20 @@ CLOCK = 'B-CLK-IT-33(1)-landscape-authorization-45d'
 GRANTED = 'the required landscape authorization has been granted'
 ROUTE = 'the applicable superintendent-opinion route is resolved'
 RECEIVED = 'the superintendent receives the complete acts for the landscape-authorization application'
-# Art. 33(1)'s conjuncts their owning units supply (measure: row 6; legal status: row 9; infection: rows 1 and 2).
-# The caller passes them as supplied; it sets no other predicate.
+# Art. 33(1)'s conjuncts their owning units supply (measure: row 6; infection: rows 1 and 2). The caller passes them
+# as supplied; it sets no other predicate. The plant's legal status is read from row 9's rows, the rows this caller
+# already takes: the register entry's act chain for L.R. 14/2007 Art. 5(3), and row 9's fact for each other instrument.
 UPSTREAM = ('a valid measure requires plant removal in the exact demarcated area',
-            'the plant has monumental or historic-interest legal status',
             'infection is currently established in the plant')
+REGISTER_ROW = 'PUG-LR14-2007:Art.5(3):definitive-listing'
+STATUS_ROWS = {NATIONAL: 'IT-L10-2013:Art.7(2):monumental-tree-status',
+               DECLARATION: 'IT-DLGS42-A136:Art.136(1):declared-tree',
+               PROPOSAL: 'IT-DLGS42-A139:Art.139-141:proposal-effect'}
+EFFICACY = 'IT-DLGS42-A146:Art.146(4):authorization-efficacy'
+EFFICACY_NEED = 'the day the landscape authorization for the removal took effect (its decision record)'
+# The proposal row's conjunct naming the tree; the others (its start, its conclusion, its lapse) follow from its dates.
+NAMES_THE_TREE = ('a proposal of declaration of notable public interest names the tree in its object or motivation, '
+                  'alone or in a row or group, and not only as a feature of the area it proposes')
 UNION = 'removal complies with applicable Union obligations'
 # What this caller never supplies, and why; emitted once beside the results.
 NOT_SUPPLIED = {
@@ -273,14 +284,54 @@ def _latest(records, value, zone):
     return final[0], None
 
 
+def _fact(value, cause):
+    return value if value is not None else Evaluation(None, needs=frozenset({cause}))
+
+
+def status_facts(snapshot, at, rows, identities, plant):
+    """The facts of Art. 33(1)'s legal-status rows for one plant, from row 9's rows. The register: the identity row 9
+    decides (`identities`) and that entry's act chain as the rows carry it (`zone_entries[].acts`), through C's
+    `listing_facts`; 'not a register tree' has no entry, 'unknown' may have one. Each other instrument: row 9's fact,
+    which row 9 computes at its own decision date, so it is used only where that date is `at`; otherwise its predicates
+    stay unset, naming that. A proposal fact true names a proposal whose effect C would date; row 9 holds none."""
+    out = {}
+    held = identities.plants.get(plant)
+    identity = held['identity'] if held else None
+    if identity is not None:
+        entry = {e['entry']: e for e in rows.get('zone_entries') or ()}.get(identity) if identity not in \
+            NOT_A_REGISTER_IDENTITY else None
+        acts = (entry or {}).get('acts') or {}
+        day = lambda act: act and act.get('published') and date.fromisoformat(act['published'])  # noqa: E731
+        out |= listing_facts(snapshot, at, own_entry={'not a register tree': False, 'unknown': None}.get(identity, True),
+                             first_publication=day(acts.get('provisional')),
+                             definitive_decision=(day(acts['definitive']), True) if day(acts.get('definitive')) else None,
+                             deletion=day(acts.get('deletion')), entry_history_complete=bool(acts.get('history_complete')))
+    row = next((p for p in rows['plants'] if p['plant'] == plant), None)
+    status = (row or {}).get('status') or {}
+    read_at = (rows.get('instruments') or {}).get('at')
+    for kind, stable in STATUS_ROWS.items():
+        fact = status.get(kind)
+        version = snapshot.version(stable, at)
+        if fact is None or read_at != at.isoformat():
+            continue
+        cause = f"row 9's {kind} fact: {fact.get('cause')}"
+        if kind == PROPOSAL:
+            if fact['value'] is True:
+                continue   # its start, conclusion and lapse are dated from the proposal's own dates
+            out |= bind(version, {NAMES_THE_TREE: _fact(fact['value'], cause)})
+        else:
+            out |= bind(version, {text: _fact(fact['value'], cause) for text in leaves(version['condition_ast'])})
+    return out
+
+
 def _upstream(snapshot, at, upstream, plants):
-    """The owning units' values for Art. 33(1)'s measure, status and infection conjuncts; nothing else."""
+    """The owning units' values for Art. 33(1)'s measure and infection conjuncts; nothing else."""
     if set(upstream) - set(plants):
         raise ValueError(f'Upstream values for plants not asked about: {sorted(set(upstream) - set(plants))}')
     for plant, values in upstream.items():
         other = set(values) - set(UPSTREAM)
         if other:
-            raise ValueError(f"The caller passes only Art. 33(1)'s measure, status and infection conjuncts as their "
+            raise ValueError(f"The caller passes only Art. 33(1)'s measure and infection conjuncts as their "
                              f'owning units supply them; not {sorted(other)} (plant {plant})')
     row = snapshot.version(RULE, at)
     if set(UPSTREAM) | {GRANTED, UNION} != set(leaves(row['condition_ast'])):
@@ -300,8 +351,8 @@ def landscape_results(snapshot, at: date, plants, supplied, *, evaluated_at, per
     `permitted_controlled_sources` reaches no result, and the results it could change for a plant it names, dated
     on or before `at`, are withheld with the need 'authorized evidence for …' (`WITHHOLDS`). `rows` and `register`
     are PR #30's rows and the register, with which row 9 decides each identity from the same admitted records
-    (`protection.named_rows`); `upstream` maps a plant to the values its owning units supply for Art. 33(1)'s measure,
-    status and infection conjuncts.
+    (`protection.named_rows`), and whose status facts give each plant's legal status (`status_facts`); `upstream`
+    maps a plant to the values its owning units supply for Art. 33(1)'s measure and infection conjuncts.
 
     A granted record dated after `at` is reported, not passed. A predicate is true or false only where an attached
     record states it, and among several records of a kind the latest day's decide (one day's that disagree supply
@@ -364,7 +415,19 @@ def landscape_results(snapshot, at: date, plants, supplied, *, evaluated_at, per
                                                       r['issuer']), zone)
         if decision is not None:
             facts[RULE][(versions[RULE], GRANTED)] = decision['outcome'] != 'denied'
+            if decision['outcome'] != 'denied':
+                # Art. 146(4): the grant counts while in effect; a phytosanitary removal needs no building title, so
+                # its five years run from the decision's own day. No commencement record reaches row 10.
+                facts[RULE] |= authorization_efficacy_facts(
+                    snapshot, at, effective=_day(decision['event'].occurred, zone), works_began=None,
+                    works_history_complete=False, zone=zone, calendar=calendar)
+        if (versions[RULE], GRANTED) not in facts[RULE]:
+            # Art. 146(4) dates the grant from the day it took effect, which only the decision supplies: one need.
+            efficacy = snapshot.version(EFFICACY, at)
+            facts[RULE] |= {(efficacy['provision_version_id'], text): Evaluation(None, needs=frozenset({EFFICACY_NEED}))
+                            for text in leaves(efficacy['condition_ast'])}
         reported += [issue] if issue else []
+        facts[RULE] |= status_facts(snapshot, at, rows, identities, plant)
         moments = {r['event'].occurred for r in kinds['landscape-lodging']}
         due = None
         if len(moments) == 1:
@@ -397,7 +460,10 @@ def landscape_results(snapshot, at: date, plants, supplied, *, evaluated_at, per
                 evaluations[row] = Evaluation(None, needs=frozenset(row_needs))
         results[plant] = dict(
             identity=identities.output(plant), records=[r['record'] for r in mine], results=evaluations,
-            facts={sid: {p: v for (_, p), v in values.items()} for sid, values in facts.items()},
+            facts={sid: {p: v for (vid, p), v in values.items() if vid == versions[sid]} for sid, values in facts.items()},
+            # The facts of the rows Art. 33(1) refers to: legal status from row 9's rows, Art. 146(4) from the decision.
+            referenced_facts={vid: {p: v for (v_, p), v in facts[RULE].items() if v_ == vid}
+                              for vid in sorted({vid for vid, _ in facts[RULE]} - {versions[RULE]})},
             performances={f'{c} -> {r}': v for (c, r), v in performances.items()},
             decision=None if decision is None else dict(
                 _event(decision), outcome=decision['outcome'], issuer=decision['issuer'],

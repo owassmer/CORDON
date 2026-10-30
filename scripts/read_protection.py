@@ -21,7 +21,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / 'regulation/stage-d'), str(ROOT / 'regulation/stage-c')]
-from cordon_d import protection  # noqa: E402
+from cordon_d import instruments, protection  # noqa: E402
 from cordon_d.case_prescriptions import admitted_records  # noqa: E402
 from cordon_d.evidence import run_instant  # noqa: E402
 from cordon_d.store import store_root  # noqa: E402
@@ -31,8 +31,10 @@ ZONE = ZoneInfo('Europe/Rome')
 
 def version() -> str:
     digest = sha256()
-    for path in (Path(protection.__file__), ROOT / protection.SOURCES / 'register.json',
-                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS):
+    for path in (Path(protection.__file__), Path(instruments.__file__), ROOT / protection.SOURCES / 'register.json',
+                 ROOT / protection.SOURCES / 'acts.json', ROOT / protection.ORDERS,
+                 ROOT / instruments.SOURCES / 'national-list.json', ROOT / instruments.SOURCES / 'declarations.json',
+                 ROOT / instruments.SOURCES / 'proposals.json', ROOT / instruments.SOURCES / 'recognitions.json'):
         digest.update(path.read_bytes())
     return digest.hexdigest()[:12]
 
@@ -101,6 +103,7 @@ def main(argv=None):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(json.dumps(out, ensure_ascii=False, indent=1))
         print('rows:', target)
+        instruments_summary(out)
     print('plants:', dict(Counter((p['kind'], p['candidates']['identity'] if p['candidates']['identity'] in
                                    ('unknown', 'not a register tree') else 'entry') for p in out['plants'])))
     print('zone entries:', dict(Counter(e['layer'] for e in out['zone_entries'])))
@@ -111,6 +114,36 @@ def main(argv=None):
     print('survey batches:', *out['survey_batches'], sep='\n  ')
     print('unread deletions:', out['unread_deletions'])
     print('note codes:', dict(Counter(c['cause'] for p in out['plants'] for c in p['codes'])))
+
+
+def instruments_summary(out: dict) -> None:
+    """The national list's and the Art. 136 declarations' counts, from the shared read (a run's records change only
+    identities)."""
+    held = out['instruments']
+    print('national list:', len(held['national_list']['entries']), 'entries,',
+          dict(Counter(e['sheet'] for e in held['national_list']['entries'])), 'decrees:',
+          len(held['national_list']['decrees']), 'bound:', held['national_list']['bound']['error_m'],
+          held['national_list']['bound']['statistic'])
+    print('declarations:', len(held['declarations']['declarations']), 'in', len(held['declarations']['versions']),
+          'PPTR versions; readings:', dict(Counter(d['reading'] for d in held['declarations']['declarations'])))
+    declared = held['declarations']['declarations']
+    for route, prefix in (('read from a vision transcription', 'read from the vision transcription'),
+                          ('read by OCR until transcribed', 'read by OCR'), ('not read from a transcription', 'not read')):
+        print(f'{route}:', sum((d['decree'] or {}).get('read', '').startswith(prefix) for d in declared), 'decrees,',
+              sum((d['decree'] or {}).get('scheda_read', '').startswith(prefix) for d in declared), 'schede')
+    population = held['declarations']['transcription']['population']
+    print('transcription population:', len(population), 'rows,', len({(r['sha256'], r['page']) for r in population}),
+          'pages; decrees not found:', sorted(d['code'] for d in declared if 'no decree' in (d['decree'] or {}).get('read', '')),
+          '; OCR engine (locator):', held['declarations']['ocr']['engine'])
+    print('proposals:', [(p['proposal'], p['proposer'], p['reading'], p['first_publication'], p['outcome'].get('kind'))
+                         for p in held['proposals']['proposals']])
+    print('proposal routes not reached:', held['proposals']['not_reached'])
+    print('instrument problems:', held['problems'])
+    print('in a zone:', [(r['plant'], r['instrument']) for r in held['in_zone']])
+    print('groups:', [(g['scheda'], g['nearest_positive_m']) for g in held['groups']])
+    print('distances:', json.dumps(held['distances'], ensure_ascii=False))
+    print('status:', {kind: dict(Counter(str(p['status'][kind]['value']) for p in out['plants'] if p['status']))
+                      for kind in (instruments.NATIONAL, instruments.DECLARATION, instruments.PROPOSAL)})
 
 
 if __name__ == '__main__':

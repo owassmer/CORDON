@@ -12,6 +12,10 @@ import test_reference
 
 
 MUTATIONS = (
+    ("cordon_c.bindings", "effective <= at and utc(day) < utc(five)", "effective <= at and utc(day) <= utc(five)",
+     "OperativeMethods.test_a_landscape_authorization_is_in_effect_for_five_years_and_begun_works_for_one_more"),
+    ("cordon_c.bindings", "Evaluation(effective <= works_began <= last)", "Evaluation(effective <= works_began)",
+     "OperativeMethods.test_a_landscape_authorization_is_in_effect_for_five_years_and_begun_works_for_one_more"),
     ("cordon_c.survey", 'round(Fraction(s.population) * p)', 'int(Fraction(s.population) * p + Fraction(1, 2))',
      "OperativeMethods.test_finite_rounding_and_published_reconstruction"),
     ("cordon_c.quantities", 'if name == "italian_deadline" else', 'if False else',

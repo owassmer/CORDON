@@ -4317,10 +4317,70 @@
       ]
     },
     {
-      "predicate": "the plant has monumental or historic-interest legal status",
+      "predicate": "a declaration of notable public interest adopted on or before the event date names the tree in its object or motivation, alone or in a row or group, and not only as a feature of the area it declares",
       "contracts": [
         "plant-population",
         "protected-status"
+      ]
+    },
+    {
+      "predicate": "the elenco degli alberi monumentali d'Italia holds the tree at the event date: a decree adopted on or before it lists the tree, alone or in its row, alberata or homogeneous group, and no decree deleting its entry was published in the Gazzetta Ufficiale on or before it",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the tree is monumental under Article 7 at the event date: the Region recognised it, alone or in its row or homogeneous group, on or before it, or a decree adopted on or before it lists it in the elenco degli alberi monumentali d'Italia; and no decree deleting its entry was published in the Gazzetta Ufficiale on or before it",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "a proposal of declaration of notable public interest names the tree in its object or motivation, alone or in a row or group, and not only as a feature of the area it proposes",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "before the event date the proposal was concluded by a declaration of notable public interest or by the competent authority's decision not to declare",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the proposal is a Soprintendente's and the Article 140(1) term for the Ministry's declaration ended before the event date without a declaration adopted",
+      "contracts": [
+        "protected-status",
+        "calendar"
+      ]
+    },
+    {
+      "predicate": "the proposal's publication on the albo pretorio of an interested comune began, or the tree's owner, possessor or holder received its communication, on or before the event date",
+      "contracts": [
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the event date falls within the five years of efficacy that run from the day the landscape authorization for the removal took effect",
+      "contracts": [
+        "administrative-event",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the event date falls within the year following the end of those five years",
+      "contracts": [
+        "administrative-event",
+        "protected-status"
+      ]
+    },
+    {
+      "predicate": "the removal works began within those five years",
+      "contracts": [
+        "removal-performance"
       ]
     },
     {

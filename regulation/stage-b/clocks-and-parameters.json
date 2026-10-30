@@ -4182,6 +4182,186 @@
         "ref": "concrete commencement of the removal work the prescription specifies"
       },
       "note": null
+    },
+    {
+      "clock_id": "B-CLK-IT-DLGS42-146(4)-five-year-efficacy",
+      "producer_provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
+      "source_phrase": "L'autorizzazione è efficace per un periodo di cinque anni",
+      "kind": "deadline",
+      "anchor": {
+        "kind": "event",
+        "event": "the day the landscape authorization for the plant's removal took effect",
+        "record": "RECEIVED_RECORD"
+      },
+      "magnitude": "5",
+      "bound": "exact",
+      "unit": "years",
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "a landscape authorization granted for the plant's removal under D.lgs. 19/2021 Article 33(1), second paragraph; the term runs from the authorization's own efficacy, since a phytosanitary removal needs no building title",
+      "legal_duty_owner": "REGIONAL_PLANT_HEALTH_SERVICE",
+      "executor": null,
+      "consumer_decision": "IT-DLGS42-A146:Art.146(4):authorization-efficacy",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "the removal works were carried out"
+      },
+      "note": "On expiry, removal works not begun within the five years need a new authorization."
+    },
+    {
+      "clock_id": "B-CLK-IT-DLGS42-146(4)-following-year-completion",
+      "producer_provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
+      "source_phrase": "I lavori iniziati nel corso del quinquennio di efficacia dell'autorizzazione possono essere conclusi entro e non oltre l'anno successivo la scadenza del quinquennio medesimo",
+      "kind": "deadline",
+      "anchor": {
+        "kind": "event",
+        "event": "the end of the authorization's five years of efficacy, the removal works having begun within them",
+        "record": "OPERATOR_RECORD"
+      },
+      "magnitude": "1",
+      "bound": "exact",
+      "unit": "years",
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "a landscape authorization granted for the plant's removal under D.lgs. 19/2021 Article 33(1), second paragraph, where the removal works began within the five years of its efficacy",
+      "legal_duty_owner": "REGIONAL_PLANT_HEALTH_SERVICE",
+      "executor": null,
+      "consumer_decision": "IT-DLGS42-A146:Art.146(4):authorization-efficacy",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "the removal works were concluded"
+      },
+      "note": "\"L'anno successivo la scadenza\" is read as one year from the expiry, not the end of the next calendar year: the shorter period cannot let a lapsed authorization clear a removal."
+    },
+    {
+      "clock_id": "B-CLK-IT-DLGS42-139(1)-ninety-day-publication",
+      "producer_provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "source_phrase": "è pubblicata per novanta giorni all'albo pretorio",
+      "kind": "minimum_duration",
+      "anchor": {
+        "kind": "event",
+        "event": "the first day of the proposal's publication on the albo pretorio of an interested comune",
+        "record": "RECEIVED_RECORD"
+      },
+      "magnitude": "90",
+      "bound": "exact",
+      "unit": "calendar_days",
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "a published proposal of declaration of notable public interest (Article 139(1); for a Soprintendente's proposal, Article 141(1))",
+      "legal_duty_owner": "COMUNE",
+      "executor": null,
+      "consumer_decision": "IT-DLGS42-A139:Art.139-141:proposal-effect",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "the proposal stayed published on the albo pretorio for ninety days"
+      },
+      "note": null
+    },
+    {
+      "clock_id": "B-CLK-IT-DLGS42-139(5)-thirty-day-observations",
+      "producer_provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "source_phrase": "Entro i trenta giorni successivi al periodo di pubblicazione di cui al comma 1",
+      "kind": "deadline",
+      "anchor": {
+        "kind": "event",
+        "event": "the end of the proposal's ninety days of publication on the albo pretorio",
+        "record": "RECEIVED_RECORD"
+      },
+      "magnitude": "30",
+      "bound": "exact",
+      "unit": "calendar_days",
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "a published proposal of declaration of notable public interest",
+      "legal_duty_owner": "OBSERVATION_SUBMITTERS",
+      "executor": null,
+      "consumer_decision": "IT-DLGS42-A139:Art.139-141:proposal-effect",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "observations and documents lodged on the proposal"
+      },
+      "note": null
+    },
+    {
+      "clock_id": "B-CLK-IT-DLGS42-139(5)-thirty-day-owner-observations",
+      "producer_provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "source_phrase": "I proprietari, possessori o detentori del bene possono presentare osservazioni e documenti entro i trenta giorni successivi alla comunicazione individuale di cui al comma 3",
+      "kind": "deadline",
+      "anchor": {
+        "kind": "event",
+        "event": "the owner, possessor or holder's receipt of the proposal's individual communication",
+        "record": "RECEIVED_RECORD"
+      },
+      "magnitude": "30",
+      "bound": "exact",
+      "unit": "calendar_days",
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "a proposal concerning a thing under Article 136(1)(a) or (b), communicated to its owner, possessor or holder (Article 139(3))",
+      "legal_duty_owner": "OWNER_OR_HOLDER",
+      "executor": null,
+      "consumer_decision": "IT-DLGS42-A139:Art.139-141:proposal-effect",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "the owner's observations and documents lodged on the proposal"
+      },
+      "note": null
+    },
+    {
+      "clock_id": "B-CLK-IT-DLGS42-140(1)-sixty-day-declaration",
+      "producer_provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "source_phrase": "sessanta giorni dalla data di scadenza dei termini di cui all'articolo 139, comma 5",
+      "kind": "deadline",
+      "anchor": {
+        "kind": "event",
+        "event": "the end of the later of the Article 139(5) observation terms",
+        "record": "RECEIVED_RECORD"
+      },
+      "magnitude": "60",
+      "bound": "exact",
+      "unit": "calendar_days",
+      "recurrence": null,
+      "relation": null,
+      "window": null,
+      "applies_when": "a Soprintendente's proposal under Article 138(3), which the Ministry declares within the Article 140(1) term (Article 141(1)-(2)); a Region's proposal has the same term, whose passing ends no effect",
+      "legal_duty_owner": "MINISTRY_OF_CULTURE",
+      "executor": null,
+      "consumer_decision": "IT-DLGS42-A139:Art.139-141:proposal-effect",
+      "consequence_on_expiry": {
+        "kind": "none",
+        "ref": null
+      },
+      "completion": {
+        "kind": "record",
+        "ref": "the declaration of notable public interest was adopted"
+      },
+      "note": "Article 141(5): where the Ministry's declaration is not adopted within the term, the proposal's Article 146(1) effects cease when it ends."
     }
   ],
   "parameters": [
@@ -14340,6 +14520,104 @@
       "aperture": "IN_APERTURE"
     },
     {
+      "provision_version_id": "IT-L10-2013:Art.7(2):monumental-tree-status:v1",
+      "expression": null,
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "States which instrument makes a tree monumental: the elenco the Ministry keeps. It states no period; the dates are the listing and deleting decrees' own.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-L10-2013:Art.7(2):monumental-tree-status:v2",
+      "expression": null,
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "States which acts make a tree monumental: the Region's recognition, and the elenco that records it. It states no period; the dates are the acts' own.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A136:Art.136(1):declared-tree:v1",
+      "expression": null,
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "States what a declaration of notable public interest may protect. It states no period; the date is the declaration's own.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-DLGS42-139(1)-ninety-day-publication",
+      "why": "the publication the proposal's effect and the observation term run from",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "expression": "Dal primo giorno di pubblicazione decorrono gli effetti di cui all'articolo 146, comma 1.",
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "States the event from which the proposal's effect runs; the day is the proposal's own publication record.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "expression": "Dalla data di ricevimento della comunicazione decorrono gli effetti di cui all'articolo 146, comma 1.",
+      "disposition": "not_a_clock",
+      "ref": null,
+      "why": "States the event from which the effect runs for the owner; the day is the communication's receipt record.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-DLGS42-139(5)-thirty-day-observations",
+      "why": "the observation term after publication, from whose end the declaration term runs",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-DLGS42-139(5)-thirty-day-owner-observations",
+      "why": "the owner's observation term, from whose end the declaration term runs",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-DLGS42-140(1)-sixty-day-declaration",
+      "why": "the term within which the declaration is adopted; for a Soprintendente's proposal its passing ends the effect",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A139:Art.139-141:proposal-effect:v1",
+      "expression": "Se il provvedimento ministeriale di dichiarazione non è adottato nei termini di cui all'articolo 140, comma 1, allo scadere dei detti termini, per le aree e gli immobili oggetto della proposta di dichiarazione, cessano gli effetti di cui all'articolo 146, comma 1.",
+      "disposition": "implements_clock",
+      "ref": "B-CLK-IT-DLGS42-140(1)-sixty-day-declaration",
+      "why": "Article 141(5) ends a Soprintendente's proposal's effect when the Article 140(1) term passes with no declaration.",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-DLGS42-146(4)-five-year-efficacy",
+      "why": "the authorization's five years of efficacy",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
+      "disposition": "clock",
+      "ref": "B-CLK-IT-DLGS42-146(4)-following-year-completion",
+      "why": "the year after the five years in which works begun within them may be concluded",
+      "aperture": "IN_APERTURE"
+    },
+    {
+      "provision_version_id": "IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1",
+      "expression": "Il termine di efficacia dell'autorizzazione decorre dal giorno in cui acquista efficacia il titolo edilizio eventualmente necessario per la realizzazione dell'intervento,",
+      "disposition": "qualifies_clock",
+      "ref": "B-CLK-IT-DLGS42-146(4)-five-year-efficacy",
+      "why": "States the five years' anchor where a building title is needed; a phytosanitary removal needs none, so the term runs from the authorization's own efficacy.",
+      "aperture": "IN_APERTURE"
+    },
+    {
       "provision_version_id": "PUG-DGR1075-2025:§4.1.1:survey-method:v1",
       "disposition": "parameter",
       "ref": "B-PAR-DGR1075-survey-high-risk",
@@ -15154,13 +15432,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-1.json",
-        "record_sha256": "94a2e918609256e8aab17dc817bd675e419c7ef8606bd3a95f37f7bfa182f53e"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-10-29-pr47-seam-1.json",
+        "record_sha256": "1b983c20326e7c232543011f667477c413e2052084b0ae7124813b940714a95c"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "4ae90a18a87861ea7c66591c70551bd0a8033ffe4d061a81d4fe417f0ae3de85"
+      "accepted_content_sha256": "bd7a57f046e5e0f66d70e40fff313aa1ee574de4ac9106db4cf900d6894b9ea2"
     },
     {
       "seam": 2,
@@ -15168,13 +15446,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-2.json",
-        "record_sha256": "3101913da5e7c48aa30a322f9ffc37ac1cd7b3a69958490094d9627e73b705fc"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-10-29-pr47-seam-2.json",
+        "record_sha256": "552400a1fc2f6ebbd08292eb2b0a651fb7eb5bd48b784fc461e7749cd8a9c1cb"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "cbe0eaedf57762729b4f60e5cd3ac91a52ce5f11f1d0b567390a5ada88729a9e"
+      "accepted_content_sha256": "11e3d85acdc358736326f335de01f29f75f9e3a7424ac11fb849d653aaf3dbee"
     },
     {
       "seam": 3,
@@ -15182,13 +15460,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-3.json",
-        "record_sha256": "6286a1cfd649a1462320bb5fbf4fb195a57eb5af7ff8d89a990498c147a74dc6"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-10-29-pr47-seam-3.json",
+        "record_sha256": "be12bb7645728d529622bf54f3dacfe4585025e775ad469e956fdeafb3ef0d09"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "5d437827ad66f2e08b0018814c89fadc4d0faf045297aa0b5a9884fd28a7a3da"
+      "accepted_content_sha256": "313377fa1cfa8b34cb41012409831f092716550d852e149a4473232afcda9a17"
     },
     {
       "seam": 4,
@@ -15196,13 +15474,13 @@
       "status": "ACCEPTED",
       "reread": "Convergent whole C/A-B amendment review and acceptance are recorded in corpus/evidence/stage-c-derivation-2026-09-08.md.",
       "semantic_reviewer": "Owen Wassmer",
-      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#35 accepts this exact content.",
+      "acceptance_act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
       "acceptance_evidence": {
-        "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-4.json",
-        "record_sha256": "2d16631696cf1d02a94781f5493764064e81bfd08e2c88ffbb571986f4895d06"
+        "record_path": "corpus/evidence/stage-b-acceptance-2026-10-29-pr47-seam-4.json",
+        "record_sha256": "a2dc89e3cf654bd67549c67be226aeeb772a15f07f17206f49d281cbcc5d5856"
       },
       "semantic_acceptance": "ACCEPTED",
-      "accepted_content_sha256": "74b37798c5beb05ca5b4371d87dbab76d45cc97fb455c3d123246b8e57644696"
+      "accepted_content_sha256": "26233a8da1028d89ae1524056a44d13f8b94afe3d82e0b4262074329983b593a"
     }
   ]
 }
