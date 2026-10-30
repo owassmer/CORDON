@@ -3608,25 +3608,9 @@
     {
       "stable_provision_id": "IT-L10-2013:Art.7(2):monumental-tree-status",
       "provision_version_id": "IT-L10-2013:Art.7(2):monumental-tree-status:v2",
-      "operator": "AND",
+      "operator": "ATOM",
       "expression": {
-        "all_of": [
-          {
-            "any_of": [
-              {
-                "predicate": "a decree approving the elenco degli alberi monumentali d'Italia lists the tree, alone or in its row, alberata or homogeneous group, and was adopted on or before the event date"
-              },
-              {
-                "predicate": "the Region recognised the tree, alone or in its row or homogeneous group, as monumental on or before the event date"
-              }
-            ]
-          },
-          {
-            "not": {
-              "predicate": "a decree deleting the tree's entry from the elenco was published in the Gazzetta Ufficiale on or before the event date"
-            }
-          }
-        ]
+        "predicate": "the tree is monumental under Article 7 at the event date: the Region recognised it, alone or in its row or homogeneous group, on or before it, or a decree adopted on or before it lists it in the elenco degli alberi monumentali d'Italia; and no decree deleting its entry was published in the Gazzetta Ufficiale on or before it"
       },
       "true_effect": "The tree is a monumental tree under L. 10/2013 Article 7 at the event date: the Region has recognised it, or the elenco lists it, and no published decree has deleted it.",
       "false_effect": "The tree is not a monumental tree under L. 10/2013 Article 7 at the event date. A tree no held decree lists, or one a published decree has deleted, is not; a held instrument whose population or dates are not held leaves the result UNKNOWN."

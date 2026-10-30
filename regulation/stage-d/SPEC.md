@@ -851,10 +851,9 @@ where the decree page links no annex, its own pages headed "ALLEGATO A/B/C" are
 read. An annex ID absent from the sheet is the sheet entry with the same number
 and province whose coordinates, or comune and place, the annex row prints. Each
 decree carries its own date as the G.U. titles it, the protocol date MASAF names it
-by, and its G.U. publication date; an entry is in the list at the event date when
-its listing decree's dates are both on or before it and its deleting decree's are
-not, false when both lie after it (or both of the deletion before), and otherwise
-unknown, naming the decree: A decides when a decree takes effect. An entry no held
+by, and its G.U. publication date; an entry is in the list at the event date, as
+A's L. 10/2013 Art. 7 rows date it, from its listing decree's own date, until the
+G.U. publication of the decree that deletes it. An entry no held
 annex lists is unknown, never false. Its kind is the species cell's prefix
 ("Insieme omogeneo di", "Filare di", ...); a member count or extent is carried
 only as printed. The sheet's column "PROPOSTA DICHIARAZIONE NOTEVOLE INTERESSE
@@ -956,11 +955,12 @@ infected plant's `error_m` plus its own error of an in-reach positive or order
 plant) is a plant C considers; a monitored plant of its genus within both errors
 is listed beside it as possibly the same tree and admits nothing. For every plant,
 `instrument_facts` gives one fact per instrument: true where the plant is the
-listed or declared tree in force at the event date; false where no entry or
+listed or declared tree in force at the event date (a declaration from its decree's
+own date, as A's Art. 136 row counts it); false where no entry or
 declared tree of its genus lies within d (its error plus the entry's), naming the
 populations held; unknown where one may be the plant, where a declaration
-containing it is not read whole, or where a decree's dates straddle the event
-date. The register's fact is row 9's identity with its own cause.
+containing it is not read whole, or where a recognised tree no held source places
+may be the plant. The register's fact is row 9's identity with its own cause.
 
 From 20 September 2025 (L. 131/2025) the Region recognises a tree as monumental
 before a decree lists it (L. 10/2013 Art. 7(2)). Each act by which it approves a
@@ -973,10 +973,18 @@ against the count the act states), and the trees it deletes or rectifies. Where 
 Calibri run's font maps its glyphs to no letters, each glyph is read as the letter
 the same act's correctly mapped Calibri runs give it; a glyph none gives is `?` and
 counted. A recognised tree joins the national-list entry with its number,
-cadastral code and province; that entry's fact carries the acts and dates, and A
-decides which act and date bring a tree into the instrument. A recognised tree no
-held decree lists is named in the list fact's populations held: no held act prints
-its position.
+cadastral code and province; that entry's fact carries the acts and dates, and the
+entry is in the instrument from the earliest of its listing decree's date and its
+recognising act's date, never before 20 September 2025 for a recognition (A's
+rows); a Region's act deleting a tree from its own list does not delete it from the
+instrument. A recognised tree no held decree lists prints no position: it is placed
+by its comune, the one its ID's cadastral code names, with ISTAT's outline and its
+measured error along that comune's borders (the largest measured for any comune
+where none is measured there), and the genus its row prints, matched against the
+genera the held list prints (a glyph its text does not map matches any letter).
+From its act's date, the list fact of a plant of that genus, or of none recorded,
+within the outline plus the plant's error and the outline's is unknown, naming it:
+any such plant may be that tree.
 
 A published proposal of declaration (D.lgs. 42/2004 Arts 138-141; one made
 before 1 May 2004 under Art. 157(2)) is one record of
@@ -1070,6 +1078,16 @@ for each tree it attaches to. Passed lodgings at one moment anchor B's 45-day
 clock, and its end is reported (at different moments, none anchors it, and that
 is reported); elapsed time fills nothing. A record attached to a plant not asked
 about is listed with that plant, and a value asked about that is a monitoring
-reference, not a plant, is reported with the plants it names. The caller sets
-neither Art. 146(2) predicate, nor Union obligations, and passes Art. 33(1)'s
-measure, status and infection conjuncts only as their owning units supply them.
+reference, not a plant, is reported with the plants it names. A granted decision
+also dates the grant under Art. 146(4): its five years run from the decision's own
+day (a phytosanitary removal needs no building title), C's
+`authorization_efficacy_facts` counting B's two clocks; no commencement record
+reaches row 10, so in the year after the five years the result names that record.
+With no decision the efficacy row names one need, the decision's day. The plant's
+legal status is read from row 9's rows, the rows the caller already takes: the
+L.R. 14/2007 register through the identity row 9 decides and that entry's act
+chain as the rows carry it (C's `listing_facts`; "not a register tree" has no
+entry, "unknown" may have one), and each other instrument through row 9's fact,
+used only where row 9 read it at the evaluation date. The caller sets neither
+Art. 146(2) predicate, nor Union obligations, and passes Art. 33(1)'s measure
+and infection conjuncts only as their owning units supply them.

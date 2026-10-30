@@ -161,6 +161,13 @@ class TheRecordAsPrinted(unittest.TestCase):
         # The DDS 45/2023 hold reads the same field for a negative olive.
         self.assertEqual(self.conjunct(record(flag='Si'), identity=HOLD)[0] is not False, True)
 
+    def test_views_spelling_one_species_differently_agree(self):
+        # The positives' views print "OLIVO" (Positivi - Campioni) and "Olivo (Olea europaea)" (Olivo - Campioni).
+        self.assertEqual(protection.one_species(['OLIVO', 'Olivo (Olea europaea)', None, ' OLIVO ']), 'Olivo (Olea europaea)')
+        self.assertIsNone(protection.one_species(['OLIVO', 'MANDORLO']))
+        self.assertIsNone(protection.one_species(['Olivo (Olea europaea)', 'Olivo (Olea oleaster)']))
+        self.assertEqual(protection.one_species(['MANDORLO']), 'MANDORLO')
+
     def test_the_flag_is_kept_as_printed(self):
         self.assertEqual(record(flag='Si').flag, 'Si')
         self.assertEqual(record(flag='1').flag, '1')

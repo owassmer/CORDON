@@ -92,10 +92,13 @@ class Rules(unittest.TestCase):
         # A plant of the tree's genus within reach may be the declared tree: identity, never a definite false.
         plant = held(declared=[named]).facts(5.0, 0.0, 7.4, 'Quercus', date(2026, 10, 28))
         self.assertIsNone(plant[I.DECLARATION]['value'])
-        # Its decree is of 8 January 1973 and notified on 6 April 1973: between them A decides.
+        # Its decree is of 8 January 1973 and notified on 6 April 1973: A's Art. 136 row counts it from its decree.
         between = held(declared=[named]).facts(record.x, record.y, record.error_m, record.genus, date(1973, 2, 1),
                                                own=record)
-        self.assertIsNone(between[I.DECLARATION]['value'])
+        self.assertIs(between[I.DECLARATION]['value'], True)
+        before = held(declared=[named]).facts(record.x, record.y, record.error_m, record.genus, date(1973, 1, 7),
+                                              own=record)
+        self.assertIs(before[I.DECLARATION]['value'], False)
 
     def test_a_wood_with_a_few_specimens_names_no_tree(self):
         # PAE0083's motivation as its scheda prints it (from D.M. 31/08/1970), in part, verbatim.
@@ -147,12 +150,49 @@ class Rules(unittest.TestCase):
         gone = entry(deleted=DELETING)
         self.assertEqual(I.in_force(gone, date(2021, 1, 1))[0], True)
         self.assertEqual(I.in_force(gone, date(2022, 8, 5))[0], False)
-        # Between the deleting decree and its G.U. publication A decides when it takes effect.
-        self.assertIsNone(I.in_force(gone, date(2022, 8, 1))[0])
-        self.assertEqual(I.in_force(gone, date(2018, 1, 1))[0], False)
+        # A's Art. 7 rows: a deletion counts only from its decree's G.U. publication (26 July adopted, 5 August
+        # published), a listing from its decree's adoption (9 August adopted, 4 October published).
+        self.assertIs(I.in_force(gone, date(2022, 8, 1))[0], True)
+        self.assertIs(I.in_force(gone, date(2018, 9, 1))[0], True)
+        self.assertEqual(I.in_force(gone, date(2018, 8, 8))[0], False)
+
+    def test_a_genus_is_the_latin_one_a_printed_species_names(self):
+        # The monitoring views print a host as "Olivo (Olea europaea)", one view as "OLIVO"; the list as "Quercus ilex L.".
+        self.assertEqual([I._genus(s) for s in ('Olivo (Olea europaea)', 'Quercia (Quercus ilex)', 'Oleandro (Nerium Oleander)',
+                                                 'Quercus ilex L.', 'Insieme omogeneo di Quercus ilex', 'OLIVO', 'Olivo')],
+                         ['Olea', 'Quercus', 'Nerium', 'Quercus', 'Quercus', None, None])
+        # A monitored oak printed with its common name beside a listed oak within d is unknown, not false.
+        self.assertIsNone(held([entry(x=20.0)]).facts(0.0, 0.0, 7.4, I._genus('Quercia (Quercus ilex)'),
+                                                      date(2026, 10, 28))[I.NATIONAL]['value'])
 
     def test_an_entry_no_held_annex_lists_is_unknown_not_false(self):
         self.assertIsNone(I.in_force(entry(listed=None), date(2026, 10, 28))[0])
+
+    def test_a_tree_the_region_recognises_is_in_from_the_act_and_never_before_20_september_2025(self):
+        # An act adopted before L. 131/2025 took effect recognises from that day; a later one from its own adoption.
+        early = [{'act': 'DGR 1279/2025', 'adopted': '2025-09-11', 'published': '2025-09-22'}]
+        late = [{'act': 'DGR 1371/2026', 'adopted': '2026-10-13', 'published': '2026-10-26'}]
+        unlisted = entry(listed=None)
+        self.assertIs(I.in_force(unlisted, date(2025, 9, 19), early)[0], False)
+        self.assertIs(I.in_force(unlisted, date(2025, 9, 20), early)[0], True)
+        self.assertIs(I.in_force(unlisted, date(2026, 10, 12), late)[0], False)
+        self.assertIs(I.in_force(unlisted, date(2026, 10, 13), late)[0], True)
+        # A listed entry the Region recognised earlier counts from the earlier act.
+        self.assertIs(I.in_force(entry(listed=decree('3', date(2026, 7, 24), date(2026, 8, 7))), date(2026, 5, 1),
+                                 [{'act': 'DGR 444/2026', 'adopted': '2026-04-14'}])[0], True)
+
+    def test_a_recognised_tree_no_source_places_is_unknown_for_a_plant_of_its_genus_in_its_comune(self):
+        from shapely.geometry import box
+        state = held()
+        state.unplaced = [{'scheda': '002/Z999/LE/16', 'comune': 'Fixturia', 'genus': 'Quercus', 'row': 'Fixturia',
+                           'acts': ['DGR'], 'from': date(2026, 10, 13), 'geometry': box(0, 0, 1000, 1000),
+                           'boundary_error_m': 100.0, 'boundary_error': 'fixture'}]
+        self.assertIsNone(state.facts(500.0, 500.0, 7.4, 'Quercus', date(2026, 10, 28))[I.NATIONAL]['value'])
+        self.assertIsNone(state.facts(1050.0, 500.0, 7.4, None, date(2026, 10, 28))[I.NATIONAL]['value'])
+        # Another genus, outside the comune and its error, or before the act: false.
+        self.assertIs(state.facts(500.0, 500.0, 7.4, 'Olea', date(2026, 10, 28))[I.NATIONAL]['value'], False)
+        self.assertIs(state.facts(1200.0, 500.0, 7.4, 'Quercus', date(2026, 10, 28))[I.NATIONAL]['value'], False)
+        self.assertIs(state.facts(500.0, 500.0, 7.4, 'Quercus', date(2026, 10, 12))[I.NATIONAL]['value'], False)
 
     def test_a_plant_near_an_entry_of_another_genus_reads_false_and_of_its_genus_unknown(self):
         state = held([entry(x=20.0)])

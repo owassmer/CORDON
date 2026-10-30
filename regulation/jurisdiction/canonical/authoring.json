@@ -5556,16 +5556,7 @@
     "legal_linguistic_conflict": "-",
     "semantic_note": "The decrees approving and updating the elenco (D.D. 5450/2017 and its updates) state no date of effect: each is published in the Gazzetta Ufficiale and on the Ministry's site, and each comune posts its trees on the albo pretorio so that anyone may challenge the listing. A counts a listing from the decree's adoption and a deletion only from its publication in the Gazzetta Ufficiale: this reading cannot clear the removal of a listed tree, and the other costs at most a landscape application for a tree in the weeks between adoption and publication. Falsifier: a controlling reading that a listing or deletion takes effect on another date. [OWNER RULING 2026-10-29, 1] Article 33(1)'s first-paragraph derogation lifts Article 7's municipal authorization on the binding opinion (comma 4, from 20 September 2025 comma 5-quater), and with it the transitional protection Article 7(4) gives a tree from the proposal of its recognition: this row is a source of status only. A listed row, alberata or homogeneous group gives each of its trees status.",
     "condition_ast": {
-      "all_of": [
-        {
-          "predicate": "a decree approving the elenco degli alberi monumentali d'Italia lists the tree, alone or in its row, alberata or homogeneous group, and was adopted on or before the event date"
-        },
-        {
-          "not": {
-            "predicate": "a decree deleting the tree's entry from the elenco was published in the Gazzetta Ufficiale on or before the event date"
-          }
-        }
-      ]
+      "predicate": "the elenco degli alberi monumentali d'Italia holds the tree at the event date: a decree adopted on or before it lists the tree, alone or in its row, alberata or homogeneous group, and no decree deleting its entry was published in the Gazzetta Ufficiale on or before it"
     },
     "higher_authority_dependencies": [],
     "documentary_source_instrument_id": "IT-L10-2013",
@@ -5604,23 +5595,7 @@
     "legal_linguistic_conflict": "-",
     "semantic_note": "From 20 September 2025 Article 7(2) reads “La regione riconosce la monumentalità dell'albero. L'albero riconosciuto come monumentale è inserito nell'elenco”: the Region's recognition makes the tree monumental, and the elenco records it. The decrees approving and updating the elenco (D.D. 5450/2017 and its updates) state no date of effect: each is published in the Gazzetta Ufficiale and on the Ministry's site, and each comune posts its trees on the albo pretorio so that anyone may challenge the listing. A counts a listing from the decree's adoption and a deletion only from its publication in the Gazzetta Ufficiale: this reading cannot clear the removal of a listed tree, and the other costs at most a landscape application for a tree in the weeks between adoption and publication. Falsifier: a controlling reading that a listing or deletion takes effect on another date. [OWNER RULING 2026-10-29, 1] Article 33(1)'s first-paragraph derogation lifts Article 7's municipal authorization on the binding opinion (comma 4, from 20 September 2025 comma 5-quater), and with it the transitional protection Article 7(4) gives a tree from the proposal of its recognition: this row is a source of status only. A listed row, alberata or homogeneous group gives each of its trees status.",
     "condition_ast": {
-      "all_of": [
-        {
-          "any_of": [
-            {
-              "predicate": "a decree approving the elenco degli alberi monumentali d'Italia lists the tree, alone or in its row, alberata or homogeneous group, and was adopted on or before the event date"
-            },
-            {
-              "predicate": "the Region recognised the tree, alone or in its row or homogeneous group, as monumental on or before the event date"
-            }
-          ]
-        },
-        {
-          "not": {
-            "predicate": "a decree deleting the tree's entry from the elenco was published in the Gazzetta Ufficiale on or before the event date"
-          }
-        }
-      ]
+      "predicate": "the tree is monumental under Article 7 at the event date: the Region recognised it, alone or in its row or homogeneous group, on or before it, or a decree adopted on or before it lists it in the elenco degli alberi monumentali d'Italia; and no decree deleting its entry was published in the Gazzetta Ufficiale on or before it"
     },
     "higher_authority_dependencies": [],
     "documentary_source_instrument_id": "IT-L10-2013",

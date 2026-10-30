@@ -7,8 +7,8 @@ record with its position, species and positional error; its placement against th
 positives, as row 9 places register entries; and, for each plant, the instruments it is in at the event date
 (`instrument_facts`, the hook the coordinator's A rows read, one fact per instrument kind).
 
-A decides when a decree takes effect: D carries each decree's own date and its publication date and does not choose
-between them. A declaration gives a tree status only where its motivation names the tree; one that protects an area
+A dates a decree (its L. 10/2013 Art. 7 rows): a listing from the decree's own date, a deletion from its G.U.
+publication; from 20 September 2025 a tree is in from the Region's act recognising it. A declaration gives a tree status only where its motivation names the tree; one that protects an area
 gives none (Art. 33(1)'s first paragraph lifts that constraint; #37's ruling, #47's plan).
 """
 from __future__ import annotations
@@ -250,10 +250,14 @@ class ListEntry:
 
 
 def _genus(species: str | None) -> str | None:
+    """The Latin genus a printed species names: the binomial in parentheses where the name prints one ("Olivo (Olea
+    europaea)", as the monitoring views print a host), otherwise the leading word where a lower-case epithet follows it
+    ("Quercus ilex L.", as the list prints a species). A common name alone ("OLIVO", "Olivo") names no Latin genus:
+    None, which any genus may be."""
     if not species:
         return None
     name = re.sub(r'^\s*(insieme\s+omogeneo|filare|alberata|gruppo|viale)\s+(di|del|della|dei)\s+', '', species, flags=re.I)
-    found = re.match(r'\s*([A-Z][a-z]+)\b', name)
+    found = re.search(r'\(\s*([A-Z][a-z]+)\s+[A-Za-z×]', name) or re.match(r'\s*([A-Z][a-z]+)\s+(?:[a-z]|x\b|×)', name)
     return found.group(1) if found else None
 
 
@@ -346,30 +350,25 @@ def list_entries(store: Path, root: Path = REPOSITORY) -> tuple[list[ListEntry],
     return out, held, problems
 
 
-def in_force(entry: ListEntry, at: date) -> tuple[bool | None, str]:
-    """Whether an entry is in the version of the list in force at `at`. A decides whether a decree takes effect on
-    its own date or on its G.U. publication; where `at` falls between the two, D does not choose."""
-    if entry.listed_by is None:
-        return None, 'no held annex lists the entry, so the version that first holds it is not known'
-
-    def effect(decree: Decree | None) -> bool | None:
-        if decree is None:
-            return False
-        if decree.published <= at and decree.adopted <= at:
-            return True
-        if decree.published > at and decree.adopted > at:
-            return False
-        return None
-    on, off = effect(entry.listed_by), effect(entry.deleted_by)
-    if on is False:
-        return False, f'first listed by {entry.listed_by.name} (G.U. {entry.listed_by.published}), after the event date'
-    if off is True:
-        return False, f'deleted by {entry.deleted_by.name} (G.U. {entry.deleted_by.published}) before the event date'
-    if on is True and off is False:
-        return True, f'listed by {entry.listed_by.name} (G.U. {entry.listed_by.published}) and not deleted at the event date'
-    pending = [d for d, v in ((entry.listed_by, on), (entry.deleted_by, off)) if v is None]
-    return None, '; '.join(f'the event date falls between {d.name} and its G.U. publication of {d.published}: A '
-                           f'decides when the decree takes effect' for d in pending)
+def in_force(entry: ListEntry, at: date, recognised_by=()) -> tuple[bool | None, str]:
+    """Whether an entry is in the instrument at `at`, as A's L. 10/2013 Art. 7 rows date it: listed from the adoption
+    of the decree that lists it, or, from RECOGNISED_FROM, from the adoption of the Region's act recognising it
+    (`recognised_by`, the entry's acts as `recognised` gives them); deleted only from the G.U. publication of the
+    decree that deletes it. A Region's act deleting a tree from its own list does not delete it from the instrument."""
+    starts = [(entry.listed_by.adopted, f'listed by {entry.listed_by.name} (adopted {entry.listed_by.adopted})')
+              ] if entry.listed_by else []
+    starts += [(max(date.fromisoformat(a['adopted']), RECOGNISED_FROM), f"recognised by {a['act']} (adopted "
+                f"{a['adopted']}; from {RECOGNISED_FROM}, L. 10/2013 Art. 7(2))") for a in recognised_by if a.get('adopted')]
+    if not starts:
+        return None, 'no held annex lists the entry and no held act of the Region recognises it'
+    start, how = min(starts)
+    if start > at:
+        return False, f'{how}, after the event date'
+    gone = entry.deleted_by
+    if gone and gone.published <= at:
+        return False, f'deleted by {gone.name} (G.U. {gone.published}) before the event date'
+    return True, f'{how}, and not deleted at the event date' + (
+        f' ({gone.name} deletes it from its G.U. publication of {gone.published})' if gone else '')
 
 
 # --- the national list's positional error ---------------------------------------------------------------------
@@ -1404,6 +1403,38 @@ def recognised(acts: list[Recognition], entries: list[ListEntry]) -> dict[str, l
     return out
 
 
+def unplaced_recognised(trees: dict, genera: set[str], root: Path = REPOSITORY) -> list[dict]:
+    """Each recognised tree no held decree lists (`recognised`'s, with no national entry): its comune, read from the
+    cadastral code of its ID, with that comune's ISTAT outline; the genus its row prints, matched against the genera
+    the held list prints (a glyph the act's text does not map, '?', matches any letter), or None; and the day it
+    enters the instrument (A's: the recognising act's adoption, from RECOGNISED_FROM). The outline's error is ISTAT's
+    measured bound along that comune's borders (its larger direction's 95th percentile), or, where none is measured
+    there, the largest measured for any comune, named as such."""
+    from cordon_d.administrative import AdministrativeUnits, records
+    measured = {c['comune']: max(d['p95'] for d in (c['istat_to_cadastre'], c['cadastre_to_istat']) if d)
+                for r in records(root, 'positional-error') if r['source'] == 'istat-boundaries' for c in r['comuni']
+                if c['istat_to_cadastre'] or c['cadastre_to_istat']}
+    out, units = [], None
+    for scheda, acts in trees.items():
+        if acts[0]['national_entry']:
+            continue
+        units = units or AdministrativeUnits(root)
+        code = re.sub(r'\s+', '', scheda).split('/')[1]
+        comune = units.comune(catastale=code)
+        row = acts[-1]['row']
+        words = re.findall(r"[A-Za-z?]+", row)
+        genus = next((g for w in words for g in sorted(genera) if len(w) == len(g)
+                      and re.fullmatch(re.escape(w).replace(r'\?', '.'), g)), None)
+        adopted = min(date.fromisoformat(a['adopted']) for a in acts if a.get('adopted'))
+        out.append({'scheda': scheda, 'comune': comune.name if comune else None,
+                    'geometry': units.comune_geometry(comune) if comune else None, 'genus': genus, 'row': row,
+                    'acts': [a['act'] for a in acts], 'from': max(adopted, RECOGNISED_FROM),
+                    'boundary_error_m': measured.get(code, max(measured.values(), default=0.0)),
+                    'boundary_error': ('ISTAT measured along its borders' if code in measured else
+                                       'no ISTAT error measured there: the largest measured for any comune')})
+    return out
+
+
 # --- proposals of declaration (D.lgs. 42/2004 Arts 138-141; Art. 157(2) for those made before 1 May 2004) --------
 
 PROPOSAL = 'D.lgs. 42/2004 Arts 139, 141: published proposal of declaration naming the tree'
@@ -1662,6 +1693,9 @@ class Instruments:
         recognised_trees = recognised_trees or {}
         self.recognised = {acts[0]['national_entry']: acts for acts in recognised_trees.values()
                            if acts[0]['national_entry']}
+        # A recognised tree no held decree lists: placed only by its comune (its ID's cadastral code), with the genus
+        # its row prints, or none where the row's genus is not read.
+        self.unplaced = unplaced_recognised(recognised_trees, {e.genus for e in entries} - {None})
         unlisted = [f"{scheda} ({acts[-1]['row'].split(' (')[0].strip()})" for scheda, acts in recognised_trees.items()
                     if not acts[0]['national_entry']]
         if unlisted:
@@ -1691,23 +1725,36 @@ def instrument_facts(held: Instruments, x: float, y: float, error_m: float, genu
     True: the plant is the listed or declared tree and the instrument holds it at `at`. False: no entry or
     declared tree of the plant's genus lies within d, or each that does is not in force at `at`; the populations
     held are named. None: a listed or declared tree within d may be the plant (identity, its own cause), a
-    declaration containing the plant is not read whole, or `at` falls between a decree and its publication
-    (A's). The proposal fact is true where a held proposal names the plant's tree, with the dates C's row reads (D
+    declaration containing the plant is not read whole, or a recognised tree no held source places may be the
+    plant. The proposal fact is true where a held proposal names the plant's tree, with the dates C's row reads (D
     does not decide whether its effect runs at `at`); false where no held proposal names a tree within d; unknown
     where a proposed tree within d may be the plant, or a proposal naming a tree, or not read whole, has no plan held
     that places it. The L.R. 14/2007 register keeps row 9's identity and act chain, passed in `register`."""
     from shapely.geometry import Point
     facts = {}
     if own is not None and own.instrument == NATIONAL:
-        value, why = in_force(own.entry, at)
+        value, why = in_force(own.entry, at, held.recognised.get(own.plant, ()))
         facts[NATIONAL] = {'value': value, 'entries': [own.plant], 'cause': why,
                            'recognised_by': held.recognised.get(own.plant, [])}
     else:
         d = round(error_m + held.bound.error_m, 2)
         near = [] if held.tree is None else [held.located[i] for i in held.tree.query_ball_point([x, y], d)]
         near = [e for e in near if genus is None or e.genus is None or e.genus == genus]
-        live = [(e, round(((e.x - x) ** 2 + (e.y - y) ** 2) ** 0.5, 2), in_force(e, at)) for e in near]
-        if all(v[0] is False for *_, v in live):
+        live = [(e, round(((e.x - x) ** 2 + (e.y - y) ** 2) ** 0.5, 2), in_force(e, at, held.recognised.get(e.scheda, ())))
+                for e in near]
+        # A recognised tree no held source places may be any plant of its genus in its comune.
+        point = Point(x, y)
+        loose = [u for u in held.unplaced if u['from'] <= at and u['geometry'] is not None
+                 and u['geometry'].distance(point) <= error_m + u['boundary_error_m']
+                 and (genus is None or u['genus'] is None or u['genus'] == genus)]
+        if loose:
+            facts[NATIONAL] = {'value': None, 'entries': [{k: u[k] for k in ('scheda', 'comune', 'genus', 'row', 'acts',
+                                                                             'boundary_error_m', 'boundary_error')}
+                                                          for u in loose],
+                               'cause': 'identity: the plant lies in the comune of a tree the Region recognised, of its '
+                                        'genus or one not read, which no held source places: '
+                                        + '; '.join(f"{u['scheda']} ({u['comune']})" for u in loose)}
+        elif all(v[0] is False for *_, v in live):
             facts[NATIONAL] = {'value': False, 'entries': [], 'cause': (
                 f'no entry of the list of its genus lies within d = {d} m' if not live else
                 'each entry within d is not in the list in force at the event date: '
@@ -1719,14 +1766,14 @@ def instrument_facts(held: Instruments, x: float, y: float, error_m: float, genu
                                                   'names it'}
     facts[NATIONAL]['held'] = held.list_held
     if own is not None and own.instrument == DECLARATION:
-        # A decides whether a declaration takes effect on its decree's date or on its publication or notification.
-        dates = (own.declaration.adopted(), own.declaration.published())
-        value = True if all(d and d <= at for d in dates) else False if all(d and d > at for d in dates) else None
+        # A's Art. 136 row counts a declaration from its decree's own date (its notification and publication make it
+        # known; the proposal's effect already ran).
+        adopted = own.declaration.adopted()
+        value = None if adopted is None else adopted <= at
         named = f'the declaration names the tree ("{own.declaration.cite}"); its decree is dated ' \
                 f'{own.declaration.decree_date}, {own.declaration.publication}'
         facts[DECLARATION] = {'value': value, 'declarations': [own.plant], 'cause': named if value is not None else (
-            named + ': a date is not printed, or the event date falls between them, and A decides when it takes '
-                    'effect')}
+            named + ': the decree\'s date is not printed')}
     else:
         point = Point(x, y)
         naming, unread, areas = [], [], []

@@ -1382,6 +1382,19 @@ def order_points(store: Path, root: Path = REPOSITORY) -> list[tuple[str, float,
     return points
 
 
+def one_species(printed) -> str | None:
+    """The one species a plant's views print: the views agree where each prints the same common name, case aside,
+    before any parenthesised Latin name ("OLIVO" and "Olivo (Olea europaea)"); the form printing a Latin name is
+    kept. Views naming different species, or different Latin names, give None."""
+    names = {n.strip() for n in printed if n and n.strip()}
+    if len({n.split('(')[0].strip().casefold() for n in names}) != 1:
+        return None
+    latin = {n for n in names if '(' in n}
+    if len({n.split('(', 1)[1].strip(' )').casefold() for n in latin}) > 1:
+        return None
+    return max(latin or names, key=len)
+
+
 @dataclass(frozen=True)
 class Plant:
     plant: str
@@ -1432,8 +1445,7 @@ def affected_plants(store: Path, decision: date, reach_start: date, root: Path =
         return next(iter(names)) if len(names) == 1 else None
 
     def species(*groups):
-        names = {n.strip() for g in groups for n in g.values('species') if n and n.strip()}
-        return next(iter(names)) if len(names) == 1 else None
+        return one_species(n for g in groups for n in g.values('species'))
 
     plants = []
     in_reach = [(g, p) for g, p in positives if g.day and g.day >= reach_start]
@@ -1508,10 +1520,9 @@ def zone_negatives(negatives, infected: list[Plant], decision: date, terms, prin
                                                                     event_date=decision, terms=terms))
         near = tree.query_ball_point([point.geometry.x, point.geometry.y], 50.0 + point.error_m + max(p.error_m for p in infected))
         if near:
-            names = {n.strip() for n in group.values('species') if n and n.strip()}
             found.append(Plant(group.reference or '|'.join(group.identity[1:]), 'negative olive', point.geometry.x,
                                point.geometry.y, point.error_m, None, monitoring_record([group], printing),
-                               species=next(iter(names)) if len(names) == 1 else None))
+                               species=one_species(group.values('species'))))
     return found
 
 

@@ -28,6 +28,7 @@ from zoneinfo import ZoneInfo
 
 from cordon_c.core import Snapshot, evaluate
 from cordon_d import landscape, protection
+from cordon_d.instruments import DECLARATION, NATIONAL, PROPOSAL
 from cordon_d.calendar import national_calendar
 from cordon_d.case_prescriptions import supplied_records
 from cordon_d.landscape import (APPLICATION, DECISION, GRANTED, NOT_SUPPLIED, OPINION, RECEIVED, ROUTE, RULE, UNION,
@@ -48,9 +49,18 @@ NEED = {
     'grant': f'predicate: {V33} :: the required landscape authorization has been granted',
     'union': f'predicate: {V33} :: removal complies with applicable Union obligations',
     'measure': f'predicate: {V33} :: a valid measure requires plant removal in the exact demarcated area',
-    'status': f'predicate: {V33} :: the plant has monumental or historic-interest legal status',
     'infection': f'predicate: {V33} :: infection is currently established in the plant',
+    'efficacy': landscape.EFFICACY_NEED,
 }
+EFFICACY_V = 'IT-DLGS42-A146:Art.146(4):authorization-efficacy:v1'
+FIVE_YEARS = ('the event date falls within the five years of efficacy that run from the day the landscape authorization '
+              'for the removal took effect')
+LISTED_V1 = ("the elenco degli alberi monumentali d'Italia holds the tree at the event date: a decree adopted on or before "
+             "it lists the tree, alone or in its row, alberata or homogeneous group, and no decree deleting its entry was "
+             "published in the Gazzetta Ufficiale on or before it")
+# What C needs of the L.R. 14/2007 register for a plant whose row 9 identity is unknown: whether it has its own entry.
+LISTING_UNKNOWN = {'whether the tree has its own list entry', "the Giunta's definitive decision on the entry and its BURP "
+                   "publication date", "the entry's deletion act and date"}
 EDGE = 'complete landscape application submitted'
 ROUTE_NEED = ('predicate: IT-DLGS42-A146:Art.146(5):regional-decision-owner:v1 :: the applicable '
               'superintendent-opinion route is resolved')
@@ -99,8 +109,20 @@ def pr30_rows():
                          point=dict(x=x, y=y, crs='EPSG:32633', error_m=ERROR_M), observations=observations,
                          codes=[dict(code=c.code, entry=c.entry, cause=c.cause) for c in named],
                          candidates={'not a register tree': True, 'identity': cand.identity, 'rule': cand.rule,
-                                     'entries': [dict(entry=e, distance_m=dm, d_m=d) for e, dm, d in cand.entries]}))
-    return dict(plants=rows, zone_entries=[])
+                                     'entries': [dict(entry=e, distance_m=dm, d_m=d) for e, dm, d in cand.entries]},
+                         status=INSTRUMENTS_NONE))
+    # The register entries A and B are and D's candidate, each listed provisionally and definitively, as the rows carry
+    # an entry's acts.
+    return dict(plants=rows, zone_entries=[dict(entry=e, acts=LISTED, qualification=dict(error_m=BOUND.error_m))
+                                         for e in ('990001', '990002', '990005')],
+                instruments=dict(at=AT.isoformat()))
+
+
+# FIXTURE values: row 9's fact for each instrument other than the register, at AT, for every fixture plant: none holds it.
+INSTRUMENTS_NONE = {kind: dict(value=False, cause='FIXTURE: no held entry, declaration or proposal names it')
+                    for kind in (NATIONAL, DECLARATION, PROPOSAL)}
+LISTED = dict(provisional=dict(act='FIXTURE DGR 1/2013', published='2013-03-01'),
+              definitive=dict(act='FIXTURE DGR 2/2014', published='2014-04-01'), deletion=None, history_complete=True)
 
 
 def record(name, kind, plants, occurred, **fields):
@@ -155,7 +177,7 @@ def need(item):
 
 
 # The owning units' values for Art. 33(1)'s three upstream conjuncts (FIXTURES).
-SETTLED = {UPSTREAM[0]: True, UPSTREAM[1]: True, UPSTREAM[2]: False}
+SETTLED = {UPSTREAM[0]: True, UPSTREAM[1]: False}
 
 
 class LandscapeRecords(unittest.TestCase):
@@ -187,16 +209,22 @@ class LandscapeRecords(unittest.TestCase):
 
     def test_a_plant_with_no_record_gets_Cs_unknown_with_the_probed_needs(self):
         run = self.run_caller([])
-        for plant in (A, B, C, D):
+        # A and B are register entries listed definitively (row 9's rows): their status is settled.
+        for plant in (A, B):
             result = run['plants'][plant]['results'][RULE]
             self.assertIsNone(result.truth)
             self.assertEqual(result.needs, set(NEED.values()))
+        # C is not a register tree and no other instrument holds it: the paragraph does not reach it.
+        self.assertIs(run['plants'][C]['results'][RULE].truth, False)
+        # D's identity is unknown: whether it has its own register entry is C's need too.
+        self.assertEqual(run['plants'][D]['results'][RULE].needs, set(NEED.values()) | LISTING_UNKNOWN)
         result, _ = self.art33([])
         self.assertIsNone(result.truth)
-        self.assertEqual(result.needs, {NEED['grant'], NEED['union']})
+        self.assertEqual(result.needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
         # An upstream conjunct not supplied adds its need as C lists it.
-        partial = self.run_caller([], upstream={A: {UPSTREAM[0]: True, UPSTREAM[2]: False}})
-        self.assertEqual(partial['plants'][A]['results'][RULE].needs, {NEED['grant'], NEED['union'], NEED['status']})
+        partial = self.run_caller([], upstream={A: {UPSTREAM[0]: True}})
+        self.assertEqual(partial['plants'][A]['results'][RULE].needs,
+                         {NEED['grant'], NEED['union'], NEED['efficacy'], NEED['infection']})
         self.assertEqual((run['unattached'], run['elsewhere'], run['ungranted']), ([], [], []))
         self.assertIn(UNION, run['not_supplied'])
         self.assertIn(APPLICATION, run['not_supplied'])
@@ -229,14 +257,43 @@ class LandscapeRecords(unittest.TestCase):
                 # From the decision's date: the day before, the grant is still C's need.
                 before, _ = self.art33([decision('d-1', on(sample(A)), outcome, conditions=conditions)],
                                        at=date(2025, 8, 19))
-                self.assertEqual(before.needs, {NEED['grant'], NEED['union']})
+                self.assertEqual(before.needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
                 # What the caller passed, with the Union value no D reader supplies, opens C's route.
-                facts = {(V33, p): v for p, v in plant['facts'][RULE].items()} | {(V33, UNION): True}
+                facts = {(V33, p): v for p, v in plant['facts'][RULE].items()} | {
+                    (vid, p): v for vid, held in plant['referenced_facts'].items() for p, v in held.items()} | {
+                    (V33, UNION): True}
                 self.assertEqual(evaluate(self.s, RULE, AT, facts).effect, self.s.versions[V33]['true_effect'])
         # An issuer the record does not print is carried as null; D judges no competence either way.
         _, run = self.art33([decision('d-1', on(sample(A)), issuer=None)])
         self.assertIsNone(run['plants'][A]['decision']['issuer'])
         self.assertIs(run['plants'][A]['facts'][RULE][GRANTED], True)
+
+    def test_a_grant_counts_while_in_effect_under_article_146_4(self):
+        # Five years from the decision's own day; in the year after, only for works begun within them, which no record
+        # reaching row 10 states; after that, the grant no longer counts.
+        within, _ = self.art33([decision('d-1', on(sample(A)), occurred=date(2021, 9, 1))], at=date(2026, 9, 1))
+        self.assertEqual(within.needs, {NEED['union']})
+        following, run = self.art33([decision('d-1', on(sample(A)), occurred=date(2021, 9, 1))], at=date(2026, 9, 2))
+        self.assertEqual((following.truth, following.needs),
+                         (None, {NEED['union'], 'the record of the day the removal works began'}))
+        self.assertEqual(run['plants'][A]['referenced_facts'][EFFICACY_V][FIVE_YEARS], False)
+        expired, _ = self.art33([decision('d-1', on(sample(A)), occurred=date(2021, 9, 1))], at=date(2027, 9, 2))
+        self.assertIs(expired.truth, False)
+
+    def test_legal_status_is_any_instruments_and_row_9s_facts_count_only_at_their_own_date(self):
+        rows = copy.deepcopy(self.rows)
+        held = next(p for p in rows['plants'] if p['plant'] == C)
+        held['status'] = dict(INSTRUMENTS_NONE, **{NATIONAL: dict(value=True, cause='FIXTURE: the listed tree')})
+        options = dict(evaluated_at=CUTOFF, permitted_controlled_sources=GRANT, rows=rows, register=REGISTER, zone=ROME,
+                       calendar=national_calendar(), upstream={C: SETTLED})
+        # C is not a register tree; row 9 holds it in the national list at AT: its status is settled.
+        run = landscape_results(self.s, AT, [C], [decision('d-1', on(sample(C)))], **options)
+        self.assertEqual(run['plants'][C]['results'][RULE].needs, {NEED['union']})
+        # Row 9 read its facts at AT; at another date they are not used, and its status is open.
+        other = landscape_results(self.s, date(2025, 9, 15), [C], [decision('d-1', on(sample(C)))], **options)
+        result = other['plants'][C]['results'][RULE]
+        self.assertIsNone(result.truth)
+        self.assertIn(f'predicate: IT-L10-2013:Art.7(2):monumental-tree-status:v1 :: {LISTED_V1}', result.needs)
 
     def test_a_denial_makes_it_false(self):
         for settled in (True, False):
@@ -246,7 +303,7 @@ class LandscapeRecords(unittest.TestCase):
 
     def test_a_same_day_grant_and_denial_supply_nothing(self):
         result, run = self.art33([decision('d-1', on(sample(A))), decision('d-2', on(sample(A)), 'denied')])
-        self.assertEqual(result.needs, {NEED['grant'], NEED['union']})
+        self.assertEqual(result.needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
         self.assertNotIn(GRANTED, run['plants'][A]['facts'][RULE])
         self.assertIsNone(run['plants'][A]['decision'])
         self.assertEqual(run['plants'][A]['reported'], [dict(
@@ -254,7 +311,7 @@ class LandscapeRecords(unittest.TestCase):
         # Who decided is reported beside the result: one day's decisions printing different issuers supply nothing.
         result, _ = self.art33([decision('d-1', on(sample(A))),
                                 decision('d-2', on(sample(A)), issuer='Comune (FIXTURE)')])
-        self.assertEqual(result.needs, {NEED['grant'], NEED['union']})
+        self.assertEqual(result.needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
         # A later day's decision decides.
         later, _ = self.art33([decision('d-1', on(sample(A))), decision('d-2', on(sample(A)), 'denied',
                                                                           occurred=date(2025, 8, 25))])
@@ -270,7 +327,7 @@ class LandscapeRecords(unittest.TestCase):
             with self.subTest(name):
                 result, run = self.art33(supplied)
                 self.assertIsNone(result.truth)
-                self.assertEqual(result.needs, {NEED['grant'], NEED['union']})
+                self.assertEqual(result.needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
                 self.assertNotIn(GRANTED, run['plants'][A]['facts'][RULE])
         _, run = self.art33([decision('d-1', on(sample(A)), kind='replanting-only')])
         self.assertIn('not this removal; it fills nothing', run['plants'][A]['reported'][0]['cause'])
@@ -369,7 +426,7 @@ class LandscapeRecords(unittest.TestCase):
                 result, run = self.art33([decision('d-1', [printed])], plant=D)
                 self.assertEqual(run['unattached'], [])
                 self.assertEqual(run['plants'][D]['records'], ['d-1'])
-                self.assertEqual(result.needs, {NEED['union']})
+                self.assertEqual(result.needs, {NEED['union']} | (LISTING_UNKNOWN if identity == 'unknown' else set()))
                 self.assertEqual(run['plants'][D]['identity'], dict(
                     identity=identity, references=[D], candidates=['990005'] if identity == 'unknown' else []))
                 self.assertEqual(run['plants'][D]['reported'], [] if identity != 'unknown' else [dict(
@@ -408,7 +465,7 @@ class LandscapeRecords(unittest.TestCase):
                 self.assertEqual(self.causes(run), [('d-1', 1, 'identity undecided')])
                 self.assertEqual(run['unattached'][0]['detail'], [
                     f'entry 990005 is no plant\'s row 9 identity; it is a candidate of the "unknown" plants {[D]}'])
-                self.assertEqual(result.needs, {NEED['grant'], NEED['union']})
+                self.assertEqual(result.needs, {NEED['grant'], NEED['union'], NEED['efficacy']} | LISTING_UNKNOWN)
         # A register entry that is not among its candidates names another monumental tree, held as a plant or not:
         # a conflict, named with its distance.
         run = self.run_caller([decision('d-1', on(sample(D), tag('0990404')))])
@@ -580,7 +637,7 @@ class LandscapeRecords(unittest.TestCase):
         plant = run['plants'][A]
         self.assertEqual(plant['due'], DUE)
         self.assertGreater(AT, DUE.date())
-        self.assertEqual(plant['results'][RULE].needs, {NEED['grant'], NEED['union']})
+        self.assertEqual(plant['results'][RULE].needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
         self.assertIsNone(self.run_caller([])['plants'][A]['due'])
         # Lodgings at two moments: the caller anchors neither.
         two = self.run_caller([lodging('l-1', on(sample(A)), None),
@@ -609,7 +666,7 @@ class LandscapeRecords(unittest.TestCase):
         self.assertEqual(granted['plants'][A]['due'], without['plants'][A]['due'])
         for plant in (B, C, D):
             self.assertEqual(granted['plants'][plant], without['plants'][plant])
-        self.assertEqual(without['plants'][A]['results'][RULE].needs, {NEED['grant'], NEED['union']})
+        self.assertEqual(without['plants'][A]['results'][RULE].needs, {NEED['grant'], NEED['union'], NEED['efficacy']})
         self.assertEqual(granted['plants'][A]['results'][RULE].needs, {NEED['union']})
 
     def test_records_dated_after_the_evaluation_date_are_reported_not_passed(self):
@@ -767,12 +824,13 @@ class LandscapeRecords(unittest.TestCase):
         out = read_landscape.results(self.s, run, [A, C], supplied, self.rows, REGISTER)
         json.dumps(out)
         a = out['plants'][A]
-        self.assertEqual(a['results'][RULE]['needs'], sorted(set(NEED.values()) - {NEED['grant']}))
+        self.assertEqual(a['results'][RULE]['needs'], sorted(set(NEED.values()) - {NEED['grant'], NEED['efficacy']}))
         self.assertIsNone(a['results'][RULE]['truth'])
         self.assertEqual((a['decision']['occurred'], a['decision']['conditions'], a['decision']['issuer'], a['due']),
                          (DECIDED.isoformat(), ['Reimpianto entro 90 giorni.'], AUTHORITY, DUE.isoformat()))
         self.assertEqual((a['lodgings'][0]['recipient'], a['receipts'][0]['recipient']), (AUTHORITY, SUPERINTENDENT))
-        self.assertEqual(out['plants'][C]['results'][RULE]['needs'], sorted(NEED.values()))
+        # C is not a register tree and no other instrument holds it: the paragraph does not reach it.
+        self.assertIs(out['plants'][C]['results'][RULE]['truth'], False)
         self.assertEqual([(u['record'], u['cause']) for u in out['unattached']], [('d-cod', 'several matches')])
         self.assertEqual(out['elsewhere'], [dict(record='d-g', kind='landscape-decision', occurred=DECIDED.isoformat(),
                                                  plant=G)])
