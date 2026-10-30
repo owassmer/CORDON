@@ -1438,8 +1438,9 @@ def unplaced_recognised(trees: dict, genera: set[str], root: Path = REPOSITORY) 
 # --- proposals of declaration (D.lgs. 42/2004 Arts 138-141; Art. 157(2) for those made before 1 May 2004) --------
 
 PROPOSAL = 'D.lgs. 42/2004 Arts 139, 141: published proposal of declaration naming the tree'
-PROPOSERS = {'region': 'the Region, on its commission\'s proposal (Arts 137, 138(1); before 2004 the provincial '
-                       'commission, Art. 157(2))', 'ministry': 'a Soprintendente (Arts 138(3), 141(1))'}
+PROPOSERS = {'region': 'the Region, on its commission\'s proposal (D.lgs. 42/2004 Arts 137, 138(1); before 2004 the '
+                       'provincial commission, under Article 157(2))', 'ministry': 'a Soprintendente (D.lgs. 42/2004 Arts '
+                       '138(3), 141(1))'}
 _PRINTED_DATE = re.compile(r"(\d{1,2})\s*[/.-]\s*(\d{1,2})\s*[/.-]\s*(\d{4})|(\d{1,2})\s*[°º]?\s+(" + '|'.join(_MONTHS) + r")\s+(\d{4})",
                            re.I)
 
@@ -1696,21 +1697,20 @@ class Instruments:
         # A recognised tree no held decree lists: placed only by its comune (its ID's cadastral code), with the genus
         # its row prints, or none where the row's genus is not read.
         self.unplaced = unplaced_recognised(recognised_trees, {e.genus for e in entries} - {None})
-        unlisted = [f"{scheda} ({acts[-1]['row'].split(' (')[0].strip()})" for scheda, acts in recognised_trees.items()
-                    if not acts[0]['national_entry']]
+        unlisted = [scheda for scheda, acts in recognised_trees.items() if not acts[0]['national_entry']]
         if unlisted:
-            self.list_held += ('; recognised by the Region and on no held decree, placed by no held source: '
-                               + ', '.join(unlisted))
+            self.list_held += (f'; {len(unlisted)} trees the Region recognised are on no held decree and placed by no '
+                               'held source (instruments.recognitions.trees)')
         self.declarations_held = (f'{len(declared)} declarations printed by {len(pptr_versions)} PPTR versions, '
                                   f"the latest {pptr_versions[0]['version']} (instruments.declarations)"
                                   if pptr_versions else 'no PPTR version held')
         self.proposed = list(proposed)
         self.proposed_trees = declared_plants(self.proposed, PROPOSAL)
         unreached = routes_unreached(proposal_routes or {})
-        self.proposals_held = (f'{len(self.proposed)} published proposals of declaration held ('
-                               + '; '.join(f'{p.code}: {p.reading}' for p in self.proposed) + ') from the routes of '
-                               f'{SOURCES}/proposals.json (instruments.proposals)'
-                               + ('; not reached: ' + ' | '.join(unreached) if unreached else ''))
+        self.proposals_held = (f'{len(self.proposed)} published proposals of declaration held '
+                               f'(instruments.proposals.proposals)' + (
+                                   f'; {len(unreached)} routes not reached (instruments.proposals.not_reached)'
+                                   if unreached else ''))
 
     def facts(self, x: float, y: float, error_m: float, genus: str | None, at: date, *,
               own: InstrumentPlant | None = None, register: dict | None = None) -> dict[str, dict]:
