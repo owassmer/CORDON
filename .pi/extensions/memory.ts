@@ -261,7 +261,6 @@ export function parseEdits(text: string): Edit[] {
 
 /** The frame the coordinator is working from now: the last one written, with where it was written. */
 const FRAME = "frame";
-const FRAME_IN_VIEW = "frame-in-view";
 export function currentFrame(entries: Entry[]): { piece: string; text: string; at: number } | null {
   for (let i = entries.length - 1; i >= 0; i--) {
     const e = entries[i]!;
@@ -455,24 +454,6 @@ export default function memory(pi: ExtensionAPI) {
       const text = [...want].sort((a, b) => a - b).map((k) => `[${all[k]!.id}] ${all[k]!.who.toUpperCase()} ${all[k]!.at.slice(0, 16)}\n${all[k]!.text}`).join("\n\n");
       return { content: [{ type: "text", text: text || "No exchange with those ids." }], details: {} };
     },
-  });
-
-  // The frame in view: once the tool output since it last appeared passes this size, it is added again after the
-  // current calls, as a message of the transcript.
-  const FRAME_EVERY_CHARS = 120_000;
-  let framePending = false;
-  pi.on("turn_end", async (_event, ctx) => {
-    const branch = ctx.sessionManager.getBranch() as Entry[];
-    const f = currentFrame(branch);
-    if (!f) return;
-    let last = f.at;
-    branch.forEach((e, i) => { if ((e as any).type === "custom_message" && (e as any).customType === FRAME_IN_VIEW && i > last) last = i; });
-    if (framePending && last > f.at) framePending = false;
-    if (framePending) return;
-    const since = branch.slice(last + 1).reduce((n, e) => n + (e.type === "message" && e.message?.role === "toolResult" ? JSON.stringify(e.message.content ?? "").length : 0), 0);
-    if (since < FRAME_EVERY_CHARS) return;
-    framePending = true;
-    pi.sendMessage({ customType: FRAME_IN_VIEW, content: `The frame you are working from (${f.piece}); write it again with the frame tool when it no longer holds:\n${f.text}`, display: false }, { deliverAs: "steer" });
   });
 
   // Prune: tool output older than the last few exchanges with Owen leaves the context.
