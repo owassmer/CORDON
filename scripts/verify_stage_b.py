@@ -17,7 +17,7 @@ ANCHOR = {'legal_state': {'kind', 'producer_stable_provision_id', 'effect', 'obj
           'resettable_period': {'kind', 'scope', 'start_event', 'reset_event', 'basis'}}
 OWNERS = {'MEMBER_STATE_CONCERNED', 'MEMBER_STATES', 'COMPETENT_AUTHORITY', 'CENTRAL_PLANT_HEALTH_SERVICE', 'NATIONAL_PLANT_HEALTH_COMMITTEE', 'LANDSCAPE_AUTHORITY_REGION',
           'RESEARCH_LABORATORY', 'SELF_CONTROL_LABORATORY', 'OFFICIAL_LABORATORY', 'REGIONAL_PLANT_HEALTH_SERVICE', 'ARIF', 'OWNER_OR_HOLDER',
-          'INNOVAPUGLIA', 'OFFICIAL_SAMPLE_CUSTODIAN'}
+          'INNOVAPUGLIA', 'OFFICIAL_SAMPLE_CUSTODIAN', 'COMUNE', 'MINISTRY_OF_CULTURE', 'OBSERVATION_SUBMITTERS'}
 # the ruled silence narrowing: a stated post-silence period may run, but only against a recipient the act reached
 EFFECTIVENESS = 'ACT_EFFECTIVE_AGAINST_RECIPIENT'
 # corrected aperture (Owen 2026-09-02): an exclusion may never rest on the absence of a held instance
@@ -40,7 +40,8 @@ NUMBER = r'\d+(?:[.,]\d+)?'
 MONTHS = ('january gennaio', 'february febbraio', 'march marzo', 'april aprile', 'may maggio', 'june giugno',
           'july luglio', 'august agosto', 'september settembre', 'october ottobre', 'november novembre', 'december dicembre')
 NUMBER_WORDS = {'one': '1', 'first': '1', 'two': '2', 'four': '4', 'five': '5', 'un': '1', 'uno': '1',
-                'due': '2', 'tre': '3', 'cinque': '5', 'quindici': '15', 'quarantacinque': '45'}
+                'due': '2', 'tre': '3', 'cinque': '5', 'quindici': '15', 'trenta': '30', 'quarantacinque': '45',
+                'sessanta': '60', 'novanta': '90'}
 def decimal(text): return Decimal(text.replace(',', '.'))
 def labelled_value(text, pattern, value, scale=1):
     found = re.search(pattern, text)
@@ -116,10 +117,11 @@ def clock_value_matches(clock, unit_words=None):
     B's `clock.unit_words` convention owns the unit words it maps; the lists below
     hold only the other words fixed clocks' phrases print.
     """
-    text = norm(clock['source_phrase'])
+    # "l'anno successivo" (the following year) states one year.
+    text = re.sub(r"\bl['\u2019]anno successivo\b", 'un anno successivo', norm(clock['source_phrase']))
     words = '|'.join(NUMBER_WORDS)
     units = {'hours': ['ore', 'hours?'], 'calendar_days': ['gg', 'days?(?! working)'],
-             'working_days': ['(?:giorni|gg) lavorativi', 'working days?'], 'months': ['mesi', 'months?'], 'years': ['anni', 'years?']}
+             'working_days': ['(?:giorni|gg) lavorativi', 'working days?'], 'months': ['mesi', 'months?'], 'years': ['anni', 'anno', 'years?']}
     if unit_words is None:
         unit_words = json.loads(B.read_text(encoding='utf-8'))['conventions']['clock.unit_words']
     for word, unit in unit_words.items():

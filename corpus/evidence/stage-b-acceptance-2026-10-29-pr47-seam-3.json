@@ -1,0 +1,12 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 3,
+  "reviewer": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
+  "accepted_content_sha256": "313377fa1cfa8b34cb41012409831f092716550d852e149a4473232afcda9a17",
+  "preceding_acceptance": {
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-3.json",
+    "record_sha256": "6286a1cfd649a1462320bb5fbf4fb195a57eb5af7ff8d89a990498c147a74dc6"
+  },
+  "scope": "D.lgs. 19/2021 Art. 33(1)'s second paragraph is recomposed (legal status: any one instrument's row; a granted authorization counts while in effect under D.lgs. 42/2004 Art. 146(4)); five new versions in this seam: L. 10/2013 Art. 7 v1 and v2, D.lgs. 42/2004 Art. 136, Arts 139-141 and Art. 146(4), with six clocks (Art. 146(4)'s five years and following year; Art. 139(1)'s ninety days, Art. 139(5)'s two thirty-day terms, Art. 140(1)'s sixty days) and their dispositions; the verifier reads 'trenta', 'sessanta', 'novanta' and \"l'anno successivo\" and three actors (Owen, 2026-10-29). Binding takes effect only on merge."
+}

@@ -1220,6 +1220,9 @@ class ComposedTemporalCases(unittest.TestCase):
 
 
 
+A_TRUE, A_FALSE = True, False
+
+
 class OperativeMethods(unittest.TestCase):
     def test_finite_rounding_and_published_reconstruction(self):
         from cordon_c.survey import FiniteStratum, finite_design_counts, finite_design_samples
@@ -1299,6 +1302,39 @@ class OperativeMethods(unittest.TestCase):
                 **args,qualifying_elections={})
             self.assertEqual(evaluate(s,identity,AT,merge_facts(remaining,facts)).effect,
                 'PLAN_ONLY_EFFECT_APPLIES')
+
+    def test_a_landscape_authorization_is_in_effect_for_five_years_and_begun_works_for_one_more(self):
+        from cordon_c.bindings import authorization_efficacy_facts
+        snapshot, zone = Snapshot.load(), ZoneInfo("Europe/Rome")
+        five, begun, year = (
+            "the event date falls within the five years of efficacy that run from the day the landscape authorization "
+            "for the removal took effect", "the removal works began within those five years",
+            "the event date falls within the year following the end of those five years")
+        version = snapshot.version("IT-DLGS42-A146:Art.146(4):authorization-efficacy", date(2026, 9, 1))["provision_version_id"]
+
+        def facts(at, works_began=date(2024, 1, 1), complete=True):
+            out = authorization_efficacy_facts(snapshot, at, effective=date(2021, 9, 1), works_began=works_began,
+                                               works_history_complete=complete, zone=zone)
+            return {text: out[(version, text)] for text in (five, begun, year)}
+        # Effective 1 September 2021: in effect through 1 September 2026; the following year through 1 September 2027.
+        self.assertIs(facts(date(2026, 9, 1))[five], True)
+        self.assertEqual((facts(date(2026, 9, 2))[five], facts(date(2026, 9, 2))[year]), (False, True))
+        self.assertIs(facts(date(2027, 9, 1))[year], True)
+        self.assertIs(facts(date(2027, 9, 2))[year], False)
+        self.assertIs(facts(date(2021, 8, 31))[five], False)
+        # Works begun after the five years' last day did not begin within them; none recorded is open unless complete.
+        self.assertIs(facts(date(2027, 1, 1), works_began=date(2026, 9, 2))[begun].truth, False)
+        self.assertIs(facts(date(2027, 1, 1), works_began=date(2026, 9, 1))[begun].truth, True)
+        self.assertIsNone(facts(date(2027, 1, 1), works_began=None, complete=False)[begun].truth)
+        self.assertIs(facts(date(2027, 1, 1), works_began=None)[begun].truth, False)
+        # Composed by A's row: in the following year the grant counts only for works begun within the five years.
+        for works, expected in ((date(2024, 1, 1), A_TRUE), (date(2026, 9, 2), A_FALSE)):
+            with self.subTest(works=works):
+                result = evaluate(snapshot, "IT-DLGS42-A146:Art.146(4):authorization-efficacy", date(2027, 1, 1),
+                                  authorization_efficacy_facts(snapshot, date(2027, 1, 1), effective=date(2021, 9, 1),
+                                                               works_began=works, works_history_complete=True,
+                                                               zone=zone))
+                self.assertIs(result.truth, expected)
 
     def test_clock_rule_population_has_one_disposition(self):
         snapshot=Snapshot.load()

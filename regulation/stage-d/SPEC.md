@@ -842,6 +842,184 @@ capitolato d'oneri and checks the census's own bound; with fewer than 20 census
 fixes it is not checked, and the census residuals' own 95th percentile is printed
 as information.
 
+Two other instruments give a tree monumental or historic-interest status, and
+`cordon_d.instruments` reads both whole, per version. The national list (L.
+10/2013 Art. 7) is MASAF's Puglia sheet with each approving or updating decree's
+annexes: a decree lists the schede its annex A (or DD 5450/2017's Sezione 1)
+prints, deletes those its annex B prints and corrects those its annex C prints;
+where the decree page links no annex, its own pages headed "ALLEGATO A/B/C" are
+read. An annex ID absent from the sheet is the sheet entry with the same number
+and province whose coordinates, or comune and place, the annex row prints. Each
+decree carries its own date as the G.U. titles it, the protocol date MASAF names it
+by, and its G.U. publication date; an entry is in the list at the event date, as
+A's L. 10/2013 Art. 7 rows date it, from its listing decree's own date, until the
+G.U. publication of the decree that deletes it. An entry no held
+annex lists is unknown, never false. Its kind is the species cell's prefix
+("Insieme omogeneo di", "Filare di", ...); a member count or extent is carried
+only as printed. The sheet's column "PROPOSTA DICHIARAZIONE NOTEVOLE INTERESSE
+PUBBLICO" (33 listed schede print "si`") is carried as printed and is no
+proposal of declaration: the census instructions (Allegato 4) define it as
+whether the tree "sia proponibile come oggetto di tutela", the surveyor's
+suggestion. Its point is the scheda's WGS 84 coordinates (the census
+instructions), and its bound is the residuals of scheda points against
+independent positions of the same trees (a declared tree in the same comune and
+genus): their 95th percentile from 20 fixes, below that the larger of the
+measured maximum and 50 m. The Art. 136 declarations are every declaration any
+held version of the PPTR layer "Immobili e aree di notevole interesse pubblico"
+prints, one per code, read from the latest version that prints it, with the
+geometry its rows draw. D reads each object and motivation as naming a tree (a
+trunk or crown measurement, "l'albero", a single "esemplare", not a quantified
+"qualche esemplare"), a row or group ("filare", "alberata", "viale alberato",
+"gruppo di" trees), or an area; a road's "tronco" (a stretch) and a circle's
+"circonferenza di raggio", as a delimitation prints them, name no tree. Trees a
+decree names as part of the area it declares give no status: PAE0013's decree (D.M.
+23 January 1976, Fasano) and PAE0123's (D.M. 1 August 1985) declare the coast, "il
+tutto con una spalliera di verde formata da alberi secolari di ulivo"; the coast is
+the thing declared and the olive hedge one feature of it, so each is an area (Owen,
+2026-10-29; A's Art. 136 row, the legal owner, carries the ruling). The tree's
+genus is the one its words name, none where they name several. The motivation is
+read from the decree's own text where the G.U. issue that published it, or an
+ordinary supplement of that issue that the issue's own index places an act of
+notable public interest in, prints the decree. An act begins at its heading (a
+Region's act, at the Region's name heading it), or after the job number closing the
+act before it, and runs to the next heading. The decree is the act of notable public
+interest whose title holds the distinctive words of the layer's object (the decree's
+title as the PPTR transcribes it; a word of three letters or more, not an article or
+preposition, that at most one object in ten prints) and whose heading prints the
+layer's decree date: the act holding the most of them, then printing the date, then
+printing the fewest words the object does not, where it holds two, or one and the
+date, or all there are, or whose title names the layer's first comune whole; only
+that act is read. "Provincia di X" in a title names no place declared, and a
+contents entry ("... Pag. N", "... » N") is a title only. Its preamble, from its
+start to its first "Decreta" (a Region's "Delibera:"; OCR's "Dccreta:" counts where
+its colon follows), its object and recitals, is read; the commission's minutes
+printed after it are not. The rows carry the act read (its heading and title) and
+its preamble. Then the motivation is read from the PPTR's scheda (elaborato 6.4),
+held for each declaration whose layer motivation reaches the layer's 254-character
+field, between its "riconoscimento" heading and "art. 134"; then from the layer. A text that names a tree, a row or a
+group decides whichever prints it, so no text naming none, OCR'd or not, turns a
+declaration that names one into an area; a layer motivation at the field's length
+that no whole text supplements is not read whole. Where the layer prints no
+motivation, an object naming a zone, wood, villa or park is an area.
+
+A page is read from its text layer where the layer supplies it. A page image (an
+image covering at least half the page) whose layer holds fewer than 500
+characters, or a layer fewer than 90% of whose words of four letters or more hold
+a vowel, is OCR'd: rendered by PyMuPDF at 300 dpi in grey and read by Tesseract
+with its Italian model (`-l ita --psm 3 --oem 1`), a ruled table read cell by cell
+as a text layer orders it. The OCR'd text is regenerable, kept under
+`derived/protected-status/ocr` keyed by the page's bytes and number, the Tesseract
+and Leptonica versions, the model's hash, the PyMuPDF version, the render settings
+and DPI, Tesseract's arguments and the route's own version, all of which the rows
+record.
+
+Tesseract locates and does not read (Owen, 2026-10-29: OCR text alone invented
+rows in laboratory-report tables, PR #13). Its text finds the act a declaration's
+decree is, as above, and the pages that act lies on, from its first page through
+the page holding its first "Decreta" ("Delibera:"), and a scheda's identification
+page. The words D's rule reads from such a page image are its vision
+transcription: the page rendered in grey at 200 dpi, one page image per request
+through the Claude subscription under the reading login
+(`report_extraction._subscription_call`, one PNG attached), asking for the page's
+text as printed, in reading order, with each word the image does not show legibly
+written `[illegible]`, and nothing else; the model is not asked whether a tree is
+named. The answer is a model's: it is kept from its first write under
+`derived/page-transcriptions`, named by the hash of its exact request (model,
+effort, source, page, prompt, renderer, the attached PNG's hash, schema), and
+replicated with the store's kept data. The preamble is cut from the transcribed text
+of the located pages exactly as from the located text: the act titled as the
+layer's object, from its heading to its first "Decreta"; a scheda's motivation
+between "riconoscimento" and "art. 134". Where the transcription holds no such act,
+begins it on another page than OCR did, or holds no "Decreta" in those pages, that
+is the cause and no cut is forced. A reading resting on a transcription cites its
+model, each page and its request's hash, and names the words it marks illegible and
+any letter outside the Latin script, which an Italian text does not print: a tree
+word so written is not seen. `scripts/transcribe_pages.py list` writes the
+population, one row per declaration and page with why the page is in
+(`corpus/sources/protected-status/transcription-pages.csv`); `run` transcribes
+only that list, refusing where the locator no longer gives it, so a pass runs the
+population approved. Until a page's transcription is held, a declaration resting on
+it keeps the reading of Tesseract's words, which says so ("the OCR'd text names no
+tree, row or group", with its route, never that the decree or scheda names none) and
+names the pages whose transcription is not yet held. Where Tesseract is not
+installed the page images are not located, and a declaration resting on them stays
+as its other texts read it, naming that cause.
+
+An area declaration gives no status. A declaration naming a tree is
+one plant record: its polygon, at the stated scale of the PPTR's tavole 6.3.1
+(1:50,000), with a scale term of 1 mm at that scale, which no source states and D
+chooses because a smaller one could leave out of a zone a declared tree it
+reaches. It is in force at the event date when its decree's date and its
+publication or notification date are both on or before it; otherwise A decides. A listed or declared tree inside a zone (50 m plus the
+infected plant's `error_m` plus its own error of an in-reach positive or order
+plant) is a plant C considers; a monitored plant of its genus within both errors
+is listed beside it as possibly the same tree and admits nothing. For every plant,
+`instrument_facts` gives one fact per instrument: true where the plant is the
+listed or declared tree in force at the event date (a declaration from its decree's
+own date, as A's Art. 136 row counts it); false where no entry or
+declared tree of its genus lies within d (its error plus the entry's), naming the
+populations held; unknown where one may be the plant, where a declaration
+containing it is not read whole, or where a recognised tree no held source places
+may be the plant. The register's fact is row 9's identity with its own cause.
+
+From 20 September 2025 (L. 131/2025) the Region recognises a tree as monumental
+before a decree lists it (L. 10/2013 Art. 7(2)). Each act by which it approves a
+list of monumental trees that the BURP publishes from that day on (the forestry
+section's determination, "elenco regionale n. N", and the Giunta's deliberation,
+"Elenco L") is held whole in `corpus/sources/protected-status/recognitions.json`
+(`scripts/acquire_protection.py recognitions`). `cordon_d.instruments.recognitions`
+reads its own date, its BURP issue's date, the trees its Allegato A lists (checked
+against the count the act states), and the trees it deletes or rectifies. Where a
+Calibri run's font maps its glyphs to no letters, each glyph is read as the letter
+the same act's correctly mapped Calibri runs give it; a glyph none gives is `?` and
+counted. A recognised tree joins the national-list entry with its number,
+cadastral code and province; that entry's fact carries the acts and dates, and the
+entry is in the instrument from the earliest of its listing decree's date and its
+recognising act's date, never before 20 September 2025 for a recognition (A's
+rows); a Region's act deleting a tree from its own list does not delete it from the
+instrument. A recognised tree no held decree lists prints no position: it is placed
+by its comune, the one its ID's cadastral code names, with ISTAT's outline and its
+measured error along that comune's borders (the largest measured for any comune
+where none is measured there), and the genus its row prints, matched against the
+genera the held list prints (a glyph its text does not map matches any letter).
+From its act's date, the list fact of a plant of that genus, or of none recorded,
+within the outline plus the plant's error and the outline's is unknown, naming it:
+any such plant may be that tree.
+
+A published proposal of declaration (D.lgs. 42/2004 Arts 138-141; one made
+before 1 May 2004 under Art. 157(2)) is one record of
+`corpus/sources/protected-status/proposals.json`: its proposer (the Region, on
+its Art. 137 commission's proposal, or a Soprintendente, Art. 138(3)) and comuni;
+its object, motivation, plan, publication periods (one per albo) and owner's
+communication, each as a held source prints it, with that source's hash, or the
+cause no held source supplies it; and its outcome (a declaration with its PPTR
+code or G.U. issue, a refusal with its date, or none). The population is every
+proposal concerning Puglia whose effect could run from four years before the
+decision on: a Region's not concluded before then, however old (the code states no
+lapse for it); a Ministry's first published from 2021 on. It is found from the
+publishers Art. 139(2) names: the BURP's document search (a phrase in an act's
+title and abstract; its index begins with the bulletins of 2001), the Region's
+landscape portal and the PPTR's report on its protections, the three
+Soprintendenze's and the Directorate-General's own sites, the Internet Archive's
+copies of their pages where a site does not answer, and the G.U.'s issues from
+2021 to the day before row 9's own search, whose declarations recite the proposals
+they conclude (`scripts/acquire_protection.py proposals`, `proposal-search`).
+`cordon_d.instruments.proposals` reads a field only where the source it cites
+prints it (whitespace, hyphens, quotes and apostrophes aside), and otherwise
+names that. It reads the object and motivation with the
+declarations' rule: a held motivation is whole, so naming no tree it is an area;
+with none held, an object naming a zone, valley or area is one. Each date is read
+from its printed phrase; the first day of publication (Art. 139(2)) is the
+earliest any albo prints. A proposal naming a tree is a plant record through the
+declared-tree path: the polygon its plan draws, with 1 mm at the plan's own stated
+scale. One naming a tree that no held plan places, or not read whole, leaves every
+plant's proposal fact unknown, naming it. The proposal fact is true where the plant
+is the proposed tree, carrying its proposer, first day of publication, periods,
+owner's receipt of the communication and outcome, from which C's row decides
+whether its effect runs at the event date (D computes no lapse); false where no
+held proposal names a tree within d, naming the population held and each route not
+reached; unknown where a proposed tree within d may be the plant.
+
 ## Landscape proceeding
 
 `cordon_d.landscape` (`scripts/read_landscape.py --records`) supplies row 10
@@ -900,6 +1078,16 @@ for each tree it attaches to. Passed lodgings at one moment anchor B's 45-day
 clock, and its end is reported (at different moments, none anchors it, and that
 is reported); elapsed time fills nothing. A record attached to a plant not asked
 about is listed with that plant, and a value asked about that is a monitoring
-reference, not a plant, is reported with the plants it names. The caller sets
-neither Art. 146(2) predicate, nor Union obligations, and passes Art. 33(1)'s
-measure, status and infection conjuncts only as their owning units supply them.
+reference, not a plant, is reported with the plants it names. A granted decision
+also dates the grant under Art. 146(4): its five years run from the decision's own
+day (a phytosanitary removal needs no building title), C's
+`authorization_efficacy_facts` counting B's two clocks; no commencement record
+reaches row 10, so in the year after the five years the result names that record.
+With no decision the efficacy row names one need, the decision's day. The plant's
+legal status is read from row 9's rows, the rows the caller already takes: the
+L.R. 14/2007 register through the identity row 9 decides and that entry's act
+chain as the rows carry it (C's `listing_facts`; "not a register tree" has no
+entry, "unknown" may have one), and each other instrument through row 9's fact,
+used only where row 9 read it at the evaluation date. The caller sets neither
+Art. 146(2) predicate, nor Union obligations, and passes Art. 33(1)'s measure
+and infection conjuncts only as their owning units supply them.

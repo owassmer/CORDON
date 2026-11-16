@@ -542,6 +542,37 @@ def listing_facts(snapshot: Snapshot, at: date, *, own_entry: bool | None,
     )
 
 
+AUTHORIZATION_EFFICACY = "IT-DLGS42-A146:Art.146(4):authorization-efficacy"
+
+
+def authorization_efficacy_facts(snapshot: Snapshot, at: date, *, effective: date, works_began: date | None,
+                                 works_history_complete: bool, zone: ZoneInfo,
+                                 calendar: WorkingCalendar | None = None) -> dict:
+    """D.lgs. 42/2004 Article 146(4) at the event date `at`: whether a landscape authorization that took effect on
+    `effective` is in effect. Its five years run from that day (B's five-year clock); works begun within them may be
+    concluded within the following year, counted from the five years' last day (B's one-year clock). `works_began` is
+    the day the removal works began where a record states it; none recorded means none began only where the works
+    history is complete."""
+    row = snapshot.version(AUTHORIZATION_EFFICACY, at)
+    day = datetime.combine(at, time(), zone)
+    five = clock_boundary(snapshot, "B-CLK-IT-DLGS42-146(4)-five-year-efficacy", at, effective, zone=zone,
+                          calendar=calendar)
+    last = _local_day(five, zone) - timedelta(days=1)
+    year = clock_boundary(snapshot, "B-CLK-IT-DLGS42-146(4)-following-year-completion", at, last, zone=zone,
+                          calendar=calendar)
+    if works_began is not None:
+        begun = Evaluation(effective <= works_began <= last)
+    else:
+        begun = Evaluation(False) if works_history_complete else Evaluation(
+            None, needs=frozenset({"the record of the day the removal works began"}))
+    return bind(row, {
+        "the event date falls within the five years of efficacy that run from the day the landscape authorization for "
+        "the removal took effect": effective <= at and utc(day) < utc(five),
+        "the removal works began within those five years": begun,
+        "the event date falls within the year following the end of those five years": utc(five) <= utc(day) < utc(year),
+    })
+
+
 def election_window_facts(snapshot: Snapshot, clock_id: str, consumer: str, at: date, *,
                            publication_end_day: date, first_valid_election_time: datetime,
                            evaluated_at: datetime, qualifying_elections: Mapping[str, datetime],

@@ -308,6 +308,14 @@
     }
   },
   {
+    "consumer": "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
+    "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+    "outcomes": {
+      "TREE_LISTED": true,
+      "TREE_NOT_LISTED": false
+    }
+  },
+  {
     "consumer": "REG-PUGLIA-U181-DIR-2023-00045:case-delta:pending-monumental-recognition-hold",
     "reference": "PUG-LR14-2007:Art.5(2):provisional-listing-pending-recognition",
     "outcomes": {

@@ -1,0 +1,4110 @@
+{
+ "service": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer",
+ "layer": "Immobili e aree di notevole interesse pubblico",
+ "captured_at": "2026-10-29T00:40:53.052217+00:00",
+ "service_description": {
+  "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer?f=json",
+  "purpose": "the PPTR service: one group per PPTR version",
+  "captured_at": "2026-10-29T00:24:52.318631+00:00",
+  "status": 200,
+  "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer?f=json",
+  "content_type": "text/plain;charset=utf-8",
+  "bytes": 125369,
+  "sha256": "1b8e0ddad7b3d25ed4f6fe045e9146f9446cb549248d2940c51f1c350df566ff"
+ },
+ "versions": [
+  {
+   "version": "PPTR aggiornato alla DGR 1155/2026",
+   "group": 2,
+   "layer": 41,
+   "rows": 181,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/41?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:24:57.665410+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/41?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3830,
+    "sha256": "72fa06bf9773fbdb40f4a0284e664592005b1e63e466533ce9cc227a731150b9"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/41/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D181&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 181,
+     "captured_at": "2026-10-29T00:25:00.584699+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/41/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D181&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 31606646,
+     "sha256": "c2d4d82f87f8966084600afdb797668a3c68fab41eaf55b3bbcbb743b0edd592"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 328/2026",
+   "group": 65,
+   "layer": 104,
+   "rows": 2177,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:27:31.191330+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3832,
+    "sha256": "92cee49354b8072eb0d4f412c9a749055883a72cf4bbebd2e953c7112dc8aafa"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D2368+AND+OBJECTID%3C%3D2867&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 2368,
+     "last_oid": 2867,
+     "captured_at": "2026-10-29T00:27:33.370256+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D2368+AND+OBJECTID%3C%3D2867&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 4692909,
+     "sha256": "9826bdf0fd91f688d51dce8cc3a2e6cae95500dbd552fe0337b5daf6f30b1123"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D2868+AND+OBJECTID%3C%3D3367&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 2868,
+     "last_oid": 3367,
+     "captured_at": "2026-10-29T00:28:01.839450+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D2868+AND+OBJECTID%3C%3D3367&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 9531702,
+     "sha256": "ccafdf54a68cb9cb2e4f0158ab1833a0118553948491cdec3582fe3cea60823a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D3368+AND+OBJECTID%3C%3D3867&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 3368,
+     "last_oid": 3867,
+     "captured_at": "2026-10-29T00:28:36.440806+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D3368+AND+OBJECTID%3C%3D3867&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 6844925,
+     "sha256": "ed2e441e2161fb2da8fcf4dd1c36c41c1f45e62c09e3376251b4941363e53623"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D3868+AND+OBJECTID%3C%3D4367&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 3868,
+     "last_oid": 4367,
+     "captured_at": "2026-10-29T00:28:59.692486+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D3868+AND+OBJECTID%3C%3D4367&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 2819019,
+     "sha256": "60dcc20def67a2ffa13533f6c05bce87d1f393b3604f91d60c206aa09a16b6ed"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D4368+AND+OBJECTID%3C%3D4544&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 4368,
+     "last_oid": 4544,
+     "captured_at": "2026-10-29T00:29:19.727889+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/104/query?where=OBJECTID%3E%3D4368+AND+OBJECTID%3C%3D4544&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 10072086,
+     "sha256": "02e89a0d56605fa48e9c7692812fc1ea0deac08af3a3724844b6847e75740bf8"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 1112/2025",
+   "group": 128,
+   "layer": 167,
+   "rows": 2176,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:30:05.726433+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3832,
+    "sha256": "9153ee2514043ae93077c450632be1999e194aa76a775228607b89ab73c803b8"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 500,
+     "captured_at": "2026-10-29T00:30:10.231754+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 4692301,
+     "sha256": "95118d3e5c4219453d674f724569001b28c00912e7e100a29aad3fe30c1e5dd7"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D501+AND+OBJECTID%3C%3D1000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 501,
+     "last_oid": 1000,
+     "captured_at": "2026-10-29T00:30:30.188976+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D501+AND+OBJECTID%3C%3D1000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 9534590,
+     "sha256": "b10ea7cc6fc44c60101bdb72120309651d96fac71d0f10e7fc5c0bdc69a2ae49"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D1001+AND+OBJECTID%3C%3D1500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1001,
+     "last_oid": 1500,
+     "captured_at": "2026-10-29T00:31:16.579790+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D1001+AND+OBJECTID%3C%3D1500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 6962258,
+     "sha256": "efb4d93ff8396931a082c81a7f1addd64b22b60914417627093485f96981a520"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D1501+AND+OBJECTID%3C%3D2000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1501,
+     "last_oid": 2000,
+     "captured_at": "2026-10-29T00:31:42.972426+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D1501+AND+OBJECTID%3C%3D2000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 2819029,
+     "sha256": "dcfb434df49ef89da1e32a639522bbe594bdd2a4de7663b0ae816f4cdfe58d00"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D2001+AND+OBJECTID%3C%3D2176&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 2001,
+     "last_oid": 2176,
+     "captured_at": "2026-10-29T00:31:53.194606+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/167/query?where=OBJECTID%3E%3D2001+AND+OBJECTID%3C%3D2176&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 9940449,
+     "sha256": "c3271fa1bb640060b728826abd58df1799b809c7ee9f7f3f98ad02cdd0546c04"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 415/2025",
+   "group": 191,
+   "layer": 230,
+   "rows": 2366,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:32:26.608527+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3832,
+    "sha256": "52c47a7e187848d2c44fbd5e156673746f31284edf910415ab7756c6f5381df3"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 500,
+     "captured_at": "2026-10-29T00:32:28.741561+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 7704672,
+     "sha256": "772c9e601796fb70f75bb103585b9c51a66d64f89ae7f3e0bff26d8f60256288"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D501+AND+OBJECTID%3C%3D1000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 501,
+     "last_oid": 1000,
+     "captured_at": "2026-10-29T00:32:58.929122+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D501+AND+OBJECTID%3C%3D1000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 10682180,
+     "sha256": "acf9d097e79e8643b883a9f9e053120218c9ee7c969cb73e79b824c71e3f0f6a"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D1001+AND+OBJECTID%3C%3D1500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1001,
+     "last_oid": 1500,
+     "captured_at": "2026-10-29T00:33:45.826271+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D1001+AND+OBJECTID%3C%3D1500&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 7959160,
+     "sha256": "2511910e3e247604b88f1f623fb1b71f413bd6b4a5419df9dfae69fd3dba4c90"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D1501+AND+OBJECTID%3C%3D2000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1501,
+     "last_oid": 2000,
+     "captured_at": "2026-10-29T00:34:37.960231+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D1501+AND+OBJECTID%3C%3D2000&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 2872505,
+     "sha256": "8fff5801b7abcb6eb25f5d20094c6f4e0c61a094bf88ff8f158d14a12f3a02fa"
+    },
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D2001+AND+OBJECTID%3C%3D2366&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 2001,
+     "last_oid": 2366,
+     "captured_at": "2026-10-29T00:35:01.354768+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/230/query?where=OBJECTID%3E%3D2001+AND+OBJECTID%3C%3D2366&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 4344983,
+     "sha256": "ce2d810b2b7890669869fce639c59f9d6200902ef5e424f48d2f77ca4df0bb7d"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 1750/2024",
+   "group": 254,
+   "layer": 293,
+   "rows": 481,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/293?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:35:06.164094+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/293?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3832,
+    "sha256": "651bac6216c2d72ca1129bdbe89329970997ac2218a8044b995d28e5ff674b3b"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/293/query?where=OBJECTID%3E%3D1649+AND+OBJECTID%3C%3D2129&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1649,
+     "last_oid": 2129,
+     "captured_at": "2026-10-29T00:35:07.968252+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/293/query?where=OBJECTID%3E%3D1649+AND+OBJECTID%3C%3D2129&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 31396926,
+     "sha256": "e5d48ac4e4fbd10554c140c61b101c48e9335e432f7338a3c844714cb2229095"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 1398/2024",
+   "group": 317,
+   "layer": 356,
+   "rows": 481,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/356?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:35:38.761636+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/356?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3832,
+    "sha256": "ec1822892193da88ed2c8290b5c9db7390b2f176fae5a3354e8b8ddab7f5af93"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/356/query?where=OBJECTID%3E%3D697+AND+OBJECTID%3C%3D1648&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 697,
+     "last_oid": 1648,
+     "captured_at": "2026-10-29T00:35:40.710337+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/356/query?where=OBJECTID%3E%3D697+AND+OBJECTID%3C%3D1648&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 31477671,
+     "sha256": "9c74351d53c1833e276e81c082108ae5152f648f09a87d8e06f8585faa23b766"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 782/2024",
+   "group": 380,
+   "layer": 419,
+   "rows": 476,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/419?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:36:06.415563+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/419?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3815,
+    "sha256": "7e5c8aabbce76c98aef82ac83a1d36c6ae932e832b6a8fb03a19a498f786b02e"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/419/query?where=OBJECTID%3E%3D477+AND+OBJECTID%3C%3D952&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 477,
+     "last_oid": 952,
+     "captured_at": "2026-10-29T00:36:08.509287+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/419/query?where=OBJECTID%3E%3D477+AND+OBJECTID%3C%3D952&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 31169840,
+     "sha256": "4fada75c3a5ab28e1e55256250c7d0065db94af00bbbe7ad2ca8dacd1e7cc926"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 1972/2023",
+   "group": 443,
+   "layer": 482,
+   "rows": 476,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/482?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:36:24.316965+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/482?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3815,
+    "sha256": "638555055973e21c2e3e8db839ea05541c6b46f327e73bbe0948bf57534c73a3"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/482/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D476&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 476,
+     "captured_at": "2026-10-29T00:36:26.090374+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/482/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D476&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 31169732,
+     "sha256": "f2c7ccc117bd9e579dab797ee09713f17e0097daa3f695fd40de7a21d6fab426"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 968/2023",
+   "group": 506,
+   "layer": 545,
+   "rows": 179,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/545?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:36:57.716880+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/545?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3815,
+    "sha256": "aa40cff0d1e42cddd0f260f51325a049b6164ef3e362249212fdb276ad5662ab"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/545/query?where=OBJECTID%3E%3D52+AND+OBJECTID%3C%3D230&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 52,
+     "last_oid": 230,
+     "captured_at": "2026-10-29T00:36:59.748156+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/545/query?where=OBJECTID%3E%3D52+AND+OBJECTID%3C%3D230&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 30769822,
+     "sha256": "756c9acbd6b281257684f4a00b0278546a5a29be6cd79d2699cd9201606025a4"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 652/2023",
+   "group": 569,
+   "layer": 608,
+   "rows": 179,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/608?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:37:29.687007+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/608?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3815,
+    "sha256": "7c743e79a5ab9a0ac59075c8024e2824565d6d74c9145562ca2f352a2bdf4a85"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/608/query?where=OBJECTID%3E%3D52+AND+OBJECTID%3C%3D230&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 52,
+     "last_oid": 230,
+     "captured_at": "2026-10-29T00:37:31.737732+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/608/query?where=OBJECTID%3E%3D52+AND+OBJECTID%3C%3D230&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 30769822,
+     "sha256": "756c9acbd6b281257684f4a00b0278546a5a29be6cd79d2699cd9201606025a4"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alle DGR 1533/2022 e 1263/2022",
+   "group": 632,
+   "layer": 671,
+   "rows": 166,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/671?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:37:52.919930+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/671?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3816,
+    "sha256": "9f093e32a02133ed9ea4404766668001c8c112adbd57d9f05e37c9f5fa3d9db1"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/671/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D166&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 166,
+     "captured_at": "2026-10-29T00:37:55.171110+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/671/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D166&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 30778384,
+     "sha256": "31a031bb2b76fbc66e45a65e83f8d7766b13157d93872ddaed0c7acee807fa41"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 650/2022",
+   "group": 695,
+   "layer": 734,
+   "rows": 162,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/734?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:38:25.835847+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/734?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3816,
+    "sha256": "b3a2b8561f4a23076cca868ca7a019330296819875f8675ff41366baa046f0b1"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/734/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D162&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 162,
+     "captured_at": "2026-10-29T00:38:27.957102+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/734/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D162&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 30748174,
+     "sha256": "17c9cf9d9082ea6257523b9920d1bf5e89c4dd65c08a9169fbb16b9b27dfdbad"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 1801/2021",
+   "group": 758,
+   "layer": 797,
+   "rows": 161,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/797?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:38:54.565164+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/797?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3816,
+    "sha256": "87b244785da1959859ceff60b74c536214f4f4a4fe21e6fc0a87b54c6b0e982c"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/797/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D161&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 1,
+     "last_oid": 161,
+     "captured_at": "2026-10-29T00:38:56.702559+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/797/query?where=OBJECTID%3E%3D1+AND+OBJECTID%3C%3D161&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 30722814,
+     "sha256": "99870e5c878005fae8161b4b507e616e59f72d63ef7ca3c76faed7526d06cdef"
+    }
+   ]
+  },
+  {
+   "version": "PPTR aggiornato alla DGR 1103/2021",
+   "group": 821,
+   "layer": 860,
+   "rows": 161,
+   "description": {
+    "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/860?f=json",
+    "purpose": "the layer description",
+    "captured_at": "2026-10-29T00:39:27.653655+00:00",
+    "status": 200,
+    "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/860?f=json",
+    "content_type": "text/plain;charset=utf-8",
+    "bytes": 3816,
+    "sha256": "ddb3de52038fa0be14045d1f1e9b3985e17faa7a10ffa051fc6951b61b4cd62c"
+   },
+   "pages": [
+    {
+     "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/860/query?where=OBJECTID%3E%3D162+AND+OBJECTID%3C%3D322&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "purpose": "the declarations of the version in one object-id window, attributes and polygon",
+     "first_oid": 162,
+     "last_oid": 322,
+     "captured_at": "2026-10-29T00:39:29.572039+00:00",
+     "status": 200,
+     "final_url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals/PPTR_APPROVATO/MapServer/860/query?where=OBJECTID%3E%3D162+AND+OBJECTID%3C%3D322&outFields=%2A&returnGeometry=true&outSR=32633&orderByFields=OBJECTID&f=json",
+     "content_type": "text/plain;charset=utf-8",
+     "bytes": 30722913,
+     "sha256": "adab00f61f10fe8c3b22ded7c0633e1cdda9060dd51cd37b5ae73e291bd51aa8"
+    }
+   ]
+  }
+ ],
+ "decrees": [
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1952/06/06/130/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0026"
+   ],
+   "captured_at": "2026-10-29T00:45:34.569126+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1952/06/06/130/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1847768,
+   "sha256": "fc44320700f10ab3c2423b1e23766cd887f9811f45a780fc36b2dca5e99b480f"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1952/10/15/240/sg/pdf",
+   "purpose": "the G.U. issue the year's archive places for the publication the layer prints",
+   "declarations": [
+    "PAE0064"
+   ],
+   "archive": "5a1ed1c95d5c12c03f4c3cd8b715b9f1d7e652f9b9a67483261fb751eb3c891e",
+   "printed": "G.U. n. 263 of 15-10-1952: the G.U. names no issue by that number on that date",
+   "captured_at": "2026-10-29T01:10:37.928128+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1952/10/15/240/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1960257,
+   "sha256": "3c1df2c2c312b6e71a6547f8f8a40c1ae491910f5e61ae42d76dfa7b163e482b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1957/11/15/282/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0016"
+   ],
+   "captured_at": "2026-10-29T00:45:34.571088+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1957/11/15/282/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2062790,
+   "sha256": "62cb128ee318a24373e600f97a311c4d02ad39a6367db5265fb5a66ae2e07e89"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1960/06/22/151/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0084"
+   ],
+   "captured_at": "2026-10-29T00:45:34.572428+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1960/06/22/151/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2674029,
+   "sha256": "6f2c99ee2eb3273f0ee704b612b656fc56b49ea96276992b7ed66a02ed713461"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1961/10/26/267/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0086"
+   ],
+   "captured_at": "2026-10-29T00:45:34.572683+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1961/10/26/267/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1726727,
+   "sha256": "d5eff327c4a88e48d1cf8fe6b9010acad580fd013658020e6f8c03422e92b92c"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1966/01/12/8/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0049"
+   ],
+   "captured_at": "2026-10-29T00:54:53.281721+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1966/01/12/8/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2914566,
+   "sha256": "9b5ac8634c8f8ce15d3df4d7893879c29cb2df7ef146bf8e38ac9700c51c0433"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1966/12/01/303/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0015"
+   ],
+   "captured_at": "2026-10-29T00:54:53.281841+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1966/12/01/303/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2472697,
+   "sha256": "554a4f9e14f6e2e02a019512f869a383ed493cbbf9b6a009a16fada3b709cae9"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1966/12/12/311/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0025"
+   ],
+   "captured_at": "2026-10-29T00:54:53.281877+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1966/12/12/311/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1797286,
+   "sha256": "036399dedb7306bf932ac0d3bba27cbf462ec9f3525d2e9c0897f6d92db02e85"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1967/05/11/117/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0048",
+    "PAE0087",
+    "PAE0090"
+   ],
+   "captured_at": "2026-10-29T00:54:53.282058+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1967/05/11/117/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2658979,
+   "sha256": "463010043e41dcb3c5ff65fb81e9a42ec2ee1b17b1ceab842b0ee80f6eede096"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1967/08/19/207/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0009"
+   ],
+   "captured_at": "2026-10-29T00:54:59.240861+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1967/08/19/207/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2352571,
+   "sha256": "17f03e2243689f15e20ba299ed7376e166c763117b3612bae3a0e5856d06b0c7"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1967/12/30/325/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0007"
+   ],
+   "captured_at": "2026-10-29T00:56:31.325540+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1967/12/30/325/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 4390647,
+   "sha256": "8e19c12f6ba58a3855f875883b82fb6bbf78cffb013fe151892d5319a41feeed"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1968/03/12/68/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0066"
+   ],
+   "captured_at": "2026-10-29T00:56:35.522983+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1968/03/12/68/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2542346,
+   "sha256": "cfaad1d42ff046a5198dff164f337c4c2391706c0c160c65b4bf2ea79ec0c90f"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1969/01/13/10/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0002"
+   ],
+   "captured_at": "2026-10-29T00:56:38.925727+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1969/01/13/10/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2569817,
+   "sha256": "a9479589ead94638dd9b1f13e891abcf1d182e8e87341f38790f1db2c4174b24"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1969/03/17/70/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0010"
+   ],
+   "captured_at": "2026-10-29T00:56:39.206271+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1969/03/17/70/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2379325,
+   "sha256": "0c23ace96d800da6b5098740ab910d3205f6a58c2a713c74c54a1209d5b332af"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1969/11/14/288/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0006"
+   ],
+   "captured_at": "2026-10-29T00:56:40.074769+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1969/11/14/288/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2468178,
+   "sha256": "d7dce65bb6e92e0857ac4ff8d2cedb7936a817348c4a661362dafee1f56bbb43"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/01/12/9/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0065"
+   ],
+   "captured_at": "2026-10-29T00:56:43.001199+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/01/12/9/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1793085,
+   "sha256": "fb8f3dae4d49c1f19eca13f10cd0fd236cc3e14d989bb8a97dcbd0fd25636b3c"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/02/11/36/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0012"
+   ],
+   "captured_at": "2026-10-29T00:56:43.319878+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/02/11/36/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2766530,
+   "sha256": "7d18c589e0e982beb2e8f81d99c091f1c4174f1b2defc79e294a28839a185541"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/07/60/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0045",
+    "PAE0082"
+   ],
+   "captured_at": "2026-10-29T00:56:44.206104+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/07/60/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3479332,
+   "sha256": "905082b83dd474b7275f2217514b8919f278a89be7684b879028db133ba6e8e1"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/09/61/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0062"
+   ],
+   "captured_at": "2026-10-29T00:56:44.220839+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/09/61/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2848921,
+   "sha256": "1c1e4614285fc6396850377ec87ab0bcb59408040e55c5e41559e0a55751f57e"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/20/71/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0059"
+   ],
+   "captured_at": "2026-10-29T00:56:44.806577+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/20/71/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2410146,
+   "sha256": "86183c094c57af9140b87db9192f25e3da6bc9394810d50d36b6ff2153fd5e45"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/21/72/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0055"
+   ],
+   "captured_at": "2026-10-29T00:56:48.456209+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/21/72/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2508655,
+   "sha256": "fba352b92b5d57eadb2cc3b872e6e26f0d516667e1a27e2a7436989a73efc90f"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/23/73/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0070",
+    "PAE0088"
+   ],
+   "captured_at": "2026-10-29T00:56:51.809943+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/23/73/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2610525,
+   "sha256": "269e2019154c53b890116303bdf64f2e44965629896cfe6409f184dbe79a5b21"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/26/77/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0046"
+   ],
+   "captured_at": "2026-10-29T00:56:55.296784+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/03/26/77/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2504296,
+   "sha256": "11ebfda3d53d3b385226684325cac0b8d71b1a253c70b92931fcd472e8c42684"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/16/121/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0080"
+   ],
+   "captured_at": "2026-10-29T00:56:56.070295+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/16/121/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2614036,
+   "sha256": "cff37abc70852f9d5db0e6ddd98314cb7aed4d509699c5b8b468f19320197436"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/19/123/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0063"
+   ],
+   "captured_at": "2026-10-29T00:56:56.300322+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/19/123/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 4090470,
+   "sha256": "12c75e18de06aec54f8e02be4b91a16894d4a356dd79c203daf7836d1a5e6f41"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/25/129/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0052"
+   ],
+   "captured_at": "2026-10-29T00:56:58.507705+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/25/129/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3196205,
+   "sha256": "b55708887fb53ca9e575eba22caf0687a33e571969e584287f13c6fd0a141a2c"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/27/131/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0074"
+   ],
+   "captured_at": "2026-10-29T00:56:59.248762+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/27/131/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3555806,
+   "sha256": "2e31f502e906aad3ae22eed7e8269786b3c131f424f298fe682c04d7f7a0bcc9"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/29/132/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0042",
+    "PAE0081"
+   ],
+   "captured_at": "2026-10-29T00:57:00.823644+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/05/29/132/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2491582,
+   "sha256": "4683cbd544c4be59d11de29a98573931a12946ff7a47e59b8af6d96cd287c8ae"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/07/11/173/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0039",
+    "PAE0073"
+   ],
+   "captured_at": "2026-10-29T00:59:49.807488+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/07/11/173/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 4154246,
+   "sha256": "4a95f19efa78a97c6045bf1f95ab680fb2c150c0849cbbd71ac72fc845c60091"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/07/14/175/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0044"
+   ],
+   "captured_at": "2026-10-29T00:59:49.807447+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/07/14/175/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3359394,
+   "sha256": "1840eeef45d7fd0862c0473247a393f1752e23a01d09da84ce4b7623a924359b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/07/17/179/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0075"
+   ],
+   "captured_at": "2026-10-29T00:59:49.807542+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/07/17/179/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3348471,
+   "sha256": "e8bebc612b1bbd5113c29d9157f52f7a9ebca7cae4e65e9a2cda7d3b06af8438"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/08/21/210/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0001"
+   ],
+   "captured_at": "2026-10-29T00:59:49.807517+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/08/21/210/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3596112,
+   "sha256": "80fd01bb15cae1292d32b762acdfe742ba60c2fe7dd9b2b8a72797d4897cabb2"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/09/22/240/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0068"
+   ],
+   "captured_at": "2026-10-29T00:59:52.290935+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/09/22/240/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2330013,
+   "sha256": "b01040bac806bdf1ec566c201e9c408aa22f2fe67352e0f620bcc43f55254226"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/09/24/242/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0072"
+   ],
+   "captured_at": "2026-10-29T00:59:54.911904+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/09/24/242/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2434755,
+   "sha256": "ff7692581acbf34fb9be78f6c7f14bc933279f76f6f788dbf64804e4ac22856b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/09/25/243/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0056"
+   ],
+   "captured_at": "2026-10-29T00:59:54.929904+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/09/25/243/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2690881,
+   "sha256": "c1c2acee134913ed05332425d602cd65006aeaab7faf50569e1c9344c3125741"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/10/26/271/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0077"
+   ],
+   "captured_at": "2026-10-29T00:59:55.278186+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/10/26/271/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2660559,
+   "sha256": "08226cb168aa3752a79191faf83f699f62f5109c87cd522659086b7610707567"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/11/07/282/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0050"
+   ],
+   "captured_at": "2026-10-29T00:59:55.690962+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/11/07/282/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2322498,
+   "sha256": "b9b763da9a96b1bde6b15583623dfe234454a7720fc1b20a47600a5c3c27f5d3"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/10/312/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0079"
+   ],
+   "captured_at": "2026-10-29T00:59:55.818529+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/10/312/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3276983,
+   "sha256": "31062d4b46615460f891d4a105ce9972f712c25f207a0baef01a8d41f235230e"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/11/313/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0078"
+   ],
+   "captured_at": "2026-10-29T00:59:58.557661+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/11/313/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3457649,
+   "sha256": "3325e1b9a5ba67ed1355dfd9e9ab036414aecef13d5fd829cca386298f28677a"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/15/316/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0076"
+   ],
+   "captured_at": "2026-10-29T00:59:58.945024+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/15/316/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2245487,
+   "sha256": "4dd8b85d5adea61665eb3f26c11aa88c241fb581aa4b4753851423c6585bb83e"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/01/08/5/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0028"
+   ],
+   "captured_at": "2026-10-29T00:59:58.952207+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/01/08/5/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2285447,
+   "sha256": "d5a2082945a4f6f995d3ca594a09ba9fa6dcf17add21e2d461080ec1f92523d2"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/02/13/38/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0071"
+   ],
+   "captured_at": "2026-10-29T00:59:59.202182+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/02/13/38/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3259939,
+   "sha256": "bf2404a6b931592737f2d311d8c85b96b4591846cac9418f4f42fc9eb8da1315"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/03/01/53/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0060"
+   ],
+   "captured_at": "2026-10-29T01:00:00.416431+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/03/01/53/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3414027,
+   "sha256": "d83aa8423685e558e8a8375c79ea05258f025f1d2d25afb6cc986f449f6fbea7"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/03/16/67/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0040"
+   ],
+   "captured_at": "2026-10-29T01:00:01.708909+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/03/16/67/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3100570,
+   "sha256": "e749426e1b7b231e01788a7440fdeb6f2288988ffbcd94270c76ac0e20dba9e7"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/06/15/149/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0021"
+   ],
+   "captured_at": "2026-10-29T01:00:01.727281+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/06/15/149/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2498783,
+   "sha256": "ae881f15d8ca5f11a8fe9aeb9bbaa21a202ebf12c4776a93bf9a474724b38774"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/06/28/161/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0043"
+   ],
+   "captured_at": "2026-10-29T01:00:02.531031+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/06/28/161/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2613872,
+   "sha256": "4ac0e2f598faecaf81bd297b0cdfef2bff48253364effc76e3ca53dfba8398d5"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1971/12/06/308/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0029",
+    "PAE0038"
+   ],
+   "captured_at": "2026-10-29T01:00:03.967024+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1971/12/06/308/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2387066,
+   "sha256": "9fcff7c894351c81df074431414f7c3e7207122ef567f59025e16520446c4d6b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1973/10/01/254/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0041"
+   ],
+   "captured_at": "2026-10-29T01:00:05.531263+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1973/10/01/254/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2189527,
+   "sha256": "e621aef9f9462d3418ff40f91ca4ac51eed9ef9a0dbba5f330ff6231137361ea"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1973/10/02/255/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0091"
+   ],
+   "captured_at": "2026-10-29T01:00:05.671577+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1973/10/02/255/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3354874,
+   "sha256": "bcd98f962956b54aa6f00375c2c84660e7482cbf5b5747753dbb53157ac99a8a"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1973/10/05/258/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0085"
+   ],
+   "captured_at": "2026-10-29T01:00:06.436203+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1973/10/05/258/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3078923,
+   "sha256": "74d76113d1eae54bef4f1edd991f8ca8dbc54d35a08387cf65765400b65ccbad"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1973/11/02/283/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0018"
+   ],
+   "captured_at": "2026-10-29T01:00:07.072925+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1973/11/02/283/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2536099,
+   "sha256": "2ee7ffd8bb368e42a2889b318000d91403a3bcf20c8bbf26276fd16837d57657"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/10/121/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0027"
+   ],
+   "captured_at": "2026-10-29T01:00:08.117637+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/10/121/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2176113,
+   "sha256": "b2aba698b8f990dd30288f58564b4ca353389e52e0be9890977fa11eae9f841a"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/27/136/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0019"
+   ],
+   "captured_at": "2026-10-29T01:00:09.568383+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/27/136/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2166312,
+   "sha256": "7eb62ab0471346eee127ffcdac6f8a21e9d58a2a72d780252c22160d283dd15f"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/30/140/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0053"
+   ],
+   "captured_at": "2026-10-29T01:00:10.342203+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/30/140/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1644610,
+   "sha256": "466262d8fee6873d2d37c9c4e5a8f7af2b799a749f54fcfac1b3fbfb2b91135b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/31/141/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0031"
+   ],
+   "captured_at": "2026-10-29T01:00:10.379329+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1974/05/31/141/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1608506,
+   "sha256": "46bc93d7cad8a1c13a5635ac6e57977018d284282a5553130a22b7d78e9bc53b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1974/12/30/339/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0003"
+   ],
+   "captured_at": "2026-10-29T01:00:10.730410+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1974/12/30/339/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3369120,
+   "sha256": "6f76630eb7ed005bd9d30b39cb07f681352f7e5d2cf7aafc56d8bef2c73246d5"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1974/12/31/340/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0051"
+   ],
+   "captured_at": "2026-10-29T01:00:10.901416+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1974/12/31/340/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2941745,
+   "sha256": "eeca42e885c76210b8b36e43584042814ecbfdfad4240b77bb721d9f2da98bde"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1975/09/27/258/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0032"
+   ],
+   "captured_at": "2026-10-29T01:00:12.183841+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1975/09/27/258/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2599337,
+   "sha256": "dd789993c6848b55e6b56e28696a3af8de1c9a6a71313feb33c6c8896466af76"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1975/10/06/265/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0017"
+   ],
+   "captured_at": "2026-10-29T01:00:12.455509+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1975/10/06/265/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3139625,
+   "sha256": "267fd3dd9be6b9673df830fc7dc41b0cbd4b95322326f9313a95a39bdcb8113b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1975/10/15/274/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0035"
+   ],
+   "captured_at": "2026-10-29T01:00:12.589732+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1975/10/15/274/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3140267,
+   "sha256": "cc10bc555943cfe9e517fc4c0826d4264b48d91f35d891b35661d15c4b00dfe2"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1975/10/17/276/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0069"
+   ],
+   "captured_at": "2026-10-29T01:00:14.718573+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1975/10/17/276/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3246435,
+   "sha256": "519cb61474d84a30ed14811d12aa0df66c032d225ad46cb22a9f9260217f08a9"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1975/12/01/317/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0034"
+   ],
+   "captured_at": "2026-10-29T01:00:15.542824+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1975/12/01/317/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2485355,
+   "sha256": "a161b76fa47b833ff121a386df937dcdfca609feec252c2188de96e087030c62"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1976/04/30/114/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0023"
+   ],
+   "captured_at": "2026-10-29T01:00:16.289725+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1976/04/30/114/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3192971,
+   "sha256": "730c3061a5ab83af9af56124b46b4bfed0bcca9e4267d21f344a110bf7b78733"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1976/05/06/119/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0014",
+    "PAE0067"
+   ],
+   "captured_at": "2026-10-29T01:00:18.667149+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1976/05/06/119/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3428022,
+   "sha256": "dfa01a5f11c83a024188c3c23b641853f4adf3867ea24ddaeb5d947e2512731d"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1976/11/24/313/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0013"
+   ],
+   "captured_at": "2026-10-29T01:00:18.748722+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1976/11/24/313/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1749891,
+   "sha256": "45593825a344bd8b09236d2f9cae22f772a204467efc2533297d75dc4e9cddbc"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1977/04/23/110/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0024"
+   ],
+   "captured_at": "2026-10-29T01:00:20.077923+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1977/04/23/110/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3607834,
+   "sha256": "eb4dbde2f95441383134b3ce1205967699210ac827ee48ed1e76ae934fd4a84e"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1977/04/29/115/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0022"
+   ],
+   "captured_at": "2026-10-29T01:00:21.108848+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1977/04/29/115/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2564051,
+   "sha256": "eafe2b1d833afd3498ee89e62463c33b43a37b0eebcfef034a9706a9178a050e"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1977/09/14/250/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0089"
+   ],
+   "captured_at": "2026-10-29T01:00:22.832631+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1977/09/14/250/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2457369,
+   "sha256": "12dec60f8d7508801164ccc3b16f05738d699951e012d6dd13bc794c4016e822"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1978/02/28/58/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0047"
+   ],
+   "captured_at": "2026-10-29T01:00:24.256811+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1978/02/28/58/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3409843,
+   "sha256": "3571b080cf04a0a45a7922d155c54b915219d4e2246410f42bcc97ccb82885cf"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1980/12/05/334/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0036"
+   ],
+   "captured_at": "2026-10-29T01:00:25.847418+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1980/12/05/334/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3442723,
+   "sha256": "9f9601352323ba065573e143024ed3e3de2e84b0b96c893d6dfdca7d3a3e564a"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1980/12/31/356/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0020"
+   ],
+   "captured_at": "2026-10-29T01:00:28.073653+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1980/12/31/356/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3212838,
+   "sha256": "a510f90dcf5c9aa3cdcf56cb286665b0792113a2fa14fbf107445143f73baac5"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1982/07/17/195/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0054"
+   ],
+   "captured_at": "2026-10-29T01:00:28.163596+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1982/07/17/195/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1393681,
+   "sha256": "3431fb56daca823f505207b4f3c31ea4945fb06f8ae015edc403781e5da61c6c"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1983/03/23/80/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0008"
+   ],
+   "captured_at": "2026-10-29T01:00:29.941580+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1983/03/23/80/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2956693,
+   "sha256": "d0d1475386634329654f4fa81b61913f47af612130ed5fd219614d92e767a432"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1984/02/08/38/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0005"
+   ],
+   "captured_at": "2026-10-29T01:00:29.943252+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1984/02/08/38/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2552100,
+   "sha256": "0f72230ed7f003cd4cdf14d242e58e1d51171ba6e64dc9c39ad67c9050321c52"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1985/10/08/237/sg/pdf",
+   "purpose": "the G.U. issue the year's archive places for the publication the layer prints",
+   "declarations": [
+    "PAE0057"
+   ],
+   "archive": "037f6a5aad62a4e1a0de4ba1a012a8f8669a11a9ba166b4ad3d2bff0a9ce6f14",
+   "printed": "G.U. n. 267 of 08-10-1985: the G.U. names no issue by that number on that date",
+   "captured_at": "2026-10-29T01:10:57.221489+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1985/10/08/237/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2908812,
+   "sha256": "35bfd7010ba8f2ba5e6215e6bf68dff83eb74a1db3604ab0a478a8bf4d185387"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1986/02/06/30/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0097",
+    "PAE0098",
+    "PAE0099",
+    "PAE0100",
+    "PAE0101",
+    "PAE0102",
+    "PAE0103",
+    "PAE0104",
+    "PAE0105",
+    "PAE0106",
+    "PAE0107",
+    "PAE0108",
+    "PAE0109",
+    "PAE0110",
+    "PAE0111",
+    "PAE0112",
+    "PAE0113",
+    "PAE0114",
+    "PAE0115",
+    "PAE0116",
+    "PAE0117",
+    "PAE0118",
+    "PAE0119",
+    "PAE0120",
+    "PAE0121",
+    "PAE0122",
+    "PAE0123",
+    "PAE0124",
+    "PAE0125",
+    "PAE0126",
+    "PAE0127",
+    "PAE0128",
+    "PAE0129",
+    "PAE0130",
+    "PAE0131",
+    "PAE0132",
+    "PAE0133",
+    "PAE0134",
+    "PAE0135",
+    "PAE0136",
+    "PAE0137",
+    "PAE0138",
+    "PAE0139",
+    "PAE0140",
+    "PAE0141",
+    "PAE0142",
+    "PAE0143",
+    "PAE0144",
+    "PAE0145",
+    "PAE0146",
+    "PAE0147",
+    "PAE0148",
+    "PAE0149",
+    "PAE0150",
+    "PAE0151",
+    "PAE0152",
+    "PAE0153"
+   ],
+   "captured_at": "2026-10-29T01:00:33.084540+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1986/02/06/30/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2788845,
+   "sha256": "5cfe98179af112d57eea6bb2cf1b4ad57bc29d394e24cf6c513aad8ecc0d4762"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1989/07/08/158/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0157"
+   ],
+   "captured_at": "2026-10-29T01:00:33.326718+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1989/07/08/158/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1361729,
+   "sha256": "afd3ccd7fc4415c98825959c9f028155fb51ebc79fd120dd56e53685ba7ab9f0"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1990/08/22/195/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0093"
+   ],
+   "captured_at": "2026-10-29T01:00:33.843802+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1990/08/22/195/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3960589,
+   "sha256": "80ffe0ddd6eb0882795ed26b54b6d2de60f869bbcbad1fdd0aaef3f775243f50"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1992/05/06/104/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0154"
+   ],
+   "captured_at": "2026-10-29T01:00:35.184609+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1992/05/06/104/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2775018,
+   "sha256": "ce512b7a653572f7f1d62203eace87530a4156d90af61a31f355b928a98f375c"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1996/07/05/156/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0033"
+   ],
+   "captured_at": "2026-10-29T01:00:35.279566+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1996/07/05/156/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3211421,
+   "sha256": "1bb1873da6f474084ae1a06d16babc3acc2336d676303048153d08731b385e7d"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1998/03/04/52/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0092"
+   ],
+   "captured_at": "2026-10-29T01:00:36.336702+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1998/03/04/52/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1695179,
+   "sha256": "066bb60a9fc73bc0bcee2144e129f888db524d4f9f586f276edc03b66c76d813"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1998/05/23/118/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0095"
+   ],
+   "captured_at": "2026-10-29T01:00:38.618530+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1998/05/23/118/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 1312064,
+   "sha256": "65b563e39c84e6017cfc07421a24876f43db3e455ccb7fee4d3405f8507237d9"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1998/05/30/124/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0094"
+   ],
+   "captured_at": "2026-10-29T01:00:38.656881+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1998/05/30/124/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 3993053,
+   "sha256": "13cbfd7fa20c97810158a239e611d53195357bb0523fd49c4db952a8fd577ae5"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1999/09/15/217/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0037"
+   ],
+   "captured_at": "2026-10-29T01:00:38.669139+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1999/09/15/217/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2827525,
+   "sha256": "670d4d385772fd51d08cea9fc727b991553f9c1284b77c6e343c31c1e771b34b"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/2025/02/01/26/sg/pdf",
+   "purpose": "the G.U. issue the layer states published the declaration",
+   "declarations": [
+    "PAE0158"
+   ],
+   "captured_at": "2026-10-29T01:00:39.207592+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/2025/02/01/26/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2070048,
+   "sha256": "d7ba7cac228c0c0f120fadcc906395d51a1353af4bda214962e52d08831578a6"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/31/330/sg/pdf",
+   "purpose": "the G.U. issue the year's archive places for the publication the layer prints",
+   "declarations": [
+    "PAE0083"
+   ],
+   "archive": "6c68aee5edd375a8364c8003613bc0ebece9855268da450ecee596d24ab93965",
+   "printed": "\"G.U. n. del 31-12-1970\" prints a date and no issue number",
+   "captured_at": "2026-10-29T01:11:25.892604+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1970/12/31/330/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 2520873,
+   "sha256": "505fa9594bd30974f4a0835c9e87a9685cbd3bb19c05f7fa6d727e0be8cdfcbb"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1999/09/15/217/so/173/sg/pdf",
+   "purpose": "the G.U. issue the year's archive places for the publication the layer prints",
+   "declarations": [
+    "PAE0096"
+   ],
+   "archive": "95108241908c8de527a3567126588cc6de751ebf721f8a256447a67de2857a8c",
+   "printed": "\"Suppl. Ord. n.173 alla G.U. n.217\" prints an issue number and no date; the decree is of 1999",
+   "captured_at": "2026-10-29T01:12:05.106568+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1999/09/15/217/so/173/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 4208381,
+   "sha256": "2abe531b16c19d43bddf723bc1cbc3e5447709695085095f1efde4f416cf5aad"
+  },
+  {
+   "url": "https://www.gazzettaufficiale.it/eli/gu/1986/02/06/30/so/5/sg/pdf",
+   "purpose": "the ordinary supplement the issue's index places an act of notable public interest in",
+   "declarations": [
+    "PAE0097",
+    "PAE0098",
+    "PAE0099",
+    "PAE0100",
+    "PAE0101",
+    "PAE0102",
+    "PAE0103",
+    "PAE0104",
+    "PAE0105",
+    "PAE0106",
+    "PAE0107",
+    "PAE0108",
+    "PAE0109",
+    "PAE0110",
+    "PAE0111",
+    "PAE0112",
+    "PAE0113",
+    "PAE0114",
+    "PAE0115",
+    "PAE0116",
+    "PAE0117",
+    "PAE0118",
+    "PAE0119",
+    "PAE0120",
+    "PAE0121",
+    "PAE0122",
+    "PAE0123",
+    "PAE0124",
+    "PAE0125",
+    "PAE0126",
+    "PAE0127",
+    "PAE0128",
+    "PAE0129",
+    "PAE0130",
+    "PAE0131",
+    "PAE0132",
+    "PAE0133",
+    "PAE0134",
+    "PAE0135",
+    "PAE0136",
+    "PAE0137",
+    "PAE0138",
+    "PAE0139",
+    "PAE0140",
+    "PAE0141",
+    "PAE0142",
+    "PAE0143",
+    "PAE0144",
+    "PAE0145",
+    "PAE0146",
+    "PAE0147",
+    "PAE0148",
+    "PAE0149",
+    "PAE0150",
+    "PAE0151",
+    "PAE0152",
+    "PAE0153"
+   ],
+   "index": "e95941b7a217f6ea0b8cb2981c35caf992f4be4be3a6858742ef0f763f922d95",
+   "captured_at": "2026-10-29T05:54:13.520934+00:00",
+   "status": 200,
+   "final_url": "https://www.gazzettaufficiale.it/eli/gu/1986/02/06/30/so/5/sg/pdf",
+   "content_type": "application/pdf",
+   "bytes": 16176091,
+   "sha256": "e99186db1e92c7117ebeeffa1f42cb30a933bb41877c261795a46d5e31385f89"
+  }
+ ],
+ "gazette_search": {
+  "from": "2026-03-31",
+  "to": "2026-10-29",
+  "captured_at": "2026-10-29T01:15:53.992228+00:00",
+  "issues": [
+   {
+    "url": "https://www.gazzettaufficiale.it/ricercaArchivioCompleto/serie_generale/2026",
+    "purpose": "the G.U. serie generale issues of the year",
+    "captured_at": "2026-10-29T01:13:15.288868+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/ricercaArchivioCompleto/serie_generale/2026",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 165254,
+    "sha256": "24de6652fc1d0ea35736d20d6f38901bc3e4a521fa059c49a538340ba102b5cd"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/03/31/75/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:17.523004+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/03/31/75/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 44266,
+    "sha256": "12e7f889b37fb273c68a1ddb4aff34f1a364e1173316c93c4dc7ecba01759f62"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/01/76/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:18.200234+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/01/76/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34829,
+    "sha256": "ab50d94ef6a417fec475bd2fcd2062479c65555e83bfc66cf7acbbe1baef55bb"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/02/77/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:18.984091+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/02/77/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35873,
+    "sha256": "448774b6dace1676a29d2ab88ff88d7d82d72662b3815e08f15530c3a98621c6"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/03/78/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:19.922350+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/03/78/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41228,
+    "sha256": "3d8efdd8616b9c391bb6df4c47cc076ec7fb2540f0cdac1d9faa5b055fbb7399"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/04/79/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:20.587066+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/04/79/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 32679,
+    "sha256": "9882d81b87e84c80f754c4f63e644453236e3a2589f8c775e167662fabb66def"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/07/80/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:21.307025+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/07/80/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 48676,
+    "sha256": "eb7887fd18319b72299c887b863ba8db515020e89386b73a982980623121e321"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/08/81/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:22.123234+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/08/81/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 48464,
+    "sha256": "bddb14d7e86460fc87200ca0eac54e553d5c1dd85925e6163d61976d05436a7c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/09/82/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:22.919513+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/09/82/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46632,
+    "sha256": "f2eed3e6702a383ea1dbb0b279a2b3cf14eb5144fdfde867885d9b9ea5a8bcc4"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/10/83/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:24.289885+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/10/83/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35192,
+    "sha256": "8167093b84b60f830dfd6b42c7ea5a71fd4abb876d63d7ccfb1a636a2be9916d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/11/84/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:25.175477+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/11/84/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 25520,
+    "sha256": "5b83b530c2632b6b49f2439ae660a7c7f84f9aa6ce0ef88989c26e2668bc8fcd"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/13/85/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:26.039905+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/13/85/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 30714,
+    "sha256": "035934ebe7a45fb14b555cdd08c42b2428ada3ba48aaa0180e82833687e58496"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/14/86/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:26.891758+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/14/86/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41206,
+    "sha256": "d50972edf4b5fe5ad6204b67249957a4d4e6edf3deb717953088571185f93721"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/15/87/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:27.797000+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/15/87/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42352,
+    "sha256": "019063505e04bd4e9bcfabe02a763c819f3f929416840ff8d5272fa98dd005c5"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/16/88/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:30.262780+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/16/88/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50260,
+    "sha256": "d9329df80cb6f1e4296c1a7bda4e04fd2c7aea2542f68084a3e02bffa55ca5c3"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/17/89/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:31.118101+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/17/89/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 28795,
+    "sha256": "f96ae1b3998a87089f75f2acc50a54329627944bdcf058b2f8f5b42adee62d11"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/18/90/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:31.874383+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/18/90/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 30379,
+    "sha256": "7a06d2591e422c1e15fe54e6551ef395d46579dc20d069c32e3ef99193b3425d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/20/91/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:32.612392+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/20/91/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 30588,
+    "sha256": "8f056d36515bb0870e71fcd0549a0735ab92533a78abbfec6aeb00a9995c50d5"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/21/92/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:33.411965+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/21/92/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 51094,
+    "sha256": "db3b6e6fb9fd367e725c9b9e4861907a10af42bb45bdad495ada898251af6a73"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/22/93/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:34.340093+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/22/93/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46421,
+    "sha256": "43f1d1a1b970d74cd903cabcb2025f95c82b367bf14916835217246ec8d7a384"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/23/94/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:35.061070+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/23/94/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39992,
+    "sha256": "3c1844e643937ec2453dab41f411672e86e9f0bddd3ca2abac157f09ed942c7b"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/24/95/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:35.754560+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/24/95/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38386,
+    "sha256": "1c2c13bed6c73226abf09530a6c21e5f0e7e2f6846c8829f12752fe5613a4b26"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/27/96/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:36.650988+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/27/96/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37676,
+    "sha256": "194f2219450c6760baa31cdf59c2a1af4f24a6a5162c39a847487d52760727d2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/28/97/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:37.333251+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/28/97/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 36406,
+    "sha256": "9bea7042e2102b6c354175e0e7dfbdb7300e84d7c623a8077007195bcbc4bd06"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/29/98/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:38.069387+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/29/98/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43460,
+    "sha256": "339c9871063ee636392ffff9ff494f3c393136aa5174d6b140329e97310dd7df"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/30/99/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:38.758874+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/04/30/99/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38257,
+    "sha256": "e12077f479fb50d1410efe708f6e01a43bbcbc3a8d5ea05a8394758a50f36e66"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/02/100/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:39.478801+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/02/100/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 30700,
+    "sha256": "d232e6a7a3b0b3fd43e3c8c53738a4ba2f58c2a9dc51d7e831af50083102d37c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/04/101/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:40.197334+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/04/101/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 33439,
+    "sha256": "dffcea8afc8741935371cc34b01724d70e33389ecfacf9c23ea1d773c2cd6c07"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/05/102/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:41.009214+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/05/102/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39258,
+    "sha256": "a4ee6972142e8e46059506a5cfdcde5c3250a0d7ef871f733cb8bc35a4405837"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/06/103/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:41.766283+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/06/103/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 45259,
+    "sha256": "c9742975b9badf6d886b3214b412c1157b8ec908ea420021c0516ea0099f490b"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/07/104/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:42.570410+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/07/104/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 55162,
+    "sha256": "fa0ff40691efac9bb016f80f218f3c0ec79002c8d4b01e75a762983618773c28"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/08/105/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:43.397438+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/08/105/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 48903,
+    "sha256": "af9cf8e6b5806f1cbfc41ed6080288f13a64e81b0b0a5f90d9476ab57b48ca9f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/09/106/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:44.745673+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/09/106/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 47389,
+    "sha256": "28a720a5cfe378d50c3b4f3b25ca6bbfff84f0d9930861b2e4c2405867991c90"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/11/107/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:45.738631+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/11/107/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43401,
+    "sha256": "81b7a59a93295bd4b03628a2a84c1eada2c7fa0a3e8dc3e475a0509e82cc060f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/12/108/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:46.509032+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/12/108/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 53903,
+    "sha256": "9b01555a5b867c488648f0be11c5d1c93cf20de7bad95c91ea2425f4247e343c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/13/109/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:47.509610+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/13/109/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 53849,
+    "sha256": "bd3ba64c1f56c786612ef971144056ce872ef02607b6703e8a93f0832e39e3ee"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/14/110/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:48.574405+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/14/110/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 61079,
+    "sha256": "e1a4b2d43dfc16e30f79b29f15cf63baacb34dee8f73847c8a19a14eb5f34123"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/15/111/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:50.098994+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/15/111/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 59035,
+    "sha256": "fc99c4470a044942fe1936da097c67af3205400b00e79459bad185046e106435"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/16/112/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:51.847291+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/16/112/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 53491,
+    "sha256": "3394b11aa537c72f237802672fff5fcb4bfa8dc712ac88c01068460ef47e1ec0"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/18/113/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:53.307934+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/18/113/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 44155,
+    "sha256": "8065588ef483bee2076794961bdd3202451a53eefb79da682a9489f59f7720f9"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/19/114/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:54.120984+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/19/114/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 55474,
+    "sha256": "b7256869027cfc0ea18d3aaefd7ac2577a3eb2c723a1b69753818b69f5385faf"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/20/115/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:54.860061+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/20/115/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 49256,
+    "sha256": "492d57e0949ce2b9a4b2f310f303d35ffc10cf6582acdf90265652e2d9a74bc2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/21/116/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:55.551882+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/21/116/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42604,
+    "sha256": "ea9ae74eb453f5b1741053e2845b4537ca25c583dc0ed2d18a5fed241746a6d3"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/22/117/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:56.202545+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/22/117/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39031,
+    "sha256": "96a2f4f3d009cb3494c6aa68a3b7226903709be969ecaf1a2b9ce67b39dbaa11"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/23/118/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:58.653748+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/23/118/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 29720,
+    "sha256": "a7d63cb5e49a5a2a482d7df57e9af26f6f3c3bb2eeba68975ab9aaf5d5237a5e"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/25/119/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:13:59.353902+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/25/119/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34360,
+    "sha256": "7cd4885783cf767e0925fda8efee031dc4b233cd62886506d157d021fed67017"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/26/120/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:00.126567+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/26/120/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46206,
+    "sha256": "deccbad9314f9d7a3769c5f1a25c21e06a88ae4c901051f84c412884c6020d1d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/27/121/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:01.007107+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/27/121/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34430,
+    "sha256": "bf93634e2cc7e76b53f3e74d0161ff54291a8bdafd9fe88a3afe2b6afa37add3"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/28/122/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:02.044027+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/28/122/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 36234,
+    "sha256": "eebeabc0f8b9bce3e0d9d5c3551971f4db336a9d22536f3405a12e31920bb0ab"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/29/123/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:02.844670+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/29/123/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 44846,
+    "sha256": "a3fcd69277160ef01b795e97da48a12eeaec186f6f13d723fea24d663124a6d2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/30/124/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:03.642352+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/05/30/124/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37064,
+    "sha256": "798c105abb6cab5b265ac36e59eb57452dcf363e48333c0eab7ec455fc648cae"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/01/125/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:04.401560+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/01/125/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42278,
+    "sha256": "62f78261e304fc54b0aca1699f01f822e19e588c0bf18963b1e93b7cfd8e3d17"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/03/126/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:05.177437+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/03/126/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50943,
+    "sha256": "ef12cf08176667d552dfde30d3f088b660cf8c12339d283465089a471fc5d6ec"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/04/127/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:11.935316+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/04/127/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43907,
+    "sha256": "68f4560aa134854edd5a19baaec0d4c5784fd6f0292f14ebee203a5fc5e79de1"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/05/128/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:12.710226+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/05/128/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38754,
+    "sha256": "2b044906379e0f5498dfdab64fe231f7e89bb518184b7a39fa104f960460fba1"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/06/129/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:13.501894+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/06/129/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34165,
+    "sha256": "9253c28a5126751892d143bded6b0f74fbbc702e07b4a11b68dc5ad11f4feaa0"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/08/130/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:14.236087+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/08/130/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37643,
+    "sha256": "b7b1fa8c2a1b7828a6ddd23484ff7ac275cb1d63c3c0c19678de31b20ba7abfd"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/09/131/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:15.077540+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/09/131/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38530,
+    "sha256": "742e2995b5f5595a5e489328e33c110b8f785607915246e509e681cc6c04d4d7"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/10/132/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:15.931496+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/10/132/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 51168,
+    "sha256": "a912416ad1b7272fd06d60bd400132a0e730e5903c1b1137adebd715d9b636d7"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/11/133/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:16.914856+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/11/133/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 31439,
+    "sha256": "8e3875a44294365d39e2f5e9869c6fdb9f8b760ac84accee87c66d07a227680d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/12/134/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:21.061211+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/12/134/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 33590,
+    "sha256": "0ec5bbb7dbf81ace3c1a1d7ff09f06ff08bfbc5da5a3002d7ede6e8875566a08"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/13/135/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:22.117740+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/13/135/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34838,
+    "sha256": "03ff5d868cbfa93228042d5e931de05f41181567961d161d12023c042e6b5c9e"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/15/136/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:23.279784+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/15/136/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34587,
+    "sha256": "ac9876af1492b162c13394cbfb11c162f683e0646439ad87217b231b107162b3"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/16/137/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:25.437133+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/16/137/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 52360,
+    "sha256": "1c5b9f28022a4b60410cc3ed184050c5adc676108122ececf2983e4c5620764d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/17/138/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:26.505314+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/17/138/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 62869,
+    "sha256": "1f34c882f96e319e01a38bd82522061c388dc482a6928d5a71d30d81da67d0cf"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/18/139/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:27.654368+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/18/139/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43003,
+    "sha256": "0a3025dc2bff6fab68ea53a0a65fd35b58d6181cd23d2da456b2a0eedd6b684c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/19/140/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:28.957371+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/19/140/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 44985,
+    "sha256": "1dbbd1a8cd9eea838fa9d4ba61b287c268dc515d7b5ccc516333dcb8a0d238dd"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/20/141/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:30.433550+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/20/141/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 36865,
+    "sha256": "bbdb3237427d344d7b42323160dcc310660b183a3f826147ef867f507aea67cb"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/22/142/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:31.759013+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/22/142/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43258,
+    "sha256": "d4bc4cf4ac1264c2198a0dd0bf0deaf3c62257d73979e3eae59dbdfee3955843"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/23/143/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:32.628908+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/23/143/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 47130,
+    "sha256": "39431bb04da5ffa64a03bfd7fc71e1870362ce49e3a811223dc05e50ae0c6d5d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/24/144/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:33.477628+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/24/144/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50918,
+    "sha256": "c5210e4133a73e6b603bbd035af3a70d9d21459f96169dbbd694b0fd4e85f398"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/25/145/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:34.452760+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/25/145/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 53075,
+    "sha256": "61b7fa554e8ac10fcbc72a4dbbef952534d5bd6f1d2af327f61c584f1774b237"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/26/146/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:35.140700+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/26/146/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46919,
+    "sha256": "ecf6c0573c33f77dd18b10354d82500909673b655522867a74ab2ce133ed0719"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/27/147/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:35.777105+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/27/147/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 40280,
+    "sha256": "3c9219db13d3d6f17c2f96c338255f50b562443f1bee16dfc2365fdb88ca035a"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/29/148/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:36.293486+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/29/148/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34638,
+    "sha256": "bf7580b53038572042e704906831f4de02e0e8b2c2ed2926cd814793a3dc6832"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/30/149/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:36.832869+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/06/30/149/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 44244,
+    "sha256": "7235bd4928eed72da4dfcfebd121f3d4fa50ab9814c8906543f15ad6f7420cf7"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/01/150/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:37.367216+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/01/150/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38256,
+    "sha256": "7e63af59d1b968ba693124b77add4467c2e52dbd0b148f71e9b51ab365130193"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/02/151/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:39.046996+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/02/151/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 29577,
+    "sha256": "78fb821c1b5fc2a9fc39a889ba55c1dd27c9475031adc141cff04f58e7308706"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/03/152/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:39.565014+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/03/152/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 36855,
+    "sha256": "8db0af498f966cfebdba14a5d993d205e1860b42b544e2d43936aa883928fb86"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/04/153/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:40.058215+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/04/153/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39823,
+    "sha256": "b66d628cdb7c3afa12f6d465a83f1fdf69655bce17394dc6355bbf705be90ed2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/06/154/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:40.595493+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/06/154/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 31291,
+    "sha256": "9fb44c9cbbd2c5996a9cc23516d649bff04127731d4b43535253aa5a2d8a73a2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/07/155/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:41.126924+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/07/155/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39422,
+    "sha256": "88269164ce8dd596fefa1c70a5ff86dc76cabcc2479edc96a870db776ccd5ede"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/08/156/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:41.825085+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/08/156/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 45423,
+    "sha256": "7dbfe761db6576cb0d4613bfa09dccf01ca5c08b982cd7bea3c2fc7aaa956dd5"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/09/157/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:42.461504+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/09/157/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39387,
+    "sha256": "0508238b06bbda87bcb1617676a21088abddf4b117332fc92299b57cf4d363fa"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/10/158/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:42.957737+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/10/158/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41770,
+    "sha256": "15d5a3a5c8bb4204320eba0aab0b3114031230f951f01b01ec510b15bfa87ced"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/11/159/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:43.475394+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/11/159/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34749,
+    "sha256": "fbd46b66a892ebe7b2658ad6b1a3dd4139611ca4d2d866f63c95206deaa61a9e"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/13/160/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:43.995210+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/13/160/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42603,
+    "sha256": "c4d71a1c491fad33a3bb1547dd3ebff92363ce10c086c970a87285b264416b69"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/14/161/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:44.538631+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/14/161/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 49172,
+    "sha256": "6ba8f9b64e5e0af3bf894de30e08b0ea0acdc068933ed82fc40b93f29de2b52f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/15/162/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:45.064012+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/15/162/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50122,
+    "sha256": "9d251f0d1b4caaf4c2061011bcb4e04da3f276d0927b66442020f3d3f3ce9816"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/16/163/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:45.545833+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/16/163/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 58605,
+    "sha256": "2ab286abccdfac2a069bc679a1528394729e7f6952f2aa6bc4745d0454fecbd2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/17/164/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:46.196948+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/17/164/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41044,
+    "sha256": "7785ca9ed345316bc76525f5ca8755bad2736b888131d520565a702f0d78a832"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/18/165/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:46.755015+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/18/165/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34672,
+    "sha256": "bbf22dc5ad052e53a67fc7f3336d67cce7ff4eaf8475e22109da2ae0b092880d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/20/166/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:51.250593+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/20/166/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39790,
+    "sha256": "287d06f48bc9bff178b91172386f72adbe099c454f44132be7f0e122bf14535f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/21/167/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:51.926481+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/21/167/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41139,
+    "sha256": "cc4740ca7c8801f6992ee39eb5459427fb53b3c465ac9f42661075898027c23b"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/22/168/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:52.547338+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/22/168/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 48644,
+    "sha256": "2a60569583d8285ae031886a332a571b6174bddccaa6fc793ee80e3ad10f3599"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/23/169/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:53.076871+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/23/169/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38095,
+    "sha256": "130a8925def127f049c1e7707cc0b3c21d735cb4a1cf1bb411493950d2249f57"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/24/170/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:53.586105+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/24/170/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37809,
+    "sha256": "c61ab60b31f8ed512100ff3b01184b4c1f3f132fae6d274a24ed9ec68741017c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/25/171/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:54.519763+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/25/171/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39937,
+    "sha256": "b1052b1752fde1ee8e1d305143da39e6efd6b464b3acf418a15eb12fdb1f13dc"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/27/172/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:55.170714+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/27/172/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46167,
+    "sha256": "23c063cbaaef2863c950d1a7a7bcbb8777d5826d32db5056ce24eceaa3bc48a7"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/28/173/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:55.697471+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/28/173/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39765,
+    "sha256": "10668760b4fe8c9bdde57108ac7e47918d698288ef36ec9f358245b81bac3f46"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/29/174/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:56.181183+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/29/174/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 45992,
+    "sha256": "6cb2a39d8735e1b9693a0d10a0c49c36dbf9a332957cddf5ca303bab2f045163"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/30/175/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:56.701203+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/30/175/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 18443,
+    "sha256": "0af86842b917b4583c9ca46d56814b4fe21e00ca883b794d583d63daf42f20f5"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/31/176/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:57.227162+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/07/31/176/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 21632,
+    "sha256": "eb879d478561095109bd609ce8c0a4da6a642b7dd68c5fbc25dffb0d2e65f351"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/01/177/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:58.071918+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/01/177/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 31553,
+    "sha256": "e62e7528ff8821615d2baafc449ad781bd02fef2309e8024039a7e4bd880b139"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/03/178/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:58.589946+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/03/178/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34917,
+    "sha256": "fa68a0a5bb819abd4c303085feca81f8922247122d19b7436625e2d72456a64b"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/04/179/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:14:59.297527+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/04/179/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34445,
+    "sha256": "ffb994b588ffce0ea8889b5e015f6493bfa549f4f14aaa708edade9f47e51878"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/05/180/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:00.835373+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/05/180/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43724,
+    "sha256": "dad048b79fbffab864f2d756a8110bde71fdc6214146793e70c0b0fd52f2078f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/06/181/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:01.469952+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/06/181/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50765,
+    "sha256": "45d12faed5b3cee772ba799a1f6a69709e36abebd496ca9c1a3c58893734c2d2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/07/182/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:02.074053+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/07/182/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 49962,
+    "sha256": "7f39e70d88df0255e7a96dae1bf55d99472a074f1c2923ffeb7cd2c70ebfc90f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/08/183/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:02.634749+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/08/183/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37942,
+    "sha256": "c13e432c8268f330eccd5248d4dabbc698d9722271a9e432bd3bea3f8d9b6458"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/10/184/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:03.310530+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/10/184/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 40733,
+    "sha256": "32fc43b917cee4a9e8e10f4fd07108dec71643eb39eae6fa5c226c4108eb26d1"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/11/185/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:03.840452+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/11/185/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50951,
+    "sha256": "cbf1b801cafd7f80d2abd22170d4468bfaeb07afc81624068c0b5627d0999aca"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/12/186/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:04.429552+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/12/186/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41582,
+    "sha256": "e5598ab51ea52e014284d5627a5d46e6e5a89fb3758f8a552f4e3282d5bdbdb2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/13/187/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:04.930273+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/13/187/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 47827,
+    "sha256": "a461702d89ed09459c614a148f77c827ecb9d5e3a15b8766d30605a829c806f0"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/14/188/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:05.461443+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/14/188/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 47068,
+    "sha256": "1a253d936b1ef68c913c25afa1003bf0d9d8f5e58c0a6486737c5803f45316c3"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/17/189/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:06.004894+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/17/189/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 47204,
+    "sha256": "62db9de0cced2066e7d8b8a8606f90495187bdf2cb35b7c0e612adf2f92d6ce4"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/18/190/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:06.591921+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/18/190/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 62313,
+    "sha256": "c1813536d4d26bc2d8b38d6c392066d9a219660e2dcb80bcc1360e05b2ac6ee2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/19/191/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:07.178147+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/19/191/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41631,
+    "sha256": "0d5e8905de83ca407408c7839841519dff7a0fc67ac6531df4611ddcd4113926"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/20/192/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:07.769012+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/20/192/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42263,
+    "sha256": "4a452ddb078bcb0ed60187e026c7ce8769c29b515e02092f115d9c781464fdc7"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/21/193/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:08.289164+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/21/193/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42116,
+    "sha256": "0ed54366c69f98dc9321f412cfd12a55ab1b8055ab1d2ca10a4bad56713299bc"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/22/194/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:08.789375+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/22/194/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37904,
+    "sha256": "abfa9dc08420363818b13271f568d2f84d1d237222de39a76d6ff8130ccd872e"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/24/195/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:09.332656+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/24/195/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35114,
+    "sha256": "6d7d4e201335afbe2b41e9494f3a1e87dbe66c4e3bc5be97288da61e510d3c7a"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/25/196/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:10.033477+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/25/196/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 33208,
+    "sha256": "55a12c44b6f82ca72722d21402eb2357977f9e741ffe55d8f97f42c0964e4a5f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/26/197/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:10.653595+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/26/197/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41644,
+    "sha256": "e6d5f284a701c8a0f0bdc58c73b7679a16764703952f2728c7bb91a40fae357c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/27/198/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:11.214644+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/27/198/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34495,
+    "sha256": "b5df2b04ed2087fbd2d6b13eca2806bd8fbc59686537a9b4ebc10e76631ff9ab"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/28/199/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:11.755497+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/28/199/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 40872,
+    "sha256": "6e2dc7e73b37eb6ab97a2122e989998d916af0fb8c46625b46d6315a7aa49570"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/29/200/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:12.254671+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/29/200/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 32351,
+    "sha256": "039a2d9b0ef1fe759112c955558ac08e13f97fe286bcf61ab709ff7b8782faf6"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/31/201/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:12.822466+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/08/31/201/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39878,
+    "sha256": "be21c4cb37c119fc7d0be4ffb04cc73d5a697967debfd258d60ef240cad4a6b2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/01/202/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:13.285181+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/01/202/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35136,
+    "sha256": "8c247d88c7d9180c8bdba3b6c83899fa239c9f85a56da046bffec0248f9e9e0f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/02/203/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:13.792149+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/02/203/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38395,
+    "sha256": "ea06911483b0c7f1a3b012852140275c7a53a974786ee598988c0833e2df54ee"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/03/204/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:14.340730+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/03/204/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 47747,
+    "sha256": "28fdd0e8ad57e7461302c51b6abb6c8f85910e26601ba686e1430824089255e6"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/04/205/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:14.906425+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/04/205/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 50433,
+    "sha256": "04971317fd72110791d93e530b0298f2374f99ed7866fcdcb9b028cf097eacb2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/05/206/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:15.399169+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/05/206/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 32301,
+    "sha256": "fbee208639326f6d8206b706de8165d892c9adef130e9a16001fa9f1ced2337b"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/07/207/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:16.672477+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/07/207/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 40454,
+    "sha256": "d81851c8756c7b68cbb8fcbdc37658cdd9f10bedcf03111f77da148608b6ea50"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/08/208/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:17.312635+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/08/208/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 66386,
+    "sha256": "8fe29748f6f9d31592409c4ee0cc34e2fe41a68d38e04fbd8263c64c0afc41f6"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/09/209/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:17.865812+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/09/209/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 62818,
+    "sha256": "227b129632f77810d1597011e7fcd2e75671ef6dd0d2d720bd5087f8df8535d4"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/10/210/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:18.510902+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/10/210/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 80761,
+    "sha256": "80c206325a522b856c092411cce0a1b885b375fd8b2562ec8597e81d7fd8328d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/11/211/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:19.050049+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/11/211/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 79282,
+    "sha256": "13608ef292e64a4001de0385b8a584a941fb7b15079e963737e8275c6cc42e1c"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/12/212/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:19.629065+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/12/212/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 49936,
+    "sha256": "0a5ad12fb0baf1cccf9ad839306ca8b5d7599b3131f61d5a4febd476e1035dfb"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/14/213/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:20.190399+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/14/213/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 56511,
+    "sha256": "aec7c28b21fc6272625484fd03db603ec051c5108d162599e0d65f57bd013442"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/15/214/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:20.794538+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/15/214/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 73128,
+    "sha256": "2ba4a7797373b22c546d235e2cb8e660a0ae76792f05c043ce0adcba98d48fb0"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/16/215/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:21.377089+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/16/215/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 62155,
+    "sha256": "31071e9152220a14c7bb408c2aeabebeb7e85d2a590b08e22f2e501054e27614"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/17/216/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:21.952555+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/17/216/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 53111,
+    "sha256": "f892c11e82358544b2f3839ed0e98e5471eb074f308a1a6fa13fecf6a0218ef2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/18/217/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:22.550101+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/18/217/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 36781,
+    "sha256": "474f741dcc57461065a2368b1b95f3d5b288e4957c89a1c13dd4af0c5c037439"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/19/218/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:23.091945+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/19/218/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35812,
+    "sha256": "1eb854af634dbaccbaae963a9baf3e1bf8936f0247860e9e76d2fd3e2d6a0ac5"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/21/219/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:23.629100+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/21/219/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 40053,
+    "sha256": "6a0a998db64e61b09fe034d127d7a25ccc4751a7e0db13e1e4274eda12adac79"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/22/220/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:24.154931+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/22/220/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39769,
+    "sha256": "c3f7a3db26bf97389cf66bdd46e68010de2246442766ca287f8fc95277cb6c64"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/23/221/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:24.661405+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/23/221/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35034,
+    "sha256": "857cbd118b1b49e4721e3ba1e22654d476c606c42522e16e973fbf24d9718244"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/24/222/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:25.168911+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/24/222/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43750,
+    "sha256": "de21a9b2f4366c0005b9bb4aabe2e3f1d40ac198453e5e830da0c1a84792ab2a"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/25/223/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:25.713158+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/25/223/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46765,
+    "sha256": "6a4e5ca05296339f27eadce3531f0a77bf721624046c50275ba4e18a11b7d65a"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/26/224/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:26.198037+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/26/224/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41851,
+    "sha256": "b3d96234c75c20f11d0836e884397af1a267bf4cdbd290487b6a2a4fd0a3f2ec"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/28/225/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:27.252835+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/28/225/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 54429,
+    "sha256": "b6ca535d73703eaaa951a49b1041ed0ad175951aabde337b749024490091a321"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/29/226/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:30.040421+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/29/226/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 71241,
+    "sha256": "dd7c93dba47376776325a356c7d42b9ea03dd34e1178b2630fa0be64359bb738"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/30/227/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:30.634358+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/09/30/227/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 51058,
+    "sha256": "e2384b0a183f12937386daa99ae2dde8a3cc409a07f7248c2bc27b41dbfaeb53"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/01/228/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:31.327760+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/01/228/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 48563,
+    "sha256": "8ba33cde550b180f1c649657da85a93b55cf46a99dedd82c53086b3caa9fea7e"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/02/229/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:31.812584+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/02/229/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 30229,
+    "sha256": "f6dc051a1ff87e9a78c6d865375da778a8c041993e40a4041347d39dfdf2e3e8"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/03/230/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:32.345358+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/03/230/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 34176,
+    "sha256": "a830b792274ec02ebff8c22d030a2610844db4e9be3bf697a430cf807011a901"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/05/231/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:34.590968+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/05/231/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 45917,
+    "sha256": "a961d3b26bc0a7086abc4b3e29ecc8a1e0db9e360b4a818ac6f2883075acd9ec"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/06/232/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:35.187119+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/06/232/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 42789,
+    "sha256": "127ce15bc57aa3c76d6628ab72e2239a31699c25cfc1ca5db1efbb28ec85051e"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/07/233/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:39.770408+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/07/233/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 48837,
+    "sha256": "9ca46255952e8e788c626bfd9a6f574d8b76359893fee5bb4590359e6502ecb4"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/08/234/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:40.529254+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/08/234/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 45522,
+    "sha256": "213150353b684852aec84df461555f667117bbfea92c41c0876c1f1332aa05da"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/09/235/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:41.051653+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/09/235/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43162,
+    "sha256": "94357ee50730fb4de848befd724621d264d934d37a2cfb6736297427dc96651f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/10/236/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:42.181048+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/10/236/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 35356,
+    "sha256": "a789262e4bef8971b557bb239b541341e7ab8f192d5e40bb632e9c3d7a715ed2"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/12/237/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:42.713199+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/12/237/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 46514,
+    "sha256": "b9c78125f0655a3f6eaa8b68a2ca879b94507567944241abd01a1880d0c49948"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/13/238/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:43.282029+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/13/238/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 41084,
+    "sha256": "969d8afc7cbafdab395b65f64b62da9900500f539d03dc514bf3c1a244d6d772"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/14/239/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:43.822546+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/14/239/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39447,
+    "sha256": "f711e5e1cf080ba15fae4cc169235fa60a29253358f5197679da3f097f7cfcb1"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/15/240/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:44.723183+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/15/240/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 37715,
+    "sha256": "c33d96b82db27c3c7fbc50b8ddc4d254467125f0feafbb6ac1b3a7286f426238"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/16/241/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:45.248831+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/16/241/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43456,
+    "sha256": "e6622a55442b5d839ea0d0ef61ed633d54735f28b582bb0028e35158bff1702f"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/17/242/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:45.785245+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/17/242/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38527,
+    "sha256": "4975ff9378fab993f748249d0e3af0f441c23417929534a1382a46fb4188d13d"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/19/243/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:48.271423+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/19/243/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 39694,
+    "sha256": "a24cceb8166105c790f178c5a564ed4243deb0e5fadeffb0c76beb97b9b20cf0"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/20/244/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:49.045439+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/20/244/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 57029,
+    "sha256": "64ef9dcd5c24e70537092657a0ead85ce361176ca0aa59c30eb5ec4a6642d2ed"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/21/245/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:49.711217+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/21/245/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 53494,
+    "sha256": "9b9c233b4113381e506420e4047b6f6dc691c5823f8a822ae3ad272488d6aae5"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/22/246/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:50.307034+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/22/246/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 43703,
+    "sha256": "19c1918d2c8ac46aba0734390de84174623777ebd7471a76224ef656bfc01957"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/23/247/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:51.052067+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/23/247/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 38654,
+    "sha256": "f8da9b06b995e81aeac07c0d2a4d91e211f47c2b656052f768ffbe0003cb53ca"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/24/248/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:51.580658+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/24/248/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 33268,
+    "sha256": "f4dad4b63043d3a6321c0aa92a78c4c5f4595318f46c5ef5e786718c2c4e98ed"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/26/249/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:52.137558+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/26/249/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 45415,
+    "sha256": "ac42a07633bced42710852eecdc7f70151a0901ba6cf4202825eb0e233e84bad"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/27/250/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:52.672535+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/27/250/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 32522,
+    "sha256": "df61fb72179f2a693d2771064f70434feea3245e822f7945a6338fa8afe2ad45"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/28/251/sg/html",
+    "purpose": "an issue of the search window: its table of contents",
+    "captured_at": "2026-10-29T01:15:53.471141+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/eli/gu/2026/10/28/251/sg/html",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 31254,
+    "sha256": "544cac78a3a4c4871c9b55bc91ea3e6f803f567c22ab3296d315ad3bcf3a492f"
+   }
+  ],
+  "matches": [
+   {
+    "url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-05-22&atto.codiceRedazionale=26A02498&elenco30giorni=false",
+    "purpose": "an act the issue titles a declaration of notable public interest",
+    "title": "Integrazione del decreto 13 giugno 1956, recante: «Dichiarazione di notevole interesse pubblico delle zone verdi all'interno delle mura urbane di Siena». (26A02498) Pag. 107",
+    "captured_at": "2026-10-29T01:13:57.902167+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-05-22&atto.codiceRedazionale=26A02498&elenco30giorni=false",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 16966,
+    "sha256": "7f945c0a44d24628a83455334e59dfbc46b892ac37a110865bb861317cacef86"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-06-15&atto.codiceRedazionale=26A02931&elenco30giorni=false",
+    "purpose": "an act the issue titles a declaration of notable public interest",
+    "title": "Dichiarazione di notevole interesse pubblico del «Borgo di Vignanello e aree panoramiche circostanti» nel Comune di Vignanello e aree del Comune di Vallerano. (26A02931) Pag. 7",
+    "captured_at": "2026-10-29T01:14:24.412217+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-06-15&atto.codiceRedazionale=26A02931&elenco30giorni=false",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 17171,
+    "sha256": "5c2dfc7cd7ad48f880a269b5356e195482d3842073558644371264c800ce5672"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-09-28&atto.codiceRedazionale=26A05115&elenco30giorni=false",
+    "purpose": "an act the issue titles a declaration of notable public interest",
+    "title": "Dichiarazione di notevole interesse pubblico paesaggistico relativa al «Rettifilo che collega Sansepolcro e Anghiari» (26A05115) Pag. 46",
+    "captured_at": "2026-10-29T01:15:29.532784+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-09-28&atto.codiceRedazionale=26A05115&elenco30giorni=false",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 16928,
+    "sha256": "99ea99a4f5be2cfb0e9ad207e602dd726628259f78cf99fd404c33ab9cbf9fe6"
+   },
+   {
+    "url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-10-06&atto.codiceRedazionale=26A05157&elenco30giorni=false",
+    "purpose": "an act the issue titles a declaration of notable public interest",
+    "title": "Dichiarazione di notevole interesse pubblico delle Case Grotta in localita' Cariglie di Mombarone e del loro intorno rurale-naturalistico, nel Comune di Asti. (26A05157) Pag. 165",
+    "captured_at": "2026-10-29T01:15:35.911667+00:00",
+    "status": 200,
+    "final_url": "https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2026-10-06&atto.codiceRedazionale=26A05157&elenco30giorni=false",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 16990,
+    "sha256": "7bf82351f72792198f2be2e3b69d541572325ab3d66a720d3f05e73df08b2834"
+   }
+  ]
+ },
+ "schede": {
+  "page": {
+   "url": "https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/6.4.-schede-di-identificazione-e-di-definizione-delle-prescrizioni-d-uso-degli-immobili-e-delle-aree-di-notevole-interesse-pubblico",
+   "purpose": "the elaborato 6.4 page: one scheda per declaration",
+   "captured_at": "2026-10-29T01:22:35.362655+00:00",
+   "status": 200,
+   "final_url": "https://pugliacon.regione.puglia.it/web/sit-puglia-paesaggio/6.4.-schede-di-identificazione-e-di-definizione-delle-prescrizioni-d-uso-degli-immobili-e-delle-aree-di-notevole-interesse-pubblico",
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 160529,
+   "sha256": "ce8b8cf914918751d1baa0c8afc156b931c64fb6f7a6f78139514d9f86fd11a4"
+  },
+  "schede": [
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0001_scheda.pdf/4ffb9206-5031-ca0e-1f23-dfc75471465f",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0001",
+    "captured_at": "2026-10-29T01:22:37.131888+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0001_scheda.pdf/4ffb9206-5031-ca0e-1f23-dfc75471465f",
+    "content_type": "application/pdf",
+    "bytes": 18809816,
+    "sha256": "57670a72684dcd2a0efe69027e0ccdb6eb825ca7eb3decc3b5df9d1e0bd5da8c"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0006_scheda.pdf/4700c993-d593-8353-a7e5-9512e0cd6330",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0006",
+    "captured_at": "2026-10-29T01:22:37.132046+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0006_scheda.pdf/4700c993-d593-8353-a7e5-9512e0cd6330",
+    "content_type": "application/pdf",
+    "bytes": 22802612,
+    "sha256": "8d29628742ce716f7ab4c71170c4889e75838d929c22c6ea3d97760199b40c1e"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0012_scheda.pdf/72818434-22b0-4626-e7a3-9070850abbd4",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0012",
+    "captured_at": "2026-10-29T01:22:37.132617+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0012_scheda.pdf/72818434-22b0-4626-e7a3-9070850abbd4",
+    "content_type": "application/pdf",
+    "bytes": 31286605,
+    "sha256": "ba9963d6bf09ab9316b0fce88d8b71557e441854fec25062667d58362269b067"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0013_scheda.pdf/34403769-624c-20bf-afa3-24a6a26f24c4",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0013",
+    "captured_at": "2026-10-29T01:23:40.460852+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0013_scheda.pdf/34403769-624c-20bf-afa3-24a6a26f24c4",
+    "content_type": "application/pdf",
+    "bytes": 27823283,
+    "sha256": "caf467475f28625ebee2e9220149811cd6a9b7d008776aa64bec9a589b9625b0"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0016_scheda.pdf/1dae4297-da74-2e33-121c-8305875fa7e6",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0016",
+    "captured_at": "2026-10-29T01:23:47.146862+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0016_scheda.pdf/1dae4297-da74-2e33-121c-8305875fa7e6",
+    "content_type": "application/pdf",
+    "bytes": 31573998,
+    "sha256": "1f2e7a49577d4b715aa71b344d95521d3cf1a3f39a34d48d15cdacbe94782ce9"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0017_scheda.pdf/03c36a5b-5506-a736-7717-da5116a8d314",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0017",
+    "captured_at": "2026-10-29T01:23:58.757879+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0017_scheda.pdf/03c36a5b-5506-a736-7717-da5116a8d314",
+    "content_type": "application/pdf",
+    "bytes": 41306379,
+    "sha256": "32b4c658ac82f5fd65edeb51c94c657e2271467fa92463d79146f515f7531abe"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0032_scheda.pdf/205eb0b3-1d45-d272-74dc-5ca9ef85fd5b",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0032",
+    "captured_at": "2026-10-29T01:25:15.476251+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0032_scheda.pdf/205eb0b3-1d45-d272-74dc-5ca9ef85fd5b",
+    "content_type": "application/pdf",
+    "bytes": 17481279,
+    "sha256": "84ad5bb93e7064370d04d248c1e46d3401203543bca504ba6833565c9cc63211"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0033_scheda.pdf/5ef74f6c-a532-5e3a-b303-0eaf99208f39",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0033",
+    "captured_at": "2026-10-29T01:25:26.030926+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0033_scheda.pdf/5ef74f6c-a532-5e3a-b303-0eaf99208f39",
+    "content_type": "application/pdf",
+    "bytes": 31052562,
+    "sha256": "3ee5fe31d40385336898f1bb6ef6851a71be8af7fc26e87915639f62e04b664b"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0049_scheda.pdf/7c9b33e6-e395-8f9b-2df7-53dfc328d7c9",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0049",
+    "captured_at": "2026-10-29T01:25:56.385449+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0049_scheda.pdf/7c9b33e6-e395-8f9b-2df7-53dfc328d7c9",
+    "content_type": "application/pdf",
+    "bytes": 31753244,
+    "sha256": "735470a137214876466a0733476920a212f9b63742c8e8b52bb94774fe0c8a42"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0057_scheda.pdf/2988e9b8-aaa9-e070-8899-5713428b7ed1",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0057",
+    "captured_at": "2026-10-29T01:26:13.191923+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0057_scheda.pdf/2988e9b8-aaa9-e070-8899-5713428b7ed1",
+    "content_type": "application/pdf",
+    "bytes": 12132265,
+    "sha256": "374b13d00b01b19622e922fdd9718a27a5e269db225df7236cac56de44d8302f"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0063_scheda.pdf/739c82e7-e53d-3e28-5568-bfa6fc78489b",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0063",
+    "captured_at": "2026-10-29T01:26:46.624562+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0063_scheda.pdf/739c82e7-e53d-3e28-5568-bfa6fc78489b",
+    "content_type": "application/pdf",
+    "bytes": 30240646,
+    "sha256": "d09f569ec5072791e4d9e71347c0ca41a341ad7945f1d1480305e67110b929f1"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0066_scheda.pdf/6a25ed2a-e0f1-eec0-0a54-86a9f95cd7b9",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0066",
+    "captured_at": "2026-10-29T01:26:48.228722+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0066_scheda.pdf/6a25ed2a-e0f1-eec0-0a54-86a9f95cd7b9",
+    "content_type": "application/pdf",
+    "bytes": 15126740,
+    "sha256": "4e15c0bfaf5c8a886985607d05b6c0bab0b4e6be4eac95776b026a3f33fa526a"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0071_scheda.pdf/c7dbf0e7-4ec1-75f1-a8e1-1356e1d02b30",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0071",
+    "captured_at": "2026-10-29T01:27:22.878924+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0071_scheda.pdf/c7dbf0e7-4ec1-75f1-a8e1-1356e1d02b30",
+    "content_type": "application/pdf",
+    "bytes": 12479021,
+    "sha256": "1b7dbdfc59e69f3a1248e5aa7db56060764bea9a857c546489b534dc1ed66d3c"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0072_scheda.pdf/d1201b35-128e-efb7-116c-0ca67ad923b8",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0072",
+    "captured_at": "2026-10-29T01:27:28.456242+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0072_scheda.pdf/d1201b35-128e-efb7-116c-0ca67ad923b8",
+    "content_type": "application/pdf",
+    "bytes": 8764200,
+    "sha256": "41d0a94da7200d9794c551e3cc27f693df80a8242ec53b41e4f4dc25b4b464d4"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0075_scheda.pdf/1306f6e6-dfcd-97b4-9b68-eaec94f13666",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0075",
+    "captured_at": "2026-10-29T01:28:01.911565+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0075_scheda.pdf/1306f6e6-dfcd-97b4-9b68-eaec94f13666",
+    "content_type": "application/pdf",
+    "bytes": 13930373,
+    "sha256": "569bc289ff3d9ac1810b3fb4ee73c3361d62de689ba4aa695262290513bc7dbb"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0077_scheda.pdf/ccbe71ba-385b-9b80-b647-248d60711b49",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0077",
+    "captured_at": "2026-10-29T01:28:01.952311+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0077_scheda.pdf/ccbe71ba-385b-9b80-b647-248d60711b49",
+    "content_type": "application/pdf",
+    "bytes": 11573691,
+    "sha256": "2abc515273c607d939b297e3b4378431d814c9644aed558f373099956443a093"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0078_scheda.pdf/8ed2eb91-e2e8-638f-661e-fab2f3103949",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0078",
+    "captured_at": "2026-10-29T01:28:03.390885+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0078_scheda.pdf/8ed2eb91-e2e8-638f-661e-fab2f3103949",
+    "content_type": "application/pdf",
+    "bytes": 9552532,
+    "sha256": "e5756eb5154fff2c539c00c196d0b1eb4c8e09ad27ac77325eeceef1dfc7bc6c"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0079_scheda.pdf/0e0f0f50-7948-15d0-8861-59bcaceb666c",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0079",
+    "captured_at": "2026-10-29T01:28:30.273849+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0079_scheda.pdf/0e0f0f50-7948-15d0-8861-59bcaceb666c",
+    "content_type": "application/pdf",
+    "bytes": 8405538,
+    "sha256": "78d1a8f52141f0122af66d88290eb5b0e91fa5c0b6538737a667f1fceb14e73c"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0081_scheda.pdf/c17506b2-e38c-a579-fbc8-31c188076d22",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0081",
+    "captured_at": "2026-10-29T01:28:33.434592+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0081_scheda.pdf/c17506b2-e38c-a579-fbc8-31c188076d22",
+    "content_type": "application/pdf",
+    "bytes": 16608436,
+    "sha256": "650abd8101e81d16f668ee0af1303ab7e5c412be0eb8ec815b00b1027e613417"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0082_scheda.pdf/c50cf075-b43d-6566-668a-f5a8e920b437",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0082",
+    "captured_at": "2026-10-29T01:28:42.652162+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0082_scheda.pdf/c50cf075-b43d-6566-668a-f5a8e920b437",
+    "content_type": "application/pdf",
+    "bytes": 12953068,
+    "sha256": "2861b9b179f7f6ce7d76ff7c1c0ea9a45d0e1e1d391d585e956fba0244d49d37"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0083_scheda.pdf/b4817f7e-9949-a828-57fd-9268c41d5c9e",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0083",
+    "captured_at": "2026-10-29T01:29:12.219846+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0083_scheda.pdf/b4817f7e-9949-a828-57fd-9268c41d5c9e",
+    "content_type": "application/pdf",
+    "bytes": 11110659,
+    "sha256": "273b969d1ee2358891914d06fd69d25bb09275bc2f1c47a60227ea7176212d1f"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0085_scheda.pdf/b6f1a2a5-160a-37c1-f289-9b0fd6b5d868",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0085",
+    "captured_at": "2026-10-29T01:29:17.003230+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0085_scheda.pdf/b6f1a2a5-160a-37c1-f289-9b0fd6b5d868",
+    "content_type": "application/pdf",
+    "bytes": 14249091,
+    "sha256": "0a9587edb141b45fd03cb623c6a1e16fd68494337fd4aba88c64b757208a78f1"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0087_scheda.pdf/a9773d0d-0ff0-a8bc-409d-0f02d0fa4e91",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0087",
+    "captured_at": "2026-10-29T01:29:25.219989+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0087_scheda.pdf/a9773d0d-0ff0-a8bc-409d-0f02d0fa4e91",
+    "content_type": "application/pdf",
+    "bytes": 18548989,
+    "sha256": "555304bb5e64b5af55b64d731f1b5b26705055fc3733407e67725b6c0cd71131"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0089_scheda.pdf/43bc2cc6-eafb-7d99-a51d-41a2e06cb01c",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0089",
+    "captured_at": "2026-10-29T01:29:51.210282+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0089_scheda.pdf/43bc2cc6-eafb-7d99-a51d-41a2e06cb01c",
+    "content_type": "application/pdf",
+    "bytes": 14541564,
+    "sha256": "ab6c8ccf41d3a76d11fd6b605d3c88cb817f4a543a55962568d6a55b8edc2955"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0092_scheda.pdf/01e4c8a5-24f3-b2e7-46f7-74d9b6bd8c78",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0092",
+    "captured_at": "2026-10-29T01:30:07.786832+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0092_scheda.pdf/01e4c8a5-24f3-b2e7-46f7-74d9b6bd8c78",
+    "content_type": "application/pdf",
+    "bytes": 7751311,
+    "sha256": "92276bec7ad18efdf256069b883be263af51276b38705781d2ee056f125ba6f2"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0094_scheda.pdf/7ad961af-7b6f-edc9-b15e-8fee322d1629",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0094",
+    "captured_at": "2026-10-29T01:30:19.441314+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0094_scheda.pdf/7ad961af-7b6f-edc9-b15e-8fee322d1629",
+    "content_type": "application/pdf",
+    "bytes": 7700594,
+    "sha256": "534d985901cdacc1409a6b8e8d2f898021bb12df98b9c810f0d95a73f1f6cbc5"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0095_scheda.pdf/158bee0b-d355-8d6c-5ee6-0fc4242cd175",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0095",
+    "captured_at": "2026-10-29T01:30:28.645558+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0095_scheda.pdf/158bee0b-d355-8d6c-5ee6-0fc4242cd175",
+    "content_type": "application/pdf",
+    "bytes": 7918794,
+    "sha256": "248d17798bda6e3fe5c979cd8fe7eac3e21765f0c60a6c4644b52b287cf3b5a2"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0102_scheda.pdf/f5967d2e-ef8c-9ad2-17b6-46ed380686ba",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0102",
+    "captured_at": "2026-10-29T01:30:34.934390+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0102_scheda.pdf/f5967d2e-ef8c-9ad2-17b6-46ed380686ba",
+    "content_type": "application/pdf",
+    "bytes": 6797718,
+    "sha256": "33227d876e9716a22b22ec9a958612973e4826fea7a702f9bd13c276e6f8850a"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0107_scheda.pdf/410e6977-1750-e847-a91d-c1c8d3db2dee",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0107",
+    "captured_at": "2026-10-29T01:31:08.308031+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0107_scheda.pdf/410e6977-1750-e847-a91d-c1c8d3db2dee",
+    "content_type": "application/pdf",
+    "bytes": 12477912,
+    "sha256": "563fa6053bb26c460bcb5bc553ee7ecb67b29f61c3d8de8de954d4fb1aa1394f"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0113_scheda.pdf/d6a3379c-2a4a-9b85-b6f7-ae8fcb9adb8a",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0113",
+    "captured_at": "2026-10-29T01:31:08.311613+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0113_scheda.pdf/d6a3379c-2a4a-9b85-b6f7-ae8fcb9adb8a",
+    "content_type": "application/pdf",
+    "bytes": 13382906,
+    "sha256": "5ce1eb932175c1d145f304a49a17e1c5c9b0ff04a4a1219ca212ae2c654496fc"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0114_scheda.pdf/6357fd39-bd99-769b-1cb2-407ea9774031",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0114",
+    "captured_at": "2026-10-29T01:31:10.242517+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0114_scheda.pdf/6357fd39-bd99-769b-1cb2-407ea9774031",
+    "content_type": "application/pdf",
+    "bytes": 10458050,
+    "sha256": "d04f3ff5839df42fb6635b30940bb2eb059569a9e32bf9881db1723d0f19908a"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0124_scheda.pdf/6306f30e-98ed-cdb0-2b78-e55d7fae38e9",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0124",
+    "captured_at": "2026-10-29T01:31:31.904162+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0124_scheda.pdf/6306f30e-98ed-cdb0-2b78-e55d7fae38e9",
+    "content_type": "application/pdf",
+    "bytes": 21232777,
+    "sha256": "9ed84c11b50ed8f340e513602d6c9397303d8e0521c658bd87c6cfc92c5fea6e"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0125_scheda.pdf/63c0adf7-afac-5781-dd58-a19746bf5a8f",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0125",
+    "captured_at": "2026-10-29T01:31:48.941950+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0125_scheda.pdf/63c0adf7-afac-5781-dd58-a19746bf5a8f",
+    "content_type": "application/pdf",
+    "bytes": 11082772,
+    "sha256": "a395675c22f8364e43c210298649cbde6a9461dba33923a4899431e6cf550e73"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0126_scheda.pdf/fd01aadc-d63f-b942-c2ed-00e200f848af",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0126",
+    "captured_at": "2026-10-29T01:31:52.682980+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0126_scheda.pdf/fd01aadc-d63f-b942-c2ed-00e200f848af",
+    "content_type": "application/pdf",
+    "bytes": 14196953,
+    "sha256": "c9fde2782eaac17345d47ef9be422f1fcc0b13ad917f1717ebd1dca16957f51a"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0129_scheda.pdf/89370c45-5fc4-c55a-0120-73ada841249d",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0129",
+    "captured_at": "2026-10-29T01:32:24.551562+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0129_scheda.pdf/89370c45-5fc4-c55a-0120-73ada841249d",
+    "content_type": "application/pdf",
+    "bytes": 7607516,
+    "sha256": "e9bbc5d88d05f4993bf4f7bedb8f14271bcedd8c3a0b0e1a6e5f6d4c0c33ff57"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0138_scheda.pdf/e59ed754-a324-a3be-09ca-22de62559efe",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0138",
+    "captured_at": "2026-10-29T01:32:31.037523+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0138_scheda.pdf/e59ed754-a324-a3be-09ca-22de62559efe",
+    "content_type": "application/pdf",
+    "bytes": 13281539,
+    "sha256": "accb2322b8d855259fafc717091c201c415b1d5da17bef8ef446ed305ec42fd6"
+   },
+   {
+    "url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0140_scheda.pdf/1672c3c5-b56e-9561-f97b-d9a18c7ad84c",
+    "purpose": "the scheda of a declaration whose layer motivation reaches the field length",
+    "code": "PAE0140",
+    "captured_at": "2026-10-29T01:32:50.645472+00:00",
+    "status": 200,
+    "final_url": "https://pugliacon.regione.puglia.it/documents/96721/1723405/PAE0140_scheda.pdf/1672c3c5-b56e-9561-f97b-d9a18c7ad84c",
+    "content_type": "application/pdf",
+    "bytes": 11912252,
+    "sha256": "1e2f114f825b4068b17cd4eb76cea4a793cb6f8a313c10c31ade6c68b1e5ccec"
+   }
+  ]
+ }
+}

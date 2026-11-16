@@ -1,0 +1,12 @@
+{
+  "schema": "cordon-stage-b-acceptance-v1",
+  "seam": 1,
+  "reviewer": "Owen Wassmer",
+  "act": "Owen Wassmer's merge of owassmer/CORDON#47 accepts this exact content.",
+  "accepted_content_sha256": "bd7a57f046e5e0f66d70e40fff313aa1ee574de4ac9106db4cf900d6894b9ea2",
+  "preceding_acceptance": {
+    "record_path": "corpus/evidence/stage-b-acceptance-2026-09-24-pr35-seam-1.json",
+    "record_sha256": "94a2e918609256e8aab17dc817bd675e419c7ef8606bd3a95f37f7bfa182f53e"
+  },
+  "scope": "No clock, parameter or disposition of this seam changes; the Stage A artifact bytes it binds change (PR #47's national rows). Binding takes effect only on merge."
+}

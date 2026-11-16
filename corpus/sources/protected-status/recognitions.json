@@ -1,0 +1,139 @@
+{
+ "from": "2025-09-20",
+ "captured_at": "2026-10-29T21:49:40.544366+00:00",
+ "burp": {
+  "publisher": "Regione Puglia: Bollettino Ufficiale (BURP), document search",
+  "search": "https://burp.regione.puglia.it/documenti",
+  "index": "a quoted phrase matches in an act's title and abstract",
+  "queries": [
+   {
+    "url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22alberi+monumentali%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "purpose": "the BURP document search for a phrase",
+    "query": "\"alberi monumentali\"",
+    "captured_at": "2026-10-29T21:47:11.524600+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22alberi+monumentali%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 288543,
+    "sha256": "178ca95700e31cdaabf0410c096848be2ce87d0509046bb9edf5f16542571364",
+    "results": 36
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22Alberi+Monumentali+della+Regione+Puglia%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "purpose": "the BURP document search for a phrase",
+    "query": "\"Alberi Monumentali della Regione Puglia\"",
+    "captured_at": "2026-10-29T21:47:13.243235+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22Alberi+Monumentali+della+Regione+Puglia%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 171996,
+    "sha256": "15b38aed45ae7f198e8c7a03df56c78f6492e86b582bdfb7447c7daa37005cea",
+    "results": 11
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22alberi+monumentali+di+Puglia%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "purpose": "the BURP document search for a phrase",
+    "query": "\"alberi monumentali di Puglia\"",
+    "captured_at": "2026-10-29T21:47:14.281151+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22alberi+monumentali+di+Puglia%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 145856,
+    "sha256": "5b582f87429fcbbbafaf62f6af20b46cfedae40f8381fc0d4c047ab3d9671310",
+    "results": 5
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22elenco+regionale%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "purpose": "the BURP document search for a phrase",
+    "query": "\"elenco regionale\"",
+    "captured_at": "2026-10-29T21:47:15.344214+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22elenco+regionale%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 1123979,
+    "sha256": "46664d35d844cc1c91d6a8b461cff783c6ef8ba5ac982b95b88c80d6080668ef",
+    "results": 215
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22monumentalit%C3%A0%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "purpose": "the BURP document search for a phrase",
+    "query": "\"monumentalità\"",
+    "captured_at": "2026-10-29T21:47:21.907367+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documenti?p_p_id=it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_numeroDoc=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_searchContent=%22monumentalit%C3%A0%22&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_toggler=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_datefilter=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_docanno=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumero=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_bolnumeroSupplemento=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Argomenti=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_Sezioni=&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_resetCur=false&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_delta=500&_it_indra_regione_puglia_burp_web_SearchDocumentiPortlet_INSTANCE_LylqGTMESls6_cur=1",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 121815,
+    "sha256": "b9db7c8b2de531c8e9ff824ef0724fbf831dafb1c9ae500b26cf719ccc52416d",
+    "results": 2
+   }
+  ],
+  "acts": [
+   {
+    "url": "https://burp.regione.puglia.it/documents/20135/2851204/DEL_1371_2026.pdf/6c7afdec-5208-04f1-e109-af2038df25d4?t=1793020193241",
+    "purpose": "an act approving a list of monumental trees",
+    "title": "DELIBERAZIONE DELLA GIUNTA REGIONALE 13 ottobre 2026, n. 1371",
+    "abstract": "Legge 14 gennaio 2013, n° 10. Deliberazione di Giunta regionale 28 giugno 2018, n° 1103. Approvazione undicesimo elenco (Elenco M) degli Alberi Monumentali della Regione Puglia.",
+    "bulletin": "Bollettino n° 85 del 26/10/2026",
+    "captured_at": "2026-10-29T21:47:23.061457+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documents/20135/2851204/DEL_1371_2026.pdf/6c7afdec-5208-04f1-e109-af2038df25d4?t=1793020193241",
+    "content_type": "application/pdf",
+    "bytes": 1167019,
+    "sha256": "fef2b02a05e25634479cd2f05f36a067f10348511658d1a7501c10c275eee728"
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documents/20135/2788468/DEL_444_2026.pdf/0e09986c-5b98-3e47-0339-ecd7bd957fdf?t=1777986945779",
+    "purpose": "an act approving a list of monumental trees",
+    "title": "DELIBERAZIONE DELLA GIUNTA REGIONALE 14 aprile 2026, n. 444",
+    "abstract": "Legge 14 gennaio 2013, n° 10. Deliberazione di Giunta regionale 28 giugno 2018, n° 1103. Approvazione decimo elenco (Elenco L) degli Alberi Monumentali della Regione Puglia.",
+    "bulletin": "Bollettino n° 35 del 05/05/2026",
+    "captured_at": "2026-10-29T21:47:25.107799+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documents/20135/2788468/DEL_444_2026.pdf/0e09986c-5b98-3e47-0339-ecd7bd957fdf?t=1777986945779",
+    "content_type": "application/pdf",
+    "bytes": 1197180,
+    "sha256": "5e6e6de4ecf9f643c2554ca46874aa8b5623361bb31b6a28b7f896eaff4e7046"
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documents/20135/2741168/DET_84_26_1_2026.pdf/3c9f5c2b-090d-122f-7dab-9b1fd7a137dd?t=1771250449576",
+    "purpose": "an act approving a list of monumental trees",
+    "title": "DETERMINAZIONE DEL DIRIGENTE DELLA SEZIONE GESTIONE SOSTENIBILE E TUTELA DELLE RISORSE FORESTALI E NATURALI 26 gennaio 2026, n. 84",
+    "abstract": "Legge 14 gennaio 2013, n° 10; Decreto interministeriale 23 ottobre 2014; Deliberazione di Giunta Regionale n.386 del 04/02/2015. Seguito della Determinazione del Dirigente del Servizio Foreste n. 46 del 19/05/2016. Approvazione elenco regionale n. 18 degli Alberi Monumentali di Puglia.",
+    "bulletin": "Bollettino n° 13 del 16/02/2026",
+    "captured_at": "2026-10-29T21:47:27.157327+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documents/20135/2741168/DET_84_26_1_2026.pdf/3c9f5c2b-090d-122f-7dab-9b1fd7a137dd?t=1771250449576",
+    "content_type": "application/pdf",
+    "bytes": 986621,
+    "sha256": "84444db8504de9c0fad5cc1481f34841f6feb0a1ed24a496fbe4689254ef15b1"
+   },
+   {
+    "url": "https://burp.regione.puglia.it/documents/20135/2686500/DEL_1279_2025.pdf/56cc3109-dae7-6977-33db-9eb3a5d9201e?t=1758536728380",
+    "purpose": "an act approving a list of monumental trees",
+    "title": "DELIBERAZIONE DELLA GIUNTA REGIONALE 11 settembre 2025, n. 1279",
+    "abstract": "Legge 14 gennaio 2013, n° 10. Deliberazione di Giunta regionale 28 giugno 2018, n° 1103. Approvazione nono elenco degli Alberi Monumentali della Regione Puglia.",
+    "bulletin": "Bollettino n° 76 del 22/09/2025",
+    "captured_at": "2026-10-29T21:47:28.724537+00:00",
+    "status": 200,
+    "final_url": "https://burp.regione.puglia.it/documents/20135/2686500/DEL_1279_2025.pdf/56cc3109-dae7-6977-33db-9eb3a5d9201e?t=1758536728380",
+    "content_type": "application/pdf",
+    "bytes": 1096427,
+    "sha256": "e93489c0b85da14fd8ee3e42135a62578a9e5d4c4fa07b200c03ae297990730e"
+   }
+  ]
+ },
+ "routes": [
+  {
+   "url": "https://foreste.regione.puglia.it/",
+   "purpose": "a route of the Region the acts name",
+   "captured_at": "2026-10-29T21:47:30.311274+00:00",
+   "error": "HTTPSConnectionPool(host='foreste.regione.puglia.it', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='foreste.regione.puglia.it', port=443) at 0x107062480>, 'Connection to foreste.regione.puglia.it timed out. (connect timeout=30)'))"
+  },
+  {
+   "url": "https://www.regione.puglia.it/web/amministrazione-trasparente",
+   "purpose": "a route of the Region the acts name",
+   "captured_at": "2026-10-29T21:48:35.529321+00:00",
+   "error": "HTTPSConnectionPool(host='www.regione.puglia.it', port=443): Max retries exceeded with url: /web/amministrazione-trasparente (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.regione.puglia.it', port=443) at 0x1070635f0>, 'Connection to www.regione.puglia.it timed out. (connect timeout=30)'))"
+  }
+ ]
+}

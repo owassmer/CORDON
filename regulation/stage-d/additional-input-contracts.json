@@ -1903,13 +1903,51 @@
       ]
     },
     {
-      "evidence": "Valid removal measure and exact demarcated-area state; plant identity and monumental or historic legal status; evidence that infection is not currently established; landscape-authorization application, opinion and decision; applicable Union obligations; case-specific removal decision.",
+      "evidence": "Valid removal measure and exact demarcated-area state; plant identity and its legal status from each instrument that gives it (L.R. 14/2007 definitive listing; the national list of L. 10/2013 Article 7 and, from 20 September 2025, the Region's recognition; declarations and published proposals of notable public interest); evidence that infection is not currently established; landscape-authorization application, opinion and decision, the day the authorization took effect and the day the works began; applicable Union obligations; case-specific removal decision.",
       "contracts": [
+        "administrative-event",
         "official-finding",
         "operative-act",
         "operative-assessment",
         "plant-population",
+        "protected-status",
+        "removal-performance"
+      ]
+    },
+    {
+      "evidence": "The national list's entries per approving or updating decree, each with its adoption date and Gazzetta Ufficiale publication date, and any decree deleting the entry; the tree's identity against the listed entry, alone or in its row or group.",
+      "contracts": [
+        "plant-population",
         "protected-status"
+      ]
+    },
+    {
+      "evidence": "The Region's recognitions of monumentality with their dates and the trees they recognise; the national list's entries per decree with adoption and Gazzetta Ufficiale dates, and deletions; the tree's identity against each.",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "Every declaration of notable public interest concerning Puglia, per PPTR version, with its decree's adoption and publication and its object and motivation as printed; the tree's identity against what the declaration names.",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "Every proposal concerning Puglia whose effect could run in the reach: its proposer, object and motivation as printed, the first day of its publication on each comune's albo pretorio, the owner's receipt of its communication where held, and its outcome with its date; the tree's identity against what the proposal names.",
+      "contracts": [
+        "plant-population",
+        "protected-status"
+      ]
+    },
+    {
+      "evidence": "The landscape authorization for the plant's removal with the day it took effect; the record of the day the removal works began.",
+      "contracts": [
+        "administrative-event",
+        "protected-status",
+        "removal-performance"
       ]
     },
     {
@@ -2863,6 +2901,17 @@
       "contracts": [
         "evaluation-context",
         "protected-status"
+      ],
+      "kind": "evidence-or-derived-input"
+    },
+    {
+      "consumer": "bindings.authorization_efficacy_facts",
+      "contracts": [
+        "evaluation-context",
+        "administrative-event",
+        "protected-status",
+        "removal-performance",
+        "calendar"
       ],
       "kind": "evidence-or-derived-input"
     },
@@ -3869,6 +3918,12 @@
     },
     {
       "consumer": "PUG-DGR1866-2022:Art7(3)-policy",
+      "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
+      "contracts": [],
+      "kind": "C-owned-outcome-comparison"
+    },
+    {
+      "consumer": "IT-DLGS-19-2021:Art.33(1):uninfected-protected-plant-removal",
       "reference": "PUG-LR14-2007:Art.5(3):definitive-listing",
       "contracts": [],
       "kind": "C-owned-outcome-comparison"

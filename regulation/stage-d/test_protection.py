@@ -5,6 +5,7 @@ views, read by D and carried through PR #32's rows. `HeldSources` runs the ordin
 store (register capture, list acts, removal orders, monitoring stream) and skips where those bytes are not held.
 Expected answers come from reading the layer, the acts and the notes, not from the reader.
 """
+import copy
 import dataclasses
 from datetime import date
 from decimal import Decimal
@@ -159,6 +160,13 @@ class TheRecordAsPrinted(unittest.TestCase):
         self.assertEqual(self.conjunct(record('codice monumentale n.  0158021')), (None, 'none'))
         # The DDS 45/2023 hold reads the same field for a negative olive.
         self.assertEqual(self.conjunct(record(flag='Si'), identity=HOLD)[0] is not False, True)
+
+    def test_views_spelling_one_species_differently_agree(self):
+        # The positives' views print "OLIVO" (Positivi - Campioni) and "Olivo (Olea europaea)" (Olivo - Campioni).
+        self.assertEqual(protection.one_species(['OLIVO', 'Olivo (Olea europaea)', None, ' OLIVO ']), 'Olivo (Olea europaea)')
+        self.assertIsNone(protection.one_species(['OLIVO', 'MANDORLO']))
+        self.assertIsNone(protection.one_species(['Olivo (Olea europaea)', 'Olivo (Olea oleaster)']))
+        self.assertEqual(protection.one_species(['MANDORLO']), 'MANDORLO')
 
     def test_the_flag_is_kept_as_printed(self):
         self.assertEqual(record(flag='Si').flag, 'Si')
@@ -872,7 +880,15 @@ class HeldSources(unittest.TestCase):
         self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (317, 2, 13, 318))
 
     def test_no_article_15_input_and_no_owner_names(self):
-        out = json.dumps(protection.rows(self.result), ensure_ascii=False)
+        # Every row, the instruments' included, except the published texts the declarations print, which name owners:
+        # their object and motivation as the PPTR layer prints them, and the text of their decree and of its scheda.
+        rows = protection.rows(self.result)
+        held = copy.deepcopy(rows['instruments'])
+        for declaration in held['declarations']['declarations']:
+            del declaration['object'], declaration['motivation']
+            for text in ('decree_act', 'decree_text', 'scheda_motivation'):
+                (declaration['decree'] or {}).pop(text, None)
+        out = json.dumps(rows | {'instruments': held}, ensure_ascii=False)
         self.assertNotIn('Art. 15', out)
         self.assertNotRegex(out, r'PROPRIETARIO|DIFONZO|LATILLA')
 

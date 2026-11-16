@@ -1,5 +1,5 @@
 """Bounded discriminating mutations of the lawful-dueness class (PR #35), of the join's rule
-table (PR #40) and of row 9's naming-record rule (PR #48), in memory.
+table (PR #40), of row 9's naming-record rule (PR #48) and of its instrument rules (PR #47), in memory.
 
 No canonical file is edited. Each named regression must pass as built and fail on its
 associated wrong A meaning or wrong implementation; this is evidence about these
@@ -195,6 +195,111 @@ CODE = (
     ('reach the plants holding an entry of a tag or COD that names several', 'cordon_d.protection',
      '            if len(one) == 1:\n', '            if one:\n',
      'test_protection.NamingRecords.test_a_record_outside_the_grant_names_nothing'),
+    # Row 9's instruments besides the register (PR #47): one mutation per rule.
+    ('let an area declaration name the plant', 'cordon_d.instruments',
+     "            if decl.reading in ('names a tree', 'names a row or group'):\n",
+     "            if decl.reading in ('names a tree', 'names a row or group', 'area'):\n",
+     'test_instruments.Rules.test_an_area_declaration_gives_no_status'),
+    ('read no tree a motivation names', 'cordon_d.instruments',
+     "    for reading, pattern in (('names a tree', _NAMES_TREE), ('names a row or group', _NAMES_GROUP)):\n",
+     "    for reading, pattern in (('names a row or group', _NAMES_GROUP),):\n",
+     'test_instruments.Rules.test_a_tree_the_motivation_names_gets_status'),
+    ("let a whole text naming no tree overrule one that names it", 'cordon_d.instruments',
+     "    return naming[0] if naming else readings[0]\n", "    return readings[0]\n",
+     'test_instruments.Rules.test_a_tree_any_text_names_is_not_overruled_by_a_whole_text_naming_none'),
+    ('read a cut motivation as an area', 'cordon_d.instruments',
+     "    if len(motivation or '') >= FIELD_LENGTH - 4:\n", "    if False:\n",
+     'test_instruments.Rules.test_a_motivation_cut_at_the_field_length_is_not_read_whole'),
+    ('ignore the deleting decree', 'cordon_d.instruments', "    if gone and gone.published <= at:\n", "    if False:\n",
+     'test_instruments.Rules.test_an_entry_deleted_by_a_later_decree_reads_false_after_the_deletion'),
+    ("count a listing from its decree's G.U. publication, not its adoption", 'cordon_d.instruments',
+     "    starts = [(entry.listed_by.adopted, ", "    starts = [(entry.listed_by.published, ",
+     'test_instruments.Rules.test_an_entry_deleted_by_a_later_decree_reads_false_after_the_deletion'),
+    ("count a declaration from its publication, not its decree", 'cordon_d.instruments',
+     "        adopted = own.declaration.adopted()\n", "        adopted = own.declaration.published()\n",
+     'test_instruments.Rules.test_a_tree_the_motivation_names_gets_status'),
+    ('read an entry no held annex lists as not listed', 'cordon_d.instruments',
+     "    if not starts:\n        return None, ", "    if not starts:\n        return False, ",
+     'test_instruments.Rules.test_an_entry_no_held_annex_lists_is_unknown_not_false'),
+    ('place against the zone radius alone', 'cordon_d.instruments',
+     "            d = ZONE_M + p.error_m + record.term_m\n", "            d = ZONE_M\n",
+     'test_instruments.Rules.test_an_unseen_entry_inside_a_zone_is_admitted_with_its_instrument'),
+    ('match an entry of another genus', 'cordon_d.instruments',
+     "        near = [e for e in near if genus is None or e.genus is None or e.genus == genus]\n", "",
+     'test_instruments.Rules.test_a_plant_near_an_entry_of_another_genus_reads_false_and_of_its_genus_unknown'),
+    ("drop the list bound's floor", 'cordon_d.instruments',
+     "        return ListBound(round(max(measured or 0.0, LIST_FLOOR_M), 2)",
+     "        return ListBound(round(measured or 0.0, 2)",
+     'test_instruments.Rules.test_the_list_bound_takes_the_floor_under_twenty_fixes'),
+    ("read a curly apostrophe as another letter", 'cordon_d.instruments',
+     "    text = text.replace('\\u2019', \"'\").replace('\\u2018', \"'\")\n", '',
+     'test_instruments.Rules.test_a_curly_apostrophe_or_a_word_broken_by_its_hyphen_mid_line_still_names_a_tree'),
+    ("leave a word broken by its hyphen mid-line unread", 'cordon_d.instruments',
+     "    text += ' ' + re.sub(", "    text += ' ' or re.sub(",
+     'test_instruments.Rules.test_a_curly_apostrophe_or_a_word_broken_by_its_hyphen_mid_line_still_names_a_tree'),
+    # A's L. 10/2013 Art. 7 dating and the Region's recognitions (PR #47).
+    ("use row 9's instrument facts at any date", 'cordon_d.landscape',
+     "        if fact is None or read_at != at.isoformat():\n", "        if fact is None:\n",
+     'test_landscape.LandscapeRecords.test_legal_status_is_any_instruments_and_row_9s_facts_count_only_at_their_own_date'),
+    ('read legal status from the register alone', 'cordon_d.landscape',
+     "    for kind, stable in STATUS_ROWS.items():\n", "    for kind, stable in ():\n",
+     'test_landscape.LandscapeRecords.test_legal_status_is_any_instruments_and_row_9s_facts_count_only_at_their_own_date'),
+    ("date a grant's efficacy from the evaluation date", 'cordon_d.landscape',
+     "                    snapshot, at, effective=_day(decision['event'].occurred, zone), works_began=None,\n",
+     "                    snapshot, at, effective=at, works_began=None,\n",
+     'test_landscape.LandscapeRecords.test_a_grant_counts_while_in_effect_under_article_146_4'),
+    ('take a printed species\' first word as its genus', 'cordon_d.instruments',
+     "    found = re.search(r'\\(\\s*([A-Z][a-z]+)\\s+[A-Za-z×]', name) or ", "    found = ",
+     'test_instruments.Rules.test_a_genus_is_the_latin_one_a_printed_species_names'),
+    ('drop a species two views spell differently', 'cordon_d.protection',
+     "    if len({n.split('(')[0].strip().casefold() for n in names}) != 1:\n", "    if len(names) != 1:\n",
+     'test_protection.TheRecordAsPrinted.test_views_spelling_one_species_differently_agree'),
+    ('count a deletion from its decree\'s adoption', 'cordon_d.instruments', "    if gone and gone.published <= at:\n",
+     "    if gone and gone.adopted <= at:\n",
+     'test_instruments.Rules.test_an_entry_deleted_by_a_later_decree_reads_false_after_the_deletion'),
+    ('count a recognition before L. 131/2025 took effect', 'cordon_d.instruments',
+     "    starts += [(max(date.fromisoformat(a['adopted']), RECOGNISED_FROM), ",
+     "    starts += [(date.fromisoformat(a['adopted']), ",
+     'test_instruments.Rules.test_a_tree_the_region_recognises_is_in_from_the_act_and_never_before_20_september_2025'),
+    ('ignore a recognised tree no source places', 'cordon_d.instruments', "        if loose:\n", "        if False:\n",
+     'test_instruments.Rules.test_a_recognised_tree_no_source_places_is_unknown_for_a_plant_of_its_genus_in_its_comune'),
+    ('drop the comune outline\'s error', 'cordon_d.instruments',
+     "                 and u['geometry'].distance(point) <= error_m + u['boundary_error_m']\n",
+     "                 and u['geometry'].distance(point) <= error_m\n",
+     'test_instruments.Rules.test_a_recognised_tree_no_source_places_is_unknown_for_a_plant_of_its_genus_in_its_comune'),
+    # Row 9's published proposals of declaration (PR #47 part 4), through the declared-tree path.
+    ('drop the proposal fact', 'cordon_d.instruments', "    facts[PROPOSAL]['held'] = held.proposals_held\n",
+     "    facts.pop(PROPOSAL, None)\n",
+     'test_instruments.Proposals.test_a_proposal_naming_a_tree_gives_its_fact_with_its_dates'),
+    ('read an area proposal as one no plan places', 'cordon_d.instruments',
+     "        unplaced = [p for p in held.proposed if p.reading == 'not read whole' or (",
+     "        unplaced = [p for p in held.proposed if p.reading in ('not read whole', 'area') or (",
+     'test_instruments.Proposals.test_an_area_proposal_gives_no_status'),
+    ("place a proposed tree at the PPTR's scale, not its plan's", 'cordon_d.instruments',
+     "        term = getattr(d, 'scale_term_m', None) or SCALE_TERM_M\n", "        term = SCALE_TERM_M\n",
+     'test_instruments.Proposals.test_a_proposal_naming_a_tree_gives_its_fact_with_its_dates'),
+    ('read a field its source does not print', 'cordon_d.instruments',
+     "        if _as_printed(item['text']) not in _as_printed(texts[digest]):\n", "        if False:\n",
+     'test_instruments.Proposals.test_a_field_is_read_only_where_its_source_prints_it'),
+    ("drop the owner's receipt of the communication", 'cordon_d.instruments',
+     "                            tuple(periods), days[0] if days else None, outcome,\n",
+     "                            tuple(periods), None, outcome,\n",
+     'test_instruments.Proposals.test_a_field_is_read_only_where_its_source_prints_it'),
+    # The words D's rule reads from a page image are its vision transcription's; Tesseract's only locate the act. The
+    # tests supply both texts, so these run everywhere.
+    ("read the Tesseract text instead of the decree's transcription", 'cordon_d.instruments',
+     "_concatenated([held[p]['text'] if p in held else texts[p] for p in pages_read])",
+     "_concatenated([texts[p] for p in pages_read])",
+     'test_instruments.VisionRoute.test_a_transcription_naming_a_tree_gives_status_and_one_naming_none_reads_area'),
+    ("read the Tesseract text instead of the scheda's transcription", 'cordon_d.instruments',
+     "    found = _RECOGNITION.search(held[index]['text'])\n", "    found = _RECOGNITION.search(texts[-1])\n",
+     'test_instruments.VisionRoute.test_a_scheda_page_image_is_read_from_its_transcription'),
+    # The OCR route needs Tesseract with its Italian model, which CI does not install: there its test skips and this
+    # mutation is reported as not run; it is caught only where Tesseract is installed.
+    ('skip the OCR route', 'cordon_d.instruments', "    engine = ocr_engine()\n    gaps = ",
+     "    engine = None\n    gaps = ",
+     'test_instruments.OcrRoute.test_a_page_image_decree_naming_a_tree_gives_status_and_one_naming_none_reads_area',
+     'Tesseract with its Italian model'),
 )
 
 
@@ -231,12 +336,18 @@ def main():
         if result.testsRun != 1 or result.errors or not result.failures:
             raise AssertionError(f'Regression did not discriminate mutation: {label}: {case}')
         print(f'Discriminated: {label}: {case}')
-    for label, name, before, after, case in CODE:
+    for label, name, before, after, case, *needs in CODE:
         module = importlib.import_module(name)
         path = Path(module.__file__)
         source = path.read_text()
-        if not run(case).wasSuccessful():
+        baseline = run(case)
+        if not baseline.wasSuccessful():
             raise AssertionError(f'Baseline already fails: {case}')
+        if baseline.skipped:
+            if not needs:
+                raise AssertionError(f'Baseline skips: {case}: {baseline.skipped[0][1]}')
+            print(f'Not run here ({baseline.skipped[0][1]}): {label}: {case}')
+            continue
         if source.count(before) != 1:
             raise AssertionError(f'Mutation location changed: {name}: {before}')
         namespace = dict(module.__dict__)

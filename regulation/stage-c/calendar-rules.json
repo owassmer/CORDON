@@ -29,7 +29,10 @@
     "B-CLK-DGR1593-albo-publication",
     "B-CLK-DGR1075-albo-publication",
     "B-CLK-IT-L241-21BIS-stated-publicity-period",
-    "B-CLK-LR4-3(4)-pre-LR45-five-year-no-detection"
+    "B-CLK-LR4-3(4)-pre-LR45-five-year-no-detection",
+    "B-CLK-IT-DLGS42-146(4)-five-year-efficacy",
+    "B-CLK-IT-DLGS42-146(4)-following-year-completion",
+    "B-CLK-IT-DLGS42-139(1)-ninety-day-publication"
   ],
   "eu_period": [
     "B-CLK-EU-5(1)(c)-v1-first-year-survey",
@@ -52,7 +55,8 @@
     "B-CLK-DGR1075-silence-arif-removal",
     "B-CLK-DGR1075-owner-execution",
     "B-CLK-DGR1075-arif-execution",
-    "B-CLK-IT-L241-21TER-stated-commencement-term"
+    "B-CLK-IT-L241-21TER-stated-commencement-term",
+    "B-CLK-IT-DLGS42-140(1)-sixty-day-declaration"
   ],
   "working_days": [
     "B-CLK-IT-29(1)-union-entry-5wd",
@@ -74,6 +78,8 @@
     "B-CLK-DGR343-owner-election",
     "B-CLK-DGR1866-owner-election",
     "B-CLK-DGR1593-owner-election",
-    "B-CLK-DGR1075-owner-election"
+    "B-CLK-DGR1075-owner-election",
+    "B-CLK-IT-DLGS42-139(5)-thirty-day-observations",
+    "B-CLK-IT-DLGS42-139(5)-thirty-day-owner-observations"
   ]
 }
