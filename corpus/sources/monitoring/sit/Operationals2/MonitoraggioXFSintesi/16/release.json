@@ -1,16 +1,16 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFSintesi/MapServer/16",
   "name": "Positivi - Campioni 2022",
-  "captured_from": "2026-09-10T21:26:28.666528+00:00",
-  "captured_through": "2026-09-10T21:26:34.137236+00:00",
+  "captured_from": "2026-11-22T21:00:25.667900+00:00",
+  "captured_through": "2026-11-22T21:00:29.381114+00:00",
   "oid_field": "OBJECTID",
   "rows": 366,
   "unique_oids": 366,
   "pages": [
     {
-      "path": "00000000.json.gz",
+      "path": "ids-55407-67567.json.gz",
       "rows": 366,
-      "sha256": "38c64b8b75b2cf2d6af65ae8c7af6b9f68ca10464bc4d28dcea288f58dc2e952"
+      "sha256": "5759ac8906e8a78e365ec40c3f4af22deba68ea233900a072a3b4c61ff0ce2ab"
     }
   ]
 }

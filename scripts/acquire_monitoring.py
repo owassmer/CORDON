@@ -26,6 +26,8 @@ import requests
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-d'))
+# The reader the acquisition runs at its end (`monitoring.ingest`) builds on Stage C's evidence types.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'regulation/stage-c'))
 from cordon_d.store import adopt, store_root  # noqa: E402
 
 

@@ -1,16 +1,16 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/MonitoraggioXFMultiplexSintesiAttuale/MapServer/4",
   "name": "Altre Aree - Campioni 2026 sub. multiplex",
-  "captured_from": "2026-09-10T21:26:25.985856+00:00",
-  "captured_through": "2026-09-10T21:26:36.905030+00:00",
+  "captured_from": "2026-11-22T21:00:21.585308+00:00",
+  "captured_through": "2026-11-22T21:00:25.827813+00:00",
   "oid_field": "OBJECTID",
-  "rows": 25,
-  "unique_oids": 25,
+  "rows": 68,
+  "unique_oids": 68,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 25,
-      "sha256": "3de297f9c0add9b96d49ce7a8f29448c7f5e9f343d8dd316264364811cc636b2"
+      "path": "ids-36-2049.json.gz",
+      "rows": 68,
+      "sha256": "747d628f87dc378672f7f3a6468d84df39d2059acdb1d8d11b2fe93b1cafec66"
     }
   ]
 }

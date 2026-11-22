@@ -1,46 +1,31 @@
 {
   "url": "https://webapps.sit.puglia.it/arcgis/rest/services/Operationals2/PuntiStampa/MapServer/45",
   "name": "Piante infette-Monitoraggio 2021",
-  "captured_from": "2026-09-10T21:35:08.634398+00:00",
-  "captured_through": "2026-09-10T21:35:32.481258+00:00",
+  "captured_from": "2026-11-22T21:02:05.272463+00:00",
+  "captured_through": "2026-11-22T21:02:11.460130+00:00",
   "oid_field": "OBJECTID",
   "rows": 2800,
   "unique_oids": 2800,
   "pages": [
     {
-      "path": "00000000.json.gz",
-      "rows": 400,
-      "sha256": "6022a9730f65fd11632f0731853eb5d6ae9747f8320ed97123dc569eab2dc7f1"
+      "path": "ids-37121-46777.json.gz",
+      "rows": 900,
+      "sha256": "79eb2aaba592c6562dfc0a50ddb395e177b04174456216191521475dadb4b943"
     },
     {
-      "path": "00000400.json.gz",
-      "rows": 400,
-      "sha256": "e57a19405f53b091dbb244b8fc3a3068b496cec71d93e06448d98f05ffcb9973"
+      "path": "ids-46778-48970.json.gz",
+      "rows": 900,
+      "sha256": "23ce1ae76b211deeab1a49285e8c06753fcd64289ddaaa9eaab2c21d9f9c3a66"
     },
     {
-      "path": "00000800.json.gz",
-      "rows": 400,
-      "sha256": "8dbb65c912ffd700a8f7dc8f99167b5b46b055a7b2389226f77d14c016d17d22"
+      "path": "ids-48971-50895.json.gz",
+      "rows": 900,
+      "sha256": "f2a4da2c64817fa76189a542cb44b2dee43475573ae99df8809da0f2933bc6ae"
     },
     {
-      "path": "00001200.json.gz",
-      "rows": 400,
-      "sha256": "e1ec7ebe69579a61a02ffff352bb469f45f33057a24d326cf57f6d74d6d8798c"
-    },
-    {
-      "path": "00001600.json.gz",
-      "rows": 400,
-      "sha256": "b31ce797a79e4fcc8b3f99637f2fd8c187f75358a93a0a8cbeea6873a71d0459"
-    },
-    {
-      "path": "00002000.json.gz",
-      "rows": 400,
-      "sha256": "6fbe8a9bf6f6c2dacd34d847dde8197fa3d95be680ef25e0bafcfa6b83a9b403"
-    },
-    {
-      "path": "00002400.json.gz",
-      "rows": 400,
-      "sha256": "19757bc4a21f1608851d7a8df61e62928853cb5e0ce232aea39b059475b0a234"
+      "path": "ids-50896-53124.json.gz",
+      "rows": 100,
+      "sha256": "6c89b5bd86eb665eb4881be8e2fc470d96ea1aaddb6480283c1c997bdeadb223"
     }
   ]
 }

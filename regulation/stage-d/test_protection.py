@@ -895,7 +895,10 @@ class HeldSources(unittest.TestCase):
         states = [p for p in group if any(n.reading == 'states' for n in p.record.notes)]
         unclear = [p for p in group if any(n.reading == 'unclear' for n in p.record.notes) and p not in states]
         measured = [p for p in group if p.record.measurements]
-        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (317, 2, 13, 318))
+        # Counted on row 1 as captured on 2026-11-22; the capture of 2026-09-10 gave 317 and 318, and the two since are
+        # Cagnano Varano positives 1975021 and 1975024 of 2026-09-11, whose NOTE_RILEVATORE prints monumental
+        # characteristics. The figures move with each capture.
+        self.assertEqual((len(states), len(unclear), len(measured), len(set(map(id, states + measured)))), (319, 2, 13, 320))
 
     def test_no_article_15_input_and_no_owner_names(self):
         out = json.dumps(protection.rows(self.result), ensure_ascii=False)
